@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_MGR_H_
 #define _TELESCOPE_MGR_H_
 
-#include "StelModule.hpp"
+#include "StelObjectMgr.hpp"
 #include "Fader.hpp"
 #include "vecmath.h"
 
@@ -38,7 +38,7 @@ class STexture;
 class StelObject;
 class Telescope;
 
-class TelescopeMgr : public StelModule {
+class TelescopeMgr : public StelObjectMgr {
 public:
   TelescopeMgr(void);
   virtual ~TelescopeMgr(void);
@@ -50,17 +50,17 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelObjectMgr class
+	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+
+
   void communicate(void);
    
   void set_names_fade_duration(float duration)
     {name_fader.set_duration((int) (duration * 1000.f));}
-   
-  vector<StelObject> search_around(Vec3d v,double lim_fov) const;
-  
-  StelObject searchByNameI18n(const wstring &nameI18n) const;
-  
-  std::vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix,
-                                               unsigned int maxNbItem) const;
   
   void set_label_color(const Vec3f &c) {label_color = c;}
   const Vec3f &getLabelColor(void) const {return label_color;}

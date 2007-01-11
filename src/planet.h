@@ -110,6 +110,9 @@ public:
 	double get_satellites_fov(const Navigator * nav) const;
 	double get_parent_satellites_fov(const Navigator * nav) const;
 	float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
+	float getSelectPriority(const Navigator *nav) const;
+	Vec3f getInfoColor(void) const;
+	
     const STexture *getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */

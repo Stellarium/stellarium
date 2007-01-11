@@ -30,6 +30,7 @@
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
+#include "StelObjectDB.hpp"
 
 using namespace s_gui;
 
@@ -698,7 +699,7 @@ Component* StelUI::createSearchWindow(void)
 void StelUI::autoCompleteSearchedObject(void)
 {
     wstring objectName = star_edit->getText();
-    star_edit->setAutoCompleteOptions(core->listMatchingObjectsI18n(objectName, 5));
+    star_edit->setAutoCompleteOptions(StelApp::getInstance().getGlobalObjectMgr().listMatchingObjectsI18n(objectName, 5));
     lblSearchMessage->setLabel(star_edit->getAutoCompleteOptions());
 }
 
@@ -706,10 +707,10 @@ void StelUI::gotoSearchedObject(void)
 {
 	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	
-	if (core->findAndSelectI18n(star_edit->getText()))
+	if (StelApp::getInstance().getGlobalObjectMgr().findAndSelectI18n(star_edit->getText()))
 	{
 		star_edit->clearText();
-		mvmgr->gotoSelectedObject();
+		mvmgr->moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
 		mvmgr->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
 		  // johannes

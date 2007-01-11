@@ -30,6 +30,7 @@
 #include "Translator.hpp"
 #include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelObjectDB.hpp"
 
 #define RADIUS_NEB 1.
 
@@ -83,6 +84,8 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagBright(conf.get_boolean("astro:flag_bright_nebulae"));
 	
 	updateI18n();
+	
+	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
 }
 
 // Draw all the Nebulae
@@ -235,6 +238,9 @@ StelObject NebulaMgr::search(Vec3f Pos)
 vector<StelObject> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
 {
 	vector<StelObject> result;
+	if (!getFlagShow())
+		return result;
+		
 	Vec3d v(av);
 	v.normalize();
 	double cos_lim_fov = cos(limitFov * M_PI/180.);

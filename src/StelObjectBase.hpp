@@ -37,10 +37,10 @@ public:
   virtual void retain(void) {}
   virtual void release(void) {}
 
-  virtual void update(void) {}
+  virtual void update(double deltaTime);
   
   //! Draw a pointer around the object, for use e.g. when the object is selected
-  void drawPointer(int delta_time, const Projector* prj,const Navigator *nav);
+  void drawPointer(const Projector* prj,const Navigator *nav);
 
   //! Write I18n information about the object in wstring. 
   virtual wstring getInfoString(const Navigator *nav) const = 0;
@@ -63,11 +63,16 @@ public:
 
   //! Return object's magnitude
   virtual float get_mag(const Navigator *nav) const = 0;
+  
+  //! Return a priority value which is used to discriminate objects by priority
+  //! As for magnitudes, the lower is the higher priority 
+  virtual float getSelectPriority(const Navigator *nav) const {return get_mag(nav);}
 
-  //! Get object main color, used to display infos
+  //! Get the object'color
   virtual Vec3f get_RGB(void) const {return Vec3f(1.,1.,1.);}
-
-  virtual class StelObject getBrightestStarInConstellation(void) const;
+	  
+  //! Get a color used to display info about the object
+  virtual Vec3f getInfoColor(void) const {return get_RGB();}
 
   //! Return the best FOV in degree to use for a close view of the object
   virtual double get_close_fov(const Navigator *nav) const {return 10.;}

@@ -36,6 +36,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
+#include "StelObjectDB.hpp"
 
 using namespace std;
 
@@ -153,7 +154,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["star_twinkle_amount"]!="") smgr->setTwinkleAmount(StelUtils::str_to_double(args["star_twinkle_amount"]));
 		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
-			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
 			mw->setIntensity(StelUtils::str_to_double(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
 			if(mw->getIntensity()) mw->setFlagShow(true);
@@ -187,7 +188,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} else if (command == "select") {
 
 		// default is to deselect current object
-		stcore->unSelect();
+		StelApp::getInstance().getGlobalObjectMgr().unSelect();
 
 
 		string select_type, identifier;
@@ -219,15 +220,16 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			select_type = "";
 		}
 
-		if(select_type != "" ) stcore->selectObject(select_type, identifier);
+		// TODO repair that maybe
+		//if(select_type != "" ) StelApp::getInstance().getGlobalObjectMgr().selectObject(select_type, identifier);
 
 		// determine if selected object pointer should be displayed
-		if(args["pointer"]=="off" || args["pointer"]=="0") stcore->setFlagSelectedObjectPointer(false);
-		else stcore->setFlagSelectedObjectPointer(true);
+		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getGlobalObjectMgr().setFlagSelectedObjectPointer(false);
+		else StelApp::getInstance().getGlobalObjectMgr().setFlagSelectedObjectPointer(true);
     
 
 	} else if (command == "deselect") {
-		stcore->deselect();
+		StelApp::getInstance().getGlobalObjectMgr().unSelect();
 
 	} else if(command == "look") {  // change direction of view
 		//	  double duration = str_to_pos_double(args["duration"]);
