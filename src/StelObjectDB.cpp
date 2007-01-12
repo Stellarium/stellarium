@@ -23,12 +23,12 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 
-StelObjectDB::StelObjectDB() : selected_object(NULL)
+StelObjectMgr::StelObjectMgr() : selected_object(NULL)
 {
 	object_pointer_visibility = true;
 }
 
-StelObjectDB::~StelObjectDB()
+StelObjectMgr::~StelObjectMgr()
 {
 	// release the previous StelObject:
 	selected_object = StelObject();
@@ -37,7 +37,7 @@ StelObjectDB::~StelObjectDB()
 /*************************************************************************
  Update infos for selected objects
 *************************************************************************/
-void StelObjectDB::update(double deltaTime)
+void StelObjectMgr::update(double deltaTime)
 {
 	// Update info about selected object
 	selected_object.update(deltaTime);
@@ -46,7 +46,7 @@ void StelObjectDB::update(double deltaTime)
 /*************************************************************************
  Draw the selected objects
 *************************************************************************/
-double StelObjectDB::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double StelObjectMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	// Draw the pointer on the currently selected object
 	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
@@ -58,13 +58,13 @@ double StelObjectDB::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/
-void StelObjectDB::registerStelObjectMgr(StelObjectModule* mgr)
+void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 {
 	objectsModule.push_back(mgr);
 }
 
 
-StelObject StelObjectDB::searchByNameI18n(const wstring &name) const
+StelObject StelObjectMgr::searchByNameI18n(const wstring &name) const
 {
 	StelObject rval;
 	std::vector<StelObjectModule*>::const_iterator iter;
@@ -80,7 +80,7 @@ StelObject StelObjectDB::searchByNameI18n(const wstring &name) const
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
 //! @return true if an object was found with the passed name
-bool StelObjectDB::findAndSelectI18n(const wstring &nameI18n)
+bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 {
 	// Then look for another object
 	StelObject obj = searchByNameI18n(nameI18n);
@@ -94,7 +94,7 @@ bool StelObjectDB::findAndSelectI18n(const wstring &nameI18n)
 //! Find and select an object based on selection type and standard name or number
 //! @return true if an object was selected
 //
-//bool StelObjectDB::selectObject(const string &type, const string &id)
+//bool StelObjectMgr::selectObject(const string &type, const string &id)
 //{
 //	/*
 //	  std::wostringstream oss;
@@ -166,21 +166,21 @@ bool StelObjectDB::findAndSelectI18n(const wstring &nameI18n)
 
 
 //! Find and select an object near given equatorial position
-bool StelObjectDB::findAndSelect(const StelCore* core, const Vec3d& pos)
+bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos)
 {
 	StelObject tempselect = cleverFind(core, pos);
 	return selectObject(tempselect);
 }
 
 //! Find and select an object near given screen position
-bool StelObjectDB::findAndSelect(const StelCore* core, int x, int y)
+bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y)
 {
 	StelObject tempselect = cleverFind(core, x, y);
 	return selectObject(tempselect);
 }
 
 // Find an object in a "clever" way, v in J2000 frame
-StelObject StelObjectDB::cleverFind(const StelCore* core, const Vec3d& v) const
+StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
 	StelObject sobj;
 	vector<StelObject> candidates;
@@ -222,7 +222,7 @@ StelObject StelObjectDB::cleverFind(const StelCore* core, const Vec3d& v) const
 	return sobj;
 }
 
-StelObject StelObjectDB::cleverFind(const StelCore* core, int x, int y) const
+StelObject StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
 	core->getProjection()->unproject_j2000(x,core->getProjection()->getViewportHeight()-y,v);
@@ -230,7 +230,7 @@ StelObject StelObjectDB::cleverFind(const StelCore* core, int x, int y) const
 }
 
 //! Deselect selected object if any
-void StelObjectDB::unSelect(void)
+void StelObjectMgr::unSelect(void)
 {
 	selected_object = NULL;
 	
@@ -244,7 +244,7 @@ void StelObjectDB::unSelect(void)
 
 //! Select passed object
 //! @return true if the object was selected (false if the same was already selected)
-bool StelObjectDB::selectObject(const StelObject &obj)
+bool StelObjectMgr::selectObject(const StelObject &obj)
 {
 	// Unselect if it is the same object
 	if (obj && selected_object==obj)
@@ -284,7 +284,7 @@ bool StelObjectDB::selectObject(const StelObject &obj)
 //! @param objPrefix the first letters of the searched object
 //! @param maxNbItem the maximum number of returned object names
 //! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-vector<wstring> StelObjectDB::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+vector<wstring> StelObjectMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {
 	vector<wstring> result;
 	vector <wstring>::const_iterator iter;
