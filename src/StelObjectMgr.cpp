@@ -18,7 +18,7 @@
  */
 
 #include "StelApp.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelObjectModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"

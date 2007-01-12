@@ -34,7 +34,7 @@
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 #include "telescope_mgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
