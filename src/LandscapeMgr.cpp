@@ -19,7 +19,7 @@
  
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
-#include "stel_atmosphere.h"
+#include "Atmosphere.hpp"
 #include "StelApp.hpp"
 #include "solarsystem.h"
 #include "StelCore.hpp"

@@ -25,11 +25,11 @@
 #ifndef _STEL_ATMOSTPHERE_H_
 #define _STEL_ATMOSTPHERE_H_
 
-#include "skylight.h"
+#include "Skylight.hpp"
 #include "vecmath.h"
 #include "Navigator.hpp"
 #include "ToneReproducer.hpp"
-#include "skybright.h"
+#include "Skybright.hpp"
 #include "Fader.hpp"
 
 using namespace std;

@@ -22,7 +22,7 @@
 
 // TODO : Adaptative resolution for optimization
 
-#include "stel_atmosphere.h"
+#include "Atmosphere.hpp"
 #include "stellarium.h"
 #include "StelUtils.hpp"
 #include "Projector.hpp"
