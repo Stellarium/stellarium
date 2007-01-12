@@ -75,7 +75,8 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	if (!Nebula::tex_circle)
 		Nebula::tex_circle = &StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
-		
+	
+	setFlagShowTexture(true);
 	setFlagShow(conf.get_boolean("astro:flag_nebula"));
 	setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
 	setMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
@@ -138,7 +139,8 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	
 				if (n->angular_size>size_limit)
 				{
-					if (n->hasTex()) n->draw_tex(prj, nav, eye);
+					if (n->hasTex())
+						n->draw_tex(prj, nav, eye);
 					else n->draw_no_tex(prj, nav, eye);
 				}
 	
