@@ -119,7 +119,7 @@ public:
 	
 	//! @brief Get the StelObject manager to use for querying from all stellarium objects
 	//! @return the StelObject manager to use for querying from all stellarium objects
-	StelObjectMgr& getGlobalObjectMgr() {return *globalObjectMgr;}
+	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 	
 	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
@@ -179,6 +179,9 @@ private:
 	// Handle key press and release
 	int handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 
+	// Set the colorscheme for all the modules
+	void setColorScheme(const std::string& fileName, const std::string& section);
+
 	// Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 
@@ -224,7 +227,7 @@ private:
 	StelTextureMgr* textureMgr;
 	
 	// Manager for all the StelObjects of the program
-	StelObjectMgr* globalObjectMgr;
+	StelObjectMgr* stelObjectMgr;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;

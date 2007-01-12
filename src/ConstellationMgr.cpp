@@ -78,7 +78,7 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 	setArtIntensity(	conf.get_double("viewing","constellation_art_intensity", 0.5));
 	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
 	
-	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
+	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
@@ -100,6 +100,14 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	}
 }
 
+void ConstellationMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
+	setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
+	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
+}
 
 /*************************************************************************
  The selected objects changed, check if some stars are selected and display the 
@@ -107,20 +115,20 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 *************************************************************************/ 
 void ConstellationMgr::selectedObjectChangeCallBack()
 {
-	if (!StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
+	if (!StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
 	{
 		setSelected(StelObject());
 		return;
 	}
 	
-	if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_CONSTELLATION)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_CONSTELLATION)
 	{
-		const Constellation* c = (const Constellation*)&(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
-		StelApp::getInstance().getGlobalObjectMgr().selectObject(c->getBrightestStarInConstellation());
+		const Constellation* c = (const Constellation*)&(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+		StelApp::getInstance().getStelObjectMgr().selectObject(c->getBrightestStarInConstellation());
 	}
-	else if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_STAR)
+	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_STAR)
 	{
-		setSelected(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
+		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 	}
 	else
 	{

@@ -45,6 +45,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager

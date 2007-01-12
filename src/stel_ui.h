@@ -70,7 +70,7 @@ public:
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
 
-    void setColorScheme(const string& skinFile, const string& section);
+    void setColorScheme(const InitParser& conf, const string& section);
 	double getMouseCursorTimeout() { return MouseCursorTimeout; }
 
 	bool getFlagShowGravityUi() { return FlagShowGravityUi; }

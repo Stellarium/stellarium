@@ -29,7 +29,7 @@ public:
 	virtual string getModuleID() const {return "gridlines";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
-	
+	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

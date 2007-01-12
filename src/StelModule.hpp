@@ -96,7 +96,7 @@ public:
 	//! The draw and update method is automatically called for external modules
 	virtual bool isExternal() {return false;}
 
-	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI. 
+	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
 	//! @param y Y mouse position in pixels.
 	//! @param button the mouse button. Can be SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT, SDL_BUTTON_MIDDLE,
@@ -105,13 +105,13 @@ public:
 	//! @return false if the event was not intercepted, true otherwise.
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state) {return false;}
 	
-	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI. 
+	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
 	//! @param y Y mouse position in pixels.
 	//! @return false if the event was not intercepted, true otherwise.
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y) {return false;}
 	
-	//! Handle key events. Please note that most of the interactions will be done through the GUI.
+	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param key the SDL key code.
 	//! @param mod the current mod state, needed to determine whether e.g CTRL or SHIFT key are pressed.
 	//! @param unicode the unicode key code.
@@ -124,6 +124,9 @@ public:
 	
 	//! Indicate that selected StelObjects changed. This can be used by some modules to update themself.
 	virtual void selectedObjectChangeCallBack() {;}
+	
+	//! Load color scheme from the given ini file and section name
+	virtual void setColorScheme(const InitParser& conf, const std::string& section) {;}
 	
 protected:
 	friend class StelModuleMgr;

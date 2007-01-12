@@ -90,7 +90,7 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 	startTrails(conf.get_boolean("astro", "flag_object_trails", false));	
 	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
 	
-	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
+	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 // Init and load the solar system data
@@ -462,6 +462,15 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 		draw_earth_shadow(nav, prj);
 
 	return maxSquaredDistance;
+}
+
+void SolarSystem::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
+	setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
+	setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
 }
 
 Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
@@ -844,9 +853,9 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 
 void SolarSystem::selectedObjectChangeCallBack()
 {
-	if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_PLANET)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_PLANET)
 	{
-		setSelected(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
+		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 //			// potentially record this action
 //			if (!recordActionCallback.empty())
 //				recordActionCallback("select planet " + selected_object.getEnglishName());

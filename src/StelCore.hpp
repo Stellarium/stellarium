@@ -21,7 +21,6 @@
 
 #include <string>
 
-#include "callbacks.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
@@ -35,7 +34,7 @@ class StelCore
 {
 public:
 	// Inputs are the locale directory and root directory and callback function for recording actions
-    StelCore(const boost::callback <void, string> & recordCallback);
+    StelCore();
     virtual ~StelCore();
 
 	//! Init and load all main core components from the passed config file.
@@ -56,6 +55,8 @@ public:
 	//! Get the current projector used in the core
 	Projector* getProjection() {return projection;}
 	const Projector* getProjection() const {return projection;}
+	//! Set the projection type
+	void setProjectionType(const string& ptype);
 	
 	//! Get the current navigation (manages frame transformation) used in the core
 	Navigator* getNavigation() {return navigation;}
@@ -65,38 +66,16 @@ public:
 	ToneReproducer* getToneReproducer() {return tone_converter;}
 	const ToneReproducer* getToneReproducer() const {return tone_converter;}
 
+	//! Get the current observer description
+	Observer* getObservatory() {return observatory;}
+	//! Get the current observer description (as a const object)
+	const Observer* getObservatory() const {return observatory;}
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Planets flags
 	bool setHomePlanet(string planet);
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Projection
-	//! Set the projection type
-	void setProjectionType(const string& ptype);
-	//! Get the projection type
-	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
-
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Observer
-	//! Return the current observatory (as a const object)
-	const Observer* getObservatory(void) {return observatory;}
-
-	//! Move to a new latitude and longitude on home planet
-	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name)
-	{
-		observatory->moveTo(lat, lon, alt, delay, name);
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Others
-	//! Load color scheme from the given ini file and section name
-	void setColorScheme(const string& skinFile, const string& section);
-
 private:
-	//! Callback to record actions
-	boost::callback<void, string> recordActionCallback;
-		
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observer * observatory;			// Manage observer position
