@@ -26,7 +26,7 @@
 #include "Fader.hpp"
 #include "LoadingBar.hpp"
 #include "Translator.hpp"
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 
 class ToneReproducer;
 class HipStarMgr;
@@ -34,7 +34,7 @@ class Constellation;
 class Projector;
 class Navigator;
 
-class ConstellationMgr : public StelObjectMgr
+class ConstellationMgr : public StelObjectModule
 {
 public:
     ConstellationMgr(HipStarMgr *_hip_stars);

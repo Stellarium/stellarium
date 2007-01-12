@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELOBJECTMGR_H
-#define STELOBJECTMGR_H
+#ifndef STELOBJECTMODULE_H
+#define STELOBJECTMODULE_H
 
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -28,12 +28,12 @@
  * @author Fabien Chereau <stellarium@free.fr>
  */
 
-class StelObjectMgr : public StelModule
+class StelObjectModule : public StelModule
 {
 public:
-    StelObjectMgr();
+    StelObjectModule();
 
-    ~StelObjectMgr();
+    ~StelObjectModule();
 	
 	//! Search for StelObject in the disk of diameter limitFov centered on the given position
 	//! Only visible objects (i.e curretly displayed on screen should be returned)
