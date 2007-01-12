@@ -41,7 +41,7 @@
 #include "GeodesicGrid.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;

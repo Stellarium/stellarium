@@ -36,7 +36,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 using namespace std;
 

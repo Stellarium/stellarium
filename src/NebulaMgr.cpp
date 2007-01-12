@@ -30,7 +30,7 @@
 #include "Translator.hpp"
 #include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 #define RADIUS_NEB 1.
 

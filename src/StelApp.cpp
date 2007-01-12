@@ -27,7 +27,7 @@
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
