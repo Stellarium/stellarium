@@ -121,6 +121,14 @@ void TelescopeMgr::update(double deltaTime) {
   telescope_fader.update((int)(deltaTime*1000));
 }
 
+void TelescopeMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	set_label_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
+	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
+}
+
 vector<StelObject> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const
 {
   vector<StelObject> result;
@@ -201,7 +209,7 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
 	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
 	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
   
-  StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
+  StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {

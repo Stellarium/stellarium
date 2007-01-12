@@ -230,6 +230,12 @@ void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
 }
 
+void LandscapeMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
+}
 
 bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 {

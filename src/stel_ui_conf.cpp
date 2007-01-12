@@ -380,7 +380,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	projection_sl->addItem("spheric_mirror");
 	projection_sl->adjustSize();
 	projection_sl->setValue(CalculateProjectionSlValue(
-                              core->getProjectionType(),
+                              core->getProjection()->getProjectionType(),
                               app->getViewPortDistorterType()));
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
@@ -700,7 +700,7 @@ Component* StelUI::createSearchWindow(void)
 void StelUI::autoCompleteSearchedObject(void)
 {
     wstring objectName = star_edit->getText();
-    star_edit->setAutoCompleteOptions(StelApp::getInstance().getGlobalObjectMgr().listMatchingObjectsI18n(objectName, 5));
+    star_edit->setAutoCompleteOptions(StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(objectName, 5));
     lblSearchMessage->setLabel(star_edit->getAutoCompleteOptions());
 }
 
@@ -708,10 +708,10 @@ void StelUI::gotoSearchedObject(void)
 {
 	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	
-	if (StelApp::getInstance().getGlobalObjectMgr().findAndSelectI18n(star_edit->getText()))
+	if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(star_edit->getText()))
 	{
 		star_edit->clearText();
-		mvmgr->moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+		mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
 		mvmgr->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
 		  // johannes
@@ -901,7 +901,7 @@ void StelUI::setVideoOption(void)
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
-	cout << "Saving video settings: projection=" << core->getProjectionType() 
+	cout << "Saving video settings: projection=" << core->getProjection()->getProjectionType() 
 	     << ", distorter=" << app->getViewPortDistorterType();
 	if ( w && h ) cout << ", res=" << w << "x" << h;
    	cout << " in file " << app->getConfigFilePath() << endl;
@@ -909,7 +909,7 @@ void StelUI::setVideoOption(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	conf.set_str("projection:type", core->getProjectionType());
+	conf.set_str("projection:type", core->getProjection()->getProjectionType());
 	conf.set_str("video:distorter", app->getViewPortDistorterType());
 
 

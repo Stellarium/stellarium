@@ -52,6 +52,7 @@ public:
 	virtual void update(double deltaTime) {names_fader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);
+	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class

@@ -190,7 +190,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} else if (command == "select") {
 
 		// default is to deselect current object
-		StelApp::getInstance().getGlobalObjectMgr().unSelect();
+		StelApp::getInstance().getStelObjectMgr().unSelect();
 
 
 		string select_type, identifier;
@@ -223,15 +223,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		}
 
 		// TODO repair that maybe
-		//if(select_type != "" ) StelApp::getInstance().getGlobalObjectMgr().selectObject(select_type, identifier);
+		//if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().selectObject(select_type, identifier);
 
 		// determine if selected object pointer should be displayed
-		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getGlobalObjectMgr().setFlagSelectedObjectPointer(false);
-		else StelApp::getInstance().getGlobalObjectMgr().setFlagSelectedObjectPointer(true);
+		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(false);
+		else StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(true);
     
 
 	} else if (command == "deselect") {
-		StelApp::getInstance().getGlobalObjectMgr().unSelect();
+		StelApp::getInstance().getStelObjectMgr().unSelect();
 
 	} else if(command == "look") {  // change direction of view
 		//	  double duration = str_to_pos_double(args["duration"]);
@@ -382,7 +382,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			if(args["alt"]!="") alt = StelUtils::str_to_double(args["alt"]);
 			delay = (int)(1000.*StelUtils::str_to_double(args["duration"]));
 		  
-			stcore->moveObserver(lat,lon,alt,delay,StelUtils::stringToWstring(name));
+			stcore->getObservatory()->moveTo(lat,lon,alt,delay,StelUtils::stringToWstring(name));
 		} else status = 0;
 
 	} else if(command=="image") {

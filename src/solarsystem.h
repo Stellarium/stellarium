@@ -51,6 +51,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void selectedObjectChangeCallBack();
+	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class

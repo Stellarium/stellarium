@@ -55,7 +55,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));
 	moduleMgr = new StelModuleMgr();
 	
-	core = new StelCore(boost::callback<void, string>(this, &StelApp::recordCommand));
+	core = new StelCore();
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, dataDir);
@@ -78,7 +78,7 @@ StelApp::~StelApp()
 	delete skyCultureMgr;
 	delete localeMgr;
 	delete fontManager;
-	delete globalObjectMgr;
+	delete stelObjectMgr;
 }
 
 /*************************************************************************
@@ -221,8 +221,8 @@ void StelApp::init(void)
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 
 	// Stel Object Data Base manager
-	globalObjectMgr = new StelObjectMgr();
-	globalObjectMgr->init(conf, lb);
+	stelObjectMgr = new StelObjectMgr();
+	stelObjectMgr->init(conf, lb);
 
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
@@ -303,7 +303,7 @@ void StelApp::update(int delta_time)
 
 	core->update(delta_time);
 	
-	globalObjectMgr->update((double)delta_time/1000);
+	stelObjectMgr->update((double)delta_time/1000);
 }
 
 //! Main drawinf function called at each frame
@@ -328,7 +328,7 @@ double StelApp::draw(int delta_time)
 	// Render all the main objects of stellarium
 	double squaredDistance = core->draw(delta_time);
 
-	globalObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+	stelObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();
@@ -415,13 +415,27 @@ void StelApp::restoreFrom2DfullscreenProjection(void) const
 	glPopMatrix();
 }
 
+// Set the colorscheme for all the modules
+void StelApp::setColorScheme(const std::string& fileName, const std::string& section)
+{
+	InitParser conf;
+	conf.load(fileName);
+	
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		(*iter)->setColorScheme(conf, section);
+	}
+	
+	ui->setColorScheme(conf, section);
+}
+
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(void)
 {
 	if (!getVisionModeNight())
 	{
-		core->setColorScheme(getConfigFilePath(), "night_color");
-		ui->setColorScheme(getConfigFilePath(), "night_color");
+		setColorScheme(getConfigFilePath(), "night_color");
 	}
 	draw_mode=DM_NIGHT;
 }
@@ -432,8 +446,7 @@ void StelApp::setVisionModeNormal(void)
 {
 	if (!getVisionModeNormal())
 	{
-		core->setColorScheme(getConfigFilePath(), "color");
-		ui->setColorScheme(getConfigFilePath(), "color");
+		setColorScheme(getConfigFilePath(), "color");
 	}
 	draw_mode=DM_NORMAL;
 }

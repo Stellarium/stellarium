@@ -1153,7 +1153,7 @@ void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
   setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
   
-  StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
+  StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1164,6 +1164,13 @@ void HipStarMgr::setGrid(void) {
   }
 }
 
+void HipStarMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
+	setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
+}
 
 // Load from file
 void HipStarMgr::load_data(LoadingBar& lb) {

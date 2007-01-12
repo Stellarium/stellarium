@@ -587,6 +587,17 @@ double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 	return 0.;
 }
 
+void GridLinesMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setColorEquatorGrid(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
+	setColorAzimutalGrid(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
+	setColorEquatorLine(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
+	setColorEclipticLine(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
+	setColorMeridianLine(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
+}
+
 //! Set flag for displaying Azimutal Grid
 void GridLinesMgr::setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
 //! Get flag for displaying Azimutal Grid

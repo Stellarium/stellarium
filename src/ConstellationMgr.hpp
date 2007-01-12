@@ -49,6 +49,7 @@ public:
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);	
 	virtual void selectedObjectChangeCallBack();
+	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
