@@ -25,7 +25,7 @@
 #include "StelModule.hpp"
 #include "StelObject.hpp"
 
-class StelObjectMgr;
+class StelObjectModule;
 class StelCore;
 
 //! Manage the selection and queries on one or more StelObjects.
@@ -46,7 +46,7 @@ public:
 	
 	//! Add a new StelObject manager into the list of supported modules.
 	//! Registered modules can have selected objects 
-	void registerStelObjectMgr(StelObjectMgr* mgr);
+	void registerStelObjectMgr(StelObjectModule* mgr);
 	
 	//! Find and select an object near given equatorial position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
@@ -89,7 +89,7 @@ public:
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
 private:
-	std::vector<StelObjectMgr*> objectsModule;	// The list of StelObjectMgr that are referenced in Stellarium
+	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
 	StelObject selected_object;			// The selected object in stellarium
 	

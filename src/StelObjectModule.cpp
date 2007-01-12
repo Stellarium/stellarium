@@ -17,15 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 
-StelObjectMgr::StelObjectMgr()
+StelObjectModule::StelObjectModule()
  : StelModule()
 {
 }
 
 
-StelObjectMgr::~StelObjectMgr()
+StelObjectModule::~StelObjectModule()
 {
 }
 

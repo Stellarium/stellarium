@@ -19,7 +19,7 @@
 
 #include "StelApp.hpp"
 #include "StelObjectDB.hpp"
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 
@@ -58,7 +58,7 @@ double StelObjectDB::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/
-void StelObjectDB::registerStelObjectMgr(StelObjectMgr* mgr)
+void StelObjectDB::registerStelObjectMgr(StelObjectModule* mgr)
 {
 	objectsModule.push_back(mgr);
 }
@@ -67,7 +67,7 @@ void StelObjectDB::registerStelObjectMgr(StelObjectMgr* mgr)
 StelObject StelObjectDB::searchByNameI18n(const wstring &name) const
 {
 	StelObject rval;
-	std::vector<StelObjectMgr*>::const_iterator iter;
+	std::vector<StelObjectModule*>::const_iterator iter;
 	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
 	{
 		rval = (*iter)->searchByNameI18n(name);
@@ -190,7 +190,7 @@ StelObject StelObjectDB::cleverFind(const StelCore* core, const Vec3d& v) const
 	float fov_around = core->getProjection()->getFov()/MY_MIN(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
 
 	// Collect the objects inside the range
-	std::vector<StelObjectMgr*>::const_iterator iteromgr;
+	std::vector<StelObjectModule*>::const_iterator iteromgr;
 	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
 		temp = (*iteromgr)->searchAround(v, fov_around, core->getNavigation(), core->getProjection());
@@ -290,7 +290,7 @@ vector<wstring> StelObjectDB::listMatchingObjectsI18n(const wstring& objPrefix, 
 	vector <wstring>::const_iterator iter;
 
 	// For all StelObjectmodules..
-	std::vector<StelObjectMgr*>::const_iterator iteromgr;
+	std::vector<StelObjectModule*>::const_iterator iteromgr;
 	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
 		// Get matching object for this module

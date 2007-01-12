@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_MGR_H_
 #define _TELESCOPE_MGR_H_
 
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 #include "Fader.hpp"
 #include "vecmath.h"
 
@@ -38,7 +38,7 @@ class STexture;
 class StelObject;
 class Telescope;
 
-class TelescopeMgr : public StelObjectMgr {
+class TelescopeMgr : public StelObjectModule {
 public:
   TelescopeMgr(void);
   virtual ~TelescopeMgr(void);
@@ -51,7 +51,7 @@ public:
 	virtual void update(double deltaTime);
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in the StelObjectMgr class
+	// Methods defined in the StelObjectModule class
 	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;

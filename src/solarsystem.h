@@ -29,14 +29,14 @@
 #include "stellarium.h"
 #include "planet.h"
 #include "StelObject.hpp"
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 
 class EllipticalOrbit;
 class LoadingBar;
 class Translator;
 class InitParser;
 
-class SolarSystem : public StelObjectMgr
+class SolarSystem : public StelObjectModule
 {
 public:
     SolarSystem();

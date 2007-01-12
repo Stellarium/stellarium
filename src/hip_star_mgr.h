@@ -26,7 +26,7 @@
 #include "Fader.hpp"
 #include "LoadingBar.hpp"
 #include "Translator.hpp"
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 
 using namespace std ;
 
@@ -38,7 +38,7 @@ class Navigator;
 class ZoneArray;
 class HipIndexStruct;
 
-class HipStarMgr : public StelObjectMgr
+class HipStarMgr : public StelObjectModule
 {
 public:
     HipStarMgr(void);
