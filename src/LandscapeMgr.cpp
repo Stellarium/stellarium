@@ -170,7 +170,7 @@ void LandscapeMgr::update(double deltaTime)
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Projector* prj = StelApp::getInstance().getCore()->getProjection();
 	const Observer* obs = StelApp::getInstance().getCore()->getObservatory();
-	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproductor();
+	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproducer();
 	
 	Vec3d sunPos = nav->helio_to_local(ssystem->getSun()->get_heliocentric_ecliptic_pos());
 	// Compute the moon position in local coordinate

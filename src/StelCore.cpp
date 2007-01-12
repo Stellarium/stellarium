@@ -36,7 +36,8 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
-
+#include "image_mgr.h"
+#include "meteor_mgr.h"
 
 StelCore::StelCore(const boost::callback<void, string>& recordCallback) :
 		projection(NULL),  hip_stars(NULL), asterisms(NULL),
@@ -45,8 +46,6 @@ StelCore::StelCore(const boost::callback<void, string>& recordCallback) :
 	recordActionCallback = recordCallback;
 
 	tone_converter = new ToneReproducer();
-	
-	script_images = new ImageMgr();
 	
 	//geoDrawer = new GeodesicGridDrawer(9);
 }
@@ -106,6 +105,10 @@ void StelCore::initProj(const InitParser& conf)
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf, LoadingBar& lb)
 {	
+	script_images = new ImageMgr();
+	script_images->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(script_images);
+	
 	// Init the solar system first
 	ssystem = new SolarSystem();
 	ssystem->init(conf, lb);
@@ -298,18 +301,6 @@ double StelCore::draw(int delta_time)
 	projection->draw_viewport_shape();
 
 	return squaredDistance;
-}
-
-
-
-// Update the sky culture for all the modules
-// TODO make generic
-void StelCore::updateSkyCulture()
-{
-	LoadingBar lb(projection, 12., "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-	if (asterisms) asterisms->updateSkyCulture(lb);
-	
-	if (hip_stars) hip_stars->updateSkyCulture(lb);
 }
 
 // Please keep saveCurrentSettings up to date with any new color settings added here
