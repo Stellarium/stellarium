@@ -67,8 +67,6 @@ public:
 	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
 	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
 	
-	//! Set the projection type
-	void setProjectionType(const string& ptype);
 	//! Get the projection type
 	string getProjectionType(void) const {return Projector::typeToString(getType());}
 	

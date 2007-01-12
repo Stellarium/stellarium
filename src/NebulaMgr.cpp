@@ -86,7 +86,7 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	
 	updateI18n();
 	
-	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
+	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
 // Draw all the Nebulae
@@ -159,6 +159,14 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 void NebulaMgr::updateSkyCulture(LoadingBar& lb)
 {;}
+
+void NebulaMgr::setColorScheme(const InitParser& conf, const std::string& section)
+{
+	// Load colors from config file
+	string defaultColor = conf.get_str(section,"default_color");
+	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
+	setCirclesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
+}
 
 // search by name
 StelObject NebulaMgr::search(const string& name)

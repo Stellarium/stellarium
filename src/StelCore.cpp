@@ -39,14 +39,10 @@
 #include "image_mgr.h"
 #include "meteor_mgr.h"
 
-StelCore::StelCore(const boost::callback<void, string>& recordCallback) :
-		projection(NULL),  hip_stars(NULL), asterisms(NULL),
+StelCore::StelCore() : projection(NULL),  hip_stars(NULL), asterisms(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL)
 {
-	recordActionCallback = recordCallback;
-
 	tone_converter = new ToneReproducer();
-	
 	//geoDrawer = new GeodesicGridDrawer(9);
 }
 
@@ -96,7 +92,6 @@ void StelCore::initProj(const InitParser& conf)
 {
 	// Projector
 	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
-	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 	string tmpstr = conf.get_str("projection:type");
 	setProjectionType(tmpstr);
 	projection->init(conf);
@@ -302,37 +297,6 @@ double StelCore::draw(int delta_time)
 
 	return squaredDistance;
 }
-
-// Please keep saveCurrentSettings up to date with any new color settings added here
-void StelCore::setColorScheme(const string& skinFile, const string& section)
-{
-	InitParser conf;
-	conf.load(skinFile);
-
-	// simple default color, rather than black which doesn't show up
-	string defaultColor = "0.6,0.4,0";
-
-	// Load colors from config file
-	nebulas->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
-	nebulas->setCirclesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
-	hip_stars->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
-	hip_stars->setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
-	telescope_mgr->set_label_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
-	telescope_mgr->set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
-	ssystem->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
-	ssystem->setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
-	ssystem->setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
-	gridLines->setColorEquatorGrid(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
-	gridLines->setColorAzimutalGrid(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
-	gridLines->setColorEquatorLine(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
-	gridLines->setColorEclipticLine(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
-	gridLines->setColorMeridianLine(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
-	landscape->setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
-	asterisms->setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
-	asterisms->setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
-	asterisms->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
-}
-
 
 void StelCore::setProjectionType(const string& sptype)
 {
