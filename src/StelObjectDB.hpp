@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef SELECTIONMGR_HPP_
-#define SELECTIONMGR_HPP_
+#ifndef STELOBJECTMGR_HPP_
+#define STELOBJECTMGR_HPP_
 
 #include <vector>
 #include "vecmath.h"
@@ -29,11 +29,11 @@ class StelObjectModule;
 class StelCore;
 
 //! Manage the selection and queries on one or more StelObjects.
-class StelObjectDB : public StelModule
+class StelObjectMgr : public StelModule
 {
 public:
-	StelObjectDB();
-	virtual ~StelObjectDB();
+	StelObjectMgr();
+	virtual ~StelObjectMgr();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
