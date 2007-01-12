@@ -148,6 +148,7 @@ void Cardinals::updateI18n()
 
 LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL)
 {
+	dependenciesOrder["draw"]="telescopes";
 }
 
 LandscapeMgr::~LandscapeMgr()

@@ -45,6 +45,7 @@ ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) :
 {
 	assert(hipStarMgr);
 	isolateSelected = false;
+	dependenciesOrder["draw"]="milkyway";
 }
 
 ConstellationMgr::~ConstellationMgr()

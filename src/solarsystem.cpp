@@ -41,6 +41,7 @@ SolarSystem::SolarSystem()
 	tex_earth_shadow(NULL), flagOrbits(false),flag_light_travel_time(false)
 {
 	flagPoint = false;
+	dependenciesOrder["draw"]="stars";
 }
 
 void SolarSystem::setFontSize(float newFontSize)

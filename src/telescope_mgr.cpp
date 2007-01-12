@@ -56,6 +56,7 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL),telescope_texture(0) {
     // has already closed the socket. We must ignore it:
   signal(SIGPIPE,SIG_IGN);
 #endif
+	dependenciesOrder["draw"]="meteors";
 }
 
 TelescopeMgr::~TelescopeMgr(void) {
@@ -119,6 +120,8 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 void TelescopeMgr::update(double deltaTime) {
   name_fader.update((int)(deltaTime*1000));
   telescope_fader.update((int)(deltaTime*1000));
+ 	// communicate with the telescopes:
+	communicate();
 }
 
 void TelescopeMgr::setColorScheme(const InitParser& conf, const std::string& section)

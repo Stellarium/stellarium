@@ -13,13 +13,16 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual void update(double deltaTime); // Increment/decrement smoothly the vision field and position
+	virtual void update(double deltaTime) {;}
 	virtual string getModuleID() const {return "movements";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
 	virtual bool handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y);
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state);
 	virtual void selectedObjectChangeCallBack();
+	
+	//! Increment/decrement smoothly the vision field and position
+	void updateMotion(double deltaTime);
 	
 	double getZoomSpeed() {return zoom_speed;}
 	

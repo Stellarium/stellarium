@@ -537,6 +537,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 
 GridLinesMgr::GridLinesMgr()
 {
+	dependenciesOrder["draw"]="stars";
 	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
 	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
 	equator_line = new SkyLine(SkyLine::EQUATOR);

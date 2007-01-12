@@ -47,10 +47,10 @@ public:
 	//! @param delta_time the time increment in ms.
 	void update(int delta_time);
 
-	//! Execute all the drawing functions
+	//! Update core state before drawing modules
 	//! @param delta_time the time increment in ms.
-	//! @returns the max squared distance in pixels any single object has moved since the previous update.
-	double draw(int delta_time);
+	void preDraw(int delta_time);
+	void postDraw();
 	
 	//! Get the current projector used in the core
 	Projector* getProjection() {return projection;}
@@ -82,18 +82,6 @@ private:
 	Projector * projection;				// Manage the projection mode and matrix
 	ToneReproducer * tone_converter;	// Tones conversion between stellarium world and display device
 	class MovementMgr* movementMgr;		// Manage vision movements
-	
-	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
-	class ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
-	class NebulaMgr * nebulas;				// Manage the nebulas
-	class SolarSystem* ssystem;				// Manage the solar system
-	class MilkyWay* milky_way;				// Our galaxy
-	class MeteorMgr* meteors;				// Manage meteor showers
-	class ImageMgr* script_images;           // for script loaded image display
-	class TelescopeMgr *telescope_mgr;
-	class LandscapeMgr* landscape;
-	class GeodesicGridDrawer* geoDrawer;
-	class GridLinesMgr* gridLines;
 };
 
 #endif // _STEL_CORE_H_
