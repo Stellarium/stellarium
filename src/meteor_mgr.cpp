@@ -25,9 +25,11 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "meteor.h"
+#include "LandscapeMgr.hpp"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {
+	dependenciesOrder["draw"]="ssystem";
 	ZHR = zhr;
 	max_velocity = maxv;
 
@@ -65,6 +67,7 @@ void MeteorMgr::set_max_velocity(int maxv)
 
 void MeteorMgr::update(double delta_time)
 {
+	delta_time*=1000;
 	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
 	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproducer();
@@ -138,6 +141,10 @@ void MeteorMgr::update(double delta_time)
 
 double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye)
 {
+	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+		return 0.;
+	
 	prj->set_orthographic_projection();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

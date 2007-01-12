@@ -131,7 +131,11 @@ void StelModuleMgr::generateCallingLists()
 				else
 				{
 					for (depIdx=list.begin(); (*depIdx)->getModuleID()!=dep && depIdx!=list.end(); ++depIdx){;}
-					assert(depIdx!=list.end());
+					if (depIdx==list.end())
+					{
+						cerr << "Error, can't find module \"" << dep << "\" on which module \"" << m->second->getModuleID() << "\" depends for the operation \""<< tmp->first << "\"." << endl;
+						assert(0);
+					}
 					++depIdx;
 				}
 				list.insert(depIdx, m->second);
