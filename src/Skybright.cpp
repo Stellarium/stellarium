@@ -26,7 +26,7 @@
 # define pow10(x) pow(10,(x))
 #endif
 
-#include "skybright.h"
+#include "Skybright.hpp"
 
 Skybright::Skybright() : SN(1.f)
 {

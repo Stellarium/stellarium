@@ -24,7 +24,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "skylight.h"
+#include "Skylight.hpp"
 
 Skylight::Skylight() : thetas(0.f), T(0.f)
 {
