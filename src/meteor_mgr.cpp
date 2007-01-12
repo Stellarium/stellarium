@@ -67,7 +67,7 @@ void MeteorMgr::update(double delta_time)
 {
 	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
-	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproductor();
+	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproducer();
 	
 
 	// step through and update all active meteors

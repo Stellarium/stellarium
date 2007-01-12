@@ -31,6 +31,7 @@
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "meteor_mgr.h"
 
 using namespace s_gui;
 
