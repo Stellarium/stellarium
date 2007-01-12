@@ -35,13 +35,6 @@ StelCore::StelCore() : projection(NULL)
 
 StelCore::~StelCore()
 {
-	// First delete external module
-	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
-	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
-	{
-		if ((*iter)->isExternal())
-			delete *iter;
-	}
 	delete navigation;
 	delete projection;
 	delete observatory;
@@ -58,7 +51,6 @@ StelCore::~StelCore()
 		delete geodesic_grid;
 		geodesic_grid = NULL;
 	}
-	delete movementMgr;
 }
 
 // Load core data and initialize with default values
