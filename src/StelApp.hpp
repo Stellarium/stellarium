@@ -38,7 +38,7 @@ class StelUI;
 class ViewportDistorter;
 class SkyLocalizer;
 class StelTextureMgr;
-class StelObjectDB;
+class StelObjectMgr;
 
 using namespace std;
 
@@ -119,7 +119,7 @@ public:
 	
 	//! @brief Get the StelObject manager to use for querying from all stellarium objects
 	//! @return the StelObject manager to use for querying from all stellarium objects
-	StelObjectDB& getGlobalObjectMgr() {return *globalObjectMgr;}
+	StelObjectMgr& getGlobalObjectMgr() {return *globalObjectMgr;}
 	
 	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
@@ -224,7 +224,7 @@ private:
 	StelTextureMgr* textureMgr;
 	
 	// Manager for all the StelObjects of the program
-	StelObjectDB* globalObjectMgr;
+	StelObjectMgr* globalObjectMgr;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;

@@ -220,7 +220,7 @@ void StelApp::init(void)
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 
 	// Stel Object Data Base manager
-	globalObjectMgr = new StelObjectDB();
+	globalObjectMgr = new StelObjectMgr();
 	globalObjectMgr->init(conf, lb);
 
 	localeMgr->init(conf);
