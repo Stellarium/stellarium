@@ -24,7 +24,7 @@
 #include "StelObject.hpp"
 #include "Fader.hpp"
 #include "grid.h"
-#include "StelObjectMgr.hpp"
+#include "StelObjectModule.hpp"
 
 using namespace std;
 
@@ -35,7 +35,7 @@ class ToneReproducer;
 
 //! Manage a collection of nebula. It display the NGC catalog with informations 
 //! and textures for some of them.
-class NebulaMgr : public StelObjectMgr
+class NebulaMgr : public StelObjectModule
 {
 public:
 	NebulaMgr();
