@@ -90,6 +90,13 @@ StelApp::~StelApp()
 	delete fontManager;
 	delete stelObjectMgr;
 	StelObject::delete_textures(); // Unload the pointer textures
+	
+	// Delete all the modules
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		delete *iter;
+		*iter = NULL;
+	}
 }
 
 /*************************************************************************

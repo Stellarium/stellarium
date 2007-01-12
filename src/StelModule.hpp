@@ -91,10 +91,6 @@ public:
 	
 	//! Get the email adress of the module author
 	virtual string getAuthorEmail() {return "http://stellarium.org";}
-	
-	//! Get whether the module is an external module or if it belongs to the standard stellarium package
-	//! The draw and update method is automatically called for external modules
-	virtual bool isExternal() {return false;}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
