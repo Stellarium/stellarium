@@ -49,6 +49,10 @@ public:
 		VIEW_HORIZON,
 		VIEW_EQUATOR
 	};
+	
+	//! Possible mount modes
+	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
+	
 	// Create and initialise to default a navigation context
 	Navigator(Observer* obs);
     virtual ~Navigator();
@@ -57,6 +61,14 @@ public:
 
 	void updateTime(int delta_time);
 	void updateTransformMatrices(void);
+	
+	//! Set current mount type
+	void setMountMode(MOUNT_MODE m) {setViewingMode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
+	//! Get current mount type
+	MOUNT_MODE getMountMode(void) {return ((getViewingMode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
+	//! Toggle current mount mode between equatorial and altazimutal
+	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
+
 
 	// Time controls
 	//! Set the current date in Julian Day

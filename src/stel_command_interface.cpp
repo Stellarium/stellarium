@@ -37,6 +37,8 @@
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "image_mgr.h"
+#include "meteor_mgr.h"
 
 using namespace std;
 
@@ -385,7 +387,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	} else if(command=="image") {
 
-		ImageMgr* script_images = stcore->getImageMgr();
+		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("image_mgr");
 
 		if(args["name"]=="") {
 			debug_message = _("Image name required.");
@@ -482,7 +484,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	}
 	else if(command=="script") {
 
-		ImageMgr* script_images = stcore->getImageMgr();
+		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("image_mgr");
 
 		if(args["action"]=="end") {
 			// stop script, audio, and unload any loaded images

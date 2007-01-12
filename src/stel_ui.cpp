@@ -36,6 +36,8 @@
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "telescope_mgr.h"
+#include "image_mgr.h"
+#include "meteor_mgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -555,7 +557,7 @@ void StelUI::cb(void)
 	if (bt_flip_vert) core->getProjection()->setFlipVert( bt_flip_vert->getState() );
 	FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(FlagHelp);
-	core->setMountMode(bt_flag_equatorial_mode->getState() ? StelCore::MOUNT_EQUATORIAL : StelCore::MOUNT_ALTAZIMUTAL);
+	core->getNavigation()->setMountMode(bt_flag_equatorial_mode->getState() ? Navigator::MOUNT_EQUATORIAL : Navigator::MOUNT_ALTAZIMUTAL);
 	FlagConfig			= bt_flag_config->getState();
 // 	if  (app->getVisionModeChart() != bt_flag_chart->getState())
 // 	{
@@ -1288,7 +1290,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             else app->commander->execute_command( "flag show_tui_short_obj_info off");
             break;
 		case SDLK_RETURN:
-            core->toggleMountMode();
+            core->getNavigation()->toggleMountMode();
             break;
 		default:
             break;
@@ -1346,7 +1348,7 @@ void StelUI::gui_update_widgets(int delta_time)
 	
 	bt_flag_nebula_name->setState(nmgr->getFlagHints());
 	bt_flag_help->setState(help_win->getVisible());
-	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
+	bt_flag_equatorial_mode->setState(core->getNavigation()->getMountMode()==Navigator::MOUNT_EQUATORIAL);
 	bt_flag_config->setState(config_win->getVisible());
 	bt_flag_night->setState(app->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible());

@@ -28,6 +28,7 @@
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
+#include "image_mgr.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -298,7 +299,7 @@ void StelApp::update(int delta_time)
 	ui->gui_update_widgets(delta_time);
 	ui->tui_update_widgets();
 
-	if(!scripts->is_paused()) core->getImageMgr()->update(delta_time);
+	if(!scripts->is_paused()) ((ImageMgr*)moduleMgr->getModule("image_mgr"))->update(delta_time);
 
 	core->update(delta_time);
 	
@@ -327,7 +328,7 @@ double StelApp::draw(int delta_time)
 	// Render all the main objects of stellarium
 	double squaredDistance = core->draw(delta_time);
 
-	globalObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproductor());
+	globalObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();
@@ -464,5 +465,10 @@ void StelApp::updateSkyLanguage()
 // Update and reload sky culture informations everywhere in the program
 void StelApp::updateSkyCulture()
 {
-	core->updateSkyCulture();
+	LoadingBar lb(core->getProjection(), 12., "logo24bits.png", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		(*iter)->updateSkyCulture(lb);
+	}
 }
