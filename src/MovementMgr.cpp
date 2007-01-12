@@ -1,5 +1,5 @@
 #include "MovementMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 

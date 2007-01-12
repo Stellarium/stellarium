@@ -31,7 +31,7 @@
 #include "StelTextureMgr.hpp"
 #include "InitParser.hpp"
 #include "Projector.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 

@@ -24,7 +24,7 @@
 #include "InitParser.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <algorithm>
 

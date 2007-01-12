@@ -36,7 +36,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)

@@ -33,7 +33,7 @@ using namespace std;
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelObjectDB.hpp"
+#include "StelObjectMgr.hpp"
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
