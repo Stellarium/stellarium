@@ -46,6 +46,7 @@ bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
 	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
+	dependenciesOrder["draw"]="constellations";
 }
 
 NebulaMgr::~NebulaMgr()

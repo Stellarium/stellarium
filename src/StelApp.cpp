@@ -28,7 +28,17 @@
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
+
 #include "image_mgr.h"
+#include "telescope_mgr.h"
+#include "ConstellationMgr.hpp"
+#include "NebulaMgr.hpp"
+#include "LandscapeMgr.hpp"
+#include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
+#include "meteor_mgr.h"
+#include "hip_star_mgr.h"
+#include "solarsystem.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -79,6 +89,7 @@ StelApp::~StelApp()
 	delete localeMgr;
 	delete fontManager;
 	delete stelObjectMgr;
+	StelObject::delete_textures(); // Unload the pointer textures
 }
 
 /*************************************************************************
@@ -227,7 +238,58 @@ void StelApp::init(void)
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
+	ImageMgr* script_images = new ImageMgr();
+	script_images->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(script_images);
+	
+	// Init the solar system first
+	SolarSystem* ssystem = new SolarSystem();
+	ssystem->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(ssystem);
+	
+	// Load hipparcos stars & names
+	HipStarMgr* hip_stars = new HipStarMgr();
+	hip_stars->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(hip_stars);	
+	
 	core->init(conf, lb);
+
+	// Init nebulas
+	NebulaMgr* nebulas = new NebulaMgr();
+	nebulas->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(nebulas);
+	
+	// Init milky way
+	MilkyWay* milky_way = new MilkyWay();
+	milky_way->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(milky_way);
+	
+	// Telescope manager
+	TelescopeMgr* telescope_mgr = new TelescopeMgr();
+	telescope_mgr->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(telescope_mgr);
+	
+	// Constellations
+	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
+	asterisms->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(asterisms);
+
+	// Load the pointer textures
+	StelObject::init_textures();
+	
+	// Landscape, atmosphere & cardinal points section
+	LandscapeMgr* landscape = new LandscapeMgr();
+	landscape->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(landscape);
+
+	GridLinesMgr* gridLines = new GridLinesMgr();
+	gridLines->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(gridLines);
+	
+	// Meteors
+	MeteorMgr* meteors = new MeteorMgr(10, 60);
+	meteors->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(meteors);
 
 //ugly fix by johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
@@ -299,9 +361,16 @@ void StelApp::update(int delta_time)
 	ui->gui_update_widgets(delta_time);
 	ui->tui_update_widgets();
 
-	if(!scripts->is_paused()) ((ImageMgr*)moduleMgr->getModule("image_mgr"))->update(delta_time);
-
 	core->update(delta_time);
+
+	if(!scripts->is_paused()) ((ImageMgr*)moduleMgr->getModule("image_mgr"))->update(delta_time);
+	
+	// Send the event to every StelModule
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders("update");
+	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	{
+		(*i)->update((double)delta_time/1000);
+	}
 	
 	stelObjectMgr->update((double)delta_time/1000);
 }
@@ -325,10 +394,22 @@ double StelApp::draw(int delta_time)
 	glEnd();
 	restoreFrom2DfullscreenProjection();
 
+	core->preDraw(delta_time);
+
 	// Render all the main objects of stellarium
-	double squaredDistance = core->draw(delta_time);
+	double squaredDistance = 0.;
+	// Send the event to every StelModule
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders("draw");
+	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	{
+		double d = (*i)->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+		if (d>squaredDistance)
+			squaredDistance = d;
+	}
 
 	stelObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+
+	core->postDraw();
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();

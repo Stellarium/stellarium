@@ -252,7 +252,7 @@ void MovementMgr::zoom_out(int s)
 
 
 // Increment/decrement smoothly the vision field and position
-void MovementMgr::update(double deltaTime)
+void MovementMgr::updateMotion(double deltaTime)
 {
 	Projector* proj = core->getProjection();
 	

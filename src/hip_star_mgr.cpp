@@ -1096,6 +1096,7 @@ HipStarMgr::HipStarMgr(void) :
   assert(hip_index);
   max_geodesic_grid_level = -1;
   last_max_search_level = -1;
+  dependenciesOrder["draw"]="nebulas";
 }
 
 
