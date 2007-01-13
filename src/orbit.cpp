@@ -9,12 +9,89 @@
 
 #include <functional>
 #include <algorithm>
-#include <cmath>
+#include <math.h>
 
 #include "solve.h"
 #include "orbit.h"
 
 using namespace std;
+
+#define EPSILON 1e-10
+#define GAUSS_GRAV_CONST (0.01720209895*0.01720209895)
+
+static
+void InitHyp(double q,double e,double dt,double &a1,double &a2) {
+  const double a = q/(e-1.0);
+  const double Mp = sqrt(GAUSS_GRAV_CONST/a)/a;
+  const double M = Mp * dt;
+  double H = M;
+  for (;;) { // Newton
+    const double Hp = H;
+    H = H-(e*sinh(H)-H-M)/(e*cosh(H)-1);
+    if (fabs(H - Hp) < EPSILON) break;
+  }
+  const double h1 = q*sqrt((e+1.0)/(e-1.0));
+  a1 = a*(e-cosh(H));
+  a2 = h1*sinh(H);
+}
+
+static
+void InitPar(double q,double dt,double &a1,double &a2) {
+  const double Ap=(1.5/q)*sqrt(0.5*GAUSS_GRAV_CONST/q);
+  const double A = Ap*dt;
+  const double h = sqrt(A*A+1.0);
+  double c = cbrt(fabs(A)+h);
+  c = c*c;
+  const double tan_nu_h = 2*A/(1+c+1/c);
+  a1 = q*(1-tan_nu_h*tan_nu_h);
+  a2 = 2.0*q*tan_nu_h;
+}
+
+static
+void InitEll(double q,double e,double dt,double &a1,double &a2) {
+  const double a = q/(1.0-e);
+  const double Mp = sqrt(GAUSS_GRAV_CONST/a)/a;
+  double M = fmod(Mp*dt,2*M_PI);
+  if (M < 0.0) M += 2.0*M_PI;
+  double H = M;
+  for (;;) { // Newton
+    const double Hp = H;
+    H = H-(M-H+e*sin(H))/(e*cos(H)-1);
+    if (fabs(H-Hp) < EPSILON) break;
+  }
+  const double h1 = q*sqrt((1.0+e)/(1.0-e));
+  a1 = a*(cos(H)-e);
+  a2 = h1*sin(H);
+}
+
+void Init3D(double i,double Omega,double o,double a1,double a2,
+            double &x1,double &x2,double &x3) {
+  const double co = cos(o);
+  const double so = sin(o);
+  const double cOm = cos(Omega);
+  const double sOm = sin(Omega);
+  const double ci = cos(i);
+  const double si = sin(i);
+  const double d11=-so*sOm*ci+co*cOm;
+  const double d12=-co*sOm*ci-so*cOm;
+  const double d21= so*cOm*ci+co*sOm;
+  const double d22= co*cOm*ci-so*sOm;
+  const double d31= so*si;
+  const double d32= co*si;
+  x1 = d11*a1+d12*a2;
+  x2 = d21*a1+d22*a2;
+  x3 = d31*a1+d32*a2;
+}
+
+void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
+  JD -= t0;
+  double a1,a2;
+  if (e < 1.0) InitEll(q,e,JD,a1,a2);
+  else if (e > 1.0) InitHyp(q,e,JD,a1,a2);
+  else InitPar(q,JD,a1,a2);
+  Init3D(i,Om,o,a1,a2,v[0],v[1],v[2]);
+}
+
 
 
 EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
