@@ -54,7 +54,7 @@ Planet::Planet(Planet *parent,
                const string& tex_halo_name,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
-			   bool hidden) :
+			   bool close_orbit,bool hidden) :
 		englishName(englishName), flagHalo(flagHalo),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
@@ -63,7 +63,7 @@ Planet::Planet(Planet *parent,
         sphere_scale(1.f),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
         coord_func(coord_func), osculating_func(osculating_func),
-        parent(parent), hidden(hidden)
+        close_orbit(close_orbit), parent(parent), hidden(hidden)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -969,6 +969,7 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 		if( n==ORBIT_SEGMENTS )
 		{
 			d = 0;  // connect loop
+			if (!close_orbit) break;
 		}
 		else
 		{
