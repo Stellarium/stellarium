@@ -95,7 +95,7 @@ public:
            const string& tex_halo_name,
            pos_func_type _coord_func,
            OsulatingFunctType *osculating_func,
-		   bool hidden);
+		   bool close_orbit,bool hidden);
 
     ~Planet();
 
@@ -277,6 +277,9 @@ protected:
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
 	OsulatingFunctType *const osculating_func;
+	bool close_orbit; // whether to connect the beginning of the orbit line to
+	                  // the end: good for elliptical orbits, bad for parabolic
+	                  // and hyperbolic orbits
 
 	const Planet *const parent;				// Planet parent i.e. sun for earth
 	list<Planet *> satellites;		// satellites of the Planet
