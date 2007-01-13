@@ -130,25 +130,26 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 		}
 
 		const string funcname = pd.get_str(secname, "coord_func");
-
 		pos_func_type posfunc;
 		OsulatingFunctType *osculating_func = 0;
+		bool close_orbit = pd.get_boolean(secname, "close_orbit", 1);
 
 		if (funcname=="ell_orbit")
 		{
 			// Read the orbital elements
-			double period = pd.get_double(secname, "orbit_Period");
-			double epoch = pd.get_double(secname, "orbit_Epoch",J2000);
-			double semi_major_axis = pd.get_double(secname, "orbit_SemiMajorAxis")/AU;
-			double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
-			double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
-			double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
-			double long_of_pericenter = pd.get_double(secname, "orbit_LongOfPericenter")*M_PI/180.;
-			double mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*M_PI/180.;
+			const double period = pd.get_double(secname, "orbit_Period");
+			const double epoch = pd.get_double(secname, "orbit_Epoch",J2000);
+			const double semi_major_axis = pd.get_double(secname, "orbit_SemiMajorAxis")/AU;
+			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			if (eccentricity >= 1.0) close_orbit = false;
+			const double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
+			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
+			const double long_of_pericenter = pd.get_double(secname, "orbit_LongOfPericenter")*M_PI/180.;
+			const double mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*M_PI/180.;
 
-			double arg_of_pericenter = long_of_pericenter - ascending_node;
-			double anomaly_at_epoch = mean_longitude - (arg_of_pericenter + ascending_node);
-			double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
+			const double arg_of_pericenter = long_of_pericenter - ascending_node;
+			const double anomaly_at_epoch = mean_longitude - (arg_of_pericenter + ascending_node);
+			const double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
 
 			  // when the parent is the sun use ecliptic rathe than sun equator:
 			const double parent_rot_obliquity = parent->get_parent()
@@ -177,6 +178,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 			// Read the orbital elements
 			const double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance");
 			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			if (eccentricity >= 1.0) close_orbit = false;
 			const double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
 			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
 			const double arg_of_pericenter = pd.get_double(secname, "orbit_ArgOfPericenter")*M_PI/180.;
@@ -318,6 +320,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
                                pd.get_str(secname, "tex_map"),
                                pd.get_str(secname, "tex_halo"),
                                posfunc,osculating_func,
+                               close_orbit,
                                pd.get_boolean(secname, "hidden", 0));
 
 		if (secname=="earth") earth = p;
