@@ -58,7 +58,7 @@ SolarSystem::~SolarSystem()
 		if (*iter) delete *iter;
 		*iter = NULL;
 	}
-	for(vector<EllipticalOrbit*>::iterator iter = ell_orbits.begin(); iter != ell_orbits.end(); ++iter)
+	for(vector<Orbit*>::iterator iter = orbits.begin(); iter != orbits.end(); ++iter)
 	{
 		if (*iter) delete *iter;
 		*iter = NULL;
@@ -133,7 +133,6 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 
 		pos_func_type posfunc;
 		OsulatingFunctType *osculating_func = 0;
-		EllipticalOrbit* orb = NULL;
 
 		if (funcname=="ell_orbit")
 		{
@@ -159,7 +158,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 			                                  ? parent->getRotAscendingnode()
 			                                  : 0.0;
 			// Create an elliptical orbit
-			orb = new EllipticalOrbit(pericenter_distance,
+			EllipticalOrbit *orb = new EllipticalOrbit(pericenter_distance,
 			                          eccentricity,
 			                          inclination,
 			                          ascending_node,
@@ -169,9 +168,29 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 			                          epoch,
 			                          parent_rot_obliquity,
 			                          parent_rot_asc_node);
-			ell_orbits.push_back(orb);
+			orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
+		} else
+		if (funcname=="comet_orbit")
+		{
+			// Read the orbital elements
+			const double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance");
+			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			const double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
+			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
+			const double arg_of_pericenter = pd.get_double(secname, "orbit_ArgOfPericenter")*M_PI/180.;
+			const double time_at_pericenter = pd.get_double(secname, "orbit_TimeAtPericenter");
+
+			CometOrbit *orb = new CometOrbit(pericenter_distance,
+			                     eccentricity,
+			                     inclination,
+			                     ascending_node,
+			                     arg_of_pericenter,
+                                 time_at_pericenter);
+			orbits.push_back(orb);
+
+			posfunc = pos_func_type(orb, &CometOrbit::positionAtTimevInVSOP87Coordinates);
 		}
 
 		if (funcname=="sun_special")

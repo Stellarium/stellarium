@@ -31,7 +31,7 @@
 #include "StelObject.hpp"
 #include "StelObjectModule.hpp"
 
-class EllipticalOrbit;
+class Orbit;
 class LoadingBar;
 class Translator;
 class InitParser;
@@ -185,7 +185,7 @@ private:
 	bool flagPoint;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
-	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
+	vector<Orbit*> orbits;// Pointers on created elliptical orbits
 	bool near_lunar_eclipse(const Navigator * nav, Projector * prj);
 	
 	// draw earth shadow on moon for lunar eclipses

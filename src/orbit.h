@@ -19,11 +19,15 @@ class OrbitSampleProc;
 class Orbit
 {
 public:
-	virtual ~Orbit() {;}
-    virtual Vec3d positionAtTime(double) const = 0;
-    virtual double getPeriod() const = 0;
-    virtual double getBoundingRadius() const = 0;
-    virtual void sample(double, double, int, OrbitSampleProc&) const = 0;
+    Orbit(void) {}
+	virtual ~Orbit(void) {}
+//    virtual Vec3d positionAtTime(double) const = 0;
+//    virtual double getPeriod() const = 0;
+//    virtual double getBoundingRadius() const = 0;
+//    virtual void sample(double, double, int, OrbitSampleProc&) const = 0;
+private:
+  Orbit(const Orbit&);
+  const Orbit &operator=(const Orbit&);
 };
 
 
@@ -72,6 +76,29 @@ private:
     double period;
     double epoch;
     double rotate_to_vsop87[9];
+};
+
+
+class CometOrbit : public Orbit {
+public:
+  CometOrbit(double pericenter_distance,
+             double eccentricity,
+             double inclination,
+             double ascendingNode,
+             double arg_of_perhelion,
+             double time_at_perihelion)
+     :q(pericenter_distance),e(eccentricity),i(inclination),
+      Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion) {}
+
+    // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
+  void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
+private:
+  const double q;
+  const double e;
+  const double i;
+  const double Om;
+  const double o;
+  const double t0;
 };
 
 
