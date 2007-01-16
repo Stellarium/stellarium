@@ -27,7 +27,7 @@
 #include "Fader.hpp"
 #include <vector>
 
-class HipStarMgr;
+class StarMgr;
 class SFont;
 
 class Constellation : public StelObjectBase
@@ -49,7 +49,7 @@ private:
 	//! observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
     
-    bool read(const string& record, HipStarMgr * _VouteCeleste);
+    bool read(const string& record, StarMgr * _VouteCeleste);
     void draw_name(SFont * constfont, Projector* prj) const;
     void draw_art(Projector* prj, const Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;

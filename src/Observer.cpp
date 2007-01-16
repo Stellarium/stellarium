@@ -25,8 +25,8 @@
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
 #include "Observer.hpp"
-#include "solarsystem.h"
-#include "planet.h"
+#include "SolarSystem.hpp"
+#include "Planet.hpp"
 #include "Translator.hpp"
 
 Observer::Observer(const SolarSystem &ssystem)

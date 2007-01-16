@@ -28,7 +28,7 @@
 #include <list>
 
 #include "Projector.hpp"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectBase.hpp"
 #include "STexture.h"
@@ -307,10 +307,10 @@ struct Star1 { // 28 byte
   }
   wstring getNameI18n(void) const {
     if (hip) {
-      const wstring commonNameI18 = HipStarMgr::getCommonName(hip);
+      const wstring commonNameI18 = StarMgr::getCommonName(hip);
       if (!commonNameI18.empty()) return commonNameI18;
-      if (HipStarMgr::getFlagSciNames()) {
-        const wstring sciName = HipStarMgr::getSciName(hip);
+      if (StarMgr::getFlagSciNames()) {
+        const wstring sciName = StarMgr::getSciName(hip);
         if (!sciName.empty()) return sciName;
       }
       return L"HP " + StelUtils::intToWstring(hip);
@@ -355,7 +355,7 @@ struct SpecialZoneData : public ZoneData {
 
 class ZoneArray {  // contains all zones of a given level
 public:
-  static ZoneArray *create(const HipStarMgr &hip_star_mgr,const char *fname);
+  static ZoneArray *create(const StarMgr &hip_star_mgr,const char *fname);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
   int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
@@ -378,9 +378,9 @@ public:
   const int mag_steps;
   double star_position_scale;
 protected:
-  ZoneArray(const HipStarMgr &hip_star_mgr,int level,
+  ZoneArray(const StarMgr &hip_star_mgr,int level,
             int mag_min,int mag_range,int mag_steps);
-  const HipStarMgr &hip_star_mgr;
+  const StarMgr &hip_star_mgr;
   int nr_of_zones;
   int nr_of_stars;
   ZoneData *zones;
@@ -390,7 +390,7 @@ template<class Star>
 class SpecialZoneArray : public ZoneArray {
 public:
   SpecialZoneArray(FILE *f,
-                   const HipStarMgr &hip_star_mgr,int level,
+                   const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void) {
     if (stars) {delete[] stars;stars = 0;}
@@ -420,7 +420,7 @@ struct HipIndexStruct {
 
 class ZoneArray1 : public SpecialZoneArray<Star1> {
 public:
-  ZoneArray1(FILE *f,const HipStarMgr &hip_star_mgr,int level,
+  ZoneArray1(FILE *f,const StarMgr &hip_star_mgr,int level,
              int mag_min,int mag_range,int mag_steps)
     : SpecialZoneArray<Star1>(f,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps) {}
@@ -431,7 +431,7 @@ private:
 
 
 
-void HipStarMgr::initTriangle(int lev,int index,
+void StarMgr::initTriangle(int lev,int index,
                               const Vec3d &c0,
                               const Vec3d &c1,
                               const Vec3d &c2) {
@@ -748,8 +748,8 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   wostringstream oss;
   if (s->hip) {
-    const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
-    const wstring sciName = HipStarMgr::getSciName(s->hip);
+    const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
+    const wstring sciName = StarMgr::getSciName(s->hip);
     if (commonNameI18!=L"" || sciName!=L"") {
       oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
       if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
@@ -810,8 +810,8 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 wstring StarWrapper1::getShortInfoString(const Navigator *nav) const {
 	wostringstream oss;
 	if (s->hip) {
-		const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
-		const wstring sciName = HipStarMgr::getSciName(s->hip);
+		const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
+		const wstring sciName = StarMgr::getSciName(s->hip);
 		if (commonNameI18!=L"" || sciName!=L"") {
 			oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
 			if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
@@ -909,7 +909,7 @@ int ReadInt(FILE *f,int &x) {
 
 #define FILE_MAGIC 0xde0955a3
 
-ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
+ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const char *fname) {
   ZoneArray *rval = 0;
   FILE *f = fopen(fname,"rb");
@@ -992,7 +992,7 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
 
 
 
-ZoneArray::ZoneArray(const HipStarMgr &hip_star_mgr,int level,
+ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
                      int mag_min,int mag_range,int mag_steps)
           :level(level),
            mag_min(mag_min),mag_range(mag_range),mag_steps(mag_steps),
@@ -1010,7 +1010,7 @@ struct TmpZoneData {
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
-                                         const HipStarMgr &hip_star_mgr,
+                                         const StarMgr &hip_star_mgr,
                                          int level,
                                          int mag_min,int mag_range,
                                          int mag_steps)
@@ -1072,21 +1072,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
 
 
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-HipStarMgr::HipStarMgr(void) :
+StarMgr::StarMgr(void) :
     limitingMag(6.5f),
     starTexture(),
     hip_index(new HipIndexStruct[NR_OF_HIP+1]),
@@ -1100,7 +1086,7 @@ HipStarMgr::HipStarMgr(void) :
 }
 
 
-HipStarMgr::~HipStarMgr(void) {
+StarMgr::~StarMgr(void) {
   ZoneArrayMap::iterator it(zone_arrays.end());
   while (it!=zone_arrays.begin()) {
     --it;
@@ -1114,28 +1100,28 @@ HipStarMgr::~HipStarMgr(void) {
   delete texPointer;
 }
 
-bool HipStarMgr::flagSciNames = true;
-map<int,string> HipStarMgr::common_names_map;
-map<int,wstring> HipStarMgr::common_names_map_i18n;
-map<string,int> HipStarMgr::common_names_index;
-map<wstring,int> HipStarMgr::common_names_index_i18n;
+bool StarMgr::flagSciNames = true;
+map<int,string> StarMgr::common_names_map;
+map<int,wstring> StarMgr::common_names_map_i18n;
+map<string,int> StarMgr::common_names_index;
+map<wstring,int> StarMgr::common_names_index_i18n;
 
-map<int,wstring> HipStarMgr::sci_names_map_i18n;
-map<wstring,int> HipStarMgr::sci_names_index_i18n;
+map<int,wstring> StarMgr::sci_names_map_i18n;
+map<wstring,int> StarMgr::sci_names_index_i18n;
 
-wstring HipStarMgr::getCommonName(int hip) {
+wstring StarMgr::getCommonName(int hip) {
   map<int,wstring>::const_iterator it(common_names_map_i18n.find(hip));
   if (it!=common_names_map_i18n.end()) return it->second;
   return L"";
 }
 
-wstring HipStarMgr::getSciName(int hip) {
+wstring StarMgr::getSciName(int hip) {
   map<int,wstring>::const_iterator it(sci_names_map_i18n.find(hip));
   if (it!=sci_names_map_i18n.end()) return it->second;
   return L"";
 }
 
-void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
+void StarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
   StelApp::getInstance().getTextureManager().setDefaultParams();
     // Load star texture no mipmap:
@@ -1161,7 +1147,7 @@ void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
-void HipStarMgr::setGrid(void) {
+void StarMgr::setGrid(void) {
   geodesic_grid->visitTriangles(max_geodesic_grid_level,initTriangleFunc,this);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
@@ -1170,7 +1156,7 @@ void HipStarMgr::setGrid(void) {
 }
 
 
-void HipStarMgr::drawPointer(const Projector* prj, const Navigator * nav)
+void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
 	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
 	{
@@ -1197,7 +1183,7 @@ void HipStarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void HipStarMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void StarMgr::setColorScheme(const InitParser& conf, const std::string& section)
 {
 	// Load colors from config file
 	string defaultColor = conf.get_str(section,"default_color");
@@ -1206,7 +1192,7 @@ void HipStarMgr::setColorScheme(const InitParser& conf, const std::string& secti
 }
 
 // Load from file
-void HipStarMgr::load_data(LoadingBar& lb) {
+void StarMgr::load_data(LoadingBar& lb) {
 
     // Please do not init twice:
   assert(max_geodesic_grid_level<0);
@@ -1253,7 +1239,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
 }
 
 // Load common names from file 
-int HipStarMgr::load_common_names(const string& commonNameFile) {
+int StarMgr::load_common_names(const string& commonNameFile) {
   cout << "Load star names from " << commonNameFile << endl;
 
   FILE *cnFile;
@@ -1304,7 +1290,7 @@ int HipStarMgr::load_common_names(const string& commonNameFile) {
 
 
 // Load scientific names from file 
-void HipStarMgr::load_sci_names(const string& sciNameFile) {
+void StarMgr::load_sci_names(const string& sciNameFile) {
   cout << "Load sci names from " << sciNameFile << endl;
 
   FILE *snFile;
@@ -1360,8 +1346,8 @@ void HipStarMgr::load_sci_names(const string& sciNameFile) {
 
 
 
-int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
-//cout << "HipStarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
+int StarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
+//cout << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
   float cmag = 1.f;
 
   // if size of star is too small (blink) we put its size to 1.2 --> no more blink
@@ -1405,7 +1391,7 @@ int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
 }
 
 
-int HipStarMgr::drawPointStar(const Vec3d &XY,float rmag,
+int StarMgr::drawPointStar(const Vec3d &XY,float rmag,
                               const Vec3f &color) const {
   if (rmag < 0.05f*star_scale) return -1;
   float cmag = rmag * rmag / 1.44f;
@@ -1488,7 +1474,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 
 
 
-int HipStarMgr::getMaxSearchLevel(const ToneReproducer *eye,
+int StarMgr::getMaxSearchLevel(const ToneReproducer *eye,
                                   const Projector *prj) const {
   int rval = -1;
   float fov_q = prj->getFov();
@@ -1513,7 +1499,7 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproducer *eye,
 
 
 // Draw all the stars
-double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
+double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
     current_JDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
@@ -1618,7 +1604,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *ey
 
 
 // Look for a star by XYZ coords
-StelObject HipStarMgr::search(Vec3d pos) const {
+StelObject StarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
   vector<StelObject> v = searchAround(pos,
@@ -1638,7 +1624,7 @@ assert(0);
 
 // Return a stl vector containing the stars located
 // inside the lim_fov circle around position v
-vector<StelObject> HipStarMgr::searchAround(const Vec3d& vv,
+vector<StelObject> StarMgr::searchAround(const Vec3d& vv,
                                             double lim_fov, // degrees
                                             const Navigator * nav,
                                             const Projector * prj) const {
@@ -1729,7 +1715,7 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void HipStarMgr::updateI18n() {
+void StarMgr::updateI18n() {
   Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   common_names_map_i18n.clear();
   common_names_index_i18n.clear();
@@ -1746,7 +1732,7 @@ void HipStarMgr::updateI18n() {
 }
 
 
-StelObject HipStarMgr::search(const string& name) const
+StelObject StarMgr::search(const string& name) const
 {
     const string catalogs("HP HD SAO");
 
@@ -1781,7 +1767,7 @@ StelObject HipStarMgr::search(const string& name) const
 }    
 
 // Search the star by HP number
-StelObject HipStarMgr::searchHP(int _HP) const {
+StelObject StarMgr::searchHP(int _HP) const {
   if (0 < _HP && _HP <= NR_OF_HIP) {
     const Star1 *const s = hip_index[_HP].s;
     if (s) {
@@ -1793,7 +1779,7 @@ StelObject HipStarMgr::searchHP(int _HP) const {
   return StelObject();
 }
 
-StelObject HipStarMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObject StarMgr::searchByNameI18n(const wstring& nameI18n) const
 {
     wstring objw = nameI18n;
     transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
@@ -1845,7 +1831,7 @@ StelObject HipStarMgr::searchByNameI18n(const wstring& nameI18n) const
 
 //! Find and return the list of at most maxNbItem objects auto-completing
 //! the passed object I18n name
-vector<wstring> HipStarMgr::listMatchingObjectsI18n(
+vector<wstring> StarMgr::listMatchingObjectsI18n(
                               const wstring& objPrefix,
                               unsigned int maxNbItem) const {
   vector<wstring> result;
@@ -1888,14 +1874,14 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(
 
 
 //! Define font file name and size to use for star names display
-void HipStarMgr::setFontSize(double newFontSize) {
+void StarMgr::setFontSize(double newFontSize) {
   fontSize = newFontSize;
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(
                StelApp::getInstance().getLocaleMgr().getSkyLanguage(),
                fontSize);
 }
 
-void HipStarMgr::updateSkyCulture(LoadingBar& lb)
+void StarMgr::updateSkyCulture(LoadingBar& lb)
 {
 	string skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	

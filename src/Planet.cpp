@@ -22,9 +22,9 @@
 #include <iomanip>
 
 #include "StelApp.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "STexture.h"
-#include "planet.h"
+#include "Planet.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
 #include "SFont.hpp"

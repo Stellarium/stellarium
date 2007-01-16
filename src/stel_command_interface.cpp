@@ -28,9 +28,9 @@
 #include "audio.h"
 #include "image.h"
 #include "stel_ui.h"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -38,7 +38,7 @@
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "image_mgr.h"
-#include "meteor_mgr.h"
+#include "MeteorMgr.hpp"
 
 using namespace std;
 
@@ -96,7 +96,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	status = parse_command(commandline, command, args);
 
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
@@ -708,7 +708,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		} else status = 0;
 
 		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-		HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
@@ -887,7 +887,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		} else status = 0;
 
 		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-		HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");

@@ -6,7 +6,7 @@
 #include "Projector.hpp"
 #include "LoadingBar.hpp"
 #include "Fader.hpp"
-#include "planet.h"
+#include "Planet.hpp"
 
 // Class which manages a grid to display in the sky
 class SkyGrid

@@ -30,15 +30,15 @@
 #include "StelObjectMgr.hpp"
 
 #include "image_mgr.h"
-#include "telescope_mgr.h"
+#include "TelescopeMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
-#include "meteor_mgr.h"
-#include "hip_star_mgr.h"
-#include "solarsystem.h"
+#include "MeteorMgr.hpp"
+#include "StarMgr.hpp"
+#include "SolarSystem.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -254,7 +254,7 @@ void StelApp::init(void)
 	StelApp::getInstance().getModuleMgr().registerModule(ssystem);
 	
 	// Load hipparcos stars & names
-	HipStarMgr* hip_stars = new HipStarMgr();
+	StarMgr* hip_stars = new StarMgr();
 	hip_stars->init(conf, lb);
 	StelApp::getInstance().getModuleMgr().registerModule(hip_stars);	
 	
