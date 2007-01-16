@@ -86,11 +86,7 @@ public:
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
 	
-protected:
-	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(const Projector* prj,
-	                         const Navigator * nav = NULL)
-	  {return angular_size * (180./M_PI)
+	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return angular_size * (180./M_PI)
 	                       * (prj->getViewportHeight()/prj->getFov());}
 
 private:
