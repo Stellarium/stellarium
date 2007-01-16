@@ -19,7 +19,7 @@
 
 #include <iostream>
 #include <algorithm>
-#include "STexture.h"
+#include "STexture.hpp"
 #include "Projector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"

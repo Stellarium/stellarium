@@ -19,6 +19,7 @@
  
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
+#include "StelModule.hpp"
 
 #if defined (HAVE_GMODULE) && defined (HAVE_GLIB)
  #include <glib.h>
@@ -40,6 +41,29 @@ StelModuleMgr::StelModuleMgr() : endIter(modules.end())
 
 StelModuleMgr::~StelModuleMgr()
 {
+}
+
+// Register a new StelModule to the list
+void StelModuleMgr::registerModule(StelModule* m)
+{
+	if (modules.find(m->getModuleID()) != modules.end())
+	{		
+		std::cerr << "Module \"" << m->getModuleID() << "\" is already loaded." << std::endl;
+		return;
+	}
+	modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
+}
+
+//! Get the corresponding module or NULL if can't find it.
+StelModule* StelModuleMgr::getModule(const string& moduleID)
+{
+	std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
+	if (iter==modules.end())
+	{
+		cerr << "Warning can't find module called " << moduleID << "." << endl;
+		return NULL;
+	}
+	return iter->second;
 }
 
 StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)

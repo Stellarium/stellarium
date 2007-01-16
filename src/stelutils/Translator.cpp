@@ -24,7 +24,6 @@
 #include <algorithm>
 #include <fstream>
 
-#include "bytes.h"
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 

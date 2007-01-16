@@ -20,6 +20,7 @@
 #include "shlobj.h"
 #endif
 
+#include <sstream>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 

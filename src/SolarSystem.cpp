@@ -23,7 +23,7 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include "SolarSystem.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "stellplanet.h"
 #include "orbit.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT

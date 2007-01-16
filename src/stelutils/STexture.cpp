@@ -18,7 +18,7 @@
  */
 
 #include <cassert>
-#include "STexture.h"
+#include "STexture.hpp"
 
 /*************************************************************************
  Constructor for the STexture class
