@@ -244,7 +244,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
 
-	if(flagBright && get_on_screen_size(prj, nav)>12.)
+	if(flagBright && getOnScreenSize(prj, nav)>12.)
 	{
 		glColor4f(1.0,1.0,1.0,1.0);
 	}
@@ -279,9 +279,9 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 
 void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
-	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
+	if (2.f/getOnScreenSize(prj, nav)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*0.8;
+	float lum = MY_MIN(1,2.f/getOnScreenSize(prj, nav))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
 	glBegin(GL_TRIANGLE_STRIP);
@@ -298,7 +298,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 
 void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproducer* eye)
 {
-	float r = (get_on_screen_size(prj, nav)/2);
+	float r = (getOnScreenSize(prj, nav)/2);
 	float cmag = 0.20 * hints_brightness;
 
 	glColor3f(cmag,cmag,cmag);
@@ -314,7 +314,7 @@ void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReprodu
 void Nebula::draw_name(const Projector* prj)
 {
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
-	float size = get_on_screen_size(prj);
+	float size = getOnScreenSize(prj);
 	float shift = 8.f + size/2.f;
 
 	wstring nebulaname = getNameI18n();
