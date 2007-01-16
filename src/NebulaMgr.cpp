@@ -181,7 +181,7 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
 
 		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
-		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getStelObjectMgr().getCountTime());
+		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
         glTranslatef(-size/2, -size/2,0.0f);
         glRotatef(90,0,0,1);

@@ -39,8 +39,8 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb) {;}
 	virtual string getModuleID() const {return "objectdb";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
-	virtual void update(double deltaTime);
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
+	virtual void update(double deltaTime) {;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -87,9 +87,6 @@ public:
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
-	//! Return a local time counter used for animation..
-	double getCountTime() const {return localTime;}
-	
 private:
 	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
@@ -105,8 +102,6 @@ private:
 	
 	//! Find in a "clever" way an object from its screen position
 	StelObject cleverFind(const StelCore* core, int x, int y) const;	
-	
-	double localTime;
 };
 
 #endif /*SELECTIONMGR_HPP_*/
