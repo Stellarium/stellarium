@@ -88,6 +88,9 @@ private:
 #ifdef WIN32
   bool wsa_ok;
 #endif
+	//! Draw a nice animated pointer around the object
+	void drawPointer(const Projector* prj, const Navigator * nav);
+
   LinearFader name_fader;
   LinearFader telescope_fader;
   Vec3f circle_color;
@@ -101,6 +104,7 @@ private:
     void clear(void);
   };
   TelescopeMap telescope_map;
+  STexture* texPointer;			// The selection pointer texture
 };
 
 

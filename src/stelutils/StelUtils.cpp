@@ -499,6 +499,12 @@ namespace StelUtils {
 		return true;
 #endif
 	}
+	
+	// Return the inverse sinus hyperbolic of z
+	double asinh(double z)
+	{
+		return std::log(z+std::sqrt(z*z+1));
+	}
 }
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)

@@ -37,11 +37,6 @@ public:
   virtual void retain(void) {}
   virtual void release(void) {}
 
-  virtual void update(double deltaTime);
-  
-  //! Draw a pointer around the object, for use e.g. when the object is selected
-  void drawPointer(const Projector* prj,const Navigator *nav);
-
   //! Write I18n information about the object in wstring. 
   virtual wstring getInfoString(const Navigator *nav) const = 0;
 
@@ -49,7 +44,7 @@ public:
   virtual wstring getShortInfoString(const Navigator *nav) const = 0;
 
   //! Return object's type
-  virtual STEL_OBJECT_TYPE get_type(void) const = 0;
+  virtual STEL_OBJECT_TYPE getType(void) const = 0;
 
   //! Return object's name
   virtual string getEnglishName(void) const = 0;
@@ -62,17 +57,14 @@ public:
   virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 
   //! Return object's magnitude
-  virtual float get_mag(const Navigator *nav) const = 0;
+  virtual float get_mag(const Navigator *nav) const {return -10;}
   
   //! Return a priority value which is used to discriminate objects by priority
   //! As for magnitudes, the lower is the higher priority 
-  virtual float getSelectPriority(const Navigator *nav) const {return get_mag(nav);}
+  virtual float getSelectPriority(const Navigator *nav) const {return -10;}
 
-  //! Get the object'color
-  virtual Vec3f get_RGB(void) const {return Vec3f(1.,1.,1.);}
-	  
   //! Get a color used to display info about the object
-  virtual Vec3f getInfoColor(void) const {return get_RGB();}
+  virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
 
   //! Return the best FOV in degree to use for a close view of the object
   virtual double get_close_fov(const Navigator *nav) const {return 10.;}
@@ -82,17 +74,8 @@ public:
   virtual double get_parent_satellites_fov(const Navigator *nav) const
     {return -1.;}
 
-  static void init_textures(void);
-  static void delete_textures(void);
-protected:
-  virtual float get_on_screen_size(const Projector *prj,
-                                   const Navigator *nav = NULL) {return 0;}
-private:
-  static int local_time;
-  static STexture * pointer_star;
-  static STexture * pointer_planet;
-  static STexture * pointer_nebula;
-  static STexture * pointer_telescope;
+  virtual float getOnScreenSize(const Projector *prj,
+                                   const Navigator *nav = NULL) const {return 0;}
 };
 
 #endif

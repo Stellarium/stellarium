@@ -122,12 +122,12 @@ void ConstellationMgr::selectedObjectChangeCallBack()
 		return;
 	}
 	
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_CONSTELLATION)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_CONSTELLATION)
 	{
 		const Constellation* c = (const Constellation*)&(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
-		StelApp::getInstance().getStelObjectMgr().selectObject(c->getBrightestStarInConstellation());
+		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
 	}
-	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_STAR)
+	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
 	{
 		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 	}

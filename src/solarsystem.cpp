@@ -68,6 +68,8 @@ SolarSystem::~SolarSystem()
 	earth = NULL;
 
 	if(tex_earth_shadow) delete tex_earth_shadow;
+	
+	delete texPointer;
 }
 
 
@@ -92,6 +94,72 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	
+	texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
+}
+
+void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_PLANET)
+	{
+		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d screenpos;
+		// Compute 2D pos and return if outside screen
+		if (!prj->project_earth_equ(pos, screenpos)) return;
+	    prj->set_orthographic_projection();
+	
+		glColor3f(1.0f,0.3f,0.3f);
+	
+		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
+		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getStelObjectMgr().getCountTime());
+
+		texPointer->bind();
+
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
+        glRotatef(StelApp::getInstance().getStelObjectMgr().getCountTime()*10.,0,0,-1);
+
+        glTranslatef(-size/2, -size/2,0.0f);
+        glRotatef(90,0,0,1);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0,size,0.0f);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0, size,0.0f);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0,size,0);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+	
+	    prj->reset_perspective_projection();
+	}
 }
 
 // Init and load the solar system data
@@ -484,6 +552,8 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
 		draw_earth_shadow(nav, prj);
 
+	drawPointer(prj, nav);
+	
 	return maxSquaredDistance;
 }
 
@@ -717,7 +787,7 @@ void SolarSystem::setFlagOrbits(bool b)
 
 void SolarSystem::setSelected(const StelObject &obj)
 {
-    if (obj.get_type() == STEL_OBJECT_PLANET) selected = obj;
+    if (obj.getType() == STEL_OBJECT_PLANET) selected = obj;
     else selected = StelObject();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
@@ -876,7 +946,7 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 
 void SolarSystem::selectedObjectChangeCallBack()
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_PLANET)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_PLANET)
 	{
 		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 //			// potentially record this action

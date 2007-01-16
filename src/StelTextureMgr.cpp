@@ -231,7 +231,7 @@ int loadTextureThread(void* tparam)
 {
 	LoadQueueParam* param = (LoadQueueParam*)tparam;
 	
-	cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
+	//cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
 	assert(param->tex->threadedLoading==true);
 	// Load the image
 	if (param->texMgr->loadImage(param->tex)==false)
