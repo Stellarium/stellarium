@@ -46,7 +46,7 @@ StelApp* StelApp::singleton = NULL;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
-		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),
+		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), totalRunTime(0.),
 	 draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
@@ -341,6 +341,8 @@ void StelApp::init(void)
 void StelApp::update(int delta_time)
 {
 	textureMgr->update();
+	
+	totalRunTime += (double)delta_time/1000.;
 	
 	++frame;
 	timefr+=delta_time;

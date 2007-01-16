@@ -112,7 +112,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 		glColor3f(1.0f,0.3f,0.3f);
 	
 		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
-		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getStelObjectMgr().getCountTime());
+		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
 
@@ -120,7 +120,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef(StelApp::getInstance().getStelObjectMgr().getCountTime()*10.,0,0,-1);
+        glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
 
         glTranslatef(-size/2, -size/2,0.0f);
         glRotatef(90,0,0,1);
