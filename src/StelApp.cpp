@@ -22,7 +22,6 @@
 #include "StelCore.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelUtils.hpp"
-#include "callbacks.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"

@@ -37,7 +37,7 @@
 #include <vector>
 #include <map>
 
-#include "STexture.h"
+#include "STexture.hpp"
 #include "SFont.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"

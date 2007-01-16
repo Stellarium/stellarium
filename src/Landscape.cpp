@@ -19,7 +19,7 @@
 
 #include "Landscape.hpp"
 #include "InitParser.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 

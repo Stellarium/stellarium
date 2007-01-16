@@ -21,7 +21,7 @@
 #include <sstream>
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "stellarium.h"
 #include "SFont.hpp"
 #include "Navigator.hpp"

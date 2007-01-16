@@ -24,7 +24,7 @@
 #include <map>
 #include <vector>
 #include "SDL_opengl.h"
-#include "STexture.h"
+#include "STexture.hpp"
 
 class ManagedSTexture : public STexture
 {

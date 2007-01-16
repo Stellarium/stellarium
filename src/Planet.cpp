@@ -23,7 +23,7 @@
 
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "Planet.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
