@@ -64,6 +64,7 @@ TelescopeMgr::~TelescopeMgr(void) {
 #ifdef WIN32
   if (wsa_ok) WSACleanup();
 #endif
+ delete texPointer;
 }
 
 double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
@@ -213,6 +214,39 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
 	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+  
+  texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
+}
+
+
+void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_TELESCOPE)
+	{
+		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d screenpos;
+		// Compute 2D pos and return if outside screen
+		if (!prj->project_earth_equ(pos, screenpos)) return;
+	    prj->set_orthographic_projection();
+	
+		glColor3fv(obj.getInfoColor());
+		float radius = 25.f;
+		texPointer->bind();
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
+        glRotatef(StelApp::getInstance().getStelObjectMgr().getCountTime()*40.,0.,0.,1.);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
+        glEnd ();
+	
+	    prj->reset_perspective_projection();
+	}
 }
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {

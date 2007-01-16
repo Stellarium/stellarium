@@ -223,7 +223,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		}
 
 		// TODO repair that maybe
-		//if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().selectObject(select_type, identifier);
+		//if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().setSelectedObject(select_type, identifier);
 
 		// determine if selected object pointer should be displayed
 		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(false);

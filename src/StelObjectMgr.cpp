@@ -23,7 +23,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 
-StelObjectMgr::StelObjectMgr() : selected_object(NULL)
+StelObjectMgr::StelObjectMgr() : selectedObject(NULL)
 {
 	object_pointer_visibility = true;
 }
@@ -31,7 +31,7 @@ StelObjectMgr::StelObjectMgr() : selected_object(NULL)
 StelObjectMgr::~StelObjectMgr()
 {
 	// release the previous StelObject:
-	selected_object = StelObject();
+	selectedObject = StelObject();
 }
 
 /*************************************************************************
@@ -39,8 +39,7 @@ StelObjectMgr::~StelObjectMgr()
 *************************************************************************/
 void StelObjectMgr::update(double deltaTime)
 {
-	// Update info about selected object
-	selected_object.update(deltaTime);
+	localTime+=deltaTime;
 }
 
 /*************************************************************************
@@ -48,10 +47,6 @@ void StelObjectMgr::update(double deltaTime)
 *************************************************************************/
 double StelObjectMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
-	// Draw the pointer on the currently selected object
-	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
-	if (selected_object && object_pointer_visibility)
-		selected_object.drawPointer(prj, nav);
 	return 0;
 }
 		
@@ -87,14 +82,14 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 	if (!obj)
 		return false;
 	else
-		return selectObject(obj);
+		return setSelectedObject(obj);
 }
 
 
 //! Find and select an object based on selection type and standard name or number
 //! @return true if an object was selected
 //
-//bool StelObjectMgr::selectObject(const string &type, const string &id)
+//bool StelObjectMgr::setSelectedObject(const string &type, const string &id)
 //{
 //	/*
 //	  std::wostringstream oss;
@@ -106,28 +101,28 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 //		unsigned int hpnum;
 //		std::istringstream istr(id);
 //		istr >> hpnum;
-//		selected_object = hip_stars->searchHP(hpnum);
-//		asterisms->setSelected(selected_object);
+//		selectedObject = hip_stars->searchHP(hpnum);
+//		asterisms->setSelected(selectedObject);
 //		ssystem->setSelected("");
 //
 //	}
 //	else if(type=="star")
 //	{
-//		selected_object = hip_stars->search(id);
-//		asterisms->setSelected(selected_object);
+//		selectedObject = hip_stars->search(id);
+//		asterisms->setSelected(selectedObject);
 //		ssystem->setSelected("");
 //
 //	}
 //	else if(type=="planet")
 //	{
 //		ssystem->setSelected(id);
-//		selected_object = ssystem->getSelected();
+//		selectedObject = ssystem->getSelected();
 //		asterisms->setSelected(StelObject());
 //
 //	}
 //	else if(type=="nebula")
 //	{
-//		selected_object = nebulas->search(id);
+//		selectedObject = nebulas->search(id);
 //		ssystem->setSelected("");
 //		asterisms->setSelected(StelObject());
 //
@@ -136,13 +131,13 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 //	{
 //		// Select only constellation, nothing else
 //		asterisms->setSelected(id);
-//		selected_object = NULL;
+//		selectedObject = NULL;
 //		ssystem->setSelected("");
 //	}
 //	else if(type=="constellation_star")
 //	{
 //		// For Find capability, select a star in constellation so can center view on constellation
-//		selected_object = asterisms->setSelectedStar(id);
+//		selectedObject = asterisms->setSelectedStar(id);
 //		ssystem->setSelected("");
 //	}
 //	else
@@ -152,7 +147,7 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 //	}
 //
 //
-//	if (selected_object)
+//	if (selectedObject)
 //	{
 //		if (movementMgr->getFlagTracking())
 //			movementMgr->setFlagLockEquPos(true);
@@ -169,14 +164,14 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos)
 {
 	StelObject tempselect = cleverFind(core, pos);
-	return selectObject(tempselect);
+	return setSelectedObject(tempselect);
 }
 
 //! Find and select an object near given screen position
 bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y)
 {
 	StelObject tempselect = cleverFind(core, x, y);
-	return selectObject(tempselect);
+	return setSelectedObject(tempselect);
 }
 
 // Find an object in a "clever" way, v in J2000 frame
@@ -232,7 +227,7 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 //! Deselect selected object if any
 void StelObjectMgr::unSelect(void)
 {
-	selected_object = NULL;
+	selectedObject = NULL;
 	
 	// Send the event to every StelModule
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
@@ -244,23 +239,23 @@ void StelObjectMgr::unSelect(void)
 
 //! Select passed object
 //! @return true if the object was selected (false if the same was already selected)
-bool StelObjectMgr::selectObject(const StelObject &obj)
+bool StelObjectMgr::setSelectedObject(const StelObject &obj)
 {
 	// Unselect if it is the same object
-	if (obj && selected_object==obj)
+	if (obj && selectedObject==obj)
 	{
 		unSelect();
 		return true;
 	}
 
-	selected_object = obj;
+	selectedObject = obj;
 
 	// If an object has been found
-	if (selected_object)
+	if (selectedObject)
 	{
 		// potentially record this action
 		//if (!recordActionCallback.empty())
-		//	recordActionCallback("select " + selected_object.getEnglishName());
+		//	recordActionCallback("select " + selectedObject.getEnglishName());
 
 		// Send the event to every StelModule
 		StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();

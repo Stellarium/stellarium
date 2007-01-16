@@ -89,7 +89,6 @@ StelApp::~StelApp()
 	delete localeMgr;
 	delete fontManager;
 	delete stelObjectMgr;
-	StelObject::delete_textures(); // Unload the pointer textures
 	
 	// Delete all the modules
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
@@ -280,9 +279,6 @@ void StelApp::init(void)
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
 	asterisms->init(conf, lb);
 	StelApp::getInstance().getModuleMgr().registerModule(asterisms);
-
-	// Load the pointer textures
-	StelObject::init_textures();
 	
 	// Landscape, atmosphere & cardinal points section
 	LandscapeMgr* landscape = new LandscapeMgr();

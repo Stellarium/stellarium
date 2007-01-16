@@ -629,7 +629,7 @@ class StarWrapperBase : public StelObjectBase {
 protected:
 	StarWrapperBase(void) : ref_count(0) {}
 	virtual ~StarWrapperBase(void) {}
-	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
+	STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_STAR;}
 
 	string getEnglishName(void) const {
 		return "";
@@ -637,7 +637,7 @@ protected:
 	wstring getNameI18n(void) const = 0;
 	wstring getInfoString(const Navigator *nav) const;
 	wstring getShortInfoString(const Navigator *nav) const;
-
+	float get_mag(const Navigator *nav) const{return -10.f;}
 private:
 	int ref_count;
 	void retain(void) {assert(ref_count>=0);ref_count++;}
@@ -669,7 +669,7 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
   oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
-      << L"/" << StelUtils::printAngleDMS(alt) << L" TEST " << endl;
+      << L"/" << StelUtils::printAngleDMS(alt) << endl;
   oss.precision(2);
 
   return oss.str();
@@ -704,7 +704,7 @@ protected:
   }
   Vec3d get_earth_equ_pos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
-  Vec3f get_RGB(void) const {return color_table[s->b_v];}
+  Vec3f getInfoColor(void) const {return color_table[s->b_v];}
   float get_mag(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
 
@@ -1110,6 +1110,8 @@ HipStarMgr::~HipStarMgr(void) {
 
   if (starTexture) {delete starTexture;starTexture = 0;}
   if (hip_index) delete hip_index;
+  
+  delete texPointer;
 }
 
 bool HipStarMgr::flagSciNames = true;
@@ -1155,6 +1157,8 @@ void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+  
+  texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1163,6 +1167,34 @@ void HipStarMgr::setGrid(void) {
        it!=zone_arrays.end();it++) {
     it->second->scaleAxis();
   }
+}
+
+
+void HipStarMgr::drawPointer(const Projector* prj, const Navigator * nav)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
+	{
+		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d screenpos;
+		// Compute 2D pos and return if outside screen
+		if (!prj->project_earth_equ(pos, screenpos)) return;
+	
+		glColor3fv(obj.getInfoColor());
+		float radius = 13.f;
+		texPointer->bind();
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
+        glRotatef(StelApp::getInstance().getStelObjectMgr().getCountTime()*40.,0.,0.,1.);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
+        glEnd ();
+	}
 }
 
 void HipStarMgr::setColorScheme(const InitParser& conf, const std::string& section)
@@ -1572,6 +1604,9 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *ey
     }
     exit_loop:
 //if ((count&63)==0) cout << endl;
+
+	drawPointer(prj, nav);
+
     prj->reset_perspective_projection();
 
     return 0.;

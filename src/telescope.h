@@ -33,7 +33,7 @@ public:
   wstring getNameI18n(void) const {return nameI18n;}
   wstring getInfoString(const Navigator * nav) const;
   wstring getShortInfoString(const Navigator * nav) const;
-  STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_TELESCOPE;}
+  STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_TELESCOPE;}
   Vec3d get_earth_equ_pos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
@@ -53,7 +53,7 @@ protected:
 private:
   bool isInitialized(void) const {return true;}
 private:
-  float get_mag(const Navigator *nav) const {return -10.f;}
+  float getSelectPriority(const Navigator *nav) const {return -10.f;}
 };
 
 

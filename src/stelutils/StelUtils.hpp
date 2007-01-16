@@ -160,6 +160,9 @@ namespace StelUtils {
 	
 	//! Download the file from the given URL to the given name using libcurl
 	bool downloadFile(const std::string& url, const std::string& fullPath);
+	
+	//! Return the inverse sinus hyperbolic of z
+	double asinh(double z);
 }
 
 // General Calendar Functions

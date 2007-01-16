@@ -43,13 +43,11 @@ private:
 	//! The returned wstring can typically be used for object labeling in the sky
 	wstring getShortInfoString(const Navigator * nav) const {return getNameI18n();}
 	//! Return object's type
-	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
+	STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_CONSTELLATION;}
 	//! Get position in earth equatorial frame
 	Vec3d get_earth_equ_pos(const Navigator *nav) const {return XYZname;}
 	//! observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
-	//! Return object's magnitude
-	float get_mag(const Navigator * nav) const {return 0.;} 
     
     bool read(const string& record, HipStarMgr * _VouteCeleste);
     void draw_name(SFont * constfont, Projector* prj) const;
