@@ -21,9 +21,9 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.hpp"
@@ -31,7 +31,7 @@
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "meteor_mgr.h"
+#include "MeteorMgr.hpp"
 
 using namespace s_gui;
 
@@ -47,7 +47,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	
@@ -852,7 +852,7 @@ void StelUI::saveRenderOptions(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
@@ -955,7 +955,7 @@ void StelUI::updateVideoVariables(void)
 void StelUI::updateConfigForm(void)
 {
 	// Stars
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");

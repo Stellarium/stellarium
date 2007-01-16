@@ -24,9 +24,9 @@
 #include <iomanip>
 #include <string>
 #include "stel_ui.h"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -484,7 +484,7 @@ void StelUI::tui_update_widgets(void)
 {
 	if (!FlagShowTuiMenu) return;
 	
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
@@ -885,7 +885,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	//	conf.set_double ("viewing:atmosphere_fade_duration", core->getAtmosphereFadeDuration());
 
 	// Star section
-	HipStarMgr* smgr = (HipStarMgr*)moduleMgr->getModule("stars");
+	StarMgr* smgr = (StarMgr*)moduleMgr->getModule("stars");
 	conf.set_double ("stars:star_scale", smgr->getScale());
 	conf.set_double ("stars:star_mag_scale", smgr->getMagScale());
 	conf.set_boolean("stars:flag_point_star", smgr->getFlagPointStar());

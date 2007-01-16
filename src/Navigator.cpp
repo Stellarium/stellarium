@@ -21,7 +21,7 @@
 #include "stellarium.h"
 #include "StelUtils.hpp"
 #include "StelObject.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 
 
 ////////////////////////////////////////////////////////////////////////////////

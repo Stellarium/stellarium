@@ -22,7 +22,7 @@
 #include "STexture.h"
 #include "Projector.hpp"
 #include "Constellation.hpp"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "Navigator.hpp"
 #include "StelTextureMgr.hpp"
 
@@ -45,7 +45,7 @@ Constellation::~Constellation()
 
 // Read Constellation data record and grab cartesian positions of stars
 // returns false if can't parse record
-bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
+bool Constellation::read(const string& record, StarMgr * _VouteCeleste)
 {   
 	unsigned int HP;
 

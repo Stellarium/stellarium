@@ -27,7 +27,7 @@
 #include <functional>
 
 #include "stellarium.h"
-#include "planet.h"
+#include "Planet.hpp"
 #include "StelObject.hpp"
 #include "StelObjectModule.hpp"
 

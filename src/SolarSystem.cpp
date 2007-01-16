@@ -22,7 +22,7 @@ using namespace std;
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "STexture.h"
 #include "stellplanet.h"
 #include "orbit.h"

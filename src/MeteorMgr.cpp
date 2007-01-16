@@ -21,10 +21,10 @@
 
 #include "Projector.hpp"
 #include "Navigator.hpp"
-#include "meteor_mgr.h"
+#include "MeteorMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "meteor.h"
+#include "Meteor.hpp"
 #include "LandscapeMgr.hpp"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )

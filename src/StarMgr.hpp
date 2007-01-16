@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _HIP_STAR_MGR_H_
-#define _HIP_STAR_MGR_H_
+#ifndef _STAR_MGR_H_
+#define _STAR_MGR_H_
 
 #include <vector>
 #include <map>
@@ -38,11 +38,11 @@ class Navigator;
 class ZoneArray;
 class HipIndexStruct;
 
-class HipStarMgr : public StelObjectModule
+class StarMgr : public StelObjectModule
 {
 public:
-    HipStarMgr(void);
-    ~HipStarMgr(void);
+    StarMgr(void);
+    ~StarMgr(void);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -188,7 +188,7 @@ private:
                                  const Vec3d &c1,
                                  const Vec3d &c2,
                                  void *context) {
-      reinterpret_cast<HipStarMgr*>(context)
+      reinterpret_cast<StarMgr*>(context)
         ->initTriangle(lev,index,c0,c1,c2);
     }
     void initTriangle(int lev,int index,
