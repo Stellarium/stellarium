@@ -27,12 +27,11 @@ public:
 private:
   wstring getInfoString(const Navigator *nav) const {return L"";}
   wstring getShortInfoString(const Navigator *nav) const {return L"";}
-  STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_UNINITIALIZED;}
+  STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_UNINITIALIZED;}
   string getEnglishName(void) const {return "";}
   wstring getNameI18n(void) const {return L"";}
   Vec3d get_earth_equ_pos(const Navigator*) const {return Vec3d(1,0,0);}
   Vec3d getObsJ2000Pos(const Navigator*) const {return Vec3d(1,0,0);}
-  float get_mag(const Navigator * nav) const {return -10;}
 };
 
 static StelObjectUninitialized uninitialized_object;
@@ -72,14 +71,7 @@ bool StelObject::operator==(const StelObject &o) const {
   return (rep == o.rep);
 }
 
-void StelObject::update(double deltaTime) {
-  rep->update(deltaTime);
-}
-
-void StelObject::drawPointer(const Projector *prj,
-                              const Navigator *nav) {
-  rep->drawPointer(prj,nav);
-}
+const StelObjectBase* StelObject::getStelObjectBase() const {return rep;}
 
 wstring StelObject::getInfoString(const Navigator *nav) const {
   return rep->getInfoString(nav);
@@ -89,8 +81,8 @@ wstring StelObject::getShortInfoString(const Navigator *nav) const {
   return rep->getShortInfoString(nav);
 }
 
-STEL_OBJECT_TYPE StelObject::get_type(void) const {
-  return rep->get_type();
+STEL_OBJECT_TYPE StelObject::getType(void) const {
+  return rep->getType();
 }
 
 string StelObject::getEnglishName(void) const {
@@ -117,10 +109,6 @@ float StelObject::getSelectPriority(const Navigator *nav) const {
 	return rep->getSelectPriority(nav);
 }
 
-Vec3f StelObject::get_RGB(void) const {
-  return rep->get_RGB();
-}
-
 Vec3f StelObject::getInfoColor(void) const {
 	return rep->getInfoColor();
 }
@@ -135,12 +123,4 @@ double StelObject::get_satellites_fov(const Navigator *nav) const {
 
 double StelObject::get_parent_satellites_fov(const Navigator *nav) const {
   return rep->get_parent_satellites_fov(nav);
-}
-
-void StelObject::init_textures(void) {
-  StelObjectBase::init_textures();
-}
-
-void StelObject::delete_textures(void) {
-  StelObjectBase::delete_textures();
 }

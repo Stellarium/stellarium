@@ -112,6 +112,9 @@ public:
 private:
 	StelObject search(Vec3f Pos);    // Search the Nebulae by position	
 		
+	//! Draw a nice animated pointer around the object
+	void drawPointer(const Projector* prj, const Navigator * nav);
+		
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);
 	Nebula *searchIC(unsigned int IC);
@@ -129,6 +132,8 @@ private:
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	bool flagShowTexture;			// Define if nebula textures are displayed
+	
+	STexture* texPointer;			// The selection pointer texture
 };
 
 #endif // _NEBULA_MGR_H_

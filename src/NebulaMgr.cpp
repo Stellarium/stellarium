@@ -44,7 +44,7 @@ void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
 bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
-NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
+NebulaMgr::NebulaMgr(void) : displayNoTexture(false), texPointer(NULL) {
 	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
 	dependenciesOrder["draw"]="constellations";
 }
@@ -61,6 +61,8 @@ NebulaMgr::~NebulaMgr()
 	Nebula::tex_circle = NULL;
 	
 	delete[] nebZones;
+	
+	delete texPointer;
 }
 
 // read from stream
@@ -74,8 +76,9 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (!Nebula::tex_circle)
-		Nebula::tex_circle = &StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
+	Nebula::tex_circle = &StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
+	
+	texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
 	setFlagShowTexture(true);
 	setFlagShow(conf.get_boolean("astro:flag_nebula"));
@@ -117,7 +120,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	static vector<Nebula *>::iterator iter;
 	Nebula* n;
 
-	  // speed up the computation of n->get_on_screen_size(prj, nav)>5:
+	  // speed up the computation of n->getOnScreenSize(prj, nav)>5:
 	const float size_limit = 5.0 * (M_PI/180.0)
 	                             * (prj->getFov()/prj->getViewportHeight());
 
@@ -153,9 +156,71 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 			}
 		}
 	}
+	
+	drawPointer(prj, nav);
+	
 	prj->reset_perspective_projection();
 
 	return 0;
+}
+
+void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_NEBULA)
+	{
+		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d screenpos;
+		
+		// Compute 2D pos and return if outside screen
+		if (!prj->project_earth_equ(pos, screenpos)) return;
+		glColor3f(0.4f,0.5f,0.8f);
+		texPointer->bind();
+		
+		glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
+
+		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
+		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getStelObjectMgr().getCountTime());
+
+        glTranslatef(-size/2, -size/2,0.0f);
+        glRotatef(90,0,0,1);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0,size,0.0f);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0, size,0.0f);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+
+        glRotatef(-90,0,0,1);
+        glTranslatef(0,size,0);
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
+        glEnd ();
+	}
 }
 
 void NebulaMgr::updateSkyCulture(LoadingBar& lb)

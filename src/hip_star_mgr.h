@@ -159,7 +159,10 @@ private:
  
     // Load all the stars from the files
     void load_data(LoadingBar& lb);
-
+    
+	//! Draw a nice animated pointer around the object
+	void drawPointer(const Projector* prj, const Navigator * nav);
+	
     LinearFader names_fader;
     LinearFader starsFader;
 
@@ -208,6 +211,8 @@ private:
     Vec3f label_color,circle_color;
     float twinkle_amount;
     float star_scale;
+    
+    STexture* texPointer;			// The selection pointer texture
 };
 
 

@@ -155,6 +155,9 @@ private:
     // observerPos is needed for light travel time computation
     void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 
+	//! Draw a nice animated pointer around the object
+	void drawPointer(const Projector* prj, const Navigator * nav);
+
 	// Load the bodies data from a file
 	void loadPlanets(LoadingBar& lb);
 
@@ -202,6 +205,8 @@ private:
 	// Master settings
 	bool flagOrbits;
 	bool flag_light_travel_time;
+	
+	STexture* texPointer;			// The selection pointer texture
 };
 
 

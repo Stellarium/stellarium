@@ -61,10 +61,6 @@ public:
 	//! @return true if a object was found with the passed name
 	bool findAndSelectI18n(const wstring &nameI18n);
 
-	//! Find and select an object based on selection type and standard name or number
-	//! @return true if an object was selected
-	//bool selectObject(const string &type, const string &id);
-
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -73,25 +69,31 @@ public:
 
 	
 	//! Return whether an object is currently selected
-	bool getFlagHasSelected(void) {return selected_object;}
+	bool getFlagHasSelected(void) {return selectedObject;}
 
 	//! Deselect selected object if any
-	//! Does not deselect selected constellation
     void unSelect(void);
 
-	//! Select passed object
-	bool selectObject(const StelObject &obj);
+	//! Select given object
+	bool setSelectedObject(const StelObject &obj);
+
+	//! Find and select an object based on selection type and standard name or number
+	//! @return true if an object was selected
+	//bool setSelectedObject(const string &type, const string &id);
 
 	//! Return the currently selected object
-	const StelObject& getSelectedObject() const {return selected_object;}
+	const StelObject& getSelectedObject() const {return selectedObject;}
 
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
+	//! Return a local time counter used for animation..
+	double getCountTime() const {return localTime;}
+	
 private:
 	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
-	StelObject selected_object;			// The selected object in stellarium
+	StelObject selectedObject;			// The selected object in stellarium
 	
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
@@ -103,6 +105,8 @@ private:
 	
 	//! Find in a "clever" way an object from its screen position
 	StelObject cleverFind(const StelCore* core, int x, int y) const;	
+	
+	double localTime;
 };
 
 #endif /*SELECTIONMGR_HPP_*/

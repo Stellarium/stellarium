@@ -42,9 +42,7 @@ public:
   operator bool(void) const;
   bool operator==(const StelObject &o) const;
 
-  void update(double deltaTime);
-  void drawPointer(const Projector *prj,
-                    const Navigator *nav);
+	const StelObjectBase* getStelObjectBase() const;
 
 	//! Get a multiline string describing the currently selected object
   wstring getInfoString(const Navigator *nav) const;
@@ -54,7 +52,7 @@ public:
   wstring getShortInfoString(const Navigator *nav) const;
 
   //! Return object's type
-  STEL_OBJECT_TYPE get_type(void) const;
+  STEL_OBJECT_TYPE getType(void) const;
 
   //! Return object's name
   string getEnglishName(void) const;
@@ -66,18 +64,15 @@ public:
   //! observer centered J2000 coordinates
   Vec3d getObsJ2000Pos(const Navigator *nav) const;
 
-  //! Return object's magnitude
-  float get_mag(const Navigator *nav) const;
-
   //! Return a priority value which is used to discriminate objects by priority
   //! As for magnitudes, the lower is the higher priority 
   float getSelectPriority(const Navigator *nav) const;
-
-  //! Get the object'color
-  Vec3f get_RGB(void) const;
   
   //! Get a color used to display info about the object
   Vec3f getInfoColor(void) const;
+  
+  // TODO remove that..
+  float get_mag(const Navigator *nav) const;
   
   // only needed for AutoZoomIn/Out, whatever this is:
     
@@ -90,8 +85,6 @@ public:
   //! Get the size of the FoV best suited for seeing the object + its parent satellites
   double get_parent_satellites_fov(const Navigator *nav) const;
 
-  static void init_textures(void);
-  static void delete_textures(void);
 private:
   StelObjectBase *rep;
 };
