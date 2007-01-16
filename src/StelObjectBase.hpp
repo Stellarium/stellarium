@@ -74,8 +74,7 @@ public:
   virtual double get_parent_satellites_fov(const Navigator *nav) const
     {return -1.;}
 
-  virtual float getOnScreenSize(const Projector *prj,
-                                   const Navigator *nav = NULL) const {return 0;}
+  virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return 0;}
 };
 
 #endif

@@ -218,10 +218,10 @@ public:
 	static void setflagShow(bool b) {Planet::flagShow = b;}
 	static bool getflagShow(void) {return Planet::flagShow;}
 	
-protected:
 	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(const Projector* prj, const Navigator * nav);
-
+	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const;
+protected:
+	
 	// Draw the 3D sphere
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 

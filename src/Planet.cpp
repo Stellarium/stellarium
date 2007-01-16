@@ -528,7 +528,7 @@ void Planet::set_big_halo(const string& halotexfile)
 }
 
 // Return the radius of a circle containing the object on screen
-float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
+float Planet::getOnScreenSize(const Projector *prj, const Navigator *nav) const
 {
 	double rad;
 	if(rings) rad = rings->get_size();
@@ -563,7 +563,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 
 
 	// Compute the 2D position and check if in the screen
-	float screen_sz = get_on_screen_size(prj, nav);
+	float screen_sz = getOnScreenSize(prj, nav);
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
@@ -666,7 +666,7 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glEnable(GL_TEXTURE_2D);
 
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
+	float tmp = 10.f + getOnScreenSize(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 
@@ -767,7 +767,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	rmag*=Planet::object_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(prj, nav);
+	float screen_r = getOnScreenSize(prj, nav);
 if (screen_r<1.f) screen_r=1.f;
 	cmag *= 0.5*rmag/(screen_r*screen_r*screen_r);
 	if (cmag>1.f) cmag = 1.f;
@@ -825,7 +825,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 	//rmag*=Planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(prj, nav);
+	float screen_r = getOnScreenSize(prj, nav);
 	cmag *= rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
@@ -855,7 +855,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(prj, nav);
+	float screen_r = getOnScreenSize(prj, nav);
 
 	float rmag = big_halo_size/2;
 
