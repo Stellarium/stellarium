@@ -1,7 +1,7 @@
 #ifndef ASTROIMAGE_H_
 #define ASTROIMAGE_H_
 
-#include "STexture.h"
+#include "STexture.hpp"
 #include "SphereGeometry.h"
 
 class Projector;

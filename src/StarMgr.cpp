@@ -31,8 +31,7 @@
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectBase.hpp"
-#include "STexture.h"
-#include "bytes.h"
+#include "STexture.hpp"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "Navigator.hpp"
 #include "StelUtils.hpp"

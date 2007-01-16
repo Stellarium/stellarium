@@ -20,12 +20,11 @@
 #ifndef STELMODULEMGR_H
 #define STELMODULEMGR_H
 
-#include "StelModule.hpp"
 #include <boost/iterator/iterator_facade.hpp>
+#include "StelModule.hpp"
 
 /**
  * Class used to manage a collection of StelModule
- * TODO : Manage drawing order, update order
  * @author Fabien Chereau <stellarium@free.fr>
  */
 class StelModuleMgr{
@@ -35,34 +34,17 @@ public:
     ~StelModuleMgr();
 	
 	//! Register a new StelModule to the list
-	void registerModule(StelModule* m)
-	{
-		if (modules.find(m->getModuleID()) != modules.end())
-		{		
-			std::cerr << "Module \"" << m->getModuleID() << "\" is already loaded." << std::endl;
-			return;
-		}
-		modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
-	}
+	void registerModule(StelModule* m);
 	
 	//! Load dynamically a module
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
-	StelModule* loadExternalModule(const string& moduleID);
+	StelModule* loadExternalModule(const std::string& moduleID);
 	
 	//! Get the corresponding module or NULL if can't find it.
-	StelModule* getModule(const string& moduleID)
-	{
-		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
-		if (iter==modules.end())
-		{
-			cerr << "Warning can't find module called " << moduleID << "." << endl;
-			return NULL;
-		}
-		return iter->second;
-	}
-
+	StelModule* getModule(const std::string& moduleID);
+	
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
 	//! according to modules orders dependencies
 	void generateCallingLists();
@@ -81,7 +63,7 @@ public:
 	 private:
 	    friend class boost::iterator_core_access;
 	    friend class StelModuleMgr;
-		Iterator(std::map<string, StelModule*>::iterator p) : mapIter(p) {}
+		Iterator(std::map<std::string, StelModule*>::iterator p) : mapIter(p) {}
 	    void increment() { ++mapIter; }
 	
 	    bool equal(Iterator const& other) const
@@ -91,7 +73,7 @@ public:
 	
 	    StelModule*& dereference() const { return mapIter->second; }
 	
-	    std::map<string, StelModule*>::iterator mapIter;
+	    std::map<std::string, StelModule*>::iterator mapIter;
 	};
 
    Iterator begin()
@@ -106,10 +88,10 @@ public:
 private:
 	
 	//! The main module list associating name:pointer
-	std::map<string, StelModule*> modules;
+	std::map<std::string, StelModule*> modules;
 	
 	//! The list of all module in the correct order for each action
-	std::map<string, std::vector<StelModule*> > callOrders;
+	std::map<std::string, std::vector<StelModule*> > callOrders;
 	
 	const Iterator endIter;
 };

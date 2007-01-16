@@ -25,7 +25,7 @@
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "Navigator.hpp"
 #include "Translator.hpp"
 #include "LoadingBar.hpp"

@@ -19,7 +19,7 @@
 
 #include "MilkyWay.hpp"
 #include "Fader.hpp"
-#include "STexture.h"
+#include "STexture.hpp"
 #include "StelUtils.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
