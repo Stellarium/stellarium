@@ -315,96 +315,13 @@ void StelApp::startMainLoop()
 					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,SDL_KEYDOWN)) ||
 						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,SDL_KEYDOWN)))
 					{
-
-						/* Fumio patch... can't use because ignores unicode values and hence is US keyboard specific.
-						   - what was the reasoning?
-					if ((E.key.keysym.sym >= SDLK_LAST && !core->handle_keys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(E.key.keysym.sym < SDLK_LAST && !core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED)))
-						*/
-
 						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
 
 						// ctrl-s saves screenshot
 						if (E.key.keysym.unicode==0x0013 &&  (Screen->flags & SDL_OPENGL))
                         {
-							string tempName;
-							char c[3];
-							FILE *fp;
-
-							SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-	0x000000FF, 0x0000FF00, 0x00FF0000, 0
-#else
-	0x00FF0000, 0x0000FF00, 0x000000FF, 0
-#endif
-								);
-							if (temp == NULL) exit(-1);
-
-							unsigned char * pixels = (unsigned char *) malloc(3 * Screen->w * Screen->h);
-							if (pixels == NULL)
-							{
-								SDL_FreeSurface(temp);
-								exit(-1);
-							}
-
-							glReadPixels(0, 0, Screen->w, Screen->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-							for (int i=0; i<Screen->h; i++)
-							{
-								memcpy(((char *) temp->pixels) + temp->pitch * i,
-										pixels + 3*Screen->w * (Screen->h-i-1), Screen->w*3);
-							}
-							free(pixels);
-
-							string shotdir;
-#if defined(WIN32)
-							char path[MAX_PATH];
-							path[MAX_PATH-1] = '\0';
-							// Previous version used SHGetFolderPath and made app crash on window 95/98..
-							//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
-							LPITEMIDLIST tmp;
-							if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
-							{
-                                 SHGetPathFromIDList(tmp, path);                      
-								shotdir = string(path)+"\\";
-							}
-							else
-							{	
-								if(getenv("USERPROFILE")!=NULL)
-								{
-									//for Win XP etc.
-									shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
-								}
-								else
-								{
-									//for Win 98 etc.
-									shotdir = "C:\\My Documents\\";
-								}
-							}
-
-#else
-							shotdir = string(getenv("HOME")) + "/";
-#endif
-#ifdef MACOSX
-							shotdir += "/Desktop/";
-#endif
-							for(int j=0; j<=100; ++j)
-							{
-								snprintf(c,3,"%d",j);
-
-							tempName = shotdir + "stellarium" + c + ".bmp";
-								fp = fopen(tempName.c_str(), "r");
-								if(fp == NULL)
-									break;
-								else
-									fclose(fp);
-							}
-
-							SDL_SaveBMP(temp, tempName.c_str());
-							SDL_FreeSurface(temp);
-							cout << "Saved screenshot to file : " << tempName << endl;
-						}
-
+                        	saveScreenShot();
+                        }
 					}
 					// Rescue escape in case of lock : CTRL + ESC forces brutal quit
 					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) terminateApplication();
@@ -465,4 +382,83 @@ void StelApp::startMainLoop()
 			}
 		}
 	}
+}
+
+void StelApp::saveScreenShot() const
+{
+	string tempName;
+	char c[3];
+	FILE *fp;
+
+	SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	0x000000FF, 0x0000FF00, 0x00FF0000, 0
+#else
+	0x00FF0000, 0x0000FF00, 0x000000FF, 0
+#endif
+	);
+	if (temp == NULL) exit(-1);
+
+	unsigned char * pixels = (unsigned char *) malloc(3 * Screen->w * Screen->h);
+	if (pixels == NULL)
+	{
+		SDL_FreeSurface(temp);
+		exit(-1);
+	}
+
+	glReadPixels(0, 0, Screen->w, Screen->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+	for (int i=0; i<Screen->h; i++)
+	{
+		memcpy(((char *) temp->pixels) + temp->pitch * i,
+				pixels + 3*Screen->w * (Screen->h-i-1), Screen->w*3);
+	}
+	free(pixels);
+
+	string shotdir;
+#if defined(WIN32)
+	char path[MAX_PATH];
+	path[MAX_PATH-1] = '\0';
+	// Previous version used SHGetFolderPath and made app crash on window 95/98..
+	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+	LPITEMIDLIST tmp;
+	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
+	{
+         SHGetPathFromIDList(tmp, path);                      
+		shotdir = string(path)+"\\";
+	}
+	else
+	{	
+		if(getenv("USERPROFILE")!=NULL)
+		{
+			//for Win XP etc.
+			shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
+		}
+		else
+		{
+			//for Win 98 etc.
+			shotdir = "C:\\My Documents\\";
+		}
+	}
+#else
+	shotdir = string(getenv("HOME")) + "/";
+#endif
+#ifdef MACOSX
+	shotdir += "/Desktop/";
+#endif
+	for(int j=0; j<=100; ++j)
+	{
+		snprintf(c,3,"%d",j);
+
+	tempName = shotdir + "stellarium" + c + ".bmp";
+		fp = fopen(tempName.c_str(), "r");
+		if(fp == NULL)
+			break;
+		else
+			fclose(fp);
+	}
+
+	SDL_SaveBMP(temp, tempName.c_str());
+	SDL_FreeSurface(temp);
+	cout << "Saved screenshot to file : " << tempName << endl;
 }
