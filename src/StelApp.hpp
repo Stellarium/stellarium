@@ -188,6 +188,9 @@ private:
 	// Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 
+	// Save a screen shot in the HOME directory
+	void saveScreenShot() const;
+
 	//! Terminate the application with SDL
 	void terminateApplication(void);
 
