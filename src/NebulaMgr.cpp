@@ -32,8 +32,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 
-#define RADIUS_NEB 1.
-
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
@@ -303,7 +301,7 @@ StelObject NebulaMgr::search(Vec3f Pos)
 			plusProche=(*iter);
 		}
 	}
-	if (anglePlusProche>RADIUS_NEB*0.999)
+	if (anglePlusProche>Nebula::RADIUS_NEB*0.999)
 	{
 		return plusProche;
 	}
