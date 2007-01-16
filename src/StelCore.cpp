@@ -23,8 +23,8 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "GeodesicGrid.hpp"
-#include "hip_star_mgr.h"
-#include "solarsystem.h"
+#include "StarMgr.hpp"
+#include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
 
 
@@ -79,7 +79,7 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 	movementMgr->init(conf, lb);
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
-	HipStarMgr* hip_stars = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	int grid_level = hip_stars->getMaxGridLevel();
 	geodesic_grid = new GeodesicGrid(grid_level);
 	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
@@ -143,7 +143,7 @@ void StelCore::preDraw(int delta_time)
 	}
 
 	// This still needs a fix
-	HipStarMgr* hip_stars = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
 }

@@ -6,11 +6,11 @@ stellarium_SOURCES = Projector.cpp Projector.hpp StereographicProjector.cpp \
 	ViewportDistorter.cpp ViewportDistorter.hpp Navigator.cpp Navigator.hpp Observer.cpp \
 	Observer.hpp grid.cpp grid.h GeodesicGrid.cpp GeodesicGrid.hpp \
 	StelObjectBase.cpp StelObjectBase.hpp StelObject.cpp StelObject.hpp StelObjectType.hpp \
-	hip_star_mgr.cpp hip_star_mgr.h Nebula.cpp Nebula.hpp NebulaMgr.cpp NebulaMgr.hpp \
-	Constellation.cpp Constellation.hpp ConstellationMgr.cpp ConstellationMgr.hpp meteor.cpp \
-	meteor.h meteor_mgr.cpp meteor_mgr.h planet.cpp planet.h orbit.cpp orbit.h \
-	solarsystem.cpp solarsystem.h telescope.cpp telescope.h telescope_mgr.cpp \
-	telescope_mgr.h Atmosphere.cpp Atmosphere.hpp image.cpp image.h image_mgr.cpp \
+	StarMgr.cpp StarMgr.hpp Nebula.cpp Nebula.hpp NebulaMgr.cpp NebulaMgr.hpp \
+	Constellation.cpp Constellation.hpp ConstellationMgr.cpp ConstellationMgr.hpp Meteor.cpp \
+	Meteor.hpp MeteorMgr.cpp MeteorMgr.hpp Planet.cpp Planet.hpp orbit.cpp orbit.h \
+	SolarSystem.cpp SolarSystem.hpp Telescope.cpp Telescope.hpp TelescopeMgr.cpp \
+	TelescopeMgr.hpp Atmosphere.cpp Atmosphere.hpp image.cpp image.h image_mgr.cpp \
 	image_mgr.h Landscape.cpp Landscape.hpp LoadingBar.cpp LoadingBar.hpp main.cpp \
 	script.cpp script.h script_mgr.cpp script_mgr.h s_gui.cpp s_gui.h Skybright.cpp \
 	Skybright.hpp Skylight.cpp Skylight.hpp solve.h StelApp.cpp StelApp.hpp StelAppSdl.cpp \

@@ -25,7 +25,7 @@
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
-#include "hip_star_mgr.h"
+#include "StarMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -34,7 +34,7 @@
 #include "StelObjectMgr.hpp"
 
 // constructor which loads all data from appropriate files
-ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
+ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) : 
 	fontSize(15),
 	asterFont(NULL),
 	hipStarMgr(_hip_stars),

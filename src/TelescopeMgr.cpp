@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "telescope_mgr.h"
-#include "telescope.h"
+#include "TelescopeMgr.hpp"
+#include "Telescope.hpp"
 #include "StelObject.hpp"
 #include "Projector.hpp"
 #include "InitParser.hpp"

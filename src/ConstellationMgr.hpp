@@ -29,7 +29,7 @@
 #include "StelObjectModule.hpp"
 
 class ToneReproducer;
-class HipStarMgr;
+class StarMgr;
 class Constellation;
 class Projector;
 class Navigator;
@@ -37,7 +37,7 @@ class Navigator;
 class ConstellationMgr : public StelObjectModule
 {
 public:
-    ConstellationMgr(HipStarMgr *_hip_stars);
+    ConstellationMgr(StarMgr *_hip_stars);
 	virtual ~ConstellationMgr();
     
 	///////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ private:
     vector<Constellation*> asterisms;
 	double fontSize;
     SFont* asterFont;
-    HipStarMgr* hipStarMgr;
+    StarMgr* hipStarMgr;
 	
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;

@@ -26,7 +26,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "ConstellationMgr.hpp"
-#include "solarsystem.h"
+#include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "InitParser.hpp"
 #include "stel_command_interface.h"
@@ -35,9 +35,9 @@
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "telescope_mgr.h"
+#include "TelescopeMgr.hpp"
 #include "image_mgr.h"
-#include "meteor_mgr.h"
+#include "MeteorMgr.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
