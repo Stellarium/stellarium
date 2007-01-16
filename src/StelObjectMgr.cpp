@@ -33,22 +33,6 @@ StelObjectMgr::~StelObjectMgr()
 	// release the previous StelObject:
 	selectedObject = StelObject();
 }
-
-/*************************************************************************
- Update infos for selected objects
-*************************************************************************/
-void StelObjectMgr::update(double deltaTime)
-{
-	localTime+=deltaTime;
-}
-
-/*************************************************************************
- Draw the selected objects
-*************************************************************************/
-double StelObjectMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
-{
-	return 0;
-}
 		
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.

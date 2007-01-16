@@ -151,6 +151,9 @@ public:
 	//! Return a list of working fullscreen hardware video modes (one per line)
 	string getVideoModeList(void) const;
 
+	//! Return the time since when stellarium is running in second
+	double getTotalRunTime() const {return totalRunTime;}
+	
 	//! Required because stelcore doesn't have access to the script manager anymore!
 	//! Record a command if script recording is on
 	void recordCommand(string commandline);
@@ -249,6 +252,8 @@ private:
 	Uint32	TickCount;	// Used For The Tick Counter
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
+
+	double totalRunTime;	// Total stellarium run time in second
 
 	int time_multiplier;  // used for adjusting delta_time for script speeds
 	

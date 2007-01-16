@@ -1172,7 +1172,7 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef(StelApp::getInstance().getStelObjectMgr().getCountTime()*40.,0.,0.,1.);
+        glRotatef(StelApp::getInstance().getTotalRunTime()*40.,0.,0.,1.);
         glBegin(GL_QUADS );
             glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
             glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
