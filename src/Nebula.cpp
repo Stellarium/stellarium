@@ -146,10 +146,11 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
-		return -1;
+		return -10;
 	}
 	else
 	{
+		if (get_mag(nav)>20) return 20;
 		return get_mag(nav);
 	}
  }
