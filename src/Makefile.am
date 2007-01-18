@@ -1,8 +1,12 @@
 bin_PROGRAMS = stellarium
-stellarium_SOURCES = Projector.cpp Projector.hpp StereographicProjector.cpp \
-	StereographicProjector.hpp CustomProjector.cpp CustomProjector.hpp CylinderProjector.cpp \
-	CylinderProjector.hpp FisheyeProjector.cpp FisheyeProjector.hpp SphericMirrorCalculator.cpp \
-	SphericMirrorCalculator.hpp SphericMirrorProjector.cpp SphericMirrorProjector.hpp \
+stellarium_SOURCES = Projector.cpp Projector.hpp \
+	CustomProjector.cpp CustomProjector.hpp \
+	CylinderProjector.cpp CylinderProjector.hpp \
+	FisheyeProjector.cpp FisheyeProjector.hpp \
+	StereographicProjector.cpp StereographicProjector.hpp \
+	EqualAreaProjector.cpp EqualAreaProjector.hpp \
+	SphericMirrorCalculator.cpp SphericMirrorCalculator.hpp \
+	SphericMirrorProjector.cpp SphericMirrorProjector.hpp \
 	ViewportDistorter.cpp ViewportDistorter.hpp Navigator.cpp Navigator.hpp Observer.cpp \
 	Observer.hpp grid.cpp grid.h GeodesicGrid.cpp GeodesicGrid.hpp \
 	StelObjectBase.hpp StelObject.cpp StelObject.hpp StelObjectType.hpp \
