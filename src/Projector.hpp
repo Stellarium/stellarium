@@ -140,6 +140,10 @@ public:
 	double getFov(void) const {return fov;}
 	double getPixelPerRad(void) const {return view_scaling_factor;}
 
+	//! Get the largest possible displayed angle in radian
+	//! This can for example be the angular distance between one corner of the screen to the oposite one
+	double getMaxDisplayedAngle() const;
+
 	//! Set the maximum Field of View in degree
 	void setMaxFov(double max);
 	//! Get the maximum Field of View in degree

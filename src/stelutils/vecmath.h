@@ -133,6 +133,14 @@ public:
     inline T dot(const Vector3<T>&) const;
 	inline Vector3 operator^(const Vector3<T>&) const;
 
+	// Return latitude in rad
+	inline T latitude() const;
+	// Return longitude in rad
+	inline T longitude() const;
+	
+	// Distance in radian between two normalized vectors
+	inline T angle(const Vector3<T>&) const;
+
     inline T length() const;
     inline T lengthSquared() const;
     inline void normalize();
@@ -217,7 +225,9 @@ template<class T> class Matrix4
     inline Vector3<T> operator*(const Vector3<T>&) const;
     inline Vector3<T> multiplyWithoutTranslation(const Vector3<T>& a) const;
 	inline Vector4<T> operator*(const Vector4<T>&) const;
-
+	
+	inline void transfo(Vector3<T>&) const;
+	
     static Matrix4<T> identity();
     static Matrix4<T> translation(const Vector3<T>&);
 
@@ -518,6 +528,11 @@ template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
                       v[0] * b.v[1] - v[1] * b.v[0]);
 }
 
+// Angle in radian between two normalized vectors
+template<class T> T Vector3<T>::angle(const Vector3<T>& b) const
+{
+	return std::acos(dot(b));
+}
 
 template<class T> T Vector3<T>::length() const
 {
@@ -545,6 +560,18 @@ template<class T> void Vector3<T>::transfo4d(const Mat4d& m)
 template<class T> void Vector3<T>::transfo4d(const Mat4f& m)
 {
 	(*this)=m*(*this);
+}
+
+// Return latitude in rad
+template<class T> T Vector3<T>::latitude() const
+{
+	return std::asin(v[2]/length());
+}
+
+// Return longitude in rad
+template<class T> T Vector3<T>::longitude() const
+{
+	return std::atan2(v[1],v[0]);
 }
 
 template<class T> 
@@ -819,24 +846,51 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis,
                                                   T angle)
 {
-    T c = (T) cos(angle);
-    T s = (T) sin(angle);
-    T t = 1 - c;
+//    T c = (T) cos(angle);
+//    T s = (T) sin(angle);
+//    T t = 1 - c;
+//
+//    return Matrix4<T>(Vector4<T>(t * axis.v[0] * axis.v[0] + c,
+//                                 t * axis.v[0] * axis.v[1] - s * axis.v[2],
+//                                 t * axis.v[0] * axis.v[2] + s * axis.v[1],
+//                                 0),
+//                      Vector4<T>(t * axis.v[0] * axis.v[1] + s * axis.v[2],
+//                                 t * axis.v[1] * axis.v[1] + c,
+//                                 t * axis.v[1] * axis.v[2] - s * axis.v[0],
+//                                 0),
+//                      Vector4<T>(t * axis.v[0] * axis.v[2] - s * axis.v[1],
+//                                 t * axis.v[1] * axis.v[2] + s * axis.v[0],
+//                                 t * axis.v[2] * axis.v[2] + c,
+//                                 0),
+//                      Vector4<T>(0, 0, 0, 1));
+                      
+	T sin_a = std::sin( angle / 2 );
+	T cos_a = std::cos( angle / 2 );
+	T X    = axis[0] * sin_a;
+	T Y    = axis[1] * sin_a;
+	T Z    = axis[2] * sin_a;
+	T W    = cos_a;
+	
+	T xx      = X * X;
+	T xy      = X * Y;
+	T xz      = X * Z;
+	T xw      = X * W;
+	
+	T yy      = Y * Y;
+	T yz      = Y * Z;
+	T yw      = Y * W;
+	
+	T zz      = Z * Z;
+	T zw      = Z * W;
 
-    return Matrix4<T>(Vector4<T>(t * axis.v[0] * axis.v[0] + c,
-                                 t * axis.v[0] * axis.v[1] - s * axis.v[2],
-                                 t * axis.v[0] * axis.v[2] + s * axis.v[1],
-                                 0),
-                      Vector4<T>(t * axis.v[0] * axis.v[1] + s * axis.v[2],
-                                 t * axis.v[1] * axis.v[1] + c,
-                                 t * axis.v[1] * axis.v[2] - s * axis.v[0],
-                                 0),
-                      Vector4<T>(t * axis.v[0] * axis.v[2] - s * axis.v[1],
-                                 t * axis.v[1] * axis.v[2] + s * axis.v[0],
-                                 t * axis.v[2] * axis.v[2] + c,
-                                 0),
-                      Vector4<T>(0, 0, 0, 1));
+	return Matrix4<T>(
+	1. - 2. * ( yy + zz ), 2. * ( xy + zw ),      2. * ( xz - yw ),      0.,
+	2. * ( xy - zw ),      1. - 2. * ( xx + zz ), 2. * ( yz + xw ),      0., 
+	2. * ( xz + yw ),      2. * ( yz - xw ),      1. - 2. * ( xx + yy ), 0., 
+	0.,                    0.,                    0.,                    1.);
 }
+
+
 
 /*
 template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
@@ -921,6 +975,13 @@ template<class T> Vector4<T> Matrix4<T>::operator*(const Vector4<T>& a) const
     return Vector4<T>(	r[0]*a.v[0] + r[4]*a.v[1] +  r[8]*a.v[2] + r[12]*a.v[3],
 						r[1]*a.v[0] + r[5]*a.v[1] +  r[9]*a.v[2] + r[13]*a.v[3],
 						r[2]*a.v[0] + r[6]*a.v[1] + r[10]*a.v[2] + r[14]*a.v[3] );
+}
+
+template<class T> void Matrix4<T>::transfo(Vector3<T>& a) const
+{
+	a.set(	r[0]*a.v[0] + r[4]*a.v[1] +  r[8]*a.v[2] + r[12],
+			r[1]*a.v[0] + r[5]*a.v[1] +  r[9]*a.v[2] + r[13],
+			r[2]*a.v[0] + r[6]*a.v[1] + r[10]*a.v[2] + r[14]);
 }
 
 template<class T> Matrix4<T> Matrix4<T>::transpose() const
