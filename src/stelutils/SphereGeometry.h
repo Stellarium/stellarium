@@ -42,6 +42,9 @@ public:
 	//! Return true if the two convex intersect
 	bool intersect(const ConvexPolygon& c) const;
 	bool intersect(const Vec3d& v) const {return inside(v);}
+	
+	void getBoundingLonLat(double result[4]) const;
+	
 private:
 	std::vector<Vec3d> vertex;
 };

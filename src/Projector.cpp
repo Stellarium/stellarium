@@ -175,6 +175,18 @@ void Projector::setFov(double f)
 	init_project_matrix();
 }
 
+// Get the largest possible displayed angle in radian
+// This can for example be the angular distance between one corner of the screen to the oposite one
+double Projector::getMaxDisplayedAngle() const
+{
+	Vec3d v1, v2;
+	unproject_earth_equ(vec_viewport[0],vec_viewport[1], v1);
+	unproject_earth_equ(vec_viewport[0]+vec_viewport[2],vec_viewport[1]+vec_viewport[3], v2);
+	v1.normalize();
+	v2.normalize();
+	return v1.angle(v2);
+}
+
 void Projector::setMaxFov(double max) {
   if (fov > max) setFov(max);
   max_fov = max;
