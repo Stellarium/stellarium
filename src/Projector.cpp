@@ -24,6 +24,7 @@
 #include "FisheyeProjector.hpp"
 #include "CylinderProjector.hpp"
 #include "StereographicProjector.hpp"
+#include "EqualAreaProjector.hpp"
 #include "SphericMirrorProjector.hpp"
 #include "InitParser.hpp"
 
@@ -33,6 +34,7 @@ const char *Projector::typeToString(PROJECTOR_TYPE type) {
     case FISHEYE_PROJECTOR:        return "fisheye";
     case CYLINDER_PROJECTOR:       return "cylinder";
     case STEREOGRAPHIC_PROJECTOR:  return "stereographic";
+    case EQUAL_AREA_PROJECTOR:     return "equal_area";
     case SPHERIC_MIRROR_PROJECTOR: return "spheric_mirror";
   }
   cerr << "fatal: Projector::typeToString(" << type << ") failed" << endl;
@@ -46,6 +48,7 @@ Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
   if (s=="fisheye")        return FISHEYE_PROJECTOR;
   if (s=="cylinder")       return CYLINDER_PROJECTOR;
   if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
+  if (s=="equal_area")     return EQUAL_AREA_PROJECTOR;
   if (s=="spheric_mirror") return SPHERIC_MIRROR_PROJECTOR;
   cerr << "fatal: Projector::stringToType(" << s << ") failed" << endl;
   assert(0);
@@ -80,6 +83,9 @@ Projector *Projector::create(PROJECTOR_TYPE type,
       break;
     case STEREOGRAPHIC_PROJECTOR:
       rval = new StereographicProjector(viewport,_fov);
+      break;
+    case EQUAL_AREA_PROJECTOR:
+      rval = new EqualAreaProjector(viewport,_fov);
       break;
     case SPHERIC_MIRROR_PROJECTOR:
       rval = new SphericMirrorProjector(viewport,_fov);
