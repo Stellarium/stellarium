@@ -231,6 +231,7 @@ struct Star3 {  // 6 byte
     pos.normalize();
     return pos;
   }
+  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
 } __attribute__ ((__packed__)) ;
@@ -264,6 +265,7 @@ struct Star2 {  // 10 byte
     pos.normalize();
     return pos;
   }
+  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
 } __attribute__ ((__packed__));
@@ -304,6 +306,7 @@ struct Star1 { // 28 byte
     pos.normalize();
     return pos;
   }
+  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {
     if (hip) {
       const wstring commonNameI18 = StarMgr::getCommonName(hip);
@@ -626,21 +629,19 @@ const Vec3f color_table[128] = {
 
 class StarWrapperBase : public StelObjectBase {
 protected:
-	StarWrapperBase(void) : ref_count(0) {}
-	virtual ~StarWrapperBase(void) {}
-	STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_STAR;}
+  StarWrapperBase(void) : ref_count(0) {}
+  virtual ~StarWrapperBase(void) {}
+  STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_STAR;}
 
-	string getEnglishName(void) const {
-		return "";
-	}
-	wstring getNameI18n(void) const = 0;
-	wstring getInfoString(const Navigator *nav) const;
-	wstring getShortInfoString(const Navigator *nav) const;
-	float get_mag(const Navigator *nav) const{return -10.f;}
+  string getEnglishName(void) const {return "";}
+  wstring getNameI18n(void) const = 0;
+  wstring getInfoString(const Navigator *nav) const;
+  wstring getShortInfoString(const Navigator *nav) const;
+  virtual float getBV(void) const = 0;
 private:
-	int ref_count;
-	void retain(void) {assert(ref_count>=0);ref_count++;}
-	void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
+  int ref_count;
+  void retain(void) {assert(ref_count>=0);ref_count++;}
+  void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
 };
 
 wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
@@ -653,8 +654,9 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   wostringstream oss;
   oss.setf(ios::fixed);
   oss.precision(2);
-  oss << _("Magnitude: ") << get_mag(nav);
-  oss << endl;
+  oss << _("Magnitude: ") << get_mag(nav)
+      << " B-V: " << getBV()
+      << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
       << StelUtils::printAngleHMS(ra_j2000,true)
       << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
@@ -706,7 +708,7 @@ protected:
   Vec3f getInfoColor(void) const {return color_table[s->b_v];}
   float get_mag(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
-
+  float getBV(void) const {return s->getBV();}
   string getEnglishName(void) const {
     return "";
   }
@@ -766,8 +768,9 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
   oss.setf(ios::fixed);
   oss.precision(2);
-  oss << _("Magnitude: ") << get_mag(nav);
-  oss << endl;
+  oss << _("Magnitude: ") << get_mag(nav)
+      << " B-V: " << s->getBV()
+      << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
       << StelUtils::printAngleHMS(ra_j2000,true)
       << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
