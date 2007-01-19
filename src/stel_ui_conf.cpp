@@ -376,8 +376,9 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	projection_sl = new StringList();
 	projection_sl->addItem("perspective");
 	projection_sl->addItem("fisheye");
-	projection_sl->addItem("stereographic");
 	projection_sl->addItem("equal_area");
+	projection_sl->addItem("stereographic");
+	projection_sl->addItem("cylinder");
 	projection_sl->addItem("spheric_mirror");
 	projection_sl->adjustSize();
 	projection_sl->setValue(CalculateProjectionSlValue(
@@ -385,7 +386,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
                               app->getViewPortDistorterType()));
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
-	projection_sl->setPos(x+20,y); y+=100;
+	projection_sl->setPos(x+20,y); y+=140;
 	
 	disk_viewport_cbx = new LabeledCheckBox(false, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
