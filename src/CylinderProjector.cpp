@@ -24,30 +24,9 @@ CylinderProjector::CylinderProjector(const Vec4i& viewport,
                                      double _fov)
                   :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
-  max_fov = 500.00001;
+  max_fov = 270.0;
   setFov(_fov);
 }
-
-/*
-bool CylinderProjector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
-{
-	double z;
-	double alpha, delta;
-
-	win = v;
-	win.transfo4d(mat);
-	z = (win.length() - zNear) / (zFar-zNear);
-	win.normalize();
-
-	alpha = asin(win[1]);
-	delta = atan2(win[2],win[0]);
-
-	win[0] = center[0] + delta/fov * 180./M_PI * MY_MIN(vec_viewport[2],vec_viewport[3]);
-	win[1] = center[1] + alpha/fov * 180./M_PI * MY_MIN(vec_viewport[2],vec_viewport[3]);
-	win[2] = z;
-	return true;//(a<0.9*M_PI) ? true : false;
-}
-*/
 
 bool CylinderProjector::project_custom(const Vec3d &v,
                                        Vec3d &win,
@@ -55,22 +34,22 @@ bool CylinderProjector::project_custom(const Vec3d &v,
   win = v;
   win.transfo4d(mat);
   const double win_length = win.length();
-  const double alpha = asin(win[1]/win_length);
-  const double delta = atan2(win[2],win[0]);
-  win[0] = center[0] + flip_horz * delta*view_scaling_factor;
-  win[1] = center[1] + flip_vert * alpha*view_scaling_factor;
+  const double alpha = atan2(win[0],-win[2]);
+  const double delta = asin(win[1]/win_length);
+  win[0] = center[0] + flip_horz * alpha*view_scaling_factor;
+  win[1] = center[1] + flip_vert * delta*view_scaling_factor;
   win[2] = (win_length - zNear) / (zFar-zNear);
   return true;
 }
 
 void CylinderProjector::unproject(double x, double y,
                                   const Mat4d& m, Vec3d& v) const {
-  const double d = flip_horz * (x - center[0]) / view_scaling_factor;
-  const double a = flip_vert * (y - center[1]) / view_scaling_factor;
-  v[0] = cos(a) * cos(d);
-  v[1] = sin(a);
-  v[2] = - cos(a) * sin(d); // why minus ?
+  const double alpha = flip_horz * (x - center[0]) / view_scaling_factor;
+  const double delta = flip_vert * (y - center[1]) / view_scaling_factor;
+  const double cd = cos(delta);
+  v[0] = cd * sin(alpha);
+  v[1] = sin(delta);
+  v[2] = cd * cos(alpha); // why not minus ?
   v.transfo4d(m);
 }
-
 
