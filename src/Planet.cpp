@@ -85,7 +85,7 @@ Planet::Planet(Planet *parent,
 	first_point = 1;
 
 	nameI18 = StelUtils::stringToWstring(englishName);
-	if (englishName!="Moon" && englishName!="Pluto") {
+	if (englishName!="Pluto") {
 	  deltaJD = 0.001*JD_SECOND;
 	}
 }
