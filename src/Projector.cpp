@@ -21,20 +21,22 @@
 #include <cstdio>
 #include <cassert>
 #include "Projector.hpp"
-#include "FisheyeProjector.hpp"
-#include "CylinderProjector.hpp"
-#include "StereographicProjector.hpp"
+#include "OrthographicProjector.hpp"
 #include "EqualAreaProjector.hpp"
+#include "FisheyeProjector.hpp"
+#include "StereographicProjector.hpp"
+#include "CylinderProjector.hpp"
 #include "SphericMirrorProjector.hpp"
 #include "InitParser.hpp"
 
 const char *Projector::typeToString(PROJECTOR_TYPE type) {
   switch (type) {
     case PERSPECTIVE_PROJECTOR:    return "perspective";
-    case FISHEYE_PROJECTOR:        return "fisheye";
-    case CYLINDER_PROJECTOR:       return "cylinder";
-    case STEREOGRAPHIC_PROJECTOR:  return "stereographic";
+    case ORTHOGRAPHIC_PROJECTOR:   return "orthographic";
     case EQUAL_AREA_PROJECTOR:     return "equal_area";
+    case FISHEYE_PROJECTOR:        return "fisheye";
+    case STEREOGRAPHIC_PROJECTOR:  return "stereographic";
+    case CYLINDER_PROJECTOR:       return "cylinder";
     case SPHERIC_MIRROR_PROJECTOR: return "spheric_mirror";
   }
   cerr << "fatal: Projector::typeToString(" << type << ") failed" << endl;
@@ -45,10 +47,11 @@ const char *Projector::typeToString(PROJECTOR_TYPE type) {
 
 Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
   if (s=="perspective")    return PERSPECTIVE_PROJECTOR;
-  if (s=="fisheye")        return FISHEYE_PROJECTOR;
-  if (s=="cylinder")       return CYLINDER_PROJECTOR;
-  if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
+  if (s=="orthographic")   return ORTHOGRAPHIC_PROJECTOR;
   if (s=="equal_area")     return EQUAL_AREA_PROJECTOR;
+  if (s=="fisheye")        return FISHEYE_PROJECTOR;
+  if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
+  if (s=="cylinder")       return CYLINDER_PROJECTOR;
   if (s=="spheric_mirror") return SPHERIC_MIRROR_PROJECTOR;
   cerr << "fatal: Projector::stringToType(" << s << ") failed" << endl;
   assert(0);
@@ -75,17 +78,20 @@ Projector *Projector::create(PROJECTOR_TYPE type,
     case PERSPECTIVE_PROJECTOR:
       rval = new Projector(viewport,_fov);
       break;
+    case ORTHOGRAPHIC_PROJECTOR:
+      rval = new OrthographicProjector(viewport,_fov);
+      break;
+    case EQUAL_AREA_PROJECTOR:
+      rval = new EqualAreaProjector(viewport,_fov);
+      break;
     case FISHEYE_PROJECTOR:
       rval = new FisheyeProjector(viewport,_fov);
-      break;
-    case CYLINDER_PROJECTOR:
-      rval = new CylinderProjector(viewport,_fov);
       break;
     case STEREOGRAPHIC_PROJECTOR:
       rval = new StereographicProjector(viewport,_fov);
       break;
-    case EQUAL_AREA_PROJECTOR:
-      rval = new EqualAreaProjector(viewport,_fov);
+    case CYLINDER_PROJECTOR:
+      rval = new CylinderProjector(viewport,_fov);
       break;
     case SPHERIC_MIRROR_PROJECTOR:
       rval = new SphericMirrorProjector(viewport,_fov);
