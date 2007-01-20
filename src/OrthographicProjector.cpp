@@ -44,10 +44,18 @@ bool OrthographicProjector::project_custom(const Vec3d &v,
 
 void OrthographicProjector::unproject(double x, double y,
                                       const Mat4d& m, Vec3d& v) const {
-  v[0] = flip_horz * (x - center[0]) / view_scaling_factor;
-  v[1] = flip_vert * (y - center[1]) / view_scaling_factor;
-  const double h = 1.0 - v[0]*v[0] - v[1]*v[1];
-  v[2] = (h < 0) ? 1.0 : sqrt(h);  // why not minus ?
+  x = flip_horz * (x - center[0]) / view_scaling_factor;
+  y = flip_vert * (y - center[1]) / view_scaling_factor;
+  const double h = 1.0 - x*x - y*y;
+  if (h < 0) {
+    v[0] = 0.0;
+    v[1] = 0.0;
+    v[2] = 1.0;
+  } else {
+    v[0] = x;
+    v[1] = y;
+    v[2] = sqrt(h);  // why not minus ?
+  }
   v.transfo4d(m);
 }
 
