@@ -375,8 +375,9 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	
 	projection_sl = new StringList();
 	projection_sl->addItem("perspective");
-	projection_sl->addItem("fisheye");
+	projection_sl->addItem("orthographic");
 	projection_sl->addItem("equal_area");
+	projection_sl->addItem("fisheye");
 	projection_sl->addItem("stereographic");
 	projection_sl->addItem("cylinder");
 	projection_sl->addItem("spheric_mirror");
