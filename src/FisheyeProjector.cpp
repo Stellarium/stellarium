@@ -78,7 +78,7 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
   win[1] = mat.r[1]*v[0] + mat.r[5]*v[1] +  mat.r[9]*v[2] + mat.r[13];
   win[2] = mat.r[2]*v[0] + mat.r[6]*v[1] + mat.r[10]*v[2] + mat.r[14];
   const double oneoverh = 1./sqrt(win[0]*win[0]+win[1]*win[1]);
-  const double a = M_PI_2 + atan(win[2]*oneoverh);
+  double a = M_PI_2 + atan(win[2]*oneoverh);
 //  modified fisheye
 //  if (a > 0.5*M_PI) a = 0.25*(M_PI*M_PI)/(M_PI-a);
   const double f = (a*view_scaling_factor) * oneoverh;
@@ -113,35 +113,26 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
 
 
 
-void FisheyeProjector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
-{
-	double d = MY_MIN(vec_viewport[2],vec_viewport[3])/2;
-	static double length;
-	v[0] = flip_horz * (x - center[0]);
-	v[1] = flip_vert * (y - center[1]);
-	v[2] = 0;
-	length = v.length();
+void FisheyeProjector::unproject(double x, double y,
+                                 const Mat4d& m, Vec3d& v) const {
+  x = flip_horz * (x - center[0]) / view_scaling_factor;
+  y = flip_vert * (y - center[1]) / view_scaling_factor;
+  
+  const double a = sqrt(x*x+y*y);
 
-	double angle_center = length/d * fov/2*M_PI/180;
-// modified fisheye
-//	if (angle_center > 0.5*M_PI) {
-//		angle_center = M_PI*(1.0-M_PI/(4.0*angle_center));
-//	}
-	double r = sin(angle_center);
-	if (length!=0)
-	{
-		v.normalize();
-		v*=r;
-	}
-	else
-	{
-		v.set(0.,0.,0.);
-	}
+    // modified fisheye
+//  const double ma = (a > 0.5*M_PI) ? M_PI*(1.0-M_PI/(4.0*a)) : a;
+//  const double f = sin(ma) / a;
+//  v[0] = x * f;
+//  v[1] = y * f;
+//  v[2] = cos(ma);
 
-	v[2] = sqrt(1.-(v[0]*v[0]+v[1]*v[1]));
-	if (angle_center>M_PI_2) v[2] = -v[2];
+  const double f = sin(a) / a;
+  v[0] = x * f;
+  v[1] = y * f;
+  v[2] = cos(a);
 
-	v.transfo4d(m);
+  v.transfo4d(m);
 }
 
 

@@ -67,12 +67,17 @@ void EqualAreaProjector::unproject(double x, double y, const Mat4d& m, Vec3d& v)
   x = flip_horz * (x - center[0]) / view_scaling_factor;
   y = flip_vert * (y - center[1]) / view_scaling_factor;
   const double dq = x*x + y*y;
-  const double z = 0.5*dq - 1.0;
   double l = 1.0 - 0.25*dq;
-  l = (l>=0.0) ? sqrt(l) : 0.0;
-  v[0] = x * l;
-  v[1] = y * l;
-  v[2] = -z; // why minus ?
+  if (l < 0) {
+    v[0] = 0.0;
+    v[1] = 0.0;
+    v[2] = 1.0;
+  } else {
+    l = sqrt(l);
+    v[0] = x * l;
+    v[1] = y * l;
+    v[2] = -(0.5*dq - 1.0); // why minus ?
+  }
   v.transfo4d(m);
 }
 
