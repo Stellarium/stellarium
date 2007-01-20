@@ -320,6 +320,7 @@ protected:
 	
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
+	// assertion: the length of the output vector is always = 1.0
 	virtual
     void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 	{
@@ -327,6 +328,7 @@ protected:
 				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,
 				1.0);
 		v.transfo4d(m);
+		v.normalize();
 	}
 	bool gravityLabels;			// should label text align with the horizon?
 };
