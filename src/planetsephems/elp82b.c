@@ -162543,10 +162543,10 @@ const unsigned char elp82b_instructions[] = {
 
 
 static
-void PrepareLambdaArray(int nr_of_lambdas,
-                        const int max_lambda_factor[],
-                        const double lambda[],
-                        double cos_sin_lambda[]) {
+void PrepareElp82bLambdaArray(int nr_of_lambdas,
+                              const int max_lambda_factor[],
+                              const double lambda[],
+                              double cos_sin_lambda[]) {
     /* initialize cos_sin_lambda:
        (cos,sin)(1*lambda[0]),(cos,sin)(-1*lambda[0]),(cos,sin)(2*lambda[0]),...
        (cos,sin)(1*lambda[1]),(cos,sin)(-1*lambda[1]),(cos,sin)(2*lambda[1]),...
@@ -162578,14 +162578,14 @@ void PrepareLambdaArray(int nr_of_lambdas,
 }
 
 static
-void AccumulateTerms(const unsigned char *instructions,
-                     const double *coefficients,
-                     const double cos_sin_lambda[],
-                     double accu[],
-                     double *sp) {
+void AccumulateElp82bTerms(const unsigned char *instructions,
+                           const double *coefficients,
+                           const double cos_sin_lambda[],
+                           double accu[],
+                           double *sp) {
     /* Accumulates the series given in instructions/coefficients.
        The argument of the series is cos_sin_lambda which has
-       been initialized using PrepareLambdaArray().
+       been initialized using PrepareElp82bLambdaArray().
        accu is the output accumulator.
        sp must point to a memory area holding 2*nr_of_lambdas double.
        area must be supplied by the caller, it will be destroyed during the
@@ -162670,21 +162670,8 @@ const double w[5] = {
 static const double a0_div_ath_times_au =
   384747.9806448954 / (384747.9806743165 * 149597870.691);
 
-  /* Polynoms for transformation matrix */
-static const double p1 =  1.0180391e-5;
-static const double p2 =  4.7020439e-7;
-static const double p3 = -5.417367e-10;
-static const double p4 = -2.507948e-12;
-static const double p5 =  4.63486e-15;
-static const double q1 = -1.13469002e-4;
-static const double q2 =  1.2372674e-7;
-static const double q3 =  1.265417e-9;
-static const double q4 = -1.371808e-12;
-static const double q5 = -3.20334e-15;
-
-
-void GetElp82bCoor(double jd,double xyz[3]) {
-  const double t = (jd - 2451545.0) / 36525.0;
+static
+void GetElp82bSphericalCoor(const double t,double r[3]) {
   double lambda[17];
   int i,k;
   for (i=0;i<4;i++) {
@@ -162701,25 +162688,131 @@ void GetElp82bCoor(double jd,double xyz[3]) {
   }
 
   double cos_sin_lambda[303*4];
-  PrepareLambdaArray(17,elp82b_max_lambda_factor,lambda,cos_sin_lambda);
+  PrepareElp82bLambdaArray(17,elp82b_max_lambda_factor,lambda,cos_sin_lambda);
   double accu[9];
   memcpy(accu,elp82b_constants,sizeof(elp82b_constants));
   double stack[17*2];
-  AccumulateTerms(elp82b_instructions,elp82b_coefficients,cos_sin_lambda,
-                  accu,stack);
+  AccumulateElp82bTerms(elp82b_instructions,elp82b_coefficients,cos_sin_lambda,
+                        accu,stack);
 
-  const double r1 =   (accu[0] + w[0]
-                  + t*(accu[3] + w[1]
-                  + t*(accu[6] + w[2]
-                  + t*(          w[3]
-                  + t*           w[4])))) * (M_PI/(180*3600));
-  const double r2 = (accu[1] + t*(accu[4] + t*accu[7])) * (M_PI/(180*3600));
-  const double r3 = (accu[2] + t*(accu[5] + t*accu[8])) * a0_div_ath_times_au;
+    // calculate r1,r2,r3:
+  r[0] =   (accu[0] + w[0]
+       + t*(accu[3] + w[1]
+       + t*(accu[6] + w[2]
+       + t*(          w[3]
+       + t*           w[4])))) * (M_PI/(180*3600));
+  r[1] = (accu[1] + t*(accu[4] + t*accu[7])) * (M_PI/(180*3600));
+  r[2] = (accu[2] + t*(accu[5] + t*accu[8])) * a0_div_ath_times_au;
+}
 
-  const double rh = r3 * cos(r2);
-  const double x3 = r3 * sin(r2);
-  const double x1 = rh * cos(r1);
-  const double x2 = rh * sin(r1);
+  /* ugly static variable for caching: */
+static double t_0 = -1e100;
+static double t_1 = 1e100;
+static double r_0[3];
+static double r_1[3];
+
+#define DELTA_T (1.0/(24.0*36525.0))
+
+static
+void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
+//  GetElp82bSphericalCoor(t,r);
+//  return;
+  int i;
+  if (t_0 < -1e99) { /* t_0 uninitialized */
+    if (t_1 - DELTA_T <= t) {
+      t_0 = t_1 - DELTA_T;
+      GetElp82bSphericalCoor(t_0,r_0);
+        /* interpolate */
+    } else
+    if (t <= t_1 + DELTA_T && t_1 <= 1e99) {
+      t_0 = t_1;
+      for (i=0;i<3;i++) r_0[i] = r_1[i];
+      t_1 = t_0 + DELTA_T;
+      GetElp82bSphericalCoor(t_1,r_1);
+        /* interpolate */
+    } else {
+      t_1 = t;
+      GetElp82bSphericalCoor(t_1,r_1);
+      for (i=0;i<3;i++) r[i] = r_1[i];
+      return;
+    }
+  } else
+  if (1e99 < t_1) { /* t_1 uninitialized */
+    if (t <= t_0 + DELTA_T) {
+      t_1 = t_0 + DELTA_T;
+      GetElp82bSphericalCoor(t_1,r_1);
+        /* interpolate */
+    } else
+    if (t_0 - DELTA_T <= t) {
+      t_1 = t_0;
+      for (i=0;i<3;i++) r_1[i] = r_0[i];
+      t_0 = t_1 - DELTA_T;
+      GetElp82bSphericalCoor(t_0,r_0);
+        /* interpolate */
+    } else {
+      t_0 = t;
+      GetElp82bSphericalCoor(t_0,r_0);
+      for (i=0;i<3;i++) r[i] = r_0[i];
+      return;
+    }
+  } else
+  if (t < t_0) {
+    if (t_0 - DELTA_T <= t) {
+      t_1 = t_0;
+      for (i=0;i<3;i++) r_1[i] = r_0[i];
+      t_0 = t_1 - DELTA_T;
+      GetElp82bSphericalCoor(t_0,r_0);
+        /* interpolate */
+    } else {
+      t_1 = 1e100;
+      t_0 = t;
+      GetElp82bSphericalCoor(t_0,r_0);
+      for (i=0;i<3;i++) r[i] = r_0[i];
+      return;
+    }
+  } else
+  if (t_1 < t) {
+    if (t <= t_1 + DELTA_T) {
+      t_0 = t_1;
+      for (i=0;i<3;i++) r_0[i] = r_1[i];
+      t_1 = t_0 + DELTA_T;
+      GetElp82bSphericalCoor(t_1,r_1);
+        /* interpolate */
+    } else {
+      t_0 = -1e100;
+      t_1 = t;
+      GetElp82bSphericalCoor(t_1,r_1);
+      for (i=0;i<3;i++) r[i] = r_1[i];
+      return;
+    }
+  }
+    /* interpolate: */
+  const double f0 = (t_1 - t);
+  const double f1 = (t - t_0);
+  const double fact = 1.0 / (t_1 - t_0);
+  for (i=0;i<3;i++) r[i] = fact * (r_0[i]*f0 + r_1[i]*f1);
+}
+
+  /* Polynoms for transformation matrix */
+static const double p1 =  1.0180391e-5;
+static const double p2 =  4.7020439e-7;
+static const double p3 = -5.417367e-10;
+static const double p4 = -2.507948e-12;
+static const double p5 =  4.63486e-15;
+static const double q1 = -1.13469002e-4;
+static const double q2 =  1.2372674e-7;
+static const double q3 =  1.265417e-9;
+static const double q4 = -1.371808e-12;
+static const double q5 = -3.20334e-15;
+
+void GetElp82bCoor(double jd,double xyz[3]) {
+  const double t = (jd - 2451545.0) / 36525.0;
+  double r[3];
+  GetElp82bSphericalCoorInterpol(t,r);
+  const double rh = r[2] * cos(r[1]);
+  const double x3 = r[2] * sin(r[1]);
+  const double x1 = rh * cos(r[0]);
+  const double x2 = rh * sin(r[0]);
 
   double pw = t*(p1 + t*(p2 + t*(p3 + t*(p4 + t*p5))));
   double qw = t*(q1 + t*(q2 + t*(q3 + t*(q4 + t*q5))));
