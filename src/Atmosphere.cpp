@@ -146,7 +146,8 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		for(int y=0; y<=sky_resolution; ++y)
 		{
 			prj->unproject_local((double)viewport_left+x*stepX, (double)viewport_bottom+y*stepY,point);
-			point.normalize();
+//			point.normalize();
+			assert(fabs(point.lengthSquared()-1.0) < 1e-10);
 
 			if (point[2]<=0)
 			{
