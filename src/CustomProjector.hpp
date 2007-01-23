@@ -41,7 +41,6 @@ private:
 	// Override glVertex3f and glVertex3d
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
-	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
