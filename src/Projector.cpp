@@ -70,9 +70,8 @@ Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const string &s) {
 }
 
 
-Projector *Projector::create(PROJECTOR_TYPE type,
-                             const Vec4i& viewport,
-                             double _fov) {
+Projector *Projector::create(PROJECTOR_TYPE type,const Vec4i& viewport,double _fov)
+{
   Projector *rval = 0;
   switch (type) {
     case PERSPECTIVE_PROJECTOR:
@@ -132,6 +131,13 @@ void Projector::init(const InitParser& conf)
 			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
 			exit(-1);
 		}
+		
+	// Register the default mappings
+	registerProjectionMapping(MappingEqualArea());
+	registerProjectionMapping(MappingStereographic());
+	registerProjectionMapping(MappingFisheye());
+	registerProjectionMapping(MappingCylinder());
+	registerProjectionMapping(MappingPerspective());
 }
 
 
@@ -187,36 +193,10 @@ void Projector::setFov(double f)
 	init_project_matrix();
 }
 
-// Get the largest possible displayed angle in radian
-// This can for example be the angular distance between one corner of the screen to the oposite one
-double Projector::getMaxDisplayedAngle() const
-{
-	Vec3d v1, v2;
-	unproject_earth_equ(vec_viewport[0],vec_viewport[1], v1);
-	unproject_earth_equ(vec_viewport[0]+vec_viewport[2],vec_viewport[1]+vec_viewport[3], v2);
-	v1.normalize();
-	v2.normalize();
-	return v1.angle(v2);
-}
 
 void Projector::setMaxFov(double max) {
   if (fov > max) setFov(max);
   max_fov = max;
-}
-
-// Fill with black around the circle
-void Projector::draw_viewport_shape(void)
-{
-	if (maskType != DISK) return;
-
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	set_orthographic_projection();
-	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
-	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
-	gluDeleteQuadric(p);
-	reset_perspective_projection();
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
@@ -268,9 +248,114 @@ void Projector::reset_perspective_projection(void) const
 }
 
 
+/*************************************************************************
+ Set the frame in which we want to draw from now on
+*************************************************************************/
+void Projector::setCurrentFrame(const std::string& frameName)
+{
+	if (frameName=="local")
+	{
+		modelViewMatrix = mat_local_to_eye;
+		inverseModelViewMatrix = inv_mat_local_to_eye;
+	}
+	else if (frameName=="helio")
+	{
+		modelViewMatrix = mat_helio_to_eye;
+		inverseModelViewMatrix = inv_mat_helio_to_eye;
+	}
+	else if (frameName=="earthequ")
+	{
+		modelViewMatrix = mat_earth_equ_to_eye;
+		inverseModelViewMatrix = inv_mat_earth_equ_to_eye;
+	}
+	else if (frameName=="j2000")
+	{
+		modelViewMatrix = mat_j2000_to_eye;
+		inverseModelViewMatrix = inv_mat_j2000_to_eye;
+	}
+	else
+	{
+		cerr << "Unknown reference frame: " << frameName << "." << endl;
+	}
+}
+
+/*************************************************************************
+ Set the current projection mapping to use
+*************************************************************************/
+void Projector::setCurrentProjection(const std::string& projectionName)
+{
+	std::map<std::string, Mapping>::const_iterator i = projectionMapping.find(projectionName);
+	if (i!=projectionMapping.end())
+	{
+		projectForward = i->second.mapForward;
+		projectForward = i->second.mapForward;
+	}
+	else
+	{
+		cerr << "Unknown projection type: " << projectionName << "." << endl;
+	}
+	//sVertex3v = boost::callback<bool, Vec3d&>();
+}
+
+/*************************************************************************
+ Project the vector v from the current frame into the viewport
+*************************************************************************/
+bool Projector::project(const Vec3d &v, Vec3d &win) const
+{
+	// modelViewMapper.forward(win);
+	// Hardcoded for linear transfo = normal openGL
+	win=v;
+	win.transfo4d(modelViewMatrix);
+
+	if (!projectForward(win))
+		return false;
+    
+	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
+	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
+	win[2] = (win[2] - zNear) / (zFar-zNear);
+	// win[2] = (win[2] - zNear) / (zFar-zNear);
+	return true;
+}
+
+/*************************************************************************
+ Project the vector v from the viewport frame into the current frame 
+*************************************************************************/
+bool Projector::unProject(const Vec3d &win, Vec3d &v) const
+{
+	v = win;
+	v[0] = flip_horz * (win[0] - center[0]) / view_scaling_factor;
+	v[1] = flip_vert * (win[1] - center[1]) / view_scaling_factor;
+
+	if (!projectBackward(v))
+		return false;
+
+	// modelViewMapper.backward(v);
+	v.transfo4d(inverseModelViewMatrix);
+	return true;
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+// Standard methods for drawing primitives
+
+// Fill with black around the circle
+void Projector::draw_viewport_shape(void)
+{
+	if (maskType != DISK) return;
+
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	set_orthographic_projection();
+	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
+	GLUquadricObj * p = gluNewQuadric();
+	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
+	gluDeleteQuadric(p);
+	reset_perspective_projection();
+}
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
-
 void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks,
                         const Mat4d& mat, int orient_inside) const {
@@ -363,64 +448,6 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
   }
 
   glPopMatrix();
-}
-
-
-// Draw a half sphere
-void Projector::sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
-	const Mat4d& mat, int orient_inside) const
-{
-	glPushMatrix();
-	glLoadMatrixd(mat);
-
-	GLfloat rho, drho, theta, dtheta;
-	GLfloat x, y, z;
-	GLfloat s, t, ds, dt;
-	GLint i, j, imin, imax;
-	GLfloat nsign;
-
-	if (orient_inside) nsign = -1.0;
-	else nsign = 1.0;
-
-	drho = M_PI / (GLfloat) stacks;
-	dtheta = 2.0 * M_PI / (GLfloat) slices;
-
-	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	ds = 1.0 / slices;
-	dt = 1.0 / stacks;
-	t = 1.0;			// because loop now runs from 0
-	imin = 0;
-	imax = stacks;
-
-	// draw intermediate stacks as quad strips
-	for (i = imin; i < imax/2; i++)
-	{
-		rho = i * drho;
-		glBegin(GL_QUAD_STRIP);
-		s = 0.0;
-		for (j = 0; j <= slices; j++)
-		{
-			theta = (j == slices) ? 0.0 : j * dtheta;
-			x = -sin(theta) * sin(rho);
-			y = cos(theta) * sin(rho);
-			z = nsign * cos(rho);
-			glNormal3f(x * nsign, y * nsign, z * nsign);
-			glTexCoord2f(s, t);
-			sVertex3(x * radius, y * radius, z * radius, mat);
-			x = -sin(theta) * sin(rho + drho);
-			y = cos(theta) * sin(rho + drho);
-			z = nsign * cos(rho + drho);
-			glNormal3f(x * nsign, y * nsign, z * nsign);
-			glTexCoord2f(s, t - dt);
-			s += ds;
-			sVertex3(x * radius, y * radius, z * radius, mat);
-		}
-		glEnd();
-		t -= dt;
-	}
-	glPopMatrix();
 }
 
 // Draw a disk with a special texturing mode having texture center at disk center
@@ -727,3 +754,225 @@ void Projector::print_gravity180(SFont* font, float x, float y, const wstring& w
 	reset_perspective_projection();
 }
 
+void Projector::drawParallelJ2000(const Vec3d& start, double length) const
+{
+	const Mat4d dRa = Mat4d::zrotation(length/10.);
+	
+	Vec3d v = start;
+	Vec3d pt1;
+	glBegin(GL_LINE_STRIP);
+	for (int i=0;i<10;++i)
+	{
+		project_j2000(v, pt1);
+		glVertex2f(pt1[0],pt1[1]);
+		dRa.transfo(v);
+	}
+	glEnd();
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+// Drawing methods for general (non-linear) mode
+	
+// Here is the main trick for texturing in fisheye mode : The trick is to compute the
+// new coordinate in orthographic projection which will simulate the fisheye projection.
+void Projector::sVertex3General(double x, double y, double z, const Mat4d& mat) const
+{
+	Vec3d win;
+	Vec3d v(x,y,z);
+	project_custom(v, win, mat);
+
+	// Can be optimized by avoiding matrix inversion if it's always the same
+	gluUnProject(win[0],win[1],win[2],mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
+	glVertex3dv(v);
+}
+
+void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
+                              GLint slices, GLint stacks,
+                              const Mat4d& mat, int orient_inside) const
+{
+    glPushMatrix();
+    glLoadMatrixd(mat);
+
+      // It is really good for performance to have Vec4f,Vec3f objects
+      // static rather than on the stack. But why?
+      // Is the constructor/destructor so expensive?
+    static Vec4f lightPos4;
+    static Vec3f lightPos3;
+    GLboolean isLightOn;
+    static Vec3f transNorm;
+    float c;
+
+    static Vec4f ambientLight;
+    static Vec4f diffuseLight;
+
+    glGetBooleanv(GL_LIGHTING, &isLightOn);
+
+    if (isLightOn)
+    {
+        glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
+        lightPos3 = lightPos4;
+        lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
+        lightPos3.normalize();
+        glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+        glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+        glDisable(GL_LIGHTING);
+    }
+
+    GLfloat x, y, z;
+    GLfloat s, t;
+    GLint i, j;
+    GLfloat nsign;
+
+    if (orient_inside) {
+      nsign = -1.0;
+      t=0.0; // from inside texture is reversed
+    } else {
+      nsign = 1.0;
+      t=1.0;
+    }
+
+    const GLfloat drho = M_PI / (GLfloat) stacks;
+#if defined(__sun) || defined(__sun__)
+	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
+    double *cos_sin_rho = new double[2*(stacks+1)];
+#else
+    double cos_sin_rho[2*(stacks+1)];
+#endif
+    double *cos_sin_rho_p = cos_sin_rho;
+    for (i = 0; i <= stacks; i++) {
+      double rho = i * drho;
+      *cos_sin_rho_p++ = cos(rho);
+      *cos_sin_rho_p++ = sin(rho);
+    }
+
+    const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
+    double cos_sin_theta[2*(slices+1)];
+    double *cos_sin_theta_p = cos_sin_theta;
+    for (i = 0; i <= slices; i++) {
+      double theta = (i == slices) ? 0.0 : i * dtheta;
+      *cos_sin_theta_p++ = cos(theta);
+      *cos_sin_theta_p++ = sin(theta);
+    }
+
+#if defined(__sun) || defined(__sun__)
+    delete[] cos_sin_rho;
+#endif
+
+    // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+    // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+    // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+    const GLfloat ds = 1.0 / slices;
+    const GLfloat dt = nsign / stacks; // from inside texture is reversed
+
+
+    // draw intermediate  as quad strips
+    for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
+         i++,cos_sin_rho_p+=2)
+    {
+        glBegin(GL_QUAD_STRIP);
+        s = 0.0;
+        for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+             j++,cos_sin_theta_p+=2)
+        {
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+            z = nsign * cos_sin_rho_p[0];
+            glTexCoord2f(s, t);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                glColor3f(c*diffuseLight[0] + ambientLight[0],
+                    c*diffuseLight[1] + ambientLight[1],
+                    c*diffuseLight[2] + ambientLight[2]);
+            }
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+            z = nsign * cos_sin_rho_p[2];
+            glTexCoord2f(s, t - dt);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                glColor3f(c*diffuseLight[0] + ambientLight[0],
+                    c*diffuseLight[1] + ambientLight[1],
+                    c*diffuseLight[2] + ambientLight[2]);
+            }
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            s += ds;
+        }
+        glEnd();
+        t -= dt;
+    }
+    glPopMatrix();
+    if (isLightOn) glEnable(GL_LIGHTING);
+}
+
+// Reimplementation of gluCylinder : glu is overrided for non standard projection
+void Projector::sCylinderGeneral(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
+const Mat4d& mat, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	static GLdouble da, r, dz;
+	static GLfloat z, nsign;
+	static GLint i, j;
+
+	nsign = 1.0;
+	if (orient_inside) glCullFace(GL_FRONT);
+	//nsign = -1.0;
+	//else nsign = 1.0;
+
+	da = 2.0 * M_PI / slices;
+	dz = height / stacks;
+
+	GLfloat ds = 1.0 / slices;
+	GLfloat dt = 1.0 / stacks;
+	GLfloat t = 0.0;
+	z = 0.0;
+	r = radius;
+	for (j = 0; j < stacks; j++)
+	{
+	GLfloat s = 0.0;
+	glBegin(GL_QUAD_STRIP);
+	for (i = 0; i <= slices; i++)
+	{
+		GLfloat x, y;
+		if (i == slices)
+		{
+			x = std::sin(0.0f);
+			y = std::cos(0.0f);
+		}
+		else
+		{
+			x = std::sin(i * da);
+			y = std::cos(i * da);
+		}
+		glNormal3f(x * nsign, y * nsign, 0);
+		glTexCoord2f(s, t);
+		sVertex3(x * r, y * r, z, mat);
+		glNormal3f(x * nsign, y * nsign, 0);
+		glTexCoord2f(s, t + dt);
+		sVertex3(x * r, y * r, z + dz, mat);
+		s += ds;
+	}			/* for slices */
+	glEnd();
+	t += dt;
+	z += dz;
+	}				/* for stacks */
+
+	glPopMatrix();
+	if (orient_inside) glCullFace(GL_BACK);
+}
