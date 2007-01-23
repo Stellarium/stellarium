@@ -843,9 +843,11 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 						a.v[0], a.v[1], a.v[2], 1);
 }
 
-template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis,
+template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a,
                                                   T angle)
 {
+	Vec3d axis(a);
+	axis.normalize();
 //    T c = (T) cos(angle);
 //    T s = (T) sin(angle);
 //    T t = 1 - c;

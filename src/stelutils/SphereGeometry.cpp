@@ -36,6 +36,17 @@ bool Convex::inside(const Vec3d& v) const
 	return true;
 }
 
+//! Return true if the vector is inside the convex, but don't check for half space with index idx
+bool Convex::insideButOne(const Vec3d& v, unsigned int idx) const
+{
+	for (unsigned int i=0;i<halfSpaces.size();++i)
+	{
+		if (i!=idx && !halfSpaces[i].inside(v))
+			return false;
+	}
+	return true;
+}
+
 // Create a ConvexPolygon from 4 vectors
 ConvexPolygon::ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3) : 
 	Convex(e0, e1, e2, e3), vertex(4)
