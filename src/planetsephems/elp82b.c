@@ -43,6 +43,7 @@ the original Fortran code:
 
 ****************************************************************/
 
+#include "calc_interpolated_elements.h"
 
 #include <math.h>
 #include <string.h>
@@ -162707,29 +162708,28 @@ void GetElp82bSphericalCoor(const double t,double r[3]) {
 
   /* ugly static variable for caching: */
 static double t_0 = -1e100;
-static double t_1 = 1e100;
+static double t_1 = -1e100;
+static double t_2 = -1e100;
 static double r_0[3];
 static double r_1[3];
+static double r_2[3];
 
 #define DELTA_T (1.0/(24.0*36525.0))
 
+/*
 static
 void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
-//  GetElp82bSphericalCoor(t,r);
-//  return;
   int i;
-  if (t_0 < -1e99) { /* t_0 uninitialized */
+  if (t_0 < -1e99) {
     if (t_1 - DELTA_T <= t) {
       t_0 = t_1 - DELTA_T;
       GetElp82bSphericalCoor(t_0,r_0);
-        /* interpolate */
     } else
     if (t <= t_1 + DELTA_T && t_1 <= 1e99) {
       t_0 = t_1;
       for (i=0;i<3;i++) r_0[i] = r_1[i];
       t_1 = t_0 + DELTA_T;
       GetElp82bSphericalCoor(t_1,r_1);
-        /* interpolate */
     } else {
       t_1 = t;
       GetElp82bSphericalCoor(t_1,r_1);
@@ -162737,18 +162737,16 @@ void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
       return;
     }
   } else
-  if (1e99 < t_1) { /* t_1 uninitialized */
+  if (1e99 < t_1) {
     if (t <= t_0 + DELTA_T) {
       t_1 = t_0 + DELTA_T;
       GetElp82bSphericalCoor(t_1,r_1);
-        /* interpolate */
     } else
     if (t_0 - DELTA_T <= t) {
       t_1 = t_0;
       for (i=0;i<3;i++) r_1[i] = r_0[i];
       t_0 = t_1 - DELTA_T;
       GetElp82bSphericalCoor(t_0,r_0);
-        /* interpolate */
     } else {
       t_0 = t;
       GetElp82bSphericalCoor(t_0,r_0);
@@ -162762,7 +162760,6 @@ void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
       for (i=0;i<3;i++) r_1[i] = r_0[i];
       t_0 = t_1 - DELTA_T;
       GetElp82bSphericalCoor(t_0,r_0);
-        /* interpolate */
     } else {
       t_1 = 1e100;
       t_0 = t;
@@ -162777,7 +162774,6 @@ void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
       for (i=0;i<3;i++) r_0[i] = r_1[i];
       t_1 = t_0 + DELTA_T;
       GetElp82bSphericalCoor(t_1,r_1);
-        /* interpolate */
     } else {
       t_0 = -1e100;
       t_1 = t;
@@ -162786,13 +162782,12 @@ void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
       return;
     }
   }
-    /* interpolate: */
   const double f0 = (t_1 - t);
   const double f1 = (t - t_0);
   const double fact = 1.0 / (t_1 - t_0);
   for (i=0;i<3;i++) r[i] = fact * (r_0[i]*f0 + r_1[i]*f1);
 }
-
+*/
   /* Polynoms for transformation matrix */
 static const double p1 =  1.0180391e-5;
 static const double p2 =  4.7020439e-7;
@@ -162808,7 +162803,9 @@ static const double q5 = -3.20334e-15;
 void GetElp82bCoor(double jd,double xyz[3]) {
   const double t = (jd - 2451545.0) / 36525.0;
   double r[3];
-  GetElp82bSphericalCoorInterpol(t,r);
+//  GetElp82bSphericalCoorInterpol(t,r);
+  CalcInterpolatedElements(t,r,3,&GetElp82bSphericalCoor,DELTA_T,
+                           &t_0,r_0,&t_1,r_1,&t_2,r_2);
   const double rh = r[2] * cos(r[1]);
   const double x3 = r[2] * sin(r[1]);
   const double x1 = rh * cos(r[0]);

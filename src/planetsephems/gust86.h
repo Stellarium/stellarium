@@ -88,6 +88,9 @@ void GetGust86Coor(double jd,int body,double *xyz);
      ICRF <-> VSOP87 must be done with the matrix given above.
    */
      
+void GetGust86OsculatingCoor(double jd0,double jd,int body,double *xyz);
+  /* The oculating orbit of epoch jd0, evatuated at jd, is returned.
+  */
 
 #ifdef __cplusplus
 }
