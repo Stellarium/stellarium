@@ -26,6 +26,8 @@
 
 #include "SDL_opengl.h"
 
+#include <math.h>
+
 class ViewportDistorterDummy : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
@@ -51,13 +53,12 @@ private:
   int viewport_wh;
   float texture_used;
   struct VertexData {
-    float color[4];
     float xy[2];
-    double h;
   };
   VertexData *trans_array;
   int trans_width,trans_height;
   SphericMirrorCalculator calc;
+  GLuint display_list;
 };
 
 
@@ -88,25 +89,36 @@ ViewportDistorterFisheyeToSphericMirror
                GL_RGB, GL_UNSIGNED_BYTE, 0);
 
 //  calc.setParams(Vec3d(0,-2,15),Vec3d(0,0,20),1,25,0.125);
+  display_list = glGenLists(1);
 }
+
+#define BLOCK_SIZE_X 8
+#define BLOCK_SIZE_Y 8
+
+struct ColorData {
+  float color[4];
+  double h;
+};
 
 void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   calc.init(conf);
   const double gamma = conf.get_double("spheric_mirror","projector_gamma",0.45);
     // init transformation
-  trans_width = screenW / 16;
-  trans_height = screenH / 16;
+  trans_width = screenW / BLOCK_SIZE_X;
+  trans_height = screenH / BLOCK_SIZE_Y;
   trans_array = new VertexData[(trans_width+1)*(trans_height+1)];
+  ColorData *color_array = new ColorData[(trans_width+1)*(trans_height+1)];
   double max_h = 0;
   for (int j=0;j<=trans_height;j++) {
     for (int i=0;i<=trans_width;i++) {
-      VertexData &data(trans_array[(j*(trans_width+1)+i)]);
+      VertexData &vertex(trans_array[(j*(trans_width+1)+i)]);
+      ColorData &color(color_array[(j*(trans_width+1)+i)]);
       Vec3d v,v_x,v_y;
       bool rc = calc.retransform(
                         (i-(trans_width>>1))/(double)trans_height,
                         (j-(trans_height>>1))/(double)trans_height,
                         v,v_x,v_y);
-      data.h = rc ? (v_x^v_y).length() : 0.0;
+      color.h = rc ? (v_x^v_y).length() : 0.0;
       const double h = v[1];
       v[1] = v[2];
       v[2] = -h;
@@ -116,25 +128,56 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
       f *= oneoverh;
       double x = (0.5 + v[0] * f);
       double y = (0.5 + v[1] * f);
-      if (x < 0.0) {x=0.0;data.h=0;} else if (x > 1.0) {x=1.0;data.h=0;}
-      if (y < 0.0) {y=0.0;data.h=0;} else if (y > 1.0) {y=1.0;data.h=0;}
-      data.xy[0] = x*texture_used;
-      data.xy[1] = y*texture_used;
-      if (data.h > max_h) max_h = data.h;
+      if (x < 0.0) {x=0.0;color.h=0;} else if (x > 1.0) {x=1.0;color.h=0;}
+      if (y < 0.0) {y=0.0;color.h=0;} else if (y > 1.0) {y=1.0;color.h=0;}
+      vertex.xy[0] = x*texture_used;
+      vertex.xy[1] = y*texture_used;
+      if (color.h > max_h) max_h = color.h;
     }
   }
   for (int j=0;j<=trans_height;j++) {
     for (int i=0;i<=trans_width;i++) {
-      VertexData &data(trans_array[(j*(trans_width+1)+i)]);
-      data.color[0] = data.color[1] = data.color[2] =
-        (data.h<=0.0) ? 0.0 : exp(gamma*log(data.h/max_h));
-      data.color[3] = 1.0f;
+      ColorData &color(color_array[(j*(trans_width+1)+i)]);
+      color.color[0] = color.color[1] = color.color[2] =
+        (color.h<=0.0) ? 0.0 : exp(gamma*log(color.h/max_h));
+      color.color[3] = 1.0f;
     }
   }
+  glNewList(display_list,GL_COMPILE);
+  glMatrixMode(GL_PROJECTION);        // projection matrix mode
+  glPushMatrix();                     // store previous matrix
+  glLoadIdentity();
+  gluOrtho2D(0,screenW,0,screenH);    // set a 2D orthographic projection
+  glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
+  glPushMatrix();
+  glLoadIdentity();
+  for (int j=0;j<trans_height;j++) {
+    glBegin(GL_QUAD_STRIP);
+    const VertexData *v0 = trans_array + j*(trans_width+1);
+    const VertexData *v1 = v0 + (trans_width+1);
+    const ColorData *c0 = color_array + j*(trans_width+1);
+    const ColorData *c1 = c0 + (trans_width+1);
+    for (int i=0;i<=trans_width;i++) {
+      glColor4fv(c0[i].color);
+      glTexCoord2fv(v0[i].xy);
+      glVertex3f(i*BLOCK_SIZE_X, j*BLOCK_SIZE_Y, 0.0);
+      glColor4fv(c1[i].color);
+      glTexCoord2fv(v1[i].xy);
+      glVertex3f(i*BLOCK_SIZE_X, (j+1)*BLOCK_SIZE_Y, 0.0);
+    }
+    glEnd();
+  }
+  glMatrixMode(GL_PROJECTION);        // Restore previous matrix
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glPopMatrix();
+  glEndList();
+  delete[] color_array;
 }
 
 ViewportDistorterFisheyeToSphericMirror
     ::~ViewportDistorterFisheyeToSphericMirror(void) {
+  glDeleteLists(display_list,1);
   if (trans_array) delete[] trans_array;
   glDeleteTextures(1,&mirror_texture);
 }
@@ -142,10 +185,12 @@ ViewportDistorterFisheyeToSphericMirror
 bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) {
     // linear interpolation:
   y = screenH-1-y;
-  const float dx = (x&15)/16.0f;
-  const int i = x >> 4;
-  const float dy = (y&15)/16.0f;
-  const int j = y >> 4;
+  float dx = x/(float)BLOCK_SIZE_X;
+  int i = (int)floorf(dx);
+  dx -= i;
+  float dy = y/(float)BLOCK_SIZE_Y;
+  const int j = (int)floorf(dy);
+  dy -= j;
   const float f00 = (1.0f-dx)*(1.0f-dy);
   const float f01 = (     dx)*(1.0f-dy);
   const float f10 = (1.0f-dx)*(     dy);
@@ -169,20 +214,10 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) {
 
 void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
   glViewport(0, 0, screenW, screenH);
-  glMatrixMode(GL_PROJECTION);		// projection matrix mode
-  glPushMatrix();						// store previous matrix
-  glLoadIdentity();
-  gluOrtho2D(0,screenW,0,screenH);			// set a 2D orthographic projection
-  glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-  glPushMatrix();
-  glLoadIdentity();	
-
-
   glBindTexture(GL_TEXTURE_2D, mirror_texture);
   glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0,
                       (screenW-viewport_wh)>>1,(screenH-viewport_wh)>>1,
                       viewport_wh,viewport_wh);
-
   glEnable(GL_TEXTURE_2D);
 
   float color[4] = {1,1,1,1};
@@ -190,40 +225,12 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
   glDisable(GL_BLEND);
   glBindTexture(GL_TEXTURE_2D, mirror_texture);
 
-/*
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0, 0.0); glVertex3f(screenW,0, 0.0);
-  glTexCoord2f(texture_used, 0.0); glVertex3f(0,0, 0.0);
-  glTexCoord2f(texture_used, texture_used); glVertex3f(0, screenH, 0.0);
-  glTexCoord2f(0.0, texture_used); glVertex3f(screenW, screenH, 0.0);
-  glEnd();
-*/
-
-
-  for (int j=0;j<trans_height;j++) {
-    glBegin(GL_QUAD_STRIP);
-    const VertexData *v0 = trans_array + j*(trans_width+1);
-    const VertexData *v1 = v0 + (trans_width+1);
-    for (int i=0;i<=trans_width;i++) {
-      glColor4fv(v0[i].color);
-      glTexCoord2fv(v0[i].xy);
-      glVertex3f(i*16, j*16, 0.0);
-      glColor4fv(v1[i].color);
-      glTexCoord2fv(v1[i].xy);
-      glVertex3f(i*16, (j+1)*16, 0.0);
-    }
-    glEnd();
-  }
-
-
-  glMatrixMode(GL_PROJECTION);		// Restore previous matrix
-  glPopMatrix();
-  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();	
+  glCallList(display_list);
 }
 
 ViewportDistorter *ViewportDistorter::create(const string &type,
-                                             int width,int height, Projector* prj) {
+                                             int width,int height,
+                                             Projector* prj) {
   if (type == "fisheye_to_spheric_mirror") {
     return new ViewportDistorterFisheyeToSphericMirror(width,height, prj);
   }
