@@ -44,6 +44,7 @@ so that for given T the functions cos and sin have only to be called 12 times.
 ****************************************************************/
 
 #include "vsop87.h"
+#include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
 
 #include <string.h>
@@ -137301,8 +137302,7 @@ void CalcVsop87Elem(double t,double elem[8*6]) {
   }
     /* longitudes: */
   for (i=0;i<8;i++) {
-    elem[i*6+1] = fmod(elem[i*6+1]+t*vsop87_l[i],2*M_PI);
-    if (elem[i*6+1] < 0.0) elem[i*6+1] += 2*M_PI;
+    elem[i*6+1] += t*vsop87_l[i];
   }
 
 /*
@@ -137316,31 +137316,33 @@ void CalcVsop87Elem(double t,double elem[8*6]) {
 }
 
   /* dirty caching in static variables */
-static double vsop87_t0 = -1e99;
-static double vsop87_elem[8*6];
-
+#define VSOP87_DIM (8*6)
+static double t_0 = -1e100;
+static double t_1 = -1e100;
+static double t_2 = -1e100;
+static double vsop87_elem_0[VSOP87_DIM];
+static double vsop87_elem_1[VSOP87_DIM];
+static double vsop87_elem_2[VSOP87_DIM];
 /* 10 days: */
-#define ELEM_VALIDITY 10
+#define DELTA_T (10.0/365250.0)
 
-#define VAL_FACTOR (365250.0/ELEM_VALIDITY)
+static double vsop87_jd0 = -1e100;
+static double vsop87_elem[VSOP87_DIM];
 
-void GetVsop87Coor(double jd,int body,double *xyz) {
-  const double t = (jd - 2451545.0) / 365250.0;
-  if (fabs(t-vsop87_t0) > 0.5/VAL_FACTOR) {
-    vsop87_t0 = t;
-    CalcVsop87Elem(vsop87_t0,vsop87_elem);
-  }
-  EllipticToRectangularA(vsop87_mu[body],vsop87_elem+body*6,
-                         365250.0*(t-vsop87_t0),xyz);
+void GetVsop87Coor(const double jd,int body,double *xyz) {
+  GetVsop87OsculatingCoor(jd,jd,body,xyz);
 }
 
 void GetVsop87OsculatingCoor(double jd0,double jd,int body,double *xyz) {
-  const double t0 = (jd0 - 2451545.0) / 365250.0;
-  if (fabs(t0-vsop87_t0) > 0.5/VAL_FACTOR) {
-    vsop87_t0 = t0;
-    CalcVsop87Elem(vsop87_t0,vsop87_elem);
+  if (jd0 != vsop87_jd0) {
+    vsop87_jd0 = jd0;
+    const double t0 = (vsop87_jd0 - 2451545.0) / 365250.0;
+    CalcInterpolatedElements(t0,vsop87_elem,
+                             VSOP87_DIM,
+                             &CalcVsop87Elem,DELTA_T,
+                             &t_0,vsop87_elem_0,
+                             &t_1,vsop87_elem_1,
+                             &t_2,vsop87_elem_2);
   }
-  const double t = (jd - 2451545.0) / 365250.0;
-  EllipticToRectangularA(vsop87_mu[body],vsop87_elem+body*6,
-                         365250.0*(t-vsop87_t0),xyz);
+  EllipticToRectangularA(vsop87_mu[body],vsop87_elem+(body*6),jd-jd0,xyz);
 }
