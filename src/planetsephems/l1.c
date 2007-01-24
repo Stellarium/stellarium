@@ -45,6 +45,7 @@ My modifications are:
 ****************************************************************/
 
 #include "l1.h"
+#include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
 
 #include <math.h>
@@ -959,8 +960,7 @@ static void CalcL1Elem(double t,int body,double elem[6]) {
     }
   }
 
-  elem[0] = fmod(elem[0]+t*bp->l,2*M_PI);
-  if (elem[0] < 0.0) elem[0] += 2*M_PI;
+  elem[0] += t*bp->l;
 }
 
 
@@ -979,17 +979,41 @@ const double L1toVsop87[9] = {
 };
 
 
+static double t_0[4] = {-1e100,-1e100,-1e100,-1e100};
+static double t_1[4] = {-1e100,-1e100,-1e100,-1e100};
+static double t_2[4] = {-1e100,-1e100,-1e100,-1e100};
+static double l1_elem_0[4*6];
+static double l1_elem_1[4*6];
+static double l1_elem_2[4*6];
+
+/* 1 day: */
+#define DELTA_T 1.0
+
+static double l1_jd0[4] = {-1e100,-1e100,-1e100,-1e100};
+static double l1_elem[4*6];
+
+static int ugly_static_parameter_body = -1;
+static void CalcUglyStaticL1Elem(double t,double elem[6]) {
+  CalcL1Elem(t,ugly_static_parameter_body,elem);
+}
+
 void GetL1Coor(double jd,int body,double *xyz) {
-    /* dirty caching in static variables */
-  static double t_old[4] = {-1e99,-1e99,-1e99,-1e99};
-  static double elem[4*6];
-  const double t = jd - 2433282.5;
-  if (fabs(t-t_old[body]) > 0.5/24.0) {
-    t_old[body] = (floor(t*24.0)+0.5)/24.0;
-    CalcL1Elem(t_old[body],body,elem+(body*6));
+  GetL1OsculatingCoor(jd,jd,body,xyz);
+}
+
+void GetL1OsculatingCoor(double jd0,double jd,int body,double *xyz) {
+  if (jd0 != l1_jd0[body]) {
+    l1_jd0[body] = jd0;
+    const double t0 = jd0 - 2433282.5;
+    ugly_static_parameter_body = body;
+    CalcInterpolatedElements(t0,l1_elem+(body*6),6,
+                             &CalcUglyStaticL1Elem,DELTA_T,
+                             t_0+body,l1_elem_0+(body*6),
+                             t_1+body,l1_elem_1+(body*6),
+                             t_2+body,l1_elem_2+(body*6));
   }
   double x[3];
-  EllipticToRectangularA(l1_bodies[body].mu,elem+(body*6),t-t_old[body],x);
+  EllipticToRectangularA(l1_bodies[body].mu,l1_elem+(body*6),jd-jd0,x);
   xyz[0] = L1toVsop87[0]*x[0]+L1toVsop87[1]*x[1]+L1toVsop87[2]*x[2];
   xyz[1] = L1toVsop87[3]*x[0]+L1toVsop87[4]*x[1]+L1toVsop87[5]*x[2];
   xyz[2] = L1toVsop87[6]*x[0]+L1toVsop87[7]*x[1]+L1toVsop87[8]*x[2];

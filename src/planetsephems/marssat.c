@@ -49,6 +49,7 @@ in MarsSatV1-0.f are
 ****************************************************************/
 
 #include "marssat.h"
+#include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
 
 #include <math.h>
@@ -355,8 +356,7 @@ void CalcMarsSatElem(double t,int body,double elem[6]) {
       elem[2*j-1] += p->amplitude * sin(d);
     }
   }
-  elem[1] = fmod(elem[1] + (bp->l + bp->acc * t) * t, 2*M_PI);
-  if (elem[1] < 0.0) elem[1] += 2*M_PI;
+  elem[1] += (bp->l + bp->acc * t) * t;
 }
 
 
@@ -395,20 +395,44 @@ void GenerateMarsSatToVSOP87(double t,double mars_sat_to_vsop87[9]) {
   MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
 }
 
+static double t_0 = -1e100;
+static double t_1 = -1e100;
+static double t_2 = -1e100;
+static double marssat_elem_0[2*6];
+static double marssat_elem_1[2*6];
+static double marssat_elem_2[2*6];
+
+/* 1 day: */
+#define DELTA_T 1.0
+
+static double marssat_jd0 = -1e100;
+static double marssat_elem[2*6];
+
+static void CalcAllMarsSatElem(double t,double elem[12]) {
+  CalcMarsSatElem(t,0,elem+(0*6));
+  CalcMarsSatElem(t,1,elem+(1*6));
+}
+
+static double mars_sat_to_vsop87[9];
+
 void GetMarsSatCoor(double jd,int body,double *xyz) {
-    /* dirty caching in static variables */
-  static double t_old = -1e99;
-  static double elem[2*6];
-  static double mars_sat_to_vsop87[9];
-  const double t = jd - 2451545.0 + 6491.5;
-  if (fabs(t-t_old) > 0.5/48.0) {
-    t_old = (floor(t*48.0)+0.5)/48.0;
-    CalcMarsSatElem(t_old,0,elem+(0*6));
-    CalcMarsSatElem(t_old,1,elem+(1*6));
-    GenerateMarsSatToVSOP87(t_old,mars_sat_to_vsop87);
+  GetMarsSatOsculatingCoor(jd,jd,body,xyz);
+}
+
+void GetMarsSatOsculatingCoor(double jd0,double jd,int body,double *xyz) {
+  if (jd0 != marssat_jd0) {
+    marssat_jd0 = jd0;
+    const double t0 = jd0 - 2451545.0 + 6491.5;
+    CalcInterpolatedElements(t0,marssat_elem,12,
+                             &CalcAllMarsSatElem,DELTA_T,
+                             &t_0,marssat_elem_0,
+                             &t_1,marssat_elem_1,
+                             &t_2,marssat_elem_2);
+    GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87);
   }
   double x[3];
-  EllipticToRectangularA(mars_sat_bodies[body].mu,elem+(body*6),t-t_old,x);
+  EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),
+                         jd-jd0,x);
   xyz[0] = mars_sat_to_vsop87[0]*x[0]
          + mars_sat_to_vsop87[1]*x[1]
          + mars_sat_to_vsop87[2]*x[2];
