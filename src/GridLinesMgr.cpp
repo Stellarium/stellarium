@@ -347,6 +347,8 @@ void SkyGrid::draw(const Projector* prj) const
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
+	glColor4f(color[0],color[1],color[2], fader.getInterstate());
+
 	prj->setCurrentFrame(frameType);	// set 2D coordinate
 
 	
@@ -393,7 +395,6 @@ void SkyGrid::draw(const Projector* prj) const
 					size = iter->second.begin()->first - lon;
 				else
 					size = ii->first - lon;
-				glColor3f(0.7,0.3,0.3);
 				if (size<0) size+=360.;
 				prj->drawParallel(vv, size*M_PI/180., true, &font);
 				++ii;
@@ -471,7 +472,6 @@ void SkyGrid::draw(const Projector* prj) const
 					size = iter->second.begin()->first - lon;
 				else
 					size = ii->first - lon;
-				glColor3f(0.7,0.3,0.3);
 				if (size<0) size+=360.;
 				prj->drawMeridian(vv, size*M_PI/180., true, &font);
 				++ii;
