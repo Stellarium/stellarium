@@ -72,7 +72,7 @@ bool MappingStereographic::backward(Vec3d &v)
 {
   v[0] *= 0.5;
   v[1] *= 0.5;
-  const double lq = v[0]*v[0] + v[0]*v[0];
+  const double lq = v[0]*v[0] + v[1]*v[1];
   v[0] *= 2.0;
   v[1] *= 2.0;
   v[2] = - (lq - 1.0); // why minus ?
@@ -126,8 +126,8 @@ bool MappingCylinder::forward(Vec3d &v)
   const double win_length = v.length();
   const double alpha = std::atan2(v[0],-v[2]);
   const double delta = std::asin(v[1]/win_length);
-  v[0] *= alpha;
-  v[1] *= delta;
+  v[0] = alpha;
+  v[1] = delta;
   v[2] = win_length;
   return true;
 }
@@ -153,7 +153,7 @@ Mapping MappingPerspective::getMapping() const
 
 bool MappingPerspective::forward(Vec3d &v)
 {
-	const double d = -v[2];
+	const double d = v[2];
 	v[0] /= d;
 	v[1] /= d;
 	return true;
@@ -161,5 +161,6 @@ bool MappingPerspective::forward(Vec3d &v)
 
 bool MappingPerspective::backward(Vec3d &v)
 {
+	
 	return true;
 }

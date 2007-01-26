@@ -149,9 +149,9 @@ public:
     static void setFlagSciNames(bool f) {flagSciNames = f;}
     static bool getFlagSciNames(void) {return flagSciNames;}
 
-    int drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const;
+    int drawStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const;
     //! Draw the star rendered as GLpoint. This may be faster but it is not so nice
-    int drawPointStar(const Vec3d &XY,float rmag,const Vec3f &color) const;
+    int drawPointStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const;
 
     static wstring getCommonName(int hip);
     static wstring getSciName(int hip);

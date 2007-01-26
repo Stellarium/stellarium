@@ -68,9 +68,6 @@ bool MilkyWay::getFlagShow(void) const {return *fader;}
 double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	assert(tex);	// A texture must be loaded before calling this
-
-	// Set openGL drawings in equatorial coordinates
-	nav->switchToEarthEquatorial();
 	
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
 	Vec3f c = Vec3f(0.25f*fader->getInterstate(), 0.25f*fader->getInterstate(),
@@ -82,11 +79,11 @@ double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	glDisable(GL_BLEND);
 	tex->bind();
 
-	prj->sSphere(radius,1.0,20,20,
-		     nav->get_j2000_to_eye_mat()*
+	prj->setCustomFrame(nav->get_j2000_to_eye_mat()*
 		     Mat4d::xrotation(M_PI/180*23)*
 		     Mat4d::yrotation(M_PI/180*120)*
-		     Mat4d::zrotation(M_PI/180*7), 1);
+		     Mat4d::zrotation(M_PI/180*7));
+	prj->sSphere(radius,1.0,20,20,1);
 
 	glDisable(GL_CULL_FACE);
 	return 0.;

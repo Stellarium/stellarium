@@ -145,7 +145,7 @@ double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return 0.;
 	
-	prj->set_orthographic_projection();
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -159,7 +159,6 @@ double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye
 
 	glEnable(GL_TEXTURE_2D);
 	
-	prj->reset_perspective_projection();
 	return 0.0;  // TODO, actually calculate movement on screen
 
 }

@@ -622,15 +622,12 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
 	if (nav->getViewingMode()==Navigator::VIEW_HORIZON)
-	{
-		proj->unproject_local(x2,proj->getViewportHeight()-y2, tempvec2);
-		proj->unproject_local(x1,proj->getViewportHeight()-y1, tempvec1);
-	}
+		proj->setCurrentFrame(Projector::FRAME_LOCAL);
 	else
-	{
-		proj->unproject_earth_equ(x2,proj->getViewportHeight()-y2, tempvec2);
-		proj->unproject_earth_equ(x1,proj->getViewportHeight()-y1, tempvec1);
-	}
+		proj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
+		
+	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
+	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
 	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
 	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
 	panView(az2-az1, alt1-alt2);

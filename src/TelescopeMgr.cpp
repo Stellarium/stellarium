@@ -70,7 +70,7 @@ TelescopeMgr::~TelescopeMgr(void) {
 double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
-  prj->set_orthographic_projection();	// set 2D coordinate
+  prj->setCurrentFrame(Projector::FRAME_J2000);
   telescope_texture->bind();
   glBlendFunc(GL_ONE,GL_ONE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -78,7 +78,7 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
        it!=telescope_map.end();it++) {
     if (it->second->isConnected() && it->second->hasKnownPosition()) {
       Vec3d XY;
-      if (prj->project_j2000_check(it->second->getObsJ2000Pos(0),XY)) {
+      if (prj->projectCheck(it->second->getObsJ2000Pos(0),XY)) {
         if (telescope_fader.getInterstate() >= 0) {
           glColor4f(circle_color[0],circle_color[1],circle_color[2],
                     telescope_fader.getInterstate());
@@ -104,7 +104,7 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
           glColor4f(label_color[0],label_color[1],label_color[2],
                     name_fader.getInterstate());
           if (prj->getFlagGravityLabels()) {
-            prj->print_gravity180(telescope_font, XY[0],XY[1],
+            prj->drawTextGravity180(telescope_font, XY[0],XY[1],
                                   it->second->getNameI18n(), 1, 6, -4);
           } else {
             telescope_font->print(XY[0]+6,XY[1]-4,it->second->getNameI18n());
@@ -114,7 +114,9 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
       }
     }
   }
-  prj->reset_perspective_projection();
+  
+  drawPointer(prj, nav);
+  
   return 0.;
 }
 
@@ -224,28 +226,18 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_TELESCOPE)
 	{
 		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d pos=obj.getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project_earth_equ(pos, screenpos)) return;
-	    prj->set_orthographic_projection();
+		if (!prj->project(pos, screenpos)) return;
 	
 		glColor3fv(obj.getInfoColor());
-		float radius = 25.f;
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef(StelApp::getInstance().getTotalRunTime()*40.,0.,0.,1.);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
-        glEnd ();
-	
-	    prj->reset_perspective_projection();
+        
+        prj->drawSprite2dMode(screenpos[0], screenpos[1], 50., StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 

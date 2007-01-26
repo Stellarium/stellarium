@@ -382,7 +382,6 @@ void StelApp::update(int delta_time)
 //! Main drawinf function called at each frame
 double StelApp::draw(int delta_time)
 {
-
     // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	// (because ui can draw outside the main viewport)
     glDisable(GL_BLEND);

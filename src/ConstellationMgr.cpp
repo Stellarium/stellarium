@@ -291,12 +291,11 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 
 double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproducer *)
 {
-	prj->set_orthographic_projection();
+	prj->setCurrentFrame(Projector::FRAME_J2000);
 	draw_lines(prj);
 	draw_names(prj);
 	draw_art(prj, nav);
 	drawBoundaries(prj);
-	prj->reset_perspective_projection();
 	return 0.;
 }
 
@@ -344,7 +343,7 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (prj->project_j2000_check((*iter)->XYZname, (*iter)->XYname))
+		if (prj->projectCheck((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->draw_name(asterFont, prj);
 	}
 }

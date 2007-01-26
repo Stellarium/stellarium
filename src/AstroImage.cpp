@@ -28,16 +28,18 @@ void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	glColor4f(1.0,1.0,1.0,1.0);
 
 	tex->bind();
-
+	
+	prj->setCurrentFrame(Projector::FRAME_J2000);
+	
 	Vec3d win;
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2dv(tex->texCoordinates[0]);
-		prj->project_j2000(poly.getVertex(2),win); glVertex3dv(win);
+		prj->project(poly.getVertex(2),win); glVertex3dv(win);
 		glTexCoord2dv(tex->texCoordinates[1]);
-		prj->project_j2000(poly.getVertex(3),win); glVertex3dv(win);
+		prj->project(poly.getVertex(3),win); glVertex3dv(win);
         glTexCoord2dv(tex->texCoordinates[2]);
-		prj->project_j2000(poly.getVertex(1),win); glVertex3dv(win);
+		prj->project(poly.getVertex(1),win); glVertex3dv(win);
         glTexCoord2dv(tex->texCoordinates[3]);
-		prj->project_j2000(poly.getVertex(0),win); glVertex3dv(win);
+		prj->project(poly.getVertex(0),win); glVertex3dv(win);
     glEnd();
 }

@@ -566,7 +566,9 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 	float screen_sz = getOnScreenSize(prj, nav);
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
+	
+	prj->setCustomFrame(mat);
+	if (prj->project(Vec3f(0,0,0), screenPos) &&
 	        screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screen_sz &&
 	        screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->getViewportWidth() + screen_sz)
 	{
@@ -584,6 +586,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 		{
 			if (ang_dist>1.f) ang_dist = 1.f;
 			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
+			
 			draw_hints(nav, prj);
 		}
 
@@ -636,13 +639,12 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 void glCircle(const Vec3d& pos, float radius)
 {
 	float angle, facets;
-	
-	glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINE_LOOP);
 
 	if (radius < 2) facets = 6;
 	else facets = (int)(radius*3);
 	
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINE_LOOP);
 	for (int i = 0; i < facets; i++)
 	{
 		angle = 2.0f*M_PI*i/facets;
@@ -654,12 +656,7 @@ void glCircle(const Vec3d& pos, float radius)
 
 void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 {
-
-	//	printf("Out level %f\n", hint_fader.getInterstate());
-
 	if(!hint_fader.getInterstate()) return;
-
-	prj->set_orthographic_projection();    // 2D coordinate
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -671,7 +668,7 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 
 	prj->getFlagGravityLabels() ? 
-		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], getSkyLabel(nav), 1, tmp, tmp) :
+		prj->drawTextGravity180(planet_name_font, screenPos[0],screenPos[1], getSkyLabel(nav), 1, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, getSkyLabel(nav));
 
 	// hint disapears smoothly on close view
@@ -681,7 +678,6 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 
 	// Draw the 2D small circle
 	glCircle(screenPos, 8);
-	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
 void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz)
@@ -703,12 +699,12 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 	}
 	tex_map->bind();
 
+	prj->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
 
     // Rotate and add an extra quarter rotation so that the planet texture map
     // fits to the observers position. No idea why this is necessary,
     // perhaps some openGl strangeness, or confusing sin/cos.
-    prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-                 mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+    prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
@@ -778,22 +774,13 @@ if (screen_r<1.f) screen_r=1.f;
 		rmag = screen_r;
 	}
 
-	prj->set_orthographic_projection();    	// 2D coordinate
-
 	tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	glTranslatef(screenPos[0], screenPos[1], 0.f);
-	glBegin(GL_QUADS);
-	glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-	glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-	glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-	glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-	glEnd();
-
-	prj->reset_perspective_projection();		// Restore the other coordinate
+	
+	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
 }
 
 void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
@@ -834,22 +821,13 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 		cmag*=rmag/screen_r;
 		rmag = screen_r;
 	}
-	prj->set_orthographic_projection();    	// 2D coordinate
 
 	tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	glTranslatef(screenPos[0], screenPos[1], 0.f);
-	glBegin(GL_QUADS);
-	glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-	glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-	glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-	glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-	glEnd();
-
-	prj->reset_perspective_projection();		// Restore the other coordinate
+	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
 }
 
 void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
@@ -868,22 +846,12 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 		rmag = screen_r*2;
 	}
 
-	prj->set_orthographic_projection();    	// 2D coordinate
-
 	tex_big_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	glTranslatef(screenPos[0], screenPos[1], 0.f);
-	glBegin(GL_QUADS);
-	glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-	glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-	glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-	glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-	glEnd();
-
-	prj->reset_perspective_projection();		// Restore the other coordinate
+	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
 }
 
 Ring::Ring(double radius_min,double radius_max,const string &texname)
@@ -922,35 +890,19 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 	const double h = mat.r[ 8]*mat.r[12]
 	               + mat.r[ 9]*mat.r[13]
 	               + mat.r[10]*mat.r[14];
-	prj->sRing(radius_min,radius_max,(h<0.0)?slices:-slices,stacks, mat, 0);
+	prj->setCustomFrame(mat);
+	prj->sRing(radius_min,radius_max,(h<0.0)?slices:-slices,stacks, 0);
 	glDisable(GL_CULL_FACE);
-
-	/* old way
-	glPushMatrix();
-	glLoadMatrixd(mat);
-	double r=radius;
-	glBegin(GL_QUADS);
-	glTexCoord2f(0,0); prj->sVertex3( -r,-r, 0., mat);	// Bottom left
-	glTexCoord2f(1,0); prj->sVertex3( r, -r, 0., mat);	// Bottom right
-	glTexCoord2f(1,1); prj->sVertex3(r, r, 0., mat);	// Top right
-	glTexCoord2f(0,1); prj->sVertex3(-r,r, 0., mat);	// Top left
-	glEnd ();
-	glPopMatrix();
-	*/
 }
 
 
 // draw orbital path of Planet
 void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 {
-
 	if(!orbit_fader.getInterstate()) return;
-
-	Vec3d onscreen;
-
 	if(!re.sidereal_period) return;
 
-	prj->set_orthographic_projection();    // 2D coordinate
+	prj->setCurrentFrame(Projector::FRAME_HELIO);    // 2D coordinate
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -963,9 +915,9 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 
 	int on=0;
 	int d;
+	Vec3d onscreen;
 	for( int n=0; n<=ORBIT_SEGMENTS; n++)
 	{
-
 		if( n==ORBIT_SEGMENTS )
 		{
 			d = 0;  // connect loop
@@ -980,8 +932,7 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 		// on it's orbit all the time (since segmented rather than smooth curve)
 		if( n == ORBIT_SEGMENTS/2 )
 		{
-
-			if(prj->project_helio(get_heliocentric_ecliptic_pos(), onscreen))
+			if(prj->project(get_heliocentric_ecliptic_pos(), onscreen))
 			{
 				if(!on) glBegin(GL_LINE_STRIP);
 				glVertex3d(onscreen[0], onscreen[1], 0);
@@ -995,8 +946,7 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 		}
 		else
 		{
-
-			if(prj->project_helio(orbit[d],onscreen))
+			if(prj->project(orbit[d],onscreen))
 			{
 				if(!on) glBegin(GL_LINE_STRIP);
 				glVertex3d(onscreen[0], onscreen[1], 0);
@@ -1012,9 +962,6 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 
 	if(on) glEnd();
 
-
-	prj->reset_perspective_projection();		// Restore the other coordinate
-
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -1029,9 +976,7 @@ void Planet::draw_trail(const Navigator * nav, const Projector* prj)
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
-	//  if(!re.sidereal_period) return;   // limits to planets
-
-	prj->set_orthographic_projection();    // 2D coordinate
+	prj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -1054,27 +999,24 @@ void Planet::draw_trail(const Navigator * nav, const Projector* prj)
 		{
 
 			nextiter--;
-			if( prj->project_earth_equ_line_check( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) )
+			if( prj->projectLineCheck( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) )
 			{
 				glBegin(GL_LINE_STRIP);
-				glVertex3d(onscreen1[0], onscreen1[1], 0);
-				glVertex3d(onscreen2[0], onscreen2[1], 0);
+				glVertex2d(onscreen1[0], onscreen1[1]);
+				glVertex2d(onscreen2[0], onscreen2[1]);
 				glEnd();
 			}
 		}
 	}
 
 	// draw final segment to finish at current Planet position
-	if( !first_point && prj->project_earth_equ_line_check( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) )
+	if( !first_point && prj->projectLineCheck( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) )
 	{
 		glBegin(GL_LINE_STRIP);
-		glVertex3d(onscreen1[0], onscreen1[1], 0);
-		glVertex3d(onscreen2[0], onscreen2[1], 0);
+		glVertex2d(onscreen1[0], onscreen1[1]);
+		glVertex2d(onscreen2[0], onscreen2[1]);
 		glEnd();
 	}
-
-
-	prj->reset_perspective_projection();		// Restore the other coordinate
 
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);

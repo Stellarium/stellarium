@@ -90,7 +90,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	Vec3f pos;
 	Vec3d xy;
 
-	prj->set_orthographic_projection();
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
 	float shift = font.getStrLen(sNorth)/2;
 
@@ -98,40 +98,39 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[0], -shift, -shift);
+		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[0], -shift, -shift);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[1], -shift, -shift);
+		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[1], -shift, -shift);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[2], -shift, -shift);
+		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[2], -shift, -shift);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[3], -shift, -shift);
+		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[3], -shift, -shift);
 	}
 	else
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[0]);
+		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[0]);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[1]);
+		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[1]);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.f);
-		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[2]);
+		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[2]);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.f);
-		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[3]);
+		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[3]);
 	}
 
-	prj->reset_perspective_projection();
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
