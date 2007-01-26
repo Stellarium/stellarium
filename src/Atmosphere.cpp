@@ -140,12 +140,14 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	double sum_lum = 0.;
 	unsigned int nb_lum = 0;
 
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+
 	// Compute the sky color for every point above the ground
 	for (int x=0; x<=sky_resolution; ++x)
 	{
 		for(int y=0; y<=sky_resolution; ++y)
 		{
-			prj->unproject_local((double)viewport_left+x*stepX, (double)viewport_bottom+y*stepY,point);
+			prj->unProject((double)viewport_left+x*stepX, (double)viewport_bottom+y*stepY,point);
 //			point.normalize();
 			assert(fabs(point.lengthSquared()-1.0) < 1e-10);
 
@@ -200,7 +202,7 @@ void Atmosphere::draw(Projector* prj)
 
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
-		prj->set_orthographic_projection();	// set 2D coordinate
+		prj->set2dDrawMode();	// set 2D coordinate
 		for (int y2=0; y2<sky_resolution; ++y2)
 		{
 			glBegin(GL_QUAD_STRIP);
@@ -213,6 +215,6 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
-		prj->reset_perspective_projection();
+		prj->unset2dDrawMode();
 	}
 }

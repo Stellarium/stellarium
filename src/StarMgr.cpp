@@ -364,7 +364,7 @@ public:
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObject> &result) = 0;
   virtual void draw(int index,bool is_inside,bool draw_point,
-                    const float *rmag_table,const Projector *prj,
+                    const float *rmag_table, Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
                     SFont *starFont,
                     STexture* starTexture) const = 0;
@@ -409,7 +409,7 @@ private:
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                     vector<StelObject> &result);
   void draw(int index,bool is_inside,bool draw_point,
-            const float *rmag_table,const Projector *prj,
+            const float *rmag_table, Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
             SFont *starFont,STexture* starTexture) const;
 };
@@ -1163,25 +1163,18 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
 	{
 		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d pos=obj.getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project_earth_equ(pos, screenpos)) return;
+		if (!prj->project(pos, screenpos)) return;
 	
 		glColor3fv(obj.getInfoColor());
-		float radius = 13.f;
+		float diameter = 26.f;
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef(StelApp::getInstance().getTotalRunTime()*40.,0.,0.,1.);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
-        glEnd ();
+        prj->drawSprite2dMode(screenpos[0], screenpos[1], diameter, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -1348,7 +1341,7 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
 
 
 
-int StarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
+int StarMgr::drawStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const {
 //cout << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
   float cmag = 1.f;
 
@@ -1381,19 +1374,14 @@ int StarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
 
   glColor3fv(color*cmag);
 
-  glBlendFunc(GL_ONE, GL_ONE);
+  //glBlendFunc(GL_ONE, GL_ONE);
 
-  glBegin(GL_QUADS );
-    glTexCoord2i(0,0);glVertex2f(XY[0]-rmag,XY[1]-rmag);    // Bottom left
-    glTexCoord2i(1,0);glVertex2f(XY[0]+rmag,XY[1]-rmag);    // Bottom right
-    glTexCoord2i(1,1);glVertex2f(XY[0]+rmag,XY[1]+rmag);    // Top right
-    glTexCoord2i(0,1);glVertex2f(XY[0]-rmag,XY[1]+rmag);    // Top left
-  glEnd();
+	prj->drawSprite2dMode(XY[0], XY[1], 2*rmag);
   return 0;
 }
 
 
-int StarMgr::drawPointStar(const Vec3d &XY,float rmag,
+int StarMgr::drawPointStar(const Projector *prj, const Vec3d &XY,float rmag,
                               const Vec3f &color) const {
   if (rmag < 0.05f*star_scale) return -1;
   float cmag = rmag * rmag / 1.44f;
@@ -1417,7 +1405,7 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   bool draw_point,
                                   const float *rmag_table,
-                                  const Projector *prj,
+                                  Projector *prj,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
                                   SFont *starFont,
@@ -1431,14 +1419,14 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
   const Star *const end = z->getStars() + z->size;
   const double movement_factor = (M_PI/180)*(0.0001/3600)
                            * ((current_JDay-d2000)/365.25)
-                           / star_position_scale;
+                           / star_position_scale;            
   for (const Star *s=z->getStars();s<end;s++) {
     if (is_inside
-        ? prj->project_j2000(s->getJ2000Pos(z,movement_factor),xy)
-        : prj->project_j2000_check(s->getJ2000Pos(z,movement_factor),xy)) {
-      if (0 > (draw_point ? hip_star_mgr.drawPointStar(xy,rmag_table[s->mag],
+        ? prj->project(s->getJ2000Pos(z,movement_factor),xy)
+        : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy)) {
+      if (0 > (draw_point ? hip_star_mgr.drawPointStar(prj, xy,rmag_table[s->mag],
                                                        color_table[s->b_v])
-                          : hip_star_mgr.drawStar(xy,rmag_table[s->mag],
+                          : hip_star_mgr.drawStar(prj, xy,rmag_table[s->mag],
                                                   color_table[s->b_v]))) {
         break;
       }
@@ -1453,7 +1441,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
             glEnable(GL_TEXTURE_2D);
           }
           if (prj->getFlagGravityLabels()) {
-            prj->print_gravity180(starFont,xy[0],xy[1],
+            prj->drawTextGravity180(starFont,xy[0],xy[1],
                                   starname, 1, 6, -4);
           } else {
             starFont->print(xy[0]+6,xy[1]-4, starname);
@@ -1531,7 +1519,7 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
     //    float maxMag = limiting_mag-1 + 60.f/prj->getFov();
 //    const float maxMag = limitingMag-1 + 60.f/max_fov;
 
-    prj->set_orthographic_projection();    // set 2D coordinate
+    prj->setCurrentFrame(Projector::FRAME_J2000);
 
     // Bind the star texture
     starTexture->bind();
@@ -1594,8 +1582,6 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
 //if ((count&63)==0) cout << endl;
 
 	drawPointer(prj, nav);
-
-    prj->reset_perspective_projection();
 
     return 0.;
 }

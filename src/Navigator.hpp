@@ -94,15 +94,6 @@ public:
     // Return the observer heliocentric position
 	Vec3d getObserverHelioPos(void) const;
 
-	// Place openGL in earth equatorial coordinates
-	void switchToEarthEquatorial(void) const { glLoadMatrixd(mat_earth_equ_to_eye); }
-
-	// Place openGL in heliocentric ecliptical coordinates
-	void switchToHeliocentric(void) const { glLoadMatrixd(mat_helio_to_eye); }
-
-	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
-	void switchToLocal(void) const { glLoadMatrixd(mat_local_to_eye); }
-
 	// Transform vector from local coordinate to equatorial
 	Vec3d local_to_earth_equ(const Vec3d& v) const { return mat_local_to_earth_equ*v; }
 

@@ -111,16 +111,15 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	nbZones = nebGrid.Intersect(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = nebGrid.getResult();
 	
-    prj->set_orthographic_projection();	// set 2D coordinate
-
+    prj->setCurrentFrame(Projector::FRAME_J2000);
+	
 	// Print all the stars of all the selected zones
 	static vector<Nebula *>::iterator end;
 	static vector<Nebula *>::iterator iter;
 	Nebula* n;
 
 	  // speed up the computation of n->getOnScreenSize(prj, nav)>5:
-	const float size_limit = 5.0 * (M_PI/180.0)
-	                             * (prj->getFov()/prj->getViewportHeight());
+	const float size_limit = 5.0 * (M_PI/180.0) * (prj->getFov()/prj->getViewportHeight());
 
 	for(int i=0;i<nbZones;++i)
 	{
@@ -132,12 +131,9 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 			// improve performance by skipping if too small to see
 			// TODO: skip if too faint to see
-			if (n->angular_size>size_limit ||
-			    (hintsFader.getInterstate()>0.0001 &&
-			     n->mag <= getMaxMagHints()))
+			if (n->angular_size>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
 			{
-
-				if ( !prj->project_j2000_check(n->XYZ,n->XY) ) continue;
+				if ( !prj->projectCheck(n->XYZ,n->XY) ) continue;
 	
 				if (n->angular_size>size_limit)
 				{
@@ -156,8 +152,6 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	}
 	
 	drawPointer(prj, nav);
-	
-	prj->reset_perspective_projection();
 
 	return 0;
 }
@@ -167,57 +161,25 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_NEBULA)
 	{
 		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d pos=obj.getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		
 		// Compute 2D pos and return if outside screen
-		if (!prj->project_earth_equ(pos, screenpos)) return;
+		if (!prj->project(pos, screenpos)) return;
 		glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 		
 		glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
 
 		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
-        glTranslatef(-size/2, -size/2,0.0f);
-        glRotatef(90,0,0,1);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0, size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
+		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
+		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
+		prj->drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
+		prj->drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
 	}
 }
 

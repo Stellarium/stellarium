@@ -218,7 +218,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  // at x or y = 1, image is centered on projection edge
 	  // centered in viewport at 0,0
 
-	  prj->set_orthographic_projection();	// set 2D coordinate
+	  prj->set2dDrawMode();	// set 2D coordinate
 
 	  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
 	  glRotatef(image_rotation,0,0,-1);
@@ -234,18 +234,14 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 		  glVertex3f(-w,h,0); }
 	  glEnd();
 	  
-	  prj->reset_perspective_projection();
+	  prj->unset2dDrawMode();
 
   } else if(image_pos_type == POS_HORIZONTAL ) {
 
 	  //	  cout << "drawing image horizontal " << image_name << endl;
 
 	  // alt az coords
-	  prj->reset_perspective_projection();
-
-	  nav->switchToLocal();
-	  Mat4d mat = nav->get_local_to_eye_mat();
-
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 	  Vec3d gridpt;
 	  
 	  //	  printf("%f %f\n", image_xpos, image_ypos);
@@ -284,7 +280,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 						  imagev;
 				  }
 				  glTexCoord2f((i+k)/(float)grid_size,j/(float)grid_size);
-				  prj->sVertex3( gridpt[0], gridpt[1], gridpt[2], mat);
+				  prj->drawVertex3v(gridpt);
 			  }
 		  }
 
@@ -294,10 +290,17 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   } else if(image_pos_type == POS_J2000 || image_pos_type == POS_EQUATORIAL) {
 
+	if(image_pos_type == POS_J2000)
+	{
+		prj->setCurrentFrame(Projector::FRAME_J2000);
+	}
+	else if (image_pos_type == POS_EQUATORIAL)
+	{
+		prj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
+	}
+	
 	  // equatorial is in current equatorial coordinates
 	  // j2000 is in J2000 epoch equatorial coordinates (precessed)
-
-	  prj->set_orthographic_projection();    // 2D coordinate
 
 	  Vec3d gridpt, onscreen;
 
@@ -335,8 +338,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 						  imagev;
 				  }
 
-				  if((image_pos_type == POS_J2000 && prj->project_j2000(gridpt, onscreen)) ||
-					 (image_pos_type == POS_EQUATORIAL && prj->project_earth_equ(gridpt, onscreen))) {
+				  if(prj->project(gridpt, onscreen)) {
 
 					  glTexCoord2f((i+k)/(float)grid_size,j/(float)grid_size);
 			  
@@ -348,8 +350,6 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
 		  glEnd();  
 	  }
-	
-	  prj->reset_perspective_projection();
 	  
 	  
   }

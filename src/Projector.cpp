@@ -18,46 +18,11 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include <cstdio>
 #include <cassert>
 #include "Projector.hpp"
-#include "OrthographicProjector.hpp"
-#include "EqualAreaProjector.hpp"
-#include "FisheyeProjector.hpp"
-#include "StereographicProjector.hpp"
-#include "CylinderProjector.hpp"
-#include "SphericMirrorProjector.hpp"
 #include "InitParser.hpp"
-
-const char *Projector::typeToString(PROJECTOR_TYPE type) {
-  switch (type) {
-    case PERSPECTIVE_PROJECTOR:    return "perspective";
-    case ORTHOGRAPHIC_PROJECTOR:   return "orthographic";
-    case EQUAL_AREA_PROJECTOR:     return "equal_area";
-    case FISHEYE_PROJECTOR:        return "fisheye";
-    case STEREOGRAPHIC_PROJECTOR:  return "stereographic";
-    case CYLINDER_PROJECTOR:       return "cylinder";
-    case SPHERIC_MIRROR_PROJECTOR: return "spheric_mirror";
-  }
-  cerr << "fatal: Projector::typeToString(" << type << ") failed" << endl;
-  assert(0);
-    // just shutup the compiler, this point will never be reached
-  return 0;
-}
-
-Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
-  if (s=="perspective")    return PERSPECTIVE_PROJECTOR;
-  if (s=="orthographic")   return ORTHOGRAPHIC_PROJECTOR;
-  if (s=="equal_area")     return EQUAL_AREA_PROJECTOR;
-  if (s=="fisheye")        return FISHEYE_PROJECTOR;
-  if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
-  if (s=="cylinder")       return CYLINDER_PROJECTOR;
-  if (s=="spheric_mirror") return SPHERIC_MIRROR_PROJECTOR;
-  cerr << "fatal: Projector::stringToType(" << s << ") failed" << endl;
-  assert(0);
-    // just shutup the compiler, this point will never be reached
-  return PERSPECTIVE_PROJECTOR;
-}
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type) {
   if(type == DISK ) return "disk";
@@ -70,46 +35,11 @@ Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const string &s) {
 }
 
 
-Projector *Projector::create(PROJECTOR_TYPE type,const Vec4i& viewport,double _fov)
-{
-  Projector *rval = 0;
-  switch (type) {
-    case PERSPECTIVE_PROJECTOR:
-      rval = new Projector(viewport,_fov);
-      break;
-    case ORTHOGRAPHIC_PROJECTOR:
-      rval = new OrthographicProjector(viewport,_fov);
-      break;
-    case EQUAL_AREA_PROJECTOR:
-      rval = new EqualAreaProjector(viewport,_fov);
-      break;
-    case FISHEYE_PROJECTOR:
-      rval = new FisheyeProjector(viewport,_fov);
-      break;
-    case STEREOGRAPHIC_PROJECTOR:
-      rval = new StereographicProjector(viewport,_fov);
-      break;
-    case CYLINDER_PROJECTOR:
-      rval = new CylinderProjector(viewport,_fov);
-      break;
-    case SPHERIC_MIRROR_PROJECTOR:
-      rval = new SphericMirrorProjector(viewport,_fov);
-      break;
-  }
-  if (rval == 0) {
-    cerr << "fatal: Projector::create(" << type << ") failed" << endl;
-    exit(1);
-  }
-    // just shutup the compiler, this point will never be reached
-  return rval;
-}
-
 void Projector::init(const InitParser& conf)
 {
 	// Video Section
-	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
-	setViewportPosX(conf.get_int    ("video:horizontal_offset"));
-	setViewportPosY(conf.get_int    ("video:vertical_offset"));
+	setViewport(conf.get_int("video:horizontal_offset"), conf.get_int("video:vertical_offset"), 
+		conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	
 	string tmpstr = conf.get_str("projection:viewport");
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
@@ -137,7 +67,11 @@ void Projector::init(const InitParser& conf)
 	registerProjectionMapping(MappingStereographic());
 	registerProjectionMapping(MappingFisheye());
 	registerProjectionMapping(MappingCylinder());
-	registerProjectionMapping(MappingPerspective());
+	
+	tmpstr = conf.get_str("projection:type");
+	setCurrentProjection(tmpstr);
+	
+	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 
@@ -157,20 +91,6 @@ Projector::~Projector()
 {
 }
 
-// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
-// The function is a reimplementation of gluPerspective
-void Projector::init_project_matrix(void)
-{
-	double f = 1./tan(fov*M_PI/360.);
-	double ratio = (double)getViewportHeight()/getViewportWidth();
-	mat_projection.set(	flip_horz*f*ratio, 0., 0., 0.,
-							0., flip_vert*f, 0., 0.,
-							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection);
-    glMatrixMode(GL_MODELVIEW);
-}
 
 void Projector::setViewport(int x, int y, int w, int h)
 {
@@ -184,13 +104,22 @@ void Projector::setViewport(int x, int y, int w, int h)
 	init_project_matrix();
 }
 
+std::vector<Vec2d> Projector::getViewportVertices() const
+{
+	std::vector<Vec2d> result;
+	result.push_back(Vec2d(vec_viewport[0], vec_viewport[1]));
+	result.push_back(Vec2d(vec_viewport[0]+vec_viewport[2], vec_viewport[1]));
+	result.push_back(Vec2d(vec_viewport[0]+vec_viewport[2], vec_viewport[1]+vec_viewport[3]));
+	result.push_back(Vec2d(vec_viewport[0], vec_viewport[1]+vec_viewport[3]));
+	return result;
+}
+
 void Projector::setFov(double f)
 {
 	fov = f;
 	if (f>max_fov) fov = max_fov;
 	if (f<min_fov) fov = min_fov;
 	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
-	init_project_matrix();
 }
 
 
@@ -203,7 +132,6 @@ void Projector::set_clipping_planes(double znear, double zfar)
 {
 	zNear = znear;
 	zFar = zfar;
-	init_project_matrix();
 }
 
 // Set the standard modelview matrices used for projection
@@ -217,29 +145,33 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	mat_helio_to_eye = _mat_helio_to_eye;
 	mat_local_to_eye = _mat_local_to_eye;
 
-	inv_mat_earth_equ_to_eye = (mat_projection*mat_earth_equ_to_eye).inverse();
-	inv_mat_j2000_to_eye = (mat_projection*mat_j2000_to_eye).inverse();
-	inv_mat_helio_to_eye = (mat_projection*mat_helio_to_eye).inverse();
-	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();	
+	// TODO: Find out what is the reason of this matrix
+	static const Mat4d mat(1., 0., 0., 0.,
+							0., 1., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
+
+	inv_mat_earth_equ_to_eye = (mat*mat_earth_equ_to_eye).inverse();
+	inv_mat_j2000_to_eye = (mat*mat_j2000_to_eye).inverse();
+	inv_mat_helio_to_eye = (mat*mat_helio_to_eye).inverse();
+	inv_mat_local_to_eye = (mat*mat_local_to_eye).inverse();	
 }
 
 
-// Set the drawing mode in 2D. Use reset_perspective_projection() to reset
-// previous projection mode
-void Projector::set_orthographic_projection(void) const
+// Set the drawing mode in 2D. Use unset2dDrawMode() to reset previous projection mode
+void Projector::set2dDrawMode(void) const
 {
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
     glPushMatrix();						// store previous matrix
     glLoadIdentity();
-    gluOrtho2D(	vec_viewport[0], vec_viewport[0] + vec_viewport[2],
-				vec_viewport[1], vec_viewport[1] + vec_viewport[3]);	// set a 2D orthographic projection
+    glOrtho(vec_viewport[0], vec_viewport[0] + vec_viewport[2], vec_viewport[1], vec_viewport[1] + vec_viewport[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
     glPushMatrix();
     glLoadIdentity();
 }
 
-// Reset the previous projection mode after a call to set_orthographic_projection()
-void Projector::reset_perspective_projection(void) const
+// Reset the previous projection mode after a call to set2dDrawMode()
+void Projector::unset2dDrawMode(void) const
 {
     glMatrixMode(GL_PROJECTION);		// Restore previous matrix
     glPopMatrix();
@@ -251,32 +183,63 @@ void Projector::reset_perspective_projection(void) const
 /*************************************************************************
  Set the frame in which we want to draw from now on
 *************************************************************************/
-void Projector::setCurrentFrame(const std::string& frameName)
+void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 {
-	if (frameName=="local")
+	switch (frameType)
 	{
-		modelViewMatrix = mat_local_to_eye;
-		inverseModelViewMatrix = inv_mat_local_to_eye;
+		case FRAME_LOCAL:
+			setCustomFrame(mat_local_to_eye);
+			break;
+		case FRAME_HELIO:
+			setCustomFrame(mat_helio_to_eye);
+			break;
+		case FRAME_EARTH_EQU:
+			setCustomFrame(mat_earth_equ_to_eye);
+			break;
+		case FRAME_J2000:
+			setCustomFrame(mat_j2000_to_eye);
+			break;
+		default:
+			cerr << "Unknown reference frame type: " << frameType << "." << endl;
 	}
-	else if (frameName=="helio")
-	{
-		modelViewMatrix = mat_helio_to_eye;
-		inverseModelViewMatrix = inv_mat_helio_to_eye;
-	}
-	else if (frameName=="earthequ")
-	{
-		modelViewMatrix = mat_earth_equ_to_eye;
-		inverseModelViewMatrix = inv_mat_earth_equ_to_eye;
-	}
-	else if (frameName=="j2000")
-	{
-		modelViewMatrix = mat_j2000_to_eye;
-		inverseModelViewMatrix = inv_mat_j2000_to_eye;
-	}
-	else
-	{
-		cerr << "Unknown reference frame: " << frameName << "." << endl;
-	}
+}
+
+/*************************************************************************
+ Set a custom model view matrix, it is valid until the next call to 
+ setCurrentFrame or setCustomFrame
+*************************************************************************/
+void Projector::setCustomFrame(const Mat4d& m) const
+{
+	static const Mat4d mat(1., 0., 0., 0.,
+		0., 1., 0., 0.,
+		0., 0., -1, 0.,
+		0., 0., 0., 1.);
+
+	modelViewMatrix = m;
+	inverseModelViewMatrix = (mat*m).inverse();
+}
+	
+// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
+// The function is a reimplementation of gluPerspective
+void Projector::init_project_matrix(void)
+{
+//	double f = 1./tan(fov*M_PI/360.);
+//	double ratio = (double)getViewportHeight()/getViewportWidth();
+//	mat_projection.set(	flip_horz*f*ratio, 0., 0., 0.,
+//							0., flip_vert*f, 0., 0.,
+//							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+//							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadMatrixd(mat_projection);
+//  glMatrixMode(GL_MODELVIEW);
+
+	// Set the real openGL projection and modelview matrix to orthographic projection
+	// thus we never need to change to 2dMode from now on before drawing
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(vec_viewport[0], vec_viewport[0] + vec_viewport[2], vec_viewport[1], vec_viewport[1] + vec_viewport[3], -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 /*************************************************************************
@@ -284,17 +247,26 @@ void Projector::setCurrentFrame(const std::string& frameName)
 *************************************************************************/
 void Projector::setCurrentProjection(const std::string& projectionName)
 {
+	if (currentProjectionType==projectionName)
+		return;
+
 	std::map<std::string, Mapping>::const_iterator i = projectionMapping.find(projectionName);
 	if (i!=projectionMapping.end())
 	{
+		currentProjectionType = projectionName;
+		
+		// Redefine the projection functions
 		projectForward = i->second.mapForward;
-		projectForward = i->second.mapForward;
+		projectBackward = i->second.mapBackward;
+		min_fov = i->second.minFov;
+		max_fov = i->second.maxFov;
+		setFov(fov);
+		init_project_matrix();
 	}
 	else
 	{
 		cerr << "Unknown projection type: " << projectionName << "." << endl;
 	}
-	//sVertex3v = boost::callback<bool, Vec3d&>();
 }
 
 /*************************************************************************
@@ -302,30 +274,24 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 *************************************************************************/
 bool Projector::project(const Vec3d &v, Vec3d &win) const
 {
-	// modelViewMapper.forward(win);
-	// Hardcoded for linear transfo = normal openGL
 	win=v;
 	win.transfo4d(modelViewMatrix);
-
 	if (!projectForward(win))
 		return false;
-    
 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
 	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
 	win[2] = (win[2] - zNear) / (zFar-zNear);
-	// win[2] = (win[2] - zNear) / (zFar-zNear);
 	return true;
 }
 
 /*************************************************************************
  Project the vector v from the viewport frame into the current frame 
 *************************************************************************/
-bool Projector::unProject(const Vec3d &win, Vec3d &v) const
+bool Projector::unProject(double x, double y, Vec3d &v) const
 {
-	v = win;
-	v[0] = flip_horz * (win[0] - center[0]) / view_scaling_factor;
-	v[1] = flip_vert * (win[1] - center[1]) / view_scaling_factor;
-
+	v[0] = flip_horz * (x - center[0]) / view_scaling_factor;
+	v[1] = flip_vert * (y - center[1]) / view_scaling_factor;
+	v[2] = 0;
 	if (!projectBackward(v))
 		return false;
 
@@ -347,20 +313,19 @@ void Projector::draw_viewport_shape(void)
 
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
-	set_orthographic_projection();
+	set2dDrawMode();
 	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
 	GLUquadricObj * p = gluNewQuadric();
 	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
-	reset_perspective_projection();
+	unset2dDrawMode();
 }
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
-void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
-                        GLint slices, GLint stacks,
-                        const Mat4d& mat, int orient_inside) const {
+void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
+                        GLint slices, GLint stacks, int orient_inside) const {
   glPushMatrix();
-  glLoadMatrixd(mat);
+  glLoadMatrixd(modelViewMatrix);
 
   if (one_minus_oblateness == 1.0) { // gluSphere seems to have hardware acceleration
     GLUquadricObj * p = gluNewQuadric();
@@ -424,9 +389,9 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                        y * one_minus_oblateness * nsign,
                        z * nsign);
             glTexCoord2f(s, t);
-            sVertex3(x * radius,
+            glVertex3d(x * radius,
                      y * radius,
-                     one_minus_oblateness * z * radius, mat);
+                     one_minus_oblateness * z * radius);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
             z = nsign * cos_sin_rho_p[2];
@@ -435,9 +400,9 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                        z * nsign);
             glTexCoord2f(s, t - dt);
             s += ds;
-            sVertex3(x * radius,
+            glVertex3d(x * radius,
                      y * radius,
-                     one_minus_oblateness * z * radius, mat);
+                     one_minus_oblateness * z * radius);
         }
         glEnd();
         t -= dt;
@@ -451,12 +416,8 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 }
 
 // Draw a disk with a special texturing mode having texture center at disk center
-void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks,
-	const Mat4d& mat, int orient_inside) const
+void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside) const
 {
-	glPushMatrix();
-	glLoadMatrixd(mat);
-
 	GLfloat r, dr, theta, dtheta;
 	GLfloat x, y;
 	GLint j;
@@ -480,24 +441,19 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks,
 			y = r*sin(theta);
 			glNormal3f(0, 0, nsign);
 			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
-			sVertex3(x, y, 0, mat);
+			drawVertex3(x, y, 0);
 			x = (r+dr)*cos(theta);
 			y = (r+dr)*sin(theta);
 			glNormal3f(0, 0, nsign);
 			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
-			sVertex3(x, y, 0, mat);
+			drawVertex3(x, y, 0);
 		}
 		glEnd();
 	}
-	glPopMatrix();
 }
 
-void Projector::sRing(GLdouble r_min, GLdouble r_max,
-                      GLint slices, GLint stacks,
-                      const Mat4d& mat, int orient_inside) const {
-  glPushMatrix();
-  glLoadMatrixd(mat);
-
+void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const
+{
   double theta;
   double x,y;
   int j;
@@ -535,38 +491,30 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
       y = r*cos_sin_theta_p[1];
       glNormal3d(0, 0, nsign);
       glTexCoord2d(tex_r0, 0.5);
-      sVertex3(x, y, 0, mat);
+      drawVertex3(x, y, 0);
       x = (r+dr)*cos_sin_theta_p[0];
       y = (r+dr)*cos_sin_theta_p[1];
       glNormal3d(0, 0, nsign);
       glTexCoord2d(tex_r1, 0.5);
-      sVertex3(x, y, 0, mat);
+      drawVertex3(x, y, 0);
     }
     glEnd();
   }
 #if defined(__sun) || defined(__sun__)
     delete[] cos_sin_theta;
-#endif  
-  
-  glPopMatrix();
+#endif
 }
 
 static
-inline void sSphereMapTexCoordFast(double rho_div_fov,
-                                   double costheta, double sintheta)
+inline void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta)
 {
 	if (rho_div_fov>0.5) rho_div_fov=0.5;
 	glTexCoord2d(0.5 + rho_div_fov * costheta,
                  0.5 + rho_div_fov * sintheta);
 }
 
-void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
-                            const Mat4d& mat, double texture_fov,
-                            int orient_inside) const
+void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov, int orient_inside) const
 {
-    glPushMatrix();
-    glLoadMatrixd(mat);
-
     double rho,x,y,z;
     int i, j;
     const double nsign = orient_inside?-1:1;
@@ -619,7 +567,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
                 sSphereMapTexCoordFast(rho/texture_fov,
                                        cos_sin_theta_p[0],
                                        cos_sin_theta_p[1]);
-                sVertex3(x * radius, y * radius, z * radius, mat);
+                drawVertex3(x * radius, y * radius, z * radius);
 
                 x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
                 y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
@@ -628,7 +576,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
                 sSphereMapTexCoordFast((rho + drho)/texture_fov,
                                        cos_sin_theta_p[0],
                                        cos_sin_theta_p[1]);
-                sVertex3(x * radius, y * radius, z * radius, mat);
+                drawVertex3(x * radius, y * radius, z * radius);
             }
             glEnd();
         }
@@ -649,7 +597,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
                 sSphereMapTexCoordFast((rho + drho)/texture_fov,
                                        cos_sin_theta_p[0],
                                        -cos_sin_theta_p[1]);
-                sVertex3(x * radius, y * radius, z * radius, mat);
+                drawVertex3(x * radius, y * radius, z * radius);
 
                 x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
                 y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
@@ -658,7 +606,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
                 sSphereMapTexCoordFast(rho/texture_fov,
                                        cos_sin_theta_p[0],
                                        -cos_sin_theta_p[1]);
-                sVertex3(x * radius, y * radius, z * radius, mat);
+                drawVertex3(x * radius, y * radius, z * radius);
             }
             glEnd();
         }
@@ -666,16 +614,14 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 #if defined(__sun) || defined(__sun__)
     delete[] cos_sin_rho;
 #endif  
-	
-    glPopMatrix();
 }
 
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside) const
 {
 	glPushMatrix();
-	glLoadMatrixd(mat);
+	glLoadMatrixd(modelViewMatrix);
 	GLUquadricObj * p = gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	if (orient_inside)
@@ -692,7 +638,7 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 }
 
 
-void Projector::print_gravity180(SFont* font, float x, float y, const wstring& ws,
+void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring& ws,
 				 bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
@@ -708,7 +654,7 @@ void Projector::print_gravity180(SFont* font, float x, float y, const wstring& w
 	psi = std::atan2((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
 
 	if (psi>5) psi = 5;
-	set_orthographic_projection();
+	set2dDrawMode();
 	glTranslatef(x,y,0);
 	if(gravityLabels) glRotatef(theta*180./M_PI,0,0,-1);
 	glTranslatef(xshift, -yshift, 0);
@@ -751,50 +697,199 @@ void Projector::print_gravity180(SFont* font, float x, float y, const wstring& w
 		}
 
 	}
-	reset_perspective_projection();
+	unset2dDrawMode();
 }
 
-void Projector::drawParallelJ2000(const Vec3d& start, double length) const
+//! Draw the string at the given position and angle with the given font
+void Projector::drawText(const SFont* font, float x, float y, const string& str, float angleDeg, float xshift, float yshift) const
 {
-	const Mat4d dRa = Mat4d::zrotation(length/10.);
+	glPushMatrix();
+	glTranslatef(x,y,0);
+	glRotatef(angleDeg,0,0,1);
+	glTranslatef(0,font->getLineHeight(),0);
+	font->print(xshift, yshift, str);
+	glPopMatrix();
+}
+
+void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
+{
+	if (nbSeg==-1)
+		nbSeg = 48; // TODO!
+	const Mat4d dRa = Mat4d::zrotation(length/nbSeg);
 	
-	Vec3d v = start;
+	Vec3d v(start);
 	Vec3d pt1;
 	glBegin(GL_LINE_STRIP);
-	for (int i=0;i<10;++i)
+	for (int i=0;i<=nbSeg;++i)
 	{
-		project_j2000(v, pt1);
+		project(v, pt1);
 		glVertex2f(pt1[0],pt1[1]);
 		dRa.transfo(v);
 	}
 	glEnd();
+	
+	// Draw label if needed
+	if (labelAxis)
+	{
+		double lon, lat;
+		StelUtils::rect_to_sphe(&lon, &lat, start);
+		Vec3d win0, win1;
+		Vec3d v1, v2;
+		StelUtils::sphe_to_rect(lon+0.0000001, lat, v2);
+		project(start, win0);
+		project(v2, win1);
+		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
+		ostringstream oss;
+		oss << lon*180./M_PI;
+		float xshift=5;
+		if (angleDeg>90. || angleDeg<-90.)
+		{
+			angleDeg+=180.;
+			xshift=-font->getStrLen(oss.str())-5.f;
+		}
+		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		
+		// Label at end of the arc
+		StelUtils::sphe_to_rect(lon+length-0.0000001, lat, v2);
+		project(v, win0);
+		project(v2, win1);
+		angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
+		xshift=5;
+		if (angleDeg>90. || angleDeg<-90.)
+		{
+			angleDeg+=180.;
+			xshift=-font->getStrLen(oss.str())-5.f;
+		}
+		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+	}
 }
 
+void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
+{
+	if (nbSeg==-1)
+		nbSeg = 48; // TODO!
+	static const Vec3d oneZ(0,0,1);
+	const Mat4d dDe = Mat4d::rotation(start^oneZ, (start[1]>=0 ? 1.:-1.) * length/nbSeg);
+	
+	Vec3d v(start);
+	Vec3d pt1;
+	glBegin(GL_LINE_STRIP);
+	for (int i=0;i<=nbSeg;++i)
+	{
+		project(v, pt1);
+		glVertex2f(pt1[0],pt1[1]);
+		dDe.transfo(v);
+	}
+	glEnd();
+	
+	// Draw label if needed
+	if (labelAxis)
+	{
+		double lon, lat;
+		StelUtils::rect_to_sphe(&lon, &lat, start);
+		Vec3d win0, win1;
+		Vec3d v2;
+		StelUtils::sphe_to_rect(lon, lat+0.0000001, v2);
+		project(start, win0);
+		project(v2, win1);
+		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
+		ostringstream oss;
+		oss << lon*180./M_PI;
+		float xshift=20;
+		if (angleDeg>90. || angleDeg<-90.)
+		{
+			angleDeg+=180.;
+			xshift=-font->getStrLen(oss.str())-20.f;
+		}
+		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		
+		// Label at end of the arc
+		StelUtils::sphe_to_rect(lon, lat+length-0.0000001, v2);
+		project(v, win0);
+		project(v2, win1);
+		angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
+		xshift=20;
+		if (angleDeg>90. || angleDeg<-90.)
+		{
+			angleDeg+=180.;
+			xshift=-font->getStrLen(oss.str())-20.f;
+		}
+		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+	}
+}
 
+// Draw a square using the current texture at the given position
+void Projector::drawSprite(const Vec3d& pos, double size) const
+{
+	Vec3d win;
+	project(pos, win);
+	drawSprite2dMode(win[0], win[1], size);
+}
+
+// Same function but gives the already projected 2d position in input
+inline void Projector::drawSprite2dMode(double x, double y, double size) const
+{
+// TODO use GL extension if available
+//	glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
+//	glEnable(GL_POINT_SPRITE_ARB);
+//	glPointSize(size);
+//	glBegin(GL_POINTS);
+//		glVertex2f(x,y);
+//	glEnd();
+	
+	const double radius = size*0.5;
+	glBegin(GL_QUADS );
+    	glTexCoord2i(0,0); glVertex2f(x-radius,y-radius);
+    	glTexCoord2i(1,0); glVertex2f(x+radius,y-radius);
+    	glTexCoord2i(1,1); glVertex2f(x+radius,y+radius);
+    	glTexCoord2i(0,1); glVertex2f(x-radius,y+radius);
+	glEnd();
+}
+
+// Same function but with a rotation angle
+void Projector::drawSprite2dMode(double x, double y, double size, double rotation) const
+{
+	glPushMatrix();
+	glTranslatef(x, y, 0.0);
+	glRotatef(rotation,0.,0.,1.);
+	const double radius = size*0.5;
+	glBegin(GL_QUADS );
+    	glTexCoord2i(0,0); glVertex2f(-radius,-radius);
+    	glTexCoord2i(1,0); glVertex2f(+radius,-radius);
+    	glTexCoord2i(1,1); glVertex2f(+radius,+radius);
+    	glTexCoord2i(0,1); glVertex2f(-radius,+radius);
+	glEnd();
+	glPopMatrix();
+}
+
+//! Generalisation of glVertex3v
+//! This method assumes that we are in orthographic projection mode, which is true for special projections
+void Projector::drawVertex3v(const Vec3d& v) const
+{
+	Vec3d win;
+	project(v, win);
+	glVertex2f(win[0],win[1]);
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 	
 // Here is the main trick for texturing in fisheye mode : The trick is to compute the
 // new coordinate in orthographic projection which will simulate the fisheye projection.
-void Projector::sVertex3General(double x, double y, double z, const Mat4d& mat) const
+//void Projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
+//{
+//	Vec3d win;
+//	Vec3d v(x,y,z);
+//	project(v, win);
+//
+//	// Can be optimized by avoiding matrix inversion if it's always the same
+//	gluUnProject(win[0],win[1],win[2],modelViewMatrix,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
+//	glVertex3dv(v);
+//}
+
+void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
+                              GLint slices, GLint stacks, int orient_inside) const
 {
-	Vec3d win;
-	Vec3d v(x,y,z);
-	project_custom(v, win, mat);
-
-	// Can be optimized by avoiding matrix inversion if it's always the same
-	gluUnProject(win[0],win[1],win[2],mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
-	glVertex3dv(v);
-}
-
-void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
-                              GLint slices, GLint stacks,
-                              const Mat4d& mat, int orient_inside) const
-{
-    glPushMatrix();
-    glLoadMatrixd(mat);
-
       // It is really good for performance to have Vec4f,Vec3f objects
       // static rather than on the stack. But why?
       // Is the constructor/destructor so expensive?
@@ -813,7 +908,7 @@ void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
     {
         glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
         lightPos3 = lightPos4;
-        lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
+        lightPos3 -= modelViewMatrix * Vec3d(0.,0.,0.); // -posCenterEye
         lightPos3.normalize();
         glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
         glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
@@ -882,7 +977,7 @@ void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
             glTexCoord2f(s, t);
             if (isLightOn)
             {
-                transNorm = mat.multiplyWithoutTranslation(
+                transNorm = modelViewMatrix.multiplyWithoutTranslation(
                                   Vec3d(x * one_minus_oblateness * nsign,
                                         y * one_minus_oblateness * nsign,
                                         z * nsign));
@@ -892,14 +987,14 @@ void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
                     c*diffuseLight[1] + ambientLight[1],
                     c*diffuseLight[2] + ambientLight[2]);
             }
-            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            drawVertex3(x * radius, y * radius, z * one_minus_oblateness * radius);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
             z = nsign * cos_sin_rho_p[2];
             glTexCoord2f(s, t - dt);
             if (isLightOn)
             {
-                transNorm = mat.multiplyWithoutTranslation(
+                transNorm = modelViewMatrix.multiplyWithoutTranslation(
                                   Vec3d(x * one_minus_oblateness * nsign,
                                         y * one_minus_oblateness * nsign,
                                         z * nsign));
@@ -909,23 +1004,19 @@ void Projector::sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
                     c*diffuseLight[1] + ambientLight[1],
                     c*diffuseLight[2] + ambientLight[2]);
             }
-            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
+            drawVertex3(x * radius, y * radius, z * one_minus_oblateness * radius);
             s += ds;
         }
         glEnd();
         t -= dt;
     }
-    glPopMatrix();
+
     if (isLightOn) glEnable(GL_LIGHTING);
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Projector::sCylinderGeneral(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
-const Mat4d& mat, int orient_inside) const
+void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside) const
 {
-	glPushMatrix();
-	glLoadMatrixd(mat);
-
 	static GLdouble da, r, dz;
 	static GLfloat z, nsign;
 	static GLint i, j;
@@ -962,10 +1053,10 @@ const Mat4d& mat, int orient_inside) const
 		}
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t);
-		sVertex3(x * r, y * r, z, mat);
+		drawVertex3(x * r, y * r, z);
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t + dt);
-		sVertex3(x * r, y * r, z + dz, mat);
+		drawVertex3(x * r, y * r, z + dz);
 		s += ds;
 	}			/* for slices */
 	glEnd();
@@ -973,6 +1064,5 @@ const Mat4d& mat, int orient_inside) const
 	z += dz;
 	}				/* for stacks */
 
-	glPopMatrix();
 	if (orient_inside) glCullFace(GL_BACK);
 }

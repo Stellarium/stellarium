@@ -66,7 +66,7 @@ ViewportDistorterFisheyeToSphericMirror
    ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH, Projector* prj)
     :screenW(screenW),screenH(screenH),trans_array(0) {
 
-  if (prj->getProjectionType() == "fisheye") {
+  if (prj->getCurrentProjection() == "fisheye") {
     prj->setMaxFov(175.0);
   } else {
     cerr << "ViewportDistorterFisheyeToSphericMirror: "

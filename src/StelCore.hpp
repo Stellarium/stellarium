@@ -55,8 +55,6 @@ public:
 	//! Get the current projector used in the core
 	Projector* getProjection() {return projection;}
 	const Projector* getProjection() const {return projection;}
-	//! Set the projection type
-	void setProjectionType(const string& ptype);
 	
 	//! Get the current navigation (manages frame transformation) used in the core
 	Navigator* getNavigation() {return navigation;}
