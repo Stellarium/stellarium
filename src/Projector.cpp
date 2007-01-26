@@ -740,7 +740,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
 		ostringstream oss;
-		oss << lon*180./M_PI;
+		oss << lat*180./M_PI;
 		float xshift=5;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
