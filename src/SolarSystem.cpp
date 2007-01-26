@@ -103,11 +103,11 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_PLANET)
 	{
 		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.get_earth_equ_pos(nav);
+		Vec3d pos=obj.getObsJ2000Pos(nav);
 		Vec3d screenpos;
+		prj->setCurrentFrame(Projector::FRAME_J2000);
 		// Compute 2D pos and return if outside screen
-		if (!prj->project_earth_equ(pos, screenpos)) return;
-	    prj->set_orthographic_projection();
+		if (!prj->project(pos, screenpos)) return;
 	
 		glColor3f(1.0f,0.3f,0.3f);
 	
@@ -119,6 +119,8 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        
+        glPushMatrix();
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
         glRotatef(StelApp::getInstance().getTotalRunTime()*10.,0,0,-1);
 
@@ -157,8 +159,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
             glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
             glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
         glEnd ();
-	
-	    prj->reset_perspective_projection();
+		glPopMatrix();
 	}
 }
 
@@ -496,7 +497,7 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 	glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
 
 	// Light pos in zero (sun)
-	nav->switchToHeliocentric();
+	//nav->switchToHeliocentric();
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
 	glEnable(GL_LIGHT0);
 
@@ -832,13 +833,12 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 	shadow = mh + mdist*mscale;
 	r_penumbra *= mscale;
 
-	nav->switchToHeliocentric();
+	//nav->switchToHeliocentric();
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-	Mat4d mat = nav->get_helio_to_eye_mat();
-
+	prj->setCurrentFrame(Projector::FRAME_HELIO);
 	// shadow radial texture
 	tex_earth_shadow->bind();
 
@@ -847,7 +847,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 	// umbra first
 	glBegin(GL_TRIANGLE_FAN);
 	glTexCoord2f(0,0);
-	prj->sVertex3( shadow[0],shadow[1], shadow[2], mat);
+	prj->drawVertex3v(shadow);
 
 	for (int i=0; i<=100; i++)
 	{
@@ -855,7 +855,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 		s = shadow + r;
 
 		glTexCoord2f(0.6,0);  // position in texture of umbra edge
-		prj->sVertex3( s[0],s[1], s[2], mat);
+		prj->drawVertex3v(s);
 	}
 	glEnd();
 
@@ -871,10 +871,10 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 		sp = shadow + u;
 
 		glTexCoord2f(0.6,0);
-		prj->sVertex3( sp[0],sp[1], sp[2], mat);
+		prj->drawVertex3v(sp);
 
 		glTexCoord2f(1.,0);  // position in texture of umbra edge
-		prj->sVertex3( s[0],s[1], s[2], mat);
+		prj->drawVertex3v(s);
 	}
 	glEnd();
 

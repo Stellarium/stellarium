@@ -267,13 +267,13 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 	Vec3d v;
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
-		prj->project_j2000(tex_quad_vertex[0],v); glVertex3dv(v);
+		prj->drawVertex3v(tex_quad_vertex[0]);
         glTexCoord2i(0,0);              // Bottom Left
-		prj->project_j2000(tex_quad_vertex[1],v); glVertex3dv(v);
+		prj->drawVertex3v(tex_quad_vertex[1]);
         glTexCoord2i(1,1);              // Top Right
-		prj->project_j2000(tex_quad_vertex[2],v); glVertex3dv(v);
+		prj->drawVertex3v(tex_quad_vertex[2]);
         glTexCoord2i(0,1);              // Top Left
-		prj->project_j2000(tex_quad_vertex[3],v); glVertex3dv(v);
+		prj->drawVertex3v(tex_quad_vertex[3]);
     glEnd();
 }
 
@@ -284,31 +284,17 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 	float lum = MY_MIN(1,2.f/getOnScreenSize(prj, nav))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
-	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1,0);              // Bottom Right
-		glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
-		glTexCoord2i(0,0);              // Bottom Left
-		glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
-		glTexCoord2i(1,1);              // Top Right
-		glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
-		glTexCoord2i(0,1);              // Top Left
-		glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
-	glEnd ();
+	prj->drawSprite2dMode(XY[0], XY[1], 8);
 }
 
 void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproducer* eye)
 {
-	float r = (getOnScreenSize(prj, nav)/2);
+	float d = getOnScreenSize(prj, nav);
 	float cmag = 0.20 * hints_brightness;
 
 	glColor3f(cmag,cmag,cmag);
 	tex_circle->bind();
-	glBegin(GL_QUADS);
-		glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
-		glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
-		glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
-		glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
-	glEnd();
+	prj->drawSprite2dMode(XY[0], XY[1], d);
 }
 
 void Nebula::draw_name(const Projector* prj)
@@ -320,7 +306,7 @@ void Nebula::draw_name(const Projector* prj)
 	wstring nebulaname = getNameI18n();
 
 	if (prj->getFlagGravityLabels())
-		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
+		prj->drawTextGravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
 	else
 		nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
 
@@ -328,7 +314,7 @@ void Nebula::draw_name(const Projector* prj)
 	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
 	{
 		if (prj->getFlagGravityLabels())
-			prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
+			prj->drawTextGravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
 		else
 			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
 	}

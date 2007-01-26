@@ -27,7 +27,6 @@
 #endif
 
 #include "SDL_opengl.h"
-
 #include "StelUtils.hpp"
 #include "typeface.h"
 
@@ -35,19 +34,19 @@ class SFont
 {
 public:
     SFont(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
-    virtual ~SFont() {;}
+    ~SFont() {;}
     
-    void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtils::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
-	void print(float x, float y, const wstring& ws, int upsidedown = 1) {typeFace.render(ws, Vec2f(x, y), upsidedown==1);}
+    void print(float x, float y, const string& s, int upsidedown = 1) const {typeFace.render(StelUtils::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
+	void print(float x, float y, const wstring& ws, int upsidedown = 1) const {typeFace.render(ws, Vec2f(x, y), upsidedown==1);}
 	
-	void print_char(const wchar_t c) {
+	void print_char(const wchar_t c) const {
 		wchar_t wc[] = L"xx";
 		wc[0] = c;
 		wc[1] = 0;  // terminate string
 		typeFace.renderGlyphs((wstring(wc)));
 	}
 
-	void print_char_outlined(const wchar_t c) {
+	void print_char_outlined(const wchar_t c) const {
 
 		// This is not the most elegant way to do this,
 		// but avoids needing two fonts loaded
@@ -88,27 +87,26 @@ public:
 		typeFace.renderGlyphs((wstring(wc)));
 	}
 	
-	void print_char(const unsigned char c) {
+	void print_char(const unsigned char c) const {
 		wchar_t wc[] = L"xx";
 		wc[0] = c;
 		wc[1] = 0;  // terminate string
 		typeFace.renderGlyphs((wstring(wc)));
 	}
 
-	void print_char_outlined(const unsigned char c) {
+	void print_char_outlined(const unsigned char c) const {
 
 		print_char_outlined(wchar_t(c));
 	}
 
-    float getStrLen(const wstring& s) {return typeFace.width(s);}
-    float getStrLen(const string& s) {return typeFace.width(StelUtils::stringToWstring(s));}
-    float getLineHeight(void) {return typeFace.lineHeight();}
-    float getAscent(void) {return typeFace.ascent();}
-    float getDescent(void) {return typeFace.descent();}
-	
-	static SFont nullFont;
-protected:
-	TypeFace typeFace;
+    float getStrLen(const wstring& s) const {return typeFace.width(s);}
+    float getStrLen(const string& s) const {return typeFace.width(StelUtils::stringToWstring(s));}
+    float getLineHeight(void) const {return typeFace.lineHeight();}
+    float getAscent(void) const {return typeFace.ascent();}
+    float getDescent(void) const {return typeFace.descent();}
+
+private:
+	mutable TypeFace typeFace;
 };
 
 

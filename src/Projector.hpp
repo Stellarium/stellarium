@@ -20,6 +20,8 @@
 #ifndef _PROJECTOR_H_
 #define _PROJECTOR_H_
 
+#include <vector>
+
 #include "stellarium.h"
 #include "vecmath.h"
 #include "SFont.hpp"
@@ -33,22 +35,22 @@ class InitParser;
 class Projector
 {
 public:
-	enum PROJECTOR_TYPE
+	//! Supported reference frame types
+	enum FRAME_TYPE
 	{
-		PERSPECTIVE_PROJECTOR    = 0,
-        ORTHOGRAPHIC_PROJECTOR   = 1,
-        EQUAL_AREA_PROJECTOR     = 2,
-		FISHEYE_PROJECTOR        = 3,
-        STEREOGRAPHIC_PROJECTOR  = 4,
-		CYLINDER_PROJECTOR       = 5,
-        SPHERIC_MIRROR_PROJECTOR = 6
+		FRAME_LOCAL,
+		FRAME_HELIO,
+		FRAME_EARTH_EQU,
+		FRAME_J2000
 	};
 	
     ///////////////////////////////////////////////////////////////////////////
-    // Main factory constructor
-    static Projector *create(PROJECTOR_TYPE type, const Vec4i& viewport, double _fov = 60.);
-	virtual ~Projector();
+    // Main constructor
+	Projector(const Vec4i& viewport, double _fov = 60.);
+	~Projector();
+	
 	void init(const InitParser& conf);
+	
 	// Set the standard modelview matrices used for projection
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
 				    const Mat4d& _mat_helio_to_eye,
@@ -57,15 +59,7 @@ public:
 	// Flags
 	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
 	bool getFlagGravityLabels() const { return gravityLabels; }
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods for choosing PROJECTION matrix type
-    static const char *typeToString(PROJECTOR_TYPE type);
-    static PROJECTOR_TYPE stringToType(const string &s);
-    
-   	virtual PROJECTOR_TYPE getType(void) const {return PERSPECTIVE_PROJECTOR;}
-   	//! Get the projection type
-	string getProjectionType(void) const {return Projector::typeToString(getType());}
+
 	
 	//! Register a new projection mapping
 	template<class MappingClass> void registerProjectionMapping(MappingClass c)
@@ -89,15 +83,9 @@ public:
 	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
 	
 	//! Get and set to define and get viewport size
-	virtual void setViewport(int x, int y, int w, int h);
-	void setViewportSize(int w, int h)
-	{
-		if (w==getViewportWidth() && h==getViewportHeight())
-			return;
-		setViewportWidth(w);
-		setViewportHeight(h);
-	}
+	void setViewport(int x, int y, int w, int h);
 	void setViewport(const Vec4i& v) {setViewport(v[0], v[1], v[2], v[3]);}
+	const Vec4i& getViewport(void) const {return vec_viewport;}
 	
 	//! Set the horizontal viewport offset in pixels
 	void setViewportPosX(int x) {setViewport(x, vec_viewport[1], vec_viewport[2], vec_viewport[3]);}
@@ -107,13 +95,17 @@ public:
 	void setViewportPosY(int y) {setViewport(vec_viewport[0], y, vec_viewport[2], vec_viewport[3]);}
 	int getViewportPosY(void) const {return vec_viewport[1];}
 	
+	//! Get/Set the viewport size in pixels
 	void setViewportWidth(int width) {setViewport(vec_viewport[0], vec_viewport[1], width, vec_viewport[3]);}
 	void setViewportHeight(int height) {setViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], height);}
-	
-
 	int getViewportWidth(void) const {return vec_viewport[2];}
 	int getViewportHeight(void) const {return vec_viewport[3];}
-	const Vec4i& getViewport(void) const {return vec_viewport;}
+	
+	//! Return a polygon matching precisely the real viewport defined by the area on the screen 
+	//! where projection is valid. Normally, nothing should be drawn outside this area.
+	//! This viewport is usually the rectangle defined by the screen, but in case of non-linear
+	//! projection, it can also be a more complex shape.
+	std::vector<Vec2d> getViewportVertices() const;
 	
 	//! Maximize viewport according to passed screen values
 	void setMaximizedViewport(int screenW, int screenH) {setViewport(0, 0, screenW, screenH);}
@@ -145,15 +137,13 @@ public:
 	bool getFlipVert(void) const {return (flip_vert < 0.0);}
 	void setFlipHorz(bool flip) {
 		flip_horz = flip ? -1.0 : 1.0;
-		init_project_matrix();
 		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 	void setFlipVert(bool flip) {
 		flip_vert = flip ? -1.0 : 1.0;
-		init_project_matrix();
 		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
-	virtual bool needGlFrontFaceCW(void) const
+	bool needGlFrontFaceCW(void) const
 		{return (flip_horz*flip_vert < 0.0);}
 
 	//! Set the Field of View in degree
@@ -174,26 +164,27 @@ public:
 	// Full projection methods
 	// Return true if the 2D pos is inside the viewport
 	bool check_in_viewport(const Vec3d& pos) const
-		{return (pos[1]>vec_viewport[1] && pos[1]<(vec_viewport[1] + vec_viewport[3]) &&
-				pos[0]>vec_viewport[0] && pos[0]<(vec_viewport[0] + vec_viewport[2]));}
+		{return (pos[1]>=vec_viewport[1] && pos[1]<=(vec_viewport[1] + vec_viewport[3]) &&
+				pos[0]>=vec_viewport[0] && pos[0]<=(vec_viewport[0] + vec_viewport[2]));}
 
 	//! Project the vector v from the current frame into the viewport
 	//! @param v the vector in the current frame
 	//! @param win the projected vector in the viewport 2D frame
 	//! @return true if the projected coordinate is valid
-	inline bool project(const Vec3d& v, Vec3d& win) const;
-
-	//! Project the vector v from the viewport frame into the current frame 
-	//! @param win the vector in the viewport 2D frame
-	//! @param v the projected vector in the current frame
-	//! @return true if the projected coordinate is valid
-	inline bool unProject(const Vec3d& win, Vec3d& v) const;
+	bool project(const Vec3d& v, Vec3d& win) const;
 
 	//! Project the vector v from the current frame into the viewport
 	//! @param v the vector in the current frame
 	//! @param win the projected vector in the viewport 2D frame
 	//! @return true if the projected point is inside the viewport
-	inline bool projectCheck(const Vec3d& v, Vec3d& win) const;
+	bool projectCheck(const Vec3d& v, Vec3d& win) const {return (project(v, win) && check_in_viewport(win));}
+
+	//! Project the vector v from the viewport frame into the current frame 
+	//! @param win the vector in the viewport 2D frame
+	//! @param v the projected vector in the current frame
+	//! @return true if the projected coordinate is valid
+	bool unProject(const Vec3d& win, Vec3d& v) const {return unProject(win[0], win[1], v);}
+	bool unProject(double x, double y, Vec3d& v) const;
 
 	//! Project the vectors v1 and v2 from the current frame into the viewport.
 	//! @param v1 the first vector in the current frame
@@ -201,169 +192,130 @@ public:
 	//! @param win1 the first projected vector in the viewport 2D frame
 	//! @param win2 the second projected vector in the viewport 2D frame
 	//! @return true if at least one of the projected vector is within the viewport
-	inline bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const;
+	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+		{return project(v1, win1) && project(v2, win2) && (check_in_viewport(win1) || check_in_viewport(win2));}
 
 	//! Set the frame in which we want to draw from now on
-	//! The frame will be the current one until this method is called again
-	//! @param frameName a string which can be e.g. "local", "helio", "earthequ", "j2000"
-	void setCurrentFrame(const std::string& frameName);
+	//! The frame will be the current one until this method or setCustomFrame is called again
+	//! @param frameType the type
+	void setCurrentFrame(FRAME_TYPE frameType) const;
+
+	//! Set a custom model view matrix, it is valid until the next call to setCurrentFrame or setCustomFrame
+	//! @param the openGL MODELVIEW matrix to use
+	void setCustomFrame(const Mat4d&) const;
 
 	//! Set the current projection mapping to use
 	//! The mapping must have been registered before beeing used
 	//! @param projectionName a string which can be e.g. "perspective", "stereographic", "fisheye", "cylinder"
 	void setCurrentProjection(const std::string& projectionName);
 	
-	// Set the drawing mode in 2D for drawing inside the viewport only.
-	// Use reset_perspective_projection() to restore previous projection mode
-	void set_orthographic_projection(void) const;
-
-	// Restore the previous projection mode after a call to set_orthographic_projection()
-	void reset_perspective_projection(void) const;
+	//! Get the current projection mapping name
+	std::string getCurrentProjection() {return currentProjectionType;}
 	
-	// Return in vector "win" the projection on the screen of point v in earth equatorial coordinate
-	// according to the current modelview and projection matrices (reimplementation of gluProject)
-	// Return true if the z screen coordinate is < 1, ie if it isn't behind the observer
-	// except for the _check version which return true if the projected point is inside the screen
-	inline bool project_earth_equ(const Vec3d& v, Vec3d& win) const
-		{return project_custom(v, win, mat_earth_equ_to_eye);}
+	//! Set the drawing mode in 2D for drawing inside the viewport only.
+	//! All the drawing primitives of the Projection class won't work properly
+	//! until the normal mode is reset by calling the unset2dDrawMode() method
+	//! Use unset2dDrawMode() to restore previous projection mode
+	void set2dDrawMode(void) const;
 
-	inline bool project_earth_equ_check(const Vec3d& v, Vec3d& win) const
-		{return project_custom_check(v, win, mat_earth_equ_to_eye);}
-
-	inline bool project_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project_custom_line_check(v1, win1, v2, win2, mat_earth_equ_to_eye);}
-
-	inline void unproject_earth_equ(double x, double y, Vec3d& v) const
-		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
-
-	inline void unproject_j2000(double x, double y, Vec3d& v) const
-		{unproject(x, y, inv_mat_j2000_to_eye, v);}
-
-	// taking account of precession
-	inline bool project_j2000(const Vec3d& v, Vec3d& win) const
-		{return project_custom(v, win, mat_j2000_to_eye);}
-
-	inline bool project_j2000_check(const Vec3d& v, Vec3d& win) const
-		{return project_custom_check(v, win, mat_j2000_to_eye);}
-
-	inline bool project_j2000_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project_custom_line_check(v1, win1, v2, win2, mat_j2000_to_eye);}
-
-	// Same function with input vector v in heliocentric coordinate
-	inline bool project_helio_check(const Vec3d& v, Vec3d& win) const
-		{return project_custom_check(v, win, mat_helio_to_eye);}
-
-	inline bool project_helio(const Vec3d& v, Vec3d& win) const
-		{return project_custom(v, win, mat_helio_to_eye);}
-
-	inline bool project_helio_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project_custom_line_check(v1, win1, v2, win2, mat_helio_to_eye);}
-
-	inline void unproject_helio(double x, double y, Vec3d& v) const
-		{return unproject(x, y, inv_mat_helio_to_eye, v);}
-
-	// Same function with input vector v in local coordinate
-	inline bool project_local(const Vec3d& v, Vec3d& win) const
-		{return project_custom(v, win, mat_local_to_eye);}
-
-	inline bool project_local_check(const Vec3d& v, Vec3d& win) const
-		{return project_custom_check(v, win, mat_local_to_eye);}
-
-	inline void unproject_local(double x, double y, Vec3d& v) const
-		{unproject(x, y, inv_mat_local_to_eye, v);}
-		
-	// Same function but using a custom modelview matrix
-	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
-	{
-		gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
-		return (win[2]<1.);
-	}
-
-    bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
-		{return (project_custom(v, win, mat) && check_in_viewport(win));}
-	// project two points and make sure both are in front of viewer and that at least one is on screen
-
-    bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
-					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
-		{return project_custom(v1, win1, mat) && project_custom(v2, win2, mat) && 
-		   (check_in_viewport(win1) || check_in_viewport(win2));}
+	// Restore the previous projection mode after a call to set2dDrawMode()
+	void unset2dDrawMode(void) const;
 		   
 
 	///////////////////////////////////////////////////////////////////////////
-	// Standard methods for drawing primitives
-	
+	// Standard methods for drawing primitives in general (non-linear) mode
 	///////////////////////////////////////////////////////////////////////////
-	// Callback versions
-	boost::callback<void, Vec3d&> sVertex3v;
-	boost::callback<void, double, double> sVertex2;
-	
-	///////////////////////////////////////////////////////////////////////////
-	
+
 	// Fill with black around the viewport
 	void draw_viewport_shape(void);
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods for linear mode
+	//! Generalisation of glVertex3v
+	void drawVertex3v(const Vec3d& v) const;
+	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
 	
-	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	virtual void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
-		GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
-
 	// Draw a disk with a special texturing mode having texture center at center
-	virtual void sDisk(GLdouble radius, GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;	
+	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside = 0) const;	
 		
 	// Draw a ring with a radial texturing
-	virtual void sRing(GLdouble r_min, GLdouble r_max,
-	                   GLint slices, GLint stacks,
-	                   const Mat4d& mat, int orient_inside) const;
+	void sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const;
 
 	// Draw a fisheye texture in a sphere
-	virtual void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
-		const Mat4d& mat, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
+	void sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
 
-	// Reimplementation of gluCylinder : glu is overrided for non standard projection
-	virtual void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
-
-	virtual void sVertex3(double x, double y, double z, const Mat4d& mat) const
-	{glVertex3d(x,y,z);}
-
-	void print_gravity180(SFont* font, float x, float y, const wstring& str, 
+	void drawTextGravity180(SFont* font, float x, float y, const wstring& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
-	void print_gravity180(SFont* font, float x, float y, const string& str, 
+	void drawTextGravity180(SFont* font, float x, float y, const string& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const
-	{
-	   	print_gravity180(font, x, y, StelUtils::stringToWstring(str), speed_optimize, xshift, yshift);
-	}
+		{drawTextGravity180(font, x, y, StelUtils::stringToWstring(str), speed_optimize, xshift, yshift);}
 
-	void drawParallelJ2000(const Vec3d& start, double length) const;
+	//! Draw the string at the given position and angle with the given font
+	//! @param x horizontal position of the lower left corner of the first character of the text in pixel
+	//! @param y horizontal position of the lower left corner of the first character of the text in pixel
+	//! @param str the text to print
+	//! @param angleDeg rotation angle in degree. Rotation is around x,y
+	//! @param xshift shift in pixel in the rotated x direction
+	//! @param yshift shift in pixel in the rotated y direction
+	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const;
 
+	//! Draw a parallel arc in the current frame, starting from point start
+	//!  going in the positive longitude direction and with the given length in radian.
+	//! @param start the starting position of the parallel in the current frame
+	//! @param length the angular length in radian (or distance on the unit sphere)
+	//! @param labelAxis if true display a label indicating the latitude at begining and at the end of the arc
+	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
+	//!   this value is automatically adjusted to prevent seeing the curve as a polygon
+	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, int nbSeg=-1) const;
+	
+	//! Draw a meridian arc in the current frame, starting from point start
+	//!  going in the positive latitude direction if longitude is in [0;180], in the negative direction
+	//!  otherwise, and with the given length in radian. The length can be up to 2 pi.
+	//! @param start the starting position of the meridian in the current frame
+	//! @param length the angular length in radian (or distance on the unit sphere)
+	//! @param labelAxis if true display a label indicating the longitude at begining and at the end of the arc
+	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
+	//!  this value is automatically adjusted to prevent seeing the curve as a polygon
+	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, int nbSeg=-1) const;
 
-	///////////////////////////////////////////////////////////////////////////
-	// Drawing methods for general (non-linear) mode
+	//! Draw a square using the current texture at the given position
+	//! @param pos the center of the sprite in the current frame
+	//! @param size the size of a square side in pixel
+	void drawSprite(const Vec3d& pos, double size) const;
+	
+	//! Draw a square using the current texture at the given projected 2d position
+	//! @param x x position in the viewport in pixel
+	//! @param y y position in the viewport in pixel
+	//! @param size the size of a square side in pixel
+	void drawSprite2dMode(double x, double y, double size) const;
+	
+	//! Draw a rotated square using the current texture at the given projected 2d position
+	//! @param x x position in the viewport in pixel
+	//! @param y y position in the viewport in pixel
+	//! @param size the size of a square side in pixel
+	//! @param rotation rotation angle in degree
+	void drawSprite2dMode(double x, double y, double size, double rotation) const;
 	
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	void sSphereGeneral(GLdouble radius, GLdouble one_minus_oblateness,
-		GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
+	void sSphere(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
 
 	// Reimplementation of gluCylinder : glu is overrided for non standard projection
-	void sCylinderGeneral(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
+	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
 
-	// Override glVertex3f and glVertex3d
-	void sVertex3General(double x, double y, double z, const Mat4d& mat) const;
-
+	///////////////////////////////////////////////////////////////////////////
+	// Methods for linear mode
+	///////////////////////////////////////////////////////////////////////////
+	
+	// Reimplementation of gluCylinder
+	void sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
+	
+	// Reimplementation of gluSphere
+	void sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
 
 
 protected:
-	Projector(const Vec4i& viewport, double _fov = 60.);
 
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
-	virtual void init_project_matrix(void);
+	void init_project_matrix(void);
 
 	//! The current projector mask
 	PROJECTOR_MASK_TYPE maskType;
@@ -389,29 +341,18 @@ protected:
 	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
 	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
 	
-	// transformation from screen 2D point x,y to object
-	// m is here the already inverted full tranfo matrix
-	// assertion: the length of the output vector is always = 1.0
-	virtual
-    void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
-	{
-		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
-				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,
-				1.0);
-		v.transfo4d(m);
-		v.normalize();
-	}
 	bool gravityLabels;			// should label text align with the horizon?
 	
-	
-	Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
-	Mat4d inverseModelViewMatrix;	// inverse of it
+	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
+	mutable Mat4d inverseModelViewMatrix;	// inverse of it
 	
 	// Callbacks
 	boost::callback<bool, Vec3d&> projectForward;
 	boost::callback<bool, Vec3d&> projectBackward;
 	
 	std::map<std::string, Mapping> projectionMapping;
+	
+	std::string currentProjectionType;	// Type of the projection currently used
 };
 
 #endif // _PROJECTOR_H_

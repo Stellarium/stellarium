@@ -178,16 +178,18 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
-	core->getProjection()->project_j2000(v, winpos);
+	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
+	core->getProjection()->project(v, winpos);
 	float xpos = winpos[0];
 	float ypos = winpos[1];
 
+	core->getProjection()->setCurrentFrame(Projector::FRAME_EARTH_EQU);
 	float best_object_value;
 	best_object_value = 100000.f;
 	vector<StelObject>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		core->getProjection()->project_earth_equ((*iter).get_earth_equ_pos(core->getNavigation()), winpos);
+		core->getProjection()->project((*iter).get_earth_equ_pos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter).getSelectPriority(core->getNavigation());
 		if (distance + priority < best_object_value)
@@ -204,7 +206,8 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 StelObject StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	core->getProjection()->unproject_j2000(x,core->getProjection()->getViewportHeight()-y,v);
+	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
+	core->getProjection()->unProject(x,core->getProjection()->getViewportHeight()-y,v);
 	return cleverFind(core, v);
 }
 

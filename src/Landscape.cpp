@@ -240,16 +240,14 @@ void LandscapeOldStyle::draw_fog(ToneReproducer * eye, const Projector* prj, con
 {
 	if(!fog_fader.getInterstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	glPushMatrix();
 	glColor3f(fog_fader.getInterstate()*(0.1f+0.1f*sky_brightness), fog_fader.getInterstate()*(0.1f+0.1f*sky_brightness), fog_fader.getInterstate()*(0.1f+0.1f*sky_brightness));
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	fog_tex->bind();
-	prj->sCylinder(radius, radius*std::sin(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
-	               Mat4d::translation(Vec3d(0.,0.,radius*std::sin(fog_angle_shift*M_PI/180.))), 1);
+	prj->setCustomFrame(nav->get_local_to_eye_mat() * Mat4d::translation(Vec3d(0.,0.,radius*std::sin(fog_angle_shift*M_PI/180.))));
+	prj->sCylinder(radius, radius*std::sin(fog_alt_angle*M_PI/180.), 128, 1, 1);
 	glDisable(GL_CULL_FACE);
-	glPopMatrix();
 }
 
 // Draw the mountains with a few pieces of texture
@@ -269,10 +267,7 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 	float x,y;
 	float a;
 
-	//	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
-	Mat4d mat = nav->get_local_to_eye_mat();
-	glPushMatrix();
-	glLoadMatrixd(mat);
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
 	z=radius*std::sin(decor_angle_shift*M_PI/180.);
 	glEnable(GL_BLEND);
@@ -292,16 +287,15 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 				glNormal3f(-x, -y, 0);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
 				             sides[i].tex_coords[3]);
-				prj->sVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]), mat);
+				prj->drawVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]));
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
 				             sides[i].tex_coords[1]);
-				prj->sVertex3(x, y, z , mat);
+				prj->drawVertex3(x, y, z);
 			}
 			glEnd();
 		}
 	}
 	glDisable(GL_CULL_FACE);
-	glPopMatrix();
 }
 
 
@@ -318,7 +312,8 @@ void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, 
 	ground_tex->bind();
 	int subdiv = 128/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
-	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, mat, 1);
+	prj->setCustomFrame(mat);
+	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, 1);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -375,7 +370,8 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	map_tex->bind();
-	prj->sSphere_map(radius,40,20, nav->get_local_to_eye_mat(), tex_fov, 1);
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	prj->sSphere_map(radius,40,20, tex_fov, 1);
 
 	glDisable(GL_CULL_FACE);
 }
@@ -449,7 +445,8 @@ void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const 
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->sSphere(radius,1.0,40,20, nav->get_local_to_eye_mat(), 1);
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	prj->sSphere(radius,1.0,40,20, 1);
 
 	glDisable(GL_CULL_FACE);
 

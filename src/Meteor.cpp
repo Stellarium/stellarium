@@ -156,7 +156,6 @@ Meteor::~Meteor()
 // returns true if alive
 bool Meteor::update(double delta_time)
 {
-
   if(!alive) return(0);
 
   if( position[2] < end_h ) {
@@ -192,9 +191,9 @@ bool Meteor::update(double delta_time)
 
 
 // returns true if visible
+// Assumes that we are in local frame
 bool Meteor::draw(Projector *proj, const Navigator* nav)
 {
-
 	if(!alive) return(0);
 
 	Vec3d start, end;
@@ -212,8 +211,8 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 
-	int t1 = proj->project_local_check(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
-	int t2 = proj->project_local_check(epos/1216, end);
+	int t1 = proj->projectCheck(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
+	int t2 = proj->projectCheck(epos/1216, end);
 
 	// don't draw if not visible (but may come into view)
 	if( t1 + t2 == 0 ) return 1;
@@ -232,7 +231,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 		posi.transfo4d(mmat);
 		posi = nav->earth_equ_to_local( posi );
 		posi[2] -= EARTH_RADIUS;
-		proj->project_local(posi/1216, intpos);
+		proj->project(posi/1216, intpos);
 
 		// draw dark to light
 		glBegin(GL_LINE_STRIP);

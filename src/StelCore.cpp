@@ -57,9 +57,7 @@ StelCore::~StelCore()
 void StelCore::initProj(const InitParser& conf)
 {
 	// Projector
-	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
-	string tmpstr = conf.get_str("projection:type");
-	setProjectionType(tmpstr);
+	projection = new Projector(Vec4i(0,0,800,600), 60);
 	projection->init(conf);
 }
 
@@ -127,19 +125,21 @@ void StelCore::preDraw(int delta_time)
 	// Init viewport to current projector values
 	projection->applyViewport();
 
+	projection->setCurrentFrame(Projector::FRAME_J2000);
+
 	const Vec4i &v(projection->getViewport());
 	Vec3d e0,e1,e2,e3;
-	projection->unproject_j2000(v[0],v[1],e0);
-	projection->unproject_j2000(v[0]+v[2],v[1]+v[3],e2);
+	projection->unProject(v[0],v[1],e0);
+	projection->unProject(v[0]+v[2],v[1]+v[3],e2);
 	if (projection->needGlFrontFaceCW())
 	{
-		projection->unproject_j2000(v[0],v[1]+v[3],e3);
-		projection->unproject_j2000(v[0]+v[2],v[1],e1);
+		projection->unProject(v[0],v[1]+v[3],e3);
+		projection->unProject(v[0]+v[2],v[1],e1);
 	}
 	else
 	{
-		projection->unproject_j2000(v[0],v[1]+v[3],e1);
-		projection->unproject_j2000(v[0]+v[2],v[1],e3);
+		projection->unProject(v[0],v[1]+v[3],e1);
+		projection->unProject(v[0]+v[2],v[1],e3);
 	}
 
 	// This still needs a fix
@@ -152,21 +152,6 @@ void StelCore::preDraw(int delta_time)
 void StelCore::postDraw()
 {
 	projection->draw_viewport_shape();
-}
-
-void StelCore::setProjectionType(const string& sptype)
-{
-	Projector::PROJECTOR_TYPE pType = Projector::stringToType(sptype);
-	if (projection->getType()==pType)
-		return;
-	Projector *const ptemp = Projector::create(pType,
-	                         projection->getViewport(),
-	                         projection->getFov());
-	ptemp->setMaskType(projection->getMaskType());
-	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
-	delete projection;
-	projection = ptemp;
-	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 
