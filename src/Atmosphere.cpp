@@ -51,7 +51,6 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
                                ToneReproducer * eye, Projector* prj,
                                float latitude, float altitude, float temperature, float relative_humidity)
 {
-
 	float min_mw_lum = 0.13;
 
 	// no need to calculate if not visible

@@ -33,7 +33,6 @@ class Observer;
 class StelCore
 {
 public:
-	// Inputs are the locale directory and root directory and callback function for recording actions
     StelCore();
     virtual ~StelCore();
 
@@ -69,16 +68,15 @@ public:
 	//! Get the current observer description (as a const object)
 	const Observer* getObservatory() const {return observatory;}
 	
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Planets flags
+	//! Change the current home planet
 	bool setHomePlanet(string planet);
 
 private:
 	// Main elements of the program
-	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observer * observatory;			// Manage observer position
-	Projector * projection;				// Manage the projection mode and matrix
-	ToneReproducer * tone_converter;	// Tones conversion between stellarium world and display device
+	Navigator* navigation;				// Manage all navigation parameters, coordinate transformations etc..
+	Observer* observatory;			// Manage observer position
+	Projector* projection;				// Manage the projection mode and matrix
+	ToneReproducer* tone_converter;	// Tones conversion between stellarium world and display device
 	class MovementMgr* movementMgr;		// Manage vision movements
 };
 

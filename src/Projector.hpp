@@ -30,8 +30,8 @@
 
 class InitParser;
 
-// Class which handle projection modes and projection matrix
-// Overide some function usually handled by glu
+//! Class which handle projection modes and projection matrix
+//! Overide some function usually handled by glu
 class Projector
 {
 public:
