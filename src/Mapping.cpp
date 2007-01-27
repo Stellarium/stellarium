@@ -59,8 +59,12 @@ bool MappingStereographic::forward(Vec3d &v)
 {
 	const double r = std::sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
 	const double h = 0.5*(r-v[2]);
-	if (h <= 0.0)
+	if (h <= 0.0) {
+		v[0] *= 1e99;
+		v[1] *= 1e99;
+		v[2] = -1e99;
 		return false;
+	}
 	const double f = 1.0 / h;
 	v[0] *= f;
 	v[1] *= f;
@@ -70,13 +74,9 @@ bool MappingStereographic::forward(Vec3d &v)
 
 bool MappingStereographic::backward(Vec3d &v)
 {
-  v[0] *= 0.5;
-  v[1] *= 0.5;
-  const double lq = v[0]*v[0] + v[1]*v[1];
-  v[0] *= 2.0;
-  v[1] *= 2.0;
-  v[2] = - (lq - 1.0); // why minus ?
-  v *= (1.0 / (lq + 1.0));
+  const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
+  v[2] = - (lqq - 1.0); // why minus ?
+  v *= (1.0 / (lqq + 1.0));
   return true;
 }
 
@@ -92,13 +92,14 @@ Mapping MappingFisheye::getMapping() const
 
 bool MappingFisheye::forward(Vec3d &v)
 {
+	const double l = v.length();
 	const double oneoverh = 1./std::sqrt(v[0]*v[0]+v[1]*v[1]);
 	double a = M_PI_2 + std::atan(v[2]*oneoverh);
 	const double f = a * oneoverh;
 	v[0] *= f;
 	v[1] *= f;
 	v[2] = std::fabs(v[2]);
-	return (a<0.9*M_PI) ? true : false;
+	return true;
 }
 
 bool MappingFisheye::backward(Vec3d &v)
@@ -153,12 +154,20 @@ Mapping MappingPerspective::getMapping() const
 
 bool MappingPerspective::forward(Vec3d &v)
 {
-  const double d = -v[2];
-  if (d <= 0) return false;
-  v[0] /= d;
-  v[1] /= d;
-  v[2] = d;
-  return true;
+  v[2] = -v[2];
+  if (v[2] > 0) {
+    v[0] /= v[2];
+    v[1] /= v[2];
+    return true;
+  }
+  if (v[2] < 0) {
+    v[0] /= (-v[2]);
+    v[1] /= (-v[2]);
+    return false;
+  }
+  v[0] *= 1e99;
+  v[1] *= 1e99;
+  return false;
 }
 
 bool MappingPerspective::backward(Vec3d &v)
@@ -181,20 +190,22 @@ Mapping MappingOrthographic::getMapping() const
 
 bool MappingOrthographic::forward(Vec3d &v)
 {
-  const double d = -v[2];
-  v.normalize();
-  v[2] = d;
-  if (v[2] < 0) return false;
-  return true;
+  const double h = 1.0/v.length();
+  v[0] *= h;
+  v[1] *= h;
+  v[2] = -v[2];
+  return (v[2] >= 0.0);
 }
 
 bool MappingOrthographic::backward(Vec3d &v)
 {
-  const double h = 1.0 - v[0]*v[0] - v[1]*v[1];
+  const double dq = v[0]*v[0] + v[1]*v[1];
+  double h = 1.0 - dq;
   if (h < 0) {
-    v[0] = 0.0;
-    v[1] = 0.0;
-    v[2] = 1.0;
+    h = 1.0/sqrt(dq);
+    v[0] *= h;
+    v[1] *= h;
+    v[2] = 0.0;
     return false;
   }
   v[2] = sqrt(h);  // why not minus ?
