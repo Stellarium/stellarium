@@ -75,4 +75,15 @@ private:
 	static bool backward(Vec3d& v);
 };
 
+class MappingOrthographic
+{
+public:
+	std::string getName() const {return "orthographic";} 
+	Mapping getMapping() const;
+
+private:
+	static bool forward(Vec3d& win);
+	static bool backward(Vec3d& v);
+};
+
 #endif /*MAPPING_HPP_*/

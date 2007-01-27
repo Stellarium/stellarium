@@ -23,6 +23,7 @@
 #include <cassert>
 #include "Projector.hpp"
 #include "InitParser.hpp"
+#include "Mapping.hpp"
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type) {
   if(type == DISK ) return "disk";
@@ -67,6 +68,8 @@ void Projector::init(const InitParser& conf)
 	registerProjectionMapping(MappingStereographic());
 	registerProjectionMapping(MappingFisheye());
 	registerProjectionMapping(MappingCylinder());
+	registerProjectionMapping(MappingPerspective());
+	registerProjectionMapping(MappingOrthographic());
 	
 	tmpstr = conf.get_str("projection:type");
 	setCurrentProjection(tmpstr);
@@ -274,8 +277,16 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 *************************************************************************/
 bool Projector::project(const Vec3d &v, Vec3d &win) const
 {
-	win=v;
-	win.transfo4d(modelViewMatrix);
+//	win=v;
+//	win.transfo4d(modelViewMatrix);
+
+	  // really important speedup:
+	win[0] = modelViewMatrix.r[0]*v[0] + modelViewMatrix.r[4]*v[1]
+	       + modelViewMatrix.r[8]*v[2] + modelViewMatrix.r[12];
+	win[1] = modelViewMatrix.r[1]*v[0] + modelViewMatrix.r[5]*v[1]
+	       + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
+	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
+	       + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
 	if (!projectForward(win))
 		return false;
 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
