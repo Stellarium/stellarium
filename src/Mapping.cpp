@@ -153,14 +153,50 @@ Mapping MappingPerspective::getMapping() const
 
 bool MappingPerspective::forward(Vec3d &v)
 {
-	const double d = v[2];
-	v[0] /= d;
-	v[1] /= d;
-	return true;
+  const double d = -v[2];
+  if (d <= 0) return false;
+  v[0] /= d;
+  v[1] /= d;
+  v[2] = d;
+  return true;
 }
 
 bool MappingPerspective::backward(Vec3d &v)
 {
-	
-	return true;
+  v[2] = std::sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
+  v[0] *= v[2];
+  v[1] *= v[2];
+  return true;
+}
+
+Mapping MappingOrthographic::getMapping() const
+{
+  Mapping m;
+  m.mapForward = boost::callback<bool, Vec3d&>(forward);
+  m.mapBackward = boost::callback<bool, Vec3d&>(backward);
+  m.minFov = 0.0001;
+  m.maxFov = 120.0;
+  return m;
+}
+
+bool MappingOrthographic::forward(Vec3d &v)
+{
+  const double d = -v[2];
+  v.normalize();
+  v[2] = d;
+  if (v[2] < 0) return false;
+  return true;
+}
+
+bool MappingOrthographic::backward(Vec3d &v)
+{
+  const double h = 1.0 - v[0]*v[0] - v[1]*v[1];
+  if (h < 0) {
+    v[0] = 0.0;
+    v[1] = 0.0;
+    v[2] = 1.0;
+    return false;
+  }
+  v[2] = sqrt(h);  // why not minus ?
+  return true;
 }

@@ -25,10 +25,10 @@
 #include "stellarium.h"
 #include "vecmath.h"
 #include "SFont.hpp"
-#include "Mapping.hpp"
 #include "callbacks.hpp"
 
 class InitParser;
+class Mapping;
 
 //! Class which handle projection modes and projection matrix
 //! Overide some function usually handled by glu
