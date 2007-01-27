@@ -287,12 +287,15 @@ bool Projector::project(const Vec3d &v, Vec3d &win) const
 	       + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
 	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
 	       + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-	if (!projectForward(win))
-		return false;
+	const bool rval = projectForward(win);
+	  // very important: even when the projected point comes from an
+	  // invisible region of the sky (rval=false), we must finish
+	  // reprojecting, so that OpenGl can successfully eliminate
+	  // polygons by culling.
 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
 	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
 	win[2] = (win[2] - zNear) / (zFar-zNear);
-	return true;
+	return rval;
 }
 
 /*************************************************************************
@@ -880,6 +883,7 @@ void Projector::drawVertex3v(const Vec3d& v) const
 	Vec3d win;
 	project(v, win);
 	glVertex2f(win[0],win[1]);
+//	glVertex3dv(win.v);
 }
 
 ///////////////////////////////////////////////////////////////////////////
