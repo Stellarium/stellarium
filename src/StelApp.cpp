@@ -308,9 +308,6 @@ void StelApp::init(void)
 
 	setViewPortDistorterType(conf.get_str("video","distorter","none"));
 
-	// Load standard modules TODO
-
-
 	// Load dynamic external modules
 	int i=1;
 	while (true)
