@@ -30,8 +30,9 @@
 class InitParser;
 class Mapping;
 
-//! Class which handle projection modes and projection matrix
-//! Overide some function usually handled by glu
+//! Class which handle projection in stellarium. It overrides a number of openGL functions
+//! to enable non-linear projection, such as fisheye or stereographic projections.
+//! This class also provide drawing primitives that are optimized according to the projection mode.
 class Projector
 {
 public:
@@ -229,7 +230,8 @@ public:
 	// Fill with black around the viewport
 	void draw_viewport_shape(void);
 	
-	//! Generalisation of glVertex3v
+	//! Generalisation of glVertex3v.
+ 	//! This method assumes that we are in orthographic projection mode, which is true for special projections.
 	void drawVertex3v(const Vec3d& v) const;
 	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
 	
