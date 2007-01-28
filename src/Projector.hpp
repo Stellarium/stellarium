@@ -311,7 +311,7 @@ public:
 	void sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
 
 
-protected:
+private:
 
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
