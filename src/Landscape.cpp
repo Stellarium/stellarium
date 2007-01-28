@@ -256,43 +256,49 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 	if (!land_fader.getInterstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
-
-	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.getInterstate());
-
-	int subdiv = 128/(nb_decor_repeat*nb_side);
-	if (subdiv<=0) subdiv = 1;
-	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
-	float dz = radius * std::sin(decor_alt_angle*M_PI/180.f);
-	float z;
-	float x,y;
-	float a;
-
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-
-	z=radius*std::sin(decor_angle_shift*M_PI/180.);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	for (int n=0;n<nb_decor_repeat;++n)
-	{
-		a = 2.f*M_PI*n/nb_decor_repeat;
-		for (int i=0;i<nb_side;++i)
-		{
-			sides[i].tex->bind();
+	glColor4f(sky_brightness, sky_brightness, sky_brightness,
+	          land_fader.getInterstate());
+	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+
+	const int stacks = 4;
+	int slices_per_side = 128/(nb_decor_repeat*nb_side);
+	if (slices_per_side<=0) slices_per_side = 1;
+	const double z0 = radius * std::sin(decor_angle_shift*M_PI/180.0);
+	const double d_z = radius * std::sin(decor_alt_angle*M_PI/180.0) / stacks;
+	const double alpha = 2.0*M_PI/(nb_decor_repeat*nb_side*slices_per_side);
+	const double ca = cos(alpha);
+	const double sa = sin(alpha);
+	double y0 = radius;
+	double x0 = 0.0;
+	for (int n=0;n<nb_decor_repeat;n++) for (int i=0;i<nb_side;i++) {
+		sides[i].tex->bind();
+		double tx0 = sides[i].tex_coords[0];
+		const float d_tx0 = (sides[i].tex_coords[2]-sides[i].tex_coords[0])
+		                  / slices_per_side;
+		const float d_ty = (sides[i].tex_coords[3]-sides[i].tex_coords[1])
+		                 / stacks;
+		for (int j=0;j<slices_per_side;j++) {
+			const double y1 = y0*ca - x0*sa;
+			const double x1 = y0*sa + x0*ca;
+			const float tx1 = tx0 + d_tx0;
+			double z = z0;
+			float ty0 = sides[i].tex_coords[1];
 			glBegin(GL_QUAD_STRIP);
-			for (int j=0;j<=subdiv;++j)
-			{
-				x = radius * std::sin(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
-				y = radius * std::cos(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
-				glNormal3f(-x, -y, 0);
-				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-				             sides[i].tex_coords[3]);
-				prj->drawVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]));
-				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-				             sides[i].tex_coords[1]);
-				prj->drawVertex3(x, y, z);
+			for (int k=0;k<=stacks;k++) {
+				glTexCoord2f(tx0,ty0);
+				prj->drawVertex3(x0, y0, z);
+				glTexCoord2f(tx1,ty0);
+				prj->drawVertex3(x1, y1, z);
+				z += d_z;
+				ty0 += d_ty;
 			}
 			glEnd();
+			y0 = y1;
+			x0 = x1;
+			tx0 = tx1;
 		}
 	}
 	glDisable(GL_CULL_FACE);
@@ -310,10 +316,10 @@ void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	ground_tex->bind();
-	int subdiv = 128/(nb_decor_repeat*nb_side);
-	if (subdiv<=0) subdiv = 1;
+	int slices_per_side = 128/(nb_decor_repeat*nb_side);
+	if (slices_per_side<=0) slices_per_side = 1;
 	prj->setCustomFrame(mat);
-	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, 1);
+	prj->sDisk(radius,nb_side*slices_per_side*nb_decor_repeat,5, 1);
 	glDisable(GL_CULL_FACE);
 }
 
