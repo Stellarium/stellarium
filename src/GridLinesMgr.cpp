@@ -503,9 +503,9 @@ void SkyGrid::draw(const Projector* prj) const
 			assert(*k>=0. && *k<=2.*M_PI);
 			assert((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
 			if (*k>M_PI)
-				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5)/10))].insert(*k);
+				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5.0)/10.0))].insert(*k);
 			else
-				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5)/10))].insert(*k);
+				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5.0)/10.0))].insert(*k);
 		}
 	}
 	
