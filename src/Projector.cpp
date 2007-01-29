@@ -915,14 +915,14 @@ inline void Projector::drawSprite2dMode(double x, double y, double size) const
 
 	const double radius = size*0.5;
 	glBegin(GL_QUADS );
-	glTexCoord2i(0,0);
-	glVertex2f(x-radius,y-radius);
-	glTexCoord2i(1,0);
-	glVertex2f(x+radius,y-radius);
-	glTexCoord2i(1,1);
-	glVertex2f(x+radius,y+radius);
-	glTexCoord2i(0,1);
-	glVertex2f(x-radius,y+radius);
+		glTexCoord2i(0,0);
+		glVertex2f(x-radius,y-radius);
+		glTexCoord2i(1,0);
+		glVertex2f(x+radius,y-radius);
+		glTexCoord2i(1,1);
+		glVertex2f(x+radius,y+radius);
+		glTexCoord2i(0,1);
+		glVertex2f(x-radius,y+radius);
 	glEnd();
 }
 
@@ -936,14 +936,14 @@ void Projector::drawSprite2dMode(double x, double y, double size, double rotatio
 	glRotatef(rotation,0.,0.,1.);
 	const double radius = size*0.5;
 	glBegin(GL_QUADS );
-	glTexCoord2i(0,0);
-	glVertex2f(-radius,-radius);
-	glTexCoord2i(1,0);
-	glVertex2f(+radius,-radius);
-	glTexCoord2i(1,1);
-	glVertex2f(+radius,+radius);
-	glTexCoord2i(0,1);
-	glVertex2f(-radius,+radius);
+		glTexCoord2i(0,0);
+		glVertex2f(-radius,-radius);
+		glTexCoord2i(1,0);
+		glVertex2f(+radius,-radius);
+		glTexCoord2i(1,1);
+		glVertex2f(+radius,+radius);
+		glTexCoord2i(0,1);
+		glVertex2f(-radius,+radius);
 	glEnd();
 	glPopMatrix();
 }
