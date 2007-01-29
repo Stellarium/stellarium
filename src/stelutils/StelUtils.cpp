@@ -123,6 +123,19 @@ namespace StelUtils {
 		m = (unsigned int)((angle - d)*60);
 		s = (angle-d)*3600-60*m;
 	}
+
+//	// Convert an angle in radian to hms a formatted string
+//	void radToHmsStr(double angle, unsigned int& h, unsigned int& m, double& s)
+//	{
+//		unsigned int h,m, d;
+//		double s;
+//		bool sign;
+//		ostringstream ras;
+//		StelUtils::radToHms(ra, h, m, s);
+//		ras << h << "%20" << m << "%20" << s;
+//		ostringstream des;
+//		StelUtils::radToDms(de, sign, d, m, s);	
+//	}
 	
 	// Obtains a Vec3f from a string with the form x,y,z
 	Vec3f str_to_vec3f(const string& s)
