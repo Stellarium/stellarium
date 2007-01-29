@@ -1374,7 +1374,10 @@ int StarMgr::drawStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec
 
   glColor3fv(color*cmag);
 
-  //glBlendFunc(GL_ONE, GL_ONE);
+    // Blending is really important. Otherwise faint stars in the vicinity of
+    // bright star will cause tiny black squares on the bright star, e.g.
+    // see Procyon.
+  glBlendFunc(GL_ONE, GL_ONE);
 
 	prj->drawSprite2dMode(XY[0], XY[1], 2*rmag);
   return 0;
