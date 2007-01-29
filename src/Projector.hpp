@@ -257,7 +257,9 @@ public:
 	//! @param angleDeg rotation angle in degree. Rotation is around x,y
 	//! @param xshift shift in pixel in the rotated x direction
 	//! @param yshift shift in pixel in the rotated y direction
-	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const;
+	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const
+		{drawText(font, x, y, StelUtils::stringToWstring(str), angleDeg, xshift, yshift);}
+	void drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const;
 
 	//! Draw a parallel arc in the current frame, starting from point start
 	//!  going in the positive longitude direction and with the given length in radian.

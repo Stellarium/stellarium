@@ -769,7 +769,7 @@ void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring&
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void Projector::drawText(const SFont* font, float x, float y, const string& str, float angleDeg, float xshift, float yshift) const
+void Projector::drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg, float xshift, float yshift) const
 {
 	glPushMatrix();
 	glTranslatef(x,y,0);
@@ -810,15 +810,14 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		ostringstream oss;
-		oss << lat*180./M_PI;
+		const wstring str = StelUtils::printAngleDMS(lat);
 		float xshift=5;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
 			angleDeg+=180.;
-			xshift=-font->getStrLen(oss.str())-5.f;
+			xshift=-font->getStrLen(str)-5.f;
 		}
-		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 
 		// Label at end of the arc
 		StelUtils::sphe_to_rect(lon+length-0.0000001, lat, v2);
@@ -829,9 +828,9 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		if (angleDeg>90. || angleDeg<-90.)
 		{
 			angleDeg+=180.;
-			xshift=-font->getStrLen(oss.str())-5.f;
+			xshift=-font->getStrLen(str)-5.f;
 		}
-		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 	}
 }
 
@@ -867,15 +866,14 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		ostringstream oss;
-		oss << lon*180./M_PI;
+		const wstring str = StelUtils::printAngleHMS(lon);
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
 			angleDeg+=180.;
-			xshift=-font->getStrLen(oss.str())-20.f;
+			xshift=-font->getStrLen(str)-20.f;
 		}
-		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 
 		// Label at end of the arc
 		StelUtils::sphe_to_rect(lon, lat+length-0.0000001, v2);
@@ -886,9 +884,9 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		if (angleDeg>90. || angleDeg<-90.)
 		{
 			angleDeg+=180.;
-			xshift=-font->getStrLen(oss.str())-20.f;
+			xshift=-font->getStrLen(str)-20.f;
 		}
-		drawText(font, win1[0], win1[1], oss.str(), angleDeg, xshift, 3);
+		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 	}
 }
 
