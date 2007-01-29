@@ -1,3 +1,5 @@
+
+#include <set>
 #include "GridLinesMgr.hpp"
 
 #include "StelApp.hpp"
@@ -206,6 +208,13 @@ static bool isParallelEntering(const Projector* prj, const Vec2d& v, double lat)
 	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
 }
 
+//! Check if the given point from the viewport side is the beginning of a parallel or not
+//! Beginning means that the direction of increasing longitude goes inside the viewport 
+static bool isParallelEntering(const Projector* prj, double lon, double lat)
+{
+	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
+}
+
 //! Check if the given point from the viewport side is the beginning of a meridian or not
 //! Beginning means that the direction of increasing latitude goes inside the viewport 
 //! @param lon180 Modified longitude in radian
@@ -299,7 +308,7 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 //! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*stepMas
 //! with a precision < 0.5 pixels
 //! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
-static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* prj, 
+static void getPslow(map<int, set<double> > & result, const Projector* prj, 
 	const Vec2d& p0, const Vec2d& p1, double step, 
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
@@ -324,7 +333,7 @@ static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* pr
 			
 			for (double v=r1;v<r2;v+=step)
 				if (funcp<=v && funcpDpix>v)
-					result[(int)(v*RADIAN_MAS)][func2(prj, p)]=p;
+					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p));
 		}
 		else
 		{
@@ -334,7 +343,7 @@ static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* pr
 			
 			for (double v=r2;v<r1;v+=step)
 				if (funcp>=v && funcpDpix<v)
-					result[(int)(v*RADIAN_MAS)][func2(prj, p)]=p;
+					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p));
 		}
 		
 		p+=dPixPrec;
@@ -408,8 +417,8 @@ void SkyGrid::draw(const Projector* prj) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionParallel(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : getClosestResolutionMeridian(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))));
 	
-	map<int, map<double, Vec2d> > resultsParallels;
-	map<int, map<double, Vec2d> > resultsMeridians;
+	map<int, set<double> > resultsParallels;
+	map<int, set<double> > resultsMeridians;
 	const vector<Vec2d> viewportVertices = prj->getViewportVertices();
 	for (unsigned int i=0;i<viewportVertices.size();++i)
 	{
@@ -421,7 +430,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 
 	// Draw the parallels
-	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
+	for (map<int, set<double> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
 	{
 		if (iter->second.size()%2!=0)
 		{
@@ -429,8 +438,8 @@ void SkyGrid::draw(const Projector* prj) const
 		}
 		else
 		{
-			map<double, Vec2d>::const_iterator ii = iter->second.begin();
-			if (!isParallelEntering(prj, iter->second.begin()->second, (double)iter->first/RADIAN_MAS))
+			set<double>::const_iterator ii = iter->second.begin();
+			if (!isParallelEntering(prj, *iter->second.begin(), (double)iter->first/RADIAN_MAS))
 			{
 				++ii;
 			}
@@ -439,13 +448,13 @@ void SkyGrid::draw(const Projector* prj) const
 			double size;
 			for (unsigned int i=0;i<iter->second.size()/2;++i)
 			{
-				double lon = ii->first;
+				double lon = *ii;
 				StelUtils::sphe_to_rect(lon, (double)iter->first/RADIAN_MAS, vv);
 				++ii;
 				if (ii==iter->second.end())
-					size = iter->second.begin()->first - lon;
+					size = *iter->second.begin() - lon;
 				else
-					size = ii->first - lon;
+					size = *ii - lon;
 				if (size<0) size+=2.*M_PI;
 				prj->drawParallel(vv, size, true, &font);
 				++ii;
@@ -458,7 +467,7 @@ void SkyGrid::draw(const Projector* prj) const
 	if (northPoleInViewport)
 	{
 		const double lastLat = (double)(--resultsParallels.end())->first/RADIAN_MAS;
-		for (double lat=lastLat+gridStepParallelRad;lat<M_PI;lat+=gridStepParallelRad)
+		for (double lat=lastLat+gridStepParallelRad;lat<M_PI/2-0.00001;lat+=gridStepParallelRad)
 		{
 			Vec3d vv(std::cos(lat), 0, std::sin(lat));
 			prj->drawParallel(vv, 2.*M_PI);
@@ -467,7 +476,7 @@ void SkyGrid::draw(const Projector* prj) const
 	if (southPoleInViewport)
 	{
 		const double lastLat = (double)resultsParallels.begin()->first/RADIAN_MAS;
-		for (double lat=lastLat-gridStepParallelRad;lat>-M_PI;lat-=gridStepParallelRad)
+		for (double lat=lastLat-gridStepParallelRad;lat>-M_PI/2+0.00001;lat-=gridStepParallelRad)
 		{
 			Vec3d vv(std::cos(lat), 0, std::sin(lat));
 			prj->drawParallel(vv, 2.*M_PI);
@@ -477,21 +486,21 @@ void SkyGrid::draw(const Projector* prj) const
 	// Draw meridians
 	
 	// Discriminate meridian categories, if latitude is > pi, the real longitude180 is -longitude+pi 
-	map<int, map<double, Vec2d> > resultsMeridiansOrdered;
-	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
+	map<int, set<double> > resultsMeridiansOrdered;
+	for (map<int, set<double> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
 	{
-		for (map<double, Vec2d>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
+		for (set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 		{
-			assert(k->first>=0. && k->first<=2.*M_PI);
+			assert(*k>=0. && *k<=2.*M_PI);
 			assert((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
-			if (k->first>M_PI)
-				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5)/10))][k->first]=k->second;
+			if (*k>M_PI)
+				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5)/10))].insert(*k);
 			else
-				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5)/10))][k->first]=k->second;
+				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5)/10))].insert(*k);
 		}
 	}
 	
-	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
+	for (map<int, set<double> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
 	{
 //		cerr << "------- lon1802=" << iter->first << "--------" << endl;
 //		for (map<double, Vec2d>::const_iterator k = iter->second.begin();k!=iter->second.end();++k)
@@ -509,8 +518,8 @@ void SkyGrid::draw(const Projector* prj) const
 		}
 		else
 		{
-			map<double, Vec2d>::const_iterator k = iter->second.begin();
-			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first))
+			set<double>::const_iterator k = iter->second.begin();
+			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
 			{
 				++k;
 			}
@@ -519,13 +528,13 @@ void SkyGrid::draw(const Projector* prj) const
 			double size;
 			for (unsigned int i=0;i<iter->second.size()/2;++i)
 			{
-				double lat180 = k->first;
+				double lat180 = *k;
 				spheToRectLat1802((double)iter->first/RADIAN_MAS, lat180, vv);
 				++k;
 				if (k==iter->second.end())
-					size = iter->second.begin()->first - lat180;
+					size = *iter->second.begin() - lat180;
 				else
-					size = k->first - lat180;
+					size = *k - lat180;
 				if (size<0.) size+=2.*M_PI;
 				prj->drawMeridian(vv, size, true, &font);
 				++k;
@@ -559,13 +568,6 @@ void SkyGrid::draw(const Projector* prj) const
 	// Draw meridian zero which can't be found by the normal algo..
 	Vec3d vv(1,0,0);
 	prj->drawMeridian(vv, 2.*M_PI, true, &font);
-
-//	Vec3d v;
-//	double lon, lat;
-//	spheToRectLat180(15*M_PI/180., 25*M_PI/180., v);
-//	rectToSpheLat180(lon, lat, v);
-//	cerr << lon*180./M_PI << " " << lat*180./M_PI << endl;
-
 }
 
 
