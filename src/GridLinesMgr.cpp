@@ -313,7 +313,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
-	const double precision = 0.2;
+	const double precision = 5;
 	const Vec2d deltaP(p1-p0);
 	Vec2d p = p0;
 	const Vec2d dPix1 = deltaP/(deltaP.length());	// 1 pixel step
@@ -377,7 +377,7 @@ static double getClosestResolutionMeridian(double pixelPerRad)
 		{
 			return STEP_SIZES_HMS[i]/3600.;
 		}
-	return 10.;
+	return 15.;
 }
 
 void SkyGrid::draw(const Projector* prj) const
