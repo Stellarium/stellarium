@@ -313,17 +313,17 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
-	const double precision = 5;
+	double precision = 5;
 	const Vec2d deltaP(p1-p0);
 	Vec2d p = p0;
 	const Vec2d dPix1 = deltaP/(deltaP.length());	// 1 pixel step
-	const Vec2d dPixPrec = deltaP*precision/(deltaP.length());	// 0.5 pixel step
 	double funcp, funcpDpix;
 	
 	funcp = func(prj, p);
-	funcpDpix = func(prj, p+dPixPrec);
+	funcpDpix = func(prj, p+dPix1*precision);
 		
-	for (double u=0;u<deltaP.length();u+=precision)
+	double u=0;
+	do
 	{	
 		if (funcp<funcpDpix)
 		{
@@ -333,7 +333,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 			
 			for (double v=r1;v<r2;v+=step)
 				if (funcp<=v && funcpDpix>v)
-					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p));
+					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
 		}
 		else
 		{
@@ -343,13 +343,22 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 			
 			for (double v=r2;v<r1;v+=step)
 				if (funcp>=v && funcpDpix<v)
-					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p));
+					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
 		}
 		
-		p+=dPixPrec;
+		precision = step/ (fabs(funcpDpix-funcp)/precision) * 0.5;
+		if (precision>2)
+			precision = 2.;
+		else if (precision<0.1)
+		{
+			precision = 0.1;
+		}
+		u+=precision;
+		p+=dPix1*precision;
 		funcp = funcpDpix;
 		funcpDpix = func(prj,p);
 	}
+	while(u<deltaP.length());
 }
 
 // Step sizes in arcsec
