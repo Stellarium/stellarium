@@ -96,64 +96,82 @@ const static double DEGREE_MAS = 1000.*60.*60.;
 const static double ARCMIN_MAS = 1000.*60;
 const static double ARCSEC_MAS = 1000.;
 
-//! Return the standard longitude in degree [-180;+180] for a position given in the viewport
+//! Return the standard longitude in radian [-pi;+pi] for a position given in the viewport
 static double getLonFrom2dPos(const Projector* prj, const Vec2d& p)
 {
 	Vec3d v;
 	prj->unProject(p[0], p[1], v);
-	return RADIAN_DEG*std::atan2(v[1],v[0]);
+	return std::atan2(v[1],v[0]);
 }
 
-//! Return the standard latitude in degree [-90;+90] for a position given in the viewport
+//! Return the standard latitude in radian [-pi/2;+pi/2] for a position given in the viewport
 static double getLatFrom2dPos(const Projector* prj, const Vec2d& p)
 {
 	Vec3d v;
 	prj->unProject(p[0], p[1], v);
-	return RADIAN_DEG*std::asin(v[2]);
+	return std::asin(v[2]);
 }
 
 
 void rectToSpheLat180(double& lon, double& lat, const Vec3d& v)
 {
 	StelUtils::rect_to_sphe(&lon, &lat, v);
+	// lon is now between -pi and pi, we want it between 0 and pi, like a latitude
+	// lat is now between -pi/2 and pi/2, we want it between 0 and 2*pi like a longitude
 	lat += M_PI/2;
-	// Longitude between -180 and 180..
 	if (lon<0.)
 	{
 		lat = 2.*M_PI-lat;
 		lon = -lon;
 	}
+	assert(lat>=0. && lat<=2.*M_PI);
+	assert(lon>=0. && lon<=M_PI);
 }
 
 void spheToRectLat180(double lon, double lat, Vec3d& v)
 {
+	assert(lat>=0. && lat<=2.*M_PI);
+	assert(lon>=0. && lon<=M_PI);
 	if (lat>M_PI)
 	{
 		lat = 2.*M_PI-lat;
-		lon = 2.*M_PI-lon;
+		lon = -lon;
 	}
 	lat -= M_PI/2;
 	StelUtils::sphe_to_rect(lon, lat, v);
 }
 
-//! Return a special latitude in degree [0;+360] for a position given in the viewport
-static double getLatFrom2dPosLat180(const Projector* prj, const Vec2d& p)
+void spheToRectLat1802(double lon, double lat, Vec3d& v)
 {
-	Vec3d v;
-	prj->unProject(p[0], p[1], v);
-	double lon, lat;
-	rectToSpheLat180(lon, lat, v);
-	return RADIAN_DEG*lat;
+	assert(lat>=0. && lat<=2.*M_PI);
+	assert(lon>=0. && lon<=M_PI);
+	if (lat>M_PI)
+	{
+		lat = 2.*M_PI-lat;
+		lon += M_PI;
+	}
+	lat -= M_PI/2;
+	StelUtils::sphe_to_rect(lon, lat, v);
 }
 
-//! Return a special longitude in degree [0;180] for a position given in the viewport
-static double getLonFrom2dPosLat180(const Projector* prj, const Vec2d& p)
+//! Return a special latitude in radian [0;2*pi] for a position given in the viewport
+static double getLatFrom2dPos180(const Projector* prj, const Vec2d& p)
 {
 	Vec3d v;
 	prj->unProject(p[0], p[1], v);
 	double lon, lat;
 	rectToSpheLat180(lon, lat, v);
-	return RADIAN_DEG*lon;
+	return lat;
+}
+
+//! Return a special longitude in radian [0;pi] for a position given in the viewport
+static double getLonFrom2dPos180(const Projector* prj, const Vec2d& p)
+{
+	Vec3d v;
+	prj->unProject(p[0], p[1], v);
+	double lon, lat;
+	rectToSpheLat180(lon, lat, v);
+	return lon;
 }
 
 
@@ -168,12 +186,14 @@ static Vec3d get2dPosFromSpherical(const Projector* prj, double lon, double lat)
 }
 
 
-//! Return the 2D position in the viewport from a longitude and latitude in radian
-static Vec3d get2dPosFromSphericalLat0180(const Projector* prj, double lon, double lat)
+//! Return the 2D position in the viewport from special longitude and latitude in radian
+static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double lat)
 {
 	Vec3d v;
 	Vec3d win;
-	spheToRectLat180(lon, lat, v);
+	
+	spheToRectLat1802(lon, lat, v);
+
 	prj->project(v, win);
 	return win;
 }
@@ -183,26 +203,38 @@ static Vec3d get2dPosFromSphericalLat0180(const Projector* prj, double lon, doub
 static bool isParallelEntering(const Projector* prj, const Vec2d& v, double lat)
 {
 	const double lon = getLonFrom2dPos(prj, v);
-	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon/RADIAN_DEG+0.001, lat));
+	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
 }
 
 //! Check if the given point from the viewport side is the beginning of a meridian or not
 //! Beginning means that the direction of increasing latitude goes inside the viewport 
-static bool isMeridianEnteringLat180(const Projector* prj, const Vec2d& v, double lon180)
+//! @param lon180 Modified longitude in radian
+static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, double lat1802)
 {
-	const double lat180 = getLatFrom2dPosLat180(prj, v);
-	if (lat180>180.)
-		return prj->check_in_viewport(get2dPosFromSphericalLat0180(prj, M_PI-lon180, lat180/RADIAN_DEG+0.001));
-	else
-		return prj->check_in_viewport(get2dPosFromSphericalLat0180(prj, lon180, lat180/RADIAN_DEG+0.001));
+	assert(lat1802>=0. && lat1802<=2.*M_PI);
+	assert(lon1802>=0. && lon1802<=M_PI);
+	double lat2 = lat1802+0.001*prj->getFov();
+	if (lat2>2.*M_PI)
+		lat2-=2.*M_PI;
+	return prj->check_in_viewport(get2dPosFromSpherical1802(prj, lon1802, lat2));
 }
 
+////! Check if the given point from the viewport side is the beginning of a meridian or not
+////! Beginning means that the direction of increasing latitude goes inside the viewport 
+//static bool isMeridianEnteringLat180(const Projector* prj, const Vec2d& v, double lon180)
+//{
+//	const double lat180 = getLatFrom2dPos180(prj, v);
+//	if (lat180>M_PI)
+//		return prj->check_in_viewport(get2dPosFromSpherical180(prj, M_PI-lon180, lat180+0.001*prj->getFov()));
+//	else
+//		return prj->check_in_viewport(get2dPosFromSpherical180(prj, lon180, lat180+0.001*prj->getFov()));
+//}
 
 //! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*stepMas
 //! with a precision < 0.5 pixels
 //! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
 static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj, 
-	const Vec2d& p0, const Vec2d& p1, double stepMas, 
+	const Vec2d& p0, const Vec2d& p1, double step, 
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
@@ -215,7 +247,7 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 	funcp = func(prj, p);
 	funcpDpix = func(prj, p+dPixPrec);
 	deriv = (funcpDpix-funcp)/0.5;
-	target = stepMas*(std::floor(funcp/stepMas) + (deriv>0 ? 1:0));
+	target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
 	bool sureThatTargetExist = false;
 	while (u<deltaP.length())
 	{
@@ -225,10 +257,10 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 			// If more that one target was inside the range [funcp;funcpDpix] add them to the result list
 			while ((funcpDpix>=target && funcp<target) || (funcpDpix<=target && funcp>target))
 			{
-				if (result.find((int)(target*DEGREE_MAS))!=result.end() && result[(int)(target*DEGREE_MAS)].find(func2(prj, p))!=result[(int)(target*DEGREE_MAS)].end())
+				if (result.find((int)(target*RADIAN_MAS))!=result.end() && result[(int)(target*RADIAN_MAS)].find(func2(prj, p))!=result[(int)(target*DEGREE_MAS)].end())
 					cerr << "Err" << endl;
-				result[(int)(target*DEGREE_MAS)][func2(prj, p)]=p;
-				target+=(deriv>0) ? stepMas:-stepMas;
+				result[(int)(target*RADIAN_MAS)][func2(prj, p)]=p;
+				target+=(deriv>0) ? step:-step;
 			}
 		
 			p = p+dPixPrec;
@@ -236,7 +268,7 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 			funcp = funcpDpix;
 			funcpDpix = func(prj, p+dPixPrec);
 			deriv = (funcpDpix-funcp)/0.5;
-			target = stepMas*(std::floor(funcp/stepMas) + (deriv>0 ? 1:0));
+			target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
 			sureThatTargetExist = false;
 		}
 		else
@@ -246,7 +278,7 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 				
 			deriv = (funcpDpix-funcp)/0.5;
 			if (sureThatTargetExist==false)
-				target = stepMas*(std::floor(funcp/stepMas) + (deriv>0 ? 1:0));
+				target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
 			double dU = (target-funcp)/deriv;
 			// TODO handle this properly, maybe using 2nd derivatives?
 			if (fabs(dU)<0.05)
@@ -268,7 +300,7 @@ static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj,
 //! with a precision < 0.5 pixels
 //! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
 static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* prj, 
-	const Vec2d& p0, const Vec2d& p1, double stepMas, 
+	const Vec2d& p0, const Vec2d& p1, double step, 
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
@@ -287,22 +319,22 @@ static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* pr
 		if (funcp<funcpDpix)
 		{
 			// If targets are included inside the range, add them
-			const double r1 = stepMas*(std::floor(funcp/stepMas));
-			const double r2 = stepMas*(std::ceil(funcpDpix/stepMas));
+			const double r1 = step*(std::floor(funcp/step));
+			const double r2 = step*(std::ceil(funcpDpix/step));
 			
-			for (double v=r1;v<r2;v+=stepMas)
+			for (double v=r1;v<r2;v+=step)
 				if (funcp<=v && funcpDpix>v)
-					result[(int)(v*DEGREE_MAS)][func2(prj, p)]=p;
+					result[(int)(v*RADIAN_MAS)][func2(prj, p)]=p;
 		}
 		else
 		{
 			// If targets are included inside the range, add them
-			const double r1 = stepMas*(std::ceil(funcp/stepMas));
-			const double r2 = stepMas*(std::floor(funcpDpix/stepMas));
+			const double r1 = step*(std::ceil(funcp/step));
+			const double r2 = step*(std::floor(funcpDpix/step));
 			
-			for (double v=r2;v<r1;v+=stepMas)
+			for (double v=r2;v<r1;v+=step)
 				if (funcp>=v && funcpDpix<v)
-					result[(int)(v*DEGREE_MAS)][func2(prj, p)]=p;
+					result[(int)(v*RADIAN_MAS)][func2(prj, p)]=p;
 		}
 		
 		p+=dPixPrec;
@@ -312,14 +344,14 @@ static void getPslow(map<int, map<double, Vec2d> > & result, const Projector* pr
 }
 
 // Step sizes in arcsec
-static const double STEP_SIZES_DMS[] = {1., 10., 60., 600., 3600., 3600.*10.};
-static const double STEP_SIZES_HMS[] = {1., 10., 60., 600., 3600., 3600.*15.};
+static const double STEP_SIZES_DMS[] = {1., 10., 60., 600., 3600., 3600.*5., 3600.*10.};
+static const double STEP_SIZES_HMS[] = {1., 10., 60., 600., 3600., 3600.*2.5, 3600.*15.};
 
 static double getClosestResolutionParallel(double pixelPerRad)
 {
-	double minResolution = 50.;
+	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
-	for (unsigned int i=0;i<6;++i)
+	for (unsigned int i=0;i<7;++i)
 		if (STEP_SIZES_DMS[i]>minSizeArcsec)
 		{
 			return STEP_SIZES_DMS[i]/3600.;
@@ -351,9 +383,30 @@ void SkyGrid::draw(const Projector* prj) const
 
 	prj->setCurrentFrame(frameType);	// set 2D coordinate
 
+	// Check whether the pole are in the viewport
+	bool northPoleInViewport = false;
+	bool southPoleInViewport = false;
+	Vec3d win;
+	prj->project(Vec3d(0,0,1), win);
+	if (prj->check_in_viewport(win))
+		northPoleInViewport = true;
+	prj->project(Vec3d(0,0,-1), win);
+	if (prj->check_in_viewport(win))
+		southPoleInViewport = true;
+
+
+	// Get the longitude and latitude resolution at the center of the viewport
+	Vec3d centerV;
+	double lon0, lat0, lon1, lat1, lon2, lat2;
+	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
+	StelUtils::rect_to_sphe(&lon0, &lat0, centerV);
+	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2+1, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
+	StelUtils::rect_to_sphe(&lon1, &lat1, centerV);
+	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
+	StelUtils::rect_to_sphe(&lon2, &lat2, centerV);
 	
-	const double gridStepParallelDeg = getClosestResolutionParallel(prj->getPixelPerRad());
-	const double gridStepMeridianDeg = getClosestResolutionMeridian(prj->getPixelPerRad());
+	const double gridStepParallelRad = M_PI/180.*getClosestResolutionParallel(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
+	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : getClosestResolutionMeridian(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))));
 	
 	map<int, map<double, Vec2d> > resultsParallels;
 	map<int, map<double, Vec2d> > resultsMeridians;
@@ -363,23 +416,21 @@ void SkyGrid::draw(const Projector* prj) const
 		// The segment of the viewport is between v0 and v1
 		Vec2d vertex0 = viewportVertices[i];
 		Vec2d vertex1 = viewportVertices[(i+1)%viewportVertices.size()];
-		getPslow(resultsParallels, prj, vertex0, vertex1, gridStepParallelDeg, getLatFrom2dPos, getLonFrom2dPos);
-		getPslow(resultsMeridians, prj, vertex0, vertex1, gridStepMeridianDeg, getLonFrom2dPosLat180, getLatFrom2dPosLat180);
+		getPslow(resultsParallels, prj, vertex0, vertex1, gridStepParallelRad, getLatFrom2dPos, getLonFrom2dPos);
+		getPslow(resultsMeridians, prj, vertex0, vertex1, gridStepMeridianRad, getLonFrom2dPos180, getLatFrom2dPos180);
 	}
 
+	// Draw the parallels
 	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
 	{
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error parallel "<< iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
-//			Vec3d vv;
-//			prj->unProject(iter->second.begin()->second[0], iter->second.begin()->second[1], vv);
-//			prj->drawParallel(vv, 2.*M_PI, 48);
+			cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
 			map<double, Vec2d>::const_iterator ii = iter->second.begin();
-			if (!isParallelEntering(prj, iter->second.begin()->second, iter->first/RADIAN_MAS))
+			if (!isParallelEntering(prj, iter->second.begin()->second, (double)iter->first/RADIAN_MAS))
 			{
 				++ii;
 			}
@@ -388,15 +439,15 @@ void SkyGrid::draw(const Projector* prj) const
 			double size;
 			for (unsigned int i=0;i<iter->second.size()/2;++i)
 			{
-				prj->unProject(ii->second[0], ii->second[1], vv);
 				double lon = ii->first;
+				StelUtils::sphe_to_rect(lon, (double)iter->first/RADIAN_MAS, vv);
 				++ii;
 				if (ii==iter->second.end())
 					size = iter->second.begin()->first - lon;
 				else
 					size = ii->first - lon;
-				if (size<0) size+=360.;
-				prj->drawParallel(vv, size*M_PI/180., true, &font);
+				if (size<0) size+=2.*M_PI;
+				prj->drawParallel(vv, size, true, &font);
 				++ii;
 			}
 		}
@@ -404,84 +455,88 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	// Draw the parallels which didn't intersect the viewport but are in the screen
 	// This can only happen for parallels around the poles fully included in the viewport (At least I hope!)
-	Vec3d win;
-	prj->project(Vec3d(0,0,1), win);
-	if (prj->check_in_viewport(win))
+	if (northPoleInViewport)
 	{
-		const double lastLat = (--resultsParallels.end())->first/DEGREE_MAS;
-		for (double lat=lastLat+gridStepParallelDeg;lat<90.;lat+=gridStepParallelDeg)
+		const double lastLat = (double)(--resultsParallels.end())->first/RADIAN_MAS;
+		for (double lat=lastLat+gridStepParallelRad;lat<M_PI;lat+=gridStepParallelRad)
 		{
-			Vec3d vv(std::cos(lat*M_PI/180.), 0, std::sin(lat*M_PI/180.));
+			Vec3d vv(std::cos(lat), 0, std::sin(lat));
 			prj->drawParallel(vv, 2.*M_PI);
 		}
 	}
-	prj->project(Vec3d(0,0,-1), win);
-	if (prj->check_in_viewport(win))
+	if (southPoleInViewport)
 	{
-		const double lastLat = resultsParallels.begin()->first/DEGREE_MAS;
-		for (double lat=lastLat-gridStepParallelDeg;lat>-90.;lat-=gridStepParallelDeg)
+		const double lastLat = (double)resultsParallels.begin()->first/RADIAN_MAS;
+		for (double lat=lastLat-gridStepParallelRad;lat>-M_PI;lat-=gridStepParallelRad)
 		{
-			Vec3d vv(std::cos(lat*M_PI/180.), 0, std::sin(lat*M_PI/180.));
+			Vec3d vv(std::cos(lat), 0, std::sin(lat));
 			prj->drawParallel(vv, 2.*M_PI);
 		}
 	}
 	
 	// Draw meridians
 	
-	// Discriminate meridian categories
+	// Discriminate meridian categories, if latitude is > pi, the real longitude180 is -longitude+pi 
 	map<int, map<double, Vec2d> > resultsMeridiansOrdered;
 	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
 	{
-		for (map<double, Vec2d>::const_iterator i=iter->second.begin();i!=iter->second.end();++i)
+		for (map<double, Vec2d>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 		{
-			if (i->first>180.)
-				resultsMeridiansOrdered[(int)(180.*DEGREE_MAS)-iter->first][i->first]=i->second;
+			assert(k->first>=0. && k->first<=2.*M_PI);
+			assert((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
+			if (k->first>M_PI)
+				resultsMeridiansOrdered[(int)(10*std::floor((M_PI*RADIAN_MAS-iter->first+5)/10))][k->first]=k->second;
 			else
-				resultsMeridiansOrdered[iter->first][i->first]=i->second;
+				resultsMeridiansOrdered[(int)(10*std::floor((iter->first+5)/10))][k->first]=k->second;
 		}
 	}
 	
 	for (map<int, map<double, Vec2d> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
 	{
-//		cerr << "------- lon180=" << iter->first/DEGREE_MAS << "--------" << endl;
+//		cerr << "------- lon1802=" << iter->first << "--------" << endl;
 //		for (map<double, Vec2d>::const_iterator k = iter->second.begin();k!=iter->second.end();++k)
 //		{
-//			cerr << k->second << " lat=" << k->first << (isMeridianEnteringLat180(prj, k->second, iter->first/RADIAN_MAS)?" *":"") << endl;
+//			Vec3d v;
+//			prj->unProject(k->second[0], k->second[1], v);
+//			double llon, llat;
+//			rectToSpheLat180(llon, llat, v);
+//			cerr << k->second << " lat=" << k->first*180./M_PI << " Llon="<< llon*180./M_PI << " Llat=" << llat*180./M_PI << (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first) ?" *":"") << endl;
 //		}
 		
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error meridian " << iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
-			map<double, Vec2d>::const_iterator ii = iter->second.begin();
-			if (!isMeridianEnteringLat180(prj, iter->second.begin()->second, iter->first/RADIAN_MAS))
+			map<double, Vec2d>::const_iterator k = iter->second.begin();
+			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first))
 			{
-				++ii;
+				++k;
 			}
 			
 			Vec3d vv;
 			double size;
 			for (unsigned int i=0;i<iter->second.size()/2;++i)
 			{
-				prj->unProject(ii->second[0], ii->second[1], vv);
-				double lon = ii->first;
-				++ii;
-				if (ii==iter->second.end())
-					size = iter->second.begin()->first - lon;
+				double lat180 = k->first;
+				spheToRectLat1802((double)iter->first/RADIAN_MAS, lat180, vv);
+				++k;
+				if (k==iter->second.end())
+					size = iter->second.begin()->first - lat180;
 				else
-					size = ii->first - lon;
-				if (size<0) size+=360.;
-				prj->drawMeridian(vv, size*M_PI/180., true, &font);
-				++ii;
+					size = k->first - lat180;
+				if (size<0.) size+=2.*M_PI;
+				prj->drawMeridian(vv, size, true, &font);
+				++k;
 			}
 		}
 	
 		// Debug, draw a cross for all the points
-//		for (map<double, Vec2d>::const_iterator i=iter->second.begin();i!=iter->second.end();++i)
+//		for (map<double, Vec2d>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 //		{
-//			if (isMeridianEnteringLat180(prj, i->second, iter->first/RADIAN_MAS))
+//			//const double lon180 = k->first>M_PI? (double)iter->first/RADIAN_MAS-M_PI : (double)iter->first/RADIAN_MAS;
+//			if (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first))
 //			{
 //				glColor3f(1,1,0);
 //			}
@@ -489,23 +544,27 @@ void SkyGrid::draw(const Projector* prj) const
 //			{
 //				glColor3f(0,0,1);
 //			}
+//			Vec3d vv, win;
+//			spheToRectLat1802((double)iter->first/RADIAN_MAS, k->first, vv);
+//			prj->project(vv, win);
 //			glBegin(GL_LINES);
-//				glVertex2f(i->second[0]-30,i->second[1]);
-//				glVertex2f(i->second[0]+30,i->second[1]);
-//				glVertex2f(i->second[0],i->second[1]-30);
-//				glVertex2f(i->second[0],i->second[1]+30);
+//				glVertex2f(win[0]-30,win[1]);
+//				glVertex2f(win[0]+30,win[1]);
+//				glVertex2f(win[0],win[1]-30);
+//				glVertex2f(win[0],win[1]+30);
 //			glEnd();
-//			ostringstream oss;
-//			oss << iter->first/DEGREE_MAS;
-//			font.print(i->second[0],i->second[1]+30,oss.str());
-//			font.print(i->second[0],i->second[1]-30,oss.str());
-//			
 //		}
 	}
 	
 	// Draw meridian zero which can't be found by the normal algo..
 	Vec3d vv(1,0,0);
 	prj->drawMeridian(vv, 2.*M_PI, true, &font);
+
+//	Vec3d v;
+//	double lon, lat;
+//	spheToRectLat180(15*M_PI/180., 25*M_PI/180., v);
+//	rectToSpheLat180(lon, lat, v);
+//	cerr << lon*180./M_PI << " " << lat*180./M_PI << endl;
 
 }
 
