@@ -47,11 +47,54 @@ namespace StelUtils {
 		return strftime(s, max, fmt, tm);
 	}
 
-	wstring stringToWstring(const string& s)
-	{
-		return Translator::UTF8stringToWstring(s);
-	}
 	
+	//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
+	wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
+	{
+		int i, j;
+		unsigned short ch;  // 16 bits
+	
+		for ( i=0, j=0; i < len; ++i, ++j )
+		{
+			ch = ((const unsigned char *)utf8)[i];
+			if ( ch >= 0xF0 )
+			{
+				ch  =  (unsigned short)(utf8[i]&0x07) << 18;
+				ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
+				ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+				ch |=  (unsigned short)(utf8[++i]&0x3F);
+			}
+			else
+				if ( ch >= 0xE0 )
+				{
+					ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
+					ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+					ch |=  (unsigned short)(utf8[++i]&0x3F);
+				}
+				else
+					if ( ch >= 0xC0 )
+					{
+						ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
+						ch |=  (unsigned short)(utf8[++i]&0x3F);
+					}
+	
+			unicode[j] = ch;
+		}
+		unicode[j] = 0;
+	
+		return unicode;
+	}
+
+	//! Convert from UTF-8 to wchar_t
+	//! Warning this is likely to be not very portable
+	std::wstring stringToWstring(const string& s)
+	{
+		wchar_t* outbuf = new wchar_t[s.length()+1];
+		UTF8_to_UNICODE(outbuf, s.c_str(), s.length());
+		wstring ws(outbuf);
+		delete[] outbuf;
+		return ws;
+	}
 	
 	string wstringToString(const wstring& ws)
 	{
@@ -157,14 +200,13 @@ namespace StelUtils {
 	//! @brief Print the passed angle with the format dd�mm'ss(.ss)"
 	//! @param angle Angle in radian
 	//! @param decimal Define if 2 decimal must also be printed
-	//! @param useD Define if letter "d" must be used instead of ÃÂ°
+	//! @param useD Define if letter "d" must be used instead of the deg sign
 	//! @return The corresponding string
 	wstring printAngleDMS(double angle, bool decimals, bool useD)
 	{
 		wchar_t buf[32];
 		buf[31]=L'\0';
 		wchar_t sign = L'+';
-	// wchar_t degsign = L'ÃÂ°'; ???
 		wchar_t degsign = L'\u00B0';
 		if (useD) degsign = L'd';
 

@@ -1312,7 +1312,7 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
     line[i-1]=' ';
     string sci_name = tempc;
     sci_name.erase(sci_name.length()-1, 1);
-    wstring sci_name_i18n = Translator::UTF8stringToWstring(sci_name);
+    wstring sci_name_i18n = StelUtils::stringToWstring(sci_name);
 
     // remove underscores
     for (wstring::size_type j=0;j<sci_name_i18n.length();++j) {
