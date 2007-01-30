@@ -55,9 +55,9 @@ public:
 	
 	// Create and initialise to default a navigation context
 	Navigator(Observer* obs);
-    virtual ~Navigator();
+    ~Navigator();
 
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	void init(const InitParser& conf, LoadingBar& lb);
 
 	void updateTime(int delta_time);
 	void updateTransformMatrices(void);

@@ -202,14 +202,6 @@ static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double 
 
 //! Check if the given point from the viewport side is the beginning of a parallel or not
 //! Beginning means that the direction of increasing longitude goes inside the viewport 
-static bool isParallelEntering(const Projector* prj, const Vec2d& v, double lat)
-{
-	const double lon = getLonFrom2dPos(prj, v);
-	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
-}
-
-//! Check if the given point from the viewport side is the beginning of a parallel or not
-//! Beginning means that the direction of increasing longitude goes inside the viewport 
 static bool isParallelEntering(const Projector* prj, double lon, double lat)
 {
 	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
@@ -226,82 +218,6 @@ static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, doubl
 	if (lat2>2.*M_PI)
 		lat2-=2.*M_PI;
 	return prj->check_in_viewport(get2dPosFromSpherical1802(prj, lon1802, lat2));
-}
-
-////! Check if the given point from the viewport side is the beginning of a meridian or not
-////! Beginning means that the direction of increasing latitude goes inside the viewport 
-//static bool isMeridianEnteringLat180(const Projector* prj, const Vec2d& v, double lon180)
-//{
-//	const double lat180 = getLatFrom2dPos180(prj, v);
-//	if (lat180>M_PI)
-//		return prj->check_in_viewport(get2dPosFromSpherical180(prj, M_PI-lon180, lat180+0.001*prj->getFov()));
-//	else
-//		return prj->check_in_viewport(get2dPosFromSpherical180(prj, lon180, lat180+0.001*prj->getFov()));
-//}
-
-//! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*stepMas
-//! with a precision < 0.5 pixels
-//! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
-static void getPs(map<int, map<double, Vec2d> > & result, const Projector* prj, 
-	const Vec2d& p0, const Vec2d& p1, double step, 
-	double (*func)(const Projector* prj, const Vec2d& p),
-	double (*func2)(const Projector* prj, const Vec2d& p))
-{
-	const Vec2d deltaP(p1-p0);
-	Vec2d p = p0;
-	const Vec2d dPix1 = deltaP/(deltaP.length());	// 1 pixel step
-	const Vec2d dPixPrec = deltaP/(deltaP.length()*2.);	// 0.5 pixel step
-	double funcp, funcpDpix, target, deriv, u=0.;
-	
-	funcp = func(prj, p);
-	funcpDpix = func(prj, p+dPixPrec);
-	deriv = (funcpDpix-funcp)/0.5;
-	target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
-	bool sureThatTargetExist = false;
-	while (u<deltaP.length())
-	{
-		// Find next point
-		if ((funcpDpix>=target && funcp<target) || (funcpDpix<=target && funcp>target))
-		{
-			// If more that one target was inside the range [funcp;funcpDpix] add them to the result list
-			while ((funcpDpix>=target && funcp<target) || (funcpDpix<=target && funcp>target))
-			{
-				if (result.find((int)(target*RADIAN_MAS))!=result.end() && result[(int)(target*RADIAN_MAS)].find(func2(prj, p))!=result[(int)(target*DEGREE_MAS)].end())
-					cerr << "Err" << endl;
-				result[(int)(target*RADIAN_MAS)][func2(prj, p)]=p;
-				target+=(deriv>0) ? step:-step;
-			}
-		
-			p = p+dPixPrec;
-			u+=0.5;
-			funcp = funcpDpix;
-			funcpDpix = func(prj, p+dPixPrec);
-			deriv = (funcpDpix-funcp)/0.5;
-			target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
-			sureThatTargetExist = false;
-		}
-		else
-		{
-			if ((deriv>0 && funcp>target) || (deriv<0 && funcp<target))
-				sureThatTargetExist = true;	// We went too "far", thus we know that the target exists
-				
-			deriv = (funcpDpix-funcp)/0.5;
-			if (sureThatTargetExist==false)
-				target = step*(std::floor(funcp/step) + (deriv>0 ? 1:0));
-			double dU = (target-funcp)/deriv;
-			// TODO handle this properly, maybe using 2nd derivatives?
-			if (fabs(dU)<0.05)
-				dU = 0.05*(dU/fabs(dU));
-			if (dU>100.)
-				dU = 100.;
-			if (dU<-100.)
-				dU = -100;
-			u += dU;
-			p += dPix1*dU;
-			funcp = func(prj, p);
-			funcpDpix = func(prj, p+dPixPrec);
-		}
-	}
 }
 
 
@@ -322,7 +238,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	funcp = func(prj, p);
 	funcpDpix = func(prj, p+dPix1*precision);
 		
-	double u=0;
+	double u=0.;
 	do
 	{	
 		if (funcp<funcpDpix)
@@ -443,7 +359,7 @@ void SkyGrid::draw(const Projector* prj) const
 	{
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			//cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
@@ -523,7 +439,7 @@ void SkyGrid::draw(const Projector* prj) const
 		
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			//cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
