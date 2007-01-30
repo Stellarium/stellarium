@@ -26,6 +26,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "StelUtils.hpp"
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
@@ -72,7 +73,7 @@ public:
 	std::wstring translate(const std::string& s)
 	{
 		if (s=="") return L"";
-		return UTF8stringToWstring(translateUTF8(s));
+		return StelUtils::stringToWstring(translateUTF8(s));
 	}
 	
 	//! @brief Get true translator locale name. Actual locale, never "system" 
@@ -88,9 +89,6 @@ public:
 
 	//! Used as a global translator by the whole app
 	static Translator globalTranslator;
-
-	//! Convert from UTF-8 to wchar_t
-	static std::wstring UTF8stringToWstring(const string& s);
 
 	//! Get available language name in native language from passed locales directory
 	static std::wstring getAvailableLanguagesNamesNative(const string& localeDir);	

@@ -98,7 +98,7 @@ namespace StelUtils {
 	//! @return The corresponding string
 	wstring printAngleHMS(double angle, bool decimals = false);
 		
-	//! @brief Convert UTF-8 std::string to std::wstring using mbstowcs() function
+	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable
 	//! @param The input string in UTF-8 format
 	//! @return The matching wide string
 	wstring stringToWstring(const string& s);
