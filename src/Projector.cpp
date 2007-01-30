@@ -785,7 +785,7 @@ void Projector::drawText(const SFont* font, float x, float y, const wstring& str
 void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
 {
 	if (nbSeg==-1)
-		nbSeg = 48; // TODO!
+		nbSeg = 4 + (int)(length*44./(2.*M_PI));
 	const Mat4d dRa = Mat4d::zrotation(length/nbSeg);
 
 	Vec3d v(start);
@@ -840,7 +840,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
 {
 	if (nbSeg==-1)
-		nbSeg = 48; // TODO!
+		nbSeg = 4 + (int)(length*54./(2.*M_PI));
 	static const Vec3d oneZ(0,0,1);
 	const Mat4d dDe = Mat4d::rotation(start^oneZ, (start[1]>=0 ? 1.:-1.) * length/nbSeg);
 
