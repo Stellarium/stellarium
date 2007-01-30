@@ -1206,7 +1206,8 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 			break;
 		}
 		case SDLK_e:
-            app->commander->execute_command( "flag equatorial_grid toggle");
+            if (!(mod & COMPATIBLE_KMOD_CTRL))
+            	app->commander->execute_command( "flag equatorial_grid toggle");
             break;
 		case SDLK_n:
             app->commander->execute_command( "flag nebula_names toggle");

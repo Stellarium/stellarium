@@ -114,54 +114,6 @@ void Translator::reload()
 }
 
 
-//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
-static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
-{
-	int i, j;
-	unsigned short ch;  // 16 bits
-
-	for ( i=0, j=0; i < len; ++i, ++j )
-	{
-		ch = ((const unsigned char *)utf8)[i];
-		if ( ch >= 0xF0 )
-		{
-			ch  =  (unsigned short)(utf8[i]&0x07) << 18;
-			ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
-			ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
-			ch |=  (unsigned short)(utf8[++i]&0x3F);
-		}
-		else
-			if ( ch >= 0xE0 )
-			{
-				ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
-				ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
-				ch |=  (unsigned short)(utf8[++i]&0x3F);
-			}
-			else
-				if ( ch >= 0xC0 )
-				{
-					ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
-					ch |=  (unsigned short)(utf8[++i]&0x3F);
-				}
-
-		unicode[j] = ch;
-	}
-	unicode[j] = 0;
-
-	return unicode;
-}
-
-//! Convert from UTF-8 to wchar_t
-//! Warning this is likely to be not very portable
-std::wstring Translator::UTF8stringToWstring(const string& s)
-{
-	wchar_t* outbuf = new wchar_t[s.length()+1];
-	UTF8_to_UNICODE(outbuf, s.c_str(), s.length());
-	wstring ws(outbuf);
-	delete[] outbuf;
-	return ws;
-}
-
 //! Convert from ISO639-1 2 letters langage code to native language name
 std::wstring Translator::iso639_1LanguageCodeToNativeName(const string& languageCode)
 {
@@ -257,7 +209,7 @@ void Translator::initIso639_1LanguageCodes(const string& fileName)
 		}
 		else
 		{
-			iso639codes.insert(pair<string, wstring>(record.substr(0, 2), UTF8stringToWstring(record.substr(pos+1))));
+			iso639codes.insert(pair<string, wstring>(record.substr(0, 2), StelUtils::stringToWstring(record.substr(pos+1))));
 		}
 	}
 }
