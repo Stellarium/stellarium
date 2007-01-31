@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-using namespace std;
 
 #include <algorithm>
 #include <iostream>
@@ -34,6 +33,8 @@ using namespace std;
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
+
+using namespace std;
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),

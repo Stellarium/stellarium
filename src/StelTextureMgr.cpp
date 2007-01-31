@@ -39,13 +39,49 @@ ManagedSTexture StelTextureMgr::NULL_STEXTURE;
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
+#if defined (_MSC_VER)
+// gluCheckExtension() is missing in MSC GL SDK !!!
+/* extName is an extension name.
+ * extString is a string of extensions separated by blank(s). There may or 
+ * may not be leading or trailing blank(s) in extString.
+ * This works in cases of extensions being prefixes of another like
+ * GL_EXT_texture and GL_EXT_texture3D.
+ * Returns GL_TRUE if extName is found otherwise it returns GL_FALSE.
+ */
+GLboolean __stdcall
+gluCheckExtension(const GLubyte *extName, const GLubyte *extString)
+{
+  GLboolean flag = GL_FALSE;
+  char *word;
+  char *lookHere;
+  char *deleteThis;
+
+  if (extString == NULL) return GL_FALSE;
+
+  deleteThis = lookHere = (char *)malloc(strlen((const char *)extString)+1); 
+  if (lookHere == NULL)
+     return GL_FALSE;
+  /* strtok() will modify string, so copy it somewhere */
+  strcpy(lookHere,(const char *)extString);
+
+  while ((word= strtok(lookHere," ")) != NULL) {
+     if (strcmp(word,(const char *)extName) == 0) {
+        flag = GL_TRUE;
+	break;
+     }  
+     lookHere = NULL;		/* get next token */
+  }
+  free((void *)deleteThis);
+  return flag;
+} /* gluCheckExtension() */
+#endif
 
 void ManagedSTexture::load(void)
 {
 	if (StelApp::getInstance().getTextureManager().loadImage(this)==false || StelApp::getInstance().getTextureManager().glLoadTexture(this)==false)
 	{
 		cerr << "Couldn't load texture " << this->fullPath << endl;
-		loadState = ManagedSTexture::ERROR;
+		loadState = ManagedSTexture::LOAD_ERROR;
 		return;
 	}
 }
@@ -236,7 +272,7 @@ int loadTextureThread(void* tparam)
 	// Load the image
 	if (param->texMgr->loadImage(param->tex)==false)
 	{
-		param->tex->loadState = ManagedSTexture::ERROR;
+		param->tex->loadState = ManagedSTexture::LOAD_ERROR;
 	}
 	// And add it to 
 	SDL_mutexP(param->loadQueueMutex);
@@ -284,7 +320,7 @@ void StelTextureMgr::update()
 	for (;iter!=loadQueue.end();++iter)
 	{
 		SDL_WaitThread((*iter)->thread, NULL);	// Ensure the thread is properly destroyed
-		if ((*iter)->tex->loadState==ManagedSTexture::ERROR)
+		if ((*iter)->tex->loadState==ManagedSTexture::LOAD_ERROR)
 		{
 			// There was an error while loading the image
 			delete (*iter)->tex;
@@ -326,7 +362,7 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 	if (loadFuncIter==imageLoaders.end())
 	{
 		cerr << "Unsupported image file extension: " << extension << " for file: " << tex->fullPath << endl;
-		tex->loadState = ManagedSTexture::ERROR;	// texture can't be loaded
+		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
 		return false;
 	}
 
@@ -336,7 +372,7 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 	if (!tex->texels)
 	{
 		cerr << "Image loading failed for file: " << tex->fullPath << endl;
-		tex->loadState = ManagedSTexture::ERROR;	// texture can't be loaded
+		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
 		return false;
 	}
 

@@ -4,7 +4,7 @@
    @file    dictionary.h
    @author  N. Devillard
    @date    Aug 2000
-   @version $Revision: 744 $
+   @version $Revision: 1753 $
    @brief   Implements a dictionary for string variables.
 
    This module implements a simple dictionary object, i.e. a list
@@ -14,10 +14,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: dictionary.h 744 2005-06-30 16:04:58Z xalioth $
+	$Id: dictionary.h 1753 2007-01-31 09:36:08Z xalioth $
 	$Author: xalioth $
-	$Date: 2005-06-30 17:04:58 +0100 (Thu, 30 Jun 2005) $
-	$Revision: 744 $
+	$Date: 2007-01-31 09:36:08 +0000 (Wed, 31 Jan 2007) $
+	$Revision: 1753 $
 */
 
 #ifndef _DICTIONARY_H_
@@ -34,7 +34,9 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 /*---------------------------------------------------------------------------
    								New types

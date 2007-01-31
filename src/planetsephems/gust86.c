@@ -442,23 +442,27 @@ void GetGust86Coor(double jd,int body,double *xyz) {
 void GetGust86OsculatingCoor(double jd0,double jd,int body,double *xyz) {
   if (jd0 != gust86_jd0) {
     gust86_jd0 = jd0;
-    const double t0 = jd0 - 2444239.5;
-    CalcInterpolatedElements(t0,gust86_elem,
-                             GUST86_DIM,
-                             &CalcGust86Elem,DELTA_T,
-                             &t_0,gust86_elem_0,
-                             &t_1,gust86_elem_1,
-                             &t_2,gust86_elem_2);
-/*
-    printf("GetGust86Coor(%d): %f %f  %f %f  %f %f\n",
-           body,
-           gust86_elem[body*6+0],gust86_elem[body*6+1],gust86_elem[body*6+2],
-           gust86_elem[body*6+3],gust86_elem[body*6+4],gust86_elem[body*6+5]);
-*/
+	{ // New block to satisfy MS VS C-compiler
+		const double t0 = jd0 - 2444239.5;
+		double x[3];
+
+		CalcInterpolatedElements(t0,gust86_elem,
+								 GUST86_DIM,
+								 &CalcGust86Elem,DELTA_T,
+								 &t_0,gust86_elem_0,
+								 &t_1,gust86_elem_1,
+								 &t_2,gust86_elem_2);
+		/*
+		printf("GetGust86Coor(%d): %f %f  %f %f  %f %f\n",
+			   body,
+			   gust86_elem[body*6+0],gust86_elem[body*6+1],gust86_elem[body*6+2],
+			   gust86_elem[body*6+3],gust86_elem[body*6+4],gust86_elem[body*6+5]);
+		*/
+
+		EllipticToRectangularN(gust86_rmu[body],gust86_elem+(body*6),jd-jd0,x);
+		xyz[0] = GUST86toVsop87[0]*x[0]+GUST86toVsop87[1]*x[1]+GUST86toVsop87[2]*x[2];
+		xyz[1] = GUST86toVsop87[3]*x[0]+GUST86toVsop87[4]*x[1]+GUST86toVsop87[5]*x[2];
+		xyz[2] = GUST86toVsop87[6]*x[0]+GUST86toVsop87[7]*x[1]+GUST86toVsop87[8]*x[2];
+	}
   }
-  double x[3];
-  EllipticToRectangularN(gust86_rmu[body],gust86_elem+(body*6),jd-jd0,x);
-  xyz[0] = GUST86toVsop87[0]*x[0]+GUST86toVsop87[1]*x[1]+GUST86toVsop87[2]*x[2];
-  xyz[1] = GUST86toVsop87[3]*x[0]+GUST86toVsop87[4]*x[1]+GUST86toVsop87[5]*x[2];
-  xyz[2] = GUST86toVsop87[6]*x[0]+GUST86toVsop87[7]*x[1]+GUST86toVsop87[8]*x[2];
 }

@@ -97,11 +97,12 @@ void* getLastCallbackObject(void);
 namespace s_gui
 {
 	typedef Vec4f s_color;
+	typedef Vec3f s_vec3;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;
 	typedef Vec4i s_vec4i;
 
-	static const s_color s_white = s_color(1,1,1);
+	static const s_color s_white = s_color(s_vec3(1,1,1));
 
 	class Scissor
 	{

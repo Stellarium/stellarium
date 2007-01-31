@@ -3041,11 +3041,11 @@ static void
 CalcLon(double t,double lon[7]) {
   int i;
   for (i=0;i<7;i++,lon++) {
-    *lon = 0;
     const struct Tass17MultiTerm *const tmt_begin =
       tass17bodies[i].series[1].multi_terms;
     const struct Tass17Term *const tt_begin = tmt_begin->terms;
     const struct Tass17Term *tt = tt_begin + tmt_begin->nr_of_terms;
+    *lon = 0;
     while (--tt >= tt_begin) {
       *lon += tt->s[0]*sin(tt->s[1]+tt->s[2]*t);
     }
@@ -3145,8 +3145,8 @@ static double tass17_elem[TASS17_DIM];
 
 void CalcAllTass17Elem(double t,double elem[TASS17_DIM]) {
   double lon[7];
-  CalcLon(t,lon);
   int body;
+  CalcLon(t,lon);
   for (body=0;body<8;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
 }
 
@@ -3155,9 +3155,11 @@ void GetTass17Coor(double jd,int body,double *xyz) {
 }
 
 void GetTass17OsculatingCoor(double jd0,double jd,int body,double *xyz) {
+  double x[3];
+
   if (jd0 != tass17_jd0) {
-    tass17_jd0 = jd0;
     const double t0 = jd0 - 2444240.0;
+    tass17_jd0 = jd0;
     CalcInterpolatedElements(t0,tass17_elem,
                              TASS17_DIM,
                              &CalcAllTass17Elem,DELTA_T,
@@ -3171,7 +3173,6 @@ void GetTass17OsculatingCoor(double jd0,double jd,int body,double *xyz) {
            tass17_elem[body*6+3],tass17_elem[body*6+4],tass17_elem[body*6+5]);
 */
   }
-  double x[3];
   EllipticToRectangularN(tass17bodies[body].mu,tass17_elem+(body*6),jd-jd0,x);
   xyz[0] = TASS17toVSOP87[0]*x[0]+TASS17toVSOP87[1]*x[1]+TASS17toVSOP87[2]*x[2];
   xyz[1] = TASS17toVSOP87[3]*x[0]+TASS17toVSOP87[4]*x[1]+TASS17toVSOP87[5]*x[2];

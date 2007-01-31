@@ -141,7 +141,11 @@ void ScriptMgr::record_script(string script_filename) {
 		FILE * fp;
 		for(int j=0; j<=100; ++j)
 		{
+#ifndef _MSC_VER
 			snprintf(c,3,"%d",j);
+#else
+			_snprintf(c,3,"%d",j);
+#endif
 
 			script_filename = sdir + "stellarium" + c + ".sts";
 			fp = fopen(script_filename.c_str(), "r");

@@ -37,6 +37,9 @@ SOFTWARE.
 
 #ifndef _ELLIPTIC_TO_RECTANGULAR_
 #define _ELLIPTIC_TO_RECTANGULAR_
+#if defined (_MSC_VER)
+#define cbrt(x) pow((x),1./3.)
+#endif
 
 #ifdef __cplusplus
 extern "C" {

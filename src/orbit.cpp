@@ -19,6 +19,11 @@ using namespace std;
 #define EPSILON 1e-10
 #define GAUSS_GRAV_CONST (0.01720209895*0.01720209895)
 
+#if defined(_MSC_VER)
+// cuberoot is missing in VC++ !?
+#define cbrt(x) pow((x),1./3.)
+#endif
+
 static
 void InitHyp(double q,double e,double dt,double &a1,double &a2) {
   const double a = q/(e-1.0);

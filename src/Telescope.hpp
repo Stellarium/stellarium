@@ -22,6 +22,9 @@
 
 #include "StelObjectBase.hpp"
 #include "Navigator.hpp"
+#if defined (_MSC_VER)
+#include <winsock2.h>
+#endif
 
 long long int GetNow(void);
 

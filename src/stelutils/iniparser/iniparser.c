@@ -4,16 +4,16 @@
    @file    iniparser.c
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 279 $
+   @version $Revision: 1753 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c 279 2003-08-25 16:29:59Z xalioth $
+    $Id: iniparser.c 1753 2007-01-31 09:36:08Z xalioth $
     $Author: xalioth $
-    $Date: 2003-08-25 17:29:59 +0100 (Mon, 25 Aug 2003) $
-    $Revision: 279 $
+    $Date: 2007-01-31 09:36:08 +0000 (Wed, 31 Jan 2007) $
+    $Revision: 1753 $
 */
 
 /*---------------------------------------------------------------------------
@@ -451,7 +451,7 @@ dictionary * iniparser_load(const char * ininame)
     FILE    *   ini ;
     int         lineno ;
 
-    if ((ini=fopen(ininame, "r"))==NULL) {
+    if ((ini=fopen(ininame, "rb"))==NULL) {
         return NULL ;
     }
 

@@ -25,6 +25,8 @@
 #include <ctime>
 #include <config.h>
 #include <cstdio>
+#include <iostream>
+#include "dirent.h"
 
 #if defined( CYGWIN )
  #include <malloc.h>
@@ -370,7 +372,28 @@ namespace StelUtils {
 		*lat = asin(v[2]/r);
 		*lng = atan2(v[1],v[0]);
 	}
-	
+
+	void rect_to_sphe(float *lng, float *lat, const Vec3d& v)
+	{
+		double r = v.length();
+		*lat = asin(v[2]/r);
+		*lng = atan2(v[1],v[0]);
+	}
+
+	void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
+	{
+		double r = v.length();
+		*lat = asin(v[2]/r);
+		*lng = atan2(v[1],v[0]);
+	}
+
+	void rect_to_sphe(double *lng, double *lat, const Vec3f& v)
+	{
+		double r = v.length();
+		*lat = asin(v[2]/r);
+		*lng = atan2(v[1],v[0]);
+	}
+
 	// strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
 	static char *trim(char *x)
@@ -494,7 +517,7 @@ namespace StelUtils {
 	bool fileExists(const std::string& fileName)
 	{
 		std::fstream fin;
-		fin.open(fileName.c_str(),std::ios::in);
+		fin.open(fileName.c_str(),std::ios::in|std::ios::binary);
 		if(fin.is_open())
 		{
 			fin.close();
@@ -504,6 +527,27 @@ namespace StelUtils {
 		return false;
 	}
 	
+	bool copyFile(const std::string& fromFile, const std::string& toFile)
+	{
+		std::fstream fin, fout;
+		char buf[1024];
+
+		fin.open(fromFile.c_str(),std::ios::in|std::ios::binary);
+		fout.open(toFile.c_str(),std::ios::out|std::ios::binary);
+
+		cerr << "Copying "<<fromFile<<" to "<<toFile<<endl;
+		while(!fin.eof()) 
+        {
+			memset(buf,0,1024);
+			fin.read(buf,1024);
+            fout.write(buf,1024);
+        }
+
+		fin.close();
+		fout.close();
+		return true;
+	}
+
 	// Delete the file
 	bool deleteFile(const std::string& fileName)
 	{
@@ -512,6 +556,20 @@ namespace StelUtils {
 			return false;
 		}
 		return true;
+	}
+
+	bool checkAbsolutePath(const string& fileName)
+	{
+		// Absolute path if starts by '/' or by 'Drive:/' (MS)
+
+		if (fileName!="")
+		{
+			if (fileName[0]=='/')
+				return true;
+			if (fileName[1] == ':' && (fileName[2] == '/' || fileName[2]=='\\'))
+				return true;
+		}
+		return false;
 	}
 
 	// Check if a number is a power of 2
@@ -773,6 +831,8 @@ float get_GMT_shift_from_system(double JD, bool _local)
 		
 #ifdef HAVE_TIMEGM
 		time_t ltime = timegm(&rawtime);
+#elif HAVE_MKTIME
+		time_t ltime = mktime(&rawtime);
 #else
 		// This does not work
 		time_t ltime = my_timegm(&rawtime);

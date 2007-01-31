@@ -39,6 +39,7 @@ Translator Translator::globalTranslator = Translator(PACKAGE_NAME, LOCALEDIR, "s
 #ifdef WIN32
 # include <windows.h>
 # include <winnls.h>
+#define putenv(x) _putenv((x))
 #endif
 
 //! Try to determine system language from system configuration
@@ -82,18 +83,9 @@ void Translator::reload()
 	if (Translator::lastUsed == this) return;
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
-#ifndef MACOSX	
+
 	if (langName=="system" || langName=="system_default")
-	{
-		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
-//		cout << "TEST=" << envstr << " " << Translator::systemLangName << endl;
-	}
-	else
-	{
-		snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
-	}
-#else
-	if (langName=="system" || langName=="system_default")
+#if defined (MACOSX)	// MACOSX
 	{
 		snprintf(envstr, 25, "LANG=%s", Translator::systemLangName.c_str());
 	}
@@ -101,10 +93,34 @@ void Translator::reload()
 	{
 		snprintf(envstr, 25, "LANG=%s", langName.c_str());
 	}
+#elif defined (_MSC_VER) //MSCVER
+	{
+		_snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+	}
+	else
+	{
+		_snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+	}
+#else // UNIX
+	{
+		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+	}
+	else
+	{
+		snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+	}
 #endif
-	//printf("Setting locale: %s\n", envstr);
+
+#if defined(DEBUG)
+	printf("Setting locale: %s\n", envstr);
+#endif
+
 	putenv(envstr);
+#if !defined (_MSC_VER)
 	setlocale(LC_MESSAGES, "");
+#else
+	setlocale(LC_CTYPE,"");
+#endif
 	assert(domain=="stellarium");
 	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
 	assert(result=="UTF-8");
