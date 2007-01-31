@@ -325,9 +325,18 @@ void GeodesicGrid::searchZones(const Convex& convex,
 {
 	if (max_search_level < 0) max_search_level = 0;
 	else if (max_search_level > max_level) max_search_level = max_level;
+#if defined(_MSC_VER)
+	int *halfs_used = new int[convex.getNbHalfSpace()];
+#else
 	int halfs_used[convex.getNbHalfSpace()];
+#endif
 	for (int h=0;h<(int)convex.getNbHalfSpace();h++) {halfs_used[h] = h;}
+#if defined(_MSC_VER)
+	bool *corner_inside[12];
+	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[convex.getNbHalfSpace()];
+#else
 	bool corner_inside[12][convex.getNbHalfSpace()];
+#endif
 	for (size_t h=0;h<convex.getNbHalfSpace();h++)
 	{
 		const HalfSpace &half_space(convex[h]);
@@ -345,6 +354,10 @@ void GeodesicGrid::searchZones(const Convex& convex,
 		            corner_inside[icosahedron_triangles[i].corners[2]],
 		            inside_list,border_list,max_search_level);
 	}
+#if defined(_MSC_VER)
+	delete[] halfs_used;
+	for(int ci=0; ci < 12; ci++) delete[] corner_inside[ci];
+#endif
 }
 
 void GeodesicGrid::searchZones(int lev,int index,
@@ -357,7 +370,11 @@ void GeodesicGrid::searchZones(int lev,int index,
                                int **inside_list,int **border_list,
                                const int max_search_level) const
 {
+#if defined(_MSC_VER)
+	int *halfs_used = new int[half_spaces_used];
+#else
 	int halfs_used[half_spaces_used];
+#endif
 	int halfs_used_count = 0;
 	for (int h=0;h<half_spaces_used;h++)
 	{
@@ -394,9 +411,15 @@ void GeodesicGrid::searchZones(int lev,int index,
 			index <<= 2;
 			inside_list++;
 			border_list++;
+#if defined(_MSC_VER)
+			bool *edge0_inside = new bool[convex.getNbHalfSpace()];
+			bool *edge1_inside = new bool[convex.getNbHalfSpace()];
+			bool *edge2_inside = new bool[convex.getNbHalfSpace()];
+#else
 			bool edge0_inside[convex.getNbHalfSpace()];
 			bool edge1_inside[convex.getNbHalfSpace()];
 			bool edge2_inside[convex.getNbHalfSpace()];
+#endif
 			for (int h=0;h<halfs_used_count;h++)
 			{
 				const int i = halfs_used[h];
@@ -421,8 +444,16 @@ void GeodesicGrid::searchZones(int lev,int index,
 			            convex,halfs_used,halfs_used_count,
 			            edge0_inside,edge1_inside,edge2_inside,
 			            inside_list,border_list,max_search_level);
+#if defined(_MSC_VER)
+			delete[] edge0_inside;
+			delete[] edge1_inside;
+			delete[] edge2_inside;
+#endif
 		}
 	}
+#if defined(_MSC_VER)
+	delete[] halfs_used;
+#endif
 }
 
 

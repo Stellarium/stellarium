@@ -110,8 +110,7 @@ string StelApp::getConfigFilePath(void) const
 *************************************************************************/
 string StelApp::getFilePath(const string& fileName) const
 {
-	// Absolute path if starts by '/'
-	if (fileName!="" && fileName[0]=='/')
+	if (StelUtils::checkAbsolutePath(fileName))
 		return fileName;
 	
 	if (StelUtils::fileExists(dotStellariumDir + fileName))
@@ -131,9 +130,11 @@ string StelApp::getFilePath(const string& fileName) const
 *************************************************************************/
 string StelApp::getDataFilePath(const string& dataFileName) const
 {
-	// Absolute path if starts by '/'
-	if (dataFileName!="" && dataFileName[0]=='/')
+	if (StelUtils::checkAbsolutePath(dataFileName))
 		return dataFileName;
+
+	if (StelUtils::fileExists(dataDir + "/" + dataFileName))
+		return dataDir + "/" + dataFileName;
 		
 	return getFilePath("data/" + dataFileName);
 }

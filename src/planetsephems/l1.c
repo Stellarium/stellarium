@@ -904,10 +904,10 @@ static const struct L1Body l1_bodies[4] = {
 
 static void CalcL1Elem(double t,int body,double elem[6]) {
   const struct L1Body *bp = l1_bodies + body;
-
+  int j;
+  double use_polynomials;
   memcpy(elem,bp->constants,6*sizeof(double));
 
-  int j;
   for (j=0;j<2;j++) {
     const struct L1Term *const begin = bp->lists[j].terms;
     const struct L1Term *p = begin + bp->lists[j].size;
@@ -926,38 +926,43 @@ static void CalcL1Elem(double t,int body,double elem[6]) {
     }
   }
 
-  const double *cheb = bp->cheb_coef;
-  elem++;
-  for (j=0;j<5;j++) {
-    elem[j] += (*cheb++);
-  }
-  
-    /* This is an artificial hack. Valery Lainey recommends
-       not using polynoials outside of [-700,700].
-       I do the following:
-       inside  [-695,695] use polynomials
-       outside [-705,705] do not use polynomials
-       inbetween avoid jumping moons by partly using polynomials */
-  double use_polynomials = (705*365.25 - fabs(t)) / (10*365.25);
-  if (use_polynomials > 0) {
-    if (use_polynomials >= 1.0) use_polynomials = 1.0;
-    const double a = -819.727638594856;
-    const double b = 812.72180699036;
-    const double x = (t / (0.5*365.25) - (b + a)) / (b - a);
-    double ti2 = 1.0;
-    double ti1 = x;
-    for (j=0;j<5;j++) {
-      elem[j] += use_polynomials * ((*cheb++) * x);
-    }
-    int i;
-    for (i=2;i<9;i++) {
-      const double ti = 2.0 * x * ti1 - ti2;
-      ti2 = ti1;
-      ti1 = ti;
-      for (j=0;j<5;j++) {
-        elem[j] += use_polynomials * ((*cheb++) * ti);
-      }
-    }
+  {
+	  const double *cheb = bp->cheb_coef;
+	  elem++;
+	  for (j=0;j<5;j++) {
+		elem[j] += (*cheb++);
+	  }
+
+		/* This is an artificial hack. Valery Lainey recommends
+		   not using polynoials outside of [-700,700].
+		   I do the following:
+		   inside  [-695,695] use polynomials
+		   outside [-705,705] do not use polynomials
+		   inbetween avoid jumping moons by partly using polynomials */
+	  use_polynomials = (705*365.25 - fabs(t)) / (10*365.25);
+	  if (use_polynomials > 0) {
+		const double a = -819.727638594856;
+		const double b = 812.72180699036;
+		const double x = (t / (0.5*365.25) - (b + a)) / (b - a);
+		double ti2 = 1.0;
+		double ti1 = x;
+		int i;
+
+		if (use_polynomials >= 1.0) 
+			use_polynomials = 1.0;
+
+		for (j=0;j<5;j++) {
+		  elem[j] += use_polynomials * ((*cheb++) * x);
+		}
+		for (i=2;i<9;i++) {
+		  const double ti = 2.0 * x * ti1 - ti2;
+		  ti2 = ti1;
+		  ti1 = ti;
+		  for (j=0;j<5;j++) {
+			elem[j] += use_polynomials * ((*cheb++) * ti);
+		  }
+		}
+	}
   }
 
   elem[0] += t*bp->l;
@@ -1002,9 +1007,10 @@ void GetL1Coor(double jd,int body,double *xyz) {
 }
 
 void GetL1OsculatingCoor(double jd0,double jd,int body,double *xyz) {
+  double x[3];
   if (jd0 != l1_jd0[body]) {
-    l1_jd0[body] = jd0;
     const double t0 = jd0 - 2433282.5;
+    l1_jd0[body] = jd0;
     ugly_static_parameter_body = body;
     CalcInterpolatedElements(t0,l1_elem+(body*6),6,
                              &CalcUglyStaticL1Elem,DELTA_T,
@@ -1012,7 +1018,6 @@ void GetL1OsculatingCoor(double jd0,double jd,int body,double *xyz) {
                              t_1+body,l1_elem_1+(body*6),
                              t_2+body,l1_elem_2+(body*6));
   }
-  double x[3];
   EllipticToRectangularA(l1_bodies[body].mu,l1_elem+(body*6),jd-jd0,x);
   xyz[0] = L1toVsop87[0]*x[0]+L1toVsop87[1]*x[1]+L1toVsop87[2]*x[2];
   xyz[1] = L1toVsop87[3]*x[0]+L1toVsop87[4]*x[1]+L1toVsop87[5]*x[2];

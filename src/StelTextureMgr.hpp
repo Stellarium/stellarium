@@ -46,14 +46,16 @@ public:
     		assert(0);
     	}
     }
+	virtual int getLoadState(void) { return loadState;}
+
+
 private:
 	friend int loadTextureThread(void* tparam);
-	
 	enum LoadState
 	{
 		UNLOADED=0,
 		LOADED=1,
-		ERROR,
+		LOAD_ERROR,
 		LOADING_IMAGE
 	};
 

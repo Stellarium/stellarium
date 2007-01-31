@@ -23,6 +23,10 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include <cstdlib>
+#include <cstdio>
 #include "Fader.hpp"
 #include "LoadingBar.hpp"
 #include "Translator.hpp"

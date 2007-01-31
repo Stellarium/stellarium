@@ -30,6 +30,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 
+using namespace std;
+
 // Predeclaration of some classes
 class StelCore;
 class StelCommandInterface;

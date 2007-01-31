@@ -452,7 +452,11 @@ void StelApp::saveScreenShot() const
 #endif
 	for(int j=0; j<=100; ++j)
 	{
+#if !defined(_MSC_VER)
 		snprintf(c,3,"%d",j);
+#else
+		_snprintf(c,3,"%d",j);
+#endif
 
 	tempName = shotdir + "stellarium" + c + ".bmp";
 		fp = fopen(tempName.c_str(), "r");

@@ -64,27 +64,28 @@ EllipticToRectangular(const double mu,const double a,const double n,
     Le += dLe;
     if (fabs(dLe) <= 1e-14) break; /* L1: <1e-12 */
   }
+  { // New block to satisfy MS VS C-compile
+	  const double cLe = cos(Le);
+	  const double sLe = sin(Le);
 
-  const double cLe = cos(Le);
-  const double sLe = sin(Le);
+	  const double dlf = -elem[2]*sLe + elem[3]*cLe;
+	  const double phi = sqrt(1.0 - elem[2]*elem[2] - elem[3]*elem[3]);
+	  const double psi = 1.0 / (1.0 + phi);
 
-  const double dlf = -elem[2]*sLe + elem[3]*cLe;
-  const double phi = sqrt(1.0 - elem[2]*elem[2] - elem[3]*elem[3]);
-  const double psi = 1.0 / (1.0 + phi);
+	  const double x1 = a * (cLe - elem[2] - psi*dlf*elem[3]);
+	  const double y1 = a * (sLe - elem[3] + psi*dlf*elem[2]);
 
-  const double x1 = a * (cLe - elem[2] - psi*dlf*elem[3]);
-  const double y1 = a * (sLe - elem[3] + psi*dlf*elem[2]);
+	  const double elem_4q = elem[4] * elem[4];
+	  const double elem_5q = elem[5] * elem[5];
+	  const double dwho = 2.0 * sqrt(1.0 - elem_4q - elem_5q);
+	  const double rtp = 1.0 - elem_5q - elem_5q;
+	  const double rtq = 1.0 - elem_4q - elem_4q;
+	  const double rdg = 2.0 * elem[5] * elem[4];
 
-  const double elem_4q = elem[4] * elem[4];
-  const double elem_5q = elem[5] * elem[5];
-  const double dwho = 2.0 * sqrt(1.0 - elem_4q - elem_5q);
-  const double rtp = 1.0 - elem_5q - elem_5q;
-  const double rtq = 1.0 - elem_4q - elem_4q;
-  const double rdg = 2.0 * elem[5] * elem[4];
-
-  xyz[0] = x1 * rtp + y1 * rdg;
-  xyz[1] = x1 * rdg + y1 * rtq;
-  xyz[2] = (-x1 * elem[5] + y1 * elem[4]) * dwho;
+	  xyz[0] = x1 * rtp + y1 * rdg;
+	  xyz[1] = x1 * rdg + y1 * rtq;
+	  xyz[2] = (-x1 * elem[5] + y1 * elem[4]) * dwho;
+  }
 
 /*
   const double rsam1 = -elem[2]*cLe - elem[3]*sLe;

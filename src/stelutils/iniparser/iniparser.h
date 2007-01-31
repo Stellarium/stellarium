@@ -4,16 +4,16 @@
    @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 260 $
+   @version $Revision: 1753 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: iniparser.h 260 2003-08-18 18:41:31Z xalioth $
+	$Id: iniparser.h 1753 2007-01-31 09:36:08Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-08-18 19:41:31 +0100 (Mon, 18 Aug 2003) $
-	$Revision: 260 $
+	$Date: 2007-01-31 09:36:08 +0000 (Wed, 31 Jan 2007) $
+	$Revision: 1753 $
 */
 
 #ifndef _INIPARSER_H_
@@ -30,7 +30,9 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #include "dictionary.h"
 
