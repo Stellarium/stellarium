@@ -66,10 +66,12 @@ void CalcInterpolatedElements(const double t,double elem[],
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }
-    const double f0 = (*t1 - t);
-    const double f1 = (t - *t0);
-    const double fact = 1.0 / delta_t;
-    for (i=0;i<dim;i++) elem[i] = fact * (e0[i]*f0 + e1[i]*f1);
+	{ // New block to satisfy MS VS 8.0
+		const double f0 = (*t1 - t);
+		const double f1 = (t - *t0);
+		const double fact = 1.0 / delta_t;
+		for (i=0;i<dim;i++) elem[i] = fact * (e0[i]*f0 + e1[i]*f1);
+	}
   } else {
     if (*t1 + delta_t >= t) { // interpolate
       if (*t2 < -1e99) {
@@ -93,10 +95,12 @@ void CalcInterpolatedElements(const double t,double elem[],
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }
-    const double f1 = (*t2 - t);
-    const double f2 = (t - *t1);
-    const double fact = 1.0 / delta_t;
-    for (i=0;i<dim;i++) elem[i] = fact * (e1[i]*f1 + e2[i]*f2);
+	{ // New block to satisfy MS VS 8.0
+		const double f1 = (*t2 - t);
+		const double f2 = (t - *t1);
+		const double fact = 1.0 / delta_t;
+		for (i=0;i<dim;i++) elem[i] = fact * (e1[i]*f1 + e2[i]*f2);
+	}
   }
 }
 

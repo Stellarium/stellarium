@@ -2868,7 +2868,7 @@ void Time_item::onTimeChange(void)
 
 Picture::Picture(const STexture * _imageTex,
                  int xpos, int ypos, int xsize, int ysize) :
-	imageTex(_imageTex), imgcolor(s_color(1,1,1))
+	imageTex(_imageTex), imgcolor(s_color(s_vec3(1,1,1)))
 {
 	setPos(xpos, ypos);
 	setSize(xsize, ysize);
@@ -2977,10 +2977,10 @@ void City_Mgr::setProximity(double _proximity)
 ////////////////////////////////////////////////////////////////////////////////
 #define POINTER_SIZE 10
 #define CITY_SIZE 5
-#define CITY_SELECT s_color(1,0,0)
-#define CITY_HOVER s_color(1,1,0)
-#define CITY_WITH_NAME s_color(1,.4,0)
-#define CITY_WITHOUT_NAME s_color(.8,.6,0)
+#define CITY_SELECT s_color(s_vec3(1,0,0))
+#define CITY_HOVER s_color(s_vec3(1,1,0))
+#define CITY_WITH_NAME s_color(s_vec3(1,.4,0))
+#define CITY_WITHOUT_NAME s_color(s_vec3(.8,.6,0))
 
 MapPicture::MapPicture(const STexture *_imageTex,
                        const STexture *_pointerTex,

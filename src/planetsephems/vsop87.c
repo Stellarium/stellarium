@@ -137200,19 +137200,20 @@ void PrepareLambdaArray(int nr_of_lambdas,
   for (i=0;i<nr_of_lambdas;i++) {
     const int max_factor = max_lambda_factor[i];
     double *cslp = cos_sin_lambda;
+    int m;
     cslp[0] = cos(lambda[i]);
     cslp[1] = sin(lambda[i]);
     cslp[2] =  cslp[0];
     cslp[3] = -cslp[1];
-    int m;
-    for (m=2;m<=max_factor;m++) {
-      cslp += 4;
+
+	for (m=2;m<=max_factor;m++) {
         /* addition theorem:
            cos(m*l) = cos(m0*l+m1*l) = cos(m0*l)*cos(m1*l)-sin(m0*l)*sin(m1*l)
            sin(m*l) = sin(m0*l+m1*l) = cos(m0*l)*sin(m1*l)+sin(m0*l)*cos(m1*l)
         */
       const double *m0 = cos_sin_lambda + ((((m+0)>>1)-1)<<2);
       const double *m1 = cos_sin_lambda + ((((m+1)>>1)-1)<<2);
+      cslp += 4;
       cslp[0] = m0[0] * m1[0] - m0[1] * m1[1];
       cslp[1] = m0[0] * m1[1] + m0[1] * m1[0];
       cslp[2] =  cslp[0];
@@ -137240,13 +137241,16 @@ void AccumulateVsop87Terms(const unsigned char *instructions,
   sp[1] = 0.0;
   for (;;) {
     int lambda_index = *instructions++;
+	int term_count;
     if (lambda_index < 0xFE) {
       lambda_index = (lambda_index<<8)|(*instructions++);
-      int term_count = (*instructions++);
-        /* calculate new argument and push it on the stack */
-      const double *const cos_sin = cos_sin_lambda + (lambda_index<<1);
-      sp[2] = cos_sin[0]*sp[0] - cos_sin[1]*sp[1];
-      sp[3] = cos_sin[0]*sp[1] + cos_sin[1]*sp[0];
+      term_count = (*instructions++);
+	  { // MSC_VER
+			/* calculate new argument and push it on the stack */
+		  const double *const cos_sin = cos_sin_lambda + (lambda_index<<1);
+		  sp[2] = cos_sin[0]*sp[0] - cos_sin[1]*sp[1];
+		  sp[3] = cos_sin[0]*sp[1] + cos_sin[1]*sp[0];
+	  }
       sp += 2;
       while (--term_count >= 0) {
         accu[*instructions++] += (coefficients[0]*sp[0]
@@ -137265,14 +137269,23 @@ static
 void CalcVsop87Elem(double t,double elem[8*6]) {
   double lambda[12];
   int i;
-  for (i=0;i<12;i++) lambda[i] = lambda_0[i] + lambda_1[i] * t;
   double cos_sin_lambda[203*4];
+  int accuSize = sizeof(vsop87_constants)/sizeof(vsop87_constants[0]);
+  double stack[12*2];
+  double use_polynomials ;
+
+#if defined(__sun) || defined(__sun__) || defined (_MSC_VER)
+  	// in Sun C/C++ on Solaris 8 and in MS VisualStudio : VLAs are not allowed, so let's use new double[]
+    double *accu = (double *)malloc(accuSize*sizeof(double));
+#else
+  double accu[accuSize];
+#endif  
+
+  for (i=0;i<12;i++) lambda[i] = lambda_0[i] + lambda_1[i] * t;
   PrepareLambdaArray(12,vsop87_max_lambda_factor,lambda,cos_sin_lambda);
-  double accu[sizeof(vsop87_constants)/sizeof(vsop87_constants[0])];
-  for (i=0;i<(sizeof(vsop87_constants)/sizeof(vsop87_constants[0]));i++) {
+  for (i=0;i<accuSize;i++) {
     accu[i] = 0.0;
   }
-  double stack[12*2];
   AccumulateVsop87Terms(vsop87_instructions,vsop87_coefficients,cos_sin_lambda,
                         accu,stack);
 
@@ -137280,7 +137293,7 @@ void CalcVsop87Elem(double t,double elem[8*6]) {
     elem[i] = 0.0;
   }
     /* terms of order t^alpha: */
-  double use_polynomials = (6.1 - fabs(t)) / 0.1;
+  use_polynomials = (6.1 - fabs(t)) / 0.1;
   if (use_polynomials > 0) {
     if (use_polynomials > 1.0) use_polynomials = 1.0;
     for (i=0;i<8*6;i++) {
@@ -137336,6 +137349,7 @@ void GetVsop87Coor(const double jd,int body,double *xyz) {
 void GetVsop87OsculatingCoor(double jd0,double jd,int body,double *xyz) {
   if (jd0 != vsop87_jd0) {
     vsop87_jd0 = jd0;
+	{
     const double t0 = (vsop87_jd0 - 2451545.0) / 365250.0;
     CalcInterpolatedElements(t0,vsop87_elem,
                              VSOP87_DIM,
@@ -137343,6 +137357,7 @@ void GetVsop87OsculatingCoor(double jd0,double jd,int body,double *xyz) {
                              &t_0,vsop87_elem_0,
                              &t_1,vsop87_elem_1,
                              &t_2,vsop87_elem_2);
+	}
   }
   EllipticToRectangularA(vsop87_mu[body],vsop87_elem+(body*6),jd-jd0,xyz);
 }

@@ -59,7 +59,8 @@ public:
 	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
 	{
 	 public:
-	    Iterator() : mapIter(0) {}
+//	    Iterator() : mapIter(0) {}
+	    Iterator() : mapIter() {}
 	 private:
 	    friend class boost::iterator_core_access;
 	    friend class StelModuleMgr;

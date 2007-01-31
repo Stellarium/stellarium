@@ -142,6 +142,11 @@ namespace StelUtils {
 	//! @param lat double* to store latitude in radian
 	void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
 
+	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! @param lng float* to store longitude in radian
+	//! @param lat float* to store latitude in radian
+	void rect_to_sphe(float *lng, float *lat, const Vec3d& v);
+
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
 	double get_dec_angle(const string&);
 	
@@ -151,7 +156,13 @@ namespace StelUtils {
 	
 	//! Delete the file
 	bool deleteFile(const std::string& fileName);
-	
+
+	//! Copy file to another
+	bool copyFile(const std::string& fromFile, const std::string& toFile);
+
+	//! Check if the filename is an absolute path
+	bool checkAbsolutePath(const string& fileName);
+
 	//! Check if a number is a power of 2
 	bool isPowerOfTwo(int value);
 	

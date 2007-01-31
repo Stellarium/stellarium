@@ -162556,19 +162556,19 @@ void PrepareElp82bLambdaArray(int nr_of_lambdas,
   for (i=0;i<nr_of_lambdas;i++) {
     const int max_factor = max_lambda_factor[i];
     double *cslp = cos_sin_lambda;
+    int m;
     cslp[0] = cos(lambda[i]);
     cslp[1] = sin(lambda[i]);
     cslp[2] =  cslp[0];
     cslp[3] = -cslp[1];
-    int m;
     for (m=2;m<=max_factor;m++) {
-      cslp += 4;
         /* addition theorem:
            cos(m*l) = cos(m0*l+m1*l) = cos(m0*l)*cos(m1*l)-sin(m0*l)*sin(m1*l)
            sin(m*l) = sin(m0*l+m1*l) = cos(m0*l)*sin(m1*l)+sin(m0*l)*cos(m1*l)
         */
       const double *m0 = cos_sin_lambda + ((((m+0)>>1)-1)<<2);
       const double *m1 = cos_sin_lambda + ((((m+1)>>1)-1)<<2);
+      cslp += 4;
       cslp[0] = m0[0] * m1[0] - m0[1] * m1[1];
       cslp[1] = m0[0] * m1[1] + m0[1] * m1[0];
       cslp[2] =  cslp[0];
@@ -162675,6 +162675,10 @@ static
 void GetElp82bSphericalCoor(const double t,double r[3]) {
   double lambda[17];
   int i,k;
+  double cos_sin_lambda[303*4];
+  double accu[9];
+  double stack[17*2];
+
   for (i=0;i<4;i++) {
     lambda[i] = 0.0;
     for (k=3;k>=0;k--) {
@@ -162688,11 +162692,8 @@ void GetElp82bSphericalCoor(const double t,double r[3]) {
     lambda[9+i] = p[i]*t;
   }
 
-  double cos_sin_lambda[303*4];
   PrepareElp82bLambdaArray(17,elp82b_max_lambda_factor,lambda,cos_sin_lambda);
-  double accu[9];
   memcpy(accu,elp82b_constants,sizeof(elp82b_constants));
-  double stack[17*2];
   AccumulateElp82bTerms(elp82b_instructions,elp82b_coefficients,cos_sin_lambda,
                         accu,stack);
 
@@ -162806,27 +162807,28 @@ void GetElp82bCoor(double jd,double xyz[3]) {
 //  GetElp82bSphericalCoorInterpol(t,r);
   CalcInterpolatedElements(t,r,3,&GetElp82bSphericalCoor,DELTA_T,
                            &t_0,r_0,&t_1,r_1,&t_2,r_2);
-  const double rh = r[2] * cos(r[1]);
-  const double x3 = r[2] * sin(r[1]);
-  const double x1 = rh * cos(r[0]);
-  const double x2 = rh * sin(r[0]);
+  { // Start new block (MS VS don't like to have delcarations after first operation
+	  const double rh = r[2] * cos(r[1]);
+	  const double x3 = r[2] * sin(r[1]);
+	  const double x1 = rh * cos(r[0]);
+	  const double x2 = rh * sin(r[0]);
 
-  double pw = t*(p1 + t*(p2 + t*(p3 + t*(p4 + t*p5))));
-  double qw = t*(q1 + t*(q2 + t*(q3 + t*(q4 + t*q5))));
-  const double pwq = pw * pw;
-  const double qwq = qw * qw;
-  const double pwqw = 2.0 * pw * qw;
-  const double pw2 = 1.0 - 2.0 * pwq;
-  const double qw2 = 1.0 - 2.0 * qwq;
-  const double ra = 2.0 * sqrt(1.0 - pwq - qwq);
-  pw *= ra;
-  qw *= ra;
+	  double pw = t*(p1 + t*(p2 + t*(p3 + t*(p4 + t*p5))));
+	  double qw = t*(q1 + t*(q2 + t*(q3 + t*(q4 + t*q5))));
+	  const double pwq = pw * pw;
+	  const double qwq = qw * qw;
+	  const double pwqw = 2.0 * pw * qw;
+	  const double pw2 = 1.0 - 2.0 * pwq;
+	  const double qw2 = 1.0 - 2.0 * qwq;
+	  const double ra = 2.0 * sqrt(1.0 - pwq - qwq);
+	  pw *= ra;
+	  qw *= ra;
 
-    // VSOP87 coordinates:
-  xyz[0] = pw2 *x1 + pwqw*x2                + pw*x3;
-  xyz[1] = pwqw*x1 + qw2 *x2                - qw*x3;
-  xyz[2] = -pw *x1 + qw  *x2 + (pw2 + qw2 - 1.0)*x3;
-
+		// VSOP87 coordinates:
+	  xyz[0] = pw2 *x1 + pwqw*x2                + pw*x3;
+	  xyz[1] = pwqw*x1 + qw2 *x2                - qw*x3;
+	  xyz[2] = -pw *x1 + qw  *x2 + (pw2 + qw2 - 1.0)*x3;
+  }
 //printf("Moon: %f  %22.15f %22.15f %22.15f\n",
 //       jd,xyz[0],xyz[1],xyz[2]);
 }

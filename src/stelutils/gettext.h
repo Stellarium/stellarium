@@ -35,7 +35,7 @@
    as well because people using "gettext.h" will not include <libintl.h>,
    and also including <libintl.h> would fail on SunOS 4, whereas <locale.h>
    is OK.  */
-#if defined(__sun)
+#if defined(__sun) || defined(_MSC_VER)
 # include <locale.h>
 #endif
 

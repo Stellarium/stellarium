@@ -40,7 +40,7 @@ void InitParser::load(const string& file)
 {
 	// Check file presence
 	FILE * fp = NULL;
-	fp = fopen(file.c_str(),"rt");
+	fp = fopen(file.c_str(),"rtb");
 	if (fp)
 	{
 		fclose(fp);

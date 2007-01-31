@@ -164,7 +164,7 @@ void StelUI::init(const InitParser& conf)
 	tex_down = &StelApp::getInstance().getTextureManager().createTexture("down.png");
 	
 	// Set default Painter
-	Painter p(baseTex, &baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
+	Painter p(baseTex, &baseFont, s_color(s_vec3(0.5, 0.5, 0.5)), s_color(s_vec3(1., 1., 1.)));
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());

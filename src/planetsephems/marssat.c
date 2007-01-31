@@ -337,8 +337,9 @@ static const struct MarsSatBody mars_sat_bodies[2] = {
 static
 void CalcMarsSatElem(double t,int body,double elem[6]) {
   const struct MarsSatBody *bp = mars_sat_bodies + body;
-  memcpy(elem,bp->constants,6*sizeof(double));
   int j;
+
+  memcpy(elem,bp->constants,6*sizeof(double));
   for (j=0;j<2;j++) {
     const struct MarsSatTerm *const begin = bp->lists[j].terms;
     const struct MarsSatTerm *p = begin + bp->lists[j].size;
@@ -383,16 +384,18 @@ static const double dinc =  0.0609;
 static
 void GenerateMarsSatToVSOP87(double t,double mars_sat_to_vsop87[9]) {
   t -= 6491.5;
-  const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
-  const double inc = (inc0 + dinc * t / 36525.) * (M_PI/180.0);
-  const double co = cos(ome);
-  const double so = sin(ome);
-  const double ci = cos(inc);
-  const double si = sin(inc);
-  const double m[9] = {co,-ci*so, si*so,
-                       so, ci*co,-si*co,
-                       0.0,si,ci};
-  MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
+  {
+	  const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
+	  const double inc = (inc0 + dinc * t / 36525.) * (M_PI/180.0);
+	  const double co = cos(ome);
+	  const double so = sin(ome);
+	  const double ci = cos(inc);
+	  const double si = sin(inc);
+	  const double m[9] = {co,-ci*so, si*so,
+						   so, ci*co,-si*co,
+						   0.0,si,ci};
+	  MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
+  }
 }
 
 static double t_0 = -1e100;
@@ -420,9 +423,10 @@ void GetMarsSatCoor(double jd,int body,double *xyz) {
 }
 
 void GetMarsSatOsculatingCoor(double jd0,double jd,int body,double *xyz) {
+  double x[3];
   if (jd0 != marssat_jd0) {
-    marssat_jd0 = jd0;
     const double t0 = jd0 - 2451545.0 + 6491.5;
+    marssat_jd0 = jd0;
     CalcInterpolatedElements(t0,marssat_elem,12,
                              &CalcAllMarsSatElem,DELTA_T,
                              &t_0,marssat_elem_0,
@@ -430,7 +434,6 @@ void GetMarsSatOsculatingCoor(double jd0,double jd,int body,double *xyz) {
                              &t_2,marssat_elem_2);
     GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87);
   }
-  double x[3];
   EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),
                          jd-jd0,x);
   xyz[0] = mars_sat_to_vsop87[0]*x[0]
