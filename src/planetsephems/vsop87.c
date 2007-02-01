@@ -137196,17 +137196,15 @@ void PrepareLambdaArray(int nr_of_lambdas,
        (cos,sin)(1*lambda[0]),(cos,sin)(-1*lambda[0]),(cos,sin)(2*lambda[0]),...
        (cos,sin)(1*lambda[1]),(cos,sin)(-1*lambda[1]),(cos,sin)(2*lambda[1]),...
     */
-  int i;
+  int i,m;
   for (i=0;i<nr_of_lambdas;i++) {
     const int max_factor = max_lambda_factor[i];
     double *cslp = cos_sin_lambda;
-    int m;
     cslp[0] = cos(lambda[i]);
     cslp[1] = sin(lambda[i]);
     cslp[2] =  cslp[0];
     cslp[3] = -cslp[1];
-
-	for (m=2;m<=max_factor;m++) {
+    for (m=2;m<=max_factor;m++) {
         /* addition theorem:
            cos(m*l) = cos(m0*l+m1*l) = cos(m0*l)*cos(m1*l)-sin(m0*l)*sin(m1*l)
            sin(m*l) = sin(m0*l+m1*l) = cos(m0*l)*sin(m1*l)+sin(m0*l)*cos(m1*l)
@@ -137241,21 +137239,20 @@ void AccumulateVsop87Terms(const unsigned char *instructions,
   sp[1] = 0.0;
   for (;;) {
     int lambda_index = *instructions++;
-	int term_count;
     if (lambda_index < 0xFE) {
       lambda_index = (lambda_index<<8)|(*instructions++);
-      term_count = (*instructions++);
-	  { // MSC_VER
-			/* calculate new argument and push it on the stack */
-		  const double *const cos_sin = cos_sin_lambda + (lambda_index<<1);
-		  sp[2] = cos_sin[0]*sp[0] - cos_sin[1]*sp[1];
-		  sp[3] = cos_sin[0]*sp[1] + cos_sin[1]*sp[0];
-	  }
-      sp += 2;
-      while (--term_count >= 0) {
-        accu[*instructions++] += (coefficients[0]*sp[0]
-                                + coefficients[1]*sp[1]);
-        coefficients += 2;
+      {
+        int term_count = (*instructions++);
+          /* calculate new argument and push it on the stack */
+        const double *const cos_sin = cos_sin_lambda + (lambda_index<<1);
+        sp[2] = cos_sin[0]*sp[0] - cos_sin[1]*sp[1];
+        sp[3] = cos_sin[0]*sp[1] + cos_sin[1]*sp[0];
+        sp += 2;
+        while (--term_count >= 0) {
+          accu[*instructions++] += (coefficients[0]*sp[0]
+                                  + coefficients[1]*sp[1]);
+          coefficients += 2;
+        }
       }
     } else {
       if (lambda_index == 0xFF) break;
@@ -137266,24 +137263,16 @@ void AccumulateVsop87Terms(const unsigned char *instructions,
 }
 
 static
-void CalcVsop87Elem(double t,double elem[8*6]) {
-  double lambda[12];
+void CalcVsop87Elem(const double t,double elem[8*6]) {
   int i;
+  double lambda[12];
   double cos_sin_lambda[203*4];
-  int accuSize = sizeof(vsop87_constants)/sizeof(vsop87_constants[0]);
+  double accu[sizeof(vsop87_constants)/sizeof(vsop87_constants[0])];
   double stack[12*2];
-  double use_polynomials ;
-
-#if defined(__sun) || defined(__sun__) || defined (_MSC_VER)
-  	// in Sun C/C++ on Solaris 8 and in MS VisualStudio : VLAs are not allowed, so let's use new double[]
-    double *accu = (double *)malloc(accuSize*sizeof(double));
-#else
-  double accu[accuSize];
-#endif  
-
+  double use_polynomials;
   for (i=0;i<12;i++) lambda[i] = lambda_0[i] + lambda_1[i] * t;
   PrepareLambdaArray(12,vsop87_max_lambda_factor,lambda,cos_sin_lambda);
-  for (i=0;i<accuSize;i++) {
+  for (i=0;i<(sizeof(vsop87_constants)/sizeof(vsop87_constants[0]));i++) {
     accu[i] = 0.0;
   }
   AccumulateVsop87Terms(vsop87_instructions,vsop87_coefficients,cos_sin_lambda,
@@ -137342,22 +137331,21 @@ static double vsop87_elem_2[VSOP87_DIM];
 static double vsop87_jd0 = -1e100;
 static double vsop87_elem[VSOP87_DIM];
 
-void GetVsop87Coor(const double jd,int body,double *xyz) {
+void GetVsop87Coor(double jd,int body,double *xyz) {
   GetVsop87OsculatingCoor(jd,jd,body,xyz);
 }
 
-void GetVsop87OsculatingCoor(double jd0,double jd,int body,double *xyz) {
+void GetVsop87OsculatingCoor(const double jd0,const double jd,
+                             const int body,double *xyz) {
   if (jd0 != vsop87_jd0) {
+    const double t0 = (jd0 - 2451545.0) / 365250.0;
     vsop87_jd0 = jd0;
-	{
-    const double t0 = (vsop87_jd0 - 2451545.0) / 365250.0;
     CalcInterpolatedElements(t0,vsop87_elem,
                              VSOP87_DIM,
                              &CalcVsop87Elem,DELTA_T,
                              &t_0,vsop87_elem_0,
                              &t_1,vsop87_elem_1,
                              &t_2,vsop87_elem_2);
-	}
   }
   EllipticToRectangularA(vsop87_mu[body],vsop87_elem+(body*6),jd-jd0,xyz);
 }

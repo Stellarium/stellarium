@@ -3071,7 +3071,7 @@ CalcTass17Elem(double t,const double lon[7],int body,double elem[6]) {
   
   tmt_begin = tass17bodies[body].series[1].multi_terms;
   tmt = tmt_begin + tass17bodies[body].series[1].nr_of_multi_terms;
-  if (body != 7) { // first multiterm already calculated: lon[body];
+  if (body != 7) { /* first multiterm already calculated: lon[body];*/
     tmt_begin++;
     elem[1] += lon[body];
   }
@@ -3143,9 +3143,9 @@ static double tass17_elem_2[TASS17_DIM];
 static double tass17_jd0 = -1e100;
 static double tass17_elem[TASS17_DIM];
 
-void CalcAllTass17Elem(double t,double elem[TASS17_DIM]) {
-  double lon[7];
+void CalcAllTass17Elem(const double t,double elem[TASS17_DIM]) {
   int body;
+  double lon[7];
   CalcLon(t,lon);
   for (body=0;body<8;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
 }
@@ -3154,9 +3154,9 @@ void GetTass17Coor(double jd,int body,double *xyz) {
   GetTass17OsculatingCoor(jd,jd,body,xyz);
 }
 
-void GetTass17OsculatingCoor(double jd0,double jd,int body,double *xyz) {
+void GetTass17OsculatingCoor(const double jd0,const double jd,
+                             const int body,double *xyz) {
   double x[3];
-
   if (jd0 != tass17_jd0) {
     const double t0 = jd0 - 2444240.0;
     tass17_jd0 = jd0;

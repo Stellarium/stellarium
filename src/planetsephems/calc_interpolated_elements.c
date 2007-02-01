@@ -33,9 +33,11 @@ void CalcInterpolatedElements(const double t,double elem[],
                               double *t0,double e0[],
                               double *t1,double e1[],
                               double *t2,double e2[]) {
-//printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
+/*
+printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
+*/
   int i;
-  if (*t1 < -1e99) { // *t1 uninitialized
+  if (*t1 < -1e99) { /* *t1 uninitialized */
     *t0 = -1e100;
     *t2 = -1e100;
     *t1 = t;
@@ -44,12 +46,12 @@ void CalcInterpolatedElements(const double t,double elem[],
     return;
   }
   if (t <= *t1) {
-    if (*t1 - delta_t <= t) { // interpolate
+    if (*t1 - delta_t <= t) { /* interpolate */
       if (*t0 < -1e99) {
         *t0 = *t1 - delta_t;
         (*calc_func)(*t0,e0);
       }
-    } else if (*t1 - 2.0*delta_t <= t) { // interpolate
+    } else if (*t1 - 2.0*delta_t <= t) { /* interpolate */
       if (*t0 < -1e99) {
         *t0 = *t1 - delta_t;
         (*calc_func)(*t0,e0);
@@ -66,19 +68,19 @@ void CalcInterpolatedElements(const double t,double elem[],
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }
-	{ // New block to satisfy MS VS 8.0
-		const double f0 = (*t1 - t);
-		const double f1 = (t - *t0);
-		const double fact = 1.0 / delta_t;
-		for (i=0;i<dim;i++) elem[i] = fact * (e0[i]*f0 + e1[i]*f1);
-	}
+    {
+      const double f0 = (*t1 - t);
+      const double f1 = (t - *t0);
+      const double fact = 1.0 / delta_t;
+      for (i=0;i<dim;i++) elem[i] = fact * (e0[i]*f0 + e1[i]*f1);
+    }
   } else {
-    if (*t1 + delta_t >= t) { // interpolate
+    if (*t1 + delta_t >= t) { /* interpolate */
       if (*t2 < -1e99) {
         *t2 = *t1 + delta_t;
         (*calc_func)(*t2,e2);
       }
-    } else if (*t1 + 2.0*delta_t >= t) { // interpolate
+    } else if (*t1 + 2.0*delta_t >= t) { /* interpolate */
       if (*t2 < -1e99) {
         *t2 = *t1 + delta_t;
         (*calc_func)(*t2,e2);
@@ -95,12 +97,12 @@ void CalcInterpolatedElements(const double t,double elem[],
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }
-	{ // New block to satisfy MS VS 8.0
-		const double f1 = (*t2 - t);
-		const double f2 = (t - *t1);
-		const double fact = 1.0 / delta_t;
-		for (i=0;i<dim;i++) elem[i] = fact * (e1[i]*f1 + e2[i]*f2);
-	}
+    {
+      const double f1 = (*t2 - t);
+      const double f2 = (t - *t1);
+      const double fact = 1.0 / delta_t;
+      for (i=0;i<dim;i++) elem[i] = fact * (e1[i]*f1 + e2[i]*f2);
+    }
   }
 }
 

@@ -17,5 +17,5 @@
  */
 
 
-// Transform spheric coordinate in rectangular
+/* Transform spheric coordinate in rectangular */
 void sphe_to_rect(double lng, double lat, double r, double *x, double *y, double *z);

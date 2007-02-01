@@ -19,6 +19,10 @@ Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 
 #include <math.h>
 
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 /* puts a large angle in the correct range 0 - 360 degrees */
 double range_degrees(double d)
 {
@@ -35,16 +39,16 @@ double range_radians (double r)
 	return r;
 }
 
-#include <math.h>
-
 #define TERMS 63
 #define LN_NUTATION_EPOCH_THRESHOLD 0.1
 
 
 /* Nutation is a period oscillation of the Earths rotational axis around it's mean position.*/
 
-// Contains Nutation in longitude, obliquity and ecliptic obliquity.
-// Angles are expressed in degrees.
+/*
+ Contains Nutation in longitude, obliquity and ecliptic obliquity.
+ Angles are expressed in degrees.
+*/
 struct ln_nutation
 {
 	double longitude;	/*!< Nutation in longitude */
