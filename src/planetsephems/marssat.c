@@ -55,6 +55,10 @@ in MarsSatV1-0.f are
 #include <math.h>
 #include <string.h> /* memcpy */
 
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 
 struct MarsSatTerm {
   double phase,frequency,amplitude;
@@ -336,9 +340,8 @@ static const struct MarsSatBody mars_sat_bodies[2] = {
 
 static
 void CalcMarsSatElem(double t,int body,double elem[6]) {
-  const struct MarsSatBody *bp = mars_sat_bodies + body;
   int j;
-
+  const struct MarsSatBody *bp = mars_sat_bodies + body;
   memcpy(elem,bp->constants,6*sizeof(double));
   for (j=0;j<2;j++) {
     const struct MarsSatTerm *const begin = bp->lists[j].terms;
@@ -385,16 +388,23 @@ static
 void GenerateMarsSatToVSOP87(double t,double mars_sat_to_vsop87[9]) {
   t -= 6491.5;
   {
-	  const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
-	  const double inc = (inc0 + dinc * t / 36525.) * (M_PI/180.0);
-	  const double co = cos(ome);
-	  const double so = sin(ome);
-	  const double ci = cos(inc);
-	  const double si = sin(inc);
-	  const double m[9] = {co,-ci*so, si*so,
-						   so, ci*co,-si*co,
-						   0.0,si,ci};
-	  MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
+    const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
+    const double inc = (inc0 + dinc * t / 36525.) * (M_PI/180.0);
+    const double co = cos(ome);
+    const double so = sin(ome);
+    const double ci = cos(inc);
+    const double si = sin(inc);
+#if defined __GNUC__ && !defined __STRICT_ANSI__
+    const double m[9] = {co,-ci*so, si*so,
+                         so, ci*co,-si*co,
+                         0.0,si,ci};
+#else
+    double m[9];
+    m[0] = co;  m[1] = -ci*so; m[2] =  si*so;
+    m[3] = so;  m[4] =  ci*co; m[5] = -si*co;
+    m[6] = 0.0; m[7] =  si;    m[8] =  ci;
+#endif
+    MultMat(J2000_to_VSOP87,m,mars_sat_to_vsop87);
   }
 }
 
@@ -422,7 +432,8 @@ void GetMarsSatCoor(double jd,int body,double *xyz) {
   GetMarsSatOsculatingCoor(jd,jd,body,xyz);
 }
 
-void GetMarsSatOsculatingCoor(double jd0,double jd,int body,double *xyz) {
+void GetMarsSatOsculatingCoor(const double jd0,const double jd,
+                              const int body,double *xyz) {
   double x[3];
   if (jd0 != marssat_jd0) {
     const double t0 = jd0 - 2451545.0 + 6491.5;
@@ -445,6 +456,8 @@ void GetMarsSatOsculatingCoor(double jd0,double jd,int body,double *xyz) {
   xyz[2] = mars_sat_to_vsop87[6]*x[0]
          + mars_sat_to_vsop87[7]*x[1]
          + mars_sat_to_vsop87[8]*x[2];
-//  printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
-//         body,jd,xyz[0],xyz[1],xyz[2]);
+/*
+  printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
+         body,jd,xyz[0],xyz[1],xyz[2]);
+*/
 }

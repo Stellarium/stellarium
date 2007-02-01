@@ -48,6 +48,10 @@ the original Fortran code:
 #include <math.h>
 #include <string.h>
 
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 static
 const int elp82b_max_lambda_factor[17] = {
   10,
@@ -162552,11 +162556,10 @@ void PrepareElp82bLambdaArray(int nr_of_lambdas,
        (cos,sin)(1*lambda[0]),(cos,sin)(-1*lambda[0]),(cos,sin)(2*lambda[0]),...
        (cos,sin)(1*lambda[1]),(cos,sin)(-1*lambda[1]),(cos,sin)(2*lambda[1]),...
     */
-  int i;
+  int i,m;
   for (i=0;i<nr_of_lambdas;i++) {
     const int max_factor = max_lambda_factor[i];
     double *cslp = cos_sin_lambda;
-    int m;
     cslp[0] = cos(lambda[i]);
     cslp[1] = sin(lambda[i]);
     cslp[2] =  cslp[0];
@@ -162641,7 +162644,7 @@ const double del[16] = {
   /* Precession */
 static
 const double zeta[1] = {
-  (1732559343.73604 + 5029.0966) * (M_PI/(180*3600))  //w[3]+preces
+  (1732559343.73604 + 5029.0966) * (M_PI/(180*3600))  /* w[3]+preces */
 };
 
   /* Planetary arguments */
@@ -162673,12 +162676,11 @@ static const double a0_div_ath_times_au =
 
 static
 void GetElp82bSphericalCoor(const double t,double r[3]) {
-  double lambda[17];
   int i,k;
+  double lambda[17];
   double cos_sin_lambda[303*4];
   double accu[9];
   double stack[17*2];
-
   for (i=0;i<4;i++) {
     lambda[i] = 0.0;
     for (k=3;k>=0;k--) {
@@ -162697,7 +162699,7 @@ void GetElp82bSphericalCoor(const double t,double r[3]) {
   AccumulateElp82bTerms(elp82b_instructions,elp82b_coefficients,cos_sin_lambda,
                         accu,stack);
 
-    // calculate r1,r2,r3:
+    /* calculate r1,r2,r3: */
   r[0] =   (accu[0] + w[0]
        + t*(accu[3] + w[1]
        + t*(accu[6] + w[2]
@@ -162717,78 +162719,6 @@ static double r_2[3];
 
 #define DELTA_T (1.0/(24.0*36525.0))
 
-/*
-static
-void GetElp82bSphericalCoorInterpol(const double t,double r[3]) {
-  int i;
-  if (t_0 < -1e99) {
-    if (t_1 - DELTA_T <= t) {
-      t_0 = t_1 - DELTA_T;
-      GetElp82bSphericalCoor(t_0,r_0);
-    } else
-    if (t <= t_1 + DELTA_T && t_1 <= 1e99) {
-      t_0 = t_1;
-      for (i=0;i<3;i++) r_0[i] = r_1[i];
-      t_1 = t_0 + DELTA_T;
-      GetElp82bSphericalCoor(t_1,r_1);
-    } else {
-      t_1 = t;
-      GetElp82bSphericalCoor(t_1,r_1);
-      for (i=0;i<3;i++) r[i] = r_1[i];
-      return;
-    }
-  } else
-  if (1e99 < t_1) {
-    if (t <= t_0 + DELTA_T) {
-      t_1 = t_0 + DELTA_T;
-      GetElp82bSphericalCoor(t_1,r_1);
-    } else
-    if (t_0 - DELTA_T <= t) {
-      t_1 = t_0;
-      for (i=0;i<3;i++) r_1[i] = r_0[i];
-      t_0 = t_1 - DELTA_T;
-      GetElp82bSphericalCoor(t_0,r_0);
-    } else {
-      t_0 = t;
-      GetElp82bSphericalCoor(t_0,r_0);
-      for (i=0;i<3;i++) r[i] = r_0[i];
-      return;
-    }
-  } else
-  if (t < t_0) {
-    if (t_0 - DELTA_T <= t) {
-      t_1 = t_0;
-      for (i=0;i<3;i++) r_1[i] = r_0[i];
-      t_0 = t_1 - DELTA_T;
-      GetElp82bSphericalCoor(t_0,r_0);
-    } else {
-      t_1 = 1e100;
-      t_0 = t;
-      GetElp82bSphericalCoor(t_0,r_0);
-      for (i=0;i<3;i++) r[i] = r_0[i];
-      return;
-    }
-  } else
-  if (t_1 < t) {
-    if (t <= t_1 + DELTA_T) {
-      t_0 = t_1;
-      for (i=0;i<3;i++) r_0[i] = r_1[i];
-      t_1 = t_0 + DELTA_T;
-      GetElp82bSphericalCoor(t_1,r_1);
-    } else {
-      t_0 = -1e100;
-      t_1 = t;
-      GetElp82bSphericalCoor(t_1,r_1);
-      for (i=0;i<3;i++) r[i] = r_1[i];
-      return;
-    }
-  }
-  const double f0 = (t_1 - t);
-  const double f1 = (t - t_0);
-  const double fact = 1.0 / (t_1 - t_0);
-  for (i=0;i<3;i++) r[i] = fact * (r_0[i]*f0 + r_1[i]*f1);
-}
-*/
   /* Polynoms for transformation matrix */
 static const double p1 =  1.0180391e-5;
 static const double p2 =  4.7020439e-7;
@@ -162801,36 +162731,38 @@ static const double q3 =  1.265417e-9;
 static const double q4 = -1.371808e-12;
 static const double q5 = -3.20334e-15;
 
-void GetElp82bCoor(double jd,double xyz[3]) {
+void GetElp82bCoor(const double jd,double xyz[3]) {
   const double t = (jd - 2451545.0) / 36525.0;
   double r[3];
-//  GetElp82bSphericalCoorInterpol(t,r);
   CalcInterpolatedElements(t,r,3,&GetElp82bSphericalCoor,DELTA_T,
                            &t_0,r_0,&t_1,r_1,&t_2,r_2);
-  { // Start new block (MS VS don't like to have delcarations after first operation
-	  const double rh = r[2] * cos(r[1]);
-	  const double x3 = r[2] * sin(r[1]);
-	  const double x1 = rh * cos(r[0]);
-	  const double x2 = rh * sin(r[0]);
+  {
+    const double rh = r[2] * cos(r[1]);
+    const double x3 = r[2] * sin(r[1]);
+    const double x1 = rh * cos(r[0]);
+    const double x2 = rh * sin(r[0]);
 
-	  double pw = t*(p1 + t*(p2 + t*(p3 + t*(p4 + t*p5))));
-	  double qw = t*(q1 + t*(q2 + t*(q3 + t*(q4 + t*q5))));
-	  const double pwq = pw * pw;
-	  const double qwq = qw * qw;
-	  const double pwqw = 2.0 * pw * qw;
-	  const double pw2 = 1.0 - 2.0 * pwq;
-	  const double qw2 = 1.0 - 2.0 * qwq;
-	  const double ra = 2.0 * sqrt(1.0 - pwq - qwq);
-	  pw *= ra;
-	  qw *= ra;
+    double pw = t*(p1 + t*(p2 + t*(p3 + t*(p4 + t*p5))));
+    double qw = t*(q1 + t*(q2 + t*(q3 + t*(q4 + t*q5))));
+    const double pwq = pw * pw;
+    const double qwq = qw * qw;
+    const double pwqw = 2.0 * pw * qw;
+    const double pw2 = 1.0 - 2.0 * pwq;
+    const double qw2 = 1.0 - 2.0 * qwq;
+    const double ra = 2.0 * sqrt(1.0 - pwq - qwq);
+    pw *= ra;
+    qw *= ra;
 
-		// VSOP87 coordinates:
-	  xyz[0] = pw2 *x1 + pwqw*x2                + pw*x3;
-	  xyz[1] = pwqw*x1 + qw2 *x2                - qw*x3;
-	  xyz[2] = -pw *x1 + qw  *x2 + (pw2 + qw2 - 1.0)*x3;
+      /* VSOP87 coordinates: */
+    xyz[0] = pw2 *x1 + pwqw*x2                + pw*x3;
+    xyz[1] = pwqw*x1 + qw2 *x2                - qw*x3;
+    xyz[2] = -pw *x1 + qw  *x2 + (pw2 + qw2 - 1.0)*x3;
+
+/*
+    printf("Moon: %f  %22.15f %22.15f %22.15f\n",
+           jd,xyz[0],xyz[1],xyz[2]);
+*/
   }
-//printf("Moon: %f  %22.15f %22.15f %22.15f\n",
-//       jd,xyz[0],xyz[1],xyz[2]);
 }
 
 
