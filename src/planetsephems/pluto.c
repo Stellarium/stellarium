@@ -210,14 +210,16 @@ static const struct pluto_radius radius[PLUTO_COEFFS] = {
 };
 
 
-// Chap 37. Equ 37.1
-// params : Julian day, Longitude, Latitude, Radius
-//
-// Calculate Pluto heliocentric ecliptical coordinates for given julian day.
-// This function is accurate to within 0.07" in longitude, 0.02" in latitude
-// and 0.000006 AU in radius.
-// Note: This function is not valid outside the period of 1885-2099.
-// Longitude and Latitude are in radians, radius in AU.
+/*
+ Chap 37. Equ 37.1
+ params : Julian day, Longitude, Latitude, Radius
+
+ Calculate Pluto heliocentric ecliptical coordinates for given julian day.
+ This function is accurate to within 0.07" in longitude, 0.02" in latitude
+ and 0.000006 AU in radius.
+ Note: This function is not valid outside the period of 1885-2099.
+ Longitude and Latitude are in radians, radius in AU.
+*/
 void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 {
 	double sum_longitude = 0, sum_latitude = 0, sum_radius = 0;

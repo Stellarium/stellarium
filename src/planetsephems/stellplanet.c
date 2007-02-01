@@ -15,7 +15,7 @@ void get_pluto_helio_coordsv(double jd,double xyz[3])
   {get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);}
 
 
-// Return 0 of course...
+/* Return 0 of course... */
 void get_sun_helio_coordsv(double jd,double xyz[3])
   {xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;}
 
