@@ -347,6 +347,60 @@ void Projector::draw_viewport_shape(void)
 	unset2dDrawMode();
 }
 
+#define MAX_STACKS 4096
+static double cos_sin_rho[2*(MAX_STACKS+1)];
+#define MAX_SLICES 4096
+static double cos_sin_theta[2*(MAX_SLICES+1)];
+
+static
+void ComputeCosSinTheta(double phi,int segments) {
+  double *cos_sin = cos_sin_theta;
+  double *cos_sin_rev = cos_sin + 2*(segments+1);
+  const double c = cos(phi);
+  const double s = sin(phi);
+  *cos_sin++ = 1.0;
+  *cos_sin++ = 0.0;
+  *--cos_sin_rev = -cos_sin[-1];
+  *--cos_sin_rev =  cos_sin[-2];
+  *cos_sin++ = c;
+  *cos_sin++ = s;
+  *--cos_sin_rev = -cos_sin[-1];
+  *--cos_sin_rev =  cos_sin[-2];
+  while (cos_sin < cos_sin_rev) {
+    cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+    cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+    cos_sin += 2;
+    *--cos_sin_rev = -cos_sin[-1];
+    *--cos_sin_rev =  cos_sin[-2];
+    segments--;
+  }
+}
+
+static
+void ComputeCosSinRho(double phi,int segments) {
+  double *cos_sin = cos_sin_rho;
+  double *cos_sin_rev = cos_sin + 2*(segments+1);
+  const double c = cos(phi);
+  const double s = sin(phi);
+  *cos_sin++ = 1.0;
+  *cos_sin++ = 0.0;
+  *--cos_sin_rev =  cos_sin[-1];
+  *--cos_sin_rev = -cos_sin[-2];
+  *cos_sin++ = c;
+  *cos_sin++ = s;
+  *--cos_sin_rev =  cos_sin[-1];
+  *--cos_sin_rev = -cos_sin[-2];
+  while (cos_sin < cos_sin_rev) {
+    cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+    cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+    cos_sin += 2;
+    *--cos_sin_rev =  cos_sin[-1];
+    *--cos_sin_rev = -cos_sin[-2];
+    segments--;
+  }
+}
+
+
 // Reimplementation of gluSphere : glu is overrided for non standard projection
 void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
                               GLint slices, GLint stacks, int orient_inside) const
@@ -365,7 +419,6 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 	}
 	else
 	{
-		//GLfloat rho, theta;
 		GLfloat x, y, z;
 		GLfloat s, t, ds, dt;
 		GLint i, j;
@@ -376,39 +429,16 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 		else
 			nsign = 1.0;
 
-		const GLfloat drho = M_PI / (GLfloat) stacks;
+		const double drho = M_PI / stacks;
+		assert(stacks<=MAX_STACKS);
+		ComputeCosSinRho(drho,stacks);
+		double *cos_sin_rho_p;
 
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-		// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-		// same applies for MSC VS 8.0 C/C++ compiler
-		double* cos_sin_rho = new double[2 * (stacks + 1)];
-#else
-		double cos_sin_rho[2*(stacks+1)];
-#endif
+		const double dtheta = 2.0 * M_PI / slices;
+		assert(slices<=MAX_SLICES);
+		ComputeCosSinTheta(dtheta,slices);
+		double *cos_sin_theta_p;
 
-		double *cos_sin_rho_p = cos_sin_rho;
-		for (i = 0; i <= stacks; i++)
-		{
-			double rho = i * drho;
-			*cos_sin_rho_p++ = cos(rho);
-			*cos_sin_rho_p++ = sin(rho);
-		}
-
-		const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-		// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-		// same applies for MSC VS 8.0 C/C++ compiler
-		double* cos_sin_theta = new double[2*(slices+1)];
-#else
-		double cos_sin_theta[2*(slices+1)];
-#endif
-		double *cos_sin_theta_p = cos_sin_theta;
-		for (i = 0; i <= slices; i++)
-		{
-			double theta = (i == slices) ? 0.0 : i * dtheta;
-			*cos_sin_theta_p++ = cos(theta);
-			*cos_sin_theta_p++ = sin(theta);
-		}
 		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 		// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 		// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
@@ -450,11 +480,6 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 			glEnd();
 			t -= dt;
 		}
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-		delete[] cos_sin_rho;
-		delete[] cos_sin_theta;
-#endif
-
 	}
 
 	glPopMatrix();
@@ -502,7 +527,6 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_in
 
 void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const
 {
-	double theta;
 	double x,y;
 	int j;
 
@@ -510,24 +534,10 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 
 	const double dr = (r_max-r_min) / stacks;
 	const double dtheta = 2.0 * M_PI / slices;
-	if (slices < 0)
-		slices = -slices;
-
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	//in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-	double *cos_sin_theta = new double[2*(slices+1)];
-#else
-
-	double cos_sin_theta[2*(slices+1)];
-#endif
-
-	double *cos_sin_theta_p = cos_sin_theta;
-	for (j = 0; j <= slices; j++)
-	{
-		const double theta = (j == slices) ? 0.0 : j * dtheta;
-		*cos_sin_theta_p++ = cos(theta);
-		*cos_sin_theta_p++ = sin(theta);
-	}
+	if (slices < 0) slices = -slices;
+	assert(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
 
 
 	// draw intermediate stacks as quad strips
@@ -540,7 +550,6 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 		        j<=slices;
 		        j++,cos_sin_theta_p+=2)
 		{
-			theta = (j == slices) ? 0.0 : j * dtheta;
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
 			glNormal3d(0, 0, nsign);
@@ -554,9 +563,6 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 		}
 		glEnd();
 	}
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	delete[] cos_sin_theta;
-#endif
 }
 
 static
@@ -575,39 +581,14 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, double 
 	const double nsign = orient_inside?-1:1;
 
 	const double drho = M_PI / stacks;
-
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-	// same applies for MSC VS 8.0 C/C++ compiler
-	double *cos_sin_rho = new double[2*(stacks+1)];
-#else
-
-	double cos_sin_rho[2*(stacks+1)];
-#endif
-
-	double *cos_sin_rho_p = cos_sin_rho;
-	for (i = 0; i <= stacks; i++)
-	{
-		const double rho = i * drho;
-		*cos_sin_rho_p++ = cos(rho);
-		*cos_sin_rho_p++ = sin(rho);
-	}
+	assert(stacks<=MAX_STACKS);
+	ComputeCosSinRho(drho,stacks);
+	double *cos_sin_rho_p;
 
 	const double dtheta = 2.0 * M_PI / slices;
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-	// same applies for MSC VS 8.0 C/C++ compiler
-	double* cos_sin_theta = new double[2*(slices+1)];
-#else
-	double cos_sin_theta[2*(slices+1)];
-#endif
-	double *cos_sin_theta_p = cos_sin_theta;
-	for (i = 0; i <= slices; i++)
-	{
-		const double theta = (i == slices) ? 0.0 : i * dtheta;
-		*cos_sin_theta_p++ = cos(theta);
-		*cos_sin_theta_p++ = sin(theta);
-	}
+	assert(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
 
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -677,10 +658,6 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, double 
 			glEnd();
 		}
 	}
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	delete[] cos_sin_rho;
-	delete[] cos_sin_theta;
-#endif
 }
 
 
@@ -1036,38 +1013,15 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		t=1.0;
 	}
 
-	const GLfloat drho = M_PI / (GLfloat) stacks;
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-	// same applies for MSC VS 8.0 C/C++ compiler
-	double *cos_sin_rho = new double[2*(stacks+1)];
-#else
-	double cos_sin_rho[2*(stacks+1)];
-#endif
+	const double drho = M_PI / stacks;
+	assert(stacks<=MAX_STACKS);
+	ComputeCosSinRho(drho,stacks);
+	double *cos_sin_rho_p;
 
-	double *cos_sin_rho_p = cos_sin_rho;
-	for (i = 0; i <= stacks; i++)
-	{
-		double rho = i * drho;
-		*cos_sin_rho_p++ = cos(rho);
-		*cos_sin_rho_p++ = sin(rho);
-	}
-
-	const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
-	// same applies for MSC VS 8.0 C/C++ compiler
-	double *cos_sin_theta = new double[2*(slices+1)];
-#else
-	double cos_sin_theta[2*(slices+1)];
-#endif
-	double *cos_sin_theta_p = cos_sin_theta;
-	for (i = 0; i <= slices; i++)
-	{
-		double theta = (i == slices) ? 0.0 : i * dtheta;
-		*cos_sin_theta_p++ = cos(theta);
-		*cos_sin_theta_p++ = sin(theta);
-	}
+	const double dtheta = 2.0 * M_PI / slices;
+	assert(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
@@ -1126,10 +1080,6 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		glEnd();
 		t -= dt;
 	}
-#if defined(__sun) || defined(__sun__) || defined(_MSC_VER)
-	delete[] cos_sin_rho;
-	delete[] cos_sin_theta;
-#endif
 
 	if (isLightOn)
 		glEnable(GL_LIGHTING);
