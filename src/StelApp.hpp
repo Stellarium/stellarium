@@ -22,6 +22,7 @@
 
 #include <string>
 #include <cassert>
+#include <vector>
 #include "SDL.h"	// SDL is used only for the key codes types
 #include "stellarium.h"
 
@@ -81,6 +82,15 @@ public:
 	//! This method will try to find the file in all valid data directories until it finds it.
 	//! @return the fullpath to the file.
 	string getFilePath(const string& fileName) const;
+
+	//! @brief Get a vector of possible paths for a given file.
+	//! This method returns a vector of the paths which exist for a fileName. 
+	//! The vector is ordered like this: full paths are always index 0 if specified;
+	//! user's local files (if present) have a lower index than installation area files.
+	//! If fileName is not found, an empty vector is returned.
+	//! @param fileName The name of the file or directory to be searched for
+	//! @return the fullpath to the file.
+	vector<string> getFilePathList(const string& fileName) const;
 
 	//! @brief Get the full path to a data file.
 	//! This method will try to find the file in all valid data directories until it finds it.

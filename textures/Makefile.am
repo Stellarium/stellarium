@@ -25,4 +25,4 @@ pkgdata_DATA = mercury.png venus.png earth-clouds.jpg earthmap.png mars.png jupi
 		bt_fwd.png bt_now.png bt_realtime.png bt_rwd.png starc64x64.png bt_azgrid.png \
 		bt_eqgrid.png telescope.png bt_flip_horz.png bt_flip_vert.png h1990-20.png
 EXTRA_DIST = $(pkgdata_DATA)
-SUBDIRS = landscapes constellation-art
+SUBDIRS = constellation-art

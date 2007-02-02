@@ -125,6 +125,30 @@ string StelApp::getFilePath(const string& fileName) const
 }
 
 /*************************************************************************
+ Get a vector of paths for a file.
+*************************************************************************/
+vector<string> StelApp::getFilePathList(const string& fileName) const
+{
+	vector<string> result;
+	
+	if (StelUtils::checkAbsolutePath(fileName)) {
+		result.push_back(fileName);
+		return result;
+	}
+	
+	if (StelUtils::fileExists(dotStellariumDir + fileName))
+		result.push_back(dotStellariumDir + fileName);
+	
+	if (StelUtils::fileExists(rootDir + fileName))
+		result.push_back(rootDir + fileName);
+	
+	if (result.size() == 0 )
+		cerr << "StelApp::getFilePathList: Can't find file " << fileName << endl;
+	
+	return result;
+}
+
+/*************************************************************************
  Get the full path to a data file. This method will try to find the file 
  in all valid data directories until it finds it.
 *************************************************************************/
