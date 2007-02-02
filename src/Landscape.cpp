@@ -281,8 +281,8 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 	const double alpha = 2.0*M_PI/(nb_decor_repeat*nb_side*slices_per_side);
 	const double ca = cos(alpha);
 	const double sa = sin(alpha);
-	double y0 = radius;
-	double x0 = 0.0;
+	double y0 = radius*cos(decor_angle_rotatez*M_PI/180.0);
+	double x0 = radius*sin(decor_angle_rotatez*M_PI/180.0);
 	for (int n=0;n<nb_decor_repeat;n++) for (int i=0;i<nb_side;i++) {
 		sides[i].tex->bind();
 		double tx0 = sides[i].tex_coords[0];
