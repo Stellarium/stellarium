@@ -67,6 +67,11 @@ public:
 protected:
 	//! Load attributes common to all landscapes
 	void loadCommon(const string& landscape_file, const string& section_name);
+	
+	//! search for a texture in landscape directory, else global textures directory
+	//! @param basename The name of a texture file, e.g. "fog.png"
+	//! @param landscapeName The landscape ID (directory name) to which the texture belongs
+	const string getTexturePath(const string& basename, const string& landscapeName);
 	float radius;
 	wstring name;
 	float sky_brightness;
