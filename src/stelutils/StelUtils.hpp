@@ -39,6 +39,17 @@ typedef stringHash_t::const_iterator stringHashIter_t;
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
+//! Errors occuring because of Stellarium's code should throw this exception,
+//! or subclass of it.
+class StellariumException
+{
+public:
+	StellariumException(const std::string& msg) : message(msg) {;}
+	virtual ~StellariumException() {;}
+	virtual void report() {std::cerr << "StellariumException occured: " << message << std::endl;}
+	std::string message;
+};
+
 namespace StelUtils {
 	
 	//! Dummy wrapper used to remove a boring warning when using strftime directly
