@@ -4,7 +4,7 @@
    @file	dictionary.c
    @author	N. Devillard
    @date	Aug 2000
-   @version	$Revision: 1753 $
+   @version	$Revision: 1766 $
    @brief	Implements a dictionary for string variables.
 
    This module implements a simple dictionary object, i.e. a list
@@ -14,10 +14,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: dictionary.c 1753 2007-01-31 09:36:08Z xalioth $
-	$Author: xalioth $
-	$Date: 2007-01-31 09:36:08 +0000 (Wed, 31 Jan 2007) $
-	$Revision: 1753 $
+	$Id: dictionary.c 1766 2007-02-02 00:46:45Z gajdosik $
+	$Author: gajdosik $
+	$Date: 2007-02-02 00:46:45 +0000 (Fri, 02 Feb 2007) $
+	$Revision: 1766 $
 */
 
 /*---------------------------------------------------------------------------
@@ -29,10 +29,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef _MSC_VER
-#include <unistd.h>
+
+#if defined __USE_SVID || defined __USE_BSD || defined __USE_XOPEN_EXTENDED
+  /* strdup already defined, at least on linux */
 #else
-#define strdup(x) _strdup(x)
+  #ifdef _MSC_VER
+    #define strdup(x) _strdup(x)
+  #else
+      /* hopefully strdup is defined. If not, try the following code: */
+    char *strdup(const char *s) {
+      char *rval = 0;
+      if (s) {
+        rval = (char*)malloc(strlen(s)+1);
+        strcpy(rval,s);
+      }
+      return rval;
+    }
+  #endif
 #endif
 
 /** Maximum value size for integers and doubles. */
