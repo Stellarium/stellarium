@@ -52,8 +52,15 @@ public:
 	Landscape* create_from_file(const string& landscape_file, const string& section_name);
 	Landscape* create_from_hash(stringHash_t & param);
 	string getFileContent(const string& landscape_file);
-	string getLandscapeNames(const string& landscape_file);
-	string nameToKey(const string& landscape_file, const string & name);
+	
+	//! retrieve a list of the available landscape IDs separated by the \n character
+	//! the ID in this context is the name of the directory in which the landscape
+	//! exists, i.e. .../landscapes/ID/...
+	string getLandscapeNames();
+	
+	//! convert the name of a landscape (from the name field in the ini file)
+	//! to the ID for the landscape
+	string nameToKey(const string& name);
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Set and gets
@@ -108,6 +115,9 @@ public:
 	//! Return the global landscape luminance, for beeing used e.g for setting eye adaptation
 	float getLuminance(void);
 	
+	//! Return a map of landscape name to landscape ID (directory name)
+	std::map<std::string,std::string> getNameToDirMap(void);
+
 private:
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinals_points;		// Cardinals points

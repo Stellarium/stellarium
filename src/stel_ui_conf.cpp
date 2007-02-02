@@ -440,7 +440,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(lmgr->getLandscapeNames(StelApp::getInstance().getDataFilePath("landscapes.ini")));
+	landscape_sl->addItemList(lmgr->getLandscapeNames());
 	landscape_sl->adjustSize();
 	sprintf(vs, "%s", StelUtils::wstringToString(lmgr->getLandscapeName()).c_str());
 	landscape_sl->setValue(vs);
@@ -930,7 +930,7 @@ void StelUI::setVideoOption(void)
 void StelUI::setLandscape(void)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	lmgr->setLandscape(lmgr->nameToKey(StelApp::getInstance().getDataFilePath("landscapes.ini"), landscape_sl->getValue()));
+	lmgr->setLandscape(lmgr->nameToKey(landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
 	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());
 }

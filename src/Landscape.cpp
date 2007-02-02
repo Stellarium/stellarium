@@ -24,6 +24,7 @@
 #include "StelTextureMgr.hpp"
 
 #include <cassert>
+#include <vector>
 
 Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 {
@@ -52,6 +53,15 @@ void Landscape::loadCommon(const string& landscape_file, const string& section_n
 	{
 		valid_landscape = 1;
 	}
+}
+
+const string Landscape::getTexturePath(const string& basename, const string& landscapeName)
+{
+	// look in the landscape directory first, and if not found default to global textures directory
+	if ( StelApp::getInstance().getFilePath("landscapes/" + landscapeName + "/" + basename) != "" ) 
+		return StelApp::getInstance().getFilePath("landscapes/" + landscapeName + "/" + basename);
+	else
+		return StelApp::getInstance().getTextureFilePath(basename);		
 }
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), fog_tex(NULL), ground_tex(NULL)
@@ -102,7 +112,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = &StelApp::getInstance().getTextureManager().createTexture(pd.get_str(section_name, tmp));
+		side_texs[i] = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, tmp), section_name));
 	}
 
 	// Init sides parameters
@@ -127,7 +137,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	nb_decor_repeat = pd.get_int(section_name, "nb_decor_repeat", 1);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	ground_tex = &StelApp::getInstance().getTextureManager().createTexture(pd.get_str(section_name, "groundtex"));
+	ground_tex = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "groundtex"), section_name));
 	s = pd.get_str(section_name, "ground");
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -137,7 +147,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = &StelApp::getInstance().getTextureManager().createTexture(pd.get_str(section_name, "fogtex"));
+	fog_tex = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "fogtex"), section_name));
 	s = pd.get_str(section_name, "fog");
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -328,7 +338,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius), map_tex(
 
 LandscapeFisheye::~LandscapeFisheye()
 {
-	if (map_tex) delete map_tex;
+	if (map_tex != NULL) delete map_tex;
 	map_tex = NULL;
 }
 
@@ -346,7 +356,7 @@ void LandscapeFisheye::load(const string& landscape_file, const string& section_
 		valid_landscape = 0;
 		return;
 	}
-	create(name, 0, pd.get_str(section_name, "maptex"), pd.get_double(section_name, "texturefov", 360));
+	create(name, 0, getTexturePath(pd.get_str(section_name, "maptex"), section_name), pd.get_double(section_name, "texturefov", 360));
 }
 
 
@@ -409,7 +419,7 @@ void LandscapeSpherical::load(const string& landscape_file, const string& sectio
 		return;
 	}
 
-	create(name, 0, pd.get_str(section_name, "maptex"));
+	create(name, 0, getTexturePath(pd.get_str(section_name, "maptex"),section_name));
 
 }
 

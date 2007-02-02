@@ -17,6 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -241,7 +244,26 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 {
 	if (new_landscape_name.empty())
 		return 0;
-	Landscape* newLandscape = create_from_file(StelApp::getInstance().getDataFilePath("landscapes.ini"), new_landscape_name);
+	
+	// we want to lookup the landscape ID (dir) from the name.
+	map<string,string> nameToDirMap = getNameToDirMap();
+	Landscape* newLandscape;
+	if (nameToDirMap[new_landscape_name] != "")
+	{
+		newLandscape = create_from_file(StelApp::getInstance().getFilePath(
+		                                        "landscapes/"
+		                                        + nameToDirMap[new_landscape_name]
+		                                        + "/landscape.ini"), nameToDirMap[new_landscape_name]);
+	}
+	else
+	{
+		// maybe the landscape in the config.ini was requested by ID, not name...
+		// as a backup we will try this if the name is not known.
+		newLandscape = create_from_file(StelApp::getInstance().getFilePath(
+		                                        "landscapes/"
+		                                        + new_landscape_name
+		                                        + "/landscape.ini"), new_landscape_name);
+	}
 
 	if(!newLandscape)
 		return 0;
@@ -397,29 +419,75 @@ string LandscapeMgr::getFileContent(const string& landscape_file)
 	return result;
 }
 
-string LandscapeMgr::getLandscapeNames(const string& landscape_file)
+/*********************************************************************
+ return a list of distinct landscape names (the name field from each 
+ landscape.ini file).  The result is a string with each name separated
+ by a '\n' character.
+ *********************************************************************/
+string LandscapeMgr::getLandscapeNames()
 {
-    InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	string result;
-
-	for (int i=0; i<pd.get_nsec();i++)
+	map<string,string> nameToDirMap = getNameToDirMap();
+ 	string result("");
+	
+	// We just look over the map of names to IDs and extract the keys
+	for(map<string,string>::iterator i=nameToDirMap.begin();
+		   i!=nameToDirMap.end();
+		   i++)
 	{
-        result += pd.get_str(pd.get_secname(i), "name") + '\n';
+		result += i->first + '\n';
 	}
+
 	return result;
 }
 
-string LandscapeMgr::nameToKey(const string& landscape_file, const string & name)
+string LandscapeMgr::nameToKey(const string& name)
 {
-    InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	for (int i=0; i<pd.get_nsec();i++)
-	{
-        if (name==pd.get_str(pd.get_secname(i), "name")) return pd.get_secname(i);
+	map<string,string> nameToDirMap = getNameToDirMap();
+	
+	if ( nameToDirMap[name] == "" ) {
+ 		assert(0);
+		return "error";
 	}
-	assert(0);
-	return "error";
+	else {
+		return nameToDirMap[name];
+	}
+}
+
+/****************************************************************************
+ get a map of landscape name (from landscape.ini name field) to ID (dir name)
+ ****************************************************************************/
+std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
+{
+	vector<string> searchDirs;
+	map<string,string> result;
+	struct dirent *dirEntStruct;
+	struct stat statStruct;
+	DIR *dir;
+
+	searchDirs = StelApp::getInstance().getFilePathList("landscapes");
+	for(vector<string>::iterator searchDir = searchDirs.begin(); searchDir != searchDirs.end(); searchDir++)
+	{
+		if ((dir = opendir((*searchDir).c_str())) != NULL)
+		{
+			while ((dirEntStruct = readdir(dir)) != NULL)
+			{
+				string landscapeID = dirEntStruct->d_name;
+				if ( landscapeID[0] != '.' ) {
+					string path = *searchDir + "/" + landscapeID + "/landscape.ini";
+					if ( stat(path.c_str(), &statStruct) == 0 ) {
+						// parse the ini file to get the name for this landscape
+						// this is going to be pretty inefficient - parsing all the
+						// ini files every time this fn is called.  Maybe we should
+						// use some cacheing?
+						InitParser pd;
+						pd.load(path);
+						result[pd.get_str(landscapeID, "name")] = landscapeID;
+					}
+				}
+			}
+			closedir(dir);
+		}
+	}
+
+	return result;	
 }
