@@ -895,7 +895,7 @@ void Projector::drawSprite(const Vec3d& pos, double size) const
 /*************************************************************************
  Same function but gives the already projected 2d position in input
 *************************************************************************/
-inline void Projector::drawSprite2dMode(double x, double y, double size) const
+void Projector::drawSprite2dMode(double x, double y, double size) const
 {
 	// TODO use GL extension if available
 	//	glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
