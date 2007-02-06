@@ -124,6 +124,13 @@ namespace StelUtils {
 		return woss.str();
 	}
 	
+	string intToString(int i)
+	{
+		std::ostringstream oss;
+		oss << i;
+		return oss.str();
+	}
+	
 	double hmsToRad(unsigned int h, unsigned int m, double s )
 	{
 		return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
