@@ -131,6 +131,11 @@ namespace StelUtils {
 	//! @return The matching wstring
 	wstring intToWstring(int i);
 	
+	//! @brief Format the int value to a string (with current locale)
+	//! @param i The input int value
+	//! @return The matching string
+	string intToString(int i);
+	
 	double str_to_double(string str);
 	double str_to_pos_double(string str); // always positive
 	int str_to_int(string str);
