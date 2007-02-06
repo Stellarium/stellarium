@@ -70,6 +70,9 @@ public:
 	void insert(const T& e) {elements.push_back(e);}
 	
 	typedef typename std::vector<T>::iterator Iterator;
+	
+	//! Erases the element at position pos.
+	Iterator erase(Iterator pos) {return elements.erase(pos);}
 	Iterator begin() {return elements.begin();}
 	Iterator end() {return elements.end();}
 private:
