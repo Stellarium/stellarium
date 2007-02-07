@@ -666,10 +666,7 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	float tmp = 10.f + getOnScreenSize(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
-
-	prj->getFlagGravityLabels() ? 
-		prj->drawTextGravity180(planet_name_font, screenPos[0],screenPos[1], getSkyLabel(nav), 1, tmp, tmp) :
-		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, getSkyLabel(nav));
+	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;

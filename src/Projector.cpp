@@ -682,7 +682,7 @@ void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, 
 }
 
 
-void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring& ws,
+void Projector::drawTextGravity180(const SFont* font, float x, float y, const wstring& ws,
                                    bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
@@ -694,13 +694,12 @@ void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring&
 	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2)
 		return;
 
-
 	theta = M_PI + std::atan2(dx, dy - 1);
 	psi = std::atan2((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
 
 	if (psi>5)
 		psi = 5;
-	set2dDrawMode();
+	glPushMatrix();
 	glTranslatef(x,y,0);
 	if(gravityLabels)
 		glRotatef(theta*180./M_PI,0,0,-1);
@@ -712,22 +711,17 @@ void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring&
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	for (unsigned int i=0;i<ws.length();++i)
 	{
-
 		if (ws[i]>=16 && ws[i]<=18)
 		{
 			// handle hilight colors (TUI)
-
 			// Note: this is hard coded - not generalized
-
 			if( ws[i]==17 )
 				glColor3f(0.5,1,0.5);  // normal
 			if( ws[i]==18 )
 				glColor3f(1,1,1);    // hilight
-
 		}
 		else
 		{
-
 			if( !speed_optimize )
 			{
 				font->print_char_outlined(ws[i]);
@@ -748,21 +742,24 @@ void Projector::drawTextGravity180(SFont* font, float x, float y, const wstring&
 				if (psi>5)
 					psi = 5;
 			}
-
-			// keep text horizontal if gravity labels off
-			if(gravityLabels)
-				glRotatef(psi,0,0,-1);
+			
+			glRotatef(psi,0,0,-1);
 		}
-
 	}
-	unset2dDrawMode();
+	glPopMatrix();
 }
 
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void Projector::drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg, float xshift, float yshift) const
+void Projector::drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
+	if (gravityLabels && !noGravity)
+	{
+		drawTextGravity180(font, x, y, str, true, xshift, yshift);
+		return;
+	}
+	
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glRotatef(angleDeg,0,0,1);

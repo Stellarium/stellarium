@@ -116,8 +116,8 @@ void LoadingBar::Draw(float val)
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	barfont.print(barx, bary-5, message);
-	extraTextFont.print(splashx + extraTextPos[0], splashy + extraTextPos[1], extraText);
+	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
+	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
 	SDL_GL_SwapBuffers();	// And swap the buffers
 	

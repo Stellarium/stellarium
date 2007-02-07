@@ -97,42 +97,21 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	float shift = font.getStrLen(sNorth)/2;
 
-	if (prj->getFlagGravityLabels())
-	{
-		// N for North
-		pos.set(-1.f, 0.f, 0.22f);
-		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[0], -shift, -shift);
+	// N for North
+	pos.set(-1.f, 0.f, 0.f);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
 
-		// S for South
-		pos.set(1.f, 0.f, 0.22f);
-		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[1], -shift, -shift);
+	// S for South
+	pos.set(1.f, 0.f, 0.f);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
 
-		// E for East
-		pos.set(0.f, 1.f, 0.22f);
-		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[2], -shift, -shift);
+	// E for East
+	pos.set(0.f, 1.f, 0.f);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
 
-		// W for West
-		pos.set(0.f, -1.f, 0.22f);
-		if (prj->project(pos,xy)) prj->drawTextGravity180(&font, xy[0], xy[1], d[3], -shift, -shift);
-	}
-	else
-	{
-		// N for North
-		pos.set(-1.f, 0.f, 0.f);
-		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[0]);
-
-		// S for South
-		pos.set(1.f, 0.f, 0.f);
-		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[1]);
-
-		// E for East
-		pos.set(0.f, 1.f, 0.f);
-		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[2]);
-
-		// W for West
-		pos.set(0.f, -1.f, 0.f);
-		if (prj->project(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[3]);
-	}
+	// W for West
+	pos.set(0.f, -1.f, 0.f);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
 
 }
 
