@@ -301,22 +301,16 @@ void Nebula::draw_name(const Projector* prj)
 {
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
 	float size = getOnScreenSize(prj);
-	float shift = 8.f + size/2.f;
+	float shift = 8.f -40. + size/2.f;
 
 	wstring nebulaname = getNameI18n();
 
-	if (prj->getFlagGravityLabels())
-		prj->drawTextGravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
-	else
-		nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
+	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 
 	// draw image credit, if it fits easily
 	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
 	{
-		if (prj->getFlagGravityLabels())
-			prj->drawTextGravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
-		else
-			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
+		prj->drawText(nebula_font,XY[0]-shift, XY[1]-shift, credit, 0, 0, 0, false);
 	}
 }
 

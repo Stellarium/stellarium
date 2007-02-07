@@ -1443,12 +1443,8 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
           if (draw_point) {
             glEnable(GL_TEXTURE_2D);
           }
-          if (prj->getFlagGravityLabels()) {
-            prj->drawTextGravity180(starFont,xy[0],xy[1],
-                                  starname, 1, 6, -4);
-          } else {
-            starFont->print(xy[0]+6,xy[1]-4, starname);
-          }
+
+          prj->drawText(starFont,xy[0],xy[1], starname, 0, 6, -4, false);
           if (draw_point) {
             glDisable(GL_TEXTURE_2D);
           } else {

@@ -90,7 +90,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         ostringstream os;
         os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
-		font->print(center[0]-6, center[1]+6, os.str());
+		prj->drawText(font,center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
 	}
 	}
@@ -124,7 +124,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         ostringstream os;
         os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
-		font->print(center[0]-6, center[1]+6, os.str());
+		prj->drawText(font,center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
 	}
 	

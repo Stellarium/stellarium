@@ -101,8 +101,6 @@ public:
 		{
 			interstate = start_value + (target_value - start_value) * counter/duration;
 		}
-
-		//		printf("Counter %d  interstate %f\n", counter, interstate);
 	}
 	
 	// Get current switch state
