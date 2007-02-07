@@ -75,6 +75,8 @@ public:
 	Iterator erase(Iterator pos) {return elements.erase(pos);}
 	Iterator begin() {return elements.begin();}
 	Iterator end() {return elements.end();}
+	
+	void clear() {elements.clear();}
 private:
 	
 	// We use a simple vector in this implementation

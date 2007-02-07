@@ -67,15 +67,14 @@ void StelUI::draw_gravity_ui(void)
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->getProjection()->drawTextGravity180(tuiFont, x - shift + 38, y - 38, os.str(), 0);
+		core->getProjection()->drawText(tuiFont, x - shift + 38, y - 38, os.str(), 0, 0, 0, false);
 	}
 
 	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = StelApp::getInstance().getStelObjectMgr().getSelectedObject().getShortInfoString(core->getNavigation());
 		glColor3fv(StelApp::getInstance().getStelObjectMgr().getSelectedObject().getInfoColor());
-		core->getProjection()->drawTextGravity180(tuiFont, x + shift - 38, 
-						   y + 38, info, 0);
+		core->getProjection()->drawText(tuiFont, x + shift - 38, y + 38, info, 0, 0, 0, false);
 	}
 }
 
@@ -443,7 +442,7 @@ void StelUI::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
-		core->getProjection()->drawTextGravity180(tuiFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
+		core->getProjection()->drawText(tuiFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0, 0, 0, false);
 	}
 }
 

@@ -119,9 +119,7 @@ void Constellation::draw_name(SFont *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
-	prj->getFlagGravityLabels() ?
-		prj->drawTextGravity180(constfont, XYname[0], XYname[1], nameI18, 1, -constfont->getStrLen(nameI18)/2) :
-		constfont->print(XYname[0]-constfont->getStrLen(nameI18)/2, XYname[1], nameI18);
+	prj->drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only

@@ -244,12 +244,6 @@ public:
 	// Draw a fisheye texture in a sphere
 	void sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
 
-	void drawTextGravity180(SFont* font, float x, float y, const wstring& str, 
-			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
-	void drawTextGravity180(SFont* font, float x, float y, const string& str, 
-			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const
-		{drawTextGravity180(font, x, y, StelUtils::stringToWstring(str), speed_optimize, xshift, yshift);}
-
 	//! Draw the string at the given position and angle with the given font
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel
 	//! @param y horizontal position of the lower left corner of the first character of the text in pixel
@@ -257,9 +251,10 @@ public:
 	//! @param angleDeg rotation angle in degree. Rotation is around x,y
 	//! @param xshift shift in pixel in the rotated x direction
 	//! @param yshift shift in pixel in the rotated y direction
-	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const
+	//! @param noGravity don't take into account the fact that the text should be written with gravity
+	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f, bool noGravity=true) const
 		{drawText(font, x, y, StelUtils::stringToWstring(str), angleDeg, xshift, yshift);}
-	void drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f) const;
+	void drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg=0.f, float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 
 	//! Draw a parallel arc in the current frame, starting from point start
 	//!  going in the positive longitude direction and with the given length in radian.
@@ -317,6 +312,9 @@ public:
 
 private:
 
+	void drawTextGravity180(const SFont* font, float x, float y, const wstring& str, 
+			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
+		
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
 	void init_project_matrix(void);

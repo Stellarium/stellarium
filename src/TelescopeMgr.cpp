@@ -101,14 +101,8 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
           glEnd();
         }
         if (name_fader.getInterstate() >= 0) {
-          glColor4f(label_color[0],label_color[1],label_color[2],
-                    name_fader.getInterstate());
-          if (prj->getFlagGravityLabels()) {
-            prj->drawTextGravity180(telescope_font, XY[0],XY[1],
-                                  it->second->getNameI18n(), 1, 6, -4);
-          } else {
-            telescope_font->print(XY[0]+6,XY[1]-4,it->second->getNameI18n());
-          }
+          glColor4f(label_color[0],label_color[1],label_color[2], name_fader.getInterstate());
+          prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
           telescope_texture->bind();
         }
       }
