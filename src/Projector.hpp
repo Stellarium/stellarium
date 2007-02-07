@@ -338,10 +338,10 @@ private:
 	Mat4d mat_j2000_to_eye;         // for precessed equ coords
 	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
-	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
-	Mat4d inv_mat_j2000_to_eye;		// Inverse of mat_projection*mat_earth_equ_to_eye
-	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
-	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
+//	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
+//	Mat4d inv_mat_j2000_to_eye;		// Inverse of mat_projection*mat_earth_equ_to_eye
+//	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
+//	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
 	
 	bool gravityLabels;			// should label text align with the horizon?
 	
