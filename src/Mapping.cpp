@@ -33,14 +33,14 @@ bool MappingEqualArea::backward(Vec3d& v)
 	{
 		v[0] = 0.0;
 		v[1] = 0.0;
-		v[2] = 1.0;
+		v[2] = -1.0;
 	}
 	else
 	{
 		l = std::sqrt(l);
 		v[0] *= l;
 		v[1] *= l;
-		v[2] = -(0.5*dq - 1.0); // why minus ?
+		v[2] = 0.5*dq - 1.0;
 	}
 	return true;
 }
@@ -51,7 +51,7 @@ Mapping MappingStereographic::getMapping() const
 	m.mapForward = boost::callback<bool, Vec3d&>(forward);
 	m.mapBackward = boost::callback<bool, Vec3d&>(backward);
 	m.minFov = 0.001;
-	m.maxFov = 270.00001;
+	m.maxFov = 480.0;
 	return m;
 }
 
@@ -60,8 +60,8 @@ bool MappingStereographic::forward(Vec3d &v)
 	const double r = std::sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
 	const double h = 0.5*(r-v[2]);
 	if (h <= 0.0) {
-		v[0] *= 1e99;
-		v[1] *= 1e99;
+		v[0] = 1e99;
+		v[1] = 1e99;
 		v[2] = -1e99;
 		return false;
 	}
@@ -75,7 +75,7 @@ bool MappingStereographic::forward(Vec3d &v)
 bool MappingStereographic::backward(Vec3d &v)
 {
   const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
-  v[2] = - (lqq - 1.0); // why minus ?
+  v[2] = lqq - 1.0;
   v *= (1.0 / (lqq + 1.0));
   return true;
 }
@@ -92,7 +92,7 @@ Mapping MappingFisheye::getMapping() const
 
 bool MappingFisheye::forward(Vec3d &v)
 {
-	const double l = v.length();
+//	const double l = v.length();
 	const double oneoverh = 1./std::sqrt(v[0]*v[0]+v[1]*v[1]);
 	double a = M_PI_2 + std::atan(v[2]*oneoverh);
 	const double f = a * oneoverh;
@@ -108,7 +108,7 @@ bool MappingFisheye::backward(Vec3d &v)
   const double f = std::sin(a) / a;
   v[0] *= f;
   v[1] *= f;
-  v[2] = std::cos(a);
+  v[2] = -std::cos(a);
   return true;
 }
 
@@ -136,7 +136,7 @@ bool MappingCylinder::forward(Vec3d &v)
 bool MappingCylinder::backward(Vec3d &v)
 {
   const double cd = cos(v[1]);
-  v[2] = cd * std::cos(v[0]); // why not minus ?
+  v[2] = - cd * std::cos(v[0]);
   v[0] = cd * std::sin(v[0]);
   v[1] = std::sin(v[1]);
   return true;
@@ -148,7 +148,7 @@ Mapping MappingPerspective::getMapping() const
 	m.mapForward = boost::callback<bool, Vec3d&>(forward);
 	m.mapBackward = boost::callback<bool, Vec3d&>(backward);
 	m.minFov = 0.0001;
-	m.maxFov = 100.0;
+	m.maxFov = 150.0;
 	return m;
 }
 
@@ -175,6 +175,7 @@ bool MappingPerspective::backward(Vec3d &v)
   v[2] = std::sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
   v[0] *= v[2];
   v[1] *= v[2];
+  v[2] = -v[2];
   return true;
 }
 
@@ -208,6 +209,6 @@ bool MappingOrthographic::backward(Vec3d &v)
     v[2] = 0.0;
     return false;
   }
-  v[2] = sqrt(h);  // why not minus ?
+  v[2] = -sqrt(h);
   return true;
 }

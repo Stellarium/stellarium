@@ -158,7 +158,9 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	mat_helio_to_eye = _mat_helio_to_eye;
 	mat_local_to_eye = _mat_local_to_eye;
 
+/*
 	// TODO: Find out what is the reason of this matrix
+    // already found out: unnecessary crazyness
 	static const Mat4d mat(1., 0., 0., 0.,
 	                       0., 1., 0., 0.,
 	                       0., 0., -1, 0.,
@@ -168,6 +170,7 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	inv_mat_j2000_to_eye = (mat*mat_j2000_to_eye).inverse();
 	inv_mat_helio_to_eye = (mat*mat_helio_to_eye).inverse();
 	inv_mat_local_to_eye = (mat*mat_local_to_eye).inverse();
+*/
 }
 
 
@@ -223,13 +226,15 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 *************************************************************************/
 void Projector::setCustomFrame(const Mat4d& m) const
 {
-	static const Mat4d mat(1., 0., 0., 0.,
-	                       0., 1., 0., 0.,
-	                       0., 0., -1, 0.,
-	                       0., 0., 0., 1.);
+// no z-crazyness, please:
+//	static const Mat4d mat(1., 0., 0., 0.,
+//	                       0., 1., 0., 0.,
+//	                       0., 0., -1, 0.,
+//	                       0., 0., 0., 1.);
+//	inverseModelViewMatrix = (mat*m).inverse();
 
 	modelViewMatrix = m;
-	inverseModelViewMatrix = (mat*m).inverse();
+	inverseModelViewMatrix = modelViewMatrix.inverse();
 }
 
 /*************************************************************************
