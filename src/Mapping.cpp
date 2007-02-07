@@ -33,7 +33,7 @@ bool MappingEqualArea::backward(Vec3d& v)
 	{
 		v[0] = 0.0;
 		v[1] = 0.0;
-		v[2] = -1.0;
+		v[2] = 1.0;
 	}
 	else
 	{
