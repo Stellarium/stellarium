@@ -51,9 +51,6 @@ void LoadingBar::Draw(float val)
 	if (SDL_GetTicks()-timeCounter<50)
 		return;
 	timeCounter = SDL_GetTicks();
-	
-	// percent complete bar only draws in 2d mode
-	prj->set2dDrawMode();
   
 	// Draw the splash screen if available
 	if (splash)
@@ -120,6 +117,4 @@ void LoadingBar::Draw(float val)
 	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
 	SDL_GL_SwapBuffers();	// And swap the buffers
-	
-	prj->unset2dDrawMode();
 }

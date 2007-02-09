@@ -212,16 +212,7 @@ public:
 	
 	//! Get the current projection mapping name
 	std::string getCurrentProjection() {return currentProjectionType;}
-	
-	//! Set the drawing mode in 2D for drawing inside the viewport only.
-	//! All the drawing primitives of the Projection class won't work properly
-	//! until the normal mode is reset by calling the unset2dDrawMode() method
-	//! Use unset2dDrawMode() to restore previous projection mode
-	void set2dDrawMode(void) const;
 
-	// Restore the previous projection mode after a call to set2dDrawMode()
-	void unset2dDrawMode(void) const;
-		   
 
 	///////////////////////////////////////////////////////////////////////////
 	// Standard methods for drawing primitives in general (non-linear) mode
@@ -292,6 +283,14 @@ public:
 	//! @param size the size of a square side in pixel
 	//! @param rotation rotation angle in degree
 	void drawSprite2dMode(double x, double y, double size, double rotation) const;
+	
+	//! Draw a rotated rectangle using the current texture at the given projected 2d position
+	//! @param x x position in the viewport in pixel
+	//! @param y y position in the viewport in pixel
+	//! @param sizex the size of the rectangle x side in pixel
+	//! @param sizey the size of the rectangle y side in pixel
+	//! @param rotation rotation angle in degree
+	void drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const;
 	
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
 	void sSphere(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
