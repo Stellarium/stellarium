@@ -15,7 +15,7 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(Projector::FRAME_TYPE frame = Projector::FRAME_EARTH_EQU, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 18);
+	SkyGrid(Projector::FRAME_TYPE frame = Projector::FRAME_EARTH_EQU);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
 	void setFontSize(double newFontSize);
@@ -27,8 +27,6 @@ public:
 	bool getFlagshow(void) const {return fader;}
 	void set_top_transparancy(bool b) { transparent_top= b; }
 private:
-	unsigned int nb_meridian;
-	unsigned int nb_parallel;
 	bool transparent_top;
 	Vec3f color;
 	Projector::FRAME_TYPE frameType;
@@ -50,7 +48,7 @@ public:
 		MERIDIAN
 	};
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
+	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
     virtual ~SkyLine();
 	void draw(Projector *prj,const Navigator *nav) const;
 	void setColor(const Vec3f& c) {color = c;}
@@ -61,11 +59,8 @@ public:
 	bool getFlagshow(void) const {return fader;}
 	void setFontSize(double newSize);
 private:
-	double radius;
-	unsigned int nb_segment;
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
-	Vec3f* points;
 	Projector::FRAME_TYPE frameType;
 	LinearFader fader;
 	double fontSize;
@@ -74,8 +69,7 @@ private:
 
 
 // rms added color as parameter
-SkyGrid::SkyGrid(Projector::FRAME_TYPE frame, unsigned int _nb_meridian, unsigned int _nb_parallel) :
-	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), color(0.2,0.2,0.2), frameType(frame), fontSize(12),
+SkyGrid::SkyGrid(Projector::FRAME_TYPE frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
 	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	transparent_top = true;
@@ -491,50 +485,28 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 	
 	// Draw meridian zero which can't be found by the normal algo..
-	Vec3d vv(1,0,0);
-	prj->drawMeridian(vv, 2.*M_PI, true, &font);
+	const Vec3d vv(1,0,0);
+	prj->drawMeridian(vv, 2.*M_PI, false, &font);
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segment) :
-		radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f), fontSize(1.),
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f), fontSize(1.),
 font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
-	float inclinaison = 0.f;
 	line_type = _line_type;
 
 	switch (line_type)
-		{
+	{
 		case LOCAL : frameType = Projector::FRAME_LOCAL; break;
-		case MERIDIAN : frameType = Projector::FRAME_LOCAL;
-			inclinaison = 90; break;
-		case ECLIPTIC : frameType = Projector::FRAME_J2000;
-			inclinaison = 23.4392803055555555556; break;
+		case MERIDIAN : frameType = Projector::FRAME_LOCAL; break;
+		case ECLIPTIC : frameType = Projector::FRAME_HELIO; break;
 		case EQUATOR : frameType = Projector::FRAME_EARTH_EQU; break;
 		default : frameType = Projector::FRAME_EARTH_EQU;
-	}
-
-	Mat4f r = Mat4f::xrotation(inclinaison*M_PI/180.f);
-
-	// Ecliptic month labels need to be redone
-	// correct for month labels
-	// TODO: can make this more accurate
-	//	if(line_type == ECLIPTIC ) r = r * Mat4f::zrotation(-77.9*M_PI/180.);
-
-	// Points to draw along the circle
-	points = new Vec3f[nb_segment+1];
-	for (unsigned int i=0;i<nb_segment+1;++i)
-	{
-		StelUtils::sphe_to_rect((float)i/(nb_segment)*2.f*M_PI, 0.f, points[i]);
-		points[i] *= radius;
-		points[i].transfo4d(r);
 	}
 }
 
 SkyLine::~SkyLine()
 {
-	delete [] points;
-	points = NULL;
 }
 
 void SkyLine::setFontSize(double newFontSize)
@@ -547,166 +519,16 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 {
 	if (!fader.getInterstate()) return;
 
-	Vec3d pt1;
-	Vec3d pt2;
-
 	glColor4f(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-  if (line_type == ECLIPTIC) {
-      // special drawing of the ecliptic line
-    const Mat4d m = nav->getHomePlanet()->getRotEquatorialToVsop87().transpose();
-    const bool draw_labels = nav->getHomePlanet()->getEnglishName()=="Earth";
-       // start labeling from the vernal equinox
-    const double corr = draw_labels ? (atan2(m.r[4],m.r[0]) - 3*M_PI/6) : 0.0;
-    Vec3d point(radius*cos(corr),radius*sin(corr),0.0);
-    point.transfo4d(m);
-    
-    prj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
-    
-    bool prev_on_screen = prj->project(point,pt1);
-    for (unsigned int i=1;i<nb_segment+1;++i) {
-      const double phi = corr+2*i*M_PI/nb_segment;
-      Vec3d point(radius*cos(phi),radius*sin(phi),0.0);
-      point.transfo4d(m);
-      const bool on_screen = prj->project(point,pt2);
-      if (on_screen && prev_on_screen) {
-        const double dx = pt2[0]-pt1[0];
-        const double dy = pt2[1]-pt1[1];
-        const double dq = dx*dx+dy*dy;
-        if (dq < 1024*1024) {
-		  glBegin (GL_LINES);
-		    glVertex2f(pt2[0],pt2[1]);
-		    glVertex2f(pt1[0],pt1[1]);
-       	  glEnd();
-        }
-		if (draw_labels && (i+2) % 4 == 0) {
-
-			const double d = sqrt(dq);
-
-			double angle = acos((pt1[1]-pt2[1])/d);
-			if( pt1[0] < pt2[0] ) {
-				angle *= -1;
-			}
-
-			// draw text label
-			std::ostringstream oss;	
-
-			oss << (i+3)/4;
-
-			glPushMatrix();
-			glTranslatef(pt2[0],pt2[1],0);
-			glRotatef(-90+angle*180./M_PI,0,0,-1);
-
-			glEnable(GL_TEXTURE_2D);
-
-			font.print(0,-2,oss.str());
-			glPopMatrix();
-			glDisable(GL_TEXTURE_2D);
-
-		}
-      }
-      prev_on_screen = on_screen;
-      pt1 = pt2;
-    }
-  } else {
-
 	prj->setCurrentFrame(frameType);
-	for (unsigned int i=0;i<nb_segment;++i)
-	{
-		if (prj->project(points[i], pt1) && prj->project(points[i+1], pt2))
-		{
-          const double dx = pt1[0]-pt2[0];
-          const double dy = pt1[1]-pt2[1];
-          const double dq = dx*dx+dy*dy;
-          if (dq < 1024*1024) {
-
-			double angle;
-
-			// TODO: allow for other numbers of meridians and parallels without
-			// screwing up labels?
-
-			glBegin (GL_LINES);
-				glVertex2f(pt1[0],pt1[1]);
-				glVertex2f(pt2[0],pt2[1]);
-       		glEnd();
-
-
-			if(line_type == MERIDIAN) {
-				const double d = sqrt(dq);
-				  
-				angle = acos((pt1[1]-pt2[1])/d);
-				if( pt1[0] < pt2[0] ) {
-					angle *= -1;
-				}
-
-				// draw text label
-				std::ostringstream oss;	
-				
-				if(i<=8) oss << (i+1)*10;
-				else if(i<=16) {
-					oss << (17-i)*10;
-					angle += M_PI;
-				}
-				else oss << "";
-				
-				glPushMatrix();
-				glTranslatef(pt2[0],pt2[1],0);
-				glRotatef(180+angle*180./M_PI,0,0,-1);
-				
-				glBegin (GL_LINES);
-				glVertex2f(-3,0);
-				glVertex2f(3,0);
-				glEnd();
-				glEnable(GL_TEXTURE_2D);
-
-				font.print(2,-2,oss.str());
-				glPopMatrix();
-				glDisable(GL_TEXTURE_2D);
-
-			}
-
-				  
-			if(line_type == EQUATOR && (i+1) % 2 == 0) {
-
-				const double d = sqrt(dq);
-				  
-				angle = acos((pt1[1]-pt2[1])/d);
-				if( pt1[0] < pt2[0] ) {
-					angle *= -1;
-				}
-
-				// draw text label
-				std::ostringstream oss;	
-
-				if((i+1)/2 == 24) oss << "0h";
-				else oss << (i+1)/2 << "h";
-
-				glPushMatrix();
-				glTranslatef(pt2[0],pt2[1],0);
-				glRotatef(180+angle*180./M_PI,0,0,-1);
-				
-				glBegin (GL_LINES);
-				glVertex2f(-3,0);
-				glVertex2f(3,0);
-				glEnd();
-				glEnable(GL_TEXTURE_2D);
-
-				font.print(2,-2,oss.str());
-				glPopMatrix();
-				glDisable(GL_TEXTURE_2D);
-
-			}
-
-		  }
-
-		}
-	}
-  }
+	
+	const Vec3d vv(1,0,0);
+	prj->drawParallel(vv, 2.*M_PI, false, &font);
 }
-
 
 GridLinesMgr::GridLinesMgr()
 {
@@ -715,7 +537,7 @@ GridLinesMgr::GridLinesMgr()
 	azi_grid = new SkyGrid(Projector::FRAME_LOCAL);
 	equator_line = new SkyLine(SkyLine::EQUATOR);
 	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
-	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
+	meridian_line = new SkyLine(SkyLine::MERIDIAN);
 }
 
 GridLinesMgr::~GridLinesMgr()
