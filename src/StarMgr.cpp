@@ -1397,9 +1397,8 @@ int StarMgr::drawPointStar(const Projector *prj, const Vec3d &XY,float rmag,
 
   glBlendFunc(GL_ONE, GL_ONE);
 
-  glBegin(GL_POINTS);
-  glVertex3f(XY[0],XY[1],0);
-  glEnd();
+  prj->drawPoint2d(XY[0], XY[1]);
+
   return 0;
 }
 
