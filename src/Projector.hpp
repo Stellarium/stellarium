@@ -321,7 +321,7 @@ private:
 	void initGlMatrixOrtho2d(void) const;
 	
 	//! Return an openGL Matrix to use for a linear perspective projection
-	Mat4d getGlMatrixPerspective(void) const;
+//	Mat4d getGlMatrixPerspective(void) const;
 
 	//! Generalisation of glVertex3v. This method assumes that the current openGL
 	//! projection matrix is a perspective one. This method is supposed to handle 
