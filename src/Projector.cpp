@@ -102,6 +102,9 @@ void Projector::init(const InitParser& conf)
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
 		glEnable(GL_POINT_SPRITE_ARB);
 		glEnable(GL_POINT_SMOOTH);
+		cerr << "INFO: using GL_ARB_point_sprite" << endl;
+	} else {
+		cerr << "WARNING: GL_ARB_point_sprite not available" << endl;
 	}
 }
 
@@ -232,15 +235,15 @@ void Projector::initGlMatrixOrtho2d(void) const
 /*************************************************************************
  Return an openGL Matrix for a perspective projection.
 *************************************************************************/
-Mat4d Projector::getGlMatrixPerspective(void) const
-{
-	const double f = 1./std::tan(fov*M_PI/360.);
-	const double ratio = (double)getViewportHeight()/getViewportWidth();
-	return Mat4d( flip_horz*f*ratio, 0., 0., 0.,
-					0., flip_vert*f, 0., 0.,
-					0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-					0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);	
-}
+//Mat4d Projector::getGlMatrixPerspective(void) const
+//{
+//	const double f = 1./std::tan(fov*M_PI/360.);
+//	const double ratio = (double)getViewportHeight()/getViewportWidth();
+//	return Mat4d( flip_horz*f*ratio, 0., 0., 0.,
+//					0., flip_vert*f, 0., 0.,
+//					0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+//					0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);	
+//}
 
 /*************************************************************************
  Set the current projection mapping to use
@@ -291,7 +294,7 @@ bool Projector::project(const Vec3d &v, Vec3d &win) const
 	  // polygons by culling.
 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
 	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
-	win[2] = (win[2] - zNear) / (zFar-zNear);
+	win[2] = (win[2] - zNear) / (zNear - zFar);
 	return rval;
 }
 
