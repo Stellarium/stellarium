@@ -82,6 +82,21 @@ void Projector::init(const InitParser& conf)
 	setCurrentProjection(tmpstr);
 
 	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
+	
+	// Determine if the GL_POINT_SPRITE_ARB extension is available on this video card
+	// Check for extensions
+	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
+	if (glGetError()!=GL_NO_ERROR)
+	{
+		cerr << "Error while requesting openGL extensions" << endl;
+		return;
+	}
+	flagGlPointSprite = gluCheckExtension ((const GLubyte*)"GL_ARB_point_sprite", strExt);
+	if (flagGlPointSprite)
+	{
+		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
+		glEnable(GL_POINT_SPRITE_ARB);
+	}
 }
 
 
@@ -849,13 +864,15 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 *************************************************************************/
 void Projector::drawSprite2dMode(double x, double y, double size) const
 {
-	// TODO use GL extension if available
-	//	glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
-	//	glEnable(GL_POINT_SPRITE_ARB);
-	//	glPointSize(size);
-	//	glBegin(GL_POINTS);
-	//		glVertex2f(x,y);
-	//	glEnd();
+	// Use GL_POINT_SPRITE_ARB extension if available
+	if (flagGlPointSprite)
+	{
+		glPointSize(size);
+		glBegin(GL_POINTS);
+			glVertex2f(x,y);
+		glEnd();
+		return;
+	}
 
 	const double radius = size*0.5;
 	glBegin(GL_QUADS );
@@ -890,6 +907,26 @@ void Projector::drawSprite2dMode(double x, double y, double size, double rotatio
 		glVertex2f(-radius,+radius);
 	glEnd();
 	glPopMatrix();
+}
+
+/*************************************************************************
+ Draw a GL_POINT at the given position
+*************************************************************************/
+void Projector::drawPoint2d(double x, double y) const
+{
+	if (flagGlPointSprite)
+	{
+		glDisable(GL_POINT_SPRITE_ARB);
+		glBegin(GL_POINTS);
+			glVertex2f(x, y);
+		glEnd();
+		glEnable(GL_POINT_SPRITE_ARB);
+		return;
+	}
+	
+	glBegin(GL_POINTS);
+		glVertex2f(x, y);
+	glEnd();
 }
 
 /*************************************************************************
