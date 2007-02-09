@@ -110,7 +110,7 @@ void Projector::setViewport(int x, int y, int w, int h)
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
 	glViewport(x, y, w, h);
-	init_project_matrix();
+	initGlMatrixOrtho2d();
 }
 
 std::vector<Vec2d> Projector::getViewportVertices() const
@@ -195,20 +195,10 @@ void Projector::setCustomFrame(const Mat4d& m) const
 }
 
 /*************************************************************************
- Init the real openGL Matrices
+ Init the real openGL Matrices to a 2d orthographic projection
 *************************************************************************/
-void Projector::init_project_matrix(void)
+void Projector::initGlMatrixOrtho2d(void) const
 {
-	//	double f = 1./tan(fov*M_PI/360.);
-	//	double ratio = (double)getViewportHeight()/getViewportWidth();
-	//	mat_projection.set(	flip_horz*f*ratio, 0., 0., 0.,
-	//							0., flip_vert*f, 0., 0.,
-	//							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-	//							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
-	//	glMatrixMode(GL_PROJECTION);
-	//	glLoadMatrixd(mat_projection);
-	//  glMatrixMode(GL_MODELVIEW);
-
 	// Set the real openGL projection and modelview matrix to orthographic projection
 	// thus we never need to change to 2dMode from now on before drawing
 	glMatrixMode(GL_PROJECTION);
@@ -216,6 +206,19 @@ void Projector::init_project_matrix(void)
 	glOrtho(vec_viewport[0], vec_viewport[0] + vec_viewport[2], vec_viewport[1], vec_viewport[1] + vec_viewport[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+/*************************************************************************
+ Return an openGL Matrix for a perspective projection.
+*************************************************************************/
+Mat4d Projector::getGlMatrixPerspective(void) const
+{
+	const double f = 1./std::tan(fov*M_PI/360.);
+	const double ratio = (double)getViewportHeight()/getViewportWidth();
+	return Mat4d( flip_horz*f*ratio, 0., 0., 0.,
+					0., flip_vert*f, 0., 0.,
+					0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+					0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);	
 }
 
 /*************************************************************************
@@ -237,7 +240,7 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 		min_fov = i->second.minFov;
 		max_fov = i->second.maxFov;
 		setFov(fov);
-		init_project_matrix();
+		initGlMatrixOrtho2d();
 	}
 	else
 	{
@@ -527,8 +530,7 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 	}
 }
 
-static
-inline void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta)
+static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double sintheta)
 {
 	if (rho_div_fov>0.5)
 		rho_div_fov=0.5;
@@ -843,16 +845,6 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 }
 
 /*************************************************************************
- Draw a square using the current texture at the given position
-*************************************************************************/
-void Projector::drawSprite(const Vec3d& pos, double size) const
-{
-	Vec3d win;
-	project(pos, win);
-	drawSprite2dMode(win[0], win[1], size);
-}
-
-/*************************************************************************
  Same function but gives the already projected 2d position in input
 *************************************************************************/
 void Projector::drawSprite2dMode(double x, double y, double size) const
@@ -924,32 +916,33 @@ void Projector::drawRectSprite2dMode(double x, double y, double sizex, double si
 }
 
 /*************************************************************************
- Generalisation of glVertex3v. This method assumes that we are in orthographic 
- projection mode, which is true for special projections.
+ Generalisation of glVertex3v for non linear mode. This method does not
+ set correct values for the lighting operations.
 *************************************************************************/
 void Projector::drawVertex3v(const Vec3d& v) const
 {
 	Vec3d win;
 	project(v, win);
-	glVertex2f(win[0],win[1]);
+	glVertex3dv(win);
+}
+
+/*************************************************************************
+ Generalisation of glVertex3v. This method assumes that the current openGL
+ projection matrix is a perspective one.
+ This method is supposed to handle lighting operations properly. 
+*************************************************************************/
+void Projector::drawVertex3vWithLight(const Vec3d& v) const
+{
+	Vec3d win,vv;
+	project(v, win);
+	
+	// Can be optimized by avoiding matrix inversion if it's always the same
+	gluUnProject(win[0],win[1],win[2],modelViewMatrix,projectionMatrix,vec_viewport,&vv[0],&vv[1],&vv[2]);
+	glVertex3dv(vv);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
-
-// Here is the main trick for texturing in fisheye mode : The trick is to compute the
-// new coordinate in orthographic projection which will simulate the fisheye projection.
-//void Projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
-//{
-//	Vec3d win;
-//	Vec3d v(x,y,z);
-//	project(v, win);
-//
-//	// Can be optimized by avoiding matrix inversion if it's always the same
-//	gluUnProject(win[0],win[1],win[2],modelViewMatrix,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
-//	glVertex3dv(v);
-//}
-
 
 void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks, int orient_inside) const
@@ -1018,8 +1011,7 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 	{
 		glBegin(GL_QUAD_STRIP);
 		s = 0.0;
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-		        j++,cos_sin_theta_p+=2)
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;j++,cos_sin_theta_p+=2)
 		{
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
