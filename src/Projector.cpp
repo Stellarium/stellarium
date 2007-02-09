@@ -96,6 +96,7 @@ void Projector::init(const InitParser& conf)
 	{
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
 		glEnable(GL_POINT_SPRITE_ARB);
+		glEnable(GL_POINT_SMOOTH);
 	}
 }
 
