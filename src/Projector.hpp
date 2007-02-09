@@ -221,19 +221,10 @@ public:
 	// Fill with black around the viewport
 	void draw_viewport_shape(void);
 	
-	//! Generalisation of glVertex3v.
- 	//! This method assumes that we are in orthographic projection mode, which is true for special projections.
+	//! Generalisation of glVertex3v for non-linear projections. This method does not
+	//! manage the lighting operations properly.
 	void drawVertex3v(const Vec3d& v) const;
 	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
-	
-	// Draw a disk with a special texturing mode having texture center at center
-	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside = 0) const;	
-		
-	// Draw a ring with a radial texturing
-	void sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const;
-
-	// Draw a fisheye texture in a sphere
-	void sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
 
 	//! Draw the string at the given position and angle with the given font
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel
@@ -265,11 +256,6 @@ public:
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//!  this value is automatically adjusted to prevent seeing the curve as a polygon
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, int nbSeg=-1) const;
-
-	//! Draw a square using the current texture at the given position
-	//! @param pos the center of the sprite in the current frame
-	//! @param size the size of a square side in pixel
-	void drawSprite(const Vec3d& pos, double size) const;
 	
 	//! Draw a square using the current texture at the given projected 2d position
 	//! @param x x position in the viewport in pixel
@@ -298,6 +284,15 @@ public:
 	// Reimplementation of gluCylinder : glu is overrided for non standard projection
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
 
+	// Draw a disk with a special texturing mode having texture center at center
+	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside = 0) const;	
+		
+	// Draw a ring with a radial texturing
+	void sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const;
+
+	// Draw a fisheye texture in a sphere
+	void sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for linear mode
 	///////////////////////////////////////////////////////////////////////////
@@ -314,10 +309,17 @@ private:
 	void drawTextGravity180(const SFont* font, float x, float y, const wstring& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 		
-	// Init the viewing matrix from the fov, the clipping planes and screen ratio
-	// The function is a reimplementation of gluPerspective
-	void init_project_matrix(void);
+	//! Init the real openGL Matrices to a 2d orthographic projection
+	void initGlMatrixOrtho2d(void) const;
+	
+	//! Return an openGL Matrix to use for a linear perspective projection
+	Mat4d getGlMatrixPerspective(void) const;
 
+	//! Generalisation of glVertex3v. This method assumes that the current openGL
+	//! projection matrix is a perspective one. This method is supposed to handle 
+	//! properly the depth buffer and lighting operations. 
+	void drawVertex3vWithLight(const Vec3d& v) const;
+	
 	//! The current projector mask
 	PROJECTOR_MASK_TYPE maskType;
 
@@ -327,7 +329,7 @@ private:
 	double max_fov;				// Maximum fov in degree
 	double zNear, zFar;			// Near and far clipping planes
 	Vec4i vec_viewport;			// Viewport parameters
-	Mat4d mat_projection;		// Projection matrix
+	Mat4d projectionMatrix;		// Projection matrix
 
 	Vec3d center;				// Viewport center in screen pixel
 	double view_scaling_factor;	// ??
@@ -337,12 +339,8 @@ private:
 	Mat4d mat_j2000_to_eye;         // for precessed equ coords
 	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
-//	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
-//	Mat4d inv_mat_j2000_to_eye;		// Inverse of mat_projection*mat_earth_equ_to_eye
-//	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
-//	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
 	
-	bool gravityLabels;			// should label text align with the horizon?
+	bool gravityLabels;				// should label text align with the horizon?
 	
 	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
 	mutable Mat4d inverseModelViewMatrix;	// inverse of it
