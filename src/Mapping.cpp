@@ -92,20 +92,22 @@ Mapping MappingFisheye::getMapping() const
 
 bool MappingFisheye::forward(Vec3d &v)
 {
-//	const double l = v.length();
-	const double oneoverh = 1./std::sqrt(v[0]*v[0]+v[1]*v[1]);
-	double a = M_PI_2 + std::atan(v[2]*oneoverh);
-	const double f = a * oneoverh;
-	v[0] *= f;
-	v[1] *= f;
-	v[2] = std::fabs(v[2]);
-	return true;
+//  const double length = v.length();
+  const double h = std::sqrt(v[0]*v[0]+v[1]*v[1]);
+  const double a = std::atan2(h,-v[2]);
+  const double f = (h > 0.0) ? (a / h) : 1.0;
+  v[0] *= f;
+  v[1] *= f;
+  v[2] = fabs(v[2]); // Just need for speed, in fact this should be length.
+                     // I hope this will give no troubles when standing on
+                     // Saturn, Mimas or Enceladus.
+  return true;
 }
 
 bool MappingFisheye::backward(Vec3d &v)
 {
   const double a = std::sqrt(v[0]*v[0]+v[1]*v[1]);
-  const double f = std::sin(a) / a;
+  const double f = (a > 0.0) ? (std::sin(a) / a) : 1.0;
   v[0] *= f;
   v[1] *= f;
   v[2] = -std::cos(a);
