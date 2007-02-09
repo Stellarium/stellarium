@@ -135,7 +135,7 @@ public:
 	double getPresetSkyTime() const {return PresetSkyTime;}
 	void setPresetSkyTime(double d) {PresetSkyTime=d;}
 	
-	//! Return the startupe mode, can be preset|Preset or anything else
+	//! Return the startup mode, can be preset|Preset or anything else
 	string getStartupTimeMode() {return StartupTimeMode;}
 	void setStartupTimeMode(const string& s) {StartupTimeMode = s;}
 	
