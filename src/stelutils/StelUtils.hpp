@@ -84,6 +84,44 @@ namespace StelUtils {
 	//!	@param s second component
 	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);	
 
+	//! @brief Convert an angle in radian to a hms formatted string
+	//! If the second, minute part is == 0, it is not output
+	//! @param rad input angle in radian
+	string radToHmsStrAdapt(double angle);
+	
+	//! @brief Convert an angle in radian to a hms formatted wstring
+	//! If the second, minute part is == 0, it is not output
+	//! @param rad input angle in radian
+	wstring radToHmsWstrAdapt(double angle);
+	
+	//! @brief Convert an angle in radian to a hms formatted string
+	//! @param rad input angle in radian
+	string radToHmsStr(double angle, bool decimal=false);
+	
+	//! @brief Convert an angle in radian to a hms formatted wstring
+	//! @param rad input angle in radian
+	wstring radToHmsWstr(double angle, bool decimal=false);
+	
+	//! @brief Convert an angle in radian to a dms formatted string
+	//! If the second, minute part is == 0, it is not output
+	//! @param rad input angle in radian
+	string radToDmsStrAdapt(double angle);
+	
+	//! @brief Convert an angle in radian to a dms formatted wstring
+	//! If the second, minute part is == 0, it is not output
+	//! @param rad input angle in radian
+	//! @param useD Define if letter "d" must be used instead of °
+	wstring radToDmsWstrAdapt(double angle, bool useD=false);
+	
+	//! @brief Convert an angle in radian to a dms formatted string
+	//! @param rad input angle in radian
+	string radToDmsStr(double angle, bool decimal=false);
+	
+	//! @brief Convert an angle in radian to a dms formatted wstring
+	//! @param rad input angle in radian
+	//! @param useD Define if letter "d" must be used instead of °
+	wstring radToDmsWstr(double angle, bool decimal=false, bool useD=false);
+	
 	//! @brief Obtains a Vec3f from a string
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector

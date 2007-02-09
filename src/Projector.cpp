@@ -804,7 +804,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		const wstring str = StelUtils::printAngleDMS(lat);
+		const wstring str = StelUtils::radToDmsWstrAdapt(lat);
 		float xshift=5;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -856,11 +856,12 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		StelUtils::rect_to_sphe(&lon, &lat, start);
 		Vec3d win0, win1;
 		Vec3d v2;
-		StelUtils::sphe_to_rect(lon, lat+0.0000001, v2);
+		StelUtils::sphe_to_rect(lon, lat+0.0000001*(start[1]>=0 ? 1.:-1.), v2);
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		const wstring str = StelUtils::printAngleHMS(lon);
+		//angleDeg += start[1]>=0 ? 1.:180.;
+		const wstring str = StelUtils::radToHmsWstrAdapt(lon);
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -870,7 +871,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 
 		// Label at end of the arc
-		StelUtils::sphe_to_rect(lon, lat+length-0.0000001, v2);
+		StelUtils::sphe_to_rect(lon, lat+(length-0.0000001)*(start[1]>=0 ? 1.:-1.), v2);
 		project(v, win0);
 		project(v2, win1);
 		angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;

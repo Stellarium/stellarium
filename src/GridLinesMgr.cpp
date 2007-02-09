@@ -279,7 +279,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 
 // Step sizes in arcsec
 static const double STEP_SIZES_DMS[] = {1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
-static const double STEP_SIZES_HMS[] = {1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*2.5, 3600.*7.5, 3600.*15.};
+static const double STEP_SIZES_HMS[] = {1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
 static double getClosestResolutionParallel(double pixelPerRad)
 {
@@ -295,9 +295,9 @@ static double getClosestResolutionParallel(double pixelPerRad)
 
 static double getClosestResolutionMeridian(double pixelPerRad)
 {
-	double minResolution = 50.;
+	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
-	for (unsigned int i=0;i<11;++i)
+	for (unsigned int i=0;i<9;++i)
 		if (STEP_SIZES_HMS[i]>minSizeArcsec)
 		{
 			return STEP_SIZES_HMS[i]/3600.;
