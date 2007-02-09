@@ -278,6 +278,11 @@ public:
 	//! @param rotation rotation angle in degree
 	void drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const;
 	
+	//! Draw a GL_POINT at the given position
+	//! @param x x position in the viewport in pixel
+	//! @param y y position in the viewport in pixel
+	void drawPoint2d(double x, double y) const;
+	
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
 	void sSphere(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
 
@@ -341,6 +346,8 @@ private:
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
 	
 	bool gravityLabels;				// should label text align with the horizon?
+	
+	bool flagGlPointSprite;			// Define whether glPointSprite is activated
 	
 	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
 	mutable Mat4d inverseModelViewMatrix;	// inverse of it

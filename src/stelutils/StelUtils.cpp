@@ -1093,15 +1093,3 @@ string get_ISO8601_time_UTC(double JD)
 	StelUtils::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_utc);
 	return isotime;
 }
-
-// Draw a point... (used for tests)
-void Draw::drawPoint(float X,float Y,float Z)
-{       
-	glColor3f(0.8, 1.0, 0.8);
-	glDisable(GL_TEXTURE_2D);
-	//glEnable(GL_BLEND);
-	glPointSize(20.);
-	glBegin(GL_POINTS);
-		glVertex3f(X,Y,Z);
-	glEnd();
-}
