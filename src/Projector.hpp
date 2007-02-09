@@ -147,6 +147,9 @@ public:
 	bool needGlFrontFaceCW(void) const
 		{return (flip_horz*flip_vert < 0.0);}
 
+	//! Get whether the GL_POINT_SPRITE extension is available now
+	bool getflagGlPointSprite() const {return flagGlPointSprite;}
+
 	//! Set the Field of View in degree
 	void setFov(double f);
 	//! Get the Field of View in degree
