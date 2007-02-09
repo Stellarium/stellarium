@@ -201,7 +201,7 @@ void Atmosphere::draw(Projector* prj)
 
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
-		prj->set2dDrawMode();	// set 2D coordinate
+
 		for (int y2=0; y2<sky_resolution; ++y2)
 		{
 			glBegin(GL_QUAD_STRIP);
@@ -214,6 +214,5 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
-		prj->unset2dDrawMode();
 	}
 }
