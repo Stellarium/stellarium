@@ -26,6 +26,7 @@
 #include <config.h>
 #include <cstdio>
 #include <iostream>
+#include <iomanip>
 #include "dirent.h"
 
 #if defined( CYGWIN )
@@ -43,187 +44,371 @@
 
 namespace StelUtils {
 
-	//! Dummy wrapper used to remove a boring warning when using strftime directly
-	size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
-	{
-		return strftime(s, max, fmt, tm);
-	}
+//! Dummy wrapper used to remove a boring warning when using strftime directly
+size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
+{
+	return strftime(s, max, fmt, tm);
+}
 
-	
-	//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
-	wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
+
+//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
+wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
+{
+	int i, j;
+	unsigned short ch;  // 16 bits
+
+	for ( i=0, j=0; i < len; ++i, ++j )
 	{
-		int i, j;
-		unsigned short ch;  // 16 bits
-	
-		for ( i=0, j=0; i < len; ++i, ++j )
+		ch = ((const unsigned char *)utf8)[i];
+		if ( ch >= 0xF0 )
 		{
-			ch = ((const unsigned char *)utf8)[i];
-			if ( ch >= 0xF0 )
+			ch  =  (unsigned short)(utf8[i]&0x07) << 18;
+			ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
+			ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+			ch |=  (unsigned short)(utf8[++i]&0x3F);
+		}
+		else
+			if ( ch >= 0xE0 )
 			{
-				ch  =  (unsigned short)(utf8[i]&0x07) << 18;
-				ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
+				ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
 				ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
 				ch |=  (unsigned short)(utf8[++i]&0x3F);
 			}
 			else
-				if ( ch >= 0xE0 )
+				if ( ch >= 0xC0 )
 				{
-					ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
-					ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+					ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
 					ch |=  (unsigned short)(utf8[++i]&0x3F);
 				}
-				else
-					if ( ch >= 0xC0 )
-					{
-						ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
-						ch |=  (unsigned short)(utf8[++i]&0x3F);
-					}
-	
-			unicode[j] = ch;
-		}
-		unicode[j] = 0;
-	
-		return unicode;
-	}
 
-	//! Convert from UTF-8 to wchar_t
-	//! Warning this is likely to be not very portable
-	std::wstring stringToWstring(const string& s)
-	{
-		wchar_t* outbuf = new wchar_t[s.length()+1];
-		UTF8_to_UNICODE(outbuf, s.c_str(), s.length());
-		wstring ws(outbuf);
-		delete[] outbuf;
-		return ws;
+		unicode[j] = ch;
 	}
-	
-	string wstringToString(const wstring& ws)
-	{
-		// Get UTF-8 string length
-		size_t len = wcstombs(NULL, ws.c_str(), 0)+1;
-		// Create wide string
-		char* s = new char[len];
-		wcstombs(s, ws.c_str(), len);
-		string ss(s);
-		delete [] s;
-		return ss;
-	}
-	
-	wstring doubleToWstring(double d)
-	{
-		std::wostringstream woss;
-		woss << d;
-		return woss.str();
-	}
-	
-	wstring intToWstring(int i)
-	{
-		std::wostringstream woss;
-		woss << i;
-		return woss.str();
-	}
-	
-	string intToString(int i)
-	{
-		std::ostringstream oss;
-		oss << i;
-		return oss.str();
-	}
-	
-	double hmsToRad(unsigned int h, unsigned int m, double s )
-	{
-		return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
-	}
-	
-	double dmsToRad(int d, unsigned int m, double s)
-	{
-		if (d>=0)
-			return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
-		return (double)M_PI/180.*d-(double)M_PI/10800.*m-s*M_PI/648000.;
-	}
-	
-	// Convert an angle in radian to hms format
-	void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
-	{
-		while (angle<0.0)
-			angle += 2.0*M_PI;
-		while (angle>2.0*M_PI)
-			angle -= 2.0*M_PI;
-			
-		angle *= 12./M_PI;
+	unicode[j] = 0;
 
-		h = (unsigned int)angle;
-		m = (unsigned int)((angle-h)*60);
-		s = (angle-h)*3600.-60.*m;
-	}
-	
-	// Convert an angle in radian to dms format
-	void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
-	{
-		while (angle>2.0*M_PI)
-			angle -= 2.0*M_PI;
-		sign=true;
-		if (angle<0)
-		{
-			angle *= -1;
-			sign = false;
-		}
-		angle *= 180./M_PI;
+	return unicode;
+}
+
+//! Convert from UTF-8 to wchar_t
+//! Warning this is likely to be not very portable
+std::wstring stringToWstring(const string& s)
+{
+	wchar_t* outbuf = new wchar_t[s.length()+1];
+	UTF8_to_UNICODE(outbuf, s.c_str(), s.length());
+	wstring ws(outbuf);
+	delete[] outbuf;
+	return ws;
+}
+
+string wstringToString(const wstring& ws)
+{
+	// Get UTF-8 string length
+	size_t len = wcstombs(NULL, ws.c_str(), 0)+1;
+	// Create wide string
+	char* s = new char[len];
+	wcstombs(s, ws.c_str(), len);
+	string ss(s);
+	delete [] s;
+	return ss;
+}
+
+wstring doubleToWstring(double d)
+{
+	std::wostringstream woss;
+	woss << d;
+	return woss.str();
+}
+
+wstring intToWstring(int i)
+{
+	std::wostringstream woss;
+	woss << i;
+	return woss.str();
+}
+
+string intToString(int i)
+{
+	std::ostringstream oss;
+	oss << i;
+	return oss.str();
+}
+
+double hmsToRad(unsigned int h, unsigned int m, double s )
+{
+	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
+}
+
+double dmsToRad(int d, unsigned int m, double s)
+{
+	if (d>=0)
+		return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
+	return (double)M_PI/180.*d-(double)M_PI/10800.*m-s*M_PI/648000.;
+}
+
+/*************************************************************************
+ Convert an angle in radian to hms
+*************************************************************************/
+void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
+{
+	while (angle<0.0)
+		angle += 2.0*M_PI;
+	while (angle>2.0*M_PI)
+		angle -= 2.0*M_PI;
 		
-		d = (unsigned int)angle;
-		m = (unsigned int)((angle - d)*60);
-		s = (angle-d)*3600-60*m;
-	}
+	angle *= 12./M_PI;
 
-//	// Convert an angle in radian to hms a formatted string
-//	void radToHmsStr(double angle, unsigned int& h, unsigned int& m, double& s)
-//	{
-//		unsigned int h,m, d;
-//		double s;
-//		bool sign;
-//		ostringstream ras;
-//		StelUtils::radToHms(ra, h, m, s);
-//		ras << h << "%20" << m << "%20" << s;
-//		ostringstream des;
-//		StelUtils::radToDms(de, sign, d, m, s);	
-//	}
-	
-	// Obtains a Vec3f from a string with the form x,y,z
-	Vec3f str_to_vec3f(const string& s)
-	{
-		float x, y, z;
-		if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
-		return Vec3f(x,y,z);
-	}
+	h = (unsigned int)angle;
+	m = (unsigned int)((angle-h)*60);
+	s = (angle-h)*3600.-60.*m;
+}
 
-	// Obtains a string from a Vec3f with the form x,y,z
-	string vec3f_to_str(const Vec3f& v)
+/*************************************************************************
+ Convert an angle in radian to dms
+*************************************************************************/
+void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
+{
+	while (angle>2.0*M_PI)
+		angle -= 2.0*M_PI;
+	sign=true;
+	if (angle<0)
 	{
-		ostringstream os;
-		os << v[0] << "," << v[1] << "," << v[2];
-		return os.str();
+		angle *= -1;
+		sign = false;
 	}
+	angle *= 180./M_PI;
 	
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle - d)*60);
+	s = (angle-d)*3600-60*m;
+}
+
+/*************************************************************************
+ Convert an angle in radian to a hms formatted string
+ If the minute and second part are null are too small, don't print them
+*************************************************************************/
+string radToHmsStrAdapt(double angle)
+{
+	unsigned int h,m;
+	double s;
+	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
+	ostringstream os;
+	os << h << 'h';
+	if (std::fabs(s*100-(int)s*100)>=1)
+	{
+		os << m << 'm' << std::fixed << std::setprecision(1) << std::setw(4) << std::setfill('0') << s << 's';
+	}
+	else if ((int)s!=0)
+	{
+		os << m << 'm' << (int)s << 's';
+	}
+	else if (m!=0)
+	{
+		os << m << 'm';
+	}
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a hms formatted wstring
+ If the minute and second part are null are too small, don't print them
+*************************************************************************/
+wstring radToHmsWstrAdapt(double angle)
+{
+	return StelUtils::stringToWstring(radToHmsStrAdapt(angle));
+}
+
+
+/*************************************************************************
+ Convert an angle in radian to a hms formatted string
+*************************************************************************/
+string radToHmsStr(double angle, bool decimal)
+{
+	unsigned int h,m;
+	double s;
+	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
+	ostringstream os;
+	if (decimal)
+		os << std::setprecision(1) << std::setw(4);
+	else
+		os << std::setprecision(0) << std::setw(2);
+	
+	os << h << 'h' << m << 'm' << std::fixed << std::setfill('0') << s << 's';
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a hms formatted wstring
+*************************************************************************/
+wstring radToHmsWstr(double angle, bool decimal)
+{
+	return StelUtils::stringToWstring(radToHmsStr(angle, decimal));
+}
+
+/*************************************************************************
+ Convert an angle in radian to a dms formatted string
+ If the minute and second part are null are too small, don't print them
+*************************************************************************/
+string radToDmsStrAdapt(double angle)
+{
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	ostringstream os;
+	
+	os << (sign?'+':'-') << d << 'd';
+	if (std::fabs(s*100-(int)s*100)>=1)
+	{
+		os << m << 'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << 's';
+	}
+	else if ((int)s!=0)
+	{
+		os << m << 'm' << (int)s << 's';
+	}
+	else if (m!=0)
+	{
+		os << m << 'm';
+	}
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a dms formatted wstring
+ If the minute and second part are null are too small, don't print them
+*************************************************************************/
+wstring radToDmsWstrAdapt(double angle, bool useD)
+{
+	wchar_t degsign = L'\u00B0';
+	if (useD) degsign = L'd';
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	wostringstream os;
+	
+	os << (sign?L'+':L'-') << d << degsign;
+	if (std::fabs(s*100-(int)s*100)>=1)
+	{
+		os << m << L'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill(L'0') << s << L's';
+	}
+	else if ((int)s!=0)
+	{
+		os << m << L'm' << (int)s << L's';
+	}
+	else if (m!=0)
+	{
+		os << m << L'm';
+	}
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a dms formatted string
+*************************************************************************/
+string radToDmsStr(double angle, bool decimal)
+{
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	ostringstream os;
+	
+	os << (sign?'+':'-') << d << 'd';
+	
+	if (decimal)
+		os << std::setprecision(1) << std::setw(4);
+	else
+		os << std::setprecision(0) << std::setw(2);
 		
-	//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
-	//! @param angle Angle in radian
-	//! @param decimal Define if 2 decimal must also be printed
-	//! @param useD Define if letter "d" must be used instead of the deg sign
-	//! @return The corresponding string
-	wstring printAngleDMS(double angle, bool decimals, bool useD)
+	os << m << 'm' << std::fixed << std::setfill('0') << s << 's';
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a dms formatted wstring
+*************************************************************************/
+wstring radToDmsWstr(double angle, bool decimal, bool useD)
+{
+	wchar_t degsign = L'\u00B0';
+	if (useD) degsign = L'd';
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	wostringstream os;
+	
+	os << (sign?L'+':L'-') << d << degsign;
+	
+	if (decimal)
+		os << std::setprecision(1) << std::setw(4);
+	else
+		os << std::setprecision(0) << std::setw(2);
+		
+	os << m << L'm' << std::fixed << std::setfill(L'0') << s << L's';
+	return os.str();
+}
+
+/*************************************************************************
+ Convert an angle in radian to a dms formatted string
+*************************************************************************/
+string radToDmsWstr(double angle)
+{
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	ostringstream os;
+	
+	os << (sign?'+':'-') << d << 'd';
+	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		wchar_t buf[32];
-		buf[31]=L'\0';
-		wchar_t sign = L'+';
-		wchar_t degsign = L'\u00B0';
-		if (useD) degsign = L'd';
+		os << m << 'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << 's';
+	}
+	else if ((int)s!=0)
+	{
+		os << m << 'm' << (int)s << 's';
+	}
+	else if (m!=0)
+	{
+		os << m << 'm';
+	}
+	return os.str();
+}
 
-		angle *= 180./M_PI;
+// Obtains a Vec3f from a string with the form x,y,z
+Vec3f str_to_vec3f(const string& s)
+{
+	float x, y, z;
+	if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
+	return Vec3f(x,y,z);
+}
 
-		if (angle<0) {
-			angle *= -1;
-			sign = '-';
+// Obtains a string from a Vec3f with the form x,y,z
+string vec3f_to_str(const Vec3f& v)
+{
+	ostringstream os;
+	os << v[0] << "," << v[1] << "," << v[2];
+	return os.str();
+}
+
+	
+//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+//! @param angle Angle in radian
+//! @param decimal Define if 2 decimal must also be printed
+//! @param useD Define if letter "d" must be used instead of the deg sign
+//! @return The corresponding string
+wstring printAngleDMS(double angle, bool decimals, bool useD)
+{
+	wchar_t buf[32];
+	buf[31]=L'\0';
+	wchar_t sign = L'+';
+	wchar_t degsign = L'\u00B0';
+	if (useD) degsign = L'd';
+
+	angle *= 180./M_PI;
+
+	if (angle<0) {
+		angle *= -1;
+		sign = '-';
 		}
 
 		if (decimals) {
@@ -251,24 +436,24 @@ namespace StelUtils {
 				sizeof(buf),
 #endif
 				L"%lc%.2d%lc%.2d'%.2d\"",
-				sign, d, degsign, m, s);
-		}
-		return buf;
+			sign, d, degsign, m, s);
 	}
-	
-	//! @brief Print the passed angle with the format +hhhmmmss(.ss)"
-	//! @param angle Angle in radian
-	//! @param decimals Define if 2 decimal must also be printed
-	//! @return The corresponding string
-	wstring printAngleHMS(double angle, bool decimals)
-	{
-		wchar_t buf[16];
-		buf[15] = L'\0';
-		angle = fmod(angle,2.0*M_PI);
-		if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
-		angle *= 12./M_PI; // range: [0..24)
-		if (decimals) {
-			angle = 0.5+angle*(60*60*100); // range:[0.5,24*60*60*100+0.5)
+	return buf;
+}
+
+//! @brief Print the passed angle with the format +hhhmmmss(.ss)"
+//! @param angle Angle in radian
+//! @param decimals Define if 2 decimal must also be printed
+//! @return The corresponding string
+wstring printAngleHMS(double angle, bool decimals)
+{
+	wchar_t buf[16];
+	buf[15] = L'\0';
+	angle = fmod(angle,2.0*M_PI);
+	if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
+	angle *= 12./M_PI; // range: [0..24)
+	if (decimals) {
+		angle = 0.5+angle*(60*60*100); // range:[0.5,24*60*60*100+0.5)
 			if (angle >= (24*60*60*100)) angle -= (24*60*60*100);
 			int h = (int)angle;
 			const int centi = h % 100;
@@ -282,8 +467,8 @@ namespace StelUtils {
 				sizeof(buf),
 #endif
 				L"%.2dh%.2dm%.2d.%02ds",h,m,s,centi);
-		} else {
-			angle = 0.5+angle*(60*60); // range:[0.5,24*60*60+0.5)
+	} else {
+		angle = 0.5+angle*(60*60); // range:[0.5,24*60*60+0.5)
 			if (angle >= (24*60*60)) angle -= (24*60*60);
 			int h = (int)angle;
 			const int s = h % 60;
@@ -295,303 +480,303 @@ namespace StelUtils {
 				sizeof(buf),
 #endif
 				L"%.2dh%.2dm%.2ds",h,m,s);
-		}
-		return buf;
 	}
-	
-	
-	double str_to_double(string str)
-	{
-		if(str=="") return 0;
-		double dbl;
-		std::istringstream dstr( str );
+	return buf;
+}
 
-		dstr >> dbl;
-		return dbl;
-	}
+
+double str_to_double(string str)
+{
+	if(str=="") return 0;
+	double dbl;
+	std::istringstream dstr( str );
+
+	dstr >> dbl;
+	return dbl;
+}
 
 // always positive
-	double str_to_pos_double(string str)
-	{
-		if(str=="") return 0;
-		double dbl;
-		std::istringstream dstr( str );
+double str_to_pos_double(string str)
+{
+	if(str=="") return 0;
+	double dbl;
+	std::istringstream dstr( str );
 
-		dstr >> dbl;
-		if(dbl < 0 ) dbl *= -1;
-		return dbl;
-	}
-
-
-	int str_to_int(string str)
-	{
-		if(str=="") return 0;
-		int integer;
-		std::istringstream istr( str );
-
-		istr >> integer;
-		return integer;
-	}
+	dstr >> dbl;
+	if(dbl < 0 ) dbl *= -1;
+	return dbl;
+}
 
 
-	int str_to_int(string str, int default_value)
-	{
-		if(str=="") return default_value;
-		int integer;
-		std::istringstream istr( str );
+int str_to_int(string str)
+{
+	if(str=="") return 0;
+	int integer;
+	std::istringstream istr( str );
 
-		istr >> integer;
-		return integer;
-	}
+	istr >> integer;
+	return integer;
+}
 
-	string double_to_str(double dbl)
-	{
-		std::ostringstream oss;
-		oss << dbl;
-		return oss.str();
-	}
 
-	long int str_to_long(string str)
-	{
-		if(str=="") return 0;
-		long int integer;
-		std::istringstream istr( str );
+int str_to_int(string str, int default_value)
+{
+	if(str=="") return default_value;
+	int integer;
+	std::istringstream istr( str );
 
-		istr >> integer;
-		return integer;
-	}
+	istr >> integer;
+	return integer;
+}
 
-	void sphe_to_rect(double lng, double lat, Vec3d& v)
-	{
-		const double cosLat = cos(lat);
-		v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-	}
+string double_to_str(double dbl)
+{
+	std::ostringstream oss;
+	oss << dbl;
+	return oss.str();
+}
 
-	void sphe_to_rect(float lng, float lat, Vec3f& v)
-	{
-		const double cosLat = cos(lat);
-		v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-	}
+long int str_to_long(string str)
+{
+	if(str=="") return 0;
+	long int integer;
+	std::istringstream istr( str );
 
-	void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
-	{
-		double r = v.length();
-		*lat = asin(v[2]/r);
-		*lng = atan2(v[1],v[0]);
-	}
+	istr >> integer;
+	return integer;
+}
 
-	void rect_to_sphe(float *lng, float *lat, const Vec3d& v)
-	{
-		double r = v.length();
-		*lat = asin(v[2]/r);
-		*lng = atan2(v[1],v[0]);
-	}
+void sphe_to_rect(double lng, double lat, Vec3d& v)
+{
+	const double cosLat = cos(lat);
+	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+}
 
-	void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
-	{
-		double r = v.length();
-		*lat = asin(v[2]/r);
-		*lng = atan2(v[1],v[0]);
-	}
+void sphe_to_rect(float lng, float lat, Vec3f& v)
+{
+	const double cosLat = cos(lat);
+	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+}
 
-	void rect_to_sphe(double *lng, double *lat, const Vec3f& v)
-	{
-		double r = v.length();
-		*lat = asin(v[2]/r);
-		*lng = atan2(v[1],v[0]);
-	}
+void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
+{
+	double r = v.length();
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
+}
 
-	// strips trailing whitespaces from buf.
+void rect_to_sphe(float *lng, float *lat, const Vec3d& v)
+{
+	double r = v.length();
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
+}
+
+void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
+{
+	double r = v.length();
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
+}
+
+void rect_to_sphe(double *lng, double *lat, const Vec3f& v)
+{
+	double r = v.length();
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
+}
+
+// strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
-	static char *trim(char *x)
+static char *trim(char *x)
+{
+	char *y;
+
+	if(!x)
+		return(x);
+	y = x + strlen(x)-1;
+	while (y >= x && iswhite(*y))
+				*y-- = 0; /* skip white space */
+	return x;
+}
+
+// salta espacios en blanco
+static void skipwhite(char **s)
+{
+	while(iswhite(**s))
+		++(*s);
+}	
+
+double get_dec_angle(const string& str)
+{
+	const char* s = str.c_str();
+	char *mptr, *ptr, *dec, *hh;
+	int negative = 0;
+	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+	char delim2[] = " NSEWnsew\"\n\t";
+	int dghh = 0, minutes = 0;
+	double seconds = 0.0, pos;
+	short count;
+
+	enum _type{
+		HOURS, DEGREES, LAT, LONG
+	}type;
+
+	if (s == NULL || !*s)
+		return(-0.0);
+	count = strlen(s) + 1;
+	if ((mptr = (char *) malloc(count)) == NULL)
+		return (-0.0);
+	ptr = mptr;
+	memcpy(ptr, s, count);
+	trim(ptr);
+	skipwhite(&ptr);
+
+	/* the last letter has precedence over the sign */
+	if (strpbrk(ptr,"SsWw") != NULL)
+		negative = 1;
+
+	if (*ptr == '+' || *ptr == '-')
+		negative = (char) (*ptr++ == '-' ? 1 : negative);
+	skipwhite(&ptr);
+	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
+		type = HOURS;
+	else
+		if (strpbrk(ptr,"SsNn") != NULL)
+			type = LAT;
+	else
+		type = DEGREES; /* unspecified, the caller must control it */
+
+	if ((ptr = strtok(ptr,delim1)) != NULL)
+		dghh = atoi (ptr);
+	else
 	{
-		char *y;
-	
-		if(!x)
-			return(x);
-		y = x + strlen(x)-1;
-		while (y >= x && iswhite(*y))
-					*y-- = 0; /* skip white space */
-		return x;
-	}
-	
-	// salta espacios en blanco
-	static void skipwhite(char **s)
-	{
-		while(iswhite(**s))
-			++(*s);
-	}	
-	
-	double get_dec_angle(const string& str)
-	{
-		const char* s = str.c_str();
-		char *mptr, *ptr, *dec, *hh;
-		int negative = 0;
-		char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
-		char delim2[] = " NSEWnsew\"\n\t";
-		int dghh = 0, minutes = 0;
-		double seconds = 0.0, pos;
-		short count;
-
-		enum _type{
-			HOURS, DEGREES, LAT, LONG
-		}type;
-
-		if (s == NULL || !*s)
-			return(-0.0);
-		count = strlen(s) + 1;
-		if ((mptr = (char *) malloc(count)) == NULL)
-			return (-0.0);
-		ptr = mptr;
-		memcpy(ptr, s, count);
-		trim(ptr);
-		skipwhite(&ptr);
-
-		/* the last letter has precedence over the sign */
-		if (strpbrk(ptr,"SsWw") != NULL)
-			negative = 1;
-
-		if (*ptr == '+' || *ptr == '-')
-			negative = (char) (*ptr++ == '-' ? 1 : negative);
-		skipwhite(&ptr);
-		if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
-			type = HOURS;
-		else
-			if (strpbrk(ptr,"SsNn") != NULL)
-				type = LAT;
-		else
-			type = DEGREES; /* unspecified, the caller must control it */
-
-		if ((ptr = strtok(ptr,delim1)) != NULL)
-			dghh = atoi (ptr);
-		else
-		{
-			free(mptr);
-			return (-0.0);
-		}
-
-		if ((ptr = strtok(NULL,delim1)) != NULL)
-		{
-			minutes = atoi (ptr);
-			if (minutes > 59)
-			{
-				free(mptr);
-				return (-0.0);
-			}
-		}
-		else
-		{
-			free(mptr);
-			return (-0.0);
-		}
-
-		if ((ptr = strtok(NULL,delim2)) != NULL)
-		{
-			if ((dec = strchr(ptr,',')) != NULL)
-				*dec = '.';
-			seconds = strtod (ptr, NULL);
-			if (seconds >= 60.0)
-			{
-				free(mptr);
-				return (-0.0);
-			}
-		}
-
-		if ((ptr = strtok(NULL," \n\t")) != NULL)
-		{
-			skipwhite(&ptr);
-			if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
-		}
-
 		free(mptr);
-
-		pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
-		if (type == HOURS && pos > 24.0)
-			return (-0.0);
-		if (type == LAT && pos > 90.0)
-			return (-0.0);
-		else
-			if (pos > 180.0)
-				return (-0.0);
-
-		if (negative)
-			pos = -pos;
-
-		return (pos);
+		return (-0.0);
 	}
-	
-	// Check if a file exist
-	bool fileExists(const std::string& fileName)
+
+	if ((ptr = strtok(NULL,delim1)) != NULL)
 	{
-		std::fstream fin;
-		fin.open(fileName.c_str(),std::ios::in|std::ios::binary);
-		if(fin.is_open())
+		minutes = atoi (ptr);
+		if (minutes > 59)
 		{
-			fin.close();
+			free(mptr);
+			return (-0.0);
+		}
+	}
+	else
+	{
+		free(mptr);
+		return (-0.0);
+	}
+
+	if ((ptr = strtok(NULL,delim2)) != NULL)
+	{
+		if ((dec = strchr(ptr,',')) != NULL)
+			*dec = '.';
+		seconds = strtod (ptr, NULL);
+		if (seconds >= 60.0)
+		{
+			free(mptr);
+			return (-0.0);
+		}
+	}
+
+	if ((ptr = strtok(NULL," \n\t")) != NULL)
+	{
+		skipwhite(&ptr);
+		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
+	}
+
+	free(mptr);
+
+	pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
+	if (type == HOURS && pos > 24.0)
+		return (-0.0);
+	if (type == LAT && pos > 90.0)
+		return (-0.0);
+	else
+		if (pos > 180.0)
+			return (-0.0);
+
+	if (negative)
+		pos = -pos;
+
+	return (pos);
+}
+
+// Check if a file exist
+bool fileExists(const std::string& fileName)
+{
+	std::fstream fin;
+	fin.open(fileName.c_str(),std::ios::in|std::ios::binary);
+	if(fin.is_open())
+	{
+		fin.close();
+		return true;
+	}
+	fin.close();
+	return false;
+}
+
+bool copyFile(const std::string& fromFile, const std::string& toFile)
+{
+	std::fstream fin, fout;
+	char buf[1024];
+
+	fin.open(fromFile.c_str(),std::ios::in|std::ios::binary);
+	fout.open(toFile.c_str(),std::ios::out|std::ios::binary);
+
+	cerr << "Copying "<<fromFile<<" to "<<toFile<<endl;
+	while(!fin.eof()) 
+    {
+		memset(buf,0,1024);
+		fin.read(buf,1024);
+        fout.write(buf,1024);
+    }
+
+	fin.close();
+	fout.close();
+	return true;
+}
+
+// Delete the file
+bool deleteFile(const std::string& fileName)
+{
+	if (std::remove(fileName.c_str())==-1)
+	{
+		return false;
+	}
+	return true;
+}
+
+bool checkAbsolutePath(const string& fileName)
+{
+	// Absolute path if starts by '/' or by 'Drive:/' (MS)
+
+	if (fileName!="")
+	{
+		if (fileName[0]=='/')
 			return true;
-		}
-		fin.close();
-		return false;
+		if (fileName[1] == ':' && (fileName[2] == '/' || fileName[2]=='\\'))
+			return true;
 	}
-	
-	bool copyFile(const std::string& fromFile, const std::string& toFile)
-	{
-		std::fstream fin, fout;
-		char buf[1024];
+	return false;
+}
 
-		fin.open(fromFile.c_str(),std::ios::in|std::ios::binary);
-		fout.open(toFile.c_str(),std::ios::out|std::ios::binary);
+// Check if a number is a power of 2
+bool isPowerOfTwo (int value) {return (value & -value) == value;}
 
-		cerr << "Copying "<<fromFile<<" to "<<toFile<<endl;
-		while(!fin.eof()) 
-        {
-			memset(buf,0,1024);
-			fin.read(buf,1024);
-            fout.write(buf,1024);
-        }
+// Return the first power of two bigger than the given value 
+int getBiggerPowerOfTwo(int value)
+{
+	int p=1;
+	while (p<value)
+		p<<=1;
+	return p;
+}
 
-		fin.close();
-		fout.close();
-		return true;
-	}
-
-	// Delete the file
-	bool deleteFile(const std::string& fileName)
-	{
-		if (std::remove(fileName.c_str())==-1)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	bool checkAbsolutePath(const string& fileName)
-	{
-		// Absolute path if starts by '/' or by 'Drive:/' (MS)
-
-		if (fileName!="")
-		{
-			if (fileName[0]=='/')
-				return true;
-			if (fileName[1] == ':' && (fileName[2] == '/' || fileName[2]=='\\'))
-				return true;
-		}
-		return false;
-	}
-
-	// Check if a number is a power of 2
-	bool isPowerOfTwo (int value) {return (value & -value) == value;}
-	
-	// Return the first power of two bigger than the given value 
-	int getBiggerPowerOfTwo(int value)
-	{
-		int p=1;
-		while (p<value)
-			p<<=1;
-		return p;
-	}
-	
-	//! Download the file from the given URL to the given name using libcurl
+//! Download the file from the given URL to the given name using libcurl
 	bool downloadFile(const std::string& url, const std::string& fullPath)
 	{
 #ifndef HAVE_LIBCURL
@@ -599,19 +784,19 @@ namespace StelUtils {
 		return false;
 #else
 		// Download the file using libCurl
-		CURL* handle = curl_easy_init();
-		curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
-		FILE* fic = fopen(fullPath.c_str(), "wb");
-		if (!fic)
-		{
-			cerr << "Can't create file: " << fullPath << endl;
-			return false;
-		}
-		curl_easy_setopt(handle, CURLOPT_WRITEDATA, fic);
-		//curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
-		if (curl_easy_perform(handle)!=0)
-		{
-			cerr << "There was an error while getting file: " << url << endl;
+	CURL* handle = curl_easy_init();
+	curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
+	FILE* fic = fopen(fullPath.c_str(), "wb");
+	if (!fic)
+	{
+		cerr << "Can't create file: " << fullPath << endl;
+		return false;
+	}
+	curl_easy_setopt(handle, CURLOPT_WRITEDATA, fic);
+	//curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
+	if (curl_easy_perform(handle)!=0)
+	{
+		cerr << "There was an error while getting file: " << url << endl;
 			fclose(fic);
 			return false;
 		}
@@ -621,11 +806,20 @@ namespace StelUtils {
 	}
 	
 	// Return the inverse sinus hyperbolic of z
-	double asinh(double z)
-	{
-		return std::log(z+std::sqrt(z*z+1));
-	}
+double asinh(double z)
+{
+	return std::log(z+std::sqrt(z*z+1));
 }
+} // end of the StelUi namespace
+
+
+
+
+
+
+
+
+
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
