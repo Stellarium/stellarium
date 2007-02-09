@@ -218,23 +218,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  // at x or y = 1, image is centered on projection edge
 	  // centered in viewport at 0,0
 
-	  prj->set2dDrawMode();	// set 2D coordinate
-
-	  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
-	  glRotatef(image_rotation,0,0,-1);
-
-	  glBegin(GL_TRIANGLE_STRIP); {
-		  glTexCoord2i(1,0);              // Bottom Right
-		  glVertex3f(w,-h,0);
-		  glTexCoord2i(0,0);              // Bottom Left
-		  glVertex3f(-w,-h,0);
-		  glTexCoord2i(1,1);              // Top Right
-		  glVertex3f(w,h,0);
-		  glTexCoord2i(0,1);              // Top Left
-		  glVertex3f(-w,h,0); }
-	  glEnd();
-	  
-	  prj->unset2dDrawMode();
+	prj->drawRectSprite2dMode(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2, w, h, -image_rotation);
 
   } else if(image_pos_type == POS_HORIZONTAL ) {
 

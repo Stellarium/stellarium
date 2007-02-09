@@ -101,12 +101,10 @@ void ImageMgr::update(double delta_time)
 
 double ImageMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
-	prj->set2dDrawMode();
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
         (*iter)->draw(nav, prj);
     }
-    prj->unset2dDrawMode();
 	return 0.0;  // TODO: determine max pixel movement from images
 }
 

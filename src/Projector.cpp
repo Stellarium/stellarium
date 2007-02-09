@@ -157,42 +157,6 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	mat_j2000_to_eye = _mat_j2000_to_eye;
 	mat_helio_to_eye = _mat_helio_to_eye;
 	mat_local_to_eye = _mat_local_to_eye;
-
-/*
-	// TODO: Find out what is the reason of this matrix
-    // already found out: unnecessary crazyness
-	static const Mat4d mat(1., 0., 0., 0.,
-	                       0., 1., 0., 0.,
-	                       0., 0., -1, 0.,
-	                       0., 0., 0., 1.);
-
-	inv_mat_earth_equ_to_eye = (mat*mat_earth_equ_to_eye).inverse();
-	inv_mat_j2000_to_eye = (mat*mat_j2000_to_eye).inverse();
-	inv_mat_helio_to_eye = (mat*mat_helio_to_eye).inverse();
-	inv_mat_local_to_eye = (mat*mat_local_to_eye).inverse();
-*/
-}
-
-
-// Set the drawing mode in 2D. Use unset2dDrawMode() to reset previous projection mode
-void Projector::set2dDrawMode(void) const
-{
-	glMatrixMode(GL_PROJECTION);		// projection matrix mode
-	glPushMatrix();						// store previous matrix
-	glLoadIdentity();
-	glOrtho(vec_viewport[0], vec_viewport[0] + vec_viewport[2], vec_viewport[1], vec_viewport[1] + vec_viewport[3], -1, 1);
-	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-	glPushMatrix();
-	glLoadIdentity();
-}
-
-// Reset the previous projection mode after a call to set2dDrawMode()
-void Projector::unset2dDrawMode(void) const
-{
-	glMatrixMode(GL_PROJECTION);		// Restore previous matrix
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
 }
 
 
@@ -226,19 +190,12 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 *************************************************************************/
 void Projector::setCustomFrame(const Mat4d& m) const
 {
-// no z-crazyness, please:
-//	static const Mat4d mat(1., 0., 0., 0.,
-//	                       0., 1., 0., 0.,
-//	                       0., 0., -1, 0.,
-//	                       0., 0., 0., 1.);
-//	inverseModelViewMatrix = (mat*m).inverse();
-
 	modelViewMatrix = m;
 	inverseModelViewMatrix = modelViewMatrix.inverse();
 }
 
 /*************************************************************************
-Init the real openGL Matrices
+ Init the real openGL Matrices
 *************************************************************************/
 void Projector::init_project_matrix(void)
 {
@@ -344,12 +301,12 @@ void Projector::draw_viewport_shape(void)
 
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
-	set2dDrawMode();
+	glPushMatrix();
 	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
 	GLUquadricObj * p = gluNewQuadric();
 	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
-	unset2dDrawMode();
+	glPopMatrix();
 }
 
 #define MAX_STACKS 4096
@@ -944,6 +901,29 @@ void Projector::drawSprite2dMode(double x, double y, double size, double rotatio
 }
 
 /*************************************************************************
+ Draw a rotated rectangle using the current texture at the given position
+*************************************************************************/
+void Projector::drawRectSprite2dMode(double x, double y, double sizex, double sizey, double rotation) const
+{
+	glPushMatrix();
+	glTranslatef(x, y, 0.0);
+	glRotatef(rotation,0.,0.,1.);
+	const double radiusx = sizex*0.5;
+	const double radiusy = sizey*0.5;
+	glBegin(GL_QUADS );
+		glTexCoord2i(0,0);
+		glVertex2f(-radiusx,-radiusy);
+		glTexCoord2i(1,0);
+		glVertex2f(+radiusx,-radiusy);
+		glTexCoord2i(1,1);
+		glVertex2f(+radiusx,+radiusy);
+		glTexCoord2i(0,1);
+		glVertex2f(-radiusx,+radiusy);
+	glEnd();
+	glPopMatrix();
+}
+
+/*************************************************************************
  Generalisation of glVertex3v. This method assumes that we are in orthographic 
  projection mode, which is true for special projections.
 *************************************************************************/
@@ -952,7 +932,6 @@ void Projector::drawVertex3v(const Vec3d& v) const
 	Vec3d win;
 	project(v, win);
 	glVertex2f(win[0],win[1]);
-//	glVertex3dv(win.v);
 }
 
 ///////////////////////////////////////////////////////////////////////////
