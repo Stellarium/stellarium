@@ -27,30 +27,43 @@
 #include "StelUtils.hpp"
 #include "Projector.hpp"
 
-Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
+Atmosphere::Atmosphere(void)
+           :sky_resolution_y(44), grid(0),
+            world_adaptation_luminance(0.f), atm_intensity(0)
 {
-	// Create the vector array used to store the sky color on the full field of view
-	tab_sky = new Vec3f*[sky_resolution+1];
-	for (int k=0; k<sky_resolution+1 ;k++)
-	{
-		tab_sky[k] = new Vec3f[sky_resolution+1];
-	}
 	setFadeDuration(3.f);
 }
 
-Atmosphere::~Atmosphere()
+Atmosphere::~Atmosphere(void)
 {
-	for (int k=0; k<sky_resolution+1 ;k++)
-	{
-		if (tab_sky[k]) delete [] tab_sky[k];
-	}
-	if (tab_sky) delete [] tab_sky;
+	if (grid) {delete[] grid;grid = 0;}
 }
 
 void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
                                ToneReproducer * eye, Projector* prj,
                                float latitude, float altitude, float temperature, float relative_humidity)
 {
+	if (grid == 0) {
+		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))
+		                                 *prj->getViewportWidth()
+		                                 /prj->getViewportHeight());
+		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];
+cout << "Atmosphere::compute_color: "
+     << (1+sky_resolution_x)*(1+sky_resolution_y)
+     << " Gridpoints instead of " << (48*48)
+     << endl;
+		float stepX = (float)prj->getViewportWidth() / (sky_resolution_x-0.5);
+		float stepY = (float)prj->getViewportHeight() / sky_resolution_y;
+		float viewport_left = (float)prj->getViewportPosX();
+		float viewport_bottom = (float)prj->getViewportPosY();
+		for (int x=0; x<=sky_resolution_x; ++x)
+			for(int y=0; y<=sky_resolution_y; ++y) {
+				GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
+				g.pos_2d[0] = viewport_left+(x-0.5*(y&1))*stepX;
+				g.pos_2d[1] = viewport_bottom+y*stepY;
+			}
+	}
+
 	float min_mw_lum = 0.13;
 
 	// no need to calculate if not visible
@@ -128,11 +141,6 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 
 	skyb.set_date(date.years, date.months, moon_phase);
 
-	float stepX = (float)prj->getViewportWidth() / sky_resolution;
-	float stepY = (float)prj->getViewportHeight() / sky_resolution;
-	float viewport_left = (float)prj->getViewportPosX();
-	float viewport_bottom = (float)prj->getViewportPosY();
-
 	Vec3d point(1., 0., 0.);
 
 	// Variables used to compute the average sky luminance
@@ -142,12 +150,13 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
 	// Compute the sky color for every point above the ground
-	for (int x=0; x<=sky_resolution; ++x)
+	for (int x=0; x<=sky_resolution_x; ++x)
 	{
-		for(int y=0; y<=sky_resolution; ++y)
+		for(int y=0; y<=sky_resolution_y; ++y)
 		{
-			prj->unProject((double)viewport_left+x*stepX, (double)viewport_bottom+y*stepY,point);
-//			point.normalize();
+            GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
+			prj->unProject(g.pos_2d[0],g.pos_2d[1],point);
+
 			assert(fabs(point.lengthSquared()-1.0) < 1e-10);
 
 			if (point[2]<=0)
@@ -173,7 +182,10 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			sum_lum+=b2.color[2];
 			++nb_lum;
 			eye->xyY_to_RGB(b2.color);
-			tab_sky[x][y].set(atm_intensity*b2.color[0],atm_intensity*b2.color[1],atm_intensity*b2.color[2]);
+			grid[y*(1+sky_resolution_x)+x].color.set(
+			              atm_intensity*b2.color[0],
+			              atm_intensity*b2.color[1],
+			              atm_intensity*b2.color[2]);
 		}
 	}
 
@@ -194,23 +206,22 @@ void Atmosphere::draw(Projector* prj)
 		// printf("Atm int: %f\n", atm_intensity);
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
-		float stepX = (float)prj->getViewportWidth() / sky_resolution;
-		float stepY = (float)prj->getViewportHeight() / sky_resolution;
-		float viewport_left = (float)prj->getViewportPosX();
-		float view_bottom = (float)prj->getViewportPosY();
-
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 
-		for (int y2=0; y2<sky_resolution; ++y2)
+		for (int y2=0; y2<sky_resolution_y; ++y2)
 		{
+			const GridPoint *g0 = grid + y2*(1+sky_resolution_x);
+			const GridPoint *g1 = g0;
+			if (y2&1) g1+=(1+sky_resolution_x);
+			else g0+=(1+sky_resolution_x);
 			glBegin(GL_QUAD_STRIP);
-			for(int x2=0; x2<sky_resolution+1; ++x2)
+			for(int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
 			{
-				glColor3fv(tab_sky[x2][y2]);
-				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+y2*stepY));
-				glColor3fv(tab_sky[x2][y2+1]);
-				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+(y2+1)*stepY));
+				glColor3fv(g0->color);
+				glVertex2fv(g0->pos_2d);
+				glColor3fv(g1->color);
+				glVertex2fv(g1->pos_2d);
 			}
 			glEnd();
 		}
