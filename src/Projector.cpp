@@ -306,12 +306,15 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 	v[0] = flip_horz * (x - center[0]) / view_scaling_factor;
 	v[1] = flip_vert * (y - center[1]) / view_scaling_factor;
 	v[2] = 0;
-	if (!projectBackward(v))
-		return false;
+	const bool rval = projectBackward(v);
+	  // Even when the reprojected point comes from an region of the screen,
+	  // where nothing is projected to (rval=false), we finish reprojecting.
+	  // This looks good for atmosphere rendering, and it helps avoiding
+	  // discontinuities when dragging around with the mouse.
 
 	// modelViewMapper.backward(v);
 	v.transfo4d(inverseModelViewMatrix);
-	return true;
+	return rval;
 }
 
 
