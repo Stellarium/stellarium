@@ -28,6 +28,9 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "SFont.hpp"
+#include "ToneReproducer.hpp"
+#include "StelModuleMgr.hpp"
 
 STexture * Nebula::tex_circle = NULL;
 SFont* Nebula::nebula_font = NULL;

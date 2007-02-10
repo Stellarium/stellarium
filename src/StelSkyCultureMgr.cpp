@@ -17,14 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelSkyCultureMgr.hpp"
+#include "Translator.hpp"
+#include "InitParser.hpp"
+#include "StelApp.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <dirent.h>
 #include <cassert>
-#include "Translator.hpp"
-#include "InitParser.hpp"
-
-#include "StelApp.hpp"
 
 StelSkyCultureMgr::StelSkyCultureMgr(const string& cultureDirPath)
 {

@@ -22,6 +22,7 @@
 #include "StelObjectModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "Projector.hpp"
 
 StelObjectMgr::StelObjectMgr() : selectedObject(NULL)
 {

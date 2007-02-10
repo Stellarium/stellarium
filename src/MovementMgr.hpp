@@ -3,6 +3,7 @@
 
 #include "StelModule.hpp"
 #include "StelCore.hpp"
+#include "Projector.hpp"
 
 class MovementMgr : public StelModule
 {

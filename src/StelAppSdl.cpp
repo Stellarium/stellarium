@@ -20,13 +20,20 @@
 #include "shlobj.h"
 #endif
 
-#include <sstream>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "Projector.hpp"
+
+#include "SDL_opengl.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"
 #endif
+
+#include <sstream>
+#include <iostream>
+
+using namespace std;
 
 void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {

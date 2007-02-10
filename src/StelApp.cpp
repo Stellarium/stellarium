@@ -38,6 +38,14 @@
 #include "MeteorMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
+#include "InitParser.hpp"
+#include "Projector.hpp"
+
+#include "StelModuleMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
+
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;

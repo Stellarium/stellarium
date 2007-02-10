@@ -31,6 +31,9 @@
 #include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
