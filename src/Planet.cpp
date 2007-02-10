@@ -829,6 +829,62 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 
 void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
+	float cmag;
+	float rmag;
+    float fov_q = prj->getFov();
+    if (fov_q > 60) fov_q = 60;
+    else if (fov_q < 0.1) fov_q = 0.1;
+    fov_q = 1.f/(fov_q*fov_q);
+    rmag = std::sqrt(eye->adapt_luminance(
+        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
+                         + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+	cmag = 1.f;
+	if (rmag<1.2f)
+	{
+		if (rmag<0.3f) return;
+		cmag=rmag*rmag/1.44f;
+		rmag=1.2f;
+	}
+	else
+	{
+      if (rmag>8.f) {
+        rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
+      }
+	}
+	rmag*=Planet::object_scale;
+	glBlendFunc(GL_ONE, GL_ONE);
+	float screen_r = 0.25*getOnScreenSize(prj, nav);
+	if (screen_r<1.f) screen_r=1.f;
+	cmag *= 0.5*rmag/(screen_r*screen_r*screen_r);
+	if (cmag>1.f) cmag = 1.f;
+
+	if (rmag<screen_r)
+	{
+		cmag*=rmag/screen_r;
+		rmag = screen_r;
+	}
+
+	tex_big_halo->bind();
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+
+	screen_r = 0.3*rmag; // just an arbitrary scaling
+      // drawSprite2dMode does not work for the big halo,
+      // perhaps it is too big?
+	glBegin(GL_QUADS);
+		glTexCoord2i(0,0);
+		glVertex2f(screenPos[0]-screen_r,screenPos[1]-screen_r);
+		glTexCoord2i(1,0);
+		glVertex2f(screenPos[0]+screen_r,screenPos[1]-screen_r);
+		glTexCoord2i(1,1);
+		glVertex2f(screenPos[0]+screen_r,screenPos[1]+screen_r);
+		glTexCoord2i(0,1);
+		glVertex2f(screenPos[0]-screen_r,screenPos[1]+screen_r);
+	glEnd();
+
+/*
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = getOnScreenSize(prj, nav);
 
@@ -849,6 +905,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	glEnable(GL_TEXTURE_2D);
 	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
+*/
 }
 
 Ring::Ring(double radius_min,double radius_max,const string &texname)
