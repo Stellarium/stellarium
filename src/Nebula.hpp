@@ -24,8 +24,8 @@
 #include "stellarium.h"
 #include "Projector.hpp"
 #include "Navigator.hpp"
-#include "SFont.hpp"
-#include "ToneReproducer.hpp"
+class SFont;
+class ToneReproducer;
 #include "Translator.hpp"
 
 /*

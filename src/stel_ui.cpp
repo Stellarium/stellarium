@@ -38,6 +38,10 @@
 #include "TelescopeMgr.hpp"
 #include "image_mgr.h"
 #include "MeteorMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "Navigator.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS

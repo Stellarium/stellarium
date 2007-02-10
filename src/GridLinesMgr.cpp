@@ -9,6 +9,8 @@
 #include "LoadingBar.hpp"
 #include "Fader.hpp"
 #include "Planet.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 // Class which manages a grid to display in the sky
 class SkyGrid

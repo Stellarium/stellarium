@@ -17,11 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <algorithm>
-
 #include "stel_command_interface.h"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
@@ -39,6 +34,17 @@
 #include "StelObjectMgr.hpp"
 #include "image_mgr.h"
 #include "MeteorMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
+#include "Projector.hpp"
+#include "Navigator.hpp"
+
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 

@@ -20,12 +20,16 @@
 // Manage all the objects to be used in the program
 
 #include "StelCore.hpp"
+#include "Navigator.hpp"
+#include "Projector.hpp"
+#include "ToneReproducer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "GeodesicGrid.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 
 StelCore::StelCore() : projection(NULL)

@@ -21,6 +21,8 @@
 #include "LoadingBar.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 

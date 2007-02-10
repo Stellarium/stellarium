@@ -30,6 +30,7 @@
 #include "SFont.hpp"
 #include "sideral_time.h"
 #include "StelTextureMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;

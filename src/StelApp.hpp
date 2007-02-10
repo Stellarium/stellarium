@@ -26,11 +26,6 @@
 #include "SDL.h"	// SDL is used only for the key codes types
 #include "stellarium.h"
 
-#include "StelFontMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelSkyCultureMgr.hpp"
-
 using namespace std;
 
 // Predeclaration of some classes
@@ -42,6 +37,10 @@ class ViewportDistorter;
 class SkyLocalizer;
 class StelTextureMgr;
 class StelObjectMgr;
+class StelFontMgr;
+class StelLocaleMgr;
+class StelModuleMgr;
+class StelSkyCultureMgr;
 
 using namespace std;
 

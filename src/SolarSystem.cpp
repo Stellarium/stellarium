@@ -33,6 +33,9 @@
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 using namespace std;
 

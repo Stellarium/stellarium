@@ -20,10 +20,13 @@
 #define _STEL_CORE_H_
 
 #include <string>
+using namespace std;
 
-#include "Navigator.hpp"
-#include "Projector.hpp"
-#include "ToneReproducer.hpp"
+class Navigator;
+class Projector;
+class ToneReproducer;
+class InitParser;
+class LoadingBar;
 
 class Observer;
 

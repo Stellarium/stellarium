@@ -28,8 +28,6 @@
 #include <cstdlib>
 #include <cstdio>
 #include "Fader.hpp"
-#include "LoadingBar.hpp"
-#include "Translator.hpp"
 #include "StelObjectModule.hpp"
 
 using namespace std ;
@@ -38,6 +36,7 @@ class StelObject;
 class ToneReproducer;
 class Projector;
 class Navigator;
+class LoadingBar;
 
 class ZoneArray;
 class HipIndexStruct;
