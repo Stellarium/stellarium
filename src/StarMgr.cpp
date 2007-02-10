@@ -38,9 +38,14 @@
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"
 #include "GeodesicGrid.hpp"
+#include "LoadingBar.hpp"
+#include "Translator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;

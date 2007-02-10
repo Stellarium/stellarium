@@ -22,8 +22,8 @@
 
 #include "StelObjectBase.hpp"
 #include "stellarium.h"
-#include "StelUtils.hpp"
-#include "SFont.hpp"
+//#include "StelUtils.hpp"
+class SFont;
 #include "ToneReproducer.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"

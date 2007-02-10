@@ -26,6 +26,9 @@
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
 #include "StelCore.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals

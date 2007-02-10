@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "Meteor.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {

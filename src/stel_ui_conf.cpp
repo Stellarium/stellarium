@@ -32,6 +32,13 @@
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "MeteorMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
+#include "InitParser.hpp"
+#include "Observer.hpp"
+#include "Navigator.hpp"
 
 using namespace s_gui;
 

@@ -23,9 +23,7 @@
 #include <vector>
 
 #include "StelObject.hpp"
-#include "Fader.hpp"
-#include "LoadingBar.hpp"
-#include "Translator.hpp"
+class LoadingBar;
 #include "StelObjectModule.hpp"
 
 class ToneReproducer;
@@ -33,6 +31,7 @@ class StarMgr;
 class Constellation;
 class Projector;
 class Navigator;
+class SFont;
 
 class ConstellationMgr : public StelObjectModule
 {
