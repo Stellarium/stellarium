@@ -31,7 +31,7 @@ public:
 	// Set the position parameters
 	// Latitude in radian, altitude in m, temperature in deg. C, humidity in %
 	void set_loc(float latitude, float altitude, float temperature = 15.f,
-		float relative_humidity = 40.f);
+	             float relative_humidity = 40.f);
 
 	// Set the moon and sun zenith angular distance (cosin given) and precompute what can be
 	// This funtion has to be called once before any call to get_luminance()
@@ -43,17 +43,14 @@ public:
 	// Inputs : cos_dist_moon = cos(angular distance between moon and the position)
 	//			cos_dist_sun  = cos(angular distance between sun  and the position)
 	//			cos_dist_zenith = cos(angular distance between zenith and the position)
-	float get_luminance(float cos_dist_moon, float cos_dist_sun, float cos_dist_zenith);
+	float get_luminance(float cos_dist_moon,
+	                    float cos_dist_sun,
+	                    float cos_dist_zenith) const;
 
 private:
 	float air_mass_moon;	// Air mass for the Moon
 	float air_mass_sun;		// Air mass for the Sun
 
-	double b_total;			// Total brightness
-	float b_night;			// Dark night brightness
-	float b_twilight;		// Twilight brightness
-	float b_daylight;		// Daylight sky brightness
-	float b_moon;			// Moon brightness
 	float mag_moon;			// Moon magnitude
 
 	float RA;				// Something related with date
