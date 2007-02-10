@@ -93,7 +93,7 @@ float Skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
     // catch rounding errors here or end up with white flashes in some cases
     if(cos_dist_moon < -1.f ) cos_dist_moon = -1.f;
 	if(cos_dist_moon > 1.f ) cos_dist_moon = 1.f;
-	if(cos_dist_sun < -1.f ) cos_dist_moon = -1.f;
+	if(cos_dist_sun < -1.f ) cos_dist_sun = -1.f;
 	if(cos_dist_sun > 1.f ) cos_dist_sun = 1.f;
 	if(cos_dist_zenith < -1.f ) cos_dist_zenith = -1.f;
 	if(cos_dist_zenith > 1.f ) cos_dist_zenith = 1.f;
