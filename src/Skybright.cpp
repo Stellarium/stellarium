@@ -87,49 +87,60 @@ void Skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 // Inputs : cos_dist_moon = cos(angular distance between moon and the position)
 //			cos_dist_sun  = cos(angular distance between sun  and the position)
 //			cos_dist_zenith = cos(angular distance between zenith and the position)
-float Skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float cos_dist_zenith)
+float Skybright::get_luminance(float cos_dist_moon,
+                               float cos_dist_sun,
+                               float cos_dist_zenith) const
 {
+	float dist_moon,dist_sun,dist_zenith;
 
     // catch rounding errors here or end up with white flashes in some cases
-    if(cos_dist_moon < -1.f ) cos_dist_moon = -1.f;
-	if(cos_dist_moon > 1.f ) cos_dist_moon = 1.f;
-	if(cos_dist_sun < -1.f ) cos_dist_sun = -1.f;
-	if(cos_dist_sun > 1.f ) cos_dist_sun = 1.f;
-	if(cos_dist_zenith < -1.f ) cos_dist_zenith = -1.f;
-	if(cos_dist_zenith > 1.f ) cos_dist_zenith = 1.f;
-	
-	float dist_moon = std::acos(cos_dist_moon);
-	float dist_sun = std::acos(cos_dist_sun);
+
+	if (cos_dist_moon <= -1.f) {cos_dist_moon = -1.f;dist_moon = M_PI;}
+	else if (cos_dist_moon >= 1.f) {cos_dist_moon = 1.f;dist_moon = 0.f;}
+	else dist_moon = std::acos(cos_dist_moon);
+
+	if (cos_dist_sun <= -1.f) {cos_dist_sun = -1.f;dist_sun = M_PI;}
+	else if (cos_dist_sun >= 1.f) {cos_dist_sun = 1.f;dist_sun = 0.f;}
+	else dist_sun = std::acos(cos_dist_sun);
+
+	if (cos_dist_zenith <= -1.f) {cos_dist_zenith = -1.f;dist_zenith = M_PI;}
+	else if (cos_dist_zenith >= 1.f) {cos_dist_zenith = 1.f;dist_zenith = 0.f;}
+	else dist_zenith = std::acos(cos_dist_zenith);
 
 	// Air mass
-	float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
-	float bKX = pow10(-0.4f * K * X);
+	const float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
+	const float bKX = pow10(-0.4f * K * X);
 
 	// Dark night sky brightness
-	b_night = 0.4f+0.6f/std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith);
-	b_night *= b_night_term * bKX;
+	const float b_night = (0.4f + 0.6f
+	                       / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
+	                    * b_night_term * bKX;
 
 	// Moonlight brightness
-	float FM = 18886.28 / (dist_moon*dist_moon + 0.0007f) + pow10(6.15f - (dist_moon+0.001) * 1.43239f);
-	FM += 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
-	b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
-
-	//Twilight brightness
-	b_twilight = pow10(b_twilight_term + 0.063661977f * std::acos(cos_dist_zenith)/K) *
-		(1.7453293f / dist_sun) * (1.f-bKX);
+	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
+	               + pow10(6.15f - (dist_moon+0.001) * 1.43239f)
+	               + 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
+	float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 
 	// Daylight brightness
-	float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f) + pow10(6.15f - (dist_sun+0.001)* 1.43239f);
-	FS += 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
-	b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
+	const float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f)
+	               + pow10(6.15f - (dist_sun+0.001)* 1.43239f)
+	               + 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
+	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
+
+	//Twilight brightness
+	const float b_twilight = pow10(b_twilight_term + 0.063661977f * dist_zenith/K)
+	                       * (1.7453293f / dist_sun) * (1.f-bKX);
 
 	// 27/08/2003 : Decide increase moonlight for more halo effect...
-	b_moon *= 2.;
+	b_moon *= 2.f;
 
 	// Total sky brightness
-	b_daylight>b_twilight ? b_total = b_night + b_twilight + b_moon : b_total = b_night + b_daylight + b_moon;
+	const float b_total = b_night + b_moon
+	                    + ((b_twilight<b_daylight) ? b_twilight : b_daylight);
 
-	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2; 
+	return (b_total<0.f) ? 0.f
+	                     : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2;
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
 }
