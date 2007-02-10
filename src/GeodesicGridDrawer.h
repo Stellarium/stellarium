@@ -23,6 +23,9 @@
 #include "GeodesicGrid.hpp"
 #include "StelModule.hpp"
 
+class Projector;
+class Navigator;
+class ToneReproductor;
 class SFont;
 
 class GeodesicGridDrawer : public StelModule
@@ -35,14 +38,15 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "geodesic_grid_drawer";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(Projector *prj, const Navigator *nav,
+	                    ToneReproductor *eye, int max_search_level);
 	virtual void update(double deltaTime) {;}
 	virtual void updateI18n() {;}
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	
 private:
-	GeodesicGrid* grid;
-	GeodesicSearchResult* searchResult;
+//	GeodesicGrid* grid;
+//	GeodesicSearchResult* searchResult;
 	SFont* font;
 };
 

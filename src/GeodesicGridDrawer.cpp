@@ -21,18 +21,20 @@
 #include "GeodesicGridDrawer.h"
 #include "Projector.hpp"
 #include "StelApp.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {
-	grid = new GeodesicGrid(maxLevel);
-	searchResult = new GeodesicSearchResult(*grid);
+//	geodesic_grid = new GeodesicGrid(maxLevel);
+//	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
 	font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage());
 }
 
 GeodesicGridDrawer::~GeodesicGridDrawer()
 {
-	delete searchResult;
-	delete grid;
+//	delete geodesic_search_result;
+//	delete geodesic_grid;
 }
 
 void GeodesicGridDrawer::init(const InitParser& conf, LoadingBar& lb)
@@ -40,7 +42,8 @@ void GeodesicGridDrawer::init(const InitParser& conf, LoadingBar& lb)
 }
 
 
-double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav,
+                                ToneReproductor *eye, int max_search_level)
 {
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -49,22 +52,23 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
 	glColor4f(0.2,0.3,0.2,1);
 	
 	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;
-	if (lev>grid->getMaxLevel()) lev = grid->getMaxLevel();
-	Vec3d e0, e1, e2, e3;
+	if (lev>geodesic_grid->getMaxLevel()) lev = geodesic_grid->getMaxLevel();
+    lev = max_search_level;
+//	Vec3d e0, e1, e2, e3;
 	Vec3d win1, win2;
-	prj->unProject(0,0,e0);
-	prj->unProject(prj->getViewportWidth(),0,e1);
-	prj->unProject(prj->getViewportWidth(),prj->getViewportHeight(),e2);
-	prj->unProject(0,prj->getViewportHeight(),e3);
-	searchResult->search(e0, e3, e2, e1, lev);
+//	prj->unproject_j2000(0,0,e0);
+//	prj->unproject_j2000(prj->getViewportWidth(),0,e1);
+//	prj->unproject_j2000(prj->getViewportWidth(),prj->getViewportHeight(),e2);
+//	prj->unproject_j2000(0,prj->getViewportHeight(),e3);
+//	geodesic_search_result->search(e0, e3, e2, e1, lev);
 	int index;
 	Vec3d v0, v1, v2;
 	{
-	GeodesicSearchInsideIterator it1(*searchResult, lev);
+	GeodesicSearchInsideIterator it1(*geodesic_search_result, lev);
 	while((index = it1.next()) >= 0)
 	{
 		Vec3d center;
-		grid->getTriangleCorners(lev, index, v0, v1, v2);
+		geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
 		prj->project(v0, win1);
 		prj->project(v1, win2);
 		center += win1;
@@ -88,17 +92,17 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         center += win1;
         center*=0.33333;
         ostringstream os;
-        os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
+        os << index << " (" << geodesic_grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
 		prj->drawText(font,center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
 	}
 	}
-	GeodesicSearchBorderIterator it1(*searchResult, lev);
+	GeodesicSearchBorderIterator it1(*geodesic_search_result, lev);
 	while((index = it1.next()) >= 0)
 	{
 		Vec3d center;
-		grid->getTriangleCorners(lev, index, v0, v1, v2);
+		geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
 		prj->project(v0, win1);
 		prj->project(v1, win2);
 		center += win1;
@@ -122,7 +126,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         center += win1;
         center*=0.33333;
         ostringstream os;
-        os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
+        os << index << " (" << geodesic_grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
 		prj->drawText(font,center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
