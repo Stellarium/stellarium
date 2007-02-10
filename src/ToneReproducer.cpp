@@ -18,6 +18,10 @@
 
 #include <cstdio>
 #include <cmath>
+#include <cassert>
+#include <iostream>
+
+using namespace std;
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -79,10 +83,14 @@ void ToneReproducer::set_world_adaptation_luminance(float _Lwa)
 
 // Convert from xyY color system to RGB according to the adaptation
 // The Y component is in cd/m^2
-void ToneReproducer::xyY_to_RGB(float* color)
+void ToneReproducer::xyY_to_RGB(float* color) const
 {
 	// 1. Hue conversion
-	float log10Y = log10f(color[2]);
+if (color[2] <= 0.f) {
+  cerr << "ToneReproducer::xyY_to_RGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
+}
+	const float log10Y = log10f(color[2]);
+
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
 	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
 	// else mesopic vision (with rods and cones, transition state)
@@ -92,7 +100,7 @@ void ToneReproducer::xyY_to_RGB(float* color)
 		float s = 0.f;
 		if (log10Y > -2.f)
 		{
-			float op = (log10Y + 2.f)/2.6f;
+			const float op = (log10Y + 2.f)/2.6f;
 			s = 3.f * op * op - 2 * op * op * op;
 		}
 
@@ -100,9 +108,8 @@ void ToneReproducer::xyY_to_RGB(float* color)
 		// The "night blue" is x,y(0.25, 0.25)
 		color[0] = (1.f - s) * 0.25f + s * color[0];	// Add scotopic + photopic components
 		color[1] = (1.f - s) * 0.25f + s * color[1];	// Add scotopic + photopic components
-
 		// Take into account the scotopic luminance approximated by V [3] [4]
-		float V = color[2] * (1.33f * (1.f + color[1] / color[0] + color[0] * (1.f - color[0] - color[1])) - 1.68f);
+		const float V = color[2] * (1.33f * (1.f + color[1] / color[0] + color[0] * (1.f - color[0] - color[1])) - 1.68f);
 		color[2] = 0.4468f * (1.f - s) * V + s * color[2];
 	}
 
@@ -110,9 +117,9 @@ void ToneReproducer::xyY_to_RGB(float* color)
 	color[2] = std::pow(adapt_luminance(color[2]) * one_over_maxdL, one_over_gamma);
 
 	// Convert from xyY to XZY
-	float X = color[0] * color[2] / color[1];
-	float Y = color[2];
-	float Z = (1.f - color[0] - color[1]) * color[2] / color[1];
+	const float X = color[0] * color[2] / color[1];
+	const float Y = color[2];
+	const float Z = (1.f - color[0] - color[1]) * color[2] / color[1];
 
 	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
 	color[0] = 2.04148f  *X - 0.564977f*Y - 0.344713f *Z;
