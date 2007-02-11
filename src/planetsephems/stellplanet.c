@@ -23,8 +23,19 @@ void get_mercury_helio_coordsv(double jd,double xyz[3])
   {GetVsop87Coor(jd,VSOP87_MERCURY,xyz);}
 void get_venus_helio_coordsv(double jd,double xyz[3])
   {GetVsop87Coor(jd,VSOP87_VENUS,xyz);}
-void get_earth_helio_coordsv(double jd,double xyz[3])
-  {GetVsop87Coor(jd,VSOP87_EMB,xyz);}
+
+void get_earth_helio_coordsv(const double jd,double xyz[3]) {
+  double moon[3];
+  GetVsop87Coor(jd,VSOP87_EMB,xyz);
+  GetElp82bCoor(jd,moon);
+    /* Earth != EMB:
+       0.0121505677733761 = mu_m/(1+mu_m),
+       mu_m = mass(moon)/mass(earth) = 0.01230002 */
+  xyz[0] -= 0.0121505677733761 * moon[0];
+  xyz[1] -= 0.0121505677733761 * moon[1];
+  xyz[2] -= 0.0121505677733761 * moon[2];
+}
+
 void get_mars_helio_coordsv(double jd,double xyz[3])
   {GetVsop87Coor(jd,VSOP87_MARS,xyz);}
 void get_jupiter_helio_coordsv(double jd,double xyz[3])
