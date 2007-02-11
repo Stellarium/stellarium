@@ -59,7 +59,10 @@ cout << "Atmosphere::compute_color: "
 		for (int x=0; x<=sky_resolution_x; ++x)
 			for(int y=0; y<=sky_resolution_y; ++y) {
 				GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
-				g.pos_2d[0] = viewport_left+(x-0.5*(y&1))*stepX;
+				g.pos_2d[0] = viewport_left
+				            + ((x == 0) ? 0.f :
+				               (x == sky_resolution_x) ? (float)prj->getViewportWidth() :
+				               (x-0.5*(y&1))*stepX);
 				g.pos_2d[1] = viewport_bottom+y*stepY;
 			}
 	}
