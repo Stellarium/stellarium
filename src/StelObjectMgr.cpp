@@ -193,6 +193,7 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 		core->getProjection()->project((*iter).get_earth_equ_pos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter).getSelectPriority(core->getNavigation());
+//		cerr << StelUtils::wstringToString((*iter).getShortInfoString(core->getNavigation())) << ": " << priority << " " << distance << endl;
 		if (distance + priority < best_object_value)
 		{
 			best_object_value = distance + priority;

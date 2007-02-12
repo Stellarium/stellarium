@@ -874,15 +874,6 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 
 
 /*******************************************************************************/
-
-// mac seems to use KMOD_META instead of KMOD_CTRL
-#ifdef MACOSX
-#define COMPATIBLE_KMOD_CTRL KMOD_META
-#else
-#define COMPATIBLE_KMOD_CTRL KMOD_CTRL
-#endif
-
-
 int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
 
