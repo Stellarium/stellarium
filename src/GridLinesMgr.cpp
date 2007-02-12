@@ -89,10 +89,7 @@ void SkyGrid::setFontSize(double newFontSize)
 
 // Conversion into mas = milli arcsecond
 const static double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
-const static double RADIAN_DEG = 180./M_PI;
 const static double DEGREE_MAS = 1000.*60.*60.;
-const static double ARCMIN_MAS = 1000.*60;
-const static double ARCSEC_MAS = 1000.;
 
 //! Return the standard longitude in radian [-pi;+pi] for a position given in the viewport
 static double getLonFrom2dPos(const Projector* prj, const Vec2d& p)
@@ -110,8 +107,9 @@ static double getLatFrom2dPos(const Projector* prj, const Vec2d& p)
 	return std::asin(v[2]);
 }
 
-
-void rectToSpheLat180(double& lon, double& lat, const Vec3d& v)
+//! Return a "longitude" between 0 and pi and "latitude" between 0 and 2*pi
+//! This is used to get rid of the longitude discontinuity in lon=0 
+void rectToSpheType2(double& lon, double& lat, const Vec3d& v)
 {
 	StelUtils::rect_to_sphe(&lon, &lat, v);
 	// lon is now between -pi and pi, we want it between 0 and pi, like a latitude
@@ -126,7 +124,9 @@ void rectToSpheLat180(double& lon, double& lat, const Vec3d& v)
 	assert(lon>=0. && lon<=M_PI);
 }
 
-void spheToRectLat180(double lon, double lat, Vec3d& v)
+//! Create a vector from a "longitude" between 0 and pi and "latitude" between 0 and 2*pi
+//! This is used to get rid of the longitude discontinuity in lon=0 
+void spheToRectType2(double lon, double lat, Vec3d& v)
 {
 	assert(lat>=0. && lat<=2.*M_PI);
 	assert(lon>=0. && lon<=M_PI);
@@ -153,22 +153,22 @@ void spheToRectLat1802(double lon, double lat, Vec3d& v)
 }
 
 //! Return a special latitude in radian [0;2*pi] for a position given in the viewport
-static double getLatFrom2dPos180(const Projector* prj, const Vec2d& p)
+static double getLatFrom2dPosType2(const Projector* prj, const Vec2d& p)
 {
 	Vec3d v;
 	prj->unProject(p[0], p[1], v);
 	double lon, lat;
-	rectToSpheLat180(lon, lat, v);
+	rectToSpheType2(lon, lat, v);
 	return lat;
 }
 
 //! Return a special longitude in radian [0;pi] for a position given in the viewport
-static double getLonFrom2dPos180(const Projector* prj, const Vec2d& p)
+static double getLonFrom2dPosType2(const Projector* prj, const Vec2d& p)
 {
 	Vec3d v;
 	prj->unProject(p[0], p[1], v);
 	double lon, lat;
-	rectToSpheLat180(lon, lat, v);
+	rectToSpheType2(lon, lat, v);
 	return lon;
 }
 
@@ -189,9 +189,7 @@ static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double 
 {
 	Vec3d v;
 	Vec3d win;
-	
 	spheToRectLat1802(lon, lat, v);
-
 	prj->project(v, win);
 	return win;
 }
@@ -218,7 +216,6 @@ static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, doubl
 
 
 //! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*stepMas
-//! with a precision < 0.5 pixels
 //! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
 static void getPslow(map<int, set<double> > & result, const Projector* prj, 
 	const Vec2d& p0, const Vec2d& p1, double step, 
@@ -277,6 +274,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 static const double STEP_SIZES_DMS[] = {1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
 static const double STEP_SIZES_HMS[] = {1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
+//! Return the angular grid step in degree which best fits the given scale 
 static double getClosestResolutionParallel(double pixelPerRad)
 {
 	double minResolution = 80.;
@@ -289,6 +287,7 @@ static double getClosestResolutionParallel(double pixelPerRad)
 	return 10.;
 }
 
+//! Return the angular grid step in degree which best fits the given scale 
 static double getClosestResolutionMeridian(double pixelPerRad)
 {
 	double minResolution = 80.;
@@ -301,6 +300,9 @@ static double getClosestResolutionMeridian(double pixelPerRad)
 	return 15.;
 }
 
+//! Draw the sky grid in the current frame
+//! This method look for each point of the viewport's contour intersecting with a meridian/parallel
+//! The the intersecting points are matched 2 by 2 to find out where to draw the arc of meridian/parallel  
 void SkyGrid::draw(const Projector* prj) const
 {
 	if (!fader.getInterstate()) return;
@@ -347,7 +349,7 @@ void SkyGrid::draw(const Projector* prj) const
 		Vec2d vertex0 = viewportVertices[i];
 		Vec2d vertex1 = viewportVertices[(i+1)%viewportVertices.size()];
 		getPslow(resultsParallels, prj, vertex0, vertex1, gridStepParallelRad, getLatFrom2dPos, getLonFrom2dPos);
-		getPslow(resultsMeridians, prj, vertex0, vertex1, gridStepMeridianRad, getLonFrom2dPos180, getLatFrom2dPos180);
+		getPslow(resultsMeridians, prj, vertex0, vertex1, gridStepMeridianRad, getLonFrom2dPosType2, getLatFrom2dPosType2);
 	}
 
 	// Draw the parallels
@@ -355,7 +357,7 @@ void SkyGrid::draw(const Projector* prj) const
 	{
 		if (iter->second.size()%2!=0)
 		{
-			//cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
@@ -429,16 +431,18 @@ void SkyGrid::draw(const Projector* prj) const
 //			Vec3d v;
 //			prj->unProject(k->second[0], k->second[1], v);
 //			double llon, llat;
-//			rectToSpheLat180(llon, llat, v);
+//			rectToSpheType2(llon, llat, v);
 //			cerr << k->second << " lat=" << k->first*180./M_PI << " Llon="<< llon*180./M_PI << " Llat=" << llat*180./M_PI << (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first) ?" *":"") << endl;
 //		}
 		
 		if (iter->second.size()%2!=0)
 		{
-			//cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
+			// The content of the set iter->second is supposed to be the sorted list of the latitudeType2
+			// at which the meridian of longitude iter->first crosses the viewport
 			set<double>::const_iterator k = iter->second.begin();
 			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
 			{
@@ -487,6 +491,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 	
 	// Draw meridian zero which can't be found by the normal algo..
+	// TODO also draw the meridian which are totally included in the viewport
 	const Vec3d vv(1,0,0);
 	prj->drawMeridian(vv, 2.*M_PI, false, &font);
 }
