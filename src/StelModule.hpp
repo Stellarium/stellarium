@@ -30,12 +30,6 @@
 #include <boost/any.hpp>
 
 #include "SDL.h"
-// mac seems to use KMOD_META instead of KMOD_CTRL
-#ifdef MACOSX
-  #define COMPATIBLE_KMOD_CTRL KMOD_META
-#else
-  #define COMPATIBLE_KMOD_CTRL KMOD_CTRL
-#endif
 
 #include "callbacks.hpp"
 

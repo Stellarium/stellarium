@@ -76,6 +76,7 @@ public:
 	Iterator begin() {return elements.begin();}
 	Iterator end() {return elements.end();}
 	
+	bool empty() {return elements.empty();}
 	void clear() {elements.clear();}
 private:
 	

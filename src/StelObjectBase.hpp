@@ -57,11 +57,11 @@ public:
   virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 
   //! Return object's magnitude
-  virtual float get_mag(const Navigator *nav) const {return -10;}
+  virtual float get_mag(const Navigator *nav) const {return 99;}
   
   //! Return a priority value which is used to discriminate objects by priority
   //! As for magnitudes, the lower is the higher priority 
-  virtual float getSelectPriority(const Navigator *nav) const {return -10;}
+  virtual float getSelectPriority(const Navigator *nav) const {return 99;}
 
   //! Get a color used to display info about the object
   virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}

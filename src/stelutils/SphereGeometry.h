@@ -27,8 +27,6 @@ public:
 	void addHalfSpace(const HalfSpace& h) {halfSpaces.push_back(h);}
 	//! Return true if the vector is inside the convex
 	bool inside(const Vec3d& v) const;
-	//! Return true if the vector is inside the convex, but don't check for half space with index idx
-	bool insideButOne(const Vec3d& v, unsigned int idx) const;
 protected:
 	std::vector<HalfSpace> halfSpaces;
 };
@@ -44,8 +42,6 @@ public:
 	//! Return true if the two convex intersect
 	bool intersect(const ConvexPolygon& c) const;
 	bool intersect(const Vec3d& v) const {return inside(v);}
-	
-	void getBoundingLonLat(double result[4]) const;
 	
 private:
 	std::vector<Vec3d> vertex;
