@@ -36,16 +36,6 @@ bool Convex::inside(const Vec3d& v) const
 	return true;
 }
 
-//! Return true if the vector is inside the convex, but don't check for half space with index idx
-bool Convex::insideButOne(const Vec3d& v, unsigned int idx) const
-{
-	for (unsigned int i=0;i<halfSpaces.size();++i)
-	{
-		if (i!=idx && !halfSpaces[i].inside(v))
-			return false;
-	}
-	return true;
-}
 
 // Create a ConvexPolygon from 4 vectors
 ConvexPolygon::ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3) : 
@@ -75,37 +65,4 @@ bool ConvexPolygon::intersect(const ConvexPolygon& c) const
 			return false;
 	}
 	return true;
-}
-
-void ConvexPolygon::getBoundingLonLat(double result[4]) const
-{
-	assert(vertex.size()==4);
-	const Vec3d oneZ(Vec3d(0,0,1));
-	
-	// Get the bounding meridian and parallel for the viewport
-	bool insideUp = inside(Vec3d(0,0,1));
-	bool insideDown = inside(Vec3d(0,0,-1));
-
-
-	result[2] = MY_MIN(MY_MIN(vertex[0].latitude(), vertex[1].latitude()), MY_MIN(vertex[2].latitude(), vertex[3].latitude()));
-	result[3] = MY_MAX(MY_MAX(vertex[0].latitude(), vertex[1].latitude()), MY_MAX(vertex[2].latitude(), vertex[3].latitude()));
-	if (result[2]<-M_PI/2)
-		result[2] = -M_PI/2;
-	if (result[3]>M_PI/2)
-		result[3] = M_PI/2;
-
-	if (insideUp) result[3] = M_PI/2;
-	if (insideDown) result[2] = -M_PI/2;
-
-	// Look for long bounds
-	if (insideUp || insideDown)
-	{
-		result[0] = 0.;
-		result[1] = 2.*M_PI;
-	}
-	else
-	{
-		result[0] = MY_MIN(MY_MIN(vertex[0].longitude(), vertex[1].longitude()), MY_MIN(vertex[2].longitude(), vertex[3].longitude()));
-		result[1] = MY_MAX(MY_MAX(vertex[0].longitude(), vertex[1].longitude()), MY_MAX(vertex[2].longitude(), vertex[3].longitude()));
-	}
 }
