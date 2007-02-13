@@ -223,7 +223,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
-	double precision = 5;
+	double precision = 50;
 	const Vec2d deltaP(p1-p0);
 	Vec2d p = p0;
 	const Vec2d dPix1 = deltaP/(deltaP.length());	// 1 pixel step
