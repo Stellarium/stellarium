@@ -215,8 +215,9 @@ static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, doubl
 }
 
 
-//! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*stepMas
-//! For each value of k*stepMas, the result is then sorted ordered according to the value of func2(p)
+//! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*step
+//! For each value of k*step, the result is then sorted ordered according to the value of func2(p)
+//! @return a map associating all the values of k*step and their associated func2(p)
 static void getPslow(map<int, set<double> > & result, const Projector* prj, 
 	const Vec2d& p0, const Vec2d& p1, double step, 
 	double (*func)(const Projector* prj, const Vec2d& p),
@@ -234,25 +235,25 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	double u=0.;
 	do
 	{	
-		if (funcp<funcpDpix)
+		if (funcp<funcpDpix) // func(p) increases over the segment [p0 p1]
 		{
 			// If targets are included inside the range, add them
-			const double r1 = step*(std::floor(funcp/step));
-			const double r2 = step*(std::ceil(funcpDpix/step));
-			
-			for (double v=r1;v<r2;v+=step)
-				if (funcp<=v && funcpDpix>v)
-					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+			double v = step*(std::ceil(funcp/step));
+			while (v<=funcpDpix)
+			{
+				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+				v+=step;
+			}
 		}
-		else
+		else // func(p) descreases over the segment [p0 p1]
 		{
 			// If targets are included inside the range, add them
-			const double r1 = step*(std::ceil(funcp/step));
-			const double r2 = step*(std::floor(funcpDpix/step));
-			
-			for (double v=r2;v<r1;v+=step)
-				if (funcp>=v && funcpDpix<v)
-					result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+			double v = step*(std::floor(funcp/step));
+			while(v>=funcpDpix)
+			{
+				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+				v-=step;
+			}
 		}
 		
 		precision = step/ (fabs(funcpDpix-funcp)/precision) * 0.5;
@@ -267,7 +268,7 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 		funcp = funcpDpix;
 		funcpDpix = func(prj,p);
 	}
-	while(u<deltaP.length());
+	while(u<=deltaP.length());
 }
 
 // Step sizes in arcsec
