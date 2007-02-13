@@ -40,6 +40,16 @@ CFLAGS="$CFLAGS $FT2_CFLAGS"
 CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
 LIBS="$LIBS $FT2_LIBS"
 
+# Check for GSL
+#AC_CHECK_LIB(m,main)
+#AC_CHECK_LIB(gslcblas,main)
+#AC_CHECK_LIB(gsl,main)
+#GSL_CFLAGS="`gsl-config --cflags`"
+#GSL_LIBS="`gsl-config --libs`"
+#CFLAGS="$CFLAGS $GSL_CFLAGS"
+#CXXFLAGS="$CXXFLAGS $GSL_CFLAGS"
+#LIBS="$LIBS $GSL_LIBS"
+
 # Compilation with STLPort
 #AM_PATH_STLPORT
 
