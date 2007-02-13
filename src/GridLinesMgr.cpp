@@ -1,5 +1,6 @@
 
 #include <set>
+
 #include "GridLinesMgr.hpp"
 
 #include "StelApp.hpp"
@@ -198,7 +199,7 @@ static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double 
 //! Beginning means that the direction of increasing longitude goes inside the viewport 
 static bool isParallelEntering(const Projector* prj, double lon, double lat)
 {
-	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.001*prj->getFov(), lat));
+	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.0001*prj->getFov(), lat));
 }
 
 //! Check if the given point from the viewport side is the beginning of a meridian or not
@@ -223,52 +224,60 @@ static void getPslow(map<int, set<double> > & result, const Projector* prj,
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
 {
-	double precision = 50;
+	double precision = 0.1;
 	const Vec2d deltaP(p1-p0);
 	Vec2d p = p0;
-	const Vec2d dPix1 = deltaP/(deltaP.length());	// 1 pixel step
+	const double umax = deltaP.length();
+	const Vec2d dPix1 = deltaP/umax;	// 1 pixel step
 	double funcp, funcpDpix;
 	
 	funcp = func(prj, p);
 	funcpDpix = func(prj, p+dPix1*precision);
 		
 	double u=0.;
+	bool lastLoop=false;
+	bool stop;
 	do
-	{	
-		if (funcp<funcpDpix) // func(p) increases over the segment [p0 p1]
+	{
+		stop = lastLoop;
+		if (funcp<funcpDpix) // func(p) increases over the segment [p p+dPix]
 		{
 			// If targets are included inside the range, add them
 			double v = step*(std::ceil(funcp/step));
 			while (v<=funcpDpix)
 			{
-				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*precision*(funcpDpix-v)/(funcpDpix-funcp)));
 				v+=step;
 			}
 		}
-		else // func(p) descreases over the segment [p0 p1]
+		else // func(p) descreases over the segment [p p+dPix]
 		{
 			// If targets are included inside the range, add them
 			double v = step*(std::floor(funcp/step));
 			while(v>=funcpDpix)
 			{
-				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*(precision*0.5)));
+				result[(int)(v*RADIAN_MAS)].insert(func2(prj, p-dPix1*precision*(v-funcpDpix)/(funcp-funcpDpix)));
 				v-=step;
 			}
 		}
 		
-		precision = step/ (fabs(funcpDpix-funcp)/precision) * 0.5;
-		if (precision>2)
+		precision = step/(std::fabs(funcpDpix-funcp)/precision);
+		if (precision>2 || funcpDpix-funcp==0.)
 			precision = 2.;
-		else if (precision<0.1)
-		{
-			precision = 0.1;
-		}
+		else if (precision<0.5)
+			precision = 0.5;
 		u+=precision;
+		if (u>umax)
+		{
+			precision-=u-umax;
+			u=umax;
+			lastLoop = true;
+		}
 		p+=dPix1*precision;
 		funcp = funcpDpix;
 		funcpDpix = func(prj,p);
 	}
-	while(u<=deltaP.length());
+	while(stop==false);
 }
 
 // Step sizes in arcsec
@@ -467,11 +476,11 @@ void SkyGrid::draw(const Projector* prj) const
 			}
 		}
 	
-		// Debug, draw a cross for all the points
-//		for (map<double, Vec2d>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
+//		// Debug, draw a cross for all the points
+//		for (set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 //		{
 //			//const double lon180 = k->first>M_PI? (double)iter->first/RADIAN_MAS-M_PI : (double)iter->first/RADIAN_MAS;
-//			if (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first))
+//			if (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
 //			{
 //				glColor3f(1,1,0);
 //			}
@@ -480,7 +489,7 @@ void SkyGrid::draw(const Projector* prj) const
 //				glColor3f(0,0,1);
 //			}
 //			Vec3d vv, win;
-//			spheToRectLat1802((double)iter->first/RADIAN_MAS, k->first, vv);
+//			spheToRectLat1802((double)iter->first/RADIAN_MAS, *k, vv);
 //			prj->project(vv, win);
 //			glBegin(GL_LINES);
 //				glVertex2f(win[0]-30,win[1]);
