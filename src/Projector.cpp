@@ -275,28 +275,25 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 /*************************************************************************
  Project the vector v from the current frame into the viewport
 *************************************************************************/
-bool Projector::project(const Vec3d &v, Vec3d &win) const
-{
-	//	win=v;
-	//	win.transfo4d(modelViewMatrix);
-
-	// really important speedup:
-	win[0] = modelViewMatrix.r[0]*v[0] + modelViewMatrix.r[4]*v[1]
-	         + modelViewMatrix.r[8]*v[2] + modelViewMatrix.r[12];
-	win[1] = modelViewMatrix.r[1]*v[0] + modelViewMatrix.r[5]*v[1]
-	         + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
-	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
-	         + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-	const bool rval = projectForward(win);
-	  // very important: even when the projected point comes from an
-	  // invisible region of the sky (rval=false), we must finish
-	  // reprojecting, so that OpenGl can successfully eliminate
-	  // polygons by culling.
-	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
-	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
-	win[2] = (win[2] - zNear) / (zNear - zFar);
-	return rval;
-}
+// bool Projector::project(const Vec3d &v, Vec3d &win) const
+// {
+// 	// really important speedup:
+// 	win[0] = modelViewMatrix.r[0]*v[0] + modelViewMatrix.r[4]*v[1]
+// 	         + modelViewMatrix.r[8]*v[2] + modelViewMatrix.r[12];
+// 	win[1] = modelViewMatrix.r[1]*v[0] + modelViewMatrix.r[5]*v[1]
+// 	         + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
+// 	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
+// 	         + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
+// 	const bool rval = projectForward(win);
+// 	  // very important: even when the projected point comes from an
+// 	  // invisible region of the sky (rval=false), we must finish
+// 	  // reprojecting, so that OpenGl can successfully eliminate
+// 	  // polygons by culling.
+// 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
+// 	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
+// 	win[2] = (win[2] - zNear) / (zNear - zFar);
+// 	return rval;
+// }
 
 /*************************************************************************
  Project the vector v from the viewport frame into the current frame 

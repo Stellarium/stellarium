@@ -39,6 +39,7 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	if (!splash_tex.empty()) splash = &StelApp::getInstance().getTextureManager().createTexture(splash_tex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
+	timeCounter = SDL_GetTicks();
 }
 	
 LoadingBar::~LoadingBar()

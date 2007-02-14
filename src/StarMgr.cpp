@@ -1105,8 +1105,8 @@ StarMgr::~StarMgr(void) {
   }
   zone_arrays.clear();
 
-  if (starTexture) {delete starTexture;starTexture = 0;}
-  if (hip_index) delete hip_index;
+  if (starTexture) {delete starTexture;starTexture = NULL;}
+  if (hip_index) delete[] hip_index;
   
   delete texPointer;
 }
@@ -1486,7 +1486,7 @@ int StarMgr::getMaxSearchLevel(const ToneReproducer *eye,
         std::exp(-0.92103f*(mag_min + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
     if (rmag<1.2f) {
       const float cmag = rmag*rmag/1.44f;
-      if (rmag < 0.1f*star_scale ||
+      if (rmag < 0.1f*starScale ||
           cmag * starMagScale < 0.1) break;
     }
     rval = it->first;
