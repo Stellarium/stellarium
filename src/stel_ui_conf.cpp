@@ -721,7 +721,7 @@ void StelUI::gotoSearchedObject(void)
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(star_edit->getText()))
 	{
 		star_edit->clearText();
-		mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+		mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
 		mvmgr->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
 		  // johannes
