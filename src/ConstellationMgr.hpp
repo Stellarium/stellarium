@@ -52,11 +52,11 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
-	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -139,15 +139,15 @@ private:
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation);
 	//! Define which constellation is selected and return brightest star 
-	StelObject setSelectedStar(const string& abbreviation);
+	boost::intrusive_ptr<StelObject> setSelectedStar(const string& abbreviation);
 	//! Define which constellation is selected from a star number
-	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
+	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	//! Remove all selected constellations
-	void deselect() { setSelected(StelObject(NULL)); }
-	StelObject getSelected(void) const;	
+	void deselect() { setSelected(NULL); }
+	StelObject* getSelected(void) const;	
 	vector<Constellation*> selected; // More than one can be selected at a time
 	
-    Constellation* is_star_in(const StelObject &s) const;
+    Constellation* is_star_in(const StelObject *s) const;
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
 	double fontSize;

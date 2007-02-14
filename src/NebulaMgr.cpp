@@ -161,10 +161,10 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_NEBULA)
+	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_NEBULA)
 	{
-		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.getObsJ2000Pos(nav);
+		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		
 		// Compute 2D pos and return if outside screen
@@ -176,7 +176,7 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
+		float size = obj->getOnScreenSize(prj, nav);
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
@@ -198,7 +198,7 @@ void NebulaMgr::setColorScheme(const InitParser& conf, const std::string& sectio
 }
 
 // search by name
-StelObject NebulaMgr::search(const string& name)
+StelObject* NebulaMgr::search(const string& name)
 {
 
 	string uname = name;
@@ -252,7 +252,7 @@ StelObject NebulaMgr::search(const string& name)
 
 
 // Look for a nebulae by XYZ coords
-StelObject NebulaMgr::search(Vec3f Pos)
+StelObject* NebulaMgr::search(Vec3f Pos)
 {
 	Pos.normalize();
 	vector<Nebula *>::iterator iter;
@@ -274,9 +274,9 @@ StelObject NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObject> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<boost::intrusive_ptr<StelObject> > NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
 {
-	vector<StelObject> result;
+	vector<boost::intrusive_ptr<StelObject> > result;
 	if (!getFlagShow())
 		return result;
 		
@@ -296,7 +296,7 @@ vector<StelObject> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 			// NOTE: non-labeled nebulas are not returned!
 			// Otherwise cursor select gets invisible nebulas - Rob
 			//if((*iter)->getNameI18n() != L"") 
-				result.push_back(*iter);
+				result.push_back(boost::intrusive_ptr<StelObject>(*iter));
 		}
 		iter++;
 	}
@@ -549,7 +549,7 @@ void NebulaMgr::updateI18n()
 
 
 //! Return the matching Nebula object's pointer if exists or NULL
-StelObject NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
+boost::intrusive_ptr<StelObject> NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);

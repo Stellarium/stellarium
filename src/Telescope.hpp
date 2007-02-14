@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_H_
 #define _TELESCOPE_H_
 
-#include "StelObjectBase.hpp"
+#include "StelObject.hpp"
 #include "Navigator.hpp"
 #if defined (_MSC_VER)
 #include <winsock2.h>
@@ -28,7 +28,7 @@
 
 long long int GetNow(void);
 
-class Telescope : public StelObjectBase {
+class Telescope : public StelObject {
 public:
   static Telescope *create(const string &url);
   virtual ~Telescope(void) {}

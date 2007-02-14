@@ -475,7 +475,7 @@ void SkyGrid::draw(const Projector* prj) const
 				++k;
 			}
 		}
-	
+
 //		// Debug, draw a cross for all the points
 //		for (set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 //		{

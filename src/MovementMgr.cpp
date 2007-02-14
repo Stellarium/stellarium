@@ -165,7 +165,7 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 		{
 			if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
 			{
-				moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),auto_move_duration);
+				moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()),auto_move_duration);
 				setFlagTracking(true);
 			}
 		}
@@ -346,7 +346,7 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()), move_duration, false, 1);
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()), move_duration, false, 1);
 		manual_move_duration = move_duration;
 	}
 	else
@@ -363,13 +363,13 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	}
 	else
 	{
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_satellites_fov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_satellites_fov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()*0.9>satfov)
 			zoomTo(satfov, move_duration);
 		else
 		{
-			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_close_fov(core->getNavigation());
+			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_close_fov(core->getNavigation());
 			if (proj->getFov()>closefov)
 				zoomTo(closefov, move_duration);
 		}
@@ -387,7 +387,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_satellites_fov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_satellites_fov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
@@ -397,7 +397,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_parent_satellites_fov((core->getNavigation()));
+		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_parent_satellites_fov((core->getNavigation()));
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
 			zoomTo(satfov, move_duration);
@@ -420,7 +420,7 @@ void MovementMgr::setFlagTracking(bool b)
 	}
 	else
 	{
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()), getAutomoveDuration());
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()), getAutomoveDuration());
 		flagTracking=true;
 	}
 }
@@ -462,7 +462,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		if( zooming_mode == 1 && StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation());
+			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation());
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -554,7 +554,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getFlagHasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquVision(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()));
+			nav->setEquVision(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()));
 		}
 		else
 		{

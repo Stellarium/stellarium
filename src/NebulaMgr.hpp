@@ -53,10 +53,10 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching Nebula object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
-	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -107,10 +107,10 @@ public:
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getMaxMagHints(void) const {return maxMagHints;}
 
-	StelObject search(const string& name);  // search by name M83, NGC 1123, IC 1234
+	StelObject* search(const string& name);  // search by name M83, NGC 1123, IC 1234
 		
 private:
-	StelObject search(Vec3f Pos);    // Search the Nebulae by position	
+	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const Projector* prj, const Navigator * nav);

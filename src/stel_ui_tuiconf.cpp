@@ -76,8 +76,8 @@ void StelUI::draw_gravity_ui(void)
 
 	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
-	    wstring info = StelApp::getInstance().getStelObjectMgr().getSelectedObject().getShortInfoString(core->getNavigation());
-		glColor3fv(StelApp::getInstance().getStelObjectMgr().getSelectedObject().getInfoColor());
+	    wstring info = StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getShortInfoString(core->getNavigation());
+		glColor3fv(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getInfoColor());
 		core->getProjection()->drawText(tuiFont, x + shift - 38, y + 38, info, 0, 0, 0, false);
 	}
 }

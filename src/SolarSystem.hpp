@@ -56,10 +56,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Return a stl vector containing the planets located inside the limitFov circle around position v
-	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching planet pointer if exists or NULL
 	//! @param planetNameI18n The case sensistive translated planet name
-	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -133,7 +133,7 @@ public:
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 
 	// Search if any Planet is close to position given in earth equatorial position.
-	StelObject search(Vec3d, const Navigator * nav, const Projector * prj) const;
+	StelObject* search(Vec3d, const Navigator * nav, const Projector * prj) const;
 
 	//! Return the matching planet pointer if exists or NULL
 	Planet* searchByEnglishName(string planetEnglishName) const;
@@ -169,11 +169,11 @@ private:
 	//! @param englishName The planet name or "" to select no planet
 	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
 	//! Set selected object from its pointer
-	void setSelected(const StelObject &obj);	
+	void setSelected(StelObject* obj);	
 	//! Get selected object's pointer
-	StelObject getSelected(void) const {return selected;}	
+	StelObject* getSelected(void) const {return selected;}	
 	//! The currently selected planet
-	StelObject selected;
+	StelObject* selected;
 
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...

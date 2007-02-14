@@ -122,22 +122,22 @@ void ConstellationMgr::selectedObjectChangeCallBack()
 {
 	if (!StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
 	{
-		setSelected(StelObject());
+		setSelected(NULL);
 		return;
 	}
 	
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_CONSTELLATION)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_CONSTELLATION)
 	{
-		const Constellation* c = (const Constellation*)&(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
 	}
-	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
+	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_STAR)
 	{
-		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get());
 	}
 	else
 	{
-		setSelected(StelObject());
+		setSelected(NULL);
 	}
 }
 
@@ -263,9 +263,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			int texSizeX, texSizeY;
 			cons->art_tex->getDimensions(texSizeX, texSizeY);
 
-			Vec3f s1 = hipStarMgr->searchHP(hp1).getObsJ2000Pos(0);
-			Vec3f s2 = hipStarMgr->searchHP(hp2).getObsJ2000Pos(0);
-			Vec3f s3 = hipStarMgr->searchHP(hp3).getObsJ2000Pos(0);
+			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos(0);
+			Vec3f s2 = hipStarMgr->searchHP(hp2)->getObsJ2000Pos(0);
+			Vec3f s3 = hipStarMgr->searchHP(hp3)->getObsJ2000Pos(0);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -352,7 +352,7 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	}
 }
 
-Constellation *ConstellationMgr::is_star_in(const StelObject &s) const
+Constellation *ConstellationMgr::is_star_in(const StelObject* s) const
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -381,10 +381,9 @@ Constellation* ConstellationMgr::findFromAbbreviation(const string & abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-vector<StelObject> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<boost::intrusive_ptr<StelObject> > ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
 {
-	vector<StelObject> result;
-	return result;
+	return vector<boost::intrusive_ptr<StelObject> >(0);
 }
 
 
@@ -546,7 +545,7 @@ void ConstellationMgr::setFlagNames(bool b)
 	}
 }
 
-StelObject ConstellationMgr::getSelected(void) const {
+StelObject* ConstellationMgr::getSelected(void) const {
 	return *selected.begin();  // TODO return all or just remove this method
 }
 
@@ -561,7 +560,7 @@ void ConstellationMgr::setSelected(const string& abbreviation)
 }
 
 //! Define which constellation is selected and return brightest star 
-StelObject ConstellationMgr::setSelectedStar(const string& abbreviation) 
+boost::intrusive_ptr<StelObject> ConstellationMgr::setSelectedStar(const string& abbreviation) 
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
 
@@ -746,7 +745,7 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 
 //! Return the matching constellation object's pointer if exists or NULL
 //! @param nameI18n The case sensistive constellation name
-StelObject ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
+boost::intrusive_ptr<StelObject> ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);

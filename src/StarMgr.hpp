@@ -60,12 +60,12 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Return a stl vector containing the stars located inside the lim_fov circle around position v
-	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	
 	//! Return the matching Stars object's pointer if exists or NULL
     //! @param nameI18n The case sensistive star common name or HP
     //! catalog name (format can be HP1234 or HP 1234) or sci name
-	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -85,9 +85,9 @@ public:
     int load_common_names(const string& commonNameFile);
     void load_sci_names(const string& sciNameFile);
 
-    StelObject search(Vec3d Pos) const;     // Search the star by position
-    StelObject search(const string&) const; // Search the star by string (incl catalog prefix)
-    StelObject searchHP(int) const;         // Search the star by HP number
+    boost::intrusive_ptr<StelObject> search(Vec3d Pos) const;     // Search the star by position
+    boost::intrusive_ptr<StelObject> search(const string&) const; // Search the star by string (incl catalog prefix)
+    boost::intrusive_ptr<StelObject> searchHP(int) const;         // Search the star by HP number
     
     void setLabelColor(const Vec3f& c) {label_color = c;}
     Vec3f getLabelColor(void) const {return label_color;}

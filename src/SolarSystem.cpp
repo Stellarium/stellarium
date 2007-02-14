@@ -56,7 +56,7 @@ void SolarSystem::setFontSize(float newFontSize)
 SolarSystem::~SolarSystem()
 {
 	  // release selected:
-	selected = StelObject();
+	selected = NULL;
 	for(vector<Planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
 		if (*iter) delete *iter;
@@ -104,10 +104,11 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 
 void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_PLANET)
+	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() &&
+		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_PLANET)
 	{
-		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.getObsJ2000Pos(nav);
+		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		prj->setCurrentFrame(Projector::FRAME_J2000);
 		// Compute 2D pos and return if outside screen
@@ -115,7 +116,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 	
 		glColor3f(1.0f,0.3f,0.3f);
 	
-		float size = obj.getStelObjectBase()->getOnScreenSize(prj, nav);
+		float size = obj->getOnScreenSize(prj, nav);
 		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
@@ -592,7 +593,7 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 	return NULL;
 }
 
-StelObject SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
+boost::intrusive_ptr<StelObject> SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 {
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
@@ -604,8 +605,7 @@ StelObject SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance
-StelObject SolarSystem::search(Vec3d pos, const Navigator * nav,
-                            const Projector * prj) const
+StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * prj) const
 {
 	pos.normalize();
 	Planet * closest = NULL;
@@ -635,12 +635,12 @@ StelObject SolarSystem::search(Vec3d pos, const Navigator * nav,
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<StelObject> SolarSystem::searchAround(const Vec3d& vv,
+vector<boost::intrusive_ptr<StelObject> > SolarSystem::searchAround(const Vec3d& vv,
                                               double limitFov,
                                               const Navigator * nav,
                                               const Projector * prj) const
 {
-	vector<StelObject> result;
+	vector<boost::intrusive_ptr<StelObject> > result;
 	if (!getFlagPlanets())
 		return result;
 		
@@ -767,7 +767,7 @@ bool SolarSystem::getFlagHints(void) const
 void SolarSystem::setFlagOrbits(bool b)
 {
 	flagOrbits = b;
-	if (!b || !selected || selected == StelObject(sun))
+	if (!b || !selected || selected == sun)
 	{
 		vector<Planet*>::iterator iter;
 		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
@@ -790,10 +790,12 @@ void SolarSystem::setFlagOrbits(bool b)
 }
 
 
-void SolarSystem::setSelected(const StelObject &obj)
+void SolarSystem::setSelected(StelObject* obj)
 {
-    if (obj.getType() == STEL_OBJECT_PLANET) selected = obj;
-    else selected = StelObject();
+    if (obj && obj->getType() == STEL_OBJECT_PLANET)
+    	selected = obj;
+    else
+    	selected = NULL;
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
@@ -950,9 +952,9 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 
 void SolarSystem::selectedObjectChangeCallBack()
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_PLANET)
+	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_PLANET)
 	{
-		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get());
 //			// potentially record this action
 //			if (!recordActionCallback.empty())
 //				recordActionCallback("select planet " + selected_object.getEnglishName());
