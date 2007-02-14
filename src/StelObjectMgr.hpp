@@ -21,6 +21,7 @@
 #define STELOBJECTMGR_HPP_
 
 #include <vector>
+#include <boost/intrusive_ptr.hpp>
 #include "vecmath.h"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -67,7 +68,6 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 
-	
 	//! Return whether an object is currently selected
 	bool getFlagHasSelected(void) {return selectedObject;}
 
@@ -75,14 +75,10 @@ public:
     void unSelect(void);
 
 	//! Select given object
-	bool setSelectedObject(const StelObject &obj);
-
-	//! Find and select an object based on selection type and standard name or number
-	//! @return true if an object was selected
-	//bool setSelectedObject(const string &type, const string &id);
+	bool setSelectedObject(const boost::intrusive_ptr<StelObject> obj);
 
 	//! Return the currently selected object
-	const StelObject& getSelectedObject() const {return selectedObject;}
+	const boost::intrusive_ptr<StelObject> getSelectedObject() const {return selectedObject;}
 
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
@@ -90,18 +86,18 @@ public:
 private:
 	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
-	StelObject selectedObject;			// The selected object in stellarium
+	boost::intrusive_ptr<StelObject> selectedObject;			// The selected object in stellarium
 	
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
 	//! Find any kind of object by its translated name
-	StelObject searchByNameI18n(const wstring &name) const;
+	boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring &name) const;
 
 	//! Find in a "clever" way an object from its equatorial position
-	StelObject cleverFind(const StelCore* core, const Vec3d& pos) const;
+	boost::intrusive_ptr<StelObject> cleverFind(const StelCore* core, const Vec3d& pos) const;
 	
 	//! Find in a "clever" way an object from its screen position
-	StelObject cleverFind(const StelCore* core, int x, int y) const;	
+	boost::intrusive_ptr<StelObject> cleverFind(const StelCore* core, int x, int y) const;	
 };
 
 #endif /*SELECTIONMGR_HPP_*/

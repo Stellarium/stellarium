@@ -30,7 +30,6 @@
 #include "Projector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
-#include "StelObjectBase.hpp"
 #include "STexture.hpp"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "Navigator.hpp"
@@ -229,7 +228,7 @@ struct Star3 {  // 6 byte
   unsigned int b_v:7;
   unsigned int mag:5;
   enum {max_pos_val=((1<<17)-1)};
-  StelObject createStelObject(const SpecialZoneArray<Star3> *a,
+  boost::intrusive_ptr<StelObject> createStelObject(const SpecialZoneArray<Star3> *a,
                               const SpecialZoneData<Star3> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double) const {
     Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
@@ -261,7 +260,7 @@ struct Star2 {  // 10 byte
   unsigned int b_v:7;
   unsigned int mag:5;
   enum {max_pos_val=((1<<19)-1)};
-  StelObject createStelObject(const SpecialZoneArray<Star2> *a,
+  boost::intrusive_ptr<StelObject> createStelObject(const SpecialZoneArray<Star2> *a,
                               const SpecialZoneData<Star2> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
     Vec3d pos = z->center
@@ -302,7 +301,7 @@ struct Star1 { // 28 byte
   Uint16 sp_int;               // 14 bits needed
   Int32 dx0,dx1,plx;
   enum {max_pos_val=0x7FFFFFFF};
-  StelObject createStelObject(const SpecialZoneArray<Star1> *a,
+  boost::intrusive_ptr<StelObject> createStelObject(const SpecialZoneArray<Star1> *a,
                               const SpecialZoneData<Star1> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
     Vec3d pos = z->center
@@ -354,7 +353,7 @@ void Star1::repack(void) {
 
 template <class Star>
 struct SpecialZoneData : public ZoneData {
-  StelObject createStelObject(const Star *s) const
+  boost::intrusive_ptr<StelObject> createStelObject(const Star *s) const
     {return s->createStelObject(*this);}
   Star *getStars(void) const {return reinterpret_cast<Star*>(stars);}
      // array of stars in this zone
@@ -367,7 +366,7 @@ public:
   int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
-                            vector<StelObject> &result) = 0;
+                            vector<boost::intrusive_ptr<StelObject> > &result) = 0;
   virtual void draw(int index,bool is_inside,bool draw_point,
                     const float *rmag_table, Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
@@ -412,7 +411,7 @@ protected:
 private:
   void scaleAxis(void);
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
-                    vector<StelObject> &result);
+                    vector<boost::intrusive_ptr<StelObject> > &result);
   void draw(int index,bool is_inside,bool draw_point,
             const float *rmag_table, Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
@@ -632,7 +631,7 @@ const Vec3f color_table[128] = {
 
 
 
-class StarWrapperBase : public StelObjectBase {
+class StarWrapperBase : public StelObject {
 protected:
   StarWrapperBase(void) : ref_count(0) {}
   virtual ~StarWrapperBase(void) {}
@@ -880,19 +879,19 @@ public:
 };
 
 
-StelObject Star1::createStelObject(const SpecialZoneArray<Star1> *a,
+boost::intrusive_ptr<StelObject> Star1::createStelObject(const SpecialZoneArray<Star1> *a,
                                    const SpecialZoneData<Star1> *z) const {
-  return new StarWrapper1(a,z,this);
+  return boost::intrusive_ptr<StelObject>(new StarWrapper1(a,z,this));
 }
 
-StelObject Star2::createStelObject(const SpecialZoneArray<Star2> *a,
+boost::intrusive_ptr<StelObject> Star2::createStelObject(const SpecialZoneArray<Star2> *a,
                                    const SpecialZoneData<Star2> *z) const {
-  return new StarWrapper2(a,z,this);
+  return boost::intrusive_ptr<StelObject>(new StarWrapper2(a,z,this));
 }
 
-StelObject Star3::createStelObject(const SpecialZoneArray<Star3> *a,
+boost::intrusive_ptr<StelObject> Star3::createStelObject(const SpecialZoneArray<Star3> *a,
                                    const SpecialZoneData<Star3> *z) const {
-  return new StarWrapper3(a,z,this);
+  return boost::intrusive_ptr<StelObject>(new StarWrapper3(a,z,this));
 }
 
 
@@ -1169,15 +1168,16 @@ void StarMgr::setGrid(void) {
 
 void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject().getType()==STEL_OBJECT_STAR)
+	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && 
+		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_STAR)
 	{
-		const StelObject& obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-		Vec3d pos=obj.getObsJ2000Pos(nav);
+		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
-		glColor3fv(obj.getInfoColor());
+		glColor3fv(obj->getInfoColor());
 		float diameter = 26.f;
 		texPointer->bind();
         glEnable(GL_TEXTURE_2D);
@@ -1599,16 +1599,16 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
 
 
 // Look for a star by XYZ coords
-StelObject StarMgr::search(Vec3d pos) const {
+boost::intrusive_ptr<StelObject> StarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
-  vector<StelObject> v = searchAround(pos,
+  vector<boost::intrusive_ptr<StelObject> > v = searchAround(pos,
                                       0.8, // just an arbitrary number
                                       NULL, NULL);
-  StelObject nearest;
+  boost::intrusive_ptr<StelObject> nearest;
   double cos_angle_nearest = -10.0;
-  for (vector<StelObject>::const_iterator it(v.begin());it!=v.end();it++) {
-    const double c = it->getObsJ2000Pos(0)*pos;
+  for (vector<boost::intrusive_ptr<StelObject> >::const_iterator it(v.begin());it!=v.end();it++) {
+    const double c = (*it)->getObsJ2000Pos(0)*pos;
     if (c > cos_angle_nearest) {
       cos_angle_nearest = c;
       nearest = *it;
@@ -1619,11 +1619,11 @@ assert(0);
 
 // Return a stl vector containing the stars located
 // inside the lim_fov circle around position v
-vector<StelObject> StarMgr::searchAround(const Vec3d& vv,
+vector<boost::intrusive_ptr<StelObject> > StarMgr::searchAround(const Vec3d& vv,
                                             double lim_fov, // degrees
                                             const Navigator * nav,
                                             const Projector * prj) const {
-  vector<StelObject> result;
+  vector<boost::intrusive_ptr<StelObject> > result;
   if (!getFlagStars())
   	return result;
   	
@@ -1696,7 +1696,7 @@ vector<StelObject> StarMgr::searchAround(const Vec3d& vv,
 template<class Star>
 void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
                                           double cos_lim_fov,
-                                          vector<StelObject> &result) {
+                                          vector<boost::intrusive_ptr<StelObject> > &result) {
   const double movement_factor = (M_PI/180)*(0.0001/3600)
                            * ((current_JDay-d2000)/365.25)
                            / star_position_scale;
@@ -1727,7 +1727,7 @@ void StarMgr::updateI18n() {
 }
 
 
-StelObject StarMgr::search(const string& name) const
+boost::intrusive_ptr<StelObject> StarMgr::search(const string& name) const
 {
     const string catalogs("HP HD SAO");
 
@@ -1762,7 +1762,7 @@ StelObject StarMgr::search(const string& name) const
 }    
 
 // Search the star by HP number
-StelObject StarMgr::searchHP(int _HP) const {
+boost::intrusive_ptr<StelObject> StarMgr::searchHP(int _HP) const {
   if (0 < _HP && _HP <= NR_OF_HIP) {
     const Star1 *const s = hip_index[_HP].s;
     if (s) {
@@ -1771,10 +1771,10 @@ StelObject StarMgr::searchHP(int _HP) const {
       return s->createStelObject(a,z);
     }
   }
-  return StelObject();
+  return boost::intrusive_ptr<StelObject>();
 }
 
-StelObject StarMgr::searchByNameI18n(const wstring& nameI18n) const
+boost::intrusive_ptr<StelObject> StarMgr::searchByNameI18n(const wstring& nameI18n) const
 {
     wstring objw = nameI18n;
     transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
@@ -1821,7 +1821,7 @@ StelObject StarMgr::searchByNameI18n(const wstring& nameI18n) const
     return searchHP(it->second);
   }
 
-  return StelObject();
+  return boost::intrusive_ptr<StelObject>();
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing

@@ -152,17 +152,14 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 		See http://svetlo.astro.cz/compute/lum.php
 
 2. Included source code
-	2.1 glpng PNG loader library for OpenGL v1.45 (10/07/00)
-		by Ben Wyatt ben (at) wyatt100.freeserve.co.uk
-		See section 10.2 for full license.
-	2.2 Iniparser library Copyright (c) 2000 by Nicolas Devillard.
-	2.3 The stellastro and stellplanet libraries are mainly subsets of the
+	2.1 Iniparser library Copyright (c) 2000 by Nicolas Devillard.
+	2.2 The stellastro and stellplanet libraries are mainly subsets of the
 		libnova library (GPL) by Liam Girdwood (liam (at) nova-ioe.org)
-	2.4 The orbit.cpp/h and solve.h files are directly borrowed from
+	2.3 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
-	2.5 Other pieces of code and ideas are from Celestia too (GPL license).
-    2.6 Callback library by Jess Jones, see section 10.4 for full license.
-    2.7 Several implementations of IMCCE theories for planet and satellite
+	2.4 Other pieces of code and ideas are from Celestia too (GPL license).
+    2.5 Callback library by Jess Jones, see section 10.4 for full license.
+    2.6 Several implementations of IMCCE theories for planet and satellite
         movement by Johannes Gajdosik (MIT-style license,
         see the corresponding files for the license text)
 

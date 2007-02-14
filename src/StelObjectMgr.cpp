@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "Projector.hpp"
 
-StelObjectMgr::StelObjectMgr() : selectedObject(NULL)
+StelObjectMgr::StelObjectMgr()
 {
 	object_pointer_visibility = true;
 }
@@ -32,7 +32,7 @@ StelObjectMgr::StelObjectMgr() : selectedObject(NULL)
 StelObjectMgr::~StelObjectMgr()
 {
 	// release the previous StelObject:
-	selectedObject = StelObject();
+	selectedObject = boost::intrusive_ptr<StelObject>();
 }
 		
 /*************************************************************************
@@ -44,9 +44,9 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 }
 
 
-StelObject StelObjectMgr::searchByNameI18n(const wstring &name) const
+boost::intrusive_ptr<StelObject> StelObjectMgr::searchByNameI18n(const wstring &name) const
 {
-	StelObject rval;
+	boost::intrusive_ptr<StelObject> rval;
 	std::vector<StelObjectModule*>::const_iterator iter;
 	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
 	{
@@ -63,7 +63,7 @@ StelObject StelObjectMgr::searchByNameI18n(const wstring &name) const
 bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 {
 	// Then look for another object
-	StelObject obj = searchByNameI18n(nameI18n);
+	boost::intrusive_ptr<StelObject> obj = searchByNameI18n(nameI18n);
 	if (!obj)
 		return false;
 	else
@@ -148,23 +148,23 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
 //! Find and select an object near given equatorial position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos)
 {
-	StelObject tempselect = cleverFind(core, pos);
+	boost::intrusive_ptr<StelObject> tempselect = cleverFind(core, pos);
 	return setSelectedObject(tempselect);
 }
 
 //! Find and select an object near given screen position
 bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y)
 {
-	StelObject tempselect = cleverFind(core, x, y);
+	boost::intrusive_ptr<StelObject> tempselect = cleverFind(core, x, y);
 	return setSelectedObject(tempselect);
 }
 
 // Find an object in a "clever" way, v in J2000 frame
-StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
+boost::intrusive_ptr<StelObject> StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
-	StelObject sobj;
-	vector<StelObject> candidates;
-	vector<StelObject> temp;
+	boost::intrusive_ptr<StelObject> sobj;
+	vector<boost::intrusive_ptr<StelObject> > candidates;
+	vector<boost::intrusive_ptr<StelObject> > temp;
 
 	// Field of view for a 30 pixel diameter circle on screen
 	float fov_around = core->getProjection()->getFov()/MY_MIN(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
@@ -187,12 +187,12 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 	core->getProjection()->setCurrentFrame(Projector::FRAME_EARTH_EQU);
 	float best_object_value;
 	best_object_value = 100000.f;
-	vector<StelObject>::iterator iter = candidates.begin();
+	vector<boost::intrusive_ptr<StelObject> >::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		core->getProjection()->project((*iter).get_earth_equ_pos(core->getNavigation()), winpos);
+		core->getProjection()->project((*iter)->get_earth_equ_pos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
-		float priority =  (*iter).getSelectPriority(core->getNavigation());
+		float priority =  (*iter)->getSelectPriority(core->getNavigation());
 //		cerr << StelUtils::wstringToString((*iter).getShortInfoString(core->getNavigation())) << ": " << priority << " " << distance << endl;
 		if (distance + priority < best_object_value)
 		{
@@ -205,7 +205,7 @@ StelObject StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 	return sobj;
 }
 
-StelObject StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
+boost::intrusive_ptr<StelObject> StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
 	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
@@ -228,7 +228,7 @@ void StelObjectMgr::unSelect(void)
 
 //! Select passed object
 //! @return true if the object was selected (false if the same was already selected)
-bool StelObjectMgr::setSelectedObject(const StelObject &obj)
+bool StelObjectMgr::setSelectedObject(const boost::intrusive_ptr<StelObject> obj)
 {
 	// Unselect if it is the same object
 	if (obj && selectedObject==obj)

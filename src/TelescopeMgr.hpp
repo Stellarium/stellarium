@@ -53,8 +53,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
-	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 
 

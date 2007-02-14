@@ -20,7 +20,7 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
-#include "StelObjectBase.hpp"
+#include "StelObject.hpp"
 #include "stellarium.h"
 //#include "StelUtils.hpp"
 class SFont;
@@ -80,7 +80,7 @@ private:
 };
 
 
-class Planet : public StelObjectBase
+class Planet : public StelObject
 {
 public:
 	Planet(Planet *parent,

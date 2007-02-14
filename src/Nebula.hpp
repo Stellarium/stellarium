@@ -20,7 +20,7 @@
 #ifndef _NEBULA_H_
 #define _NEBULA_H_
 
-#include "StelObjectBase.hpp"
+#include "StelObject.hpp"
 #include "stellarium.h"
 #include "Projector.hpp"
 #include "Navigator.hpp"
@@ -47,7 +47,7 @@ PD Photographic plate defect
 */
 
 
-class Nebula : public StelObjectBase
+class Nebula : public StelObject
 {
 friend class NebulaMgr;
 public:
