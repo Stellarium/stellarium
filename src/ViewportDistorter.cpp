@@ -34,29 +34,31 @@ private:
   string getType(void) const {return "none";}
   void init(const InitParser &conf) {}
   void distort(void) const {}
-  bool distortXY(int &x,int &y) {return true;}
+  bool distortXY(int &x,int &y) const {return true;}
 };
 
 
 class ViewportDistorterFisheyeToSphericMirror : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
-  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH, Projector* prj);
+  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
+                                          Projector *prj);
   ~ViewportDistorterFisheyeToSphericMirror(void);
   string getType(void) const {return "fisheye_to_spheric_mirror";}
   void init(const InitParser &conf);
   void distort(void) const;
-  bool distortXY(int &x,int &y);
+  bool distortXY(int &x,int &y) const;
   const int screenW;
   const int screenH;
   unsigned int mirror_texture;
   int viewport_wh;
   float texture_used;
-  struct VertexData {
-    float xy[2];
+  struct TexturePoint {
+    float tex_xy[2];
   };
-  VertexData *trans_array;
-  int trans_width,trans_height;
+  TexturePoint *texture_point_array;
+  int max_x,max_y;
+  double step_x,step_y;
   SphericMirrorCalculator calc;
   GLuint display_list;
 };
@@ -64,7 +66,7 @@ private:
 
 ViewportDistorterFisheyeToSphericMirror
    ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH, Projector* prj)
-    :screenW(screenW),screenH(screenH),trans_array(0) {
+    :screenW(screenW),screenH(screenH),texture_point_array(0) {
 
   if (prj->getCurrentProjection() == "fisheye") {
     prj->setMaxFov(175.0);
@@ -92,10 +94,13 @@ ViewportDistorterFisheyeToSphericMirror
   display_list = glGenLists(1);
 }
 
-#define BLOCK_SIZE_X 8
-#define BLOCK_SIZE_Y 8
+//#define BLOCK_SIZE_X 8
+//#define BLOCK_SIZE_Y 8
 
-struct ColorData {
+#define BASE_LENGTH 16
+
+struct VertexPoint {
+  float ver_xy[2];
   float color[4];
   double h;
 };
@@ -103,44 +108,53 @@ struct ColorData {
 void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   calc.init(conf);
   const double gamma = conf.get_double("spheric_mirror","projector_gamma",0.45);
+
     // init transformation
-  trans_width = screenW / BLOCK_SIZE_X;
-  trans_height = screenH / BLOCK_SIZE_Y;
-  trans_array = new VertexData[(trans_width+1)*(trans_height+1)];
-  ColorData *color_array = new ColorData[(trans_width+1)*(trans_height+1)];
+  max_x = (int)trunc(0.5 + screenW/BASE_LENGTH);
+  step_x = screenW / (double)(max_x-0.5);
+  max_y = (int)trunc(screenH/(BASE_LENGTH*0.5*sqrt(3.0)));
+  step_y = screenH/ (double)max_y;
+  texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
+  VertexPoint *vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
   double max_h = 0;
-  for (int j=0;j<=trans_height;j++) {
-    for (int i=0;i<=trans_width;i++) {
-      VertexData &vertex(trans_array[(j*(trans_width+1)+i)]);
-      ColorData &color(color_array[(j*(trans_width+1)+i)]);
+  for (int j=0;j<=max_y;j++) {
+    for (int i=0;i<=max_x;i++) {
+      VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
+      TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
+      vertex_point.ver_xy[0] = ((i == 0) ? 0.0 :
+				              (i == max_x) ? screenW :
+				              (i-0.5*(j&1))*step_x);
+      vertex_point.ver_xy[1] = j*step_y;
       Vec3d v,v_x,v_y;
       bool rc = calc.retransform(
-                        (i-(trans_width>>1))/(double)trans_height,
-                        (j-(trans_height>>1))/(double)trans_height,
-                        v,v_x,v_y);
-      color.h = rc ? (v_x^v_y).length() : 0.0;
+                       (vertex_point.ver_xy[0]-0.5*screenW) / screenH,
+                       (vertex_point.ver_xy[1]-0.5*screenH) / screenH,
+                       v,v_x,v_y);
+      vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
       const double h = v[1];
       v[1] = v[2];
       v[2] = -h;
       const double oneoverh = 1./sqrt(v[0]*v[0]+v[1]*v[1]);
       const double a = 0.5 + atan(v[2]*oneoverh)/M_PI; // range: [0..1]
-      double f = a* 180.0/175.0; // MAX_FOV=175.0 for fisheye
+      double f = a * 180.0/175.0; // MAX_FOV=175.0 for fisheye
       f *= oneoverh;
       double x = (0.5 + v[0] * f);
       double y = (0.5 + v[1] * f);
-      if (x < 0.0) {x=0.0;color.h=0;} else if (x > 1.0) {x=1.0;color.h=0;}
-      if (y < 0.0) {y=0.0;color.h=0;} else if (y > 1.0) {y=1.0;color.h=0;}
-      vertex.xy[0] = x*texture_used;
-      vertex.xy[1] = y*texture_used;
-      if (color.h > max_h) max_h = color.h;
+      if (x < 0.0) {x=0.0;vertex_point.h=0;}
+      else if (x > 1.0) {x=1.0;vertex_point.h=0;}
+      if (y < 0.0) {y=0.0;vertex_point.h=0;}
+      else if (y > 1.0) {y=1.0;vertex_point.h=0;}
+      texture_point.tex_xy[0] = x*texture_used;
+      texture_point.tex_xy[1] = y*texture_used;
+      if (vertex_point.h > max_h) max_h = vertex_point.h;
     }
   }
-  for (int j=0;j<=trans_height;j++) {
-    for (int i=0;i<=trans_width;i++) {
-      ColorData &color(color_array[(j*(trans_width+1)+i)]);
-      color.color[0] = color.color[1] = color.color[2] =
-        (color.h<=0.0) ? 0.0 : exp(gamma*log(color.h/max_h));
-      color.color[3] = 1.0f;
+  for (int j=0;j<=max_y;j++) {
+    for (int i=0;i<=max_x;i++) {
+      VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
+      vertex_point.color[0] = vertex_point.color[1] = vertex_point.color[2] =
+        (vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
+      vertex_point.color[3] = 1.0f;
     }
   }
   glNewList(display_list,GL_COMPILE);
@@ -151,19 +165,26 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
   glPushMatrix();
   glLoadIdentity();
-  for (int j=0;j<trans_height;j++) {
+  for (int j=0;j<max_y;j++) {
+    const TexturePoint *t0 = texture_point_array + j*(max_x+1);
+    const TexturePoint *t1 = t0;
+    const VertexPoint *v0 = vertex_point_array + j*(max_x+1);
+    const VertexPoint *v1 = v0;
+    if (j&1) {
+      t1 += (max_x+1);
+      v1 += (max_x+1);
+    } else {
+      t0 += (max_x+1);
+      v0 += (max_x+1);
+    }
     glBegin(GL_QUAD_STRIP);
-    const VertexData *v0 = trans_array + j*(trans_width+1);
-    const VertexData *v1 = v0 + (trans_width+1);
-    const ColorData *c0 = color_array + j*(trans_width+1);
-    const ColorData *c1 = c0 + (trans_width+1);
-    for (int i=0;i<=trans_width;i++) {
-      glColor4fv(c0[i].color);
-      glTexCoord2fv(v0[i].xy);
-      glVertex3f(i*BLOCK_SIZE_X, j*BLOCK_SIZE_Y, 0.0);
-      glColor4fv(c1[i].color);
-      glTexCoord2fv(v1[i].xy);
-      glVertex3f(i*BLOCK_SIZE_X, (j+1)*BLOCK_SIZE_Y, 0.0);
+    for (int i=0;i<=max_x;i++,t0++,t1++,v0++,v1++) {
+      glColor4fv(v0->color);
+      glTexCoord2fv(t0->tex_xy);
+      glVertex2fv(v0->ver_xy);
+      glColor4fv(v1->color);
+      glTexCoord2fv(t1->tex_xy);
+      glVertex2fv(v1->ver_xy);
     }
     glEnd();
   }
@@ -172,42 +193,90 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   glMatrixMode(GL_MODELVIEW);
   glPopMatrix();
   glEndList();
-  delete[] color_array;
+  delete[] vertex_point_array;
 }
 
 ViewportDistorterFisheyeToSphericMirror
     ::~ViewportDistorterFisheyeToSphericMirror(void) {
   glDeleteLists(display_list,1);
-  if (trans_array) delete[] trans_array;
+  if (texture_point_array) delete[] texture_point_array;
   glDeleteTextures(1,&mirror_texture);
 }
 
-bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) {
-    // linear interpolation:
+bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const {
+  const float f = viewport_wh/(float)texture_used;
   y = screenH-1-y;
-  float dx = x/(float)BLOCK_SIZE_X;
-  int i = (int)floorf(dx);
-  dx -= i;
-  float dy = y/(float)BLOCK_SIZE_Y;
+
+    // find the triangle and interpolate accordingly:
+  float dy = y / step_y;
   const int j = (int)floorf(dy);
   dy -= j;
-  const float f00 = (1.0f-dx)*(1.0f-dy);
-  const float f01 = (     dx)*(1.0f-dy);
-  const float f10 = (1.0f-dx)*(     dy);
-  const float f11 = (     dx)*(     dy);
-  const VertexData *const v = trans_array + (j*(trans_width+1)+i);
-  x = ((screenW-viewport_wh)>>1)
-    + (int)std::floor(0.5f +
-                        (v[0].xy[0]*f00
-                       + v[1].xy[0]*f01
-                       + v[trans_width+1].xy[0]*f10
-                       + v[trans_width+2].xy[0]*f11)*viewport_wh/texture_used);
-  y = ((screenH-viewport_wh)>>1)
-    + (int)std::floor(0.5f +
-                        ((v[0].xy[1]*f00
-                       + v[1].xy[1]*f01
-                       + v[trans_width+1].xy[1]*f10
-                       + v[trans_width+2].xy[1]*f11)*viewport_wh/texture_used));
+  if (j&1) {
+    float dx = x / step_x + 0.5*(1.0-dy);
+    const int i = (int)floorf(dx);
+    dx -= i;
+    const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
+    if (dx + dy <= 1.f) {
+      if (i == 0) {
+        dx -= 0.5*(1.0-dy);
+        dx *= 2.f;
+      }
+      x = (int)(floorf(0.5*(screenW-viewport_wh)
+            + f * (t[0].tex_xy[0]
+                  + dx * (t[1].tex_xy[0]-t[0].tex_xy[0])
+                  + dy * (t[max_x+1].tex_xy[0]-t[0].tex_xy[0]))));
+      y = (int)(floorf(0.5*(screenH-viewport_wh)
+            + f * (t[0].tex_xy[1]
+                   + dx * (t[1].tex_xy[1]-t[0].tex_xy[1])
+                   + dy * (t[max_x+1].tex_xy[1]-t[0].tex_xy[1]))));
+    } else {
+      if (i == max_x-1) {
+        dx -= 0.5*(1.0-dy);
+        dx *= 2.f;
+      }
+      x = (int)(floorf(0.5*(screenW-viewport_wh)
+            + f * (t[max_x+2].tex_xy[0]
+                   + (1.f-dy) * (t[1].tex_xy[0]-t[max_x+2].tex_xy[0])
+                   + (1.f-dx) * (t[max_x+1].tex_xy[0]-t[max_x+2].tex_xy[0]))));
+      y = (int)(floorf(0.5*(screenH-viewport_wh)
+            + f * (t[max_x+2].tex_xy[1]
+                   + (1.f-dy) * (t[1].tex_xy[1]-t[max_x+2].tex_xy[1])
+                   + (1.f-dx) * (t[max_x+1].tex_xy[1]-t[max_x+2].tex_xy[1]))));
+    }
+  } else {
+    float dx = x / step_x + 0.5*dy;
+    const int i = (int)floorf(dx);
+    dx -= i;
+    const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
+    if (dx >= dy) {
+      if (i == max_x-1) {
+        dx -= 0.5*dy;
+        dx *= 2.f;
+      }
+      x = (int)(floorf(0.5*(screenW-viewport_wh)
+            + f * (t[1].tex_xy[0]
+                   + (1.f-dx) * (t[0].tex_xy[0]-t[1].tex_xy[0])
+                   + dy * (t[max_x+2].tex_xy[0]-t[1].tex_xy[0]))));
+      y = (int)(floorf(0.5*(screenH-viewport_wh)
+            + f * (t[1].tex_xy[1]
+                   + (1.f-dx) * (t[0].tex_xy[1]-t[1].tex_xy[1])
+                   + dy * (t[max_x+2].tex_xy[1]-t[1].tex_xy[1]))));
+    } else {
+      if (i == 0) {
+        dx -= 0.5*dy;
+        dx *= 2.f;
+      }
+      x = (int)(floorf(0.5*(screenW-viewport_wh)
+            + f * (t[max_x+1].tex_xy[0]
+                   + (1.f-dy) * (t[0].tex_xy[0]-t[max_x+1].tex_xy[0])
+                   + dx * (t[max_x+2].tex_xy[0]-t[max_x+1].tex_xy[0]))));
+      y = (int)(floorf(0.5*(screenH-viewport_wh)
+            + f * (t[max_x+1].tex_xy[1]
+                   + (1.f-dy) * (t[0].tex_xy[1]-t[max_x+1].tex_xy[1])
+                   + dx * (t[max_x+2].tex_xy[1]-t[max_x+1].tex_xy[1]))));
+    }
+  }
+  
   y = screenH-1-y;
   return true;
 }
@@ -228,11 +297,12 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
   glCallList(display_list);
 }
 
+
 ViewportDistorter *ViewportDistorter::create(const string &type,
                                              int width,int height,
                                              Projector* prj) {
   if (type == "fisheye_to_spheric_mirror") {
-    return new ViewportDistorterFisheyeToSphericMirror(width,height, prj);
+    return new ViewportDistorterFisheyeToSphericMirror(width,height,prj);
   }
   return new ViewportDistorterDummy;
 }
