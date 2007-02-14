@@ -103,6 +103,9 @@ StelApp::~StelApp()
 		delete *iter;
 		*iter = NULL;
 	}
+
+	delete textureMgr;
+	delete moduleMgr;
 }
 
 /*************************************************************************

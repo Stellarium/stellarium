@@ -124,7 +124,7 @@ GeodesicGrid::~GeodesicGrid(void)
 	if (max_level > 0)
 	{
 		for (int i=max_level-1;i>=0;i--) delete[] triangles[i];
-		delete triangles;
+		delete[] triangles;
 	}
 }
 
@@ -474,11 +474,11 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)
 	{
-		delete zones[i];
+		delete[] zones[i];
 	}
-	delete border;
-	delete inside;
-	delete zones;
+	delete[] border;
+	delete[] inside;
+	delete[] zones;
 }
 
 void GeodesicSearchResult::search(const Convex& convex,
