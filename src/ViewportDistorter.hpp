@@ -41,7 +41,7 @@ public:
   virtual string getType(void) const = 0;
   virtual void init(const InitParser &conf) = 0;
   virtual void distort(void) const = 0;
-  virtual bool distortXY(int &x,int &y) = 0;
+  virtual bool distortXY(int &x,int &y) const = 0;
 protected:
   ViewportDistorter(void) {}
 private:
