@@ -17,11 +17,12 @@ bool MappingEqualArea::forward(Vec3d &v)
 {
 	const double rq1 = v[0]*v[0] + v[1]*v[1];
 	const double rq = rq1 + v[2]*v[2];
-	const double z1 = std::sqrt(rq) + v[2];
+	const double r = std::sqrt(rq);
+	const double z1 = r + v[2];
 	const double f = std::sqrt((1.0 + (z1*z1) / rq1) / rq);
 	v[0] *= f;
 	v[1] *= f;
-	v[2] = rq;
+	v[2] = r;
 	return true;
 }
 
@@ -50,7 +51,7 @@ Mapping MappingStereographic::getMapping() const
 	Mapping m;
 	m.mapForward = boost::callback<bool, Vec3d&>(forward);
 	m.mapBackward = boost::callback<bool, Vec3d&>(backward);
-	m.minFov = 0.001;
+	m.minFov = 0.0001;
 	m.maxFov = 480.0;
 	return m;
 }
@@ -69,7 +70,7 @@ bool MappingStereographic::forward(Vec3d &v)
 	const double f = 1.0 / h;
 	v[0] *= f;
 	v[1] *= f;
-	v[2] = rq;
+	v[2] = r;
 	return true;
 }
 
@@ -99,7 +100,7 @@ bool MappingFisheye::forward(Vec3d &v)
 	const double f = (h > 0.0) ? (a / h) : 1.0;
 	v[0] *= f;
 	v[1] *= f;
-	v[2] = rq1 + v[2]*v[2];
+	v[2] = std::sqrt(rq1 + v[2]*v[2]);
 	return true;
 }
 
@@ -118,19 +119,19 @@ Mapping MappingCylinder::getMapping() const
 	Mapping m;
 	m.mapForward = boost::callback<bool, Vec3d&>(forward);
 	m.mapBackward = boost::callback<bool, Vec3d&>(backward);
-	m.minFov = 0.001;
+	m.minFov = 0.0001;
 	m.maxFov = 270.0;
 	return m;
 }
 
 bool MappingCylinder::forward(Vec3d &v)
 {
-	const double rq = v[0]*v[0] + v[1]*v[1] + v[2]*v[2];
+	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const double alpha = std::atan2(v[0],-v[2]);
-	const double delta = std::asin(v[1]/std::sqrt(rq));
+	const double delta = std::asin(v[1]/r);
 	v[0] = alpha;
 	v[1] = delta;
-	v[2] = rq;
+	v[2] = r;
 	return true;
 }
 
@@ -155,22 +156,22 @@ Mapping MappingPerspective::getMapping() const
 
 bool MappingPerspective::forward(Vec3d &v)
 {
-	const double rq = v[0]*v[0] + v[1]*v[1] + v[2]*v[2];
+	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	if (v[2] < 0) {
 		v[0] /= (-v[2]);
 		v[1] /= (-v[2]);
-		v[2] = rq;
+		v[2] = r;
 		return true;
 	}
 	if (v[2] > 0) {
 		v[0] /= v[2];
 		v[1] /= v[2];
-		v[2] = rq;
+		v[2] = r;
 		return false;
 	}
 	v[0] *= 1e99;
 	v[1] *= 1e99;
-	v[2] = rq;
+	v[2] = r;
 	return false;
 }
 
@@ -195,12 +196,12 @@ Mapping MappingOrthographic::getMapping() const
 
 bool MappingOrthographic::forward(Vec3d &v)
 {
-	const double rq = v[0]*v[0] + v[1]*v[1] + v[2]*v[2];
-	const double h = 1.0/std::sqrt(rq);
+	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const double h = 1.0/r;
 	v[0] *= h;
 	v[1] *= h;
-    const bool rval = (v[2] <= 0.0);
-	v[2] = rq;
+	const bool rval = (v[2] <= 0.0);
+	v[2] = r;
 	return rval;
 }
 
