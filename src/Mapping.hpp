@@ -10,12 +10,15 @@ public:
 	Mapping();
 
 	//! Apply the transformation in the forward direction
-	//! After transformation v[2] will always contain the squared length
-	//! of the original v: v[0]*v[0]+v[1]*v[1]+v[2]*v[2]
+	//! After transformation v[2] will always contain the length
+	//! of the original v: sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])
 	//! regardless of the projection type. This makes it possible to
 	//! implement depth buffer testing in a way independent of the
-	//! projection type. The squared length is returned instead of the
-	//! length because of performance reasons.
+	//! projection type. I would like to return the squared length
+	//! instead of the length because of performance reasons.
+	//! But then far away objects are not textured any more,
+	//! perhaps because of a depth buffer overflow although
+	//! the depth test is disabled?
 	boost::callback<bool, Vec3d&> mapForward;
 
 	//! Apply the transformation in the backward direction
