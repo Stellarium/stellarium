@@ -594,18 +594,12 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 		if (rings && screen_sz>1)
 		{
 			const double dist = get_earth_equ_pos(nav).length();
+			double z_near = 0.9*(dist - rings->get_size());
+			double z_far  = 1.1*(dist + rings->get_size());
+			if (z_near < 0.0) z_near = 0.0;
 			double n,f;
 			prj->get_clipping_planes(&n,&f); // Save clipping planes
-			  // If z_near is too big, then Saturn and the rings are clipped
-			  // in perspective projection
-			  // when near the edge of the screen (home_planet=Hyperion).
-			  // If z_near is too small, the depth test does not work properly
-			  // when seen from great distance.
-			double z_near = dist-rings->get_size()*2;
-			if (z_near < 0.001) z_near = 0.0000001;
-			else if (z_near < 0.05) z_near *= 0.1;
-			else if (z_near < 0.5) z_near *= 0.5;
-			prj->set_clipping_planes(z_near, dist+rings->get_size()*10);
+			prj->set_clipping_planes(z_near*z_near,z_far*z_far);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			draw_sphere(prj,mat,screen_sz);
