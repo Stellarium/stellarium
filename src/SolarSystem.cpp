@@ -40,7 +40,8 @@
 using namespace std;
 
 SolarSystem::SolarSystem()
-	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
+	:sun(NULL),moon(NULL),earth(NULL),selected(NULL),
+	moonScale(1.), fontSize(14.),
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	tex_earth_shadow(NULL), flagOrbits(false),flag_light_travel_time(false)
 {
@@ -952,11 +953,9 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 
 void SolarSystem::selectedObjectChangeCallBack()
 {
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_PLANET)
-	{
-		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get());
-//			// potentially record this action
-//			if (!recordActionCallback.empty())
-//				recordActionCallback("select planet " + selected_object.getEnglishName());
-	}
+	setSelected(StelApp::getInstance().getStelObjectMgr()
+    	                              .getSelectedObject().get());
+//		// potentially record this action
+//		if (!recordActionCallback.empty())
+//			recordActionCallback("select planet " + selected_object.getEnglishName());
 }
