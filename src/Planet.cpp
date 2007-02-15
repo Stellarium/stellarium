@@ -599,7 +599,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 			if (z_near < 0.0) z_near = 0.0;
 			double n,f;
 			prj->get_clipping_planes(&n,&f); // Save clipping planes
-			prj->set_clipping_planes(z_near*z_near,z_far*z_far);
+			prj->set_clipping_planes(z_near,z_far);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			draw_sphere(prj,mat,screen_sz);
