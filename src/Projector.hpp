@@ -204,6 +204,8 @@ public:
 	bool unProject(const Vec3d& win, Vec3d& v) const {return unProject(win[0], win[1], v);}
 	bool unProject(double x, double y, Vec3d& v) const;
 
+	const Mapping &getMapping(void) const {return *mapping;}
+
 	//! Project the vectors v1 and v2 from the current frame into the viewport.
 	//! @param v1 the first vector in the current frame
 	//! @param v2 the second vector in the current frame
