@@ -79,6 +79,17 @@ void Projector::init(const InitParser& conf)
 			exit(-1);
 		}
 
+	double overwrite_max_fov
+	  = conf.get_double("projection","fisheye_max_fov",0.0);
+    if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
+	if (overwrite_max_fov > 180.0)
+		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
+	overwrite_max_fov
+	  = conf.get_double("projection","cylinder_max_fov",0.0);
+    if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
+	if (overwrite_max_fov > 90.0)
+		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
+
 	// Register the default mappings
 	registerProjectionMapping(MappingEqualArea::getMapping());
 	registerProjectionMapping(MappingStereographic::getMapping());
@@ -263,7 +274,8 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 	if (currentProjectionType==projectionName)
 		return;
 
-	std::map<std::string, Mapping*>::const_iterator i = projectionMapping.find(projectionName);
+	std::map<std::string,const Mapping*>::const_iterator
+		i(projectionMapping.find(projectionName));
 	if (i!=projectionMapping.end())
 	{
 		currentProjectionType = projectionName;

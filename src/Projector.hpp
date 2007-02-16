@@ -377,8 +377,8 @@ private:
 	mutable Mat4d inverseModelViewMatrix;	// inverse of it
 	
 	// Callbacks
-	Mapping *mapping;
-	std::map<std::string, Mapping*> projectionMapping;
+	const Mapping *mapping;
+	std::map<std::string,const Mapping*> projectionMapping;
 	
 	std::string currentProjectionType;	// Type of the projection currently used
 };
