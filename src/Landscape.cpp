@@ -329,7 +329,19 @@ void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, 
 	int slices_per_side = 256/(nb_decor_repeat*nb_side);
 	if (slices_per_side<=0) slices_per_side = 1;
 	prj->setCustomFrame(mat);
-	prj->sDisk(radius,nb_side*slices_per_side*nb_decor_repeat,5, 1);
+
+// draw a fan disk instead of a ordinary disk to that the inner slices
+// are not so slender. When they are too slender, culling errors occur
+// in cylinder projection mode.
+//	prj->sDisk(radius,nb_side*slices_per_side*nb_decor_repeat,5, 1);
+	int slices_inside = nb_side*slices_per_side*nb_decor_repeat;
+	int level = 0;
+	while ((slices_inside&1)==0 && slices_inside > 4) {
+		level++;
+		slices_inside>>=1;
+	}
+	prj->sFanDisk(radius,slices_inside,level);
+
 	glDisable(GL_CULL_FACE);
 }
 
