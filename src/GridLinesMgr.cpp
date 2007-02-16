@@ -334,7 +334,6 @@ static double getClosestResolutionMeridian(double pixelPerRad)
 void SkyGrid::draw(const Projector* prj) const
 {
 	if (!fader.getInterstate()) return;
-
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -415,7 +414,7 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	// Draw the parallels which didn't intersect the viewport but are in the screen
 	// This can only happen for parallels around the poles fully included in the viewport (At least I hope!)
-	if (northPoleInViewport)
+	if (northPoleInViewport && !resultsParallels.empty())
 	{
 		const double lastLat = (double)(--resultsParallels.end())->first/RADIAN_MAS;
 		for (double lat=lastLat+gridStepParallelRad;lat<M_PI/2-0.00001;lat+=gridStepParallelRad)
@@ -424,7 +423,7 @@ void SkyGrid::draw(const Projector* prj) const
 			prj->drawParallel(vv, 2.*M_PI);
 		}
 	}
-	if (southPoleInViewport)
+	if (southPoleInViewport && !resultsParallels.empty())
 	{
 		const double lastLat = (double)resultsParallels.begin()->first/RADIAN_MAS;
 		for (double lat=lastLat-gridStepParallelRad;lat>-M_PI/2+0.00001;lat-=gridStepParallelRad)
