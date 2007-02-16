@@ -490,7 +490,7 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
   int i,j;
   for (i=0;i<=level;i++) {
     double f = ((i+1)/(double)(level+1));
-    rad[i] = radius*f*f;
+    rad[i] = radius*f*std::sqrt(f);
   }
   int slices = inner_fan_slices<<level;
   const double dtheta = 2.0 * M_PI / slices;
