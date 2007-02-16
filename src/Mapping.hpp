@@ -22,9 +22,7 @@ public:
 	//! the depth test is disabled?
 	virtual bool forward(Vec3d &v) const = 0;
 	virtual bool backward(Vec3d &v) const = 0;
-	virtual double fovToViewScalingFactor(
-	                 double fov,
-	                 double view_port_width_height_min) const = 0;
+	virtual double fovToViewScalingFactor(double fov) const = 0;
 	//! Minimum FOV apperture in degree
 	double minFov;
 	//! Maximum FOV apperture in degree
