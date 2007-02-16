@@ -42,14 +42,6 @@
 
 using namespace s_gui;
 
-static string CalculateProjectionSlValue(
-                const string &projection_type,
-                const string &viewport_distorter_type) {
-  if (viewport_distorter_type == "fisheye_to_spheric_mirror")
-    return "spheric_mirror";
-  return projection_type;
-}
-
 Component* StelUI::createConfigWindow(SFont& courierFont)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
@@ -387,11 +379,8 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	projection_sl->addItem("fisheye");
 	projection_sl->addItem("stereographic");
 	projection_sl->addItem("cylinder");
-	projection_sl->addItem("spheric_mirror");
 	projection_sl->adjustSize();
-	projection_sl->setValue(CalculateProjectionSlValue(
-                              core->getProjection()->getCurrentProjection(),
-                              app->getViewPortDistorterType()));
+	projection_sl->setValue(core->getProjection()->getCurrentProjection());
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
 	projection_sl->setPos(x+20,y); y+=140;
@@ -400,6 +389,11 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
+
+	viewport_distorter_cbx = new LabeledCheckBox(false, _("Viewport Distorter"));
+	viewport_distorter_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
+	tab_video->addComponent(viewport_distorter_cbx);
+	viewport_distorter_cbx->setPos(x,y); y+=35;
 
 	x=220; y=10;
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
@@ -944,13 +938,7 @@ void StelUI::setLandscape(void)
 
 void StelUI::updateVideoVariables(void)
 {
-	if (projection_sl->getValue() == "spheric_mirror") {
-		core->getProjection()->setCurrentProjection("fisheye");
-        app->setViewPortDistorterType("fisheye_to_spheric_mirror");
-	} else {
-		core->getProjection()->setCurrentProjection(projection_sl->getValue());
-        app->setViewPortDistorterType("none");
-	}
+	core->getProjection()->setCurrentProjection(projection_sl->getValue());
     
 	if (disk_viewport_cbx->getState() && !core->getProjection()->getViewportMaskDisk())
 	{
@@ -960,6 +948,9 @@ void StelUI::updateVideoVariables(void)
 	{
 		core->getProjection()->setViewportMaskNone();
 	}
+
+	app->setViewPortDistorterType(viewport_distorter_cbx->getState()
+	                              ? "fisheye_to_spheric_mirror" : "none");
 }
 
 void StelUI::updateConfigForm(void)
@@ -1054,10 +1045,9 @@ void StelUI::updateConfigForm(void)
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getNavigation()->getTimeSpeed()/JD_SECOND));
 
-	projection_sl->setValue(CalculateProjectionSlValue(
-                              core->getProjection()->getCurrentProjection(),
-                              app->getViewPortDistorterType()));
+	projection_sl->setValue(core->getProjection()->getCurrentProjection());
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
+	viewport_distorter_cbx->setState(app->getViewPortDistorterType()!="none");
 }
 
 void StelUI::config_win_hideBtCallback(void)
