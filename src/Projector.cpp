@@ -139,10 +139,8 @@ void Projector::setViewport(int x, int y, int w, int h)
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 //	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
 	view_scaling_factor
-	  = mapping ? mapping->fovToViewScalingFactor(
-	                         fov,MY_MIN(getViewportWidth(),
-	                                    getViewportHeight()))
-	  : 1.0;
+	  = (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0)
+      * MY_MIN(getViewportWidth(),getViewportHeight());
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
 }
@@ -165,18 +163,16 @@ void Projector::setFov(double f)
 	if (f<min_fov)
 		fov = min_fov;
 	view_scaling_factor
-	  = mapping ? mapping->fovToViewScalingFactor(
-	                         fov,MY_MIN(getViewportWidth(),
-	                                    getViewportHeight()))
-	  : 1.0;
+	  = (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0)
+      * MY_MIN(getViewportWidth(),getViewportHeight());
 }
 
 
 void Projector::setMaxFov(double max)
 {
+	max_fov = max;
 	if (fov > max)
 		setFov(max);
-	max_fov = max;
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
