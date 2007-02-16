@@ -138,29 +138,29 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
     for (int i=0;i<=max_x;i++) {
       VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
       TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
-      vertex_point.ver_xy[0] = ((i == 0) ? 0.0 :
+      vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
 				              (i == max_x) ? screenW :
-				              (i-0.5*(j&1))*step_x);
+				              (i-0.5f*(j&1))*step_x);
       vertex_point.ver_xy[1] = j*step_y;
       Vec3d v,v_x,v_y;
       bool rc = calc.retransform(
-                       (vertex_point.ver_xy[0]-0.5*screenW) / screenH,
-                       (vertex_point.ver_xy[1]-0.5*screenH) / screenH,
+                       (vertex_point.ver_xy[0]-0.5f*screenW) / screenH,
+                       (vertex_point.ver_xy[1]-0.5f*screenH) / screenH,
                        v,v_x,v_y);
       double h = v[1];
       v[1] = v[2];
       v[2] = -h;
 
       rc &= prj->getMapping().forward(v);
-      double x = (0.5 + v[0] * fact);
-      double y = (0.5 + v[1] * fact);
+      float x = (0.5 + v[0] * fact);
+      float y = (0.5 + v[1] * fact);
 
       vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
 
-      if (x < 0.0) {x=0.0;vertex_point.h=0;}
-      else if (x > 1.0) {x=1.0;vertex_point.h=0;}
-      if (y < 0.0) {y=0.0;vertex_point.h=0;}
-      else if (y > 1.0) {y=1.0;vertex_point.h=0;}
+      if (x < 0.f) {x=0.f;vertex_point.h=0;}
+      else if (x > 1.f) {x=1.f;vertex_point.h=0;}
+      if (y < 0.f) {y=0.f;vertex_point.h=0;}
+      else if (y > 1.f) {y=1.f;vertex_point.h=0;}
       texture_point.tex_xy[0] = x*texture_used;
       texture_point.tex_xy[1] = y*texture_used;
       if (vertex_point.h > max_h) max_h = vertex_point.h;
@@ -230,65 +230,65 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const {
   const int j = (int)floorf(dy);
   dy -= j;
   if (j&1) {
-    float dx = x / step_x + 0.5*(1.0-dy);
+    float dx = x / step_x + 0.5f*(1.f-dy);
     const int i = (int)floorf(dx);
     dx -= i;
     const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
     if (dx + dy <= 1.f) {
       if (i == 0) {
-        dx -= 0.5*(1.0-dy);
+        dx -= 0.5f*(1.f-dy);
         dx *= 2.f;
       }
-      x = (int)(floorf(0.5*(screenW-viewport_wh)
+      x = (int)(floorf(0.5f*(screenW-viewport_wh)
             + f * (t[0].tex_xy[0]
                   + dx * (t[1].tex_xy[0]-t[0].tex_xy[0])
                   + dy * (t[max_x+1].tex_xy[0]-t[0].tex_xy[0]))));
-      y = (int)(floorf(0.5*(screenH-viewport_wh)
+      y = (int)(floorf(0.5f*(screenH-viewport_wh)
             + f * (t[0].tex_xy[1]
                    + dx * (t[1].tex_xy[1]-t[0].tex_xy[1])
                    + dy * (t[max_x+1].tex_xy[1]-t[0].tex_xy[1]))));
     } else {
       if (i == max_x-1) {
-        dx -= 0.5*(1.0-dy);
+        dx -= 0.5f*(1.f-dy);
         dx *= 2.f;
       }
-      x = (int)(floorf(0.5*(screenW-viewport_wh)
+      x = (int)(floorf(0.5f*(screenW-viewport_wh)
             + f * (t[max_x+2].tex_xy[0]
                    + (1.f-dy) * (t[1].tex_xy[0]-t[max_x+2].tex_xy[0])
                    + (1.f-dx) * (t[max_x+1].tex_xy[0]-t[max_x+2].tex_xy[0]))));
-      y = (int)(floorf(0.5*(screenH-viewport_wh)
+      y = (int)(floorf(0.5f*(screenH-viewport_wh)
             + f * (t[max_x+2].tex_xy[1]
                    + (1.f-dy) * (t[1].tex_xy[1]-t[max_x+2].tex_xy[1])
                    + (1.f-dx) * (t[max_x+1].tex_xy[1]-t[max_x+2].tex_xy[1]))));
     }
   } else {
-    float dx = x / step_x + 0.5*dy;
+    float dx = x / step_x + 0.5f*dy;
     const int i = (int)floorf(dx);
     dx -= i;
     const TexturePoint *const t = texture_point_array + (j*(max_x+1)+i);
     if (dx >= dy) {
       if (i == max_x-1) {
-        dx -= 0.5*dy;
+        dx -= 0.5f*dy;
         dx *= 2.f;
       }
-      x = (int)(floorf(0.5*(screenW-viewport_wh)
+      x = (int)(floorf(0.5f*(screenW-viewport_wh)
             + f * (t[1].tex_xy[0]
                    + (1.f-dx) * (t[0].tex_xy[0]-t[1].tex_xy[0])
                    + dy * (t[max_x+2].tex_xy[0]-t[1].tex_xy[0]))));
-      y = (int)(floorf(0.5*(screenH-viewport_wh)
+      y = (int)(floorf(0.5f*(screenH-viewport_wh)
             + f * (t[1].tex_xy[1]
                    + (1.f-dx) * (t[0].tex_xy[1]-t[1].tex_xy[1])
                    + dy * (t[max_x+2].tex_xy[1]-t[1].tex_xy[1]))));
     } else {
       if (i == 0) {
-        dx -= 0.5*dy;
+        dx -= 0.5f*dy;
         dx *= 2.f;
       }
-      x = (int)(floorf(0.5*(screenW-viewport_wh)
+      x = (int)(floorf(0.5f*(screenW-viewport_wh)
             + f * (t[max_x+1].tex_xy[0]
                    + (1.f-dy) * (t[0].tex_xy[0]-t[max_x+1].tex_xy[0])
                    + dx * (t[max_x+2].tex_xy[0]-t[max_x+1].tex_xy[0]))));
-      y = (int)(floorf(0.5*(screenH-viewport_wh)
+      y = (int)(floorf(0.5f*(screenH-viewport_wh)
             + f * (t[max_x+1].tex_xy[1]
                    + (1.f-dy) * (t[0].tex_xy[1]-t[max_x+1].tex_xy[1])
                    + dx * (t[max_x+2].tex_xy[1]-t[max_x+1].tex_xy[1]))));
