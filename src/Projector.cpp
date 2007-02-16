@@ -488,16 +488,9 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
   assert(level<64);
   double rad[64];
   int i,j;
-  if (dynamic_cast<MappingCylinder*>(mapping)) {
-    for (i=0;i<=level;i++) {
-      double f = ((i+1)/(double)(level+1));
-      rad[i] = radius*f*f;
-    }
-  } else {
-    for (i=0;i<=level;i++) {
-      double f = ((i+1)/(double)(level+1));
-      rad[i] = radius*f*std::sqrt(f);
-    }
+  for (i=0;i<=level;i++) {
+    double f = ((i+1)/(double)(level+1));
+    rad[i] = radius*f*f;
   }
   int slices = inner_fan_slices<<level;
   const double dtheta = 2.0 * M_PI / slices;
