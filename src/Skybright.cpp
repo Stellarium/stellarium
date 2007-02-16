@@ -39,7 +39,7 @@ Skybright::Skybright() : SN(1.f)
 // moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
 void Skybright::set_date(int year, int month, float moon_phase)
 {
-	mag_moon = -12.73f + 1.4896903f * fabs(moon_phase) + 0.04310727f * pow(moon_phase, 4.f);
+	mag_moon = -12.73f + 1.4896903f * std::fabs(moon_phase) + 0.04310727f * std::pow(moon_phase, 4.f);
 
 	RA = (month - 3.f) * 0.52359878f;
 
