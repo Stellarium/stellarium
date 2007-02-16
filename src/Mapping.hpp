@@ -1,13 +1,14 @@
 #ifndef MAPPING_HPP_
 #define MAPPING_HPP_
 
-#include "callbacks.hpp"
 #include "vecmath.h"
 
 class Mapping
 {
 public:
-	Mapping();
+	Mapping::Mapping(void);
+	virtual ~Mapping(void) {}
+	virtual std::string getName(void) const = 0;
 
 	//! Apply the transformation in the forward direction
 	//! After transformation v[2] will always contain the length
@@ -19,81 +20,15 @@ public:
 	//! But then far away objects are not textured any more,
 	//! perhaps because of a depth buffer overflow although
 	//! the depth test is disabled?
-	boost::callback<bool, Vec3d&> mapForward;
-
-	//! Apply the transformation in the backward direction
-	boost::callback<bool, Vec3d&> mapBackward;
-
+	virtual bool forward(Vec3d &v) const = 0;
+	virtual bool backward(Vec3d &v) const = 0;
+	virtual double fovToViewScalingFactor(
+	                 double fov,
+	                 double view_port_width_height_min) const = 0;
 	//! Minimum FOV apperture in degree
 	double minFov;
 	//! Maximum FOV apperture in degree
 	double maxFov;
 };
 
-class MappingPerspective
-{
-public:
-	std::string getName() const {return "perspective";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-class MappingEqualArea
-{
-public:
-	std::string getName() const {return "equal_area";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-class MappingStereographic
-{
-public:
-	std::string getName() const {return "stereographic";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-class MappingFisheye
-{
-public:
-	std::string getName() const {return "fisheye";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-class MappingCylinder
-{
-public:
-	std::string getName() const {return "cylinder";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-class MappingOrthographic
-{
-public:
-	std::string getName() const {return "orthographic";} 
-	Mapping getMapping() const;
-
-private:
-	static bool forward(Vec3d& win);
-	static bool backward(Vec3d& v);
-};
-
-#endif /*MAPPING_HPP_*/
+#endif

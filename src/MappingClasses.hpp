@@ -1,0 +1,90 @@
+#ifndef _MAPPING_CLASSES_HPP_
+#define _MAPPING_CLASSES_HPP_
+
+#include "Mapping.hpp"
+
+class MappingPerspective : public Mapping
+{
+public:
+    MappingPerspective(void);
+	std::string getName(void) const {return "perspective";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingPerspective instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+class MappingEqualArea : public Mapping
+{
+public:
+    MappingEqualArea(void);
+	std::string getName(void) const {return "equal_area";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingEqualArea instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+class MappingStereographic : public Mapping
+{
+public:
+    MappingStereographic(void);
+	std::string getName(void) const {return "stereographic";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingStereographic instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+class MappingFisheye : public Mapping
+{
+public:
+    MappingFisheye(void);
+	std::string getName(void) const {return "fisheye";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingFisheye instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+class MappingCylinder : public Mapping
+{
+public:
+    MappingCylinder(void);
+	std::string getName(void) const {return "cylinder";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingCylinder instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+class MappingOrthographic : public Mapping
+{
+public:
+    MappingOrthographic(void);
+	std::string getName(void) const {return "orthographic";} 
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingOrthographic instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov,
+	                              double view_port_width_height_min) const;
+};
+
+#endif
