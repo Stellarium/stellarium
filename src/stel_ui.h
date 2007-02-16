@@ -288,6 +288,7 @@ private:
 	// Video Options
 	StringList* projection_sl;
 	LabeledCheckBox* disk_viewport_cbx;
+	LabeledCheckBox* viewport_distorter_cbx;
 	ListBox* screen_size_sl;
 	void setVideoOption(void);
 	void updateVideoVariables(void);

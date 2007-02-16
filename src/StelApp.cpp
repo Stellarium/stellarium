@@ -187,14 +187,13 @@ void StelApp::setViewPortDistorterType(const string &type)
 {
 	if (distorter)
 	{
-		if (distorter->getType() == type) return;
 		delete distorter;
 		distorter = 0;
 	}
 	distorter = ViewportDistorter::create(type,screenW,screenH,core->getProjection());
 	InitParser conf;
 	conf.load(dotStellariumDir + "config.ini");
-	distorter->init(conf,core->getProjection());
+	distorter->init(conf);
 }
 
 string StelApp::getViewPortDistorterType(void) const
