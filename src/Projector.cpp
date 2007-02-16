@@ -23,7 +23,7 @@
 #include <cassert>
 #include "Projector.hpp"
 #include "InitParser.hpp"
-#include "Mapping.hpp"
+#include "MappingClasses.hpp"
 
 #ifndef GL_ARB_point_sprite
 #define GL_POINT_SPRITE_ARB               0x8861
@@ -45,6 +45,10 @@ Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const string &s)
 	return NONE;
 }
 
+void Projector::registerProjectionMapping(Mapping *c)
+{
+	if (c) projectionMapping[c->getName()] = c;
+}
 
 void Projector::init(const InitParser& conf)
 {
@@ -76,12 +80,12 @@ void Projector::init(const InitParser& conf)
 		}
 
 	// Register the default mappings
-	registerProjectionMapping(MappingEqualArea());
-	registerProjectionMapping(MappingStereographic());
-	registerProjectionMapping(MappingFisheye());
-	registerProjectionMapping(MappingCylinder());
-	registerProjectionMapping(MappingPerspective());
-	registerProjectionMapping(MappingOrthographic());
+	registerProjectionMapping(MappingEqualArea::getMapping());
+	registerProjectionMapping(MappingStereographic::getMapping());
+	registerProjectionMapping(MappingFisheye::getMapping());
+	registerProjectionMapping(MappingCylinder::getMapping());
+	registerProjectionMapping(MappingPerspective::getMapping());
+	registerProjectionMapping(MappingOrthographic::getMapping());
 
 	tmpstr = conf.get_str("projection:type");
 	setCurrentProjection(tmpstr);
@@ -113,7 +117,8 @@ Projector::Projector(const Vec4i& viewport, double _fov)
 		:maskType(NONE), fov(1.0), min_fov(0.0001), max_fov(100),
 		zNear(0.1), zFar(10000),
 		vec_viewport(viewport),
-		gravityLabels(0)
+		gravityLabels(0),
+		mapping(NULL)
 {
 	flip_horz = 1.0;
 	flip_vert = 1.0;
@@ -132,7 +137,12 @@ void Projector::setViewport(int x, int y, int w, int h)
 	vec_viewport[2] = w;
 	vec_viewport[3] = h;
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
-	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
+//	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
+	view_scaling_factor
+	  = mapping ? mapping->fovToViewScalingFactor(
+	                         fov,MY_MIN(getViewportWidth(),
+	                                    getViewportHeight()))
+	  : 1.0;
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
 }
@@ -154,7 +164,11 @@ void Projector::setFov(double f)
 		fov = max_fov;
 	if (f<min_fov)
 		fov = min_fov;
-	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
+	view_scaling_factor
+	  = mapping ? mapping->fovToViewScalingFactor(
+	                         fov,MY_MIN(getViewportWidth(),
+	                                    getViewportHeight()))
+	  : 1.0;
 }
 
 
@@ -253,16 +267,15 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 	if (currentProjectionType==projectionName)
 		return;
 
-	std::map<std::string, Mapping>::const_iterator i = projectionMapping.find(projectionName);
+	std::map<std::string, Mapping*>::const_iterator i = projectionMapping.find(projectionName);
 	if (i!=projectionMapping.end())
 	{
 		currentProjectionType = projectionName;
 
 		// Redefine the projection functions
-		projectForward = i->second.mapForward;
-		projectBackward = i->second.mapBackward;
-		min_fov = i->second.minFov;
-		max_fov = i->second.maxFov;
+		mapping = i->second;
+		min_fov = mapping->minFov;
+		max_fov = mapping->maxFov;
 		setFov(fov);
 		initGlMatrixOrtho2d();
 	}
@@ -284,7 +297,7 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 // 	         + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
 // 	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
 // 	         + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-// 	const bool rval = projectForward(win);
+// 	const bool rval = mapping->forward(win);
 // 	  // very important: even when the projected point comes from an
 // 	  // invisible region of the sky (rval=false), we must finish
 // 	  // reprojecting, so that OpenGl can successfully eliminate
@@ -303,7 +316,7 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 	v[0] = flip_horz * (x - center[0]) / view_scaling_factor;
 	v[1] = flip_vert * (y - center[1]) / view_scaling_factor;
 	v[2] = 0;
-	const bool rval = projectBackward(v);
+	const bool rval = mapping->backward(v);
 	  // Even when the reprojected point comes from an region of the screen,
 	  // where nothing is projected to (rval=false), we finish reprojecting.
 	  // This looks good for atmosphere rendering, and it helps avoiding
