@@ -307,6 +307,11 @@ public:
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
 
 	// Draw a disk with a special texturing mode having texture center at center
+	// The disk is made up of concentric circles with increasing refinement.
+	// The number of slices of the outmost circle is (inner_fan_slices<<level).
+	void sFanDisk(double radius,int inner_fan_slices,int level) const;
+
+	// Draw a disk with a special texturing mode having texture center at center
 	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside = 0) const;	
 		
 	// Draw a ring with a radial texturing
