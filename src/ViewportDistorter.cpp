@@ -32,7 +32,7 @@ class ViewportDistorterDummy : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
   string getType(void) const {return "none";}
-  void init(const InitParser&,Projector*) {}
+  void init(const InitParser&) {}
   void distort(void) const {}
   bool distortXY(int &x,int &y) const {return true;}
 };
@@ -45,9 +45,10 @@ private:
                                           Projector *prj);
   ~ViewportDistorterFisheyeToSphericMirror(void);
   string getType(void) const {return "fisheye_to_spheric_mirror";}
-  void init(const InitParser &conf,Projector *prj);
+  void init(const InitParser &conf);
   void distort(void) const;
   bool distortXY(int &x,int &y) const;
+  Projector *const prj;
   const int screenW;
   const int screenH;
   unsigned int mirror_texture;
@@ -61,19 +62,23 @@ private:
   double step_x,step_y;
   SphericMirrorCalculator calc;
   GLuint display_list;
+  double original_max_fov;
 };
 
 
 ViewportDistorterFisheyeToSphericMirror
-   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,Projector *prj)
-    :screenW(screenW),screenH(screenH),texture_point_array(0) {
+   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
+                                             Projector *prj)
+    :prj(prj),screenW(screenW),screenH(screenH),texture_point_array(0) {
 
-  if (prj->getCurrentProjection() != "fisheye") {
-    cerr << "ViewportDistorterFisheyeToSphericMirror: "
-         << "what are you doing? the projection type should be fisheye."
-         << endl;
-    assert(0);
-  }
+  original_max_fov = prj->getMaxFov();
+
+//  if (prj->getCurrentProjection() != "fisheye") {
+//    cerr << "ViewportDistorterFisheyeToSphericMirror: "
+//         << "what are you doing? the projection type should be fisheye."
+//         << endl;
+////    assert(0);
+//  }
   viewport_wh = (screenW < screenH) ? screenW : screenH;
   int texture_wh = 1;
   while (texture_wh < viewport_wh) texture_wh <<= 1;
@@ -99,20 +104,27 @@ struct VertexPoint {
   double h;
 };
 
-void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf,
-                                                   Projector *prj) {
+void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
+//cout << "ViewportDistorterFisheyeToSphericMirror::init: "
+//     << prj->getCurrentProjection() << endl;
   calc.init(conf);
   const double gamma
     = conf.get_double("spheric_mirror","projector_gamma",0.45);
-  double fisheye_max_fov
-    = conf.get_double("spheric_mirror","fisheye_max_fov",175.0);
-  if (fisheye_max_fov > 240.0) fisheye_max_fov = 240.0;
-  else if (fisheye_max_fov < 120.0) fisheye_max_fov = 120.0;
-  prj->setMaxFov(fisheye_max_fov);
+  double distorter_max_fov
+    = conf.get_double("spheric_mirror","distorter_max_fov",175.0);
+  if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
+  else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
+  if (distorter_max_fov > prj->getMapping().maxFov)
+    distorter_max_fov = prj->getMapping().maxFov;
+  prj->setMaxFov(distorter_max_fov);
+  const double fact
+    = prj->getMapping().fovToViewScalingFactor(distorter_max_fov);
   double texture_triangle_base_length
     = conf.get_double("spheric_mirror","texture_triangle_base_length",16.0);  
-  if (texture_triangle_base_length > 256.0) texture_triangle_base_length = 256.0;
-  else if (texture_triangle_base_length < 2.0) texture_triangle_base_length = 2.0;
+  if (texture_triangle_base_length > 256.0)
+    texture_triangle_base_length = 256.0;
+  else if (texture_triangle_base_length < 2.0)
+    texture_triangle_base_length = 2.0;
   
     // init transformation
   max_x = (int)trunc(0.5 + screenW/texture_triangle_base_length);
@@ -139,11 +151,11 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf,
       double h = v[1];
       v[1] = v[2];
       v[2] = -h;
-      h = sqrt(v[0]*v[0]+v[1]*v[1]);
-      const double a = atan2(h,-v[2])/M_PI; // range: [0..1]
-      const double f = a * 180.0/(fisheye_max_fov*h);
-      double x = (0.5 + v[0] * f);
-      double y = (0.5 + v[1] * f);
+
+      prj->getMapping().forward(v);
+      double x = (0.5 + v[0] * fact);
+      double y = (0.5 + v[1] * fact);
+
       if (x < 0.0) {x=0.0;vertex_point.h=0;}
       else if (x > 1.0) {x=1.0;vertex_point.h=0;}
       if (y < 0.0) {y=0.0;vertex_point.h=0;}
@@ -205,6 +217,7 @@ ViewportDistorterFisheyeToSphericMirror
   glDeleteLists(display_list,1);
   if (texture_point_array) delete[] texture_point_array;
   glDeleteTextures(1,&mirror_texture);
+  prj->setMaxFov(original_max_fov);
 }
 
 bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const {
