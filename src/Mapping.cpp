@@ -41,12 +41,10 @@ bool MappingPerspective::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingPerspective::fovToViewScalingFactor(
-                             double fov,
-                             double view_port_width_height_min) const
+double MappingPerspective::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min / std::tan(fov);
+	return 0.5 / std::tan(fov);
 }
 
 
@@ -87,12 +85,10 @@ bool MappingEqualArea::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingEqualArea::fovToViewScalingFactor(
-                           double fov,
-                           double view_port_width_height_min) const
+double MappingEqualArea::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min * 0.5/std::sin(0.5*fov);
+	return 0.5 * 0.5/std::sin(0.5*fov);
 }
 
 
@@ -128,12 +124,10 @@ bool MappingStereographic::backward(Vec3d &v) const
   return true;
 }
 
-double MappingStereographic::fovToViewScalingFactor(
-                               double fov,
-                               double view_port_width_height_min) const
+double MappingStereographic::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min * 0.5/std::tan(0.5*fov);
+	return 0.5 * 0.5/std::tan(0.5*fov);
 }
 
 
@@ -167,12 +161,10 @@ bool MappingFisheye::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingFisheye::fovToViewScalingFactor(
-                         double fov,
-                         double view_port_width_height_min) const
+double MappingFisheye::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min / fov;
+	return 0.5 / fov;
 }
 
 
@@ -205,12 +197,10 @@ bool MappingCylinder::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingCylinder::fovToViewScalingFactor(
-                          double fov,
-                          double view_port_width_height_min) const
+double MappingCylinder::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min / fov;
+	return 0.5 / fov;
 }
 
 
@@ -247,11 +237,9 @@ bool MappingOrthographic::backward(Vec3d &v) const
 	return true;
 }
 
-double MappingOrthographic::fovToViewScalingFactor(
-                              double fov,
-                              double view_port_width_height_min) const
+double MappingOrthographic::fovToViewScalingFactor(double fov) const
 {
 	fov *= (0.5*M_PI/180.0);
-	return 0.5*view_port_width_height_min / std::sin(fov);
+	return 0.5 / std::sin(fov);
 }
 

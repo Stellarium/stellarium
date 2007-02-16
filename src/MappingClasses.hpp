@@ -13,8 +13,7 @@ private:
 	static MappingPerspective instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 class MappingEqualArea : public Mapping
@@ -27,8 +26,7 @@ private:
 	static MappingEqualArea instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 class MappingStereographic : public Mapping
@@ -41,8 +39,7 @@ private:
 	static MappingStereographic instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 class MappingFisheye : public Mapping
@@ -55,8 +52,7 @@ private:
 	static MappingFisheye instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 class MappingCylinder : public Mapping
@@ -69,8 +65,7 @@ private:
 	static MappingCylinder instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 class MappingOrthographic : public Mapping
@@ -83,8 +78,7 @@ private:
 	static MappingOrthographic instance;
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
-	double fovToViewScalingFactor(double fov,
-	                              double view_port_width_height_min) const;
+	double fovToViewScalingFactor(double fov) const;
 };
 
 #endif
