@@ -147,14 +147,15 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
                        (vertex_point.ver_xy[0]-0.5*screenW) / screenH,
                        (vertex_point.ver_xy[1]-0.5*screenH) / screenH,
                        v,v_x,v_y);
-      vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
       double h = v[1];
       v[1] = v[2];
       v[2] = -h;
 
-      prj->getMapping().forward(v);
+      rc &= prj->getMapping().forward(v);
       double x = (0.5 + v[0] * fact);
       double y = (0.5 + v[1] * fact);
+
+      vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
 
       if (x < 0.0) {x=0.0;vertex_point.h=0;}
       else if (x > 1.0) {x=1.0;vertex_point.h=0;}
