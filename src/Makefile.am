@@ -1,5 +1,6 @@
 bin_PROGRAMS = stellarium
 stellarium_SOURCES = Projector.cpp Projector.hpp \
+	Mapping.hpp Mapping.cpp MappingClasses.hpp MappingClasses.cpp \
 	SphericMirrorCalculator.cpp SphericMirrorCalculator.hpp \
 	ViewportDistorter.cpp ViewportDistorter.hpp Navigator.cpp Navigator.hpp Observer.cpp \
 	Observer.hpp grid.cpp grid.h GeodesicGrid.cpp GeodesicGrid.hpp \
@@ -20,7 +21,7 @@ stellarium_SOURCES = Projector.cpp Projector.hpp \
 	StelLocaleMgr.hpp StelLocaleMgr.cpp StelSkyCultureMgr.hpp StelSkyCultureMgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
 	StelTextureMgr.hpp StelTextureMgr.cpp AstroImage.hpp AstroImage.cpp LandscapeMgr.hpp LandscapeMgr.cpp \
 	GridLinesMgr.hpp GridLinesMgr.cpp MilkyWay.hpp MilkyWay.cpp MovementMgr.hpp MovementMgr.cpp \
-	StelObjectMgr.hpp StelObjectMgr.cpp Mapping.hpp Mapping.cpp
+	StelObjectMgr.hpp StelObjectMgr.cpp
 
 stellarium_LDADD = stelutils/libstelutils.a \
 stelutils/iniparser/libiniparser.a \
