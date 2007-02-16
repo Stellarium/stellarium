@@ -71,7 +71,7 @@ ViewportDistorterFisheyeToSphericMirror
                                              Projector *prj)
     :prj(prj),screenW(screenW),screenH(screenH),texture_point_array(0) {
 
-  original_max_fov = prj->getMaxFov();
+  original_max_fov = prj->getMapping().maxFov;
 
 //  if (prj->getCurrentProjection() != "fisheye") {
 //    cerr << "ViewportDistorterFisheyeToSphericMirror: "
