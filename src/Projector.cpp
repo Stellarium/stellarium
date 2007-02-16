@@ -455,7 +455,7 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 			glBegin(GL_QUAD_STRIP);
 			s = 0.0;
 			for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
-			        j++,cos_sin_theta_p+=2)
+			     j++,cos_sin_theta_p+=2)
 			{
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
@@ -487,40 +487,100 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 	glPopMatrix();
 }
 
+
+void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
+  assert(level<64);
+  double rad[64];
+  int i,j;
+  for (i=0;i<=level;i++) {
+    double f = ((i+1)/(double)(level+1));
+    rad[i] = radius*f*f;
+  }
+  int slices = inner_fan_slices<<level;
+  const double dtheta = 2.0 * M_PI / slices;
+  assert(slices<=MAX_SLICES);
+  ComputeCosSinTheta(dtheta,slices);
+  double *cos_sin_theta_p;
+  int slices_step = 2;
+  for (i=level;i>0;i--,slices_step<<=1) {
+    for (j=0,cos_sin_theta_p=cos_sin_theta;
+         j<slices;
+         j+=slices_step,cos_sin_theta_p+=2*slices_step) {
+      glBegin(GL_TRIANGLE_FAN);
+      double x = rad[i]*cos_sin_theta_p[slices_step];
+      double y = rad[i]*cos_sin_theta_p[slices_step+1];
+      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+      drawVertex3(x,y,0);
+
+      x = rad[i]*cos_sin_theta_p[2*slices_step];
+      y = rad[i]*cos_sin_theta_p[2*slices_step+1];
+      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+      drawVertex3(x,y,0);
+
+      x = rad[i-1]*cos_sin_theta_p[2*slices_step];
+      y = rad[i-1]*cos_sin_theta_p[2*slices_step+1];
+      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+      drawVertex3(x,y,0);
+
+      x = rad[i-1]*cos_sin_theta_p[0];
+      y = rad[i-1]*cos_sin_theta_p[1];
+      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+      drawVertex3(x,y,0);
+
+      x = rad[i]*cos_sin_theta_p[0];
+      y = rad[i]*cos_sin_theta_p[1];
+      glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+      drawVertex3(x,y,0);
+      glEnd();
+    }
+  }
+   // draw the inner fan
+  slices_step>>=1;
+  glBegin(GL_TRIANGLE_FAN);
+  glTexCoord2d(0.5,0.5);
+  drawVertex3(0,0,0);
+  for (j=0,cos_sin_theta_p=cos_sin_theta;
+       j<=slices;
+       j+=slices_step,cos_sin_theta_p+=2*slices_step) {
+    double x = rad[0]*cos_sin_theta_p[0];
+    double y = rad[0]*cos_sin_theta_p[1];
+    glTexCoord2d(0.5*(1.0+x/radius),0.5*(1.0+y/radius));
+    drawVertex3(x,y,0);
+  }
+  glEnd();
+}
+
+
 // Draw a disk with a special texturing mode having texture center at disk center
 void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside) const
 {
-	GLfloat r, dr, theta, dtheta;
-	GLfloat x, y;
-	GLint j;
-	GLfloat nsign;
+	GLint i,j;
+	const GLfloat nsign = orient_inside ? -1 : 1;
+    double r;
+	const double dr = radius / stacks;
 
-	if (orient_inside)
-		nsign = -1.0;
-	else
-		nsign = 1.0;
-
-	dr = radius / (GLfloat) stacks;
-	dtheta = 2.0 * M_PI / (GLfloat) slices;
-	if (slices < 0)
-		slices = -slices;
+	const double dtheta = 2.0 * M_PI / slices;
+	if (slices < 0) slices = -slices;
+	assert(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
 
 	// draw intermediate stacks as quad strips
-	for (r = 0; r < radius; r+=dr)
+	for (i = 0, r = 0.0; i < stacks; i++, r+=dr)
 	{
-		glBegin(GL_TRIANGLE_STRIP);
-		for (j = 0; j <= slices; j++)
+		glBegin(GL_QUAD_STRIP);
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+		     j++,cos_sin_theta_p+=2)
 		{
-			theta = (j == slices) ? 0.0 : j * dtheta;
-			x = r*cos(theta);
-			y = r*sin(theta);
+			double x = r*cos_sin_theta_p[0];
+			double y = r*cos_sin_theta_p[1];
 			glNormal3f(0, 0, nsign);
-			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
+			glTexCoord2d(0.5+0.5*x/radius, 0.5+0.5*y/radius);
 			drawVertex3(x, y, 0);
-			x = (r+dr)*cos(theta);
-			y = (r+dr)*sin(theta);
+			x = (r+dr)*cos_sin_theta_p[0];
+			y = (r+dr)*cos_sin_theta_p[1];
 			glNormal3f(0, 0, nsign);
-			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
+			glTexCoord2d(0.5+0.5*x/radius, 0.5+0.5*y/radius);
 			drawVertex3(x, y, 0);
 		}
 		glEnd();
