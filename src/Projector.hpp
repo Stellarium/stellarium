@@ -25,10 +25,9 @@
 #include "stellarium.h"
 #include "vecmath.h"
 #include "SFont.hpp"
-#include "callbacks.hpp"
+#include "Mapping.hpp"
 
 class InitParser;
-class Mapping;
 
 //! Class which handle projection in stellarium. It overrides a number of openGL functions
 //! to enable non-linear projection, such as fisheye or stereographic projections.
@@ -63,10 +62,7 @@ public:
 
 	
 	//! Register a new projection mapping
-	template<class MappingClass> void registerProjectionMapping(MappingClass c)
-	{
-		projectionMapping[c.getName()] = c.getMapping();
-	}
+	void registerProjectionMapping(Mapping *c);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling viewport and mask 
@@ -184,7 +180,7 @@ public:
 				+ modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
 		win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
 				+ modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-		const bool rval = projectForward(win);
+		const bool rval = mapping->forward(win);
 		// very important: even when the projected point comes from an
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
@@ -374,10 +370,8 @@ private:
 	mutable Mat4d inverseModelViewMatrix;	// inverse of it
 	
 	// Callbacks
-	boost::callback<bool, Vec3d&> projectForward;
-	boost::callback<bool, Vec3d&> projectBackward;
-	
-	std::map<std::string, Mapping> projectionMapping;
+	Mapping *mapping;
+	std::map<std::string, Mapping*> projectionMapping;
 	
 	std::string currentProjectionType;	// Type of the projection currently used
 };
