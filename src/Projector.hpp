@@ -164,8 +164,8 @@ public:
 	// Full projection methods
 	// Return true if the 2D pos is inside the viewport
 	bool check_in_viewport(const Vec3d& pos) const
-		{return (pos[1]>=vec_viewport[1] && pos[1]<=(vec_viewport[1] + vec_viewport[3]) &&
-				pos[0]>=vec_viewport[0] && pos[0]<=(vec_viewport[0] + vec_viewport[2]));}
+		{return (pos[1]>=vec_viewport[1] && pos[0]>=vec_viewport[0] &&
+		pos[1]<=(vec_viewport[1] + vec_viewport[3]) && pos[0]<=(vec_viewport[0] + vec_viewport[2]));}
 
 	//! Project the vector v from the current frame into the viewport
 	//! @param v the vector in the current frame

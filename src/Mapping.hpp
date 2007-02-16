@@ -6,7 +6,7 @@
 class Mapping
 {
 public:
-	Mapping::Mapping(void);
+	Mapping(void);
 	virtual ~Mapping(void) {}
 	virtual std::string getName(void) const = 0;
 
