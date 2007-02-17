@@ -81,12 +81,12 @@ void Projector::init(const InitParser& conf)
 
 	double overwrite_max_fov
 	  = conf.get_double("projection","fisheye_max_fov",0.0);
-    if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
+	if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
 	if (overwrite_max_fov > 180.0)
 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
 	overwrite_max_fov
 	  = conf.get_double("projection","cylinder_max_fov",0.0);
-    if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
+	if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
 	if (overwrite_max_fov > 90.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
 
@@ -102,16 +102,25 @@ void Projector::init(const InitParser& conf)
 	setCurrentProjection(tmpstr);
 
 	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
-	
-	// Determine if the GL_POINT_SPRITE_ARB extension is available on this video card
-	// Check for extensions
-	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
-	if (glGetError()!=GL_NO_ERROR)
+
+	flagGlPointSprite
+	  = conf.get_boolean("projection","flag_use_gl_point_sprite",true);
+	if (flagGlPointSprite)
 	{
-		cerr << "Error while requesting openGL extensions" << endl;
-		return;
+		// Determine if the GL_POINT_SPRITE_ARB extension is available on this video card
+		// Check for extensions
+		const GLubyte * strExt = glGetString(GL_EXTENSIONS);
+		if (glGetError()!=GL_NO_ERROR)
+		{
+			cerr << "Error while requesting openGL extensions" << endl;
+			flagGlPointSprite = false;
+		}
+		else
+                {
+			flagGlPointSprite = gluCheckExtension
+			                      ((const GLubyte*)"GL_ARB_point_sprite", strExt);
+		}
 	}
-	flagGlPointSprite = gluCheckExtension ((const GLubyte*)"GL_ARB_point_sprite", strExt);
 	if (flagGlPointSprite)
 	{
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
