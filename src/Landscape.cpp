@@ -274,7 +274,9 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
 	const int stacks = 8;
-	int slices_per_side = 256/(nb_decor_repeat*nb_side);
+	  // make slices_per_side=(3<<K) so that the innermost polygon of the
+	  // fandisk becomes a triangle:
+	int slices_per_side = 3*64/(nb_decor_repeat*nb_side);
 	if (slices_per_side<=0) slices_per_side = 1;
 	const double z0 = radius * std::sin(decor_angle_shift*M_PI/180.0);
 	const double d_z = radius * std::sin(decor_alt_angle*M_PI/180.0) / stacks;
@@ -326,7 +328,9 @@ void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	ground_tex->bind();
-	int slices_per_side = 256/(nb_decor_repeat*nb_side);
+	  // make slices_per_side=(3<<K) so that the innermost polygon of the
+	  // fandisk becomes a triangle:
+	int slices_per_side = 3*64/(nb_decor_repeat*nb_side);
 	if (slices_per_side<=0) slices_per_side = 1;
 	prj->setCustomFrame(mat);
 
