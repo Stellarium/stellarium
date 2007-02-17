@@ -500,9 +500,13 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
   assert(level<64);
   double rad[64];
   int i,j;
-  for (i=0;i<=level;i++) {
-    double f = ((i+1)/(double)(level+1));
-    rad[i] = radius*f*f;
+  rad[level] = radius;
+//  for (i=level-1;i>=0;i--) {
+//    double f = ((i+1)/(double)(level+1));
+//    rad[i] = radius*f*f;
+//  }
+  for (i=level-1;i>=0;i--) {
+    rad[i] = rad[i+1]*(1.0-M_PI/(inner_fan_slices<<(i+1)))*2.0/3.0;
   }
   int slices = inner_fan_slices<<level;
   const double dtheta = 2.0 * M_PI / slices;
@@ -542,11 +546,9 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
       glEnd();
     }
   }
-   // draw the inner fan
+    // draw the inner polygon
   slices_step>>=1;
-  glBegin(GL_TRIANGLE_FAN);
-  glTexCoord2d(0.5,0.5);
-  drawVertex3(0,0,0);
+  glBegin(GL_POLYGON);
   for (j=0,cos_sin_theta_p=cos_sin_theta;
        j<=slices;
        j+=slices_step,cos_sin_theta_p+=2*slices_step) {
