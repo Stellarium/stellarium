@@ -69,7 +69,10 @@ void Projector::init(const InitParser& conf)
 	else
 		if (tmpstr=="square" || tmpstr=="disk")
 		{
-			setSquareViewport(getViewportWidth(), getViewportHeight(), conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
+			setSquareViewport(getViewportWidth(),
+			                  getViewportHeight(),
+			                  conf.get_int("video:horizontal_offset"),
+			                  conf.get_int("video:vertical_offset"));
 			if (tmpstr=="disk")
 				setViewportMaskDisk();
 		}
