@@ -30,15 +30,12 @@
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
 {
-	tex = NULL;
 	fader = new LinearFader();
 	dependenciesOrder["draw"]="first";
 }
 
 MilkyWay::~MilkyWay()
 {
-	if (tex) delete tex;
-	tex = NULL;
 	delete fader;
 	fader = NULL;
 }
@@ -52,9 +49,8 @@ void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
 
 void MilkyWay::setTexture(const string& tex_file)
 {
-	if (tex) delete tex;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex = &StelApp::getInstance().getTextureManager().createTexture(tex_file);
+	tex = StelApp::getInstance().getTextureManager().createTexture(tex_file);
 
 	// big performance improvement to cache this
 	tex_avg_luminance = tex->getAverageLuminance();

@@ -109,10 +109,6 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 StelUI::~StelUI()
 {
 	delete desktop; 	desktop = NULL;
-	delete baseTex; 	baseTex = NULL;
-	delete flipBaseTex; flipBaseTex = NULL;
-	delete tex_up; tex_up = NULL;
-	delete tex_down; tex_down = NULL;
 	if (tui_root) delete tui_root; tui_root=NULL;
 	Component::deleteScissor();
 }
@@ -123,10 +119,6 @@ void StelUI::init(const InitParser& conf)
 	if(initialised)
 	{
 		// delete existing objects before recreating
-		if(baseTex) delete baseTex;
-		if(flipBaseTex) delete flipBaseTex;
-		if(tex_up) delete tex_up;
-		if(tex_down) delete tex_down;
 		if(desktop) delete desktop;
 	}
 
@@ -161,11 +153,11 @@ void StelUI::init(const InitParser& conf)
 
 	// Create standard texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	baseTex = &StelApp::getInstance().getTextureManager().createTexture("backmenu.png");
-	flipBaseTex = &StelApp::getInstance().getTextureManager().createTexture("backmenu_flip.png");
+	baseTex = StelApp::getInstance().getTextureManager().createTexture("backmenu.png");
+	flipBaseTex = StelApp::getInstance().getTextureManager().createTexture("backmenu_flip.png");
 
-	tex_up = &StelApp::getInstance().getTextureManager().createTexture("up.png");
-	tex_down = &StelApp::getInstance().getTextureManager().createTexture("down.png");
+	tex_up = StelApp::getInstance().getTextureManager().createTexture("up.png");
+	tex_down = StelApp::getInstance().getTextureManager().createTexture("down.png");
 	
 	// Set default Painter
 	Painter p(baseTex, &baseFont, s_color(s_vec3(0.5, 0.5, 0.5)), s_color(s_vec3(1., 1., 1.)));
@@ -211,9 +203,9 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
 
-	dialog_win = new StdDlgWin(L"Stellarium", &StelApp::getInstance().getTextureManager().createTexture("bt_blank.png"),
-							   &StelApp::getInstance().getTextureManager().createTexture("bt_question.png"),
-							   &StelApp::getInstance().getTextureManager().createTexture("bt_alert.png"));
+	dialog_win = new StdDlgWin(L"Stellarium", StelApp::getInstance().getTextureManager().createTexture("bt_blank.png"),
+							   StelApp::getInstance().getTextureManager().createTexture("bt_question.png"),
+							   StelApp::getInstance().getTextureManager().createTexture("bt_alert.png"));
 	//dialog_win->setOpaque(opaqueGUI);
 	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
 	desktop->addComponent(dialog_win);
@@ -316,65 +308,65 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	int x = 0;
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	bt_flag_constellation_draw = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_constellations.png"));
+	bt_flag_constellation_draw = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_constellations.png"));
 	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_constellation_name = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_const_names.png"));
+	bt_flag_constellation_name = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_const_names.png"));
 	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_constellation_art = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_constart.png"));
+	bt_flag_constellation_art = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_constart.png"));
 	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_azimuth_grid = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_azgrid.png"));
+	bt_flag_azimuth_grid = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_azgrid.png"));
 	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_equator_grid = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_eqgrid.png"));
+	bt_flag_equator_grid = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_eqgrid.png"));
 	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_ground = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_ground.png"));
+	bt_flag_ground = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_ground.png"));
 	bt_flag_ground->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_cardinals = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_cardinal.png"));
+	bt_flag_cardinals = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_cardinal.png"));
 	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_atmosphere = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_atmosphere.png"));
+	bt_flag_atmosphere = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_atmosphere.png"));
 	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_nebula_name = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_nebula.png"));
+	bt_flag_nebula_name = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_nebula.png"));
 	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_help = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_help.png"));
+	bt_flag_help = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_help.png"));
 	bt_flag_help->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_equatorial_mode = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_follow.png"));
+	bt_flag_equatorial_mode = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_follow.png"));
 	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_config = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_config.png"));
+	bt_flag_config = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_config.png"));
 	bt_flag_config->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 
 
-	bt_flag_night = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_nightview.png"));
+	bt_flag_night = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_nightview.png"));
 	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_quit = new FlagButton(true, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_quit.png"));
+	bt_flag_quit = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_quit.png"));
 	bt_flag_quit->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_search = new FlagButton(true, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_search.png"));
+	bt_flag_search = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_search.png"));
 	bt_flag_search->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
@@ -385,7 +377,7 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_script->setOnReturnKeyCallback(callback<void>(this, &StelUI::cbEditScriptExecute));
 	bt_script->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_goto = new FlagButton(true, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_goto.png"));
+	bt_flag_goto = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_goto.png"));
 	bt_flag_goto->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
@@ -402,11 +394,11 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(x,0);x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(x,0); x+=UI_BT;
 	if (conf.get_boolean("gui","flag_show_flip_buttons",false)) {
-		bt_flip_horz = new FlagButton(true, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_flip_horz.png"));
+		bt_flip_horz = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_flip_horz.png"));
 		bt_flip_horz->setOnPressCallback(callback<void>(this, &StelUI::cb));
 		bt_flip_horz->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 		bt_flag_ctr->addComponent(bt_flip_horz);		bt_flip_horz->setPos(x,0); x+=UI_BT;
-		bt_flip_vert = new FlagButton(true, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_flip_vert.png"));
+		bt_flip_vert = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_flip_vert.png"));
 		bt_flip_vert->setOnPressCallback(callback<void>(this, &StelUI::cb));
 		bt_flip_vert->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 		bt_flag_ctr->addComponent(bt_flip_vert);		bt_flip_vert->setPos(x,0); x+=UI_BT;
@@ -442,20 +434,20 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 Component* StelUI::createTimeControlButtons(void)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	bt_dec_time_speed = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_rwd.png"));
+	bt_dec_time_speed = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_rwd.png"));
 	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_dec_time_speed_cb));
 	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_real_time_speed = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_realtime.png"));
+	bt_real_time_speed = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_realtime.png"));
 	bt_real_time_speed->setSize(24,24);
 	bt_real_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_real_time_speed_cb));
 	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_inc_time_speed = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_fwd.png"));
+	bt_inc_time_speed = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_fwd.png"));
 	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_inc_time_speed_cb));
 	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_time_now = new FlagButton(false, NULL, &StelApp::getInstance().getTextureManager().createTexture("bt_now.png"));
+	bt_time_now = new FlagButton(false, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_now.png"));
 	bt_time_now->setOnPressCallback(callback<void>(this, &StelUI::bt_time_now_cb));
 	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 

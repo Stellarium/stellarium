@@ -86,11 +86,38 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}
+	
+//	if (moduleID=="stellagui")
+//	{
+//		// Preload the .so/.dll that the module requires, they are referenced in the module/dynamiclib.ini file
+//		vector<string> dynlibs;
+//		dynlibs.push_back("/lib/libpcre.so");
+//		dynlibs.push_back("/lib/libCEGUIBase.so");
+//		dynlibs.push_back("/lib/libCEGUIOpenGLRenderer.so");
+//		dynlibs.push_back("/lib/libCEGUITGAImageCodec.so");
+//		dynlibs.push_back("/lib/libCEGUILuaScriptModule.so");
+//		dynlibs.push_back("/lib/libCEGUItoluapp.so");
+//		dynlibs.push_back("/lib/libCEGUITinyXMLParser.so");
+//		dynlibs.push_back("/lib/libCEGUIFalagardWRBase.so");
+//		
+//		for (unsigned int i=0;i<dynlibs.size();++i)
+//		{
+//			string tmp = StelApp::getInstance().getFilePath("modules/" + moduleID + dynlibs[i]);
+//			GModule* tmpmd = g_module_open(tmp.c_str(), G_MODULE_BIND_LAZY);
+//			if (tmpmd==NULL)
+//			{
+//				cerr << "Couldn't load the dynamic library: " << tmp << ": " << g_module_error() << endl;
+//				cerr << "Module " << moduleID << " will not be loaded." << endl;
+//				return NULL;
+//			}
+//		}
+//	}
+
 	// Load module
 	GModule* md = g_module_open(moduleFullPath.c_str(), G_MODULE_BIND_LAZY);
 	if (md==NULL)
 	{
-		cerr << "Couldn't find the dynamic library: " << moduleFullPath << ": " << g_module_error() << endl;
+		cerr << "Couldn't open the dynamic library: " << moduleFullPath << ": " << g_module_error() << endl;
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}

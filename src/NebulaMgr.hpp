@@ -25,6 +25,7 @@
 #include "Fader.hpp"
 #include "grid.h"
 #include "StelObjectModule.hpp"
+#include "STextureTypes.hpp"
 
 using namespace std;
 
@@ -133,7 +134,7 @@ private:
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	bool flagShowTexture;			// Define if nebula textures are displayed
 	
-	STexture* texPointer;			// The selection pointer texture
+	STextureSP texPointer;			// The selection pointer texture
 };
 
 #endif // _NEBULA_MGR_H_

@@ -23,6 +23,7 @@
 #include "SDL_timer.h"
 #include "s_gui.h"
 #include "StelUtils.hpp"
+#include "STexture.hpp"
 using namespace std;
 using namespace s_gui;
 
@@ -219,13 +220,12 @@ void Scissor::pop(void)
 ////////////////////////////////////////////////////////////////////////////////
 
 Painter::Painter() :
-	tex1(NULL),
 	font(NULL),
 	opaque(false)
 {
 }
 
-Painter::Painter(const STexture* _tex1, SFont* _font,
+Painter::Painter(const STextureSP _tex1, SFont* _font,
 	const s_color& _baseColor, const s_color& _textColor) :
 		tex1(_tex1),
 		font(_font),
@@ -306,7 +306,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
 
 // Fill the defined square with the given texture and given color
 void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz,
-                             const s_color& c, const STexture * t) const
+                             const s_color& c, const STextureSP t) const
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
@@ -844,7 +844,7 @@ void FilledButton::draw()
 ////////////////////////////////////////////////////////////////////////////////
 
 
-TexturedButton::TexturedButton(const STexture* tex)
+TexturedButton::TexturedButton(const STextureSP tex)
 {
 	if (tex) setTexture(tex);
 }
@@ -906,8 +906,7 @@ void LabeledCheckBox::draw(void)
 	Container::draw();
 }
 
-FlagButton::FlagButton(int state, const STexture* tex,
-                       STexture* specificTex) : CheckBox(state)
+FlagButton::FlagButton(int state, const STextureSP tex, STextureSP specificTex) : CheckBox(state)
 {
 	if (tex) setTexture(tex);
 	specific_tex = specificTex;
@@ -916,7 +915,6 @@ FlagButton::FlagButton(int state, const STexture* tex,
 
 FlagButton::~FlagButton()
 {
-	if (specific_tex) delete specific_tex;
 }
 
 void FlagButton::draw()
@@ -1959,9 +1957,9 @@ void FramedContainer::setFrameSize(int left, int right, int bottom, int top)
 // Standard window widget
 ////////////////////////////////////////////////////////////////////////////////
 
-StdWin::StdWin(const wstring& _title, const STexture* _header_tex,
+StdWin::StdWin(const wstring& _title, const STextureSP _header_tex,
                SFont * _winfont, int headerSize) :
-	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(false)
+	FramedContainer(), titleLabel(NULL), dragging(false)
 {
 	if (_header_tex) header_tex = _header_tex;
 	if (_winfont) painter.setFont(_winfont);
@@ -2032,7 +2030,7 @@ void StdWin::setVisible(bool _visible)
 // Standard Button Window - StdWin with a close button in the title bar
 ////////////////////////////////////////////////////////////////////////////////
 
-StdBtWin::StdBtWin(const wstring& _title, const STexture* _header_tex,
+StdBtWin::StdBtWin(const wstring& _title, const STextureSP _header_tex,
                    SFont * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), hideBt(NULL)
 {
@@ -2058,7 +2056,7 @@ void StdBtWin::onHideBt(void)
 
 
 StdTransBtWin::StdTransBtWin(const wstring& _title, int _time_out,
-                             const STexture* _header_tex, SFont * _winfont,
+                             const STextureSP _header_tex, SFont * _winfont,
                              int headerSize) :
 	StdBtWin(_title, _header_tex, _winfont, headerSize)
 {
@@ -2107,7 +2105,7 @@ void StdTransBtWin::set_timeout(int _time_out)
 #define STDDLGWIN_BT_ICON_LEFT 20
 #define STDDLGWIN_BT_ICON_TOP 20
 
-StdDlgWin::StdDlgWin(const wstring& _title, STexture* blankIconTex, STexture* questionIconTex, STexture* alertIconTex, const STexture* _header_tex,
+StdDlgWin::StdDlgWin(const wstring& _title, STextureSP blankIconTex, STextureSP questionIconTex, STextureSP alertIconTex, const STextureSP _header_tex,
                      SFont * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL), 
 	inputEdit(NULL), hasIcon(false)
@@ -2126,9 +2124,9 @@ StdDlgWin::StdDlgWin(const wstring& _title, STexture* blankIconTex, STexture* qu
 	secondBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onSecondBt));
 	addComponent(secondBt);
 
-	blankIcon = blankIconTex;//new STexture("bt_blank.png");
-	questionIcon = questionIconTex;//new STexture("bt_question.png");
-	alertIcon = alertIconTex;//new STexture("bt_alert.png");
+	blankIcon = blankIconTex;
+	questionIcon = questionIconTex;
+	alertIcon = alertIconTex;
 	picture = new Picture(questionIcon, STDDLGWIN_BT_ICON_LEFT, STDDLGWIN_BT_ICON_TOP, 32, 32);
 	addComponent(picture);
 
@@ -2152,8 +2150,6 @@ StdDlgWin::StdDlgWin(const wstring& _title, STexture* blankIconTex, STexture* qu
 
 StdDlgWin::~StdDlgWin()
 {
-	delete blankIcon;
-	delete alertIcon;
 }
 
 void StdDlgWin::resetResponse(void)
@@ -2562,8 +2558,8 @@ bool CursorBar::onMove(int x, int y)
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-IntIncDec::IntIncDec(SFont* _font, const STexture* tex_up,
-		const STexture* tex_down, int _min, int _max,
+IntIncDec::IntIncDec(SFont* _font, const STextureSP tex_up,
+		const STextureSP tex_down, int _min, int _max,
 		int _init_value, int _inc, bool _loop) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL), loop(_loop)
 {
@@ -2620,8 +2616,8 @@ void IntIncDec::dec_value()
 	if (!onPressCallback.empty()) onPressCallback();
 }
 		
-IntIncDecVert::IntIncDecVert(SFont* _font, const STexture* tex_up,
-		const STexture* tex_down, int _min, int _max,
+IntIncDecVert::IntIncDecVert(SFont* _font, const STextureSP tex_up,
+		const STextureSP tex_down, int _min, int _max,
 		int _init_value, int _inc, bool _loop) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc, loop)
 {
 	label->setPos(0,3);
@@ -2630,8 +2626,8 @@ IntIncDecVert::IntIncDecVert(SFont* _font, const STexture* tex_up,
 	setSize(_max/10 * 8 + 16,40);
 }
 
-FloatIncDec::FloatIncDec(SFont* _font, const STexture* tex_up,
-		const STexture* tex_down, float _min, float _max,
+FloatIncDec::FloatIncDec(SFont* _font, const STextureSP tex_up,
+		const STextureSP tex_down, float _min, float _max,
 		float _init_value, float _inc) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), 
 	btless(NULL), label(NULL), format(FORMAT_DEFAULT)
@@ -2708,8 +2704,8 @@ void FloatIncDec::dec_value()
 // Widget used to set time and date.
 ////////////////////////////////////////////////////////////////////////////////
 
-Time_item::Time_item(SFont* _font, const STexture* tex_up,
-						const STexture* tex_down, double _JD) :
+Time_item::Time_item(SFont* _font, const STextureSP tex_up,
+						const STextureSP tex_down, double _JD) :
 						d(NULL), m(NULL), y(NULL), h(NULL), mn(NULL), s(NULL)
 {
 	if (_font) setFont(_font);
@@ -2866,7 +2862,7 @@ void Time_item::onTimeChange(void)
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-Picture::Picture(const STexture * _imageTex,
+Picture::Picture(const STextureSP _imageTex,
                  int xpos, int ypos, int xsize, int ysize) :
 	imageTex(_imageTex), imgcolor(s_color(s_vec3(1,1,1)))
 {
@@ -2878,8 +2874,6 @@ Picture::Picture(const STexture * _imageTex,
 
 Picture::~Picture()
 {
-	if (imageTex) delete imageTex;
-	imageTex = NULL;
 }
 
 void Picture::draw(void)
@@ -2982,9 +2976,9 @@ void City_Mgr::setProximity(double _proximity)
 #define CITY_WITH_NAME s_color(s_vec3(1,.4,0))
 #define CITY_WITHOUT_NAME s_color(s_vec3(.8,.6,0))
 
-MapPicture::MapPicture(const STexture *_imageTex,
-                       const STexture *_pointerTex,
-                       const STexture *_cityTex,
+MapPicture::MapPicture(const STextureSP _imageTex,
+                       const STextureSP _pointerTex,
+                       const STextureSP _cityTex,
                        int xpos, int ypos, int xsize, int ysize) :
 	Picture(_imageTex, xpos, ypos, xsize, ysize), pointer(NULL), panning(false), 
 	dragging(false), zoom(1.f), sized(false), exact(false)

@@ -37,14 +37,13 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (!splash_tex.empty()) splash = &StelApp::getInstance().getTextureManager().createTexture(splash_tex);
+	if (!splash_tex.empty()) splash = StelApp::getInstance().getTextureManager().createTexture(splash_tex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 	timeCounter = SDL_GetTicks();
 }
 	
 LoadingBar::~LoadingBar()
 {
-	if (splash) delete splash;
 }
 
 void LoadingBar::Draw(float val)

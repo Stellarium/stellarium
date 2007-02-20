@@ -27,8 +27,7 @@
 #include "Navigator.hpp"
 #include "Fader.hpp"
 #include "StelUtils.hpp"
-
-class STexture;
+#include "STextureTypes.hpp"
 
 // Class which manages the displaying of the Landscape
 class Landscape
@@ -83,7 +82,7 @@ protected:
 	
 typedef struct
 {
-	STexture* tex;
+	STextureSP tex;
 	float tex_coords[4];
 } landscape_tex_coord;
 };
@@ -101,13 +100,13 @@ private:
 	void draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_ground(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	STexture** side_texs;
+	STextureSP* side_texs;
 	int nb_side_texs;
 	int nb_side;
 	landscape_tex_coord* sides;
-	STexture* fog_tex;
+	STextureSP fog_tex;
 	landscape_tex_coord fog_tex_coord;
-	STexture* ground_tex;
+	STextureSP ground_tex;
 	landscape_tex_coord ground_tex_coord;
 	int nb_decor_repeat;
 	float fog_alt_angle;
@@ -130,7 +129,7 @@ public:
 	void create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
 
-	STexture* map_tex;
+	STextureSP map_tex;
 	float tex_fov;
 };
 
@@ -145,7 +144,7 @@ public:
 	void create(const wstring _name, bool _fullpath, const string _maptex);
 private:
 
-	STexture* map_tex;
+	STextureSP map_tex;
 };
 
 #endif // _LANDSCAPE_H_

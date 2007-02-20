@@ -23,8 +23,8 @@
 #include <string>
 #include "StelModule.hpp"
 #include "vecmath.h"
+#include "STextureTypes.hpp"
 
-class STexture;
 class Navigator;
 class ToneReproducer;
 class LoadingBar;
@@ -56,7 +56,7 @@ public:
 	
 private:
 	float radius;
-	STexture* tex;
+	STextureSP tex;
 	Vec3f color;
 	float intensity;
 	float tex_avg_luminance;

@@ -23,6 +23,7 @@
 #include "StelObjectModule.hpp"
 #include "Fader.hpp"
 #include "vecmath.h"
+#include "STextureTypes.hpp"
 
 #include <vector>
 #include <map>
@@ -34,7 +35,6 @@ class InitParser;
 class Projector;
 class Navigator;
 class SFont;
-class STexture;
 class StelObject;
 class Telescope;
 
@@ -96,7 +96,7 @@ private:
   Vec3f circle_color;
   Vec3f label_color;
   SFont *telescope_font;
-  STexture *telescope_texture;
+  STextureSP telescope_texture;
 
   class TelescopeMap : public std::map<int,Telescope*> {
   public:
@@ -104,7 +104,7 @@ private:
     void clear(void);
   };
   TelescopeMap telescope_map;
-  STexture* texPointer;			// The selection pointer texture
+  STextureSP texPointer;			// The selection pointer texture
 };
 
 

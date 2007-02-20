@@ -30,6 +30,7 @@
 #include "Planet.hpp"
 #include "StelObject.hpp"
 #include "StelObjectModule.hpp"
+#include "STextureTypes.hpp"
 
 class Orbit;
 class LoadingBar;
@@ -200,13 +201,13 @@ private:
 		bool operator()(Planet* p1, Planet* p2) { return p1->get_distance() > p2->get_distance(); }
 	};
 
-	STexture *tex_earth_shadow;  // for lunar eclipses
+	STextureSP tex_earth_shadow;  // for lunar eclipses
 
 	// Master settings
 	bool flagOrbits;
 	bool flag_light_travel_time;
 	
-	STexture* texPointer;			// The selection pointer texture
+	STextureSP texPointer;			// The selection pointer texture
 };
 
 

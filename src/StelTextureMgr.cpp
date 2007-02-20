@@ -35,7 +35,6 @@ extern "C" {
 using namespace std;
 
 // Initialize statics
-ManagedSTexture StelTextureMgr::NULL_STEXTURE;
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
@@ -199,7 +198,7 @@ void StelTextureMgr::setDefaultParams()
 /*************************************************************************
  Internal
 *************************************************************************/
-ManagedSTexture* StelTextureMgr::initTex(const string& afilename)
+ManagedSTextureSP StelTextureMgr::initTex(const string& afilename)
 {
 	string filename;
 	if (afilename[0]=='/' || (afilename[0]=='.' && afilename[1]=='/'))
@@ -209,10 +208,10 @@ ManagedSTexture* StelTextureMgr::initTex(const string& afilename)
 	if (!StelUtils::fileExists(filename))
 	{
 		cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
-		return NULL;
+		return ManagedSTextureSP();
 	}
 
-	ManagedSTexture* tex = new ManagedSTexture();
+	ManagedSTextureSP tex(new ManagedSTexture());
 	// Set parameters than can be set for this texture
 	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
 	tex->magFilter = magFilter;
@@ -226,24 +225,21 @@ ManagedSTexture* StelTextureMgr::initTex(const string& afilename)
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
-ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
+ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
 {
-	ManagedSTexture* tex = initTex(afilename);
+	ManagedSTextureSP tex = initTex(afilename);
 	if (tex==NULL)
-		return NULL_STEXTURE;
+		return ManagedSTextureSP();
 
 	// Load only if lazyLoading is not true, else will load later
 	if (lazyLoading==true)
-		return *tex;
+		return tex;
 	
 	// Simply load everything
-	if (loadImage(tex) && glLoadTexture(tex))
-		return *tex;
+	if (loadImage(tex.get()) && glLoadTexture(tex.get()))
+		return tex;
 	else
-	{
-		delete tex;
-		return NULL_STEXTURE;
-	}
+		return ManagedSTextureSP();
 }
 
 /*************************************************************************
@@ -255,10 +251,10 @@ struct LoadQueueParam
 	std::vector<LoadQueueParam*>* loadQueue;
 	SDL_mutex* loadQueueMutex;
 	SDL_Thread* thread;
-	ManagedSTexture* tex;
+	ManagedSTextureSP tex;
 	
 	// those 2 are used to return the final texture and status. Only access them in the main thread!!
-	STexture** outTex;
+	STextureSP* outTex;
 	bool* status;
 };
 
@@ -270,7 +266,7 @@ int loadTextureThread(void* tparam)
 	//cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
 	assert(param->tex->threadedLoading==true);
 	// Load the image
-	if (param->texMgr->loadImage(param->tex)==false)
+	if (param->texMgr->loadImage(param->tex.get())==false)
 	{
 		param->tex->loadState = ManagedSTexture::LOAD_ERROR;
 	}
@@ -281,10 +277,10 @@ int loadTextureThread(void* tparam)
 	return 0;
 }
 
-bool StelTextureMgr::createTextureThread(STexture** outTex, const std::string& filename, bool* status)
+bool StelTextureMgr::createTextureThread(STextureSP* outTex, const std::string& filename, bool* status)
 {
 	*status = false;
-	ManagedSTexture* tex = initTex(filename);
+	ManagedSTextureSP tex = initTex(filename);
 	if (tex==NULL)
 	{
 		*status = true;	// indicate error
@@ -323,20 +319,16 @@ void StelTextureMgr::update()
 		if ((*iter)->tex->loadState==ManagedSTexture::LOAD_ERROR)
 		{
 			// There was an error while loading the image
-			delete (*iter)->tex;
-			(*iter)->tex=NULL;
-			*((*iter)->outTex) = NULL;
+			*((*iter)->outTex) = STextureSP();
 			*((*iter)->status) = true;
 		}
 		else
 		{
 			// Create openGL texture
-			if (glLoadTexture((*iter)->tex)==false)
+			if (glLoadTexture((*iter)->tex.get())==false)
 			{
 				// There was an error while loading the texture to openGL
-				delete (*iter)->tex;
-				(*iter)->tex=NULL;
-				*((*iter)->outTex) = NULL;
+				*((*iter)->outTex) = STextureSP();
 				*((*iter)->status) = true;
 			}
 			else
