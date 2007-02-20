@@ -29,6 +29,7 @@ class SFont;
 #include "callbacks.hpp"
 #include "Fader.hpp"
 #include "Translator.hpp"
+#include "STextureTypes.hpp"
 
 #include <list>
 #include <string>
@@ -76,7 +77,7 @@ public:
 private:
 	const double radius_min;
 	const double radius_max;
-	STexture *tex;
+	STextureSP tex;
 };
 
 
@@ -113,7 +114,7 @@ public:
 	float getSelectPriority(const Navigator *nav) const;
 	Vec3f getInfoColor(void) const;
 	
-    const STexture *getMapTexture(void) const {return tex_map;}
+    const STextureSP getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
@@ -255,9 +256,9 @@ protected:
 	Mat4d rot_local_to_parent;
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
-    STexture * tex_map;			// Planet map texture
-	STexture * tex_halo;			// Little halo texture
-	STexture * tex_big_halo;		// Big halo texture
+    STextureSP tex_map;			// Planet map texture
+	STextureSP tex_halo;			// Little halo texture
+	STextureSP tex_big_halo;		// Big halo texture
 
 	float big_halo_size;				// Halo size on screen
 

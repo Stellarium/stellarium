@@ -59,8 +59,7 @@ Planet::Planet(Planet *parent,
 		englishName(englishName), flagHalo(flagHalo),
         flag_lighting(flag_lighting),
         radius(radius), one_minus_oblateness(1.0-oblateness),
-        color(color), albedo(albedo), axis_rotation(0.),
-        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
+        color(color), albedo(albedo), axis_rotation(0.), rings(NULL),
         sphere_scale(1.f),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
         coord_func(coord_func), osculating_func(osculating_func),
@@ -72,9 +71,9 @@ Planet::Planet(Planet *parent,
 	mat_local_to_parent = Mat4d::identity();
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	tex_map = &StelApp::getInstance().getTextureManager().createTexture(tex_map_name);
+	tex_map = StelApp::getInstance().getTextureManager().createTexture(tex_map_name);
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (flagHalo) tex_halo = &StelApp::getInstance().getTextureManager().createTexture(tex_halo_name);
+	if (flagHalo) tex_halo = StelApp::getInstance().getTextureManager().createTexture(tex_halo_name);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -93,14 +92,6 @@ Planet::Planet(Planet *parent,
 
 Planet::~Planet()
 {
-	if (tex_map) delete tex_map;
-	tex_map = NULL;
-	if (tex_halo) delete tex_halo;
-	tex_halo = NULL;
-	if (rings) delete rings;
-	rings = NULL;
-	if (tex_big_halo) delete tex_big_halo;
-	tex_big_halo = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -525,7 +516,7 @@ float Planet::compute_magnitude(const Navigator * nav) const
 void Planet::set_big_halo(const string& halotexfile)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex_big_halo = &StelApp::getInstance().getTextureManager().createTexture(halotexfile);
+	tex_big_halo = StelApp::getInstance().getTextureManager().createTexture(halotexfile);
 }
 
 // Return the radius of a circle containing the object on screen
@@ -905,12 +896,10 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 
 Ring::Ring(double radius_min,double radius_max,const string &texname)
      :radius_min(radius_min),radius_max(radius_max) {
-	tex = &StelApp::getInstance().getTextureManager().createTexture(texname);
+	tex = StelApp::getInstance().getTextureManager().createTexture(texname);
 }
 
 Ring::~Ring(void) {
-	if (tex) delete tex;
-	tex = NULL;
 }
 
 void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)

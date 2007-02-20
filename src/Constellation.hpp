@@ -26,6 +26,7 @@
 #include "Fader.hpp"
 #include <vector>
 #include <boost/intrusive_ptr.hpp>
+#include "STextureTypes.hpp"
 
 class StarMgr;
 class SFont;
@@ -92,7 +93,7 @@ private:
     /** List of stars forming the segments */
     boost::intrusive_ptr<StelObject>* asterism;
    
-	class STexture* art_tex;
+	STextureSP art_tex;
 	Vec3d art_vertex[9];
 	
 	/** Define whether art, lines, names and boundary must be drawn */

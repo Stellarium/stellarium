@@ -43,7 +43,7 @@ SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL),selected(NULL),
 	moonScale(1.), fontSize(14.),
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
-	tex_earth_shadow(NULL), flagOrbits(false),flag_light_travel_time(false)
+	flagOrbits(false),flag_light_travel_time(false)
 {
 	flagPoint = false;
 	dependenciesOrder["draw"]="stars";
@@ -71,10 +71,6 @@ SolarSystem::~SolarSystem()
 	sun = NULL;
 	moon = NULL;
 	earth = NULL;
-
-	if(tex_earth_shadow) delete tex_earth_shadow;
-	
-	delete texPointer;
 }
 
 
@@ -99,8 +95,7 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
-	
-	texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
 }
 
 void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
@@ -431,7 +426,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 
 	// special case: load earth shadow texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex_earth_shadow = &StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
+	tex_earth_shadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 	
 	cout << "(loaded)" << endl;
 }

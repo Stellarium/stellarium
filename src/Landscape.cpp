@@ -64,7 +64,7 @@ const string Landscape::getTexturePath(const string& basename, const string& lan
 		return StelApp::getInstance().getTextureFilePath(basename);		
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), fog_tex(NULL), ground_tex(NULL)
+LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -73,16 +73,14 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	{
 		for (int i=0;i<nb_side_texs;++i)
 		{
-			if (side_texs[i]) delete side_texs[i];
-			side_texs[i] = NULL;
+			// TODO I am not sure that this decrement the reference count of the shared pointers
+			// side_texs[i] = NULL;
 		}
 		delete [] side_texs;
 		side_texs = NULL;
 	}
 
 	if (sides) delete [] sides;
-	if (ground_tex) delete ground_tex;
-	if (fog_tex) delete fog_tex;
 
 }
 
@@ -105,14 +103,14 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 
 	// Load sides textures
 	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
-	side_texs = new STexture*[nb_side_texs];
+	side_texs = new STextureSP[nb_side_texs];
 	char tmp[255];
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_CLAMP_TO_EDGE);
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, tmp), section_name));
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, tmp), section_name));
 	}
 
 	// Init sides parameters
@@ -137,7 +135,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	nb_decor_repeat = pd.get_int(section_name, "nb_decor_repeat", 1);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	ground_tex = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "groundtex"), section_name));
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "groundtex"), section_name));
 	s = pd.get_str(section_name, "ground");
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -147,7 +145,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = &StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "fogtex"), section_name));
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "fogtex"), section_name));
 	s = pd.get_str(section_name, "fog");
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -175,14 +173,14 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 
 	// Load sides textures
 	nb_side_texs = StelUtils::str_to_int(param["nbsidetex"]);
-	side_texs = new STexture*[nb_side_texs];
+	side_texs = new STextureSP[nb_side_texs];
 	
 	char tmp[255];
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = &StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp]);
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp]);
 	}
 
 	// Init sides parameters
@@ -206,7 +204,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 
 	nb_decor_repeat = StelUtils::str_to_int(param["nb_decor_repeat"], 1);
 
-	ground_tex = &StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
 	s = param["ground"];
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -216,7 +214,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = &StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"]);
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"]);
 	s = param["fog"];
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -349,13 +347,11 @@ void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, 
 	glDisable(GL_CULL_FACE);
 }
 
-LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius), map_tex(NULL)
+LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
-	if (map_tex != NULL) delete map_tex;
-	map_tex = NULL;
 }
 
 void LandscapeFisheye::load(const string& landscape_file, const string& section_name)
@@ -383,7 +379,7 @@ void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string 
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	map_tex = &StelApp::getInstance().getTextureManager().createTexture(_maptex);
+	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 	tex_fov = _texturefov*M_PI/180.;
 }
 
@@ -411,13 +407,11 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 
 // spherical panoramas
 
-LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius), map_tex(NULL)
+LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
-	if (map_tex) delete map_tex;
-	map_tex = NULL;
 }
 
 void LandscapeSpherical::load(const string& landscape_file, const string& section_name)
@@ -447,7 +441,7 @@ void LandscapeSpherical::create(const wstring _name, bool _fullpath, const strin
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	map_tex = &StelApp::getInstance().getTextureManager().createTexture(_maptex);
+	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 }
 
 

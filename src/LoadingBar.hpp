@@ -20,10 +20,10 @@
 #ifndef _LOADINGBAR_H_
 #define _LOADINGBAR_H_
 
+#include "STextureTypes.hpp"
 
 class SFont;
 class Projector;
-class STexture;
 
 // Class which is used to display loading bar
 class LoadingBar
@@ -42,7 +42,7 @@ private:
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	SFont& barfont;
 	SFont& extraTextFont;
-	STexture* splash;
+	STextureSP splash;
 	wstring extraText;
 	Vec2f extraTextPos;
 	int timeCounter;

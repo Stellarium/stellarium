@@ -371,7 +371,7 @@ public:
                     const float *rmag_table, Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
                     SFont *starFont,
-                    STexture* starTexture) const = 0;
+                    STextureSP starTexture) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
                     const Vec3d &c0,
@@ -415,7 +415,7 @@ private:
   void draw(int index,bool is_inside,bool draw_point,
             const float *rmag_table, Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
-            SFont *starFont,STexture* starTexture) const;
+            SFont *starFont,STextureSP starTexture) const;
 };
 
 struct HipIndexStruct {
@@ -1104,10 +1104,7 @@ StarMgr::~StarMgr(void) {
   }
   zone_arrays.clear();
 
-  if (starTexture) {delete starTexture;starTexture = NULL;}
   if (hip_index) delete[] hip_index;
-  
-  delete texPointer;
 }
 
 bool StarMgr::flagSciNames = true;
@@ -1135,8 +1132,7 @@ void StarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
   StelApp::getInstance().getTextureManager().setDefaultParams();
     // Load star texture no mipmap:
-  starTexture = &StelApp::getInstance().getTextureManager()
-                  .createTexture("star16x16.png");
+  starTexture = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
   double fontSize = 12;
   starFont = &StelApp::getInstance().getFontManager()
                 .getStandardFont(StelApp::getInstance()
@@ -1154,7 +1150,7 @@ void StarMgr::init(const InitParser& conf, LoadingBar& lb) {
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
   
-  texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
+  texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
 void StarMgr::setGrid(void) {
@@ -1420,7 +1416,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
                                   SFont *starFont,
-                                  STexture* starTexture) const {
+                                  STextureSP starTexture) const {
   if (draw_point) {
     glDisable(GL_TEXTURE_2D);
     glPointSize(0.1);

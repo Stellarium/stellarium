@@ -37,7 +37,7 @@ Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
 
   // use alpha channel if present, otherwise use solid texture
   StelApp::getInstance().getTextureManager().setDefaultParams();
-  image_tex = &StelApp::getInstance().getTextureManager().createTexture(filename);  // what if it doesn't load?
+  image_tex = StelApp::getInstance().getTextureManager().createTexture(filename);  // what if it doesn't load?
 
   int img_w, img_h;
   image_tex->getDimensions(img_w, img_h);
@@ -50,7 +50,6 @@ Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
 }
 
 Image::~Image() {
-  if(image_tex) delete image_tex;
 }
 
 void Image::set_alpha(float alpha, float duration) {

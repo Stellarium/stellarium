@@ -31,7 +31,7 @@ Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 
-Constellation::Constellation() : asterism(NULL), art_tex(NULL)
+Constellation::Constellation() : asterism(NULL)
 {
 }
 
@@ -39,8 +39,6 @@ Constellation::~Constellation()
 {   
 	if (asterism) delete[] asterism;
     asterism = NULL;
-    if (art_tex) delete art_tex;
-    art_tex = NULL;
 }
 
 // Read Constellation data record and grab cartesian positions of stars

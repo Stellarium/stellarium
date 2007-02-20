@@ -88,10 +88,10 @@ private:
 	StelApp * app;			// The main application instance
 	
 	bool initialised;
-	STexture * baseTex;	// The standard fill texture
-	STexture * flipBaseTex;	// The standard fill texture
-	STexture * tex_up;		// Up arrow texture
-	STexture * tex_down;	// Down arrow texture
+	STextureSP baseTex;	// The standard fill texture
+	STextureSP flipBaseTex;	// The standard fill texture
+	STextureSP tex_up;		// Up arrow texture
+	STextureSP tex_down;	// Down arrow texture
 
 	// Flags and variables (moved from StelCore)
 	int FlagShowTopBar;

@@ -27,6 +27,7 @@
 class SFont;
 class ToneReproducer;
 #include "Translator.hpp"
+#include "STextureTypes.hpp"
 
 /*
 Gx Galaxy
@@ -95,7 +96,7 @@ private:
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
     void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj, const Navigator * nav);
-    bool hasTex(void) { return (neb_tex != NULL); }
+    bool hasTex(void) {return neb_tex;}
     
 	unsigned int M_nb;			// Messier Catalog number
 	unsigned int NGC_nb;			// New General Catalog number
@@ -110,12 +111,12 @@ private:
 	Vec3d XY;						// Store temporary 2D position
 	nebula_type nType;
 
-	class ManagedSTexture* neb_tex;			// Texture
+	ManagedSTextureSP neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;			// Object luminance to use (value computed to compensate
 						// the texture average luminosity)
 	
-	static STexture * tex_circle;	// The symbolic circle texture
+	static STextureSP tex_circle;	// The symbolic circle texture
 	static SFont* nebula_font;		// Font used for names printing
 	static float hints_brightness;
 
