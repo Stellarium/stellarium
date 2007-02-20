@@ -680,7 +680,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 		glDisable(GL_LIGHTING);
 		glColor3fv(color);
 	}
-	tex_map->bind();
+	if (tex_map) tex_map->bind();
 
 	prj->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
 
@@ -757,7 +757,7 @@ if (screen_r<1.f) screen_r=1.f;
 		rmag = screen_r;
 	}
 
-	tex_halo->bind();
+	if (tex_halo) tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -805,7 +805,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 		rmag = screen_r;
 	}
 
-	tex_halo->bind();
+	if (tex_halo) tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -850,7 +850,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 		rmag = screen_r;
 	}
 
-	tex_big_halo->bind();
+	if (tex_big_halo) tex_big_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -885,7 +885,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 		rmag = screen_r*2;
 	}
 
-	tex_big_halo->bind();
+	if (tex_big_halo) tex_big_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -919,7 +919,7 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 
-	tex->bind();
+	if (tex) tex->bind();
 
 	// TODO: radial texture would look much better
 
