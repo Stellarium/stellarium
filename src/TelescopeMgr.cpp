@@ -43,7 +43,7 @@ void TelescopeMgr::TelescopeMap::clear(void) {
   std::map<int,Telescope*>::clear();
 }
 
-TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL),telescope_texture(0) {
+TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
 #ifdef WIN32
   WSADATA wsaData;
   if (WSAStartup(0x202,&wsaData) == 0) {
@@ -62,11 +62,9 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL),telescope_texture(0) {
 }
 
 TelescopeMgr::~TelescopeMgr(void) {
-  if (telescope_texture) delete telescope_texture;
 #ifdef WIN32
   if (wsa_ok) WSACleanup();
 #endif
- delete texPointer;
 }
 
 double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
@@ -187,12 +185,8 @@ void TelescopeMgr::setFontSize(float font_size) {
 
 void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
   setFontSize(12.f);
-  if (telescope_texture) {
-    delete telescope_texture;
-    telescope_texture = 0;
-  }
   StelApp::getInstance().getTextureManager().setDefaultParams();
-  telescope_texture = &StelApp::getInstance().getTextureManager().createTexture("telescope.png");
+  telescope_texture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 #ifdef WIN32
   if (!wsa_ok) return;
 #endif
@@ -213,7 +207,7 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
   
-  texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
+  texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
 

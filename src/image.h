@@ -23,6 +23,7 @@
 #define _IMAGE_H_
 
 #include <string>
+#include "STextureTypes.hpp"
 
 class Projector;
 class Navigator;
@@ -58,7 +59,7 @@ POS_VIEWPORT,
 	}  // was texture loaded from disk?
 
 private:
-	class STexture * image_tex;
+	STextureSP image_tex;
 	std::string image_name;
 	IMAGE_POSITIONING image_pos_type;
 	float image_scale, image_alpha, image_rotation;

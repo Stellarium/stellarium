@@ -29,6 +29,7 @@
 #include <cstdio>
 #include "Fader.hpp"
 #include "StelObjectModule.hpp"
+#include "STextureTypes.hpp"
 
 using namespace std ;
 
@@ -180,7 +181,7 @@ private:
     bool gravityLabel;
     float limitingMag;                  // limiting magnitude at 60 degree fov
     
-    STexture *starTexture;                // star texture
+    STextureSP starTexture;                // star texture
 
     int max_geodesic_grid_level;
     int last_max_search_level;
@@ -191,8 +192,7 @@ private:
                                  const Vec3d &c1,
                                  const Vec3d &c2,
                                  void *context) {
-      reinterpret_cast<StarMgr*>(context)
-        ->initTriangle(lev,index,c0,c1,c2);
+      reinterpret_cast<StarMgr*>(context)->initTriangle(lev,index,c0,c1,c2);
     }
     void initTriangle(int lev,int index,
                       const Vec3d &c0,
@@ -215,7 +215,7 @@ private:
     float twinkle_amount;
     float star_scale;
     
-    STexture* texPointer;			// The selection pointer texture
+    STextureSP texPointer;			// The selection pointer texture
 };
 
 

@@ -23,8 +23,10 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <boost/shared_ptr.hpp>
 #include "SDL_opengl.h"
 #include "STexture.hpp"
+#include "STextureTypes.hpp"
 
 class ManagedSTexture : public STexture
 {
@@ -47,7 +49,6 @@ public:
     	}
     }
 	virtual int getLoadState(void) { return loadState;}
-
 
 private:
 	friend int loadTextureThread(void* tparam);
@@ -99,7 +100,7 @@ public:
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	ManagedSTexture& createTexture(const std::string& afilename, bool lazyLoading=false);
+	ManagedSTextureSP createTexture(const std::string& afilename, bool lazyLoading=false);
 	
 	//! Load an image from a file and create a new texture from it in a new thread, the value of the return pointer
 	//!    and of the status boolean are only set in the update() method and therefore don't need to be protected
@@ -109,7 +110,7 @@ public:
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param status is set to false if the creation of the texture failed
-	bool createTextureThread(STexture** tex, const std::string& filename, bool* status);
+	bool createTextureThread(STextureSP* tex, const std::string& filename, bool* status);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -142,7 +143,7 @@ private:
 	friend class ManagedSTexture;
 
 	//! Internal
-	ManagedSTexture* initTex(const string& afilename);
+	ManagedSTextureSP initTex(const string& afilename);
 
 	//! Load the image memory. If we use threaded loading, the texture will
 	//! be uploaded to openGL memory at the next update() call.

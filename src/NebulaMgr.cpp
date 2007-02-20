@@ -45,7 +45,7 @@ void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
 bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
-NebulaMgr::NebulaMgr(void) : displayNoTexture(false), texPointer(NULL) {
+NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
 	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
 	dependenciesOrder["draw"]="constellations";
 }
@@ -57,13 +57,8 @@ NebulaMgr::~NebulaMgr()
 	{
 		delete (*iter);
 	}
-
-	if (Nebula::tex_circle) delete Nebula::tex_circle;
-	Nebula::tex_circle = NULL;
 	
 	delete[] nebZones;
-	
-	delete texPointer;
 }
 
 // read from stream
@@ -77,9 +72,9 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	Nebula::tex_circle = &StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
+	Nebula::tex_circle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
 	
-	texPointer = &StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
 	setFlagShowTexture(true);
 	setFlagShow(conf.get_boolean("astro:flag_nebula"));

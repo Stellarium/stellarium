@@ -62,4 +62,5 @@ protected:
 	GLint magFilter;
 };
 
+
 #endif // _STEXTURE_H_

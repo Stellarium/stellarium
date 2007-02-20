@@ -32,7 +32,7 @@
 #include "ToneReproducer.hpp"
 #include "StelModuleMgr.hpp"
 
-STexture * Nebula::tex_circle = NULL;
+STextureSP Nebula::tex_circle;
 SFont* Nebula::nebula_font = NULL;
 float Nebula::circleScale = 1.f;
 float Nebula::hints_brightness = 0;
@@ -45,20 +45,13 @@ const float Nebula::RADIUS_NEB = 1.f;
 Nebula::Nebula() :
 		M_nb(0),
 		NGC_nb(0),
-		IC_nb(0),
-		/*UGC_nb(0),*/
-		neb_tex(NULL)
+		IC_nb(0)
 {
 	nameI18 = L"";
 }
 
 Nebula::~Nebula()
 {
-	delete neb_tex;
-	neb_tex = NULL;
-
-	delete tex_circle;
-	tex_circle = NULL;
 }
 
 wstring Nebula::getInfoString(const Navigator* nav) const
@@ -216,7 +209,7 @@ bool Nebula::readTexture(const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = &StelApp::getInstance().getTextureManager().createTexture(tex_name, true);
+	neb_tex = StelApp::getInstance().getTextureManager().createTexture(tex_name, true);
 
 	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
@@ -367,9 +360,6 @@ bool Nebula::readNGC(char *recordstr)
 		luminance = .0075;
 
 	// this is a huge performance drag if called every frame, so cache here
-	if (neb_tex) delete neb_tex;
-	neb_tex = NULL;
-
 	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
 	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NEB_OC;}
 	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NEB_GC;}

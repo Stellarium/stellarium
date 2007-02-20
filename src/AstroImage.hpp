@@ -19,7 +19,7 @@
 #ifndef ASTROIMAGE_H_
 #define ASTROIMAGE_H_
 
-#include "STexture.hpp"
+#include "STextureTypes.hpp"
 #include "SphereGeometry.h"
 
 class Projector;
@@ -31,7 +31,7 @@ class AstroImage
 {
 public:
 	AstroImage();
-	AstroImage(STexture* tex, const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3);
+	AstroImage(STextureSP tex, const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3);
 	AstroImage(const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3);
 	virtual ~AstroImage();
 	
@@ -41,8 +41,8 @@ public:
 	//! Return the matching ConvexPolygon
 	const ConvexPolygon& getPolygon(void) const {return poly;}
 	
-	const STexture* getTexture() const {return tex;}
-	void setTexture(STexture* atex) {if (tex) delete tex; tex=atex;}
+	const STextureSP getTexture() const {return tex;}
+	void setTexture(STextureSP atex) {tex=atex;}
 
 	bool getLoadStatus() const {return loadStatus;}
 
@@ -51,7 +51,7 @@ private:
 	friend class FitsAstroImage;
 	
 	// The texture matching the positions
-	STexture* tex;
+	STextureSP tex;
 	
 	// Position of the 4 corners of the texture in sky coordinates
 	const ConvexPolygon poly;

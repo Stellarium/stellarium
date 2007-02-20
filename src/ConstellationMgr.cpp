@@ -259,7 +259,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		else
 		{
 			StelApp::getInstance().getTextureManager().setDefaultParams();
-			cons->art_tex = &StelApp::getInstance().getTextureManager().createTexture(texfile);
+			cons->art_tex = StelApp::getInstance().getTextureManager().createTexture(texfile);
 			int texSizeX, texSizeY;
 			cons->art_tex->getDimensions(texSizeX, texSizeY);
 

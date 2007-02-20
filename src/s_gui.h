@@ -37,7 +37,7 @@
 #include <vector>
 #include <map>
 
-#include "STexture.hpp"
+#include "STextureTypes.hpp"
 #include "SFont.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
@@ -123,12 +123,12 @@ namespace s_gui
     public:
         Painter();
 		~Painter();
-		Painter(const STexture* _tex1, SFont* _font, const s_color& _baseColor, const s_color& _textColor);
+		Painter(const STextureSP _tex1, SFont* _font, const s_color& _baseColor, const s_color& _textColor);
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
-		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const STexture * t) const;
+		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const STextureSP  t) const;
 		void drawCross(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
@@ -136,7 +136,7 @@ namespace s_gui
 		void print(int x, int y, const string& str, const s_color& c);
 		void print(int x, int y, const wstring& str);
 		void print(int x, int y, const wstring& str, const s_color& c);		
-		void setTexture(const STexture* tex) {tex1 = tex;}
+		void setTexture(const STextureSP tex) {tex1 = tex;}
 		void setFont(SFont* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
 		void setBaseColor(const s_color& c) {baseColor = c;}
@@ -145,7 +145,7 @@ namespace s_gui
 		SFont* getFont(void) const {return font;}
 		void setOpaque(bool _b) { opaque = _b; }
     private:
-		const STexture* tex1;
+		STextureSP tex1;
 		SFont* font;
 		s_color baseColor;
 		s_color textColor;
@@ -192,7 +192,7 @@ namespace s_gui
 		virtual bool onClic(int, int, Uint8, Uint8) {return 0;}
 		virtual bool onMove(int, int) {return 0;}
 		virtual bool onKey(Uint16, Uint8) {return 0;}
-		virtual void setTexture(const STexture* tex) {painter.setTexture(tex);}
+		virtual void setTexture(const STextureSP tex) {painter.setTexture(tex);}
 		virtual void setFont(SFont* f) {painter.setFont(f);}
 		SFont* getFont(void) const {return painter.getFont();}
 		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
@@ -304,7 +304,7 @@ namespace s_gui
     class TexturedButton : public Button
     {
     public:
-		TexturedButton(const STexture* tex = NULL);
+		TexturedButton(const STextureSP tex = STextureSP());
         virtual void draw();
     protected:
     };
@@ -335,11 +335,11 @@ namespace s_gui
 	class FlagButton : public CheckBox
     {
     public:
-		FlagButton(int state = 0, const STexture* tex = NULL, STexture* specificTex = NULL);
+		FlagButton(int state = 0, const STextureSP tex=STextureSP(), STextureSP specificTex=STextureSP());
         virtual ~FlagButton();
 		virtual void draw();
     protected:
-		const STexture* specific_tex;
+		STextureSP specific_tex;
     };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -564,8 +564,8 @@ namespace s_gui
 	class IntIncDec : public Container
 	{
 	public:
-	    IntIncDec(SFont* _font = NULL, const STexture* tex_up = NULL,
-			const STexture* tex_down = NULL, int min = 0, int max = 9,
+	    IntIncDec(SFont* _font = NULL, const STextureSP tex_up = NULL,
+			const STextureSP tex_down = NULL, int min = 0, int max = 9,
 			int init_value = 0, int inc = 1, bool _loop = false);
 	    virtual ~IntIncDec();
 		virtual void draw();
@@ -584,8 +584,8 @@ namespace s_gui
 	class IntIncDecVert : public IntIncDec
 	{
 	public:
-	    IntIncDecVert(SFont* _font = NULL, const STexture* tex_up = NULL,
-			const STexture* tex_down = NULL, int min = 0, int max = 9,
+	    IntIncDecVert(SFont* _font = NULL, const STextureSP tex_up=STextureSP(),
+			const STextureSP tex_down=STextureSP(), int min = 0, int max = 9,
 			int init_value = 0, int inc = 1, bool _loop = false);
 	};
 
@@ -593,8 +593,8 @@ namespace s_gui
 	class FloatIncDec : public Container
 	{
 	public:
-	    FloatIncDec(SFont* _font = NULL, const STexture* tex_up = NULL,
-			const STexture* tex_down = NULL, float min = 0.f, float max = 1.0f,
+	    FloatIncDec(SFont* _font = NULL, const STextureSP tex_up=STextureSP(),
+			const STextureSP tex_down=STextureSP(), float min = 0.f, float max = 1.0f,
 			float init_value = 0.5f, float inc = 0.1f);
 	    virtual ~FloatIncDec();
 		virtual void draw();
@@ -615,8 +615,8 @@ namespace s_gui
     class Time_item : public Container
     {
     public:
-		Time_item(SFont* _font = NULL, const STexture* tex_up = NULL,
-			const STexture* tex_down = NULL, double _JD = 2451545.0);
+		Time_item(SFont* _font = NULL, const STextureSP tex_up=STextureSP(),
+			const STextureSP tex_down=STextureSP(), double _JD = 2451545.0);
 		double getJDay(void) const;
 		string getDateString(void);
 		void setJDay(double jd);
@@ -664,7 +664,7 @@ namespace s_gui
 	class StdWin : public FramedContainer
 	{
 	public:
-	    StdWin(const wstring& _title = L"", const STexture* _header_tex = NULL,
+	    StdWin(const wstring& _title = L"", const STextureSP _header_tex = STextureSP(),
 			SFont * _winfont = NULL, int headerSize = 18);
 	   	virtual void draw();
 	    virtual wstring getTitle() const {return titleLabel->getLabel();}
@@ -674,7 +674,7 @@ namespace s_gui
 		virtual void setVisible(bool _visible);
 	protected:
 	    Label* titleLabel;
-		const STexture* header_tex;
+		STextureSP header_tex;
 		int dragging;
 		s_vec2i oldPos;
 	};
@@ -696,8 +696,8 @@ namespace s_gui
 	class StdDlgWin : public StdWin
 	{
 	public:
-		StdDlgWin(const wstring& _title,  STexture* blankIconTex, STexture* questionIconTex, STexture* alertIconTex,
-                  const STexture* _header_tex = NULL,
+		StdDlgWin(const wstring& _title,  STextureSP blankIconTex, STextureSP questionIconTex, STextureSP alertIconTex,
+                  const STextureSP _header_tex = STextureSP(),
                   SFont * _winfont = NULL, int headerSize = 18);
 		~StdDlgWin();
 		virtual void setDialogCallback(const callback<void>& c) {onCompleteCallback = c;}
@@ -718,9 +718,9 @@ namespace s_gui
 		LabeledButton *firstBt, *secondBt;
 		TextLabel *messageLabel;
 		EditBox *inputEdit;
-		const STexture *blankIcon;
-		const STexture *questionIcon;
-		const STexture *alertIcon;
+		STextureSP blankIcon;
+		STextureSP questionIcon;
+		STextureSP alertIcon;
 		Picture *picture;
 		wstring originalTitle;
 		bool hasIcon;
@@ -736,7 +736,7 @@ namespace s_gui
 	{
 	public:
 	    StdBtWin(const wstring& _title = NULL,
-                 const STexture* _header_tex = NULL,
+                 const STextureSP _header_tex = STextureSP(),
 			SFont * _winfont = NULL, int headerSize = 18);
 		virtual void draw();
 		virtual void setOnHideBtCallback(const callback<void>& c) {onHideBtCallback = c;}
@@ -751,7 +751,7 @@ namespace s_gui
 	{
 	public:
 	    StdTransBtWin(const wstring& _title = L"", int _time_out =0,
-                      const STexture* _header_tex = NULL,
+                      const STextureSP _header_tex = STextureSP(),
 			SFont * _winfont = NULL, int headerSize = 18);
 		virtual void update(int _delta_time);
 		virtual void set_timeout(int _time_out=0);
@@ -814,14 +814,14 @@ namespace s_gui
     class Picture : public CallbackComponent
 	{
 	public:
-	    Picture(const STexture * _imageTex,
+	    Picture(const STextureSP  _imageTex,
                 int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~Picture();
 		virtual void draw(void);
 		void setShowEdge(bool v) {showedges = v;}
 		void setImgColor(const s_color &c) {imgcolor = c;}
 	private:
-	    const STexture * imageTex;
+	    const STextureSP  imageTex;
 		bool showedges;
 		s_color imgcolor;
 	};
@@ -876,9 +876,9 @@ namespace s_gui
     class MapPicture : public Picture
 	{
 	public:
-	    MapPicture(const STexture *_imageTex,
-                   const STexture *_pointerTex,
-                   const STexture *_cityTex,
+	    MapPicture(const STextureSP _imageTex,
+                   const STextureSP _pointerTex,
+                   const STextureSP _cityTex,
                    int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~MapPicture();
 		virtual void setOnNearestCityCallback(const callback<void>& c) {onNearestCityCallback = c;}
