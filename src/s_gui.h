@@ -564,8 +564,13 @@ namespace s_gui
 	class IntIncDec : public Container
 	{
 	public:
-	    IntIncDec(SFont* _font = NULL, const STextureSP tex_up = NULL,
-			const STextureSP tex_down = NULL, int min = 0, int max = 9,
+//	    IntIncDec(SFont* _font = NULL, const STextureSP tex_up = NULL,
+//			const STextureSP tex_down = NULL, int min = 0, int max = 9,
+//			int init_value = 0, int inc = 1, bool _loop = false);
+	    IntIncDec(SFont* _font,
+			const STextureSP tex_up,
+			const STextureSP tex_down,
+			int min = 0, int max = 9,
 			int init_value = 0, int inc = 1, bool _loop = false);
 	    virtual ~IntIncDec();
 		virtual void draw();
