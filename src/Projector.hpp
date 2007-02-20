@@ -150,7 +150,9 @@ public:
 	void setFov(double f);
 	//! Get the Field of View in degree
 	double getFov(void) const {return fov;}
-	double getPixelPerRad(void) const {return view_scaling_factor;}
+	
+	//! Get the average number of pixel per radian
+	double getPixelPerRad(void) const {return MY_MIN(getViewportWidth(),getViewportHeight())/(fov*M_PI/180.);}
 
 	//! Set the maximum Field of View in degree
 	void setMaxFov(double max);
