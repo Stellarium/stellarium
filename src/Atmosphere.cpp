@@ -28,7 +28,7 @@
 #include "Projector.hpp"
 
 Atmosphere::Atmosphere(void)
-           :sky_resolution_y(44), grid(0),
+           :viewport(0,0,0,0),sky_resolution_y(44), grid(0),
             world_adaptation_luminance(0.f), atm_intensity(0)
 {
 	setFadeDuration(3.f);
@@ -43,15 +43,20 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
                                ToneReproducer * eye, Projector* prj,
                                float latitude, float altitude, float temperature, float relative_humidity)
 {
-	if (grid == 0) {
+	if (viewport != prj->getViewport()) {
+		viewport = prj->getViewport();
+		if (grid) {
+			delete grid;
+			grid = 0;
+		}
 		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))
 		                                 *prj->getViewportWidth()
 		                                 /prj->getViewportHeight());
 		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];
-cout << "Atmosphere::compute_color: "
-     << (1+sky_resolution_x)*(1+sky_resolution_y)
-     << " Gridpoints instead of " << (48*48)
-     << endl;
+//cout << "Atmosphere::compute_color: "
+//     << (1+sky_resolution_x)*(1+sky_resolution_y)
+//     << " Gridpoints instead of " << (48*48)
+//     << endl;
 		float stepX = (float)prj->getViewportWidth() / (sky_resolution_x-0.5);
 		float stepY = (float)prj->getViewportHeight() / sky_resolution_y;
 		float viewport_left = (float)prj->getViewportPosX();
@@ -218,7 +223,7 @@ void Atmosphere::draw(Projector* prj)
 			const GridPoint *g1 = g0;
 			if (y2&1) g1+=(1+sky_resolution_x);
 			else g0+=(1+sky_resolution_x);
-			glBegin(GL_QUAD_STRIP);
+			glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
 			{
 				glColor3fv(g0->color);
