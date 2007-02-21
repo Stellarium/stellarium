@@ -34,10 +34,19 @@ Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
 Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
 {
     reserve(4);
-    push_back(e0^e1);
-    push_back(e1^e2);
-    push_back(e2^e3);
-    push_back(e3^e0);
+	const double d = e0*((e1-e0)^(e2-e0));
+	if (d > 0)
+	{
+		push_back(e0^e1);
+		push_back(e1^e2);
+		push_back(e2^e3);
+		push_back(e3^e0);
+	}
+	else
+	{
+		push_back((e1-e0)^(e2-e0));
+		(*begin()).d = d;
+	}
 }
 
 

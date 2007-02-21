@@ -333,7 +333,7 @@ void GeodesicGrid::searchZones(const Convex& convex,
 	for (int h=0;h<(int)convex.size();h++) {halfs_used[h] = h;}
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	bool *corner_inside[12];
-	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[convex.getNbHalfSpace()];
+	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[convex.size()];
 #else
 	bool corner_inside[12][convex.size()];
 #endif
