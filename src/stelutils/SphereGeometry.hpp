@@ -85,13 +85,14 @@ bool intersect(const T& o, const Vec3d& v)
 //! HalfSpace
 struct HalfSpace
 {
-    HalfSpace() {}
-    HalfSpace(const Vec3d& n_) : n(n_) {}
-    HalfSpace(const HalfSpace& other) : n(other.n) {}
+    HalfSpace() : d(0) {}
+    HalfSpace(const Vec3d& n_) : n(n_), d(0) {}
+    HalfSpace(const HalfSpace& other) : n(other.n), d(0) {}
     
 	Vec3d n;
-	
-	bool contains(const Vec3d& v) const {return (v*n >= 0);}
+	double d;
+	bool contains(const Vec3d &v) const {return (v*n>=d);}
+	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
 };
 
 inline bool contains(const HalfSpace& h,  const Vec3d& v)
