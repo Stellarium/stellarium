@@ -69,28 +69,22 @@ void Projector::init(const InitParser& conf)
 	const int viewport_height
 	  = conf.get_int("projection","viewport_height",
 	                    maximized ? screen_h : screen_min_wh);
-	const int viewport_min_wh = MY_MIN(viewport_width,viewport_height);
 	const int viewport_x
 	  = conf.get_int("projection","viewport_x",
-	                 horizontal_offset +
-	                 maximized ? 0 : ((screen_w-viewport_min_wh)/2));
+	                 horizontal_offset + ((screen_w-viewport_width)/2));
 	const int viewport_y
 	  = conf.get_int("projection","viewport_y",
-	                 vertical_offset +
-	                 maximized ? 0 : ((screen_h-viewport_min_wh)/2));
+	                 vertical_offset + ((screen_h-viewport_height)/2));
 	const double viewport_center_x
-	  = conf.get_double("projection","viewport_center_x",
-	                    viewport_x + 0.5*viewport_width);
+	  = conf.get_double("projection","viewport_center_x",0.5*viewport_width);
 	const double viewport_center_y
-	  = conf.get_double("projection","viewport_center_y",
-	                    viewport_y + 0.5*viewport_height);
-	const double viewport_diameter_180
-	  = conf.get_double("projection","viewport_diameter_180",
-	                    viewport_min_wh);
-	setViewport(viewport_x,viewport_y,
-	            viewport_width,viewport_height,
+	  = conf.get_double("projection","viewport_center_y",0.5*viewport_height);
+	const double viewport_fov_diameter
+	  = conf.get_double("projection","viewport_fov_diameter",
+                        MY_MIN(viewport_width,viewport_height));
+	setViewport(viewport_x,viewport_y,viewport_width,viewport_height,
 	            viewport_center_x,viewport_center_y,
-	            viewport_diameter_180);
+	            viewport_fov_diameter);
 
 
 	double overwrite_max_fov
@@ -161,7 +155,7 @@ Projector::Projector(const Vec4i& viewport, double _fov)
 		viewport_xywh(viewport),
         viewport_center(Vec2d(viewport_xywh[0]+0.5*viewport_xywh[2],
 		                      viewport_xywh[1]+0.5*viewport_xywh[3])),
-        viewport_diameter_180(MY_MIN(viewport_xywh[2],viewport_xywh[3])),
+        viewport_fov_diameter(MY_MIN(viewport_xywh[2],viewport_xywh[3])),
 		gravityLabels(0),
 		mapping(NULL)
 {
@@ -169,8 +163,9 @@ Projector::Projector(const Vec4i& viewport, double _fov)
 	flip_vert = 1.0;
 	setViewport(viewport_xywh[0],viewport_xywh[1],
 	            viewport_xywh[2],viewport_xywh[3],
-	            viewport_center[0],viewport_center[1],
-	            viewport_diameter_180);
+	            viewport_center[0]-viewport_xywh[0],
+                viewport_center[1]-viewport_xywh[1],
+	            viewport_fov_diameter);
 	setFov(_fov);
 }
 
@@ -179,20 +174,17 @@ Projector::~Projector()
 
 
 void Projector::setViewport(int x, int y, int w, int h,
-                            double cx,double cy,double diam_180)
+                            double cx,double cy,double fov_diam)
 {
 	viewport_xywh[0] = x;
 	viewport_xywh[1] = y;
 	viewport_xywh[2] = w;
 	viewport_xywh[3] = h;
-//	viewport_center.set(viewport_xywh[0]+0.5*viewport_xywh[2],
-//	                    viewport_xywh[1]+0.5*viewport_xywh[3]);
-	viewport_center[0] = cx;
-	viewport_center[1] = cy;
-	viewport_diameter_180 = diam_180;
-	view_scaling_factor = viewport_diameter_180
+	viewport_center[0] = x+cx;
+	viewport_center[1] = y+cy;
+	viewport_fov_diameter = fov_diam;
+	view_scaling_factor = viewport_fov_diameter
 	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
-//      * MY_MIN(getViewportWidth(),getViewportHeight());
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
 }
@@ -214,9 +206,8 @@ void Projector::setFov(double f)
 		fov = max_fov;
 	if (f<min_fov)
 		fov = min_fov;
-	view_scaling_factor = viewport_diameter_180
+	view_scaling_factor = viewport_fov_diameter
 	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
-//      * MY_MIN(getViewportWidth(),getViewportHeight());
 }
 
 
@@ -394,7 +385,7 @@ void Projector::draw_viewport_shape(void)
 	glPushMatrix();
 	glTranslated(viewport_center[0],viewport_center[1],0.0);
 	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, 0.5*viewport_diameter_180,
+	gluDisk(p, 0.5*viewport_fov_diameter,
                getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
 	glPopMatrix();
