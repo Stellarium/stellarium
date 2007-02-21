@@ -79,13 +79,21 @@ public:
 	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
 	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
 	
-	//! Get and set to define and get viewport size
+	//! define viewport size, center(relative to lower left corner)
+    //! and diameter of FOV disk
 	void setViewport(int x, int y, int w, int h,
-	                 double cx,double cy,double diam_180);
+	                 double cx, double cy, double fov_diam);
+
+	//! Get the lower left corner of the viewport and the width, height
 	const Vec4i& getViewport(void) const {return viewport_xywh;}
 
-	const Vec2d& getViewportCenter(void) const {return viewport_center;}
-	double getDiameter180(void) const {return viewport_diameter_180;}
+	//! Get the center of the viewport relative to the lower left corner
+	Vec2d getViewportCenter(void) const
+	  {return Vec2d(viewport_center[0]-viewport_xywh[0],
+	                viewport_center[1]-viewport_xywh[1]);}
+
+	//! Get the diameter of the FOV disk
+	double getViewportFovDiameter(void) const {return viewport_fov_diameter;}
 	
 	//! Get the horizontal viewport offset in pixels
 	int getViewportPosX(void) const {return viewport_xywh[0];}
@@ -105,16 +113,6 @@ public:
 	//! This viewport is usually the rectangle defined by the screen, but in case of non-linear
 	//! projection, it can also be a more complex shape.
 	std::vector<Vec2d> getViewportVertices() const;
-	
-	//! Maximize viewport according to passed screen values
-//	void setMaximizedViewport(int screenW, int screenH) {setViewport(0, 0, screenW, screenH);}
-
-	//! Set a centered squared viewport with passed vertical and horizontal offset
-//	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
-//	{
-//		int m = MY_MIN(screenW, screenH);
-//		setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
-//	}
 	
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}
@@ -361,9 +359,11 @@ private:
 	double min_fov;				// Minimum fov in degree
 	double max_fov;				// Maximum fov in degree
 	double zNear, zFar;			// Near and far clipping planes
+
 	Vec4i viewport_xywh;		// Viewport parameters
 	Vec2d viewport_center;		// Viewport center in screen pixel
-    double viewport_diameter_180;	// diameter of a circle with 180 degrees diameter in screen pixel
+	double viewport_fov_diameter;	// diameter of a circle with 180 degrees diameter in screen pixel
+
 	Mat4d projectionMatrix;		// Projection matrix
 
 	double view_scaling_factor;	// ??
