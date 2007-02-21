@@ -293,8 +293,7 @@ void StelApp::startMainLoop()
 					// Recalculate The OpenGL Scene Data For The New Window
 					if (E.resize.h && E.resize.w)
 					{
-						core->getProjection()->setViewportHeight(E.resize.h);
-						core->getProjection()->setViewportWidth(E.resize.w);
+						core->getProjection()->windowHasBeenResized(E.resize.w,E.resize.h);
 					}
 					break;
 
