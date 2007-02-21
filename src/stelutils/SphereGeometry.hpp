@@ -36,30 +36,30 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include <boost/lambda/lambda.hpp>
-#include <boost/lambda/bind.hpp>
+//#include <boost/lambda/lambda.hpp>
+//#include <boost/lambda/bind.hpp>
 
 #include "vecmath.h"
 
-using namespace boost::lambda;
+//using namespace boost::lambda;
 
 /******************
 First some internal convenient functions
 *******************/
 
-//! Return true if the predicate if true for any of the elements of c
-template<class C, class P>
-static bool any(const C& c, P pred)
-{
-    return std::find_if(c.begin(), c.end(), pred) != c.end();
-}
-
-//! Return true if the predicate if true for all of the elements of c
-template<class C, class P>
-static bool all(const C& c, P pred)
-{
-    return std::find_if(c.begin(), c.end(), !pred) == c.end();
-}
+////! Return true if the predicate if true for any of the elements of c
+//template<class C, class P>
+//static bool any(const C& c, P pred)
+//{
+//    return std::find_if(c.begin(), c.end(), pred) != c.end();
+//}
+//
+////! Return true if the predicate if true for all of the elements of c
+//template<class C, class P>
+//static bool all(const C& c, P pred)
+//{
+//    return std::find_if(c.begin(), c.end(), !pred) == c.end();
+//}
 
 
 // Just used to resolved some compile time type embiguities
@@ -87,12 +87,13 @@ struct HalfSpace
 {
     HalfSpace() : d(0) {}
     HalfSpace(const Vec3d& n_) : n(n_), d(0) {}
-    HalfSpace(const HalfSpace& other) : n(other.n), d(0) {}
-    
-	Vec3d n;
-	double d;
+    HalfSpace(const Vec3d& n_, double d_) : n(n_), d(d_) {}
+    HalfSpace(const HalfSpace& other) : n(other.n), d(other.d) {}
 	bool contains(const Vec3d &v) const {return (v*n>=d);}
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
+	
+	Vec3d n;
+	double d;
 };
 
 inline bool contains(const HalfSpace& h,  const Vec3d& v)
@@ -117,19 +118,24 @@ public:
 template<class T>
 bool contains(const T& o, const Polygon& p)
 {
-    return ::all(p, bind(&containsT<T, Vec3d>,o, _1));
+	for (Polygon::const_iterator vertex=p.begin();vertex!=p.end();++vertex)
+	{
+		if (!contains(o, *vertex))
+			return false;
+	}
+	return true;
 }
 
 template<class T>
 bool intersect(const T& o, const Polygon& p)
 {
-//	for (Polygon::const_iterator iter=p.begin();iter!=p.end();++iter)
-//	{
-//		if (containsT(o, *iter))
-//			return true;
-//	}
-//	return false;
-    return ::any(p, bind(&containsT<T, Vec3d>,o, _1));
+	for (Polygon::const_iterator iter=p.begin();iter!=p.end();++iter)
+	{
+		if (containsT(o, *iter))
+			return true;
+	}
+	return false;
+//    return ::any(p, bind(&containsT<T, Vec3d>,o, _1));
 }
 
 template<class T>
@@ -159,13 +165,7 @@ bool contains(const Convex& c, const T& o)
 			return false;
 	}
 	return true;
-// Should be equivalent but in debug one is much much more fast than the other
-//    return ::all(c, bind(
-//                    static_cast<bool(*)(const HalfSpace&, const T&)>(&contains),
-//                    _1, o));
 }
-
-
 
 //! ConvexPoygon class
 //! It stores both informations :
@@ -223,38 +223,19 @@ inline bool intersect(const ConvexPolygon& c1, const ConvexPolygon& c2)
 }
 
 
-
-struct Disk
+struct Disk : HalfSpace
 {
-    Vec3d norm;
-    float angle;
-    
     //! constructor
-    Disk(const Vec3d& n, float a) :
-        norm(n), angle(a)
-    { 
-    } 
-    
-    bool contains(const Vec3d& v) const
-    { return norm.angle(v) <= angle; }
+    // @param a is the disk radius in radian
+    Disk(const Vec3d& n, double a) : HalfSpace(n, std::cos(a/2))
+    {} 
 };
-
-
-inline bool contains(const Disk& d,  const Vec3d& v)
-{
-    return d.contains(v);
-}
-
-inline bool intersect(const Disk& d,  const Vec3d& v)
-{
-    return d.contains(v);
-}
 
 
 // special for ConvexPolygon
 inline bool intersect(const Disk& d, const ConvexPolygon& p)
 {
-	return intersect(p, d.norm) || 
+	return intersect(p, d.n) || 
 	       intersect(d, static_cast<const Polygon&>(p));
 }
 
