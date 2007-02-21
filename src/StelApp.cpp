@@ -190,10 +190,10 @@ void StelApp::setViewPortDistorterType(const string &type)
 		delete distorter;
 		distorter = 0;
 	}
-	distorter = ViewportDistorter::create(type,screenW,screenH,core->getProjection());
 	InitParser conf;
 	conf.load(dotStellariumDir + "config.ini");
-	distorter->init(conf);
+	distorter = ViewportDistorter::create(type,screenW,screenH,
+	                                      core->getProjection(),conf);
 }
 
 string StelApp::getViewPortDistorterType(void) const
@@ -421,13 +421,15 @@ double StelApp::draw(int delta_time)
 	set2DfullscreenProjection();
 	glBegin(GL_QUADS);
     {
-        glVertex2f(0,screenH);
-        glVertex2f(screenW,screenH);
-        glVertex2f(screenW,0);
+        glVertex2f(0,core->getProjection()->getViewportHeight());
+        glVertex2f(core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
+        glVertex2f(core->getProjection()->getViewportWidth(),0);
 		glVertex2f(0,0);
 	}
 	glEnd();
 	restoreFrom2DfullscreenProjection();
+
+	distorter->prepare();
 
 	core->preDraw(delta_time);
 
@@ -511,12 +513,12 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 //! Set the drawing mode in 2D for drawing in the full screen
 void StelApp::set2DfullscreenProjection(void) const
 {
-	glViewport(0, 0, screenW, screenH);
+	glViewport(0, 0, core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
 	glLoadIdentity();
-	gluOrtho2D(	0, screenW,
-	            0, screenH);			// set a 2D orthographic projection
+	gluOrtho2D(	0, core->getProjection()->getViewportWidth(),
+	            0, core->getProjection()->getViewportHeight());			// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 	glPushMatrix();
 	glLoadIdentity();
