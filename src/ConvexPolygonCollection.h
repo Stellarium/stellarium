@@ -4,7 +4,7 @@
 #include <functional>
 #include <vector>
 #include <boost/iterator/iterator_facade.hpp>
-#include "SphereGeometry.h"
+#include "SphereGeometry.hpp"
 
 
 //! Template class used to store elements which can be assimilated to a Convex.
@@ -33,7 +33,7 @@ public:
 	    {
 	    	for(;++vecIter!=coll->elements.end();)
 	    	{
-	    		if (searchZone.intersect(coll->getConvex(*vecIter))==true)
+	    		if (::intersect(searchZone, coll->getConvex(*vecIter))==true)
 	    			return;
 	    	}
 	    }
@@ -61,7 +61,7 @@ public:
 		if (elements.empty())
 			return std::pair<SearchIterator, SearchIterator>(end, end);
 		SearchIterator begin(this, searchZone, elements.begin());
-		if (searchZone.intersect(getConvex(*begin))==false)
+		if (::intersect(searchZone,getConvex(*begin))==false)
 			++begin;
 		return std::pair<SearchIterator, SearchIterator>(begin, end);
 	}

@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define _GEODESIC_GRID_H_
 
 #include <boost/iterator/iterator_facade.hpp>
-#include "SphereGeometry.h"
+#include "SphereGeometry.hpp"
 
 class GeodesicGrid
 {

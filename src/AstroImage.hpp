@@ -20,7 +20,7 @@
 #define ASTROIMAGE_H_
 
 #include "STextureTypes.hpp"
-#include "SphereGeometry.h"
+#include "SphereGeometry.hpp"
 
 class Projector;
 class Navigator;

@@ -328,27 +328,27 @@ void GeodesicGrid::searchZones(const Convex& convex,
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	int *halfs_used = new int[convex.getNbHalfSpace()];
 #else
-	int halfs_used[convex.getNbHalfSpace()];
+	int halfs_used[convex.size()];
 #endif
-	for (int h=0;h<(int)convex.getNbHalfSpace();h++) {halfs_used[h] = h;}
+	for (int h=0;h<(int)convex.size();h++) {halfs_used[h] = h;}
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	bool *corner_inside[12];
 	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[convex.getNbHalfSpace()];
 #else
-	bool corner_inside[12][convex.getNbHalfSpace()];
+	bool corner_inside[12][convex.size()];
 #endif
-	for (size_t h=0;h<convex.getNbHalfSpace();h++)
+	for (size_t h=0;h<convex.size();h++)
 	{
 		const HalfSpace &half_space(convex[h]);
 		for (int i=0;i<12;i++)
 		{
-			corner_inside[i][h] = half_space.inside(icosahedron_corners[i]);
+			corner_inside[i][h] = half_space.contains(icosahedron_corners[i]);
 		}
 	}
 	for (int i=0;i<20;i++)
 	{
 		searchZones(0,i,
-		            convex,halfs_used,convex.getNbHalfSpace(),
+		            convex,halfs_used,convex.size(),
 		            corner_inside[icosahedron_triangles[i].corners[0]],
 		            corner_inside[icosahedron_triangles[i].corners[1]],
 		            corner_inside[icosahedron_triangles[i].corners[2]],
@@ -412,21 +412,21 @@ void GeodesicGrid::searchZones(int lev,int index,
 			inside_list++;
 			border_list++;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-			bool *edge0_inside = new bool[convex.getNbHalfSpace()];
-			bool *edge1_inside = new bool[convex.getNbHalfSpace()];
-			bool *edge2_inside = new bool[convex.getNbHalfSpace()];
+			bool *edge0_inside = new bool[convex.size()];
+			bool *edge1_inside = new bool[convex.size()];
+			bool *edge2_inside = new bool[convex.size()];
 #else
-			bool edge0_inside[convex.getNbHalfSpace()];
-			bool edge1_inside[convex.getNbHalfSpace()];
-			bool edge2_inside[convex.getNbHalfSpace()];
+			bool edge0_inside[convex.size()];
+			bool edge1_inside[convex.size()];
+			bool edge2_inside[convex.size()];
 #endif
 			for (int h=0;h<halfs_used_count;h++)
 			{
 				const int i = halfs_used[h];
 				const HalfSpace &half_space(convex[i]);
-				edge0_inside[i] = half_space.inside(t.e0);
-				edge1_inside[i] = half_space.inside(t.e1);
-				edge2_inside[i] = half_space.inside(t.e2);
+				edge0_inside[i] = half_space.contains(t.e0);
+				edge1_inside[i] = half_space.contains(t.e1);
+				edge2_inside[i] = half_space.contains(t.e2);
 			}
 			searchZones(lev,index+0,
 			            convex,halfs_used,halfs_used_count,
