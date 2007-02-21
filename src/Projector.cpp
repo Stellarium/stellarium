@@ -53,34 +53,45 @@ void Projector::registerProjectionMapping(Mapping *c)
 void Projector::init(const InitParser& conf)
 {
 	// Video Section
-	setViewport(conf.get_int("video:horizontal_offset"), conf.get_int("video:vertical_offset"),
-	            conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
-
 	string tmpstr = conf.get_str("projection:viewport");
-	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
+	const Projector::PROJECTOR_MASK_TYPE
+	  projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
-	initFov	= conf.get_double ("navigation","init_fov",60.);
-	setFov(initFov);
-	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
+	const bool maximized = (tmpstr=="maximized");
+	const int screen_w = conf.get_int("video:screen_w");
+	const int screen_h = conf.get_int("video:screen_h");
+	const int screen_min_wh = MY_MIN(screen_w,screen_h);
+	const int horizontal_offset = conf.get_int("video","horizontal_offset",0);
+	const int vertical_offset = conf.get_int("video","vertical_offset",0);
+	const int viewport_width
+	  = conf.get_int("projection","viewport_width",
+	                    maximized ? screen_w : screen_min_wh);
+	const int viewport_height
+	  = conf.get_int("projection","viewport_height",
+	                    maximized ? screen_h : screen_min_wh);
+	const int viewport_min_wh = MY_MIN(viewport_width,viewport_height);
+	const int viewport_x
+	  = conf.get_int("projection","viewport_x",
+	                 horizontal_offset +
+	                 maximized ? 0 : ((screen_w-viewport_min_wh)/2));
+	const int viewport_y
+	  = conf.get_int("projection","viewport_y",
+	                 vertical_offset +
+	                 maximized ? 0 : ((screen_h-viewport_min_wh)/2));
+	const double viewport_center_x
+	  = conf.get_double("projection","viewport_center_x",
+	                    viewport_x + 0.5*viewport_width);
+	const double viewport_center_y
+	  = conf.get_double("projection","viewport_center_y",
+	                    viewport_y + 0.5*viewport_height);
+	const double viewport_diameter_180
+	  = conf.get_double("projection","viewport_diameter_180",
+	                    viewport_min_wh);
+	setViewport(viewport_x,viewport_y,
+	            viewport_width,viewport_height,
+	            viewport_center_x,viewport_center_y,
+	            viewport_diameter_180);
 
-	tmpstr = conf.get_str("projection:viewport");
-	if (tmpstr=="maximized")
-		setMaximizedViewport(getViewportWidth(),  getViewportHeight());
-	else
-		if (tmpstr=="square" || tmpstr=="disk")
-		{
-			setSquareViewport(getViewportWidth(),
-			                  getViewportHeight(),
-			                  conf.get_int("video:horizontal_offset"),
-			                  conf.get_int("video:vertical_offset"));
-			if (tmpstr=="disk")
-				setViewportMaskDisk();
-		}
-		else
-		{
-			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
-			exit(-1);
-		}
 
 	double overwrite_max_fov
 	  = conf.get_double("projection","fisheye_max_fov",0.0);
@@ -92,6 +103,10 @@ void Projector::init(const InitParser& conf)
 	if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
 	if (overwrite_max_fov > 90.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
+
+	initFov	= conf.get_double ("navigation","init_fov",60.);
+	setFov(initFov);
+	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 
 	// Register the default mappings
 	registerProjectionMapping(MappingEqualArea::getMapping());
@@ -135,17 +150,27 @@ void Projector::init(const InitParser& conf)
 	}
 }
 
+void Projector::windowHasBeenResized(int width,int height) {
+  cout << "Projector::windowHasBeenResized(" << width << ',' << height << "): "
+          "not implemented yet" << endl;
+}
 
 Projector::Projector(const Vec4i& viewport, double _fov)
-		:maskType(NONE), fov(1.0), min_fov(0.0001), max_fov(100),
+		:maskType(NONE), fov(_fov), min_fov(0.0001), max_fov(100),
 		zNear(0.1), zFar(10000),
-		vec_viewport(viewport),
+		viewport_xywh(viewport),
+        viewport_center(Vec2d(viewport_xywh[0]+0.5*viewport_xywh[2],
+		                      viewport_xywh[1]+0.5*viewport_xywh[3])),
+        viewport_diameter_180(MY_MIN(viewport_xywh[2],viewport_xywh[3])),
 		gravityLabels(0),
 		mapping(NULL)
 {
 	flip_horz = 1.0;
 	flip_vert = 1.0;
-	setViewport(viewport);
+	setViewport(viewport_xywh[0],viewport_xywh[1],
+	            viewport_xywh[2],viewport_xywh[3],
+	            viewport_center[0],viewport_center[1],
+	            viewport_diameter_180);
 	setFov(_fov);
 }
 
@@ -153,17 +178,21 @@ Projector::~Projector()
 {}
 
 
-void Projector::setViewport(int x, int y, int w, int h)
+void Projector::setViewport(int x, int y, int w, int h,
+                            double cx,double cy,double diam_180)
 {
-	vec_viewport[0] = x;
-	vec_viewport[1] = y;
-	vec_viewport[2] = w;
-	vec_viewport[3] = h;
-	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
-//	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
-	view_scaling_factor
-	  = (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0)
-      * MY_MIN(getViewportWidth(),getViewportHeight());
+	viewport_xywh[0] = x;
+	viewport_xywh[1] = y;
+	viewport_xywh[2] = w;
+	viewport_xywh[3] = h;
+//	viewport_center.set(viewport_xywh[0]+0.5*viewport_xywh[2],
+//	                    viewport_xywh[1]+0.5*viewport_xywh[3]);
+	viewport_center[0] = cx;
+	viewport_center[1] = cy;
+	viewport_diameter_180 = diam_180;
+	view_scaling_factor = viewport_diameter_180
+	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
+//      * MY_MIN(getViewportWidth(),getViewportHeight());
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
 }
@@ -171,10 +200,10 @@ void Projector::setViewport(int x, int y, int w, int h)
 std::vector<Vec2d> Projector::getViewportVertices() const
 {
 	std::vector<Vec2d> result;
-	result.push_back(Vec2d(vec_viewport[0], vec_viewport[1]));
-	result.push_back(Vec2d(vec_viewport[0]+vec_viewport[2], vec_viewport[1]));
-	result.push_back(Vec2d(vec_viewport[0]+vec_viewport[2], vec_viewport[1]+vec_viewport[3]));
-	result.push_back(Vec2d(vec_viewport[0], vec_viewport[1]+vec_viewport[3]));
+	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]));
+	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]));
+	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]+viewport_xywh[3]));
+	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]+viewport_xywh[3]));
 	return result;
 }
 
@@ -185,9 +214,9 @@ void Projector::setFov(double f)
 		fov = max_fov;
 	if (f<min_fov)
 		fov = min_fov;
-	view_scaling_factor
-	  = (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0)
-      * MY_MIN(getViewportWidth(),getViewportHeight());
+	view_scaling_factor = viewport_diameter_180
+	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
+//      * MY_MIN(getViewportWidth(),getViewportHeight());
 }
 
 
@@ -260,7 +289,8 @@ void Projector::initGlMatrixOrtho2d(void) const
 	// thus we never need to change to 2dMode from now on before drawing
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(vec_viewport[0], vec_viewport[0] + vec_viewport[2], vec_viewport[1], vec_viewport[1] + vec_viewport[3], -1, 1);
+	glOrtho(viewport_xywh[0], viewport_xywh[0] + viewport_xywh[2],
+	        viewport_xywh[1], viewport_xywh[1] + viewport_xywh[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -322,8 +352,8 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 // 	  // invisible region of the sky (rval=false), we must finish
 // 	  // reprojecting, so that OpenGl can successfully eliminate
 // 	  // polygons by culling.
-// 	win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
-// 	win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
+// 	win[0] = viewport_center[0] + flip_horz * view_scaling_factor * win[0];
+// 	win[1] = viewport_center[1] + flip_vert * view_scaling_factor * win[1];
 // 	win[2] = (win[2] - zNear) / (zNear - zFar);
 // 	return rval;
 // }
@@ -333,8 +363,8 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 *************************************************************************/
 bool Projector::unProject(double x, double y, Vec3d &v) const
 {
-	v[0] = flip_horz * (x - center[0]) / view_scaling_factor;
-	v[1] = flip_vert * (y - center[1]) / view_scaling_factor;
+	v[0] = flip_horz * (x - viewport_center[0]) / view_scaling_factor;
+	v[1] = flip_vert * (y - viewport_center[1]) / view_scaling_factor;
 	v[2] = 0;
 	const bool rval = mapping->backward(v);
 	  // Even when the reprojected point comes from an region of the screen,
@@ -362,9 +392,10 @@ void Projector::draw_viewport_shape(void)
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
-	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
+	glTranslated(viewport_center[0],viewport_center[1],0.0);
 	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
+	gluDisk(p, 0.5*viewport_diameter_180,
+               getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
 	glPopMatrix();
 }
@@ -769,12 +800,12 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
                                    bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
-	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
-	dy = y - (vec_viewport[1] + vec_viewport[3]/2);
+	dx = x - viewport_center[0];
+	dy = y - viewport_center[1];
 	d = sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
-	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2)
+	if (d>MY_MAX(viewport_xywh[3], viewport_xywh[2])*2)
 		return;
 
 	theta = M_PI + std::atan2(dx, dy - 1);
@@ -1078,7 +1109,7 @@ void Projector::drawVertex3vWithLight(const Vec3d& v) const
 	project(v, win);
 	
 	// Can be optimized by avoiding matrix inversion if it's always the same
-	gluUnProject(win[0],win[1],win[2],modelViewMatrix,projectionMatrix,vec_viewport,&vv[0],&vv[1],&vv[2]);
+	gluUnProject(win[0],win[1],win[2],modelViewMatrix,projectionMatrix,viewport_xywh,&vv[0],&vv[1],&vv[2]);
 	glVertex3dv(vv);
 }
 

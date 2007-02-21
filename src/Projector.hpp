@@ -80,24 +80,26 @@ public:
 	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
 	
 	//! Get and set to define and get viewport size
-	void setViewport(int x, int y, int w, int h);
-	void setViewport(const Vec4i& v) {setViewport(v[0], v[1], v[2], v[3]);}
-	const Vec4i& getViewport(void) const {return vec_viewport;}
+	void setViewport(int x, int y, int w, int h,
+	                 double cx,double cy,double diam_180);
+	const Vec4i& getViewport(void) const {return viewport_xywh;}
+
+	const Vec2d& getViewportCenter(void) const {return viewport_center;}
+	double getDiameter180(void) const {return viewport_diameter_180;}
 	
-	//! Set the horizontal viewport offset in pixels
-	void setViewportPosX(int x) {setViewport(x, vec_viewport[1], vec_viewport[2], vec_viewport[3]);}
-	int getViewportPosX(void) const {return vec_viewport[0];}
+	//! Get the horizontal viewport offset in pixels
+	int getViewportPosX(void) const {return viewport_xywh[0];}
 	
-	//! Get/Set the vertical viewport offset in pixels
-	void setViewportPosY(int y) {setViewport(vec_viewport[0], y, vec_viewport[2], vec_viewport[3]);}
-	int getViewportPosY(void) const {return vec_viewport[1];}
+	//! Get the vertical viewport offset in pixels
+	int getViewportPosY(void) const {return viewport_xywh[1];}
 	
-	//! Get/Set the viewport size in pixels
-	void setViewportWidth(int width) {setViewport(vec_viewport[0], vec_viewport[1], width, vec_viewport[3]);}
-	void setViewportHeight(int height) {setViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], height);}
-	int getViewportWidth(void) const {return vec_viewport[2];}
-	int getViewportHeight(void) const {return vec_viewport[3];}
+	//! Get the viewport size in pixels
+	int getViewportWidth(void) const {return viewport_xywh[2];}
+	int getViewportHeight(void) const {return viewport_xywh[3];}
 	
+	//! somehow the user has managed to resize the window
+	void windowHasBeenResized(int width,int height);
+
 	//! Return a polygon matching precisely the real viewport defined by the area on the screen 
 	//! where projection is valid. Normally, nothing should be drawn outside this area.
 	//! This viewport is usually the rectangle defined by the screen, but in case of non-linear
@@ -105,14 +107,14 @@ public:
 	std::vector<Vec2d> getViewportVertices() const;
 	
 	//! Maximize viewport according to passed screen values
-	void setMaximizedViewport(int screenW, int screenH) {setViewport(0, 0, screenW, screenH);}
+//	void setMaximizedViewport(int screenW, int screenH) {setViewport(0, 0, screenW, screenH);}
 
 	//! Set a centered squared viewport with passed vertical and horizontal offset
-	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
-	{
-		int m = MY_MIN(screenW, screenH);
-		setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
-	}
+//	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
+//	{
+//		int m = MY_MIN(screenW, screenH);
+//		setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
+//	}
 	
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}
@@ -123,7 +125,7 @@ public:
 	void setViewportMaskNone(void) {setMaskType(Projector::NONE);}
 	
 	//! Set the current openGL viewport to projector's viewport
-	void applyViewport(void) const {glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);}	
+	void applyViewport(void) const {glViewport(viewport_xywh[0], viewport_xywh[1], viewport_xywh[2], viewport_xywh[3]);}	
 	
 	void set_clipping_planes(double znear, double zfar);
 	void get_clipping_planes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
@@ -166,8 +168,8 @@ public:
 	// Full projection methods
 	// Return true if the 2D pos is inside the viewport
 	bool check_in_viewport(const Vec3d& pos) const
-		{return (pos[1]>=vec_viewport[1] && pos[0]>=vec_viewport[0] &&
-		pos[1]<=(vec_viewport[1] + vec_viewport[3]) && pos[0]<=(vec_viewport[0] + vec_viewport[2]));}
+		{return (pos[1]>=viewport_xywh[1] && pos[0]>=viewport_xywh[0] &&
+		pos[1]<=(viewport_xywh[1] + viewport_xywh[3]) && pos[0]<=(viewport_xywh[0] + viewport_xywh[2]));}
 
 	//! Project the vector v from the current frame into the viewport
 	//! @param v the vector in the current frame
@@ -187,8 +189,8 @@ public:
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
 		// polygons by culling.
-		win[0] = center[0] + flip_horz * view_scaling_factor * win[0];
-		win[1] = center[1] + flip_vert * view_scaling_factor * win[1];
+		win[0] = viewport_center[0] + flip_horz * view_scaling_factor * win[0];
+		win[1] = viewport_center[1] + flip_vert * view_scaling_factor * win[1];
 		win[2] = (win[2] - zNear) / (zNear - zFar);
 		return rval;
 	}
@@ -359,10 +361,11 @@ private:
 	double min_fov;				// Minimum fov in degree
 	double max_fov;				// Maximum fov in degree
 	double zNear, zFar;			// Near and far clipping planes
-	Vec4i vec_viewport;			// Viewport parameters
+	Vec4i viewport_xywh;		// Viewport parameters
+	Vec2d viewport_center;		// Viewport center in screen pixel
+    double viewport_diameter_180;	// diameter of a circle with 180 degrees diameter in screen pixel
 	Mat4d projectionMatrix;		// Projection matrix
 
-	Vec3d center;				// Viewport center in screen pixel
 	double view_scaling_factor;	// ??
 	double flip_horz,flip_vert;	// Whether to flip in horizontal or vertical directions
 
