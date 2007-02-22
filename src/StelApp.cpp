@@ -44,7 +44,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
-
+#include "MovementMgr.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -466,8 +466,35 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
 		if ((*i)->handleMouseClicks(x, y, button, state)==true)
-		return 1;
-	}	
+			return 1;
+	}
+	
+	// Manage the event for the main window
+	{
+		// Deselect the selected object
+		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
+		{
+			commander->execute_command("select");
+			return 1;
+		}
+		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("movements");
+		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !mvmgr->getHasDragged())
+		{
+			// CTRL + left clic = right clic for 1 button mouse
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
+				commander->execute_command("select");
+				return 1;
+			}
+
+			// Try to select object at that position
+			getStelObjectMgr().findAndSelect(core, x, y);
+
+			// If an object was selected update informations
+			if (getStelObjectMgr().getFlagHasSelected()) ui->updateInfoSelectString();
+		}
+	}
+	
 	return 0;
 }
 
