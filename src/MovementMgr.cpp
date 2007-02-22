@@ -156,7 +156,10 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 			if (is_dragging)
 			{
 				is_dragging = false;
-				return true;
+				if (has_dragged)
+					return true;
+				else
+					return false;
 			}
 		}
 		break;
