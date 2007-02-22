@@ -27,7 +27,6 @@
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
-
 #include "image_mgr.h"
 #include "TelescopeMgr.hpp"
 #include "ConstellationMgr.hpp"

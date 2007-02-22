@@ -171,6 +171,14 @@ public:
 
 	// n.b. - do not confuse this with sky time rate
 	int getTimeMultiplier() { return time_multiplier; }
+	
+	//! Set the drawing mode in 2D for drawing in the full screen
+	void set2DfullscreenProjection(void) const;
+	//! Restore previous projection mode
+	void restoreFrom2DfullscreenProjection(void) const;
+	
+	int getScreenW() const {return screenW;}
+	int getScreenH() const {return screenH;}
 private:
 	//! Initialize application and core
 	void init(void);
@@ -204,11 +212,6 @@ private:
 
 	//! Terminate the application with SDL
 	void terminateApplication(void);
-
-	//! Set the drawing mode in 2D for drawing in the full screen
-	void set2DfullscreenProjection(void) const;
-	//! Restore previous projection mode
-	void restoreFrom2DfullscreenProjection(void) const;
 
 	// The StelApp singleton
 	static StelApp* singleton;
