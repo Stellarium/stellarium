@@ -83,6 +83,8 @@ public:
 
 	// for use by TUI
 	void saveCurrentConfig(const string& confFile);
+	
+	void updateInfoSelectString(void);
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -189,7 +191,6 @@ private:
 	// The TextLabel displaying the infos about the selected object
 	Container * info_select_ctr;
 	TextLabel * info_select_txtlbl;
-	void updateInfoSelectString(void);
 
 	// The window containing the info (licence)
 	StdBtWin * licence_win;

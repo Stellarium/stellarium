@@ -833,34 +833,6 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 		mvmgr->stopDragging();
 		return 1;
 	}
-
-	// Manage the event for the main window
-	{
-		
-		
-		// Deselect the selected object
-		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
-		{
-			app->commander->execute_command("select");
-			return 1;
-		}
-		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
-		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !mvmgr->getHasDragged())
-		{
-			// CTRL + left clic = right clic for 1 button mouse
-			if (SDL_GetModState() & KMOD_CTRL)
-			{
-				app->commander->execute_command("select");
-				return 1;
-			}
-
-			// Try to select object at that position
-			StelApp::getInstance().getStelObjectMgr().findAndSelect(core, x, y);
-
-			// If an object was selected update informations
-			if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected()) updateInfoSelectString();
-		}
-	}
 	return 0;
 }
 
