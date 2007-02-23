@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+#include "GLee.h"
 #include "StelApp.hpp"
 extern "C" {
 #include <jpeglib.h>
@@ -38,42 +39,6 @@ using namespace std;
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
-#if defined (_MSC_VER)
-// gluCheckExtension() is missing in MSC GL SDK !!!
-/* extName is an extension name.
- * extString is a string of extensions separated by blank(s). There may or 
- * may not be leading or trailing blank(s) in extString.
- * This works in cases of extensions being prefixes of another like
- * GL_EXT_texture and GL_EXT_texture3D.
- * Returns GL_TRUE if extName is found otherwise it returns GL_FALSE.
- */
-GLboolean __stdcall
-gluCheckExtension(const GLubyte *extName, const GLubyte *extString)
-{
-  GLboolean flag = GL_FALSE;
-  char *word;
-  char *lookHere;
-  char *deleteThis;
-
-  if (extString == NULL) return GL_FALSE;
-
-  deleteThis = lookHere = (char *)malloc(strlen((const char *)extString)+1); 
-  if (lookHere == NULL)
-     return GL_FALSE;
-  /* strtok() will modify string, so copy it somewhere */
-  strcpy(lookHere,(const char *)extString);
-
-  while ((word= strtok(lookHere," ")) != NULL) {
-     if (strcmp(word,(const char *)extName) == 0) {
-        flag = GL_TRUE;
-	break;
-     }  
-     lookHere = NULL;		/* get next token */
-  }
-  free((void *)deleteThis);
-  return flag;
-} /* gluCheckExtension() */
-#endif
 
 void ManagedSTexture::load(void)
 {
@@ -101,8 +66,9 @@ void ManagedSTexture::lazyBind()
 	}
 }
 
-//! Return the average texture luminance.
-//! @return 0 is black, 1 is white
+/*************************************************************************
+ Return the average texture luminance, 0 is black, 1 is white
+ *************************************************************************/
 float ManagedSTexture::getAverageLuminance(void)
 {
 	if (loadState==ManagedSTexture::LOADED)
@@ -151,35 +117,23 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
+	// Get whether floating point textures are supported on this video card
+	// This enable for high dynamic range textures to be loaded
+	isFloatingPointTexAllowed = GLEE_ARB_texture_float;
+	
+	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
+	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
+
 	// Check vendor and renderer
 	string glRenderer((char*)glGetString(GL_RENDERER));
 	string glVendor((char*)glGetString(GL_VENDOR));
 	string glVersion((char*)glGetString(GL_VERSION));
-	
 	// cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
-	
-	// Check for extensions
-	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
-	if (glGetError()!=GL_NO_ERROR)
-	{
-		cerr << "Error while requesting openGL extensions" << endl;
-		return;
-	}
-
-	// Get whether floating point textures are supported on this video card
-	// This enable for high dynamic range textures to be loaded
-	isFloatingPointTexAllowed = gluCheckExtension ((const GLubyte*)"GL_ARB_texture_float", strExt);
-	
-	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
-	isNoPowerOfTwoAllowed = gluCheckExtension ((const GLubyte*)"GL_ARB_texture_non_power_of_two", strExt);
-	if (glVersion!="" && glVersion[0]=='2')
-		isNoPowerOfTwoAllowed = true;
-
 	if (glVendor=="NVIDIA Corporation" && glRenderer=="Quadro NVS 285/PCI/SSE2" && glVersion=="2.0.2 NVIDIA 87.74")
 		isNoPowerOfTwoLUMINANCEAllowed = false;
 	else
 		isNoPowerOfTwoLUMINANCEAllowed = isNoPowerOfTwoAllowed;
-		
+
 	// Get Maximum Texture Size Supported by the video card
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
 }
@@ -193,6 +147,7 @@ void StelTextureMgr::setDefaultParams()
 	setWrapMode();
 	setMinFilter();
 	setMagFilter();
+	setDynamicRangeMode();
 }
 
 /*************************************************************************
@@ -218,6 +173,7 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& afilename)
 	tex->wrapMode = wrapMode;
 	tex->fullPath = filename;
 	tex->mipmapsMode = mipmapsMode;
+	tex->dynamicRangeMode = dynamicRangeMode;
 	
 	return tex;
 }
@@ -262,9 +218,7 @@ struct LoadQueueParam
 int loadTextureThread(void* tparam)
 {
 	LoadQueueParam* param = (LoadQueueParam*)tparam;
-	
-	//cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
-	assert(param->tex->threadedLoading==true);
+
 	// Load the image
 	if (param->texMgr->loadImage(param->tex.get())==false)
 	{
@@ -287,8 +241,6 @@ bool StelTextureMgr::createTextureThread(STextureSP* outTex, const std::string& 
 		outTex = NULL;
 		return false;
 	}
-	
-	tex->threadedLoading = true;
 
 	LoadQueueParam* tparam = new LoadQueueParam();
 	tparam->texMgr = this;
@@ -345,7 +297,7 @@ void StelTextureMgr::update()
 
 
 /*************************************************************************
-  Load the image in memory
+  Load the image in memory by calling the associated ImageLoader
 *************************************************************************/
 bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 {
@@ -368,6 +320,63 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 		return false;
 	}
 
+	// Scale input image according to the dynamic range parameters
+	if (tex->format==GL_LUMINANCE)
+	{
+		switch (tex->dynamicRangeMode)
+		{
+			case (ManagedSTexture::LINEAR):
+				if (tex->internalFormat==1)
+				{
+					// Assumes already GLubyte = unsigned char on 8 bits
+					break;
+				}
+				const unsigned int scale = 1<<((tex->internalFormat-1)*8);
+				if (tex->internalFormat==2)
+				{
+					// We assume short unsigned int = GLushort
+					GLushort* data = (GLushort*)tex->texels;
+					for (int i=0;i<tex->width*tex->height;++i)
+					{
+						tex->texels[i] = data[i]/scale;
+					}
+					tex->texels = (GLubyte*)realloc(data, tex->width*tex->height); 
+					break;
+				}
+				if (tex->internalFormat==4)
+				{
+					// We assume short unsigned int = GLushort
+					GLuint* data = (GLuint*)tex->texels;
+					for (int i=0;i<tex->width*tex->height;++i)
+					{
+						tex->texels[i] = data[i]/scale;
+					}
+					tex->texels = (GLubyte*)realloc(data, tex->width*tex->height); 
+					break;
+				}
+				// Unsupported format.. Delete everything and return
+				free(tex->texels);
+				tex->texels = NULL;
+				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+				tex->loadState = ManagedSTexture::LOAD_ERROR;
+				return false;
+
+			default:
+				// Unsupported dynamic range mode.. Delete everything and return
+				free(tex->texels);
+				tex->texels = NULL;
+				cerr << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded."<< endl;
+				tex->loadState = ManagedSTexture::LOAD_ERROR;
+				return false;
+		}
+		tex->internalFormat = 1;
+	}
+	else
+	{
+		// TODO, no scaling is currently done for color images
+	}
+
+	// Repair texture size if non power of 2 is not allowed by the video driver
 	if ((!isNoPowerOfTwoAllowed || (!isNoPowerOfTwoLUMINANCEAllowed && tex->format==GL_LUMINANCE)) && 
 		(!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{

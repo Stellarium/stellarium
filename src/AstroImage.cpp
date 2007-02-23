@@ -23,9 +23,7 @@ void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	if (!tex) return;
 	
 	glEnable(GL_TEXTURE_2D);
-
 	glColor4f(1.0,1.0,1.0,1.0);
-
 	tex->bind();
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
