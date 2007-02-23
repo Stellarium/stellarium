@@ -21,14 +21,11 @@
 #include <sstream>
 #include <cstdio>
 #include <cassert>
+#include "GLee.h"
 #include "Projector.hpp"
 #include "InitParser.hpp"
 #include "MappingClasses.hpp"
 
-#ifndef GL_ARB_point_sprite
-#define GL_POINT_SPRITE_ARB               0x8861
-#define GL_COORD_REPLACE_ARB              0x8862
-#endif
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
@@ -115,24 +112,8 @@ void Projector::init(const InitParser& conf)
 
 	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 
-	flagGlPointSprite
-	  = conf.get_boolean("projection","flag_use_gl_point_sprite",true);
-	if (flagGlPointSprite)
-	{
-		// Determine if the GL_POINT_SPRITE_ARB extension is available on this video card
-		// Check for extensions
-		const GLubyte * strExt = glGetString(GL_EXTENSIONS);
-		if (glGetError()!=GL_NO_ERROR)
-		{
-			cerr << "Error while requesting openGL extensions" << endl;
-			flagGlPointSprite = false;
-		}
-		else
-                {
-			flagGlPointSprite = gluCheckExtension
-			                      ((const GLubyte*)"GL_ARB_point_sprite", strExt);
-		}
-	}
+	flagGlPointSprite = conf.get_boolean("projection","flag_use_gl_point_sprite",true);
+	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
 	if (flagGlPointSprite)
 	{
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
