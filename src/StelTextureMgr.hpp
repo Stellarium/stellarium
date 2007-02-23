@@ -42,14 +42,24 @@ public:
     
     virtual ~ManagedSTexture()
     {
-    	if (threadedLoading && loadState==ManagedSTexture::LOADING_IMAGE)
+    	if (loadState==ManagedSTexture::LOADING_IMAGE)
     	{
-    		// TODO should search in the loading queue the matching thread and kill it 
+    		// TODO should search in the loading queue the matching thread and kill it
     		assert(0);
     	}
     }
 	virtual int getLoadState(void) { return loadState;}
-
+	
+	//! Supported dynamic range modes
+	enum DynamicRangeMode
+	{
+		LINEAR,
+		MINMAX_USER,
+		MINMAX_QUANTILE,
+		MINMAX_GREYLEVEL,
+		MINMAX_GREYLEVEL_AUTO
+	};
+	
 private:
 	friend int loadTextureThread(void* tparam);
 	enum LoadState
@@ -60,24 +70,25 @@ private:
 		LOADING_IMAGE
 	};
 
-	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f), threadedLoading(false) {;}
+	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f) {;}
 	LoadState loadState;
 	void load(void);
 	
 	// Cached average luminance
 	float avgLuminance;
 	
-	// Define whether the loading must be done in a thread
-	bool threadedLoading;
+	DynamicRangeMode dynamicRangeMode;
 };
 
+//! Abstract class for any Image loaders.
 class ImageLoader
 {
 public:
 	virtual ~ImageLoader() {;}
-	virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo) = 0;
-private:
-	void setWH(ManagedSTexture& texinfo, GLsizei w, GLsizei h) {texinfo.width = w; texinfo.height = h;}
+	//! Load the data from the image and store it into tex.texels
+	//! The caller is responsible for freeing the memory allocated in tex.texels
+	//! This method must be thread compliant
+	virtual bool loadImage(const std::string& filename, ManagedSTexture& tex) = 0;
 };
 
 /**
@@ -100,7 +111,8 @@ public:
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	ManagedSTextureSP createTexture(const std::string& afilename, bool lazyLoading=false);
+	//! @param lazyLoading if true the texture will be loaded only when it used for the first time
+	ManagedSTextureSP createTexture(const std::string& filename, bool lazyLoading=false);
 	
 	//! Load an image from a file and create a new texture from it in a new thread, the value of the return pointer
 	//!    and of the status boolean are only set in the update() method and therefore don't need to be protected
@@ -134,6 +146,10 @@ public:
 	//! Set default parameters for Mipmap mode, wrap mode, min and mag filters
 	void setDefaultParams();
 	
+	//! Define how the dynamic range of the image will be adapted to fit on 8 bits
+	//! Note that using linear mode on 8 bits images does nothing
+	void setDynamicRangeMode(ManagedSTexture::DynamicRangeMode dMode = ManagedSTexture::LINEAR) {dynamicRangeMode = dMode;}
+	
 	//! Register a new image loader for a given image file extension
 	void registerImageLoader(const std::string& fileExtension, ImageLoader* loader)
 	{
@@ -160,6 +176,7 @@ private:
 	GLint wrapMode;
 	GLint minFilter;
 	GLint magFilter;
+	ManagedSTexture::DynamicRangeMode dynamicRangeMode;
 	
 	// The maximum texture size supported by the video card
 	GLint maxTextureSize;
@@ -170,9 +187,6 @@ private:
 	// Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
 	bool isNoPowerOfTwoLUMINANCEAllowed;
-	
-	// The null texture to return in case of problems
-	static ManagedSTexture NULL_STEXTURE;
 	
 	// Everything used for the threaded loading
 	friend struct LoadQueueParam;
