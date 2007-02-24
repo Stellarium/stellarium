@@ -118,16 +118,16 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float bKX = pow10(-0.4f * K * X);
 
 	// Dark night sky brightness
-/*
 	const float b_night = (0.4f + 0.6f
 	                       / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
 	                    * b_night_term * bKX;
-						*/
 
+	/* From original BASIC code for comparison
 	const float b_night = b_night_term 
 		* (0.4f + 0.6f / std::sqrt(1.f - 0.96f 
 								   * std::sin(dist_zenith)*std::sin(dist_zenith)))
 		* bKX;
+		*/
 
 	// Moonlight brightness
 	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
