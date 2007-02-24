@@ -181,6 +181,7 @@ string StelApp::getTextureFilePath(const string& textureFileName) const
 	return rootDir + "textures/" + textureFileName;
 }
 
+bool restart_ui = false;
 
 void StelApp::setViewPortDistorterType(const string &type)
 {
@@ -415,18 +416,19 @@ double StelApp::draw(int delta_time)
 {
     // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	// (because ui can draw outside the main viewport)
-    glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	set2DfullscreenProjection();
-	glBegin(GL_QUADS);
-    {
-        glVertex2f(0,core->getProjection()->getViewportHeight());
-        glVertex2f(core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
-        glVertex2f(core->getProjection()->getViewportWidth(),0);
-		glVertex2f(0,0);
-	}
-	glEnd();
-	restoreFrom2DfullscreenProjection();
+	glClear(GL_COLOR_BUFFER_BIT);
+//	glDisable(GL_BLEND);
+//	glColor3f(0.f,0.f,0.f);
+//	set2DfullscreenProjection();
+//	glBegin(GL_QUADS);
+//	{
+//		glVertex2f(0,core->getProjection()->getViewportHeight());
+//		glVertex2f(core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
+//		glVertex2f(core->getProjection()->getViewportWidth(),0);
+//		glVertex2f(0,0);
+//	}
+//	glEnd();
+//	restoreFrom2DfullscreenProjection();
 
 	distorter->prepare();
 
@@ -447,10 +449,13 @@ double StelApp::draw(int delta_time)
 
 	core->postDraw();
 
-	// Draw the Graphical ui and the Text ui
-	ui->draw();
+	// Draw the Text ui into the predistorted image
+	ui->drawTui();
 
 	distorter->distort();
+
+	// Draw the Graphical ui
+	ui->drawGui();
 
 	return squaredDistance;
 }
@@ -458,8 +463,12 @@ double StelApp::draw(int delta_time)
 // Handle mouse clics
 int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 {
+	const int ui_x = x;
+	const int ui_y = y;
+	y = screenH - 1 - y;
 	distorter->distortXY(x,y);
-	if (ui->handle_clic(x, y, button, state)) return 1;
+
+	if (ui->handle_clic(ui_x, ui_y, button, state)) return 1;
 
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseClicks");
@@ -501,6 +510,9 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 // Handle mouse move
 int StelApp::handleMove(int x, int y)
 {
+	const int ui_x = x;
+	const int ui_y = y;
+	y = screenH - 1 - y;
 	distorter->distortXY(x,y);
 	
 	// Send the event to every StelModule
@@ -511,7 +523,7 @@ int StelApp::handleMove(int x, int y)
 			return 1;
 	}
 	
-	return ui->handle_move(x, y);
+	return ui->handle_move(ui_x,ui_y);
 }
 
 // Handle key press and release
@@ -539,15 +551,23 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 //! Set the drawing mode in 2D for drawing in the full screen
 void StelApp::set2DfullscreenProjection(void) const
 {
-	glViewport(0, 0, core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
+//	glViewport(core->getProjection()->getViewportPosX(),
+//	           core->getProjection()->getViewportPosY(),
+//	           core->getProjection()->getViewportWidth(),
+//	           core->getProjection()->getViewportHeight());
+
+	glViewport(0,0,screenW,screenH);
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
 	glLoadIdentity();
-	gluOrtho2D(	0, core->getProjection()->getViewportWidth(),
-	            0, core->getProjection()->getViewportHeight());			// set a 2D orthographic projection
+//	gluOrtho2D(	0, core->getProjection()->getViewportWidth(),
+//	            0, core->getProjection()->getViewportHeight());			// set a 2D orthographic projection
+	gluOrtho2D(0,screenW,0,screenH);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 	glPushMatrix();
 	glLoadIdentity();
+	glScalef(1, -1, 1);					// invert the y axis, down is positive
+	glTranslatef(0, -screenH, 0);		// move the origin from the bottom left corner to the upper left corner
 }
 
 //! Restore previous projection mode
@@ -622,7 +642,9 @@ void StelApp::updateSkyLanguage()
 // Update and reload sky culture informations everywhere in the program
 void StelApp::updateSkyCulture()
 {
-	LoadingBar lb(core->getProjection(), 12., "logo24bits.png", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
+     core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
+      StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	// Send the event to every StelModule
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
 	{

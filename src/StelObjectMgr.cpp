@@ -209,7 +209,9 @@ boost::intrusive_ptr<StelObject> StelObjectMgr::cleverFind(const StelCore* core,
 {
 	Vec3d v;
 	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
-	core->getProjection()->unProject(x,core->getProjection()->getViewportHeight()-y,v);
+//johannes: StelApp already gives appropriate x/y coordinates
+//	core->getProjection()->unProject(x,core->getProjection()->getViewportHeight()-y,v);
+	core->getProjection()->unProject(x,y,v);
 	return cleverFind(core, v);
 }
 
