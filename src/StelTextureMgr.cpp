@@ -326,6 +326,8 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 		switch (tex->dynamicRangeMode)
 		{
 			case (ManagedSTexture::LINEAR):
+				{
+
 				if (tex->internalFormat==1)
 				{
 					// Assumes already GLubyte = unsigned char on 8 bits
@@ -360,6 +362,7 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
 				tex->loadState = ManagedSTexture::LOAD_ERROR;
 				return false;
+				}
 
 			default:
 				// Unsupported dynamic range mode.. Delete everything and return

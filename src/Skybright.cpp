@@ -44,7 +44,7 @@ void Skybright::set_date(int year, int month, float moon_phase)
 	RA = (month - 3.f) * 0.52359878f;
 
 	// Term for dark sky brightness computation
-	b_night_term = 1.0e-13 + 0.3e-13 * std::cos(0.56636f * (year-1992.f));
+	b_night_term = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
 }
 
 
@@ -74,6 +74,12 @@ void Skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 	else air_mass_sun = 1.f / (cos_dist_sun_zenith+0.025f*std::exp(-11.f*cos_dist_sun_zenith));
 
 	b_moon_term1 = pow10(-0.4f * (mag_moon + 54.32f));
+
+	// Moon should have no impact if below the horizon
+	// .05 is ad hoc fadeout range - Rob
+	if( cos_dist_moon_zenith < 0 ) b_moon_term1 *= 1 + cos_dist_moon_zenith/.05;
+	if(cos_dist_moon_zenith < -.05) b_moon_term1 = 0;
+
 
 	C3 = pow10(-0.4f*K*air_mass_moon);	// Term for moon brightness computation
 
@@ -112,15 +118,24 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float bKX = pow10(-0.4f * K * X);
 
 	// Dark night sky brightness
+/*
 	const float b_night = (0.4f + 0.6f
 	                       / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
 	                    * b_night_term * bKX;
+						*/
+
+	const float b_night = b_night_term 
+		* (0.4f + 0.6f / std::sqrt(1.f - 0.96f 
+								   * std::sin(dist_zenith)*std::sin(dist_zenith)))
+		* bKX;
 
 	// Moonlight brightness
 	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
 	               + pow10(6.15f - (dist_moon+0.001) * 1.43239f)
 	               + 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
 	float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
+
+
 
 	// Daylight brightness
 	const float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f)
@@ -133,7 +148,7 @@ float Skybright::get_luminance(float cos_dist_moon,
 	                       * (1.7453293f / dist_sun) * (1.f-bKX);
 
 	// 27/08/2003 : Decide increase moonlight for more halo effect...
-	b_moon *= 2.f;
+	// took out 20070223 Rob :	b_moon *= 2.f;
 
 	// Total sky brightness
 	const float b_total = b_night + b_moon
