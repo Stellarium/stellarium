@@ -44,7 +44,8 @@ public:
 	StelUI(StelCore *, StelApp * _app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui
 	void init(const InitParser& conf);		// Initialize the ui.
-	void draw(void);		// Display the ui
+	void drawTui(void);		// Display the ui
+	void drawGui(void);		// Display the ui
 	void gui_update_widgets(int delta_time);		// Update changing values
 
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.

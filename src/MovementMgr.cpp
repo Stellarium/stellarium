@@ -631,8 +631,11 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 	else
 		proj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
 		
-	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
-	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
+//johannes: StelApp already gives appropriate x/y coordinates
+//	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);
+//	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
+	proj->unProject(x2,y2, tempvec2);
+	proj->unProject(x1,y1, tempvec1);
 	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
 	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
 	panView(az2-az1, alt1-alt2);

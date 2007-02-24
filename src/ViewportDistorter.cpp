@@ -36,7 +36,7 @@ private:
   string getType(void) const {return "none";}
   void prepare(void) const {}
   void distort(void) const {}
-  bool distortXY(int &x,int &y) const {return true;}
+  bool distortXY(int &x,int &y) const {}
 };
 
 
@@ -177,6 +177,11 @@ ViewportDistorterFisheyeToSphericMirror
 //     << viewport_texture_offset[0] << ", "
 //     << viewport_texture_offset[1] << endl;
 
+  prj->setViewport(viewport[0],viewport[1],
+                   viewport_w,viewport_h,
+                   viewport_center[0],viewport_center[1],
+                   viewport_fov_diameter);
+
 
 
     // initialize mirror_texture:
@@ -295,13 +300,6 @@ ViewportDistorterFisheyeToSphericMirror
     // initialize the display list
   display_list = glGenLists(1);
   glNewList(display_list,GL_COMPILE);
-  glMatrixMode(GL_PROJECTION);        // projection matrix mode
-  glPushMatrix();                     // store previous matrix
-  glLoadIdentity();
-  gluOrtho2D(0,screen_w,0,screen_h);    // set a 2D orthographic projection
-  glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
-  glPushMatrix();
-  glLoadIdentity();
   for (int j=0;j<max_y;j++) {
     const TexturePoint *t0 = texture_point_array + j*(max_x+1);
     const TexturePoint *t1 = t0;
@@ -325,10 +323,6 @@ ViewportDistorterFisheyeToSphericMirror
     }
     glEnd();
   }
-  glMatrixMode(GL_PROJECTION);        // Restore previous matrix
-  glPopMatrix();
-  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();
   glEndList();
   delete[] vertex_point_array;
 }
@@ -337,29 +331,24 @@ ViewportDistorterFisheyeToSphericMirror
 
 ViewportDistorterFisheyeToSphericMirror::
     ~ViewportDistorterFisheyeToSphericMirror(void) {
-  if (texture_point_array) {
-    delete[] texture_point_array;
-    texture_point_array = 0;
-    glDeleteLists(display_list,1);
-    if (flag_use_ext_framebuffer_object) {
-      glDeleteFramebuffersEXT(1, &fbo);
-      glDeleteRenderbuffersEXT(1, &depth_buffer);
-    }
-    glDeleteTextures(1,&mirror_texture);
-    prj->setMaxFov(original_max_fov);
-    prj->setViewport(original_viewport[0],original_viewport[1],
-                     original_viewport[2],original_viewport[3],
-                     original_viewport_center[0],original_viewport_center[1],
-                     original_viewport_fov_diameter);
+  if (texture_point_array) delete[] texture_point_array;
+  glDeleteLists(display_list,1);
+  if (flag_use_ext_framebuffer_object) {
+    glDeleteFramebuffersEXT(1, &fbo);
+    glDeleteRenderbuffersEXT(1, &depth_buffer);
   }
+  glDeleteTextures(1,&mirror_texture);
+  prj->setMaxFov(original_max_fov);
+  prj->setViewport(original_viewport[0],original_viewport[1],
+                   original_viewport[2],original_viewport[3],
+                   original_viewport_center[0],original_viewport_center[1],
+                   original_viewport_fov_diameter);
 }
 
 
 
 
 bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const {
-  y = screen_h-1-y;
-
   float texture_x,texture_y;
 
     // find the triangle and interpolate accordingly:
@@ -429,7 +418,7 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) const {
     - viewport_texture_offset[0] + viewport[0];
   y = (int)floorf(0.5+texture_wh*texture_y)
     - viewport_texture_offset[1] + viewport[1];
-  y = viewport_h-1-y;
+//  y = screen_h-1-y;
   return true;
 }
 
@@ -438,11 +427,6 @@ void ViewportDistorterFisheyeToSphericMirror::prepare(void) const {
   if (flag_use_ext_framebuffer_object) {
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
   }
-
-  prj->setViewport(viewport[0],viewport[1],
-                   viewport_w,viewport_h,
-                   viewport_center[0],viewport_center[1],
-                   viewport_fov_diameter);
 }
 
 void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
@@ -451,12 +435,14 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
   }
   glViewport(0, 0, screen_w, screen_h);
-  glMatrixMode(GL_PROJECTION);		// projection matrix mode
+  glMatrixMode(GL_PROJECTION);        // projection matrix mode
+  glPushMatrix();                     // store previous matrix
   glLoadIdentity();
-  gluOrtho2D(	0, screen_w,
-	          0, screen_h);			// set a 2D orthographic projection
-  glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
+  gluOrtho2D(0,screen_w,0,screen_h);    // set a 2D orthographic projection
+  glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
+  glPushMatrix();
   glLoadIdentity();
+
 
   glBindTexture(GL_TEXTURE_2D, mirror_texture);
   if (!flag_use_ext_framebuffer_object) {
@@ -482,6 +468,12 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
 //glTexCoord2f(1.0f, 0.0f); glVertex2i(screen_w,0);
 //glTexCoord2f(0.0f, 0.0f); glVertex2i(0,0);
 //glEnd();
+
+  glMatrixMode(GL_PROJECTION);        // Restore previous matrix
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glPopMatrix();
+  glViewport(viewport[0],viewport[1],viewport_w,viewport_h);
 }
 
 
