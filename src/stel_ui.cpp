@@ -163,17 +163,17 @@ void StelUI::init(const InitParser& conf)
 	Painter p(baseTex, &baseFont, s_color(s_vec3(0.5, 0.5, 0.5)), s_color(s_vec3(1., 1., 1.)));
 	Component::setDefaultPainter(p);
 
-	Component::initScissor(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
+	Component::initScissor(StelApp::getInstance().screenW, StelApp::getInstance().screenH);
 
 	desktop = new Container(true);
-	desktop->reshape(0,0,core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
+	desktop->reshape(0,0,StelApp::getInstance().screenW,StelApp::getInstance().screenH);
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,core->getProjection()->getViewportHeight()-41-(int)baseFont.getDescent());
+	bt_flag_help_lbl->setPos(3,StelApp::getInstance().screenH-41-(int)baseFont.getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(core->getProjection()->getViewportWidth()-210,core->getProjection()->getViewportHeight()-41-(int)baseFont.getDescent());
+	bt_flag_time_control_lbl->setPos(StelApp::getInstance().screenW-210,StelApp::getInstance().screenH-41-(int)baseFont.getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -242,12 +242,12 @@ Component* StelUI::createTopBar(SFont& baseFont)
 {
 	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
-	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(core->getProjection()->getViewportWidth()-100,1);
-	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(core->getProjection()->getViewportWidth()-220,1);
+	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelApp::getInstance().screenW-100,1);
+	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelApp::getInstance().screenW-220,1);
 	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), &baseFont);
-	top_bar_appName_lbl->setPos(core->getProjection()->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->getProjection()->getViewportWidth(),(int)(baseFont.getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,StelApp::getInstance().screenW,(int)(baseFont.getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -424,7 +424,7 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->getProjection()->getViewportHeight()-25, x-1, 25);
+	bt_flag_ctr->reshape(0, StelApp::getInstance().screenH-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -458,7 +458,7 @@ Component* StelUI::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
 	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
-	bt_time_control_ctr->reshape(core->getProjection()->getViewportWidth()-4*25-1, core->getProjection()->getViewportHeight()-25, 4*25, 25);
+	bt_time_control_ctr->reshape(StelApp::getInstance().screenW-4*25-1, StelApp::getInstance().screenH-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
@@ -771,13 +771,18 @@ void StelUI::help_win_hideBtCallback(void)
 
 
 /*******************************************************************/
-void StelUI::draw(void)
+void StelUI::drawTui(void)
 {
 
 	// draw first as windows should cover these up
 	// also problem after 2dfullscreen with square viewport
 	if (FlagShowGravityUi) draw_gravity_ui();
 	if (getFlagShowTuiMenu()) draw_tui();
+}
+
+
+void StelUI::drawGui(void)
+{
 
 	// Special cool text transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -786,9 +791,6 @@ void StelUI::draw(void)
 
 	app->set2DfullscreenProjection();	// 2D coordinate
 	Component::enableScissor();
-
-	glScalef(1, -1, 1);						// invert the y axis, down is positive
-	glTranslatef(0, -core->getProjection()->getViewportHeight(), 0);	// move the origin from the bottom left corner to the upper left corner
 
 	desktop->draw();
 
@@ -1351,7 +1353,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 	{
 		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
-	top_bar_appName_lbl->setPos(core->getProjection()->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
 wstring StelUI::getTitleWithAltitude(void)
