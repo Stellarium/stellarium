@@ -22,6 +22,7 @@
 
 // TODO : Adaptative resolution for optimization
 
+#include "GLee.h"
 #include "Atmosphere.hpp"
 #include "stellarium.h"
 #include "StelUtils.hpp"
@@ -200,6 +201,16 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	world_adaptation_luminance = 3.75f + 3.5*sum_lum/nb_lum*atm_intensity;
 	milkyway_adaptation_luminance = min_mw_lum*(1-atm_intensity) + 30*sum_lum/nb_lum*atm_intensity;
 
+/*
+	// Light pollution testing Rob 20070219
+	float light_pollution = 10.f;
+	world_adaptation_luminance = 3.75f + light_pollution + 3.5*sum_lum/nb_lum*atm_intensity;
+//	milkyway_adaptation_luminance = light_pollution + min_mw_lum*(1-atm_intensity) 
+	//	+ 30*sum_lum/nb_lum*atm_intensity;
+	milkyway_adaptation_luminance = 30000*world_adaptation_luminance;
+// NOT USED AT ALL!
+*/
+
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
@@ -212,7 +223,12 @@ void Atmosphere::draw(Projector* prj)
 	if(fader.getInterstate())
 	{
 		// printf("Atm int: %f\n", atm_intensity);
+
+		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
+
+		// fallback if glBlendEquation not available
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+
 
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
@@ -233,5 +249,8 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
+
+		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_FUNC_ADD);
+
 	}
 }
