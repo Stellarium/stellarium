@@ -36,7 +36,7 @@ private:
   string getType(void) const {return "none";}
   void prepare(void) const {}
   void distort(void) const {}
-  bool distortXY(int &x,int &y) const {}
+  bool distortXY(int &x,int &y) const {return true;}
 };
 
 
