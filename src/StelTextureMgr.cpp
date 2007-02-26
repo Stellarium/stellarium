@@ -89,7 +89,7 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 	
 	// Init default values
 	setDefaultParams();
-	
+
 	// Add default loaders
 	registerImageLoader("png", &pngLoader);
 	registerImageLoader("PNG", &pngLoader);
@@ -297,6 +297,152 @@ void StelTextureMgr::update()
 
 
 /*************************************************************************
+ Adapt the scaling for the texture. Return true if there was no errors
+ This method is thread safe
+*************************************************************************/
+bool StelTextureMgr::reScale(ManagedSTexture* tex)
+{
+	const unsigned int nbPix = tex->width*tex->height;
+	const int bitpix = tex->internalFormat*8;
+	// Scale input image according to the dynamic range parameters
+	if (tex->format==GL_LUMINANCE)
+	{
+		switch (tex->dynamicRangeMode)
+		{
+			case (ManagedSTexture::LINEAR):
+			{
+				if (tex->internalFormat==1)
+				{
+					// Assumes already GLubyte = unsigned char on 8 bits
+					break;
+				}
+				const unsigned int scale = 1<<(bitpix-8);
+				if (tex->internalFormat==2)
+				{
+					// We assume short unsigned int = GLushort
+					GLushort* data = (GLushort*)tex->texels;
+					for (unsigned int i=0;i<nbPix;++i)
+					{
+						tex->texels[i] = data[i]/scale;
+					}
+					tex->texels = (GLubyte*)realloc(data, nbPix); 
+					break;
+				}
+				if (tex->internalFormat==4)
+				{
+					// We assume short unsigned int = GLushort
+					GLuint* data = (GLuint*)tex->texels;
+					for (unsigned int i=0;i<nbPix;++i)
+					{
+						tex->texels[i] = data[i]/scale;
+					}
+					tex->texels = (GLubyte*)realloc(data, nbPix); 
+					break;
+				}
+				// Unsupported format..
+				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+				return false;
+			}
+			case (ManagedSTexture::MINMAX_QUANTILE):
+			{
+				// Compute the image histogram
+				int* histo = (int*)calloc(sizeof(int), 1<<bitpix); 
+				
+				if (tex->internalFormat==1)
+				{
+					// We assume unsigned char = GLubyte
+					GLubyte* data = (GLubyte*)tex->texels;
+					for (unsigned int i = 0; i <nbPix ; ++i)
+						++(histo[(int)data[i]]);
+				}
+				else if (tex->internalFormat==2)
+				{
+					// We assume short unsigned int = GLushort
+					GLushort* data = (GLushort*)tex->texels;
+					for (unsigned int i = 0; i <nbPix; ++i)
+						++(histo[(int)data[i]]);
+				}
+				else
+				{
+					// Unsupported format..
+					cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+					return false;
+				}
+				
+				// From the histogram, compute the Quantile cut at values minQuantile and maxQuantile
+				const double minQuantile = 0.10;
+				const double maxQuantile = 0.98;
+				int minCut, maxCut;
+				int thresh = (int)(minQuantile*nbPix);
+				int minI = 0;
+				// Start from 1 to ignore zeroed region in the image
+				for (int id=1;id<1<<bitpix;++id)
+				{
+					minI+=histo[id];
+					if (minI>=thresh)
+					{
+						minCut = id;
+						break;
+					}
+				}
+				
+				thresh = (int)((1.-maxQuantile)*nbPix);
+				int maxI = 0;
+				// Finisg at 1 to ignore zeroed region in the image
+				for (int id=1<<bitpix;id>=1;--id)
+				{
+					maxI+=histo[id];
+					if (maxI>=thresh)
+					{
+						maxCut = id;
+						break;
+					}
+				}
+				free(histo);
+				
+				cerr << "minCut=" << minCut << " maxCut=" << maxCut << endl;
+				
+				if (tex->internalFormat==1)
+				{
+					double scaling = 255./(maxCut-minCut);
+					GLubyte* data = (GLubyte*)tex->texels;
+					for (unsigned int i=0;i<nbPix;++i)
+					{
+						tex->texels[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
+					}
+				}
+				else if (tex->internalFormat==2)
+				{
+					double scaling = 255./(maxCut-minCut);
+					GLushort* data = (GLushort*)tex->texels;
+					for (unsigned int i=0;i<nbPix;++i)
+						tex->texels[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
+				}
+				else
+				{
+					// Unsupported format..
+					cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+					return false;
+				}
+				tex->texels = (GLubyte*)realloc(tex->texels, nbPix); 
+			}
+			break;
+			default:
+				// Unsupported dynamic range mode..
+				cerr << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded."<< endl;
+				return false;
+		}
+		tex->internalFormat = 1;
+		return true;
+	}
+	else
+	{
+		// TODO, no scaling is currently done for color images
+		return true;
+	}
+}
+
+/*************************************************************************
   Load the image in memory by calling the associated ImageLoader
 *************************************************************************/
 bool StelTextureMgr::loadImage(ManagedSTexture* tex)
@@ -320,63 +466,13 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 		return false;
 	}
 
-	// Scale input image according to the dynamic range parameters
-	if (tex->format==GL_LUMINANCE)
+	// Apply scaling for the image
+	if (reScale(tex)==false)
 	{
-		switch (tex->dynamicRangeMode)
-		{
-			case (ManagedSTexture::LINEAR):
-				{
-
-				if (tex->internalFormat==1)
-				{
-					// Assumes already GLubyte = unsigned char on 8 bits
-					break;
-				}
-				const unsigned int scale = 1<<((tex->internalFormat-1)*8);
-				if (tex->internalFormat==2)
-				{
-					// We assume short unsigned int = GLushort
-					GLushort* data = (GLushort*)tex->texels;
-					for (int i=0;i<tex->width*tex->height;++i)
-					{
-						tex->texels[i] = data[i]/scale;
-					}
-					tex->texels = (GLubyte*)realloc(data, tex->width*tex->height); 
-					break;
-				}
-				if (tex->internalFormat==4)
-				{
-					// We assume short unsigned int = GLushort
-					GLuint* data = (GLuint*)tex->texels;
-					for (int i=0;i<tex->width*tex->height;++i)
-					{
-						tex->texels[i] = data[i]/scale;
-					}
-					tex->texels = (GLubyte*)realloc(data, tex->width*tex->height); 
-					break;
-				}
-				// Unsupported format.. Delete everything and return
-				free(tex->texels);
-				tex->texels = NULL;
-				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
-				tex->loadState = ManagedSTexture::LOAD_ERROR;
-				return false;
-				}
-
-			default:
-				// Unsupported dynamic range mode.. Delete everything and return
-				free(tex->texels);
-				tex->texels = NULL;
-				cerr << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded."<< endl;
-				tex->loadState = ManagedSTexture::LOAD_ERROR;
-				return false;
-		}
-		tex->internalFormat = 1;
-	}
-	else
-	{
-		// TODO, no scaling is currently done for color images
+		free(tex->texels);
+		tex->texels = NULL;
+		tex->loadState = ManagedSTexture::LOAD_ERROR;
+		return false;
 	}
 
 	// Repair texture size if non power of 2 is not allowed by the video driver

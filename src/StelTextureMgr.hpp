@@ -168,6 +168,10 @@ private:
 	//! Load the texture already in the RAM to openGL memory
 	bool glLoadTexture(ManagedSTexture* tex);
 	
+	//! Adapt the scaling for the texture. Return true if there was no errors
+	//! This method is thread safe
+	bool reScale(ManagedSTexture* tex);
+
 	// List of image loaders providing image loading for the given files extensions
 	std::map<std::string, ImageLoader*> imageLoaders;
 	
