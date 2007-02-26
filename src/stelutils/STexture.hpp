@@ -47,6 +47,7 @@ public:
 	GLsizei height;
 	
 	GLenum format;
+	GLenum type;
 	GLint internalFormat;
 	GLubyte *texels;
 	

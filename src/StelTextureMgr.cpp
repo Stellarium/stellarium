@@ -130,7 +130,7 @@ void StelTextureMgr::init()
 	string glVersion((char*)glGetString(GL_VERSION));
 	// cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
 	if (glVendor=="NVIDIA Corporation" && glRenderer=="Quadro NVS 285/PCI/SSE2" && glVersion=="2.0.2 NVIDIA 87.74")
-		isNoPowerOfTwoLUMINANCEAllowed = false;
+		isNoPowerOfTwoLUMINANCEAllowed = true;//false;
 	else
 		isNoPowerOfTwoLUMINANCEAllowed = isNoPowerOfTwoAllowed;
 
@@ -314,30 +314,15 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				if (tex->internalFormat==1)
 				{
 					// Assumes already GLubyte = unsigned char on 8 bits
-					break;
+					return true;
 				}
-				const unsigned int scale = 1<<(bitpix-8);
 				if (tex->internalFormat==2)
 				{
-					// We assume short unsigned int = GLushort
-					GLushort* data = (GLushort*)tex->texels;
-					for (unsigned int i=0;i<nbPix;++i)
-					{
-						tex->texels[i] = data[i]/scale;
-					}
-					tex->texels = (GLubyte*)realloc(data, nbPix); 
-					break;
+					return true;
 				}
 				if (tex->internalFormat==4)
 				{
-					// We assume short unsigned int = GLushort
-					GLuint* data = (GLuint*)tex->texels;
-					for (unsigned int i=0;i<nbPix;++i)
-					{
-						tex->texels[i] = data[i]/scale;
-					}
-					tex->texels = (GLubyte*)realloc(data, nbPix); 
-					break;
+					return true;
 				}
 				// Unsupported format..
 				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
@@ -533,21 +518,22 @@ bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
 	// generate texture
 	glGenTextures (1, &(tex->id));
 	glBindTexture (GL_TEXTURE_2D, tex->id);
-
+	
 	// setup some parameters for texture filters and mipmapping
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, tex->minFilter);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex->magFilter);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->wrapMode);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->wrapMode);
-	glTexImage2D (GL_TEXTURE_2D, 0, tex->internalFormat, tex->width, tex->height, 0, tex->format, GL_UNSIGNED_BYTE, tex->texels);
+	
+	glTexImage2D (GL_TEXTURE_2D, 0, tex->internalFormat, tex->width, tex->height, 0, tex->format, tex->type, tex->texels);
 	if (tex->mipmapsMode==true)
-		gluBuild2DMipmaps (GL_TEXTURE_2D, tex->internalFormat, tex->width, tex->height, tex->format, GL_UNSIGNED_BYTE, tex->texels);
-
+		gluBuild2DMipmaps (GL_TEXTURE_2D, tex->internalFormat, tex->width, tex->height, tex->format, tex->type, tex->texels);
 	// OpenGL has its own copy of texture data
 	free (tex->texels);
 	tex->texels = NULL;
 	
 	tex->loadState = ManagedSTexture::LOADED;	// texture loaded
+	
 	return true;
 }
 
@@ -697,21 +683,25 @@ bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTextur
 	case PNG_COLOR_TYPE_GRAY:
 		texinfo.format = GL_LUMINANCE;
 		texinfo.internalFormat = 1;
+		texinfo.type = GL_UNSIGNED_BYTE;
 		break;
 
 	case PNG_COLOR_TYPE_GRAY_ALPHA:
 		texinfo.format = GL_LUMINANCE_ALPHA;
 		texinfo.internalFormat = 2;
+		texinfo.type = GL_UNSIGNED_BYTE;
 		break;
 
 	case PNG_COLOR_TYPE_RGB:
 		texinfo.format = GL_RGB;
 		texinfo.internalFormat = 3;
+		texinfo.type = GL_UNSIGNED_BYTE;
 		break;
 
 	case PNG_COLOR_TYPE_RGB_ALPHA:
 		texinfo.format = GL_RGBA;
 		texinfo.internalFormat = 4;
+		texinfo.type = GL_UNSIGNED_BYTE;
 		break;
 
 	default:
@@ -813,7 +803,7 @@ bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTextur
 	texinfo.width = cinfo.image_width;
 	texinfo.height = cinfo.image_height;
 	texinfo.internalFormat = cinfo.num_components;
-
+	texinfo.type = GL_UNSIGNED_BYTE;
 	if (cinfo.num_components == 1)
 		texinfo.format = GL_LUMINANCE;
 	else
