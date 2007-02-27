@@ -58,8 +58,6 @@ void Projector::init(const InitParser& conf)
 	const int screen_w = conf.get_int("video:screen_w");
 	const int screen_h = conf.get_int("video:screen_h");
 	const int screen_min_wh = MY_MIN(screen_w,screen_h);
-	const int horizontal_offset = conf.get_int("video","horizontal_offset",0);
-	const int vertical_offset = conf.get_int("video","vertical_offset",0);
 	const int viewport_width
 	  = conf.get_int("projection","viewport_width",
 	                    maximized ? screen_w : screen_min_wh);
@@ -68,10 +66,10 @@ void Projector::init(const InitParser& conf)
 	                    maximized ? screen_h : screen_min_wh);
 	const int viewport_x
 	  = conf.get_int("projection","viewport_x",
-	                 horizontal_offset + ((screen_w-viewport_width)/2));
+	                 (screen_w-viewport_width)/2);
 	const int viewport_y
 	  = conf.get_int("projection","viewport_y",
-	                 vertical_offset + ((screen_h-viewport_height)/2));
+	                 (screen_h-viewport_height)/2);
 	const double viewport_center_x
 	  = conf.get_double("projection","viewport_center_x",0.5*viewport_width);
 	const double viewport_center_y
