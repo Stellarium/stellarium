@@ -119,10 +119,13 @@ ViewportDistorterFisheyeToSphericMirror
       = conf.get_boolean("spheric_mirror",
                          "flag_use_ext_framebuffer_object",true);
   }
-  cout << "ViewportDistorterFisheyeToSphericMirror::"
-          "ViewportDistorterFisheyeToSphericMirror: "
-          "flag_use_ext_framebuffer_object: "
+  cout << "INFO: flag_use_ext_framebuffer_object = "
        << flag_use_ext_framebuffer_object << endl;
+  if (flag_use_ext_framebuffer_object && !GLEE_EXT_packed_depth_stencil) {
+    cout << "WARNING: "
+            "using EXT_framebuffer_object, but EXT_packed_depth_stencil "
+            "not available: no stencil buffer support" << endl;
+  }
 
   double texture_triangle_base_length
     = conf.get_double("spheric_mirror","texture_triangle_base_length",16.0);  
@@ -194,10 +197,14 @@ ViewportDistorterFisheyeToSphericMirror
   if (flag_use_ext_framebuffer_object) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  texture_wh,texture_wh, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-      // Create the render buffer for depth    
+      // create the depth buffer (which also includes the stencil buffer
+      // in case of EXT_packed_depth_stencil):
     glGenRenderbuffersEXT(1, &depth_buffer);
     glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
-    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT,
+    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT,
+                             GLEE_EXT_packed_depth_stencil
+                              ? GL_DEPTH24_STENCIL8_EXT
+                              : GL_DEPTH_COMPONENT,
                              texture_wh,texture_wh);
       // Setup our FBO
     glGenFramebuffersEXT(1, &fbo);
@@ -206,9 +213,15 @@ ViewportDistorterFisheyeToSphericMirror
       // Attach the texture to the FBO so we can render to it
     glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT,
                               GL_TEXTURE_2D, mirror_texture, 0);
-      // Attach the depth render buffer to the FBO as it's depth attachment
+      // Attach the depth (and stencil) buffer to the FBO as it's
+      // depth (and stencil) attachment
     glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,
                                  GL_RENDERBUFFER_EXT, depth_buffer);
+    if (GLEE_EXT_packed_depth_stencil) {
+      glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT,
+                                   GL_STENCIL_ATTACHMENT_EXT,
+                                   GL_RENDERBUFFER_EXT, depth_buffer);
+    }
     const GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
     if (status != GL_FRAMEBUFFER_COMPLETE_EXT) {
         cout << "could not initialize GL_FRAMEBUFFER_EXT" << endl;
