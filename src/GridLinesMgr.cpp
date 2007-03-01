@@ -369,7 +369,7 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	map<int, set<double> > resultsParallels;
 	map<int, set<double> > resultsMeridians;
-	const vector<Vec2d> viewportVertices = prj->getViewportVertices();
+	const vector<Vec2d> viewportVertices = prj->getViewportVertices2d();
 	for (unsigned int i=0;i<viewportVertices.size();++i)
 	{
 		// The segment of the viewport is between v0 and v1

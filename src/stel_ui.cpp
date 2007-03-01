@@ -838,14 +838,14 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	return 0;
 }
 
-
+int StelUI::handle_keysGUI(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
+{
+	return desktop->onKey(unicode, state);
+}
+		
 /*******************************************************************************/
 int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
-
-	if (desktop->onKey(unicode, state))
-		return 1;
-
 	if (state==SDL_KEYDOWN)
 	{
 //printf("handle_keys: '%c'(%d), %d, 0x%04x\n",key,(int)key,unicode,mod);

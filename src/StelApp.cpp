@@ -534,7 +534,7 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 	// (this could be debated)
 	if (ui->handle_keys_tui(unicode, state)) return 1;
 
-	if (ui->handle_keys(key, mod, unicode, state)) return 1;
+	if (ui->handle_keysGUI(key, mod, unicode, state)) return 1;
 
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleKeys");
@@ -544,24 +544,18 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 			return 1;
 	}
 
-	return 0;
+	// Non widget key handling
+	return ui->handle_keys(key, mod, unicode, state);
 }
 
 
 //! Set the drawing mode in 2D for drawing in the full screen
 void StelApp::set2DfullscreenProjection(void) const
 {
-//	glViewport(core->getProjection()->getViewportPosX(),
-//	           core->getProjection()->getViewportPosY(),
-//	           core->getProjection()->getViewportWidth(),
-//	           core->getProjection()->getViewportHeight());
-
 	glViewport(0,0,screenW,screenH);
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
 	glLoadIdentity();
-//	gluOrtho2D(	0, core->getProjection()->getViewportWidth(),
-//	            0, core->getProjection()->getViewportHeight());			// set a 2D orthographic projection
 	gluOrtho2D(0,screenW,0,screenH);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 	glPushMatrix();

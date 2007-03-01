@@ -47,9 +47,9 @@ public:
 	GLsizei height;
 	
 	GLenum format;
-	GLenum type;
 	GLint internalFormat;
-	GLubyte *texels;
+	GLubyte* texels;
+	GLenum type;
 	
 	// Position of the 4 corners of the texture in texture coordinates
 	Vec2d texCoordinates[4];

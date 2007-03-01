@@ -484,12 +484,12 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 	int total=0;
 	while(!getline(inf, record).eof())
 	{
+		if (record.empty() || record[0]=='#')
+			continue;
 		++total;
 	}
 	inf.clear();
 	inf.seekg(0);
-
-	printf("(%d textures loaded)\n", total);
 
 	int current = 0;
 	int NGC;
@@ -500,6 +500,9 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		lb.SetMessage(_("Loading Nebula Textures:") + StelUtils::intToWstring(current) + L"/" + StelUtils::intToWstring(total));
 		lb.Draw((float)current/total);
 
+		if (record.empty() || record[0]=='#')
+			continue;
+
 		istringstream istr(record);
 		istr >> NGC;
 
@@ -507,7 +510,10 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		if (e)
 		{
 			if (!e->readTexture(record)) // reading error
+			{
 				cerr << "Error while reading texture for nebula " << e->englishName << endl;
+				cerr << "Record was " << record << endl;
+			}
 		} else {
 			// Allow non NGC nebulas/textures!
 
@@ -525,6 +531,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		}
 	
 	}
+	cout << "(" << total << " textures loaded)" << endl;
 	return true;
 }
 

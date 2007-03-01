@@ -36,31 +36,16 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-//#include <boost/lambda/lambda.hpp>
-//#include <boost/lambda/bind.hpp>
 
 #include "vecmath.h"
 
-//using namespace boost::lambda;
+// Damn X11! Why do they define such names! (in X11/X.h:#define Convex 2)
+#ifdef Convex
+#undef Convex
+#endif
 
-/******************
-First some internal convenient functions
-*******************/
-
-////! Return true if the predicate if true for any of the elements of c
-//template<class C, class P>
-//static bool any(const C& c, P pred)
-//{
-//    return std::find_if(c.begin(), c.end(), pred) != c.end();
-//}
-//
-////! Return true if the predicate if true for all of the elements of c
-//template<class C, class P>
-//static bool all(const C& c, P pred)
-//{
-//    return std::find_if(c.begin(), c.end(), !pred) == c.end();
-//}
-
+namespace StelGeom
+{
 
 // Just used to resolved some compile time type embiguities
 template <class T1, class T2>
@@ -135,7 +120,6 @@ bool intersect(const T& o, const Polygon& p)
 			return true;
 	}
 	return false;
-//    return ::any(p, bind(&containsT<T, Vec3d>,o, _1));
 }
 
 template<class T>
@@ -244,5 +228,7 @@ inline bool intersect(const ConvexPolygon& p, const Disk& d)
 {
 	return intersect(d, p);
 }
+
+}	// namespace StelGeom
 
 #endif /*SPHEREGEOMETRY_HPP_*/

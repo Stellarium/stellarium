@@ -319,7 +319,7 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
 }
 
 
-void GeodesicGrid::searchZones(const Convex& convex,
+void GeodesicGrid::searchZones(const StelGeom::Convex& convex,
                                int **inside_list,int **border_list,
                                int max_search_level) const
 {
@@ -339,7 +339,7 @@ void GeodesicGrid::searchZones(const Convex& convex,
 #endif
 	for (size_t h=0;h<convex.size();h++)
 	{
-		const HalfSpace &half_space(convex[h]);
+		const StelGeom::HalfSpace &half_space(convex[h]);
 		for (int i=0;i<12;i++)
 		{
 			corner_inside[i][h] = half_space.contains(icosahedron_corners[i]);
@@ -361,7 +361,7 @@ void GeodesicGrid::searchZones(const Convex& convex,
 }
 
 void GeodesicGrid::searchZones(int lev,int index,
-                               const Convex& convex,
+                               const StelGeom::Convex& convex,
                                const int *index_of_used_half_spaces,
                                const int half_spaces_used,
                                const bool *corner0_inside,
@@ -423,7 +423,7 @@ void GeodesicGrid::searchZones(int lev,int index,
 			for (int h=0;h<halfs_used_count;h++)
 			{
 				const int i = halfs_used[h];
-				const HalfSpace &half_space(convex[i]);
+				const StelGeom::HalfSpace &half_space(convex[i]);
 				edge0_inside[i] = half_space.contains(t.e0);
 				edge1_inside[i] = half_space.contains(t.e1);
 				edge2_inside[i] = half_space.contains(t.e2);
@@ -481,7 +481,7 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 	delete[] zones;
 }
 
-void GeodesicSearchResult::search(const Convex& convex,
+void GeodesicSearchResult::search(const StelGeom::Convex& convex,
                                   int max_search_level)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)
@@ -496,7 +496,7 @@ void GeodesicSearchResult::search(const Vec3d &e0,const Vec3d &e1,
                                   const Vec3d &e2,const Vec3d &e3,
                                   int max_search_level)
 {
-	Convex c(e0, e1, e2, e3);
+	StelGeom::Convex c(e0, e1, e2, e3);
 	search(c,max_search_level);
 }
 
