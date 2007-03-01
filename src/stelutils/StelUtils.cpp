@@ -487,7 +487,7 @@ wstring printAngleHMS(double angle, bool decimals)
 
 double str_to_double(string str)
 {
-	if(str=="") return 0;
+	if(str.empty()) return 0;
 	double dbl;
 	std::istringstream dstr( str );
 
@@ -498,7 +498,7 @@ double str_to_double(string str)
 // always positive
 double str_to_pos_double(string str)
 {
-	if(str=="") return 0;
+	if(str.empty()) return 0;
 	double dbl;
 	std::istringstream dstr( str );
 
@@ -510,7 +510,7 @@ double str_to_pos_double(string str)
 
 int str_to_int(string str)
 {
-	if(str=="") return 0;
+	if(str.empty()) return 0;
 	int integer;
 	std::istringstream istr( str );
 
@@ -521,7 +521,7 @@ int str_to_int(string str)
 
 int str_to_int(string str, int default_value)
 {
-	if(str=="") return default_value;
+	if(str.empty()) return default_value;
 	int integer;
 	std::istringstream istr( str );
 
@@ -538,7 +538,7 @@ string double_to_str(double dbl)
 
 long int str_to_long(string str)
 {
-	if(str=="") return 0;
+	if(str.empty()) return 0;
 	long int integer;
 	std::istringstream istr( str );
 

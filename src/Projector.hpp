@@ -26,6 +26,7 @@
 #include "vecmath.h"
 #include "SFont.hpp"
 #include "Mapping.hpp"
+#include "SphereGeometry.hpp"
 
 class InitParser;
 
@@ -112,7 +113,11 @@ public:
 	//! where projection is valid. Normally, nothing should be drawn outside this area.
 	//! This viewport is usually the rectangle defined by the screen, but in case of non-linear
 	//! projection, it can also be a more complex shape.
-	std::vector<Vec2d> getViewportVertices() const;
+	std::vector<Vec2d> getViewportVertices2d() const;
+	
+	//! Return a convex polygon on the sphere which includes the viewport in the current frame
+	//! @param margin an extra margin in pixel which extends the polygon size
+	StelGeom::ConvexPolygon getViewportConvexPolygon(double margin=0.) const;
 	
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}

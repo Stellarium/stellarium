@@ -6,11 +6,11 @@ AstroImage::AstroImage()
 {
 }
 
-AstroImage::AstroImage(STextureSP atex, const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3) : tex(atex), poly(ConvexPolygon(v3, v2, v1, v0))
+AstroImage::AstroImage(STextureSP atex, const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3) : tex(atex), poly(StelGeom::ConvexPolygon(v3, v2, v1, v0))
 {
 }
 
-AstroImage::AstroImage(const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3) : poly(ConvexPolygon(v3, v2, v1, v0))
+AstroImage::AstroImage(const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3) : poly(StelGeom::ConvexPolygon(v3, v2, v1, v0))
 {
 }
 

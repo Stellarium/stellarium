@@ -30,6 +30,8 @@
 template<class Obj>
 class TreeGrid;
 
+using namespace StelGeom;
+
 //! This a convenient class that contains the methods of StelGridPolicy<T>
 //! that don't depend of the template type, so we can put them in the .cpp file
 class TreeGridPolicyBase
