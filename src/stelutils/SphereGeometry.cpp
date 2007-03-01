@@ -19,7 +19,7 @@
 
 #include "SphereGeometry.hpp"
 
-
+using namespace StelGeom;
 
 //! Special constructor for 3 halfspaces convex
 Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)

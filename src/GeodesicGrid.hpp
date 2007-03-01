@@ -72,7 +72,7 @@ public:
 	// one such zone is returned (always the same one,
 	// because the algorithm is deterministic).
 
-	void searchZones(const Convex& convex,
+	void searchZones(const StelGeom::Convex& convex,
 	                 int **inside,int **border,int max_search_level) const;
 	// find all zones that lie fully(inside) or partly(border)
 	// in the intersection of the given half spaces.
@@ -106,7 +106,7 @@ private:
 	                    VisitFunc *func,
 	                    void *context) const;
 	void searchZones(int lev,int index,
-	                 const Convex& convex,
+	                 const StelGeom::Convex& convex,
 	                 const int *index_of_used_half_spaces,
 	                 const int half_spaces_used,
 	                 const bool *corner0_inside,
@@ -130,7 +130,7 @@ class GeodesicSearchResult
 public:
 	GeodesicSearchResult(const GeodesicGrid &grid);
 	~GeodesicSearchResult(void);
-	void search(const Convex& convex,
+	void search(const StelGeom::Convex& convex,
 	            int max_search_level);
 	void search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,
 	            int max_search_level);

@@ -168,7 +168,11 @@ void Projector::setViewport(int x, int y, int w, int h,
 	initGlMatrixOrtho2d();
 }
 
-std::vector<Vec2d> Projector::getViewportVertices() const
+/*************************************************************************
+ Return a polygon matching precisely the real viewport defined by the area on the screen 
+ where projection is valid.
+*************************************************************************/
+std::vector<Vec2d> Projector::getViewportVertices2d() const
 {
 	std::vector<Vec2d> result;
 	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]));
@@ -176,6 +180,20 @@ std::vector<Vec2d> Projector::getViewportVertices() const
 	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]+viewport_xywh[3]));
 	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]+viewport_xywh[3]));
 	return result;
+}
+
+/*************************************************************************
+ Return a convex polygon on the sphere which includes the viewport in the 
+ current frame
+*************************************************************************/
+StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double margin) const
+{
+	Vec3d e0, e1, e2, e3;
+	unProject(0-margin,0-margin,e0);
+	unProject(getViewportWidth()+margin,0-margin,e1);
+	unProject(getViewportWidth()+margin,getViewportHeight()+margin,e2);
+	unProject(0-margin,getViewportHeight()+margin,e3);
+	return StelGeom::ConvexPolygon(e0, e3, e2, e1);
 }
 
 void Projector::setFov(double f)

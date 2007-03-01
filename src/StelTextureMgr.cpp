@@ -128,11 +128,8 @@ void StelTextureMgr::init()
 	string glRenderer((char*)glGetString(GL_RENDERER));
 	string glVendor((char*)glGetString(GL_VENDOR));
 	string glVersion((char*)glGetString(GL_VERSION));
-	// cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
-	if (glVendor=="NVIDIA Corporation" && glRenderer=="Quadro NVS 285/PCI/SSE2" && glVersion=="2.0.2 NVIDIA 87.74")
-		isNoPowerOfTwoLUMINANCEAllowed = true;//false;
-	else
-		isNoPowerOfTwoLUMINANCEAllowed = isNoPowerOfTwoAllowed;
+
+	isNoPowerOfTwoLUMINANCEAllowed = false;
 
 	// Get Maximum Texture Size Supported by the video card
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
@@ -393,15 +390,22 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 					GLubyte* data = (GLubyte*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
 					{
-						tex->texels[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
+						data[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
 					}
 				}
-				else if (tex->internalFormat==2)
+				else if (tex->internalFormat==2 && tex->type==GL_UNSIGNED_SHORT)
 				{
-					double scaling = 255./(maxCut-minCut);
+					double scaling = 65535./(maxCut-minCut);
 					GLushort* data = (GLushort*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
-						tex->texels[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
+						data[i] = (GLushort)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 65535);
+				}
+				else if (tex->internalFormat==2 && tex->type==GL_SHORT)
+				{
+					double scaling = 65535./(maxCut-minCut);
+					GLshort* data = (GLshort*)tex->texels;
+					for (unsigned int i=0;i<nbPix;++i)
+						data[i] = (GLshort)MY_MIN((MY_MAX((data[i]-minCut), -32767)*scaling), 32767);
 				}
 				else
 				{
@@ -409,7 +413,6 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 					cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
 					return false;
 				}
-				tex->texels = (GLubyte*)realloc(tex->texels, nbPix); 
 			}
 			break;
 			default:
@@ -417,7 +420,6 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				cerr << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded."<< endl;
 				return false;
 		}
-		tex->internalFormat = 1;
 		return true;
 	}
 	else
@@ -524,7 +526,7 @@ bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex->magFilter);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->wrapMode);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->wrapMode);
-	
+
 	glTexImage2D (GL_TEXTURE_2D, 0, tex->internalFormat, tex->width, tex->height, 0, tex->format, tex->type, tex->texels);
 	if (tex->mipmapsMode==true)
 		gluBuild2DMipmaps (GL_TEXTURE_2D, tex->internalFormat, tex->width, tex->height, tex->format, tex->type, tex->texels);

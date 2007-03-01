@@ -1218,10 +1218,7 @@ void EditBox::setEditing(bool _editing)
 
 void EditBox::setPrompt(const wstring &p)
 {
-	if (p.empty()) 
-		prompt = EDITBOX_DEFAULT_PROMPT; 
-	else 
-		prompt = p; 
+	prompt = p; 
 }
 
 wstring EditBox::getDefaultPrompt(void)
@@ -1294,7 +1291,7 @@ bool EditBox::onKey(Uint16 k, Uint8 s)
         else if (k == SDLK_ESCAPE) setText(L"");
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
         || (k >= SDLK_A && k <= SDLK_Z) || (k >= 224 && k <= 255) 
-		|| k == SDLK_SPACE || k == SDLK_UNDERSCORE)
+		|| k == SDLK_SPACE || k == SDLK_UNDERSCORE || k == SDLK_MINUS || k == SDLK_PLUS)
         {
 			text = lastText;
             wstring newtext = text.substr(0, cursorPos);

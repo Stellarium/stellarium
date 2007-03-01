@@ -452,6 +452,7 @@ namespace s_gui
 		wstring getAutoCompleteOptions(void) { return autoComplete.getOptions(); }
 		wstring getText(void) { return text; }
 		void setEditing(bool _b);
+		bool getEditing() const {return isEditing;}
 		void refreshLabel(void);
 		void setPrompt(const wstring &p);
 		void setPrompt(void) { setPrompt(wstring()); };

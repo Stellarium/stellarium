@@ -62,6 +62,7 @@ public:
 	void localizeTui(void);
 	void draw_tui(void);		// Display the tui
 	int handle_keys_tui(Uint16 key, Uint8 state);
+	int handle_keysGUI(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void tuiUpdateIndependentWidgets(void); // For widgets that aren't tied directly to current settings

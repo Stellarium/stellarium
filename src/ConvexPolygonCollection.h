@@ -27,13 +27,13 @@ public:
 	 	friend class ConvexPolygonVector;
 	    friend class boost::iterator_core_access;
 		
-		SearchIterator(const ConvexPolygonVector<T, GetConvexFunc>* collection, const ConvexPolygon& zone, typename std::vector<T>::iterator iter) : coll(collection), searchZone(zone), vecIter(iter) {;}
+		SearchIterator(const ConvexPolygonVector<T, GetConvexFunc>* collection, const StelGeom::ConvexPolygon& zone, typename std::vector<T>::iterator iter) : coll(collection), searchZone(zone), vecIter(iter) {;}
 		
 	    void increment()
 	    {
 	    	for(;++vecIter!=coll->elements.end();)
 	    	{
-	    		if (::intersect(searchZone, coll->getConvex(*vecIter))==true)
+	    		if (StelGeom::intersect(searchZone, coll->getConvex(*vecIter))==true)
 	    			return;
 	    	}
 	    }
@@ -48,20 +48,20 @@ public:
 	    // The matching collection
 	    const ConvexPolygonVector<T, GetConvexFunc>* coll;
 	    // The ConvexPolygon used for the search
-	    const ConvexPolygon searchZone;
+	    const StelGeom::ConvexPolygon searchZone;
 	    // Specific to this implementation
 	    typename std::vector<T>::iterator vecIter;
 	};
 
 	//! Get a range of iterators pointing on elements which intersect the given zone
 	//! @param a convex polygon defining the region to intersect	
-	std::pair<SearchIterator, SearchIterator> getIntersectingElems(const ConvexPolygon& searchZone)
+	std::pair<SearchIterator, SearchIterator> getIntersectingElems(const StelGeom::ConvexPolygon& searchZone)
 	{
 		SearchIterator end(this, searchZone, elements.end());
 		if (elements.empty())
 			return std::pair<SearchIterator, SearchIterator>(end, end);
 		SearchIterator begin(this, searchZone, elements.begin());
-		if (::intersect(searchZone,getConvex(*begin))==false)
+		if (StelGeom::intersect(searchZone,getConvex(*begin))==false)
 			++begin;
 		return std::pair<SearchIterator, SearchIterator>(begin, end);
 	}
