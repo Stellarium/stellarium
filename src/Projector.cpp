@@ -265,7 +265,7 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 void Projector::setCustomFrame(const Mat4d& m) const
 {
 	modelViewMatrix = m;
-	inverseModelViewMatrix = modelViewMatrix.inverse();
+//	inverseModelViewMatrix = modelViewMatrix.inverse();
 }
 
 /*************************************************************************
@@ -360,8 +360,17 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 	  // This looks good for atmosphere rendering, and it helps avoiding
 	  // discontinuities when dragging around with the mouse.
 
-	// modelViewMapper.backward(v);
-	v.transfo4d(inverseModelViewMatrix);
+	x = v[0] - modelViewMatrix.r[12];
+	y = v[1] - modelViewMatrix.r[13];
+	const double z = v[2] - modelViewMatrix.r[14];
+	v[0] = modelViewMatrix.r[0]*x + modelViewMatrix.r[1]*y + modelViewMatrix.r[2]*z;
+	v[1] = modelViewMatrix.r[4]*x + modelViewMatrix.r[5]*y + modelViewMatrix.r[6]*z;
+	v[2] = modelViewMatrix.r[8]*x + modelViewMatrix.r[9]*y + modelViewMatrix.r[10]*z;
+
+// Johannes: Get rid of the inverseModelViewMatrix.
+// We need no matrix inversion because we always work with orthogonal matrices
+// (where the transposed is the inverse).
+//	v.transfo4d(inverseModelViewMatrix);
 	return rval;
 }
 
