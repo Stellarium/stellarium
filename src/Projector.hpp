@@ -384,7 +384,6 @@ private:
 	bool flagGlPointSprite;			// Define whether glPointSprite is activated
 	
 	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
-	mutable Mat4d inverseModelViewMatrix;	// inverse of it
 	
 	// Callbacks
 	const Mapping *mapping;
