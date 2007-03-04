@@ -118,7 +118,11 @@ public:
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame
 	//! @param margin an extra margin in pixel which extends the polygon size
 	StelGeom::ConvexPolygon getViewportConvexPolygon(double margin=0.) const;
-	
+
+	//! unproject the entire viewport depending on mapping, maskType,
+	//! viewport_fov_diameter, viewport_center, viewport_xywh
+	StelGeom::Convex Projector::unprojectViewport(void) const;
+
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}
 	//! Get whether a disk mask must be drawn over the viewport
