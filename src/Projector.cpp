@@ -196,6 +196,59 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double margin) const
 	return StelGeom::ConvexPolygon(e0, e3, e2, e1);
 }
 
+StelGeom::Convex Projector::unprojectViewport(void) const {
+    // This is quite ugly, but already better than nothing.
+    // In fact this function should have different implementations
+    // for the different mapping types. And maskType, viewport_fov_diameter,
+    // viewport_center, viewport_xywh must be taken into account, too.
+    // Last not least all halfplanes n*x>d really should have d=0
+    // or at least very small (d*d)/(n*n).
+  if (dynamic_cast<const MappingCylinder*>(mapping) == 0 || fov < 90) {
+    Vec3d e0,e1,e2,e3;
+    bool ok;
+    if (maskType == DISK) {
+      if (fov >= 170) {
+        unProject(viewport_center[0],viewport_center[1],e0);
+        StelGeom::Convex rval(1);
+        rval[0].n = e0;
+        rval[0].d = (fov<210) ? sin(fov*M_PI/180.0) : -2.0;
+        return rval;
+      }
+	  ok  = unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
+                      viewport_center[1] - 0.5*viewport_fov_diameter,e0);
+	  ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
+                      viewport_center[1] + 0.5*viewport_fov_diameter,e2);
+	  if (needGlFrontFaceCW()) {
+        ok &= unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
+                        viewport_center[1] + 0.5*viewport_fov_diameter,e3);
+        ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
+                        viewport_center[1] - 0.5*viewport_fov_diameter,e1);
+	  } else {
+        ok &= unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
+                        viewport_center[1] + 0.5*viewport_fov_diameter,e1);
+        ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
+                        viewport_center[1] - 0.5*viewport_fov_diameter,e3);
+	  }
+    } else {
+      ok  = unProject(viewport_xywh[0],viewport_xywh[1],e0);
+      ok &= unProject(viewport_xywh[0]+viewport_xywh[2],
+                      viewport_xywh[1]+viewport_xywh[3],e2);
+      if (needGlFrontFaceCW()) {
+        ok &= unProject(viewport_xywh[0],viewport_xywh[1]+viewport_xywh[3],e3);
+        ok &= unProject(viewport_xywh[0]+viewport_xywh[2],viewport_xywh[1],e1);
+      } else {
+        ok &= unProject(viewport_xywh[0],viewport_xywh[1]+viewport_xywh[3],e1);
+        ok &= unProject(viewport_xywh[0]+viewport_xywh[2],viewport_xywh[1],e3);
+      }
+    }
+    if (ok && fov < 300) return StelGeom::Convex(e0,e1,e2,e3);
+  }
+  StelGeom::Convex rval(1);
+  rval[0].n = Vec3d(1.0,0.0,0.0);
+  rval[0].d = -2.0;
+  return rval;
+}
+
 void Projector::setFov(double f)
 {
 	fov = f;
