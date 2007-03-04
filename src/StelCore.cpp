@@ -131,6 +131,7 @@ void StelCore::preDraw(int delta_time)
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
 
+/*
 	const Vec4i &v(projection->getViewport());
 	Vec3d e0,e1,e2,e3;
 	projection->unProject(v[0],v[1],e0);
@@ -147,9 +148,11 @@ void StelCore::preDraw(int delta_time)
 	}
 
 	// This still needs a fix
+*/
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
-	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
+	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
+//	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
 }
 
 
