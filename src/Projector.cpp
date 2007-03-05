@@ -248,9 +248,9 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
       StelGeom::HalfSpace h2(e2^e3);
       StelGeom::HalfSpace h3(e3^e0);
       if (h0.contains(e2) && h0.contains(e3) &&
-          h1.contains(e3) && h0.contains(e0) &&
-          h2.contains(e0) && h0.contains(e1) &&
-          h3.contains(e1) && h0.contains(e2)) {
+          h1.contains(e3) && h1.contains(e0) &&
+          h2.contains(e0) && h2.contains(e1) &&
+          h3.contains(e1) && h3.contains(e2)) {
         StelGeom::Convex rval(4);
         rval[0] = h0;
         rval[1] = h1;
