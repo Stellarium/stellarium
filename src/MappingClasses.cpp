@@ -138,13 +138,24 @@ MappingFisheye MappingFisheye::instance;
 bool MappingFisheye::forward(Vec3d &v) const
 {
 	const double rq1 = v[0]*v[0] + v[1]*v[1];
-	const double h = std::sqrt(rq1);
-	const double a = std::atan2(h,-v[2]);
-	const double f = (h > 0.0) ? (a / h) : 1.0;
-	v[0] *= f;
-	v[1] *= f;
-	v[2] = std::sqrt(rq1 + v[2]*v[2]);
-	return true;
+	if (rq1 > 0.0) {
+		const double h = std::sqrt(rq1);
+		const double f = std::atan2(h,-v[2]) / h;
+		v[0] *= f;
+		v[1] *= f;
+		v[2] = std::sqrt(rq1 + v[2]*v[2]);
+		return true;
+	}
+	if (v[2] < 0.0) {
+		v[0] = 0.0;
+		v[1] = 0.0;
+		v[2] = 1.0;
+		return true;
+	}
+	v[0] = 1e99;
+	v[1] = 1e99;
+	v[2] = -1e99;
+	return false;
 }
 
 bool MappingFisheye::backward(Vec3d &v) const
@@ -154,7 +165,7 @@ bool MappingFisheye::backward(Vec3d &v) const
 	v[0] *= f;
 	v[1] *= f;
 	v[2] = -std::cos(a);
-	return true;
+	return (a < M_PI);
 }
 
 double MappingFisheye::fovToViewScalingFactor(double fov) const
