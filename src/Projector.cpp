@@ -201,17 +201,18 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
     // In fact this function should have different implementations
     // for the different mapping types. And maskType, viewport_fov_diameter,
     // viewport_center, viewport_xywh must be taken into account, too.
-    // Last not least all halfplanes n*x>d really should have d=0
-    // or at least very small (d*d)/(n*n).
-  if (dynamic_cast<const MappingCylinder*>(mapping) == 0 || fov < 90) {
+    // Last not least all halfplanes n*x>d really should have d<=0
+    // or at least very small d/n.length().
+  if ((dynamic_cast<const MappingCylinder*>(mapping) == 0 || fov < 90) &&
+      fov < 360.0) {
     Vec3d e0,e1,e2,e3;
     bool ok;
     if (maskType == DISK) {
-      if (fov >= 170) {
+      if (fov >= 120.0) {
         unProject(viewport_center[0],viewport_center[1],e0);
         StelGeom::Convex rval(1);
         rval[0].n = e0;
-        rval[0].d = (fov<210) ? sin(fov*M_PI/180.0) : -2.0;
+        rval[0].d = (fov<360.0) ? cos(fov*(M_PI/360.0)) : -1.0;
         return rval;
       }
 	  ok  = unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
@@ -241,7 +242,39 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
         ok &= unProject(viewport_xywh[0]+viewport_xywh[2],viewport_xywh[1],e3);
       }
     }
-    if (ok && fov < 300) return StelGeom::Convex(e0,e1,e2,e3);
+    if (ok) {
+      StelGeom::HalfSpace h0(e0^e1);
+      StelGeom::HalfSpace h1(e1^e2);
+      StelGeom::HalfSpace h2(e2^e3);
+      StelGeom::HalfSpace h3(e3^e0);
+      if (h0.contains(e2) && h0.contains(e3) &&
+          h1.contains(e3) && h0.contains(e0) &&
+          h2.contains(e0) && h0.contains(e1) &&
+          h3.contains(e1) && h0.contains(e2)) {
+        StelGeom::Convex rval(4);
+        rval[0] = h0;
+        rval[1] = h1;
+        rval[2] = h2;
+        rval[3] = h3;
+        return rval;
+      } else {
+        Vec3d middle;
+        if (unProject(viewport_xywh[0]+0.5*viewport_xywh[2],
+                      viewport_xywh[1]+0.5*viewport_xywh[3],middle)) {
+          double d = middle*e0;
+          double h = middle*e1;
+          if (d > h) d = h;
+          h = middle*e2;
+          if (d > h) d = h;
+          h = middle*e3;
+          if (d > h) d = h;
+          StelGeom::Convex rval(1);
+          rval[0].n = middle;
+          rval[0].d = d;
+          return rval;
+        }
+      }
+    }
   }
   StelGeom::Convex rval(1);
   rval[0].n = Vec3d(1.0,0.0,0.0);
