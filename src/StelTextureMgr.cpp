@@ -295,7 +295,7 @@ void StelTextureMgr::update()
 
 /*************************************************************************
  Adapt the scaling for the texture. Return true if there was no errors
- This method is thread safe
+ This method is re-entrant
 *************************************************************************/
 bool StelTextureMgr::reScale(ManagedSTexture* tex)
 {
@@ -370,7 +370,7 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				
 				thresh = (int)((1.-maxQuantile)*nbPix);
 				int maxI = 0;
-				// Finisg at 1 to ignore zeroed region in the image
+				// Finish at 1 to ignore zeroed region in the image
 				for (int id=1<<bitpix;id>=1;--id)
 				{
 					maxI+=histo[id];

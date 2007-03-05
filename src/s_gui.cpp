@@ -810,7 +810,6 @@ Button::Button() :
 void Button::draw()
 {
 	if (!visible) return;
-
 	if (!is_mouse_over)
 	{
 		if (!hideBorder)
@@ -1554,7 +1553,7 @@ void ListBox::createLines(void)
 	{
 		bt = new LabeledButton(wstring()); 
 		bt->setHideBorder(true);
-		bt->setHideBorderMouseOver(true);
+		bt->setHideBorderMouseOver(false);
 		bt->setHideTexture(true);
 		bt->setJustification(JUSTIFY_LEFT);
 		bt->adjustSize();
@@ -1588,7 +1587,7 @@ void ListBox::draw(void)
 		else
 		{
 			itemBt[j]->setHideBorder(true);
-			itemBt[j]->setHideBorderMouseOver(true);
+			itemBt[j]->setHideBorderMouseOver(false);
 		}
 		itemBt[j++]->draw();
 		i++;
