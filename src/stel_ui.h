@@ -172,7 +172,7 @@ private:
 	void bt_flag_ctrOnMouseInOut(void);
 	void cbr(void);
 
-	// Tile control buttons
+	// Time control buttons
 	FilledContainer * bt_time_control_ctr;
 	FlagButton * bt_dec_time_speed;
 	FlagButton * bt_real_time_speed;
