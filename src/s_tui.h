@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 #include "StelKey.hpp"
+#include "StelTypes.hpp"
 
 #include <set>
 #include <list>

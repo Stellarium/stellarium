@@ -21,6 +21,8 @@
 #include <iostream>
 #include <cstdlib>
 
+#include <config.h>
+
 #include "stellarium.h"
 #include "StelApp.hpp"
 #include "Translator.hpp"
@@ -31,6 +33,10 @@
 
 #ifdef HAVE_LIBCURL
  #include <curl/curl.h>
+#endif
+
+#ifdef USE_SDL
+#include "StelAppSdl.hpp"
 #endif
 
 using namespace std;
@@ -242,14 +248,19 @@ int main(int argc, char **argv)
 	curl_global_init(CURL_GLOBAL_ALL);
 #endif
 
-	StelApp app(CDIR, LDIR, DATA_ROOT);
+	StelApp* app = NULL;
+#ifdef USE_SDL
+	app = new StelAppSdl(CDIR, LDIR, DATA_ROOT);
+#endif
+	app->init();
 
-	app.startMainLoop();
+	app->startMainLoop();
 
 #ifdef HAVE_LIBCURL
 	curl_global_cleanup();
 #endif
 
+	delete app;
 	return 0;
 }
 

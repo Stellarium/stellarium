@@ -26,6 +26,7 @@
 
 #include "GLee.h"
 #include "StelKey.hpp"
+#include "StelTypes.hpp"
 
 #include <list>
 #include <string>
@@ -480,7 +481,7 @@ namespace s_gui
 		bool autoFocus;
 		bool cursorVisible;
 		bool blinkTimerValid;
-		SDL_TimerID blinkTimer;
+		//SDL_TimerID blinkTimer;
     };
 	
 	class ScrollBar : public CallbackComponent

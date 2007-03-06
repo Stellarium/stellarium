@@ -28,9 +28,9 @@ extern "C" {
 #include <jpeglib.h>
 }
 #include <png.h>
-#include "SDL_thread.h"
 
 #include "StelUtils.hpp"
+#include <boost/thread.hpp>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -90,8 +90,6 @@ float ManagedSTexture::getAverageLuminance(void)
 *************************************************************************/
 StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atextureDir)
 {
-	loadQueueMutex = SDL_CreateMutex();
-	
 	// Init default values
 	setDefaultParams();
 
@@ -112,8 +110,6 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 *************************************************************************/
 StelTextureMgr::~StelTextureMgr()
 {
-	SDL_DestroyMutex(loadQueueMutex);
-	loadQueueMutex = NULL;
 }
 
 /*************************************************************************
@@ -207,8 +203,8 @@ struct LoadQueueParam
 {
 	StelTextureMgr* texMgr;
 	std::vector<LoadQueueParam*>* loadQueue;
-	SDL_mutex* loadQueueMutex;
-	SDL_Thread* thread;
+	boost::mutex* loadQueueMutex;
+	boost::thread* thread;
 	ManagedSTextureSP tex;
 	
 	// those 2 are used to return the final texture and status. Only access them in the main thread!!
@@ -217,21 +213,24 @@ struct LoadQueueParam
 };
 
 
-int loadTextureThread(void* tparam)
+struct loadTextureThread
 {
-	LoadQueueParam* param = (LoadQueueParam*)tparam;
-
-	// Load the image
-	if (param->texMgr->loadImage(param->tex.get())==false)
+	loadTextureThread(LoadQueueParam* p) : param(p) {;}
+	
+	void operator()()
 	{
-		param->tex->loadState = ManagedSTexture::LOAD_ERROR;
+		// Load the image
+		if (param->texMgr->loadImage(param->tex.get())==false)
+		{
+			param->tex->loadState = ManagedSTexture::LOAD_ERROR;
+		}
+		// And add it to 
+		boost::mutex::scoped_lock(*param->loadQueueMutex);
+		param->loadQueue->push_back(param);
 	}
-	// And add it to 
-	SDL_mutexP(param->loadQueueMutex);
-	param->loadQueue->push_back(param);
-	SDL_mutexV(param->loadQueueMutex);
-	return 0;
-}
+	
+	LoadQueueParam* param;
+};
 
 bool StelTextureMgr::createTextureThread(STextureSP* outTex, const std::string& filename, bool* status)
 {
@@ -247,16 +246,15 @@ bool StelTextureMgr::createTextureThread(STextureSP* outTex, const std::string& 
 	LoadQueueParam* tparam = new LoadQueueParam();
 	tparam->texMgr = this;
 	tparam->loadQueue = &loadQueue;
-	tparam->loadQueueMutex = loadQueueMutex;
+	tparam->loadQueueMutex = &loadQueueMutex;
 	tparam->tex = tex;
 	tparam->outTex = outTex;
 	tparam->status=status;
 	tex->loadState = ManagedSTexture::LOADING_IMAGE;
-	SDL_Thread *thread = SDL_CreateThread(loadTextureThread, tparam);
+	boost::thread* thread = new boost::thread(loadTextureThread(tparam));
 	tparam->thread = thread;
 	return true;
 }
-
 
 /*************************************************************************
  Update loading of textures in threads
@@ -265,11 +263,11 @@ void StelTextureMgr::update()
 {
 	// Load the successfully loaded images to openGL, because openGL is not thread safe,
 	// this has to be done in the main thread.
-	SDL_mutexP(loadQueueMutex);
+	boost::mutex::scoped_lock l(loadQueueMutex);
 	std::vector<LoadQueueParam*>::iterator iter = loadQueue.begin();
 	for (;iter!=loadQueue.end();++iter)
 	{
-		SDL_WaitThread((*iter)->thread, NULL);	// Ensure the thread is properly destroyed
+		(*iter)->thread->join();	// Ensure the thread is properly destroyed
 		if ((*iter)->tex->loadState==ManagedSTexture::LOAD_ERROR)
 		{
 			// There was an error while loading the image
@@ -294,7 +292,6 @@ void StelTextureMgr::update()
 		delete (*iter);
 	}
 	loadQueue.clear();
-	SDL_mutexV(loadQueueMutex);
 }
 
 
