@@ -162,8 +162,8 @@ void Projector::setViewport(int x, int y, int w, int h,
 	viewport_center[0] = x+cx;
 	viewport_center[1] = y+cy;
 	viewport_fov_diameter = fov_diam;
-	view_scaling_factor = viewport_fov_diameter
-	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
+	view_scaling_factor = 0.5 * viewport_fov_diameter
+	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
 }
@@ -289,8 +289,8 @@ void Projector::setFov(double f)
 		fov = max_fov;
 	if (f<min_fov)
 		fov = min_fov;
-	view_scaling_factor = viewport_fov_diameter
-	  * (mapping ? mapping->fovToViewScalingFactor(fov) : 1.0);
+	view_scaling_factor = 0.5 * viewport_fov_diameter
+	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 }
 
 

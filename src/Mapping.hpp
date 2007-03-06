@@ -23,6 +23,8 @@ public:
 	virtual bool forward(Vec3d &v) const = 0;
 	virtual bool backward(Vec3d &v) const = 0;
 	virtual double fovToViewScalingFactor(double fov) const = 0;
+	virtual double viewScalingFactorToFov(double vsf) const = 0;
+	virtual double deltaZoom(double fov) const = 0;
 	//! Minimum FOV apperture in degree
 	double minFov;
 	//! Maximum FOV apperture in degree
