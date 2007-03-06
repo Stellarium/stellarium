@@ -40,20 +40,10 @@ CFLAGS="$CFLAGS $FT2_CFLAGS"
 CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
 LIBS="$LIBS $FT2_LIBS"
 
-# Check for GSL
-#AC_CHECK_LIB(m,main)
-#AC_CHECK_LIB(gslcblas,main)
-#AC_CHECK_LIB(gsl,main)
-#GSL_CFLAGS="`gsl-config --cflags`"
-#GSL_LIBS="`gsl-config --libs`"
-#CFLAGS="$CFLAGS $GSL_CFLAGS"
-#CXXFLAGS="$CXXFLAGS $GSL_CFLAGS"
-#LIBS="$LIBS $GSL_LIBS"
-
-# Compilation with STLPort
-#AM_PATH_STLPORT
-
 AX_BOOST_BASE
+AX_BOOST_THREAD
+dnl AX_BOOST_DATE_TIME
+dnl AX_BOOST_FILESYSTEM 
 
 # Check for libcurl
 LIBCURL_CHECK_CONFIG([yes], , [haveCurl=yes], [haveCurl=no])
@@ -170,6 +160,9 @@ esac
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm)
+
+AC_DEFINE_UNQUOTED(USE_SDL, 1, [Define whether SDL is to be used.])
+
 
 AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/stelutils/iniparser/Makefile src/planetsephems/Makefile src/stelutils/Makefile data/Makefile doc/Makefile textures/Makefile landscapes/Makefile landscapes/guereins/Makefile landscapes/hurricane/Makefile landscapes/moon/Makefile landscapes/ocean/Makefile landscapes/trees/Makefile textures/constellation-art/Makefile textures/constellation-art/inuit/Makefile data/scripts/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile data/sky_cultures/chinese/Makefile data/sky_cultures/egyptian/Makefile data/sky_cultures/korean/Makefile data/sky_cultures/navajo/Makefile data/sky_cultures/lakota/Makefile data/sky_cultures/inuit/Makefile intl/Makefile po/Makefile.in m4/Makefile])
 

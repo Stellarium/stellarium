@@ -24,6 +24,7 @@
 #include <map>
 #include <vector>
 #include <boost/shared_ptr.hpp>
+#include <boost/thread/mutex.hpp>
 #include "GLee.h"
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
@@ -61,7 +62,7 @@ public:
 	};
 	
 private:
-	friend int loadTextureThread(void* tparam);
+	friend struct loadTextureThread;
 	enum LoadState
 	{
 		UNLOADED=0,
@@ -193,9 +194,8 @@ private:
 	bool isNoPowerOfTwoLUMINANCEAllowed;
 	
 	// Everything used for the threaded loading
-	friend struct LoadQueueParam;
-	friend int loadTextureThread(void* tparam);
-	struct SDL_mutex* loadQueueMutex;
+	friend struct loadTextureThread;
+	boost::mutex loadQueueMutex;
 	std::vector<class LoadQueueParam*> loadQueue;
 	
 	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
