@@ -134,9 +134,7 @@ void StelCore::preDraw(int delta_time)
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
 	
-	// temporary reverted to old convex polygon because of the blinking bug 
-	geodesic_search_result->search(projection->getViewportConvexPolygon(),max_search_level);
-//	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
+	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
 }
 
 
