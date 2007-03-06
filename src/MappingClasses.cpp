@@ -2,7 +2,7 @@
 
 MappingPerspective::MappingPerspective(void)
 {
-	maxFov = 150.0;
+	maxFov = 175.0;
 }
 
 MappingPerspective MappingPerspective::instance;
@@ -39,8 +39,20 @@ bool MappingPerspective::backward(Vec3d &v) const
 
 double MappingPerspective::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 / std::tan(fov);
+	return std::tan(fov);
+}
+
+double MappingPerspective::viewScalingFactorToFov(double vsf) const
+{
+	return std::atan(vsf);
+}
+
+double MappingPerspective::deltaZoom(double fov) const
+{
+    const double vsf = fovToViewScalingFactor(fov);
+// deriv_viewScalingFactorToFov(vsf) = 1.0 / (1.0+vsf*vsf)
+// return vsf*deriv_viewScalingFactorToFov(vsf))
+	return vsf / (1.0+vsf*vsf);
 }
 
 
@@ -83,14 +95,26 @@ bool MappingEqualArea::backward(Vec3d &v) const
 
 double MappingEqualArea::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 * 0.5/std::sin(0.5*fov);
+	return 2.0 * std::sin(0.5 * fov);
+}
+
+double MappingEqualArea::viewScalingFactorToFov(double vsf) const
+{
+	return 2.0 * std::asin(0.5 * vsf);
+}
+
+double MappingEqualArea::deltaZoom(double fov) const
+{
+// deriv_viewScalingFactorToFov(vsf) = 2.0 / sqrt(4.0-vsf*vsf);
+// const double vsf = fovToViewScalingFactor(fov);
+// return vsf*deriv_viewScalingFactorToFov(vsf)) = 2.0*vsf / sqrt(4.0-vsf*vsf);
+    return fov;
 }
 
 
 MappingStereographic::MappingStereographic(void)
 {
-	maxFov = 330.0;
+	maxFov = 350.0;
 }
 
 MappingStereographic MappingStereographic::instance;
@@ -122,10 +146,21 @@ bool MappingStereographic::backward(Vec3d &v) const
 
 double MappingStereographic::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 * 0.5/std::tan(0.5*fov);
+	return 2.0 * std::tan(0.5 * fov);
 }
 
+double MappingStereographic::viewScalingFactorToFov(double vsf) const
+{
+	return 2.0 * std::atan(0.5 * vsf);
+}
+
+double MappingStereographic::deltaZoom(double fov) const
+{
+    const double vsf = fovToViewScalingFactor(fov);
+// deriv_viewScalingFactorToFov(vsf) = 4.0 / (4.0+vsf*vsf)
+// return vsf*deriv_viewScalingFactorToFov(vsf))
+	return 4.0*vsf / (4.0+vsf*vsf);
+}
 
 
 MappingFisheye::MappingFisheye(void)
@@ -170,8 +205,17 @@ bool MappingFisheye::backward(Vec3d &v) const
 
 double MappingFisheye::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 / fov;
+	return fov;
+}
+
+double MappingFisheye::viewScalingFactorToFov(double vsf) const
+{
+	return vsf;
+}
+
+double MappingFisheye::deltaZoom(double fov) const
+{
+	return fov;
 }
 
 
@@ -206,8 +250,17 @@ bool MappingCylinder::backward(Vec3d &v) const
 
 double MappingCylinder::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 / fov;
+	return fov;
+}
+
+double MappingCylinder::viewScalingFactorToFov(double vsf) const
+{
+	return vsf;
+}
+
+double MappingCylinder::deltaZoom(double fov) const
+{
+	return fov;
 }
 
 
@@ -246,7 +299,15 @@ bool MappingOrthographic::backward(Vec3d &v) const
 
 double MappingOrthographic::fovToViewScalingFactor(double fov) const
 {
-	fov *= (0.5*M_PI/180.0);
-	return 0.5 / std::sin(fov);
+	return std::sin(fov);
 }
 
+double MappingOrthographic::viewScalingFactorToFov(double vsf) const
+{
+	return std::asin(vsf);
+}
+
+double MappingOrthographic::deltaZoom(double fov) const
+{
+	return fov;
+}

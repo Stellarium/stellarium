@@ -265,7 +265,10 @@ void MovementMgr::updateMotion(double deltaTime)
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=move_speed*deltaTime*1000*proj->getFov();
-	double deplzoom=zoom_speed*deltaTime*1000*proj->getFov();
+//	double deplzoom=zoom_speed*deltaTime*1000*proj->getFov();
+	double deplzoom=zoom_speed*deltaTime*1000*proj->getMapping().
+	                  deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
+
 	if (deltaAz<0)
 	{
 		deltaAz = -depl/30;
