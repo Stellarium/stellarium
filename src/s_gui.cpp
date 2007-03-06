@@ -1090,7 +1090,7 @@ EditBox::EditBox(const wstring& _label, SFont* font)
 EditBox::~EditBox()
 {
 	if (blinkTimerValid) {
-		SDL_RemoveTimer(blinkTimer);
+		//SDL_RemoveTimer(blinkTimer);
 		blinkTimerValid = false;
 	}
 }
@@ -1199,7 +1199,7 @@ void EditBox::setEditing(bool _editing)
 		activeEditBox = this;
 
 		if (!blinkTimerValid) {
-			blinkTimer = SDL_AddTimer(600, toggleBlink, &cursorVisible);
+			//blinkTimer = SDL_AddTimer(600, toggleBlink, &cursorVisible);
 			blinkTimerValid = true;
 		}
 	}
@@ -1209,7 +1209,7 @@ void EditBox::setEditing(bool _editing)
 		cursorVisible = false;
 		autoComplete.reset();
 		activeEditBox = NULL;
-		SDL_RemoveTimer(blinkTimer);
+		//SDL_RemoveTimer(blinkTimer);
 		blinkTimerValid = false;
 	}
 }

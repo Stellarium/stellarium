@@ -12,7 +12,7 @@ stellarium_SOURCES = Projector.cpp Projector.hpp \
 	TelescopeMgr.hpp Atmosphere.cpp Atmosphere.hpp image.cpp image.h image_mgr.cpp \
 	image_mgr.h Landscape.cpp Landscape.hpp LoadingBar.cpp LoadingBar.hpp main.cpp \
 	script.cpp script.h script_mgr.cpp script_mgr.h s_gui.cpp s_gui.h Skybright.cpp \
-	Skybright.hpp Skylight.cpp Skylight.hpp solve.h StelApp.cpp StelApp.hpp StelAppSdl.cpp \
+	Skybright.hpp Skylight.cpp Skylight.hpp solve.h StelApp.cpp StelApp.hpp StelAppSdl.hpp StelAppSdl.cpp \
 	audio.cpp audio.h command_interface.cpp command_interface.h \
 	stel_command_interface.cpp stel_command_interface.h StelCore.cpp StelCore.hpp stellarium.h \
 	stel_ui_conf.cpp stel_ui.cpp stel_ui.h stel_ui_tuiconf.cpp s_tui.cpp s_tui.h \
@@ -32,3 +32,7 @@ INCLUDES = -I$(top_srcdir)/src/planetsephems -I$(top_srcdir)/src/stelutils -I$(t
 
 SUBDIRS = planetsephems stelutils
 noinst_HEADERS = 
+
+ACLOCAL_AMFLAGS = -I config/m4
+AM_CXXFLAGS = $(BOOST_CPPFLAGS)
+AM_LDFLAGS = $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB)

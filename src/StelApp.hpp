@@ -24,6 +24,7 @@
 #include <cassert>
 #include <vector>
 #include "StelKey.hpp"
+#include "StelTypes.hpp"
 #include "stellarium.h"
 
 using namespace std;
@@ -60,14 +61,14 @@ public:
 	StelApp(const string& configDir, const string& localeDir, const string& dataRootDir);
 
 	//! Deinitialize and destroy the main Stellarium application.
-	~StelApp();
+	virtual ~StelApp();
+
+	//! Initialize application and core
+	void init(void);
 
 	//! @brief Get the StelApp singleton instance
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance(void) {assert(singleton); return *singleton;}
-
-	//! @brief Start the main loop and return when the program ends.
-	void startMainLoop(void);
 
 	//! @brief Get the configuration file path.
 	//! @return the full path to Stellarium's main config.ini file
@@ -158,18 +159,6 @@ public:
 
 	void setViewPortDistorterType(const string &type);
 	string getViewPortDistorterType(void) const;
-
-	//! Return a list of working fullscreen hardware video modes (one per line)
-	string getVideoModeList(void) const;
-
-	//! Return the time since when stellarium is running in second
-	double getTotalRunTime() const;
-	
-	//! Set mouse cursor display
-	void showCursor(bool b);
-	
-	//! De-init SDL / QT related stuff
-	void deInit();
 	
 	//! Required because stelcore doesn't have access to the script manager anymore!
 	//! Record a command if script recording is on
@@ -189,13 +178,29 @@ public:
 	//! Get the height of the screen
 	int getScreenH() const {return screenH;}
 	
-	//! Swap GL buffer, should be called only for special condition
-	void swapGLBuffers() const;
+	///////////////////////////////////////////////////////////////////////////
+	// Methods overidded for SDL / QT
+	///////////////////////////////////////////////////////////////////////////	
 	
-private:
-	//! Initialize application and core
-	void init(void);
-
+	//! @brief Start the main loop and return when the program ends.
+	virtual void startMainLoop(void) = 0;
+	
+	//! Return a list of working fullscreen hardware video modes (one per line)
+	virtual string getVideoModeList(void) const = 0;
+	
+	//! Return the time since when stellarium is running in second
+	virtual double getTotalRunTime() const = 0;
+	
+	//! Set mouse cursor display
+	virtual void showCursor(bool b) = 0;
+	
+	//! De-init SDL / QT related stuff
+	virtual void deInit() = 0;
+	
+	//! Swap GL buffer, should be called only for special condition
+	virtual void swapGLBuffers() const = 0;
+	
+protected:
 	//! Update all object according to the delta time
 	void update(int delta_time);
 
@@ -204,21 +209,29 @@ private:
 	// travelled since the last update.
 	double draw(int delta_time);
 	
-	// Initialize openGL screen
-	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
-	
-	// Save a screen shot in the HOME directory
-	void saveScreenShot() const;
-
-	//! Terminate the application
-	void terminateApplication(void);
-	
 	// Handle mouse clics
 	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
 	// Handle mouse move
 	int handleMove(int x, int y, StelMod mod);
 	// Handle key press and release
 	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
+
+	float minfps, maxfps;
+
+	///////////////////////////////////////////////////////////////////////////
+	// Methods overidded for SDL / QT
+	///////////////////////////////////////////////////////////////////////////	
+	
+	// Initialize openGL screen
+	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
+	
+	// Save a screen shot in the HOME directory
+	virtual void saveScreenShot() const =0;
+
+	//! Terminate the application
+	virtual void terminateApplication(void) = 0;
+	
+private:
 
 	// Set the colorscheme for all the modules
 	void setColorScheme(const std::string& fileName, const std::string& section);
@@ -259,9 +272,8 @@ private:
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
 
-	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;
-	float minfps, maxfps;
+	int frame, timefr, timeBase;		// Used for fps counter
 	
 	// Main elements of the stel_app
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
@@ -269,26 +281,11 @@ private:
 	StelUI * ui;							// The main User Interface
 	ViewportDistorter *distorter;
 
-	double totalRunTime;	// Total stellarium run time in second
-
 	int time_multiplier;	// used for adjusting delta_time for script speeds
 	
 	//! Possible drawing modes
 	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
-
-#ifdef USE_SDL
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-	// SDL related function and variables
-	static SDL_Cursor *create_cursor(const char *image[]);
-
-	// SDL managment variables
-	SDL_Surface *Screen;// The Screen
-	SDL_Event	E;		// And Event Used In The Polling Process
-	Uint32	TickCount;	// Used For The Tick Counter
-	Uint32	LastCount;	// Used For The Tick Counter
-	SDL_Cursor *Cursor;
-#endif // USE_SDL
 
 };
 
