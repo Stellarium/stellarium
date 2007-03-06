@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-#include "GLee.h"
+#include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
 extern "C" {
 #include <jpeglib.h>
@@ -30,8 +30,13 @@ extern "C" {
 #include <png.h>
 #include "SDL_thread.h"
 
-#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
+
+#if defined(__APPLE__) && defined(__MACH__)
+#include <OpenGL/glu.h>	/* Header File For The GLU Library */
+#else
+#include <GL/glu.h>	/* Header File For The GLU Library */
+#endif
 
 using namespace std;
 

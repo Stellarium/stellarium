@@ -26,7 +26,7 @@ void MovementMgr::init(const InitParser& conf, LoadingBar& lb)
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 }	
 	
-bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y)
+bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y, StelMod mod)
 {
 	// Turn if the mouse is at the edge of the screen.
 	// unless config asks otherwise
@@ -83,45 +83,45 @@ bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y)
 }
 
 
-bool MovementMgr::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
+bool MovementMgr::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
-	if (state == SDL_KEYDOWN)
+	if (state == Stel_KEYDOWN)
 	{
 		// Direction and zoom deplacements
-		if (key==SDLK_LEFT) turn_left(1);
-		if (key==SDLK_RIGHT) turn_right(1);
-		if (key==SDLK_UP)
+		if (key==StelKey_LEFT) turn_left(1);
+		if (key==StelKey_RIGHT) turn_right(1);
+		if (key==StelKey_UP)
 		{
-			if (mod & KMOD_CTRL) zoom_in(1);
+			if (mod & StelMod_CTRL) zoom_in(1);
 			else turn_up(1);
 		}
-		if (key==SDLK_DOWN)
+		if (key==StelKey_DOWN)
 		{
-			if (mod & KMOD_CTRL) zoom_out(1);
+			if (mod & StelMod_CTRL) zoom_out(1);
 			else turn_down(1);
 		}
-		if (key==SDLK_PAGEUP) zoom_in(1);
-		if (key==SDLK_PAGEDOWN) zoom_out(1);
+		if (key==StelKey_PAGEUP) zoom_in(1);
+		if (key==StelKey_PAGEDOWN) zoom_out(1);
 	}
 	else
 	{
 		// When a deplacement key is released stop mooving
-		if (key==SDLK_LEFT) turn_left(0);
-		if (key==SDLK_RIGHT) turn_right(0);
-		if (mod & KMOD_CTRL)
+		if (key==StelKey_LEFT) turn_left(0);
+		if (key==StelKey_RIGHT) turn_right(0);
+		if (mod & StelMod_CTRL)
 		{
-			if (key==SDLK_UP) zoom_in(0);
-			if (key==SDLK_DOWN) zoom_out(0);
+			if (key==StelKey_UP) zoom_in(0);
+			if (key==StelKey_DOWN) zoom_out(0);
 		}
 		else
 		{
-			if (key==SDLK_UP) turn_up(0);
-			if (key==SDLK_DOWN) turn_down(0);
+			if (key==StelKey_UP) turn_up(0);
+			if (key==StelKey_DOWN) turn_down(0);
 		}
-		if (key==SDLK_PAGEUP) zoom_in(0);
-		if (key==SDLK_PAGEDOWN) zoom_out(0);
+		if (key==StelKey_PAGEUP) zoom_in(0);
+		if (key==StelKey_PAGEDOWN) zoom_out(0);
 	}
-	if (key==SDLK_LEFT || key==SDLK_RIGHT || key==SDLK_UP || key==SDLK_DOWN || key==SDLK_PAGEUP || key==SDLK_PAGEDOWN)
+	if (key==StelKey_LEFT || key==StelKey_RIGHT || key==StelKey_UP || key==StelKey_DOWN || key==StelKey_PAGEUP || key==StelKey_PAGEDOWN)
 	{
 		return true;
 	}
@@ -131,19 +131,19 @@ bool MovementMgr::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state
 	}
 }
 
-bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
+bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)
 {
 	switch (button)
 	{
-	case SDL_BUTTON_WHEELUP :
+	case Stel_BUTTON_WHEELUP :
 		zoomTo(getAimFov()-MouseZoom*getAimFov()/60., 0.2);
 		return true;
-	case SDL_BUTTON_WHEELDOWN :
+	case Stel_BUTTON_WHEELDOWN :
 		zoomTo(getAimFov()+MouseZoom*getAimFov()/60., 0.2);
 		return true;
-	case SDL_BUTTON_RIGHT : break;
-	case SDL_BUTTON_LEFT :
-		if (state==SDL_MOUSEBUTTONDOWN)
+	case Stel_BUTTON_RIGHT : break;
+	case Stel_BUTTON_LEFT :
+		if (state==Stel_MOUSEBUTTONDOWN)
 		{
 			is_dragging = true;
 			has_dragged = false;
@@ -163,8 +163,8 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 			}
 		}
 		break;
-	case SDL_BUTTON_MIDDLE :
-		if (state==SDL_MOUSEBUTTONUP)
+	case Stel_BUTTON_MIDDLE :
+		if (state==Stel_MOUSEBUTTONUP)
 		{
 			if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
 			{

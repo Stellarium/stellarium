@@ -85,7 +85,6 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 *************************************************************************/
 StelApp::~StelApp()
 {
-	SDL_FreeCursor(Cursor);
 	delete ui;
 	delete scripts;
 	delete commander;
@@ -105,6 +104,8 @@ StelApp::~StelApp()
 
 	delete textureMgr;
 	delete moduleMgr;
+	
+	deInit();
 }
 
 /*************************************************************************
@@ -203,17 +204,6 @@ string StelApp::getViewPortDistorterType(void) const
 }
 
 
-void StelApp::quit(void)
-{
-	static SDL_Event Q;						// Send a SDL_QUIT event
-	Q.type = SDL_QUIT;						// To the SDL event queue
-	if(SDL_PushEvent(&Q) == -1)				// Try to send the event
-	{
-		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
-		exit(-1);
-	}
-}
-
 void StelApp::init(void)
 {
 	Translator::initSystemLanguage();
@@ -252,7 +242,7 @@ void StelApp::init(void)
 	// Create openGL context first
 	screenW = conf.get_int("video:screen_w");
 	screenH = conf.get_int("video:screen_h");
-	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
+	initOpenGL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
 
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
@@ -461,36 +451,36 @@ double StelApp::draw(int delta_time)
 }
 
 // Handle mouse clics
-int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
+int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	const int ui_x = x;
 	const int ui_y = y;
 	y = screenH - 1 - y;
 	distorter->distortXY(x,y);
 
-	if (ui->handle_clic(ui_x, ui_y, button, state)) return 1;
+	if (ui->handle_clic(ui_x, ui_y, button, state, mod)) return 1;
 
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseClicks");
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		if ((*i)->handleMouseClicks(x, y, button, state)==true)
+		if ((*i)->handleMouseClicks(x, y, button, state, mod)==true)
 			return 1;
 	}
 	
 	// Manage the event for the main window
 	{
 		// Deselect the selected object
-		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
+		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
 		{
 			commander->execute_command("select");
 			return 1;
 		}
 		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("movements");
-		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !mvmgr->getHasDragged())
+		if (button==Stel_BUTTON_LEFT && state==Stel_MOUSEBUTTONUP && !mvmgr->getHasDragged())
 		{
 			// CTRL + left clic = right clic for 1 button mouse
-			if (SDL_GetModState() & KMOD_CTRL)
+			if (mod & StelMod_CTRL)
 			{
 				commander->execute_command("select");
 				return 1;
@@ -508,7 +498,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 }
 
 // Handle mouse move
-int StelApp::handleMove(int x, int y)
+int StelApp::handleMove(int x, int y, StelMod mod)
 {
 	const int ui_x = x;
 	const int ui_y = y;
@@ -519,15 +509,15 @@ int StelApp::handleMove(int x, int y)
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseMoves");
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		if ((*i)->handleMouseMoves(x, y)==true)
+		if ((*i)->handleMouseMoves(x, y, mod)==true)
 			return 1;
 	}
 	
-	return ui->handle_move(ui_x,ui_y);
+	return ui->handle_move(ui_x,ui_y, mod);
 }
 
 // Handle key press and release
-int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
+int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
 
 	// Standard keys should not be able to be hijacked by modules - Rob
@@ -556,7 +546,7 @@ void StelApp::set2DfullscreenProjection(void) const
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
 	glLoadIdentity();
-	gluOrtho2D(0,screenW,0,screenH);	// set a 2D orthographic projection
+	glOrtho(0,screenW,0,screenH,-1,1);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 	glPushMatrix();
 	glLoadIdentity();

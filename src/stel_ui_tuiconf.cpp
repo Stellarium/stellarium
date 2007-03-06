@@ -456,7 +456,7 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 	{
 		return 0;
 	}
-	if (state==SDL_KEYDOWN && key=='m')
+	if (state==Stel_KEYDOWN && key=='m')
 	{
 		// leave tui menu
 		FlagShowTuiMenu = false;
@@ -613,7 +613,7 @@ void StelUI::tui_cb_admin_updateme(void)
 void StelUI::tui_cb_admin_shutdown(void)
 {
 	system( (StelApp::getInstance().getDataFilePath("script_shutdown") ).c_str() );
-	app->quit();
+	app->terminateApplication();
 }
 
 // Set a new landscape skin

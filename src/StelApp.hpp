@@ -23,7 +23,7 @@
 #include <string>
 #include <cassert>
 #include <vector>
-#include "SDL.h"	// SDL is used only for the key codes types
+#include "StelKey.hpp"
 #include "stellarium.h"
 
 using namespace std;
@@ -163,7 +163,13 @@ public:
 	string getVideoModeList(void) const;
 
 	//! Return the time since when stellarium is running in second
-	double getTotalRunTime() const {return totalRunTime;}
+	double getTotalRunTime() const;
+	
+	//! Set mouse cursor display
+	void showCursor(bool b);
+	
+	//! De-init SDL / QT related stuff
+	void deInit();
 	
 	//! Required because stelcore doesn't have access to the script manager anymore!
 	//! Record a command if script recording is on
@@ -177,8 +183,15 @@ public:
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection(void) const;
 	
+	//! Get the width of the screen
 	int getScreenW() const {return screenW;}
+	
+	//! Get the height of the screen
 	int getScreenH() const {return screenH;}
+	
+	//! Swap GL buffer, should be called only for special condition
+	void swapGLBuffers() const;
+	
 private:
 	//! Initialize application and core
 	void init(void);
@@ -190,28 +203,25 @@ private:
 	// Return the max squared distance in pixels that any object has
 	// travelled since the last update.
 	double draw(int delta_time);
-
-	//! Quit the application
-	void quit(void);
-
-	// Handle mouse clics
-	int handleClick(int x, int y, Uint8 button, Uint8 state);
-	// Handle mouse move
-	int handleMove(int x, int y);
-	// Handle key press and release
-	int handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
-
-	// Set the colorscheme for all the modules
-	void setColorScheme(const std::string& fileName, const std::string& section);
-
-	// Initialize openGL screen with SDL
-	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
-
+	
+	// Initialize openGL screen
+	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
+	
 	// Save a screen shot in the HOME directory
 	void saveScreenShot() const;
 
-	//! Terminate the application with SDL
+	//! Terminate the application
 	void terminateApplication(void);
+	
+	// Handle mouse clics
+	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
+	// Handle mouse move
+	int handleMove(int x, int y, StelMod mod);
+	// Handle key press and release
+	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
+
+	// Set the colorscheme for all the modules
+	void setColorScheme(const std::string& fileName, const std::string& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -219,7 +229,7 @@ private:
 	// Screen size
 	int screenW, screenH;
 
-	// The assicated StelCore instance
+	// The associated StelCore instance
 	StelCore* core;
 
 	// Full path to config dir
@@ -259,6 +269,15 @@ private:
 	StelUI * ui;							// The main User Interface
 	ViewportDistorter *distorter;
 
+	double totalRunTime;	// Total stellarium run time in second
+
+	int time_multiplier;	// used for adjusting delta_time for script speeds
+	
+	//! Possible drawing modes
+	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
+	DRAWMODE draw_mode;					// Current draw mode
+
+#ifdef USE_SDL
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	// SDL related function and variables
 	static SDL_Cursor *create_cursor(const char *image[]);
@@ -269,14 +288,8 @@ private:
 	Uint32	TickCount;	// Used For The Tick Counter
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
+#endif // USE_SDL
 
-	double totalRunTime;	// Total stellarium run time in second
-
-	int time_multiplier;  // used for adjusting delta_time for script speeds
-	
-	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
-	DRAWMODE draw_mode;					// Current draw mode
 };
 
 #endif

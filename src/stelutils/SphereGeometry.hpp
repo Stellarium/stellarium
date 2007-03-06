@@ -39,11 +39,6 @@
 
 #include "vecmath.h"
 
-// Damn X11! Why do they define such names! (in X11/X.h:#define Convex 2)
-#ifdef Convex
-#undef Convex
-#endif
-
 namespace StelGeom
 {
 
@@ -129,21 +124,23 @@ bool intersect(const Polygon& p, const T& o)
 
 
 //! Several HalfSpaces defining a convex region
-class Convex : public std::vector<HalfSpace>
+//! Damn X11! Convex is #defined as an int in X11/X.h: (#define Convex 2)
+//! So we need to use another name...
+class ConvexS : public std::vector<HalfSpace>
 {
 public:
     //! Default contructor
-    Convex(int size = 0) : std::vector<HalfSpace>(size) {}
+    ConvexS(int size = 0) : std::vector<HalfSpace>(size) {}
     //! Special constructor for 3 halfspaces convex
-    Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);
+    ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);
     //! Special constructor for 4 halfspaces convex
-    Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
+    ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
 };
 
 template <class T>
-bool contains(const Convex& c, const T& o)
+bool contains(const ConvexS& c, const T& o)
 {
-	for (Convex::const_iterator iter=c.begin();iter!=c.end();++iter)
+	for (ConvexS::const_iterator iter=c.begin();iter!=c.end();++iter)
 	{
 		if (!contains(*iter, o))
 			return false;
@@ -154,7 +151,7 @@ bool contains(const Convex& c, const T& o)
 //! ConvexPoygon class
 //! It stores both informations :
 //! The halfpaces and the points
-class ConvexPolygon : public Convex, public Polygon
+class ConvexPolygon : public ConvexS, public Polygon
 {
 public:
 
@@ -163,12 +160,12 @@ public:
 
     //! Special constructor for 3 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2):
-	    Convex(e0, e1, e2), Polygon(e0, e1, e2)
+	    ConvexS(e0, e1, e2), Polygon(e0, e1, e2)
 	{}
 	
 	//! Special constructor for 4 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3):
-	    Convex(e0, e1, e2, e3), Polygon(e0, e1, e2, e3)
+	    ConvexS(e0, e1, e2, e3), Polygon(e0, e1, e2, e3)
 	{}
 	
 	bool operator==(const ConvexPolygon& other) const {
@@ -192,10 +189,10 @@ public:
 	const Polygon& asPolygon() const {return static_cast<const Polygon&>(*this);}
 	
 	//! Cast to Convex in case of ambiguity
-	Convex& asConvex() {return static_cast<Convex&>(*this);}
+	ConvexS& asConvex() {return static_cast<ConvexS&>(*this);}
 	
 	//! Same with const
-	const Convex& asConvex() const {return static_cast<const Convex&>(*this);}
+	const ConvexS& asConvex() const {return static_cast<const ConvexS&>(*this);}
 };
 
 //! we rewrite the intersect for ConvexPolygon

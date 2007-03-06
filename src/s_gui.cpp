@@ -20,7 +20,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "SDL_timer.h"
 #include "s_gui.h"
 #include "StelUtils.hpp"
 #include "STexture.hpp"
@@ -465,22 +464,22 @@ CallbackComponent::CallbackComponent() : Component(), is_mouse_over(false), pres
 {
 }
 
-bool CallbackComponent::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool CallbackComponent::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 	pressed = false;
-	if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT && isIn(x, y))
+	if (state==Stel_MOUSEBUTTONDOWN && bt==Stel_BUTTON_LEFT && isIn(x, y))
 	{
 		pressed = true;
 	}
-	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT && isIn(x, y))
+	if (state==Stel_MOUSEBUTTONUP && bt==Stel_BUTTON_LEFT && isIn(x, y))
 	{
 		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	}
 	return false;
 }
 
-bool CallbackComponent::onMove(int x, int y)
+bool CallbackComponent::onMove(int x, int y, StelMod mod)
 {
 	if (!visible) 
 	{
@@ -675,7 +674,7 @@ void Container::draw(void)
 	}
 }
 
-bool Container::onClic(int x, int y, Uint8 button, Uint8 state)
+bool Container::onClic(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 
@@ -689,7 +688,7 @@ bool Container::onClic(int x, int y, Uint8 button, Uint8 state)
 		if ((*iter)->getFocus())	
 		{
 			hasFocus = true;
-			if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) 
+			if ((*iter)->onClic(x - pos[0], y - pos[1], button, state, mod)) 
 			{
 				// The signal has been intercepted
 				// Set the component in first position in the objects list
@@ -706,7 +705,7 @@ bool Container::onClic(int x, int y, Uint8 button, Uint8 state)
 	iter = childs.begin();
 	while (iter != childs.end())
 	{
-		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
+		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state, mod))
 		{
 			// The signal has been intercepted
 			// Set the component in first position in the objects list
@@ -716,10 +715,10 @@ bool Container::onClic(int x, int y, Uint8 button, Uint8 state)
 		}
         iter++;
     }
-	return CallbackComponent::onClic(x, y, button, state);
+	return CallbackComponent::onClic(x, y, button, state, mod);
 }
 
-bool Container::onMove(int x, int y)
+bool Container::onMove(int x, int y, StelMod mod)
 {
 	bool hasFocus = false;
 
@@ -732,24 +731,24 @@ bool Container::onMove(int x, int y)
 		if ((*iter)->getFocus())	
 		{
 			hasFocus = true;
-			if ((*iter)->onMove(x - pos[0], y - pos[1])) return true;
+			if ((*iter)->onMove(x - pos[0], y - pos[1], mod)) return true;
 		}
         iter++;
 	}
 	// focus but not handled - return
-	if (hasFocus) return CallbackComponent::onMove(x, y);
+	if (hasFocus) return CallbackComponent::onMove(x, y, mod);
 	
 	iter = childs.begin();
 
 	while (iter != childs.end())
 	{
-		if ((*iter)->onMove(x - pos[0], y - pos[1])) return true;	// The signal has been intercepted
+		if ((*iter)->onMove(x - pos[0], y - pos[1], mod)) return true;	// The signal has been intercepted
         iter++;
     }
-	return CallbackComponent::onMove(x, y);
+	return CallbackComponent::onMove(x, y, mod);
 }
 
-bool Container::onKey(Uint16 k, Uint8 s)
+bool Container::onKey(Uint16 k, Uint8 s, StelMod mod)
 {
 	bool hasFocus = false;
 	if (!visible) return false;
@@ -762,7 +761,7 @@ bool Container::onKey(Uint16 k, Uint8 s)
 		if ((*iter)->getFocus())	
 		{
 			hasFocus = true;
-			if ((*iter)->onKey(k,s)) return true;
+			if ((*iter)->onKey(k,s, mod)) return true;
 		}
         iter++;
 	}
@@ -772,7 +771,7 @@ bool Container::onKey(Uint16 k, Uint8 s)
 	iter = childs.begin();
 	while (iter != childs.end())
 	{
-		if ((*iter)->onKey(k, s)) return 1;	// The signal has been intercepted
+		if ((*iter)->onKey(k, s, mod)) return 1;	// The signal has been intercepted
         iter++;
     }
     return false;
@@ -822,12 +821,12 @@ void Button::draw()
 	}
 }
 
-bool Button::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool Button::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 
-	CallbackComponent::onClic(x,y,bt,state);
-	if (bt==SDL_BUTTON_LEFT && isIn(x, y)) return 1;
+	CallbackComponent::onClic(x,y,bt,state, mod);
+	if (bt==Stel_BUTTON_LEFT && isIn(x, y)) return 1;
 	return 0;
 }
 
@@ -869,12 +868,12 @@ void CheckBox::draw()
 	Button::draw();
 }
 
-bool CheckBox::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool CheckBox::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
-	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT && isIn(x, y))
+	if (state==Stel_MOUSEBUTTONUP && bt==Stel_BUTTON_LEFT && isIn(x, y))
 		isChecked = !isChecked;
-	return Button::onClic(x,y,bt,state);
+	return Button::onClic(x,y,bt,state, mod);
 }
 
 LabeledCheckBox::LabeledCheckBox(bool state, const wstring& _label) : 
@@ -1096,10 +1095,10 @@ EditBox::~EditBox()
 	}
 }
 
-bool EditBox::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool EditBox::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
-	if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT)
+	if (state==Stel_MOUSEBUTTONDOWN && bt==Stel_BUTTON_LEFT)
 	{
 		if (isIn(x, y)) 
         {
@@ -1112,7 +1111,7 @@ bool EditBox::onClic(int x, int y, Uint8 bt, Uint8 state)
             return false;
          }
 	}
-	return Button::onClic(x,y,bt,state);
+	return Button::onClic(x,y,bt,state, mod);
 }
 
 void EditBox::setColorScheme(const s_color& baseColor, const s_color& textColor)
@@ -1225,17 +1224,17 @@ wstring EditBox::getDefaultPrompt(void)
 	return EDITBOX_DEFAULT_PROMPT;
 }
 
-#define SDLK_A 65
-#define SDLK_Z 90
+#define StelKey_A_LIM 65
+#define StelKey_Z_LIM 90
 
-bool EditBox::onKey(Uint16 k, Uint8 s)
+bool EditBox::onKey(Uint16 k, Uint8 s, StelMod mod)
 {
     if (!isEditing) return false;
 
-	if (s==SDL_KEYDOWN)
+	if (s==Stel_KEYDOWN)
     { 
 		lastKey = k;
-        if  (k==SDLK_RETURN)
+        if  (k==StelKey_RETURN)
         {
 			if (autoComplete.hasOption()) text = autoComplete.getFirstOption();
             history.add(text);
@@ -1243,42 +1242,42 @@ bool EditBox::onKey(Uint16 k, Uint8 s)
             return 1;
         }
 
-  		if (k == SDLK_TAB)
+  		if (k == StelKey_TAB)
   		{
 			if (autoComplete.hasOption()) text = autoComplete.getFirstOption();
 		}
-  		else if (k == SDLK_UP)
+  		else if (k == StelKey_UP)
   		{
               text = history.prev();
               cursorPos = text.length();
         }
-  		else if (k == SDLK_DOWN)
+  		else if (k == StelKey_DOWN)
   		{
               text = history.next();
               cursorPos = text.length();
         }
-  		else if (k == SDLK_LEFT)  		
+  		else if (k == StelKey_LEFT)  		
   		{
-            if (SDL_GetModState() & KMOD_CTRL)
+            if (mod & StelMod_CTRL)
                 cursorToPrevWord();
             else
                 if (cursorPos > 0) cursorPos--;
         }
-        else if (k == SDLK_RIGHT)
+        else if (k == StelKey_RIGHT)
         {
-            if (SDL_GetModState() & KMOD_CTRL)
+            if (mod & StelMod_CTRL)
                 cursorToNextWord();
             else
               if (cursorPos < text.length()) cursorPos++;
         }
-        else if (k == SDLK_HOME) cursorPos = 0;
-        else if (k == SDLK_END)  cursorPos = text.length();
-  		else if (k == SDLK_DELETE)
+        else if (k == StelKey_HOME) cursorPos = 0;
+        else if (k == StelKey_END)  cursorPos = text.length();
+  		else if (k == StelKey_DELETE)
   		{
            text = lastText;
            if (cursorPos < text.length()) text = text.erase(cursorPos, 1);
         }
-        else if (k == SDLK_BACKSPACE)
+        else if (k == StelKey_BACKSPACE)
         {
            text = lastText;
            if (cursorPos > 0)
@@ -1287,10 +1286,10 @@ bool EditBox::onKey(Uint16 k, Uint8 s)
                text = text.erase(cursorPos, 1);
            }
         }
-        else if (k == SDLK_ESCAPE) setText(L"");
-        else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
-        || (k >= SDLK_A && k <= SDLK_Z) || (k >= 224 && k <= 255) 
-		|| k == SDLK_SPACE || k == SDLK_UNDERSCORE || k == SDLK_MINUS || k == SDLK_PLUS)
+        else if (k == StelKey_ESCAPE) setText(L"");
+        else if ((k >= StelKey_0 && k <= StelKey_9) || (k >= StelKey_a && k <= StelKey_z) 
+        || (k >= StelKey_A_LIM && k <= StelKey_Z_LIM) || (k >= 224 && k <= 255) 
+		|| k == StelKey_SPACE || k == StelKey_UNDERSCORE || k == StelKey_MINUS || k == StelKey_PLUS)
         {
 			text = lastText;
             wstring newtext = text.substr(0, cursorPos);
@@ -1384,15 +1383,15 @@ void ScrollBar::draw(void)
 	glPopMatrix();
 }
 
-bool ScrollBar::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool ScrollBar::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
-	if (bt==SDL_MOUSEBUTTONUP && state==SDL_MOUSEBUTTONUP)
+	if (bt==Stel_MOUSEBUTTONUP && state==Stel_MOUSEBUTTONUP)
 	{
 		dragging = false;
 		return false;
 	}
 	
-	if (visible && isIn(x,y) && state==SDL_MOUSEBUTTONDOWN)
+	if (visible && isIn(x,y) && state==Stel_MOUSEBUTTONDOWN)
 	{
 		if (scrollBt.isIn(x-pos[0],y-pos[1])) 
 		{
@@ -1418,13 +1417,13 @@ bool ScrollBar::onClic(int x, int y, Uint8 bt, Uint8 state)
 	return false;
 }
 
-bool ScrollBar::onMove(int x, int y)
+bool ScrollBar::onMove(int x, int y, StelMod mod)
 {
 	float delta, v;
 	
 	if (!visible) return false;
 
-	scrollBt.onMove(x-pos[0],y-pos[1]);
+	scrollBt.onMove(x-pos[0],y-pos[1], mod);
 
 	if (!isIn(x, y)) 
 	{
@@ -1611,7 +1610,7 @@ void ListBox::setCurrent(const wstring& ws)
 	}
 }
 
-bool ListBox::onClic(int x, int y, Uint8 button, Uint8 state)
+bool ListBox::onClic(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 	if (!isIn(x,y)) return false;
@@ -1620,16 +1619,16 @@ bool ListBox::onClic(int x, int y, Uint8 button, Uint8 state)
 	y = y - pos[1];
 	if (scrollBar.getVisible())
 	{
-		if (scrollBar.onClic(x, y, button, state)) return true;
+		if (scrollBar.onClic(x, y, button, state, mod)) return true;
 	}
 
-	if (state==SDL_MOUSEBUTTONDOWN)
+	if (state==Stel_MOUSEBUTTONDOWN)
 	{
 		int i = firstItemIndex;
     	vector<LabeledButton*>::iterator iter = itemBt.begin();
 		while (iter != itemBt.end())
 		{
-			if ((*iter)->onClic(x, y, button, state)) 
+			if ((*iter)->onClic(x, y, button, state, mod)) 
 			{
 				value = i;
 				if (!onChangeCallback.empty()) RUNCALLBACK(onChangeCallback);
@@ -1643,7 +1642,7 @@ bool ListBox::onClic(int x, int y, Uint8 button, Uint8 state)
 	return false;
 }
 
-bool ListBox::onMove(int x, int y)
+bool ListBox::onMove(int x, int y, StelMod mod)
 {
 	if (!visible) return false;
 	x = x - pos[0];
@@ -1652,10 +1651,10 @@ bool ListBox::onMove(int x, int y)
 	// highlight the item with the mouse over
 	while (iter != itemBt.end())
 	{
-		(*iter)->onMove(x, y); 
+		(*iter)->onMove(x, y, mod); 
    	    iter++;
 	}
-	if (scrollBar.onMove(x, y)) return true;
+	if (scrollBar.onMove(x, y, mod)) return true;
 	
 	return false;
 }
@@ -1982,17 +1981,17 @@ void StdWin::draw()
 	FramedContainer::draw();
 }
 
-bool StdWin::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool StdWin::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
-	if (FramedContainer::onClic(x, y, bt, state)) return 1;
-	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT)
+	if (FramedContainer::onClic(x, y, bt, state, mod)) return 1;
+	if (state==Stel_MOUSEBUTTONUP && bt==Stel_BUTTON_LEFT)
 	{
 		dragging = false;
 	}
 	if (isIn(x, y))
 	{
-		if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT)
+		if (state==Stel_MOUSEBUTTONDOWN && bt==Stel_BUTTON_LEFT)
 		{
 			dragging = true;
 			oldPos.set(x,y);
@@ -2002,10 +2001,10 @@ bool StdWin::onClic(int x, int y, Uint8 bt, Uint8 state)
 	return false;
 }
 
-bool StdWin::onMove(int x, int y)
+bool StdWin::onMove(int x, int y, StelMod mod)
 {
 	if (!visible) return false;
-	if (FramedContainer::onMove(x, y)) return 1;
+	if (FramedContainer::onMove(x, y, mod)) return 1;
 	if (dragging)
 	{
 		pos+=(s_vec2i(x,y)-oldPos);
@@ -2382,13 +2381,13 @@ int TabContainer::getHeadersSize(void)
 	return s;
 }
 
-bool TabContainer::onClic(int x, int y, Uint8 button, Uint8 state)
+bool TabContainer::onClic(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 	list<TabHeader*>::iterator iter = headers.begin();
 	while (iter != headers.end())
 	{
-		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
+		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state, mod))
 		{
 			select(*iter);
 			(*iter)->setInFront(true);
@@ -2396,7 +2395,7 @@ bool TabContainer::onClic(int x, int y, Uint8 button, Uint8 state)
 		}
         iter++;
     }
-	return Container::onClic(x, y, button, state);
+	return Container::onClic(x, y, button, state, mod);
 }
 
 void TabContainer::select(TabHeader* t)
@@ -2497,15 +2496,15 @@ void CursorBar::setValue(float _value)
 	sized = false;
 }
 
-bool CursorBar::onClic(int x, int y, Uint8 bt, Uint8 state)
+bool CursorBar::onClic(int x, int y, Uint8 bt, Uint8 state, StelMod mod)
 {
-	if (bt==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP)
+	if (bt==Stel_BUTTON_LEFT && state==Stel_MOUSEBUTTONUP)
 	{
 		dragging = false;
 		return false;
 	}
 	
-	if (visible && isIn(x,y) && state==SDL_MOUSEBUTTONDOWN)
+	if (visible && isIn(x,y) && state==Stel_MOUSEBUTTONDOWN)
 	{
 		if (cursorBt.isIn(x-pos[0],y-pos[1])) 
 		{
@@ -2518,13 +2517,13 @@ bool CursorBar::onClic(int x, int y, Uint8 bt, Uint8 state)
 	return false;
 }
 
-bool CursorBar::onMove(int x, int y)
+bool CursorBar::onMove(int x, int y, StelMod mod)
 {
 	float delta, v;
 	
 	if (!visible) return false;
 	
-	cursorBt.onMove(x-pos[0],y-pos[1]);
+	cursorBt.onMove(x-pos[0],y-pos[1], mod);
 	
 	if (!isIn(x, y)) 
 	{
@@ -3130,13 +3129,13 @@ bool MapPicture::isIn(int x, int y)
 	return (originalPos[0]<=x && (originalSize[0]+originalPos[0])>=x && originalPos[1]<=y && (originalPos[1]+originalSize[1])>=y);
 }
 
-bool MapPicture::onKey(Uint16 k, Uint8 s)
+bool MapPicture::onKey(Uint16 k, Uint8 s, StelMod mod)
 {
-	if (s==SDL_KEYDOWN)
+	if (s==Stel_KEYDOWN)
 	{
-		if (k == SDLK_PAGEUP) 
+		if (k == StelKey_PAGEUP) 
 			zoomInOut(1.f);
-		else if (k == SDLK_PAGEDOWN) 
+		else if (k == StelKey_PAGEDOWN) 
 			zoomInOut(-1.f);
 		else
 			return false;
@@ -3145,9 +3144,9 @@ bool MapPicture::onKey(Uint16 k, Uint8 s)
 	return false;
 }
 
-void MapPicture::calcPointerPos(int x, int y)
+void MapPicture::calcPointerPos(int x, int y, StelMod mod)
 {
-	if (SDL_GetModState() & KMOD_CTRL)
+	if (mod & StelMod_CTRL)
 	{
 		nearestIndex = cities.getNearest(getLongitudeFromx(x - pos[0]), getLatitudeFromy(y - pos[1]));
 		if (nearestIndex != -1)
@@ -3176,7 +3175,7 @@ void MapPicture::calcPointerPos(int x, int y)
 	exact = false;
 }
 
-bool MapPicture::onClic(int x, int y, Uint8 button, Uint8 state)
+bool MapPicture::onClic(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	if (!visible) return false;
 
@@ -3187,20 +3186,20 @@ bool MapPicture::onClic(int x, int y, Uint8 button, Uint8 state)
 		return false;
 	}
 
-	if (button==SDL_BUTTON_LEFT)
+	if (button==Stel_BUTTON_LEFT)
 	{
-		if (state == SDL_MOUSEBUTTONDOWN)
+		if (state == Stel_MOUSEBUTTONDOWN)
 		{
 			dragging = true;
-			calcPointerPos(x, y);
+			calcPointerPos(x, y, mod);
 			if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 		}
 		else
 			dragging = false;
 	}
-	if (button==SDL_BUTTON_RIGHT)
+	if (button==Stel_BUTTON_RIGHT)
 	{
-		if (state == SDL_MOUSEBUTTONDOWN)
+		if (state == Stel_MOUSEBUTTONDOWN)
 		{
 			panning = true;
 			oldPos.set(x,y);
@@ -3208,14 +3207,14 @@ bool MapPicture::onClic(int x, int y, Uint8 button, Uint8 state)
 		else
 			panning = false;
 	}
-	else if (button == 	SDL_BUTTON_WHEELUP)
+	else if (button == 	Stel_BUTTON_WHEELUP)
 		zoomInOut(0.5f); //polls twice - press and release I assume
-	else if (button == 	SDL_BUTTON_WHEELDOWN)
+	else if (button == 	Stel_BUTTON_WHEELDOWN)
 		zoomInOut(-0.5f);
 	return true;
 }
 
-bool MapPicture::onMove(int x, int y)
+bool MapPicture::onMove(int x, int y, StelMod mod)
 {
 	if (!visible) return false;
  	if (!isIn(x,y)) return false;
@@ -3225,7 +3224,7 @@ bool MapPicture::onMove(int x, int y)
 
 	if (dragging)
 	{
-		calcPointerPos(x, y);
+		calcPointerPos(x, y, mod);
 		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	}
 	else if (panning)
@@ -3412,9 +3411,9 @@ void StringList::draw(void)
 	}
 }
 
-bool StringList::onClic(int x, int y, Uint8 button, Uint8 state)
+bool StringList::onClic(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
-	if (!visible || state!=SDL_MOUSEBUTTONDOWN || !isIn(x,y)) return 0;
+	if (!visible || state!=Stel_MOUSEBUTTONDOWN || !isIn(x,y)) return 0;
 	int poss = (y-pos[1])/itemSize;
 	if (items.begin()+poss == items.end() || (unsigned int)poss>items.size()) return 1;
 	current = items.begin()+poss;

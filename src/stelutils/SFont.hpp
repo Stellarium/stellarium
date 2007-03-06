@@ -26,7 +26,7 @@
 # include <config.h>
 #endif
 
-#include "SDL_opengl.h"
+#include "GLee.h"
 #include "StelUtils.hpp"
 #include "typeface.h"
 

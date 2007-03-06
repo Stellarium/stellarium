@@ -22,7 +22,7 @@
 using namespace StelGeom;
 
 //! Special constructor for 3 halfspaces convex
-Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
+ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
 {
     reserve(3);
     push_back(e0^e1);
@@ -31,7 +31,7 @@ Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
 }
 
 //! Special constructor for 4 halfspaces convex
-Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
+ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
 {
     reserve(4);
 	const double d = e0*((e1-e0)^(e2-e0));
