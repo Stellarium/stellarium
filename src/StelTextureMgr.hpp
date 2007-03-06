@@ -24,7 +24,7 @@
 #include <map>
 #include <vector>
 #include <boost/shared_ptr.hpp>
-#include "SDL_opengl.h"
+#include "GLee.h"
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
 
@@ -159,7 +159,7 @@ private:
 	friend class ManagedSTexture;
 
 	//! Internal
-	ManagedSTextureSP initTex(const string& afilename);
+	ManagedSTextureSP initTex(const std::string& afilename);
 
 	//! Load the image memory. If we use threaded loading, the texture will
 	//! be uploaded to openGL memory at the next update() call.

@@ -28,10 +28,7 @@
 
 #include "StelUtils.hpp"
 #include "Translator.hpp"
-
-// SDL is used only for the key codes, i'm lasy to redefine them
-// This is TODO to make the s_ library independent
-#include "SDL.h"
+#include "StelKey.hpp"
 
 #include <set>
 #include <list>
@@ -315,27 +312,27 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16 k, Uint8 v)
 		{
-		  if (current==items.end() || v==SDL_KEYUP) return false;
-		        if (k==SDLK_RETURN)
+		  if (current==items.end() || v==Stel_KEYUP) return false;
+		        if (k==StelKey_RETURN)
 			{
 				if (!onTriggerCallback.empty()) onTriggerCallback();
 				return false;
 			}
-			if (k==SDLK_UP)
+			if (k==StelKey_UP)
 			{
 				if (current!=items.begin()) --current;
 				else current = --items.end();
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
-			if (k==SDLK_DOWN)
+			if (k==StelKey_DOWN)
 			{
 			        if (current!= --items.end()) ++current;
 				else current = items.begin();
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
-			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
+			if (k==StelKey_LEFT || k==StelKey_ESCAPE) return false;
 			return false;
 		}
 		void addItem(const T& newitem) {
@@ -411,27 +408,27 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16 k, Uint8 v)
 		{
-		  if (current==items.end() || v==SDL_KEYUP) return false;
-		        if (k==SDLK_RETURN)
+		  if (current==items.end() || v==Stel_KEYUP) return false;
+		        if (k==StelKey_RETURN)
 			{
 				if (!onTriggerCallback.empty()) onTriggerCallback();
 				return false;
 			}
-			if (k==SDLK_UP)
+			if (k==StelKey_UP)
 			{
 				if (current!=items.begin()) --current;
 				else current = --items.end();
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
-			if (k==SDLK_DOWN)
+			if (k==StelKey_DOWN)
 			{
 			        if (current!= --items.end()) ++current;
 				else current = items.begin();
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
-			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
+			if (k==StelKey_LEFT || k==StelKey_ESCAPE) return false;
 			return false;
 		}
 		void addItem(const T& newkey, const T& newvalue) {

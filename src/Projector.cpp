@@ -22,6 +22,13 @@
 #include <cstdio>
 #include <cassert>
 #include "GLee.h"
+
+#if defined(__APPLE__) && defined(__MACH__)
+#include <OpenGL/glu.h>	/* Header File For The GLU Library */
+#else
+#include <GL/glu.h>	/* Header File For The GLU Library */
+#endif
+
 #include "Projector.hpp"
 #include "InitParser.hpp"
 #include "MappingClasses.hpp"
@@ -196,7 +203,7 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double margin) const
 	return StelGeom::ConvexPolygon(e0, e3, e2, e1);
 }
 
-StelGeom::Convex Projector::unprojectViewport(void) const {
+StelGeom::ConvexS Projector::unprojectViewport(void) const {
     // This is quite ugly, but already better than nothing.
     // In fact this function should have different implementations
     // for the different mapping types. And maskType, viewport_fov_diameter,
@@ -210,7 +217,7 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
     if (maskType == DISK) {
       if (fov >= 120.0) {
         unProject(viewport_center[0],viewport_center[1],e0);
-        StelGeom::Convex rval(1);
+        StelGeom::ConvexS rval(1);
         rval[0].n = e0;
         rval[0].d = (fov<360.0) ? cos(fov*(M_PI/360.0)) : -1.0;
         return rval;
@@ -251,7 +258,7 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
           h1.contains(e3) && h1.contains(e0) &&
           h2.contains(e0) && h2.contains(e1) &&
           h3.contains(e1) && h3.contains(e2)) {
-        StelGeom::Convex rval(4);
+        StelGeom::ConvexS rval(4);
         rval[0] = h0;
         rval[1] = h1;
         rval[2] = h2;
@@ -268,7 +275,7 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
           if (d > h) d = h;
           h = middle*e3;
           if (d > h) d = h;
-          StelGeom::Convex rval(1);
+          StelGeom::ConvexS rval(1);
           rval[0].n = middle;
           rval[0].d = d;
           return rval;
@@ -276,7 +283,7 @@ StelGeom::Convex Projector::unprojectViewport(void) const {
       }
     }
   }
-  StelGeom::Convex rval(1);
+  StelGeom::ConvexS rval(1);
   rval[0].n = Vec3d(1.0,0.0,0.0);
   rval[0].d = -2.0;
   return rval;

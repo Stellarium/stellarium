@@ -7,7 +7,7 @@
 #include "SphereGeometry.hpp"
 
 
-//! Template class used to store elements which can be assimilated to a Convex.
+//! Template class used to store elements which can be assimilated to a ConvexS.
 //! GetConvexFunc is a Functor std::unary_function<const T&, ConvexPolygon> returning 
 //! the convex for an element of class T
 

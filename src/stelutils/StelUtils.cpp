@@ -40,7 +40,7 @@
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 #include "vecmath.h"
-#include "SDL_opengl.h"
+#include "GLee.h"
 
 namespace StelUtils {
 

@@ -45,7 +45,7 @@ private:
 	STextureSP splash;
 	wstring extraText;
 	Vec2f extraTextPos;
-	int timeCounter;
+	double timeCounter;
 };
 
 #endif //_LOADINGBAR_H_

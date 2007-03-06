@@ -39,7 +39,7 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	if (!splash_tex.empty()) splash = StelApp::getInstance().getTextureManager().createTexture(splash_tex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
-	timeCounter = SDL_GetTicks();
+	timeCounter = StelApp::getInstance().getTotalRunTime();
 }
 	
 LoadingBar::~LoadingBar()
@@ -50,9 +50,9 @@ void LoadingBar::Draw(float val)
 {
 	// Ensure that the refresh frequency is not too high 
 	// (display may be very slow when no 3D acceleration works)
-	if (SDL_GetTicks()-timeCounter<50)
+	if (StelApp::getInstance().getTotalRunTime()-timeCounter<0.050)
 		return;
-	timeCounter = SDL_GetTicks();
+	timeCounter = StelApp::getInstance().getTotalRunTime();
   
 	// Draw the splash screen if available
 	if (splash)
@@ -118,5 +118,5 @@ void LoadingBar::Draw(float val)
 	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
 	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
-	SDL_GL_SwapBuffers();	// And swap the buffers
+	StelApp::getInstance().swapGLBuffers();	// And swap the buffers
 }

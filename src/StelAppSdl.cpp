@@ -20,11 +20,10 @@
 #include "shlobj.h"
 #endif
 
+#include "stellarium.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
-
-#include "SDL_opengl.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"
@@ -35,7 +34,15 @@
 
 using namespace std;
 
-void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
+/*************************************************************************
+ *  SDL dependent part
+*************************************************************************/
+#ifdef USE_SDL 
+
+#include "GLee.h"
+#include "SDL_opengl.h"
+
+void StelApp::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
     Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
@@ -228,7 +235,6 @@ SDL_Cursor* StelApp::create_cursor(const char *image[])
   return SDL_CreateCursor(data, mask, 32, 32, hot_x, hot_y);
 }
 
-
 // Terminate the application
 void StelApp::terminateApplication(void)
 {
@@ -241,6 +247,30 @@ void StelApp::terminateApplication(void)
 	}
 }
 
+// Set mouse cursor display
+void StelApp::showCursor(bool b)
+{
+	SDL_ShowCursor(b);
+}
+
+// DeInit SDL related stuff
+void StelApp::deInit()
+{
+	SDL_FreeCursor(Cursor);
+}
+
+//! Swap GL buffer, should be called only for special condition
+void StelApp::swapGLBuffers() const
+{
+	SDL_GL_SwapBuffers();
+}
+	
+//! Return the time since when stellarium is running in second
+double StelApp::getTotalRunTime() const
+{
+	return ((double)SDL_GetTicks()+0.5)/1000;
+}
+	
 enum {
 	USER_EVENT_TICK
 };
@@ -307,23 +337,23 @@ void StelApp::startMainLoop()
 					break;
 
 				case SDL_MOUSEMOTION:
-				  	handleMove(E.motion.x,E.motion.y);
+				  	handleMove(E.motion.x,E.motion.y, SDLKmodToStelMod(SDL_GetModState()));
 					break;
 				
 				case SDL_MOUSEBUTTONDOWN:
-					handleClick(E.button.x,E.button.y,E.button.button,SDL_MOUSEBUTTONDOWN);
+					handleClick(E.button.x,E.button.y,E.button.button,Stel_MOUSEBUTTONDOWN, SDLKmodToStelMod(SDL_GetModState()));
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					handleClick(E.button.x,E.button.y,E.button.button,SDL_MOUSEBUTTONUP);
+					handleClick(E.button.x,E.button.y,E.button.button,Stel_MOUSEBUTTONUP, SDLKmodToStelMod(SDL_GetModState()));
 					break;
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,SDL_KEYDOWN)) ||
-						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,SDL_KEYDOWN)))
+					if ((E.key.keysym.unicode && !handleKeys(SDLKeyToStelKey(E.key.keysym.sym),SDLKmodToStelMod(E.key.keysym.mod),E.key.keysym.unicode,Stel_KEYDOWN)) ||
+						(!E.key.keysym.unicode && !handleKeys(SDLKeyToStelKey(E.key.keysym.sym),SDLKmodToStelMod(E.key.keysym.mod),SDLKeyToStelKey(E.key.keysym.sym),Stel_KEYDOWN)))
 					{
 						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
 
@@ -338,7 +368,7 @@ void StelApp::startMainLoop()
 					break;
 
 				case SDL_KEYUP:
-					handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,SDL_KEYUP);
+					handleKeys(SDLKeyToStelKey(E.key.keysym.sym),SDLKmodToStelMod(E.key.keysym.mod),SDLKeyToStelKey(E.key.keysym.sym),Stel_KEYUP);
 			}
 		}
 		else  // No events to poll
@@ -476,3 +506,5 @@ void StelApp::saveScreenShot() const
 	SDL_FreeSurface(temp);
 	cout << "Saved screenshot to file : " << tempName << endl;
 }
+
+#endif // USE_SDL
