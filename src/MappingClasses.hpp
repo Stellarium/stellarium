@@ -14,6 +14,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 class MappingEqualArea : public Mapping
@@ -27,6 +29,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 class MappingStereographic : public Mapping
@@ -40,6 +44,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 class MappingFisheye : public Mapping
@@ -53,6 +59,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 class MappingCylinder : public Mapping
@@ -66,6 +74,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 class MappingOrthographic : public Mapping
@@ -79,6 +89,8 @@ private:
 	bool forward(Vec3d &win) const;
 	bool backward(Vec3d &v) const;
 	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
 };
 
 #endif

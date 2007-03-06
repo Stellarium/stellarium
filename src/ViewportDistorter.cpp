@@ -250,8 +250,8 @@ ViewportDistorterFisheyeToSphericMirror
     = conf.get_double("spheric_mirror","projector_gamma",0.45);
   if (gamma < 0.0) gamma = 0.0;
   const float view_scaling_factor
-    = viewport_fov_diameter
-    * prj->getMapping().fovToViewScalingFactor(distorter_max_fov);
+    = 0.5 * viewport_fov_diameter
+    / prj->getMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
   max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
   step_x = screen_w / (double)(max_x-0.5);
   max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
