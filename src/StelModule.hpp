@@ -29,11 +29,10 @@
 #include <vector>
 #include <boost/any.hpp>
 
-#include "SDL.h"
-
+#include "stellarium.h"
+#include "StelKey.hpp"
 #include "callbacks.hpp"
 
-#include "stellarium.h"
 
 // Predeclaration
 class Projector;
@@ -89,25 +88,25 @@ public:
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
 	//! @param y Y mouse position in pixels.
-	//! @param button the mouse button. Can be SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT, SDL_BUTTON_MIDDLE,
-	//!   SDL_BUTTON_WHEELUP, SDL_BUTTON_WHEELDOWN
-	//! @param state the state of the button. Can be SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP.
+	//! @param button the mouse button. Can be Stel_BUTTON_LEFT, Stel_BUTTON_RIGHT, Stel_BUTTON_MIDDLE,
+	//!   Stel_BUTTON_WHEELUP, Stel_BUTTON_WHEELDOWN
+	//! @param state the state of the button. Can be Stel_MOUSEBUTTONDOWN, Stel_MOUSEBUTTONUP.
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state) {return false;}
+	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod) {return false;}
 	
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
 	//! @param y Y mouse position in pixels.
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleMouseMoves(Uint16 x, Uint16 y) {return false;}
+	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
-	//! @param key the SDL key code.
+	//! @param key the key code.
 	//! @param mod the current mod state, needed to determine whether e.g CTRL or SHIFT key are pressed.
 	//! @param unicode the unicode key code.
-	//! @param state the press state of the key. Can be SDL_KEYDOWN or SDL_KEYUP.
+	//! @param state the press state of the key. Can be Stel_KEYDOWN or Stel_KEYUP.
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state) {return false;}
+	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state) {return false;}
 	
 	//! Return the full path to a data file belonging to the module
 	std::string getFilePath(const std::string& fileName) const;

@@ -36,7 +36,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
-#include "SDL_opengl.h"
+#include "GLee.h"
 
 #include "typeface.h"
 

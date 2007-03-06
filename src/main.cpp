@@ -21,8 +21,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "SDL.h"
-
 #include "stellarium.h"
 #include "StelApp.hpp"
 #include "Translator.hpp"

@@ -121,7 +121,7 @@ public:
 
 	//! unproject the entire viewport depending on mapping, maskType,
 	//! viewport_fov_diameter, viewport_center, viewport_xywh
-	StelGeom::Convex Projector::unprojectViewport(void) const;
+	StelGeom::ConvexS unprojectViewport(void) const;
 
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}

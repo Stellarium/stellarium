@@ -17,8 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// TODO : remove the maximum of char* and replace by string to make the soft safer
-
 #ifndef _GUI_H_
 #define _GUI_H_
 
@@ -26,10 +24,8 @@
 # include <config.h>
 #endif
 
-#include "SDL_opengl.h"
-
-// SDL is used only for the key codes, i'm lasy to redefine them
-#include "SDL.h"
+#include "GLee.h"
+#include "StelKey.hpp"
 
 #include <list>
 #include <string>
@@ -189,9 +185,9 @@ namespace s_gui
         virtual int getVisible(void) const {return visible;}
         virtual void setFocus(bool _focus) { focus = _focus; };
         virtual bool getFocus(void) const {return focus;}
-		virtual bool onClic(int, int, Uint8, Uint8) {return 0;}
-		virtual bool onMove(int, int) {return 0;}
-		virtual bool onKey(Uint16, Uint8) {return 0;}
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod) {return 0;}
+		virtual bool onMove(int, int, StelMod) {return 0;}
+		virtual bool onKey(Uint16, Uint8, StelMod) {return 0;}
 		virtual void setTexture(const STextureSP tex) {painter.setTexture(tex);}
 		virtual void setFont(SFont* f) {painter.setFont(f);}
 		SFont* getFont(void) const {return painter.getFont();}
@@ -239,8 +235,8 @@ namespace s_gui
 		virtual void setOnMouseInOutCallback(const callback<void>& c) {onMouseInOutCallback = c;}
         virtual void setOnPressCallback(const callback<void>& c) {onPressCallback = c;}
 		virtual bool getIsMouseOver(void) {return is_mouse_over;}
-		virtual bool onMove(int, int);
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onMove(int, int, StelMod);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
     protected:
 		callback<void> onPressCallback;
 		callback<void> onMouseInOutCallback;
@@ -258,9 +254,9 @@ namespace s_gui
         virtual void removeComponent(Component*);
 		virtual void removeAllComponents(void);
         virtual void draw(void);
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
-		virtual bool onKey(Uint16, Uint8);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
+		virtual bool onMove(int, int, StelMod);
+		virtual bool onKey(Uint16, Uint8, StelMod mod);
         virtual void setFocus(bool _focus);
    		void setGUIColorSchemeMember(bool _b);
 		void setColorScheme(const s_color& _baseColor, const s_color& _textColor);
@@ -287,7 +283,7 @@ namespace s_gui
     public:
 		Button();
         virtual void draw();
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
 		void setHideBorder(bool _b) { hideBorder = _b;}
 		void setHideBorderMouseOver(bool _b) { hideBorderMouseOver = _b;}
 		void setHideTexture(bool _b) { hideTexture = _b;}
@@ -327,7 +323,7 @@ namespace s_gui
         virtual void draw();
 		virtual int getState(void) const {return isChecked;}
 		virtual void setState(bool s) {isChecked = s;}
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
     protected:
 		bool isChecked;
     };
@@ -445,8 +441,8 @@ namespace s_gui
 		virtual void setFont(SFont* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
-		virtual bool onKey(Uint16, Uint8);
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onKey(Uint16, Uint8, StelMod mod);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
 		void setVisible(bool _visible);
 		void setAutoCompleteOptions(vector<wstring> _autocomplete) { autoComplete.setOptions(_autocomplete); };
 		wstring getAutoCompleteOptions(void) { return autoComplete.getOptions(); }
@@ -493,8 +489,8 @@ namespace s_gui
 		ScrollBar(bool _vertical = true, int _totalElements = 1, int _elementsForBar = 1);
 		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
 		virtual void draw(void);
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
+		virtual bool onMove(int, int, StelMod);
 		void setTotalElements(int _elements);
 		void setElementsForBar(int _elementsForBar);
 		void setValue(int _value);
@@ -522,8 +518,8 @@ namespace s_gui
 		ListBox(int _displayLines = 5);
 		~ListBox();
 		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
+		virtual bool onMove(int, int, StelMod);
         virtual void draw(void);
    		virtual void setVisible(bool _visible);
 		wstring getItem(int value);
@@ -675,8 +671,8 @@ namespace s_gui
 	   	virtual void draw();
 	    virtual wstring getTitle() const {return titleLabel->getLabel();}
 	    virtual void setTitle(const wstring& _title);
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
+		virtual bool onMove(int, int, StelMod);
 		virtual void setVisible(bool _visible);
 	protected:
 	    Label* titleLabel;
@@ -783,7 +779,7 @@ namespace s_gui
 		TabContainer(SFont* _font = NULL);
 		void addTab(Component* c, const wstring& name);
 		virtual void draw(void);
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
 		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
 	protected:
 		int getHeadersSize(void);
@@ -801,8 +797,8 @@ namespace s_gui
         virtual float getValue(void) {return value;}
 		virtual void setValue(float _value);
 		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
+		virtual bool onMove(int, int, StelMod);
 	private:
 		void adjustSize(void);
 		bool dragging;
@@ -889,10 +885,10 @@ namespace s_gui
 		~MapPicture();
 		virtual void setOnNearestCityCallback(const callback<void>& c) {onNearestCityCallback = c;}
 		virtual void draw(void);
-		virtual bool onClic(int, int, Uint8, Uint8);
-		virtual bool onMove(int, int);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod mod);
+		virtual bool onMove(int, int, StelMod);
 		virtual bool isIn(int x, int y);
-		bool onKey(Uint16 k, Uint8 s);
+		bool onKey(Uint16 k, Uint8 s, StelMod);
 		void set_font(SFont* newFont) {city_name_font = newFont;}
 		double getPointerLongitude(void);
 		double getPointerLatitude(void);
@@ -921,7 +917,7 @@ namespace s_gui
 		void drawCityName(const s_vec2i& cityPos, const wstring& _name);
 		void drawCity(const s_vec2i& cityPos, int ctype);
 		void drawNearestCity(void);
-		void calcPointerPos(int x, int y);
+		void calcPointerPos(int x, int y, StelMod mod);
 		void setPointerSize(void);
 		Picture *pointer;
 		Picture *cityPointer;
@@ -946,7 +942,7 @@ namespace s_gui
 	public:
 		StringList();
 		virtual void draw(void);
-		virtual bool onClic(int, int, Uint8, Uint8);
+		virtual bool onClic(int, int, Uint8, Uint8, StelMod);
 		void addItem(const string &);
 		void addItemList(const string& s)
 		{

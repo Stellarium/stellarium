@@ -131,28 +131,12 @@ void StelCore::preDraw(int delta_time)
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
 
-/*
-	const Vec4i &v(projection->getViewport());
-	Vec3d e0,e1,e2,e3;
-	projection->unProject(v[0],v[1],e0);
-	projection->unProject(v[0]+v[2],v[1]+v[3],e2);
-	if (projection->needGlFrontFaceCW())
-	{
-		projection->unProject(v[0],v[1]+v[3],e3);
-		projection->unProject(v[0]+v[2],v[1],e1);
-	}
-	else
-	{
-		projection->unProject(v[0],v[1]+v[3],e1);
-		projection->unProject(v[0]+v[2],v[1],e3);
-	}
-
-	// This still needs a fix
-*/
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
-	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
-//	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
+	
+	// temporary reverted to old convex polygon because of the blinking bug 
+	geodesic_search_result->search(projection->getViewportConvexPolygon(),max_search_level);
+//	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
 }
 
 

@@ -25,7 +25,6 @@
 #include <config.h>
 
 #include <string>
-#include "SDL.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"

@@ -26,8 +26,6 @@
 #include "InitParser.hpp"
 #include "Projector.hpp"
 
-#include "SDL_opengl.h"
-
 #include <math.h>
 
 class ViewportDistorterDummy : public ViewportDistorter {
@@ -451,7 +449,7 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
   glMatrixMode(GL_PROJECTION);        // projection matrix mode
   glPushMatrix();                     // store previous matrix
   glLoadIdentity();
-  gluOrtho2D(0,screen_w,0,screen_h);    // set a 2D orthographic projection
+  glOrtho(0,screen_w,0,screen_h, -1, 1); // set a 2D orthographic projection
   glMatrixMode(GL_MODELVIEW);         // modelview matrix mode
   glPushMatrix();
   glLoadIdentity();

@@ -51,18 +51,18 @@ public:
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state);
+	int handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
 	// Handle mouse move
-	int handle_move(int x, int y);
+	int handle_move(int x, int y, StelMod mod);
 	// Handle key press and release
-	int handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
+	int handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 
 	// Text UI
 	void init_tui(void);
 	void localizeTui(void);
 	void draw_tui(void);		// Display the tui
 	int handle_keys_tui(Uint16 key, Uint8 state);
-	int handle_keysGUI(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
+	int handle_keysGUI(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void tuiUpdateIndependentWidgets(void); // For widgets that aren't tied directly to current settings

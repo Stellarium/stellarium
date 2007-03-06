@@ -22,7 +22,7 @@
 
 #include <string>
 #include "vecmath.h"
-#include "SDL_opengl.h"
+#include "GLee.h"
 
 /**
  * Base texture class.

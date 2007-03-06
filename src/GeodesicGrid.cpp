@@ -319,7 +319,7 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
 }
 
 
-void GeodesicGrid::searchZones(const StelGeom::Convex& convex,
+void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
                                int **inside_list,int **border_list,
                                int max_search_level) const
 {
@@ -361,7 +361,7 @@ void GeodesicGrid::searchZones(const StelGeom::Convex& convex,
 }
 
 void GeodesicGrid::searchZones(int lev,int index,
-                               const StelGeom::Convex& convex,
+                               const StelGeom::ConvexS& convex,
                                const int *index_of_used_half_spaces,
                                const int half_spaces_used,
                                const bool *corner0_inside,
@@ -481,7 +481,7 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 	delete[] zones;
 }
 
-void GeodesicSearchResult::search(const StelGeom::Convex& convex,
+void GeodesicSearchResult::search(const StelGeom::ConvexS& convex,
                                   int max_search_level)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)
@@ -496,7 +496,7 @@ void GeodesicSearchResult::search(const Vec3d &e0,const Vec3d &e1,
                                   const Vec3d &e2,const Vec3d &e3,
                                   int max_search_level)
 {
-	StelGeom::Convex c(e0, e1, e2, e3);
+	StelGeom::ConvexS c(e0, e1, e2, e3);
 	search(c,max_search_level);
 }
 

@@ -154,19 +154,19 @@ bool Branch::setValue_Specialslash(const wstring& s)
 bool Branch::onKey(Uint16 k, Uint8 v)
 {
 	if (!*current) return false;
-	if (v==SDL_KEYUP) return (*current)->onKey(k,v);
-	if (v==SDL_KEYDOWN)
+	if (v==Stel_KEYUP) return (*current)->onKey(k,v);
+	if (v==Stel_KEYDOWN)
 	{
 		if ((*current)->onKey(k,v)) return true;
 		else
 		{
-			if (k==SDLK_UP)
+			if (k==StelKey_UP)
 			{
 				if (current!=childs.begin()) --current;
 				else current=--childs.end();
 				return true;
 			}
-			if (k==SDLK_DOWN)
+			if (k==StelKey_DOWN)
 			{
 				if (current!=--childs.end()) ++current;
 				else current=childs.begin();
@@ -189,7 +189,7 @@ bool MenuBranch::onKey(Uint16 k, Uint8 v)
 		if (isEditing)
 		{
 			if ((*Branch::current)->onKey(k, v)) return true;
-			if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
+			if (v==Stel_KEYDOWN && (k==StelKey_LEFT || k==StelKey_ESCAPE || k==StelKey_RETURN))
 			{
 				isEditing = false;
 				return true;
@@ -198,22 +198,22 @@ bool MenuBranch::onKey(Uint16 k, Uint8 v)
 		}
 		else
 		{
-			if (v==SDL_KEYDOWN && k==SDLK_UP)
+			if (v==Stel_KEYDOWN && k==StelKey_UP)
 			{
 				if (Branch::current!=Branch::childs.begin()) --Branch::current;
 				return true;
 			}
-			if (v==SDL_KEYDOWN && k==SDLK_DOWN)
+			if (v==Stel_KEYDOWN && k==StelKey_DOWN)
 			{
 				if (Branch::current!=--Branch::childs.end()) ++Branch::current;
 				return true;
 			}
-			if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
+			if (v==Stel_KEYDOWN && (k==StelKey_RIGHT || k==StelKey_RETURN))
 			{
 				if ((*Branch::current)->isEditable()) isEditing = true;
 				return true;
 			}
-			if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+			if (v==Stel_KEYDOWN && (k==StelKey_LEFT || k==StelKey_ESCAPE))
 			{
 				isNavigating = false;
 				return true;
@@ -223,7 +223,7 @@ bool MenuBranch::onKey(Uint16 k, Uint8 v)
 	}
 	else
 	{
-		if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
+		if (v==Stel_KEYDOWN && (k==StelKey_RIGHT || k==StelKey_RETURN))
 		{
 			isNavigating = true;
 			return true;
@@ -253,7 +253,7 @@ bool MenuBranch_item::onKey(Uint16 k, Uint8 v)
 	if (isEditing)
 	{
 		if ((*Branch::current)->onKey(k, v)) return true;
-		if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
+		if (v==Stel_KEYDOWN && (k==StelKey_LEFT || k==StelKey_ESCAPE || k==StelKey_RETURN))
 		{
 			isEditing = false;
 			return true;
@@ -262,24 +262,24 @@ bool MenuBranch_item::onKey(Uint16 k, Uint8 v)
 	}
 	else
 	{
-		if (v==SDL_KEYDOWN && k==SDLK_UP)
+		if (v==Stel_KEYDOWN && k==StelKey_UP)
 		{
 			if (Branch::current!=Branch::childs.begin()) --Branch::current;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (v==SDL_KEYDOWN && k==SDLK_DOWN)
+		if (v==Stel_KEYDOWN && k==StelKey_DOWN)
 		{
 			if (Branch::current!=--Branch::childs.end()) ++Branch::current;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
+		if (v==Stel_KEYDOWN && (k==StelKey_RIGHT || k==StelKey_RETURN))
 		{
 			if ((*Branch::current)->isEditable()) isEditing = true;
 			return true;
 		}
-		if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+		if (v==Stel_KEYDOWN && (k==StelKey_LEFT || k==StelKey_ESCAPE))
 		{
 			return false;
 		}
@@ -306,7 +306,7 @@ Boolean_item::Boolean_item(bool init_state, const wstring& _label, const wstring
 
 bool Boolean_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYDOWN && (k==SDLK_UP || k==SDLK_DOWN) )
+	if (v==Stel_KEYDOWN && (k==StelKey_UP || k==StelKey_DOWN) )
 	{
 		state = !state;
 		if (!onChangeCallback.empty()) onChangeCallback();
@@ -334,10 +334,10 @@ wstring Decimal::getString(void)
 
 bool Integer_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYUP) return false;
+	if (v==Stel_KEYUP) return false;
 	if (!numInput)
 	{
-		if (k==SDLK_UP)
+		if (k==StelKey_UP)
 		{
 			++value;
 			if (value>mmax)
@@ -348,7 +348,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (k==SDLK_DOWN)
+		if (k==StelKey_DOWN)
 		{
 			--value;
 			if (value<mmin)
@@ -360,8 +360,8 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
-			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_MINUS)
+		if (k==StelKey_0 || k==StelKey_1 || k==StelKey_2 || k==StelKey_3 || k==StelKey_4 || k==StelKey_5 ||
+			k==StelKey_6 || k==StelKey_7 || k==StelKey_8 || k==StelKey_9 || k==StelKey_MINUS)
 		{
 			// Start editing with numerical numbers
 			numInput = true;
@@ -376,7 +376,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 	}
 	else	// numInput == true
 	{
-		if (k==SDLK_RETURN)
+		if (k==StelKey_RETURN)
 		{
 			numInput=false;
 			wistringstream is(strInput);
@@ -387,7 +387,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_UP)
+		if (k==StelKey_UP)
 		{
 			wistringstream is(strInput);
 			is >> value;
@@ -397,7 +397,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
-		if (k==SDLK_DOWN)
+		if (k==StelKey_DOWN)
 		{
 			wistringstream is(strInput);
 			is >> value;
@@ -408,8 +408,8 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
-			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_MINUS)
+		if (k==StelKey_0 || k==StelKey_1 || k==StelKey_2 || k==StelKey_3 || k==StelKey_4 || k==StelKey_5 ||
+			k==StelKey_6 || k==StelKey_7 || k==StelKey_8 || k==StelKey_9 || k==StelKey_MINUS)
 		{
 			// The user was already editing
 			char c = k;
@@ -417,7 +417,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_ESCAPE)
+		if (k==StelKey_ESCAPE)
 		{
 			numInput=false;
 			return false;
@@ -436,10 +436,10 @@ wstring Integer_item::getString(void)
 
 bool Decimal_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYUP) return false;
+	if (v==Stel_KEYUP) return false;
 	if (!numInput)
 	{
-		if (k==SDLK_UP)
+		if (k==StelKey_UP)
 		{
 			value+=delta;
 			if (value>mmax)
@@ -450,7 +450,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (k==SDLK_DOWN)
+		if (k==StelKey_DOWN)
 		{
 			value-=delta;
 			if (value<mmin)
@@ -462,8 +462,8 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
-			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_PERIOD || k==SDLK_MINUS)
+		if (k==StelKey_0 || k==StelKey_1 || k==StelKey_2 || k==StelKey_3 || k==StelKey_4 || k==StelKey_5 ||
+			k==StelKey_6 || k==StelKey_7 || k==StelKey_8 || k==StelKey_9 || k==StelKey_PERIOD || k==StelKey_MINUS)
 		{
 			// Start editing with numerical numbers
 			numInput = true;
@@ -477,7 +477,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 	}
 	else	// numInput == true
 	{
-		if (k==SDLK_RETURN || k==SDLK_LEFT)
+		if (k==StelKey_RETURN || k==StelKey_LEFT)
 		{
 			numInput=false;
 			wistringstream is(strInput);
@@ -488,7 +488,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			return false;
 		}
 
-		if (k==SDLK_UP)
+		if (k==StelKey_UP)
 		{
 			wistringstream is(strInput);
 			is >> value;
@@ -498,7 +498,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
-		if (k==SDLK_DOWN)
+		if (k==StelKey_DOWN)
 		{
 			wistringstream wistemp(strInput);
 			wistemp >> value;
@@ -509,8 +509,8 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
-			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_PERIOD || k==SDLK_MINUS)
+		if (k==StelKey_0 || k==StelKey_1 || k==StelKey_2 || k==StelKey_3 || k==StelKey_4 || k==StelKey_5 ||
+			k==StelKey_6 || k==StelKey_7 || k==StelKey_8 || k==StelKey_9 || k==StelKey_PERIOD || k==StelKey_MINUS)
 		{
 			// The user was already editing
 			wchar_t c = (wchar_t)k;
@@ -518,7 +518,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 
-		if (k==SDLK_ESCAPE)
+		if (k==StelKey_ESCAPE)
 		{
 			numInput=false;
 			return false;
@@ -568,7 +568,7 @@ Time_item::~Time_item()
 
 bool Time_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYUP) return false;
+	if (v==Stel_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{
@@ -579,12 +579,12 @@ bool Time_item::onKey(Uint16 k, Uint8 v)
 	}
 	else
 	{
-		if (k==SDLK_ESCAPE)
+		if (k==StelKey_ESCAPE)
 		{
 			return false;
 		}
 
-		if (k==SDLK_RIGHT)
+		if (k==StelKey_RIGHT)
 		{
 			if (current_edit==y) current_edit=m;
 			else if (current_edit==m) current_edit=d;
@@ -594,7 +594,7 @@ bool Time_item::onKey(Uint16 k, Uint8 v)
 			else if (current_edit==s) current_edit=y;
 			return true;
 		}
-		if (k==SDLK_LEFT)
+		if (k==StelKey_LEFT)
 		{
 			if (current_edit==y) current_edit=s;
 			else if (current_edit==m) current_edit=y;
@@ -758,7 +758,7 @@ Time_zone_item::Time_zone_item(const string& zonetab_file, const wstring& _label
 
 bool Time_zone_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYUP) return false;
+	if (v==Stel_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{
@@ -767,18 +767,18 @@ bool Time_zone_item::onKey(Uint16 k, Uint8 v)
 	}
 	else
 	{
-		if (k==SDLK_ESCAPE)
+		if (k==StelKey_ESCAPE)
 		{
 			return false;
 		}
 
-		if (k==SDLK_RIGHT)
+		if (k==StelKey_RIGHT)
 		{
 			if (current_edit==&continents_names) current_edit = &continents[continents_names.getCurrent()];
 			else current_edit=&continents_names;
 			return true;
 		}
-		if (k==SDLK_LEFT)
+		if (k==StelKey_LEFT)
 		{
 			if (current_edit==&continents_names) return false;
 			else current_edit = &continents_names;
@@ -836,7 +836,7 @@ wstring Action_item::getString(void)
 
 bool Action_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYDOWN && k==SDLK_RETURN)
+	if (v==Stel_KEYDOWN && k==StelKey_RETURN)
 	{
 		// Call the callback if enter is pressed
 		if (!onChangeCallback.empty()) onChangeCallback();
@@ -864,7 +864,7 @@ wstring ActionConfirm_item::getString(void)
 
 bool ActionConfirm_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYDOWN && k==SDLK_RETURN)
+	if (v==Stel_KEYDOWN && k==StelKey_RETURN)
 	{
 		if (isConfirming)
 		{
@@ -879,7 +879,7 @@ bool ActionConfirm_item::onKey(Uint16 k, Uint8 v)
 			return true;
 		}
 	}
-	if (v==SDL_KEYDOWN && ( k==SDLK_ESCAPE || k==SDLK_LEFT) )
+	if (v==Stel_KEYDOWN && ( k==StelKey_ESCAPE || k==StelKey_LEFT) )
 	{
 		if (isConfirming)
 		{
@@ -913,7 +913,7 @@ Vector_item::~Vector_item()
 
 bool Vector_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==SDL_KEYUP) return false;
+	if (v==Stel_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{
@@ -923,19 +923,19 @@ bool Vector_item::onKey(Uint16 k, Uint8 v)
 	}
 	else
 	{
-		if (k==SDLK_ESCAPE)
+		if (k==StelKey_ESCAPE)
 		{
 			return false;
 		}
 
-		if (k==SDLK_RIGHT)
+		if (k==StelKey_RIGHT)
 		{
 			if (current_edit==a) current_edit=b;
 			else if (current_edit==b) current_edit=c;
 			else if (current_edit==c) current_edit=a;
 			return true;
 		}
-		if (k==SDLK_LEFT)
+		if (k==StelKey_LEFT)
 		{
 			if (current_edit==a) current_edit=c;
 			else if (current_edit==c) current_edit=b;
