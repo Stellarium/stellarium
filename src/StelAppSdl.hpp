@@ -36,6 +36,7 @@ public:
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
 
+	void resize(int w, int h);
 protected:
 
 	// Initialize openGL screen
@@ -54,7 +55,8 @@ private:
 
 	// SDL managment variables
 	SDL_Surface *Screen;// The Screen
-	SDL_Event	E;		// And Event Used In The Polling Process
+	Uint32	Vflags;		// Our Video Flags
+	int bbpMode;
 	Uint32	TickCount;	// Used For The Tick Counter
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
