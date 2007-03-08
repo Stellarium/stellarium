@@ -44,11 +44,15 @@ using namespace std;
 #include "SDL.h"
 #include "SDL_opengl.h"
 
+void StelAppSdl::resize(int w, int h) {
+  Screen = SDL_SetVideoMode(w, h, bbpMode, Vflags);
+  StelApp::resize(w,h);
+}
+
 void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
-    Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
-
+	StelAppSdl::bbpMode = bbpMode;
 #ifdef HAVE_SDL_MIXER_H
 
     // Init the SDL library, the VIDEO subsystem    
@@ -92,7 +96,7 @@ void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string i
 	//SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24);
 
     // We want a hardware surface
-    Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
+    Vflags = SDL_HWSURFACE|SDL_OPENGL|SDL_RESIZABLE;//|SDL_DOUBLEBUF;
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
     if (fullScreen) Vflags|=SDL_FULLSCREEN;
@@ -307,6 +311,7 @@ void StelAppSdl::startMainLoop()
     LastCount = SDL_GetTicks();
 
 	// Start the main loop
+	SDL_Event	E;		// And Event Used In The Polling Process
 	while(1)
 	{
 		if(SDL_PollEvent(&E))	// Fetch The First Event Of The Queue
@@ -325,7 +330,7 @@ void StelAppSdl::startMainLoop()
 					// Recalculate The OpenGL Scene Data For The New Window
 					if (E.resize.h && E.resize.w)
 					{
-						getCore()->getProjection()->windowHasBeenResized(E.resize.w,E.resize.h);
+						resize(E.resize.w,E.resize.h);
 					}
 					break;
 
