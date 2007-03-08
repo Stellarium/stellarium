@@ -66,21 +66,6 @@ AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
-dnl Check for SDL
-case "$host" in
-*-*-mingw32)
-;;
-*-*-cygwin)
-;;
-*)
-SDL_VERSION=1.2.0
-	AM_PATH_SDL($SDL_VERSION,:,AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-	LIBS="$LIBS $SDL_LIBS"
-;;
-esac
-
 # Check for libpng
 AC_CHECK_LIB(png, png_read_info,[AC_CHECK_HEADER(png.h,LIBS="$LIBS -lpng -lz",)], AC_MSG_ERROR(*** PNG library not found ***), -lz -lm)
 
@@ -89,7 +74,6 @@ AC_CHECK_LIB(jpeg, jpeg_read_header,[AC_CHECK_HEADER(jpeglib.h,LIBS="$LIBS -ljpe
 
 
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h,LIBS="$LIBS -lSDL_mixer",,[#include "SDL.h"])], AC_MSG_WARN(*** SDL_mixer library not found - audio features will be deactivated in Stellarium ***))
-
 AC_CHECK_HEADERS(byteswap.h SDL_mixer.h)
 
 # Fix a bug in recent autoconf versions..
@@ -161,8 +145,138 @@ esac
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm)
 
-AC_DEFINE_UNQUOTED(USE_SDL, 1, [Define whether SDL is to be used.])
 
+AC_ARG_WITH([qt42],
+             AC_HELP_STRING([--with-qt42=yes],
+                            [to specify that we will use QT-4.2.0 instead of SDL.]),
+             [WITHQT="$withval"],
+             [WITHQT=no])
+
+if test "${WITHQT}" != no ; then
+AC_DEFINE_UNQUOTED(USE_QT4, 1, [Define whether QT4 is to be used.])
+dnl ---------------------------------------------------------
+dnl ---------------------- QT stuff -------------------------
+dnl ---------------------------------------------------------
+AC_MSG_CHECKING(QT4.2 directory)
+QTDIR=xxx
+AC_ARG_WITH([qt-dir],
+             AC_HELP_STRING([--with-qt-dir=/path/to/Qt-4.2.0],
+                            [to specify the path to the Qt-4.2.0 directory.]),
+             [QTPATHS="$withval"],
+             [QTPATHS="/usr/local/Trolltech/Qt-4.2.0 /c/Qt/4.2.0 /opt/qt4"])
+
+for x in $QTPATHS; do
+    if test -d $x ; then
+       QTDIR="$x"
+    fi
+done
+if test $QTDIR = xxx ; then
+   AC_MSG_ERROR(Could not locate QT 4.2)
+fi
+AC_MSG_RESULT($QTDIR)
+host=`uname -a` # AC_CANONICAL_HOST is broken at the time of this writing.
+case $host in
+  MINGW32*)
+    AC_MSG_NOTICE(MinGW detected.)
+    QTLIBS="-L$QTDIR/lib -lopengl32 -lglu32 -lgdi32 -luser32 -lmingw32 -lqtmain -lQtOpenGL4 -lQtGui4 -lQtCore4 -mthreads -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc -Wl,-s -Wl,-s -Wl,-subsystem,windows"
+    QTINC="-I$QTDIR/include -I$QTDIR/include/QtCore -I$QTDIR/include/QtGui -I$QTDIR/include/QtOpenGL -DUNICODE -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DQT_NEEDS_QMAIN -frtti -fexceptions"
+    QTBIN="$QTDIR/bin"
+    ;;
+  *)
+    AC_MSG_NOTICE(I'm assuming this is Linux)
+    AC_PATH_XTRA
+    QTLIBS="-Wl,-rpath,$QTDIR/lib -L$QTDIR/lib -lQtGui -lQtOpenGL -lQtCore $X_LIBS -lX11 -lXext -lXmu -lXt -lXi $X_EXTRA_LIBS -lGLU -lGL -lpthread"
+    QTINC="-I$QTDIR/include -I$QTDIR/include/QtGui -I$QTDIR/include/QtCore -I$QTDIR/include/QtOpenGL $X_CFLAGS -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED"
+    QTBIN="$QTDIR/bin"
+    ;;
+esac
+
+LIBS="$LIBS $QTLIBS"
+INCLUDES="$INCLUDES $QTINC"
+PATH="$PATH:$QTBIN"
+CXXFLAGS="$CXXFLAGS $QTINC"
+
+# Now we check whether we can actually build a Qt app.
+cat > myqt.h << EOF
+#include <QObject>
+class Test : public QObject
+{
+Q_OBJECT
+public:
+  Test() {}
+  ~Test() {}
+public slots:
+  void receive() {}
+signals:
+  void send();
+};
+EOF
+
+cat > myqt.cpp << EOF
+#include "myqt.h"
+#include <QApplication>
+int main( int argc, char **argv )
+{
+  QApplication app( argc, argv );
+  Test t;
+  QObject::connect( &t, SIGNAL(send()), &t, SLOT(receive()) );
+}
+EOF
+
+AC_MSG_CHECKING(does moc work?)
+bnv_try_1="moc myqt.h -o moc_myqt.cpp"
+AC_TRY_EVAL(bnv_try_1)
+if test x"$ac_status" != x0; then
+   AC_MSG_ERROR(moc doesn't work)
+fi
+AC_MSG_RESULT(yes)
+AC_MSG_CHECKING(can I compile moc_myqt.cpp?)
+bnv_try_2="$CXX -c $CXXFLAGS -o moc_myqt.o moc_myqt.cpp"
+AC_TRY_EVAL(bnv_try_2)
+if test x"$ac_status" != x0; then
+   AC_MSG_ERROR(couldn't compile moc_myqt.cpp)
+fi
+AC_MSG_RESULT(yes)
+AC_MSG_CHECKING(can I compile myqt.cpp?)
+bnv_try_3="$CXX $QTINC -c $CXXFLAGS -o myqt.o myqt.cpp"
+AC_TRY_EVAL(bnv_try_3)
+if test x"$ac_status" != x0; then
+   AC_MSG_ERROR(couldn't compile myqt.cpp)
+fi
+AC_MSG_RESULT(yes)
+AC_MSG_CHECKING(can I link against QT?)
+nv_try_4="$CXX $LIBS -o myqt myqt.o moc_myqt.o"
+AC_TRY_EVAL(bnv_try_4)
+if test x"$ac_status" != x0; then
+   AC_MSG_ERROR(couldn't link)
+fi
+AC_MSG_RESULT(yes)
+
+AC_MSG_CHECKING(for mkoctfile)
+AC_TRY_EVAL(mkoctfile)
+if test x"$ac_status" != x0; then
+   AC_MSG_ERROR(mkoctfile is not in the path)
+fi
+AC_MSG_RESULT(yes)
+rm -f moc_myqt.cpp myqt.h myqt.cpp myqt.o myqt moc_myqt.o
+dnl ---------------------------------------------------------
+else
+	AC_DEFINE_UNQUOTED(USE_SDL, 0, [Define whether SDL is to be used.])
+	dnl Check for SDL
+	case "$host" in
+	*-*-mingw32)
+	;;
+	*-*-cygwin)
+	;;
+	*)
+	SDL_VERSION=1.2.0
+		AM_PATH_SDL($SDL_VERSION,:,AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
+		CFLAGS="$CFLAGS $SDL_CFLAGS"
+		CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+		LIBS="$LIBS $SDL_LIBS"
+	;;
+	esac
+fi
 
 AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/stelutils/iniparser/Makefile src/planetsephems/Makefile src/stelutils/Makefile data/Makefile doc/Makefile textures/Makefile landscapes/Makefile landscapes/guereins/Makefile landscapes/hurricane/Makefile landscapes/moon/Makefile landscapes/ocean/Makefile landscapes/trees/Makefile textures/constellation-art/Makefile textures/constellation-art/inuit/Makefile data/scripts/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile data/sky_cultures/chinese/Makefile data/sky_cultures/egyptian/Makefile data/sky_cultures/korean/Makefile data/sky_cultures/navajo/Makefile data/sky_cultures/lakota/Makefile data/sky_cultures/inuit/Makefile intl/Makefile po/Makefile.in m4/Makefile])
 

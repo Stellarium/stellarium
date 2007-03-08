@@ -279,10 +279,10 @@ typedef enum {
 	StelMod_RESERVED = 0x8000
 } StelMod;
 
-#define StelMod_CTRL	(StelMod_LCTRL|StelMod_RCTRL)
-#define StelMod_SHIFT	(StelMod_LSHIFT|StelMod_RSHIFT)
-#define StelMod_ALT	(StelMod_LALT|StelMod_RALT)
-#define StelMod_META	(StelMod_LMETA|StelMod_RMETA)
+#define StelMod_CTRL	((StelMod)(StelMod_LCTRL|StelMod_RCTRL))
+#define StelMod_SHIFT	((StelMod)(StelMod_LSHIFT|StelMod_RSHIFT))
+#define StelMod_ALT	((StelMod)(StelMod_LALT|StelMod_RALT))
+#define StelMod_META	((StelMod)(StelMod_LMETA|StelMod_RMETA))
 
 #define Stel_BUTTON_LEFT		1
 #define Stel_BUTTON_MIDDLE	2

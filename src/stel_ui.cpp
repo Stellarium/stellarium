@@ -220,6 +220,19 @@ void StelUI::init(const InitParser& conf)
 	setTitleObservatoryName(getTitleWithAltitude());
 }
 
+void StelUI::resize()
+{
+	Component::initScissor(StelApp::getInstance().screenW, StelApp::getInstance().screenH);
+	if (!desktop)
+		return;
+		
+	desktop->reshape(0,0,StelApp::getInstance().screenW,StelApp::getInstance().screenH);
+	top_bar_ctr->reshape(0,0,StelApp::getInstance().screenW,top_bar_ctr->getSizey());
+	bt_flag_ctr->setPos(0,StelApp::getInstance().screenH-25);
+	bt_flag_help_lbl->setPos(3,StelApp::getInstance().screenH-41-4);
+	bt_time_control_ctr->reshape(StelApp::getInstance().screenW-4*25-1, StelApp::getInstance().screenH-25, 4*25, 25);
+	bt_flag_time_control_lbl->setPos(StelApp::getInstance().screenW-210,StelApp::getInstance().screenH-41-4);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::show_message(wstring _message, int _time_out)

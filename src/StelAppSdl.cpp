@@ -262,7 +262,7 @@ void StelAppSdl::deInit()
 }
 
 //! Swap GL buffer, should be called only for special condition
-void StelAppSdl::swapGLBuffers() const
+void StelAppSdl::swapGLBuffers()
 {
 	SDL_GL_SwapBuffers();
 }

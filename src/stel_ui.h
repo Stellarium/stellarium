@@ -87,6 +87,9 @@ public:
 	void saveCurrentConfig(const string& confFile);
 	
 	void updateInfoSelectString(void);
+	
+	//! Resize the UI desktop to a new window size
+	void resize();
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
