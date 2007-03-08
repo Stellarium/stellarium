@@ -21,10 +21,6 @@
 
 // 20060728 Modified to not load bitmap glyphs due to improper rendering
 
-#ifdef GOOEY_MMGR
-#include "mmgr/nommgr.h"
-#endif
-
 #include <cstddef>
 #include <vector>
 #include <map>

@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "GLee.h"
 #include "stellarium.h"
 #include "vecmath.h"
 #include "SFont.hpp"

@@ -34,7 +34,7 @@ public:
 	virtual void deInit();
 	
 	//! Swap GL buffer, should be called only for special condition
-	virtual void swapGLBuffers() const;
+	virtual void swapGLBuffers();
 
 protected:
 

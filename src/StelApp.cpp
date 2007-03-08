@@ -53,7 +53,7 @@ StelApp* StelApp::singleton = NULL;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
-		maxfps(10000.f), fps(0), frame(0), timefr(0), timeBase(0),
+		maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), timeBase(0), ui(NULL),
 	 draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
@@ -255,7 +255,7 @@ void StelApp::init(void)
 	core->initProj(conf);
 
 	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
-	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
+	              screenW, screenH,
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 
 	// Stel Object Data Base manager
@@ -402,18 +402,6 @@ double StelApp::draw(int delta_time)
     // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	// (because ui can draw outside the main viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
-//	glDisable(GL_BLEND);
-//	glColor3f(0.f,0.f,0.f);
-//	set2DfullscreenProjection();
-//	glBegin(GL_QUADS);
-//	{
-//		glVertex2f(0,core->getProjection()->getViewportHeight());
-//		glVertex2f(core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
-//		glVertex2f(core->getProjection()->getViewportWidth(),0);
-//		glVertex2f(0,0);
-//	}
-//	glEnd();
-//	restoreFrom2DfullscreenProjection();
 
 	distorter->prepare();
 
@@ -443,6 +431,19 @@ double StelApp::draw(int delta_time)
 	ui->drawGui();
 
 	return squaredDistance;
+}
+
+/*************************************************************************
+ Call this when the size of the main window has changed
+*************************************************************************/
+void StelApp::resize(int w, int h)
+{
+	screenW = w;
+	screenH = h;
+	if (core && core->getProjection())
+		core->getProjection()->windowHasBeenResized(w,h);
+	if (ui)
+		ui->resize();
 }
 
 // Handle mouse clics

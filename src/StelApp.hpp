@@ -23,9 +23,9 @@
 #include <string>
 #include <cassert>
 #include <vector>
+#include "stellarium.h"
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
-#include "stellarium.h"
 
 using namespace std;
 
@@ -64,7 +64,7 @@ public:
 	virtual ~StelApp();
 
 	//! Initialize application and core
-	void init(void);
+	virtual void init(void);
 
 	//! @brief Get the StelApp singleton instance
 	//! @return the StelApp singleton instance
@@ -198,7 +198,7 @@ public:
 	virtual void deInit() = 0;
 	
 	//! Swap GL buffer, should be called only for special condition
-	virtual void swapGLBuffers() const = 0;
+	virtual void swapGLBuffers() = 0;
 	
 protected:
 	//! Update all object according to the delta time
@@ -231,16 +231,17 @@ protected:
 	//! Terminate the application
 	virtual void terminateApplication(void) = 0;
 	
+	//! Call this when the size of the main window has changed
+	void resize(int w, int h);
 private:
-
+	// Screen size
+	int screenW, screenH;
+	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const std::string& fileName, const std::string& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;
-
-	// Screen size
-	int screenW, screenH;
 
 	// The associated StelCore instance
 	StelCore* core;
