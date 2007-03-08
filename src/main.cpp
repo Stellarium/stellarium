@@ -36,7 +36,13 @@
 #endif
 
 #ifdef USE_SDL
-#include "StelAppSdl.hpp"
+ #include "StelAppSdl.hpp"
+#else
+ #ifdef USE_QT4
+  #include "StelAppQt4.hpp"
+ #else
+	#error You must define either USE_SDL or USE_QT4
+ #endif
 #endif
 
 using namespace std;
@@ -251,6 +257,9 @@ int main(int argc, char **argv)
 	StelApp* app = NULL;
 #ifdef USE_SDL
 	app = new StelAppSdl(CDIR, LDIR, DATA_ROOT);
+#endif
+#ifdef USE_QT4
+	app = new StelAppQt4(CDIR, LDIR, DATA_ROOT, argc, argv);
 #endif
 	app->init();
 

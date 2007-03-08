@@ -130,9 +130,11 @@ void Projector::init(const InitParser& conf)
 	}
 }
 
-void Projector::windowHasBeenResized(int width,int height) {
-  cout << "Projector::windowHasBeenResized(" << width << ',' << height << "): "
-          "not implemented yet" << endl;
+void Projector::windowHasBeenResized(int width,int height)
+{
+	// Maximize display when resized since it invalidates previous options anyway
+	setViewport(0,0,width,height,
+		0.5*width, 0.5*height,MY_MIN(viewport_xywh[2],viewport_xywh[3]));
 }
 
 Projector::Projector(const Vec4i& viewport, double _fov)

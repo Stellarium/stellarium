@@ -9873,15 +9873,15 @@ GLEE_EXTERN PFNGLXQUERYMAXSWAPBARRIERSSGIXPROC pglXQueryMaxSwapBarriersSGIX;
 #endif 
 
 /* GLX_SUN_get_transparent_index */
-
-#ifndef GLX_SUN_get_transparent_index
-#define GLX_SUN_get_transparent_index 1
-#define __GLEE_GLX_SUN_get_transparent_index 1
-/* Constants */
-typedef Status (APIENTRYP PFNGLXGETTRANSPARENTINDEXSUNPROC) (Display * dpy, Window overlay, Window underlay, long * pTransparentIndex);
-GLEE_EXTERN PFNGLXGETTRANSPARENTINDEXSUNPROC pglXGetTransparentIndexSUN;
-#define glXGetTransparentIndexSUN pglXGetTransparentIndexSUN
-#endif 
+//
+//#ifndef GLX_SUN_get_transparent_index
+//#define GLX_SUN_get_transparent_index 1
+//#define __GLEE_GLX_SUN_get_transparent_index 1
+///* Constants */
+//typedef Status (APIENTRYP PFNGLXGETTRANSPARENTINDEXSUNPROC) (Display * dpy, Window overlay, Window underlay, long * pTransparentIndex);
+//GLEE_EXTERN PFNGLXGETTRANSPARENTINDEXSUNPROC pglXGetTransparentIndexSUN;
+//#define glXGetTransparentIndexSUN pglXGetTransparentIndexSUN
+//#endif 
 
 /* GLX_3DFX_multisample */
 
