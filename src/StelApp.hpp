@@ -232,7 +232,10 @@ protected:
 	virtual void terminateApplication(void) = 0;
 	
 	//! Call this when the size of the main window has changed
-	virtual void resize(int w, int h);
+	void resize(int w, int h);
+
+	//! Call this when you want to make the window (not) resizable
+	virtual void setResizable(bool resizable) = 0;
 private:
 	// Screen size
 	int screenW, screenH;
