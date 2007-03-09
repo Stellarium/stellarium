@@ -183,6 +183,7 @@ bool restart_ui = false;
 
 void StelApp::setViewPortDistorterType(const string &type)
 {
+	if (type != getViewPortDistorterType()) setResizable(type == "none");
 	if (distorter)
 	{
 		delete distorter;

@@ -144,7 +144,10 @@ void StelAppQt4::saveScreenShot() const
 	cerr << "Broken" << endl;
 }
 
-
+void StelAppQt4::setResizable(bool resizable)
+{
+	cout << "please implement me" << endl;
+}
 
 
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)

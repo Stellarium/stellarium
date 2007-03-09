@@ -44,15 +44,22 @@ using namespace std;
 #include "SDL.h"
 #include "SDL_opengl.h"
 
-void StelAppSdl::resize(int w, int h) {
-  Screen = SDL_SetVideoMode(w, h, bbpMode, Vflags);
-  StelApp::resize(w,h);
+void StelAppSdl::setResizable(bool resizable)
+{
+	Uint32 Vflags = Screen->flags;
+	if (resizable) Vflags |= SDL_RESIZABLE;
+    else Vflags &= (~SDL_RESIZABLE);
+	Screen = SDL_SetVideoMode(Screen->w,Screen->h,
+						      Screen->format->BitsPerPixel,
+						      Vflags);
+	assert(Screen);
 }
 
-void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
+void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
+                            string iconFile)
 {
     Screen = NULL;
-	StelAppSdl::bbpMode = bbpMode;
+	Uint32	Vflags;		// Our Video Flags
 #ifdef HAVE_SDL_MIXER_H
 
     // Init the SDL library, the VIDEO subsystem    
@@ -330,6 +337,10 @@ void StelAppSdl::startMainLoop()
 					// Recalculate The OpenGL Scene Data For The New Window
 					if (E.resize.h && E.resize.w)
 					{
+						Screen = SDL_SetVideoMode(E.resize.w,E.resize.h,
+						                          Screen->format->BitsPerPixel,
+						                          Screen->flags);
+						assert(Screen);
 						resize(E.resize.w,E.resize.h);
 					}
 					break;
