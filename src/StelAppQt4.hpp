@@ -66,6 +66,7 @@ protected:
 	//! Terminate the application
 	virtual void terminateApplication(void);
 	
+	virtual void setResizable(bool resizable);
 private:
 
 	GLWidget* winOpenGL;

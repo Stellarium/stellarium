@@ -35,8 +35,6 @@ public:
 	
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
-
-	void resize(int w, int h);
 protected:
 
 	// Initialize openGL screen
@@ -48,6 +46,7 @@ protected:
 	//! Terminate the application
 	virtual void terminateApplication(void);
 	
+	virtual void setResizable(bool resizable);
 private:
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	// SDL related function and variables
@@ -55,8 +54,6 @@ private:
 
 	// SDL managment variables
 	SDL_Surface *Screen;// The Screen
-	Uint32	Vflags;		// Our Video Flags
-	int bbpMode;
 	Uint32	TickCount;	// Used For The Tick Counter
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
