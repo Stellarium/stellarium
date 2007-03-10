@@ -246,23 +246,51 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 		if (funcname=="comet_orbit")
 		{
 			// Read the orbital elements
-			const double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance");
-			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			const double eccentricity = pd.get_double(secname,"orbit_Eccentricity",0.0);
 			if (eccentricity >= 1.0) close_orbit = false;
-			const double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
-			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
-			const double arg_of_pericenter = pd.get_double(secname, "orbit_ArgOfPericenter")*M_PI/180.;
-			const double time_at_pericenter = pd.get_double(secname, "orbit_TimeAtPericenter");
-
+			double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance",-1e100);
+			double semi_major_axis;
+			if (pericenter_distance <= 0.0) {
+				semi_major_axis = pd.get_double(secname,"orbit_SemiMajorAxis",-1e100);
+				if (semi_major_axis <= -1e100) {
+					cerr << "ERROR: " << englishName
+					     << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis"
+					     << endl;
+					assert(0);
+				} else {
+					pericenter_distance = semi_major_axis * (1.0-eccentricity);
+				}
+			} else {
+				semi_major_axis = pericenter_distance / (1.0-eccentricity);
+			}
+			double time_at_pericenter = pd.get_double(secname,"orbit_TimeAtPericenter",-1e100);
+			if (time_at_pericenter <= -1e100) {
+				const double epoch = pd.get_double(secname,"orbit_Epoch",-1e100);
+				double mean_anomaly = pd.get_double(secname,"orbit_MeanAnomaly",-1e100);
+				if (epoch <= -1e100 || mean_anomaly <= -1e100) {
+					cerr << "ERROR: " << englishName
+					     << ": when you do not provide orbit_TimeAtPericenter, you must provide both "
+					        "orbit_Epoch and orbit_MeanAnomaly"
+					     << endl;
+					assert(0);
+				} else {
+					mean_anomaly *= (M_PI/180.0);
+					const double n = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
+					time_at_pericenter = epoch - mean_anomaly / n;
+				}
+			}
+			const double inclination = pd.get_double(secname,"orbit_Inclination")*(M_PI/180.0);
+			const double ascending_node = pd.get_double(secname,"orbit_AscendingNode")*(M_PI/180.0);
+			const double arg_of_pericenter = pd.get_double(secname,"orbit_ArgOfPericenter")*(M_PI/180.0);
 			CometOrbit *orb = new CometOrbit(pericenter_distance,
-			                     eccentricity,
-			                     inclination,
-			                     ascending_node,
-			                     arg_of_pericenter,
-                                 time_at_pericenter);
+			                                 eccentricity,
+			                                 inclination,
+			                                 ascending_node,
+			                                 arg_of_pericenter,
+			                                 time_at_pericenter);
 			orbits.push_back(orb);
 
-			posfunc = pos_func_type(orb, &CometOrbit::positionAtTimevInVSOP87Coordinates);
+			posfunc = pos_func_type(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
 		}
 
 		if (funcname=="sun_special")
