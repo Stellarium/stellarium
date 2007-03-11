@@ -207,19 +207,67 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 		if (funcname=="ell_orbit")
 		{
 			// Read the orbital elements
-			const double period = pd.get_double(secname, "orbit_Period");
 			const double epoch = pd.get_double(secname, "orbit_Epoch",J2000);
-			const double semi_major_axis = pd.get_double(secname, "orbit_SemiMajorAxis")/AU;
 			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
 			if (eccentricity >= 1.0) close_orbit = false;
-			const double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
-			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
-			const double long_of_pericenter = pd.get_double(secname, "orbit_LongOfPericenter")*M_PI/180.;
-			const double mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*M_PI/180.;
-
-			const double arg_of_pericenter = long_of_pericenter - ascending_node;
-			const double anomaly_at_epoch = mean_longitude - (arg_of_pericenter + ascending_node);
-			const double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
+			double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance",-1e100);
+			double semi_major_axis;
+			if (pericenter_distance <= 0.0) {
+				semi_major_axis = pd.get_double(secname,"orbit_SemiMajorAxis",-1e100);
+				if (semi_major_axis <= -1e100) {
+					cerr << "ERROR: " << englishName
+					     << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis"
+					     << endl;
+					assert(0);
+				} else {
+					semi_major_axis /= AU;
+					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
+					pericenter_distance = semi_major_axis * (1.0-eccentricity);
+				}
+			} else {
+				pericenter_distance /= AU;
+				semi_major_axis = (eccentricity == 1.0)
+				                ? 0.0 // parabolic orbits have no semi_major_axis
+				                : pericenter_distance / (1.0-eccentricity);
+			}
+			double mean_motion = pd.get_double(secname,"orbit_MeanMotion",-1e100);
+			double period;
+			if (mean_motion <= -1e100) {
+				period = pd.get_double(secname,"orbit_Period",-1e100);
+				if (period <= -1e100) {
+					mean_motion = (eccentricity == 1.0)
+					            ? 0.01720209895 * (1.5/pericenter_distance)
+					                            * sqrt(0.5/pericenter_distance)
+					            : (semi_major_axis > 0.0)
+					            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+					            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+					period = 2.0*M_PI/mean_motion;
+				} else {
+					mean_motion = 2.0*M_PI/period;
+				}
+			} else {
+				period = 2.0*M_PI/mean_motion;
+			}
+			const double inclination = pd.get_double(secname, "orbit_Inclination")*(M_PI/180.0);
+			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*(M_PI/180.0);
+			double arg_of_pericenter = pd.get_double(secname,"orbit_ArgOfPericenter",-1e100);
+			double long_of_pericenter;
+			if (arg_of_pericenter <= -1e100) {
+				long_of_pericenter = pd.get_double(secname,"orbit_LongOfPericenter")*(M_PI/180.0);
+				arg_of_pericenter = long_of_pericenter - ascending_node;
+			} else {
+            	arg_of_pericenter *= (M_PI/180.0);
+				long_of_pericenter = arg_of_pericenter + ascending_node;
+			}
+			double mean_anomaly = pd.get_double(secname,"orbit_MeanAnomaly",-1e100);
+            double mean_longitude;
+			if (mean_anomaly <= -1e100) {
+				mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*(M_PI/180.0);
+				mean_anomaly = mean_longitude - long_of_pericenter;
+			} else {
+            	mean_anomaly *= (M_PI/180.0);
+				mean_longitude = mean_anomaly + long_of_pericenter;
+			}
 
 			  // when the parent is the sun use ecliptic rathe than sun equator:
 			const double parent_rot_obliquity = parent->get_parent()
@@ -230,15 +278,15 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 			                                  : 0.0;
 			// Create an elliptical orbit
 			EllipticalOrbit *orb = new EllipticalOrbit(pericenter_distance,
-			                          eccentricity,
-			                          inclination,
-			                          ascending_node,
-			                          arg_of_pericenter,
-			                          anomaly_at_epoch,
-			                          period,
-			                          epoch,
-			                          parent_rot_obliquity,
-			                          parent_rot_asc_node);
+			                                           eccentricity,
+			                                           inclination,
+			                                           ascending_node,
+			                                           arg_of_pericenter,
+			                                           mean_anomaly,
+			                                           period,
+			                                           epoch,
+			                                           parent_rot_obliquity,
+			                                           parent_rot_asc_node);
 			orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
@@ -258,10 +306,31 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 					     << endl;
 					assert(0);
 				} else {
+					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
 					pericenter_distance = semi_major_axis * (1.0-eccentricity);
 				}
 			} else {
-				semi_major_axis = pericenter_distance / (1.0-eccentricity);
+				semi_major_axis = (eccentricity == 1.0)
+				                ? 0.0 // parabolic orbits have no semi_major_axis
+				                : pericenter_distance / (1.0-eccentricity);
+			}
+			double mean_motion = pd.get_double(secname,"orbit_MeanMotion",-1e100);
+			double period;
+			if (mean_motion <= -1e100) {
+				period = pd.get_double(secname,"orbit_Period",-1e100);
+				if (period <= -1e100) {
+					mean_motion = (eccentricity == 1.0)
+					            ? 0.01720209895 * (1.5/pericenter_distance)
+					                            * sqrt(0.5/pericenter_distance)
+					            : (semi_major_axis > 0.0)
+					            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+					            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+					period = 2.0*M_PI/mean_motion;
+				} else {
+					mean_motion = 2.0*M_PI/period;
+				}
+			} else {
+				period = 2.0*M_PI/mean_motion;
 			}
 			double time_at_pericenter = pd.get_double(secname,"orbit_TimeAtPericenter",-1e100);
 			if (time_at_pericenter <= -1e100) {
@@ -275,8 +344,8 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 					assert(0);
 				} else {
 					mean_anomaly *= (M_PI/180.0);
-					const double n = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
-					time_at_pericenter = epoch - mean_anomaly / n;
+					const double mean_motion = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
+					time_at_pericenter = epoch - mean_anomaly / mean_motion;
 				}
 			}
 			const double inclination = pd.get_double(secname,"orbit_Inclination")*(M_PI/180.0);
@@ -287,7 +356,8 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 			                                 inclination,
 			                                 ascending_node,
 			                                 arg_of_pericenter,
-			                                 time_at_pericenter);
+			                                 time_at_pericenter,
+			                                 mean_motion);
 			orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
@@ -429,8 +499,8 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 		    pd.get_double(secname, "rot_periode", pd.get_double(secname, "orbit_Period", 24.))/24.,
 		    pd.get_double(secname, "rot_rotation_offset",0.),
 		    pd.get_double(secname, "rot_epoch", J2000),
-		    pd.get_double(secname, "rot_obliquity",0.)*M_PI/180.,
-		    pd.get_double(secname, "rot_equator_ascending_node",0.)*M_PI/180.,
+		    pd.get_double(secname, "rot_obliquity",0.)*(M_PI/180.0),
+		    pd.get_double(secname, "rot_equator_ascending_node",0.)*(M_PI/180.0),
 		    pd.get_double(secname, "rot_precession_rate",0.)*M_PI/(180*36525),
 		    pd.get_double(secname, "sidereal_period",0.) );
 

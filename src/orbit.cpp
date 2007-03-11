@@ -17,7 +17,6 @@
 using namespace std;
 
 #define EPSILON 1e-10
-#define GAUSS_GRAV_CONST (0.01720209895*0.01720209895)
 
 #if defined(_MSC_VER)
 // cuberoot is missing in VC++ !?
@@ -25,10 +24,9 @@ using namespace std;
 #endif
 
 static
-void InitHyp(double q,double e,double dt,double &a1,double &a2) {
+void InitHyp(double q,double n,double e,double dt,double &a1,double &a2) {
   const double a = q/(e-1.0);
-  const double Mp = sqrt(GAUSS_GRAV_CONST/a)/a;
-  const double M = Mp * dt;
+  const double M = n * dt;
   double H = M;
   for (;;) { // Newton
     const double Hp = H;
@@ -41,9 +39,8 @@ void InitHyp(double q,double e,double dt,double &a1,double &a2) {
 }
 
 static
-void InitPar(double q,double dt,double &a1,double &a2) {
-  const double Ap=(1.5/q)*sqrt(0.5*GAUSS_GRAV_CONST/q);
-  const double A = Ap*dt;
+void InitPar(double q,double n,double dt,double &a1,double &a2) {
+  const double A = n*dt;
   const double h = sqrt(A*A+1.0);
   double c = cbrt(fabs(A)+h);
   c = c*c;
@@ -53,10 +50,9 @@ void InitPar(double q,double dt,double &a1,double &a2) {
 }
 
 static
-void InitEll(double q,double e,double dt,double &a1,double &a2) {
+void InitEll(double q,double n,double e,double dt,double &a1,double &a2) {
   const double a = q/(1.0-e);
-  const double Mp = sqrt(GAUSS_GRAV_CONST/a)/a;
-  double M = fmod(Mp*dt,2*M_PI);
+  double M = fmod(n*dt,2*M_PI);
   if (M < 0.0) M += 2.0*M_PI;
   double H = M;
   for (;;) { // Newton
@@ -91,9 +87,9 @@ void Init3D(double i,double Omega,double o,double a1,double a2,
 void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
   JD -= t0;
   double a1,a2;
-  if (e < 1.0) InitEll(q,e,JD,a1,a2);
-  else if (e > 1.0) InitHyp(q,e,JD,a1,a2);
-  else InitPar(q,JD,a1,a2);
+  if (e < 1.0) InitEll(q,n,e,JD,a1,a2);
+  else if (e > 1.0) InitHyp(q,n,e,JD,a1,a2);
+  else InitPar(q,n,JD,a1,a2);
   Init3D(i,Om,o,a1,a2,v[0],v[1],v[2]);
 }
 
