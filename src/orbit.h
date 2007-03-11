@@ -86,9 +86,11 @@ public:
              double inclination,
              double ascendingNode,
              double arg_of_perhelion,
-             double time_at_perihelion)
+             double time_at_perihelion,
+             double mean_motion)
      :q(pericenter_distance),e(eccentricity),i(inclination),
-      Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion) {}
+      Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion),
+      n(mean_motion) {}
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
   void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
@@ -99,6 +101,7 @@ private:
   const double Om;
   const double o;
   const double t0;
+  const double n;
 };
 
 
