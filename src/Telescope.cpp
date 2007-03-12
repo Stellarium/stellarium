@@ -19,6 +19,7 @@
 
 #include "Telescope.hpp"
 #include "StelUtils.hpp"
+#include "Translator.hpp"
 
 #include <sstream>
 #include <iostream>
@@ -225,13 +226,20 @@ Telescope::Telescope(const string &name) : name(name) {
 }
 
 wstring Telescope::getInfoString(const Navigator *nav) const {
-  const Vec3d equatorial_pos = get_earth_equ_pos(nav);
-  double ra,dec;
-  StelUtils::rect_to_sphe(&ra,&dec,equatorial_pos);
+  const Vec3d j2000_pos = getObsJ2000Pos(nav);
+  double dec_j2000, ra_j2000;
+  StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+  const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+  double dec_equ, ra_equ;
+  StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   std::wostringstream oss;
   oss << nameI18n << endl
-      << "RA/DE: " << StelUtils::printAngleHMS(ra)
-      << "/" << StelUtils::printAngleDMS(dec) << endl;
+      << _("J2000") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_j2000,false)
+      << L"/" << StelUtils::printAngleDMS(dec_j2000,false) << endl
+      << _("Equ of date") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_equ)
+      << L"/" << StelUtils::printAngleDMS(dec_equ);
   return oss.str();
 }
 
