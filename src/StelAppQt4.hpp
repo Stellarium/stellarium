@@ -27,6 +27,7 @@
 class StelAppQt4 : public StelApp
 {
 	friend class GLWidget;
+	friend class StelMainWindow;
 public:
 	StelAppQt4(const string& configDir, const string& localeDir, const string& dataRootDir, int argc, char **argv);
 	virtual ~StelAppQt4();
@@ -68,7 +69,7 @@ protected:
 	
 	virtual void setResizable(bool resizable);
 private:
-	class QMainWindow* mainWindow;
+	class StelMainWindow* mainWindow;
 	GLWidget* winOpenGL;
 };
 

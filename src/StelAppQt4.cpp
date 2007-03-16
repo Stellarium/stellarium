@@ -35,6 +35,16 @@ using namespace std;
 #include <QtOpenGL>
 #include <QMainWindow>
 
+class StelMainWindow : public QMainWindow
+{
+public:
+	StelMainWindow(class StelAppQt4* app) : stelApp(app) {;}
+	void keyPressEvent(QKeyEvent*);
+	void keyReleaseEvent(QKeyEvent*);
+private:
+	class StelAppQt4* stelApp;
+};
+
 class GLWidget : public QGLWidget
 {
 public:
@@ -48,8 +58,6 @@ public:
     void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent*);
-	void keyPressEvent(QKeyEvent*);
-	void keyReleaseEvent(QKeyEvent*);
 	QTime qtime;
 private:
     int timerId;
@@ -92,15 +100,11 @@ void StelAppQt4::terminateApplication(void)
 
 // Set mouse cursor display
 void StelAppQt4::showCursor(bool b)
-{
-	;
-}
+{;}
 
 // DeInit SDL related stuff
 void StelAppQt4::deInit()
-{
-;
-}
+{;}
 
 //! Swap GL buffer, should be called only for special condition
 void StelAppQt4::swapGLBuffers()
@@ -124,7 +128,7 @@ void StelAppQt4::startMainLoop()
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
 	}
 	
-	QMainWindow mainWin;
+	StelMainWindow mainWin(this);
 	mainWindow = &mainWin;
 	
 	GLWidget openGLWin(&mainWin, this);
@@ -153,9 +157,16 @@ void StelAppQt4::saveScreenShot() const
 
 void StelAppQt4::setResizable(bool resizable)
 {
-	cout << "please implement me" << endl;
+	if (resizable)
+	{
+		mainWindow->setMinimumSize(300,200);
+		mainWindow->setMaximumSize(10000,10000);
+	}
+	else
+	{
+		mainWindow->setFixedSize(mainWindow->size());
+	}
 }
-
 
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
@@ -391,12 +402,12 @@ StelKey qtKeyToStelKey(Qt::Key k)
 	return StelKey_UNKNOWN; 
 }
 
-void GLWidget::keyPressEvent(QKeyEvent* event)
+void StelMainWindow::keyPressEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 }
 
-void GLWidget::keyReleaseEvent(QKeyEvent* event)
+void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
 }
