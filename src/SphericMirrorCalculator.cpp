@@ -21,71 +21,120 @@
 #include "SphericMirrorCalculator.hpp"
 #include "InitParser.hpp"
 
-// This code slow and ugly and I know it.
-// Yet it might be useful for playing around.
-
-SphericMirrorCalculator::SphericMirrorCalculator(void) {
-  setParams(Vec3d(0,-0.2,1.0),Vec3d(0,0,2.0),0.25,2.5,0.125,0.8,true,false);
-}
-
-void SphericMirrorCalculator::init(const InitParser &conf) {
-  const Vec3d projector_position(
-                conf.get_double("spheric_mirror","projector_position_x",0.0),
-                conf.get_double("spheric_mirror","projector_position_z",-0.2),
-                conf.get_double("spheric_mirror","projector_position_y",1.0));
+SphericMirrorCalculator::SphericMirrorCalculator(const InitParser &conf) {
   const Vec3d mirror_position(
                 conf.get_double("spheric_mirror","mirror_position_x",0.0),
-                conf.get_double("spheric_mirror","mirror_position_z",0.0),
-                conf.get_double("spheric_mirror","mirror_position_y",2.0));
+                conf.get_double("spheric_mirror","mirror_position_y",2.0),
+                conf.get_double("spheric_mirror","mirror_position_z",0.0));
   const double mirror_radius(conf.get_double("spheric_mirror",
                                              "mirror_radius",0.25));
+  DomeCenter = mirror_position * (-1.0/mirror_radius);
   const double dome_radius(conf.get_double("spheric_mirror",
                                            "dome_radius",2.5));
-  const double zenith_y(conf.get_double("spheric_mirror",
-                                        "zenith_y",0.125));
-  const double scaling_factor(conf.get_double("spheric_mirror",
-                                              "scaling_factor",0.8));
-  const double flip_horz(conf.get_boolean("spheric_mirror",
-                                          "flip_horz",true));
-  const double flip_vert(conf.get_boolean("spheric_mirror",
-                                          "flip_vert",false));
-  setParams(projector_position,
-            mirror_position,
-            mirror_radius,
-            dome_radius,
-            zenith_y,
-            scaling_factor,
-            flip_horz,
-            flip_vert);
-}
-
-void SphericMirrorCalculator::setParams(const Vec3d &projector_position,
-                                        const Vec3d &mirror_position,
-                                        double mirror_radius,
-                                        double dome_radius,
-                                        double zenith_y,
-                                        double scaling_factor,
-                                        const bool flip_horz,
-                                        const bool flip_vert) {
-  DomeCenter = (- mirror_position) * (1.0/mirror_radius);
   DomeRadius = dome_radius / mirror_radius;
+  const Vec3d projector_position(
+                conf.get_double("spheric_mirror","projector_position_x",0.0),
+                conf.get_double("spheric_mirror","projector_position_y",1.0),
+                conf.get_double("spheric_mirror","projector_position_z",-0.2));
   P = (projector_position - mirror_position) * (1.0/mirror_radius);
-  PP = P.dot(P);
+  PP = P.lengthSquared();
   lP = sqrt(PP);
   p = P * (1.0/lP);
-  const double zoom_factor = sqrt(PP-1.0) * scaling_factor;
-  horz_zoom_factor = flip_horz ? (-zoom_factor) : zoom_factor;
-  vert_zoom_factor = flip_vert ? (-zoom_factor) : zoom_factor;
-  cos_alpha = 1.0;
-  sin_alpha = 0.0;
-  double x,y;
-    // before calling transform() horz_zoom_factor,vert_zoom_factor,
-    // cos_alpha,sin_alpha must already be initialized
-  transform(Vec3d(0,1,0),x,y);
-  double alpha = atan(y/zoom_factor) - atan(zenith_y/zoom_factor);
-  cos_alpha = cos(alpha);
-  sin_alpha = sin(alpha);
+  double image_distance_div_height
+    = conf.get_double("spheric_mirror","image_distance_div_height",-1e100);
+  if (image_distance_div_height <= -1e100) {
+    const double scaling_factor = conf.get_double("spheric_mirror",
+                                                "scaling_factor",
+                                                0.8);
+    image_distance_div_height = sqrt(PP-1.0) * scaling_factor;
+    cout << "INFO: spheric_mirror:scaling_factor is deprecated "
+            "and may be removed in future versions." << endl
+         << "      In order to keep your setup unchanged, please use "
+            "spheric_mirror:image_distance_div_height = "
+         << image_distance_div_height << " instead" << endl;
+  }
+  horz_zoom_factor = conf.get_boolean("spheric_mirror","flip_horz",true)
+                   ? (-image_distance_div_height)
+                   : image_distance_div_height;
+  vert_zoom_factor = conf.get_boolean("spheric_mirror","flip_vert",false)
+                   ? (-image_distance_div_height)
+                   : image_distance_div_height;
+
+  const double alpha = conf.get_double("spheric_mirror","projector_alpha",0.0)
+                     * (M_PI/180);
+  const double phi = conf.get_double("spheric_mirror","projector_phi",0.0)
+                   * (M_PI/180);
+  double delta = conf.get_double("spheric_mirror","projector_delta",-1e100);
+  if (delta <= -1e100) {
+    double x,y;
+      // before calling transform() horz_zoom_factor,vert_zoom_factor,
+      // alpha_delta_phi must already be initialized
+    initRotMatrix(0.0,0.0,0.0);
+    transform(Vec3d(0,0,1),x,y);
+    const double zenith_y(conf.get_double("spheric_mirror","zenith_y",0.125));
+    delta = -atan(y/image_distance_div_height)
+          + atan(zenith_y/image_distance_div_height);
+    cout << "INFO: spheric_mirror:zenith_y is deprecated "
+            "and may be removed in future versions." << endl
+         << "      In order to keep your setup unchanged, please use "
+            "spheric_mirror:projector_delta = "
+         << (delta*(180.0/M_PI)) << " instead" << endl;
+  } else {
+    delta *= (M_PI/180);
+  }
+  initRotMatrix(alpha,delta,phi);
 }
+
+void SphericMirrorCalculator::initRotMatrix(double alpha,
+                                            double delta,
+                                            double phi) {
+  const double ca = cos(alpha);
+  const double sa = sin(alpha);
+  const double cd = cos(delta);
+  const double sd = sin(delta);
+  const double cp = cos(phi);
+  const double sp = sin(phi);
+
+  alpha_delta_phi[0] =   ca*cp - sa*sd*sp;
+  alpha_delta_phi[1] = - sa*cp - ca*sd*sp;
+  alpha_delta_phi[2] =            - cd*sp;
+
+  alpha_delta_phi[3] =           sa*cd;
+  alpha_delta_phi[4] =           ca*cd;
+  alpha_delta_phi[5] =            - sd;
+  
+  alpha_delta_phi[6] = - ca*sp - sa*sd*cp;
+  alpha_delta_phi[7] =   sa*sp - ca*sd*cp;
+  alpha_delta_phi[8] =            - cd*cp;
+/*
+    // check if alpha_delta_phi is an orthogonal matrix:
+  for (int i=0;i<3;i++) {
+    for (int j=0;j<3;j++) {
+      double prod0 = 0;
+      double prod1 = 0;
+      for (int k=0;k<3;k++) {
+        prod0 += alpha_delta_phi[3*i+k]*alpha_delta_phi[3*j+k];
+        prod1 += alpha_delta_phi[i+3*k]*alpha_delta_phi[j+3*k];
+      }
+      if (i==j) {
+        prod0 -= 1.0;
+        prod1 -= 1.0;
+      }
+      if (fabs(prod0)>1e-10) {
+        cout << "i: " << i << ", j: " << j
+             << ", prod0: " << prod0 << ", prod1: " << prod1 << endl;
+        assert(0);
+      }
+      if (fabs(prod1)>1e-10) {
+        cout << "i: " << i << ", j: " << j
+             << ", prod0: " << prod0 << ", prod1: " << prod1 << endl;
+        assert(0);
+      }
+    }
+  }
+*/
+}
+
 
 bool SphericMirrorCalculator::transform(const Vec3d &v,
                                         double &xb,double &yb) const {
@@ -99,6 +148,8 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
   double t_min = 0;
   double t_max = 1;
   Vec3d Q;
+    // more iterations would be more accurate,
+    // but I keep this number of iterations for exact zenith_y compatibility:
   for (int i=0;i<10;i++) {
     const double t = 0.5 * (t_min+t_max);
     Q = p*t + s*(1.0-t);
@@ -114,11 +165,15 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
     }
   }
   Vec3d x = Q-P;
-  const double zb = (cos_alpha*x[2] + sin_alpha*x[1]);
 
     // rotate
-  xb = horz_zoom_factor * x[0]/zb;
-  yb = vert_zoom_factor * (cos_alpha*x[1] - sin_alpha*x[2])/zb;
+  const double zb =
+    alpha_delta_phi[1]*x[0] + alpha_delta_phi[4]*x[1] + alpha_delta_phi[7]*x[2];
+  xb = (horz_zoom_factor/zb) *
+   (alpha_delta_phi[0]*x[0] + alpha_delta_phi[3]*x[1] + alpha_delta_phi[6]*x[2]);
+  yb = (vert_zoom_factor/zb) *
+   (alpha_delta_phi[2]*x[0] + alpha_delta_phi[5]*x[1] + alpha_delta_phi[8]*x[2]);
+
   return rval;
 }
 
@@ -126,9 +181,9 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
 bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
   x /= horz_zoom_factor;
   y /= vert_zoom_factor;
-  v[0] = x;
-  v[1] =   y*cos_alpha + sin_alpha;
-  v[2] =  -y*sin_alpha + cos_alpha;
+  v[0] = alpha_delta_phi[0]*x + alpha_delta_phi[1] + alpha_delta_phi[2]*y;
+  v[1] = alpha_delta_phi[3]*x + alpha_delta_phi[4] + alpha_delta_phi[5]*y;
+  v[2] = alpha_delta_phi[6]*x + alpha_delta_phi[7] + alpha_delta_phi[8]*y;
   const double vv = v.dot(v);
   const double Pv = P.dot(v);
   const double discr = Pv*Pv-(P.dot(P)-1.0)*vv;
@@ -154,17 +209,17 @@ bool SphericMirrorCalculator::retransform(double x,double y,
   y /= vert_zoom_factor;
   const double dy = 1.0/vert_zoom_factor;
 
-  v[0] = x;
-  v[1] =   y*cos_alpha + sin_alpha;
-  v[2] =  -y*sin_alpha + cos_alpha;
+  v[0] = alpha_delta_phi[0]*x + alpha_delta_phi[1] + alpha_delta_phi[2]*y;
+  v[1] = alpha_delta_phi[3]*x + alpha_delta_phi[4] + alpha_delta_phi[5]*y;
+  v[2] = alpha_delta_phi[6]*x + alpha_delta_phi[7] + alpha_delta_phi[8]*y;
 
-  v_x[0] = dx;
-  v_x[1] = 0;
-  v_x[2] = 0;
+  v_x[0] = alpha_delta_phi[0]*dx;
+  v_x[1] = alpha_delta_phi[3]*dx;
+  v_x[2] = alpha_delta_phi[6]*dx;
 
-  v_y[0] = 0;
-  v_y[1] =  dy*cos_alpha;
-  v_y[2] = -dy*sin_alpha;
+  v_y[0] = alpha_delta_phi[2]*dy;
+  v_y[1] = alpha_delta_phi[5]*dy;
+  v_y[2] = alpha_delta_phi[8]*dy;
 
   const double vv = v.dot(v);
   const double vv_x = 2.0*v.dot(v_x);
