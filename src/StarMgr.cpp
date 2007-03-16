@@ -1510,7 +1510,6 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
     star_scale = starScale * starsFader.getInterstate();
     const float names_brightness = names_fader.getInterstate() 
                                  * starsFader.getInterstate();
-    
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     

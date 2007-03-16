@@ -33,6 +33,7 @@ using namespace std;
 #include <QtGui/QImage>
 #include <QtGui/QApplication>
 #include <QtOpenGL>
+#include <QMainWindow>
 
 class GLWidget : public QGLWidget
 {
@@ -71,10 +72,10 @@ void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string i
 {
 	cerr << "StelAppQt4::initOpenGL" << endl;
 	if (fullScreen)
-		winOpenGL->showFullScreen();
+		mainWindow->showFullScreen();
 	else
-		winOpenGL->resize(w, h);
-	winOpenGL->setWindowIcon(QIcon(iconFile.c_str()));
+		mainWindow->resize(w, h);
+	mainWindow->setWindowIcon(QIcon(iconFile.c_str()));
 }
 
 string StelAppQt4::getVideoModeList(void) const
@@ -123,16 +124,22 @@ void StelAppQt4::startMainLoop()
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
 	}
 	
-	GLWidget widget(0, this);
-	widget.show();
-	winOpenGL = &widget;
+	QMainWindow mainWin;
+	mainWindow = &mainWin;
+	
+	GLWidget openGLWin(&mainWin, this);
+	winOpenGL = &openGLWin;
+	
+	mainWin.setCentralWidget(&openGLWin);
+	openGLWin.show();
+	mainWin.show();
+	
 
-	QDockWidget win("Stellarium Config", &widget);
-	win.setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable);
-	win.show();
-	win.resize(200,200);
-	//win.setAllowedAreas();
-	//win.setFloating(true);
+	QDockWidget* configWidget = new QDockWidget("Stellarium Config", &mainWin);
+	configWidget->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable);
+	configWidget->show();
+	configWidget->resize(200,200);
+	mainWin.addDockWidget(Qt::LeftDockWidgetArea, configWidget);
 
 	StelApp::init();
 
@@ -156,7 +163,6 @@ GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::de
 	// make openGL context current
 	makeCurrent();
 	setAutoBufferSwap(false);
-	setWindowTitle(tr("Stellarium QT4"));
 	timerId = startTimer(10);
 	qtime.start();
 }
@@ -175,15 +181,17 @@ void GLWidget::initializeGL()
 
 void GLWidget::resizeGL(int w, int h)
 {
-	cerr << "GLWidget::resizeGL(" << w << "x" << h << ")" << endl;
+	//cerr << "GLWidget::resizeGL(" << w << "x" << h << ")" << endl;
 	stelApp->resize(w, h);
 }
 
 void GLWidget::paintGL()
 {
-	//cerr << stelApp->getCore()->getProjection()->getFov() << endl;
 	int dt = qtime.elapsed()-previousTime;
 	previousTime = qtime.elapsed();
+	
+	if (dt<0)	// This fix the star scale bug!!
+		return;
 	stelApp->update(dt);
 	stelApp->draw(dt);
 	swapBuffers();
