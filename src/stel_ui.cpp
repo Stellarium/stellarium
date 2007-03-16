@@ -228,6 +228,9 @@ void StelUI::resize()
 		
 	desktop->reshape(0,0,StelApp::getInstance().screenW,StelApp::getInstance().screenH);
 	top_bar_ctr->reshape(0,0,StelApp::getInstance().screenW,top_bar_ctr->getSizey());
+	top_bar_fps_lbl->setPos(StelApp::getInstance().screenW-100,1);
+	top_bar_fov_lbl->setPos(StelApp::getInstance().screenW-220,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
 	bt_flag_ctr->setPos(0,StelApp::getInstance().screenH-25);
 	bt_flag_help_lbl->setPos(3,StelApp::getInstance().screenH-41-4);
 	bt_time_control_ctr->reshape(StelApp::getInstance().screenW-4*25-1, StelApp::getInstance().screenH-25, 4*25, 25);

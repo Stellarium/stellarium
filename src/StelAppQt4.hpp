@@ -68,7 +68,7 @@ protected:
 	
 	virtual void setResizable(bool resizable);
 private:
-
+	class QMainWindow* mainWindow;
 	GLWidget* winOpenGL;
 };
 
