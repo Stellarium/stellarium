@@ -27,16 +27,7 @@ class InitParser;
 
 class SphericMirrorCalculator {
 public:
-  SphericMirrorCalculator(void);
-  void init(const InitParser &conf);
-  void setParams(const Vec3d &projector_position,
-                 const Vec3d &mirror_position,
-                 double mirror_radius,
-                 double dome_radius,
-                 double zenith_y,
-                 double scaling_factor,
-                 bool flip_horz,
-                 bool flip_vert);
+  SphericMirrorCalculator(const InitParser &conf);
   double getHorzZoomFactor(void) const {return horz_zoom_factor;}
   double getVertZoomFactor(void) const {return vert_zoom_factor;}
   bool transform(const Vec3d &v,double &x,double &y) const;
@@ -44,15 +35,17 @@ public:
     // for calculating partial derivatives:
   bool retransform(double x,double y,Vec3d &v,Vec3d &v_x,Vec3d &v_y) const;
 private:
+  void initRotMatrix(double alpha,double delta,double phi);
+private:
   Vec3d P;          // projector
   Vec3d DomeCenter;
   double DomeRadius;
   double PP;
   double lP;
   Vec3d p;
-  double cos_alpha,sin_alpha;
   double horz_zoom_factor;
   double vert_zoom_factor;
+  double alpha_delta_phi[9];
 };
 
 #endif
