@@ -101,8 +101,7 @@ ViewportDistorterFisheyeToSphericMirror
      original_viewport_center(prj->getViewportCenter()),
      original_viewport_fov_diameter(prj->getViewportFovDiameter()),
      texture_point_array(0) {
-  SphericMirrorCalculator calc;
-  calc.init(conf);
+  SphericMirrorCalculator calc(conf);
 
   double distorter_max_fov
     = conf.get_double("spheric_mirror","distorter_max_fov",175.0);
@@ -272,16 +271,15 @@ ViewportDistorterFisheyeToSphericMirror
                        (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
                        (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
                        v,v_x,v_y);
-      double h = v[1];
-      v[1] = v[2];
-      v[2] = -h;
+//      double h = v[1];
+//      v[1] = v[2];
 
       rc &= prj->getMapping().forward(v);
       const float x = viewport_center[0] + v[0] * view_scaling_factor;
       const float y = viewport_center[1] + v[1] * view_scaling_factor;
       vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
 
-        // sharp image up to the border of the fisheye image, an the cost of
+        // sharp image up to the border of the fisheye image, at the cost of
         // accepting clamping artefacts. You can get rid of the clamping
         // artefacts by specifying a viewport size a little less then
         // (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
