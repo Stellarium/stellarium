@@ -78,12 +78,13 @@ StelAppQt4::~StelAppQt4()
 
 void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
-	cerr << "StelAppQt4::initOpenGL" << endl;
-	if (fullScreen)
-		mainWindow->showFullScreen();
-	else
-		mainWindow->resize(w, h);
 	mainWindow->setWindowIcon(QIcon(iconFile.c_str()));
+	mainWindow->resize(w, h);
+	if (fullScreen)
+	{
+		mainWindow->showFullScreen();
+		winOpenGL->setGeometry(0,0,1600,1200);
+	}
 }
 
 string StelAppQt4::getVideoModeList(void) const
@@ -136,17 +137,15 @@ void StelAppQt4::startMainLoop()
 	
 	mainWin.setCentralWidget(&openGLWin);
 	openGLWin.show();
-	mainWin.show();
-	
 
-	QDockWidget* configWidget = new QDockWidget("Stellarium Config", &mainWin);
-	configWidget->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable);
-	configWidget->show();
-	configWidget->resize(200,200);
-	mainWin.addDockWidget(Qt::LeftDockWidgetArea, configWidget);
+//	QDockWidget* configWidget = new QDockWidget("Stellarium Config", &mainWin);
+//	configWidget->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable);
+//	configWidget->resize(200,200);
+//	mainWin.addDockWidget(Qt::LeftDockWidgetArea, configWidget);
 
 	StelApp::init();
-
+	mainWin.show();
+	
 	app.exec();
 }
 
@@ -404,6 +403,14 @@ StelKey qtKeyToStelKey(Qt::Key k)
 
 void StelMainWindow::keyPressEvent(QKeyEvent* event)
 {
+	if ((Qt::Key)event->key()==Qt::Key_F1)
+	{
+		// Toggle full screen
+		if (!isFullScreen())
+			showFullScreen();
+		else
+			showNormal();
+	}
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 }
 
