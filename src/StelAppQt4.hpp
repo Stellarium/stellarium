@@ -56,6 +56,8 @@ public:
 
 	virtual void init(void) {;}
 	
+	class StelMainWindow* getMainWindow() {return mainWindow;}
+	
 protected:
 
 	// Initialize openGL screen
