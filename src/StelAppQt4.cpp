@@ -284,6 +284,7 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 		mod = StelMod_CTRL;
 
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
+	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
 }
 
 
