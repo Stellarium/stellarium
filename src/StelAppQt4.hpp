@@ -72,7 +72,7 @@ protected:
 	virtual void setResizable(bool resizable);
 private:
 	class StelMainWindow* mainWindow;
-	GLWidget* winOpenGL;
+	class GLWidget* winOpenGL;
 };
 
 #endif // USE_QT4
