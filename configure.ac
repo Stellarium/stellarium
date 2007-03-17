@@ -42,6 +42,11 @@ LIBS="$LIBS $FT2_LIBS"
 
 AX_BOOST_BASE
 AX_BOOST_THREAD
+if test "x$BOOST_THREAD_LIB" = "x"; then
+	echo "Sorry, we need the thread lib from Boost."
+	echo "Please install from http://www.boost.org"
+	exit 1
+fi
 dnl AX_BOOST_DATE_TIME
 dnl AX_BOOST_FILESYSTEM 
 
@@ -163,7 +168,7 @@ AC_ARG_WITH([qt-dir],
              AC_HELP_STRING([--with-qt-dir=/path/to/Qt-4.2.0],
                             [to specify the path to the Qt-4.2.0 directory.]),
              [QTPATHS="$withval"],
-             [QTPATHS="/usr/local/Trolltech/Qt-4.2.0 /c/Qt/4.2.0 /opt/qt4"])
+             [QTPATHS="/usr/local/Trolltech/Qt-4.2.0 /usr/share/qt4 /c/Qt/4.2.0 /opt/qt4"])
 
 for x in $QTPATHS; do
     if test -d $x ; then
