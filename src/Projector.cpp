@@ -1214,10 +1214,8 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
 	// Is the constructor/destructor so expensive?
-	static Vec4f lightPos4;
 	static Vec3f lightPos3;
 	GLboolean isLightOn;
-	static Vec3f transNorm;
 	float c;
 
 	static Vec4f ambientLight;
@@ -1227,9 +1225,9 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 
 	if (isLightOn)
 	{
-		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
-		lightPos3 = lightPos4;
+		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos3);
 		lightPos3 -= modelViewMatrix * Vec3d(0.,0.,0.); // -posCenterEye
+		lightPos3 = modelViewMatrix.transpose().multiplyWithoutTranslation(lightPos3);
 		lightPos3.normalize();
 		glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
 		glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
@@ -1283,13 +1281,10 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				transNorm = modelViewMatrix.multiplyWithoutTranslation(
-				                Vec3d(x * one_minus_oblateness * nsign,
-				                      y * one_minus_oblateness * nsign,
-				                      z * nsign));
-				c = lightPos3.dot(transNorm);
-				if (c<0)
-					c=0;
+				c = nsign * lightPos3.dot(Vec3f(x * one_minus_oblateness,
+				                                y * one_minus_oblateness,
+				                                z));
+				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
 				          c*diffuseLight[2] + ambientLight[2]);
@@ -1301,13 +1296,10 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				transNorm = modelViewMatrix.multiplyWithoutTranslation(
-				                Vec3d(x * one_minus_oblateness * nsign,
-				                      y * one_minus_oblateness * nsign,
-				                      z * nsign));
-				c = lightPos3.dot(transNorm);
-				if (c<0)
-					c=0;
+				c = nsign * lightPos3.dot(Vec3f(x * one_minus_oblateness,
+				                                y * one_minus_oblateness,
+				                                z));
+				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
 				          c*diffuseLight[2] + ambientLight[2]);
