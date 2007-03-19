@@ -62,7 +62,7 @@ public:
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
 	float get_milkyway_adaptation_luminance(void) const {return milkyway_adaptation_luminance;}
 private:
-	Vec4i viewport;
+	Vector4<GLint> viewport;
 	Skylight sky;
 	Skybright skyb;
 	int sky_resolution_y,sky_resolution_x;

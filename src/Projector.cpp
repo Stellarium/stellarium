@@ -137,7 +137,7 @@ void Projector::windowHasBeenResized(int width,int height)
 		0.5*width, 0.5*height,MY_MIN(viewport_xywh[2],viewport_xywh[3]));
 }
 
-Projector::Projector(const Vec4i& viewport, double _fov)
+Projector::Projector(const Vector4<GLint>& viewport, double _fov)
 		:maskType(NONE), fov(_fov), min_fov(0.0001), max_fov(100),
 		zNear(0.1), zFar(10000),
 		viewport_xywh(viewport),

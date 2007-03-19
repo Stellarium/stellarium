@@ -56,7 +56,7 @@ private:
   const int screen_w;
   const int screen_h;
   const double original_max_fov;
-  const Vec4i original_viewport;
+  const Vector4<GLint> original_viewport;
   const Vec2d original_viewport_center;
   const double original_viewport_fov_diameter;
 
