@@ -48,7 +48,7 @@ public:
 	
     ///////////////////////////////////////////////////////////////////////////
     // Main constructor
-	Projector(const Vec4i& viewport, double _fov = 60.);
+	Projector(const Vector4<GLint>& viewport, double _fov = 60.);
 	~Projector();
 	
 	void init(const InitParser& conf);
@@ -87,7 +87,7 @@ public:
 	                 double cx, double cy, double fov_diam);
 
 	//! Get the lower left corner of the viewport and the width, height
-	const Vec4i& getViewport(void) const {return viewport_xywh;}
+	const Vector4<GLint>& getViewport(void) const {return viewport_xywh;}
 
 	//! Get the center of the viewport relative to the lower left corner
 	Vec2d getViewportCenter(void) const
@@ -370,7 +370,7 @@ private:
 	double max_fov;				// Maximum fov in degree
 	double zNear, zFar;			// Near and far clipping planes
 
-	Vec4i viewport_xywh;		// Viewport parameters
+	Vector4<GLint> viewport_xywh;	// Viewport parameters
 	Vec2d viewport_center;		// Viewport center in screen pixel
 	double viewport_fov_diameter;	// diameter of a circle with 180 degrees diameter in screen pixel
 

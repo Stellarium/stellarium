@@ -61,7 +61,7 @@ StelCore::~StelCore()
 void StelCore::initProj(const InitParser& conf)
 {
 	// Projector
-	projection = new Projector(Vec4i(0,0,800,600), 60);
+	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
 	projection->init(conf);
 }
 
