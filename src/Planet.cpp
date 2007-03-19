@@ -548,6 +548,9 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 	// This removed totally the Planet shaking bug!!!
 	mat = nav->get_helio_to_eye_mat() * mat;
 
+	const Vec3d sun_pos = nav->get_helio_to_eye_mat()*Vec3d(0,0,0);
+	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
+
 	if (this == nav->getHomePlanet()) {
 		if (rings) rings->draw(prj,mat,1000.0);
 		return 0;
