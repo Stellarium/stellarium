@@ -224,9 +224,9 @@ void Atmosphere::draw(Projector* prj)
 	{
 		// printf("Atm int: %f\n", atm_intensity);
 
-		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
+		// TEST
+		//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
 
-		// fallback if glBlendEquation not available
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
 
@@ -250,7 +250,7 @@ void Atmosphere::draw(Projector* prj)
 			glEnd();
 		}
 
-		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_FUNC_ADD);
+//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_FUNC_ADD);
 
 	}
 }
