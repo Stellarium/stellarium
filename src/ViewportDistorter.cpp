@@ -26,6 +26,10 @@
 #include "InitParser.hpp"
 #include "Projector.hpp"
 
+#include <fstream>
+
+using namespace std;
+
 #include <math.h>
 
 class ViewportDistorterDummy : public ViewportDistorter {
@@ -101,14 +105,6 @@ ViewportDistorterFisheyeToSphericMirror
      original_viewport_center(prj->getViewportCenter()),
      original_viewport_fov_diameter(prj->getViewportFovDiameter()),
      texture_point_array(0) {
-  SphericMirrorCalculator calc(conf);
-
-  double distorter_max_fov
-    = conf.get_double("spheric_mirror","distorter_max_fov",175.0);
-  if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
-  else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
-  if (distorter_max_fov > prj->getMapping().maxFov)
-    distorter_max_fov = prj->getMapping().maxFov;
 
   flag_use_ext_framebuffer_object = GLEE_EXT_framebuffer_object;
   if (flag_use_ext_framebuffer_object) {
@@ -124,15 +120,15 @@ ViewportDistorterFisheyeToSphericMirror
             "not available: no stencil buffer support" << endl;
   }
 
-  double texture_triangle_base_length
-    = conf.get_double("spheric_mirror","texture_triangle_base_length",16.0);  
-  if (texture_triangle_base_length > 256.0)
-    texture_triangle_base_length = 256.0;
-  else if (texture_triangle_base_length < 2.0)
-    texture_triangle_base_length = 2.0;
-
-
     // initialize viewport parameters and texture size:
+  double distorter_max_fov
+    = conf.get_double("spheric_mirror","distorter_max_fov",175.0);
+  if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
+  else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
+  if (distorter_max_fov > prj->getMapping().maxFov)
+    distorter_max_fov = prj->getMapping().maxFov;
+  prj->setMaxFov(distorter_max_fov);
+  
   viewport_w = conf.get_int("spheric_mirror","viewport_width",
                             original_viewport[2]);
   if (viewport_w <= 0) {
@@ -176,12 +172,10 @@ ViewportDistorterFisheyeToSphericMirror
 //cout << "viewport_texture_offset: "
 //     << viewport_texture_offset[0] << ", "
 //     << viewport_texture_offset[1] << endl;
-
   prj->setViewport(viewport[0],viewport[1],
                    viewport_w,viewport_h,
                    viewport_center[0],viewport_center[1],
                    viewport_fov_diameter);
-
 
 
     // initialize mirror_texture:
@@ -240,69 +234,113 @@ ViewportDistorterFisheyeToSphericMirror
     delete pixel_data;
   }
 
-  prj->setMaxFov(distorter_max_fov);
-  
     // init transformation
-  double gamma
-    = conf.get_double("spheric_mirror","projector_gamma",0.45);
-  if (gamma < 0.0) gamma = 0.0;
-  const float view_scaling_factor
-    = 0.5 * viewport_fov_diameter
-    / prj->getMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
-  max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
-  step_x = screen_w / (double)(max_x-0.5);
-  max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
-  step_y = screen_h/ (double)max_y;
-//cout << "max_x: " << max_x << ", max_y: " << max_y
-//     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
-  texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
-  VertexPoint *vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
-  double max_h = 0;
-  for (int j=0;j<=max_y;j++) {
-    for (int i=0;i<=max_x;i++) {
-      VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
-      TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
-      vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
-				              (i == max_x) ? screen_w :
-				              (i-0.5f*(j&1))*step_x);
-      vertex_point.ver_xy[1] = j*step_y;
-      Vec3d v,v_x,v_y;
-      bool rc = calc.retransform(
-                       (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
-                       (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
-                       v,v_x,v_y);
-//      double h = v[1];
-//      v[1] = v[2];
+  VertexPoint *vertex_point_array = 0;
+  const string custom_distortion_file
+    = conf.get_str("spheric_mirror","custom_distortion_file","");  
+  if (custom_distortion_file.empty()) {
+    double texture_triangle_base_length
+      = conf.get_double("spheric_mirror","texture_triangle_base_length",16.0);  
+    if (texture_triangle_base_length > 256.0)
+      texture_triangle_base_length = 256.0;
+    else if (texture_triangle_base_length < 2.0)
+      texture_triangle_base_length = 2.0;
+    max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
+    step_x = screen_w / (double)(max_x-0.5);
+    max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
+    step_y = screen_h/ (double)max_y;
+  //cout << "max_x: " << max_x << ", max_y: " << max_y
+  //     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
 
-      rc &= prj->getMapping().forward(v);
-      const float x = viewport_center[0] + v[0] * view_scaling_factor;
-      const float y = viewport_center[1] + v[1] * view_scaling_factor;
-      vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
+    double gamma
+      = conf.get_double("spheric_mirror","projector_gamma",0.45);
+    if (gamma < 0.0) gamma = 0.0;
+    const float view_scaling_factor
+      = 0.5 * viewport_fov_diameter
+      / prj->getMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
+    texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
+    vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
+    double max_h = 0;
+    SphericMirrorCalculator calc(conf);
+    for (int j=0;j<=max_y;j++) {
+      for (int i=0;i<=max_x;i++) {
+        VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
+        TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
+        vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
+				                (i == max_x) ? screen_w :
+				                (i-0.5f*(j&1))*step_x);
+        vertex_point.ver_xy[1] = j*step_y;
+        Vec3d v,v_x,v_y;
+        bool rc = calc.retransform(
+                         (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
+                         (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
+                         v,v_x,v_y);
+        rc &= prj->getMapping().forward(v);
+        const float x = viewport_center[0] + v[0] * view_scaling_factor;
+        const float y = viewport_center[1] + v[1] * view_scaling_factor;
+        vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
 
-        // sharp image up to the border of the fisheye image, at the cost of
-        // accepting clamping artefacts. You can get rid of the clamping
-        // artefacts by specifying a viewport size a little less then
-        // (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
-        // of 512*512 and viewport_fov_diameter=512 you will get clamping
-        // artefacts in the 3 otherwise black hills on the bottom of the image.
+          // sharp image up to the border of the fisheye image, at the cost of
+          // accepting clamping artefacts. You can get rid of the clamping
+          // artefacts by specifying a viewport size a little less then
+          // (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
+          // of 512*512 and viewport_fov_diameter=512 you will get clamping
+          // artefacts in the 3 otherwise black hills on the bottom of the image.
 
-//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
-//      else if (x > viewport_w) {x=viewport_w;vertex_point.h=0;}
-//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
-//      else if (y > viewport_h) {y=viewport_h;vertex_point.h=0;}
+  //      if (x < 0.f) {x=0.f;vertex_point.h=0;}
+  //      else if (x > viewport_w) {x=viewport_w;vertex_point.h=0;}
+  //      if (y < 0.f) {y=0.f;vertex_point.h=0;}
+  //      else if (y > viewport_h) {y=viewport_h;vertex_point.h=0;}
 
-      texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
-      texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
+        texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
+        texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
 
-      if (vertex_point.h > max_h) max_h = vertex_point.h;
+        if (vertex_point.h > max_h) max_h = vertex_point.h;
+      }
     }
-  }
-  for (int j=0;j<=max_y;j++) {
-    for (int i=0;i<=max_x;i++) {
-      VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
-      vertex_point.color[0] = vertex_point.color[1] = vertex_point.color[2] =
-        (vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
-      vertex_point.color[3] = 1.0f;
+    for (int j=0;j<=max_y;j++) {
+      for (int i=0;i<=max_x;i++) {
+        VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
+        vertex_point.color[0] = vertex_point.color[1] = vertex_point.color[2] =
+          (vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
+        vertex_point.color[3] = 1.0f;
+      }
+    }
+  } else {
+    ifstream file(custom_distortion_file.c_str());
+    assert(file);
+    file >> max_x >> max_y;
+    assert(file && max_x>0 && max_y>0);
+    step_x = screen_w / (double)(max_x-0.5);
+    step_y = screen_h/ (double)max_y;
+  //cout << "max_x: " << max_x << ", max_y: " << max_y
+  //     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
+    texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
+    vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
+    for (int j=0;j<=max_y;j++) {
+      for (int i=0;i<=max_x;i++) {
+        VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
+        TexturePoint &texture_point(texture_point_array[(j*(max_x+1)+i)]);
+        vertex_point.ver_xy[0] = ((i == 0) ? 0.f :
+				                (i == max_x) ? screen_w :
+				                (i-0.5f*(j&1))*step_x);
+        vertex_point.ver_xy[1] = j*step_y;
+        float x,y;
+        file >> x >> y
+             >> vertex_point.color[0]
+             >> vertex_point.color[1]
+             >> vertex_point.color[2];
+        vertex_point.color[3] = 1.0f;
+        assert(file);
+  //      if (x < 0.f) {x=0.f;vertex_point.h=0;}
+  //      else if (x > viewport_w) {x=viewport_w;vertex_point.h=0;}
+  //      if (y < 0.f) {y=0.f;vertex_point.h=0;}
+  //      else if (y > viewport_h) {y=viewport_h;vertex_point.h=0;}
+
+        texture_point.tex_xy[0] = (viewport_texture_offset[0]+x)/texture_wh;
+        texture_point.tex_xy[1] = (viewport_texture_offset[1]+y)/texture_wh;
+
+      }
     }
   }
 
