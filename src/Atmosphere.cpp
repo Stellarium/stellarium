@@ -239,7 +239,7 @@ void Atmosphere::draw(Projector* prj)
 			const GridPoint *g1 = g0;
 			if (y2&1) g1+=(1+sky_resolution_x);
 			else g0+=(1+sky_resolution_x);
-			glBegin(GL_QUAD_STRIP);
+			glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
 			{
 				glColor3fv(g0->color);
