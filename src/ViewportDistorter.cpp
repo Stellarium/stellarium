@@ -259,7 +259,7 @@ ViewportDistorterFisheyeToSphericMirror
       = 0.5 * viewport_fov_diameter
       / prj->getMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
     texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
-    vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
+    vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
     double max_h = 0;
     SphericMirrorCalculator calc(conf);
     for (int j=0;j<=max_y;j++) {
@@ -316,7 +316,7 @@ ViewportDistorterFisheyeToSphericMirror
   //cout << "max_x: " << max_x << ", max_y: " << max_y
   //     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
     texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
-    vertex_point_array = new VertexPoint[(max_x+1)*(max_x+1)];
+    vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
     for (int j=0;j<=max_y;j++) {
       for (int i=0;i<=max_x;i++) {
         VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
