@@ -42,6 +42,7 @@ class StelFontMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
+class StelFileMgr;
 
 using namespace std;
 
@@ -132,6 +133,10 @@ public:
 	//! @brief Get the StelObject manager to use for querying from all stellarium objects
 	//! @return the StelObject manager to use for querying from all stellarium objects
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
+	
+	//! @brief Get the StelFileMgr for performing file operations
+	//! @return the StelFileMgr manager to use for performing file operations
+	StelFileMgr& getFileMgr() {return *stelFileMgr;}
 	
 	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
@@ -275,6 +280,9 @@ private:
 	
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
+
+	// Utility class for file operations, mainly locating files by name
+	StelFileMgr* stelFileMgr;
 
 	float fps;
 	int frame, timefr, timeBase;		// Used for fps counter
