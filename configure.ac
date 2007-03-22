@@ -48,7 +48,13 @@ if test "x$BOOST_THREAD_LIB" = "x"; then
 	exit 1
 fi
 dnl AX_BOOST_DATE_TIME
-dnl AX_BOOST_FILESYSTEM 
+AX_BOOST_FILESYSTEM 
+if test "x$BOOST_FILESYSTEM_LIB" = "x"; then
+	echo "Sorry, we need the filesystem lib from Boost."
+	echo "Please install from http://www.boost.org"
+	exit 1
+fi
+LIBS="$LIBS $BOOST_FILESYSTEM_LIB"
 
 # Check for libcurl
 LIBCURL_CHECK_CONFIG([yes], , [haveCurl=yes], [haveCurl=no])

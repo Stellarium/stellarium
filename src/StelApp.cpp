@@ -45,6 +45,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "MovementMgr.hpp"
+#include "StelFileMgr.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -65,6 +66,11 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	dataDir = DATA_ROOT+"/data";
 	rootDir = DATA_ROOT + "/";
 
+	// This is necessary so boost will allow paths which 
+	// include ".", e.g. .stellarium 
+        fs::path::default_name_check(fs::native);
+
+        stelFileMgr = new StelFileMgr();
 	textureMgr = new StelTextureMgr(rootDir + "textures/");
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));
@@ -110,11 +116,12 @@ StelApp::~StelApp()
 *************************************************************************/
 string StelApp::getConfigFilePath(void) const
 {
-	return getDotStellariumDir() + "config.ini";
+	return stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string();
 }
 
 /*************************************************************************
  Get the full path to a file.
+ Deprecated in favour of using StelFileMgr::findFile
 *************************************************************************/
 string StelApp::getFilePath(const string& fileName) const
 {
@@ -134,6 +141,7 @@ string StelApp::getFilePath(const string& fileName) const
 
 /*************************************************************************
  Get a vector of paths for a file.
+ Deprecated in favour of using StelFileMgr::getSearchPaths
 *************************************************************************/
 vector<string> StelApp::getFilePathList(const string& fileName) const
 {
@@ -159,6 +167,7 @@ vector<string> StelApp::getFilePathList(const string& fileName) const
 /*************************************************************************
  Get the full path to a data file. This method will try to find the file 
  in all valid data directories until it finds it.
+ Deprecated in favour of using StelFileMgr::findFile
 *************************************************************************/
 string StelApp::getDataFilePath(const string& dataFileName) const
 {
@@ -172,7 +181,9 @@ string StelApp::getDataFilePath(const string& dataFileName) const
 }
 
 /*************************************************************************
- Get the full path to a texture file. This method will try to find the file in all valid data 
+ Get the full path to a texture file. This method will try to find the 
+ file in all valid data 
+ Deprecated in favour of using StelFileMgr::findFile
 *************************************************************************/
 string StelApp::getTextureFilePath(const string& textureFileName) const
 {
@@ -211,7 +222,7 @@ void StelApp::init(void)
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
-	conf.load(dotStellariumDir + "config.ini");
+	conf.load(stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string());
 
 	// Main section
 	string version = conf.get_str("main:version");
