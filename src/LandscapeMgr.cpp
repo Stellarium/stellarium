@@ -29,6 +29,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelFontMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelFileMgr.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -229,22 +230,17 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	
 	// we want to lookup the landscape ID (dir) from the name.
 	map<string,string> nameToDirMap = getNameToDirMap();
+	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	Landscape* newLandscape;
+	
 	if (nameToDirMap[new_landscape_name] != "")
 	{
-		newLandscape = create_from_file(StelApp::getInstance().getFilePath(
-		                                        "landscapes/"
-		                                        + nameToDirMap[new_landscape_name]
-		                                        + "/landscape.ini"), nameToDirMap[new_landscape_name]);
+		newLandscape = create_from_file(
+				fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
 	}
 	else
 	{
-		// maybe the landscape in the config.ini was requested by ID, not name...
-		// as a backup we will try this if the name is not known.
-		newLandscape = create_from_file(StelApp::getInstance().getFilePath(
-		                                        "landscapes/"
-		                                        + new_landscape_name
-		                                        + "/landscape.ini"), new_landscape_name);
+		newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini").string(), new_landscape_name);
 	}
 
 	if(!newLandscape)
@@ -440,34 +436,22 @@ string LandscapeMgr::nameToKey(const string& name)
  ****************************************************************************/
 std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 {
-	vector<string> searchDirs;
+	set<string> landscapeDirs;
 	map<string,string> result;
-	struct dirent *dirEntStruct;
-	struct stat statStruct;
-	DIR *dir;
-
-	searchDirs = StelApp::getInstance().getFilePathList("landscapes");
-	for(vector<string>::iterator searchDir = searchDirs.begin(); searchDir != searchDirs.end(); searchDir++)
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	
+	landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::DIRECTORY);
+	for(set<string>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
 	{
-		if ((dir = opendir((*searchDir).c_str())) != NULL)
+		try
 		{
-			while ((dirEntStruct = readdir(dir)) != NULL)
-			{
-				string landscapeID = dirEntStruct->d_name;
-				if ( landscapeID[0] != '.' ) {
-					string path = *searchDir + "/" + landscapeID + "/landscape.ini";
-					if ( stat(path.c_str(), &statStruct) == 0 ) {
-						// parse the ini file to get the name for this landscape
-						// this is going to be pretty inefficient - parsing all the
-						// ini files every time this fn is called.  Maybe we should
-						// use some cacheing?
-						InitParser pd;
-						pd.load(path);
-						result[pd.get_str(landscapeID, "name")] = landscapeID;
-					}
-				}
-			}
-			closedir(dir);
+			InitParser pd;
+			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini").string());
+			result[pd.get_str(*dir, "name")] = *dir;
+		}
+		catch (exception& e)
+		{
+			cerr << "WARNING: unable to successfully read landscape.ini file from landscape " << *dir << endl;
 		}
 	}
 
