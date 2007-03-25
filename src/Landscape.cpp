@@ -22,6 +22,7 @@
 #include "STexture.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelFileMgr.hpp"
 
 #include <cassert>
 #include <vector>
@@ -58,10 +59,16 @@ void Landscape::loadCommon(const string& landscape_file, const string& section_n
 const string Landscape::getTexturePath(const string& basename, const string& landscapeName)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
-	if ( StelApp::getInstance().getFilePath("landscapes/" + landscapeName + "/" + basename) != "" ) 
-		return StelApp::getInstance().getFilePath("landscapes/" + landscapeName + "/" + basename);
-	else
-		return StelApp::getInstance().getTextureFilePath(basename);		
+	string path;
+	try {
+		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeName + "/" + basename).string();
+		return path;
+	}
+	catch (exception& e)
+	{
+		path = StelApp::getInstance().getFileMgr().findFile("textures/" + basename).string();
+		return path;
+	}
 }
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
