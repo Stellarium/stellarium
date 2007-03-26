@@ -46,11 +46,19 @@ public:
 	//! findFile looks through the search paths in order, returning the first instance
 	//! of the specified path.  By specifying a flags parameter it is possible to constrain
 	//! the results to those matching various criteria.
+	//! If the path argument is a complete path (is a full path on single root OSes, or
+	//! unanbigiously identifies one and only one file on multi-root OSes), it will 
+	//! be tested for compliance with other conditions - the regular search path will
+	//! not be tested.
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
 	//! @exception [misc] boost filesystem exceptions on file path errors and such
-	//! @exception std::exception what() -> "file not found"
+	//! @exception std::exception what() -> "file not found: [filename]"
+	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
+	//! 		This exception occurs if a full path (complete in the 
+	//! 		boost::filesystem sense) is passes at the path argument, but 
+	//!		that path does not match the flags specified.
 	const fs::path findFile(const string& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
@@ -88,6 +96,13 @@ public:
 	bool isWritable(const fs::path& path);
 	
 private:
+	//! Check if a (complete) path matches a set of flags
+	//! @param path a complete (in the boost::fs sense) path
+	//! @param flags a set of StelFileMgr::FLAGS to test against path
+	//! @return true if path passes all flag tests, else false
+	//! @exceptions [misc] can throw boost::filesystem exceptions if there are unexpected problems with IO
+	bool fileFlagsCheck(const fs::path& path, const FLAGS& flags=(FLAGS)0);
+	
 	vector<fs::path> fileLocations;
 				
 };

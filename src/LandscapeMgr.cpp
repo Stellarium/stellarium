@@ -235,12 +235,29 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	
 	if (nameToDirMap[new_landscape_name] != "")
 	{
-		newLandscape = create_from_file(
-				fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
+		try
+		{
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while loading landscape ";
+			cerr << "landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini";
+			cerr << ", (" << e.what() << ")" << endl;
+		}
 	}
 	else
 	{
-		newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini").string(), new_landscape_name);
+		try
+		{
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini").string(), new_landscape_name);
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while loading landscape ";
+			cerr << "landscapes/" + new_landscape_name + "/landscape.ini";
+			cerr << ", (" << e.what() << ")" << endl;
+		}
 	}
 
 	if(!newLandscape)
@@ -440,7 +457,15 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 	map<string,string> result;
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
-	landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::DIRECTORY);
+	try
+	{
+		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::DIRECTORY);
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while trying list list landscapes:" << e.what() << endl;	
+	}
+	
 	for(set<string>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
 	{
 		try

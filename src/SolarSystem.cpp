@@ -36,6 +36,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace std;
 
@@ -169,7 +170,15 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 {
 	cout << "Loading Solar System data...";
 	InitParser pd;	// The Planet data ini file parser
-	pd.load(StelApp::getInstance().getDataFilePath("ssystem.ini"));
+	try
+	{
+		pd.load(StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini").string());
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while loading ssysyem.ini: " << e.what() << endl;
+		return;
+	}
 
 	int nbSections = pd.get_nsec();
 	for (int i = 0;i<nbSections;++i)
