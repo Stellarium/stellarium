@@ -74,53 +74,26 @@ StelFileMgr::~StelFileMgr()
 
 const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
+	if ( fs::path(path).is_complete() )
+		if ( fileFlagsCheck(path) )
+			return(path);
+		else 
+		{
+			throw(runtime_error("file does not match flags: " + path));
+		}
+		
 	fs::path result;
 	for(vector<fs::path>::iterator i = fileLocations.begin();
 		   i != fileLocations.end();
 		   i++)
-	{		
-		// cerr << "DEBUG StelFileMgr::findFile: " << path << " looking in " << (*i).string() << endl;
-		// We set the return trigger to true, and then check each flag which is set
-		// and the conditions for them, switching the return trigger to false if any
-		// of the criteria fail.
-		bool returnThisOne = true;
-		if ( flags & NEW )
-		{
-			// if the NEW flag is set, we check to see if the parent is an existing directory
-			// which is writable
-			fs::path parent(*i / path / "..");
-			if ( ! isWritable(parent.normalize()) || ! fs::is_directory(parent.normalize()) )
-			{
-				returnThisOne = false;	
-			}						
-		}
-		else if ( fs::exists(*i / path) )
-		{
-			fs::path fullPath(*i / path);
-			if ( (flags & WRITABLE) && ! isWritable(fullPath) )
-				returnThisOne = false;
-			
-			if ( (flags & DIRECTORY) && ! fs::is_directory(fullPath) )
-				returnThisOne = false;
-			
-			if ( (flags & FILE) && fs::is_directory(fullPath) )
-				returnThisOne = false; 			
-		}
-		else
-		{
-			// doesn't exist and NEW flag wasn't requested
-			returnThisOne = false;
-		}
-		
-		if ( returnThisOne )
+	{				
+		if (fileFlagsCheck(*i / path))
 			return fs::path(*i / path);
-
 	}
 	
-	cerr << "WARNING StelFileMgr::findFile: " << path << " file not found, throwing exception" << endl;
-	throw(runtime_error("file not found"));
+	throw(runtime_error("file not found: " + path));
 }
-	
+
 const set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
 {
 	set<string> result;
@@ -129,27 +102,29 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
               li != fileLocations.end();
 	      li++ )
 	{
-		if ( fs::is_directory(*li / path) )
-		{ 
-			fs::directory_iterator end_iter;
-			for ( fs::directory_iterator dir_itr( *li / path );
-					    dir_itr != end_iter;
-					    ++dir_itr )
-			{
-				// default is to return all objects in this directory
-				bool returnThisOne = true;
-			
-				// but if we have flags set, that will filter the result
-				fs::path fullPath(*li / path / dir_itr->leaf());
-				if ( (flags & WRITABLE) && ! isWritable(fullPath) )
-					returnThisOne = false;
-			
-				if ( (flags & DIRECTORY) && ! fs::is_directory(fullPath) )
-					returnThisOne = false;
-			
-				// OK, add the ones we want to the result
-				if ( returnThisOne )
-					result.insert(dir_itr->leaf());
+		if ( fs::exists(*li / path) ) {
+			if ( fs::is_directory(*li / path) )
+			{ 
+				fs::directory_iterator end_iter;
+				for ( fs::directory_iterator dir_itr( *li / path );
+						dir_itr != end_iter;
+						++dir_itr )
+				{
+					// default is to return all objects in this directory
+					bool returnThisOne = true;
+				
+					// but if we have flags set, that will filter the result
+					fs::path fullPath(*li / path / dir_itr->leaf());
+					if ( (flags & WRITABLE) && ! isWritable(fullPath) )
+						returnThisOne = false;
+				
+					if ( (flags & DIRECTORY) && ! fs::is_directory(fullPath) )
+						returnThisOne = false;
+				
+					// OK, add the ones we want to the result
+					if ( returnThisOne )
+						result.insert(dir_itr->leaf());
+				}
 			}
 		}
 	}
@@ -241,5 +216,37 @@ bool StelFileMgr::isWritable(const fs::path& path)
 	}
 	
 	return result;
+}
+
+bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
+{
+	if ( flags & NEW )
+	{
+		// if the NEW flag is set, we check to see if the parent is an existing directory
+		// which is writable
+		fs::path parent(path / "..");
+		if ( ! isWritable(parent.normalize()) || ! fs::is_directory(parent.normalize()) )
+		{
+			return(false);	
+		}						
+	}
+	else if ( fs::exists(path) )
+	{
+		if ( (flags & WRITABLE) && ! isWritable(path) )
+			return(false);
+			
+		if ( (flags & DIRECTORY) && ! fs::is_directory(path) )
+			return(false);
+			
+		if ( (flags & FILE) && fs::is_directory(path) )
+			return(false); 			
+	}
+	else
+	{
+		// doesn't exist and NEW flag wasn't requested
+		return(false);
+	}
+		
+	return(true);
 }
 

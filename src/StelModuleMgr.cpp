@@ -20,7 +20,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModule.hpp"
-
+#include "StelFileMgr.hpp"
+		
 #if defined (HAVE_GMODULE) && defined (HAVE_GLIB)
  #include <glib.h>
  #include <gmodule.h>
@@ -74,7 +75,14 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 #else
 	moduleFullPath += ".so";
 #endif
-	moduleFullPath = StelApp::getInstance().getFilePath(moduleFullPath);
+	try
+	{
+		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::DIRECTORY).string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while locating module path: " << e.what() << endl;
+	}
 #if !defined (HAVE_GMODULE) || !defined (HAVE_GLIB)
 	cerr << "This version of stellarium was compiled without enabling dynamic loading of modules." << endl;
 	cerr << "Module " << moduleID << " will not be loaded." << endl;
@@ -82,7 +90,7 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 #else
 	if (g_module_supported()==FALSE)
 	{
-		cerr << "Dynamic loading of modules does not work on this plateform." << endl;
+		cerr << "Dynamic loading of modules does not work on this platform." << endl;
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}

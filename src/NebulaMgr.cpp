@@ -34,6 +34,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
 
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
@@ -64,16 +65,23 @@ NebulaMgr::~NebulaMgr()
 // read from stream
 void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 {
-	loadNGC(StelApp::getInstance().getDataFilePath("ngc2000.dat"), lb);
-	loadNGCNames(StelApp::getInstance().getDataFilePath("ngc2000names.dat"));
-	loadTextures(StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
+	try
+	{
+		loadNGC(StelApp::getInstance().getFileMgr().findFile("data/ngc2000.dat").string(), lb);
+		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("data/ngc2000names.dat").string());
+		loadTextures(StelApp::getInstance().getFileMgr().findFile("data/nebula_textures.fab").string(), lb);
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while loading nebula data: " << e.what() << endl;
+	}
 
 	double fontSize = 12;
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	Nebula::tex_circle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
-	
+
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
 	setFlagShowTexture(true);

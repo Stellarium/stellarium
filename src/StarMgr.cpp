@@ -45,6 +45,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -1191,51 +1192,81 @@ void StarMgr::setColorScheme(const InitParser& conf, const std::string& section)
 	setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
 }
 
-// Load from file
-void StarMgr::load_data(LoadingBar& lb) {
+/***************************************************************************
+ Load star catalogue data from files.
+ If a file is not found, it will be skipped.
+***************************************************************************/
+void StarMgr::load_data(LoadingBar& lb)
+{
+	// Please do not init twice:
+	assert(max_geodesic_grid_level < 0);
 
-    // Please do not init twice:
-  assert(max_geodesic_grid_level<0);
+	cout << "Loading star data...";
+	for (int i=0; cat_file_names[i]; i++)
+	{
+		lb.SetMessage(_("Loading catalog ") + StelUtils::intToWstring(i));
+		lb.Draw(i / 8.0);
+		try
+		{
+			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("data/") + cat_file_names[i]).string().c_str());
+			if (z)
+			{
+				if (max_geodesic_grid_level < z->level)
+				{
+					max_geodesic_grid_level = z->level;
+				}
+				ZoneArray *&pos(zone_arrays[z->level]);
+				if (pos)
+				{
+					cerr << cat_file_names[i] << ", " << z->level << ": duplicate level" << endl;
+					delete z;
+				}
+				else
+				{
+					pos = z;
+				}
+			}
+		}
+		catch (exception& e)
+		{
+			cerr << "error while loading " << cat_file_names[i] << ": " << e.what() << endl;
+		}
+	}
 
-  printf("Loading star data...");
-  for (int i=0;cat_file_names[i];i++) {
-    lb.SetMessage(_("Loading catalog ") + StelUtils::intToWstring(i));
-    lb.Draw(i/8.0);
-    ZoneArray *const z = ZoneArray::create(*this,StelApp::getInstance().getDataFilePath(cat_file_names[i]).c_str());
-    if (z) {
-      if (max_geodesic_grid_level < z->level) {
-        max_geodesic_grid_level = z->level;
-      }
-      ZoneArray *&pos(zone_arrays[z->level]);
-      if (pos) {
-        fprintf(stderr,"%s, %d: duplicate level\n",
-                cat_file_names[i],z->level);
-        delete z;
-      } else {
-        pos = z;
-      }
-    }
-  }
-  
-  for (int i=0;i<=NR_OF_HIP;i++) {
-    hip_index[i].a = 0;
-    hip_index[i].z = 0;
-    hip_index[i].s = 0;
-  }
-  for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
-       it!=zone_arrays.end();it++) {
-    it->second->updateHipIndex(hip_index);
-  }
+	for (int i=0; i<=NR_OF_HIP; i++)
+	{
+		hip_index[i].a = 0;
+		hip_index[i].z = 0;
+		hip_index[i].s = 0;
+	}
+	for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
+	                it != zone_arrays.end();it++)
+	{
+		it->second->updateHipIndex(hip_index);
+	}
 
-  spectral_array.initFromFile(
-                   StelApp::getInstance().getDataFilePath(
-                                            spectral_file).c_str());
-  component_array.initFromFile(
-                    StelApp::getInstance().getDataFilePath(
-                                             component_file).c_str());
+	try
+	{
+		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("data/") + spectral_file).string().c_str());
+	}
+	catch (exception& e)
+	{
+		cerr << "ERROR while loading data from " << string("data/") + spectral_file;
+		cerr << ": " << e.what() << endl;
+	}
+	
+	try
+	{
+		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("data/") + component_file).string().c_str());
+	}
+	catch (exception& e)
+	{
+		cerr << "ERROR while loading data from " << string("data/") + component_file;
+		cerr << ": " << e.what() << endl;
+	}
 
-  last_max_search_level = max_geodesic_grid_level;
-  printf("finished, max_geodesic_level: %d\n",max_geodesic_grid_level);
+	last_max_search_level = max_geodesic_grid_level;
+	cout << "finished, max_geodesic_level: " << max_geodesic_grid_level << endl;
 }
 
 // Load common names from file 
@@ -1876,8 +1907,8 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	string skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	
 	// Load culture star names in english
-	load_common_names(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/star_names.fab"));
-	load_sci_names(StelApp::getInstance().getDataFilePath("name.fab"));
+	load_common_names(StelApp::getInstance().getFileMgr().findFile("data/sky_cultures/" + skyCultureDir + "/star_names.fab").string());
+	load_sci_names(StelApp::getInstance().getFileMgr().findFile("data/name.fab").string());
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );

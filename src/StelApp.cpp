@@ -69,8 +69,13 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	// This is necessary so boost will allow paths which 
 	// include ".", e.g. .stellarium 
         fs::path::default_name_check(fs::native);
-
+	
+	// Prepare the search path to pass to the file manager
+	vector<fs::path> searchPaths;
+	searchPaths.push_back(CDIR);
+	searchPaths.push_back(DATA_ROOT);
         stelFileMgr = new StelFileMgr();
+	stelFileMgr->setSearchPaths(searchPaths);
 	textureMgr = new StelTextureMgr(rootDir + "textures/");
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));

@@ -24,6 +24,7 @@
 #include "StelFontMgr.hpp"
 #include "SFont.hpp"
 #include "StelApp.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace std;
 
@@ -80,15 +81,19 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 	}
 	else
 	{
-		SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getDataFilePath(lf.fileName));
-		loadedFonts[lf]=font;
-		return *font;
+		try
+		{
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/"+lf.fileName).string());
+			loadedFonts[lf]=font;
+			return *font;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while trying to load fonts: " << e.what() << endl;
+			SFont* dummy;
+			return *dummy;
+		}
 	}
-	// Unreachable code
-	assert(false);
-	
-	SFont* dummy;
-	return *dummy;
 }
 
 /*************************************************************************
@@ -104,9 +109,15 @@ SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
 	}
 	else
 	{
-		SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getDataFilePath(lf.fileName));
-		loadedFonts[lf]=font;
-		return *font;
+		try {
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/" + lf.fileName).string());
+			loadedFonts[lf]=font;
+			return *font;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR loading font " << lf.fileName << ": " << e.what() << endl;
+		}
 	}
 	// Unreachable code
 	assert(false);
@@ -158,24 +169,16 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 			istringstream record(buffer);
 			record >> readFont.langageName >> readFont.fontFileName >> readFont.fontScale >> readFont.fixedFontFileName >> readFont.fixedFontScale;
 
-			// Test that font files exist
-			ifstream fontFile(StelApp::getInstance().getDataFilePath(readFont.fontFileName).c_str());
-			if (!fontFile.is_open())
+			try
 			{
-				//cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fontFileName) << ", will use default font instead." << endl;
+				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fontFileName);
+				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fixedFontFileName);
+			}
+			catch(exception& e)
+			{
 				continue;
 			}
-			fontFile.close();
 
-			// normal font OK, test fixed font
-			fontFile.open(StelApp::getInstance().getDataFilePath(readFont.fixedFontFileName).c_str());
-			if (!fontFile.is_open())
-			{
-				//cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fixedFontFileName) << ", will use default font instead." << endl;
-				continue;
-			}
-			fontFile.close();
-			
 			if (readFont.langageName=="default")
 				readFont.langageName="*";
 			fontMapping[readFont.langageName]=readFont;
