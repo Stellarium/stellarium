@@ -40,6 +40,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "Projector.hpp"
 #include "Navigator.hpp"
+#include "StelFileMgr.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -411,8 +412,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				string image_filename;
 				if(stapp->scripts->is_playing()) 
 					image_filename = stapp->scripts->get_script_path() + args["filename"];
-				else 
-					image_filename = stapp->getDataFilePath(args["filename"]);
+				else
+				{
+					try
+					{
+						image_filename = stapp->getFileMgr().findFile(string("data/") + args["filename"]).string();
+					}
+					catch(exception& e)
+					{
+						cerr << "ERROR finding script: " << e.what() << endl;
+					}
+				}
 				  
 				status = script_images->load_image(image_filename, args["name"], img_pos);
 

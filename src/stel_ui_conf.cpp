@@ -39,6 +39,7 @@
 #include "InitParser.hpp"
 #include "Observer.hpp"
 #include "Navigator.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace s_gui;
 
@@ -308,7 +309,14 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
 	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), 9.5)));
-	load_cities(StelApp::getInstance().getDataFilePath("cities.fab"));
+	try
+	{
+		load_cities(StelApp::getInstance().getFileMgr().findFile("data/cities.fab").string());
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while trying to load cities data: " << e.what() << endl;
+	}
 	
 	y += 5;
 	Label * lblcursor = new Label(_("Cursor : "));

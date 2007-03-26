@@ -109,9 +109,6 @@ public:
 	//! @return false if the event was not intercepted, true otherwise.
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state) {return false;}
 	
-	//! Return the full path to a data file belonging to the module
-	std::string getFilePath(const std::string& fileName) const;
-	
 	//! Indicate that selected StelObjects changed. This can be used by some modules to update themself.
 	virtual void selectedObjectChangeCallBack() {;}
 	

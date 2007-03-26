@@ -36,6 +36,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) : 
@@ -91,17 +92,28 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	// Check if the sky culture changed since last load
 	if (lastLoadedSkyCulture != StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir())
 	{
-		lastLoadedSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
-		loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationship.fab"),
-			StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab"), lb);
-		if (lastLoadedSkyCulture=="western") loadBoundaries(StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"));
-		loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellation_names.eng.fab"));
+		try
+		{
+			StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
+			lastLoadedSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+			loadLinesAndArt(
+				fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellationship.fab").string(),
+				fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab").string(),
+				lb);
+			if (lastLoadedSkyCulture=="western") 
+				loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat").string());
+			loadNames(fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellation_names.eng.fab").string());
 	
-		// Translated constellation names for the new sky culture
-		updateI18n();
+			// Translated constellation names for the new sky culture
+			updateI18n();
 		
-		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChangeCallBack();
+			// as constellations have changed, clear out any selection and retest for match!
+			selectedObjectChangeCallBack();
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while updating sky culture: " << e.what();
+		}
 	}
 }
 

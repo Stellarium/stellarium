@@ -23,14 +23,6 @@
 #include "StelApp.hpp"
 
 /*************************************************************************
- Return the full path to a data file belonging to the module
-*************************************************************************/
-std::string StelModule::getFilePath(const std::string& fileName) const 
-{
-	return StelApp::getInstance().getDotStellariumDir()+"modules/"+getModuleID()+"/"+fileName;
-}
-
-/*************************************************************************
  Init itself from a .ini file
 *************************************************************************/
 void StelModule::loadProperties(const string& iniFile)
