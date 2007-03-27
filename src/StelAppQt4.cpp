@@ -112,7 +112,7 @@ void StelAppQt4::swapGLBuffers()
 {
 	winOpenGL->swapBuffers();
 }
-	
+
 //! Return the time since when stellarium is running in second
 double StelAppQt4::getTotalRunTime() const
 {
@@ -286,7 +286,6 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
 }
-
 
 StelKey qtKeyToStelKey(Qt::Key k)
 {
