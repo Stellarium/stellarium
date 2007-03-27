@@ -61,8 +61,6 @@ public:
 		MINMAX_GREYLEVEL_AUTO
 	};
 	
-private:
-	friend struct loadTextureThread;
 	enum LoadState
 	{
 		UNLOADED=0,
@@ -70,9 +68,13 @@ private:
 		LOAD_ERROR,
 		LOADING_IMAGE
 	};
+	LoadState loadState;
+	
+private:
+	friend struct loadTextureThread;
 
 	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f) {;}
-	LoadState loadState;
+
 	void load(void);
 	
 	// Cached average luminance
@@ -90,6 +92,17 @@ public:
 	//! The caller is responsible for freeing the memory allocated in tex.texels
 	//! This method must be thread compliant
 	virtual bool loadImage(const std::string& filename, ManagedSTexture& tex) = 0;
+};
+
+//! Struct used for returning queued textures loaded in thread
+struct QueuedTex
+{
+	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, const std::string& alocalPath) :
+		tex(atex), userPtr(auserPtr), url(aurl), localPath(alocalPath) {;}
+	ManagedSTextureSP tex;
+	void* userPtr;
+	std::string url;
+	std::string localPath;
 };
 
 /**
@@ -115,15 +128,16 @@ public:
 	//! @param lazyLoading if true the texture will be loaded only when it used for the first time
 	ManagedSTextureSP createTexture(const std::string& filename, bool lazyLoading=false);
 	
-	//! Load an image from a file and create a new texture from it in a new thread, the value of the return pointer
-	//!    and of the status boolean are only set in the update() method and therefore don't need to be protected
-	//!    by a Mutex.
-	//! @param tex the pointer where the loaded texture will be returned. In case of threaded loading, this pointer will
-	//!    remain to NULL until the texture is actually loaded.
-	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
+	//! Load an image from a file and create a new texture from it in a new thread. The created texture is inserted in
+	//! the passed queue, protected by the given mutex.
+	//! If the texture creation fails for any reasons, its loadState will be set to LOAD_ERROR
+	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	//! @param status is set to false if the creation of the texture failed
-	bool createTextureThread(STextureSP* tex, const std::string& filename, bool* status);
+	//! @param queue the queue where the texture will be inserted once downloaded
+	//! @param queueMutex the mutex protecting the queue
+	bool createTextureThread(const std::string& url, std::vector<QueuedTex*>* queue, 
+		boost::mutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
+		bool toDelete=true);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -160,7 +174,7 @@ private:
 	friend class ManagedSTexture;
 
 	//! Internal
-	ManagedSTextureSP initTex(const std::string& afilename);
+	ManagedSTextureSP initTex(const std::string& fullPath);
 
 	//! Load the image memory. If we use threaded loading, the texture will
 	//! be uploaded to openGL memory at the next update() call.
