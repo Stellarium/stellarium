@@ -161,7 +161,7 @@ AC_ARG_WITH([qt42],
              AC_HELP_STRING([--with-qt42=yes],
                             [to specify that we will use QT-4.2.0 instead of SDL.]),
              [WITHQT="$withval"],
-             [WITHQT=no])
+             [WITHQT=yes])
 
 if test "${WITHQT}" != no ; then
 AC_DEFINE_UNQUOTED(USE_QT4, 1, [Define whether QT4 is to be used.])

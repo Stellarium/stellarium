@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "StelTextureMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 extern "C" {
 #include <jpeglib.h>
@@ -38,7 +39,10 @@ extern "C" {
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
+#include <boost/filesystem/operations.hpp>
+
 using namespace std;
+namespace fs = boost::filesystem;
 
 // Initialize statics
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
@@ -151,25 +155,14 @@ void StelTextureMgr::setDefaultParams()
 /*************************************************************************
  Internal
 *************************************************************************/
-ManagedSTextureSP StelTextureMgr::initTex(const string& afilename)
+ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
 {
-	string filename;
-	if (afilename[0]=='/' || (afilename[0]=='.' && afilename[1]=='/'))
-		filename = afilename;
-	else
-		filename = textureDir + afilename;
-	if (!StelUtils::fileExists(filename))
-	{
-		cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
-		return ManagedSTextureSP();
-	}
-
 	ManagedSTextureSP tex(new ManagedSTexture());
 	// Set parameters than can be set for this texture
 	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
 	tex->magFilter = magFilter;
 	tex->wrapMode = wrapMode;
-	tex->fullPath = filename;
+	tex->fullPath = fullPath;
 	tex->mipmapsMode = mipmapsMode;
 	tex->dynamicRangeMode = dynamicRangeMode;
 	
@@ -181,7 +174,25 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& afilename)
 *************************************************************************/
 ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
 {
-	ManagedSTextureSP tex = initTex(afilename);
+	fs::path ph;
+	try
+	{
+		ph = StelApp::getInstance().getFileMgr().findFile(afilename);
+	}
+	catch (exception e)
+	{
+		try
+		{
+			ph = StelApp::getInstance().getFileMgr().findFile("textures/" + afilename);
+		}
+		catch (exception e)
+		{
+			cerr << "WARNING : Can't find texture file " << afilename << ": " << e.what() << endl;
+			return ManagedSTextureSP();
+		}
+	}
+	
+	ManagedSTextureSP tex = initTex(ph.string());
 	if (tex==NULL)
 		return ManagedSTextureSP();
 
@@ -196,6 +207,7 @@ ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool la
 		return ManagedSTextureSP();
 }
 
+
 /*************************************************************************
  Structure used to pass parameter to loading threads
 *************************************************************************/
@@ -206,12 +218,17 @@ struct LoadQueueParam
 	boost::mutex* loadQueueMutex;
 	boost::thread* thread;
 	ManagedSTextureSP tex;
+	bool toDownload;
+	bool toDelete;
+	std::string fileExtension;
 	
-	// those 2 are used to return the final texture and status. Only access them in the main thread!!
-	STextureSP* outTex;
-	bool* status;
+	// Those 2 are used to return the final texture
+	std::vector<QueuedTex*>* outQueue;
+	boost::mutex* outQueueMutex;
+	std::string url;
+	std::string localPath;
+	void* userPtr;
 };
-
 
 struct loadTextureThread
 {
@@ -219,12 +236,34 @@ struct loadTextureThread
 	
 	void operator()()
 	{
+		if (param->toDownload)
+		{
+			string cacheFileName;
+			static int i = 0;
+			do
+			{
+				cacheFileName = "tmp" + StelUtils::intToString(++i) + param->fileExtension;
+			}
+			while (StelUtils::fileExists(cacheFileName));
+			
+			cout << "Downloading image " << param->url << " to " << cacheFileName << endl;
+			StelUtils::downloadFile(param->url, cacheFileName, APP_NAME);
+			param->tex->fullPath = cacheFileName;
+			param->localPath = cacheFileName;
+		}
+		
 		// Load the image
 		if (param->texMgr->loadImage(param->tex.get())==false)
 		{
 			param->tex->loadState = ManagedSTexture::LOAD_ERROR;
 		}
-		// And add it to 
+		
+		if (param->toDownload && param->toDelete)
+		{
+			StelUtils::deleteFile(param->localPath);
+		}
+		
+		// And add it to the loadQueue for final step in update()
 		boost::mutex::scoped_lock(*param->loadQueueMutex);
 		param->loadQueue->push_back(param);
 	}
@@ -232,25 +271,56 @@ struct loadTextureThread
 	LoadQueueParam* param;
 };
 
-bool StelTextureMgr::createTextureThread(STextureSP* outTex, const std::string& filename, bool* status)
+/*************************************************************************
+ Load an image from a file and create a new texture from it in a new thread. 
+ The created texture is inserted in the passed queue, protected by the given mutex.
+ If the texture creation fails for any reasons, its loadState will be set to LOAD_ERROR
+*************************************************************************/
+bool StelTextureMgr::createTextureThread(const std::string& url, 
+	std::vector<QueuedTex*>* outQueue, boost::mutex* outQueueMutex, void* userPtr, 
+	const std::string& fileExtension, bool toDelete)
 {
-	*status = false;
+	bool toDownload = false;
+	string filename;
+	if (url[0]=='/' || (url[0]=='.' && url[1]=='/'))
+		filename = url;
+	else
+		filename = textureDir + url;
+		
+	if (!StelUtils::fileExists(filename))
+	{
+		if (url[0]=='h' && url[1]=='t' && url[2]=='t' && url[3]=='p')
+		{
+			// Assume that the file must be downloaded
+			filename = "";
+			toDownload = true;
+		}
+		else
+		{
+			cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
+			return ManagedSTextureSP();
+		}
+	}
+	
 	ManagedSTextureSP tex = initTex(filename);
 	if (tex==NULL)
-	{
-		*status = true;	// indicate error
-		outTex = NULL;
 		return false;
-	}
 
 	LoadQueueParam* tparam = new LoadQueueParam();
 	tparam->texMgr = this;
 	tparam->loadQueue = &loadQueue;
 	tparam->loadQueueMutex = &loadQueueMutex;
 	tparam->tex = tex;
-	tparam->outTex = outTex;
-	tparam->status=status;
+	tparam->outQueue = outQueue;
+	tparam->outQueueMutex=outQueueMutex;
+	tparam->url = url;
+	tparam->localPath = filename;
+	tparam->toDownload = toDownload;
+	tparam->toDelete = toDelete;
+	tparam->userPtr = userPtr;
+	tparam->fileExtension = fileExtension;
 	tex->loadState = ManagedSTexture::LOADING_IMAGE;
+	// Create and run the thread
 	boost::thread* thread = new boost::thread(loadTextureThread(tparam));
 	tparam->thread = thread;
 	return true;
@@ -268,28 +338,21 @@ void StelTextureMgr::update()
 	for (;iter!=loadQueue.end();++iter)
 	{
 		(*iter)->thread->join();	// Ensure the thread is properly destroyed
-		if ((*iter)->tex->loadState==ManagedSTexture::LOAD_ERROR)
+		
 		{
-			// There was an error while loading the image
-			*((*iter)->outTex) = STextureSP();
-			*((*iter)->status) = true;
-		}
-		else
-		{
-			// Create openGL texture
-			if (glLoadTexture((*iter)->tex.get())==false)
+			boost::mutex::scoped_lock l(*(*iter)->outQueueMutex);
+			if ((*iter)->tex->loadState!=ManagedSTexture::LOAD_ERROR)
 			{
-				// There was an error while loading the texture to openGL
-				*((*iter)->outTex) = STextureSP();
-				*((*iter)->status) = true;
+				// Create openGL texture
+				if (glLoadTexture((*iter)->tex.get())==false)
+				{
+					// There was an error while loading the texture to openGL
+					(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
+				}
 			}
-			else
-			{
-				*((*iter)->outTex) = (*iter)->tex;
-				*((*iter)->status) = true;
-			}
+			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->localPath));
+			delete (*iter);
 		}
-		delete (*iter);
 	}
 	loadQueue.clear();
 }
@@ -354,8 +417,8 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				}
 				
 				// From the histogram, compute the Quantile cut at values minQuantile and maxQuantile
-				const double minQuantile = 0.10;
-				const double maxQuantile = 0.98;
+				const double minQuantile = 0.01;
+				const double maxQuantile = 0.99;
 				int minCut, maxCut;
 				int thresh = (int)(minQuantile*nbPix);
 				int minI = 0;
@@ -400,14 +463,14 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 					double scaling = 65535./(maxCut-minCut);
 					GLushort* data = (GLushort*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
-						data[i] = (GLushort)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 65535);
+						data[i] = (GLushort)MY_MIN((MY_MAX(data[i]-minCut, 0)*scaling), 65535);
 				}
 				else if (tex->internalFormat==2 && tex->type==GL_SHORT)
 				{
 					double scaling = 65535./(maxCut-minCut);
 					GLshort* data = (GLshort*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
-						data[i] = (GLshort)MY_MIN((MY_MAX((data[i]-minCut), -32767)*scaling), 32767);
+						data[i] = (GLshort)MY_MIN((MY_MAX(data[i]-minCut, -32767)*scaling), 32767);
 				}
 				else
 				{
@@ -484,11 +547,19 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 		{
 			memcpy(&(texels2[j*w*tex->internalFormat]), &(texels2[(tex->height-1)*w*tex->internalFormat]), tex->width*tex->internalFormat);
 		}
-		for (int j=0;j<h;++j)
+		if (w>tex->width)
 		{
-			memset(&texels2[(j*w+tex->width)*tex->internalFormat], texels2[(j*w+tex->width-1)*tex->internalFormat], w-tex->width);
+			for (int j=0;j<h;++j)
+			{
+				if (tex->internalFormat==1)
+					memset(&texels2[(j*w+tex->width)], texels2[(j*w+tex->width-1)], (w-tex->width));
+				else
+				{
+					for (int l=0;l<w-tex->width;++l)
+						memcpy(&texels2[(j*w+tex->width+l)*tex->internalFormat], &texels2[(j*w+tex->width-1)*tex->internalFormat], tex->internalFormat);
+				}
+			}
 		}
-		
 		
 		// Update the texture coordinates because the new texture does not occupy the whole buffer
 		tex->texCoordinates[0].set((double)tex->width/w, 0.);
