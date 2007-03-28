@@ -78,6 +78,8 @@ public:
 	
 	bool empty() {return elements.empty();}
 	void clear() {elements.clear();}
+	
+	size_t size() {return elements.size();}
 private:
 	
 	// We use a simple vector in this implementation
