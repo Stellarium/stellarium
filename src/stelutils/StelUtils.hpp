@@ -159,27 +159,46 @@ namespace StelUtils {
 	
 	//! @brief Format the double value to a wstring (with current locale)
 	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
-	//! @param d The input double value
-	//! @return The matching wstring
+	//! @param d the input double value
+	//! @return the matching wstring
 	wstring doubleToWstring(double d);
 	
 	//! @brief Format the int value to a wstring (with current locale)
 	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
-	//! @param i The input int value
-	//! @return The matching wstring
+	//! @param i the input int value
+	//! @return the matching wstring
 	wstring intToWstring(int i);
 	
 	//! @brief Format the int value to a string (with current locale)
-	//! @param i The input int value
-	//! @return The matching string
+	//! @param i the input int value
+	//! @return the matching string
 	string intToString(int i);
 	
-	double str_to_double(string str);
-	double str_to_pos_double(string str); // always positive
-	int str_to_int(string str);
-	int str_to_int(string str, int default_value);
-	string double_to_str(double dbl);
-	long int str_to_long(string str);
+	//! @brief Extract the int value from a string
+	//! @param str the input string
+	//! @return the matching int
+	int stringToInt(const string& str);
+	
+	//! @brief Extract the int value from a string, and use default value if the string is not convertible as an int
+	//! @param str the input string
+	//! @param defaultValue the default fallback value
+	//! @return the matching int or default value
+	int stringToInt(const string& str, int defaultValue);
+	
+	//! @brief Extract the double value from a string
+	//! @param str the input string
+	//! @return the matching double value
+	double stringToDouble(const string& str);
+	
+	//! @brief Format the double value to a string (with current locale)
+	//! @param dbl the input int value
+	//! @return the matching string
+	string doubleToString(double dbl);
+	
+	//! @brief Extract the long int value from a string
+	//! @param str the input string
+	//! @return the matching long int value
+	long int stringToLong(const string& str);
 	
 	//! @brief Convert from spherical coordinates to Rectangular direction
 	//! @param lng longitude in radian
