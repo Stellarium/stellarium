@@ -179,7 +179,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	valid_landscape = 1;  // assume valid if got here
 
 	// Load sides textures
-	nb_side_texs = StelUtils::str_to_int(param["nbsidetex"]);
+	nb_side_texs = StelUtils::stringToInt(param["nbsidetex"]);
 	side_texs = new STextureSP[nb_side_texs];
 	
 	char tmp[255];
@@ -191,7 +191,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	}
 
 	// Init sides parameters
-	nb_side = StelUtils::str_to_int(param["nbside"]);
+	nb_side = StelUtils::stringToInt(param["nbside"]);
 	sides = new landscape_tex_coord[nb_side];
 	string s;
 	int texnum;
@@ -209,7 +209,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 		//printf("%f %f %f %f\n",a,b,c,d);
 	}
 
-	nb_decor_repeat = StelUtils::str_to_int(param["nb_decor_repeat"], 1);
+	nb_decor_repeat = StelUtils::stringToInt(param["nb_decor_repeat"], 1);
 
 	ground_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
 	s = param["ground"];
@@ -230,14 +230,14 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	fog_tex_coord.tex_coords[2] = c;
 	fog_tex_coord.tex_coords[3] = d;
 
-	fog_alt_angle = StelUtils::str_to_double(param["fog_alt_angle"]);
-	fog_angle_shift = StelUtils::str_to_double(param["fog_angle_shift"]);
-	decor_alt_angle = StelUtils::str_to_double(param["decor_alt_angle"]);
-	decor_angle_shift = StelUtils::str_to_double(param["decor_angle_shift"]);
-	decor_angle_rotatez = StelUtils::str_to_double(param["decor_angle_rotatez"]);
-	ground_angle_shift = StelUtils::str_to_double(param["ground_angle_shift"]);
-	ground_angle_rotatez = StelUtils::str_to_double(param["ground_angle_rotatez"]);
-	draw_ground_first = StelUtils::str_to_int(param["draw_ground_first"]);
+	fog_alt_angle = StelUtils::stringToDouble(param["fog_alt_angle"]);
+	fog_angle_shift = StelUtils::stringToDouble(param["fog_angle_shift"]);
+	decor_alt_angle = StelUtils::stringToDouble(param["decor_alt_angle"]);
+	decor_angle_shift = StelUtils::stringToDouble(param["decor_angle_shift"]);
+	decor_angle_rotatez = StelUtils::stringToDouble(param["decor_angle_rotatez"]);
+	ground_angle_shift = StelUtils::stringToDouble(param["ground_angle_shift"]);
+	ground_angle_rotatez = StelUtils::stringToDouble(param["ground_angle_rotatez"]);
+	draw_ground_first = StelUtils::stringToInt(param["draw_ground_first"]);
 }
 
 void LandscapeOldStyle::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)

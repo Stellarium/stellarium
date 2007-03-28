@@ -394,7 +394,7 @@ Landscape* LandscapeMgr::create_from_hash(stringHash_t & param)
 	else
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"], StelUtils::str_to_double(param["texturefov"]));
+		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"], StelUtils::stringToDouble(param["texturefov"]));
 		return ldscp;
 	}
 }

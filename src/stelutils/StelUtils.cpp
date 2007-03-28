@@ -485,7 +485,7 @@ wstring printAngleHMS(double angle, bool decimals)
 }
 
 
-double str_to_double(string str)
+double stringToDouble(const string& str)
 {
 	if(str.empty()) return 0;
 	double dbl;
@@ -495,20 +495,7 @@ double str_to_double(string str)
 	return dbl;
 }
 
-// always positive
-double str_to_pos_double(string str)
-{
-	if(str.empty()) return 0;
-	double dbl;
-	std::istringstream dstr( str );
-
-	dstr >> dbl;
-	if(dbl < 0 ) dbl *= -1;
-	return dbl;
-}
-
-
-int str_to_int(string str)
+int stringToInt(const string& str)
 {
 	if(str.empty()) return 0;
 	int integer;
@@ -519,7 +506,7 @@ int str_to_int(string str)
 }
 
 
-int str_to_int(string str, int default_value)
+int stringToInt(const string& str, int default_value)
 {
 	if(str.empty()) return default_value;
 	int integer;
@@ -529,14 +516,14 @@ int str_to_int(string str, int default_value)
 	return integer;
 }
 
-string double_to_str(double dbl)
+string doubleToString(double dbl)
 {
 	std::ostringstream oss;
 	oss << dbl;
 	return oss.str();
 }
 
-long int str_to_long(string str)
+long int stringToLong(const string& str)
 {
 	if(str.empty()) return 0;
 	long int integer;
@@ -777,13 +764,13 @@ int getBiggerPowerOfTwo(int value)
 }
 
 //! Download the file from the given URL to the given name using libcurl
-	bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer)
-	{
+bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer)
+{
 #ifndef HAVE_LIBCURL
-		cerr << "Stellarium was compiled without libCurl support. Can't access remote URLs." << endl;
-		return false;
+	cerr << "Stellarium was compiled without libCurl support. Can't access remote URLs." << endl;
+	return false;
 #else
-		// Download the file using libCurl
+	// Download the file using libCurl
 	CURL* handle = curl_easy_init();
 	curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(handle, CURLOPT_REFERER, referer.c_str());
@@ -798,13 +785,13 @@ int getBiggerPowerOfTwo(int value)
 	if (curl_easy_perform(handle)!=0)
 	{
 		cerr << "There was an error while getting file: " << url << endl;
-			fclose(fic);
-			return false;
-		}
 		fclose(fic);
-		return true;
-#endif
+		return false;
 	}
+	fclose(fic);
+	return true;
+#endif
+}
 	
 	// Return the inverse sinus hyperbolic of z
 double asinh(double z)
