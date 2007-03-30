@@ -40,7 +40,7 @@ public:
 	virtual int getScreenW() const {return screenW;}
 	
 	//! Get the height of the openGL screen
-	virtual int getScreenH() const = {return screenH;}
+	virtual int getScreenH() const {return screenH;}
 protected:
 
 	// Initialize openGL screen
