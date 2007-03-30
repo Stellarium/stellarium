@@ -41,7 +41,7 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 	timeCounter = StelApp::getInstance().getTotalRunTime();
 }
-	
+
 LoadingBar::~LoadingBar()
 {
 }
@@ -53,6 +53,8 @@ void LoadingBar::Draw(float val)
 	if (StelApp::getInstance().getTotalRunTime()-timeCounter<0.050)
 		return;
 	timeCounter = StelApp::getInstance().getTotalRunTime();
+	if (val>1.)
+		val = 1.;
   
 	// Draw the splash screen if available
 	if (splash)
@@ -81,35 +83,23 @@ void LoadingBar::Draw(float val)
 	// black out background of text for redraws (so can keep sky unaltered)
 	glColor3f(0, 0, 0);
 	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1, 0);		// Bottom Right
 		glVertex3f(barx + barwidth, bary-17, 0.0f);
-		glTexCoord2i(0, 0);		// Bottom Left
 		glVertex3f(barx, bary-17, 0.0f);
-		glTexCoord2i(1, 1);		// Top Right
 		glVertex3f(barx + barwidth, bary-5, 0.0f);
-		glTexCoord2i(0, 1);		// Top Left
 		glVertex3f(barx, bary-5, 0.0f);
 	glEnd();
 	glColor3f(0.8, 0.8, 1);
 	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1, 0);		// Bottom Right
 		glVertex3f(barx + barwidth, bary + barheight, 0.0f);
-		glTexCoord2i(0, 0);		// Bottom Left
 		glVertex3f(barx, bary + barheight, 0.0f);
-		glTexCoord2i(1, 1);		// Top Right
 		glVertex3f(barx + barwidth, bary, 0.0f);
-		glTexCoord2i(0, 1);		// Top Left
 		glVertex3f(barx, bary, 0.0f);
 	glEnd();
 	glColor3f(0.4f, 0.4f, 0.6f);
 	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1, 0);		// Bottom Right
 		glVertex3f(-1 + barx + barwidth * val, bary + barheight - 1, 0.0f);
-		glTexCoord2i(0, 0);		// Bottom Left
 		glVertex3f(1 + barx, bary + barheight - 1, 0.0f);
-		glTexCoord2i(1, 1);		// Top Right
 		glVertex3f(-1 + barx + barwidth * val, bary + 1, 0.0f);
-		glTexCoord2i(0, 1);		// Top Left
 		glVertex3f(1 + barx, bary + 1, 0.0f);
 	glEnd();
 	
