@@ -35,6 +35,12 @@ public:
 	
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
+	
+	//! Get the width of the openGL screen
+	virtual int getScreenW() const {return screenW;}
+	
+	//! Get the height of the openGL screen
+	virtual int getScreenH() const = {return screenH;}
 protected:
 
 	// Initialize openGL screen
@@ -48,6 +54,8 @@ protected:
 	
 	virtual void setResizable(bool resizable);
 private:
+	// Screen size
+	int screenW, screenH;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	// SDL related function and variables
 	static SDL_Cursor *create_cursor(const char *image[]);

@@ -419,7 +419,7 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				// From the histogram, compute the Quantile cut at values minQuantile and maxQuantile
 				const double minQuantile = 0.01;
 				const double maxQuantile = 0.99;
-				int minCut, maxCut;
+				int minCut=0, maxCut=0;
 				int thresh = (int)(minQuantile*nbPix);
 				int minI = 0;
 				// Start from 1 to ignore zeroed region in the image

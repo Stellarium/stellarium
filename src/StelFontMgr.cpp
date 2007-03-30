@@ -90,7 +90,7 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 		catch(exception& e)
 		{
 			cerr << "ERROR while trying to load fonts: " << e.what() << endl;
-			SFont* dummy;
+			SFont* dummy=NULL;
 			return *dummy;
 		}
 	}

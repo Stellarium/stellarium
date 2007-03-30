@@ -181,11 +181,11 @@ public:
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection(void) const;
 	
-	//! Get the width of the screen
-	int getScreenW() const {return screenW;}
+	//! Get the width of the openGL screen
+	virtual int getScreenW() const = 0;
 	
-	//! Get the height of the screen
-	int getScreenH() const {return screenH;}
+	//! Get the height of the openGL screen
+	virtual int getScreenH() const = 0;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
@@ -240,14 +240,12 @@ protected:
 	//! Terminate the application
 	virtual void terminateApplication(void) = 0;
 	
-	//! Call this when the size of the main window has changed
-	void resize(int w, int h);
+	//! Call this when the size of the GL window has changed
+	void glWindowHasBeenResized(int w, int h);
 
 	//! Call this when you want to make the window (not) resizable
 	virtual void setResizable(bool resizable) = 0;
 private:
-	// Screen size
-	int screenW, screenH;
 	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const std::string& fileName, const std::string& section);
