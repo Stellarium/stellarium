@@ -149,17 +149,12 @@ void StelAppQt4::startMainLoop()
 	GLWidget openGLWin(&mainWin, this);
 	winOpenGL = &openGLWin;
 	mainWin.setCentralWidget(&openGLWin);
+	mainWin.show();
 	openGLWin.show();
-//	QDockWidget* configWidget = new QDockWidget("Stellarium Config", &mainWin);
-//	configWidget->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable);
-//	configWidget->resize(200,200);
-//	mainWin.addDockWidget(Qt::LeftDockWidgetArea, configWidget);
 
 	StelApp::init();
-	
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
 	openGLWin.resizeGL(getScreenW(), getScreenH());
-	mainWin.show();
 	
 	app.exec();
 }
