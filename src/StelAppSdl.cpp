@@ -58,6 +58,9 @@ void StelAppSdl::setResizable(bool resizable)
 void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
                             string iconFile)
 {
+	screenW = w;
+	screenH = h;
+
     Screen = NULL;
 	Uint32	Vflags;		// Our Video Flags
 #ifdef HAVE_SDL_MIXER_H
@@ -341,7 +344,9 @@ void StelAppSdl::startMainLoop()
 						                          Screen->format->BitsPerPixel,
 						                          Screen->flags);
 						assert(Screen);
-						resize(E.resize.w,E.resize.h);
+						screenH = E.resize.h;
+						screenW = E.resize.w;
+						glWindowHasBeenResized(E.resize.w,E.resize.h);
 					}
 					break;
 
