@@ -294,7 +294,8 @@ typedef enum {
 Stel_KEYDOWN,
 Stel_KEYUP,
 Stel_MOUSEBUTTONDOWN,		/* Mouse button pressed */
-Stel_MOUSEBUTTONUP		/* Mouse button released */
+Stel_MOUSEBUTTONUP,		/* Mouse button released */
+Stel_NOEVENT
 } StelEvent;
 
 // mac seems to use KMOD_META instead of KMOD_CTRL
