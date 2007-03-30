@@ -163,17 +163,17 @@ void StelUI::init(const InitParser& conf)
 	Painter p(baseTex, &baseFont, s_color(s_vec3(0.5, 0.5, 0.5)), s_color(s_vec3(1., 1., 1.)));
 	Component::setDefaultPainter(p);
 
-	Component::initScissor(StelApp::getInstance().screenW, StelApp::getInstance().screenH);
+	Component::initScissor(StelApp::getInstance().getScreenW(), StelApp::getInstance().getScreenH());
 
 	desktop = new Container(true);
-	desktop->reshape(0,0,StelApp::getInstance().screenW,StelApp::getInstance().screenH);
+	desktop->reshape(0,0,StelApp::getInstance().getScreenW(),StelApp::getInstance().getScreenH());
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,StelApp::getInstance().screenH-41-(int)baseFont.getDescent());
+	bt_flag_help_lbl->setPos(3,StelApp::getInstance().getScreenH()-41-(int)baseFont.getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(StelApp::getInstance().screenW-210,StelApp::getInstance().screenH-41-(int)baseFont.getDescent());
+	bt_flag_time_control_lbl->setPos(StelApp::getInstance().getScreenW()-210,StelApp::getInstance().getScreenH()-41-(int)baseFont.getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -222,19 +222,19 @@ void StelUI::init(const InitParser& conf)
 
 void StelUI::resize()
 {
-	Component::initScissor(StelApp::getInstance().screenW, StelApp::getInstance().screenH);
+	Component::initScissor(StelApp::getInstance().getScreenW(), StelApp::getInstance().getScreenH());
 	if (!desktop)
 		return;
 		
-	desktop->reshape(0,0,StelApp::getInstance().screenW,StelApp::getInstance().screenH);
-	top_bar_ctr->reshape(0,0,StelApp::getInstance().screenW,top_bar_ctr->getSizey());
-	top_bar_fps_lbl->setPos(StelApp::getInstance().screenW-100,1);
-	top_bar_fov_lbl->setPos(StelApp::getInstance().screenW-220,1);
-	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
-	bt_flag_ctr->setPos(0,StelApp::getInstance().screenH-25);
-	bt_flag_help_lbl->setPos(3,StelApp::getInstance().screenH-41-4);
-	bt_time_control_ctr->reshape(StelApp::getInstance().screenW-4*25-1, StelApp::getInstance().screenH-25, 4*25, 25);
-	bt_flag_time_control_lbl->setPos(StelApp::getInstance().screenW-210,StelApp::getInstance().screenH-41-4);
+	desktop->reshape(0,0,StelApp::getInstance().getScreenW(),StelApp::getInstance().getScreenH());
+	top_bar_ctr->reshape(0,0,StelApp::getInstance().getScreenW(),top_bar_ctr->getSizey());
+	top_bar_fps_lbl->setPos(StelApp::getInstance().getScreenW()-100,1);
+	top_bar_fov_lbl->setPos(StelApp::getInstance().getScreenW()-220,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
+	bt_flag_ctr->setPos(0,StelApp::getInstance().getScreenH()-25);
+	bt_flag_help_lbl->setPos(3,StelApp::getInstance().getScreenH()-41-4);
+	bt_time_control_ctr->reshape(StelApp::getInstance().getScreenW()-4*25-1, StelApp::getInstance().getScreenH()-25, 4*25, 25);
+	bt_flag_time_control_lbl->setPos(StelApp::getInstance().getScreenW()-210,StelApp::getInstance().getScreenH()-41-4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -258,12 +258,12 @@ Component* StelUI::createTopBar(SFont& baseFont)
 {
 	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
-	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelApp::getInstance().screenW-100,1);
-	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelApp::getInstance().screenW-220,1);
+	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelApp::getInstance().getScreenW()-100,1);
+	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelApp::getInstance().getScreenW()-220,1);
 	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), &baseFont);
-	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,StelApp::getInstance().screenW,(int)(baseFont.getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,StelApp::getInstance().getScreenW(),(int)(baseFont.getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -440,7 +440,7 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, StelApp::getInstance().screenH-25, x-1, 25);
+	bt_flag_ctr->reshape(0, StelApp::getInstance().getScreenH()-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -474,7 +474,7 @@ Component* StelUI::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
 	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
-	bt_time_control_ctr->reshape(StelApp::getInstance().screenW-4*25-1, StelApp::getInstance().screenH-25, 4*25, 25);
+	bt_time_control_ctr->reshape(StelApp::getInstance().getScreenW()-4*25-1, StelApp::getInstance().getScreenH()-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
@@ -1369,7 +1369,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 	{
 		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
-	top_bar_appName_lbl->setPos(StelApp::getInstance().screenW/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
 wstring StelUI::getTitleWithAltitude(void)

@@ -83,8 +83,21 @@ void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string i
 	if (fullScreen)
 	{
 		mainWindow->showFullScreen();
-		winOpenGL->setGeometry(0,0,1600,1200);
+		QDesktopWidget* desktop = QApplication::desktop();
+		mainWindow->resize(desktop->screenGeometry(mainWindow).width(),desktop->screenGeometry(mainWindow).height());
 	}
+}
+
+// Get the width of the openGL screen
+int StelAppQt4::getScreenW() const
+{
+	return winOpenGL->width();
+}
+	
+// Get the height of the openGL screen
+int StelAppQt4::getScreenH() const
+{
+	return winOpenGL->height();
 }
 
 string StelAppQt4::getVideoModeList(void) const
@@ -122,7 +135,7 @@ double StelAppQt4::getTotalRunTime() const
 void StelAppQt4::startMainLoop()
 {
 	int argc = 0;
-	char **argv;
+	char **argv = NULL;
 	QApplication app(argc, argv);
 	if (!QGLFormat::hasOpenGL())
 	{
@@ -131,19 +144,21 @@ void StelAppQt4::startMainLoop()
 	
 	StelMainWindow mainWin(this);
 	mainWindow = &mainWin;
+	mainWindow->setMinimumSize(400,300);
 	
 	GLWidget openGLWin(&mainWin, this);
 	winOpenGL = &openGLWin;
-	
 	mainWin.setCentralWidget(&openGLWin);
 	openGLWin.show();
-
 //	QDockWidget* configWidget = new QDockWidget("Stellarium Config", &mainWin);
 //	configWidget->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable);
 //	configWidget->resize(200,200);
 //	mainWin.addDockWidget(Qt::LeftDockWidgetArea, configWidget);
 
 	StelApp::init();
+	
+	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
+	openGLWin.resizeGL(getScreenW(), getScreenH());
 	mainWin.show();
 	
 	app.exec();
@@ -158,7 +173,6 @@ void StelAppQt4::setResizable(bool resizable)
 {
 	if (resizable)
 	{
-		mainWindow->setMinimumSize(300,200);
 		mainWindow->setMaximumSize(10000,10000);
 	}
 	else
@@ -192,7 +206,7 @@ void GLWidget::initializeGL()
 void GLWidget::resizeGL(int w, int h)
 {
 	//cerr << "GLWidget::resizeGL(" << w << "x" << h << ")" << endl;
-	stelApp->resize(w, h);
+	stelApp->glWindowHasBeenResized(w, h);
 }
 
 void GLWidget::paintGL()
@@ -228,7 +242,7 @@ StelMod qtModToStelMod(Qt::KeyboardModifiers m)
 
 void GLWidget::mousePressEvent(QMouseEvent* event)
 {
-	Uint8 button;
+	Uint8 button = Stel_NOEVENT;
 	if (event->button() == Qt::LeftButton)
 		button = Stel_BUTTON_LEFT;
 	if (event->button() == Qt::RightButton)
@@ -236,7 +250,7 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 	if (event->button() == Qt::MidButton)
 		button = Stel_BUTTON_MIDDLE;		
 
-	Uint8 state;
+	Uint8 state = Stel_NOEVENT;
 	if (event->type() == QEvent::MouseButtonPress)
 		state = Stel_MOUSEBUTTONDOWN;
 	if (event->type() == QEvent::MouseButtonRelease)
@@ -247,7 +261,7 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-	Uint8 button;
+	Uint8 button = Stel_NOEVENT;
 	if (event->button() == Qt::LeftButton)
 		button = Stel_BUTTON_LEFT;
 	if (event->button() == Qt::RightButton)
@@ -255,7 +269,7 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* event)
 	if (event->button() == Qt::MidButton)
 		button = Stel_BUTTON_MIDDLE;		
 
-	Uint8 state;
+	Uint8 state = Stel_NOEVENT;
 	if (event->type() == QEvent::MouseButtonPress)
 		state = Stel_MOUSEBUTTONDOWN;
 	if (event->type() == QEvent::MouseButtonRelease)
@@ -277,7 +291,7 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 	else
 		button = Stel_BUTTON_WHEELDOWN;
 	
-	StelMod mod;
+	StelMod mod = StelMod_NONE;
 	if (event->modifiers() == Qt::ShiftModifier)
 		mod = StelMod_SHIFT;
 	if (event->modifiers() == Qt::ControlModifier)
@@ -407,9 +421,13 @@ void StelMainWindow::keyPressEvent(QKeyEvent* event)
 	{
 		// Toggle full screen
 		if (!isFullScreen())
+		{
 			showFullScreen();
+		}
 		else
+		{
 			showNormal();
+		}
 	}
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 }

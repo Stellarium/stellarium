@@ -231,7 +231,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	// we want to lookup the landscape ID (dir) from the name.
 	map<string,string> nameToDirMap = getNameToDirMap();
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
-	Landscape* newLandscape;
+	Landscape* newLandscape = NULL;
 	
 	if (nameToDirMap[new_landscape_name] != "")
 	{

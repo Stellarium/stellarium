@@ -56,8 +56,13 @@ public:
 
 	virtual void init(void) {;}
 	
-	class StelMainWindow* getMainWindow() {return mainWindow;}
+	//! Get the width of the openGL screen
+	virtual int getScreenW() const;
 	
+	//! Get the height of the openGL screen
+	virtual int getScreenH() const;
+	
+	class StelMainWindow* getMainWindow() {return mainWindow;}
 protected:
 
 	// Initialize openGL screen

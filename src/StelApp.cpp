@@ -207,7 +207,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 	}
 	InitParser conf;
 	conf.load(dotStellariumDir + "config.ini");
-	distorter = ViewportDistorter::create(type,screenW,screenH,
+	distorter = ViewportDistorter::create(type,getScreenW(),getScreenH(),
 	                                      core->getProjection(),conf);
 }
 
@@ -254,9 +254,7 @@ void StelApp::init(void)
 	}
 
 	// Create openGL context first
-	screenW = conf.get_int("video:screen_w");
-	screenH = conf.get_int("video:screen_h");
-	initOpenGL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
+	initOpenGL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
 
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
@@ -264,15 +262,15 @@ void StelApp::init(void)
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	maxfps 				= conf.get_double ("video","maximum_fps",10000);
-	minfps 				= conf.get_double ("video","minimum_fps",10000);
+	maxfps = conf.get_double ("video","maximum_fps",10000);
+	minfps = conf.get_double ("video","minimum_fps",10000);
 
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
 	core->initProj(conf);
 
 	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
-	              screenW, screenH,
+	              getScreenW(), getScreenH(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 
 	// Stel Object Data Base manager
@@ -451,14 +449,12 @@ double StelApp::draw(int delta_time)
 }
 
 /*************************************************************************
- Call this when the size of the main window has changed
+ Call this when the size of the GL window has changed
 *************************************************************************/
-void StelApp::resize(int w, int h)
+void StelApp::glWindowHasBeenResized(int w, int h)
 {
-	screenW = w;
-	screenH = h;
 	if (core && core->getProjection())
-		core->getProjection()->windowHasBeenResized(w,h);
+		core->getProjection()->windowHasBeenResized(getScreenW(),getScreenH());
 	if (ui)
 		ui->resize();
 }
@@ -468,7 +464,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
 	const int ui_x = x;
 	const int ui_y = y;
-	y = screenH - 1 - y;
+	y = getScreenH() - 1 - y;
 	distorter->distortXY(x,y);
 
 	if (ui->handle_clic(ui_x, ui_y, button, state, mod)) return 1;
@@ -515,7 +511,7 @@ int StelApp::handleMove(int x, int y, StelMod mod)
 {
 	const int ui_x = x;
 	const int ui_y = y;
-	y = screenH - 1 - y;
+	y = getScreenH() - 1 - y;
 	distorter->distortXY(x,y);
 	
 	// Send the event to every StelModule
@@ -555,16 +551,16 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 //! Set the drawing mode in 2D for drawing in the full screen
 void StelApp::set2DfullscreenProjection(void) const
 {
-	glViewport(0,0,screenW,screenH);
+	glViewport(0,0,getScreenW(),getScreenH());
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
 	glLoadIdentity();
-	glOrtho(0,screenW,0,screenH,-1,1);	// set a 2D orthographic projection
+	glOrtho(0,getScreenW(),0,getScreenH(),-1,1);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 	glPushMatrix();
 	glLoadIdentity();
 	glScalef(1, -1, 1);					// invert the y axis, down is positive
-	glTranslatef(0, -screenH, 0);		// move the origin from the bottom left corner to the upper left corner
+	glTranslatef(0, -getScreenH(), 0);		// move the origin from the bottom left corner to the upper left corner
 }
 
 //! Restore previous projection mode

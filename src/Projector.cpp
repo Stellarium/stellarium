@@ -133,8 +133,7 @@ void Projector::init(const InitParser& conf)
 void Projector::windowHasBeenResized(int width,int height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
-	setViewport(0,0,width,height,
-		0.5*width, 0.5*height,MY_MIN(viewport_xywh[2],viewport_xywh[3]));
+	setViewport(0,0,width,height, 0.5*width, 0.5*height,MY_MIN(width,height));
 }
 
 Projector::Projector(const Vector4<GLint>& viewport, double _fov)
