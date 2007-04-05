@@ -178,6 +178,7 @@ void StelAppQt4::setResizable(bool resizable)
 
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
+	setFocusPolicy(Qt::ClickFocus);
 	setMouseTracking(true);
 	// make openGL context current
 	makeCurrent();
