@@ -509,7 +509,12 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 	}
 
 	// Load the image
-	loadFuncIter->second->loadImage(tex->fullPath, *tex);
+	if (!loadFuncIter->second->loadImage(tex->fullPath, *tex))
+	{
+		cerr << "Image loading failed for file: " << tex->fullPath << endl;
+		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
+		return false;
+	}
 
 	if (!tex->texels)
 	{
@@ -839,26 +844,65 @@ bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTextur
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+/* jpeg error manager */
+struct my_error_mgr
+{
+	/* "public" fields */
+	struct jpeg_error_mgr pub;
+
+	/* for return to caller */
+	jmp_buf setjmp_buffer;
+};
+
+void err_exit(j_common_ptr cinfo)
+{
+	/* get error manager */
+	my_error_mgr* jerr = (my_error_mgr*)(cinfo->err);
+
+	/* display error message */
+	(*cinfo->err->output_message) (cinfo);
+
+	/* return control to the setjmp point */
+	longjmp (jerr->setjmp_buffer, 1);
+}
+
+
 bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTexture& texinfo)
 {
 	FILE *fp = NULL;
 	struct jpeg_decompress_struct cinfo;
-	struct jpeg_error_mgr jerr;
-	JSAMPROW j;
-	int i;
+	struct my_error_mgr jerr;
 
 	/* open image file */
 	fp = fopen (filename.c_str(), "rb");
 	if (!fp)
 	{
-		cerr << "error: couldn't open \"" << filename << "\"!\n";
+		cerr << "Error: couldn't open \"" << filename << "\"!\n";
 		return false;
 	}
 
 	/* create and configure decompressor */
 	jpeg_create_decompress (&cinfo);
-	cinfo.err = jpeg_std_error (&jerr);
+	cinfo.err = jpeg_std_error (&jerr.pub);
 	jpeg_stdio_src (&cinfo, fp);
+
+	/* configure error manager */
+	jerr.pub.error_exit = err_exit;
+	texinfo.texels = NULL;
+	
+	if (setjmp(jerr.setjmp_buffer))
+	{
+		cerr << "Error: couldn't read jpeg file \"" << filename << "\"!\n";
+		jpeg_destroy_decompress(&cinfo);
+		if (texinfo.texels)
+		{
+			free(texinfo.texels);
+			texinfo.texels = NULL;
+		}
+		fclose(fp);
+		return false;
+	}
 
 	/*
 	 * NOTE: this is the simplest "readJpegFile" function. There
@@ -871,7 +915,8 @@ bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTextur
 	 */
 
 	/* read header and prepare for decompression */
-	jpeg_read_header (&cinfo, TRUE);
+	jpeg_read_header(&cinfo, TRUE);
+
 	jpeg_start_decompress (&cinfo);
 
 	/* initialize image's member variables */
@@ -888,9 +933,9 @@ bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTextur
 	                                    * texinfo.height * texinfo.internalFormat);
 
 	/* extract each scanline of the image */
-	for (i = 0; i < texinfo.height; ++i)
+	for (int i = 0; i < texinfo.height; ++i)
 	{
-		j = (texinfo.texels +
+		JSAMPROW j = (texinfo.texels +
 		     ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
 		jpeg_read_scanlines (&cinfo, &j, 1);
 	}
@@ -899,6 +944,6 @@ bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTextur
 	jpeg_finish_decompress (&cinfo);
 	jpeg_destroy_decompress (&cinfo);
 
-	fclose (fp);
+	fclose(fp);
 	return true;
 }
