@@ -1372,6 +1372,11 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
+void StelUI::setTitle(const wstring& title)
+{
+	top_bar_appName_lbl->setLabel(title);
+}
+
 wstring StelUI::getTitleWithAltitude(void)
 {
 	return core->getObservatory()->getHomePlanetNameI18n() +

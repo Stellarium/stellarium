@@ -69,6 +69,7 @@ public:
 	void show_message(wstring _message, int _time_out=0);
     void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
     void setTitleObservatoryName(const wstring& name);
+    void setTitle(const wstring& title);
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
 
@@ -83,6 +84,10 @@ public:
 	void setFlagShowTuiMenu(const bool flag);
 	bool getFlagShowTuiMenu() { return FlagShowTuiMenu; }
 
+	void setFlagShowTime(int b) {FlagShowTime=b;}
+	void setFlagShowFPS(int b) {FlagShowFps=b;}
+	void setFlagShowFov(int b) {FlagShowFov=b;}
+	
 	// for use by TUI
 	void saveCurrentConfig(const string& confFile);
 	
