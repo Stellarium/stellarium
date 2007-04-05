@@ -146,6 +146,10 @@ public:
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
 	
+	//! @brief Get the old-style home-made GUI. This method will be suppressed when the StelUI is made as a real StelModule
+	//! @return a pointer on the old-style home-made GUI.
+	StelUI* getStelUI() {return ui;}
+	
 	//! Update translations and font everywhere in the program
 	void updateAppLanguage();
 	
