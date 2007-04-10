@@ -6,6 +6,8 @@
  * Author and Copyright: Johannes Gajdosik, 2006
  *  (I will move these parts to new files,
  *   so that the Copyright is more clear).
+ *
+ * MSB unpacking of gcc bitfields by Nigel Kerr
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +48,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "bytes.h"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -159,15 +162,82 @@ struct ZoneData { // a single Triangle
 
 #ifdef WORDS_BIGENDIAN
 
+// MSB UnpackBits and UnpackUBits really implemented the same as LSB (below)
+// but we use a local char[4] to swap the bytes about before the cast to int
+// or unsigned int.
+
 static
 int UnpackBits(const char *addr,int bits_begin,const int bits_size) {
-  #error someone with a bigendian machine: please implement this
-  #error Parameters: addr,bits_begin,bits_size describe the bitfield as
-  #error implemented in gcc for littleendian machines
+	while (bits_begin >= 8) {
+		bits_begin -= 8;
+		addr++;
+	}
+
+	char swapper[4];
+	swapper[3] = addr[0];
+	swapper[2] = addr[1];
+	swapper[1] = addr[2];
+	swapper[0] = addr[3];
+	
+	int rval = ((const int*)(&(swapper[0])))[0];
+	
+	const int bits_end = bits_begin + bits_size;
+	if (bits_end <= 32) {
+		if (bits_end < 32) rval <<= (32-bits_end);
+		if (bits_size < 32) rval >>= (32-bits_size);
+		
+	} else {
+		rval >>= bits_begin;
+		const int mask = (1<<(32-bits_begin))-1;
+		rval &= mask;
+		swapper[3] = addr[4];
+		swapper[2] = addr[5];
+		swapper[1] = addr[6];
+		swapper[0] = addr[7];
+		
+		int rval_hi = ((const int*)(&(swapper[0])))[0];
+		rval_hi <<= (64-bits_end);
+		rval_hi >>= (32-bits_size);
+		rval_hi &= ~mask;
+		rval |= rval_hi;
+	}
+	return rval;
 }
 
 static
 unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
+	while (bits_begin >= 8) {
+		bits_begin -= 8;
+		addr++;
+	}
+
+	char swapper[4];
+	swapper[3] = addr[0];
+	swapper[2] = addr[1];
+	swapper[1] = addr[2];
+	swapper[0] = addr[3];
+	
+	unsigned int rval = ((const unsigned int*)(&(swapper[0])))[0];
+	
+	const int bits_end = bits_begin + bits_size;
+	if (bits_end <= 32) {
+		if (bits_begin > 0) rval >>= bits_begin;
+	} else {
+		rval >>= bits_begin;
+		const int mask = (((unsigned int)1)<<(32-bits_begin))-1;
+		rval &= mask;
+		swapper[3] = addr[4];
+		swapper[2] = addr[5];
+		swapper[1] = addr[6];
+		swapper[0] = addr[7];
+		
+		unsigned int rval_hi = ((const unsigned int*)(&(swapper[0])))[0];
+		rval_hi <<= (32-bits_begin);
+		rval_hi &= ~mask;
+		rval |= rval_hi;
+	}
+	if (bits_size < 32) rval &= ((((unsigned int)1)<<bits_size)-1);
+	return rval;
 }
 
 #else
@@ -230,7 +300,7 @@ struct Star3 {  // 6 byte
   unsigned int mag:5;
   enum {max_pos_val=((1<<17)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
-                              const SpecialZoneData<Star3> *z) const;
+                               const SpecialZoneData<Star3> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double) const {
     Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
     pos.normalize();
@@ -239,6 +309,7 @@ struct Star3 {  // 6 byte
   float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
+  void print(void);
 } __attribute__ ((__packed__)) ;
 
 void Star3::repack(void) {
@@ -252,6 +323,14 @@ void Star3::repack(void) {
   mag = _mag;
 }
 
+void Star3::print(void) {
+  cout << "x0: " << x0
+       << ", x1: " << x1
+       << ", b_v: " << b_v
+       << ", mag: " << mag
+       << endl;
+}
+
 
 struct Star2 {  // 10 byte
   int x0:20;
@@ -262,7 +341,7 @@ struct Star2 {  // 10 byte
   unsigned int mag:5;
   enum {max_pos_val=((1<<19)-1)};
   StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
-                              const SpecialZoneData<Star2> *z) const;
+                               const SpecialZoneData<Star2> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
     Vec3d pos = z->center
               + (x0+movement_factor*dx0)*z->axis0
@@ -273,6 +352,7 @@ struct Star2 {  // 10 byte
   float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
+  void print(void);
 } __attribute__ ((__packed__));
 
 void Star2::repack(void) {
@@ -290,6 +370,16 @@ void Star2::repack(void) {
   mag = _mag;
 }
 
+void Star2::print(void) {
+  cout << "x0: " << x0
+       << ", x1: " << x1
+       << ", dx0: " << dx0
+       << ", dx1: " << dx1
+       << ", b_v: " << b_v
+       << ", mag: " << mag
+       << endl;
+}
+
 
 
 struct Star1 { // 28 byte
@@ -303,7 +393,7 @@ struct Star1 { // 28 byte
   Int32 dx0,dx1,plx;
   enum {max_pos_val=0x7FFFFFFF};
   StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
-                              const SpecialZoneData<Star1> *z) const;
+                               const SpecialZoneData<Star1> *z) const;
   Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
     Vec3d pos = z->center
               + (x0+movement_factor*dx0)*z->axis0
@@ -325,6 +415,7 @@ struct Star1 { // 28 byte
     return L"";
   }
   void repack(void);
+  void print(void);
 } __attribute__ ((__packed__));
 
 void Star1::repack(void) {
@@ -350,6 +441,19 @@ void Star1::repack(void) {
   plx = _plx;
 }
 
+void Star1::print(void) {
+  cout << "hip: " << hip
+       << ", component_ids: " << ((unsigned int)component_ids)
+       << ", x0: " << x0
+       << ", x1: " << x1
+       << ", b_v: " << ((unsigned int)b_v)
+       << ", mag: " << ((unsigned int)mag)
+       << ", sp_int: " << sp_int
+       << ", dx0: " << dx0
+       << ", dx1: " << dx1
+       << ", sp_int: " << sp_int
+       << endl;
+}
 
 
 template <class Star>
@@ -881,17 +985,17 @@ public:
 
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,
-                                   const SpecialZoneData<Star1> *z) const {
+                                    const SpecialZoneData<Star1> *z) const {
   return StelObjectP(new StarWrapper1(a,z,this));
 }
 
 StelObjectP Star2::createStelObject(const SpecialZoneArray<Star2> *a,
-                                   const SpecialZoneData<Star2> *z) const {
+                                    const SpecialZoneData<Star2> *z) const {
   return StelObjectP(new StarWrapper2(a,z,this));
 }
 
 StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a,
-                                   const SpecialZoneData<Star3> *z) const {
+                                    const SpecialZoneData<Star3> *z) const {
   return StelObjectP(new StarWrapper3(a,z,this));
 }
 
@@ -914,7 +1018,9 @@ void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
 
 static inline
 int ReadInt(FILE *f,int &x) {
-  return (4 == fread(&x,1,4,f)) ? 0 : -1;
+  const int rval = (4 == fread(&x,1,4,f)) ? 0 : -1;
+  LE_TO_CPU_INT32(x,x);
+  return rval;
 }
 
 
@@ -1042,8 +1148,10 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
       } else {
         const int *tmp = zone_size;
         for (int z=0;z<nr_of_zones;z++,tmp++) {
-          nr_of_stars += *tmp;
-          getZones()[z].size = *tmp;
+          int tmp_spu_int32;
+          LE_TO_CPU_INT32(tmp_spu_int32,*tmp);
+          nr_of_stars += tmp_spu_int32;
+          getZones()[z].size = tmp_spu_int32;
         }
       }
         // delete zone_size before allocating stars
@@ -1076,6 +1184,13 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
         s = stars;
         for (int i=0;i<nr_of_stars;i++,s++) s->repack();
 #endif
+        cout << endl
+             << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+             << "): repack test start" << endl;
+        stars[0].print();
+        stars[1].print();
+        cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+             << "): repack test end" << endl;
       }
     }
   }
