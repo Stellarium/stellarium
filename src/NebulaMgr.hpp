@@ -54,10 +54,10 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching Nebula object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
-	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object

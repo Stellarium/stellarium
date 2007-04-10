@@ -56,7 +56,7 @@ bool Constellation::read(const string& record, StarMgr * _VouteCeleste)
 	// make short_name uppercase for case insensitive searches
 	transform(abbreviation.begin(),abbreviation.end(), abbreviation.begin(), ::toupper);
 
-    asterism = new boost::intrusive_ptr<StelObject>[nb_segments*2];
+    asterism = new StelObjectP[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
 		HP = 0;
@@ -257,10 +257,10 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 	}
 }
 
-boost::intrusive_ptr<StelObject> Constellation::getBrightestStarInConstellation(void) const
+StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {
 	float maxMag = 99.f;
-	boost::intrusive_ptr<StelObject> brightest;
+	StelObjectP brightest;
 	  // maybe the brightest star has always odd index,
 	  // so check all segment endpoints:
 	for (int i=2*nb_segments-1;i>=0;i--)

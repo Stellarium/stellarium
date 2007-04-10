@@ -129,9 +129,9 @@ void TelescopeMgr::setColorScheme(const InitParser& conf, const std::string& sec
 	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
 }
 
-vector<boost::intrusive_ptr<StelObject> > TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const
 {
-  vector<boost::intrusive_ptr<StelObject> > result;
+  vector<StelObjectP> result;
   if (!getFlagTelescopes())
   	return result;
   Vec3d v(vv);
@@ -146,7 +146,7 @@ vector<boost::intrusive_ptr<StelObject> > TelescopeMgr::searchAround(const Vec3d
   return result;
 }
 
-boost::intrusive_ptr<StelObject> TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
+StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
     if (it->second->getNameI18n() == nameI18n) return it->second;
@@ -216,7 +216,7 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() &&
 		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_TELESCOPE)
 	{
-		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen

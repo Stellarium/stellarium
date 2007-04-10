@@ -104,7 +104,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() &&
 		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_PLANET)
 	{
-		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		prj->setCurrentFrame(Projector::FRAME_J2000);
@@ -696,7 +696,7 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 	return NULL;
 }
 
-boost::intrusive_ptr<StelObject> SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
+StelObjectP SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 {
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
@@ -738,12 +738,12 @@ StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projecto
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<boost::intrusive_ptr<StelObject> > SolarSystem::searchAround(const Vec3d& vv,
+vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv,
                                               double limitFov,
                                               const Navigator * nav,
                                               const Projector * prj) const
 {
-	vector<boost::intrusive_ptr<StelObject> > result;
+	vector<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
 		
