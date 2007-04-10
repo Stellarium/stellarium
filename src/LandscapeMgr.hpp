@@ -51,7 +51,6 @@ public:
 	// Method specific to the landscape manager
 	Landscape* create_from_file(const string& landscape_file, const string& section_name);
 	Landscape* create_from_hash(stringHash_t & param);
-	string getFileContent(const string& landscape_file);
 	
 	//! retrieve a list of the available landscape IDs separated by the \n character
 	//! the ID in this context is the name of the directory in which the landscape
