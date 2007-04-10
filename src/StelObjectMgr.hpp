@@ -21,7 +21,6 @@
 #define STELOBJECTMGR_HPP_
 
 #include <vector>
-#include <boost/intrusive_ptr.hpp>
 #include "vecmath.h"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -39,7 +38,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb) {;}
-	virtual string getModuleID() const {return "objectdb";}
+	virtual string getModuleID() const {return "StelObjectMgr";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
 	virtual void update(double deltaTime) {;}
 	
@@ -75,10 +74,10 @@ public:
     void unSelect(void);
 
 	//! Select given object
-	bool setSelectedObject(const boost::intrusive_ptr<StelObject> obj);
+	bool setSelectedObject(const StelObjectP obj);
 
 	//! Return the currently selected object
-	const boost::intrusive_ptr<StelObject> getSelectedObject() const {return selectedObject;}
+	const StelObjectP getSelectedObject() const {return selectedObject;}
 
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
@@ -86,18 +85,18 @@ public:
 private:
 	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
-	boost::intrusive_ptr<StelObject> selectedObject;			// The selected object in stellarium
+	StelObjectP selectedObject;			// The selected object in stellarium
 	
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
 	//! Find any kind of object by its translated name
-	boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring &name) const;
+	StelObjectP searchByNameI18n(const wstring &name) const;
 
 	//! Find in a "clever" way an object from its equatorial position
-	boost::intrusive_ptr<StelObject> cleverFind(const StelCore* core, const Vec3d& pos) const;
+	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
 	
 	//! Find in a "clever" way an object from its screen position
-	boost::intrusive_ptr<StelObject> cleverFind(const StelCore* core, int x, int y) const;	
+	StelObjectP cleverFind(const StelCore* core, int x, int y) const;	
 };
 
 #endif /*SELECTIONMGR_HPP_*/

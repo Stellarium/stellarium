@@ -52,11 +52,11 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
-	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -139,7 +139,7 @@ private:
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation);
 	//! Define which constellation is selected and return brightest star 
-	boost::intrusive_ptr<StelObject> setSelectedStar(const string& abbreviation);
+	StelObjectP setSelectedStar(const string& abbreviation);
 	//! Define which constellation is selected from a star number
 	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	//! Remove all selected constellations

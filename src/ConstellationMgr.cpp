@@ -393,9 +393,9 @@ Constellation* ConstellationMgr::findFromAbbreviation(const string & abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-vector<boost::intrusive_ptr<StelObject> > ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
 {
-	return vector<boost::intrusive_ptr<StelObject> >(0);
+	return vector<StelObjectP>(0);
 }
 
 
@@ -572,7 +572,7 @@ void ConstellationMgr::setSelected(const string& abbreviation)
 }
 
 //! Define which constellation is selected and return brightest star 
-boost::intrusive_ptr<StelObject> ConstellationMgr::setSelectedStar(const string& abbreviation) 
+StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation) 
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
 
@@ -757,7 +757,7 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 
 //! Return the matching constellation object's pointer if exists or NULL
 //! @param nameI18n The case sensistive constellation name
-boost::intrusive_ptr<StelObject> ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
