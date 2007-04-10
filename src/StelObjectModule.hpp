@@ -41,11 +41,11 @@ public:
 	//! @param v equatorial position at epoch J2000
 	//! @param limitFov angular diameter of the searching zone in degree
 	//! @return the list of all the displayed objects contained in the defined zone
-	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const = 0;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const = 0;
 	
 	//! Return the matching StelObject if exists or the empty StelObject if not found
 	//! @param nameI18n the translated name for the current sky locale
-	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const = 0;
+	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const = 0;
 	
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
 	//! @param objPrefix the first letters of the searched object

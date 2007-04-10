@@ -57,10 +57,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Return a stl vector containing the planets located inside the limitFov circle around position v
-	virtual vector<boost::intrusive_ptr<StelObject> > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching planet pointer if exists or NULL
 	//! @param planetNameI18n The case sensistive translated planet name
-	virtual boost::intrusive_ptr<StelObject> searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object

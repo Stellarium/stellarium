@@ -55,7 +55,7 @@ private:
     void draw_art(Projector* prj, const Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const StelObject*) const;
-	boost::intrusive_ptr<StelObject> getBrightestStarInConstellation(void) const;
+	StelObjectP getBrightestStarInConstellation(void) const;
     
     wstring getNameI18n(void) const {return nameI18;}
     string getEnglishName(void) const {return abbreviation;}
@@ -91,7 +91,7 @@ private:
     unsigned int nb_segments;
     
     /** List of stars forming the segments */
-    boost::intrusive_ptr<StelObject>* asterism;
+    StelObjectP* asterism;
    
 	STextureSP art_tex;
 	Vec3d art_vertex[9];

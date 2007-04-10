@@ -166,7 +166,7 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
 	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_NEBULA)
 	{
-		const boost::intrusive_ptr<StelObject> obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		
@@ -277,9 +277,9 @@ StelObject* NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<boost::intrusive_ptr<StelObject> > NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
 {
-	vector<boost::intrusive_ptr<StelObject> > result;
+	vector<StelObjectP> result;
 	if (!getFlagShow())
 		return result;
 		
@@ -299,7 +299,7 @@ vector<boost::intrusive_ptr<StelObject> > NebulaMgr::searchAround(const Vec3d& a
 			// NOTE: non-labeled nebulas are not returned!
 			// Otherwise cursor select gets invisible nebulas - Rob
 			//if((*iter)->getNameI18n() != L"") 
-				result.push_back(boost::intrusive_ptr<StelObject>(*iter));
+				result.push_back(StelObjectP(*iter));
 		}
 		iter++;
 	}
@@ -559,7 +559,7 @@ void NebulaMgr::updateI18n()
 
 
 //! Return the matching Nebula object's pointer if exists or NULL
-boost::intrusive_ptr<StelObject> NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObjectP NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
