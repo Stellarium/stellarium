@@ -23,6 +23,8 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "stel_ui.h"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -41,6 +43,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "Navigator.hpp"
+#include "StelFileMgr.hpp"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -139,7 +142,14 @@ void StelUI::init_tui(void)
 	// 2. Time
 	tui_time_skytime = new s_tui::Time_item(wstring(L"2.1 ") );
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
-	tui_time_settmz = new s_tui::Time_zone_item(StelApp::getInstance().getDataFilePath("zone.tab"), wstring(L"2.2 ") );
+	try
+	{
+		tui_time_settmz = new s_tui::Time_zone_item(StelApp::getInstance().getFileMgr().findFile("data/zone.tab").string(), wstring(L"2.2 "));
+	}
+	catch(exception &e)
+	{
+		cerr << "ERROR locating zone file: " << e.what() << endl;
+	}
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
 	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") );
@@ -258,7 +268,7 @@ void StelUI::init_tui(void)
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") );
-	tui_effect_landscape->addItemList(StelUtils::stringToWstring(lmgr->getFileContent(StelApp::getInstance().getDataFilePath( "landscapes.ini"))));
+	tui_effect_landscape->addItemList(StelUtils::stringToWstring(lmgr->getLandscapeNames()));
 
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
@@ -410,7 +420,7 @@ void StelUI::localizeTui(void)
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list(StelApp::getInstance().getDataFilePath("scripts/"))), 0); 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list("data/scripts")), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
 
@@ -463,8 +473,30 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 
 		// If selected a script in tui, run that now
 		if(SelectedScript!="")
-			app->commander->execute_command("script action play filename " +  SelectedScript
-			                           + " path " + SelectedScriptDirectory);
+		{
+			// build up a command string
+			string cmd;
+			if (SelectedScriptDirectory!="")
+				cmd = "script action play filename " +  SelectedScript + " path " + SelectedScriptDirectory + "/scripts/";
+			else
+			{
+				try
+				{
+					boost::filesystem::path theParent = StelApp::getInstance().getFileMgr().findFile("data/scripts/" + SelectedScript) / "..";
+					cmd = "script action play filename " + SelectedScript + " path " + theParent.normalize().string() + "/";
+				}
+				catch(exception& e)
+				{
+					cerr << "ERROR while executing script " << SelectedScript << ": " << e.what() << endl;
+				}
+			}
+			
+			// now execute the command
+			if ( cmd != "" )
+				app->commander->execute_command(cmd);
+			else
+				cerr << "ERROR while executing script" << endl;
+		}
 
 		// clear out now
 		SelectedScriptDirectory = SelectedScript = "";
@@ -599,20 +631,41 @@ void StelUI::tui_cb_admin_save_default(void)
 {
 	saveCurrentConfig(app->getConfigFilePath());
 
-	system( (StelApp::getInstance().getDataFilePath("script_save_config ") ).c_str() );
+	try
+	{
+		system( (StelApp::getInstance().getFileMgr().findFile("data/script_save_config ") ).string().c_str() );
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while calling script_save_config: " << e.what() << endl;
+	}
 }
 
 // Launch script for internet update
 void StelUI::tui_cb_admin_updateme(void)
 {
-	system( ( StelApp::getInstance().getDataFilePath("script_internet_update" )).c_str() );
+	try
+	{
+		system( ( StelApp::getInstance().getFileMgr().findFile("data/script_internet_update" )).string().c_str() );
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while calling script_internet_update: " << e.what() << endl;
+	}
 }
 
 
 // Launch script for shutdown, then exit
 void StelUI::tui_cb_admin_shutdown(void)
 {
-	system( (StelApp::getInstance().getDataFilePath("script_shutdown") ).c_str() );
+	try
+	{
+		system( ( StelApp::getInstance().getFileMgr().findFile("data/script_shutdown" )).string().c_str() );
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while calling script_shutdown: " << e.what() << endl;
+	}
 	app->terminateApplication();
 }
 
@@ -637,14 +690,11 @@ void StelUI::tui_cb_tui_general_change_sky_locale(void) {
 }
 
 
-#define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
-
 // callback for changing scripts from removeable media
 void StelUI::tui_cb_scripts_removeable() {
-  
   if(!ScriptDirectoryRead) {
 	  // read scripts from mounted disk
-	  string script_list = app->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK);
+	  string script_list = app->scripts->get_script_list(app->scripts->get_removable_media_path());
 	  tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") + StelUtils::stringToWstring(script_list),0);
 	  ScriptDirectoryRead = 1;
   } 
@@ -653,24 +703,28 @@ void StelUI::tui_cb_scripts_removeable() {
 	  SelectedScript = "";
   } else {
 	  SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
-	  SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
+	  SelectedScriptDirectory = app->scripts->get_removable_media_path();
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
   } 
 }
 
-
-// callback for changing scripts from local directory
-void StelUI::tui_cb_scripts_local() {
-  
-	if(tui_scripts_local->getCurrent()!=_(TUI_SCRIPT_MSG)){
-    SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
-	SelectedScriptDirectory = StelApp::getInstance().getDataFilePath("scripts/");
-    // to reduce confusion for user, clear out removeable script selection as well
-    if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(_(TUI_SCRIPT_MSG));
-  } else {
-    SelectedScript = "";
-  }
+/****************************************************************************
+ callback for changing scripts from local directory
+****************************************************************************/
+void StelUI::tui_cb_scripts_local() {  
+	if(tui_scripts_local->getCurrent()!=_(TUI_SCRIPT_MSG))
+	{
+    		SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
+		SelectedScriptDirectory = "";
+    		// to reduce confusion for user, clear out removeable script selection as well
+    		if(ScriptDirectoryRead) 
+			tui_scripts_removeable->setCurrent(_(TUI_SCRIPT_MSG));
+  	} 
+	else
+	{
+    		SelectedScript = "";
+  	}
 }
 
 
@@ -816,7 +870,7 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 
 	// Reread local script directory (in case new files)
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list(StelApp::getInstance().getDataFilePath("scripts/"))), 0); 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list("data/scripts")), 0); 
 }
 
 

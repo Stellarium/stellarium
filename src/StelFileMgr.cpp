@@ -97,10 +97,18 @@ const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 const set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
 {
 	set<string> result;
+	vector<fs::path> listPaths;
 	
-	for ( vector<fs::path>::iterator li = fileLocations.begin();
-              li != fileLocations.end();
-	      li++ )
+	// If path is "complete" (a full path), we just look in there, else
+	// we append relative paths to the search paths maintained by this class.
+	if ( fs::path(path).is_complete() )
+		listPaths.push_back("");
+	else
+		listPaths = fileLocations;
+	
+	for (vector<fs::path>::iterator li = listPaths.begin();
+	     li != listPaths.end();
+	     li++)
 	{
 		if ( fs::exists(*li / path) ) {
 			if ( fs::is_directory(*li / path) )

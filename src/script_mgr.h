@@ -38,7 +38,7 @@ class ScriptMgr : public StelModule
 {
 
  public:
-  ScriptMgr(StelCommandInterface * command_interface, string _data_dir);
+  ScriptMgr(StelCommandInterface * command_interface);
   virtual ~ScriptMgr();
   virtual string getModuleID() const { return "script_mgr"; }
   
@@ -64,6 +64,8 @@ class ScriptMgr : public StelModule
   bool get_allow_ui() { return allow_ui; }
   void set_gui_debug(bool _gdebug) { gui_debug = _gdebug; }  // Should script errors be shown onscreen?
   bool get_gui_debug() { return gui_debug; }
+  void set_removable_media_path(const string& path) { RemoveableScriptDirectory = path; };
+  const string& get_removable_media_path(void) { return RemoveableScriptDirectory; };
 
  private:
 
@@ -79,7 +81,6 @@ class ScriptMgr : public StelModule
   string rec_filename;
   string RemoveableScriptDirectory;
   bool RemoveableDirectoryMounted;
-  string DataDir;  
   bool allow_ui;    // Allow user interface to function during scripts 
                     // (except for time related keys which control script playback)
   bool gui_debug;
