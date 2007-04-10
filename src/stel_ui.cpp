@@ -48,8 +48,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 StelUI::StelUI(StelCore * _core, StelApp * _app) :
-	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
-
+	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0), desktop(NULL),
 	top_bar_ctr(NULL),
 	top_bar_date_lbl(NULL),
 	top_bar_hour_lbl(NULL),
@@ -70,7 +69,6 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 	bt_flag_help(NULL),
 	bt_flag_equatorial_mode(NULL),
 	bt_flag_config(NULL),
-//		bt_flag_chart(NULL),
 	bt_flag_night(NULL),
 	bt_flag_search(NULL),
 	bt_script(NULL),
