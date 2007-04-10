@@ -78,14 +78,32 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	stelFileMgr->setSearchPaths(searchPaths);
 	textureMgr = new StelTextureMgr(rootDir + "textures/");
 	localeMgr = new StelLocaleMgr();
-	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));
-	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));
+	string fontMapFile("");
+	try 
+	{
+		fontMapFile = stelFileMgr->findFile("data/fontmap.dat").string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR when locating font map file: " << e.what() << endl; 		
+	}
+	fontManager = new StelFontMgr(fontMapFile);
+	string skyCulturesDir("");
+	try
+	{
+		skyCulturesDir = stelFileMgr->findFile("data/sky_cultures", StelFileMgr::DIRECTORY).string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR when locating sky cultures directory: " << e.what() << endl;
+	}
+	skyCultureMgr = new StelSkyCultureMgr(skyCulturesDir);
 	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore();
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
-	scripts = new ScriptMgr(commander, dataDir);
+	scripts = new ScriptMgr(commander);
 	time_multiplier = 1;
 	distorter = 0;
 }
@@ -130,6 +148,7 @@ string StelApp::getConfigFilePath(void) const
 *************************************************************************/
 string StelApp::getFilePath(const string& fileName) const
 {
+	cerr << "WARNING StelApp::getFilePath is deprecated - please use StelFileMgr::findFile instead" << endl;
 	if (StelUtils::checkAbsolutePath(fileName))
 		return fileName;
 	
@@ -150,6 +169,7 @@ string StelApp::getFilePath(const string& fileName) const
 *************************************************************************/
 vector<string> StelApp::getFilePathList(const string& fileName) const
 {
+	cerr << "WARNING StelApp::getFilePathList is deprecated - please use StelFileMgr::getSearchPaths instead" << endl;
 	vector<string> result;
 	
 	if (StelUtils::checkAbsolutePath(fileName)) {
@@ -176,6 +196,7 @@ vector<string> StelApp::getFilePathList(const string& fileName) const
 *************************************************************************/
 string StelApp::getDataFilePath(const string& dataFileName) const
 {
+	cerr << "WARNING StelApp::getDataFilePath is deprecated - please use StelFileMgr::findFile instead" << endl;
 	if (StelUtils::checkAbsolutePath(dataFileName))
 		return dataFileName;
 
@@ -192,6 +213,7 @@ string StelApp::getDataFilePath(const string& dataFileName) const
 *************************************************************************/
 string StelApp::getTextureFilePath(const string& textureFileName) const
 {
+	cerr << "WARNING StelApp::getTextureFilePathis deprecated - please use StelFileMgr::findFile instead" << endl;
 	return rootDir + "textures/" + textureFileName;
 }
 
@@ -223,11 +245,27 @@ void StelApp::init(void)
 	Translator::initSystemLanguage();
 
 	// Load language codes
-	Translator::initIso639_1LanguageCodes(getDataFilePath("iso639-1.utf8"));
+	try
+	{
+		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8").string());
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while loading translations: " << e.what() << endl;
+	}
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
-	conf.load(stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string());
+	string confPath;
+	try
+	{
+		confPath = stelFileMgr->findFile("config.ini").string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR finding config file: " << e.what() << endl;
+	}
+	conf.load(confPath);
 
 	// Main section
 	string version = conf.get_str("main:version");
@@ -254,7 +292,16 @@ void StelApp::init(void)
 	}
 
 	// Create openGL context first
-	initOpenGL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
+	string iconPath;
+	try
+	{
+		iconPath = stelFileMgr->findFile("data/icon.bmp").string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR when trying to locate icon file: " << e.what() << endl;
+	}
+	initOpenGL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), iconPath);
 
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
@@ -367,6 +414,8 @@ void StelApp::init(void)
 	
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
+	
+	scripts->set_removable_media_path(conf.get_str("files:removable_media_path"));
 	
 	// play startup script, if available
 	scripts->play_startup_script();

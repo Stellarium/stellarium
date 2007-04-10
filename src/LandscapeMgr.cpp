@@ -399,21 +399,6 @@ Landscape* LandscapeMgr::create_from_hash(stringHash_t & param)
 	}
 }
 
-
-string LandscapeMgr::getFileContent(const string& landscape_file)
-{
-	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	string result;
-
-	for (int i=0; i<pd.get_nsec();i++)
-	{
-		result += pd.get_secname(i) + '\n';
-	}
-	return result;
-}
-
 /*********************************************************************
  return a list of distinct landscape names (the name field from each 
  landscape.ini file).  The result is a string with each name separated

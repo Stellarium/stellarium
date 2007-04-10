@@ -77,6 +77,7 @@ public:
 
 	//! @brief Get the (writable) .stellarium/ directory path, usually $HOME/.stellarium/
 	//! @return the full path to the (writable) .stellarium/ directory path
+	//! @deprecated should not be needed if StelFileMgr is used
 	const std::string& getDotStellariumDir() const {return dotStellariumDir;}
 
 	//! @brief Get the full path to a file.

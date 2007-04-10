@@ -25,13 +25,14 @@
 #include "script_mgr.h"
 #include "script.h"
 #include "stel_command_interface.h"
+#include "StelApp.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace std;
 
 
-ScriptMgr::ScriptMgr(StelCommandInterface *command_interface, string _data_dir) : play_paused(false) {
+ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(false) {
 	commander = command_interface;
-	DataDir = _data_dir;
 	recording = 0;
 	playing = 0;
 	record_elapsed_time = 0;
@@ -47,7 +48,7 @@ ScriptMgr::~ScriptMgr() {
 // path is used for loading script assets 
 bool ScriptMgr::play_script(string script_file, string script_path) {
 	// load script...
-
+	
 	if(playing){
 		// cancel current script and start next (one script can call another)
 		cancel_script();
@@ -61,10 +62,16 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 	// if script is on mountable disk, mount that now
 	if( RemoveableScriptDirectory != "" &&
 		script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
-		system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
-		cout << "MOUNT DISK to read script\n";
-		
-		RemoveableDirectoryMounted = 1;
+		try
+		{
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk" ).string().c_str());	  
+			cout << "MOUNT DISK to read script" << endl;
+			RemoveableDirectoryMounted = 1;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while trying to mount removable media: " << e.what() << endl;		
+		}
 	}
 
 	if( script->load(script_file, script_path) ) {
@@ -88,9 +95,16 @@ void ScriptMgr::cancel_script() {
 	play_paused = 0;
 	
 	if(RemoveableDirectoryMounted) {
-		system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
-		cout << "UNMOUNT DISK\n";
-		RemoveableDirectoryMounted = 0;
+		try
+		{
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk" ).string().c_str());	  
+			cout << "UNMOUNT DISK" << endl;
+			RemoveableDirectoryMounted = 0;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while trying to mount removable media: " << e.what() << endl;		
+		}
 	}
 }
 
@@ -233,51 +247,65 @@ void ScriptMgr::update(double delta_time)
 
 }  
 
-// get a list of script files from directory
+/****************************************************************************
+ get a list of script files from directory.  If directory is equal to the
+ removable media directory, the mount and unmount scripts are called
+ before and after the file listing is done.  Note the removable media
+ directory must be a complete path (in the boost::filesystem sense) - not a
+ relative path.
+ returns a string list of script file names, delimited with the '\n' 
+ character
+****************************************************************************/
 string ScriptMgr::get_script_list(string directory) {
-
-	// TODO: This is POSIX specific
-
-	struct dirent *entryp;
-	DIR *dp;
 	string result="";
-	string tmp;
-
 	// if directory is on mountable disk, mount that now
-	if( RemoveableScriptDirectory != "" &&
-		directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
-		system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
-		cout << "MOUNT DISK to read directory\n";
-		
-		RemoveableDirectoryMounted = 1;
+	if(RemoveableScriptDirectory!="" 
+	   && directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory)==0) 
+	{
+		try
+		{
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk").string().c_str());	  
+			cout << "MOUNT DISK to read directory\n";
+			directory += "/scripts";
+			RemoveableDirectoryMounted = 1;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while trying to mount removable media: " << e.what() << endl;
+		}
 	}
 
-	if ((dp = opendir(directory.c_str())) != NULL) {
-
-		// TODO: sort the directory
-		while ((entryp = readdir(dp)) != NULL) {
-			tmp = entryp->d_name;
-		  
-			if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
-				result += tmp + "\n";
-				//cout << entryp->d_name << endl;
+	try
+	{
+		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory);
+		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
+		{
+			// stl::sets are automagically sorted, so we just need to filter for .sts filenames
+			if ( (*i).substr((*i).length() - 4, 4) == ".sts" )
+			{
+				result = result + *i + '\n';
 			}
 		}
-		closedir(dp);
-	} else {
-		cout << "Unable to read script directory" << directory << endl;
 	}
-
+	catch(exception& e)
+	{
+		cerr << "ERROR while listing scripts: " << e.what() << endl;
+	}
+	
 	if(RemoveableDirectoryMounted) {
-		// leave disk unmounted
-		system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
-		cout << "UNMOUNT DISK\n";
-		RemoveableDirectoryMounted = 0;
+		try
+		{
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk").string().c_str());	  
+			cout << "UNMOUNT DISK" << endl;
+			RemoveableDirectoryMounted = 0;
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR while trying to unmount removable media: " << e.what() << endl;
+		}
 	}
 
-	//cout << "Result = " << result;
 	return result;
-
 }
 
 string ScriptMgr::get_script_path() { 
@@ -291,12 +319,19 @@ bool ScriptMgr::play_startup_script() {
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&
-	   play_script(RemoveableScriptDirectory + "scripts/startup.sts", 
-				   RemoveableScriptDirectory + "scripts/")) {
-		return 1;
-	} else {
-		// try in stellarium tree
-		return play_script(DataDir + "/scripts/startup.sts", DataDir + "/scripts/");
+	   play_script(RemoveableScriptDirectory + "/scripts/startup.sts", 
+				   RemoveableScriptDirectory + "/scripts/")) {
 	} 
-
+	else {
+		try {
+			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("data/scripts/startup.sts")); 
+			boost::filesystem::path parentDir(fullPath / "..");
+			play_script(fullPath.string(), parentDir.normalize().string() + "/");
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR running startup.sts script: " << e.what() << endl;
+		}
+	}
+	return 1;
 }
