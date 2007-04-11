@@ -136,8 +136,6 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
 	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
-//johannes: StelApp already gives appropriate x/y coordinates
-//	core->getProjection()->unProject(x,core->getProjection()->getViewportHeight()-y,v);
 	core->getProjection()->unProject(x,y,v);
 	return cleverFind(core, v);
 }
