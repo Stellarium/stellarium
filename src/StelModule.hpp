@@ -109,8 +109,10 @@ public:
 	//! @return false if the event was not intercepted, true otherwise.
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state) {return false;}
 	
-	//! Indicate that selected StelObjects changed. This can be used by some modules to update themself.
-	virtual void selectedObjectChangeCallBack() {;}
+	//! Indicate that the user requested selection of StelObjects.
+	//! The StelModule should then manage by themself how they handle the event
+	//! @param added true if the user request that the objects are added to the selection
+	virtual void selectedObjectChangeCallBack(bool added=false) {;}
 	
 	//! Load color scheme from the given ini file and section name
 	virtual void setColorScheme(const InitParser& conf, const std::string& section) {;}

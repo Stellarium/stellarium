@@ -740,7 +740,7 @@ class StarWrapperBase : public StelObject {
 protected:
   StarWrapperBase(void) : ref_count(0) {}
   virtual ~StarWrapperBase(void) {}
-  STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_STAR;}
+  std::string getType(void) const {return "Star";}
 
   string getEnglishName(void) const {return "";}
   wstring getNameI18n(void) const = 0;
@@ -1280,10 +1280,10 @@ void StarMgr::setGrid(void) {
 
 void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && 
-		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_STAR)
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+	if (!newSelected.empty())
 	{
-		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen

@@ -213,10 +213,10 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
 
 void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() &&
-		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_TELESCOPE)
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
+	if (!newSelected.empty())
 	{
-		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
