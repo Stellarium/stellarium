@@ -528,25 +528,28 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	
 	// Manage the event for the main window
 	{
-//		// Deselect the selected object
-//		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
-//		{
-//			commander->execute_command("select");
-//			return 1;
-//		}
+		// Deselect the selected object
+		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
+		{
+			commander->execute_command("select");
+			return 1;
+		}
 		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("movements");
 		if (button==Stel_BUTTON_LEFT && state==Stel_MOUSEBUTTONUP && !mvmgr->getHasDragged())
 		{
-//			// CTRL + left clic = right clic for 1 button mouse
-//			if (mod & StelMod_CTRL)
-//			{
-//				commander->execute_command("select");
-//				return 1;
-//			}
+#ifdef MACOSX
+			// CTRL + left clic = right clic for 1 button mouse
+			if (mod & StelMod_CTRL)
+			{
+				commander->execute_command("select");
+				return 1;
+			}
 
 			// Try to select object at that position
+			getStelObjectMgr().findAndSelect(core, x, y, mod & StelMod_META);
+#else
 			getStelObjectMgr().findAndSelect(core, x, y, mod & StelMod_CTRL);
-
+#endif
 			// If an object was selected update informations
 			if (getStelObjectMgr().getWasSelected())
 			{
