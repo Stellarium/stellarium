@@ -29,6 +29,9 @@ class StelObjectModule;
 class StelCore;
 
 //! Manage the selection and queries on one or more StelObjects.
+//! When the user request selection of an object, the selectedObjectChangeCallBack method
+//! of all the StelModule which are registered is called.
+//! Each module is then free to manage object selection as it wants. 
 class StelObjectMgr : public StelModule
 {
 public:
@@ -49,17 +52,20 @@ public:
 	void registerStelObjectMgr(StelObjectModule* mgr);
 	
 	//! Find and select an object near given equatorial position
+	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, const Vec3d& pos);
+	bool findAndSelect(const StelCore* core, const Vec3d& pos, bool added=false);
 
 	//! Find and select an object near given screen position
+	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, int x, int y);
+	bool findAndSelect(const StelCore* core, int x, int y, bool added=false);
 
 	//! Find and select an object from its translated name
+	//! @param added add the found object to selection if true, replace if false
 	//! @param nameI18n the case sensitive object translated name
-	//! @return true if a object was found with the passed name
-	bool findAndSelectI18n(const wstring &nameI18n);
+	//! @return true if a object with the passed name was found
+	bool findAndSelectI18n(const wstring &nameI18n, bool added=false);
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -67,17 +73,22 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 
-	//! Return whether an object is currently selected
-	bool getFlagHasSelected(void) {return selectedObject;}
+	//! Return whether an object was selected during last selection related event 
+	bool getWasSelected(void) const {return !lastSelectedObjects.empty();}
 
-	//! Deselect selected object if any
+	//! Notify that we want to unselect any object
     void unSelect(void);
 
-	//! Select given object
-	bool setSelectedObject(const StelObjectP obj);
+	//! Notify that we want to select the given object
+	//! @param added add the object to selection if true, replace if false
+	bool setSelectedObject(const StelObjectP obj, bool added=false);
 
-	//! Return the currently selected object
-	const StelObjectP getSelectedObject() const {return selectedObject;}
+	//! Get the list objects which was recently selected by the user
+	const std::vector<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
+	
+	//! Return the list objects of type "withType" which was recently selected by the user
+	//! @param type return only objects of the given type 
+	std::vector<StelObjectP> getSelectedObject(const std::string& type);
 
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
@@ -85,7 +96,7 @@ public:
 private:
 	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
 	
-	StelObjectP selectedObject;			// The selected object in stellarium
+	std::vector<StelObjectP> lastSelectedObjects;	// The last selected object in stellarium
 	
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 

@@ -163,7 +163,7 @@ public:
 	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
 //	Mat4d get_helio_to_geo_matrix();
 
-	STEL_OBJECT_TYPE getType(void) const {return STEL_OBJECT_PLANET;}
+	std::string getType(void) const {return "Planet";}
 
 	// Return the Planet position in rectangular earth equatorial coordinate
 	Vec3d get_earth_equ_pos(const Navigator *nav) const;

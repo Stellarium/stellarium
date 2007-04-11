@@ -101,10 +101,10 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 
 void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() &&
-		StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_PLANET)
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	if (!newSelected.empty())
 	{
-		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		prj->setCurrentFrame(Projector::FRAME_J2000);
@@ -895,7 +895,7 @@ void SolarSystem::setFlagOrbits(bool b)
 
 void SolarSystem::setSelected(StelObject* obj)
 {
-    if (obj && obj->getType() == STEL_OBJECT_PLANET)
+    if (obj && obj->getType() == "Planet")
     	selected = obj;
     else
     	selected = NULL;
@@ -1053,10 +1053,11 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 	return result;
 }
 
-void SolarSystem::selectedObjectChangeCallBack()
+void SolarSystem::selectedObjectChangeCallBack(bool added)
 {
-	setSelected(StelApp::getInstance().getStelObjectMgr()
-    	                              .getSelectedObject().get());
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	if (!newSelected.empty())
+		setSelected(newSelected[0].get());
 //		// potentially record this action
 //		if (!recordActionCallback.empty())
 //			recordActionCallback("select planet " + selected_object.getEnglishName());

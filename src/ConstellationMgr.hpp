@@ -47,7 +47,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);	
-	virtual void selectedObjectChangeCallBack();
+	virtual void selectedObjectChangeCallBack(bool added = false);
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	
 	///////////////////////////////////////////////////////////////////////////

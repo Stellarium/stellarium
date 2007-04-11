@@ -31,8 +31,6 @@ StelObjectMgr::StelObjectMgr()
 
 StelObjectMgr::~StelObjectMgr()
 {
-	// release the previous StelObject:
-	selectedObject = StelObjectP();
 }
 		
 /*************************************************************************
@@ -60,103 +58,29 @@ StelObjectP StelObjectMgr::searchByNameI18n(const wstring &name) const
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
 //! @return true if an object was found with the passed name
-bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n)
+bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n, bool added)
 {
 	// Then look for another object
 	StelObjectP obj = searchByNameI18n(nameI18n);
 	if (!obj)
 		return false;
 	else
-		return setSelectedObject(obj);
+		return setSelectedObject(obj, added);
 }
-
-
-//! Find and select an object based on selection type and standard name or number
-//! @return true if an object was selected
-//
-//bool StelObjectMgr::setSelectedObject(const string &type, const string &id)
-//{
-//	/*
-//	  std::wostringstream oss;
-//	  oss << id.c_str();
-//	  return findAndSelectI18n(oss.str());
-//	*/
-//	if(type=="hp")
-//	{
-//		unsigned int hpnum;
-//		std::istringstream istr(id);
-//		istr >> hpnum;
-//		selectedObject = hip_stars->searchHP(hpnum);
-//		asterisms->setSelected(selectedObject);
-//		ssystem->setSelected("");
-//
-//	}
-//	else if(type=="star")
-//	{
-//		selectedObject = hip_stars->search(id);
-//		asterisms->setSelected(selectedObject);
-//		ssystem->setSelected("");
-//
-//	}
-//	else if(type=="planet")
-//	{
-//		ssystem->setSelected(id);
-//		selectedObject = ssystem->getSelected();
-//		asterisms->setSelected(StelObject());
-//
-//	}
-//	else if(type=="nebula")
-//	{
-//		selectedObject = nebulas->search(id);
-//		ssystem->setSelected("");
-//		asterisms->setSelected(StelObject());
-//
-//	}
-//	else if(type=="constellation")
-//	{
-//		// Select only constellation, nothing else
-//		asterisms->setSelected(id);
-//		selectedObject = NULL;
-//		ssystem->setSelected("");
-//	}
-//	else if(type=="constellation_star")
-//	{
-//		// For Find capability, select a star in constellation so can center view on constellation
-//		selectedObject = asterisms->setSelectedStar(id);
-//		ssystem->setSelected("");
-//	}
-//	else
-//	{
-//		cerr << "Invalid selection type specified: " << type << endl;
-//		return 0;
-//	}
-//
-//
-//	if (selectedObject)
-//	{
-//		if (movementMgr->getFlagTracking())
-//			movementMgr->setFlagLockEquPos(true);
-//		movementMgr->setFlagTracking(false);
-//
-//		return 1;
-//	}
-//
-//	return 0;
-//}
 
 
 //! Find and select an object near given equatorial position
-bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos)
+bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, bool added)
 {
 	StelObjectP tempselect = cleverFind(core, pos);
-	return setSelectedObject(tempselect);
+	return setSelectedObject(tempselect, added);
 }
 
 //! Find and select an object near given screen position
-bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y)
+bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, bool added)
 {
 	StelObjectP tempselect = cleverFind(core, x, y);
-	return setSelectedObject(tempselect);
+	return setSelectedObject(tempselect, added);
 }
 
 // Find an object in a "clever" way, v in J2000 frame
@@ -205,6 +129,9 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	return sobj;
 }
 
+/*************************************************************************
+ Find in a "clever" way an object from its equatorial position
+*************************************************************************/
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
@@ -215,44 +142,38 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 	return cleverFind(core, v);
 }
 
-//! Deselect selected object if any
+/*************************************************************************
+ Notify that we want to unselect any object
+*************************************************************************/
 void StelObjectMgr::unSelect(void)
 {
-	selectedObject = NULL;
+	lastSelectedObjects.clear();
 	
 	// Send the event to every StelModule
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
 	{
-		(*iter)->selectedObjectChangeCallBack();
+		(*iter)->selectedObjectChangeCallBack(false);
 	}
 }
 
-//! Select passed object
-//! @return true if the object was selected (false if the same was already selected)
-bool StelObjectMgr::setSelectedObject(const StelObjectP obj)
+/*************************************************************************
+ Notify that we want to select the given object
+*************************************************************************/
+bool StelObjectMgr::setSelectedObject(const StelObjectP obj, bool added)
 {
-	// Unselect if it is the same object
-	if (obj && selectedObject==obj)
-	{
-		unSelect();
-		return true;
-	}
-
-	selectedObject = obj;
+	lastSelectedObjects.clear();
 
 	// If an object has been found
-	if (selectedObject)
+	if (obj)
 	{
-		// potentially record this action
-		//if (!recordActionCallback.empty())
-		//	recordActionCallback("select " + selectedObject.getEnglishName());
+		lastSelectedObjects.push_back(obj);
 
 		// Send the event to every StelModule
 		StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 		for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
 		{
-			(*iter)->selectedObjectChangeCallBack();
+			(*iter)->selectedObjectChangeCallBack(added);
 		}
 		return true;
 	}
@@ -265,11 +186,26 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj)
 	assert(0);	// Non reachable code
 }
 
+/*************************************************************************
+ Return the list objects of type "withType" which was recently selected by
+  the user
+*************************************************************************/
+std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const std::string& type)
+{
+	std::vector<StelObjectP> result;
+	for (std::vector<StelObjectP>::iterator iter=lastSelectedObjects.begin();iter!=lastSelectedObjects.end();++iter)
+	{
+		if ((*iter)->getType()==type)
+			result.push_back(*iter);
+	}
+	return result;
+}
+	
 
-//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
-//! @param objPrefix the first letters of the searched object
-//! @param maxNbItem the maximum number of returned object names
-//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+/*************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing 
+ passed object I18 name
+*************************************************************************/
 vector<wstring> StelObjectMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {
 	vector<wstring> result;

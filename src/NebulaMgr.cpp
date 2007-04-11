@@ -164,9 +164,10 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	if (StelApp::getInstance().getStelObjectMgr().getFlagHasSelected() && StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_NEBULA)
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
+	if (!newSelected.empty())
 	{
-		const StelObjectP obj = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
 		
