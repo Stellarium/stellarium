@@ -23,7 +23,7 @@
 #include "vecmath.h"
 #include "StelObjectType.hpp"
 
-#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -48,8 +48,8 @@ public:
   //! The returned wstring can typically be used for object labeling in the sky
   virtual wstring getShortInfoString(const Navigator *nav) const = 0;
 
-  //! Return object's type
-  virtual STEL_OBJECT_TYPE getType(void) const = 0;
+  //! Return object's type. It should be the name of the class.
+  virtual std::string getType(void) const = 0;
 
   //! Return object's name
   virtual string getEnglishName(void) const = 0;

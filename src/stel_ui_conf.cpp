@@ -722,12 +722,16 @@ void StelUI::gotoSearchedObject(void)
 	
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(star_edit->getText()))
 	{
-		star_edit->clearText();
-		mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()->get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
-		mvmgr->setFlagTracking(true);
-		lblSearchMessage->setLabel(L"");
-		  // johannes
-		search_win->setVisible(false);
+		const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		if (!newSelected.empty())
+		{
+			star_edit->clearText();
+			mvmgr->moveTo(newSelected[0]->get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+			mvmgr->setFlagTracking(true);
+			lblSearchMessage->setLabel(L"");
+			  // johannes
+			search_win->setVisible(false);
+		}
 	}
 	else
 	{

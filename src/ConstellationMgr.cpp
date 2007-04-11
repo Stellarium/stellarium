@@ -108,7 +108,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 			updateI18n();
 		
 			// as constellations have changed, clear out any selection and retest for match!
-			selectedObjectChangeCallBack();
+			selectedObjectChangeCallBack(false);
 		}
 		catch(exception& e)
 		{
@@ -130,26 +130,32 @@ void ConstellationMgr::setColorScheme(const InitParser& conf, const std::string&
  The selected objects changed, check if some stars are selected and display the 
  matching constellations if isolate_selected mode is activated
 *************************************************************************/ 
-void ConstellationMgr::selectedObjectChangeCallBack()
+void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 {
-	if (!StelApp::getInstance().getStelObjectMgr().getFlagHasSelected())
+	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+	if (newSelected.empty())
 	{
 		setSelected(NULL);
 		return;
 	}
 	
-	if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_CONSTELLATION)
+	const std::vector<StelObjectP> newSelectedConst = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Constellation");
+	if (!newSelectedConst.empty())
 	{
-		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
+		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
 		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
-	}
-	else if (StelApp::getInstance().getStelObjectMgr().getSelectedObject()->getType()==STEL_OBJECT_STAR)
-	{
-		setSelected(StelApp::getInstance().getStelObjectMgr().getSelectedObject().get());
 	}
 	else
 	{
-		setSelected(NULL);
+		const std::vector<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+		if (!newSelectedStar.empty())
+		{
+			setSelected(newSelectedStar[0].get());
+		}
+		else
+		{
+			setSelected(NULL);
+		}
 	}
 }
 

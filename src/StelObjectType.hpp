@@ -25,14 +25,4 @@
 class StelObject;
 typedef boost::intrusive_ptr<StelObject> StelObjectP;
 
-enum STEL_OBJECT_TYPE {
-  STEL_OBJECT_UNINITIALIZED,
-  STEL_OBJECT_STAR,
-  STEL_OBJECT_PLANET,
-  STEL_OBJECT_NEBULA,
-  STEL_OBJECT_CONSTELLATION,
-  STEL_OBJECT_TELESCOPE,
-  STEL_OBJECT_VO_OBS
-};
-
 #endif
