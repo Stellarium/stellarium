@@ -549,7 +549,10 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 
 			// If an object was selected update informations
 			if (getStelObjectMgr().getWasSelected())
+			{
+				((MovementMgr*)moduleMgr->getModule("movements"))->setFlagTracking(false);
 				ui->updateInfoSelectString();
+			}
 		}
 	}
 	
