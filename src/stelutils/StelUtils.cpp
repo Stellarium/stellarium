@@ -313,13 +313,15 @@ string radToDmsStr(double angle, bool decimal)
 	ostringstream os;
 	
 	os << (sign?'+':'-') << d << 'd';
+		
+	os << m << 'm' << std::fixed << std::setfill('0');
 	
 	if (decimal)
 		os << std::setprecision(1) << std::setw(4);
 	else
 		os << std::setprecision(0) << std::setw(2);
 		
-	os << m << 'm' << std::fixed << std::setfill('0') << s << 's';
+	os << s << 's';
 	return os.str();
 }
 
