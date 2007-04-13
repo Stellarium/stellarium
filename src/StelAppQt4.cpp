@@ -176,6 +176,22 @@ void StelAppQt4::setResizable(bool resizable)
 	}
 }
 
+/*************************************************************************
+ Alternate fullscreen mode/windowed mode if possible
+*************************************************************************/
+void StelAppQt4::toggleFullScreen()
+{
+	// Toggle full screen
+	if (!mainWindow->isFullScreen())
+	{
+		mainWindow->showFullScreen();
+	}
+	else
+	{
+		mainWindow->showNormal();
+	}
+}
+
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
 	setFocusPolicy(Qt::ClickFocus);
@@ -415,15 +431,7 @@ void StelMainWindow::keyPressEvent(QKeyEvent* event)
 {
 	if ((Qt::Key)event->key()==Qt::Key_F1)
 	{
-		// Toggle full screen
-		if (!isFullScreen())
-		{
-			showFullScreen();
-		}
-		else
-		{
-			showNormal();
-		}
+		stelApp->toggleFullScreen();
 	}
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 }
@@ -432,5 +440,6 @@ void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
 }
+
 
 #endif

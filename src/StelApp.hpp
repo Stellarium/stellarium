@@ -214,6 +214,12 @@ public:
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers() = 0;
 	
+	//! Terminate the application
+	virtual void terminateApplication() = 0;
+	
+	//! Alternate fullscreen mode/windowed mode if possible
+	virtual void toggleFullScreen() = 0;
+	
 protected:
 	//! Update all object according to the delta time
 	void update(int delta_time);
@@ -241,9 +247,6 @@ protected:
 	
 	// Save a screen shot in the HOME directory
 	virtual void saveScreenShot() const =0;
-
-	//! Terminate the application
-	virtual void terminateApplication(void) = 0;
 	
 	//! Call this when the size of the GL window has changed
 	void glWindowHasBeenResized(int w, int h);

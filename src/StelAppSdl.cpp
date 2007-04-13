@@ -378,7 +378,8 @@ void StelAppSdl::startMainLoop()
 					if ((E.key.keysym.unicode && !handleKeys(SDLKeyToStelKey(E.key.keysym.sym),SDLmodToStelMod(E.key.keysym.mod),E.key.keysym.unicode,Stel_KEYDOWN)) ||
 						(!E.key.keysym.unicode && !handleKeys(SDLKeyToStelKey(E.key.keysym.sym),SDLmodToStelMod(E.key.keysym.mod),SDLKeyToStelKey(E.key.keysym.sym),Stel_KEYDOWN)))
 					{
-						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
+						if (E.key.keysym.sym==SDLK_F1)
+							toggleFullScreen(); // Try fullscreen
 
 						// ctrl-s saves screenshot
 						if (E.key.keysym.unicode==0x0013 &&  (Screen->flags & SDL_OPENGL))
@@ -529,5 +530,14 @@ void StelAppSdl::saveScreenShot() const
 	SDL_FreeSurface(temp);
 	cout << "Saved screenshot to file : " << tempName << endl;
 }
+
+/*************************************************************************
+ Alternate fullscreen mode/windowed mode if possible
+*************************************************************************/
+virtual void StelAppSdl::toggleFullScreen()
+{
+	SDL_WM_ToggleFullScreen(Screen);
+}
+	
 
 #endif // USE_SDL
