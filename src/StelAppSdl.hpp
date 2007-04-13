@@ -41,18 +41,22 @@ public:
 	
 	//! Get the height of the openGL screen
 	virtual int getScreenH() const {return screenH;}
+	
+	//! Terminate the application
+	virtual void terminateApplication();
+	
+	//! Alternate fullscreen mode/windowed mode if possible
+	virtual void toggleFullScreen();
+	
 protected:
-
 	// Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 	
 	// Save a screen shot in the HOME directory
 	virtual void saveScreenShot() const;
-
-	//! Terminate the application
-	virtual void terminateApplication(void);
 	
 	virtual void setResizable(bool resizable);
+	
 private:
 	// Screen size
 	int screenW, screenH;

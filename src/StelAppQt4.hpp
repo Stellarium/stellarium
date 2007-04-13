@@ -63,6 +63,12 @@ public:
 	virtual int getScreenH() const;
 	
 	class StelMainWindow* getMainWindow() {return mainWindow;}
+	
+	//! Terminate the application
+	virtual void terminateApplication(void);
+	
+	//! Alternate fullscreen mode/windowed mode if possible
+	virtual void toggleFullScreen();
 protected:
 
 	// Initialize openGL screen
@@ -70,9 +76,6 @@ protected:
 	
 	// Save a screen shot in the HOME directory
 	virtual void saveScreenShot() const;
-
-	//! Terminate the application
-	virtual void terminateApplication(void);
 	
 	virtual void setResizable(bool resizable);
 private:
