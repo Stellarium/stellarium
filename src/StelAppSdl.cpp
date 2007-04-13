@@ -534,7 +534,7 @@ void StelAppSdl::saveScreenShot() const
 /*************************************************************************
  Alternate fullscreen mode/windowed mode if possible
 *************************************************************************/
-virtual void StelAppSdl::toggleFullScreen()
+void StelAppSdl::toggleFullScreen()
 {
 	SDL_WM_ToggleFullScreen(Screen);
 }
