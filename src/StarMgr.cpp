@@ -309,7 +309,7 @@ struct Star3 {  // 6 byte
   float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
-  void print(void);
+//  void print(void);
 } __attribute__ ((__packed__)) ;
 
 void Star3::repack(void) {
@@ -323,13 +323,13 @@ void Star3::repack(void) {
   mag = _mag;
 }
 
-void Star3::print(void) {
-  cout << "x0: " << x0
-       << ", x1: " << x1
-       << ", b_v: " << b_v
-       << ", mag: " << mag
-       << endl;
-}
+//void Star3::print(void) {
+//  cout << "x0: " << x0
+//       << ", x1: " << x1
+//       << ", b_v: " << b_v
+//       << ", mag: " << mag
+//       << endl;
+//}
 
 
 struct Star2 {  // 10 byte
@@ -352,7 +352,7 @@ struct Star2 {  // 10 byte
   float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
-  void print(void);
+//  void print(void);
 } __attribute__ ((__packed__));
 
 void Star2::repack(void) {
@@ -370,15 +370,15 @@ void Star2::repack(void) {
   mag = _mag;
 }
 
-void Star2::print(void) {
-  cout << "x0: " << x0
-       << ", x1: " << x1
-       << ", dx0: " << dx0
-       << ", dx1: " << dx1
-       << ", b_v: " << b_v
-       << ", mag: " << mag
-       << endl;
-}
+//void Star2::print(void) {
+//  cout << "x0: " << x0
+//       << ", x1: " << x1
+//       << ", dx0: " << dx0
+//       << ", dx1: " << dx1
+//       << ", b_v: " << b_v
+//       << ", mag: " << mag
+//       << endl;
+//}
 
 
 
@@ -415,7 +415,7 @@ struct Star1 { // 28 byte
     return L"";
   }
   void repack(void);
-  void print(void);
+//  void print(void);
 } __attribute__ ((__packed__));
 
 void Star1::repack(void) {
@@ -441,19 +441,19 @@ void Star1::repack(void) {
   plx = _plx;
 }
 
-void Star1::print(void) {
-  cout << "hip: " << hip
-       << ", component_ids: " << ((unsigned int)component_ids)
-       << ", x0: " << x0
-       << ", x1: " << x1
-       << ", b_v: " << ((unsigned int)b_v)
-       << ", mag: " << ((unsigned int)mag)
-       << ", sp_int: " << sp_int
-       << ", dx0: " << dx0
-       << ", dx1: " << dx1
-       << ", sp_int: " << sp_int
-       << endl;
-}
+//void Star1::print(void) {
+//  cout << "hip: " << hip
+//       << ", component_ids: " << ((unsigned int)component_ids)
+//       << ", x0: " << x0
+//       << ", x1: " << x1
+//       << ", b_v: " << ((unsigned int)b_v)
+//       << ", mag: " << ((unsigned int)mag)
+//       << ", sp_int: " << sp_int
+//       << ", dx0: " << dx0
+//       << ", dx1: " << dx1
+//       << ", plx: " << plx
+//       << endl;
+//}
 
 
 template <class Star>
@@ -1184,13 +1184,13 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
         s = stars;
         for (int i=0;i<nr_of_stars;i++,s++) s->repack();
 #endif
-        cout << endl
-             << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-             << "): repack test start" << endl;
-        stars[0].print();
-        stars[1].print();
-        cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-             << "): repack test end" << endl;
+//        cout << endl
+//             << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+//             << "): repack test start" << endl;
+//        stars[0].print();
+//        stars[1].print();
+//        cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+//             << "): repack test end" << endl;
       }
     }
   }
