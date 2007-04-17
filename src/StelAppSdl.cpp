@@ -48,7 +48,7 @@ void StelAppSdl::setResizable(bool resizable)
 {
 	Uint32 Vflags = Screen->flags;
 	if (resizable) Vflags |= SDL_RESIZABLE;
-    else Vflags &= (~SDL_RESIZABLE);
+	else Vflags &= (~SDL_RESIZABLE);
 	Screen = SDL_SetVideoMode(Screen->w,Screen->h,
 						      Screen->format->BitsPerPixel,
 						      Vflags);
@@ -61,12 +61,12 @@ void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
 	screenW = w;
 	screenH = h;
 
-    Screen = NULL;
+	Screen = NULL;
 	Uint32	Vflags;		// Our Video Flags
 #ifdef HAVE_SDL_MIXER_H
 
-    // Init the SDL library, the VIDEO subsystem    
-    // Tony - added timer
+	// Init the SDL library, the VIDEO subsystem
+	// Tony - added timer
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 	{
 		// couldn't init audio, so try without
@@ -450,35 +450,6 @@ void StelAppSdl::startMainLoop()
 
 void StelAppSdl::saveScreenShot() const
 {
-	string tempName;
-	char c[3];
-	FILE *fp;
-
-	SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-	0x000000FF, 0x0000FF00, 0x00FF0000, 0
-#else
-	0x00FF0000, 0x0000FF00, 0x000000FF, 0
-#endif
-	);
-	if (temp == NULL) exit(-1);
-
-	unsigned char * pixels = (unsigned char *) malloc(3 * Screen->w * Screen->h);
-	if (pixels == NULL)
-	{
-		SDL_FreeSurface(temp);
-		exit(-1);
-	}
-
-	glReadPixels(0, 0, Screen->w, Screen->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-	for (int i=0; i<Screen->h; i++)
-	{
-		memcpy(((char *) temp->pixels) + temp->pitch * i,
-				pixels + 3*Screen->w * (Screen->h-i-1), Screen->w*3);
-	}
-	free(pixels);
-
 	string shotdir;
 #if defined(WIN32)
 	char path[MAX_PATH];
@@ -510,23 +481,71 @@ void StelAppSdl::saveScreenShot() const
 #ifdef MACOSX
 	shotdir += "/Desktop/";
 #endif
+
+#ifdef __x86_64__
+	const char *extension = ".ppm";
+#else
+	const char *extension = ".bmp";
+#endif
+
+	string tempName;
 	for(int j=0; j<=100; ++j)
 	{
+		char c[3];
 #if !defined(_MSC_VER)
 		snprintf(c,3,"%d",j);
 #else
 		_snprintf(c,3,"%d",j);
 #endif
 
-	tempName = shotdir + "stellarium" + c + ".bmp";
-		fp = fopen(tempName.c_str(), "r");
+		tempName = shotdir + "stellarium" + c + extension;
+		FILE *fp = fopen(tempName.c_str(), "r");
 		if(fp == NULL)
 			break;
 		else
 			fclose(fp);
 	}
 
+	SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	0x000000FF, 0x0000FF00, 0x00FF0000, 0
+#else
+	0x00FF0000, 0x0000FF00, 0x000000FF, 0
+#endif
+	);
+	if (temp == NULL) exit(-1);
+
+	unsigned char * pixels = (unsigned char *) malloc(3 * Screen->w * Screen->h);
+	if (pixels == NULL)
+	{
+		SDL_FreeSurface(temp);
+		exit(-1);
+	}
+
+	glReadPixels(0, 0, Screen->w, Screen->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+	for (int i=0; i<Screen->h; i++)
+	{
+		memcpy(((char *) temp->pixels) + temp->pitch * i,
+				pixels + 3*Screen->w * (Screen->h-i-1), Screen->w*3);
+	}
+	free(pixels);
+
+#ifdef __x86_64__
+	  // workaround because SDL_SaveBMP is buggy on x86_64
+	FILE *f = fopen(tempName.c_str(),"wb");
+	if (f) {
+	  fprintf(f,"P6\n# stellarium screenshot\n%d %d\n255\n",Screen->w,Screen->h);
+	  fwrite(temp->pixels,1,3*(Screen->w)*(Screen->h),f);
+	  fclose(f);
+	} else {
+	  cerr << "StelAppSdl::saveScreenShot: fopen(" << tempName << ") failed"
+	       << endl;
+	}
+#else
 	SDL_SaveBMP(temp, tempName.c_str());
+#endif
+
 	SDL_FreeSurface(temp);
 	cout << "Saved screenshot to file : " << tempName << endl;
 }
