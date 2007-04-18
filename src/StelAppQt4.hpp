@@ -69,6 +69,8 @@ public:
 	
 	//! Alternate fullscreen mode/windowed mode if possible
 	virtual void toggleFullScreen();
+	
+	bool getFullScreen() const;
 protected:
 
 	// Initialize openGL screen

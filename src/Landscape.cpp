@@ -71,7 +71,7 @@ const string Landscape::getTexturePath(const string& basename, const string& lan
 	}
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
+LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), tanMode(false)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -169,6 +169,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	ground_angle_shift = pd.get_double(section_name, "ground_angle_shift", 0.);
 	ground_angle_rotatez = pd.get_double(section_name, "ground_angle_rotatez", 0.);
 	draw_ground_first = pd.get_int(section_name, "draw_ground_first", 0);
+	tanMode = pd.get_boolean(section_name, "tan_mode", false);
 }
 
 
@@ -183,7 +184,8 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	side_texs = new STextureSP[nb_side_texs];
 	
 	char tmp[255];
-	StelApp::getInstance().getTextureManager().setDefaultParams();
+	//StelApp::getInstance().getTextureManager().setMipmapsMode(true);
+	//StelApp::getInstance().getTextureManager().setMagFilter(GL_NEAREST);
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
@@ -260,8 +262,13 @@ void LandscapeOldStyle::draw_fog(ToneReproducer * eye, const Projector* prj, con
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	fog_tex->bind();
-	prj->setCustomFrame(nav->get_local_to_eye_mat() * Mat4d::translation(Vec3d(0.,0.,radius*std::sin(fog_angle_shift*M_PI/180.))));
-	prj->sCylinder(radius, radius*std::sin(fog_alt_angle*M_PI/180.), 128, 1, 1);
+	
+	const double vpos = tanMode ? radius*std::tan(fog_angle_shift*M_PI/180.) : radius*std::sin(fog_angle_shift*M_PI/180.);
+	prj->setCustomFrame(nav->get_local_to_eye_mat() * Mat4d::translation(Vec3d(0.,0.,vpos)));
+	
+	const double height = tanMode ? radius*std::tan(fog_alt_angle*M_PI/180.) : radius*std::sin(fog_alt_angle*M_PI/180.);
+	prj->sCylinder(radius, height, 128, 1, 1);
+	
 	glDisable(GL_CULL_FACE);
 }
 
@@ -283,8 +290,10 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 	  // fandisk becomes a triangle:
 	int slices_per_side = 3*64/(nb_decor_repeat*nb_side);
 	if (slices_per_side<=0) slices_per_side = 1;
-	const double z0 = radius * std::sin(decor_angle_shift*M_PI/180.0);
-	const double d_z = radius * std::sin(decor_alt_angle*M_PI/180.0) / stacks;
+	const double z0 = tanMode ? radius * std::tan(decor_angle_shift*M_PI/180.0) : 
+		radius * std::sin(decor_angle_shift*M_PI/180.0);
+	const double d_z = tanMode ? radius * std::tan(decor_alt_angle*M_PI/180.0) / stacks : 
+		radius * std::sin(decor_alt_angle*M_PI/180.0) / stacks;
 	const double alpha = 2.0*M_PI/(nb_decor_repeat*nb_side*slices_per_side);
 	const double ca = cos(alpha);
 	const double sa = sin(alpha);
@@ -326,7 +335,10 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
-	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*std::sin(ground_angle_shift*M_PI/180.)));
+	
+	const double vshift = tanMode ? radius*std::tan(ground_angle_shift*M_PI/180.) : radius*std::sin(ground_angle_shift*M_PI/180.);
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+
 	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.getInterstate());
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);

@@ -557,6 +557,11 @@ void StelAppSdl::toggleFullScreen()
 {
 	SDL_WM_ToggleFullScreen(Screen);
 }
-	
+
+bool StelAppSdl::getFullScreen() const
+{
+	cerr << "Warning StelAppSdl::getFullScreen() can't be implemented." << endl;
+	return true;
+}
 
 #endif // USE_SDL
