@@ -192,6 +192,12 @@ void StelAppQt4::toggleFullScreen()
 	}
 }
 
+
+bool StelAppQt4::getFullScreen() const
+{
+	return mainWindow->isFullScreen();
+}
+
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
 	setFocusPolicy(Qt::ClickFocus);
