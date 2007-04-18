@@ -48,6 +48,9 @@ public:
 	//! Alternate fullscreen mode/windowed mode if possible
 	virtual void toggleFullScreen();
 	
+	//! Return whether we are in fullscreen mode
+	virtual bool getFullScreen() const;
+	
 protected:
 	// Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);

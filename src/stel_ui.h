@@ -81,12 +81,17 @@ public:
 	bool getFlagShowTuiShortObjInfo() { return FlagShowTuiShortObjInfo; }
 
 	// Whether tui menu is currently displayed
-	void setFlagShowTuiMenu(const bool flag);
+	void setFlagShowTuiMenu(bool flag);
 	bool getFlagShowTuiMenu() { return FlagShowTuiMenu; }
 
 	void setFlagShowTime(int b) {FlagShowTime=b;}
 	void setFlagShowFPS(int b) {FlagShowFps=b;}
 	void setFlagShowFov(int b) {FlagShowFov=b;}
+	
+	void setFlagShowFlagButtons(bool b);
+	
+	void setFlagShowConfigWin(bool b);
+	bool getFlagShowConfigWin() const {return config_win->getVisible();}
 	
 	// for use by TUI
 	void saveCurrentConfig(const string& confFile);

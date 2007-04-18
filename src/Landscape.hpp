@@ -118,6 +118,7 @@ private:
 	float ground_angle_shift;
 	float ground_angle_rotatez;
 	int draw_ground_first;
+	bool tanMode;	// Whether the angles should be converted using tan instead of sin 
 };
 
 class LandscapeFisheye : public Landscape

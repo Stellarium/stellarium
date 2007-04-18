@@ -220,6 +220,9 @@ public:
 	//! Alternate fullscreen mode/windowed mode if possible
 	virtual void toggleFullScreen() = 0;
 	
+	//! Return whether we are in fullscreen mode
+	virtual bool getFullScreen() const = 0;
+	
 protected:
 	//! Update all object according to the delta time
 	void update(int delta_time);

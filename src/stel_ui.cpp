@@ -1393,12 +1393,25 @@ void StelUI::setColorScheme(const InitParser& conf, const string& section)
 }
 
 
-void StelUI::setFlagShowTuiMenu(const bool flag) {
-
-	if(flag && !FlagShowTuiMenu) {
+void StelUI::setFlagShowTuiMenu(const bool flag)
+{
+	if( flag && !FlagShowTuiMenu)
+	{
 		tuiUpdateIndependentWidgets();
 	}
 
 	FlagShowTuiMenu = flag;
+}
 
+void StelUI::setFlagShowConfigWin(bool b)
+{
+	bt_flag_config->setState(b);
+	FlagConfig=b;
+	config_win->setVisible(b);
+}
+
+void StelUI::setFlagShowFlagButtons(bool b)
+{
+	FlagMenu=b;
+	bt_flag_ctr->setVisible(b);
 }
