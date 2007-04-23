@@ -135,9 +135,10 @@ public:
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param queue the queue where the texture will be inserted once downloaded
 	//! @param queueMutex the mutex protecting the queue
+	//! @param cookiesFile path to a file containing cookies to use for authenticated download
 	bool createTextureThread(const std::string& url, std::vector<QueuedTex*>* queue, 
 		boost::mutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
-		bool toDelete=true);
+		bool toDelete=true, const std::string& cookiesFile="");
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}

@@ -117,6 +117,9 @@ public:
 	//! Load color scheme from the given ini file and section name
 	virtual void setColorScheme(const InitParser& conf, const std::string& section) {;}
 	
+	//! This method is called for all StelModules when the GL window is resized
+	virtual void glWindowHasBeenResized(int w, int h) {;}
+	
 protected:
 	friend class StelModuleMgr;
 
