@@ -766,7 +766,8 @@ int getBiggerPowerOfTwo(int value)
 }
 
 //! Download the file from the given URL to the given name using libcurl
-bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer)
+bool downloadFile(const std::string& url, const std::string& fullPath, 
+	const std::string& referer, const string& cookiesFile)
 {
 #ifndef HAVE_LIBCURL
 	cerr << "Stellarium was compiled without libCurl support. Can't access remote URLs." << endl;
@@ -776,6 +777,13 @@ bool downloadFile(const std::string& url, const std::string& fullPath, const std
 	CURL* handle = curl_easy_init();
 	curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(handle, CURLOPT_REFERER, referer.c_str());
+	if (!cookiesFile.empty())
+	{
+		// Activate cookies
+		curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
+		curl_easy_setopt(handle, CURLOPT_COOKIEFILE, cookiesFile.c_str());
+		cerr << "Using cookies file: " << cookiesFile << endl;
+	}
 	FILE* fic = fopen(fullPath.c_str(), "wb");
 	if (!fic)
 	{
@@ -788,9 +796,11 @@ bool downloadFile(const std::string& url, const std::string& fullPath, const std
 	{
 		cerr << "There was an error while getting file: " << url << endl;
 		fclose(fic);
+		curl_easy_cleanup(handle);
 		return false;
 	}
 	fclose(fic);
+	curl_easy_cleanup(handle);
 	return true;
 #endif
 }

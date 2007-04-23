@@ -227,6 +227,7 @@ struct LoadQueueParam
 	boost::mutex* outQueueMutex;
 	std::string url;
 	std::string localPath;
+	std::string cookiesFile;
 	void* userPtr;
 };
 
@@ -247,7 +248,7 @@ struct loadTextureThread
 			while (StelUtils::fileExists(cacheFileName));
 			
 			cout << "Downloading image " << param->url << " to " << cacheFileName << endl;
-			StelUtils::downloadFile(param->url, cacheFileName, APP_NAME);
+			StelUtils::downloadFile(param->url, cacheFileName, APP_NAME, param->cookiesFile);
 			param->tex->fullPath = cacheFileName;
 			param->localPath = cacheFileName;
 		}
@@ -278,7 +279,7 @@ struct loadTextureThread
 *************************************************************************/
 bool StelTextureMgr::createTextureThread(const std::string& url, 
 	std::vector<QueuedTex*>* outQueue, boost::mutex* outQueueMutex, void* userPtr, 
-	const std::string& fileExtension, bool toDelete)
+	const std::string& fileExtension, bool toDelete, const std::string& cookiesFile)
 {
 	bool toDownload = false;
 	string filename;
@@ -314,6 +315,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	tparam->outQueue = outQueue;
 	tparam->outQueueMutex=outQueueMutex;
 	tparam->url = url;
+	tparam->cookiesFile = cookiesFile;
 	tparam->localPath = filename;
 	tparam->toDownload = toDownload;
 	tparam->toDelete = toDelete;
