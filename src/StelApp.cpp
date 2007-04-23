@@ -506,6 +506,11 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 		core->getProjection()->windowHasBeenResized(getScreenW(),getScreenH());
 	if (ui)
 		ui->resize();
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		(*iter)->glWindowHasBeenResized(w, h);
+	}
 }
 
 // Handle mouse clics

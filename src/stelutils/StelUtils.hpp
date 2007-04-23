@@ -243,7 +243,7 @@ namespace StelUtils {
 	int getBiggerPowerOfTwo(int value);
 	
 	//! Download the file from the given URL to the given name using libcurl
-	bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer="Stellarium");
+	bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer="Stellarium", const std::string& cookiesFile="");
 	
 	//! Return the inverse sinus hyperbolic of z
 	double asinh(double z);

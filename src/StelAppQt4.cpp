@@ -148,6 +148,7 @@ void StelAppQt4::startMainLoop()
 	
 	GLWidget openGLWin(&mainWin, this);
 	winOpenGL = &openGLWin;
+	winOpenGL->setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
 	mainWin.setCentralWidget(&openGLWin);
 	mainWin.show();
 	openGLWin.show();
