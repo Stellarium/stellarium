@@ -777,10 +777,11 @@ bool downloadFile(const std::string& url, const std::string& fullPath,
 	CURL* handle = curl_easy_init();
 	curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(handle, CURLOPT_REFERER, referer.c_str());
+	curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
+	curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0);
 	if (!cookiesFile.empty())
 	{
 		// Activate cookies
-		curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
 		curl_easy_setopt(handle, CURLOPT_COOKIEFILE, cookiesFile.c_str());
 		cerr << "Using cookies file: " << cookiesFile << endl;
 	}
