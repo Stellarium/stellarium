@@ -67,9 +67,13 @@ class Translations
 
 		// Constellation cultures
 		N_("Chinese");
-		N_("Western");
-		N_("Polynesian");
 		N_("Egyptian");
+		N_("Inuit");
+		N_("Korean");
+		N_("Lakota");
+		N_("Navajo");
+		N_("Polynesian");
+		N_("Western");
 		
 		// Western Constellations
 		N_("Aquila");				// aql
@@ -333,6 +337,9 @@ class Translations
         N_("Turtle");   // 011
         N_("Thunderbird");   // 012
         N_("Bear's Lodge");   // 013
+
+		// Korean Constellations
+		// TODO
 
 		// TUI script message
 		N_("Select and exit to run.");
