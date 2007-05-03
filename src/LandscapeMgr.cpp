@@ -339,6 +339,12 @@ void LandscapeMgr::updateI18n()
 	void LandscapeMgr::setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
 	//! Get atmosphere fade duration in s
 	float LandscapeMgr::getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
+
+	//! Set light pollution luminance level
+    void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f) {atmosphere->setLightPollutionLuminance(f);}
+	//! Get light pollution luminance level
+    float LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const {return atmosphere->getLightPollutionLuminance();}
+
 	
 	float LandscapeMgr::getLuminance(void) {return atmosphere->get_intensity();}
 

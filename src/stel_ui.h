@@ -387,6 +387,7 @@ private:
 	s_tui::Decimal_item* tui_colors_const_art_intensity;
 
 	// 5. Effects
+	s_tui::Decimal_item* tui_effect_light_pollution;
 	s_tui::MultiSet_item<wstring>* tui_effect_landscape;
 	s_tui::Boolean_item* tui_effect_pointobj;
 	s_tui::Decimal_item* tui_effect_object_scale;

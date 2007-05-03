@@ -61,6 +61,10 @@ public:
 	float get_fade_intensity(void) {return fader.getInterstate();}  // let's you know how far faded in or out the atm is (0-1)
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
 	float get_milkyway_adaptation_luminance(void) const {return milkyway_adaptation_luminance;}
+
+	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
+	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
+
 private:
 	Vector4<GLint> viewport;
 	Skylight sky;
@@ -77,6 +81,7 @@ private:
 	float milkyway_adaptation_luminance;
 	float atm_intensity;
 	ParabolicFader fader;
+	float lightPollutionLuminance;
 };
 
 #endif // _STEL_ATMOSTPHERE_H_
