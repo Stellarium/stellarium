@@ -482,13 +482,13 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			// build up a command string
 			string cmd;
 			if (SelectedScriptDirectory!="")
-				cmd = "script action play filename " +  SelectedScript + " path " + SelectedScriptDirectory + "/scripts/";
+				cmd = "script action play filename \"" +  SelectedScript + "\" path \"" + SelectedScriptDirectory + "/scripts/\"";
 			else
 			{
 				try
 				{
 					boost::filesystem::path theParent = StelApp::getInstance().getFileMgr().findFile("data/scripts/" + SelectedScript) / "..";
-					cmd = "script action play filename " + SelectedScript + " path " + theParent.normalize().string() + "/";
+					cmd = "script action play filename \"" + SelectedScript + "\" path \"" + theParent.normalize().string() + "/\"";
 				}
 				catch(exception& e)
 				{
