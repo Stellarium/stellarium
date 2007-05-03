@@ -82,7 +82,6 @@ void Audio::update(double delta_time) {
 void Audio::sync() {
 	if(track==NULL) return;
 
-	Mix_RewindMusic();
 	Mix_SetMusicPosition(elapsed_seconds);  // ISSUE doesn't work for all audio formats
 	Mix_ResumeMusic();
 	is_playing = 1;
