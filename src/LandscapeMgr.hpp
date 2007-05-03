@@ -110,6 +110,11 @@ public:
 	void setAtmosphereFadeDuration(float f);
 	//! Get atmosphere fade duration in s
 	float getAtmosphereFadeDuration(void) const;
+
+	//! Set light pollution luminance level
+	void setAtmosphereLightPollutionLuminance(float f);
+	//! Get light pollution luminance level
+	float getAtmosphereLightPollutionLuminance(void) const;
 	
 	//! Return the global landscape luminance, for beeing used e.g for setting eye adaptation
 	float getLuminance(void);
