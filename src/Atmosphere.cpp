@@ -30,7 +30,7 @@
 
 Atmosphere::Atmosphere(void)
            :viewport(0,0,0,0),sky_resolution_y(44), grid(0),
-            world_adaptation_luminance(0.f), atm_intensity(0)
+            world_adaptation_luminance(0.f), atm_intensity(0), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
 }
@@ -79,7 +79,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	if(!fader.getInterstate())
 	{
 		atm_intensity = 0;
-		world_adaptation_luminance = 3.75f;
+		world_adaptation_luminance = 3.75f + lightPollutionLuminance;
 		milkyway_adaptation_luminance = min_mw_lum;  // brighter than without atm, since no drawing addition of atm brightness
 		return;
 	}
@@ -198,18 +198,8 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		}
 	}
 
-	world_adaptation_luminance = 3.75f + 3.5*sum_lum/nb_lum*atm_intensity;
+	world_adaptation_luminance = 3.75f + lightPollutionLuminance + 3.5*sum_lum/nb_lum*atm_intensity;
 	milkyway_adaptation_luminance = min_mw_lum*(1-atm_intensity) + 30*sum_lum/nb_lum*atm_intensity;
-
-/*
-	// Light pollution testing Rob 20070219
-	float light_pollution = 10.f;
-	world_adaptation_luminance = 3.75f + light_pollution + 3.5*sum_lum/nb_lum*atm_intensity;
-//	milkyway_adaptation_luminance = light_pollution + min_mw_lum*(1-atm_intensity) 
-	//	+ 30*sum_lum/nb_lum*atm_intensity;
-	milkyway_adaptation_luminance = 30000*world_adaptation_luminance;
-// NOT USED AT ALL!
-*/
 
 	sum_lum = 0.f;
 	nb_lum = 0;

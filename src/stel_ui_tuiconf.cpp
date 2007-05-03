@@ -267,6 +267,10 @@ void StelUI::init_tui(void)
 
 
 	// 5. Effects
+	tui_effect_light_pollution = new s_tui::Decimal_item(0, 30, 1, wstring(L"5.9 "), 0.1 );
+	tui_effect_light_pollution->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
+	tui_menu_effects->addComponent(tui_effect_light_pollution);
+
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") );
 	tui_effect_landscape->addItemList(StelUtils::stringToWstring(lmgr->getLandscapeNames()));
 
@@ -408,14 +412,15 @@ void StelUI::localizeTui(void)
 
 
 	// 6. Effects
-	tui_effect_landscape->setLabel(wstring(L"6.1 ") + _("Landscape: "));
-	tui_effect_manual_zoom->setLabel(wstring(L"6.2 ") + _("Manual zoom: "), _("Yes"),_("No"));
-	tui_effect_pointobj->setLabel(wstring(L"6.3 ") + _("Object Sizing Rule: "), _("Point"),_("Magnitude"));
-	tui_effect_object_scale->setLabel(wstring(L"6.4 ") + _("Magnitude Sizing Multiplier: "));
-	tui_effect_milkyway_intensity->setLabel(wstring(L"6.5 ") + _("Milky Way intensity: "));
-	tui_effect_nebulae_label_magnitude->setLabel(wstring(L"6.6 ") + _("Maximum Nebula Magnitude to Label: "));
-	tui_effect_zoom_duration->setLabel(wstring(L"6.7 ") + _("Zoom Duration: "));
-	tui_effect_cursor_timeout->setLabel(wstring(L"6.8 ") + _("Cursor Timeout: "));
+	tui_effect_light_pollution->setLabel(wstring(L"6.1 ") + _("Light Pollution Luminance: "));
+	tui_effect_landscape->setLabel(wstring(L"6.2 ") + _("Landscape: "));
+	tui_effect_manual_zoom->setLabel(wstring(L"6.3 ") + _("Manual zoom: "), _("Yes"),_("No"));
+	tui_effect_pointobj->setLabel(wstring(L"6.4 ") + _("Object Sizing Rule: "), _("Point"),_("Magnitude"));
+	tui_effect_object_scale->setLabel(wstring(L"6.5 ") + _("Magnitude Sizing Multiplier: "));
+	tui_effect_milkyway_intensity->setLabel(wstring(L"6.6 ") + _("Milky Way intensity: "));
+	tui_effect_nebulae_label_magnitude->setLabel(wstring(L"6.7 ") + _("Maximum Nebula Magnitude to Label: "));
+	tui_effect_zoom_duration->setLabel(wstring(L"6.8 ") + _("Zoom Duration: "));
+	tui_effect_cursor_timeout->setLabel(wstring(L"6.9 ") + _("Cursor Timeout: "));
 
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
@@ -571,6 +576,7 @@ void StelUI::tui_update_widgets(void)
 
 
 	// 6. effects
+	tui_effect_light_pollution->setValue(lmgr->getAtmosphereLightPollutionLuminance());
 	tui_effect_landscape->setValue(lmgr->getLandscapeName());
 	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(mvmgr->getAutomoveDuration());
@@ -797,6 +803,10 @@ void StelUI::tui_cb_effects()
 	app->commander->execute_command(oss.str());
 
 	MouseCursorTimeout = tui_effect_cursor_timeout->getValue();  // never recorded
+
+	oss.str("");
+	oss << "set light_pollution_luminance " << tui_effect_light_pollution->getValue();
+	app->commander->execute_command(oss.str());
 
 }
 
