@@ -463,7 +463,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		status = 0;
 #else
   
-		if(args["action"]=="sync") {
+		if(args["action"]=="drop") {
+			if(audio) delete audio;
+			audio = NULL;
+
+		} else if(args["action"]=="sync") {
 			if(audio) audio->sync();
 
 		} else if(args["action"]=="pause") {
