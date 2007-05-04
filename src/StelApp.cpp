@@ -307,8 +307,11 @@ void StelApp::init(void)
 	textureMgr->init();
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
-
+	swapGLBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	maxfps = conf.get_double ("video","maximum_fps",10000);
 	minfps = conf.get_double ("video","minimum_fps",10000);
 

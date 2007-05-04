@@ -144,7 +144,7 @@ void StelAppQt4::startMainLoop()
 	
 	StelMainWindow mainWin(this);
 	mainWindow = &mainWin;
-	mainWindow->setMinimumSize(400,300);
+	mainWindow->setMinimumSize(400,400);
 	
 	GLWidget openGLWin(&mainWin, this);
 	winOpenGL = &openGLWin;
@@ -156,6 +156,7 @@ void StelAppQt4::startMainLoop()
 	StelApp::init();
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
 	openGLWin.resizeGL(getScreenW(), getScreenH());
+	
 	openGLWin.timerId = openGLWin.startTimer(10);
 	openGLWin.qtime.start();
 	
@@ -216,10 +217,11 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
+	//cerr << "GLWidget::initializeGL()" << endl;
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	swapBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);	
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void GLWidget::resizeGL(int w, int h)
