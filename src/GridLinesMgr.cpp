@@ -518,9 +518,25 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 	
 	// Draw meridian zero which can't be found by the normal algo..
-	// TODO also draw the meridian which are totally included in the viewport
 	const Vec3d vv(1,0,0);
 	prj->drawMeridian(vv, 2.*M_PI, false, &font);
+	
+	// Draw the meridians which are totally included in the viewport (and thus don't intersect with the edge of the screen)
+	if (northPoleInViewport && southPoleInViewport)
+	{
+		int nbMeridian = (int)(2.*M_PI/gridStepMeridianRad);
+		int dLatMas = 360*60*60*1000/nbMeridian;
+		//cerr << resultsMeridiansOrdered.size()+1 << "/" << nbMeridian/2 << " dLatMas=" << dLatMas/1000/60/60 << endl;
+		for (int latMas=0;latMas<360*60*60*1000/2;latMas+=dLatMas) 
+		{
+			if (resultsMeridiansOrdered.find(latMas)==resultsMeridiansOrdered.end() && latMas!=0)
+			{
+				Vec3d vvv;
+				spheToRectLat1802((double)latMas/RADIAN_MAS, 0, vvv);
+				prj->drawMeridian(vvv, 2.*M_PI, false, &font);
+			}
+		}
+	}
 }
 
 

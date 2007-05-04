@@ -75,7 +75,7 @@ StelFileMgr::~StelFileMgr()
 const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
 	if ( fs::path(path).is_complete() )
-		if ( fileFlagsCheck(path) )
+		if ( fileFlagsCheck(path, flags) )
 			return(path);
 		else 
 		{
@@ -87,7 +87,7 @@ const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 		   i != fileLocations.end();
 		   i++)
 	{				
-		if (fileFlagsCheck(*i / path))
+		if (fileFlagsCheck(*i / path, flags))
 			return fs::path(*i / path);
 	}
 	
@@ -136,7 +136,7 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 			}
 		}
 	}
-	
+
 	return result;
 }
 
