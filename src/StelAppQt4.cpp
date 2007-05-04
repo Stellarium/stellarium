@@ -59,8 +59,8 @@ public:
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent*);
 	QTime qtime;
-private:
     int timerId;
+private:
     class StelAppQt4* stelApp;
     int previousTime;
 };
@@ -156,6 +156,8 @@ void StelAppQt4::startMainLoop()
 	StelApp::init();
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
 	openGLWin.resizeGL(getScreenW(), getScreenH());
+	openGLWin.timerId = openGLWin.startTimer(10);
+	openGLWin.qtime.start();
 	
 	app.exec();
 }
@@ -206,8 +208,6 @@ GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::de
 	// make openGL context current
 	makeCurrent();
 	setAutoBufferSwap(false);
-	timerId = startTimer(10);
-	qtime.start();
 }
 
 GLWidget::~GLWidget()
