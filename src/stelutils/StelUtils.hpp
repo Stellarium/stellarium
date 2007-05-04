@@ -41,12 +41,12 @@ typedef stringHash_t::const_iterator stringHashIter_t;
 
 //! Errors occuring because of Stellarium's code should throw this exception,
 //! or subclass of it.
-class StellariumException
+class StellariumException : public std::exception
 {
 public:
-	StellariumException(const std::string& msg) : message(msg) {;}
-	virtual ~StellariumException() {;}
-	virtual void report() {std::cerr << "StellariumException occured: " << message << std::endl;}
+	StellariumException(const std::string& msg) : message("StellariumException occured: " + msg) {;}
+	~StellariumException() throw() {;}
+	virtual const char* what() const throw() {return message.c_str();}
 	std::string message;
 };
 
