@@ -464,7 +464,7 @@ void SkyGrid::draw(const Projector* prj) const
 		
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			//cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
 		}
 		else
 		{
