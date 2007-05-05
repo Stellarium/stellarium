@@ -135,43 +135,48 @@ void StelModuleMgr::generateCallingLists()
 		{
 			mc->second.push_back(m->second);
 		}
-		// Order them now according to dependencies
-		for (m=modules.begin();m!=modules.end();++m)
+		
+		// Very unoptimized method but we don't care since it's not time critical
+		for (unsigned int n=0;n<modules.size();++n)
 		{
-			StelModule::DependenciesOrderT::iterator tmp = m->second->dependenciesOrder.find(mc->first);
-			if (tmp!=m->second->dependenciesOrder.end() && tmp->second.size()!=0)
+			// Order them now according to dependencies
+			for (m=modules.begin();m!=modules.end();++m)
 			{
-				// There is a dependency
-				const string& dep = tmp->second;
-				std::vector<StelModule*>& list = mc->second;
-				
-				// Remove the module we want to sort
-				std::vector<StelModule*>::iterator thisIdx;
-				for (thisIdx=list.begin(); (*thisIdx)!=m->second && thisIdx!=list.end(); ++thisIdx){;}
-				assert(thisIdx!=list.end());
-				list.erase(thisIdx);
-				
-				// And insert it after the dependent module
-				std::vector<StelModule*>::iterator depIdx;
-				if (dep=="first")
+				StelModule::DependenciesOrderT::iterator tmp = m->second->dependenciesOrder.find(mc->first);
+				if (tmp!=m->second->dependenciesOrder.end() && tmp->second.size()!=0)
 				{
-					depIdx = list.begin();
-				}
-				else if (dep=="last")
-				{
-					depIdx = list.end();
-				}
-				else
-				{
-					for (depIdx=list.begin(); (*depIdx)->getModuleID()!=dep && depIdx!=list.end(); ++depIdx){;}
-					if (depIdx==list.end())
+					// There is a dependency
+					const string& dep = tmp->second;
+					std::vector<StelModule*>& list = mc->second;
+					
+					// Remove the module we want to sort
+					std::vector<StelModule*>::iterator thisIdx;
+					for (thisIdx=list.begin(); (*thisIdx)!=m->second && thisIdx!=list.end(); ++thisIdx){;}
+					assert(thisIdx!=list.end());
+					list.erase(thisIdx);
+					
+					// And insert it after the dependent module
+					std::vector<StelModule*>::iterator depIdx;
+					if (dep=="first")
 					{
-						cerr << "Error, can't find module \"" << dep << "\" on which module \"" << m->second->getModuleID() << "\" depends for the operation \""<< tmp->first << "\"." << endl;
-						assert(0);
+						depIdx = list.begin();
 					}
-					++depIdx;
+					else if (dep=="last")
+					{
+						depIdx = list.end();
+					}
+					else
+					{
+						for (depIdx=list.begin(); (*depIdx)->getModuleID()!=dep && depIdx!=list.end(); ++depIdx){;}
+						if (depIdx==list.end())
+						{
+							cerr << "Error, can't find module \"" << dep << "\" on which module \"" << m->second->getModuleID() << "\" depends for the operation \""<< tmp->first << "\"." << endl;
+							assert(0);
+						}
+						++depIdx;
+					}
+					list.insert(depIdx, m->second);
 				}
-				list.insert(depIdx, m->second);
 			}
 		}
 	}
