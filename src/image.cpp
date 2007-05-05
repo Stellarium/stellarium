@@ -188,11 +188,14 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   glColor4f(1.0,1.0,1.0,image_alpha);
 
+//  printf("image_alpha %f\n", image_alpha);
+
   image_tex->bind();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   float cx = vieww/2.f + prj->getViewportPosX();
   float cy = viewh/2.f + prj->getViewportPosY();
+
 
   // calculations to keep image proportions when scale up to fit view
   float prj_ratio = (float)vieww/viewh;   
@@ -209,7 +212,6 @@ void Image::draw(const Navigator * nav, Projector * prj) {
   float w = image_scale*xbase;
   float h = image_scale*ybase;
 
-
   if(image_pos_type == POS_VIEWPORT ) {
 
 	  //	  cout << "drawing image viewport " << image_name << endl;
@@ -217,7 +219,10 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  // at x or y = 1, image is centered on projection edge
 	  // centered in viewport at 0,0
 
-	prj->drawRectSprite2dMode(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2, w, h, -image_rotation);
+	  // printf("Image drawn: %f %f %f %f\n", cx+image_xpos*vieww/2,cy+image_ypos*viewh/2, w, h);
+
+	  prj->drawRectSprite2dMode(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2, 2*w, 2*h, -image_rotation);
+
 
   } else if(image_pos_type == POS_HORIZONTAL ) {
 

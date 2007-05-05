@@ -25,7 +25,9 @@
 #include "Navigator.hpp"
 
 ImageMgr::ImageMgr()
-{}
+{
+	dependenciesOrder["draw"]="landscape";
+}
 
 ImageMgr::~ImageMgr()
 {
