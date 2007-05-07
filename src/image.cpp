@@ -188,7 +188,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   glColor4f(1.0,1.0,1.0,image_alpha);
 
-//  printf("image_alpha %f\n", image_alpha);
+  printf("image_alpha %f\n", image_alpha);
 
   image_tex->bind();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -229,7 +229,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  //	  cout << "drawing image horizontal " << image_name << endl;
 
 	  // alt az coords
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	  prj->setCurrentFrame(Projector::FRAME_LOCAL);
 	  Vec3d gridpt;
 	  
 	  //	  printf("%f %f\n", image_xpos, image_ypos);
@@ -255,14 +255,14 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 				  // TODO: separate x, y scales?
 				  if(image_ratio<1) {
 					  // image height is maximum angular dimension
-					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+					  gridpt = Mat4d::rotation( imagev, (image_rotation)*M_PI/180.) *
 						  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
 						  Mat4d::rotation( ortho2, image_scale/image_ratio*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
 						  imagev;
 
 				  } else {
 					  // image width is maximum angular dimension
-					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+					  gridpt = Mat4d::rotation( imagev, (image_rotation)*M_PI/180.) *
 						  Mat4d::rotation( ortho1, image_scale/image_ratio*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
 						  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
 						  imagev;
