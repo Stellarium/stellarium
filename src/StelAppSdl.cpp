@@ -26,8 +26,8 @@
 #include "StelCore.hpp"
 #include "Projector.hpp"
 
-#ifdef HAVE_SDL_MIXER_H
-#include "SDL_mixer.h"
+#ifdef HAVE_SDL_SDL_MIXER_H
+#include <SDL/SDL_mixer.h>
 #endif
 
 #include <sstream>
@@ -63,7 +63,7 @@ void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
 
 	Screen = NULL;
 	Uint32	Vflags;		// Our Video Flags
-#ifdef HAVE_SDL_MIXER_H
+#ifdef HAVE_SDL_SDL_MIXER_H
 
 	// Init the SDL library, the VIDEO subsystem
 	// Tony - added timer
