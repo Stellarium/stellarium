@@ -24,7 +24,7 @@
 #include "stellarium.h"
 #include "Translator.hpp"
 
-#ifdef HAVE_SDL_MIXER_H
+#ifdef HAVE_SDL_SDL_MIXER_H
 
 float Audio::master_volume = 0.5;
 
