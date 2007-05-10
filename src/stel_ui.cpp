@@ -886,6 +886,11 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			app->terminateApplication();
 		}
 
+		// ctrl-s saves screenshot
+		if (key == StelKey_s && (mod & COMPATIBLE_StelMod_CTRL))
+		{
+			app->saveScreenShot();
+		}
 
 		// if script is running, only script control keys are accessible
 		// to pause/resume/cancel the script
