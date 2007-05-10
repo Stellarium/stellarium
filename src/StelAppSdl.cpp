@@ -380,12 +380,6 @@ void StelAppSdl::startMainLoop()
 					{
 						if (E.key.keysym.sym==SDLK_F1)
 							toggleFullScreen(); // Try fullscreen
-
-						// ctrl-s saves screenshot
-						if (E.key.keysym.unicode==0x0013 &&  (Screen->flags & SDL_OPENGL))
-                        {
-                        	saveScreenShot();
-                        }
 					}
 					// Rescue escape in case of lock : CTRL + ESC forces brutal quit
 					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) terminateApplication();

@@ -165,7 +165,59 @@ void StelAppQt4::startMainLoop()
 
 void StelAppQt4::saveScreenShot() const
 {
-	cerr << "Broken" << endl;
+	QImage im = winOpenGL->grabFrameBuffer();
+
+	string shotdir;
+#if defined(WIN32)
+	char path[MAX_PATH];
+	path[MAX_PATH-1] = '\0';
+	// Previous version used SHGetFolderPath and made app crash on window 95/98..
+	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+	LPITEMIDLIST tmp;
+	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
+	{
+         SHGetPathFromIDList(tmp, path);                      
+		shotdir = string(path)+"\\";
+	}
+	else
+	{	
+		if(getenv("USERPROFILE")!=NULL)
+		{
+			//for Win XP etc.
+			shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
+		}
+		else
+		{
+			//for Win 98 etc.
+			shotdir = "C:\\My Documents\\";
+		}
+	}
+#else
+	shotdir = string(getenv("HOME")) + "/";
+#endif
+#ifdef MACOSX
+	shotdir += "/Desktop/";
+#endif
+
+	string tempName;
+	for(int j=0; j<=100; ++j)
+	{
+		char c[3];
+#if !defined(_MSC_VER)
+		snprintf(c,3,"%d",j);
+#else
+		_snprintf(c,3,"%d",j);
+#endif
+
+		tempName = shotdir + "stellarium" + c + ".bmp";
+		FILE *fp = fopen(tempName.c_str(), "r");
+		if(fp == NULL)
+			break;
+		else
+			fclose(fp);
+	}
+	im.save(tempName.c_str());
+	cout << "Saved screenshot to file : " << tempName << endl;
 }
 
 void StelAppQt4::setResizable(bool resizable)
