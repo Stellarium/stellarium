@@ -81,8 +81,12 @@ public:
 	void setSearchPaths(const vector<fs::path> paths);
 		
 	//! Get the user's Desktop directory
-	//! This is a porable way to retrieve the directory for the user's desktop
-	//! @return the user's desktop directory
+	//! This is a portable way to retrieve the directory for the user's desktop.
+	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
+	//! using SHGetSpecialFolderLocation.  If that doesn't work, the USERPROFILE
+	//! environment variable is checked, and if set, \\Desktop is appended, else
+	//! C:\\Windows\\Desktop is used.
+	//! @return the path to the user's desktop directory
 	//! @exception NOT_FOUND when the directory cannot be determined, or the
 	//!            OS doesn't provide one.
 	const fs::path getDesktopDir(void);

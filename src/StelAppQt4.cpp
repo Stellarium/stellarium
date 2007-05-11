@@ -22,6 +22,9 @@
 #ifdef USE_QT4
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <string>
 
 #include "StelAppQt4.hpp"
 #include "StelCore.hpp"
@@ -30,6 +33,8 @@
 
 using namespace std;
 
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <QtGui/QImage>
 #include <QtGui/QApplication>
 #include <QtOpenGL>
@@ -165,59 +170,29 @@ void StelAppQt4::startMainLoop()
 
 void StelAppQt4::saveScreenShot() const
 {
+	boost::filesystem::path shotdir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
-	string shotdir;
-#if defined(WIN32)
-	char path[MAX_PATH];
-	path[MAX_PATH-1] = '\0';
-	// Previous version used SHGetFolderPath and made app crash on window 95/98..
-	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
-	LPITEMIDLIST tmp;
-	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
-	{
-         SHGetPathFromIDList(tmp, path);                      
-		shotdir = string(path)+"\\";
-	}
-	else
-	{	
-		if(getenv("USERPROFILE")!=NULL)
-		{
-			//for Win XP etc.
-			shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
-		}
-		else
-		{
-			//for Win 98 etc.
-			shotdir = "C:\\My Documents\\";
-		}
-	}
+#if defined(WIN32) || defined(MACOSX)
+	shotdir = getFileMgr().getDesktopDir();
 #else
-	shotdir = string(getenv("HOME")) + "/";
-#endif
-#ifdef MACOSX
-	shotdir += "/Desktop/";
+	shotdir = string(getenv("HOME"));
 #endif
 
-	string tempName;
-	for(int j=0; j<=100; ++j)
+	boost::filesystem::path shotPath;
+	for(int j=0; j<1000; ++j)
 	{
-		char c[3];
-#if !defined(_MSC_VER)
-		snprintf(c,3,"%d",j);
-#else
-		_snprintf(c,3,"%d",j);
-#endif
-
-		tempName = shotdir + "stellarium" + c + ".bmp";
-		FILE *fp = fopen(tempName.c_str(), "r");
-		if(fp == NULL)
+		stringstream oss;
+		oss << setfill('0') << setw(3) << j;
+		shotPath = shotdir / (string("stellarium") + oss.str() + ".bmp");
+		if (!boost::filesystem::exists(shotPath))
 			break;
-		else
-			fclose(fp);
 	}
-	im.save(tempName.c_str());
-	cout << "Saved screenshot to file : " << tempName << endl;
+	// TODO - if no more filenames available, don't just overwrite the last one
+	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
+	
+	cout << "saving screenshot in file: " << shotPath.string() << endl;
+	im.save(QString(shotPath.string().c_str()));
 }
 
 void StelAppQt4::setResizable(bool resizable)
