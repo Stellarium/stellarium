@@ -139,7 +139,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 			// TODO: skip if too faint to see
 			if (n->angular_size>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
 			{
-				if ( !prj->projectCheck(n->XYZ,n->XY) ) continue;
+				prj->project(n->XYZ,n->XY);
 	
 				if (n->angular_size>size_limit)
 				{

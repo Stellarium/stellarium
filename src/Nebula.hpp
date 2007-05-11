@@ -90,6 +90,9 @@ public:
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return angular_size * (180./M_PI)
 	                       * (prj->getViewportHeight()/prj->getFov());}
 
+	//! Get the convex polygon matching the nebula image in J2000 frame
+	StelGeom::ConvexPolygon getConvexPolygon() {return StelGeom::ConvexPolygon(tex_quad_vertex[0], tex_quad_vertex[1], tex_quad_vertex[2], tex_quad_vertex[3]);}
+	
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
 	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
