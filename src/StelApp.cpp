@@ -595,7 +595,7 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 
 	// Standard keys should not be able to be hijacked by modules - Rob
 	// (this could be debated)
-	if (ui->handle_keys_tui(unicode, state)) return 1;
+	if (ui->handle_keys_tui(key, state)) return 1;
 
 	if (ui->handle_keysGUI(key, mod, unicode, state)) return 1;
 
