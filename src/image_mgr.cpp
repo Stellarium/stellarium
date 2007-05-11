@@ -107,6 +107,9 @@ double ImageMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
     {
         (*iter)->draw(nav, prj);
     }
-	return 0.0;  // TODO: determine max pixel movement from images
+	
+
+	if(active_images.begin() == active_images.end()) return 0.0;  
+	else return 100.0;  // TODO: determine max pixel movement from images
 }
 

@@ -188,7 +188,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   glColor4f(1.0,1.0,1.0,image_alpha);
 
-  printf("image_alpha %f\n", image_alpha);
+  // printf("image_alpha %f\n", image_alpha);
 
   image_tex->bind();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

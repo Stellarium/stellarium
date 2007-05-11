@@ -458,7 +458,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} 
 	else if(command=="audio") {
 
-#ifndef HAVE_SDL_MIXER_H
+#ifndef HAVE_SDL_SDL_MIXER_H
 		debug_message = _("This executable was compiled without audio support.");
 		status = 0;
 #else
