@@ -7,17 +7,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-10-05 10:48+0200\n"
-"PO-Revision-Date: 2006-07-25 19:55+0000\n"
-"Last-Translator: fairydream <fairydream81@yahoo.com>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2006-09-14 23:25+0200\n"
+"PO-Revision-Date: 2007-03-03 05:42+0000\n"
+"Last-Translator: tuan1812 <dohuutuan1812@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-03-03 05:58+0000\n"
 
 #: src/main.cpp:52
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
 " -v, --version          Output version information and exit.\n"
@@ -28,211 +29,173 @@ msgstr ""
 "-h, --trợ giúp Hiển thị trợ giúp và thoát\n"
 
 #: src/main.cpp:76
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: (Các) đối số trong dòng lệnh sai\n"
 
 #: src/main.cpp:77
-#, fuzzy, c-format
+#, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Gõ `%s --help' để biết thêm thông tin.\n"
 
 #: src/constellation_mgr.cpp:177
-#, fuzzy
 msgid "Loading Constellation Art: "
 msgstr "Đang tải hình vẽ các chòm sao: "
 
 #: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
 #: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
-#, fuzzy
 msgid "Magnitude: "
 msgstr "Cấp sao biểu kiến: "
 
 #: src/hip_star.cpp:86 src/hip_star.cpp:142
-#, fuzzy
 msgid " (Variable)"
 msgstr " Biến quang"
 
 #: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
-#, fuzzy
 msgid "RA/DE: "
 msgstr "Xích kinh/Xích vĩ: "
 
 #: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
-#, fuzzy
 msgid "Az/Alt: "
 msgstr "Độ phương/Độ cao: "
 
 #: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
-#, fuzzy
 msgid "Distance: "
 msgstr "Khoảng cách: "
 
 #: src/hip_star.cpp:98 src/hip_star.cpp:145
-#, fuzzy
 msgid " Light Years"
 msgstr " Năm ánh sáng"
 
 #: src/hip_star.cpp:105
-#, fuzzy
 msgid "Spectral Type: "
 msgstr "Dạng phổ: "
 
 #: src/hip_star_mgr.cpp:134
-#, fuzzy
 msgid "Loading Hipparcos catalog:"
 msgstr "Đang tải bảng danh mục Hipparcos:"
 
 #: src/nebula.cpp:104
-#, fuzzy
 msgid "Type: "
 msgstr "Loại: "
 
 #: src/nebula.cpp:105
-#, fuzzy
 msgid "Size: "
 msgstr "Kích thuớc: "
 
 #: src/nebula_mgr.cpp:328
-#, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "Đang tải bảng danh mục NGC: "
 
 #: src/nebula_mgr.cpp:455
-#, fuzzy
 msgid "Loading Nebula Textures:"
 msgstr "Đang tải kết cấu các tinh vân:"
 
 #: src/planet.cpp:121 src/planet.cpp:158
-#, fuzzy
 msgid "AU"
 msgstr "Đơn vị thiên văn"
 
 #: src/stel_ui.cpp:516 src/stel_ui.cpp:646
-#, fuzzy
 msgid "Script commander"
 msgstr "Bộ soạn kịch bản"
 
 #: src/stel_ui.cpp:543
-#, fuzzy
 msgid "Invalid Script command"
 msgstr "Mã lệnh sai"
 
 #: src/stel_ui.cpp:611
-#, fuzzy
 msgid "Drawing of the Constellations [C]"
 msgstr "Đường nối trong chòm sao [C]"
 
 #: src/stel_ui.cpp:613
-#, fuzzy
 msgid "Names of the Constellations [V]"
 msgstr "Tên các chòm sao [V]"
 
 #: src/stel_ui.cpp:615
-#, fuzzy
 msgid "Constellations Art [R]"
 msgstr "Hình vẽ các chòm sao [R]"
 
 #: src/stel_ui.cpp:617
-#, fuzzy
 msgid "Azimuthal Grid [Z]"
 msgstr "Lưới phương vị [Z]"
 
 #: src/stel_ui.cpp:619
-#, fuzzy
 msgid "Equatorial Grid [E]"
 msgstr "Lưới xích đạo [E]"
 
 #: src/stel_ui.cpp:621
-#, fuzzy
 msgid "Ground [G]"
 msgstr "Mặt đất [G]"
 
 #: src/stel_ui.cpp:623
-#, fuzzy
 msgid "Cardinal Points [Q]"
 msgstr "Điểm phương hướng [Q]"
 
 #: src/stel_ui.cpp:625
-#, fuzzy
 msgid "Atmosphere [A]"
 msgstr "Bầu khí quyển [A]"
 
 #: src/stel_ui.cpp:627
-#, fuzzy
 msgid "Nebulas [N]"
 msgstr "Tinh vân [N]"
 
 #: src/stel_ui.cpp:629
-#, fuzzy
 msgid "Help [H]"
 msgstr "Trợ giúp [H]"
 
 #: src/stel_ui.cpp:631
-#, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Quay theo Equatorial/Altazimuthal [ENTER]"
 
 #: src/stel_ui.cpp:633
-#, fuzzy
 msgid "Configuration window"
 msgstr "Thiết lập thông số"
 
 #: src/stel_ui.cpp:636
-#, fuzzy
 msgid "Night (red) mode"
 msgstr "Mode ban đêm (menu đỏ)"
 
 #: src/stel_ui.cpp:639
-#, fuzzy
 msgid "Quit [CTRL + Q]"
 msgstr "Thoát [CTRL + Q]"
 
 #: src/stel_ui.cpp:641
-#, fuzzy
 msgid "Quit [CMD + Q]"
 msgstr "Thoát [CMD + Q]"
 
 #: src/stel_ui.cpp:644
-#, fuzzy
 msgid "Search for object"
 msgstr "Tìm kiếm vật thể"
 
 #: src/stel_ui.cpp:648
-#, fuzzy
 msgid "Goto selected object [SPACE]"
 msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
 
 #: src/stel_ui.cpp:650
 msgid "Flip horizontally"
-msgstr ""
+msgstr "Lật theo chiều ngang"
 
 #: src/stel_ui.cpp:652
 msgid "Flip vertically"
-msgstr ""
+msgstr "Lật theo chiều dọc"
 
 #: src/stel_ui.cpp:658
-#, fuzzy
 msgid "Decrease Time Speed [J]"
 msgstr "Giảm tốc độ trôi thời gian [J]"
 
 #: src/stel_ui.cpp:660
-#, fuzzy
 msgid "Real Time Speed [K]"
 msgstr "Tốc độ thời gian thực [K]"
 
 #: src/stel_ui.cpp:662
-#, fuzzy
 msgid "Increase Time Speed [L]"
 msgstr "Tăng tốc độ trôi thời gian [L]"
 
 #: src/stel_ui.cpp:664
-#, fuzzy
 msgid "Return to Current Time"
 msgstr "Trở về thời điểm hiện tại"
 
 #: src/stel_ui.cpp:673
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -243,12 +206,10 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:692
-#, fuzzy
 msgid "Information"
 msgstr "Thông tin"
 
 #: src/stel_ui.cpp:704
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -275,7 +236,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -304,7 +264,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:727
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -323,7 +282,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:734
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -342,7 +300,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:741
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -362,173 +319,146 @@ msgid ""
 "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
+"Những tuỳ chọn khác:\n"
+"9 : Bật tắt mật độ mưa sao băng\n"
+"CTRL + 0,...,9 : Thi hành lệnh GOTO cho KTV 0,...,9\n"
+"CTRL + SHIFT + H : bật tắt chức năng lật hình ngang\n"
+"CTRL + SHIFT + V : bật tắt chức năng lật hình dọc\n"
 
 #: src/stel_ui.cpp:751
 msgid "CTRL + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Thoát\n"
 
 #: src/stel_ui.cpp:753
 msgid "CMD + Q : Quit\n"
-msgstr ""
+msgstr "CMD + Q : Thoát\n"
 
 #: src/stel_ui.cpp:760
-#, fuzzy
 msgid "Help"
 msgstr "Trợ giúp"
 
 #: src/stel_ui.cpp:1039
-#, fuzzy
 msgid "Command recording stopped."
 msgstr "Dừng việc ghi lệnh."
 
 #: src/stel_ui.cpp:1047
-#, fuzzy
 msgid "Recording commands to script file:\n"
 msgstr "Ghi các lệnh vào file kịch bản:\n"
 
 #: src/stel_ui.cpp:1049
-#, fuzzy
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Nhấn CTRL-R lần nữa để dừng.\n"
 
 #: src/stel_ui.cpp:1053
-#, fuzzy
 msgid "Error: Unable to open script file to record commands."
 msgstr "Lỗi: không thể mở file kịch bản để ghi lệnh."
 
 #: src/stel_ui_conf.cpp:37
-#, fuzzy
 msgid "Configuration"
 msgstr "Cấu hình"
 
 #: src/stel_ui_conf.cpp:57
-#, fuzzy
 msgid "Stars"
 msgstr "Các vì sao"
 
 #: src/stel_ui_conf.cpp:62
-#, fuzzy
 msgid "Star Names. Up to mag :"
 msgstr "Hiện tên ngôi sao sáng đến :"
 
 #: src/stel_ui_conf.cpp:74
-#, fuzzy
 msgid "Star Twinkle. Amount :"
 msgstr "Số lượng sao nhấp nháy :"
 
 #: src/stel_ui_conf.cpp:90
-#, fuzzy
 msgid "Constellations Lines"
 msgstr "Đường nối các chòm sao"
 
 #: src/stel_ui_conf.cpp:95
-#, fuzzy
 msgid "Constellations Names"
 msgstr "Tên các chòm sao"
 
 #: src/stel_ui_conf.cpp:100
-#, fuzzy
 msgid "Constellations Boundaries"
 msgstr "Ranh giới các chòm sao"
 
 #: src/stel_ui_conf.cpp:105
-#, fuzzy
 msgid "Selected Constellation Only"
 msgstr "Chỉ hiện thị chòm sao được chọn"
 
 #: src/stel_ui_conf.cpp:116
-#, fuzzy
 msgid "Nebulas Names. Up to mag :"
 msgstr "Hiện tên tinh vân sáng đến :"
 
 #: src/stel_ui_conf.cpp:129
-#, fuzzy
 msgid "Also display Nebulas without textures"
 msgstr "Cũng hiển thị những đám tinh vân không có hình chụp"
 
 #: src/stel_ui_conf.cpp:140
-#, fuzzy
 msgid "Planets"
 msgstr "Hành tinh"
 
 #: src/stel_ui_conf.cpp:145
-#, fuzzy
 msgid "Moon Scale"
 msgstr "Tỉ lệ thật mặt trăng"
 
 #: src/stel_ui_conf.cpp:152
-#, fuzzy
 msgid "Planets Hints"
 msgstr "Ghi chú các hình tinh"
 
 #: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "Lưới quỹ đạo"
 
 #: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "Lưới phương vị"
 
 #: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
-#, fuzzy
 msgid "Equator Line"
 msgstr "Đường quỹ đạo"
 
 #: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "Đường hoàng đạo"
 
 #: src/stel_ui_conf.cpp:190
-#, fuzzy
 msgid "Ground"
 msgstr "Mặt đất"
 
 #: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "Điểm phương hướng"
 
 #: src/stel_ui_conf.cpp:200
-#, fuzzy
 msgid "Atmosphere"
 msgstr "Khí quyển"
 
 #: src/stel_ui_conf.cpp:205
-#, fuzzy
 msgid "Fog"
 msgstr "Sương mù"
 
 #: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:445
 #: src/stel_ui_conf.cpp:504
-#, fuzzy
 msgid "Save as default"
 msgstr "Lưu vào mặc định"
 
 #: src/stel_ui_conf.cpp:247
-#, fuzzy
 msgid "Current Time :"
 msgstr "Thời gian hiện tại :"
 
 #: src/stel_ui_conf.cpp:256
-#, fuzzy
 msgid "Time Zone :"
 msgstr "Múi thời gian :"
 
 #: src/stel_ui_conf.cpp:260
-#, fuzzy
 msgid "Using System Default Time Zone"
 msgstr "Sử dụng hệ thống múi thời gian mặc định"
 
 #: src/stel_ui_conf.cpp:269
-#, fuzzy
 msgid "Time speed : "
 msgstr "Tốc độ thời gian trôi : "
 
 #: src/stel_ui_conf.cpp:277
-#, fuzzy
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -539,52 +469,42 @@ msgstr ""
 "Sử dụng phím K để chỉnh tốc độ thời gian trôi bình thường."
 
 #: src/stel_ui_conf.cpp:300
-#, fuzzy
 msgid "Cursor : "
 msgstr "Địa điểm đang chỉ : "
 
 #: src/stel_ui_conf.cpp:305
-#, fuzzy
 msgid "Selected : "
 msgstr "Được chọn : "
 
 #: src/stel_ui_conf.cpp:310
-#, fuzzy
 msgid "Longitude : "
 msgstr "Kinh tuyến : "
 
 #: src/stel_ui_conf.cpp:318
-#, fuzzy
 msgid "Latitude : "
 msgstr "Vĩ tuyến : "
 
 #: src/stel_ui_conf.cpp:326
-#, fuzzy
 msgid "Altitude : "
 msgstr "Độ cao : "
 
 #: src/stel_ui_conf.cpp:333
-#, fuzzy
 msgid "Save location"
 msgstr "Lưu địa điểm"
 
 #: src/stel_ui_conf.cpp:355
-#, fuzzy
 msgid "Projection :"
 msgstr "Hình chiếu :"
 
 #: src/stel_ui_conf.cpp:374
-#, fuzzy
 msgid "Disk Viewport"
 msgstr "Tầm nhìn dạng đĩa"
 
 #: src/stel_ui_conf.cpp:380
-#, fuzzy
 msgid "Screen Resolution :"
 msgstr "Độ phân giải màn hình :"
 
 #: src/stel_ui_conf.cpp:384
-#, fuzzy
 msgid "Restart program for"
 msgstr "Khởi động lại chương trình để"
 
@@ -779,7 +699,7 @@ msgstr "Đúng"
 
 #: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2215
 msgid "No"
-msgstr "Sai"
+msgstr "Không"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Star Magnitude Multiplier: "
@@ -887,7 +807,7 @@ msgstr "Lưu cấu hình hiện tại thành mặc định: "
 
 #: src/stel_ui_tuiconf.cpp:431
 msgid "Shut Down: "
-msgstr ""
+msgstr "Tắt: "
 
 #: src/stel_ui_tuiconf.cpp:432
 msgid "Update me via Internet: "
