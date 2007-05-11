@@ -7,14 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-10-05 10:48+0200\n"
-"PO-Revision-Date: 2006-08-19 18:36+0000\n"
-"Last-Translator: nplus <nplus@globcom.net>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2006-09-14 23:25+0200\n"
+"PO-Revision-Date: 2007-04-13 01:45+0000\n"
+"Last-Translator: Ivaylo Stoimenov <ivaylo.stoimenov@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-04-16 13:38:18+0000\n"
 
 #: src/main.cpp:52
 #, c-format
@@ -36,7 +37,7 @@ msgstr "Пробвай `%s --help' за повече информация.\n"
 
 #: src/constellation_mgr.cpp:177
 msgid "Loading Constellation Art: "
-msgstr ""
+msgstr "Зареждане на галерията от съзвездия "
 
 #: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
 #: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
@@ -69,7 +70,7 @@ msgstr "Спектрален тип: "
 
 #: src/hip_star_mgr.cpp:134
 msgid "Loading Hipparcos catalog:"
-msgstr ""
+msgstr "Зареждане на каталога на Хипарх:"
 
 #: src/nebula.cpp:104
 msgid "Type: "
@@ -173,11 +174,11 @@ msgstr "Отиди на избран обект [SPACE]"
 
 #: src/stel_ui.cpp:650
 msgid "Flip horizontally"
-msgstr ""
+msgstr "Хоризонтално обръщане"
 
 #: src/stel_ui.cpp:652
 msgid "Flip vertically"
-msgstr ""
+msgstr "Вертикално обръщане"
 
 #: src/stel_ui.cpp:658
 msgid "Decrease Time Speed [J]"
@@ -292,11 +293,11 @@ msgstr ""
 
 #: src/stel_ui.cpp:751
 msgid "CTRL + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Изход\n"
 
 #: src/stel_ui.cpp:753
 msgid "CMD + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Изход\n"
 
 #: src/stel_ui.cpp:760
 msgid "Help"
@@ -481,7 +482,7 @@ msgstr "промени за потвърждение."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "За непосочена резолюция, редактирайте файла :"
 
 #: src/stel_ui_conf.cpp:418
 msgid "Choose landscapes:"
@@ -623,7 +624,7 @@ msgstr "Надморска височина (m): "
 
 #: src/stel_ui_tuiconf.cpp:365
 msgid "Solar System Body: "
-msgstr ""
+msgstr "Тяло от слънчевата система: "
 
 #: src/stel_ui_tuiconf.cpp:369
 msgid "Sky Time: "
@@ -647,7 +648,7 @@ msgstr "Актуално време"
 
 #: src/stel_ui_tuiconf.cpp:374
 msgid "Preset Time"
-msgstr ""
+msgstr "Зададено време"
 
 #: src/stel_ui_tuiconf.cpp:375
 msgid "Time Display Format: "
@@ -659,7 +660,7 @@ msgstr "Формат на датата: "
 
 #: src/stel_ui_tuiconf.cpp:388
 msgid "Show: "
-msgstr ""
+msgstr "Показване: "
 
 #: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2234
 msgid "Yes"
@@ -683,7 +684,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
 msgid "Constellation Lines"
-msgstr ""
+msgstr "Линии на съзвездията"
 
 #: src/stel_ui_tuiconf.cpp:395
 msgid "Constellation Names"
@@ -695,7 +696,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Constellation Boundaries"
-msgstr ""
+msgstr "Граници на съзвездията"
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Planet Names"
@@ -707,7 +708,7 @@ msgstr "Орбити на планети"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Planet Trails"
-msgstr ""
+msgstr "Траектории на планети"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Meridian Line"
@@ -744,7 +745,7 @@ msgstr "Звездна величина"
 
 #: src/stel_ui_tuiconf.cpp:416
 msgid "Milky Way intensity: "
-msgstr ""
+msgstr "Интензитет на Млечния път "
 
 #: src/stel_ui_tuiconf.cpp:417
 msgid "Maximum Nebula Magnitude to Label: "
@@ -836,11 +837,11 @@ msgstr "Европа"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr ""
+msgstr "Ганимед"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr ""
+msgstr "Калисто"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -896,7 +897,7 @@ msgstr ""
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr ""
+msgstr "Харон"
 
 #: src/translations.h:60
 msgid "Solar System Observer"
@@ -984,15 +985,15 @@ msgstr ""
 
 #: src/translations.h:87
 msgid "Cancer"
-msgstr ""
+msgstr "Рак"
 
 #: src/translations.h:88
 msgid "Capricornus"
-msgstr ""
+msgstr "Козирог"
 
 #: src/translations.h:89
 msgid "Carina"
-msgstr ""
+msgstr "Кораб"
 
 #: src/translations.h:90
 msgid "Cassiopeia"
@@ -1000,7 +1001,7 @@ msgstr "Касиопея"
 
 #: src/translations.h:91
 msgid "Centaurus"
-msgstr "Кентавър"
+msgstr "Центавър"
 
 #: src/translations.h:92
 msgid "Cepheus"
@@ -1020,7 +1021,7 @@ msgstr "Колар"
 
 #: src/translations.h:96
 msgid "Columba"
-msgstr ""
+msgstr "Гълъб"
 
 #: src/translations.h:97
 msgid "Circinus"
@@ -1040,7 +1041,7 @@ msgstr ""
 
 #: src/translations.h:101
 msgid "Corvus"
-msgstr ""
+msgstr "Гарван"
 
 #: src/translations.h:102
 msgid "Crux"
@@ -1100,15 +1101,15 @@ msgstr "Жерав"
 
 #: src/translations.h:116
 msgid "Hercules"
-msgstr ""
+msgstr "Херкулес"
 
 #: src/translations.h:117
 msgid "Horologium"
-msgstr ""
+msgstr "Часовник"
 
 #: src/translations.h:118
 msgid "Hydra"
-msgstr ""
+msgstr "Хидра"
 
 #: src/translations.h:119
 msgid "Hydrus"
@@ -1120,15 +1121,15 @@ msgstr ""
 
 #: src/translations.h:121
 msgid "Lacerta"
-msgstr ""
+msgstr "Гущер"
 
 #: src/translations.h:122
 msgid "Monoceros"
-msgstr ""
+msgstr "Еднорог"
 
 #: src/translations.h:123
 msgid "Lepus"
-msgstr ""
+msgstr "Заек"
 
 #: src/translations.h:124
 msgid "Leo"
@@ -1136,7 +1137,7 @@ msgstr "Лъв"
 
 #: src/translations.h:125
 msgid "Lupus"
-msgstr ""
+msgstr "Вълк"
 
 #: src/translations.h:126
 msgid "Lynx"
@@ -1148,7 +1149,7 @@ msgstr "Лира"
 
 #: src/translations.h:128
 msgid "Antlia"
-msgstr ""
+msgstr "Помпа"
 
 #: src/translations.h:129
 msgid "Microscopium"
@@ -1220,23 +1221,23 @@ msgstr ""
 
 #: src/translations.h:146
 msgid "Pisces"
-msgstr "Рис"
+msgstr "Риби"
 
 #: src/translations.h:147
 msgid "Volans"
-msgstr ""
+msgstr "Летяща риба"
 
 #: src/translations.h:148
 msgid "Puppis"
-msgstr ""
+msgstr "Кърма"
 
 #: src/translations.h:149
 msgid "Reticulum"
-msgstr ""
+msgstr "Мрежичка"
 
 #: src/translations.h:150
 msgid "Sagittarius"
-msgstr ""
+msgstr "Стрелец"
 
 #: src/translations.h:151
 msgid "Scorpius"
@@ -1244,11 +1245,11 @@ msgstr "Скорпион"
 
 #: src/translations.h:153
 msgid "Serpens"
-msgstr ""
+msgstr "Змия"
 
 #: src/translations.h:154
 msgid "Sextans"
-msgstr ""
+msgstr "Секстант"
 
 #: src/translations.h:155
 msgid "Mensa"
@@ -1276,15 +1277,15 @@ msgstr "Южен триъгълник"
 
 #: src/translations.h:161
 msgid "Aquarius"
-msgstr ""
+msgstr "Водолей"
 
 #: src/translations.h:162
 msgid "Virgo"
-msgstr ""
+msgstr "Дева"
 
 #: src/translations.h:163
 msgid "Vela"
-msgstr ""
+msgstr "Корабни платна"
 
 #: src/translations.h:166
 msgid "Bull's Foreleg"
