@@ -89,32 +89,50 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 {
-	// Check if the sky culture changed since last load
-	if (lastLoadedSkyCulture != StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir())
-	{
-		try
-		{
-			StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
-			lastLoadedSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
-			loadLinesAndArt(
-				fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellationship.fab").string(),
-				fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab").string(),
-				lb);
-			if (lastLoadedSkyCulture=="western") 
-				loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat").string());
-			loadNames(fileMan.findFile("data/sky_cultures/" + lastLoadedSkyCulture + "/constellation_names.eng.fab").string());
+	string newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	
-			// Translated constellation names for the new sky culture
-			updateI18n();
-		
-			// as constellations have changed, clear out any selection and retest for match!
-			selectedObjectChangeCallBack(false);
-		}
-		catch(exception& e)
-		{
-			cerr << "ERROR while updating sky culture: " << e.what();
-		}
+	// Check if the sky culture changed since last load, if not don't load anything
+	if (lastLoadedSkyCulture == newSkyCulture)
+		return;
+	
+	// Find constellation art.  If this doesn't exist, warn, but continue using ""
+	// the loadLinesAndArt function knows how to handle this (just loads lines).
+	string conArtFile("");
+	try
+	{
+		conArtFile = fileMan.findFile("data/sky_cultures/"+newSkyCulture+"/constellationsart.fab").string();
 	}
+	catch(exception& e)
+	{
+		cout << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture << endl;
+	}
+				
+	try
+	{
+		loadLinesAndArt(fileMan.findFile("data/sky_cultures/"+newSkyCulture+"/constellationship.fab").string(),
+				conArtFile, lb);
+			
+		// load constellation names
+		loadNames(fileMan.findFile("data/sky_cultures/" + newSkyCulture + "/constellation_names.eng.fab").string());
+	
+		// Translate constellation names for the new sky culture
+		updateI18n();
+		
+		// as constellations have changed, clear out any selection and retest for match!
+		selectedObjectChangeCallBack(false);		
+	}
+	catch(exception& e)
+	{
+		cout << "ERROR: while loading new constellation data for sky culture " 
+			<< newSkyCulture << ", reason: " << e.what() << endl;		
+	}
+		
+	// TODO: do we need to have an else { clearBoundaries(); } ?
+	if (newSkyCulture=="western") 
+		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat").string());
+
+	lastLoadedSkyCulture = newSkyCulture;
 }
 
 void ConstellationMgr::setColorScheme(const InitParser& conf, const std::string& section)
