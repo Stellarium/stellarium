@@ -2022,8 +2022,24 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	string skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	
 	// Load culture star names in english
-	load_common_names(StelApp::getInstance().getFileMgr().findFile("data/sky_cultures/" + skyCultureDir + "/star_names.fab").string());
-	load_sci_names(StelApp::getInstance().getFileMgr().findFile("data/name.fab").string());
+	try
+	{
+		load_common_names(StelApp::getInstance().getFileMgr().findFile("data/sky_cultures/" + skyCultureDir + "/star_names.fab").string());
+	}
+	catch(exception& e)
+	{
+		cout << "WARNING: could not load star_names.fab for sky culture " 
+			<< skyCultureDir << ": " << e.what() << endl;	
+	}
+	
+	try
+	{
+		load_sci_names(StelApp::getInstance().getFileMgr().findFile("data/name.fab").string());
+	}
+	catch(exception& e)
+	{
+		cout << "WARNING: could not load scientific star names file: " << e.what() << endl;	
+	}
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
