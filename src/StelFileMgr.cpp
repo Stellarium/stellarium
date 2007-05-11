@@ -147,9 +147,39 @@ void StelFileMgr::setSearchPaths(const vector<fs::path> paths)
 
 const fs::path StelFileMgr::getDesktopDir(void)
 {
-	// TODO: Windows and Mac versions
-	fs::path result(getenv("HOME"));
+	// TODO: Test Windows and MAC builds.  I edited the code but have
+	// not got a build platform -MNG
+	fs::path result;
+#if defined(WIN32)
+	char path[MAX_PATH];
+	path[MAX_PATH-1] = '\0';
+	// Previous version used SHGetFolderPath and made app crash on window 95/98..
+	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+	LPITEMIDLIST tmp;
+	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
+	{
+		SHGetPathFromIDList(tmp, path);                      
+		result = path;
+	}
+	else
+	{	
+		if(getenv("USERPROFILE")!=NULL)
+		{
+			//for Win XP etc.
+			result = string(getenv("USERPROFILE")) + "\\Desktop";
+		}
+		else
+		{
+			//for Win 98 etc.
+			//note: will not work well for users who installed windows in a 
+			//non-default location.  Ugly & a source of problems.
+			result = "C:\\Windows\\Desktop";
+		}
+	}
+#else
+	result = getenv("HOME");
 	result /= "Desktop";
+#endif
 	return result;
 }
 
