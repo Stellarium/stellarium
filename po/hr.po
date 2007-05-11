@@ -9,12 +9,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2006-09-14 23:25+0200\n"
-"PO-Revision-Date: 2006-04-18 19:09+0000\n"
-"Last-Translator: Mario <matovina.mario@gmail.com>\n"
+"PO-Revision-Date: 2006-12-28 12:19+0000\n"
+"Last-Translator: Ivo <balonja@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-01-18 10:38+0000\n"
 
 #: src/main.cpp:52
 #, c-format
@@ -23,16 +24,19 @@ msgid ""
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
+"Upotreba: %s [OPCIJA] ...\n"
+"  -v, --version Prikaži informaciju o verziji i izađi.\n"
+"  -h, --help Prikaži ovu pomoć i izađi.\n"
 
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr ""
+msgstr "%s: Pogrešni argument(i) u komandnoj liniji\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr ""
+msgstr "Upiši `%s --help' za više informacija.\n"
 
 #: src/constellation_mgr.cpp:177
 msgid "Loading Constellation Art: "
@@ -169,11 +173,11 @@ msgstr "prati određeni objekt"
 
 #: src/stel_ui.cpp:650
 msgid "Flip horizontally"
-msgstr ""
+msgstr "Preokreni vodoravno"
 
 #: src/stel_ui.cpp:652
 msgid "Flip vertically"
-msgstr ""
+msgstr "Preokreni okomito"
 
 #: src/stel_ui.cpp:658
 msgid "Decrease Time Speed [J]"
@@ -219,6 +223,17 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
+"Kretanje i odabir:\n"
+"Tipke sa strelicama : Pomicanje po RA/DE\n"
+"Page Up/Down : Zumiranje\n"
+"CTRL+Up/Down : Zumiranje\n"
+"Lijevi klik : Odabir objekta\n"
+"Desni klik : Poništavanje odabira\n"
+"CTRL+Lijevi klik : Poništavanje odabira\n"
+"\\ : Odzumiranje (planet + mjeseci ako se odnosi na njih)\n"
+"/ : Zumiranje na odabrani objekt\n"
+"Razmaknica : Centriranje na odabrani objekt\n"
+"\n"
 
 #: src/stel_ui.cpp:715
 msgid ""
@@ -235,6 +250,18 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Opcije prikaza:\n"
+"ENTER : Ekvatorijalna/altazimutalna montaža\n"
+"F1 : Prikaz preko cijelog ekrana ako je moguće\n"
+"C : Linije zvježđa V : Oznake zvježđa\n"
+"R : Slike zvježđa E : Ekvatorijalna mreža\n"
+"Z : Azimutalna mreža N : Oznake maglica\n"
+"P : Oznake planeta G : Tlo\n"
+"A : Atmosfera F : Magla\n"
+"Q : Strane svijeta O : Skaliranje Mjeseca\n"
+"T : Praćenje objekta S : Zvijezde\n"
+"4 , : Ekliptika 5 . : Nebeski ekvator\n"
+"\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -246,6 +273,13 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Dijalozi i ostale kontrole:\n"
+"H : Pomoć I : O Stellariumu\n"
+"M : Tekstualni meni 1 (jedan) : Konfiguracija\n"
+"CTRL + S : Snimanje izgleda ekrana\n"
+"CTRL + R : Pokreni/zaustavi snimanje skripte\n"
+"CTRL + F : Pronalazač objekata\n"
+"\n"
 
 #: src/stel_ui.cpp:734
 msgid ""
@@ -257,6 +291,13 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
+"Vrijeme i Datum:\n"
+"6 : Pauziranje 7 : Zaustavljanje\n"
+"8 : Postavi trenutno vrijeme J : Smanji brzinu\n"
+"K : Normalna brzina L : Povećaj brzinu\n"
+"- : Idi 24 sata unazad = : Idi 24 sata unaprijed\n"
+"[ : Idi 7 dana unazad ] : Idi 7 dana unaprijed\n"
+"\n"
 
 #: src/stel_ui.cpp:741
 msgid ""
@@ -265,6 +306,10 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"Za vrijeme reprodukcije skripte:\n"
+"CTRL + C : Završi skriptu\n"
+"6 : pauziraj K : nastavi\n"
+"\n"
 
 #: src/stel_ui.cpp:745
 msgid ""
@@ -274,34 +319,39 @@ msgid ""
 "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
+"Razno:\n"
+"9 : Promijeni broj meteora po satu\n"
+"CTRL + 0,..,9 : Izvrši naredbu GOTO za teleskop 0,..,9\n"
+"CTRL + SHIFT + H: Vodoravno zrcaljenje\n"
+"CTRL + SHIFT + V: Okomito zrcaljenje\n"
 
 #: src/stel_ui.cpp:751
 msgid "CTRL + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Izlaz\n"
 
 #: src/stel_ui.cpp:753
 msgid "CMD + Q : Quit\n"
-msgstr ""
+msgstr "CMD + Q : Izlaz\n"
 
 #: src/stel_ui.cpp:760
 msgid "Help"
-msgstr ""
+msgstr "Pomoć"
 
 #: src/stel_ui.cpp:1039
 msgid "Command recording stopped."
-msgstr ""
+msgstr "Snimanje naredbi zaustavljeno."
 
 #: src/stel_ui.cpp:1047
 msgid "Recording commands to script file:\n"
-msgstr ""
+msgstr "Snimanje naredbi u skriptu:\n"
 
 #: src/stel_ui.cpp:1049
 msgid "Hit CTRL-R again to stop.\n"
-msgstr ""
+msgstr "Za zaustavljanje pritisnite CTRL-R ponovo.\n"
 
 #: src/stel_ui.cpp:1053
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
+msgstr "Greška: Nije moguće otvoriti skriptu za snimanje naredbi."
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
@@ -313,15 +363,15 @@ msgstr "Zvijezde"
 
 #: src/stel_ui_conf.cpp:62
 msgid "Star Names. Up to mag :"
-msgstr "Imena zvijezda do magnitude"
+msgstr "Imena zvijezda do magnitude :"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
-msgstr "svjetlucanje zvijezda"
+msgstr "svjetlucanje zvijezda :"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Constellations Lines"
-msgstr ""
+msgstr "Linije zviježđa"
 
 #: src/stel_ui_conf.cpp:95
 msgid "Constellations Names"
@@ -329,7 +379,7 @@ msgstr "imena zviježđa"
 
 #: src/stel_ui_conf.cpp:100
 msgid "Constellations Boundaries"
-msgstr ""
+msgstr "Granice zviježđa"
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
@@ -337,11 +387,11 @@ msgstr "samo odabrana zviježđa"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr "imena maglica do mag."
+msgstr "imena maglica do mag. :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Prikaži i maglice bez tekstura"
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
@@ -349,11 +399,11 @@ msgstr "planeti"
 
 #: src/stel_ui_conf.cpp:145
 msgid "Moon Scale"
-msgstr ""
+msgstr "Skaliranje Mjeseca"
 
 #: src/stel_ui_conf.cpp:152
 msgid "Planets Hints"
-msgstr ""
+msgstr "Označi planete"
 
 #: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
 msgid "Equatorial Grid"
@@ -365,11 +415,11 @@ msgstr "azimutalna mreža"
 
 #: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
 msgid "Equator Line"
-msgstr "ekvator"
+msgstr "Nebeski ekvator"
 
 #: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
 msgid "Ecliptic Line"
-msgstr ""
+msgstr "Ekliptika"
 
 #: src/stel_ui_conf.cpp:190
 msgid "Ground"
@@ -414,6 +464,9 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
+"Tipke J i L smanjuju/povećavaju\n"
+"   brzinu vremena.\n"
+"Tipka K postavlja realnu brzinu vremena."
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
@@ -426,12 +479,12 @@ msgstr "odabrano "
 #: src/stel_ui_conf.cpp:310
 #, fuzzy
 msgid "Longitude : "
-msgstr "širina "
+msgstr "dužina "
 
 #: src/stel_ui_conf.cpp:318
 #, fuzzy
 msgid "Latitude : "
-msgstr "dužina "
+msgstr "širina "
 
 #: src/stel_ui_conf.cpp:326
 msgid "Altitude : "
@@ -463,71 +516,71 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "Za neizlistane rezolucije ekrana, editirajte datoteku:"
 
 #: src/stel_ui_conf.cpp:418
 msgid "Choose landscapes:"
-msgstr ""
+msgstr "Izbor krajolika:"
 
 #: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
 msgid "Author: "
-msgstr ""
+msgstr "Autor: "
 
 #: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
-msgstr ""
+msgstr "Jezik programa: "
 
 #: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
 msgid "Sky Language: "
-msgstr ""
+msgstr "Jezik zviježđa: "
 
 #: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
 msgid "Sky Culture: "
-msgstr ""
+msgstr "Kultura (za zviježđa): "
 
 #: src/stel_ui_conf.cpp:511
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #: src/stel_ui_conf.cpp:512
 msgid "Date & Time"
-msgstr ""
+msgstr "Datum i vrijeme"
 
 #: src/stel_ui_conf.cpp:513
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #: src/stel_ui_conf.cpp:514
 msgid "Landscapes"
-msgstr ""
+msgstr "Krajolici"
 
 #: src/stel_ui_conf.cpp:515
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: src/stel_ui_conf.cpp:516
 msgid "Rendering"
-msgstr ""
+msgstr "Renderiranje"
 
 #: src/stel_ui_conf.cpp:648
 msgid "Object Search"
-msgstr ""
+msgstr "Traženje objekata"
 
 #: src/stel_ui_conf.cpp:655
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr ""
+msgstr "Traži (npr. Saturn, Sjevernjača, HP6218, Orion, M31):"
 
 #: src/stel_ui_conf.cpp:672
 msgid "GO"
-msgstr ""
+msgstr "Idi"
 
 #: src/stel_ui_conf.cpp:799
 msgid "Enter observatory name"
-msgstr ""
+msgstr "Unesi ime opservatorija"
 
 #: src/stel_ui_conf.cpp:898
 msgid "Info: "
-msgstr ""
+msgstr "Info: "
 
 #: src/stel_ui_conf.cpp:950
 msgid ": Normal rate"

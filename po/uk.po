@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-05-02 16:06-0700\n"
+"POT-Creation-Date: 2007-05-11 18:10+0200\n"
 "PO-Revision-Date: 2006-06-26 11:07+0000\n"
 "Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
 "Language-Team:\n"
@@ -39,7 +39,7 @@ msgstr "%s: Невірний(ні) аргумент(и) командного р�
 msgid "Try `%s --help' for more information.\n"
 msgstr "Cпробуйте `%s --help' щоб отримати більше інформації.\n"
 
-#: src/ConstellationMgr.cpp:268
+#: src/ConstellationMgr.cpp:286
 msgid "Loading Constellation Art: "
 msgstr "Завантаження малюнка сузір'я: "
 
@@ -346,19 +346,19 @@ msgstr ""
 msgid "Help"
 msgstr "Допомога"
 
-#: src/stel_ui.cpp:974
+#: src/stel_ui.cpp:979
 msgid "Command recording stopped."
 msgstr "Запис команди зупинено"
 
-#: src/stel_ui.cpp:982
+#: src/stel_ui.cpp:987
 msgid "Recording commands to script file:\n"
 msgstr "Запис команд до файлу сценарію:\n"
 
-#: src/stel_ui.cpp:984
+#: src/stel_ui.cpp:989
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Знову натисніть CTRL-R, щоб зупинити.\n"
 
-#: src/stel_ui.cpp:988
+#: src/stel_ui.cpp:993
 msgid "Error: Unable to open script file to record commands."
 msgstr "Помилка: Не можу відкрити файл сценарію для запису команд."
 
@@ -414,19 +414,19 @@ msgstr "Масштабування місяця"
 msgid "Planets Hints"
 msgstr "Назви планет"
 
-#: src/stel_ui_conf.cpp:181 src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_conf.cpp:181 src/stel_ui_tuiconf.cpp:407
 msgid "Equatorial Grid"
 msgstr "Екваторіальна сітка"
 
-#: src/stel_ui_conf.cpp:186 src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_conf.cpp:186 src/stel_ui_tuiconf.cpp:406
 msgid "Azimuthal Grid"
 msgstr "Азимутна сітка"
 
-#: src/stel_ui_conf.cpp:191 src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_conf.cpp:191 src/stel_ui_tuiconf.cpp:408
 msgid "Equator Line"
 msgstr "Лінія екватора"
 
-#: src/stel_ui_conf.cpp:196 src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_conf.cpp:196 src/stel_ui_tuiconf.cpp:409
 msgid "Ecliptic Line"
 msgstr "Лінія екліптики"
 
@@ -434,7 +434,7 @@ msgstr "Лінія екліптики"
 msgid "Ground"
 msgstr "Земля"
 
-#: src/stel_ui_conf.cpp:212 src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_conf.cpp:212 src/stel_ui_tuiconf.cpp:401
 msgid "Cardinal Points"
 msgstr "Сторони світу"
 
@@ -543,11 +543,11 @@ msgstr "Автор: "
 msgid "Program Language: "
 msgstr "Мова програми: "
 
-#: src/stel_ui_conf.cpp:498 src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_conf.cpp:498 src/stel_ui_tuiconf.cpp:388
 msgid "Sky Language: "
 msgstr "Мова неба: "
 
-#: src/stel_ui_conf.cpp:516 src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_conf.cpp:516 src/stel_ui_tuiconf.cpp:384
 msgid "Sky Culture: "
 msgstr "Культура неба: "
 
@@ -619,220 +619,224 @@ msgstr ""
 msgid "Current Time Speed is x"
 msgstr "Поточний коефіцієнт часу: x"
 
-#: src/stel_ui_tuiconf.cpp:284 src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:288 src/stel_ui_tuiconf.cpp:419
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Множник зміни величини: "
 
-#: src/stel_ui_tuiconf.cpp:350
+#: src/stel_ui_tuiconf.cpp:354
 msgid "Set Location "
 msgstr "Встановити місцезнаходження "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Set Time "
 msgstr "Встановити час "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:356
 msgid "General "
 msgstr "Загальне "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Stars "
 msgstr "Зірки "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Colors "
 msgstr "Кольори "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:359
 msgid "Effects "
 msgstr "Ефекти "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:360
 msgid "Scripts "
 msgstr "Сценарії "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:361
 msgid "Administration "
 msgstr "Управління "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Latitude: "
 msgstr "Широта: "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:365
 msgid "Longitude: "
 msgstr "Довгота: "
 
-#: src/stel_ui_tuiconf.cpp:362
+#: src/stel_ui_tuiconf.cpp:366
 msgid "Altitude (m): "
 msgstr "Висота (m): "
 
-#: src/stel_ui_tuiconf.cpp:363
+#: src/stel_ui_tuiconf.cpp:367
 #, fuzzy
 msgid "Solar System Body: "
 msgstr "Тіло із сонячної системи: "
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Sky Time: "
 msgstr "Астрономічний час: "
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Set Time Zone: "
 msgstr "Встановити часовий пояс: "
 
-#: src/stel_ui_tuiconf.cpp:370
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Preset Sky Time: "
 msgstr "Встановлений астрономічний час: "
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Sky Time At Start-up: "
 msgstr "Астрономічний час при запуску: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:376
 msgid "Actual Time"
 msgstr "Справжній час"
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Preset Time"
 msgstr "Заданий час"
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Time Display Format: "
 msgstr "Формат відображення часу: "
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:379
 msgid "Date Display Format: "
 msgstr "Формат відображення дати: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Show: "
 msgstr "Показ: "
 
-#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2222
+#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2222
 msgid "Yes"
 msgstr "Так"
 
-#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2203
+#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2203
 msgid "No"
 msgstr "Ні"
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:392
 msgid "Star Magnitude Multiplier: "
 msgstr "Множник зоряної величини: "
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:393
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимальна величина для напису: "
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Twinkling: "
 msgstr "Мерехтіння: "
 
-#: src/stel_ui_tuiconf.cpp:393
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Constellation Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Constellation Names"
 msgstr "Назви сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Constellation Art Intensity"
 msgstr "Яскравість малюнків сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Constellation Boundaries"
 msgstr "Межі сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Planet Names"
 msgstr "Імена планет"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:403
 msgid "Planet Orbits"
 msgstr "Орбіти планет"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:404
 msgid "Planet Trails"
 msgstr "Сліди від планет"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:405
 msgid "Meridian Line"
 msgstr "Лінія зеніту"
 
-#: src/stel_ui_tuiconf.cpp:406
+#: src/stel_ui_tuiconf.cpp:410
 msgid "Nebula Names"
 msgstr "Імена туманностей"
 
-#: src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_tuiconf.cpp:411
 msgid "Nebula Circles"
 msgstr "Кільця туманностей"
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:415
+msgid "Light Pollution Luminance: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Landscape: "
 msgstr "Ландшафт: "
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Manual zoom: "
 msgstr "Ручний масштаб: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Object Sizing Rule: "
 msgstr "Правило зміни розміру об'єкту: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Point"
 msgstr "Точка"
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Magnitude"
 msgstr "Величина"
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Milky Way intensity: "
 msgstr "Інтенсивність Чумацького шляху: "
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:421
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Максимальна величина туманності для напису: "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Zoom Duration: "
 msgstr "Трівалість збільшення: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:423
 msgid "Cursor Timeout: "
 msgstr "Затримка курсора: "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:426
 msgid "Local Script: "
 msgstr "Локальний сценарій: "
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:429
 msgid "CD/DVD Script: "
 msgstr "Сценарій CD/DVD: "
 
-#: src/stel_ui_tuiconf.cpp:428
+#: src/stel_ui_tuiconf.cpp:433
 msgid "Load Default Configuration: "
 msgstr "Завантажити типову конфіґурацію: "
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:434
 msgid "Save Current Configuration as Default: "
 msgstr "Зберегти поточну конфіґурацію як типову: "
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Shut Down: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:436
 msgid "Update me via Internet: "
 msgstr "Оновити мене через Інтернет: "
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Set UI Locale: "
 msgstr "Встановити локаль інтерфейсу: "
 
-#: src/stel_ui_tuiconf.cpp:593
+#: src/stel_ui_tuiconf.cpp:599
 msgid "Arrow down to load list."
 msgstr "Стрілка донизу для завантаження списку"
 
@@ -969,1007 +973,1027 @@ msgid "Chinese"
 msgstr "Китайська"
 
 #: src/translations.h:70
-msgid "Western"
-msgstr "Європейська"
-
-#: src/translations.h:71
-msgid "Polynesian"
-msgstr "Полінезійська"
-
-#: src/translations.h:72
 msgid "Egyptian"
 msgstr "Єгипетська"
 
+#: src/translations.h:71
+#, fuzzy
+msgid "Inuit"
+msgstr "Індієць"
+
+#: src/translations.h:72
+#, fuzzy
+msgid "Korean"
+msgstr "Ріг"
+
+#: src/translations.h:73
+#, fuzzy
+msgid "Lakota"
+msgstr "Ящірка"
+
+#: src/translations.h:74
+#, fuzzy
+msgid "Navajo"
+msgstr "Павич"
+
 #: src/translations.h:75
+msgid "Polynesian"
+msgstr "Полінезійська"
+
+#: src/translations.h:76
+msgid "Western"
+msgstr "Європейська"
+
+#: src/translations.h:79
 msgid "Aquila"
 msgstr "Орел"
 
-#: src/translations.h:76
+#: src/translations.h:80
 msgid "Andromeda"
 msgstr "Андромеда"
 
-#: src/translations.h:77
+#: src/translations.h:81
 msgid "Sculptor"
 msgstr "Скульптор"
 
-#: src/translations.h:78
+#: src/translations.h:82
 msgid "Ara"
 msgstr "Жертівник"
 
-#: src/translations.h:79
+#: src/translations.h:83
 msgid "Libra"
 msgstr "Ваги"
 
-#: src/translations.h:80
+#: src/translations.h:84
 msgid "Cetus"
 msgstr "Кит"
 
-#: src/translations.h:81
+#: src/translations.h:85
 msgid "Aries"
 msgstr "Овен"
 
-#: src/translations.h:82 src/translations.h:152
+#: src/translations.h:86 src/translations.h:156
 msgid "Scutum"
 msgstr "Щит"
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Pyxis"
 msgstr "Компас"
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Bootes"
 msgstr "Волопас"
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Caelum"
 msgstr "Різець"
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Chamaeleon"
 msgstr "Хамелеон"
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Cancer"
 msgstr "Рак"
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Capricornus"
 msgstr "Козоріг"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Carina"
 msgstr "Кіль"
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Cassiopeia"
 msgstr "Кассіопея"
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Centaurus"
 msgstr "Кентавр"
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Cepheus"
 msgstr "Цефей"
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Coma Berenices"
 msgstr "Волосся Вероніки"
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Canes Venatici"
 msgstr "Гончі Пси"
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Auriga"
 msgstr "Візничий"
 
-#: src/translations.h:96
+#: src/translations.h:100
 msgid "Columba"
 msgstr "Голуб"
 
-#: src/translations.h:97
+#: src/translations.h:101
 msgid "Circinus"
 msgstr "Циркуль"
 
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Crater"
 msgstr "Чаша"
 
-#: src/translations.h:99
+#: src/translations.h:103
 msgid "Corona Australis"
 msgstr "Південна Корона"
 
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Corona Borealis"
 msgstr "Північна Корона"
 
-#: src/translations.h:101
+#: src/translations.h:105
 msgid "Corvus"
 msgstr "Ворон"
 
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Crux"
 msgstr "Хрест (Південний)"
 
-#: src/translations.h:103
+#: src/translations.h:107
 msgid "Cygnus"
 msgstr "Лебідь"
 
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Delphinus"
 msgstr "Дельфін"
 
-#: src/translations.h:105
+#: src/translations.h:109
 msgid "Dorado"
 msgstr "Золота Риба"
 
-#: src/translations.h:106
+#: src/translations.h:110
 msgid "Draco"
 msgstr "Дракон"
 
-#: src/translations.h:107
+#: src/translations.h:111
 msgid "Norma"
 msgstr "Косинець"
 
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Eridanus"
 msgstr "Ерідан"
 
-#: src/translations.h:109
+#: src/translations.h:113
 msgid "Sagitta"
 msgstr "Стріла"
 
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Fornax"
 msgstr "Піч"
 
-#: src/translations.h:111
+#: src/translations.h:115
 msgid "Gemini"
 msgstr "Близнюки"
 
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Camelopardalis"
 msgstr "Жирафа"
 
-#: src/translations.h:113
+#: src/translations.h:117
 msgid "Canis Major"
 msgstr "Великий Пес"
 
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Ursa Major"
 msgstr "Велика Ведмедиця"
 
-#: src/translations.h:115
+#: src/translations.h:119
 msgid "Grus"
 msgstr "Журавель"
 
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Hercules"
 msgstr "Геркулес"
 
-#: src/translations.h:117
+#: src/translations.h:121
 msgid "Horologium"
 msgstr "Годинник"
 
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hydra"
 msgstr "Гідра"
 
-#: src/translations.h:119
+#: src/translations.h:123
 msgid "Hydrus"
 msgstr "Південний Змій"
 
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Indus"
 msgstr "Індієць"
 
-#: src/translations.h:121
+#: src/translations.h:125
 msgid "Lacerta"
 msgstr "Ящірка"
 
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Monoceros"
 msgstr "Одноріг"
 
-#: src/translations.h:123
+#: src/translations.h:127
 msgid "Lepus"
 msgstr "Заєць"
 
-#: src/translations.h:124
+#: src/translations.h:128
 msgid "Leo"
 msgstr "Лев"
 
-#: src/translations.h:125
+#: src/translations.h:129
 msgid "Lupus"
 msgstr "Вовк"
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "Lynx"
 msgstr "Рись"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "Lyra"
 msgstr "Ліра"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "Antlia"
 msgstr "Насос"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "Microscopium"
 msgstr "Мікроскоп"
 
-#: src/translations.h:130
+#: src/translations.h:134
 msgid "Musca"
 msgstr "Муха"
 
-#: src/translations.h:131
+#: src/translations.h:135
 msgid "Octans"
 msgstr "Октант"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Apus"
 msgstr "Райський Птах"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Ophiuchus"
 msgstr "Змієносець"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Orion"
 msgstr "Оріон"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Pavo"
 msgstr "Павич"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Pegasus"
 msgstr "Пегас"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Pictor"
 msgstr "Живописець"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Perseus"
 msgstr "Персей"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Equuleus"
 msgstr "Малий Кінь"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Canis Minor"
 msgstr "Малий Пес"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Leo Minor"
 msgstr "Малий Лев"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Vulpecula"
 msgstr "Лисичка"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Ursa Minor"
 msgstr "Мала Ведмедиця"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Phoenix"
 msgstr "Фенікс"
 
-#: src/translations.h:145
+#: src/translations.h:149
 msgid "Piscis Austrinus"
 msgstr "Південна Риба"
 
-#: src/translations.h:146
+#: src/translations.h:150
 msgid "Pisces"
 msgstr "Риби"
 
-#: src/translations.h:147
+#: src/translations.h:151
 msgid "Volans"
 msgstr "Летюча Риба"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Puppis"
 msgstr "Корма"
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Reticulum"
 msgstr "Сітка"
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "Sagittarius"
 msgstr "Стрілець"
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Scorpius"
 msgstr "Скорпіон"
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Serpens"
 msgstr "Змія"
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Sextans"
 msgstr "Секстант"
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Mensa"
 msgstr "Столова Гора"
 
-#: src/translations.h:156
+#: src/translations.h:160
 msgid "Taurus"
 msgstr "Телець"
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Telescopium"
 msgstr "Телескоп"
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Tucana"
 msgstr "Тукан"
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Triangulum"
 msgstr "Трикутник"
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Triangulum Australe"
 msgstr "Південний Трикутник"
 
-#: src/translations.h:161
+#: src/translations.h:165
 msgid "Aquarius"
 msgstr "Водолій"
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Virgo"
 msgstr "Діва"
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Vela"
 msgstr "Паруси"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Bull's Foreleg"
 msgstr "Передня нога бика"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Two Poles"
 msgstr "Два стовпи"
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Lion"
 msgstr "Лев"
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Two Jaws"
 msgstr "Дві щелепи"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Sah"
 msgstr ""
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Bird"
 msgstr "Птаха"
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Sek"
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:177
 msgid "Triangle"
 msgstr "Трикутник"
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Ferry Boat"
 msgstr "Пором"
 
-#: src/translations.h:175 src/translations.h:246
+#: src/translations.h:179 src/translations.h:250
 msgid "Boat"
 msgstr "Човен"
 
-#: src/translations.h:176
+#: src/translations.h:180
 msgid "Crocodile"
 msgstr "Крокодил"
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Selkis"
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Prow"
 msgstr "Ніс"
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Horus"
 msgstr "Horus (бог з головою сокола)"
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Sheepfold"
 msgstr "Кошара"
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Giant"
 msgstr "Велетень"
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Hippopotamus"
 msgstr "Гіпопотам"
 
-#: src/translations.h:183
+#: src/translations.h:187
 msgid "Flock"
 msgstr "Натовп"
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Pair of Stars"
 msgstr "Пара зірок"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Khanuwy Fish"
 msgstr ""
 
-#: src/translations.h:186 src/translations.h:225
+#: src/translations.h:190 src/translations.h:229
 msgid "Net"
 msgstr "Мережа"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Jaw"
 msgstr "Щелепа"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Mooring Post"
 msgstr "Причальний стовп"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Kenemet"
 msgstr "Kenemet (богиня матері)"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Chematy"
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Waty Bekety"
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Sheep"
 msgstr "Вівця"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Stars of Water"
 msgstr "Зірки води"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Northern Dipper"
 msgstr "Північний ківш"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Curved Array"
 msgstr "Крива низка"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Coiled Thong"
 msgstr "Намотаний батіг"
 
-#: src/translations.h:199
+#: src/translations.h:203
 msgid "Wings"
 msgstr "Крила"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Chariot"
 msgstr "Колісниця"
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Tail"
 msgstr "Хвіст"
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Winnowing Basket"
 msgstr "Кошик для віяння"
 
-#: src/translations.h:203 src/translations.h:326
+#: src/translations.h:207 src/translations.h:330
 msgid "Dipper"
 msgstr "Ківш"
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Drum"
 msgstr "Барабан"
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Three Steps"
 msgstr "Три кроки"
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Imperial Guards"
 msgstr "Імперська ґвардія"
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Horn"
 msgstr "Ріг"
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Willow"
 msgstr "Верба"
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Imperial Passageway"
 msgstr "Імперський прохід"
 
-#: src/translations.h:210
+#: src/translations.h:214
 msgid "Kitchen"
 msgstr "Кухня"
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "River Turtle"
 msgstr "Річкова черепаха"
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "Stomach"
 msgstr "Шлунок"
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "Great General"
 msgstr "Великий генерал"
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Wall"
 msgstr "Стіна"
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Legs"
 msgstr "Ноги"
 
-#: src/translations.h:216
+#: src/translations.h:220
 msgid "Root"
 msgstr "Корінь"
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Ramparts"
 msgstr "Твердині"
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Flying Corridor"
 msgstr "Летючий коридор"
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Outer Fence"
 msgstr "Зовнішня огорожа"
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Ford"
 msgstr "Брід"
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Seven Excellencies"
 msgstr "Сім превосходительств"
 
-#: src/translations.h:222
+#: src/translations.h:226
 msgid "Market"
 msgstr "Базар"
 
-#: src/translations.h:223
+#: src/translations.h:227
 msgid "Five Chariots"
 msgstr "П'ять колісниць"
 
-#: src/translations.h:224
+#: src/translations.h:228
 msgid "Rolled Tongue"
 msgstr "Скручений язик"
 
-#: src/translations.h:226
+#: src/translations.h:230
 msgid "Toilet"
 msgstr "Туалет"
 
-#: src/translations.h:227
+#: src/translations.h:231
 msgid "Screen"
 msgstr "Екран"
 
-#: src/translations.h:228
+#: src/translations.h:232
 msgid "Soldiers Market"
 msgstr "Ринок солдатів"
 
-#: src/translations.h:229
+#: src/translations.h:233
 msgid "Square Granary"
 msgstr "Прямокутна комора"
 
-#: src/translations.h:230
+#: src/translations.h:234
 msgid "Three Stars"
 msgstr "Три зірки"
 
-#: src/translations.h:231
+#: src/translations.h:235
 msgid "Four Channels"
 msgstr "Чотири канали"
 
-#: src/translations.h:232
+#: src/translations.h:236
 msgid "Well"
 msgstr "Криниця"
 
-#: src/translations.h:233
+#: src/translations.h:237
 msgid "South River"
 msgstr "Південна ріка"
 
-#: src/translations.h:234
+#: src/translations.h:238
 msgid "North River"
 msgstr "Північна ріка"
 
-#: src/translations.h:235
+#: src/translations.h:239
 msgid "Five Feudal Kings"
 msgstr "П'ять феодальних королів"
 
-#: src/translations.h:236
+#: src/translations.h:240
 msgid "Orchard"
 msgstr "Фруктовий сад"
 
-#: src/translations.h:237
+#: src/translations.h:241
 msgid "Meadows"
 msgstr "Луги"
 
-#: src/translations.h:238
+#: src/translations.h:242
 msgid "Circular Granary"
 msgstr "Кругла комора"
 
-#: src/translations.h:239
+#: src/translations.h:243
 msgid "Purple Palace"
 msgstr "Фіолетовий палац"
 
-#: src/translations.h:240
+#: src/translations.h:244
 msgid "Extended Net"
 msgstr "Велика мережа"
 
-#: src/translations.h:241
+#: src/translations.h:245
 msgid "Arsenal"
 msgstr "Арсенал"
 
-#: src/translations.h:242
+#: src/translations.h:246
 msgid "Hook"
 msgstr "Серп"
 
-#: src/translations.h:243
+#: src/translations.h:247
 msgid "Supreme Palace"
 msgstr "Верховний палац"
 
-#: src/translations.h:244
+#: src/translations.h:248
 msgid "Jade Well"
 msgstr "Нефритовий колодязь"
 
-#: src/translations.h:245
+#: src/translations.h:249
 msgid "Lance"
 msgstr "Спис"
 
-#: src/translations.h:247
+#: src/translations.h:251
 msgid "Mausoleum"
 msgstr "Мавзолей"
 
-#: src/translations.h:248
+#: src/translations.h:252
 msgid "Dog"
 msgstr "Пес"
 
-#: src/translations.h:249
+#: src/translations.h:253
 msgid "Earth God's Temple"
 msgstr "Храм земного бога"
 
-#: src/translations.h:250
+#: src/translations.h:254
 msgid "Bow and Arrow"
 msgstr "Лук та стріла"
 
-#: src/translations.h:251
+#: src/translations.h:255
 msgid "Pestle"
 msgstr "Товкач"
 
-#: src/translations.h:252
+#: src/translations.h:256
 msgid "Mortar"
 msgstr "Ступка"
 
-#: src/translations.h:253
+#: src/translations.h:257
 msgid "Rooftop"
 msgstr ""
 
-#: src/translations.h:254
+#: src/translations.h:258
 msgid "Thunderbolt"
 msgstr "Удар блискавки"
 
-#: src/translations.h:255
+#: src/translations.h:259
 msgid "Chariot Yard"
 msgstr "Подвір'я колісниці"
 
-#: src/translations.h:256
+#: src/translations.h:260
 msgid "Good Gourd"
 msgstr "Хороший гарбуз"
 
-#: src/translations.h:257
+#: src/translations.h:261
 msgid "Rotten Gourd"
 msgstr "Гнилий гарбуз"
 
-#: src/translations.h:258
+#: src/translations.h:262
 msgid "Encampment"
 msgstr "Табір"
 
-#: src/translations.h:259
+#: src/translations.h:263
 msgid "Thunder and Lightning"
 msgstr "Грім та блискавка"
 
-#: src/translations.h:260
+#: src/translations.h:264
 msgid "Palace Gate"
 msgstr "Ворота палацу"
 
-#: src/translations.h:261
+#: src/translations.h:265
 msgid "Emptiness"
 msgstr "Пустота"
 
-#: src/translations.h:262
+#: src/translations.h:266
 msgid "Weaving Girl"
 msgstr "Ткаля"
 
-#: src/translations.h:263
+#: src/translations.h:267
 msgid "Girl"
 msgstr "Дівчина"
 
-#: src/translations.h:264
+#: src/translations.h:268
 msgid "Ox"
 msgstr "Бик"
 
-#: src/translations.h:265
+#: src/translations.h:269
 msgid "Heart"
 msgstr "Серце"
 
-#: src/translations.h:266
+#: src/translations.h:270
 msgid "Room"
 msgstr "Кімната"
 
-#: src/translations.h:267
+#: src/translations.h:271
 msgid "Spring"
 msgstr "Весна"
 
-#: src/translations.h:268
+#: src/translations.h:272
 msgid "Establishment"
 msgstr "Господарство"
 
-#: src/translations.h:269
+#: src/translations.h:273
 msgid "Flail"
 msgstr "Ціп"
 
-#: src/translations.h:270
+#: src/translations.h:274
 msgid "Spear"
 msgstr "Спис"
 
-#: src/translations.h:271
+#: src/translations.h:275
 msgid "Right Flag"
 msgstr "Правий прапор"
 
-#: src/translations.h:272
+#: src/translations.h:276
 msgid "Left Flag"
 msgstr "Лівий прапор"
 
-#: src/translations.h:273
+#: src/translations.h:277
 msgid "Drumstick"
 msgstr "Барабанна паличка"
 
-#: src/translations.h:274
+#: src/translations.h:278
 msgid "Bond"
 msgstr "Узи"
 
-#: src/translations.h:275
+#: src/translations.h:279
 msgid "Woman's Bed"
 msgstr "Ліжко жінки"
 
-#: src/translations.h:276
+#: src/translations.h:280
 msgid "Western Door"
 msgstr "Західні двері"
 
-#: src/translations.h:277
+#: src/translations.h:281
 msgid "Eastern Door"
 msgstr "Східні двері"
 
-#: src/translations.h:278
+#: src/translations.h:282
 msgid "Farmland"
 msgstr "Ферма"
 
-#: src/translations.h:279
+#: src/translations.h:283
 msgid "Star"
 msgstr "Зірка"
 
-#: src/translations.h:280
+#: src/translations.h:284
 msgid "Ghosts"
 msgstr "Привиди"
 
-#: src/translations.h:281
+#: src/translations.h:285
 msgid "Xuanyuan"
 msgstr "Xuanyuan (Жовтий Імператор)"
 
-#: src/translations.h:282
+#: src/translations.h:286
 msgid "Tripod"
 msgstr "Тринога"
 
-#: src/translations.h:283
+#: src/translations.h:287
 msgid "Neck"
 msgstr "Шия"
 
-#: src/translations.h:284
+#: src/translations.h:288
 msgid "Zaofu"
 msgstr "Тринога"
 
-#: src/translations.h:285
+#: src/translations.h:289
 msgid "Market Officer"
 msgstr "Офіцер ринку"
 
-#: src/translations.h:286
+#: src/translations.h:290
 msgid "Banner of Three Stars"
 msgstr "Прапор трьох зірок"
 
-#: src/translations.h:289
+#: src/translations.h:293
 msgid "Bailer"
 msgstr "Ківш"
 
-#: src/translations.h:290
+#: src/translations.h:294
 msgid "Cat's Cradle"
 msgstr "Колиска для кішки"
 
-#: src/translations.h:291
+#: src/translations.h:295
 msgid "Voice of Joy"
 msgstr "Голос радості"
 
-#: src/translations.h:292
+#: src/translations.h:296
 msgid "The Seven"
 msgstr "Семірка"
 
-#: src/translations.h:293
+#: src/translations.h:297
 msgid "Maui's Fishhook"
 msgstr "Риболовецький гачок Мауї"
 
-#: src/translations.h:294
+#: src/translations.h:298
 msgid "Navigator's Triangle"
 msgstr "Трикутник Навігатора"
 
-#: src/translations.h:295
+#: src/translations.h:299
 msgid "Kite of Kawelo"
 msgstr "Паперовий змій Kawelo"
 
-#: src/translations.h:296
+#: src/translations.h:300
 msgid "Frigate Bird"
 msgstr "Птаха Фрегат"
 
-#: src/translations.h:297
+#: src/translations.h:301
 msgid "Cared for by Moon"
 msgstr "Заклопотаний Місяцем"
 
-#: src/translations.h:298
+#: src/translations.h:302
 msgid "Dolphin"
 msgstr "Дельфін"
 
-#: src/translations.h:301
+#: src/translations.h:305
 msgid "Revolving Male"
 msgstr ""
 
-#: src/translations.h:302
+#: src/translations.h:306
 msgid "Revolving Female"
 msgstr ""
 
-#: src/translations.h:303
+#: src/translations.h:307
 msgid "Man with Feet Apart"
 msgstr ""
 
-#: src/translations.h:304
+#: src/translations.h:308
 #, fuzzy
 msgid "Lizard"
 msgstr "Птаха"
 
-#: src/translations.h:305
+#: src/translations.h:309
 msgid "Dilyehe"
 msgstr ""
 
-#: src/translations.h:306
+#: src/translations.h:310
 msgid "First Big One"
 msgstr ""
 
-#: src/translations.h:307
+#: src/translations.h:311
 msgid "Rabbit Tracks"
 msgstr ""
 
-#: src/translations.h:308
+#: src/translations.h:312
 msgid "First Slim One"
 msgstr ""
 
-#: src/translations.h:311
+#: src/translations.h:315
 #, fuzzy
 msgid "Two Sunbeams"
 msgstr "Дві щелепи"
 
-#: src/translations.h:312
+#: src/translations.h:316
 msgid "Two Placed Far Apart"
 msgstr ""
 
-#: src/translations.h:313
+#: src/translations.h:317
 #, fuzzy
 msgid "Dogs"
 msgstr "Пес"
 
-#: src/translations.h:314
+#: src/translations.h:318
 #, fuzzy
 msgid "Collarbones"
 msgstr "Сузір'я"
 
-#: src/translations.h:315
+#: src/translations.h:319
 msgid "Lamp Stand"
 msgstr ""
 
-#: src/translations.h:316
+#: src/translations.h:320
 #, fuzzy
 msgid "Caribou"
 msgstr "Колісниця"
 
-#: src/translations.h:317
+#: src/translations.h:321
 msgid "Two in Front"
 msgstr ""
 
-#: src/translations.h:318
+#: src/translations.h:322
 msgid "Breastbone"
 msgstr ""
 
-#: src/translations.h:319
+#: src/translations.h:323
 msgid "Runners"
 msgstr ""
 
-#: src/translations.h:320
+#: src/translations.h:324
 msgid "Blubber Container"
 msgstr ""
 
-#: src/translations.h:323
+#: src/translations.h:327
 msgid "Hand"
 msgstr ""
 
-#: src/translations.h:324
+#: src/translations.h:328
 msgid "Snake"
 msgstr ""
 
-#: src/translations.h:325
+#: src/translations.h:329
 msgid "Fireplace"
 msgstr ""
 
-#: src/translations.h:327
+#: src/translations.h:331
 msgid "Race Track"
 msgstr ""
 
-#: src/translations.h:328
+#: src/translations.h:332
 #, fuzzy
 msgid "Animal"
 msgstr "Насос"
 
-#: src/translations.h:329
+#: src/translations.h:333
 msgid "Elk"
 msgstr ""
 
-#: src/translations.h:330
+#: src/translations.h:334
 msgid "Seven Little Girls"
 msgstr ""
 
-#: src/translations.h:331
+#: src/translations.h:335
 #, fuzzy
 msgid "Dried Willow"
 msgstr "Верба"
 
-#: src/translations.h:332
+#: src/translations.h:336
 msgid "Salamander"
 msgstr ""
 
-#: src/translations.h:333
+#: src/translations.h:337
 #, fuzzy
 msgid "Turtle"
 msgstr "Річкова черепаха"
 
-#: src/translations.h:334
+#: src/translations.h:338
 #, fuzzy
 msgid "Thunderbird"
 msgstr "Удар блискавки"
 
-#: src/translations.h:335
+#: src/translations.h:339
 msgid "Bear's Lodge"
 msgstr ""
 
-#: src/translations.h:338
+#: src/translations.h:345
 msgid "Select and exit to run."
 msgstr "Вибрати та вийти для перезапуску."
 
