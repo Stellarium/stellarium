@@ -547,9 +547,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stapp->scripts->pause_script();
 		} else if (args["action"]=="pause" || args["action"]=="resume") {
 			stapp->scripts->resume_script();
-#ifdef HAVE_SDL_MIXER_H
 			if(audio) audio->sync();
-#endif
 		} else status =0;
 
 	} else if(command=="clear") {
