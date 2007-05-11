@@ -24,6 +24,8 @@
 
 #ifdef USE_QT4
 
+class GLWidget;
+
 class StelAppQt4 : public StelApp
 {
 	friend class GLWidget;
