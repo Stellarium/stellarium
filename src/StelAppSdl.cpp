@@ -25,6 +25,7 @@
 #include "StelAppSdl.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
+#include "StelFileMgr.hpp"
 
 #ifdef HAVE_SDL_SDL_MIXER_H
 #include <SDL/SDL_mixer.h>
@@ -32,6 +33,9 @@
 
 #include <sstream>
 #include <iostream>
+#include <iomanip>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 
 using namespace std;
 
@@ -444,36 +448,12 @@ void StelAppSdl::startMainLoop()
 
 void StelAppSdl::saveScreenShot() const
 {
-	string shotdir;
-#if defined(WIN32)
-	char path[MAX_PATH];
-	path[MAX_PATH-1] = '\0';
-	// Previous version used SHGetFolderPath and made app crash on window 95/98..
-	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
-	LPITEMIDLIST tmp;
-	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
-	{
-         SHGetPathFromIDList(tmp, path);                      
-		shotdir = string(path)+"\\";
-	}
-	else
-	{	
-		if(getenv("USERPROFILE")!=NULL)
-		{
-			//for Win XP etc.
-			shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
-		}
-		else
-		{
-			//for Win 98 etc.
-			shotdir = "C:\\My Documents\\";
-		}
-	}
+	boost::filesystem::path shotdir;
+
+#if defined(WIN32) || defined(MACOSX)
+	shotdir = getFileMgr().getDesktopDir();
 #else
-	shotdir = string(getenv("HOME")) + "/";
-#endif
-#ifdef MACOSX
-	shotdir += "/Desktop/";
+	shotdir = string(getenv("HOME"));
 #endif
 
 #ifdef __x86_64__
@@ -482,23 +462,17 @@ void StelAppSdl::saveScreenShot() const
 	const char *extension = ".bmp";
 #endif
 
-	string tempName;
-	for(int j=0; j<=100; ++j)
+	boost::filesystem::path shotPath;
+	for(int j=0; j<1000; ++j)
 	{
-		char c[3];
-#if !defined(_MSC_VER)
-		snprintf(c,3,"%d",j);
-#else
-		_snprintf(c,3,"%d",j);
-#endif
-
-		tempName = shotdir + "stellarium" + c + extension;
-		FILE *fp = fopen(tempName.c_str(), "r");
-		if(fp == NULL)
+		stringstream oss;
+		oss << setfill('0') << setw(3) << j;
+		shotPath = shotdir / (string("stellarium") + oss.str() + extension);
+		if (!boost::filesystem::exists(shotPath))
 			break;
-		else
-			fclose(fp);
 	}
+	// TODO - if no more filenames available, don't just overwrite the last one
+	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 
 	SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
@@ -527,21 +501,23 @@ void StelAppSdl::saveScreenShot() const
 
 #ifdef __x86_64__
 	  // workaround because SDL_SaveBMP is buggy on x86_64
-	FILE *f = fopen(tempName.c_str(),"wb");
+	FILE *f = fopen(shotPath.string().c_str(),"wb");
 	if (f) {
-	  fprintf(f,"P6\n# stellarium screenshot\n%d %d\n255\n",Screen->w,Screen->h);
-	  fwrite(temp->pixels,1,3*(Screen->w)*(Screen->h),f);
-	  fclose(f);
+		fprintf(f,"P6\n# stellarium screenshot\n%d %d\n255\n",Screen->w,Screen->h);
+		fwrite(temp->pixels,1,3*(Screen->w)*(Screen->h),f);
+		fclose(f);
 	} else {
-	  cerr << "StelAppSdl::saveScreenShot: fopen(" << tempName << ") failed"
-	       << endl;
+		cerr << "StelAppSdl::saveScreenShot: fopen(" 
+			<< shotPath.string() 
+			<< ") failed"
+			<< endl;
 	}
 #else
-	SDL_SaveBMP(temp, tempName.c_str());
+	SDL_SaveBMP(temp, shotPath.string().c_str());
 #endif
 
 	SDL_FreeSurface(temp);
-	cout << "Saved screenshot to file : " << tempName << endl;
+	cout << "Saved screenshot to file : " << shotPath.string() << endl;
 }
 
 /*************************************************************************
