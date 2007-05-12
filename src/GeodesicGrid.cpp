@@ -209,6 +209,7 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 	default:
 		assert(0);
 	}
+	return 0;
 }
 
 void GeodesicGrid::initTriangle(int lev,int index,
