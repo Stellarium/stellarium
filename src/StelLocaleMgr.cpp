@@ -26,7 +26,7 @@ using namespace std;
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, LOCALEDIR, ""), GMT_shift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMT_shift(0)
 {}
 
 

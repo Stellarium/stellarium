@@ -103,17 +103,17 @@ void check_command_line(int argc, char **argv)
 void setDirectories(const char* executableName)
 {
 #if !defined(MACOSX) && !defined(XCODE)
-	// The variable CONFIG_DATA_DIR must have been set by the configure script
+	// The variable INSTALL_DATADIR must have been set by the configure script
 	// Its value is the dataRoot directory, ie the one containing data/ and textures/
 
     FILE * tempFile = NULL;
 #if !defined(MACOSX) || ( defined(MACOSX) && !defined(XCODE) )
 	// Check the presence of a file in possible data directories and set the
 	// dataRoot string if the directory was found.
-	tempFile = fopen((string(CONFIG_DATA_DIR) + "/"CHECK_FILE).c_str(),"r");
+	tempFile = fopen((string(INSTALL_DATADIR) + "/"CHECK_FILE).c_str(),"r");
 	if (tempFile)
 	{
-		DATA_ROOT = string(CONFIG_DATA_DIR);
+		DATA_ROOT = string(INSTALL_DATADIR);
 	}
 	else
 	{
@@ -133,7 +133,7 @@ void setDirectories(const char* executableName)
 			else
 			{
             	// Failure....
-            	cerr << "ERROR : I can't find the datas directories in :\n"  << CONFIG_DATA_DIR << 
+            	cerr << "ERROR : I can't find the datas directories in :\n"  << INSTALL_DATADIR << 
             	"/ nor in ./ nor in ../\nYou may fully install the software (type \"make install\" on POSIX systems)\nor launch the application from the stellarium package directory." << endl;
                 exit(-1);
 			}
@@ -153,7 +153,7 @@ void setDirectories(const char* executableName)
 #endif
 
 	// We now have a valid dataRoot directory, we can then set the data and textures dir
-	LDIR = LOCALEDIR;
+	LDIR = INSTALL_LOCALEDIR;
 
 	// If the system is non unix (windows) or if it's macosx the config file is in the
 	// config/ directory of the dataRoot directory
@@ -173,7 +173,7 @@ void setDirectories(const char* executableName)
 #else
 
 	// Just an indication if we are on unix/linux that we use local data files
-	if (DATA_ROOT != string(CONFIG_DATA_DIR))
+	if (DATA_ROOT != string(INSTALL_DATADIR))
 		printf("> Found data files in %s : local version.\n", DATA_ROOT.c_str());
 
 	// The problem is more complexe in the case of a unix/linux system
