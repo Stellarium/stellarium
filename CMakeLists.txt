@@ -6,7 +6,7 @@ SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 
 ########### Main global variables ###########
-SET(CMAKE_BUILD_TYPE Release)
+SET(CMAKE_BUILD_TYPE Debug)   # Choices are None Debug Release RelWithDebInfo MinSizeRel
 SET(CMAKE_C_FLAGS "-Wall")      # additional C compile flags
 SET(CMAKE_CXX_FLAGS "-Wall")    # additional CPP compile flags
 SET(CMAKE_LDFLAGS "")           # additional linking flags
