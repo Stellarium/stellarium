@@ -343,18 +343,24 @@ TypeFace::TypeFace(const std::string& aFaceName, size_t aPointSize, size_t aReso
 	
 	if (FTinitialized==false)
 	{
-		assert(FT_Init_FreeType(&ftlibrary_) == 0);
+		int res = FT_Init_FreeType(&ftlibrary_);
+		assert(res==0);
 		FTinitialized = true;
 	}
 
-    assert(FT_New_Face(ftlibrary_, aFaceName.c_str(), 0, &data_->face_) == 0);
+	int res = FT_New_Face(ftlibrary_, aFaceName.c_str(), 0, &data_->face_);
+    assert(res == 0);
 
-    assert(FT_IS_SCALABLE(data_->face_));
-    assert(FT_IS_SFNT(data_->face_));
+	res = FT_IS_SCALABLE(data_->face_);
+    assert(res!=0);
+
+	res = FT_IS_SFNT(data_->face_);
+	assert(res!=0);
 
     if( !data_->face_->charmap) FT_Set_Charmap(data_->face_, data_->face_->charmaps[0]);
 
-    assert(FT_Set_Char_Size(data_->face_, 0L, static_cast<FT_F26Dot6>(aPointSize << 6), aResolution, aResolution) == 0);
+	res = FT_Set_Char_Size(data_->face_, 0L, static_cast<FT_F26Dot6>(aPointSize << 6), aResolution, aResolution);
+    assert(res == 0);
 
     data_->hasKerning_ = (FT_HAS_KERNING(data_->face_) != 0);
 }
@@ -398,7 +404,8 @@ TypeFace::setPointSize(size_t aPointSize)
     {
         data_->pointSize_ = aPointSize;
         const FT_F26Dot6 sz = static_cast<FT_F26Dot6>(aPointSize << 6);
-        assert(FT_Set_Char_Size(data_->face_, sz, sz, data_->resolution_, data_->resolution_) == 0);
+		int res = FT_Set_Char_Size(data_->face_, sz, sz, data_->resolution_, data_->resolution_);
+        assert(res == 0);
         flushCache();
     }
 }
