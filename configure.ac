@@ -107,10 +107,10 @@ PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
 ;;
 esac
 
-AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the data (as textures or star catalogs) are stored.])
+AC_DEFINE_UNQUOTED(INSTALL_DATADIR, "$PKGDATADIR", [Set the directory where the data (as textures or star catalogs) are stored.])
 
 localedir=`eval echo "${datadir}/locale"`
-AC_DEFINE_UNQUOTED(LOCALEDIR, "$localedir", [Set the directory where the locales (translations) are stored.])
+AC_DEFINE_UNQUOTED(INSTALL_LOCALEDIR, "$localedir", [Set the directory where the locales (translations) are stored.])
 
 dnl For each host type, set the appropriate options
 dnl MACOSX

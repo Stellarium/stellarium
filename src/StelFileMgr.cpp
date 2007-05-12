@@ -39,7 +39,7 @@ StelFileMgr::StelFileMgr()
 	// OK, the main installation directory.  
 #if !defined(MACOSX) && !defined(MINGW32)
 	// For POSIX systems we use the value from the config.h filesystem
-	fs::path installLocation(CONFIG_DATA_DIR);
+	fs::path installLocation(INSTALL_DATADIR);
 	if (fs::exists(installLocation / CHECK_FILE))
 	{
 		fileLocations.push_back(installLocation);
