@@ -2034,86 +2034,6 @@ msgstr "Minutter"
 msgid "Seconds"
 msgstr "Sekunder"
 
-#~ msgid " (Variable)"
-#~ msgstr " (Variabel)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Henter Hipparcos stjernekatalog:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Antall meteorer per minutt"
-
-#~ msgid "Name : "
-#~ msgstr "Navn : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "(Var)"
-#~ msgstr "(Var)"
-
-#~ msgid "RA : "
-#~ msgstr "RA : "
-
-#~ msgid "DE : "
-#~ msgstr "DE : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Spektral : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Lysstyrke : "
-
-#~ msgid "Distance : "
-#~ msgstr "Avstand : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Høyde (m): "
-
-#~ msgid ": mag "
-#~ msgstr ":forsterket "
-
-#~ msgid "ly"
-#~ msgstr "ly"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Henter Hip/Sao stjernekatalog: %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Henter Hipparcos stjernekatalog: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Henter Sao-katalog: %d/%d"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Kat: NGC "
-
-#~ msgid "Type : "
-#~ msgstr "Type : "
-
-#~ msgid "Size : "
-#~ msgstr "Størrelse : "
-
-#, fuzzy
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Henter Sharpless-katalog: %d/%d"
-
-#, fuzzy
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Henter Cadwell-katalog: %d/%d"
-
-#~ msgid "Message"
-#~ msgstr "Beskjed"
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid "Chart mode"
-#~ msgstr "Diagram-modus"
-
 #, fuzzy
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -2124,195 +2044,44 @@ msgstr "Sekunder"
 #~ "problemer til nettstedet http://stellarium.sourceforge.net\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "\"Annet:                               Definisjon:\\n\n"
-#~ "9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 "
-#~ "km\n"
-#~ "                                     Lysstyrke: Sola -26 (lys)  Pluto +14 "
-#~ "(svak)\n"
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "Cmd+Q : Avslutt\n"
+#~ msgid " (Variable)"
+#~ msgstr " (Variabel)"
 
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Fiskeøye-projeksjon"
-
-#~ msgid "Choose landscapes :"
-#~ msgstr "Velg landskap :"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Endringer lagres under arkfanen \"Hjemsted\""
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "å lagre aktivt landskap som standard landskap."
-
-#~ msgid "Star No./Name"
-#~ msgstr "Stjernenr./-navn"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "eks. 60718 (aCrux) eller Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Stjernebilder"
-
-#~ msgid "eg. Crux"
-#~ msgstr "eks. Sydkorset"
-
-#~ msgid "Nebula"
-#~ msgstr "Tåke"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "f.eks M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planet/måne"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "f.eks. Pluto eller Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planeter & måner"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Stjernebilder: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Navn på stjernebilder "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Kardinalpunkter "
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "Sentrer visning N-S: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "Sentrer visning Ø-V: "
-
-#, fuzzy
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
-#~ "problemer til nettstedet http://stellarium.sourceforge.net\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "ERROR : Kan ikke finne datamappen i :\n"
-#~ "%s/ , ./ eller i ../\n"
-#~ "Du må kanskje installere programmet på nytt (skriv \"make install\" på "
-#~ "POSIX systemer)\n"
-#~ "eller starte programmet fra pakemappen til Stellarium.\n"
-
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Datafiler funnet i %s : lokal versjon.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Vil lage oppsettsfiler i %s\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "Prøv å lage mappen %s\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "Klarte ikke å lage filen %sconfig.ini\n"
-#~ "Dersom mappen %s ikke finnes, må du lage den selv.\n"
-#~ "Dersom mappe %s finnes, sjekk lese-/skriverettighetene dine\n"
-
-#~ msgid "ERROR on line %d of %s\n"
-#~ msgstr "FEIL i linje %d i %s\n"
-
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %s Light Years\n"
-#~ "Hip : %.4d\n"
-#~ msgstr ""
-#~ "Navn : %s%s%s\n"
-#~ "Lengdegrad (RE) : %s\n"
-#~ "Breddegrad (DE) : %s\n"
-#~ "Lysstyrke : %.2f\n"
-#~ "Avstand : %s lysår\n"
-#~ "Hip : %.4d\n"
-
-#~ msgid "%s: mag %.1f %s"
-#~ msgstr "%s: lysstyrke %.1f %s"
-
-#~ msgid "Loading Hipparcos star data "
-#~ msgstr "Henter Hipparcos stjernedata "
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Navn: %s (NGC %u)\n"
-#~ "Lengdegrad (RE) : %s\n"
-#~ "Breddegrad (DE) : %s\n"
-#~ "Lysstyrke: %.2f"
-
-#~ msgid "Loading nebulas data "
-#~ msgstr "Henter data om tåker "
-
-#~ msgid "(%d deep space objects)...\n"
-#~ msgstr "(%d objekt veldig langt ute)...\n"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Henter hjemsted: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(landskap er: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Lagrer hjemstedet %s i filen %s\n"
-
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %.8f AU"
-#~ msgstr ""
-#~ "Navn :%s%s\n"
-#~ "Lengdegrad (RE) : %s\n"
-#~ "Breddegrad (DE) : %s\n"
-#~ "Lysstyrke : %.2f\n"
-#~ "Avstand : %.8f AE"
+#~ msgid " in file "
+#~ msgstr " i fil "
 
 #~ msgid "%s%s: mag %.1f"
 #~ msgstr "%s%s: lysstyrke %.1f"
 
-#~ msgid "Using sky language from environment locale: "
-#~ msgstr "Bruker språk fra lokal mappe: "
+#~ msgid "%s: mag %.1f %s"
+#~ msgstr "%s: lysstyrke %.1f %s"
 
-#~ msgid "Did not recognize locale language code "
-#~ msgstr "Gjenkjente ikke valgte språkkode "
+#~ msgid "(%d deep space objects)...\n"
+#~ msgstr "(%d objekt veldig langt ute)...\n"
+
+#~ msgid "(Dbl)"
+#~ msgstr "(Dbl)"
+
+#~ msgid "(Var)"
+#~ msgstr "(Var)"
+
+#~ msgid "(landscape is: \"%s\")\n"
+#~ msgstr "(landskap er: \"%s\")\n"
 
 #~ msgid ". Defaulting to english sky labels\n"
 #~ msgstr ". Bruker derfor engelske navn\n"
+
+#~ msgid ": mag "
+#~ msgstr ":forsterket "
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Datafiler funnet i %s : lokal versjon.\n"
+
+#~ msgid "Alt : "
+#~ msgstr "Høyde (m): "
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2380,11 +2149,230 @@ msgstr "Sekunder"
 #~ "CTRL + S : Kopier stjernebildet\n"
 #~ "CTRL + R : Start registrering av skript\n"
 
+#~ msgid "Az  : "
+#~ msgstr "Az : "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "Cmd+Q : Avslutt\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid ""
+#~ "Can't create the file %sconfig.ini\n"
+#~ "If the directory %s is missing please create it by hand.\n"
+#~ "If not, check that you have access to %s\n"
+#~ msgstr ""
+#~ "Klarte ikke å lage filen %sconfig.ini\n"
+#~ "Dersom mappen %s ikke finnes, må du lage den selv.\n"
+#~ "Dersom mappe %s finnes, sjekk lese-/skriverettighetene dine\n"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Kardinalpunkter "
+
+#~ msgid "Cat: NGC "
+#~ msgstr "Kat: NGC "
+
+#~ msgid "Chart mode"
+#~ msgstr "Diagram-modus"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr "Velg landskap :"
+
+#~ msgid "Constellation"
+#~ msgstr "Stjernebilder"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Navn på stjernebilder "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Stjernebilder: "
+
+#~ msgid "DE : "
+#~ msgstr "DE : "
+
+#~ msgid "Did not recognize locale language code "
+#~ msgstr "Gjenkjente ikke valgte språkkode "
+
+#~ msgid "Distance : "
+#~ msgstr "Avstand : "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "Sentrer visning Ø-V: "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "ERROR : Kan ikke finne datamappen i :\n"
+#~ "%s/ , ./ eller i ../\n"
+#~ "Du må kanskje installere programmet på nytt (skriv \"make install\" på "
+#~ "POSIX systemer)\n"
+#~ "eller starte programmet fra pakemappen til Stellarium.\n"
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr "FEIL : Aktiv oppsettsfil er fra en annen versjon av programmet ("
+
+#~ msgid "ERROR on line %d of %s\n"
+#~ msgstr "FEIL i linje %d i %s\n"
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Fiskeøye-projeksjon"
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "Invalid sky culture directory: "
+#~ msgstr "Ugyldig mappe for himmelkultur: "
+
+#, fuzzy
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Henter Cadwell-katalog: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Henter Hipparcos stjernekatalog: %d/%d"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Henter Hip/Sao stjernekatalog: %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Henter Hipparcos stjernekatalog:"
+
+#~ msgid "Loading Hipparcos star data "
+#~ msgstr "Henter Hipparcos stjernedata "
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Henter Sao-katalog: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Henter Sharpless-katalog: %d/%d"
+
+#~ msgid "Loading Solar System data...\n"
+#~ msgstr "Henter data om solsystem...\n"
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Henter laget oppsett "
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Henter hjemsted: \"%s\", "
+
+#~ msgid "Loading nebulas data "
+#~ msgstr "Henter data om tåker "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Lysstyrke : "
+
+#~ msgid "Message"
+#~ msgstr "Beskjed"
+
 #~ msgid "Messier No."
 #~ msgstr "Messier-nr."
 
-#~ msgid "eg. M83"
-#~ msgstr "eks. M83"
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Antall meteorer per minutt"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "\"Annet:                               Definisjon:\\n\n"
+#~ "9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 "
+#~ "km\n"
+#~ "                                     Lysstyrke: Sola -26 (lys)  Pluto +14 "
+#~ "(svak)\n"
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "Sentrer visning N-S: "
+
+#~ msgid "Name : "
+#~ msgstr "Navn : "
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f"
+#~ msgstr ""
+#~ "Navn: %s (NGC %u)\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke: %.2f"
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s%s%s\n"
+#~ "Hip : %.4d\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Navn :%s%s%s\n"
+#~ "Hip : %.4d\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Lysstyrke : %.2f"
+
+#~ msgid ""
+#~ "Name : %s%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %s Light Years\n"
+#~ "Hip : %.4d\n"
+#~ msgstr ""
+#~ "Navn : %s%s%s\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke : %.2f\n"
+#~ "Avstand : %s lysår\n"
+#~ "Hip : %.4d\n"
+
+#~ msgid ""
+#~ "Name :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %.8f AU"
+#~ msgstr ""
+#~ "Navn :%s%s\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke : %.2f\n"
+#~ "Avstand : %.8f AE"
+
+#~ msgid "Nebula"
+#~ msgstr "Tåke"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planet/måne"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planeter & måner"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
+#~ "problemer til nettstedet http://stellarium.sourceforge.net\n"
+#~ "\n"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Endringer lagres under arkfanen \"Hjemsted\""
+
+#~ msgid "RA : "
+#~ msgstr "RA : "
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "Lagrer hjemstedet %s i filen %s\n"
 
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Lagre valgene i fil "
@@ -2392,11 +2380,14 @@ msgstr "Sekunder"
 #~ msgid "Saving video size "
 #~ msgstr "Lagre video-størrelse "
 
-#~ msgid " in file "
-#~ msgstr " i fil "
+#~ msgid "Size : "
+#~ msgstr "Størrelse : "
 
-#~ msgid "Loading Solar System data...\n"
-#~ msgstr "Henter data om solsystem...\n"
+#~ msgid "Spectral : "
+#~ msgstr "Spektral : "
+
+#~ msgid "Star No./Name"
+#~ msgstr "Stjernenr./-navn"
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2414,26 +2405,35 @@ msgstr "Sekunder"
 #~ "importert (%s).\n"
 #~ "Den vil nå bli erstattet med en standard oppsettsfil.\n"
 
-#~ msgid "Loading configuration file "
-#~ msgstr "Henter laget oppsett "
+#~ msgid "Try to create directory %s\n"
+#~ msgstr "Prøv å lage mappen %s\n"
 
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr "FEIL : Aktiv oppsettsfil er fra en annen versjon av programmet ("
+#~ msgid "Type : "
+#~ msgstr "Type : "
 
-#~ msgid "Invalid sky culture directory: "
-#~ msgstr "Ugyldig mappe for himmelkultur: "
+#~ msgid "Using sky language from environment locale: "
+#~ msgstr "Bruker språk fra lokal mappe: "
 
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Navn :%s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Lysstyrke : %.2f"
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Vil lage oppsettsfiler i %s\n"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "eks. 60718 (aCrux) eller Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "eks. Sydkorset"
+
+#~ msgid "eg. M83"
+#~ msgstr "eks. M83"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "f.eks M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "f.eks. Pluto eller Io"
+
+#~ msgid "ly"
+#~ msgstr "ly"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "å lagre aktivt landskap som standard landskap."

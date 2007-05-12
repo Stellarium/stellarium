@@ -2039,35 +2039,65 @@ msgstr "Minuten"
 msgid "Seconds"
 msgstr "Sekunden"
 
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "and comments to us at: http://stellarium.sourceforge.net\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "and comments to us at: http://stellarium.sourceforge.net\n"
+#~ "\n"
+
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
+
 #~ msgid " (Variable)"
 #~ msgstr " (Variable)"
 
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Lade Hipparcos-Katalog:"
+#~ msgid "(Dbl)"
+#~ msgstr "(Dbl)"
 
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Sternschnuppen pro Minute"
-
-#, fuzzy
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Lade HIP/SAO-Kataloge: %d/%d"
-
-#, fuzzy
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Lade HIP-Katalog: %d/%d"
-
-#, fuzzy
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Lade SAO-Katalog: %d/%d"
+#~ msgid "(Var)"
+#~ msgstr "(Var)"
 
 #~ msgid ": mag "
 #~ msgstr ": mag "
 
-#~ msgid "Message"
-#~ msgstr "Mitteilung"
+#~ msgid "Alt : "
+#~ msgstr "Alt : "
+
+#~ msgid "Az  : "
+#~ msgstr "Az : "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD + Q : Beenden\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Himmelsrichtungen: "
 
 #~ msgid "Chart mode"
 #~ msgstr "Grafikmodus"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr "Landschaft auswählen :"
+
+#~ msgid "Constellation"
+#~ msgstr "Sternbild"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Sternbildnamen: "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Sternbildlinien: "
+
+#~ msgid "DE : "
+#~ msgstr "DE : "
+
+#~ msgid "Distance : "
+#~ msgstr "Entfernung : "
 
 #, fuzzy
 #~ msgid ""
@@ -2080,127 +2110,46 @@ msgstr "Sekunden"
 #~ "Während der Skriptwiedergabe: \t CTRL + C : Skript beenden\n"
 #~ "\t                            \n"
 
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q : Beenden\n"
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "O-W Zentrumsabstand: "
 
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Fischaugenprojektionsmodus"
 
-#~ msgid "Choose landscapes :"
-#~ msgstr "Landschaft auswählen :"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Option bitte im Reiter \"Standort\" sichern"
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "um die aktuelle Landschaft als Standard zu speichern."
-
-#~ msgid "Star No./Name"
-#~ msgstr "Stern Nr./Name"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "z.B. 60718 (aCrux) oder Canopus"
-
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Sternbild"
-
-#~ msgid "eg. Crux"
-#~ msgstr "z.B. Kreuz des Südens"
-
-#~ msgid "Nebula"
-#~ msgstr "Sternennebel"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "z.B. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planet/Mond"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "z.B. Pluto oder Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planeten & Monde"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Sternbildlinien: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Sternbildnamen: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Himmelsrichtungen: "
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "N-S Zentrumsabstand: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "O-W Zentrumsabstand: "
-
-#~ msgid "Name : "
-#~ msgstr "Name : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "(Var)"
-#~ msgstr "(Var)"
-
-#~ msgid "RA : "
-#~ msgstr "RA : "
-
-#~ msgid "DE : "
-#~ msgstr "DE : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Spektral : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Größenordnung : "
-
-#~ msgid "Distance : "
-#~ msgstr "Entfernung : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Alt : "
-
-#~ msgid "ly"
-#~ msgstr "ly"
-
-#~ msgid "Type : "
-#~ msgstr "Typ : "
-
-#~ msgid "Size : "
-#~ msgstr "Größe : "
-
-#, fuzzy
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Loading NGC catalog: %d/%d"
 
 #, fuzzy
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Loading NGC catalog: %d/%d"
 
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#, fuzzy
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Lade HIP-Katalog: %d/%d"
 
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "and comments to us at: http://stellarium.sourceforge.net\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "and comments to us at: http://stellarium.sourceforge.net\n"
-#~ "\n"
+#, fuzzy
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Lade HIP/SAO-Kataloge: %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Lade Hipparcos-Katalog:"
+
+#, fuzzy
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Lade SAO-Katalog: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Loading NGC catalog: %d/%d"
+
+#~ msgid "Magnitude : "
+#~ msgstr "Größenordnung : "
+
+#~ msgid "Message"
+#~ msgstr "Mitteilung"
+
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Sternschnuppen pro Minute"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2208,3 +2157,54 @@ msgstr "Sekunden"
 #~ msgstr ""
 #~ "Verschiedenes:\n"
 #~ "9 : Häufigkeit von Meteoritenschauern anzeigen\n"
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "N-S Zentrumsabstand: "
+
+#~ msgid "Name : "
+#~ msgstr "Name : "
+
+#~ msgid "Nebula"
+#~ msgstr "Sternennebel"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planet/Mond"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planeten & Monde"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Option bitte im Reiter \"Standort\" sichern"
+
+#~ msgid "RA : "
+#~ msgstr "RA : "
+
+#~ msgid "Size : "
+#~ msgstr "Größe : "
+
+#~ msgid "Spectral : "
+#~ msgstr "Spektral : "
+
+#~ msgid "Star No./Name"
+#~ msgstr "Stern Nr./Name"
+
+#~ msgid "Type : "
+#~ msgstr "Typ : "
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "z.B. 60718 (aCrux) oder Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "z.B. Kreuz des Südens"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "z.B. M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "z.B. Pluto oder Io"
+
+#~ msgid "ly"
+#~ msgstr "ly"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "um die aktuelle Landschaft als Standard zu speichern."
