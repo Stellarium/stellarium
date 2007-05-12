@@ -1405,7 +1405,8 @@ int StarMgr::load_common_names(const string& commonNameFile) {
   while (fgets(line, sizeof(line), cnFile)) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
-    assert(1==sscanf(line,"%u",&hip));
+    if(sscanf(line,"%u",&hip)!=1)
+		assert(0);
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;
@@ -1454,7 +1455,8 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
   while (fgets(line, sizeof(line), snFile)) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
-    assert(1==sscanf(line,"%u",&hip));
+    if(sscanf(line,"%u",&hip)!=1)
+		assert(0);
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;

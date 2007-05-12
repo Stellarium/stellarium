@@ -1,7 +1,7 @@
 #ifndef STELKEY_HPP_
 #define STELKEY_HPP_
 
-#include "stellarium.h"
+#include <config.h>
 
 // Directly and shamlessly copied from SDL_keysym.h
 
