@@ -2035,84 +2035,6 @@ msgstr "Minuty"
 msgid "Seconds"
 msgstr "Sekundy"
 
-#~ msgid " (Variable)"
-#~ msgstr " (Zmienna)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Ładowanie katalogu Hipparcosa:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Liczba meteorów na minutę"
-
-#~ msgid "Name : "
-#~ msgstr "Nazwa : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(podwójna)"
-
-#~ msgid "(Var)"
-#~ msgstr "(zmienna)"
-
-#~ msgid "RA : "
-#~ msgstr "RA : "
-
-#~ msgid "DE : "
-#~ msgstr "DE : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Typ widmowy : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Jasność : "
-
-#~ msgid "Distance : "
-#~ msgstr "Odległość : "
-
-#~ msgid "Az  : "
-#~ msgstr "Azymut "
-
-#~ msgid "Alt : "
-#~ msgstr "Wysokość "
-
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
-#~ msgid "ly"
-#~ msgstr "l.św."
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Ładowanie katalogu SAO : %d/%d"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Katalog: NGC "
-
-#~ msgid "Type : "
-#~ msgstr "Typ : "
-
-#~ msgid "Size : "
-#~ msgstr "Rozmiar : "
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Ładowanie katalogu Sharplessa:"
-
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Ładowanie katalogu Cadwella:"
-
-#~ msgid "Message"
-#~ msgstr "Komunikat"
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid "Chart mode"
-#~ msgstr "Tryb wykresu"
-
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
@@ -2123,162 +2045,38 @@ msgstr "Sekundy"
 #~ "na stronie programu http://stellarium.sourceforge.net\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr "9: Intensywność deszczu meteorytów\n"
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Wyjście\n"
+#~ msgid " (Variable)"
+#~ msgstr " (Zmienna)"
 
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Widok \"rybie oko\""
+#~ msgid " in file "
+#~ msgstr " w pliku "
 
-#~ msgid "Choose landscapes :"
-#~ msgstr "Wybierz krajobraz:"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Zapisz opcję w zakładce \"Lokalizacja\""
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "by zapisać obecny krajobraz jako domyślny"
-
-#~ msgid "Star No./Name"
-#~ msgstr "Gwiazda nr/Nazwa"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "np. 60718 (aCrux) lub Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Gwiazdozbiór"
-
-#~ msgid "eg. Crux"
-#~ msgstr "np. Krzyż Południa"
-
-#~ msgid "Nebula"
-#~ msgstr "Mgławica"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "np. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planeta/Księżyc"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "np. Pluton lub Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planety i księżyce"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Linie gwiazdozbiorów: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Podpisy gwiazdozbiorów: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Punkty kardynalne: "
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "środkowanie N-S "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "środkowanie E-W "
-
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "BŁĄD : Nie mogę znaleźć danych w  :\n"
-#~ "%s/ ani w ./ ani w ../\n"
-#~ "Powinieneś ponownie zainstalować program (wpisz \"make install\" w "
-#~ "systemach POSIX)\n"
-#~ "lub uruchom program z folderu, w którym go zainstalowałeś.\n"
-
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Znaleziono dane w %s : wersja lokalna.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Pliki konfiguracyjne zostaną utworzone w %s\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "Spróbuj stworzyć ścieżkę %s\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "Nie można utworzyć pliku %sconfig.ini\n"
-#~ "Jeśli folder %s nie istnieje - utwórz go.\n"
-#~ "Jeśli istnieje, sprawdź czy masz do niego dostęp %s\n"
-
-#~ msgid ""
-#~ "Name :%s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-#~ msgstr ""
-#~ "Nazwa :%s%s%s\n"
-#~ "Hip : %.4dh\n"
-#~ " hRA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-
-#~ msgid "Loading Hipparcos star data "
-#~ msgstr "Ładowanie danych o gwiazdach z katalogu Hipparcosa "
-
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-#~ msgstr ""
-#~ "Nazwa : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-
-#~ msgid "Loading nebulas data "
-#~ msgstr "Ładowanie danych o mgławicach "
+#~ msgid "%s%s: mag %.1f"
+#~ msgstr "%s%s: mag %.1f"
 
 #~ msgid "(%d deep space objects)...\n"
 #~ msgstr "(%d obiekty głębokiego kosmosu)...\n"
 
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Ładowanie lokacji: \"%s\", "
+#~ msgid "(Dbl)"
+#~ msgstr "(podwójna)"
+
+#~ msgid "(Var)"
+#~ msgstr "(zmienna)"
 
 #~ msgid "(landscape is: \"%s\")\n"
 #~ msgstr "(krajobraz: \"%s\")\n"
 
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Zapisywanie lokacji %s do pliku %s\n"
+#~ msgid ": mag "
+#~ msgstr ": mag "
 
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Distance : %.8f AU\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Nazwa :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Odległość : %.8f UA\n"
-#~ "Jasność : %.2f"
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Znaleziono dane w %s : wersja lokalna.\n"
 
-#~ msgid "%s%s: mag %.1f"
-#~ msgstr "%s%s: mag %.1f"
+#~ msgid "Alt : "
+#~ msgstr "Wysokość "
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2346,17 +2144,198 @@ msgstr "Sekundy"
 #~ "CTRL + S : Zrzut ekranu\n"
 #~ "CTRL + R : Przełącz rejestrowanie skryptu\n"
 
+#~ msgid "Az  : "
+#~ msgstr "Azymut "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Wyjście\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid ""
+#~ "Can't create the file %sconfig.ini\n"
+#~ "If the directory %s is missing please create it by hand.\n"
+#~ "If not, check that you have access to %s\n"
+#~ msgstr ""
+#~ "Nie można utworzyć pliku %sconfig.ini\n"
+#~ "Jeśli folder %s nie istnieje - utwórz go.\n"
+#~ "Jeśli istnieje, sprawdź czy masz do niego dostęp %s\n"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Punkty kardynalne: "
+
+#~ msgid "Cat: NGC "
+#~ msgstr "Katalog: NGC "
+
+#~ msgid "Chart mode"
+#~ msgstr "Tryb wykresu"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr "Wybierz krajobraz:"
+
+#~ msgid "Constellation"
+#~ msgstr "Gwiazdozbiór"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Podpisy gwiazdozbiorów: "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Linie gwiazdozbiorów: "
+
+#~ msgid "DE : "
+#~ msgstr "DE : "
+
+#~ msgid "Distance : "
+#~ msgstr "Odległość : "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "środkowanie E-W "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "BŁĄD : Nie mogę znaleźć danych w  :\n"
+#~ "%s/ ani w ./ ani w ../\n"
+#~ "Powinieneś ponownie zainstalować program (wpisz \"make install\" w "
+#~ "systemach POSIX)\n"
+#~ "lub uruchom program z folderu, w którym go zainstalowałeś.\n"
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr "BŁĄD: Plik konfiguracyjny pochodzi z innej wersji programu ("
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Widok \"rybie oko\""
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Ładowanie katalogu Cadwella:"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Ładowanie katalogu Hipparcosa:"
+
+#~ msgid "Loading Hipparcos star data "
+#~ msgstr "Ładowanie danych o gwiazdach z katalogu Hipparcosa "
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Ładowanie katalogu SAO : %d/%d"
+
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Ładowanie katalogu Sharplessa:"
+
+#~ msgid "Loading Solar System data...\n"
+#~ msgstr "Ładowanie danych systemu słonecznego...\n"
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Ładowanie pliku konfiguracyjnego "
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Ładowanie lokacji: \"%s\", "
+
+#~ msgid "Loading nebulas data "
+#~ msgstr "Ładowanie danych o mgławicach "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Jasność : "
+
+#~ msgid "Message"
+#~ msgstr "Komunikat"
+
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Liczba meteorów na minutę"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr "9: Intensywność deszczu meteorytów\n"
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "środkowanie N-S "
+
+#~ msgid "Name : "
+#~ msgstr "Nazwa : "
+
+#~ msgid ""
+#~ "Name : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f"
+#~ msgstr ""
+#~ "Nazwa : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f"
+
+#~ msgid ""
+#~ "Name :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Distance : %.8f AU\n"
+#~ "Magnitude : %.2f"
+#~ msgstr ""
+#~ "Nazwa :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Odległość : %.8f UA\n"
+#~ "Jasność : %.2f"
+
+#~ msgid ""
+#~ "Name :%s%s%s\n"
+#~ "Hip : %.4d\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f"
+#~ msgstr ""
+#~ "Nazwa :%s%s%s\n"
+#~ "Hip : %.4dh\n"
+#~ " hRA : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f"
+
+#~ msgid "Nebula"
+#~ msgstr "Mgławica"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planeta/Księżyc"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planety i księżyce"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Zapisz opcję w zakładce \"Lokalizacja\""
+
+#~ msgid "RA : "
+#~ msgstr "RA : "
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "Zapisywanie lokacji %s do pliku %s\n"
+
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Zapisywanie opcji renderowania w pliku "
 
 #~ msgid "Saving video size "
 #~ msgstr "Zapisywanie rozmiaru obrazu "
 
-#~ msgid " in file "
-#~ msgstr " w pliku "
+#~ msgid "Size : "
+#~ msgstr "Rozmiar : "
 
-#~ msgid "Loading Solar System data...\n"
-#~ msgstr "Ładowanie danych systemu słonecznego...\n"
+#~ msgid "Spectral : "
+#~ msgstr "Typ widmowy : "
+
+#~ msgid "Star No./Name"
+#~ msgstr "Gwiazda nr/Nazwa"
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2375,8 +2354,29 @@ msgstr "Sekundy"
 #~ "stara aby skopiować z niej ustawienia (%s).\n"
 #~ "Zostanie on zastąpiony domyślnym plikiem konfiguracyjnym.\n"
 
-#~ msgid "Loading configuration file "
-#~ msgstr "Ładowanie pliku konfiguracyjnego "
+#~ msgid "Try to create directory %s\n"
+#~ msgstr "Spróbuj stworzyć ścieżkę %s\n"
 
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr "BŁĄD: Plik konfiguracyjny pochodzi z innej wersji programu ("
+#~ msgid "Type : "
+#~ msgstr "Typ : "
+
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Pliki konfiguracyjne zostaną utworzone w %s\n"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "np. 60718 (aCrux) lub Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "np. Krzyż Południa"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "np. M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "np. Pluton lub Io"
+
+#~ msgid "ly"
+#~ msgstr "l.św."
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "by zapisać obecny krajobraz jako domyślny"
