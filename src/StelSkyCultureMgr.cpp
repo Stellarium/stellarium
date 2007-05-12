@@ -141,7 +141,10 @@ wstring StelSkyCultureMgr::directoryToSkyCultureI18(const string& directory) con
 {
 	stringHashIter_t i = dirToNameEnglish.find(directory);
 	if (i==dirToNameEnglish.end())
+	{
 		assert(0);
+		return L"";
+	}
 	else
 		return _(i->second);
 }
