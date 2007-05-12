@@ -2030,20 +2030,108 @@ msgstr "Perc"
 msgid "Seconds"
 msgstr "Másodp."
 
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
+
 #~ msgid " (Variable)"
 #~ msgstr " (változó)"
+
+#~ msgid "(Dbl)"
+#~ msgstr "(kettős)"
+
+#~ msgid ": mag "
+#~ msgstr ": mag "
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Adatfájlok a(z) %s könyvtárban: helyi változat.\n"
+
+#~ msgid "Alt : "
+#~ msgstr "Mag.: "
+
+#~ msgid "Az  : "
+#~ msgstr "Az  : "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Kilépés\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Égtájak: "
+
+#~ msgid "Cat: NGC "
+#~ msgstr "Kat.: NGC "
+
+#~ msgid "Choose a catalog :"
+#~ msgstr "Katalógus:"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr "Tájkép választása:"
+
+#~ msgid "Constellation"
+#~ msgstr "Csillagkép"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Csillagképek címkéi: "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Csillagképek vonalai: "
+
+#~ msgid "DE : "
+#~ msgstr "DE: "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "K-Ny középvonal eltolása: "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "HIBA: Nem találom az adatkönyvtárakat a következő helyeken:\n"
+#~ "%s/, ./ és ../\n"
+#~ "Telepítsd rendesen a programot (POSIX rendszereken a \"make install\"\n"
+#~ "kiadásával), vagy pedig futtasd a stellarium csomag könyvtárából.\n"
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Halszem vetület"
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Cadwell-katalógus betöltése:"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "HIP-katalógus betöltése: %d/%d"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "HIP-/SAO-katalógus betöltése: %d/%d"
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hipparcos-katalógus betöltése:"
 
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "SAO-katalógus betöltése: %d/%d"
+
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Sharpless-katalógus betöltése:"
+
+#~ msgid "Message"
+#~ msgstr "Üzenet"
+
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Meteorgyakoriság (db/perc)"
 
-#~ msgid "flip horizontally"
-#~ msgstr "vízszintes tükrözés"
-
-#~ msgid "flip vertically"
-#~ msgstr "függőleges tükrözés"
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Egyebek:\n"
+#~ "9: Meteorzápor gyakoriságának váltása\n"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2057,12 +2145,6 @@ msgstr "Másodp."
 #~ "CTRL+0...9 : GOTO parancs kiadása a 0-ás, ... 9-es távcsőnek\n"
 #~ "CTRL+SHIFT+H: kép vízszintes tükrözése\n"
 #~ "CTRL+SHIFT+V: kép függőleges tükrözése\n"
-
-#~ msgid "flip horizontal"
-#~ msgstr "vízszintes tükrözés"
-
-#~ msgid "flip vertical"
-#~ msgstr "függőleges tükrözés"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2081,135 +2163,20 @@ msgstr "Másodp."
 #~ "CTRL+Q: Kilépés\n"
 #~ "CMD+Q : Kilépés\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Egyebek:\n"
-#~ "9: Meteorzápor gyakoriságának váltása\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Kilépés\n"
-
-#~ msgid "Message"
-#~ msgstr "Üzenet"
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Halszem vetület"
-
-#~ msgid "Choose landscapes :"
-#~ msgstr "Tájkép választása:"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "A \"Hely\" fül beállításainak elmentésével"
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "tehető alapértelmezetté a jelenlegi tájkép."
-
-#~ msgid "Star No./Name"
-#~ msgstr "Csillag sz./neve"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "pl. 60718 (aCrux) vagy Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Csillagkép"
-
-#~ msgid "eg. Crux"
-#~ msgstr "pl. Déli Kereszt"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "pl. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Bolygó/hold"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "pl. Plútó vagy Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Bolygók és holdak"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Csillagképek vonalai: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Csillagképek címkéi: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Égtájak: "
-
 #~ msgid "N-S Centering Offset: "
 #~ msgstr "É-D középvonal eltolása: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "K-Ny középvonal eltolása: "
-
-#~ msgid "Sky language:"
-#~ msgstr "Az ég nyelve:"
-
-#~ msgid "Sky culture:"
-#~ msgstr "Kultúrkör:"
-
-#~ msgid "Object No :"
-#~ msgstr "Égitest száma:"
-
-#~ msgid "e.g. : 1432, 83"
-#~ msgstr "pl.: 1432, 83"
-
-#~ msgid "Choose a catalog :"
-#~ msgstr "Katalógus:"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "HIP-/SAO-katalógus betöltése: %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "HIP-katalógus betöltése: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "SAO-katalógus betöltése: %d/%d"
-
-#~ msgid ": mag "
-#~ msgstr ": mag "
 
 #~ msgid "Name : "
 #~ msgstr "Név: "
 
-#~ msgid "(Dbl)"
-#~ msgstr "(kettős)"
+#~ msgid "Object No :"
+#~ msgstr "Égitest száma:"
 
-#~ msgid "ly"
-#~ msgstr "fé"
+#~ msgid "Planet/Moon"
+#~ msgstr "Bolygó/hold"
 
-#~ msgid "RA : "
-#~ msgstr "RA: "
-
-#~ msgid "DE : "
-#~ msgstr "DE: "
-
-#~ msgid "Az  : "
-#~ msgstr "Az  : "
-
-#~ msgid "Alt : "
-#~ msgstr "Mag.: "
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Kat.: NGC "
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Sharpless-katalógus betöltése:"
-
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Cadwell-katalógus betöltése:"
+#~ msgid "Planets & Moons"
+#~ msgstr "Bolygók és holdak"
 
 #~ msgid ""
 #~ "Please check last version and send bug report & comments \n"
@@ -2220,20 +2187,53 @@ msgstr "Másodp."
 #~ "van? Lásd a honlapot: http://www.stellarium.org\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "HIBA: Nem találom az adatkönyvtárakat a következő helyeken:\n"
-#~ "%s/, ./ és ../\n"
-#~ "Telepítsd rendesen a programot (POSIX rendszereken a \"make install\"\n"
-#~ "kiadásával), vagy pedig futtasd a stellarium csomag könyvtárából.\n"
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "A \"Hely\" fül beállításainak elmentésével"
 
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Adatfájlok a(z) %s könyvtárban: helyi változat.\n"
+#~ msgid "RA : "
+#~ msgstr "RA: "
+
+#~ msgid "Sky culture:"
+#~ msgstr "Kultúrkör:"
+
+#~ msgid "Sky language:"
+#~ msgstr "Az ég nyelve:"
+
+#~ msgid "Star No./Name"
+#~ msgstr "Csillag sz./neve"
 
 #~ msgid "Will create config files in %s\n"
 #~ msgstr "Ide kerülnek a konfigurációs fájlok: %s\n"
+
+#~ msgid "e.g. : 1432, 83"
+#~ msgstr "pl.: 1432, 83"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "pl. 60718 (aCrux) vagy Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "pl. Déli Kereszt"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "pl. M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "pl. Plútó vagy Io"
+
+#~ msgid "flip horizontal"
+#~ msgstr "vízszintes tükrözés"
+
+#~ msgid "flip horizontally"
+#~ msgstr "vízszintes tükrözés"
+
+#~ msgid "flip vertical"
+#~ msgstr "függőleges tükrözés"
+
+#~ msgid "flip vertically"
+#~ msgstr "függőleges tükrözés"
+
+#~ msgid "ly"
+#~ msgstr "fé"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "tehető alapértelmezetté a jelenlegi tájkép."

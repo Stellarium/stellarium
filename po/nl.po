@@ -2034,101 +2034,6 @@ msgstr "Minuten"
 msgid "Seconds"
 msgstr "Seconden"
 
-#~ msgid " (Variable)"
-#~ msgstr " (Variabel)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Laden Hipparcos sterrencatalogus:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Aantal meteorieten per minuut"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-#~ "CTRL + SHIFT + H: toggle horizontal image flipping\n"
-#~ "CTRL + SHIFT + V: toggle vertical image flipping\n"
-#~ "CTRL + Q : Quit\n"
-#~ "CMD + Q  : Quit\n"
-#~ msgstr ""
-#~ "Allerlei:\n"
-#~ "9: verander intensiteit meteorenregens\n"
-#~ "CTRL+0,1,...,9 : voer een GOTO commando uit voor telescoop 0,1,...,9\n"
-#~ "CTRL+SHIFT+H: spiegel beeld horizontaal\n"
-#~ "CTRL+SHIFT+V: spiegel beeld verticaal\n"
-#~ "CTRL+Q: Afsluiten\n"
-#~ "CMD+Q: Afsluiten\n"
-
-#~ msgid "Name : "
-#~ msgstr "Naam : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "(Var)"
-#~ msgstr "(Var)"
-
-#~ msgid "RA : "
-#~ msgstr "RK : "
-
-#~ msgid "DE : "
-#~ msgstr "DE : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Spectrumtype : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Magnitude : "
-
-#~ msgid "Distance : "
-#~ msgstr "Afstand : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Hoogte : "
-
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
-#~ msgid "ly"
-#~ msgstr "lj"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Laden HIP/SAO sterrencatalogi: %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Laden HIP sterrencatalogus: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Laden SAO sterrencatalogus: %d/%d"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Cat: NGC "
-
-#~ msgid "Type : "
-#~ msgstr "Type : "
-
-#~ msgid "Size : "
-#~ msgstr "Grootte : "
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Laden Sharpless sterrencataloog:"
-
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Laden Cadwell sterrencataloog:"
-
-#~ msgid "Message"
-#~ msgstr "Bericht"
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid "Chart mode"
-#~ msgstr "Kaartmodus"
-
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
@@ -2138,289 +2043,67 @@ msgstr "Seconden"
 #~ "problemen en ervaringen op de website http://stellarium.sourceforge.net\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Overige:\n"
-#~ "9 : Intensiteit meteorenregens\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Afsluiten\n"
+#~ msgid " Choose landscapes :"
+#~ msgstr " Kies landschap :"
 
 #~ msgid " Current Time :"
 #~ msgstr " Huidige tijd :"
 
-#~ msgid " Time Zone :"
-#~ msgstr " Tijdzone :"
-
-#~ msgid " Using System Default Time Zone"
-#~ msgstr " Standaard tijdzone"
-
-#~ msgid " Time speed : "
-#~ msgstr " Snelheid tijd : "
+#~ msgid " Current Time Speed is x"
+#~ msgstr " Huidige snelheid is x"
 
 #~ msgid " Projection :"
 #~ msgstr " Projectie:"
 
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Vissenoogprojectie (fish-eye)"
-
 #~ msgid " Screen Resolution :"
 #~ msgstr " Schermresolutie:"
 
-#~ msgid " Choose landscapes :"
-#~ msgstr " Kies landschap :"
+#~ msgid " Time Zone :"
+#~ msgstr " Tijdzone :"
 
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Sla keuze op in de tab \"Locatie\""
+#~ msgid " Time speed : "
+#~ msgstr " Snelheid tijd : "
 
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "om het huidige landschap als standaard te gebruiken."
+#~ msgid " Using System Default Time Zone"
+#~ msgstr " Standaard tijdzone"
 
-#~ msgid "Star No./Name"
-#~ msgstr "Ster Nr./Naam"
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "bijv. 60718 (aCrux) of Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Sterrenbeeld"
-
-#~ msgid "eg. Crux"
-#~ msgstr "bijv. Crux"
-
-#~ msgid "Nebula"
-#~ msgstr "Nevels"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "bijv. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planeet/Maan"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "bijv. Pluto of Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planeten en manen"
-
-#~ msgid " Current Time Speed is x"
-#~ msgstr " Huidige snelheid is x"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Lijnen sterrenbeelden: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Namen sterrenbeelden: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Windstreken: "
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "Offset voor N-Z centrering: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "Offset voor O-W centrering: "
-
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "ERROR : Kan de datamappen niet vinden in :\n"
-#~ "%s/ , ./ of in ../\n"
-#~ "Je kan de software volledig installeren (typ \"make install\" op een "
-#~ "POSIX systeem)\n"
-#~ "of het programma starten vanuit de packagemap van Stellarium.\n"
-
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Databestanden gevonden in %s : lokale versie.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Zal configuratiebestanden aanmaken in %s\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "Tracht map aan te maken %s\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "Kan het bestand %sconfig.ini niet aanmaken\n"
-#~ "Indien de map %s ontbreekt, maak ze dan zelf aan.\n"
-#~ "Indien de map wel bestaat, kijk na of je er toegang toe hebt. %s\n"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data..."
-#~ msgstr "Laden sterrenbeelden %d/%d"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos double stars..."
-#~ msgstr "Laden Hipparcos sterrendata"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos periodic variable stars..."
-#~ msgstr "Laden Hipparcos sterrendata"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos/SAO star data..."
-#~ msgstr "Laden Hipparcos sterrendata"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos star data..."
-#~ msgstr "Laden Hipparcos sterrendata"
-
-#, fuzzy
-#~ msgid "Loading SAO star data "
-#~ msgstr "Laden neveldata "
-
-#, fuzzy
-#~ msgid "Loading star name data "
-#~ msgstr "Laden data zonnestelsel "
-
-#, fuzzy
-#~ msgid "Loading NGC data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#, fuzzy
-#~ msgid "Loading Sharpless data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#, fuzzy
-#~ msgid "Loading Cadwell reference data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#, fuzzy
-#~ msgid "(%d deep space objects)\n"
-#~ msgstr "(%d deep space objecten)...\n"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Laden positie: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(landschap is: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Opslaan positie %s in bestand %s\n"
-
-#, fuzzy
-#~ msgid "Loading Cities data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#~ msgid "Saving rendering options in file "
-#~ msgstr "Opslaan renderinginstellingen "
-
-#~ msgid "Saving video size "
-#~ msgstr "Opslaan videogrootte "
+#~ msgid " (Variable)"
+#~ msgstr " (Variabel)"
 
 #~ msgid " in file "
 #~ msgstr " in bestand "
 
-#~ msgid ""
-#~ "The current config file is from a previous version (>=0.6.0).\n"
-#~ "Previous options will be imported in the new config file.\n"
-#~ msgstr ""
-#~ "Het huidige configuratiebestand is er één van een vorige programmaversie "
-#~ "(>=0.6.0).\n"
-#~ "Eerdere instellingen worden geïmporteerd in het nieuwe "
-#~ "configuratiebestand.\n"
-
-#~ msgid ""
-#~ "The current config file is from a version too old for parameters to be "
-#~ "imported (%s).\n"
-#~ "It will be replaced by the default config file.\n"
-#~ msgstr ""
-#~ "Het huidige configuratiebestand is van een te oude programmaversie om "
-#~ "parameters te importeren (%s).\n"
-#~ "Het zal worden vervangen door een standaard configuratiebestand.\n"
-
-#~ msgid "Loading configuration file "
-#~ msgstr "Laden configuratiebestand "
-
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr ""
-#~ "ERROR : het huidige configuratiebestand is van een andere programmaversie "
-#~ "("
-
-#, fuzzy
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Kijk na of je de laatste versie van Stellarium hebt en meld \n"
-#~ "problemen en ervaringen op de website http://stellarium.sourceforge.net\n"
-#~ "\n"
-
-#, fuzzy
-#~ msgid "Loading Solar System data..."
-#~ msgstr "Laden data zonnestelsel"
-
-#, fuzzy
-#~ msgid "Canes"
-#~ msgstr "Planeten"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %s Light Years\n"
-#~ "Hip : %.4d\n"
-#~ msgstr ""
-#~ "Naam :%s%s\n"
-#~ "RK : %s\n"
-#~ "DE : %s\n"
-#~ "Afstand : %.8f UA\n"
-#~ "Magnitude : %.2f\n"
+#~ msgid "%s%s: mag %.1f"
+#~ msgstr "%s%s: mag %.1f"
 
 #, fuzzy
 #~ msgid "%s: mag %.1f %s"
 #~ msgstr "%s: mag %.1f"
 
 #, fuzzy
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Naam: %s (NGC %u)\n"
-#~ "RK: %s\n"
-#~ "DE: %s\n"
-#~ "Mag: %.2f"
+#~ msgid "(%d deep space objects)\n"
+#~ msgstr "(%d deep space objecten)...\n"
 
-#, fuzzy
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %.8f AU"
-#~ msgstr ""
-#~ "Naam :%s%s\n"
-#~ "RK : %s\n"
-#~ "DE : %s\n"
-#~ "Afstand : %.8f UA\n"
-#~ "Magnitude : %.2f"
+#~ msgid "(Dbl)"
+#~ msgstr "(Dbl)"
 
-#~ msgid "%s%s: mag %.1f"
-#~ msgstr "%s%s: mag %.1f"
+#~ msgid "(Var)"
+#~ msgstr "(Var)"
+
+#~ msgid "(landscape is: \"%s\")\n"
+#~ msgstr "(landschap is: \"%s\")\n"
+
+#~ msgid ": mag "
+#~ msgstr ": mag "
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Databestanden gevonden in %s : lokale versie.\n"
+
+#~ msgid "Alt : "
+#~ msgstr "Hoogte : "
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2488,6 +2171,206 @@ msgstr "Seconden"
 #~ "CTRL + S : Neem een screenshot\n"
 #~ "CTRL + R : Start het registreren van scripts\n"
 
+#~ msgid "Az  : "
+#~ msgstr "Az : "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Afsluiten\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid ""
+#~ "Can't create the file %sconfig.ini\n"
+#~ "If the directory %s is missing please create it by hand.\n"
+#~ "If not, check that you have access to %s\n"
+#~ msgstr ""
+#~ "Kan het bestand %sconfig.ini niet aanmaken\n"
+#~ "Indien de map %s ontbreekt, maak ze dan zelf aan.\n"
+#~ "Indien de map wel bestaat, kijk na of je er toegang toe hebt. %s\n"
+
+#, fuzzy
+#~ msgid "Canes"
+#~ msgstr "Planeten"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Windstreken: "
+
+#~ msgid "Cat: NGC "
+#~ msgstr "Cat: NGC "
+
+#~ msgid "Chart mode"
+#~ msgstr "Kaartmodus"
+
+#~ msgid "Constellation"
+#~ msgstr "Sterrenbeeld"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Namen sterrenbeelden: "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Lijnen sterrenbeelden: "
+
+#~ msgid "DE : "
+#~ msgstr "DE : "
+
+#~ msgid "Distance : "
+#~ msgstr "Afstand : "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "Offset voor O-W centrering: "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "ERROR : Kan de datamappen niet vinden in :\n"
+#~ "%s/ , ./ of in ../\n"
+#~ "Je kan de software volledig installeren (typ \"make install\" op een "
+#~ "POSIX systeem)\n"
+#~ "of het programma starten vanuit de packagemap van Stellarium.\n"
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr ""
+#~ "ERROR : het huidige configuratiebestand is van een andere programmaversie "
+#~ "("
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Vissenoogprojectie (fish-eye)"
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Laden Cadwell sterrencataloog:"
+
+#, fuzzy
+#~ msgid "Loading Cadwell reference data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#, fuzzy
+#~ msgid "Loading Cities data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#, fuzzy
+#~ msgid "Loading Constellation boundary data..."
+#~ msgstr "Laden sterrenbeelden %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Laden HIP sterrencatalogus: %d/%d"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Laden HIP/SAO sterrencatalogi: %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Laden Hipparcos sterrencatalogus:"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos double stars..."
+#~ msgstr "Laden Hipparcos sterrendata"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos periodic variable stars..."
+#~ msgstr "Laden Hipparcos sterrendata"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos star data..."
+#~ msgstr "Laden Hipparcos sterrendata"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos/SAO star data..."
+#~ msgstr "Laden Hipparcos sterrendata"
+
+#, fuzzy
+#~ msgid "Loading NGC data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#, fuzzy
+#~ msgid "Loading NGC name data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Laden SAO sterrencatalogus: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading SAO star data "
+#~ msgstr "Laden neveldata "
+
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Laden Sharpless sterrencataloog:"
+
+#, fuzzy
+#~ msgid "Loading Sharpless data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#, fuzzy
+#~ msgid "Loading Solar System data..."
+#~ msgstr "Laden data zonnestelsel"
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Laden configuratiebestand "
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Laden positie: \"%s\", "
+
+#, fuzzy
+#~ msgid "Loading star name data "
+#~ msgstr "Laden data zonnestelsel "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Magnitude : "
+
+#~ msgid "Message"
+#~ msgstr "Bericht"
+
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Aantal meteorieten per minuut"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Overige:\n"
+#~ "9 : Intensiteit meteorenregens\n"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ "CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
+#~ "CTRL + SHIFT + H: toggle horizontal image flipping\n"
+#~ "CTRL + SHIFT + V: toggle vertical image flipping\n"
+#~ "CTRL + Q : Quit\n"
+#~ "CMD + Q  : Quit\n"
+#~ msgstr ""
+#~ "Allerlei:\n"
+#~ "9: verander intensiteit meteorenregens\n"
+#~ "CTRL+0,1,...,9 : voer een GOTO commando uit voor telescoop 0,1,...,9\n"
+#~ "CTRL+SHIFT+H: spiegel beeld horizontaal\n"
+#~ "CTRL+SHIFT+V: spiegel beeld verticaal\n"
+#~ "CTRL+Q: Afsluiten\n"
+#~ "CMD+Q: Afsluiten\n"
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "Offset voor N-Z centrering: "
+
+#~ msgid "Name : "
+#~ msgstr "Naam : "
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f"
+#~ msgstr ""
+#~ "Naam: %s (NGC %u)\n"
+#~ "RK: %s\n"
+#~ "DE: %s\n"
+#~ "Mag: %.2f"
+
 #, fuzzy
 #~ msgid ""
 #~ "Name : %s%s%s\n"
@@ -2502,3 +2385,120 @@ msgstr "Seconden"
 #~ "AD : %s\n"
 #~ "DE : %s\n"
 #~ "Mag : %.2f"
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %s Light Years\n"
+#~ "Hip : %.4d\n"
+#~ msgstr ""
+#~ "Naam :%s%s\n"
+#~ "RK : %s\n"
+#~ "DE : %s\n"
+#~ "Afstand : %.8f UA\n"
+#~ "Magnitude : %.2f\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Name :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %.8f AU"
+#~ msgstr ""
+#~ "Naam :%s%s\n"
+#~ "RK : %s\n"
+#~ "DE : %s\n"
+#~ "Afstand : %.8f UA\n"
+#~ "Magnitude : %.2f"
+
+#~ msgid "Nebula"
+#~ msgstr "Nevels"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planeet/Maan"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planeten en manen"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Kijk na of je de laatste versie van Stellarium hebt en meld \n"
+#~ "problemen en ervaringen op de website http://stellarium.sourceforge.net\n"
+#~ "\n"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Sla keuze op in de tab \"Locatie\""
+
+#~ msgid "RA : "
+#~ msgstr "RK : "
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "Opslaan positie %s in bestand %s\n"
+
+#~ msgid "Saving rendering options in file "
+#~ msgstr "Opslaan renderinginstellingen "
+
+#~ msgid "Saving video size "
+#~ msgstr "Opslaan videogrootte "
+
+#~ msgid "Size : "
+#~ msgstr "Grootte : "
+
+#~ msgid "Spectral : "
+#~ msgstr "Spectrumtype : "
+
+#~ msgid "Star No./Name"
+#~ msgstr "Ster Nr./Naam"
+
+#~ msgid ""
+#~ "The current config file is from a previous version (>=0.6.0).\n"
+#~ "Previous options will be imported in the new config file.\n"
+#~ msgstr ""
+#~ "Het huidige configuratiebestand is er één van een vorige programmaversie "
+#~ "(>=0.6.0).\n"
+#~ "Eerdere instellingen worden geïmporteerd in het nieuwe "
+#~ "configuratiebestand.\n"
+
+#~ msgid ""
+#~ "The current config file is from a version too old for parameters to be "
+#~ "imported (%s).\n"
+#~ "It will be replaced by the default config file.\n"
+#~ msgstr ""
+#~ "Het huidige configuratiebestand is van een te oude programmaversie om "
+#~ "parameters te importeren (%s).\n"
+#~ "Het zal worden vervangen door een standaard configuratiebestand.\n"
+
+#~ msgid "Try to create directory %s\n"
+#~ msgstr "Tracht map aan te maken %s\n"
+
+#~ msgid "Type : "
+#~ msgstr "Type : "
+
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Zal configuratiebestanden aanmaken in %s\n"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "bijv. 60718 (aCrux) of Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "bijv. Crux"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "bijv. M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "bijv. Pluto of Io"
+
+#~ msgid "ly"
+#~ msgstr "lj"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "om het huidige landschap als standaard te gebruiken."

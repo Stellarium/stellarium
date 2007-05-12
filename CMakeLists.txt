@@ -42,6 +42,9 @@ FIND_PACKAGE(FreeType2 REQUIRED)
 FIND_PACKAGE(CURL)
 FIND_PACKAGE(Gettext REQUIRED)
 
+########### Other ###########
+
+
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)
 TEST_BIG_ENDIAN(WORDS_BIGENDIAN)

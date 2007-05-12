@@ -2026,133 +2026,6 @@ msgstr "Dakika"
 msgid "Seconds"
 msgstr "Saniye"
 
-#~ msgid " (Variable)"
-#~ msgstr " (Değişken)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Hipparkos Kataloğu yükleniyor:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Dakikadaki meteor hızı"
-
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
-#~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "HATA: Şu dizinlerde veri bulamadım:\n"
-#~ "%s/ ne de ./ ne de../\n"
-#~ "Yazılımı yeniden yüklemeyi deneyebilir (POSIX sistemlerde \"make install"
-#~ "\" yazarak)\n"
-#~ "ya da yazılımı Stellarium paket dizininden başlatabilirsiniz.\n"
-
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> veri dosyaları %s dizininde bulundu: yerel sürüm.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Yapılandırma dosyası  %s dizininde yaratılacak\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "%s dizini yaratılıyor\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "%sconfig.ini dosyası yaratılamıyor\n"
-#~ "Eğer  %s  dizini kaybolmuşsa lütfen onu elle oluşturun.\n"
-#~ "Aksi takdirde %s dizinine erişim hakkınız olmayacaktır.\n"
-
-#~ msgid "ERROR on line %d of %s\n"
-#~ msgstr "%d satırında %s hatası\n"
-
-#~ msgid "Loading Constellation Art: %d/%d"
-#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
-
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %s Light Years\n"
-#~ "Hip : %.4d\n"
-#~ msgstr ""
-#~ "Adı: %s%s%s\n"
-#~ "RA: %s\n"
-#~ "DE: %s\n"
-#~ "Parlaklık: %.2f\n"
-#~ "Uzaklık: %s Işık Yılı\n"
-#~ "Hip: %.4d\n"
-
-#~ msgid "Loading Hipparcos star data "
-#~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor "
-
-#~ msgid "Loading Hipparcos catalog: %d/%d"
-#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
-
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Adı: %s (NGC %u)\n"
-#~ "RA: %s\n"
-#~ "DE: %s\n"
-#~ "Parlaklık: %.2f"
-
-#~ msgid "Loading nebulas data "
-#~ msgstr "Nebula Verileri Yükleniyor "
-
-#~ msgid "(%d deep space objects)...\n"
-#~ msgstr "(%d derin gök cisimleri)...\n"
-
-#~ msgid "Loading Nebula Data: %d/%d"
-#~ msgstr "Nebula Verisi Yükleniyor: %d/%d"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Konum Yükleniyor: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(yeryüzü şekli: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "%s konumu %s dosyasına kaydediliyor\n"
-
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %.8f AU"
-#~ msgstr ""
-#~ "İsim:%s%s\n"
-#~ "RA: %s\n"
-#~ "DE: %s\n"
-#~ "Parlaklık: %.2f\n"
-#~ "Uzaklık: %.8f AU"
-
-#~ msgid "Did not recognize locale language code "
-#~ msgstr "Yerel dil kodu tanımlanamadı "
-
-#~ msgid ". Defaulting to english sky labels\n"
-#~ msgstr "Gök isimleri İngilizce öntanımlı yapılıyor\n"
-
-#~ msgid "Message"
-#~ msgstr "İleti"
-
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
@@ -2161,6 +2034,45 @@ msgstr "Saniye"
 #~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
 #~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
 #~ "\n"
+
+#~ msgid " Choose landscapes :"
+#~ msgstr "Yeryüzü Şeklini Seç:"
+
+#~ msgid " Current Time :"
+#~ msgstr "Şu Anki Saat:"
+
+#~ msgid " Projection :"
+#~ msgstr "Projeksiyon:"
+
+#~ msgid " Screen Resolution :"
+#~ msgstr "Ekran Çözünürlüğü:"
+
+#~ msgid " Time Zone :"
+#~ msgstr "Zaman Dilimi:"
+
+#~ msgid " Time speed : "
+#~ msgstr "Zaman Akış Hızı: "
+
+#~ msgid " Using System Default Time Zone"
+#~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
+
+#~ msgid " (Variable)"
+#~ msgstr " (Değişken)"
+
+#~ msgid " in file "
+#~ msgstr " dosyasında "
+
+#~ msgid "(%d deep space objects)...\n"
+#~ msgstr "(%d derin gök cisimleri)...\n"
+
+#~ msgid "(landscape is: \"%s\")\n"
+#~ msgstr "(yeryüzü şekli: \"%s\")\n"
+
+#~ msgid ". Defaulting to english sky labels\n"
+#~ msgstr "Gök isimleri İngilizce öntanımlı yapılıyor\n"
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> veri dosyaları %s dizininde bulundu: yerel sürüm.\n"
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2230,77 +2142,159 @@ msgstr "Saniye"
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q: Çık\n"
 
-#~ msgid " Current Time :"
-#~ msgstr "Şu Anki Saat:"
-
-#~ msgid " Time Zone :"
-#~ msgstr "Zaman Dilimi:"
-
-#~ msgid " Using System Default Time Zone"
-#~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
-
-#~ msgid " Time speed : "
-#~ msgstr "Zaman Akış Hızı: "
-
-#~ msgid " Projection :"
-#~ msgstr "Projeksiyon:"
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Balıkgözü Gösterimi"
-
-#~ msgid " Screen Resolution :"
-#~ msgstr "Ekran Çözünürlüğü:"
-
-#~ msgid " Choose landscapes :"
-#~ msgstr "Yeryüzü Şeklini Seç:"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Lütfen \"Konum\" sekmesinden"
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "bulunduğunuz noktayı işaretleyip kaydedin."
-
-#~ msgid "HP No./Name"
-#~ msgstr "HP No./Adı"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "Örn. 60718 (aCrux) ya da Canopus"
+#~ msgid ""
+#~ "Can't create the file %sconfig.ini\n"
+#~ "If the directory %s is missing please create it by hand.\n"
+#~ "If not, check that you have access to %s\n"
+#~ msgstr ""
+#~ "%sconfig.ini dosyası yaratılamıyor\n"
+#~ "Eğer  %s  dizini kaybolmuşsa lütfen onu elle oluşturun.\n"
+#~ "Aksi takdirde %s dizinine erişim hakkınız olmayacaktır.\n"
 
 #~ msgid "Constellation"
 #~ msgstr "Takımyıldızı"
 
-#~ msgid "eg. Crux"
-#~ msgstr "Örn. Crux"
+#~ msgid "Did not recognize locale language code "
+#~ msgstr "Yerel dil kodu tanımlanamadı "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "D-B Merkezli Konumlandırma: "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "HATA: Şu dizinlerde veri bulamadım:\n"
+#~ "%s/ ne de ./ ne de../\n"
+#~ "Yazılımı yeniden yüklemeyi deneyebilir (POSIX sistemlerde \"make install"
+#~ "\" yazarak)\n"
+#~ "ya da yazılımı Stellarium paket dizininden başlatabilirsiniz.\n"
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr "HATA: Mevcut yapılandırma dosyası farklı bir sürüme ait ("
+
+#~ msgid "ERROR on line %d of %s\n"
+#~ msgstr "%d satırında %s hatası\n"
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Balıkgözü Gösterimi"
+
+#~ msgid "HP No./Name"
+#~ msgstr "HP No./Adı"
+
+#~ msgid "Invalid sky culture directory: "
+#~ msgstr "Geçersiz Gök Kültü dizini: "
+
+#~ msgid "Loading Constellation Art: %d/%d"
+#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Hipparkos Kataloğu yükleniyor:"
+
+#~ msgid "Loading Hipparcos catalog: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+
+#~ msgid "Loading Hipparcos star data "
+#~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor "
+
+#~ msgid "Loading Nebula Data: %d/%d"
+#~ msgstr "Nebula Verisi Yükleniyor: %d/%d"
+
+#~ msgid "Loading Solar System data...\n"
+#~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Yapılandırma dosyası yükleniyor "
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Konum Yükleniyor: \"%s\", "
+
+#~ msgid "Loading nebulas data "
+#~ msgstr "Nebula Verileri Yükleniyor "
+
+#~ msgid "Message"
+#~ msgstr "İleti"
 
 #~ msgid "Messier No."
 #~ msgstr "Messier Kataloğu No:"
 
-#~ msgid "eg. M83"
-#~ msgstr "Örn. M83"
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Dakikadaki meteor hızı"
 
-#~ msgid "Planet/Moon"
-#~ msgstr "Gezegen/Ay"
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "K-G Merkezli Konumlandırma: "
 
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "Örn. Pluton ya da Ay"
+#~ msgid ""
+#~ "Name : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f"
+#~ msgstr ""
+#~ "Adı: %s (NGC %u)\n"
+#~ "RA: %s\n"
+#~ "DE: %s\n"
+#~ "Parlaklık: %.2f"
+
+#~ msgid ""
+#~ "Name : %s%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %s Light Years\n"
+#~ "Hip : %.4d\n"
+#~ msgstr ""
+#~ "Adı: %s%s%s\n"
+#~ "RA: %s\n"
+#~ "DE: %s\n"
+#~ "Parlaklık: %.2f\n"
+#~ "Uzaklık: %s Işık Yılı\n"
+#~ "Hip: %.4d\n"
+
+#~ msgid ""
+#~ "Name :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %.8f AU"
+#~ msgstr ""
+#~ "İsim:%s%s\n"
+#~ "RA: %s\n"
+#~ "DE: %s\n"
+#~ "Parlaklık: %.2f\n"
+#~ "Uzaklık: %.8f AU"
 
 #~ msgid "Nebula"
 #~ msgstr "Bulutsu"
 
+#~ msgid "Planet/Moon"
+#~ msgstr "Gezegen/Ay"
+
 #~ msgid "Planets & Moons"
 #~ msgstr "Gezegenler ve Ayları"
+
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
+#~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
+#~ "\n"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Lütfen \"Konum\" sekmesinden"
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "%s konumu %s dosyasına kaydediliyor\n"
 
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Kaplama özellikleri dosyaya kaydediliyor "
 
 #~ msgid "Saving video size "
 #~ msgstr "Video boyutunu kaydediyor "
-
-#~ msgid " in file "
-#~ msgstr " dosyasında "
-
-#~ msgid "Loading Solar System data...\n"
-#~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2318,20 +2312,26 @@ msgstr "Saniye"
 #~ "kadar eski(%s).\n"
 #~ "Bu dosya öntanımlı yapılandırma dosyası ile değiştirilecek.\n"
 
-#~ msgid "Loading configuration file "
-#~ msgstr "Yapılandırma dosyası yükleniyor "
+#~ msgid "Try to create directory %s\n"
+#~ msgstr "%s dizini yaratılıyor\n"
 
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr "HATA: Mevcut yapılandırma dosyası farklı bir sürüme ait ("
-
-#~ msgid "Invalid sky culture directory: "
-#~ msgstr "Geçersiz Gök Kültü dizini: "
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Yapılandırma dosyası  %s dizininde yaratılacak\n"
 
 #~ msgid "Zoom duration: "
 #~ msgstr "Büyütme süresi: "
 
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "K-G Merkezli Konumlandırma: "
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "Örn. 60718 (aCrux) ya da Canopus"
 
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "D-B Merkezli Konumlandırma: "
+#~ msgid "eg. Crux"
+#~ msgstr "Örn. Crux"
+
+#~ msgid "eg. M83"
+#~ msgstr "Örn. M83"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "Örn. Pluton ya da Ay"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "bulunduğunuz noktayı işaretleyip kaydedin."

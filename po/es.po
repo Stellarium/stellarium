@@ -2079,84 +2079,6 @@ msgstr "Minutos"
 msgid "Seconds"
 msgstr "Segundos"
 
-#~ msgid " (Variable)"
-#~ msgstr " (Variable)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Cargando catálogo Hipparcos:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Tasa de Meteoritos por minuto"
-
-#~ msgid "Name : "
-#~ msgstr "Nombre : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "(Var)"
-#~ msgstr "(Var)"
-
-#~ msgid "RA : "
-#~ msgstr "AR : "
-
-#~ msgid "DE : "
-#~ msgstr "DEC : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Espectral : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Magnitud : "
-
-#~ msgid "Distance : "
-#~ msgstr "Distancia : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Alt : "
-
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
-#~ msgid "ly"
-#~ msgstr "al"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Cargando Catálogos HIP/SAO : %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Cargando Catálogo HIP: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Cargando Catálogo SAO: %d/%d"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Catálogo: NGC "
-
-#~ msgid "Type : "
-#~ msgstr "Tipo : "
-
-#~ msgid "Size : "
-#~ msgstr "Tamaño : "
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Cargando Catálogo Sharpless:"
-
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Cargando Catálogo Caldwell:"
-
-#~ msgid "Message"
-#~ msgstr "Mensaje"
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid "Chart mode"
-#~ msgstr "Modo carta"
-
 #, fuzzy
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -2168,286 +2090,65 @@ msgstr "Segundos"
 #~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 #~ "\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Misc:\n"
-#~ "9 : Cambiar la tasa de meteoros\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Salir\n"
-
 #~ msgid " Current Time :"
 #~ msgstr " Hora-Fecha actual :"
-
-#~ msgid " Time Zone :"
-#~ msgstr " Zona horaria :"
-
-#~ msgid " Using System Default Time Zone"
-#~ msgstr " Usando la zona horaria por defecto del sistema"
-
-#~ msgid " Time speed : "
-#~ msgstr " Velocidad del tiempo : "
-
-#~ msgid " Projection :"
-#~ msgstr " Proyección :"
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Modo de proyección Ojo de pez"
-
-#~ msgid " Screen Resolution :"
-#~ msgstr " Resolución de pantalla  :"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Guardar la opción en la pestaña \"Localización\""
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "para guardar paisaje actual como predeterminado."
-
-#~ msgid "Star No./Name"
-#~ msgstr "No./Nombre de estrella"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "ej. 60718 (aCrux) o Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 25190"
-
-#~ msgid "Constellation"
-#~ msgstr "Constelación"
-
-#~ msgid "eg. Crux"
-#~ msgstr "ej. Crux"
-
-#~ msgid "Nebula"
-#~ msgstr "Nebulosa"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "ej. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planeta/Luna"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "ej. Plutón o Io"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planetas y Lunas"
 
 #, fuzzy
 #~ msgid " Current Time Speed is x"
 #~ msgstr " Hora-Fecha actual :"
 
-#~ msgid "Constellation lines: "
-#~ msgstr "Líneas de Constelaciones: "
+#~ msgid " Projection :"
+#~ msgstr " Proyección :"
 
-#~ msgid "Constellation labels: "
-#~ msgstr "Nombres de constelaciones: "
+#~ msgid " Screen Resolution :"
+#~ msgstr " Resolución de pantalla  :"
 
-#~ msgid "Cardinal points: "
-#~ msgstr "Puntos cardinales: "
+#~ msgid " Time Zone :"
+#~ msgstr " Zona horaria :"
 
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "Compensación del centrado N-S: "
+#~ msgid " Time speed : "
+#~ msgstr " Velocidad del tiempo : "
 
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "Compensación del centrado E-O: "
+#~ msgid " Using System Default Time Zone"
+#~ msgstr " Usando la zona horaria por defecto del sistema"
 
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "ERROR : No se puede encontrar el directorio de datos en :\n"
-#~ "%s/ ni en ./ ni en ../\n"
-#~ "Usted puede instalar el software completo (teclee \"make install\" en un "
-#~ "sistema POSIX)\n"
-#~ "o lance la aplicación desde el directorio de stellarium.\n"
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Encontrados los archivos de datos en %s : versión local.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Se crearán los archivos de configuración en %s\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "Intento de crear el directorio %s\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "No se puede crear el archivo %sconfig.ini\n"
-#~ "Si el directorio %s no se encuentra por favor creelo manualmente.\n"
-#~ "Si no, compruebe que tiene acceso a %s\n"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data..."
-#~ msgstr "Cargando imágenes de las Constelaciones : %d/%d"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos double stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos periodic variable stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos/SAO star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading SAO star data "
-#~ msgstr "Cargando datos de Nebulosas "
-
-#, fuzzy
-#~ msgid "Loading star name data "
-#~ msgstr "Cargando datos del Sistema Solar... "
-
-#, fuzzy
-#~ msgid "Loading NGC data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading Sharpless data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading Cadwell reference data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "(%d deep space objects)\n"
-#~ msgstr "(%d objetos del cielo profundo)...\n"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Cargando posición: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(el paisaje es: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Grabando posición %s en el archivo %s\n"
-
-#, fuzzy
-#~ msgid "Loading Cities data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#~ msgid "Saving rendering options in file "
-#~ msgstr "Grabando opciones de renderizado en archivo "
-
-#~ msgid "Saving video size "
-#~ msgstr "Grabando el tamaño de video "
+#~ msgid " (Variable)"
+#~ msgstr " (Variable)"
 
 #~ msgid " in file "
 #~ msgstr " en el archivo "
 
-#~ msgid ""
-#~ "The current config file is from a previous version (>=0.6.0).\n"
-#~ "Previous options will be imported in the new config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión anterior (>=0.6.0).\n"
-#~ "Las anteriores opciones serán importadas en el nuevo archivo de "
-#~ "configuración.\n"
-
-#~ msgid ""
-#~ "The current config file is from a version too old for parameters to be "
-#~ "imported (%s).\n"
-#~ "It will be replaced by the default config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión demasiado antigua "
-#~ "como para poder importar sus parámetros (%s).\n"
-#~ "Será reemplazado por el archivo de configuración por defecto.\n"
-
-#~ msgid "Loading configuration file "
-#~ msgstr "Cargando el archivo de configuración "
-
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr ""
-#~ "ERROR : El archivo de configuración actual es de una versión diferente ("
-
-#, fuzzy
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de "
-#~ "error y tus comentarios \n"
-#~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
-#~ "\n"
-
-#, fuzzy
-#~ msgid "Loading Solar System data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Canes"
-#~ msgstr "Planetas"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %s Light Years\n"
-#~ "Hip : %.4d\n"
-#~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f\n"
+#~ msgid "%s%s: mag %.1f"
+#~ msgstr "%s%s: mag %.1f"
 
 #, fuzzy
 #~ msgid "%s: mag %.1f %s"
 #~ msgstr "%s: mag %.1f"
 
 #, fuzzy
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Nombre : %s (NGC %u)\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
+#~ msgid "(%d deep space objects)\n"
+#~ msgstr "(%d objetos del cielo profundo)...\n"
 
-#, fuzzy
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %.8f AU"
-#~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f"
+#~ msgid "(Dbl)"
+#~ msgstr "(Dbl)"
 
-#~ msgid "%s%s: mag %.1f"
-#~ msgstr "%s%s: mag %.1f"
+#~ msgid "(Var)"
+#~ msgstr "(Var)"
+
+#~ msgid "(landscape is: \"%s\")\n"
+#~ msgstr "(el paisaje es: \"%s\")\n"
+
+#~ msgid ": mag "
+#~ msgstr ": mag "
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Encontrados los archivos de datos en %s : versión local.\n"
+
+#~ msgid "Alt : "
+#~ msgstr "Alt : "
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2515,6 +2216,217 @@ msgstr "Segundos"
 #~ "CTRL + S : Tomar una captura de pantalla\n"
 #~ "CTRL + R : Activar registro de scripts\n"
 
+#~ msgid "Az  : "
+#~ msgstr "Az : "
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Salir\n"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid ""
+#~ "Can't create the file %sconfig.ini\n"
+#~ "If the directory %s is missing please create it by hand.\n"
+#~ "If not, check that you have access to %s\n"
+#~ msgstr ""
+#~ "No se puede crear el archivo %sconfig.ini\n"
+#~ "Si el directorio %s no se encuentra por favor creelo manualmente.\n"
+#~ "Si no, compruebe que tiene acceso a %s\n"
+
+#, fuzzy
+#~ msgid "Canes"
+#~ msgstr "Planetas"
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Puntos cardinales: "
+
+#~ msgid "Cat: NGC "
+#~ msgstr "Catálogo: NGC "
+
+#~ msgid "Chart mode"
+#~ msgstr "Modo carta"
+
+#~ msgid "Constellation"
+#~ msgstr "Constelación"
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Nombres de constelaciones: "
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Líneas de Constelaciones: "
+
+#~ msgid "DE : "
+#~ msgstr "DEC : "
+
+#~ msgid "Distance : "
+#~ msgstr "Distancia : "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "Compensación del centrado E-O: "
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "ERROR : No se puede encontrar el directorio de datos en :\n"
+#~ "%s/ ni en ./ ni en ../\n"
+#~ "Usted puede instalar el software completo (teclee \"make install\" en un "
+#~ "sistema POSIX)\n"
+#~ "o lance la aplicación desde el directorio de stellarium.\n"
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr ""
+#~ "ERROR : El archivo de configuración actual es de una versión diferente ("
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Modo de proyección Ojo de pez"
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 25190"
+
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Cargando Catálogo Caldwell:"
+
+#, fuzzy
+#~ msgid "Loading Cadwell reference data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#, fuzzy
+#~ msgid "Loading Cities data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#, fuzzy
+#~ msgid "Loading Constellation boundary data..."
+#~ msgstr "Cargando imágenes de las Constelaciones : %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Cargando Catálogo HIP: %d/%d"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Cargando Catálogos HIP/SAO : %d/%d"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Cargando catálogo Hipparcos:"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos double stars..."
+#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos periodic variable stars..."
+#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos star data..."
+#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
+
+#, fuzzy
+#~ msgid "Loading Hipparcos/SAO star data..."
+#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
+
+#, fuzzy
+#~ msgid "Loading NGC data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#, fuzzy
+#~ msgid "Loading NGC name data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Cargando Catálogo SAO: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading SAO star data "
+#~ msgstr "Cargando datos de Nebulosas "
+
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Cargando Catálogo Sharpless:"
+
+#, fuzzy
+#~ msgid "Loading Sharpless data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#, fuzzy
+#~ msgid "Loading Solar System data..."
+#~ msgstr "Cargando datos del Sistema Solar..."
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Cargando el archivo de configuración "
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Cargando posición: \"%s\", "
+
+#, fuzzy
+#~ msgid "Loading star name data "
+#~ msgstr "Cargando datos del Sistema Solar... "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Magnitud : "
+
+#~ msgid "Message"
+#~ msgstr "Mensaje"
+
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Tasa de Meteoritos por minuto"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Misc:\n"
+#~ "9 : Cambiar la tasa de meteoros\n"
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "Compensación del centrado N-S: "
+
+#~ msgid "Name : "
+#~ msgstr "Nombre : "
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s (NGC %u)\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f"
+#~ msgstr ""
+#~ "Nombre : %s (NGC %u)\n"
+#~ "AD : %s\n"
+#~ "DE : %s\n"
+#~ "Mag : %.2f"
+
+#, fuzzy
+#~ msgid ""
+#~ "Name : %s%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %s Light Years\n"
+#~ "Hip : %.4d\n"
+#~ msgstr ""
+#~ "Nombre :%s%s\n"
+#~ "AD : %s\n"
+#~ "DE : %s\n"
+#~ "Distancia : %.8f UA\n"
+#~ "Magnitud : %.2f\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Name :%s%s\n"
+#~ "RA : %s\n"
+#~ "DE : %s\n"
+#~ "Magnitude : %.2f\n"
+#~ "Distance : %.8f AU"
+#~ msgstr ""
+#~ "Nombre :%s%s\n"
+#~ "AD : %s\n"
+#~ "DE : %s\n"
+#~ "Distancia : %.8f UA\n"
+#~ "Magnitud : %.2f"
+
 #~ msgid ""
 #~ "Name :%s%s%s\n"
 #~ "Hip : %.4d\n"
@@ -2527,3 +2439,91 @@ msgstr "Segundos"
 #~ "AD : %s\n"
 #~ "DE : %s\n"
 #~ "Mag : %.2f"
+
+#~ msgid "Nebula"
+#~ msgstr "Nebulosa"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planeta/Luna"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planetas y Lunas"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Por favor comprueba si tienes la última versión y envía un informe de "
+#~ "error y tus comentarios \n"
+#~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
+#~ "\n"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Guardar la opción en la pestaña \"Localización\""
+
+#~ msgid "RA : "
+#~ msgstr "AR : "
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "Grabando posición %s en el archivo %s\n"
+
+#~ msgid "Saving rendering options in file "
+#~ msgstr "Grabando opciones de renderizado en archivo "
+
+#~ msgid "Saving video size "
+#~ msgstr "Grabando el tamaño de video "
+
+#~ msgid "Size : "
+#~ msgstr "Tamaño : "
+
+#~ msgid "Spectral : "
+#~ msgstr "Espectral : "
+
+#~ msgid "Star No./Name"
+#~ msgstr "No./Nombre de estrella"
+
+#~ msgid ""
+#~ "The current config file is from a previous version (>=0.6.0).\n"
+#~ "Previous options will be imported in the new config file.\n"
+#~ msgstr ""
+#~ "El archivo de configuración actual es de una versión anterior (>=0.6.0).\n"
+#~ "Las anteriores opciones serán importadas en el nuevo archivo de "
+#~ "configuración.\n"
+
+#~ msgid ""
+#~ "The current config file is from a version too old for parameters to be "
+#~ "imported (%s).\n"
+#~ "It will be replaced by the default config file.\n"
+#~ msgstr ""
+#~ "El archivo de configuración actual es de una versión demasiado antigua "
+#~ "como para poder importar sus parámetros (%s).\n"
+#~ "Será reemplazado por el archivo de configuración por defecto.\n"
+
+#~ msgid "Try to create directory %s\n"
+#~ msgstr "Intento de crear el directorio %s\n"
+
+#~ msgid "Type : "
+#~ msgstr "Tipo : "
+
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Se crearán los archivos de configuración en %s\n"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "ej. 60718 (aCrux) o Canopus"
+
+#~ msgid "eg. Crux"
+#~ msgstr "ej. Crux"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "ej. M83, NGC 7009, IC 2118"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "ej. Plutón o Io"
+
+#~ msgid "ly"
+#~ msgstr "al"
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "para guardar paisaje actual como predeterminado."
