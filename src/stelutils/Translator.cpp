@@ -34,7 +34,7 @@ map<string, wstring> Translator::iso639codes;
 string Translator::systemLangName = "C";
 
 // Use system locale language by default
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, LOCALEDIR, "system");
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
 
 #ifdef WIN32
 # include <windows.h>
