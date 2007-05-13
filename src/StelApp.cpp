@@ -88,16 +88,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 		cerr << "ERROR when locating font map file: " << e.what() << endl;
 	}
 	fontManager = new StelFontMgr(fontMapFile);
-	string skyCulturesDir("");
-	try
-	{
-		skyCulturesDir = stelFileMgr->findFile("data/sky_cultures", StelFileMgr::DIRECTORY).string();
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR when locating sky cultures directory: " << e.what() << endl;
-	}
-	skyCultureMgr = new StelSkyCultureMgr(skyCulturesDir);
+	skyCultureMgr = new StelSkyCultureMgr();
 	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore();

@@ -2026,7 +2026,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	// Load culture star names in english
 	try
 	{
-		load_common_names(StelApp::getInstance().getFileMgr().findFile("data/sky_cultures/" + skyCultureDir + "/star_names.fab").string());
+		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab").string());
 	}
 	catch(exception& e)
 	{
