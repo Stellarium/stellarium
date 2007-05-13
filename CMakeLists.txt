@@ -86,3 +86,6 @@ ADD_SUBDIRECTORY( skycultures )
 
 ########### install files ###############
 
+########### Generate doxygen doc ###############
+ADD_CUSTOM_TARGET(doc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
+

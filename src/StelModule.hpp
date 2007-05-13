@@ -34,7 +34,6 @@
 #include "StelTypes.hpp"
 #include "callbacks.hpp"
 
-
 // Predeclaration
 class Projector;
 class Navigator;
@@ -44,10 +43,14 @@ class InitParser;
 
 using namespace std;
 
-/**
-	@author Fabien Chereau <stellarium@free.fr>
-	TODO: Use boost::bind + boost::function instead of callback
-*/
+//! @brief This is the common base class for all the main components of stellarium.
+//!
+//! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
+//! Every new component should herit and implement the methods defined in StelModule.hpp.
+//! Once a module is registered into the StelModuleMgr, it is automatically managed by the program.
+//! Because StelModules are very generic components, it is also possible to load them dynamically,
+//! thus enabling creation of external plug-ins for stellarium.
+//! @author Fabien Chereau
 class StelModule{
 public:
 	StelModule() {;}
