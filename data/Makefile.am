@@ -7,4 +7,4 @@ pkgdata_DATA = icon.bmp stellarium.ico landscapes.ini ssystem.ini name.fab \
 	variable_txt.dat ngc2000names.dat default_config.ini nebula_textures.fab \
 	DejaVuSansMono.ttf constellations_boundaries.dat fontmap.dat iso639-1.utf8
 EXTRA_DIST = $(pkgdata_DATA) $(man_MANS)
-SUBDIRS = sky_cultures scripts
+SUBDIRS = scripts
