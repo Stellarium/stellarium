@@ -30,9 +30,13 @@ class LoadingBar;
 
 class Observer;
 
-//!  @brief Main class for stellarium core processing.
+//! @brief Main class for stellarium core processing.
 //!
-//! Manage all the base modules which must be present in stellarium
+//! This class provide services like management of sky projections, tone conversion,
+//! or reference frames conversion. It is used by the StelModules to update and display themself.
+//! There is currently only one StelCore instance in Stellarium, but in the future they may be more, 
+//! allowing for example to display several independent view of the sky at the same time.
+//! @author Fabien Chereau
 class StelCore
 {
 public:
