@@ -10,11 +10,5 @@ ADD_SUBDIRECTORY( inuit )
 
 ########### install files ###############
 
-INSTALL_FILES( /share/@PACKAGE@/data/sky_cultures FILES  )
+INSTALL_FILES( /share/${PACKAGE}/data/sky_cultures FILES  )
 
-
-
-#original Makefile.am contents follow:
-
-#pkgdatadir = $(datadir)/@PACKAGE@/data/sky_cultures
-#SUBDIRS = polynesian western chinese egyptian korean navajo lakota inuit

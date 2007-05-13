@@ -21,7 +21,7 @@ FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
    SET(_gmoFiles)
-   GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
+   GET_FILENAME_COMPONENT(_potBaseName ${_potFile} NAME_WE)
    GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
 
    SET(_addToAll)
