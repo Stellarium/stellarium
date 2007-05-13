@@ -33,7 +33,7 @@ class InitParser;
 */
 class StelSkyCultureMgr{
 public:
-    StelSkyCultureMgr(const string& cultureDirPath);
+    StelSkyCultureMgr();
 
     ~StelSkyCultureMgr();
 	
