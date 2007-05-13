@@ -101,7 +101,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	string conArtFile("");
 	try
 	{
-		conArtFile = fileMan.findFile("data/sky_cultures/"+newSkyCulture+"/constellationsart.fab").string();
+		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab").string();
 	}
 	catch(exception& e)
 	{
@@ -110,11 +110,11 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 				
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("data/sky_cultures/"+newSkyCulture+"/constellationship.fab").string(),
+		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab").string(),
 				conArtFile, lb);
 			
 		// load constellation names
-		loadNames(fileMan.findFile("data/sky_cultures/" + newSkyCulture + "/constellation_names.eng.fab").string());
+		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab").string());
 	
 		// Translate constellation names for the new sky culture
 		updateI18n();

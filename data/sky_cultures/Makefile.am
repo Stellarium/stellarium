@@ -1,2 +1,2 @@
-pkgdatadir = $(datadir)/@PACKAGE@/data/sky_cultures
+pkgdatadir = $(datadir)/@PACKAGE@/skycultures
 SUBDIRS = polynesian western chinese egyptian korean navajo lakota inuit

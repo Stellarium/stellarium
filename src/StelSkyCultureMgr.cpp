@@ -18,6 +18,7 @@
  */
 
 #include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "Translator.hpp"
 #include "InitParser.hpp"
 #include "StelApp.hpp"
@@ -27,33 +28,33 @@
 #include <dirent.h>
 #include <cassert>
 
-StelSkyCultureMgr::StelSkyCultureMgr(const string& cultureDirPath)
+StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	struct dirent *entryp;
-	DIR *dp;
+	set<string> cultureDirNames;
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
-	if ((dp = opendir(cultureDirPath.c_str())) == NULL)
+	try
 	{
-		cerr << "Unable to find culture directory:" << cultureDirPath << endl;
-		assert(0);
+		cultureDirNames = fileMan.listContents("skycultures",StelFileMgr::DIRECTORY);
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while trying list sky cultures:" << e.what() << endl;	
 	}
 	
-	while ((entryp = readdir(dp)) != NULL)
+	for(set<string>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
 	{
-		string tmp = entryp->d_name;
-		string tmpfic = cultureDirPath+"/"+tmp+"/info.ini";
-		FILE* fic = fopen(tmpfic.c_str(), "r");
-		if (fic)
+		try
 		{
-			InitParser conf;
-			conf.load(tmpfic);
-			dirToNameEnglish[tmp] = conf.get_str("info:name");
-			// cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
-			fclose(fic);
+			InitParser pd;
+			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini").string());
+			dirToNameEnglish[*dir] = pd.get_str("info:name");
 		}
-	}
-	
-	closedir(dp);
+		catch (exception& e)
+		{
+			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
+		}
+	}	
 }
 
 
