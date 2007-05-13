@@ -199,11 +199,4 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 
 
 #@LIBINTL@
-#
 
-#SUBDIRS = planetsephems stelutils
-#noinst_HEADERS = 
-#
-#ACLOCAL_AMFLAGS = -I config/m4
-#AM_CXXFLAGS = $(BOOST_CPPFLAGS)
-#AM_LDFLAGS = $(BOOST_LDFLAGS) $(BOOST_THREAD_LIB)
