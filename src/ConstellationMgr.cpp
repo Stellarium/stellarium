@@ -111,7 +111,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	try
 	{
 		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab").string(),
-				conArtFile, lb);
+				conArtFile, newSkyCulture, lb);
 			
 		// load constellation names
 		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab").string());
@@ -192,7 +192,7 @@ void ConstellationMgr::setFontSize(double newFontSize)
 }
 
 // Load line and art data from files
-void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, LoadingBar& lb)
+void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb)
 {
 	std::ifstream inf(fileName.c_str());
 
@@ -295,7 +295,30 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		else
 		{
 			StelApp::getInstance().getTextureManager().setDefaultParams();
-			cons->art_tex = StelApp::getInstance().getTextureManager().createTexture(texfile);
+			string texturePath(texfile);
+			try
+			{
+				texturePath = StelApp::getInstance().getFileMgr().findFile(string("skycultures/")+cultureName+"/"+texfile).string();
+			}
+			catch(exception& e)
+			{
+				// if the texture isn't found in the skycultures/[culture] directory,
+				// try the central textures diectory.
+				cerr << "WARNING, could not locate texture file " << texfile
+				     << " in the skycultures/" << cultureName
+				     << " directory...  looking in general textures/ directory..." 
+				     << endl; 
+				try
+				{
+					texturePath = StelApp::getInstance().getFileMgr().findFile(string("textures/")+texfile).string();
+				}
+				catch(exception& e2)
+				{
+					cerr << "ERROR: could not find texture, " << texfile << ": " << e2.what() << endl;
+				}
+			}
+			
+			cons->art_tex = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 			int texSizeX, texSizeY;
 			cons->art_tex->getDimensions(texSizeX, texSizeY);
 

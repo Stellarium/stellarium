@@ -29,4 +29,3 @@ pkgdata_DATA = mercury.png venus.png earth-clouds.jpg earthmap.png mars.png jupi
 		m97dumont.png n1499bousquet.png n2244bousquet.png n253bousquet.png n6946dumont.png \
 		n869-884spano.png
 EXTRA_DIST = $(pkgdata_DATA)
-SUBDIRS = constellation-art
