@@ -292,6 +292,6 @@ else
 	esac
 fi
 
-AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/stelutils/iniparser/Makefile src/planetsephems/Makefile src/stelutils/Makefile data/Makefile doc/Makefile textures/Makefile landscapes/Makefile landscapes/guereins/Makefile landscapes/hurricane/Makefile landscapes/moon/Makefile landscapes/ocean/Makefile landscapes/trees/Makefile textures/constellation-art/Makefile textures/constellation-art/inuit/Makefile data/scripts/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile data/sky_cultures/chinese/Makefile data/sky_cultures/egyptian/Makefile data/sky_cultures/korean/Makefile data/sky_cultures/navajo/Makefile data/sky_cultures/lakota/Makefile data/sky_cultures/inuit/Makefile intl/Makefile po/Makefile.in m4/Makefile])
+AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/stelutils/iniparser/Makefile src/planetsephems/Makefile src/stelutils/Makefile data/Makefile doc/Makefile textures/Makefile landscapes/Makefile landscapes/guereins/Makefile landscapes/hurricane/Makefile landscapes/moon/Makefile landscapes/ocean/Makefile landscapes/trees/Makefile textures/constellation-art/Makefile textures/constellation-art/inuit/Makefile data/scripts/Makefile skycultures/Makefile skycultures/polynesian/Makefile skycultures/western/Makefile skycultures/chinese/Makefile skycultures/egyptian/Makefile skycultures/korean/Makefile skycultures/navajo/Makefile skycultures/lakota/Makefile skycultures/inuit/Makefile intl/Makefile po/Makefile.in m4/Makefile])
 
 AC_OUTPUT
