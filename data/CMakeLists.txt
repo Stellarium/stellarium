@@ -1,4 +1,3 @@
-ADD_SUBDIRECTORY( sky_cultures ) 
 ADD_SUBDIRECTORY( scripts ) 
 
 ########### install files ###############

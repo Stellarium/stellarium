@@ -82,6 +82,7 @@ ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc ) 
 ADD_SUBDIRECTORY( po ) 
 ADD_SUBDIRECTORY( landscapes ) 
+ADD_SUBDIRECTORY( skycultures ) 
 
 ########### install files ###############
 
