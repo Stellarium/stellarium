@@ -72,7 +72,11 @@ public:
 	void loadNames(const string& names_file);
 	
 	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
-	void loadLinesAndArt(const string& lines_file, const string& art_file, LoadingBar& lb);
+	//! @param fileName The name of the constellation data file
+	//! @param artFileName The name of the constellation art data file
+	//! @param cultureName A string ID of the current skyculture
+	//! @param lb The loading progress bar object
+	void loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb);
 	
 	//! Set constellation art fade duration
 	void setArtFadeDuration(float duration);
