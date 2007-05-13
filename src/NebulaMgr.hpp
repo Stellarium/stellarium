@@ -110,7 +110,15 @@ public:
 
 	StelObject* search(const string& name);  // search by name M83, NGC 1123, IC 1234
 		
-private:
+	//! Load a set of nebula images
+	//! Each sub-directory of the INSTALLDIR/nebulae directory contains a set of 
+	//! nebula textures.  The sub-directory is the setName.  Each set has its
+	//! own nebula_textures.fab file and corresponding image files.
+	//! This function loads a set of textures.
+	//! @param setName a string which corresponds to the directory where the set resides
+	void loadNebulaSet(const string& setName, LoadingBar& lb);
+	
+	private:
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
@@ -121,7 +129,11 @@ private:
 	Nebula *searchIC(unsigned int IC);
 	bool loadNGC(const string& fileName, LoadingBar& lb);
 	bool loadNGCNames(const string& fileName);
-	bool loadTextures(const string& fileName, LoadingBar& lb);
+	
+	//! loads the textures for a specified nebula texture setName
+	//! @param setName The name of the sub-directory in .../nebulae in which the set resides
+	//! @param lb the loading progress bar object
+	bool loadTextures(const string& setName, LoadingBar& lb);
 
 	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;
