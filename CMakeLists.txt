@@ -4,6 +4,7 @@ SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "9")
 SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
+SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 SET(CMAKE_BUILD_TYPE Debug)   # Choices are None Debug Release RelWithDebInfo MinSizeRel
@@ -81,7 +82,6 @@ ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc ) 
 ADD_SUBDIRECTORY( po ) 
 ADD_SUBDIRECTORY( landscapes ) 
-
 
 ########### install files ###############
 
