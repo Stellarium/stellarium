@@ -29,6 +29,7 @@
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
 
+//! @brief Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
 {
 	friend class StelTextureMgr;
@@ -83,7 +84,7 @@ private:
 	DynamicRangeMode dynamicRangeMode;
 };
 
-//! Abstract class for any Image loaders.
+//! @brief Abstract class for any Image loaders.
 class ImageLoader
 {
 public:
@@ -94,7 +95,7 @@ public:
 	virtual bool loadImage(const std::string& filename, ManagedSTexture& tex) = 0;
 };
 
-//! Struct used for returning queued textures loaded in thread
+//! @brief Describe queued textures loaded in thread
 struct QueuedTex
 {
 	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, const std::string& alocalPath) :
@@ -105,10 +106,13 @@ struct QueuedTex
 	std::string localPath;
 };
 
-/**
- * Class used to manage textures loading and manipulation.
- * @author Fabien Chereau <stellarium@free.fr>
- */
+//! @brief Manage textures loading and manipulation.
+//!
+//! The texture loader has a current state defining the way the textures will be loaded in memory,
+//! that is, whether mimap should be generated, the wrap mode or mag and min filters.
+//! The state should be reinitialized by calling the StelTextureMgr::setDefaultParams method before any texture loading.
+//! It provides function for loading images in a separate threads.
+//! @author Fabien Chereau
 class StelTextureMgr
 {
 public:

@@ -11,7 +11,8 @@
 using namespace std;
 namespace fs = boost::filesystem;
 
-//! @class StelFileMgr provides utilities for locating and handling files.
+//! @brief Provides utilities for locating and handling files.
+//!
 //! StelFileMgr provides functions for locating files.  It maintains a list of 
 //! directories in which to look for files called the search path. Typcially this
 //! includes the Stellarium installatiom directory, and a per-user settings 

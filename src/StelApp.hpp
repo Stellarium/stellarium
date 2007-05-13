@@ -46,7 +46,14 @@ class StelFileMgr;
 
 using namespace std;
 
-//! Singleton main Stellarium application class.
+//! @brief Singleton main Stellarium application class.
+//!
+//! This is the central class of Stellarium.
+//! Only one singleton instance of this class is created and can be accessed from anywhere else.
+//! This class is the access point to several "Manager" class which provide application-wide services for managment of font,
+//! textures, localization, sky culture, and in theory all other services used by the other part of the program.
+//! The StelApp class is also the one managing the StelModules in a generic maner by calling their update,
+//! drawing and other methods when needed.
 //! @author Fabien Chereau
 class StelApp
 {
@@ -187,16 +194,18 @@ public:
 	void restoreFrom2DfullscreenProjection(void) const;
 	
 	//! Get the width of the openGL screen
+	//! @return width of the openGL screen in pixels
 	virtual int getScreenW() const = 0;
 	
 	//! Get the height of the openGL screen
+	//! @return height of the openGL screen in pixels
 	virtual int getScreenH() const = 0;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
 	///////////////////////////////////////////////////////////////////////////	
 	
-	//! @brief Start the main loop and return when the program ends.
+	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop(void) = 0;
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)
@@ -227,9 +236,8 @@ protected:
 	//! Update all object according to the delta time
 	void update(int delta_time);
 
-	//! Draw all
-	// Return the max squared distance in pixels that any object has
-	// travelled since the last update.
+	//! Draw all registered StelModule in the order defined by the order lists.
+	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	double draw(int delta_time);
 	
 	// Handle mouse clics
@@ -256,6 +264,7 @@ protected:
 
 	//! Call this when you want to make the window (not) resizable
 	virtual void setResizable(bool resizable) = 0;
+	
 private:
 	
 	// Set the colorscheme for all the modules
