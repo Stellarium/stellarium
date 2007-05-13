@@ -163,7 +163,7 @@ double Nebula::get_close_fov(const Navigator*) const
 
 // Read nebula data from file and compute x,y and z;
 // returns false if can't parse record
-bool Nebula::readTexture(const string& record)
+bool Nebula::readTexture(const string& setName, const string& record)
 {
 	string tex_name;
 	string name;
@@ -209,7 +209,7 @@ bool Nebula::readTexture(const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = StelApp::getInstance().getTextureManager().createTexture(tex_name, true);
+	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, true);
 
 	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 

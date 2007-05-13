@@ -72,12 +72,16 @@ public:
 	void setLabelColor(const Vec3f& v) {label_color = v;}
 	void setCircleColor(const Vec3f& v) {circle_color = v;}
 
-	// Read the Nebula data from a file
-    bool readTexture(const string&);
-    bool readNGC(char *record);
+	//! reads a texture into memory
+	//! read a nebula texture for a given nebula set and record of the
+	//! nebula_textures.fab file for that set.
+	//! @param setName The string name of the set of nebulas being processed
+	//! @param record The string containing the current record from nebula_textures.fab
+	bool readTexture(const string& setName, const string& record);
+	bool readNGC(char *record);
 
-    wstring getNameI18n(void) const {return nameI18;}
-    string getEnglishName(void) const {return englishName;}
+	wstring getNameI18n(void) const {return nameI18;}
+	string getEnglishName(void) const {return englishName;}
     
 	//! @brief Get the printable nebula Type
 	//! @return the nebula type code.

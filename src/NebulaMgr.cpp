@@ -65,16 +65,14 @@ NebulaMgr::~NebulaMgr()
 // read from stream
 void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 {
-	try
-	{
-		loadNGC(StelApp::getInstance().getFileMgr().findFile("data/ngc2000.dat").string(), lb);
-		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("data/ngc2000names.dat").string());
-		loadTextures(StelApp::getInstance().getFileMgr().findFile("data/nebula_textures.fab").string(), lb);
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR while loading nebula data: " << e.what() << endl;
-	}
+	// TODO: mechanism to specify which sets get loaded at start time.
+	// candidate methods:
+	// 1. config file option (list of sets to load at startup)
+	// 2. load all
+	// 3. flag in nebula_textures.fab (yuk)
+	// 4. info.ini file in each set containing a "load at startup" item
+	// For now (0.9.0), just load the default set
+	loadNebulaSet("default", lb);
 
 	double fontSize = 12;
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
@@ -254,6 +252,19 @@ StelObject* NebulaMgr::search(const string& name)
 
 }
 
+void NebulaMgr::loadNebulaSet(const string& setName, LoadingBar& lb)
+{
+	try
+	{
+		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat").string(), lb);
+		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat").string());
+		loadTextures(setName, lb);
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while loading nebula data set " << setName << ": " << e.what() << endl;
+	}
+}
 
 // Look for a nebulae by XYZ coords
 StelObject* NebulaMgr::search(Vec3f Pos)
@@ -477,71 +488,80 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 	return true;
 }
 
-bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
+bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 {
-	cout << "Loading Nebula Textures...";
-
-	std::ifstream inf(fileName.c_str());
-	if (!inf.is_open())
+	cout << "Loading Nebula Textures for set " << setName << "...";
+	string texFile;
+	try
 	{
-		cerr << "Can't open nebula catalog " << fileName << endl;
-		return false;
-	}
-
-	// determine total number to be loaded for percent complete display
-	string record;
-	int total=0;
-	while(!getline(inf, record).eof())
-	{
-		if (record.empty() || record[0]=='#')
-			continue;
-		++total;
-	}
-	inf.clear();
-	inf.seekg(0);
-
-	int current = 0;
-	int NGC;
-	while(!getline(inf, record).eof())
-	{
-		// Draw loading bar
-		++current;
-		lb.SetMessage(_("Loading Nebula Textures:") + StelUtils::intToWstring(current) + L"/" + StelUtils::intToWstring(total));
-		lb.Draw((float)current/total);
-
-		if (record.empty() || record[0]=='#')
-			continue;
-
-		istringstream istr(record);
-		istr >> NGC;
-
-		Nebula *e = (Nebula*)searchNGC(NGC);
-		if (e)
+		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab").string();
+		std::ifstream inf(texFile.c_str());
+		if (!inf.is_open())
 		{
-			if (!e->readTexture(record)) // reading error
-			{
-				cerr << "Error while reading texture for nebula " << e->englishName << endl;
-				cerr << "Record was " << record << endl;
-			}
-		} else {
-			// Allow non NGC nebulas/textures!
-
-			if( NGC != -1) cout << "Nebula with unrecognized NGC number " << NGC << endl;
-			e = new Nebula;
-			if (!e->readTexture(record)) { // reading error
-				cerr << "Error while reading texture for nebula " << e->englishName << endl;
-				delete e;
-
-			} else {
-
-				neb_array.push_back(e);
-				nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
-			}
+			throw(runtime_error("cannot open file for reading: " + texFile));
 		}
 	
+		// determine total number to be loaded for percent complete display
+		string record;
+		int total=0;
+		while(!getline(inf, record).eof())
+		{
+			if (record.empty() || record[0]=='#')
+				continue;
+			++total;
+		}
+		inf.clear();
+		inf.seekg(0);
+
+		int current = 0;
+		int NGC;
+		while(!getline(inf, record).eof())
+		{
+		// Draw loading bar
+			if (record.empty() || record[0]=='#')
+				continue;
+
+			++current;
+			lb.SetMessage(_("Loading Nebula Textures:") + StelUtils::intToWstring(current) + L"/" + StelUtils::intToWstring(total));
+			lb.Draw((float)current/total);
+
+			istringstream istr(record);
+			istr >> NGC;
+
+			Nebula *e = (Nebula*)searchNGC(NGC);
+			if (e)
+			{
+				if (!e->readTexture(setName, record)) // reading error
+				{
+					cerr << "Error while reading nebula texture " << setName << "/" << e->englishName << endl;
+					cerr << "Record was " << record << endl;
+				}
+			} 
+			else
+			{
+			// Allow non NGC nebulas/textures!
+				if (NGC != -1) cout << "Nebula with unrecognized NGC number " << NGC << endl;
+				e = new Nebula;
+				if (!e->readTexture(setName, record)) { // reading error
+					cerr << "Error while reading texture " << e->englishName << endl;
+					delete e;
+				} 
+				else 
+				{
+					neb_array.push_back(e);
+					nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+				}
+			}
+	
+		}
+		cout << "(" << total << " textures loaded)" << endl;
+		return true;	
 	}
-	cout << "(" << total << " textures loaded)" << endl;
-	return true;
+	catch(exception& e)
+	{
+		cerr << "ERROR: unable to load nebula texture set \"" << setName << "\": " << e.what() << endl;
+		return false;		
+	}
 }
 
 //! @brief Update i18 names from english names according to passed translator
