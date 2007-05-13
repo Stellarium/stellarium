@@ -10,5 +10,5 @@ ADD_SUBDIRECTORY( inuit )
 
 ########### install files ###############
 
-INSTALL_FILES( /share/${PACKAGE}/data/sky_cultures FILES  )
+INSTALL_FILES( /share/${PACKAGE}/skycultures FILES  )
 
