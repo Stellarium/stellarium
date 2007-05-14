@@ -1287,9 +1287,15 @@ bool EditBox::onKey(Uint16 k, Uint8 s, StelMod mod)
            }
         }
         else if (k == StelKey_ESCAPE) setText(L"");
-        else if ((k >= StelKey_0 && k <= StelKey_9) || (k >= StelKey_a && k <= StelKey_z) 
-        || (k >= StelKey_A_LIM && k <= StelKey_Z_LIM) || (k >= 224 && k <= 255) 
-		|| k == StelKey_SPACE || k == StelKey_UNDERSCORE || k == StelKey_MINUS || k == StelKey_PLUS)
+	else if ((k >= StelKey_0 && k <= StelKey_9)
+		|| (k >= StelKey_a && k <= StelKey_z )
+		|| (k >= StelKey_A_LIM && k <= StelKey_Z_LIM) 
+		|| (k >= StelKey_EXCLAIM && k <= StelKey_SLASH)
+		|| (k >= StelKey_COLON && k <= StelKey_AT)
+		|| (k >= StelKey_LEFTBRACKET && k <= StelKey_BACKQUOTE)
+		|| (k >= 224 && k <= 255)
+		||  k == StelKey_SPACE
+		||  k == StelKey_UNDERSCORE)
         {
 			text = lastText;
             wstring newtext = text.substr(0, cursorPos);
@@ -1298,6 +1304,18 @@ bool EditBox::onKey(Uint16 k, Uint8 s, StelMod mod)
             text = newtext;
             cursorPos++;
         }
+	else if (k >= StelKey_a && k <= StelKey_z)
+	{
+		wstring newtext = text.substr(0, cursorPos);
+		if (mod & StelMod_SHIFT)
+		{
+			cout << "shift + " << k << " pressed" << endl; 
+		}
+		else
+		{			
+			cout << k << " pressed" << endl; 
+		}
+	}
         else
             return false;
 
