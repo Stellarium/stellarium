@@ -128,7 +128,7 @@ StelApp::~StelApp()
 /*************************************************************************
  Get the configuration file path.
 *************************************************************************/
-string StelApp::getConfigFilePath(void) const
+string StelApp::getConfigFilePath() const
 {
 	return stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string();
 }
@@ -224,14 +224,14 @@ void StelApp::setViewPortDistorterType(const string &type)
 	                                      core->getProjection(),conf);
 }
 
-string StelApp::getViewPortDistorterType(void) const
+string StelApp::getViewPortDistorterType() const
 {
 	if (distorter) return distorter->getType();
 	return "none";
 }
 
 
-void StelApp::init(void)
+void StelApp::init()
 {
 	Translator::initSystemLanguage();
 
@@ -604,7 +604,7 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 
 
 //! Set the drawing mode in 2D for drawing in the full screen
-void StelApp::set2DfullscreenProjection(void) const
+void StelApp::set2DfullscreenProjection() const
 {
 	glViewport(0,0,getScreenW(),getScreenH());
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
@@ -619,7 +619,7 @@ void StelApp::set2DfullscreenProjection(void) const
 }
 
 //! Restore previous projection mode
-void StelApp::restoreFrom2DfullscreenProjection(void) const
+void StelApp::restoreFrom2DfullscreenProjection() const
 {
 	glMatrixMode(GL_PROJECTION);		// Restore previous matrix
 	glPopMatrix();
@@ -643,7 +643,7 @@ void StelApp::setColorScheme(const std::string& fileName, const std::string& sec
 }
 
 //! Set flag for activating night vision mode
-void StelApp::setVisionModeNight(void)
+void StelApp::setVisionModeNight()
 {
 	if (!getVisionModeNight())
 	{
@@ -654,7 +654,7 @@ void StelApp::setVisionModeNight(void)
 
 //! Set flag for activating chart vision mode
 // ["color" section name used for easier backward compatibility for older configs - Rob]
-void StelApp::setVisionModeNormal(void)
+void StelApp::setVisionModeNormal()
 {
 	if (!getVisionModeNormal())
 	{

@@ -43,12 +43,14 @@ FIND_PACKAGE(FreeType2 REQUIRED)
 FIND_PACKAGE(CURL)
 FIND_PACKAGE(Gettext REQUIRED)
 
+########### Others ###########
+#SET(USE_QT4 1)
+SET(USE_SDL 1)
 
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)
 TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
 SET(HAVE_LIBCURL ${CURL_FOUND})
-SET(USE_QT4 1)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 ########### Set some global variables ###########
