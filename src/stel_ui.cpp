@@ -1136,7 +1136,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 
 		case StelKey_f:
             if (mod & COMPATIBLE_StelMod_CTRL) {
-				FlagSearch = !FlagSearch;
+		    		FlagSearch = ! search_win->getVisible();;
 				search_win->setVisible(FlagSearch);
             } else {
 				app->commander->execute_command( "flag fog toggle");
