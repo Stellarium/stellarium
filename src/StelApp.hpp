@@ -52,7 +52,7 @@ using namespace std;
 //! Only one singleton instance of this class is created and can be accessed from anywhere else.
 //! This class is the access point to several "Manager" class which provide application-wide services for managment of font,
 //! textures, localization, sky culture, and in theory all other services used by the other part of the program.
-//! The StelApp class is also the one managing the StelModules in a generic maner by calling their update,
+//! The StelApp class is also the one managing the StelModule in a generic maner by calling their update,
 //! drawing and other methods when needed.
 //! @author Fabien Chereau
 class StelApp
@@ -72,11 +72,11 @@ public:
 	virtual ~StelApp();
 
 	//! Initialize application and core
-	virtual void init(void);
+	virtual void init();
 
 	//! @brief Get the StelApp singleton instance
 	//! @return the StelApp singleton instance
-	static StelApp& getInstance(void) {assert(singleton); return *singleton;}
+	static StelApp& getInstance() {assert(singleton); return *singleton;}
 
 	//! @brief Get the configuration file path.
 	//! @return the full path to Stellarium's main config.ini file
@@ -168,18 +168,18 @@ public:
 	void updateSkyCulture();	
 	
 	//! Set flag for activating night vision mode
-	void setVisionModeNight(void);
+	void setVisionModeNight();
 	//! Get flag for activating night vision mode
-	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
+	bool getVisionModeNight() const {return draw_mode==DM_NIGHT;}
 
 	//! Set flag for activating chart vision mode
 	// ["color" section name used for easier backward compatibility for older configs - Rob]
-	void setVisionModeNormal(void);
+	void setVisionModeNormal();
 	//! Get flag for activating chart vision mode
-	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
+	bool getVisionModeNormal() const {return draw_mode==DM_NORMAL;}
 
 	void setViewPortDistorterType(const string &type);
-	string getViewPortDistorterType(void) const;
+	string getViewPortDistorterType() const;
 	
 	//! Required because stelcore doesn't have access to the script manager anymore!
 	//! Record a command if script recording is on
@@ -196,9 +196,9 @@ public:
 	const int getTimeMultiplier() { return time_multiplier; }
 	
 	//! Set the drawing mode in 2D for drawing in the full screen
-	void set2DfullscreenProjection(void) const;
+	void set2DfullscreenProjection() const;
 	//! Restore previous projection mode
-	void restoreFrom2DfullscreenProjection(void) const;
+	void restoreFrom2DfullscreenProjection() const;
 	
 	//! Get the width of the openGL screen
 	//! @return width of the openGL screen in pixels
@@ -213,10 +213,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////	
 	
 	//! Start the main loop and return when the program ends.
-	virtual void startMainLoop(void) = 0;
+	virtual void startMainLoop() = 0;
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)
-	virtual string getVideoModeList(void) const = 0;
+	virtual string getVideoModeList() const = 0;
 	
 	//! Return the time since when stellarium is running in second
 	virtual double getTotalRunTime() const = 0;
@@ -247,11 +247,11 @@ protected:
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	double draw(int delta_time);
 	
-	// Handle mouse clics
+	//! Handle mouse clics
 	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
-	// Handle mouse move
+	//! Handle mouse move
 	int handleMove(int x, int y, StelMod mod);
-	// Handle key press and release
+	//! Handle key press and release
 	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 
 	//! The minimum desired frame rate in frame per second
@@ -263,10 +263,10 @@ protected:
 	// Methods overidded for SDL / QT
 	///////////////////////////////////////////////////////////////////////////	
 	
-	// Initialize openGL screen
+	//! Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
 	
-	// Save a screen shot in the HOME directory
+	//! Save a screen shot in the HOME directory
 	virtual void saveScreenShot() const =0;
 	
 	//! Call this when the size of the GL window has changed
