@@ -1304,18 +1304,6 @@ bool EditBox::onKey(Uint16 k, Uint8 s, StelMod mod)
             text = newtext;
             cursorPos++;
         }
-	else if (k >= StelKey_a && k <= StelKey_z)
-	{
-		wstring newtext = text.substr(0, cursorPos);
-		if (mod & StelMod_SHIFT)
-		{
-			cout << "shift + " << k << " pressed" << endl; 
-		}
-		else
-		{			
-			cout << k << " pressed" << endl; 
-		}
-	}
         else
             return false;
 
