@@ -247,7 +247,10 @@ protected:
 	// Handle key press and release
 	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 
-	float minfps, maxfps;
+	//! The minimum desired frame rate in frame per second
+	float minfps;
+	//! The maximum desired frame rate in frame per second
+	float maxfps;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
