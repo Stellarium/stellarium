@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Stellarium
 PROJECT_NUMBER         = 0.9.0
-OUTPUT_DIRECTORY       = /home/fabien/prog/trunk/stellarium/builds/doc
+OUTPUT_DIRECTORY       = ./builds/doc
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 USE_WINDOWS_ENCODING   = NO
@@ -25,7 +25,7 @@ ABBREVIATE_BRIEF       = "The $name class" \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/fabien/prog/trunk/stellarium/src/
+STRIP_FROM_PATH        = ./src/
 STRIP_FROM_INC_PATH    = 
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -37,7 +37,7 @@ TAB_SIZE               = 4
 ALIASES                = 
 OPTIMIZE_OUTPUT_FOR_C  = NO
 OPTIMIZE_OUTPUT_JAVA   = NO
-BUILTIN_STL_SUPPORT    = YES
+BUILTIN_STL_SUPPORT    = NO
 DISTRIBUTE_GROUP_DOC   = NO
 SUBGROUPING            = YES
 #---------------------------------------------------------------------------
@@ -82,7 +82,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = /home/fabien/prog/trunk/stellarium
+INPUT                  = ./src/
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
@@ -133,7 +133,9 @@ FILE_PATTERNS          = *.c \
                          *.xpm \
                          *.dox
 RECURSIVE              = YES
-EXCLUDE                = /home/fabien/prog/trunk/stellarium/intl
+EXCLUDE                = ./src/stelutils/iniparser \
+                         ./src/stelutils/typeface.h \
+                         ./src/stelutils/typeface.cpp
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = 
 EXAMPLE_PATH           = 
