@@ -187,11 +187,13 @@ public:
 
 	//! Set the time multiplier used when fast forwarding scripts
 	//! n.b. - do not confuse this with sky time rate
-	void setTimeMultiplier(const int m) { time_multiplier = m; }
+	//! @param multiplier new value for the time multiplier
+	void setTimeMultiplier(const int multiplier) { time_multiplier = multiplier; }
 
 	//! Get the time multiplier used when fast forwarding scripts
 	//! n.b. - do not confuse this with sky time rate
-	int getTimeMultiplier() { return time_multiplier; }
+	//! @return the integer time multiplier
+	const int getTimeMultiplier() { return time_multiplier; }
 	
 	//! Set the drawing mode in 2D for drawing in the full screen
 	void set2DfullscreenProjection(void) const;
