@@ -11,5 +11,12 @@ pkgdata_DATA = nebula_textures.fab ngc2000.dat ngc2000names.dat \
 		m86.png m87.png m89.png m8bousquet.png m90.png m91.png m92.png m94.png \
 		m95.png m96.png m97dumont.png m98.png m99.png m9.png n1499bousquet.png \
 		n2244bousquet.png n253bousquet.png n6946dumont.png n869-884spano.png \
-		nebula_textures.fab ngc2000.dat ngc2000names.dat pleiades.png 
+		nebula_textures.fab ngc2000.dat ngc2000names.dat pleiades.png \
+		m93.png m80.png m79.png m75.png m73.png m72.png m71.png \
+		m70.png m69.png m68.png m67.png m62.png m56.png m55.png \
+		m52.png m50.png m48.png m41.png m35.png m30.png m29.png \
+		m28.png m26.png m25.png m24.png m23.png m21.png m19.png \
+		m107.png
 EXTRA_DIST = $(pkgdata_DATA)
+
+
