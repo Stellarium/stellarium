@@ -61,7 +61,7 @@ class Audio
   virtual ~Audio() {;}
   void play(bool loop) {;}
   void pause() {;}
-  void resync() {;}
+  void sync() {;}
   void resume() {;}
   void stop() {;}
   void set_volume(float _volume) {;}
