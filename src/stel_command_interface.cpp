@@ -547,7 +547,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stapp->scripts->pause_script();
 		} else if (args["action"]=="pause" || args["action"]=="resume") {
 			stapp->scripts->resume_script();
-			//if(audio) audio->sync(); FC this causes error while compiling.
+			if(audio) audio->sync();
 		} else status =0;
 
 	} else if(command=="clear") {
