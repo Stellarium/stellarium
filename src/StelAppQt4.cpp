@@ -63,11 +63,15 @@ public:
     void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent*);
+	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
+	void thereWasAnEvent();
+	
 	QTime qtime;
     int timerId;
 private:
     class StelAppQt4* stelApp;
     int previousTime;
+    double lastEventTimeSec;
 };
 
 StelAppQt4::StelAppQt4(const string& configDir, const string& localeDir, const string& dataRootDir, int argc, char **argv) :
@@ -229,6 +233,13 @@ bool StelAppQt4::getFullScreen() const
 	return mainWindow->isFullScreen();
 }
 
+
+
+//////////////////////////////////////////////////////////////////////////
+// GLWidget methods
+//////////////////////////////////////////////////////////////////////////
+
+
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
 	setFocusPolicy(Qt::ClickFocus);
@@ -273,7 +284,18 @@ void GLWidget::timerEvent(QTimerEvent *)
 {
 	update();
 	killTimer(timerId);
-	timerId = startTimer(15);
+	double duration = 1./stelApp->minfps;
+	if (stelApp->getTotalRunTime()-lastEventTimeSec<2.5)
+		duration = 1./stelApp->maxfps;
+	timerId = startTimer((int)(duration*1000));
+}
+
+void GLWidget::thereWasAnEvent()
+{
+	// Refresh screen ASAP
+	killTimer(timerId);
+	timerId = startTimer(0);
+	lastEventTimeSec = stelApp->getTotalRunTime();
 }
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
@@ -305,6 +327,9 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 		state = Stel_MOUSEBUTTONUP;
 	
 	stelApp->handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
+	
+	// Refresh screen ASAP
+	thereWasAnEvent();
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* event)
@@ -324,11 +349,17 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* event)
 		state = Stel_MOUSEBUTTONUP;
 	
 	stelApp->handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
+	
+	// Refresh screen ASAP
+	thereWasAnEvent();
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent* event)
 {
 	stelApp->handleMove(event->x(), event->y(), qtModToStelMod(event->modifiers()));
+	
+	// Refresh screen ASAP
+	thereWasAnEvent();
 }
 
 void GLWidget::wheelEvent(QWheelEvent* event)
@@ -347,6 +378,9 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
+	
+	// Refresh screen ASAP
+	thereWasAnEvent();
 }
 
 StelKey qtKeyToStelKey(Qt::Key k)
@@ -470,11 +504,15 @@ void StelMainWindow::keyPressEvent(QKeyEvent* event)
 		stelApp->toggleFullScreen();
 	}
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
+	// Refresh screen ASAP
+	stelApp->winOpenGL->thereWasAnEvent();
 }
 
 void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
+	// Refresh screen ASAP
+	stelApp->winOpenGL->thereWasAnEvent();
 }
 
 
