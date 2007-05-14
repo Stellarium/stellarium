@@ -903,12 +903,12 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			{
 				// pause/unpause script
 				app->commander->execute_command( "script action pause");
-				app->time_multiplier = 1;  // don't allow resumption of ffwd this way (confusing for audio)
+				app->setTimeMultiplier(1);   // don't allow resumption of ffwd this way (confusing for audio)
 			}
 			else if(key==StelKey_k)
 			{
 				app->commander->execute_command( "script action resume");
-				app->time_multiplier = 1;
+				app->setTimeMultiplier(1);
 			}
 			else if(key==StelKey_7 || unicode==0x0003 || (key==StelKey_m && FlagEnableTuiMenu))
 			{  // ctrl-c
@@ -929,16 +929,16 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			}
 			else if(key==StelKey_j)
 			{
-				if(app->time_multiplier==2)
+				if(app->getTimeMultiplier()==2)
 				{
-					app->time_multiplier = 1;
+					app->setTimeMultiplier(1);
 
 					// restart audio in correct place
 					app->commander->execute_command( "audio action sync");
 				}
-				else if(app->time_multiplier > 1 )
+				else if(app->getTimeMultiplier() > 1 )
 				{
-					app->time_multiplier /= 2;
+					app->setTimeMultiplier(  app->getTimeMultiplier()/2 );
 				}
 
 			}
@@ -946,8 +946,8 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			{
 				// stop audio since won't play at higher speeds
 				app->commander->execute_command( "audio action pause");
-				app->time_multiplier *= 2;
-				if(app->time_multiplier>8) app->time_multiplier = 8;
+				app->setTimeMultiplier( app->getTimeMultiplier()*2 );
+				if(app->getTimeMultiplier()>8) app->setTimeMultiplier(8);
 			}
 			else if(!app->scripts->get_allow_ui())
 			{
@@ -959,7 +959,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		}
 		else
 		{
-			app->time_multiplier = 1;  // if no script in progress always real time
+			app->setTimeMultiplier(1);  // if no script in progress always real time
 
 			// normal time controls here (taken over for script control above if playing a script)
 			if(key==StelKey_k) app->commander->execute_command( "timerate rate 1");

@@ -185,7 +185,12 @@ public:
 	//! Record a command if script recording is on
 	void recordCommand(string commandline);
 
-	// n.b. - do not confuse this with sky time rate
+	//! Set the time multiplier used when fast forwarding scripts
+	//! n.b. - do not confuse this with sky time rate
+	void setTimeMultiplier(const int m) { time_multiplier = m; }
+
+	//! Get the time multiplier used when fast forwarding scripts
+	//! n.b. - do not confuse this with sky time rate
 	int getTimeMultiplier() { return time_multiplier; }
 	
 	//! Set the drawing mode in 2D for drawing in the full screen

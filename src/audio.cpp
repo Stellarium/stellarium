@@ -86,7 +86,7 @@ void Audio::sync() {
 	Mix_ResumeMusic();
 	is_playing = 1;
 
-	//	printf("Synced audio to %f seconds\n", elapsed_seconds);
+	// printf("Synced audio to %f seconds\n", elapsed_seconds);
 }
 
 void Audio::pause() {
