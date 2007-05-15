@@ -3,7 +3,7 @@
 
 #ifdef USE_SDL
 
-#include "SDL.h"
+#include "SDL/SDL.h"
 #include "StelApp.hpp"
 
 class StelAppSdl : public StelApp

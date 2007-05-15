@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/convenience.hpp>
 #include <boost/random/linear_congruential.hpp>
 	
 using namespace std;
@@ -258,6 +259,17 @@ bool StelFileMgr::isWritable(const fs::path& path)
 
 bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 {
+	if ( ! (flags & HIDDEN) )
+	{
+		// Files are considered HIDDEN on POSIX systems if the file name begins with 
+		// a "." character.  Unless we have the HIDDEN flag set, reject and path
+		// where the basename starts with a .
+		if (basename(path)[0] == '.')
+		{
+			return(false);
+		}
+	}
+	
 	if ( flags & NEW )
 	{
 		// if the NEW flag is set, we check to see if the parent is an existing directory
