@@ -31,7 +31,8 @@ public:
 						//!< that it is possible to create files within the directory.
 		DIRECTORY	= 0x00000004,	//!< Exclude non-directories.
 		FILE		= 0x00000008,	//!< Exclude non-files.
-		NEW 		= 0x00000010	//!< Exclude existing paths.
+		NEW 		= 0x00000010,	//!< Exclude existing paths.
+  		HIDDEN		= 0x00000020	//!< Include "hidden" paths (starting with a . on POSIX systems).
 	};
 				
 	//! Default Constructor.

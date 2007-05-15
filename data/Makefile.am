@@ -7,4 +7,3 @@ pkgdata_DATA = icon.bmp stellarium.ico landscapes.ini ssystem.ini name.fab \
 		default_config.ini DejaVuSansMono.ttf \
 		constellations_boundaries.dat fontmap.dat iso639-1.utf8
 EXTRA_DIST = $(pkgdata_DATA) $(man_MANS)
-SUBDIRS = scripts
