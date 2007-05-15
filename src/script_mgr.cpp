@@ -103,7 +103,7 @@ void ScriptMgr::cancel_script() {
 		}
 		catch(exception& e)
 		{
-			cerr << "ERROR while trying to mount removable media: " << e.what() << endl;		
+			cerr << "ERROR while trying to unmount removable media: " << e.what() << endl;		
 		}
 	}
 }
@@ -275,16 +275,23 @@ string ScriptMgr::get_script_list(string directory) {
 		}
 	}
 
+	cerr << "DEBUG: getting script list for " << directory << endl; 
+	
 	try
 	{
-		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory);
+		// we add an entry if there exists <directory>/scriptname/scriptname.sts
+		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::DIRECTORY);
 		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
-			// stl::sets are automagically sorted, so we just need to filter for .sts filenames
-			if ( (*i).substr((*i).length() - 4, 4) == ".sts" )
+			try
 			{
+				StelApp::getInstance().getFileMgr().findFile(directory + "/" + *i + "/" + *i + ".sts");				
 				result = result + *i + '\n';
 			}
+			catch(exception& e)
+			{
+				cerr << "WARNING: script directory " << *i << " found, but no " << *i << ".sts inside it" << endl;	
+			}			
 		}
 	}
 	catch(exception& e)
@@ -319,12 +326,12 @@ bool ScriptMgr::play_startup_script() {
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&
-	   play_script(RemoveableScriptDirectory + "/scripts/startup.sts", 
-				   RemoveableScriptDirectory + "/scripts/")) {
+	   play_script(RemoveableScriptDirectory + "/scripts/startup/startup.sts", 
+				   RemoveableScriptDirectory + "/scripts/startup/")) {
 	} 
 	else {
 		try {
-			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("data/scripts/startup.sts")); 
+			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup/startup.sts")); 
 			boost::filesystem::path parentDir(fullPath / "..");
 			play_script(fullPath.string(), parentDir.normalize().string() + "/");
 		}

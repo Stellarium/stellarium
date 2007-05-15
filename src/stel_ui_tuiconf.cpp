@@ -425,7 +425,7 @@ void StelUI::localizeTui(void)
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list("data/scripts")), 0); 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
 
@@ -487,8 +487,8 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					boost::filesystem::path theParent = StelApp::getInstance().getFileMgr().findFile("data/scripts/" + SelectedScript) / "..";
-					cmd = "script action play filename \"" + SelectedScript + "\" path \"" + theParent.normalize().string() + "/\"";
+					boost::filesystem::path theParent = StelApp::getInstance().getFileMgr().findFile("scripts/" + SelectedScript);
+					cmd = "script action play filename \"" + SelectedScript + ".sts\" path \"" + theParent.string() + "/\"";
 				}
 				catch(exception& e)
 				{
@@ -880,7 +880,7 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 
 	// Reread local script directory (in case new files)
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list("data/scripts")), 0); 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
 }
 
 

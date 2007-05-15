@@ -84,6 +84,7 @@ ADD_SUBDIRECTORY( po )
 ADD_SUBDIRECTORY( landscapes ) 
 ADD_SUBDIRECTORY( skycultures ) 
 ADD_SUBDIRECTORY( nebulae ) 
+ADD_SUBDIRECTORY( scripts ) 
 
 ########### install files ###############
 
