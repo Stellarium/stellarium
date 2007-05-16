@@ -21,94 +21,83 @@ Look for the binary package matching your distribution.
 If you can't find a suited binary package or if you are curious you can also 
 compile the software by yourself.
 
-Compilation and installation have been successfuly tested on many plateforms 
-and OS (including windows). These are general explanations for any architec-
-tures. Special (tricky) cases are described below.
+Make sure you install all the necessary dependencies. See this wiki page:
 
-To compile stellarium, you will need the following development libraries :
-- openGL (libgl-dev on linux, libopengl32 on win32)
-- GLU (libglu-dev on linux libglu32 on win32)
-- SDL - www.libsdl.org (libsdl-dev).
-- Zlib - www.zlib.net (zlib-dev).
-- PNG - www.libpng.org (libpng-dev).
-- SDL-mixer : this is optional, only if you want to enable sound which is any-
-way unused on standard version (libsdl-mixer-dev)
+http://stellarium.org/wiki/index.php/Build_Dependencies
 
-Once this is installed you are ready to compile stellarium sources :
-untar the tar.gz archive
+Once they are installed you are ready to compile Stellarium sources:
+
+Untar the tar.gz archive:
 ~$ tar -xzf stellarium-XXX.tar.gz
 ~$ cd stellarium
 
-then type
+Then type:
 ~$ ./configure
 ~$ make
 
-then to launch the local version of the program type
+Then to launch the local version of the program type:
 ~$ ./src/stellarium
 
-to fully install stellarium (so that it will be launchable from everywhere) type as root
+To fully install Stellarium (so that it will be launch-able from everywhere) 
+type as root:
 ~$ make install
 
-once installed you may want to clean the build directory
+Once installed you may want to clean the build directory:
 ~$ make clean
 
-If you want to uninstall stellarium, type as root
+If you want to uninstall Stellarium, type as root:
 ~$ make uninstall
 
 ===============================================================================
-Special instructions for COMPILATION on MACOSX with Xcode (By Da-Woon Jung)
+Special instructions for COMPILATION on MACOSX with Xcode 
 ===============================================================================
-untar the tar.gz archive
-~$ tar -xzf stellarium-XXX.tar.gz
-~$ cd stellarium
 
-untar the file macosx-xcode.tar.gz
-~$ tar -xzf macosx-xcode.tar.gz
+See the wiki:
+http://stellarium.org/wiki/index.php/Building_universal_Stellarium_0.8.1_on_an_Intel_Mac
 
-this should create the "macosx" directory
-Follow instructions in the macosx/Readme.rtf file.
 
 ===============================================================================
 Special instructions for COMPILATION on WINDOWS (XP) with MinGW
 ===============================================================================
 
+See the wiki:
+http://stellarium.org/wiki/index.php/Windows_Build_Instructions
+
 
 ===============================================================================
-              COMPILATION (and modification) from the CVS sources
+              COMPILATION (and modification) from the SVN sources
 ===============================================================================
-You can get the latest cvs snapshot (from sourceforge). However with this CVS
-version no correct behaviour is garanteed. It is mainly intended for use by
+You can get the latest SVN snapshot (from sourceforge). However with this SVN
+version no correct behaviour is guaranteed. It is mainly intended for use by
 developers. 
-You can browse the CVS tree from http://cvs.sourceforge.net/viewcvs.py/stellarium/
+You can browse the SVN tree from 
 
-To get the latest cvs snapshot type in a console:
+http://stellarium.svn.sourceforge.net/viewvc/stellarium/
 
-~$ cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium login
-~$ cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium co stellarium
+For build instructions see these pages on the Stellarium wiki:
 
-then to compile type:
-~$ cd stellarium
-~$ ./autogen.sh
-~$ ./configure
-~$ make
+http://stellarium.org/wiki/index.php/Compilation_on_Linux
+http://stellarium.org/wiki/index.php/Windows_Build_Instructions
+http://stellarium.org/wiki/index.php/Building_universal_Stellarium_0.8.1_on_an_Intel_Mac
 
-then to launch the local version of the program type
-~$ ./src/stellarium
 
-You can now have a look at the src/ directory where you will find the source files.
-Edit whatever you want in it and when your new great feature is done you will need 
-to share it with the community of stellarium developers.
+You can have a look at the src/ directory where you will find the source 
+files.  Edit whatever you want in it and when your new great feature is done 
+you will need to share it with the community of Stellarium developers.
 
-At this point, an official developer just have to type cvs commit to update the 
-repository version. But as you are not an official developer (yet!) you will need 
-to create a patch file which will contain all the changes you did on the source code.
+At this point, an official developer just have to type svn commit to update 
+the repository version. But as you are not an official developer (yet!) you 
+will need to create a patch file which will contain all the changes you did 
+on the source code.  
 
 ~$ cd directory-you-want-to-diff
-~$ cvs -z3 diff -u > mypatch.diff
+~$ svn diff > mypatch.diff
 
-You can now submit mypatch.diff on the sourceforge stellarium page in the patches 
-section (http://sourceforge.net/tracker/?group_id=48857&atid=454375) with a clear 
-comment on what is the patch doing.
+You can now submit mypatch.diff on the sourceforge Stellarium page in the 
+patches section (http://sourceforge.net/tracker/?group_id=48857&atid=454375) 
+with a clear comment on what is the patch doing.
 
 A project member will then have a look at it and decide whether the patch is 
-accepted or rejected for integration into stellarium.
+accepted or rejected for integration into Stellarium.
+
+
