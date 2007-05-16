@@ -212,6 +212,7 @@ void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagFog(conf.get_boolean("landscape:flag_fog"));
 	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
 	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
+	setAtmosphereLightPollutionLuminance(conf.get_double("viewing","light_pollution_luminance",0.0));
 	cardinals_points = new Cardinals();
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
 }
