@@ -152,6 +152,10 @@ void StelUI::init_tui(void)
 	}
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
 	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
+
+	tui_time_day_key = new s_tui::MultiSet2_item<wstring>(wstring(L"2.2 ") );
+	tui_time_day_key->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_day_key));
+
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") );
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb1));
 	tui_time_startuptime = new s_tui::MultiSet2_item<wstring>(wstring(L"2.4 ") );
@@ -170,6 +174,7 @@ void StelUI::init_tui(void)
 
 	tui_menu_time->addComponent(tui_time_skytime);
 	tui_menu_time->addComponent(tui_time_settmz);
+	tui_menu_time->addComponent(tui_time_day_key);
 	tui_menu_time->addComponent(tui_time_presetskytime);
 	tui_menu_time->addComponent(tui_time_startuptime);
 	tui_menu_time->addComponent(tui_time_displayformat);
@@ -192,17 +197,21 @@ void StelUI::init_tui(void)
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, wstring(L"4.1 ") );
 	tui_stars_show->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
-	tui_star_magscale = new s_tui::Decimal_item(1,30, 1, wstring(L"4.2 ") );
+	tui_star_magscale = new s_tui::Decimal_item(0,30, 1, wstring(L"4.2 "), 0.1 );
 	tui_star_magscale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
 	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, wstring(L"4.3 ") );
 	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
 	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, wstring(L"4.4 "), 0.1);
 	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
+	tui_star_limitingmag = new s_tui::Decimal_item(0., 7., 6.5, wstring(L"4.5 "), 0.1);
+	tui_star_limitingmag->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
 
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_magscale);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
 	tui_menu_stars->addComponent(tui_stars_twinkle);
+// TODO	tui_menu_stars->addComponent(tui_star_limitingmag);
+
 
 	// 5. Colors
 	tui_colors_const_line_color = new s_tui::Vector_item(wstring(L"5.1 "));
@@ -285,11 +294,11 @@ void StelUI::init_tui(void)
 	tui_effect_pointobj->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_pointobj);
 
-	tui_effect_object_scale = new s_tui::Decimal_item(0, 25, 1, wstring(L"5.4 ") + _("Magnitude Sizing Multiplier: "), 0.1);
+	tui_effect_object_scale = new s_tui::Decimal_item(0, 25, 1, wstring(L"5.4 "), 0.05);
 	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_object_scale);
 
-	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 100, 1, wstring(L"5.5 "), .5);
+	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 100, 1, wstring(L"5.5 "), .1);
 	tui_effect_milkyway_intensity->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects_milkyway_intensity));
 	tui_menu_effects->addComponent(tui_effect_milkyway_intensity);
 
@@ -371,12 +380,15 @@ void StelUI::localizeTui(void)
 	// 2. Time
 	tui_time_skytime->setLabel(wstring(L"2.1 ") + _("Sky Time: "));
 	tui_time_settmz->setLabel(wstring(L"2.2 ") + _("Set Time Zone: "));
-	tui_time_presetskytime->setLabel(wstring(L"2.3 ") + _("Preset Sky Time: "));
-	tui_time_startuptime->setLabel(wstring(L"2.4 ") + _("Sky Time At Start-up: "));
+	tui_time_day_key->setLabel(wstring(L"2.3 ") + _("Day keys: "));
+	tui_time_day_key->replaceItemList(_("Calendar") + wstring(L"\ncalendar\n") 
+					  + _("Sidereal") + wstring(L"\nsidereal\n"), 0);
+	tui_time_presetskytime->setLabel(wstring(L"2.4 ") + _("Preset Sky Time: "));
+	tui_time_startuptime->setLabel(wstring(L"2.5 ") + _("Sky Time At Start-up: "));
 	tui_time_startuptime->replaceItemList(_("Actual Time") + wstring(L"\nActual\n") 
 										  + _("Preset Time") + wstring(L"\nPreset\n"), 0);
-	tui_time_displayformat->setLabel(wstring(L"2.5 ") + _("Time Display Format: "));
-	tui_time_dateformat->setLabel(wstring(L"2.6 ") + _("Date Display Format: "));
+	tui_time_displayformat->setLabel(wstring(L"2.6 ") + _("Time Display Format: "));
+	tui_time_dateformat->setLabel(wstring(L"2.7 ") + _("Date Display Format: "));
 
 	// 3. General settings
 
@@ -389,9 +401,10 @@ void StelUI::localizeTui(void)
 
 	// 4. Stars
 	tui_stars_show->setLabel(wstring(L"4.1 ") + _("Show: "), _("Yes"),_("No"));
-	tui_star_magscale->setLabel(wstring(L"4.2 ") + _("Star Magnitude Multiplier: "));
+	tui_star_magscale->setLabel(wstring(L"4.2 ") + _("Star Value Multiplier: "));
 	tui_star_labelmaxmag->setLabel(wstring(L"4.3 ") + _("Maximum Magnitude to Label: "));
 	tui_stars_twinkle->setLabel(wstring(L"4.4 ") + _("Twinkling: "));
+	tui_star_limitingmag->setLabel(wstring(L"4.5 ") + _("Limiting Magnitude: "));
 
 	// 5. Colors
 	tui_colors_const_line_color->setLabel(wstring(L"5.1 ") + _("Constellation Lines") + L": ");
@@ -416,7 +429,7 @@ void StelUI::localizeTui(void)
 	tui_effect_landscape->setLabel(wstring(L"6.2 ") + _("Landscape: "));
 	tui_effect_manual_zoom->setLabel(wstring(L"6.3 ") + _("Manual zoom: "), _("Yes"),_("No"));
 	tui_effect_pointobj->setLabel(wstring(L"6.4 ") + _("Object Sizing Rule: "), _("Point"),_("Magnitude"));
-	tui_effect_object_scale->setLabel(wstring(L"6.5 ") + _("Magnitude Sizing Multiplier: "));
+	tui_effect_object_scale->setLabel(wstring(L"6.5 ") + _("Magnitude Scaling Multiplier: "));
 	tui_effect_milkyway_intensity->setLabel(wstring(L"6.6 ") + _("Milky Way intensity: "));
 	tui_effect_nebulae_label_magnitude->setLabel(wstring(L"6.7 ") + _("Maximum Nebula Magnitude to Label: "));
 	tui_effect_zoom_duration->setLabel(wstring(L"6.8 ") + _("Zoom Duration: "));
@@ -542,6 +555,7 @@ void StelUI::tui_update_widgets(void)
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->getNavigation()->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getNavigation()->getJDay())*JD_HOUR);
 	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
+	tui_time_day_key->setCurrent(StelUtils::stringToWstring(getDayKeyMode()));
 	tui_time_presetskytime->setJDay(core->getNavigation()->getPresetSkyTime());
 	tui_time_startuptime->setCurrent(StelUtils::stringToWstring(core->getNavigation()->getStartupTimeMode()));
 	tui_time_displayformat->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().get_time_format_str()));
@@ -556,6 +570,8 @@ void StelUI::tui_update_widgets(void)
 	tui_star_labelmaxmag->setValue(smgr->getMaxMagName());
 	tui_stars_twinkle->setValue(smgr->getTwinkleAmount());
 	tui_star_magscale->setValue(smgr->getMagScale());
+// TODO	tui_star_limitingmag->setValue(core->getStarLimitingMag());
+
 
 	// 5. Colors
 	tui_colors_const_line_color->setVector(cmgr->getLinesColor());
@@ -778,6 +794,11 @@ void StelUI::tui_cb_stars()
 	oss.str("");
 	oss << "set star_mag_scale " << tui_star_magscale->getValue();
 	app->commander->execute_command(oss.str());
+/* TODO
+	oss.str("");
+	oss << "set star_limiting_mag " << tui_star_limitingmag->getValue();
+	app->commander->execute_command(oss.str());
+*/
 
 }
 
@@ -867,6 +888,15 @@ void StelUI::tui_cb_location_change_planet()
 									"\"");
 }
 
+
+void StelUI::tui_cb_day_key() 
+{
+
+	setDayKeyMode( StelUtils::wstringToString(tui_time_day_key->getCurrent()) );
+	//	cout << "Set from tui value DayKeyMode to " << app->DayKeyMode << endl;
+}
+
+
 // Update widgets that don't always match current settings with current settings
 void StelUI::tuiUpdateIndependentWidgets(void) { 
 
@@ -881,6 +911,10 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	// Reread local script directory (in case new files)
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
 			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
+
+	// also clear out script lists as media may have changed
+	ScriptDirectoryRead = 0;
+
 }
 
 
@@ -944,6 +978,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf.set_boolean("viewing:flag_meridian_line", grlmgr->getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf.set_double("viewing:light_pollution_luminance", lmgr->getAtmosphereLightPollutionLuminance());
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_landscape", lmgr->getFlagLandscape());
@@ -978,6 +1013,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 
 	// gui section
 	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
+	conf.set_str	("gui:day_key_mode", getDayKeyMode());
 
 	// Text ui section
 	conf.set_boolean("tui:flag_show_gravity_ui", getFlagShowGravityUi());
@@ -1011,3 +1047,5 @@ void StelUI::saveCurrentConfig(const string& confFile)
 
 	conf.save(confFile);
 }
+
+

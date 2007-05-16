@@ -240,6 +240,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     
 
 	} else if (command == "deselect") {
+		/* TODO
+		if(args["constellation"] != "") { 
+			stcore->unsetSelectedConstellation(args["constellation"]);
+		} else {
+			stcore->deselect();
+		}
+		*/
+
 		StelApp::getInstance().getStelObjectMgr().unSelect();
 
 	} else if(command == "look") {  // change direction of view
