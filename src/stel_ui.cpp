@@ -135,6 +135,7 @@ void StelUI::init(const InitParser& conf)
 	baseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
+	setDayKeyMode( conf.get_str("gui","day_key_mode","calendar"));
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -1220,13 +1221,13 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             licence_win->setVisible(FlagInfos);
             break;
 		case StelKey_EQUALS:
-			if (mod & StelMod_ALT)
+			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				app->commander->execute_command( "date sidereal 1");
 			else
 				app->commander->execute_command( "date relative 1");
 			break;
 		case StelKey_MINUS:
-			if (mod & StelMod_ALT)
+			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				app->commander->execute_command( "date sidereal -1");
 			else 
 				app->commander->execute_command( "date relative -1");
@@ -1238,13 +1239,13 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             app->commander->execute_command( "flag moon_scaled toggle");
             break;
 		case StelKey_LEFTBRACKET:
-			if (mod & StelMod_ALT)
+			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				app->commander->execute_command( "date sidereal -7");
 			else 
 				app->commander->execute_command( "date relative -7");
             break;
 		case StelKey_RIGHTBRACKET:
-			if (mod & StelMod_ALT)
+			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				app->commander->execute_command( "date sidereal 7");
 			else 
 				app->commander->execute_command( "date relative 7");
@@ -1419,4 +1420,20 @@ void StelUI::setFlagShowFlagButtons(bool b)
 {
 	FlagMenu=b;
 	bt_flag_ctr->setVisible(b);
+}
+
+
+void StelUI::setDayKeyMode(const string dayMode) 
+{
+	if(dayMode == "sidereal") 
+	{
+		dayKeyMode = "sidereal";
+	} else {
+		dayKeyMode = "calendar";
+	}
+}
+
+string StelUI::getDayKeyMode() 
+{
+	return dayKeyMode;
 }

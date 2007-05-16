@@ -100,6 +100,13 @@ public:
 	
 	//! Resize the UI desktop to a new window size
 	void resize();
+
+	//! Set day key mode (calendar, sidereal)
+	void setDayKeyMode(const string dayMode);
+
+	//! Get day key mode (calendar, sidereal)
+	string getDayKeyMode();
+
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -330,6 +337,8 @@ private:
 	void setSkyLanguage(void);
 	void setSkyCulture(void);
 
+	string dayKeyMode;  // whether day keys should use calendar or sidereal days
+
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;
@@ -353,6 +362,7 @@ private:
 	// 2. Time & Date
 	s_tui::Time_zone_item* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
+	s_tui::MultiSet2_item<wstring>* tui_time_day_key;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::MultiSet2_item<wstring>* tui_time_startuptime;
 	s_tui::MultiSet_item<wstring>* tui_time_displayformat;
@@ -368,6 +378,7 @@ private:
 	s_tui::Decimal_item* tui_star_labelmaxmag;
 	s_tui::Decimal_item* tui_stars_twinkle;
 	s_tui::Decimal_item* tui_star_magscale;
+	s_tui::Decimal_item* tui_star_limitingmag;
 	
 	//  Colors
 	s_tui::Vector_item* tui_colors_const_line_color;
@@ -431,6 +442,7 @@ private:
 	void tui_cb_sky_time();        // change effect parameters
 	void tui_cb_change_color();        // change colors
 	void tui_cb_location_change_planet();  // change planet of observer
+	void tui_cb_day_key();  // change length of time for day keys
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<wstring>* create_tree_from_time_zone_file(const string& zonetab);
