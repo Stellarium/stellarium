@@ -58,6 +58,10 @@ public:
 	//! @param nameI18n The case sensistive constellation name
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	
+	//! Return the matching constellation if exists or NULL
+	//! @param name The case sensistive standard program name (three letter abbreviation)
+	virtual StelObjectP searchByName(const string& name) const;
+
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names

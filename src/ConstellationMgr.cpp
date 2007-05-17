@@ -819,6 +819,24 @@ StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 	return NULL;
 }
 
+
+//! Return the matching constellation object's pointer if exists or NULL
+//! @param name The case sensistive standard program constellation code
+StelObjectP ConstellationMgr::searchByName(const string& name) const
+{
+	string objw = name;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	vector <Constellation*>::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		string objwcap = (*iter)->englishName;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	return NULL;
+}
+
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {

@@ -59,8 +59,12 @@ public:
 	//! Return a stl vector containing the planets located inside the limitFov circle around position v
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching planet pointer if exists or NULL
-	//! @param planetNameI18n The case sensistive translated planet name
+	//! @param NameI18n The case sensistive translated planet name
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
+
+	//! Return the matching planet pointer if exists or NULL
+	//! @param name The case sensistive standard program planet name
+	virtual StelObjectP searchByName(const string& name) const;
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object

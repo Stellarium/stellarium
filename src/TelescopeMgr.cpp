@@ -154,6 +154,15 @@ StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
   return 0;
 }
 
+
+StelObjectP TelescopeMgr::searchByName(const string &name) const {
+  for (TelescopeMap::const_iterator it(telescope_map.begin());
+       it!=telescope_map.end();it++) {
+    if (it->second->getEnglishName() == name) return it->second;
+  }
+  return 0;
+}
+
 vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
                                 const wstring& objPrefix,
                                 unsigned int maxNbItem) const {
