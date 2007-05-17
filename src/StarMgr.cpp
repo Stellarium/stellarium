@@ -1323,7 +1323,7 @@ void StarMgr::load_data(LoadingBar& lb)
 		lb.Draw(i / 8.0);
 		try
 		{
-			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("data/") + cat_file_names[i]).string().c_str());
+			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + cat_file_names[i]).string().c_str());
 			if (z)
 			{
 				if (max_geodesic_grid_level < z->level)
@@ -1362,21 +1362,21 @@ void StarMgr::load_data(LoadingBar& lb)
 
 	try
 	{
-		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("data/") + spectral_file).string().c_str());
+		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + spectral_file).string().c_str());
 	}
 	catch (exception& e)
 	{
-		cerr << "ERROR while loading data from " << string("data/") + spectral_file;
+		cerr << "ERROR while loading data from " << string("stars/default/") + spectral_file;
 		cerr << ": " << e.what() << endl;
 	}
 	
 	try
 	{
-		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("data/") + component_file).string().c_str());
+		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + component_file).string().c_str());
 	}
 	catch (exception& e)
 	{
-		cerr << "ERROR while loading data from " << string("data/") + component_file;
+		cerr << "ERROR while loading data from " << string("stars/default/") + component_file;
 		cerr << ": " << e.what() << endl;
 	}
 
@@ -2036,7 +2036,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	
 	try
 	{
-		load_sci_names(StelApp::getInstance().getFileMgr().findFile("data/name.fab").string());
+		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab").string());
 	}
 	catch(exception& e)
 	{
