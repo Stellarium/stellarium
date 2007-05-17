@@ -619,6 +619,48 @@ StelObjectP NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 	return NULL;
 }
 
+
+//! Return the matching Nebula object's pointer if exists or NULL
+StelObjectP NebulaMgr::searchByName(const string& name) const
+{
+	string objw = name;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	vector <Nebula*>::const_iterator iter;
+	
+	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
+	if (objw.substr(0, 3) == "NGC")
+	{
+		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		{
+			if (("NGC" + StelUtils::intToString((*iter)->NGC_nb)) == objw ||
+			 ("NGC " + StelUtils::intToString((*iter)->NGC_nb)) == objw)
+			 return *iter;
+		}
+	}
+	
+	// Search by common names
+	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	{
+		string objwcap = (*iter)->englishName;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	
+	// Search by Messier numbers (possible formats are "M31" or "M 31")
+	if (objw.substr(0, 1) == "M")
+	{
+		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		{
+			if (("M" + StelUtils::intToString((*iter)->M_nb)) == objw ||
+			 ("M " + StelUtils::intToString((*iter)->M_nb)) == objw)
+			 return *iter;
+		}
+	}
+	
+	return NULL;
+}
+
+
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {

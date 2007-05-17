@@ -206,7 +206,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		if(args["hp"]!=""){
 			select_type = "hp";
-			identifier = args["hp"];
+			identifier = string("HP") + args["hp"];
 		}
 		else if(args["star"]!="") {
 			select_type = "star";
@@ -231,8 +231,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			select_type = "";
 		}
 
-		// TODO repair that maybe
-		//if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().setSelectedObject(select_type, identifier);
+		// TODO - NEEDS WORK to fix completely
+
+		if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().findAndSelect(identifier);
 
 		// determine if selected object pointer should be displayed
 		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(false);

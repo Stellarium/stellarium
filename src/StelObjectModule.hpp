@@ -46,6 +46,10 @@ public:
 	//! Return the matching StelObject if exists or the empty StelObject if not found
 	//! @param nameI18n the translated name for the current sky locale
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const = 0;
+
+	//! Return the matching StelObject if exists or the empty StelObject if not found
+	//! @param name the standard program name
+	virtual StelObjectP searchByName(const string& name) const = 0;
 	
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
 	//! @param objPrefix the first letters of the searched object
