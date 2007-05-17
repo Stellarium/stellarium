@@ -55,6 +55,21 @@ StelObjectP StelObjectMgr::searchByNameI18n(const wstring &name) const
 	return rval;
 }
 
+//! Find any kind of object by its standard program name
+StelObjectP StelObjectMgr::searchByName(const string &name) const
+{
+	StelObjectP rval;
+	std::vector<StelObjectModule*>::const_iterator iter;
+	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
+	{
+		rval = (*iter)->searchByName(name);
+		if (rval)
+			return rval;
+	}
+	return rval;
+}
+
+
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
 //! @return true if an object was found with the passed name
@@ -62,6 +77,17 @@ bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n, bool added)
 {
 	// Then look for another object
 	StelObjectP obj = searchByNameI18n(nameI18n);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, added);
+}
+
+//! Find and select an object from its standard program name
+bool StelObjectMgr::findAndSelect(const string &name, bool added)
+{
+	// Then look for another object
+	StelObjectP obj = searchByName(name);
 	if (!obj)
 		return false;
 	else

@@ -55,6 +55,8 @@ public:
 	// Methods defined in the StelObjectModule class
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByName(const string& name) const;
+
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 
 

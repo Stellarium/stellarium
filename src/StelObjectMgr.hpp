@@ -67,6 +67,12 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelectI18n(const wstring &nameI18n, bool added=false);
 
+	//! Find and select an object from its standard program name
+	//! @param added add the found object to selection if true, replace if false
+	//! @param name the case sensitive object translated name
+	//! @return true if a object with the passed name was found
+	bool findAndSelect(const string &name, bool added=false);
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -102,6 +108,9 @@ private:
 
 	//! Find any kind of object by its translated name
 	StelObjectP searchByNameI18n(const wstring &name) const;
+
+	//! Find any kind of object by its standard program name
+	StelObjectP searchByName(const string &name) const;
 
 	//! Find in a "clever" way an object from its equatorial position
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;

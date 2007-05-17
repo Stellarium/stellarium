@@ -707,6 +707,18 @@ StelObjectP SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 	return NULL;
 }
 
+
+StelObjectP SolarSystem::searchByName(const string& name) const
+{
+	vector<Planet*>::const_iterator iter = system_planets.begin();
+	while (iter != system_planets.end())
+	{
+		if( (*iter)->getEnglishName() == name ) return (*iter); 
+		++iter;
+	}
+	return NULL;
+}
+
 // Search if any Planet is close to position given in earth equatorial position and return the distance
 StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * prj) const
 {
