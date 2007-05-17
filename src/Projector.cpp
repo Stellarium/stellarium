@@ -90,15 +90,35 @@ void Projector::init(const InitParser& conf)
 
 
 	double overwrite_max_fov
+	  = conf.get_double("projection","equal_area_max_fov",0.0);
+	if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
+	if (overwrite_max_fov > 0.0)
+		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
+	overwrite_max_fov
+	  = conf.get_double("projection","stereographic_max_fov",0.0);
+	if (overwrite_max_fov > 359.999999) overwrite_max_fov = 359.999999;
+	if (overwrite_max_fov > 0.0)
+		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
+	overwrite_max_fov
 	  = conf.get_double("projection","fisheye_max_fov",0.0);
 	if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
-	if (overwrite_max_fov > 180.0)
+	if (overwrite_max_fov > 0.0)
 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
 	overwrite_max_fov
 	  = conf.get_double("projection","cylinder_max_fov",0.0);
 	if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
-	if (overwrite_max_fov > 90.0)
+	if (overwrite_max_fov > 0.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
+	overwrite_max_fov
+	  = conf.get_double("projection","perspective_max_fov",0.0);
+	if (overwrite_max_fov > 179.999999) overwrite_max_fov = 179.999999;
+	if (overwrite_max_fov > 0.0)
+		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
+	overwrite_max_fov
+	  = conf.get_double("projection","orthographic_max_fov",0.0);
+	if (overwrite_max_fov > 180.0) overwrite_max_fov = 180.0;
+	if (overwrite_max_fov > 0.0)
+		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 
 	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 
