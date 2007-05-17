@@ -100,8 +100,6 @@ void Projector::init(const InitParser& conf)
 	if (overwrite_max_fov > 90.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
 
-	initFov	= conf.get_double ("navigation","init_fov",60.);
-	setFov(initFov);
 	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 
 	// Register the default mappings
@@ -114,6 +112,9 @@ void Projector::init(const InitParser& conf)
 
 	tmpstr = conf.get_str("projection:type");
 	setCurrentProjection(tmpstr);
+
+	initFov	= conf.get_double ("navigation","init_fov",60.);
+	setFov(initFov);
 
 	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 
@@ -153,6 +154,7 @@ Projector::Projector(const Vector4<GLint>& viewport, double _fov)
 	            viewport_center[0]-viewport_xywh[0],
                 viewport_center[1]-viewport_xywh[1],
 	            viewport_fov_diameter);
+
 	setFov(_fov);
 }
 
@@ -292,6 +294,8 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
 
 void Projector::setFov(double f)
 {
+
+//	cout << "Set fov to " << f << " " << max_fov << " " << min_fov << endl;
 	fov = f;
 	if (f>max_fov)
 		fov = max_fov;
@@ -306,7 +310,10 @@ void Projector::setMaxFov(double max)
 {
 	max_fov = max;
 	if (fov > max)
+	{
 		setFov(max);
+	}
+
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
@@ -408,6 +415,7 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 		mapping = i->second;
 		min_fov = mapping->minFov;
 		max_fov = mapping->maxFov;
+
 		setFov(fov);
 		initGlMatrixOrtho2d();
 	}
