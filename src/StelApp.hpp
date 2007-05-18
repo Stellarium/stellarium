@@ -82,41 +82,6 @@ public:
 	//! @return the full path to Stellarium's main config.ini file
 	string getConfigFilePath() const;
 
-	//! @brief Get the (writable) .stellarium/ directory path, usually $HOME/.stellarium/
-	//! @return the full path to the (writable) .stellarium/ directory path
-	//! @deprecated should not be needed if StelFileMgr is used
-	const std::string& getDotStellariumDir() const {return dotStellariumDir;}
-
-	//! @brief Get the full path to a file.
-	//! This method will try to find the file in all valid data directories until it finds it.
-	//! @return the fullpath to the file.
-	//! @deprecated in favour of using StelFileMgr::findFile
-	string getFilePath(const string& fileName) const;
-
-	//! @brief Get a vector of possible paths for a given file.
-	//! This method returns a vector of the paths which exist for a fileName. 
-	//! The vector is ordered like this: full paths are always index 0 if specified;
-	//! user's local files (if present) have a lower index than installation area files.
-	//! If fileName is not found, an empty vector is returned.
-	//! @param fileName The name of the file or directory to be searched for
-	//! @return the fullpath to the file.
-	//! @deprecated in favour of using StelFileMgr::getSearchPaths
-	vector<string> getFilePathList(const string& fileName) const;
-
-	//! @brief Get the full path to a data file.
-	//! This method will try to find the file in all valid data directories until it finds it.
-	//! @param dataFileName the data file path relative to the main data directory (e.g image/myImage.png)
-	//! @return the fullpath to the data file e.g /usr/local/share/stellarium/data/image/myImage.png
-	//! @deprecated in favour of using StelFileMgr::findFile
-	string getDataFilePath(const string& dataFileName) const;
-
-	//! @brief Get the full path to a texture file.
-	//! This method will try to find the file in all valid data directories until it finds it.
-	//! @param textureFileName the texture file path relative to the main data directory (e.g jupiter.png)
-	//! @return the fullpath to the texture file e.g /usr/local/share/stellarium/data/texture/jupiter.png.
-	//! @deprecated in favour of using StelFileMgr::findFile
-	string getTextureFilePath(const string& textureFileName) const;
-	
 	//! @brief Get the locale data directory path
 	//! @return the full path to the directory containing locale specific infos e.g. /usr/local/share/locale/.
 	//! This directory should e.g. contain fr/LC_MESSAGES/stellarium.mo so that french translations work.

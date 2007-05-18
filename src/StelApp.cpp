@@ -130,82 +130,15 @@ StelApp::~StelApp()
 *************************************************************************/
 string StelApp::getConfigFilePath() const
 {
-	return stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string();
-}
-
-/*************************************************************************
- Get the full path to a file.
- Deprecated in favour of using StelFileMgr::findFile
-*************************************************************************/
-string StelApp::getFilePath(const string& fileName) const
-{
-	cerr << "WARNING StelApp::getFilePath is deprecated - please use StelFileMgr::findFile instead" << endl;
-	if (StelUtils::checkAbsolutePath(fileName))
-		return fileName;
-	
-	if (StelUtils::fileExists(dotStellariumDir + fileName))
-		return dotStellariumDir + fileName;
-	
-	if (StelUtils::fileExists(rootDir + fileName))
-		return rootDir + fileName;
-	
-	cerr << "Can't find file " << fileName << endl;
-	
-	return "";
-}
-
-/*************************************************************************
- Get a vector of paths for a file.
- Deprecated in favour of using StelFileMgr::getSearchPaths
-*************************************************************************/
-vector<string> StelApp::getFilePathList(const string& fileName) const
-{
-	cerr << "WARNING StelApp::getFilePathList is deprecated - please use StelFileMgr::getSearchPaths instead" << endl;
-	vector<string> result;
-	
-	if (StelUtils::checkAbsolutePath(fileName)) {
-		result.push_back(fileName);
-		return result;
+	try
+	{
+		return stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string();
 	}
-	
-	if (StelUtils::fileExists(dotStellariumDir + fileName))
-		result.push_back(dotStellariumDir + fileName);
-	
-	if (StelUtils::fileExists(rootDir + fileName))
-		result.push_back(rootDir + fileName);
-	
-	if (result.size() == 0 )
-		cerr << "StelApp::getFilePathList: Can't find file " << fileName << endl;
-	
-	return result;
-}
-
-/*************************************************************************
- Get the full path to a data file. This method will try to find the file 
- in all valid data directories until it finds it.
- Deprecated in favour of using StelFileMgr::findFile
-*************************************************************************/
-string StelApp::getDataFilePath(const string& dataFileName) const
-{
-	cerr << "WARNING StelApp::getDataFilePath is deprecated - please use StelFileMgr::findFile instead" << endl;
-	if (StelUtils::checkAbsolutePath(dataFileName))
-		return dataFileName;
-
-	if (StelUtils::fileExists(dataDir + "/" + dataFileName))
-		return dataDir + "/" + dataFileName;
-		
-	return getFilePath("data/" + dataFileName);
-}
-
-/*************************************************************************
- Get the full path to a texture file. This method will try to find the 
- file in all valid data 
- Deprecated in favour of using StelFileMgr::findFile
-*************************************************************************/
-string StelApp::getTextureFilePath(const string& textureFileName) const
-{
-	cerr << "WARNING StelApp::getTextureFilePathis deprecated - please use StelFileMgr::findFile instead" << endl;
-	return rootDir + "textures/" + textureFileName;
+	catch(exception& e)
+	{
+		cerr << "ERROR: could not determine path of config.ini file: " << e.what();
+		return "config.ini";
+	}
 }
 
 bool restart_ui = false;
