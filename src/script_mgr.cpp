@@ -275,8 +275,6 @@ string ScriptMgr::get_script_list(string directory) {
 		}
 	}
 
-	cerr << "DEBUG: getting script list for " << directory << endl; 
-	
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
