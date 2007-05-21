@@ -122,19 +122,13 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
-	// Get whether floating point textures are supported on this video card
-	// This enable for high dynamic range textures to be loaded
-	isFloatingPointTexAllowed = GLEE_ARB_texture_float;
-	
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
 	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
-
+	
 	// Check vendor and renderer
 	string glRenderer((char*)glGetString(GL_RENDERER));
 	string glVendor((char*)glGetString(GL_VENDOR));
 	string glVersion((char*)glGetString(GL_VERSION));
-
-	isNoPowerOfTwoLUMINANCEAllowed = false;
 
 	// Get Maximum Texture Size Supported by the video card
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
@@ -531,8 +525,7 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 	}
 
 	// Repair texture size if non power of 2 is not allowed by the video driver
-	if ((!isNoPowerOfTwoAllowed || (!isNoPowerOfTwoLUMINANCEAllowed && tex->format==GL_LUMINANCE)) && 
-		(!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
+	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
 		//cerr << "Can't load natively non power of 2 textures for texture: " << tex->fullPath << endl;
 		int w = StelUtils::getBiggerPowerOfTwo(tex->width);

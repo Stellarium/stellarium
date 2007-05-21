@@ -441,7 +441,6 @@ void StelUI::localizeTui(void)
 			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
-	N_("USB Script: ");  // Placeholder for translating - Rob
 
 	// 8. Administration
 	tui_admin_loaddefault->setLabel(wstring(L"8.1 ") + _("Load Default Configuration: "));

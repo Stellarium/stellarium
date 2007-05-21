@@ -274,6 +274,8 @@ Component* StelUI::createTopBar(SFont& baseFont)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::updateTopBar(void)
 {
+	if (!top_bar_ctr)
+		return;
 	top_bar_ctr->setVisible(FlagShowTopBar);
 	if (!FlagShowTopBar) return;
 

@@ -204,12 +204,8 @@ private:
 	// The maximum texture size supported by the video card
 	GLint maxTextureSize;
 	
-	// Whether GL_ARB_texture_float is supported on this card
-	bool isFloatingPointTexAllowed;
-	
 	// Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
-	bool isNoPowerOfTwoLUMINANCEAllowed;
 	
 	// Everything used for the threaded loading
 	friend struct loadTextureThread;
