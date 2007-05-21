@@ -488,7 +488,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
+	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
 	language_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getAppLanguage()));
 	tab_language->addComponent(language_lb);
@@ -504,7 +504,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
+	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
 	languageSky_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
@@ -920,7 +920,7 @@ void StelUI::setVideoOption(void)
 	cout << "Saving video settings: projection=" << core->getProjection()->getCurrentProjection()
 	     << ", distorter=" << app->getViewPortDistorterType();
 	if ( w && h ) cout << ", res=" << w << "x" << h;
-   	cout << " in file " << app->getConfigFilePath() << endl;
+	cout << " in file " << app->getConfigFilePath() << endl;
 
 	InitParser conf;
 	conf.load(app->getConfigFilePath());

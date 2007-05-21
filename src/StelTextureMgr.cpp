@@ -92,7 +92,7 @@ float ManagedSTexture::getAverageLuminance(void)
 /*************************************************************************
  Constructor for the StelTextureMgr class
 *************************************************************************/
-StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atextureDir)
+StelTextureMgr::StelTextureMgr()
 {
 	// Init default values
 	setDefaultParams();
@@ -282,11 +282,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	const std::string& fileExtension, bool toDelete, const std::string& cookiesFile)
 {
 	bool toDownload = false;
-	string filename;
-	if (url[0]=='/' || (url[0]=='.' && url[1]=='/'))
-		filename = url;
-	else
-		filename = textureDir + url;
+	string filename = url;
 		
 	if (!StelUtils::fileExists(filename))
 	{
