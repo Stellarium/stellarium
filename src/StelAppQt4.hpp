@@ -31,7 +31,7 @@ class StelAppQt4 : public StelApp
 	friend class GLWidget;
 	friend class StelMainWindow;
 public:
-	StelAppQt4(const string& configDir, const string& localeDir, const string& dataRootDir, int argc, char **argv);
+	StelAppQt4(int argc, char **argv);
 	virtual ~StelAppQt4();
 
 	///////////////////////////////////////////////////////////////////////////

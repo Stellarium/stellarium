@@ -116,7 +116,7 @@ struct QueuedTex
 class StelTextureMgr
 {
 public:
-	StelTextureMgr(const std::string& textureDir);
+	StelTextureMgr();
 	virtual ~StelTextureMgr();
 	
 	//! Initialize some variable from the openGL contex.
@@ -195,7 +195,6 @@ private:
 	// List of image loaders providing image loading for the given files extensions
 	std::map<std::string, ImageLoader*> imageLoaders;
 	
-	std::string textureDir;
 	bool mipmapsMode;
 	GLint wrapMode;
 	GLint minFilter;

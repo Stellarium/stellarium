@@ -16,57 +16,36 @@
 using namespace std;
 namespace fs = boost::filesystem;
 
+#define CHECK_FILE "data/ssystem.ini"
+
 StelFileMgr::StelFileMgr()
 {
-	// if the operating system supports user-level directories, the first place to look
-	// for files is in there.
-#if !defined(MACOSX) && !defined(MINGW32)
-	// Linux & other POSIX-likes
-	fs::path homeLocation(getenv("HOME"));
-	if (!fs::is_directory(homeLocation))
+	try
 	{
-		// This will be the case if getenv failed or something else is weird
-		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
+		fileLocations.push_back(getUserDir());
 	}
-	else 
+	catch(exception &e)
 	{
-		homeLocation /= ".stellarium";
-		fileLocations.push_back(homeLocation);
+		cerr << "WARNING: could not locate user directory" << endl;
 	}
-#endif
-
-	// TODO: the proper thing for Windows and OSX
 	
-	// OK, the main installation directory.  
-#if !defined(MACOSX) && !defined(MINGW32)
-	// For POSIX systems we use the value from the config.h filesystem
-	fs::path installLocation(INSTALL_DATADIR);
-	if (fs::exists(installLocation / CHECK_FILE))
+	try
 	{
-		fileLocations.push_back(installLocation);
-		//configRootDir = installLocation;
+		fileLocations.push_back(getInstallationDir());
 	}
-	else 
+	catch(exception &e)
 	{
-		cerr << "WARNING StelFileMgr::StelFileMgr: could not find install location:" 
-				<< installLocation.string() 
-				<< " (we checked for " 
-				<< CHECK_FILE
-				<< ")."
-				<< endl;
-		installLocation = fs::current_path();
-		if (fs::exists(installLocation / CHECK_FILE))
-		{
-			// cerr << "DEBUG StelFileMgr::StelFileMgr: found data files in current directory" << endl;
-			fileLocations.push_back(installLocation);
-			// configRootDir = installLocation;
-		}		
-		else 
-		{
-			cerr << "ERROR StelFileMgr::StelFileMgr: couldn't locate check file (" << CHECK_FILE << ") anywhere" << endl;	
-		}
+		cerr << "WARNING: could not locate installation directory" << endl;
 	}
-#endif	
+
+	cerr << "DEBUG: StelFileMgr::fileLocations path is (StelFileMgr::StelFileMgr()):" << endl;		   
+	for(vector<fs::path>::iterator i = fileLocations.begin();
+		   i != fileLocations.end();
+		   i++)
+	{
+		cerr << "  + " << (*i).string() << endl;
+	}
+	cerr << "  [end search paths]" << endl;
 }
 
 StelFileMgr::~StelFileMgr()
@@ -75,6 +54,12 @@ StelFileMgr::~StelFileMgr()
 
 const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
+	if (path[0] == '.')
+	{
+		if (fileFlagsCheck(path, flags)) 
+			return fs::path(path);
+	}
+	
 	if ( fs::path(path).is_complete() )
 		if ( fileFlagsCheck(path, flags) )
 			return(path);
@@ -144,44 +129,19 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 void StelFileMgr::setSearchPaths(const vector<fs::path> paths)
 {
 	fileLocations = paths;
+	cerr << "DEBUG: StelFileMgr::fileLocations path is (StelFileMgr::setSearchPaths(...)):" << endl;		   
+	for(vector<fs::path>::iterator i = fileLocations.begin();
+		   i != fileLocations.end();
+		   i++)
+	{
+		cerr << "  + " << (*i).string() << endl;
+	}
+	cerr << "  [end search paths]" << endl;
 }
 
-const fs::path StelFileMgr::getDesktopDir(void)
+bool StelFileMgr::exists(const fs::path& path)
 {
-	// TODO: Test Windows and MAC builds.  I edited the code but have
-	// not got a build platform -MNG
-	fs::path result;
-#if defined(WIN32)
-	char path[MAX_PATH];
-	path[MAX_PATH-1] = '\0';
-	// Previous version used SHGetFolderPath and made app crash on window 95/98..
-	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
-	LPITEMIDLIST tmp;
-	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
-	{
-		SHGetPathFromIDList(tmp, path);                      
-		result = path;
-	}
-	else
-	{	
-		if(getenv("USERPROFILE")!=NULL)
-		{
-			//for Win XP etc.
-			result = string(getenv("USERPROFILE")) + "\\Desktop";
-		}
-		else
-		{
-			//for Win 98 etc.
-			//note: will not work well for users who installed windows in a 
-			//non-default location.  Ugly & a source of problems.
-			result = "C:\\Windows\\Desktop";
-		}
-	}
-#else
-	result = getenv("HOME");
-	result /= "Desktop";
-#endif
-	return result;
+	return fs::exists(path);
 }
 
 /**
@@ -257,6 +217,49 @@ bool StelFileMgr::isWritable(const fs::path& path)
 	return result;
 }
 
+bool StelFileMgr::isDirectory(const fs::path& path)
+{
+	return fs::is_directory(path);
+}
+
+void StelFileMgr::checkUserDir()
+{
+	try {
+		if (fs::exists(getUserDir()))
+		{
+			if (isDirectory(getUserDir()) && isWritable(getUserDir()))
+			{
+				// everything checks out fine.
+				return;
+			}
+			else
+			{
+				cerr << "ERROR: user directory is not a writable directory: " << getUserDir().string() << endl;
+				exit(1);
+			}
+		}
+		else
+		{
+			// The user directory doesn't exist, lets create it.
+			system(string("mkdir " + getUserDir().string()).c_str());
+			
+			// And verify that it was created
+			if (!fs::exists(getUserDir()))
+			{
+				cerr << "ERROR: could not create user directory: " << getUserDir().string() << endl;
+				exit(1);
+			}
+		}
+		
+	}
+	catch(exception& e)
+	{
+		// This should never happen  ;)
+		cerr << "ERROR: cannot work out the user directory" << endl;
+		exit(1);
+	}	
+}
+
 bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 {
 	if ( ! (flags & HIDDEN) )
@@ -298,5 +301,184 @@ bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 	}
 		
 	return(true);
+}
+
+// Platform dependent members with compiler directives in them.
+const fs::path StelFileMgr::getDesktopDir(void)
+{
+	// TODO: Test Windows and MAC builds.  I edited the code but have
+	// not got a build platform -MNG
+	fs::path result;
+#if defined(WIN32)
+	char path[MAX_PATH];
+	path[MAX_PATH-1] = '\0';
+	// Previous version used SHGetFolderPath and made app crash on window 95/98..
+	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+	LPITEMIDLIST tmp;
+	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
+	{
+		SHGetPathFromIDList(tmp, path);                      
+		result = path;
+	}
+	else
+	{	
+		if(getenv("USERPROFILE")!=NULL)
+		{
+			//for Win XP etc.
+			result = string(getenv("USERPROFILE")) + "\\Desktop";
+		}
+		else
+		{
+			//for Win 98 etc.
+			//note: will not work well for users who installed windows in a 
+			//non-default location.  Ugly & a source of problems.
+			result = "C:\\Windows\\Desktop";
+		}
+	}
+#else
+	result = getenv("HOME");
+	result /= "Desktop";
+#endif
+	if (!fs::is_directory(result))
+	{
+		throw(runtime_error("NOT FOUND"));
+	}
+	return result;
+}
+
+const fs::path StelFileMgr::getUserDir(void)
+{
+#if defined(MINGW32) || defined(WIN32)
+	// Windows
+#error "StelFileMgr::getUserDir not yet implemented for Windows"	
+#elseif defined(MAXOSX)
+	// OSX
+#error "StelFileMgr::getUserDir not yet implemented for OSX"
+#else 
+	// Linux, BSD, Solaris etc.	       
+	fs::path homeLocation(getenv("HOME"));
+	if (!fs::is_directory(homeLocation))
+	{
+		// This will be the case if getenv failed or something else is weird
+		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
+		throw(runtime_error("NOT FOUND"));
+	}
+	else 
+	{
+		homeLocation /= ".stellarium";
+		return(homeLocation);
+	}
+#endif
+	throw(runtime_error("NOT FOUND"));
+}
+	
+const fs::path StelFileMgr::getInstallationDir(void)
+{
+#if defined(MINGW32) || defined(WIN32)
+	// Windows
+#error "StelFileMgr::getInstallationDir not yet implemented for Windows"	
+#elseif defined(MAXOSX)
+	// OSX
+#error "StelFileMgr::getInstallationDir not yet implemented for OSX"
+#else 
+	// Linux, BSD, Solaris etc.
+	// We use the value from the config.h filesystem
+	fs::path installLocation(INSTALL_DATADIR);
+	if (fs::exists(installLocation / CHECK_FILE))
+	{
+		return installLocation;
+	}
+	else
+	{
+		cerr << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
+			<< installLocation.string()
+			<< " (we checked for "
+			<< CHECK_FILE
+			<< ")."
+			<< endl;
+		installLocation = fs::current_path();
+		if (fs::exists(installLocation / CHECK_FILE))
+		{
+			return installLocation;
+		}
+		else
+		{
+			throw(runtime_error("NOT FOUND"));
+		}
+	}
+#endif
+	throw(runtime_error("NOT FOUND"));
+}
+	
+const fs::path StelFileMgr::getScreenshotDir(void)
+{
+#if defined(MINGW32) || defined(WIN32)
+	// Windows
+#error "StelFileMgr::getScreenshotDir not yet implemented for Windows"	
+	// return getDesktopDir();
+#elseif defined(MAXOSX)
+	// OSX
+#error "StelFileMgr::getScreenshotDir not yet implemented for OSX"
+	// return getDesktopDir();
+#else 
+	// Linux, BSD, Solaris etc.
+	fs::path checkDir(getenv("HOME"));
+	if (!fs::is_directory(checkDir))
+	{
+		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
+		throw(runtime_error("NOT FOUND"));
+	}
+	else
+	{
+		return(checkDir);
+	}
+#endif
+	throw(runtime_error("NOT FOUND"));
+}
+
+const fs::path StelFileMgr::getScriptSaveDir(void)
+{
+#if defined(MINGW32) || defined(WIN32)
+	// Windows
+#error "StelFileMgr::getScreenshotDir not yet implemented for Windows"	
+	// return getDesktopDir();
+#elseif defined(MAXOSX)
+	// OSX
+#error "StelFileMgr::getScreenshotDir not yet implemented for OSX"
+	// return getDesktopDir();
+#else 
+	// Linux, BSD, Solaris etc.
+	fs::path checkDir(getenv("HOME"));
+	if (!fs::is_directory(checkDir))
+	{
+		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
+		throw(runtime_error("NOT FOUND"));
+	}
+	else
+	{
+		return(checkDir);
+	}
+#endif
+	throw(runtime_error("NOT FOUND"));
+}
+
+const string StelFileMgr::getLocaleDir(void)
+{
+	fs::path localePath;
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
+	// Windows and MacOS X have the locale dir in the installation folder
+	localePath = getInstallationDir() / "data/locale";
+#else
+	// Linux, BSD etc, the locale dir is set in the config.h
+	localePath = fs::path(INSTALL_LOCALEDIR);
+#endif
+	if (fs::exists(localePath))
+	{
+		return localePath.string();
+	}
+	else
+	{
+		throw(runtime_error("NOT FOUND"));
+	}
 }
 

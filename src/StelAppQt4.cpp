@@ -74,8 +74,8 @@ private:
     double lastEventTimeSec;
 };
 
-StelAppQt4::StelAppQt4(const string& configDir, const string& localeDir, const string& dataRootDir, int argc, char **argv) :
-	StelApp(configDir, localeDir, dataRootDir)
+StelAppQt4::StelAppQt4(int argc, char **argv) :
+	StelApp(argc, argv)
 {
 }
 

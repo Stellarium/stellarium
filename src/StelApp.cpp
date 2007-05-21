@@ -47,37 +47,55 @@
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 
+#include <cstdlib>
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
-		maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), timeBase(0), ui(NULL),
-	 draw_mode(StelApp::DM_NORMAL)
+StelApp::StelApp(int argc, char** argv) :
+	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
+	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
 	assert(!singleton);
 	singleton = this;
 
-	dotStellariumDir = CDIR;
-	localeDir = LDIR;
-	dataDir = DATA_ROOT+"/data";
-	rootDir = DATA_ROOT + "/";
-
 	// This is necessary so boost will allow paths which 
-	// include ".", e.g. .stellarium 
-        fs::path::default_name_check(fs::native);
+	// include ".", e.g. /home/bob/.stellarium 
+	fs::path::default_name_check(fs::native);
 	
-	// Prepare the search path to pass to the file manager
-	vector<fs::path> searchPaths;
-	searchPaths.push_back(CDIR);
-	searchPaths.push_back(DATA_ROOT);
-        stelFileMgr = new StelFileMgr();
-	stelFileMgr->setSearchPaths(searchPaths);
-	textureMgr = new StelTextureMgr(rootDir + "textures/");
+	// C++-ize argv for use with StelUtils::argsHaveOption... functions
+	for(int i=0; i<argc; i++) { argList.push_back(argv[i]); }
+		
+	stelFileMgr = new StelFileMgr();
+	
+	// Check if the user directory exists, and create it if necessary
+	stelFileMgr->checkUserDir();
+	
+	// Check some command-line options
+	try
+	{
+		setConfigFile(StelUtils::argsHaveOptionWithArg<string>(argList, "-c", "--config-file", "config.ini"));
+		cerr << "StelApp DEBUG: I have set the config file name to: " << configFile << endl;
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
+		setConfigFile("config.ini");		
+	}
+	
+	if (!stelFileMgr->exists(configFile))
+	{
+		cerr << "DEBUG: configuration file does not exist - copying from default file" << endl;
+		copyDefaultConfigFile();
+	}
+        
+	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
+	
 	string fontMapFile("");
 	try 
 	{
@@ -88,6 +106,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 		cerr << "ERROR when locating font map file: " << e.what() << endl;
 	}
 	fontManager = new StelFontMgr(fontMapFile);
+	
 	skyCultureMgr = new StelSkyCultureMgr();
 	moduleMgr = new StelModuleMgr();
 	
@@ -125,22 +144,6 @@ StelApp::~StelApp()
 	delete moduleMgr;
 }
 
-/*************************************************************************
- Get the configuration file path.
-*************************************************************************/
-string StelApp::getConfigFilePath() const
-{
-	try
-	{
-		return stelFileMgr->findFile("config.ini", StelFileMgr::WRITABLE).string();
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR: could not determine path of config.ini file: " << e.what();
-		return "config.ini";
-	}
-}
-
 bool restart_ui = false;
 
 void StelApp::setViewPortDistorterType(const string &type)
@@ -152,7 +155,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 		distorter = 0;
 	}
 	InitParser conf;
-	conf.load(dotStellariumDir + "config.ini");
+	conf.load(getConfigFilePath());
 	distorter = ViewportDistorter::create(type,getScreenW(),getScreenH(),
 	                                      core->getProjection(),conf);
 }
@@ -183,7 +186,7 @@ void StelApp::init()
 	string confPath;
 	try
 	{
-		confPath = stelFileMgr->findFile("config.ini").string();
+		confPath = getConfigFilePath();
 	}
 	catch(exception& e)
 	{
@@ -205,9 +208,21 @@ void StelApp::init()
 		if( v1 == 0 && v2 < 6 )
 		{
 			// The config file is too old to try an importation
-			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-			system( (string("cp -f ") + dataDir + "default_config.ini " + getConfigFilePath()).c_str() );
-			conf.load(dotStellariumDir + "config.ini");  // Read new config!
+			cout << "The current config file is from a version too old for parameters to be imported (" 
+					<< (version.empty() ? "<0.6.0" : version.c_str())
+					<< ")." << endl 
+					<< "It will be replaced by the default config file." << endl;
+			try
+			{
+				string defaultFile = stelFileMgr->findFile("data/default_config.ini").string();
+				string configFile = getConfigFilePath();
+				system(string("cp -f " + defaultFile + " " + configFile).c_str());	
+				conf.load(configFile);  // Read new config
+			}
+			catch(exception& e)
+			{
+				cerr << "ERROR: cannot copy default config file to user directory: " << e.what() << endl;
+			}
 		}
 		else
 		{
@@ -549,6 +564,51 @@ void StelApp::set2DfullscreenProjection() const
 	glLoadIdentity();
 	glScalef(1, -1, 1);					// invert the y axis, down is positive
 	glTranslatef(0, -getScreenH(), 0);		// move the origin from the bottom left corner to the upper left corner
+}
+
+void StelApp::setConfigFile(const string& configName)
+{
+	try
+	{
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::WRITABLE).string();
+	}
+	catch(exception& e)
+	{
+		cerr << "WARNING: setConfigFile: could not find existing file matching name " << configName << endl;
+		try
+		{
+			configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW).string();
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR: setConfigFile: no writable path found for config file, " 
+				<< configName << ": " << e.what() << endl;
+			cerr << "I'm going to panic and use \"config.ini\".  Gook luck." << endl;
+			configFile = "config.ini";
+		}
+	}
+}
+
+void StelApp::copyDefaultConfigFile()
+{
+	string defaultConfigFilePath;
+	try
+	{
+		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini").string();
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR: failed to locate data/default_config.ini.  Please check your installation." << endl;
+		exit(1);
+	}
+	
+	system((string("cp ") + defaultConfigFilePath + " " + configFile).c_str());
+	
+	if (!stelFileMgr->exists(configFile))
+	{
+		cerr << "ERROR: somehow copying the default_config.ini file failed (destination=" << configFile << ")" << endl;
+		exit(1);
+	}
 }
 
 //! Restore previous projection mode

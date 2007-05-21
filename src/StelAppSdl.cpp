@@ -45,8 +45,8 @@ using namespace std;
 #ifdef USE_SDL 
 
 #include "GLee.h"
-#include "SDL.h"
-#include "SDL_opengl.h"
+#include "SDL/SDL.h"
+#include "SDL/SDL_opengl.h"
 
 void StelAppSdl::setResizable(bool resizable)
 {

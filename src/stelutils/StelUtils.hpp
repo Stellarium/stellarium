@@ -23,7 +23,11 @@
 #include <string>
 #include <map>
 #include <ctime>
+#include <vector>
 #include "vecmath.h"
+#include <sstream>
+#include <algorithm>
+#include <stdexcept>
 
 using namespace std;
 
@@ -110,7 +114,7 @@ namespace StelUtils {
 	//! @brief Convert an angle in radian to a dms formatted wstring
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
-	//! @param useD Define if letter "d" must be used instead of °
+	//! @param useD Define if letter "d" must be used instead of ï¿½
 	wstring radToDmsWstrAdapt(double angle, bool useD=false);
 	
 	//! @brief Convert an angle in radian to a dms formatted string
@@ -119,7 +123,7 @@ namespace StelUtils {
 	
 	//! @brief Convert an angle in radian to a dms formatted wstring
 	//! @param rad input angle in radian
-	//! @param useD Define if letter "d" must be used instead of °
+	//! @param useD Define if letter "d" must be used instead of ï¿½
 	wstring radToDmsWstr(double angle, bool decimal=false, bool useD=false);
 	
 	//! @brief Obtains a Vec3f from a string
@@ -134,10 +138,10 @@ namespace StelUtils {
 	//! @deprecated Use the << operator from Vec3f class
 	string vec3f_to_str(const Vec3f& v);
 	
-	//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+	//! @brief Print the passed angle with the format ddï¿½mm'ss(.ss)"
 	//! @param angle Angle in radian
 	//! @param decimal Define if 2 decimal must also be printed
-	//! @param useD Define if letter "d" must be used instead of °
+	//! @param useD Define if letter "d" must be used instead of ï¿½
 	//! @return The corresponding string
 	wstring printAngleDMS(double angle, bool decimals = false, bool useD = false);
 	
@@ -247,6 +251,85 @@ namespace StelUtils {
 	
 	//! Return the inverse sinus hyperbolic of z
 	double asinh(double z);
+	
+	//! check if a vector of strings has a CLI-style option
+	//! @param args a vector of strings, think argv
+	//! @param shortOpt a short-form option string, e.g, "-h"
+	//! @param longOpt a long-form option string, e.g. "--help"
+	//! @param modify whether to remove found options from args (default=true)
+	//! @return true if the option exists in args
+	bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify=true);
+	
+	//! retrieve option with argument from vector of strings
+	//! given a vector of string command line arguments, this function will
+	//! extract the argument to an option of type T.
+	//! The option may be expresed using either the short form, e.g. -n arg,
+	//! the long form with a space, e.g. --number arg, or the long form
+	//! with an =, e.g. --number=arg
+	//! Type checking is done on the result using the stringstream class, so
+	//! any type which can be validated and converted using this class may be
+	//! used with this function.
+	//! @param args a vector of string arguments, think argv
+	//! @param shortOpt the short form of the option, e.g. -n
+	//! @param longOpt the long form of the option, e.g. --number
+	//! @param defValue the default value to return if the option was not found in args
+	//! @param mofify whether to remove found values from args or not (default=true)
+	//! @exception runtime_error("no_optarg") the expected argument to the option was not found
+	//! @exception runtime_error("optarg_type") the expected argument to the option was not found
+	template<class T>
+	T argsHaveOptionWithArg(vector<string>& args, string shortOpt, string longOpt, T defValue, bool modify=true)
+	{
+		vector<string>::iterator optArg;
+	
+		vector<string>::iterator lastOpt = find(args.begin(), args.end(), "--");
+		for(vector<string>::iterator i=args.begin(); i!=lastOpt; i++)
+		{
+			if (*i == shortOpt || *i == longOpt)
+			{
+				optArg = i + 1;
+				if (optArg == lastOpt)
+					throw(runtime_error("no_optarg"));
+				else
+				{
+					T result;
+					stringstream ss(*optArg);
+					ss >> result;
+					if ( ! ss.fail() )
+					{
+						if (modify)
+							args.erase(i, optArg + 1);
+
+						return result;
+					}
+					else
+					{
+						throw(runtime_error("optarg_type"));
+					}
+				}
+				
+			}
+			else if ( (*i).substr(0, longOpt.length()) == longOpt && (*i).substr(longOpt.length(), 1) == "=" )
+			{
+				string arg(*i);
+				arg.erase(0,longOpt.length()+1);
+				T result;
+				stringstream ss(arg);
+				ss >> result;
+				if ( ! ss.fail() )
+				{
+					if (modify)
+						args.erase(i);
+
+					return result;
+				}
+				else
+				{
+					throw(runtime_error("optarg type"));
+				}
+			}
+		}
+		return defValue;
+	}
 }
 
 // General Calendar Functions

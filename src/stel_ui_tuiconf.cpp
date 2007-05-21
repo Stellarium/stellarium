@@ -77,10 +77,10 @@ void StelUI::draw_gravity_ui(void)
 		core->getProjection()->drawText(tuiFont, x - shift + 38, y - 38, os.str(), 0, 0, 0, false);
 	}
 
-	if (StelApp::getInstance().getStelObjectMgr().getWasSelected() && FlagShowTuiShortObjInfo)
+	if (app->getStelObjectMgr().getWasSelected() && FlagShowTuiShortObjInfo)
 	{
-	    wstring info = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getShortInfoString(core->getNavigation());
-		glColor3fv(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getInfoColor());
+	    wstring info = app->getStelObjectMgr().getSelectedObject()[0]->getShortInfoString(core->getNavigation());
+		glColor3fv(app->getStelObjectMgr().getSelectedObject()[0]->getInfoColor());
 		core->getProjection()->drawText(tuiFont, x + shift - 38, y + 38, info, 0, 0, 0, false);
 	}
 }
@@ -90,7 +90,7 @@ void StelUI::draw_gravity_ui(void)
 // since lose states - try localizeTui() instead
 void StelUI::init_tui(void)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
 	
 	// Menu root branch
 	ScriptDirectoryRead = 0;
@@ -129,7 +129,7 @@ void StelUI::init_tui(void)
 	// Home planet only changed if hit enter to accept because
 	// switching planet instantaneously as select is hard on a planetarium audience
 	tui_location_planet = new s_tui::MultiSet2_item<wstring>(wstring(L"1.4 ") );
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* ssmgr = (SolarSystem*)app->getModuleMgr().getModule("ssystem");
 	tui_location_planet->addItemList(ssmgr->getPlanetHashString());
 	//	tui_location_planet->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
 	tui_location_planet->set_OnTriggerCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
@@ -144,7 +144,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	try
 	{
-		tui_time_settmz = new s_tui::Time_zone_item(StelApp::getInstance().getFileMgr().findFile("data/zone.tab").string(), wstring(L"2.2 "));
+		tui_time_settmz = new s_tui::Time_zone_item(app->getFileMgr().findFile("data/zone.tab").string(), wstring(L"2.2 "));
 	}
 	catch(exception &e)
 	{
@@ -188,7 +188,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet_item<wstring>(wstring(L"3.2 ") );
-	tui_general_sky_locale->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
+	tui_general_sky_locale->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -343,7 +343,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.5 ");
-	tui_admin_setlocale->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
+	tui_admin_setlocale->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
@@ -374,7 +374,7 @@ void StelUI::localizeTui(void)
 	tui_location_longitude->setLabel(wstring(L"1.2 ") + _("Longitude: "));
 	tui_location_altitude->setLabel(wstring(L"1.3 ") + _("Altitude (m): "));
 	tui_location_planet->setLabel(wstring(L"1.4 ") + _("Solar System Body: "));
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* ssmgr = (SolarSystem*)app->getModuleMgr().getModule("ssystem");
 	tui_location_planet->replaceItemList(ssmgr->getPlanetHashString(),0);
 
 	// 2. Time
@@ -501,7 +501,7 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					boost::filesystem::path theParent = StelApp::getInstance().getFileMgr().findFile("scripts/" + SelectedScript);
+					boost::filesystem::path theParent = app->getFileMgr().findFile("scripts/" + SelectedScript);
 					cmd = "script action play filename \"" + SelectedScript + ".sts\" path \"" + theParent.string() + "/\"";
 				}
 				catch(exception& e)
@@ -538,14 +538,14 @@ void StelUI::tui_update_widgets(void)
 {
 	if (!FlagShowTuiMenu) return;
 	
-	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-	MilkyWay* mw = (MilkyWay*)StelApp::getInstance().getModuleMgr().getModule("milkyway");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	StarMgr* smgr = (StarMgr*)app->getModuleMgr().getModule("stars");
+	ConstellationMgr* cmgr = (ConstellationMgr*)app->getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)app->getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)app->getModuleMgr().getModule("ssystem");
+	MilkyWay* mw = (MilkyWay*)app->getModuleMgr().getModule("milkyway");
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)app->getModuleMgr().getModule("gridlines");
+	MovementMgr* mvmgr = (MovementMgr*)app->getModuleMgr().getModule("movements");
 	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory()->get_latitude());
@@ -652,11 +652,18 @@ void StelUI::tui_cb_admin_load_default(void)
 // Save to default configuration
 void StelUI::tui_cb_admin_save_default(void)
 {
-	saveCurrentConfig(app->getConfigFilePath());
+	try
+	{
+		saveCurrentConfig(app->getConfigFilePath());
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR: could not save config.ini file: " << e.what() << endl;
+	}
 
 	try
 	{
-		system( (StelApp::getInstance().getFileMgr().findFile("data/script_save_config ") ).string().c_str() );
+		system( (app->getFileMgr().findFile("data/script_save_config ") ).string().c_str() );
 	}
 	catch(exception& e)
 	{
@@ -669,7 +676,7 @@ void StelUI::tui_cb_admin_updateme(void)
 {
 	try
 	{
-		system( ( StelApp::getInstance().getFileMgr().findFile("data/script_internet_update" )).string().c_str() );
+		system( ( app->getFileMgr().findFile("data/script_internet_update" )).string().c_str() );
 	}
 	catch(exception& e)
 	{
@@ -683,7 +690,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 {
 	try
 	{
-		system( ( StelApp::getInstance().getFileMgr().findFile("data/script_shutdown" )).string().c_str() );
+		system( ( app->getFileMgr().findFile("data/script_shutdown" )).string().c_str() );
 	}
 	catch(exception& e)
 	{
@@ -853,11 +860,11 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 
 void StelUI::tui_cb_change_color()
 {
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	ConstellationMgr* cmgr = (ConstellationMgr*)app->getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)app->getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)app->getModuleMgr().getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)app->getModuleMgr().getModule("gridlines");
 	
 	cmgr->setLinesColor( tui_colors_const_line_color->getVector() );
 	cmgr->setNamesColor( tui_colors_const_label_color->getVector() );
@@ -924,11 +931,11 @@ void StelUI::saveCurrentConfig(const string& confFile)
 {
 	// No longer resaves everything, just settings user can change through UI
 
-	StelSkyCultureMgr* skyCultureMgr = &StelApp::getInstance().getSkyCultureMgr();
-	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-	StelModuleMgr* moduleMgr = &StelApp::getInstance().getModuleMgr();
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	StelSkyCultureMgr* skyCultureMgr = &app->getSkyCultureMgr();
+	StelLocaleMgr* localeMgr = &app->getLocaleMgr();
+	StelModuleMgr* moduleMgr = &app->getModuleMgr();
+	GridLinesMgr* grlmgr = (GridLinesMgr*)app->getModuleMgr().getModule("gridlines");
+	MovementMgr* mvmgr = (MovementMgr*)app->getModuleMgr().getModule("movements");
 	
 	cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;

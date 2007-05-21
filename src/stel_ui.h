@@ -106,7 +106,7 @@ public:
 
 	//! Get day key mode (calendar, sidereal)
 	string getDayKeyMode();
-
+	
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance

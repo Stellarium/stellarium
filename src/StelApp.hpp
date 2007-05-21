@@ -61,12 +61,12 @@ class StelApp
 	friend class StelCommandInterface;
 public:
 	//! @brief Create and initialize the main Stellarium application.
-	//! @param configDir the full path to the directory where config.ini is stored.
-	//! @param localeDir the full path to the directory containing locale specific infos
-	//! e.g. /usr/local/share/locale/. This directory should typically contain fr/LC_MESSAGES/stellarium.mo
-	//! so that french translations work.
-	//! @param dataRootDir the root data directory.
-	StelApp(const string& configDir, const string& localeDir, const string& dataRootDir);
+	//! @param argc The number of command line paremeters
+	//! @param argv an array of char* command line arguments
+	//! The configFile will be search for in the search path by the StelFileMgr,
+	//! it is therefor possible to specify either just a file name or path within the
+	//! search path, or use a full path or even a relative path to an existing file
+	StelApp(int argc, char** argv);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -77,15 +77,6 @@ public:
 	//! @brief Get the StelApp singleton instance
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {assert(singleton); return *singleton;}
-
-	//! @brief Get the configuration file path.
-	//! @return the full path to Stellarium's main config.ini file
-	string getConfigFilePath() const;
-
-	//! @brief Get the locale data directory path
-	//! @return the full path to the directory containing locale specific infos e.g. /usr/local/share/locale/.
-	//! This directory should e.g. contain fr/LC_MESSAGES/stellarium.mo so that french translations work.
-	const string& getLocaleDir() {return localeDir;}
 
 	//! @brief Get the module manager to use for accessing any module loaded in the application
 	//! @return the module manager.
@@ -165,6 +156,21 @@ public:
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection() const;
 	
+	//! Sets the name of the configuration file
+	//! It is possible to set the configuration by passing either a full path
+	//! a relative path of an existing file, or path segment which will be appended
+	//! to the serach path.  The configuration file must be writable, or there will
+	//! be trouble!
+	//! @param configName the name or full path of the configuration file
+	void setConfigFile(const string& configName);
+	
+	//! Retrieve the full path of the current configuration file
+	//! @return the full path of the configuration file
+	const string& getConfigFilePath() { return configFile; }
+		
+	//! Copies the default configuration file
+	void copyDefaultConfigFile();
+	
 	//! Get the width of the openGL screen
 	//! @return width of the openGL screen in pixels
 	virtual int getScreenW() const = 0;
@@ -241,6 +247,8 @@ protected:
 	virtual void setResizable(bool resizable) = 0;
 	
 private:
+	// C++-ized version of argc & argv
+	vector<string> argList;
 	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const std::string& fileName, const std::string& section);
@@ -250,15 +258,6 @@ private:
 
 	// The associated StelCore instance
 	StelCore* core;
-
-	// Full path to config dir
-	string dotStellariumDir;
-	// Full path to locale dir
-	string localeDir;
-	// Full path to data dir
-	string dataDir;
-	// Full path to root dir
-	string rootDir;
 
 	// Module manager for the application
 	StelModuleMgr* moduleMgr;
@@ -295,6 +294,8 @@ private:
 	//! Possible drawing modes
 	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
+	
+	string configFile;
 
 };
 
