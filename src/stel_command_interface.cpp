@@ -489,7 +489,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			// if from script, local to that path
 			string path;
 			if(stapp->scripts->is_playing()) path = stapp->scripts->get_script_path();
-			else path = StelApp::getInstance().rootDir + "/";			
+			else path = StelApp::getInstance().getFileMgr().getScriptSaveDir().string() + "/";			
 		  
 			//		  cout << "audio path = " << path << endl;
 		  

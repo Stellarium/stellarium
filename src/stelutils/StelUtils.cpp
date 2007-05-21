@@ -27,6 +27,11 @@
 #include <cstdio>
 #include <iostream>
 #include <iomanip>
+#include <vector>
+#include <algorithm>
+#include <stdexcept>
+
+
 #include "dirent.h"
 
 #if defined( CYGWIN )
@@ -393,7 +398,7 @@ string vec3f_to_str(const Vec3f& v)
 }
 
 	
-//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+//! @brief Print the passed angle with the format ddï¿½mm'ss(.ss)"
 //! @param angle Angle in radian
 //! @param decimal Define if 2 decimal must also be printed
 //! @param useD Define if letter "d" must be used instead of the deg sign
@@ -813,14 +818,29 @@ double asinh(double z)
 }
 } // end of the StelUi namespace
 
+bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify=true)
+{
+	bool result=false;
+	vector<string>::iterator lastOpt = find(args.begin(), args.end(), "--");
 
+	vector<string>::iterator foundShort = find(args.begin(), lastOpt, shortOpt);
+	if (foundShort != lastOpt)
+	{
+		result=true;
+		if (modify)
+			args.erase(foundShort);
+	}
 
+	vector<string>::iterator foundLong = find(args.begin(), lastOpt, longOpt);
+	if (foundLong != lastOpt)
+	{
+		result=true;
+		if (modify)
+			args.erase(foundLong);
+	}
 
-
-
-
-
-
+	return result;
+}
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day

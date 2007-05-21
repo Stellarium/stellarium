@@ -9,8 +9,8 @@
 class StelAppSdl : public StelApp
 {
 public:
-	StelAppSdl(const string& configDir, const string& localeDir, const string& dataRootDir) :
-		StelApp(configDir, localeDir, dataRootDir) {;}
+	StelAppSdl(int argc, char** argv) :
+		StelApp(argc, argv) {;}
 
 	virtual ~StelAppSdl() {deInit();}
 

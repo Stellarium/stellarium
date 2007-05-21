@@ -15,7 +15,7 @@ namespace fs = boost::filesystem;
 //!
 //! StelFileMgr provides functions for locating files.  It maintains a list of 
 //! directories in which to look for files called the search path. Typcially this
-//! includes the Stellarium installatiom directory, and a per-user settings 
+//! includes the Stellarium installation directory, and a per-user settings 
 //! directory (on platforms which support it).
 //! The concept is that the StelFileMgr will be asked for a named path, and it
 //! will try to locate that path within each of the search directories.
@@ -52,6 +52,9 @@ public:
 	//! unanbigiously identifies one and only one file on multi-root OSes), it will 
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
+	//! If you wish to serach for a non-exiting file which is not in the search path 
+	//! you should explicitly prefix it with "./", or otherwise have a . at the start of
+	//! the path parameter, e.g. path="./my_config_file_in_the_pwd.ini"
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
@@ -82,6 +85,28 @@ public:
 	//!        search paths
 	void setSearchPaths(const vector<fs::path> paths);
 		
+	//! Check if a path exists.  Note it might be a file or a directory.
+	//! @param path to check
+	bool exists(const fs::path& path);
+	
+	//! Check if a path is writable
+	//! For files, true is returned if the file exists and is writable
+	//! or if the file doesn't exist, but it's parent directory does,
+	//! if the file can be created.
+	//! In the case of directories, return true if the directory can
+	//! have files created in it.
+	//! @param path to check
+	bool isWritable(const fs::path& path);
+	
+	//! Check if a path exists and is a directory.
+	//! @param path to check
+	bool isDirectory(const fs::path& path);
+	
+	//! Check if the user directory exists, is writable and a driectory
+	//! Creates it if it does not exist.  Exits the program if any of this
+	//! process fails.
+	void checkUserDir();
+	
 	//! Get the user's Desktop directory
 	//! This is a portable way to retrieve the directory for the user's desktop.
 	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
@@ -93,13 +118,42 @@ public:
 	//!            OS doesn't provide one.
 	const fs::path getDesktopDir(void);
 	
-	//! Check if a path is writable
-	//! For files, true is returned if the file exists and is writable
-	//! or if the file doesn't exist, but it's parent directory does,
-	//! if the file can be created.
-	//! In the case of directories, return true if the directory can
-	//! have files created in it.
-	bool isWritable(const fs::path& path);
+	//! Returns the path to the user directory
+	//! This is the directory where we expect to find the [default] writable 
+	//! configuration file, user versions of scripts, nebulae, stars, skycultures etc.
+	//! It will be the first directory in the path which is used when
+	//! trying to find most data files
+	//! @return the path to the user private data directory	
+	//! @exceptions NOT_FOUND if the directory could not be found
+	const fs::path getUserDir(void);
+	
+	//! Returns the path to the installation directory
+	//! This is the directory where we expect to find scripts, nebulae, stars, 
+	//! skycultures etc, and will be added at the end of the search path
+	//! @return the path to the installation data directory	
+	//! @exceptions NOT_FOUND if the directory could not be found
+	const fs::path getInstallationDir(void);
+	
+	//! This is the directory into which screenshots will be saved
+	//! It is $HOME on Linux, BSD, Solaris etc.
+	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
+	//! It is ??? on Windows
+	//! @return the path to the directory where screenshots are saved
+	//! @exceptions NOT_FOUND if the directory could not be found
+	const fs::path getScreenshotDir(void);
+	
+	//! This is the directory into which saved scripts will be saved
+	//! It is $HOME on Linux, BSD, Solaris etc.
+	//! It is the user's desktop on MacOS X (??? - someone please verify this)
+	//! It is ??? on Windows
+	//! @return the path to the directory where recorded scripts are saved	
+	//! @exceptions NOT_FOUND if the directory could not be found
+	const fs::path getScriptSaveDir(void);
+	
+	//! get the directory for locate files (i18n)
+	//! @return the path to the locale directory
+	//! @exceptions NOT_FOUND if the directory could not be found
+	const string getLocaleDir(void);
 	
 private:
 	//! Check if a (complete) path matches a set of flags
@@ -108,9 +162,9 @@ private:
 	//! @return true if path passes all flag tests, else false
 	//! @exceptions [misc] can throw boost::filesystem exceptions if there are unexpected problems with IO
 	bool fileFlagsCheck(const fs::path& path, const FLAGS& flags=(FLAGS)0);
-	
+		
 	vector<fs::path> fileLocations;
-				
+	
 };
 
 #endif

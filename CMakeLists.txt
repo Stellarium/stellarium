@@ -44,8 +44,8 @@ FIND_PACKAGE(CURL)
 FIND_PACKAGE(Gettext REQUIRED)
 
 ########### Others ###########
-#SET(USE_QT4 1)
-SET(USE_SDL 1)
+SET(USE_QT4 1)
+#SET(USE_SDL 1)
 
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)
