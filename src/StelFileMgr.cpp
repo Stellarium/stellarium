@@ -374,13 +374,17 @@ const fs::path StelFileMgr::getUserDir(void)
 	
 const fs::path StelFileMgr::getInstallationDir(void)
 {
+	// If we are running from the build tree, we use the files from there...
+	if (fs::exists(CHECK_FILE))
+		return fs::path(".");
+
 #if defined(MINGW32) || defined(WIN32)
 	// Windows
 #error "StelFileMgr::getInstallationDir not yet implemented for Windows"	
 #elseif defined(MAXOSX)
 	// OSX
 #error "StelFileMgr::getInstallationDir not yet implemented for OSX"
-#else 
+#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
 	fs::path installLocation(INSTALL_DATADIR);
@@ -459,6 +463,7 @@ const fs::path StelFileMgr::getScriptSaveDir(void)
 		return(checkDir);
 	}
 #endif
+	cerr << "ERROR in StelFileMgr::getScriptSaveDir: could not determine installation directory" << endl;
 	throw(runtime_error("NOT FOUND"));
 }
 
@@ -467,10 +472,17 @@ const string StelFileMgr::getLocaleDir(void)
 	fs::path localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
+	// TODO: check if this works with OSX
 	localePath = getInstallationDir() / "data/locale";
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
-	localePath = fs::path(INSTALL_LOCALEDIR);
+	// but first, if we are in the development tree, don't rely on an 
+	// install having been done.
+	if (getInstallationDir() == ".")
+		return "./data/locale";
+	else
+		localePath = fs::path(INSTALL_LOCALEDIR);
+	
 #endif
 	if (fs::exists(localePath))
 	{
@@ -478,7 +490,8 @@ const string StelFileMgr::getLocaleDir(void)
 	}
 	else
 	{
-		throw(runtime_error("NOT FOUND"));
+		cerr << "WARNING in StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"" << endl;
+		return "";
 	}
 }
 
