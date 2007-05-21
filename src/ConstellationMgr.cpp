@@ -160,8 +160,10 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 	const std::vector<StelObjectP> newSelectedConst = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Constellation");
 	if (!newSelectedConst.empty())
 	{
-		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
-		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
+//		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
+//		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
+		// Do not select a star, just the constellation
+		setSelectedConst((Constellation *)newSelectedConst[0].get());
 	}
 	else
 	{
@@ -833,6 +835,8 @@ StelObjectP ConstellationMgr::searchByName(const string& name) const
 		string objwcap = (*iter)->englishName;
 		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
 		if (objwcap==objw) return *iter;
+
+		if ((*iter)->abbreviation==objw) return *iter;
 	}
 	return NULL;
 }
