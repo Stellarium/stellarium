@@ -701,7 +701,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 // Set a new landscape skin
 void StelUI::tui_cb_tui_effect_change_landscape(void)
 {
-	app->commander->execute_command(string("set landscape_name " +  StelUtils::wstringToString(tui_effect_landscape->getCurrent())));
+	app->commander->execute_command(string("set landscape_name \"" +  StelUtils::wstringToString(tui_effect_landscape->getCurrent()) + "\""));
 }
 
 

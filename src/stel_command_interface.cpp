@@ -198,44 +198,39 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	} else if (command == "select") {
 
-		// default is to deselect current object
-		StelApp::getInstance().getStelObjectMgr().unSelect();
+		// default is to unselect current object (TODO: but not constellations!)
 
-
-		string select_type, identifier;
-
+		
 		if(args["hp"]!=""){
-			select_type = "hp";
-			identifier = string("HP") + args["hp"];
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(string("HP") + args["hp"]), false);
 		}
 		else if(args["star"]!="") {
-			select_type = "star";
-			identifier = args["star"];
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(args["star"]), false);
 		} 
 		else if(args["planet"]!=""){
-			select_type = "planet";
-			identifier = args["planet"];
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( ssmgr->searchByName(args["planet"]), false);
 		} 
 		else if(args["nebula"]!=""){
-			select_type = "nebula";
-			identifier = args["nebula"];
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( nmgr->searchByName(args["nebula"]), false);
 		} 
 		else if(args["constellation"]!=""){
-			select_type = "constellation";
-			identifier = args["constellation"];
+			// TODO do not select a star
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation"]), true);
 		} 
 		else if(args["constellation_star"]!=""){
-			select_type = "constellation_star";
-			identifier = args["constellation_star"];
+			// This is no longer supported as easy to just select a star.  Here for backward compatibility.
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation_star"]), true);
 		} else {
-			select_type = "";
+			// unselect current selection 
+			// TODO: should not deselect constellations?
+			StelApp::getInstance().getStelObjectMgr().unSelect();
 		}
 
-		// TODO - NEEDS WORK to fix completely
 
-		if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().findAndSelect(identifier);
-
+		//		if(select_type != "" ) StelApp::getInstance().getStelObjectMgr().findAndSelect(identifier, addToSelection);
+		
 		// determine if selected object pointer should be displayed
+		// TODO also make this a set option
 		if(args["pointer"]=="off" || args["pointer"]=="0") StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(false);
 		else StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(true);
     

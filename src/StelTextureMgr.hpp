@@ -206,7 +206,10 @@ private:
 	
 	// Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
-	
+
+	// Used to correct a bug on some nvidia cards
+	bool isNoPowerOfTwoLUMINANCEAllowed;
+
 	// Everything used for the threaded loading
 	friend struct loadTextureThread;
 	boost::mutex loadQueueMutex;
