@@ -43,7 +43,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "Navigator.hpp"
+#include "Observer.hpp"
 #include "StelFileMgr.hpp"
+#include "InitParser.hpp"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)

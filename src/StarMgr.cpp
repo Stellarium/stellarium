@@ -48,6 +48,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "InitParser.hpp"
 #include "bytes.h"
 
 typedef int Int32;

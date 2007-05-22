@@ -42,6 +42,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "Navigator.hpp"
+#include "Observer.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS

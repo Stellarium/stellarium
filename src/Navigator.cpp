@@ -22,6 +22,8 @@
 #include "StelUtils.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
+#include "Observer.hpp"
+#include "InitParser.hpp"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +43,11 @@ Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(
 
 Navigator::~Navigator()
 {}
+
+const Planet *Navigator::getHomePlanet(void) const
+{
+	return position->getHomePlanet();
+}
 
 void Navigator::init(const InitParser& conf, LoadingBar& lb)
 {
