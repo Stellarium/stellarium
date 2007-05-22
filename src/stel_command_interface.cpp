@@ -41,6 +41,7 @@
 #include "Projector.hpp"
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
+#include "Observer.hpp"
 
 #include <iostream>
 #include <sstream>

@@ -30,6 +30,7 @@
 #include "Planet.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "InitParser.hpp"
 
 // Class which manages a grid to display in the sky
 class SkyGrid

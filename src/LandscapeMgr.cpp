@@ -30,6 +30,8 @@
 #include "StelFontMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "Observer.hpp"
+#include "InitParser.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
