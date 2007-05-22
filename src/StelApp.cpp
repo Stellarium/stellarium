@@ -79,17 +79,17 @@ StelApp::StelApp(int argc, char** argv) :
 	try
 	{
 		setConfigFile(StelUtils::argsHaveOptionWithArg<string>(argList, "-c", "--config-file", "config.ini"));
-		cerr << "StelApp DEBUG: I have set the config file name to: " << configFile << endl;
 	}
 	catch(exception& e)
 	{
 		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
 		setConfigFile("config.ini");		
 	}
+	cout << "config file is: " << configFile << endl;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "DEBUG: configuration file does not exist - copying from default file" << endl;
+		cerr << "config file \"" << configFile << "\" does not exist - copying the default file." << endl;
 		copyDefaultConfigFile();
 	}
         
@@ -574,14 +574,14 @@ void StelApp::setConfigFile(const string& configName)
 	}
 	catch(exception& e)
 	{
-		cerr << "WARNING: setConfigFile: could not find existing file matching name " << configName << endl;
+		cerr << "WARNING (setConfigFile) could not find existing file matching name " << configName << endl;
 		try
 		{
 			configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW).string();
 		}
 		catch(exception& e)
 		{
-			cerr << "ERROR: setConfigFile: no writable path found for config file, " 
+			cerr << "ERROR (setConfigFile): no writable path found for config file, " 
 				<< configName << ": " << e.what() << endl;
 			cerr << "I'm going to panic and use \"config.ini\".  Gook luck." << endl;
 			configFile = "config.ini";
@@ -598,15 +598,16 @@ void StelApp::copyDefaultConfigFile()
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR: failed to locate data/default_config.ini.  Please check your installation." << endl;
+		cerr << "ERROR (copyDefaultConfigFile): failed to locate data/default_config.ini.  Please check your installation." << endl;
 		exit(1);
 	}
 	
-	system((string("cp ") + defaultConfigFilePath + " " + configFile).c_str());
+	string cp_cmd(string("cp ") + defaultConfigFilePath + " " + configFile);
+	system(cp_cmd.c_str());
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "ERROR: somehow copying the default_config.ini file failed (destination=" << configFile << ")" << endl;
+		cerr << "ERROR (copyDefaultConfigFile): failed to copy with with command: " << cp_cmd << endl;
 		exit(1);
 	}
 }
