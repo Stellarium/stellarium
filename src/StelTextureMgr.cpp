@@ -104,9 +104,6 @@ StelTextureMgr::StelTextureMgr()
 	registerImageLoader("JPEG", &jpgLoader);
 	registerImageLoader("jpg", &jpgLoader);
 	registerImageLoader("JPG", &jpgLoader);
-	
-	// Used to correct a bug on some nvidia cards
-	isNoPowerOfTwoLUMINANCEAllowed = true;
 }
 
 /*************************************************************************
