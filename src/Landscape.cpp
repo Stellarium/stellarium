@@ -37,16 +37,17 @@ Landscape::~Landscape()
 
 
 // Load attributes common to all landscapes
-void Landscape::loadCommon(const string& landscape_file, const string& section_name)
+void Landscape::loadCommon(const string& landscape_file, const string& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
-	name = StelUtils::stringToWstring(pd.get_str(section_name, "name"));
-	author = StelUtils::stringToWstring(pd.get_str(section_name, "author"));
-	description = StelUtils::stringToWstring(pd.get_str(section_name, "description"));
+	cout << "DEBUG MNG: section name is: " << landscapeId << "file name is " << landscape_file << endl;
+	name = StelUtils::stringToWstring(pd.get_str("landscape", "name"));
+	author = StelUtils::stringToWstring(pd.get_str("landscape", "author"));
+	description = StelUtils::stringToWstring(pd.get_str("landscape", "description"));
 	if(name == L"" )
 	{
-		cerr << "No valid landscape definition found for section "<< section_name << " in file " << landscape_file << ". No landscape in use." << endl;
+		cerr << "No valid landscape definition found for section "<< landscapeId << " in file " << landscape_file << ". No landscape in use." << endl;
 		valid_landscape = 0;
 		return;
 	}
@@ -56,12 +57,12 @@ void Landscape::loadCommon(const string& landscape_file, const string& section_n
 	}
 }
 
-const string Landscape::getTexturePath(const string& basename, const string& landscapeName)
+const string Landscape::getTexturePath(const string& basename, const string& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
 	string path;
 	try {
-		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeName + "/" + basename).string();
+		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeId + "/" + basename).string();
 		return path;
 	}
 	catch (exception& e)
@@ -91,25 +92,25 @@ LandscapeOldStyle::~LandscapeOldStyle()
 
 }
 
-void LandscapeOldStyle::load(const string& landscape_file, const string& section_name)
+void LandscapeOldStyle::load(const string& landscape_file, const string& landscapeId)
 {
-	loadCommon(landscape_file, section_name);
+	loadCommon(landscape_file, landscapeId);
 	
 	// TODO: put values into hash and call create method to consolidate code
 
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	string type = pd.get_str(section_name, "type");
+	string type = pd.get_str("landscape", "type");
 	if(type != "old_style")
 	{
-		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected old_style, found " << type << ".  No landscape in use.\n";
+		cerr << "Landscape type mismatch for landscape "<< landscapeId << ", expected old_style, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
 	}
 
 	// Load sides textures
-	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
+	nb_side_texs = pd.get_int("landscape", "nbsidetex", 0);
 	side_texs = new STextureSP[nb_side_texs];
 	char tmp[255];
 	StelApp::getInstance().getTextureManager().setDefaultParams();
@@ -117,11 +118,11 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, tmp), section_name));
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", tmp), landscapeId));
 	}
 
 	// Init sides parameters
-	nb_side = pd.get_int(section_name, "nbside", 0);
+	nb_side = pd.get_int("landscape", "nbside", 0);
 	sides = new landscape_tex_coord[nb_side];
 	string s;
 	int texnum;
@@ -129,7 +130,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	for (int i=0;i<nb_side;++i)
 	{
 		sprintf(tmp,"side%d",i);
-		s = pd.get_str(section_name, tmp);
+		s = pd.get_str("landscape", tmp);
 		sscanf(s.c_str(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		sides[i].tex = side_texs[texnum];
 		sides[i].tex_coords[0] = a;
@@ -139,11 +140,11 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 		//printf("%f %f %f %f\n",a,b,c,d);
 	}
 
-	nb_decor_repeat = pd.get_int(section_name, "nb_decor_repeat", 1);
+	nb_decor_repeat = pd.get_int("landscape", "nb_decor_repeat", 1);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	ground_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "groundtex"), section_name));
-	s = pd.get_str(section_name, "ground");
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", "groundtex"), landscapeId));
+	s = pd.get_str("landscape", "ground");
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
 	ground_tex_coord.tex_coords[0] = a;
@@ -152,8 +153,8 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str(section_name, "fogtex"), section_name));
-	s = pd.get_str(section_name, "fog");
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", "fogtex"), landscapeId));
+	s = pd.get_str("landscape", "fog");
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
 	fog_tex_coord.tex_coords[0] = a;
@@ -161,15 +162,15 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	fog_tex_coord.tex_coords[2] = c;
 	fog_tex_coord.tex_coords[3] = d;
 
-	fog_alt_angle = pd.get_double(section_name, "fog_alt_angle", 0.);
-	fog_angle_shift = pd.get_double(section_name, "fog_angle_shift", 0.);
-	decor_alt_angle = pd.get_double(section_name, "decor_alt_angle", 0.);
-	decor_angle_shift = pd.get_double(section_name, "decor_angle_shift", 0.);
-	decor_angle_rotatez = pd.get_double(section_name, "decor_angle_rotatez", 0.);
-	ground_angle_shift = pd.get_double(section_name, "ground_angle_shift", 0.);
-	ground_angle_rotatez = pd.get_double(section_name, "ground_angle_rotatez", 0.);
-	draw_ground_first = pd.get_int(section_name, "draw_ground_first", 0);
-	tanMode = pd.get_boolean(section_name, "tan_mode", false);
+	fog_alt_angle = pd.get_double("landscape", "fog_alt_angle", 0.);
+	fog_angle_shift = pd.get_double("landscape", "fog_angle_shift", 0.);
+	decor_alt_angle = pd.get_double("landscape", "decor_alt_angle", 0.);
+	decor_angle_shift = pd.get_double("landscape", "decor_angle_shift", 0.);
+	decor_angle_rotatez = pd.get_double("landscape", "decor_angle_rotatez", 0.);
+	ground_angle_shift = pd.get_double("landscape", "ground_angle_shift", 0.);
+	ground_angle_rotatez = pd.get_double("landscape", "ground_angle_rotatez", 0.);
+	draw_ground_first = pd.get_int("landscape", "draw_ground_first", 0);
+	tanMode = pd.get_boolean("landscape", "tan_mode", false);
 }
 
 
@@ -373,21 +374,21 @@ LandscapeFisheye::~LandscapeFisheye()
 {
 }
 
-void LandscapeFisheye::load(const string& landscape_file, const string& section_name)
+void LandscapeFisheye::load(const string& landscape_file, const string& landscapeId)
 {
-	loadCommon(landscape_file, section_name);
+	loadCommon(landscape_file, landscapeId);
 	
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	string type = pd.get_str(section_name, "type");
+	string type = pd.get_str("landscape", "type");
 	if(type != "fisheye")
 	{
-		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected fisheye, found " << type << ".  No landscape in use.\n";
+		cerr << "Landscape type mismatch for landscape "<< landscapeId << ", expected fisheye, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
 	}
-	create(name, 0, getTexturePath(pd.get_str(section_name, "maptex"), section_name), pd.get_double(section_name, "texturefov", 360));
+	create(name, 0, getTexturePath(pd.get_str("landscape", "maptex"), landscapeId), pd.get_double("landscape", "texturefov", 360));
 }
 
 
@@ -433,22 +434,22 @@ LandscapeSpherical::~LandscapeSpherical()
 {
 }
 
-void LandscapeSpherical::load(const string& landscape_file, const string& section_name)
+void LandscapeSpherical::load(const string& landscape_file, const string& landscapeId)
 {
-	loadCommon(landscape_file, section_name);
+	loadCommon(landscape_file, landscapeId);
 	
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	string type = pd.get_str(section_name, "type");
+	string type = pd.get_str("landscape", "type");
 	if(type != "spherical" )
 	{
-		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected spherical, found " << type << ".  No landscape in use.\n";
+		cerr << "Landscape type mismatch for landscape "<< landscapeId << ", expected spherical, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
 	}
 
-	create(name, 0, getTexturePath(pd.get_str(section_name, "maptex"),section_name));
+	create(name, 0, getTexturePath(pd.get_str("landscape", "maptex"),landscapeId));
 
 }
 

@@ -238,7 +238,8 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	{
 		try
 		{
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
+			//newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), new_landscape_name);
 		}
 		catch(exception& e)
 		{
@@ -349,12 +350,12 @@ void LandscapeMgr::updateI18n()
 	
 	float LandscapeMgr::getLuminance(void) {return atmosphere->get_intensity();}
 
-Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const string& section_name)
+Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const string& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 	string s;
-	s = pd.get_str(section_name, "type");
+	s = pd.get_str("landscape", "type");
 	Landscape* ldscp = NULL;
 	if (s=="old_style")
 	{
@@ -377,7 +378,7 @@ Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const st
 		ldscp = new LandscapeFisheye();
 	}
 	
-	ldscp->load(landscape_file, section_name);
+	ldscp->load(landscape_file, landscapeId);
 	return ldscp;
 }
 
@@ -464,7 +465,9 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 		{
 			InitParser pd;
 			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini").string());
-			result[pd.get_str(*dir, "name")] = *dir;
+			string k = pd.get_str("landscape", "name");
+			cerr << "DEBUG MNG: getNameToDirMap, adding " << k << " -> " << *dir << endl;
+			result[k] = *dir;
 		}
 		catch (exception& e)
 		{
