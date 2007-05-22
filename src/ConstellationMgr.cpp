@@ -153,7 +153,9 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 	if (newSelected.empty())
 	{
-		setSelected(NULL);
+		// Even if do not have anything selected, KEEP constellation selection intact
+		// (allows viewing constellations without distraction from star pointer animation)
+		// setSelected(NULL);
 		return;
 	}
 	
