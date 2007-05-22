@@ -21,6 +21,7 @@
 
 #include "StelCore.hpp"
 #include "Navigator.hpp"
+#include "Observer.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
 #include "StelApp.hpp"
@@ -155,7 +156,7 @@ bool StelCore::setHomePlanet(string planet)
 	{
 		StelUI* ui = StelApp::getInstance().getStelUI();
 		ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+		return true;
 	}
-	else
-		return false;
+	return false;
 }

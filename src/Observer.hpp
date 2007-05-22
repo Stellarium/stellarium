@@ -20,8 +20,9 @@
 #ifndef _OBSERVATOR_H_
 #define _OBSERVATOR_H_
 
-#include "InitParser.hpp"
 #include "vecmath.h"
+
+class InitParser;
 
 class Observer
 {
@@ -72,8 +73,5 @@ private:
 	float move_to_coef, move_to_mult;
 
 };
-
-time_t my_timegm (struct tm *tm);
-
 
 #endif // _OBSERVATOR_H_

@@ -22,8 +22,11 @@
 
 
 #include "stellarium.h"
-#include "Observer.hpp"
 #include "vecmath.h"
+
+#include <string>
+
+using std::string;
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
@@ -34,8 +37,11 @@
 extern const Mat4d mat_j2000_to_vsop87;
 extern const Mat4d mat_vsop87_to_j2000;
 
+class Observer;
 class StelObject;
 class LoadingBar;
+class InitParser;
+class Planet;
 
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
@@ -88,7 +94,7 @@ public:
 	void setEquVision(const Vec3d& _pos);
 	void setPrecEquVision(const Vec3d& _pos);
 	
-	const Planet *getHomePlanet(void) const {return position->getHomePlanet();}
+	const Planet *getHomePlanet(void) const;
 
     // Return the observer heliocentric position
 	Vec3d getObserverHelioPos(void) const;
