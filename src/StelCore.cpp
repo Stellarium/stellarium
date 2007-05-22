@@ -30,6 +30,7 @@
 #include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "stel_ui.h"
 
 
 StelCore::StelCore() : projection(NULL)
@@ -150,5 +151,11 @@ bool StelCore::setHomePlanet(string planet)
 	// reset planet trails due to changed perspective
 	ssystem->startTrails( ssystem->getFlagTrails() );
 
-	return observatory->setHomePlanet(planet);
+	if(observatory->setHomePlanet(planet))
+	{
+		StelUI* ui = StelApp::getInstance().getStelUI();
+		ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+	}
+	else
+		return false;
 }
