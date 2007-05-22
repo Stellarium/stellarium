@@ -21,6 +21,9 @@
 #define _OBSERVATOR_H_
 
 #include "vecmath.h"
+#include <string>
+
+using namespace std;
 
 class InitParser;
 

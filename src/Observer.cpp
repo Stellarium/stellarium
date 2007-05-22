@@ -17,24 +17,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-
-#include "stellarium.h"
+#include "Observer.hpp"
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
-#include "Observer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "Translator.hpp"
+
+#include <cassert>
 
 Observer::Observer(const SolarSystem &ssystem)
            :ssystem(ssystem), planet(0),
             longitude(0.), latitude(0.), altitude(0)
 {
 	name = L"Anonymous_Location";
-	flag_move_to = 0;
+	flag_move_to = false;
 }
 
 Observer::~Observer()
@@ -108,14 +105,6 @@ void Observer::load(const InitParser& conf, const string& section)
 	longitude = StelUtils::get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
 }
-//
-//void Observer::set_landscape_name(const string s) {
-//
-//	// need to lower case name because config file parser lowercases section names
-//	string x = s;
-//	transform(x.begin(), x.end(), x.begin(), ::tolower);
-//	landscape_name = x;
-//}
 
 void Observer::save(const string& file, const string& section) const
 {
@@ -154,7 +143,7 @@ void Observer::setConf(InitParser & conf, const string& section) const
 // move gradually to a new observation location
 void Observer::moveTo(double lat, double lon, double alt, int duration, const wstring& _name)
 {
-  flag_move_to = 1;
+  flag_move_to = true;
 
   start_lat = latitude;
   end_lat = lat;
@@ -188,12 +177,12 @@ wstring Observer::getHomePlanetNameI18n(void) const {
 // for moving observator position gradually
 // TODO need to work on direction of motion...
 void Observer::update(int delta_time) {
-  if(flag_move_to) {
+  if (flag_move_to) {
     move_to_mult += move_to_coef*delta_time;
 
-    if( move_to_mult >= 1) {
-      move_to_mult = 1;
-      flag_move_to = 0;
+    if (move_to_mult >= 1.f) {
+      move_to_mult = 1.f;
+      flag_move_to = false;
     }
 
     latitude = start_lat - move_to_mult*(start_lat-end_lat);
