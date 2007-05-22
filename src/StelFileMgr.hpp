@@ -161,6 +161,9 @@ private:
 	//! @return true if path passes all flag tests, else false
 	//! @exceptions [misc] can throw boost::filesystem exceptions if there are unexpected problems with IO
 	bool fileFlagsCheck(const fs::path& path, const FLAGS& flags=(FLAGS)0);
+	
+	//! Used to print info to stdout on the current state of the file paths.
+	void outputFileSearchPaths(void);
 		
 	vector<fs::path> fileLocations;
 	

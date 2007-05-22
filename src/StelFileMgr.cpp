@@ -38,14 +38,7 @@ StelFileMgr::StelFileMgr()
 		cerr << "WARNING: could not locate installation directory" << endl;
 	}
 
-	cerr << "DEBUG: StelFileMgr::fileLocations path is (StelFileMgr::StelFileMgr()):" << endl;		   
-	for(vector<fs::path>::iterator i = fileLocations.begin();
-		   i != fileLocations.end();
-		   i++)
-	{
-		cerr << "  + " << (*i).string() << endl;
-	}
-	cerr << "  [end search paths]" << endl;
+	outputFileSearchPaths();
 }
 
 StelFileMgr::~StelFileMgr()
@@ -129,14 +122,8 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 void StelFileMgr::setSearchPaths(const vector<fs::path> paths)
 {
 	fileLocations = paths;
-	cerr << "DEBUG: StelFileMgr::fileLocations path is (StelFileMgr::setSearchPaths(...)):" << endl;		   
-	for(vector<fs::path>::iterator i = fileLocations.begin();
-		   i != fileLocations.end();
-		   i++)
-	{
-		cerr << "  + " << (*i).string() << endl;
-	}
-	cerr << "  [end search paths]" << endl;
+	
+	outputFileSearchPaths();
 }
 
 bool StelFileMgr::exists(const fs::path& path)
@@ -303,6 +290,18 @@ bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 	return(true);
 }
 
+void StelFileMgr::outputFileSearchPaths(void)
+{
+	int count = 0;
+	cout << "File search path set to:" << endl;		   
+	for(vector<fs::path>::iterator i = fileLocations.begin();
+		   i != fileLocations.end();
+		   i++)
+	{
+		cout << " " << ++count << ") " << (*i).string() << endl;
+	}
+}
+
 // Platform dependent members with compiler directives in them.
 const fs::path StelFileMgr::getDesktopDir(void)
 {
@@ -448,7 +447,7 @@ const fs::path StelFileMgr::getScriptSaveDir(void)
 	// return getDesktopDir();
 #elseif defined(MAXOSX)
 	// OSX
-#error "StelFileMgr::getScreenshotDir not yet implemented for OSX"
+#error "StelFileMgr::getScriptSaveDir not yet implemented for OSX"
 	// return getDesktopDir();
 #else 
 	// Linux, BSD, Solaris etc.
