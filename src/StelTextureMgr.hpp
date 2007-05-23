@@ -20,6 +20,7 @@
 #ifndef STELTEXTUREMGR_H_
 #define STELTEXTUREMGR_H_
 
+#include <config.h>
 #include <string>
 #include <map>
 #include <vector>
@@ -28,6 +29,7 @@
 #include "GLee.h"
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
+#include "InitParser.hpp"
 
 //! @brief Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
@@ -98,12 +100,20 @@ public:
 //! @brief Describe queued textures loaded in thread
 struct QueuedTex
 {
-	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, const std::string& alocalPath) :
-		tex(atex), userPtr(auserPtr), url(aurl), localPath(alocalPath) {;}
+#ifdef USE_QT4
+	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, class QFile* afile) :
+		tex(atex), userPtr(auserPtr), url(aurl), file(afile) {;}
+#else
+	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl) :
+		tex(atex), userPtr(auserPtr), url(aurl) {;}
+#endif
+	~QueuedTex();
 	ManagedSTextureSP tex;
 	void* userPtr;
 	std::string url;
-	std::string localPath;
+#ifdef USE_QT4
+	class QFile* file;
+#endif
 };
 
 //! @brief Manage textures loading and manipulation.
@@ -121,7 +131,7 @@ public:
 	
 	//! Initialize some variable from the openGL contex.
 	//! Must be called after the creation of the GLContext.
-	void init();
+	void init(const InitParser& conf);
 	
 	//! Update loading of textures in threads
 	void update();
@@ -142,7 +152,7 @@ public:
 	//! @param cookiesFile path to a file containing cookies to use for authenticated download
 	bool createTextureThread(const std::string& url, std::vector<QueuedTex*>* queue, 
 		boost::mutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
-		bool toDelete=true, const std::string& cookiesFile="");
+		const std::string& cookiesFile="");
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
