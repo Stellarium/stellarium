@@ -342,7 +342,7 @@ void StelApp::init()
 		oss << "external_modules:module" << i; 
 		if (conf.find_entry(oss.str()))
 		{
-			StelModule* m = moduleMgr->loadExternalModule(conf.get_str(oss.str()));
+			StelModule* m = moduleMgr->loadExternalPlugin(conf.get_str(oss.str()));
 			if (m!=NULL)
 			{
 				m->init(conf, lb);
