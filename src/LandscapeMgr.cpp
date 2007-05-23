@@ -241,7 +241,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 		try
 		{
 			//newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), new_landscape_name);
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
 		}
 		catch(exception& e)
 		{
@@ -468,7 +468,7 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 			InitParser pd;
 			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini").string());
 			string k = pd.get_str("landscape", "name");
-			cerr << "DEBUG MNG: getNameToDirMap, adding " << k << " -> " << *dir << endl;
+			// cerr << "DEBUG MNG: getNameToDirMap, adding " << k << " -> " << *dir << endl;
 			result[k] = *dir;
 		}
 		catch (exception& e)

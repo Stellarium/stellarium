@@ -41,7 +41,7 @@ void Landscape::loadCommon(const string& landscape_file, const string& landscape
 {
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
-	cout << "DEBUG MNG: section name is: " << landscapeId << "file name is " << landscape_file << endl;
+	// cout << "DEBUG MNG: section name is: " << landscapeId << "file name is " << landscape_file << endl;
 	name = StelUtils::stringToWstring(pd.get_str("landscape", "name"));
 	author = StelUtils::stringToWstring(pd.get_str("landscape", "author"));
 	description = StelUtils::stringToWstring(pd.get_str("landscape", "description"));
