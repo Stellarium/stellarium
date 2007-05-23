@@ -342,7 +342,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 #ifdef USE_QT4
 		tparam->file = new QFile(tparam->localPath.c_str());
 #else
-		tparam->file = NULL;
+//		tparam->file = NULL;
 #endif
 	}
 		
@@ -376,7 +376,11 @@ void StelTextureMgr::update()
 					(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
 				}
 			}
+#ifdef USE_QT4
 			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
+#else
+			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url));
+#endif
 			delete (*iter);
 		}
 	}
