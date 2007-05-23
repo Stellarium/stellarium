@@ -21,14 +21,8 @@
 #include "StelApp.hpp"
 #include "StelModule.hpp"
 #include "StelFileMgr.hpp"
-		
-#if defined (HAVE_GMODULE) && defined (HAVE_GLIB)
- #include <glib.h>
- #include <gmodule.h>
- // the function signature for getStelmodule()
- typedef StelModule* (* getStelmoduleFunc) (void);
- static getStelmoduleFunc getStelModule = NULL;
-#endif
+#include "StelPluginInterface.hpp"
+
 
 StelModuleMgr::StelModuleMgr() : endIter(modules.end())
 {
@@ -66,8 +60,11 @@ StelModule* StelModuleMgr::getModule(const string& moduleID)
 	}
 	return iter->second;
 }
+#ifdef USE_QT4
+#include <QPluginLoader>
+#endif
 
-StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
+StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 {
 	string moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
 #ifdef WIN32
@@ -83,40 +80,33 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 	{
 		cerr << "ERROR while locating module path: " << e.what() << endl;
 	}
-#if !defined (HAVE_GMODULE) || !defined (HAVE_GLIB)
+#ifndef USE_QT4
 	cerr << "This version of stellarium was compiled without enabling dynamic loading of modules." << endl;
 	cerr << "Module " << moduleID << " will not be loaded." << endl;
 	return NULL;
 #else
-	if (g_module_supported()==FALSE)
+	QPluginLoader loader(moduleFullPath.c_str());
+	if (!loader.load())
 	{
-		cerr << "Dynamic loading of modules does not work on this platform." << endl;
+		cerr << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString().toStdString() << endl;
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}
-
-	// Load module
-	GModule* md = g_module_open(moduleFullPath.c_str(), G_MODULE_BIND_LAZY);
-	if (md==NULL)
+	
+	QObject* obj = loader.instance();
+	if (!obj)
 	{
-		cerr << "Couldn't open the dynamic library: " << moduleFullPath << ": " << g_module_error() << endl;
+		cerr << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString().toStdString() << endl;
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}
-
-	if (g_module_symbol(md, "getStelModule", (gpointer *)&getStelModule)!=TRUE)
-	{
-		cerr << "Couldn't find the getStelModule() function in the shared library: " << moduleID << ": " << g_module_error() << endl;
-		cerr << "Module " << moduleID << " will not be loaded." << endl;
-		g_module_close(md);
-		return NULL;
-	}
-	StelModule* sMod = getStelModule();
+	
+	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
+	StelModule* sMod = plugInt->getStelModule();
 	cout << "Loaded external module " << moduleID << "." << endl;
 	return sMod;
 #endif
 }
-
 
 // Generate properly sorted calling lists for each action (e,g, draw, update)
 // according to modules orders dependencies
