@@ -23,10 +23,8 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include "StelModule.hpp"
 
-/**
- * Class used to manage a collection of StelModule
- * @author Fabien Chereau <stellarium@free.fr>
- */
+//! @brief Manage a collection of StelModule
+//! @author Fabien Chereau <stellarium@free.fr>
 class StelModuleMgr{
 public:
 	
@@ -40,8 +38,8 @@ public:
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
-	StelModule* loadExternalModule(const std::string& moduleID);
-	
+	StelModule* loadExternalPlugin(const std::string& moduleID);
+
 	//! Get the corresponding module or NULL if can't find it.
 	StelModule* getModule(const std::string& moduleID);
 	
@@ -59,7 +57,6 @@ public:
 	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
 	{
 	 public:
-//	    Iterator() : mapIter(0) {}
 	    Iterator() : mapIter() {}
 	 private:
 	    friend class boost::iterator_core_access;
