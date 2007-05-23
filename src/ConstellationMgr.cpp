@@ -172,11 +172,14 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 		const std::vector<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 		if (!newSelectedStar.empty())
 		{
+			if (!added)
+				setSelected(NULL);
 			setSelected(newSelectedStar[0].get());
 		}
 		else
 		{
-			setSelected(NULL);
+			if (!added)
+				setSelected(NULL);
 		}
 	}
 }
@@ -638,11 +641,9 @@ StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation)
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
 {
-
 	// update states for other constellations to fade them out
 	if (c != NULL)
 	{
-
 		selected.push_back(c);
 
 		// Propagate current settings to newly selected constellation
