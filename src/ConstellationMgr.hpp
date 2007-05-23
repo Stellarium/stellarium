@@ -113,7 +113,6 @@ public:
 	bool getFlagNames(void) const {return flagNames;}
 	
 	//! Set whether selected constellation must be displayed alone
-//	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
 	void setFlagIsolateSelected(bool s) { isolateSelected = s; }
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}

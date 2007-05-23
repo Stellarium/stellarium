@@ -41,13 +41,18 @@ extern "C" {
 
 #include <boost/filesystem/operations.hpp>
 
+#ifdef USE_QT4
+ #include "fixx11h.h"
+ #include <QTemporaryFile>
+ #include <QDir>
+#endif
+
 using namespace std;
 namespace fs = boost::filesystem;
 
 // Initialize statics
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
-
 
 void ManagedSTexture::load(void)
 {
@@ -117,10 +122,11 @@ StelTextureMgr::~StelTextureMgr()
  Initialize some variable from the openGL context.
  Must be called after the creation of the openGL context.
 *************************************************************************/
-void StelTextureMgr::init()
+void StelTextureMgr::init(const InitParser& conf)
 {
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
-	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
+	isNoPowerOfTwoAllowed = conf.get_boolean("video","non_power_of_two_textures", true);
+	isNoPowerOfTwoAllowed = isNoPowerOfTwoAllowed && (GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0);
 	
 	// Check vendor and renderer
 	string glRenderer((char*)glGetString(GL_RENDERER));
@@ -210,7 +216,6 @@ struct LoadQueueParam
 	boost::thread* thread;
 	ManagedSTextureSP tex;
 	bool toDownload;
-	bool toDelete;
 	std::string fileExtension;
 	
 	// Those 2 are used to return the final texture
@@ -220,8 +225,24 @@ struct LoadQueueParam
 	std::string localPath;
 	std::string cookiesFile;
 	void* userPtr;
+	
+#ifdef USE_QT4
+	QFile* file;
+#endif
 };
 
+QueuedTex::~QueuedTex()
+{
+#ifdef USE_QT4
+	if (file)
+		delete file;
+	file = NULL;
+#endif
+}
+
+/*************************************************************************
+ Local structure used by boost thread for running the thread
+*************************************************************************/
 struct loadTextureThread
 {
 	loadTextureThread(LoadQueueParam* p) : param(p) {;}
@@ -230,29 +251,15 @@ struct loadTextureThread
 	{
 		if (param->toDownload)
 		{
-			string cacheFileName;
-			static int i = 0;
-			do
-			{
-				cacheFileName = "tmp" + StelUtils::intToString(++i) + param->fileExtension;
-			}
-			while (StelUtils::fileExists(cacheFileName));
-			
-			cout << "Downloading image " << param->url << " to " << cacheFileName << endl;
-			StelUtils::downloadFile(param->url, cacheFileName, APP_NAME, param->cookiesFile);
-			param->tex->fullPath = cacheFileName;
-			param->localPath = cacheFileName;
+			cout << "Downloading image " << param->url << " to " << param->localPath << endl;
+			StelUtils::downloadFile(param->url, param->localPath, APP_NAME, param->cookiesFile);
+			param->tex->fullPath = param->localPath;
 		}
 		
 		// Load the image
 		if (param->texMgr->loadImage(param->tex.get())==false)
 		{
 			param->tex->loadState = ManagedSTexture::LOAD_ERROR;
-		}
-		
-		if (param->toDownload && param->toDelete)
-		{
-			StelUtils::deleteFile(param->localPath);
 		}
 		
 		// And add it to the loadQueue for final step in update()
@@ -270,7 +277,7 @@ struct loadTextureThread
 *************************************************************************/
 bool StelTextureMgr::createTextureThread(const std::string& url, 
 	std::vector<QueuedTex*>* outQueue, boost::mutex* outQueueMutex, void* userPtr, 
-	const std::string& fileExtension, bool toDelete, const std::string& cookiesFile)
+	const std::string& fileExtension, const std::string& cookiesFile)
 {
 	bool toDownload = false;
 	string filename = url;
@@ -305,10 +312,40 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	tparam->cookiesFile = cookiesFile;
 	tparam->localPath = filename;
 	tparam->toDownload = toDownload;
-	tparam->toDelete = toDelete;
 	tparam->userPtr = userPtr;
 	tparam->fileExtension = fileExtension;
 	tex->loadState = ManagedSTexture::LOADING_IMAGE;
+
+	// Create a temporary file name
+	if (toDownload)
+	{
+#ifdef USE_QT4
+		QTemporaryFile* fic = new QTemporaryFile(QDir::tempPath() + "XXXXXX" + QString(tparam->fileExtension.c_str()));
+		if (!fic->open())
+		{
+			cerr << "WARNING in loadTextureThread::operator()(): can't create temp file." << endl;
+		}
+		tparam->file = fic;
+		tparam->localPath = tparam->file->fileName().toStdString();
+		//tparam->tempFile->close();
+#else
+		static int i = 0;
+		do
+		{
+			tparam->localPath = "tmp" + StelUtils::intToString(++i) + tparam->fileExtension;
+		}
+		while (StelUtils::fileExists(tparam->localPath));
+#endif
+	}
+	else
+	{
+#ifdef USE_QT4
+		tparam->file = new QFile(tparam->localPath.c_str());
+#else
+		tparam->file = NULL;
+#endif
+	}
+		
 	// Create and run the thread
 	boost::thread* thread = new boost::thread(loadTextureThread(tparam));
 	tparam->thread = thread;
@@ -339,7 +376,7 @@ void StelTextureMgr::update()
 					(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
 				}
 			}
-			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->localPath));
+			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
 			delete (*iter);
 		}
 	}

@@ -243,7 +243,7 @@ void StelApp::init()
 	initOpenGL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), iconPath);
 
 	// Initialize AFTER creation of openGL context
-	textureMgr->init();
+	textureMgr->init(conf);
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
 	glClearColor(0.0, 0.0, 0.0, 0.0);
