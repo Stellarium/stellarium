@@ -1,7 +1,7 @@
 ADD_SUBDIRECTORY( planetsephems ) 
 ADD_SUBDIRECTORY( stelutils ) 
 
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
 
 ########### next target ###############
 
