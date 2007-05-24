@@ -18,4 +18,6 @@
 /* Define whether SDL is to be used. */
 #cmakedefine USE_SDL
 
+#define PACKAGE_NAME "stellarium"
+
 #endif

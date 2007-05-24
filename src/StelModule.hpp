@@ -81,7 +81,7 @@ public:
 	virtual string getModuleID() const = 0;	
 	
 	//! Get the version of the module, default is stellarium main version
-	virtual string getModuleVersion() const {return PACKAGE_VERSION;}
+	virtual string getModuleVersion() const;
 	
 	//! Get the name of the module author
 	virtual string getAuthorName() {return "Stellarium's Team";}
