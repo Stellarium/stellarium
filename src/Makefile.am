@@ -14,7 +14,7 @@ stellarium_SOURCES = Projector.cpp Projector.hpp \
 	script.cpp script.h script_mgr.cpp script_mgr.h s_gui.cpp s_gui.h Skybright.cpp \
 	Skybright.hpp Skylight.cpp Skylight.hpp solve.h StelApp.cpp StelApp.hpp StelAppSdl.hpp StelAppSdl.cpp \
 	audio.cpp audio.h command_interface.cpp command_interface.h \
-	stel_command_interface.cpp stel_command_interface.h StelCore.cpp StelCore.hpp stellarium.h \
+	stel_command_interface.cpp stel_command_interface.h StelCore.cpp StelCore.hpp \
 	stel_ui_conf.cpp stel_ui.cpp stel_ui.h stel_ui_tuiconf.cpp s_tui.cpp s_tui.h \
 	ToneReproducer.cpp ToneReproducer.hpp translations.h StelObjectModule.hpp StelObjectModule.cpp \
 	StelModule.hpp StelModule.cpp StelModuleMgr.cpp StelModuleMgr.hpp StelFontMgr.hpp StelFontMgr.cpp \
@@ -23,7 +23,8 @@ stellarium_SOURCES = Projector.cpp Projector.hpp \
 	GridLinesMgr.hpp GridLinesMgr.cpp MilkyWay.hpp MilkyWay.cpp MovementMgr.hpp MovementMgr.cpp \
 	StelObjectMgr.hpp StelObjectMgr.cpp  TreeGrid.hpp TreeGrid.cpp \
 	StelFileMgr.hpp StelFileMgr.cpp \
-	StelAppQt4.hpp StelAppQt4.cpp
+	StelAppQt4.hpp StelAppQt4.cpp \
+	StelPluginInterface.hpp
 
 stellarium_LDADD = stelutils/libstelutils.a \
 stelutils/iniparser/libiniparser.a \

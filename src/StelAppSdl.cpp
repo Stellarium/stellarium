@@ -183,7 +183,7 @@ static const char *arrow[] = {
 	SDL_SetCursor(Cursor);
 
 	// Set the window caption
-	SDL_WM_SetCaption(APP_NAME, APP_NAME);
+	SDL_WM_SetCaption(StelApp::getApplicationName().c_str(), StelApp::getApplicationName().c_str());
 
 	// Set the window icon
 	SDL_Surface *icon = SDL_LoadBMP((iconFile).c_str());

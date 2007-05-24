@@ -1,7 +1,7 @@
 ADD_SUBDIRECTORY( planetsephems ) 
 ADD_SUBDIRECTORY( stelutils ) 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR})
 
 ########### next target ###############
 
@@ -85,13 +85,13 @@ SET(stellarium_SRCS
    stel_command_interface.h
    StelCore.cpp
    StelCore.hpp
-   stellarium.h
    stel_ui_conf.cpp
    stel_ui.cpp
    stel_ui.h
    stel_ui_tuiconf.cpp
    s_tui.cpp
    s_tui.h
+   StelPluginInterface.hpp
    ToneReproducer.cpp
    ToneReproducer.hpp
    translations.h
@@ -190,7 +190,7 @@ SET(stellarium_SRCS
 
 ADD_EXECUTABLE(stellarium ${stellarium_SRCS})
 
-TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${OPENGL_LIBRARIES} -lboost_filesystem -lboost_thread)
+TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} -lboost_filesystem -lboost_thread)
 
 INSTALL(TARGETS stellarium DESTINATION bin)
 
