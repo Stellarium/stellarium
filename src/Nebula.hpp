@@ -21,13 +21,13 @@
 #define _NEBULA_H_
 
 #include "StelObject.hpp"
-#include "stellarium.h"
 #include "Projector.hpp"
 #include "Navigator.hpp"
-class SFont;
-class ToneReproducer;
 #include "Translator.hpp"
 #include "STextureTypes.hpp"
+
+class SFont;
+class ToneReproducer;
 
 /*
 Gx Galaxy

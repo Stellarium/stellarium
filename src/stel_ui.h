@@ -22,7 +22,7 @@
 #ifndef _STEL_UI_H
 #define _STEL_UI_H
 
-#include "stellarium.h"
+#include <config.h>
 #include "s_gui.h"
 #include "s_tui.h"
 

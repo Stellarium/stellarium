@@ -23,7 +23,6 @@
 #include <string>
 #include <cassert>
 #include <vector>
-#include "stellarium.h"
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 

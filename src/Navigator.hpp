@@ -20,11 +20,8 @@
 #ifndef _NAVIGATOR_H_
 #define _NAVIGATOR_H_
 
-
-#include "stellarium.h"
-#include "vecmath.h"
-
 #include <string>
+#include "vecmath.h"
 
 using std::string;
 

@@ -22,7 +22,6 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "STexture.hpp"
-#include "stellarium.h"
 #include "SFont.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"

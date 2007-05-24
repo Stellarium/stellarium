@@ -18,7 +18,6 @@
  */
 
 #include "Navigator.hpp"
-#include "stellarium.h"
 #include "StelUtils.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
