@@ -23,6 +23,14 @@
 #include "StelApp.hpp"
 
 /*************************************************************************
+ Get the version of the module, default is stellarium main version
+*************************************************************************/
+string StelModule::getModuleVersion() const
+{
+	return PACKAGE_VERSION;
+}
+
+/*************************************************************************
  Init itself from a .ini file
 *************************************************************************/
 void StelModule::loadProperties(const string& iniFile)

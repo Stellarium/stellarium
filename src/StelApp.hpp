@@ -71,6 +71,9 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
+	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0"
+	static string getApplicationName();
+
 	//! Initialize application and core
 	virtual void init();
 

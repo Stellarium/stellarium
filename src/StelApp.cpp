@@ -144,6 +144,15 @@ StelApp::~StelApp()
 	delete moduleMgr;
 }
 
+/*************************************************************************
+ Return the full name of stellarium, i.e. "stellarium 0.9.0"
+*************************************************************************/
+std::string StelApp::getApplicationName()
+{
+	return string("Stellarium")+PACKAGE_VERSION;
+}
+
+	
 bool restart_ui = false;
 
 void StelApp::setViewPortDistorterType(const string &type)
