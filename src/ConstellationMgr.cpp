@@ -172,13 +172,13 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 		const std::vector<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 		if (!newSelectedStar.empty())
 		{
-			if (!added)
-				setSelected(NULL);
+//			if (!added)
+//				setSelected(NULL);
 			setSelected(newSelectedStar[0].get());
 		}
 		else
 		{
-			if (!added)
+//			if (!added)
 				setSelected(NULL);
 		}
 	}
