@@ -20,8 +20,9 @@
 // manage an audio track (SDL mixer music track)
 
 #include <iostream>
+#include <config.h>
+
 #include "audio.h"
-#include "stellarium.h"
 #include "Translator.hpp"
 
 #ifdef HAVE_SDL_SDL_MIXER_H

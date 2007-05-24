@@ -25,7 +25,6 @@
 #include "STexture.hpp"
 #include "stellplanet.h"
 #include "orbit.h"
-#include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "InitParser.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"

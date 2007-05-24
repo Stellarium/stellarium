@@ -20,12 +20,12 @@
 #ifndef _CONSTELLATION_H_
 #define _CONSTELLATION_H_
 
-#include "stellarium.h"
+#include <vector>
+#include <boost/intrusive_ptr.hpp>
+
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "Fader.hpp"
-#include <vector>
-#include <boost/intrusive_ptr.hpp>
 #include "STextureTypes.hpp"
 
 class StarMgr;

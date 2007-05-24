@@ -26,7 +26,6 @@
 #include <vector>
 #include <functional>
 
-#include "stellarium.h"
 #include "Planet.hpp"
 #include "StelObject.hpp"
 #include "StelObjectModule.hpp"

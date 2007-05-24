@@ -17,25 +17,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/*
-	Class which compute and display the daylight sky color using openGL
-	the sky is computed with the Skylight class.
-*/
-
 #ifndef _STEL_ATMOSTPHERE_H_
 #define _STEL_ATMOSTPHERE_H_
 
 #include "Skylight.hpp"
 #include "vecmath.h"
 #include "Navigator.hpp"
-#include "ToneReproducer.hpp"
 #include "Skybright.hpp"
 #include "Fader.hpp"
 
 using namespace std;
 
 class Projector;
+class ToneReproducer;
 
+//! @brief Compute and display the daylight sky color using openGL
+//! the sky is computed with the Skylight class.
 class Atmosphere
 {
 public:

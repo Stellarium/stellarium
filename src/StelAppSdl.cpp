@@ -16,26 +16,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifdef WIN32
-#include "shlobj.h"
-#endif
-
-#include <config.h>
-#include "stellarium.h"
-#include "StelAppSdl.hpp"
-#include "StelCore.hpp"
-#include "Projector.hpp"
-#include "StelFileMgr.hpp"
-
-#ifdef HAVE_SDL_SDL_MIXER_H
-#include <SDL/SDL_mixer.h>
-#endif
-
 #include <sstream>
 #include <iostream>
 #include <iomanip>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
+
+#include <config.h>
+
+#ifdef WIN32
+#include "shlobj.h"
+#endif
+
+#ifdef HAVE_SDL_SDL_MIXER_H
+#include <SDL/SDL_mixer.h>
+#endif
+
+
+#include "StelAppSdl.hpp"
+#include "StelCore.hpp"
+#include "Projector.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace std;
 

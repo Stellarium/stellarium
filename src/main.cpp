@@ -20,10 +20,8 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
-
 #include <config.h>
 
-#include "stellarium.h"
 #include "StelApp.hpp"
 #include "Translator.hpp"
 
