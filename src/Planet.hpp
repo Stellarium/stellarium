@@ -54,8 +54,10 @@ struct TrailPoint {
 // Class used to store orbital elements
 class RotationElements
 {
- public:
-    RotationElements();
+public:
+    RotationElements(void)
+	  : period(1.), offset(0.), epoch(J2000),
+	    obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
     float period;        // rotation period
     float offset;        // rotation at epoch
     double epoch;
@@ -121,6 +123,10 @@ public:
     // Compute the z rotation to use from equatorial to geographic coordinates
     double getSiderealTime(double jd) const;
     Mat4d getRotEquatorialToVsop87(void) const;
+	void setRotEquatorialToVsop87(const Mat4d &m);
+
+	const RotationElements &getRotationElements(void) const {return re;}
+	void averageRotationElements(const RotationElements &r,double f1,double f2);
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double date);
@@ -154,6 +160,7 @@ public:
 
 	// Return the heliocentric ecliptical position
 	Vec3d get_heliocentric_ecliptic_pos() const;
+	void set_heliocentric_ecliptic_pos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
 	double compute_distance(const Vec3d& obs_helio_pos);
@@ -253,7 +260,6 @@ protected:
 	Vec3f color;
 	float albedo;					// Planet albedo
 	Mat4d rot_local_to_parent;
-	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
     STextureSP tex_map;			// Planet map texture
 	STextureSP tex_halo;			// Little halo texture
@@ -281,7 +287,7 @@ protected:
 	                  // the end: good for elliptical orbits, bad for parabolic
 	                  // and hyperbolic orbits
 
-	const Planet *const parent;				// Planet parent i.e. sun for earth
+	const Planet *parent;				// Planet parent i.e. sun for earth
 	list<Planet *> satellites;		// satellites of the Planet
 
 	static SFont* planet_name_font;// Font for names
