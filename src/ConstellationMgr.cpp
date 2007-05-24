@@ -50,7 +50,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 {
 	assert(hipStarMgr);
 	isolateSelected = false;
-	dependenciesOrder["draw"]="milkyway";
+	dependenciesOrder["draw"]="nebulas";
 }
 
 ConstellationMgr::~ConstellationMgr()

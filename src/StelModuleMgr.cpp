@@ -126,6 +126,7 @@ void StelModuleMgr::generateCallingLists()
 			mc->second.push_back(m->second);
 		}
 		
+		// Order N times to ensure that all dependencies are respected 
 		// Very unoptimized method but we don't care since it's not time critical
 		for (unsigned int n=0;n<modules.size();++n)
 		{
@@ -169,5 +170,10 @@ void StelModuleMgr::generateCallingLists()
 				}
 			}
 		}
+		
+//		cerr << "---------------" << endl;
+//		cerr << mc->first << endl;
+//		for (std::vector<StelModule*>::iterator ii=mc->second.begin();ii!=mc->second.end();++ii)
+//			cerr << (*ii)->getModuleID() << endl;
 	}
 }
