@@ -107,6 +107,16 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 				
 					if ( (flags & DIRECTORY) && ! fs::is_directory(fullPath) )
 						returnThisOne = false;
+					
+					// we only want to return "hidden" results if the HIDDEN flag is set
+					if ( ! (flags & HIDDEN) )
+					{
+						string bn = fs::basename(fullPath); 
+						if (dir_itr->leaf()[0] == '.') 
+						{
+							returnThisOne = false;
+						}
+					}
 				
 					// OK, add the ones we want to the result
 					if ( returnThisOne )
@@ -254,7 +264,7 @@ bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 		// Files are considered HIDDEN on POSIX systems if the file name begins with 
 		// a "." character.  Unless we have the HIDDEN flag set, reject and path
 		// where the basename starts with a .
-		if (basename(path)[0] == '.')
+		if (fs::basename(path)[0] == '.')
 		{
 			return(false);
 		}
