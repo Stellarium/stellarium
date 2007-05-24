@@ -75,7 +75,7 @@ public:
 	//!         is invalid (not a directory / not existing)
 	const set<string> listContents(const string& path, const FLAGS& flags=(FLAGS)0);
 		
-	//! Get a vector of gs::path objects which describes the current search paths.
+	//! Get a vector of fs::path objects which describes the current search paths.
 	//! @return returns a vector of boost::filesystem::path objects representing the
 	//!         current search paths.
 	const vector<fs::path>& getSearchPaths(void) { return fileLocations; }
