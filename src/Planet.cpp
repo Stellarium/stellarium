@@ -39,10 +39,6 @@ Vec3f Planet::orbit_color = Vec3f(1,.6,1);
 Vec3f Planet::trail_color = Vec3f(1,.7,.7);
 LinearFader Planet::flagShow;
 
-RotationElements::RotationElements() : period(1.), offset(0.), epoch(J2000),
-		obliquity(0.), ascendingNode(0.), precessionRate(0.)
-{}
-
 Planet::Planet(Planet *parent,
                const string& englishName,
                int flagHalo,
@@ -68,7 +64,6 @@ Planet::Planet(Planet *parent,
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
     rot_local_to_parent = Mat4d::identity();
-	mat_local_to_parent = Mat4d::identity();
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
 	tex_map = StelApp::getInstance().getTextureManager().createTexture(tex_map_name);
@@ -371,8 +366,6 @@ void Planet::compute_trans_matrix(double jd)
                                             -re.precessionRate*(jd-re.epoch))
                           * Mat4d::xrotation(re.obliquity);
 	}
-    mat_local_to_parent = Mat4d::translation(ecliptic_pos)
-                        * rot_local_to_parent;
 }
 
 Mat4d Planet::getRotEquatorialToVsop87(void) const {
@@ -383,21 +376,27 @@ Mat4d Planet::getRotEquatorialToVsop87(void) const {
   return rval;
 }
 
-// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-//Mat4d Planet::get_helio_to_geo_matrix()
-//{
-//	Mat4d mat = mat_local_to_parent;
-//	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
-//
-//	// Iterate thru parents
-//	Planet * p = parent;
-//	while (p!=NULL && p->parent!=NULL)
-//		{
-//			mat = p->mat_local_to_parent * mat;
-//			p=p->parent;
-//		}
-//	return mat;
-//}
+void Planet::setRotEquatorialToVsop87(const Mat4d &m) {
+  Mat4d a = Mat4d::identity();
+  if (parent) for (const Planet *p=parent;p->parent;p=p->parent) {
+    a = p->rot_local_to_parent * a;
+  }
+  rot_local_to_parent = a.transpose() * m;
+}
+
+
+void Planet::averageRotationElements(const RotationElements &r,
+                                     double f1,double f2) {
+  re.offset = r.offset + fmod(re.offset - r.offset
+                              + 360.0*( (lastJD-re.epoch)/re.period
+                                      - (lastJD-r.epoch)/r.period),
+                              360.0);
+  re.epoch = r.epoch;
+  re.period = r.period;
+  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
+  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
+  re.offset = f1*re.offset + f2*r.offset;
+}
 
 // Compute the z rotation to use from equatorial to geographic coordinates
 double Planet::getSiderealTime(double jd) const
@@ -424,19 +423,23 @@ Vec3d Planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
 	const Planet *p = parent;
-	while (p!=NULL
-	        && p->parent!=NULL)
+	if (p) while (p->parent)
 	{
-		//johannes			pos.transfo4d(p->mat_local_to_parent);
 		pos += p->ecliptic_pos;
 		p = p->parent;
-		if (p->parent)
-		{
-			// a satellite has no satellites
-			exit(128);
-		}
 	}
 	return pos;
+}
+
+void Planet::set_heliocentric_ecliptic_pos(const Vec3d &pos)
+{
+	ecliptic_pos = pos;
+	const Planet *p = parent;
+	if (p) while (p->parent)
+	{
+		ecliptic_pos -= p->ecliptic_pos;
+		p = p->parent;
+	}
 }
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)
@@ -534,11 +537,11 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 {
 	if (hidden) return 0;
 
-	Mat4d mat = mat_local_to_parent;
+	Mat4d mat = Mat4d::translation(ecliptic_pos)
+              * rot_local_to_parent;
 	const Planet *p = parent;
 	while (p && p->parent)
 	{
-		//johannes			mat = p->mat_local_to_parent * mat;
 		mat = Mat4d::translation(p->ecliptic_pos)
 		    * mat
 		    * p->rot_local_to_parent;

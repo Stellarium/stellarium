@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _OBSERVATOR_H_
-#define _OBSERVATOR_H_
+#ifndef _OBSERVER_H_
+#define _OBSERVER_H_
 
 #include "vecmath.h"
 #include <string>
@@ -26,6 +26,9 @@
 using namespace std;
 
 class InitParser;
+class SolarSystem;
+class Planet;
+class ArtificialPlanet;
 
 class Observer
 {
@@ -34,9 +37,10 @@ public:
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
     bool setHomePlanet(const string &english_name);
-    const class Planet *getHomePlanet(void) const {return planet;}
+    const Planet *getHomePlanet(void) const;
     string getHomePlanetEnglishName(void) const;
     wstring getHomePlanetNameI18n(void) const;
+	wstring get_name(void) const;
 
     Vec3d getCenterVsop87Pos(void) const;
     double getDistanceFromCenter(void) const;
@@ -47,8 +51,6 @@ public:
 	void setConf(InitParser &conf, const string& section) const;
 	void load(const string& file, const string& section);
 	void load(const InitParser& conf, const string& section);
-
-	wstring get_name(void) const;
 
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
@@ -61,9 +63,13 @@ public:
 	void update(int delta_time);  // for moving observing position 
 
 private:
-    const class SolarSystem &ssystem;
+    const SolarSystem &ssystem;
 	wstring name;			// Position name
-	const class Planet *planet;
+
+	const Planet *planet;
+    ArtificialPlanet *artificial_planet;
+    int time_to_go;
+
 	double longitude;		// Longitude in degree
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter
@@ -77,4 +83,4 @@ private:
 
 };
 
-#endif // _OBSERVATOR_H_
+#endif
