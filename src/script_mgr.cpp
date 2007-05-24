@@ -21,6 +21,10 @@
 #include <iostream>
 #include <dirent.h>
 #include <cstdio>
+#include <sstream>
+#include <iomanip>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 
 #include "script_mgr.h"
 #include "script.h"
@@ -29,7 +33,7 @@
 #include "StelFileMgr.hpp"
 
 using namespace std;
-
+namespace fs = boost::filesystem;
 
 ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(false) {
 	commander = command_interface;
@@ -130,49 +134,50 @@ void ScriptMgr::record_script(string script_filename) {
 		return;
 	}
 
-	if(script_filename != "") {
-		rec_file.open(script_filename.c_str(), fstream::out);
-	} else {
-
-		string sdir;
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)
-		if(getenv("USERPROFILE")!=NULL){
-			//for Win XP etc.
-			sdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
-		}else{
-			//for Win 98 etc.
-			sdir = "C:\\My Documents\\";
-		}
-#else
-		sdir = string(getenv("HOME")) + "/";
-#endif
-#ifdef MACOSX
-		sdir += "/Desktop/";
-#endif
-
-		// add a number to be unique
-		char c[3];
-		FILE * fp;
-		for(int j=0; j<=100; ++j)
+	// If we get no script filename as a parameter we should make a new one.
+	if(script_filename == "") {
+		fs::path scriptSaveDir;
+		try
 		{
-#ifndef _MSC_VER
-			snprintf(c,3,"%d",j);
-#else
-			_snprintf(c,3,"%d",j);
-#endif
-
-			script_filename = sdir + "stellarium" + c + ".sts";
-			fp = fopen(script_filename.c_str(), "r");
-			if(fp == NULL)
-				break;
-			else
-				fclose(fp);
+			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir() / "scripts";
+			if ( !fs::exists(scriptSaveDir) )
+			{
+				system(string("mkdir " + scriptSaveDir.string()).c_str());
+			}
+			if(!fs::is_directory(scriptSaveDir) || !StelApp::getInstance().getFileMgr().isWritable(scriptSaveDir))
+			{
+				throw(runtime_error("couldn't create it"));				
+			}
 		}
-	
-		rec_file.open(script_filename.c_str(), fstream::out);
-
+		catch(exception& e)
+		{
+			cerr << "ERROR ScriptMgr::record_script: could not determine script save directory (" << e.what() << ") NOT RECORDING" << endl;
+			return;
+		}
+		
+		fs::path scriptPath;
+		for(int j=0; j<1000; ++j)
+		{
+			stringstream oss;
+			oss << setfill('0') << setw(3) << j;
+			scriptPath = scriptSaveDir / (string("recorded_script_") + oss.str() + ".sts");
+			if (!fs::exists(scriptPath))
+				break;
+		}
+		// catch the case where we we have all 999 scripts existing...
+		if (fs::exists(scriptPath))
+		{
+			cerr << "ERROR ScriptMgr::record_script: could not make a new scipt filename, NOT RECORDING" << endl;
+			return;
+		}
+		else
+		{
+			script_filename = scriptPath.string();
+		}
 	}
 	
+	// Open the file for writing.
+	rec_file.open(script_filename.c_str(), fstream::out);	
 
 	if(rec_file.is_open()) {
 		recording = 1;
@@ -182,7 +187,7 @@ void ScriptMgr::record_script(string script_filename) {
 	} else {
 		cout << "Error opening script file for writing: " << script_filename << endl;
 		rec_filename = "";
-	} 
+	}
 }
 
 void ScriptMgr::record_command(string commandline) {
@@ -278,18 +283,13 @@ string ScriptMgr::get_script_list(string directory) {
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
-		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::DIRECTORY);
+		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::FILE);
 		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
-			try
+			if (string(*i, i->length()-4, 4) == ".sts" )
 			{
-				StelApp::getInstance().getFileMgr().findFile(directory + "/" + *i + "/" + *i + ".sts");				
 				result = result + *i + '\n';
 			}
-			catch(exception& e)
-			{
-				cerr << "WARNING: script directory " << *i << " found, but no " << *i << ".sts inside it" << endl;	
-			}			
 		}
 	}
 	catch(exception& e)
@@ -324,12 +324,12 @@ bool ScriptMgr::play_startup_script() {
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&
-	   play_script(RemoveableScriptDirectory + "/scripts/startup/startup.sts", 
-				   RemoveableScriptDirectory + "/scripts/startup/")) {
+	   play_script(RemoveableScriptDirectory + "/scripts/startup.sts", 
+				   RemoveableScriptDirectory + "/scripts/")) {
 	} 
 	else {
 		try {
-			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup/startup.sts")); 
+			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup.sts")); 
 			boost::filesystem::path parentDir(fullPath / "..");
 			play_script(fullPath.string(), parentDir.normalize().string() + "/");
 		}
