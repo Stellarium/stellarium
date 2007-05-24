@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2006 Fabien Chereau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,17 +16,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+ 
+#ifndef STELPLUGININTERFACE_HPP_
+#define STELPLUGININTERFACE_HPP_
 
-#ifndef _STELLARIUM_H_
-#define _STELLARIUM_H_
+#ifdef USE_QT4
 
-#include <config.h>
+#include <QtPlugin>
+class StelPluginInterface
+{
+public:
+	virtual ~StelPluginInterface() {}
+	virtual class StelModule* getStelModule() const = 0;
+};
+Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0")
 
-#if defined( WIN32 ) || defined ( __MWERKS__ ) || defined( _MSC_VER ) || defined( MINGW32 )
-#  ifndef WIN32
-#     define WIN32
-#  endif
-#  include <windows.h>
 #endif
 
-#endif /*_STELLARIUM_H_*/
+#endif /*STELPLUGININTERFACE_HPP_*/

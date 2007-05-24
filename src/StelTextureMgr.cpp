@@ -252,7 +252,7 @@ struct loadTextureThread
 		if (param->toDownload)
 		{
 			cout << "Downloading image " << param->url << " to " << param->localPath << endl;
-			StelUtils::downloadFile(param->url, param->localPath, APP_NAME, param->cookiesFile);
+			StelUtils::downloadFile(param->url, param->localPath, StelApp::getApplicationName(), param->cookiesFile);
 			param->tex->fullPath = param->localPath;
 		}
 		

@@ -260,7 +260,7 @@ Component* StelUI::createTopBar(SFont& baseFont)
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
 	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelApp::getInstance().getScreenW()-100,1);
 	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelApp::getInstance().getScreenW()-220,1);
-	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), &baseFont);
+	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(StelApp::getApplicationName()), &baseFont);
 	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
 	top_bar_ctr->reshape(0,0,StelApp::getInstance().getScreenW(),(int)(baseFont.getLineHeight()+0.5)+5);
@@ -1371,10 +1371,10 @@ void StelUI::updateInfoSelectString(void)
 void StelUI::setTitleObservatoryName(const wstring& name)
 {
 	if (name == L"")
-		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME));
+		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(StelApp::getApplicationName()));
 	else
 	{
-		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME) + L" (" + name + L")");
+		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(StelApp::getApplicationName()) + L" (" + name + L")");
 	}
 	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
