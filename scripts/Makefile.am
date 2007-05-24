@@ -1,3 +1,3 @@
 pkgdatadir = $(datadir)/@PACKAGE@/scripts
-SUBDIRS = startup lunar_eclipse_partial lunar_eclipse_total
-
+pkgdata_DATA = startup.sts lunar_eclipse_total.sts lunar_eclipse_partial.sts
+EXTRA_DIST = $(pkgdata_DATA)

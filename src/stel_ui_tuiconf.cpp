@@ -502,8 +502,8 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					boost::filesystem::path theParent = app->getFileMgr().findFile("scripts/" + SelectedScript);
-					cmd = "script action play filename \"" + SelectedScript + ".sts\" path \"" + theParent.string() + "/\"";
+					boost::filesystem::path theParent = app->getFileMgr().findFile("scripts");
+					cmd = "script action play filename \"" + SelectedScript + "\" path \"" + theParent.string() + "/\"";
 				}
 				catch(exception& e)
 				{
