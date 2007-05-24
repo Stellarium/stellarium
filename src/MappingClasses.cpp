@@ -2,7 +2,7 @@
 
 MappingPerspective::MappingPerspective(void)
 {
-	maxFov = 175.0;
+	maxFov = 150.0;
 }
 
 MappingPerspective MappingPerspective::instance;
@@ -114,7 +114,7 @@ double MappingEqualArea::deltaZoom(double fov) const
 
 MappingStereographic::MappingStereographic(void)
 {
-	maxFov = 350.0;
+	maxFov = 235.0;
 }
 
 MappingStereographic MappingStereographic::instance;
