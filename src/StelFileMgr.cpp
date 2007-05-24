@@ -449,33 +449,6 @@ const fs::path StelFileMgr::getScreenshotDir(void)
 	throw(runtime_error("NOT FOUND"));
 }
 
-const fs::path StelFileMgr::getScriptSaveDir(void)
-{
-#if defined(MINGW32) || defined(WIN32)
-	// Windows
-#error "StelFileMgr::getScreenshotDir not yet implemented for Windows"	
-	// return getDesktopDir();
-#elseif defined(MAXOSX)
-	// OSX
-#error "StelFileMgr::getScriptSaveDir not yet implemented for OSX"
-	// return getDesktopDir();
-#else 
-	// Linux, BSD, Solaris etc.
-	fs::path checkDir(getenv("HOME"));
-	if (!fs::is_directory(checkDir))
-	{
-		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
-		throw(runtime_error("NOT FOUND"));
-	}
-	else
-	{
-		return(checkDir);
-	}
-#endif
-	cerr << "ERROR in StelFileMgr::getScriptSaveDir: could not determine installation directory" << endl;
-	throw(runtime_error("NOT FOUND"));
-}
-
 const string StelFileMgr::getLocaleDir(void)
 {
 	fs::path localePath;

@@ -482,18 +482,34 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			// only one track at a time allowed
 			if(audio) delete audio;
 		  
-			// if from script, local to that path
-			string path;
-			if(stapp->scripts->is_playing()) path = stapp->scripts->get_script_path();
-			else path = StelApp::getInstance().getFileMgr().getScriptSaveDir().string() + "/";			
-		  
-			//		  cout << "audio path = " << path << endl;
-		  
-			audio = new Audio(path + args["filename"], "default track", StelUtils::stringToLong(args["output_rate"]));
-			audio->play(args["loop"]=="on");
+			if(stapp->scripts->is_playing())
+			{
+				// If we're playing the audio file from a script, search for the audio file
+				// in the script directory where the script file exists.
+				audio = new Audio(stapp->scripts->get_script_path() + args["filename"],
+						"default track",
+      						StelUtils::stringToLong(args["output_rate"]));
+				audio->play(args["loop"]=="on");
+			}
+			else
+			{
+				// If we're not playing a script at the moment use the file manager to 
+				// search for it.  This way we can accept full paths or relative paths 
+				// from the pwd and so on.
+				try
+				{
+					string audioFilePath = StelApp::getInstance().getFileMgr().findFile(args["filename"], StelFileMgr::FILE).string();
+					audio = new Audio(audioFilePath, "default track", StelUtils::stringToLong(args["output_rate"]));
+					audio->play(args["loop"]=="on");
+				}
+				catch(exception& e)
+				{
+					cerr << "ERROR while trying to play audio file: " << args["filename"] << " : " << e.what() << endl;
+				}
+			}
 
 			// if fast forwarding mute (pause) audio
-			if(stapp->getTimeMultiplier()!=1) audio->pause();
+			if(stapp->getTimeMultiplier()!=1) audio->pause();		  
 
 		} else if(args["volume"]!="") {
 

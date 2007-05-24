@@ -141,15 +141,7 @@ public:
 	//! @return the path to the directory where screenshots are saved
 	//! @exceptions NOT_FOUND if the directory could not be found
 	const fs::path getScreenshotDir(void);
-	
-	//! This is the directory into which saved scripts will be saved
-	//! It is $HOME on Linux, BSD, Solaris etc.
-	//! It is the user's desktop on MacOS X (??? - someone please verify this)
-	//! It is ??? on Windows
-	//! @return the path to the directory where recorded scripts are saved	
-	//! @exceptions NOT_FOUND if the directory could not be found
-	const fs::path getScriptSaveDir(void);
-	
+		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	const string getLocaleDir(void);

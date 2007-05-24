@@ -449,13 +449,21 @@ void StelAppSdl::startMainLoop()
 
 void StelAppSdl::saveScreenShot() const
 {
-	boost::filesystem::path shotdir;
-
-#if defined(WIN32) || defined(MACOSX)
-	shotdir = getFileMgr().getDesktopDir();
-#else
-	shotdir = string(getenv("HOME"));
-#endif
+	boost::filesystem::path shotDir;
+	try
+	{
+		shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+		if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+		{
+			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.string() << endl;
+			return;
+		}
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
+		return;
+	}
 
 #ifdef __x86_64__
 	const char *extension = ".ppm";
@@ -468,7 +476,7 @@ void StelAppSdl::saveScreenShot() const
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotdir / (string("stellarium") + oss.str() + extension);
+		shotPath = shotDir / (string("stellarium") + oss.str() + extension);
 		if (!boost::filesystem::exists(shotPath))
 			break;
 	}
