@@ -215,12 +215,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			StelApp::getInstance().getStelObjectMgr().setSelectedObject( nmgr->searchByName(args["nebula"]), false);
 		} 
 		else if(args["constellation"]!=""){
-			// TODO do not select a star
 			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation"]), true);
 		} 
 		else if(args["constellation_star"]!=""){
 			// This is no longer supported as easy to just select a star.  Here for backward compatibility.
 			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation_star"]), true);
+			cout << "WARNING: select constellation_star comand is no longer fully supported.\n";
 		} else {
 			// unselect current selection 
 			// TODO: should not deselect constellations?
