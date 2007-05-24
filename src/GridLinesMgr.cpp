@@ -347,13 +347,10 @@ void SkyGrid::draw(const Projector* prj) const
 	bool northPoleInViewport = false;
 	bool southPoleInViewport = false;
 	Vec3d win;
-	prj->project(Vec3d(0,0,1), win);
-	if (prj->check_in_viewport(win))
+	if (prj->project(Vec3d(0,0,1), win) && prj->check_in_viewport(win))
 		northPoleInViewport = true;
-	prj->project(Vec3d(0,0,-1), win);
-	if (prj->check_in_viewport(win))
+	if (prj->project(Vec3d(0,0,-1), win) && prj->check_in_viewport(win))
 		southPoleInViewport = true;
-
 
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
