@@ -17,16 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-//	Class which compute and display the daylight sky color using openGL
-//	the sky is computed with the Skylight class.
-
-// TODO : Adaptative resolution for optimization
 
 #include "GLee.h"
 #include "Atmosphere.hpp"
-#include "stellarium.h"
 #include "StelUtils.hpp"
 #include "Projector.hpp"
+#include "ToneReproducer.hpp"
 
 Atmosphere::Atmosphere(void)
            :viewport(0,0,0,0),sky_resolution_y(44), grid(0),

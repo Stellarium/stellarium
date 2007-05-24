@@ -20,19 +20,16 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
+#include <list>
+#include <string>
+
 #include "StelObject.hpp"
-#include "stellarium.h"
-//#include "StelUtils.hpp"
-class SFont;
 #include "ToneReproducer.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
 #include "Fader.hpp"
 #include "Translator.hpp"
 #include "STextureTypes.hpp"
-
-#include <list>
-#include <string>
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> pos_func_type;
@@ -42,6 +39,8 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 72
+
+class SFont;
 
 using namespace std;
 

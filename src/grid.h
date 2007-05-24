@@ -20,9 +20,9 @@
 #ifndef _GRID_H_
 #define _GRID_H_
 
-#include "stellarium.h"
 #include "vecmath.h"
 
+//! @deprecated Move to GeodesicGrid
 class Grid  
 {
 public:

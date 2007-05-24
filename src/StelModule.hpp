@@ -29,7 +29,6 @@
 #include <vector>
 #include <boost/any.hpp>
 
-#include "stellarium.h"
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 #include "callbacks.hpp"

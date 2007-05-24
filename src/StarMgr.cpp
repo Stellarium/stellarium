@@ -28,12 +28,12 @@
 
 #include <string>
 #include <list>
+#include <config.h>
 
 #include "Projector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "STexture.hpp"
-#include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "ToneReproducer.hpp"

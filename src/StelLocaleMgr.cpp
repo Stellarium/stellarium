@@ -17,15 +17,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-using namespace std;
-
 #include <config.h>
 #include "StelLocaleMgr.hpp"
-#include "stellarium.h"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
 #include "StelFileMgr.hpp"
+
+using namespace std;
 
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMT_shift(0)
 {}
