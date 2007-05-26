@@ -28,6 +28,7 @@
 
 #include "StelAppQt4.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "Projector.hpp"
 #include "fixx11h.h"
 
@@ -174,21 +175,30 @@ void StelAppQt4::startMainLoop()
 
 void StelAppQt4::saveScreenShot() const
 {
-	boost::filesystem::path shotdir;
+	boost::filesystem::path shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
-#if defined(WIN32) || defined(MACOSX)
-	shotdir = getFileMgr().getDesktopDir();
-#else
-	shotdir = string(getenv("HOME"));
-#endif
+        try
+        {
+                shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+                if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+                {
+                        cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.string() << endl;
+                        return;
+                }
+        }
+        catch(exception& e)
+        {
+                cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
+                return;
+        }
 
 	boost::filesystem::path shotPath;
 	for(int j=0; j<1000; ++j)
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotdir / (string("stellarium") + oss.str() + ".bmp");
+		shotPath = shotDir / (string("stellarium") + oss.str() + ".bmp");
 		if (!boost::filesystem::exists(shotPath))
 			break;
 	}
