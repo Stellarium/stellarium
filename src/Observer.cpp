@@ -93,7 +93,7 @@ cout << "parent: " << parent->getEnglishName() << endl;
     m.r[ 3] = 0;
     m.r[ 7] = 0;
     m.r[11] = 0;
-    m.r[15] = 0;
+    m.r[15] = 1.0;
     setRotEquatorialToVsop87(m);
   }
 };
