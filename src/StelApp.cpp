@@ -579,22 +579,34 @@ void StelApp::setConfigFile(const string& configName)
 {
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::WRITABLE).string();
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE)).string();
+		return;
 	}
 	catch(exception& e)
 	{
-		cerr << "WARNING (setConfigFile) could not find existing file matching name " << configName << endl;
-		try
-		{
-			configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW).string();
-		}
-		catch(exception& e)
-		{
-			cerr << "ERROR (setConfigFile): no writable path found for config file, " 
-				<< configName << ": " << e.what() << endl;
-			cerr << "I'm going to panic and use \"config.ini\".  Gook luck." << endl;
-			configFile = "config.ini";
-		}
+		//cerr << "DEBUG StelApp::setConfigFile could not locate writable config file " << configName << endl;
+	}
+	
+	try
+	{
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE).string();	
+		return;
+	}
+	catch(exception& e)
+	{
+		//cerr << "DEBUG StelApp::setConfigFile could not find read only config file " << configName << endl;
+	}		
+	
+	try
+	{
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW).string();
+		//cerr << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile << endl;
+		return;
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName << endl;
+		exit(1);
 	}
 }
 
