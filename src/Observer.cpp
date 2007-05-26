@@ -23,6 +23,9 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "Translator.hpp"
+  // unselecting selected planet after setHomePlanet:
+#include "StelApp.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <cassert>
 
@@ -66,7 +69,6 @@ public:
     } else {
       parent = &p; // sun
     }
-cout << "parent: " << parent->getEnglishName() << endl;
     setRotEquatorialToVsop87(p.getRotEquatorialToVsop87());
     set_heliocentric_ecliptic_pos(p.get_heliocentric_ecliptic_pos());
   }
@@ -221,6 +223,10 @@ wstring Observer::get_name(void) const {
 
 bool Observer::setHomePlanet(const string &english_name) {
   Planet *p = ssystem.searchByEnglishName(english_name);
+  return setHomePlanet(p);
+}
+
+bool Observer::setHomePlanet(const Planet *p) {
   if (!p) return false;
   if (planet != p) {
     if (planet) {
@@ -269,6 +275,11 @@ void Observer::update(int delta_time) {
     if (time_to_go <= 0) {
       delete artificial_planet;
       artificial_planet = 0;
+      StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
+      if (objmgr.getWasSelected() &&
+          objmgr.getSelectedObject()[0].get()==planet) {
+        objmgr.unSelect();
+      }
     } else {
       const double f1 = time_to_go/(double)(time_to_go + delta_time);
       const double f2 = 1.0 - f1;

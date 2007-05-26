@@ -37,6 +37,7 @@ public:
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
     bool setHomePlanet(const string &english_name);
+    bool setHomePlanet(const Planet *p);
     const Planet *getHomePlanet(void) const;
     string getHomePlanetEnglishName(void) const;
     wstring getHomePlanetNameI18n(void) const;
