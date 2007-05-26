@@ -239,7 +239,7 @@ protected:
 	//! Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
 	
-	//! Save a screen shot in the HOME directory
+	//! Save a screen shot to StelFileMgr::getScreenshotDir()
 	virtual void saveScreenShot() const =0;
 	
 	//! Call this when the size of the GL window has changed

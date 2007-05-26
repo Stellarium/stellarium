@@ -78,7 +78,7 @@ protected:
 	// Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 	
-	// Save a screen shot in the HOME directory
+	// Save a screen shot in the StelFileMgr::getScreenshotDir()
 	virtual void saveScreenShot() const;
 	
 	virtual void setResizable(bool resizable);

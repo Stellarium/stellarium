@@ -273,12 +273,14 @@ bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
 	if ( flags & NEW )
 	{
 		// if the NEW flag is set, we check to see if the parent is an existing directory
-		// which is writable
+		// which is writable, and that the file doesn't already exist
 		fs::path parent(path / "..");
 		if ( ! isWritable(parent.normalize()) || ! fs::is_directory(parent.normalize()) )
 		{
 			return(false);	
-		}						
+		}
+		if ( fs::exists(path) )
+			return false;				
 	}
 	else if ( fs::exists(path) )
 	{
