@@ -763,6 +763,7 @@ CTRL + C : End Script\n\
 				  "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
 				  "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 				  "CTRL + SHIFT + V: Toggle vertical image flipping\n"))+
+		wstring(_("CTRL + G : set observer onto the selected planet\n"))+
 #ifndef MACOSX
 		wstring(_("CTRL + Q : Quit\n"))
 #else
@@ -775,7 +776,7 @@ CTRL + C : End Script\n\
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	//help_win->setOpaque(opaqueGUI);
-	help_win->reshape(215,70,580,624);
+	help_win->reshape(215,60,580,640);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
@@ -1197,7 +1198,15 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             app->commander->execute_command( "flag nebula_names toggle");
             break;
 		case StelKey_g:
-            app->commander->execute_command( "flag landscape toggle");
+			if (mod & COMPATIBLE_StelMod_CTRL) {
+                if (objmgr.getWasSelected())
+                {
+                    core->getObservatory()->setHomePlanet(
+                       dynamic_cast<Planet*>(objmgr.getSelectedObject()[0].get()));
+                }
+            } else {
+                app->commander->execute_command( "flag landscape toggle");
+            }
             break;
 		case StelKey_q:
             app->commander->execute_command( "flag cardinal_points toggle");
