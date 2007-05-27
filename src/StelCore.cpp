@@ -151,8 +151,10 @@ bool StelCore::setHomePlanet(string planet)
 
 	if(observatory->setHomePlanet(planet))
 	{
+		// Set the title bar
 		StelUI* ui = StelApp::getInstance().getStelUI();
 		ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+		
 		return true;
 	}
 	return false;

@@ -110,6 +110,10 @@ public:
 	bool getFlagLandscapeSetsLocation(void) {return FlagLandscapeSetsLocation;}
 	void setFlagLandscapeSetsLocation(bool b) {FlagLandscapeSetsLocation=b;}
 	
+	//! Update the planet map in the configuration
+	//! @param englishName The english name of the new planet to set in the map widget 
+	void updatePlanetMap(const string& englishName);
+	
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -239,7 +243,7 @@ private:
 
 	TabContainer * config_tab_ctr;
 
-	void load_cities(const string & fileName);
+	void load_cities(const string & planetEnglishName);
 	vector<City*> cities;
 
 	// The window managing the search - Tony

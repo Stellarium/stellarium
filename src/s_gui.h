@@ -823,8 +823,9 @@ namespace s_gui
 		virtual void draw(void);
 		void setShowEdge(bool v) {showedges = v;}
 		void setImgColor(const s_color &c) {imgcolor = c;}
+		void setPictureTexture(const STextureSP _imageTex);
 	private:
-	    const STextureSP  imageTex;
+		STextureSP imageTex;
 		bool showedges;
 		s_color imgcolor;
 	};
@@ -869,6 +870,7 @@ namespace s_gui
 		void setProximity(double _proximity);
 		City *getCity(unsigned int _index);
 		unsigned int size(void) { return cities.size(); }
+		void clearCities(void) { cities.clear(); }
 	private:
 		vector<City*> cities;
 		double proximity;
@@ -900,7 +902,9 @@ namespace s_gui
 		void zoomInOut(float _amount);
 		
 		void addCity(const string& _name, const string& _state, const string& _country, 
-			double _longitude, double _latitude, float _zone, int _showatzoom, int _altitude) { cities.addCity(_name, _state, _country, _longitude, _latitude, _zone, _showatzoom, _altitude);}
+			double _longitude, double _latitude, float _zone, int _showatzoom, int _altitude) {cities.addCity(_name, _state, _country, _longitude, _latitude, _zone, _showatzoom, _altitude);}
+		void clearCities(void) {cities.clearCities(); nearestIndex = -1; pointerIndex = -1;}
+		void setMapTexture(const STextureSP _newTex) { setPictureTexture(_newTex); }
 		string getPositionString(void);
 		string getCursorString(void);
 		void findPosition(double longitude, double latitude);

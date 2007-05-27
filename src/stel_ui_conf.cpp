@@ -309,14 +309,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
 	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), 9.5)));
-	try
-	{
-		load_cities(StelApp::getInstance().getFileMgr().findFile("data/cities.fab").string());
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR while trying to load cities data: " << e.what() << endl;
-	}
+	load_cities(core->getObservatory()->getHomePlanetEnglishName());
 	
 	y += 5;
 	Label * lblcursor = new Label(_("Cursor : "));
@@ -605,8 +598,22 @@ void StelUI::setSkyCulture(void)
 	app->getSkyCultureMgr().setSkyCulture(skyculture_lb->getCurrent());
 }
 
-void StelUI::load_cities(const string & fileName)
+void StelUI::load_cities(const string& planetEnglishName)
 {
+	// Clear the old cities
+	earth_map->clearCities();
+	
+	string fileName;
+	try
+	{
+		fileName = StelApp::getInstance().getFileMgr().findFile("data/cities_" + planetEnglishName + ".fab").string();
+	}
+	catch(exception& e)
+	{
+		cerr << "INFO StelUI::load_cities " << e.what() << endl;
+		return;
+	}
+
 	float time;
 
 	char linetmp[200];
@@ -616,12 +623,12 @@ void StelUI::load_cities(const string & fileName)
 	char tmpstr[2000];
 	int total = 0;
 
-	cout << "Loading Cities data...";
+	cout << "Loading Cities data for planet " << planetEnglishName << "...";
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
 	{
 		cerr << "Can't open " << fileName << endl;
-		return; // no art, but still loaded constellation data
+		return;
 	}
 
 	// determine total number to be loaded for percent complete display
@@ -815,7 +822,7 @@ void StelUI::setCityFromMap(void)
 {
 	waitOnLocation = false;
 	lblMapLocation->setLabel(StelUtils::stringToWstring(earth_map->getCursorString()));
-	lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
+	lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));	
 }
 
 void StelUI::setObserverPositionFromIncDec(void)
@@ -1115,4 +1122,20 @@ void StelUI::search_win_hideBtCallback(void)
 	FlagSearch = false;
 	search_win->setVisible(false);
 	bt_flag_search->setState(0);
+}
+
+void StelUI::updatePlanetMap(const string& englishName)
+{
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	Planet* planetObject = (Planet*)(ssystem->searchByEnglishName(englishName));
+	if (!planetObject)
+		return;
+	
+	STextureSP newTex = planetObject->getMapTexture();
+	if (newTex)
+		earth_map->setMapTexture(newTex);
+	else
+		cerr << "WARNING StelUI::updatePlanetMap no texture found for body: " << englishName << endl;
+	
+	load_cities(englishName);	
 }
