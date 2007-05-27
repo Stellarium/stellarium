@@ -126,7 +126,6 @@ public:
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
-	void averageRotationElements(const RotationElements &r,double f1,double f2);
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double date);
@@ -165,9 +164,6 @@ public:
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
 	double compute_distance(const Vec3d& obs_helio_pos);
 	double get_distance(void) const {return distance;}
-
-	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-//	Mat4d get_helio_to_geo_matrix();
 
 	std::string getType(void) const {return "Planet";}
 
