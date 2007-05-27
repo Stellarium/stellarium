@@ -361,6 +361,7 @@ void Observer::update(int delta_time) {
       // Set the UI title bar
       StelUI* ui = StelApp::getInstance().getStelUI();
       ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+      ui->updatePlanetMap(getHomePlanetEnglishName());
     } else {
       const double f1 = time_to_go/(double)(time_to_go + delta_time);
       artificial_planet->computeAverage(f1);

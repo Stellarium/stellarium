@@ -14,5 +14,5 @@ pkgdata_DATA = mercury.png venus.png earth-clouds.jpg earthmap.png mars.png jupi
 		bt_search.png bt_track.png bt_alert.png bt_blank.png bt_night.png \
 		bt_question.png bt_chart.png bt_nightview.png bt_fwd.png \
 		bt_now.png bt_realtime.png bt_rwd.png bt_azgrid.png \
-		bt_eqgrid.png bt_flip_horz.png bt_flip_vert.png 
+		bt_eqgrid.png bt_flip_horz.png bt_flip_vert.png nomap.png
 EXTRA_DIST = $(pkgdata_DATA)
