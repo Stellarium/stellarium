@@ -198,7 +198,7 @@ void StelAppQt4::saveScreenShot() const
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir / (string("stellarium") + oss.str() + ".bmp");
+		shotPath = shotDir / (string("stellarium-") + oss.str() + ".bmp");
 		if (!boost::filesystem::exists(shotPath))
 			break;
 	}
