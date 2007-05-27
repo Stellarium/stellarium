@@ -385,19 +385,6 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m) {
 }
 
 
-void Planet::averageRotationElements(const RotationElements &r,
-                                     double f1,double f2) {
-  re.offset = r.offset + fmod(re.offset - r.offset
-                              + 360.0*( (lastJD-re.epoch)/re.period
-                                      - (lastJD-r.epoch)/r.period),
-                              360.0);
-  re.epoch = r.epoch;
-  re.period = r.period;
-  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
-  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
-  re.offset = f1*re.offset + f2*r.offset;
-}
-
 // Compute the z rotation to use from equatorial to geographic coordinates
 double Planet::getSiderealTime(double jd) const
 {
@@ -919,7 +906,6 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glRotatef(axis_rotation + 180.,0.,0.,1.);
 	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
