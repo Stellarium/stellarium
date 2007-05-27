@@ -63,6 +63,15 @@ public:
 	void update(double deltaTime) {land_fader.update((int)(deltaTime*1000)); fog_fader.update((int)(deltaTime*1000));}
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
 
+	//! Return the (English) planet name for the landscape
+	string getPlanet(void) { return planet; }	
+	//! Return the latitude for the landscape
+	double getLatitude(void) { return latitude; }
+	//! Return the longitude for the landscape
+	double getLongitude(void) { return longitude; }
+	//! Return the altitude for the landscape
+	double getAltitude(void) { return altitude; }
+
 protected:
 	//! Load attributes common to all landscapes
 	void loadCommon(const string& landscape_file, const string& landscapeId);
@@ -80,6 +89,10 @@ protected:
 	LinearFader fog_fader;
 	wstring author;
 	wstring description;
+	string planet;
+	double latitude;
+	double longitude;
+	double altitude;
 	
 typedef struct
 {

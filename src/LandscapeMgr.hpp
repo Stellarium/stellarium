@@ -64,7 +64,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Set and gets
-	const string& getLandscapeSectionName() {return landscapeSectionName;}
+	const string& getLandscapeId() {return landscapeSectionName;}
 	
 	//! Set the landscape
 	bool setLandscape(const string& new_landscape_name);
@@ -84,12 +84,16 @@ public:
 	bool getFlagFog(void) const;
 
 	//! Return the real name of the current landscape
-    wstring getLandscapeName(void);
-    //! Return the author name of the current landscape
-    wstring getLandscapeAuthorName(void);
-    //! Return the description of the current landscape
-    wstring getLandscapeDescription(void);
-    
+	wstring getLandscapeName(void);
+	//! Return the author name of the current landscape
+	wstring getLandscapeAuthorName(void);
+	//! Return the description of the current landscape
+	wstring getLandscapeDescription(void);
+	//! Return the translated name of the planet where the current landscape is from
+	wstring getLandscapePlanetName(void);
+	//! Return a wstring with the longitude, latitude and altitude of the current landscape
+	wstring getLandscapeLocationDescription(void);
+
 	//! Set flag for displaying Cardinals Points
 	void setFlagCardinalsPoints(bool b);
 	//! Get flag for displaying Cardinals Points

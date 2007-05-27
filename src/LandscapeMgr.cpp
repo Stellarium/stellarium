@@ -32,6 +32,7 @@
 #include "StelFileMgr.hpp"
 #include "Observer.hpp"
 #include "InitParser.hpp"
+#include "stel_ui.h"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -276,6 +277,24 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 		landscape = newLandscape;
 	}
 	landscapeSectionName = new_landscape_name;
+	
+	if (StelApp::getInstance().getStelUI()->getFlagLandscapeSetsLocation())
+	{
+		// Set the planet and moveto the right location
+		if (landscape->getPlanet()!="") 
+			StelApp::getInstance().getCore()->setHomePlanet(landscape->getPlanet());
+	
+		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
+		{
+			StelApp::getInstance().getCore()->getObservatory()->moveTo(
+				landscape->getLatitude(),
+				landscape->getLongitude(),
+				landscape->getAltitude(),
+				0,
+    				landscape->getName());
+		}
+	
+	}
 	return 1;
 }
 
@@ -308,19 +327,60 @@ void LandscapeMgr::updateI18n()
 	if (cardinals_points) cardinals_points->updateI18n();
 }
 
-	//! Set flag for displaying Landscape
-	void LandscapeMgr::setFlagLandscape(bool b) {landscape->setFlagShow(b);}
-	//! Get flag for displaying Landscape
-	bool LandscapeMgr::getFlagLandscape(void) const {return landscape->getFlagShow();}
+void LandscapeMgr::setFlagLandscape(bool b) 
+{
+	landscape->setFlagShow(b);
+}
+	
+bool LandscapeMgr::getFlagLandscape(void) const 
+{
+	return landscape->getFlagShow();
+}
 
-	//! Set flag for displaying Fog
-	void LandscapeMgr::setFlagFog(bool b) {landscape->setFlagShowFog(b);}
-	//! Get flag for displaying Fog
-	bool LandscapeMgr::getFlagFog(void) const {return landscape->getFlagShowFog();}
+void LandscapeMgr::setFlagFog(bool b) 
+{
+	landscape->setFlagShowFog(b);
+}
+	
+bool LandscapeMgr::getFlagFog(void) const 
+{
+	return landscape->getFlagShowFog();
+}
 
-    wstring LandscapeMgr::getLandscapeName(void) {return landscape->getName();}
-    wstring LandscapeMgr::getLandscapeAuthorName(void) {return landscape->getAuthorName();}
-    wstring LandscapeMgr::getLandscapeDescription(void) {return landscape->getDescription();}
+wstring LandscapeMgr::getLandscapeName(void)
+{
+	return landscape->getName();
+}
+
+wstring LandscapeMgr::getLandscapeAuthorName(void)
+{
+	return landscape->getAuthorName();
+}
+
+wstring LandscapeMgr::getLandscapeDescription(void)
+{
+	return landscape->getDescription();
+}
+
+wstring LandscapeMgr::getLandscapePlanetName(void) {
+	string desc("");
+	if (landscape->getPlanet() != "")
+	{
+		desc = landscape->getPlanet();
+	}
+	return StelUtils::stringToWstring(desc);
+}
+    
+wstring LandscapeMgr::getLandscapeLocationDescription(void) {
+	string desc("");
+	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
+	{
+		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() / (180/M_PI));
+		desc += ", lat " + StelUtils::radToDmsStrAdapt(landscape->getLatitude() / (180/M_PI));
+		desc += ", " + StelUtils::doubleToString(landscape->getAltitude()) + " m";
+	}
+	return StelUtils::stringToWstring(desc);
+}
     
 	//! Set flag for displaying Cardinals Points
 	void LandscapeMgr::setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
@@ -468,7 +528,7 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 			InitParser pd;
 			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini").string());
 			string k = pd.get_str("landscape", "name");
-			// cerr << "DEBUG MNG: getNameToDirMap, adding " << k << " -> " << *dir << endl;
+			// cerr << "DEBUG LandscapeMgr::getNameToDirMap adding " << k << " -> " << *dir << endl;
 			result[k] = *dir;
 		}
 		catch (exception& e)

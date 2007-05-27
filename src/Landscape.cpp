@@ -27,7 +27,8 @@
 #include <cassert>
 #include <vector>
 
-Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
+Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.),
+		     planet(""), latitude(-1000), longitude(-1000), altitude(1)
 {
 	valid_landscape = 0;
 }
@@ -41,7 +42,7 @@ void Landscape::loadCommon(const string& landscape_file, const string& landscape
 {
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
-	// cout << "DEBUG MNG: section name is: " << landscapeId << "file name is " << landscape_file << endl;
+	// cout << "DEBUG Landscape::loadCommon section name is: " << landscapeId << "file name is " << landscape_file << endl;
 	name = StelUtils::stringToWstring(pd.get_str("landscape", "name"));
 	author = StelUtils::stringToWstring(pd.get_str("landscape", "author"));
 	description = StelUtils::stringToWstring(pd.get_str("landscape", "description"));
@@ -55,6 +56,12 @@ void Landscape::loadCommon(const string& landscape_file, const string& landscape
 	{
 		valid_landscape = 1;
 	}
+	
+	// Optional data
+	if (pd.find_entry("location:planet")) planet = pd.get_str("location", "planet");
+	if (pd.find_entry("location:latitude")) latitude = pd.get_double("location", "latitude");
+	if (pd.find_entry("location:longitude")) longitude = pd.get_double("location", "longitude");
+	if (pd.find_entry("location:altitude")) altitude = pd.get_int("location", "altitude");
 }
 
 const string Landscape::getTexturePath(const string& basename, const string& landscapeId)
