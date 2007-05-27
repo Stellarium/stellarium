@@ -107,6 +107,9 @@ public:
 	//! Get day key mode (calendar, sidereal)
 	string getDayKeyMode();
 	
+	bool getFlagLandscapeSetsLocation(void) {return FlagLandscapeSetsLocation;}
+	void setFlagLandscapeSetsLocation(bool b) {FlagLandscapeSetsLocation=b;}
+	
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -328,6 +331,13 @@ private:
 	void saveLandscapeOption(void);
 	Label* landscape_authorlb;
 	TextLabel* landscape_descriptionlb;
+	Label* landscapePlanetLb;
+	Label* landscapeLocationLb;
+	LabeledCheckBox* locationFromLandscapeCheck;
+	void setLandscapeUpdatesLocation(void);
+	bool FlagLandscapeSetsLocation;
+
+
 	
 	// Language options
 	ListBox* language_lb;
@@ -407,6 +417,7 @@ private:
 	s_tui::Decimal_item* tui_effect_nebulae_label_magnitude;
 	s_tui::Boolean_item* tui_effect_manual_zoom;
 	s_tui::Decimal_item* tui_effect_cursor_timeout;
+	s_tui::Boolean_item* tui_effect_landscape_sets_location;
 
 	// 6. Scripts
 	s_tui::MultiSet_item<wstring>* tui_scripts_local;

@@ -461,12 +461,27 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	landscape_authorlb->adjustSize();
 	tab_landscapes->addComponent(landscape_authorlb);
 	
+	landscapePlanetLb = new Label(_("Planet: ") + lmgr->getLandscapePlanetName());
+	landscapePlanetLb->setPos(x+landscape_sl->getSizex()+20, y+25); 
+	landscapePlanetLb->adjustSize();
+	tab_landscapes->addComponent(landscapePlanetLb);
+	
+	landscapeLocationLb = new Label(_("Location: ") + lmgr->getLandscapeLocationDescription());
+	landscapeLocationLb->setPos(x+landscape_sl->getSizex()+20, y+50); 
+	landscapeLocationLb->adjustSize();
+	tab_landscapes->addComponent(landscapeLocationLb);
+	
+	locationFromLandscapeCheck = new LabeledCheckBox(getFlagLandscapeSetsLocation(),_("Setting landscape updates the location"));
+	locationFromLandscapeCheck->setOnPressCallback(callback<void>(this, &StelUI::setLandscapeUpdatesLocation));
+	locationFromLandscapeCheck->setPos(x+landscape_sl->getSizex()+20, y+80); 
+	tab_landscapes->addComponent(locationFromLandscapeCheck);
+			
 	landscape_descriptionlb = new TextLabel(lmgr->getLandscapeDescription());
-	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+25); 
+	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+110); 
 	landscape_descriptionlb->adjustSize();
 	tab_landscapes->addComponent(landscape_descriptionlb);	
 	
-	y+=150;	
+	y+=250;	
 
 	LabeledButton* landscape_save_bt = new LabeledButton(_("Save as default"));
 	landscape_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveLandscapeOptions));
@@ -766,6 +781,7 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
 	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
 	app->commander->execute_command("flag fog ", fog_cbx->getState());
+	app->commander->execute_command("flag landscape_sets_location", locationFromLandscapeCheck->getState());
 	if (meteor_rate_10->getState() && metmgr->getZHR()!=10)
 		app->commander->execute_command("meteors zhr 10");
 	else if (meteor_rate_80->getState() && metmgr->getZHR()!=80)
@@ -846,8 +862,25 @@ void StelUI::saveLandscapeOptions(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
-	conf.set_str("init_location:landscape_name", lmgr->getLandscapeSectionName());
+	conf.set_str("init_location:landscape_name", lmgr->getLandscapeId());
+	conf.set_boolean("landscape:flag_landscape_sets_location", getFlagLandscapeSetsLocation());
 	conf.save(app->getConfigFilePath());
+}
+
+void StelUI::setLandscapeUpdatesLocation(void)
+{
+	FlagLandscapeSetsLocation = locationFromLandscapeCheck->getState();
+	InitParser conf;
+	conf.load(app->getConfigFilePath());
+	conf.set_boolean("landscape:flag_landscape_sets_location", FlagLandscapeSetsLocation);
+	if (FlagLandscapeSetsLocation)
+	{
+		cout << "Landscape changes will now update the location" << endl;
+	}
+	else
+	{
+		cout << "Landscape changes not update the location" << endl;
+	}
 }
 
 void StelUI::saveLanguageOptions(void)
@@ -945,7 +978,9 @@ void StelUI::setLandscape(void)
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	lmgr->setLandscape(lmgr->nameToKey(landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
-	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());
+	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());	
+	landscapePlanetLb->setLabel(_("Planet: ") + lmgr->getLandscapePlanetName());
+	landscapeLocationLb->setLabel(_("Location: ") + lmgr->getLandscapeLocationDescription());
 }
 
 void StelUI::updateVideoVariables(void)
@@ -1060,6 +1095,8 @@ void StelUI::updateConfigForm(void)
 	projection_sl->setValue(core->getProjection()->getCurrentProjection());
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
 	viewport_distorter_cbx->setState(app->getViewPortDistorterType()!="none");
+	
+	locationFromLandscapeCheck->setState(app->ui->getFlagLandscapeSetsLocation());
 }
 
 void StelUI::config_win_hideBtCallback(void)

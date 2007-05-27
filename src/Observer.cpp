@@ -26,6 +26,7 @@
   // unselecting selected planet after setHomePlanet:
 #include "StelApp.hpp"
 #include "StelObjectMgr.hpp"
+#include "stel_ui.h"
 
 #include <cassert>
 
@@ -217,13 +218,15 @@ wstring Observer::getHomePlanetNameI18n(void) const {
 }
 
 wstring Observer::get_name(void) const {
-  return name;
+	return artificial_planet ? L"" : name;
 }
 
 
 bool Observer::setHomePlanet(const string &english_name) {
   Planet *p = ssystem.searchByEnglishName(english_name);
-  return setHomePlanet(p);
+  bool result = setHomePlanet(p);
+  return result;
+  //return setHomePlanet(p);
 }
 
 bool Observer::setHomePlanet(const Planet *p) {
@@ -232,6 +235,7 @@ bool Observer::setHomePlanet(const Planet *p) {
     if (planet) {
       if (!artificial_planet) {
         artificial_planet = new ArtificialPlanet(*planet);
+	name = L"";
       }
       time_to_go = 2000; // milliseconds: 2 seconds
     }
@@ -263,7 +267,8 @@ void Observer::moveTo(double lat, double lon, double alt, int duration, const ws
   move_to_mult = 0;
 
 	name = _name;
-  //  printf("coef = %f\n", move_to_coef);
+	StelUI* ui = StelApp::getInstance().getStelUI();
+	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 }
 
 
@@ -280,6 +285,9 @@ void Observer::update(int delta_time) {
           objmgr.getSelectedObject()[0].get()==planet) {
         objmgr.unSelect();
       }
+      // Set the UI title bar
+      StelUI* ui = StelApp::getInstance().getStelUI();
+      ui->setTitleObservatoryName(ui->getTitleWithAltitude());
     } else {
       const double f1 = time_to_go/(double)(time_to_go + delta_time);
       const double f2 = 1.0 - f1;

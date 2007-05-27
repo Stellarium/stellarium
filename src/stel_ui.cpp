@@ -143,7 +143,10 @@ void StelUI::init(const InitParser& conf)
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
-
+	
+	// Landscape ui section
+	FlagLandscapeSetsLocation = conf.get_boolean("landscape:flag_landscape_sets_location");
+	
 	SFont& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
 	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize));
 	SFont& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseCFontSize);
@@ -746,6 +749,7 @@ M   : Text menu                 1 (one)  : Configuration\n\
 CTRL + S : Take a screenshot\n\
 CTRL + R : Toggle script recording\n\
 CTRL + F : Toggle object finder\n\
+CTRL + G : Goto selected solar system object\n\
 \n")) + 
 		wstring(_("Time & Date:\n\
 6   : Time rate pause           7   : Time rate 0\n\
@@ -776,7 +780,7 @@ CTRL + C : End Script\n\
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	//help_win->setOpaque(opaqueGUI);
-	help_win->reshape(215,60,580,640);
+	help_win->reshape(215,45,580,670);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));

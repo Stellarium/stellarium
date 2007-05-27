@@ -316,7 +316,11 @@ void StelUI::init_tui(void)
 	tui_effect_cursor_timeout->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_cursor_timeout);
 
+	tui_effect_landscape_sets_location = new s_tui::Boolean_item(getFlagLandscapeSetsLocation(), wstring(L"6.10 ") );
+	tui_effect_landscape_sets_location->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
+	tui_menu_effects->addComponent(tui_effect_landscape_sets_location);
 
+	
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<wstring>(wstring(L"6.1 ") );
 	//	tui_scripts_local->addItemList(wstring(TUI_SCRIPT_MSG) + wstring(L"\n") 
@@ -436,6 +440,7 @@ void StelUI::localizeTui(void)
 	tui_effect_nebulae_label_magnitude->setLabel(wstring(L"6.7 ") + _("Maximum Nebula Magnitude to Label: "));
 	tui_effect_zoom_duration->setLabel(wstring(L"6.8 ") + _("Zoom Duration: "));
 	tui_effect_cursor_timeout->setLabel(wstring(L"6.9 ") + _("Cursor Timeout: "));
+	tui_effect_landscape_sets_location->setLabel(wstring(L"6.10 ") + _("Setting Landscape Sets Location: "), _("Yes"),_("No"));
 
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
@@ -603,6 +608,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_milkyway_intensity->setValue(mw->getIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(nmgr->getMaxMagHints());
+	tui_effect_landscape_sets_location->setValue(app->ui->getFlagLandscapeSetsLocation());
 
 
 	// 7. Scripts
@@ -836,6 +842,10 @@ void StelUI::tui_cb_effects()
 
 	oss.str("");
 	oss << "set light_pollution_luminance " << tui_effect_light_pollution->getValue();
+	app->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "flag landscape_sets_location " << tui_effect_landscape_sets_location->getValue();
 	app->commander->execute_command(oss.str());
 
 }
