@@ -70,6 +70,34 @@ void ArtificialPlanet::setDest(const Planet &dest) {
   ArtificialPlanet::dest = &dest;
   englishName = orig_name + "->" + dest.getEnglishName(),
   nameI18 = orig_name_i18n + L"->" + dest.getNameI18n();
+
+    // rotation:
+  const RotationElements &r(dest.getRotationElements());
+  lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+//  lastJD = dest->getLastJD();
+
+  
+//  re.offset = fmod(re.offset + 360.0*24* (lastJD-re.epoch)/re.period,
+//                              360.0);
+//  re.epoch = lastJD;
+
+//  re.period = r.period;
+
+//  re.offset = fmod(re.offset + 360.0*24* (r.epoch-re.epoch)/re.period,
+//                              360.0);
+//  re.epoch = r.epoch;
+
+
+  re.offset = r.offset + fmod(re.offset - r.offset
+                               + 360.0*( (lastJD-re.epoch)/re.period
+                                          - (lastJD-r.epoch)/r.period),
+                              360.0);
+
+  re.epoch = r.epoch;
+  re.period = r.period;
+  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
+  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
+
     // Set the UI title bar
   StelUI* ui = StelApp::getInstance().getStelUI();
   ui->setTitleObservatoryName(ui->getTitleWithAltitude());
@@ -136,33 +164,8 @@ void ArtificialPlanet::computeAverage(double f1) {
   if (a1[2]-a2[2] < -M_PI) a1[2] += 2.0*M_PI;
   setRot(a1*f1 + a2*f2);
 
-    // rotation:
-  const RotationElements &r(dest->getRotationElements());
-  lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
-//  lastJD = dest->getLastJD();
-
-  
-//  re.offset = fmod(re.offset + 360.0*24* (lastJD-re.epoch)/re.period,
-//                              360.0);
-//  re.epoch = lastJD;
-
-//  re.period = r.period;
-
-//  re.offset = fmod(re.offset + 360.0*24* (r.epoch-re.epoch)/re.period,
-//                              360.0);
-//  re.epoch = r.epoch;
-
-
-  re.offset = r.offset + fmod(re.offset - r.offset
-                               + 360.0*( (lastJD-re.epoch)/re.period
-                                          - (lastJD-r.epoch)/r.period),
-                              360.0);
-
-  re.epoch = r.epoch;
-  re.period = r.period;
-  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
-  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
-  re.offset = f1*re.offset + f2*r.offset;
+    // rotation offset:
+  re.offset = f1*re.offset + f2*dest->getRotationElements().offset;
 }
 
 
