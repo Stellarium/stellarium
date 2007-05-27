@@ -476,7 +476,7 @@ void StelAppSdl::saveScreenShot() const
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir / (string("stellarium") + oss.str() + extension);
+		shotPath = shotDir / (string("stellarium-") + oss.str() + extension);
 		if (!boost::filesystem::exists(shotPath))
 			break;
 	}
