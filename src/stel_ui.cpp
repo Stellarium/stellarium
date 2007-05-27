@@ -1383,13 +1383,16 @@ void StelUI::updateInfoSelectString(void)
 
 void StelUI::setTitleObservatoryName(const wstring& name)
 {
-	if (name == L"")
-		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(StelApp::getApplicationName()));
-	else
-	{
-		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(StelApp::getApplicationName()) + L" (" + name + L")");
+	if (top_bar_appName_lbl) {
+		if (name.empty())
+			top_bar_appName_lbl->setLabel(
+				StelUtils::stringToWstring(StelApp::getApplicationName()));
+		else
+			top_bar_appName_lbl->setLabel(
+				StelUtils::stringToWstring(StelApp::getApplicationName())
+					+ L" (" + name + L")");
+		top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 	}
-	top_bar_appName_lbl->setPos(StelApp::getInstance().getScreenW()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
 void StelUI::setTitle(const wstring& title)
