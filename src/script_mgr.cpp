@@ -160,7 +160,7 @@ void ScriptMgr::record_script(string script_filename) {
 		{
 			stringstream oss;
 			oss << setfill('0') << setw(3) << j;
-			scriptPath = scriptSaveDir / (string("recorded_script_") + oss.str() + ".sts");
+			scriptPath = scriptSaveDir / (string("recorded-") + oss.str() + ".sts");
 			if (!fs::exists(scriptPath))
 				break;
 		}
