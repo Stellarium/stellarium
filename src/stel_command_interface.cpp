@@ -894,6 +894,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stapp->scripts->get_gui_debug();
 			stapp->scripts->set_gui_debug(newval);
 		}
+		else if(name=="landscape_sets_location")
+		{
+			newval = !stapp->ui->getFlagLandscapeSetsLocation();
+			stapp->ui->setFlagLandscapeSetsLocation(newval);
+		}
 		else return(status);  // no matching flag found untrusted, but maybe trusted matched
 
 	} else {
@@ -984,6 +989,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="object_trails") ssmgr->setFlagTrails(newval);
 		else if(name=="track_object") mvmgr->setFlagTracking(newval);
 		else if(name=="script_gui_debug") stapp->scripts->set_gui_debug(newval); // Not written to config - script specific
+		else if(name=="landscape_sets_location") stapp->ui->setFlagLandscapeSetsLocation(newval);
 		else return(status);
 
 	}
