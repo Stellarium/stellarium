@@ -2885,6 +2885,11 @@ void Picture::draw(void)
 	if (showedges) painter.drawSquareEdge(pos, size);
 }
 
+void Picture::setPictureTexture(const STextureSP _imageTex)
+{
+	imageTex = _imageTex;
+	painter.setTexture(imageTex);
+}
 
 ///////////////////////////// MapPicture  //////////////////////////////////////
 // MapPicture - for selecting the current location
@@ -3109,18 +3114,17 @@ void MapPicture::draw(void)
 		sized = true;
 	}
 	
-    glPushMatrix();
-    Component::scissor->push(originalPos, originalSize);
+	glPushMatrix();
+	Component::scissor->push(originalPos, originalSize);
 
 	Picture::draw();
 
 	drawCities();
 	drawNearestCity();
-	
-	if (zoom == 1) 
-		pointer->setSize((int)zoom*6, (int)zoom*6);
-	else
-		pointer->setSize((int)(zoom*2), (int)(zoom*2));
+	float pointerScale = 20;
+	if (zoom > 4) pointerScale *= (zoom - 2.5)/2;
+	pointer->setSize((int)pointerScale, (int)pointerScale);
+		
 	pointer->setPos(s_vec2i(pointerPos[0]+pos[0]-pointer->getSizex()/2, pointerPos[1]+pos[1]-pointer->getSizey()/2));
 	pointer->draw();
 	
