@@ -59,6 +59,18 @@ StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
 	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL)
 {
+	ui=0;
+	scripts=0;
+	commander=0;
+	core=0;
+	distorter=0;
+	skyCultureMgr=0;
+	localeMgr=0;
+	fontManager=0;
+	stelObjectMgr=0;
+	textureMgr=0;
+	moduleMgr=0;
+
 	// Can't create 2 StelApp instances
 	assert(!singleton);
 	singleton = this;
@@ -123,15 +135,15 @@ StelApp::StelApp(int argc, char** argv) :
 *************************************************************************/
 StelApp::~StelApp()
 {
-	delete ui;
-	delete scripts;
-	delete commander;
-	delete core;
-	if (distorter) delete distorter;
-	delete skyCultureMgr;
-	delete localeMgr;
-	delete fontManager;
-	delete stelObjectMgr;
+	delete ui;ui=0;
+	delete scripts;scripts=0;
+	delete commander;commander=0;
+	delete core;core=0;
+	if (distorter) {delete distorter;distorter=0;}
+	delete skyCultureMgr;skyCultureMgr=0;
+	delete localeMgr;localeMgr=0;
+	delete fontManager;fontManager=0;
+	delete stelObjectMgr;stelObjectMgr=0;
 	
 	// Delete all the modules
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
@@ -140,8 +152,8 @@ StelApp::~StelApp()
 		*iter = NULL;
 	}
 
-	delete textureMgr;
-	delete moduleMgr;
+	delete textureMgr;textureMgr=0;
+	delete moduleMgr;moduleMgr=0;
 }
 
 /*************************************************************************
