@@ -26,80 +26,147 @@
   // unselecting selected planet after setHomePlanet:
 #include "StelApp.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelCore.hpp" // getNavigator
+#include "Navigator.hpp" // getJDay
+  // setting the titlebar text:
 #include "stel_ui.h"
 
 #include <cassert>
 
-static
-Vec3d getRot(const Planet *p) {
-  Mat4d m(p->getRotEquatorialToVsop87());
+class ArtificialPlanet : public Planet {
+public:
+  ArtificialPlanet(const Planet &orig);
+  void setDest(const Planet &dest);
+  void computeAverage(double f1);
+private:
+  void setRot(const Vec3d &r);
+  static Vec3d GetRot(const Planet *p);
+  const Planet *dest;
+  const string orig_name;
+  const wstring orig_name_i18n;
+};
+
+ArtificialPlanet::ArtificialPlanet(const Planet &orig)
+                 :Planet(0,"",0,0,0,0,Vec3f(0,0,0),0,"","",
+                         pos_func_type(),0,false,true),
+//                 :Planet(orig),
+                  dest(0),
+                  orig_name(orig.getEnglishName()),
+                  orig_name_i18n(orig.getNameI18n()) {
+  radius = 0;
+    // set parent = sun:
+  if (orig.get_parent()) {
+    parent = orig.get_parent();
+    while (parent->get_parent()) parent = parent->get_parent();
+  } else {
+    parent = &orig; // sun
+  }
+  re = orig.getRotationElements();
+  setRotEquatorialToVsop87(orig.getRotEquatorialToVsop87());
+  set_heliocentric_ecliptic_pos(orig.get_heliocentric_ecliptic_pos());
+}
+
+void ArtificialPlanet::setDest(const Planet &dest) {
+  ArtificialPlanet::dest = &dest;
+  englishName = orig_name + "->" + dest.getEnglishName(),
+  nameI18 = orig_name_i18n + L"->" + dest.getNameI18n();
+    // Set the UI title bar
+  StelUI* ui = StelApp::getInstance().getStelUI();
+  ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+}
+
+void ArtificialPlanet::setRot(const Vec3d &r) {
+  const double ca = cos(r[0]);
+  const double sa = sin(r[0]);
+  const double cd = cos(r[1]);
+  const double sd = sin(r[1]);
+  const double cp = cos(r[2]);
+  const double sp = sin(r[2]);
+  Mat4d m;
+  m.r[ 0] = cd*cp;
+  m.r[ 4] = sd;
+  m.r[ 8] = cd*sp;
+  m.r[12] = 0;
+  m.r[ 1] = -ca*sd*cp -sa*sp;
+  m.r[ 5] =  ca*cd;
+  m.r[ 9] = -ca*sd*sp +sa*cp;
+  m.r[13] = 0;
+  m.r[ 2] =  sa*sd*cp -ca*sp;
+  m.r[ 6] = -sa*cd;
+  m.r[10] =  sa*sd*sp +ca*cp;
+  m.r[14] = 0;
+  m.r[ 3] = 0;
+  m.r[ 7] = 0;
+  m.r[11] = 0;
+  m.r[15] = 1.0;
+  setRotEquatorialToVsop87(m);
+}
+
+Vec3d ArtificialPlanet::GetRot(const Planet *p) {
+  const Mat4d m(p->getRotEquatorialToVsop87());
+  const double cos_r1 = sqrt(m.r[0]*m.r[0]+m.r[8]*m.r[8]);
   Vec3d r;
-  r[1] = atan2(m.r[4],
-               sqrt(m.r[0]*m.r[0]+m.r[8]*m.r[8]));
-    // not well defined if cos(r[1])==0
-  r[0] = atan2(-m.r[6],m.r[5]);
-  r[2] = atan2( m.r[8],m.r[0]);
+  r[1] = atan2(m.r[4],cos_r1);
+    // not well defined if cos(r[1])==0:
+  if (cos_r1 <= 0.0) {
+    // if (m.r[4]>0.0) sin,cos(a-p)=m.r[ 9],m.r[10]
+    // else sin,cos(a+p)=m.r[ 9],m.r[10]
+    // so lets say p=0:
+    r[2] = 0.0;
+    r[0] = atan2(m.r[9],m.r[10]);
+  } else {
+    r[0] = atan2(-m.r[6],m.r[5]);
+    r[2] = atan2( m.r[8],m.r[0]);
+  }
   return r;
 }
 
-class ArtificialPlanet : public Planet {
-public:
-  ArtificialPlanet(const Planet &p)
-//    : Planet(0,"",0,0,0,0,Vec3f(0,0,0),0,"","",
-//             pos_func_type(),0,false,true) {
-    : Planet(p) {
-    englishName = "";
-    nameI18 = L"";
-    flagHalo = 0;
-    flag_lighting = 0;
-    albedo = 0;
-    color[0] = color[1] = color[2] = 0;
-    rings = 0;
-    satellites.clear();
-    trail.clear();
-    hidden = true;
-    tex_map = STextureSP();
-	tex_halo = STextureSP();
-	tex_big_halo = STextureSP();
-    coord_func = pos_func_type();
-//    osculating_func = 0;
-    radius = 0;
-      // set parent = sun:
-    if (parent) {
-      while (parent->get_parent()) parent = parent->get_parent();
-    } else {
-      parent = &p; // sun
-    }
-    setRotEquatorialToVsop87(p.getRotEquatorialToVsop87());
-    set_heliocentric_ecliptic_pos(p.get_heliocentric_ecliptic_pos());
-  }
-  void setRot(const Vec3d &r) {
-    const double ca = cos(r[0]);
-    const double sa = sin(r[0]);
-    const double cd = cos(r[1]);
-    const double sd = sin(r[1]);
-    const double cp = cos(r[2]);
-    const double sp = sin(r[2]);
-    Mat4d m;
-    m.r[ 0] = cd*cp;
-    m.r[ 4] = sd;
-    m.r[ 8] = cd*sp;
-    m.r[12] = 0;
-    m.r[ 1] = -ca*sd*cp -sa*sp;
-    m.r[ 5] =  ca*cd;
-    m.r[ 9] = -ca*sd*sp +sa*cp;
-    m.r[13] = 0;
-    m.r[ 2] =  sa*sd*cp -ca*sp;
-    m.r[ 6] = -sa*cd;
-    m.r[10] =  sa*sd*sp +ca*cp;
-    m.r[14] = 0;
-    m.r[ 3] = 0;
-    m.r[ 7] = 0;
-    m.r[11] = 0;
-    m.r[15] = 1.0;
-    setRotEquatorialToVsop87(m);
-  }
-};
+void ArtificialPlanet::computeAverage(double f1) {
+  const double f2 = 1.0 - f1;
+     // position:
+  set_heliocentric_ecliptic_pos(get_heliocentric_ecliptic_pos()*f1
+                      + dest->get_heliocentric_ecliptic_pos()*f2);
+
+    // 3 Euler angles:
+  Vec3d a1(GetRot(this));
+  const Vec3d a2(GetRot(dest));
+  if (a1[0]-a2[0] >  M_PI) a1[0] -= 2.0*M_PI; else
+  if (a1[0]-a2[0] < -M_PI) a1[0] += 2.0*M_PI;
+  if (a1[2]-a2[2] >  M_PI) a1[2] -= 2.0*M_PI; else
+  if (a1[2]-a2[2] < -M_PI) a1[2] += 2.0*M_PI;
+  setRot(a1*f1 + a2*f2);
+
+    // rotation:
+  const RotationElements &r(dest->getRotationElements());
+  lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+//  lastJD = dest->getLastJD();
+
+  
+//  re.offset = fmod(re.offset + 360.0*24* (lastJD-re.epoch)/re.period,
+//                              360.0);
+//  re.epoch = lastJD;
+
+//  re.period = r.period;
+
+//  re.offset = fmod(re.offset + 360.0*24* (r.epoch-re.epoch)/re.period,
+//                              360.0);
+//  re.epoch = r.epoch;
+
+
+  re.offset = r.offset + fmod(re.offset - r.offset
+                               + 360.0*( (lastJD-re.epoch)/re.period
+                                          - (lastJD-r.epoch)/r.period),
+                              360.0);
+
+  re.epoch = r.epoch;
+  re.period = r.period;
+  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
+  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
+  re.offset = f1*re.offset + f2*r.offset;
+}
+
+
+
 
 Observer::Observer(const SolarSystem &ssystem)
          :ssystem(ssystem),
@@ -229,7 +296,8 @@ bool Observer::setHomePlanet(const string &english_name) {
   //return setHomePlanet(p);
 }
 
-bool Observer::setHomePlanet(const Planet *p) {
+bool Observer::setHomePlanet(const Planet *p,float transit_seconds) {
+//  transit_seconds = 5;
   if (!p) return false;
   if (planet != p) {
     if (planet) {
@@ -237,7 +305,9 @@ bool Observer::setHomePlanet(const Planet *p) {
         artificial_planet = new ArtificialPlanet(*planet);
 	name = L"";
       }
-      time_to_go = 2000; // milliseconds: 2 seconds
+//cout << "setHomePlanet" << endl << endl;
+      artificial_planet->setDest(*p);
+      time_to_go = (int)(1000.f * transit_seconds); // milliseconds
     }
     planet = p;
   }
@@ -290,17 +360,7 @@ void Observer::update(int delta_time) {
       ui->setTitleObservatoryName(ui->getTitleWithAltitude());
     } else {
       const double f1 = time_to_go/(double)(time_to_go + delta_time);
-      const double f2 = 1.0 - f1;
-         // helicentric positions:
-      artificial_planet->set_heliocentric_ecliptic_pos(
-        artificial_planet->get_heliocentric_ecliptic_pos()*f1
-         + planet->get_heliocentric_ecliptic_pos()*f2);
-         // 3 Euler angles:
-      artificial_planet->setRot(
-        getRot(artificial_planet)*f1 + getRot(planet)*f2);
-
-      artificial_planet->averageRotationElements(
-        planet->getRotationElements(),f1,f2);
+      artificial_planet->computeAverage(f1);
     }
   }
 
