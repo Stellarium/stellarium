@@ -5,13 +5,18 @@ Local script directory is reread when enter TUI
 Inuit constellation art by Johan Meuris
 More sky cultures
 Code reorganization
+Data files reorganized
 Sidereal day/week keystrokes (ALT -, ALT =, ALT [, ALT ])
 On demand nebula image loading
 Added back Hawaiian translations (invented locale "hw")
 Orthographic projection, Lamberts Equal Area projection, Cylinder projection
 Interpolate the elliptic coordinates (or the spherical coordinates in case of the moon)
 Do not place the Earth at the EMB but at its proper position
-new orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits
+New orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits
+Go to selected solar system body by pressing control-g
+Location map updates on changing observer to new solar system body
+Titlebar updates after moving to new planet
+Landscapes may now have location, can update observer by selecting landscape
 
 0.8.2 [2006-10-5]
 Re-enabled some script recording features (select, pan/tilt, zoom)
