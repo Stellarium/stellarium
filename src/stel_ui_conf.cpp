@@ -788,7 +788,7 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
 	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
 	app->commander->execute_command("flag fog ", fog_cbx->getState());
-	app->commander->execute_command("flag landscape_sets_location", locationFromLandscapeCheck->getState());
+	app->commander->execute_command("flag landscape_sets_location ", locationFromLandscapeCheck->getState());
 	if (meteor_rate_10->getState() && metmgr->getZHR()!=10)
 		app->commander->execute_command("meteors zhr 10");
 	else if (meteor_rate_80->getState() && metmgr->getZHR()!=80)
