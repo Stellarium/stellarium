@@ -26,7 +26,7 @@
 
 Atmosphere::Atmosphere(void)
            :viewport(0,0,0,0),sky_resolution_y(44), grid(0),
-            world_adaptation_luminance(0.f), atm_intensity(0), lightPollutionLuminance(0)
+            averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
 }
@@ -40,15 +40,15 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
                                ToneReproducer * eye, Projector* prj,
                                float latitude, float altitude, float temperature, float relative_humidity)
 {
-	if (viewport != prj->getViewport()) {
+	if (viewport != prj->getViewport())
+	{
 		viewport = prj->getViewport();
-		if (grid) {
+		if (grid)
+		{
 			delete grid;
 			grid = 0;
 		}
-		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))
-		                                 *prj->getViewportWidth()
-		                                 /prj->getViewportHeight());
+		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];
 //cout << "Atmosphere::compute_color: "
 //     << (1+sky_resolution_x)*(1+sky_resolution_y)
@@ -59,56 +59,35 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		float viewport_left = (float)prj->getViewportPosX();
 		float viewport_bottom = (float)prj->getViewportPosY();
 		for (int x=0; x<=sky_resolution_x; ++x)
-			for(int y=0; y<=sky_resolution_y; ++y) {
+		{
+			for(int y=0; y<=sky_resolution_y; ++y)
+			{
 				GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
-				g.pos_2d[0] = viewport_left
-				            + ((x == 0) ? 0.f :
-				               (x == sky_resolution_x) ? (float)prj->getViewportWidth() :
-				               (x-0.5*(y&1))*stepX);
+				g.pos_2d[0] = viewport_left + ((x == 0) ? 0.f :
+					(x == sky_resolution_x) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
 				g.pos_2d[1] = viewport_bottom+y*stepY;
 			}
+		}
 	}
 
-	float min_mw_lum = 0.13;
-
-	// no need to calculate if not visible
-	if(!fader.getInterstate())
-	{
-		atm_intensity = 0;
-		world_adaptation_luminance = 3.75f + lightPollutionLuminance;
-		milkyway_adaptation_luminance = min_mw_lum;  // brighter than without atm, since no drawing addition of atm brightness
-		return;
-	}
-	else
-	{
-		atm_intensity = fader.getInterstate();
-	}
-
-
-	//Vec3d obj;
-	skylight_struct2 b2;
-
+	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
-	double sun_angular_size = atan(696000./AU/sunPos.length());
-	double moon_angular_size = atan(1738./AU/moonPos.length());
-
-	double touch_angle = sun_angular_size + moon_angular_size;
-	double dark_angle = moon_angular_size - sun_angular_size;
-
-	sunPos.normalize();
-	moonPos.normalize();
+	const double sun_angular_size = atan(696000./AU/sunPos.length());
+	const double moon_angular_size = atan(1738./AU/moonPos.length());
+	const double touch_angle = sun_angular_size + moon_angular_size;
 
 	// determine luminance falloff during solar eclipses
-	double separation_angle = acos( sunPos.dot( moonPos ));  // angle between them
-
+	sunPos.normalize();
+	moonPos.normalize();
+	double separation_angle = std::acos(sunPos.dot(moonPos));  // angle between them
 	//	printf("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
-
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
 	// TODO: use better coverage function (non-linear)
 	// because of above issues, this algorithm darkens more quickly than reality
 	if( separation_angle < touch_angle)
 	{
+		double dark_angle = moon_angular_size - sun_angular_size;
 		float min;
 		if(dark_angle < 0)
 		{
@@ -119,12 +98,24 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		}
 		else min = 0.004;  // so bright stars show up at total eclipse
 
-		if(separation_angle < dark_angle) atm_intensity = min;
-		else atm_intensity *= min + (1.-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle);
+		if (separation_angle < dark_angle)
+			eclipseFactor = min;
+		else
+			eclipseFactor = min + (1.-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle);
+	}
+	else
+		eclipseFactor = 1.;
+		
 
-		//		printf("atm int %f (min %f)\n", atm_intensity, min);
+	// No need to calculate if not visible
+	if (!fader.getInterstate())
+	{
+		averageLuminance = 0.001 + lightPollutionLuminance;
+		return;
 	}
 
+	// Calculate the atmosphere RGB for each point of the grid
+	
 	float sun_pos[3];
 	sun_pos[0] = sunPos[0];
 	sun_pos[1] = sunPos[1];
@@ -143,15 +134,16 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	// Calculate the date from the julian day.
 	ln_date date;
 	get_date(JD, &date);
-
 	skyb.set_date(date.years, date.months, moon_phase);
-
-	Vec3d point(1., 0., 0.);
 
 	// Variables used to compute the average sky luminance
 	double sum_lum = 0.;
 	unsigned int nb_lum = 0;
-
+	
+	Vec3d point(1., 0., 0.);
+	skylight_struct2 b2;
+	const float atm_intensity = fader.getInterstate();
+	
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
 	// Compute the sky color for every point above the ground
@@ -182,23 +174,22 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
 			                                 moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
 			                                 sun_pos[2]*b2.pos[2], b2.pos[2]);
-
+			b2.color[2] *= eclipseFactor;
+			b2.color[2] += 0.001 + lightPollutionLuminance;
 
 			sum_lum+=b2.color[2];
 			++nb_lum;
+			
 			eye->xyY_to_RGB(b2.color);
 			grid[y*(1+sky_resolution_x)+x].color.set(
-			              atm_intensity*b2.color[0],
-			              atm_intensity*b2.color[1],
-			              atm_intensity*b2.color[2]);
+				b2.color[0]*atm_intensity,
+				b2.color[1]*atm_intensity,
+				b2.color[2]*atm_intensity);
 		}
 	}
 
-	world_adaptation_luminance = 3.75f + lightPollutionLuminance + 3.5*sum_lum/nb_lum*atm_intensity;
-	milkyway_adaptation_luminance = min_mw_lum*(1-atm_intensity) + 30*sum_lum/nb_lum*atm_intensity;
-
-	sum_lum = 0.f;
-	nb_lum = 0;
+	// Update average luminance
+	averageLuminance = sum_lum/nb_lum;
 }
 
 
@@ -208,14 +199,9 @@ void Atmosphere::draw(Projector* prj)
 {
 	if(fader.getInterstate())
 	{
-		// printf("Atm int: %f\n", atm_intensity);
-
 		// TEST
 		//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
-
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-
-
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 
@@ -235,8 +221,6 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
-
 //		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_FUNC_ADD);
-
 	}
 }

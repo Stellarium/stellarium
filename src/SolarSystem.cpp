@@ -591,7 +591,7 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 	
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
-	const float ambient[4] = {0.03,0.03,0.03,0.03};
+	const float ambient[4] = {0.02,0.02,0.02,0.02};
 	const float diffuse[4] = {1,1,1,1};
 	glLightfv(GL_LIGHT0,GL_AMBIENT, ambient);
 	glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
