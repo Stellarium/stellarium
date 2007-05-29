@@ -8,7 +8,7 @@ use Getopt::Long;
 
 
 use constant PROG_DESCRIPTION => "asteroid orbital elements converter";
-use constant PROG_COPYRIGHT   => "(C) XXXX; released under the GNU GPL version 2";
+use constant PROG_COPYRIGHT   => "(C) 2007; released under the GNU GPL version 2";
 use constant PROG_VERSION     => "0.01";
 use constant PROG_AUTHOR      => "Matthew Gates";
 
