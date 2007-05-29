@@ -775,7 +775,6 @@ CTRL + C : End Script\n\
 				  "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
 				  "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 				  "CTRL + SHIFT + V: Toggle vertical image flipping\n"))+
-		wstring(_("CTRL + G : set observer onto the selected planet\n"))+
 #ifndef MACOSX
 		wstring(_("CTRL + Q : Quit\n"))
 #else
