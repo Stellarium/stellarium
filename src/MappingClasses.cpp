@@ -223,7 +223,7 @@ double MappingFisheye::deltaZoom(double fov) const
 MappingCylinder::MappingCylinder(void)
 {
 	// assume aspect ration of 4/3 for getting a full 360 degree horizon:
-	maxFov = 180.0 * 4/3;
+	maxFov = 175.0 * 4/3;
 }
 
 MappingCylinder MappingCylinder::instance;

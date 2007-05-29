@@ -54,10 +54,18 @@ public:
 	//! Get whether atmosphere is displayed
 	bool getFlagShow() const {return fader;}
 	
-	float get_intensity(void) {return atm_intensity; }  // tells you actual atm intensity due to eclipses + fader
-	float get_fade_intensity(void) {return fader.getInterstate();}  // let's you know how far faded in or out the atm is (0-1)
-	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
-	float get_milkyway_adaptation_luminance(void) const {return milkyway_adaptation_luminance;}
+	//! Get the actual atmosphere intensity due to eclipses + fader
+	//! @return the display intensity ranging from 0 to 1
+	float getRealDisplayIntensityFactor(void) const {return fader.getInterstate()*eclipseFactor;}
+	
+	// let's you know how far faded in or out the atm is (0-1)
+	float getFadeIntensity(void) const {return fader.getInterstate();}
+	
+	//! Get the average luminance of the atmosphere in cd/m2
+	//! If atmosphere is off, the luminance includes the background starlight + light pollution.
+	//! Otherwise it includes the atmosphere + background starlight + eclipse factor + light pollution.
+	//! @return the last computed average luminance of the atmosphere in cd/m2.
+	float getAverageLuminance(void) const {return averageLuminance;}
 
 	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
@@ -74,9 +82,10 @@ private:
 	GridPoint *grid;	// For Atmosphere calculation
 
 	int startY;			// intern variable used to store the Horizon Y screen value
-	float world_adaptation_luminance;
-	float milkyway_adaptation_luminance;
-	float atm_intensity;
+	
+	//! The average luminance of the atmosphere in cd/m2
+	float averageLuminance;
+	double eclipseFactor;
 	ParabolicFader fader;
 	float lightPollutionLuminance;
 };

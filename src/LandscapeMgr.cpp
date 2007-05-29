@@ -168,7 +168,9 @@ void LandscapeMgr::update(double deltaTime)
 	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
 	                          eye, prj, obs->get_latitude(), obs->get_altitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
-	eye->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
+	
+	eye->set_world_adaptation_luminance(3.75+atmosphere->getAverageLuminance()*3.5);
+	//cerr << atmosphere->getAverageLuminance()*3.5 << " " << MY_MAX(atmosphere->getAverageLuminance()*3.5, 3.75) << endl;
 	
 	sunPos.normalize();
 	moonPos.normalize();
@@ -181,11 +183,11 @@ void LandscapeMgr::update(double deltaTime)
 		sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
 
 	// TODO make this more generic for non-atmosphere planets
-	if(atmosphere->get_fade_intensity() == 1)
+	if(atmosphere->getFadeIntensity() == 1)
 	{
 		// If the atmosphere is on, a solar eclipse might darken the sky
 		// otherwise we just use the sun position calculation above
-		sky_brightness *= (atmosphere->get_intensity()+0.1);
+		sky_brightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
 
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
@@ -410,7 +412,7 @@ wstring LandscapeMgr::getLandscapeLocationDescription(void) {
     float LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const {return atmosphere->getLightPollutionLuminance();}
 
 	
-	float LandscapeMgr::getLuminance(void) {return atmosphere->get_intensity();}
+	float LandscapeMgr::getLuminance(void) {return atmosphere->getRealDisplayIntensityFactor();}
 
 Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const string& landscapeId)
 {
