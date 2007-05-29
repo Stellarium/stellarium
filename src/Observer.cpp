@@ -29,7 +29,6 @@
 #include "StelCore.hpp" // getNavigator
 #include "Navigator.hpp" // getJDay
   // setting the titlebar text:
-#include "stel_ui.h"
 
 #include <cassert>
 
@@ -98,9 +97,6 @@ void ArtificialPlanet::setDest(const Planet &dest) {
   if (re.offset - r.offset < -180.f) re.offset += 360.f; else
   if (re.offset - r.offset >  180.f) re.offset -= 360.f;
 
-    // Set the UI title bar
-  StelUI* ui = StelApp::getInstance().getStelUI();
-  ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 }
 
 void ArtificialPlanet::setRot(const Vec3d &r) {
@@ -339,9 +335,7 @@ void Observer::moveTo(double lat, double lon, double alt, int duration, const ws
   move_to_coef = 1.0f/duration;
   move_to_mult = 0;
 
-	name = _name;
-	StelUI* ui = StelApp::getInstance().getStelUI();
-	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
+  name = _name;
 }
 
 
@@ -359,9 +353,8 @@ void Observer::update(int delta_time) {
         objmgr.unSelect();
       }
       // Set the UI title bar
-      StelUI* ui = StelApp::getInstance().getStelUI();
-      ui->setTitleObservatoryName(ui->getTitleWithAltitude());
-      ui->updatePlanetMap(getHomePlanetEnglishName());
+      // StelUI* ui = StelApp::getInstance().getStelUI();
+      // ui->updatePlanetMap(getHomePlanetEnglishName());
     } else {
       const double f1 = time_to_go/(double)(time_to_go + delta_time);
       artificial_planet->computeAverage(f1);

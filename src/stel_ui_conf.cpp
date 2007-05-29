@@ -1093,6 +1093,12 @@ void StelUI::updateConfigForm(void)
 		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}
+	
+	const Planet* p = core->getObservatory()->getHomePlanet();
+	if (p != mapLastPlanet) {
+		updatePlanetMap(core->getObservatory()->getHomePlanetEnglishName());
+		mapLastPlanet = const_cast<Planet*>(p);
+	}
 
 	time_current->setJDay(core->getNavigation()->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getNavigation()->getJDay())*JD_HOUR);
 	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getNavigation()->getJDay()) + L")");
