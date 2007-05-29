@@ -201,7 +201,8 @@ sub dump_data {
 		print "tex_halo = star16x16.png\n";
 		print "radius = 25\n";
 		print "tex_map = nomap.png\n";
-		# print "sidereal_period = ?\n";
+		my $sp = (($gh_data{$id}{"SemiMajorAxis"} ** 3) ** 0.5) * 365.256363051;
+		print "sidereal_period = $sp\n";
 		foreach my $field (reverse sort @ga_field_order) {
 			my $prefix = "";
 			if ($field eq "mag") { next; }
