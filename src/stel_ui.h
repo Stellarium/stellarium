@@ -35,6 +35,7 @@ class StelApp;
 class StelCore;
 class StelCommandInterface;
 class InitParser;
+class Planet;
 
 class StelUI
 {
@@ -163,6 +164,7 @@ private:
 	Label * top_bar_appName_lbl;
 	Label * top_bar_fov_lbl;
 	Component* createTopBar(SFont& baseFont);
+	Planet* topBarLastPlanet;	
 	void updateTopBar(void);
 
 	// Flags buttons (the buttons in the bottom left corner)
@@ -300,6 +302,7 @@ private:
 	Label *lblMapPointer;
 	FloatIncDec* lat_incdec, * long_incdec;
 	IntIncDec* alt_incdec;
+	Planet* mapLastPlanet;
 	void setObserverPositionFromMap(void);
 	void setCityFromMap(void);
 	void setObserverPositionFromIncDec(void);
@@ -468,6 +471,7 @@ private:
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
 	string SelectedScriptDirectory;  // script directory for same
+	
 };
 
 #endif  //_STEL_UI_H

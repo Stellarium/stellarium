@@ -56,6 +56,8 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 	top_bar_fps_lbl(NULL),
 	top_bar_appName_lbl(NULL),
 	top_bar_fov_lbl(NULL),
+	topBarLastPlanet(NULL),
+
 
 	bt_flag_ctr(NULL),
 	bt_flag_constellation_draw(NULL),
@@ -89,8 +91,8 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 	config_win(NULL),
 	search_win(NULL),
 	dialog_win(NULL),
+	mapLastPlanet(NULL),
 	tui_root(NULL)
-
 {
 	if (!_core)
 	{
@@ -318,6 +320,12 @@ void StelUI::updateTopBar(void)
 		top_bar_fps_lbl->adjustSize();
 	}
 	top_bar_fps_lbl->setVisible(FlagShowFps);
+	
+	const Planet* p = core->getObservatory()->getHomePlanet();
+	if (p != topBarLastPlanet) {
+		setTitleObservatoryName(getTitleWithAltitude());
+		topBarLastPlanet = const_cast<Planet*>(p);
+	}
 }
 
 // Create the button panel in the lower left corner
