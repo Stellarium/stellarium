@@ -27,7 +27,10 @@
 #endif
 
 long long int GetNow(void);
+
+#ifdef __MINGW32__
 struct fd_set;
+#endif
 
 class Telescope : public StelObject {
 public:
