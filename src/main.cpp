@@ -21,6 +21,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <config.h>
+#include <clocale>
 
 #include "StelApp.hpp"
 #include "Translator.hpp"

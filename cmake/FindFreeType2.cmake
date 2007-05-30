@@ -12,7 +12,6 @@
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
 
-IF(UNIX)
   FIND_PATH(FreeType2_INCLUDE_DIR 
     freetype/config/ftheader.h
     /usr/include/freetype2
@@ -26,7 +25,6 @@ IF(UNIX)
     /usr/openwin/lib
     /usr/lib
     )
-ENDIF(UNIX)
 
 if (FreeType2_INCLUDE_DIR AND FreeType2_LIBRARIES)
    set(FreeType2_FOUND TRUE)

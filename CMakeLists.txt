@@ -8,9 +8,19 @@ SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 SET(CMAKE_BUILD_TYPE Debug)   # Choices are None Debug Release RelWithDebInfo MinSizeRel
-SET(CMAKE_C_FLAGS "-Wall")      # additional C compile flags
-SET(CMAKE_CXX_FLAGS "-Wall")    # additional CPP compile flags
-SET(CMAKE_LDFLAGS "")           # additional linking flags
+
+IF(UNIX AND NOT WIN32)
+ SET(CMAKE_C_FLAGS -Wall)       # additional C compile flags
+ SET(CMAKE_CXX_FLAGS -Wall)     # additional CPP compile flags
+ SET(STLPORT_LIBRARY "")
+ELSE(UNIX AND NOT WIN32)
+ SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I/home/fchereau/STLport/stlport -L/home/fchereau/STLport/lib")
+ SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I/home/fchereau/STLport/stlport -L/home/fchereau/STLport/lib")
+ SET(STLPORT_LIBRARY "-lstlport.5.0")
+ SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -L/home/fchereau/STLport/lib")
+ENDIF(UNIX AND NOT WIN32)
+
+
 
 ########### Check headers ###########
 INCLUDE(CheckIncludeFiles)
