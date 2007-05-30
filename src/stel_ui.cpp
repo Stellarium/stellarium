@@ -763,8 +763,8 @@ CTRL + G : Goto selected solar system object\n\
 6   : Time rate pause           7   : Time rate 0\n\
 8   : Set current time          J   : Decrease time rate\n\
 K   : Normal time rate          L   : Increase time rate\n\
--   : Back 24 hours             =   : Forward 24 hours\n\
-[   : Back 7 days               ]   : Forward 7 days\n\
+- and = :  Back and forward one day (press ALT for sidereal day)\n\
+[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n\
 \n")) + 
 		wstring(_("During Script Playback:\n\
 CTRL + C : End Script\n\
