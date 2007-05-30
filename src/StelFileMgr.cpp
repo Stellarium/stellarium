@@ -1,5 +1,4 @@
-#include "config.h"
-#include "StelFileMgr.hpp"
+#include <config.h>
 #include <vector>
 #include <set>
 #include <string>
@@ -12,7 +11,16 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/convenience.hpp>
 #include <boost/random/linear_congruential.hpp>
-	
+
+#ifdef WIN32
+# include <windows.h>
+# ifndef _SHOBJ_H
+# include <shlobj.h>
+# endif 
+#endif
+
+#include "StelFileMgr.hpp"
+
 using namespace std;
 namespace fs = boost::filesystem;
 
@@ -359,15 +367,33 @@ const fs::path StelFileMgr::getDesktopDir(void)
 
 const fs::path StelFileMgr::getUserDir(void)
 {
-#if defined(MINGW32) || defined(WIN32)
-	// Windows
-#error "StelFileMgr::getUserDir not yet implemented for Windows"	
-#elseif defined(MAXOSX)
+ fs::path homeLocation;
+#ifdef WIN32
+	char path[MAX_PATH];
+	path[MAX_PATH-1] = '\0';
+	LPITEMIDLIST tmp;
+	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_PERSONAL, &tmp)))
+	{
+		SHGetPathFromIDList(tmp, path);                      
+		homeLocation = path;
+	}
+	else
+	{	
+		if(getenv("HOME")!=NULL)
+		{
+			//for Win XP etc.
+			homeLocation = string(getenv("HOME"));
+		}
+	}
+#else
+# ifdef MACOSX
 	// OSX
-#error "StelFileMgr::getUserDir not yet implemented for OSX"
-#else 
+# error "StelFileMgr::getUserDir not yet implemented for OSX"
+# else 
 	// Linux, BSD, Solaris etc.	       
-	fs::path homeLocation(getenv("HOME"));
+ homeLocation = getenv("HOME");
+# endif
+#endif
 	if (!fs::is_directory(homeLocation))
 	{
 		// This will be the case if getenv failed or something else is weird
@@ -379,7 +405,6 @@ const fs::path StelFileMgr::getUserDir(void)
 		homeLocation /= ".stellarium";
 		return(homeLocation);
 	}
-#endif
 	throw(runtime_error("NOT FOUND"));
 }
 	
@@ -389,13 +414,6 @@ const fs::path StelFileMgr::getInstallationDir(void)
 	if (fs::exists(CHECK_FILE))
 		return fs::path(".");
 
-#if defined(MINGW32) || defined(WIN32)
-	// Windows
-#error "StelFileMgr::getInstallationDir not yet implemented for Windows"	
-#elseif defined(MAXOSX)
-	// OSX
-#error "StelFileMgr::getInstallationDir not yet implemented for OSX"
-#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
 	fs::path installLocation(INSTALL_DATADIR);
@@ -421,33 +439,13 @@ const fs::path StelFileMgr::getInstallationDir(void)
 			throw(runtime_error("NOT FOUND"));
 		}
 	}
-#endif
+
 	throw(runtime_error("NOT FOUND"));
 }
 	
 const fs::path StelFileMgr::getScreenshotDir(void)
 {
-#if defined(MINGW32) || defined(WIN32)
-	// Windows
-#error "StelFileMgr::getScreenshotDir not yet implemented for Windows"	
-	// return getDesktopDir();
-#elseif defined(MAXOSX)
-	// OSX
-#error "StelFileMgr::getScreenshotDir not yet implemented for OSX"
-	// return getDesktopDir();
-#else 
-	// Linux, BSD, Solaris etc.
-	fs::path checkDir(getenv("HOME"));
-	if (!fs::is_directory(checkDir))
-	{
-		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
-		throw(runtime_error("NOT FOUND"));
-	}
-	else
-	{
-		return(checkDir);
-	}
-#endif
+      return getDesktopDir();
 	throw(runtime_error("NOT FOUND"));
 }
 

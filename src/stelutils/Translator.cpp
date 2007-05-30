@@ -23,6 +23,8 @@
 #include <cstdio>
 #include <algorithm>
 #include <fstream>
+#include <clocale>
+#include <cstdlib>
 
 #include "StelUtils.hpp"
 #include "Translator.hpp"
@@ -116,7 +118,7 @@ void Translator::reload()
 #endif
 
 	putenv(envstr);
-#if !defined (_MSC_VER)
+#if !defined (_MSC_VER) && !defined (__MINGW32__) 
 	setlocale(LC_MESSAGES, "");
 #else
 	setlocale(LC_CTYPE,"");

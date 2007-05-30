@@ -27,6 +27,7 @@
 #endif
 
 long long int GetNow(void);
+struct fd_set;
 
 class Telescope : public StelObject {
 public:
