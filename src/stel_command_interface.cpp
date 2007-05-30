@@ -409,30 +409,27 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			script_images->drop_image(args["name"]);
 		} else {
 			if(args["action"]=="load" && args["filename"]!="") {
-
 				Image::IMAGE_POSITIONING img_pos = Image::POS_VIEWPORT;
 				if(args["coordinate_system"] == "horizontal") img_pos = Image::POS_HORIZONTAL;
 				else if(args["coordinate_system"] == "equatorial") img_pos = Image::POS_EQUATORIAL;
 				else if(args["coordinate_system"] == "j2000") img_pos = Image::POS_J2000;
 
 				string image_filename;
-				if(stapp->scripts->is_playing()) 
+				if(stapp->scripts->is_playing())
 					image_filename = stapp->scripts->get_script_path() + args["filename"];
 				else
+					image_filename = "data/" + args["filename"];
+					
+				try
 				{
-					try
-					{
-						image_filename = stapp->getFileMgr().findFile(string("data/") + args["filename"]).string();
-					}
-					catch(exception& e)
-					{
-						cerr << "ERROR finding script: " << e.what() << endl;
-					}
+					image_filename = stapp->getFileMgr().findFile(image_filename).string();
+					script_images->load_image(image_filename, args["name"], img_pos);
 				}
-				  
-				status = script_images->load_image(image_filename, args["name"], img_pos);
-
-				if(status==0) debug_message = _("Unable to open file: ") + StelUtils::stringToWstring(image_filename);
+				catch(exception& e)
+				{
+					cerr << "ERROR finding script: " << e.what() << endl;
+					debug_message = _("Unable to open file: ") + StelUtils::stringToWstring(image_filename);
+				}				  
 			}
 
 			if( status ) {
