@@ -18,6 +18,8 @@
  */
 
 
+#include <config.h>
+
 #include <math.h> // fmod
 #include <sstream>
 #include <fstream>
@@ -427,7 +429,7 @@ wstring printAngleDMS(double angle, bool decimals, bool useD)
 			const int m = d % 60;
 			d /= 60;
 			swprintf(buf,
-#ifndef MINGW32
+#ifndef __MINGW32__
 				sizeof(buf),
 #endif
 				L"%lc%.2d%lc%.2d'%.2d.%02d\"",
@@ -439,7 +441,7 @@ wstring printAngleDMS(double angle, bool decimals, bool useD)
 			const int m = d % 60;
 			d /= 60;
 			swprintf(buf,
-#ifndef MINGW32
+#ifndef __MINGW32__
 				sizeof(buf),
 #endif
 				L"%lc%.2d%lc%.2d'%.2d\"",
@@ -470,7 +472,7 @@ wstring printAngleHMS(double angle, bool decimals)
 			const int m = h % 60;
 			h /= 60;
 			swprintf(buf,
-#ifndef MINGW32
+#ifndef __MINGW32__
 				sizeof(buf),
 #endif
 				L"%.2dh%.2dm%.2d.%02ds",h,m,s,centi);
@@ -483,7 +485,7 @@ wstring printAngleHMS(double angle, bool decimals)
 			const int m = h % 60;
 			h /= 60;
 			swprintf(buf,
-#ifndef MINGW32
+#ifndef __MINGW32__
 				sizeof(buf),
 #endif
 				L"%.2dh%.2dm%.2ds",h,m,s);
@@ -1041,7 +1043,7 @@ float get_GMT_shift_from_system(double JD, bool _local)
 	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0); 
 #else */
 
-#if !defined(MINGW32)
+#if !defined(WIN32)
 
 	struct tm * timeinfo;
 

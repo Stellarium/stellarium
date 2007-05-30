@@ -342,7 +342,7 @@ namespace s_tui
 		}
 		void addItemList(const wstring& s)
 		{
-			wistringstream is(s);
+			std::wistringstream is(s);
 			T elem;
 			while(getline(is, elem))
 			{
