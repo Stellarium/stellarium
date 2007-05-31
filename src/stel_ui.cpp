@@ -215,12 +215,12 @@ void StelUI::init(const InitParser& conf)
 
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow(courierFont));
+	
 	desktop->addComponent(createConfigWindow(courierFont));
 	desktop->addComponent(createSearchWindow());
-
-	initialised = true;
-
 	setTitleObservatoryName(getTitleWithAltitude());
+	
+ initialised = true;
 }
 
 double StelUI::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
