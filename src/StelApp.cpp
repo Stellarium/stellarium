@@ -154,7 +154,7 @@ StelApp::~StelApp()
 *************************************************************************/
 std::string StelApp::getApplicationName()
 {
-	return string("Stellarium")+PACKAGE_VERSION;
+	return string("Stellarium")+" "+PACKAGE_VERSION;
 }
 
 void StelApp::setViewPortDistorterType(const string &type)
@@ -416,7 +416,6 @@ void StelApp::update(int delta_time)
 //! Main drawinf function called at each frame
 double StelApp::draw(int delta_time)
 {
- cerr << "StelApp::draw" << endl;
      if (!initialized)
         return 0.;
         
