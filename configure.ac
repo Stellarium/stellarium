@@ -34,13 +34,6 @@ CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
 LIBS="$LIBS $FT2_LIBS"
 
 AX_BOOST_BASE
-AX_BOOST_FILESYSTEM 
-if test "x$BOOST_FILESYSTEM_LIB" = "x"; then
-	echo "Sorry, we need the filesystem lib from Boost."
-	echo "Please install from http://www.boost.org"
-	exit 1
-fi
-LIBS="$LIBS $BOOST_FILESYSTEM_LIB"
 
 # Check for libcurl
 LIBCURL_CHECK_CONFIG([yes], , [haveCurl=yes], [haveCurl=no])
