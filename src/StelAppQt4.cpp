@@ -158,10 +158,11 @@ void StelAppQt4::startMainLoop()
 	winOpenGL = &openGLWin;
 	winOpenGL->setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
 	mainWin.setCentralWidget(&openGLWin);
-	StelApp::init();
+
 	mainWin.show();
 	openGLWin.show();
-
+	StelApp::init();
+	
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
 	openGLWin.resizeGL(getScreenW(), getScreenH());
 	
