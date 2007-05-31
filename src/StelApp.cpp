@@ -57,7 +57,7 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL)
+	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL), initialized(false)
 {
 	scripts=0;
 	commander=0;
@@ -223,17 +223,9 @@ void StelApp::init()
 					<< (version.empty() ? "<0.6.0" : version.c_str())
 					<< ")." << endl 
 					<< "It will be replaced by the default config file." << endl;
-			try
-			{
-				string defaultFile = stelFileMgr->findFile("data/default_config.ini");
-				string configFile = getConfigFilePath();
-				system(string("cp -f " + defaultFile + " " + configFile).c_str());	
-				conf.load(configFile);  // Read new config
-			}
-			catch(exception& e)
-			{
-				cerr << "ERROR: cannot copy default config file to user directory: " << e.what() << endl;
-			}
+
+            copyDefaultConfigFile();
+            conf.load(configFile);  // Read new config
 		}
 		else
 		{
@@ -334,7 +326,6 @@ void StelApp::init()
 // star names are loaded again
 	skyCultureMgr->init(conf);
 
-	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui = new StelUI(core, this);
 	ui->init(conf);
 	ui->init_tui();  // don't reinit tui since probably called from there
@@ -373,10 +364,15 @@ void StelApp::init()
 	
 	// play startup script, if available
 	scripts->play_startup_script();
+	
+	initialized = true;
 }
 
 void StelApp::update(int delta_time)
 {
+     if (!initialized)
+        return;
+        
 	textureMgr->update();
 	
 	++frame;
@@ -397,6 +393,7 @@ void StelApp::update(int delta_time)
 	// run command from a running script
 	scripts->update(delta_time);
 
+  assert(ui);
 	ui->update((double)delta_time/1000);
 
 	core->update(delta_time);
@@ -419,6 +416,10 @@ void StelApp::update(int delta_time)
 //! Main drawinf function called at each frame
 double StelApp::draw(int delta_time)
 {
+ cerr << "StelApp::draw" << endl;
+     if (!initialized)
+        return 0.;
+        
     // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	// (because ui can draw outside the main viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -628,7 +629,7 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	string cp_cmd(string("cp ") + defaultConfigFilePath + " " + configFile);
+	string cp_cmd(string("cp \"") + defaultConfigFilePath + "\" \"" + configFile + "\"");
 	system(cp_cmd.c_str());
 	
 	if (!stelFileMgr->exists(configFile))

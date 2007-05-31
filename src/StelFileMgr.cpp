@@ -95,10 +95,11 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 	     li != listPaths.end();
 	     li++)
 	{
-		QFileInfo thisPath((*li+"/"+path+"/").c_str());
+		QFileInfo thisPath((*li+"/"+path).c_str());
 		if (thisPath.isDir()) 
 		{
-			QStringList lsOut = thisPath.absoluteDir().entryList();
+  QDir thisDir(thisPath.absoluteFilePath());
+			QStringList lsOut = thisDir.entryList();
 			for (QStringList::const_iterator fileIt = lsOut.constBegin(); 
 				fileIt != lsOut.constEnd(); 
 				++fileIt)
@@ -107,7 +108,6 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 				if ((*fileIt != "..") && (*fileIt != "."))
 				{
 					QFileInfo fullPath((*li+"/"+path+"/"+(*fileIt).toStdString()).c_str());
-
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
@@ -344,16 +344,10 @@ const string StelFileMgr::getInstallationDir(void)
 	if (QFileInfo(CHECK_FILE).exists())
 		return ".";
 
-#if defined(WIN32) 
-#error StelFileMgr::getInstallationDir not yet implemented for osx
-#elif defined(MACOSX)
-#error StelFileMgr::getInstallationDir not yet implemented for osx
-#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
 	QFileInfo installLocation(INSTALL_DATADIR);
 	QFileInfo checkFile(INSTALL_DATADIR "/" CHECK_FILE);
-#endif
 
 	if (checkFile.exists())
 	{
@@ -386,7 +380,7 @@ const string StelFileMgr::getLocaleDir(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = getInstallationDir() + "/data/locale";
+	localePath = QFileInfo(QString(getInstallationDir().c_str()) + "/data/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 
