@@ -372,7 +372,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_video->addComponent(lblvideo1);
 
 	y+=20;
-	
+
 	projection_sl = new StringList();
 	projection_sl->addItem("perspective");
 	projection_sl->addItem("orthographic");
@@ -458,29 +458,27 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	landscapePlanetLb->setPos(x+landscape_sl->getSizex()+20, y+25); 
 	landscapePlanetLb->adjustSize();
 	tab_landscapes->addComponent(landscapePlanetLb);
-	
+
 	landscapeLocationLb = new Label(_("Location: ") + lmgr->getLandscapeLocationDescription());
 	landscapeLocationLb->setPos(x+landscape_sl->getSizex()+20, y+50); 
 	landscapeLocationLb->adjustSize();
 	tab_landscapes->addComponent(landscapeLocationLb);
-	
+
 	locationFromLandscapeCheck = new LabeledCheckBox(lmgr->getFlagLandscapeSetsLocation(),_("Setting landscape updates the location"));
 	locationFromLandscapeCheck->setOnPressCallback(callback<void>(this, &StelUI::setLandscapeUpdatesLocation));
 	locationFromLandscapeCheck->setPos(x+landscape_sl->getSizex()+20, y+80); 
 	tab_landscapes->addComponent(locationFromLandscapeCheck);
-			
+	
 	landscape_descriptionlb = new TextLabel(lmgr->getLandscapeDescription());
 	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+110); 
 	landscape_descriptionlb->adjustSize();
 	tab_landscapes->addComponent(landscape_descriptionlb);	
-	
 	y+=250;	
 
 	LabeledButton* landscape_save_bt = new LabeledButton(_("Save as default"));
 	landscape_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveLandscapeOptions));
 	tab_landscapes->addComponent(landscape_save_bt);
 	landscape_save_bt->setPos(tab_landscapes->getSizex()/2-landscape_save_bt->getSizex()/2,tab_landscapes->getSizey()-70);
-
 
 	// Language options
 	FilledContainer* tab_language = new FilledContainer();
