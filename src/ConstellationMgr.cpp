@@ -101,7 +101,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	string conArtFile("");
 	try
 	{
-		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab").string();
+		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
 	}
 	catch(exception& e)
 	{
@@ -110,11 +110,11 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 				
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab").string(),
+		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
 				conArtFile, newSkyCulture, lb);
 			
 		// load constellation names
-		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab").string());
+		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
 	
 		// Translate constellation names for the new sky culture
 		updateI18n();
@@ -130,7 +130,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 		
 	// TODO: do we need to have an else { clearBoundaries(); } ?
 	if (newSkyCulture=="western") 
-		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat").string());
+		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
 
 	lastLoadedSkyCulture = newSkyCulture;
 }
@@ -305,7 +305,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			string texturePath(texfile);
 			try
 			{
-				texturePath = StelApp::getInstance().getFileMgr().findFile(string("skycultures/")+cultureName+"/"+texfile).string();
+				texturePath = StelApp::getInstance().getFileMgr().findFile(string("skycultures/")+cultureName+"/"+texfile);
 			}
 			catch(exception& e)
 			{
@@ -317,7 +317,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 				     << endl; 
 				try
 				{
-					texturePath = StelApp::getInstance().getFileMgr().findFile(string("textures/")+texfile).string();
+					texturePath = StelApp::getInstance().getFileMgr().findFile(string("textures/")+texfile);
 				}
 				catch(exception& e2)
 				{

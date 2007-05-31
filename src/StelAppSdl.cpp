@@ -19,8 +19,6 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
 
 #include <config.h>
 
@@ -449,13 +447,13 @@ void StelAppSdl::startMainLoop()
 
 void StelAppSdl::saveScreenShot() const
 {
-	boost::filesystem::path shotDir;
+	string shotDir;
 	try
 	{
 		shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
 		if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
 		{
-			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.string() << endl;
+			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
 			return;
 		}
 	}
@@ -471,13 +469,13 @@ void StelAppSdl::saveScreenShot() const
 	const char *extension = ".bmp";
 #endif
 
-	boost::filesystem::path shotPath;
+	string shotPath;
 	for(int j=0; j<1000; ++j)
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir / (string("stellarium-") + oss.str() + extension);
-		if (!boost::filesystem::exists(shotPath))
+		shotPath = shotDir+"/"+(string("stellarium-") + oss.str() + extension);
+		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
 	// TODO - if no more filenames available, don't just overwrite the last one
@@ -510,23 +508,23 @@ void StelAppSdl::saveScreenShot() const
 
 #ifdef __x86_64__
 	  // workaround because SDL_SaveBMP is buggy on x86_64
-	FILE *f = fopen(shotPath.string().c_str(),"wb");
+	FILE *f = fopen(shotPath.c_str(),"wb");
 	if (f) {
 		fprintf(f,"P6\n# stellarium screenshot\n%d %d\n255\n",Screen->w,Screen->h);
 		fwrite(temp->pixels,1,3*(Screen->w)*(Screen->h),f);
 		fclose(f);
 	} else {
 		cerr << "StelAppSdl::saveScreenShot: fopen(" 
-			<< shotPath.string() 
+			<< shotPath
 			<< ") failed"
 			<< endl;
 	}
 #else
-	SDL_SaveBMP(temp, shotPath.string().c_str());
+	SDL_SaveBMP(temp, shotPath.c_str());
 #endif
 
 	SDL_FreeSurface(temp);
-	cout << "Saved screenshot to file : " << shotPath.string() << endl;
+	cout << "Saved screenshot to file : " << shotPath << endl;
 }
 
 /*************************************************************************

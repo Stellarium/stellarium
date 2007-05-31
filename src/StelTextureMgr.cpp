@@ -38,8 +38,6 @@ extern "C" {
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
-#include <boost/filesystem/operations.hpp>
-
 #ifndef USE_QT4
 #error This version of stellarium can only compile with QT4.2
 #endif
@@ -51,7 +49,6 @@ extern "C" {
 #include <QMutexLocker>
 
 using namespace std;
-namespace fs = boost::filesystem;
 
 // Initialize statics
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
@@ -178,7 +175,7 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
 *************************************************************************/
 ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
 {
-	fs::path ph;
+	string ph;
 	try
 	{
 		ph = StelApp::getInstance().getFileMgr().findFile(afilename);
@@ -196,7 +193,7 @@ ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool la
 		}
 	}
 	
-	ManagedSTextureSP tex = initTex(ph.string());
+	ManagedSTextureSP tex = initTex(ph);
 	if (tex==NULL)
 		return ManagedSTextureSP();
 

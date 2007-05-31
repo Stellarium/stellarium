@@ -74,10 +74,6 @@ StelApp::StelApp(int argc, char** argv) :
 	// Can't create 2 StelApp instances
 	assert(!singleton);
 	singleton = this;
-
-	// This is necessary so boost will allow paths which 
-	// include ".", e.g. /home/bob/.stellarium 
-	fs::path::default_name_check(fs::native);
 	
 	// C++-ize argv for use with StelUtils::argsHaveOption... functions
 	for(int i=0; i<argc; i++) { argList.push_back(argv[i]); }
@@ -111,7 +107,7 @@ StelApp::StelApp(int argc, char** argv) :
 	string fontMapFile("");
 	try 
 	{
-		fontMapFile = stelFileMgr->findFile("data/fontmap.dat").string();
+		fontMapFile = stelFileMgr->findFile("data/fontmap.dat");
 	}
 	catch(exception& e)
 	{
@@ -195,7 +191,7 @@ void StelApp::init()
 	// Load language codes
 	try
 	{
-		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8").string());
+		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8"));
 	}
 	catch(exception& e)
 	{
@@ -235,7 +231,7 @@ void StelApp::init()
 					<< "It will be replaced by the default config file." << endl;
 			try
 			{
-				string defaultFile = stelFileMgr->findFile("data/default_config.ini").string();
+				string defaultFile = stelFileMgr->findFile("data/default_config.ini");
 				string configFile = getConfigFilePath();
 				system(string("cp -f " + defaultFile + " " + configFile).c_str());	
 				conf.load(configFile);  // Read new config
@@ -255,7 +251,7 @@ void StelApp::init()
 	string iconPath;
 	try
 	{
-		iconPath = stelFileMgr->findFile("data/icon.bmp").string();
+		iconPath = stelFileMgr->findFile("data/icon.bmp");
 	}
 	catch(exception& e)
 	{
@@ -591,7 +587,7 @@ void StelApp::setConfigFile(const string& configName)
 {
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE)).string();
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
 		return;
 	}
 	catch(exception& e)
@@ -601,7 +597,7 @@ void StelApp::setConfigFile(const string& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE).string();	
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE);	
 		return;
 	}
 	catch(exception& e)
@@ -611,7 +607,7 @@ void StelApp::setConfigFile(const string& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW).string();
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW);
 		//cerr << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile << endl;
 		return;
 	}
@@ -627,7 +623,7 @@ void StelApp::copyDefaultConfigFile()
 	string defaultConfigFilePath;
 	try
 	{
-		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini").string();
+		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini");
 	}
 	catch(exception& e)
 	{

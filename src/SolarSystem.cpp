@@ -171,7 +171,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 	InitParser pd;	// The Planet data ini file parser
 	try
 	{
-		pd.load(StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini").string());
+		pd.load(StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini"));
 	}
 	catch(exception& e)
 	{

@@ -6,10 +6,8 @@
 #include <vector>
 #include <set>
 #include <string>
-#include <boost/filesystem/path.hpp>
 
 using namespace std;
-namespace fs = boost::filesystem;
 
 //! @brief Provides utilities for locating and handling files.
 //!
@@ -58,13 +56,11 @@ public:
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
-	//! @exception [misc] boost filesystem exceptions on file path errors and such
 	//! @exception std::exception what() -> "file not found: [filename]"
 	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
-	//! 		This exception occurs if a full path (complete in the 
-	//! 		boost::filesystem sense) is passes at the path argument, but 
+	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	const fs::path findFile(const string& path, const FLAGS& flags=(FLAGS)0);
+	const string findFile(const string& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -75,19 +71,17 @@ public:
 	//!         is invalid (not a directory / not existing)
 	const set<string> listContents(const string& path, const FLAGS& flags=(FLAGS)0);
 		
-	//! Get a vector of fs::path objects which describes the current search paths.
-	//! @return returns a vector of boost::filesystem::path objects representing the
-	//!         current search paths.
-	const vector<fs::path>& getSearchPaths(void) { return fileLocations; }
+	//! Get a vector of strings which describes the current search paths.
+	//! @return returns a vector of strings representing the current search paths.
+	const vector<string>& getSearchPaths(void) { return fileLocations; }
 	
 	//! Set the search paths.
-	//! @param paths is a vector of boost::filesystem::path objects which will become the new
-	//!        search paths
-	void setSearchPaths(const vector<fs::path> paths);
+	//! @param paths is a vector of strings which will become the new search paths
+	void setSearchPaths(const vector<string>& paths);
 		
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
-	bool exists(const fs::path& path);
+	bool exists(const string& path);
 	
 	//! Check if a path is writable
 	//! For files, true is returned if the file exists and is writable
@@ -96,16 +90,31 @@ public:
 	//! In the case of directories, return true if the directory can
 	//! have files created in it.
 	//! @param path to check
-	bool isWritable(const fs::path& path);
+	bool isWritable(const string& path);
 	
 	//! Check if a path exists and is a directory.
 	//! @param path to check
-	bool isDirectory(const fs::path& path);
+	bool isDirectory(const string& path);
 	
-	//! Check if the user directory exists, is writable and a driectory
+	//! Check if the user directory exists, is writable and a directory
 	//! Creates it if it does not exist.  Exits the program if any of this
 	//! process fails.
 	void checkUserDir();
+	
+	//! Make a directory
+	//! @param path the path of the directory to create.
+	//! @return true if success, else false
+	bool mkDir(const string& path);
+	
+	//! Convenience function to find the parent directory of a given path
+	//! May return relative paths if the parameter is a relative path
+	//! @param path the path whose parent directory is to be returned
+	const string dirName(const string& path);
+	
+	//! Convenience function to find the basename of a given path
+	//! May return relative paths if the parameter is a relative path
+	//! @param path the path whose parent directory is to be returned
+	const string baseName(const string& path);
 	
 	//! Get the user's Desktop directory
 	//! This is a portable way to retrieve the directory for the user's desktop.
@@ -116,7 +125,7 @@ public:
 	//! @return the path to the user's desktop directory
 	//! @exception NOT_FOUND when the directory cannot be determined, or the
 	//!            OS doesn't provide one.
-	const fs::path getDesktopDir(void);
+	const string getDesktopDir(void);
 	
 	//! Returns the path to the user directory
 	//! This is the directory where we expect to find the [default] writable 
@@ -125,14 +134,14 @@ public:
 	//! trying to find most data files
 	//! @return the path to the user private data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const fs::path getUserDir(void);
+	const string getUserDir(void);
 	
 	//! Returns the path to the installation directory
 	//! This is the directory where we expect to find scripts, nebulae, stars, 
 	//! skycultures etc, and will be added at the end of the search path
 	//! @return the path to the installation data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const fs::path getInstallationDir(void);
+	const string getInstallationDir(void);
 	
 	//! This is the directory into which screenshots will be saved
 	//! It is $HOME on Linux, BSD, Solaris etc.
@@ -140,7 +149,7 @@ public:
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const fs::path getScreenshotDir(void);
+	const string getScreenshotDir(void);
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
@@ -148,16 +157,16 @@ public:
 	
 private:
 	//! Check if a (complete) path matches a set of flags
-	//! @param path a complete (in the boost::fs sense) path
+	//! @param path a complete path
 	//! @param flags a set of StelFileMgr::FLAGS to test against path
 	//! @return true if path passes all flag tests, else false
-	//! @exceptions [misc] can throw boost::filesystem exceptions if there are unexpected problems with IO
-	bool fileFlagsCheck(const fs::path& path, const FLAGS& flags=(FLAGS)0);
+	//! @exceptions misc 
+	bool fileFlagsCheck(const string& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Used to print info to stdout on the current state of the file paths.
 	void outputFileSearchPaths(void);
 		
-	vector<fs::path> fileLocations;
+	vector<string> fileLocations;
 	
 };
 
