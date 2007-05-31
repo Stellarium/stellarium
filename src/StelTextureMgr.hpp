@@ -25,11 +25,13 @@
 #include <map>
 #include <vector>
 #include <boost/shared_ptr.hpp>
-#include <boost/thread/mutex.hpp>
+
 #include "GLee.h"
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
 #include "InitParser.hpp"
+
+class QMutex;
 
 //! @brief Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
@@ -151,7 +153,7 @@ public:
 	//! @param queueMutex the mutex protecting the queue
 	//! @param cookiesFile path to a file containing cookies to use for authenticated download
 	bool createTextureThread(const std::string& url, std::vector<QueuedTex*>* queue, 
-		boost::mutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
+		QMutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
 		const std::string& cookiesFile="");
 	
 	//! Define if mipmaps must be created while creating textures
@@ -222,7 +224,7 @@ private:
 
 	// Everything used for the threaded loading
 	friend struct loadTextureThread;
-	boost::mutex loadQueueMutex;
+	QMutex* loadQueueMutex;
 	std::vector<class LoadQueueParam*> loadQueue;
 	
 	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 

@@ -34,13 +34,6 @@ CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
 LIBS="$LIBS $FT2_LIBS"
 
 AX_BOOST_BASE
-AX_BOOST_THREAD
-if test "x$BOOST_THREAD_LIB" = "x"; then
-	echo "Sorry, we need the thread lib from Boost."
-	echo "Please install from http://www.boost.org"
-	exit 1
-fi
-dnl AX_BOOST_DATE_TIME
 AX_BOOST_FILESYSTEM 
 if test "x$BOOST_FILESYSTEM_LIB" = "x"; then
 	echo "Sorry, we need the filesystem lib from Boost."
@@ -75,9 +68,6 @@ AC_CHECK_LIB(png, png_read_info,[AC_CHECK_HEADER(png.h,LIBS="$LIBS -lpng -lz",)]
 
 # Check for libjpeg
 AC_CHECK_LIB(jpeg, jpeg_read_header,[AC_CHECK_HEADER(jpeglib.h,LIBS="$LIBS -ljpeg ",)], AC_MSG_ERROR(*** JPEG library not found ***), -lm)
-
-#AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h,LIBS="$LIBS -lSDL_mixer",,[#include "SDL.h"])], AC_MSG_WARN(*** SDL_mixer library not found - audio features will be deactivated in Stellarium ***))
-#AC_CHECK_HEADERS(byteswap.h SDL_mixer.h)
 
 AC_CHECK_LIB([SDL_mixer], [Mix_OpenAudio], [], [AC_MSG_WARN([SDL_mixer not found])])
 AC_CHECK_HEADERS([SDL/SDL_mixer.h])

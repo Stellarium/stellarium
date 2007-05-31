@@ -190,13 +190,10 @@ SET(stellarium_SRCS
 
 ADD_EXECUTABLE(stellarium ${stellarium_SRCS})
 
-TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} -lboost_filesystem -lboost_thread ${STLPORT_LIBRARY})
+TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} -lboost_filesystem ${STLPORT_LIBRARY})
 
 INSTALL(TARGETS stellarium DESTINATION bin)
 
 
 ########### install files ###############
-
-
-#@LIBINTL@
 

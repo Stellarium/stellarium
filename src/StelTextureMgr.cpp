@@ -31,7 +31,6 @@ extern "C" {
 #include <png.h>
 
 #include "StelUtils.hpp"
-#include <boost/thread.hpp>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -41,11 +40,11 @@ extern "C" {
 
 #include <boost/filesystem/operations.hpp>
 
-#ifdef USE_QT4
- #include "fixx11h.h"
- #include <QTemporaryFile>
- #include <QDir>
-#endif
+#include "fixx11h.h"
+#include <QTemporaryFile>
+#include <QDir>
+#include <QThread>
+#include <QMutexLocker>
 
 using namespace std;
 namespace fs = boost::filesystem;
@@ -99,6 +98,8 @@ float ManagedSTexture::getAverageLuminance(void)
 *************************************************************************/
 StelTextureMgr::StelTextureMgr()
 {
+	loadQueueMutex = new QMutex();
+
 	// Init default values
 	setDefaultParams();
 
@@ -116,6 +117,8 @@ StelTextureMgr::StelTextureMgr()
 *************************************************************************/
 StelTextureMgr::~StelTextureMgr()
 {
+	delete loadQueueMutex;
+	loadQueueMutex = NULL;
 }
 
 /*************************************************************************
@@ -212,15 +215,15 @@ struct LoadQueueParam
 {
 	StelTextureMgr* texMgr;
 	std::vector<LoadQueueParam*>* loadQueue;
-	boost::mutex* loadQueueMutex;
-	boost::thread* thread;
+	QMutex* loadQueueMutex;
+	QThread* thread;
 	ManagedSTextureSP tex;
 	bool toDownload;
 	std::string fileExtension;
 	
 	// Those 2 are used to return the final texture
 	std::vector<QueuedTex*>* outQueue;
-	boost::mutex* outQueueMutex;
+	QMutex* outQueueMutex;
 	std::string url;
 	std::string localPath;
 	std::string cookiesFile;
@@ -243,11 +246,12 @@ QueuedTex::~QueuedTex()
 /*************************************************************************
  Local structure used by boost thread for running the thread
 *************************************************************************/
-struct loadTextureThread
+class loadTextureThread : public QThread
 {
+public:
 	loadTextureThread(LoadQueueParam* p) : param(p) {;}
 	
-	void operator()()
+	virtual void run()
 	{
 		if (param->toDownload)
 		{
@@ -263,10 +267,11 @@ struct loadTextureThread
 		}
 		
 		// And add it to the loadQueue for final step in update()
-		boost::mutex::scoped_lock(*param->loadQueueMutex);
+		QMutexLocker locker(param->loadQueueMutex);
 		param->loadQueue->push_back(param);
 	}
-	
+
+private:
 	LoadQueueParam* param;
 };
 
@@ -276,7 +281,7 @@ struct loadTextureThread
  If the texture creation fails for any reasons, its loadState will be set to LOAD_ERROR
 *************************************************************************/
 bool StelTextureMgr::createTextureThread(const std::string& url, 
-	std::vector<QueuedTex*>* outQueue, boost::mutex* outQueueMutex, void* userPtr, 
+	std::vector<QueuedTex*>* outQueue, QMutex* outQueueMutex, void* userPtr, 
 	const std::string& fileExtension, const std::string& cookiesFile)
 {
 	bool toDownload = false;
@@ -304,7 +309,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	LoadQueueParam* tparam = new LoadQueueParam();
 	tparam->texMgr = this;
 	tparam->loadQueue = &loadQueue;
-	tparam->loadQueueMutex = &loadQueueMutex;
+	tparam->loadQueueMutex = loadQueueMutex;
 	tparam->tex = tex;
 	tparam->outQueue = outQueue;
 	tparam->outQueueMutex=outQueueMutex;
@@ -347,8 +352,9 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	}
 		
 	// Create and run the thread
-	boost::thread* thread = new boost::thread(loadTextureThread(tparam));
+	QThread* thread = new loadTextureThread(tparam);
 	tparam->thread = thread;
+	thread->start();
 	return true;
 }
 
@@ -359,14 +365,14 @@ void StelTextureMgr::update()
 {
 	// Load the successfully loaded images to openGL, because openGL is not thread safe,
 	// this has to be done in the main thread.
-	boost::mutex::scoped_lock l(loadQueueMutex);
+	QMutexLocker locker(loadQueueMutex);
 	std::vector<LoadQueueParam*>::iterator iter = loadQueue.begin();
 	for (;iter!=loadQueue.end();++iter)
 	{
-		(*iter)->thread->join();	// Ensure the thread is properly destroyed
+		(*iter)->thread->wait();	// Ensure the thread is properly destroyed
 		
 		{
-			boost::mutex::scoped_lock l(*(*iter)->outQueueMutex);
+			QMutexLocker locker((*iter)->outQueueMutex);
 			if ((*iter)->tex->loadState!=ManagedSTexture::LOAD_ERROR)
 			{
 				// Create openGL texture
@@ -386,7 +392,6 @@ void StelTextureMgr::update()
 	}
 	loadQueue.clear();
 }
-
 
 /*************************************************************************
  Adapt the scaling for the texture. Return true if there was no errors
