@@ -283,12 +283,7 @@ string ScriptMgr::get_script_list(string directory) {
 		{
 			if (string(*i, i->length()-4, 4) == ".sts" )
 			{
-				cerr << " YES" << endl; 
 				result = result + *i + '\n';
-			}
-			else
-			{
-				cerr << " NO" << endl; 
 			}
 		}
 	}
