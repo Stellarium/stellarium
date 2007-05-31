@@ -409,11 +409,14 @@ Vec3d Planet::get_ecliptic_pos() const
 Vec3d Planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
-	const Planet *p = parent;
-	if (p) while (p->parent)
+	const Planet *pp = parent;
+	if (pp)
 	{
-		pos += p->ecliptic_pos;
-		p = p->parent;
+		while (pp->parent)
+		{
+			pos += pp->ecliptic_pos;
+			pp = pp->parent;
+		}
 	}
 	return pos;
 }

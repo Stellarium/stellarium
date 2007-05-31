@@ -94,6 +94,9 @@ public:
 	//! Return a wstring with the longitude, latitude and altitude of the current landscape
 	wstring getLandscapeLocationDescription(void);
 
+	bool getFlagLandscapeSetsLocation(void) const {return flagLandscapeSetsLocation;}
+	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
+
 	//! Set flag for displaying Cardinals Points
 	void setFlagCardinalsPoints(bool b);
 	//! Get flag for displaying Cardinals Points
@@ -131,6 +134,9 @@ private:
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinals_points;		// Cardinals points
 	Landscape* landscape;				// The landscape ie the fog, the ground and "decor"
+	
+	// Define whether the location is set by the landscape
+	bool flagLandscapeSetsLocation;
 	
 	std::string landscapeSectionName;
 };

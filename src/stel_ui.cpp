@@ -145,9 +145,7 @@ void StelUI::init(const InitParser& conf)
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
-	
-	// Landscape ui section
-	FlagLandscapeSetsLocation = conf.get_boolean("landscape:flag_landscape_sets_location");
+
 	
 	SFont& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
 	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize));
@@ -223,6 +221,19 @@ void StelUI::init(const InitParser& conf)
 	initialised = true;
 
 	setTitleObservatoryName(getTitleWithAltitude());
+}
+
+double StelUI::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+{
+	if (initialised)
+		drawTui();
+	return 0.;
+}
+
+void StelUI::update(double deltaTime)
+{
+	gui_update_widgets((int)(deltaTime*1000));
+	tui_update_widgets();
 }
 
 void StelUI::resize()
@@ -813,6 +824,8 @@ void StelUI::drawTui(void)
 
 void StelUI::drawGui(void)
 {
+	if (!initialised)
+		return;
 
 	// Special cool text transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1307,6 +1320,10 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 // Update changing values
 void StelUI::gui_update_widgets(int delta_time)
 {
+	if (!initialised)
+		return;
+		
+	setTitleObservatoryName(getTitleWithAltitude());
 	updateTopBar();
 
 	// handle mouse cursor timeout
@@ -1329,7 +1346,9 @@ void StelUI::gui_update_widgets(int delta_time)
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 
-	
+	if (!initialised) 
+        return;
+        
 	if (FlagShowSelectedObjectInfo && StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
 		info_select_ctr->setVisible(true);

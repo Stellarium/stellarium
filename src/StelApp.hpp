@@ -26,8 +26,6 @@
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 
-using namespace std;
-
 // Predeclaration of some classes
 class StelCore;
 class StelCommandInterface;
@@ -60,7 +58,7 @@ class StelApp
 	friend class StelCommandInterface;
 public:
 	//! @brief Create and initialize the main Stellarium application.
-	//! @param argc The number of command line paremeters
+	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
@@ -249,6 +247,10 @@ protected:
 	virtual void setResizable(bool resizable) = 0;
 	
 private:
+
+	//! Return whether the UI (whichever it is) has been initialized
+	bool isUiInitialised();
+	
 	// C++-ized version of argc & argv
 	vector<string> argList;
 	
@@ -298,7 +300,6 @@ private:
 	DRAWMODE draw_mode;					// Current draw mode
 	
 	string configFile;
-
 };
 
 #endif

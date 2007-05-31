@@ -28,7 +28,6 @@
 #include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "stel_ui.h"
 
 
 StelCore::StelCore() : projection(NULL)
@@ -98,6 +97,7 @@ void StelCore::update(int delta_time)
 	// Position of sun and all the satellites (ie planets)
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	solsystem->computePositions(navigation->getJDay(), navigation->getHomePlanet()->get_heliocentric_ecliptic_pos());
+	//cerr << "get_heliocentric_ecliptic_pos()[0]=" << navigation->getHomePlanet()->get_heliocentric_ecliptic_pos()[0] << endl;
 
 	// Transform matrices between coordinates systems
 	navigation->updateTransformMatrices();
@@ -116,7 +116,8 @@ void StelCore::update(int delta_time)
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
 	                                    navigation->get_helio_to_eye_mat(),
 	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_j2000_to_eye_mat());	
+	                                    navigation->get_j2000_to_eye_mat());
+	//cerr << "get_j2000_to_eye_mat()[0]=" << navigation->get_j2000_to_eye_mat()[0] << endl;
 }
 
 // Execute all the pre-drawing functions
@@ -151,10 +152,6 @@ bool StelCore::setHomePlanet(string planet)
 
 	if(observatory->setHomePlanet(planet))
 	{
-		// Set the title bar
-		StelUI* ui = StelApp::getInstance().getStelUI();
-		ui->setTitleObservatoryName(ui->getTitleWithAltitude());
-		
 		return true;
 	}
 	return false;

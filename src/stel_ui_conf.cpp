@@ -464,7 +464,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	landscapeLocationLb->adjustSize();
 	tab_landscapes->addComponent(landscapeLocationLb);
 	
-	locationFromLandscapeCheck = new LabeledCheckBox(getFlagLandscapeSetsLocation(),_("Setting landscape updates the location"));
+	locationFromLandscapeCheck = new LabeledCheckBox(lmgr->getFlagLandscapeSetsLocation(),_("Setting landscape updates the location"));
 	locationFromLandscapeCheck->setOnPressCallback(callback<void>(this, &StelUI::setLandscapeUpdatesLocation));
 	locationFromLandscapeCheck->setPos(x+landscape_sl->getSizex()+20, y+80); 
 	tab_landscapes->addComponent(locationFromLandscapeCheck);
@@ -870,17 +870,18 @@ void StelUI::saveLandscapeOptions(void)
 	conf.load(app->getConfigFilePath());
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
 	conf.set_str("init_location:landscape_name", lmgr->getLandscapeId());
-	conf.set_boolean("landscape:flag_landscape_sets_location", getFlagLandscapeSetsLocation());
+	conf.set_boolean("landscape:flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf.save(app->getConfigFilePath());
 }
 
 void StelUI::setLandscapeUpdatesLocation(void)
 {
-	FlagLandscapeSetsLocation = locationFromLandscapeCheck->getState();
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	lmgr->setFlagLandscapeSetsLocation(locationFromLandscapeCheck->getState());
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	conf.set_boolean("landscape:flag_landscape_sets_location", FlagLandscapeSetsLocation);
-	if (FlagLandscapeSetsLocation)
+	conf.set_boolean("landscape:flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
+	if (lmgr->getFlagLandscapeSetsLocation())
 	{
 		cout << "Landscape changes will now update the location" << endl;
 	}
@@ -1109,7 +1110,7 @@ void StelUI::updateConfigForm(void)
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
 	viewport_distorter_cbx->setState(app->getViewPortDistorterType()!="none");
 	
-	locationFromLandscapeCheck->setState(app->ui->getFlagLandscapeSetsLocation());
+	locationFromLandscapeCheck->setState(lmgr->getFlagLandscapeSetsLocation());
 }
 
 void StelUI::config_win_hideBtCallback(void)
