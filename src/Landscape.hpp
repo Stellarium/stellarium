@@ -43,7 +43,9 @@ public:
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
 	virtual void load(const string& file_name, const string& landscapeId) = 0;
-	void set_sky_brightness(float b) {sky_brightness = b;}
+	
+	//! Set the brightness of the landscape
+	void setBrightness(float b) {sky_brightness = b;}
 	
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(bool b) {land_fader=b;}

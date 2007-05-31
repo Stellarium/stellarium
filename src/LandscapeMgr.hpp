@@ -132,8 +132,6 @@ private:
 	Cardinals* cardinals_points;		// Cardinals points
 	Landscape* landscape;				// The landscape ie the fog, the ground and "decor"
 	
-	float sky_brightness;				// Current sky Brightness in ?
-	
 	std::string landscapeSectionName;
 };
 

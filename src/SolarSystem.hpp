@@ -154,6 +154,9 @@ public:
 	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
 	
+	//! Get the list of all the bodies of the solar system
+	const vector<Planet*>& getAllPlanets() const {return system_planets;}
+	
 private:
 	// Compute the transformation matrix for every elements of the solar system.
     // observerPos is needed for light travel time computation

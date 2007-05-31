@@ -170,28 +170,54 @@ void LandscapeMgr::update(double deltaTime)
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
 	eye->set_world_adaptation_luminance(3.75+atmosphere->getAverageLuminance()*3.5);
-	//cerr << atmosphere->getAverageLuminance()*3.5 << " " << MY_MAX(atmosphere->getAverageLuminance()*3.5, 3.75) << endl;
 	
+	// Compute the ground luminance based on every planets around
+//	float groundLuminance = 0;
+//	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
+//	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
+//	{
+//		Vec3d pos = nav->helio_to_local((*i)->get_heliocentric_ecliptic_pos());
+//		pos.normalize();
+//		if (pos[2] <= 0)
+//		{
+//			// No need to take this body into the landscape illumination computation
+//			// because it is under the horizon
+//		}
+//		else
+//		{
+//			// Compute the Illuminance E of the ground caused by the planet in lux = lumen/m^2
+//			float E = pow10(((*i)->get_mag(nav)+13.988)/-2.5);
+//			//cerr << "mag=" << (*i)->get_mag(nav) << " illum=" << E << endl;
+//			// Luminance in cd/m^2
+//			groundLuminance += E/0.44*pos[2]*pos[2]; // 1m^2 from 1.5 m above the ground is 0.44 sr.
+//		}
+//	}
+//	groundLuminance*=atmosphere->getFadeIntensity();
+//	groundLuminance=atmosphere->getAverageLuminance()/50;
+//	cout << "Atmosphere lum=" << atmosphere->getAverageLuminance() << " ground lum=" <<  groundLuminance << endl;
+	//cout << "Adapted Atmosphere lum=" << eye->adapt_luminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adapt_luminance(groundLuminance) << endl;
+	
+	// compute global ground brightness in a simplistic way, directly in RGB
+	float landscapeBrightness = 0;
 	sunPos.normalize();
 	moonPos.normalize();
-	// compute global sky brightness TODO : make this more "scientifically"
-	// TODO: also add moonlight illumination
-
 	if(sunPos[2] < -0.1/1.5 )
-		sky_brightness = 0.01;
+		landscapeBrightness = 0.01;
 	else
-		sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
-
+		landscapeBrightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
+	if (moonPos[2] > -0.1/1.5)
+		landscapeBrightness += MY_MAX(0.2/-12.*ssystem->getMoon()->get_mag(nav),0)*moonPos[2];
+//
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
 	{
 		// If the atmosphere is on, a solar eclipse might darken the sky
 		// otherwise we just use the sun position calculation above
-		sky_brightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
+		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
 
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
-	landscape->set_sky_brightness(sky_brightness+0.05);
+	landscape->setBrightness(landscapeBrightness+0.05);
 }
 
 double LandscapeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
