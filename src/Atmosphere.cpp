@@ -96,7 +96,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			min = (asun - moon_angular_size*moon_angular_size)/asun;  // minimum proportion of sun uncovered
 			dark_angle *= -1;
 		}
-		else min = 0.004;  // so bright stars show up at total eclipse
+		else min = 0.001;  // so bright stars show up at total eclipse
 
 		if (separation_angle < dark_angle)
 			eclipseFactor = min;
@@ -176,7 +176,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			                                 sun_pos[2]*b2.pos[2], b2.pos[2]);
 			b2.color[2] *= eclipseFactor;
 			b2.color[2] += 0.001 + lightPollutionLuminance;
-
+			
 			sum_lum+=b2.color[2];
 			++nb_lum;
 			
@@ -187,7 +187,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 				b2.color[2]*atm_intensity);
 		}
 	}
-
+	
 	// Update average luminance
 	averageLuminance = sum_lum/nb_lum;
 }
