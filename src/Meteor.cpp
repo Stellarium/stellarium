@@ -168,7 +168,7 @@ bool Meteor::update(double delta_time)
   }
 
   // *** would need time direction multiplier to allow reverse time replay
-  position[2] = position[2] - velocity/1000.0f*delta_time;
+  position[2] = position[2] - velocity*delta_time/1000.0f;
 
   // train doesn't extend beyond start of burn
   if( position[2] + velocity*0.5f > start_h ) {
