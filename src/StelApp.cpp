@@ -327,8 +327,8 @@ void StelApp::init()
 	skyCultureMgr->init(conf);
 	ui = new StelUI(core, this);
 	ui->init(conf);
-		cerr << "coucou99" << endl;
 	ui->init_tui();  // don't reinit tui since probably called from there
+	
 	// Initialisation of the color scheme
 	draw_mode = draw_mode=DM_NIGHT;  // fool caching
 	setVisionModeNormal();
