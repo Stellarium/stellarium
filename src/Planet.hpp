@@ -108,10 +108,10 @@ public:
 	wstring getSkyLabel(const Navigator * nav) const;
 	wstring getInfoString(const Navigator * nav) const;
 	wstring getShortInfoString(const Navigator * nav) const;
-	double get_close_fov(const Navigator * nav) const;
+	double getCloseViewFov(const Navigator * nav) const;
 	double get_satellites_fov(const Navigator * nav) const;
 	double get_parent_satellites_fov(const Navigator * nav) const;
-	float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
+	float getMagnitude(const Navigator * nav) const {return compute_magnitude(nav);}
 	float getSelectPriority(const Navigator *nav) const;
 	Vec3f getInfoColor(void) const;
 	
@@ -168,7 +168,7 @@ public:
 	std::string getType(void) const {return "Planet";}
 
 	// Return the Planet position in rectangular earth equatorial coordinate
-	Vec3d get_earth_equ_pos(const Navigator *nav) const;
+	Vec3d getEarthEquatorialPos(const Navigator *nav) const;
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const;
 

@@ -104,7 +104,7 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	oss.precision(2);
 	oss << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos()) << endl;
 
-	Vec3d equPos = get_earth_equ_pos(nav);
+	Vec3d equPos = getEarthEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
 	oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 	// calculate alt az position
@@ -150,7 +150,7 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 	oss.precision(2);
 	oss << L"  " << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos());
 
-	Vec3d equPos = get_earth_equ_pos(nav);
+	Vec3d equPos = getEarthEquatorialPos(nav);
 	oss.precision(5);
 	oss << L"  " <<  _("Distance: ") << equPos.length() << _("AU");
 
@@ -162,11 +162,11 @@ float Planet::getSelectPriority(const Navigator *nav) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return get_mag(nav)-15.f;
+		return getMagnitude(nav)-15.f;
 	}
 	else
 	{
-		return get_mag(nav) - 8.f;
+		return getMagnitude(nav) - 8.f;
 	}
 }
 
@@ -176,18 +176,18 @@ Vec3f Planet::getInfoColor(void) const
 }
 
 
-double Planet::get_close_fov(const Navigator* nav) const
+double Planet::getCloseViewFov(const Navigator* nav) const
 {
-	return std::atan(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	return std::atan(radius*sphere_scale*2.f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
 }
 
 double Planet::get_satellites_fov(const Navigator * nav) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
-	if (englishName=="Jupiter") return std::atan(0.005f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Saturn") return std::atan(0.005f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Mars") return std::atan(0.0001f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Uranus") return std::atan(0.002f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Jupiter") return std::atan(0.005f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Saturn") return std::atan(0.005f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Mars") return std::atan(0.0001f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Uranus") return std::atan(0.002f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
 	return -1.;
 }
 
@@ -212,7 +212,7 @@ void Planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 
 
 // Return the Planet position in rectangular earth equatorial coordinate
-Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
+Vec3d Planet::getEarthEquatorialPos(const Navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(v);		// this is earth equatorial but centered
@@ -519,7 +519,7 @@ float Planet::getOnScreenSize(const Projector *prj, const Navigator *nav) const
 	if(rings) rad = rings->get_size();
 	else rad = radius;
 
-	return std::atan(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->getFov()*prj->getViewportHeight();
+	return std::atan(rad*sphere_scale*2.f/getEarthEquatorialPos(nav).length())*180./M_PI/prj->getFov()*prj->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -562,7 +562,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->getFov();
+		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/getEarthEquatorialPos(nav).length())/prj->getFov();
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
@@ -580,7 +580,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 
 		if (rings && screen_sz>1)
 		{
-			const double dist = get_earth_equ_pos(nav).length();
+			const double dist = getEarthEquatorialPos(nav).length();
 			double z_near = 0.9*(dist - rings->get_size());
 			double z_far  = 1.1*(dist + rings->get_size());
 			if (z_near < 0.0) z_near = 0.0;
@@ -1034,7 +1034,7 @@ void Planet::draw_trail(const Navigator * nav, const Projector* prj)
 	}
 
 	// draw final segment to finish at current Planet position
-	if( !first_point && prj->projectLineCheck( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) )
+	if( !first_point && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getEarthEquatorialPos(nav), onscreen2) )
 	{
 		glBegin(GL_LINE_STRIP);
 		glVertex2d(onscreen1[0], onscreen1[1]);

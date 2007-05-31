@@ -145,8 +145,8 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	}
 	else
 	{
-		if (get_mag(nav)>20) return 20;
-		return get_mag(nav);
+		if (getMagnitude(nav)>20) return 20;
+		return getMagnitude(nav);
 	}
  }
 
@@ -155,7 +155,7 @@ Vec3f Nebula::getInfoColor(void) const
 	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getNamesColor();
 }
 
-double Nebula::get_close_fov(const Navigator*) const
+double Nebula::getCloseViewFov(const Navigator*) const
 {
 	return angular_size * 180./M_PI * 4;
 }

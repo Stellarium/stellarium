@@ -43,6 +43,7 @@
 #include "StelLocaleMgr.hpp"
 #include "Navigator.hpp"
 #include "Observer.hpp"
+#include "Planet.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -624,7 +625,7 @@ void StelUI::cb(void)
 	if (bt_flag_goto->getState())
 	{
 		if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
-			mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+			mvmgr->moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()),mvmgr->getAutoMoveDuration());
 	}
 	bt_flag_goto->setState(false);
 

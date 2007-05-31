@@ -22,10 +22,10 @@
 
 #include <vector>
 
-#include "StelObject.hpp"
-class LoadingBar;
+#include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
 
+class LoadingBar;
 class ToneReproducer;
 class StarMgr;
 class Constellation;
@@ -33,6 +33,10 @@ class Projector;
 class Navigator;
 class SFont;
 
+//! @brief Display and manage the constellations.
+//!
+//! It can display constellations lines, names, art textures and boundaries.
+//! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
 {
 public:

@@ -140,7 +140,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	vector<StelObjectP>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		core->getProjection()->project((*iter)->get_earth_equ_pos(core->getNavigation()), winpos);
+		core->getProjection()->project((*iter)->getEarthEquatorialPos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter)->getSelectPriority(core->getNavigation());
 //		cerr << StelUtils::wstringToString((*iter).getShortInfoString(core->getNavigation())) << ": " << priority << " " << distance << endl;

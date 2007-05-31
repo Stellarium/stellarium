@@ -21,7 +21,7 @@
 #define _NEBULA_MGR_H_
 
 #include <vector>
-#include "StelObject.hpp"
+#include "StelObjectType.hpp"
 #include "Fader.hpp"
 #include "grid.h"
 #include "StelObjectModule.hpp"

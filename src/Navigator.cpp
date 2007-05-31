@@ -19,11 +19,9 @@
 
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
-#include "StelObject.hpp"
 #include "SolarSystem.hpp"
-#include "Observer.hpp"
 #include "InitParser.hpp"
-
+#include "Observer.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(obs)

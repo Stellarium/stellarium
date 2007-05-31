@@ -46,7 +46,7 @@ private:
 	//! Return object's type
 	std::string getType(void) const {return "Constellation";}
 	//! Get position in earth equatorial frame
-	Vec3d get_earth_equ_pos(const Navigator *nav) const {return XYZname;}
+	Vec3d getEarthEquatorialPos(const Navigator *nav) const {return XYZname;}
 	//! observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
     
