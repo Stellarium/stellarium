@@ -300,6 +300,9 @@ private:
 	DRAWMODE draw_mode;					// Current draw mode
 	
 	string configFile;
+	
+	// Define whether the StelApp instance has completed initialization
+	bool initialized;
 };
 
 #endif
