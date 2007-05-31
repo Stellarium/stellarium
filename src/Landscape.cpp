@@ -59,8 +59,8 @@ void Landscape::loadCommon(const string& landscape_file, const string& landscape
 	
 	// Optional data
 	if (pd.find_entry("location:planet")) planet = pd.get_str("location", "planet");
-	if (pd.find_entry("location:latitude")) latitude = pd.get_double("location", "latitude");
-	if (pd.find_entry("location:longitude")) longitude = pd.get_double("location", "longitude");
+	if (pd.find_entry("location:latitude")) latitude = StelUtils::get_dec_angle(pd.get_str("location", "latitude"));
+	if (pd.find_entry("location:longitude")) longitude = StelUtils::get_dec_angle(pd.get_str("location", "longitude"));
 	if (pd.find_entry("location:altitude")) altitude = pd.get_int("location", "altitude");
 }
 

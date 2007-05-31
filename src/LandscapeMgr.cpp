@@ -402,6 +402,7 @@ wstring LandscapeMgr::getLandscapePlanetName(void) {
     
 wstring LandscapeMgr::getLandscapeLocationDescription(void) {
 	string desc;
+//cerr << landscape->getLongitude() << " " << landscape->getLatitude() << endl;
 	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
 	{
 		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
