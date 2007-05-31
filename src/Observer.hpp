@@ -20,8 +20,8 @@
 #ifndef _OBSERVER_H_
 #define _OBSERVER_H_
 
-#include "vecmath.h"
 #include <string>
+#include "vecmath.h"
 
 using namespace std;
 
@@ -36,7 +36,7 @@ public:
 
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
-    bool setHomePlanet(const string &english_name);
+	bool setHomePlanet(const string &english_name);
     void setHomePlanet(const Planet *p,float transit_seconds=2.f);
     const Planet *getHomePlanet(void) const;
     string getHomePlanetEnglishName(void) const;
@@ -49,7 +49,7 @@ public:
     Mat4d getRotEquatorialToVsop87(void) const;
 
 	void save(const string& file, const string& section) const;
-	void setConf(InitParser &conf, const string& section) const;
+	void setConf(InitParser& conf, const string& section) const;
 	void load(const string& file, const string& section);
 	void load(const InitParser& conf, const string& section);
 

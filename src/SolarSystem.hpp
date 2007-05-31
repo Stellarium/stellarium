@@ -26,8 +26,6 @@
 #include <vector>
 #include <functional>
 
-#include "Planet.hpp"
-#include "StelObject.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
@@ -35,6 +33,9 @@ class Orbit;
 class LoadingBar;
 class Translator;
 class InitParser;
+class StelObject;
+class Planet;
+class SFont;
 
 class SolarSystem : public StelObjectModule
 {
@@ -74,8 +75,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Activate/Deactivate planets display
-	void setFlagPlanets(bool b) {Planet::setflagShow(b);}
-	bool getFlagPlanets(void) const {return Planet::getflagShow();}
+	void setFlagPlanets(bool b);
+	bool getFlagPlanets(void) const;
 
 	//! Activate/Deactivate planets trails display
 	void setFlagTrails(bool b);
@@ -97,34 +98,31 @@ public:
 	void setFontSize(float newFontSize);
 	
 	//! Set/Get planets names color
-	void setNamesColor(const Vec3f& c) {Planet::set_label_color(c);}
-	const Vec3f& getNamesColor(void) const {return Planet::getLabelColor();}
+	void setNamesColor(const Vec3f& c);
+	const Vec3f& getNamesColor(void) const;
 	
 	//! Set/Get orbits lines color
-	void setOrbitsColor(const Vec3f& c) {Planet::set_orbit_color(c);}
-	Vec3f getOrbitsColor(void) const {return Planet::getOrbitColor();}
+	void setOrbitsColor(const Vec3f& c);
+	Vec3f getOrbitsColor(void) const;
 	
 	//! Set/Get planets trails color
-	void setTrailsColor(const Vec3f& c)  {Planet::set_trail_color(c);}
-	Vec3f getTrailsColor(void) const {return Planet::getTrailColor();}
+	void setTrailsColor(const Vec3f& c);
+	Vec3f getTrailsColor(void) const;
 	
 	//! Set/Get base planets display scaling factor 
-	void setScale(float scale) {Planet::setScale(scale);}
-	float getScale(void) const {return Planet::getScale();}
+	void setScale(float scale);
+	float getScale(void) const;
 	
 	//! Activate/Deactivate display of planets halos as GLPoints
 	void setFlagPoint(bool b) {flagPoint = b;}
 	bool getFlagPoint() {return flagPoint;}
 	
 	//! Set/Get if Moon display is scaled
-	void setFlagMoonScale(bool b)
-      {if (!b) getMoon()->set_sphere_scale(1);
-       else getMoon()->set_sphere_scale(moonScale);
-       flagMoonScale = b;}
+	void setFlagMoonScale(bool b);
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
 	
 	//! Set/Get Moon display scaling factor 
-	void setMoonScale(float f) {moonScale = f; if (flagMoonScale) getMoon()->set_sphere_scale(moonScale);}
+	void setMoonScale(float f);
 	float getMoonScale(void) const {return moonScale;}		
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -174,7 +172,7 @@ private:
 	
 	//! Set selected planets by englishName
 	//! @param englishName The planet name or "" to select no planet
-	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
+	void setSelected(const string& englishName);
 	//! Set selected object from its pointer
 	void setSelected(StelObject* obj);	
 	//! Get selected object's pointer
@@ -204,7 +202,7 @@ private:
 	// And sort them from the furthest to the closest to the observer
 	struct bigger_distance : public binary_function<Planet*, Planet*, bool>
 	{
-		bool operator()(Planet* p1, Planet* p2) { return p1->get_distance() > p2->get_distance(); }
+		bool operator()(Planet* p1, Planet* p2);
 	};
 
 	STextureSP tex_earth_shadow;  // for lunar eclipses

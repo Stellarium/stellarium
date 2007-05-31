@@ -22,7 +22,8 @@
 
 #include <boost/intrusive_ptr.hpp>
 #include "StelModule.hpp"
-#include "StelObject.hpp"
+#include "StelObjectType.hpp"
+#include "vecmath.h"
 
 /**
  * Manage a collection of StelObject.

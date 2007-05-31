@@ -17,13 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEL_OBJECT_BASE_H_
-#define _STEL_OBJECT_BASE_H_
-
-#include "vecmath.h"
-#include "StelObjectType.hpp"
+#ifndef _STEL_OBJECT_H_
+#define _STEL_OBJECT_H_
 
 #include <string>
+#include "vecmath.h"
+#include "StelObjectType.hpp"
 
 using namespace std;
 
@@ -35,6 +34,7 @@ class StelObject;
 void intrusive_ptr_add_ref(StelObject* p);
 void intrusive_ptr_release(StelObject* p);
 
+//! @brief The base abstract class for sky objects.
 class StelObject {
 public:
   virtual ~StelObject(void) {}
@@ -51,18 +51,20 @@ public:
   //! Return object's type. It should be the name of the class.
   virtual std::string getType(void) const = 0;
 
-  //! Return object's name
+  //! Return object's name in english
   virtual string getEnglishName(void) const = 0;
+	
+  //! Return translated object's name
   virtual wstring getNameI18n(void) const = 0;
 
   //! Get position in earth equatorial frame
-  virtual Vec3d get_earth_equ_pos(const Navigator *nav) const = 0;
+  virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const = 0;
 
   //! observer centered J2000 coordinates
   virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 
   //! Return object's magnitude
-  virtual float get_mag(const Navigator *nav) const {return 99;}
+  virtual float getMagnitude(const Navigator *nav) const {return 99;}
   
   //! Return a priority value which is used to discriminate objects by priority
   //! As for magnitudes, the lower is the higher priority 
@@ -72,7 +74,7 @@ public:
   virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
 
   //! Return the best FOV in degree to use for a close view of the object
-  virtual double get_close_fov(const Navigator *nav) const {return 10.;}
+  virtual double getCloseViewFov(const Navigator *nav) const {return 10.;}
 
   //! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
   virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}

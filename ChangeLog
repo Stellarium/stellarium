@@ -4,15 +4,20 @@ Can select multiple constellations at one time
 Local script directory is reread when enter TUI
 Inuit constellation art by Johan Meuris
 More sky cultures
-Code reorganization
+Large code reorganization into modular classes based on StelModule, StelApp singleton and its "manager" classes providing services to the modules.
+Code cleaning and commenting.
+Sidereal day/week keystrokes (ALT -, ALT =, ALT [, ALT ]).
+On demand nebula image loading.
 Data files reorganized
-Sidereal day/week keystrokes (ALT -, ALT =, ALT [, ALT ])
-On demand nebula image loading
 Added back Hawaiian translations (invented locale "hw")
-Orthographic projection, Lamberts Equal Area projection, Cylinder projection
-Interpolate the elliptic coordinates (or the spherical coordinates in case of the moon)
-Do not place the Earth at the EMB but at its proper position
-New orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits
+Orthographic projection, Lamberts Equal Area projection, Cylinder projection.
+Interpolate the elliptic coordinates (or the spherical coordinates in case of the moon).
+Do not place the Earth at the EMB but at its proper position.
+New orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits.
+Added loading of jpeg textures and re-coded most of the texture manager.
+Allow loading of plug-ins (unstable until version 1.0).
+Recoded Grid display to allow for adaptative scale wrt zoom and labeling.
+The main window managed by QT4.2 instead of SDL.
 Go to selected solar system body by pressing control-g
 Location map updates on changing observer to new solar system body
 Titlebar updates after moving to new planet

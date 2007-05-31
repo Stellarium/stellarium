@@ -17,6 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <algorithm>
+
 #include "stel_command_interface.h"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
@@ -41,17 +46,14 @@
 #include "Projector.hpp"
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
+#include "Planet.hpp"
 #include "Observer.hpp"
-
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <algorithm>
 
 using namespace std;
 
 
-StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) : FlagTimePause(0) {
+StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) : FlagTimePause(0)
+{
   stcore = core;
   stapp = app;
   audio = NULL;

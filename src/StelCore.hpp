@@ -27,7 +27,6 @@ class Projector;
 class ToneReproducer;
 class InitParser;
 class LoadingBar;
-
 class Observer;
 
 //! @brief Main class for stellarium core processing.

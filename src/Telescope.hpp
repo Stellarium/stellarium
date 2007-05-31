@@ -41,7 +41,7 @@ public:
   wstring getInfoString(const Navigator * nav) const;
   wstring getShortInfoString(const Navigator * nav) const;
   std::string getType(void) const {return "Telescope";}
-  Vec3d get_earth_equ_pos(const Navigator *nav) const
+  Vec3d getEarthEquatorialPos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
 
