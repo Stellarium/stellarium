@@ -208,7 +208,7 @@ bool Nebula::readTexture(const string& setName, const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, true);
+	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, false);
 
 	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 

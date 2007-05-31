@@ -52,7 +52,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		}
 		catch (exception& e)
 		{
-			// cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
+			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
 		}
 	}	
 }
