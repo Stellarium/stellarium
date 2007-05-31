@@ -314,7 +314,7 @@ void StelUI::init_tui(void)
 	tui_effect_cursor_timeout->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_cursor_timeout);
 
-	tui_effect_landscape_sets_location = new s_tui::Boolean_item(getFlagLandscapeSetsLocation(), wstring(L"6.10 ") );
+	tui_effect_landscape_sets_location = new s_tui::Boolean_item(lmgr->getFlagLandscapeSetsLocation(), wstring(L"6.10 "));
 	tui_effect_landscape_sets_location->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_landscape_sets_location);
 
@@ -542,6 +542,9 @@ void StelUI::tui_cb1(void)
 // Update all the tui widgets with values taken from the core parameters
 void StelUI::tui_update_widgets(void)
 {
+	if (!initialised)
+		return;
+
 	if (!FlagShowTuiMenu) return;
 	
 	StarMgr* smgr = (StarMgr*)app->getModuleMgr().getModule("stars");
@@ -608,7 +611,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_milkyway_intensity->setValue(mw->getIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(nmgr->getMaxMagHints());
-	tui_effect_landscape_sets_location->setValue(app->ui->getFlagLandscapeSetsLocation());
+	tui_effect_landscape_sets_location->setValue(lmgr->getFlagLandscapeSetsLocation());
 
 
 	// 7. Scripts

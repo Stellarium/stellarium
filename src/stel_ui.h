@@ -36,6 +36,9 @@ class StelCore;
 class StelCommandInterface;
 class InitParser;
 class Planet;
+class Projector;
+class Navigator;
+class ToneReproducer;
 
 class StelUI
 {
@@ -44,6 +47,10 @@ friend class StelCommandInterface;
 public:
 	StelUI(StelCore *, StelApp * _app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui
+    
+    virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void update(double deltaTime);
+    
 	void init(const InitParser& conf);		// Initialize the ui.
 	void drawTui(void);		// Display the ui
 	void drawGui(void);		// Display the ui
@@ -72,7 +79,6 @@ public:
     void setTitleObservatoryName(const wstring& name);
     void setTitle(const wstring& title);
     wstring getTitleWithAltitude(void);
-    bool isInitialised(void) { return initialised; }
 
     void setColorScheme(const InitParser& conf, const string& section);
 	double getMouseCursorTimeout() { return MouseCursorTimeout; }
@@ -107,9 +113,6 @@ public:
 
 	//! Get day key mode (calendar, sidereal)
 	string getDayKeyMode();
-	
-	bool getFlagLandscapeSetsLocation(void) {return FlagLandscapeSetsLocation;}
-	void setFlagLandscapeSetsLocation(bool b) {FlagLandscapeSetsLocation=b;}
 	
 	//! Update the planet map in the configuration
 	//! @param englishName The english name of the new planet to set in the map widget 
@@ -342,9 +345,6 @@ private:
 	Label* landscapeLocationLb;
 	LabeledCheckBox* locationFromLandscapeCheck;
 	void setLandscapeUpdatesLocation(void);
-	bool FlagLandscapeSetsLocation;
-
-
 	
 	// Language options
 	ListBox* language_lb;
