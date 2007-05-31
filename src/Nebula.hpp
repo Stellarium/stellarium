@@ -60,11 +60,11 @@ public:
 	wstring getInfoString(const Navigator * nav) const;
 	wstring getShortInfoString(const Navigator * nav = NULL) const;
 	std::string getType(void) const {return "Nebula";}
-	Vec3d get_earth_equ_pos(const Navigator *nav) const {return nav->j2000_to_earth_equ(XYZ);}
+	Vec3d getEarthEquatorialPos(const Navigator *nav) const {return nav->j2000_to_earth_equ(XYZ);}
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
-	double get_close_fov(const Navigator * nav = NULL) const;
-	float get_mag(const Navigator * nav = NULL) const {return mag;}
+	double getCloseViewFov(const Navigator * nav = NULL) const;
+	float getMagnitude(const Navigator * nav = NULL) const {return mag;}
 	float getSelectPriority(const Navigator *nav) const;
 
 	virtual Vec3f getInfoColor(void) const;

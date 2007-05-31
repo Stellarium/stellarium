@@ -28,7 +28,7 @@
 #include "SolarSystem.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
-
+#include "Planet.hpp"
 
 StelCore::StelCore() : projection(NULL)
 {

@@ -50,6 +50,7 @@
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
 #include "bytes.h"
+#include "InitParser.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -764,7 +765,7 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   wostringstream oss;
   oss.setf(ios::fixed);
   oss.precision(2);
-  oss << _("Magnitude: ") << get_mag(nav)
+  oss << _("Magnitude: ") << getMagnitude(nav)
       << " B-V: " << getBV()
       << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
@@ -790,7 +791,7 @@ wstring StarWrapperBase::getShortInfoString(const Navigator *nav) const {
 	wostringstream oss;
 	oss.setf(ios::fixed);
 	oss.precision(2);
-	oss << _("Magnitude: ") << get_mag(nav);
+	oss << _("Magnitude: ") << getMagnitude(nav);
 
 	return oss.str();
 }
@@ -813,14 +814,14 @@ protected:
                    / a->star_position_scale
                  );
   }
-  Vec3d get_earth_equ_pos(const Navigator *nav) const
+  Vec3d getEarthEquatorialPos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   Vec3f getInfoColor(void) const {return color_table[s->b_v];}
-  float get_mag(const Navigator *nav) const
+  float getMagnitude(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
   float getSelectPriority(const Navigator *nav) const
   {
-  	return get_mag(nav);
+  	return getMagnitude(nav);
   }
   float getBV(void) const {return s->getBV();}
   string getEnglishName(void) const {
@@ -882,7 +883,7 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
   oss.setf(ios::fixed);
   oss.precision(2);
-  oss << _("Magnitude: ") << get_mag(nav)
+  oss << _("Magnitude: ") << getMagnitude(nav)
       << " B-V: " << s->getBV()
       << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
@@ -945,7 +946,7 @@ wstring StarWrapper1::getShortInfoString(const Navigator *nav) const {
 	
 	oss.setf(ios::fixed);
 	oss.precision(2);
-	oss << _("Magnitude: ") << get_mag(nav);
+	oss << _("Magnitude: ") << getMagnitude(nav);
 	oss << L"  ";
 
 	if (s->plx) {

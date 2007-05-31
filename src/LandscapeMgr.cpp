@@ -30,9 +30,9 @@
 #include "StelFontMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "Observer.hpp"
 #include "InitParser.hpp"
-#include "stel_ui.h"
+#include "Planet.hpp"
+#include "Observer.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -207,7 +207,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += MY_MAX(0.2/-12.*ssystem->getMoon()->get_mag(nav),0)*moonPos[2];
+		landscapeBrightness += MY_MAX(0.2/-12.*ssystem->getMoon()->getMagnitude(nav),0)*moonPos[2];
 //
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)

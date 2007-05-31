@@ -36,6 +36,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "Planet.hpp"
 
 using namespace std;
 
@@ -729,7 +730,7 @@ StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projecto
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->get_earth_equ_pos(nav);
+		equPos = (*iter)->getEarthEquatorialPos(nav);
 		equPos.normalize();
 		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
@@ -766,7 +767,7 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv,
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->get_earth_equ_pos(nav);
+		equPos = (*iter)->getEarthEquatorialPos(nav);
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
 		{
@@ -1072,4 +1073,51 @@ void SolarSystem::selectedObjectChangeCallBack(bool added)
 //		// potentially record this action
 //		if (!recordActionCallback.empty())
 //			recordActionCallback("select planet " + selected_object.getEnglishName());
+}
+
+// Activate/Deactivate planets display
+void SolarSystem::setFlagPlanets(bool b) {Planet::setflagShow(b);}
+bool SolarSystem::getFlagPlanets(void) const {return Planet::getflagShow();}
+
+// Set/Get planets names color
+void SolarSystem::setNamesColor(const Vec3f& c) {Planet::set_label_color(c);}
+const Vec3f& SolarSystem::getNamesColor(void) const {return Planet::getLabelColor();}
+
+// Set/Get orbits lines color
+void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::set_orbit_color(c);}
+Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
+
+// Set/Get planets trails color
+void SolarSystem::setTrailsColor(const Vec3f& c)  {Planet::set_trail_color(c);}
+Vec3f SolarSystem::getTrailsColor(void) const {return Planet::getTrailColor();}
+
+// Set/Get base planets display scaling factor 
+void SolarSystem::setScale(float scale) {Planet::setScale(scale);}
+float SolarSystem::getScale(void) const {return Planet::getScale();}
+
+// Set/Get if Moon display is scaled
+void SolarSystem::setFlagMoonScale(bool b)
+{
+	if (!b) getMoon()->set_sphere_scale(1);
+	else getMoon()->set_sphere_scale(moonScale);
+	flagMoonScale = b;
+}
+
+// Set/Get Moon display scaling factor 
+void SolarSystem::setMoonScale(float f)
+{
+	moonScale = f;
+	if (flagMoonScale)
+		getMoon()->set_sphere_scale(moonScale);
+}
+
+// Set selected planets by englishName
+void SolarSystem::setSelected(const string& englishName)
+{
+	setSelected(searchByEnglishName(englishName));
+}
+
+bool SolarSystem::bigger_distance::operator()(Planet* p1, Planet* p2)
+{
+	return p1->get_distance() > p2->get_distance();
 }

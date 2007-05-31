@@ -40,6 +40,7 @@
 #include "Observer.hpp"
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
+#include "Planet.hpp"
 
 using namespace s_gui;
 
@@ -746,7 +747,7 @@ void StelUI::gotoSearchedObject(void)
 		if (!newSelected.empty())
 		{
 			star_edit->clearText();
-			mvmgr->moveTo(newSelected[0]->get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+			mvmgr->moveTo(newSelected[0]->getEarthEquatorialPos(core->getNavigation()),mvmgr->getAutoMoveDuration());
 			mvmgr->setFlagTracking(true);
 			lblSearchMessage->setLabel(L"");
 			  // johannes
