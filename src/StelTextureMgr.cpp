@@ -40,6 +40,10 @@ extern "C" {
 
 #include <boost/filesystem/operations.hpp>
 
+#ifndef USE_QT4
+#error This version of stellarium can only compile with QT4.2
+#endif
+
 #include "fixx11h.h"
 #include <QTemporaryFile>
 #include <QDir>
@@ -229,18 +233,14 @@ struct LoadQueueParam
 	std::string cookiesFile;
 	void* userPtr;
 	
-#ifdef USE_QT4
 	QFile* file;
-#endif
 };
 
 QueuedTex::~QueuedTex()
 {
-#ifdef USE_QT4
 	if (file)
 		delete file;
 	file = NULL;
-#endif
 }
 
 /*************************************************************************
@@ -324,7 +324,6 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	// Create a temporary file name
 	if (toDownload)
 	{
-#ifdef USE_QT4
 		QTemporaryFile* fic = new QTemporaryFile(QDir::tempPath() + "XXXXXX" + QString(tparam->fileExtension.c_str()));
 		if (!fic->open())
 		{
@@ -332,23 +331,10 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 		}
 		tparam->file = fic;
 		tparam->localPath = tparam->file->fileName().toStdString();
-		//tparam->tempFile->close();
-#else
-		static int i = 0;
-		do
-		{
-			tparam->localPath = "tmp" + StelUtils::intToString(++i) + tparam->fileExtension;
-		}
-		while (StelUtils::fileExists(tparam->localPath));
-#endif
 	}
 	else
 	{
-#ifdef USE_QT4
 		tparam->file = new QFile(tparam->localPath.c_str());
-#else
-//		tparam->file = NULL;
-#endif
 	}
 		
 	// Create and run the thread
@@ -382,11 +368,7 @@ void StelTextureMgr::update()
 					(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
 				}
 			}
-#ifdef USE_QT4
 			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
-#else
-			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url));
-#endif
 			delete (*iter);
 		}
 	}
