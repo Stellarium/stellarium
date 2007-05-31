@@ -290,27 +290,27 @@ wstring Observer::get_name(void) const {
 
 bool Observer::setHomePlanet(const string &english_name) {
   Planet *p = ssystem.searchByEnglishName(english_name);
-  bool result = setHomePlanet(p);
-  return result;
-  //return setHomePlanet(p);
+  if (p==NULL)
+  	return false;
+  setHomePlanet(p);
+  return true;
 }
 
-bool Observer::setHomePlanet(const Planet *p,float transit_seconds) {
+void Observer::setHomePlanet(const Planet *p,float transit_seconds) {
 //  transit_seconds = 5;
-  if (!p) return false;
+  assert(p);
   if (planet != p) {
     if (planet) {
       if (!artificial_planet) {
         artificial_planet = new ArtificialPlanet(*planet);
 	name = L"";
       }
-//cout << "setHomePlanet" << endl << endl;
+cout << "setHomePlanet" << endl << endl;
       artificial_planet->setDest(*p);
       time_to_go = (int)(1000.f * transit_seconds); // milliseconds
     }
     planet = p;
   }
-  return true;
 }
 
 const Planet *Observer::getHomePlanet(void) const {

@@ -134,9 +134,10 @@ void Cardinals::updateI18n()
 }
 
 
-LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL)
+LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
 {
 	dependenciesOrder["draw"]="telescopes";
+	dependenciesOrder["update"]="ssystem";
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -246,6 +247,7 @@ void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
 	setAtmosphereLightPollutionLuminance(conf.get_double("viewing","light_pollution_luminance",0.0));
 	cardinals_points = new Cardinals();
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
+	setFlagLandscapeSetsLocation(conf.get_boolean("landscape:flag_landscape_sets_location"));
 }
 
 void LandscapeMgr::setColorScheme(const InitParser& conf, const std::string& section)
@@ -305,7 +307,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	}
 	landscapeSectionName = new_landscape_name;
 	
-	if (StelApp::getInstance().getStelUI()->getFlagLandscapeSetsLocation())
+	if (getFlagLandscapeSetsLocation())
 	{
 		// Set the planet and moveto the right location
 		if (landscape->getPlanet()!="") 

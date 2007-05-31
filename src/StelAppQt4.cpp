@@ -158,10 +158,10 @@ void StelAppQt4::startMainLoop()
 	winOpenGL = &openGLWin;
 	winOpenGL->setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
 	mainWin.setCentralWidget(&openGLWin);
+	StelApp::init();
 	mainWin.show();
 	openGLWin.show();
 
-	StelApp::init();
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
 	openGLWin.resizeGL(getScreenW(), getScreenH());
 	
@@ -250,6 +250,8 @@ bool StelAppQt4::getFullScreen() const
 
 GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
 {
+	lastEventTimeSec = (double)(qtime.elapsed()/1000);
+	previousTime = qtime.elapsed();
 	setFocusPolicy(Qt::ClickFocus);
 	setMouseTracking(true);
 	// make openGL context current

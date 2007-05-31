@@ -59,10 +59,8 @@ StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
 	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL)
 {
-	ui=0;
 	scripts=0;
 	commander=0;
-	core=0;
 	distorter=0;
 	skyCultureMgr=0;
 	localeMgr=0;
@@ -119,7 +117,6 @@ StelApp::StelApp(int argc, char** argv) :
 	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore();
-	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander);
 	time_multiplier = 1;
@@ -131,15 +128,15 @@ StelApp::StelApp(int argc, char** argv) :
 *************************************************************************/
 StelApp::~StelApp()
 {
-	delete ui;ui=0;
-	delete scripts;scripts=0;
-	delete commander;commander=0;
-	delete core;core=0;
-	if (distorter) {delete distorter;distorter=0;}
-	delete skyCultureMgr;skyCultureMgr=0;
-	delete localeMgr;localeMgr=0;
-	delete fontManager;fontManager=0;
-	delete stelObjectMgr;stelObjectMgr=0;
+	delete ui; ui=NULL;
+	delete scripts; scripts=NULL;
+	delete commander; commander=NULL;
+	delete core; core=NULL;
+	if (distorter) {delete distorter; distorter=NULL;}
+	delete skyCultureMgr; skyCultureMgr=NULL;
+	delete localeMgr; localeMgr=NULL;
+	delete fontManager; fontManager=NULL;
+	delete stelObjectMgr; stelObjectMgr=NULL;
 	
 	// Delete all the modules
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
@@ -148,8 +145,8 @@ StelApp::~StelApp()
 		*iter = NULL;
 	}
 
-	delete textureMgr;textureMgr=0;
-	delete moduleMgr;moduleMgr=0;
+	delete textureMgr; textureMgr=NULL;
+	delete moduleMgr; moduleMgr=NULL;
 }
 
 /*************************************************************************
@@ -159,9 +156,6 @@ std::string StelApp::getApplicationName()
 {
 	return string("Stellarium")+PACKAGE_VERSION;
 }
-
-	
-bool restart_ui = false;
 
 void StelApp::setViewPortDistorterType(const string &type)
 {
@@ -341,6 +335,7 @@ void StelApp::init()
 	skyCultureMgr->init(conf);
 
 	// TODO: Need way to update settings from config without reinitializing whole gui
+	ui = new StelUI(core, this);
 	ui->init(conf);
 	ui->init_tui();  // don't reinit tui since probably called from there
 
@@ -402,8 +397,7 @@ void StelApp::update(int delta_time)
 	// run command from a running script
 	scripts->update(delta_time);
 
-	ui->gui_update_widgets(delta_time);
-	ui->tui_update_widgets();
+	ui->update((double)delta_time/1000);
 
 	core->update(delta_time);
 
@@ -411,9 +405,12 @@ void StelApp::update(int delta_time)
 	
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("update");
+	//cerr << "-------" << endl;
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
+		//cerr << (*i)->getModuleID() << endl;
 		(*i)->update((double)delta_time/1000);
+
 	}
 	
 	stelObjectMgr->update((double)delta_time/1000);
@@ -446,7 +443,7 @@ double StelApp::draw(int delta_time)
 	core->postDraw();
 
 	// Draw the Text ui into the predistorted image
-	ui->drawTui();
+	ui->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
 
 	distorter->distort();
 
@@ -696,7 +693,8 @@ void StelApp::recordCommand(string commandline)
 void StelApp::updateAppLanguage()
 {
 	// update translations and font in tui
-	ui->localizeTui();
+	if (ui)
+		ui->localizeTui();
 }
 
 
