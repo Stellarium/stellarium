@@ -7,10 +7,9 @@
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/convenience.hpp>
-#include <boost/random/linear_congruential.hpp>
+#include <QFileInfo>
+#include <QDir>
+#include <QString>
 
 #ifdef WIN32
 # include <windows.h>
@@ -22,7 +21,6 @@
 #include "StelFileMgr.hpp"
 
 using namespace std;
-namespace fs = boost::filesystem;
 
 #define CHECK_FILE "data/ssystem.ini"
 
@@ -53,29 +51,29 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
+const string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
+	// explicitly specified relative paths
 	if (path[0] == '.')
-	{
 		if (fileFlagsCheck(path, flags)) 
-			return fs::path(path);
-	}
-	
-	if ( fs::path(path).is_complete() )
-		if ( fileFlagsCheck(path, flags) )
-			return(path);
-		else 
-		{
+			return path;
+		else
 			throw(runtime_error("file does not match flags: " + path));
-		}
-		
-	fs::path result;
-	for(vector<fs::path>::iterator i = fileLocations.begin();
+
+	// explicitly specified absolute paths
+	QFileInfo thePath(path.c_str());
+	if ( thePath.isAbsolute() )
+		if (fileFlagsCheck(path, flags))
+			return path;
+		else
+			throw(runtime_error("file does not match flags: " + path));
+	
+	for(vector<string>::iterator i = fileLocations.begin();
 		   i != fileLocations.end();
 		   i++)
-	{				
-		if (fileFlagsCheck(*i / path, flags))
-			return fs::path(*i / path);
+	{
+		if (fileFlagsCheck(*i + "/" + path, flags))
+			return (*i + "/" + path);
 	}
 	
 	throw(runtime_error("file not found: " + path));
@@ -84,51 +82,55 @@ const fs::path StelFileMgr::findFile(const string& path, const FLAGS& flags)
 const set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
 {
 	set<string> result;
-	vector<fs::path> listPaths;
-	
+	vector<string> listPaths;
+		
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if ( fs::path(path).is_complete() )
+	if (QFileInfo(path.c_str()).isAbsolute())
 		listPaths.push_back("");
 	else
 		listPaths = fileLocations;
 	
-	for (vector<fs::path>::iterator li = listPaths.begin();
+	for (vector<string>::iterator li = listPaths.begin();
 	     li != listPaths.end();
 	     li++)
 	{
-		if ( fs::exists(*li / path) ) {
-			if ( fs::is_directory(*li / path) )
-			{ 
-				fs::directory_iterator end_iter;
-				for ( fs::directory_iterator dir_itr( *li / path );
-						dir_itr != end_iter;
-						++dir_itr )
+		QFileInfo thisPath((*li+"/"+path+"/").c_str());
+		if (thisPath.isDir()) 
+		{
+			QStringList lsOut = thisPath.absoluteDir().entryList();
+			for (QStringList::const_iterator fileIt = lsOut.constBegin(); 
+				fileIt != lsOut.constEnd(); 
+				++fileIt)
+			{
+
+				if ((*fileIt != "..") && (*fileIt != "."))
 				{
+					QFileInfo fullPath((*li+"/"+path+"/"+(*fileIt).toStdString()).c_str());
+
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
 					// but if we have flags set, that will filter the result
-					fs::path fullPath(*li / path / dir_itr->leaf());
-					if ( (flags & WRITABLE) && ! isWritable(fullPath) )
+					if ((flags & WRITABLE) && !fullPath.isWritable())
 						returnThisOne = false;
 				
-					if ( (flags & DIRECTORY) && ! fs::is_directory(fullPath) )
+					if ((flags & DIRECTORY) && !fullPath.isDir())
+						returnThisOne = false;
+					
+					if ((flags & FILE) && !fullPath.isFile())
 						returnThisOne = false;
 					
 					// we only want to return "hidden" results if the HIDDEN flag is set
-					if ( ! (flags & HIDDEN) )
-					{
-						string bn = fs::basename(fullPath); 
-						if (dir_itr->leaf()[0] == '.') 
-						{
+					if (!(flags & HIDDEN))
+						if ((*fileIt)[0] == '.') 
 							returnThisOne = false;
-						}
-					}
 				
 					// OK, add the ones we want to the result
-					if ( returnThisOne )
-						result.insert(dir_itr->leaf());
+					if (returnThisOne)
+					{
+						result.insert((*fileIt).toStdString());
+					}
 				}
 			}
 		}
@@ -137,169 +139,117 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 	return result;
 }
 
-void StelFileMgr::setSearchPaths(const vector<fs::path> paths)
+void StelFileMgr::setSearchPaths(const vector<string>& paths)
 {
 	fileLocations = paths;
-	
 	outputFileSearchPaths();
 }
 
-bool StelFileMgr::exists(const fs::path& path)
+bool StelFileMgr::exists(const string& path)
 {
-	return fs::exists(path);
+	return QFileInfo(path.c_str()).exists();
 }
 
-/**
- * Hopefully portable way to implement testing of write permission
- * to a file or directory.
- */
-bool StelFileMgr::isWritable(const fs::path& path)
+bool StelFileMgr::isWritable(const string& path)
 {
-	bool result = false;
-		
-	if ( fs::exists ( path ) )
-	{
-		// For directories, we consider them writable if it is possible to create a file
-		// inside them.  We will try to create a file called "stmp[randomnumber]"
-		// (first without appending a random number, but if that exist, we'll re-try
-		// 10 times with different random suffixes).
-		// If this is possible we will delete it and return true, else we return false.
-		// We'll use the boost random number library for portability
-		if ( fs::is_directory ( path ) )
-		{
-			// cerr << "DEBUG StelFileMgr::isWritable: exists and is directory: " << path.string() << endl;
-			boost::rand48 rnd(boost::int32_t(3141));
-			int triesLeft = 50;
-			ostringstream outs;
-			
-			outs << "stmp";
-			fs::path testPath(path / outs.str());
-					
-			while(fs::exists(testPath) && triesLeft-- > 0)
-			{
-				// cerr << "DEBUG StelFileMgr::isWritable: test path " << testPath.string() << " already exists, trying another" << endl;
-				outs.str("");
-				outs << "stmp" << rnd();
-				testPath = path / outs.str();
-			}
-			
-			if (fs::exists(testPath))
-			{
-				// cerr << "DEBUG StelFileMgr::isWritable: I reall tried, but I can't make a unique non-existing file name to test" << endl;
-				result = false;
-			}
-			else
-			{
-				// OK, we have a non-exiting testPath now.  We just call isWritable for that path
-				// cerr << "DEBUG StelFileMgr::isWritable: testing non-existing file in dir: " << testPath.string() << endl;
-				result = isWritable(testPath);
-			}
-		}
-		else {
-			// try to open writable (without damaging file)
-			// cerr << "DEBUG StelFileMgr::isWritable: exists and is file: " << path.string() << endl;
-			ofstream f ( path.native_file_string().c_str(), ios_base::out | ios_base::app );	
-			if ( f )
-			{
-				result = true;
-				f.close();
-			}
-		}
-	}
-	else
-	{
-		// try to create file to see if it's possible.
-		// cerr << "DEBUG StelFileMgr::isWritable: does not exist: " << path.string() << endl;
-		ofstream f ( path.native_file_string().c_str(), ios_base::out | ios_base::app );
-		if ( f )
-		{
-			f.close();
-			fs::remove (path);
-			result = true;
-		}
-	}
-	
-	return result;
+	return QFileInfo(path.c_str()).isWritable();
 }
 
-bool StelFileMgr::isDirectory(const fs::path& path)
+bool StelFileMgr::isDirectory(const string& path)
 {
-	return fs::is_directory(path);
+	return QFileInfo(path.c_str()).isDir();
+}
+
+bool StelFileMgr::mkDir(const string& path)
+{
+	return QDir("/").mkpath(path.c_str());
+}
+
+const string StelFileMgr::dirName(const string& path)
+{
+	return QFileInfo(path.c_str()).dir().canonicalPath().toStdString();
+}
+
+const string StelFileMgr::baseName(const string& path)
+{
+	return QFileInfo(path.c_str()).baseName().toStdString();
 }
 
 void StelFileMgr::checkUserDir()
 {
 	try {
-		if (fs::exists(getUserDir()))
+		QFileInfo uDir(getUserDir().c_str());
+		if (uDir.exists())
 		{
-			if (isDirectory(getUserDir()) && isWritable(getUserDir()))
+			if (uDir.isDir() && uDir.isWritable())
 			{
 				// everything checks out fine.
 				return;
 			}
 			else
 			{
-				cerr << "ERROR: user directory is not a writable directory: " << getUserDir().string() << endl;
+				cerr << "ERROR StelFileMgr::checkUserDir: user directory is not a writable directory: " << uDir.filePath().toStdString() << endl;
 				exit(1);
 			}
 		}
 		else
 		{
 			// The user directory doesn't exist, lets create it.
-			system(string("mkdir " + getUserDir().string()).c_str());
-			
-			// And verify that it was created
-			if (!fs::exists(getUserDir()))
+			if (!QDir("/").mkpath(uDir.filePath()))
 			{
-				cerr << "ERROR: could not create user directory: " << getUserDir().string() << endl;
+				cerr << "ERROR: could not create user directory: " << uDir.filePath().toStdString() << endl;
 				exit(1);
 			}
 		}
-		
 	}
 	catch(exception& e)
 	{
 		// This should never happen  ;)
-		cerr << "ERROR: cannot work out the user directory" << endl;
+		cerr << "ERROR: cannot work out the user directory: " << e.what() << endl;
 		exit(1);
 	}	
 }
 
-bool StelFileMgr::fileFlagsCheck(const fs::path& path, const FLAGS& flags)
+bool StelFileMgr::fileFlagsCheck(const string& path, const FLAGS& flags)
 {
 	if ( ! (flags & HIDDEN) )
 	{
 		// Files are considered HIDDEN on POSIX systems if the file name begins with 
 		// a "." character.  Unless we have the HIDDEN flag set, reject and path
 		// where the basename starts with a .
-		if (fs::basename(path)[0] == '.')
+		if (baseName(path)[0] == '.')
 		{
 			return(false);
 		}
 	}
 	
-	if ( flags & NEW )
+	QFileInfo thePath(path.c_str());
+	QDir parentDir = thePath.dir();
+
+	if (flags & NEW)
 	{
-		// if the NEW flag is set, we check to see if the parent is an existing directory
-		// which is writable, and that the file doesn't already exist
-		fs::path parent(path / "..");
-		if ( ! isWritable(parent.normalize()) || ! fs::is_directory(parent.normalize()) )
-		{
-			return(false);	
-		}
-		if ( fs::exists(path) )
+		// if the file already exists, it is not a new file
+		if (thePath.exists())
 			return false;				
+
+		// To be able to create a new file, we need to have a 
+		// parent directory which is writable.
+		QFileInfo pInfo(parentDir.absolutePath());
+		if (!pInfo.exists() || !pInfo.isWritable())
+		{
+			return(false);
+		}
 	}
-	else if ( fs::exists(path) )
+	else if (thePath.exists())
 	{
-		if ( (flags & WRITABLE) && ! isWritable(path) )
+		if ((flags & WRITABLE) && !thePath.isWritable())
 			return(false);
 			
-		if ( (flags & DIRECTORY) && ! fs::is_directory(path) )
+		if ((flags & DIRECTORY) && !thePath.isDir())
 			return(false);
 			
-		if ( (flags & FILE) && fs::is_directory(path) )
-			return(false); 			
+		if ((flags & FILE) && !thePath.isFile())
+			return(false); 
 	}
 	else
 	{
@@ -314,20 +264,19 @@ void StelFileMgr::outputFileSearchPaths(void)
 {
 	int count = 0;
 	cout << "File search path set to:" << endl;		   
-	for(vector<fs::path>::iterator i = fileLocations.begin();
+	for(vector<string>::iterator i = fileLocations.begin();
 		   i != fileLocations.end();
 		   i++)
 	{
-		cout << " " << ++count << ") " << (*i).string() << endl;
+		cout << " " << ++count << ") " << *i << endl;
 	}
 }
 
-// Platform dependent members with compiler directives in them.
-const fs::path StelFileMgr::getDesktopDir(void)
+const string StelFileMgr::getDesktopDir(void)
 {
 	// TODO: Test Windows and MAC builds.  I edited the code but have
 	// not got a build platform -MNG
-	fs::path result;
+	string result;
 #if defined(WIN32)
 	char path[MAX_PATH];
 	path[MAX_PATH-1] = '\0';
@@ -356,119 +305,101 @@ const fs::path StelFileMgr::getDesktopDir(void)
 	}
 #else
 	result = getenv("HOME");
-	result /= "Desktop";
+	result += "/Desktop";
 #endif
-	if (!fs::is_directory(result))
+	if (!QFileInfo(result.c_str()).isDir())
 	{
 		throw(runtime_error("NOT FOUND"));
 	}
 	return result;
 }
 
-const fs::path StelFileMgr::getUserDir(void)
+const string StelFileMgr::getUserDir(void)
 {
- fs::path homeLocation;
-#ifdef WIN32
-	char path[MAX_PATH];
-	path[MAX_PATH-1] = '\0';
-	LPITEMIDLIST tmp;
-	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_PERSONAL, &tmp)))
-	{
-		SHGetPathFromIDList(tmp, path);                      
-		homeLocation = path;
-	}
-	else
-	{	
-		if(getenv("HOME")!=NULL)
-		{
-			//for Win XP etc.
-			homeLocation = string(getenv("HOME"));
-		}
-	}
-#else
-# ifdef MACOSX
-	// OSX
-# error "StelFileMgr::getUserDir not yet implemented for OSX"
-# else 
-	// Linux, BSD, Solaris etc.	       
- homeLocation = getenv("HOME");
-# endif
+	QFileInfo userDir;
+#if defined(WIN32)
+	userDir = QDir::homePath() + "/Stellarium";
+#elif defined(MACOSX)
+	userDir = getUserPreferencesDir();
+#else 
+	userDir = QDir::homePath() + "/.stellarium";
 #endif
-	if (!fs::is_directory(homeLocation))
+	if (!userDir.exists() || !userDir.isDir())
 	{
-		// This will be the case if getenv failed or something else is weird
-		cerr << "WARNING StelFileMgr::StelFileMgr: HOME env var refers to non-directory" << endl;
-		throw(runtime_error("NOT FOUND"));
+		cerr << "WARNING StelFileMgr::getUserDir user dir does not exist: "
+			<< userDir.filePath().toStdString() << endl;
 	}
-	else 
+	else if (!userDir.isWritable())
 	{
-		homeLocation /= ".stellarium";
-		return(homeLocation);
+		cerr << "WARNING StelFileMgr::getUserDir user dir is not writable: "
+			<< userDir.filePath().toStdString() << endl;
 	}
-	throw(runtime_error("NOT FOUND"));
+
+	return userDir.filePath().toStdString();
 }
-	
-const fs::path StelFileMgr::getInstallationDir(void)
+
+const string StelFileMgr::getInstallationDir(void)
 {
 	// If we are running from the build tree, we use the files from there...
-	if (fs::exists(CHECK_FILE))
-		return fs::path(".");
+	if (QFileInfo(CHECK_FILE).exists())
+		return ".";
 
+#if defined(WIN32) 
+#error StelFileMgr::getInstallationDir not yet implemented for osx
+#elif defined(MACOSX)
+#error StelFileMgr::getInstallationDir not yet implemented for osx
+#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
-	fs::path installLocation(INSTALL_DATADIR);
-	if (fs::exists(installLocation / CHECK_FILE))
+	QFileInfo installLocation(INSTALL_DATADIR);
+	QFileInfo checkFile(INSTALL_DATADIR "/" CHECK_FILE);
+#endif
+
+	if (checkFile.exists())
 	{
-		return installLocation;
+		return installLocation.filePath().toStdString();
 	}
 	else
 	{
 		cerr << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< installLocation.string()
+			<< installLocation.filePath().toStdString()
 			<< " (we checked for "
-			<< CHECK_FILE
+			<< checkFile.filePath().toStdString()
 			<< ")."
 			<< endl;
-		installLocation = fs::current_path();
-		if (fs::exists(installLocation / CHECK_FILE))
-		{
-			return installLocation;
-		}
-		else
-		{
-			throw(runtime_error("NOT FOUND"));
-		}
+		throw(runtime_error("NOT FOUND"));
 	}
-
-	throw(runtime_error("NOT FOUND"));
 }
 	
-const fs::path StelFileMgr::getScreenshotDir(void)
+const string StelFileMgr::getScreenshotDir(void)
 {
-      return getDesktopDir();
-	throw(runtime_error("NOT FOUND"));
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
+	return getDesktopDir();
+#else
+	return QDir::homePath().toStdString();
+#endif
 }
 
 const string StelFileMgr::getLocaleDir(void)
 {
-	fs::path localePath;
+	QFileInfo localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = getInstallationDir() / "data/locale";
+	localePath = getInstallationDir() + "/data/locale";
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 
 	// install having been done.
 	if (getInstallationDir() == ".")
-		return "./data/locale";
+		localePath = QFileInfo("./data/locale");
 	else
-		localePath = fs::path(INSTALL_LOCALEDIR);
+		localePath = QFileInfo(INSTALL_LOCALEDIR);
 	
 #endif
-	if (fs::exists(localePath))
+	if (localePath.exists())
 	{
-		return localePath.string();
+		return localePath.filePath().toStdString();
 	}
 	else
 	{

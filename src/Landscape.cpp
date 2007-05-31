@@ -69,12 +69,12 @@ const string Landscape::getTexturePath(const string& basename, const string& lan
 	// look in the landscape directory first, and if not found default to global textures directory
 	string path;
 	try {
-		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeId + "/" + basename).string();
+		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeId + "/" + basename);
 		return path;
 	}
 	catch (exception& e)
 	{
-		path = StelApp::getInstance().getFileMgr().findFile("textures/" + basename).string();
+		path = StelApp::getInstance().getFileMgr().findFile("textures/" + basename);
 		return path;
 	}
 }

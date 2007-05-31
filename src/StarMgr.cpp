@@ -1324,7 +1324,7 @@ void StarMgr::load_data(LoadingBar& lb)
 		lb.Draw(i / 8.0);
 		try
 		{
-			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + cat_file_names[i]).string().c_str());
+			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("stars/default/")+cat_file_names[i]).c_str());
 			if (z)
 			{
 				if (max_geodesic_grid_level < z->level)
@@ -1363,7 +1363,7 @@ void StarMgr::load_data(LoadingBar& lb)
 
 	try
 	{
-		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + spectral_file).string().c_str());
+		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + spectral_file).c_str());
 	}
 	catch (exception& e)
 	{
@@ -1373,7 +1373,7 @@ void StarMgr::load_data(LoadingBar& lb)
 	
 	try
 	{
-		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + component_file).string().c_str());
+		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + component_file).c_str());
 	}
 	catch (exception& e)
 	{
@@ -2082,7 +2082,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	// Load culture star names in english
 	try
 	{
-		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab").string());
+		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(exception& e)
 	{
@@ -2092,7 +2092,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	
 	try
 	{
-		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab").string());
+		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
 	}
 	catch(exception& e)
 	{

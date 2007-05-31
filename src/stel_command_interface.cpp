@@ -422,7 +422,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 					
 				try
 				{
-					image_filename = stapp->getFileMgr().findFile(image_filename).string();
+					image_filename = stapp->getFileMgr().findFile(image_filename);
 					script_images->load_image(image_filename, args["name"], img_pos);
 				}
 				catch(exception& e)
@@ -495,7 +495,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				// from the pwd and so on.
 				try
 				{
-					string audioFilePath = StelApp::getInstance().getFileMgr().findFile(args["filename"], StelFileMgr::FILE).string();
+					string audioFilePath = StelApp::getInstance().getFileMgr().findFile(args["filename"], StelFileMgr::FILE);
 					audio = new Audio(audioFilePath, "default track", StelUtils::stringToLong(args["output_rate"]));
 					audio->play(args["loop"]=="on");
 				}
