@@ -269,8 +269,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	{
 		try
 		{
-			//newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini").string(), nameToDirMap[new_landscape_name]);
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini"), nameToDirMap[new_landscape_name]);
 		}
 		catch(exception& e)
 		{
@@ -283,7 +282,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	{
 		try
 		{
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini").string(), new_landscape_name);
+			newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini"), new_landscape_name);
 		}
 		catch(exception& e)
 		{
@@ -554,14 +553,14 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini").string());
+			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini"));
 			string k = pd.get_str("landscape", "name");
 			// cerr << "DEBUG LandscapeMgr::getNameToDirMap adding " << k << " -> " << *dir << endl;
 			result[k] = *dir;
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read landscape.ini file from landscape " << *dir << endl;
+			//cerr << "WARNING: unable to successfully read landscape.ini file from landscape " << *dir << endl;
 		}
 	}
 

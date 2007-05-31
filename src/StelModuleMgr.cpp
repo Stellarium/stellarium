@@ -74,7 +74,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 #endif
 	try
 	{
-		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE).string();
+		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE);
 	}
 	catch(exception& e)
 	{

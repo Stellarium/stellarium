@@ -257,8 +257,8 @@ void NebulaMgr::loadNebulaSet(const string& setName, LoadingBar& lb)
 {
 	try
 	{
-		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat").string(), lb);
-		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat").string());
+		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"), lb);
+		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
 		loadTextures(setName, lb);
 	}
 	catch(exception& e)
@@ -495,7 +495,7 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 	string texFile;
 	try
 	{
-		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab").string();
+		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab");
 		std::ifstream inf(texFile.c_str());
 		if (!inf.is_open())
 		{

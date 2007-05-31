@@ -606,7 +606,7 @@ void StelUI::load_cities(const string& planetEnglishName)
 	string fileName;
 	try
 	{
-		fileName = StelApp::getInstance().getFileMgr().findFile("data/cities_" + planetEnglishName + ".fab").string();
+		fileName = StelApp::getInstance().getFileMgr().findFile("data/cities_" + planetEnglishName + ".fab");
 	}
 	catch(exception& e)
 	{

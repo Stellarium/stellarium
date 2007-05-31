@@ -34,8 +34,6 @@
 
 using namespace std;
 
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
 #include <QtGui/QImage>
 #include <QtGui/QApplication>
 #include <QtOpenGL>
@@ -175,7 +173,7 @@ void StelAppQt4::startMainLoop()
 
 void StelAppQt4::saveScreenShot() const
 {
-	boost::filesystem::path shotDir;
+	string shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
         try
@@ -183,7 +181,7 @@ void StelAppQt4::saveScreenShot() const
                 shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
                 if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
                 {
-                        cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.string() << endl;
+                        cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
                         return;
                 }
         }
@@ -193,20 +191,20 @@ void StelAppQt4::saveScreenShot() const
                 return;
         }
 
-	boost::filesystem::path shotPath;
+	string shotPath;
 	for(int j=0; j<1000; ++j)
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir / (string("stellarium-") + oss.str() + ".bmp");
-		if (!boost::filesystem::exists(shotPath))
+		shotPath = shotDir+"/"+(string("stellarium-") + oss.str() + ".bmp");
+		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
 	// TODO - if no more filenames available, don't just overwrite the last one
 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 	
-	cout << "saving screenshot in file: " << shotPath.string() << endl;
-	im.save(QString(shotPath.string().c_str()));
+	cout << "saving screenshot in file: " << shotPath << endl;
+	im.save(QString(shotPath.c_str()));
 }
 
 void StelAppQt4::setResizable(bool resizable)

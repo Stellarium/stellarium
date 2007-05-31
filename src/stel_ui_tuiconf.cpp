@@ -23,8 +23,6 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
 #include "stel_ui.h"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -146,7 +144,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	try
 	{
-		tui_time_settmz = new s_tui::Time_zone_item(app->getFileMgr().findFile("data/zone.tab").string(), wstring(L"2.2 "));
+		tui_time_settmz = new s_tui::Time_zone_item(app->getFileMgr().findFile("data/zone.tab"), wstring(L"2.2 "));
 	}
 	catch(exception &e)
 	{
@@ -507,9 +505,10 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					boost::filesystem::path theParent = app->getFileMgr().findFile("scripts/" + SelectedScript);
-					theParent /= "..";
-					cmd = "script action play filename \"" + SelectedScript + "\" path \"" + theParent.normalize().string() + "/\"";
+					string theParent = app->getFileMgr().findFile("scripts/" + SelectedScript);
+					theParent = app->getFileMgr().dirName(theParent);
+					cmd = "script action play filename \"" + SelectedScript 
+						+ "\" path \"" + theParent + "/\"";
 				}
 				catch(exception& e)
 				{
@@ -671,7 +670,7 @@ void StelUI::tui_cb_admin_save_default(void)
 
 	try
 	{
-		system( (app->getFileMgr().findFile("data/script_save_config ") ).string().c_str() );
+		system( (app->getFileMgr().findFile("data/script_save_config ") ).c_str() );
 	}
 	catch(exception& e)
 	{
@@ -684,7 +683,7 @@ void StelUI::tui_cb_admin_updateme(void)
 {
 	try
 	{
-		system( ( app->getFileMgr().findFile("data/script_internet_update" )).string().c_str() );
+		system( ( app->getFileMgr().findFile("data/script_internet_update" )).c_str() );
 	}
 	catch(exception& e)
 	{
@@ -698,7 +697,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 {
 	try
 	{
-		system( ( app->getFileMgr().findFile("data/script_shutdown" )).string().c_str() );
+		system( ( app->getFileMgr().findFile("data/script_shutdown" )).c_str() );
 	}
 	catch(exception& e)
 	{

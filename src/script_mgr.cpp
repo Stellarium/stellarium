@@ -23,8 +23,6 @@
 #include <cstdio>
 #include <sstream>
 #include <iomanip>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
 
 #include "script_mgr.h"
 #include "script.h"
@@ -33,7 +31,6 @@
 #include "StelFileMgr.hpp"
 
 using namespace std;
-namespace fs = boost::filesystem;
 
 ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(false) {
 	commander = command_interface;
@@ -68,7 +65,7 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 		script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk" ).string().c_str());	  
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk" ).c_str());	  
 			cout << "MOUNT DISK to read script" << endl;
 			RemoveableDirectoryMounted = 1;
 		}
@@ -101,7 +98,7 @@ void ScriptMgr::cancel_script() {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk" ).string().c_str());	  
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk" ).c_str());	  
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -136,17 +133,16 @@ void ScriptMgr::record_script(string script_filename) {
 
 	// If we get no script filename as a parameter we should make a new one.
 	if(script_filename == "") {
-		fs::path scriptSaveDir;
+		string scriptSaveDir;
 		try
 		{
-			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir() / "scripts";
-			if ( !fs::exists(scriptSaveDir) )
+			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir() + "/scripts";
+			if (!StelApp::getInstance().getFileMgr().exists(scriptSaveDir))
 			{
-				system(string("mkdir " + scriptSaveDir.string()).c_str());
-			}
-			if(!fs::is_directory(scriptSaveDir) || !StelApp::getInstance().getFileMgr().isWritable(scriptSaveDir))
-			{
-				throw(runtime_error("couldn't create it"));				
+				if (!StelApp::getInstance().getFileMgr().mkDir(scriptSaveDir))
+				{
+					throw(runtime_error("couldn't create it"));				
+				}
 			}
 		}
 		catch(exception& e)
@@ -155,24 +151,24 @@ void ScriptMgr::record_script(string script_filename) {
 			return;
 		}
 		
-		fs::path scriptPath;
+		string scriptPath;
 		for(int j=0; j<1000; ++j)
 		{
 			stringstream oss;
 			oss << setfill('0') << setw(3) << j;
-			scriptPath = scriptSaveDir / (string("recorded-") + oss.str() + ".sts");
-			if (!fs::exists(scriptPath))
+			scriptPath = scriptSaveDir +"/"+ (string("recorded-") + oss.str() + ".sts");
+			if (!StelApp::getInstance().getFileMgr().exists(scriptPath))
 				break;
 		}
 		// catch the case where we we have all 999 scripts existing...
-		if (fs::exists(scriptPath))
+		if (StelApp::getInstance().getFileMgr().exists(scriptPath))
 		{
 			cerr << "ERROR ScriptMgr::record_script: could not make a new scipt filename, NOT RECORDING" << endl;
 			return;
 		}
 		else
 		{
-			script_filename = scriptPath.string();
+			script_filename = scriptPath;
 		}
 	}
 	
@@ -256,8 +252,7 @@ void ScriptMgr::update(double delta_time)
  get a list of script files from directory.  If directory is equal to the
  removable media directory, the mount and unmount scripts are called
  before and after the file listing is done.  Note the removable media
- directory must be a complete path (in the boost::filesystem sense) - not a
- relative path.
+ directory must be a complete path - not a relative path.
  returns a string list of script file names, delimited with the '\n' 
  character
 ****************************************************************************/
@@ -269,7 +264,7 @@ string ScriptMgr::get_script_list(string directory) {
 	{
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk").string().c_str());	  
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk").c_str());	  
 			cout << "MOUNT DISK to read directory\n";
 			directory += "/scripts";
 			RemoveableDirectoryMounted = 1;
@@ -283,12 +278,19 @@ string ScriptMgr::get_script_list(string directory) {
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
+		cerr << "DEBUG MNG: about to get list of scripts" << endl;
 		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::FILE);
 		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
+			cerr << "DEBUG MNG: considering file " << *i;
 			if (string(*i, i->length()-4, 4) == ".sts" )
 			{
+				cerr << " YES" << endl; 
 				result = result + *i + '\n';
+			}
+			else
+			{
+				cerr << " NO" << endl; 
 			}
 		}
 	}
@@ -300,7 +302,7 @@ string ScriptMgr::get_script_list(string directory) {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk").string().c_str());	  
+			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk").c_str());	  
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -329,9 +331,9 @@ bool ScriptMgr::play_startup_script() {
 	} 
 	else {
 		try {
-			boost::filesystem::path fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup.sts")); 
-			boost::filesystem::path parentDir(fullPath / "..");
-			play_script(fullPath.string(), parentDir.normalize().string() + "/");
+			string fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup.sts")); 
+			string parentDir(StelApp::getInstance().getFileMgr().dirName(fullPath));
+			play_script(fullPath, parentDir + "/");
 		}
 		catch(exception& e)
 		{

@@ -83,7 +83,7 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 	{
 		try
 		{
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/"+lf.fileName).string());
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/"+lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}
@@ -110,7 +110,7 @@ SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
 	else
 	{
 		try {
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/" + lf.fileName).string());
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/" + lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}

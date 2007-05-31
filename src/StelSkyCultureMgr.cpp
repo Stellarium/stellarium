@@ -47,12 +47,12 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini").string());
+			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini"));
 			dirToNameEnglish[*dir] = pd.get_str("info:name");
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
+			// cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
 		}
 	}	
 }
