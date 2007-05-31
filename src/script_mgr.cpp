@@ -278,11 +278,9 @@ string ScriptMgr::get_script_list(string directory) {
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
-		cerr << "DEBUG MNG: about to get list of scripts" << endl;
 		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::FILE);
 		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
-			cerr << "DEBUG MNG: considering file " << *i;
 			if (string(*i, i->length()-4, 4) == ".sts" )
 			{
 				cerr << " YES" << endl; 
