@@ -401,11 +401,11 @@ wstring LandscapeMgr::getLandscapePlanetName(void) {
 }
     
 wstring LandscapeMgr::getLandscapeLocationDescription(void) {
-	string desc("");
+	string desc;
 	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
 	{
-		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() / (180/M_PI));
-		desc += ", lat " + StelUtils::radToDmsStrAdapt(landscape->getLatitude() / (180/M_PI));
+		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
+		desc += ", lat " + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
 		desc += ", " + StelUtils::doubleToString(landscape->getAltitude()) + " m";
 	}
 	return StelUtils::stringToWstring(desc);
