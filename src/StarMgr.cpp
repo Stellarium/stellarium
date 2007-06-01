@@ -1599,7 +1599,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
             glEnable(GL_TEXTURE_2D);
           }
 
-          prj->drawText(starFont,xy[0],xy[1], starname, 0, 6, -4, false);
+          prj->drawText(starFont,xy[0],xy[1], starname, 0, 4, 4, false);
           if (draw_point) {
             glDisable(GL_TEXTURE_2D);
           } else {

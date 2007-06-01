@@ -296,7 +296,7 @@ void Nebula::draw_name(const Projector* prj)
 {
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
 	float size = getOnScreenSize(prj);
-	float shift = 8.f -40. + size/2.f;
+	float shift = 4.f + size/1.8f;
 
 	wstring nebulaname = getNameI18n();
 
@@ -305,7 +305,7 @@ void Nebula::draw_name(const Projector* prj)
 	// draw image credit, if it fits easily
 	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
 	{
-		prj->drawText(nebula_font,XY[0]-shift, XY[1]-shift, credit, 0, 0, 0, false);
+		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, credit, 0, 0, 0, false);
 	}
 }
 
