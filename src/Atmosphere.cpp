@@ -33,7 +33,7 @@ Atmosphere::Atmosphere(void)
 
 Atmosphere::~Atmosphere(void)
 {
-	if (grid) {delete[] grid;grid = 0;}
+	if (grid) {delete[] grid;grid = NULL;}
 }
 
 void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
@@ -45,8 +45,8 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		viewport = prj->getViewport();
 		if (grid)
 		{
-			delete grid;
-			grid = 0;
+			delete[] grid;
+			grid = NULL;
 		}
 		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];

@@ -87,6 +87,8 @@ Planet::Planet(Planet *parent,
 
 Planet::~Planet()
 {
+	if (rings)
+		delete rings;
 }
 
 // Return the information string "ready to print" :)

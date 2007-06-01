@@ -137,6 +137,7 @@ StelApp::~StelApp()
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL;
+	delete stelFileMgr; stelFileMgr=NULL;
 	
 	// Delete all the modules
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)

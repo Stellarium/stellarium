@@ -305,7 +305,7 @@ void Observer::setHomePlanet(const Planet *p,float transit_seconds) {
         artificial_planet = new ArtificialPlanet(*planet);
 	name = L"";
       }
-cout << "setHomePlanet" << endl << endl;
+
       artificial_planet->setDest(*p);
       time_to_go = (int)(1000.f * transit_seconds); // milliseconds
     }
