@@ -506,8 +506,8 @@ public:
                    const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void) {
-    if (stars) {delete[] stars;stars = 0;}
-    if (zones) {delete[] getZones();zones = 0;}
+    if (stars) {delete[] stars;stars = NULL;}
+    if (zones) {delete[] getZones();zones = NULL;}
     nr_of_zones = 0;
     nr_of_stars = 0;
   }
@@ -1219,6 +1219,7 @@ StarMgr::~StarMgr(void) {
   while (it!=zone_arrays.begin()) {
     --it;
     delete it->second;
+    it->second = NULL;
   }
   zone_arrays.clear();
 

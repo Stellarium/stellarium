@@ -870,7 +870,7 @@ namespace s_gui
 		void setProximity(double _proximity);
 		City *getCity(unsigned int _index);
 		unsigned int size(void) { return cities.size(); }
-		void clearCities(void) { cities.clear(); }
+		void clearCities(void);
 	private:
 		vector<City*> cities;
 		double proximity;
@@ -939,7 +939,6 @@ namespace s_gui
 		bool exact;
 		double exactLatitude, exactLongitude;
 		int exactAltitude;
-		float fontsize;
 	};
 
     class StringList : public CallbackComponent

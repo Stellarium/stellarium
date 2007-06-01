@@ -86,17 +86,11 @@ LandscapeOldStyle::~LandscapeOldStyle()
 {
 	if (side_texs)
 	{
-		for (int i=0;i<nb_side_texs;++i)
-		{
-			// TODO I am not sure that this decrement the reference count of the shared pointers
-			// side_texs[i] = NULL;
-		}
 		delete [] side_texs;
 		side_texs = NULL;
 	}
 
 	if (sides) delete [] sides;
-
 }
 
 void LandscapeOldStyle::load(const string& landscape_file, const string& landscapeId)
