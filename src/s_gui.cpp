@@ -1842,6 +1842,13 @@ void TextLabel::setLabel(const wstring& _label)
 		label.replace(pos, 2, L"\n");
 	}
 	
+    list<Component*>::iterator iter = childs.begin();
+    while (iter != childs.end())
+    {
+        delete (*iter);
+        (*iter)=NULL;
+        iter++;
+    }
     childs.clear();
 
     Label * tempLabel;
@@ -2907,11 +2914,7 @@ City_Mgr::City_Mgr(double _proximity) : proximity(_proximity)
 
 City_Mgr::~City_Mgr()
 {
-	vector<City*>::iterator iter;
-	for (iter = cities.begin();iter!=cities.end();iter++)
-	{
-		delete (*iter);
-	}
+	clearCities();
 }
 
 void City_Mgr::addCity(const string& _name, const string& _state, 
@@ -2919,6 +2922,16 @@ void City_Mgr::addCity(const string& _name, const string& _state,
 {
 	City *city = new City(_name, _state, _country, _longitude, _latitude, _zone, _showatzoom, _altitude);
 	cities.push_back(city);
+}
+
+void City_Mgr::clearCities(void)
+{
+	vector<City*>::iterator iter;
+	for (iter = cities.begin();iter!=cities.end();iter++)
+	{
+		delete (*iter);
+	}
+	cities.clear();
 }
 
 int City_Mgr::getNearest(double _longitude, double _latitude)
@@ -3040,7 +3053,7 @@ void MapPicture::drawCityName(const s_vec2i& cityPos, const wstring& _name)
 	if ((cityPos[0] > originalPos[0] + originalSize[0]) || (cityPos[0] < originalPos[0]))
 		return;
 		
-	y = cityPos[1]-(int)(fontsize/2);
+	y = cityPos[1]-(int)(city_name_font->getLineHeight()/2);
 	strLen = (int)city_name_font->getStrLen(_name);
 	x = cityPos[0] + cityPointer->getSizex()/2 + 1;
 	if (x + strLen + 1 >= originalPos[0] + originalSize[0])

@@ -37,11 +37,10 @@ StelCore::StelCore() : projection(NULL)
 
 StelCore::~StelCore()
 {
-	delete navigation;
-	delete projection;
-	delete observatory;
-	observatory = NULL;
-	delete tone_converter;
+	delete navigation; navigation=NULL;
+	delete projection; projection=NULL;
+	delete observatory; observatory=NULL;
+	delete tone_converter; tone_converter=NULL;
 	
 	if (geodesic_search_result)
 	{

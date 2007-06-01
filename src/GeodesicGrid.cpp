@@ -97,7 +97,7 @@ GeodesicGrid::GeodesicGrid(const int lev)
 {
 	if (max_level > 0)
 	{
-		triangles = new Triangle*[max_level];
+		triangles = new Triangle*[max_level+1];
 		int nr_of_triangles = 20;
 		for (int i=0;i<max_level;i++)
 		{
