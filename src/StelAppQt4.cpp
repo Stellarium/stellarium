@@ -177,20 +177,20 @@ void StelAppQt4::saveScreenShot() const
 	string shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
-        try
-        {
-                shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-                if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
-                {
-                        cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
-                        return;
-                }
-        }
-        catch(exception& e)
-        {
-                cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
-                return;
-        }
+	try
+	{
+		shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+		if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+		{
+			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+			return;
+		}
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
+		return;
+	}
 
 	string shotPath;
 	for(int j=0; j<1000; ++j)
@@ -204,7 +204,7 @@ void StelAppQt4::saveScreenShot() const
 	// TODO - if no more filenames available, don't just overwrite the last one
 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 	
-	cout << "saving screenshot in file: " << shotPath << endl;
+	cout << "Saving screenshot in file: " << shotPath << endl;
 	im.save(QString(shotPath.c_str()));
 }
 
