@@ -60,27 +60,6 @@ typedef unsigned short int Uint16;
 
 #define NR_OF_HIP 120416
 
-static
-const char *cat_file_names[] = {
-  "stars0.cat",
-  "stars1.cat",
-  "stars2.cat",
-  "stars3.cat",
-  "stars4.cat",
-  "stars5.cat",
-  "stars6.cat",
-  "stars7.cat",
-  "stars8.cat",
-  "stars9.cat",
-  0
-};
-
-static const char *spectral_file
- = "stars_hip_sp.cat";
-
-static const char *component_file
- = "stars_hip_component_ids.cat";
-
 class StringArray {
 public:
   StringArray(void) : array(0),size(0) {}
@@ -468,7 +447,8 @@ struct SpecialZoneData : public ZoneData {
 
 class ZoneArray {  // contains all zones of a given level
 public:
-  static ZoneArray *create(const StarMgr &hip_star_mgr,const char *fname);
+  static ZoneArray *create(const StarMgr &hip_star_mgr,const char *fname,
+                           LoadingBar &lb);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
   int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
@@ -502,7 +482,7 @@ protected:
 template<class Star>
 class SpecialZoneArray : public ZoneArray {
 public:
-  SpecialZoneArray(FILE *f,
+  SpecialZoneArray(FILE *f,LoadingBar &lb,
                    const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void) {
@@ -533,9 +513,9 @@ struct HipIndexStruct {
 
 class ZoneArray1 : public SpecialZoneArray<Star1> {
 public:
-  ZoneArray1(FILE *f,const StarMgr &hip_star_mgr,int level,
+  ZoneArray1(FILE *f,LoadingBar &lb,const StarMgr &hip_star_mgr,int level,
              int mag_min,int mag_range,int mag_steps)
-    : SpecialZoneArray<Star1>(f,hip_star_mgr,level,
+    : SpecialZoneArray<Star1>(f,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps) {}
 private:
   void updateHipIndex(HipIndexStruct hip_index[]) const;
@@ -1026,81 +1006,94 @@ int ReadInt(FILE *f,int &x) {
 }
 
 
-#define FILE_MAGIC 0xde0955a3
+#define FILE_MAGIC 0x835f040a
+#define MAX_MAJOR_FILE_VERSION 0
 
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
-                             const char *fname) {
+                             const char *fname,
+                             LoadingBar &lb) {
   ZoneArray *rval = 0;
   FILE *f = fopen(fname,"rb");
   if (f == 0) {
     fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",fname);
   } else {
-    int type,level,mag_min,mag_range,mag_steps;
-    if (ReadInt(f,type) < 0 ||
+    printf("ZoneArray::create(%s): ",fname);
+    int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
+    if (ReadInt(f,magic) < 0 ||
+        ReadInt(f,type) < 0 ||
+        ReadInt(f,major) < 0 ||
+        ReadInt(f,minor) < 0 ||
         ReadInt(f,level) < 0 ||
         ReadInt(f,mag_min) < 0 ||
         ReadInt(f,mag_range) < 0 ||
         ReadInt(f,mag_steps) < 0) {
-      fprintf(stderr,"ZoneArray::create(%s): bad file\n",fname);
+      printf("bad file, ");
+    } else if (((unsigned int)magic) != FILE_MAGIC) {
+      printf("no star catalogue file, ");
     } else {
-      type -= FILE_MAGIC;
-      printf("ZoneArray::create(%s): type: %d level: %d"
-             " mag_min: %d mag_range: %d mag_steps: %d stars: ",
-             fname,
-             type,level,mag_min,mag_range,mag_steps);
+      printf("type: %d major: %d minor: %d level: %d"
+             " mag_min: %d mag_range: %d mag_steps: %d; ",
+             type,major,minor,level,mag_min,mag_range,mag_steps);
       switch (type) {
         case 0:
-            // When this assertion fails you must redefine Star1
-            // for your compiler.
-            // Because your compiler does not pack the data,
-            // which is crucial for this application.
-          assert(sizeof(Star1) == 28);
-          rval = new ZoneArray1(f,hip_star_mgr,level,
-                                mag_min,mag_range,mag_steps);
-          if (rval == 0) {
-            fprintf(stderr,"ZoneArray::create(%s): no memory\n",
-                    fname);
+          if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
+            printf("unsupported version, ");
+          } else {
+              // When this assertion fails you must redefine Star1
+              // for your compiler.
+              // Because your compiler does not pack the data,
+              // which is crucial for this application.
+            assert(sizeof(Star1) == 28);
+            rval = new ZoneArray1(f,lb,hip_star_mgr,level,
+                                  mag_min,mag_range,mag_steps);
+            if (rval == 0) {
+              printf("no memory, ");
+            }
           }
           break;
         case 1:
-            // When this assertion fails you must redefine Star2
-            // for your compiler.
-            // Because your compiler does not pack the data,
-            // which is crucial for this application.
-          assert(sizeof(Star2) == 10);
-          rval = new SpecialZoneArray<Star2>(f,hip_star_mgr,level,
-                                             mag_min,mag_range,mag_steps);
-          if (rval == 0) {
-            fprintf(stderr,"ZoneArray::create(%s): no memory\n",
-                    fname);
+          if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
+            printf("unsupported version, ");
+          } else {
+              // When this assertion fails you must redefine Star2
+              // for your compiler.
+              // Because your compiler does not pack the data,
+              // which is crucial for this application.
+            assert(sizeof(Star2) == 10);
+            rval = new SpecialZoneArray<Star2>(f,lb,hip_star_mgr,level,
+                                               mag_min,mag_range,mag_steps);
+            if (rval == 0) {
+              printf("no memory, ");
+            }
           }
           break;
         case 2:
-            // When this assertion fails you must redefine Star3
-            // for your compiler.
-            // Because your compiler does not pack the data,
-            // which is crucial for this application.
-          assert(sizeof(Star3) == 6);
-          rval = new SpecialZoneArray<Star3>(f,hip_star_mgr,level,
-                                             mag_min,mag_range,mag_steps);
-          if (rval == 0) {
-            fprintf(stderr,"ZoneArray::create(%s): no memory\n",
-                    fname);
+          if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
+            printf("unsupported version, ");
+          } else {
+              // When this assertion fails you must redefine Star3
+              // for your compiler.
+              // Because your compiler does not pack the data,
+              // which is crucial for this application.
+            assert(sizeof(Star3) == 6);
+            rval = new SpecialZoneArray<Star3>(f,lb,hip_star_mgr,level,
+                                               mag_min,mag_range,mag_steps);
+            if (rval == 0) {
+              printf("no memory, ");
+            }
           }
           break;
         default:
-          fprintf(stderr,"ZoneArray::create(%s): bad file type\n",
-                  fname);
+          printf("bad file type, ");
           break;
       }
-      if (rval) {
-        if (!rval->isInitialized()) {
-          fprintf(stderr,"ZoneArray::create(%s): "
-                         "initialization failed\n",fname);
+      if (rval && rval->isInitialized()) {
+        printf("stars: %d\n",rval->getNrOfStars());
+      } else {
+        printf("initialization failed\n");
+        if (rval) {
           delete rval;
           rval = 0;
-        } else {
-          printf("%d\n",rval->getNrOfStars());
         }
       }
     }
@@ -1128,7 +1121,7 @@ struct TmpZoneData {
 
 
 template<class Star>
-SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
+SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,LoadingBar &lb,
                                          const StarMgr &hip_star_mgr,
                                          int level,
                                          int mag_min,int mag_range,
@@ -1137,6 +1130,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
                                   mag_min,mag_range,mag_steps),
                         stars(0) {
   if (nr_of_zones > 0) {
+//		lb.Draw(i / 8.0);
     zones = new SpecialZoneData<Star>[nr_of_zones];
     assert(zones!=0);
     {
@@ -1247,8 +1241,8 @@ wstring StarMgr::getSciName(int hip) {
   return L"";
 }
 
-void StarMgr::init(const InitParser& conf, LoadingBar& lb) {
-  load_data(lb);
+void StarMgr::init(const InitParser &conf,LoadingBar &lb) {
+  load_data(conf,lb);
   StelApp::getInstance().getTextureManager().setDefaultParams();
     // Load star texture no mipmap:
   starTexture = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
@@ -1314,40 +1308,52 @@ void StarMgr::setColorScheme(const InitParser& conf, const std::string& section)
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
 ***************************************************************************/
-void StarMgr::load_data(LoadingBar& lb)
+void StarMgr::load_data(const InitParser &conf,LoadingBar &lb)
 {
 	// Please do not init twice:
 	assert(max_geodesic_grid_level < 0);
 
 	cout << "Loading star data...";
-	for (int i=0; cat_file_names[i]; i++)
+
+	for (int i=0; i<100; i++)
 	{
-		lb.SetMessage(_("Loading catalog ") + StelUtils::intToWstring(i));
-		lb.Draw(i / 8.0);
-		try
-		{
-			ZoneArray *const z = ZoneArray::create(*this, StelApp::getInstance().getFileMgr().findFile(string("stars/default/")+cat_file_names[i]).c_str());
-			if (z)
+		char key_name[64];
+		sprintf(key_name,"cat_file_name_%02d",i);
+		const string cat_file_name = conf.get_str("stars",key_name,"");
+		if (!cat_file_name.empty()) {
+			lb.SetMessage(_("Loading catalog ")
+			              + StelUtils::stringToWstring(cat_file_name));
+			try
 			{
-				if (max_geodesic_grid_level < z->level)
+				ZoneArray *const z
+				   = ZoneArray::create(*this,
+				       StelApp::getInstance().getFileMgr()
+				         .findFile(string("stars/default/")+cat_file_name)
+				                    .c_str(),lb);
+				if (z)
 				{
-					max_geodesic_grid_level = z->level;
-				}
-				ZoneArray *&pos(zone_arrays[z->level]);
-				if (pos)
-				{
-					cerr << cat_file_names[i] << ", " << z->level << ": duplicate level" << endl;
-					delete z;
-				}
-				else
-				{
-					pos = z;
+					if (max_geodesic_grid_level < z->level)
+					{
+						max_geodesic_grid_level = z->level;
+					}
+					ZoneArray *&pos(zone_arrays[z->level]);
+					if (pos)
+					{
+						cerr << cat_file_name << ", " << z->level
+						     << ": duplicate level" << endl;
+						delete z;
+					}
+					else
+					{
+						pos = z;
+					}
 				}
 			}
-		}
-		catch (exception& e)
-		{
-			cerr << "error while loading " << cat_file_names[i] << ": " << e.what() << endl;
+			catch (exception& e)
+			{
+				cerr << "error while loading " << cat_file_name
+				     << ": " << e.what() << endl;
+			}
 		}
 	}
 
@@ -1363,24 +1369,47 @@ void StarMgr::load_data(LoadingBar& lb)
 		it->second->updateHipIndex(hip_index);
 	}
 
-	try
+	const string cat_hip_sp_file_name
+	  = conf.get_str("stars",cat_hip_sp_file_name,"");
+	if (cat_hip_sp_file_name.empty())
 	{
-		spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + spectral_file).c_str());
+		cerr << "ERROR: stars:cat_hip_sp_file_name not found" << endl;
 	}
-	catch (exception& e)
+	else
 	{
-		cerr << "ERROR while loading data from " << string("stars/default/") + spectral_file;
-		cerr << ": " << e.what() << endl;
+		try
+		{
+			spectral_array.initFromFile(StelApp::getInstance().getFileMgr()
+			        .findFile("stars/default/" + cat_hip_sp_file_name).c_str());
+		}
+		catch (exception& e)
+		{
+			cerr << "ERROR while loading data from "
+			     << ("stars/default/" + cat_hip_sp_file_name)
+		    	 << ": " << e.what() << endl;
+		}
 	}
-	
-	try
+
+	const string cat_hip_cids_file_name
+	  = conf.get_str("stars",cat_hip_cids_file_name,"");
+	if (cat_hip_cids_file_name.empty())
 	{
-		component_array.initFromFile(StelApp::getInstance().getFileMgr().findFile(string("stars/default/") + component_file).c_str());
+		cerr << "ERROR: stars:cat_hip_cids_file_name not found" << endl;
 	}
-	catch (exception& e)
+	else
 	{
-		cerr << "ERROR while loading data from " << string("stars/default/") + component_file;
-		cerr << ": " << e.what() << endl;
+		try
+		{
+			component_array.initFromFile(StelApp::getInstance().getFileMgr()
+			        .findFile("stars/default/" + cat_hip_cids_file_name)
+			        .c_str());
+		}
+		catch (exception& e)
+		{
+			cerr << "ERROR while loading data from "
+			     << ("stars/default/" + cat_hip_cids_file_name)
+		    	 << ": " << e.what() << endl;
+		}
 	}
 
 	last_max_search_level = max_geodesic_grid_level;
