@@ -26,6 +26,8 @@
 
 class GLWidget;
 
+//! @brief Implementation of StelApp based on a Qt4 main window
+//! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
 class StelAppQt4 : public StelApp
 {
 	friend class GLWidget;
@@ -38,7 +40,7 @@ public:
 	// Methods from StelApp
 	///////////////////////////////////////////////////////////////////////////	
 	
-	//! @brief Start the main loop and return when the program ends.
+	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop(void);
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)
@@ -56,6 +58,7 @@ public:
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
 
+	//! Empty in the case of StelAppQt4
 	virtual void init(void) {;}
 	
 	//! Get the width of the openGL screen
@@ -64,24 +67,29 @@ public:
 	//! Get the height of the openGL screen
 	virtual int getScreenH() const;
 	
-	class StelMainWindow* getMainWindow() {return mainWindow;}
-	
 	//! Terminate the application
 	virtual void terminateApplication(void);
 	
 	//! Alternate fullscreen mode/windowed mode if possible
 	virtual void toggleFullScreen();
 	
+	//! Get whether fullscreen is activated or not
 	bool getFullScreen() const;
+	
+	//! Return the instance of the main window of the program
+	class StelMainWindow* getMainWindow() {return mainWindow;}
+
 protected:
 
-	// Initialize openGL screen
+	//! Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 	
-	// Save a screen shot in the StelFileMgr::getScreenshotDir()
+	//! Save a screen shot in the StelFileMgr::getScreenshotDir()
 	virtual void saveScreenShot() const;
 	
+	//! Call this when you want to make the window (not) resizable
 	virtual void setResizable(bool resizable);
+
 private:
 	class StelMainWindow* mainWindow;
 	class GLWidget* winOpenGL;
