@@ -166,7 +166,7 @@ public:
 private:
  
     // Load all the stars from the files
-    void load_data(LoadingBar& lb);
+    void load_data(const InitParser &conf,LoadingBar &lb);
     
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const Projector* prj, const Navigator * nav);
