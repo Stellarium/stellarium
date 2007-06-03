@@ -5,78 +5,60 @@
 
 // change catalogue locations according to your needs:
 
-const char *hip_name = "cdsweb.u-strasbg.fr/ftp/cats/I/239/hip_main.dat";
-
-const char *tyc_names[]={
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.00",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.01",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.02",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.03",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.04",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.05",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.06",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.07",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.08",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.09",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.10",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.11",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.12",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.13",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.14",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.15",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.16",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.17",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.18",
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/tyc2.dat.19",
-  0
-};
-
 const char *nomad_names[]={
-  "/sde1/contents/NOMAD/n161a",
-  "/sde1/contents/NOMAD/n161b",
-  "/sde1/contents/NOMAD/n161c",
-  "/sde1/contents/NOMAD/n161d",
+  "/sdf1/contents/NOMAD/Nomad00.sml",
+  "/sdf1/contents/NOMAD/Nomad01.sml",
+  "/sdf1/contents/NOMAD/Nomad02.sml",
+  "/sdf1/contents/NOMAD/Nomad03.sml",
+  "/sdf1/contents/NOMAD/Nomad04.sml",
+  "/sdf1/contents/NOMAD/Nomad05.sml",
+  "/sdf1/contents/NOMAD/Nomad06.sml",
+  "/sdf1/contents/NOMAD/Nomad07.sml",
+  "/sdf1/contents/NOMAD/Nomad08.sml",
+  "/sdf1/contents/NOMAD/Nomad09.sml",
+  "/sdf1/contents/NOMAD/Nomad10.sml",
+  "/sdf1/contents/NOMAD/Nomad11.sml",
+  "/sdf1/contents/NOMAD/Nomad12.sml",
+  "/sdf1/contents/NOMAD/Nomad13.sml",
+  "/sdf1/contents/NOMAD/Nomad14.sml",
+  "/sdf1/contents/NOMAD/Nomad15.sml",
+  "/sdf1/contents/NOMAD/Nomad16.sml",
   0
 };
 
-
-const char *suppl_names[]={
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/suppl_1.dat",
-  0, // suppl_2 contains bad stars from Tyc1
-  "cdsweb.u-strasbg.fr/ftp/cats/I/259/suppl_2.dat",
-  0
-};
 
 
 #define NR_OF_HIP 120416
 
 #define MAX_HIP_LEVEL 2
 #define MAX_TYC_LEVEL 4
-#define MAX_LEVEL 7
+#define MAX_LEVEL 9
 
 static
 const char *output_file_names[MAX_LEVEL+1] = {
-  "/sde1/contents/stars0.cat",
-  "/sde1/contents/stars1.cat",
-  "/sde1/contents/stars2.cat",
-  "/sde1/contents/stars3.cat",
-  "/sde1/contents/stars4.cat",
-  "/sde1/contents/stars5.cat",
-  "/sde1/contents/stars6.cat",
-  "/sde1/contents/stars7.cat"
+  "stars0.cat",
+  "stars1.cat",
+  "stars2.cat",
+  "stars3.cat",
+  "stars4.cat",
+  "stars5.cat",
+  "stars6.cat",
+  "stars7.cat",
+  "stars8.cat",
+  "stars9.cat"
 };
 
 static
-const char *component_ids_filename = "/sde1/contents/stars_hip_component_ids.cat";
+const char *component_ids_filename = "stars_hip_component_ids.cat";
 
 static
-const char *sp_filename = "/sde1/contents/stars_hip_sp.cat";
+const char *sp_filename = "stars_hip_sp.cat";
 
 static
 const double level_mag_limit[MAX_LEVEL+1] = {
   6,7.5,9,
   10.5,12,
-  13.5,15,16.5
+  13.5,15,16.5,18,19.5
 };
 
 
@@ -889,7 +871,9 @@ struct ZoneData {
                        int tyc1,int tyc2,int tyc3,
                        int hip,const char *component_ids,
                        double x0,double x1,double dx0,double dx1,
-                       double mag,double b_v,bool &does_not_fit) = 0;
+                       double mag,double b_v,
+                       double plx,const char *sp,
+                       bool &does_not_fit) = 0;
   void writeInfoToOutput(FILE *f) const;
   virtual void writeStarsToOutput(FILE *f) = 0;
   Vector center;
@@ -904,7 +888,8 @@ struct HipZoneData : public ZoneData {
                        int tyc1,int tyc2,int tyc3,
                        int hip,const char *component_ids,
                        double x0,double x1,double dx0,double dx1,
-                       double mag,double b_v,bool &does_not_fit);
+                       double mag,double b_v,double plx,const char *sp,
+                       bool &does_not_fit);
   void writeStarsToOutput(FILE *f);
 };
 
@@ -978,7 +963,8 @@ struct TycZoneData : public ZoneData {
                        int tyc1,int tyc2,int tyc3,
                        int hip,const char *component_ids,
                        double x0,double x1,double dx0,double dx1,
-                       double mag,double b_v,bool &does_not_fit);
+                       double mag,double b_v,double plx,const char *sp,
+                       bool &does_not_fit);
   void writeStarsToOutput(FILE *f);
 };
 
@@ -989,7 +975,8 @@ struct FaintZoneData : public ZoneData {
                        int tyc1,int tyc2,int tyc3,
                        int hip,const char *component_ids,
                        double x0,double x1,double dx0,double dx1,
-                       double mag,double b_v,bool &does_not_fit);
+                       double mag,double b_v,double plx,const char *sp,
+                       bool &does_not_fit);
   void writeStarsToOutput(FILE *f);
 };
 
@@ -1002,10 +989,8 @@ public:
               double ra, // degrees
               double dec, // degrees
               double pma,double pmd,
-              double mag,double b_v);
-  int addData(int hip,const char *component_ids,double plx,const char *sp,
-              double ra,double dec,double pm_ra,double pm_dec,
-              double mag,double b_v);
+              double mag,double b_v,
+              double plx,const char *sp);
   void writeOutput(const char *fnames[]);
 private:
   GeodesicGrid grid;
@@ -1028,6 +1013,7 @@ private:
                      double dec, // degrees
                      double pma,double pmd,
                      double mag,double b_v,
+                     double plx,const char *sp,
                      bool &does_not_fit);
     void writeOutput(const char *fname);
   };
@@ -1273,7 +1259,8 @@ HipStar *FaintZoneData::add(int level,
                        int tyc1,int tyc2,int tyc3,
                        int hip,const char *component_ids,
                        double x0,double x1,double dx0,double dx1,
-                       double mag,double b_v,bool &does_not_fit) {
+                       double mag,double b_v,double plx,const char *sp,
+                       bool &does_not_fit) {
   if (mag>=level_mag_limit[level]) {
     cout << "too faint" << endl;
     exit(-1);
@@ -1294,7 +1281,8 @@ HipStar *TycZoneData::add(int level,
                           int tyc1,int tyc2,int tyc3,
                           int hip,const char *component_ids,
                           double x0,double x1,double dx0,double dx1,
-                          double mag,double b_v,bool &does_not_fit) {
+                          double mag,double b_v,double plx,const char *sp,
+                          bool &does_not_fit) {
   TycStar s;
   s.x0  = ((int)floor(0.5+x0*((1<<19)-1))); // 20 bit signed
   s.b_v = BvToColorIndex(b_v);       // 0..127: 7 Bit unsigned
@@ -1322,7 +1310,8 @@ HipStar *HipZoneData::add(int level,
                           int tyc1,int tyc2,int tyc3,
                           int hip,const char *component_ids,
                           double x0,double x1,double dx0,double dx1,
-                          double mag,double b_v,bool &does_not_fit) {
+                          double mag,double b_v,double plx,const char *sp,
+                          bool &does_not_fit) {
   HipStar s;
   s.x0  = ((int)floor(0.5+x0*((1<<31)-1))); // 32 bit signed
   s.b_v = BvToColorIndex(b_v);       // 0..127: 7 Bit unsigned
@@ -1340,7 +1329,8 @@ HipStar *HipZoneData::add(int level,
   s.component_ids = component_ids;
   s.comp_ids_int = 0;
   s.sp_int = 0;
-  s.plx = 0;
+  s.plx = (int)floor(0.5+100.0*plx);
+  s.sp = sp;
   stars.push_back(s);
   does_not_fit = false;
   return &(stars.back());
@@ -1350,12 +1340,13 @@ HipStar *HipZoneData::add(int level,
 HipStar *Accumulator::ZoneArray::addStar(
                            int tyc1,int tyc2,int tyc3,int hip,const char *component_ids,
                            double ra,double dec,double pma,double pmd,
-                           double mag,double b_v,
+                           double mag,double b_v,double plx,const char *sp,
                            bool &does_not_fit) {
   ra *= (M_PI/180.0);
   dec *= (M_PI/180.0);
   if (ra < 0 || ra >= 2*M_PI || dec < -0.5*M_PI || dec > 0.5*M_PI) {
-    cerr << "ZoneData::addStar: bad ra/dec: " << ra << ',' << dec << endl;
+    cerr << "ZoneArray(l=" << level << ")::addStar: "
+            "bad ra/dec: " << ra << ',' << dec << endl;
     exit (-1);
   }
   const double cdec = cos(dec);
@@ -1378,7 +1369,7 @@ HipStar *Accumulator::ZoneArray::addStar(
 
 //cout << "Accumulator::ZoneArray(l=" << level << ")::addStar: " << zone << endl;
   HipStar *rval = z.add(level,tyc1,tyc2,tyc3,hip,component_ids,
-                        x0,x1,dx0,dx1,mag,b_v,does_not_fit);
+                        x0,x1,dx0,dx1,mag,b_v,plx,sp,does_not_fit);
   if (!does_not_fit) nr_of_stars++;
 //cout << "Accumulator::ZoneArray(l=" << level << ")::addStar: 999";
   return rval;
@@ -1386,7 +1377,7 @@ HipStar *Accumulator::ZoneArray::addStar(
 
 int Accumulator::addStar(int tyc1,int tyc2,int tyc3,int hip,const char *component_ids,
                          double ra,double dec,double pma,double pmd,
-                         double mag,double b_v) {
+                         double mag,double b_v,double plx,const char *sp) {
 //  const int packed_hip = PackHip(hip,component_ids);
 //  const int packed_tyc = PackTyc(tyc1,tyc2,tyc3);
 
@@ -1409,36 +1400,15 @@ int Accumulator::addStar(int tyc1,int tyc2,int tyc3,int hip,const char *componen
   bool does_not_fit;
   HipStar *s = zone_array[l]->addStar(tyc1,tyc2,tyc3,hip,component_ids,
                                       ra,dec,pma,pmd,
-                                      mag,b_v,does_not_fit);
+                                      mag,b_v,plx,sp,does_not_fit);
   if (does_not_fit) s = zone_array[MAX_HIP_LEVEL]
                             ->addStar(tyc1,tyc2,tyc3,hip,component_ids,
                                       ra,dec,pma,pmd,
-                                      mag,b_v,does_not_fit);
+                                      mag,b_v,plx,sp,does_not_fit);
   if (s) hip_index[hip].push_back(s);
   return 0;
 }
 
-int Accumulator::addData(int hip,const char *component_ids,
-                         double plx,const char *sp,
-                         double ra,double dec,double pm_ra,double pm_dec,
-                         double mag,double b_v) {
-  if (0<hip && hip<=NR_OF_HIP) {
-    if (hip_index[hip].empty()) {
-      if (mag > 1000) {
-        cout << "missing tycho2, bad hip: " << hip << endl;
-        return -1;
-      }
-      addStar(0,0,0,hip,component_ids,ra,dec,pm_ra,pm_dec,mag,b_v);
-//      cout << "missing tycho2, good hip: " << hip << endl;
-    }
-    for (list<HipStar*>::const_iterator it(hip_index[hip].begin());
-         it!=hip_index[hip].end();it++) {
-      HipStar *const s = *it;
-      if (s) s->setPlxSp(plx,sp);
-    }
-  }
-  return 0;
-}
 
 
 
@@ -1452,12 +1422,15 @@ int Accumulator::addData(int hip,const char *component_ids,
 
 
 
-#define FILE_MAGIC 0xde0955a3
+#define FILE_MAGIC 0x835f040a
 
 void Accumulator::HipZoneArray::writeHeaderToOutput(FILE *f) const {
   cout << "Accumulator::HipZoneArray(" << level << ")::writeHeaderToOutput: "
        << nr_of_stars << endl;
-  WriteInt(f,FILE_MAGIC+0); // type
+  WriteInt(f,FILE_MAGIC);
+  WriteInt(f,0); // type
+  WriteInt(f,0); // major version
+  WriteInt(f,0); // minor version
   WriteInt(f,level);
 //  WriteInt(f,scale_int);
   if (level == 0) {
@@ -1472,7 +1445,10 @@ void Accumulator::HipZoneArray::writeHeaderToOutput(FILE *f) const {
 void Accumulator::TycZoneArray::writeHeaderToOutput(FILE *f) const {
   cout << "Accumulator::TycZoneArray(" << level << ")::writeHeaderToOutput: "
        << nr_of_stars << endl;
-  WriteInt(f,FILE_MAGIC+1); // type
+  WriteInt(f,FILE_MAGIC);
+  WriteInt(f,1); // type
+  WriteInt(f,0); // major version
+  WriteInt(f,0); // minor version
   WriteInt(f,level);
 //  WriteInt(f,scale_int);
   WriteInt(f,(int)floor(0.5+1000.0*level_mag_limit[level-1])); // min_mag
@@ -1484,7 +1460,10 @@ void Accumulator::TycZoneArray::writeHeaderToOutput(FILE *f) const {
 void Accumulator::FaintZoneArray::writeHeaderToOutput(FILE *f) const {
   cout << "Accumulator::FaintZoneArray(" << level << ")::writeHeaderToOutput: "
        << nr_of_stars << endl;
-  WriteInt(f,FILE_MAGIC+2); // type
+  WriteInt(f,FILE_MAGIC);
+  WriteInt(f,2); // type
+  WriteInt(f,0); // major version
+  WriteInt(f,0); // minor version
   WriteInt(f,level);
 //  WriteInt(f,scale_int);
   WriteInt(f,(int)floor(0.5+1000.0*level_mag_limit[level-1])); // min_mag
@@ -1540,469 +1519,36 @@ void Accumulator::writeOutput(const char *fnames[]) {
 
 
 
-int ReadEmptyString(const char *s) {
-  if (s) {
-    while (*s) {if (*s!=' ') return 0;s++;}
-  }
-  return 1;
-}
-
-int ReadBlankOrDouble(const char *s,double *x) {
-  if (s==0) return -1;
-  if (ReadEmptyString(s)) {*x=-9999999.99;return 0;}
-  if (1==sscanf(s,"%lf",x)) {
-//    printf("\"%s\":%f\n",s,*x);
-    return 0;
-  }
-  return -2;
-}
-
-int ReadTyc2File(const char *fname,Accumulator &accu) {
-  char buff[208];
-  int count;
+int ReadHipTycFile(Accumulator &accu) {
+  int count = 0;
   FILE *f;
-  int tyc1,tyc2,tyc3,hip;
-  char component_ids[4] = {'\0','\0','\0','\0'};
-  double ra,dec,pma,pmd,bt,vt,mag,b_v;
-  f = fopen(fname,"rb");
-  if (f == 0) {
-    fprintf(stderr,"Could not open file \"%s\".\n",fname);
-    exit(-1);
-  }
-  count = 0;
-  while (207==fread(buff,1,207,f)) {
-    if (buff[4]==' ' && buff[10]==' ' &&
-        buff[12]=='|' && buff[14]=='|' && buff[27]=='|' && buff[40]=='|' &&
-        buff[48]=='|' && buff[56]=='|' && buff[60]=='|' && buff[64]=='|' &&
-        buff[69]=='|' && buff[74]=='|' && buff[82]=='|' && buff[90]=='|' &&
-        buff[93]=='|' && buff[97]=='|' && buff[101]=='|' && buff[105]=='|' &&
-        buff[109]=='|' && buff[116]=='|' && buff[122]=='|' && buff[129]=='|' &&
-        buff[135]=='|' && buff[139]=='|' && buff[141]=='|' && buff[151]=='|' &&
-        buff[164]=='|' && buff[177]=='|' && buff[182]=='|' && buff[187]=='|' &&
-        buff[193]=='|' && buff[199]=='|' && buff[201]=='|' &&
-        buff[206]==0x0A) {
-      buff[12]='\0';
-      if (3!=sscanf(buff,"%d%d%d",&tyc1,&tyc2,&tyc3)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 1\n",fname,count);
-        exit(-1);
-      }
-      if (tyc1<1 || tyc2<1 || tyc3<1 ||
-          tyc1>9537 || tyc2>12121 || tyc3>3) {
-        fprintf(stderr,"File \"%s\", record %d: Error 2\n",fname,count);
-        exit(-1);
-      }
-      component_ids[0] = buff[148];
-      component_ids[1] = buff[149];
-      component_ids[2] = buff[150];
-      if (component_ids[2] == ' ') {
-        component_ids[2] = '\0';
-        if (component_ids[1] == ' ') {
-          component_ids[1] = '\0';
-          if (component_ids[0] == ' ') {
-            component_ids[0] = '\0';
-          }
-        }
-      }
-      buff[148] = '\0';
-      if (1!=sscanf(buff+142,"%d",&hip)) {
-        if (buff[142]!=' '||buff[143]!=' '||buff[144]!=' '||
-            buff[145]!=' '||buff[146]!=' '||buff[147]!=' '||
-            component_ids[0] != '\0') {
-          fprintf(stderr,"File \"%s\", record %d: Error 3\n",fname,count);
-          exit(-1);
-        } else {
-          hip = 0;
-        }
-      } else {
-        if (hip<1 || hip>120404) {
-          fprintf(stderr,"File \"%s\", record %d: Error 4\n",fname,count);
-          exit(-1);
-        }
-      }
-      buff[27]=buff[40]=buff[48]=' ';buff[56]='\0';
-
-      if (buff[13]=='X' || buff[13]=='P') {
-        buff[164]=buff[177]=' ';
-        if (2!=sscanf(buff+152,"%lf%lf",&ra,&dec)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 5\n",fname,count);
-          exit(-1);
-        }
-        if (buff[13]=='P') {
-            // do not use the "photocentre of two Tycho-2 entries":
-          if (2!=sscanf(buff+41,"%lf%lf",&pma,&pmd)) {
-            fprintf(stderr,"File \"%s\", record %d: Error 6\n",fname,count);
-            exit(-1);
-          }
-            // simple proper motion correction:
-          buff[182]=' ';buff[187]='\0';
-          double EpRA,EpDE;
-          if (2!=sscanf(buff+178,"%lf%lf",&EpRA,&EpDE)) {
-            fprintf(stderr,"File \"%s\", record %d: Error 7\n",fname,count);
-            exit(-1);
-          }
-          EpRA += 1990.0;
-          EpDE += 1990.0;
-          ra += (2000.0-EpRA)*(0.001/3600)*pma*cos(dec*M_PI/180);
-          dec += (2000.0-EpDE)*(0.001/3600)*pmd;
-          if (ra < 0.0) ra+=360.0;
-          else if (ra >= 360.0) ra-=360.0;
-          if (dec < -90.0 || dec > 90.0) {
-            fprintf(stderr,"File \"%s\", "
-                    "record %d: no real error, just bad dec, I am sorry.\n",
-                    fname,count);
-            exit(-1);
-          }
-        } else {
-          if (!ReadEmptyString(buff+15)) {
-            fprintf(stderr,"File \"%s\", record %d: Error 8\n",fname,count);
-            exit(-1);
-          }
-          pma = pmd = 0.0;
-        }
-      } else {
-        if (4!=sscanf(buff+15,"%lf%lf%lf%lf",&ra,&dec,&pma,&pmd)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 10\n",fname,count);
-          exit(-1);
-        }
-      }
-
-      buff[116]='\0';
-      if (ReadBlankOrDouble(buff+110,&bt)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 11\n",fname,count);
-        exit(-1);
-      }
-      buff[129]='\0';
-      if (ReadBlankOrDouble(buff+123,&vt)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 12\n",fname,count);
-        exit(-1);
-      }
-      if (bt>-10.0)
-        if (vt>-10.0) {
-          mag = vt -0.090*(bt-vt);  // Johnson photometry V
-          b_v = 0.850*(bt-vt);      // Johnson photometry B-V
-        } else {
-          mag = bt;
-          b_v = 0.73;
-        }
-      else
-        if (vt>-10.0) {
-          mag = vt;
-          b_v = 0.73;
-        } else {
-          fprintf(stderr,"File \"%s\", record %d: Error 11\n",fname,count);
-          exit(-1);
-        }
-//      printf("%04lu %05lu %lu %12.8f %12.8f %7.1f %7.1f %6.3f %6.3f\n",
-//             tyc1,tyc2,tyc3,ra,dec,pma,pmd,bt,vt);
-      const int rc = accu.addStar(tyc1,tyc2,tyc3,hip,component_ids,
-                                  ra, // degrees
-                                  dec, // degrees
-                                  pma,pmd,mag,b_v);
-      if (rc < 0) {
-        fprintf(stderr,"File \"%s\", record %d: Error 12 %d %d \"%s\"\n",
-                fname,count,rc,hip,component_ids);
-        exit(-1);
-      }
-    } else {
-      fprintf(stderr,"File \"%s\", record %d: wrong format\n",fname,count);
-      exit(-1);
-    }
-    count++;
-  }
-  fclose(f);
-  return count;
-}
-
-
-int ReadTyc2SupplFile(const char *fname,Accumulator &accu) {
-  char buff[124];
-  int count;
-  FILE *f;
-  int tyc1,tyc2,tyc3,hip;
-  char component_ids[4] = {'\0','\0','\0','\0'};
-  double ra,dec,pma,pmd,bt,vt,mag,b_v;
+  const char *fname = "HipTyc";
   f = fopen(fname,"r");
   if (f == 0) {
     fprintf(stderr,"Could not open file \"%s\".\n",fname);
     exit(-1);
   }
-  count = 0;
-  while (fgets(buff,124,f)) {
-    if (buff[4]==' ' && buff[10]==' ' &&
-        buff[12]=='|' && buff[14]=='|' && buff[27]=='|' && buff[40]=='|' &&
-        buff[48]=='|' && buff[56]=='|' && buff[62]=='|' && buff[68]=='|' &&
-        buff[74]=='|' && buff[80]=='|' && buff[82]=='|' && buff[89]=='|' &&
-        buff[95]=='|' && buff[102]=='|' && buff[108]=='|' && buff[112]=='|' &&
-        buff[114]=='|') {
-      buff[12]='\0';
-      if (3!=sscanf(buff,"%d%d%d",&tyc1,&tyc2,&tyc3)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 1\n",fname,count);
-        exit(-1);
-      }
-      if (tyc1<1 || tyc2<1 || tyc3<1 ||
-          tyc1>9537 || tyc2>12121 || tyc3>4) {
-        fprintf(stderr,"File \"%s\", record %d: Error 2\n",fname,count);
-        exit(-1);
-      }
-      component_ids[0] = buff[121];
-      if (component_ids[0] == ' ') {
-        component_ids[0] = '\0';
-      }
-      buff[121] = '\0';
-      if (1!=sscanf(buff+115,"%d",&hip)) {
-        if (buff[115]!=' '||buff[116]!=' '||buff[117]!=' '||
-            buff[118]!=' '||buff[119]!=' '||buff[120]!=' '||
-            component_ids[0] != '\0') {
-          fprintf(stderr,"File \"%s\", record %d: Error 3\n",fname,count);
-          exit(-1);
-        } else {
-          hip = 0;
-        }
-      } else {
-        if (hip<1 || hip>120404) {
-          fprintf(stderr,"File \"%s\", record %d: Error 4\n",fname,count);
-          exit(-1);
-        }
-      }
-      buff[27]=' ';buff[40]='\0';
-      if (2!=sscanf(buff+15,"%lf%lf",&ra,&dec)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 5\n",fname,count);
-        exit(-1);
-      }
-      buff[48]='\0';
-      if (ReadBlankOrDouble(buff+41,&pma)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 6\n",fname,count);
-        exit(-1);
-      }
-      buff[56]='\0';
-      if (ReadBlankOrDouble(buff+49,&pmd)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 7\n",fname,count);
-        exit(-1);
-      }
-      if (pma<-1000000.0)
-        if (pmd<-1000000.0) {pma=pmd=0.0;}
-        else {
-          fprintf(stderr,"File \"%s\", record %d: Error 8\n",fname,count);
-          exit(-1);
-        }
-      else
-        if (pmd<-1000000.0) {
-          fprintf(stderr,"File \"%s\", record %d: Error 9\n",fname,count);
-          exit(-1);
-        }
-      buff[89]='\0';
-      if (ReadBlankOrDouble(buff+83,&bt)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 10\n",fname,count);
-        exit(-1);
-      }
-      buff[102]='\0';
-      if (ReadBlankOrDouble(buff+96,&vt)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 11\n",fname,count);
-        exit(-1);
-      }
-      switch (buff[81]) {
-        case ' ':
-          if (bt<-10 || vt<-10) {
-            fprintf(stderr,"File \"%s\", record %d: Error 12\n",fname,count);
-            exit(-1);
-          }
-          mag = vt -0.090*(bt-vt);  // Johnson photometry V
-          b_v = 0.850*(bt-vt);      // Johnson photometry B-V
-          break;
-        case 'B':
-          if (bt<-10 || vt>-10) {
-            fprintf(stderr,"File \"%s\", record %d: Error 13\n",fname,count);
-            exit(-1);
-          }
-          mag = bt;
-          b_v = 0.73;
-          break;
-        case 'V':case 'H':
-          if (bt>-10 || vt<-10) {
-            fprintf(stderr,"File \"%s\", record %d: Error 14\n",fname,count);
-            exit(-1);
-          }
-          mag = vt;
-          b_v = 0.73;
-          break;
-        default:
-          fprintf(stderr,"File \"%s\", record %d: Error 15\n",fname,count);
-          exit(-1);
-      }
-//      printf("%04lu %05lu %lu %12.8f %12.8f %7.1f %7.1f %6.3f %6.3f\n",
-//             tyc1,tyc2,tyc3,ra,dec,pma,pmd,bt,vt);
-      if (accu.addStar(tyc1,tyc2,tyc3,hip,component_ids,
-                       ra, // degrees
-                       dec, // degrees
-                       pma,pmd,mag,b_v) < 0) {
-        fprintf(stderr,"File \"%s\", record %d: Error 16\n",fname,count);
-        exit(-1);
-      }
-    } else {
-      fprintf(stderr,"File \"%s\", record %d: wrong format\n",fname,count);
-      exit(-1);
-    }
-    count++;
-  }
-  fclose(f);
-  return count;
-}
 
-int ReadHipFile(const char *fname,Accumulator &accu) {
-  char buff[452];
-  int count;
-  FILE *f;
-  int hip;
-  char sp[13] = {'\0','\0','\0','\0','\0','\0',
-                 '\0','\0','\0','\0','\0','\0','\0'};
-  double plx;
-  f = fopen(fname,"rb");
-  if (f == 0) {
-    fprintf(stderr,"Could not open file \"%s\".\n",fname);
-    exit(-1);
-  }
-  count = 0;
-  while (451==fread(buff,1,451,f)) {
-    if (buff[1]=='|' && buff[14]=='|' &&
-        buff[78]=='|' && buff[86]=='|' &&
-        buff[434]=='|' && buff[447]=='|' &&
-        buff[450]==0x0A) {
-      buff[14] = '\0';
-      if (1!=sscanf(buff+2,"%d",&hip)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 3\n",fname,count);
-          exit(-1);
-      }
-      if (hip<1 || hip>NR_OF_HIP) {
-        fprintf(stderr,"File \"%s\", record %d: Error 4\n",fname,count);
-        exit(-1);
-      }
-
-      char component_ids[3];
-      component_ids[0] = buff[352];
-      component_ids[1] = buff[353];
-      component_ids[2] = '\0';
-      if (component_ids[1] == ' ') {
-        component_ids[1] = '\0';
-        if (component_ids[0] == ' ') {
-          component_ids[0] = '\0';
-        }
-      }
-
-      double pm_ra,pm_dec;
-      buff[95]='\0';
-      if (1!=sscanf(buff+87,"%lf",&pm_ra)) pm_ra = 0.0;
-      buff[104]='\0';
-      if (1!=sscanf(buff+96,"%lf",&pm_dec)) pm_dec = 0.0;
-      
-      buff[63]='\0';
-      double ra;
-      if (1!=sscanf(buff+51,"%lf",&ra)) {
-        buff[28]='\0';
-        if (buff[19]!=' ' || buff[22]!=' ' || buff[25]!='.') {
-          fprintf(stderr,"File \"%s\", record %d: Error 5\n",fname,count);
-          exit(-1);
-        }
-        buff[25] = ' ';
-        int h,m,s,c;
-        if (4!=sscanf(buff+17,"%d%d%d%d",&h,&m,&s,&c)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 6\n",fname,count);
-          exit(-1);
-        }
-        h *= 60;
-        h += m;
-        h *= 60;
-        h += s;
-        h *= 100;
-        h += c;
-        ra = (360/24)*h / (double)(60*60*100);
-      }
-      
-      buff[76]='\0';
-      double dec;
-      if (1!=sscanf(buff+64,"%lf",&dec)) {
-        buff[40]='\0';
-        if (buff[32]!=' ' || buff[35]!=' ' || buff[38]!='.') {
-          fprintf(stderr,"File \"%s\", record %d: Error 7\n",fname,count);
-          exit(-1);
-        }
-        buff[38] = ' ';
-        int d,m,s,c;
-        if (4!=sscanf(buff+30,"%d%d%d%d",&d,&m,&s,&c)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 8\n",fname,count);
-          exit(-1);
-        }
-        d *= 60;
-        d += m;
-        d *= 60;
-        d += s;
-        d *= 10;
-        d += c;
-        if (buff[29]=='-') {
-          d = -d;
-        } else if (buff[29]!='+') {
-          fprintf(stderr,"File \"%s\", record %d: Error 9\n",fname,count);
-          exit(-1);
-        }
-        dec = d / (double)(60*60*10);
-      }
-      ChangeEpoch(2000.0-1991.25,ra,dec,pm_ra,pm_dec);
-
-      buff[223]='\0';
-      buff[236]='\0';
-      double bt,vt;
-      if (1!=sscanf(buff+217,"%lf",&bt) ||
-          1!=sscanf(buff+230,"%lf",&vt)) {
-        bt = vt = 9999.999;
-      }
-
-      double mag;
-      buff[46]='\0';
-      if (1!=sscanf(buff+41,"%lf",&mag)) {
-        if (bt<1000 && vt<1000) {
-          mag = vt -0.090*(bt-vt);  // Johnson photometry V
-        } else {
-            // no magnitude at all
-          mag = 9999.999;
-        }
-      }
-
-      double b_v;
-      buff[251]='\0';
-      if (1!=sscanf(buff+245,"%lf",&b_v)) {
-        if (!ReadEmptyString(buff+245)) {
-          fprintf(stderr,"File \"%s\", record %d: Error 11\n",fname,count);
-          exit(-1);
-        }
-        if (bt<1000 && vt<1000) {
-          b_v = 0.850*(bt-vt);      // Johnson photometry B-V
-        } else {
-          b_v = 0.73;
-        }
-      }
-
-      buff[86]='\0';
-      if (ReadEmptyString(buff+79)) plx = 0.0;
-      else if (1!=sscanf(buff+79,"%lf",&plx)) {
-        fprintf(stderr,"File \"%s\", record %d: Error 12\n",fname,count);
-        exit(-1);
-      }
-      for (int i=0;i<12;i++) sp[i] = buff[435+i];
-      for (int i=11;i>=0;i--) {
-        if (sp[i] == ' ') sp[i] = '\0';
-        else break;
-      }
-      const int rc = accu.addData(hip,component_ids,plx,sp,
-                                  ra,dec,pm_ra,pm_dec,mag,b_v);
+  int hip,tyc1,tyc2,tyc3;
+  char cids[32];
+  char sp[256];
+  int mag,b_v,VarFlag;
+  double ra,dec,Plx,pm_ra,pm_dec;
+  while (14==fscanf(f,"%d%d%d%d%s%d%lf%lf%lf%lf%lf%d%d%s",
+                    &hip,&tyc1,&tyc2,&tyc3,cids,&VarFlag,
+                    &ra,&dec,&Plx,&pm_ra,&pm_dec,&mag,&b_v,sp)) {
+      const int rc = accu.addStar(tyc1,tyc2,tyc3,hip,
+                                  cids[0]=='?'?"":cids,
+                                  ra, // degrees
+                                  dec, // degrees
+                                  pm_ra,pm_dec,0.001*mag,0.001*b_v,
+                                  Plx,sp[0]=='?'?"":sp);
       if (rc < 0) {
           // never mind: propably no magnitude for Hiparcos star
 //        fprintf(stderr,"File \"%s\", record %d: Error 13 %d %d \"%s\"\n",
 //                fname,count,rc,hip,sp);
 //        exit(-1);
       }
-    } else {
-      fprintf(stderr,"File \"%s\", record %d: wrong format\n",fname,count);
-      exit(-1);
-    }
     count++;
   }
   fclose(f);
@@ -2010,18 +1556,33 @@ int ReadHipFile(const char *fname,Accumulator &accu) {
 }
 
 
+const unsigned short int SHORT_ASTSRCBIT0 = 0x0001; // Astrometry source bit 0
+const unsigned short int SHORT_ASTSRCBIT1 = 0x0002; // Astrometry source bit 1
+const unsigned short int SHORT_ASTSRCBIT2 = 0x0004; // Astrometry source bit 2
+const unsigned short int SHORT_UBBIT   = 0x0008;
+const unsigned short int SHORT_TMBIT   = 0x0010;
+const unsigned short int SHORT_XRBIT   = 0x0020;
+const unsigned short int SHORT_IUCBIT  = 0x0040;
+const unsigned short int SHORT_ITYBIT  = 0x0080;
+const unsigned short int SHORT_OMAGBIT = 0x0100;
+const unsigned short int SHORT_EMAGBIT = 0x0200;
+const unsigned short int SHORT_TMONLY  = 0x0400;
+const unsigned short int SHORT_SPIKE   = 0x0800;
+const unsigned short int SHORT_TYCONF  = 0x1000;
+const unsigned short int SHORT_BSCONF  = 0x2000;
+const unsigned short int SHORT_BSART   = 0x4000;
+const unsigned short int SHORT_USEME   = 0x8000;
 
-struct NOMAD_Record {
-  int ra,spd,dev_ra,dev_spd;
-  int pm_ra,pm_spd,dev_pm_ra,dev_pm_spd;
-  int epoch_ra,epoch_spd;
-  int b,v,r,j,h,k;
-  int usno_id,_two_mass_id,yb6_id,ucac2_id,tycho2_id;
-  int flags;
+struct Short_NOMAD_Record {
+  int ra,spd,pm_ra,pm_spd;
+  short int b,v,r;
+  unsigned short int flags;
 };
 
+
+
 #define READ_SIZE 10000
-static NOMAD_Record buff[READ_SIZE];
+static Short_NOMAD_Record buff[READ_SIZE];
 
 void ReadNOMADFile(const char *fname,Accumulator &accu) {
   int count;
@@ -2033,7 +1594,7 @@ void ReadNOMADFile(const char *fname,Accumulator &accu) {
   }
   int total = 0;
   do {
-    count = fread(buff,sizeof(NOMAD_Record),READ_SIZE,f);
+    count = fread(buff,sizeof(Short_NOMAD_Record),READ_SIZE,f);
     total += count;
     printf("\rfread(%s,...) returned %6d, total = %8d",
            fname,count,total);
@@ -2047,17 +1608,21 @@ void ReadNOMADFile(const char *fname,Accumulator &accu) {
           if (buff[i].r >= 30000) {
 //          cerr << "no magnitude at all" << endl;
           } else {
-            mag = buff[i].r;
-            b_v = 0;
+            mag = buff[i].r + 3499; // just an assumption
+            b_v = 3499;
           }
         } else {
-          mag = buff[i].b;
-          b_v = 0;
+          mag = buff[i].b + 500; // just an assumption
+          b_v = -500;
         }
       } else {
         mag = buff[i].v;
         if (buff[i].b >= 30000) {
-          b_v = 0;
+          if (buff[i].r >= 30000) {
+            b_v = 0;
+          } else {
+            b_v = buff[i].v-buff[i].r; // desperate
+          }
         } else {
           b_v = buff[i].b-buff[i].v;
         }
@@ -2067,37 +1632,25 @@ void ReadNOMADFile(const char *fname,Accumulator &accu) {
       if (buff[i].b < 30000) nr_of_measurements++;
       if (buff[i].v < 30000) nr_of_measurements++;
       if (buff[i].r < 30000) nr_of_measurements++;
-//      if (buff[i].j < 30000) nr_of_measurements++;
-//      if (buff[i].h < 30000) nr_of_measurements++;
-//      if (buff[i].k < 30000) nr_of_measurements++;
-      
-#define AST_SRC 0x00000007
-#define UBBIT 0x00001000
-#define SPIKE 0x02000000
-//USNO-B1.0 diffraction spike bit set
-#define USEME 0x20000000
 
-#define TMONLY 0x00800000
-// Object found only in 2MASS cat
-#define BSART 0x10000000
-//Faint source is bright star artifact
-
-      if (mag < 16500 && buff[i].tycho2_id==0 &&
-          ((buff[i].flags&USEME) ||
-           (((buff[i].flags&AST_SRC)!=1 ||
-              (((buff[i].flags&UBBIT)==0)
+      if (mag < 19500 &&
+          ((buff[i].flags&SHORT_USEME) ||
+           (
+           ((buff[i].flags&(SHORT_ASTSRCBIT0|SHORT_ASTSRCBIT1|SHORT_ASTSRCBIT2))!=1 ||
+              (((buff[i].flags&SHORT_UBBIT)==0)
                &&
                   (mag>14000 || nr_of_measurements>1) &&
                   (mag>13000 || nr_of_measurements>2)
                    )) &&
-            ((buff[i].flags&SPIKE)==0) &&
-            ((buff[i].flags&BSART)==0) &&
-            ((buff[i].flags&TMONLY)==0)))) {
+            ((buff[i].flags&SHORT_SPIKE)==0) &&
+            ((buff[i].flags&SHORT_BSART)==0) &&
+            ((buff[i].flags&SHORT_TMONLY)==0)))) {
         if (accu.addStar(0,0,0,0,"",
                          buff[i].ra/(3600.0*1000.0), // degrees
                          (buff[i].spd-90*3600*1000)/(3600.0*1000.0), // degrees
                          0.1*buff[i].pm_ra,0.1*buff[i].pm_spd,
-                         0.001*mag,0.001*b_v) < 0) {
+                         0.001*mag,0.001*b_v,
+                         0,"") < 0) {
           fprintf(stderr,"File \"%s\", record %d: Error 16\n",fname,count);
           exit(-1);
         }
@@ -2120,19 +1673,9 @@ int main(int argc,char *argv[]) {
 
   Accumulator accu;
   int n=0;
-  for (int c=0;tyc_names[c];c++) {
-    n += ReadTyc2File(tyc_names[c],accu);
-    printf("%s: %d records processed.\n",tyc_names[c],n);
-  }
-  for (int c=0;suppl_names[c];c++) {
-    n += ReadTyc2SupplFile(suppl_names[c],accu);
-    printf("%s: %d records processed.\n",suppl_names[c],n);
-  }
-  if (restrict_output_level_min <= MAX_HIP_LEVEL) {
-    n = ReadHipFile(hip_name,accu);
-    printf("%s: %d records processed.\n",hip_name,n);
-    SqueezeHip();
-  }
+  n = ReadHipTycFile(accu);
+  printf("HipTyc: %d records processed.\n",n);
+  SqueezeHip();
   
   for (int c=0;nomad_names[c];c++) {
     ReadNOMADFile(nomad_names[c],accu);
