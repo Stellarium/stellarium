@@ -20,8 +20,6 @@
 #ifndef STELPLUGININTERFACE_HPP_
 #define STELPLUGININTERFACE_HPP_
 
-#ifdef USE_QT4
-
 #include <QtPlugin>
 class StelPluginInterface
 {
@@ -30,7 +28,5 @@ public:
 	virtual class StelModule* getStelModule() const = 0;
 };
 Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0")
-
-#endif
 
 #endif /*STELPLUGININTERFACE_HPP_*/

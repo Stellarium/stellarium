@@ -12,11 +12,14 @@
 #cmakedefine HAVE_BYTESWAP_H
 #cmakedefine WORDS_BIGENDIAN
 
-/* Define whether QT4 is to be used. */
+/* Define whether QT4 is to be used for the main window managment. */
 #cmakedefine USE_QT4
 
-/* Define whether SDL is to be used. */
+/* Define whether SDL is to be used for the main window managment. */
 #cmakedefine USE_SDL
+
+/* Define whether SDL_mixer is to be used. */
+#cmakedefine HAVE_SDL_SDL_MIXER_H
 
 #define PACKAGE_NAME "stellarium"
 

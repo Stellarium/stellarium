@@ -38,10 +38,6 @@ extern "C" {
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
-#ifndef USE_QT4
-#error This version of stellarium can only compile with QT4.2
-#endif
-
 #include "fixx11h.h"
 #include <QTemporaryFile>
 #include <QDir>
