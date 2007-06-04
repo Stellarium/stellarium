@@ -21,176 +21,6 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Rosetta-Export-Date: 2007-04-16 13:38:10+0000\n"
 
-#: src/ConstellationMgr.cpp:293
-msgid "Loading Constellation Art: "
-msgstr "Cargando figuras de Constelaciones: "
-
-#: src/StarMgr.cpp:748 src/StarMgr.cpp:774 src/StarMgr.cpp:866
-#: src/StarMgr.cpp:929 src/Nebula.cpp:92 src/Nebula.cpp:114 src/Planet.cpp:107
-#: src/Planet.cpp:153
-msgid "Magnitude: "
-msgstr "Magnitud: "
-
-#: src/StarMgr.cpp:751 src/StarMgr.cpp:869
-msgid "J2000"
-msgstr ""
-
-#: src/StarMgr.cpp:751 src/StarMgr.cpp:754 src/StarMgr.cpp:869
-#: src/StarMgr.cpp:875 src/Nebula.cpp:94 src/Planet.cpp:111
-msgid "RA/DE: "
-msgstr "AR/DEC: "
-
-#: src/StarMgr.cpp:754 src/StarMgr.cpp:875
-msgid "Equ of date"
-msgstr ""
-
-#: src/StarMgr.cpp:763 src/StarMgr.cpp:884 src/Nebula.cpp:100
-#: src/Planet.cpp:117
-msgid "Az/Alt: "
-msgstr "Az/Alt: "
-
-#: src/StarMgr.cpp:889
-msgid "Parallax: "
-msgstr ""
-
-#: src/StarMgr.cpp:891 src/StarMgr.cpp:934 src/Planet.cpp:120
-#: src/Planet.cpp:157
-msgid "Distance: "
-msgstr "Distancia: "
-
-#: src/StarMgr.cpp:894 src/StarMgr.cpp:937
-msgid " Light Years"
-msgstr " Años luz"
-
-#: src/StarMgr.cpp:898 src/StarMgr.cpp:941
-msgid "Spectral Type: "
-msgstr "Tipo espectral: "
-
-#: src/StarMgr.cpp:1328
-#, fuzzy
-msgid "Loading catalog "
-msgstr "Cargando catálogo NGC: "
-
-#: src/Nebula.cpp:102
-msgid "Type: "
-msgstr "Tipo: "
-
-#: src/Nebula.cpp:103
-msgid "Size: "
-msgstr "Tamaño: "
-
-#: src/NebulaMgr.cpp:394
-msgid "Loading NGC catalog: "
-msgstr "Cargando catálogo NGC: "
-
-#: src/NebulaMgr.cpp:526
-msgid "Loading Nebula Textures:"
-msgstr "Cargando texturas de nebulosas:"
-
-#: src/Planet.cpp:120 src/Planet.cpp:157
-msgid "AU"
-msgstr "UA"
-
-#: src/stel_ui.cpp:544 src/stel_ui.cpp:685
-msgid "Script commander"
-msgstr "Administrador de scripts"
-
-#: src/stel_ui.cpp:571
-msgid "Invalid Script command"
-msgstr "Comando de script inválido"
-
-#: src/stel_ui.cpp:650
-msgid "Drawing of the Constellations [C]"
-msgstr "Dibujo de las constelaciones [C]"
-
-#: src/stel_ui.cpp:652
-msgid "Names of the Constellations [V]"
-msgstr "Nombres de las constelaciones [V]"
-
-#: src/stel_ui.cpp:654
-msgid "Constellations Art [R]"
-msgstr "Figuras de las constelaciones [R]"
-
-#: src/stel_ui.cpp:656
-msgid "Azimuthal Grid [Z]"
-msgstr "Cuadrícula Azimutal [Z]"
-
-#: src/stel_ui.cpp:658
-msgid "Equatorial Grid [E]"
-msgstr "Cuadrícula Ecuatorial [E]"
-
-#: src/stel_ui.cpp:660
-msgid "Ground [G]"
-msgstr "Suelo [G]"
-
-#: src/stel_ui.cpp:662
-msgid "Cardinal Points [Q]"
-msgstr "Puntos Cardinales [Q]"
-
-#: src/stel_ui.cpp:664
-msgid "Atmosphere [A]"
-msgstr "Atmósfera [A]"
-
-#: src/stel_ui.cpp:666
-msgid "Nebulas [N]"
-msgstr "Nebulosas [N]"
-
-#: src/stel_ui.cpp:668
-msgid "Help [H]"
-msgstr "Ayuda [H]"
-
-#: src/stel_ui.cpp:670
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Montura Ecuatorial/Altazimutal [ENTER]"
-
-#: src/stel_ui.cpp:672
-msgid "Configuration window"
-msgstr "Ventana de configuración"
-
-#: src/stel_ui.cpp:675
-msgid "Night (red) mode"
-msgstr "Modo nocturno (rojo)"
-
-#: src/stel_ui.cpp:678
-msgid "Quit [CTRL + Q]"
-msgstr "Salir [CTRL + Q]"
-
-#: src/stel_ui.cpp:680
-msgid "Quit [CMD + Q]"
-msgstr "Salir [CMD + Q]"
-
-#: src/stel_ui.cpp:683
-msgid "Search for object"
-msgstr "Buscar objeto"
-
-#: src/stel_ui.cpp:687
-msgid "Goto selected object [SPACE]"
-msgstr "Ir al objeto seleccionado [ESPACIO]"
-
-#: src/stel_ui.cpp:689
-msgid "Flip horizontally"
-msgstr "Doblar horizontalmente"
-
-#: src/stel_ui.cpp:691
-msgid "Flip vertically"
-msgstr "Doblar verticalmente"
-
-#: src/stel_ui.cpp:697
-msgid "Decrease Time Speed [J]"
-msgstr "Disminuir Velocidad del Tiempo [J]"
-
-#: src/stel_ui.cpp:699
-msgid "Real Time Speed [K]"
-msgstr "Velocidad en Tiempo Real [K]"
-
-#: src/stel_ui.cpp:701
-msgid "Increase Time Speed [L]"
-msgstr "Aumentar Velocidad del Tiempo [L]"
-
-#: src/stel_ui.cpp:703
-msgid "Return to Current Time"
-msgstr "Volver a fecha y hora actuales"
-
 #: src/stel_ui.cpp:712
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -202,35 +32,485 @@ msgstr ""
 "y comentarios a: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:731
-msgid "Information"
-msgstr "Información"
+#: src/StarMgr.cpp:894 src/StarMgr.cpp:937
+msgid " Light Years"
+msgstr " Años luz"
 
-#: src/stel_ui.cpp:743
+#: src/stel_ui_conf.cpp:1068
+msgid ": Exceptional Leonid rate"
+msgstr "Valoración Excepcional de las Leonidas"
+
+#: src/stel_ui_conf.cpp:1075
+msgid ": Highest rate ever (1966 Leonids)"
+msgstr "El Rango más alto (Leonidas 1966)"
+
+#: src/stel_ui_conf.cpp:1054
+msgid ": Normal rate"
+msgstr ": Valoración Normal"
+
+#: src/stel_ui_conf.cpp:1061
+msgid ": Standard Perseids rate"
+msgstr "Valoración Normal de las Perseidas"
+
+#: src/Planet.cpp:120 src/Planet.cpp:157
+msgid "AU"
+msgstr "UA"
+
+#: src/stel_ui_tuiconf.cpp:392
+msgid "Actual Time"
+msgstr "Hora Actual"
+
+#: src/stel_ui_tuiconf.cpp:374
+msgid "Administration "
+msgstr "Administración "
+
+#: src/stel_ui_conf.cpp:147
+msgid "Also display Nebulas without textures"
+msgstr "También mostrar Nebulosas sin texturas"
+
+#: src/stel_ui_tuiconf.cpp:379
+msgid "Altitude (m): "
+msgstr "Altitud (m): "
+
+#: src/stel_ui_conf.cpp:342
+msgid "Altitude : "
+msgstr "Altitud : "
+
+#: src/translations.h:80
+msgid "Andromeda"
+msgstr "Andrómeda"
+
+#: src/translations.h:332
+#, fuzzy
+msgid "Animal"
+msgstr "Antlia"
+
+#: src/translations.h:132
+#, fuzzy
+msgid "Antlia"
+msgstr "Antlia"
+
+#: src/translations.h:136
+#, fuzzy
+msgid "Apus"
+msgstr "Apus"
+
+#: src/translations.h:165
+msgid "Aquarius"
+msgstr "Acuario"
+
+#: src/translations.h:79
+msgid "Aquila"
+msgstr "Aguila"
+
+#: src/translations.h:82
+msgid "Ara"
+msgstr "Altar"
+
+#: src/translations.h:85
+msgid "Aries"
+msgstr "Aries"
+
+#: src/stel_ui_tuiconf.cpp:626
+msgid "Arrow down to load list."
+msgstr "Flecha de cursor abajo para cargar la lista."
+
+#: src/translations.h:245
+msgid "Arsenal"
+msgstr "Arsenal"
+
+#: src/stel_ui_conf.cpp:218
+msgid "Atmosphere"
+msgstr "Atmósfera"
+
+#: src/stel_ui.cpp:664
+msgid "Atmosphere [A]"
+msgstr "Atmósfera [A]"
+
+#: src/translations.h:99
+msgid "Auriga"
+msgstr "Cochero"
+
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+msgid "Author: "
+msgstr "Autor: "
+
+#: src/StarMgr.cpp:763 src/StarMgr.cpp:884 src/Nebula.cpp:100
+#: src/Planet.cpp:117
+msgid "Az/Alt: "
+msgstr "Az/Alt: "
+
+#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:423
+msgid "Azimuthal Grid"
+msgstr "Cuadrícula Acimutal"
+
+#: src/stel_ui.cpp:656
+msgid "Azimuthal Grid [Z]"
+msgstr "Cuadrícula Azimutal [Z]"
+
+#: src/translations.h:293
+#, fuzzy
+msgid "Bailer"
+msgstr "Achicador"
+
+#: src/translations.h:290
+msgid "Banner of Three Stars"
+msgstr "Barra de Tres Estrellas"
+
+#: src/translations.h:339
+msgid "Bear's Lodge"
+msgstr ""
+
+#: src/translations.h:175
+msgid "Bird"
+msgstr "Pájaro"
+
+#: src/translations.h:324
+msgid "Blubber Container"
+msgstr ""
+
+#: src/translations.h:179 src/translations.h:250
+msgid "Boat"
+msgstr "Barco"
+
+#: src/translations.h:278
+#, fuzzy
+msgid "Bond"
+msgstr "Nexo"
+
+#: src/translations.h:88
+msgid "Bootes"
+msgstr "Boyero"
+
+#: src/translations.h:254
+msgid "Bow and Arrow"
+msgstr "Arco y Flecha"
+
+#: src/translations.h:322
+msgid "Breastbone"
+msgstr ""
+
+#: src/translations.h:170
+msgid "Bull's Foreleg"
+msgstr "Pata de Toro"
+
+#: src/stel_ui_tuiconf.cpp:447
+msgid "CD/DVD Script: "
+msgstr "Script CD/DVD: "
+
+#: src/stel_ui.cpp:793
+msgid "CMD + Q : Quit\n"
+msgstr "CMD + Q : Salir\n"
+
+#: src/stel_ui.cpp:791
+msgid "CTRL + Q : Quit\n"
+msgstr "CTRL+Q : Salir\n"
+
+#: src/translations.h:89
+#, fuzzy
+msgid "Caelum"
+msgstr "Caelum"
+
+#: src/stel_ui_tuiconf.cpp:388
+msgid "Calendar"
+msgstr ""
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Calixto"
+
+#: src/translations.h:116
+msgid "Camelopardalis"
+msgstr "Jirafa"
+
+#: src/s_gui.cpp:2222 src/s_gui.cpp:2268
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/translations.h:91
+msgid "Cancer"
+msgstr "Cáncer"
+
+#: src/translations.h:98
+msgid "Canes Venatici"
+msgstr "Perros de Caza"
+
+#: src/translations.h:117
+msgid "Canis Major"
+msgstr "Can Mayor"
+
+#: src/translations.h:144
+msgid "Canis Minor"
+msgstr "Can Menor"
+
+#: src/translations.h:92
+msgid "Capricornus"
+msgstr "Capricornio"
+
+#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:418
+msgid "Cardinal Points"
+msgstr "Puntos cardinales"
+
+#: src/stel_ui.cpp:662
+msgid "Cardinal Points [Q]"
+msgstr "Puntos Cardinales [Q]"
+
+#: src/translations.h:301
+msgid "Cared for by Moon"
+msgstr "Apreciado por la Luna"
+
+#: src/translations.h:320
+#, fuzzy
+msgid "Caribou"
+msgstr "Carro"
+
+#: src/translations.h:93
+msgid "Carina"
+msgstr "Carina"
+
+#: src/translations.h:94
+msgid "Cassiopeia"
+msgstr "Casiopea"
+
+#: src/translations.h:294
+#, fuzzy
+msgid "Cat's Cradle"
+msgstr "Andamio"
+
+#: src/translations.h:95
+msgid "Centaurus"
+msgstr "Centauro"
+
+#: src/translations.h:96
+msgid "Cepheus"
+msgstr "Cefeo"
+
+#: src/translations.h:84
+msgid "Cetus"
+msgstr "Ballena"
+
+#: src/translations.h:90
+msgid "Chamaeleon"
+msgstr "Camaleón"
+
+#: src/translations.h:204
+msgid "Chariot"
+msgstr "Carro"
+
+#: src/translations.h:259
+msgid "Chariot Yard"
+msgstr "Patio del Carro"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Caronte"
+
+#: src/translations.h:194
+#, fuzzy
+msgid "Chematy"
+msgstr "Chematy"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "Chino"
+
+#: src/stel_ui_conf.cpp:438
+msgid "Choose landscapes:"
+msgstr "Elija paisajes:"
+
+#: src/translations.h:101
+msgid "Circinus"
+msgstr "Compás"
+
+#: src/translations.h:242
+msgid "Circular Granary"
+msgstr "Granero Circular"
+
+#: src/translations.h:202
+msgid "Coiled Thong"
+msgstr "Cuerda enrollada"
+
+#: src/translations.h:318
+#, fuzzy
+msgid "Collarbones"
+msgstr "Constelaciones"
+
+#: src/stel_ui_tuiconf.cpp:371
+msgid "Colors "
+msgstr "Colores "
+
+#: src/translations.h:100
+msgid "Columba"
+msgstr "Paloma"
+
+#: src/translations.h:97
+msgid "Coma Berenices"
+msgstr "Cabellera de Berenice"
+
+#: src/stel_ui.cpp:1009
+msgid "Command recording stopped."
+msgstr "Grabación de Comandos detenida."
+
+#: src/stel_ui_conf.cpp:55
+msgid "Configuration"
+msgstr "Configuración"
+
+#: src/stel_ui.cpp:672
+msgid "Configuration window"
+msgstr "Ventana de configuración"
+
+#: src/stel_ui_tuiconf.cpp:416
+msgid "Constellation Art Intensity"
+msgstr "Intensidad de Diseño de Constelación"
+
+#: src/stel_ui_tuiconf.cpp:417
+msgid "Constellation Boundaries"
+msgstr "Límites de la Constelación"
+
+#: src/stel_ui_tuiconf.cpp:414
+msgid "Constellation Lines"
+msgstr "Líneas de la Constelación"
+
+#: src/stel_ui_tuiconf.cpp:415
+msgid "Constellation Names"
+msgstr "Nombres de Constelación"
+
+#: src/stel_ui.cpp:654
+msgid "Constellations Art [R]"
+msgstr "Figuras de las constelaciones [R]"
+
+#: src/stel_ui_conf.cpp:118
+msgid "Constellations Boundaries"
+msgstr "Límites De las Constelaciones"
+
+#: src/stel_ui_conf.cpp:108
+msgid "Constellations Lines"
+msgstr "Líneas de Constelaciones"
+
+#: src/stel_ui_conf.cpp:113
+msgid "Constellations Names"
+msgstr "Nombres de las constelaciones"
+
+#: src/translations.h:103
+msgid "Corona Australis"
+msgstr "Corona Austral"
+
+#: src/translations.h:104
+msgid "Corona Borealis"
+msgstr "Corona Boreal"
+
+#: src/translations.h:105
+msgid "Corvus"
+msgstr "Cuervo"
+
+#: src/translations.h:102
+msgid "Crater"
+msgstr "Cráter"
+
+#: src/translations.h:180
+msgid "Crocodile"
+msgstr "Cocodrilo"
+
+#: src/translations.h:106
+msgid "Crux"
+msgstr "Cruz del Sur"
+
+#: src/stel_ui_conf.cpp:265
+msgid "Current Time :"
+msgstr "Hora actual :"
+
+#: src/stel_ui_conf.cpp:1106
+msgid "Current Time Speed is x"
+msgstr "La velocidad del tiempo actual es x"
+
+#: src/stel_ui_conf.cpp:316
+msgid "Cursor : "
+msgstr "Cursor : "
+
+#: src/stel_ui_tuiconf.cpp:440
+msgid "Cursor Timeout: "
+msgstr "Límite de Tiempo del Cursor : "
+
+#: src/translations.h:201
+msgid "Curved Array"
+msgstr "Matriz Curvada"
+
+#: src/translations.h:107
+msgid "Cygnus"
+msgstr "Cisne"
+
+#: src/stel_ui_conf.cpp:545
+msgid "Date & Time"
+msgstr "Fecha y hora"
+
+#: src/stel_ui_tuiconf.cpp:395
+msgid "Date Display Format: "
+msgstr "Formato de fecha: "
+
+#: src/s_gui.cpp:2742
+msgid "Day"
+msgstr "Día"
+
+#: src/stel_ui_tuiconf.cpp:387
+msgid "Day keys: "
+msgstr ""
+
+#: src/stel_ui.cpp:697
+msgid "Decrease Time Speed [J]"
+msgstr "Disminuir Velocidad del Tiempo [J]"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/translations.h:108
+msgid "Delphinus"
+msgstr "Delfín"
+
+#: src/stel_ui.cpp:766
+#, fuzzy
 msgid ""
-"Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
+"Dialogs & other controls:\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
+"CTRL + F : Toggle object finder\n"
+"CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Movimiento y selección:\n"
-"Cursores : Cambiar vista AR/DEC\n"
-"RePág/AvPág : Acercar/Alejar\n"
-"CTRL + Arriba/Abajo : Acercar/Alejar\n"
-"Click Izquierdo : Seleccionar\n"
-"Click Derecho : Soltar\n"
-"CTRL+Click Izquierdo : Soltar\n"
-"\\ : Alejar (planeta y lunas si aplican)\n"
-"/ : Acercar objeto seleccionado\n"
-"ESPACIO : Centrar objeto seleccionado\n"
+"Diálogos y otros controles:\n"
 "\n"
+"H : Ayuda I : Acerca de Stellarium\n"
+"\n"
+"M : Menú de texto 1(uno) : Configuración\n"
+"\n"
+"CTRL + S : Captura de pantalla\n"
+"\n"
+"CTRL + R : Inicia/detiene grabación de script\n"
+"\n"
+"CTRL + F : Buscador de objetos\n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#: src/translations.h:309
+msgid "Dilyehe"
+msgstr ""
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:207 src/translations.h:330
+msgid "Dipper"
+msgstr "Carro"
+
+#: src/stel_ui_conf.cpp:390
+#, fuzzy
+msgid "Disk Viewport"
+msgstr "Vista de Telescopio"
 
 #: src/stel_ui.cpp:754
 msgid ""
@@ -271,33 +551,1327 @@ msgstr ""
 "\n"
 "\n"
 
-#: src/stel_ui.cpp:766
+#: src/StarMgr.cpp:891 src/StarMgr.cpp:934 src/Planet.cpp:120
+#: src/Planet.cpp:157
+msgid "Distance: "
+msgstr "Distancia: "
+
+#: src/translations.h:252
+msgid "Dog"
+msgstr "Perro"
+
+#: src/translations.h:317
 #, fuzzy
+msgid "Dogs"
+msgstr "Perro"
+
+#: src/translations.h:302
+msgid "Dolphin"
+msgstr "Delfín"
+
+#: src/translations.h:109
+msgid "Dorado"
+msgstr "Dorado"
+
+#: src/translations.h:110
+msgid "Draco"
+msgstr "Dragón"
+
+#: src/stel_ui.cpp:650
+msgid "Drawing of the Constellations [C]"
+msgstr "Dibujo de las constelaciones [C]"
+
+#: src/translations.h:335
+#, fuzzy
+msgid "Dried Willow"
+msgstr "Sauce"
+
+#: src/translations.h:208
+msgid "Drum"
+msgstr "Tambor"
+
+#: src/translations.h:277
+msgid "Drumstick"
+msgstr "Palillo"
+
+#: src/stel_ui.cpp:781
 msgid ""
-"Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"CTRL + G : Goto selected solar system object\n"
+"During Script Playback:\n"
+"CTRL + C : End Script\n"
+"6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"Diálogos y otros controles:\n"
+"Durante la ejecución del script:\n"
+"CTRL + C : Termina el script\n"
+"6 : pausa el script K : reanuda el script\n"
 "\n"
-"H : Ayuda I : Acerca de Stellarium\n"
+
+#: src/translations.h:65 src/s_gui.cpp:2686
+msgid "E"
+msgstr "E"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Tierra"
+
+#: src/translations.h:253
+msgid "Earth God's Temple"
+msgstr "Templo del Dios Tierra"
+
+#: src/translations.h:281
+msgid "Eastern Door"
+msgstr "Puerta del este"
+
+#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:426
+msgid "Ecliptic Line"
+msgstr "Eclíptica"
+
+#: src/stel_ui_tuiconf.cpp:372
+msgid "Effects "
+msgstr "Efectos "
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "Egipcio"
+
+#: src/translations.h:333
+msgid "Elk"
+msgstr ""
+
+#: src/translations.h:265
+msgid "Emptiness"
+msgstr "Vacío"
+
+#: src/translations.h:262
+msgid "Encampment"
+msgstr "Campamento"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Encélado"
+
+#: src/stel_ui_conf.cpp:859
+msgid "Enter observatory name"
+msgstr "Ingrese el nombre del observatorio"
+
+#: src/StarMgr.cpp:754 src/StarMgr.cpp:875
+msgid "Equ of date"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:425
+msgid "Equator Line"
+msgstr "Línea del Ecuador (celeste)"
+
+#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:424
+msgid "Equatorial Grid"
+msgstr "Cuadrícula Ecuatorial"
+
+#: src/stel_ui.cpp:658
+msgid "Equatorial Grid [E]"
+msgstr "Cuadrícula Ecuatorial [E]"
+
+#: src/stel_ui.cpp:670
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr "Montura Ecuatorial/Altazimutal [ENTER]"
+
+#: src/translations.h:143
+msgid "Equuleus"
+msgstr "Caballito"
+
+#: src/translations.h:112
+msgid "Eridanus"
+msgstr "Eridano (El Gran Rio)"
+
+#: src/stel_ui.cpp:1023
+msgid "Error: Unable to open script file to record commands."
+msgstr "Error: No puede abrir el script para grabar comandos."
+
+#: src/translations.h:272
+msgid "Establishment"
+msgstr "Asentamiento"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/translations.h:244
+msgid "Extended Net"
+msgstr "Red Extendida"
+
+#: src/translations.h:282
+msgid "Farmland"
+msgstr "Huerta"
+
+#: src/translations.h:178
+msgid "Ferry Boat"
+msgstr "Transbordador"
+
+#: src/translations.h:329
+msgid "Fireplace"
+msgstr ""
+
+#: src/translations.h:310
+msgid "First Big One"
+msgstr ""
+
+#: src/translations.h:312
+msgid "First Slim One"
+msgstr ""
+
+#: src/translations.h:227
+msgid "Five Chariots"
+msgstr "Cinco Carros"
+
+#: src/translations.h:239
+msgid "Five Feudal Kings"
+msgstr "Cinco Reyes Feudales"
+
+#: src/translations.h:273
+#, fuzzy
+msgid "Flail"
+msgstr "Mangual"
+
+#: src/stel_ui.cpp:689
+msgid "Flip horizontally"
+msgstr "Doblar horizontalmente"
+
+#: src/stel_ui.cpp:691
+msgid "Flip vertically"
+msgstr "Doblar verticalmente"
+
+#: src/translations.h:187
+msgid "Flock"
+msgstr "Grupo"
+
+#: src/translations.h:222
+msgid "Flying Corridor"
+msgstr "Corredor volante"
+
+#: src/stel_ui_conf.cpp:223
+msgid "Fog"
+msgstr "Niebla"
+
+#: src/stel_ui_conf.cpp:421
+msgid "For unlisted screen resolution, edit the file :"
+msgstr "Para otras resoluciones de pantalla, editar el archivo :"
+
+#: src/translations.h:224
+#, fuzzy
+msgid "Ford"
+msgstr "Vado"
+
+#: src/translations.h:114
+msgid "Fornax"
+msgstr "Fornax"
+
+#: src/translations.h:235
+msgid "Four Channels"
+msgstr "Cuatro canales"
+
+#: src/translations.h:300
+#, fuzzy
+msgid "Frigate Bird"
+msgstr "Rabihorcado"
+
+#: src/stel_ui_conf.cpp:720
+msgid "GO"
+msgstr "IR"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganímedes"
+
+#: src/translations.h:115
+msgid "Gemini"
+msgstr "Geminis"
+
+#: src/stel_ui_tuiconf.cpp:369
+msgid "General "
+msgstr "General "
+
+#: src/translations.h:284
+msgid "Ghosts"
+msgstr "Fantasmas"
+
+#: src/translations.h:185
+msgid "Giant"
+msgstr "Gigante"
+
+#: src/translations.h:267
+msgid "Girl"
+msgstr "Chica"
+
+#: src/translations.h:260
+msgid "Good Gourd"
+msgstr "Buena Calabaza"
+
+#: src/stel_ui.cpp:687
+msgid "Goto selected object [SPACE]"
+msgstr "Ir al objeto seleccionado [ESPACIO]"
+
+#: src/translations.h:217
+msgid "Great General"
+msgstr "Gran General"
+
+#: src/stel_ui_conf.cpp:208
+msgid "Ground"
+msgstr "Suelo"
+
+#: src/stel_ui.cpp:660
+msgid "Ground [G]"
+msgstr "Suelo [G]"
+
+#: src/translations.h:119
+msgid "Grus"
+msgstr "Grulla"
+
+#: src/translations.h:327
+msgid "Hand"
+msgstr ""
+
+#: src/translations.h:269
+msgid "Heart"
+msgstr "Corazón"
+
+#: src/stel_ui.cpp:800
+msgid "Help"
+msgstr "Ayuda"
+
+#: src/stel_ui.cpp:668
+msgid "Help [H]"
+msgstr "Ayuda [H]"
+
+#: src/translations.h:120
+msgid "Hercules"
+msgstr "Hércules"
+
+#: src/translations.h:186
+msgid "Hippopotamus"
+msgstr "Hipopotamo"
+
+#: src/stel_ui.cpp:1019
+msgid "Hit CTRL-R again to stop.\n"
+msgstr "Presione CTRL-R otra vez para parar.\n"
+
+#: src/translations.h:246
+msgid "Hook"
+msgstr "Garfio"
+
+#: src/translations.h:211
+msgid "Horn"
+msgstr "Cuerno"
+
+#: src/translations.h:121
+msgid "Horologium"
+msgstr "Reloj"
+
+#: src/translations.h:183
+msgid "Horus"
+msgstr "Horus (Halcón)"
+
+#: src/s_gui.cpp:2745
+msgid "Hour"
+msgstr "Hora"
+
+#: src/translations.h:122
+msgid "Hydra"
+msgstr "Hydra"
+
+#: src/translations.h:123
+#, fuzzy
+msgid "Hydrus"
+msgstr "Hidra"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hiperión"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Japeto"
+
+#: src/translations.h:210
+msgid "Imperial Guards"
+msgstr "Guardias Imperiales"
+
+#: src/translations.h:213
+msgid "Imperial Passageway"
+msgstr "Pasadizo Imperial"
+
+#: src/stel_ui.cpp:701
+msgid "Increase Time Speed [L]"
+msgstr "Aumentar Velocidad del Tiempo [L]"
+
+#: src/translations.h:124
+#, fuzzy
+msgid "Indus"
+msgstr "Indus"
+
+#: src/stel_ui_conf.cpp:988
+msgid "Info: "
+msgstr "Info: "
+
+#: src/stel_ui.cpp:731
+msgid "Information"
+msgstr "Información"
+
+#: src/translations.h:71
+#, fuzzy
+msgid "Inuit"
+msgstr "Indus"
+
+#: src/stel_ui.cpp:571
+msgid "Invalid Script command"
+msgstr "Comando de script inválido"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:869
+msgid "J2000"
+msgstr ""
+
+#: src/translations.h:248
+msgid "Jade Well"
+msgstr "Pozo de jade"
+
+#: src/translations.h:191
+msgid "Jaw"
+msgstr "Mandibula"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Júpiter"
+
+#: src/translations.h:193
+#, fuzzy
+msgid "Kenemet"
+msgstr "Kenemet"
+
+#: src/translations.h:189
+#, fuzzy
+msgid "Khanuwy Fish"
+msgstr "Pez Khanuwy"
+
+#: src/translations.h:214
+msgid "Kitchen"
+msgstr "Cocina"
+
+#: src/translations.h:299
+msgid "Kite of Kawelo"
+msgstr "Cometa de Kawelo"
+
+#: src/translations.h:72
+#, fuzzy
+msgid "Korean"
+msgstr "Cuerno"
+
+#: src/translations.h:125
+#, fuzzy
+msgid "Lacerta"
+msgstr "Lagarto"
+
+#: src/translations.h:73
+#, fuzzy
+msgid "Lakota"
+msgstr "Lagarto"
+
+#: src/translations.h:319
+msgid "Lamp Stand"
+msgstr ""
+
+#: src/translations.h:249
+msgid "Lance"
+msgstr "Lanza"
+
+#: src/stel_ui_tuiconf.cpp:433
+msgid "Landscape: "
+msgstr "Paisaje: "
+
+#: src/stel_ui_conf.cpp:547
+msgid "Landscapes"
+msgstr "Paisajes"
+
+#: src/stel_ui_conf.cpp:544
+msgid "Language"
+msgstr "Idioma"
+
+#: src/stel_ui_conf.cpp:334
+msgid "Latitude : "
+msgstr "Latitud : "
+
+#: src/stel_ui_tuiconf.cpp:377
+msgid "Latitude: "
+msgstr "Latitud: "
+
+#: src/translations.h:276
+msgid "Left Flag"
+msgstr "Indicador Izquierdo"
+
+#: src/translations.h:219
+msgid "Legs"
+msgstr "Patas"
+
+#: src/translations.h:128
+msgid "Leo"
+msgstr "Leo"
+
+#: src/translations.h:145
+msgid "Leo Minor"
+msgstr "Leo Menor"
+
+#: src/translations.h:127
+msgid "Lepus"
+msgstr "Lepus"
+
+#: src/translations.h:83
+msgid "Libra"
+msgstr "Libra"
+
+#: src/stel_ui_tuiconf.cpp:432
+msgid "Light Pollution Luminance: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:411
+#, fuzzy
+msgid "Limiting Magnitude: "
+msgstr "Magnitud: "
+
+#: src/translations.h:172
+msgid "Lion"
+msgstr "León"
+
+#: src/translations.h:308
+#, fuzzy
+msgid "Lizard"
+msgstr "Pájaro"
+
+#: src/stel_ui_tuiconf.cpp:451
+msgid "Load Default Configuration: "
+msgstr "Cargar configuración predeterminada: "
+
+#: src/ConstellationMgr.cpp:293
+msgid "Loading Constellation Art: "
+msgstr "Cargando figuras de Constelaciones: "
+
+#: src/NebulaMgr.cpp:394
+msgid "Loading NGC catalog: "
+msgstr "Cargando catálogo NGC: "
+
+#: src/NebulaMgr.cpp:526
+msgid "Loading Nebula Textures:"
+msgstr "Cargando texturas de nebulosas:"
+
+#: src/StarMgr.cpp:1328
+#, fuzzy
+msgid "Loading catalog "
+msgstr "Cargando catálogo NGC: "
+
+#: src/stel_ui_tuiconf.cpp:444
+msgid "Local Script: "
+msgstr "Script local: "
+
+#: src/stel_ui_conf.cpp:546
+msgid "Location"
+msgstr "Ubicación"
+
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#, fuzzy
+msgid "Location: "
+msgstr "Ubicación"
+
+#: src/stel_ui_conf.cpp:326
+msgid "Longitude : "
+msgstr "Longitud : "
+
+#: src/stel_ui_tuiconf.cpp:378
+msgid "Longitude: "
+msgstr "Longitud: "
+
+#: src/translations.h:129
+msgid "Lupus"
+msgstr "Lupus"
+
+#: src/translations.h:130
+msgid "Lynx"
+msgstr "Lince"
+
+#: src/translations.h:131
+msgid "Lyra"
+msgstr "Lira"
+
+#: src/stel_ui_tuiconf.cpp:435
+msgid "Magnitude"
+msgstr "Magnitud"
+
+#: src/stel_ui_tuiconf.cpp:436
+#, fuzzy
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Multiplicador de tamaño de magnitud: "
+
+#: src/StarMgr.cpp:748 src/StarMgr.cpp:774 src/StarMgr.cpp:866
+#: src/StarMgr.cpp:929 src/Nebula.cpp:92 src/Nebula.cpp:114 src/Planet.cpp:107
+#: src/Planet.cpp:153
+msgid "Magnitude: "
+msgstr "Magnitud: "
+
+#: src/translations.h:307
+msgid "Man with Feet Apart"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:434
+msgid "Manual zoom: "
+msgstr "Zoom manual: "
+
+#: src/translations.h:226
+msgid "Market"
+msgstr "Mercado"
+
+#: src/translations.h:289
+msgid "Market Officer"
+msgstr "Gerente del Mercado"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Marte"
+
+#: src/translations.h:297
+msgid "Maui's Fishhook"
+msgstr "Anzuelo de Maui"
+
+#: src/translations.h:251
+msgid "Mausoleum"
+msgstr "Mausoleo"
+
+#: src/stel_ui_tuiconf.cpp:409
+msgid "Maximum Magnitude to Label: "
+msgstr "Magnitud Máxima para mostrar nombre: "
+
+#: src/stel_ui_tuiconf.cpp:438
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Magnitud de nebulosas máxima para mostrar Nombre: "
+
+#: src/translations.h:241
+msgid "Meadows"
+msgstr "Prados"
+
+#: src/translations.h:159
+#, fuzzy
+msgid "Mensa"
+msgstr "Mensa"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Mercurio"
+
+#: src/stel_ui_tuiconf.cpp:422
+msgid "Meridian Line"
+msgstr "Meridiano"
+
+#: src/stel_ui_conf.cpp:1080
+msgid "Meteor zenith hourly rate"
+msgstr ""
+
+#: src/translations.h:133
+msgid "Microscopium"
+msgstr "Microscopio"
+
+#: src/stel_ui_tuiconf.cpp:437
+msgid "Milky Way intensity: "
+msgstr "Luminosidad de la Vía Láctea: "
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/s_gui.cpp:2748
+msgid "Minutes"
+msgstr "Minutos"
+
+#: src/stel_ui.cpp:785
+msgid ""
+"Misc:\n"
+"9   : Toggle meteor shower rates\n"
+"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: Toggle vertical image flipping\n"
+msgstr ""
+"Misc:\n"
+"9 : Mostrar cantidad de lluvia de meteoritos\n"
+"CTRL + 0,..,9 : Ejecuta comando \"IR A ...\" para telescopio 0,..,9\n"
+"CTRL + SHIFT + H: Activa movimiento de imagen horizontal\n"
+"CTRL + SHIFT + V: Activa movimiento de imagen vertical\n"
+
+#: src/translations.h:126
+msgid "Monoceros"
+msgstr "Monoceros"
+
+#: src/s_gui.cpp:2739
+msgid "Month"
+msgstr "Mes"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Luna"
+
+#: src/stel_ui_conf.cpp:163
+msgid "Moon Scale"
+msgstr "Escala de la Luna"
+
+#: src/translations.h:192
+msgid "Mooring Post"
+msgstr "Pilar de Anclaje"
+
+#: src/translations.h:256
+msgid "Mortar"
+msgstr "Mortero"
+
+#: src/stel_ui.cpp:743
+msgid ""
+"Movement & selection:\n"
+"Arrow Keys       : Change viewing RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"\\                : Zoom out (planet + moons if applicable)\n"
+"/                : Zoom to selected object\n"
+"SPACE            : Center on selected object\n"
 "\n"
-"M : Menú de texto 1(uno) : Configuración\n"
+msgstr ""
+"Movimiento y selección:\n"
+"Cursores : Cambiar vista AR/DEC\n"
+"RePág/AvPág : Acercar/Alejar\n"
+"CTRL + Arriba/Abajo : Acercar/Alejar\n"
+"Click Izquierdo : Seleccionar\n"
+"Click Derecho : Soltar\n"
+"CTRL+Click Izquierdo : Soltar\n"
+"\\ : Alejar (planeta y lunas si aplican)\n"
+"/ : Acercar objeto seleccionado\n"
+"ESPACIO : Centrar objeto seleccionado\n"
 "\n"
-"CTRL + S : Captura de pantalla\n"
-"\n"
-"CTRL + R : Inicia/detiene grabación de script\n"
-"\n"
-"CTRL + F : Buscador de objetos\n"
-"\n"
-"\n"
-"\n"
-"\n"
+
+#: src/translations.h:134
+msgid "Musca"
+msgstr "Musca"
+
+#: src/translations.h:63 src/s_gui.cpp:2681
+msgid "N"
+msgstr "N"
+
+#: src/stel_ui.cpp:652
+msgid "Names of the Constellations [V]"
+msgstr "Nombres de las constelaciones [V]"
+
+#: src/translations.h:74
+#, fuzzy
+msgid "Navajo"
+msgstr "Pavo"
+
+#: src/translations.h:298
+msgid "Navigator's Triangle"
+msgstr "Triángulo del Navegante"
+
+#: src/stel_ui_tuiconf.cpp:428
+msgid "Nebula Circles"
+msgstr "Circulos de las Nebulosas"
+
+#: src/stel_ui_tuiconf.cpp:427
+msgid "Nebula Names"
+msgstr "Nombres de Nebulosas"
+
+#: src/stel_ui_conf.cpp:134
+msgid "Nebulas Names. Up to mag :"
+msgstr "Nombre de nebulosas. Hasta magnitud :"
+
+#: src/stel_ui.cpp:666
+msgid "Nebulas [N]"
+msgstr "Nebulosas [N]"
+
+#: src/translations.h:287
+msgid "Neck"
+msgstr "Cuello"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptuno"
+
+#: src/translations.h:190 src/translations.h:229
+msgid "Net"
+msgstr "red"
+
+#: src/stel_ui.cpp:675
+msgid "Night (red) mode"
+msgstr "Modo nocturno (rojo)"
+
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2216
+msgid "No"
+msgstr "No"
+
+#: src/translations.h:111
+msgid "Norma"
+msgstr "Norma"
+
+#: src/translations.h:238
+msgid "North River"
+msgstr "Río Norte"
+
+#: src/translations.h:200
+msgid "Northern Dipper"
+msgstr "Cucharón del Norte"
+
+#: src/s_gui.cpp:2240 src/s_gui.cpp:2266
+msgid "OK"
+msgstr "OK"
+
+#: src/stel_ui_conf.cpp:695
+msgid "Object Search"
+msgstr "Búsqueda del objeto"
+
+#: src/stel_ui_tuiconf.cpp:435
+msgid "Object Sizing Rule: "
+msgstr "Regla de tamaño de los objetos: "
+
+#: src/translations.h:135
+msgid "Octans"
+msgstr "Octans"
+
+#: src/translations.h:137
+msgid "Ophiuchus"
+msgstr "Ophiuchus"
+
+#: src/translations.h:240
+msgid "Orchard"
+msgstr "Huerto"
+
+#: src/translations.h:138
+msgid "Orion"
+msgstr "Orión"
+
+#: src/translations.h:223
+msgid "Outer Fence"
+msgstr "Ventana Exterior"
+
+#: src/translations.h:268
+msgid "Ox"
+msgstr "Buey"
+
+#: src/translations.h:188
+msgid "Pair of Stars"
+msgstr "par de estrellas"
+
+#: src/translations.h:264
+msgid "Palace Gate"
+msgstr "Puerta del palacio"
+
+#: src/StarMgr.cpp:889
+msgid "Parallax: "
+msgstr ""
+
+#: src/translations.h:139
+msgid "Pavo"
+msgstr "Pavo"
+
+#: src/translations.h:140
+msgid "Pegasus"
+msgstr "Pegaso"
+
+#: src/translations.h:142
+msgid "Perseus"
+msgstr "Perseo"
+
+#: src/translations.h:255
+#, fuzzy
+msgid "Pestle"
+msgstr "Almirez"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Fobos"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Fobos"
+
+#: src/translations.h:148
+msgid "Phoenix"
+msgstr "Fénix"
+
+#: src/translations.h:141
+msgid "Pictor"
+msgstr "Pictor"
+
+#: src/translations.h:150
+msgid "Pisces"
+msgstr "Piscis"
+
+#: src/translations.h:149
+msgid "Piscis Austrinus"
+msgstr "Piscis Austral"
+
+#: src/stel_ui_tuiconf.cpp:419
+msgid "Planet Names"
+msgstr "Nombres de Planetas"
+
+#: src/stel_ui_tuiconf.cpp:420
+msgid "Planet Orbits"
+msgstr "Orbitas de Planetas"
+
+#: src/stel_ui_tuiconf.cpp:421
+msgid "Planet Trails"
+msgstr "Recorrido de los Planetas"
+
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#, fuzzy
+msgid "Planet: "
+msgstr "Planetas"
+
+#: src/stel_ui_conf.cpp:158
+msgid "Planets"
+msgstr "Planetas"
+
+#: src/stel_ui_conf.cpp:170
+msgid "Planets Hints"
+msgstr "Info Planetas"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Plutón"
+
+#: src/stel_ui_tuiconf.cpp:435
+msgid "Point"
+msgstr "Punto"
+
+#: src/translations.h:75
+msgid "Polynesian"
+msgstr "Polinesio"
+
+#: src/stel_ui_tuiconf.cpp:390
+msgid "Preset Sky Time: "
+msgstr "Hora sideral preestablecida: "
+
+#: src/stel_ui_tuiconf.cpp:393
+msgid "Preset Time"
+msgstr "Hora Pre-establecida"
+
+#: src/stel_ui_conf.cpp:489
+msgid "Program Language: "
+msgstr "Lenguaje de Programación: "
+
+#: src/stel_ui_conf.cpp:371
+msgid "Projection :"
+msgstr "Proyección :"
+
+#: src/translations.h:182
+msgid "Prow"
+msgstr "Proa"
+
+#: src/translations.h:152
+msgid "Puppis"
+msgstr "Popa"
+
+#: src/translations.h:243
+msgid "Purple Palace"
+msgstr "Palacio Púrpura"
+
+#: src/translations.h:87
+msgid "Pyxis"
+msgstr "Pyxis"
+
+#: src/stel_ui.cpp:680
+msgid "Quit [CMD + Q]"
+msgstr "Salir [CMD + Q]"
+
+#: src/stel_ui.cpp:678
+msgid "Quit [CTRL + Q]"
+msgstr "Salir [CTRL + Q]"
+
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:754 src/StarMgr.cpp:869
+#: src/StarMgr.cpp:875 src/Nebula.cpp:94 src/Planet.cpp:111
+msgid "RA/DE: "
+msgstr "AR/DEC: "
+
+#: src/translations.h:311
+msgid "Rabbit Tracks"
+msgstr ""
+
+#: src/translations.h:331
+msgid "Race Track"
+msgstr ""
+
+#: src/translations.h:221
+#, fuzzy
+msgid "Ramparts"
+msgstr "Murallas"
+
+#: src/stel_ui.cpp:699
+msgid "Real Time Speed [K]"
+msgstr "Velocidad en Tiempo Real [K]"
+
+#: src/stel_ui.cpp:1017
+msgid "Recording commands to script file:\n"
+msgstr "Grabar Comandos en el script:\n"
+
+#: src/stel_ui_conf.cpp:549
+msgid "Rendering"
+msgstr "Preparación"
+
+#: src/stel_ui_conf.cpp:405
+msgid "Restart program for"
+msgstr "Reiniciar el programa para"
+
+#: src/translations.h:153
+msgid "Reticulum"
+msgstr "Retículo"
+
+#: src/stel_ui.cpp:703
+msgid "Return to Current Time"
+msgstr "Volver a fecha y hora actuales"
+
+#: src/translations.h:306
+msgid "Revolving Female"
+msgstr ""
+
+#: src/translations.h:305
+msgid "Revolving Male"
+msgstr ""
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rea"
+
+#: src/translations.h:275
+msgid "Right Flag"
+msgstr "Indicador Derecho"
+
+#: src/translations.h:215
+msgid "River Turtle"
+msgstr "Río Tortuga"
+
+#: src/translations.h:228
+msgid "Rolled Tongue"
+msgstr "Lengua Rodante"
+
+#: src/translations.h:257
+msgid "Rooftop"
+msgstr "Tejado"
+
+#: src/translations.h:270
+msgid "Room"
+msgstr "Habitación"
+
+#: src/translations.h:220
+msgid "Root"
+msgstr "Raíz"
+
+#: src/translations.h:261
+msgid "Rotten Gourd"
+msgstr "Calabaza Podrida"
+
+#: src/translations.h:323
+msgid "Runners"
+msgstr ""
+
+#: src/translations.h:64 src/s_gui.cpp:2682
+msgid "S"
+msgstr "S"
+
+#: src/translations.h:113
+msgid "Sagitta"
+msgstr "Flecha"
+
+#: src/translations.h:154
+msgid "Sagittarius"
+msgstr "Sagitario"
+
+#: src/translations.h:174
+msgid "Sah"
+msgstr "Sah"
+
+#: src/translations.h:336
+msgid "Salamander"
+msgstr ""
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Saturno"
+
+#: src/stel_ui_tuiconf.cpp:452
+msgid "Save Current Configuration as Default: "
+msgstr "Guardar configuración actual como predeterminada: "
+
+#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:428 src/stel_ui_conf.cpp:479
+#: src/stel_ui_conf.cpp:537
+msgid "Save as default"
+msgstr "Guardar como predeterminado"
+
+#: src/stel_ui_conf.cpp:349
+msgid "Save location"
+msgstr "Guardar localización"
+
+#: src/translations.h:155
+msgid "Scorpius"
+msgstr "Escorpión"
+
+#: src/translations.h:231
+msgid "Screen"
+msgstr "Pantalla"
+
+#: src/stel_ui_conf.cpp:401
+msgid "Screen Resolution :"
+msgstr "Resolución de pantalla :"
+
+#: src/stel_ui.cpp:544 src/stel_ui.cpp:685
+msgid "Script commander"
+msgstr "Administrador de scripts"
+
+#: src/stel_ui_tuiconf.cpp:373
+msgid "Scripts "
+msgstr "Scripts "
+
+#: src/translations.h:81
+msgid "Sculptor"
+msgstr "Escultor"
+
+#: src/translations.h:86 src/translations.h:156
+msgid "Scutum"
+msgstr "Scutum"
+
+#: src/stel_ui_conf.cpp:702
+msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+msgstr "Buscar (ej. Saturno, Polaris, HP6218, Orion, M31):"
+
+#: src/stel_ui.cpp:683
+msgid "Search for object"
+msgstr "Buscar objeto"
+
+#: src/s_gui.cpp:2751
+msgid "Seconds"
+msgstr "Segundos"
+
+#: src/translations.h:176
+msgid "Sek"
+msgstr "Sek"
+
+#: src/translations.h:345
+msgid "Select and exit to run."
+msgstr "Seleccione y salga para funcionar"
+
+#: src/stel_ui_conf.cpp:321
+msgid "Selected : "
+msgstr "Seleccionado : "
+
+#: src/stel_ui_conf.cpp:123
+msgid "Selected Constellation Only"
+msgstr "Sólo constelación seleccionada"
+
+#: src/translations.h:181
+#, fuzzy
+msgid "Selkis"
+msgstr "Selkis"
+
+#: src/translations.h:157
+msgid "Serpens"
+msgstr "Serpiente"
+
+#: src/stel_ui_tuiconf.cpp:367
+msgid "Set Location "
+msgstr "Establecer la ubicación "
+
+#: src/stel_ui_tuiconf.cpp:368
+msgid "Set Time "
+msgstr "Ajustar fecha y hora "
+
+#: src/stel_ui_tuiconf.cpp:386
+msgid "Set Time Zone: "
+msgstr "Establecer zona horaria: "
+
+#: src/stel_ui_tuiconf.cpp:455
+msgid "Set UI Locale: "
+msgstr "Configurar UI Local: "
+
+#: src/stel_ui_tuiconf.cpp:441
+msgid "Setting Landscape Sets Location: "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:468
+msgid "Setting landscape updates the location"
+msgstr ""
+
+#: src/translations.h:225
+msgid "Seven Excellencies"
+msgstr "Siete Maravillas"
+
+#: src/translations.h:334
+msgid "Seven Little Girls"
+msgstr ""
+
+#: src/translations.h:158
+msgid "Sextans"
+msgstr "Sextante"
+
+#: src/translations.h:196
+msgid "Sheep"
+msgstr "Carnero"
+
+#: src/translations.h:184
+msgid "Sheepfold"
+msgstr "Rebaño de Ovejas"
+
+#: src/stel_ui_tuiconf.cpp:407
+msgid "Show: "
+msgstr "Mostrar: "
+
+#: src/stel_ui_tuiconf.cpp:453
+msgid "Shut Down: "
+msgstr "Apagar: "
+
+#: src/stel_ui_tuiconf.cpp:389
+msgid "Sidereal"
+msgstr ""
+
+#: src/Nebula.cpp:103
+msgid "Size: "
+msgstr "Tamaño: "
+
+#: src/stel_ui_conf.cpp:523 src/stel_ui_tuiconf.cpp:400
+msgid "Sky Culture: "
+msgstr "Cultura del Cielo: "
+
+#: src/stel_ui_conf.cpp:505 src/stel_ui_tuiconf.cpp:404
+msgid "Sky Language: "
+msgstr "Lenguaje del Cielo: "
+
+#: src/stel_ui_tuiconf.cpp:391
+msgid "Sky Time At Start-up: "
+msgstr "Hora sideral al inicio: "
+
+#: src/stel_ui_tuiconf.cpp:385
+msgid "Sky Time: "
+msgstr "Hora sideral: "
+
+#: src/translations.h:328
+msgid "Snake"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:380
+msgid "Solar System Body: "
+msgstr "Cuerpo del sistema solar "
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Observador del Sistema Solar"
+
+#: src/translations.h:232
+msgid "Soldiers Market"
+msgstr "Mercado Militar"
+
+#: src/translations.h:237
+msgid "South River"
+msgstr "Río Sur"
+
+#: src/translations.h:274
+#, fuzzy
+msgid "Spear"
+msgstr "Lanza"
+
+#: src/StarMgr.cpp:898 src/StarMgr.cpp:941
+msgid "Spectral Type: "
+msgstr "Tipo espectral: "
+
+#: src/translations.h:271
+msgid "Spring"
+msgstr "Primavera"
+
+#: src/translations.h:233
+#, fuzzy
+msgid "Square Granary"
+msgstr "Granero Cuadrado"
+
+#: src/translations.h:283
+msgid "Star"
+msgstr "Estrella"
+
+#: src/stel_ui_conf.cpp:80
+msgid "Star Names. Up to mag :"
+msgstr "Nombre de las estrellas. Hasta magnitud :"
+
+#: src/stel_ui_conf.cpp:92
+msgid "Star Twinkle. Amount :"
+msgstr "Centelleo de las estrellas. Cantidad :"
+
+#: src/stel_ui_tuiconf.cpp:408
+#, fuzzy
+msgid "Star Value Multiplier: "
+msgstr "Multiplicador de magnitud de estrellas: "
+
+#: src/stel_ui_conf.cpp:75
+msgid "Stars"
+msgstr "Estrellas"
+
+#: src/stel_ui_tuiconf.cpp:370
+msgid "Stars "
+msgstr "Estrellas "
+
+#: src/translations.h:197
+msgid "Stars of Water"
+msgstr "Estrellas de Agua"
+
+#: src/translations.h:216
+msgid "Stomach"
+msgstr "Estómago"
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Sol"
+
+#: src/translations.h:247
+msgid "Supreme Palace"
+msgstr "Palacio Supremo"
+
+#: src/translations.h:205
+msgid "Tail"
+msgstr "Cola"
+
+#: src/translations.h:160
+msgid "Taurus"
+msgstr "Tauro"
+
+#: src/translations.h:161
+msgid "Telescopium"
+msgstr "Telescopio"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tetis"
+
+#: src/translations.h:296
+msgid "The Seven"
+msgstr "Los siete"
+
+#: src/translations.h:234
+msgid "Three Stars"
+msgstr "Tres estrellas"
+
+#: src/translations.h:209
+msgid "Three Steps"
+msgstr "Tres Pasos"
+
+#: src/translations.h:263
+msgid "Thunder and Lightning"
+msgstr "Truenos y Relámpagos"
+
+#: src/translations.h:338
+#, fuzzy
+msgid "Thunderbird"
+msgstr "Rayo"
+
+#: src/translations.h:258
+msgid "Thunderbolt"
+msgstr "Rayo"
 
 #: src/stel_ui.cpp:774
 #, fuzzy
@@ -319,164 +1893,100 @@ msgstr ""
 "[ : Retroceder 7 días ] : Adelantar 7 días\n"
 "\n"
 
-#: src/stel_ui.cpp:781
-msgid ""
-"During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
-msgstr ""
-"Durante la ejecución del script:\n"
-"CTRL + C : Termina el script\n"
-"6 : pausa el script K : reanuda el script\n"
-"\n"
-
-#: src/stel_ui.cpp:785
-msgid ""
-"Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"
-msgstr ""
-"Misc:\n"
-"9 : Mostrar cantidad de lluvia de meteoritos\n"
-"CTRL + 0,..,9 : Ejecuta comando \"IR A ...\" para telescopio 0,..,9\n"
-"CTRL + SHIFT + H: Activa movimiento de imagen horizontal\n"
-"CTRL + SHIFT + V: Activa movimiento de imagen vertical\n"
-
-#: src/stel_ui.cpp:791
-msgid "CTRL + Q : Quit\n"
-msgstr "CTRL+Q : Salir\n"
-
-#: src/stel_ui.cpp:793
-msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : Salir\n"
-
-#: src/stel_ui.cpp:800
-msgid "Help"
-msgstr "Ayuda"
-
-#: src/stel_ui.cpp:1009
-msgid "Command recording stopped."
-msgstr "Grabación de Comandos detenida."
-
-#: src/stel_ui.cpp:1017
-msgid "Recording commands to script file:\n"
-msgstr "Grabar Comandos en el script:\n"
-
-#: src/stel_ui.cpp:1019
-msgid "Hit CTRL-R again to stop.\n"
-msgstr "Presione CTRL-R otra vez para parar.\n"
-
-#: src/stel_ui.cpp:1023
-msgid "Error: Unable to open script file to record commands."
-msgstr "Error: No puede abrir el script para grabar comandos."
-
-#: src/stel_ui_conf.cpp:55
-msgid "Configuration"
-msgstr "Configuración"
-
-#: src/stel_ui_conf.cpp:75
-msgid "Stars"
-msgstr "Estrellas"
-
-#: src/stel_ui_conf.cpp:80
-msgid "Star Names. Up to mag :"
-msgstr "Nombre de las estrellas. Hasta magnitud :"
-
-#: src/stel_ui_conf.cpp:92
-msgid "Star Twinkle. Amount :"
-msgstr "Centelleo de las estrellas. Cantidad :"
-
-#: src/stel_ui_conf.cpp:108
-msgid "Constellations Lines"
-msgstr "Líneas de Constelaciones"
-
-#: src/stel_ui_conf.cpp:113
-msgid "Constellations Names"
-msgstr "Nombres de las constelaciones"
-
-#: src/stel_ui_conf.cpp:118
-msgid "Constellations Boundaries"
-msgstr "Límites De las Constelaciones"
-
-#: src/stel_ui_conf.cpp:123
-msgid "Selected Constellation Only"
-msgstr "Sólo constelación seleccionada"
-
-#: src/stel_ui_conf.cpp:134
-msgid "Nebulas Names. Up to mag :"
-msgstr "Nombre de nebulosas. Hasta magnitud :"
-
-#: src/stel_ui_conf.cpp:147
-msgid "Also display Nebulas without textures"
-msgstr "También mostrar Nebulosas sin texturas"
-
-#: src/stel_ui_conf.cpp:158
-msgid "Planets"
-msgstr "Planetas"
-
-#: src/stel_ui_conf.cpp:163
-msgid "Moon Scale"
-msgstr "Escala de la Luna"
-
-#: src/stel_ui_conf.cpp:170
-msgid "Planets Hints"
-msgstr "Info Planetas"
-
-#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:424
-msgid "Equatorial Grid"
-msgstr "Cuadrícula Ecuatorial"
-
-#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:423
-msgid "Azimuthal Grid"
-msgstr "Cuadrícula Acimutal"
-
-#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:425
-msgid "Equator Line"
-msgstr "Línea del Ecuador (celeste)"
-
-#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:426
-msgid "Ecliptic Line"
-msgstr "Eclíptica"
-
-#: src/stel_ui_conf.cpp:208
-msgid "Ground"
-msgstr "Suelo"
-
-#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:418
-msgid "Cardinal Points"
-msgstr "Puntos cardinales"
-
-#: src/stel_ui_conf.cpp:218
-msgid "Atmosphere"
-msgstr "Atmósfera"
-
-#: src/stel_ui_conf.cpp:223
-msgid "Fog"
-msgstr "Niebla"
-
-#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:428 src/stel_ui_conf.cpp:479
-#: src/stel_ui_conf.cpp:537
-msgid "Save as default"
-msgstr "Guardar como predeterminado"
-
-#: src/stel_ui_conf.cpp:265
-msgid "Current Time :"
-msgstr "Hora actual :"
+#: src/stel_ui_tuiconf.cpp:394
+msgid "Time Display Format: "
+msgstr "Formato de hora: "
 
 #: src/stel_ui_conf.cpp:274
 msgid "Time Zone :"
 msgstr "Zona horaria :"
 
-#: src/stel_ui_conf.cpp:278
-msgid "Using System Default Time Zone"
-msgstr "Usando zona horaria predeterminada del sistema :"
-
 #: src/stel_ui_conf.cpp:287
 msgid "Time speed : "
 msgstr "Velocidad del Tiempo : "
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titán"
+
+#: src/translations.h:230
+msgid "Toilet"
+msgstr "Aseo"
+
+#: src/translations.h:177
+msgid "Triangle"
+msgstr "Triángulo"
+
+#: src/translations.h:163
+msgid "Triangulum"
+msgstr "Triángulo"
+
+#: src/translations.h:164
+msgid "Triangulum Australe"
+msgstr "Triángulo Austral"
+
+#: src/translations.h:286
+msgid "Tripod"
+msgstr "Trípode"
+
+#: src/translations.h:162
+msgid "Tucana"
+msgstr "Tucana"
+
+#: src/translations.h:337
+#, fuzzy
+msgid "Turtle"
+msgstr "Río Tortuga"
+
+#: src/stel_ui_tuiconf.cpp:410
+msgid "Twinkling: "
+msgstr "Centelleo: "
+
+#: src/translations.h:173
+msgid "Two Jaws"
+msgstr "Mordaza"
+
+#: src/translations.h:316
+msgid "Two Placed Far Apart"
+msgstr ""
+
+#: src/translations.h:171
+msgid "Two Poles"
+msgstr "Dos Polos"
+
+#: src/translations.h:315
+#, fuzzy
+msgid "Two Sunbeams"
+msgstr "Mordaza"
+
+#: src/translations.h:321
+msgid "Two in Front"
+msgstr ""
+
+#: src/Nebula.cpp:102
+msgid "Type: "
+msgstr "Tipo: "
+
+#: src/translations.h:346
+#, fuzzy
+msgid "USB Script: "
+msgstr "Scripts "
+
+#: src/stel_ui_tuiconf.cpp:454
+msgid "Update me via Internet: "
+msgstr "Actualízame vía Internet: "
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Urano"
+
+#: src/translations.h:118
+msgid "Ursa Major"
+msgstr "Osa Mayor"
+
+#: src/translations.h:147
+msgid "Ursa Minor"
+msgstr "Osa Menor"
 
 #: src/stel_ui_conf.cpp:295
 msgid ""
@@ -488,1637 +1998,112 @@ msgstr ""
 "   la velocidad del tiempo.\n"
 "Use la tecla K para volver a velocidad de tiempo real."
 
-#: src/stel_ui_conf.cpp:316
-msgid "Cursor : "
-msgstr "Cursor : "
-
-#: src/stel_ui_conf.cpp:321
-msgid "Selected : "
-msgstr "Seleccionado : "
-
-#: src/stel_ui_conf.cpp:326
-msgid "Longitude : "
-msgstr "Longitud : "
-
-#: src/stel_ui_conf.cpp:334
-msgid "Latitude : "
-msgstr "Latitud : "
-
-#: src/stel_ui_conf.cpp:342
-msgid "Altitude : "
-msgstr "Altitud : "
-
-#: src/stel_ui_conf.cpp:349
-msgid "Save location"
-msgstr "Guardar localización"
-
-#: src/stel_ui_conf.cpp:371
-msgid "Projection :"
-msgstr "Proyección :"
-
-#: src/stel_ui_conf.cpp:390
-#, fuzzy
-msgid "Disk Viewport"
-msgstr "Vista de Telescopio"
-
-#: src/stel_ui_conf.cpp:395
-msgid "Viewport Distorter"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:401
-msgid "Screen Resolution :"
-msgstr "Resolución de pantalla :"
-
-#: src/stel_ui_conf.cpp:405
-msgid "Restart program for"
-msgstr "Reiniciar el programa para"
-
-#: src/stel_ui_conf.cpp:406
-msgid "change to apply."
-msgstr "cambiar para aplicar."
-
-#: src/stel_ui_conf.cpp:421
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "Para otras resoluciones de pantalla, editar el archivo :"
-
-#: src/stel_ui_conf.cpp:438
-msgid "Choose landscapes:"
-msgstr "Elija paisajes:"
-
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
-msgid "Author: "
-msgstr "Autor: "
-
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
-#, fuzzy
-msgid "Planet: "
-msgstr "Planetas"
-
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
-#, fuzzy
-msgid "Location: "
-msgstr "Ubicación"
-
-#: src/stel_ui_conf.cpp:468
-msgid "Setting landscape updates the location"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:489
-msgid "Program Language: "
-msgstr "Lenguaje de Programación: "
-
-#: src/stel_ui_conf.cpp:505 src/stel_ui_tuiconf.cpp:404
-msgid "Sky Language: "
-msgstr "Lenguaje del Cielo: "
-
-#: src/stel_ui_conf.cpp:523 src/stel_ui_tuiconf.cpp:400
-msgid "Sky Culture: "
-msgstr "Cultura del Cielo: "
-
-#: src/stel_ui_conf.cpp:544
-msgid "Language"
-msgstr "Idioma"
-
-#: src/stel_ui_conf.cpp:545
-msgid "Date & Time"
-msgstr "Fecha y hora"
-
-#: src/stel_ui_conf.cpp:546
-msgid "Location"
-msgstr "Ubicación"
-
-#: src/stel_ui_conf.cpp:547
-msgid "Landscapes"
-msgstr "Paisajes"
-
-#: src/stel_ui_conf.cpp:548
-msgid "Video"
-msgstr "Vídeo"
-
-#: src/stel_ui_conf.cpp:549
-msgid "Rendering"
-msgstr "Preparación"
-
-#: src/stel_ui_conf.cpp:695
-msgid "Object Search"
-msgstr "Búsqueda del objeto"
-
-#: src/stel_ui_conf.cpp:702
-msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Buscar (ej. Saturno, Polaris, HP6218, Orion, M31):"
-
-#: src/stel_ui_conf.cpp:720
-msgid "GO"
-msgstr "IR"
-
-#: src/stel_ui_conf.cpp:859
-msgid "Enter observatory name"
-msgstr "Ingrese el nombre del observatorio"
-
-#: src/stel_ui_conf.cpp:988
-msgid "Info: "
-msgstr "Info: "
-
-#: src/stel_ui_conf.cpp:1054
-msgid ": Normal rate"
-msgstr ": Valoración Normal"
-
-#: src/stel_ui_conf.cpp:1061
-msgid ": Standard Perseids rate"
-msgstr "Valoración Normal de las Perseidas"
-
-#: src/stel_ui_conf.cpp:1068
-msgid ": Exceptional Leonid rate"
-msgstr "Valoración Excepcional de las Leonidas"
-
-#: src/stel_ui_conf.cpp:1075
-msgid ": Highest rate ever (1966 Leonids)"
-msgstr "El Rango más alto (Leonidas 1966)"
-
-#: src/stel_ui_conf.cpp:1080
-msgid "Meteor zenith hourly rate"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:1106
-msgid "Current Time Speed is x"
-msgstr "La velocidad del tiempo actual es x"
-
-#: src/stel_ui_tuiconf.cpp:367
-msgid "Set Location "
-msgstr "Establecer la ubicación "
-
-#: src/stel_ui_tuiconf.cpp:368
-msgid "Set Time "
-msgstr "Ajustar fecha y hora "
-
-#: src/stel_ui_tuiconf.cpp:369
-msgid "General "
-msgstr "General "
-
-#: src/stel_ui_tuiconf.cpp:370
-msgid "Stars "
-msgstr "Estrellas "
-
-#: src/stel_ui_tuiconf.cpp:371
-msgid "Colors "
-msgstr "Colores "
-
-#: src/stel_ui_tuiconf.cpp:372
-msgid "Effects "
-msgstr "Efectos "
-
-#: src/stel_ui_tuiconf.cpp:373
-msgid "Scripts "
-msgstr "Scripts "
-
-#: src/stel_ui_tuiconf.cpp:374
-msgid "Administration "
-msgstr "Administración "
-
-#: src/stel_ui_tuiconf.cpp:377
-msgid "Latitude: "
-msgstr "Latitud: "
-
-#: src/stel_ui_tuiconf.cpp:378
-msgid "Longitude: "
-msgstr "Longitud: "
-
-#: src/stel_ui_tuiconf.cpp:379
-msgid "Altitude (m): "
-msgstr "Altitud (m): "
-
-#: src/stel_ui_tuiconf.cpp:380
-msgid "Solar System Body: "
-msgstr "Cuerpo del sistema solar "
-
-#: src/stel_ui_tuiconf.cpp:385
-msgid "Sky Time: "
-msgstr "Hora sideral: "
-
-#: src/stel_ui_tuiconf.cpp:386
-msgid "Set Time Zone: "
-msgstr "Establecer zona horaria: "
-
-#: src/stel_ui_tuiconf.cpp:387
-msgid "Day keys: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:388
-msgid "Calendar"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:389
-msgid "Sidereal"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:390
-msgid "Preset Sky Time: "
-msgstr "Hora sideral preestablecida: "
-
-#: src/stel_ui_tuiconf.cpp:391
-msgid "Sky Time At Start-up: "
-msgstr "Hora sideral al inicio: "
-
-#: src/stel_ui_tuiconf.cpp:392
-msgid "Actual Time"
-msgstr "Hora Actual"
-
-#: src/stel_ui_tuiconf.cpp:393
-msgid "Preset Time"
-msgstr "Hora Pre-establecida"
-
-#: src/stel_ui_tuiconf.cpp:394
-msgid "Time Display Format: "
-msgstr "Formato de hora: "
-
-#: src/stel_ui_tuiconf.cpp:395
-msgid "Date Display Format: "
-msgstr "Formato de fecha: "
-
-#: src/stel_ui_tuiconf.cpp:407
-msgid "Show: "
-msgstr "Mostrar: "
-
-#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
-#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2235
-msgid "Yes"
-msgstr "Si"
-
-#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
-#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2216
-msgid "No"
-msgstr "No"
-
-#: src/stel_ui_tuiconf.cpp:408
-#, fuzzy
-msgid "Star Value Multiplier: "
-msgstr "Multiplicador de magnitud de estrellas: "
-
-#: src/stel_ui_tuiconf.cpp:409
-msgid "Maximum Magnitude to Label: "
-msgstr "Magnitud Máxima para mostrar nombre: "
-
-#: src/stel_ui_tuiconf.cpp:410
-msgid "Twinkling: "
-msgstr "Centelleo: "
-
-#: src/stel_ui_tuiconf.cpp:411
-#, fuzzy
-msgid "Limiting Magnitude: "
-msgstr "Magnitud: "
-
-#: src/stel_ui_tuiconf.cpp:414
-msgid "Constellation Lines"
-msgstr "Líneas de la Constelación"
-
-#: src/stel_ui_tuiconf.cpp:415
-msgid "Constellation Names"
-msgstr "Nombres de Constelación"
-
-#: src/stel_ui_tuiconf.cpp:416
-msgid "Constellation Art Intensity"
-msgstr "Intensidad de Diseño de Constelación"
-
-#: src/stel_ui_tuiconf.cpp:417
-msgid "Constellation Boundaries"
-msgstr "Límites de la Constelación"
-
-#: src/stel_ui_tuiconf.cpp:419
-msgid "Planet Names"
-msgstr "Nombres de Planetas"
-
-#: src/stel_ui_tuiconf.cpp:420
-msgid "Planet Orbits"
-msgstr "Orbitas de Planetas"
-
-#: src/stel_ui_tuiconf.cpp:421
-msgid "Planet Trails"
-msgstr "Recorrido de los Planetas"
-
-#: src/stel_ui_tuiconf.cpp:422
-msgid "Meridian Line"
-msgstr "Meridiano"
-
-#: src/stel_ui_tuiconf.cpp:427
-msgid "Nebula Names"
-msgstr "Nombres de Nebulosas"
-
-#: src/stel_ui_tuiconf.cpp:428
-msgid "Nebula Circles"
-msgstr "Circulos de las Nebulosas"
-
-#: src/stel_ui_tuiconf.cpp:432
-msgid "Light Pollution Luminance: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:433
-msgid "Landscape: "
-msgstr "Paisaje: "
-
-#: src/stel_ui_tuiconf.cpp:434
-msgid "Manual zoom: "
-msgstr "Zoom manual: "
-
-#: src/stel_ui_tuiconf.cpp:435
-msgid "Object Sizing Rule: "
-msgstr "Regla de tamaño de los objetos: "
-
-#: src/stel_ui_tuiconf.cpp:435
-msgid "Point"
-msgstr "Punto"
-
-#: src/stel_ui_tuiconf.cpp:435
-msgid "Magnitude"
-msgstr "Magnitud"
-
-#: src/stel_ui_tuiconf.cpp:436
-#, fuzzy
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Multiplicador de tamaño de magnitud: "
-
-#: src/stel_ui_tuiconf.cpp:437
-msgid "Milky Way intensity: "
-msgstr "Luminosidad de la Vía Láctea: "
-
-#: src/stel_ui_tuiconf.cpp:438
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitud de nebulosas máxima para mostrar Nombre: "
-
-#: src/stel_ui_tuiconf.cpp:439
-msgid "Zoom Duration: "
-msgstr "Duración del zoom: "
-
-#: src/stel_ui_tuiconf.cpp:440
-msgid "Cursor Timeout: "
-msgstr "Límite de Tiempo del Cursor : "
-
-#: src/stel_ui_tuiconf.cpp:441
-msgid "Setting Landscape Sets Location: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:444
-msgid "Local Script: "
-msgstr "Script local: "
-
-#: src/stel_ui_tuiconf.cpp:447
-msgid "CD/DVD Script: "
-msgstr "Script CD/DVD: "
-
-#: src/stel_ui_tuiconf.cpp:451
-msgid "Load Default Configuration: "
-msgstr "Cargar configuración predeterminada: "
-
-#: src/stel_ui_tuiconf.cpp:452
-msgid "Save Current Configuration as Default: "
-msgstr "Guardar configuración actual como predeterminada: "
-
-#: src/stel_ui_tuiconf.cpp:453
-msgid "Shut Down: "
-msgstr "Apagar: "
-
-#: src/stel_ui_tuiconf.cpp:454
-msgid "Update me via Internet: "
-msgstr "Actualízame vía Internet: "
-
-#: src/stel_ui_tuiconf.cpp:455
-msgid "Set UI Locale: "
-msgstr "Configurar UI Local: "
-
-#: src/stel_ui_tuiconf.cpp:626
-msgid "Arrow down to load list."
-msgstr "Flecha de cursor abajo para cargar la lista."
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Sol"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Mercurio"
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venus"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Tierra"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Luna"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Marte"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Fobos"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Júpiter"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganímedes"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Calixto"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Saturno"
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Encélado"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tetis"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rea"
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titán"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hiperión"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Japeto"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Fobos"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptuno"
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Urano"
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Plutón"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Caronte"
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Observador del Sistema Solar"
-
-#: src/translations.h:63 src/s_gui.cpp:2681
-msgid "N"
-msgstr "N"
-
-#: src/translations.h:64 src/s_gui.cpp:2682
-msgid "S"
-msgstr "S"
-
-#: src/translations.h:65 src/s_gui.cpp:2686
-msgid "E"
-msgstr "E"
-
-#: src/translations.h:66 src/s_gui.cpp:2687
-msgid "W"
-msgstr "O"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "Chino"
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "Egipcio"
-
-#: src/translations.h:71
-#, fuzzy
-msgid "Inuit"
-msgstr "Indus"
-
-#: src/translations.h:72
-#, fuzzy
-msgid "Korean"
-msgstr "Cuerno"
-
-#: src/translations.h:73
-#, fuzzy
-msgid "Lakota"
-msgstr "Lagarto"
-
-#: src/translations.h:74
-#, fuzzy
-msgid "Navajo"
-msgstr "Pavo"
-
-#: src/translations.h:75
-msgid "Polynesian"
-msgstr "Polinesio"
-
-#: src/translations.h:76
-msgid "Western"
-msgstr "Occidental"
-
-#: src/translations.h:79
-msgid "Aquila"
-msgstr "Aguila"
-
-#: src/translations.h:80
-msgid "Andromeda"
-msgstr "Andrómeda"
-
-#: src/translations.h:81
-msgid "Sculptor"
-msgstr "Escultor"
-
-#: src/translations.h:82
-msgid "Ara"
-msgstr "Altar"
-
-#: src/translations.h:83
-msgid "Libra"
-msgstr "Libra"
-
-#: src/translations.h:84
-msgid "Cetus"
-msgstr "Ballena"
-
-#: src/translations.h:85
-msgid "Aries"
-msgstr "Aries"
-
-#: src/translations.h:86 src/translations.h:156
-msgid "Scutum"
-msgstr "Scutum"
-
-#: src/translations.h:87
-msgid "Pyxis"
-msgstr "Pyxis"
-
-#: src/translations.h:88
-msgid "Bootes"
-msgstr "Boyero"
-
-#: src/translations.h:89
-#, fuzzy
-msgid "Caelum"
-msgstr "Caelum"
-
-#: src/translations.h:90
-msgid "Chamaeleon"
-msgstr "Camaleón"
-
-#: src/translations.h:91
-msgid "Cancer"
-msgstr "Cáncer"
-
-#: src/translations.h:92
-msgid "Capricornus"
-msgstr "Capricornio"
-
-#: src/translations.h:93
-msgid "Carina"
-msgstr "Carina"
-
-#: src/translations.h:94
-msgid "Cassiopeia"
-msgstr "Casiopea"
-
-#: src/translations.h:95
-msgid "Centaurus"
-msgstr "Centauro"
-
-#: src/translations.h:96
-msgid "Cepheus"
-msgstr "Cefeo"
-
-#: src/translations.h:97
-msgid "Coma Berenices"
-msgstr "Cabellera de Berenice"
-
-#: src/translations.h:98
-msgid "Canes Venatici"
-msgstr "Perros de Caza"
-
-#: src/translations.h:99
-msgid "Auriga"
-msgstr "Cochero"
-
-#: src/translations.h:100
-msgid "Columba"
-msgstr "Paloma"
-
-#: src/translations.h:101
-msgid "Circinus"
-msgstr "Compás"
-
-#: src/translations.h:102
-msgid "Crater"
-msgstr "Cráter"
-
-#: src/translations.h:103
-msgid "Corona Australis"
-msgstr "Corona Austral"
-
-#: src/translations.h:104
-msgid "Corona Borealis"
-msgstr "Corona Boreal"
-
-#: src/translations.h:105
-msgid "Corvus"
-msgstr "Cuervo"
-
-#: src/translations.h:106
-msgid "Crux"
-msgstr "Cruz del Sur"
-
-#: src/translations.h:107
-msgid "Cygnus"
-msgstr "Cisne"
-
-#: src/translations.h:108
-msgid "Delphinus"
-msgstr "Delfín"
-
-#: src/translations.h:109
-msgid "Dorado"
-msgstr "Dorado"
-
-#: src/translations.h:110
-msgid "Draco"
-msgstr "Dragón"
-
-#: src/translations.h:111
-msgid "Norma"
-msgstr "Norma"
-
-#: src/translations.h:112
-msgid "Eridanus"
-msgstr "Eridano (El Gran Rio)"
-
-#: src/translations.h:113
-msgid "Sagitta"
-msgstr "Flecha"
-
-#: src/translations.h:114
-msgid "Fornax"
-msgstr "Fornax"
-
-#: src/translations.h:115
-msgid "Gemini"
-msgstr "Geminis"
-
-#: src/translations.h:116
-msgid "Camelopardalis"
-msgstr "Jirafa"
-
-#: src/translations.h:117
-msgid "Canis Major"
-msgstr "Can Mayor"
-
-#: src/translations.h:118
-msgid "Ursa Major"
-msgstr "Osa Mayor"
-
-#: src/translations.h:119
-msgid "Grus"
-msgstr "Grulla"
-
-#: src/translations.h:120
-msgid "Hercules"
-msgstr "Hércules"
-
-#: src/translations.h:121
-msgid "Horologium"
-msgstr "Reloj"
-
-#: src/translations.h:122
-msgid "Hydra"
-msgstr "Hydra"
-
-#: src/translations.h:123
-#, fuzzy
-msgid "Hydrus"
-msgstr "Hidra"
-
-#: src/translations.h:124
-#, fuzzy
-msgid "Indus"
-msgstr "Indus"
-
-#: src/translations.h:125
-#, fuzzy
-msgid "Lacerta"
-msgstr "Lagarto"
-
-#: src/translations.h:126
-msgid "Monoceros"
-msgstr "Monoceros"
-
-#: src/translations.h:127
-msgid "Lepus"
-msgstr "Lepus"
-
-#: src/translations.h:128
-msgid "Leo"
-msgstr "Leo"
-
-#: src/translations.h:129
-msgid "Lupus"
-msgstr "Lupus"
-
-#: src/translations.h:130
-msgid "Lynx"
-msgstr "Lince"
-
-#: src/translations.h:131
-msgid "Lyra"
-msgstr "Lira"
-
-#: src/translations.h:132
-#, fuzzy
-msgid "Antlia"
-msgstr "Antlia"
-
-#: src/translations.h:133
-msgid "Microscopium"
-msgstr "Microscopio"
-
-#: src/translations.h:134
-msgid "Musca"
-msgstr "Musca"
-
-#: src/translations.h:135
-msgid "Octans"
-msgstr "Octans"
-
-#: src/translations.h:136
-#, fuzzy
-msgid "Apus"
-msgstr "Apus"
-
-#: src/translations.h:137
-msgid "Ophiuchus"
-msgstr "Ophiuchus"
-
-#: src/translations.h:138
-msgid "Orion"
-msgstr "Orión"
-
-#: src/translations.h:139
-msgid "Pavo"
-msgstr "Pavo"
-
-#: src/translations.h:140
-msgid "Pegasus"
-msgstr "Pegaso"
-
-#: src/translations.h:141
-msgid "Pictor"
-msgstr "Pictor"
-
-#: src/translations.h:142
-msgid "Perseus"
-msgstr "Perseo"
-
-#: src/translations.h:143
-msgid "Equuleus"
-msgstr "Caballito"
-
-#: src/translations.h:144
-msgid "Canis Minor"
-msgstr "Can Menor"
-
-#: src/translations.h:145
-msgid "Leo Minor"
-msgstr "Leo Menor"
-
-#: src/translations.h:146
-msgid "Vulpecula"
-msgstr "Vulpecula"
-
-#: src/translations.h:147
-msgid "Ursa Minor"
-msgstr "Osa Menor"
-
-#: src/translations.h:148
-msgid "Phoenix"
-msgstr "Fénix"
-
-#: src/translations.h:149
-msgid "Piscis Austrinus"
-msgstr "Piscis Austral"
-
-#: src/translations.h:150
-msgid "Pisces"
-msgstr "Piscis"
-
-#: src/translations.h:151
-msgid "Volans"
-msgstr "Volans"
-
-#: src/translations.h:152
-msgid "Puppis"
-msgstr "Popa"
-
-#: src/translations.h:153
-msgid "Reticulum"
-msgstr "Retículo"
-
-#: src/translations.h:154
-msgid "Sagittarius"
-msgstr "Sagitario"
-
-#: src/translations.h:155
-msgid "Scorpius"
-msgstr "Escorpión"
-
-#: src/translations.h:157
-msgid "Serpens"
-msgstr "Serpiente"
-
-#: src/translations.h:158
-msgid "Sextans"
-msgstr "Sextante"
-
-#: src/translations.h:159
-#, fuzzy
-msgid "Mensa"
-msgstr "Mensa"
-
-#: src/translations.h:160
-msgid "Taurus"
-msgstr "Tauro"
-
-#: src/translations.h:161
-msgid "Telescopium"
-msgstr "Telescopio"
-
-#: src/translations.h:162
-msgid "Tucana"
-msgstr "Tucana"
-
-#: src/translations.h:163
-msgid "Triangulum"
-msgstr "Triángulo"
-
-#: src/translations.h:164
-msgid "Triangulum Australe"
-msgstr "Triángulo Austral"
-
-#: src/translations.h:165
-msgid "Aquarius"
-msgstr "Acuario"
-
-#: src/translations.h:166
-msgid "Virgo"
-msgstr "Virgo"
+#: src/stel_ui_conf.cpp:278
+msgid "Using System Default Time Zone"
+msgstr "Usando zona horaria predeterminada del sistema :"
 
 #: src/translations.h:167
 msgid "Vela"
 msgstr "Vela"
 
-#: src/translations.h:170
-msgid "Bull's Foreleg"
-msgstr "Pata de Toro"
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venus"
 
-#: src/translations.h:171
-msgid "Two Poles"
-msgstr "Dos Polos"
+#: src/stel_ui_conf.cpp:548
+msgid "Video"
+msgstr "Vídeo"
 
-#: src/translations.h:172
-msgid "Lion"
-msgstr "León"
+#: src/stel_ui_conf.cpp:395
+msgid "Viewport Distorter"
+msgstr ""
 
-#: src/translations.h:173
-msgid "Two Jaws"
-msgstr "Mordaza"
+#: src/translations.h:166
+msgid "Virgo"
+msgstr "Virgo"
 
-#: src/translations.h:174
-msgid "Sah"
-msgstr "Sah"
+#: src/translations.h:295
+msgid "Voice of Joy"
+msgstr "Voz de Ánimo"
 
-#: src/translations.h:175
-msgid "Bird"
-msgstr "Pájaro"
+#: src/translations.h:151
+msgid "Volans"
+msgstr "Volans"
 
-#: src/translations.h:176
-msgid "Sek"
-msgstr "Sek"
+#: src/translations.h:146
+msgid "Vulpecula"
+msgstr "Vulpecula"
 
-#: src/translations.h:177
-msgid "Triangle"
-msgstr "Triángulo"
+#: src/translations.h:66 src/s_gui.cpp:2687
+msgid "W"
+msgstr "O"
 
-#: src/translations.h:178
-msgid "Ferry Boat"
-msgstr "Transbordador"
-
-#: src/translations.h:179 src/translations.h:250
-msgid "Boat"
-msgstr "Barco"
-
-#: src/translations.h:180
-msgid "Crocodile"
-msgstr "Cocodrilo"
-
-#: src/translations.h:181
-#, fuzzy
-msgid "Selkis"
-msgstr "Selkis"
-
-#: src/translations.h:182
-msgid "Prow"
-msgstr "Proa"
-
-#: src/translations.h:183
-msgid "Horus"
-msgstr "Horus (Halcón)"
-
-#: src/translations.h:184
-msgid "Sheepfold"
-msgstr "Rebaño de Ovejas"
-
-#: src/translations.h:185
-msgid "Giant"
-msgstr "Gigante"
-
-#: src/translations.h:186
-msgid "Hippopotamus"
-msgstr "Hipopotamo"
-
-#: src/translations.h:187
-msgid "Flock"
-msgstr "Grupo"
-
-#: src/translations.h:188
-msgid "Pair of Stars"
-msgstr "par de estrellas"
-
-#: src/translations.h:189
-#, fuzzy
-msgid "Khanuwy Fish"
-msgstr "Pez Khanuwy"
-
-#: src/translations.h:190 src/translations.h:229
-msgid "Net"
-msgstr "red"
-
-#: src/translations.h:191
-msgid "Jaw"
-msgstr "Mandibula"
-
-#: src/translations.h:192
-msgid "Mooring Post"
-msgstr "Pilar de Anclaje"
-
-#: src/translations.h:193
-#, fuzzy
-msgid "Kenemet"
-msgstr "Kenemet"
-
-#: src/translations.h:194
-#, fuzzy
-msgid "Chematy"
-msgstr "Chematy"
+#: src/translations.h:218
+msgid "Wall"
+msgstr "Muro"
 
 #: src/translations.h:195
 #, fuzzy
 msgid "Waty Bekety"
 msgstr "Waty Bekety"
 
-#: src/translations.h:196
-msgid "Sheep"
-msgstr "Carnero"
+#: src/translations.h:266
+msgid "Weaving Girl"
+msgstr "Tejedora"
 
-#: src/translations.h:197
-msgid "Stars of Water"
-msgstr "Estrellas de Agua"
+#: src/translations.h:236
+msgid "Well"
+msgstr "Pozo"
 
-#: src/translations.h:200
-msgid "Northern Dipper"
-msgstr "Cucharón del Norte"
+#: src/translations.h:76
+msgid "Western"
+msgstr "Occidental"
 
-#: src/translations.h:201
-msgid "Curved Array"
-msgstr "Matriz Curvada"
+#: src/translations.h:280
+msgid "Western Door"
+msgstr "Puerta del oeste"
 
-#: src/translations.h:202
-msgid "Coiled Thong"
-msgstr "Cuerda enrollada"
+#: src/translations.h:212
+msgid "Willow"
+msgstr "Sauce"
 
 #: src/translations.h:203
 msgid "Wings"
 msgstr "Alas"
-
-#: src/translations.h:204
-msgid "Chariot"
-msgstr "Carro"
-
-#: src/translations.h:205
-msgid "Tail"
-msgstr "Cola"
 
 #: src/translations.h:206
 #, fuzzy
 msgid "Winnowing Basket"
 msgstr "Cubo aventado"
 
-#: src/translations.h:207 src/translations.h:330
-msgid "Dipper"
-msgstr "Carro"
-
-#: src/translations.h:208
-msgid "Drum"
-msgstr "Tambor"
-
-#: src/translations.h:209
-msgid "Three Steps"
-msgstr "Tres Pasos"
-
-#: src/translations.h:210
-msgid "Imperial Guards"
-msgstr "Guardias Imperiales"
-
-#: src/translations.h:211
-msgid "Horn"
-msgstr "Cuerno"
-
-#: src/translations.h:212
-msgid "Willow"
-msgstr "Sauce"
-
-#: src/translations.h:213
-msgid "Imperial Passageway"
-msgstr "Pasadizo Imperial"
-
-#: src/translations.h:214
-msgid "Kitchen"
-msgstr "Cocina"
-
-#: src/translations.h:215
-msgid "River Turtle"
-msgstr "Río Tortuga"
-
-#: src/translations.h:216
-msgid "Stomach"
-msgstr "Estómago"
-
-#: src/translations.h:217
-msgid "Great General"
-msgstr "Gran General"
-
-#: src/translations.h:218
-msgid "Wall"
-msgstr "Muro"
-
-#: src/translations.h:219
-msgid "Legs"
-msgstr "Patas"
-
-#: src/translations.h:220
-msgid "Root"
-msgstr "Raíz"
-
-#: src/translations.h:221
-#, fuzzy
-msgid "Ramparts"
-msgstr "Murallas"
-
-#: src/translations.h:222
-msgid "Flying Corridor"
-msgstr "Corredor volante"
-
-#: src/translations.h:223
-msgid "Outer Fence"
-msgstr "Ventana Exterior"
-
-#: src/translations.h:224
-#, fuzzy
-msgid "Ford"
-msgstr "Vado"
-
-#: src/translations.h:225
-msgid "Seven Excellencies"
-msgstr "Siete Maravillas"
-
-#: src/translations.h:226
-msgid "Market"
-msgstr "Mercado"
-
-#: src/translations.h:227
-msgid "Five Chariots"
-msgstr "Cinco Carros"
-
-#: src/translations.h:228
-msgid "Rolled Tongue"
-msgstr "Lengua Rodante"
-
-#: src/translations.h:230
-msgid "Toilet"
-msgstr "Aseo"
-
-#: src/translations.h:231
-msgid "Screen"
-msgstr "Pantalla"
-
-#: src/translations.h:232
-msgid "Soldiers Market"
-msgstr "Mercado Militar"
-
-#: src/translations.h:233
-#, fuzzy
-msgid "Square Granary"
-msgstr "Granero Cuadrado"
-
-#: src/translations.h:234
-msgid "Three Stars"
-msgstr "Tres estrellas"
-
-#: src/translations.h:235
-msgid "Four Channels"
-msgstr "Cuatro canales"
-
-#: src/translations.h:236
-msgid "Well"
-msgstr "Pozo"
-
-#: src/translations.h:237
-msgid "South River"
-msgstr "Río Sur"
-
-#: src/translations.h:238
-msgid "North River"
-msgstr "Río Norte"
-
-#: src/translations.h:239
-msgid "Five Feudal Kings"
-msgstr "Cinco Reyes Feudales"
-
-#: src/translations.h:240
-msgid "Orchard"
-msgstr "Huerto"
-
-#: src/translations.h:241
-msgid "Meadows"
-msgstr "Prados"
-
-#: src/translations.h:242
-msgid "Circular Granary"
-msgstr "Granero Circular"
-
-#: src/translations.h:243
-msgid "Purple Palace"
-msgstr "Palacio Púrpura"
-
-#: src/translations.h:244
-msgid "Extended Net"
-msgstr "Red Extendida"
-
-#: src/translations.h:245
-msgid "Arsenal"
-msgstr "Arsenal"
-
-#: src/translations.h:246
-msgid "Hook"
-msgstr "Garfio"
-
-#: src/translations.h:247
-msgid "Supreme Palace"
-msgstr "Palacio Supremo"
-
-#: src/translations.h:248
-msgid "Jade Well"
-msgstr "Pozo de jade"
-
-#: src/translations.h:249
-msgid "Lance"
-msgstr "Lanza"
-
-#: src/translations.h:251
-msgid "Mausoleum"
-msgstr "Mausoleo"
-
-#: src/translations.h:252
-msgid "Dog"
-msgstr "Perro"
-
-#: src/translations.h:253
-msgid "Earth God's Temple"
-msgstr "Templo del Dios Tierra"
-
-#: src/translations.h:254
-msgid "Bow and Arrow"
-msgstr "Arco y Flecha"
-
-#: src/translations.h:255
-#, fuzzy
-msgid "Pestle"
-msgstr "Almirez"
-
-#: src/translations.h:256
-msgid "Mortar"
-msgstr "Mortero"
-
-#: src/translations.h:257
-msgid "Rooftop"
-msgstr "Tejado"
-
-#: src/translations.h:258
-msgid "Thunderbolt"
-msgstr "Rayo"
-
-#: src/translations.h:259
-msgid "Chariot Yard"
-msgstr "Patio del Carro"
-
-#: src/translations.h:260
-msgid "Good Gourd"
-msgstr "Buena Calabaza"
-
-#: src/translations.h:261
-msgid "Rotten Gourd"
-msgstr "Calabaza Podrida"
-
-#: src/translations.h:262
-msgid "Encampment"
-msgstr "Campamento"
-
-#: src/translations.h:263
-msgid "Thunder and Lightning"
-msgstr "Truenos y Relámpagos"
-
-#: src/translations.h:264
-msgid "Palace Gate"
-msgstr "Puerta del palacio"
-
-#: src/translations.h:265
-msgid "Emptiness"
-msgstr "Vacío"
-
-#: src/translations.h:266
-msgid "Weaving Girl"
-msgstr "Tejedora"
-
-#: src/translations.h:267
-msgid "Girl"
-msgstr "Chica"
-
-#: src/translations.h:268
-msgid "Ox"
-msgstr "Buey"
-
-#: src/translations.h:269
-msgid "Heart"
-msgstr "Corazón"
-
-#: src/translations.h:270
-msgid "Room"
-msgstr "Habitación"
-
-#: src/translations.h:271
-msgid "Spring"
-msgstr "Primavera"
-
-#: src/translations.h:272
-msgid "Establishment"
-msgstr "Asentamiento"
-
-#: src/translations.h:273
-#, fuzzy
-msgid "Flail"
-msgstr "Mangual"
-
-#: src/translations.h:274
-#, fuzzy
-msgid "Spear"
-msgstr "Lanza"
-
-#: src/translations.h:275
-msgid "Right Flag"
-msgstr "Indicador Derecho"
-
-#: src/translations.h:276
-msgid "Left Flag"
-msgstr "Indicador Izquierdo"
-
-#: src/translations.h:277
-msgid "Drumstick"
-msgstr "Palillo"
-
-#: src/translations.h:278
-#, fuzzy
-msgid "Bond"
-msgstr "Nexo"
-
 #: src/translations.h:279
 msgid "Woman's Bed"
 msgstr "Cama de Mujer"
-
-#: src/translations.h:280
-msgid "Western Door"
-msgstr "Puerta del oeste"
-
-#: src/translations.h:281
-msgid "Eastern Door"
-msgstr "Puerta del este"
-
-#: src/translations.h:282
-msgid "Farmland"
-msgstr "Huerta"
-
-#: src/translations.h:283
-msgid "Star"
-msgstr "Estrella"
-
-#: src/translations.h:284
-msgid "Ghosts"
-msgstr "Fantasmas"
 
 #: src/translations.h:285
 msgid "Xuanyuan"
 msgstr "Xuanyuan"
 
-#: src/translations.h:286
-msgid "Tripod"
-msgstr "Trípode"
+#: src/s_gui.cpp:2736
+msgid "Year"
+msgstr "Año"
 
-#: src/translations.h:287
-msgid "Neck"
-msgstr "Cuello"
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2235
+msgid "Yes"
+msgstr "Si"
 
 #: src/translations.h:288
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/translations.h:289
-msgid "Market Officer"
-msgstr "Gerente del Mercado"
+#: src/stel_ui_tuiconf.cpp:439
+msgid "Zoom Duration: "
+msgstr "Duración del zoom: "
 
-#: src/translations.h:290
-msgid "Banner of Three Stars"
-msgstr "Barra de Tres Estrellas"
-
-#: src/translations.h:293
-#, fuzzy
-msgid "Bailer"
-msgstr "Achicador"
-
-#: src/translations.h:294
-#, fuzzy
-msgid "Cat's Cradle"
-msgstr "Andamio"
-
-#: src/translations.h:295
-msgid "Voice of Joy"
-msgstr "Voz de Ánimo"
-
-#: src/translations.h:296
-msgid "The Seven"
-msgstr "Los siete"
-
-#: src/translations.h:297
-msgid "Maui's Fishhook"
-msgstr "Anzuelo de Maui"
-
-#: src/translations.h:298
-msgid "Navigator's Triangle"
-msgstr "Triángulo del Navegante"
-
-#: src/translations.h:299
-msgid "Kite of Kawelo"
-msgstr "Cometa de Kawelo"
-
-#: src/translations.h:300
-#, fuzzy
-msgid "Frigate Bird"
-msgstr "Rabihorcado"
-
-#: src/translations.h:301
-msgid "Cared for by Moon"
-msgstr "Apreciado por la Luna"
-
-#: src/translations.h:302
-msgid "Dolphin"
-msgstr "Delfín"
-
-#: src/translations.h:305
-msgid "Revolving Male"
-msgstr ""
-
-#: src/translations.h:306
-msgid "Revolving Female"
-msgstr ""
-
-#: src/translations.h:307
-msgid "Man with Feet Apart"
-msgstr ""
-
-#: src/translations.h:308
-#, fuzzy
-msgid "Lizard"
-msgstr "Pájaro"
-
-#: src/translations.h:309
-msgid "Dilyehe"
-msgstr ""
-
-#: src/translations.h:310
-msgid "First Big One"
-msgstr ""
-
-#: src/translations.h:311
-msgid "Rabbit Tracks"
-msgstr ""
-
-#: src/translations.h:312
-msgid "First Slim One"
-msgstr ""
-
-#: src/translations.h:315
-#, fuzzy
-msgid "Two Sunbeams"
-msgstr "Mordaza"
-
-#: src/translations.h:316
-msgid "Two Placed Far Apart"
-msgstr ""
-
-#: src/translations.h:317
-#, fuzzy
-msgid "Dogs"
-msgstr "Perro"
-
-#: src/translations.h:318
-#, fuzzy
-msgid "Collarbones"
-msgstr "Constelaciones"
-
-#: src/translations.h:319
-msgid "Lamp Stand"
-msgstr ""
-
-#: src/translations.h:320
-#, fuzzy
-msgid "Caribou"
-msgstr "Carro"
-
-#: src/translations.h:321
-msgid "Two in Front"
-msgstr ""
-
-#: src/translations.h:322
-msgid "Breastbone"
-msgstr ""
-
-#: src/translations.h:323
-msgid "Runners"
-msgstr ""
-
-#: src/translations.h:324
-msgid "Blubber Container"
-msgstr ""
-
-#: src/translations.h:327
-msgid "Hand"
-msgstr ""
-
-#: src/translations.h:328
-msgid "Snake"
-msgstr ""
-
-#: src/translations.h:329
-msgid "Fireplace"
-msgstr ""
-
-#: src/translations.h:331
-msgid "Race Track"
-msgstr ""
-
-#: src/translations.h:332
-#, fuzzy
-msgid "Animal"
-msgstr "Antlia"
-
-#: src/translations.h:333
-msgid "Elk"
-msgstr ""
-
-#: src/translations.h:334
-msgid "Seven Little Girls"
-msgstr ""
-
-#: src/translations.h:335
-#, fuzzy
-msgid "Dried Willow"
-msgstr "Sauce"
-
-#: src/translations.h:336
-msgid "Salamander"
-msgstr ""
-
-#: src/translations.h:337
-#, fuzzy
-msgid "Turtle"
-msgstr "Río Tortuga"
-
-#: src/translations.h:338
-#, fuzzy
-msgid "Thunderbird"
-msgstr "Rayo"
-
-#: src/translations.h:339
-msgid "Bear's Lodge"
-msgstr ""
-
-#: src/translations.h:345
-msgid "Select and exit to run."
-msgstr "Seleccione y salga para funcionar"
-
-#: src/translations.h:346
-#, fuzzy
-msgid "USB Script: "
-msgstr "Scripts "
-
-#: src/s_gui.cpp:2222 src/s_gui.cpp:2268
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: src/s_gui.cpp:2240 src/s_gui.cpp:2266
-msgid "OK"
-msgstr "OK"
-
-#: src/s_gui.cpp:2736
-msgid "Year"
-msgstr "Año"
-
-#: src/s_gui.cpp:2739
-msgid "Month"
-msgstr "Mes"
-
-#: src/s_gui.cpp:2742
-msgid "Day"
-msgstr "Día"
-
-#: src/s_gui.cpp:2745
-msgid "Hour"
-msgstr "Hora"
-
-#: src/s_gui.cpp:2748
-msgid "Minutes"
-msgstr "Minutos"
-
-#: src/s_gui.cpp:2751
-msgid "Seconds"
-msgstr "Segundos"
-
-#~ msgid ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-#~ msgstr ""
-#~ "Uso: %s [OPCIÓN] ...\n"
-#~ " -v, --version          Muestra información de la versión y finaliza.\n"
-#~ " -h, --help             Muestra la ayuda y finaliza.\n"
-
-#~ msgid "%s: Bad command line argument(s)\n"
-#~ msgstr "%s: Argumento(s) de la línea de comandos incorrecto(s)\n"
-
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "Intenta `%s --help' para más información.\n"
+#: src/stel_ui_conf.cpp:406
+msgid "change to apply."
+msgstr "cambiar para aplicar."
 
 #, fuzzy
 #~ msgid ""
@@ -2164,6 +2149,9 @@ msgstr "Segundos"
 
 #~ msgid "%s%s: mag %.1f"
 #~ msgstr "%s%s: mag %.1f"
+
+#~ msgid "%s: Bad command line argument(s)\n"
+#~ msgstr "%s: Argumento(s) de la línea de comandos incorrecto(s)\n"
 
 #, fuzzy
 #~ msgid "%s: mag %.1f %s"
@@ -2542,11 +2530,23 @@ msgstr "Segundos"
 #~ "como para poder importar sus parámetros (%s).\n"
 #~ "Será reemplazado por el archivo de configuración por defecto.\n"
 
+#~ msgid "Try `%s --help' for more information.\n"
+#~ msgstr "Intenta `%s --help' para más información.\n"
+
 #~ msgid "Try to create directory %s\n"
 #~ msgstr "Intento de crear el directorio %s\n"
 
 #~ msgid "Type : "
 #~ msgstr "Tipo : "
+
+#~ msgid ""
+#~ "Usage: %s [OPTION] ...\n"
+#~ " -v, --version          Output version information and exit.\n"
+#~ " -h, --help             Display this help and exit.\n"
+#~ msgstr ""
+#~ "Uso: %s [OPCIÓN] ...\n"
+#~ " -v, --version          Muestra información de la versión y finaliza.\n"
+#~ " -h, --help             Muestra la ayuda y finaliza.\n"
 
 #~ msgid "Will create config files in %s\n"
 #~ msgstr "Se crearán los archivos de configuración en %s\n"
