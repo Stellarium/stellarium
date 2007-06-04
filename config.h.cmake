@@ -24,4 +24,6 @@
 #cmakedefine INSTALL_LOCALEDIR "${INSTALL_LOCALEDIR}"
 #cmakedefine PACKAGE_VERSION "${PACKAGE_VERSION}"
 
+#cmakedefine ENABLE_NLS ${ENABLE_NLS}
+
 #endif
