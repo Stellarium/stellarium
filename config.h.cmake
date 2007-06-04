@@ -19,7 +19,7 @@
 #cmakedefine USE_SDL
 
 /* Define whether SDL_mixer is to be used. */
-#cmakedefine HAVE_SDL_SDL_MIXER_H
+#cmakedefine HAVE_SDL_SDL_MIXER ${HAVE_SDL_SDL_MIXER}
 
 #define PACKAGE_NAME "stellarium"
 
