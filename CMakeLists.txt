@@ -1,3 +1,5 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
@@ -5,6 +7,36 @@ SET(STELLARIUM_MINOR "9")
 SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
+
+########### Packaging info for CPack ###########
+INCLUDE(InstallRequiredSystemLibraries)
+
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
+SET(CPACK_GENERATOR "TGZ")
+SET(CPACK_SOURCE_GENERATOR "TGZ")
+IF(WIN32 AND NOT UNIX)
+  # There is a bug in NSI that does not handle full unix paths properly. Make
+  # sure there is at least one set of four (4) backlasshes.
+  SET(CPACK_PACKAGE_ICON "${SOURCE_DIR}/data/\\\\icon.bmp")
+  SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\stellarium.exe")
+  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} Stellarium")
+  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.stellarium.org")
+  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.stellarium.com")
+  SET(CPACK_NSIS_MODIFY_PATH ON)
+ELSE(WIN32 AND NOT UNIX)
+  SET(CPACK_STRIP_FILES "bin/stellarium")
+  SET(CPACK_SOURCE_STRIP_FILES "")
+ENDIF(WIN32 AND NOT UNIX)
+SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
+INCLUDE(CPack)
 
 ########### Main global variables ###########
 SET(CMAKE_BUILD_TYPE Debug)   # Choices are None Debug Release RelWithDebInfo MinSizeRel
