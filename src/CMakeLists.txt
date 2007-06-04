@@ -154,6 +154,9 @@ SET(stellarium_SRCS
    stelutils/spgrid.hpp
    stelutils/GLee.c
    stelutils/GLee.h
+   stelutils/StelKey.hpp
+   stelutils/StelTypes.hpp
+   stelutils/fixx11h.h
 
    stelutils/iniparser/dictionary.c
    stelutils/iniparser/dictionary.h
