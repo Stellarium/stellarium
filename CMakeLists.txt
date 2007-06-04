@@ -45,8 +45,13 @@ CHECK_FUNCTION_EXISTS(mktime HAVE_MKTIME)
 CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 
 ########### Others ###########
+# Define if we want to manage the main window with SDL or Qt4
+# Note that Qt4 is required in any case anyway
 SET(USE_QT4 1)
 #SET(USE_SDL 1)
+
+# Activate translation with gettext
+SET(ENABLE_NLS 1)
 
 ########### Find packages ###########
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -56,7 +61,25 @@ INCLUDE(${QT_USE_FILE})
 
 IF(USE_SDL)
   FIND_PACKAGE(SDL)
+  FIND_PACKAGE(SDL_mixer)
+  IF (SDLMIXER_FOUND)
+    SET(HAVE_SDL_SDL_MIXER true)
+  ELSE (SDLMIXER_FOUND)
+    SET(SDLMIXER_INCLUDE_DIR "")
+    SET(SDLMIXER_LIBRARY "")
+  ENDIF (SDLMIXER_FOUND)
 ENDIF(USE_SDL)
+
+IF(ENABLE_NLS)
+  FIND_PACKAGE(Iconv REQUIRED)
+  FIND_PATH(INTL_INCLUDE_DIR libintl.h 
+    /usr/include 
+    /usr/local/include) 
+  FIND_LIBRARY(INTL_LIBRARIES intl c
+    PATHS 
+    /usr/lib/
+    /usr/local/lib) 
+ENDIF(ENABLE_NLS)
 
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(PNG REQUIRED)
@@ -80,7 +103,6 @@ INCLUDE(TestBigEndian)
 TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
 SET(HAVE_LIBCURL ${CURL_FOUND})
 SET(PACKAGE_VERSION ${VERSION})
-SET(ENABLE_NLS 1)
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 ########### Add macros ###########

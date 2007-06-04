@@ -60,9 +60,8 @@ StelModule* StelModuleMgr::getModule(const string& moduleID)
 	}
 	return iter->second;
 }
-#ifdef USE_QT4
+
 #include <QPluginLoader>
-#endif
 
 StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 {
@@ -80,11 +79,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 	{
 		cerr << "ERROR while locating module path: " << e.what() << endl;
 	}
-#ifndef USE_QT4
-	cerr << "This version of stellarium was compiled without enabling dynamic loading of modules." << endl;
-	cerr << "Module " << moduleID << " will not be loaded." << endl;
-	return NULL;
-#else
+
 	QPluginLoader loader(moduleFullPath.c_str());
 	if (!loader.load())
 	{
@@ -105,7 +100,6 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 	StelModule* sMod = plugInt->getStelModule();
 	cout << "Loaded external module " << moduleID << "." << endl;
 	return sMod;
-#endif
 }
 
 // Generate properly sorted calling lists for each action (e,g, draw, update)

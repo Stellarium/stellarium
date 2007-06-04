@@ -102,20 +102,14 @@ public:
 //! @brief Describe queued textures loaded in thread
 struct QueuedTex
 {
-#ifdef USE_QT4
 	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, class QFile* afile) :
 		tex(atex), userPtr(auserPtr), url(aurl), file(afile) {;}
-#else
-	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl) :
-		tex(atex), userPtr(auserPtr), url(aurl) {;}
-#endif
+
 	~QueuedTex();
 	ManagedSTextureSP tex;
 	void* userPtr;
 	std::string url;
-#ifdef USE_QT4
 	class QFile* file;
-#endif
 };
 
 //! @brief Manage textures loading and manipulation.
