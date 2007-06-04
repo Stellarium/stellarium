@@ -1308,13 +1308,17 @@ void StarMgr::setColorScheme(const InitParser& conf, const std::string& section)
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
 ***************************************************************************/
-void StarMgr::load_data(const InitParser &conf,LoadingBar &lb)
+void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 {
 	// Please do not init twice:
 	assert(max_geodesic_grid_level < 0);
 
 	cout << "Loading star data...";
 
+	const string starsIniFile = StelApp::getInstance().getFileMgr().findFile(string("stars/default/stars.ini"));
+	InitParser conf;
+	conf.load(starsIniFile);
+				         
 	for (int i=0; i<100; i++)
 	{
 		char key_name[64];
@@ -1370,7 +1374,7 @@ void StarMgr::load_data(const InitParser &conf,LoadingBar &lb)
 	}
 
 	const string cat_hip_sp_file_name
-	  = conf.get_str("stars",cat_hip_sp_file_name,"");
+	  = conf.get_str("stars","cat_hip_sp_file_name","");
 	if (cat_hip_sp_file_name.empty())
 	{
 		cerr << "ERROR: stars:cat_hip_sp_file_name not found" << endl;
