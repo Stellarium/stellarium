@@ -172,7 +172,6 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
 	angle = fmod(angle,2.0*M_PI);
-	if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
 	sign=true;
 	if (angle<0)
 	{
