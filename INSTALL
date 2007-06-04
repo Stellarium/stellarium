@@ -29,10 +29,10 @@ Once they are installed you are ready to compile Stellarium sources:
 
 Untar the tar.gz archive:
 ~$ tar -xzf stellarium-XXX.tar.gz
-~$ cd stellarium
+~$ cd stellarium-XXX
 
 Then type:
-~$ ./configure
+~$ cmake .
 ~$ make
 
 Then to launch the local version of the program type:
@@ -44,9 +44,6 @@ type as root:
 
 Once installed you may want to clean the build directory:
 ~$ make clean
-
-If you want to uninstall Stellarium, type as root:
-~$ make uninstall
 
 ===============================================================================
 Special instructions for COMPILATION on MACOSX with Xcode 

@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4.2)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -7,36 +7,6 @@ SET(STELLARIUM_MINOR "9")
 SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
-
-########### Packaging info for CPack ###########
-INCLUDE(InstallRequiredSystemLibraries)
-
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
-SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
-SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
-SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
-SET(CPACK_GENERATOR "TGZ")
-SET(CPACK_SOURCE_GENERATOR "TGZ")
-IF(WIN32 AND NOT UNIX)
-  # There is a bug in NSI that does not handle full unix paths properly. Make
-  # sure there is at least one set of four (4) backlasshes.
-  SET(CPACK_PACKAGE_ICON "${SOURCE_DIR}/data/\\\\icon.bmp")
-  SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\stellarium.exe")
-  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} Stellarium")
-  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.stellarium.org")
-  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.stellarium.com")
-  SET(CPACK_NSIS_MODIFY_PATH ON)
-ELSE(WIN32 AND NOT UNIX)
-  SET(CPACK_STRIP_FILES "bin/stellarium")
-  SET(CPACK_SOURCE_STRIP_FILES "")
-ENDIF(WIN32 AND NOT UNIX)
-SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-INCLUDE(CPack)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
@@ -55,7 +25,6 @@ ELSE(UNIX AND NOT WIN32)
  SET(STLPORT_LIBRARY "-lstlport.5.0")
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -L/home/fchereau/STLport/lib")
 ENDIF(UNIX AND NOT WIN32)
-
 
 
 ########### Check headers ###########
@@ -97,33 +66,61 @@ FIND_PACKAGE(FreeType2 REQUIRED)
 FIND_PACKAGE(CURL)
 FIND_PACKAGE(Gettext REQUIRED)
 
-########### Generate a config.h ###########
-INCLUDE(TestBigEndian)
-TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
-SET(HAVE_LIBCURL ${CURL_FOUND})
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
-
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
   SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/stellarium)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
-  SET(DATA_DESTINATION "share/stellarium")
-  SET(PO_DESTINATION "share/locale")
-  SET(BIN_DESTINATION "bin")
 ELSE(UNIX AND NOT WIN32)
-  SET(INSTALL_DATADIR data)
+  SET(INSTALL_DATADIR .)
   SET(INSTALL_LOCALEDIR locale)
-  SET(DATA_DESTINATION "data")
-  SET(PO_DESTINATION "locale")
-  SET(BIN_DESTINATION ".")
 ENDIF(UNIX AND NOT WIN32)
+
+########### Generate a config.h ###########
+INCLUDE(TestBigEndian)
+TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
+SET(HAVE_LIBCURL ${CURL_FOUND})
+SET(PACKAGE_VERSION ${VERSION})
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 ########### Add macros ###########
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
-ADD_DEFINITIONS(-DINSTALL_DATADIR=\\"${INSTALL_DATADIR}\\")
-ADD_DEFINITIONS(-DINSTALL_LOCALEDIR=\\"${INSTALL_LOCALEDIR}\\")
-ADD_DEFINITIONS(-DPACKAGE_VERSION=\\"${VERSION}\\")
 
+########### install files ###############
+
+########### Packaging info for CPack ###########
+INCLUDE(InstallRequiredSystemLibraries)
+
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
+SET(CPACK_GENERATOR "TGZ")
+SET(CPACK_SOURCE_GENERATOR "TGZ")
+IF(WIN32 AND NOT UNIX)
+  # There is a bug in NSI that does not handle full unix paths properly. Make
+  # sure there is at least one set of four (4) backlasshes.
+  SET(CPACK_PACKAGE_ICON "${SOURCE_DIR}/data/\\\\icon.bmp")
+  SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\stellarium.exe")
+  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} Stellarium")
+  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.stellarium.org")
+  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.stellarium.org")
+  SET(CPACK_NSIS_MODIFY_PATH ON)
+ELSE(WIN32 AND NOT UNIX)
+  SET(CPACK_STRIP_FILES "bin/stellarium")
+  SET(CPACK_SOURCE_STRIP_FILES "")
+ENDIF(WIN32 AND NOT UNIX)
+SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
+INCLUDE(CPack)
+
+########### Generate doxygen doc ###############
+ADD_CUSTOM_TARGET(doc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
+
+########### Subdirectories ###############
 ADD_SUBDIRECTORY( intl ) 
 ADD_SUBDIRECTORY( data ) 
 ADD_SUBDIRECTORY( src ) 
@@ -135,9 +132,3 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae ) 
 ADD_SUBDIRECTORY( scripts ) 
 ADD_SUBDIRECTORY( stars ) 
-
-########### install files ###############
-
-########### Generate doxygen doc ###############
-ADD_CUSTOM_TARGET(doc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
-
