@@ -753,7 +753,7 @@ SPACE            : Center on selected object\n\
 \n"))+
 		wstring(_("Display options:\n\
 ENTER : Equatorial/altazimuthal mount\n\
-F1  : Toggle fullscreen if possible.\n\
+F1  : Toggle fullscreen / window.\n\
 C   : Constellation lines       V   : Constellation labels\n\
 R   : Constellation art         E   : Equatorial grid\n\
 Z   : Azimuthal grid            N   : Nebula labels\n\

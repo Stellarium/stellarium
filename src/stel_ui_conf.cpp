@@ -976,6 +976,8 @@ void StelUI::setVideoOption(void)
 		conf.set_int("video:screen_w", w);
 		conf.set_int("video:screen_h", h);
 	}
+	
+	conf.set_boolean("video:fullscreen", app->getFullScreen());
 
 	conf.save(app->getConfigFilePath());
 }
