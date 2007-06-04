@@ -39,7 +39,11 @@ SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
 INCLUDE(CPack)
 
 ########### Main global variables ###########
-SET(CMAKE_BUILD_TYPE Debug)   # Choices are None Debug Release RelWithDebInfo MinSizeRel
+IF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING
+      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+      FORCE)
+ENDIF(NOT CMAKE_BUILD_TYPE)
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS -Wall)       # additional C compile flags
