@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-05-11 18:10+0200\n"
+"POT-Creation-Date: 2007-06-04 11:24+0200\n"
 "PO-Revision-Date: 2007-01-13 20:29+0000\n"
 "Last-Translator: Nkolay Parukhin <nik@sevpinro.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,198 +17,177 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Rosetta-Export-Date: 2007-01-18 10:38+0000\n"
 
-#: src/main.cpp:67
-#, c-format
-msgid ""
-"Usage: %s [OPTION] ...\n"
-" -v, --version          Output version information and exit.\n"
-" -h, --help             Display this help and exit.\n"
-msgstr ""
-"Использование: %s [ОПЦИИ] ...\n"
-" -v, --version Выводит информацию о версии и завершает работу.\n"
-" -h, --help Отображает эту справку и завершает работу.\n"
-
-#: src/main.cpp:90
-#, c-format
-msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: Неверный(е) аргумент(ы) командной строки.\n"
-
-#: src/main.cpp:91
-#, c-format
-msgid "Try `%s --help' for more information.\n"
-msgstr "Попробуйте '%s --help' для дополнительной информации.\n"
-
-#: src/ConstellationMgr.cpp:286
+#: src/ConstellationMgr.cpp:293
 msgid "Loading Constellation Art: "
 msgstr "Загружаются изображения созвездий: "
 
-#: src/StarMgr.cpp:766 src/StarMgr.cpp:792 src/StarMgr.cpp:884
-#: src/StarMgr.cpp:947 src/Nebula.cpp:93 src/Nebula.cpp:115 src/Planet.cpp:110
-#: src/Planet.cpp:156
+#: src/StarMgr.cpp:748 src/StarMgr.cpp:774 src/StarMgr.cpp:866
+#: src/StarMgr.cpp:929 src/Nebula.cpp:92 src/Nebula.cpp:114 src/Planet.cpp:107
+#: src/Planet.cpp:153
 msgid "Magnitude: "
 msgstr "Магнитуда: "
 
-#: src/StarMgr.cpp:769 src/StarMgr.cpp:887
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:869
 msgid "J2000"
 msgstr ""
 
-#: src/StarMgr.cpp:769 src/StarMgr.cpp:772 src/StarMgr.cpp:887
-#: src/StarMgr.cpp:893 src/Nebula.cpp:95 src/Planet.cpp:114
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:754 src/StarMgr.cpp:869
+#: src/StarMgr.cpp:875 src/Nebula.cpp:94 src/Planet.cpp:111
 msgid "RA/DE: "
 msgstr "Рад./Град.: "
 
-#: src/StarMgr.cpp:772 src/StarMgr.cpp:893
+#: src/StarMgr.cpp:754 src/StarMgr.cpp:875
 msgid "Equ of date"
 msgstr ""
 
-#: src/StarMgr.cpp:781 src/StarMgr.cpp:902 src/Nebula.cpp:101
-#: src/Planet.cpp:120
+#: src/StarMgr.cpp:763 src/StarMgr.cpp:884 src/Nebula.cpp:100
+#: src/Planet.cpp:117
 msgid "Az/Alt: "
 msgstr "Аз./Выс.: "
 
-#: src/StarMgr.cpp:907
+#: src/StarMgr.cpp:889
 msgid "Parallax: "
 msgstr ""
 
-#: src/StarMgr.cpp:909 src/StarMgr.cpp:952 src/Planet.cpp:123
-#: src/Planet.cpp:160
+#: src/StarMgr.cpp:891 src/StarMgr.cpp:934 src/Planet.cpp:120
+#: src/Planet.cpp:157
 msgid "Distance: "
 msgstr "Расстояние: "
 
-#: src/StarMgr.cpp:912 src/StarMgr.cpp:955
+#: src/StarMgr.cpp:894 src/StarMgr.cpp:937
 msgid " Light Years"
 msgstr " световых лет"
 
-#: src/StarMgr.cpp:916 src/StarMgr.cpp:959
+#: src/StarMgr.cpp:898 src/StarMgr.cpp:941
 msgid "Spectral Type: "
 msgstr "Спектральный класс: "
 
-#: src/StarMgr.cpp:1322
+#: src/StarMgr.cpp:1328
 #, fuzzy
 msgid "Loading catalog "
 msgstr "Загружается каталог NGC: "
 
-#: src/Nebula.cpp:103
+#: src/Nebula.cpp:102
 msgid "Type: "
 msgstr "Тип: "
 
-#: src/Nebula.cpp:104
+#: src/Nebula.cpp:103
 msgid "Size: "
 msgstr "Размер: "
 
-#: src/NebulaMgr.cpp:382
+#: src/NebulaMgr.cpp:394
 msgid "Loading NGC catalog: "
 msgstr "Загружается каталог NGC: "
 
-#: src/NebulaMgr.cpp:509
+#: src/NebulaMgr.cpp:526
 msgid "Loading Nebula Textures:"
 msgstr "Загружаются текстуры туманностей:"
 
-#: src/Planet.cpp:123 src/Planet.cpp:160
+#: src/Planet.cpp:120 src/Planet.cpp:157
 msgid "AU"
 msgstr "а.е."
 
-#: src/stel_ui.cpp:517 src/stel_ui.cpp:658
+#: src/stel_ui.cpp:544 src/stel_ui.cpp:685
 msgid "Script commander"
 msgstr "Редактор сценария"
 
-#: src/stel_ui.cpp:544
+#: src/stel_ui.cpp:571
 msgid "Invalid Script command"
 msgstr "Неверная команда сценария"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:650
 msgid "Drawing of the Constellations [C]"
 msgstr "Линии созвездий [C]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:652
 msgid "Names of the Constellations [V]"
 msgstr "Названия созвездий [V]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:654
 msgid "Constellations Art [R]"
 msgstr "Изображения созвездий [R]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:656
 msgid "Azimuthal Grid [Z]"
 msgstr "Азимутальная сетка [Z]"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:658
 msgid "Equatorial Grid [E]"
 msgstr "Экваториальная сетка [E]"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:660
 msgid "Ground [G]"
 msgstr "Земля [G]"
 
-#: src/stel_ui.cpp:635
+#: src/stel_ui.cpp:662
 msgid "Cardinal Points [Q]"
 msgstr "Стороны Света [Q]"
 
-#: src/stel_ui.cpp:637
+#: src/stel_ui.cpp:664
 msgid "Atmosphere [A]"
 msgstr "Атмосфера [A]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:666
 msgid "Nebulas [N]"
 msgstr "Туманности [N]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:668
 msgid "Help [H]"
 msgstr "Справка [H]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:670
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Экваториальная/Альтазимутальная установка"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:672
 msgid "Configuration window"
 msgstr "Окно настройки"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:675
 msgid "Night (red) mode"
 msgstr "Ночной (красный) режим"
 
-#: src/stel_ui.cpp:651
+#: src/stel_ui.cpp:678
 msgid "Quit [CTRL + Q]"
 msgstr "Выход [CTRL + Q]"
 
-#: src/stel_ui.cpp:653
+#: src/stel_ui.cpp:680
 msgid "Quit [CMD + Q]"
 msgstr "Выход [CMD + Q]"
 
-#: src/stel_ui.cpp:656
+#: src/stel_ui.cpp:683
 msgid "Search for object"
 msgstr "Поиск объекта"
 
-#: src/stel_ui.cpp:660
+#: src/stel_ui.cpp:687
 msgid "Goto selected object [SPACE]"
 msgstr "Выбранный объект в центр экрана [SPACE]"
 
-#: src/stel_ui.cpp:662
+#: src/stel_ui.cpp:689
 msgid "Flip horizontally"
 msgstr "Отразить по горизонтали"
 
-#: src/stel_ui.cpp:664
+#: src/stel_ui.cpp:691
 msgid "Flip vertically"
 msgstr "Отразить по вертикали"
 
-#: src/stel_ui.cpp:670
+#: src/stel_ui.cpp:697
 msgid "Decrease Time Speed [J]"
 msgstr "Замедлить/обратный ход времени [J]"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:699
 msgid "Real Time Speed [K]"
 msgstr "Скорость реальн. времени [K]"
 
-#: src/stel_ui.cpp:674
+#: src/stel_ui.cpp:701
 msgid "Increase Time Speed [L]"
 msgstr "Ускорить ход времени [L]"
 
-#: src/stel_ui.cpp:676
+#: src/stel_ui.cpp:703
 msgid "Return to Current Time"
 msgstr "Возврат в текущее время"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:712
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -219,11 +198,11 @@ msgstr ""
 "и комментарии нам на: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:731
 msgid "Information"
 msgstr "Информация"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:743
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -249,7 +228,7 @@ msgstr ""
 "ПРОБЕЛ : Выбранный объект в центр экрана\n"
 "\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:754
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -277,7 +256,8 @@ msgstr ""
 "4 , : Линия эклиптики      5 . : Линия экватора\n"
 "\n"
 
-#: src/stel_ui.cpp:739
+#: src/stel_ui.cpp:766
+#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -285,6 +265,7 @@ msgid ""
 "CTRL + S : Take a screenshot\n"
 "CTRL + R : Toggle script recording\n"
 "CTRL + F : Toggle object finder\n"
+"CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
 "Диалоги и другое управление:\n"
@@ -296,14 +277,15 @@ msgstr ""
 "CTRL + F : Включить поиск объекта\n"
 "\n"
 
-#: src/stel_ui.cpp:746
+#: src/stel_ui.cpp:774
+#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
 "8   : Set current time          J   : Decrease time rate\n"
 "K   : Normal time rate          L   : Increase time rate\n"
-"-   : Back 24 hours             =   : Forward 24 hours\n"
-"[   : Back 7 days               ]   : Forward 7 days\n"
+"- and = :  Back and forward one day (press ALT for sidereal day)\n"
+"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
 "\n"
 msgstr ""
 "Время и Дата:\n"
@@ -314,7 +296,7 @@ msgstr ""
 "[ : Назад на 7 дней      ] : Вперед на 7 дней\n"
 "\n"
 
-#: src/stel_ui.cpp:753
+#: src/stel_ui.cpp:781
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -326,7 +308,7 @@ msgstr ""
 "6 : Приостановить сценарий      K : Продолжить сценарий\n"
 "\n"
 
-#: src/stel_ui.cpp:757
+#: src/stel_ui.cpp:785
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -340,140 +322,140 @@ msgstr ""
 "CTRL + SHIFT + H: Включить отражение изображения по горизонтали\n"
 "CTRL + SHIFT + V: Включить отражение изображения по горизонтали\n"
 
-#: src/stel_ui.cpp:763
+#: src/stel_ui.cpp:791
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Выход\n"
 
-#: src/stel_ui.cpp:765
+#: src/stel_ui.cpp:793
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Выход\n"
 
-#: src/stel_ui.cpp:772
+#: src/stel_ui.cpp:800
 msgid "Help"
 msgstr "Справка"
 
-#: src/stel_ui.cpp:979
+#: src/stel_ui.cpp:1009
 msgid "Command recording stopped."
 msgstr "Запись команд остановлена."
 
-#: src/stel_ui.cpp:987
+#: src/stel_ui.cpp:1017
 msgid "Recording commands to script file:\n"
 msgstr "Запись команд в файл сценария:\n"
 
-#: src/stel_ui.cpp:989
+#: src/stel_ui.cpp:1019
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Нажмите снова CTRL + R чтобы остановить.\n"
 
-#: src/stel_ui.cpp:993
+#: src/stel_ui.cpp:1023
 msgid "Error: Unable to open script file to record commands."
 msgstr "Ошибка: Невозможно открыть файл сценария для записи команд."
 
-#: src/stel_ui_conf.cpp:54
+#: src/stel_ui_conf.cpp:55
 msgid "Configuration"
 msgstr "Настройка"
 
-#: src/stel_ui_conf.cpp:74
+#: src/stel_ui_conf.cpp:75
 msgid "Stars"
 msgstr "Звезды"
 
-#: src/stel_ui_conf.cpp:79
+#: src/stel_ui_conf.cpp:80
 msgid "Star Names. Up to mag :"
 msgstr "Названия звезд. До магн. :"
 
-#: src/stel_ui_conf.cpp:91
+#: src/stel_ui_conf.cpp:92
 msgid "Star Twinkle. Amount :"
 msgstr "Мерцание звезд. Величина :"
 
-#: src/stel_ui_conf.cpp:107
+#: src/stel_ui_conf.cpp:108
 msgid "Constellations Lines"
 msgstr "Линии созвездий"
 
-#: src/stel_ui_conf.cpp:112
+#: src/stel_ui_conf.cpp:113
 msgid "Constellations Names"
 msgstr "Названия созвездий"
 
-#: src/stel_ui_conf.cpp:117
+#: src/stel_ui_conf.cpp:118
 msgid "Constellations Boundaries"
 msgstr "Границы созвездий"
 
-#: src/stel_ui_conf.cpp:122
+#: src/stel_ui_conf.cpp:123
 msgid "Selected Constellation Only"
 msgstr "Только выбранные созвездия"
 
-#: src/stel_ui_conf.cpp:133
+#: src/stel_ui_conf.cpp:134
 msgid "Nebulas Names. Up to mag :"
 msgstr "Названия туманностей. До магн. :"
 
-#: src/stel_ui_conf.cpp:146
+#: src/stel_ui_conf.cpp:147
 msgid "Also display Nebulas without textures"
 msgstr "Также показывать туманности без текстур"
 
-#: src/stel_ui_conf.cpp:157
+#: src/stel_ui_conf.cpp:158
 msgid "Planets"
 msgstr "Планеты"
 
-#: src/stel_ui_conf.cpp:162
+#: src/stel_ui_conf.cpp:163
 msgid "Moon Scale"
 msgstr "Масштабирование Луны"
 
-#: src/stel_ui_conf.cpp:169
+#: src/stel_ui_conf.cpp:170
 msgid "Planets Hints"
 msgstr "Названия планет"
 
-#: src/stel_ui_conf.cpp:181 src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:424
 msgid "Equatorial Grid"
 msgstr "Экватор. сетка"
 
-#: src/stel_ui_conf.cpp:186 src/stel_ui_tuiconf.cpp:406
+#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:423
 msgid "Azimuthal Grid"
 msgstr "Азимут. сетка"
 
-#: src/stel_ui_conf.cpp:191 src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:425
 msgid "Equator Line"
 msgstr "Линия экватора"
 
-#: src/stel_ui_conf.cpp:196 src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:426
 msgid "Ecliptic Line"
 msgstr "Линия эклиптики"
 
-#: src/stel_ui_conf.cpp:207
+#: src/stel_ui_conf.cpp:208
 msgid "Ground"
 msgstr "Земля"
 
-#: src/stel_ui_conf.cpp:212 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:418
 msgid "Cardinal Points"
 msgstr "Стороны Света"
 
-#: src/stel_ui_conf.cpp:217
+#: src/stel_ui_conf.cpp:218
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/stel_ui_conf.cpp:222
+#: src/stel_ui_conf.cpp:223
 msgid "Fog"
 msgstr "Дымка"
 
-#: src/stel_ui_conf.cpp:252 src/stel_ui_conf.cpp:434 src/stel_ui_conf.cpp:471
-#: src/stel_ui_conf.cpp:530
+#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:428 src/stel_ui_conf.cpp:479
+#: src/stel_ui_conf.cpp:537
 msgid "Save as default"
 msgstr "Сделать настройками по умолчанию"
 
-#: src/stel_ui_conf.cpp:264
+#: src/stel_ui_conf.cpp:265
 msgid "Current Time :"
 msgstr "Текущее время :"
 
-#: src/stel_ui_conf.cpp:273
+#: src/stel_ui_conf.cpp:274
 msgid "Time Zone :"
 msgstr "Часовой пояс :"
 
-#: src/stel_ui_conf.cpp:277
+#: src/stel_ui_conf.cpp:278
 msgid "Using System Default Time Zone"
 msgstr "Системный часовой пояс по умолчанию"
 
-#: src/stel_ui_conf.cpp:286
+#: src/stel_ui_conf.cpp:287
 msgid "Time speed : "
 msgstr "Скорость времени : "
 
-#: src/stel_ui_conf.cpp:294
+#: src/stel_ui_conf.cpp:295
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -484,363 +466,402 @@ msgstr ""
 "Используйте клавишу K для возврата к нормальной \n"
 "скорости времени."
 
-#: src/stel_ui_conf.cpp:322
+#: src/stel_ui_conf.cpp:316
 msgid "Cursor : "
 msgstr "Курсор : "
 
-#: src/stel_ui_conf.cpp:327
+#: src/stel_ui_conf.cpp:321
 msgid "Selected : "
 msgstr "Выбрано : "
 
-#: src/stel_ui_conf.cpp:332
+#: src/stel_ui_conf.cpp:326
 msgid "Longitude : "
 msgstr "Долгота : "
 
-#: src/stel_ui_conf.cpp:340
+#: src/stel_ui_conf.cpp:334
 msgid "Latitude : "
 msgstr "Широта : "
 
-#: src/stel_ui_conf.cpp:348
+#: src/stel_ui_conf.cpp:342
 msgid "Altitude : "
 msgstr "Высота : "
 
-#: src/stel_ui_conf.cpp:355
+#: src/stel_ui_conf.cpp:349
 msgid "Save location"
 msgstr "Сохранить местоположение"
 
-#: src/stel_ui_conf.cpp:377
+#: src/stel_ui_conf.cpp:371
 msgid "Projection :"
 msgstr "Проекция :"
 
-#: src/stel_ui_conf.cpp:396
+#: src/stel_ui_conf.cpp:390
 msgid "Disk Viewport"
 msgstr "Поле обзора в виде диска"
 
-#: src/stel_ui_conf.cpp:401
+#: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:401
 msgid "Screen Resolution :"
 msgstr "Разрешение экрана :"
 
-#: src/stel_ui_conf.cpp:411
+#: src/stel_ui_conf.cpp:405
 msgid "Restart program for"
 msgstr "Перезапустите программу для"
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:406
 msgid "change to apply."
 msgstr "применения изменений."
 
-#: src/stel_ui_conf.cpp:427
+#: src/stel_ui_conf.cpp:421
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Для прочих разрешений экрана редактируйте файл :"
 
-#: src/stel_ui_conf.cpp:444
+#: src/stel_ui_conf.cpp:438
 msgid "Choose landscapes:"
 msgstr "Выбор ландшафта :"
 
-#: src/stel_ui_conf.cpp:459 src/stel_ui_conf.cpp:947
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
 msgid "Author: "
 msgstr "Автор : "
 
-#: src/stel_ui_conf.cpp:482
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#, fuzzy
+msgid "Planet: "
+msgstr "Планеты"
+
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#, fuzzy
+msgid "Location: "
+msgstr "Место"
+
+#: src/stel_ui_conf.cpp:468
+msgid "Setting landscape updates the location"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:489
 msgid "Program Language: "
 msgstr "Язык программы : "
 
-#: src/stel_ui_conf.cpp:498 src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_conf.cpp:505 src/stel_ui_tuiconf.cpp:404
 msgid "Sky Language: "
 msgstr "Язык неба : "
 
-#: src/stel_ui_conf.cpp:516 src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_conf.cpp:523 src/stel_ui_tuiconf.cpp:400
 msgid "Sky Culture: "
 msgstr "Культура неба : "
 
-#: src/stel_ui_conf.cpp:537
+#: src/stel_ui_conf.cpp:544
 msgid "Language"
 msgstr "Язык"
 
-#: src/stel_ui_conf.cpp:538
+#: src/stel_ui_conf.cpp:545
 msgid "Date & Time"
 msgstr "Дата и Время"
 
-#: src/stel_ui_conf.cpp:539
+#: src/stel_ui_conf.cpp:546
 msgid "Location"
 msgstr "Место"
 
-#: src/stel_ui_conf.cpp:540
+#: src/stel_ui_conf.cpp:547
 msgid "Landscapes"
 msgstr "Ландшафты"
 
-#: src/stel_ui_conf.cpp:541
+#: src/stel_ui_conf.cpp:548
 msgid "Video"
 msgstr "Видео"
 
-#: src/stel_ui_conf.cpp:542
+#: src/stel_ui_conf.cpp:549
 msgid "Rendering"
 msgstr "Рендеринг"
 
-#: src/stel_ui_conf.cpp:674
+#: src/stel_ui_conf.cpp:695
 msgid "Object Search"
 msgstr "Поиск объекта"
 
-#: src/stel_ui_conf.cpp:681
+#: src/stel_ui_conf.cpp:702
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Искать (напр. Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui_conf.cpp:699
+#: src/stel_ui_conf.cpp:720
 msgid "GO"
 msgstr "Перейти"
 
-#: src/stel_ui_conf.cpp:837
+#: src/stel_ui_conf.cpp:859
 msgid "Enter observatory name"
 msgstr "Ввод названия обсерватории"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:988
 msgid "Info: "
 msgstr "Сведения : "
 
-#: src/stel_ui_conf.cpp:1012
+#: src/stel_ui_conf.cpp:1054
 msgid ": Normal rate"
 msgstr ":  Нормальный"
 
-#: src/stel_ui_conf.cpp:1019
+#: src/stel_ui_conf.cpp:1061
 msgid ": Standard Perseids rate"
 msgstr ":  Стандартный для Персеид"
 
-#: src/stel_ui_conf.cpp:1026
+#: src/stel_ui_conf.cpp:1068
 msgid ": Exceptional Leonid rate"
 msgstr ":  Выше среднего (Леониды)"
 
-#: src/stel_ui_conf.cpp:1033
+#: src/stel_ui_conf.cpp:1075
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ":  Максимальный (Леониды, 1966)"
 
-#: src/stel_ui_conf.cpp:1038
+#: src/stel_ui_conf.cpp:1080
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1058
+#: src/stel_ui_conf.cpp:1106
 msgid "Current Time Speed is x"
 msgstr "Текущая скорость времени : x"
 
-#: src/stel_ui_tuiconf.cpp:288 src/stel_ui_tuiconf.cpp:419
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Коэфф. изменения Магнитуды: "
-
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:367
 msgid "Set Location "
 msgstr "Задать местоположение "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:368
 msgid "Set Time "
 msgstr "Установить время "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:369
 msgid "General "
 msgstr "Общее "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Stars "
 msgstr "Звезды "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Colors "
 msgstr "Цвета "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Effects "
 msgstr "Эффекты "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Scripts "
 msgstr "Сценарии "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Administration "
 msgstr "Администрирование "
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Latitude: "
 msgstr "Широта: "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Longitude: "
 msgstr "Долгота: "
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:379
 msgid "Altitude (m): "
 msgstr "Высота (м): "
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:380
 msgid "Solar System Body: "
 msgstr "Тело Солнечной системы: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:385
 msgid "Sky Time: "
 msgstr "Астрономич. время: "
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:386
 msgid "Set Time Zone: "
 msgstr "Установить часовой пояс: "
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:387
+msgid "Day keys: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:388
+msgid "Calendar"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:389
+msgid "Sidereal"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Preset Sky Time: "
 msgstr "Заданное астрономич. время: "
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Sky Time At Start-up: "
 msgstr "Астрономич. время при загрузке: "
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:392
 msgid "Actual Time"
 msgstr "Настоящее время"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:393
 msgid "Preset Time"
 msgstr "Заданное время"
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Time Display Format: "
 msgstr "Формат отображения времени: "
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Date Display Format: "
 msgstr "Формат отображения даты: "
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Show: "
 msgstr "Показать: "
 
-#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2222
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2235
 msgid "Yes"
 msgstr "Да"
 
-#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2203
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2216
 msgid "No"
 msgstr "Нет"
 
-#: src/stel_ui_tuiconf.cpp:392
-msgid "Star Magnitude Multiplier: "
+#: src/stel_ui_tuiconf.cpp:408
+#, fuzzy
+msgid "Star Value Multiplier: "
 msgstr "Коэфф. Звездной величины: "
 
-#: src/stel_ui_tuiconf.cpp:393
+#: src/stel_ui_tuiconf.cpp:409
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимал. Магнитуда для надписи: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:410
 msgid "Twinkling: "
 msgstr "Мерцание: "
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:411
+#, fuzzy
+msgid "Limiting Magnitude: "
+msgstr "Магнитуда: "
+
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Constellation Lines"
 msgstr "Линии созвездий"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:415
 msgid "Constellation Names"
 msgstr "Названия созвездий"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Constellation Art Intensity"
 msgstr "Яркость изображения созвездий"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Constellation Boundaries"
 msgstr "Границы созвездий"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Planet Names"
 msgstr "Названия планет"
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Planet Orbits"
 msgstr "Орбиты планет"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_tuiconf.cpp:421
 msgid "Planet Trails"
 msgstr "Следы планет"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Meridian Line"
 msgstr "Линия меридиана"
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:427
 msgid "Nebula Names"
 msgstr "Название туманности"
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:428
 msgid "Nebula Circles"
 msgstr "Круги туманности"
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:433
 msgid "Landscape: "
 msgstr "Ландшафт: "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:434
 msgid "Manual zoom: "
 msgstr "Ручное приближение: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Object Sizing Rule: "
 msgstr "Правило изменения размера объекта: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Point"
 msgstr "Точка"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Magnitude"
 msgstr "Магнитуда"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/stel_ui_tuiconf.cpp:436
+#, fuzzy
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Коэфф. изменения Магнитуды: "
+
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Milky Way intensity: "
 msgstr "Яркость Млечного Пути: "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:438
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Макс. магнитуда галактик для надписи: "
 
-#: src/stel_ui_tuiconf.cpp:422
+#: src/stel_ui_tuiconf.cpp:439
 msgid "Zoom Duration: "
 msgstr "Длительность приближения: "
 
-#: src/stel_ui_tuiconf.cpp:423
+#: src/stel_ui_tuiconf.cpp:440
 msgid "Cursor Timeout: "
 msgstr "Простой курсора: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:441
+msgid "Setting Landscape Sets Location: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:444
 msgid "Local Script: "
 msgstr "Локальный сценарий: "
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:447
 msgid "CD/DVD Script: "
 msgstr "CD/DVD сценарий: "
 
-#: src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_tuiconf.cpp:451
 msgid "Load Default Configuration: "
 msgstr "Загрузить настройки по умолчанию: "
 
-#: src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:452
 msgid "Save Current Configuration as Default: "
 msgstr "Сохранить текущие настройки как \"по умолчанию\": "
 
-#: src/stel_ui_tuiconf.cpp:435
+#: src/stel_ui_tuiconf.cpp:453
 msgid "Shut Down: "
 msgstr "Завершение работы: "
 
-#: src/stel_ui_tuiconf.cpp:436
+#: src/stel_ui_tuiconf.cpp:454
 msgid "Update me via Internet: "
 msgstr "Обновить через Интернет: "
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/stel_ui_tuiconf.cpp:455
 msgid "Set UI Locale: "
 msgstr "Установка расположения UI "
 
-#: src/stel_ui_tuiconf.cpp:599
+#: src/stel_ui_tuiconf.cpp:626
 msgid "Arrow down to load list."
 msgstr "Стрелка вниз для загрузки списка"
 
@@ -956,19 +977,19 @@ msgstr "Харон"
 msgid "Solar System Observer"
 msgstr "Обозреватель солнечной системы"
 
-#: src/translations.h:63 src/s_gui.cpp:2668
+#: src/translations.h:63 src/s_gui.cpp:2681
 msgid "N"
 msgstr "С"
 
-#: src/translations.h:64 src/s_gui.cpp:2669
+#: src/translations.h:64 src/s_gui.cpp:2682
 msgid "S"
 msgstr "Ю"
 
-#: src/translations.h:65 src/s_gui.cpp:2673
+#: src/translations.h:65 src/s_gui.cpp:2686
 msgid "E"
 msgstr "В"
 
-#: src/translations.h:66 src/s_gui.cpp:2674
+#: src/translations.h:66 src/s_gui.cpp:2687
 msgid "W"
 msgstr "З"
 
@@ -2001,37 +2022,57 @@ msgstr ""
 msgid "Select and exit to run."
 msgstr "Выбрать и выйти для перезапуска."
 
-#: src/s_gui.cpp:2209 src/s_gui.cpp:2255
+#: src/translations.h:346
+#, fuzzy
+msgid "USB Script: "
+msgstr "Сценарии "
+
+#: src/s_gui.cpp:2222 src/s_gui.cpp:2268
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/s_gui.cpp:2227 src/s_gui.cpp:2253
+#: src/s_gui.cpp:2240 src/s_gui.cpp:2266
 msgid "OK"
 msgstr "ОК"
 
-#: src/s_gui.cpp:2723
+#: src/s_gui.cpp:2736
 msgid "Year"
 msgstr "Год"
 
-#: src/s_gui.cpp:2726
+#: src/s_gui.cpp:2739
 msgid "Month"
 msgstr "Месяц"
 
-#: src/s_gui.cpp:2729
+#: src/s_gui.cpp:2742
 msgid "Day"
 msgstr "День"
 
-#: src/s_gui.cpp:2732
+#: src/s_gui.cpp:2745
 msgid "Hour"
 msgstr "Часов"
 
-#: src/s_gui.cpp:2735
+#: src/s_gui.cpp:2748
 msgid "Minutes"
 msgstr "Минут"
 
-#: src/s_gui.cpp:2738
+#: src/s_gui.cpp:2751
 msgid "Seconds"
 msgstr "Секунд"
+
+#~ msgid ""
+#~ "Usage: %s [OPTION] ...\n"
+#~ " -v, --version          Output version information and exit.\n"
+#~ " -h, --help             Display this help and exit.\n"
+#~ msgstr ""
+#~ "Использование: %s [ОПЦИИ] ...\n"
+#~ " -v, --version Выводит информацию о версии и завершает работу.\n"
+#~ " -h, --help Отображает эту справку и завершает работу.\n"
+
+#~ msgid "%s: Bad command line argument(s)\n"
+#~ msgstr "%s: Неверный(е) аргумент(ы) командной строки.\n"
+
+#~ msgid "Try `%s --help' for more information.\n"
+#~ msgstr "Попробуйте '%s --help' для дополнительной информации.\n"
 
 #~ msgid " (Variable)"
 #~ msgstr " (переменная)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-05-11 18:10+0200\n"
+"POT-Creation-Date: 2007-06-04 11:24+0200\n"
 "PO-Revision-Date: 2007-04-04 22:00+0000\n"
 "Last-Translator: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
 "Language-Team: \n"
@@ -16,198 +16,177 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Rosetta-Export-Date: 2007-04-16 13:38:12+0000\n"
 
-#: src/main.cpp:67
-#, c-format
-msgid ""
-"Usage: %s [OPTION] ...\n"
-" -v, --version          Output version information and exit.\n"
-" -h, --help             Display this help and exit.\n"
-msgstr ""
-"Usage: %s [OPTION] ...\n"
-"-v, --version\t\tاطلاعات این نسخه را چاپ کرده و خارج می‌شود.\n"
-" -h, --help             راهنمایی را چاپ کرده و خارج می‌شود.\n"
-
-#: src/main.cpp:90
-#, c-format
-msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: آرگومان(های) نامناسب برای خط فرمان\n"
-
-#: src/main.cpp:91
-#, c-format
-msgid "Try `%s --help' for more information.\n"
-msgstr "برای اطلاعات بیشتر «%s --help» را امتحان کنید.\n"
-
-#: src/ConstellationMgr.cpp:286
+#: src/ConstellationMgr.cpp:293
 msgid "Loading Constellation Art: "
 msgstr "بارگیری تصاویر صوَر فلکی: "
 
-#: src/StarMgr.cpp:766 src/StarMgr.cpp:792 src/StarMgr.cpp:884
-#: src/StarMgr.cpp:947 src/Nebula.cpp:93 src/Nebula.cpp:115 src/Planet.cpp:110
-#: src/Planet.cpp:156
+#: src/StarMgr.cpp:748 src/StarMgr.cpp:774 src/StarMgr.cpp:866
+#: src/StarMgr.cpp:929 src/Nebula.cpp:92 src/Nebula.cpp:114 src/Planet.cpp:107
+#: src/Planet.cpp:153
 msgid "Magnitude: "
 msgstr "قدر: "
 
-#: src/StarMgr.cpp:769 src/StarMgr.cpp:887
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:869
 msgid "J2000"
 msgstr ""
 
-#: src/StarMgr.cpp:769 src/StarMgr.cpp:772 src/StarMgr.cpp:887
-#: src/StarMgr.cpp:893 src/Nebula.cpp:95 src/Planet.cpp:114
+#: src/StarMgr.cpp:751 src/StarMgr.cpp:754 src/StarMgr.cpp:869
+#: src/StarMgr.cpp:875 src/Nebula.cpp:94 src/Planet.cpp:111
 msgid "RA/DE: "
 msgstr "بُعد/مِیل: "
 
-#: src/StarMgr.cpp:772 src/StarMgr.cpp:893
+#: src/StarMgr.cpp:754 src/StarMgr.cpp:875
 msgid "Equ of date"
 msgstr ""
 
-#: src/StarMgr.cpp:781 src/StarMgr.cpp:902 src/Nebula.cpp:101
-#: src/Planet.cpp:120
+#: src/StarMgr.cpp:763 src/StarMgr.cpp:884 src/Nebula.cpp:100
+#: src/Planet.cpp:117
 msgid "Az/Alt: "
 msgstr "سمت/ارتفاع: "
 
-#: src/StarMgr.cpp:907
+#: src/StarMgr.cpp:889
 msgid "Parallax: "
 msgstr ""
 
-#: src/StarMgr.cpp:909 src/StarMgr.cpp:952 src/Planet.cpp:123
-#: src/Planet.cpp:160
+#: src/StarMgr.cpp:891 src/StarMgr.cpp:934 src/Planet.cpp:120
+#: src/Planet.cpp:157
 msgid "Distance: "
 msgstr "فاصله: "
 
-#: src/StarMgr.cpp:912 src/StarMgr.cpp:955
+#: src/StarMgr.cpp:894 src/StarMgr.cpp:937
 msgid " Light Years"
 msgstr " سال‌نوری"
 
-#: src/StarMgr.cpp:916 src/StarMgr.cpp:959
+#: src/StarMgr.cpp:898 src/StarMgr.cpp:941
 msgid "Spectral Type: "
 msgstr "رده طیفی: "
 
-#: src/StarMgr.cpp:1322
+#: src/StarMgr.cpp:1328
 #, fuzzy
 msgid "Loading catalog "
 msgstr "بارگیری کاتالوگ NGC: "
 
-#: src/Nebula.cpp:103
+#: src/Nebula.cpp:102
 msgid "Type: "
 msgstr "نوع: "
 
-#: src/Nebula.cpp:104
+#: src/Nebula.cpp:103
 msgid "Size: "
 msgstr "اندازه: "
 
-#: src/NebulaMgr.cpp:382
+#: src/NebulaMgr.cpp:394
 msgid "Loading NGC catalog: "
 msgstr "بارگیری کاتالوگ NGC: "
 
-#: src/NebulaMgr.cpp:509
+#: src/NebulaMgr.cpp:526
 msgid "Loading Nebula Textures:"
 msgstr "بارگیری بافت سحابی‌ها:"
 
-#: src/Planet.cpp:123 src/Planet.cpp:160
+#: src/Planet.cpp:120 src/Planet.cpp:157
 msgid "AU"
 msgstr "واحد نجومی"
 
-#: src/stel_ui.cpp:517 src/stel_ui.cpp:658
+#: src/stel_ui.cpp:544 src/stel_ui.cpp:685
 msgid "Script commander"
 msgstr "فرمانده اسکریپت"
 
-#: src/stel_ui.cpp:544
+#: src/stel_ui.cpp:571
 msgid "Invalid Script command"
 msgstr "فرمان اشتباه"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:650
 msgid "Drawing of the Constellations [C]"
 msgstr "نقاشیهای صورتهای فلکی [C]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:652
 msgid "Names of the Constellations [V]"
 msgstr "نامهای صورتهای فلکی [V]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:654
 msgid "Constellations Art [R]"
 msgstr "تصاویر صورتهای فلکی [R]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:656
 msgid "Azimuthal Grid [Z]"
 msgstr "تقسیمات سَمتی"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:658
 msgid "Equatorial Grid [E]"
 msgstr "تقسیمات استوایی"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:660
 msgid "Ground [G]"
 msgstr "زمین [G]"
 
-#: src/stel_ui.cpp:635
+#: src/stel_ui.cpp:662
 msgid "Cardinal Points [Q]"
 msgstr "چهارجهت اصلی"
 
-#: src/stel_ui.cpp:637
+#: src/stel_ui.cpp:664
 msgid "Atmosphere [A]"
 msgstr "جَوّ[A]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:666
 msgid "Nebulas [N]"
 msgstr "سحابی‌ها[N]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:668
 msgid "Help [H]"
 msgstr "کمک[H]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:670
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "استقرار سمت‌ارتفاعی/استوایی[ENTER]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:672
 msgid "Configuration window"
 msgstr "پنجره پیکربندی"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:675
 msgid "Night (red) mode"
 msgstr "حالت شبانه (نور قرمز)"
 
-#: src/stel_ui.cpp:651
+#: src/stel_ui.cpp:678
 msgid "Quit [CTRL + Q]"
 msgstr "خروج[CTRL + Q]"
 
-#: src/stel_ui.cpp:653
+#: src/stel_ui.cpp:680
 msgid "Quit [CMD + Q]"
 msgstr "خروج[CMD + Q]"
 
-#: src/stel_ui.cpp:656
+#: src/stel_ui.cpp:683
 msgid "Search for object"
 msgstr "جستجوی جرم"
 
-#: src/stel_ui.cpp:660
+#: src/stel_ui.cpp:687
 msgid "Goto selected object [SPACE]"
 msgstr "برو به جرم منتخب [SPACE]"
 
-#: src/stel_ui.cpp:662
+#: src/stel_ui.cpp:689
 msgid "Flip horizontally"
 msgstr "قرینه‌سازی افقی"
 
-#: src/stel_ui.cpp:664
+#: src/stel_ui.cpp:691
 msgid "Flip vertically"
 msgstr "قرینه‌سازی عمودی"
 
-#: src/stel_ui.cpp:670
+#: src/stel_ui.cpp:697
 msgid "Decrease Time Speed [J]"
 msgstr "کاهش سرعت گذر زمان [J]"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:699
 msgid "Real Time Speed [K]"
 msgstr "سرعت واقعی گذر زمان [K]"
 
-#: src/stel_ui.cpp:674
+#: src/stel_ui.cpp:701
 msgid "Increase Time Speed [L]"
 msgstr "افزایش سرعت گذر زمان [L]"
 
-#: src/stel_ui.cpp:676
+#: src/stel_ui.cpp:703
 msgid "Return to Current Time"
 msgstr "بازگشت به زمان فعلی"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:712
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -218,11 +197,11 @@ msgstr ""
 "    برای ارسال توضیح از این سایت استفاده کنید : http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:731
 msgid "Information"
 msgstr "اطلاعات"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:743
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -248,7 +227,7 @@ msgstr ""
 "SPACE       : در مرکز نهادن جرم منتخب\n"
 "\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:754
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -274,7 +253,8 @@ msgstr ""
 "خط استوای سماوی: ۵    خط دایرة‌البروج: ۴\n"
 "\n"
 
-#: src/stel_ui.cpp:739
+#: src/stel_ui.cpp:766
+#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -282,6 +262,7 @@ msgid ""
 "CTRL + S : Take a screenshot\n"
 "CTRL + R : Toggle script recording\n"
 "CTRL + F : Toggle object finder\n"
+"CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
 "محاورات و کنترلهای دیگر: /nدرباره Stellarium :  I    کمک: H \n"
@@ -291,14 +272,15 @@ msgstr ""
 "تعویض جرم‌یاب: CTRL + F\n"
 "\n"
 
-#: src/stel_ui.cpp:746
+#: src/stel_ui.cpp:774
+#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
 "8   : Set current time          J   : Decrease time rate\n"
 "K   : Normal time rate          L   : Increase time rate\n"
-"-   : Back 24 hours             =   : Forward 24 hours\n"
-"[   : Back 7 days               ]   : Forward 7 days\n"
+"- and = :  Back and forward one day (press ALT for sidereal day)\n"
+"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
 "\n"
 msgstr ""
 "زمان و تاریخ: \n"
@@ -309,7 +291,7 @@ msgstr ""
 "عقب:  [\n"
 "\n"
 
-#: src/stel_ui.cpp:753
+#: src/stel_ui.cpp:781
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -321,7 +303,7 @@ msgstr ""
 "ازسرگیری اسکریپت: K  توقف اسکریپت:  ۶\n"
 "\n"
 
-#: src/stel_ui.cpp:757
+#: src/stel_ui.cpp:785
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -330,141 +312,141 @@ msgid ""
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
 
-#: src/stel_ui.cpp:763
+#: src/stel_ui.cpp:791
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q :خروج\n"
 
-#: src/stel_ui.cpp:765
+#: src/stel_ui.cpp:793
 msgid "CMD + Q : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:772
+#: src/stel_ui.cpp:800
 msgid "Help"
 msgstr "راهنما"
 
-#: src/stel_ui.cpp:979
+#: src/stel_ui.cpp:1009
 msgid "Command recording stopped."
 msgstr "ضبط فرمانها متوقف شد."
 
-#: src/stel_ui.cpp:987
+#: src/stel_ui.cpp:1017
 msgid "Recording commands to script file:\n"
 msgstr ":در حال ضبط فرمانها در فایل اسکریپت\n"
 
-#: src/stel_ui.cpp:989
+#: src/stel_ui.cpp:1019
 msgid "Hit CTRL-R again to stop.\n"
 msgstr ".را فشار دهیدCTRL-R برای توقف دوباره\n"
 
-#: src/stel_ui.cpp:993
+#: src/stel_ui.cpp:1023
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: .فایل اسکریپت برای ضبط فرمانها باز نمی‌شود"
 
-#: src/stel_ui_conf.cpp:54
+#: src/stel_ui_conf.cpp:55
 msgid "Configuration"
 msgstr "پیکربندی"
 
-#: src/stel_ui_conf.cpp:74
+#: src/stel_ui_conf.cpp:75
 msgid "Stars"
 msgstr "ستارگان"
 
-#: src/stel_ui_conf.cpp:79
+#: src/stel_ui_conf.cpp:80
 msgid "Star Names. Up to mag :"
 msgstr ":نام ستاره‌ها تا قدرِ"
 
-#: src/stel_ui_conf.cpp:91
+#: src/stel_ui_conf.cpp:92
 msgid "Star Twinkle. Amount :"
 msgstr ":مقدار چشمک‌زدن ستاره"
 
-#: src/stel_ui_conf.cpp:107
+#: src/stel_ui_conf.cpp:108
 #, fuzzy
 msgid "Constellations Lines"
 msgstr "خطوط صورت فلكي"
 
-#: src/stel_ui_conf.cpp:112
+#: src/stel_ui_conf.cpp:113
 msgid "Constellations Names"
 msgstr "نام صورتهای فلکی"
 
-#: src/stel_ui_conf.cpp:117
+#: src/stel_ui_conf.cpp:118
 msgid "Constellations Boundaries"
 msgstr "مرزهای صورتهای فلکی"
 
-#: src/stel_ui_conf.cpp:122
+#: src/stel_ui_conf.cpp:123
 msgid "Selected Constellation Only"
 msgstr "فقط صورت‌فلکی انتخاب‌شده"
 
-#: src/stel_ui_conf.cpp:133
+#: src/stel_ui_conf.cpp:134
 msgid "Nebulas Names. Up to mag :"
 msgstr ":نام سحابی‌ها تا قدرِ"
 
-#: src/stel_ui_conf.cpp:146
+#: src/stel_ui_conf.cpp:147
 msgid "Also display Nebulas without textures"
 msgstr "نمایش سحابی ها بدون بافت"
 
-#: src/stel_ui_conf.cpp:157
+#: src/stel_ui_conf.cpp:158
 msgid "Planets"
 msgstr "سیارات"
 
-#: src/stel_ui_conf.cpp:162
+#: src/stel_ui_conf.cpp:163
 msgid "Moon Scale"
 msgstr "مقیاس ماه"
 
-#: src/stel_ui_conf.cpp:169
+#: src/stel_ui_conf.cpp:170
 msgid "Planets Hints"
 msgstr "نشانه‌های سیارات"
 
-#: src/stel_ui_conf.cpp:181 src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:424
 msgid "Equatorial Grid"
 msgstr "تقسیمات استوایی"
 
-#: src/stel_ui_conf.cpp:186 src/stel_ui_tuiconf.cpp:406
+#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:423
 msgid "Azimuthal Grid"
 msgstr "تقسیمات سَمتی"
 
-#: src/stel_ui_conf.cpp:191 src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:425
 msgid "Equator Line"
 msgstr "خط استوای سماوی"
 
-#: src/stel_ui_conf.cpp:196 src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:426
 msgid "Ecliptic Line"
 msgstr "خط دایرة‌البروج"
 
-#: src/stel_ui_conf.cpp:207
+#: src/stel_ui_conf.cpp:208
 msgid "Ground"
 msgstr "زمین"
 
-#: src/stel_ui_conf.cpp:212 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:418
 msgid "Cardinal Points"
 msgstr "چهارجهت اصلی"
 
-#: src/stel_ui_conf.cpp:217
+#: src/stel_ui_conf.cpp:218
 msgid "Atmosphere"
 msgstr "جَوّ"
 
-#: src/stel_ui_conf.cpp:222
+#: src/stel_ui_conf.cpp:223
 msgid "Fog"
 msgstr "مه"
 
-#: src/stel_ui_conf.cpp:252 src/stel_ui_conf.cpp:434 src/stel_ui_conf.cpp:471
-#: src/stel_ui_conf.cpp:530
+#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:428 src/stel_ui_conf.cpp:479
+#: src/stel_ui_conf.cpp:537
 msgid "Save as default"
 msgstr "ذخیره به عنوان پیش‌فرض"
 
-#: src/stel_ui_conf.cpp:264
+#: src/stel_ui_conf.cpp:265
 msgid "Current Time :"
 msgstr ":زمان فعلی"
 
-#: src/stel_ui_conf.cpp:273
+#: src/stel_ui_conf.cpp:274
 msgid "Time Zone :"
 msgstr ":منطقه زمانی"
 
-#: src/stel_ui_conf.cpp:277
+#: src/stel_ui_conf.cpp:278
 msgid "Using System Default Time Zone"
 msgstr "استفاده از منطقه زمانی پیش‌فرض سیستم"
 
-#: src/stel_ui_conf.cpp:286
+#: src/stel_ui_conf.cpp:287
 msgid "Time speed : "
 msgstr ":سرعت گذر زمان "
 
-#: src/stel_ui_conf.cpp:294
+#: src/stel_ui_conf.cpp:295
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -474,364 +456,401 @@ msgstr ""
 "گذر زمان استفاده کنید.\n"
 "از کلید K برای بازگشت به سرعت گذر واقعی استفاده کنید."
 
-#: src/stel_ui_conf.cpp:322
+#: src/stel_ui_conf.cpp:316
 msgid "Cursor : "
 msgstr "مکان‌نما : "
 
-#: src/stel_ui_conf.cpp:327
+#: src/stel_ui_conf.cpp:321
 msgid "Selected : "
 msgstr ":انتخاب‌شده "
 
-#: src/stel_ui_conf.cpp:332
+#: src/stel_ui_conf.cpp:326
 msgid "Longitude : "
 msgstr ":طول جغرافیایی "
 
-#: src/stel_ui_conf.cpp:340
+#: src/stel_ui_conf.cpp:334
 msgid "Latitude : "
 msgstr ":عرض جغرافیایی "
 
-#: src/stel_ui_conf.cpp:348
+#: src/stel_ui_conf.cpp:342
 msgid "Altitude : "
 msgstr ":ارتفاع "
 
-#: src/stel_ui_conf.cpp:355
+#: src/stel_ui_conf.cpp:349
 msgid "Save location"
 msgstr "ذخیره موقعیت"
 
-#: src/stel_ui_conf.cpp:377
+#: src/stel_ui_conf.cpp:371
 msgid "Projection :"
 msgstr ":تصویر کردن"
 
-#: src/stel_ui_conf.cpp:396
+#: src/stel_ui_conf.cpp:390
 #, fuzzy
 msgid "Disk Viewport"
 msgstr "نمایش از روی دیسک"
 
-#: src/stel_ui_conf.cpp:401
+#: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:401
 msgid "Screen Resolution :"
 msgstr "تفکیک‌پذیری صفحه نمایش"
 
-#: src/stel_ui_conf.cpp:411
+#: src/stel_ui_conf.cpp:405
 msgid "Restart program for"
 msgstr "شروع دوباره برنامه برای"
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:406
 msgid "change to apply."
 msgstr ".تغییر دهید تا اِعمال شود"
 
-#: src/stel_ui_conf.cpp:427
+#: src/stel_ui_conf.cpp:421
 msgid "For unlisted screen resolution, edit the file :"
 msgstr ":برای مقادیر تفکیک‌پذیری صفحه که در لیست نیستند، فایل را ویرایش کنید"
 
-#: src/stel_ui_conf.cpp:444
+#: src/stel_ui_conf.cpp:438
 msgid "Choose landscapes:"
 msgstr "انتخاب چشم انداز ها:"
 
-#: src/stel_ui_conf.cpp:459 src/stel_ui_conf.cpp:947
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
 msgid "Author: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:482
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#, fuzzy
+msgid "Planet: "
+msgstr "سیارات"
+
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#, fuzzy
+msgid "Location: "
+msgstr "موقعیت"
+
+#: src/stel_ui_conf.cpp:468
+msgid "Setting landscape updates the location"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:489
 msgid "Program Language: "
 msgstr "زبان برنامه: "
 
-#: src/stel_ui_conf.cpp:498 src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_conf.cpp:505 src/stel_ui_tuiconf.cpp:404
 msgid "Sky Language: "
 msgstr ":زبان آسمان "
 
-#: src/stel_ui_conf.cpp:516 src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_conf.cpp:523 src/stel_ui_tuiconf.cpp:400
 msgid "Sky Culture: "
 msgstr ":فرهنگ آسمان "
 
-#: src/stel_ui_conf.cpp:537
+#: src/stel_ui_conf.cpp:544
 msgid "Language"
 msgstr "زبان"
 
-#: src/stel_ui_conf.cpp:538
+#: src/stel_ui_conf.cpp:545
 msgid "Date & Time"
 msgstr "تاریخ و زمان"
 
-#: src/stel_ui_conf.cpp:539
+#: src/stel_ui_conf.cpp:546
 msgid "Location"
 msgstr "موقعیت"
 
-#: src/stel_ui_conf.cpp:540
+#: src/stel_ui_conf.cpp:547
 msgid "Landscapes"
 msgstr "منظره‌ها"
 
-#: src/stel_ui_conf.cpp:541
+#: src/stel_ui_conf.cpp:548
 msgid "Video"
 msgstr "ویدیو"
 
-#: src/stel_ui_conf.cpp:542
+#: src/stel_ui_conf.cpp:549
 msgid "Rendering"
 msgstr "پردازش"
 
-#: src/stel_ui_conf.cpp:674
+#: src/stel_ui_conf.cpp:695
 msgid "Object Search"
 msgstr "جستجوی جرم"
 
-#: src/stel_ui_conf.cpp:681
+#: src/stel_ui_conf.cpp:702
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "جستجو برای (نمونه : Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui_conf.cpp:699
+#: src/stel_ui_conf.cpp:720
 msgid "GO"
 msgstr "برو"
 
-#: src/stel_ui_conf.cpp:837
+#: src/stel_ui_conf.cpp:859
 msgid "Enter observatory name"
 msgstr "نام رصدخانه را وارد کنید"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:988
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1012
+#: src/stel_ui_conf.cpp:1054
 msgid ": Normal rate"
 msgstr ": نرخ معمول"
 
-#: src/stel_ui_conf.cpp:1019
+#: src/stel_ui_conf.cpp:1061
 msgid ": Standard Perseids rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1026
+#: src/stel_ui_conf.cpp:1068
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1033
+#: src/stel_ui_conf.cpp:1075
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1038
+#: src/stel_ui_conf.cpp:1080
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1058
+#: src/stel_ui_conf.cpp:1106
 msgid "Current Time Speed is x"
 msgstr ".است x سرعت فعلی گذر زمان"
 
-#: src/stel_ui_tuiconf.cpp:288 src/stel_ui_tuiconf.cpp:419
-msgid "Magnitude Sizing Multiplier: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:367
 msgid "Set Location "
 msgstr "موقعیت را تنظیم کنید "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:368
 msgid "Set Time "
 msgstr "زمان را تنظیم کنید "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:369
 msgid "General "
 msgstr "عمومی "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Stars "
 msgstr "ستارگان "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Colors "
 msgstr "رنگ‌ها "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Effects "
 msgstr "جلوه‌ها "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Scripts "
 msgstr "اسکریپت‌ها "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Administration "
 msgstr "مدیریت "
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Latitude: "
 msgstr ":عرض جغرافیایی "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Longitude: "
 msgstr ":طول جغرافیایی "
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:379
 msgid "Altitude (m): "
 msgstr ":(ارتفاع (متر "
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:380
 msgid "Solar System Body: "
 msgstr "بدنه سیستم خورشیدی: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:385
 msgid "Sky Time: "
 msgstr ":زمان آسمان "
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:386
 msgid "Set Time Zone: "
 msgstr ":تنظیم منطقه زمانی "
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:387
+msgid "Day keys: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:388
+msgid "Calendar"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:389
+msgid "Sidereal"
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Preset Sky Time: "
 msgstr ":پیش‌تنظیم زمان آسمان "
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Sky Time At Start-up: "
 msgstr ":زمان آسمان در ابتدا "
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:392
 msgid "Actual Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:393
 msgid "Preset Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Time Display Format: "
 msgstr ":قالب نمایش زمان "
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Date Display Format: "
 msgstr ":قالب نمایش تاریخ "
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Show: "
 msgstr ":نمایش "
 
-#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2222
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2235
 msgid "Yes"
 msgstr "بله"
 
-#: src/stel_ui_tuiconf.cpp:391 src/stel_ui_tuiconf.cpp:417 src/s_gui.cpp:2203
+#: src/stel_ui_tuiconf.cpp:407 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:441 src/s_gui.cpp:2216
 msgid "No"
 msgstr "خیر"
 
-#: src/stel_ui_tuiconf.cpp:392
-msgid "Star Magnitude Multiplier: "
+#: src/stel_ui_tuiconf.cpp:408
+msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:393
+#: src/stel_ui_tuiconf.cpp:409
 msgid "Maximum Magnitude to Label: "
 msgstr ":حداکثر قدر برای برچسب زدن "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:410
 msgid "Twinkling: "
 msgstr ":چشمک زدن "
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:411
+#, fuzzy
+msgid "Limiting Magnitude: "
+msgstr "قدر: "
+
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:415
 msgid "Constellation Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Planet Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Planet Orbits"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_tuiconf.cpp:421
 msgid "Planet Trails"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Meridian Line"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:427
 msgid "Nebula Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:428
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:433
 msgid "Landscape: "
 msgstr ":منظره "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:434
 msgid "Manual zoom: "
 msgstr ":زوم دستی "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Object Sizing Rule: "
 msgstr ":قانون اندازه‌گذاری جرم "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Point"
 msgstr "نقطه"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:435
 msgid "Magnitude"
 msgstr "قدر"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/stel_ui_tuiconf.cpp:436
+msgid "Magnitude Scaling Multiplier: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Milky Way intensity: "
 msgstr ":شدت نمایش راه شیری "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:438
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ":حداکثر قدر سحابی برای برچسب زدن "
 
-#: src/stel_ui_tuiconf.cpp:422
+#: src/stel_ui_tuiconf.cpp:439
 msgid "Zoom Duration: "
 msgstr ":دوام زوم "
 
-#: src/stel_ui_tuiconf.cpp:423
+#: src/stel_ui_tuiconf.cpp:440
 msgid "Cursor Timeout: "
 msgstr "مهلت مکان‌نما: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:441
+msgid "Setting Landscape Sets Location: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:444
 msgid "Local Script: "
 msgstr ":اسکریپت محلی "
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:447
 msgid "CD/DVD Script: "
 msgstr ": CD/DVD اسکریپت "
 
-#: src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_tuiconf.cpp:451
 msgid "Load Default Configuration: "
 msgstr ":بارگیری پیکربندی پیش‌فرض "
 
-#: src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_tuiconf.cpp:452
 msgid "Save Current Configuration as Default: "
 msgstr ":ذخیره پیکربندی فعلی به عنوان پیش‌فرض "
 
-#: src/stel_ui_tuiconf.cpp:435
+#: src/stel_ui_tuiconf.cpp:453
 msgid "Shut Down: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:436
+#: src/stel_ui_tuiconf.cpp:454
 msgid "Update me via Internet: "
 msgstr ":بروزرسانی از راه اینترنت "
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/stel_ui_tuiconf.cpp:455
 msgid "Set UI Locale: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:599
+#: src/stel_ui_tuiconf.cpp:626
 msgid "Arrow down to load list."
 msgstr ""
 
@@ -947,19 +966,19 @@ msgstr "کایرون"
 msgid "Solar System Observer"
 msgstr "ناظر منظومه خورشیدی"
 
-#: src/translations.h:63 src/s_gui.cpp:2668
+#: src/translations.h:63 src/s_gui.cpp:2681
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:64 src/s_gui.cpp:2669
+#: src/translations.h:64 src/s_gui.cpp:2682
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:65 src/s_gui.cpp:2673
+#: src/translations.h:65 src/s_gui.cpp:2686
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:66 src/s_gui.cpp:2674
+#: src/translations.h:66 src/s_gui.cpp:2687
 msgid "W"
 msgstr "غرب"
 
@@ -1986,37 +2005,57 @@ msgstr ""
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/s_gui.cpp:2209 src/s_gui.cpp:2255
+#: src/translations.h:346
+#, fuzzy
+msgid "USB Script: "
+msgstr "اسکریپت‌ها "
+
+#: src/s_gui.cpp:2222 src/s_gui.cpp:2268
 msgid "Cancel"
 msgstr ""
 
-#: src/s_gui.cpp:2227 src/s_gui.cpp:2253
+#: src/s_gui.cpp:2240 src/s_gui.cpp:2266
 msgid "OK"
 msgstr "تأیید"
 
-#: src/s_gui.cpp:2723
+#: src/s_gui.cpp:2736
 msgid "Year"
 msgstr "سال"
 
-#: src/s_gui.cpp:2726
+#: src/s_gui.cpp:2739
 msgid "Month"
 msgstr "ماه"
 
-#: src/s_gui.cpp:2729
+#: src/s_gui.cpp:2742
 msgid "Day"
 msgstr "روز"
 
-#: src/s_gui.cpp:2732
+#: src/s_gui.cpp:2745
 msgid "Hour"
 msgstr "ساعت"
 
-#: src/s_gui.cpp:2735
+#: src/s_gui.cpp:2748
 msgid "Minutes"
 msgstr "دقیقه"
 
-#: src/s_gui.cpp:2738
+#: src/s_gui.cpp:2751
 msgid "Seconds"
 msgstr "ثانیه"
+
+#~ msgid ""
+#~ "Usage: %s [OPTION] ...\n"
+#~ " -v, --version          Output version information and exit.\n"
+#~ " -h, --help             Display this help and exit.\n"
+#~ msgstr ""
+#~ "Usage: %s [OPTION] ...\n"
+#~ "-v, --version\t\tاطلاعات این نسخه را چاپ کرده و خارج می‌شود.\n"
+#~ " -h, --help             راهنمایی را چاپ کرده و خارج می‌شود.\n"
+
+#~ msgid "%s: Bad command line argument(s)\n"
+#~ msgstr "%s: آرگومان(های) نامناسب برای خط فرمان\n"
+
+#~ msgid "Try `%s --help' for more information.\n"
+#~ msgstr "برای اطلاعات بیشتر «%s --help» را امتحان کنید.\n"
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"

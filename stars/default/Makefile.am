@@ -1,5 +1,6 @@
 pkgdatadir = $(datadir)/@PACKAGE@/stars/default
 pkgdata_DATA = name.fab \
+               stars.ini \
                stars_0_0v0_0.cat \
                stars_1_0v0_0.cat \
                stars_2_0v0_0.cat \
