@@ -47,8 +47,8 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 ########### Others ###########
 # Define if we want to manage the main window with SDL or Qt4
 # Note that Qt4 is required in any case anyway
-SET(USE_QT4 1)
-#SET(USE_SDL 1)
+#SET(USE_QT4 1)
+SET(USE_SDL TRUE)
 
 # Activate translation with gettext
 SET(ENABLE_NLS 1)
@@ -60,14 +60,15 @@ SET(QT_USE_QTOPENGL TRUE)
 INCLUDE(${QT_USE_FILE})
 
 IF(USE_SDL)
-  FIND_PACKAGE(SDL)
-  FIND_PACKAGE(SDL_mixer)
-  IF (SDLMIXER_FOUND)
-    SET(HAVE_SDL_SDL_MIXER true)
-  ELSE (SDLMIXER_FOUND)
+  FIND_PACKAGE(SDL REQUIRED)
+  FIND_PACKAGE(SDL_mixer REQUIRED)
+  IF(SDLMIXER_LIBRARY)
+    MESSAGE(STATUS "Found SDL_mixer. Activate sound support.")
+    SET(HAVE_SDL_SDL_MIXER 1)
+  ELSE(SDLMIXER_LIBRARY)
     SET(SDLMIXER_INCLUDE_DIR "")
     SET(SDLMIXER_LIBRARY "")
-  ENDIF (SDLMIXER_FOUND)
+  ENDIF(SDLMIXER_LIBRARY)
 ENDIF(USE_SDL)
 
 IF(ENABLE_NLS)
