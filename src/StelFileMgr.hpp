@@ -81,7 +81,7 @@ public:
 		
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
-	bool exists(const string& path);
+	static bool exists(const string& path);
 	
 	//! Check if a path is writable
 	//! For files, true is returned if the file exists and is writable
@@ -90,11 +90,11 @@ public:
 	//! In the case of directories, return true if the directory can
 	//! have files created in it.
 	//! @param path to check
-	bool isWritable(const string& path);
+	static bool isWritable(const string& path);
 	
 	//! Check if a path exists and is a directory.
 	//! @param path to check
-	bool isDirectory(const string& path);
+	static bool isDirectory(const string& path);
 	
 	//! Check if the user directory exists, is writable and a directory
 	//! Creates it if it does not exist.  Exits the program if any of this
@@ -104,7 +104,7 @@ public:
 	//! Make a directory
 	//! @param path the path of the directory to create.
 	//! @return true if success, else false
-	bool mkDir(const string& path);
+	static bool mkDir(const string& path);
 	
 	//! Convenience function to find the parent directory of a given path
 	//! May return relative paths if the parameter is a relative path
@@ -155,6 +155,12 @@ public:
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	const string getLocaleDir(void);
 	
+	//! Copies the file currently specified by fileName() to a file called newName.
+	//! @param fileName name of the file to copy.
+	//! @param newName name of the file to create.
+	//! @return true if successful. False if not or if a file with the name newName already exists.
+	static bool copy(const string& fileName, const string& newName);
+
 private:
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path

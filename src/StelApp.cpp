@@ -635,7 +635,7 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	StelUtils::copyFile(defaultConfigFilePath, configFile);
+	StelFileMgr::copy(defaultConfigFilePath, configFile);
 	if (!stelFileMgr->exists(configFile))
 	{
 		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath << " to " << configFile << ". You could try to copy it by hand." << endl;
