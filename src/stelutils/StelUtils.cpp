@@ -603,41 +603,6 @@ double get_dec_angle(const string& str)
 	return (pos);
 }
 
-// Check if a file exist
-bool fileExists(const std::string& fileName)
-{
-	std::fstream fin;
-	fin.open(fileName.c_str(),std::ios::in|std::ios::binary);
-	if(fin.is_open())
-	{
-		fin.close();
-		return true;
-	}
-	fin.close();
-	return false;
-}
-
-bool copyFile(const std::string& fromFile, const std::string& toFile)
-{
-	std::fstream fin, fout;
-	char buf[1024];
-
-	fin.open(fromFile.c_str(),std::ios::in|std::ios::binary);
-	fout.open(toFile.c_str(),std::ios::out|std::ios::binary);
-
-	cerr << "Copying "<<fromFile<<" to "<<toFile<<endl;
-	while(!fin.eof()) 
-    {
-		memset(buf,0,1024);
-		fin.read(buf,1024);
-        fout.write(buf,1024);
-    }
-
-	fin.close();
-	fout.close();
-	return true;
-}
-
 // Delete the file
 bool deleteFile(const std::string& fileName)
 {

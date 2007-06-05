@@ -72,7 +72,7 @@ double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	eye->xyY_to_RGB(c);
 	//cerr << tex_avg_luminance << endl;
 	c = Vec3f(c[0]*c[0], c[1]*c[1], c[2]*c[2]);
-	c*=intensity/tex_avg_luminance*10;
+	c*=intensity/tex_avg_luminance*6;
 	//c-=Vec3f(0.3,0.3,0.3);
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;

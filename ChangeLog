@@ -1,13 +1,14 @@
-0.9.0 [not released yet]
+0.9.0 [2007-06-6]
 Larger star catalog
 Can select multiple constellations at one time
 Local script directory is reread when enter TUI
 Inuit constellation art by Johan Meuris
 More sky cultures
-Large code reorganization into modular classes based on StelModule, StelApp singleton and its "manager" classes providing services to the modules.
+Large code reorganization into a modular structure based on StelModule, StelApp singleton and its "manager" classes providing services to the modules.
+Projection code cleaned and splitted into Mapping classes.
+Movement control code encapsulated into the MovementMgr module.
 Code cleaning and commenting.
 Sidereal day/week keystrokes (ALT -, ALT =, ALT [, ALT ]).
-On demand nebula image loading.
 Data files reorganized
 Added back Hawaiian translations (invented locale "hw")
 Orthographic projection, Lamberts Equal Area projection, Cylinder projection.
@@ -16,6 +17,7 @@ Do not place the Earth at the EMB but at its proper position.
 New orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits.
 Added loading of jpeg textures and re-coded most of the texture manager.
 Allow loading of plug-ins (unstable until version 1.0).
+Selection of object is managed per module, and by the StelObjectManager.
 Recoded Grid display to allow for adaptative scale wrt zoom and labeling.
 The main window managed by QT4.2 instead of SDL.
 Go to selected solar system body by pressing control-g
@@ -23,6 +25,8 @@ Location map updates on changing observer to new solar system body
 Titlebar updates after moving to new planet
 Landscapes may now have location, can update observer by selecting landscape
 More nebula textures and better placement of most existing textures
+Build is now managed by cmake instead of autoconf/automake. These old tools are still supported for this version.
+
 
 0.8.2 [2006-10-5]
 Re-enabled some script recording features (select, pan/tilt, zoom)

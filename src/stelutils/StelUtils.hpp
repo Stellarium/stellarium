@@ -214,15 +214,8 @@ namespace StelUtils {
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
 	double get_dec_angle(const string&);
 	
-	//! Check if a file exist
-	//! May require optimization
-	bool fileExists(const std::string& fileName);
-	
 	//! Delete the file
 	bool deleteFile(const std::string& fileName);
-
-	//! Copy file to another
-	bool copyFile(const std::string& fromFile, const std::string& toFile);
 
 	//! Check if the filename is an absolute path
 	bool checkAbsolutePath(const string& fileName);
