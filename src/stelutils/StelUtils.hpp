@@ -137,19 +137,6 @@ namespace StelUtils {
 	//! @return the string describing the Vector with the form "x,y,z"
 	//! @deprecated Use the << operator from Vec3f class
 	string vec3f_to_str(const Vec3f& v);
-	
-	//! @brief Print the passed angle with the format dd�mm'ss(.ss)"
-	//! @param angle Angle in radian
-	//! @param decimal Define if 2 decimal must also be printed
-	//! @param useD Define if letter "d" must be used instead of �
-	//! @return The corresponding string
-	wstring printAngleDMS(double angle, bool decimals = false, bool useD = false);
-	
-	//! @brief Print the passed angle with the format +hh:mm:ss(.ss)"
-	//! @param angle Angle in radian
-	//! @param decimals Define if 2 decimal must also be printed
-	//! @return The corresponding string
-	wstring printAngleHMS(double angle, bool decimals = false);
 		
 	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable
 	//! @param The input string in UTF-8 format

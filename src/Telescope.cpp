@@ -235,11 +235,11 @@ wstring Telescope::getInfoString(const Navigator *nav) const {
   std::wostringstream oss;
   oss << nameI18n << endl
       << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_j2000,false)
-      << L"/" << StelUtils::printAngleDMS(dec_j2000,false) << endl
+      << StelUtils::radToHmsWstr(ra_j2000,false)
+      << L"/" << StelUtils::radToDmsWstr(dec_j2000,false) << endl
       << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_equ)
-      << L"/" << StelUtils::printAngleDMS(dec_equ);
+      << StelUtils::radToHmsWstr(ra_equ)
+      << L"/" << StelUtils::radToDmsWstr(dec_equ);
   return oss.str();
 }
 

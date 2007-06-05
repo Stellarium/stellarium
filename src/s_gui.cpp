@@ -2674,7 +2674,7 @@ void FloatIncDec::draw()
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{
-		wstring l = StelUtils::printAngleDMS(value*M_PI/180.);
+		wstring l = StelUtils::radToDmsWstr(value*M_PI/180.);
 		wstring m = l.substr(1);
 		if (format == FORMAT_LATITUDE)
 		{
