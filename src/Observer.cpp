@@ -259,11 +259,11 @@ void Observer::setConf(InitParser & conf, const string& section) const
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
 	conf.set_str(section + ":latitude",
 	             StelUtils::wstringToString(
-	               StelUtils::printAngleDMS(latitude*M_PI/180.0,
+	               StelUtils::radToDmsWstr(latitude*M_PI/180.0,
 	                                          true, true)));
 	conf.set_str(section + ":longitude",
 	             StelUtils::wstringToString(
-	               StelUtils::printAngleDMS(longitude*M_PI/180.0,
+	               StelUtils::radToDmsWstr(longitude*M_PI/180.0,
 	                                          true, true)));
 
 	conf.set_int(section + ":altitude", altitude);

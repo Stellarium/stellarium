@@ -108,17 +108,17 @@ wstring Planet::getInfoString(const Navigator * nav) const
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
-	oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
+	oss << _("RA/DE: ") << StelUtils::radToHmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
 	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
-	oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
+	oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
 
 	oss.precision(8);
 	oss << _("Distance: ") << equPos.length() << _("AU") << endl;
-
+	
 	return oss.str();
 }
 
