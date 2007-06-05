@@ -297,7 +297,8 @@ bool Observer::setHomePlanet(const string &english_name) {
 }
 
 void Observer::setHomePlanet(const Planet *p,float transit_seconds) {
-  if (p && planet != p) {
+  assert(p); // Assertion enables to track bad calls. Please keep it this way.
+  if (planet != p) {
     if (planet) {
       if (!artificial_planet) {
         artificial_planet = new ArtificialPlanet(*planet);
