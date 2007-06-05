@@ -635,12 +635,10 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	string cp_cmd(string("cp \"") + defaultConfigFilePath + "\" \"" + configFile + "\"");
-	system(cp_cmd.c_str());
-	
+	StelUtils::copyFile(defaultConfigFilePath, configFile);
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "ERROR (copyDefaultConfigFile): failed to copy with with command: " << cp_cmd << endl;
+		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath << " to " << configFile << ". You could try to copy it by hand." << endl;
 		exit(1);
 	}
 }
