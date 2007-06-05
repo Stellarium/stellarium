@@ -799,7 +799,7 @@ CTRL + C : End Script\n\
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	//help_win->setOpaque(opaqueGUI);
-	help_win->reshape(215,45,580,670);
+	help_win->reshape(215,45,580,645);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
