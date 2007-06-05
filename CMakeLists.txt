@@ -10,7 +10,7 @@ SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING
+  SET(CMAKE_BUILD_TYPE Release CACHE STRING
       "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
       FORCE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
@@ -109,8 +109,15 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 ########### Add macros ###########
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
-########### install files ###############
+########### uninstall files ###############
+CONFIGURE_FILE(
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+  IMMEDIATE @ONLY)
 
+ADD_CUSTOM_TARGET(uninstall
+  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+ 
 ########### Packaging info for CPack ###########
 INCLUDE(InstallRequiredSystemLibraries)
 

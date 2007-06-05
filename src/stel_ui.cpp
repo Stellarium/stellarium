@@ -1226,8 +1226,8 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			if (mod & COMPATIBLE_StelMod_CTRL) {
                 if (objmgr.getWasSelected())
                 {
-                    core->getObservatory()->setHomePlanet(
-                       dynamic_cast<Planet*>(objmgr.getSelectedObject()[0].get()));
+                	Planet* pl = dynamic_cast<Planet*>(objmgr.getSelectedObject()[0].get());
+                    if (pl) core->getObservatory()->setHomePlanet(pl);
                 }
             } else {
                 app->commander->execute_command( "flag landscape toggle");
