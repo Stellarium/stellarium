@@ -280,7 +280,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	bool toDownload = false;
 	string filename = url;
 		
-	if (!StelUtils::fileExists(filename))
+	if (!StelFileMgr::exists(filename))
 	{
 		if (url[0]=='h' && url[1]=='t' && url[2]=='t' && url[3]=='p')
 		{

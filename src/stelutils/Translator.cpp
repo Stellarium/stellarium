@@ -114,7 +114,7 @@ void Translator::reload()
 #endif
 
 #ifndef NDEBUG
-	printf("Setting locale: %s\n", envstr);
+//	printf("Setting locale: %s\n", envstr);
 #endif
 
 	putenv(envstr);

@@ -165,6 +165,11 @@ bool StelFileMgr::mkDir(const string& path)
 	return QDir("/").mkpath(path.c_str());
 }
 
+bool StelFileMgr::copy(const string& fileName, const string& newName)
+{
+	return QFile::copy(fileName.c_str(), newName.c_str());
+}
+
 const string StelFileMgr::dirName(const string& path)
 {
 	return QFileInfo(path.c_str()).dir().canonicalPath().toStdString();
