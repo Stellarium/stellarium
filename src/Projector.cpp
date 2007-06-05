@@ -138,7 +138,7 @@ void Projector::init(const InitParser& conf)
 
 	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 
-	flagGlPointSprite = conf.get_boolean("projection","flag_use_gl_point_sprite",true);
+	flagGlPointSprite = conf.get_boolean("projection","flag_use_gl_point_sprite",false);
 	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
 	if (flagGlPointSprite)
 	{
@@ -147,7 +147,7 @@ void Projector::init(const InitParser& conf)
 		glEnable(GL_POINT_SMOOTH);
 		cerr << "INFO: using GL_ARB_point_sprite" << endl;
 	} else {
-		cerr << "WARNING: GL_ARB_point_sprite not available" << endl;
+		//cerr << "WARNING: GL_ARB_point_sprite not available" << endl;
 	}
 }
 
