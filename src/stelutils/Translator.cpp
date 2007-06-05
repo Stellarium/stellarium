@@ -175,7 +175,7 @@ std::vector<string> Translator::getAvailableLanguagesIso639_1Codes(const string&
 	DIR *dp;
 	std::vector<string> result;
 	
-	cout << "Reading stellarium translations in directory: " << localeDir << endl;
+	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
 	if ((dp = opendir(localeDir.c_str())) == NULL)
 	{
