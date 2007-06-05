@@ -1,5 +1,5 @@
 0.9.0 [2007-06-6]
-Larger star catalog
+Larger star catalog including stars from Hiparcos, Tycho2 and NOMAD
 Can select multiple constellations at one time
 Local script directory is reread when enter TUI
 Inuit constellation art by Johan Meuris
@@ -20,7 +20,8 @@ Allow loading of plug-ins (unstable until version 1.0).
 Selection of object is managed per module, and by the StelObjectManager.
 Recoded Grid display to allow for adaptative scale wrt zoom and labeling.
 The main window managed by QT4.2 instead of SDL.
-Go to selected solar system body by pressing control-g
+Window resizing
+Smooth go to selected solar system body by pressing control-g
 Location map updates on changing observer to new solar system body
 Titlebar updates after moving to new planet
 Landscapes may now have location, can update observer by selecting landscape

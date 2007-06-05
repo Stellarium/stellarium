@@ -85,7 +85,8 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	with any question concerning planetary/satellite ephemeris.
 
 	Norbert Zacharias from USNO for kindly sending a cut of the NOMAD catalogue
-	on 4 DVD, and answering NOMAD related questions.
+	on 4 DVD, answering NOMAD related questions, and finally copying the
+	entiere NOMAD catalogue onto a disk.
     
 	++ Thanks to ++
 	
@@ -190,20 +191,24 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 		provided with any distribution, as well as a description about
 		any changes made to the data, if at all."
 		The changes made to the data are:
-		-) try to compute magnitude and color from the b,v,r values
+		-) try to compute visual magnitude and color from the b,v,r values
 		-) compute nr_of_measurements = the number of valid b,v,r values
 		-) throw away or keep stars (depending on magnitude,
 		   nr_of_measurements, combination of flags, tycho2 number)
-		-) add all stars from hiparcos and tycho2+1st supplement
+		-) add all stars from hiparcos (incl. component solutions),
+		   and tycho2+1st supplement
 		-) reorganize the stars in several brigthness levels and triangular
 		   zones according to position and magnitude
-		The program that is used to generate the star files is called
-		"MakeCombinedCatalogue" and can be found in the util subdirectory
-		in source code.
+		The programs that are used to generate the star files are called
+		"MakeCombinedCatalogue", "ParseHip", "ParseNomad",
+		and can be found in the util subdirectory in source code.
 		The position, magnitudes, and proper motions of the stars
 		coming from NOMAD are unchanged, except for a possible
-		loss of precision, especially in magnitude. Also proper motions of
-		faint stars are neglected at all.
+		loss of precision, especially in magnitude. When there is no
+		v-magnitude, it is estimated from r or b magnitude.
+		When there is no b- or v- magnitude, the color B-V is estimated from
+		the other magnitudes.
+		Also proper motions of faint stars are neglected at all.
 
 4. Graphics
 	4.1 All graphics are copyrighted by Fabien Chereau (GPL) except the ones
