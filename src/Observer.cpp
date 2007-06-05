@@ -297,9 +297,7 @@ bool Observer::setHomePlanet(const string &english_name) {
 }
 
 void Observer::setHomePlanet(const Planet *p,float transit_seconds) {
-//  transit_seconds = 5;
-  assert(p);
-  if (planet != p) {
+  if (p && planet != p) {
     if (planet) {
       if (!artificial_planet) {
         artificial_planet = new ArtificialPlanet(*planet);
