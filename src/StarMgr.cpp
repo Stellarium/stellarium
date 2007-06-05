@@ -390,8 +390,8 @@ struct Star1 { // 28 byte
       if (StarMgr::getFlagSciNames()) {
         const wstring sciName = StarMgr::getSciName(hip);
         if (!sciName.empty()) return sciName;
+        return L"HP " + StelUtils::intToWstring(hip);
       }
-      return L"HP " + StelUtils::intToWstring(hip);
     }
     return L"";
   }
