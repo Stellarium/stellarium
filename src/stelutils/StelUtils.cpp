@@ -262,15 +262,15 @@ string radToDmsStrAdapt(double angle)
 	os << (sign?'+':'-') << d << 'd';
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << 'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << 's';
+		os << m << '\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << '\"';
 	}
 	else if ((int)s!=0)
 	{
-		os << m << 'm' << (int)s << 's';
+		os << m << '\'' << (int)s << '\"';
 	}
 	else if (m!=0)
 	{
-		os << m << 'm';
+		os << m << '\'';
 	}
 	return os.str();
 }
@@ -292,15 +292,15 @@ wstring radToDmsWstrAdapt(double angle, bool useD)
 	os << (sign?L'+':L'-') << d << degsign;
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << L'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill(L'0') << s << L's';
+		os << m << L'\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill(L'0') << s << L'\"';
 	}
 	else if ((int)s!=0)
 	{
-		os << m << L'm' << (int)s << L's';
+		os << m << L'\'' << (int)s << L'\"';
 	}
 	else if (m!=0)
 	{
-		os << m << L'm';
+		os << m << L'\'';
 	}
 	return os.str();
 }
@@ -318,14 +318,14 @@ string radToDmsStr(double angle, bool decimal)
 	
 	os << (sign?'+':'-') << d << 'd';
 		
-	os << m << 'm' << std::fixed << std::setfill('0');
+	os << m << '\'' << std::fixed << std::setfill('0');
 	
 	if (decimal)
 		os << std::setprecision(1) << std::setw(4);
 	else
 		os << std::setprecision(0) << std::setw(2);
 		
-	os << s << 's';
+	os << s << '\"';
 	return os.str();
 }
 
@@ -349,7 +349,7 @@ wstring radToDmsWstr(double angle, bool decimal, bool useD)
 	else
 		os << std::setprecision(0) << std::setw(2);
 		
-	os << m << L'm' << std::fixed << std::setfill(L'0') << s << L's';
+	os << m << L'\'' << std::fixed << std::setfill(L'0') << s << L'\"';
 	return os.str();
 }
 
@@ -367,15 +367,15 @@ string radToDmsWstr(double angle)
 	os << (sign?'+':'-') << d << 'd';
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << 'm' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << 's';
+		os << m << '\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << '\"';
 	}
 	else if ((int)s!=0)
 	{
-		os << m << 'm' << (int)s << 's';
+		os << m << '\'' << (int)s << '\"';
 	}
 	else if (m!=0)
 	{
-		os << m << 'm';
+		os << m << '\'';
 	}
 	return os.str();
 }
@@ -395,101 +395,6 @@ string vec3f_to_str(const Vec3f& v)
 	os << v[0] << "," << v[1] << "," << v[2];
 	return os.str();
 }
-
-	
-//! @brief Print the passed angle with the format dd�mm'ss(.ss)"
-//! @param angle Angle in radian
-//! @param decimal Define if 2 decimal must also be printed
-//! @param useD Define if letter "d" must be used instead of the deg sign
-//! @return The corresponding string
-wstring printAngleDMS(double angle, bool decimals, bool useD)
-{
-	wchar_t buf[32];
-	buf[31]=L'\0';
-	wchar_t sign = L'+';
-	wchar_t degsign = L'\u00B0';
-	if (useD) degsign = L'd';
-
-	angle *= 180./M_PI;
-
-	if (angle<0) {
-		angle *= -1;
-		sign = '-';
-		}
-
-		if (decimals) {
-			int d = (int)(0.5+angle*(60*60*100));
-			const int centi = d % 100;
-			d /= 100;
-			const int s = d % 60;
-			d /= 60;
-			const int m = d % 60;
-			d /= 60;
-			swprintf(buf,
-#ifndef __MINGW32__
-				sizeof(buf),
-#endif
-				L"%lc%.2d%lc%.2d'%.2d.%02d\"",
-				sign, d, degsign, m, s, centi);
-		} else {
-			int d = (int)(0.5+angle*(60*60));
-			const int s = d % 60;
-			d /= 60;
-			const int m = d % 60;
-			d /= 60;
-			swprintf(buf,
-#ifndef __MINGW32__
-				sizeof(buf),
-#endif
-				L"%lc%.2d%lc%.2d'%.2d\"",
-			sign, d, degsign, m, s);
-	}
-	return buf;
-}
-
-//! @brief Print the passed angle with the format +hhhmmmss(.ss)"
-//! @param angle Angle in radian
-//! @param decimals Define if 2 decimal must also be printed
-//! @return The corresponding string
-wstring printAngleHMS(double angle, bool decimals)
-{
-	wchar_t buf[16];
-	buf[15] = L'\0';
-	angle = fmod(angle,2.0*M_PI);
-	if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
-	angle *= 12./M_PI; // range: [0..24)
-	if (decimals) {
-		angle = 0.5+angle*(60*60*100); // range:[0.5,24*60*60*100+0.5)
-			if (angle >= (24*60*60*100)) angle -= (24*60*60*100);
-			int h = (int)angle;
-			const int centi = h % 100;
-			h /= 100;
-			const int s = h % 60;
-			h /= 60;
-			const int m = h % 60;
-			h /= 60;
-			swprintf(buf,
-#ifndef __MINGW32__
-				sizeof(buf),
-#endif
-				L"%.2dh%.2dm%.2d.%02ds",h,m,s,centi);
-	} else {
-		angle = 0.5+angle*(60*60); // range:[0.5,24*60*60+0.5)
-			if (angle >= (24*60*60)) angle -= (24*60*60);
-			int h = (int)angle;
-			const int s = h % 60;
-			h /= 60;
-			const int m = h % 60;
-			h /= 60;
-			swprintf(buf,
-#ifndef __MINGW32__
-				sizeof(buf),
-#endif
-				L"%.2dh%.2dm%.2ds",h,m,s);
-	}
-	return buf;
-}
-
 
 double stringToDouble(const string& str)
 {

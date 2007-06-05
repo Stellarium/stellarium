@@ -749,21 +749,21 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
       << " B-V: " << getBV()
       << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_j2000,true)
-      << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
+      << StelUtils::radToHmsWstr(ra_j2000,true)
+      << L"/" << StelUtils::radToDmsWstr(dec_j2000,true) << endl;
   oss << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_equ)
-      << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
+      << StelUtils::radToHmsWstr(ra_equ)
+      << L"/" << StelUtils::radToDmsWstr(dec_equ) << endl;
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
-      << L"/" << StelUtils::printAngleDMS(alt) << endl;
+  oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(az)
+      << L"/" << StelUtils::radToDmsWstr(alt) << endl;
   oss.precision(2);
-
+  
   return oss.str();
 }
 
@@ -867,22 +867,22 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
       << " B-V: " << s->getBV()
       << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_j2000,true)
-      << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
+      << StelUtils::radToHmsWstr(ra_j2000,true)
+      << L"/" << StelUtils::radToDmsWstr(dec_j2000,true) << endl;
 ///  oss << "Motion J2000: " << s->dx0 << '/' << s->dx1 << endl;
 
 
   oss << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_equ)
-      << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
+      << StelUtils::radToHmsWstr(ra_equ)
+      << L"/" << StelUtils::radToDmsWstr(dec_equ) << endl;
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
-      << L"/" << StelUtils::printAngleDMS(alt) << endl;
+  oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(az)
+      << L"/" << StelUtils::radToDmsWstr(alt) << endl;
 
   if (s->plx) {
     oss.precision(5);
