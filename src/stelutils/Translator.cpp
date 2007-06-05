@@ -113,12 +113,12 @@ void Translator::reload()
 	}
 #endif
 
-#if defined(DEBUG)
+#ifndef NDEBUG
 	printf("Setting locale: %s\n", envstr);
 #endif
 
 	putenv(envstr);
-#if !defined (_MSC_VER) && !defined (__MINGW32__) 
+#if !defined (_MSC_VER)
 	setlocale(LC_MESSAGES, "");
 #else
 	setlocale(LC_CTYPE,"");
@@ -175,7 +175,7 @@ std::vector<string> Translator::getAvailableLanguagesIso639_1Codes(const string&
 	DIR *dp;
 	std::vector<string> result;
 	
-	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
+	cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
 	if ((dp = opendir(localeDir.c_str())) == NULL)
 	{

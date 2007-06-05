@@ -79,7 +79,7 @@ IF(ENABLE_NLS)
   FIND_LIBRARY(INTL_LIBRARIES intl c
     PATHS 
     /usr/lib/
-    /usr/local/lib) 
+    /usr/local/lib)
 ENDIF(ENABLE_NLS)
 
 FIND_PACKAGE(OpenGL REQUIRED)
@@ -96,7 +96,7 @@ IF(UNIX AND NOT WIN32)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
 ELSE(UNIX AND NOT WIN32)
   SET(INSTALL_DATADIR .)
-  SET(INSTALL_LOCALEDIR locale)
+  SET(INSTALL_LOCALEDIR ./locale)
 ENDIF(UNIX AND NOT WIN32)
 
 ########### Generate a config.h ###########
@@ -123,8 +123,8 @@ SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
 SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
 SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
-SET(CPACK_GENERATOR "TGZ")
 SET(CPACK_SOURCE_GENERATOR "TGZ")
+SET(CPACK_GENERATOR "TGZ")
 IF(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full unix paths properly. Make
   # sure there is at least one set of four (4) backlasshes.

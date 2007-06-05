@@ -380,13 +380,13 @@ const string StelFileMgr::getLocaleDir(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = QFileInfo(QString(getInstallationDir().c_str()) + "/data/locale");
+	localePath = QFileInfo(QString(getInstallationDir().c_str()) + "/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 
 	// install having been done.
 	if (getInstallationDir() == ".")
-		localePath = QFileInfo("./data/locale");
+		localePath = QFileInfo("./locale");
 	else
 		localePath = QFileInfo(INSTALL_LOCALEDIR);
 	
