@@ -1122,10 +1122,28 @@ ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
   nr_of_stars = 0;
 }
 
-struct TmpZoneData {
-  int size;
-};
-
+static
+bool ReadFileWithLoadingBar(FILE *f,void *data,size_t size,LoadingBar &lb) {
+  int parts = 256;
+  size_t part_size = (size + (parts>>1)) / parts;
+  if (part_size < 64*1024) {
+    part_size = 64*1024;
+    parts = (size + (part_size>>1)) / part_size;
+  }
+  float i = 0.f;
+  lb.Draw(i / parts);
+  i += 1.f;
+  while (size > 0) {
+    const size_t to_read = (part_size < size) ? part_size : size;
+    const size_t read_rc = fread(data,1,to_read,f);
+    if (read_rc != to_read) return false;
+    size -= read_rc;
+    data = ((char*)data) + read_rc;
+    lb.Draw(i / parts);
+    i += 1.f;
+  }
+  return true;
+}
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,LoadingBar &lb,
@@ -1182,7 +1200,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,LoadingBar &lb,
                 "no memory (3)" << endl;
         exit(1);
       }
-      if (nr_of_stars != (int)fread(stars,sizeof(Star),nr_of_stars,f)) {
+      if (!ReadFileWithLoadingBar(f,stars,sizeof(Star)*nr_of_stars,lb)) {
         delete[] stars;
         stars = 0;
         nr_of_stars = 0;
