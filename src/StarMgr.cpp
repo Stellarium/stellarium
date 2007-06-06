@@ -90,7 +90,10 @@ void StringArray::initFromFile(const char *file_name) {
   }
   if (size > 0) {
     array = new string[size];
-    assert(array!=0);
+    if (array == 0) {
+      cerr << "ERROR: StringArray::initFromFile: no memory" << endl;
+      exit(1);
+    }
     for (int i=0;i<size;i++) {
       array[i] = list.front();
       list.pop_front();
@@ -987,7 +990,11 @@ void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
        z>=getZones();z--) {
     for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--) {
       const int hip = s->hip;
-      assert(0 <= hip && hip <= NR_OF_HIP);
+      if (hip < 0 || NR_OF_HIP < hip) {
+        cerr << "ERROR: ZoneArray1::updateHipIndex: invalid HP number: "
+             << hip << endl;
+        exit(1);
+      }
       if (hip != 0) {
         hip_index[hip].a = this;
         hip_index[hip].z = z;
@@ -1132,10 +1139,18 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,LoadingBar &lb,
   if (nr_of_zones > 0) {
 //		lb.Draw(i / 8.0);
     zones = new SpecialZoneData<Star>[nr_of_zones];
-    assert(zones!=0);
+    if (zones == 0) {
+      cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
+              "no memory (1)" << endl;
+      exit(1);
+    }
     {
       int *zone_size = new int[nr_of_zones];
-      assert(zone_size!=0);
+      if (zone_size == 0) {
+        cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
+                "no memory (2)" << endl;
+        exit(1);
+      }
       if (nr_of_zones != (int)fread(zone_size,sizeof(int),
                                     nr_of_zones,f)) {
         delete[] getZones();
@@ -1162,7 +1177,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,LoadingBar &lb,
       nr_of_zones = 0;
     } else {
       stars = new Star[nr_of_stars];
-      assert(stars!=0);
+      if (stars == 0) {
+        cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
+                "no memory (3)" << endl;
+        exit(1);
+      }
       if (nr_of_stars != (int)fread(stars,sizeof(Star),nr_of_stars,f)) {
         delete[] stars;
         stars = 0;
@@ -1201,7 +1220,10 @@ StarMgr::StarMgr(void) :
 	fontSize(13.),
     starFont(0)
 {
-  assert(hip_index);
+  if (hip_index == 0) {
+    cerr << "ERROR: StarMgr::StarMgr: no memory" << endl;
+    exit(1);
+  }
   max_geodesic_grid_level = -1;
   last_max_search_level = -1;
   dependenciesOrder["draw"]="constellations";
@@ -1425,6 +1447,11 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 
 // Load common names from file 
 int StarMgr::load_common_names(const string& commonNameFile) {
+  common_names_map.clear();
+  common_names_map_i18n.clear();
+  common_names_index.clear();
+  common_names_index_i18n.clear();
+
   cout << "Load star names from " << commonNameFile << endl;
 
   FILE *cnFile;
@@ -1434,18 +1461,16 @@ int StarMgr::load_common_names(const string& commonNameFile) {
     return 0;
   }
 
-  common_names_map.clear();
-  common_names_map_i18n.clear();
-  common_names_index.clear();
-  common_names_index_i18n.clear();
-
   // Assign names to the matching stars, now support spaces in names
   char line[256];
   while (fgets(line, sizeof(line), cnFile)) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
-    if(sscanf(line,"%u",&hip)!=1)
-		assert(0);
+    if (sscanf(line,"%u",&hip)!=1) {
+      cerr << "ERROR: StarMgr::load_common_names(" << commonNameFile
+           << "): bad line: \"" << line << '"' << endl;
+      exit(1);
+    }
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;
@@ -1477,6 +1502,9 @@ int StarMgr::load_common_names(const string& commonNameFile) {
 
 // Load scientific names from file 
 void StarMgr::load_sci_names(const string& sciNameFile) {
+  sci_names_map_i18n.clear();
+  sci_names_index_i18n.clear();
+
   cout << "Load sci names from " << sciNameFile << endl;
 
   FILE *snFile;
@@ -1486,16 +1514,16 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
     return;
   }
 
-  sci_names_map_i18n.clear();
-  sci_names_index_i18n.clear();
-
   // Assign names to the matching stars, now support spaces in names
   char line[256];
   while (fgets(line, sizeof(line), snFile)) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
-    if(sscanf(line,"%u",&hip)!=1)
-		assert(0);
+    if (sscanf(line,"%u",&hip)!=1) {
+      cerr << "ERROR: StarMgr::load_sci_names(" << sciNameFile
+           << "): bad line: \"" << line << '"' << endl;
+      exit(1);
+    }
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;
