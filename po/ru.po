@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2007-01-13 20:29+0000\n"
 "Last-Translator: Nkolay Parukhin <nik@sevpinro.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -32,19 +32,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " световых лет"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ":  Выше среднего (Леониды)"
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ":  Максимальный (Леониды, 1966)"
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ":  Нормальный"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ":  Стандартный для Персеид"
 
@@ -125,7 +125,7 @@ msgstr "Атмосфера [A]"
 msgid "Auriga"
 msgstr "Возничий"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr "Автор : "
 
@@ -408,7 +408,7 @@ msgstr "Южный Крест"
 msgid "Current Time :"
 msgstr "Текущее время :"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr "Текущая скорость времени : x"
 
@@ -494,10 +494,11 @@ msgid "Disk Viewport"
 msgstr "Поле обзора в виде диска"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -872,7 +873,7 @@ msgstr "Ускорить ход времени [L]"
 msgid "Indus"
 msgstr "Индеец"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr "Сведения : "
 
@@ -1038,7 +1039,7 @@ msgstr "Локальный сценарий: "
 msgid "Location"
 msgstr "Место"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "Место"
@@ -1130,7 +1131,7 @@ msgstr "Меркурий"
 msgid "Meridian Line"
 msgstr "Линия меридиана"
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1384,7 +1385,7 @@ msgstr "Орбиты планет"
 msgid "Planet Trails"
 msgstr "Следы планет"
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "Планеты"

@@ -4,13 +4,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.2)
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "9")
-SET(STELLARIUM_PATCH "0")
+SET(STELLARIUM_PATCH "1")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Release CACHE STRING
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING
       "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
       FORCE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
@@ -133,18 +133,6 @@ SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
 SET(CPACK_SOURCE_GENERATOR "TGZ")
 SET(CPACK_GENERATOR "TGZ")
 SET(CPACK_STRIP_FILES "bin/stellarium")
-IF(WIN32 AND NOT UNIX)
-  # There is a bug in NSI that does not handle full unix paths properly. Make
-  # sure there is at least one set of four (4) backlasshes.
-  SET(CPACK_PACKAGE_ICON "${SOURCE_DIR}/data/\\\\icon.bmp")
-  SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\stellarium.exe")
-  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} Stellarium")
-  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.stellarium.org")
-  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.stellarium.org")
-  SET(CPACK_NSIS_MODIFY_PATH ON)
-ELSE(WIN32 AND NOT UNIX)
-  SET(CPACK_SOURCE_STRIP_FILES "")
-ENDIF(WIN32 AND NOT UNIX)
 SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
 INCLUDE(CPack)
 
