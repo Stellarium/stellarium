@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2006-11-23 21:49+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -30,19 +30,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " valovuotta"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ": Poikkeuksellinen leonidien aktiivisuus"
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Suurin tunnettu aktiivisuus (1966 leonidit)"
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ": Normaali aktiivisuus"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ": Perseidien normaaliaktiivisuus"
 
@@ -123,7 +123,7 @@ msgstr "Ilmakehä [A]"
 msgid "Auriga"
 msgstr "Ajomies"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr "Tekijä: "
 
@@ -406,7 +406,7 @@ msgstr "Etelän risti"
 msgid "Current Time :"
 msgstr "Nykyhetki :"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr "Nykyinen aika-askel on x"
 
@@ -491,10 +491,11 @@ msgid "Disk Viewport"
 msgstr "Putkinäkymä"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -870,7 +871,7 @@ msgstr "Kasvata aika-askelta [L]"
 msgid "Indus"
 msgstr "Intiaani"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr "Tiedot: "
 
@@ -1036,7 +1037,7 @@ msgstr "Paikallinen komentojono: "
 msgid "Location"
 msgstr "Paikkakunta"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "Paikkakunta"
@@ -1128,7 +1129,7 @@ msgstr "Merkurius"
 msgid "Meridian Line"
 msgstr "Meridiaaniviiva"
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1382,7 +1383,7 @@ msgstr "Planeettojen radat"
 msgid "Planet Trails"
 msgstr "Planeettojen reitit"
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "Planeetat"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2006-08-30 11:25-0700\n"
 "Last-Translator:  <rob@digitaliseducation.com>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -30,19 +30,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " Light Years"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ": Exceptional Leonid rate"
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Highest rate ever (1966 Leonids)"
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ": Normal rate"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ": Standard Perseids rate"
 
@@ -123,7 +123,7 @@ msgstr "Atmosphere [A]"
 msgid "Auriga"
 msgstr "Auriga"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr "Crux"
 msgid "Current Time :"
 msgstr "Current Time :"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr "Current Time Speed is x"
 
@@ -492,10 +492,11 @@ msgid "Disk Viewport"
 msgstr "Disk Viewport"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -870,7 +871,7 @@ msgstr "Increase Time Speed [L]"
 msgid "Indus"
 msgstr "Indus"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr ""
 
@@ -1036,7 +1037,7 @@ msgstr "Local Script: "
 msgid "Location"
 msgstr "Location"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "Location"
@@ -1128,7 +1129,7 @@ msgstr "Ukaliali'i"
 msgid "Meridian Line"
 msgstr "Meridian Line"
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1377,7 +1378,7 @@ msgstr "Planet Orbits"
 msgid "Planet Trails"
 msgstr "Planet Trails"
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "Planets"

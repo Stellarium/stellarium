@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2007-04-18 00:37+0000\n"
 "Last-Translator: G.S.K.Lee <curimi_0418@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
@@ -31,19 +31,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " 光年"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ": 獅子座流星暴"
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": 1966年獅子座流星暴 (觀測史最大量)"
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ": 一般夜晚"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ": 英仙座流星雨"
 
@@ -124,7 +124,7 @@ msgstr "大氣 [A]"
 msgid "Auriga"
 msgstr "御夫座"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr "作者: "
 
@@ -407,7 +407,7 @@ msgstr "南十字座"
 msgid "Current Time :"
 msgstr "目前時間:"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr "目前時間流速為x"
 
@@ -492,10 +492,11 @@ msgid "Disk Viewport"
 msgstr "星座盤模式"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -870,7 +871,7 @@ msgstr "增加時間流速 [L]"
 msgid "Indus"
 msgstr "印第安座"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr "簡介: "
 
@@ -1036,7 +1037,7 @@ msgstr "本地端劇本: "
 msgid "Location"
 msgstr "位置"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "位置"
@@ -1128,7 +1129,7 @@ msgstr "水星"
 msgid "Meridian Line"
 msgstr "子午圈"
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1386,7 +1387,7 @@ msgstr "行星軌道"
 msgid "Planet Trails"
 msgstr "行星軌跡"
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "行星"
