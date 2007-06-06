@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2007-04-04 22:00+0000\n"
 "Last-Translator: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
 "Language-Team: \n"
@@ -31,19 +31,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " سال‌نوری"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ": نرخ معمول"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgstr "جَوّ[A]"
 msgid "Auriga"
 msgstr "ارابه‌ران"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr ""
 
@@ -408,7 +408,7 @@ msgstr "چلیپا"
 msgid "Current Time :"
 msgstr ":زمان فعلی"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr ".است x سرعت فعلی گذر زمان"
 
@@ -493,10 +493,11 @@ msgid "Disk Viewport"
 msgstr "نمایش از روی دیسک"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -868,7 +869,7 @@ msgstr "افزایش سرعت گذر زمان [L]"
 msgid "Indus"
 msgstr "هندی"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr ""
 
@@ -1032,7 +1033,7 @@ msgstr ":اسکریپت محلی "
 msgid "Location"
 msgstr "موقعیت"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "موقعیت"
@@ -1123,7 +1124,7 @@ msgstr "عُطارِد"
 msgid "Meridian Line"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1372,7 +1373,7 @@ msgstr ""
 msgid "Planet Trails"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "سیارات"

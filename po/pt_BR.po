@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2007-06-04 11:24+0200\n"
+"POT-Creation-Date: 2007-06-05 20:10+0200\n"
 "PO-Revision-Date: 2006-03-25 03:22+0000\n"
 "Last-Translator: zumbi12 <zumbi12doze@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
@@ -31,19 +31,19 @@ msgstr ""
 msgid " Light Years"
 msgstr " Anos-luz"
 
-#: src/stel_ui_conf.cpp:1068
+#: src/stel_ui_conf.cpp:1070
 msgid ": Exceptional Leonid rate"
 msgstr ": Taxa excepcional de Leonídeos"
 
-#: src/stel_ui_conf.cpp:1075
+#: src/stel_ui_conf.cpp:1077
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Taxa mais alta de todas (1966 Leonídeos)"
 
-#: src/stel_ui_conf.cpp:1054
+#: src/stel_ui_conf.cpp:1056
 msgid ": Normal rate"
 msgstr ": Taxa normal"
 
-#: src/stel_ui_conf.cpp:1061
+#: src/stel_ui_conf.cpp:1063
 msgid ": Standard Perseids rate"
 msgstr ": Taxa Básica de Perseides"
 
@@ -124,7 +124,7 @@ msgstr "Atmosfera [A]"
 msgid "Auriga"
 msgstr "Cocheiro"
 
-#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:987
+#: src/stel_ui_conf.cpp:453 src/stel_ui_conf.cpp:989
 msgid "Author: "
 msgstr "Autor: "
 
@@ -407,7 +407,7 @@ msgstr "Cruzeiro do Sul"
 msgid "Current Time :"
 msgstr "Hora atual:"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1108
 msgid "Current Time Speed is x"
 msgstr "A velocidade do atual do tempo é x"
 
@@ -492,10 +492,11 @@ msgid "Disk Viewport"
 msgstr "Visão Disco"
 
 #: src/stel_ui.cpp:754
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
+"F1  : Toggle fullscreen / window.\n"
 "C   : Constellation lines       V   : Constellation labels\n"
 "R   : Constellation art         E   : Equatorial grid\n"
 "Z   : Azimuthal grid            N   : Nebula labels\n"
@@ -873,7 +874,7 @@ msgstr "Aumentar velocidade do tempo [L]"
 msgid "Indus"
 msgstr "Índio"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:990
 msgid "Info: "
 msgstr "Informações: "
 
@@ -1039,7 +1040,7 @@ msgstr "Script local: "
 msgid "Location"
 msgstr "Localização"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:990
+#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:992
 #, fuzzy
 msgid "Location: "
 msgstr "Localização"
@@ -1131,7 +1132,7 @@ msgstr "Mercúrio"
 msgid "Meridian Line"
 msgstr "Linha meridiana"
 
-#: src/stel_ui_conf.cpp:1080
+#: src/stel_ui_conf.cpp:1082
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1385,7 +1386,7 @@ msgstr "Órbitas dos planetas"
 msgid "Planet Trails"
 msgstr "Trilhas dos planetas"
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:991
 #, fuzzy
 msgid "Planet: "
 msgstr "Planetas"
