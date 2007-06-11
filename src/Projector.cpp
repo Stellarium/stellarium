@@ -1089,7 +1089,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
 		//angleDeg += start[1]>=0 ? 1.:180.;
-		const wstring str = StelUtils::radToHmsWstrAdapt(lon);
+		wstring str = StelUtils::radToHmsWstrAdapt(lon);
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1109,6 +1109,8 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			angleDeg+=180.;
 			xshift=-font->getStrLen(str)-20.f;
 		}
+		StelUtils::rect_to_sphe(&lon, &lat, v);
+		str = StelUtils::radToHmsWstrAdapt(lon);
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 	}
 }
