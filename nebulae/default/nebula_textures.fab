@@ -1,6 +1,6 @@
 # nebula objects aligned to stars5.cat level catalogue
 # high confidence (match of guide stars etc)
-# NGC	RA	Dec		Mag	Size	Rot		x	texture			credit (or "none")
+# NGC	RA	Dec		Mag	Size	Rot		Title (unless overridden by other databases)	texture			credit (or "none")
  7089	323.355	-0.840819	6.5	12.8974	8.49933 	x       m2.png			Grasslands_Observatory
  5272	205.547	28.3732		6.4	13.1497	4.13507		x	m3.png			Grasslands_Observatory
  6121	245.909	-26.5328	5.9	13.068	1.99832		x	m4.png			Grasslands_Observatory
@@ -49,12 +49,12 @@
  3556	167.832	55.6698		10.0	10.2313	7.24902		x	m108.png		Grasslands_Observatory
  3992	179.39	53.3634		9.8	6.69427	-1.26006	x	m109.png		Grasslands_Observatory
   205	10.0877	41.683		8.0	17.4	0.0		x	m110.png		Grasslands_Observatory
-  253	11.8853	-25.2797	7.1	29.7591	6.55031		x	n253bousquet.png	Jean-Pierre_Bousquet
-  869	35.0958	57.1324		4.3	67.9081	7.24878		x	n869-884spano.png	Maxime_Spano
- 1499	60.2971	36.4664		6.0	127.34	2.03381		x	n1499bousquet.png	Jean-Pierre_Bousquet
- 2244	98.047	4.96694		8.3	88.6413	-24.8908	x	n2244bousquet.png	Jean-Pierre_Bousquet
- 6946	308.718	60.1521		8.9	12.1883	-28.977		x	n6946dumont.png		Stephane_Dumont
- 2024	85.139	-2.435		8.0	124	0.25		x	ic434bousquet.png	Pierre_Bousquet
+  253	11.8853	-25.2797	7.1	29.7591	6.55031		NGC253	n253bousquet.png	Jean-Pierre_Bousquet
+  869	35.0958	57.1324		4.3	67.9081	7.24878		Chi_&_h_Per	n869-884spano.png	Maxime_Spano
+ 1499	60.2971	36.4664		6.0	127.34	2.03381		California	n1499bousquet.png	Jean-Pierre_Bousquet
+ 2244	98.047	4.96694		8.3	88.6413	-24.8908	Rosetta	n2244bousquet.png	Jean-Pierre_Bousquet
+ 6946	308.718	60.1521		8.9	12.1883	-28.977		NGC6946	n6946dumont.png		Stephane_Dumont
+ 2024	85.139	-2.435		8.0	124	0.25		IC434_&_Horse_Head_Nebula	ic434bousquet.png	Pierre_Bousquet
 
 # medium confidence - found useful guide stars, but no overlapping ones so visual alignment only
  1952	83.61	22.014		8.2	7.00995	-12.6216	x	m1dumont.png		Stephane_Dumont
@@ -91,34 +91,34 @@
 #   -1	340.075	3.352		14	0.03	0.0	Einstein_Cross	h1990-20.png		HST
 
 # added 2007-05-14, high confidence adapted from patch 1660718 by Dragan Stanojevic
- 2447	116.116	-23.8716	6.2	12.9302	2.2046		x	m93.png			Grasslands_Observatory
- 6531	271.126	-22.467		5.9	13.2368	2.20864		x	m21.png			Grasslands_Observatory
- 6494	269.222	-19.0271	5.5	13.011	2.17567		x	m23.png			Grasslands_Observatory
- 6694	281.335	-9.38496	8.0	13.2222	362.415		x	m26.png			Grasslands_Observatory
- 6913	305.989	38.5102		6.6	13.1132	8.38192		x	m29.png			Grasslands_Observatory
- 7099	325.092	-23.1728	7.5	13.1898	2.47463		x	m30.png			Grasslands_Observatory
- 2168	92.2662	24.3259		5.1	13.4321	-351.355	x	m35.png			Grasslands_Observatory
- 2287	101.503	-20.7595	4.5	13.4085	8.25879		x	m41.png			Grasslands_Observatory
- 2548	123.445	-5.75581	5.8	12.9176	2.15229		x	m48.png			Grasslands_Observatory
- 2323	105.696	-8.3636		5.9	13.1821	2.35904		x	m50.png			Grasslands_Observatory
- 7654	351.119	61.5907		6.9	13.3053	8.99455		x	m52.png			Grasslands_Observatory
- 2682	132.874	11.7792		6.9	13.294	0.694326	x	m67.png			Grasslands_Observatory
- 6994	314.733	-12.6395	9.0	5.64363	0.205621	x	m73.png			Grasslands_Observatory
- 6093	244.259	-22.9786	7.2	9.7497	3.2517		x	m80.png			Grasslands_Observatory
+ 2447	116.116	-23.8716	6.2	12.9302	2.2046		M93	m93.png			Grasslands_Observatory
+ 6531	271.126	-22.467		5.9	13.2368	2.20864		M21	m21.png			Grasslands_Observatory
+ 6494	269.222	-19.0271	5.5	13.011	2.17567		M23	m23.png			Grasslands_Observatory
+ 6694	281.335	-9.38496	8.0	13.2222	362.415		M26	m26.png			Grasslands_Observatory
+ 6913	305.989	38.5102		6.6	13.1132	8.38192		M29	m29.png			Grasslands_Observatory
+ 7099	325.092	-23.1728	7.5	13.1898	2.47463		M30	m30.png			Grasslands_Observatory
+ 2168	92.2662	24.3259		5.1	13.4321	-351.355	M35	m35.png			Grasslands_Observatory
+ 2287	101.503	-20.7595	4.5	13.4085	8.25879		M41	m41.png			Grasslands_Observatory
+ 2548	123.445	-5.75581	5.8	12.9176	2.15229		M48	m48.png			Grasslands_Observatory
+ 2323	105.696	-8.3636		5.9	13.1821	2.35904		M50	m50.png			Grasslands_Observatory
+ 7654	351.119	61.5907		6.9	13.3053	8.99455		M52	m52.png			Grasslands_Observatory
+ 2682	132.874	11.7792		6.9	13.294	0.694326	M67	m67.png			Grasslands_Observatory
+ 6994	314.733	-12.6395	9.0	5.64363	0.205621	M73	m73.png			Grasslands_Observatory
+ 6093	244.259	-22.9786	7.2	9.7497	3.2517		M80	m80.png			Grasslands_Observatory
 
 # uncertain positioning, added from patch 1660718 by Dragan Stanojevic
- 6273	255.65	-26.26		7.2	14.0	0.0		x	m19.png			Grasslands_Observatory
- 6603	274.6	-18.42		4.6	7.0	0.0		x	m24.png			Grasslands_Observatory
-   -1	277.9	-19.25		4.6	30.0	0.0		x	m25.png			Grasslands_Observatory
- 6626	276.125	-24.86		6.9	10.0	0.0		x	m28.png			Grasslands_Observatory
- 6809	295.0	-30.96		7.0	19.0	0.0		x	m55.png			Grasslands_Observatory
- 6779	289.15	30.18		8.3	7.0	0.0		x	m56.png			Grasslands_Observatory
- 6266	255.03	-30.12		6.6	11.0	0.0		x	m62.png			Grasslands_Observatory
- 4590	189.875	-26.75		8.2	11.0	0.0		x	m68.png			Grasslands_Observatory
- 6637	277.85	-32.35		7.7	10.0	0.0		x	m69.png			Grasslands_Observatory
- 6681	280.8	-32.8		8.1	8.0	0.0		x	m70.png			Grasslands_Observatory
- 6838	298.45	18.78		8.3	7.2	0.0		x	m71.png			Grasslands_Observatory
- 6981	313.375	-12.53		9.4	6.0	0.0		x	m72.png			Grasslands_Observatory
- 6864	301.525	-21.92		8.6	7.0	0.0		x	m75.png			Grasslands_Observatory
- 1904	81.125	-24.55		8.0	6.0	0.0		x	m79.png			Grasslands_Observatory
- 6171	248.125	-13.05		8.1	13.0	.0		x	m107.png		Grasslands_Observatory
+ 6273	255.65	-26.26		7.2	14.0	0.0		M19	m19.png			Grasslands_Observatory
+ 6603	274.6	-18.42		4.6	7.0	0.0		M24	m24.png			Grasslands_Observatory
+   -1	277.9	-19.25		4.6	30.0	0.0		M25	m25.png			Grasslands_Observatory
+ 6626	276.125	-24.86		6.9	10.0	0.0		M28	m28.png			Grasslands_Observatory
+ 6809	295.0	-30.96		7.0	19.0	0.0		M55	m55.png			Grasslands_Observatory
+ 6779	289.15	30.18		8.3	7.0	0.0		M56	m56.png			Grasslands_Observatory
+ 6266	255.03	-30.12		6.6	11.0	0.0		M62	m62.png			Grasslands_Observatory
+ 4590	189.875	-26.75		8.2	11.0	0.0		M68	m68.png			Grasslands_Observatory
+ 6637	277.85	-32.35		7.7	10.0	0.0		M69	m69.png			Grasslands_Observatory
+ 6681	280.8	-32.8		8.1	8.0	0.0		M70	m70.png			Grasslands_Observatory
+ 6838	298.45	18.78		8.3	7.2	0.0		M71	m71.png			Grasslands_Observatory
+ 6981	313.375	-12.53		9.4	6.0	0.0		M72	m72.png			Grasslands_Observatory
+ 6864	301.525	-21.92		8.6	7.0	0.0		M75	m75.png			Grasslands_Observatory
+ 1904	81.125	-24.55		8.0	6.0	0.0		M79	m79.png			Grasslands_Observatory
+ 6171	248.125	-13.05		8.1	13.0	.0		M107	m107.png		Grasslands_Observatory
