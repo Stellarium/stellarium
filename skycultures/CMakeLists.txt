@@ -7,8 +7,3 @@ ADD_SUBDIRECTORY( navajo )
 ADD_SUBDIRECTORY( lakota ) 
 ADD_SUBDIRECTORY( inuit ) 
 
-
-########### install files ###############
-
-INSTALL_FILES( /share/${PACKAGE}/skycultures FILES  )
-

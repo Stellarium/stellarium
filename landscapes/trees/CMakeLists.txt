@@ -1,5 +1,5 @@
 
 ########### install files ###############
 
-INSTALL_FILES( /share/${PACKAGE}/landscapes/trees FILES  landscape.ini trees_512.png  )
+INSTALL(FILES landscape.ini trees_512.png DESTINATION share/${PACKAGE}/landscapes/trees)
 
