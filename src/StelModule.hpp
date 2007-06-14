@@ -20,18 +20,11 @@
 #ifndef STELMODULE_H
 #define STELMODULE_H
 
-#include <cassert>
-#include <cstdlib>
-#include <iostream>
 #include <string>
-#include <sstream>
 #include <map>
-#include <vector>
-#include <boost/any.hpp>
 
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
-#include "callbacks.hpp"
 
 // Predeclaration
 class Projector;
@@ -132,139 +125,6 @@ protected:
 	//! The list of dependencies defining for example if this module must be drawn before another one
 	DependenciesOrderT dependenciesOrder;
 	
-public:
-	///////////////////////////////////////////////////////////////////////////
-	// Properties managment
-	
-	//! Init itself from a .ini file
-	void loadProperties(const string& iniFile);
-	
-	//! Save itself into a .ini file for subsequent reload
-	void saveProperties(const string& iniFile) const;
-	
-	//! Set a property value from a string: try to cast the value as a bool, int, double, string, Vec3d
-	void setPropertyStr(const string& key, const string& value);
-	
-	//! Get a property value as string: try to cast the value as a bool, int, double, string, Vec3d
-	string getPropertyStr(const string& key) const;
-	
-	//! Set a property value from a defined type
-	template<typename ValueType>
-	void setProperty(const string& key, ValueType value)
-	{
-		try
-		{
-			propertyAccessor& a = getAccessor(key);
-			a.set(value);
-		}
-		catch (boost::bad_any_cast)
-		{
-			std::cerr << "Error while setting property \"" << key << "\", value="<< value << ",  incorrect type passed." << std::endl;
-			assert(0);
-		}
-	}
-	
-	//! Get a property value from a defined type
-	template<typename ValueType>
-	ValueType getProperty(const string& key)
-	{
-		const propertyAccessor& a = getAccessor(key);
-		return a.template get<ValueType>();
-	}
-	
-	//! Get a list containing 3 strings per element : propertyKey, value, comment
-	vector<vector<string> > getPropertiesList() const
-	{
-		vector<vector<string> > result;
-		
-		map<string, propertyAccessor>::const_iterator iter;
-		for (iter=properties.begin(); iter!=properties.end(); ++iter)
-		{
-			vector<string> line;
-			line.push_back((*iter).first);
-			line.push_back(getPropertyStr((*iter).first));
-			line.push_back((*iter).second.comment);
-			result.push_back(line);
-		}
-		return result;
-	}
-	
-protected:
-	//! Add a property to the property list
-#define	REGISTER_PROPERTY(type, key, getter, setter, comment) registerProperty<type>( (key) , boost::callback<type>(this, (getter) ), boost::callback<void, type>(this, (setter) ), (comment) )
-
-	//! Add a property to the class
-	template<typename ValueType>
-	void registerProperty(const string& key, boost::callback<ValueType> getter, boost::callback<void, ValueType> setter, const string& comment = "")
-	{
-		propertyAccessor myAccessor;
-		myAccessor.init(getter, setter);
-		myAccessor.comment = comment;
-		properties.insert(std::pair<string, propertyAccessor>(key, myAccessor));
-	}
-
-private:
-	// Enable the access to setter and getter 
-	class propertyAccessor
-	{
-	public:
-		template<typename T>
-		void init(boost::callback<T> getter, boost::callback<void, T> setter)
-		{
-			callbackget = boost::any(getter);
-			callbackset = boost::any(setter);
-		}
-		
-		//! Call the setter
-		template<typename T>
-		void set(T value)
-		{
-			boost::callback<void, T> setter = boost::any_cast<boost::callback<void, T> >(callbackset);
-			setter(value);
-		}
-		
-		//! Call the getter
-		template<typename T>
-		T get() const
-		{
-			boost::callback<T> getter = boost::any_cast<boost::callback<T> >(callbackget);
-			return getter();
-		}
-		
-		//! Description of the property
-		string comment;
-		
-	private:
-		boost::any callbackget;
-		boost::any callbackset;
-	};
-	
-	//! Get the const accessor matching the given key and fails if doesn't find it
-	const propertyAccessor& getAccessor(const string& key) const
-	{
-		std::map<string, propertyAccessor>::const_iterator iter = properties.find(key);
-		if (iter==properties.end())
-		{
-			std::cerr << "Couldn't find property \"" << key << "\" in module \"" << getModuleID() << "\"." << std::endl;
-			assert(0);
-		}
-		return (*iter).second;
-	}
-	
-	//! Get the accessor matching the given key and fails if doesn't find it
-	propertyAccessor& getAccessor(const string& key)
-	{
-		std::map<string, propertyAccessor>::iterator iter = properties.find(key);
-		if (iter==properties.end())
-		{
-			std::cerr << "Couldn't find property \"" << key << "\" in module \"" << getModuleID() << "\"." << std::endl;
-			assert(0);
-		}
-		return (*iter).second;
-	}
-	
-	//! The list of all the properties and associated accessors
-	std::map<string, propertyAccessor> properties;
 };
 
 #endif

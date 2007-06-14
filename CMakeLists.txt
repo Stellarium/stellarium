@@ -20,10 +20,11 @@ IF(UNIX AND NOT WIN32)
  SET(CMAKE_CXX_FLAGS -Wall)     # additional CPP compile flags
  SET(STLPORT_LIBRARY "")
 ELSE(UNIX AND NOT WIN32)
- SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I/home/fchereau/STLport/stlport -L/home/fchereau/STLport/lib")
- SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I/home/fchereau/STLport/stlport -L/home/fchereau/STLport/lib")
+ SET(STLPORT_PATH "/home/fchereau/STLport")
+ SET(CMAKE_C_FLAGS "-Wall -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I${STLPORT_PATH}/stlport -L${STLPORT_PATH}/lib")
+ SET(CMAKE_CXX_FLAGS "-Wall -Wsign-promo -fexceptions -fident -mthreads -D_STLP_NO_CUSTOM_IO -D_STLP_USE_DYNAMIC_LIB  -I${STLPORT_PATH}/stlport -L${STLPORT_PATH}/lib")
  SET(STLPORT_LIBRARY "-lstlport.5.0")
- SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -L/home/fchereau/STLport/lib")
+ SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -L${STLPORT_PATH}/lib")
 ENDIF(UNIX AND NOT WIN32)
 
 

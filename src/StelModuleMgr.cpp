@@ -17,6 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
+#include <iostream>
+#include <config.h>
+
+#include "InitParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModule.hpp"
@@ -38,7 +42,9 @@ StelModuleMgr::~StelModuleMgr()
 {
 }
 
-// Register a new StelModule to the list
+/*************************************************************************
+ Register a new StelModule to the list
+*************************************************************************/
 void StelModuleMgr::registerModule(StelModule* m)
 {
 	if (modules.find(m->getModuleID()) != modules.end())
@@ -49,7 +55,9 @@ void StelModuleMgr::registerModule(StelModule* m)
 	modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
 }
 
-//! Get the corresponding module or NULL if can't find it.
+/*************************************************************************
+ Get the corresponding module or NULL if can't find it.
+*************************************************************************/
 StelModule* StelModuleMgr::getModule(const string& moduleID)
 {
 	std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
@@ -63,6 +71,9 @@ StelModule* StelModuleMgr::getModule(const string& moduleID)
 
 #include <QPluginLoader>
 
+/*************************************************************************
+ Load an external plugin
+*************************************************************************/
 StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 {
 	string moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
@@ -102,8 +113,10 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 	return sMod;
 }
 
-// Generate properly sorted calling lists for each action (e,g, draw, update)
-// according to modules orders dependencies
+/*************************************************************************
+ Generate properly sorted calling lists for each action (e,g, draw, update)
+ according to modules orders dependencies
+*************************************************************************/
 void StelModuleMgr::generateCallingLists()
 {
 	std::map<string, std::vector<StelModule*> >::iterator mc;
@@ -170,4 +183,47 @@ void StelModuleMgr::generateCallingLists()
 //		for (std::vector<StelModule*>::iterator ii=mc->second.begin();ii!=mc->second.end();++ii)
 //			cerr << (*ii)->getModuleID() << endl;
 	}
+}
+
+/*************************************************************************
+ Return the list of all the external module found in the modules/ directories
+*************************************************************************/
+std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalModuleList()
+{
+	std::vector<StelModuleMgr::ExternalStelModuleDescriptor> result;
+	set<string> moduleDirs;
+	
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	
+	try
+	{
+		moduleDirs = fileMan.listContents("modules",StelFileMgr::DIRECTORY);
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR while trying list list modules:" << e.what() << endl;	
+	}
+	
+	for (set<string>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)
+	{
+		try
+		{
+			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
+			InitParser pd;
+			pd.load(fileMan.findFile("modules/" + *dir + "/module.ini"));
+			mDesc.key = *dir;
+			mDesc.name = pd.get_str("module", "name");
+			mDesc.author = pd.get_str("module", "author");
+			mDesc.contact = pd.get_str("module", "contact");
+			mDesc.description = pd.get_str("module", "description");
+			mDesc.loadAtStartup = pd.get_boolean("module", "load_at_startup");
+			result.push_back(mDesc);
+		}
+		catch (exception& e)
+		{
+			cerr << "WARNING: unable to successfully read module.ini file from module " << *dir << endl;
+		}
+	}
+
+	return result;
 }

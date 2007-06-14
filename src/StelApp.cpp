@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
+#include <cstdlib>
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
@@ -46,8 +47,6 @@
 #include "StelSkyCultureMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
-
-#include <cstdlib>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -337,24 +336,19 @@ void StelApp::init()
 
 	setViewPortDistorterType(conf.get_str("video","distorter","none"));
 
-	// Load dynamic external modules
-	int i=1;
-	while (true)
+	// Load dynamically all the modules found in the modules/ directories
+	// which are configured to be loaded at startup
+	std::vector<StelModuleMgr::ExternalStelModuleDescriptor> mDesc = moduleMgr->getExternalModuleList();
+	for (std::vector<StelModuleMgr::ExternalStelModuleDescriptor>::const_iterator i=mDesc.begin();i!=mDesc.end();++i)
 	{
-		ostringstream oss;
-		oss << "external_modules:module" << i; 
-		if (conf.find_entry(oss.str()))
+		if (i->loadAtStartup==false)
+			continue;
+		StelModule* m = moduleMgr->loadExternalPlugin(i->key);
+		if (m!=NULL)
 		{
-			StelModule* m = moduleMgr->loadExternalPlugin(conf.get_str(oss.str()));
-			if (m!=NULL)
-			{
-				m->init(conf, lb);
-				moduleMgr->registerModule(m);
-			}
+			m->init(conf, lb);
+			moduleMgr->registerModule(m);
 		}
-		else
-			break;
-		i++;
 	}
 	
 	// Generate dependency Lists for all modules
