@@ -20,6 +20,7 @@
 #ifndef STELOBJECTMODULE_H
 #define STELOBJECTMODULE_H
 
+#include <vector>
 #include <boost/intrusive_ptr.hpp>
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"

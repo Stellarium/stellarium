@@ -20,14 +20,16 @@
 #ifndef STELMODULEMGR_H
 #define STELMODULEMGR_H
 
+#include <map>
+#include <vector>
 #include <boost/iterator/iterator_facade.hpp>
 #include "StelModule.hpp"
 
 //! @brief Manage a collection of StelModule
 //! @author Fabien Chereau <stellarium@free.fr>
-class StelModuleMgr{
+class StelModuleMgr
+{
 public:
-	
 	StelModuleMgr();
     ~StelModuleMgr();
 	
@@ -56,35 +58,41 @@ public:
 	//! Add iterator so that we can easily iterate through registered modules
 	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
 	{
-	 public:
-	    Iterator() : mapIter() {}
-	 private:
-	    friend class boost::iterator_core_access;
-	    friend class StelModuleMgr;
-		Iterator(std::map<std::string, StelModule*>::iterator p) : mapIter(p) {}
-	    void increment() { ++mapIter; }
+		public:
+			Iterator() : mapIter() {}
+		private:
+			friend class boost::iterator_core_access;
+			friend class StelModuleMgr;
+			Iterator(std::map<std::string, StelModule*>::iterator p) : mapIter(p) {}
+			void increment() { ++mapIter; }
 	
-	    bool equal(Iterator const& other) const
-	    {
-	        return this->mapIter == other.mapIter;
-	    }
-	
-	    StelModule*& dereference() const { return mapIter->second; }
-	
-	    std::map<std::string, StelModule*>::iterator mapIter;
+			bool equal(Iterator const& other) const
+			{
+				return this->mapIter == other.mapIter;
+			}
+			
+			StelModule*& dereference() const { return mapIter->second; }
+			std::map<std::string, StelModule*>::iterator mapIter;
 	};
+	Iterator begin() {return Iterator(modules.begin());}
+	const Iterator& end() {return endIter;}
 
-   Iterator begin()
-   {
-      return Iterator(modules.begin());
-   }
-
-   const Iterator& end()
-   {
-      return endIter;
-   }
+	//! Contains the information read from the module.ini file
+	struct ExternalStelModuleDescriptor
+	{
+		//! The name of the directory and of the lib*.so with *=key
+		std::string key;
+		std::string name;
+		std::string author;
+		std::string contact;
+		std::string description;
+		bool loadAtStartup;
+	};
+   
+   //! Return the list of all the external module found in the modules directories
+   static std::vector<ExternalStelModuleDescriptor> getExternalModuleList();
+   
 private:
-	
 	//! The main module list associating name:pointer
 	std::map<std::string, StelModule*> modules;
 	
