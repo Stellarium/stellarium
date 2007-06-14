@@ -354,14 +354,7 @@ void StelApp::init()
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
 	
-	if (conf.find_entry("files:removable_media_path"))
-	{
-		scripts->set_removable_media_path(conf.get_str("files:removable_media_path"));
-	}
-	else
-	{
-		scripts->set_removable_media_path("");
-	}
+	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", ""));
 	
 	// play startup script, if available
 	scripts->play_startup_script();
