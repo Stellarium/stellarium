@@ -17,9 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <dirent.h>
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -551,14 +548,13 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 		cerr << "ERROR while trying list list landscapes:" << e.what() << endl;	
 	}
 	
-	for(set<string>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
+	for (set<string>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
 	{
 		try
 		{
 			InitParser pd;
 			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini"));
 			string k = pd.get_str("landscape", "name");
-			// cerr << "DEBUG LandscapeMgr::getNameToDirMap adding " << k << " -> " << *dir << endl;
 			result[k] = *dir;
 		}
 		catch (exception& e)
