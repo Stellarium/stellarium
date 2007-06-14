@@ -452,14 +452,19 @@ double StelApp::draw(int delta_time)
 *************************************************************************/
 void StelApp::glWindowHasBeenResized(int w, int h)
 {
-	if (core && core->getProjection())
-		core->getProjection()->windowHasBeenResized(getScreenW(),getScreenH());
-	if (ui)
-		ui->resize();
-	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
-	{
-		(*iter)->glWindowHasBeenResized(w, h);
+	// no resizing allowed in distortion mode
+	if (distorter && distorter->getType() == "none") {
+		if (core && core->getProjection())
+			core->getProjection()->windowHasBeenResized(getScreenW(),
+			                                            getScreenH());
+		if (ui)
+			ui->resize();
+		// Send the event to every StelModule
+		for (StelModuleMgr::Iterator iter=moduleMgr->begin();
+		     iter!=moduleMgr->end();++iter)
+		{
+			(*iter)->glWindowHasBeenResized(w, h);
+		}
 	}
 }
 
