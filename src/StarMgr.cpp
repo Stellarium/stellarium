@@ -457,8 +457,8 @@ public:
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObjectP > &result) = 0;
-  virtual void draw(int index,bool is_inside,bool draw_point,
-                    const float *rmag_table, Projector *prj,
+  virtual void draw(int index,bool is_inside,
+                    const float *rcmag_table, Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
                     SFont *starFont,
                     STextureSP starTexture) const = 0;
@@ -502,8 +502,8 @@ private:
   void scaleAxis(void);
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                     vector<StelObjectP > &result);
-  void draw(int index,bool is_inside,bool draw_point,
-            const float *rmag_table, Projector *prj,
+  void draw(int index,bool is_inside,
+            const float *rcmag_table, Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
             SFont *starFont,STextureSP starTexture) const;
 };
@@ -1235,10 +1235,11 @@ StarMgr::StarMgr(void) :
     limitingMag(6.5f),
     starTexture(),
     hip_index(new HipIndexStruct[NR_OF_HIP+1]),
+    mag_converter(new MagConverter(*this)),
 	fontSize(13.),
     starFont(0)
 {
-  if (hip_index == 0) {
+  if (hip_index == 0 || mag_converter == 0) {
     cerr << "ERROR: StarMgr::StarMgr: no memory" << endl;
     exit(1);
   }
@@ -1256,7 +1257,7 @@ StarMgr::~StarMgr(void) {
     it->second = NULL;
   }
   zone_arrays.clear();
-
+  if (mag_converter) {delete mag_converter;mag_converter = 0;}
   if (hip_index) delete[] hip_index;
 }
 
@@ -1300,6 +1301,10 @@ void StarMgr::init(const InitParser &conf,LoadingBar &lb) {
   setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
   setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
   setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
+  setMagConverterMaxFov(conf.get_double("stars","mag_converter_max_fov",60.0));
+  setMagConverterMinFov(conf.get_double("stars","mag_converter_min_fov",0.1));
+  setMagConverterMagShift(
+    conf.get_double("stars","mag_converter_mag_shift",0.0));
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
   
@@ -1575,82 +1580,39 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
 
 
 
-
-
-
-
-int StarMgr::drawStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const {
+int StarMgr::drawStar(const Projector *prj,const Vec3d &XY,
+                      const float rc_mag[2],
+                      const Vec3f &color) const {
 //cout << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
-  float cmag = 1.f;
-
-  // if size of star is too small (blink) we put its size to 1.2 --> no more blink
-  // And we compensate the difference of brighteness with cmag
-  if (rmag<1.2f) {
-    cmag = rmag*rmag/1.44f;
-    if (rmag < 0.1f*star_scale ||
-        cmag * starMagScale < 0.1) return -1;
-    rmag=1.2f;
-  } else {
-//if (rmag>4.f) {
-//  rmag=4.f+2.f*std::sqrt(1.f+rmag-4.f)-2.f;
-  if (rmag>8.f) {
-    rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
-  }
-//}
-//    if (rmag > 5.f) {
-//      rmag=5.f;
-//    }
-  }
-
-  // Calculation of the luminosity
   // Random coef for star twinkling
-  cmag *= (1.-twinkle_amount*rand()/RAND_MAX);
-
-  // Global scaling
-  rmag *= star_scale;
-  cmag *= starMagScale;
-
-  glColor3fv(color*cmag);
+assert(rc_mag[1]>= 0.f);
+  glColor3fv(color*rc_mag[1]*(1.-twinkle_amount*rand()/RAND_MAX));
 
     // Blending is really important. Otherwise faint stars in the vicinity of
     // bright star will cause tiny black squares on the bright star, e.g.
     // see Procyon.
   glBlendFunc(GL_ONE, GL_ONE);
 
-	prj->drawSprite2dMode(XY[0], XY[1], 2*rmag);
+  if (flagPointStar) {
+    //! Draw the star rendered as GLpoint. This may be faster but it is not so nice
+    prj->drawPoint2d(XY[0], XY[1]);
+  } else {
+    prj->drawSprite2dMode(XY[0], XY[1], 2.f*rc_mag[0]);
+  }
   return 0;
 }
 
-
-int StarMgr::drawPointStar(const Projector *prj, const Vec3d &XY,float rmag,
-                              const Vec3f &color) const {
-  if (rmag < 0.05f*star_scale) return -1;
-  float cmag = rmag * rmag / 1.44f;
-  if (cmag*starMagScale < 0.05) return -2;
-
-  cmag *= (1.-twinkle_amount*rand()/RAND_MAX);
-  cmag *= starMagScale;
-
-  glColor3fv(color*cmag);
-
-  glBlendFunc(GL_ONE, GL_ONE);
-
-  prj->drawPoint2d(XY[0], XY[1]);
-
-  return 0;
-}
 
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
-                                  bool draw_point,
-                                  const float *rmag_table,
+                                  const float *rcmag_table,
                                   Projector *prj,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
                                   SFont *starFont,
                                   STextureSP starTexture) const {
-  if (draw_point) {
+  if (hip_star_mgr.getFlagPointStar()) {
     glDisable(GL_TEXTURE_2D);
     glPointSize(0.1);
   }
@@ -1664,10 +1626,8 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
     if (is_inside
         ? prj->project(s->getJ2000Pos(z,movement_factor),xy)
         : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy)) {
-      if (0 > (draw_point ? hip_star_mgr.drawPointStar(prj, xy,rmag_table[s->mag],
-                                                       color_table[s->b_v])
-                          : hip_star_mgr.drawStar(prj, xy,rmag_table[s->mag],
-                                                  color_table[s->b_v]))) {
+      if (0 > hip_star_mgr.drawStar(prj,xy,rcmag_table + 2*(s->mag),
+                                    color_table[s->b_v])) {
         break;
       }
       if (s->mag < max_mag_star_name) {
@@ -1677,12 +1637,12 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                     color_table[s->b_v][1]*0.75,
                     color_table[s->b_v][2]*0.75,
                     names_brightness);
-          if (draw_point) {
+          if (hip_star_mgr.getFlagPointStar()) {
             glEnable(GL_TEXTURE_2D);
           }
 
           prj->drawText(starFont,xy[0],xy[1], starname, 0, 4, 4, false);
-          if (draw_point) {
+          if (hip_star_mgr.getFlagPointStar()) {
             glDisable(GL_TEXTURE_2D);
           } else {
             starTexture->bind();
@@ -1691,7 +1651,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
       }
     }
   }
-  if (draw_point) {
+  if (hip_star_mgr.getFlagPointStar()) {
     glEnable(GL_TEXTURE_2D);
   }
 }
@@ -1701,28 +1661,63 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 
 
 int StarMgr::getMaxSearchLevel(const ToneReproducer *eye,
-                                  const Projector *prj) const {
+                               const Projector *prj) const {
   int rval = -1;
-  float fov_q = prj->getFov();
-  if (fov_q > 60) fov_q = 60;
-  else if (fov_q < 0.1) fov_q = 0.1;
-  fov_q = 1.f/(fov_q*fov_q);
+  mag_converter->setFov(prj->getFov());
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
     const float mag_min = 0.001f*it->second->mag_min;
-    const float rmag =
-      std::sqrt(eye->adapt_luminance(
-        std::exp(-0.92103f*(mag_min + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
-    if (rmag<1.2f) {
-      const float cmag = rmag*rmag/1.44f;
-      if (rmag < 0.1f*starScale ||
-          cmag * starMagScale < 0.1) break;
-    }
+    float rcmag[2];
+    if (mag_converter->computeRCMag(mag_min,getFlagPointStar(),
+                                    eye,rcmag) < 0) break;
     rval = it->first;
   }
   return rval;
 }
 
+int StarMgr::MagConverter::computeRCMag(float mag,bool point_star,
+                                        const ToneReproducer *eye,
+                                        float rc_mag[2]) const {
+    // rmag:
+  rc_mag[0] = std::sqrt(
+           eye->adapt_luminance(
+             std::exp(-0.92103f*(mag + mag_shift)) * fov_factor))
+           * 30.f;
+  if (point_star) {
+    rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
+    if (rc_mag[0] * mgr.getScale() < 0.1f ||     // 0.05f
+        rc_mag[1] * mgr.getMagScale() < 0.1f) {  // 0.05f
+      rc_mag[0] = rc_mag[1] = 0.f;
+      return -1;
+    }
+    // Global scaling
+    rc_mag[1] *= mgr.getMagScale();
+  } else {
+
+    // if size of star is too small (blink) we put its size to 1.2 --> no more blink
+    // And we compensate the difference of brighteness with cmag
+    if (rc_mag[0]<1.2f) {
+      rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
+      if (rc_mag[0] * mgr.getScale() < 0.1f ||
+          rc_mag[1] * mgr.getMagScale() < 0.1f) {
+        rc_mag[0] = rc_mag[1] = 0.f;
+        return -1;
+      }
+      rc_mag[0] = 1.2f;
+    } else {
+        // cmag:
+      rc_mag[1] = 1.f;
+      if (rc_mag[0]>8.f) {
+        rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
+      }
+    }
+
+    // Global scaling
+    rc_mag[0] *= mgr.getScale();
+    rc_mag[1] *= mgr.getMagScale();
+  }
+  return 0;
+}
 
 // Draw all the stars
 double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
@@ -1732,28 +1727,16 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
     // projecting all stars just to draw disembodied labels
     if(!starsFader.getInterstate()) return 0.;
 
-    float fov_q = prj->getFov();
-    if (fov_q > 60) fov_q = 60;
-    else if (fov_q < 0.1) fov_q = 0.1;
-    fov_q = 1.f/(fov_q*fov_q);
+    mag_converter->setFov(prj->getFov());
 
     // Set temporary static variable for optimization
     if (flagStarTwinkle) twinkle_amount = twinkleAmount;
     else twinkle_amount = 0;
-    star_scale = starScale * starsFader.getInterstate();
     const float names_brightness = names_fader.getInterstate() 
                                  * starsFader.getInterstate();
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     
-    // FOV is currently measured vertically, so need to adjust for wide screens
-    // TODO: projector should probably use largest measurement itself
-//    const float max_fov =
-//      MY_MAX( prj->getFov(),
-//              prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight());
-    //    float maxMag = limiting_mag-1 + 60.f/prj->getFov();
-//    const float maxMag = limitingMag-1 + 60.f/max_fov;
-
     prj->setCurrentFrame(Projector::FRAME_J2000);
 
     // Bind the star texture
@@ -1763,7 +1746,7 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
     glBlendFunc(GL_ONE, GL_ONE);
 
     // draw all the stars of all the selected zones
-    float rmag_table[256];
+    float rcmag_table[2*256];
 //static int count = 0;
 //count++;
     for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
@@ -1778,13 +1761,14 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
 //        rmag_table[i] =
 //          eye->adapt_luminance(std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f)
 //            * std::pow(prj->getFov(),-0.85f) * 70.f;
-        rmag_table[i] =
-          std::sqrt(eye->adapt_luminance(
-            std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
-        if (i==0 && rmag_table[0]<1.2f) {
-          const float cmag = rmag_table[0]*rmag_table[0]/1.44f;
-          if (rmag_table[0] < 0.1f*star_scale ||
-              cmag * starMagScale < 0.1) goto exit_loop;
+        if (mag_converter->computeRCMag(mag,getFlagPointStar(),eye,
+                                        rcmag_table + 2*i) < 0) {
+          if (i==0) goto exit_loop;
+        }
+        if (getFlagPointStar()) {
+          rcmag_table[2*i+1] *= starsFader.getInterstate();
+        } else {
+          rcmag_table[2*i] *= starsFader.getInterstate();
         }
       }
       last_max_search_level = it->first;
@@ -1795,26 +1779,20 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
         if (x > 0) max_mag_star_name = x;
       }
       int zone;
-//if ((count&63)==0) cout << "inside(" << it->first << "):";
       for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,true,flagPointStar,rmag_table,prj,
+        it->second->draw(zone,true,rcmag_table,prj,
                          max_mag_star_name,names_brightness,
                          starFont,starTexture);
-//if ((count&63)==0) cout << " " << zone;
       }
-//if ((count&63)==0) cout << endl << "border(" << it->first << "):";
       for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,false,flagPointStar,rmag_table,prj,
+        it->second->draw(zone,false,rcmag_table,prj,
                          max_mag_star_name,names_brightness,
                          starFont,starTexture);
-//if ((count&63)==0) cout << " " << zone;
       }
-//if ((count&63)==0) cout << endl;
     }
     exit_loop:
-//if ((count&63)==0) cout << endl;
 
 	drawPointer(prj, nav);
 
@@ -1831,8 +1809,8 @@ StelObjectP StarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
   vector<StelObjectP > v = searchAround(pos,
-                                      0.8, // just an arbitrary number
-                                      NULL, NULL);
+                                        0.8, // just an arbitrary number
+                                        NULL, NULL);
   StelObjectP nearest;
   double cos_angle_nearest = -10.0;
   for (vector<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {

@@ -144,8 +144,8 @@ public:
 	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
 	// Return the squared distance in pixels between the current and the
 	// previous position this planet was drawn at.
-	double draw(Projector* prj, const Navigator* nav, const ToneReproducer* eye, 
-		  int flag_point, bool stencil);
+	double draw(Projector* prj, const Navigator* nav, const ToneReproducer* eye,
+	            bool stencil);
 
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,

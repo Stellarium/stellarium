@@ -46,7 +46,6 @@ SolarSystem::SolarSystem()
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flag_light_travel_time(false)
 {
-	flagPoint = false;
 	dependenciesOrder["draw"]="stars";
 }
 
@@ -93,7 +92,6 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 	setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
 	setFlagTrails(conf.get_boolean("astro", "flag_object_trails", false));
 	startTrails(conf.get_boolean("astro", "flag_object_trails", false));	
-	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
@@ -640,11 +638,11 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-			squaredDistance = (*iter)->draw(prj, nav, eye, flagPoint, 1);
+			squaredDistance = (*iter)->draw(prj, nav, eye, 1);
 		}
 		else
 		{
-			squaredDistance = (*iter)->draw(prj, nav, eye, flagPoint, 0);
+			squaredDistance = (*iter)->draw(prj, nav, eye, 0);
 		}
 		if (squaredDistance > maxSquaredDistance)
 			maxSquaredDistance = squaredDistance;

@@ -31,6 +31,7 @@
 #include "sideral_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StarMgr.hpp"
 
 SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -525,7 +526,7 @@ float Planet::getOnScreenSize(const Projector *prj, const Navigator *nav) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer* eye, int flag_point, bool stencil)
+double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer* eye, bool stencil)
 {
 	if (hidden) return 0;
 
@@ -605,8 +606,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 
 		if (tex_halo)
 		{
-			if (flag_point) draw_point_halo(nav, prj, eye);
-			else draw_halo(nav, prj, eye);
+			draw_halo(nav, prj, eye);
 		}
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
 	}
@@ -705,123 +705,59 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 }
 
+
+
 void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
-	float cmag;
-	float rmag;
+	float rc_mag[2];
+	const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
+                                  .getModuleMgr().getModule("stars");
 
-    float fov_q = prj->getFov();
-    if (fov_q > 60) fov_q = 60;
-    else if (fov_q < 0.1) fov_q = 0.1;
-    fov_q = 1.f/(fov_q*fov_q);
-    rmag = std::sqrt(eye->adapt_luminance(
-        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
-                         + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+	if (smgr->computeRCMag(
+                compute_magnitude(nav->getObserverHelioPos()),false,
+                prj->getFov(),eye,rc_mag) < 0) return;
 
-//	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
-//	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/std::pow(prj->getFov(),0.85f)*50.f;
 
-	cmag = 1.f;
+    glBlendFunc(GL_ONE, GL_ONE);
+    float screen_r = getOnScreenSize(prj, nav);
+	if (smgr->getFlagPointStar()) {
+		rc_mag[1] *= rc_mag[0]/(screen_r*screen_r*screen_r);
+		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
 
-	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-	// And we compensate the difference of brighteness with cmag
-	if (rmag<1.2f)
-	{
-		if (rmag<0.3f) return;
-		cmag=rmag*rmag/1.44f;
-		rmag=1.2f;
+		if (rc_mag[0]<screen_r)
+		{
+			rc_mag[1]*= (rc_mag[0]/screen_r);
+			rc_mag[0] = screen_r;
+		}
+
+		if (tex_halo) tex_halo->bind();
+		glEnable(GL_BLEND);
+		glDisable(GL_LIGHTING);
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
+		prj->drawSprite2dMode(screenPos[0], screenPos[1], rc_mag[0]*2);
+    } else {
+		// Global scaling with star_scale already done
+		//	rc_mag[0]*=Planet::object_scale;
+
+		if (screen_r<1.f) screen_r=1.f;
+		rc_mag[1] *= 0.5*rc_mag[0]/(screen_r*screen_r*screen_r);
+		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
+
+		if (rc_mag[0]<screen_r)
+		{
+			rc_mag[1]*= (rc_mag[0]/screen_r);
+			rc_mag[0] = screen_r;
+		}
+
+		if (tex_halo) tex_halo->bind();
+		glEnable(GL_BLEND);
+		glDisable(GL_LIGHTING);
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
+
+		prj->drawSprite2dMode(screenPos[0], screenPos[1], rc_mag[0]*2);
 	}
-	else
-	{
-//  try this one if you want to see a bright moon:
-//if (rmag>4.f) {
-//  rmag=4.f+2.f*std::sqrt(1.f+rmag-4.f)-2.f;
-  if (rmag>8.f) {
-    rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
-  }
-//}
-
-//		if (rmag>5.f)
-//		{
-//			rmag=5.f+sqrt(rmag-5)/6;
-//			if (rmag>9.f)
-//			{
-//				rmag=9.f;
-//			}
-//		}
-	}
-
-
-	// Global scaling
-	rmag*=Planet::object_scale;
-
-	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = getOnScreenSize(prj, nav);
-if (screen_r<1.f) screen_r=1.f;
-	cmag *= 0.5*rmag/(screen_r*screen_r*screen_r);
-	if (cmag>1.f) cmag = 1.f;
-
-	if (rmag<screen_r)
-	{
-		cmag*=rmag/screen_r;
-		rmag = screen_r;
-	}
-
-	if (tex_halo) tex_halo->bind();
-	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
-	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	
-	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
-}
-
-void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
-{
-	float cmag;
-	float rmag;
-
-    float fov_q = prj->getFov();
-    if (fov_q > 60) fov_q = 60;
-    fov_q = 1.f/(fov_q*fov_q);
-    rmag =
-      std::sqrt(eye->adapt_luminance(
-        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
-                         + 12.12331f)) * 108064.73f * fov_q)) * 6.f;
-
-//	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
-//	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/std::pow(prj->getFov(),0.85f)*10.f;
-
-	cmag = 1.f;
-
-	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-	// And we compensate the difference of brighteness with cmag
-	if (rmag<0.3f) return;
-	cmag=rmag*rmag/(1.4f*1.4f);
-	rmag=1.4f;
-
-	// Global scaling
-	//rmag*=Planet::star_scale;
-
-	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = getOnScreenSize(prj, nav);
-	cmag *= rmag/screen_r;
-	if (cmag>1.f) cmag = 1.f;
-
-	if (rmag<screen_r)
-	{
-		cmag*=rmag/screen_r;
-		rmag = screen_r;
-	}
-
-	if (tex_halo) tex_halo->bind();
-	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
-	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	prj->drawSprite2dMode(screenPos[0], screenPos[1], rmag*2);
 }
 
 void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
@@ -863,48 +799,31 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	}
 	else
 	{
-		float cmag;
-		float rmag;
-	    float fov_q = prj->getFov();
-	    if (fov_q > 60) fov_q = 60;
-	    else if (fov_q < 0.1) fov_q = 0.1;
-	    fov_q = 1.f/(fov_q*fov_q);
-	    rmag = std::sqrt(eye->adapt_luminance(
-	        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
-	                         + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
-		cmag = 1.f;
-		if (rmag<1.2f)
-		{
-			if (rmag<0.3f) return;
-			cmag=rmag*rmag/1.44f;
-			rmag=1.2f;
-		}
-		else
-		{
-	      if (rmag>8.f) {
-	        rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
-	      }
-		}
-		rmag*=Planet::object_scale;
+		float rc_mag[2];
+		const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
+	                                  .getModuleMgr().getModule("stars");
+		if (smgr->computeRCMag(
+    	            compute_magnitude(nav->getObserverHelioPos()),false,
+        	        prj->getFov(),eye,rc_mag) < 0) return;
 		glBlendFunc(GL_ONE, GL_ONE);
 		float screen_r = 0.25*getOnScreenSize(prj, nav);
 		if (screen_r<1.f) screen_r=1.f;
-		cmag *= 0.5*rmag/(screen_r*screen_r*screen_r);
-		if (cmag>1.f) cmag = 1.f;
+		rc_mag[1] *= 0.5*rc_mag[0]/(screen_r*screen_r*screen_r);
+		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
 	
-		if (rmag<screen_r)
+		if (rc_mag[0]<screen_r)
 		{
-			cmag*=rmag/screen_r;
-			rmag = screen_r;
+			rc_mag[1]*=rc_mag[0]/screen_r;
+			rc_mag[0] = screen_r;
 		}
 	
 		if (tex_big_halo) tex_big_halo->bind();
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
 	
-		screen_r = 0.3*rmag; // just an arbitrary scaling
+		screen_r = 0.3*rc_mag[0]; // just an arbitrary scaling
 	      // drawSprite2dMode does not work for the big halo,
 	      // perhaps it is too big?
 		glBegin(GL_QUADS);
