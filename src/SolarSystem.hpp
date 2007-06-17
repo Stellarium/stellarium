@@ -113,10 +113,6 @@ public:
 	void setScale(float scale);
 	float getScale(void) const;
 	
-	//! Activate/Deactivate display of planets halos as GLPoints
-	void setFlagPoint(bool b) {flagPoint = b;}
-	bool getFlagPoint() {return flagPoint;}
-	
 	//! Set/Get if Moon display is scaled
 	void setFlagMoonScale(bool b);
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
@@ -188,9 +184,6 @@ private:
 
 	double fontSize;
 	SFont& planet_name_font;
-	
-	// Whether to display halo as GLpoints
-	bool flagPoint;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<Orbit*> orbits;// Pointers on created elliptical orbits
