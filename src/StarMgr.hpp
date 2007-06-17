@@ -149,6 +149,28 @@ public:
     void setLimitingMag(float f) {limitingMag = f;}
     /** Get stars limiting display magnitude */
     float getLimitingMag(void) const {return limitingMag;}
+
+
+      /** Set MagConverter maximum FOV */
+    void setMagConverterMaxFov(float x) {mag_converter->setMaxFov(x);}
+      /** Set MagConverter minimum FOV */
+    void setMagConverterMinFov(float x) {mag_converter->setMinFov(x);}
+      /** Set MagConverter magnitude shift */
+    void setMagConverterMagShift(float x) {mag_converter->setMagShift(x);}
+      /** Get MagConverter maximum FOV */
+    float getMagConverterMaxFov(void) const {return mag_converter->getMaxFov();}
+      /** Get MagConverter minimum FOV */
+    float getMagConverterMinFov(void) const {return mag_converter->getMinFov();}
+      /** Get MagConverter magnitude shift */
+    float getMagConverterMagShift(void) const {return mag_converter->getMagShift();}
+
+      /** Compute RMag and CMag from magnitude.
+          Useful for conststent drawing of Planet halos */
+    int computeRCMag(float mag,bool point_star,float fov,
+                     const ToneReproducer *eye,float rc_mag[2]) const
+      {mag_converter->setFov(fov);
+       return mag_converter->computeRCMag(mag,point_star,eye,rc_mag);}
+
         
     //! Define font size to use for star names display
 	void setFontSize(double newFontSize);
@@ -157,9 +179,8 @@ public:
     static void setFlagSciNames(bool f) {flagSciNames = f;}
     static bool getFlagSciNames(void) {return flagSciNames;}
 
-    int drawStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const;
-    //! Draw the star rendered as GLpoint. This may be faster but it is not so nice
-    int drawPointStar(const Projector *prj, const Vec3d &XY,float rmag,const Vec3f &color) const;
+    int drawStar(const Projector *prj, const Vec3d &XY,
+                 const float rc_mag[2],const Vec3f &color) const;
 
     static wstring getCommonName(int hip);
     static wstring getSciName(int hip);
@@ -204,6 +225,33 @@ private:
                       const Vec3d &c2);
     HipIndexStruct *hip_index; // array of hiparcos stars
 
+    class MagConverter {
+    public:
+      MagConverter(const StarMgr &mgr) : mgr(mgr) {
+        setMaxFov(180.f);
+        setMinFov(0.1f);
+        setFov(180.f);
+        setMagShift(0.f);
+      }
+      void setMaxFov(float fov) {max_fov = fov;}
+      void setMinFov(float fov) {min_fov = fov;}
+      void setMagShift(float d) {mag_shift = d + 12.12331f;}
+      float getMaxFov(void) const {return max_fov;}
+      float getMinFov(void) const {return min_fov;}
+      float getMagShift(void) const {return mag_shift - 12.12331f;}
+      void setFov(float fov) {
+        if (fov > max_fov) fov = max_fov;
+        else if (fov < min_fov) fov = min_fov;
+        fov_factor = 108064.73f / (fov*fov);
+      }
+      int computeRCMag(float mag,bool point_star,
+                       const ToneReproducer *eye,float rc_mag[2]) const;
+    private:
+      const StarMgr &mgr;
+      float max_fov,min_fov,mag_shift,fov_factor;
+    };
+    MagConverter *mag_converter;
+
     static map<int,string> common_names_map;
     static map<int,wstring> common_names_map_i18n;
     static map<string,int> common_names_index;
@@ -217,7 +265,6 @@ private:
     static bool flagSciNames;
     Vec3f label_color,circle_color;
     float twinkle_amount;
-    float star_scale;
     
     STextureSP texPointer;			// The selection pointer texture
 };
