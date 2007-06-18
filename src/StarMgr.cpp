@@ -1584,8 +1584,10 @@ int StarMgr::drawStar(const Projector *prj,const Vec3d &XY,
                       const float rc_mag[2],
                       const Vec3f &color) const {
 //cout << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
+  //assert(rc_mag[1]>= 0.f);
+  if (rc_mag[0]<=0.f || rc_mag[1]<=0.f) return -1;
+
   // Random coef for star twinkling
-assert(rc_mag[1]>= 0.f);
   glColor3fv(color*rc_mag[1]*(1.-twinkle_amount*rand()/RAND_MAX));
 
     // Blending is really important. Otherwise faint stars in the vicinity of
