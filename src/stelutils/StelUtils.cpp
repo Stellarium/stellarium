@@ -49,6 +49,9 @@
 #include "vecmath.h"
 #include "GLee.h"
 
+#include "fixx11h.h"
+#include <QString>
+
 namespace StelUtils {
 
 //! Dummy wrapper used to remove a boring warning when using strftime directly
@@ -58,64 +61,15 @@ size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 }
 
 
-//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
-wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
-{
-	int i, j;
-	unsigned short ch;  // 16 bits
-
-	for ( i=0, j=0; i < len; ++i, ++j )
-	{
-		ch = ((const unsigned char *)utf8)[i];
-		if ( ch >= 0xF0 )
-		{
-			ch  =  (unsigned short)(utf8[i]&0x07) << 18;
-			ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
-			ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
-			ch |=  (unsigned short)(utf8[++i]&0x3F);
-		}
-		else
-			if ( ch >= 0xE0 )
-			{
-				ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
-				ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
-				ch |=  (unsigned short)(utf8[++i]&0x3F);
-			}
-			else
-				if ( ch >= 0xC0 )
-				{
-					ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
-					ch |=  (unsigned short)(utf8[++i]&0x3F);
-				}
-
-		unicode[j] = ch;
-	}
-	unicode[j] = 0;
-
-	return unicode;
-}
-
 //! Convert from UTF-8 to wchar_t
-//! Warning this is likely to be not very portable
 std::wstring stringToWstring(const string& s)
 {
-	wchar_t* outbuf = new wchar_t[s.length()+1];
-	UTF8_to_UNICODE(outbuf, s.c_str(), s.length());
-	wstring ws(outbuf);
-	delete[] outbuf;
-	return ws;
+	return QString::fromUtf8(s.c_str()).toStdWString();
 }
 
 string wstringToString(const wstring& ws)
 {
-	// Get UTF-8 string length
-	size_t len = wcstombs(NULL, ws.c_str(), 0)+1;
-	// Create wide string
-	char* s = new char[len];
-	wcstombs(s, ws.c_str(), len);
-	string ss(s);
-	delete [] s;
-	return ss;
+	return QString::fromStdWString(ws).toUtf8().constData();
 }
 
 wstring doubleToWstring(double d)

@@ -1547,12 +1547,12 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
            << "): bad line: \"" << line << '"' << endl;
       exit(1);
     }
+	if (sci_names_map_i18n.find(hip)!=sci_names_map_i18n.end())
+		continue;
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;
     char *tempc = line+i;
-    while (line[i]!='_' && i<sizeof(line)-1) ++i;
-    line[i-1]=' ';
     string sci_name = tempc;
     sci_name.erase(sci_name.length()-1, 1);
     wstring sci_name_i18n = StelUtils::stringToWstring(sci_name);
