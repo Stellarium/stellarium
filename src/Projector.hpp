@@ -389,7 +389,6 @@ private:
 	
 	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
 	
-	// Callbacks
 	const Mapping *mapping;
 	std::map<std::string,const Mapping*> projectionMapping;
 	
