@@ -38,8 +38,8 @@ my %gh_names;		# key is asteroid ID
 my %gh_data;		# key is asteroid ID
 my %gh_selection;	# list of IDs which we want
 my $gs_selection_max = 0;
-my $gs_data_filename = "asteroid_orbits.dat";
-my $gs_name_filename = "asteroid_names.dat";
+my $gs_data_filename = "../builds/asteroid_orbits.dat";
+my $gs_name_filename = "../builds/asteroid_names.dat";
 
 if ( ! $gs_flg_all ) {
 	foreach my $i (split(",", $gs_flg_id_list)) {
