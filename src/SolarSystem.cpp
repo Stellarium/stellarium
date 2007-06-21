@@ -81,7 +81,7 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization assert that center is sun center (only impacts on light speed correction)
-	computePositions(get_julian_from_sys());
+	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setScale(conf.get_double ("stars:star_scale"));  // if reload config
 	setFlagMoonScale(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", false)));  // name change

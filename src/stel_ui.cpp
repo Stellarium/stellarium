@@ -531,7 +531,7 @@ void StelUI::bt_real_time_speed_cb(void)
 
 void StelUI::bt_time_now_cb(void)
 {
-	core->getNavigation()->setJDay(get_julian_from_sys());
+	core->getNavigation()->setJDay(StelUtils::getJDFromSystem());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1388,7 +1388,7 @@ void StelUI::gui_update_widgets(int delta_time)
 	static double lastJD = 0;
 	if (fabs(lastJD-core->getNavigation()->getJDay())>JD_SECOND/4)
 	{
-		bt_time_now->setState(fabs(core->getNavigation()->getJDay()-get_julian_from_sys())<JD_SECOND);
+		bt_time_now->setState(fabs(core->getNavigation()->getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
 		lastJD = core->getNavigation()->getJDay();
 	}
 	if (config_win->getVisible()) updateConfigForm();
