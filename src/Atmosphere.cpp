@@ -132,9 +132,8 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
 
 	// Calculate the date from the julian day.
-	ln_date date;
-	get_date(JD, &date);
-	skyb.set_date(date.years, date.months, moon_phase);
+	QDate date = StelUtils::jdToQDateTime(JD).date();
+	skyb.set_date(date.year(), date.month(), moon_phase);
 
 	// Variables used to compute the average sky luminance
 	double sum_lum = 0.;

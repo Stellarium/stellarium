@@ -96,7 +96,7 @@ public:
 	
 	//! Return the current time shift at observator time zone with respect to GMT time
 	void set_GMT_shift(int t) {GMT_shift=t;}
-	float get_GMT_shift(double JD = 0, bool _local=0) const;
+	float get_GMT_shift(double JD = 0) const;
 	void set_custom_tz_name(const string& tzname);
 	string get_custom_tz_name(void) const {return custom_tz_name;}
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}

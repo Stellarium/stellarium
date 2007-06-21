@@ -368,14 +368,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		} else if(args["load"]=="current") {
 			// set date to current date
-			stcore->getNavigation()->setJDay(get_julian_from_sys());
+			stcore->getNavigation()->setJDay(StelUtils::getJDFromSystem());
 		} else if(args["load"]=="preset") {
 			// set date to preset (or current) date, based on user setup
 			// TODO: should this record as the actual date used?
 			if (stcore->getNavigation()->getStartupTimeMode()=="preset" || stcore->getNavigation()->getStartupTimeMode()=="Preset")
 				stcore->getNavigation()->setJDay(stcore->getNavigation()->getPresetSkyTime() -
 				                stapp->getLocaleMgr().get_GMT_shift(stcore->getNavigation()->getPresetSkyTime()) * JD_HOUR);
-			else stcore->getNavigation()->setJDay(get_julian_from_sys());
+			else stcore->getNavigation()->setJDay(StelUtils::getJDFromSystem());
 
 		} else status=0;
 	  
@@ -662,7 +662,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// 			  }
 		// 		  else
 		// 			  {
-		// 				  stcore->navigation->set_JDay(get_julian_from_sys());
+		// 				  stcore->navigation->set_JDay(getJDFromSystem());
 		// 			  }
 		// 		  if(stcore->getFlagPlanetsTrails() && stcore->ssystem) stcore->startPlanetsTrails(true);
 		// 		  else stcore->startPlanetsTrails(false);

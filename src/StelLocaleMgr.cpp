@@ -107,93 +107,98 @@ Translator& StelLocaleMgr::getSkyTranslator()
 // Return a string with the UTC date formated according to the date_format variable
 wstring StelLocaleMgr::get_printable_date_UTC(double JD) const
 {
-	struct tm time_utc;
-	get_tm_from_julian(JD, &time_utc);
-	
-	static char date[255];
+	QDateTime dateTime = StelUtils::jdToQDateTime(JD);
 	switch(date_format)
 	{
-	case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_utc); break;
-	case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
-	case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
-	case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
+		case S_DATE_SYSTEM_DEFAULT:
+			return dateTime.toString(Qt::LocaleDate).toStdWString();
+		case S_DATE_MMDDYYYY:
+			return dateTime.toString("MM.dd.yyyy").toStdWString();
+		case S_DATE_DDMMYYYY:
+			return dateTime.toString("dd.MM.yyyy").toStdWString();
+		case S_DATE_YYYYMMDD:
+			return dateTime.toString("yyyy.MM.dd").toStdWString();
+		default:
+			return dateTime.toString(Qt::LocaleDate).toStdWString();
 	}
-	return StelUtils::stringToWstring(date);
 }
 
 // Return a string with the UTC time formated according to the time_format variable
-// TODO : for some locales (french) the %p returns nothing
 wstring StelLocaleMgr::get_printable_time_UTC(double JD) const
 {
-	struct tm time_utc;
-	get_tm_from_julian(JD, &time_utc);
-	
-	static char heure[255];
+	QDateTime dateTime = StelUtils::jdToQDateTime(JD);
 	switch(time_format)
 	{
-	case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_utc); break;
-	case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
-	case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
+		case S_TIME_SYSTEM_DEFAULT:
+			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
+		case S_TIME_24H:
+			return dateTime.time().toString("HH:mm:ss").toStdWString();
+		case S_TIME_12H:
+			return dateTime.time().toString("HH:mm:ss ap").toStdWString();
+		default:
+			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
 	}
-	return StelUtils::stringToWstring(heure);
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 string StelLocaleMgr::get_ISO8601_time_local(double JD) const
 {
-	struct tm time_local;
+	QDateTime dateTime;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		get_tm_from_julian(JD + GMT_shift, &time_local);
+		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
 	else
-		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
-	
-	static char isotime[255];
-StelUtils::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_local);
-	return isotime;
+		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
+	return dateTime.toLocalTime().toString(Qt::ISODate).toStdString();
 }
 
 
 // Return a string with the local date formated according to the date_format variable
 wstring StelLocaleMgr::get_printable_date_local(double JD) const
 {
-	struct tm time_local;
-	
+	QDateTime dateTime;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		get_tm_from_julian(JD + GMT_shift, &time_local);
+		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
 	else
-		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
+	dateTime = dateTime.toLocalTime();
 	
-	static char date[255];
-	switch(date_format)
+	switch (date_format)
 	{
-	case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_local); break;
-	case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
-	case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
-	case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
+		case S_DATE_SYSTEM_DEFAULT:
+			return dateTime.date().toString(Qt::LocaleDate).toStdWString();
+		case S_DATE_MMDDYYYY:
+			return dateTime.date().toString("MM.dd.yyyy").toStdWString();
+		case S_DATE_DDMMYYYY:
+			return dateTime.date().toString("dd.MM.yyyy").toStdWString();
+		case S_DATE_YYYYMMDD:
+			return dateTime.date().toString("yyyy.MM.dd").toStdWString();
+		default:
+			return dateTime.date().toString(Qt::LocaleDate).toStdWString();
 	}
-	
-	return StelUtils::stringToWstring(date);
 }
 
 // Return a string with the local time (according to time_zone_mode variable) formated
 // according to the time_format variable
 wstring StelLocaleMgr::get_printable_time_local(double JD) const
 {
-	struct tm time_local;
-	
+	QDateTime dateTime;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		get_tm_from_julian(JD + GMT_shift, &time_local);
+		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
 	else
-		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
+	dateTime = dateTime.toLocalTime();
 	
-	static char heure[255];
-	switch(time_format)
+	switch (time_format)
 	{
-	case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_local); break;
-	case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
-	case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
+		case S_TIME_SYSTEM_DEFAULT:
+			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
+		case S_TIME_24H:
+			return dateTime.time().toString("HH:mm:ss").toStdWString();
+		case S_TIME_12H:
+			return dateTime.time().toString("HH:mm:ss ap").toStdWString();
+		default:
+			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
 	}
-	return StelUtils::stringToWstring(heure);
 }
 
 // Convert the time format enum to its associated string and reverse
@@ -202,7 +207,7 @@ StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const string
 	if (tf == "system_default") return S_TIME_SYSTEM_DEFAULT;
 	if (tf == "24h") return S_TIME_24H;
 	if (tf == "12h") return S_TIME_12H;
-cout << "ERROR : unrecognized time_display_format : " << tf << " system_default used." << endl;
+	cerr << "WARNING: unrecognized time_display_format : " << tf << " system_default used." << endl;
 	return S_TIME_SYSTEM_DEFAULT;
 }
 
@@ -211,7 +216,7 @@ string StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
 	if (tf == S_TIME_SYSTEM_DEFAULT) return "system_default";
 	if (tf == S_TIME_24H) return "24h";
 	if (tf == S_TIME_12H) return "12h";
-cout << "ERROR : unrecognized time_display_format value : " << tf << " system_default used." << endl;
+	cerr << "WARNING: unrecognized time_display_format value : " << tf << " system_default used." << endl;
 	return "system_default";
 }
 
@@ -222,7 +227,7 @@ StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const string
 	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;
 	if (df == "ddmmyyyy") return S_DATE_DDMMYYYY;
 	if (df == "yyyymmdd") return S_DATE_YYYYMMDD;  // iso8601
-cout << "ERROR : unrecognized date_display_format : " << df << " system_default used." << endl;
+	cerr << "WARNING: unrecognized date_display_format : " << df << " system_default used." << endl;
 	return S_DATE_SYSTEM_DEFAULT;
 }
 
@@ -232,7 +237,7 @@ string StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
 	if (df == S_DATE_MMDDYYYY) return "mmddyyyy";
 	if (df == S_DATE_DDMMYYYY) return "ddmmyyyy";
 	if (df == S_DATE_YYYYMMDD) return "yyyymmdd";
-	cout << "ERROR : unrecognized date_display_format value : " << df << " system_default used." << endl;
+	cerr << "WARNING: unrecognized date_display_format value : " << df << " system_default used." << endl;
 	return "system_default";
 }
 
@@ -249,8 +254,8 @@ void StelLocaleMgr::set_custom_tz_name(const string& tzname)
 	}
 }
 
-float StelLocaleMgr::get_GMT_shift(double JD, bool _local) const
+float StelLocaleMgr::get_GMT_shift(double JD) const
 {
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
-	else return get_GMT_shift_from_system(JD,_local);
+	else return get_GMT_shift_from_system(JD);
 }
