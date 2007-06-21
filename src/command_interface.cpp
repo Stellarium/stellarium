@@ -35,7 +35,7 @@ CommandInterface::~CommandInterface() {
 }
 
   
-int CommandInterface::parse_command(string command_line, string &command, stringHash_t &arguments) {
+int CommandInterface::parse_command(string command_line, string &command, map<string, string> &arguments) {
 
    istringstream commandstr( command_line );
    string key, value, temp;
@@ -91,7 +91,7 @@ int CommandInterface::parse_command(string command_line, string &command, string
 main() {
 
   string command;
-  stringHash_t args;
+  map<string, string> args;
   int status;
 
   string commandline("flag art on atmosphere off location \"West Virginia\"");

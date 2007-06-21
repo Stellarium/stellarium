@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
 #include <config.h>
 
 #include <math.h> // fmod
@@ -33,10 +32,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-
-#include "dirent.h"
-
-#if defined( CYGWIN )
+#ifdef CYGWIN
  #include <malloc.h>
 #endif
 
@@ -45,7 +41,6 @@
 #endif
 
 #include "StelUtils.hpp"
-#include "Translator.hpp"
 #include "vecmath.h"
 #include "GLee.h"
 

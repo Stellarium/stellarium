@@ -88,7 +88,7 @@ bool StelSkyCultureMgr::setSkyCultureDir(const string& cultureDir)
 string StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
 	string cultures;
-	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		cultures += iter->second + "\n";
 	}
@@ -99,7 +99,7 @@ string StelSkyCultureMgr::getSkyCultureListEnglish(void)
 wstring StelSkyCultureMgr::getSkyCultureListI18(void)
 {
 	wstring cultures;
-	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		if (iter != dirToNameEnglish.begin()) cultures += L"\n";
 		cultures += _(iter->second);
@@ -113,7 +113,7 @@ wstring StelSkyCultureMgr::getSkyCultureListI18(void)
 wstring StelSkyCultureMgr::getSkyCultureHash(void) const
 {
 	wstring cultures;
-	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		
 		// weed out invalid hash entries from invalid culture lookups in hash
@@ -140,7 +140,7 @@ string StelSkyCultureMgr::directoryToSkyCultureEnglish(const string& directory)
 
 wstring StelSkyCultureMgr::directoryToSkyCultureI18(const string& directory) const
 {
-	stringHashIter_t i = dirToNameEnglish.find(directory);
+	map<string, string>::const_iterator i = dirToNameEnglish.find(directory);
 	if (i==dirToNameEnglish.end())
 	{
 		cout << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
@@ -155,7 +155,7 @@ wstring StelSkyCultureMgr::directoryToSkyCultureI18(const string& directory) con
 
 string StelSkyCultureMgr::skyCultureToDirectory(const wstring& cultureName)
 {
-	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		if (_(iter->second) == cultureName) return iter->first;
 	}

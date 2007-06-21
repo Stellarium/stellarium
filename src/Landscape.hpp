@@ -111,7 +111,7 @@ public:
     virtual ~LandscapeOldStyle();
 	virtual void load(const string& fileName, const string& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(bool _fullpath, stringHash_t param);
+	void create(bool _fullpath, map<string, string> param);
 private:
 	void draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;

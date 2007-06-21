@@ -21,8 +21,6 @@
 #define _S_UTILITY_H_
 
 #include <string>
-#include <map>
-#include <ctime>
 #include <vector>
 #include "vecmath.h"
 #include <sstream>
@@ -33,9 +31,6 @@
 #include <QDateTime>
 
 using namespace std;
-
-typedef map< string, string > stringHash_t;
-typedef stringHash_t::const_iterator stringHashIter_t;
 
 // astonomical unit (km)
 #define AU 149597870.691

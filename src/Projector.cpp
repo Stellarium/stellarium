@@ -21,6 +21,7 @@
 #include <sstream>
 #include <cstdio>
 #include <cassert>
+#include <map>
 #include "GLee.h"
 
 #if defined(__APPLE__) && defined(__MACH__)
