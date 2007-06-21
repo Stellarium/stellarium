@@ -51,7 +51,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	Landscape* create_from_file(const string& landscape_file, const string& section_name);
-	Landscape* create_from_hash(stringHash_t & param);
+	Landscape* create_from_hash(map<string, string> & param);
 	
 	//! retrieve a list of the available landscape IDs separated by the \n character
 	//! the ID in this context is the name of the directory in which the landscape
@@ -71,7 +71,7 @@ public:
 
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 	//! and make it the current landscape
-	bool loadLandscape(stringHash_t& param);
+	bool loadLandscape(map<string, string>& param);
 	
 	//! Set flag for displaying Landscape
 	void setFlagLandscape(bool b);

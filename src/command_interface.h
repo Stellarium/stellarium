@@ -40,7 +40,7 @@ class CommandInterface
   virtual int execute_command(string command) = 0;
   
   protected:
-  int parse_command(string command_line, string &command, stringHash_t &arguments);
+  int parse_command(string command_line, string &command, map<string, string> &arguments);
 
 };
 

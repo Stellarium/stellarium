@@ -20,10 +20,10 @@
 #ifndef STELSKYCULTUREMGR_H
 #define STELSKYCULTUREMGR_H
 
-using namespace std;
-
+#include <map>
 #include <string>
-#include "StelUtils.hpp"
+
+using namespace std;
 
 class InitParser;
 
@@ -72,7 +72,7 @@ public:
 	string skyCultureToDirectory(const wstring& cultureName);
 	
 private:
-	stringHash_t dirToNameEnglish;
+	map<string, string> dirToNameEnglish;
 	
 	// The directory containing data for the culture used for constellations, etc.. 
 	string skyCultureDir;

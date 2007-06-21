@@ -176,7 +176,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& landsca
 
 
 // create from a hash of parameters (no ini file needed)
-void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
+void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 {
 	name = StelUtils::stringToWstring(param["name"]);
 	valid_landscape = 1;  // assume valid if got here

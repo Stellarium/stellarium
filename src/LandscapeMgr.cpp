@@ -327,7 +327,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 
 //! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 //! and make it the current landscape
-bool LandscapeMgr::loadLandscape(stringHash_t& param)
+bool LandscapeMgr::loadLandscape(map<string, string>& param)
 {
 	Landscape* newLandscape = create_from_hash(param);
 	if(!newLandscape)
@@ -473,7 +473,7 @@ Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const st
 
 // create landscape from parameters passed in a hash (same keys as with ini file)
 // NOTE: maptex must be full path and filename
-Landscape* LandscapeMgr::create_from_hash(stringHash_t & param)
+Landscape* LandscapeMgr::create_from_hash(map<string, string> & param)
 {
 	// NOTE: textures should be full filename (and path)
 	if (param["type"]=="old_style")
