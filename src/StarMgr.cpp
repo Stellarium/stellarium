@@ -275,7 +275,9 @@ unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
 
 #endif
 
-
+static inline float IndexToBV(unsigned char b_v) {
+  return b_v*(4.f/127.f)-0.5f;
+}
 
 struct Star3 {  // 6 byte
   int x0:18;
@@ -290,7 +292,7 @@ struct Star3 {  // 6 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
+  float getBV(void) const {return IndexToBV(b_v);}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
 //  void print(void);
@@ -333,7 +335,7 @@ struct Star2 {  // 10 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
+  float getBV(void) const {return IndexToBV(b_v);}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
 //  void print(void);
@@ -385,7 +387,7 @@ struct Star1 { // 28 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return b_v*(4.0/127.0)-0.5;}
+  float getBV(void) const {return IndexToBV(b_v);}
   wstring getNameI18n(void) const {
     if (hip) {
       const wstring commonNameI18 = StarMgr::getCommonName(hip);
@@ -587,8 +589,7 @@ void SpecialZoneArray<Star>::scaleAxis(void) {
 
 
 
-static
-const Vec3f color_table[128] = {
+static Vec3f color_table[128] = {
   Vec3f(0.587877,0.755546,1.000000),
   Vec3f(0.609856,0.750638,1.000000),
   Vec3f(0.624467,0.760192,1.000000),
@@ -718,6 +719,38 @@ const Vec3f color_table[128] = {
   Vec3f(1.000000,0.365506,0.000000),
   Vec3f(1.000000,0.361692,0.000000),
 };
+
+static
+void InitColorTableFromConfigFile(const InitParser &conf) {
+  std::map<float,Vec3f> color_map;
+  for (float b_v=-0.5f;b_v<=4.0f;b_v+=0.01) {
+    char entry[256];
+    sprintf(entry,"color_bv_%+5.2f",b_v);
+    const string s(conf.get_str("stars",entry,""));
+    if (!s.empty()) {
+      const Vec3f c(StelUtils::str_to_vec3f(s));
+      color_map[b_v] = c;
+    }
+  }
+  if (color_map.size() > 1) {
+    for (int i=0;i<128;i++) {
+      const float b_v = IndexToBV(i);
+      std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(b_v));
+      if (greater == color_map.begin()) {
+        color_table[i] = greater->second;
+      } else {
+        std::map<float,Vec3f>::const_iterator less(greater);--less;
+        if (greater == color_map.end()) {
+          color_table[i] = less->second;
+        } else {
+          color_table[i] = ((b_v-less->first)*greater->second
+                          + (greater->first-b_v)*less->second)
+                          *(1.f/(greater->first-less->first));
+        }
+      }
+    }
+  }
+}
 
 
 
@@ -1282,8 +1315,12 @@ wstring StarMgr::getSciName(int hip) {
   return L"";
 }
 
+
+
+
 void StarMgr::init(const InitParser &conf,LoadingBar &lb) {
   load_data(conf,lb);
+  InitColorTableFromConfigFile(conf);
   StelApp::getInstance().getTextureManager().setDefaultParams();
     // Load star texture no mipmap:
   starTexture = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
