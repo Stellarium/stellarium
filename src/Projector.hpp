@@ -21,6 +21,7 @@
 #define _PROJECTOR_H_
 
 #include <vector>
+#include <map>
 
 #include "GLee.h"
 #include "vecmath.h"

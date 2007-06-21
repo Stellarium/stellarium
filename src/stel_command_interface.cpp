@@ -96,7 +96,7 @@ int StelCommandInterface::execute_command(string command, int arg) {
 // they are "trusted" - TODO details TBD when needed
 int StelCommandInterface::execute_command(string commandline, unsigned long int &wait, bool trusted) {
 	string command;
-	stringHash_t args;
+	map<string, string> args;
 	int status = 0;  // true if command was understood
 	int recordable = 1;  // true if command should be recorded (if recording)
 	wstring debug_message;  // detailed errors can be placed in here for printout at end of method
