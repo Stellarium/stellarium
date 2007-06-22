@@ -50,7 +50,6 @@
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
 #include "bytes.h"
-#include "InitParser.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -720,6 +719,17 @@ static Vec3f color_table[128] = {
   Vec3f(1.000000,0.361692,0.000000),
 };
 
+
+#define GAMMA 0.45
+
+static double Gamma(double gamma,double x) {
+  return ((x<=0.0) ? 0.0 : exp(gamma*log(x)));
+}
+
+static Vec3f Gamma(double gamma,const Vec3f &x) {
+  return Vec3f(Gamma(gamma,x[0]),Gamma(gamma,x[1]),Gamma(gamma,x[2]));
+}
+
 static
 void InitColorTableFromConfigFile(const InitParser &conf) {
   std::map<float,Vec3f> color_map;
@@ -729,7 +739,7 @@ void InitColorTableFromConfigFile(const InitParser &conf) {
     const string s(conf.get_str("stars",entry,""));
     if (!s.empty()) {
       const Vec3f c(StelUtils::str_to_vec3f(s));
-      color_map[b_v] = c;
+      color_map[b_v] = Gamma(1/0.45,c);
     }
   }
   if (color_map.size() > 1) {
@@ -743,9 +753,10 @@ void InitColorTableFromConfigFile(const InitParser &conf) {
         if (greater == color_map.end()) {
           color_table[i] = less->second;
         } else {
-          color_table[i] = ((b_v-less->first)*greater->second
-                          + (greater->first-b_v)*less->second)
-                          *(1.f/(greater->first-less->first));
+          color_table[i] = Gamma(0.45,
+                            ((b_v-less->first)*greater->second
+                            + (greater->first-b_v)*less->second)
+                            *(1.f/(greater->first-less->first)));
         }
       }
     }
