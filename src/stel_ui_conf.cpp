@@ -397,7 +397,13 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_video->addComponent(viewport_distorter_cbx);
 	viewport_distorter_cbx->setPos(x,y); y+=35;
 
+	Label * lblvideo1a = new Label(wstring(L"\u2022 ")+_("Saving settings will save current full screen status"));
+	lblvideo1a->setPos(x+10, y);
+	tab_video->addComponent(lblvideo1a);
+
+	char vs[1000];
 	x=220; y=10;
+#ifndef USE_QT4
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(x+10, y);
 	tab_video->addComponent(lblvideo2); y+=24;
@@ -413,7 +419,6 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	screen_size_sl->setPos(x+20,y);
 	screen_size_sl->setSizex(200);
 	screen_size_sl->addItemList(StelUtils::stringToWstring(app->getVideoModeList()));
-	char vs[1000];
 	sprintf(vs, "%dx%d", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
 	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
@@ -424,7 +429,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	lblvideo6->setPos(30, tab_video->getSizey()-110);
 	tab_video->addComponent(lblvideo5);
 	tab_video->addComponent(lblvideo6);
-
+#endif
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);

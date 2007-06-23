@@ -22,8 +22,6 @@
 
 using namespace std;
 
-#define CHECK_FILE "data/ssystem.ini"
-
 StelFileMgr::StelFileMgr()
 {
 	try
@@ -323,7 +321,18 @@ const string StelFileMgr::getUserDir(void)
 {
 	QFileInfo userDir;
 #if defined(WIN32)
-	userDir = QDir::homePath() + "/Stellarium";
+	QString homeString = QDir::homePath();
+	if (homeString == QDir::rootPath() || homeString.toUpper() == "C:\\")
+	{
+		// This case happens in Win98 with no user profiles.  In this case
+		// We don't want to bother with a separate user dir - we just 
+		// return the install directory.
+		userDir = getInstallationDir();
+	}
+	else
+	{
+		userDir = homeString + "/Stellarium";
+	}
 #elif defined(MACOSX)
 	userDir = getUserPreferencesDir();
 #else 
