@@ -714,29 +714,22 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
                                   .getModuleMgr().getModule("stars");
 
 	if (smgr->computeRCMag(
-                compute_magnitude(nav->getObserverHelioPos()),false,
+                compute_magnitude(nav->getObserverHelioPos()),smgr->getFlagPointStar(),
                 prj->getFov(),eye,rc_mag) < 0) return;
 
-
-    glBlendFunc(GL_ONE, GL_ONE);
-    float screen_r = getOnScreenSize(prj, nav);
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+	glBlendFunc(GL_ONE, GL_ONE);
+	float screen_r = getOnScreenSize(prj, nav);
 	if (smgr->getFlagPointStar()) {
-		rc_mag[1] *= rc_mag[0]/(screen_r*screen_r*screen_r);
-		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
-
-		if (rc_mag[0]<screen_r)
+		if (screen_r<=1.f)
 		{
-			rc_mag[1]*= (rc_mag[0]/screen_r);
-			rc_mag[0] = screen_r;
+			glDisable(GL_TEXTURE_2D);
+			glPointSize(0.1);
+			glColor3fv(color*rc_mag[1]);
+			prj->drawPoint2d(screenPos[0], screenPos[1]);
 		}
-
-		if (tex_halo) tex_halo->bind();
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
-		prj->drawSprite2dMode(screenPos[0], screenPos[1], rc_mag[0]*2);
-    } else {
+	} else {
 		// Global scaling with star_scale already done
 		//	rc_mag[0]*=Planet::object_scale;
 
@@ -749,13 +742,9 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 			rc_mag[1]*= (rc_mag[0]/screen_r);
 			rc_mag[0] = screen_r;
 		}
-
 		if (tex_halo) tex_halo->bind();
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
-
+		glColor3fv(color*rc_mag[1]);
 		prj->drawSprite2dMode(screenPos[0], screenPos[1], rc_mag[0]*2);
 	}
 }
@@ -864,8 +853,6 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 	glEnable(GL_BLEND);
 
 	if (tex) tex->bind();
-
-	// TODO: radial texture would look much better
 
 	  // solve the ring wraparound by culling:
 	  // decide if we are above or below the ring plane
