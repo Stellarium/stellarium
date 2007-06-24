@@ -6,23 +6,23 @@
 // change catalogue locations according to your needs:
 
 const char *nomad_names[]={
-  "/sdf1/contents/NOMAD/Nomad00.sml",
-  "/sdf1/contents/NOMAD/Nomad01.sml",
-  "/sdf1/contents/NOMAD/Nomad02.sml",
-  "/sdf1/contents/NOMAD/Nomad03.sml",
-  "/sdf1/contents/NOMAD/Nomad04.sml",
-  "/sdf1/contents/NOMAD/Nomad05.sml",
-  "/sdf1/contents/NOMAD/Nomad06.sml",
-  "/sdf1/contents/NOMAD/Nomad07.sml",
-  "/sdf1/contents/NOMAD/Nomad08.sml",
-  "/sdf1/contents/NOMAD/Nomad09.sml",
-  "/sdf1/contents/NOMAD/Nomad10.sml",
-  "/sdf1/contents/NOMAD/Nomad11.sml",
-  "/sdf1/contents/NOMAD/Nomad12.sml",
-  "/sdf1/contents/NOMAD/Nomad13.sml",
-  "/sdf1/contents/NOMAD/Nomad14.sml",
-  "/sdf1/contents/NOMAD/Nomad15.sml",
-  "/sdf1/contents/NOMAD/Nomad16.sml",
+  "/sdb1/nomad.sml/Nomad00.sml",
+  "/sdb1/nomad.sml/Nomad01.sml",
+  "/sdb1/nomad.sml/Nomad02.sml",
+  "/sdb1/nomad.sml/Nomad03.sml",
+  "/sdb1/nomad.sml/Nomad04.sml",
+  "/sdb1/nomad.sml/Nomad05.sml",
+  "/sdb1/nomad.sml/Nomad06.sml",
+  "/sdb1/nomad.sml/Nomad07.sml",
+  "/sdb1/nomad.sml/Nomad08.sml",
+  "/sdb1/nomad.sml/Nomad09.sml",
+  "/sdb1/nomad.sml/Nomad10.sml",
+  "/sdb1/nomad.sml/Nomad11.sml",
+  "/sdb1/nomad.sml/Nomad12.sml",
+  "/sdb1/nomad.sml/Nomad13.sml",
+  "/sdb1/nomad.sml/Nomad14.sml",
+  "/sdb1/nomad.sml/Nomad15.sml",
+  "/sdb1/nomad.sml/Nomad16.sml",
   0
 };
 
@@ -1430,7 +1430,7 @@ void Accumulator::HipZoneArray::writeHeaderToOutput(FILE *f) const {
   WriteInt(f,FILE_MAGIC);
   WriteInt(f,0); // type
   WriteInt(f,0); // major version
-  WriteInt(f,0); // minor version
+  WriteInt(f,1); // minor version
   WriteInt(f,level);
 //  WriteInt(f,scale_int);
   if (level == 0) {
