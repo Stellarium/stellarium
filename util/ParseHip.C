@@ -862,7 +862,7 @@ int ReadHipMain(const char *fname,Accumulator &accu) {
     double B_V = 10000.0;
     if (!ReadEmptyString(buff+245)) ASSERT(1==sscanf(buff+245,"%lf",&B_V));
     double V_I = 10000.0;
-    if (!ReadEmptyString(buff+260)) ASSERT(1==sscanf(buff+260,"%lf",&B_V));
+    if (!ReadEmptyString(buff+260)) ASSERT(1==sscanf(buff+260,"%lf",&V_I));
     
     double Hpmag = 10000.0;
     if (!ReadEmptyString(buff+274)) ASSERT(1==sscanf(buff+274,"%lf",&Hpmag));
