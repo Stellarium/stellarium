@@ -173,6 +173,7 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 		case S_DATE_YYYYMMDD:
 			return dateTime.date().toString("yyyy.MM.dd").toStdWString();
 		default:
+			cerr << "Warning, unknown date format, fallback to system default" << endl;
 			return dateTime.date().toString(Qt::LocaleDate).toStdWString();
 	}
 }
@@ -193,10 +194,11 @@ wstring StelLocaleMgr::get_printable_time_local(double JD) const
 		case S_TIME_SYSTEM_DEFAULT:
 			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
 		case S_TIME_24H:
-			return dateTime.time().toString("HH:mm:ss").toStdWString();
+			return dateTime.time().toString("hh:mm:ss").toStdWString();
 		case S_TIME_12H:
-			return dateTime.time().toString("HH:mm:ss ap").toStdWString();
+			return dateTime.time().toString("hh:mm:ss ap").toStdWString();
 		default:
+			cerr << "Warning, unknown date format, fallback to system default" << endl;
 			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
 	}
 }
