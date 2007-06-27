@@ -339,7 +339,13 @@ string vec3f_to_str(const Vec3f& v)
 
 double stringToDouble(const string& str)
 {
-	if(str.empty()) return 0;
+#ifdef NAN
+	if(str.empty())
+		return NAN;
+#else
+	if(str.empty())
+		return 0.;
+#endif
 	double dbl;
 	std::istringstream dstr( str );
 
