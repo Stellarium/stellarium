@@ -27,8 +27,10 @@ void SimpleGrid::filterIntersect(const Disk& s)
     // because we recompute everything each time, when we
     // should use the previous informations we have
     this->clear();
-    for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter) {
-        if (intersect(s, (*iter)->getObsJ2000Pos(navigator))) {
+    for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter)
+    {
+        if (intersect(s, (*iter)->getObsJ2000Pos(navigator)))
+        {
             this->insert(*iter);
         }
     }
