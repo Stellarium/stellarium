@@ -22,6 +22,10 @@ SET(stellarium_SRCS
    Observer.hpp
    grid.cpp
    grid.h
+   Grid.cpp
+   Grid.hpp
+   SimpleGrid.cpp
+   SimpleGrid.hpp
    GeodesicGrid.cpp
    GeodesicGrid.hpp
    StelObject.cpp

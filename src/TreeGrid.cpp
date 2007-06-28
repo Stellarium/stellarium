@@ -17,46 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
+#include <cassert>
 #include "TreeGrid.hpp"
 
-
-// This method is called when we need to split a triangle
-// into smaller sub triangles
-std::list<const ConvexPolygon*> TreeGridPolicyBase::split(const Polygon* p)
-{
-    assert(p->size() == 3);
-    std::list<const ConvexPolygon*> ret;
-    const Vec3d& e0 = (*p)[0];
-    const Vec3d& e1 = (*p)[1];
-    const Vec3d& e2 = (*p)[2];
-    
-    Vec3d e01 = e0 + e1;
-    e01.normalize();
-    Vec3d e12 = e1 + e2;
-    e12.normalize();
-    Vec3d e20 = e2 + e0;
-    e20.normalize();
-    
-    ConvexPolygon* s1 = new ConvexPolygon(e0, e01, e20);
-    ret.push_back(s1);
-    
-    ConvexPolygon* s2 = new ConvexPolygon(e1, e12, e01);
-    ret.push_back(s2);
-    
-    ConvexPolygon* s3 = new ConvexPolygon(e2, e20, e12);
-    ret.push_back(s3);
-    
-    ConvexPolygon* s4 = new ConvexPolygon(e01, e12, e20);
-    ret.push_back(s4);
-
-    return ret;
-}
-
-//! The only empty convex
-const ConvexPolygon TreeGridBase::_empty_convex;
-
-
-std::list<const ConvexPolygon*> TreeGridBase::create_tetrahedron() const
+TreeGrid::TreeGrid(Navigator* nav, unsigned int maxobj):
+    Grid(nav), maxObjects(maxobj), filter(Vec3d(0,0,0), 0)
 {
     // We create the initial triangles forming a tetrahedron :
     const int vertexes[4][3] =
@@ -74,8 +39,6 @@ std::list<const ConvexPolygon*> TreeGridBase::create_tetrahedron() const
         {3, 1, 0}
     };
     
-    std::list<const ConvexPolygon*> ret;
-    
     for (int i = 0; i < 4; ++i) {
         int i0 = triangles[i][0];
         int i1 = triangles[i][1];
@@ -88,20 +51,114 @@ std::list<const ConvexPolygon*> TreeGridBase::create_tetrahedron() const
         Vec3d v2(vertexes[i2][0], vertexes[i2][1], vertexes[i2][2]);
         v2.normalize();
         
-        ConvexPolygon* triangle = new ConvexPolygon(v0, v1, v2);
-        ret.push_back(triangle);
+        children.push_back(ConvexPolygon(v0, v1, v2));
     }
-    
-    return ret;
 }
 
-
-//! Destructor
-TreeGridBase::~TreeGridBase()
+void TreeGrid::insert(StelObject* obj, TreeGridNode& node)
 {
-    typedef std::vector<const ConvexPolygon*>::iterator Iter;
-    for (Iter i = _shapes.begin(); i != _shapes.end(); ++i) {
-        delete *i;
+    if (node.children.empty())
+    {
+        node.objects.push_back(obj);
+        // If we have too many objects in the node, we split it
+        if (node.objects.size() >= maxObjects)
+        {
+            split(node);
+            TreeGridNode::Objects node_objects;
+            std::swap(node_objects, node.objects);
+            for (TreeGridNode::Objects::iterator iter = node_objects.begin();
+                    iter != node_objects.end(); ++iter)
+            {
+                insert(*iter, node);
+            }
+        }
+    }
+    else // if we have children
+    {
+        for (TreeGridNode::Children::iterator iter = node.children.begin();
+                iter != node.children.end(); ++iter)
+        {
+            if (contains(iter->triangle, obj->getObsJ2000Pos(navigator))) {
+                insert(obj, *iter);
+                return;
+            }
+        }
+        node.objects.push_back(obj);
     }
 }
+
+void TreeGrid::split(TreeGridNode& node)
+{
+    assert(node.children.empty());
+    const Polygon& p = node.triangle;
+    
+    assert(p.size() == 3);
+    
+    const Vec3d& e0 = p[0];
+    const Vec3d& e1 = p[1];
+    const Vec3d& e2 = p[2];
+    
+    Vec3d e01 = e0 + e1;
+    e01.normalize();
+    Vec3d e12 = e1 + e2;
+    e12.normalize();
+    Vec3d e20 = e2 + e0;
+    e20.normalize();
+    
+    node.children.push_back(ConvexPolygon(e0, e01, e20));
+    node.children.push_back(ConvexPolygon(e1, e12, e01));
+    node.children.push_back(ConvexPolygon(e2, e20, e12));
+    node.children.push_back(ConvexPolygon(e01, e12, e20));
+}
+
+
+
+void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
+{
+    for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
+    {
+        grid.insert(*io);
+    }
+    for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+    {
+        fillAll(*ic, grid);
+    }
+}
+
+unsigned int TreeGrid::depth(const TreeGridNode& node) const
+{
+    if (node.children.empty()) return 0;
+    unsigned int max = 0;
+    for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+    {
+        unsigned int d = depth(*ic);
+        if (d > max) max = d;
+    }
+    return max + 1;
+}
+
+struct NotIntersectPred
+{
+    Disk shape;
+    const Navigator* nav;
+    
+    NotIntersectPred(const Disk& s, const Navigator* n = NULL) : shape(s), nav(n) {}
+    bool operator() (const StelObject* obj) const
+    {
+        return !intersect(shape, obj->getObsJ2000Pos(nav));
+    }
+};
+
+void TreeGrid::filterIntersect(const Disk& s)
+{
+    // first we remove all the objects that are not in the disk
+    this->remove_if(NotIntersectPred(s, navigator));
+    // now we add all the objects that are in the disk, but not in the old disk
+    fillIntersect(Difference<Disk, Disk>(s, filter), *this, *this);
+    // this->clear();
+    // fillIntersect(s, *this, *this);
+    
+    filter = s;
+}
+
 
