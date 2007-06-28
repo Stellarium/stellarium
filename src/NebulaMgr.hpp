@@ -23,7 +23,7 @@
 #include <vector>
 #include "StelObjectType.hpp"
 #include "Fader.hpp"
-#include "grid.h"
+#include "TreeGrid.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
@@ -143,8 +143,8 @@ public:
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
-	vector<Nebula*>* nebZones;		// array of nebula vector with the grid id as array rank
-	Grid nebGrid;					// Grid for opimisation
+	typedef TreeGrid MyGrid;
+	MyGrid nebGrid;
 	
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
