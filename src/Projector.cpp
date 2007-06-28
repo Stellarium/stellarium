@@ -387,7 +387,6 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 void Projector::setCustomFrame(const Mat4d& m) const
 {
 	modelViewMatrix = m;
-//	inverseModelViewMatrix = modelViewMatrix.inverse();
 }
 
 /*************************************************************************
@@ -1005,7 +1004,7 @@ void Projector::drawText(const SFont* font, float x, float y, const wstring& str
 /*************************************************************************
  Draw a parallel arc in the current frame
 *************************************************************************/
-void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
+void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg) const
 {
 	if (nbSeg==-1)
 		nbSeg = 4 + (int)(length*44./(2.*M_PI));
@@ -1025,6 +1024,12 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 	// Draw label if needed
 	if (labelAxis)
 	{
+		static GLfloat tmpColor[4];
+		if (textColor)
+		{
+			glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+			glColor4fv(*textColor);
+		}
 		double lon, lat;
 		StelUtils::rect_to_sphe(&lon, &lat, start);
 		Vec3d win0, win1;
@@ -1054,13 +1059,16 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 			xshift=-font->getStrLen(str)-5.f;
 		}
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
+		
+		if (textColor)
+			glColor4fv(tmpColor);
 	}
 }
 
 /*************************************************************************
  Draw a meridian arc in the current frame
 *************************************************************************/
-void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, int nbSeg) const
+void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg) const
 {
 	if (nbSeg==-1)
 		nbSeg = 4 + (int)(length*54./(2.*M_PI));
@@ -1081,6 +1089,12 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 	// Draw label if needed
 	if (labelAxis)
 	{
+		static GLfloat tmpColor[4];
+		if (textColor)
+		{
+			glGetFloatv(GL_CURRENT_COLOR, tmpColor);
+			glColor4fv(*textColor);
+		}
 		double lon, lat;
 		StelUtils::rect_to_sphe(&lon, &lat, start);
 		Vec3d win0, win1;
@@ -1113,6 +1127,9 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		StelUtils::rect_to_sphe(&lon, &lat, v);
 		str = StelUtils::radToHmsWstrAdapt(lon);
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
+		
+		if (textColor)
+			glColor4fv(tmpColor);
 	}
 }
 

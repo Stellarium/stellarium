@@ -274,9 +274,10 @@ public:
 	//! @param start the starting position of the parallel in the current frame
 	//! @param length the angular length in radian (or distance on the unit sphere)
 	//! @param labelAxis if true display a label indicating the latitude at begining and at the end of the arc
+	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//!   this value is automatically adjusted to prevent seeing the curve as a polygon
-	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, int nbSeg=-1) const;
+	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 	
 	//! Draw a meridian arc in the current frame, starting from point start
 	//!  going in the positive latitude direction if longitude is in [0;180], in the negative direction
@@ -284,9 +285,10 @@ public:
 	//! @param start the starting position of the meridian in the current frame
 	//! @param length the angular length in radian (or distance on the unit sphere)
 	//! @param labelAxis if true display a label indicating the longitude at begining and at the end of the arc
+	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//!  this value is automatically adjusted to prevent seeing the curve as a polygon
-	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, int nbSeg=-1) const;
+	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 	
 	//! Draw a square using the current texture at the given projected 2d position
 	//! @param x x position in the viewport in pixel
