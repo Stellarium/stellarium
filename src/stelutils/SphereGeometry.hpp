@@ -226,6 +226,35 @@ inline bool intersect(const ConvexPolygon& p, const Disk& d)
 	return intersect(d, p);
 }
 
+
+template<class S1, class S2>
+class Difference
+{
+public:
+    Difference(const S1& s1_, const S2& s2_) : s1(s1_), s2(s2_) 
+    {}
+    
+    S1 s1;
+    S2 s2;
+};
+
+template<class S1, class S2, class S>
+inline bool intersect(const Difference<S1, S2>& d, const S& s)
+{
+    return !contains(d.s2, s) && intersect(d.s1, s);
+}
+
+template<class S1, class S2>
+bool intersect(const Difference<S1, S2>& d, const Vec3d& v)
+{ return !contains(d.s2, v) && intersect(d.s1, v); }
+
+template<class S1, class S2, class S>
+inline bool contains(const Difference<S1, S2>&d, const S& s)
+{
+    return !intersect(d.s2, s) && contains(d.s1, s);
+}
+
+
 }	// namespace StelGeom
 
 #endif /*SPHEREGEOMETRY_HPP_*/
