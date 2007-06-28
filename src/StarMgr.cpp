@@ -1415,13 +1415,13 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void) {
 
 
 StarMgr::StarMgr(void) :
-    limitingMag(6.5f),
     starTexture(),
     hip_index(new HipIndexStruct[NR_OF_HIP+1]),
     mag_converter(new MagConverter(*this)),
 	fontSize(13.),
     starFont(0)
 {
+  setMagConverterMaxScaled60DegMag(6.5f);
   if (hip_index == 0 || mag_converter == 0) {
     cerr << "ERROR: StarMgr::StarMgr: no memory" << endl;
     exit(1);
@@ -1487,11 +1487,15 @@ void StarMgr::init(const InitParser &conf,LoadingBar &lb) {
   setMaxMagName(conf.get_double ("stars:max_mag_star_name"));
   setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
   setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
-  setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
+//  setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
   setMagConverterMaxFov(conf.get_double("stars","mag_converter_max_fov",60.0));
   setMagConverterMinFov(conf.get_double("stars","mag_converter_min_fov",0.1));
   setMagConverterMagShift(
     conf.get_double("stars","mag_converter_mag_shift",0.0));
+  setMagConverterMaxMag(
+    conf.get_double("stars","mag_converter_max_mag",30.0));
+  setMagConverterMaxScaled60DegMag(
+    conf.get_double("stars","mag_converter_max_scaled_60deg_mag",6.5f));
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
   
@@ -1839,6 +1843,7 @@ int StarMgr::getMaxSearchLevel(const ToneReproducer *eye,
                                const Projector *prj) const {
   int rval = -1;
   mag_converter->setFov(prj->getFov());
+  mag_converter->setEye(eye);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
     const float mag_min = 0.001f*it->second->mag_min;
@@ -1850,31 +1855,61 @@ int StarMgr::getMaxSearchLevel(const ToneReproducer *eye,
   return rval;
 }
 
+void StarMgr::MagConverter::setFov(float fov) {
+  if (fov > max_fov) fov = max_fov;
+  else if (fov < min_fov) fov = min_fov;
+  fov_factor = 108064.73f / (fov*fov);
+}
+
+void StarMgr::MagConverter::setEye(const ToneReproducer *eye) {
+  min_rmag
+    = std::sqrt(eye->adapt_luminance(
+        std::exp(-0.92103f*(max_scaled_60deg_mag + mag_shift + 12.12331f))
+          * (108064.73f / 3600.f))) * 30.f;
+//cout << "min_rmag: " << min_rmag << endl;
+}
+
 int StarMgr::MagConverter::computeRCMag(float mag,bool point_star,
                                         const ToneReproducer *eye,
                                         float rc_mag[2]) const {
+  if (mag > max_mag) {
+    rc_mag[0] = rc_mag[1] = 0.f;
+    return -1;
+  }
+
     // rmag:
   rc_mag[0] = std::sqrt(
            eye->adapt_luminance(
-             std::exp(-0.92103f*(mag + mag_shift)) * fov_factor))
+             std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor))
            * 30.f;
+
+  if (rc_mag[0] < min_rmag) {
+    rc_mag[0] = rc_mag[1] = 0.f;
+    return -1;
+  }
+
   if (point_star) {
+    if (rc_mag[0] * mgr.getScale() < 0.1f) { // 0.05f
+      rc_mag[0] = rc_mag[1] = 0.f;
+      return -1;
+    }
     rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-    if (rc_mag[0] * mgr.getScale() < 0.1f ||     // 0.05f
-        rc_mag[1] * mgr.getMagScale() < 0.1f) {  // 0.05f
+    if (rc_mag[1] * mgr.getMagScale() < 0.1f) {  // 0.05f
       rc_mag[0] = rc_mag[1] = 0.f;
       return -1;
     }
     // Global scaling
     rc_mag[1] *= mgr.getMagScale();
   } else {
-
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
     if (rc_mag[0]<1.2f) {
+      if (rc_mag[0] * mgr.getScale() < 0.1f) {
+        rc_mag[0] = rc_mag[1] = 0.f;
+        return -1;
+      }
       rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-      if (rc_mag[0] * mgr.getScale() < 0.1f ||
-          rc_mag[1] * mgr.getMagScale() < 0.1f) {
+      if (rc_mag[1] * mgr.getMagScale() < 0.1f) {
         rc_mag[0] = rc_mag[1] = 0.f;
         return -1;
       }
@@ -1886,7 +1921,6 @@ int StarMgr::MagConverter::computeRCMag(float mag,bool point_star,
         rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
       }
     }
-
     // Global scaling
     rc_mag[0] *= mgr.getScale();
     rc_mag[1] *= mgr.getMagScale();
@@ -1903,6 +1937,7 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
     if(!starsFader.getInterstate()) return 0.;
 
     mag_converter->setFov(prj->getFov());
+    mag_converter->setEye(eye);
 
     // Set temporary static variable for optimization
     if (flagStarTwinkle) twinkle_amount = twinkleAmount;
@@ -2001,9 +2036,9 @@ assert(0);
 // Return a stl vector containing the stars located
 // inside the lim_fov circle around position v
 vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
-                                            double lim_fov, // degrees
-                                            const Navigator * nav,
-                                            const Projector * prj) const {
+                                           double lim_fov, // degrees
+                                           const Navigator * nav,
+                                           const Projector * prj) const {
   vector<StelObjectP > result;
   if (!getFlagStars())
   	return result;
@@ -2084,6 +2119,7 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
   const SpecialZoneData<Star> *const z = getZones()+index;
   for (int i=0;i<z->size;i++) {
     if (z->getStars()[i].getJ2000Pos(z,movement_factor)*v >= cos_lim_fov) {
+        // TODO: do not select stars that are too faint to display
       result.push_back(z->getStars()[i].createStelObject(this,z));
     }
   }
