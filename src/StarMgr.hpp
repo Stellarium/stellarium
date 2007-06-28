@@ -145,30 +145,55 @@ public:
     /** Get stars twinkle amount */
     float getTwinkleAmount(void) const {return twinkleAmount;}
     
-    /** Set stars limiting display magnitude */
-    void setLimitingMag(float f) {limitingMag = f;}
-    /** Get stars limiting display magnitude */
-    float getLimitingMag(void) const {return limitingMag;}
+    /** Set stars limiting display magnitude at 60 degree fov */
+//    void setLimitingMag(float f) {setMagConverterMaxScaled60DegMag(f);}
+    /** Get stars limiting display magnitude at 60 degree fov */
+//    float getLimitingMag(void) const
+//      {return getMagConverterMaxScaled60DegMag();}
 
 
-      /** Set MagConverter maximum FOV */
+      /** Set MagConverter maximum FOV
+          Usually stars/planet halos are drawn fainter when FOV gets larger.
+          But when FOV gets larger than this value, the stars do not become
+          fainter any more. Must be >= 60.0 */
     void setMagConverterMaxFov(float x) {mag_converter->setMaxFov(x);}
-      /** Set MagConverter minimum FOV */
+      /** Set MagConverter minimum FOV
+          Usually stars/planet halos are drawn brighter when FOV gets smaller.
+          But when FOV gets smaller than this value, the stars do not become
+          brighter any more. Must be <= 60.0 */
     void setMagConverterMinFov(float x) {mag_converter->setMinFov(x);}
-      /** Set MagConverter magnitude shift */
+      /** Set MagConverter magnitude shift
+          draw the stars/planet halos as if they were brighter of fainter
+          by this amount of magnitude */
     void setMagConverterMagShift(float x) {mag_converter->setMagShift(x);}
+      /** Set MagConverter maximum magnitude
+          stars/planet halos, whose original (unshifted) magnitude is greater
+          than this value will not be drawn */
+    void setMagConverterMaxMag(float mag) {mag_converter->setMaxMag(mag);}
+      /** Set MagConverter maximum scaled magnitude wrt 60 degree FOV
+          stars/planet halos, whose original (unshifted) magnitude is greater
+          than this value will not be drawn at 60 degree FOV */
+    void setMagConverterMaxScaled60DegMag(float mag)
+      {mag_converter->setMaxScaled60DegMag(mag);}
+
       /** Get MagConverter maximum FOV */
     float getMagConverterMaxFov(void) const {return mag_converter->getMaxFov();}
       /** Get MagConverter minimum FOV */
     float getMagConverterMinFov(void) const {return mag_converter->getMinFov();}
       /** Get MagConverter magnitude shift */
     float getMagConverterMagShift(void) const {return mag_converter->getMagShift();}
+      /** Get MagConverter maximum magnitude */
+    float getMagConverterMaxMag(void) const {return mag_converter->getMaxMag();}
+      /** Get MagConverter maximum scaled magnitude wrt 60 degree FOV */
+    float getMagConverterMaxScaled60DegMag(void) const
+      {return mag_converter->getMaxScaled60DegMag();}
 
       /** Compute RMag and CMag from magnitude.
           Useful for conststent drawing of Planet halos */
     int computeRCMag(float mag,bool point_star,float fov,
                      const ToneReproducer *eye,float rc_mag[2]) const
       {mag_converter->setFov(fov);
+       mag_converter->setEye(eye);
        return mag_converter->computeRCMag(mag,point_star,eye,rc_mag);}
 
         
@@ -204,7 +229,6 @@ private:
     float twinkleAmount;
     bool flagPointStar;
     bool gravityLabel;
-    float limitingMag;                  // limiting magnitude at 60 degree fov
     
     STextureSP starTexture;                // star texture
 
@@ -232,23 +256,27 @@ private:
         setMinFov(0.1f);
         setFov(180.f);
         setMagShift(0.f);
+        setMaxMag(30.f);
+        min_rmag = 0.01f;
       }
-      void setMaxFov(float fov) {max_fov = fov;}
-      void setMinFov(float fov) {min_fov = fov;}
-      void setMagShift(float d) {mag_shift = d + 12.12331f;}
+      void setMaxFov(float fov) {max_fov = (fov<60.f)?60.f:fov;}
+      void setMinFov(float fov) {min_fov = (fov>60.f)?60.f:fov;}
+      void setMagShift(float d) {mag_shift = d;}
+      void setMaxMag(float mag) {max_mag = mag;}
+      void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
       float getMaxFov(void) const {return max_fov;}
       float getMinFov(void) const {return min_fov;}
-      float getMagShift(void) const {return mag_shift - 12.12331f;}
-      void setFov(float fov) {
-        if (fov > max_fov) fov = max_fov;
-        else if (fov < min_fov) fov = min_fov;
-        fov_factor = 108064.73f / (fov*fov);
-      }
+      float getMagShift(void) const {return mag_shift;}
+      float getMaxMag(void) const {return max_mag;}
+      float getMaxScaled60DegMag(void) const {return max_scaled_60deg_mag;}
+      void setFov(float fov);
+      void setEye(const ToneReproducer *eye);
       int computeRCMag(float mag,bool point_star,
                        const ToneReproducer *eye,float rc_mag[2]) const;
     private:
       const StarMgr &mgr;
-      float max_fov,min_fov,mag_shift,fov_factor;
+      float max_fov,min_fov,mag_shift,max_mag,max_scaled_60deg_mag,
+            min_rmag,fov_factor;
     };
     MagConverter *mag_converter;
 
