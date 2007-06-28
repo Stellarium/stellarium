@@ -253,8 +253,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		if(args["delta_az"]!="" || args["delta_alt"]!="") {
 			// immediately change viewing direction
-			mvmgr->panView(StelUtils::stringToDouble(args["delta_az"]),
-							StelUtils::stringToDouble(args["delta_alt"]));
+			double dAz = 0.0;
+			double dAlt = 0.0;
+			if (args["delta_az"]!="") dAz = StelUtils::stringToDouble(args["delta_az"]);
+			if (args["delta_alt"]!="") dAlt = StelUtils::stringToDouble(args["delta_alt"]);
+			mvmgr->panView(dAz, dAlt);
 		}	else status = 0;
 
 		// TODO absolute settings (see RFE 1311031)
@@ -263,7 +266,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 
 	} else if(command == "zoom") {
-		double duration = StelUtils::stringToDouble(args["duration"]);
+		double duration=0.0;
+		if (args["duration"]!="") duration = StelUtils::stringToDouble(args["duration"]);
 
 		if(args["auto"]!="") {
 			// auto zoom using specified or default duration
@@ -277,7 +281,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		} else if (args["fov"]!="") {
 			// zoom to specific field of view
-			mvmgr->zoomTo( StelUtils::stringToDouble(args["fov"]), StelUtils::stringToDouble(args["duration"]));
+			mvmgr->zoomTo( StelUtils::stringToDouble(args["fov"]), duration);
 
 		} else if (args["delta_fov"]!="") stcore->getProjection()->setFov(stcore->getProjection()->getFov() + StelUtils::stringToDouble(args["delta_fov"]));
 		// should we record absolute fov instead of delta? isn't usually smooth playback
@@ -388,14 +392,16 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			double lat = observatory->get_latitude();
 			double lon = observatory->get_longitude();
 			double alt = observatory->get_altitude();
+			
 			string name;
-			int delay;
+			int delay = 0;
 		  
 			if(args["name"]!="") name = args["name"];
 			if(args["lat"]!="") lat = StelUtils::stringToDouble(args["lat"]);
 			if(args["lon"]!="") lon = StelUtils::stringToDouble(args["lon"]);
 			if(args["alt"]!="") alt = StelUtils::stringToDouble(args["alt"]);
-			delay = (int)(1000.*StelUtils::stringToDouble(args["duration"]));
+			
+			if (args["delay"]!="") delay = (int)(1000.*StelUtils::stringToDouble(args["duration"]));
 		  
 			stcore->getObservatory()->moveTo(lat,lon,alt,delay,StelUtils::stringToWstring(name));
 		} else status = 0;
@@ -438,21 +444,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				Image * img = script_images->get_image(args["name"]);
 			  
 				if(img != NULL) {
-					if(args["alpha"]!="") img->set_alpha(StelUtils::stringToDouble(args["alpha"]), 
-														 StelUtils::stringToDouble(args["duration"]));
-					if(args["scale"]!="") img->set_scale(StelUtils::stringToDouble(args["scale"]), 
-														 StelUtils::stringToDouble(args["duration"]));
-					if(args["rotation"]!="") img->set_rotation(StelUtils::stringToDouble(args["rotation"]), 
-															   StelUtils::stringToDouble(args["duration"]));
-					if(args["xpos"]!="" || args["ypos"]!="") 
+					double duration=0.0;
+					if (args["duration"]!="") duration = StelUtils::stringToDouble(args["duration"]);
+					if(args["alpha"]!="") img->set_alpha(StelUtils::stringToDouble(args["alpha"]), duration);
+					if(args["scale"]!="") img->set_scale(StelUtils::stringToDouble(args["scale"]), duration);
+					if(args["rotation"]!="") img->set_rotation(StelUtils::stringToDouble(args["rotation"]), duration);
+					if(args["xpos"]!="" || args["ypos"]!="")
 						img->set_location(StelUtils::stringToDouble(args["xpos"]), args["xpos"]!="",
-										  StelUtils::stringToDouble(args["ypos"]), args["ypos"]!="",
-										  StelUtils::stringToDouble(args["duration"]));
+							StelUtils::stringToDouble(args["ypos"]), args["ypos"]!="",
+							duration);
 					// for more human readable scripts, as long as someone doesn't do both...
 					if(args["altitude"]!="" || args["azimuth"]!="") 
 						img->set_location(StelUtils::stringToDouble(args["altitude"]), args["altitude"]!="",
-										  StelUtils::stringToDouble(args["azimuth"]), args["azimuth"]!="",
-										  StelUtils::stringToDouble(args["duration"]));
+										  StelUtils::stringToDouble(args["azimuth"]), args["azimuth"]!="", duration);
 				} else {
 					debug_message = _("Unable to find image: ") + StelUtils::stringToWstring(args["name"]);
 					status=0;
