@@ -741,7 +741,7 @@ void InitColorTableFromConfigFile(const InitParser &conf) {
   std::map<float,Vec3f> color_map;
   for (float b_v=-0.5f;b_v<=4.0f;b_v+=0.01) {
     char entry[256];
-    sprintf(entry,"color_bv_%+5.2f",b_v);
+    sprintf(entry,"bv_color_%+5.2f",b_v);
     const string s(conf.get_str("stars",entry,""));
     if (!s.empty()) {
       const Vec3f c(StelUtils::str_to_vec3f(s));
