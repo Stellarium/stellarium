@@ -48,7 +48,6 @@ bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
 NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
-	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
 	dependenciesOrder["draw"]="milkyway";
 }
 
@@ -59,8 +58,6 @@ NebulaMgr::~NebulaMgr()
 	{
 		delete (*iter);
 	}
-	
-	delete[] nebZones;
 }
 
 // read from stream
@@ -107,52 +104,45 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	Vec3f pXYZ;
-
-	// Find the star zones which are in the screen
-	int nbZones=0;
+	
 	// FOV is currently measured vertically, so need to adjust for wide screens
 	// TODO: projector should probably use largest measurement itself
 	float max_fov = MY_MAX( prj->getFov(), prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight());
-	nbZones = nebGrid.Intersect(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f);
-	static int * zoneList = nebGrid.getResult();
+	
+	nebGrid.filterIntersect(StelGeom::Disk(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f));
+	//printf("nb visible neb = %d\n", nebGrid.size());
 	
     prj->setCurrentFrame(Projector::FRAME_J2000);
 	
 	// Print all the stars of all the selected zones
-	static vector<Nebula *>::iterator end;
-	static vector<Nebula *>::iterator iter;
 	Nebula* n;
 
 	  // speed up the computation of n->getOnScreenSize(prj, nav)>5:
 	const float size_limit = 5.0 * (M_PI/180.0) * (prj->getFov()/prj->getViewportHeight());
 
-	for(int i=0;i<nbZones;++i)
+	for (MyGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
-		end = nebZones[zoneList[i]].end();
-	    for(iter = nebZones[zoneList[i]].begin(); iter!=end; ++iter)
-		{
-			n = *iter;
-			if (!displayNoTexture && !n->hasTex()) continue;
+		n = static_cast<Nebula*>(*iter);
+		if (!displayNoTexture && !n->hasTex()) continue;
 
-			// improve performance by skipping if too small to see
-			// TODO: skip if too faint to see
-			if (n->angular_size>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
+		// improve performance by skipping if too small to see
+		// TODO: skip if too faint to see
+		if (n->angular_size>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
+		{
+			prj->project(n->XYZ,n->XY);
+
+			if (n->angular_size>size_limit)
 			{
-				prj->project(n->XYZ,n->XY);
-	
-				if (n->angular_size>size_limit)
-				{
-					if (n->hasTex())
-						n->draw_tex(prj, nav, eye);
-					else n->draw_no_tex(prj, nav, eye);
-				}
-	
-				if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
-				{
-					n->draw_name(prj);
-					n->draw_circle(prj, nav);
-				} 
+				if (n->hasTex())
+					n->draw_tex(prj, nav, eye);
+				else n->draw_no_tex(prj, nav, eye);
 			}
+
+			if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
+			{
+				n->draw_name(prj);
+				n->draw_circle(prj, nav);
+			} 
 		}
 	}
 	
@@ -405,13 +395,14 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 		else
 		{
 			neb_array.push_back(e);
-			nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+			//nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+			nebGrid.insert(e);
 		}
 		i++;
 	}
 	fclose(ngcFile);
 	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-
+    printf("Grid depth = %d\n", nebGrid.depth());
 	return true;
 }
 
@@ -550,7 +541,8 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 				else 
 				{
 					neb_array.push_back(e);
-					nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+					// nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+					nebGrid.insert(e);
 				}
 			}
 	

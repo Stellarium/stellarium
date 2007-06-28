@@ -20,8 +20,6 @@ SET(stellarium_SRCS
    Navigator.hpp
    Observer.cpp
    Observer.hpp
-   grid.cpp
-   grid.h
    Grid.cpp
    Grid.hpp
    SimpleGrid.cpp
