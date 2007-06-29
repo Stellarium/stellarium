@@ -160,7 +160,9 @@ void StelAppQt4::startMainLoop()
 	mainWin.setCentralWidget(&openGLWin);
 
 	mainWin.show();
+	QCoreApplication::flush();
 	openGLWin.show();
+	QCoreApplication::flush();
 	StelApp::init();
 	
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
