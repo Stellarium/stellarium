@@ -153,7 +153,6 @@ SET(stellarium_SRCS
    stelutils/SphereGeometry.cpp
    stelutils/Fader.hpp
    stelutils/STextureTypes.hpp
-   stelutils/spgrid.hpp
    stelutils/GLee.c
    stelutils/GLee.h
    stelutils/StelKey.hpp
