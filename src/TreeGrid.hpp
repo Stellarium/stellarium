@@ -28,12 +28,12 @@
 struct TreeGridNode
 {
     TreeGridNode() {}
-    TreeGridNode(const ConvexPolygon& s) : triangle(s) {}
+    TreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
         
     typedef std::vector<StelObject*> Objects;
     Objects objects;
     
-    ConvexPolygon triangle;
+    StelGeom::ConvexPolygon triangle;
     
     typedef std::vector<TreeGridNode> Children;
     Children children;
