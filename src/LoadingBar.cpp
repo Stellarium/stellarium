@@ -24,6 +24,8 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 
+#include <QCoreApplication>
+
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
@@ -108,5 +110,6 @@ void LoadingBar::Draw(float val)
 	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
 	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
+	QCoreApplication::flush();
 	StelApp::getInstance().swapGLBuffers();	// And swap the buffers
 }
