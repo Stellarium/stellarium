@@ -30,11 +30,18 @@
 #include "StelModuleMgr.hpp"
 #include "Planet.hpp"
 
+/*************************************************************************
+ Constructor
+*************************************************************************/
 StelCore::StelCore() : projection(NULL)
 {
 	tone_converter = new ToneReproducer();
 }
 
+
+/*************************************************************************
+ Destructor
+*************************************************************************/
 StelCore::~StelCore()
 {
 	delete navigation; navigation=NULL;
@@ -54,7 +61,10 @@ StelCore::~StelCore()
 	}
 }
 
-// Load core data and initialize with default values
+
+/*************************************************************************
+ Init projection temp TODO remove
+*************************************************************************/
 void StelCore::initProj(const InitParser& conf)
 {
 	// Projector
@@ -62,7 +72,10 @@ void StelCore::initProj(const InitParser& conf)
 	projection->init(conf);
 }
 
-// Load core data and initialize with default values
+
+/*************************************************************************
+ Load core data and initialize with default values
+*************************************************************************/
 void StelCore::init(const InitParser& conf, LoadingBar& lb)
 {	
 	// Observer
@@ -83,10 +96,12 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 	geodesic_grid = new GeodesicGrid(grid_level);
 	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
 	hip_stars->setGrid();
-	//tone_converter->set_world_adaptation_luminance(3.75f + landscape->getLuminance()*40000.f);
 }
 
-// Update all the objects in function of the time
+
+/*************************************************************************
+ Update all the objects in function of the time
+*************************************************************************/
 void StelCore::update(int delta_time)
 {
 	// Update the position of observation and time etc...
@@ -116,10 +131,12 @@ void StelCore::update(int delta_time)
 	                                    navigation->get_helio_to_eye_mat(),
 	                                    navigation->get_local_to_eye_mat(),
 	                                    navigation->get_j2000_to_eye_mat());
-	//cerr << "get_j2000_to_eye_mat()[0]=" << navigation->get_j2000_to_eye_mat()[0] << endl;
 }
 
-// Execute all the pre-drawing functions
+
+/*************************************************************************
+ Execute all the pre-drawing functions
+*************************************************************************/
 void StelCore::preDraw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
@@ -137,13 +154,19 @@ void StelCore::preDraw(int delta_time)
 }
 
 
+/*************************************************************************
+ Update core state after drawing modules
+*************************************************************************/
 void StelCore::postDraw()
 {
 	projection->draw_viewport_shape();
 }
 
 
-bool StelCore::setHomePlanet(string planet)
+/*************************************************************************
+ Change the current home planet
+*************************************************************************/
+bool StelCore::setHomePlanet(const std::string& planet)
 {
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	// reset planet trails due to changed perspective

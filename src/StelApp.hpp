@@ -238,9 +238,6 @@ protected:
 	virtual void setResizable(bool resizable) = 0;
 	
 private:
-
-	//! Return whether the UI (whichever it is) has been initialized
-	bool isUiInitialised();
 	
 	// C++-ized version of argc & argv
 	vector<string> argList;
