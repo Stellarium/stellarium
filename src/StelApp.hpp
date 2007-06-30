@@ -28,9 +28,6 @@
 
 // Predeclaration of some classes
 class StelCore;
-class StelCommandInterface;
-class ScriptMgr;
-class StelUI;
 class ViewportDistorter;
 class SkyLocalizer;
 class StelTextureMgr;
@@ -54,8 +51,6 @@ using namespace std;
 //! @author Fabien Chereau
 class StelApp
 {
-	friend class StelUI;
-	friend class StelCommandInterface;
 public:
 	//! @brief Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
@@ -110,10 +105,6 @@ public:
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
 	
-	//! @brief Get the old-style home-made GUI. This method will be suppressed when the StelUI is made as a real StelModule
-	//! @return a pointer on the old-style home-made GUI.
-	StelUI* getStelUI() {return ui;}
-	
 	//! Update translations and font everywhere in the program
 	void updateAppLanguage();
 	
@@ -136,10 +127,6 @@ public:
 
 	void setViewPortDistorterType(const string &type);
 	string getViewPortDistorterType() const;
-	
-	//! Required because stelcore doesn't have access to the script manager anymore!
-	//! Record a command if script recording is on
-	void recordCommand(string commandline);
 
 	//! Set the time multiplier used when fast forwarding scripts
 	//! n.b. - do not confuse this with sky time rate
@@ -179,6 +166,10 @@ public:
 	//! @return height of the openGL screen in pixels
 	virtual int getScreenH() const = 0;
 	
+	//! Get the current number of frame per second
+	//! @return the FPS averaged on the last second
+	float getFps() const {return fps;}
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
 	///////////////////////////////////////////////////////////////////////////	
@@ -210,6 +201,9 @@ public:
 	//! Return whether we are in fullscreen mode
 	virtual bool getFullScreen() const = 0;
 	
+	//! Save a screen shot to StelFileMgr::getScreenshotDir()
+	virtual void saveScreenShot() const =0;
+	
 protected:
 	//! Update all object according to the delta time
 	void update(int delta_time);
@@ -236,9 +230,6 @@ protected:
 	
 	//! Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
-	
-	//! Save a screen shot to StelFileMgr::getScreenshotDir()
-	virtual void saveScreenShot() const =0;
 	
 	//! Call this when the size of the GL window has changed
 	void glWindowHasBeenResized(int w, int h);
@@ -288,9 +279,6 @@ private:
 	int frame, timefr, timeBase;		// Used for fps counter
 	
 	// Main elements of the stel_app
-	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
-	ScriptMgr * scripts;                    // manage playing and recording scripts
-	StelUI * ui;							// The main User Interface
 	ViewportDistorter *distorter;
 
 	int time_multiplier;	// used for adjusting delta_time for script speeds

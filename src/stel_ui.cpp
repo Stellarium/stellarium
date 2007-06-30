@@ -116,7 +116,7 @@ StelUI::~StelUI()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelUI::init(const InitParser& conf)
+void StelUI::init(const InitParser& conf, LoadingBar& lb)
 {
 	if(initialised)
 	{
@@ -221,7 +221,8 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(createSearchWindow());
 	setTitleObservatoryName(getTitleWithAltitude());
 	
- initialised = true;
+	init_tui();
+ 	initialised = true;
 }
 
 double StelUI::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
@@ -327,7 +328,7 @@ void StelUI::updateTopBar(void)
 	if (FlagShowFps)
 	{
 		wstringstream wos;
-		wos << L"FPS=" << setprecision(4) << app->fps;
+		wos << L"FPS=" << setprecision(4) << app->getFps();
 		top_bar_fps_lbl->setLabel(wos.str());
 		top_bar_fps_lbl->adjustSize();
 	}
@@ -566,8 +567,9 @@ void StelUI::cbEditScriptExecute(void)
 
 	bt_script->clearText();
 	bt_script->setEditing(false);
-
-	if (!app->commander->execute_command(command_string))
+	
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	if (!commander->execute_command(command_string))
 		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
 }
 
@@ -844,11 +846,12 @@ void StelUI::drawGui(void)
 }
 
 /*******************************************************************************/
-int StelUI::handle_move(int x, int y, StelMod mod)
+int StelUI::handleMouseMoves(int x, int y, StelMod mod)
 {
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
-	if(app->scripts->is_playing()) return 0;
+	if(scripts->is_playing()) return 0;
 
 	// Show cursor
 	StelApp::getInstance().showCursor(true);
@@ -860,11 +863,12 @@ int StelUI::handle_move(int x, int y, StelMod mod)
 }
 
 /*******************************************************************************/
-int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)
+int StelUI::handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)
 {
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
-	if(app->scripts->is_playing()) return 0;
+	if(scripts->is_playing()) return 0;
 
 	// Make sure object pointer is turned on (script may have turned off)
 	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(true);
@@ -891,6 +895,9 @@ int StelUI::handle_keysGUI(StelKey key, StelMod mod, Uint16 unicode, Uint8 state
 int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
 	const StelObjectMgr& objmgr = StelApp::getInstance().getStelObjectMgr();
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	
 	if (state==Stel_KEYDOWN)
 	{
 //printf("handle_keys: '%c'(%d), %d, 0x%04x\n",key,(int)key,unicode,mod);
@@ -925,36 +932,36 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		// if script is running, only script control keys are accessible
 		// to pause/resume/cancel the script
 		// (otherwise script could get very confused by user interaction)
-		if(app->scripts->is_playing())
+		if(scripts->is_playing())
 		{
 
 			// here reusing time control keys to control the script playback
 			if(key==StelKey_6)
 			{
 				// pause/unpause script
-				app->commander->execute_command( "script action pause");
+				commander->execute_command( "script action pause");
 				app->setTimeMultiplier(1);   // don't allow resumption of ffwd this way (confusing for audio)
 			}
 			else if(key==StelKey_k)
 			{
-				app->commander->execute_command( "script action resume");
+				commander->execute_command( "script action resume");
 				app->setTimeMultiplier(1);
 			}
 			else if(key==StelKey_7 || unicode==0x0003 || (key==StelKey_m && FlagEnableTuiMenu))
 			{  // ctrl-c
 				// TODO: should double check with user here...
-				app->commander->execute_command( "script action end");
+				commander->execute_command( "script action end");
 				if(key==StelKey_m) setFlagShowTuiMenu(true);
 			}
 			// TODO n is bad key if ui allowed
 			else if(key==StelKey_GREATER || key==StelKey_n)
 			{
-				app->commander->execute_command( "audio volume increment");
+				commander->execute_command( "audio volume increment");
 			}
 			// TODO d is bad key if ui allowed
 			else if(key==StelKey_LESS || key==StelKey_d)
 			{
-				app->commander->execute_command( "audio volume decrement");
+				commander->execute_command( "audio volume decrement");
 
 			}
 			else if(key==StelKey_j)
@@ -964,7 +971,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 					app->setTimeMultiplier(1);
 
 					// restart audio in correct place
-					app->commander->execute_command( "audio action sync");
+					commander->execute_command( "audio action sync");
 				}
 				else if(app->getTimeMultiplier() > 1 )
 				{
@@ -975,16 +982,16 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			else if(key==StelKey_l)
 			{
 				// stop audio since won't play at higher speeds
-				app->commander->execute_command( "audio action pause");
+				commander->execute_command( "audio action pause");
 				app->setTimeMultiplier( app->getTimeMultiplier()*2 );
 				if(app->getTimeMultiplier()>8) app->setTimeMultiplier(8);
 			}
-			else if(!app->scripts->get_allow_ui())
+			else if(!scripts->get_allow_ui())
 			{
 				cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
 			}
 
-			if(!app->scripts->get_allow_ui()) return 0;  // only limited user interaction allowed with script
+			if(!scripts->get_allow_ui()) return 0;  // only limited user interaction allowed with script
 
 		}
 		else
@@ -992,30 +999,30 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			app->setTimeMultiplier(1);  // if no script in progress always real time
 
 			// normal time controls here (taken over for script control above if playing a script)
-			if(key==StelKey_k) app->commander->execute_command( "timerate rate 1");
-			if(key==StelKey_l) app->commander->execute_command( "timerate action increment");
-			if(key==StelKey_j) app->commander->execute_command( "timerate action decrement");
-			if(key==StelKey_6) app->commander->execute_command( "timerate action pause");
-			if(key==StelKey_7) app->commander->execute_command( "timerate rate 0");
-			if(key==StelKey_8) app->commander->execute_command( "date load preset");
+			if(key==StelKey_k) commander->execute_command( "timerate rate 1");
+			if(key==StelKey_l) commander->execute_command( "timerate action increment");
+			if(key==StelKey_j) commander->execute_command( "timerate action decrement");
+			if(key==StelKey_6) commander->execute_command( "timerate action pause");
+			if(key==StelKey_7) commander->execute_command( "timerate rate 0");
+			if(key==StelKey_8) commander->execute_command( "date load preset");
 
 		}
 
 		if (key == StelKey_r && (mod & COMPATIBLE_StelMod_CTRL))
 		{
-			if(app->scripts->is_recording())
+			if(scripts->is_recording())
 			{
-				app->commander->execute_command( "script action cancelrecord");
+				commander->execute_command( "script action cancelrecord");
 				show_message(_("Command recording stopped."), 3000);
 			}
 			else
 			{
-				app->commander->execute_command( "script action record");
+				commander->execute_command( "script action record");
 
-				if(app->scripts->is_recording())
+				if(scripts->is_recording())
 				{
 					show_message(wstring( _("Recording commands to script file:\n")
-					                      + StelUtils::stringToWstring(app->scripts->get_record_filename()) + L"\n\n"
+					                      + StelUtils::stringToWstring(scripts->get_record_filename()) + L"\n\n"
 					                      + _("Hit CTRL-R again to stop.\n")), 4000);
 				}
 				else
@@ -1083,16 +1090,16 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 			if(!grlmgr->getFlagEclipticLine())
 			{
-				app->commander->execute_command( "flag ecliptic_line on");
+				commander->execute_command( "flag ecliptic_line on");
 			}
 			else if( !ssmgr->getFlagTrails())
 			{
-				app->commander->execute_command( "flag object_trails on");
+				commander->execute_command( "flag object_trails on");
 			}
 			else
 			{
-				app->commander->execute_command( "flag object_trails off");
-				app->commander->execute_command( "flag ecliptic_line off");
+				commander->execute_command( "flag object_trails off");
+				commander->execute_command( "flag ecliptic_line off");
 			}
 			break;
 		}
@@ -1102,7 +1109,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 				break;
             } // else fall through
 		case StelKey_PERIOD:
-            app->commander->execute_command( "flag equator_line toggle");
+            commander->execute_command( "flag equator_line toggle");
             break;
 		case StelKey_6:
             if (mod & COMPATIBLE_StelMod_CTRL && objmgr.getWasSelected())
@@ -1129,13 +1136,13 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 				const int zhr = metmgr->getZHR();
 				if (zhr <= 10 ) {
-					app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
+					commander->execute_command("meteors zhr 80");  // standard Perseids rate
 				} else if( zhr <= 80 ) {
-					app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
+					commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
 				} else if( zhr <= 10000 ) {
-					app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
+					commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
 				} else {
-					app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
+					commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
 				}
             }
             break;
@@ -1160,7 +1167,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 					core->getProjection()->setFlipVert(!core->getProjection()->getFlipVert());
 				}
             } else {
-				app->commander->execute_command( "flag constellation_names toggle");
+				commander->execute_command( "flag constellation_names toggle");
             }
             break;
 
@@ -1169,37 +1176,37 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		    		FlagSearch = ! search_win->getVisible();;
 				search_win->setVisible(FlagSearch);
             } else {
-				app->commander->execute_command( "flag fog toggle");
+				commander->execute_command( "flag fog toggle");
             }
 			break;
 
 		case StelKey_r:
-            app->commander->execute_command( "flag constellation_art toggle");
+            commander->execute_command( "flag constellation_art toggle");
             break;
 		case StelKey_c:
-            app->commander->execute_command( "flag constellation_drawing toggle");
+            commander->execute_command( "flag constellation_drawing toggle");
             break;
 		case StelKey_b:
-            app->commander->execute_command( "flag constellation_boundaries toggle");
+            commander->execute_command( "flag constellation_boundaries toggle");
             break;
 		case StelKey_d:
-            app->commander->execute_command( "flag star_names toggle");
+            commander->execute_command( "flag star_names toggle");
             break;
 		case StelKey_p:
 		{
 			SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 			if(!ssmgr2->getFlagHints())
 			{
-				app->commander->execute_command("flag planet_names on");
+				commander->execute_command("flag planet_names on");
 			}
 			else if( !ssmgr2->getFlagOrbits())
 			{
-				app->commander->execute_command("flag planet_orbits on");
+				commander->execute_command("flag planet_orbits on");
 			}
 			else
 			{
-				app->commander->execute_command("flag planet_orbits off");
-				app->commander->execute_command("flag planet_names off");
+				commander->execute_command("flag planet_orbits off");
+				commander->execute_command("flag planet_names off");
 			}
 			break;
 		}
@@ -1207,20 +1214,20 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		{
 			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 			if (grlmgr->getFlagMeridianLine()) {
-				app->commander->execute_command( "flag meridian_line 0");
-				app->commander->execute_command( "flag azimuthal_grid 1");
+				commander->execute_command( "flag meridian_line 0");
+				commander->execute_command( "flag azimuthal_grid 1");
 			} else {
-				if (grlmgr->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
-				else app->commander->execute_command( "flag meridian_line 1");
+				if (grlmgr->getFlagAzimutalGrid()) commander->execute_command( "flag azimuthal_grid 0");
+				else commander->execute_command( "flag meridian_line 1");
 			}
 			break;
 		}
 		case StelKey_e:
             if (!(mod & COMPATIBLE_StelMod_CTRL))
-            	app->commander->execute_command( "flag equatorial_grid toggle");
+            	commander->execute_command( "flag equatorial_grid toggle");
             break;
 		case StelKey_n:
-            app->commander->execute_command( "flag nebula_names toggle");
+            commander->execute_command( "flag nebula_names toggle");
             break;
 		case StelKey_g:
 			if (mod & COMPATIBLE_StelMod_CTRL) {
@@ -1230,14 +1237,14 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
                     if (pl) core->getObservatory()->setHomePlanet(pl);
                 }
             } else {
-                app->commander->execute_command( "flag landscape toggle");
+                commander->execute_command( "flag landscape toggle");
             }
             break;
 		case StelKey_q:
-            app->commander->execute_command( "flag cardinal_points toggle");
+            commander->execute_command( "flag cardinal_points toggle");
             break;
 		case StelKey_a:
-            app->commander->execute_command( "flag atmosphere toggle");
+            commander->execute_command( "flag atmosphere toggle");
             break;
 
 		case StelKey_t:
@@ -1248,10 +1255,10 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		}
 		case StelKey_s:
             if (!(mod & COMPATIBLE_StelMod_CTRL))
-				app->commander->execute_command( "flag stars toggle");
+				commander->execute_command( "flag stars toggle");
             break;
 		case StelKey_SPACE:
-            app->commander->execute_command("flag track_object on");
+            commander->execute_command("flag track_object on");
             break;
 		case StelKey_i:
             FlagInfos=!FlagInfos;
@@ -1259,54 +1266,54 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             break;
 		case StelKey_EQUALS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
-				app->commander->execute_command( "date sidereal 1");
+				commander->execute_command( "date sidereal 1");
 			else
-				app->commander->execute_command( "date relative 1");
+				commander->execute_command( "date relative 1");
 			break;
 		case StelKey_MINUS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
-				app->commander->execute_command( "date sidereal -1");
+				commander->execute_command( "date sidereal -1");
 			else 
-				app->commander->execute_command( "date relative -1");
+				commander->execute_command( "date relative -1");
             break;
 		case StelKey_m:
             if (FlagEnableTuiMenu) setFlagShowTuiMenu(true);  // not recorded
             break;
 		case StelKey_o:
-            app->commander->execute_command( "flag moon_scaled toggle");
+            commander->execute_command( "flag moon_scaled toggle");
             break;
 		case StelKey_LEFTBRACKET:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
-				app->commander->execute_command( "date sidereal -7");
+				commander->execute_command( "date sidereal -7");
 			else 
-				app->commander->execute_command( "date relative -7");
+				commander->execute_command( "date relative -7");
             break;
 		case StelKey_RIGHTBRACKET:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
-				app->commander->execute_command( "date sidereal 7");
+				commander->execute_command( "date sidereal 7");
 			else 
-				app->commander->execute_command( "date relative 7");
+				commander->execute_command( "date relative 7");
             break;
 		case StelKey_SLASH:
             if (mod & COMPATIBLE_StelMod_CTRL) {
-				app->commander->execute_command( "zoom auto out");
+				commander->execute_command( "zoom auto out");
             } else {
             	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 				// here we help script recorders by selecting the right type of zoom option
 				// based on current settings of manual or full auto zoom
-				if(mvmgr->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
-				else app->commander->execute_command( "zoom auto in");
+				if(mvmgr->getFlagManualAutoZoom()) commander->execute_command( "zoom auto in manual 1");
+				else commander->execute_command( "zoom auto in");
             }
             break;
 		case StelKey_BACKSLASH:
-            app->commander->execute_command( "zoom auto out");
+            commander->execute_command( "zoom auto out");
             break;
 		case StelKey_x:
-            app->commander->execute_command( "flag show_tui_datetime toggle");
+            commander->execute_command( "flag show_tui_datetime toggle");
 
 			// keep these in sync.  Maybe this should just be one flag.
-            if(FlagShowTuiDateTime) app->commander->execute_command( "flag show_tui_short_obj_info on");
-            else app->commander->execute_command( "flag show_tui_short_obj_info off");
+            if(FlagShowTuiDateTime) commander->execute_command( "flag show_tui_short_obj_info on");
+            else commander->execute_command( "flag show_tui_short_obj_info off");
             break;
 		case StelKey_RETURN:
             core->getNavigation()->toggleMountMode();

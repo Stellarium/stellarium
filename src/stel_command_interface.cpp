@@ -112,6 +112,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	
 	// stellarium specific logic to run each command
 
@@ -423,8 +424,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				else if(args["coordinate_system"] == "j2000") img_pos = Image::POS_J2000;
 
 				string image_filename;
-				if(stapp->scripts->is_playing())
-					image_filename = stapp->scripts->get_script_path() + args["filename"];
+				if(scripts->is_playing())
+					image_filename = scripts->get_script_path() + args["filename"];
 				else
 					image_filename = "data/" + args["filename"];
 					
@@ -485,11 +486,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			// only one track at a time allowed
 			if(audio) delete audio;
 		  
-			if(stapp->scripts->is_playing())
+			if(scripts->is_playing())
 			{
 				// If we're playing the audio file from a script, search for the audio file
 				// in the script directory where the script file exists.
-				audio = new Audio(stapp->scripts->get_script_path() + args["filename"],
+				audio = new Audio(scripts->get_script_path() + args["filename"],
 						"default track",
       						StelUtils::stringToLong(args["output_rate"]));
 				audio->play(args["loop"]=="on");
@@ -537,40 +538,40 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				delete audio;
 				audio = NULL;
 			}
-			stapp->scripts->cancel_script();
+			scripts->cancel_script();
 			script_images->drop_all_images();
 
 		} else if(args["action"]=="play" && args["filename"]!="") {
-			if(stapp->scripts->is_playing()) {
+			if(scripts->is_playing()) {
 
-				string script_path = stapp->scripts->get_script_path();
+				string script_path = scripts->get_script_path();
 
 				// stop script, audio, and unload any loaded images
 				if(audio) {
 					delete audio;
 					audio = NULL;
 				}
-				stapp->scripts->cancel_script();
+				scripts->cancel_script();
 				script_images->drop_all_images();
 
 				// keep same script path 
-				stapp->scripts->play_script(script_path + args["filename"], script_path);
+				scripts->play_script(script_path + args["filename"], script_path);
 			} else {
-				stapp->scripts->play_script(args["path"] + args["filename"], args["path"]);
+				scripts->play_script(args["path"] + args["filename"], args["path"]);
 			}
 
 		} else if(args["action"]=="record") {
-			stapp->scripts->record_script(args["filename"]);
+			scripts->record_script(args["filename"]);
 			recordable = 0;  // don't record this command!
 		} else if(args["action"]=="cancelrecord") {
-			stapp->scripts->cancel_record_script();
+			scripts->cancel_record_script();
 			recordable = 0;  // don't record this command!
-		} else if(args["action"]=="pause" && !stapp->scripts->is_paused()) {
+		} else if(args["action"]=="pause" && !scripts->is_paused()) {
 			// n.b. action=pause TOGGLES pause
 			if(audio) audio->pause();
-			stapp->scripts->pause_script();
+			scripts->pause_script();
 		} else if (args["action"]=="pause" || args["action"]=="resume") {
-			stapp->scripts->resume_script();
+			scripts->resume_script();
 			if(audio) audio->sync();
 		} else status =0;
 
@@ -623,7 +624,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} else if(command=="landscape" && args["action"] == "load") {
 
 		// textures are relative to script
-		args["path"] = stapp->scripts->get_script_path();
+		args["path"] = scripts->get_script_path();
 		lmgr->loadLandscape(args);
 	  
 	} else if(command=="meteors") {
@@ -687,17 +688,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	if(status ) {
 
 		// if recording commands, do that now
-		if(recordable) stapp->scripts->record_command(commandline);
+		if(recordable) scripts->record_command(commandline);
 
 		//    cout << commandline << endl;
 
 	} else {
 
 		// Show gui error window only if script asked for gui debugging
-		if(stapp->scripts->is_playing() && stapp->scripts->get_gui_debug()) 
-			stapp->ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
+		if(scripts->is_playing() && scripts->get_gui_debug())
+		{
+			StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
+			ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
 									StelUtils::stringToWstring(commandline) + wstring(L"\"\n\n") + debug_message, 7000);
-			
+		}	
 		cerr << "Could not execute: " << commandline << endl << StelUtils::wstringToString(debug_message) << endl;
 	}
 
@@ -729,17 +732,17 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 				newval = !stcore->getFlagEnableMoveKeys();
 				stcore->setFlagEnableMoveKeys(newval); }
 			else if(name=="enable_move_mouse") newval = (stapp->FlagEnableMoveMouse = !stapp->FlagEnableMoveMouse);
-			else if(name=="menu") newval = (stapp->ui->FlagMenu = !stapp->ui->FlagMenu);
-			else if(name=="help") newval = (stapp->ui->FlagHelp = !stapp->ui->FlagHelp);
-			else if(name=="infos") newval = (stapp->ui->FlagInfos = !stapp->ui->FlagInfos);
-			else if(name=="show_topbar") newval = (stapp->ui->FlagShowTopBar = !stapp->ui->FlagShowTopBar);
-			else if(name=="show_time") newval = (stapp->ui->FlagShowTime = !stapp->ui->FlagShowTime);
-			else if(name=="show_date") newval = (stapp->ui->FlagShowDate = !stapp->ui->FlagShowDate);
-			else if(name=="show_appname") newval = (stapp->ui->FlagShowAppName = !stapp->ui->FlagShowAppName);
-			else if(name=="show_fps") newval = (stapp->ui->FlagShowFps = !stapp->ui->FlagShowFps);
-			else if(name=="show_fov") newval = (stapp->ui->FlagShowFov = !stapp->ui->FlagShowFov);
-			else if(name=="enable_tui_menu") newval = (stapp->ui->FlagEnableTuiMenu = !stapp->ui->FlagEnableTuiMenu);
-			else if(name=="show_gravity_ui") newval = (stapp->ui->FlagShowGravityUi = !stapp->ui->FlagShowGravityUi);
+			else if(name=="menu") newval = (ui->FlagMenu = !ui->FlagMenu);
+			else if(name=="help") newval = (ui->FlagHelp = !ui->FlagHelp);
+			else if(name=="infos") newval = (ui->FlagInfos = !ui->FlagInfos);
+			else if(name=="show_topbar") newval = (ui->FlagShowTopBar = !ui->FlagShowTopBar);
+			else if(name=="show_time") newval = (ui->FlagShowTime = !ui->FlagShowTime);
+			else if(name=="show_date") newval = (ui->FlagShowDate = !ui->FlagShowDate);
+			else if(name=="show_appname") newval = (ui->FlagShowAppName = !ui->FlagShowAppName);
+			else if(name=="show_fps") newval = (ui->FlagShowFps = !ui->FlagShowFps);
+			else if(name=="show_fov") newval = (ui->FlagShowFov = !ui->FlagShowFov);
+			else if(name=="enable_tui_menu") newval = (ui->FlagEnableTuiMenu = !ui->FlagEnableTuiMenu);
+			else if(name=="show_gravity_ui") newval = (ui->FlagShowGravityUi = !ui->FlagShowGravityUi);
 			else if(name=="gravity_labels") {
 				newval = !stcore->getFlagGravityLabels();
 				stcore->setFlagGravityLabels(newval);
@@ -757,6 +760,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
+		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 		
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
@@ -786,13 +791,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !smgr->getFlagPointStar();
 			smgr->setFlagPointStar(newval);
 		}
-		else if(name=="show_selected_object_info") newval = (stapp->ui->FlagShowSelectedObjectInfo = !stapp->ui->FlagShowSelectedObjectInfo);
-		else if(name=="show_tui_datetime") newval = (stapp->ui->FlagShowTuiDateTime = !stapp->ui->FlagShowTuiDateTime);
-		else if(name=="show_tui_short_obj_info") newval = (stapp->ui->FlagShowTuiShortObjInfo = !stapp->ui->FlagShowTuiShortObjInfo);
+		else if(name=="show_selected_object_info") newval = (ui->FlagShowSelectedObjectInfo = !ui->FlagShowSelectedObjectInfo);
+		else if(name=="show_tui_datetime") newval = (ui->FlagShowTuiDateTime = !ui->FlagShowTuiDateTime);
+		else if(name=="show_tui_short_obj_info") newval = (ui->FlagShowTuiShortObjInfo = !ui->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") {
 			newval = !mvmgr->getFlagManualAutoZoom();  
 			mvmgr->setFlagManualAutoZoom(newval); }
-		else if(name=="show_script_bar") newval = (stapp->ui->FlagShowScriptBar = !stapp->ui->FlagShowScriptBar);
+		else if(name=="show_script_bar") newval = (ui->FlagShowScriptBar = !ui->FlagShowScriptBar);
 		else if(name=="fog") {
 			newval = !lmgr->getFlagFog();
 			lmgr->setFlagFog(newval); 
@@ -876,7 +881,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			nmgr->setFlagHints(newval);
 		}
 		else if(name=="milky_way") {
-			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
 			newval = !mw->getFlagShow();
 			mw->setFlagShow(newval);
 		}
@@ -894,8 +899,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			mvmgr->setFlagTracking(newval);
 		}
 		else if(name=="script_gui_debug") {  // Not written to config - script specific
-			newval = !stapp->scripts->get_gui_debug();
-			stapp->scripts->set_gui_debug(newval);
+			newval = !scripts->get_gui_debug();
+			scripts->set_gui_debug(newval);
 		}
 		else if(name=="landscape_sets_location")
 		{
@@ -915,17 +920,17 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(name=="enable_zoom_keys") stcore->setFlagEnableZoomKeys(newval);
 			else if(name=="enable_move_keys") stcore->setFlagEnableMoveKeys(newval);
 			else if(name=="enable_move_mouse") stapp->FlagEnableMoveMouse = newval;
-			else if(name=="menu") stapp->ui->FlagMenu = newval;
-			else if(name=="help") stapp->ui->FlagHelp = newval;
-			else if(name=="infos") stapp->ui->FlagInfos = newval;
-			else if(name=="show_topbar") stapp->ui->FlagShowTopBar = newval;
-			else if(name=="show_time") stapp->ui->FlagShowTime = newval;
-			else if(name=="show_date") stapp->ui->FlagShowDate = newval;
-			else if(name=="show_appname") stapp->ui->FlagShowAppName = newval;
-			else if(name=="show_fps") stapp->ui->FlagShowFps = newval;
-			else if(name=="show_fov") stapp->ui->FlagShowFov = newval;
-			else if(name=="enable_tui_menu") stapp->ui->FlagEnableTuiMenu = newval;
-			else if(name=="show_gravity_ui") stapp->ui->FlagShowGravityUi = newval;
+			else if(name=="menu") ui->FlagMenu = newval;
+			else if(name=="help") ui->FlagHelp = newval;
+			else if(name=="infos") ui->FlagInfos = newval;
+			else if(name=="show_topbar") ui->FlagShowTopBar = newval;
+			else if(name=="show_time") ui->FlagShowTime = newval;
+			else if(name=="show_date") ui->FlagShowDate = newval;
+			else if(name=="show_appname") ui->FlagShowAppName = newval;
+			else if(name=="show_fps") ui->FlagShowFps = newval;
+			else if(name=="show_fov") ui->FlagShowFov = newval;
+			else if(name=="enable_tui_menu") ui->FlagEnableTuiMenu = newval;
+			else if(name=="show_gravity_ui") ui->FlagShowGravityUi = newval;
 			else if(name=="gravity_labels") stcore->setFlagGravityLabels(newval);
 			else status = 0;
 
@@ -941,6 +946,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
+		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 		
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
@@ -949,11 +956,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
      	else if(name=="constellation_pick") cmgr->setFlagIsolateSelected(newval);
 		else if(name=="star_twinkle") smgr->setFlagTwinkle(newval);
 		else if(name=="point_star") smgr->setFlagPointStar(newval);
-		else if(name=="show_selected_object_info") stapp->ui->FlagShowSelectedObjectInfo = newval;
-		else if(name=="show_tui_datetime") stapp->ui->FlagShowTuiDateTime = newval;
-		else if(name=="show_tui_short_obj_info") stapp->ui->FlagShowTuiShortObjInfo = newval;
+		else if(name=="show_selected_object_info") ui->FlagShowSelectedObjectInfo = newval;
+		else if(name=="show_tui_datetime") ui->FlagShowTuiDateTime = newval;
+		else if(name=="show_tui_short_obj_info") ui->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") mvmgr->setFlagManualAutoZoom(newval);
-		else if(name=="show_script_bar") stapp->ui->FlagShowScriptBar = newval;
+		else if(name=="show_script_bar") ui->FlagShowScriptBar = newval;
 		else if(name=="fog") lmgr->setFlagFog(newval);
 		else if(name=="atmosphere") { 
 			lmgr->setFlagAtmosphere ( newval);
@@ -985,13 +992,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="milky_way")
 		{
-			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
 			mw->setFlagShow(newval);
 		}
 		else if(name=="bright_nebulae") nmgr->setFlagBright(newval);
 		else if(name=="object_trails") ssmgr->setFlagTrails(newval);
 		else if(name=="track_object") mvmgr->setFlagTracking(newval);
-		else if(name=="script_gui_debug") stapp->scripts->set_gui_debug(newval); // Not written to config - script specific
+		else if(name=="script_gui_debug") scripts->set_gui_debug(newval); // Not written to config - script specific
 		else if(name=="landscape_sets_location") lmgr->setFlagLandscapeSetsLocation(newval);
 		else return(status);
 
@@ -1003,6 +1010,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 }
 
 
-void StelCommandInterface::update(double delta_time) {
-	if(audio) audio->update(delta_time);
+void StelCommandInterface::update(double delta_time)
+{
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	// keep audio position updated if changing time multiplier
+	if (scripts->is_paused())
+		return;
+	if (audio)
+		audio->update(delta_time);
 }

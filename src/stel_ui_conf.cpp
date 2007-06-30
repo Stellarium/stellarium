@@ -769,57 +769,61 @@ void StelUI::updateConfigVariables(void)
 {
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
-
-	app->commander->execute_command("flag stars ", stars_cbx->getState());
-	app->commander->execute_command("flag star_names ", star_names_cbx->getState());
-	app->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
-	app->commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
-	app->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
-	app->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
-	app->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
-	app->commander->execute_command("flag constellation_boundaries ", constellation_boundaries_cbx->getState());
-	app->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
-	app->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
-	app->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	
+	commander->execute_command("flag stars ", stars_cbx->getState());
+	commander->execute_command("flag star_names ", star_names_cbx->getState());
+	commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
+	commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
+	commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
+	commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
+	commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
+	commander->execute_command("flag constellation_boundaries ", constellation_boundaries_cbx->getState());
+	commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
+	commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
+	commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
 	nmgr->setFlagDisplayNoTexture(nebulas_no_texture_cbx->getState());
-	app->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
-	app->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
-	app->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
-	app->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
-	app->commander->execute_command("flag equator_line ", equator_cbx->getState());
-	app->commander->execute_command("flag ecliptic_line ", ecliptic_cbx->getState());
-	app->commander->execute_command("flag landscape ", ground_cbx->getState());
-	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
-	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
-	app->commander->execute_command("flag fog ", fog_cbx->getState());
-	app->commander->execute_command("flag landscape_sets_location ", locationFromLandscapeCheck->getState());
+	commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
+	commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
+	commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
+	commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
+	commander->execute_command("flag equator_line ", equator_cbx->getState());
+	commander->execute_command("flag ecliptic_line ", ecliptic_cbx->getState());
+	commander->execute_command("flag landscape ", ground_cbx->getState());
+	commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
+	commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
+	commander->execute_command("flag fog ", fog_cbx->getState());
+	commander->execute_command("flag landscape_sets_location ", locationFromLandscapeCheck->getState());
 	if (meteor_rate_10->getState() && metmgr->getZHR()!=10)
-		app->commander->execute_command("meteors zhr 10");
+		commander->execute_command("meteors zhr 10");
 	else if (meteor_rate_80->getState() && metmgr->getZHR()!=80)
-		app->commander->execute_command("meteors zhr 80");
+		commander->execute_command("meteors zhr 80");
 	else if (meteor_rate_10000->getState() && metmgr->getZHR()!=10000)
-		app->commander->execute_command("meteors zhr 10000");
+		commander->execute_command("meteors zhr 10000");
 	else if (meteor_rate_144000->getState() && metmgr->getZHR()!=144000)
-		app->commander->execute_command("meteors zhr 144000");
+		commander->execute_command("meteors zhr 144000");
 }
 
 void StelUI::updateConfigVariables2(void)
 {
-	app->commander->execute_command("flag planets ", planets_cbx->getState());
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	commander->execute_command("flag planets ", planets_cbx->getState());
 }
 
 void StelUI::setCurrentTimeFromConfig(void)
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
-	app->commander->execute_command(string("date local " + time_current->getDateString()));
+	commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
 void StelUI::setObserverPositionFromMap(void)
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude()
 		<< " alt " << earth_map->getPointerAltitude();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 }
 
 void StelUI::setCityFromMap(void)
@@ -831,16 +835,20 @@ void StelUI::setCityFromMap(void)
 
 void StelUI::setObserverPositionFromIncDec(void)
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss.setf(ios::fixed);
 	oss.precision(10);
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
 		<< " alt " << alt_incdec->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 }
 
 void StelUI::doSaveObserverPosition(const string& name)
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
+	
 	string location = name;
     for (string::size_type i=0;i<location.length();++i)
 	{
@@ -850,10 +858,10 @@ void StelUI::doSaveObserverPosition(const string& name)
 	std::ostringstream oss;
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
 		<< " name " << location;
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	core->getObservatory()->save(app->getConfigFilePath(), "init_location");
-	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
+	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 }
 
 void StelUI::saveObserverPosition(void)
