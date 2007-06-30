@@ -42,7 +42,7 @@ class ScriptMgr : public StelModule
   virtual ~ScriptMgr();
   virtual string getModuleID() const { return "script_mgr"; }
   
-  virtual void init(const InitParser& conf, LoadingBar& lb) {return;}
+  virtual void init(const InitParser& conf, LoadingBar& lb);
   virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
   
   bool play_script(string script_file, string script_path);

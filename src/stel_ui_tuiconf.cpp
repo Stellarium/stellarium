@@ -71,7 +71,7 @@ void StelUI::draw_gravity_ui(void)
 		}
 
 		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getProjection()->getFov();
-		if (FlagShowFps) os << L"  FPS " << app->fps;
+		if (FlagShowFps) os << L"  FPS " << app->getFps();
 
 		glColor3f(0.5,1,0.5);
 		core->getProjection()->drawText(tuiFont, x - shift + 38, y - 38, os.str(), 0, 0, 0, false);
@@ -322,7 +322,7 @@ void StelUI::init_tui(void)
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<wstring>(wstring(L"6.1 ") );
 	//	tui_scripts_local->addItemList(wstring(TUI_SCRIPT_MSG) + wstring(L"\n") 
-	//			       + StelUtils::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
+	//			       + StelUtils::stringToWstring(scripts->get_script_list(core->getDataDir() + "scripts/"))); 
 	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_scripts_local));
 	tui_menu_scripts->addComponent(tui_scripts_local);
 
@@ -359,7 +359,8 @@ void StelUI::init_tui(void)
 // Update fonts, labels and lists for a new app locale
 void StelUI::localizeTui(void)
 {
-
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	
 	cout << "Localizing TUI for locale: " << app->getLocaleMgr().getAppLanguage() << endl;
 
 	if(!tui_root) return;  // not initialized yet
@@ -443,7 +444,7 @@ void StelUI::localizeTui(void)
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
+			+ StelUtils::stringToWstring(scripts->get_script_list("scripts")), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
 
@@ -517,8 +518,9 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			}
 			
 			// now execute the command
+			StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 			if ( cmd != "" )
-				app->commander->execute_command(cmd);
+				commander->execute_command(cmd);
 			else
 				cerr << "ERROR while executing script" << endl;
 		}
@@ -712,29 +714,32 @@ void StelUI::tui_cb_admin_shutdown(void)
 // Set a new landscape skin
 void StelUI::tui_cb_tui_effect_change_landscape(void)
 {
-	app->commander->execute_command(string("set landscape_name \"" +  StelUtils::wstringToString(tui_effect_landscape->getCurrent()) + "\""));
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	commander->execute_command(string("set landscape_name \"" +  StelUtils::wstringToString(tui_effect_landscape->getCurrent()) + "\""));
 }
 
 
 // Set a new sky culture
 void StelUI::tui_cb_tui_general_change_sky_culture(void) {
-
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	//	core->setSkyCulture(tui_general_sky_culture->getCurrent());
-	app->commander->execute_command( string("set sky_culture ") + StelUtils::wstringToString(tui_general_sky_culture->getCurrent()));
+	commander->execute_command( string("set sky_culture ") + StelUtils::wstringToString(tui_general_sky_culture->getCurrent()));
 }
 
 // Set a new sky locale
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	// wcout << "set sky locale to " << tui_general_sky_locale->getCurrent() << endl;
-	app->commander->execute_command( string("set sky_locale " + StelUtils::wstringToString(tui_general_sky_locale->getCurrent())));
+	commander->execute_command( string("set sky_locale " + StelUtils::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
 
 // callback for changing scripts from removeable media
 void StelUI::tui_cb_scripts_removeable() {
   if(!ScriptDirectoryRead) {
+  		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	  // read scripts from mounted disk
-	  string script_list = app->scripts->get_script_list(app->scripts->get_removable_media_path());
+	  string script_list = scripts->get_script_list(scripts->get_removable_media_path());
 	  tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") + StelUtils::stringToWstring(script_list),0);
 	  ScriptDirectoryRead = 1;
   } 
@@ -742,8 +747,9 @@ void StelUI::tui_cb_scripts_removeable() {
   if(tui_scripts_removeable->getCurrent()==_(TUI_SCRIPT_MSG)) {
 	  SelectedScript = "";
   } else {
+  		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	  SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
-	  SelectedScriptDirectory = app->scripts->get_removable_media_path();
+	  SelectedScriptDirectory = scripts->get_removable_media_path();
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
   } 
@@ -776,80 +782,83 @@ void StelUI::tui_cb_admin_set_locale() {
 
 
 void StelUI::tui_cb_effects_milkyway_intensity() {
-
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss << "set milky_way_intensity " << tui_effect_milkyway_intensity->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 }
 
 void StelUI::tui_cb_setlocation() {
-	
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss << "moveto lat " << tui_location_latitude->getValue() 
 		<< " lon " <<  tui_location_longitude->getValue()
 		<< " alt " << tui_location_altitude->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 }
 
 
 void StelUI::tui_cb_stars()
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	
 	// 4. Stars
 	std::ostringstream oss;
 
 	oss << "flag stars " << tui_stars_show->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set max_mag_star_name " << tui_star_labelmaxmag->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_twinkle_amount " << tui_stars_twinkle->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_mag_scale " << tui_star_magscale->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 /* TODO
 	oss.str("");
 	oss << "set star_limiting_mag " << tui_star_limitingmag->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 */
 
 }
 
 void StelUI::tui_cb_effects()
 {
-
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	
 	// 5. effects
 	std::ostringstream oss;
 
 	oss << "flag point_star " << tui_effect_pointobj->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set auto_move_duration " << tui_effect_zoom_duration->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "flag manual_zoom " << tui_effect_manual_zoom->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_scale " << tui_effect_object_scale->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	MouseCursorTimeout = tui_effect_cursor_timeout->getValue();  // never recorded
 
 	oss.str("");
 	oss << "set light_pollution_luminance " << tui_effect_light_pollution->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "flag landscape_sets_location " << tui_effect_landscape_sets_location->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 
 }
 
@@ -857,18 +866,20 @@ void StelUI::tui_cb_effects()
 // set sky time
 void StelUI::tui_cb_sky_time()
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss << "date local " << StelUtils::wstringToString(tui_time_skytime->getDateString());
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 }
 
 
 // set nebula label limit
 void StelUI::tui_cb_effects_nebulae_label_magnitude()
 {
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
 	std::ostringstream oss;
 	oss << "set max_mag_nebula_name " << tui_effect_nebulae_label_magnitude->getValue();
-	app->commander->execute_command(oss.str());
+	commander->execute_command(oss.str());
 }
 
 
@@ -905,7 +916,8 @@ void StelUI::tui_cb_location_change_planet()
 {
 	//	core->setHomePlanet( StelUtils::wstringToString( tui_location_planet->getCurrent() ) );
 	//	wcout << "set home planet " << tui_location_planet->getCurrent() << endl;
-	app->commander->execute_command(string("set home_planet \"") + 
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");	
+	commander->execute_command(string("set home_planet \"") + 
 									StelUtils::wstringToString( tui_location_planet->getCurrent() ) +
 									"\"");
 }
@@ -931,8 +943,9 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory()->getHomePlanetEnglishName()));
 
 	// Reread local script directory (in case new files)
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-			+ StelUtils::stringToWstring(app->scripts->get_script_list("scripts")), 0); 
+			+ StelUtils::stringToWstring(scripts->get_script_list("scripts")), 0); 
 
 	// also clear out script lists as media may have changed
 	ScriptDirectoryRead = 0;

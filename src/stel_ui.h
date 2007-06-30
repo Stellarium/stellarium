@@ -25,6 +25,7 @@
 #include <config.h>
 #include "s_gui.h"
 #include "s_tui.h"
+#include "StelModule.hpp"
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
 
@@ -39,19 +40,25 @@ class Planet;
 class Projector;
 class Navigator;
 class ToneReproducer;
+class LoadingBar;
 
-class StelUI
+class StelUI : public StelModule
 {
 friend class StelCommandInterface;
 
 public:
-	StelUI(StelCore *, StelApp * _app);	// Create a stellarium ui. Need to call init() before use
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "StelUI";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void update(double deltaTime);
+	virtual void glWindowHasBeenResized(int w, int h) {resize();}
+	
+	StelUI(StelCore*, StelApp* app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui
     
-    virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
-	virtual void update(double deltaTime);
-    
-	void init(const InitParser& conf);		// Initialize the ui.
 	void drawTui(void);		// Display the ui
 	void drawGui(void);		// Display the ui
 	void gui_update_widgets(int delta_time);		// Update changing values
@@ -59,9 +66,9 @@ public:
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
+	int handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
 	// Handle mouse move
-	int handle_move(int x, int y, StelMod mod);
+	int handleMouseMoves(int x, int y, StelMod mod);
 	// Handle key press and release
 	int handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 

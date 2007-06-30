@@ -23,6 +23,9 @@
 #include "image_mgr.h"
 #include "Projector.hpp"
 #include "Navigator.hpp"
+#include "script_mgr.h"
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
 
 ImageMgr::ImageMgr()
 {
@@ -95,6 +98,9 @@ Image * ImageMgr::get_image(string name)
 
 void ImageMgr::update(double delta_time)
 {
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	if(scripts->is_paused())
+		return;
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
         (*iter)->update(delta_time);
