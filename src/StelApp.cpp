@@ -395,7 +395,7 @@ void StelApp::update(int delta_time)
 	stelObjectMgr->update((double)delta_time/1000);
 }
 
-//! Main drawinf function called at each frame
+//! Main drawing function called at each frame
 double StelApp::draw(int delta_time)
 {
      if (!initialized)
@@ -407,7 +407,7 @@ double StelApp::draw(int delta_time)
 
 	distorter->prepare();
 
-	core->preDraw(delta_time);
+	core->preDraw();
 
 	// Render all the main objects of stellarium
 	double squaredDistance = 0.;

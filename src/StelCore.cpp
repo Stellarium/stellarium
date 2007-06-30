@@ -137,7 +137,7 @@ void StelCore::update(int delta_time)
 /*************************************************************************
  Execute all the pre-drawing functions
 *************************************************************************/
-void StelCore::preDraw(int delta_time)
+void StelCore::preDraw()
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.000001 ,50);
