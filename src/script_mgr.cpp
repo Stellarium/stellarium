@@ -29,6 +29,7 @@
 #include "stel_command_interface.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
+#include "InitParser.hpp"
 
 using namespace std;
 
@@ -44,6 +45,11 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(fals
 }
 
 ScriptMgr::~ScriptMgr() {
+}
+
+void ScriptMgr::init(const InitParser& conf, LoadingBar& lb)
+{
+	set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 }
 
 // path is used for loading script assets 

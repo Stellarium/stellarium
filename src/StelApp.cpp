@@ -56,10 +56,8 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-	timeBase(0), ui(NULL), draw_mode(StelApp::DM_NORMAL), initialized(false)
+	timeBase(0), draw_mode(StelApp::DM_NORMAL), initialized(false)
 {
-	scripts=0;
-	commander=0;
 	distorter=0;
 	skyCultureMgr=0;
 	localeMgr=0;
@@ -116,8 +114,6 @@ StelApp::StelApp(int argc, char** argv) :
 	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore();
-	commander = new StelCommandInterface(core, this);
-	scripts = new ScriptMgr(commander);
 	time_multiplier = 1;
 	distorter = 0;
 }
@@ -127,9 +123,6 @@ StelApp::StelApp(int argc, char** argv) :
 *************************************************************************/
 StelApp::~StelApp()
 {
-	delete ui; ui=NULL;
-	delete scripts; scripts=NULL;
-	delete commander; commander=NULL;
 	delete core; core=NULL;
 	if (distorter) {delete distorter; distorter=NULL;}
 	delete skyCultureMgr; skyCultureMgr=NULL;
@@ -257,8 +250,6 @@ void StelApp::init()
 	maxfps = conf.get_double ("video","maximum_fps",10000);
 	minfps = conf.get_double ("video","minimum_fps",10000);
 
-	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
-
 	core->initProj(conf);
 
 	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
@@ -272,62 +263,69 @@ void StelApp::init()
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
+	StelCommandInterface* commander = new StelCommandInterface(core, this);
+	getModuleMgr().registerModule(commander);
+	
+	ScriptMgr* scripts = new ScriptMgr(commander);
+	getModuleMgr().registerModule(scripts);
+	
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(script_images);
+	getModuleMgr().registerModule(script_images);
 	
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(ssystem);
+	getModuleMgr().registerModule(ssystem);
 	
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
 	hip_stars->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(hip_stars);	
+	getModuleMgr().registerModule(hip_stars);	
 	
 	core->init(conf, lb);
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
 	nebulas->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(nebulas);
+	getModuleMgr().registerModule(nebulas);
 	
 	// Init milky way
 	MilkyWay* milky_way = new MilkyWay();
 	milky_way->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(milky_way);
+	getModuleMgr().registerModule(milky_way);
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
 	telescope_mgr->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(telescope_mgr);
+	getModuleMgr().registerModule(telescope_mgr);
 	
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
 	asterisms->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(asterisms);
+	getModuleMgr().registerModule(asterisms);
 	
 	// Landscape, atmosphere & cardinal points section
 	LandscapeMgr* landscape = new LandscapeMgr();
 	landscape->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(landscape);
+	getModuleMgr().registerModule(landscape);
 
 	GridLinesMgr* gridLines = new GridLinesMgr();
 	gridLines->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(gridLines);
+	getModuleMgr().registerModule(gridLines);
 	
 	// Meteors
 	MeteorMgr* meteors = new MeteorMgr(10, 60);
 	meteors->init(conf, lb);
-	StelApp::getInstance().getModuleMgr().registerModule(meteors);
+	getModuleMgr().registerModule(meteors);
 
 //ugly fix by johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
 	skyCultureMgr->init(conf);
-	ui = new StelUI(core, this);
-	ui->init(conf);
-	ui->init_tui();  // don't reinit tui since probably called from there
+	
+	StelUI* ui = new StelUI(core, this);
+	ui->init(conf, lb);
+	getModuleMgr().registerModule(ui);
 	
 	// Initialisation of the color scheme
 	draw_mode = draw_mode=DM_NIGHT;  // fool caching
@@ -381,18 +379,7 @@ void StelApp::update(int delta_time)
 	// change time rate if needed to fast forward scripts
 	delta_time *= time_multiplier;
 
-	// keep audio position updated if changing time multiplier
-	if(!scripts->is_paused()) commander->update(delta_time);
-
-	// run command from a running script
-	scripts->update(delta_time);
-
-  assert(ui);
-	ui->update((double)delta_time/1000);
-
 	core->update(delta_time);
-
-	if(!scripts->is_paused()) ((ImageMgr*)moduleMgr->getModule("image_mgr"))->update(delta_time);
 	
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("update");
@@ -435,13 +422,10 @@ double StelApp::draw(int delta_time)
 	stelObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
 
 	core->postDraw();
-
-	// Draw the Text ui into the predistorted image
-	ui->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
-
 	distorter->distort();
 
 	// Draw the Graphical ui
+	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 	ui->drawGui();
 
 	return squaredDistance;
@@ -457,8 +441,6 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 		if (core && core->getProjection())
 			core->getProjection()->windowHasBeenResized(getScreenW(),
 			                                            getScreenH());
-		if (ui)
-			ui->resize();
 		// Send the event to every StelModule
 		for (StelModuleMgr::Iterator iter=moduleMgr->begin();
 		     iter!=moduleMgr->end();++iter)
@@ -476,7 +458,8 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	y = getScreenH() - 1 - y;
 	distorter->distortXY(x,y);
 
-	if (ui->handle_clic(ui_x, ui_y, button, state, mod)) return 1;
+	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
+	if (ui->handleClick(ui_x, ui_y, button, state, mod)) return 1;
 
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseClicks");
@@ -488,6 +471,8 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	
 	// Manage the event for the main window
 	{
+		StelCommandInterface* commander = (StelCommandInterface*)getModuleMgr().getModule("command_interface");
+		
 		// Deselect the selected object
 		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
 		{
@@ -514,6 +499,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			if (getStelObjectMgr().getWasSelected())
 			{
 				((MovementMgr*)moduleMgr->getModule("movements"))->setFlagTracking(false);
+				StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 				ui->updateInfoSelectString();
 			}
 		}
@@ -537,14 +523,14 @@ int StelApp::handleMove(int x, int y, StelMod mod)
 		if ((*i)->handleMouseMoves(x, y, mod)==true)
 			return 1;
 	}
-	
-	return ui->handle_move(ui_x,ui_y, mod);
+	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
+	return ui->handleMouseMoves(ui_x,ui_y, mod);
 }
 
 // Handle key press and release
 int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
-
+	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 	// Standard keys should not be able to be hijacked by modules - Rob
 	// (this could be debated)
 	if (ui->handle_keys_tui(key, state)) return 1;
@@ -655,8 +641,6 @@ void StelApp::setColorScheme(const std::string& fileName, const std::string& sec
 	{
 		(*iter)->setColorScheme(conf, section);
 	}
-	
-	ui->setColorScheme(conf, section);
 }
 
 //! Set flag for activating night vision mode
@@ -680,16 +664,11 @@ void StelApp::setVisionModeNormal()
 	draw_mode=DM_NORMAL;
 }
 
-void StelApp::recordCommand(string commandline)
-{
-	scripts->record_command(commandline);
-}
-
-
 // Update translations and font everywhere in the program
 void StelApp::updateAppLanguage()
 {
 	// update translations and font in tui
+	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 	if (ui)
 		ui->localizeTui();
 }
