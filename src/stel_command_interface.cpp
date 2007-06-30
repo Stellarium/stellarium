@@ -28,6 +28,7 @@
 #include "audio.h"
 #include "image.h"
 #include "stel_ui.h"
+#include "script_mgr.h"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "SolarSystem.hpp"

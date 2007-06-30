@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"
+#include "script_mgr.h"
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"

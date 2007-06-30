@@ -26,7 +26,6 @@
 
 #include "command_interface.h"
 #include "StelUtils.hpp"
-#include "script_mgr.h"
 #include "StelModule.hpp"
 
 using namespace std;

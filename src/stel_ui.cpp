@@ -44,6 +44,7 @@
 #include "Navigator.hpp"
 #include "Observer.hpp"
 #include "Planet.hpp"
+#include "script_mgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
