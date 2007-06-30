@@ -192,6 +192,13 @@ SET(stellarium_SRCS
    planetsephems/stellplanet.h
 )
 
+IF(MACOSX)
+  SET(stellarium_SRCS 
+    ${stellarium_SRCS}
+    MacosxDirs.cpp
+    MacosxDirs.hpp)
+ENDIF(MACOSX)
+
 ADD_EXECUTABLE(stellarium ${stellarium_SRCS})
 
 TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${STLPORT_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
