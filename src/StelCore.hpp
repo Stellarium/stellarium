@@ -48,12 +48,11 @@ public:
 	void initProj(const InitParser& conf);
 
 	//! Update all the objects with respect to the time.
-	//! @param delta_time the time increment in ms.
-	void update(int delta_time);
+	//! @param deltaTime the time increment in ms.
+	void update(int deltaTime);
 
 	//! Update core state before drawing modules
-	//! @param delta_time the time increment in ms.
-	void preDraw(int delta_time);
+	void preDraw();
 	
 	//! Update core state after drawing modules
 	void postDraw();
@@ -68,9 +67,9 @@ public:
 	//! Get the current navigation (manages frame transformation) used in the core
 	const Navigator* getNavigation() const {return navigation;}
 
-	//! Get the current tone converter used in the core
+	//! Get the current tone reproducer used in the core
 	ToneReproducer* getToneReproducer() {return tone_converter;}
-	//! Get the current tone converter used in the core
+	//! Get the current tone reproducer used in the core
 	const ToneReproducer* getToneReproducer() const {return tone_converter;}
 
 	//! Get the current observer description
