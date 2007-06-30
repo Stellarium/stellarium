@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 
+
 // Init static members
 Translator* Translator::lastUsed = NULL;
 map<string, wstring> Translator::iso639codes;
@@ -36,7 +37,12 @@ map<string, wstring> Translator::iso639codes;
 string Translator::systemLangName = "C";
 
 // Use system locale language by default
+#if defined(MACOSX)
+#include "MacosxDirs.hpp"
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory() + "/locale", "system");
+#else
 Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
+#endif
 
 #ifdef WIN32
 # include <windows.h>

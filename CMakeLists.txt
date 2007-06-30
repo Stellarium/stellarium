@@ -15,6 +15,10 @@ IF(NOT CMAKE_BUILD_TYPE)
       FORCE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  SET(MACOSX 1)
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS -Wall)       # additional C compile flags
  SET(CMAKE_CXX_FLAGS -Wall)     # additional CPP compile flags
@@ -26,6 +30,15 @@ ELSE(UNIX AND NOT WIN32)
  SET(STLPORT_LIBRARY "-lstlport.5.0")
  SET(CMAKE_EXE_LINKER_FLAGS "-Wsign-promo -fexceptions -fident -mthreads -L${STLPORT_PATH}/lib")
 ENDIF(UNIX AND NOT WIN32)
+
+# best way to get to MACOSX?
+IF(MACOSX)
+ SET(CMAKE_INCLUDE_PATH "/usr/X11R6/include:/usr/X11R6/include/freetype2:/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include:/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
+ SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
+ SET(CMAKE_C_FLAGS "-Wall -DMACOSX -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib")
+ SET(CMAKE_CXX_FLAGS "-Wall -DMACOSX -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib")
+ SET(STLPORT_LIBRARY "")
+ENDIF(MACOSX)
 
 
 ########### Check headers ###########
@@ -60,6 +73,9 @@ FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 INCLUDE(${QT_USE_FILE})
 
+FIND_PACKAGE(SDL REQUIRED)
+FIND_PACKAGE(SDL_mixer REQUIRED)
+
 IF(SDLMIXER_LIBRARY)
   MESSAGE(STATUS "Found SDL_mixer. Activate sound support.")
   SET(HAVE_SDL_SDL_MIXER_H 1)
@@ -67,11 +83,6 @@ ELSE(SDLMIXER_LIBRARY)
   SET(SDLMIXER_INCLUDE_DIR "")
   SET(SDLMIXER_LIBRARY "")
 ENDIF(SDLMIXER_LIBRARY)
-
-IF(USE_SDL)
-  FIND_PACKAGE(SDL REQUIRED)
-  FIND_PACKAGE(SDL_mixer REQUIRED)
-ENDIF(USE_SDL)
 
 IF(ENABLE_NLS)
   FIND_PACKAGE(Iconv REQUIRED)
@@ -94,8 +105,14 @@ FIND_PACKAGE(Gettext REQUIRED)
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
+IF(MACOSX)
+  SET(CMAKE_INSTALL_PREFIX "/Users/Shared/stellarium/Stellarium.app/Contents")
+  SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/Resources/data")
+  SET(INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/Resources/locale")
+ELSE(MACOSX)
   SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/stellarium)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
+ENDIF(MACOSX)
 ELSE(UNIX AND NOT WIN32)
   SET(INSTALL_DATADIR .)
   SET(INSTALL_LOCALEDIR ./locale)
@@ -152,3 +169,9 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae ) 
 ADD_SUBDIRECTORY( scripts ) 
 ADD_SUBDIRECTORY( stars ) 
+
+########### Macosx Bundling ###############
+IF(MACOSX)
+ADD_CUSTOM_TARGET(macosx_bundle mv ${CMAKE_INSTALL_PREFIX}/bin ${CMAKE_INSTALL_PREFIX}/MacOS COMMAND mv ${CMAKE_INSTALL_PREFIX}/share ${CMAKE_INSTALL_PREFIX}/Resources COMMAND mv ${CMAKE_INSTALL_PREFIX}/Resources/stellarium/* ${CMAKE_INSTALL_PREFIX}/Resources DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ENDIF(MACOSX)
+
