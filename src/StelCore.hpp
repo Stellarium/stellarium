@@ -20,7 +20,6 @@
 #define _STEL_CORE_H_
 
 #include <string>
-using namespace std;
 
 class Navigator;
 class Projector;
@@ -55,34 +54,38 @@ public:
 	//! Update core state before drawing modules
 	//! @param delta_time the time increment in ms.
 	void preDraw(int delta_time);
+	
+	//! Update core state after drawing modules
 	void postDraw();
 	
 	//! Get the current projector used in the core
 	Projector* getProjection() {return projection;}
+	//! Get the current projector used in the core
 	const Projector* getProjection() const {return projection;}
 	
 	//! Get the current navigation (manages frame transformation) used in the core
 	Navigator* getNavigation() {return navigation;}
+	//! Get the current navigation (manages frame transformation) used in the core
 	const Navigator* getNavigation() const {return navigation;}
 
 	//! Get the current tone converter used in the core
 	ToneReproducer* getToneReproducer() {return tone_converter;}
+	//! Get the current tone converter used in the core
 	const ToneReproducer* getToneReproducer() const {return tone_converter;}
 
 	//! Get the current observer description
 	Observer* getObservatory() {return observatory;}
-	//! Get the current observer description (as a const object)
+	//! Get the current observer description
 	const Observer* getObservatory() const {return observatory;}
 	
 	//! Change the current home planet
-	bool setHomePlanet(string planet);
+	bool setHomePlanet(const std::string& planet);
 
 private:
-	// Main elements of the program
 	Navigator* navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observer* observatory;			// Manage observer position
+	Observer* observatory;				// Manage observer position
 	Projector* projection;				// Manage the projection mode and matrix
-	ToneReproducer* tone_converter;	// Tones conversion between stellarium world and display device
+	ToneReproducer* tone_converter;		// Tones conversion between stellarium world and display device
 	class MovementMgr* movementMgr;		// Manage vision movements
 };
 
