@@ -26,10 +26,6 @@
 #include "StelApp.hpp"
 #include "Translator.hpp"
 
-#if defined(MACOSX) && defined(XCODE)
-#include "StelConfig.h"
-#endif
-
 #ifdef HAVE_LIBCURL
  #include <curl/curl.h>
 #endif

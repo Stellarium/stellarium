@@ -18,6 +18,10 @@
 # endif 
 #endif
 
+#ifdef MACOSX
+#include "MacosxDirs.hpp"
+#endif
+
 #include "StelFileMgr.hpp"
 
 using namespace std;
@@ -334,7 +338,7 @@ const string StelFileMgr::getUserDir(void)
 		userDir = homeString + "/Stellarium";
 	}
 #elif defined(MACOSX)
-	userDir = getUserPreferencesDir();
+	userDir = QDir::homePath() + "/Library/Preferences/Stellarium";
 #else 
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
@@ -358,10 +362,15 @@ const string StelFileMgr::getInstallationDir(void)
 	if (QFileInfo(CHECK_FILE).exists())
 		return ".";
 
+#if defined(MACOSX)
+	QFileInfo installLocation( QString(MacosxDirs::getApplicationResourcesDirectory().c_str() ));
+	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
+#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
 	QFileInfo installLocation(INSTALL_DATADIR);
 	QFileInfo checkFile(INSTALL_DATADIR "/" CHECK_FILE);
+#endif
 
 	if (checkFile.exists())
 	{
