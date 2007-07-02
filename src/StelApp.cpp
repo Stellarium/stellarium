@@ -260,10 +260,9 @@ void StelApp::init()
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init(conf, lb);
-
+	
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
-	
 	StelCommandInterface* commander = new StelCommandInterface(core, this);
 	getModuleMgr().registerModule(commander);
 	
@@ -273,7 +272,6 @@ void StelApp::init()
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init(conf, lb);
 	getModuleMgr().registerModule(script_images);
-	
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init(conf, lb);
