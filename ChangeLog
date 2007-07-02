@@ -4,6 +4,7 @@ Fixed a grid RA labeling bug.
 Improved the plug-in managment.
 Fixed nebula names loading (bug #1740287)
 Recoded time methods based on Qt time function (this fixed bug #1740595, LANG=en_IN crash).
+Use the new Grid class by Guillaume Chereau for NebulaMgr.
 Made StelUI and StelCommandMgr real StelModules.
 Increased grid labeling brightness.
 Fixed splash screen flikering and logo image truncation in full screen mode.
