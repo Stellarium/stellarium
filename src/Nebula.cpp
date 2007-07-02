@@ -100,7 +100,8 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
 	
 	oss << _("Type: ") << getTypeString() << endl;
-	oss << _("Size: ") << StelUtils::radToDmsWstr(angular_size*M_PI/180.) << endl;
+	if (angular_size>0)
+		oss << _("Size: ") << StelUtils::radToDmsWstr(angular_size*M_PI/180.) << endl;
 	
 	return oss.str();
 }
@@ -157,7 +158,7 @@ Vec3f Nebula::getInfoColor(void) const
 
 double Nebula::getCloseViewFov(const Navigator*) const
 {
-	return angular_size * 180./M_PI * 4;
+	return angular_size * 4;
 }
 
 // Read nebula data from file and compute x,y and z;
@@ -202,9 +203,6 @@ bool Nebula::readTexture(const string& setName, const string& record)
 	// Calc the Cartesian coord with RA and DE
 	StelUtils::sphe_to_rect(RaRad,DecRad,XYZ);
 	XYZ*=RADIUS_NEB;
-
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
-	angular_size = tex_angular_size/2/60*M_PI/180;
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
@@ -315,7 +313,6 @@ bool Nebula::readNGC(char *recordstr)
 	float ramin;
 	int dedeg;
 	float demin;
-	float tex_angular_size;
 	int nb;
 
 	sscanf(&recordstr[1],"%d",&nb);
@@ -342,19 +339,19 @@ bool Nebula::readNGC(char *recordstr)
 	StelUtils::sphe_to_rect(RaRad,DecRad,XYZ);
 	XYZ*=Nebula::RADIUS_NEB;
 
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	sscanf(&recordstr[47],"%f",&mag);
 	if (mag < 1) mag = 99;
 
-	sscanf(&recordstr[40],"%f",&tex_angular_size);
-	if (tex_angular_size < 0)
-		tex_angular_size = 1;
-	if (tex_angular_size > 150)
-		tex_angular_size = 150;
+	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
+	float size;
+	sscanf(&recordstr[40],"%f",&size);
 
-	angular_size = tex_angular_size/2/60*M_PI/180;
+	angular_size = size/60;
+	
+	if (size < 0)
+		size = 1;
 
-	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproducer::mag_to_luminance(mag, size*size*3600);
 	if (luminance < 0)
 		luminance = .0075;
 
