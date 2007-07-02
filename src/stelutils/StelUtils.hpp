@@ -315,6 +315,7 @@ namespace StelUtils {
 	double qDateTimeToJd(const QDateTime& dateTime);
 
 	//! Convert a  julian day to a QT QDateTime class
+	//! Warning if JD < 0 the date is invalid (any date before 2 January 4713 B.C.)
 	//! @param the decimal Julian Day
 	//! @result the matching UTC QDateTime
 	QDateTime jdToQDateTime(double jd);
