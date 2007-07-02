@@ -67,7 +67,7 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 void StelSkyCultureMgr::init(const InitParser& conf)
 {
 	string tmp = conf.get_str("localization", "sky_culture", "western");
-	setSkyCultureDir(tmp);
+	skyCultureDir = tmp;
 }
 
 //! Set the current sky culture from the passed directory
