@@ -82,9 +82,7 @@ public:
 	enum S_TIME_FORMAT {S_TIME_24H,	S_TIME_12H,	S_TIME_SYSTEM_DEFAULT};
 	enum S_DATE_FORMAT {S_DATE_MMDDYYYY, S_DATE_DDMMYYYY, S_DATE_SYSTEM_DEFAULT, S_DATE_YYYYMMDD};
 	
-	wstring get_printable_date_UTC(double JD) const;
 	wstring get_printable_date_local(double JD) const;
-	wstring get_printable_time_UTC(double JD) const;
 	wstring get_printable_time_local(double JD) const;
 	
 	enum S_TZ_FORMAT
