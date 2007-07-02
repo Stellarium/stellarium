@@ -33,7 +33,7 @@
 #include "Projector.hpp"
 #include "InitParser.hpp"
 #include "MappingClasses.hpp"
-
+#include "StelApp.hpp"
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
@@ -63,8 +63,8 @@ void Projector::init(const InitParser& conf)
 	  projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	const bool maximized = (tmpstr=="maximized");
-	const int screen_w = conf.get_int("video:screen_w");
-	const int screen_h = conf.get_int("video:screen_h");
+	const int screen_w = StelApp::getInstance().getScreenW();
+	const int screen_h = StelApp::getInstance().getScreenH();
 	const int screen_min_wh = MY_MIN(screen_w,screen_h);
 	const int viewport_width
 	  = conf.get_int("projection","viewport_width",
@@ -1237,20 +1237,6 @@ void Projector::drawVertex3v(const Vec3d& v) const
 	glVertex3dv(win);
 }
 
-/*************************************************************************
- Generalisation of glVertex3v. This method assumes that the current openGL
- projection matrix is a perspective one.
- This method is supposed to handle lighting operations properly. 
-*************************************************************************/
-void Projector::drawVertex3vWithLight(const Vec3d& v) const
-{
-	Vec3d win,vv;
-	project(v, win);
-	
-	// Can be optimized by avoiding matrix inversion if it's always the same
-	gluUnProject(win[0],win[1],win[2],modelViewMatrix,projectionMatrix,viewport_xywh,&vv[0],&vv[1],&vv[2]);
-	glVertex3dv(vv);
-}
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
