@@ -91,8 +91,10 @@ public:
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
 	
-	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return angular_size * (180./M_PI)
-	                       * (prj->getViewportHeight()/prj->getFov());}
+	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
+	{
+		return angular_size * (prj->getViewportHeight()/prj->getFov());
+	}
 
 	//! Get the convex polygon matching the nebula image in J2000 frame
 	StelGeom::ConvexPolygon getConvexPolygon() {return StelGeom::ConvexPolygon(tex_quad_vertex[0], tex_quad_vertex[1], tex_quad_vertex[2], tex_quad_vertex[3]);}
@@ -113,7 +115,7 @@ private:
 	wstring nameI18;				// Nebula name
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
-	float angular_size;				// Angular size in radians
+	float angular_size;				// Angular size in degree
 	Vec3f XYZ;						// Cartesian equatorial position
 	Vec3d XY;						// Store temporary 2D position
 	nebula_type nType;

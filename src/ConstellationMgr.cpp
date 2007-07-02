@@ -79,10 +79,10 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
 	setFlagNames(		conf.get_boolean("viewing:flag_constellation_name"));
 	setFlagBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
-	setFlagArt(			conf.get_boolean("viewing:flag_constellation_art"));
-	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
 	setArtIntensity(	conf.get_double("viewing","constellation_art_intensity", 0.5));
 	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
+	setFlagArt(			conf.get_boolean("viewing:flag_constellation_art"));
+	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
