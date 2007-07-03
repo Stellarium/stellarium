@@ -66,6 +66,7 @@ class ScriptMgr : public StelModule
   bool get_gui_debug() { return gui_debug; }
   void set_removable_media_path(const string& path) { RemoveableScriptDirectory = path; };
   const string& get_removable_media_path(void) { return RemoveableScriptDirectory; };
+  const bool can_write_files(void) { return scripts_can_write_files; };
 
  private:
 
@@ -84,6 +85,7 @@ class ScriptMgr : public StelModule
   bool allow_ui;    // Allow user interface to function during scripts 
                     // (except for time related keys which control script playback)
   bool gui_debug;
+  bool scripts_can_write_files;
 };
 
 

@@ -38,10 +38,11 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(fals
 	recording = 0;
 	playing = 0;
 	record_elapsed_time = 0;
-
+	scripts_can_write_files = false;
 	// used when scripts are on a CD that needs to be mounted manually
 	RemoveableScriptDirectory = "";
 	RemoveableDirectoryMounted = 0;
+
 }
 
 ScriptMgr::~ScriptMgr() {
@@ -50,6 +51,7 @@ ScriptMgr::~ScriptMgr() {
 void ScriptMgr::init(const InitParser& conf, LoadingBar& lb)
 {
 	set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
+	scripts_can_write_files = conf.get_boolean("files","scripting_allow_write_files", false);
 }
 
 // path is used for loading script assets 
@@ -222,20 +224,16 @@ void ScriptMgr::cancel_record_script() {
 // note that waits can drift by up to 1/fps seconds
 void ScriptMgr::update(double delta_time) 
 {
-
-	if(recording) record_elapsed_time += (unsigned long int)delta_time;
+	if(recording) record_elapsed_time += (unsigned long int)(delta_time * 1000);
 
 	if(playing && !play_paused) 
 	{
-
-		elapsed_time += (unsigned long int) delta_time;  // time elapsed since last command (should have been) executed
-
+		// time elapsed since last command (should have been) executed
+		elapsed_time += (unsigned long int)(delta_time * 1000);  
+		
 		if(elapsed_time >= wait_time) 
 		{
 			// now time to run next command
-
-
-			//      cout << "dt " << delta_time << " et: " << elapsed_time << endl;
 			elapsed_time -= wait_time;
 			string comd;
 			unsigned long int wait;
