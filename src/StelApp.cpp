@@ -267,6 +267,7 @@ void StelApp::init()
 	getModuleMgr().registerModule(commander);
 	
 	ScriptMgr* scripts = new ScriptMgr(commander);
+	scripts->init(conf, lb);
 	getModuleMgr().registerModule(scripts);
 	
 	ImageMgr* script_images = new ImageMgr();
