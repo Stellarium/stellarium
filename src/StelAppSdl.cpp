@@ -445,22 +445,29 @@ void StelAppSdl::startMainLoop()
 	}
 }
 
-void StelAppSdl::saveScreenShot() const
+void StelAppSdl::saveScreenShot(const string& filePrefix, const string& saveDir) const
 {
 	string shotDir;
-	try
+	if (saveDir == "")
 	{
-		shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-		if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+		try
 		{
-			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+			{
+				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+				return;
+			}
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
 			return;
 		}
 	}
-	catch(exception& e)
+	else
 	{
-		cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
-		return;
+		shotDir = saveDir;
 	}
 
 #ifdef __x86_64__
@@ -474,7 +481,7 @@ void StelAppSdl::saveScreenShot() const
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+(string("stellarium-") + oss.str() + extension);
+		shotPath = shotDir+"/"+(filePrefix + oss.str() + extension);
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}

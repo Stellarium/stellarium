@@ -84,8 +84,13 @@ protected:
 	//! Initialize openGL screen
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 	
-	//! Save a screen shot in the StelFileMgr::getScreenshotDir()
-	virtual void saveScreenShot() const;
+	//! Save a screen shot.
+	//! The format of the file, and hence the filename extension 
+	//! depends on the architecture and build type.
+	//! @arg filePrefix changes the beginning of the file name
+	//! @arg shotDir changes the drectory where the screenshot is saved
+	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
+	virtual void saveScreenShot(const string& filePrefix="stellarium-", const string& saveDir="") const;
 	
 	//! Call this when you want to make the window (not) resizable
 	virtual void setResizable(bool resizable);

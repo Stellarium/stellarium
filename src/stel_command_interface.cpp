@@ -680,7 +680,18 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// 		  system( ( stcore->getDataDir() + "script_loadConfig " ).c_str() );
 		// 
 		// 	  } else status = 0;
+	} else if(command=="screenshot") {
+		if(args["prefix"]=="")
+		{
+			cerr << "ERROR: screenshot command must have prefix argument" << endl;
+			status = 0;
+		}
+		else
+		{
+			StelApp::getInstance().saveScreenShot(args["prefix"], args["dir"]);
+			status = 1;
 
+		}
 	} else {
 		debug_message = _("Unrecognized or malformed command name.");
 		status = 0;
