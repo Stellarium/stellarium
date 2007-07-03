@@ -201,8 +201,13 @@ public:
 	//! Return whether we are in fullscreen mode
 	virtual bool getFullScreen() const = 0;
 	
-	//! Save a screen shot to StelFileMgr::getScreenshotDir()
-	virtual void saveScreenShot() const =0;
+	//! Save a screen shot.
+	//! The format of the file, and hence the filename extension 
+	//! depends on the architecture and build type.
+	//! @arg filePrefix changes the beginning of the file name
+	//! @arg shotDir changes the drectory where the screenshot is saved
+	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
+	virtual void saveScreenShot(const string& filePrefix="stellarium-", const string& shotDir="") const =0;
 	
 protected:
 	//! Update all object according to the delta time

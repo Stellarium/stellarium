@@ -172,24 +172,31 @@ void StelAppQt4::startMainLoop()
 	app.exec();
 }
 
-void StelAppQt4::saveScreenShot() const
+void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir) const
 {
 	string shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
-	try
+	if (saveDir == "")
 	{
-		shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-		if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+		try
 		{
-			cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+			{
+				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+				return;
+			}
+		}
+		catch(exception& e)
+		{
+			cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
 			return;
 		}
 	}
-	catch(exception& e)
+	else
 	{
-		cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
-		return;
+		shotDir = saveDir;
 	}
 
 	string shotPath;
@@ -197,7 +204,7 @@ void StelAppQt4::saveScreenShot() const
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+(string("stellarium-") + oss.str() + ".bmp");
+		shotPath = shotDir+"/"+(filePrefix + oss.str() + ".bmp");
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
