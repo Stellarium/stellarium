@@ -134,7 +134,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else status = 0;
 
 	}  else if (command == "wait" && args["duration"]!="") {
-
+		cerr << "DEBUG waiting for " << args["duration"] << endl;
 		float fdelay = StelUtils::stringToDouble(args["duration"]);
 		if(fdelay > 0) wait = (int)(fdelay*1000);
 
@@ -681,16 +681,24 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// 
 		// 	  } else status = 0;
 	} else if(command=="screenshot") {
-		if(args["prefix"]=="")
+		if (!scripts->can_write_files())
 		{
-			cerr << "ERROR: screenshot command must have prefix argument" << endl;
-			status = 0;
+			debug_message = _("Scripting cannot write files (check setting files:scripts_can_write_files)");
+			status = 0;	
 		}
 		else
 		{
-			StelApp::getInstance().saveScreenShot(args["prefix"], args["dir"]);
-			status = 1;
+			if(args["prefix"]=="")
+			{
+				debug_message = _("mandatory argument \"prefix\" not specified");
+				status = 0;
+			}
+			else
+				{
+				StelApp::getInstance().saveScreenShot(args["prefix"], args["dir"]);
+				status = 1;
 
+			}
 		}
 	} else {
 		debug_message = _("Unrecognized or malformed command name.");
