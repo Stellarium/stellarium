@@ -396,6 +396,10 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				{
 					return true;
 				}
+				if (tex->internalFormat==-4)
+				{
+					return true;
+				}
 				// Unsupported format..
 				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
 				return false;
@@ -551,6 +555,15 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 		//cerr << "Resize to " << w << "x" << h << endl;
 		
 		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
+		if (texels2==NULL)
+		{
+			cerr << "Unsufficient memory for image data allocation: need to allocate array of " << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat << " bytes per pixels." << endl;
+			free(tex->texels);
+			tex->texels = NULL;
+			tex->loadState = ManagedSTexture::LOAD_ERROR;
+			return false;
+		}
+		
 		// Copy data into the power of two buffer
 		for (int j=0;j<tex->height;++j)
 		{
