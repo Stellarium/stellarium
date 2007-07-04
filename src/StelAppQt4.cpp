@@ -117,7 +117,7 @@ string StelAppQt4::getVideoModeList(void) const
 // Terminate the application
 void StelAppQt4::terminateApplication(void)
 {
-	exit(0);
+	QCoreApplication::quit();
 }
 
 // Set mouse cursor display
