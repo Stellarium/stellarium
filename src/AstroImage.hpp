@@ -55,10 +55,6 @@ public:
 	//! Set the texture for this image
 	void setTexture(STextureSP atex) {tex=atex;}
 
-	//! Get the loading status for the texture
-	//! @return true once the texture loading is over
-	bool getLoadStatus() const {return loadStatus;}
-
 	//! Get the path of the texture image file
 	//! @return the full path of the texture image file or an empty string if it is unknown
 	const std::string& getFullPath() const {return fullPath;}
@@ -71,9 +67,6 @@ private:
 	
 	// Position of the 4 corners of the texture in sky coordinates
 	const StelGeom::ConvexPolygon poly;
-	
-	// Is set to true once the texture loading is over. If at this point tex==NULL, there has been an error
-	bool loadStatus;
 	
 	// Full path to the image if a file exists
 	std::string fullPath;
