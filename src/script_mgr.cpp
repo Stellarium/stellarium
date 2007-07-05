@@ -50,8 +50,8 @@ ScriptMgr::~ScriptMgr() {
 
 void ScriptMgr::init(const InitParser& conf, LoadingBar& lb)
 {
-	set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
-	scripts_can_write_files = conf.get_boolean("files","scripting_allow_write_files", false);
+	set_allow_ui( conf.get_boolean("scripts","flag_script_allow_ui",0) );
+	scripts_can_write_files = conf.get_boolean("scripts","scripting_allow_write_files", false);
 }
 
 // path is used for loading script assets 
