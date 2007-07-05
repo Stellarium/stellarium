@@ -167,7 +167,8 @@ void StelApp::setViewPortDistorterType(const string &type)
 
 string StelApp::getViewPortDistorterType() const
 {
-	if (distorter) return distorter->getType();
+	if (distorter)
+            return distorter->getType();
 	return "none";
 }
 
