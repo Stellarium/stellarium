@@ -134,7 +134,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else status = 0;
 
 	}  else if (command == "wait" && args["duration"]!="") {
-		cerr << "DEBUG waiting for " << args["duration"] << endl;
 		float fdelay = StelUtils::stringToDouble(args["duration"]);
 		if(fdelay > 0) wait = (int)(fdelay*1000);
 
