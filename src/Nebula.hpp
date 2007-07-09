@@ -85,7 +85,6 @@ public:
     
 	//! @brief Get the printable nebula Type
 	//! @return the nebula type code.
-	//wstring getTypeString(void) const {return L"TODO";}
 	wstring getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
