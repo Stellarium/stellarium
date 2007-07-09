@@ -347,6 +347,8 @@ bool Nebula::readNGC(char *recordstr)
 	sscanf(&recordstr[40],"%f",&size);
 
 	angular_size = size/60;
+	if (angular_size<0)
+		angular_size=0;
 	
 	if (size < 0)
 		size = 1;

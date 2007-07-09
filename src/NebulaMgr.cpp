@@ -170,8 +170,8 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		float size = obj->getOnScreenSize(prj, nav);
-		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
+		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
 		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
 		prj->drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
