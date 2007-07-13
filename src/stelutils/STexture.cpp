@@ -23,7 +23,7 @@
 /*************************************************************************
  Constructor for the STexture class
 *************************************************************************/
-STexture::STexture() : texels(NULL), type(GL_UNSIGNED_BYTE)
+STexture::STexture() : texels(NULL), type(GL_UNSIGNED_BYTE), id(-1)
 {
 	texCoordinates[0].set(1., 0.);
 	texCoordinates[1].set(0., 0.);
@@ -40,6 +40,7 @@ STexture::~STexture()
 		delete texels;
 	texels = NULL;
 	glDeleteTextures(1, &id);
+//	std::cerr << "delete texture " << id << std::endl;
 }
 
 

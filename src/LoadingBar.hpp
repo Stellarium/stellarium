@@ -36,6 +36,7 @@ public:
 	virtual ~LoadingBar();
 	void SetMessage(wstring m) {message=m;}
 	void Draw(float val);
+	void setClearBuffer(bool b) {clearBuffer=b;}
 private:
 	wstring message;
 	Projector* prj;
@@ -46,6 +47,7 @@ private:
 	wstring extraText;
 	Vec2f extraTextPos;
 	double timeCounter;
+	bool clearBuffer;
 };
 
 #endif //_LOADINGBAR_H_

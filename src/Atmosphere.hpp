@@ -81,8 +81,6 @@ private:
 	};
 	GridPoint *grid;	// For Atmosphere calculation
 
-	int startY;			// intern variable used to store the Horizon Y screen value
-	
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
 	double eclipseFactor;

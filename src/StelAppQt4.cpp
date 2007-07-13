@@ -94,6 +94,7 @@ void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string i
 		QDesktopWidget* desktop = QApplication::desktop();
 		mainWindow->resize(desktop->screenGeometry(mainWindow).width(),desktop->screenGeometry(mainWindow).height());
 	}
+	
 }
 
 // Get the width of the openGL screen
@@ -161,6 +162,7 @@ void StelAppQt4::startMainLoop()
 
 	mainWin.show();
 	openGLWin.show();
+	
 	StelApp::init();
 	
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
