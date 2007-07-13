@@ -242,22 +242,23 @@ void StelApp::init()
 
 	// Initialize AFTER creation of openGL context
 	textureMgr->init(conf);
-
-	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	swapGLBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);
 	
 	maxfps = conf.get_double ("video","maximum_fps",10000);
 	minfps = conf.get_double ("video","minimum_fps",10000);
 
 	core->initProj(conf);
 
+	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	swapGLBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
 	              getScreenW(), getScreenH(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-
+	lb.setClearBuffer(true);	// Prevent flickering
+	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init(conf, lb);

@@ -349,21 +349,18 @@ void StelTextureMgr::update()
 	for (;iter!=loadQueue.end();++iter)
 	{
 		(*iter)->thread->wait();	// Ensure the thread is properly destroyed
-		
+		QMutexLocker locker((*iter)->outQueueMutex);
+		if ((*iter)->tex->loadState!=ManagedSTexture::LOAD_ERROR)
 		{
-			QMutexLocker locker((*iter)->outQueueMutex);
-			if ((*iter)->tex->loadState!=ManagedSTexture::LOAD_ERROR)
+			// Create openGL texture
+			if (glLoadTexture((*iter)->tex.get())==false)
 			{
-				// Create openGL texture
-				if (glLoadTexture((*iter)->tex.get())==false)
-				{
-					// There was an error while loading the texture to openGL
-					(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
-				}
+				// There was an error while loading the texture to openGL
+				(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
 			}
-			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
-			delete (*iter);
 		}
+		(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
+		delete (*iter);
 	}
 	loadQueue.clear();
 }
@@ -437,12 +434,12 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				int thresh = (int)(minQuantile*nbPix);
 				int minI = 0;
 				// Start from 1 to ignore zeroed region in the image
-				for (int id=1;id<1<<bitpix;++id)
+				for (int idd=1;idd<1<<bitpix;++idd)
 				{
-					minI+=histo[id];
+					minI+=histo[idd];
 					if (minI>=thresh)
 					{
-						minCut = id;
+						minCut = idd;
 						break;
 					}
 				}
@@ -450,12 +447,12 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				thresh = (int)((1.-maxQuantile)*nbPix);
 				int maxI = 0;
 				// Finish at 1 to ignore zeroed region in the image
-				for (int id=1<<bitpix;id>=1;--id)
+				for (int idd=1<<bitpix;idd>=1;--idd)
 				{
-					maxI+=histo[id];
+					maxI+=histo[idd];
 					if (maxI>=thresh)
 					{
-						maxCut = id;
+						maxCut = idd;
 						break;
 					}
 				}
@@ -620,7 +617,8 @@ bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
 	// generate texture
 	glGenTextures (1, &(tex->id));
 	glBindTexture (GL_TEXTURE_2D, tex->id);
-	
+//	cerr  << "Create texture " << tex->id << endl;
+
 	// setup some parameters for texture filters and mipmapping
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, tex->minFilter);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex->magFilter);
