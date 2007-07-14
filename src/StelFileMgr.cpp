@@ -331,7 +331,7 @@ const string StelFileMgr::getUserDir(void)
 		// This case happens in Win98 with no user profiles.  In this case
 		// We don't want to bother with a separate user dir - we just 
 		// return the install directory.
-		userDir = getInstallationDir();
+		userDir = QString::fromStdString(getInstallationDir());
 	}
 	else
 	{
