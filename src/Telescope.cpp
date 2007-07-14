@@ -24,8 +24,9 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-
 #include <math.h>
+
+#include <QTextStream>
 
 #ifdef WIN32
   #include <windows.h> // GetSystemTimeAsFileTime
@@ -219,10 +220,9 @@ Telescope *Telescope::create(const string &url) {
 }
 
 
-Telescope::Telescope(const string &name) : name(name) {
-  std::wostringstream oss;
-  oss << name.c_str();
-  nameI18n = oss.str();
+Telescope::Telescope(const string &name) : name(name)
+{
+	nameI18n = StelUtils::stringToWstring(name);
 }
 
 wstring Telescope::getInfoString(const Navigator *nav) const {
@@ -232,15 +232,16 @@ wstring Telescope::getInfoString(const Navigator *nav) const {
   const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
   double dec_equ, ra_equ;
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
-  std::wostringstream oss;
-  oss << nameI18n << endl
-      << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_j2000,false)
-      << L"/" << StelUtils::radToDmsWstr(dec_j2000,false) << endl
-      << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_equ)
-      << L"/" << StelUtils::radToDmsWstr(dec_equ);
-  return oss.str();
+  QString str;
+  QTextStream oss(&str);
+  oss << QString::fromStdWString(nameI18n) << endl
+      << q_("J2000") << " " << q_("RA/DE: ")
+		  << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,false))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,false)) << endl
+      << q_("Equ of date") << " " << q_("RA/DE: ")
+		  << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ));
+  return str.toStdWString();
 }
 
 wstring Telescope::getShortInfoString(const Navigator*) const {

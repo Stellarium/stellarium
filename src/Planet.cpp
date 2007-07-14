@@ -21,6 +21,8 @@
 #include <sstream>
 #include <iomanip>
 
+#include <QTextStream>
+
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
 #include "STexture.hpp"
@@ -96,31 +98,37 @@ Planet::~Planet()
 wstring Planet::getInfoString(const Navigator * nav) const
 {
 	double tempDE, tempRA;
-	wostringstream oss;
+	
+	QString str;
+	QTextStream oss(&str);
 
-	oss << _(englishName);  // UI translation can differ from sky translation
-	oss.setf(ios::fixed);
-	oss.precision(1);
-	if (sphere_scale != 1.f) oss << L" (x" << sphere_scale << L")";
+	oss << q_(englishName);  // UI translation can differ from sky translation
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphere_scale != 1.f)
+		oss << " (x" << sphere_scale << ")";
 	oss << endl;
 
-	oss.precision(2);
-	oss << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos()) << endl;
+	oss.setRealNumberPrecision(2);
+	oss << q_("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos()) << endl;
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
-	oss << _("RA/DE: ") << StelUtils::radToHmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
+	oss << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(tempRA)) << "/" 
+			<< QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
 	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-	if(tempRA > M_PI*2) tempRA -= M_PI*2;
-	oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
+	if(tempRA > M_PI*2)
+		tempRA -= M_PI*2;
+	oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(tempRA)) << "/"
+			<< QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
 
-	oss.precision(8);
-	oss << _("Distance: ") << equPos.length() << _("AU") << endl;
+	oss.setRealNumberPrecision(8);
+	oss << q_("Distance: ") << equPos.length() << q_("AU") << endl;
 	
-	return oss.str();
+	return str.toStdWString();
 }
 
 //! Get sky label (sky translation)
@@ -142,22 +150,24 @@ wstring Planet::getSkyLabel(const Navigator * nav) const
 // Return the information string "ready to print" :)
 wstring Planet::getShortInfoString(const Navigator * nav) const
 {
-	wostringstream oss;
+	QString str;
+	QTextStream oss(&str);
 
-	oss << _(englishName);  // UI translation can differ from sky translation
+	oss << q_(englishName);  // UI translation can differ from sky translation
 
-	oss.setf(ios::fixed);
-	oss.precision(1);
-	if (sphere_scale != 1.f) oss << L" (x" << sphere_scale << L")";
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphere_scale != 1.f)
+		oss << " (x" << sphere_scale << ")";
 
-	oss.precision(2);
-	oss << L"  " << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos());
+	oss.setRealNumberPrecision(2);
+	oss << "  " << q_("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos());
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
-	oss.precision(5);
-	oss << L"  " <<  _("Distance: ") << equPos.length() << _("AU");
+	oss.setRealNumberPrecision(5);
+	oss << "  " << q_("Distance: ") << equPos.length() << q_("AU");
 
-	return oss.str();
+	return str.toStdWString();
 }
 
 float Planet::getSelectPriority(const Navigator *nav) const

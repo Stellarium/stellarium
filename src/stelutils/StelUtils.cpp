@@ -44,7 +44,9 @@
 #include "vecmath.h"
 #include "GLee.h"
 
+#include "fixx11h.h"
 #include <QString>
+#include <QTextStream>
 
 namespace StelUtils {
 
@@ -61,23 +63,17 @@ string wstringToString(const wstring& ws)
 
 wstring doubleToWstring(double d)
 {
-	std::wostringstream woss;
-	woss << d;
-	return woss.str();
+	return QString::number(d).toStdWString();
 }
 
 wstring intToWstring(int i)
 {
-	std::wostringstream woss;
-	woss << i;
-	return woss.str();
+	return QString::number(i).toStdWString();
 }
 
 string intToString(int i)
 {
-	std::ostringstream oss;
-	oss << i;
-	return oss.str();
+	return QString::number(i).toStdString();
 }
 
 double hmsToRad(unsigned int h, unsigned int m, double s )
@@ -222,28 +218,33 @@ string radToDmsStrAdapt(double angle)
 *************************************************************************/
 wstring radToDmsWstrAdapt(double angle, bool useD)
 {
-	wchar_t degsign = L'\u00B0';
-	if (useD) degsign = L'd';
+	QString degsign('d');
+	if (!useD)
+	{
+		const wchar_t degsignw = L'\u00B0';
+		degsign = QString::fromWCharArray(&degsignw, 1);
+	}
 	bool sign;
 	unsigned int d,m;
 	double s;
 	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	wostringstream os;
+	QString str;
+	QTextStream os(&str);
 	
-	os << (sign?L'+':L'-') << d << degsign;
+	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << L'\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill(L'0') << s << L'\"';
+		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << '\"';
 	}
 	else if ((int)s!=0)
 	{
-		os << m << L'\'' << (int)s << L'\"';
+		os << m << '\'' << (int)s << '\"';
 	}
 	else if (m!=0)
 	{
-		os << m << L'\'';
+		os << m << '\'';
 	}
-	return os.str();
+	return str.toStdWString();
 }
 
 /*************************************************************************
@@ -275,23 +276,27 @@ string radToDmsStr(double angle, bool decimal)
 *************************************************************************/
 wstring radToDmsWstr(double angle, bool decimal, bool useD)
 {
-	wchar_t degsign = L'\u00B0';
-	if (useD) degsign = L'd';
+	QString degsign('d');
+	if (!useD)
+	{
+		const wchar_t degsignw = L'\u00B0';
+		degsign = QString::fromWCharArray(&degsignw, 1);
+	}
 	bool sign;
 	unsigned int d,m;
 	double s;
 	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	wostringstream os;
-	
-	os << (sign?L'+':L'-') << d << degsign;
+	QString str;
+	QTextStream os(&str);
+	os << (sign?'+':'-') << d << degsign;
 	
 	if (decimal)
-		os << std::setprecision(1) << std::setw(4);
+		os << qSetRealNumberPrecision(1) << qSetFieldWidth(4);
 	else
-		os << std::setprecision(0) << std::setw(2);
+		os << qSetRealNumberPrecision(0) << qSetFieldWidth(2);
 		
-	os << m << L'\'' << std::fixed << std::setfill(L'0') << s << L'\"';
-	return os.str();
+	os << m << '\'' << fixed << qSetPadChar('0') << s << '\"';
+	return str.toStdWString();
 }
 
 /*************************************************************************
