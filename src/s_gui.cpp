@@ -20,6 +20,8 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <QTextStream>
+
 #include "s_gui.h"
 #include "StelUtils.hpp"
 #include "STexture.hpp"
@@ -1693,11 +1695,11 @@ void ListBox::addItems(const vector<wstring> _items)
 
 void ListBox::addItemList(const wstring& s)
 {
-	wistringstream is(s);
-	wstring elem;
-	while(getline(is, elem))
+	QTextStream is(QString::fromStdWString(s).toUtf8());
+	while(!is.atEnd())
 	{
-		addItem(elem);
+		QString elem = is.readLine();
+		addItem(elem.toStdWString());
 	}
 }
 
@@ -1852,21 +1854,22 @@ void TextLabel::setLabel(const wstring& _label)
     childs.clear();
 
     Label * tempLabel;
-    wstring pch;
 
     unsigned int i = 0;
 	unsigned int lineHeight = (int)painter.getFont()->getLineHeight()+1;
 
-	wistringstream is(label);
-    while (getline(is, pch))
-    {
-        tempLabel = new Label();
+	QTextStream is(QString::fromStdWString(label).toUtf8());
+	is.reset();
+	while(!is.atEnd())
+	{
+		tempLabel = new Label();
 		tempLabel->setPainter(painter);
-        tempLabel->setLabel(pch);
-        tempLabel->setPos(0,i*lineHeight);
-        addComponent(tempLabel);
-        i++;
-    }
+		QString elem = is.readLine();
+		tempLabel->setLabel(elem.toStdWString());
+		tempLabel->setPos(0,i*lineHeight);
+		addComponent(tempLabel);
+		++i;
+	}
     adjustSize();
 }
 
