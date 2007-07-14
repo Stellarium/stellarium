@@ -7,7 +7,7 @@ WizardImageFile=data\splash.bmp
 WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
-AppVerName=Stellarium 0.9.0
+AppVerName=Stellarium 0.9.1
 DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\stellarium.exe
@@ -15,7 +15,7 @@ LicenseFile=COPYING
 Compression=zip/9
 
 [Files]
-Source: "build\msys\Stellarium-0.9.0-win32\bin\stellarium.exe"; DestDir: "{app}"
+Source: "build\msys\Stellarium-0.9.1-win32\bin\stellarium.exe"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
@@ -25,7 +25,6 @@ Source: "ChangeLog"; DestDir: "{app}";
 Source: "libpng13.dll"; DestDir: "{app}";
 Source: "zlib1.dll"; DestDir: "{app}";
 Source: "mingwm10.dll"; DestDir: "{app}";
-Source: "libstlport.5.0.dll"; DestDir: "{app}";
 Source: "freetype6.dll"; DestDir: "{app}";
 Source: "jpeg62.dll"; DestDir: "{app}";
 Source: "intl.dll"; DestDir: "{app}";
@@ -33,9 +32,9 @@ Source: "iconv.dll"; DestDir: "{app}";
 Source: "QtCore4.dll"; DestDir: "{app}";
 Source: "QtGui4.dll"; DestDir: "{app}";
 Source: "QtOpenGL4.dll"; DestDir: "{app}";
-Source: "build\msys\Stellarium-0.9.0-win32\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
+Source: "build\msys\Stellarium-0.9.1-win32\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
-Source: "build\msys\Stellarium-0.9.0-win32\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
+Source: "build\msys\Stellarium-0.9.1-win32\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
 [UninstallDelete]
 
