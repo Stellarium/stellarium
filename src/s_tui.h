@@ -38,6 +38,9 @@
 #include <iostream>
 #include <sstream>
 
+#include "fixx11h.h"
+#include <QTextStream>
+
 #include "vecmath.h"
 #include "callbacks.hpp"
 
@@ -342,11 +345,12 @@ namespace s_tui
 		}
 		void addItemList(const wstring& s)
 		{
-			std::wistringstream is(s);
+			QTextStream is(QString::fromStdWString(s).toUtf8());
 			T elem;
-			while(getline(is, elem))
+			while(!is.atEnd())
 			{
-				addItem(elem);
+				QString elem = is.readLine();
+				addItem(elem.toStdWString());
 			}
 		}
 		void replaceItemList(wstring s, int selection)
@@ -439,11 +443,13 @@ namespace s_tui
 		}
 		void addItemList(wstring s)  // newline delimited, key and value alternate
 		{
-			wistringstream is(s);
+			QTextStream is(QString::fromStdWString(s).toUtf8());
 			T key, value;
-			while(getline(is, key) && getline(is, value))
+			while(!is.atEnd())
 			{
-				addItem(key, value);
+				QString key = is.readLine();
+				QString value = is.readLine();
+				addItem(key.toStdWString(),value.toStdWString());
 			}
 		}
 		void replaceItemList(wstring s, int selection)

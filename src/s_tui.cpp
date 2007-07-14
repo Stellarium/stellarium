@@ -379,8 +379,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 		if (k==StelKey_RETURN)
 		{
 			numInput=false;
-			wistringstream is(strInput);
-			is >> value;
+			value = QString::fromStdWString(strInput).toInt();
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -389,8 +388,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 
 		if (k==StelKey_UP)
 		{
-			wistringstream is(strInput);
-			is >> value;
+			value = QString::fromStdWString(strInput).toInt();
 			++value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
@@ -399,8 +397,7 @@ bool Integer_item::onKey(Uint16 k, Uint8 v)
 		}
 		if (k==StelKey_DOWN)
 		{
-			wistringstream is(strInput);
-			is >> value;
+			value = QString::fromStdWString(strInput).toInt();
 			--value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
@@ -480,8 +477,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 		if (k==StelKey_RETURN || k==StelKey_LEFT)
 		{
 			numInput=false;
-			wistringstream is(strInput);
-			is >> value;
+			value = QString::fromStdWString(strInput).toDouble();
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -490,8 +486,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 
 		if (k==StelKey_UP)
 		{
-			wistringstream is(strInput);
-			is >> value;
+			value = QString::fromStdWString(strInput).toDouble();
 			value+=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
@@ -500,8 +495,7 @@ bool Decimal_item::onKey(Uint16 k, Uint8 v)
 		}
 		if (k==StelKey_DOWN)
 		{
-			wistringstream wistemp(strInput);
-			wistemp >> value;
+			value = QString::fromStdWString(strInput).toDouble();
 			value-=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
