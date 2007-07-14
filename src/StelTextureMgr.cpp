@@ -156,7 +156,7 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
 {
 	ManagedSTextureSP tex(new ManagedSTexture());
 	// Set parameters than can be set for this texture
-	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
+	tex->minFilter = ((mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter);
 	tex->magFilter = magFilter;
 	tex->wrapMode = wrapMode;
 	tex->fullPath = fullPath;

@@ -27,6 +27,7 @@
 // class used to manage groups of Stars
 
 #include <config.h>
+#include <QTextStream>
 
 #include "Projector.hpp"
 #include "StarMgr.hpp"
@@ -795,38 +796,35 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
   double dec_equ, ra_equ;
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
-  wostringstream oss;
-  oss.setf(ios::fixed);
-  oss.precision(2);
-  oss << _("Magnitude: ") << getMagnitude(nav)
-      << " B-V: " << getBV()
-      << endl;
-  oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_j2000,true)
-      << L"/" << StelUtils::radToDmsWstr(dec_j2000,true) << endl;
-  oss << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_equ)
-      << L"/" << StelUtils::radToDmsWstr(dec_equ) << endl;
+  QString str;
+  QTextStream oss(&str);
+  oss.setRealNumberNotation(QTextStream::FixedNotation);
+  oss.setRealNumberPrecision(2);
+  oss << q_("Magnitude: ") << getMagnitude(nav) << " B-V: " << getBV() << endl;
+  oss << q_("J2000") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,true))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,true)) << endl;
+  oss << q_("Equ of date") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ)) << endl;
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(az)
-      << L"/" << StelUtils::radToDmsWstr(alt) << endl;
-  oss.precision(2);
+  oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(az))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(alt)) << endl;
   
-  return oss.str();
+  return str.toStdWString();
 }
 
-wstring StarWrapperBase::getShortInfoString(const Navigator *nav) const {
-	wostringstream oss;
-	oss.setf(ios::fixed);
-	oss.precision(2);
-	oss << _("Magnitude: ") << getMagnitude(nav);
-
-	return oss.str();
+wstring StarWrapperBase::getShortInfoString(const Navigator *nav) const
+{
+	QString str;
+	QTextStream oss(&str);
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(2);
+	oss << q_("Magnitude: ") << getMagnitude(nav);
+	return str.toStdWString();
 }
 
 
@@ -957,12 +955,15 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 }
 
 
-wstring StarWrapper1::getShortInfoString(const Navigator *nav) const {
+wstring StarWrapper1::getShortInfoString(const Navigator *nav) const
+{
 	wostringstream oss;
-	if (s->hip) {
+	if (s->hip)
+	{
 		const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
 		const wstring sciName = StarMgr::getSciName(s->hip);
-		if (commonNameI18!=L"" || sciName!=L"") {
+		if (commonNameI18!=L"" || sciName!=L"")
+		{
 			oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
 			if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
 			oss << wstring(sciName==L"" ? L"" : sciName);
@@ -970,9 +971,9 @@ wstring StarWrapper1::getShortInfoString(const Navigator *nav) const {
 			oss << L"  ";
 		}
 		oss << L"HP " << s->hip;
-		if (s->component_ids) {
-			oss << L" "
-				<< convertToComponentIds(s->component_ids).c_str();
+		if (s->component_ids)
+		{
+			oss << L" " << convertToComponentIds(s->component_ids).c_str();
 		}
 		oss << L"  ";
 	}
