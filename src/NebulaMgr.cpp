@@ -402,7 +402,7 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 	}
 	fclose(ngcFile);
 	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-    printf("Grid depth = %d\n", nebGrid.depth());
+    //printf("Grid depth = %d\n", nebGrid.depth());
 	return true;
 }
 
