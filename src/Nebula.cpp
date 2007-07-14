@@ -19,6 +19,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <QTextStream>
+
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "STexture.hpp"
@@ -60,22 +62,24 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
 
-	wostringstream oss;
+	QString str;
+	QTextStream oss(&str);
 	if (nameI18!=L"")
 	{
-		oss << nameI18 << L" (";
+		oss << QString::fromStdWString(nameI18);
+		oss << " (";
 	}
 	if ((M_nb > 0) && (M_nb < 111))
 	{
-		oss << L"M " << M_nb << L" - ";
+		oss << "M " << M_nb << " - ";
 	}
 	if (NGC_nb > 0)
 	{
-		oss << L"NGC " << NGC_nb;
+		oss << "NGC " << NGC_nb;
 	}
 	if (IC_nb > 0)
 	{
-		oss << L"IC " << IC_nb;
+		oss << "IC " << IC_nb;
 	}
 	/*if (UGC_nb > 0)
 	{
@@ -83,38 +87,40 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	}*/
 	if (nameI18!=L"")
 	{
-		oss << L")";
+		oss << ")";
 	}
 	oss << endl;
+
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(2);
+	oss << q_("Magnitude: ") << mag << endl;	
 	
-	oss.setf(ios::fixed);
-	oss.precision(2);
-	oss << _("Magnitude: ") << mag << endl;	
-	
-	oss << _("RA/DE: ") << StelUtils::radToHmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
+	oss << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(tempRA)) << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(tempRA) << L"/" << StelUtils::radToDmsWstr(tempDE) << endl;
+	oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(tempRA)) << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
 	
-	oss << _("Type: ") << getTypeString() << endl;
+	oss << q_("Type: ") << QString::fromStdWString(getTypeString()) << endl;
 	if (angular_size>0)
-		oss << _("Size: ") << StelUtils::radToDmsWstr(angular_size*M_PI/180.) << endl;
+		oss << q_("Size: ") << QString::fromStdWString(StelUtils::radToDmsWstr(angular_size*M_PI/180.)) << endl;
 	
-	return oss.str();
+	return str.toStdWString();
 }
 
 wstring Nebula::getShortInfoString(const Navigator*) const
 {
 	if (nameI18!=L"")
 	{
-		wostringstream oss;
-		oss << nameI18 << L"  ";
-		if (mag < 99) oss << _("Magnitude: ") << mag;
+		QString str;
+		QTextStream oss(&str);
+		oss << QString::fromStdWString(nameI18) << L"  ";
+		if (mag < 99)
+			oss << q_("Magnitude: ") << mag;
 		
-		return oss.str();
+		return str.toStdWString();
 	}
 	else
 	{
@@ -207,7 +213,7 @@ bool Nebula::readTexture(const string& setName, const string& record)
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, false);
-
+	
 	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
 

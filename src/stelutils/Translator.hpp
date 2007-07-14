@@ -27,10 +27,12 @@
 #include <map>
 #include <vector>
 #include "StelUtils.hpp"
+#include <QString>
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
 #define _(String) Translator::globalTranslator.translate( gettext_noop(String) ).c_str()
+#define q_(String) Translator::globalTranslator.qtranslate( gettext_noop(String) )
 #define N_(String) gettext_noop(String)
 
 using namespace std;
@@ -72,8 +74,18 @@ public:
 	//! @return The translated string in wide characters.
 	std::wstring translate(const std::string& s)
 	{
-		if (s=="") return L"";
+		if (s.empty()) return L"";
 		return StelUtils::stringToWstring(translateUTF8(s));
+	}
+	
+	//! @brief Translate input message and return it as a QString.
+	//! @param s input string in english.
+	//! @return The translated QString
+	QString qtranslate(const std::string& s)
+	{
+		if (s.empty()) return QString();
+		reload();
+		return QString::fromUtf8(gettext(s.c_str()));
 	}
 	
 	//! @brief Get true translator locale name. Actual locale, never "system" 

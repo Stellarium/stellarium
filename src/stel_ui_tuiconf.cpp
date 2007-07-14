@@ -44,6 +44,7 @@
 #include "Observer.hpp"
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
+#include <QTextStream>
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -61,20 +62,27 @@ void StelUI::draw_gravity_ui(void)
 	if (FlagShowTuiDateTime)
 	{
 		double jd = core->getNavigation()->getJDay();
-		wostringstream os;
+		
+		QString str;
+		QTextStream os(&str);
 
-		os << app->getLocaleMgr().get_printable_date_local(jd) << L" " << app->getLocaleMgr().get_printable_time_local(jd);
+		os << QString::fromStdWString(app->getLocaleMgr().get_printable_date_local(jd) + L" " + app->getLocaleMgr().get_printable_time_local(jd));
 
 		// label location if not on earth
 		if(core->getObservatory()->getHomePlanetEnglishName() != "Earth") {
-			os << L" " << _(core->getObservatory()->getHomePlanetEnglishName());
+			os << " ";
+			os << q_(core->getObservatory()->getHomePlanetEnglishName());
 		}
 
-		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getProjection()->getFov();
-		if (FlagShowFps) os << L"  FPS " << app->getFps();
+		if (FlagShowFov)
+		{
+			os.setRealNumberPrecision(3);
+			os << " fov " << core->getProjection()->getFov();
+		}
+		if (FlagShowFps) os << "  FPS " << app->getFps();
 
 		glColor3f(0.5,1,0.5);
-		core->getProjection()->drawText(tuiFont, x - shift + 38, y - 38, os.str(), 0, 0, 0, false);
+		core->getProjection()->drawText(tuiFont, x - shift + 38, y - 38, str.toStdWString(), 0, 0, 0, false);
 	}
 
 	if (app->getStelObjectMgr().getWasSelected() && FlagShowTuiShortObjInfo)

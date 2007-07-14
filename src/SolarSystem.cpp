@@ -38,6 +38,8 @@
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
 
+#include <QTextStream>
+
 using namespace std;
 
 SolarSystem::SolarSystem()
@@ -803,23 +805,21 @@ vector<wstring> SolarSystem::getNamesI18(void)
 // Planet translated name is PARENT : NAME
 wstring SolarSystem::getPlanetHashString(void)
 {
-	wostringstream oss;
-	vector < Planet * >::iterator iter;
-
-	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter) {
-		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun") {
-			   oss << Translator::globalTranslator.translate((*iter)->get_parent()->getEnglishName()) 
-				   << L" : ";
+	QString str;
+	QTextStream oss(&str);
+	
+	vector <Planet *>::iterator iter;
+	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+	{
+		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun")
+		{
+			oss << q_((*iter)->get_parent()->getEnglishName()) << " : ";
 		}
 		
-		oss << Translator::globalTranslator.translate((*iter)->getEnglishName()) << L"\n";
-		oss << StelUtils::stringToWstring((*iter)->getEnglishName()) << L"\n";
+		oss << q_((*iter)->getEnglishName()) << endl;
+		oss << (*iter)->getEnglishName().c_str() << endl;
 	}
-		
-	// wcout <<  oss.str();
-
-	return oss.str();
-
+	return str.toStdWString();
 }
 
 

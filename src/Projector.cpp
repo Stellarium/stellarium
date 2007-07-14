@@ -137,7 +137,7 @@ void Projector::init(const InitParser& conf)
 	initFov	= conf.get_double ("navigation","init_fov",60.);
 	setFov(initFov);
 
-	glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
+	//glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 
 	flagGlPointSprite = conf.get_boolean("projection","flag_use_gl_point_sprite",false);
 	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
@@ -146,7 +146,7 @@ void Projector::init(const InitParser& conf)
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
 		glEnable(GL_POINT_SPRITE_ARB);
 		glEnable(GL_POINT_SMOOTH);
-		cerr << "INFO: using GL_ARB_point_sprite" << endl;
+		cout << "INFO: using GL_ARB_point_sprite" << endl;
 	} else {
 		//cerr << "WARNING: GL_ARB_point_sprite not available" << endl;
 	}
