@@ -893,111 +893,102 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
   double dec_equ, ra_equ;
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
-  wostringstream oss;
-  if (s->hip) {
+  QString str;
+  QTextStream oss(&str);
+  if (s->hip)
+  {
     const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
     const wstring sciName = StarMgr::getSciName(s->hip);
-    if (commonNameI18!=L"" || sciName!=L"") {
-      oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
-      if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
-      oss << wstring(sciName==L"" ? L"" : sciName);
-      if (commonNameI18!=L"" && sciName!=L"") oss << L")";
-      oss << endl;
+    if (commonNameI18!=L"" || sciName!=L"")
+	{
+		oss << QString::fromStdWString(commonNameI18) << (commonNameI18 == L"" ? "" : " ");
+		if (commonNameI18!=L"" && sciName!=L"") oss << "(";
+		oss << (sciName==L"" ? "" : QString::fromStdWString(sciName));
+		if (commonNameI18!=L"" && sciName!=L"") oss << ")";
+		oss << endl;
     }
-    oss << L"HP " << s->hip;
-    if (s->component_ids) {
-      oss << L" "
-          << convertToComponentIds(s->component_ids).c_str();
+    oss << "HP " << s->hip;
+    if (s->component_ids)
+	{
+		oss << " " << convertToComponentIds(s->component_ids).c_str();
     }
     oss << endl;
   }
 
-  oss.setf(ios::fixed);
-  oss.precision(2);
-  oss << _("Magnitude: ") << getMagnitude(nav)
-      << " B-V: " << s->getBV()
-      << endl;
-  oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_j2000,true)
-      << L"/" << StelUtils::radToDmsWstr(dec_j2000,true) << endl;
-///  oss << "Motion J2000: " << s->dx0 << '/' << s->dx1 << endl;
-
-
-  oss << _("Equ of date") << L" " << _("RA/DE: ")
-      << StelUtils::radToHmsWstr(ra_equ)
-      << L"/" << StelUtils::radToDmsWstr(dec_equ) << endl;
+  oss.setRealNumberNotation(QTextStream::FixedNotation);
+  oss.setRealNumberPrecision(2);
+  oss << q_("Magnitude: ") << getMagnitude(nav) << " B-V: " << s->getBV() << endl;
+  oss << q_("J2000") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,true))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,true)) << endl;
+  
+  oss << q_("Equ of date") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ)) << endl;
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
-  if(az > M_PI*2) az -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtils::radToDmsWstr(az)
-      << L"/" << StelUtils::radToDmsWstr(alt) << endl;
+  if (az > M_PI*2)
+	  az -= M_PI*2;    
+  oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(az))
+		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(alt)) << endl;
 
-  if (s->plx) {
-    oss.precision(5);
-    oss << _("Parallax: ") << (0.00001*s->plx) << endl;
-    oss.precision(2);
-    oss << _("Distance: ")
-        << (AU/(SPEED_OF_LIGHT*86400*365.25))
-                       / (s->plx*((0.00001/3600)*(M_PI/180)))
-        << _(" Light Years") << endl;
+  if (s->plx)
+  {
+		oss.setRealNumberPrecision(5);
+		oss << q_("Parallax: ") << (0.00001*s->plx) << endl;
+		oss.setRealNumberPrecision(2);
+		oss << q_("Distance: ") << (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180)))
+        << q_(" Light Years") << endl;
   }
 
-  if (s->sp_int) {
-    oss << _("Spectral Type: ")
-        << convertToSpectralType(s->sp_int).c_str() << endl;
+  if (s->sp_int)
+  {
+    oss << q_("Spectral Type: ") << convertToSpectralType(s->sp_int).c_str() << endl;
   }
-  oss.precision(2);
-
-  return oss.str();
+  return str.toStdWString();
 }
 
 
 wstring StarWrapper1::getShortInfoString(const Navigator *nav) const
 {
-	wostringstream oss;
+	QString str;
+	QTextStream oss(&str);
 	if (s->hip)
 	{
 		const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
 		const wstring sciName = StarMgr::getSciName(s->hip);
 		if (commonNameI18!=L"" || sciName!=L"")
 		{
-			oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
-			if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
-			oss << wstring(sciName==L"" ? L"" : sciName);
-			if (commonNameI18!=L"" && sciName!=L"") oss << L")";
-			oss << L"  ";
+			oss << QString::fromStdWString(commonNameI18) << (commonNameI18 == L"" ? "" : " ");
+			if (commonNameI18!=L"" && sciName!=L"") oss << "(";
+			oss << (sciName==L"" ? "" : QString::fromStdWString(sciName));
+			if (commonNameI18!=L"" && sciName!=L"") oss << ")";
+			oss << "  ";
 		}
-		oss << L"HP " << s->hip;
+		oss << "HP " << s->hip;
 		if (s->component_ids)
 		{
-			oss << L" " << convertToComponentIds(s->component_ids).c_str();
+			oss << " " << convertToComponentIds(s->component_ids).c_str();
 		}
-		oss << L"  ";
+		oss << "  ";
 	}
 	
-	oss.setf(ios::fixed);
-	oss.precision(2);
-	oss << _("Magnitude: ") << getMagnitude(nav);
-	oss << L"  ";
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(2);
+	oss << q_("Magnitude: ") << getMagnitude(nav) << "  ";
 
-	if (s->plx) {
-		oss.precision(2);
-		oss << _("Distance: ")
-			<< (AU/(SPEED_OF_LIGHT*86400*365.25))
-			/ (s->plx*((0.00001/3600)*(M_PI/180)))
-			<< _(" Light Years") << L"  ";
+	if (s->plx)
+	{
+		oss << q_("Distance: ") << (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180)))
+			<< q_(" Light Years") << "  ";
 	}
 	
-	if (s->sp_int) {
-		oss << _("Spectral Type: ")
-			<< convertToSpectralType(s->sp_int).c_str();
+	if (s->sp_int)
+	{
+		oss << q_("Spectral Type: ") << convertToSpectralType(s->sp_int).c_str();
 	}
-	oss.precision(2);
-	
-	return oss.str();
+	return str.toStdWString();
 }
 
 

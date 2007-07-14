@@ -66,8 +66,7 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	QTextStream oss(&str);
 	if (nameI18!=L"")
 	{
-		oss << QString::fromStdWString(nameI18);
-		oss << " (";
+		oss << QString::fromStdWString(nameI18) << " (";
 	}
 	if ((M_nb > 0) && (M_nb < 111))
 	{
