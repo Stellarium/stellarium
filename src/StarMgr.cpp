@@ -53,7 +53,10 @@
 #include <string>
 #include <list>
 
+#ifndef WIN32
 #include <sys/mman.h>
+#endif
+
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
@@ -1303,7 +1306,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
           }
         }
 #else
-        HANDLE file_handle = _get_osfhandle(_fileno(f));
+        HANDLE file_handle = (void*)_get_osfhandle(_fileno(f));
         if (file_handle == INVALID_HANDLE_VALUE) {
           cerr << "ERROR: SpecialZoneArray(" << level
                << ")::SpecialZoneArray: "

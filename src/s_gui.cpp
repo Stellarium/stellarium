@@ -21,6 +21,7 @@
 #include <sstream>
 #include <fstream>
 #include <QTextStream>
+#include <QStringList>
 
 #include "s_gui.h"
 #include "StelUtils.hpp"
@@ -1695,11 +1696,11 @@ void ListBox::addItems(const vector<wstring> _items)
 
 void ListBox::addItemList(const wstring& s)
 {
-	QTextStream is(QString::fromStdWString(s).toUtf8());
-	while(!is.atEnd())
+	QString str = QString::fromStdWString(s);
+	QStringList l = str.split('\n');
+	for (int i=0;i<l.size();++i)
 	{
-		QString elem = is.readLine();
-		addItem(elem.toStdWString());
+		addItem(l.at(i).toStdWString());
 	}
 }
 

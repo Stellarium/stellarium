@@ -319,18 +319,20 @@ void StelUI::updateTopBar(void)
 
 	if (FlagShowFov)
 	{
-		wstringstream wos;
-		wos << L"FOV=" << setprecision(3) << core->getProjection()->getFov() << L"\u00B0";
-		top_bar_fov_lbl->setLabel(wos.str());
+		QString str;
+    	QTextStream wos(&str);
+		wos << "FOV=" << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QString::fromWCharArray(L"\u00B0");
+		top_bar_fov_lbl->setLabel(str.toStdWString());
 		top_bar_fov_lbl->adjustSize();
 	}
 	top_bar_fov_lbl->setVisible(FlagShowFov);
 
 	if (FlagShowFps)
 	{
-		wstringstream wos;
-		wos << L"FPS=" << setprecision(4) << app->getFps();
-		top_bar_fps_lbl->setLabel(wos.str());
+		QString str;
+    	QTextStream wos(&str);
+		wos << "FPS=" << qSetRealNumberPrecision(4) << app->getFps();
+		top_bar_fps_lbl->setLabel(str.toStdWString());
 		top_bar_fps_lbl->adjustSize();
 	}
 	top_bar_fps_lbl->setVisible(FlagShowFps);
