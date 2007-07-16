@@ -1858,7 +1858,7 @@ void StarMgr::MagConverter::setFov(float fov) {
 
 void StarMgr::MagConverter::setEye(const ToneReproducer *eye) {
   min_rmag
-    = std::sqrt(eye->adapt_luminance(
+    = std::sqrt(eye->adaptLuminance(
         std::exp(-0.92103f*(max_scaled_60deg_mag + mag_shift + 12.12331f))
           * (108064.73f / 3600.f))) * 30.f;
 //cout << "min_rmag: " << min_rmag << endl;
@@ -1874,7 +1874,7 @@ int StarMgr::MagConverter::computeRCMag(float mag,bool point_star,
 
     // rmag:
   rc_mag[0] = std::sqrt(
-           eye->adapt_luminance(
+           eye->adaptLuminance(
              std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor))
            * 30.f;
 
@@ -1964,7 +1964,7 @@ double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) 
           // Compute the equivalent star luminance for a 5 arc min circle
           // and convert it in function of the eye adaptation
 //        rmag_table[i] =
-//          eye->adapt_luminance(std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f)
+//          eye->adaptLuminance(std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f)
 //            * std::pow(prj->getFov(),-0.85f) * 70.f;
         if (mag_converter->computeRCMag(mag,getFlagPointStar(),eye,
                                         rcmag_table + 2*i) < 0) {

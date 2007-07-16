@@ -30,58 +30,67 @@ class Navigator;
 class Projector;
 class STexture;
 
+// Declare the 2 functions needed by boost intrusive pointers
 class StelObject;
 void intrusive_ptr_add_ref(StelObject* p);
 void intrusive_ptr_release(StelObject* p);
 
-//! @brief The base abstract class for sky objects.
-class StelObject {
+//! @brief The base abstract class for sky objects used in Stellarium like Stars, Planets, Constellations etc..
+//!
+//! Normally you should use StelObjectP instead of StelObject* which have by default the same behaviour,
+//! but which can be added reference counting if needed.
+class StelObject
+{
 public:
-  virtual ~StelObject(void) {}
-  
-  virtual void retain(void) {;}
-  virtual void release(void) {;}
+	virtual ~StelObject(void) {}
 
-  //! Write I18n information about the object in wstring. 
-  virtual wstring getInfoString(const Navigator *nav) const = 0;
-
-  //! The returned wstring can typically be used for object labeling in the sky
-  virtual wstring getShortInfoString(const Navigator *nav) const = 0;
-
-  //! Return object's type. It should be the name of the class.
-  virtual std::string getType(void) const = 0;
-
-  //! Return object's name in english
-  virtual string getEnglishName(void) const = 0;
+	//! Increment the reference counts if needed.
+	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
+	virtual void retain(void) {;}
 	
-  //! Return translated object's name
-  virtual wstring getNameI18n(void) const = 0;
-
-  //! Get position in earth equatorial frame
-  virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const = 0;
-
-  //! observer centered J2000 coordinates
-  virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
-
-  //! Return object's magnitude
-  virtual float getMagnitude(const Navigator *nav) const {return 99;}
-  
-  //! Return a priority value which is used to discriminate objects by priority
-  //! As for magnitudes, the lower is the higher priority 
-  virtual float getSelectPriority(const Navigator *nav) const {return 99;}
-
-  //! Get a color used to display info about the object
-  virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
-
-  //! Return the best FOV in degree to use for a close view of the object
-  virtual double getCloseViewFov(const Navigator *nav) const {return 10.;}
-
-  //! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
-  virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
-  virtual double get_parent_satellites_fov(const Navigator *nav) const
-    {return -1.;}
-
-  virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return 0;}
+	//! Decrement the reference counts if needed.
+	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
+	virtual void release(void) {;}
+	
+	//! Write I18n information about the object in wstring. 
+	virtual wstring getInfoString(const Navigator *nav) const = 0;
+	
+	//! The returned wstring can typically be used for object labeling in the sky
+	virtual wstring getShortInfoString(const Navigator *nav) const = 0;
+	
+	//! Return object's type. It should be the name of the class.
+	virtual std::string getType(void) const = 0;
+	
+	//! Return object's name in english
+	virtual string getEnglishName(void) const = 0;
+	
+	//! Return translated object's name
+	virtual wstring getNameI18n(void) const = 0;
+	
+	//! Get position in earth equatorial frame
+	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const = 0;
+	
+	//! observer centered J2000 coordinates
+	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
+	
+	//! Return object's magnitude
+	virtual float getMagnitude(const Navigator *nav) const {return 99;}
+	
+	//! Return a priority value which is used to discriminate objects by priority
+	//! As for magnitudes, the lower is the higher priority 
+	virtual float getSelectPriority(const Navigator *nav) const {return 99;}
+	
+	//! Get a color used to display info about the object
+	virtual Vec3f getInfoColor(void) const {return Vec3f(1,1,1);}
+	
+	//! Return the best FOV in degree to use for a close view of the object
+	virtual double getCloseViewFov(const Navigator *nav) const {return 10.;}
+	
+	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
+	virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
+	virtual double get_parent_satellites_fov(const Navigator *nav) const {return -1.;}
+	
+	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return 0;}
 };
 
 #endif

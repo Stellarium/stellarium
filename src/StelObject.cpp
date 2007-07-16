@@ -21,8 +21,12 @@
 #include "StelObject.hpp"
 
 void intrusive_ptr_add_ref(StelObject* p)
-{p->retain();}
+{
+	p->retain();
+}
 
 void intrusive_ptr_release(StelObject* p)
-{p->release();}
+{
+	p->release();
+}
 
