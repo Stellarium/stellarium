@@ -179,7 +179,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			sum_lum+=b2.color[2];
 			++nb_lum;
 			
-			eye->xyY_to_RGB(b2.color);
+			eye->xyYToRGB(b2.color);
 			grid[y*(1+sky_resolution_x)+x].color.set(
 				b2.color[0]*atm_intensity,
 				b2.color[1]*atm_intensity,

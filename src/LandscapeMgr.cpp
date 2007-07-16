@@ -167,7 +167,7 @@ void LandscapeMgr::update(double deltaTime)
 	                          eye, prj, obs->get_latitude(), obs->get_altitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
-	eye->set_world_adaptation_luminance(3.75+atmosphere->getAverageLuminance()*3.5);
+	eye->setWorldAdaptationLuminance(3.75+atmosphere->getAverageLuminance()*3.5);
 	
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
@@ -193,7 +193,7 @@ void LandscapeMgr::update(double deltaTime)
 //	groundLuminance*=atmosphere->getFadeIntensity();
 //	groundLuminance=atmosphere->getAverageLuminance()/50;
 //	cout << "Atmosphere lum=" << atmosphere->getAverageLuminance() << " ground lum=" <<  groundLuminance << endl;
-	//cout << "Adapted Atmosphere lum=" << eye->adapt_luminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adapt_luminance(groundLuminance) << endl;
+	//cout << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance) << endl;
 	
 	// compute global ground brightness in a simplistic way, directly in RGB
 	float landscapeBrightness = 0;

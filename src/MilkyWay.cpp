@@ -68,8 +68,8 @@ double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
 	Vec3f c = Vec3f(0.25f, 0.25f, 0.0001f*fader->getInterstate());
-	//cerr << eye->adapt_luminance(c[2]) << endl;
-	eye->xyY_to_RGB(c);
+	//cerr << eye->adaptLuminance(c[2]) << endl;
+	eye->xyYToRGB(c);
 	//cerr << tex_avg_luminance << endl;
 	c = Vec3f(c[0]*c[0], c[1]*c[1], c[2]*c[2]);
 	c*=intensity/tex_avg_luminance*6;
