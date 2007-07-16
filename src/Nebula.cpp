@@ -213,7 +213,7 @@ bool Nebula::readTexture(const string& setName, const string& record)
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, false);
 	
-	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproducer::magToLuminance(mag, tex_angular_size*tex_angular_size*3600);
 
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
@@ -248,7 +248,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 	}
 	else
 	{
-		float ad_lum=eye->adapt_luminance(luminance);
+		float ad_lum=eye->adaptLuminance(luminance);
 
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
@@ -358,7 +358,7 @@ bool Nebula::readNGC(char *recordstr)
 	if (size < 0)
 		size = 1;
 
-	luminance = ToneReproducer::mag_to_luminance(mag, size*size*3600);
+	luminance = ToneReproducer::magToLuminance(mag, size*size*3600);
 	if (luminance < 0)
 		luminance = .0075;
 

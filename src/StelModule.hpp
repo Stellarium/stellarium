@@ -76,10 +76,10 @@ public:
 	virtual string getModuleVersion() const;
 	
 	//! Get the name of the module author
-	virtual string getAuthorName() {return "Stellarium's Team";}
+	virtual string getAuthorName() const {return "Stellarium's Team";}
 	
 	//! Get the email adress of the module author
-	virtual string getAuthorEmail() {return "http://stellarium.org";}
+	virtual string getAuthorEmail() const {return "http://www.stellarium.org";}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.

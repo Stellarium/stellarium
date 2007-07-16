@@ -23,72 +23,84 @@
 
 using namespace std;
 
-#ifdef HAVE_CONFIG_H
 # include <config.h>
-#endif
 #ifndef HAVE_POW10
 # define pow10(x) pow(10,(x))
 #endif
 
 #include "ToneReproducer.hpp"
 
-// Set some values to prevent bugs in case of bad use
-ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), one_over_maxdL(1.f/100.f), one_over_gamma(1.f/2.3f)
+/*********************************************************************
+ Constructor: Set some default values to prevent bugs in case of bad use
+*********************************************************************/
+ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
 {
-	// Update alpha_da and beta_da values
+	// Update alphaDa and betaDa values
 	float log10Lwa = log10f(Lwa);
-	alpha_wa = 0.4f * log10Lwa + 1.519f;
-	beta_wa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
+	alphaWa = 0.4f * log10Lwa + 1.519f;
+	betaWa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 	
-	set_display_adaptation_luminance(Lda);
-	set_world_adaptation_luminance(Lwa);
+	setDisplayAdaptationLuminance(Lda);
+	setWorldAdaptationLuminance(Lwa);
 }
 
+
+/*********************************************************************
+ Destructor
+*********************************************************************/
 ToneReproducer::~ToneReproducer()
 {
 }
 
-// Set the eye adaptation luminance for the display and precompute what can be
-// Usual luminance range is 1-100 cd/m^2 for a CRT screen
-void ToneReproducer::set_display_adaptation_luminance(float _Lda)
+
+/*********************************************************************
+ Set the eye adaptation luminance for the display (and precompute what can be)
+*********************************************************************/
+void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 {
 	Lda = _Lda;
 
-	// Update alpha_da and beta_da values
+	// Update alphaDa and betaDa values
 	float log10Lda = log10f(Lda);
-	alpha_da = 0.4f * log10Lda + 1.519f;
-	beta_da = -0.4f * log10Lda*log10Lda + 0.218f * log10Lda + 6.1642f;
+	alphaDa = 0.4f * log10Lda + 1.519f;
+	betaDa = -0.4f * log10Lda*log10Lda + 0.218f * log10Lda + 6.1642f;
 
 	// Update terms
-	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = pow10((beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
+	alphaWaOverAlphaDa = alphaWa/alphaDa;
+	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
 }
 
-// Set the eye adaptation luminance for the world and precompute what can be
-void ToneReproducer::set_world_adaptation_luminance(float _Lwa)
+
+/*********************************************************************
+ Set the eye adaptation luminance for the world (and precompute what can be)
+*********************************************************************/
+void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 {
 	Lwa = _Lwa;
 
-	// Update alpha_da and beta_da values
+	// Update alphaDa and betaDa values
 	float log10Lwa = log10f(Lwa);
-	alpha_wa = 0.4f * log10Lwa + 1.519f;
-	beta_wa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
+	alphaWa = 0.4f * log10Lwa + 1.519f;
+	betaWa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 
 	// Update terms
-	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = pow10((beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
+	alphaWaOverAlphaDa = alphaWa/alphaDa;
+	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
 
 }
 
 
-// Convert from xyY color system to RGB according to the adaptation
-// The Y component is in cd/m^2
-void ToneReproducer::xyY_to_RGB(float* color) const
+/*********************************************************************
+ Convert from xyY color system to RGB according to the adaptation
+ The Y component is in cd/m^2
+*********************************************************************/
+void ToneReproducer::xyYToRGB(float* color) const
 {
 	// 1. Hue conversion
-if (color[2] <= 0.f) {
-  cerr << "ToneReproducer::xyY_to_RGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
-}
+	if (color[2] <= 0.f)
+	{
+		cerr << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
+	}
 	const float log10Y = log10f(color[2]);
 
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
@@ -114,7 +126,7 @@ if (color[2] <= 0.f) {
 	}
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	color[2] = std::pow(adapt_luminance(color[2]) * one_over_maxdL, one_over_gamma);
+	color[2] = std::pow(adaptLuminance(color[2]) * oneOverMaxdL, oneOverGamma);
 
 	// Convert from xyY to XZY
 	const float X = color[0] * color[2] / color[1];
@@ -127,8 +139,11 @@ if (color[2] <= 0.f) {
 	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
 }
 
-// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-float ToneReproducer::mag_to_luminance(float mag, float surface)
+
+/*********************************************************************
+ Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
+*********************************************************************/
+float ToneReproducer::magToLuminance(float mag, float surface)
 {
 	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
 }
