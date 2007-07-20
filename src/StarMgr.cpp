@@ -1284,7 +1284,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
 #ifndef WIN32
         mmap_start = mmap(0,mmap_offset+sizeof(Star)*nr_of_stars,PROT_READ,
                           MAP_PRIVATE | MAP_NORESERVE |
+#ifdef MACOSX
+			  0x0,
+#else
                           MAP_POPULATE | MAP_NONBLOCK,
+#endif
                           fileno(f),start_in_file-mmap_offset);
         if (mmap_start == MAP_FAILED) {
           cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "

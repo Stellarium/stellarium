@@ -80,7 +80,11 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 #ifdef WIN32
 	moduleFullPath += ".dll";
 #else
+#ifdef MACOSX
+	moduleFullPath += ".dylib";
+#else
 	moduleFullPath += ".so";
+#endif
 #endif
 	try
 	{
