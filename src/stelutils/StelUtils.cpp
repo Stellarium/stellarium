@@ -234,7 +234,7 @@ wstring radToDmsWstrAdapt(double angle, bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << '\"';
+		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 	}
 	else if ((int)s!=0)
 	{
@@ -289,13 +289,23 @@ wstring radToDmsWstr(double angle, bool decimal, bool useD)
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;
-	
+
+	int width = 2;
 	if (decimal)
-		os << qSetRealNumberPrecision(1) << qSetFieldWidth(4);
+	{
+		os << qSetRealNumberPrecision(1);
+		width = 4;
+	}
 	else
-		os << qSetRealNumberPrecision(0) << qSetFieldWidth(2);
+	{
+		os << qSetRealNumberPrecision(0);
+		width = 2;
+	}
 		
-	os << m << '\'' << fixed << qSetPadChar('0') << s << '\"';
+	os << qSetFieldWidth(width) << m << qSetFieldWidth(0) << '\'' 
+		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s 
+		<< qSetFieldWidth(0) << '\"';
+
 	return str.toStdWString();
 }
 
