@@ -87,7 +87,14 @@ public:
 
 	//! Notify that we want to select the given object
 	//! @param added add the object to selection if true, replace if false
+	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const StelObjectP obj, bool added=false);
+	
+	//! Notify that we want to select the given objects
+	//! @param objs a vector of objects to select
+	//! @param added add the object to selection if true, replace if false
+	//! @return true if at least 1 object was sucessfully selected
+	bool setSelectedObject(const std::vector<StelObjectP>& objs, bool added=false);
 
 	//! Get the list objects which was recently selected by the user
 	const std::vector<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}

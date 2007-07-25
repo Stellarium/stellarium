@@ -320,6 +320,10 @@ void GLWidget::thereWasAnEvent()
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
 {
+	// Dirty
+	if (m.testFlag(Qt::ShiftModifier) && m.testFlag(Qt::ControlModifier))
+		return (StelMod)((int)StelMod_SHIFT|(int)StelMod_CTRL);
+	
 	switch (m)
 	{
 	case Qt::ShiftModifier : return StelMod_SHIFT;
