@@ -782,6 +782,7 @@ CTRL + G : Goto selected solar system object\n\
 K   : Normal time rate          L   : Increase time rate\n\
 - and = :  Back and forward one day (press ALT for sidereal day)\n\
 [ and ] :  Back and forward 7 days (press ALT for sidereal days)\n\
+CTRL + - : Back one hour        CTRL + = : forward one hour\n\
 \n")) + 
 		wstring(_("During Script Playback:\n\
 CTRL + C : End Script\n\
@@ -804,7 +805,7 @@ CTRL + C : End Script\n\
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	//help_win->setOpaque(opaqueGUI);
-	help_win->reshape(215,45,580,645);
+	help_win->reshape(215,45,580,655);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
@@ -1270,13 +1271,17 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		case StelKey_EQUALS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				commander->execute_command( "date sidereal 1");
+			else if (mod & StelMod_CTRL)
+				commander->execute_command( "date relative 0.04166666666666666667");
 			else
 				commander->execute_command( "date relative 1");
 			break;
 		case StelKey_MINUS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				commander->execute_command( "date sidereal -1");
-			else 
+			else if (mod & StelMod_CTRL)
+				commander->execute_command( "date relative -0.04166666666666666667");
+			else
 				commander->execute_command( "date relative -1");
             break;
 		case StelKey_m:
