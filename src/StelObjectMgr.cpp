@@ -211,6 +211,29 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, bool added)
 }
 
 /*************************************************************************
+ Notify that we want to select the given objects
+*************************************************************************/
+bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, bool added)
+{
+	lastSelectedObjects.clear();
+	if (objs.empty())
+	{
+		unSelect();
+		return false;
+	}
+	
+	lastSelectedObjects=objs;
+
+	// Send the event to every StelModule
+	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
+	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	{
+		(*iter)->selectedObjectChangeCallBack(added);
+	}
+	return true;
+}
+
+/*************************************************************************
  Return the list objects of type "withType" which was recently selected by
   the user
 *************************************************************************/

@@ -20,7 +20,7 @@ public:
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod);
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
-	virtual void selectedObjectChangeCallBack();
+	virtual void selectedObjectChangeCallBack(bool added=false);
 	
 	//! Increment/decrement smoothly the vision field and position
 	void updateMotion(double deltaTime);
