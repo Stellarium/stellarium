@@ -44,6 +44,7 @@ public:
 	virtual string getModuleID() const { return "image_mgr"; }
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
     int load_image(string filename, string name, Image::IMAGE_POSITIONING position_type);
     int drop_image(string name);

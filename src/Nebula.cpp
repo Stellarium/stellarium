@@ -277,9 +277,9 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 
 void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
-	if (2.f/getOnScreenSize(prj, nav)<0.1) return;
+	if (4.f/getOnScreenSize(prj, nav)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = MY_MIN(1,2.f/getOnScreenSize(prj, nav))*0.8;
+	float lum = MY_MIN(1,4.f/getOnScreenSize(prj, nav))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
 	prj->drawSprite2dMode(XY[0], XY[1], 8);

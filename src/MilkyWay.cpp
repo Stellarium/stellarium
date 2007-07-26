@@ -32,7 +32,6 @@
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
 {
 	fader = new LinearFader();
-	dependenciesOrder["draw"]="first";
 }
 
 MilkyWay::~MilkyWay()

@@ -31,11 +31,11 @@
 StelModuleMgr::StelModuleMgr() : endIter(modules.end())
 {
 	// Initialize empty call lists for each possible actions
-	callOrders["draw"]=std::vector<StelModule*>();
-	callOrders["update"]=std::vector<StelModule*>();
-	callOrders["handleMouseClicks"]=std::vector<StelModule*>();
-	callOrders["handleMouseMoves"]=std::vector<StelModule*>();
-	callOrders["handleKeys"]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_DRAW]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_UPDATE]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEMOUSECLICKS]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEMOUSEMOVES]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEKEYS]=std::vector<StelModule*>();
 }
 
 StelModuleMgr::~StelModuleMgr()
@@ -117,13 +117,21 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 	return sMod;
 }
 
+struct StelModuleOrderComparator
+{
+	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {;}
+	bool operator()(StelModule* x, StelModule* y) {return x->getCallOrder(action)<y->getCallOrder(action);}
+private:
+	StelModule::StelModuleActionName action;
+};
+
 /*************************************************************************
  Generate properly sorted calling lists for each action (e,g, draw, update)
  according to modules orders dependencies
 *************************************************************************/
 void StelModuleMgr::generateCallingLists()
 {
-	std::map<string, std::vector<StelModule*> >::iterator mc;
+	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> >::iterator mc;
 	std::map<string, StelModule*>::iterator m;
 	
 	// For each actions (e.g. "draw", "update", etc..)
@@ -136,56 +144,7 @@ void StelModuleMgr::generateCallingLists()
 		{
 			mc->second.push_back(m->second);
 		}
-		
-		// Order N times to ensure that all dependencies are respected 
-		// Very unoptimized method but we don't care since it's not time critical
-		for (unsigned int n=0;n<modules.size();++n)
-		{
-			// Order them now according to dependencies
-			for (m=modules.begin();m!=modules.end();++m)
-			{
-				StelModule::DependenciesOrderT::iterator tmp = m->second->dependenciesOrder.find(mc->first);
-				if (tmp!=m->second->dependenciesOrder.end() && tmp->second.size()!=0)
-				{
-					// There is a dependency
-					const string& dep = tmp->second;
-					std::vector<StelModule*>& list = mc->second;
-					
-					// Remove the module we want to sort
-					std::vector<StelModule*>::iterator thisIdx;
-					for (thisIdx=list.begin(); (*thisIdx)!=m->second && thisIdx!=list.end(); ++thisIdx){;}
-					assert(thisIdx!=list.end());
-					list.erase(thisIdx);
-					
-					// And insert it after the dependent module
-					std::vector<StelModule*>::iterator depIdx;
-					if (dep=="first")
-					{
-						depIdx = list.begin();
-					}
-					else if (dep=="last")
-					{
-						depIdx = list.end();
-					}
-					else
-					{
-						for (depIdx=list.begin(); (*depIdx)->getModuleID()!=dep && depIdx!=list.end(); ++depIdx){;}
-						if (depIdx==list.end())
-						{
-							cerr << "Error, can't find module \"" << dep << "\" on which module \"" << m->second->getModuleID() << "\" depends for the operation \""<< tmp->first << "\"." << endl;
-							assert(0);
-						}
-						++depIdx;
-					}
-					list.insert(depIdx, m->second);
-				}
-			}
-		}
-		
-//		cerr << "---------------" << endl;
-//		cerr << mc->first << endl;
-//		for (std::vector<StelModule*>::iterator ii=mc->second.begin();ii!=mc->second.end();++ii)
-//			cerr << (*ii)->getModuleID() << endl;
+		std::sort(mc->second.begin(), mc->second.end(), StelModuleOrderComparator(mc->first));
 	}
 }
 

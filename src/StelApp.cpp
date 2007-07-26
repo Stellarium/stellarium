@@ -384,7 +384,7 @@ void StelApp::update(int delta_time)
 	core->update(delta_time);
 	
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders("update");
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_UPDATE);
 	//cerr << "-------" << endl;
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
@@ -413,7 +413,7 @@ double StelApp::draw(int delta_time)
 	// Render all the main objects of stellarium
 	double squaredDistance = 0.;
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders("draw");
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_DRAW);
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
 		double d = (*i)->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
@@ -464,7 +464,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	if (ui->handleClick(ui_x, ui_y, button, state, mod)) return 1;
 
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseClicks");
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS);
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
 		if ((*i)->handleMouseClicks(x, y, button, state, mod)==true)
@@ -519,7 +519,7 @@ int StelApp::handleMove(int x, int y, StelMod mod)
 	distorter->distortXY(x,y);
 	
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseMoves");
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES);
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
 		if ((*i)->handleMouseMoves(x, y, mod)==true)
@@ -540,7 +540,7 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 	if (ui->handle_keysGUI(key, mod, unicode, state)) return 1;
 
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleKeys");
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS);
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
 		if ((*i)->handleKeys(key, mod, unicode, state)==true)

@@ -36,6 +36,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 
 // constructor which loads all data from appropriate files
@@ -50,7 +51,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 {
 	assert(hipStarMgr);
 	isolateSelected = false;
-	dependenciesOrder["draw"]="nebulas";
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -85,6 +85,16 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("gridlines")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)

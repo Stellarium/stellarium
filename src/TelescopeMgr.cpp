@@ -27,6 +27,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <algorithm>
 
@@ -58,13 +59,22 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
     // has already closed the socket. We must ignore it:
   signal(SIGPIPE,SIG_IGN);
 #endif
-	dependenciesOrder["draw"]="meteors";
 }
 
 TelescopeMgr::~TelescopeMgr(void) {
 #ifdef WIN32
   if (wsa_ok) WSACleanup();
 #endif
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("meteors")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {

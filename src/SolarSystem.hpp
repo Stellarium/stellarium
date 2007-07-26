@@ -53,6 +53,7 @@ public:
 	virtual void updateI18n();
 	virtual void selectedObjectChangeCallBack(bool added=false);
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class

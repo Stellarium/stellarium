@@ -44,6 +44,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n() {;}
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}
 	
 	//! Get Milky Way intensity
 	float getIntensity() {return intensity;}

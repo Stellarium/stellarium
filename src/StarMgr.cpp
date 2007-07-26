@@ -49,6 +49,7 @@
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
 #include "bytes.h"
+#include "StelModuleMgr.hpp"
 
 #include <string>
 #include <list>
@@ -1427,7 +1428,16 @@ StarMgr::StarMgr(void) :
   }
   max_geodesic_grid_level = -1;
   last_max_search_level = -1;
-  dependenciesOrder["draw"]="constellations";
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double StarMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("constellations")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 
