@@ -55,6 +55,7 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void glWindowHasBeenResized(int w, int h) {resize();}
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	StelUI(StelCore*, StelApp* app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui

@@ -116,6 +116,16 @@ StelUI::~StelUI()
 	Component::deleteScissor();
 }
 
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double StelUI::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+1000;
+	return 0;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::init(const InitParser& conf, LoadingBar& lb)
 {
