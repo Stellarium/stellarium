@@ -36,6 +36,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
+#include "StelModuleMgr.hpp"
 
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
@@ -47,8 +48,8 @@ void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
 bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
-NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
-	dependenciesOrder["draw"]="milkyway";
+NebulaMgr::NebulaMgr(void) : displayNoTexture(false)
+{
 }
 
 NebulaMgr::~NebulaMgr()
@@ -58,6 +59,16 @@ NebulaMgr::~NebulaMgr()
 	{
 		delete (*iter);
 	}
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double NebulaMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("milkyway")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 // read from stream

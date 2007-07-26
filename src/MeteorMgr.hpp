@@ -38,7 +38,8 @@ class MeteorMgr : public StelModule
 	virtual string getModuleID() const {return "meteors";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
-
+	virtual double getCallOrder(StelModuleActionName actionName) const;
+	
   void setZHR(int zhr);   // set zenith hourly rate
   int getZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s

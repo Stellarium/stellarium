@@ -31,7 +31,6 @@
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {
-	dependenciesOrder["draw"]="ssystem";
 	ZHR = zhr;
 	max_velocity = maxv;
 
@@ -50,6 +49,16 @@ MeteorMgr::~MeteorMgr()
 void MeteorMgr::init(const InitParser& conf, LoadingBar& lb)
 {
 	setZHR(conf.get_int("astro", "meteor_rate", 10));
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 void MeteorMgr::setZHR(int zhr)

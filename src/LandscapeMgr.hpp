@@ -47,6 +47,7 @@ public:
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager

@@ -50,7 +50,8 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
-
+	virtual double getCallOrder(StelModuleActionName actionName) const;
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
