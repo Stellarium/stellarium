@@ -29,12 +29,21 @@
 
 ImageMgr::ImageMgr()
 {
-	dependenciesOrder["draw"]="landscape";
 }
 
 ImageMgr::~ImageMgr()
 {
     drop_all_images();
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double ImageMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("landscape")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 int ImageMgr::load_image(string filename, string name, Image::IMAGE_POSITIONING position_type)

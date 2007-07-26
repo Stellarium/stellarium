@@ -36,6 +36,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "Planet.hpp"
 
 #include <QTextStream>
@@ -48,7 +49,6 @@ SolarSystem::SolarSystem()
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flag_light_travel_time(false)
 {
-	dependenciesOrder["draw"]="stars";
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -75,6 +75,15 @@ SolarSystem::~SolarSystem()
 	earth = NULL;
 }
 
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double SolarSystem::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("stars")->getCallOrder(actionName)+10;
+	return 0;
+}
 
 // Init and load the solar system data
 void SolarSystem::init(const InitParser& conf, LoadingBar& lb)

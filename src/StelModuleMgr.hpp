@@ -50,7 +50,7 @@ public:
 	void generateCallingLists();
 
 	//! Get the list of modules in the correct order for calling the given action
-	const std::vector<StelModule*>& getCallOrders(const std::string& action)
+	const std::vector<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
 	{
 		return callOrders[action];
 	}
@@ -97,7 +97,7 @@ private:
 	std::map<std::string, StelModule*> modules;
 	
 	//! The list of all module in the correct order for each action
-	std::map<std::string, std::vector<StelModule*> > callOrders;
+	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> > callOrders;
 	
 	const Iterator endIter;
 };

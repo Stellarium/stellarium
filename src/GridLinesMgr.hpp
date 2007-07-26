@@ -49,7 +49,8 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
-
+	virtual double getCallOrder(StelModuleActionName actionName) const;
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
 	//! Set flag for displaying Azimutal Grid

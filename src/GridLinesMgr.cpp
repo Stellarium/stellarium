@@ -30,6 +30,7 @@
 #include "Planet.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "InitParser.hpp"
 
 // Class which manages a grid to display in the sky
@@ -585,7 +586,6 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 
 GridLinesMgr::GridLinesMgr()
 {
-	dependenciesOrder["draw"]="nebulas";
 	equ_grid = new SkyGrid(Projector::FRAME_EARTH_EQU);
 	azi_grid = new SkyGrid(Projector::FRAME_LOCAL);
 	equator_line = new SkyLine(SkyLine::EQUATOR);
@@ -600,6 +600,16 @@ GridLinesMgr::~GridLinesMgr()
 	delete equator_line;
 	delete ecliptic_line;
 	delete meridian_line;
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("nebulas")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 void GridLinesMgr::init(const InitParser& conf, LoadingBar& lb)

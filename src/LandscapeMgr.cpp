@@ -133,8 +133,6 @@ void Cardinals::updateI18n()
 
 LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
 {
-	dependenciesOrder["draw"]="telescopes";
-	dependenciesOrder["update"]="ssystem";
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -143,6 +141,18 @@ LandscapeMgr::~LandscapeMgr()
 	delete cardinals_points;
 	delete landscape;
 	landscape = NULL;
+}
+
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ACTION_DRAW)
+		return StelApp::getInstance().getModuleMgr().getModule("telescopes")->getCallOrder(actionName)+10;
+	if (actionName==StelModule::ACTION_UPDATE)
+		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+10;
+	return 0;
 }
 
 void LandscapeMgr::update(double deltaTime)

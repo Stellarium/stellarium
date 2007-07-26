@@ -115,16 +115,24 @@ public:
 	//! This method is called for all StelModules when the GL window is resized
 	virtual void glWindowHasBeenResized(int w, int h) {;}
 	
+	//! Define the possible action for which an order is defined
+	enum StelModuleActionName
+	{
+		ACTION_DRAW,
+		ACTION_UPDATE,
+		ACTION_HANDLEMOUSECLICKS,
+		ACTION_HANDLEMOUSEMOVES,
+		ACTION_HANDLEKEYS
+	};
+	
+	//! Return the value defining the order of call for the given action
+	//! For example if stars.callOrder[ACTION_DRAW] == 10 and constellation.callOrder[ACTION_DRAW] == 11, 
+	//! the stars module will be drawn before the constellations
+	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called.
+	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
+	
 protected:
 	friend class StelModuleMgr;
-
-	// Each value is the name of a module for which the action must be called before
-	// For example if DependenciesOrderT["draw"] == "stars", the stars module will be drawn before the module
-	typedef std::map<std::string, std::string> DependenciesOrderT;
-	
-	//! The list of dependencies defining for example if this module must be drawn before another one
-	DependenciesOrderT dependenciesOrder;
-	
 };
 
 #endif
