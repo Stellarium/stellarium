@@ -684,7 +684,7 @@ void StelUI::cbr(void)
 	if (bt_flag_equatorial_mode->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Equatorial/Altazimuthal Mount [ENTER]"));
 	if (bt_flag_config->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Configuration window"));
+		bt_flag_help_lbl->setLabel(_("Configuration window [1]"));
 
 	if (bt_flag_night->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Night (red) mode"));
@@ -695,15 +695,15 @@ void StelUI::cbr(void)
 	bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
 	if (bt_flag_search->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Search for object"));
+		bt_flag_help_lbl->setLabel(_("Search for object [CTRL + F]"));
 	if (bt_script->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Script commander"));
 	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
 	if (bt_flip_horz && bt_flip_horz->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Flip horizontally"));
+		bt_flag_help_lbl->setLabel(_("Flip horizontally [CTRL + SHIFT + H]"));
 	if (bt_flip_vert && bt_flip_vert->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Flip vertically"));
+		bt_flag_help_lbl->setLabel(_("Flip vertically [CTRL + SHIFT + V]"));
 }
 
 void StelUI::tcbr(void)
@@ -715,7 +715,7 @@ void StelUI::tcbr(void)
 	if (bt_inc_time_speed->getIsMouseOver())
 		bt_flag_time_control_lbl->setLabel(_("Increase Time Speed [L]"));
 	if (bt_time_now->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel(_("Return to Current Time"));
+		bt_flag_time_control_lbl->setLabel(_("Return to Current Time [8]"));
 }
 
 // The window containing the info (licence)
