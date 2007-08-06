@@ -75,8 +75,7 @@ private:
 
 
 template<class S>
-void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node,
-                                Grid& grid) const
+void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const
 {
     for (TreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
