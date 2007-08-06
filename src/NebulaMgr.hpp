@@ -144,8 +144,7 @@ public:
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
-	typedef TreeGrid MyGrid;
-	MyGrid nebGrid;
+	TreeGrid nebGrid;
 	
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
