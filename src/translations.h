@@ -72,6 +72,7 @@ class Translations
 		N_("Korean");
 		N_("Lakota");
 		N_("Navajo");
+		N_("Norse");
 		N_("Polynesian");
 		N_("Western");
 		
@@ -310,6 +311,14 @@ class Translations
         N_("First Big One");  // 006
         N_("Rabbit Tracks");     // 007
         N_("First Slim One");   // 008
+
+		// Norse Constellations
+        N_("Aurvandil's Toe");   // 001
+        N_("Wolf's Mouth");     // 002
+        N_("The Fishermen");     // 003
+        N_("Woman's Cart");        // 004
+        N_("Man's Cart");        // 005
+        N_("The Asar Battlefield");  // 006
 
 		// Inuit Constellations
         N_("Two Sunbeams");   // 001
