@@ -6,4 +6,4 @@ ADD_SUBDIRECTORY( korean )
 ADD_SUBDIRECTORY( navajo ) 
 ADD_SUBDIRECTORY( lakota ) 
 ADD_SUBDIRECTORY( inuit ) 
-
+ADD_SUBDIRECTORY( norse ) 
