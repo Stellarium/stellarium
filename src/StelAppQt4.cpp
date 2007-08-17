@@ -320,18 +320,26 @@ void GLWidget::thereWasAnEvent()
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
 {
-	// Dirty
-	if (m.testFlag(Qt::ShiftModifier) && m.testFlag(Qt::ControlModifier))
-		return (StelMod)((int)StelMod_SHIFT|(int)StelMod_CTRL);
-	
-	switch (m)
+
+	StelMod out = StelMod_NONE;
+	if (m.testFlag(Qt::ShiftModifier))
 	{
-	case Qt::ShiftModifier : return StelMod_SHIFT;
-	case Qt::ControlModifier : return StelMod_CTRL;
-	case Qt::AltModifier : return StelMod_ALT;
-	case Qt::MetaModifier : return StelMod_META;
-	default: return StelMod_NONE;
+		out = (StelMod)((int)out|(int)StelMod_SHIFT);
 	}
+	if (m.testFlag(Qt::ControlModifier))
+	{
+		out = (StelMod)((int)out|(int)COMPATIBLE_StelMod_CTRL);
+	}
+	if (m.testFlag(Qt::AltModifier))
+	{
+		out = (StelMod)((int)out|(int)StelMod_ALT);
+	}
+	if (m.testFlag(Qt::MetaModifier))
+	{
+		out = (StelMod)((int)out|(int)StelMod_META);
+	}
+
+	return out;
 }
 
 void GLWidget::mousePressEvent(QMouseEvent* event)
