@@ -1115,6 +1115,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       printf("you must byteswap before mmap loading\n");
       return 0;
     }
+    printf("byteswap ");
     type = bswap_32(type);
     major = bswap_32(major);
     minor = bswap_32(minor);
@@ -1127,8 +1128,8 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
     return 0;
   }
   ZoneArray *rval = 0;
-  printf("type: %ud major: %ud minor: %ud level: %ud"
-         " mag_min: %d mag_range: %ud mag_steps: %ud; ",
+  printf("type: %u major: %u minor: %u level: %u"
+         " mag_min: %d mag_range: %u mag_steps: %u; ",
          type,major,minor,level,(int)mag_min,mag_range,mag_steps);
   switch (type) {
     case 0:
