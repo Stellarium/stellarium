@@ -154,7 +154,7 @@ struct ZoneData { // a single Triangle
 };
 
 
-#ifdef WORDS_BIGENDIAN
+//#ifdef WORDS_BIGENDIAN
 
 // MSB UnpackBits and UnpackUBits really implemented the same as LSB (below)
 // but we use a local char[4] to swap the bytes about before the cast to int
@@ -234,8 +234,8 @@ unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
 	return rval;
 }
 
-#else
-
+//#else
+/*
 static
 int UnpackBits(const char *addr,int bits_begin,const int bits_size) {
   while (bits_begin >= 8) {
@@ -282,8 +282,8 @@ unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
   if (bits_size < 32) rval &= ((((unsigned int)1)<<bits_size)-1);
   return rval;
 }
-
-#endif
+*/
+//#endif
 
 static inline float IndexToBV(unsigned char b_v) {
   return b_v*(4.f/127.f)-0.5f;
@@ -466,7 +466,7 @@ public:
                            const string &extended_file_name,
                            LoadingBar &lb);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
-  int getNrOfStars(void) const {return nr_of_stars;}
+  unsigned int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObjectP > &result) = 0;
@@ -490,15 +490,16 @@ protected:
   ZoneArray(const StarMgr &hip_star_mgr,int level,
             int mag_min,int mag_range,int mag_steps);
   const StarMgr &hip_star_mgr;
-  int nr_of_zones;
-  int nr_of_stars;
+  unsigned int nr_of_zones;
+  unsigned int nr_of_stars;
   ZoneData *zones;
 };
 
 template<class Star>
 class SpecialZoneArray : public ZoneArray {
 public:
-  SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
+  SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
+                   LoadingBar &lb,
                    const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void);
@@ -528,9 +529,10 @@ struct HipIndexStruct {
 
 class ZoneArray1 : public SpecialZoneArray<Star1> {
 public:
-  ZoneArray1(FILE *f,bool use_mmap,LoadingBar &lb,const StarMgr &hip_star_mgr,
+  ZoneArray1(FILE *f,bool byte_swap,bool use_mmap,
+             LoadingBar &lb,const StarMgr &hip_star_mgr,
              int level,int mag_min,int mag_range,int mag_steps)
-    : SpecialZoneArray<Star1>(f,use_mmap,lb,hip_star_mgr,level,
+    : SpecialZoneArray<Star1>(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps) {}
 private:
   void updateHipIndex(HipIndexStruct hip_index[]) const;
@@ -1032,7 +1034,7 @@ StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a,
 
 
 void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
-  for (const SpecialZoneData<Star1> *z=getZones()+nr_of_zones-1;
+  for (const SpecialZoneData<Star1> *z=getZones()+(nr_of_zones-1);
        z>=getZones();z--) {
     for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--) {
       const int hip = s->hip;
@@ -1052,31 +1054,29 @@ void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
 
 
 static inline
-int ReadInt(FILE *f,int &x) {
+int ReadInt(FILE *f,unsigned int &x) {
   const int rval = (4 == fread(&x,1,4,f)) ? 0 : -1;
-  LE_TO_CPU_INT32(x,x);
+//  LE_TO_CPU_INT32(x,x);
   return rval;
 }
 
 
 #define FILE_MAGIC 0x835f040a
+#define FILE_MAGIC_OTHER_ENDIAN 0x0a045f83
 #define MAX_MAJOR_FILE_VERSION 0
 
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const string &extended_file_name,
                              LoadingBar &lb) {
   string fname(extended_file_name);
-  ZoneArray *rval = 0;
   bool use_mmap = false;
   if (fname.find("mmap:") == 0) {
     fname.erase(0,5);
-#if (defined(WORDS_BIGENDIAN) || !defined(__GNUC__))
+#if (!defined(__GNUC__))
+#warning Star loading has only been tested with gcc
     cerr << "WARNING: ZoneArray::create(" << extended_file_name << "): "
             "mmap catalog loading currently only implemented for gcc compiled "
-            "binaries for little endian machines. If you have a big endian "
-            "machine, want mmap catalog loading, and are capable of compiling "
-            "stellarium on your machine, then contact me (Johannes Gajdosik) "
-            "and we can do it together." << endl;
+            "binaries." << endl;
 #else
     use_mmap = true;
 #endif
@@ -1084,100 +1084,117 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   try {
     fname = StelApp::getInstance().getFileMgr()
                                   .findFile("stars/default/"+fname);
-    FILE *f = fopen(fname.c_str(),"rb");
-    if (f == 0) {
-      fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",
-              extended_file_name.c_str());
-    } else {
-      printf("ZoneArray::create(%s): ",extended_file_name.c_str());
-      int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
-      if (ReadInt(f,magic) < 0 ||
-          ReadInt(f,type) < 0 ||
-          ReadInt(f,major) < 0 ||
-          ReadInt(f,minor) < 0 ||
-          ReadInt(f,level) < 0 ||
-          ReadInt(f,mag_min) < 0 ||
-          ReadInt(f,mag_range) < 0 ||
-          ReadInt(f,mag_steps) < 0) {
-        printf("bad file, ");
-      } else if (((unsigned int)magic) != FILE_MAGIC) {
-        printf("no star catalogue file, ");
-      } else {
-        printf("type: %d major: %d minor: %d level: %d"
-               " mag_min: %d mag_range: %d mag_steps: %d; ",
-               type,major,minor,level,mag_min,mag_range,mag_steps);
-        switch (type) {
-          case 0:
-            if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
-              printf("unsupported version, ");
-            } else {
-                // When this assertion fails you must redefine Star1
-                // for your compiler.
-                // Because your compiler does not pack the data,
-                // which is crucial for this application.
-              assert(sizeof(Star1) == 28);
-              rval = new ZoneArray1(f,use_mmap,lb,hip_star_mgr,level,
-                                    mag_min,mag_range,mag_steps);
-              if (rval == 0) {
-                printf("no memory, ");
-              }
-            }
-            break;
-          case 1:
-            if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
-              printf("unsupported version, ");
-            } else {
-                // When this assertion fails you must redefine Star2
-                // for your compiler.
-                // Because your compiler does not pack the data,
-                // which is crucial for this application.
-              assert(sizeof(Star2) == 10);
-              rval = new SpecialZoneArray<Star2>(f,use_mmap,lb,hip_star_mgr,
-                                                 level,
-                                                 mag_min,mag_range,mag_steps);
-              if (rval == 0) {
-                printf("no memory, ");
-              }
-            }
-            break;
-          case 2:
-            if (major < 0 || major > MAX_MAJOR_FILE_VERSION) {
-              printf("unsupported version, ");
-            } else {
-                // When this assertion fails you must redefine Star3
-                // for your compiler.
-                // Because your compiler does not pack the data,
-                // which is crucial for this application.
-              assert(sizeof(Star3) == 6);
-              rval = new SpecialZoneArray<Star3>(f,use_mmap,lb,hip_star_mgr,
-                                                 level,
-                                                 mag_min,mag_range,mag_steps);
-              if (rval == 0) {
-                printf("no memory, ");
-              }
-            }
-            break;
-          default:
-            printf("bad file type, ");
-            break;
-        }
-        if (rval && rval->isInitialized()) {
-          printf("stars: %d\n",rval->getNrOfStars());
-        } else {
-          printf("initialization failed\n");
-          if (rval) {
-            delete rval;
-            rval = 0;
-          }
-        }
-      }
-      fclose(f);
-    }
   } catch (exception &e) {
     cerr << "ZoneArray::create(" << extended_file_name << "): "
             "error while loading \"" << fname
          << "\": " << e.what() << endl;
+    return 0;
   }
+  FILE *f = fopen(fname.c_str(),"rb");
+  if (f == 0) {
+    fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",
+            extended_file_name.c_str());
+    return 0;
+  }
+  printf("ZoneArray::create(%s): ",extended_file_name.c_str());
+  unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
+  if (ReadInt(f,magic) < 0 ||
+      ReadInt(f,type) < 0 ||
+      ReadInt(f,major) < 0 ||
+      ReadInt(f,minor) < 0 ||
+      ReadInt(f,level) < 0 ||
+      ReadInt(f,mag_min) < 0 ||
+      ReadInt(f,mag_range) < 0 ||
+      ReadInt(f,mag_steps) < 0) {
+    printf("bad file\n");
+    return 0;
+  }
+  const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
+  if (byte_swap) {
+    if (use_mmap) {
+      printf("you must byteswap before mmap loading\n");
+      return 0;
+    }
+    type = bswap_32(type);
+    major = bswap_32(major);
+    minor = bswap_32(minor);
+    level = bswap_32(level);
+    mag_min = bswap_32(mag_min);
+    mag_range = bswap_32(mag_range);
+    mag_steps = bswap_32(mag_steps);
+  } else if (magic != FILE_MAGIC) {
+    printf("no star catalogue file\n");
+    return 0;
+  }
+  ZoneArray *rval = 0;
+  printf("type: %ud major: %ud minor: %ud level: %ud"
+         " mag_min: %d mag_range: %ud mag_steps: %ud; ",
+         type,major,minor,level,(int)mag_min,mag_range,mag_steps);
+  switch (type) {
+    case 0:
+      if (major > MAX_MAJOR_FILE_VERSION) {
+        printf("unsupported version, ");
+      } else {
+          // When this assertion fails you must redefine Star1
+          // for your compiler.
+          // Because your compiler does not pack the data,
+          // which is crucial for this application.
+        assert(sizeof(Star1) == 28);
+        rval = new ZoneArray1(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
+                              mag_min,mag_range,mag_steps);
+        if (rval == 0) {
+          printf("no memory, ");
+        }
+      }
+      break;
+    case 1:
+      if (major > MAX_MAJOR_FILE_VERSION) {
+        printf("unsupported version, ");
+      } else {
+          // When this assertion fails you must redefine Star2
+          // for your compiler.
+          // Because your compiler does not pack the data,
+          // which is crucial for this application.
+        assert(sizeof(Star2) == 10);
+        rval = new SpecialZoneArray<Star2>(f,byte_swap,use_mmap,lb,hip_star_mgr,
+                                           level,
+                                           mag_min,mag_range,mag_steps);
+        if (rval == 0) {
+          printf("no memory, ");
+        }
+      }
+      break;
+    case 2:
+      if (major > MAX_MAJOR_FILE_VERSION) {
+        printf("unsupported version, ");
+      } else {
+          // When this assertion fails you must redefine Star3
+          // for your compiler.
+          // Because your compiler does not pack the data,
+          // which is crucial for this application.
+        assert(sizeof(Star3) == 6);
+        rval = new SpecialZoneArray<Star3>(f,byte_swap,use_mmap,lb,hip_star_mgr,
+                                           level,
+                                           mag_min,mag_range,mag_steps);
+        if (rval == 0) {
+          printf("no memory, ");
+        }
+      }
+      break;
+    default:
+      printf("bad file type, ");
+      break;
+  }
+  if (rval && rval->isInitialized()) {
+    printf("stars: %d\n",rval->getNrOfStars());
+  } else {
+    printf("initialization failed\n");
+    if (rval) {
+      delete rval;
+      rval = 0;
+    }
+  }
+  fclose(f);
   return rval;
 }
 
@@ -1218,7 +1235,8 @@ bool ReadFileWithLoadingBar(FILE *f,void *data,size_t size,LoadingBar &lb) {
 }
 
 template<class Star>
-SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
+SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
+                                         LoadingBar &lb,
                                          const StarMgr &hip_star_mgr,
                                          int level,
                                          int mag_min,int mag_range,
@@ -1242,22 +1260,21 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
       exit(1);
     }
     {
-      int *zone_size = new int[nr_of_zones];
+      unsigned int *zone_size = new unsigned int[nr_of_zones];
       if (zone_size == 0) {
         cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
                 "no memory (2)" << endl;
         exit(1);
       }
-      if (nr_of_zones != (int)fread(zone_size,sizeof(int),
+      if (nr_of_zones != fread(zone_size,sizeof(unsigned int),
                                     nr_of_zones,f)) {
         delete[] getZones();
         zones = 0;
         nr_of_zones = 0;
       } else {
-        const int *tmp = zone_size;
-        for (int z=0;z<nr_of_zones;z++,tmp++) {
-          int tmp_spu_int32;
-          LE_TO_CPU_INT32(tmp_spu_int32,*tmp);
+        const unsigned int *tmp = zone_size;
+        for (unsigned int z=0;z<nr_of_zones;z++,tmp++) {
+          const unsigned int tmp_spu_int32 = byte_swap?bswap_32(*tmp):*tmp;
           nr_of_stars += tmp_spu_int32;
           getZones()[z].size = tmp_spu_int32;
         }
@@ -1267,7 +1284,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
       delete[] zone_size;
     }
     
-    if (nr_of_stars <= 0) {
+    if (nr_of_stars == 0) {
         // no stars ?
       if (zones) delete[] getZones();
       zones = 0;
@@ -1284,12 +1301,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
         const long mmap_offset = start_in_file % page_size;
 #ifndef WIN32
         mmap_start = mmap(0,mmap_offset+sizeof(Star)*nr_of_stars,PROT_READ,
-                          MAP_PRIVATE | MAP_NORESERVE |
-#ifdef MACOSX
-			  0x0,
-#else
-                          MAP_POPULATE | MAP_NONBLOCK,
-#endif
+                          MAP_PRIVATE | MAP_NORESERVE,
                           fileno(f),start_in_file-mmap_offset);
         if (mmap_start == MAP_FAILED) {
           cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
@@ -1305,7 +1317,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
         } else {
           stars = (Star*)(((char*)mmap_start)+mmap_offset);
           Star *s = stars;
-          for (int z=0;z<nr_of_zones;z++) {
+          for (unsigned int z=0;z<nr_of_zones;z++) {
             getZones()[z].stars = s;
             s += getZones()[z].size;
           }
@@ -1342,7 +1354,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
             } else {
               stars = (Star*)(((char*)mmap_start)+mmap_offset);
               Star *s = stars;
-              for (int z=0;z<nr_of_zones;z++) {
+              for (unsigned int z=0;z<nr_of_zones;z++) {
                 getZones()[z].stars = s;
                 s += getZones()[z].size;
               }
@@ -1366,14 +1378,14 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool use_mmap,LoadingBar &lb,
           nr_of_zones = 0;
         } else {
           Star *s = stars;
-          for (int z=0;z<nr_of_zones;z++) {
+          for (unsigned int z=0;z<nr_of_zones;z++) {
             getZones()[z].stars = s;
             s += getZones()[z].size;
           }
-#if (defined(WORDS_BIGENDIAN) || !defined(__GNUC__))
+          if (byte_swap) {
             s = stars;
-            for (int i=0;i<nr_of_stars;i++,s++) s->repack();
-#endif
+            for (unsigned int i=0;i<nr_of_stars;i++,s++) s->repack();
+          }
 //          cout << endl
 //               << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
 //               << "): repack test start" << endl;
