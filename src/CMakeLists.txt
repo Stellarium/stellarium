@@ -20,10 +20,6 @@ SET(stellarium_SRCS
    Navigator.hpp
    Observer.cpp
    Observer.hpp
-   Grid.cpp
-   Grid.hpp
-   SimpleGrid.cpp
-   SimpleGrid.hpp
    GeodesicGrid.cpp
    GeodesicGrid.hpp
    StelObject.cpp
@@ -125,8 +121,6 @@ SET(stellarium_SRCS
    MovementMgr.cpp
    StelObjectMgr.hpp
    StelObjectMgr.cpp
-   TreeGrid.hpp
-   TreeGrid.cpp
    StelFileMgr.hpp
    StelFileMgr.cpp
    StelAppQt4.hpp
@@ -158,6 +152,14 @@ SET(stellarium_SRCS
    stelutils/StelKey.hpp
    stelutils/StelTypes.hpp
    stelutils/fixx11h.h
+
+   stelutils/Grid.cpp
+   stelutils/Grid.hpp
+   stelutils/SimpleGrid.cpp
+   stelutils/SimpleGrid.hpp
+   stelutils/TreeGrid.hpp
+   stelutils/TreeGrid.cpp
+   stelutils/GridObject.hpp
 
    stelutils/iniparser/dictionary.c
    stelutils/iniparser/dictionary.h
