@@ -76,12 +76,6 @@ struct HalfSpace
 	double d;
 };
 
-inline bool contains(const HalfSpace& h,  const Vec3d& v)
-{
-    return h.contains(v);
-}
-
-
 //! Polygon class
 //! This is a set of points
 class Polygon : public std::vector<Vec3d>
@@ -95,27 +89,27 @@ public:
     Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
 };
 
-template<class T>
-bool contains(const T& o, const Polygon& p)
-{
-	for (Polygon::const_iterator vertex=p.begin();vertex!=p.end();++vertex)
-	{
-		if (!contains(o, *vertex))
-			return false;
-	}
-	return true;
-}
+// template<class T>
+// bool contains(const T& o, const Polygon& p)
+// {
+// 	for (Polygon::const_iterator vertex=p.begin();vertex!=p.end();++vertex)
+// 	{
+// 		if (!contains(o, *vertex))
+// 			return false;
+// 	}
+// 	return true;
+// }
 
-template<class T>
-bool intersect(const T& o, const Polygon& p)
-{
-	for (Polygon::const_iterator iter=p.begin();iter!=p.end();++iter)
-	{
-		if (containsT(o, *iter))
-			return true;
-	}
-	return false;
-}
+// template<class T>
+// bool intersect(const T& o, const Polygon& p)
+// {
+// 	for (Polygon::const_iterator iter=p.begin();iter!=p.end();++iter)
+// 	{
+// 		if (containsT(o, *iter))
+// 			return true;
+// 	}
+// 	return false;
+// }
 
 template<class T>
 bool intersect(const Polygon& p, const T& o)
@@ -137,20 +131,37 @@ public:
     ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);
     //! Special constructor for 4 halfspaces convex
     ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
+	
+	//! Tell whether the points of the passed Polygon are all outside of at least one HalfSpace
+	bool areAllPointsOutsideOneSide(const Polygon& poly) const
+	{
+		for (const_iterator iter=begin();iter!=end();++iter)
+		{
+			bool allOutside = true;
+			for (Polygon::const_iterator v=poly.begin();v!=poly.end()&& allOutside==true;++v)
+			{
+				allOutside = allOutside && !iter->contains(*v);
+			}
+			if (allOutside)
+				return true;
+		}
+		return false;
+	}
 };
 
-template <class T>
-bool contains(const ConvexS& c, const T& o)
-{
-	for (ConvexS::const_iterator iter=c.begin();iter!=c.end();++iter)
-	{
-		if (!contains(*iter, o))
-			return false;
-	}
-	return true;
-}
+// template <class T>
+// bool contains(const ConvexS& c, const T& o)
+// {
+// 	for (ConvexS::const_iterator iter=c.begin();iter!=c.end();++iter)
+// 	{
+// 		if (!contains(*iter, o))
+// 			return false;
+// 	}
+// 	return true;
+// }
 
-//! ConvexPoygon class
+
+//! ConvexPolygon class
 //! It stores both informations :
 //! The halfpaces and the points
 class ConvexPolygon : public ConvexS, public Polygon
@@ -197,14 +208,15 @@ public:
 	const ConvexS& asConvex() const {return static_cast<const ConvexS&>(*this);}
 };
 
-//! we rewrite the intersect for ConvexPolygon
-inline bool intersect(const ConvexPolygon& c1, const ConvexPolygon& c2)
-{
-    const Polygon& p1 = c1;
-    const Polygon& p2 = c2;
-    return intersect(c1, p2) || intersect(c2, p1);
-}
 
+//! We rewrite the intersect for ConvexPolygon
+inline bool intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
+{
+	//std::cerr << "intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)" << std::endl;
+	const ConvexS& c1 = cp1;
+	const ConvexS& c2 = cp2;
+	return !c1.areAllPointsOutsideOneSide(cp2) && !c2.areAllPointsOutsideOneSide(cp1);
+}
 
 struct Disk : HalfSpace
 {
@@ -214,14 +226,29 @@ struct Disk : HalfSpace
     {} 
 };
 
-
-// special for ConvexPolygon
-inline bool intersect(const Disk& d, const ConvexPolygon& p)
+//! We rewrite the intersect for ConvexPolygon
+inline bool intersect(const Disk& cp1, const ConvexPolygon& cp2)
 {
-	return intersect(p, d.n) || 
-	       intersect(d, static_cast<const Polygon&>(p));
+	assert(0);
+	// TODO
+	return false;
 }
 
+//! We rewrite the intersect for ConvexPolygon
+inline bool intersect(const ConvexS& cp1, const ConvexPolygon& cp2)
+{
+	assert(0);
+	// TODO
+	return false;
+}
+
+// special for ConvexPolygon
+// inline bool intersect(const Disk& d, const ConvexPolygon& p)
+// {
+// 	return intersect(p, d.n) || 
+// 	       intersect(d, static_cast<const Polygon&>(p));
+// }
+// 
 // special for ConvexPolygon
 inline bool intersect(const ConvexPolygon& p, const Disk& d)
 {
@@ -256,6 +283,44 @@ inline bool contains(const Difference<S1, S2>&d, const S& s)
     return !intersect(d.s2, s) && contains(d.s1, s);
 }
 
+
+
+inline bool contains(const HalfSpace& h,  const Vec3d& v)
+{
+	return h.contains(v);
+}
+
+inline bool contains(const HalfSpace& h, const Polygon& poly)
+{
+	for (Polygon::const_iterator iter=poly.begin();iter!=poly.end();++iter)
+	{
+		if (!h.contains(*iter))
+			return false;
+	}
+	return true;
+}
+
+inline bool contains(const ConvexPolygon& c, const Vec3d& v)
+{
+	const ConvexS& conv = c;
+	for (ConvexS::const_iterator iter=conv.begin();iter!=conv.end();++iter)
+	{
+		if (!iter->contains(v))
+			return false;
+	}
+	return true;
+}
+
+inline bool contains(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
+{
+	const Polygon& poly = cp2;
+	for (Polygon::const_iterator iter=poly.begin();iter!=poly.end();++iter)
+	{
+		if (!contains(cp1, *iter))
+			return false;
+	}
+	return true;
+}
 
 }	// namespace StelGeom
 

@@ -41,7 +41,7 @@ struct TreeGridNode
     typedef std::vector<TreeGridNode> Children;
     Children children;
     
-    double draw(Projector *prj, const Navigator *nav, float opacity = 1.) const;
+	double draw(Projector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
 };
 
 class TreeGrid : public Grid, public TreeGridNode
@@ -96,10 +96,13 @@ void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) c
         {
             fillAll(*ic, grid);
         }
-        else if(intersect(s, ic->triangle))
-        {
-            fillIntersect(s, *ic, grid);
-        }
+        else
+		{
+			if(intersect(s, ic->triangle))
+        	{
+            	fillIntersect(s, *ic, grid);
+        	}
+		}
     }
 }
 
@@ -119,13 +122,13 @@ template<class Shape>
 void TreeGrid::filterIntersect(const Shape& s)
 {
     // first we remove all the objects that are not in the disk
-    this->remove_if(NotIntersectPred<Shape>(s));
-    // now we add all the objects that are in the disk, but not in the old disk
-    fillIntersect(Difference<Shape, ConvexS>(s, filter), *this, *this);
-    // this->clear();
-    // fillIntersect(s, *this, *this);
+//     this->remove_if(NotIntersectPred<Shape>(s));
+//     // now we add all the objects that are in the disk, but not in the old disk
+//     fillIntersect(Difference<Shape, ConvexS>(s, filter), *this, *this);
+    this->clear();
+    fillIntersect(s, *this, *this);
     
-    filter = ConvexS(s);
+    //filter = ConvexS(s);
 }
 
 

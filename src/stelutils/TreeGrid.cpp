@@ -20,38 +20,57 @@
 #include <cassert>
 #include "TreeGrid.hpp"
 
+static const double icosahedron_G = 0.5*(1.0+sqrt(5.0));
+static const double icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
+static const double icosahedron_a = icosahedron_b*icosahedron_G;
+
+static const Vec3d icosahedron_corners[12] =
+{
+	Vec3d( icosahedron_a, -icosahedron_b,            0.0),
+	Vec3d( icosahedron_a,  icosahedron_b,            0.0),
+	Vec3d(-icosahedron_a,  icosahedron_b,            0.0),
+	Vec3d(-icosahedron_a, -icosahedron_b,            0.0),
+	Vec3d(           0.0,  icosahedron_a, -icosahedron_b),
+	Vec3d(           0.0,  icosahedron_a,  icosahedron_b),
+	Vec3d(           0.0, -icosahedron_a,  icosahedron_b),
+	Vec3d(           0.0, -icosahedron_a, -icosahedron_b),
+	Vec3d(-icosahedron_b,            0.0,  icosahedron_a),
+	Vec3d( icosahedron_b,            0.0,  icosahedron_a),
+	Vec3d( icosahedron_b,            0.0, -icosahedron_a),
+	Vec3d(-icosahedron_b,            0.0, -icosahedron_a)
+};
+
+static const int icosahedron_triangles[20][3] =
+{
+ { 1, 0,10}, //  1
+ { 0, 1, 9}, //  0
+ { 0, 9, 6}, // 12
+ { 9, 8, 6}, //  9
+ { 0, 7,10}, // 16
+ { 6, 7, 0}, //  6
+ { 7, 6, 3}, //  7
+ { 6, 8, 3}, // 14
+ {11,10, 7}, // 11
+ { 7, 3,11}, // 18
+ { 3, 2,11}, //  3
+ { 2, 3, 8}, //  2
+ {10,11, 4}, // 10
+ { 2, 4,11}, // 19
+ { 5, 4, 2}, //  5
+ { 2, 8, 5}, // 15
+ { 4, 1,10}, // 17
+ { 4, 5, 1}, //  4
+ { 5, 9, 1}, // 13
+ { 8, 9, 5}  //  8
+};
+
 TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 {
-    // We create the initial triangles forming a tetrahedron :
-    const int vertexes[4][3] =
-    {
-        {+1, +1, +1},
-        {-1, +1, -1},
-        {-1, -1, +1},
-        {+1, -1, -1},
-    };
-    const int triangles[4][3] =
-    {
-        {3, 0, 2},
-        {1, 2, 0},
-        {2, 1, 3},
-        {3, 1, 0}
-    };
-    
-    for (int i = 0; i < 4; ++i) {
-        int i0 = triangles[i][0];
-        int i1 = triangles[i][1];
-        int i2 = triangles[i][2];
-        
-        Vec3d v0(vertexes[i0][0], vertexes[i0][1], vertexes[i0][2]);
-        v0.normalize();
-        Vec3d v1(vertexes[i1][0], vertexes[i1][1], vertexes[i1][2]);
-        v1.normalize();
-        Vec3d v2(vertexes[i2][0], vertexes[i2][1], vertexes[i2][2]);
-        v2.normalize();
-        
-        children.push_back(ConvexPolygon(v0, v1, v2));
-    }
+	for (int i=0;i<20;++i)
+	{
+		const int* corners = icosahedron_triangles[i];
+		children.push_back(ConvexPolygon(icosahedron_corners[corners[0]],icosahedron_corners[corners[1]], icosahedron_corners[corners[2]]));
+	}
 }
 
 void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
@@ -92,22 +111,23 @@ void TreeGrid::split(TreeGridNode& node)
     const Polygon& p = node.triangle;
     
     assert(p.size() == 3);
-    
-    const Vec3d& e0 = p[0];
-    const Vec3d& e1 = p[1];
-    const Vec3d& e2 = p[2];
-    
-    Vec3d e01 = e0 + e1;
-    e01.normalize();
-    Vec3d e12 = e1 + e2;
-    e12.normalize();
-    Vec3d e20 = e2 + e0;
-    e20.normalize();
-    
-    node.children.push_back(ConvexPolygon(e0, e01, e20));
-    node.children.push_back(ConvexPolygon(e1, e12, e01));
-    node.children.push_back(ConvexPolygon(e2, e20, e12));
-    node.children.push_back(ConvexPolygon(e01, e12, e20));
+
+	const Vec3d& c0 = p[0];
+	const Vec3d& c1 = p[1];
+	const Vec3d& c2 = p[2];
+	
+	assert((c0^c1)*c2 >= 0.0);
+	Vec3d e0 = c1+c2;
+	e0.normalize();
+	Vec3d e1 = c2+c0;
+	e1.normalize();
+	Vec3d e2 = c0+c1;
+	e2.normalize();
+	
+	node.children.push_back(ConvexPolygon(c0,e2,e1));
+	node.children.push_back(ConvexPolygon(e2,c1,e0));
+	node.children.push_back(ConvexPolygon(e1,e0,c2));
+	node.children.push_back(ConvexPolygon(e0,e1,e2));
 }
 
 
@@ -135,3 +155,46 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
     }
     return max + 1;
 }
+
+#if 1
+#include "Projector.hpp"
+#include "Navigator.hpp"				 
+double TreeGridNode::draw(Projector *prj, const StelGeom::ConvexS& roi, float opacity) const
+{
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	glColor4f(0,1,0, opacity);
+	Vec3d e1, e2;
+	if (children.size()==0)
+	{
+		if (prj->projectLineCheck(triangle[0], e1, triangle[1], e2))
+		{
+			glBegin(GL_LINES);
+			glVertex2f(e1[0], e1[1]);
+			glVertex2f(e2[0], e2[1]);
+			glEnd();
+		}
+		if (prj->projectLineCheck(triangle[1], e1, triangle[2], e2))
+		{
+			glBegin(GL_LINES);
+			glVertex2f(e1[0], e1[1]);
+			glVertex2f(e2[0], e2[1]);
+			glEnd();
+		}
+		if (prj->projectLineCheck(triangle[2], e1, triangle[0], e2))
+		{
+			glBegin(GL_LINES);
+			glVertex2f(e1[0], e1[1]);
+			glVertex2f(e2[0], e2[1]);
+			glEnd();
+		}
+	}
+	opacity *= 0.75;
+	for (Children::const_iterator ic = children.begin(); ic != children.end(); ++ic)
+	{
+		ic->draw(prj, roi, opacity);
+	}
+	return 0.;
+}
+#endif
