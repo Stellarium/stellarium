@@ -48,7 +48,7 @@ void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
 bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
-NebulaMgr::NebulaMgr(void) : displayNoTexture(false)
+NebulaMgr::NebulaMgr(void) : nebGrid(10000), displayNoTexture(false)
 {
 }
 
@@ -117,7 +117,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	Vec3f pXYZ;
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
-	const StelGeom::ConvexS& p = prj->getViewportConvexPolygon(50);
+	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(0);
     nebGrid.filterIntersect(p);
 	
 	// Print all the stars of all the selected zones
@@ -126,7 +126,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	  // speed up the computation of n->getOnScreenSize(prj, nav)>5:
 	const float size_limit = 5.0 * (M_PI/180.0) * (prj->getFov()/prj->getViewportHeight());
 
-	for (SimpleGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
+	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
 		n = static_cast<Nebula*>(*iter);
 		if (!displayNoTexture && !n->hasTex()) continue;
@@ -153,7 +153,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	}
 	
 	drawPointer(prj, nav);
-	//nebGrid.draw(prj, nav);
+	//nebGrid.draw(prj, p);
 
 	return 0;
 }
