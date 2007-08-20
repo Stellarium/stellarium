@@ -19,7 +19,6 @@
  
 
 #include "SimpleGrid.hpp"
-#include "Navigator.hpp"
 
 void SimpleGrid::filterIntersect(const Disk& s)
 {
@@ -29,7 +28,7 @@ void SimpleGrid::filterIntersect(const Disk& s)
     this->clear();
     for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter)
     {
-        if (intersect(s, (*iter)->getObsJ2000Pos(navigator)))
+		if (intersect(s, (*iter)->getPositionForGrid()))
         {
             this->insert(*iter);
         }
