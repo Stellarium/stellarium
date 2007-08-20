@@ -20,8 +20,8 @@
 #include <cassert>
 #include "TreeGrid.hpp"
 
-TreeGrid::TreeGrid(Navigator* nav, unsigned int maxobj):
-    Grid(nav), maxObjects(maxobj), filter(Vec3d(0,0,0), 0)
+TreeGrid::TreeGrid(unsigned int maxobj):
+    maxObjects(maxobj), filter(Vec3d(0,0,0), 0)
 {
     // We create the initial triangles forming a tetrahedron :
     const int vertexes[4][3] =
@@ -55,7 +55,7 @@ TreeGrid::TreeGrid(Navigator* nav, unsigned int maxobj):
     }
 }
 
-void TreeGrid::insert(StelObject* obj, TreeGridNode& node)
+void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
 {
     if (node.children.empty())
     {
@@ -78,7 +78,7 @@ void TreeGrid::insert(StelObject* obj, TreeGridNode& node)
         for (TreeGridNode::Children::iterator iter = node.children.begin();
                 iter != node.children.end(); ++iter)
         {
-            if (contains(iter->triangle, obj->getObsJ2000Pos(navigator))) {
+			if (contains(iter->triangle, obj->getPositionForGrid())) {
                 insert(obj, *iter);
                 return;
             }
@@ -140,19 +140,18 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
 struct NotIntersectPred
 {
     Disk shape;
-    const Navigator* nav;
     
-    NotIntersectPred(const Disk& s, const Navigator* n = NULL) : shape(s), nav(n) {}
-    bool operator() (const StelObject* obj) const
+    NotIntersectPred(const Disk& s) : shape(s) {}
+    bool operator() (const GridObject* obj) const
     {
-        return !intersect(shape, obj->getObsJ2000Pos(nav));
+		return !intersect(shape, obj->getPositionForGrid());
     }
 };
 
 void TreeGrid::filterIntersect(const Disk& s)
 {
     // first we remove all the objects that are not in the disk
-    this->remove_if(NotIntersectPred(s, navigator));
+    this->remove_if(NotIntersectPred(s));
     // now we add all the objects that are in the disk, but not in the old disk
     fillIntersect(Difference<Disk, Disk>(s, filter), *this, *this);
     // this->clear();

@@ -30,7 +30,7 @@ struct TreeGridNode
     TreeGridNode() {}
     TreeGridNode(const StelGeom::ConvexPolygon& s) : triangle(s) {}
         
-    typedef std::vector<StelObject*> Objects;
+	typedef std::vector<GridObject*> Objects;
     Objects objects;
     
     StelGeom::ConvexPolygon triangle;
@@ -42,10 +42,10 @@ struct TreeGridNode
 class TreeGrid : public Grid, public TreeGridNode
 {
 public:
-    TreeGrid(Navigator* nav = NULL, unsigned int maxobj = 1000);
+    TreeGrid(unsigned int maxobj = 1000);
     ~TreeGrid() {}
     
-    void insert(StelObject* obj)
+	void insert(GridObject* obj)
     {
         insert(obj, *this);
     }
@@ -57,7 +57,7 @@ public:
     
 private:
     
-    void insert(StelObject* obj, TreeGridNode& node);
+	void insert(GridObject* obj, TreeGridNode& node);
     void split(TreeGridNode& node);
     
     template<class S>
@@ -79,7 +79,7 @@ void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) c
 {
     for (TreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
-        if (intersect(s, (*io)->getObsJ2000Pos(navigator)))
+		if (intersect(s, (*io)->getPositionForGrid()))
         {
             grid.insert(*io);
         }
