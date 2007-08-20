@@ -13,6 +13,7 @@
 #    building the default target.
 
 
+FIND_PROGRAM(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
 
 FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
 
@@ -23,6 +24,14 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
    SET(_gmoFiles)
    GET_FILENAME_COMPONENT(_potBaseName ${_potFile} NAME_WE)
    GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
+
+	# Update message strings from the code [TODO: run even if pot file exists!]
+	ADD_CUSTOM_COMMAND( 
+    	OUTPUT ${_absPotFile}
+        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=N_ -C --default-domain=stellarium --directory=${PROJECT_SOURCE_DIR} --files-from=POTFILES.in  --copyright-holder="Fabien Chereau et al"  
+        DEPENDS POTFILES.in
+    )
+
 
    SET(_addToAll)
    IF(${_firstPoFile} STREQUAL "ALL")
@@ -48,7 +57,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
    ENDFOREACH (_currentPoFile )
 
-   ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_gmoFiles})
+   ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS stellarium.pot ${_gmoFiles})
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 
