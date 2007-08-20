@@ -24,6 +24,7 @@
 #include "StelObjectType.hpp"
 #include "Fader.hpp"
 #include "TreeGrid.hpp"
+#include "SimpleGrid.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
@@ -123,7 +124,7 @@ public:
 	//! @param setName a string which corresponds to the directory where the set resides
 	void loadNebulaSet(const string& setName, LoadingBar& lb);
 	
-	private:
+private:
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
@@ -144,7 +145,8 @@ public:
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
-	TreeGrid nebGrid;
+	//TreeGrid nebGrid;
+	SimpleGrid nebGrid;
 	
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed

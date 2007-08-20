@@ -20,19 +20,4 @@
 
 #include "SimpleGrid.hpp"
 
-void SimpleGrid::filterIntersect(const Disk& s)
-{
-    // This is a totaly non-optimized method
-    // because we recompute everything each time, when we
-    // should use the previous informations we have
-    this->clear();
-    for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter)
-    {
-		if (intersect(s, (*iter)->getPositionForGrid()))
-        {
-            this->insert(*iter);
-        }
-    }
-}
-
 

@@ -129,7 +129,9 @@ bool intersect(const Polygon& p, const T& o)
 class ConvexS : public std::vector<HalfSpace>
 {
 public:
-    //! Default contructor
+    //! copy constructor
+    ConvexS(const ConvexS& c) : std::vector<HalfSpace>(c) {}
+    //! Default constructor
     ConvexS(int size = 0) : std::vector<HalfSpace>(size) {}
     //! Special constructor for 3 halfspaces convex
     ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2);

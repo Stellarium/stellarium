@@ -25,6 +25,9 @@
 
 #include "Grid.hpp"
 
+class Projector;
+class Navigator;
+
 struct TreeGridNode
 {
     TreeGridNode() {}
@@ -37,6 +40,8 @@ struct TreeGridNode
     
     typedef std::vector<TreeGridNode> Children;
     Children children;
+    
+    double draw(Projector *prj, const Navigator *nav, float opacity = 1.) const;
 };
 
 class TreeGrid : public Grid, public TreeGridNode
@@ -50,7 +55,8 @@ public:
         insert(obj, *this);
     }
     
-    void filterIntersect(const Disk& s);
+    template<class Shape>
+    void filterIntersect(const Shape& s);
     
     unsigned int depth() const
     { return depth(*this); }
@@ -69,7 +75,7 @@ private:
     unsigned int maxObjects;
     
     // The last filter
-    Disk filter;
+    ConvexS filter;
     
 };
 
@@ -96,6 +102,32 @@ void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) c
         }
     }
 }
+
+template<class Shape>
+struct NotIntersectPred
+{
+    Shape shape;
+    
+    NotIntersectPred(const Shape& s) : shape(s) {}
+	bool operator() (const GridObject* obj) const
+    {
+		return !intersect(shape, obj->getPositionForGrid());
+    }
+};
+
+template<class Shape>
+void TreeGrid::filterIntersect(const Shape& s)
+{
+    // first we remove all the objects that are not in the disk
+    this->remove_if(NotIntersectPred<Shape>(s));
+    // now we add all the objects that are in the disk, but not in the old disk
+    fillIntersect(Difference<Shape, ConvexS>(s, filter), *this, *this);
+    // this->clear();
+    // fillIntersect(s, *this, *this);
+    
+    filter = ConvexS(s);
+}
+
 
 #endif // _TREEGRID_HPP_
 

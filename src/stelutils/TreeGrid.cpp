@@ -20,8 +20,7 @@
 #include <cassert>
 #include "TreeGrid.hpp"
 
-TreeGrid::TreeGrid(unsigned int maxobj):
-    maxObjects(maxobj), filter(Vec3d(0,0,0), 0)
+TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 {
     // We create the initial triangles forming a tetrahedron :
     const int vertexes[4][3] =
@@ -136,28 +135,3 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
     }
     return max + 1;
 }
-
-struct NotIntersectPred
-{
-    Disk shape;
-    
-    NotIntersectPred(const Disk& s) : shape(s) {}
-    bool operator() (const GridObject* obj) const
-    {
-		return !intersect(shape, obj->getPositionForGrid());
-    }
-};
-
-void TreeGrid::filterIntersect(const Disk& s)
-{
-    // first we remove all the objects that are not in the disk
-    this->remove_if(NotIntersectPred(s));
-    // now we add all the objects that are in the disk, but not in the old disk
-    fillIntersect(Difference<Disk, Disk>(s, filter), *this, *this);
-    // this->clear();
-    // fillIntersect(s, *this, *this);
-    
-    filter = s;
-}
-
-
