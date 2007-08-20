@@ -34,7 +34,7 @@ public:
     
     ~Grid() {}
 
-    void filterIntersect(const Disk& s) {}
+    void filterIntersect(const ConvexS& s) {}
     
 	void insert(GridObject* obj)
     {
