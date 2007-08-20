@@ -25,7 +25,6 @@
 
 #include "Grid.hpp"
 
-
 class SimpleGrid : public Grid
 {
 public:
@@ -35,16 +34,31 @@ public:
 	void insert(GridObject* obj)
     {
         all.push_back(obj);
-        Grid::insert(obj);
     }
-    void filterIntersect(const Disk& s);
 
-
+	template<class Shape>
+	void filterIntersect(const Shape& s);
+  
 private:
-    // all the objects
-	typedef std::list<GridObject*> AllObjects;
+	typedef std::vector<GridObject*> AllObjects;
     AllObjects all;
 };
 
+template<class Shape>
+void SimpleGrid::filterIntersect(const Shape& s)
+{
+	// This is a totaly non-optimized method
+	// because we recompute everything each time, when we
+	// should use the previous informations we have
+	this->clear();
+	for (AllObjects::iterator iter = all.begin(); iter != all.end(); ++iter)
+	{
+		if (intersect(s, (*iter)->getPositionForGrid()))
+		{
+			this->Grid::insert(*iter);
+		}
+	}
+}
+			
 #endif // _SIMPLEGRID_HPP_
  

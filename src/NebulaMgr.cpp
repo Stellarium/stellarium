@@ -116,14 +116,9 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 	Vec3f pXYZ;
 	
-	// FOV is currently measured vertically, so need to adjust for wide screens
-	// TODO: projector should probably use largest measurement itself
-	float max_fov = MY_MAX( prj->getFov(), prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight());
-	
-	nebGrid.filterIntersect(StelGeom::Disk(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f));
-	//printf("nb visible neb = %d\n", nebGrid.size());
-	
-    prj->setCurrentFrame(Projector::FRAME_J2000);
+	prj->setCurrentFrame(Projector::FRAME_J2000);
+	const StelGeom::ConvexS& p = prj->getViewportConvexPolygon(50);
+    nebGrid.filterIntersect(p);
 	
 	// Print all the stars of all the selected zones
 	Nebula* n;
@@ -158,6 +153,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	}
 	
 	drawPointer(prj, nav);
+	//nebGrid.draw(prj, nav);
 
 	return 0;
 }
