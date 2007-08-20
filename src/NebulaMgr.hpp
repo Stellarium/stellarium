@@ -23,7 +23,7 @@
 #include <vector>
 #include "StelObjectType.hpp"
 #include "Fader.hpp"
-#include "TreeGrid.hpp"
+//#include "TreeGrid.hpp"
 #include "SimpleGrid.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
