@@ -29,10 +29,10 @@
 class SimpleGrid : public Grid
 {
 public:
-    SimpleGrid(Navigator* nav = NULL) : Grid(nav) {}
+    SimpleGrid() {}
     
     ~SimpleGrid() {}
-    void insert(StelObject* obj)
+	void insert(GridObject* obj)
     {
         all.push_back(obj);
         Grid::insert(obj);
@@ -42,7 +42,7 @@ public:
 
 private:
     // all the objects
-    typedef std::list<StelObject*> AllObjects;
+	typedef std::list<GridObject*> AllObjects;
     AllObjects all;
 };
 

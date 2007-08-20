@@ -23,6 +23,7 @@
 #include <string>
 #include "vecmath.h"
 #include "StelObjectType.hpp"
+#include "GridObject.hpp"
 
 using namespace std;
 
@@ -39,11 +40,15 @@ void intrusive_ptr_release(StelObject* p);
 //!
 //! Normally you should use StelObjectP instead of StelObject* which have by default the same behaviour,
 //! but which can be added reference counting if needed.
-class StelObject
+class StelObject : public GridObject
 {
 public:
 	virtual ~StelObject(void) {}
 
+	//! Default implementation of the GridObject method
+	//! Calling this method on some object will cause an error if they need a valid Navigator instance to compute their position
+	virtual Vec3d getPositionForGrid() const {return getObsJ2000Pos(NULL);}
+	
 	//! Increment the reference counts if needed.
 	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
 	virtual void retain(void) {;}

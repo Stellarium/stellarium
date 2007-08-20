@@ -22,28 +22,24 @@
 
 #include <list>
 
-#include "StelObject.hpp"
+#include "GridObject.hpp"
 #include "SphereGeometry.hpp"
-
-class Navigator;
 
 using namespace StelGeom;
  
-class Grid : public std::list<StelObject*>
+class Grid : public std::list<GridObject*>
 {
 public:
-    Grid(Navigator* nav) : navigator(nav) {}
+    Grid() {}
     
     ~Grid() {}
 
     void filterIntersect(const Disk& s) {}
     
-    void insert(StelObject* obj)
+	void insert(GridObject* obj)
     {
-        std::list<StelObject*>::push_back(obj);
+		std::list<GridObject*>::push_back(obj);
     }
-protected:    
-    Navigator *navigator;
 };
 
 #endif // _GRID_HPP_
