@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-11-26 07:09+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-07-26 20:25+0000\n"
 "Last-Translator: Ali Isingor <isingor@gmail.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11\n"
-"X-Rosetta-Export-Date: 2006-11-30 13:28+0000\n"
+"X-Rosetta-Export-Date: 2007-07-29 13:58:33+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -26,6 +26,10 @@ msgstr ""
 "   Lütfen yeni sürümleri kullanın ve olası hata raporları ile\n"
 "    yorumlarınızı http://www.stellarium.org adresine yazın.\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Işık Yılı"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -42,6 +46,10 @@ msgstr "Normal hız"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Standart Perseids meteor yağmuru oranı"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AU"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -68,9 +76,8 @@ msgid "Andromeda"
 msgstr "Zincirli Prenses"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "Pompa"
+msgstr "Hayvan"
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -102,7 +109,7 @@ msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
 
 #: src/translations.h:246
 msgid "Arsenal"
-msgstr "Arsenal"
+msgstr "Cephanelik"
 
 #: src/stel_ui_conf.cpp:218
 msgid "Atmosphere"
@@ -124,6 +131,11 @@ msgstr ""
 msgid "Author: "
 msgstr "Yazar: "
 
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Az/Alt: "
+
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
 msgstr "Azimutal İzdüşüm"
@@ -137,13 +149,12 @@ msgid "Bailer"
 msgstr "Kefil"
 
 #: src/translations.h:291
-#, fuzzy
 msgid "Banner of Three Stars"
-msgstr "Üç Yıldız Panosu"
+msgstr "Üç Yıldızlı Bayrak"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "Ayı İni"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -151,7 +162,7 @@ msgstr "Kuş"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "Donyağı Kırbası"
 
 #: src/translations.h:180 src/translations.h:251
 msgid "Boat"
@@ -171,7 +182,7 @@ msgstr "Ok ve Yay"
 
 #: src/translations.h:331
 msgid "Breastbone"
-msgstr ""
+msgstr "Kaburga Kemiği"
 
 #: src/translations.h:171
 msgid "Bull's Foreleg"
@@ -242,9 +253,8 @@ msgid "Cared for by Moon"
 msgstr "Aya Adanmış"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "Savaş Arabası"
+msgstr "Karibu Geyiği"
 
 #: src/translations.h:94
 msgid "Carina"
@@ -308,12 +318,11 @@ msgstr "Yuvarlak Tahıl Ambarı"
 
 #: src/translations.h:203
 msgid "Coiled Thong"
-msgstr ""
+msgstr "Kayış"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "Takımyıldızları"
+msgstr "Köprücük Kemikleri"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
@@ -422,7 +431,7 @@ msgstr "Kuğu"
 
 #: src/stel_ui_conf.cpp:550
 msgid "Date & Time"
-msgstr "Yer ve Zaman"
+msgstr "Tarih ve Saat"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Date Display Format: "
@@ -470,7 +479,7 @@ msgstr ""
 
 #: src/translations.h:310
 msgid "Dilyehe"
-msgstr ""
+msgstr "Dilyehe"
 
 #: src/translations.h:50
 msgid "Dione"
@@ -512,14 +521,18 @@ msgstr ""
 "4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Uzaklık: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "köpek"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "köpek"
+msgstr "Köpekler"
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -538,9 +551,8 @@ msgid "Drawing of the Constellations [C]"
 msgstr "Takımyıldızlarını Çiz [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "Söğüt"
+msgstr "Kurutulmuş Söğüt"
 
 #: src/translations.h:209
 msgid "Drum"
@@ -592,7 +604,7 @@ msgstr "Mısır"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Geyik"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -609,6 +621,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Gözlem yeri adını girin"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -640,7 +656,7 @@ msgstr "Hata: Komutları kaydetmek için betik dosyası açılamadı."
 
 #: src/translations.h:273
 msgid "Establishment"
-msgstr ""
+msgstr "Yönetici Sınıf"
 
 #: src/translations.h:43
 msgid "Europa"
@@ -660,15 +676,15 @@ msgstr "Feribot"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Ocak"
 
 #: src/translations.h:311
 msgid "First Big One"
-msgstr ""
+msgstr "İlk İri Yapılı"
 
 #: src/translations.h:313
 msgid "First Slim One"
-msgstr ""
+msgstr "İlk Zayıf Yapılı"
 
 #: src/translations.h:228
 msgid "Five Chariots"
@@ -778,7 +794,7 @@ msgstr "Turna"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "El"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -865,9 +881,8 @@ msgid "Information"
 msgstr "Kısayollar"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "Kızılderili"
+msgstr "Eskimo"
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -876,6 +891,10 @@ msgstr "Geçersiz Betik komutu"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -906,18 +925,16 @@ msgid "Kite of Kawelo"
 msgstr "Kawelo Kartalı"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "Boynuz"
+msgstr "Kore"
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "Kertenkele"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "Kertenkele"
+msgstr "Lakota (Kuzey Amerika yerlileri)"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
@@ -973,7 +990,7 @@ msgstr "Terazi"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
-msgstr ""
+msgstr "Işık Kirliliği Parlaklığı: "
 
 #: src/stel_ui_tuiconf.cpp:420
 #, fuzzy
@@ -985,9 +1002,8 @@ msgid "Lion"
 msgstr "Aslan"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "Kuş"
+msgstr "Kertenkele"
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
@@ -997,18 +1013,17 @@ msgstr "Öntanımlı Yapılandırmayı Yükle: "
 msgid "Loading Constellation Art: "
 msgstr "Takımyıldızı Göstergesi Yükleniyor: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "NGC kataloğu yükleniyor: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Bulutsu Dokuları Yükleniyor:"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "NGC kataloğu yükleniyor: "
+msgstr "Katalog yükleniyor: "
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1052,14 +1067,19 @@ msgstr "Kadir"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Kadir Numarası Çarpanı: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Kadir: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
-msgstr ""
+msgstr "Ayrık Bacaklı Adam"
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Kadının Yatağı"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1087,11 +1107,11 @@ msgstr "Mozole"
 
 #: src/stel_ui_tuiconf.cpp:418
 msgid "Maximum Magnitude to Label: "
-msgstr "Maksimum Kadir Oranı: "
+msgstr "En Yüksek Kadir Oranı: "
 
 #: src/stel_ui_tuiconf.cpp:447
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maksimum Bulutsu Kadir Oranı: "
+msgstr "En Yüksek Bulutsu Kadir Oranı: "
 
 #: src/translations.h:242
 msgid "Meadows"
@@ -1111,7 +1131,7 @@ msgstr "Meridyan Çizgisi"
 
 #: src/stel_ui_conf.cpp:1095
 msgid "Meteor zenith hourly rate"
-msgstr ""
+msgstr "Saatlik meteor zenith oranı (ZHR)"
 
 #: src/translations.h:134
 msgid "Microscopium"
@@ -1201,12 +1221,10 @@ msgid "Names of the Constellations [V]"
 msgstr "Takımyıldızı Adları [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "Tavus Kuşu"
+msgstr "Navajo"
 
 #: src/translations.h:299
-#, fuzzy
 msgid "Navigator's Triangle"
 msgstr "Denizci'nin Üçgeni"
 
@@ -1262,7 +1280,7 @@ msgstr "Kuzey Irmağı"
 
 #: src/translations.h:201
 msgid "Northern Dipper"
-msgstr ""
+msgstr "Kuzey Maşrapası"
 
 #: src/s_gui.cpp:2244 src/s_gui.cpp:2270
 msgid "OK"
@@ -1307,6 +1325,10 @@ msgstr "Yıldız Çifti"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Saray Kapısı"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr "Iraklık Açısı "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1425,13 +1447,18 @@ msgstr "Çık [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Çık [CTRL + Q]"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "RA/DE: "
+
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "Tavşan İzleri"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Koşu Yolu"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1464,11 +1491,11 @@ msgstr "Şu Anki Zamana Dön"
 
 #: src/translations.h:307
 msgid "Revolving Female"
-msgstr ""
+msgstr "Dönen Kadın"
 
 #: src/translations.h:306
 msgid "Revolving Male"
-msgstr ""
+msgstr "Dönen Adam"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1504,7 +1531,7 @@ msgstr "Kelek Kabak"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "Koşucular"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
@@ -1524,7 +1551,7 @@ msgstr "Sah"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Semender"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1642,7 +1669,7 @@ msgstr "Yedi Ekselans"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Yedi Küçük Kız"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1668,6 +1695,10 @@ msgstr "Kapat: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Büyüklük: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Gök Kültürü: "
@@ -1686,7 +1717,7 @@ msgstr "Gök Zamanı: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Yılan"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Solar System Body: "
@@ -1708,6 +1739,10 @@ msgstr "Güney Irmağı"
 msgid "Spear"
 msgstr "Mızrak"
 
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Yüzey Sıcaklığı: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Bahar"
@@ -1722,7 +1757,7 @@ msgstr "Yıldız"
 
 #: src/stel_ui_conf.cpp:80
 msgid "Star Names. Up to mag :"
-msgstr "Şu parlaklıktan fazla Yıldız İsimleri:"
+msgstr "Şu kadirden fazla Yıldız İsimleri:"
 
 #: src/stel_ui_conf.cpp:92
 msgid "Star Twinkle. Amount :"
@@ -1755,7 +1790,7 @@ msgstr "Güneş"
 
 #: src/translations.h:248
 msgid "Supreme Palace"
-msgstr ""
+msgstr "Kutsal Saray"
 
 #: src/translations.h:206
 msgid "Tail"
@@ -1799,7 +1834,6 @@ msgid "Thunder and Lightning"
 msgstr "Gökgürültüsü ve Şimşek"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
 msgstr "Yıldırım"
 
@@ -1868,9 +1902,8 @@ msgid "Tucana"
 msgstr "Tukan"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "Nehir Kaplumbağası"
+msgstr "Kaplumbağa"
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
@@ -1889,13 +1922,16 @@ msgid "Two Poles"
 msgstr "Kutuplar"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "İki Çene"
+msgstr "İki Güneş Işını"
 
 #: src/translations.h:330
 msgid "Two in Front"
-msgstr ""
+msgstr "Karşıda İki Kişi"
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Türü: "
 
 #: src/translations.h:355
 #, fuzzy
@@ -1946,7 +1982,7 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
-msgstr ""
+msgstr "Görünüm Bozulması"
 
 #: src/translations.h:167
 msgid "Virgo"
@@ -2051,6 +2087,9 @@ msgstr "değişiklik uygulanıyor."
 #~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
 #~ "\n"
 
+#~ msgid " Choose landscapes :"
+#~ msgstr "Yeryüzü Şeklini Seç:"
+
 #~ msgid " Current Time :"
 #~ msgstr "Şu Anki Saat:"
 
@@ -2069,23 +2108,8 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid " Using System Default Time Zone"
 #~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Şu anki zaman"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Saati Ayarla"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Değişken)"
-
-#~ msgid " Light Years"
-#~ msgstr " Işık Yılı"
 
 #~ msgid " in file "
 #~ msgstr " dosyasında "
@@ -2096,62 +2120,14 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "(%d deep space objects)...\n"
 #~ msgstr "(%d derin gök cisimleri)...\n"
 
-#, fuzzy
-#~ msgid ") failed: "
-#~ msgstr " dosyasında "
-
-#, fuzzy
-#~ msgid ".  No landscape in use.\n"
+#~ msgid "(landscape is: \"%s\")\n"
 #~ msgstr "(yeryüzü şekli: \"%s\")\n"
 
 #~ msgid ". Defaulting to english sky labels\n"
 #~ msgstr "Gök isimleri İngilizce öntanımlı yapılıyor\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "(yeryüzü şekli: \"%s\")\n"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Takımyıldızı Adları"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Yeryüzü Şekilleri"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Betikler "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Enlem: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Enlem: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Boylam: "
-
 #~ msgid "> Found data files in %s : local version.\n"
 #~ msgstr "> veri dosyaları %s dizininde bulundu: yerel sürüm.\n"
-
-#~ msgid "AU"
-#~ msgstr "AU"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Konum"
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2218,13 +2194,6 @@ msgstr "değişiklik uygulanıyor."
 #~ "CTRL + S : Ekran görüntüsü al\n"
 #~ "CTRL + R : Betik kayıt  modu\n"
 
-#~ msgid "Az/Alt: "
-#~ msgstr "Az/Alt: "
-
-#, fuzzy
-#~ msgid "Boundary file "
-#~ msgstr " dosyasında "
-
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q: Çık\n"
 
@@ -2237,22 +2206,11 @@ msgstr "değişiklik uygulanıyor."
 #~ "Eğer  %s  dizini kaybolmuşsa lütfen onu elle oluşturun.\n"
 #~ "Aksi takdirde %s dizinine erişim hakkınız olmayacaktır.\n"
 
-#, fuzzy
-#~ msgid "Can't find file \""
-#~ msgstr " dosyasında "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "%s konumu %s dosyasına kaydediliyor\n"
-
 #~ msgid "Constellation"
 #~ msgstr "Takımyıldızı"
 
 #~ msgid "Did not recognize locale language code "
 #~ msgstr "Yerel dil kodu tanımlanamadı "
-
-#~ msgid "Distance: "
-#~ msgstr "Uzaklık: "
 
 #~ msgid "E-W Centering Offset: "
 #~ msgstr "D-B Merkezli Konumlandırma: "
@@ -2273,25 +2231,8 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "ERROR : The current config file is from a different version ("
 #~ msgstr "HATA: Mevcut yapılandırma dosyası farklı bir sürüme ait ("
 
-#, fuzzy
-#~ msgid "ERROR : can't find posfunc "
+#~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "%d satırında %s hatası\n"
-
-#, fuzzy
-#~ msgid "ERROR on line "
-#~ msgstr "%d satırında %s hatası\n"
-
-#, fuzzy
-#~ msgid "ERROR while loading nebula data set "
-#~ msgstr "Nebula Verileri Yükleniyor "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Bulutsu Dokuları Yükleniyor:"
 
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Balıkgözü Gösterimi"
@@ -2302,16 +2243,8 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Invalid sky culture directory: "
 #~ msgstr "Geçersiz Gök Kültü dizini: "
 
-#, fuzzy
-#~ msgid "Loading Cities data for planet "
-#~ msgstr "Nebula Verileri Yükleniyor "
-
 #~ msgid "Loading Constellation Art: %d/%d"
 #~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hipparkos Kataloğu yükleniyor:"
@@ -2322,35 +2255,20 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Loading Hipparcos star data "
 #~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor "
 
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "NGC kataloğu yükleniyor: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
-
 #~ msgid "Loading Nebula Data: %d/%d"
 #~ msgstr "Nebula Verisi Yükleniyor: %d/%d"
 
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Bulutsu Dokuları Yükleniyor:"
-
-#, fuzzy
-#~ msgid "Loading Solar System data..."
+#~ msgid "Loading Solar System data...\n"
 #~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
 
-#, fuzzy
-#~ msgid "Loading location: \""
+#~ msgid "Loading configuration file "
+#~ msgstr "Yapılandırma dosyası yükleniyor "
+
+#~ msgid "Loading location: \"%s\", "
 #~ msgstr "Konum Yükleniyor: \"%s\", "
 
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
-
-#~ msgid "Magnitude: "
-#~ msgstr "Kadir: "
+#~ msgid "Loading nebulas data "
+#~ msgstr "Nebula Verileri Yükleniyor "
 
 #~ msgid "Message"
 #~ msgstr "İleti"
@@ -2363,10 +2281,6 @@ msgstr "değişiklik uygulanıyor."
 
 #~ msgid "N-S Centering Offset: "
 #~ msgstr "K-G Merkezli Konumlandırma: "
-
-#, fuzzy
-#~ msgid "NGC data file "
-#~ msgstr " dosyasında "
 
 #~ msgid ""
 #~ "Name : %s (NGC %u)\n"
@@ -2407,16 +2321,8 @@ msgstr "değişiklik uygulanıyor."
 #~ "Parlaklık: %.2f\n"
 #~ "Uzaklık: %.8f AU"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "K"
-
 #~ msgid "Nebula"
 #~ msgstr "Bulutsu"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Gezegenler"
 
 #~ msgid "Planet/Moon"
 #~ msgstr "Gezegen/Ay"
@@ -2436,36 +2342,14 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Please save option in tab \"Location\""
 #~ msgstr "Lütfen \"Konum\" sekmesinden"
 
-#~ msgid "RA/DE: "
-#~ msgstr "RA/DE: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Yapılandırma dosyası yükleniyor "
-
-#, fuzzy
-#~ msgid "Saving landscape name in file "
-#~ msgstr "Kaplama özellikleri dosyaya kaydediliyor "
-
-#, fuzzy
-#~ msgid "Saving language in file "
-#~ msgstr "Yapılandırma dosyası yükleniyor "
-
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "%s konumu %s dosyasına kaydediliyor\n"
 
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Kaplama özellikleri dosyaya kaydediliyor "
 
-#, fuzzy
-#~ msgid "Saving video settings: projection="
+#~ msgid "Saving video size "
 #~ msgstr "Video boyutunu kaydediyor "
-
-#~ msgid "Size: "
-#~ msgstr "Büyüklük: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Yüzey Sıcaklığı: "
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2489,9 +2373,6 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Try to create directory %s\n"
 #~ msgstr "%s dizini yaratılıyor\n"
 
-#~ msgid "Type: "
-#~ msgstr "Türü: "
-
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
 #~ " -v, --version          Output version information and exit.\n"
@@ -2501,71 +2382,11 @@ msgstr "değişiklik uygulanıyor."
 #~ " -v, --sürüm   Kullanılan sürüm bilgisi ve çık.\n"
 #~ " -h, --yardım   Bu yardımı göster ve çık.\n"
 
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Kanatlar"
-
 #~ msgid "Will create config files in %s\n"
 #~ msgstr "Yapılandırma dosyası  %s dizininde yaratılacak\n"
 
 #~ msgid "Zoom duration: "
 #~ msgstr "Büyütme süresi: "
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Enlem: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Samanyolu Yoğunluğu: "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Yazar: "
-
-#, fuzzy
-#~ msgid "bad file, "
-#~ msgstr " dosyasında "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosfer"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Renkler "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Takımyıldızı Göstergesi Yoğunluğu"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Takımyıldızı Çizgileri"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Takımyıldızı Sınırları"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Öntanımlı olarak kaydet"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Dünya"
 
 #~ msgid "eg. 60718 (aCrux) or Canopus"
 #~ msgstr "Örn. 60718 (aCrux) ya da Canopus"
@@ -2579,341 +2400,5 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "eg. Pluto or Io"
 #~ msgstr "Örn. Pluton ya da Ay"
 
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosfer"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Azimutal İzdüşüm"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Azimutal İzdüşüm"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Azimutal İzdüşüm"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Ana Yönler"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Takımyıldızı Sınırları"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Takımyıldızı Sınırları"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Takımyıldızı Adları"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Takımyıldızı Adları"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Yörünge Çizgisi"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Ekvator Çizgisi"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Ekvatoral İzdüşüm"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Yeryüzü Şekli: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Elle büyütme: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Meridyan Çizgisi"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Meridyan Çizgisi"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Bulutsu Adları"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Gezegen Adları"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Gezegenler"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Takımyıldızı Sınırları"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Takımyıldızı"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Yeryüzü Şekilleri"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Sis"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Yeryüzü"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Yeryüzü"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Konum"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Kraliçe"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Yeryüzü Şekilleri"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Yeryüzü Şekli: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Yeryüzü Şekilleri"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Yeryüzü Şekilleri"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Enlem: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Konum"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Konum"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Boylam: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Kraliçe"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Kraliçe"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Ay"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Ayın Evreleri"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "İmleç Gecikmesi: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Bulutsu Çemberleri"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Bulutsu Çemberleri"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Bulutsu"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Bulutsu"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Uçan Balık"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Gözlem yeri adını girin"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Boylam: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Pazar Yeri"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Dünya"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Gezegenler"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Gezegen Adları"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Gezegen Yörüngeleri"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Projeksiyon :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Projeksiyon :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Uranüs"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Kanatlar"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Betik yöneticisi"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Betik yöneticisi"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Betikler "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Betikler "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Yeryüzü Şeklini Seç:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Samanyolu Yoğunluğu: "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Gök Kültürü: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Yerel Saate Ayarla: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Yıldız Pırıldama Miktarı:"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Gök Kültürü: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Yıldızlar"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Öntanımlı olarak kaydet"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Yıldızlar "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Güneş"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganymede"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Teleskop"
-
 #~ msgid "to save current landscape as the default landscape."
 #~ msgstr "bulunduğunuz noktayı işaretleyip kaydedin."
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Türü: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Takımyıldızı Göstergesi Yoğunluğu"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Takımyıldızı Sınırları"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Takımyıldızı Adları"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Batı"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Öküz"

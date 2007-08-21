@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2007-04-04 22:00+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 11:53+0000\n"
 "Last-Translator: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-04-16 13:38:12+0000\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:58:46+0000\n"
 
 #: src/stel_ui.cpp:727
 #, fuzzy
@@ -26,6 +26,10 @@ msgstr ""
 "   لطفا نسخه به روز رسان را بررسی کنید و مشکل به وجود آمده را ارسال کنید\n"
 "    برای ارسال توضیح از این سایت استفاده کنید : http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " سال‌نوری"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -42,6 +46,10 @@ msgstr ": نرخ معمول"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ""
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "واحد نجومی"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -123,6 +131,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr ""
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "سمت/ارتفاع: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -511,6 +524,11 @@ msgstr ""
 "خط استوای سماوی: ۵    خط دایرة‌البروج: ۴\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "فاصله: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr ""
@@ -607,6 +625,10 @@ msgstr "اِنسلادوس"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "نام رصدخانه را وارد کنید"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -875,6 +897,10 @@ msgstr "فرمان اشتباه"
 msgid "Io"
 msgstr "آیو"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr ""
@@ -993,11 +1019,11 @@ msgstr ":بارگیری پیکربندی پیش‌فرض "
 msgid "Loading Constellation Art: "
 msgstr "بارگیری تصاویر صوَر فلکی: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "بارگیری کاتالوگ NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "بارگیری بافت سحابی‌ها:"
 
@@ -1046,6 +1072,12 @@ msgstr "قدر"
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
+
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "قدر: "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
@@ -1301,6 +1333,10 @@ msgstr "ستاره های دوگانه"
 msgid "Palace Gate"
 msgstr ""
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "طاووس"
@@ -1417,6 +1453,11 @@ msgstr "خروج[CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "خروج[CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "بُعد/مِیل: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1661,6 +1702,10 @@ msgstr ""
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "اندازه: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr ":فرهنگ آسمان "
@@ -1700,6 +1745,10 @@ msgstr ""
 #: src/translations.h:275
 msgid "Spear"
 msgstr ""
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "رده طیفی: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1885,6 +1934,10 @@ msgstr ""
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "نوع: "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -2044,17 +2097,6 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid " (Variable)"
 #~ msgstr " (متغير)"
 
-#, fuzzy
-#~ msgid " : "
-#~ msgstr "مِیل : "
-
-#~ msgid " Light Years"
-#~ msgstr " سال‌نوری"
-
-#, fuzzy
-#~ msgid " name "
-#~ msgstr "نام : "
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: آرگومان(های) نامناسب برای خط فرمان\n"
 
@@ -2064,61 +2106,14 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "(Var)"
 #~ msgstr "(متغیر)"
 
-#, fuzzy
-#~ msgid ", max: "
+#~ msgid ": mag "
 #~ msgstr ": قدر "
-
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "انتخاب چشم انداز ها:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "نام صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "منظره‌ها"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "اسکریپت‌ها "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr ":عرض جغرافیایی "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr ":عرض جغرافیایی "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr ":طول جغرافیایی "
-
-#~ msgid "AU"
-#~ msgstr "واحد نجومی"
 
 #~ msgid "Alt : "
 #~ msgstr "ارتفاع: "
 
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "موقعیت"
-
 #~ msgid "Az  : "
 #~ msgstr "سمت  : "
-
-#~ msgid "Az/Alt: "
-#~ msgstr "سمت/ارتفاع: "
 
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q :خروج\n"
@@ -2126,12 +2121,14 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "CW 113, SH 40"
 #~ msgstr "CW ۱۱۳, SH ۴۰"
 
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "مرزهای صورتهای فلکی"
+#~ msgid "Cardinal points: "
+#~ msgstr "چهارجهت اصلی "
 
 #~ msgid "Chart mode"
 #~ msgstr "حالت نقشه‌ای"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr ":مناظر را انتخاب کنید"
 
 #~ msgid "Constellation"
 #~ msgstr "صورت فلکی"
@@ -2142,29 +2139,17 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "Constellation lines: "
 #~ msgstr ":خطوط صورتهای فلکی "
 
+#~ msgid "DE : "
+#~ msgstr "مِیل : "
+
 #~ msgid "Distance : "
 #~ msgstr "فاصله : "
-
-#~ msgid "Distance: "
-#~ msgstr "فاصله: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "بارگیری بافت سحابی‌ها:"
 
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "حالت تصویر‌کردن چشم‌ماهی"
 
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP ۶۰۷۱۸, HD ۱۰۸۲۴۸, SAO ۲۵۱۹۰۴"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "بارگیری تصاویر صوَر فلکی: "
 
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP: %d/%d"
@@ -2175,34 +2160,11 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "بارگیری کاتالوگ هیپارک:"
 
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "بارگیری کاتالوگ NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "بارگیری کاتالوگ NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "بارگیری بافت سحابی‌ها:"
-
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ SAO: %d/%d"
 
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "بارگیری کاتالوگ NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "بارگیری کاتالوگ NGC: "
-
 #~ msgid "Magnitude : "
 #~ msgstr "قدر : "
-
-#~ msgid "Magnitude: "
-#~ msgstr "قدر: "
 
 #~ msgid "Message"
 #~ msgstr "پیغام"
@@ -2217,16 +2179,11 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ "غیره:n\\ تغییر نرخ بارش شهابی:\n"
 #~ "  ۹\n"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "شمال"
+#~ msgid "Name : "
+#~ msgstr "نام : "
 
 #~ msgid "Nebula"
 #~ msgstr "سحابی"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "سیارات"
 
 #~ msgid "Planet/Moon"
 #~ msgstr "قمر/سیاره"
@@ -2240,24 +2197,11 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "RA : "
 #~ msgstr "بُعد : "
 
-#~ msgid "RA/DE: "
-#~ msgstr "بُعد/مِیل: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr ":ذخیره پیکربندی فعلی به عنوان پیش‌فرض "
-
 #~ msgid "Size : "
-#~ msgstr "اندازه: "
-
-#~ msgid "Size: "
 #~ msgstr "اندازه: "
 
 #~ msgid "Spectral : "
 #~ msgstr "رده طیفی : "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "رده طیفی: "
 
 #~ msgid "Star No./Name"
 #~ msgstr "نام/ شماره ستاره"
@@ -2268,13 +2212,6 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "Type : "
 #~ msgstr "نوع  : "
 
-#~ msgid "Type: "
-#~ msgstr "نوع: "
-
-#, fuzzy
-#~ msgid "Unknown landscape type: "
-#~ msgstr ":مناظر را انتخاب کنید"
-
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
 #~ " -v, --version          Output version information and exit.\n"
@@ -2283,54 +2220,6 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ "Usage: %s [OPTION] ...\n"
 #~ "-v, --version\t\tاطلاعات این نسخه را چاپ کرده و خارج می‌شود.\n"
 #~ " -h, --help             راهنمایی را چاپ کرده و خارج می‌شود.\n"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr ":عرض جغرافیایی "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "کالیستو"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr ":شدت نمایش راه شیری "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "جَوّ"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "رنگ‌ها "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "خطوط صورت فلكي"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "خطوط صورت فلكي"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "مرزهای صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "ذخیره به عنوان پیش‌فرض"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "زمین"
 
 #~ msgid "eg. Crux"
 #~ msgstr "مثلاْ چلیپا"
@@ -2341,292 +2230,8 @@ msgstr ".تغییر دهید تا اِعمال شود"
 #~ msgid "eg. Pluto or Io"
 #~ msgstr "مثلاً پلوتون یا آیو"
 
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "اِنسلادوس"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "جَوّ"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "تقسیمات سَمتی"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "تقسیمات سَمتی"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "تقسیمات سَمتی"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "چهارجهت اصلی "
-
-#, fuzzy
-#~ msgid "flag cardinal_points toggle"
-#~ msgstr "چهارجهت اصلی "
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "بارگیری تصاویر صوَر فلکی: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "مرزهای صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "مرزهای صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "بارگیری تصاویر صوَر فلکی: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "نام صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "نام صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "خط دایرة‌البروج"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "خط استوای سماوی"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "تقسیمات استوایی"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr ":منظره "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr ":زوم دستی "
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "سیارات"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "مرزهای صورتهای فلکی"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "صورت فلکی"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "منظره‌ها"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "مه"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "زمین"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "زمین"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "موقعیت"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "ذات‌الکرسی"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "منظره‌ها"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr ":منظره "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "منظره‌ها"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "منظره‌ها"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr ":عرض جغرافیایی "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "موقعیت"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "موقعیت"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr ":طول جغرافیایی "
-
 #~ msgid "ly"
 #~ msgstr "سال‌نوری"
 
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "ذات‌الکرسی"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "ذات‌الکرسی"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "ماه"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "مقیاس ماه"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "مهلت مکان‌نما: "
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "سحابی"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "سحابی"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "دیوُن"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "ماهی پرنده"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "نام رصدخانه را وارد کنید"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr ":طول جغرافیایی "
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "زمین"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "سیارات"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr ":تصویر کردن"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr ":تصویر کردن"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "اورانوس"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "پرگار"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "فرمانده اسکریپت"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "فرمانده اسکریپت"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "اسکریپت‌ها "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "اسکریپت‌ها "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr ":مناظر را انتخاب کنید"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr ":شدت نمایش راه شیری "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr ":فرهنگ آسمان "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr ":مقدار چشمک‌زدن ستاره"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr ":فرهنگ آسمان "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "ستارگان"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "ذخیره به عنوان پیش‌فرض"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "ستارگان "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "خورشید"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "گانی‌مد"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "تلسکوپ"
-
 #~ msgid "to save current landscape as the default landscape."
 #~ msgstr "ذخیره کردن منظره فعلی به عنوان پیش‌فرض"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "نوع: "
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "مرزهای صورتهای فلکی"

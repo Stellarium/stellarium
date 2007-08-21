@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2007-03-03 05:42+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 12:22+0000\n"
 "Last-Translator: tuan1812 <dohuutuan1812@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-03-03 05:58+0000\n"
+"X-Rosetta-Export-Date: 2007-07-06 16:18:16+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -26,6 +25,10 @@ msgstr ""
 "   Xin vui lòng kiểm tra phiên bản mới hơn và gởi thông báo lỗi\n"
 "    và đóng góp ý kiến cho chúng tôi tại: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Năm ánh sáng"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -42,6 +45,10 @@ msgstr ": Tốc độ bình thường"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Tốc độ mưa sao băng Perseids"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "Đơn vị thiên văn"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -68,9 +75,8 @@ msgid "Andromeda"
 msgstr "Tiên Nữ"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "Máy Bơm Không Khí"
+msgstr ""
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -86,7 +92,7 @@ msgstr "Bảo Bình"
 
 #: src/translations.h:80
 msgid "Aquila"
-msgstr "Đại Bàng"
+msgstr "Thiên Ưng"
 
 #: src/translations.h:83
 msgid "Ara"
@@ -123,6 +129,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "Tác giả: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Độ phương/Độ cao: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -241,9 +252,8 @@ msgid "Cared for by Moon"
 msgstr "Cared for by Moon"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "Xe ngựa"
+msgstr ""
 
 #: src/translations.h:94
 msgid "Carina"
@@ -310,9 +320,8 @@ msgid "Coiled Thong"
 msgstr "Cuộn da"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "Đường nối chòm sao"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
@@ -512,14 +521,18 @@ msgstr ""
 "4 , : Đường elip 5 . : Đường xích đạo\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Khoảng cách: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Con chó"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "Con chó"
+msgstr ""
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -538,9 +551,8 @@ msgid "Drawing of the Constellations [C]"
 msgstr "Đường nối trong chòm sao [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "Cây liễu"
+msgstr ""
 
 #: src/translations.h:209
 msgid "Drum"
@@ -609,6 +621,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Nhập vào tên nơi quan sát"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -827,7 +843,7 @@ msgstr "Giờ"
 
 #: src/translations.h:123
 msgid "Hydra"
-msgstr "Rắn Biển"
+msgstr "Trường Xà"
 
 #: src/translations.h:124
 msgid "Hydrus"
@@ -866,9 +882,8 @@ msgid "Information"
 msgstr "Thông tin"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "Người Da Đỏ"
+msgstr ""
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -877,6 +892,10 @@ msgstr "Mã lệnh sai"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -907,18 +926,16 @@ msgid "Kite of Kawelo"
 msgstr "Diều của Kawelo"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "Sừng"
+msgstr ""
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "Thằn Lằn"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "Thằn Lằn"
+msgstr ""
 
 #: src/translations.h:328
 msgid "Lamp Stand"
@@ -986,9 +1003,8 @@ msgid "Lion"
 msgstr "Sư tử"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "Chim"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
@@ -998,18 +1014,17 @@ msgstr "Nạp cấu hình mặc định: "
 msgid "Loading Constellation Art: "
 msgstr "Đang tải hình vẽ các chòm sao: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Đang tải bảng danh mục NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Đang tải kết cấu các tinh vân:"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "Đang tải bảng danh mục NGC: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1053,14 +1068,19 @@ msgstr "Cường độ"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Tăng cường độ: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Cấp sao biểu kiến: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Giường phụ nữ"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1207,9 +1227,8 @@ msgid "Names of the Constellations [V]"
 msgstr "Tên các chòm sao [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "Con Công"
+msgstr ""
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1312,6 +1331,10 @@ msgstr "Hai ngôi sao"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Cổng cung điện"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1429,6 +1452,11 @@ msgstr "Thoát [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "Thoát [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "Xích kinh/Xích vĩ: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1647,7 +1675,7 @@ msgstr "Thất nương"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Bảy cô gái"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1672,6 +1700,10 @@ msgstr "Tắt: "
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Sidereal"
 msgstr ""
+
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Kích thuớc: "
 
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
@@ -1712,6 +1744,10 @@ msgstr "Sông Nam"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Cây giáo"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Dạng phổ: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1804,9 +1840,8 @@ msgid "Thunder and Lightning"
 msgstr "Sấm sét"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
-msgstr "Tiếng sét"
+msgstr ""
 
 #: src/translations.h:259
 msgid "Thunderbolt"
@@ -1873,9 +1908,8 @@ msgid "Tucana"
 msgstr "Chim Tu-Căng"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "Rùa sông"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
@@ -1894,13 +1928,16 @@ msgid "Two Poles"
 msgstr "Hai cực"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "Hai hàm"
+msgstr ""
 
 #: src/translations.h:330
 msgid "Two in Front"
 msgstr ""
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Loại: "
 
 #: src/translations.h:355
 #, fuzzy
@@ -2047,159 +2084,20 @@ msgstr "Khoảng thời gian phóng to/thu nhỏ: "
 msgid "change to apply."
 msgstr "thay đổi để ghi nhận."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Thời gian thực"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Chỉnh thời gian"
-
 #~ msgid " (Variable)"
 #~ msgstr " Biến quang"
-
-#~ msgid " Light Years"
-#~ msgstr " Năm ánh sáng"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: (Các) đối số trong dòng lệnh sai\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Chọn phong cảnh :"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Hình vẽ các chòm sao [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Phong cảnh"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Kịch bản "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Vĩ độ: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Vĩ độ: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Kinh độ: "
-
-#~ msgid "AU"
-#~ msgstr "Đơn vị thiên văn"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Địa điểm"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Độ phương/Độ cao: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Đường nối chòm sao"
-
-#~ msgid "Distance: "
-#~ msgstr "Khoảng cách: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Đang tải hình vẽ các chòm sao: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Đang tải kết cấu các tinh vân:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Đang tải hình vẽ các chòm sao: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Đang tải bảng danh mục Hipparcos:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Đang tải bảng danh mục NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Đang tải bảng danh mục NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Đang tải kết cấu các tinh vân:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Đang tải bảng danh mục NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Đang tải bảng danh mục NGC: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Cấp sao biểu kiến: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Núi Table"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Mật độ sao băng mỗi phút"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "B"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Tinh vân [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Hành tinh"
-
-#~ msgid "RA/DE: "
-#~ msgstr "Xích kinh/Xích vĩ: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Lưu cấu hình hiện tại thành mặc định: "
-
-#~ msgid "Size: "
-#~ msgstr "Kích thuớc: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Dạng phổ: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Gõ `%s --help' để biết thêm thông tin.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Loại: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2209,395 +2107,3 @@ msgstr "thay đổi để ghi nhận."
 #~ "Cách sử dụng: %s [TÙY CHỌN] ...\n"
 #~ "-v, --phiên bản Xuất thông tin về phiên bản và thoát\n"
 #~ "-h, --trợ giúp Hiển thị trợ giúp và thoát\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Cánh"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Vĩ độ: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Mật độ dãi Ngân Hà "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Tác giả: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Khí quyển"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Đường nối các chòm sao"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Màu sắc "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Độ đậm hình vẽ chòm sao"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Đường nối các chòm sao"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Lưu vào mặc định"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Trái đất"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Khí quyển"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Lưới phương vị"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Lưới phương vị"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Lưới phương vị"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Điểm phương hướng"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Đang tải hình vẽ các chòm sao: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Đang tải hình vẽ các chòm sao: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Đang tải hình vẽ các chòm sao: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Đường hoàng đạo"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Đường quỹ đạo"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Lưới quỹ đạo"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Phong cảnh: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Zoom thủ công: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Đường kinh tuyến"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Đường kinh tuyến"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Tên các hành tinh"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Hành tinh"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Đường nối chòm sao"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Phong cảnh"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Sương mù"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Mặt đất"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Mặt đất"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Charon"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Địa điểm"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Thiên Hậu"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Phong cảnh"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Phong cảnh: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Phong cảnh"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Phong cảnh"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Vĩ độ: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Địa điểm"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Địa điểm"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Kinh độ: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Thiên Hậu"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Thiên Hậu"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Mặt trăng"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Tỉ lệ thật mặt trăng"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Thời gian dấu con chuột: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Vòng bao tinh vân"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Vòng bao tinh vân"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Tinh vân [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Cá Chuồn"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Nhập vào tên nơi quan sát"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Kinh độ: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Chợ"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Trái đất"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Hành tinh"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Tên các hành tinh"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Quỹ đạo các hành tinh"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Hình chiếu :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Hình chiếu :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Thiên vương tinh"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Cánh"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Bộ soạn kịch bản"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Bộ soạn kịch bản"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Kịch bản "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Kịch bản "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Chọn phong cảnh :"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Mật độ dãi Ngân Hà "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Chòm sao theo : "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Thiết lập nơi xảy ra UI "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Số lượng sao nhấp nháy :"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Chòm sao theo : "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Các vì sao"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Lưu vào mặc định"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Các vì sao "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Mặt trời"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganymede"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Kính Viễn Vọng"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Loại: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Độ đậm hình vẽ chòm sao"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Ranh giới các chòm sao"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Tên các chòm sao"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Phương Tây"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Con bò"

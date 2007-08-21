@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-12-02 15:44+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 12:17+0000\n"
 "Last-Translator: Nicolae Crefelean <kneekoo@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
-"X-Rosetta-Export-Date: 2006-12-20 17:38+0000\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:59:03+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -27,6 +27,10 @@ msgstr ""
 "   Pentru noi versiuni , buguri ale programului\n"
 "    şi pentru comentarii accesaţi: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Ani lumină"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -43,6 +47,10 @@ msgstr ": Rata normală"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Rata standard a Perseidelor"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "u.a."
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -124,6 +132,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "Autor: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Az/Alt: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -513,6 +526,11 @@ msgstr ""
 "4, : Linia eclipticii 5. : Linia ecuatorului\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Distanţă: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Câinele"
@@ -610,6 +628,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Introduceţi numele observatorului"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -879,6 +901,10 @@ msgstr "Comandă greşită în script"
 msgid "Io"
 msgstr "Io"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr "Fântâna de Jad"
@@ -999,11 +1025,11 @@ msgstr "Încărcare a configuraţiei implicite : "
 msgid "Loading Constellation Art: "
 msgstr "Încarc imaginile constelaţiilor: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Încarc catalogul NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Se încarcă texturile pentru nebuloase:"
 
@@ -1054,14 +1080,19 @@ msgstr "Magnitudine"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Multiplicator dimensiune magnitudine: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Magnitudine: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Patul Femeii"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1314,6 +1345,10 @@ msgstr "Perechea de Stele"
 msgid "Palace Gate"
 msgstr "Poarta Palatului"
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "Păunul"
@@ -1430,6 +1465,11 @@ msgstr "Închide [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "Închide [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "AD/DE: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1674,6 +1714,10 @@ msgstr "Închide: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Mărime: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Mitologia autohtonă a cerului: "
@@ -1713,6 +1757,10 @@ msgstr "Râul de Sud"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Suliţa"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Tipul Spectral: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1903,6 +1951,10 @@ msgstr "Două Fălci"
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Tipul: "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -2048,159 +2100,20 @@ msgstr "Durata focalizării: "
 msgid "change to apply."
 msgstr "shimbă la \"apply\"."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Ora Actuală"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Ora Prestabilită"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Variabilă)"
-
-#~ msgid " Light Years"
-#~ msgstr " Ani lumină"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Linia de comandă conţine comenzi greşite.\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Alegeţi peisaje:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Numele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Imaginile constelaţiilor [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Numele constelaţiilor"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Peisaje"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Scripturi "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Latitudine : "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Latitudine : "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Longitudine : "
-
-#~ msgid "AU"
-#~ msgstr "u.a."
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Locaţia"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Az/Alt: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Limitele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Liniile Constelaţiilor"
-
-#~ msgid "Distance: "
-#~ msgstr "Distanţă: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Încarc imaginile constelaţiilor: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Se încarcă texturile pentru nebuloase:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Încarc imaginile constelaţiilor: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Încarc catalogul Hipparcos:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Încarc catalogul NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Încarc catalogul NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Se încarcă texturile pentru nebuloase:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Încarc catalogul NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Încarc catalogul NGC: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Magnitudine: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Platoul"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Rata meteoriţilor pe minut"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "N"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Nebuloase [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Planete"
-
-#~ msgid "RA/DE: "
-#~ msgstr "AD/DE: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Salvează configuraţia curentă ca implicită : "
-
-#~ msgid "Size: "
-#~ msgstr "Mărime: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Tipul Spectral: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Încercaţi '%s--ajutor' pentru informaţii suplimentare.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Tipul: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2210,395 +2123,3 @@ msgstr "shimbă la \"apply\"."
 #~ "Utilizare:%s [OPŢIUNE]...\n"
 #~ " -v,--versiune ; afişează versiunea şi închide programul.\n"
 #~ " -h,--ajutor ; afişează comenzile de ajutor şi închide programul.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Aripile"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Latitudine : "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Intensitatea Căii Lactee : "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Autor: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosferă"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Liniile Constelaţiilor"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Culori "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Intensitatea Desenelor Constalaţiilor"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Liniile Constelaţiilor"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Numele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Marginile constelaţiilor"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Salvează ca implicite"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Terra"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosferă"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Tabel azimutal"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Tabel azimutal"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Tabel azimutal"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Puncte cardinale"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Încarc imaginile constelaţiilor: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Limitele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Limitele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Încarc imaginile constelaţiilor: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Numele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Numele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Încarc imaginile constelaţiilor: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Eliptica"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Ecuatorul"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Tabel ecuatorial"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Peisaj: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Focalizare manuală: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Linia Meridianului"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Linia Meridianului"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Numele Nebuloaselor"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Numele Planetelor"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Planete"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Limitele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Liniile Constelaţiilor"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Peisaje"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Ceaţă"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Teren"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Teren"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Charon"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Locaţia"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Casiopeia"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Peisaje"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Peisaj: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Peisaje"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Peisaje"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Latitudine : "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Locaţia"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Locaţia"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Longitudine : "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Casiopeia"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Casiopeia"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Luna"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Mărimea Lunii"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Timp ascundere cursor: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Cercurile Nebuloaselor"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Cercurile Nebuloaselor"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Numele Nebuloaselor"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Nebuloase [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Peştele Zburător"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Introduceţi numele observatorului"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Longitudine : "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Piaţa"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Terra"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Planete"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Numele Planetelor"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Orbitele Planetelor"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Proiecţie :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Proiecţie :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Uranus"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Aripile"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Editor scripturi"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Editor scripturi"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Scripturi "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Scripturi "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Alegeţi peisaje:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Intensitatea Căii Lactee : "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Mitologia autohtonă a cerului: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Stabileşte Limba Interfeţei "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Stele ce clipesc. Numărul lor :"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Mitologia autohtonă a cerului: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Stele"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Salvează ca implicite"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Stele "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Soarele"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganymede"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Telescopul"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Tipul: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Intensitatea Desenelor Constalaţiilor"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Limitele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Numele Constelaţiilor"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Occidental"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Boul"
