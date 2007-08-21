@@ -73,6 +73,10 @@ TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 	}
 }
 
+TreeGrid::~TreeGrid()
+{
+}
+
 void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
 {
     if (node.children.empty())
@@ -130,18 +134,28 @@ void TreeGrid::split(TreeGridNode& node)
 	node.children.push_back(ConvexPolygon(e0,e1,e2));
 }
 
-
-
 void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
 {
-    for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
-    {
-        grid.insert(*io);
-    }
-    for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
-    {
-        fillAll(*ic, grid);
-    }
+	for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
+	{
+		grid.insert(*io);
+	}
+	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+	{
+		fillAll(*ic, grid);
+	}
+}
+
+void TreeGrid::fillAll(const TreeGridNode& node, std::vector<GridObject*>& result) const
+{
+	for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
+	{
+		result.push_back(*io);
+	}
+	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
+	{
+		fillAll(*ic, result);
+	}
 }
 
 unsigned int TreeGrid::depth(const TreeGridNode& node) const
@@ -156,6 +170,16 @@ unsigned int TreeGrid::depth(const TreeGridNode& node) const
     return max + 1;
 }
 
+/*************************************************************************
+ Get all the objects loaded into the grid structure
+*************************************************************************/
+std::vector<GridObject*> TreeGrid::getAllObjects()
+{
+	std::vector<GridObject*> result;
+	fillAll(*this, result);
+	return result;
+}
+	
 #if 1
 #include "Projector.hpp"
 #include "Navigator.hpp"				 

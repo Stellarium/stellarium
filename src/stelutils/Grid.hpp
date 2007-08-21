@@ -27,18 +27,21 @@
 
 using namespace StelGeom;
  
-class Grid : public std::list<GridObject*>
+class Grid : public std::vector<GridObject*>
 {
 public:
     Grid() {}
     
-    ~Grid() {}
+    virtual ~Grid() {}
 
     void filterIntersect(const ConvexS& s) {}
     
+	//! Get all the objects loaded into the grid structure
+	virtual std::vector<GridObject*> getAllObjects() = 0;
+	
 	void insert(GridObject* obj)
     {
-		std::list<GridObject*>::push_back(obj);
+		std::vector<GridObject*>::push_back(obj);
     }
 };
 

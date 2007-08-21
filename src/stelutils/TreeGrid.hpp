@@ -48,7 +48,7 @@ class TreeGrid : public Grid, public TreeGridNode
 {
 public:
     TreeGrid(unsigned int maxobj = 1000);
-    ~TreeGrid() {}
+    virtual ~TreeGrid();
     
 	void insert(GridObject* obj)
     {
@@ -61,6 +61,10 @@ public:
     unsigned int depth() const
     { return depth(*this); }
     
+	//! Get all the objects loaded into the grid structure
+	//! This is quite slow and should not used for time critical operations
+	virtual std::vector<GridObject*> getAllObjects();
+	
 private:
     
 	void insert(GridObject* obj, TreeGridNode& node);
@@ -70,6 +74,7 @@ private:
     void fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const;    
     
     void fillAll(const TreeGridNode& node, Grid& grid) const;
+	void fillAll(const TreeGridNode& node, std::vector<GridObject*>& result) const;
     unsigned int depth(const TreeGridNode& node) const;
     
     unsigned int maxObjects;

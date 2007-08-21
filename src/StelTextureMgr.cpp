@@ -260,8 +260,10 @@ public:
 		}
 		
 		// And add it to the loadQueue for final step in update()
-		QMutexLocker locker(param->loadQueueMutex);
-		param->loadQueue->push_back(param);
+		{
+			QMutexLocker locker(param->loadQueueMutex);
+			param->loadQueue->push_back(param);
+		}
 	}
 
 private:
@@ -349,7 +351,6 @@ void StelTextureMgr::update()
 	for (;iter!=loadQueue.end();++iter)
 	{
 		(*iter)->thread->wait();	// Ensure the thread is properly destroyed
-		QMutexLocker locker((*iter)->outQueueMutex);
 		if ((*iter)->tex->loadState!=ManagedSTexture::LOAD_ERROR)
 		{
 			// Create openGL texture
@@ -359,7 +360,10 @@ void StelTextureMgr::update()
 				(*iter)->tex->loadState=ManagedSTexture::LOAD_ERROR;
 			}
 		}
-		(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
+		{
+			QMutexLocker locker((*iter)->outQueueMutex);
+			(*iter)->outQueue->push_back(new QueuedTex((*iter)->tex, (*iter)->userPtr, (*iter)->url, (*iter)->file));
+		}
 		delete (*iter);
 	}
 	loadQueue.clear();
