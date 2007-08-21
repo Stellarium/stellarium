@@ -117,7 +117,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	Vec3f pXYZ;
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
-	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(0);
+	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(50);
     nebGrid.filterIntersect(p);
 	
 	// Print all the stars of all the selected zones
@@ -151,7 +151,6 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 			} 
 		}
 	}
-	
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
@@ -330,11 +329,11 @@ Nebula *NebulaMgr::searchM(unsigned int M)
 Nebula *NebulaMgr::searchNGC(unsigned int NGC)
 {
 	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	for(iter=neb_array.begin();iter!=neb_array.end();++iter)
 	{
-		if ((*iter)->NGC_nb == NGC) return (*iter);
+		if ((*iter)->NGC_nb == NGC)
+			return (*iter);
 	}
-
 	return NULL;
 }
 
