@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2007-01-29 12:39+0000\n"
-"Last-Translator: kamokamohouse2009 <masas_heavy@pop01.odn.ne.jp>\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-07-17 15:34+0000\n"
+"Last-Translator: sigma <example@example.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-02-11 20:08+0000\n"
+"X-Rosetta-Export-Date: 2007-07-22 04:28:42+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -25,6 +25,10 @@ msgstr ""
 "   新しいバージョンを調べるか、バグレポートやコメントを\n"
 "    右記に送ってください。: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " 光年"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -41,6 +45,10 @@ msgstr ": 一般的な数"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": ペルセウス座流星群ぐらい"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "天文単位"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -123,6 +131,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "作者: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "方位/高度: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -528,6 +541,11 @@ msgstr ""
 "4 , : 黄道線 5 . : 赤道線\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "距離: "
+
 #: src/translations.h:253
 #, fuzzy
 msgid "Dog"
@@ -633,6 +651,10 @@ msgstr "エンケラドス"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "観測所の名前を入力"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -913,9 +935,8 @@ msgid "Information"
 msgstr "情報"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "インディアン"
+msgstr "イヌイット"
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -924,6 +945,10 @@ msgstr "無効なスクリプトコマンド"
 #: src/translations.h:42
 msgid "Io"
 msgstr "イオ"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
 
 #: src/translations.h:249
 #, fuzzy
@@ -958,18 +983,16 @@ msgid "Kite of Kawelo"
 msgstr "Kite of Kawelo(カウェロの凧)"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "角(かく：青龍)"
+msgstr "韓国"
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "とかげ"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "とかげ"
+msgstr "ラコタ"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
@@ -1028,7 +1051,7 @@ msgstr "てんびん"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
-msgstr ""
+msgstr "光害の明るさ: "
 
 #: src/stel_ui_tuiconf.cpp:420
 #, fuzzy
@@ -1053,18 +1076,17 @@ msgstr "標準の環境設定を再設定 : "
 msgid "Loading Constellation Art: "
 msgstr "星座絵をロード中: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "NGC カタログをロード中: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "星雲・星団のテクスチャをロード中"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "NGC カタログをロード中: "
+msgstr "恒星カタログをロード中 "
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1108,14 +1130,19 @@ msgstr "等級"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "等級による倍率 : "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "等級: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "女床(じょしょう：天市垣)"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1172,7 +1199,7 @@ msgstr "子午線"
 
 #: src/stel_ui_conf.cpp:1095
 msgid "Meteor zenith hourly rate"
-msgstr ""
+msgstr "１時間あたりの流れ星の数"
 
 #: src/translations.h:134
 msgid "Microscopium"
@@ -1269,9 +1296,8 @@ msgid "Names of the Constellations [V]"
 msgstr "星座名 [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "くじゃく"
+msgstr "ナバホ"
 
 #: src/translations.h:299
 #, fuzzy
@@ -1384,6 +1410,10 @@ msgstr "Pair of Stars(双子星)"
 #, fuzzy
 msgid "Palace Gate"
 msgstr "闕丘(けっきゅう：朱雀)"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr "年周視差: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1504,6 +1534,11 @@ msgstr "終了 [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "終了 [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "赤経/赤緯: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1762,6 +1797,10 @@ msgstr "終了する : "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "大きさ : "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "星座の地域: "
@@ -1804,6 +1843,10 @@ msgstr "南河(なんか：朱雀)"
 #, fuzzy
 msgid "Spear"
 msgstr "天槍(てんそう：紫微垣)"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "スペクトル型: "
 
 #: src/translations.h:272
 #, fuzzy
@@ -2011,6 +2054,10 @@ msgstr "Two Jaws(割れあご)"
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "型 : "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -2166,159 +2213,20 @@ msgstr "ズーム時間 : "
 msgid "change to apply."
 msgstr "プログラムを再起動してください"
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "現在の時刻"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "設定された時刻"
-
 #~ msgid " (Variable)"
 #~ msgstr " （変光星）"
-
-#~ msgid " Light Years"
-#~ msgstr " 光年"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: コマンド行の引数が違います\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "背景の選択:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "星座絵 [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "背景"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "スクリプト "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "緯度 : "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "緯度 : "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "経度 : "
-
-#~ msgid "AU"
-#~ msgstr "天文単位"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "観測場所"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "方位/高度: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "星座線"
-
-#~ msgid "Distance: "
-#~ msgstr "距離: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "星座絵をロード中: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "星雲・星団のテクスチャをロード中"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "星座絵をロード中: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "ヒッパルコスカタログをロード中:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "NGC カタログをロード中: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "NGC カタログをロード中: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "星雲・星団のテクスチャをロード中"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "NGC カタログをロード中: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "NGC カタログをロード中: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "等級: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "テーブルさん"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "1分あたりの流れ星の数"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "北"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "星雲名 [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "惑星"
-
-#~ msgid "RA/DE: "
-#~ msgstr "赤経/赤緯: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "現在の設定を標準として保存 : "
-
-#~ msgid "Size: "
-#~ msgstr "大きさ : "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "スペクトル型: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "より詳しい情報は `%s --help' を試してください\n"
-
-#~ msgid "Type: "
-#~ msgstr "型 : "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2328,395 +2236,3 @@ msgstr "プログラムを再起動してください"
 #~ "使用法: %s [オプション] ...\n"
 #~ " -v, --version バージョン情報を出力し、終了する。\n"
 #~ " -h, --help このヘルプを出力し、終了する。\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "翼(よく：朱雀)"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "緯度 : "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "カリスト"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "天の川の明るさ : "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "作者: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "大気"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "星座線"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "色 "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "星座絵の明るさ"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "星座線"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "デフォルトとして保存"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "地球"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "エンケラドス"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "大気"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "地平座標"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "地平座標"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "地平座標"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "方位"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "星座絵をロード中: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "星座絵をロード中: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "星座絵をロード中: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "黄道線"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "赤道線"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "赤道座標"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "背景 : "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "手動ズーム : "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "子午線"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "子午線"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "星雲の名前"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "惑星の名前"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "惑星"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "星座線"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "背景"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "もや"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "地表"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "地表"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "カロン"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "観測場所"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "カシオペヤ"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "背景"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "背景 : "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "背景"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "背景"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "緯度 : "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "観測場所"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "観測場所"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "経度 : "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "カシオペヤ"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "カシオペヤ"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "月"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "月の拡大図"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "カーソル表示時間 : "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "星雲の円"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "星雲の円"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "星雲の名前"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "星雲名 [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "ディオーネ"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "とびうお"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "観測所の名前を入力"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "経度 : "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "天市垣(てんいちえん：天市垣)"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "地球"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "惑星"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "惑星の名前"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "惑星の軌道"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "投影法 :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "投影法 :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "天王星"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "翼(よく：朱雀)"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "スクリプトバー"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "スクリプトバー"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "スクリプト "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "スクリプト "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "背景の選択:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "天の川の明るさ : "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "星座の地域: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "操作パネルの言語: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "星のまたたく量 :"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "星座の地域: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "恒星"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "デフォルトとして保存"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "恒星 "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "太陽"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "ガニメデ"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "ぼうえんきょう"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "型 : "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "星座絵の明るさ"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "星座の境界線"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "星座名"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "西洋"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "牛(ぎゅう：玄武)"

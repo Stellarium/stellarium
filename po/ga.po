@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-06-25 12:58+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 11:58+0000\n"
 "Last-Translator: peamur <tristamson@yahoo.ie>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:58:48+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -22,6 +23,10 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Solasblianta"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -38,6 +43,10 @@ msgstr ": Ráta normálta"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ""
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AR"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -119,6 +128,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "Údar: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Asamat/Airde: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -508,6 +522,11 @@ msgstr ""
 "4, : Líne éiclipteach 5. : Líne an mheánchiorcail\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Fad: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "an Madra"
@@ -601,6 +620,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Iontráil ainm réadlainne"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -867,6 +890,10 @@ msgstr ""
 msgid "Io"
 msgstr "IO"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr ""
@@ -987,11 +1014,11 @@ msgstr ""
 msgid "Loading Constellation Art: "
 msgstr ""
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Lódálaim an NGC chatalóg: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Lódálaim na huigeacht na réaltnéalta:"
 
@@ -1040,6 +1067,12 @@ msgstr "Méid"
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
+
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Méid: "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
@@ -1295,6 +1328,10 @@ msgstr ""
 msgid "Palace Gate"
 msgstr ""
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "an Phéacóg"
@@ -1411,6 +1448,11 @@ msgstr "Scoir [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "Scoir [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "Radiain/Céimeanna: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1655,6 +1697,10 @@ msgstr ""
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Méid: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr ""
@@ -1694,6 +1740,10 @@ msgstr ""
 #: src/translations.h:275
 msgid "Spear"
 msgstr "an tSleá"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Aicme speictreach: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1873,6 +1923,10 @@ msgstr ""
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Tíopa: "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -2014,489 +2068,8 @@ msgstr "Aga na sumail "
 msgid "change to apply."
 msgstr ""
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Am iarbhír"
-
 #~ msgid " (Variable)"
 #~ msgstr " (athraitheach)"
 
-#~ msgid " Light Years"
-#~ msgstr " Solasblianta"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Ealaín na réaltbhuíonta [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Tírdhreacha"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Scripteanna "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Leithead: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Leithead: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Fad: "
-
-#~ msgid "AU"
-#~ msgstr "AR"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Áit"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Asamat/Airde: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Línte na realtbhuíonta"
-
-#~ msgid "Distance: "
-#~ msgstr "Fad: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Lódálaim na huigeacht na réaltnéalta:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Lódálaim an chatalog Chipparcois"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Lódálaim an NGC chatalóg: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Lódálaim an NGC chatalóg: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Lódálaim na huigeacht na réaltnéalta:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Lódálaim an NGC chatalóg: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Lódálaim an NGC chatalóg: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Méid: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "an Tábla"
-
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "T"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Réaltnéalta [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Pláinéid"
-
-#~ msgid "RA/DE: "
-#~ msgstr "Radiain/Céimeanna: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Cumraíocht"
-
-#~ msgid "Size: "
-#~ msgstr "Méid: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Aicme speictreach: "
-
-#~ msgid "Type: "
-#~ msgstr "Tíopa: "
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "na hEití"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Leithead: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Déine an Bhealaigh na Bó Finne "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Údar: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmaisféar"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Línte na realtbhuíonta"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Dathanna "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Línte na realtbhuíonta"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Línte na realtbhuíonta"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Sábháil mar réamhshocrú"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Domhan"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmaisféar"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Eangach asamatach"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Eangach asamatach"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Eangach asamatach"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Príomhairde"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Línte na realtbhuíonta"
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Líne an éicliptigh"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Líne an mheánchiorcail"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Eangach mheánchriosach"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Tírdhreach: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Súmáil láimhe: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Líne na fadlíne"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Líne na fadlíne"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Ainmneacha na réaltnéalta"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Ainmneacha na bpláinéad"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Pláinéid"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Línte na realtbhuíonta"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Tírdhreacha"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Ceo"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Talamh"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Talamh"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Carón"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Áit"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Caiseoipé"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Tírdhreacha"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Tírdhreach: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Tírdhreacha"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Tírdhreacha"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Leithead: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Áit"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Áit"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Fad: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Caiseoipé"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Caiseoipé"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Gealach"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Scálú na gealaí"
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Ciorcail na réaltnéalta"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Ciorcail na réaltnéalta"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Ainmneacha na réaltnéalta"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Réaltnéalta [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "an tIasc Eitilte"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Iontráil ainm réadlainne"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Fad: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "an Margadh"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Domhan"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Pláinéid"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Ainmneacha na bpláinéad"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Fithisí na bpláinéad"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Teilgean :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Teilgean :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Úránas"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "na hEití"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Scripteanna "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Scripteanna "
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Déine an Bhealaigh na Bó Finne "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Réaltaí"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Sábháil mar réamhshocrú"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Réaltaí "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Grian"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganaiméide"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "an Teileascóp"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Tíopa: "
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Fóireacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Ainmneacha na réaltbhuíonta"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Thiariocht"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "an Damh"

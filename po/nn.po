@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-09-24 21:38+0000\n"
-"Last-Translator: eikland <eikland@users.sourceforge.net>\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-07-24 08:52+0000\n"
+"Last-Translator: Tor Egil Hoftun Kvæstad <toregilhk@hotmail.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-29 13:58:38+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -25,6 +26,10 @@ msgstr ""
 "   Sjekk om det er ein nyare versjon før du melder\n"
 "    feil eller kommentarar til oss på: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " lysår"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -41,6 +46,10 @@ msgstr ": Normalt antal"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr "Vanleg antal i perseid meteorsverm"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AE"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -123,6 +132,11 @@ msgstr ""
 msgid "Author: "
 msgstr "Forfattar: "
 
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Asimut/høgde: "
+
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
 msgstr "Planprojisert rutenett"
@@ -141,7 +155,7 @@ msgstr "Det trestjerna banner"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "Bjørnehi"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -469,7 +483,7 @@ msgstr ""
 
 #: src/translations.h:310
 msgid "Dilyehe"
-msgstr ""
+msgstr "Dilyehe"
 
 #: src/translations.h:50
 msgid "Dione"
@@ -512,6 +526,11 @@ msgstr ""
 "Z : Planprojiserte ruter (azimutial) E : Sylinderprojiserte (ekvatorial)\n"
 "Enter: Sylinder-/planprojisering\n"
 "\n"
+
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Avstand: "
 
 #: src/translations.h:253
 msgid "Dog"
@@ -593,7 +612,7 @@ msgstr "Egyptisk"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Elg"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -610,6 +629,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Angje namn på observatorium"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr "Ekvatortid"
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -661,7 +684,7 @@ msgstr "Båtferje"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Eldstad"
 
 #: src/translations.h:311
 msgid "First Big One"
@@ -878,6 +901,10 @@ msgstr "Ugyldig skriptkommando"
 msgid "Io"
 msgstr "Io"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr "Jade-brønn"
@@ -974,7 +1001,7 @@ msgstr "Vekta"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
-msgstr ""
+msgstr "Lysstyrke på lysforureining: "
 
 #: src/stel_ui_tuiconf.cpp:420
 #, fuzzy
@@ -998,11 +1025,11 @@ msgstr "Hent standard oppsett: "
 msgid "Loading Constellation Art: "
 msgstr "Hentar stjernebileta: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Hentar NGC-katalog: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Hentar stjernetåkebilete:"
 
@@ -1053,14 +1080,19 @@ msgstr "Storleik"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Multiplikator for lysstyrke: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Lysstyrke: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
-msgstr ""
+msgstr "Mann med lausreven fot"
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Kvinneseng"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1112,7 +1144,7 @@ msgstr "Meridianline"
 
 #: src/stel_ui_conf.cpp:1095
 msgid "Meteor zenith hourly rate"
-msgstr ""
+msgstr "Antal meteorar over senit per time"
 
 #: src/translations.h:134
 msgid "Microscopium"
@@ -1312,6 +1344,10 @@ msgstr "Stjernepar"
 msgid "Palace Gate"
 msgstr "Palassport"
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr "Parallakse: "
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "Påfuglen"
@@ -1429,13 +1465,18 @@ msgstr "Avslutt [Cmd + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Avslutt [Ctrl + Q]"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "Rekt./Dekl.: "
+
 #: src/translations.h:312
 msgid "Rabbit Tracks"
 msgstr ""
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Racerbane"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1468,11 +1509,11 @@ msgstr "Tilbake til dato/tid i dag"
 
 #: src/translations.h:307
 msgid "Revolving Female"
-msgstr ""
+msgstr "Dreibar kvinne"
 
 #: src/translations.h:306
 msgid "Revolving Male"
-msgstr ""
+msgstr "Dreibar mann"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1528,7 +1569,7 @@ msgstr "Sah"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Salamander"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1646,7 +1687,7 @@ msgstr "Sju storfeltar"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Sju små jenter"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1672,6 +1713,10 @@ msgstr "Avslutte: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Storleik: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Stjernebilete utfrå kultur: "
@@ -1690,7 +1735,7 @@ msgstr "Himmeltid: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Slange"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Solar System Body: "
@@ -1711,6 +1756,10 @@ msgstr "Sørlege elv"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Spyd"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Sprektaltype: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1901,6 +1950,10 @@ msgstr "To kjevar"
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Type: "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -1950,8 +2003,9 @@ msgid "Video"
 msgstr "Video"
 
 #: src/stel_ui_conf.cpp:395
+#, fuzzy
 msgid "Viewport Distorter"
-msgstr ""
+msgstr "Forvrenging av biletefelt"
 
 #: src/translations.h:167
 msgid "Virgo"
@@ -2047,159 +2101,20 @@ msgstr "Steg for zoom: "
 msgid "change to apply."
 msgstr "for å vise endringane."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Faktisk tid"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Førehandsvald tid"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Variabel)"
-
-#~ msgid " Light Years"
-#~ msgstr " lysår"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Ugyldig(e) kommandolinjeargument\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Vel landskap:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Namn på stjernebilete"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Stjernebilete - grafikk [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Namn på stjernebileta"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Landskap"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Skript "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Breiddegrad: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Breiddegrad: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Lengdegrad: "
-
-#~ msgid "AU"
-#~ msgstr "AE"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Stad"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Asimut/høgde: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Grenser til stjernebilete"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Liner i stjernebilete"
-
-#~ msgid "Distance: "
-#~ msgstr "Avstand: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Hentar stjernebileta: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Hentar stjernetåkebilete:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Hentar stjernebileta: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hentar Hipparcos stjernekatalog:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Hentar NGC-katalog: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Hentar NGC-katalog: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Hentar stjernetåkebilete:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Hentar NGC-katalog: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Hentar NGC-katalog: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Lysstyrke: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Bordet"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Antal meteorar per minutt"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "N"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Stjernetåker [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Planetar"
-
-#~ msgid "RA/DE: "
-#~ msgstr "Rekt./Dekl.: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Lagre dette oppsettet som standard: "
-
-#~ msgid "Size: "
-#~ msgstr "Storleik: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Sprektaltype: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Prøv '%s --help' for meir informasjon.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Type: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2209,395 +2124,3 @@ msgstr "for å vise endringane."
 #~ "Bruk: %s [Val] ...\n"
 #~ " -v, --version Viser versjonsinformasjon og avsluttar.\n"
 #~ " -h, --help Viser hjelp og avsluttar.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Vengjer"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Breiddegrad: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Intensitet for Mjølkevegen "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Forfattar: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosfære"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Strekteikna stjernebilete"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Fargar "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Intensitet til stjernebilete - grafikk"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Strekteikna stjernebilete"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Namn på stjernebilete"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Grenser til stjernebileta"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Lagre som standard"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Jorda"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosfære"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Planprojisert rutenett"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Planprojisert rutenett"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Planprojisert rutenett"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Himmelretningar"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Hentar stjernebileta: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Grenser til stjernebilete"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Grenser til stjernebilete"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Hentar stjernebileta: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Namn på stjernebilete"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Namn på stjernebilete"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Hentar stjernebileta: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Ekliptisk line"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Ekvatorline"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Sylinderprojisert rutenett"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Landskap: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Manuell zoom: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Meridianline"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Meridianline"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Namn på stjernetåker"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Planetnamn"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Planetar"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Grenser til stjernebilete"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Liner i stjernebilete"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Landskap"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Tåke"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Horisont"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Horisont"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Charon"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Stad"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Kassiopeia"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Landskap"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Landskap: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Landskap"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Landskap"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Breiddegrad: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Stad"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Stad"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Lengdegrad: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Kassiopeia"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Kassiopeia"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Månen"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Skaler månen"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Fjern markør etter: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Stjernetåkesirklar"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Stjernetåkesirklar"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Namn på stjernetåker"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Stjernetåker [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Flygefisken"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Angje namn på observatorium"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Lengdegrad: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Marknad"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Jorda"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Planetar"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Planetnamn"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Planetbanar"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Projeksjon :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Projeksjon :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Uranus"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Vengjer"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Skriptkommandoar"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Skriptkommandoar"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Skript "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Skript "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Vel landskap:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Intensitet for Mjølkevegen "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Stjernebilete utfrå kultur: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Språk i programmet: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Stjernefunkling - intensitet:"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Stjernebilete utfrå kultur: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Stjerner"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Lagre som standard"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Stjerner "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Sola"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganymedes"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Teleskopet"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Type: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Intensitet til stjernebilete - grafikk"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Grenser til stjernebilete"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Namn på stjernebilete"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Vestleg"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Okse"
