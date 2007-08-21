@@ -40,7 +40,8 @@ public:
 	void filterIntersect(const Shape& s);
 
 	//! Get all the object loaded into the grid
-	std::vector<GridObject*>& getAllObjects() {return all;}
+	virtual std::vector<GridObject*> getAllObjects() {return all;}
+	
 private:
 	typedef std::vector<GridObject*> AllObjects;
     AllObjects all;
