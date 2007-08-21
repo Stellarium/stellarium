@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-10-19 15:29+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-07-18 09:39+0000\n"
 "Last-Translator: lmichnovic <ladislav.michnovic@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-22 04:28:13+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -25,6 +26,10 @@ msgstr ""
 "   Prosíme, skontrolujte, či nevyšla novšia verzia a zašlite nám\n"
 "   chybové hlásenia s komentárom na http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " svetelných rokov"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -41,6 +46,10 @@ msgstr ": Normálna intenzita"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Štandardná intenzita Perzeíd"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AU"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -67,9 +76,8 @@ msgid "Andromeda"
 msgstr "Androméda"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "Výveva"
+msgstr "Zviera"
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -123,6 +131,11 @@ msgstr ""
 msgid "Author: "
 msgstr "Autor: "
 
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Azimut/Výška: "
+
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
 msgstr "Azimutálna mriežka"
@@ -141,7 +154,7 @@ msgstr "Vlajka troch hviezd"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "Medvedí brloh"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -149,7 +162,7 @@ msgstr "Vták"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "Nádoba pre veľrybí tuk"
 
 #: src/translations.h:180 src/translations.h:251
 msgid "Boat"
@@ -169,7 +182,7 @@ msgstr "Luk a šíp"
 
 #: src/translations.h:331
 msgid "Breastbone"
-msgstr ""
+msgstr "Hrudná kosť"
 
 #: src/translations.h:171
 msgid "Bull's Foreleg"
@@ -240,9 +253,8 @@ msgid "Cared for by Moon"
 msgstr "Obľúbené  Mesiacom"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "Voz"
+msgstr "Sob"
 
 #: src/translations.h:94
 msgid "Carina"
@@ -309,9 +321,8 @@ msgid "Coiled Thong"
 msgstr "Zvinutý remeň"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "Čiary súhvezdí"
+msgstr "Kľúčne kosti"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
@@ -468,7 +479,7 @@ msgstr ""
 
 #: src/translations.h:310
 msgid "Dilyehe"
-msgstr ""
+msgstr "Diljeh (Plejády)"
 
 #: src/translations.h:50
 msgid "Dione"
@@ -510,14 +521,18 @@ msgstr ""
 "4 : čiara ekliptiky               5 : ekvatoriálna čiara\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Vzdialenosť: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Pes"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "Pes"
+msgstr "Psy"
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -536,9 +551,8 @@ msgid "Drawing of the Constellations [C]"
 msgstr "Vykresliť súhvezdia [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "Vŕba"
+msgstr "Suchá vŕba"
 
 #: src/translations.h:209
 msgid "Drum"
@@ -590,7 +604,7 @@ msgstr "Egyptská"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Jeleň kanadský"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -607,6 +621,10 @@ msgstr "Enceladus"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Zadaj meno observatória"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr "Ekvinokcium"
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -658,15 +676,15 @@ msgstr "Pramica"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Pahreba"
 
 #: src/translations.h:311
 msgid "First Big One"
-msgstr ""
+msgstr "Prvý Veľký"
 
 #: src/translations.h:313
 msgid "First Slim One"
-msgstr ""
+msgstr "Prvý Chudý"
 
 #: src/translations.h:228
 msgid "Five Chariots"
@@ -776,7 +794,7 @@ msgstr "Žeriav"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "Ruka"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -863,9 +881,8 @@ msgid "Information"
 msgstr "Informácie"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "Indián"
+msgstr "Eskimácka"
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -874,6 +891,10 @@ msgstr "Nesprávny skriptovací príkaz"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -904,22 +925,20 @@ msgid "Kite of Kawelo"
 msgstr "Kawelov šarkan"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "Roh"
+msgstr "Kórejská"
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "Jašterica"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "Jašterica"
+msgstr "Indiánska - kmeň Lakota"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
-msgstr ""
+msgstr "Stojan pre lampáš"
 
 #: src/translations.h:250
 msgid "Lance"
@@ -971,7 +990,7 @@ msgstr "Váhy"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
-msgstr ""
+msgstr "Jas svetelneho znečistenia: "
 
 #: src/stel_ui_tuiconf.cpp:420
 #, fuzzy
@@ -983,9 +1002,8 @@ msgid "Lion"
 msgstr "Lev"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "Vták"
+msgstr "Jašterica"
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
@@ -995,18 +1013,17 @@ msgstr "Nahraj pôvodné nastavenie: "
 msgid "Loading Constellation Art: "
 msgstr "Nahrávam obrázky súhvezdí: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Nahrávam katalóg NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Nahrávam textúry hmlovín:"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "Nahrávam katalóg NGC: "
+msgstr "Nahrávam katalóg "
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1050,14 +1067,19 @@ msgstr "Magnitúda"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Násobiteľ kalibrovania magnitúdy: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Magnitúda: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
-msgstr ""
+msgstr "Človek s roztiahnutými nohami"
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Posteľ ženy"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1109,7 +1131,7 @@ msgstr "Poludník"
 
 #: src/stel_ui_conf.cpp:1095
 msgid "Meteor zenith hourly rate"
-msgstr ""
+msgstr "hod. intenzita meteorov"
 
 #: src/translations.h:134
 msgid "Microscopium"
@@ -1205,9 +1227,8 @@ msgid "Names of the Constellations [V]"
 msgstr "Názvy súhvezdí [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "Páv"
+msgstr "Indiánska - kmeň Navaho"
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1310,6 +1331,10 @@ msgstr "Pár hviezd"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Palácová brána"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr "paralaxa: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1428,13 +1453,18 @@ msgstr "Skončiť [PRÍKAZ + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Skončiť [CTRL + Q]"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "Rekt./Dekl.: "
+
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "Stopy králika"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Bežecká dráha"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1467,11 +1497,11 @@ msgstr "Nastaviť súčasný čas [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
-msgstr ""
+msgstr "Otáčajúca sa žena"
 
 #: src/translations.h:306
 msgid "Revolving Male"
-msgstr ""
+msgstr "Otáčajúci sa muž"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1507,7 +1537,7 @@ msgstr "Zhnitá tekvica"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "Bežci"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
@@ -1527,7 +1557,7 @@ msgstr "Sah"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Salamander"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1645,7 +1675,7 @@ msgstr "Sedem Excelencií"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Sedem malých dievčat"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1671,6 +1701,10 @@ msgstr "Vypnúť: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Veľkosť: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Kultúra (týka sa súhvezdí): "
@@ -1689,7 +1723,7 @@ msgstr "Čas oblohy: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Had"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Solar System Body: "
@@ -1710,6 +1744,10 @@ msgstr "Južná rieka"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Kopija"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Spektrálny typ: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1802,9 +1840,8 @@ msgid "Thunder and Lightning"
 msgstr "Hrom a blesk"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
-msgstr "Blesk"
+msgstr "Hromový vták"
 
 #: src/translations.h:259
 msgid "Thunderbolt"
@@ -1871,9 +1908,8 @@ msgid "Tucana"
 msgstr "Tukan"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "Riečna korytnačka"
+msgstr "Korytnačka"
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
@@ -1885,20 +1921,23 @@ msgstr "Dvoje čeľuste"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
-msgstr ""
+msgstr "Dvojica ďaleko vzadu"
 
 #: src/translations.h:172
 msgid "Two Poles"
 msgstr "Dva póly"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "Dvoje čeľuste"
+msgstr "Dva slnečné lúče"
 
 #: src/translations.h:330
 msgid "Two in Front"
-msgstr ""
+msgstr "Dvojica vpredu"
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Typ: "
 
 #: src/translations.h:355
 #, fuzzy
@@ -1949,7 +1988,7 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
-msgstr ""
+msgstr "Zakrivenie pohľadu"
 
 #: src/translations.h:167
 msgid "Virgo"
@@ -2045,159 +2084,20 @@ msgstr "Trvanie zväčšenia: "
 msgid "change to apply."
 msgstr "aby sa zmeny použili."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Aktuálny čas"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Prednastaviť čas"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Premenná)"
-
-#~ msgid " Light Years"
-#~ msgstr " svetelných rokov"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Nesprávne argumenty príkazu\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Zvoľ okolitú krajinu:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Kresby súhvezdí [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Terén"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Skripty "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Zemepisná šírka: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Zemepisná šírka: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Zemepisná dĺžka: "
-
-#~ msgid "AU"
-#~ msgstr "AU"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Umiestnenie"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Azimut/Výška: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Čiary súhvezdí"
-
-#~ msgid "Distance: "
-#~ msgstr "Vzdialenosť: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Nahrávam obrázky súhvezdí: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Nahrávam textúry hmlovín:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Nahrávam obrázky súhvezdí: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Nahrávam katalóg Hipparcos:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Nahrávam katalóg NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Nahrávam katalóg NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Nahrávam textúry hmlovín:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Nahrávam katalóg NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Nahrávam katalóg NGC: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Magnitúda: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Stolový vrch"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Počet meteorov/min."
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "Sever"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Hmloviny [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Planéty"
-
-#~ msgid "RA/DE: "
-#~ msgstr "Rekt./Dekl.: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Ulož aktuálne nastavenie ako štandardné: "
-
-#~ msgid "Size: "
-#~ msgstr "Veľkosť: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Spektrálny typ: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Viac informácií získate príkazom `%s --help'.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Typ: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2207,395 +2107,3 @@ msgstr "aby sa zmeny použili."
 #~ "Použitie: %s [VOĽBA] ...\n"
 #~ " -v, --version Vypíše informáciu o verzii a skončí.\n"
 #~ " -h, --help Vypíše tento text a skončí.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Krídla"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Zemepisná šírka: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Callisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Intenzita Mliečnej dráhy "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Autor: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosféra"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "čiary súhvezdí"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Farby "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Intenzita kresieb súhvezdí"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "čiary súhvezdí"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Nastaviť ako predvolené"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Zem"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Enceladus"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosféra"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Azimutálna mriežka"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Azimutálna mriežka"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Azimutálna mriežka"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Svetové strany"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Nahrávam obrázky súhvezdí: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Nahrávam obrázky súhvezdí: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Nahrávam obrázky súhvezdí: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "čiara ekliptiky"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Rovníková čiara"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Ekvatoriálna mriežka"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Terén: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Ručné zväčšenie: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Poludník"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Poludník"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Názvy hmlovín"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Názvy planét"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Planéty"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Čiary súhvezdí"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Terén"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Hmla"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Zem"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Zem"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Umiestnenie"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Terén"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Terén: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Terén"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Terén"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Zemepisná šírka: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Umiestnenie"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Umiestnenie"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Zemepisná dĺžka: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Mesiac"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Mesačná škála"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Miznutie kurzora (sekundy): "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Kruhy hmlovín"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Kruhy hmlovín"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Názvy hmlovín"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Hmloviny [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Dione"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Lietajúca ryba"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Zadaj meno observatória"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Zemepisná dĺžka: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Tržnica"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Zem"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Planéty"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Názvy planét"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Dráhy planét"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Projekcia"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Projekcia"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Urán"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Krídla"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Skriptovací commander"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Skriptovací commander"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Skripty "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Skripty "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Zvoľ okolitú krajinu:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Intenzita Mliečnej dráhy "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Kultúra (týka sa súhvezdí): "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Nastav jazyk pre UI: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Mihotanie hviezd. Rozsah:"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Kultúra (týka sa súhvezdí): "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Hviezdy"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Nastaviť ako predvolené"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Hviezdy "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Slnko"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganymedes"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Ďalekohľad"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Typ: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Intenzita kresieb súhvezdí"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Hranice súhvezdí"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Názvy súhvezdí"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Západná"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Vôl"

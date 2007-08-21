@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-09-26 16:06+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-07-09 17:12+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-13 00:18:20+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -25,6 +26,10 @@ msgstr ""
 "   Παρακαλώ ελέγξτε για νέες εκδόσεις και στείλτε αναφορά σφάλματος\n"
 "    και σχόλια σε έμας στο: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Έτη Φωτός"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -41,6 +46,10 @@ msgstr ": Κανονικός ρυθμός"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Τυπικός ρυθμός Περσίδων"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AU"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -67,9 +76,8 @@ msgid "Andromeda"
 msgstr "Ανδρόμεδα"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "Αντλία"
+msgstr "Ζώο"
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -123,6 +131,11 @@ msgstr ""
 msgid "Author: "
 msgstr "Συγγραφέας "
 
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Αζ/Υψ: "
+
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
 msgstr "Πλέγμα Αζιμούθιου"
@@ -141,7 +154,7 @@ msgstr "Λάβαρο των Τριών Αστεριών"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "Φωλιά της Αρκούδας"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -149,7 +162,7 @@ msgstr "Πουλί"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "Δοχείο Λίπους (Inuit)"
 
 #: src/translations.h:180 src/translations.h:251
 msgid "Boat"
@@ -169,7 +182,7 @@ msgstr "Τόξο και Βέλος"
 
 #: src/translations.h:331
 msgid "Breastbone"
-msgstr ""
+msgstr "Θώρακας"
 
 #: src/translations.h:171
 msgid "Bull's Foreleg"
@@ -240,9 +253,8 @@ msgid "Cared for by Moon"
 msgstr "Φροντισμένο από το Φεγγάρι"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "Άρμα"
+msgstr "Καριμπού"
 
 #: src/translations.h:94
 msgid "Carina"
@@ -309,9 +321,8 @@ msgid "Coiled Thong"
 msgstr "Κουλουριασμένο λουρί"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "Γραμμές Αστερισμών"
+msgstr "Κόκαλα Κλείδας"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
@@ -468,7 +479,7 @@ msgstr ""
 
 #: src/translations.h:310
 msgid "Dilyehe"
-msgstr ""
+msgstr "Dilyehe (Πλειάδες)"
 
 #: src/translations.h:50
 msgid "Dione"
@@ -511,14 +522,18 @@ msgstr ""
 "4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Απόσταση: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Σκύλος"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "Σκύλος"
+msgstr "Σκύλοι"
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -537,7 +552,6 @@ msgid "Drawing of the Constellations [C]"
 msgstr "Σχέδιο του Αστερισμού [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
 msgstr "Ιτιά"
 
@@ -591,7 +605,7 @@ msgstr "Αιγυπτιακός"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Ελάφι"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -608,6 +622,10 @@ msgstr "Εγκέλαδος"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Εισάγετε όνομα παρατηρητηρίου"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr "Εξίσωση ημερομηνίας"
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -661,15 +679,15 @@ msgstr "Καράβι"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Τζάκι"
 
 #: src/translations.h:311
 msgid "First Big One"
-msgstr ""
+msgstr "Το Πρώτο Μεγάλο"
 
 #: src/translations.h:313
 msgid "First Slim One"
-msgstr ""
+msgstr "Το Πρώτο Λυγερόκορμο"
 
 #: src/translations.h:228
 msgid "Five Chariots"
@@ -779,7 +797,7 @@ msgstr "Γερανός"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "Χέρι"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -866,9 +884,8 @@ msgid "Information"
 msgstr "Πληροφορίες"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "Ινδός"
+msgstr "Ίνουιτ (Εσκιμώος)"
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -877,6 +894,10 @@ msgstr "Λανθασμένη εντολή Σεναριου"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Ιώ"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -907,22 +928,20 @@ msgid "Kite of Kawelo"
 msgstr "Χαρταετός του Καγουίλο"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "Κέρατο"
+msgstr "Κορεάτικη"
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "Σαύρα"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "Σαύρα"
+msgstr "Ινδιάνοι Λακότα"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
-msgstr ""
+msgstr "Στήριγμα Λάμπας"
 
 #: src/translations.h:250
 msgid "Lance"
@@ -974,7 +993,7 @@ msgstr "Ζυγός"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
-msgstr ""
+msgstr "θάμπωση φωτορύπανσης "
 
 #: src/stel_ui_tuiconf.cpp:420
 #, fuzzy
@@ -986,9 +1005,8 @@ msgid "Lion"
 msgstr "Λέων"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "Πουλί"
+msgstr "Σαύρα"
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
@@ -998,16 +1016,15 @@ msgstr "Φόρτωση Προεπιλεγμένων Ρυθμίσεων: "
 msgid "Loading Constellation Art: "
 msgstr "Φόρτωση Σχεδίων Αστερισμών: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Φόρτωση καταλόγου NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
 msgstr "Φόρτωση καταλόγου NGC: "
 
@@ -1053,14 +1070,19 @@ msgstr "Μέγεθος"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Μέγεθος: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
-msgstr ""
+msgstr "Άντρας με τα πόδια ανοιχτά"
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Κρεβάτι Γυναίκας"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1112,7 +1134,7 @@ msgstr "Μεσημβρινός"
 
 #: src/stel_ui_conf.cpp:1095
 msgid "Meteor zenith hourly rate"
-msgstr ""
+msgstr "Ωριαίος ρυθμός μετέωρων στο μέγιστο"
 
 #: src/translations.h:134
 msgid "Microscopium"
@@ -1209,9 +1231,8 @@ msgid "Names of the Constellations [V]"
 msgstr "Ονόματα των Αστερισμών [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "Ταώς"
+msgstr "Ινδιάνοι Ναβάχο"
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1314,6 +1335,10 @@ msgstr "Ζευγάρι από αστέρια"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Πύλη του Παλατιού"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr "Παράλλαξη: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1432,13 +1457,18 @@ msgstr "Έξοδος [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Έξοδος [CTRL + Q]"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "RA/DE: "
+
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "Ίχνη Λαγού"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Πίστα Αγώνων"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1471,11 +1501,11 @@ msgstr "Επιστροφή στην Τρέχουσα Χρόνου"
 
 #: src/translations.h:307
 msgid "Revolving Female"
-msgstr ""
+msgstr "Περιστρεφόμενη Γυναίκα"
 
 #: src/translations.h:306
 msgid "Revolving Male"
-msgstr ""
+msgstr "Περιστρεφόμενος Άντρας"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1511,7 +1541,7 @@ msgstr "Σάπια Κολοκύθα"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "Δρομείς"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
@@ -1531,7 +1561,7 @@ msgstr "Σαχ"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Σαλαμάνδρα"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1649,7 +1679,7 @@ msgstr "Επτά Εξοχότητες"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Επτά Μικρά Κορίτσια"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1675,6 +1705,10 @@ msgstr "Τερματισμός: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Μέγεθος: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Πολιτισμός Ουρανού: "
@@ -1693,7 +1727,7 @@ msgstr "Ώρα Ουρανού: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Φίδι"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Solar System Body: "
@@ -1714,6 +1748,10 @@ msgstr "Νότιος Ποταμός"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Λόγχη"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Τύπος φάσματος "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1806,7 +1844,6 @@ msgid "Thunder and Lightning"
 msgstr "Κεραυνός και Αστραπή"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
 msgstr "Κεραυνός"
 
@@ -1875,9 +1912,8 @@ msgid "Tucana"
 msgstr "Τουκάνα"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "Χελώνα Λίμνης"
+msgstr "Χελώνα"
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
@@ -1889,20 +1925,23 @@ msgstr "Δύο Σαγόνια"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
-msgstr ""
+msgstr "Δύο Τοποθετημένα Μακριά"
 
 #: src/translations.h:172
 msgid "Two Poles"
 msgstr "Δύο Πόλοι"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "Δύο Σαγόνια"
+msgstr "Δύο Ηλιαχτίδες"
 
 #: src/translations.h:330
 msgid "Two in Front"
-msgstr ""
+msgstr "Δύο Μπροστά"
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Τύπος: "
 
 #: src/translations.h:355
 #, fuzzy
@@ -1953,7 +1992,7 @@ msgstr "Βίντεο"
 
 #: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
-msgstr ""
+msgstr "Παραμορφωτής σφαιρικού καθρέπτη"
 
 #: src/translations.h:167
 msgid "Virgo"
@@ -2049,159 +2088,20 @@ msgstr "Διάρκεια Εστίασης: "
 msgid "change to apply."
 msgstr "αλλάξτε για εφαρμογή."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Πραγματική 'Ωρα"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Προκαθορισμένη Ώρα"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Μεταβλητή)"
-
-#~ msgid " Light Years"
-#~ msgstr " Έτη Φωτός"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Λάθος γραμμής εντολής σύνοψης\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Επιλογή τοπίου:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Σχέδια των Αστερισμών [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Τοπία"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Σενάριο "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Πλάτος: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Πλάτος: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Μήκος: "
-
-#~ msgid "AU"
-#~ msgstr "AU"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Τοποθεσία"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Αζ/Υψ: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Γραμμές Αστερισμών"
-
-#~ msgid "Distance: "
-#~ msgstr "Απόσταση: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Φόρτωση Σχεδίων Αστερισμών: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Φόρτωση Σχεδίων Αστερισμών: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Φόρτωση καταλόγου Hipparcos:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Φόρτωση καταλόγου NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Φόρτωση καταλόγου NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Φόρτωση καταλόγου NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Φόρτωση καταλόγου NGC: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Μέγεθος: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Τράπεζα"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Ρυθμός Μετεωρήτων ανα λεπτό"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "Β"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Γαλαξιακά Νεφελώματα [Ν]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Πλανήτες"
-
-#~ msgid "RA/DE: "
-#~ msgstr "RA/DE: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Αποθήκευση Τρέχουσων Ρυθμίσεων ως Προεπιλεγμένες "
-
-#~ msgid "Size: "
-#~ msgstr "Μέγεθος: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Τύπος φάσματος "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Δοκιμάστε `%s --help' για περισσότερες πληροφορίες.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Τύπος: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2212,395 +2112,3 @@ msgstr "αλλάξτε για εφαρμογή."
 #~ " -v, --version Δίνει ώς έξοδο πληροφορίες για την εκδοση και μετά γίνεται "
 #~ "έξοδος.\n"
 #~ "-h, --help Παρουσιάζει αυτή τη βοήθεια και μετά γίνεται έξοδος.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Φτερά"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Πλάτος: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Καλλιστώ"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Φωτεινότητα Γαλαξία: "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Συγγραφέας "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Ατμόσφαιρα"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Γραμμές Αστερισμών"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Χρώματα "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Ένταση Καλλιτεχνίας Αστερισμών"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Γραμμές Αστερισμών"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Αποθήκευση ως προεπιλεγμένο"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Γη"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Εγκέλαδος"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Ατμόσφαιρα"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Πλέγμα Αζιμούθιου"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Πλέγμα Αζιμούθιου"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Πλέγμα Αζιμούθιου"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Σημεία του Ορίζοντα"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Φόρτωση Σχεδίων Αστερισμών: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Φόρτωση Σχεδίων Αστερισμών: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Φόρτωση Σχεδίων Αστερισμών: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Εκλειπτική Γραμμή"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Γραμμή Ισημερινού"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Πλέγμα Ισημερινού"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Τοπίο: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Χειροκίνητη εστιάση: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Μεσημβρινός"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Μεσημβρινός"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Ονόματα Νεφελωμάτων"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Ονόματα Πλανητών"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Πλανήτες"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Γραμμές Αστερισμών"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Τοπία"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Ομίχλη"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Έδαφος"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Έδαφος"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Χάρος"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Τοποθεσία"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Κασσιώπη"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Τοπία"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Τοπίο: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Τοπία"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Τοπία"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Πλάτος: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Τοποθεσία"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Τοποθεσία"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Μήκος: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Κασσιώπη"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Κασσιώπη"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Σελήνη"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Κλίμακα Φεγγαριού"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Τέλος χρονικού ορίου Κέρσορα "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Κύκλοι Νεφελωμάτων"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Κύκλοι Νεφελωμάτων"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Ονόματα Νεφελωμάτων"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Γαλαξιακά Νεφελώματα [Ν]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Διώνη"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Ιπτάμενος Ιχθύς"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Εισάγετε όνομα παρατηρητηρίου"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Μήκος: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Αγορά"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Γη"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Πλανήτες"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Ονόματα Πλανητών"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Τροχιές Πλανητών"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Προβολή :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Προβολή :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Ουρανός"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Φτερά"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Ρυθμιστής Σεναρίου"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Ρυθμιστής Σεναρίου"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Σενάριο "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Σενάριο "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Επιλογή τοπίου:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Φωτεινότητα Γαλαξία: "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Πολιτισμός Ουρανού: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Ρύθμιση περιβάλλοντος διασύνδεσης χρήστη "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Αναλαμπές Άστρων. Ποσοστό :"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Πολιτισμός Ουρανού: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Άστρα"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Αποθήκευση ως προεπιλεγμένο"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Αστέρια "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Ήλιος"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Γανυμήδης"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Τηλεσκόπιον"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Τύπος: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Ένταση Καλλιτεχνίας Αστερισμών"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Όρια Αστερισμών"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Ονόματα Αστερισμών"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Δυτικός"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Βόδι"

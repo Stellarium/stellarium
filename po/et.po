@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-01-28 22:34+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 11:51+0000\n"
 "Last-Translator: H_M_Murdock_EST <eerove@gmail.com>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:58:44+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -22,6 +23,10 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Valgusaasta"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -37,6 +42,10 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
+msgstr ""
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:401
@@ -117,6 +126,11 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
+msgstr ""
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
 msgstr ""
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
@@ -484,6 +498,11 @@ msgid ""
 "\n"
 msgstr ""
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr ""
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr ""
@@ -574,6 +593,10 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
+msgstr ""
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
@@ -841,6 +864,10 @@ msgstr ""
 msgid "Io"
 msgstr ""
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr ""
@@ -957,18 +984,17 @@ msgstr ""
 msgid "Loading Constellation Art: "
 msgstr ""
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr ""
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr ""
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "Hipparcose kataloogi laadimine:"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1009,6 +1035,12 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude Scaling Multiplier: "
+msgstr ""
+
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
 msgstr ""
 
 #: src/translations.h:308
@@ -1252,6 +1284,10 @@ msgstr ""
 msgid "Palace Gate"
 msgstr ""
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr ""
@@ -1368,6 +1404,11 @@ msgstr "Katkesta [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "Katkesta [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr ""
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1612,6 +1653,10 @@ msgstr ""
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr ""
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr ""
@@ -1650,6 +1695,10 @@ msgstr ""
 
 #: src/translations.h:275
 msgid "Spear"
+msgstr ""
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
 msgstr ""
 
 #: src/translations.h:272
@@ -1828,6 +1877,10 @@ msgstr ""
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr ""
+
 #: src/translations.h:355
 msgid "USB Script: "
 msgstr ""
@@ -1968,113 +2021,5 @@ msgstr ""
 msgid "change to apply."
 msgstr ""
 
-#~ msgid " Light Years"
-#~ msgstr " Valgusaasta"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Asukoht"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Konfiguratsioon"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
+#~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hipparcose kataloogi laadimine:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Hipparcose kataloogi laadimine:"
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Hipparcose kataloogi laadimine:"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Planeedid"
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Konfiguratsioon"
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosfäär"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Värvid "
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosfäär"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Ekvaatorijoon"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Planeedid"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Udu"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Maapind"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Maapind"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Asukoht"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Maastikud"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Asukoht"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Asukoht"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Planeedid"
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Tähed"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Tähed "

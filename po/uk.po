@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-06-26 11:07+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 12:21+0000\n"
 "Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
-"Language-Team:\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:59:08+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -27,6 +28,10 @@ msgstr ""
 "   Будь-ласка перевірте наявність новішої версії і відішліть \n"
 "    повідомлення про помилки в програмі на http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Світлові роки"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -43,6 +48,10 @@ msgstr ": Нормальна"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Стандартна кількість Персеїд"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "АО"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -124,6 +133,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "Автор: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Азимут/Висота: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -514,6 +528,11 @@ msgstr ""
 "4 , : Лінія екліптики 5 . : Лінія екватора\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Відстань: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Пес"
@@ -611,6 +630,10 @@ msgstr "Енцелад"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Введіть ім'я обсерваторії"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -877,6 +900,10 @@ msgstr "Непрацездатна команда сценарію"
 msgid "Io"
 msgstr "Іо"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
+
 #: src/translations.h:249
 msgid "Jade Well"
 msgstr "Нефритовий колодязь"
@@ -997,11 +1024,11 @@ msgstr "Завантажити типову конфіґурацію: "
 msgid "Loading Constellation Art: "
 msgstr "Завантаження малюнка сузір'я: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Завантаження каталогу NGC: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Завантаження текстур туманностей:"
 
@@ -1052,14 +1079,19 @@ msgstr "Величина"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Множник зміни величини: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Величина: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Ліжко жінки"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1307,6 +1339,10 @@ msgstr "Пара зірок"
 msgid "Palace Gate"
 msgstr "Ворота палацу"
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "Павич"
@@ -1424,6 +1460,11 @@ msgstr "Вихід [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "Вихід [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "Радіани/Градуси: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1668,6 +1709,10 @@ msgstr ""
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Розмір: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Культура неба: "
@@ -1708,6 +1753,10 @@ msgstr "Південна ріка"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Спис"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Спектральний тип: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1898,6 +1947,10 @@ msgstr "Дві щелепи"
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Тип: "
+
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
@@ -2043,27 +2096,8 @@ msgstr "Трівалість збільшення: "
 msgid "change to apply."
 msgstr "застосування змін."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Справжній час"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Заданий час"
-
 #~ msgid " (Variable)"
 #~ msgstr " (Змінна)"
-
-#, fuzzy
-#~ msgid " : "
-#~ msgstr "Висота (m): "
-
-#~ msgid " Light Years"
-#~ msgstr " Світлові роки"
 
 #~ msgid " in file "
 #~ msgstr " у файлі "
@@ -2071,74 +2105,19 @@ msgstr "застосування змін."
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Невірний(ні) аргумент(и) командного рядка\n"
 
-#, fuzzy
-#~ msgid ") failed: "
-#~ msgstr " у файлі "
-
-#, fuzzy
-#~ msgid ".  No landscape in use.\n"
+#~ msgid "(landscape is: \"%s\")\n"
 #~ msgstr "(ландшафт є: \"%s\")\n"
 
 #, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "(ландшафт є: \"%s\")\n"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Назви сузір'їв"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Пейзажі"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Сценарії "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Широта: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Широта: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Довгота: "
-
-#~ msgid "AU"
-#~ msgstr "АО"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Розташування"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Азимут/Висота: "
-
-#, fuzzy
-#~ msgid "Boundary file "
-#~ msgstr " у файлі "
+#~ msgid "Alt : "
+#~ msgstr "Висота (m): "
 
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q  : Вихід\n"
 
 #, fuzzy
-#~ msgid "Can't find file \""
-#~ msgstr " у файлі "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Збереження розташування %s до файлу %s\n"
+#~ msgid "Choose landscapes :"
+#~ msgstr " Виберіть ландшафти :"
 
 #~ msgid "Constellation"
 #~ msgstr "Сузір'я"
@@ -2151,50 +2130,15 @@ msgstr "застосування змін."
 #~ msgid "Constellation lines: "
 #~ msgstr "Сузір'я "
 
-#~ msgid "Distance: "
-#~ msgstr "Відстань: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Завантаження текстур туманностей:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Завантаження малюнка сузір'я: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Завантаження каталогу Hipparcos:"
 
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Завантаження каталогу NGC: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Завантаження каталогу NGC: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Завантаження текстур туманностей:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Завантаження каталогу NGC: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Завантаження каталогу NGC: "
+#~ msgid "Loading configuration file "
+#~ msgstr "Завантаження конфігураційного файлу "
 
 #, fuzzy
 #~ msgid "Magnitude : "
 #~ msgstr "Величина "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Величина: "
 
 #~ msgid "Message"
 #~ msgstr "Повідомлення"
@@ -2210,20 +2154,8 @@ msgstr "застосування змін."
 #~ "Інше:\n"
 #~ "9 : Увімкнути метеорний дощ\n"
 
-#, fuzzy
-#~ msgid "NGC data file "
-#~ msgstr " у файлі "
-
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "Пн"
-
 #~ msgid "Nebula"
 #~ msgstr "Туманність"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Планети"
 
 #~ msgid "Planet/Moon"
 #~ msgstr "Планета/місяць"
@@ -2231,43 +2163,11 @@ msgstr "застосування змін."
 #~ msgid "Planets & Moons"
 #~ msgstr "Планети & місяці"
 
-#~ msgid "RA/DE: "
-#~ msgstr "Радіани/Градуси: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Завантаження конфігураційного файлу "
-
-#, fuzzy
-#~ msgid "Saving landscape name in file "
-#~ msgstr "Збереження розташування %s до файлу %s\n"
-
-#, fuzzy
-#~ msgid "Saving language in file "
-#~ msgstr "Завантаження конфігураційного файлу "
-
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "Збереження розташування %s до файлу %s\n"
 
-#, fuzzy
-#~ msgid "Saving rendering options in file "
-#~ msgstr "Збереження розташування %s до файлу %s\n"
-
-#~ msgid "Size: "
-#~ msgstr "Розмір: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Спектральний тип: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Cпробуйте `%s --help' щоб отримати більше інформації.\n"
-
-#~ msgid "Type: "
-#~ msgstr "Тип: "
-
-#, fuzzy
-#~ msgid "Unknown landscape type: "
-#~ msgstr " Виберіть ландшафти :"
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2278,66 +2178,6 @@ msgstr "застосування змін."
 #~ " -v, --version         Виведення інформації про версію та вихід.\n"
 #~ " -h, --help             Відображення цієї допомоги та вихід.\n"
 
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Крила"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Широта: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Калісто"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Інтенсивність Чумацького шляху: "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Автор: "
-
-#, fuzzy
-#~ msgid "bad file, "
-#~ msgstr " у файлі "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Атмосфера"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Кольори "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Яскравість малюнків сузір'їв"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Лінії сузір'їв"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Кордони сузір'їв"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Зберегти як типове значення"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Земля"
-
 #~ msgid "eg. 60718 (aCrux) or Canopus"
 #~ msgstr "наприклад 60718 (aCrux) або Канопус"
 
@@ -2346,339 +2186,3 @@ msgstr "застосування змін."
 
 #~ msgid "eg. Pluto or Io"
 #~ msgstr "наприклад Плутон або Io"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Енцелад"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Атмосфера"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Азимутна сітка"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Азимутна сітка"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Азимутна сітка"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Сторони світу"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Завантаження малюнка сузір'я: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Межі сузір'їв"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Межі сузір'їв"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Завантаження малюнка сузір'я: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Назви сузір'їв"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Назви сузір'їв"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Лінія екліптики"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Лінія екватора"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Екваторіальна сітка"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Ландшафт: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Ручний масштаб: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Лінія зеніту"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Лінія зеніту"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Імена туманностей"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Імена планет"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Планети"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Межі сузір'їв"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Сузір'я"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Пейзажі"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Туман"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Земля"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Земля"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Харон"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Розташування"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Кассіопея"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Пейзажі"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Ландшафт: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Пейзажі"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Пейзажі"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Широта: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Розташування"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Розташування"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Довгота: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Кассіопея"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Кассіопея"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Місяць"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Масштабування місяця"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Затримка курсора: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Кільця туманностей"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Кільця туманностей"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Туманність"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Туманність"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Діона"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Летюча Риба"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Введіть ім'я обсерваторії"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Довгота: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Базар"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Земля"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Планети"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Імена планет"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Орбіти планет"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Розташування :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Розташування :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Уран"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Крила"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Командир сценарію"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Командир сценарію"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Сценарії "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Сценарії "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr " Виберіть ландшафти :"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Інтенсивність Чумацького шляху: "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Культура неба: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Встановити локаль інтерфейсу: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Зоряне мерехтіння. Величина:"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Культура неба: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Зірки"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Зберегти як типове значення"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Зірки "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Сонце"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ґанімед"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Телескоп"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Тип: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Яскравість малюнків сузір'їв"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Межі сузір'їв"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Назви сузір'їв"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Європейська"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Бик"

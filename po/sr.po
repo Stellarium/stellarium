@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-05-30 17:02+0000\n"
-"Last-Translator: djura <djura@apolo.co.yu>\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-08-12 18:14+0000\n"
+"Last-Translator: Veljko <veljko.tasic@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-08-13 22:08:12+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -22,6 +23,10 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " Svetlosne godine"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -32,36 +37,43 @@ msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:1069
+#, fuzzy
 msgid ": Normal rate"
-msgstr ""
+msgstr ": Normalni ritam"
 
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ""
 
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AU"
+
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
-msgstr ""
+msgstr "Stvarno vreme"
 
 #: src/stel_ui_tuiconf.cpp:383
 msgid "Administration "
-msgstr ""
+msgstr "Administracija "
 
 #: src/stel_ui_conf.cpp:147
+#, fuzzy
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Prikaži i Nebule bez tekstura"
 
 #: src/stel_ui_tuiconf.cpp:388
 msgid "Altitude (m): "
-msgstr ""
+msgstr "Visina (m): "
 
 #: src/stel_ui_conf.cpp:342
+#, fuzzy
 msgid "Altitude : "
-msgstr ""
+msgstr "Nadmorska visina: "
 
 #: src/translations.h:81
 msgid "Andromeda"
-msgstr ""
+msgstr "Andromeda"
 
 #: src/translations.h:341
 msgid "Animal"
@@ -77,7 +89,7 @@ msgstr ""
 
 #: src/translations.h:166
 msgid "Aquarius"
-msgstr ""
+msgstr "Vodolija"
 
 #: src/translations.h:80
 msgid "Aquila"
@@ -89,11 +101,12 @@ msgstr ""
 
 #: src/translations.h:86
 msgid "Aries"
-msgstr ""
+msgstr "Ovan"
 
 #: src/stel_ui_tuiconf.cpp:636
+#, fuzzy
 msgid "Arrow down to load list."
-msgstr ""
+msgstr "Strelica na dole da se učita lista."
 
 #: src/translations.h:246
 msgid "Arsenal"
@@ -101,7 +114,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:218
 msgid "Atmosphere"
-msgstr ""
+msgstr "Atmosfera"
 
 #: src/stel_ui.cpp:679
 msgid "Atmosphere [A]"
@@ -117,15 +130,22 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
+msgstr "Autor: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
 msgstr ""
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
+#, fuzzy
 msgid "Azimuthal Grid"
-msgstr ""
+msgstr "Azimutalna mreža"
 
 #: src/stel_ui.cpp:671
+#, fuzzy
 msgid "Azimuthal Grid [Z]"
-msgstr ""
+msgstr "Azimutalna mreža [Z]"
 
 #: src/translations.h:294
 msgid "Bailer"
@@ -173,15 +193,15 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:456
 msgid "CD/DVD Script: "
-msgstr ""
+msgstr "CD/DVD skripta: "
 
 #: src/stel_ui.cpp:809
 msgid "CMD + Q : Quit\n"
-msgstr ""
+msgstr "CMD + Q : Izlaz\n"
 
 #: src/stel_ui.cpp:807
 msgid "CTRL + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Izlaz\n"
 
 #: src/translations.h:90
 msgid "Caelum"
@@ -201,11 +221,11 @@ msgstr ""
 
 #: src/s_gui.cpp:2226 src/s_gui.cpp:2272
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #: src/translations.h:92
 msgid "Cancer"
-msgstr ""
+msgstr "Rak"
 
 #: src/translations.h:99
 msgid "Canes Venatici"
@@ -221,15 +241,17 @@ msgstr ""
 
 #: src/translations.h:93
 msgid "Capricornus"
-msgstr ""
+msgstr "Jarac"
 
 #: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:427
+#, fuzzy
 msgid "Cardinal Points"
-msgstr ""
+msgstr "Ključne tačke"
 
 #: src/stel_ui.cpp:677
+#, fuzzy
 msgid "Cardinal Points [Q]"
-msgstr ""
+msgstr "Ključne tačke [G]"
 
 #: src/translations.h:302
 msgid "Cared for by Moon"
@@ -253,7 +275,7 @@ msgstr ""
 
 #: src/translations.h:96
 msgid "Centaurus"
-msgstr ""
+msgstr "Kentaur"
 
 #: src/translations.h:97
 msgid "Cepheus"
@@ -285,11 +307,12 @@ msgstr ""
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr ""
+msgstr "Kineski"
 
 #: src/stel_ui_conf.cpp:443
+#, fuzzy
 msgid "Choose landscapes:"
-msgstr ""
+msgstr "Izaberite pejzaž:"
 
 #: src/translations.h:102
 msgid "Circinus"
@@ -309,7 +332,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
-msgstr ""
+msgstr "Boje "
 
 #: src/translations.h:101
 msgid "Columba"
@@ -320,16 +343,19 @@ msgid "Coma Berenices"
 msgstr ""
 
 #: src/stel_ui.cpp:1030
+#, fuzzy
 msgid "Command recording stopped."
-msgstr ""
+msgstr "Snimanje komandi prekinuto."
 
 #: src/stel_ui_conf.cpp:55
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguracija"
 
 #: src/stel_ui.cpp:687
+#, fuzzy
 msgid "Configuration window [1]"
-msgstr ""
+msgstr "Konfiguracioni prozor"
 
 #: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Art Intensity"
@@ -337,31 +363,35 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Boundaries"
-msgstr ""
+msgstr "Granice sazvežđa"
 
 #: src/stel_ui_tuiconf.cpp:423
 msgid "Constellation Lines"
-msgstr ""
+msgstr "Linije sazvežđa"
 
 #: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Names"
-msgstr ""
+msgstr "Imena sazvežđa"
 
 #: src/stel_ui.cpp:669
+#, fuzzy
 msgid "Constellations Art [R]"
-msgstr ""
+msgstr "Grafici sazvеžđa [R]"
 
 #: src/stel_ui_conf.cpp:118
+#, fuzzy
 msgid "Constellations Boundaries"
-msgstr ""
+msgstr "Granice sazvežđa"
 
 #: src/stel_ui_conf.cpp:108
+#, fuzzy
 msgid "Constellations Lines"
-msgstr ""
+msgstr "Linije sazvežđa"
 
 #: src/stel_ui_conf.cpp:113
+#, fuzzy
 msgid "Constellations Names"
-msgstr ""
+msgstr "Imena sazvežđa"
 
 #: src/translations.h:104
 msgid "Corona Australis"
@@ -389,15 +419,17 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:265
 msgid "Current Time :"
-msgstr ""
+msgstr "Trenutno vreme:"
 
 #: src/stel_ui_conf.cpp:1121
+#, fuzzy
 msgid "Current Time Speed is x"
-msgstr ""
+msgstr "Trenutna brzina vremena je x"
 
 #: src/stel_ui_conf.cpp:316
+#, fuzzy
 msgid "Cursor : "
-msgstr ""
+msgstr "Kursor: "
 
 #: src/stel_ui_tuiconf.cpp:449
 msgid "Cursor Timeout: "
@@ -413,23 +445,25 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:550
 msgid "Date & Time"
-msgstr ""
+msgstr "Datum i vreme"
 
 #: src/stel_ui_tuiconf.cpp:404
+#, fuzzy
 msgid "Date Display Format: "
-msgstr ""
+msgstr "Format prikaza datuma: "
 
 #: src/s_gui.cpp:2746
 msgid "Day"
-msgstr ""
+msgstr "dan"
 
 #: src/stel_ui_tuiconf.cpp:396
 msgid "Day keys: "
 msgstr ""
 
 #: src/stel_ui.cpp:712
+#, fuzzy
 msgid "Decrease Time Speed [J]"
-msgstr ""
+msgstr "Uspori protok vremena [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -483,6 +517,11 @@ msgid ""
 "\n"
 msgstr ""
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Rastojanje: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr ""
@@ -505,7 +544,7 @@ msgstr ""
 
 #: src/stel_ui.cpp:665
 msgid "Drawing of the Constellations [C]"
-msgstr ""
+msgstr "Crtanje sazvežđa [C]"
 
 #: src/translations.h:344
 msgid "Dried Willow"
@@ -529,11 +568,11 @@ msgstr ""
 
 #: src/translations.h:65 src/s_gui.cpp:2690
 msgid "E"
-msgstr ""
+msgstr "I"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr ""
+msgstr "Zemlja"
 
 #: src/translations.h:254
 msgid "Earth God's Temple"
@@ -544,16 +583,17 @@ msgid "Eastern Door"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:435
+#, fuzzy
 msgid "Ecliptic Line"
-msgstr ""
+msgstr "Linija eklipse"
 
 #: src/stel_ui_tuiconf.cpp:381
 msgid "Effects "
-msgstr ""
+msgstr "Efekti "
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr ""
+msgstr "Egipatski"
 
 #: src/translations.h:342
 msgid "Elk"
@@ -573,19 +613,26 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
+msgstr "Unesi ime opservatorije"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
+#, fuzzy
 msgid "Equator Line"
-msgstr ""
+msgstr "Linija ekvatora"
 
 #: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:433
+#, fuzzy
 msgid "Equatorial Grid"
-msgstr ""
+msgstr "Ekvatorijalna mreža"
 
 #: src/stel_ui.cpp:673
+#, fuzzy
 msgid "Equatorial Grid [E]"
-msgstr ""
+msgstr "Ekvatorijalna mreža [E]"
 
 #: src/stel_ui.cpp:685
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
@@ -600,8 +647,9 @@ msgid "Eridanus"
 msgstr ""
 
 #: src/stel_ui.cpp:1044
+#, fuzzy
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
+msgstr "Greška: Nije moguće otvoriti skript datoteku za upis komandi."
 
 #: src/translations.h:273
 msgid "Establishment"
@@ -648,12 +696,14 @@ msgid "Flail"
 msgstr ""
 
 #: src/stel_ui.cpp:704
+#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr ""
+msgstr "Okreni horizontalno"
 
 #: src/stel_ui.cpp:706
+#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr ""
+msgstr "Okreni vertikalno"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -665,11 +715,12 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:223
 msgid "Fog"
-msgstr ""
+msgstr "Magla"
 
 #: src/stel_ui_conf.cpp:426
+#, fuzzy
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "Za rezoluciju koja nije u listi, ažuriraj datoteku:"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -689,7 +740,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:725
 msgid "GO"
-msgstr ""
+msgstr "Kreni"
 
 #: src/translations.h:44
 msgid "Ganymede"
@@ -697,11 +748,11 @@ msgstr ""
 
 #: src/translations.h:116
 msgid "Gemini"
-msgstr ""
+msgstr "Blizanci"
 
 #: src/stel_ui_tuiconf.cpp:378
 msgid "General "
-msgstr ""
+msgstr "Opšte "
 
 #: src/translations.h:285
 msgid "Ghosts"
@@ -720,8 +771,9 @@ msgid "Good Gourd"
 msgstr ""
 
 #: src/stel_ui.cpp:702
+#, fuzzy
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "Idi na obeleženi objekat [SPACE]"
 
 #: src/translations.h:218
 msgid "Great General"
@@ -729,7 +781,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:208
 msgid "Ground"
-msgstr ""
+msgstr "Tlo"
 
 #: src/stel_ui.cpp:675
 msgid "Ground [G]"
@@ -741,7 +793,7 @@ msgstr ""
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "Ruka"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -749,7 +801,7 @@ msgstr ""
 
 #: src/stel_ui.cpp:816
 msgid "Help"
-msgstr ""
+msgstr "Pomoć"
 
 #: src/stel_ui.cpp:683
 msgid "Help [H]"
@@ -764,8 +816,9 @@ msgid "Hippopotamus"
 msgstr ""
 
 #: src/stel_ui.cpp:1040
+#, fuzzy
 msgid "Hit CTRL-R again to stop.\n"
-msgstr ""
+msgstr "Pritisnite CTRL-R ponovo da zaustavite.\n"
 
 #: src/translations.h:247
 msgid "Hook"
@@ -785,7 +838,7 @@ msgstr ""
 
 #: src/s_gui.cpp:2749
 msgid "Hour"
-msgstr ""
+msgstr "Čas"
 
 #: src/translations.h:123
 msgid "Hydra"
@@ -812,8 +865,9 @@ msgid "Imperial Passageway"
 msgstr ""
 
 #: src/stel_ui.cpp:716
+#, fuzzy
 msgid "Increase Time Speed [L]"
-msgstr ""
+msgstr "Ubrzaj protok vremena [L]"
 
 #: src/translations.h:125
 msgid "Indus"
@@ -821,11 +875,12 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:1003
 msgid "Info: "
-msgstr ""
+msgstr "Informacija: "
 
 #: src/stel_ui.cpp:746
+#, fuzzy
 msgid "Information"
-msgstr ""
+msgstr "Informacije"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -833,11 +888,15 @@ msgstr ""
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
-msgstr ""
+msgstr "Neodgovarajuća skript komanda"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr ""
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -849,7 +908,7 @@ msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr ""
+msgstr "Jupiter"
 
 #: src/translations.h:194
 msgid "Kenemet"
@@ -869,7 +928,7 @@ msgstr ""
 
 #: src/translations.h:72
 msgid "Korean"
-msgstr ""
+msgstr "Корејски"
 
 #: src/translations.h:126
 msgid "Lacerta"
@@ -889,23 +948,24 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:442
 msgid "Landscape: "
-msgstr ""
+msgstr "Pejzaž: "
 
 #: src/stel_ui_conf.cpp:552
 msgid "Landscapes"
-msgstr ""
+msgstr "Pejzaži"
 
 #: src/stel_ui_conf.cpp:549
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #: src/stel_ui_conf.cpp:334
+#, fuzzy
 msgid "Latitude : "
-msgstr ""
+msgstr "Širina: "
 
 #: src/stel_ui_tuiconf.cpp:386
 msgid "Latitude: "
-msgstr ""
+msgstr "Širina: "
 
 #: src/translations.h:277
 msgid "Left Flag"
@@ -917,7 +977,7 @@ msgstr ""
 
 #: src/translations.h:129
 msgid "Leo"
-msgstr ""
+msgstr "Lav"
 
 #: src/translations.h:146
 msgid "Leo Minor"
@@ -929,15 +989,16 @@ msgstr ""
 
 #: src/translations.h:84
 msgid "Libra"
-msgstr ""
+msgstr "Vaga"
 
 #: src/stel_ui_tuiconf.cpp:441
 msgid "Light Pollution Luminance: "
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:420
+#, fuzzy
 msgid "Limiting Magnitude: "
-msgstr ""
+msgstr "Magnituda "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -945,48 +1006,50 @@ msgstr ""
 
 #: src/translations.h:309
 msgid "Lizard"
-msgstr ""
+msgstr "Gušter"
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
-msgstr ""
+msgstr "Učitaj standardnu konfiguraciju: "
 
 #: src/ConstellationMgr.cpp:303
 msgid "Loading Constellation Art: "
-msgstr ""
+msgstr "Učitavanje ilustracija sazvežđa "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
-msgstr "Učitavam NGC katalog: "
+msgstr "Učitavanje NGC kataloga: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
+#, fuzzy
 msgid "Loading Nebula Textures:"
-msgstr ""
+msgstr "Učitavanje tekstura nebula:"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "Učitavam NGC katalog: "
+msgstr "Učitavanje kataloga "
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
-msgstr ""
+msgstr "Lokalna skripta: "
 
 #: src/stel_ui_conf.cpp:551
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #: src/stel_ui_conf.cpp:468 src/stel_ui_conf.cpp:1005
+#, fuzzy
 msgid "Location: "
-msgstr ""
+msgstr "Lokacija"
 
 #: src/stel_ui_conf.cpp:326
+#, fuzzy
 msgid "Longitude : "
-msgstr ""
+msgstr "Dužina: "
 
 #: src/stel_ui_tuiconf.cpp:387
 msgid "Longitude: "
-msgstr ""
+msgstr "Dužina: "
 
 #: src/translations.h:130
 msgid "Lupus"
@@ -1002,11 +1065,18 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Magnitude"
-msgstr ""
+msgstr "Magnituda"
 
 #: src/stel_ui_tuiconf.cpp:445
+#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr ""
+msgstr "Faktor uvećanja magnitude: "
+
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Magnituda "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
@@ -1018,7 +1088,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
-msgstr ""
+msgstr "Manuelni zum: "
 
 #: src/translations.h:227
 msgid "Market"
@@ -1030,7 +1100,7 @@ msgstr ""
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr ""
+msgstr "Mars"
 
 #: src/translations.h:298
 msgid "Maui's Fishhook"
@@ -1058,7 +1128,7 @@ msgstr ""
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr ""
+msgstr "Merkur"
 
 #: src/stel_ui_tuiconf.cpp:431
 msgid "Meridian Line"
@@ -1073,8 +1143,9 @@ msgid "Microscopium"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:446
+#, fuzzy
 msgid "Milky Way intensity: "
-msgstr ""
+msgstr "Naglašenost Mlečnog Puta: "
 
 #: src/translations.h:47
 msgid "Mimas"
@@ -1082,7 +1153,7 @@ msgstr ""
 
 #: src/s_gui.cpp:2752
 msgid "Minutes"
-msgstr ""
+msgstr "minuta"
 
 #: src/stel_ui.cpp:801
 msgid ""
@@ -1099,11 +1170,11 @@ msgstr ""
 
 #: src/s_gui.cpp:2743
 msgid "Month"
-msgstr ""
+msgstr "mesec"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr ""
+msgstr "Mesec"
 
 #: src/stel_ui_conf.cpp:163
 msgid "Moon Scale"
@@ -1118,6 +1189,7 @@ msgid "Mortar"
 msgstr ""
 
 #: src/stel_ui.cpp:758
+#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1131,6 +1203,17 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
+"Kretanje & obeležavanje:\n"
+"Strelice : Promena pogleda RA/DE\n"
+"Page Up/Down : Zumiranje\n"
+"CTRL+gore/dole : Zumiranje\n"
+"Levi taster miša : Obeležavanje objekta\n"
+"Desni taster miša : Uklanjanje selekcije\n"
+"CTRL+levi taster miša : Uklanjanje selekcije\n"
+"\\ : Udaljavanje (planete + meseci)\n"
+"/ : Zumiranje do obeleženog objekta\n"
+"SPACE : Centriranje na obeleženi objekat\n"
+"\n"
 
 #: src/translations.h:135
 msgid "Musca"
@@ -1138,7 +1221,7 @@ msgstr ""
 
 #: src/translations.h:63 src/s_gui.cpp:2685
 msgid "N"
-msgstr ""
+msgstr "S"
 
 #: src/stel_ui.cpp:667
 msgid "Names of the Constellations [V]"
@@ -1146,7 +1229,7 @@ msgstr "Nazivi sazvežđa [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
-msgstr ""
+msgstr "Navaho"
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1158,15 +1241,16 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:436
 msgid "Nebula Names"
-msgstr ""
+msgstr "Imena nebula"
 
 #: src/stel_ui_conf.cpp:134
 msgid "Nebulas Names. Up to mag :"
 msgstr ""
 
 #: src/stel_ui.cpp:681
+#, fuzzy
 msgid "Nebulas [N]"
-msgstr ""
+msgstr "Nebule [N]"
 
 #: src/translations.h:288
 msgid "Neck"
@@ -1174,20 +1258,21 @@ msgstr ""
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr ""
+msgstr "Neptun"
 
 #: src/translations.h:191 src/translations.h:230
 msgid "Net"
 msgstr ""
 
 #: src/stel_ui.cpp:690
+#, fuzzy
 msgid "Night (red) mode"
-msgstr ""
+msgstr "Nоćni (crveni) prikaz"
 
 #: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
 #: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2220
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: src/translations.h:112
 msgid "Norma"
@@ -1207,11 +1292,11 @@ msgstr ""
 
 #: src/s_gui.cpp:2244 src/s_gui.cpp:2270
 msgid "OK"
-msgstr ""
+msgstr "Potvrdi"
 
 #: src/stel_ui_conf.cpp:700
 msgid "Object Search"
-msgstr ""
+msgstr "Pretraga objekata"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Object Sizing Rule: "
@@ -1249,6 +1334,10 @@ msgstr ""
 msgid "Palace Gate"
 msgstr ""
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr ""
@@ -1283,7 +1372,7 @@ msgstr ""
 
 #: src/translations.h:151
 msgid "Pisces"
-msgstr ""
+msgstr "Ribe"
 
 #: src/translations.h:150
 msgid "Piscis Austrinus"
@@ -1291,7 +1380,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:428
 msgid "Planet Names"
-msgstr ""
+msgstr "Imena planeta"
 
 #: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Orbits"
@@ -1299,15 +1388,16 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Trails"
-msgstr ""
+msgstr "Tragovi planeta"
 
 #: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:1004
+#, fuzzy
 msgid "Planet: "
-msgstr ""
+msgstr "Planete"
 
 #: src/stel_ui_conf.cpp:158
 msgid "Planets"
-msgstr ""
+msgstr "Planete"
 
 #: src/stel_ui_conf.cpp:170
 msgid "Planets Hints"
@@ -1315,11 +1405,11 @@ msgstr ""
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr ""
+msgstr "Pluton"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Point"
-msgstr ""
+msgstr "Tačka"
 
 #: src/translations.h:76
 msgid "Polynesian"
@@ -1335,7 +1425,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:494
 msgid "Program Language: "
-msgstr ""
+msgstr "Jezik programa: "
 
 #: src/stel_ui_conf.cpp:371
 msgid "Projection :"
@@ -1359,10 +1449,15 @@ msgstr ""
 
 #: src/stel_ui.cpp:695
 msgid "Quit [CMD + Q]"
-msgstr ""
+msgstr "Izlaz [CMD + Q]"
 
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
+msgstr "Izlaz [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
 msgstr ""
 
 #: src/translations.h:312
@@ -1379,27 +1474,30 @@ msgstr ""
 
 #: src/stel_ui.cpp:714
 msgid "Real Time Speed [K]"
-msgstr ""
+msgstr "Realan protok vremena [K]"
 
 #: src/stel_ui.cpp:1038
+#, fuzzy
 msgid "Recording commands to script file:\n"
-msgstr ""
+msgstr "Snimanje komandi u skript datoteku:\n"
 
 #: src/stel_ui_conf.cpp:554
 msgid "Rendering"
-msgstr ""
+msgstr "Iscrtavanje"
 
 #: src/stel_ui_conf.cpp:411
+#, fuzzy
 msgid "Restart program for"
-msgstr ""
+msgstr "Ponovo pokreni program"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr ""
 
 #: src/stel_ui.cpp:718
+#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr ""
+msgstr "Vrati se na trenutno vreme"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1447,7 +1545,7 @@ msgstr ""
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
-msgstr ""
+msgstr "Ј"
 
 #: src/translations.h:114
 msgid "Sagitta"
@@ -1455,7 +1553,7 @@ msgstr ""
 
 #: src/translations.h:155
 msgid "Sagittarius"
-msgstr ""
+msgstr "Strelac"
 
 #: src/translations.h:175
 msgid "Sah"
@@ -1467,20 +1565,21 @@ msgstr ""
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr ""
+msgstr "Saturn"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Save Current Configuration as Default: "
-msgstr ""
+msgstr "Snimi trenutnu konfiguraciju kao standardnu: "
 
 #: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:484
 #: src/stel_ui_conf.cpp:542
+#, fuzzy
 msgid "Save as default"
-msgstr ""
+msgstr "Snimi kao standardno"
 
 #: src/stel_ui_conf.cpp:349
 msgid "Save location"
-msgstr ""
+msgstr "Sačuvaj lokaciju"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Saving settings will save current full screen status"
@@ -1488,7 +1587,7 @@ msgstr ""
 
 #: src/translations.h:156
 msgid "Scorpius"
-msgstr ""
+msgstr "Škorpija"
 
 #: src/translations.h:232
 msgid "Screen"
@@ -1496,15 +1595,15 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:407
 msgid "Screen Resolution :"
-msgstr ""
+msgstr "Rezolucija ekrana:"
 
 #: src/stel_ui.cpp:558 src/stel_ui.cpp:700
 msgid "Script commander"
-msgstr ""
+msgstr "Skript komander"
 
 #: src/stel_ui_tuiconf.cpp:382
 msgid "Scripts "
-msgstr ""
+msgstr "Skripte "
 
 #: src/translations.h:82
 msgid "Sculptor"
@@ -1516,15 +1615,16 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:707
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr ""
+msgstr "Traži (npr. Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:698
+#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr ""
+msgstr "Pretraga objekata"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
-msgstr ""
+msgstr "sekundi"
 
 #: src/translations.h:177
 msgid "Sek"
@@ -1535,12 +1635,14 @@ msgid "Select and exit to run."
 msgstr ""
 
 #: src/stel_ui_conf.cpp:321
+#, fuzzy
 msgid "Selected : "
-msgstr ""
+msgstr "Obeležen: "
 
 #: src/stel_ui_conf.cpp:123
+#, fuzzy
 msgid "Selected Constellation Only"
-msgstr ""
+msgstr "Samo obeleženo sazvežđe"
 
 #: src/translations.h:182
 msgid "Selkis"
@@ -1552,19 +1654,20 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:376
 msgid "Set Location "
-msgstr ""
+msgstr "Podesi lokaciju "
 
 #: src/stel_ui_tuiconf.cpp:377
 msgid "Set Time "
-msgstr ""
+msgstr "Podesi vreme "
 
 #: src/stel_ui_tuiconf.cpp:395
 msgid "Set Time Zone: "
-msgstr ""
+msgstr "Podesi vremensku zonu: "
 
 #: src/stel_ui_tuiconf.cpp:464
+#, fuzzy
 msgid "Set UI Locale: "
-msgstr ""
+msgstr "Podesi korisnički interfejs lokalno: "
 
 #: src/stel_ui_tuiconf.cpp:450
 msgid "Setting Landscape Sets Location: "
@@ -1596,23 +1699,28 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:416
 msgid "Show: "
-msgstr ""
+msgstr "Prikaži: "
 
 #: src/stel_ui_tuiconf.cpp:462
 msgid "Shut Down: "
-msgstr ""
+msgstr "Isključi: "
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Veličina: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
+#, fuzzy
 msgid "Sky Culture: "
-msgstr ""
+msgstr "Kultura neba: "
 
 #: src/stel_ui_conf.cpp:510 src/stel_ui_tuiconf.cpp:413
 msgid "Sky Language: "
-msgstr ""
+msgstr "Jezik neba: "
 
 #: src/stel_ui_tuiconf.cpp:400
 msgid "Sky Time At Start-up: "
@@ -1646,6 +1754,11 @@ msgstr ""
 msgid "Spear"
 msgstr ""
 
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+#, fuzzy
+msgid "Spectral Type: "
+msgstr "Spektralni tip: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr ""
@@ -1663,20 +1776,22 @@ msgid "Star Names. Up to mag :"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:92
+#, fuzzy
 msgid "Star Twinkle. Amount :"
-msgstr ""
+msgstr "Treperenje Zvezda. Količina:"
 
 #: src/stel_ui_tuiconf.cpp:417
+#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr ""
+msgstr "Faktor uvećanja magnitude: "
 
 #: src/stel_ui_conf.cpp:75
 msgid "Stars"
-msgstr ""
+msgstr "Zvezde"
 
 #: src/stel_ui_tuiconf.cpp:379
 msgid "Stars "
-msgstr ""
+msgstr "Zvezde "
 
 #: src/translations.h:198
 msgid "Stars of Water"
@@ -1688,7 +1803,7 @@ msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr ""
+msgstr "Sunce"
 
 #: src/translations.h:248
 msgid "Supreme Palace"
@@ -1700,7 +1815,7 @@ msgstr ""
 
 #: src/translations.h:161
 msgid "Taurus"
-msgstr ""
+msgstr "Bik"
 
 #: src/translations.h:162
 msgid "Telescopium"
@@ -1755,16 +1870,18 @@ msgid ""
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
+#, fuzzy
 msgid "Time Display Format: "
-msgstr ""
+msgstr "Format prikaza vremena: "
 
 #: src/stel_ui_conf.cpp:274
 msgid "Time Zone :"
-msgstr ""
+msgstr "Vremenska zona:"
 
 #: src/stel_ui_conf.cpp:287
+#, fuzzy
 msgid "Time speed : "
-msgstr ""
+msgstr "Brzina vremena : "
 
 #: src/translations.h:52
 msgid "Titan"
@@ -1776,7 +1893,7 @@ msgstr ""
 
 #: src/translations.h:178
 msgid "Triangle"
-msgstr ""
+msgstr "Trougao"
 
 #: src/translations.h:164
 msgid "Triangulum"
@@ -1800,7 +1917,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
-msgstr ""
+msgstr "Treperenje: "
 
 #: src/translations.h:174
 msgid "Two Jaws"
@@ -1822,36 +1939,46 @@ msgstr ""
 msgid "Two in Front"
 msgstr ""
 
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Tip: "
+
 #: src/translations.h:355
+#, fuzzy
 msgid "USB Script: "
-msgstr ""
+msgstr "Skripte "
 
 #: src/stel_ui_tuiconf.cpp:463
 msgid "Update me via Internet: "
-msgstr ""
+msgstr "Ažuriraj putem interneta: "
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr ""
+msgstr "Uran"
 
 #: src/translations.h:119
 msgid "Ursa Major"
-msgstr ""
+msgstr "Veliki medved"
 
 #: src/translations.h:148
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Mali medved"
 
 #: src/stel_ui_conf.cpp:295
+#, fuzzy
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
+"Koristite tastere J i L da usporite ili ubrzate\n"
+"   brzinu vremena.\n"
+"Koristite taster K da se vratite u realnu brzinu vremena."
 
 #: src/stel_ui_conf.cpp:278
+#, fuzzy
 msgid "Using System Default Time Zone"
-msgstr ""
+msgstr "Koristi se sistemska vremenska zona"
 
 #: src/translations.h:168
 msgid "Vela"
@@ -1859,11 +1986,11 @@ msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr ""
+msgstr "Venera"
 
 #: src/stel_ui_conf.cpp:553
 msgid "Video"
-msgstr ""
+msgstr "Vídeo"
 
 #: src/stel_ui_conf.cpp:395
 msgid "Viewport Distorter"
@@ -1871,7 +1998,7 @@ msgstr ""
 
 #: src/translations.h:167
 msgid "Virgo"
-msgstr ""
+msgstr "Devica"
 
 #: src/translations.h:296
 msgid "Voice of Joy"
@@ -1887,7 +2014,7 @@ msgstr ""
 
 #: src/translations.h:66 src/s_gui.cpp:2691
 msgid "W"
-msgstr ""
+msgstr "Z"
 
 #: src/translations.h:219
 msgid "Wall"
@@ -1907,7 +2034,7 @@ msgstr ""
 
 #: src/translations.h:77
 msgid "Western"
-msgstr ""
+msgstr "Zapadni"
 
 #: src/translations.h:281
 msgid "Western Door"
@@ -1943,12 +2070,12 @@ msgstr ""
 
 #: src/s_gui.cpp:2740
 msgid "Year"
-msgstr ""
+msgstr "godina"
 
 #: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
 #: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2239
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: src/translations.h:289
 msgid "Zaofu"
@@ -1959,52 +2086,9 @@ msgid "Zoom Duration: "
 msgstr ""
 
 #: src/stel_ui_conf.cpp:412
+#, fuzzy
 msgid "change to apply."
-msgstr ""
+msgstr "da bi promene postale aktivne"
 
-#~ msgid " Light Years"
-#~ msgstr " Svetlosne godine"
-
-#~ msgid "AU"
-#~ msgstr "AU"
-
-#~ msgid "Distance: "
-#~ msgstr "Rastojanje: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Nazivi sazvežđa [V]"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Učitavam NGC katalog: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Učitavam NGC katalog: "
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Učitavam NGC katalog: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Učitavam NGC katalog: "
-
-#~ msgid "Size: "
-#~ msgstr "Veličina: "
-
-#~ msgid "Type: "
-#~ msgstr "Tip: "
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosfera [A]"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Tlo [G]"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Tip: "
+#~ msgid "Try `%s --help' for more information.\n"
+#~ msgstr "Pokušajte `%s --help` za više informacija.\n"

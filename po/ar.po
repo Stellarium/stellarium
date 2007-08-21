@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2007-03-27 12:13+0000\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-20 11:38+0000\n"
 "Last-Translator: AhmedQatar <qaaaaaaq@yahoo.co.uk>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-04-16 13:38:13+0000\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:58:33+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -26,6 +26,10 @@ msgstr ""
 "   بامكانك التحقق من التحديثات الجديدة وارسال تقارير الاعطال\n"
 "    وكذلك ملاحظاتك لنا على العنوان: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " سنوات ضوئية"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -44,6 +48,10 @@ msgid ": Standard Perseids rate"
 msgstr ""
 ": المعدل القياسي للبيرسد Perseids (حركة النيازك العالية في شهر اغسطس من كل "
 "عام)"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "وحدة فلكية"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -70,9 +78,8 @@ msgid "Andromeda"
 msgstr "المراة المسلسلة"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "مفرغة الهواء"
+msgstr ""
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -125,6 +132,11 @@ msgstr ""
 #: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
 msgid "Author: "
 msgstr "المؤلف: "
+
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "سمتي/ استوائي: "
 
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
@@ -243,9 +255,8 @@ msgid "Cared for by Moon"
 msgstr "بعناية القمر"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "العربة"
+msgstr ""
 
 #: src/translations.h:94
 msgid "Carina"
@@ -312,9 +323,8 @@ msgid "Coiled Thong"
 msgstr "Coiled Thong"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "خطوط الأبراج"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Colors "
@@ -514,14 +524,18 @@ msgstr ""
 "مفتاح 4 أو ، : المسار الشمسي  مفتاح 5 أو . :المسار الاستوائي\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "المسافة "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "الكلب"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "الكلب"
+msgstr ""
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -540,9 +554,8 @@ msgid "Drawing of the Constellations [C]"
 msgstr "رسوم الابراج [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "الصفصاف"
+msgstr ""
 
 #: src/translations.h:209
 msgid "Drum"
@@ -607,6 +620,10 @@ msgstr "إنكيلادوس"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "ادخل اسم الهدف المراد رصده"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -863,9 +880,8 @@ msgid "Information"
 msgstr "معلومات"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "الهندي"
+msgstr ""
 
 #: src/stel_ui.cpp:586
 msgid "Invalid Script command"
@@ -874,6 +890,10 @@ msgstr "أمر برمجي غير صالح"
 #: src/translations.h:42
 msgid "Io"
 msgstr "آيو"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -904,18 +924,16 @@ msgid "Kite of Kawelo"
 msgstr "الطائرة الورقية"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "البوق"
+msgstr ""
 
 #: src/translations.h:126
 msgid "Lacerta"
 msgstr "العظاءة"
 
 #: src/translations.h:73
-#, fuzzy
 msgid "Lakota"
-msgstr "العظاءة"
+msgstr ""
 
 #: src/translations.h:328
 msgid "Lamp Stand"
@@ -983,9 +1001,8 @@ msgid "Lion"
 msgstr "الأسد"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "طائر"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:460
 msgid "Load Default Configuration: "
@@ -995,18 +1012,17 @@ msgstr "تحميل الاعدادات الافتراضية: "
 msgid "Loading Constellation Art: "
 msgstr "تحميل رسوم الأبراج "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "تحميل كتلوج ال NGC "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "تحميل أشكال السديم"
 
 #: src/StarMgr.cpp:1586
-#, fuzzy
 msgid "Loading catalog "
-msgstr "تحميل كتلوج ال NGC "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:453
 msgid "Local Script: "
@@ -1050,14 +1066,19 @@ msgstr "مقدار الاضاءة"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "مقدار الحجم مضروب في : "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "قيمة "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "سرير المراءة"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1203,9 +1224,8 @@ msgid "Names of the Constellations [V]"
 msgstr "اسماء الأبراج [V]"
 
 #: src/translations.h:74
-#, fuzzy
 msgid "Navajo"
-msgstr "الطاووس"
+msgstr ""
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1308,6 +1328,10 @@ msgstr "زوج من النجوم"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "مدخل القصر"
+
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1425,6 +1449,11 @@ msgstr "انهاء Quit [CMD + Q]"
 #: src/stel_ui.cpp:693
 msgid "Quit [CTRL + Q]"
 msgstr "انهاء [CTRL + Q]"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "دائري/ درجات: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1669,6 +1698,10 @@ msgstr "اطفاء: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "حجم "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "التسميات الفلكية حسب الحضارات: "
@@ -1708,6 +1741,10 @@ msgstr "النهر الجنوبي"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "الرمح"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "النوع الطيفي "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1800,9 +1837,8 @@ msgid "Thunder and Lightning"
 msgstr "الرعد والبرق"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
-msgstr "الصاعقة"
+msgstr ""
 
 #: src/translations.h:259
 msgid "Thunderbolt"
@@ -1868,9 +1904,8 @@ msgid "Tucana"
 msgstr "الطوقان"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "سلحفاة النهر"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Twinkling: "
@@ -1889,13 +1924,16 @@ msgid "Two Poles"
 msgstr "القطبان"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "الفكّان"
+msgstr ""
 
 #: src/translations.h:330
 msgid "Two in Front"
 msgstr ""
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "نوع "
 
 #: src/translations.h:355
 #, fuzzy
@@ -2042,160 +2080,21 @@ msgstr "مدة التكبير: "
 msgid "change to apply."
 msgstr "تطبق التغيرات."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "الوقت الفعلي"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "الوقت الحالي"
-
 #~ msgid " (Variable)"
 #~ msgstr " متغير"
 
-#~ msgid " Light Years"
-#~ msgstr " سنوات ضوئية"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Bad command line argument(s)\n"
-
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "اختر نوع المنظر :"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "اسماء الأبراج"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "الرسوم الفنية للأبراج [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "اسماء الابراج"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "المناظر"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "النصوص البرمجية "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "خط العرض: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "خط العرض: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "خط الطول: "
-
-#~ msgid "AU"
-#~ msgstr "وحدة فلكية"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "الموقع الجغرافي"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "سمتي/ استوائي: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "خطوط الأبراج"
-
-#~ msgid "Distance: "
-#~ msgstr "المسافة "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "تحميل رسوم الأبراج "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "تحميل أشكال السديم"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "تحميل رسوم الأبراج "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr ""
 #~ "تحميل كتلوجات الهيباركوس (اقمار صناعية مخصصة لتحليل القياسات الفضائية)"
 
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "تحميل كتلوج ال NGC "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "تحميل كتلوج ال NGC "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "تحميل أشكال السديم"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "تحميل كتلوج ال NGC "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "تحميل كتلوج ال NGC "
-
-#~ msgid "Magnitude: "
-#~ msgstr "قيمة "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "الجبل"
-
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "معدل النيازك في الدقيقة"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "ِشمال"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "السدم السماوية [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "الكواكب"
-
-#~ msgid "RA/DE: "
-#~ msgstr "دائري/ درجات: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "حفظ الاعدادات الحالية كافتراضي: "
-
-#~ msgid "Size: "
-#~ msgstr "حجم "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "النوع الطيفي "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Try `%s --help' for more information.\n"
-
-#~ msgid "Type: "
-#~ msgstr "نوع "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2205,395 +2104,3 @@ msgstr "تطبق التغيرات."
 #~ "Usage: %s [OPTION] ...\n"
 #~ "-v, --version Output version information and exit.\n"
 #~ "-h, --help Display this help and exit.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "الاجنحة"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "خط العرض: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "كاليستو"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "كثافة درب التبانة: "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "المؤلف: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "الغلاف الجوي"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "خطوط الابراج"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "الالوان "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "كثافة الرسوم الفنية للابراج"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "خطوط الابراج"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "اسماء الأبراج"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "حفظ كأفتراضي"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "الأرض"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "إنكيلادوس"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "الغلاف الجوي"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "الشبكة السمتية"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "الشبكة السمتية"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "الشبكة السمتية"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "الجهات الاربع"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "تحميل رسوم الأبراج "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "تحميل رسوم الأبراج "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "اسماء الأبراج"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "اسماء الأبراج"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "تحميل رسوم الأبراج "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "خط المسار الشمسي"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "خط الاستواء"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "الشبكة الاستوائية"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "المناظر: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "التقريب اليدوي: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "خط دائرة نصف النهار"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "خط دائرة نصف النهار"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "اسماء السدم السماوية"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "اسماء الكواكب"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "الكواكب"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "خطوط الأبراج"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "المناظر"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "ضباب"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "الأرضية ( سطح الأرض)"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "الأرضية ( سطح الأرض)"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "الموقع الجغرافي"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "ذات الكرسي"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "المناظر"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "المناظر: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "المناظر"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "المناظر"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "خط العرض: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "الموقع الجغرافي"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "الموقع الجغرافي"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "خط الطول: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "ذات الكرسي"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "ذات الكرسي"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "القمر"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "تكبير القمر"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "خروج المؤشر: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "دوائر السدم السماوية"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "دوائر السدم السماوية"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "اسماء السدم السماوية"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "السدم السماوية [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "ديون"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "السمكة الطائرة"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "ادخل اسم الهدف المراد رصده"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "خط الطول: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "السوق"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "الأرض"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "الكواكب"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "اسماء الكواكب"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "مدارات الكواكب"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "النمط ثلاثي الأبعاد:"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "النمط ثلاثي الأبعاد:"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "أورانوس"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "الاجنحة"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "برنامج الأوامر"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "برنامج الأوامر"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "النصوص البرمجية "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "النصوص البرمجية "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "اختر نوع المنظر :"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "كثافة درب التبانة: "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "التسميات الفلكية حسب الحضارات: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "حدد لغة الواجهة المحلية: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "وميض النجم. مقدار:"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "التسميات الفلكية حسب الحضارات: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "النجوم"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "حفظ كأفتراضي"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "النجوم "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "الشمس"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "غانيميد"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "المرقب"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "نوع "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "كثافة الرسوم الفنية للابراج"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "حدود الابراج"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "اسماء الأبراج"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "غربي"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "الثور"

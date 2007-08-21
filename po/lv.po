@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 09:11-0700\n"
-"PO-Revision-Date: 2006-11-03 10:58+0000\n"
-"Last-Translator: Delta <deruta@gmx.net>\n"
+"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"PO-Revision-Date: 2007-06-30 10:34+0000\n"
+"Last-Translator: Delta <deltazzx@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Rosetta-Export-Date: 2007-07-07 03:58:28+0000\n"
 
 #: src/stel_ui.cpp:727
 msgid ""
@@ -25,6 +26,10 @@ msgstr ""
 "   Jūs varat apmēklēt lapu http://www.stellarium.org lai\n"
 "     ziņotu par kļūdām un izmēģinātu jaunākās versijas.\n"
 "\n"
+
+#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+msgid " Light Years"
+msgstr " gaismas gadi"
 
 #: src/stel_ui_conf.cpp:1083
 msgid ": Exceptional Leonid rate"
@@ -41,6 +46,10 @@ msgstr ": Normāls daudzums"
 #: src/stel_ui_conf.cpp:1076
 msgid ": Standard Perseids rate"
 msgstr ": Standarta daudzums Perseīdiem"
+
+#: src/Planet.cpp:129 src/Planet.cpp:168
+msgid "AU"
+msgstr "AU (astr.vien.)"
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Actual Time"
@@ -123,6 +132,11 @@ msgstr ""
 msgid "Author: "
 msgstr "Autors: "
 
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/Planet.cpp:125
+msgid "Az/Alt: "
+msgstr "Az/Augst: "
+
 #: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
 msgid "Azimuthal Grid"
 msgstr "Azimutālais tīkls"
@@ -149,7 +163,7 @@ msgstr "Putns"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "Trāna Trauks"
 
 #: src/translations.h:180 src/translations.h:251
 msgid "Boat"
@@ -169,7 +183,7 @@ msgstr "Loks un Bulta"
 
 #: src/translations.h:331
 msgid "Breastbone"
-msgstr ""
+msgstr "Krūšu Kauls"
 
 #: src/translations.h:171
 msgid "Bull's Foreleg"
@@ -511,6 +525,11 @@ msgstr ""
 "4 un , : Ekliptika 5 un . : Ekvatora līnija\n"
 "\n"
 
+#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/Planet.cpp:168
+msgid "Distance: "
+msgstr "Attālums: "
+
 #: src/translations.h:253
 msgid "Dog"
 msgstr "Suns"
@@ -591,7 +610,7 @@ msgstr "Ēģiptiešu"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Alnis"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -608,6 +627,10 @@ msgstr "Encelads"
 #: src/stel_ui_conf.cpp:872
 msgid "Enter observatory name"
 msgstr "Ievadiet novērojumu vietas nosaukumu"
+
+#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+msgid "Equ of date"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
 msgid "Equator Line"
@@ -659,11 +682,11 @@ msgstr "Pārcēlājs"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Pavards"
 
 #: src/translations.h:311
 msgid "First Big One"
-msgstr ""
+msgstr "Pirmais Lielais"
 
 #: src/translations.h:313
 msgid "First Slim One"
@@ -777,7 +800,7 @@ msgstr "Dzērve"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "Roka"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -875,6 +898,10 @@ msgstr "Nepareiza skripta komanda"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Jo"
+
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+msgid "J2000"
+msgstr ""
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -996,11 +1023,11 @@ msgstr "Ielādēt noklusējuma konfigurāciju: "
 msgid "Loading Constellation Art: "
 msgstr "Ielādē zvaigznāju zīmējumus: "
 
-#: src/NebulaMgr.cpp:391
+#: src/NebulaMgr.cpp:390
 msgid "Loading NGC catalog: "
 msgstr "Ielādē NGC katalogu: "
 
-#: src/NebulaMgr.cpp:524
+#: src/NebulaMgr.cpp:523
 msgid "Loading Nebula Textures:"
 msgstr "Ielādē miglāju tekstūras:"
 
@@ -1051,14 +1078,19 @@ msgstr "Zvaigžņlieluma"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
 
+#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
+#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/Planet.cpp:164
+msgid "Magnitude: "
+msgstr "Zvaigžņlielums: "
+
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr ""
 
 #: src/translations.h:320
-#, fuzzy
 msgid "Man's Cart"
-msgstr "Sievietes Gulta"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Manual zoom: "
@@ -1311,6 +1343,10 @@ msgstr "Zvaigžņu Pāris"
 msgid "Palace Gate"
 msgstr "Pils Vārti"
 
+#: src/StarMgr.cpp:945
+msgid "Parallax: "
+msgstr ""
+
 #: src/translations.h:140
 msgid "Pavo"
 msgstr "Pāvs"
@@ -1428,13 +1464,18 @@ msgstr "Beigt [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Beigt [CTRL + Q]"
 
+#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+msgid "RA/DE: "
+msgstr "RA/DE: "
+
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "Truša Pēdas"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Sacīkšu Trase"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1507,7 +1548,7 @@ msgstr "Spuvušais Ķirbis"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "Skrējēji"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
@@ -1527,7 +1568,7 @@ msgstr "Sahs"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Salamandra"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1645,7 +1686,7 @@ msgstr "Septiņi Augstmaņi"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "Septiņas Mazas Meitenes"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1671,6 +1712,10 @@ msgstr "Izslēgt: "
 msgid "Sidereal"
 msgstr ""
 
+#: src/Nebula.cpp:107
+msgid "Size: "
+msgstr "Izmērs: "
+
 #: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
 msgid "Sky Culture: "
 msgstr "Debesu kultūra: "
@@ -1689,7 +1734,7 @@ msgstr "Debesu laiks: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Čūska"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Solar System Body: "
@@ -1710,6 +1755,10 @@ msgstr "Dienvidu Upe"
 #: src/translations.h:275
 msgid "Spear"
 msgstr "Šķēps"
+
+#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+msgid "Spectral Type: "
+msgstr "Spektra klase: "
 
 #: src/translations.h:272
 msgid "Spring"
@@ -1885,7 +1934,7 @@ msgstr "Divi Žokļi"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
-msgstr ""
+msgstr "Divi Ļoti Tālie"
 
 #: src/translations.h:172
 msgid "Two Poles"
@@ -1898,7 +1947,11 @@ msgstr "Divi Žokļi"
 
 #: src/translations.h:330
 msgid "Two in Front"
-msgstr ""
+msgstr "Divi Priekšā"
+
+#: src/Nebula.cpp:105
+msgid "Type: "
+msgstr "Tips: "
 
 #: src/translations.h:355
 #, fuzzy
@@ -2045,159 +2098,20 @@ msgstr "Tuvinājuma ilgums: "
 msgid "change to apply."
 msgstr "ir nepieciešams pārstartēt programmu."
 
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Actual\n"
-#~ msgstr "Reālais Laiks"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Preset\n"
-#~ msgstr "Iestatītais Laiks"
-
 #~ msgid " (Variable)"
 #~ msgstr " (maiņzvaigzne)"
-
-#~ msgid " Light Years"
-#~ msgstr " gaismas gadi"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Kļūdains komandrindas arguments(ti)\n"
 
-#, fuzzy
-#~ msgid ". No landscape in use."
-#~ msgstr "Izvēlieties ainavu:"
-
-#, fuzzy
-#~ msgid "/constellation_names.eng.fab"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "/constellationsart.fab"
-#~ msgstr "Zvaigznāju zīmējumi [R]"
-
-#, fuzzy
-#~ msgid "/constellationship.fab"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "/landscape.ini"
-#~ msgstr "Ainavas"
-
-#, fuzzy
-#~ msgid "/scripts/\""
-#~ msgstr "Skripti "
-
-#, fuzzy
-#~ msgid ":altitude"
-#~ msgstr "Ģeog.plat.: "
-
-#, fuzzy
-#~ msgid ":latitude"
-#~ msgstr "Ģeog.plat.: "
-
-#, fuzzy
-#~ msgid ":longitude"
-#~ msgstr "Ģeog.gar.: "
-
-#~ msgid "AU"
-#~ msgstr "AU (astr.vien.)"
-
-#, fuzzy
-#~ msgid "Anonymous_Location"
-#~ msgstr "Vieta"
-
-#~ msgid "Az/Alt: "
-#~ msgstr "Az/Augst: "
-
-#, fuzzy
-#~ msgid "Can't open constellation data file %s\n"
-#~ msgstr "Zvaigznāju Robežas"
-
-#, fuzzy
-#~ msgid "Constellation"
-#~ msgstr "Zvaigznāju līnijas"
-
-#~ msgid "Distance: "
-#~ msgstr "Attālums: "
-
-#, fuzzy
-#~ msgid "Error in Constellation "
-#~ msgstr "Ielādē zvaigznāju zīmējumus: "
-
-#, fuzzy
-#~ msgid "Error while reading nebula texture "
-#~ msgstr "Ielādē miglāju tekstūras:"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data from "
-#~ msgstr "Ielādē zvaigznāju zīmējumus: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Ielādē Hipparcos katalogu:"
-
-#, fuzzy
-#~ msgid "Loading NGC data... "
-#~ msgstr "Ielādē NGC katalogu: "
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Ielādē NGC katalogu: "
-
-#, fuzzy
-#~ msgid "Loading Nebula Textures for set "
-#~ msgstr "Ielādē miglāju tekstūras:"
-
-#, fuzzy
-#~ msgid "Loading location: \""
-#~ msgstr "Ielādē NGC katalogu: "
-
-#, fuzzy
-#~ msgid "Loading star data..."
-#~ msgstr "Ielādē NGC katalogu: "
-
-#~ msgid "Magnitude: "
-#~ msgstr "Zvaigžņlielums: "
-
-#, fuzzy
-#~ msgid "Message"
-#~ msgstr "Galds"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Meteoru daudzums minūtē"
 
-#, fuzzy
-#~ msgid "Nb"
-#~ msgstr "Z"
-
-#, fuzzy
-#~ msgid "Nebula"
-#~ msgstr "Miglāji [N]"
-
-#, fuzzy
-#~ msgid "Planet"
-#~ msgstr "Planētas"
-
-#~ msgid "RA/DE: "
-#~ msgstr "RA/DE: "
-
-#, fuzzy
-#~ msgid "Saving configuration file "
-#~ msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
-
-#~ msgid "Size: "
-#~ msgstr "Izmērs: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Spektra klase: "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Lai iegūtu papildus informāciju, mēģiniet '%s --help'\n"
-
-#~ msgid "Type: "
-#~ msgstr "Tips: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2208,395 +2122,3 @@ msgstr "ir nepieciešams pārstartēt programmu."
 #~ " -v, --version Izvada informāciju par programmas veersiju un izbeidz "
 #~ "programmas darbību.\n"
 #~ " -h, --help Parāda pamācību un izbeidz programmas darbību.\n"
-
-#, fuzzy
-#~ msgid "Warning "
-#~ msgstr "Spārni"
-
-#, fuzzy
-#~ msgid "altitude"
-#~ msgstr "Ģeog.plat.: "
-
-#, fuzzy
-#~ msgid "astro"
-#~ msgstr "Kalisto"
-
-#, fuzzy
-#~ msgid "astro:milky_way_intensity"
-#~ msgstr "Piena Ceļa intensitāte: "
-
-#, fuzzy
-#~ msgid "author"
-#~ msgstr "Autors: "
-
-#, fuzzy
-#~ msgid "bt_atmosphere.png"
-#~ msgstr "Atmosfēra"
-
-#, fuzzy
-#~ msgid "bt_constellations.png"
-#~ msgstr "Zvaigznāju kontūras"
-
-#, fuzzy
-#~ msgid "color"
-#~ msgstr "Krāsas "
-
-#, fuzzy
-#~ msgid "constellation_art_intensity"
-#~ msgstr "Zvaigznāju Mākslas Intensitāte"
-
-#, fuzzy
-#~ msgid "constellation_font_size"
-#~ msgstr "Zvaigznāju kontūras"
-
-#, fuzzy
-#~ msgid "constellations"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "data/constellations_boundaries.dat"
-#~ msgstr "Zvaigznāju robežas"
-
-#, fuzzy
-#~ msgid "default"
-#~ msgstr "Saglabāt kā noklusējumu"
-
-#, fuzzy
-#~ msgid "earth"
-#~ msgstr "Zeme"
-
-#, fuzzy
-#~ msgid "enceladus_special"
-#~ msgstr "Encelads"
-
-#, fuzzy
-#~ msgid "flag atmosphere "
-#~ msgstr "Atmosfēra"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid "
-#~ msgstr "Azimutālais tīkls"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 0"
-#~ msgstr "Azimutālais tīkls"
-
-#, fuzzy
-#~ msgid "flag azimuthal_grid 1"
-#~ msgstr "Azimutālais tīkls"
-
-#, fuzzy
-#~ msgid "flag cardinal_points "
-#~ msgstr "Debess puses"
-
-#, fuzzy
-#~ msgid "flag constellation_art toggle"
-#~ msgstr "Ielādē zvaigznāju zīmējumus: "
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries "
-#~ msgstr "Zvaigznāju Robežas"
-
-#, fuzzy
-#~ msgid "flag constellation_boundaries toggle"
-#~ msgstr "Zvaigznāju Robežas"
-
-#, fuzzy
-#~ msgid "flag constellation_drawing "
-#~ msgstr "Ielādē zvaigznāju zīmējumus: "
-
-#, fuzzy
-#~ msgid "flag constellation_names "
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "flag constellation_names toggle"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "flag constellation_pick "
-#~ msgstr "Ielādē zvaigznāju zīmējumus: "
-
-#, fuzzy
-#~ msgid "flag ecliptic_line "
-#~ msgstr "Ekliptikas līnija"
-
-#, fuzzy
-#~ msgid "flag equator_line "
-#~ msgstr "Ekvatora līnija"
-
-#, fuzzy
-#~ msgid "flag equatorial_grid "
-#~ msgstr "Ekvatoriālais tīkls"
-
-#, fuzzy
-#~ msgid "flag landscape "
-#~ msgstr "Ainava: "
-
-#, fuzzy
-#~ msgid "flag manual_zoom "
-#~ msgstr "Manuālā tuvināšana: "
-
-#, fuzzy
-#~ msgid "flag meridian_line 0"
-#~ msgstr "Meridiāna līnija"
-
-#, fuzzy
-#~ msgid "flag meridian_line 1"
-#~ msgstr "Meridiāna līnija"
-
-#, fuzzy
-#~ msgid "flag nebula_names "
-#~ msgstr "Nebulu Nosaukumi"
-
-#, fuzzy
-#~ msgid "flag planet_names "
-#~ msgstr "Planētu Nosaukumi"
-
-#, fuzzy
-#~ msgid "flag planets "
-#~ msgstr "Planētas"
-
-#, fuzzy
-#~ msgid "flag_constellation_boundaries"
-#~ msgstr "Zvaigznāju Robežas"
-
-#, fuzzy
-#~ msgid "flag_constellation_pick"
-#~ msgstr "Zvaigznāju līnijas"
-
-#, fuzzy
-#~ msgid "flag_landscape"
-#~ msgstr "Ainavas"
-
-#, fuzzy
-#~ msgid "fog"
-#~ msgstr "Dūmaka"
-
-#, fuzzy
-#~ msgid "ground"
-#~ msgstr "Apvārsnis"
-
-#, fuzzy
-#~ msgid "groundtex"
-#~ msgstr "Apvārsnis"
-
-#, fuzzy
-#~ msgid "halo"
-#~ msgstr "Šarons"
-
-#, fuzzy
-#~ msgid "init_location"
-#~ msgstr "Vieta"
-
-#, fuzzy
-#~ msgid "io_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "landscape"
-#~ msgstr "Ainavas"
-
-#, fuzzy
-#~ msgid "landscape:flag_fog"
-#~ msgstr "Ainava: "
-
-#, fuzzy
-#~ msgid "landscapes"
-#~ msgstr "Ainavas"
-
-#, fuzzy
-#~ msgid "landscapes/"
-#~ msgstr "Ainavas"
-
-#, fuzzy
-#~ msgid "latitude"
-#~ msgstr "Ģeog.plat.: "
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Vieta"
-
-#, fuzzy
-#~ msgid "location:planet"
-#~ msgstr "Vieta"
-
-#, fuzzy
-#~ msgid "longitude"
-#~ msgstr "Ģeog.gar.: "
-
-#, fuzzy
-#~ msgid "mars_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "mimas_special"
-#~ msgstr "Kasiopeja"
-
-#, fuzzy
-#~ msgid "moon"
-#~ msgstr "Mēness"
-
-#, fuzzy
-#~ msgid "moon_scale"
-#~ msgstr "Rādīt Mēnesi redzamajā izmērā"
-
-#, fuzzy
-#~ msgid "mouse_cursor_timeout"
-#~ msgstr "Kursora taimauts: "
-
-#, fuzzy
-#~ msgid "nebula_circle_color"
-#~ msgstr "Nebulu Apļi"
-
-#, fuzzy
-#~ msgid "nebula_scale"
-#~ msgstr "Nebulu Apļi"
-
-#, fuzzy
-#~ msgid "nebulae/"
-#~ msgstr "Nebulu Nosaukumi"
-
-#, fuzzy
-#~ msgid "nebulas"
-#~ msgstr "Miglāji [N]"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Diona"
-
-#, fuzzy
-#~ msgid "oblateness"
-#~ msgstr "Lidojošā Zivs"
-
-#, fuzzy
-#~ msgid "observatory name"
-#~ msgstr "Ievadiet novērojumu vietas nosaukumu"
-
-#, fuzzy
-#~ msgid "orbit_MeanLongitude"
-#~ msgstr "Ģeog.gar.: "
-
-#, fuzzy
-#~ msgid "parent"
-#~ msgstr "Tirgus"
-
-#, fuzzy
-#~ msgid "path"
-#~ msgstr "Zeme"
-
-#, fuzzy
-#~ msgid "planet"
-#~ msgstr "Planētas"
-
-#, fuzzy
-#~ msgid "planet_names_color"
-#~ msgstr "Planētu Nosaukumi"
-
-#, fuzzy
-#~ msgid "planet_orbits_color"
-#~ msgstr "Planētu orbītas"
-
-#, fuzzy
-#~ msgid "projection:type"
-#~ msgstr "Projekcija :"
-
-#, fuzzy
-#~ msgid "projection:viewport"
-#~ msgstr "Projekcija :"
-
-#, fuzzy
-#~ msgid "radius"
-#~ msgstr "Urāns"
-
-#, fuzzy
-#~ msgid "rings"
-#~ msgstr "Spārni"
-
-#, fuzzy
-#~ msgid "script action end"
-#~ msgstr "Skriptu pavēlnieks"
-
-#, fuzzy
-#~ msgid "script action record"
-#~ msgstr "Skriptu pavēlnieks"
-
-#, fuzzy
-#~ msgid "scripts"
-#~ msgstr "Skripti "
-
-#, fuzzy
-#~ msgid "scripts/"
-#~ msgstr "Skripti "
-
-#, fuzzy
-#~ msgid "set landscape_name \""
-#~ msgstr "Izvēlieties ainavu:"
-
-#, fuzzy
-#~ msgid "set milky_way_intensity "
-#~ msgstr "Piena Ceļa intensitāte: "
-
-#, fuzzy
-#~ msgid "set sky_culture "
-#~ msgstr "Debesu kultūra: "
-
-#, fuzzy
-#~ msgid "set sky_locale "
-#~ msgstr "Iestādīt lokalizāciju: "
-
-#, fuzzy
-#~ msgid "set star_twinkle_amount "
-#~ msgstr "Zvaigžņu mirgošanas apmērs :"
-
-#, fuzzy
-#~ msgid "skycultures/"
-#~ msgstr "Debesu kultūra: "
-
-#, fuzzy
-#~ msgid "stars"
-#~ msgstr "Zvaigznes"
-
-#, fuzzy
-#~ msgid "stars/default/"
-#~ msgstr "Saglabāt kā noklusējumu"
-
-#, fuzzy
-#~ msgid "stars: %d\n"
-#~ msgstr "Zvaigznes "
-
-#, fuzzy
-#~ msgid "sun"
-#~ msgstr "Saule"
-
-#, fuzzy
-#~ msgid "tan_mode"
-#~ msgstr "Ganimēds"
-
-#, fuzzy
-#~ msgid "telescopes"
-#~ msgstr "Teleskops"
-
-#, fuzzy
-#~ msgid "type"
-#~ msgstr "Tips: "
-
-#, fuzzy
-#~ msgid "viewing:constellation_art_intensity"
-#~ msgstr "Zvaigznāju Mākslas Intensitāte"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_boundaries"
-#~ msgstr "Zvaigznāju Robežas"
-
-#, fuzzy
-#~ msgid "viewing:flag_constellation_name"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#, fuzzy
-#~ msgid "western"
-#~ msgstr "Rietumu"
-
-#, fuzzy
-#~ msgid "x"
-#~ msgstr "Vērsis"
