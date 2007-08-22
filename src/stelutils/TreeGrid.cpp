@@ -138,7 +138,7 @@ void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
 {
 	for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
 	{
-		grid.insert(*io);
+		grid.insertResult(*io);
 	}
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
 	{

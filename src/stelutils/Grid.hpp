@@ -34,12 +34,14 @@ public:
     
     virtual ~Grid() {}
 
-    void filterIntersect(const ConvexS& s) {}
+	//! Preselect all the objects in the given area
+    virtual void filterIntersect(const ConvexS& s) {;}
     
 	//! Get all the objects loaded into the grid structure
 	virtual std::vector<GridObject*> getAllObjects() = 0;
-	
-	void insert(GridObject* obj)
+
+	//! Insert an element in the resulting object list
+	void insertResult(GridObject* obj)
     {
 		std::vector<GridObject*>::push_back(obj);
     }
