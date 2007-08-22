@@ -45,6 +45,12 @@ public:
     {
 		std::vector<GridObject*>::push_back(obj);
     }
+	
+	//! Insert several elements in the resulting object list
+	void insertResult(const std::vector<GridObject*>& objs)
+	{
+		std::vector<GridObject*>::insert(std::vector<GridObject*>::end(), objs.begin(), objs.end());
+	}
 };
 
 #endif // _GRID_HPP_
