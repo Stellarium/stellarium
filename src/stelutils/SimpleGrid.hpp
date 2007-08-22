@@ -58,7 +58,7 @@ void SimpleGrid::filterIntersect(const Shape& s)
 	{
 		if (intersect(s, (*iter)->getPositionForGrid()))
 		{
-			this->Grid::insert(*iter);
+			this->Grid::insertResult(*iter);
 		}
 	}
 }

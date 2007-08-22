@@ -222,17 +222,9 @@ struct Disk : HalfSpace
 {
     //! constructor
     // @param a is the disk radius in radian
-    Disk(const Vec3d& n, double a) : HalfSpace(n, std::cos(a/2))
-    {} 
+    Disk(const Vec3d& n, double r) : HalfSpace(n, std::cos(r))
+    {}
 };
-
-//! We rewrite the intersect for ConvexPolygon
-inline bool intersect(const Disk& cp1, const ConvexPolygon& cp2)
-{
-	assert(0);
-	// TODO
-	return false;
-}
 
 //! We rewrite the intersect for ConvexPolygon
 inline bool intersect(const ConvexS& cp1, const ConvexPolygon& cp2)
@@ -241,20 +233,6 @@ inline bool intersect(const ConvexS& cp1, const ConvexPolygon& cp2)
 	// TODO
 	return false;
 }
-
-// special for ConvexPolygon
-// inline bool intersect(const Disk& d, const ConvexPolygon& p)
-// {
-// 	return intersect(p, d.n) || 
-// 	       intersect(d, static_cast<const Polygon&>(p));
-// }
-// 
-// special for ConvexPolygon
-inline bool intersect(const ConvexPolygon& p, const Disk& d)
-{
-	return intersect(d, p);
-}
-
 
 template<class S1, class S2>
 class Difference
@@ -320,6 +298,29 @@ inline bool contains(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
 			return false;
 	}
 	return true;
+}
+
+//! We rewrite the intersect for Disk/ConvexPolygon
+//! This method checks that the minimum distance between the Disk center and each side of the ConvexPolygon
+//! is smaller than the disk radius
+inline bool intersect(const HalfSpace& h, const ConvexPolygon& cp)
+{
+	if (contains(cp, h.n))
+		return true;
+	const ConvexS& c = cp;
+	for (ConvexS::const_iterator iter=c.begin();iter!=c.end();++iter)
+	{
+		const double cosAlpha = h.n*iter->n;
+		if (!(std::sqrt(1.-cosAlpha*cosAlpha) > h.d))
+			return true;
+	}
+	return false;
+}
+
+// special for ConvexPolygon
+inline bool intersect(const ConvexPolygon& c, const HalfSpace& h)
+{
+	return intersect(h, c);
 }
 
 }	// namespace StelGeom
