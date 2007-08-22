@@ -88,7 +88,6 @@ private:
 template<class S>
 void TreeGrid::fillIntersect(const S& s, const TreeGridNode& node, Grid& grid) const
 {
-	//std::cerr << "TreeGrid::fillIntersect " << this << std::endl;
     for (TreeGridNode::Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
     {
 		if (intersect(s, (*io)->getPositionForGrid()))

@@ -88,8 +88,7 @@ void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
             split(node);
             TreeGridNode::Objects node_objects;
             std::swap(node_objects, node.objects);
-            for (TreeGridNode::Objects::iterator iter = node_objects.begin();
-                    iter != node_objects.end(); ++iter)
+            for (TreeGridNode::Objects::iterator iter = node_objects.begin();iter != node_objects.end(); ++iter)
             {
                 insert(*iter, node);
             }
@@ -136,10 +135,7 @@ void TreeGrid::split(TreeGridNode& node)
 
 void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
 {
-	for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
-	{
-		grid.insertResult(*io);
-	}
+	grid.insertResult(node.objects);
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
 	{
 		fillAll(*ic, grid);
@@ -148,10 +144,7 @@ void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
 
 void TreeGrid::fillAll(const TreeGridNode& node, std::vector<GridObject*>& result) const
 {
-	for (Objects::const_iterator io = node.objects.begin(); io != node.objects.end(); ++io)
-	{
-		result.push_back(*io);
-	}
+	result.insert(result.end(), node.objects.begin(), node.objects.end());
 	for (Children::const_iterator ic = node.children.begin(); ic != node.children.end(); ++ic)
 	{
 		fillAll(*ic, result);
@@ -180,7 +173,7 @@ std::vector<GridObject*> TreeGrid::getAllObjects()
 	return result;
 }
 	
-#if 1
+#if 0
 #include "Projector.hpp"
 #include "Navigator.hpp"				 
 double TreeGridNode::draw(Projector *prj, const StelGeom::ConvexS& roi, float opacity) const
