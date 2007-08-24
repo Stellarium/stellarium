@@ -41,15 +41,6 @@
 
 namespace StelGeom
 {
-
-// Just used to resolved some compile time type embiguities
-template <class T1, class T2>
-static bool containsT(const T1& o1, const T2& o2)
-{
-    return contains(o1, o2);
-}
-
-
 /****************
 Now the geometrical objects
 *****************/
@@ -89,32 +80,12 @@ public:
     Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3);
 };
 
-// template<class T>
-// bool contains(const T& o, const Polygon& p)
-// {
-// 	for (Polygon::const_iterator vertex=p.begin();vertex!=p.end();++vertex)
-// 	{
-// 		if (!contains(o, *vertex))
-// 			return false;
-// 	}
-// 	return true;
-// }
-
-// template<class T>
-// bool intersect(const T& o, const Polygon& p)
-// {
-// 	for (Polygon::const_iterator iter=p.begin();iter!=p.end();++iter)
-// 	{
-// 		if (containsT(o, *iter))
-// 			return true;
-// 	}
-// 	return false;
-// }
 
 template<class T>
 bool intersect(const Polygon& p, const T& o)
-{ return intersect(o, p); }
-
+{
+	return intersect(o, p);
+}
 
 
 //! Several HalfSpaces defining a convex region
@@ -148,18 +119,6 @@ public:
 		return false;
 	}
 };
-
-// template <class T>
-// bool contains(const ConvexS& c, const T& o)
-// {
-// 	for (ConvexS::const_iterator iter=c.begin();iter!=c.end();++iter)
-// 	{
-// 		if (!contains(*iter, o))
-// 			return false;
-// 	}
-// 	return true;
-// }
-
 
 //! ConvexPolygon class
 //! It stores both informations :
