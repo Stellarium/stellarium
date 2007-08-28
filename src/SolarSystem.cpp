@@ -974,7 +974,9 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 
 	// umbra first
 	glBegin(GL_TRIANGLE_FAN);
-	glTexCoord2f(0,0);
+      // johannes: work-around for nasty ATI rendering bug:
+      // use y-texture coordinate of 0.5 instead of 0.0
+	glTexCoord2f(0.f,0.5f);
 	prj->drawVertex3v(shadow);
 
 	for (int i=0; i<=100; i++)
@@ -982,7 +984,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
 		s = shadow + r;
 
-		glTexCoord2f(0.6,0);  // position in texture of umbra edge
+		glTexCoord2f(0.6f,0.5f);  // position in texture of umbra edge
 		prj->drawVertex3v(s);
 	}
 	glEnd();
@@ -998,10 +1000,10 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 		s = shadow + r;
 		sp = shadow + u;
 
-		glTexCoord2f(0.6,0);
+		glTexCoord2f(0.6f,0.5f);
 		prj->drawVertex3v(sp);
 
-		glTexCoord2f(1.,0);  // position in texture of umbra edge
+		glTexCoord2f(1.f,0.5f);  // position in texture of umbra edge
 		prj->drawVertex3v(s);
 	}
 	glEnd();
