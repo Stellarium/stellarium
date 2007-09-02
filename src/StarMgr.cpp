@@ -305,7 +305,7 @@ struct Star3 {  // 6 byte
   float getBV(void) const {return IndexToBV(b_v);}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
-//  void print(void);
+  void print(void);
 } __attribute__ ((__packed__)) ;
 
 void Star3::repack(void) {
@@ -319,13 +319,13 @@ void Star3::repack(void) {
   mag = _mag;
 }
 
-//void Star3::print(void) {
-//  cout << "x0: " << x0
-//       << ", x1: " << x1
-//       << ", b_v: " << b_v
-//       << ", mag: " << mag
-//       << endl;
-//}
+void Star3::print(void) {
+  cout << "x0: " << x0
+       << ", x1: " << x1
+       << ", b_v: " << b_v
+       << ", mag: " << mag
+       << endl;
+}
 
 
 struct Star2 {  // 10 byte
@@ -348,7 +348,7 @@ struct Star2 {  // 10 byte
   float getBV(void) const {return IndexToBV(b_v);}
   wstring getNameI18n(void) const {return L"";}
   void repack(void);
-//  void print(void);
+  void print(void);
 } __attribute__ ((__packed__));
 
 void Star2::repack(void) {
@@ -366,15 +366,15 @@ void Star2::repack(void) {
   mag = _mag;
 }
 
-//void Star2::print(void) {
-//  cout << "x0: " << x0
-//       << ", x1: " << x1
-//       << ", dx0: " << dx0
-//       << ", dx1: " << dx1
-//       << ", b_v: " << b_v
-//       << ", mag: " << mag
-//       << endl;
-//}
+void Star2::print(void) {
+  cout << "x0: " << x0
+       << ", x1: " << x1
+       << ", dx0: " << dx0
+       << ", dx1: " << dx1
+       << ", b_v: " << b_v
+       << ", mag: " << mag
+       << endl;
+}
 
 
 
@@ -411,7 +411,7 @@ struct Star1 { // 28 byte
     return L"";
   }
   void repack(void);
-//  void print(void);
+  void print(void);
 } __attribute__ ((__packed__));
 
 void Star1::repack(void) {
@@ -437,19 +437,19 @@ void Star1::repack(void) {
   plx = _plx;
 }
 
-//void Star1::print(void) {
-//  cout << "hip: " << hip
-//       << ", component_ids: " << ((unsigned int)component_ids)
-//       << ", x0: " << x0
-//       << ", x1: " << x1
-//       << ", b_v: " << ((unsigned int)b_v)
-//       << ", mag: " << ((unsigned int)mag)
-//       << ", sp_int: " << sp_int
-//       << ", dx0: " << dx0
-//       << ", dx1: " << dx1
-//       << ", plx: " << plx
-//       << endl;
-//}
+void Star1::print(void) {
+  cout << "hip: " << hip
+       << ", component_ids: " << ((unsigned int)component_ids)
+       << ", x0: " << x0
+       << ", x1: " << x1
+       << ", b_v: " << ((unsigned int)b_v)
+       << ", mag: " << ((unsigned int)mag)
+       << ", sp_int: " << sp_int
+       << ", dx0: " << dx0
+       << ", dx1: " << dx1
+       << ", plx: " << plx
+       << endl;
+}
 
 
 template <class Star>
@@ -466,6 +466,7 @@ public:
                            const string &extended_file_name,
                            LoadingBar &lb);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
+  virtual void generateNativeDebugFile(const char *fname) const = 0;
   unsigned int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
@@ -503,6 +504,7 @@ public:
                    const StarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void);
+  void generateNativeDebugFile(const char *fname) const;
 protected:
   SpecialZoneData<Star> *getZones(void) const
     {return static_cast<SpecialZoneData<Star>*>(zones);}
@@ -1188,6 +1190,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   }
   if (rval && rval->isInitialized()) {
     printf("stars: %d\n",rval->getNrOfStars());
+    rval->generateNativeDebugFile((fname+".debug").c_str());
   } else {
     printf("initialization failed\n");
     if (rval) {
@@ -1234,6 +1237,17 @@ bool ReadFileWithLoadingBar(FILE *f,void *data,size_t size,LoadingBar &lb) {
   }
   return true;
 }
+
+template<class Star>
+void SpecialZoneArray<Star>::generateNativeDebugFile(const char *fname) const {
+  FILE *f = fopen(fname,"wb");
+  if (f) {
+      // write first 10 stars in native format to a file:
+    fwrite(stars,10,sizeof(Star),f);
+    fclose(f);
+  }
+}
+
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
@@ -1387,13 +1401,13 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
             s = stars;
             for (unsigned int i=0;i<nr_of_stars;i++,s++) s->repack();
           }
-//          cout << endl
-//               << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//               << "): repack test start" << endl;
-//          stars[0].print();
-//          stars[1].print();
-//          cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//               << "): repack test end" << endl;
+          cout << endl
+               << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+               << "): repack test start" << endl;
+          stars[0].print();
+          stars[1].print();
+          cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+               << "): repack test end" << endl;
         }
       }
     }
