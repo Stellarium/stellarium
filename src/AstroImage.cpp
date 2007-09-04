@@ -23,6 +23,8 @@ void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 	if (!tex) return;
 	
 	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	glColor4f(1.0,1.0,1.0,1.0);
 	tex->bind();
 	
