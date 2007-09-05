@@ -28,61 +28,67 @@ class InitParser;
 class LoadingBar;
 class Observer;
 
-//! Main class for stellarium core processing.
-//! This class provide services like management of sky projections, tone conversion,
-//! or reference frames conversion. It is used by the StelModules to update and display themself.
-//! There is currently only one StelCore instance in Stellarium, but in the future they may be more, 
-//! allowing for example to display several independent view of the sky at the same time.
+//! @class StelCore Main class for Stellarium core processing.
+//! This class provides services like management of sky projections,
+//! tone conversion, or reference frame conversion. It is used by the
+//! various StelModules to update and display themself.
+//! There is currently only one StelCore instance in Stellarium, but
+//! in the future they may be more, allowing for example to display 
+//! several independent views of the sky at the same time.
 //! @author Fabien Chereau
 class StelCore
 {
 public:
-    StelCore();
-    virtual ~StelCore();
+	StelCore();
+	virtual ~StelCore();
 
 	//! Init and load all main core components from the passed config file.
 	void init(const InitParser& conf, LoadingBar& lb);
 
-	//! Init projection temp TODO remove
+	//! Init projection temp TODO remove.
 	void initProj(const InitParser& conf);
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in ms.
 	void update(int deltaTime);
 
-	//! Update core state before drawing modules
+	//! Update core state before drawing modules.
 	void preDraw();
-	
-	//! Update core state after drawing modules
+
+	//! Update core state after drawing modules.
 	void postDraw();
-	
-	//! Get the current projector used in the core
+
+	//! Get the current projector used in the core.
 	Projector* getProjection() {return projection;}
-	//! Get the current projector used in the core
+
+	//! Get the current projector used in the core.
 	const Projector* getProjection() const {return projection;}
-	
-	//! Get the current navigation (manages frame transformation) used in the core
+
+	//! Get the current navigation (manages frame transformation) used in the core.
 	Navigator* getNavigation() {return navigation;}
-	//! Get the current navigation (manages frame transformation) used in the core
+
+	//! Get the current navigation (manages frame transformation) used in the core.
 	const Navigator* getNavigation() const {return navigation;}
 
-	//! Get the current tone reproducer used in the core
+	//! Get the current tone reproducer used in the core.
 	ToneReproducer* getToneReproducer() {return tone_converter;}
-	//! Get the current tone reproducer used in the core
+
+	//! Get the current tone reproducer used in the core.
 	const ToneReproducer* getToneReproducer() const {return tone_converter;}
 
-	//! Get the current observer description
+	//! Get the current observer description.
 	Observer* getObservatory() {return observatory;}
-	//! Get the current observer description
+
+	//! Get the current observer description.
 	const Observer* getObservatory() const {return observatory;}
-	
-	//! Change the current home planet
+
+	//! Change the current home planet.
 	bool setHomePlanet(const std::string& planet);
 
 private:
-	Navigator* navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observer* observatory;				// Manage observer position
-	Projector* projection;				// Manage the projection mode and matrix
+	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
+	Observer* observatory;			// Manage observer position
+	Projector* projection;			// Manage the projection mode and matrix
 	ToneReproducer* tone_converter;		// Tones conversion between stellarium world and display device
 	class MovementMgr* movementMgr;		// Manage vision movements
 };
