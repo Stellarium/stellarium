@@ -33,24 +33,49 @@ class Projector;
 class Navigator;
 class SFont;
 
-//! Display and manage the constellations.
+//! @class ConstellationMgr Display and manage the constellations.
 //! It can display constellations lines, names, art textures and boundaries.
 //! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
 {
 public:
-    ConstellationMgr(StarMgr *_hip_stars);
+	ConstellationMgr(StarMgr *_hip_stars);
 	virtual ~ConstellationMgr();
-    
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	//! Initialize the ConstellationMgr.
+	//! Reads from the configuration parser object and updates the loading bar
+	//! as constellation objects are loaded for the required sky culture.
+	//! @param conf the ini file parser object
+	//! @param lb a reference to the LoadingBar object
 	virtual void init(const InitParser& conf, LoadingBar& lb);
+	//! Get the module ID string.
+	//! @return "constellations";
 	virtual string getModuleID() const {return "constellations";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw constellation lines, art, names and boundaries
+	
+	//! Draw constellation lines, art, names and boundaries.
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); 
+	
+	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
+	
+	//! Update i18n names from English names according to current 
+	//! locale, and update font for locale.
+	//! The translation is done using gettext with translated strings defined 
+	//! in translations.h
 	virtual void updateI18n();
-	virtual void updateSkyCulture(LoadingBar& lb);	
+	
+	//! Loads new constellation data and art if the SkyCulture has changed.
+	virtual void updateSkyCulture(LoadingBar& lb);
+	
+	//! Limit the number of constellations to draw based on selected stars.
+	//! The selected objects changed, check if some stars are selected and display the 
+	//! matching constellations if isolate_selected mode is activated.
+	//! @param added not used at present (?)
 	virtual void selectedObjectChangeCallBack(bool added = false);
+	
+	//! 
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
@@ -73,8 +98,7 @@ public:
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Properties setters and getters	
-	
+	// Properties setters and getters
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names in english
 	void loadNames(const string& names_file);
@@ -140,31 +164,53 @@ public:
 	void setFontSize(double newFontSize);
 
 private:
+	//! Load the constellation boundary file.
+	//! This function deletes any currently loaded constellation boundaries
+	//! and loads a new set from the file passed as the parameter.  The boundary 
+	//! data file consists of whitespace separated values (space, tab or newline).  
+	//! Each boundary may span multiple lines, and consists of the following ordered
+	//! data items:
+	//!  - The number of vertexes which make up in the boundary (integer).
+	//!  - For each vertex, two floating point numbers describing the ra and dec 
+	//!    of the vertex.
+	//!  - The number of constellations which this boundary separates (always 2).
+	//!  - Two constellation abbreviations representing the constellations which 
+	//!    the boundary separates.
+	//! @param conCatFile the path to the file which contains 
+	//! the constellation boundary data.
 	bool loadBoundaries(const string& conCatFile);
-	void draw_lines(Projector * prj) const;
-	void draw_art(Projector * prj, const Navigator * nav) const;
-	void draw_names(Projector * prj) const;
+	//! Draw the constellation lines.
+	void drawLines(Projector * prj) const;
+	//! Draw the constellation art.
+	void drawArt(Projector * prj, const Navigator * nav) const;
+	//! Draw the constellation name labels.
+	void drawNames(Projector * prj) const;
+	//! Draw the constellation boundaries.
 	void drawBoundaries(Projector* prj) const;	
-	
+	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
-	//! Define which constellation is selected from its abbreviation
+	//! Define which constellation is selected from its abbreviation.
 	void setSelected(const string& abbreviation);
-	//! Define which constellation is selected and return brightest star 
+	//! Define which constellation is selected and return brightest star.
 	StelObjectP setSelectedStar(const string& abbreviation);
-	//! Define which constellation is selected from a star number
-	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
-	//! Remove all selected constellations
-	void deselect() { setSelected(NULL); }
-	StelObject* getSelected(void) const;	
+	//! Define which constellation is selected from a star number.
+	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(isStarIn(s));}
+	//! Remove all selected constellations.
+	void deselect() {setSelected(NULL);}
+	//! Get the first selected constellation.
+	//! NOTE: this function should return a list of all, or may be deleted. Please 
+	//! do not use until it exhibits the proper behaviour.
+	StelObject* getSelected(void) const;
+	
 	vector<Constellation*> selected; // More than one can be selected at a time
 	
-    Constellation* is_star_in(const StelObject *s) const;
-    Constellation* findFromAbbreviation(const string& abbreviation) const;		
-    vector<Constellation*> asterisms;
+	Constellation* isStarIn(const StelObject *s) const;
+	Constellation* findFromAbbreviation(const string& abbreviation) const;		
+	vector<Constellation*> asterisms;
 	double fontSize;
-    SFont* asterFont;
-    StarMgr* hipStarMgr;
-	
+	SFont* asterFont;
+	StarMgr* hipStarMgr;
+
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
 
