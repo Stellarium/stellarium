@@ -31,8 +31,10 @@
 
 class InitParser;
 
-//! Class which handle projection in stellarium. It overrides a number of openGL functions
-//! to enable non-linear projection, such as fisheye or stereographic projections.
+//! @brief Class which handle projection in stellarium.
+
+//! It overrides a number of openGL functions to enable non-linear projection, 
+//! such as fisheye or stereographic projections.
 //! This class also provide drawing primitives that are optimized according to the projection mode.
 class Projector
 {

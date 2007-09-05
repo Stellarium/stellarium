@@ -37,11 +37,11 @@
 
 using namespace std;
 
-//! Class used to translate strings to any language.
+//! @brief Class used to translate strings to any language.
+
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
 //! All its operations do not modify the global locale.
 //! The purpose of this class is to remove all non-OO C locale functions from stellarium.
-//! It could be extended for all locale management using e.g the portable IBM ICU library.
 //! @author Fabien Chereau
 class Translator
 {

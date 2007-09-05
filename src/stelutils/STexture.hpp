@@ -24,10 +24,8 @@
 #include "vecmath.h"
 #include "GLee.h"
 
-/**
- * Base texture class.
- * @author Fabien Chereau <stellarium@free.fr>
- */
+//! @brief Base texture class.
+//! @author Fabien Chereau
 class STexture
 {
 public:
@@ -51,7 +49,7 @@ public:
 	GLubyte* texels;
 	GLenum type;
 	
-	// Position of the 4 corners of the texture in texture coordinates
+	//! Position of the 4 corners of the texture in texture coordinates
 	Vec2d texCoordinates[4];
 protected:
 	GLuint id;
