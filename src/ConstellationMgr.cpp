@@ -463,10 +463,7 @@ vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitF
 }
 
 
-/** 
- * @brief Read constellation names from the given file
- * @param namesFile Name of the file containing the constellation names in english
- */
+//! Read constellation names from the given file.
 void ConstellationMgr::loadNames(const string& namesFile)
 {
 	// Constellation not loaded yet

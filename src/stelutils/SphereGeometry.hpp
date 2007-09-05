@@ -19,8 +19,14 @@
  
 #ifndef SPHEREGEOMETRY_HPP_
 #define SPHEREGEOMETRY_HPP_
- 
-/*
+
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+#include "vecmath.h"
+
+/**
     In this file we define different geometrical shapes :
     - HalfSpace
     - Convex
@@ -32,13 +38,6 @@
     - contains(x, y)
     - intersect(x, y) = intersect(y, x)
 */
-
-#include <vector>
-#include <algorithm>
-#include <functional>
-
-#include "vecmath.h"
-
 namespace StelGeom
 {
 /****************

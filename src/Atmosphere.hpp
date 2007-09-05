@@ -31,8 +31,8 @@ using namespace std;
 class Projector;
 class ToneReproducer;
 
-//! @brief Compute and display the daylight sky color using openGL
-//! the sky is computed with the Skylight class.
+//! Compute and display the daylight sky color using openGL.
+//! The sky brightness is computed with the SkyBright class, the color with the SkyLight
 class Atmosphere
 {
 public:

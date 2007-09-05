@@ -37,8 +37,7 @@
 
 using namespace std;
 
-//! @brief Class used to translate strings to any language.
-
+//! Class used to translate strings to any language.
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
 //! All its operations do not modify the global locale.
 //! The purpose of this class is to remove all non-OO C locale functions from stellarium.
@@ -47,7 +46,7 @@ class Translator
 {
 public:
 
-	//! @brief Create a translator from a language name.
+	//! Create a translator from a language name.
 	//! If the passed locale name cannot be handled by the system, default value will be used.
 	//! The passed language name is a language code string like "fr" or "fr_FR".
 	//! This class wrap gettext to simulate an object oriented multiplateform gettext UTF8 translator
@@ -60,7 +59,7 @@ public:
 		Translator::lastUsed = NULL;
 	}
 
-	//! @brief Translate input message.
+	//! Translate input message.
 	//! @param s input string in english.
 	//! @return The translated string in UTF-8 characters.
 	std::string translateUTF8(const std::string& s)
@@ -69,7 +68,7 @@ public:
 		return gettext(s.c_str());
 	}
 
-	//! @brief Translate input message.
+	//! Translate input message.
 	//! @param s input string in english.
 	//! @return The translated string in wide characters.
 	std::wstring translate(const std::string& s)
@@ -78,7 +77,7 @@ public:
 		return StelUtils::stringToWstring(translateUTF8(s));
 	}
 	
-	//! @brief Translate input message and return it as a QString.
+	//! Translate input message and return it as a QString.
 	//! @param s input string in english.
 	//! @return The translated QString
 	QString qtranslate(const std::string& s)
@@ -88,7 +87,7 @@ public:
 		return QString::fromUtf8(gettext(s.c_str()));
 	}
 	
-	//! @brief Get true translator locale name. Actual locale, never "system" 
+	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
 	const std::string& getTrueLocaleName(void) const
 	{

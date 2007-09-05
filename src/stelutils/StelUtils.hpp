@@ -54,28 +54,28 @@ public:
 
 namespace StelUtils {
 
-	//! @brief Convert an angle in hms format to radian
+	//! Convert an angle in hms format to radian.
 	//! @param h hour component
 	//! @param m minute component
 	//!	@param s second component
 	//! @return angle in radian
 	double hmsToRad(unsigned int h, unsigned int m, double s);
 			   
-	//! @brief Convert an angle in +-dms format to radian
+	//! Convert an angle in +-dms format to radian.
 	//! @param d degree component
 	//! @param m arcmin component
 	//!	@param s arcsec component
 	//! @return angle in radian
 	double dmsToRad(int d, unsigned int m, double s);
 	
-	//! @brief Convert an angle in radian to hms format
+	//! Convert an angle in radian to hms format.
 	//! @param rad input angle in radian
 	//! @param h hour component
 	//! @param m minute component
 	//!	@param s second component
 	void radToHms(double rad, unsigned int& h, unsigned int& m, double& s);
 	
-	//! @brief Convert an angle in radian to +-dms format
+	//! Convert an angle in radian to +-dms format.
 	//! @param rad input angle in radian
 	//! @param sign true if positive, false otherwise
 	//! @param d degree component
@@ -83,125 +83,125 @@ namespace StelUtils {
 	//!	@param s second component
 	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);	
 
-	//! @brief Convert an angle in radian to a hms formatted string
+	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
 	string radToHmsStrAdapt(double angle);
 	
-	//! @brief Convert an angle in radian to a hms formatted wstring
+	//! Convert an angle in radian to a hms formatted wstring.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
 	wstring radToHmsWstrAdapt(double angle);
 	
-	//! @brief Convert an angle in radian to a hms formatted string
+	//! Convert an angle in radian to a hms formatted string.
 	//! @param rad input angle in radian
 	string radToHmsStr(double angle, bool decimal=false);
 	
-	//! @brief Convert an angle in radian to a hms formatted wstring
+	//! Convert an angle in radian to a hms formatted wstring.
 	//! @param rad input angle in radian
 	wstring radToHmsWstr(double angle, bool decimal=false);
 	
-	//! @brief Convert an angle in radian to a dms formatted string
+	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
 	string radToDmsStrAdapt(double angle);
 	
-	//! @brief Convert an angle in radian to a dms formatted wstring
+	//! Convert an angle in radian to a dms formatted wstring.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
 	//! @param useD Define if letter "d" must be used instead of �
 	wstring radToDmsWstrAdapt(double angle, bool useD=false);
 	
-	//! @brief Convert an angle in radian to a dms formatted string
+	//! Convert an angle in radian to a dms formatted string.
 	//! @param rad input angle in radian
 	string radToDmsStr(double angle, bool decimal=false);
 	
-	//! @brief Convert an angle in radian to a dms formatted wstring
+	//! Convert an angle in radian to a dms formatted wstring.
 	//! @param rad input angle in radian
 	//! @param useD Define if letter "d" must be used instead of �
 	wstring radToDmsWstr(double angle, bool decimal=false, bool useD=false);
 	
-	//! @brief Obtains a Vec3f from a string
+	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
 	//! @deprecated Use the >> operator from Vec3f class
 	Vec3f str_to_vec3f(const string& s);
 	
-	//! @brief Obtains a string from a Vec3f 
+	//! Obtains a string from a Vec3f.
 	//! @param v The vector
 	//! @return the string describing the Vector with the form "x,y,z"
 	//! @deprecated Use the << operator from Vec3f class
 	string vec3f_to_str(const Vec3f& v);
 		
-	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable
+	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable.
 	//! @param The input string in UTF-8 format
 	//! @return The matching wide string
 	wstring stringToWstring(const string& s);
 	
-	//! @brief Convert std::wstring to UTF-8 std::string using wcstombs() function
+	//! Convert std::wstring to UTF-8 std::string using wcstombs() function.
 	//! @param The input wide character string
 	//! @return The matching string in UTF-8 format
 	string wstringToString(const wstring& ws);
 	
-	//! @brief Format the double value to a wstring (with current locale)
+	//! Format the double value to a wstring (with current locale).
 	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
 	//! @param d the input double value
 	//! @return the matching wstring
 	wstring doubleToWstring(double d);
 	
-	//! @brief Format the int value to a wstring (with current locale)
+	//! Format the int value to a wstring (with current locale).
 	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
 	//! @param i the input int value
 	//! @return the matching wstring
 	wstring intToWstring(int i);
 	
-	//! @brief Format the int value to a string (with current locale)
+	//! Format the int value to a string (with current locale).
 	//! @param i the input int value
 	//! @return the matching string
 	string intToString(int i);
 	
-	//! @brief Extract the int value from a string
+	//! Extract the int value from a string.
 	//! @param str the input string
 	//! @return the matching int
 	int stringToInt(const string& str);
 	
-	//! @brief Extract the int value from a string, and use default value if the string is not convertible as an int
+	//! Extract the int value from a string, and use default value if the string is not convertible as an int.
 	//! @param str the input string
 	//! @param defaultValue the default fallback value
 	//! @return the matching int or default value
 	int stringToInt(const string& str, int defaultValue);
 	
-	//! @brief Extract the double value from a string
+	//! Extract the double value from a string.
 	//! @param str the input string
 	//! @return the matching double value
 	double stringToDouble(const string& str);
 	
-	//! @brief Format the double value to a string (with current locale)
+	//! Format the double value to a string (with current locale).
 	//! @param dbl the input int value
 	//! @return the matching string
 	string doubleToString(double dbl);
 	
-	//! @brief Extract the long int value from a string
+	//! Extract the long int value from a string.
 	//! @param str the input string
 	//! @return the matching long int value
 	long int stringToLong(const string& str);
 	
-	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
 	void sphe_to_rect(double lng, double lat, Vec3d& v);
 	
-	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
 	void sphe_to_rect(float lng, float lat, Vec3f& v);
 	
-	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
 
-	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	void rect_to_sphe(float *lng, float *lat, const Vec3d& v);
@@ -209,25 +209,25 @@ namespace StelUtils {
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
 	double get_dec_angle(const string&);
 	
-	//! Delete the file
+	//! Delete the file.
 	bool deleteFile(const std::string& fileName);
 
-	//! Check if the filename is an absolute path
+	//! Check if the filename is an absolute path.
 	bool checkAbsolutePath(const string& fileName);
 
-	//! Check if a number is a power of 2
+	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(int value);
 	
-	//! Return the first power of two bigger than the given value 
+	//! Return the first power of two bigger than the given value.
 	int getBiggerPowerOfTwo(int value);
 	
-	//! Download the file from the given URL to the given name using libcurl
+	//! Download the file from the given URL to the given name using libcurl.
 	bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer="Stellarium", const std::string& cookiesFile="");
 	
-	//! Return the inverse sinus hyperbolic of z
+	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);
 	
-	//! check if a vector of strings has a CLI-style option
+	//! Check if a vector of strings has a CLI-style option.
 	//! @param args a vector of strings, think argv
 	//! @param shortOpt a short-form option string, e.g, "-h"
 	//! @param longOpt a long-form option string, e.g. "--help"
@@ -235,7 +235,7 @@ namespace StelUtils {
 	//! @return true if the option exists in args
 	bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify=true);
 	
-	//! retrieve option with argument from vector of strings
+	//! Retrieve option with argument from vector of strings.
 	//! given a vector of string command line arguments, this function will
 	//! extract the argument to an option of type T.
 	//! The option may be expresed using either the short form, e.g. -n arg,
@@ -309,18 +309,18 @@ namespace StelUtils {
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions. 
 	
-	//! Convert a QT QDateTime class to julian day
+	//! Convert a QT QDateTime class to julian day.
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
 	double qDateTimeToJd(const QDateTime& dateTime);
 
-	//! Convert a  julian day to a QT QDateTime class
+	//! Convert a  julian day to a QT QDateTime class.
 	//! Warning if JD < 0 the date is invalid (any date before 2 January 4713 B.C.)
 	//! @param the decimal Julian Day
 	//! @result the matching UTC QDateTime
 	QDateTime jdToQDateTime(double jd);
 
-	//! Get the current Julian Date from system time
+	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
 	double getJDFromSystem(void);
 }
@@ -329,15 +329,16 @@ namespace StelUtils {
 // Old General Calendar Functions. 
 // They should be migrated to more protable ones based on Qt
 
-//! Return the number of hours to add to gmt time to get the local time at time JD
+//! Return the number of hours to add to gmt time to get the local time at time JD.
 //! taking the parameters from system. This takes into account the daylight saving
 //! time if there is. (positive for Est of GMT)
 float get_GMT_shift_from_system(double JD);
 
-//! Return the time zone name taken from system locale
+//! Return the time zone name taken from system locale.
 wstring get_time_zone_name_from_system(double JD);
 
-// convert string in ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timezone offset) to julian day
+//! convert string in ISO 8601-like format to julian day.
+//! @param date string in ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timezone offset)
 int string_to_jday(string date, double &jd);
 
 

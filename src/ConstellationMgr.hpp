@@ -33,8 +33,7 @@ class Projector;
 class Navigator;
 class SFont;
 
-//! @brief Display and manage the constellations.
-//!
+//! Display and manage the constellations.
 //! It can display constellations lines, names, art textures and boundaries.
 //! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
@@ -67,7 +66,7 @@ public:
 	//! @param name The case sensistive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const string& name) const;
 
-	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
@@ -76,11 +75,11 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters	
 	
-	//! @brief Read constellation names from the given file
+	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names in english
 	void loadNames(const string& names_file);
 	
-	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
+	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param fileName The name of the constellation data file
 	//! @param artFileName The name of the constellation art data file
 	//! @param cultureName A string ID of the current skyculture

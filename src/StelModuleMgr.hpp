@@ -25,8 +25,7 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include "StelModule.hpp"
 
-//! @brief Manage a collection of StelModule
-//! @author Fabien Chereau <stellarium@free.fr>
+//! Manage a collection of StelModule.
 class StelModuleMgr
 {
 public:

@@ -26,8 +26,7 @@
 #include "StelObjectType.hpp"
 #include "vecmath.h"
 
-//! @brief Specialization of StelModule which manage a collection of StelObject.
-
+//! Specialization of StelModule which manage a collection of StelObject.
 //! Instance deriving from the StelObjectModule class can be managed by the StelObjectMgr.
 //! The class defines extra abstract functions for searching and listing StelObjects
 //! @author Fabien Chereau

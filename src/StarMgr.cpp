@@ -2161,7 +2161,7 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
   }
 }
 
-//! @brief Update i18 names from english names according to passed translator
+//! Update i18 names from english names according to passed translator.
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n() {
   Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();

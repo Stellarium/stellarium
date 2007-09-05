@@ -30,8 +30,7 @@ using namespace std;
 // Predeclaration
 typedef struct _dictionary_ dictionary;
 
-//! @brief Class which parses .ini configuration files
-
+//! Class which parses .ini configuration files.
 //! It is a C++ wrapper on the C library iniparser, by Nicolas Devillard
 class InitParser
 {

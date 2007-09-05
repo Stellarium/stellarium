@@ -349,7 +349,7 @@ namespace s_gui
         Label(const wstring& _label = L"", SFont* _font = NULL);
         virtual ~Label();
         virtual const wstring& getLabel() const {return label;}
-        /** @brief Set new label */
+        //! Set new label.
         virtual void setLabel(const wstring&);
         virtual void draw();
         virtual void draw(float intensity);
