@@ -26,7 +26,7 @@
 #include "SphereGeometry.hpp"
 
 using namespace StelGeom;
- 
+
 class Grid : public std::vector<GridObject*>
 {
 public:

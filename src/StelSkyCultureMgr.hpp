@@ -27,10 +27,8 @@ using namespace std;
 
 class InitParser;
 
-/**
-	Manage sky cultures for stellarium.
-	@author Fabien Chereau
-*/
+//! @brief Manage sky cultures for stellarium.
+//! @author Fabien Chereau
 class StelSkyCultureMgr{
 public:
     StelSkyCultureMgr();
