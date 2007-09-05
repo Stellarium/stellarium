@@ -83,7 +83,7 @@ public:
 	wstring getNameI18n(void) const {return nameI18;}
 	string getEnglishName(void) const {return englishName;}
     
-	//! @brief Get the printable nebula Type
+	//! Get the printable nebula Type.
 	//! @return the nebula type code.
 	wstring getTypeString(void) const;
 

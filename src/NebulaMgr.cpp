@@ -563,7 +563,7 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 	}
 }
 
-//! @brief Update i18 names from english names according to passed translator
+//! Update i18 names from english names according to passed translator.
 //! The translation is done using gettext with translated strings defined in translations.h
 void NebulaMgr::updateI18n()
 {

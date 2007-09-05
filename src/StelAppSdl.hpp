@@ -18,7 +18,7 @@ public:
 	// Methods from StelApp
 	///////////////////////////////////////////////////////////////////////////	
 	
-	//! @brief Start the main loop and return when the program ends.
+	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop(void);
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)

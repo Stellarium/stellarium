@@ -33,7 +33,7 @@
 
 class QMutex;
 
-//! @brief Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
+//! Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
 {
 	friend class StelTextureMgr;
@@ -88,7 +88,7 @@ private:
 	DynamicRangeMode dynamicRangeMode;
 };
 
-//! @brief Abstract class for any Image loaders.
+//! Abstract class for any Image loaders.
 class ImageLoader
 {
 public:
@@ -99,7 +99,7 @@ public:
 	virtual bool loadImage(const std::string& filename, ManagedSTexture& tex) = 0;
 };
 
-//! @brief Describe queued textures loaded in thread
+//! Describe queued textures loaded in thread.
 struct QueuedTex
 {
 	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, class QFile* afile) :
@@ -112,8 +112,7 @@ struct QueuedTex
 	class QFile* file;
 };
 
-//! @brief Manage textures loading and manipulation.
-//!
+//! Manage textures loading and manipulation.
 //! The texture loader has a current state defining the way the textures will be loaded in memory,
 //! that is, whether mimap should be generated, the wrap mode or mag and min filters.
 //! The state should be reinitialized by calling the StelTextureMgr::setDefaultParams method before any texture loading.

@@ -27,8 +27,7 @@ class Landscape;
 class Atmosphere;
 class Cardinals;
 
-//! @brief Class which manage all the rendering a the level of the observer's surrounding.
-//!
+//! Class which manage all the rendering a the level of the observer's surrounding.
 //! This includes landscape textures, fog, atmosphere and cardinal points
 //! I decided to put all these elements together in a single class because there are 
 //! inherently linked, especially when we start moving the observer in altitude
