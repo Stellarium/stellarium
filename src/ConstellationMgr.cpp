@@ -40,7 +40,7 @@
 #include "StelFileMgr.hpp"
 
 // constructor which loads all data from appropriate files
-ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) : 
+ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	fontSize(15),
 	asterFont(NULL),
 	hipStarMgr(_hip_stars),
@@ -55,7 +55,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 
 ConstellationMgr::~ConstellationMgr()
 {
- 	vector<Constellation *>::iterator iter;
+	vector<Constellation *>::iterator iter;
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
@@ -125,7 +125,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 			
 		// load constellation names
 		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
-	
+
 		// Translate constellation names for the new sky culture
 		updateI18n();
 		
@@ -154,10 +154,6 @@ void ConstellationMgr::setColorScheme(const InitParser& conf, const std::string&
 	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
 }
 
-/*************************************************************************
- The selected objects changed, check if some stars are selected and display the 
- matching constellations if isolate_selected mode is activated
-*************************************************************************/ 
 void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 {
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
@@ -194,14 +190,35 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 	}
 }
 
-void ConstellationMgr::setLinesColor(const Vec3f& c) {Constellation::lineColor = c;}
-Vec3f ConstellationMgr::getLinesColor() const {return Constellation::lineColor;}
+void ConstellationMgr::setLinesColor(const Vec3f& c)
+{
+	Constellation::lineColor = c;
+}
 
-void ConstellationMgr::setBoundariesColor(const Vec3f& c) {Constellation::boundaryColor = c;}
-Vec3f ConstellationMgr::getBoundariesColor() const {return Constellation::boundaryColor;}
+Vec3f ConstellationMgr::getLinesColor() const
+{
+	return Constellation::lineColor;
+}
 
-void ConstellationMgr::setNamesColor(const Vec3f& c) {Constellation::labelColor = c;}
-Vec3f ConstellationMgr::getNamesColor() const {return Constellation::labelColor;}
+void ConstellationMgr::setBoundariesColor(const Vec3f& c) 
+{
+	Constellation::boundaryColor = c;
+}
+
+Vec3f ConstellationMgr::getBoundariesColor() const 
+{
+	return Constellation::boundaryColor;
+}
+
+void ConstellationMgr::setNamesColor(const Vec3f& c) 
+{
+	Constellation::labelColor = c;
+}
+
+Vec3f ConstellationMgr::getNamesColor() const 
+{
+	return Constellation::labelColor;
+}
 
 void ConstellationMgr::setFontSize(double newFontSize)
 {
@@ -242,8 +259,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		if(cons->read(record, hipStarMgr))
 		{
 			asterisms.push_back(cons);
-		} else
-		{ 
+		}
+		else
+		{
 			cerr << "ERROR on line " << line << "of " << fileName.c_str() << endl;
 			delete cons;
 		}
@@ -372,15 +390,15 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproducer *)
 {
 	prj->setCurrentFrame(Projector::FRAME_J2000);
-	draw_lines(prj);
-	draw_names(prj);
-	draw_art(prj, nav);
+	drawLines(prj);
+	drawNames(prj);
+	drawArt(prj, nav);
 	drawBoundaries(prj);
 	return 0.;
 }
 
 // Draw constellations art textures
-void ConstellationMgr::draw_art(Projector * prj, const Navigator * nav) const
+void ConstellationMgr::drawArt(Projector * prj, const Navigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -397,10 +415,10 @@ void ConstellationMgr::draw_art(Projector * prj, const Navigator * nav) const
 }
 
 // Draw constellations lines
-void ConstellationMgr::draw_lines(Projector * prj) const
+void ConstellationMgr::drawLines(Projector * prj) const
 {
 	glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
+	glDisable(GL_BLEND);
 
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -410,7 +428,7 @@ void ConstellationMgr::draw_lines(Projector * prj) const
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::draw_names(Projector * prj) const
+void ConstellationMgr::drawNames(Projector * prj) const
 {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
@@ -428,13 +446,14 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	}
 }
 
-Constellation *ConstellationMgr::is_star_in(const StelObject* s) const
+Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		// Check if the star is in one of the constellation
-		if ((*iter)->is_star_in(s)) {
+		if ((*iter)->isStarIn(s)) 
+		{
 			return (*iter);
 		}
 	}
@@ -462,8 +481,6 @@ vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitF
 	return vector<StelObjectP>(0);
 }
 
-
-//! Read constellation names from the given file.
 void ConstellationMgr::loadNames(const string& namesFile)
 {
 	// Constellation not loaded yet
@@ -491,7 +508,8 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	while (!std::getline(commonNameFile, record).eof())
 	{
 
-		if( record != "") {
+		if( record != "") 
+		{
 			istringstream in(record); 
 			in >> tmpShortName;
 
@@ -499,18 +517,15 @@ void ConstellationMgr::loadNames(const string& namesFile)
 
 			aster = findFromAbbreviation(tmpShortName);
 			if (aster != NULL)
-				{
-					// Read the names in english
-					aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
-				}
+			{
+				// Read the names in english
+				aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
+			}
 		}
 	}
 	commonNameFile.close();
-
 }
 
-//! @brief Update i18n names from english names according to current locale, and update font for locale
-//! The translation is done using gettext with translated strings defined in translations.h
 void ConstellationMgr::updateI18n()
 {
 	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -529,7 +544,7 @@ void ConstellationMgr::update(double delta_time)
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->update((int)(delta_time*1000));
-    }
+	}
 }
 
 
@@ -591,7 +606,7 @@ void ConstellationMgr::setFlagArt(bool b)
 		vector < Constellation * >::const_iterator iter;
 		for (iter = selected.begin(); iter != selected.end(); ++iter)
 			(*iter)->setFlagArt(b);
-   }
+	}
 	else
 	{
 		vector < Constellation * >::const_iterator iter;
@@ -622,8 +637,6 @@ StelObject* ConstellationMgr::getSelected(void) const {
 	return *selected.begin();  // TODO return all or just remove this method
 }
 
-
-//! Define which constellation is selected from its abbreviation
 void ConstellationMgr::setSelected(const string& abbreviation) 
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
@@ -632,7 +645,6 @@ void ConstellationMgr::setSelected(const string& abbreviation)
 
 }
 
-//! Define which constellation is selected and return brightest star 
 StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation) 
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
@@ -643,8 +655,6 @@ StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation)
 	}
 	return NULL;
 }
-
-
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
 {
@@ -658,35 +668,37 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		c->setFlagName(getFlagNames());
 		c->setFlagArt(getFlagArt());
 		c->setFlagBoundaries(getFlagBoundaries());
-				
+	
 		if (isolateSelected)
 		{
-		    vector < Constellation * >::const_iterator iter;
-		    for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		    {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			{
 
 				bool match = 0;
 				vector < Constellation * >::const_iterator s_iter;
 				for (s_iter = selected.begin(); s_iter != selected.end(); ++s_iter)
-					if( (*iter)==(*s_iter) ) {
+				{
+					if( (*iter)==(*s_iter) ) 
+					{
 						match=true; // this is a selected constellation
 						break;  
 					}
+				}
 
-				if(!match) {
+				if(!match)
+				{
 					// Not selected constellation
 					(*iter)->setFlagLines(false);
 					(*iter)->setFlagName(false);
 					(*iter)->setFlagArt(false);
 					(*iter)->setFlagBoundaries(false);
-		        }
-             }
+		        	}
+             		}
 			Constellation::singleSelected = true;  // For boundaries
-        }
+        	}
 		else
-		{
 			Constellation::singleSelected = false; // For boundaries
-		}
 	}
 	else
 	{
@@ -709,7 +721,6 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 	}
 }
 
-// Load from file 
 bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 {
 	Constellation *cons = NULL;
@@ -722,17 +733,17 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 	}
 	allBoundarySegments.clear();
 
-    cout << "Loading Constellation boundary data from " << boundaryFile << " ...\n";
+	cout << "Loading Constellation boundary data from " << boundaryFile << " ...\n";
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
 	
-    ifstream dataFile;
+	ifstream dataFile;
 	dataFile.open(boundaryFile.c_str());
-    if (!dataFile.is_open())
-    {
-        cerr << "Boundary file " << boundaryFile << " not found" << endl;
-        return false;
-    }
+	if (!dataFile.is_open())
+	{
+		cerr << "Boundary file " << boundaryFile << " not found" << endl;
+		return false;
+	}
 
 	float DE, RA;
 	float oDE, oRA;
@@ -785,18 +796,17 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 		i++;
 
 	}
-    dataFile.close();
+	dataFile.close();
 	cout << "(" << i << " segments loaded)" << endl;
-    delete points;
-    
-    return true;
+	delete points;
+
+	return true;
 }
 
-// Draw constellations lines
 void ConstellationMgr::drawBoundaries(Projector * prj) const
 {
 	glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
+	glDisable(GL_BLEND);
 
 	glLineStipple(2, 0x3333);
 	glEnable(GL_LINE_STIPPLE);
@@ -814,8 +824,6 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 ///  return 0;
 ///}
 
-//! Return the matching constellation object's pointer if exists or NULL
-//! @param nameI18n The case sensistive constellation name
 StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
@@ -831,9 +839,6 @@ StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 	return NULL;
 }
 
-
-//! Return the matching constellation object's pointer if exists or NULL
-//! @param name The case sensistive standard program constellation code
 StelObjectP ConstellationMgr::searchByName(const string& name) const
 {
 	string objw = name;
@@ -851,7 +856,6 @@ StelObjectP ConstellationMgr::searchByName(const string& name) const
 	return NULL;
 }
 
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {
 	vector<wstring> result;
