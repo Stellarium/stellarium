@@ -192,7 +192,7 @@ void Constellation::drawArt(Projector* prj, const Navigator* nav) const
 	glDisable(GL_CULL_FACE);
 }
 
-const Constellation* Constellation::is_star_in(const StelObject* s) const
+const Constellation* Constellation::isStarIn(const StelObject* s) const
 {
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{

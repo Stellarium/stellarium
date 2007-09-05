@@ -90,7 +90,7 @@ private:
 	//! the lines of a Constellation.
 	//! @return a pointer to the constellation which the star is a part of, 
 	//! or NULL if the star is not part of a constellation
-	const Constellation* is_star_in(const StelObject*) const;
+	const Constellation* isStarIn(const StelObject*) const;
 	
 	//! Get the brightest star in a Constellation.
 	//! Checks all stars which make up the constellation lines, and returns 
