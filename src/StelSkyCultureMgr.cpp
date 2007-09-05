@@ -63,7 +63,7 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 }
 
 
-//! @brief Init itself from a config file.
+//! Init itself from a config file.
 void StelSkyCultureMgr::init(const InitParser& conf)
 {
 	string tmp = conf.get_str("localization", "sky_culture", "western");

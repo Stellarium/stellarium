@@ -24,7 +24,7 @@
 #include "vecmath.h"
 #include "GLee.h"
 
-//! @brief Base texture class.
+//! Base texture class.
 //! @author Fabien Chereau
 class STexture
 {

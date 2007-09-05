@@ -27,7 +27,7 @@ using namespace std;
 
 class InitParser;
 
-//! @brief Manage sky cultures for stellarium.
+//! Manage sky cultures for stellarium.
 //! @author Fabien Chereau
 class StelSkyCultureMgr{
 public:
@@ -35,7 +35,7 @@ public:
 
     ~StelSkyCultureMgr();
 	
-	//! @brief Init itself from a config file.
+	//! Init itself from a config file.
 	void init(const InitParser& conf);
 	
 	//! Set the sky culture from I18 name

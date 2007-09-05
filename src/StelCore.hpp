@@ -28,8 +28,7 @@ class InitParser;
 class LoadingBar;
 class Observer;
 
-//! @brief Main class for stellarium core processing.
-//!
+//! Main class for stellarium core processing.
 //! This class provide services like management of sky projections, tone conversion,
 //! or reference frames conversion. It is used by the StelModules to update and display themself.
 //! There is currently only one StelCore instance in Stellarium, but in the future they may be more, 

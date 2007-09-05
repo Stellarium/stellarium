@@ -26,7 +26,7 @@
 
 class GLWidget;
 
-//! @brief Implementation of StelApp based on a Qt4 main window
+//! Implementation of StelApp based on a Qt4 main window.
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
 class StelAppQt4 : public StelApp
 {

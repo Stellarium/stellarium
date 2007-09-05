@@ -36,36 +36,36 @@ public:
 
     ~StelLocaleMgr();
 
-	//! @brief Init itself from a config file.
+	//! Init itself from a config file.
 	void init(const InitParser& conf);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// MESSAGES TRANSLATIONS
 	///////////////////////////////////////////////////////////////////////////
-	//! @brief Get the application language currently used for GUI etc..
+	//! Get the application language currently used for GUI etc...
 	//! This function has no permanent effect on the global locale.
 	//! @return the name of the language (e.g fr).
 	string getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
 	
-	//! @brief Set the application language. This applies to GUI etc..
+	//! Set the application language. This applies to GUI etc..
 	//! This function has no permanent effect on the global locale.
 	//! @param newAppLocaleName the name of the language (e.g fr).
 	void setAppLanguage(const string& newAppLangName);			   
 	
-	//! @brief Get the Translator currently used for global application.
+	//! Get the Translator currently used for global application.
 	Translator& getAppTranslator() const;
 	
-	//! @brief Get the language currently used for sky objects.
+	//! Get the language currently used for sky objects.
 	//! This function has no permanent effect on the global locale.
 	//! @return the name of the language (e.g fr).
 	string getSkyLanguage() const;		   
 	
-	//! @brief Set the sky language and reload the sky objects names with the new translation.
+	//! Set the sky language and reload the sky objects names with the new translation.
 	//! This function has no permanent effect on the global locale
 	//!@param newSkyLangName The name of the locale (e.g fr) to use for sky object labels
 	void setSkyLanguage(const string& newSkyLangName);
 	
-	//! @brief Get the Translator currently used for sky objects.
+	//! Get the Translator currently used for sky objects.
 	Translator& getSkyTranslator();
 	
 	///////////////////////////////////////////////////////////////////////////

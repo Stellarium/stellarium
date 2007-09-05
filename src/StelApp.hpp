@@ -40,8 +40,7 @@ class StelFileMgr;
 
 using namespace std;
 
-//! @brief Singleton main Stellarium application class.
-//!
+//! Singleton main Stellarium application class.
 //! This is the central class of Stellarium.
 //! Only one singleton instance of this class is created and can be accessed from anywhere else.
 //! This class is the access point to several "Manager" class which provide application-wide services for managment of font,
@@ -52,7 +51,7 @@ using namespace std;
 class StelApp
 {
 public:
-	//! @brief Create and initialize the main Stellarium application.
+	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
 	//! The configFile will be search for in the search path by the StelFileMgr,
@@ -69,39 +68,40 @@ public:
 	//! Initialize application and core
 	virtual void init();
 
-	//! @brief Get the StelApp singleton instance
+	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {assert(singleton); return *singleton;}
 
-	//! @brief Get the module manager to use for accessing any module loaded in the application
+	//! Get the module manager to use for accessing any module loaded in the application.
 	//! @return the module manager.
 	StelModuleMgr& getModuleMgr() {return *moduleMgr;}
 	
-	//! @brief Get the locale manager to use for i18n & date/time localization
+	//! Get the locale manager to use for i18n & date/time localization.
 	//! @return the font manager to use for loading fonts.
 	StelLocaleMgr& getLocaleMgr() {return *localeMgr;}
 	
-	//! @brief Get the font manager to use for loading fonts.
+	//! Get the font manager to use for loading fonts.
 	//! @return the font manager to use for loading fonts.
 	StelFontMgr& getFontManager() {return *fontManager;}
 	
-	//! @brief Get the sky cultures manager
+	//! Get the sky cultures manager.
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
 	
-	//! @brief Get the texture manager to use for loading textures.
+	//! Get the texture manager to use for loading textures.
 	//! @return the texture manager to use for loading textures.
 	StelTextureMgr& getTextureManager() {return *textureMgr;}
 	
-	//! @brief Get the StelObject manager to use for querying from all stellarium objects
+	//! Get the StelObject manager to use for querying from all stellarium objects.
 	//! @return the StelObject manager to use for querying from all stellarium objects
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 	
-	//! @brief Get the StelFileMgr for performing file operations
+	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
 	StelFileMgr& getFileMgr() {return *stelFileMgr;}
 	
-	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
+	//! Get the core of the program.
+	//! It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
 	

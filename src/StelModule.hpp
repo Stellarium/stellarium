@@ -35,8 +35,7 @@ class InitParser;
 
 using namespace std;
 
-//! @brief This is the common base class for all the main components of stellarium.
-//!
+//! This is the common base class for all the main components of stellarium.
 //! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
 //! Every new component should herit and implement the methods defined in StelModule.hpp.
 //! Once a module is registered into the StelModuleMgr, it is automatically managed by the program.
@@ -61,12 +60,12 @@ public:
 	//! @param delta_time the time increment in second since last call.
 	virtual void update(double deltaTime) = 0;
 	
-	//! @brief Update i18n strings from english names according to current global sky and application language.
+	//! Update i18n strings from english names according to current global sky and application language.
 	//! This method also reload the proper fonts depending on the language.
 	//! The translation shall be done using the Translator provided by the StelApp singleton instance.
 	virtual void updateI18n() {;}
 		   
-	//! @brief Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
+	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	
 	//! Get the identifier of the module. Must be unique.

@@ -21,8 +21,8 @@
 
 #include "vecmath.h"
 
-//! @brief Simple abstract class defining the method getPositionForGrid() used
-//! by the grid algorithms to get a permanent (fixed) position
+//! Simple abstract class defining the method getPositionForGrid() used
+//! by the grid algorithms to get a permanent (fixed) position.
 class GridObject
 {
 	public:

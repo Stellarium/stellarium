@@ -19,8 +19,7 @@
 #ifndef _TONE_REPRODUCER_H_
 #define _TONE_REPRODUCER_H_
 
-//! @brief Class which converts tones in function of the eye adaptation to luminance.
-//!
+//! Converts tones in function of the eye adaptation to luminance.
 //! The aim is to get on the screen something which is perceptualy accurate,
 //! ie. to compress high dynamic range luminance to CRT display range.
 //! The class perform mainly a fast implementation of the algorithm from the
@@ -33,7 +32,7 @@
 //! appropriate for a daylight sky luminance)
 //!
 //! REFERENCES :
-//! Thanks to all the authors of the following papers i used for providing
+//! Thanks to all the authors of the following papers I used for providing
 //! their work freely online.
 //!
 //! [1] "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
