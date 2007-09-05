@@ -38,57 +38,52 @@ Constellation::Constellation() : asterism(NULL)
 Constellation::~Constellation()
 {   
 	if (asterism) delete[] asterism;
-    asterism = NULL;
+	asterism = NULL;
 }
 
-// Read Constellation data record and grab cartesian positions of stars
-// returns false if can't parse record
-bool Constellation::read(const string& record, StarMgr * _VouteCeleste)
+bool Constellation::read(const string& record, StarMgr *starMgr)
 {   
 	unsigned int HP;
 
 	abbreviation.clear();
-	nb_segments = 0;
+	numberOfSegments = 0;
 
 	std::istringstream istr(record);
-	if (!(istr >> abbreviation >> nb_segments)) return false;
+	if (!(istr >> abbreviation >> numberOfSegments)) return false;
 		
 	// make short_name uppercase for case insensitive searches
 	transform(abbreviation.begin(),abbreviation.end(), abbreviation.begin(), ::toupper);
 
-    asterism = new StelObjectP[nb_segments*2];
-    for (unsigned int i=0;i<nb_segments*2;++i)
-    {
+	asterism = new StelObjectP[numberOfSegments*2];
+	for (unsigned int i=0;i<numberOfSegments*2;++i)
+	{
 		HP = 0;
-        istr >> HP;
+		istr >> HP;
 		if(HP == 0)
 		{
-//			delete[] asterism;
+			// delete[] asterism;
 			return false;
 		}
 
-        asterism[i]=_VouteCeleste->searchHP(HP);
+		asterism[i]=starMgr->searchHP(HP);
 		if (!asterism[i])
 		{
 			cout << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP << endl;
-//			delete[] asterism;
+			// delete[] asterism;
 			return false;
 		}
-    }
+	}
 
-    for(unsigned int ii=0;ii<nb_segments*2;++ii)
-    {
+	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+	{
 		XYZname+= asterism[ii]->getObsJ2000Pos(0);
-    }
-    XYZname*=1./(nb_segments*2);
+	}
+	XYZname*=1./(numberOfSegments*2);
 
 	return true;
 }
 
-
-// Draw the lines for the Constellation using the coords of the stars
-// (optimized for use thru the class ConstellationMgr only)
-void Constellation::draw_optim(Projector* prj) const
+void Constellation::drawOptim(Projector* prj) const
 {
 	if(!line_fader.getInterstate()) return;
 
@@ -100,8 +95,8 @@ void Constellation::draw_optim(Projector* prj) const
 
 	Vec3d star1;
 	Vec3d star2;
-    for (unsigned int i=0;i<nb_segments;++i)
-    {
+	for (unsigned int i=0;i<numberOfSegments;++i)
+	{
 		if (prj->projectLineCheck(asterism[2*i]->getObsJ2000Pos(0),star1,asterism[2*i+1]->getObsJ2000Pos(0),star2))
 		{
 			glBegin(GL_LINES);
@@ -112,19 +107,17 @@ void Constellation::draw_optim(Projector* prj) const
 	}
 }
 
-// Draw the name
-void Constellation::draw_name(SFont *constfont, Projector* prj) const
+void Constellation::drawName(SFont *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
 	prj->drawText(constfont, XYname[0], XYname[1], nameI18, 0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
-// Draw the art texture, optimized function to be called thru a constellation manager only
-void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
+void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 {
 	float intensity = art_fader.getInterstate(); 
-	if (art_tex && intensity) 
+	if (artTexture && intensity) 
 	{
 		glColor3f(intensity,intensity,intensity);
 
@@ -144,7 +137,7 @@ void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
-			art_tex->bind();
+			artTexture->bind();
 		
 			if ((b0 || b1 || b2 || b3) && (v0[2]<1 && v1[2]<1 && v2[2]<1 && v3[2]<1))
 			{	
@@ -187,29 +180,30 @@ void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
 }
 
 // Draw the art texture
-void Constellation::draw_art(Projector* prj, const Navigator* nav) const
+void Constellation::drawArt(Projector* prj, const Navigator* nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	draw_art_optim(prj, nav);
+	drawArtOptim(prj, nav);
 
 	glDisable(GL_CULL_FACE);
 }
 
 const Constellation* Constellation::is_star_in(const StelObject* s) const
 {
-    for(unsigned int i=0;i<nb_segments*2;++i)
-    {
+	for(unsigned int i=0;i<numberOfSegments*2;++i)
+	{
 
 		// asterism[i]==s test was not working
-		if (asterism[i]->getEnglishName()==s->getEnglishName()) {
-//			cout << "Const matched. " << getEnglishName() << endl;
+		if (asterism[i]->getEnglishName()==s->getEnglishName())
+		{
+			// cout << "Const matched. " << getEnglishName() << endl;
 			return this;
 		}
-    }
+	}
 	return NULL;
 }
 
@@ -221,8 +215,7 @@ void Constellation::update(int delta_time)
 	boundary_fader.update(delta_time);
 }
 
-// Draw the Constellation lines
-void Constellation::draw_boundary_optim(Projector* prj) const
+void Constellation::drawBoundaryOptim(Projector* prj) const
 {
 	if(!boundary_fader.getInterstate()) return;
 
@@ -261,10 +254,10 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {
 	float maxMag = 99.f;
 	StelObjectP brightest;
-	  // maybe the brightest star has always odd index,
-	  // so check all segment endpoints:
-	for (int i=2*nb_segments-1;i>=0;i--)
-    {
+	// maybe the brightest star has always odd index,
+	// so check all segment endpoints:
+	for (int i=2*numberOfSegments-1;i>=0;i--)
+	{
 		const float Mag = asterism[i]->getMagnitude(0);
 		if (Mag < maxMag)
 		{
