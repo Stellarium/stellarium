@@ -26,11 +26,11 @@
 #include "StelObjectType.hpp"
 #include "vecmath.h"
 
-/**
- * Manage a collection of StelObject.
- * @author Fabien Chereau <stellarium@free.fr>
- */
+//! @brief Specialization of StelModule which manage a collection of StelObject.
 
+//! Instance deriving from the StelObjectModule class can be managed by the StelObjectMgr.
+//! The class defines extra abstract functions for searching and listing StelObjects
+//! @author Fabien Chereau
 class StelObjectModule : public StelModule
 {
 public:

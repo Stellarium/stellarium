@@ -21,7 +21,7 @@
 
 #include "vecmath.h"
 
-//! Simple abstract class defining the method getPositionForGrid() used
+//! @brief Simple abstract class defining the method getPositionForGrid() used
 //! by the grid algorithms to get a permanent (fixed) position
 class GridObject
 {
@@ -29,7 +29,7 @@ class GridObject
 		virtual ~GridObject(void) {;}
 		
 		//! This method is used by the grid algorithms to get a permanent position for an object
-		//! @return a permanent direction in a 3d coordinate system
+		//! @return a unit vector giving a permanent direction in a 3d coordinate system.
 		virtual Vec3d getPositionForGrid() const=0;
 };
 
