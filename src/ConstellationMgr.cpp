@@ -335,9 +335,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 				}
 			}
 			
-			cons->art_tex = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 			int texSizeX, texSizeY;
-			cons->art_tex->getDimensions(texSizeX, texSizeY);
+			cons->artTexture->getDimensions(texSizeX, texSizeY);
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos(0);
 			Vec3f s2 = hipStarMgr->searchHP(hp2)->getObsJ2000Pos(0);
@@ -390,7 +390,7 @@ void ConstellationMgr::draw_art(Projector * prj, const Navigator * nav) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->draw_art_optim(prj, nav);
+		(*iter)->drawArtOptim(prj, nav);
 	}
 
 	glDisable(GL_CULL_FACE);
@@ -405,7 +405,7 @@ void ConstellationMgr::draw_lines(Projector * prj) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->draw_optim(prj);
+		(*iter)->drawOptim(prj);
 	}
 }
 
@@ -424,7 +424,7 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	{
 		// Check if in the field of view
 		if (prj->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->draw_name(asterFont, prj);
+			(*iter)->drawName(asterFont, prj);
 	}
 }
 
@@ -804,7 +804,7 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->draw_boundary_optim(prj);
+		(*iter)->drawBoundaryOptim(prj);
 	}
 	glDisable(GL_LINE_STIPPLE);
 }
