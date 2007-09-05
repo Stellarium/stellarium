@@ -40,13 +40,15 @@ class StelFileMgr;
 
 using namespace std;
 
-//! Singleton main Stellarium application class.
-//! This is the central class of Stellarium.
-//! Only one singleton instance of this class is created and can be accessed from anywhere else.
-//! This class is the access point to several "Manager" class which provide application-wide services for managment of font,
-//! textures, localization, sky culture, and in theory all other services used by the other part of the program.
-//! The StelApp class is also the one managing the StelModule in a generic maner by calling their update,
-//! drawing and other methods when needed.
+//! @class StelApp Singleton main Stellarium application class.
+//! This is the central class of Stellarium.  Only one singleton instance of
+//! this class is created and can be accessed from anywhere else.  This class 
+//! is the access point to several "Manager" class which provide application-wide 
+//! services for managment of font, textures, localization, sky culture, and in 
+//! theory all other services used by the other part of the program.
+//!
+//! The StelApp class is also the one managing the StelModule in a generic manner
+//! by calling their update, drawing and other methods when needed.
 //! @author Fabien Chereau
 class StelApp
 {
@@ -62,10 +64,10 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
-	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0"
+	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
 	static string getApplicationName();
 
-	//! Initialize application and core
+	//! Initialize application and core.
 	virtual void init();
 
 	//! Get the StelApp singleton instance.
@@ -105,45 +107,45 @@ public:
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
 	
-	//! Update translations and font everywhere in the program
+	//! Update translations and font everywhere in the program.
 	void updateAppLanguage();
 	
-	//! Update translations and font for sky everywhere in the program
+	//! Update translations and font for sky everywhere in the program.
 	void updateSkyLanguage();	
 	
-	//! Update and reload sky culture informations everywhere in the program
+	//! Update and reload sky culture informations everywhere in the program.
 	void updateSkyCulture();	
 	
-	//! Set flag for activating night vision mode
+	//! Set flag for activating night vision mode.
 	void setVisionModeNight();
-	//! Get flag for activating night vision mode
+	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return draw_mode==DM_NIGHT;}
 
-	//! Set flag for activating chart vision mode
+	//! Set flag for activating chart vision mode.
 	// ["color" section name used for easier backward compatibility for older configs - Rob]
 	void setVisionModeNormal();
-	//! Get flag for activating chart vision mode
+	//! Get flag for activating chart vision mode.
 	bool getVisionModeNormal() const {return draw_mode==DM_NORMAL;}
 
 	void setViewPortDistorterType(const string &type);
 	string getViewPortDistorterType() const;
 
-	//! Set the time multiplier used when fast forwarding scripts
+	//! Set the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
 	//! @param multiplier new value for the time multiplier
 	void setTimeMultiplier(const int multiplier) { time_multiplier = multiplier; }
 
-	//! Get the time multiplier used when fast forwarding scripts
+	//! Get the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
 	//! @return the integer time multiplier
 	const int getTimeMultiplier() { return time_multiplier; }
 	
-	//! Set the drawing mode in 2D for drawing in the full screen
+	//! Set the drawing mode in 2D for drawing in the full screen.
 	void set2DfullscreenProjection() const;
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection() const;
 	
-	//! Sets the name of the configuration file
+	//! Sets the name of the configuration file.
 	//! It is possible to set the configuration by passing either a full path
 	//! a relative path of an existing file, or path segment which will be appended
 	//! to the serach path.  The configuration file must be writable, or there will
@@ -151,22 +153,24 @@ public:
 	//! @param configName the name or full path of the configuration file
 	void setConfigFile(const string& configName);
 	
-	//! Retrieve the full path of the current configuration file
+	//! Retrieve the full path of the current configuration file.
 	//! @return the full path of the configuration file
 	const string& getConfigFilePath() { return configFile; }
-		
-	//! Copies the default configuration file
+	
+	//! Copies the default configuration file.
+	//! This function copies the default_config.ini file to config.ini (or other
+	//! name specified on the command line located in the user data directory.
 	void copyDefaultConfigFile();
 	
-	//! Get the width of the openGL screen
+	//! Get the width of the openGL screen.
 	//! @return width of the openGL screen in pixels
 	virtual int getScreenW() const = 0;
 	
-	//! Get the height of the openGL screen
+	//! Get the height of the openGL screen.
 	//! @return height of the openGL screen in pixels
 	virtual int getScreenH() const = 0;
 	
-	//! Get the current number of frame per second
+	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 	
@@ -177,28 +181,28 @@ public:
 	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop() = 0;
 	
-	//! Return a list of working fullscreen hardware video modes (one per line)
+	//! Return a list of working fullscreen hardware video modes (one per line).
 	virtual string getVideoModeList() const = 0;
 	
-	//! Return the time since when stellarium is running in second
+	//! Return the time since when stellarium is running in second.
 	virtual double getTotalRunTime() const = 0;
 	
-	//! Set mouse cursor display
+	//! Set mouse cursor display.
 	virtual void showCursor(bool b) = 0;
 	
-	//! De-init SDL / QT related stuff
+	//! De-init SDL / QT related stuff.
 	virtual void deInit() = 0;
 	
-	//! Swap GL buffer, should be called only for special condition
+	//! Swap GL buffer, should be called only for special condition.
 	virtual void swapGLBuffers() = 0;
 	
-	//! Terminate the application
+	//! Terminate the application.
 	virtual void terminateApplication() = 0;
 	
-	//! Alternate fullscreen mode/windowed mode if possible
+	//! Alternate fullscreen mode/windowed mode if possible.
 	virtual void toggleFullScreen() = 0;
 	
-	//! Return whether we are in fullscreen mode
+	//! Return whether we are in fullscreen mode.
 	virtual bool getFullScreen() const = 0;
 	
 	//! Save a screen shot.
@@ -210,36 +214,36 @@ public:
 	virtual void saveScreenShot(const string& filePrefix="stellarium-", const string& shotDir="") const =0;
 	
 protected:
-	//! Update all object according to the delta time
+	//! Update all object according to the delta time.
 	void update(int delta_time);
 
 	//! Draw all registered StelModule in the order defined by the order lists.
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	double draw(int delta_time);
 	
-	//! Handle mouse clics
+	//! Handle mouse clics.
 	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
-	//! Handle mouse move
+	//! Handle mouse move.
 	int handleMove(int x, int y, StelMod mod);
-	//! Handle key press and release
+	//! Handle key press and release.
 	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 
-	//! The minimum desired frame rate in frame per second
+	//! The minimum desired frame rate in frame per second.
 	float minfps;
-	//! The maximum desired frame rate in frame per second
+	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
 	///////////////////////////////////////////////////////////////////////////	
 	
-	//! Initialize openGL screen
+	//! Initialize openGL screen.
 	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
 	
-	//! Call this when the size of the GL window has changed
+	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);
 
-	//! Call this when you want to make the window (not) resizable
+	//! Call this when you want to make the window (not) resizable.
 	virtual void setResizable(bool resizable) = 0;
 	
 private:
@@ -285,7 +289,7 @@ private:
 
 	int time_multiplier;	// used for adjusting delta_time for script speeds
 	
-	//! Possible drawing modes
+	//! Possible drawing modes.
 	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
 	
