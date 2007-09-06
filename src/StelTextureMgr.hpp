@@ -33,7 +33,8 @@
 
 class QMutex;
 
-//! Extends STexture by adding functionnalities such as lazy loading or luminosity scaling.
+//! @class ManagedSTexture Extends STexture by adding functionalities
+//! such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
 {
 	friend class StelTextureMgr;
@@ -44,17 +45,17 @@ public:
 	virtual void lazyBind();
 	//! Return the average texture luminance.
 	//! @return 0 is black, 1 is white
-    virtual float getAverageLuminance(void);
-    
-    virtual ~ManagedSTexture()
-    {
-    	if (loadState==ManagedSTexture::LOADING_IMAGE)
-    	{
-    		// TODO should search in the loading queue the matching thread and kill it
-    		assert(0);
-    	}
-    }
-	virtual int getLoadState(void) { return loadState;}
+	virtual float getAverageLuminance(void);
+
+	virtual ~ManagedSTexture()
+	{
+		if (loadState==ManagedSTexture::LOADING_IMAGE)
+		{
+			// TODO should search in the loading queue the matching thread and kill it
+			assert(0);
+		}
+	}
+	virtual int getLoadState(void) {return loadState;}
 	
 	//! Supported dynamic range modes
 	enum DynamicRangeMode
@@ -88,7 +89,7 @@ private:
 	DynamicRangeMode dynamicRangeMode;
 };
 
-//! Abstract class for any Image loaders.
+//! @class ImageLoader Abstract class for any Image loaders.
 class ImageLoader
 {
 public:
@@ -197,7 +198,7 @@ private:
 	//! This method is thread safe
 	bool reScale(ManagedSTexture* tex);
 
-	// List of image loaders providing image loading for the given files extensions
+	//! List of image loaders providing image loading for the given files extensions
 	std::map<std::string, ImageLoader*> imageLoaders;
 	
 	bool mipmapsMode;
@@ -206,13 +207,13 @@ private:
 	GLint magFilter;
 	ManagedSTexture::DynamicRangeMode dynamicRangeMode;
 	
-	// The maximum texture size supported by the video card
+	//! The maximum texture size supported by the video card
 	GLint maxTextureSize;
 	
-	// Whether ARB_texture_non_power_of_two is supported on this card
+	//! Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
 
-	// Used to correct a bug on some nvidia cards
+	//! Used to correct a bug on some nvidia cards
 	bool isNoPowerOfTwoLUMINANCEAllowed;
 
 	// Everything used for the threaded loading
@@ -220,14 +221,14 @@ private:
 	QMutex* loadQueueMutex;
 	std::vector<class LoadQueueParam*> loadQueue;
 	
-	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
+	//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
 	class PngLoader : public ImageLoader
 	{
 		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
 	};
 	static PngLoader pngLoader;
 	
-	// Define a JPG loader. This implementation supports LUMINANCE or RGB.
+	//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
 	class JpgLoader : public ImageLoader
 	{
 		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
