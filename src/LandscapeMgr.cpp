@@ -264,9 +264,9 @@ void LandscapeMgr::setColorScheme(const InitParser& conf, const std::string& sec
 	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 }
 
-bool LandscapeMgr::setLandscape(const string& new_landscape_name)
+bool LandscapeMgr::setLandscape(const string& newLandscapeName)
 {
-	if (new_landscape_name.empty())
+	if (newLandscapeName.empty())
 		return 0;
 	
 	// we want to lookup the landscape ID (dir) from the name.
@@ -274,16 +274,16 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	Landscape* newLandscape = NULL;
 	
-	if (nameToDirMap[new_landscape_name] != "")
+	if (nameToDirMap[newLandscapeName] != "")
 	{
 		try
 		{
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini"), nameToDirMap[new_landscape_name]);
+			newLandscape = createFromFile(fileMan.findFile("landscapes/" + nameToDirMap[newLandscapeName] + "/landscape.ini"), nameToDirMap[newLandscapeName]);
 		}
 		catch(exception& e)
 		{
 			cerr << "ERROR while loading landscape ";
-			cerr << "landscapes/" + nameToDirMap[new_landscape_name] + "/landscape.ini";
+			cerr << "landscapes/" + nameToDirMap[newLandscapeName] + "/landscape.ini";
 			cerr << ", (" << e.what() << ")" << endl;
 		}
 	}
@@ -291,12 +291,12 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 	{
 		try
 		{
-			newLandscape = create_from_file(fileMan.findFile("landscapes/" + new_landscape_name + "/landscape.ini"), new_landscape_name);
+			newLandscape = createFromFile(fileMan.findFile("landscapes/" + newLandscapeName + "/landscape.ini"), newLandscapeName);
 		}
 		catch(exception& e)
 		{
 			cerr << "ERROR while loading landscape ";
-			cerr << "landscapes/" + new_landscape_name + "/landscape.ini";
+			cerr << "landscapes/" + newLandscapeName + "/landscape.ini";
 			cerr << ", (" << e.what() << ")" << endl;
 		}
 	}
@@ -312,7 +312,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 		delete landscape;
 		landscape = newLandscape;
 	}
-	landscapeSectionName = new_landscape_name;
+	landscapeSectionName = newLandscapeName;
 	
 	if (getFlagLandscapeSetsLocation())
 	{
@@ -339,7 +339,7 @@ bool LandscapeMgr::setLandscape(const string& new_landscape_name)
 //! and make it the current landscape
 bool LandscapeMgr::loadLandscape(map<string, string>& param)
 {
-	Landscape* newLandscape = create_from_hash(param);
+	Landscape* newLandscape = createFromHash(param);
 	if(!newLandscape)
 		return 0;
 
@@ -398,7 +398,8 @@ wstring LandscapeMgr::getLandscapeDescription(void)
 	return landscape->getDescription();
 }
 
-wstring LandscapeMgr::getLandscapePlanetName(void) {
+wstring LandscapeMgr::getLandscapePlanetName(void) 
+{
 	string desc("");
 	if (landscape->getPlanet() != "")
 	{
@@ -407,7 +408,8 @@ wstring LandscapeMgr::getLandscapePlanetName(void) {
 	return StelUtils::stringToWstring(desc);
 }
     
-wstring LandscapeMgr::getLandscapeLocationDescription(void) {
+wstring LandscapeMgr::getLandscapeLocationDescription(void) 
+{
 	string desc;
 //cerr << landscape->getLongitude() << " " << landscape->getLatitude() << endl;
 	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
@@ -418,41 +420,78 @@ wstring LandscapeMgr::getLandscapeLocationDescription(void) {
 	}
 	return StelUtils::stringToWstring(desc);
 }
-    
-	//! Set flag for displaying Cardinals Points
-	void LandscapeMgr::setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
-	//! Get flag for displaying Cardinals Points
-	bool LandscapeMgr::getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
 
-	//! Set Cardinals Points color
-	void LandscapeMgr::setColorCardinalPoints(const Vec3f& v) {cardinals_points->setColor(v); }
-	//! Get Cardinals Points color
-	Vec3f LandscapeMgr::getColorCardinalPoints(void) const {return cardinals_points->get_color();}
+//! Set flag for displaying Cardinals Points
+void LandscapeMgr::setFlagCardinalsPoints(bool b) 
+{
+	cardinals_points->setFlagShow(b);
+}
+
+//! Get flag for displaying Cardinals Points
+bool LandscapeMgr::getFlagCardinalsPoints(void) const 
+{
+	return cardinals_points->getFlagShow();
+}
+
+//! Set Cardinals Points color
+void LandscapeMgr::setColorCardinalPoints(const Vec3f& v) 
+{
+	cardinals_points->setColor(v); 
+}
+
+//! Get Cardinals Points color
+Vec3f LandscapeMgr::getColorCardinalPoints(void) const 
+{
+	return cardinals_points->get_color();
+}
 	
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Atmosphere
-	//! Set flag for displaying Atmosphere
-	void LandscapeMgr::setFlagAtmosphere(bool b) {atmosphere->setFlagShow(b);}
-	//! Get flag for displaying Atmosphere
-	bool LandscapeMgr::getFlagAtmosphere(void) const {return atmosphere->getFlagShow();}
+///////////////////////////////////////////////////////////////////////////////////////
+// Atmosphere
+//! Set flag for displaying Atmosphere
+void LandscapeMgr::setFlagAtmosphere(bool b) 
+{
+	atmosphere->setFlagShow(b);
+}
 
-	//! Set atmosphere fade duration in s
-	void LandscapeMgr::setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
-	//! Get atmosphere fade duration in s
-	float LandscapeMgr::getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
+//! Get flag for displaying Atmosphere
+bool LandscapeMgr::getFlagAtmosphere(void) const 
+{
+	return atmosphere->getFlagShow();
+}
 
-	//! Set light pollution luminance level
-    void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f) {atmosphere->setLightPollutionLuminance(f);}
-	//! Get light pollution luminance level
-    float LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const {return atmosphere->getLightPollutionLuminance();}
+//! Set atmosphere fade duration in s
+void LandscapeMgr::setAtmosphereFadeDuration(float f) 
+{
+	atmosphere->setFadeDuration(f);
+}
 
-	
-	float LandscapeMgr::getLuminance(void) {return atmosphere->getRealDisplayIntensityFactor();}
+//! Get atmosphere fade duration in s
+float LandscapeMgr::getAtmosphereFadeDuration(void) const 
+{
+	return atmosphere->getFadeDuration();
+}
 
-Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const string& landscapeId)
+//! Set light pollution luminance level
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f) 
+{
+	atmosphere->setLightPollutionLuminance(f);
+}
+
+//! Get light pollution luminance level
+float LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const 
+{
+	return atmosphere->getLightPollutionLuminance();
+}
+
+float LandscapeMgr::getLuminance(void) 
+{
+	return atmosphere->getRealDisplayIntensityFactor();
+}
+
+Landscape* LandscapeMgr::createFromFile(const string& landscapeFile, const string& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
+	pd.load(landscapeFile);
 	string s;
 	s = pd.get_str("landscape", "type");
 	Landscape* ldscp = NULL;
@@ -477,13 +516,11 @@ Landscape* LandscapeMgr::create_from_file(const string& landscape_file, const st
 		ldscp = new LandscapeFisheye();
 	}
 	
-	ldscp->load(landscape_file, landscapeId);
+	ldscp->load(landscapeFile, landscapeId);
 	return ldscp;
 }
 
-// create landscape from parameters passed in a hash (same keys as with ini file)
-// NOTE: maptex must be full path and filename
-Landscape* LandscapeMgr::create_from_hash(map<string, string> & param)
+Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
 {
 	// NOTE: textures should be full filename (and path)
 	if (param["type"]=="old_style")
