@@ -35,8 +35,8 @@ class LoadingBar;
 class Translator;
 class ToneReproducer;
 
-//! Manage a collection of nebula. It display the NGC catalog with informations 
-//! and textures for some of them.
+//! @class NebulaMgr Manage a collection of nebulae. This class is used 
+//! to display the NGC catalog with information, and textures for some of them.
 class NebulaMgr : public StelObjectModule
 {
 public:
@@ -45,23 +45,66 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	//! Initialize the NebulaMgr object.
+	//!  - Load the font into the Nebula class, which is used to draw Nebula labels.
+	//!  - Load the texture used to draw nebula locations into the Nebula class (for
+	//!     those with no individual texture).
+	//!  - Load the pointer texture.
+	//!  - Set flags values from ini parser which relate to nebula display.
+	//!  - call updateI18n() to translate names.
+	//! @param conf the ini parser object which contains configuration information
+	//! pertaining to nebulae.
+	//! @param lb the loading bar object used to display loading progress and status
 	virtual void init(const InitParser& conf, LoadingBar& lb);
+	
+	//! Identify the module.
+	//! @return "nebulas";
 	virtual string getModuleID() const {return "nebulas";}
+	
+	//! Draws all nebula objects.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	
+	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
+	
+	//! Update i18 names from English names according to passed translator.
+	//! The translation is done using gettext with translated strings defined 
+	//! in translations.h
 	virtual void updateI18n();
+	
+	//! Called when the sky culture is updated, so that the module can respond
+	//! as appropriate.  Does nothing as there are no SkyCulture specific features 
+	//! in the current nebula implementation.
 	virtual void updateSkyCulture(LoadingBar& lb);
+	
+	//! Sets the colors of the Nebula labels and markers according to the
+	//! values in the ini parser object.
+	//! @param conf The ini parser object.
+	//! @param section The section of the parser object from which to take the 
+	//! new color values.
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	
+	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
+	//! Used to get a vector of objects which are near to some position.
+	//! @param v a vector representing the position in th sky around which 
+	//! to search for nebulae.
+	//! @param limitFov the field of view around the position v in which to
+	//! search for nebulae.
+	//! @param nav the Navigator object.
+	//! @param prj the Projector object.
+	//! @return an stl vector containing the nebulae located inside the
+	//! limitFov circle around position v.
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
-	//! Return the matching Nebula object's pointer if exists or NULL
+	
+	//! Return the matching nebula object's pointer if exists or NULL.
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	
-	//! Return the matching nebula if exists or NULL
+	//! Return the matching nebula if exists or NULL.
 	//! @param name The case sensistive standard program name
 	virtual StelObjectP searchByName(const string& name) const;
 
@@ -73,51 +116,56 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
-	//! Set Nebulae Hints circle scale
+	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);
-	//! Get Nebulae Hints circle scale
+	//! Get Nebulae Hints circle scale.
 	float getCircleScale(void) const;
-	
+	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
-	
-	//! Set flag for displaying Nebulae Hints
+	//! Set flag for displaying Nebulae Hints.
 	void setFlagHints(bool b) {hintsFader=b;}
-	//! Get flag for displaying Nebulae Hints
+	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
-	
+	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
+	//! Get value of flag used to turn on and off Nebula rendering.
 	bool getFlagShow(void) const { return flagShow; }
-
+	//! Set the color used to draw nebula labels.
 	void setNamesColor(const Vec3f& c);
+	//! Get current value of the nebula label color.
 	const Vec3f &getNamesColor(void) const;
-	
+	//! Set the color used to draw the nebula circles.
 	void setCirclesColor(const Vec3f& c);
+	//! Get current value of the nebula circle color.
 	const Vec3f &getCirclesColor(void) const;
 	
-	//! Set flag for displaying nebulae as bright to show all details
+	//! Set flag for displaying nebulae as bright to show all details.
+	//! Turning on the bright flag turns off magnitude compensation when rendering nebulae.
 	void setFlagBright(bool b);
-	//! Get whether we display nebulae as bright to show all details
+	//! Get whether we display nebulae as bright to show all details.
+	//! Turning on the bright flag turns off magnitude compensation when rendering nebulae.
 	bool getFlagBright(void) const;
 	
-	//! Set flag for displaying Nebulae even without textures
+	//! Set flag for displaying nebulae even without textures.
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
-	//! Get flag for displaying Nebulae without textures
+	//! Get flag for displaying nebulae without textures.
 	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
 	
-	//! Display textures for nebulas which have one
+	//! Display textures for nebulae which have one.
 	void setFlagShowTexture(bool b) {flagShowTexture = b;}
-	//! Get whether textures are displayed for nebulas which have one
+	//! Get whether textures are displayed for nebulas which have one.
 	bool getFlagShowTexture(void) const {return flagShowTexture;}	
 	
-	//! Set maximum magnitude at which nebulae hints are displayed
+	//! Set maximum magnitude at which nebulae hints are displayed.
 	void setMaxMagHints(float f) {maxMagHints = f;}
-	//! Get maximum magnitude at which nebulae hints are displayed
+	//! Get maximum magnitude at which nebulae hints are displayed.
 	float getMaxMagHints(void) const {return maxMagHints;}
-
-	StelObject* search(const string& name);  // search by name M83, NGC 1123, IC 1234
-		
-	//! Load a set of nebula images
-	//! Each sub-directory of the INSTALLDIR/nebulae directory contains a set of 
+	
+	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
+	StelObject* search(const string& name);
+	
+	//! Load a set of nebula images.
+	//! Each sub-directory of the INSTALLDIR/nebulae directory contains a set of
 	//! nebula textures.  The sub-directory is the setName.  Each set has its
 	//! own nebula_textures.fab file and corresponding image files.
 	//! This function loads a set of textures.
@@ -148,7 +196,7 @@ private:
 	TreeGrid nebGrid;
 	//SimpleGrid nebGrid;
 	
-	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
+	float maxMagHints;			// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	bool flagShowTexture;			// Define if nebula textures are displayed
 	
