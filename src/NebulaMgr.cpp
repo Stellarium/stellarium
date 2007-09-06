@@ -118,12 +118,12 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
 	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(50);
-    nebGrid.filterIntersect(p);
+	nebGrid.filterIntersect(p);
 	
 	// Print all the stars of all the selected zones
 	Nebula* n;
 
-	  // speed up the computation of n->getOnScreenSize(prj, nav)>5:
+	// speed up the computation of n->getOnScreenSize(prj, nav)>5:
 	const float size_limit = 5.0 * (M_PI/180.0) * (prj->getFov()/prj->getViewportHeight());
 
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
@@ -563,8 +563,6 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 	}
 }
 
-//! Update i18 names from english names according to passed translator.
-//! The translation is done using gettext with translated strings defined in translations.h
 void NebulaMgr::updateI18n()
 {
 	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
