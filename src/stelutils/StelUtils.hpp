@@ -41,13 +41,19 @@ using namespace std;
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
-//! Errors occuring because of Stellarium's code should throw this exception,
-//! or subclass of it.
+//! @class StellariumException Errors occuring because of Stellarium's code should 
+//! throw this exception, or subclass of it.
 class StellariumException : public std::exception
 {
 public:
+	//! Constructor
+	//! @param msg a string message which will be appended to the error message 
+	//! which will be output when the exception occurs.  It will be appended to
+	//! "StellariumException occured: ".
 	StellariumException(const std::string& msg) : message("StellariumException occured: " + msg) {;}
 	~StellariumException() throw() {;}
+	//! Get a string describing the exception.
+	//! @return the exception message.
 	virtual const char* what() const throw() {return message.c_str();}
 	std::string message;
 };
@@ -332,14 +338,16 @@ namespace StelUtils {
 //! Return the number of hours to add to gmt time to get the local time at time JD.
 //! taking the parameters from system. This takes into account the daylight saving
 //! time if there is. (positive for Est of GMT)
+//! @deprecated in favor of QT-based calendar functions.
 float get_GMT_shift_from_system(double JD);
 
 //! Return the time zone name taken from system locale.
+//! @deprecated in favor of QT-based calendar functions.
 wstring get_time_zone_name_from_system(double JD);
 
 //! convert string in ISO 8601-like format to julian day.
 //! @param date string in ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timezone offset)
+//! @deprecated in favor of QT-based calendar functions.
 int string_to_jday(string date, double &jd);
-
 
 #endif
