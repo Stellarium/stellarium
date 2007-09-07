@@ -33,7 +33,8 @@
 #include "StelModuleMgr.hpp"
 #include "InitParser.hpp"
 
-// Class which manages a grid to display in the sky
+//! @class SkyGrid 
+//! Class which manages a grid to display in the sky.
 class SkyGrid
 {
 public:
@@ -59,7 +60,8 @@ private:
 };
 
 
-// Class which manages a line to display around the sky like the ecliptic line
+//! @class SkyLine 
+//! Class which manages a line to display around the sky like the ecliptic line.
 class SkyLine
 {
 public:
@@ -89,7 +91,6 @@ private:
 	double fontSize;
 	SFont& font;
 };
-
 
 // rms added color as parameter
 SkyGrid::SkyGrid(Projector::FRAME_TYPE frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
