@@ -29,30 +29,51 @@ class Navigator;
 class ToneReproducer;
 class LoadingBar;
 
-// Class which manages the displaying of the Milky Way
+//! @class MilkyWay Manages the displaying of the Milky Way.
 class MilkyWay : public StelModule
 {
 public:
 	MilkyWay();
-    virtual ~MilkyWay();
-  
- 	///////////////////////////////////////////////////////////////////////////
+	virtual ~MilkyWay();
+	
+	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	//! Initialize the class.  Here we load the texture for the Milky Way and 
+	//! get the display settings from the ini parser object, namely the flag which
+	//! determines if the Milky Way is displayed or not, and the intensity setting.
+	//! @param conf ini parser object which contains the milky way settings.
+	//! @param lb the LoadingBar object used to display loading progress.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
+	
+	//! Return the module ID: "milkyway";
 	virtual string getModuleID() const {return "milkyway";}
+	
+	//! Draw the Milky Way.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	
+	//! Update and time-dependent state.  Updates the fade level while the 
+	//! Milky way rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
+	
+	//! Does nothing in the MilkyWay module.
 	virtual void updateI18n() {;}
+	
+	//! Does nothing in the MilkyWay module.
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}
 	
-	//! Get Milky Way intensity
+	//! Get Milky Way intensity.
 	float getIntensity() {return intensity;}
-	//! Set Milky Way intensity
+	//! Set Milky Way intensity.
 	void setIntensity(float aintensity) {intensity = aintensity;}
-	void setTexture(const string& tex_file);
+	//! Set the texture to use for the Milky Way.
+	//! @param texFile the path to a texture file to be loaded.
+	void setTexture(const string& texFile);
+	//! Sets the color used.
 	void setColor(const Vec3f& c) { color=c;}
+	//! Sets the Milky Way rendering on and off.
 	void setFlagShow(bool b);
+	//! Get the current status of the Milky Way rendering flag.
 	bool getFlagShow(void) const;
 	
 private:

@@ -47,10 +47,10 @@ void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
 	setIntensity(conf.get_double("astro","milky_way_intensity",1.));
 }
 
-void MilkyWay::setTexture(const string& tex_file)
+void MilkyWay::setTexture(const string& texFile)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex = StelApp::getInstance().getTextureManager().createTexture(tex_file);
+	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
 
 	// big performance improvement to cache this
 	tex_avg_luminance = tex->getAverageLuminance();
