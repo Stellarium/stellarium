@@ -676,15 +676,7 @@ double getJDFromSystem(void)
 	return StelUtils::qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
 
-} // end of the StelUi namespace
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify=true)
+bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify)
 {
 	bool result=false;
 	vector<string>::iterator lastOpt = find(args.begin(), args.end(), "--");
@@ -707,6 +699,9 @@ bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool 
 
 	return result;
 }
+
+} // end of the StelUtils namespace
+////////////////////////////////////////////////////////////////////////////////////////////
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
