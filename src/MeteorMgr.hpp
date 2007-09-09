@@ -25,30 +25,56 @@
 
 class Meteor;
 
+//! @class MeteorMgr
+//! Simulates meteor showers.
 class MeteorMgr : public StelModule
 {
-
- public:
-  MeteorMgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
-  virtual ~MeteorMgr();
-  
+public:
+	//! Construct a MeteorMgr object.
+	//! @param zhr the base zenith hourly rate - i.e. the rate when there is no
+	//!            meteor shower in progress.
+	//! @param maxv the initial value of the maximum meteor velocity.
+	MeteorMgr(int zhr, int maxv); 
+	virtual ~MeteorMgr();
+ 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	//! Initialize the MeteorMgr object.
+	//! Takes the meteor rate from the ini parser object.
+	//! @param conf the ini parser object.
+	//! @param lb the loading bar object.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
+	
+	//! Get the module id: "meteors".
 	virtual string getModuleID() const {return "meteors";}
+	
+	//! Draw meteors.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	
+	//! Update time-dependent parts of the module.
+	//! This function adds new meteors to the list of currently visiable
+	//! ones based on the current rate, and removes those which have run their 
+	//! course.
 	virtual void update(double deltaTime);
+	
+	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
-  void setZHR(int zhr);   // set zenith hourly rate
-  int getZHR(void);   
-  void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-
- private:
-  vector<Meteor*> active;		// Vector containing all active meteors
-  int ZHR;
-  int max_velocity;
-  double zhr_to_wsr;  // factor to convert from zhr to whole earth per second rate
+	//! Set the zenith hourly rate.
+	void setZHR(int zhr);
+	
+	//! Get the current zenith hourly rate.
+	int getZHR(void);
+	
+	//! Set the maximum velocity in km/s
+	void set_max_velocity(int maxv);
+	
+private:
+	vector<Meteor*> active;		// Vector containing all active meteors
+	int ZHR;
+	int max_velocity;
+	double zhr_to_wsr;  // factor to convert from zhr to whole earth per second rate
+	
 };
 
 
