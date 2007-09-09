@@ -389,12 +389,15 @@ void LandscapeFisheye::load(const string& landscape_file, const string& landscap
 		valid_landscape = 0;
 		return;
 	}
-	create(name, 0, getTexturePath(pd.get_str("landscape", "maptex"), landscapeId), pd.get_double("landscape", "texturefov", 360));
+	create(name, 0, getTexturePath(pd.get_str("landscape", "maptex"), landscapeId),
+	       pd.get_double("landscape", "texturefov", 360),
+           pd.get_double("landscape", "angle_rotatez", 0.));
 }
 
 
 // create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov)
+void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string _maptex,
+	                          double _texturefov, double _angle_rotatez)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
@@ -402,6 +405,7 @@ void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 	tex_fov = _texturefov*M_PI/180.;
+    angle_rotatez = _angle_rotatez*M_PI/180.;
 }
 
 
@@ -420,7 +424,7 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_BLEND);
 	map_tex->bind();
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-	prj->sSphere_map(radius,40,20, tex_fov, 1);
+	prj->sSphere_map(radius,40,20,tex_fov,1,angle_rotatez);
 
 	glDisable(GL_CULL_FACE);
 }
@@ -450,19 +454,22 @@ void LandscapeSpherical::load(const string& landscape_file, const string& landsc
 		return;
 	}
 
-	create(name, 0, getTexturePath(pd.get_str("landscape", "maptex"),landscapeId));
+	create(name, 0, getTexturePath(pd.get_str("landscape","maptex"),landscapeId),
+	       pd.get_double("landscape", "angle_rotatez", 0.));
 
 }
 
 
 // create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const wstring _name, bool _fullpath, const string _maptex)
+void LandscapeSpherical::create(const wstring _name, bool _fullpath, const string _maptex,
+	                            double _angle_rotatez)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
+    angle_rotatez = _angle_rotatez*M_PI/180.;
 }
 
 
@@ -493,7 +500,7 @@ void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-	prj->sSphere(radius,1.0,40,20, 1);
+	prj->sSphere(radius,1.0,40,20,1,angle_rotatez);
 
 	glDisable(GL_CULL_FACE);
 

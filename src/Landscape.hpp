@@ -143,11 +143,13 @@ public:
 	virtual ~LandscapeFisheye();
 	virtual void load(const string& fileName, const string& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov);
+	void create(const wstring _name, bool _fullpath, const string _maptex,
+	            double _texturefov, double angle_rotatez);
 private:
 
 	STextureSP map_tex;
 	float tex_fov;
+	float angle_rotatez;
 };
 
 
@@ -158,10 +160,12 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const string& fileName, const string& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(const wstring _name, bool _fullpath, const string _maptex);
+	void create(const wstring _name, bool _fullpath,
+	            const string _maptex, double angle_rotatez);
 private:
 
 	STextureSP map_tex;
+	float angle_rotatez;
 };
 
 #endif // _LANDSCAPE_H_

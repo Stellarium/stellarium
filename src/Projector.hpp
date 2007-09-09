@@ -318,7 +318,9 @@ public:
 	void drawPoint2d(double x, double y) const;
 	
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	void sSphere(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, GLint stacks, int orient_inside = 0) const;
+	void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
+	             GLint slices, GLint stacks, int orient_inside = 0,
+	             GLdouble theta_start = 0.0) const;
 
 	// Reimplementation of gluCylinder : glu is overrided for non standard projection
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
@@ -335,7 +337,9 @@ public:
 	void sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const;
 
 	// Draw a fisheye texture in a sphere
-	void sSphere_map(GLdouble radius, GLint slices, GLint stacks, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
+	void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
+	                 double texture_fov = 2.*M_PI, int orient_inside = 0,
+	                 GLdouble theta_start = 0.0) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for linear mode
