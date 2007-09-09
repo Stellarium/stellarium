@@ -532,13 +532,16 @@ Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
 	else if (param["type"]=="spherical")
 	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"]);
+		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"],
+                      StelUtils::stringToDouble(param["angle_rotatez"]));
 		return ldscp;
 	}
 	else
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"], StelUtils::stringToDouble(param["texturefov"]));
+		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"],
+		              StelUtils::stringToDouble(param["texturefov"]),
+                      StelUtils::stringToDouble(param["angle_rotatez"]));
 		return ldscp;
 	}
 }
