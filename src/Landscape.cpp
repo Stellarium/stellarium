@@ -423,8 +423,9 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	map_tex->bind();
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-	prj->sSphere_map(radius,40,20,tex_fov,1,angle_rotatez);
+	prj->setCustomFrame(nav->get_local_to_eye_mat()
+	                    * Mat4d::zrotation(-angle_rotatez));
+	prj->sSphere_map(radius,40,20,tex_fov,1);
 
 	glDisable(GL_CULL_FACE);
 }
@@ -499,8 +500,9 @@ void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const 
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-	prj->sSphere(radius,1.0,40,20,1,angle_rotatez);
+	prj->setCustomFrame(nav->get_local_to_eye_mat()
+	                    * Mat4d::zrotation(-angle_rotatez));
+	prj->sSphere(radius,1.0,40,20,1);
 
 	glDisable(GL_CULL_FACE);
 
