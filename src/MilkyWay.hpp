@@ -29,7 +29,8 @@ class Navigator;
 class ToneReproducer;
 class LoadingBar;
 
-//! @class MilkyWay Manages the displaying of the Milky Way.
+//! @class MilkyWay 
+//! Manages the displaying of the Milky Way.
 class MilkyWay : public StelModule
 {
 public:

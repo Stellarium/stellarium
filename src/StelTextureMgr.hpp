@@ -33,8 +33,8 @@
 
 class QMutex;
 
-//! @class ManagedSTexture Extends STexture by adding functionalities
-//! such as lazy loading or luminosity scaling.
+//! @class ManagedSTexture 
+//! Extends STexture by adding functionalities such as lazy loading or luminosity scaling.
 class ManagedSTexture : public STexture
 {
 	friend class StelTextureMgr;
@@ -89,7 +89,8 @@ private:
 	DynamicRangeMode dynamicRangeMode;
 };
 
-//! @class ImageLoader Abstract class for any Image loaders.
+//! @class ImageLoader 
+//! Abstract class for any Image loaders.
 class ImageLoader
 {
 public:
