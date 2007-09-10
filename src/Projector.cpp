@@ -525,39 +525,25 @@ static double cos_sin_rho[2*(MAX_STACKS+1)];
 static double cos_sin_theta[2*(MAX_SLICES+1)];
 
 static
-void ComputeCosSinTheta(double cos_sin_theta[],double phi,int segments,
-                        double theta_start = 0.0) {
-  if (theta_start == 0.0) {
-    double *cos_sin = cos_sin_theta;
-    double *cos_sin_rev = cos_sin + 2*(segments+1);
-    const double c = cos(phi);
-    const double s = sin(phi);
-    *cos_sin++ = 1.0;
-    *cos_sin++ = 0.0;
+void ComputeCosSinTheta(double phi,int segments) {
+  double *cos_sin = cos_sin_theta;
+  double *cos_sin_rev = cos_sin + 2*(segments+1);
+  const double c = cos(phi);
+  const double s = sin(phi);
+  *cos_sin++ = 1.0;
+  *cos_sin++ = 0.0;
+  *--cos_sin_rev = -cos_sin[-1];
+  *--cos_sin_rev =  cos_sin[-2];
+  *cos_sin++ = c;
+  *cos_sin++ = s;
+  *--cos_sin_rev = -cos_sin[-1];
+  *--cos_sin_rev =  cos_sin[-2];
+  while (cos_sin < cos_sin_rev) {
+    cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+    cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+    cos_sin += 2;
     *--cos_sin_rev = -cos_sin[-1];
     *--cos_sin_rev =  cos_sin[-2];
-    *cos_sin++ = c;
-    *cos_sin++ = s;
-    *--cos_sin_rev = -cos_sin[-1];
-    *--cos_sin_rev =  cos_sin[-2];
-    while (cos_sin < cos_sin_rev) {
-      cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-      cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-      cos_sin += 2;
-      *--cos_sin_rev = -cos_sin[-1];
-      *--cos_sin_rev =  cos_sin[-2];
-    }
-  } else {
-    double *cos_sin = cos_sin_theta;
-    const double c = cos(phi);
-    const double s = sin(phi);
-    *cos_sin++ = cos(theta_start);
-    *cos_sin++ = sin(theta_start);
-    while (--segments >= 0) {
-      cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-      cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-      cos_sin += 2;
-    }
   }
 }
 
@@ -621,7 +607,7 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 
 		const double dtheta = 2.0 * M_PI / slices;
 		assert(slices<=MAX_SLICES);
-		ComputeCosSinTheta(cos_sin_theta,dtheta,slices);
+		ComputeCosSinTheta(dtheta,slices);
 		double *cos_sin_theta_p;
 
 		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -686,7 +672,7 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
   int slices = inner_fan_slices<<level;
   const double dtheta = 2.0 * M_PI / slices;
   assert(slices<=MAX_SLICES);
-  ComputeCosSinTheta(cos_sin_theta,dtheta,slices);
+  ComputeCosSinTheta(dtheta,slices);
   double *cos_sin_theta_p;
   int slices_step = 2;
   for (i=level;i>0;i--,slices_step<<=1) {
@@ -747,7 +733,7 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_in
 	const double dtheta = 2.0 * M_PI / slices;
 	if (slices < 0) slices = -slices;
 	assert(slices<=MAX_SLICES);
-	ComputeCosSinTheta(cos_sin_theta,dtheta,slices);
+	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 
 	// draw intermediate stacks as quad strips
@@ -783,7 +769,7 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 	const double dtheta = 2.0 * M_PI / slices;
 	if (slices < 0) slices = -slices;
 	assert(slices<=MAX_SLICES);
-	ComputeCosSinTheta(cos_sin_theta,dtheta,slices);
+	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 
 
@@ -821,8 +807,7 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 }
 
 void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
-                            double texture_fov, int orient_inside,
-                            GLdouble theta_start) const
+                            double texture_fov, int orient_inside) const
 {
 	double rho,x,y,z;
 	int i, j;
@@ -835,14 +820,9 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 
 	const double dtheta = 2.0 * M_PI / slices;
 	assert(slices<=MAX_SLICES);
-	static double cos_sin_unshifted_theta[2*(MAX_SLICES+1)];
-	ComputeCosSinTheta(cos_sin_unshifted_theta,dtheta,slices);
-    double *cos_sin_theta_start = cos_sin_unshifted_theta;
-    if (theta_start != 0.0) {
-	  ComputeCosSinTheta(cos_sin_theta,dtheta,slices,theta_start);
-      cos_sin_theta_start = cos_sin_theta;
-    }
-	double *cos_sin_theta_p,*cos_sin_theta_start_p;
+
+	ComputeCosSinTheta(dtheta,slices);
+	double *cos_sin_theta_p;
 
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -858,14 +838,11 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 		        i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
 			glBegin(GL_QUAD_STRIP);
-			for (j=0,
-			     cos_sin_theta_start_p=cos_sin_theta_start,
-			     cos_sin_theta_p=cos_sin_unshifted_theta;
-			     j<=slices;++j,
-			     cos_sin_theta_start_p+=2,cos_sin_theta_p+=2)
+			for (j=0,cos_sin_theta_p=cos_sin_theta;
+			     j<=slices;++j,cos_sin_theta_p+=2)
 			{
-				x = -cos_sin_theta_start_p[1] * cos_sin_rho_p[1];
-				y = cos_sin_theta_start_p[0] * cos_sin_rho_p[1];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
 				sSphereMapTexCoordFast(rho/texture_fov,
@@ -873,8 +850,8 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				                       cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
 
-				x = -cos_sin_theta_start_p[1] * cos_sin_rho_p[3];
-				y = cos_sin_theta_start_p[0] * cos_sin_rho_p[3];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
 				sSphereMapTexCoordFast((rho + drho)/texture_fov,
@@ -891,14 +868,11 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 		        i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
 		{
 			glBegin(GL_QUAD_STRIP);
-			for (j=0,
-			     cos_sin_theta_start_p=cos_sin_theta_start,
-			     cos_sin_theta_p=cos_sin_unshifted_theta;
-			     j<=slices;++j,
-			     cos_sin_theta_start_p+=2,cos_sin_theta_p+=2)
+			for (j=0,cos_sin_theta_p=cos_sin_theta;
+			     j<=slices;++j,cos_sin_theta_p+=2)
 			{
-				x = -cos_sin_theta_start_p[1] * cos_sin_rho_p[3];
-				y = cos_sin_theta_start_p[0] * cos_sin_rho_p[3];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
 				sSphereMapTexCoordFast((rho + drho)/texture_fov,
@@ -906,8 +880,8 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				                       -cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
 
-				x = -cos_sin_theta_start_p[1] * cos_sin_rho_p[1];
-				y = cos_sin_theta_start_p[0] * cos_sin_rho_p[1];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
 				sSphereMapTexCoordFast(rho/texture_fov,
@@ -1269,8 +1243,7 @@ void Projector::drawVertex3v(const Vec3d& v) const
 // Drawing methods for general (non-linear) mode
 
 void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
-                        GLint slices, GLint stacks, int orient_inside,
-                        GLdouble theta_start) const
+                        GLint slices, GLint stacks, int orient_inside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1318,8 +1291,8 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 
 	const double dtheta = 2.0 * M_PI / slices;
 	assert(slices<=MAX_SLICES);
-	ComputeCosSinTheta(cos_sin_theta,dtheta,slices,theta_start);
-	double *cos_sin_theta_p;
+	ComputeCosSinTheta(dtheta,slices);
+	const double *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
@@ -1330,7 +1303,7 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 
 	// draw intermediate  as quad strips
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
-	        i++,cos_sin_rho_p+=2)
+	     i++,cos_sin_rho_p+=2)
 	{
 		glBegin(GL_QUAD_STRIP);
 		s = 0.0;
