@@ -35,7 +35,8 @@ class LoadingBar;
 class Translator;
 class ToneReproducer;
 
-//! @class NebulaMgr Manage a collection of nebulae. This class is used 
+//! @class NebulaMgr
+//! Manage a collection of nebulae. This class is used 
 //! to display the NGC catalog with information, and textures for some of them.
 class NebulaMgr : public StelObjectModule
 {

@@ -30,7 +30,8 @@ using namespace std;
 // Predeclaration
 typedef struct _dictionary_ dictionary;
 
-//! @class InitParser Parses .ini configuration files.
+//! @class InitParser 
+//! Parses .ini configuration files.
 //! This class is used to parse and modify ini style configuration files.
 //! Settings in an ini file are separated into sections, and in each section are
 //! specified by a key.

@@ -41,8 +41,8 @@ using namespace std;
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
-//! @class StellariumException Errors occuring because of Stellarium's code should 
-//! throw this exception, or subclass of it.
+//! @class StellariumException 
+//! Errors occuring because of Stellarium's code should throw this exception, or subclass of it.
 class StellariumException : public std::exception
 {
 public:

@@ -30,7 +30,8 @@
 #define LOW_ALTITUDE 70.f
 #define VISIBLE_RADIUS 457.8f
 
-//! @class Meteor models a single meteor.
+//! @class Meteor 
+//! Models a single meteor.
 //! Control of the meteor rate is performed in the MeteorMgr class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
 //! "dies", after which, the update() member returns false.  The live/dead

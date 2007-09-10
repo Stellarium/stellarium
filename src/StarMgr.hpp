@@ -42,7 +42,8 @@ class LoadingBar;
 class ZoneArray;
 class HipIndexStruct;
 
-//! @class StarMgr Stores the star catalogue data.
+//! @class StarMgr 
+//! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
 //! and render the labels of those stars with names for a given SkyCulture.
 //! 
