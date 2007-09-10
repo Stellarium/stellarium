@@ -50,7 +50,6 @@
 
 namespace StelUtils {
 
-//! Convert from UTF-8 to wchar_t
 std::wstring stringToWstring(const string& s)
 {
 	return QString::fromUtf8(s.c_str()).toStdWString();
