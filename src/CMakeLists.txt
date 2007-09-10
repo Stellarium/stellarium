@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_
 
 ########### next target ###############
 
-SET(stellarium_SRCS
+SET(stellarium_lib_SRCS
    Projector.cpp
    Projector.hpp
    Mapping.hpp
@@ -59,7 +59,6 @@ SET(stellarium_SRCS
    Landscape.hpp
    LoadingBar.cpp
    LoadingBar.hpp
-   main.cpp
    script.cpp
    script.h
    script_mgr.cpp
@@ -194,6 +193,10 @@ SET(stellarium_SRCS
    planetsephems/stellplanet.h
 )
 
+SET(stellarium_exe_SRCS
+   main.cpp
+)
+
 IF(MACOSX)
   SET(stellarium_SRCS 
     ${stellarium_SRCS}
@@ -201,8 +204,11 @@ IF(MACOSX)
     MacosxDirs.hpp)
 ENDIF(MACOSX)
 
-ADD_EXECUTABLE(stellarium ${stellarium_SRCS})
 
-TARGET_LINK_LIBRARIES(stellarium ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
+ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS})
+TARGET_LINK_LIBRARIES(stelMain ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
+INSTALL(TARGETS stelMain DESTINATION bin)
 
+ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+TARGET_LINK_LIBRARIES(stellarium stelMain ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 INSTALL(TARGETS stellarium DESTINATION bin)
