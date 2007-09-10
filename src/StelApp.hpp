@@ -40,7 +40,8 @@ class StelFileMgr;
 
 using namespace std;
 
-//! @class StelApp Singleton main Stellarium application class.
+//! @class StelApp 
+//! Singleton main Stellarium application class.
 //! This is the central class of Stellarium.  Only one singleton instance of
 //! this class is created and can be accessed from anywhere else.  This class 
 //! is the access point to several "Manager" class which provide application-wide 

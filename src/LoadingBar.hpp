@@ -25,7 +25,8 @@
 class SFont;
 class Projector;
 
-//! @class LoadingBar Class which is used to display loading bar.  
+//! @class LoadingBar 
+//! This class is used to display loading bar.
 //! A LoadingBar has a progress bar whose value can be set after the creation
 //! of the LoadingBar, and a text display area, whose contents may also be
 //! modified after the creation of the LoadingBar.

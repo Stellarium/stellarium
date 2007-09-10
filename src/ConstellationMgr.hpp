@@ -33,7 +33,8 @@ class Projector;
 class Navigator;
 class SFont;
 
-//! @class ConstellationMgr Display and manage the constellations.
+//! @class ConstellationMgr
+//! Display and manage the constellations.
 //! It can display constellations lines, names, art textures and boundaries.
 //! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
