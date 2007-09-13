@@ -241,7 +241,7 @@ bool MappingCylinder::forward(Vec3d &v) const
 
 bool MappingCylinder::backward(Vec3d &v) const
 {
-	const double cd = cos(v[1]);
+	const double cd = std::cos(v[1]);
 	v[2] = - cd * std::cos(v[0]);
 	v[0] = cd * std::sin(v[0]);
 	v[1] = std::sin(v[1]);
@@ -287,13 +287,13 @@ bool MappingOrthographic::backward(Vec3d &v) const
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double h = 1.0 - dq;
 	if (h < 0) {
-		h = 1.0/sqrt(dq);
+		h = 1.0/std::sqrt(dq);
 		v[0] *= h;
 		v[1] *= h;
 		v[2] = 0.0;
 		return false;
 	}
-	v[2] = -sqrt(h);
+	v[2] = -std::sqrt(h);
 	return true;
 }
 

@@ -157,7 +157,8 @@ public:
     inline Vector4();
     inline Vector4(const Vector4<T>&);
 	inline Vector4(const Vector3<T>&);
-    inline Vector4(T, T, T, T);
+	inline Vector4(T, T, T);
+	inline Vector4(T, T, T, T);
 
 	inline Vector4& operator=(const Vector4<T>&);
 	inline Vector4& operator=(const Vector3<T>&);
@@ -372,7 +373,7 @@ template<class T> T Vector2<T>::dot(const Vector2<T>& b) const
 
 template<class T> T Vector2<T>::length() const
 {
-    return (T) sqrt(v[0] * v[0] + v[1] * v[1]);
+    return (T) std::sqrt(v[0] * v[0] + v[1] * v[1]);
 }
 
 template<class T> T Vector2<T>::lengthSquared() const
@@ -382,7 +383,7 @@ template<class T> T Vector2<T>::lengthSquared() const
 
 template<class T> void Vector2<T>::normalize()
 {
-    T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1]);
+    T s = (T) 1 / std::sqrt(v[0] * v[0] + v[1] * v[1]);
     v[0] *= s;
     v[1] *= s;
 }
@@ -550,7 +551,7 @@ template<class T> T Vector3<T>::lengthSquared() const
 
 template<class T> void Vector3<T>::normalize()
 {
-    T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
+    T s = (T) (1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;
@@ -612,6 +613,11 @@ template<class T> Vector4<T>::Vector4(const Vector4<T>& a)
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
+}
+
+template<class T> Vector4<T>::Vector4(T x, T y, T z)
+{
+	v[0]=x; v[1]=y; v[2]=z; v[3]=1;
 }
 
 template<class T> Vector4<T>::Vector4(T x, T y, T z, T a = 1)

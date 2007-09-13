@@ -20,8 +20,8 @@
 #include <cassert>
 #include "TreeGrid.hpp"
 
-static const double icosahedron_G = 0.5*(1.0+sqrt(5.0));
-static const double icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
+static const double icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
+static const double icosahedron_b = 1.0/std::sqrt(1.0+icosahedron_G*icosahedron_G);
 static const double icosahedron_a = icosahedron_b*icosahedron_G;
 
 static const Vec3d icosahedron_corners[12] =

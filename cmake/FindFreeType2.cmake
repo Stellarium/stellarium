@@ -16,6 +16,7 @@
     freetype/config/ftheader.h
     /usr/include/freetype2
     /usr/X11R6/include/freetype
+    /usr/nekoware/include/freetype2
     )
 
   FIND_LIBRARY(FreeType2_LIBRARIES
@@ -24,6 +25,7 @@
     /usr/local/lib
     /usr/openwin/lib
     /usr/lib
+    /usr/nekoware/lib
     )
 
 if (FreeType2_INCLUDE_DIR AND FreeType2_LIBRARIES)
