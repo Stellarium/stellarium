@@ -58,6 +58,15 @@
 #include <sys/mman.h>
 #endif
 
+// Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
+#ifndef MAP_NORESERVE
+# ifdef MAP_AUTORESRV
+#  define MAP_NORESERVE MAP_AUTORESRV
+# else
+#  define MAP_NORESERVE 0
+# endif
+#endif
+
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
@@ -250,6 +259,21 @@ unsigned int UnpackUBits(bool from_be,const char *addr,int bits_begin,
 static inline float IndexToBV(unsigned char b_v) {
   return b_v*(4.f/127.f)-0.5f;
 }
+
+// Patch by Rainer Canavan for compilation on irix with mipspro compiler part 2
+// Fails on Linux GCC
+// #ifndef HAVE_ATTRIB_PACKED
+// # define __attribute__(x)
+// # define __packed__ 1
+// #endif
+// 
+// #ifdef HAVE_PRAGMA_PACK
+// # pragma pack(1)
+// #endif
+// 
+// #ifdef HAVE_PRAGMA_PACK_HPPA
+// # pragma pack 1
+// #endif
 
 struct Star3 {  // 6 byte
   int x0:18;
@@ -1057,7 +1081,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   if (fname.find("mmap:") == 0) {
     fname.erase(0,5);
 #if (!defined(__GNUC__))
-#warning Star loading has only been tested with gcc
+// #warning Star loading has only been tested with gcc
     cerr << "WARNING: ZoneArray::create(" << extended_file_name << "): "
             "mmap catalog loading currently only implemented for gcc compiled "
             "binaries." << endl;

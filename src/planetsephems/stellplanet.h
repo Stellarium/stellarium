@@ -72,7 +72,7 @@ void get_titania_parent_coordsv(double jd,double xyz[3]);
 void get_oberon_parent_coordsv(double jd,double xyz[3]);
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 

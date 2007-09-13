@@ -984,6 +984,6 @@ namespace s_gui
 		StringList* lb;
     };
 
-};
+}
 
 #endif // _GUI_H_

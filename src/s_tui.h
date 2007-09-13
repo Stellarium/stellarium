@@ -547,6 +547,6 @@ namespace s_tui
 
 
 
-}; // namespace s_tui
+} // namespace s_tui
 
 #endif // _TUI_H_

@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 #ifndef HAVE_POW10
+# include <math.h>
 # define pow10(x) pow(10,(x))
 #endif
 

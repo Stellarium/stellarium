@@ -767,12 +767,15 @@ float get_GMT_shift_from_system(double JD)
 	get_tm_from_julian(JD, &rawtime);
 #ifdef HAVE_TIMEGM
 	time_t ltime = timegm(&rawtime);
-#elif HAVE_MKTIME
+#endif
+#ifndef HAVE_TIMEGM
+#ifdef HAVE_MKTIME
 	time_t ltime = mktime(&rawtime);
 #else
 	// This does not work
 	time_t ltime = my_timegm(&rawtime);
 #endif	
+#endif
 	timeinfo = localtime(&ltime);
 
 	static char heure[20];
