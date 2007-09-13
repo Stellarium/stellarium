@@ -37,7 +37,7 @@ void get_earth_centre_dist (float height, double latitude, double * p_sin_o, dou
 double get_refraction_adj (double altitude, double atm_pres, double temp);
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 

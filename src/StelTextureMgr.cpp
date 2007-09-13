@@ -88,7 +88,7 @@ float ManagedSTexture::getAverageLuminance(void)
 		return avgLuminance;
 	}
 	return 0;
-};
+}
 
 /*************************************************************************
  Constructor for the StelTextureMgr class

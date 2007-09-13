@@ -49,7 +49,7 @@ void drawIntro(void)
     cout << "[ This is "<< StelApp::getApplicationName() << " - http://www.stellarium.org ]" << endl;
     cout << "[ Copyright (C) 2000-2006 Fabien Chereau et al         ]" << endl;
     cout << " -------------------------------------------------------" << endl;
-};
+}
 
 // Main stellarium procedure
 int main(int argc, char **argv)

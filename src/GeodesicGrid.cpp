@@ -326,7 +326,7 @@ void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
 	if (max_search_level < 0) max_search_level = 0;
 	else if (max_search_level > max_level) max_search_level = max_level;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-	int *halfs_used = new int[convex.getNbHalfSpace()];
+	int *halfs_used = new int[convex.size()];
 #else
 	int halfs_used[convex.size()];
 #endif
