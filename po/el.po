@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"POT-Creation-Date: 2007-09-13 08:23-0700\n"
 "PO-Revision-Date: 2007-07-09 17:12+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "    και σχόλια σε έμας στο: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
 msgid " Light Years"
 msgstr " Έτη Φωτός"
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Author: "
 msgstr "Συγγραφέας "
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
 #: src/Planet.cpp:125
 msgid "Az/Alt: "
 msgstr "Αζ/Υψ: "
@@ -522,7 +522,7 @@ msgstr ""
 "4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
 "\n"
 
-#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
 #: src/Planet.cpp:168
 msgid "Distance: "
 msgstr "Απόσταση: "
@@ -623,7 +623,7 @@ msgstr "Εγκέλαδος"
 msgid "Enter observatory name"
 msgstr "Εισάγετε όνομα παρατηρητηρίου"
 
-#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
 msgid "Equ of date"
 msgstr "Εξίσωση ημερομηνίας"
 
@@ -895,7 +895,7 @@ msgstr "Λανθασμένη εντολή Σεναριου"
 msgid "Io"
 msgstr "Ιώ"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
 msgid "J2000"
 msgstr "J2000"
 
@@ -1012,7 +1012,7 @@ msgstr "Σαύρα"
 msgid "Load Default Configuration: "
 msgstr "Φόρτωση Προεπιλεγμένων Ρυθμίσεων: "
 
-#: src/ConstellationMgr.cpp:303
+#: src/ConstellationMgr.cpp:321
 msgid "Loading Constellation Art: "
 msgstr "Φόρτωση Σχεδίων Αστερισμών: "
 
@@ -1024,7 +1024,7 @@ msgstr "Φόρτωση καταλόγου NGC: "
 msgid "Loading Nebula Textures:"
 msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
 
-#: src/StarMgr.cpp:1586
+#: src/StarMgr.cpp:1622
 msgid "Loading catalog "
 msgstr "Φόρτωση καταλόγου NGC: "
 
@@ -1070,8 +1070,8 @@ msgstr "Μέγεθος"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
-#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
-#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
+#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
 #: src/Planet.cpp:164
 msgid "Magnitude: "
 msgstr "Μέγεθος: "
@@ -1336,7 +1336,7 @@ msgstr "Ζευγάρι από αστέρια"
 msgid "Palace Gate"
 msgstr "Πύλη του Παλατιού"
 
-#: src/StarMgr.cpp:945
+#: src/StarMgr.cpp:953
 msgid "Parallax: "
 msgstr "Παράλλαξη: "
 
@@ -1457,8 +1457,8 @@ msgstr "Έξοδος [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Έξοδος [CTRL + Q]"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
-#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
+#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
@@ -1749,7 +1749,7 @@ msgstr "Νότιος Ποταμός"
 msgid "Spear"
 msgstr "Λόγχη"
 
-#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
 msgid "Spectral Type: "
 msgstr "Τύπος φάσματος "
 

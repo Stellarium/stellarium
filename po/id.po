@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"POT-Creation-Date: 2007-09-13 08:23-0700\n"
 "PO-Revision-Date: 2007-08-14 00:58+0000\n"
 "Last-Translator: Virgo Rustianto <vrustianto@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "    dan uraiannya kepada kami di: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
 msgid " Light Years"
 msgstr " Tahun Cahaya"
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Author: "
 msgstr "Pengarang: "
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
 #: src/Planet.cpp:125
 #, fuzzy
 msgid "Az/Alt: "
@@ -529,7 +529,7 @@ msgstr ""
 "4 , : Garis putar matahari 5 . : Garis Katulistiwa\n"
 "\n"
 
-#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
 #: src/Planet.cpp:168
 msgid "Distance: "
 msgstr "Jarak: "
@@ -632,7 +632,7 @@ msgstr "Enceladus"
 msgid "Enter observatory name"
 msgstr "Masukkan nama observatori"
 
-#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
 msgid "Equ of date"
 msgstr "Tanggal sama dengan"
 
@@ -903,7 +903,7 @@ msgstr "Perintah skrip tak sesuai"
 msgid "Io"
 msgstr "Io"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
 msgid "J2000"
 msgstr "J2000"
 
@@ -1020,7 +1020,7 @@ msgstr "Kadal"
 msgid "Load Default Configuration: "
 msgstr "Baca Konfigurasi Default: "
 
-#: src/ConstellationMgr.cpp:303
+#: src/ConstellationMgr.cpp:321
 msgid "Loading Constellation Art: "
 msgstr "Panggil Gambar Konstelasi "
 
@@ -1032,7 +1032,7 @@ msgstr "Memanggil daftar NGC: "
 msgid "Loading Nebula Textures:"
 msgstr "Panggil Gambar Nebula:"
 
-#: src/StarMgr.cpp:1586
+#: src/StarMgr.cpp:1622
 msgid "Loading catalog "
 msgstr "Memanggil daftar NGC: "
 
@@ -1078,8 +1078,8 @@ msgstr "Magnitudo"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Ukuran pengali Magnitudo "
 
-#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
-#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
+#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
 #: src/Planet.cpp:164
 msgid "Magnitude: "
 msgstr "Magnitudo "
@@ -1345,7 +1345,7 @@ msgstr "Sepasang bintang"
 msgid "Palace Gate"
 msgstr "Gerbang istana"
 
-#: src/StarMgr.cpp:945
+#: src/StarMgr.cpp:953
 msgid "Parallax: "
 msgstr "Parallax "
 
@@ -1466,8 +1466,8 @@ msgstr "Keluar [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Keluar [CTRL + Q]"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
-#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
+#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
 #, fuzzy
 msgid "RA/DE: "
 msgstr "RA/DE: "
@@ -1765,7 +1765,7 @@ msgstr "Sungai Selatan"
 msgid "Spear"
 msgstr "tombak"
 
-#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
 #, fuzzy
 msgid "Spectral Type: "
 msgstr "Jenis Spektrum "
