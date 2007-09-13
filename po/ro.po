@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"POT-Creation-Date: 2007-09-13 08:23-0700\n"
 "PO-Revision-Date: 2007-06-20 12:17+0000\n"
 "Last-Translator: Nicolae Crefelean <kneekoo@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "    şi pentru comentarii accesaţi: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
 msgid " Light Years"
 msgstr " Ani lumină"
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
 #: src/Planet.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
@@ -526,7 +526,7 @@ msgstr ""
 "4, : Linia eclipticii 5. : Linia ecuatorului\n"
 "\n"
 
-#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
 #: src/Planet.cpp:168
 msgid "Distance: "
 msgstr "Distanţă: "
@@ -629,7 +629,7 @@ msgstr "Enceladus"
 msgid "Enter observatory name"
 msgstr "Introduceţi numele observatorului"
 
-#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
 msgid "Equ of date"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgstr "Comandă greşită în script"
 msgid "Io"
 msgstr "Io"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
 msgid "J2000"
 msgstr ""
 
@@ -1021,7 +1021,7 @@ msgstr "Pasărea"
 msgid "Load Default Configuration: "
 msgstr "Încărcare a configuraţiei implicite : "
 
-#: src/ConstellationMgr.cpp:303
+#: src/ConstellationMgr.cpp:321
 msgid "Loading Constellation Art: "
 msgstr "Încarc imaginile constelaţiilor: "
 
@@ -1033,7 +1033,7 @@ msgstr "Încarc catalogul NGC: "
 msgid "Loading Nebula Textures:"
 msgstr "Se încarcă texturile pentru nebuloase:"
 
-#: src/StarMgr.cpp:1586
+#: src/StarMgr.cpp:1622
 #, fuzzy
 msgid "Loading catalog "
 msgstr "Încarc catalogul NGC: "
@@ -1080,8 +1080,8 @@ msgstr "Magnitudine"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Multiplicator dimensiune magnitudine: "
 
-#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
-#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
+#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
 #: src/Planet.cpp:164
 msgid "Magnitude: "
 msgstr "Magnitudine: "
@@ -1345,7 +1345,7 @@ msgstr "Perechea de Stele"
 msgid "Palace Gate"
 msgstr "Poarta Palatului"
 
-#: src/StarMgr.cpp:945
+#: src/StarMgr.cpp:953
 msgid "Parallax: "
 msgstr ""
 
@@ -1466,8 +1466,8 @@ msgstr "Închide [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Închide [CTRL + Q]"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
-#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
+#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "AD/DE: "
 
@@ -1758,7 +1758,7 @@ msgstr "Râul de Sud"
 msgid "Spear"
 msgstr "Suliţa"
 
-#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
 msgid "Spectral Type: "
 msgstr "Tipul Spectral: "
 

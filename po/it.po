@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-21 11:09+0200\n"
+"POT-Creation-Date: 2007-09-13 08:23-0700\n"
 "PO-Revision-Date: 2007-07-05 19:41+0000\n"
 "Last-Translator: supernaicol <nicola.rosati@tele2.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "    e commenti a: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:948 src/StarMgr.cpp:990
+#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
 msgid " Light Years"
 msgstr " Anni Luce"
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Author: "
 msgstr "Autore: "
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:939 src/Nebula.cpp:103
+#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
 #: src/Planet.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
@@ -526,7 +526,7 @@ msgstr ""
 "4 , : Linea dell'eclittica 5 . : Linea equatoriale\n"
 "\n"
 
-#: src/StarMgr.cpp:947 src/StarMgr.cpp:989 src/Planet.cpp:129
+#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
 #: src/Planet.cpp:168
 msgid "Distance: "
 msgstr "Distanza: "
@@ -629,7 +629,7 @@ msgstr "Encelado"
 msgid "Enter observatory name"
 msgstr "Inserisci il nome dell'osservatorio"
 
-#: src/StarMgr.cpp:812 src/StarMgr.cpp:930
+#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
 msgid "Equ of date"
 msgstr ""
 
@@ -900,7 +900,7 @@ msgstr "Comando di script non valido"
 msgid "Io"
 msgstr "Io"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:927
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
 msgid "J2000"
 msgstr "j2000"
 
@@ -1020,7 +1020,7 @@ msgstr "Lucertola"
 msgid "Load Default Configuration: "
 msgstr "Carica la configurazione di default: "
 
-#: src/ConstellationMgr.cpp:303
+#: src/ConstellationMgr.cpp:321
 #, fuzzy
 msgid "Loading Constellation Art: "
 msgstr "sto caricando le figure delle Costellazioni: "
@@ -1033,7 +1033,7 @@ msgstr "Caricamento del catalogo NGC in corso... "
 msgid "Loading Nebula Textures:"
 msgstr "Caricamento delle texture delle Nebulose in corso..."
 
-#: src/StarMgr.cpp:1586
+#: src/StarMgr.cpp:1622
 #, fuzzy
 msgid "Loading catalog "
 msgstr "sto caricando il catalogo "
@@ -1080,8 +1080,8 @@ msgstr "Magnitudine"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Moltiplicatore delle dimensioni di magnitudine: "
 
-#: src/StarMgr.cpp:809 src/StarMgr.cpp:832 src/StarMgr.cpp:926
-#: src/StarMgr.cpp:985 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
+#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
+#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
 #: src/Planet.cpp:164
 msgid "Magnitude: "
 msgstr "Magnitudine: "
@@ -1347,7 +1347,7 @@ msgstr "Coppia di stelle"
 msgid "Palace Gate"
 msgstr "Cancello del Palazzo"
 
-#: src/StarMgr.cpp:945
+#: src/StarMgr.cpp:953
 msgid "Parallax: "
 msgstr "Parallasse: "
 
@@ -1468,8 +1468,8 @@ msgstr "Esci [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "Esci [CTRL + Q]"
 
-#: src/StarMgr.cpp:810 src/StarMgr.cpp:812 src/StarMgr.cpp:927
-#: src/StarMgr.cpp:930 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
+#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "AR/DE: "
 
@@ -1760,7 +1760,7 @@ msgstr "Fiume del Sud"
 msgid "Spear"
 msgstr "Lancia"
 
-#: src/StarMgr.cpp:953 src/StarMgr.cpp:995
+#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
 msgid "Spectral Type: "
 msgstr "Tipo Spettrale: "
 
