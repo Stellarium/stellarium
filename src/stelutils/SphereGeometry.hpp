@@ -26,18 +26,16 @@
 
 #include "vecmath.h"
 
-/**
-    In this file we define different geometrical shapes :
-    - HalfSpace
-    - Convex
-    - Polygon
-    - ConvexPolygon
-    - Disk
-    
-    We also define two functions
-    - contains(x, y)
-    - intersect(x, y) = intersect(y, x)
-*/
+//! In this namespace we define different geometrical shapes :
+//! <ul>
+//! <li> HalfSpace
+//! <li> ConvexS
+//! <li> Polygon
+//! <li> ConvexPolygon
+//! <li> Disk
+//! <ul>
+//! We also define two functions, contains(x, y) and intersect(x, y) = intersect(y, x) 
+//! which is defined for most of the pair of geometrical shapes
 namespace StelGeom
 {
 /****************
@@ -52,22 +50,28 @@ template<class T>
 bool intersect(const T& o, const Vec3d& v)
 { return contains(o, v); }
 
-//! HalfSpace
+//! @class HalfSpace A HalfSpace is defined by a direction and an aperture.
+//! It forms a cone from the center of the Coordinate frame with a radius d
 struct HalfSpace
 {
     HalfSpace() : d(0) {}
-    HalfSpace(const Vec3d& n_) : n(n_), d(0) {}
-    HalfSpace(const Vec3d& n_, double d_) : n(n_), d(d_) {}
+    HalfSpace(const Vec3d& an) : n(an), d(0) {}
+	//! Construct a HalfSpace from its direction and aperture
+	//! @param an a unit vector indicating the direction
+    //! @param ar the aperture radius in radian
+    HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {}
     HalfSpace(const HalfSpace& other) : n(other.n), d(other.d) {}
 	bool contains(const Vec3d &v) const {return (v*n>=d);}
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
 	
+	//! The direction unit vector
 	Vec3d n;
+	//! The cone radius in radian
 	double d;
 };
 
-//! Polygon class
-//! This is a set of points
+//! @class Polygon A polygon is defined by a set of connected points.
+//! The last point is connected to the first one
 class Polygon : public std::vector<Vec3d>
 {
 public:
@@ -87,9 +91,9 @@ bool intersect(const Polygon& p, const T& o)
 }
 
 
-//! Several HalfSpaces defining a convex region
-//! Damn X11! Convex is #defined as an int in X11/X.h: (#define Convex 2)
-//! So we need to use another name...
+//! @class ConvexS A Convex is defined by several HalfSpaces defining a convex region.
+//! A Convex region is not necessarily a ConvexPolygon, it can for example be a single HalfSpace.
+//! Because in X11, Convex is #defined as an int in X11/X.h: (#define Convex 2) we needed to use another name (ConvexS).
 class ConvexS : public std::vector<HalfSpace>
 {
 public:
@@ -119,9 +123,9 @@ public:
 	}
 };
 
-//! ConvexPolygon class
-//! It stores both informations :
-//! The halfpaces and the points
+//! @class ConvexPolygon A special case of ConvexS for which all HalfSpace have a aperture of PI/2.
+//! The operator [] behave as for a Polygon, i.e. return the vertex positions.
+//! To acces the HalfSpaces, use the asConvex() method.
 class ConvexPolygon : public ConvexS, public Polygon
 {
 public:
@@ -176,10 +180,12 @@ inline bool intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
 	return !c1.areAllPointsOutsideOneSide(cp2) && !c2.areAllPointsOutsideOneSide(cp1);
 }
 
+//! @class Disk A Disk is defined by a single HalfSpace
 struct Disk : HalfSpace
 {
-    //! constructor
-    // @param a is the disk radius in radian
+    //! Constructor
+	//! @param n a unit vector indicating the the disk center
+    //! @param r the disk radius in radian
     Disk(const Vec3d& n, double r) : HalfSpace(n, std::cos(r))
     {}
 };
