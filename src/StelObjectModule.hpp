@@ -26,26 +26,29 @@
 #include "StelObjectType.hpp"
 #include "vecmath.h"
 
-//! Specialization of StelModule which manage a collection of StelObject.
-//! Instance deriving from the StelObjectModule class can be managed by the StelObjectMgr.
-//! The class defines extra abstract functions for searching and listing StelObjects
+//! @class StelObjectModule
+//! Specialization of StelModule which manages a collection of StelObjects.
+//! Instances deriving from the StelObjectModule class can be managed by the StelObjectMgr.
+//! The class defines extra abstract functions for searching and listing StelObjects.
 //! @author Fabien Chereau
 class StelObjectModule : public StelModule
 {
 public:
-    StelObjectModule();
+	StelObjectModule();
 
-    ~StelObjectModule();
+	~StelObjectModule();
 	
-	//! Search for StelObject in the disk of diameter limitFov centered on the given position
-	//! Only visible objects (i.e curretly displayed on screen should be returned)
-	//! @param v equatorial position at epoch J2000
-	//! @param limitFov angular diameter of the searching zone in degree
-	//! @return the list of all the displayed objects contained in the defined zone
+	//! Search for StelObject in an area around a specifid point.
+	//! The function searches in a disk of diameter limitFov centered on v.
+	//! Only visible objects (i.e curretly displayed on screen) should be returned.
+	//! @param v equatorial position at epoch J2000.
+	//! @param limitFov angular diameter of the searching zone in degree.
+	//! @return the list of all the displayed objects contained in the defined zone.
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const = 0;
 	
-	//! Return the matching StelObject if exists or the empty StelObject if not found
-	//! @param nameI18n the translated name for the current sky locale
+	//! Find a StelObject by name.
+	//! @param nameI18n The translated name for the current sky locale.
+	//! @return The matching StelObject if exists or the empty StelObject if not found.
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const = 0;
 
 	//! Return the matching StelObject if exists or the empty StelObject if not found
