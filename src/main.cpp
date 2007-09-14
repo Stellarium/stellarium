@@ -42,24 +42,12 @@
 
 using namespace std;
 
-// Print a beautiful console logo !!
-void drawIntro(void)
-{
-    cout << " -------------------------------------------------------" << endl;
-    cout << "[ This is "<< StelApp::getApplicationName() << " - http://www.stellarium.org ]" << endl;
-    cout << "[ Copyright (C) 2000-2006 Fabien Chereau et al         ]" << endl;
-    cout << " -------------------------------------------------------" << endl;
-}
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
 	
-	// Print the console logo..
-	drawIntro();
-
 #ifdef HAVE_LIBCURL
 	curl_global_init(CURL_GLOBAL_ALL);
 #endif
