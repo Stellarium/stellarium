@@ -675,6 +675,11 @@ double getJDFromSystem(void)
 	return StelUtils::qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
 
+double qTimeToJDFraction(const QTime& time)
+{
+	return (double)1./(24*60*60*1000)*QTime().msecsTo(time)-0.5;
+}
+
 bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify)
 {
 	bool result=false;

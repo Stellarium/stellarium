@@ -49,6 +49,13 @@
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 
+#include <QStringList>
+#include <QString>
+#include <QRegExp>
+#include <QTextStream>
+#include <set>
+#include <string>
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 
@@ -57,7 +64,7 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-	timeBase(0), draw_mode(StelApp::DM_NORMAL), initialized(false)
+	timeBase(0), draw_mode(StelApp::DM_NORMAL), configFile("config.ini"), initialized(false)
 {
 	distorter=0;
 	skyCultureMgr=0;
@@ -71,52 +78,9 @@ StelApp::StelApp(int argc, char** argv) :
 	assert(!singleton);
 	singleton = this;
 	
-	// C++-ize argv for use with StelUtils::argsHaveOption... functions
-	for(int i=0; i<argc; i++) { argList.push_back(argv[i]); }
-		
-	stelFileMgr = new StelFileMgr();
-	
-	// Check if the user directory exists, and create it if necessary
-	stelFileMgr->checkUserDir();
-	
-	// Check some command-line options
-	try
-	{
-		setConfigFile(StelUtils::argsHaveOptionWithArg<string>(argList, "-c", "--config-file", "config.ini"));
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
-		setConfigFile("config.ini");		
-	}
-	cout << "config file is: " << configFile << endl;
-	
-	if (!stelFileMgr->exists(configFile))
-	{
-		cerr << "config file \"" << configFile << "\" does not exist - copying the default file." << endl;
-		copyDefaultConfigFile();
-	}
-        
-	textureMgr = new StelTextureMgr();
-	localeMgr = new StelLocaleMgr();
-	
-	string fontMapFile("");
-	try 
-	{
-		fontMapFile = stelFileMgr->findFile("data/fontmap.dat");
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR when locating font map file: " << e.what() << endl;
-	}
-	fontManager = new StelFontMgr(fontMapFile);
-	
-	skyCultureMgr = new StelSkyCultureMgr();
-	moduleMgr = new StelModuleMgr();
-	
-	core = new StelCore();
-	time_multiplier = 1;
-	distorter = 0;
+	argList = new QStringList;
+	for(int i=0; i<argc; i++)
+		*argList << argv[i];
 }
 
 /*************************************************************************
@@ -141,6 +105,7 @@ StelApp::~StelApp()
 
 	delete textureMgr; textureMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL;
+	delete argList; argList=NULL;
 }
 
 /*************************************************************************
@@ -175,6 +140,55 @@ string StelApp::getViewPortDistorterType() const
 
 void StelApp::init()
 {
+	stelFileMgr = new StelFileMgr();
+
+	// Check if the user directory exists, and create it if necessary
+	stelFileMgr->checkUserDir();
+	
+	// Parse for first set of CLI arguments - stuff we want to process before other
+	// output, such as --help and --version, and if we want to set the configFile value.
+	parseCLIArgsPreConfig();
+	
+	// OK, print the console splash and get on with loading the program
+	cout << " -------------------------------------------------------" << endl;
+	cout << "[ This is "<< StelApp::getApplicationName() << " - http://www.stellarium.org ]" << endl;
+	cout << "[ Copyright (C) 2000-2006 Fabien Chereau et al         ]" << endl;
+	cout << " -------------------------------------------------------" << endl;
+	
+	vector<string> p=stelFileMgr->getSearchPaths();
+	cout << "File search paths:" << endl;
+	for(vector<string>::iterator i=p.begin(); i!=p.end(); i++)
+		cout << " " << (1 + i - p.begin()) << ". " << *i << endl;
+	
+	cout << "config file is: " << configFile << endl;
+	
+	if (!stelFileMgr->exists(configFile))
+	{
+		cerr << "config file \"" << configFile << "\" does not exist - copying the default file." << endl;
+		copyDefaultConfigFile();
+	}
+	
+	textureMgr = new StelTextureMgr();
+	localeMgr = new StelLocaleMgr();
+	
+	string fontMapFile("");
+	try 
+	{
+		fontMapFile = stelFileMgr->findFile("data/fontmap.dat");
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR when locating font map file: " << e.what() << endl;
+	}
+	fontManager = new StelFontMgr(fontMapFile);
+	
+	skyCultureMgr = new StelSkyCultureMgr();
+	moduleMgr = new StelModuleMgr();
+	
+	core = new StelCore();
+	time_multiplier = 1;
+	distorter = 0;
+	
 	Translator::initSystemLanguage();
 
 	// Load language codes
@@ -227,6 +241,8 @@ void StelApp::init()
 			cout << "Attempting to use an existing older config file." << endl;
 		}
 	}
+	
+	parseCLIArgsPostConfig(conf);
 
 	// Create openGL context first
 	string iconPath;
@@ -360,6 +376,168 @@ void StelApp::init()
 	scripts->play_startup_script();
 	
 	initialized = true;
+}
+
+void StelApp::parseCLIArgsPreConfig(void)
+{	
+	if (argsGetOption(argList, "-v", "--version"))
+	{
+		cout << getApplicationName() << endl;
+		exit(0);
+	}
+
+	if (argsGetOption(argList, "-h", "--help"))
+	{
+		// Get the basename of binary
+		QString binName = argList->at(0);
+		binName.remove(QRegExp("^.*[/\\\\]"));
+		
+		cout << "Usage:" << endl
+				<< "  " 
+				<< qPrintable(binName) << " [options]" << endl << endl
+				<< "Options:" << endl
+				<< "--version (or -v)       : Print program name and version and exit." << endl
+				<< "--help (or -h)          : This cruft." << endl
+				<< "--config-file (or -c)   : Use an alternative name for the config file" << endl
+				<< "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
+				<< "                          the full screen setting in the config file" << endl
+				<< "--home-planet           : Specify observer planet (English name)" << endl
+				<< "--altitude              : Specify observer altitude in meters" << endl
+				<< "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
+				<< "--latitude              : Specify longitude, e.g. -1d4\\'27.48\\\"" << endl 
+				<< "--list-landscapes       : Print a list of value landscape IDs" << endl 
+				<< "--landscape             : Start using landscape whose ID (dir name)" << endl
+				<< "                          is passed as parameter to option" << endl
+				<< "--sky-date              : Specify sky date in format yyyymmdd" << endl
+				<< "--sky-time              : Specify sky time in format hh:mm:ss" << endl
+				<< "--fov                   : Specify the field of view (degrees)" << endl
+				<< "--projection-type       : Specify projection type, e.g. stereographic" << endl;
+		exit(0);
+	}
+	
+	if (argsGetOption(argList, "", "--list-landscapes"))
+	{
+		set<string> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::DIRECTORY);
+		for(set<string>::iterator i=landscapeIds.begin(); i!=landscapeIds.end(); i++)
+		{
+			try 
+			{
+				// finding the file will throw an exception if it is not found
+				// in that case we won't output the landscape ID as it canont work
+				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
+				cout << *i << endl;
+			}
+			catch(exception& e){}
+		}
+		exit(0);
+	}
+	
+	try
+	{
+		setConfigFile(qPrintable(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini")));
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
+		setConfigFile("config.ini");		
+	}
+}
+
+void StelApp::parseCLIArgsPostConfig(InitParser& conf)
+{
+	// Over-ride config file options with command line options
+	// We should catch exceptions from argsGetOptionWithArg...
+	int fullScreen, altitude;
+	float fov;
+	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime, projectionType;
+	
+	try
+	{
+		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
+		landscapeId = argsGetOptionWithArg<QString>(argList, "", "--landscape", "");
+		homePlanet = argsGetOptionWithArg<QString>(argList, "", "--home-planet", "");
+		altitude = argsGetOptionWithArg<int>(argList, "", "--altitude", -1);
+		longitude = argsGetOptionWithArg<QString>(argList, "", "--longitude", "");
+		latitude = argsGetOptionWithArg<QString>(argList, "", "--latitude", "");
+		skyDate = argsGetOptionWithArg<QString>(argList, "", "--sky-date", "");
+		skyTime = argsGetOptionWithArg<QString>(argList, "", "--sky-time", "");
+		fov = argsGetOptionWithArg<float>(argList, "", "--fov", -1.0);
+		projectionType = argsGetOptionWithArg<QString>(argList, "", "--projection-type", "");
+
+	}
+	catch (exception& e)
+	{
+		cerr << "ERROR while checking command line options: " << e.what() << endl;
+		exit(0);
+	}
+
+	// Will be -1 if option is not found, in which case we don't change anything.
+	if (fullScreen == 1) conf.set_boolean("video:fullscreen", true);
+	else if (fullScreen == 0) conf.set_boolean("video:fullscreen", false);
+	
+	if (landscapeId != "") conf.set_str("init_location:landscape_name", qPrintable(landscapeId));
+	
+	if (homePlanet != "") conf.set_str("init_location:home_planet", qPrintable(homePlanet));
+	
+	if (altitude != -1) conf.set_int("init_location:altitude", altitude);
+	
+	QRegExp longLatRx("[\\-+]?\\d+d\\d+\\'\\d+(\\.\\d+)?\"");
+	if (longitude != "")
+	{
+		if (longLatRx.exactMatch(longitude))
+			conf.set_str("init_location:longitude", qPrintable(longitude));
+		else
+			cerr << "WARNING: --longitude argument has unrecognised format" << endl;
+	}
+	
+	if (latitude != "")
+	{
+		if (longLatRx.exactMatch(latitude))
+			conf.set_str("init_location:latitude", qPrintable(latitude));
+		else
+			cerr << "WARNING: --latitude argument has unrecognised format" << endl;
+	}
+	
+	if (skyDate != "" || skyTime != "")
+	{
+		// Get the Julian date for the start of the current day
+		// and the extra necessary for the time of day as separate
+		// components.  Then if the --sky-date and/or --sky-time flags
+		// are set we over-ride the component, and finally add them to 
+		// get the full julian date and set that.
+		
+		// First, lets determine the Julian day number and the part for the time of day
+		QDateTime now = QDateTime::currentDateTime();
+		double skyDatePart = now.date().toJulianDay();
+		double skyTimePart = StelUtils::qTimeToJDFraction(now.time());
+		
+		// Over-ride the sktDatePart if the user specified the date using --sky-date
+		if (skyDate != "")
+		{
+			// validate the argument format, we will tolerate yyyy-mm-dd by removing all -'s
+			QRegExp dateRx("\\d{8}");
+			if (dateRx.exactMatch(skyDate.remove("-")))
+				skyDatePart = QDate::fromString(skyDate, "yyyyMMdd").toJulianDay();
+			else
+				cerr << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)" << endl;
+		}
+		
+		if (skyTime != "")
+		{
+			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
+			if (timeRx.exactMatch(skyTime))
+				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
+			else
+				cerr << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)" << endl;
+		}
+
+		conf.set_str("navigation:startup_time_mode", "preset");
+		conf.set_double ("navigation:preset_sky_time", skyDatePart + skyTimePart);
+	}
+
+	if (fov > 0.0) conf.set_double("navigation:init_fov", fov);
+	
+	if (projectionType != "") conf.set_str("projection:type", qPrintable(projectionType));
 }
 
 void StelApp::update(int delta_time)
@@ -698,3 +876,111 @@ void StelApp::updateSkyCulture()
 		(*iter)->updateSkyCulture(lb);
 	}
 }
+
+bool StelApp::argsGetOption(QStringList* args, QString shortOpt, QString longOpt)
+{
+	bool result=false;
+
+        // Don't see anything after a -- as an option
+	int lastOptIdx = args->indexOf("--");
+	if (lastOptIdx == -1)
+		lastOptIdx = args->size();
+
+	for(int i=0; i<lastOptIdx; i++)
+	{
+		if ((shortOpt!="" && args->at(i) == shortOpt) || args->at(i) == longOpt)
+		{
+			result = true;
+			i=args->size();
+		}
+	}
+
+	return result;
+}
+
+template<class T>
+T StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString longOpt, T defaultValue)
+{
+	// Don't see anything after a -- as an option
+	int lastOptIdx = args->indexOf("--");
+	if (lastOptIdx == -1)
+		lastOptIdx = args->size();
+
+	for(int i=0; i<lastOptIdx; i++)
+	{
+		bool match(false);
+		QString argStr("");
+
+		// form -n=arg
+		if ((shortOpt!="" && args->at(i).left(shortOpt.length()+1)==shortOpt+"="))
+		{
+			match=true;
+			argStr=args->at(i).right(args->at(i).length() - shortOpt.length() - 1);
+		}
+		// form --number=arg
+		else if (args->at(i).left(longOpt.length()+1)==longOpt+"=")
+		{
+			match=true;
+			argStr=args->at(i).right(args->at(i).length() - longOpt.length() - 1);
+		}
+		// forms -n arg and --number arg
+		else if ((shortOpt!="" && args->at(i)==shortOpt) || args->at(i)==longOpt)
+		{
+			if (i+1>=lastOptIdx)
+			{
+				throw(runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
+			}
+			else
+			{
+				match=true;
+				argStr=args->at(i+1);
+				i++;  // skip option argument in next iteration 
+			}
+		}
+
+		if (match)
+		{
+			T retVal;
+			QTextStream converter(qPrintable(argStr));
+			converter >> retVal;
+			if (converter.status() != QTextStream::Ok)
+				throw(runtime_error(qPrintable("optarg_type ("+longOpt+")")));
+			else
+				return retVal;
+		}
+	}
+
+	return defaultValue;
+}
+
+int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString longOpt, int defaultValue)
+{
+	QString strArg = argsGetOptionWithArg<QString>(args, shortOpt, longOpt, "");
+	if (strArg == "")
+	{
+		return defaultValue;
+	}
+	if (strArg.compare("yes", Qt::CaseInsensitive)==0
+		   || strArg.compare("y", Qt::CaseInsensitive)==0
+		   || strArg.compare("true", Qt::CaseInsensitive)==0
+		   || strArg.compare("t", Qt::CaseInsensitive)==0
+		   || strArg.compare("on", Qt::CaseInsensitive)==0
+		   || strArg=="1")
+	{
+		return 1;
+	}
+	else if (strArg.compare("no", Qt::CaseInsensitive)==0
+			|| strArg.compare("n", Qt::CaseInsensitive)==0
+			|| strArg.compare("false", Qt::CaseInsensitive)==0
+			|| strArg.compare("f", Qt::CaseInsensitive)==0
+			|| strArg.compare("off", Qt::CaseInsensitive)==0
+			|| strArg=="0")
+	{
+		return 0;
+	}
+	else
+	{
+		throw(runtime_error("optarg_type"));
+	}
+}
+
