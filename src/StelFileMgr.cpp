@@ -46,7 +46,7 @@ StelFileMgr::StelFileMgr()
 		cerr << "WARNING: could not locate installation directory" << endl;
 	}
 
-	outputFileSearchPaths();
+	//outputFileSearchPaths();
 }
 
 StelFileMgr::~StelFileMgr()
@@ -144,7 +144,7 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 void StelFileMgr::setSearchPaths(const vector<string>& paths)
 {
 	fileLocations = paths;
-	outputFileSearchPaths();
+	//outputFileSearchPaths();
 }
 
 bool StelFileMgr::exists(const string& path)

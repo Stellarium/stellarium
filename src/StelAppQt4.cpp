@@ -25,11 +25,14 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
+#include <vector>
+#include <set>
 
 #include "StelAppQt4.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
+#include "InitParser.hpp"
 #include "fixx11h.h"
 
 using namespace std;
@@ -38,6 +41,12 @@ using namespace std;
 #include <QtGui/QApplication>
 #include <QtOpenGL>
 #include <QMainWindow>
+#include <QStringList>
+#include <QCoreApplication>
+#include <QRegExp>
+#include <QDate>
+#include <QTime>
+#include <QDateTime>
 
 class StelMainWindow : public QMainWindow
 {
@@ -52,25 +61,27 @@ private:
 class GLWidget : public QGLWidget
 {
 public:
-    GLWidget(QWidget *parent, class StelAppQt4* app);
-    ~GLWidget();
-    void initializeGL();
-    void resizeGL(int w, int h);
-    void paintGL();
-    void timerEvent(QTimerEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseReleaseEvent(QMouseEvent*);
+	GLWidget(QWidget *parent, class StelAppQt4* app);
+	~GLWidget();
+	void initializeGL();
+	void resizeGL(int w, int h);
+	void paintGL();
+	void timerEvent(QTimerEvent*);
+	void mousePressEvent(QMouseEvent*);
+	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent*);
 	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
 	void thereWasAnEvent();
 	
 	QTime qtime;
-    int timerId;
+	int timerId;
+	
 private:
-    class StelAppQt4* stelApp;
-    int previousTime;
-    double lastEventTimeSec;
+	class StelAppQt4* stelApp;
+	int previousTime;
+	double lastEventTimeSec;
+	
 };
 
 StelAppQt4::StelAppQt4(int argc, char **argv) :
@@ -82,7 +93,6 @@ StelAppQt4::~StelAppQt4()
 {
 	deInit();
 }
-
 
 void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
@@ -250,8 +260,6 @@ bool StelAppQt4::getFullScreen() const
 {
 	return mainWindow->isFullScreen();
 }
-
-
 
 //////////////////////////////////////////////////////////////////////////
 // GLWidget methods
