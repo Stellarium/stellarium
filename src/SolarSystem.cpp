@@ -809,9 +809,6 @@ vector<wstring> SolarSystem::getNamesI18(void)
 	return names;
 }
 
-
-// returns a newline delimited hash of localized:standard planet names for tui
-// Planet translated name is PARENT : NAME
 wstring SolarSystem::getPlanetHashString(void)
 {
 	QString str;
