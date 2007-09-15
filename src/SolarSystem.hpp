@@ -70,7 +70,7 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	
 	//! Update time-varying components.
-	//! This include planet motion trails.
+	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
 	
 	//! Translate names.
@@ -87,14 +87,25 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	//! Return a STL vector containing the planets located inside the limitFov circle around position v.
+	//! Search for SolarSystem objects in some area around a point.
+	//! @param v A vector representing a point in the sky.
+	//! @param limitFov The radius of the circle around the point v which
+	//! defines the size of the area to search.
+	//! @param nav The Navigator object.
+	//! @param prj The Projector object.
+	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
+	//! objects found in the specified area. This vector is not sorted by distance 
+	//! from v.
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
-	//! Return the matching planet pointer if exists or NULL.
-	//! @param NameI18n The case sensistive translated planet name
+	
+	//! Search for a SolarSystem object based on the localised name.
+	//! @param NameI18n The case sensistive translated planet name.
+	//! @return A StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 
-	//! Return the matching planet pointer if exists or NULL.
-	//! @param name The case sensistive standard program planet name.
+	//! Search for a SolarSystem object based on the English name.
+	//! @param NameI18n The case sensistive translated planet name.
+	//! @return A StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const string& name) const;
 	
 	//! Find objects by translated name prefix.
@@ -103,80 +114,108 @@ public:
 	//! @param objPrefix the case insensitive first letters of the searched object.
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @return a vector of matching object name by order of relevance, or an 
-	//! empty vector if nothing match.
+	//! empty vector if nothing matchs.
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
-	//! Activate/Deactivate planets display.
+	//! Set flag which determines if planets are drawn or hidden.
 	void setFlagPlanets(bool b);
+	//! Get the current value of the flag which determines if planet are drawn or hidden.
 	bool getFlagPlanets(void) const;
 
-	//! Activate/Deactivate planets trails display.
+	//! Set flag which determines if planet trails are drawn or hidden.
 	void setFlagTrails(bool b);
+	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
 	bool getFlagTrails(void) const;
 	
-	//! Activate/Deactivate planets hints display.
+	//! Set flag which determines if planet hints are drawn or hidden.
 	void setFlagHints(bool b);
+	//! Get the current value of the flag which determines if planet hints are drawn or hidden.
 	bool getFlagHints(void) const;	
 	
-	//! Activate/Deactivate planets hints display.
+	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
+	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits(void) const {return flagOrbits;}
 
-	//! Activate/Deactivate light travel time correction.
+	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b) {flag_light_travel_time = b;}
+	//! Get the current value of the flag which determines if light travel time 
+	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flag_light_travel_time;}	
 	
 	//! Set planet names font size.
 	void setFontSize(float newFontSize);
 	
-	//! Set/Get planets names color.
+	//! Set the color used to draw planet labels.
 	void setNamesColor(const Vec3f& c);
+	//! Get the current color used to draw planet labels.
 	const Vec3f& getNamesColor(void) const;
 	
-	//! Set/Get orbits lines color.
+	//! Set the color used to draw planet orbit lines.
 	void setOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 	
-	//! Set/Get planets trails color.
+	//! Set the color used to draw planet trails.
 	void setTrailsColor(const Vec3f& c);
+	//! Get the current color used to draw planet trails.
 	Vec3f getTrailsColor(void) const;
 	
-	//! Set/Get base planets display scaling factor.
+	//! Set base planets display scaling factor.
 	void setScale(float scale);
+	//! Get base planets display scaling factor.
 	float getScale(void) const;
 	
-	//! Set/Get if Moon display is scaled.
+	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
+	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
 	
-	//! Set/Get Moon display scaling factor.
+	//! Set the display scaling factor for Earth's moon.
 	void setMoonScale(float f);
+	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}		
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
-	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
+	//! Get a hash of locale and ssystem.ini names for use with the TUI.
+	//! @return A newline delimited hash of localized:standard planet names.
+	//! Planet translated name is PARENT : NAME
+	wstring getPlanetHashString();
  
-	//! Compute the position and transform matrix for every elements of the solar system.
-	//! observerPos is needed for light travel time computation.
-	//! @param observerPos position of the observer in heliocentric ecliptic frame.
+	//! Compute the position and transform matrix for every element of the solar system.
+	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
+	//! (Required for light travel time computation.)
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 
-	// Search if any Planet is close to position given in earth equatorial position.
-	StelObject* search(Vec3d, const Navigator * nav, const Projector * prj) const;
+	//! Search for SolarSystem objects which are close to the position given 
+	//! in earth equatorial position.
+	//! @param v A position in earth equatorial position.
+	//! @param nav the Navigator object.
+	//! @param prj the Projector object.
+	//! @return a pointer to a StelObject if found, else NULL
+	StelObject* search(Vec3d v, const Navigator * nav, const Projector * prj) const;
 
-	//! Return the matching planet pointer if exists or NULL.
+	//! Get a pointer to a Planet object.
+	//! @param the English name of the desired planet.
+	//! @return The matching planet pointer if exists or NULL.
 	Planet* searchByEnglishName(string planetEnglishName) const;
 	
+	//! Get the Planet object pointer for the Sun.
 	Planet* getSun(void) const {return sun;}
+	
+	//! Get the Planet object pointer for the Earth.
 	Planet* getEarth(void) const {return earth;}
+	
+	//! Get the Planet object pointer for Earth's moon.
 	Planet* getMoon(void) const {return moon;}
 	
 	//! Start/stop accumulating new trail data (clear old data).
 	void startTrails(bool b);
 	
+	//! Update the planet motion trails.
 	void updateTrails(const Navigator* nav);
 	
 	//! Get list of all the translated planets name.
@@ -186,14 +225,14 @@ public:
 	const vector<Planet*>& getAllPlanets() const {return system_planets;}
 	
 private:
-	// Compute the transformation matrix for every elements of the solar system.
-	// observerPos is needed for light travel time computation
+	//! Compute the transformation matrix for every elements of the solar system.
+	//! observerPos is needed for light travel time computation.
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);
 
-	// Load the bodies data from a file
+	//! Load planet data from a file.
 	void loadPlanets(LoadingBar& lb);
 
 	Planet* sun;
