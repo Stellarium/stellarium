@@ -27,46 +27,71 @@ using namespace std;
 
 class InitParser;
 
+//! @class StelSkyCultureMgr
 //! Manage sky cultures for stellarium.
+//! Different human cultures have used different names for stars, and visualised
+//! different constellations in the sky (and in different parts of the sky). The
+//! StelSkyCultureMgr class handles the different sky cultures.
 //! @author Fabien Chereau
 class StelSkyCultureMgr{
 public:
-    StelSkyCultureMgr();
-
-    ~StelSkyCultureMgr();
+	StelSkyCultureMgr();
+	~StelSkyCultureMgr();
 	
-	//! Init itself from a config file.
+	//! Initialize the StelSkyCultureMgr object.
+	//! Gets the default sky culture name from the ini parser object and 
+	//! sets that sky culture by calling setSkyCultureDir().
+	//! @param conf The ini parser object which contains the default sky 
+	//! culture setting.
 	void init(const InitParser& conf);
 	
-	//! Set the sky culture from I18 name
-	//! Returns false and doesn't change if skyculture is invalid
+	//! Set the sky culture from i18n name.
+	//! @return true on success; false and doesn't change if skyculture is invalid.
 	bool setSkyCulture(const wstring& cultureName) {return setSkyCultureDir(skyCultureToDirectory(cultureName));}
 	
-	//! Get the current sky culture I18 name
+	//! Get the current sky culture i18n name.
 	wstring getSkyCulture() const;
 	
-	//! Set the current sky culture from the passed directory
-	bool setSkyCultureDir(const string& culturedir);
+	//! Set the current sky culture from the passed directory.
+	//! In in the installatiom data directory and user data directory, 
+	//! we have the "skycultures" sub-directory. Inside this there is
+	//! one sub-directory per sky culture. This sub-directory name
+	//! is that we refer to here.
+	//! @param cultureDir The sub-directory name inside the "skycultures" 
+	//! directory.
+	//! @return true on success; else false.
+	bool setSkyCultureDir(const string& cultureDir);
 	
-	//! Get the current sky culture directory
+	//! Get the current sky culture directory name.  
 	string getSkyCultureDir() {return skyCultureDir;}
 	
-	//! returns newline delimited hash of translated culture names and directories
+	//! Get a hash of translated culture names and directories.
+	//! @return A newline delimited list of translated culture names and directories
+	//! e.g. "name1\ndir1\name2\ndir2".
 	wstring getSkyCultureHash() const;	
 	
-	//! returns newline delimited list of human readable culture names in english
+	//! Get a list of sky culture names in English.
+	//! @return A new-line delimited list of English sky culture names.
 	string getSkyCultureListEnglish(void);
 	
-	//! returns newline delimited list of human readable culture names translated to current language
+	//! Get a list of sky culture names in the current language.
+	//! @return A new-line delimited list of translated sky culture names.
 	wstring getSkyCultureListI18(void);
 	
-	//! Get the culture name in english associated to the passed directory
+	//! Get the culture name in English associated with a specified directory.
+	//! @param directory The directory name.
+	//! @return The English name for the culture associated with directory.
 	string directoryToSkyCultureEnglish(const string& directory);
 	
-	//! Get the culture name translated to current language associated to the passed directory
+	//! Get the culture name translated to current language associated with 
+	//! a specified directory.
+	//! @param directory The directory name.
+	//! @return The translated name for the culture associated with directory.
 	wstring directoryToSkyCultureI18(const string& directory) const;
 	
-	//! Get the directory associated to the passed translated culture name
+	//! Get the directory associated with a specified translated culture name.
+	//! @param cultureName The culture name in the current language.
+	//! @return The directory assocuated with cultureName.
 	string skyCultureToDirectory(const wstring& cultureName);
 	
 private:
