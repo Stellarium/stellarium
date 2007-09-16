@@ -5,6 +5,8 @@
 #include "StelCore.hpp"
 #include "Projector.hpp"
 
+//! @class MovementMgr
+//! Manages the movement and zoomer operations.
 class MovementMgr : public StelModule
 {
 public:
@@ -13,60 +15,92 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	//! Initializes the object based on the settings in the ini parser object.
+	//! Includes:
+	//! - Enabling/disabling the movement keys
+	//! - Enabling/disabling the zoom keys
+	//! - Enabling/disabling the mouse zoom
+	//! - Enabling/disabling the mouse movement
+	//! - Sets the zoom and movement speeds
+	//! - Sets the auto-zoom duration and mode.
+	//!
+	//! @param conf the ini parser object.
+	//! @param lb the LoadingBar object.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
+	
+	//! Update time-dependent things (does nothing).
 	virtual void update(double deltaTime) {;}
+	//! Get the StelModule ID, returns, "movements".
 	virtual string getModuleID() const {return "movements";}
+	//! Implement required draw function.  Does nothing.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
+	//! Handle keyboard events.
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
+	//! Handle mouse movement events.
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod);
+	//! Handle mouse click events.
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
+	//! Called then the selected object changes.
 	virtual void selectedObjectChangeCallBack(bool added=false);
 	
-	//! Increment/decrement smoothly the vision field and position
+	//! Increment/decrement smoothly the vision field and position.
 	void updateMotion(double deltaTime);
 	
+	//! Get the zoom speed.
+	// TODO: what are the units?
 	double getZoomSpeed() {return zoom_speed;}
 	
+	//! Get the duration of the auto-move feature.
+	//! @return the number of seconds it takes for an auto-zoom 
+	//! operation to complete.
 	float getAutoMoveDuration() {return auto_move_duration;}
-	//! Set whether auto zoom can go further than normal
+	//! Set whether auto zoom can go further than normal.
 	void setFlagManualAutoZoom(bool b) {FlagManualZoom = b;}
-	//! Get whether auto zoom can go further than normal
+	//! Get whether auto zoom can go further than normal.
 	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}
 	
-	//! Set object tracking
+	//! Set object tracking on/off.
 	void setFlagTracking(bool b);
-	//! Get object tracking
+	//! Get current object tracking status.
 	bool getFlagTracking(void) const {return flagTracking;}
 
-	//! Move view in alt/az (or equatorial if in that mode) coordinates
+	//! Move view in alt/az (or equatorial if in that mode) coordinates.
 	void panView(double deltaAz, double deltaAlt);
 
-	//! Set automove duration in seconds
+	//! Set automove duration in seconds.
 	void setAutomoveDuration(float f) {auto_move_duration = f;}
-	//! Get automove duration in seconds
+	//! Get automove duration in seconds.
 	float getAutomoveDuration(void) const {return auto_move_duration;}
 
-	// Move to the given position in equatorial or local coordinate depending on _local_pos value
+	//! Move the view to a specified position.
+	//! Uses equatorial or local coordinate depending on _local_pos value.
+	//! @param _aim The position to move to expressed as a vector.
+	//! @param move_duration The time it takes for the move to complete.
+	//! @param _local_pos If false, use equatorial position, else use local.
+	//! @param zooming ???
 	void moveTo(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false, int zooming = 0);
 
-	//! Zoom to the given FOV (in degree)
+	//! Change the zoom level.
+	//! @param aim_fov The desired field of view in degrees.
+	//! @param move_duration The time that the operation should take to complete.
 	void zoomTo(double aim_fov, float move_duration = 1.);
 
 	//! Go and zoom temporarily to the selected object.
+	// TODO: in what way is the move temporary?
 	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
 
-	//! Unzoom to the previous position
+	//! Unzoom to the previous position.
 	void autoZoomOut(float move_duration = 1.f, bool full = 0);
-	
-	//! Set whether sky position is to be locked
+
+	//! Set whether sky position is to be locked.
 	void setFlagLockEquPos(bool b) {flag_lock_equ_pos=b;}
-	//! Set whether sky position is locked
+	//! Get whether sky position is locked.
 	bool getFlagLockEquPos(void) const {return flag_lock_equ_pos;}
 
-    //! If is currently zooming, return the target FOV, otherwise return current FOV
-    double getAimFov(void) const {return (flag_auto_zoom ? zoom_move.aim : core->getProjection()->getFov());}
+	//! If currently zooming, return the target FOV, otherwise return current FOV.
+	double getAimFov(void) const {return (flag_auto_zoom ? zoom_move.aim : core->getProjection()->getFov());}
 	
-	//! Those are hopefully temporary
+	// These are hopefully temporary.
 	bool getHasDragged() const {return has_dragged;}
 	void stopDragging() {is_dragging=false; has_dragged=false;}
 private:
@@ -90,7 +124,7 @@ private:
 
 	bool flag_lock_equ_pos;			// Define if the equatorial position is locked
 
-	bool flagTracking;				// Define if the selected object is followed
+	bool flagTracking;			// Define if the selected object is followed
 	
 	// Flags for mouse movements
 	bool is_mouse_moving_horiz;
@@ -107,21 +141,21 @@ private:
 	typedef struct
 	{
 		Vec3d start;
-	    Vec3d aim;
-	    float speed;
-	    float coef;
-		bool local_pos;				// Define if the position are in equatorial or altazimutal
-	}auto_move;
+		Vec3d aim;
+		float speed;
+		float coef;
+		bool local_pos;			// Define if the position are in equatorial or altazimutal
+	} auto_move;
 	
-	auto_move move;					// Current auto movement
-    int flag_auto_move;				// Define if automove is on or off
-	int zooming_mode;				// 0 : undefined, 1 zooming, -1 unzooming
+	auto_move move;				// Current auto movement
+	int flag_auto_move;			// Define if automove is on or off
+	int zooming_mode;			// 0 : undefined, 1 zooming, -1 unzooming
 
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed, zoom_speed;		// Speed of movement and zooming
 
-	int FlagManualZoom;					// Define whether auto zoom can go further
-	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
+	int FlagManualZoom;			// Define whether auto zoom can go further
+	float auto_move_duration;		// Duration of movement for the auto move to a selected objectin seconds
 	
 	// Mouse control options
 	bool is_dragging, has_dragged;
@@ -131,10 +165,10 @@ private:
 	typedef struct
 	{
 		double start;
-	    double aim;
-	    float speed;
-	    float coef;
-	}auto_zoom;
+		double aim;
+		float speed;
+		float coef;
+	} auto_zoom;
 	
 	// Automove
 	auto_zoom zoom_move;		// Current auto movement

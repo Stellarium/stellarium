@@ -26,7 +26,8 @@ using namespace std;
 
 class SFont;
 
-//! Manage font for Stellarium. Take into account special font for special language.
+//! @class StelFontMgr
+//! Manage fonts for Stellarium. Take into account special font for special language.
 //! It also load fonts and store them in a cache to prevent duplication.
 //! @author Fabien Chereau <stellarium@free.fr>
 class StelFontMgr
@@ -47,7 +48,8 @@ public:
 	SFont& getFixedFont(const string &langageName, double size=12.);
 	
 private:
-	// Class which describes which font to use for a given langage ISO code.
+	//! @class FontForLanguage
+	//! Class which describes which font to use for a given language ISO code.
 	class FontForLanguage
 	{
 		public:
@@ -59,7 +61,8 @@ private:
 			bool operator == (const FontForLanguage& f) const;
 	};	
 	
-	// Class which describes a loaded font
+	//! @class LoadedFont
+	//! Class which describes a loaded font.
 	class LoadedFont
 	{
 		public:
@@ -68,7 +71,8 @@ private:
 			int size;	// floating point scale * 10
 	};
 	
-	// Comparator for sorting LoadedFonts
+	//! @class ltLoadedFonts
+	//! Comparator for sorting LoadedFonts.
 	struct ltLoadedFont
 	{
 		bool operator()(const LoadedFont l1, const LoadedFont l2) const
@@ -77,16 +81,16 @@ private:
 		}
 	};	
 	
-	// Return the structure describing the fonts and scales to use for a given language
+	//! Get the structure describing the fonts and scales to use for a given language.
 	FontForLanguage& getFontForLanguage(const string& langageName);	
 	
-	// Load the associations between langages and font file/scaling
+	//! Load the associations between languages and font file/scaling.
 	void loadFontForLanguage(const string& fontMapFile);
 	
-	// Contains a mapping of font/langage
+	//! Contains a mapping of font/langage
 	std::map<string, FontForLanguage> fontMapping;
 	
-	// Keep references on all loaded fonts
+	//! Keeps references on all loaded fonts
 	std::map<LoadedFont, SFont*, ltLoadedFont> loadedFonts;
 };
 
