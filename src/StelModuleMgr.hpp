@@ -25,12 +25,14 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include "StelModule.hpp"
 
-//! Manage a collection of StelModule.
+//! @class StelModuleMgr
+//! Manage a collection of StelModules including both core and plugin modules.
+//! 
 class StelModuleMgr
 {
 public:
 	StelModuleMgr();
-    ~StelModuleMgr();
+	~StelModuleMgr();
 	
 	//! Register a new StelModule to the list
 	void registerModule(StelModule* m);
@@ -87,10 +89,10 @@ public:
 		std::string description;
 		bool loadAtStartup;
 	};
-   
-   //! Return the list of all the external module found in the modules directories
-   static std::vector<ExternalStelModuleDescriptor> getExternalModuleList();
-   
+ 
+	//! Return the list of all the external module found in the modules directories
+	static std::vector<ExternalStelModuleDescriptor> getExternalModuleList();
+ 
 private:
 	//! The main module list associating name:pointer
 	std::map<std::string, StelModule*> modules;
