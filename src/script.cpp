@@ -58,9 +58,6 @@ int Script::next_command(string &command)
 	{
 		input_file->getline (buffer,999);
 
-		if(input_file->eof())
-			return 0;
-
 		if( buffer[0] != '#' && buffer[0] != 0)
 		{
 
