@@ -60,11 +60,13 @@
 
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
 #ifndef MAP_NORESERVE
-# ifdef MAP_AUTORESRV
-#  define MAP_NORESERVE MAP_AUTORESRV
-# else
-#  define MAP_NORESERVE 0
-# endif
+#  ifdef MAP_AUTORESRV
+#    if (defined(__sgi) && defined(_COMPILER_VERSION))
+#      define MAP_NORESERVE MAP_AUTORESRV
+#    endif
+#  else
+#    define MAP_NORESERVE 0
+#  endif
 #endif
 
 #include <errno.h>
@@ -275,6 +277,9 @@ static inline float IndexToBV(unsigned char b_v) {
 // # pragma pack 1
 // #endif
 
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(1)
+#endif
 struct Star3 {  // 6 byte
   int x0:18;
   int x1:18;
@@ -292,7 +297,15 @@ struct Star3 {  // 6 byte
   wstring getNameI18n(void) const {return L"";}
   void repack(bool from_be);
   void print(void);
-} __attribute__ ((__packed__)) ;
+}
+#if defined(__GNUC__)
+   __attribute__ ((__packed__))
+#endif
+;
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(0)
+#endif
+
 
 void Star3::repack(bool from_be) {
   const int _x0  = UnpackBits(from_be,(const char*)this, 0,18);
@@ -318,6 +331,9 @@ void Star3::print(void) {
 }
 
 
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(1)
+#endif
 struct Star2 {  // 10 byte
   int x0:20;
   int x1:20;
@@ -339,7 +355,15 @@ struct Star2 {  // 10 byte
   wstring getNameI18n(void) const {return L"";}
   void repack(bool from_be);
   void print(void);
-} __attribute__ ((__packed__));
+}
+#if defined(__GNUC__)
+   __attribute__ ((__packed__))
+#endif
+;
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(0)
+#endif
+
 
 void Star2::repack(bool from_be) {
   const int _x0  = UnpackBits(from_be,(const char*)this, 0,20);
@@ -374,6 +398,9 @@ void Star2::print(void) {
 
 
 
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(1)
+#endif
 struct Star1 { // 28 byte
   int hip:24;                  // 17 bits needed
   unsigned char component_ids; //  5 bits needed
@@ -408,7 +435,15 @@ struct Star1 { // 28 byte
   }
   void repack(bool from_be);
   void print(void);
-} __attribute__ ((__packed__));
+}
+#if defined(__GNUC__)
+   __attribute__ ((__packed__))
+#endif
+;
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#pragma pack(0)
+#endif
+
 
 void Star1::repack(bool from_be) {
   const int _hip  = UnpackBits(from_be,(const char*)this, 0,24);
