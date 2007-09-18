@@ -77,6 +77,7 @@ private:
 	Uint32	TickCount;	// Used For The Tick Counter
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
+	bool fullScreenMode;    // Are we currently in full screen mode?
 };
 
 #endif // USE_SDL

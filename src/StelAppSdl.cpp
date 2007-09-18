@@ -113,6 +113,7 @@ void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
     if (fullScreen) Vflags|=SDL_FULLSCREEN;
+    fullScreenMode = fullScreen;
 
 	// Create the SDL screen surface
     Screen = SDL_SetVideoMode(w, h, bbpMode, Vflags);
@@ -539,13 +540,13 @@ void StelAppSdl::saveScreenShot(const string& filePrefix, const string& saveDir)
 *************************************************************************/
 void StelAppSdl::toggleFullScreen()
 {
-	SDL_WM_ToggleFullScreen(Screen);
+	if (SDL_WM_ToggleFullScreen(Screen))
+		fullScreenMode = ! fullScreenMode;
 }
 
 bool StelAppSdl::getFullScreen() const
 {
-	cerr << "Warning StelAppSdl::getFullScreen() can't be implemented." << endl;
-	return true;
+	return fullScreenMode;
 }
 
 #endif // USE_SDL
