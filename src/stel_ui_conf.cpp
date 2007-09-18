@@ -965,9 +965,9 @@ void StelUI::saveRenderOptions(void)
 void StelUI::setVideoOption(void)
 {
 	int w, h;
-	wstring mode = screen_size_sl->getCurrent();
-	if (mode == wstring())
+	if (screen_size_sl==NULL)
 	{
+		// In QT build the screen_size_sl does not exist.
 		w = StelApp::getInstance().getScreenW();
 		h = StelApp::getInstance().getScreenH();
 	}
