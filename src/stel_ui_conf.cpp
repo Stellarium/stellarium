@@ -964,10 +964,23 @@ void StelUI::saveRenderOptions(void)
 
 void StelUI::setVideoOption(void)
 {
-	string s = StelUtils::wstringToString(screen_size_sl->getCurrent());
-	int i = s.find("x");
-	int w = atoi(s.substr(0,i).c_str());
-	int h = atoi(s.substr(i+1,s.size()).c_str());
+	int w, h;
+	wstring mode = screen_size_sl->getCurrent();
+	if (mode == wstring())
+	{
+		w = StelApp::getInstance().getScreenW();
+		h = StelApp::getInstance().getScreenH();
+	}
+	else
+	{
+		// SDL build - take res from SDL mode-string, else
+		// we can get a full screen with a non-fullsized
+		// view port inside it (if we just use the 
+		string s = StelUtils::wstringToString(screen_size_sl->getCurrent());
+		int i = s.find("x");
+		w = atoi(s.substr(0,i).c_str());
+		h = atoi(s.substr(i+1,s.size()).c_str());
+	}
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
 	cout << "Saving video settings: projection=" << core->getProjection()->getCurrentProjection()
