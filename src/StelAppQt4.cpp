@@ -84,14 +84,12 @@ private:
 	
 };
 
-StelAppQt4::StelAppQt4(int argc, char **argv) :
-	StelApp(argc, argv)
+StelAppQt4::StelAppQt4(int argc, char **argv) : StelApp(argc, argv)
 {
 }
 
 StelAppQt4::~StelAppQt4()
 {
-	deInit();
 }
 
 void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
@@ -135,10 +133,6 @@ void StelAppQt4::terminateApplication(void)
 void StelAppQt4::showCursor(bool b)
 {;}
 
-// DeInit SDL related stuff
-void StelAppQt4::deInit()
-{;}
-
 //! Swap GL buffer, should be called only for special condition
 void StelAppQt4::swapGLBuffers()
 {
@@ -153,35 +147,14 @@ double StelAppQt4::getTotalRunTime() const
 
 void StelAppQt4::startMainLoop()
 {
-	int argc = 0;
-	char **argv = NULL;
-	QApplication app(argc, argv);
-	if (!QGLFormat::hasOpenGL())
-	{
-		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
-	}
-	
-	StelMainWindow mainWin(this);
-	mainWindow = &mainWin;
-	mainWindow->setMinimumSize(400,400);
-	
-	GLWidget openGLWin(&mainWin, this);
-	winOpenGL = &openGLWin;
-	winOpenGL->setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
-	mainWin.setCentralWidget(&openGLWin);
-
-	mainWin.show();
-	openGLWin.show();
-	
 	StelApp::init();
 	
 	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
-	openGLWin.resizeGL(getScreenW(), getScreenH());
+	winOpenGL->resizeGL(getScreenW(), getScreenH());
+	winOpenGL->timerId = winOpenGL->startTimer(10);
+	winOpenGL->qtime.start();
 	
-	openGLWin.timerId = openGLWin.startTimer(10);
-	openGLWin.qtime.start();
 	
-	app.exec();
 }
 
 void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir) const
@@ -555,5 +528,39 @@ void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
 	stelApp->winOpenGL->thereWasAnEvent();
 }
 
+void StelAppQt4::setQtWins( StelMainWindow* mW, GLWidget* glW)
+{
+	mainWindow = mW;
+	winOpenGL = glW;
+}
 
+void StelAppQt4::runStellarium(int argc, char **argv)
+{
+	QApplication app(argc, argv);
+	if (!QGLFormat::hasOpenGL())
+	{
+		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
+	}
+	
+	StelAppQt4* stelApp = new StelAppQt4(argc, argv);
+	
+	StelMainWindow mainWin(stelApp);
+	mainWin.setMinimumSize(400,400);
+	
+	GLWidget openGLWin(&mainWin, stelApp);
+	openGLWin.setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
+	mainWin.setCentralWidget(&openGLWin);
+
+	mainWin.show();
+	openGLWin.show();
+	
+	stelApp->setQtWins(&mainWin, &openGLWin);
+	stelApp->startMainLoop();
+	app.exec();
+	
+	// At this point it is important to still have a valid GL context because the textures are deallocated
+	// The GL Context is still valid because openGLWin is still in the current scope
+	delete stelApp;
+}
+		
 #endif

@@ -621,7 +621,7 @@ bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
 	// generate texture
 	glGenTextures (1, &(tex->id));
 	glBindTexture (GL_TEXTURE_2D, tex->id);
-//	cerr  << "Create texture " << tex->id << endl;
+	//cerr  << "Create texture " << tex->id << endl;
 
 	// setup some parameters for texture filters and mipmapping
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, tex->minFilter);

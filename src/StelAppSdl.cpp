@@ -273,12 +273,6 @@ void StelAppSdl::showCursor(bool b)
 	SDL_ShowCursor(b);
 }
 
-// DeInit SDL related stuff
-void StelAppSdl::deInit()
-{
-	SDL_FreeCursor(Cursor);
-}
-
 //! Swap GL buffer, should be called only for special condition
 void StelAppSdl::swapGLBuffers()
 {

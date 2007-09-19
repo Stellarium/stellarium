@@ -12,7 +12,7 @@ public:
 	StelAppSdl(int argc, char** argv) :
 		StelApp(argc, argv) {;}
 
-	virtual ~StelAppSdl() {deInit();}
+	virtual ~StelAppSdl() {SDL_FreeCursor(Cursor);}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods from StelApp
@@ -29,9 +29,6 @@ public:
 	
 	//! Set mouse cursor display
 	virtual void showCursor(bool b);
-	
-	//! De-init SDL / QT related stuff
-	virtual void deInit();
 	
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
