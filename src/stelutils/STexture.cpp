@@ -41,7 +41,7 @@ STexture::~STexture()
 	texels = NULL;
 	if (glIsTexture(id)==GL_FALSE)
 	{
-		std::cerr << "Warning: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError() << std::endl;
+		// std::cerr << "Warning: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError() << std::endl;
 	}
 	else
 	{
