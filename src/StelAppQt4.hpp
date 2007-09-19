@@ -34,6 +34,10 @@ class StelAppQt4 : public StelApp
 	friend class GLWidget;
 	friend class StelMainWindow;
 public:
+	
+	//! Constructor
+	//! @param argc The number of command line parameters
+	//! @param argv an array of char* command line arguments
 	StelAppQt4(int argc, char **argv);
 	virtual ~StelAppQt4();
 
@@ -78,10 +82,16 @@ public:
 	class StelMainWindow* getMainWindow() {return mainWindow;}
 
 	//! Run the whole stellarium program and return at the end, i.e after deinitialization
+	//! The caller doesn't have to do anything after this call.
+	//! @param argc The number of command line parameters
+	//! @param argv an array of char* command line arguments
 	static void runStellarium(int argc, char **argv);
 	
-	//! Used by the init sequence
-	void setQtWins(StelMainWindow*, GLWidget*);
+	//! Used by the init sequence, set the main windows and GL widget
+	//! @param mainW the Qt main window in which Stellarium is going to run
+	//! @param glW the GL widget in which Stellarium GL drawing will occur
+	void setQtWins(StelMainWindow* mainW, GLWidget* glW);
+	
 protected:
 
 	//! Initialize openGL screen
