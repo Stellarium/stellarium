@@ -1129,7 +1129,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                                   .findFile("stars/default/"+fname);
   } catch (exception &e) {
     cerr << "ZoneArray::create(" << extended_file_name << "): "
-            "error while loading \"" << fname
+            "warning while loading \"" << fname
          << "\": " << e.what() << endl;
     return 0;
   }
@@ -1458,13 +1458,13 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
               );
             }
           }
-          cout << endl
-               << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-               << "): repack test start" << endl;
-          stars[0].print();
-          stars[1].print();
-          cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-               << "): repack test end" << endl;
+//           cout << endl
+//                << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+//                << "): repack test start" << endl;
+//           stars[0].print();
+//           stars[1].print();
+//           cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+//                << "): repack test end" << endl;
         }
       }
     }
