@@ -23,7 +23,7 @@
 /*************************************************************************
  Constructor for the STexture class
 *************************************************************************/
-STexture::STexture() : texels(NULL), type(GL_UNSIGNED_BYTE), id(-1)
+STexture::STexture() : texels(NULL), type(GL_UNSIGNED_BYTE), id(0)
 {
 	texCoordinates[0].set(1., 0.);
 	texCoordinates[1].set(0., 0.);
@@ -39,8 +39,15 @@ STexture::~STexture()
 	if (texels)
 		delete texels;
 	texels = NULL;
-	glDeleteTextures(1, &id);
-//	std::cerr << "delete texture " << id << std::endl;
+	if (glIsTexture(id)==GL_FALSE)
+	{
+		std::cerr << "Warning: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError() << std::endl;
+	}
+	else
+	{
+		glDeleteTextures(1, &id);
+		// std::cerr << "Delete texture with ID=" << id << std::endl;
+	}
 }
 
 

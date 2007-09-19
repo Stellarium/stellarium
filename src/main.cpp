@@ -52,21 +52,19 @@ int main(int argc, char **argv)
 	curl_global_init(CURL_GLOBAL_ALL);
 #endif
 
-	StelApp* app = NULL;
 #ifdef USE_SDL
-	app = new StelAppSdl(argc, argv);
-#endif
-#ifdef USE_QT4
-	app = new StelAppQt4(argc, argv);
-#endif
+	StelApp* app = new StelAppSdl(argc, argv);
 	app->init();
 	app->startMainLoop();
+	delete app;
+#endif
+#ifdef USE_QT4
+	StelAppQt4::runStellarium(argc, argv);
+#endif
 
 #ifdef HAVE_LIBCURL
 	curl_global_cleanup();
 #endif
-
-	delete app;
 	return 0;
 }
 

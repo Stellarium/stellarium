@@ -211,8 +211,8 @@ void StelUI::init_tui(void)
 	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
 	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, wstring(L"4.4 "), 0.1);
 	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
-	tui_star_limitingmag = new s_tui::Decimal_item(0., 7., 6.5, wstring(L"4.5 "), 0.1);
-	tui_star_limitingmag->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
+//	tui_star_limitingmag = new s_tui::Decimal_item(0., 7., 6.5, wstring(L"4.5 "), 0.1);
+//	tui_star_limitingmag->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_stars));
 
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_magscale);
@@ -417,7 +417,7 @@ void StelUI::localizeTui(void)
 	tui_star_magscale->setLabel(wstring(L"4.2 ") + _("Star Value Multiplier: "));
 	tui_star_labelmaxmag->setLabel(wstring(L"4.3 ") + _("Maximum Magnitude to Label: "));
 	tui_stars_twinkle->setLabel(wstring(L"4.4 ") + _("Twinkling: "));
-	tui_star_limitingmag->setLabel(wstring(L"4.5 ") + _("Limiting Magnitude: "));
+	//tui_star_limitingmag->setLabel(wstring(L"4.5 ") + _("Limiting Magnitude: "));
 
 	// 5. Colors
 	tui_colors_const_line_color->setLabel(wstring(L"5.1 ") + _("Constellation Lines") + L": ");

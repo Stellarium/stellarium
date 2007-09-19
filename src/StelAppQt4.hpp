@@ -25,6 +25,7 @@
 #ifdef USE_QT4
 
 class GLWidget;
+class StelMainWindow;
 
 //! Implementation of StelApp based on a Qt4 main window.
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
@@ -52,9 +53,6 @@ public:
 	//! Set mouse cursor display
 	virtual void showCursor(bool b);
 	
-	//! De-init SDL / QT related stuff
-	virtual void deInit();
-	
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
 
@@ -79,6 +77,11 @@ public:
 	//! Return the instance of the main window of the program
 	class StelMainWindow* getMainWindow() {return mainWindow;}
 
+	//! Run the whole stellarium program and return at the end, i.e after deinitialization
+	static void runStellarium(int argc, char **argv);
+	
+	//! Used by the init sequence
+	void setQtWins(StelMainWindow*, GLWidget*);
 protected:
 
 	//! Initialize openGL screen

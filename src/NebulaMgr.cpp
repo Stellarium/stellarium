@@ -59,6 +59,8 @@ NebulaMgr::~NebulaMgr()
 	{
 		delete (*iter);
 	}
+	
+	Nebula::tex_circle = STextureSP();
 }
 
 /*************************************************************************

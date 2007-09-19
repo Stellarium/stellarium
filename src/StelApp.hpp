@@ -205,9 +205,6 @@ public:
 	//! Set mouse cursor display.
 	virtual void showCursor(bool b) = 0;
 	
-	//! De-init SDL / QT related stuff.
-	virtual void deInit() = 0;
-	
 	//! Swap GL buffer, should be called only for special condition.
 	virtual void swapGLBuffers() = 0;
 	
