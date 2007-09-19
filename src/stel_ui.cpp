@@ -114,6 +114,7 @@ StelUI::~StelUI()
 	delete desktop; 	desktop = NULL;
 	if (tui_root) delete tui_root; tui_root=NULL;
 	Component::deleteScissor();
+	Component::setDefaultPainter(Painter());
 }
 
 /*************************************************************************
