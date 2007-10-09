@@ -7,12 +7,14 @@ Recoded time methods based on Qt time function (this fixed bug #1740595, LANG=en
 Use the new Grid class by Guillaume Chereau for NebulaMgr.
 Made StelUI and StelCommandMgr real StelModules.
 Increased grid labeling brightness.
-Fixed splash screen flikering and logo image truncation in full screen mode.
+Fixed splash screen flickering and logo image truncation in full screen mode.
 Fixed wrong nebula size (bug #1673142)
 Fixed constellation art intensity bug (bug #1733482)
 Got rid of all wstreamstring and therefore don't require STLPort anymore for MinGW compilation.
 Added more command line options.
 Re-coded StelAppQt4 init and deinit to prevent GLContext errors.
+New config parameters for controlling star brigthness, size, color
+Circles around telescope markers indicating ocular FOV
 
 0.9.0 [2007-06-6]
 Larger star catalog including stars from Hipparcos, Tycho2 and NOMAD
