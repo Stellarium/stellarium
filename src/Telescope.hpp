@@ -26,6 +26,9 @@
 #include <winsock2.h>
 #endif
 
+#include <list>
+#include <string>
+
 long long int GetNow(void);
 
 #ifdef __MINGW32__
@@ -53,14 +56,17 @@ public:
                                 int &fdmax) = 0;
   virtual void handleSelectFds(const fd_set &read_fds,
                                const fd_set &write_fds) {}
+  void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
+  const std::list<double> &getOculars(void) const {return oculars;}
 protected:
   Telescope(const string &name);
   wstring nameI18n;
   const string name;
 private:
   bool isInitialized(void) const {return true;}
-private:
   float getSelectPriority(const Navigator *nav) const {return -10.f;}
+private:
+  std::list<double> oculars; // fov of the oculars
 };
 
 
