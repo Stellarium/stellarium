@@ -40,7 +40,7 @@
 #endif
 
 void TelescopeMgr::TelescopeMap::clear(void) {
-  for (const_iterator it(begin());it!=end();it++) delete it->second;
+  for (const_iterator it(begin());it!=end();++it) delete it->second;
   std::map<int,Telescope*>::clear();
 }
 
@@ -85,13 +85,21 @@ double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
   glBlendFunc(GL_ONE,GL_ONE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
   for (TelescopeMap::const_iterator it(telescope_map.begin());
-       it!=telescope_map.end();it++) {
+       it!=telescope_map.end();++it) {
     if (it->second->isConnected() && it->second->hasKnownPosition()) {
       Vec3d XY;
       if (prj->projectCheck(it->second->getObsJ2000Pos(0),XY)) {
         if (telescope_fader.getInterstate() >= 0) {
           glColor4f(circle_color[0],circle_color[1],circle_color[2],
                     telescope_fader.getInterstate());
+          glDisable(GL_TEXTURE_2D);
+          for (std::list<double>::const_iterator
+               it2(it->second->getOculars().begin());
+               it2!=it->second->getOculars().end();++it2) {
+            prj->drawCircle(XY[0],XY[1],
+                            0.5*prj->getPixelPerRadAtCenter()*(M_PI/180)*(*it2));
+          }
+          glEnable(GL_TEXTURE_2D);
           double radius = 15;
 //          double radius = 0.5*prj->getRadPerPixel()*(M_PI/180)*0.5;
 //          if (radius < 15) radius = 15;
@@ -148,7 +156,7 @@ vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov,
   v.normalize();
   double cos_lim_fov = cos(limitFov * M_PI/180.);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
-       it!=telescope_map.end();it++) {
+       it!=telescope_map.end();++it) {
     if (it->second->getObsJ2000Pos(0).dot(v) >= cos_lim_fov) {
       result.push_back(it->second);
     }
@@ -158,7 +166,7 @@ vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov,
 
 StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
-       it!=telescope_map.end();it++) {
+       it!=telescope_map.end();++it) {
     if (it->second->getNameI18n() == nameI18n) return it->second;
   }
   return 0;
@@ -167,7 +175,7 @@ StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
 
 StelObjectP TelescopeMgr::searchByName(const string &name) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
-       it!=telescope_map.end();it++) {
+       it!=telescope_map.end();++it) {
     if (it->second->getEnglishName() == name) return it->second;
   }
   return 0;
@@ -181,7 +189,7 @@ vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
   wstring objw = objPrefix;
   std::transform(objw.begin(),objw.end(),objw.begin(),::toupper);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
-       it!=telescope_map.end();it++) {
+       it!=telescope_map.end();++it) {
     wstring constw = it->second->getNameI18n().substr(0, objw.size());
     std::transform(constw.begin(),constw.end(),constw.begin(),::toupper);
     if (constw==objw) {
@@ -211,18 +219,28 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
 #endif
   telescope_map.clear();
   for (int i=0;i<9;i++) {
-    const char name[2] = {'0'+i,'\0'};
-    const string url = conf.get_str("telescopes",name,"");
+    char name[2] = {'0'+i,'\0'};
+    const string telescope_name(name);
+    const string url = conf.get_str("telescopes",telescope_name,"");
     if (!url.empty()) {
       Telescope *t = Telescope::create(url);
       if (t) {
+        for (int j=0;j<9;j++) {
+          name[0] = '0'+j;
+          const double fov = conf.get_double(
+                               "telescopes",
+                               telescope_name+"_ocular_"+name,-1.0);
+cout << "TelescopeMgr::init: " << telescope_name << "; "
+     << (telescope_name+"_ocular_"+name) << ": " << fov << endl;
+          t->addOcular(fov);
+        }
         telescope_map[i] = t;
       }
     }
   }
   
-	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
-	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
+  setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
+  setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
   
   StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
   
@@ -267,7 +285,7 @@ void TelescopeMgr::communicate(void) {
     FD_ZERO(&write_fds);
     int fd_max = -1;
     for (TelescopeMap::const_iterator it(telescope_map.begin());
-         it!=telescope_map.end();it++) {
+         it!=telescope_map.end();++it) {
       it->second->prepareSelectFds(read_fds,write_fds,fd_max);
     }
     if (fd_max >= 0) {
@@ -277,7 +295,7 @@ void TelescopeMgr::communicate(void) {
       const int select_rc = select(fd_max+1,&read_fds,&write_fds,0,&tv);
       if (select_rc > 0) {
         for (TelescopeMap::const_iterator it(telescope_map.begin());
-             it!=telescope_map.end();it++) {
+             it!=telescope_map.end();++it) {
           it->second->handleSelectFds(read_fds,write_fds);
         }
       }
