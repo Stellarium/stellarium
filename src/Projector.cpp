@@ -193,7 +193,7 @@ void Projector::setViewport(int x, int y, int w, int h,
 	viewport_center[0] = x+cx;
 	viewport_center[1] = y+cy;
 	viewport_fov_diameter = fov_diam;
-	view_scaling_factor = 0.5 * viewport_fov_diameter
+	pixel_per_rad = 0.5 * viewport_fov_diameter
 	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
@@ -322,7 +322,7 @@ void Projector::setFov(double f)
 		fov = max_fov;
 	if (f<min_fov)
 		fov = min_fov;
-	view_scaling_factor = 0.5 * viewport_fov_diameter
+	pixel_per_rad = 0.5 * viewport_fov_diameter
 	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 }
 
@@ -462,8 +462,8 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 // 	  // invisible region of the sky (rval=false), we must finish
 // 	  // reprojecting, so that OpenGl can successfully eliminate
 // 	  // polygons by culling.
-// 	win[0] = viewport_center[0] + flip_horz * view_scaling_factor * win[0];
-// 	win[1] = viewport_center[1] + flip_vert * view_scaling_factor * win[1];
+// 	win[0] = viewport_center[0] + flip_horz * pixel_per_rad * win[0];
+// 	win[1] = viewport_center[1] + flip_vert * pixel_per_rad * win[1];
 // 	win[2] = (win[2] - zNear) / (zNear - zFar);
 // 	return rval;
 // }
@@ -473,8 +473,8 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 *************************************************************************/
 bool Projector::unProject(double x, double y, Vec3d &v) const
 {
-	v[0] = flip_horz * (x - viewport_center[0]) / view_scaling_factor;
-	v[1] = flip_vert * (y - viewport_center[1]) / view_scaling_factor;
+	v[0] = flip_horz * (x - viewport_center[0]) / pixel_per_rad;
+	v[1] = flip_vert * (y - viewport_center[1]) / pixel_per_rad;
 	v[2] = 0;
 	const bool rval = mapping->backward(v);
 	  // Even when the reprojected point comes from an region of the screen,
@@ -1133,6 +1133,36 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			glColor4fv(tmpColor);
 	}
 }
+
+
+/*************************************************************************
+ draw a simple circle, 2d viewport coordinates in pixel
+*************************************************************************/
+void Projector::drawCircle(double x,double y,double r) const {
+  if (r <= 1.0) return;
+  const Vec2d center(x,y);
+  const Vec2d v_center(0.5*viewport_xywh[2],
+                       0.5*viewport_xywh[3]);
+  const double R = v_center.length();
+  const double d = (v_center-center).length();
+  if (d > r+R || d < r-R) return;
+  const int segments = 180;
+  const double phi = 2.0*M_PI/segments;
+  const double cp = cos(phi);
+  const double sp = sin(phi);
+  double dx = r;
+  double dy = 0;
+  glBegin(GL_LINE_LOOP);
+  for (int i=0;i<=segments;i++) {
+    glVertex2d(x+dx,y+dy);
+    r = dx*cp-dy*sp;
+    dy = dx*sp+dy*cp;
+    dx = r;
+  }
+  glEnd();
+}
+
+
 
 /*************************************************************************
  Same function but gives the already projected 2d position in input

@@ -220,8 +220,8 @@ public:
 	//! Get the Field of View in degrees.
 	double getFov(void) const {return fov;}
 	
-	//! Get the average number of pixel per radian.
-	double getPixelPerRad(void) const {return MY_MIN(getViewportWidth(),getViewportHeight())/(fov*M_PI/180.);}
+	//! Get size of a radian in pixels at the center of the viewport disk
+	double getPixelPerRadAtCenter(void) const {return pixel_per_rad;}
 
 	//! Set the maximum field of View in degrees.
 	void setMaxFov(double max);
@@ -256,8 +256,8 @@ public:
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
 		// polygons by culling.
-		win[0] = viewport_center[0] + flip_horz * view_scaling_factor * win[0];
-		win[1] = viewport_center[1] + flip_vert * view_scaling_factor * win[1];
+		win[0] = viewport_center[0] + flip_horz * pixel_per_rad * win[0];
+		win[1] = viewport_center[1] + flip_vert * pixel_per_rad * win[1];
 		win[2] = (win[2] - zNear) / (zNear - zFar);
 		return rval;
 	}
@@ -366,7 +366,10 @@ public:
 	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
 			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
-	
+
+    //! draw a simple circle, 2d viewport coordinates in pixel
+	void drawCircle(double x,double y,double r) const;
+
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
@@ -457,7 +460,7 @@ private:
 
 	Mat4d projectionMatrix;		// Projection matrix
 
-	double view_scaling_factor;	// ??
+	double pixel_per_rad; // pixel per rad at the center of the viewport disk
 	double flip_horz,flip_vert;	// Whether to flip in horizontal or vertical directions
 
 	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
