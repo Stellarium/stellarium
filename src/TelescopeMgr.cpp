@@ -230,8 +230,6 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
           const double fov = conf.get_double(
                                "telescopes",
                                telescope_name+"_ocular_"+name,-1.0);
-cout << "TelescopeMgr::init: " << telescope_name << "; "
-     << (telescope_name+"_ocular_"+name) << ": " << fov << endl;
           t->addOcular(fov);
         }
         telescope_map[i] = t;
