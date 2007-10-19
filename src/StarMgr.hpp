@@ -31,16 +31,19 @@
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
-using namespace std ;
+using namespace std;
 
 class StelObject;
 class ToneReproducer;
 class Projector;
 class Navigator;
 class LoadingBar;
+class SFont;
 
-class ZoneArray;
-class HipIndexStruct;
+namespace BigStarCatalogExtension {
+  class ZoneArray;
+  class HipIndexStruct;
+}
 
 //! @class StarMgr 
 //! Stores the star catalogue data.
@@ -302,7 +305,11 @@ public:
 	//! Get the (translated) scientifc name for a star with a specified 
 	//! Hipparcos catalogue number.
 	static wstring getSciName(int hip);
-	
+
+	static Vec3f color_table[128];
+	static double getCurrentJDay(void) {return current_JDay;}
+	static string convertToSpectralType(int index);
+	static string convertToComponentIds(int index);
 private:
 	//! Load all the stars from the files.
 	void load_data(const InitParser &conf,LoadingBar &lb);
@@ -327,7 +334,7 @@ private:
 	
 	int max_geodesic_grid_level;
 	int last_max_search_level;
-	typedef map<int, ZoneArray*> ZoneArrayMap;
+	typedef map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zone_arrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
 				const Vec3d &c0,
@@ -343,7 +350,7 @@ private:
 			const Vec3d &c1,
 			const Vec3d &c2);
 	
-	HipIndexStruct *hip_index; // array of hiparcos stars
+	BigStarCatalogExtension::HipIndexStruct *hip_index; // array of hiparcos stars
 	
 	class MagConverter
 	{
@@ -386,6 +393,8 @@ private:
 	
 	static map<int, wstring> sci_names_map_i18n;
 	static map<wstring, int> sci_names_index_i18n;
+
+	static double current_JDay;
 	
 	double fontSize;
 	SFont *starFont;

@@ -25,6 +25,16 @@ SET(stellarium_lib_SRCS
    StelObject.cpp
    StelObject.hpp
    StelObjectType.hpp
+   ZoneData.hpp
+   Star.cpp
+   Star.hpp
+   StarWrapper.cpp
+   StarWrapper.hpp
+   ZoneArray.cpp
+   ZoneArray.hpp
+   ZoneData.hpp
+   StringArray.cpp
+   StringArray.hpp
    StarMgr.cpp
    StarMgr.hpp
    Nebula.cpp
