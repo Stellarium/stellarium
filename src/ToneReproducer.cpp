@@ -96,12 +96,17 @@ void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 *********************************************************************/
 void ToneReproducer::xyYToRGB(float* color) const
 {
+	float log10Y;
 	// 1. Hue conversion
 	if (color[2] <= 0.f)
 	{
-		cerr << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
+//		cerr << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
+		log10Y = -9e50;
 	}
-	const float log10Y = log10f(color[2]);
+	else
+	{
+		log10Y = log10f(color[2]);
+	}
 
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
 	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
