@@ -21,6 +21,12 @@
 #define _LOADINGBAR_H_
 
 #include "STextureTypes.hpp"
+#include "vecmath.h"
+
+#include <string>
+
+using std::string;
+using std::wstring;
 
 class SFont;
 class Projector;
