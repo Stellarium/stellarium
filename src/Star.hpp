@@ -42,6 +42,14 @@ typedef unsigned short int Uint16;
 template <class Star> struct SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
+
+// structs for storing the stars in binary form. The idea is
+// to store much data for bright stars (Star1), but only little or even
+// very little data for faints stars (Star3). Using only 6 bytes for Star3
+// makes it feasable to store hundreds of millions of them in main memory.
+
+
+
 static inline float IndexToBV(unsigned char b_v) {
   return b_v*(4.f/127.f)-0.5f;
 }

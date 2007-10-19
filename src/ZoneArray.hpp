@@ -55,7 +55,9 @@
 
 namespace BigStarCatalogExtension {
 
-class ZoneArray {  // contains all zones of a given level
+// A ZoneArray manages all ZoneData structures of a given GeodesicGrid level.
+
+class ZoneArray {
 public:
   static ZoneArray *create(const StarMgr &hip_star_mgr,
                            const string &extended_file_name,
