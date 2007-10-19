@@ -26,6 +26,9 @@ using std::string;
 
 namespace BigStarCatalogExtension {
 
+// simple class for retrieving strings from a file: each string is
+// a single line. You can access the lines of a file by the line number.
+
 class StringArray {
 public:
   StringArray(void) : array(0),size(0) {}
