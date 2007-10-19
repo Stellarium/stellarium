@@ -31,6 +31,17 @@ template <class Star> struct SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
 
+// A Star (Star1,Star2,Star3,...) cannot be a StelObject. The additional
+// overhead of having a dynamic type would simply be too much.
+// Therefore the StarWrapper is needed when returning Stars as StelObjects,
+// e.g. for searching, and for constellations.
+// The StarWrapper is destroyed when it is not needed anymore, by utilizing
+// reference counting and boost::intrusive_ptr. So there is no chance that
+// more than a few hundreds of StarWrappers are alive simultanousely.
+// Another reason for having the StarWrapper is to encapsulate the differences
+// between the different kinds of Stars (Star1,Star2,Star3).
+
+
 class StarWrapperBase : public StelObject {
 protected:
   StarWrapperBase(void) : ref_count(0) {}

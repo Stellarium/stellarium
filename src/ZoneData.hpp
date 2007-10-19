@@ -32,6 +32,12 @@ class StelObject;
 
 namespace BigStarCatalogExtension {
 
+// The stars are arranged in triangular zones according to GeodesicGrid.
+// Bright stars (Star1) are stored in zones with small level, whereas
+// fainter stars (Star2,Star3) are stored in zones with highter level.
+// A ZoneData contains stars of a given type (Star1,Star2 or Star3) of
+// a given triangle and level of the GeodesicGrid.
+
 struct ZoneData { // a single Triangle
     // no virtual functions!
   int getNrOfStars(void) const {return size;}
