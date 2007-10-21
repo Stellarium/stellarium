@@ -70,14 +70,18 @@ void ZoneArray::initTriangle(int index,
 static inline
 int ReadInt(FILE *f,unsigned int &x) {
   const int rval = (4 == fread(&x,1,4,f)) ? 0 : -1;
-//  LE_TO_CPU_INT32(x,x);
   return rval;
 }
 
 
 #define FILE_MAGIC 0x835f040a
 #define FILE_MAGIC_OTHER_ENDIAN 0x0a045f83
+#define FILE_MAGIC_NATIVE 0x835f040b
 #define MAX_MAJOR_FILE_VERSION 0
+
+#if (!defined(__GNUC__))
+#warning Star catalogue loading has only been tested with gcc
+#endif
 
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const string &extended_file_name,
@@ -86,14 +90,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   bool use_mmap = false;
   if (fname.find("mmap:") == 0) {
     fname.erase(0,5);
-#if (!defined(__GNUC__))
-// #warning Star loading has only been tested with gcc
-    cerr << "WARNING: ZoneArray::create(" << extended_file_name << "): "
-            "mmap catalog loading currently only implemented for gcc compiled "
-            "binaries." << endl;
-#else
     use_mmap = true;
-#endif
   }
   try {
     fname = StelApp::getInstance().getFileMgr()
@@ -125,8 +122,13 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   }
   const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
   if (byte_swap) {
+      // ok, FILE_MAGIC_OTHER_ENDIAN, must swap
     if (use_mmap) {
-      printf("you must byteswap before mmap loading\n");
+      printf("you must convert catalogue "
+#if (!defined(__GNUC__))
+             "to native format "
+#endif
+             "before mmap loading\n");
       return 0;
     }
     printf("byteswap ");
@@ -137,7 +139,20 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
     mag_min = bswap_32(mag_min);
     mag_range = bswap_32(mag_range);
     mag_steps = bswap_32(mag_steps);
-  } else if (magic != FILE_MAGIC) {
+  } else if (magic == FILE_MAGIC) {
+      // ok, FILE_MAGIC
+#if (!defined(__GNUC__))
+    if (use_mmap) {
+        // mmap only with gcc:
+      printf("you must convert catalogue "
+             "to native format "
+             "before mmap loading\n");
+      return 0;
+    }
+#endif
+  } else if (magic == FILE_MAGIC_NATIVE) {
+      // ok, will work for any architecture and any compiler
+  } else {
     printf("no star catalogue file\n");
     return 0;
   }
