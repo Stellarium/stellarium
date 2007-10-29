@@ -794,7 +794,7 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	QFile::copy(QString::fromUtf8(defaultConfigFilePath.c_str()), QString::fromUtf8(configFile.c_str()));
+	QFile::copy(QString::fromLocal8Bit (defaultConfigFilePath.c_str()), QString::fromLocal8Bit (configFile.c_str()));
 	if (!stelFileMgr->exists(configFile))
 	{
 		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath << " to " << configFile << ". You could try to copy it by hand." << endl;
