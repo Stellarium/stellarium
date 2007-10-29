@@ -341,10 +341,12 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	Label * lblalt = new Label(_("Altitude : "));
 	lblalt->setPos(20, y+81);
-	alt_incdec	= new IntIncDec(&courierFont, tex_up, tex_down, 0, 2000, 0, 10);
+	alt_incdec	= new IntIncDec(&courierFont, tex_up, tex_down, 0, 30000, 0, 10);
 	alt_incdec->setSizex(135);
 	alt_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
 	alt_incdec->setPos(130,y+80);
+	Label * lblaltunit = new Label(_("m"));
+	lblaltunit->setPos(180, y+81);
 
 	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
 	location_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveObserverPosition));
@@ -358,6 +360,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_location->addComponent(lbllong);
 	tab_location->addComponent(lbllat);
 	tab_location->addComponent(lblalt);
+	tab_location->addComponent(lblaltunit);
 	tab_location->addComponent(long_incdec);
 	tab_location->addComponent(lat_incdec);
 	tab_location->addComponent(alt_incdec);
