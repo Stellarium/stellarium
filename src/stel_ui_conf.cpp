@@ -1171,7 +1171,12 @@ void StelUI::updatePlanetMap(const string& englishName)
 	if (!planetObject)
 		return;
 	
-	STextureSP newTex = planetObject->getMapTexture();
+	STextureSP newTex;
+	if (planetObject->getEnglishName()=="Earth")
+		newTex = StelApp::getInstance().getTextureManager().createTexture("earthmap.png");
+	else
+		newTex = planetObject->getMapTexture();
+	
 	if (newTex)
 		earth_map->setMapTexture(newTex);
 	else
