@@ -63,7 +63,7 @@ const string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 			throw(runtime_error("file does not match flags: " + path));
 
 	// explicitly specified absolute paths
-	QFileInfo thePath(path.c_str());
+		QFileInfo thePath(QString::fromUtf8(path.c_str()));
 	if ( thePath.isAbsolute() )
 		if (fileFlagsCheck(path, flags))
 			return path;
@@ -88,7 +88,7 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 		
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if (QFileInfo(path.c_str()).isAbsolute())
+	if (QFileInfo(QString::fromUtf8(path.c_str())).isAbsolute())
 		listPaths.push_back("");
 	else
 		listPaths = fileLocations;
@@ -97,7 +97,7 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 	     li != listPaths.end();
 	     li++)
 	{
-		QFileInfo thisPath((*li+"/"+path).c_str());
+		QFileInfo thisPath(QString::fromUtf8((*li+"/"+path).c_str()));
 		if (thisPath.isDir()) 
 		{
   QDir thisDir(thisPath.absoluteFilePath());
@@ -109,7 +109,7 @@ const set<string> StelFileMgr::listContents(const string& path, const StelFileMg
 
 				if ((*fileIt != "..") && (*fileIt != "."))
 				{
-					QFileInfo fullPath((*li+"/"+path+"/"+(*fileIt).toStdString()).c_str());
+					QFileInfo fullPath(QString::fromUtf8((*li+"/"+path+"/"+(*fileIt).toStdString()).c_str()));
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
@@ -149,43 +149,38 @@ void StelFileMgr::setSearchPaths(const vector<string>& paths)
 
 bool StelFileMgr::exists(const string& path)
 {
-	return QFileInfo(path.c_str()).exists();
+	return QFileInfo(QString::fromUtf8(path.c_str())).exists();
 }
 
 bool StelFileMgr::isWritable(const string& path)
 {
-	return QFileInfo(path.c_str()).isWritable();
+	return QFileInfo(QString::fromUtf8(path.c_str())).isWritable();
 }
 
 bool StelFileMgr::isDirectory(const string& path)
 {
-	return QFileInfo(path.c_str()).isDir();
+	return QFileInfo(QString::fromUtf8(path.c_str())).isDir();
 }
 
 bool StelFileMgr::mkDir(const string& path)
 {
-	return QDir("/").mkpath(path.c_str());
-}
-
-bool StelFileMgr::copy(const string& fileName, const string& newName)
-{
-	return QFile::copy(fileName.c_str(), newName.c_str());
+	return QDir("/").mkpath(QString::fromUtf8(path.c_str()));
 }
 
 const string StelFileMgr::dirName(const string& path)
 {
-	return QFileInfo(path.c_str()).dir().canonicalPath().toStdString();
+	return QFileInfo(QString::fromUtf8(path.c_str())).dir().canonicalPath().toStdString();
 }
 
 const string StelFileMgr::baseName(const string& path)
 {
-	return QFileInfo(path.c_str()).baseName().toStdString();
+	return QFileInfo(QString::fromUtf8(path.c_str())).baseName().toStdString();
 }
 
 void StelFileMgr::checkUserDir()
 {
 	try {
-		QFileInfo uDir(getUserDir().c_str());
+		QFileInfo uDir(QString::fromUtf8(getUserDir().c_str()));
 		if (uDir.exists())
 		{
 			if (uDir.isDir() && uDir.isWritable())
@@ -230,7 +225,7 @@ bool StelFileMgr::fileFlagsCheck(const string& path, const FLAGS& flags)
 		}
 	}
 	
-	QFileInfo thePath(path.c_str());
+	QFileInfo thePath(QString::fromUtf8(path.c_str()));
 	QDir parentDir = thePath.dir();
 
 	if (flags & NEW)
@@ -314,7 +309,7 @@ const string StelFileMgr::getDesktopDir(void)
 	result = getenv("HOME");
 	result += "/Desktop";
 #endif
-	if (!QFileInfo(result.c_str()).isDir())
+	if (!QFileInfo(QString::fromUtf8(result.c_str())).isDir())
 	{
 		throw(runtime_error("NOT FOUND"));
 	}
@@ -353,7 +348,7 @@ const string StelFileMgr::getUserDir(void)
 			<< userDir.filePath().toStdString() << endl;
 	}
 
-	return userDir.filePath().toStdString();
+	return userDir.filePath().toUtf8().data();
 }
 
 const string StelFileMgr::getInstallationDir(void)
@@ -363,7 +358,7 @@ const string StelFileMgr::getInstallationDir(void)
 		return ".";
 
 #if defined(MACOSX)
-	QFileInfo installLocation( QString(MacosxDirs::getApplicationResourcesDirectory().c_str() ));
+	QFileInfo installLocation( QString::fromUtf8(MacosxDirs::getApplicationResourcesDirectory().c_str() ));
 	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 #else
 	// Linux, BSD, Solaris etc.
@@ -403,7 +398,7 @@ const string StelFileMgr::getLocaleDir(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = QFileInfo(QString(getInstallationDir().c_str()) + "/locale");
+	localePath = QFileInfo(QString::fromUtf8(getInstallationDir().c_str()) + "/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 
