@@ -403,6 +403,9 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	char vs[1000];
 	x=220; y=10;
+	
+	// Should fix bug 1751366
+	screen_size_sl = NULL;
 #ifndef USE_QT4
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(x+10, y);
