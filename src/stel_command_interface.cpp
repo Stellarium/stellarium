@@ -482,6 +482,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else if(args["action"]=="pause") {
 			if(audio) audio->pause();
 
+		} else if(args["action"]=="resume") {
+			if(audio) audio->resume();
+
 		} else if( args["action"]=="play" && args["filename"]!="") {
 			// only one track at a time allowed
 			if(audio) delete audio;
