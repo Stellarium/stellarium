@@ -15,6 +15,8 @@ Added more command line options.
 Re-coded StelAppQt4 init and deinit to prevent GLContext errors.
 New config parameters for controlling star brigthness, size, color
 Circles around telescope markers indicating ocular FOV
+Applied patches for bugs #1769632 (bad init in get_tm_from_Julian), #1769584 (NebulaMgr.cpp reports wrong name on error) and #1758435 (segfault)
+Fixed bug #1781617 (added altitude unit) and #1751366 (segfault when changing projection mode).
 
 0.9.0 [2007-06-6]
 Larger star catalog including stars from Hipparcos, Tycho2 and NOMAD
