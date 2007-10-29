@@ -445,16 +445,17 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 			e = (Nebula*)searchNGC(nb);
 		}
 
+		strncpy(n, recordstr, 36);
+		// trim the white spaces at the back
+		n[36] = '\0';
+		k = 36;
+		while (n[--k] == ' ' && k >= 0)
+		{
+			n[k] = '\0';
+		}
+		
 		if (e)
 		{
-			strncpy(n, recordstr, 36);
-			// trim the white spaces at the back
-			n[36] = '\0';
-			k = 36;
-			while (n[--k] == ' ' && k >= 0)
-			{
-				n[k] = '\0';
-			}
 			// If the name is not a messier number perhaps one is already
 			// defined for this object
 			if (strncmp(n, "M ",2))
