@@ -747,6 +747,7 @@ void get_tm_from_julian(double JD, struct tm * tm_time)
 	tm_time->tm_sec = dateTime.time().second();
 	tm_time->tm_min = dateTime.time().minute();
 	tm_time->tm_hour = dateTime.time().hour();
+	tm_time->tm_wday = (int)fmod(JD + 1.0,7);
 	tm_time->tm_mday = dateTime.date().day();
 	tm_time->tm_mon = dateTime.date().month() - 1;
 	tm_time->tm_year = dateTime.date().year() - 1900;
