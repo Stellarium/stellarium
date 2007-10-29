@@ -51,6 +51,7 @@
 
 #include <QStringList>
 #include <QString>
+#include <QFile>
 #include <QRegExp>
 #include <QTextStream>
 #include <set>
@@ -793,7 +794,7 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	StelFileMgr::copy(defaultConfigFilePath, configFile);
+	QFile::copy(QString::fromUtf8(defaultConfigFilePath.c_str()), QString::fromUtf8(configFile.c_str()));
 	if (!stelFileMgr->exists(configFile))
 	{
 		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath << " to " << configFile << ". You could try to copy it by hand." << endl;

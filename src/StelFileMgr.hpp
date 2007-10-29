@@ -153,12 +153,6 @@ public:
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	const string getLocaleDir(void);
-	
-	//! Copies the file currently specified by fileName() to a file called newName.
-	//! @param fileName name of the file to copy.
-	//! @param newName name of the file to create.
-	//! @return true if successful. False if not or if a file with the name newName already exists.
-	static bool copy(const string& fileName, const string& newName);
 
 private:
 	//! Check if a (complete) path matches a set of flags
