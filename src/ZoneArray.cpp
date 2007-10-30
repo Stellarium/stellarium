@@ -107,7 +107,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
             extended_file_name.c_str());
     return 0;
   }
-  printf("ZoneArray::create(%s): ",extended_file_name.c_str());
+  printf("Loading %s: ",extended_file_name.c_str());
   unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
   if (ReadInt(f,magic) < 0 ||
       ReadInt(f,type) < 0 ||
@@ -157,9 +157,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
     return 0;
   }
   ZoneArray *rval = 0;
-  printf("type: %u major: %u minor: %u level: %u"
-         " mag_min: %d mag_range: %u mag_steps: %u; ",
-         type,major,minor,level,(int)mag_min,mag_range,mag_steps);
+  printf("%u_%uv%u_%u; ",level,type,major,minor);
   switch (type) {
     case 0:
       if (major > MAX_MAJOR_FILE_VERSION) {
