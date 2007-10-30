@@ -229,7 +229,7 @@ void Observer::load(const InitParser& conf, const string& section)
       planet = ssystem.getEarth();
     }
     
-    cout << "Loading location: \"" << StelUtils::wstringToString(name) <<"\", on " << planet->getEnglishName();
+    cout << "Loading location: \"" << StelUtils::wstringToString(name) <<"\", on " << planet->getEnglishName() << endl;
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
