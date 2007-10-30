@@ -733,7 +733,7 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 	}
 	allBoundarySegments.clear();
 
-	cout << "Loading Constellation boundary data from " << boundaryFile << " ...\n";
+	cout << "Loading Constellation boundary data from " << boundaryFile << "... ";
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
 	

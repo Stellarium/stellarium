@@ -531,7 +531,7 @@ int StarMgr::load_common_names(const string& commonNameFile) {
   common_names_index.clear();
   common_names_index_i18n.clear();
 
-  cout << "Load star names from " << commonNameFile << endl;
+  cout << "Loading star names from " << commonNameFile << endl;
 
   FILE *cnFile;
   cnFile=fopen(commonNameFile.c_str(),"r");
@@ -584,7 +584,7 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
   sci_names_map_i18n.clear();
   sci_names_index_i18n.clear();
 
-  cout << "Load sci names from " << sciNameFile << endl;
+  cout << "Loading star sci names from " << sciNameFile << endl;
 
   FILE *snFile;
   snFile=fopen(sciNameFile.c_str(),"r");
