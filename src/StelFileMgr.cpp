@@ -332,6 +332,17 @@ const string StelFileMgr::getUserDir(void)
 	{
 		userDir = homeString + "/Stellarium";
 	}
+
+	// In 0.9.0 we forgot to check the %APPDATA% env var, which might
+	// be set in XP or newer.  In this case, we want to use it, but
+	// only if there is not already an existing data directory in the
+	// "wrong place" (better to use an existing location which is slightly
+	// wrong, than to lose all the users settings when thy upgrade).
+	if (getenv("APPDATA")!=NULL && !userDir.isDir())
+	{
+		userDir = QString::fromLocal8Bit(getenv("APPDATA")) + "/Stellarium";
+	}
+
 #elif defined(MACOSX)
 	userDir = QDir::homePath() + "/Library/Preferences/Stellarium";
 #else 
