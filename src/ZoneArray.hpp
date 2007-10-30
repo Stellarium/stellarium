@@ -41,6 +41,7 @@
 #include <string.h>
 #else
 #include <io.h>
+#include <windows.h>
 #endif
 
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
@@ -223,11 +224,12 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
     } else {
       if (use_mmap) {
         const long start_in_file = ftell(f);
-        const long page_size =
 #ifndef WIN32
-          sysconf(_SC_PAGE_SIZE);
+        const long page_size = sysconf(_SC_PAGE_SIZE);
 #else
-          4096;
+        SYSTEM_INFO system_info;
+        GetSystemInfo(&system_info);
+        const long page_size = system_info.dwAllocationGranularity;
 #endif
         const long mmap_offset = start_in_file % page_size;
 #ifndef WIN32
@@ -276,7 +278,9 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
             if (mmap_start == NULL) {
               cerr << "ERROR: SpecialZoneArray(" << level
                    << ")::SpecialZoneArray: "
-                      "MapViewOfFile failed: " << GetLastError() << endl;
+                      "MapViewOfFile failed: " << GetLastError()
+                   << ", page_size: " << page_size << endl;
+                   << endl;
               stars = 0;
               nr_of_stars = 0;
               delete[] getZones();
