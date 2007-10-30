@@ -107,7 +107,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 	if (!obj)
 	{
 		cerr << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString().toStdString() << endl;
-		cerr << "Module " << moduleID << " will not be loaded." << endl;
+		cerr << "Module " << moduleID << " will not be open." << endl;
 		return NULL;
 	}
 	

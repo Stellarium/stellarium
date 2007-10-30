@@ -39,6 +39,8 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <string.h>
+#else
+#include <io.h>
 #endif
 
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
