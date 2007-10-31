@@ -38,7 +38,6 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "Planet.hpp"
-
 #include <QTextStream>
 
 using namespace std;
@@ -181,7 +180,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 	InitParser pd;	// The Planet data ini file parser
 	try
 	{
-		pd.load(StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini"));
+		pd.load(StelApp::getInstance().getFileMgr().qfindFile("data/ssystem.ini"));
 	}
 	catch(exception& e)
 	{

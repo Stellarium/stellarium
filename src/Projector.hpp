@@ -24,6 +24,7 @@
 #include <map>
 
 #include "GLee.h"
+#include "fixx11h.h"
 #include "vecmath.h"
 #include "SFont.hpp"
 #include "Mapping.hpp"

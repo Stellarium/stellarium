@@ -432,7 +432,7 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 
 	const string starsIniFile = StelApp::getInstance().getFileMgr().findFile(string("stars/default/stars.ini"));
 	InitParser conf;
-	conf.load(starsIniFile);
+	conf.load(starsIniFile.c_str());
 				         
 	for (int i=0; i<100; i++)
 	{

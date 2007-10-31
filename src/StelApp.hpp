@@ -25,6 +25,8 @@
 #include <vector>
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
+#include <QString>
+#include "fixx11h.h"
 
 // Predeclaration of some classes
 class StelCore;
@@ -39,7 +41,6 @@ class StelSkyCultureMgr;
 class StelFileMgr;
 class InitParser;
 class QStringList;
-class QString;
 
 using namespace std;
 
@@ -166,11 +167,11 @@ public:
 	//! to the serach path.  The configuration file must be writable, or there will
 	//! be trouble!
 	//! @param configName the name or full path of the configuration file
-	void setConfigFile(const string& configName);
+	void setConfigFile(const QString& configName);
 	
 	//! Retrieve the full path of the current configuration file.
 	//! @return the full path of the configuration file
-	const string& getConfigFilePath() { return configFile; }
+	const QString& getConfigFilePath() { return configFile; }
 	
 	//! Copies the default configuration file.
 	//! This function copies the default_config.ini file to config.ini (or other
@@ -325,7 +326,7 @@ protected:
 		
 private:	
 	// Set the colorscheme for all the modules
-	void setColorScheme(const std::string& fileName, const std::string& section);
+	void setColorScheme(const QString& fileName, const std::string& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -363,7 +364,7 @@ private:
 	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
 	
-	string configFile;
+	QString configFile;
 	
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;

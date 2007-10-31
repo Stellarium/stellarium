@@ -24,6 +24,7 @@
 
 #include <string>
 #include <iostream>
+#include <QString>
 
 using namespace std;
 
@@ -46,11 +47,11 @@ public:
 
 	//! Load the config file (the parsing operation)
 	//! @param file_name the path to the .ini file to be loaded.
-	void load(const string& file_name);
+	void load(const QString& file_name);
 
 	//! Save the current config state.
 	//! @param file_name the path to the .ini file to be written
-	void save(const string& file_name) const;
+	void save(const QString& file_name) const;
 
 	//! Get a string for a setting in the InitParser object.
 	//! If the requested setting cannot be found a warning message will be printed on standard error.
