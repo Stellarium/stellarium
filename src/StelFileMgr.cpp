@@ -53,6 +53,11 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
+QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
+{
+	return QString::fromUtf8(findFile(path.toUtf8().data(), flags).c_str());
+}
+
 string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
 	// explicitly specified relative paths
