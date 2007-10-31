@@ -53,7 +53,7 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-const string StelFileMgr::findFile(const string& path, const FLAGS& flags)
+string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
 	// explicitly specified relative paths
 	if (path[0] == '.')
@@ -81,7 +81,7 @@ const string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 	throw(runtime_error("file not found: " + path));
 }
 
-const set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
+set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
 {
 	set<string> result;
 	vector<string> listPaths;
@@ -167,12 +167,12 @@ bool StelFileMgr::mkDir(const string& path)
 	return QDir("/").mkpath(QString::fromLocal8Bit (path.c_str()));
 }
 
-const string StelFileMgr::dirName(const string& path)
+string StelFileMgr::dirName(const string& path)
 {
 	return QFileInfo(QString::fromLocal8Bit (path.c_str())).dir().canonicalPath().toStdString();
 }
 
-const string StelFileMgr::baseName(const string& path)
+string StelFileMgr::baseName(const string& path)
 {
 	return QFileInfo(QString::fromLocal8Bit (path.c_str())).baseName().toStdString();
 }
@@ -274,7 +274,7 @@ void StelFileMgr::outputFileSearchPaths(void)
 	}
 }
 
-const string StelFileMgr::getDesktopDir(void)
+string StelFileMgr::getDesktopDir(void)
 {
 	// TODO: Test Windows and MAC builds.  I edited the code but have
 	// not got a build platform -MNG
@@ -316,7 +316,7 @@ const string StelFileMgr::getDesktopDir(void)
 	return result;
 }
 
-const string StelFileMgr::getUserDir(void)
+string StelFileMgr::getUserDir(void)
 {
 	QFileInfo userDir;
 #if defined(WIN32)
@@ -362,7 +362,7 @@ const string StelFileMgr::getUserDir(void)
 	return userDir.filePath().toUtf8().data();
 }
 
-const string StelFileMgr::getInstallationDir(void)
+string StelFileMgr::getInstallationDir(void)
 {
 	// If we are running from the build tree, we use the files from there...
 	if (QFileInfo(CHECK_FILE).exists())
@@ -394,7 +394,7 @@ const string StelFileMgr::getInstallationDir(void)
 	}
 }
 	
-const string StelFileMgr::getScreenshotDir(void)
+string StelFileMgr::getScreenshotDir(void)
 {
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	return getDesktopDir();
@@ -403,7 +403,7 @@ const string StelFileMgr::getScreenshotDir(void)
 #endif
 }
 
-const string StelFileMgr::getLocaleDir(void)
+string StelFileMgr::getLocaleDir(void)
 {
 	QFileInfo localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)

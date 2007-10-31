@@ -7,6 +7,9 @@
 #include <set>
 #include <string>
 
+#include "fixx11h.h"
+#include <QString>
+
 using namespace std;
 
 //! Provides utilities for locating and handling files.
@@ -49,7 +52,7 @@ public:
 	//! unanbigiously identifies one and only one file on multi-root OSes), it will 
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
-	//! If you wish to serach for a non-exiting file which is not in the search path 
+	//! If you wish to search for a non-exiting file which is not in the search path 
 	//! you should explicitly prefix it with "./", or otherwise have a . at the start of
 	//! the path parameter, e.g. path="./my_config_file_in_the_pwd.ini"
 	//! @param path the name of the file to search for, for example "textures/fog.png".
@@ -59,7 +62,8 @@ public:
 	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	const string findFile(const string& path, const FLAGS& flags=(FLAGS)0);
+	string findFile(const string& path, const FLAGS& flags=(FLAGS)0);
+	QString qfindFile(const QString& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -68,7 +72,7 @@ public:
 	//!         not the whole path), which are available in any of the search
 	//!         paths + path.  Returns empty list if none were found or the path
 	//!         is invalid (not a directory / not existing)
-	const set<string> listContents(const string& path, const FLAGS& flags=(FLAGS)0);
+	set<string> listContents(const string& path, const FLAGS& flags=(FLAGS)0);
 		
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
@@ -108,12 +112,12 @@ public:
 	//! Convenience function to find the parent directory of a given path
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
-	const string dirName(const string& path);
+	string dirName(const string& path);
 	
 	//! Convenience function to find the basename of a given path
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
-	const string baseName(const string& path);
+	string baseName(const string& path);
 	
 	//! Get the user's Desktop directory
 	//! This is a portable way to retrieve the directory for the user's desktop.
@@ -124,7 +128,7 @@ public:
 	//! @return the path to the user's desktop directory
 	//! @exception NOT_FOUND when the directory cannot be determined, or the
 	//!            OS doesn't provide one.
-	const string getDesktopDir(void);
+	string getDesktopDir(void);
 	
 	//! Returns the path to the user directory
 	//! This is the directory where we expect to find the [default] writable 
@@ -133,14 +137,14 @@ public:
 	//! trying to find most data files
 	//! @return the path to the user private data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const string getUserDir(void);
+	string getUserDir(void);
 	
 	//! Returns the path to the installation directory
 	//! This is the directory where we expect to find scripts, nebulae, stars, 
 	//! skycultures etc, and will be added at the end of the search path
 	//! @return the path to the installation data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const string getInstallationDir(void);
+	string getInstallationDir(void);
 	
 	//! This is the directory into which screenshots will be saved
 	//! It is $HOME on Linux, BSD, Solaris etc.
@@ -148,11 +152,11 @@ public:
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
 	//! @exceptions NOT_FOUND if the directory could not be found
-	const string getScreenshotDir(void);
+	string getScreenshotDir(void);
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
-	const string getLocaleDir(void);
+	string getLocaleDir(void);
 
 private:
 	//! Check if a (complete) path matches a set of flags
