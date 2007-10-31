@@ -100,7 +100,7 @@ public:
 	
 	//! Check if a path exists and is a directory.
 	//! @param path to check
-	static bool isDirectory(const string& path);
+	static bool isDirectory(const QString& path);
 	
 	//! Check if the user directory exists, is writable and a directory
 	//! Creates it if it does not exist.  Exits the program if any of this
