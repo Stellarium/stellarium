@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <cassert>
 #include <QFileInfo>
 
 #include "InitParser.hpp"
@@ -43,7 +44,7 @@ void InitParser::load(const QString& file)
 	if (!QFileInfo(file).exists())
 	{
 		cerr << "ERROR : Can't find config file " << file.toStdString() << endl;
-		exit(-1);
+		assert(0);
 	}
 
 	if (dico) free_dico();

@@ -163,11 +163,11 @@ void StelApp::init()
 		cout << " " << n << ". " << (*i).toStdString() << endl;
 		++n;
 	}
-	cout << "config file is: " << configFile.toUtf8().data() << endl;
+	cout << "config file is: " << configFile.toStdString() << endl;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "config file \"" << configFile.toUtf8().data() << "\" does not exist - copying the default file." << endl;
+		cerr << "config file \"" << configFile.toStdString() << "\" does not exist - copying the default file." << endl;
 		copyDefaultConfigFile();
 	}
 	
@@ -822,7 +822,7 @@ void StelApp::setVisionModeNight()
 {
 	if (!getVisionModeNight())
 	{
-		setColorScheme(getConfigFilePath().toUtf8().data(), "night_color");
+		setColorScheme(getConfigFilePath(), "night_color");
 	}
 	draw_mode=DM_NIGHT;
 }
@@ -833,7 +833,7 @@ void StelApp::setVisionModeNormal()
 {
 	if (!getVisionModeNormal())
 	{
-		setColorScheme(getConfigFilePath().toUtf8().data(), "color");
+		setColorScheme(getConfigFilePath(), "color");
 	}
 	draw_mode=DM_NORMAL;
 }
