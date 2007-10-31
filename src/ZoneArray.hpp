@@ -280,7 +280,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
                    << ")::SpecialZoneArray: "
                       "MapViewOfFile failed: " << GetLastError()
                    << ", page_size: " << page_size << endl;
-                   << endl;
+                   //<< endl;
               stars = 0;
               nr_of_stars = 0;
               delete[] getZones();
