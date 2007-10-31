@@ -163,9 +163,9 @@ bool StelFileMgr::isWritable(const QString& path)
 	return QFileInfo(path).isWritable();
 }
 
-bool StelFileMgr::isDirectory(const string& path)
+bool StelFileMgr::isDirectory(const QString& path)
 {
-	return QFileInfo(QString::fromUtf8(path.c_str())).isDir();
+	return QFileInfo(path).isDir();
 }
 
 bool StelFileMgr::mkDir(const string& path)
@@ -363,7 +363,8 @@ QString StelFileMgr::getUserDir(void)
 			<< userDir.filePath().toStdString() << endl;
 	}
 
-	return userDir.filePath().toUtf8().data();
+	userDir=userDir.canonicalFilePath();
+	return userDir.filePath();
 }
 
 QString StelFileMgr::getInstallationDir(void)
