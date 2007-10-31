@@ -54,10 +54,6 @@ public:
 	const STextureSP getTexture() const {return tex;}
 	//! Set the texture for this image
 	void setTexture(STextureSP atex) {tex=atex;}
-
-	//! Get the path of the texture image file
-	//! @return the full path of the texture image file or an empty string if it is unknown
-	const std::string& getFullPath() const {return fullPath;}
 	
 private:
 	friend class FitsAstroImage;
@@ -67,9 +63,6 @@ private:
 	
 	// Position of the 4 corners of the texture in sky coordinates
 	const StelGeom::ConvexPolygon poly;
-	
-	// Full path to the image if a file exists
-	std::string fullPath;
 };
 
 #endif /*ASTROIMAGE_H_*/
