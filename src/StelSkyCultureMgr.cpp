@@ -30,7 +30,7 @@
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	set<string> cultureDirNames;
+	QSet<QString> cultureDirNames;
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
 	try
@@ -42,17 +42,17 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		cerr << "ERROR while trying list sky cultures:" << e.what() << endl;	
 	}
 	
-	for(set<string>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
+	for(QSet<QString>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
 	{
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini"));
-			dirToNameEnglish[*dir] = pd.get_str("info:name");
+			pd.load(fileMan.qfindFile("skycultures/" + *dir + "/info.ini"));
+			dirToNameEnglish[(*dir).toStdString()] = pd.get_str("info:name");
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir << endl;
+			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << (*dir).toStdString() << endl;
 		}
 	}	
 }

@@ -491,7 +491,7 @@ float LandscapeMgr::getLuminance(void)
 Landscape* LandscapeMgr::createFromFile(const string& landscapeFile, const string& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscapeFile);
+	pd.load(landscapeFile.c_str());
 	string s;
 	s = pd.get_str("landscape", "type");
 	Landscape* ldscp = NULL;
@@ -585,7 +585,7 @@ string LandscapeMgr::nameToKey(const string& name)
  ****************************************************************************/
 std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 {
-	set<string> landscapeDirs;
+	QSet<QString> landscapeDirs;
 	map<string,string> result;
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
@@ -598,14 +598,14 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 		cerr << "ERROR while trying list list landscapes:" << e.what() << endl;	
 	}
 	
-	for (set<string>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
+	for (QSet<QString>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
 	{
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.findFile("landscapes/" + *dir + "/landscape.ini"));
+			pd.load(fileMan.qfindFile("landscapes/" + *dir + "/landscape.ini"));
 			string k = pd.get_str("landscape", "name");
-			result[k] = *dir;
+			result[k] = (*dir).toStdString();
 		}
 		catch (exception& e)
 		{

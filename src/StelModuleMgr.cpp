@@ -154,7 +154,7 @@ void StelModuleMgr::generateCallingLists()
 std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalModuleList()
 {
 	std::vector<StelModuleMgr::ExternalStelModuleDescriptor> result;
-	set<string> moduleDirs;
+	QSet<QString> moduleDirs;
 	
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	
@@ -167,14 +167,14 @@ std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExter
 		cerr << "ERROR while trying list list modules:" << e.what() << endl;	
 	}
 	
-	for (set<string>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)
+	for (QSet<QString>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)
 	{
 		try
 		{
 			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
 			InitParser pd;
-			pd.load(fileMan.findFile("modules/" + *dir + "/module.ini"));
-			mDesc.key = *dir;
+			pd.load(fileMan.qfindFile("modules/" + *dir + "/module.ini"));
+			mDesc.key = (*dir).toStdString();
 			mDesc.name = pd.get_str("module", "name");
 			mDesc.author = pd.get_str("module", "author");
 			mDesc.contact = pd.get_str("module", "contact");
@@ -184,7 +184,7 @@ std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExter
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read module.ini file from module " << *dir << endl;
+			cerr << "WARNING: unable to successfully read module.ini file from module " << (*dir).toStdString() << endl;
 		}
 	}
 

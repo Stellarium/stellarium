@@ -159,7 +159,7 @@ void StelAppQt4::startMainLoop()
 
 void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir) const
 {
-	string shotDir;
+	QString shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
 
 	if (saveDir == "")
@@ -169,7 +169,7 @@ void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir)
 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
 			{
-				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.toUtf8().data() << endl;
 				return;
 			}
 		}
@@ -181,23 +181,23 @@ void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir)
 	}
 	else
 	{
-		shotDir = saveDir;
+		shotDir = QString::fromStdString(saveDir);
 	}
 
-	string shotPath;
+	QString shotPath;
 	for(int j=0; j<1000; ++j)
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+(filePrefix + oss.str() + ".bmp");
+		shotPath = shotDir+"/"+filePrefix.c_str() + oss.str().c_str() + ".bmp";
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
 	// TODO - if no more filenames available, don't just overwrite the last one
 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 	
-	cout << "Saving screenshot in file: " << shotPath << endl;
-	im.save(QString(shotPath.c_str()));
+	cout << "Saving screenshot in file: " << shotPath.toUtf8().data() << endl;
+	im.save(shotPath);
 }
 
 void StelAppQt4::setResizable(bool resizable)

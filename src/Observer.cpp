@@ -207,7 +207,7 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const {
 void Observer::load(const string& file, const string& section)
 {
 	InitParser conf;
-	conf.load(file);
+	conf.load(file.c_str());
 	if (!conf.find_entry(section))
 	{
 		cerr << "ERROR : Can't find observator section " << section << " in file " << file << endl;
@@ -244,11 +244,11 @@ void Observer::save(const string& file, const string& section) const
 	printf("Saving location %s to file %s\n",StelUtils::wstringToString(name).c_str(), file.c_str());
 
 	InitParser conf;
-	conf.load(file);
+	conf.load(file.c_str());
 
 	setConf(conf,section);
 
-	conf.save(file);
+	conf.save(file.c_str());
 }
 
 

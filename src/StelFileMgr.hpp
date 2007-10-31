@@ -4,11 +4,12 @@
 #define CHECK_FILE "data/ssystem.ini"
 
 #include <vector>
-#include <set>
+#include <QSet>
 #include <string>
 
 #include "fixx11h.h"
 #include <QString>
+#include <QStringList>
 
 using namespace std;
 
@@ -72,19 +73,20 @@ public:
 	//!         not the whole path), which are available in any of the search
 	//!         paths + path.  Returns empty list if none were found or the path
 	//!         is invalid (not a directory / not existing)
-	set<string> listContents(const string& path, const FLAGS& flags=(FLAGS)0);
+	QSet<QString> listContents(const QString& path, const FLAGS& flags=(FLAGS)0);
 		
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
-	const vector<string>& getSearchPaths(void) { return fileLocations; }
+	const QStringList& getSearchPaths(void) { return fileLocations; }
 	
 	//! Set the search paths.
 	//! @param paths is a vector of strings which will become the new search paths
-	void setSearchPaths(const vector<string>& paths);
+	void setSearchPaths(const QStringList& paths);
 		
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
 	static bool exists(const string& path);
+	static bool exists(const QString& path);
 	
 	//! Check if a path is writable
 	//! For files, true is returned if the file exists and is writable
@@ -94,6 +96,7 @@ public:
 	//! have files created in it.
 	//! @param path to check
 	static bool isWritable(const string& path);
+	static bool isWritable(const QString& path);
 	
 	//! Check if a path exists and is a directory.
 	//! @param path to check
@@ -114,11 +117,6 @@ public:
 	//! @param path the path whose parent directory is to be returned
 	string dirName(const string& path);
 	
-	//! Convenience function to find the basename of a given path
-	//! May return relative paths if the parameter is a relative path
-	//! @param path the path whose parent directory is to be returned
-	string baseName(const string& path);
-	
 	//! Get the user's Desktop directory
 	//! This is a portable way to retrieve the directory for the user's desktop.
 	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
@@ -128,7 +126,7 @@ public:
 	//! @return the path to the user's desktop directory
 	//! @exception NOT_FOUND when the directory cannot be determined, or the
 	//!            OS doesn't provide one.
-	string getDesktopDir(void);
+	QString getDesktopDir(void);
 	
 	//! Returns the path to the user directory
 	//! This is the directory where we expect to find the [default] writable 
@@ -137,14 +135,7 @@ public:
 	//! trying to find most data files
 	//! @return the path to the user private data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
-	string getUserDir(void);
-	
-	//! Returns the path to the installation directory
-	//! This is the directory where we expect to find scripts, nebulae, stars, 
-	//! skycultures etc, and will be added at the end of the search path
-	//! @return the path to the installation data directory	
-	//! @exceptions NOT_FOUND if the directory could not be found
-	string getInstallationDir(void);
+	QString getUserDir(void);
 	
 	//! This is the directory into which screenshots will be saved
 	//! It is $HOME on Linux, BSD, Solaris etc.
@@ -152,24 +143,36 @@ public:
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
 	//! @exceptions NOT_FOUND if the directory could not be found
-	string getScreenshotDir(void);
+	QString getScreenshotDir(void);
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	string getLocaleDir(void);
 
 private:
+	//! Convenience function to find the basename of a given path
+	//! May return relative paths if the parameter is a relative path
+	//! @param path the path whose parent directory is to be returned
+	QString baseName(const QString& path);
+	
+	//! Returns the path to the installation directory
+	//! This is the directory where we expect to find scripts, nebulae, stars, 
+	//! skycultures etc, and will be added at the end of the search path
+	//! @return the path to the installation data directory	
+	//! @exceptions NOT_FOUND if the directory could not be found
+	QString getInstallationDir(void);
+	
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
 	//! @param flags a set of StelFileMgr::FLAGS to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exceptions misc 
-	bool fileFlagsCheck(const string& path, const FLAGS& flags=(FLAGS)0);
+	bool fileFlagsCheck(const QString& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Used to print info to stdout on the current state of the file paths.
 	void outputFileSearchPaths(void);
 		
-	vector<string> fileLocations;
+	QStringList fileLocations;
 	
 };
 

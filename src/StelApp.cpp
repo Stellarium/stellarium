@@ -127,8 +127,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 	}
 	InitParser conf;
 	conf.load(getConfigFilePath());
-	distorter = ViewportDistorter::create(type,getScreenW(),getScreenH(),
-	                                      core->getProjection(),conf);
+	distorter = ViewportDistorter::create(type,getScreenW(),getScreenH(),core->getProjection(),conf);
 }
 
 string StelApp::getViewPortDistorterType() const
@@ -156,16 +155,19 @@ void StelApp::init()
 	cout << "[ Copyright (C) 2000-2007 Fabien Chereau et al         ]" << endl;
 	cout << " -------------------------------------------------------" << endl;
 	
-	vector<string> p=stelFileMgr->getSearchPaths();
+	QStringList p=stelFileMgr->getSearchPaths();
 	cout << "File search paths:" << endl;
-	for(vector<string>::iterator i=p.begin(); i!=p.end(); i++)
-		cout << " " << (1 + i - p.begin()) << ". " << *i << endl;
-	
-	cout << "config file is: " << configFile << endl;
+	int n=0;
+	for(QStringList::iterator i=p.begin(); i!=p.end(); ++i)
+	{
+		cout << " " << n << ". " << (*i).toStdString() << endl;
+		++n;
+	}
+	cout << "config file is: " << configFile.toUtf8().data() << endl;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "config file \"" << configFile << "\" does not exist - copying the default file." << endl;
+		cerr << "config file \"" << configFile.toUtf8().data() << "\" does not exist - copying the default file." << endl;
 		copyDefaultConfigFile();
 	}
 	
@@ -204,16 +206,7 @@ void StelApp::init()
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
-	string confPath;
-	try
-	{
-		confPath = getConfigFilePath();
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR finding config file: " << e.what() << endl;
-	}
-	conf.load(confPath);
+	conf.load(getConfigFilePath());
 
 	// Main section
 	string version = conf.get_str("main:version");
@@ -235,7 +228,7 @@ void StelApp::init()
 					<< "It will be replaced by the default config file." << endl;
 
             copyDefaultConfigFile();
-            conf.load(configFile);  // Read new config
+			conf.load(getConfigFilePath());  // Read new config
 		}
 		else
 		{
@@ -418,15 +411,15 @@ void StelApp::parseCLIArgsPreConfig(void)
 	
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
-		set<string> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::DIRECTORY);
-		for(set<string>::iterator i=landscapeIds.begin(); i!=landscapeIds.end(); i++)
+		QSet<QString> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::DIRECTORY);
+		for(QSet<QString>::iterator i=landscapeIds.begin(); i!=landscapeIds.end(); ++i)
 		{
 			try 
 			{
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
-				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
-				cout << *i << endl;
+				stelFileMgr->qfindFile("landscapes/" + *i + "/landscape.ini");
+				cout << (*i).toUtf8().data() << endl;
 			}
 			catch(exception& e){}
 		}
@@ -746,11 +739,11 @@ void StelApp::set2DfullscreenProjection() const
 	glTranslatef(0, -getScreenH(), 0);		// move the origin from the bottom left corner to the upper left corner
 }
 
-void StelApp::setConfigFile(const string& configName)
+void StelApp::setConfigFile(const QString& configName)
 {
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
+		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
 		return;
 	}
 	catch(exception& e)
@@ -760,7 +753,7 @@ void StelApp::setConfigFile(const string& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE);	
+		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::FILE);	
 		return;
 	}
 	catch(exception& e)
@@ -770,23 +763,23 @@ void StelApp::setConfigFile(const string& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW);
+		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::NEW);
 		//cerr << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile << endl;
 		return;
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName << endl;
+		cerr << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName.toUtf8().data() << endl;
 		exit(1);
 	}
 }
 
 void StelApp::copyDefaultConfigFile()
 {
-	string defaultConfigFilePath;
+	QString defaultConfigFilePath;
 	try
 	{
-		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini");
+		defaultConfigFilePath = stelFileMgr->qfindFile("data/default_config.ini");
 	}
 	catch(exception& e)
 	{
@@ -794,10 +787,10 @@ void StelApp::copyDefaultConfigFile()
 		exit(1);
 	}
 	
-	QFile::copy(QString::fromLocal8Bit (defaultConfigFilePath.c_str()), QString::fromLocal8Bit (configFile.c_str()));
+	QFile::copy(defaultConfigFilePath, configFile);
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath << " to " << configFile << ". You could try to copy it by hand." << endl;
+		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath.toUtf8().data() << " to " << configFile.toUtf8().data() << ". You could try to copy it by hand." << endl;
 		exit(1);
 	}
 }
@@ -812,7 +805,7 @@ void StelApp::restoreFrom2DfullscreenProjection() const
 }
 
 // Set the colorscheme for all the modules
-void StelApp::setColorScheme(const std::string& fileName, const std::string& section)
+void StelApp::setColorScheme(const QString& fileName, const std::string& section)
 {
 	InitParser conf;
 	conf.load(fileName);
@@ -829,7 +822,7 @@ void StelApp::setVisionModeNight()
 {
 	if (!getVisionModeNight())
 	{
-		setColorScheme(getConfigFilePath(), "night_color");
+		setColorScheme(getConfigFilePath().toUtf8().data(), "night_color");
 	}
 	draw_mode=DM_NIGHT;
 }
@@ -840,7 +833,7 @@ void StelApp::setVisionModeNormal()
 {
 	if (!getVisionModeNormal())
 	{
-		setColorScheme(getConfigFilePath(), "color");
+		setColorScheme(getConfigFilePath().toUtf8().data(), "color");
 	}
 	draw_mode=DM_NORMAL;
 }

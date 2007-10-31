@@ -866,7 +866,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	commander->execute_command(oss.str());
 
-	core->getObservatory()->save(app->getConfigFilePath(), "init_location");
+	core->getObservatory()->save(app->getConfigFilePath().toUtf8().data(), "init_location");
 	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 }
 
@@ -883,7 +883,7 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveLandscapeOptions(void)
 {
-	cout << "Saving landscape name in file " << app->getConfigFilePath() << endl;
+	cout << "Saving landscape name in file " << app->getConfigFilePath().toUtf8().data() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
@@ -911,7 +911,7 @@ void StelUI::setLandscapeUpdatesLocation(void)
 
 void StelUI::saveLanguageOptions(void)
 {
-	cout << "Saving language in file " << app->getConfigFilePath() << endl;
+	cout << "Saving language in file " << app->getConfigFilePath().toUtf8().data() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage());
@@ -922,7 +922,7 @@ void StelUI::saveLanguageOptions(void)
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << app->getConfigFilePath() << endl;
+	cout << "Saving rendering options in file " << app->getConfigFilePath().toUtf8().data() << endl;
 
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
@@ -992,7 +992,7 @@ void StelUI::setVideoOption(void)
 	cout << "Saving video settings: projection=" << core->getProjection()->getCurrentProjection()
 	     << ", distorter=" << app->getViewPortDistorterType();
 	if ( w && h ) cout << ", res=" << w << "x" << h;
-	cout << " in file " << app->getConfigFilePath() << endl;
+	cout << " in file " << app->getConfigFilePath().toUtf8().data() << endl;
 
 	InitParser conf;
 	conf.load(app->getConfigFilePath());

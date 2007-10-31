@@ -41,7 +41,7 @@ Landscape::~Landscape()
 void Landscape::loadCommon(const string& landscape_file, const string& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
+	pd.load(landscape_file.c_str());
 	// cout << "DEBUG Landscape::loadCommon section name is: " << landscapeId << "file name is " << landscape_file << endl;
 	name = StelUtils::stringToWstring(pd.get_str("landscape", "name"));
 	author = StelUtils::stringToWstring(pd.get_str("landscape", "author"));
@@ -100,7 +100,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& landsca
 	// TODO: put values into hash and call create method to consolidate code
 
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
+	pd.load(landscape_file.c_str());
 
 	string type = pd.get_str("landscape", "type");
 	if(type != "old_style")
@@ -380,7 +380,7 @@ void LandscapeFisheye::load(const string& landscape_file, const string& landscap
 	loadCommon(landscape_file, landscapeId);
 	
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
+	pd.load(landscape_file.c_str());
 
 	string type = pd.get_str("landscape", "type");
 	if(type != "fisheye")
@@ -445,7 +445,7 @@ void LandscapeSpherical::load(const string& landscape_file, const string& landsc
 	loadCommon(landscape_file, landscapeId);
 	
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
+	pd.load(landscape_file.c_str());
 
 	string type = pd.get_str("landscape", "type");
 	if(type != "spherical" )
