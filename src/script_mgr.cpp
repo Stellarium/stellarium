@@ -144,7 +144,7 @@ void ScriptMgr::record_script(string script_filename) {
 		string scriptSaveDir;
 		try
 		{
-			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir() + "/scripts";
+			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir().toStdString() + "/scripts";
 			if (!StelApp::getInstance().getFileMgr().exists(scriptSaveDir))
 			{
 				if (!StelApp::getInstance().getFileMgr().mkDir(scriptSaveDir))
@@ -282,12 +282,12 @@ string ScriptMgr::get_script_list(string directory) {
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
-		set<string> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::FILE);
-		for(set<string>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
+		QSet<QString> scriptList = StelApp::getInstance().getFileMgr().listContents(directory.c_str(), StelFileMgr::FILE);
+		for(QSet<QString>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
-			if (string(*i, i->length()-4, 4) == ".sts" )
+			if (i->endsWith(".sts"))
 			{
-				result = result + *i + '\n';
+				result = result + (*i).toUtf8().data() + '\n';
 			}
 		}
 	}

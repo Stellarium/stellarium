@@ -27,6 +27,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "GLee.h"
+#include "fixx11h.h"
 #include "STexture.hpp"
 #include "STextureTypes.hpp"
 #include "InitParser.hpp"

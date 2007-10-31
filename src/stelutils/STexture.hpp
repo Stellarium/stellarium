@@ -23,6 +23,7 @@
 #include <string>
 #include "vecmath.h"
 #include "GLee.h"
+#include "fixx11h.h"
 
 //! Base texture class.
 //! @author Fabien Chereau

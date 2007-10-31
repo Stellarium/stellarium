@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <QFileInfo>
 
 #include "InitParser.hpp"
 #include "iniparser.h"
@@ -36,43 +37,37 @@ InitParser::~InitParser()
 	dico = NULL;
 }
 
-void InitParser::load(const string& file)
+void InitParser::load(const QString& file)
 {
 	// Check file presence
-	FILE * fp = NULL;
-	fp = fopen(file.c_str(),"rtb");
-	if (fp)
+	if (!QFileInfo(file).exists())
 	{
-		fclose(fp);
-	}
-	else
-	{
-		cerr << "ERROR : Can't find config file " << file << endl;
+		cerr << "ERROR : Can't find config file " << file.toStdString() << endl;
 		exit(-1);
 	}
 
 	if (dico) free_dico();
 	dico = NULL;
-	dico = iniparser_load(file.c_str());
+	dico = iniparser_load(file.toUtf8().data());
 	if (!dico)
 	{
-		cerr << "ERROR : Couldn't read config file " << file << endl;
+		cerr << "ERROR : Couldn't read config file " << file.toUtf8().data() << endl;
 		exit(-1);
 	}
 }
 
-void InitParser::save(const string& file_name) const
+void InitParser::save(const QString& file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
-	fp = fopen(file_name.c_str(),"wt");
+	fp = fopen(file_name.toUtf8().data(),"wt");
 	if (fp)
 	{
 		iniparser_dump_ini(dico, fp);
 	}
 	else
 	{
-		cerr << "ERROR : Can't open file " << file_name << endl;
+		cerr << "ERROR : Can't open file " << file_name.toUtf8().data() << endl;
 		exit(-1);
 	}
 	if (fp) fclose(fp);

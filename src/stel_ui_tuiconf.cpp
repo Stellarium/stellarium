@@ -962,7 +962,7 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 
 
 // Saves all current settings
-void StelUI::saveCurrentConfig(const string& confFile)
+void StelUI::saveCurrentConfig(const QString& confFile)
 {
 	// No longer resaves everything, just settings user can change through UI
 
@@ -972,7 +972,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	GridLinesMgr* grlmgr = (GridLinesMgr*)app->getModuleMgr().getModule("gridlines");
 	MovementMgr* mvmgr = (MovementMgr*)app->getModuleMgr().getModule("movements");
 	
-	cout << "Saving configuration file " << confFile << " ..." << endl;
+	cout << "Saving configuration file " << confFile.toUtf8().data() << " ..." << endl;
 	InitParser conf;
 	conf.load(confFile);
 

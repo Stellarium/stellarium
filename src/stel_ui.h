@@ -109,7 +109,7 @@ public:
 	bool getFlagShowConfigWin() const {return config_win->getVisible();}
 	
 	// for use by TUI
-	void saveCurrentConfig(const string& confFile);
+	void saveCurrentConfig(const QString& confFile);
 	
 	void updateInfoSelectString(void);
 	

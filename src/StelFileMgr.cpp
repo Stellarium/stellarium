@@ -30,7 +30,7 @@ StelFileMgr::StelFileMgr()
 {
 	try
 	{
-		fileLocations.push_back(getUserDir());
+		fileLocations.append(getUserDir());
 	}
 	catch(exception &e)
 	{
@@ -39,7 +39,7 @@ StelFileMgr::StelFileMgr()
 	
 	try
 	{
-		fileLocations.push_back(getInstallationDir());
+		fileLocations.append(getInstallationDir());
 	}
 	catch(exception &e)
 	{
@@ -53,68 +53,61 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
+string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
-	return QString::fromUtf8(findFile(path.toUtf8().data(), flags).c_str());
+	return qfindFile(QString::fromUtf8(path.c_str()), flags).toUtf8().data();
 }
 
-string StelFileMgr::findFile(const string& path, const FLAGS& flags)
+QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
 {
 	// explicitly specified relative paths
 	if (path[0] == '.')
 		if (fileFlagsCheck(path, flags)) 
 			return path;
 		else
-			throw(runtime_error("file does not match flags: " + path));
+			throw(runtime_error(std::string("file does not match flags: ") + path.toUtf8().data()));
 
 	// explicitly specified absolute paths
-		QFileInfo thePath(QString::fromLocal8Bit (path.c_str()));
+	QFileInfo thePath(path);
 	if ( thePath.isAbsolute() )
 		if (fileFlagsCheck(path, flags))
 			return path;
 		else
-			throw(runtime_error("file does not match flags: " + path));
+			throw(runtime_error(std::string("file does not match flags: ") + path.toUtf8().data()));
 	
-	for(vector<string>::iterator i = fileLocations.begin();
-		   i != fileLocations.end();
-		   i++)
+	for (QStringList::iterator i=fileLocations.begin(); i!=fileLocations.end(); ++i)
 	{
 		if (fileFlagsCheck(*i + "/" + path, flags))
 			return (*i + "/" + path);
 	}
 	
-	throw(runtime_error("file not found: " + path));
+	throw(runtime_error(std::string("file not found: ") + path.toUtf8().data()));
 }
 
-set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLAGS& flags)
+QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::FLAGS& flags)
 {
-	set<string> result;
-	vector<string> listPaths;
-		
+	QSet<QString> result;
+	QStringList listPaths;
+			
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if (QFileInfo(QString::fromLocal8Bit (path.c_str())).isAbsolute())
-		listPaths.push_back("");
+	if (QFileInfo(path).isAbsolute())
+		listPaths.append("");
 	else
 		listPaths = fileLocations;
 	
-	for (vector<string>::iterator li = listPaths.begin();
-	     li != listPaths.end();
-	     li++)
+	for (QStringList::iterator li = listPaths.begin();li != listPaths.end();++li)
 	{
-		QFileInfo thisPath(QString::fromLocal8Bit ((*li+"/"+path).c_str()));
+		QFileInfo thisPath(*li+"/"+path);
 		if (thisPath.isDir()) 
 		{
-  QDir thisDir(thisPath.absoluteFilePath());
+  			QDir thisDir(thisPath.absoluteFilePath());
 			QStringList lsOut = thisDir.entryList();
-			for (QStringList::const_iterator fileIt = lsOut.constBegin(); 
-				fileIt != lsOut.constEnd(); 
-				++fileIt)
+			for (QStringList::const_iterator fileIt = lsOut.constBegin(); fileIt != lsOut.constEnd(); ++fileIt)
 			{
-
 				if ((*fileIt != "..") && (*fileIt != "."))
 				{
-					QFileInfo fullPath(QString::fromLocal8Bit ((*li+"/"+path+"/"+(*fileIt).toStdString()).c_str()));
+					QFileInfo fullPath(*li+"/"+path+"/"+*fileIt);
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
@@ -136,7 +129,7 @@ set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLA
 					// OK, add the ones we want to the result
 					if (returnThisOne)
 					{
-						result.insert((*fileIt).toStdString());
+						result.insert(*fileIt);
 					}
 				}
 			}
@@ -146,7 +139,7 @@ set<string> StelFileMgr::listContents(const string& path, const StelFileMgr::FLA
 	return result;
 }
 
-void StelFileMgr::setSearchPaths(const vector<string>& paths)
+void StelFileMgr::setSearchPaths(const QStringList& paths)
 {
 	fileLocations = paths;
 	//outputFileSearchPaths();
@@ -154,38 +147,46 @@ void StelFileMgr::setSearchPaths(const vector<string>& paths)
 
 bool StelFileMgr::exists(const string& path)
 {
-	return QFileInfo(QString::fromLocal8Bit (path.c_str())).exists();
+	return QFileInfo(QString::fromUtf8(path.c_str())).exists();
+}
+bool StelFileMgr::exists(const QString& path)
+{
+	return QFileInfo(path).exists();
 }
 
 bool StelFileMgr::isWritable(const string& path)
 {
-	return QFileInfo(QString::fromLocal8Bit (path.c_str())).isWritable();
+	return QFileInfo(QString::fromUtf8(path.c_str())).isWritable();
+}
+bool StelFileMgr::isWritable(const QString& path)
+{
+	return QFileInfo(path).isWritable();
 }
 
 bool StelFileMgr::isDirectory(const string& path)
 {
-	return QFileInfo(QString::fromLocal8Bit (path.c_str())).isDir();
+	return QFileInfo(QString::fromUtf8(path.c_str())).isDir();
 }
 
 bool StelFileMgr::mkDir(const string& path)
 {
-	return QDir("/").mkpath(QString::fromLocal8Bit (path.c_str()));
+	return QDir("/").mkpath(QString::fromUtf8(path.c_str()));
 }
 
 string StelFileMgr::dirName(const string& path)
 {
-	return QFileInfo(QString::fromLocal8Bit (path.c_str())).dir().canonicalPath().toStdString();
+	return QFileInfo(QString::fromUtf8(path.c_str())).dir().canonicalPath().toStdString();
 }
 
-string StelFileMgr::baseName(const string& path)
+QString StelFileMgr::baseName(const QString& path)
 {
-	return QFileInfo(QString::fromLocal8Bit (path.c_str())).baseName().toStdString();
+	return QFileInfo(path).baseName();
 }
 
 void StelFileMgr::checkUserDir()
 {
 	try {
-		QFileInfo uDir(QString::fromLocal8Bit (getUserDir().c_str()));
+		QFileInfo uDir(getUserDir());
 		if (uDir.exists())
 		{
 			if (uDir.isDir() && uDir.isWritable())
@@ -204,7 +205,7 @@ void StelFileMgr::checkUserDir()
 			// The user directory doesn't exist, lets create it.
 			if (!QDir("/").mkpath(uDir.filePath()))
 			{
-				cerr << "ERROR: could not create user directory: " << uDir.filePath().toStdString() << endl;
+				cerr << "ERROR: could not create user directory: " << uDir.filePath().toUtf8().data() << endl;
 				exit(1);
 			}
 		}
@@ -217,7 +218,7 @@ void StelFileMgr::checkUserDir()
 	}	
 }
 
-bool StelFileMgr::fileFlagsCheck(const string& path, const FLAGS& flags)
+bool StelFileMgr::fileFlagsCheck(const QString& path, const FLAGS& flags)
 {
 	if ( ! (flags & HIDDEN) )
 	{
@@ -230,7 +231,7 @@ bool StelFileMgr::fileFlagsCheck(const string& path, const FLAGS& flags)
 		}
 	}
 	
-	QFileInfo thePath(QString::fromLocal8Bit (path.c_str()));
+	QFileInfo thePath(path);
 	QDir parentDir = thePath.dir();
 
 	if (flags & NEW)
@@ -271,19 +272,17 @@ void StelFileMgr::outputFileSearchPaths(void)
 {
 	int count = 0;
 	cout << "File search path set to:" << endl;		   
-	for(vector<string>::iterator i = fileLocations.begin();
-		   i != fileLocations.end();
-		   i++)
+	for(QStringList::iterator i=fileLocations.begin(); i!=fileLocations.end(); ++i)
 	{
-		cout << " " << ++count << ") " << *i << endl;
+		cout << " " << ++count << ") " << (*i).toUtf8().data() << endl;
 	}
 }
 
-string StelFileMgr::getDesktopDir(void)
+QString StelFileMgr::getDesktopDir(void)
 {
 	// TODO: Test Windows and MAC builds.  I edited the code but have
 	// not got a build platform -MNG
-	string result;
+	QString result;
 #if defined(WIN32)
 	char path[MAX_PATH];
 	path[MAX_PATH-1] = '\0';
@@ -300,7 +299,7 @@ string StelFileMgr::getDesktopDir(void)
 		if(getenv("USERPROFILE")!=NULL)
 		{
 			//for Win XP etc.
-			result = string(getenv("USERPROFILE")) + "\\Desktop";
+			result = QString(getenv("USERPROFILE")) + "\\Desktop";
 		}
 		else
 		{
@@ -314,14 +313,14 @@ string StelFileMgr::getDesktopDir(void)
 	result = getenv("HOME");
 	result += "/Desktop";
 #endif
-	if (!QFileInfo(QString::fromLocal8Bit (result.c_str())).isDir())
+	if (!QFileInfo(result).isDir())
 	{
 		throw(runtime_error("NOT FOUND"));
 	}
 	return result;
 }
 
-string StelFileMgr::getUserDir(void)
+QString StelFileMgr::getUserDir(void)
 {
 	QFileInfo userDir;
 #if defined(WIN32)
@@ -331,7 +330,7 @@ string StelFileMgr::getUserDir(void)
 		// This case happens in Win98 with no user profiles.  In this case
 		// We don't want to bother with a separate user dir - we just 
 		// return the install directory.
-		userDir = QString::fromStdString(getInstallationDir());
+		userDir = getInstallationDir();
 	}
 	else
 	{
@@ -367,14 +366,14 @@ string StelFileMgr::getUserDir(void)
 	return userDir.filePath().toUtf8().data();
 }
 
-string StelFileMgr::getInstallationDir(void)
+QString StelFileMgr::getInstallationDir(void)
 {
 	// If we are running from the build tree, we use the files from there...
 	if (QFileInfo(CHECK_FILE).exists())
 		return ".";
 
 #if defined(MACOSX)
-	QFileInfo installLocation( QString::fromLocal8Bit (MacosxDirs::getApplicationResourcesDirectory().c_str() ));
+	QFileInfo installLocation(MacosxDirs::getApplicationResourcesDirectory());
 	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 #else
 	// Linux, BSD, Solaris etc.
@@ -385,7 +384,7 @@ string StelFileMgr::getInstallationDir(void)
 
 	if (checkFile.exists())
 	{
-		return installLocation.filePath().toStdString();
+		return installLocation.filePath();
 	}
 	else
 	{
@@ -399,12 +398,12 @@ string StelFileMgr::getInstallationDir(void)
 	}
 }
 	
-string StelFileMgr::getScreenshotDir(void)
+QString StelFileMgr::getScreenshotDir(void)
 {
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	return getDesktopDir();
 #else
-	return QDir::homePath().toStdString();
+	return QDir::homePath();
 #endif
 }
 
@@ -414,7 +413,7 @@ string StelFileMgr::getLocaleDir(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = QFileInfo(QString::fromLocal8Bit (getInstallationDir().c_str()) + "/locale");
+	localePath = QFileInfo(QString::fromUtf8(getInstallationDir().c_str()) + "/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 

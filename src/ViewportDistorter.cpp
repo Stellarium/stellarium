@@ -20,6 +20,7 @@
 
 #include "GLee.h"
 
+#include "fixx11h.h"
 #include "ViewportDistorter.hpp"
 #include "StelApp.hpp"
 #include "SphericMirrorCalculator.hpp"
