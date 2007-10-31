@@ -344,7 +344,7 @@ QString StelFileMgr::getUserDir(void)
 	// wrong, than to lose all the users settings when thy upgrade).
 	if (getenv("APPDATA")!=NULL && !userDir.isDir())
 	{
-		userDir = QString::fromLocal8Bit(getenv("APPDATA")) + "/Stellarium";
+		userDir = QString::fromUtf8(getenv("APPDATA")) + "/Stellarium";
 	}
 
 #elif defined(MACOSX)
