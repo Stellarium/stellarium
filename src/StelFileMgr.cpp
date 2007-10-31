@@ -348,10 +348,11 @@ QString StelFileMgr::getUserDir(void)
 	}
 
 #elif defined(MACOSX)
-	userDir = QDir::homePath() + "/Library/Preferences/Stellarium";
+	userDir.setFile(QDir::homePath() + "/Library/Preferences/Stellarium");
 #else 
-	userDir = QDir::homePath() + "/.stellarium";
+	userDir.setFile(QDir::homePath() + "/.stellarium");
 #endif
+	cerr << userDir.filePath().toStdString() << endl;
 	if (!userDir.exists() || !userDir.isDir())
 	{
 		cerr << "WARNING StelFileMgr::getUserDir user dir does not exist: "
@@ -362,8 +363,6 @@ QString StelFileMgr::getUserDir(void)
 		cerr << "WARNING StelFileMgr::getUserDir user dir is not writable: "
 			<< userDir.filePath().toStdString() << endl;
 	}
-
-	userDir=userDir.canonicalFilePath();
 	return userDir.filePath();
 }
 
