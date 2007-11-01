@@ -447,16 +447,19 @@ void StelAppSdl::saveScreenShot(const string& filePrefix, const string& saveDir)
 	{
 		try
 		{
-			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+			const QString tmp = StelApp::getInstance().getFileMgr().getScreenshotDir();
+			shotDir = tmp.toStdString();
+			if (!StelApp::getInstance().getFileMgr().isWritable(tmp))
 			{
-				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
+				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: "
+                     << shotDir << endl;
 				return;
 			}
 		}
 		catch(exception& e)
 		{
-			cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
+			cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: "
+                 << e.what() << endl;
 			return;
 		}
 	}
