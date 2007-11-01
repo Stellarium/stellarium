@@ -43,16 +43,16 @@ void InitParser::load(const QString& file)
 	// Check file presence
 	if (!QFileInfo(file).exists())
 	{
-		cerr << "ERROR : Can't find config file " << file.toStdString() << endl;
+		cerr << "ERROR : Can't find config file " << qPrintable(file) << endl;
 		assert(0);
 	}
 
 	if (dico) free_dico();
 	dico = NULL;
-	dico = iniparser_load(file.toUtf8().data());
+	dico = iniparser_load(file.toLocal8Bit().data());
 	if (!dico)
 	{
-		cerr << "ERROR : Couldn't read config file " << file.toUtf8().data() << endl;
+		cerr << "ERROR : Couldn't read config file " << qPrintable(file) << endl;
 		exit(-1);
 	}
 }
@@ -61,14 +61,14 @@ void InitParser::save(const QString& file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
-	fp = fopen(file_name.toUtf8().data(),"wt");
+	fp = fopen(file_name.toLocal8Bit().data(),"wt");
 	if (fp)
 	{
 		iniparser_dump_ini(dico, fp);
 	}
 	else
 	{
-		cerr << "ERROR : Can't open file " << file_name.toUtf8().data() << endl;
+		cerr << "ERROR : Can't open file " << qPrintable(file_name) << endl;
 		exit(-1);
 	}
 	if (fp) fclose(fp);
