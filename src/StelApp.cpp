@@ -160,14 +160,14 @@ void StelApp::init()
 	int n=0;
 	for(QStringList::iterator i=p.begin(); i!=p.end(); ++i)
 	{
-		cout << " " << n << ". " << (*i).toStdString() << endl;
+		cout << " " << n << ". " << qPrintable(*i) << endl;
 		++n;
 	}
-	cout << "config file is: " << configFile.toStdString() << endl;
+	cout << "config file is: " << qPrintable(configFile) << endl;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "config file \"" << configFile.toStdString() << "\" does not exist - copying the default file." << endl;
+		cerr << "config file \"" << qPrintable(configFile) << "\" does not exist - copying the default file." << endl;
 		copyDefaultConfigFile();
 	}
 	

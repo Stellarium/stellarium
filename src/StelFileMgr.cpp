@@ -274,7 +274,7 @@ void StelFileMgr::outputFileSearchPaths(void)
 	cout << "File search path set to:" << endl;		   
 	for(QStringList::iterator i=fileLocations.begin(); i!=fileLocations.end(); ++i)
 	{
-		cout << " " << ++count << ") " << (*i).toUtf8().data() << endl;
+		cout << " " << ++count << ") " << qPrintable(*i) << endl;
 	}
 }
 
