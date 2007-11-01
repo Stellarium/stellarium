@@ -430,7 +430,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_video->addComponent(screen_size_sl);
 
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
-	Label * lblvideo6 = new Label(StelUtils::stringToWstring(app->getConfigFilePath()));
+	Label * lblvideo6 = new Label(app->getConfigFilePath().toStdWString());
 	lblvideo5->setPos(30, tab_video->getSizey()-125);
 	lblvideo6->setPos(30, tab_video->getSizey()-110);
 	tab_video->addComponent(lblvideo5);
