@@ -198,8 +198,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
                 "no memory (2)" << endl;
         exit(1);
       }
-      if (nr_of_zones != fread(zone_size,sizeof(unsigned int),
-                                    nr_of_zones,f)) {
+      if (nr_of_zones != fread(zone_size,sizeof(unsigned int),nr_of_zones,f)) {
         delete[] getZones();
         zones = 0;
         nr_of_zones = 0;
@@ -273,8 +272,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
             mmap_start = MapViewOfFile(mapping_handle, 
                                        FILE_MAP_READ, 
                                        0, 
-                                       mmap_offset, 
-                                       sizeof(Star)*nr_of_stars);
+                                       start_in_file-mmap_offset, 
+                                       mmap_offset+sizeof(Star)*nr_of_stars);
             if (mmap_start == NULL) {
               cerr << "ERROR: SpecialZoneArray(" << level
                    << ")::SpecialZoneArray: "
