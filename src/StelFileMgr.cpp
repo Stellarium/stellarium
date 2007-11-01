@@ -344,7 +344,7 @@ QString StelFileMgr::getUserDir(void)
 	// wrong, than to lose all the users settings when thy upgrade).
 	if (getenv("APPDATA")!=NULL && !userDir.isDir())
 	{
-		userDir = QString::fromUtf8(getenv("APPDATA")) + "/Stellarium";
+		userDir = QString::fromLocal8Bit(getenv("APPDATA")) + "/Stellarium";
 	}
 
 #elif defined(MACOSX)
@@ -413,7 +413,7 @@ string StelFileMgr::getLocaleDir(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	// Windows and MacOS X have the locale dir in the installation folder
 	// TODO: check if this works with OSX
-	localePath = QFileInfo(QString::fromUtf8(getInstallationDir().c_str()) + "/locale");
+	localePath = QFileInfo(getInstallationDir() + "/locale");
 #else
 	// Linux, BSD etc, the locale dir is set in the config.h
 	// but first, if we are in the development tree, don't rely on an 
