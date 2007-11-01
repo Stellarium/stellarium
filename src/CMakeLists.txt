@@ -218,7 +218,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${J
 
 ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS})
 TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
-INSTALL(TARGETS stelMain DESTINATION bin)
+INSTALL(TARGETS stelMain DESTINATION lib)
 
 ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
 TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
