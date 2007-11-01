@@ -33,13 +33,13 @@ class MacosxDirs
 {
 public:
 	//! Return the full path to the ".app" directory that corresponds to this macosx application.
-	//! @return a std::string of the full path.
-	static string getApplicationDirectory();
+	//! @return the full path.
+	static QString getApplicationDirectory();
 
 
 	//! Return the full path of the Resources directory inside this macosx application.
-	//! @return a std::string of the full path.
-	static string getApplicationResourcesDirectory();
+	//! @return the full path.
+	static QString getApplicationResourcesDirectory();
 };
 
 #endif

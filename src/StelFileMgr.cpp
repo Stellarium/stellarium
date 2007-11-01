@@ -352,7 +352,6 @@ QString StelFileMgr::getUserDir(void)
 #else 
 	userDir.setFile(QDir::homePath() + "/.stellarium");
 #endif
-	cerr << userDir.filePath().toStdString() << endl;
 	if (!userDir.exists() || !userDir.isDir())
 	{
 		cerr << "WARNING StelFileMgr::getUserDir user dir does not exist: "

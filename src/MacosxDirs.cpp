@@ -33,15 +33,13 @@ OSStatus CreateCStringUTF8(CFStringRef inString, char* &outCString)
 	return err;
 }
 
-string MacosxDirs::getApplicationDirectory()
+QString MacosxDirs::getApplicationDirectory()
 {
 	FSRef appBundleRef;
-
 	ProcessSerialNumber psn = {0, kCurrentProcess};
 
 	if (GetProcessBundleLocation(&psn, &appBundleRef) == noErr)
 	{
-
 		CFURLRef url = CFURLCreateFromFSRef(kCFAllocatorDefault, &appBundleRef);
 		CFStringRef cfString = NULL;
 		char * cstr;
@@ -52,17 +50,17 @@ string MacosxDirs::getApplicationDirectory()
 			CFRelease(url);
 			if (CreateCStringUTF8(cfString, cstr) == noErr)
 			{
-				string res(cstr);
+				QString res(cstr);
 				free(cstr);
 				return res;
 			}
 		}
 	}
-	return NULL;
+	return QString();
 }
 
-string MacosxDirs::getApplicationResourcesDirectory()
+QString MacosxDirs::getApplicationResourcesDirectory()
 {
-	return MacosxDirs::getApplicationDirectory() + std::string("/Contents/Resources");
+	return MacosxDirs::getApplicationDirectory() + "/Contents/Resources";
 }
 
