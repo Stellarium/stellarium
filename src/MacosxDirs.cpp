@@ -61,6 +61,6 @@ QString MacosxDirs::getApplicationDirectory()
 
 QString MacosxDirs::getApplicationResourcesDirectory()
 {
-	return MacosxDirs::getApplicationDirectory() + "/Contents/Resources";
+	return MacosxDirs::getApplicationDirectory().append("/Contents/Resources");
 }
 

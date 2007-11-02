@@ -39,7 +39,7 @@ string Translator::systemLangName = "C";
 // Use system locale language by default
 #if defined(MACOSX)
 #include "MacosxDirs.hpp"
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory() + "/locale", "system");
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory().append( "/locale" ).toStdString(), "system");
 #else
 Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
 #endif
