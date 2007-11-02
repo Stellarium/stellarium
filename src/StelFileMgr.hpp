@@ -3,7 +3,6 @@
 
 #define CHECK_FILE "data/ssystem.ini"
 
-#include <vector>
 #include <QSet>
 #include <string>
 

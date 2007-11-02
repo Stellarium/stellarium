@@ -20,6 +20,7 @@
 #define MACOSXDIRS_HPP_
 
 #include <string>
+#include <QString>
 
 using namespace std;
 
