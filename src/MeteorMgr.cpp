@@ -57,7 +57,7 @@ void MeteorMgr::init(const InitParser& conf, LoadingBar& lb)
 double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
 	return 0;
 }
 
@@ -152,7 +152,7 @@ void MeteorMgr::update(double delta_time)
 
 double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye)
 {
-	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return 0.;
 	

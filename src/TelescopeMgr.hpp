@@ -46,7 +46,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual string getModuleID() const {return "telescopes";}
+	virtual QString getModuleID() const {return "TelescopeMgr";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void setColorScheme(const InitParser& conf, const std::string& section);

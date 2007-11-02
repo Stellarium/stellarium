@@ -93,7 +93,7 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("gridlines")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr")->getCallOrder(actionName)+10;
 	return 0;
 }
 

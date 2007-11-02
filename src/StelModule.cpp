@@ -22,7 +22,7 @@
 /*************************************************************************
  Get the version of the module, default is stellarium main version
 *************************************************************************/
-string StelModule::getModuleVersion() const
+QString StelModule::getModuleVersion() const
 {
 	return PACKAGE_VERSION;
 }

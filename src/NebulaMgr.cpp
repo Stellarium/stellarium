@@ -69,7 +69,7 @@ NebulaMgr::~NebulaMgr()
 double NebulaMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("milkyway")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("MilkyWay")->getCallOrder(actionName)+10;
 	return 0;
 }
 

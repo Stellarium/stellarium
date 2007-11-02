@@ -326,7 +326,7 @@ protected:
 		
 private:	
 	// Set the colorscheme for all the modules
-	void setColorScheme(const QString& fileName, const std::string& section);
+	void setColorScheme(const QString& fileName, const QString& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;

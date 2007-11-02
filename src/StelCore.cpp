@@ -79,7 +79,7 @@ void StelCore::initProj(const InitParser& conf)
 void StelCore::init(const InitParser& conf, LoadingBar& lb)
 {	
 	// Observer
-	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	observatory = new Observer(*solsystem);
 	observatory->load(conf, "init_location");
 
@@ -91,7 +91,7 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 	movementMgr->init(conf, lb);
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
-	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	int grid_level = hip_stars->getMaxGridLevel();
 	geodesic_grid = new GeodesicGrid(grid_level);
 	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
@@ -109,7 +109,7 @@ void StelCore::update(int delta_time)
 	navigation->updateTime(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
-	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	solsystem->computePositions(navigation->getJDay(), navigation->getHomePlanet()->get_heliocentric_ecliptic_pos());
 	//cerr << "get_heliocentric_ecliptic_pos()[0]=" << navigation->getHomePlanet()->get_heliocentric_ecliptic_pos()[0] << endl;
 
@@ -147,7 +147,7 @@ void StelCore::preDraw()
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
 
-	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
 	
 	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
@@ -168,7 +168,7 @@ void StelCore::postDraw()
 *************************************************************************/
 bool StelCore::setHomePlanet(const std::string& planet)
 {
-	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	// reset planet trails due to changed perspective
 	ssystem->startTrails( ssystem->getFlagTrails() );
 

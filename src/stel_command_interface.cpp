@@ -106,14 +106,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	status = parse_command(commandline, command, args);
 
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
-	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	
 	// stellarium specific logic to run each command
 
@@ -169,7 +169,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["star_twinkle_amount"]!="") smgr->setTwinkleAmount(StelUtils::stringToDouble(args["star_twinkle_amount"]));
 		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
-			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("MilkyWay");
 			mw->setIntensity(StelUtils::stringToDouble(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
 			if(mw->getIntensity()) mw->setFlagShow(true);
@@ -409,7 +409,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	} else if(command=="image") {
 
-		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("image_mgr");
+		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("ImageMgr");
 
 		if(args["name"]=="") {
 			debug_message = _("Image name required.");
@@ -533,7 +533,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	}
 	else if(command=="script") {
 
-		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("image_mgr");
+		ImageMgr* script_images = (ImageMgr*)StelApp::getInstance().getModuleMgr().getModule("ImageMgr");
 
 		if(args["action"]=="end") {
 			// stop script, audio, and unload any loaded images
@@ -775,15 +775,15 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 
 		} else status = 0;
 
-		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
-		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 		
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
@@ -903,7 +903,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			nmgr->setFlagHints(newval);
 		}
 		else if(name=="milky_way") {
-			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("MilkyWay");
 			newval = !mw->getFlagShow();
 			mw->setFlagShow(newval);
 		}
@@ -961,15 +961,15 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		
 		} else status = 0;
 
-		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+		StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
-		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 		
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
@@ -1014,7 +1014,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="milky_way")
 		{
-			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("milkyway");
+			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("MilkyWay");
 			mw->setFlagShow(newval);
 		}
 		else if(name=="bright_nebulae") nmgr->setFlagBright(newval);
@@ -1034,7 +1034,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 
 void StelCommandInterface::update(double delta_time)
 {
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	// keep audio position updated if changing time multiplier
 	if (scripts->is_paused())
 		return;

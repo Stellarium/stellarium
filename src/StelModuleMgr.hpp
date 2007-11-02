@@ -41,10 +41,10 @@ public:
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
-	StelModule* loadExternalPlugin(const std::string& moduleID);
+	StelModule* loadExternalPlugin(const QString& moduleID);
 
 	//! Get the corresponding module or NULL if can't find it.
-	StelModule* getModule(const std::string& moduleID);
+	StelModule* getModule(const QString& moduleID);
 	
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
 	//! according to modules orders dependencies
@@ -64,7 +64,7 @@ public:
 		private:
 			friend class boost::iterator_core_access;
 			friend class StelModuleMgr;
-			Iterator(std::map<std::string, StelModule*>::iterator p) : mapIter(p) {}
+			Iterator(std::map<QString, StelModule*>::iterator p) : mapIter(p) {}
 			void increment() { ++mapIter; }
 	
 			bool equal(Iterator const& other) const
@@ -73,7 +73,7 @@ public:
 			}
 			
 			StelModule*& dereference() const { return mapIter->second; }
-			std::map<std::string, StelModule*>::iterator mapIter;
+			std::map<QString, StelModule*>::iterator mapIter;
 	};
 	Iterator begin() {return Iterator(modules.begin());}
 	const Iterator& end() {return endIter;}
@@ -82,11 +82,11 @@ public:
 	struct ExternalStelModuleDescriptor
 	{
 		//! The name of the directory and of the lib*.so with *=key
-		std::string key;
-		std::string name;
-		std::string author;
-		std::string contact;
-		std::string description;
+		QString key;
+		QString name;
+		QString author;
+		QString contact;
+		QString description;
 		bool loadAtStartup;
 	};
  
@@ -95,7 +95,7 @@ public:
  
 private:
 	//! The main module list associating name:pointer
-	std::map<std::string, StelModule*> modules;
+	std::map<QString, StelModule*> modules;
 	
 	//! The list of all module in the correct order for each action
 	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> > callOrders;

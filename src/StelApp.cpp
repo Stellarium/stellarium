@@ -645,7 +645,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	
 	// Manage the event for the main window
 	{
-		StelCommandInterface* commander = (StelCommandInterface*)getModuleMgr().getModule("command_interface");
+		StelCommandInterface* commander = (StelCommandInterface*)getModuleMgr().getModule("StelCommandInterface");
 		
 		// Deselect the selected object
 		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
@@ -653,7 +653,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			commander->execute_command("select");
 			return 1;
 		}
-		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("movements");
+		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("MovementMgr");
 		if (button==Stel_BUTTON_LEFT && state==Stel_MOUSEBUTTONUP && !mvmgr->getHasDragged())
 		{
 #ifdef MACOSX
@@ -672,7 +672,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			// If an object was selected update informations
 			if (getStelObjectMgr().getWasSelected())
 			{
-				((MovementMgr*)moduleMgr->getModule("movements"))->setFlagTracking(false);
+				((MovementMgr*)moduleMgr->getModule("MovementMgr"))->setFlagTracking(false);
 				StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 				ui->updateInfoSelectString();
 			}
@@ -805,7 +805,7 @@ void StelApp::restoreFrom2DfullscreenProjection() const
 }
 
 // Set the colorscheme for all the modules
-void StelApp::setColorScheme(const QString& fileName, const std::string& section)
+void StelApp::setColorScheme(const QString& fileName, const QString& section)
 {
 	InitParser conf;
 	conf.load(fileName);

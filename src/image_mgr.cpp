@@ -42,7 +42,7 @@ ImageMgr::~ImageMgr()
 double ImageMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("landscape")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10;
 	return 0;
 }
 
@@ -107,7 +107,7 @@ Image * ImageMgr::get_image(string name)
 
 void ImageMgr::update(double delta_time)
 {
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	if(scripts->is_paused())
 		return;
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)

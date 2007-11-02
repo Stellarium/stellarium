@@ -20,9 +20,8 @@
 #ifndef STELMODULE_H
 #define STELMODULE_H
 
-#include <string>
-#include <map>
-
+#include <QString>
+//#include <QObject>
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 
@@ -42,7 +41,10 @@ using namespace std;
 //! Because StelModules are very generic components, it is also possible to load them dynamically,
 //! thus enabling creation of external plug-ins for stellarium.
 //! @author Fabien Chereau
-class StelModule{
+class StelModule //: public QObject
+{
+	//Q_OBJECT
+
 public:
 	StelModule() {;}
 
@@ -69,16 +71,16 @@ public:
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	
 	//! Get the identifier of the module. Must be unique.
-	virtual string getModuleID() const = 0;	
+	virtual QString getModuleID() const = 0;	
 	
 	//! Get the version of the module, default is stellarium main version
-	virtual string getModuleVersion() const;
+	virtual QString getModuleVersion() const;
 	
 	//! Get the name of the module author
-	virtual string getAuthorName() const {return "Stellarium's Team";}
+	virtual QString getAuthorName() const {return "Stellarium's Team";}
 	
 	//! Get the email adress of the module author
-	virtual string getAuthorEmail() const {return "http://www.stellarium.org";}
+	virtual QString getAuthorEmail() const {return "http://www.stellarium.org";}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
 	//! @param x X mouse position in pixels.
@@ -109,7 +111,7 @@ public:
 	virtual void selectedObjectChangeCallBack(bool added=false) {;}
 	
 	//! Load color scheme from the given ini file and section name
-	virtual void setColorScheme(const InitParser& conf, const std::string& section) {;}
+	virtual void setColorScheme(const InitParser& conf, const QString& section) {;}
 	
 	//! This method is called for all StelModules when the GL window is resized
 	virtual void glWindowHasBeenResized(int w, int h) {;}

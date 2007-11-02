@@ -59,7 +59,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
 	//! Return the StelModule ID, "ssystem".
-	virtual string getModuleID() const {return "ssystem";}
+	virtual QString getModuleID() const {return "SolarSystem";}
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param prj The Projector object.
@@ -80,7 +80,7 @@ public:
 	virtual void selectedObjectChangeCallBack(bool added=false);
 	
 	//! Set the color scheme.
-	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

@@ -73,7 +73,7 @@ TelescopeMgr::~TelescopeMgr(void) {
 double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("meteors")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+10;
 	return 0;
 }
 
