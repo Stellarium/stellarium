@@ -31,7 +31,7 @@ public:
 	//! Update time-dependent things (does nothing).
 	virtual void update(double deltaTime) {;}
 	//! Get the StelModule ID, returns, "movements".
-	virtual string getModuleID() const {return "movements";}
+	virtual QString getModuleID() const {return "MovementMgr";}
 	//! Implement required draw function.  Does nothing.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
 	//! Handle keyboard events.

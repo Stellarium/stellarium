@@ -80,7 +80,7 @@ SolarSystem::~SolarSystem()
 double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("stars")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("StarMgr")->getCallOrder(actionName)+10;
 	return 0;
 }
 
@@ -674,13 +674,13 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer*
 	return maxSquaredDistance;
 }
 
-void SolarSystem::setColorScheme(const InitParser& conf, const std::string& section)
+void SolarSystem::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
-	setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
-	setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"planet_names_color", defaultColor)));
+	setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"planet_orbits_color", defaultColor)));
+	setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"object_trails_color", defaultColor)));
 }
 
 Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const

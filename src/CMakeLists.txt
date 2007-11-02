@@ -203,6 +203,16 @@ SET(stellarium_lib_SRCS
    planetsephems/stellplanet.h
 )
 
+################# compiles moc files ############
+# Add here all the files which require moc compilation
+# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
+# SET(stellarium_MOC_HDRS
+#	StelModule.hpp
+#)
+
+# After this call, stellarium_MOC_SRCS = moc_VirGO.cxx
+#QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
+
 SET(stellarium_exe_SRCS
    main.cpp
 )
@@ -216,7 +226,7 @@ ENDIF(MACOSX)
 
 SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
-ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS})
+ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS})
 TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
 INSTALL(TARGETS stelMain DESTINATION lib)
 

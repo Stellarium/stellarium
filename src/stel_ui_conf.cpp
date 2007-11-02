@@ -48,9 +48,9 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	
-	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	
 	config_win = new StdBtWin(_("Configuration"));
 	//config_win->setOpaque(opaqueGUI);
@@ -750,7 +750,7 @@ void StelUI::autoCompleteSearchedObject(void)
 
 void StelUI::gotoSearchedObject(void)
 {
-	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 	
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(star_edit->getText()))
 	{
@@ -773,9 +773,9 @@ void StelUI::gotoSearchedObject(void)
 
 void StelUI::updateConfigVariables(void)
 {
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	
 	commander->execute_command("flag stars ", stars_cbx->getState());
 	commander->execute_command("flag star_names ", star_names_cbx->getState());
@@ -812,20 +812,20 @@ void StelUI::updateConfigVariables(void)
 
 void StelUI::updateConfigVariables2(void)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	commander->execute_command("flag planets ", planets_cbx->getState());
 }
 
 void StelUI::setCurrentTimeFromConfig(void)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
 	commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
 void StelUI::setObserverPositionFromMap(void)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	std::ostringstream oss;
 	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude()
 		<< " alt " << earth_map->getPointerAltitude();
@@ -841,7 +841,7 @@ void StelUI::setCityFromMap(void)
 
 void StelUI::setObserverPositionFromIncDec(void)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	std::ostringstream oss;
 	oss.setf(ios::fixed);
 	oss.precision(10);
@@ -852,7 +852,7 @@ void StelUI::setObserverPositionFromIncDec(void)
 
 void StelUI::doSaveObserverPosition(const string& name)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
 	
 	string location = name;
@@ -886,7 +886,7 @@ void StelUI::saveLandscapeOptions(void)
 	cout << "Saving landscape name in file " << app->getConfigFilePath().toUtf8().data() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("LandscapeMgr");
 	conf.set_str("init_location:landscape_name", lmgr->getLandscapeId());
 	conf.set_boolean("landscape:flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf.save(app->getConfigFilePath());
@@ -894,7 +894,7 @@ void StelUI::saveLandscapeOptions(void)
 
 void StelUI::setLandscapeUpdatesLocation(void)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("LandscapeMgr");
 	lmgr->setFlagLandscapeSetsLocation(locationFromLandscapeCheck->getState());
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
@@ -927,13 +927,13 @@ void StelUI::saveRenderOptions(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
 	
 	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
@@ -1016,7 +1016,7 @@ void StelUI::setVideoOption(void)
 
 void StelUI::setLandscape(void)
 {
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	lmgr->setLandscape(lmgr->nameToKey(landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
 	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());	
@@ -1044,13 +1044,13 @@ void StelUI::updateVideoVariables(void)
 void StelUI::updateConfigForm(void)
 {
 	// Stars
-	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
+	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
 	
 	stars_cbx->setState(smgr->getFlagStars());
 	star_names_cbx->setState(smgr->getFlagNames());
@@ -1166,7 +1166,7 @@ void StelUI::search_win_hideBtCallback(void)
 
 void StelUI::updatePlanetMap(const string& englishName)
 {
-	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	Planet* planetObject = (Planet*)(ssystem->searchByEnglishName(englishName));
 	if (!planetObject)
 		return;

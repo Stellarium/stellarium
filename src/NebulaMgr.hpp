@@ -60,7 +60,7 @@ public:
 	
 	//! Identify the module.
 	//! @return "nebulas";
-	virtual string getModuleID() const {return "nebulas";}
+	virtual QString getModuleID() const {return "NebulaMgr";}
 	
 	//! Draws all nebula objects.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);

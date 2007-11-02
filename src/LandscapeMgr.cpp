@@ -149,9 +149,9 @@ LandscapeMgr::~LandscapeMgr()
 double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("telescopes")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("TelescopeMgr")->getCallOrder(actionName)+10;
 	if (actionName==StelModule::ACTION_UPDATE)
-		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
 	return 0;
 }
 
@@ -163,7 +163,7 @@ void LandscapeMgr::update(double deltaTime)
 	
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
-	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Projector* prj = StelApp::getInstance().getCore()->getProjection();
 	const Observer* obs = StelApp::getInstance().getCore()->getObservatory();

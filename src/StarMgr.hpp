@@ -89,7 +89,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
 	//! Get the StelModule ID for this module, returns "stars".
-	virtual string getModuleID() const {return "stars";}
+	virtual QString getModuleID() const {return "StarMgr";}
 	
 	//! Draw the stars and the star selection indicator if necessary.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw all the stars

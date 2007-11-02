@@ -40,7 +40,7 @@ class ScriptMgr : public StelModule
  public:
   ScriptMgr(StelCommandInterface * command_interface);
   virtual ~ScriptMgr();
-  virtual string getModuleID() const { return "script_mgr"; }
+  virtual QString getModuleID() const { return "ScriptMgr"; }
   
   virtual void init(const InitParser& conf, LoadingBar& lb);
   virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}

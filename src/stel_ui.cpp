@@ -123,7 +123,7 @@ StelUI::~StelUI()
 double StelUI::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("ssystem")->getCallOrder(actionName)+1000;
+		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+1000;
 	return 0;
 }
 
@@ -582,7 +582,7 @@ void StelUI::cbEditScriptExecute(void)
 	bt_script->clearText();
 	bt_script->setEditing(false);
 	
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
 	if (!commander->execute_command(command_string))
 		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
 }
@@ -590,11 +590,11 @@ void StelUI::cbEditScriptExecute(void)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::cb(void)
 {
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 	
 	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
 	cmgr->setFlagNames(bt_flag_constellation_name->getState());
@@ -863,7 +863,7 @@ void StelUI::drawGui(void)
 /*******************************************************************************/
 int StelUI::handleMouseMoves(int x, int y, StelMod mod)
 {
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
 	if(scripts->is_playing()) return 0;
@@ -880,7 +880,7 @@ int StelUI::handleMouseMoves(int x, int y, StelMod mod)
 /*******************************************************************************/
 int StelUI::handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)
 {
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
 	if(scripts->is_playing()) return 0;
@@ -894,7 +894,7 @@ int StelUI::handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod m
 
 	if (desktop->onClic((int)x, (int)y, button, state, mod))
 	{
-		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 		mvmgr->stopDragging();
 		return 1;
 	}
@@ -910,8 +910,8 @@ int StelUI::handle_keysGUI(StelKey key, StelMod mod, Uint16 unicode, Uint8 state
 int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
 	const StelObjectMgr& objmgr = StelApp::getInstance().getStelObjectMgr();
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("command_interface");
-	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("script_mgr");
+	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
+	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	
 	if (state==Stel_KEYDOWN)
 	{
@@ -1047,7 +1047,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 			}
             return 0;
 		}
-		TelescopeMgr* telmgr = (TelescopeMgr*)StelApp::getInstance().getModuleMgr().getModule("telescopes");
+		TelescopeMgr* telmgr = (TelescopeMgr*)StelApp::getInstance().getModuleMgr().getModule("TelescopeMgr");
         switch (key) {
 		case StelKey_ESCAPE:
 	        // RFE 1310384, ESC closes dialogs
@@ -1101,8 +1101,8 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             } // else fall through
 		case StelKey_COMMA:
 		{
-			SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+			SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			if(!grlmgr->getFlagEclipticLine())
 			{
 				commander->execute_command( "flag ecliptic_line on");
@@ -1148,7 +1148,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             if (mod & COMPATIBLE_StelMod_CTRL && objmgr.getWasSelected()) {
             	telmgr->telescopeGoto(9,objmgr.getSelectedObject()[0]->getObsJ2000Pos(core->getNavigation()));
             } else {
-            	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
+            	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
 				const int zhr = metmgr->getZHR();
 				if (zhr <= 10 ) {
 					commander->execute_command("meteors zhr 80");  // standard Perseids rate
@@ -1209,7 +1209,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             break;
 		case StelKey_p:
 		{
-			SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+			SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 			if(!ssmgr2->getFlagHints())
 			{
 				commander->execute_command("flag planet_names on");
@@ -1227,7 +1227,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		}
 		case StelKey_z:
 		{
-			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			if (grlmgr->getFlagMeridianLine()) {
 				commander->execute_command( "flag meridian_line 0");
 				commander->execute_command( "flag azimuthal_grid 1");
@@ -1264,7 +1264,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 
 		case StelKey_t:
 		{
-			MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+			MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
             mvmgr->setFlagLockEquPos(!mvmgr->getFlagLockEquPos());
             break;
 		}
@@ -1317,7 +1317,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             if (mod & COMPATIBLE_StelMod_CTRL) {
 				commander->execute_command( "zoom auto out");
             } else {
-            	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+            	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 				// here we help script recorders by selecting the right type of zoom option
 				// based on current settings of manual or full auto zoom
 				if(mvmgr->getFlagManualAutoZoom()) commander->execute_command( "zoom auto in manual 1");
@@ -1368,10 +1368,10 @@ void StelUI::gui_update_widgets(int delta_time)
 	// update message win
 	message_win->update(delta_time);
 	
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	if (!initialised) 
         return;

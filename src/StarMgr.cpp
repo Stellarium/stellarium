@@ -305,7 +305,7 @@ StarMgr::StarMgr(void) :
 double StarMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
-		return StelApp::getInstance().getModuleMgr().getModule("constellations")->getCallOrder(actionName)+10;
+		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10;
 	return 0;
 }
 

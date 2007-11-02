@@ -42,7 +42,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb) {;}
-	virtual string getModuleID() const {return "StelObjectMgr";}
+	virtual QString getModuleID() const {return "StelObjectMgr";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
 	virtual void update(double deltaTime) {;}
 	

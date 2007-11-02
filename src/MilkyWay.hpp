@@ -47,7 +47,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
 	//! Return the module ID: "milkyway";
-	virtual string getModuleID() const {return "milkyway";}
+	virtual QString getModuleID() const {return "MilkyWay";}
 	
 	//! Draw the Milky Way.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
