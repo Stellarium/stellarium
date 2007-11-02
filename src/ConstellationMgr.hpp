@@ -53,7 +53,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	//! Get the module ID string.
 	//! @return "constellations";
-	virtual string getModuleID() const {return "constellations";}
+	virtual QString getModuleID() const {return "ConstellationMgr";}
 	
 	//! Draw constellation lines, art, names and boundaries.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); 

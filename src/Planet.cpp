@@ -172,7 +172,7 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 
 float Planet::getSelectPriority(const Navigator *nav) const
 {
-	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem"))->getFlagHints() )
+	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
 		return getMagnitude(nav)-15.f;
@@ -185,7 +185,7 @@ float Planet::getSelectPriority(const Navigator *nav) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem"))->getNamesColor();
+	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getNamesColor();
 }
 
 
@@ -721,7 +721,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 {
 	float rc_mag[2];
 	const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
-                                  .getModuleMgr().getModule("stars");
+                                  .getModuleMgr().getModule("StarMgr");
 
 	if (smgr->computeRCMag(
                 compute_magnitude(nav->getObserverHelioPos()),smgr->getFlagPointStar(),
@@ -800,7 +800,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	{
 		float rc_mag[2];
 		const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
-	                                  .getModuleMgr().getModule("stars");
+	                                  .getModuleMgr().getModule("StarMgr");
 		if (smgr->computeRCMag(
     	            compute_magnitude(nav->getObserverHelioPos()),false,
         	        prj->getFov(),eye,rc_mag) < 0) return;

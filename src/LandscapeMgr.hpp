@@ -20,6 +20,7 @@
 #ifndef LANDSCAPEMGR_H_
 #define LANDSCAPEMGR_H_
 
+#include <map>
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 
@@ -49,7 +50,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
 	//! Get the module ID, returns "landscape".
-	virtual string getModuleID() const {return "landscape";}
+	virtual QString getModuleID() const {return "LandscapeMgr";}
 	
 	//! Draw the landscape graphics, cardinal points and atmosphere.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);

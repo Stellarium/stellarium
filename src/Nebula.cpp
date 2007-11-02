@@ -144,7 +144,7 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 
  float Nebula::getSelectPriority(const Navigator *nav) const
  {
-	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getFlagHints() )
+	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
 		return -10;
@@ -158,7 +158,7 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getNamesColor();
+	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getNamesColor();
 }
 
 double Nebula::getCloseViewFov(const Navigator*) const

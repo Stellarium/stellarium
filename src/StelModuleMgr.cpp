@@ -49,21 +49,21 @@ void StelModuleMgr::registerModule(StelModule* m)
 {
 	if (modules.find(m->getModuleID()) != modules.end())
 	{		
-		std::cerr << "Module \"" << m->getModuleID() << "\" is already loaded." << std::endl;
+		std::cerr << "Module \"" << m->getModuleID().toStdString() << "\" is already loaded." << std::endl;
 		return;
 	}
-	modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
+	modules.insert(std::pair<QString, StelModule*>(m->getModuleID(), m));
 }
 
 /*************************************************************************
  Get the corresponding module or NULL if can't find it.
 *************************************************************************/
-StelModule* StelModuleMgr::getModule(const string& moduleID)
+StelModule* StelModuleMgr::getModule(const QString& moduleID)
 {
-	std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
+	std::map<QString, StelModule*>::const_iterator iter = modules.find(moduleID);
 	if (iter==modules.end())
 	{
-		cerr << "Warning can't find module called " << moduleID << "." << endl;
+		cerr << "Warning can't find module called " << moduleID.toStdString() << "." << endl;
 		return NULL;
 	}
 	return iter->second;
@@ -74,9 +74,9 @@ StelModule* StelModuleMgr::getModule(const string& moduleID)
 /*************************************************************************
  Load an external plugin
 *************************************************************************/
-StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
+StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 {
-	string moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
+	QString moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
 #ifdef WIN32
 	moduleFullPath += ".dll";
 #else
@@ -88,32 +88,32 @@ StelModule* StelModuleMgr::loadExternalPlugin(const string& moduleID)
 #endif
 	try
 	{
-		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE);
+		moduleFullPath = StelApp::getInstance().getFileMgr().qfindFile(moduleFullPath, StelFileMgr::FILE);
 	}
 	catch(exception& e)
 	{
 		cerr << "ERROR while locating module path: " << e.what() << endl;
 	}
 
-	QPluginLoader loader(moduleFullPath.c_str());
+	QPluginLoader loader(moduleFullPath);
 	if (!loader.load())
 	{
-		cerr << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString().toStdString() << endl;
-		cerr << "Module " << moduleID << " will not be loaded." << endl;
+		cerr << "Couldn't load the dynamic library: " << moduleFullPath.toStdString() << ": " << loader.errorString().toStdString() << endl;
+		cerr << "Module " << moduleID.toStdString() << " will not be loaded." << endl;
 		return NULL;
 	}
 	
 	QObject* obj = loader.instance();
 	if (!obj)
 	{
-		cerr << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString().toStdString() << endl;
-		cerr << "Module " << moduleID << " will not be open." << endl;
+		cerr << "Couldn't open the dynamic library: " << moduleFullPath.toStdString() << ": " << loader.errorString().toStdString() << endl;
+		cerr << "Module " << moduleID.toStdString() << " will not be open." << endl;
 		return NULL;
 	}
 	
 	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
 	StelModule* sMod = plugInt->getStelModule();
-	cout << "Loaded external module " << moduleID << "." << endl;
+	cout << "Loaded external module " << moduleID.toStdString() << "." << endl;
 	return sMod;
 }
 
@@ -132,7 +132,7 @@ private:
 void StelModuleMgr::generateCallingLists()
 {
 	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> >::iterator mc;
-	std::map<string, StelModule*>::iterator m;
+	std::map<QString, StelModule*>::iterator m;
 	
 	// For each actions (e.g. "draw", "update", etc..)
 	for (mc=callOrders.begin();mc!=callOrders.end();++mc)
@@ -174,11 +174,11 @@ std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExter
 			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
 			InitParser pd;
 			pd.load(fileMan.qfindFile("modules/" + *dir + "/module.ini"));
-			mDesc.key = (*dir).toStdString();
-			mDesc.name = pd.get_str("module", "name");
-			mDesc.author = pd.get_str("module", "author");
-			mDesc.contact = pd.get_str("module", "contact");
-			mDesc.description = pd.get_str("module", "description");
+			mDesc.key = *dir;
+			mDesc.name = pd.get_str("module", "name").c_str();
+			mDesc.author = pd.get_str("module", "author").c_str();
+			mDesc.contact = pd.get_str("module", "contact").c_str();
+			mDesc.description = pd.get_str("module", "description").c_str();
 			mDesc.loadAtStartup = pd.get_boolean("module", "load_at_startup");
 			result.push_back(mDesc);
 		}

@@ -56,7 +56,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
 	//! Get the module ID, returns, "gridlines".
-	virtual string getModuleID() const {return "gridlines";}
+	virtual QString getModuleID() const {return "GridLinesMgr";}
 	
 	//! Draw the grids and great circle lines.
 	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line 
