@@ -1,15 +1,16 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 #
 # See POD docs at end of this file for genereal info
 
 use strict;
+use warnings;
 use File::Basename;
 use Getopt::Long;
 
 
 use constant PROG_DESCRIPTION => "asteroid orbital elements converter";
 use constant PROG_COPYRIGHT   => "(C) 2007; released under the GNU GPL version 2";
-use constant PROG_VERSION     => "0.01";
+use constant PROG_VERSION     => "0.02";
 use constant PROG_AUTHOR      => "Matthew Gates";
 
 my $this_script		= basename($0);
@@ -40,6 +41,7 @@ my %gh_selection;	# list of IDs which we want
 my $gs_selection_max = 0;
 my $gs_data_filename = "../builds/asteroid_orbits.dat";
 my $gs_name_filename = "../builds/asteroid_names.dat";
+my $gs_unknown_name_counter = 0;
 
 if ( ! $gs_flg_all ) {
 	foreach my $i (split(",", $gs_flg_id_list)) {
@@ -110,7 +112,7 @@ sub download_data_files {
 	if ( ! defined($statinfo[9]) ) { $download = 1; }
 	elsif ( time - $statinfo[9] > $gs_flg_data_age ) { $download = 1; }
 	if ( $download ) {
-		system("curl '$gs_flg_data_url' > '$gs_data_filename'") || die "cannot dowload $gs_flg_data_url : $!";
+		system("curl '$gs_flg_data_url' > '$gs_data_filename'") && die "cannot download $gs_flg_data_url";
 	}
 	else {
 		print STDERR "No need to download $gs_data_filename - we have a recent copy locally\n";
@@ -121,7 +123,7 @@ sub download_data_files {
 	if ( ! defined($statinfo[9]) ) { $download = 1; }
 	elsif ( time - $statinfo[9] > $gs_flg_data_age ) { $download = 1; }
 	if ( $download ) {
-		system("curl '$gs_flg_name_url' > '$gs_name_filename'") || die "cannot dowload $gs_flg_name_url : $!";
+		system("curl '$gs_flg_name_url' > '$gs_name_filename'") && die "cannot download $gs_flg_name_url : $!";
 	}
 	else {
 		print STDERR "No need to download $gs_name_filename - we have a recent copy locally\n";
@@ -145,9 +147,9 @@ sub load_data {
 		chomp;
 		my($id, @data) = unpack("A10 A17 A25 A25 A25 A25 A25 A25 A6 A6", $_);
 		$id =~ s/'//g;
-		if ( $id > $gs_selection_max ) { last; }
+		if ( $id > $gs_selection_max && ! $gs_flg_all ) { last; }
 
-		if ( ! defined($gh_selection{$id} && ! $gs_flg_all ) ) { next; }
+		if ( ! defined($gh_selection{$id}) && ! $gs_flg_all ) { next; }
 
 		my %datahash;
 		for(my $i=0; $i<=$#ga_field_order; $i++) {
@@ -190,8 +192,16 @@ sub load_names {
 
 sub dump_data {
 	foreach my $id (sort {$a <=> $b} keys %gh_data) {
-		printf "[%s]\n", lc($gh_names{$id});
-		print "name = $gh_names{$id}\n";
+		my $name;
+		if (defined($gh_names{$id})) {
+			$name = $gh_names{$id};
+		}
+		else {
+			$name = "unknown_name_$gs_unknown_name_counter";
+			$gs_unknown_name_counter++;
+		}
+		printf "[%s]\n", lc($name);
+		print "name = $name\n";
 		print "parent = Sun\n";
 		print "oblateness = 0.0\n";
 		print "color = 1.0,1.0,1.0\n";
@@ -314,6 +324,10 @@ http://porpoisehead.net/
 =item Date:2007-05-29 Created, Author MNG
 
 Original version.
+
+=item Date:2007-11-06 Bug fixes, Author MNG
+
+Download error status fixed.  Fixed --all option.  Fixed undefined name error.
 
 =back
 
