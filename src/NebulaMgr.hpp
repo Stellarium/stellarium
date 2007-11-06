@@ -58,10 +58,6 @@ public:
 	//! @param lb the loading bar object used to display loading progress and status
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
-	//! Identify the module.
-	//! @return "nebulas";
-	virtual QString getModuleID() const {return "NebulaMgr";}
-	
 	//! Draws all nebula objects.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	

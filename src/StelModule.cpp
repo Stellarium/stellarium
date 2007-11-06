@@ -19,6 +19,7 @@
  
 #include "StelModule.hpp"
 
+
 /*************************************************************************
  Get the version of the module, default is stellarium main version
 *************************************************************************/

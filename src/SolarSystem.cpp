@@ -48,6 +48,7 @@ SolarSystem::SolarSystem()
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flag_light_travel_time(false)
 {
+	setObjectName("SolarSystem");
 }
 
 void SolarSystem::setFontSize(float newFontSize)

@@ -58,9 +58,6 @@ public:
 	//! @param lb The LoadingBar object used to show loading progress.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
-	//! Return the StelModule ID, "ssystem".
-	virtual QString getModuleID() const {return "SolarSystem";}
-	
 	//! Draw SolarSystem objects (planets).
 	//! @param prj The Projector object.
 	//! @param nav The Navigator object.

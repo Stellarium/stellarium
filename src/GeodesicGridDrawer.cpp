@@ -26,6 +26,7 @@
 
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {
+	setObjectName("GeodesicGridDrawer");
 //	geodesic_grid = new GeodesicGrid(maxLevel);
 //	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
 	font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage());

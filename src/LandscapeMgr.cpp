@@ -133,6 +133,7 @@ void Cardinals::updateI18n()
 
 LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
 {
+	setObjectName("LandscapeMgr");
 }
 
 LandscapeMgr::~LandscapeMgr()

@@ -20,6 +20,7 @@
 #ifndef STELMODULEMGR_H
 #define STELMODULEMGR_H
 
+#include <QObject>
 #include <map>
 #include <vector>
 #include <boost/iterator/iterator_facade.hpp>
@@ -28,8 +29,10 @@
 //! @class StelModuleMgr
 //! Manage a collection of StelModules including both core and plugin modules.
 //! 
-class StelModuleMgr
+class StelModuleMgr : public QObject
 {
+	Q_OBJECT
+			
 public:
 	StelModuleMgr();
 	~StelModuleMgr();

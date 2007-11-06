@@ -45,6 +45,7 @@ void TelescopeMgr::TelescopeMap::clear(void) {
 }
 
 TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
+	setObjectName("TelescopeMgr");
 #ifdef WIN32
   WSADATA wsaData;
   if (WSAStartup(0x202,&wsaData) == 0) {

@@ -48,6 +48,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "QtScriptMgr.hpp"
 
 #include <QStringList>
 #include <QString>
@@ -96,16 +97,8 @@ StelApp::~StelApp()
 	delete fontManager; fontManager=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL;
 	delete stelFileMgr; stelFileMgr=NULL;
-	
-	// Delete all the modules
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
-	{
-		delete *iter;
-		*iter = NULL;
-	}
-
+	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
 	delete textureMgr; textureMgr=NULL;
-	delete moduleMgr; moduleMgr=NULL;
 	delete argList; argList=NULL;
 }
 
@@ -369,6 +362,9 @@ void StelApp::init()
 	// play startup script, if available
 	scripts->play_startup_script();
 	
+	//QtScriptMgr scriptMgr;
+	//scriptMgr.test();
+	
 	initialized = true;
 }
 
@@ -560,9 +556,7 @@ void StelApp::update(int delta_time)
 	//cerr << "-------" << endl;
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		//cerr << (*i)->getModuleID() << endl;
 		(*i)->update((double)delta_time/1000);
-
 	}
 	
 	stelObjectMgr->update((double)delta_time/1000);

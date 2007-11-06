@@ -1,7 +1,7 @@
 ADD_SUBDIRECTORY( planetsephems ) 
 ADD_SUBDIRECTORY( stelutils ) 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR})
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript)
 
 ########### next target ###############
 
@@ -135,6 +135,9 @@ SET(stellarium_lib_SRCS
    StelAppQt4.hpp
    StelAppQt4.cpp
 
+   QtScriptMgr.hpp
+   QtScriptMgr.cpp
+
    stelutils/bytes.h
    stelutils/gettext.h
    stelutils/InitParser.cpp
@@ -206,12 +209,15 @@ SET(stellarium_lib_SRCS
 ################# compiles moc files ############
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-# SET(stellarium_MOC_HDRS
-#	StelModule.hpp
-#)
+SET(stellarium_MOC_HDRS
+	QtScriptMgr.hpp
+	StelModule.hpp
+	StelModuleMgr.hpp
+	ConstellationMgr.hpp
+)
 
 # After this call, stellarium_MOC_SRCS = moc_VirGO.cxx
-#QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
+QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 
 SET(stellarium_exe_SRCS
    main.cpp
@@ -224,7 +230,7 @@ IF(MACOSX)
     MacosxDirs.hpp)
 ENDIF(MACOSX)
 
-SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
+SET(extLinkerOption ${QT_LIBRARIES} -lQtScript ${FreeType2_LIBRARIES} ${CURL_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
 ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS})
 TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})

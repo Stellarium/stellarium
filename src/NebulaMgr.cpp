@@ -50,6 +50,7 @@ bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 NebulaMgr::NebulaMgr(void) : nebGrid(10000), displayNoTexture(false)
 {
+	setObjectName("NebulaMgr");
 }
 
 NebulaMgr::~NebulaMgr()

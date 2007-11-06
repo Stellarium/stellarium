@@ -45,10 +45,7 @@ public:
 	//! @param conf ini parser object which contains the milky way settings.
 	//! @param lb the LoadingBar object used to display loading progress.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	
-	//! Return the module ID: "milkyway";
-	virtual QString getModuleID() const {return "MilkyWay";}
-	
+
 	//! Draw the Milky Way.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	

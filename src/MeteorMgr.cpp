@@ -31,6 +31,8 @@
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {
+	setObjectName("MeteorMgr");
+			
 	ZHR = zhr;
 	max_velocity = maxv;
 

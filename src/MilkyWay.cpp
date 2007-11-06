@@ -31,6 +31,7 @@
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
 {
+	setObjectName("MilkyWay");
 	fader = new LinearFader();
 }
 
