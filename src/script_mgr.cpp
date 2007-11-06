@@ -34,6 +34,7 @@
 using namespace std;
 
 ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(false) {
+	setObjectName("ScriptMgr");
 	commander = command_interface;
 	recording = 0;
 	playing = 0;

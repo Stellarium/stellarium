@@ -45,9 +45,6 @@ public:
 	//! @param lb the loading bar object.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
-	//! Get the module id: "meteors".
-	virtual QString getModuleID() const {return "MeteorMgr";}
-	
 	//! Draw meteors.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	

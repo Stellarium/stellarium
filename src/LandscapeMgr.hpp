@@ -49,9 +49,6 @@ public:
 	//! @param lb the loading bar object used to show loading progress.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
-	//! Get the module ID, returns "landscape".
-	virtual QString getModuleID() const {return "LandscapeMgr";}
-	
 	//! Draw the landscape graphics, cardinal points and atmosphere.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	

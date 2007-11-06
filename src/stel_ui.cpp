@@ -96,6 +96,7 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 	mapLastPlanet(NULL),
 	tui_root(NULL)
 {
+	setObjectName("StelUI");
 	if (!_core)
 	{
 		printf("ERROR : In stel_ui constructor, unvalid core.");

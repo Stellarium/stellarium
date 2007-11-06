@@ -47,12 +47,13 @@ StelModuleMgr::~StelModuleMgr()
 *************************************************************************/
 void StelModuleMgr::registerModule(StelModule* m)
 {
-	if (modules.find(m->getModuleID()) != modules.end())
+	if (modules.find(m->objectName()) != modules.end())
 	{		
-		std::cerr << "Module \"" << m->getModuleID().toStdString() << "\" is already loaded." << std::endl;
+		std::cerr << "Module \"" << m->objectName().toStdString() << "\" is already loaded." << std::endl;
 		return;
 	}
-	modules.insert(std::pair<QString, StelModule*>(m->getModuleID(), m));
+	modules.insert(std::pair<QString, StelModule*>(m->objectName(), m));
+	m->setParent(this);
 }
 
 /*************************************************************************

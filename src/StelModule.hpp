@@ -21,7 +21,7 @@
 #define STELMODULE_H
 
 #include <QString>
-//#include <QObject>
+#include <QObject>
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 
@@ -41,9 +41,9 @@ using namespace std;
 //! Because StelModules are very generic components, it is also possible to load them dynamically,
 //! thus enabling creation of external plug-ins for stellarium.
 //! @author Fabien Chereau
-class StelModule //: public QObject
+class StelModule : public QObject
 {
-	//Q_OBJECT
+	Q_OBJECT
 
 public:
 	StelModule() {;}
@@ -68,10 +68,7 @@ public:
 	virtual void updateI18n() {;}
 		   
 	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
-	virtual void updateSkyCulture(LoadingBar& lb) {;}
-	
-	//! Get the identifier of the module. Must be unique.
-	virtual QString getModuleID() const = 0;	
+	virtual void updateSkyCulture(LoadingBar& lb) {;}	
 	
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;

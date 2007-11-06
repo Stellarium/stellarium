@@ -193,6 +193,17 @@ const int GrayScale = XGrayScale;
 #endif
 
 // Affects: Should be without side effects.
+#ifdef NormalState
+#ifndef FIXX11H_NormalState
+#define FIXX11H_NormalState
+const int XNormalState = NormalState;
+#undef NormalState
+const int NormalState = XNormalState;
+#endif
+#undef NormalState
+#endif
+
+// Affects: Should be without side effects.
 #ifdef Status
 #ifndef FIXX11H_Status
 #define FIXX11H_Status

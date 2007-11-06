@@ -49,6 +49,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	flagArt(0),
 	flagBoundaries(0)
 {
+	setObjectName("ConstellationMgr");
 	assert(hipStarMgr);
 	isolateSelected = false;
 }

@@ -37,9 +37,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual QString getModuleID() const {return "GeodesicGridDrawer";}
-	virtual double draw(Projector *prj, const Navigator *nav,
-	                    ToneReproductor *eye, int max_search_level);
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye, int max_search_level);
 	virtual void update(double deltaTime) {;}
 	virtual void updateI18n() {;}
 	virtual void updateSkyCulture(LoadingBar& lb) {;}

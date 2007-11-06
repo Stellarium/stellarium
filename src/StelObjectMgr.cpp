@@ -26,6 +26,7 @@
 
 StelObjectMgr::StelObjectMgr()
 {
+	setObjectName("StelObjectMgr");
 	object_pointer_visibility = true;
 }
 
