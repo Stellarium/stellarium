@@ -55,6 +55,7 @@ using namespace std;
 
 StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) : FlagTimePause(0)
 {
+	setObjectName("StelCommandInterface");
   stcore = core;
   stapp = app;
   audio = NULL;

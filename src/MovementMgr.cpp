@@ -7,6 +7,7 @@
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
 	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
 {
+	setObjectName("MovementMgr");
 	is_dragging = false;
 }
 

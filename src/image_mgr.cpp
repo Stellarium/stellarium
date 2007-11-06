@@ -29,6 +29,7 @@
 
 ImageMgr::ImageMgr()
 {
+	setObjectName("ImageMgr");
 }
 
 ImageMgr::~ImageMgr()

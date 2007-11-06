@@ -39,6 +39,9 @@ class SFont;
 //! It also supports several different sky cultures.
 class ConstellationMgr : public StelObjectModule
 {
+	Q_OBJECT;
+	Q_PROPERTY(bool flagArt READ getFlagArt WRITE setFlagArt)
+		
 public:
 	ConstellationMgr(StarMgr *_hip_stars);
 	virtual ~ConstellationMgr();
@@ -51,9 +54,6 @@ public:
 	//! @param conf the ini file parser object
 	//! @param lb a reference to the LoadingBar object
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	//! Get the module ID string.
-	//! @return "constellations";
-	virtual QString getModuleID() const {return "ConstellationMgr";}
 	
 	//! Draw constellation lines, art, names and boundaries.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); 
@@ -100,17 +100,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
-	//! Read constellation names from the given file.
-	//! @param namesFile Name of the file containing the constellation names in english
-	void loadNames(const string& names_file);
-	
-	//! Load constellation line shapes, art textures and boundaries shapes from data files.
-	//! @param fileName The name of the constellation data file
-	//! @param artFileName The name of the constellation art data file
-	//! @param cultureName A string ID of the current skyculture
-	//! @param lb The loading progress bar object
-	void loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb);
-	
+public slots:
 	//! Set constellation art fade duration
 	void setArtFadeDuration(float duration);
 	//! Get constellation art fade duration
@@ -163,8 +153,19 @@ public:
 	
 	//! Define font size to use for constellation names display
 	void setFontSize(double newFontSize);
-
+	
 private:
+	//! Read constellation names from the given file.
+	//! @param namesFile Name of the file containing the constellation names in english
+	void loadNames(const string& names_file);
+	
+	//! Load constellation line shapes, art textures and boundaries shapes from data files.
+	//! @param fileName The name of the constellation data file
+	//! @param artFileName The name of the constellation art data file
+	//! @param cultureName A string ID of the current skyculture
+	//! @param lb The loading progress bar object
+	void loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb);
+	
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
 	//! and loads a new set from the file passed as the parameter.  The boundary 

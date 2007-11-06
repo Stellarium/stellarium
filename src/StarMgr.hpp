@@ -88,8 +88,6 @@ public:
 	//! @param lb The LoadingBar object which shows progress and current operation.
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	
-	//! Get the StelModule ID for this module, returns "stars".
-	virtual QString getModuleID() const {return "StarMgr";}
 	
 	//! Draw the stars and the star selection indicator if necessary.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw all the stars

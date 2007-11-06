@@ -290,6 +290,7 @@ StarMgr::StarMgr(void) :
 	fontSize(13.),
     starFont(0)
 {
+	setObjectName("StarMgr");
   setMagConverterMaxScaled60DegMag(6.5f);
   if (hip_index == 0 || mag_converter == 0) {
     cerr << "ERROR: StarMgr::StarMgr: no memory" << endl;

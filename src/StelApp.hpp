@@ -25,8 +25,8 @@
 #include <vector>
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
-#include <QString>
 #include "fixx11h.h"
+#include <QString>
 
 // Predeclaration of some classes
 class StelCore;
