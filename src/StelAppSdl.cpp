@@ -30,7 +30,7 @@
 #include <SDL/SDL_mixer.h>
 #endif
 
-
+#include <QDebug>
 #include "StelAppSdl.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
@@ -58,8 +58,7 @@ void StelAppSdl::setResizable(bool resizable)
 	assert(Screen);
 }
 
-void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,
-                            string iconFile)
+void StelAppSdl::initOpenGL(int w, int h, int bbpMode, bool fullScreen,const QString& iconFile)
 {
 	screenW = w;
 	screenH = h;
@@ -194,7 +193,7 @@ static const char *arrow[] = {
 	glClear(GL_COLOR_BUFFER_BIT);	
 }
 
-string StelAppSdl::getVideoModeList(void) const
+QString StelAppSdl::getVideoModeList(void) const
 {
     SDL_Rect **modes;
 	int i;
@@ -440,19 +439,18 @@ void StelAppSdl::startMainLoop()
 	}
 }
 
-void StelAppSdl::saveScreenShot(const string& filePrefix, const string& saveDir) const
+void StelAppSdl::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
-	string shotDir;
+	QString shotDir;
 	if (saveDir == "")
 	{
 		try
 		{
 			const QString tmp = StelApp::getInstance().getFileMgr().getScreenshotDir();
-			shotDir = tmp.toStdString();
+			shotDir = tmp;
 			if (!StelApp::getInstance().getFileMgr().isWritable(tmp))
 			{
-				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: "
-                     << shotDir << endl;
+				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir << endl;
 				return;
 			}
 		}
@@ -474,7 +472,7 @@ void StelAppSdl::saveScreenShot(const string& filePrefix, const string& saveDir)
 	const char *extension = ".bmp";
 #endif
 
-	string shotPath;
+	QString shotPath;
 	for(int j=0; j<1000; ++j)
 	{
 		stringstream oss;
