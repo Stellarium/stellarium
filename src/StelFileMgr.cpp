@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QString>
+#include <QDebug>
 
 #ifdef WIN32
 # include <windows.h>
@@ -65,7 +66,7 @@ QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
 		if (fileFlagsCheck(path, flags)) 
 			return path;
 		else
-			throw(runtime_error(std::string("file does not match flags: ") + path.toUtf8().data()));
+			throw (runtime_error(std::string("file does not match flags: ") + qPrintable(path)));
 
 	// explicitly specified absolute paths
 	QFileInfo thePath(path);
@@ -73,15 +74,15 @@ QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
 		if (fileFlagsCheck(path, flags))
 			return path;
 		else
-			throw(runtime_error(std::string("file does not match flags: ") + path.toUtf8().data()));
+			throw (runtime_error(std::string("file does not match flags: ") + qPrintable(path)));
 	
-	for (QStringList::iterator i=fileLocations.begin(); i!=fileLocations.end(); ++i)
+	foreach (QString i, fileLocations)
 	{
-		if (fileFlagsCheck(*i + "/" + path, flags))
-			return (*i + "/" + path);
+		if (fileFlagsCheck(i + "/" + path, flags))
+			return i + "/" + path;
 	}
 	
-	throw(runtime_error(std::string("file not found: ") + path.toUtf8().data()));
+	throw (runtime_error(std::string("file not found: ") + qPrintable(path)));
 }
 
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::FLAGS& flags)
@@ -96,9 +97,9 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	else
 		listPaths = fileLocations;
 	
-	for (QStringList::iterator li = listPaths.begin();li != listPaths.end();++li)
+	foreach (QString li, listPaths)
 	{
-		QFileInfo thisPath(*li+"/"+path);
+		QFileInfo thisPath(li+"/"+path);
 		if (thisPath.isDir()) 
 		{
   			QDir thisDir(thisPath.absoluteFilePath());
@@ -107,7 +108,7 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 			{
 				if ((*fileIt != "..") && (*fileIt != "."))
 				{
-					QFileInfo fullPath(*li+"/"+path+"/"+*fileIt);
+					QFileInfo fullPath(li+"/"+path+"/"+*fileIt);
 					// default is to return all objects in this directory
 					bool returnThisOne = true;
 				
@@ -272,9 +273,9 @@ void StelFileMgr::outputFileSearchPaths(void)
 {
 	int count = 0;
 	cout << "File search path set to:" << endl;		   
-	for(QStringList::iterator i=fileLocations.begin(); i!=fileLocations.end(); ++i)
+	foreach (QString i, fileLocations)
 	{
-		cout << " " << ++count << ") " << qPrintable(*i) << endl;
+		cout << " " << ++count << ") " << qPrintable(i) << endl;
 	}
 }
 
@@ -354,13 +355,13 @@ QString StelFileMgr::getUserDir(void)
 #endif
 	if (!userDir.exists() || !userDir.isDir())
 	{
-		cerr << "WARNING StelFileMgr::getUserDir user dir does not exist: "
-			<< userDir.filePath().toStdString() << endl;
+		qWarning() << "WARNING StelFileMgr::getUserDir user dir does not exist: "
+			<< userDir.filePath() << endl;
 	}
 	else if (!userDir.isWritable())
 	{
-		cerr << "WARNING StelFileMgr::getUserDir user dir is not writable: "
-			<< userDir.filePath().toStdString() << endl;
+		qWarning() << "WARNING StelFileMgr::getUserDir user dir is not writable: "
+			<< userDir.filePath() << endl;
 	}
 	return userDir.filePath();
 }
