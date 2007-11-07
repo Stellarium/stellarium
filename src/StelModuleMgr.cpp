@@ -20,6 +20,9 @@
 #include <iostream>
 #include <config.h>
 
+#include <QDebug>
+#include <QPluginLoader>
+
 #include "InitParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -28,14 +31,14 @@
 #include "StelPluginInterface.hpp"
 
 
-StelModuleMgr::StelModuleMgr() : endIter(modules.end())
+StelModuleMgr::StelModuleMgr()
 {
 	// Initialize empty call lists for each possible actions
-	callOrders[StelModule::ACTION_DRAW]=std::vector<StelModule*>();
-	callOrders[StelModule::ACTION_UPDATE]=std::vector<StelModule*>();
-	callOrders[StelModule::ACTION_HANDLEMOUSECLICKS]=std::vector<StelModule*>();
-	callOrders[StelModule::ACTION_HANDLEMOUSEMOVES]=std::vector<StelModule*>();
-	callOrders[StelModule::ACTION_HANDLEKEYS]=std::vector<StelModule*>();
+	callOrders[StelModule::ACTION_DRAW]=QList<StelModule*>();
+	callOrders[StelModule::ACTION_UPDATE]=QList<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEMOUSECLICKS]=QList<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEMOUSEMOVES]=QList<StelModule*>();
+	callOrders[StelModule::ACTION_HANDLEKEYS]=QList<StelModule*>();
 }
 
 StelModuleMgr::~StelModuleMgr()
@@ -49,10 +52,10 @@ void StelModuleMgr::registerModule(StelModule* m)
 {
 	if (modules.find(m->objectName()) != modules.end())
 	{		
-		std::cerr << "Module \"" << m->objectName().toStdString() << "\" is already loaded." << std::endl;
+		qWarning() << "Module \"" << m->objectName() << "\" is already loaded." << endl;
 		return;
 	}
-	modules.insert(std::pair<QString, StelModule*>(m->objectName(), m));
+	modules.insert(m->objectName(), m);
 	m->setParent(this);
 }
 
@@ -61,16 +64,15 @@ void StelModuleMgr::registerModule(StelModule* m)
 *************************************************************************/
 StelModule* StelModuleMgr::getModule(const QString& moduleID)
 {
-	std::map<QString, StelModule*>::const_iterator iter = modules.find(moduleID);
+	QMap<QString, StelModule*>::const_iterator iter = modules.find(moduleID);
 	if (iter==modules.end())
 	{
-		cerr << "Warning can't find module called " << moduleID.toStdString() << "." << endl;
+		qWarning() << "Warning can't find module called " << moduleID << "." << endl;
 		return NULL;
 	}
-	return iter->second;
+	return iter.value();
 }
 
-#include <QPluginLoader>
 
 /*************************************************************************
  Load an external plugin
@@ -91,7 +93,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	{
 		moduleFullPath = StelApp::getInstance().getFileMgr().qfindFile(moduleFullPath, StelFileMgr::FILE);
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
 		cerr << "ERROR while locating module path: " << e.what() << endl;
 	}
@@ -99,16 +101,16 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	QPluginLoader loader(moduleFullPath);
 	if (!loader.load())
 	{
-		cerr << "Couldn't load the dynamic library: " << moduleFullPath.toStdString() << ": " << loader.errorString().toStdString() << endl;
-		cerr << "Module " << moduleID.toStdString() << " will not be loaded." << endl;
+		qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString() << endl;
+		qWarning() << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}
 	
 	QObject* obj = loader.instance();
 	if (!obj)
 	{
-		cerr << "Couldn't open the dynamic library: " << moduleFullPath.toStdString() << ": " << loader.errorString().toStdString() << endl;
-		cerr << "Module " << moduleID.toStdString() << " will not be open." << endl;
+		qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString() << endl;
+		qWarning() << "Module " << moduleID << " will not be open." << endl;
 		return NULL;
 	}
 	
@@ -132,29 +134,27 @@ private:
 *************************************************************************/
 void StelModuleMgr::generateCallingLists()
 {
-	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> >::iterator mc;
-	std::map<QString, StelModule*>::iterator m;
-	
+	QMap<StelModule::StelModuleActionName, QList<StelModule*> >::iterator mc;
 	// For each actions (e.g. "draw", "update", etc..)
-	for (mc=callOrders.begin();mc!=callOrders.end();++mc)
+	for(mc=callOrders.begin();mc!=callOrders.end();++mc)
 	{
 		// Flush previous call orders
-		mc->second.clear();
+		mc.value().clear();
 		// and init them with modules in creation order
-		for (m=modules.begin();m!=modules.end();++m)
+		foreach (StelModule* m, getAllModules())
 		{
-			mc->second.push_back(m->second);
+			mc.value().push_back(m);
 		}
-		std::sort(mc->second.begin(), mc->second.end(), StelModuleOrderComparator(mc->first));
+		qSort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
 	}
 }
 
 /*************************************************************************
  Return the list of all the external module found in the modules/ directories
 *************************************************************************/
-std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalModuleList()
+QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalModuleList()
 {
-	std::vector<StelModuleMgr::ExternalStelModuleDescriptor> result;
+	QList<StelModuleMgr::ExternalStelModuleDescriptor> result;
 	QSet<QString> moduleDirs;
 	
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
@@ -185,7 +185,7 @@ std::vector<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExter
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read module.ini file from module " << (*dir).toStdString() << endl;
+			qWarning() << "WARNING: unable to successfully read module.ini file from module " << *dir << endl;
 		}
 	}
 

@@ -49,7 +49,7 @@ public:
 	virtual void startMainLoop(void);
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)
-	virtual string getVideoModeList(void) const;
+	virtual QString getVideoModeList(void) const;
 	
 	//! Return the time since when stellarium is running in second
 	virtual double getTotalRunTime() const;
@@ -95,7 +95,7 @@ public:
 protected:
 
 	//! Initialize openGL screen
-	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
+	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
 	
 	//! Save a screen shot.
 	//! The format of the file, and hence the filename extension 
@@ -103,7 +103,7 @@ protected:
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the drectory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	virtual void saveScreenShot(const string& filePrefix="stellarium-", const string& saveDir="") const;
+	virtual void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 	
 	//! Call this when you want to make the window (not) resizable
 	virtual void setResizable(bool resizable);

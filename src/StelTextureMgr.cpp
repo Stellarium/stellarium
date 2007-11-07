@@ -249,7 +249,7 @@ public:
 		if (param->toDownload)
 		{
 			cout << "Downloading image " << param->url << " to " << param->localPath << endl;
-			StelUtils::downloadFile(param->url, param->localPath, StelApp::getApplicationName(), param->cookiesFile);
+			StelUtils::downloadFile(param->url, param->localPath, StelApp::getApplicationName().toStdString(), param->cookiesFile);
 			param->tex->fullPath = param->localPath;
 		}
 		
