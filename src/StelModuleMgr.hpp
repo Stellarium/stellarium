@@ -21,9 +21,8 @@
 #define STELMODULEMGR_H
 
 #include <QObject>
-#include <map>
-#include <vector>
-#include <boost/iterator/iterator_facade.hpp>
+#include <QMap>
+#include <QList>
 #include "StelModule.hpp"
 
 //! @class StelModuleMgr
@@ -49,37 +48,18 @@ public:
 	//! Get the corresponding module or NULL if can't find it.
 	StelModule* getModule(const QString& moduleID);
 	
+	//! Get the list of all the currently registered modules
+	QList<StelModule*> getAllModules() {return modules.values();}
+	
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
 	//! according to modules orders dependencies
 	void generateCallingLists();
 
 	//! Get the list of modules in the correct order for calling the given action
-	const std::vector<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
+	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
 	{
 		return callOrders[action];
 	}
-
-	//! Add iterator so that we can easily iterate through registered modules
-	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
-	{
-		public:
-			Iterator() : mapIter() {}
-		private:
-			friend class boost::iterator_core_access;
-			friend class StelModuleMgr;
-			Iterator(std::map<QString, StelModule*>::iterator p) : mapIter(p) {}
-			void increment() { ++mapIter; }
-	
-			bool equal(Iterator const& other) const
-			{
-				return this->mapIter == other.mapIter;
-			}
-			
-			StelModule*& dereference() const { return mapIter->second; }
-			std::map<QString, StelModule*>::iterator mapIter;
-	};
-	Iterator begin() {return Iterator(modules.begin());}
-	const Iterator& end() {return endIter;}
 
 	//! Contains the information read from the module.ini file
 	struct ExternalStelModuleDescriptor
@@ -94,16 +74,15 @@ public:
 	};
  
 	//! Return the list of all the external module found in the modules directories
-	static std::vector<ExternalStelModuleDescriptor> getExternalModuleList();
+	static QList<ExternalStelModuleDescriptor> getExternalModuleList();
  
 private:
 	//! The main module list associating name:pointer
-	std::map<QString, StelModule*> modules;
+	QMap<QString, StelModule*> modules;
 	
 	//! The list of all module in the correct order for each action
-	std::map<StelModule::StelModuleActionName, std::vector<StelModule*> > callOrders;
-	
-	const Iterator endIter;
+	QMap<StelModule::StelModuleActionName, QList<StelModule*> > callOrders;
+
 };
 
 #endif

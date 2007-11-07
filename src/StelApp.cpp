@@ -105,12 +105,12 @@ StelApp::~StelApp()
 /*************************************************************************
  Return the full name of stellarium, i.e. "stellarium 0.9.0"
 *************************************************************************/
-std::string StelApp::getApplicationName()
+QString StelApp::getApplicationName()
 {
-	return string("Stellarium")+" "+PACKAGE_VERSION;
+	return QString("Stellarium")+" "+PACKAGE_VERSION;
 }
 
-void StelApp::setViewPortDistorterType(const string &type)
+void StelApp::setViewPortDistorterType(const QString &type)
 {
 	if (type != getViewPortDistorterType()) setResizable(type == "none");
 	if (distorter)
@@ -120,13 +120,13 @@ void StelApp::setViewPortDistorterType(const string &type)
 	}
 	InitParser conf;
 	conf.load(getConfigFilePath());
-	distorter = ViewportDistorter::create(type,getScreenW(),getScreenH(),core->getProjection(),conf);
+	distorter = ViewportDistorter::create(type.toStdString(),getScreenW(),getScreenH(),core->getProjection(),conf);
 }
 
-string StelApp::getViewPortDistorterType() const
+QString StelApp::getViewPortDistorterType() const
 {
 	if (distorter)
-            return distorter->getType();
+            return distorter->getType().c_str();
 	return "none";
 }
 
@@ -144,16 +144,16 @@ void StelApp::init()
 	
 	// OK, print the console splash and get on with loading the program
 	cout << " -------------------------------------------------------" << endl;
-	cout << "[ This is "<< StelApp::getApplicationName() << " - http://www.stellarium.org ]" << endl;
+	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
 	cout << "[ Copyright (C) 2000-2007 Fabien Chereau et al         ]" << endl;
 	cout << " -------------------------------------------------------" << endl;
 	
 	QStringList p=stelFileMgr->getSearchPaths();
 	cout << "File search paths:" << endl;
 	int n=0;
-	for(QStringList::iterator i=p.begin(); i!=p.end(); ++i)
+	foreach (QString i, p)
 	{
-		cout << " " << n << ". " << qPrintable(*i) << endl;
+		cout << " " << n << ". " << qPrintable(i) << endl;
 		++n;
 	}
 	cout << "config file is: " << qPrintable(configFile) << endl;
@@ -167,16 +167,16 @@ void StelApp::init()
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	
-	string fontMapFile("");
+	QString fontMapFile("");
 	try 
 	{
-		fontMapFile = stelFileMgr->findFile("data/fontmap.dat");
+		fontMapFile = stelFileMgr->qfindFile("data/fontmap.dat");
 	}
 	catch(exception& e)
 	{
 		cerr << "ERROR when locating font map file: " << e.what() << endl;
 	}
-	fontManager = new StelFontMgr(fontMapFile);
+	fontManager = new StelFontMgr(fontMapFile.toStdString());
 	
 	skyCultureMgr = new StelSkyCultureMgr();
 	moduleMgr = new StelModuleMgr();
@@ -232,10 +232,10 @@ void StelApp::init()
 	parseCLIArgsPostConfig(conf);
 
 	// Create openGL context first
-	string iconPath;
+	QString iconPath;
 	try
 	{
-		iconPath = stelFileMgr->findFile("data/icon.bmp");
+		iconPath = stelFileMgr->qfindFile("data/icon.bmp");
 	}
 	catch(exception& e)
 	{
@@ -337,16 +337,15 @@ void StelApp::init()
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
-	setViewPortDistorterType(conf.get_str("video","distorter","none"));
+	setViewPortDistorterType(conf.get_str("video","distorter","none").c_str());
 
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
-	std::vector<StelModuleMgr::ExternalStelModuleDescriptor> mDesc = moduleMgr->getExternalModuleList();
-	for (std::vector<StelModuleMgr::ExternalStelModuleDescriptor>::const_iterator i=mDesc.begin();i!=mDesc.end();++i)
+	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
 	{
-		if (i->loadAtStartup==false)
+		if (i.loadAtStartup==false)
 			continue;
-		StelModule* m = moduleMgr->loadExternalPlugin(i->key);
+		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
 		if (m!=NULL)
 		{
 			m->init(conf, lb);
@@ -372,7 +371,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 {	
 	if (argsGetOption(argList, "-v", "--version"))
 	{
-		cout << getApplicationName() << endl;
+		cout << qPrintable(getApplicationName()) << endl;
 		exit(0);
 	}
 
@@ -552,11 +551,9 @@ void StelApp::update(int delta_time)
 	core->update(delta_time);
 	
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_UPDATE);
-	//cerr << "-------" << endl;
-	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_UPDATE))
 	{
-		(*i)->update((double)delta_time/1000);
+		i->update((double)delta_time/1000);
 	}
 	
 	stelObjectMgr->update((double)delta_time/1000);
@@ -579,10 +576,9 @@ double StelApp::draw(int delta_time)
 	// Render all the main objects of stellarium
 	double squaredDistance = 0.;
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_DRAW);
-	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_DRAW))
 	{
-		double d = (*i)->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+		double d = i->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
 		if (d>squaredDistance)
 			squaredDistance = d;
 	}
@@ -610,10 +606,9 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 			core->getProjection()->windowHasBeenResized(getScreenW(),
 			                                            getScreenH());
 		// Send the event to every StelModule
-		for (StelModuleMgr::Iterator iter=moduleMgr->begin();
-		     iter!=moduleMgr->end();++iter)
+		foreach (StelModule* iter, moduleMgr->getAllModules())
 		{
-			(*iter)->glWindowHasBeenResized(w, h);
+			iter->glWindowHasBeenResized(w, h);
 		}
 	}
 }
@@ -630,10 +625,9 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	if (ui->handleClick(ui_x, ui_y, button, state, mod)) return 1;
 
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS);
-	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
 	{
-		if ((*i)->handleMouseClicks(x, y, button, state, mod)==true)
+		if (i->handleMouseClicks(x, y, button, state, mod)==true)
 			return 1;
 	}
 	
@@ -685,10 +679,9 @@ int StelApp::handleMove(int x, int y, StelMod mod)
 	distorter->distortXY(x,y);
 	
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES);
-	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
-		if ((*i)->handleMouseMoves(x, y, mod)==true)
+		if (i->handleMouseMoves(x, y, mod)==true)
 			return 1;
 	}
 	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
@@ -706,10 +699,9 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 	if (ui->handle_keysGUI(key, mod, unicode, state)) return 1;
 
 	// Send the event to every StelModule
-	std::vector<StelModule*> modList = moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS);
-	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS))
 	{
-		if ((*i)->handleKeys(key, mod, unicode, state)==true)
+		if (i->handleKeys(key, mod, unicode, state)==true)
 			return 1;
 	}
 
@@ -805,9 +797,9 @@ void StelApp::setColorScheme(const QString& fileName, const QString& section)
 	conf.load(fileName);
 	
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		(*iter)->setColorScheme(conf, section);
+		iter->setColorScheme(conf, section);
 	}
 }
 
@@ -846,9 +838,9 @@ void StelApp::updateAppLanguage()
 void StelApp::updateSkyLanguage()
 {
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		(*iter)->updateI18n();
+		iter->updateI18n();
 	}
 }
 
@@ -856,12 +848,12 @@ void StelApp::updateSkyLanguage()
 void StelApp::updateSkyCulture()
 {
 	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
-     core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
-      StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+				  core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
+					StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		(*iter)->updateSkyCulture(lb);
+		iter->updateSkyCulture(lb);
 	}
 }
 

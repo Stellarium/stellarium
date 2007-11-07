@@ -196,8 +196,8 @@ void StelFileMgr::checkUserDir()
 			}
 			else
 			{
-				cerr << "ERROR StelFileMgr::checkUserDir: user directory is not a writable directory: " << uDir.filePath().toStdString() << endl;
-				exit(1);
+				cerr << "ERROR StelFileMgr::checkUserDir: user directory is not a writable directory: " << qPrintable(uDir.filePath()) << endl;
+				qFatal("User directory is not a writable directory");
 			}
 		}
 		else
@@ -205,8 +205,8 @@ void StelFileMgr::checkUserDir()
 			// The user directory doesn't exist, lets create it.
 			if (!QDir("/").mkpath(uDir.filePath()))
 			{
-				cerr << "ERROR: could not create user directory: " << uDir.filePath().toUtf8().data() << endl;
-				exit(1);
+				cerr << "ERROR: could not create user directory: " << qPrintable(uDir.filePath()) << endl;
+				qFatal("Could not create user directory");
 			}
 		}
 	}
@@ -214,7 +214,7 @@ void StelFileMgr::checkUserDir()
 	{
 		// This should never happen  ;)
 		cerr << "ERROR: cannot work out the user directory: " << e.what() << endl;
-		exit(1);
+		qFatal("Cannot work out the user directory");
 	}	
 }
 

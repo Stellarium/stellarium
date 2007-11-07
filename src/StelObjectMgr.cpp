@@ -175,10 +175,9 @@ void StelObjectMgr::unSelect(void)
 	lastSelectedObjects.clear();
 	
 	// Send the event to every StelModule
-	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
-	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
-		(*iter)->selectedObjectChangeCallBack(false);
+		iter->selectedObjectChangeCallBack(false);
 	}
 }
 
@@ -207,10 +206,9 @@ bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, bool
 	lastSelectedObjects=objs;
 
 	// Send the event to every StelModule
-	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
-	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
-		(*iter)->selectedObjectChangeCallBack(added);
+		iter->selectedObjectChangeCallBack(added);
 	}
 	return true;
 }
