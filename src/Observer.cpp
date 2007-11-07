@@ -225,7 +225,7 @@ void Observer::load(const InitParser& conf, const string& section)
 		if (name[i]=='_') name[i]=' ';
 	}
 
-    if (!setHomePlanet(conf.get_str(section, "home_planet", "Earth"))) {
+    if (!setHomePlanet(conf.get_str(section, "home_planet", "Earth").c_str())) {
       planet = ssystem.getEarth();
     }
     
@@ -288,8 +288,8 @@ wstring Observer::get_name(void) const {
 }
 
 
-bool Observer::setHomePlanet(const string &english_name) {
-  Planet *p = ssystem.searchByEnglishName(english_name);
+bool Observer::setHomePlanet(const QString &english_name) {
+  Planet *p = ssystem.searchByEnglishName(english_name.toStdString());
   if (p==NULL)
   	return false;
   setHomePlanet(p);
