@@ -166,13 +166,13 @@ void StelCore::postDraw()
 /*************************************************************************
  Change the current home planet
 *************************************************************************/
-bool StelCore::setHomePlanet(const std::string& planet)
+bool StelCore::setHomePlanet(const QString& planet)
 {
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	// reset planet trails due to changed perspective
 	ssystem->startTrails( ssystem->getFlagTrails() );
 
-	if(observatory->setHomePlanet(planet))
+	if (observatory->setHomePlanet(planet))
 	{
 		return true;
 	}

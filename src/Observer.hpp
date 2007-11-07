@@ -20,7 +20,7 @@
 #ifndef _OBSERVER_H_
 #define _OBSERVER_H_
 
-#include <string>
+#include <QString>
 #include "vecmath.h"
 
 using namespace std;
@@ -36,7 +36,7 @@ public:
 
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
-	bool setHomePlanet(const string &english_name);
+	bool setHomePlanet(const QString& english_name);
     void setHomePlanet(const Planet *p,float transit_seconds=2.f);
     const Planet *getHomePlanet(void) const;
     string getHomePlanetEnglishName(void) const;
