@@ -181,10 +181,10 @@ static const char *arrow[] = {
 	SDL_SetCursor(Cursor);
 
 	// Set the window caption
-	SDL_WM_SetCaption(StelApp::getApplicationName().c_str(), StelApp::getApplicationName().c_str());
+	SDL_WM_SetCaption(StelApp::getApplicationName().toAscii(), StelApp::getApplicationName().toAscii());
 
 	// Set the window icon
-	SDL_Surface *icon = SDL_LoadBMP((iconFile).c_str());
+	SDL_Surface *icon = SDL_LoadBMP(iconFile.toAscii());
 	SDL_WM_SetIcon(icon, NULL);
 	SDL_FreeSurface(icon);
 	
@@ -215,7 +215,7 @@ QString StelAppSdl::getVideoModeList(void) const
 		ostringstream modesstr;
 		for(i=0;modes[i];++i)
 			modesstr << modes[i]->w << "x" << modes[i]->h << endl;
-		return modesstr.str();
+		return modesstr.str().c_str();
 	}
 }
 
@@ -477,7 +477,7 @@ void StelAppSdl::saveScreenShot(const QString& filePrefix, const QString& saveDi
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+(filePrefix + oss.str() + extension);
+		shotPath = shotDir+"/"+(filePrefix + oss.str().c_str() + extension);
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
@@ -511,7 +511,7 @@ void StelAppSdl::saveScreenShot(const QString& filePrefix, const QString& saveDi
 
 #ifdef __x86_64__
 	  // workaround because SDL_SaveBMP is buggy on x86_64
-	FILE *f = fopen(shotPath.c_str(),"wb");
+	FILE *f = fopen(shotPath.toAscii(),"wb");
 	if (f) {
 		fprintf(f,"P6\n# stellarium screenshot\n%d %d\n255\n",Screen->w,Screen->h);
 		fwrite(temp->pixels,1,3*(Screen->w)*(Screen->h),f);
@@ -523,11 +523,11 @@ void StelAppSdl::saveScreenShot(const QString& filePrefix, const QString& saveDi
 			<< endl;
 	}
 #else
-	SDL_SaveBMP(temp, shotPath.c_str());
+	SDL_SaveBMP(temp, shotPath.toAscii());
 #endif
 
 	SDL_FreeSurface(temp);
-	cout << "Saved screenshot to file : " << shotPath << endl;
+	cout << "Saved screenshot to file : " << (shotPath.toStdString()) << endl;
 }
 
 /*************************************************************************
