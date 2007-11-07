@@ -990,15 +990,15 @@ void StelUI::setVideoOption(void)
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
 	cout << "Saving video settings: projection=" << core->getProjection()->getCurrentProjection()
-	     << ", distorter=" << app->getViewPortDistorterType();
+			<< ", distorter=" << qPrintable(app->getViewPortDistorterType());
 	if ( w && h ) cout << ", res=" << w << "x" << h;
-	cout << " in file " << app->getConfigFilePath().toUtf8().data() << endl;
+	cout << " in file " << qPrintable(app->getConfigFilePath()) << endl;
 
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
 	conf.set_str("projection:type", core->getProjection()->getCurrentProjection());
-	conf.set_str("video:distorter", app->getViewPortDistorterType());
+	conf.set_str("video:distorter", app->getViewPortDistorterType().toStdString());
 
 
 	if (core->getProjection()->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");

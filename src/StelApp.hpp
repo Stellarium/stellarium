@@ -20,9 +20,7 @@
 #ifndef STELAPP_H
 #define STELAPP_H
 
-#include <string>
 #include <cassert>
-#include <vector>
 #include "StelKey.hpp"
 #include "StelTypes.hpp"
 #include "fixx11h.h"
@@ -70,7 +68,7 @@ public:
 	virtual ~StelApp();
 	
 	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
-	static string getApplicationName();
+	static QString getApplicationName();
 
 	//! Initialize application and core.
 	virtual void init();
@@ -143,8 +141,8 @@ public:
 	//! Get flag for activating chart vision mode.
 	bool getVisionModeNormal() const {return draw_mode==DM_NORMAL;}
 
-	void setViewPortDistorterType(const string &type);
-	string getViewPortDistorterType() const;
+	void setViewPortDistorterType(const QString &type);
+	QString getViewPortDistorterType() const;
 
 	//! Set the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
@@ -198,7 +196,7 @@ public:
 	virtual void startMainLoop() = 0;
 	
 	//! Return a list of working fullscreen hardware video modes (one per line).
-	virtual string getVideoModeList() const = 0;
+	virtual QString getVideoModeList() const = 0;
 	
 	//! Return the time since when stellarium is running in second.
 	virtual double getTotalRunTime() const = 0;
@@ -224,7 +222,7 @@ public:
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the drectory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	virtual void saveScreenShot(const string& filePrefix="stellarium-", const string& shotDir="") const =0;
+	virtual void saveScreenShot(const QString& filePrefix="stellarium-", const QString& shotDir="") const =0;
 	
 protected:
 	//! Update all object according to the delta time.
@@ -251,7 +249,7 @@ protected:
 	///////////////////////////////////////////////////////////////////////////	
 	
 	//! Initialize openGL screen.
-	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile) =0;
+	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile) =0;
 	
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);

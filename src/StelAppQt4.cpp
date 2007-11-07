@@ -92,9 +92,9 @@ StelAppQt4::~StelAppQt4()
 {
 }
 
-void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
+void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
 {
-	mainWindow->setWindowIcon(QIcon(iconFile.c_str()));
+	mainWindow->setWindowIcon(QIcon(iconFile));
 	mainWindow->resize(w, h);
 	if (fullScreen)
 	{
@@ -117,7 +117,7 @@ int StelAppQt4::getScreenH() const
 	return winOpenGL->height();
 }
 
-string StelAppQt4::getVideoModeList(void) const
+QString StelAppQt4::getVideoModeList(void) const
 {
 	return "";
 }
@@ -157,7 +157,7 @@ void StelAppQt4::startMainLoop()
 	
 }
 
-void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir) const
+void StelAppQt4::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
 	QString shotDir;
 	QImage im = winOpenGL->grabFrameBuffer();
@@ -169,7 +169,7 @@ void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir)
 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
 			{
-				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << shotDir.toUtf8().data() << endl;
+				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir) << endl;
 				return;
 			}
 		}
@@ -181,7 +181,7 @@ void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir)
 	}
 	else
 	{
-		shotDir = QString::fromStdString(saveDir);
+		shotDir = saveDir;
 	}
 
 	QString shotPath;
@@ -189,14 +189,14 @@ void StelAppQt4::saveScreenShot(const string& filePrefix, const string& saveDir)
 	{
 		stringstream oss;
 		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+filePrefix.c_str() + oss.str().c_str() + ".bmp";
+		shotPath = shotDir+"/"+filePrefix + oss.str().c_str() + ".bmp";
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}
 	// TODO - if no more filenames available, don't just overwrite the last one
 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 	
-	cout << "Saving screenshot in file: " << shotPath.toUtf8().data() << endl;
+	cout << "Saving screenshot in file: " << qPrintable(shotPath) << endl;
 	im.save(shotPath);
 }
 
