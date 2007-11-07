@@ -424,7 +424,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	screen_size_sl = new ListBox(6);
 	screen_size_sl->setPos(x+20,y);
 	screen_size_sl->setSizex(200);
-	screen_size_sl->addItemList(StelUtils::stringToWstring(app->getVideoModeList()));
+	screen_size_sl->addItemList(app->getVideoModeList().toStdWString());
 	sprintf(vs, "%dx%d", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
 	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
