@@ -319,7 +319,7 @@ bool LandscapeMgr::setLandscape(const string& newLandscapeName)
 	{
 		// Set the planet and moveto the right location
 		if (landscape->getPlanet()!="") 
-			StelApp::getInstance().getCore()->setHomePlanet(landscape->getPlanet());
+			StelApp::getInstance().getCore()->setHomePlanet(landscape->getPlanet().c_str());
 	
 		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
 		{

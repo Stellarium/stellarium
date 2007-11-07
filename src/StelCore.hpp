@@ -19,7 +19,7 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
-#include <string>
+#include <QString>
 
 class Navigator;
 class Projector;
@@ -84,7 +84,7 @@ public:
 	const Observer* getObservatory() const {return observatory;}
 
 	//! Change the current home planet.
-	bool setHomePlanet(const std::string& planet);
+	bool setHomePlanet(const QString& planet);
 
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
