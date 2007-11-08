@@ -75,7 +75,8 @@ public:
     float getLineHeight(void) const {return typeFace.lineHeight();}
     float getAscent(void) const {return typeFace.ascent();}
     float getDescent(void) const {return typeFace.descent();}
-
+	float getSize(void) const {return typeFace.pointSize();}
+	
 private:
 	mutable TypeFace typeFace;
 };

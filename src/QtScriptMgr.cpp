@@ -25,8 +25,41 @@
 #include "StelCore.hpp"
 #include "Navigator.hpp"
 
+Q_DECLARE_METATYPE(Vec3f);
+
+QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
+{
+	QScriptValue obj = engine->newObject();
+	obj.setProperty("r", QScriptValue(engine, c[0]));
+	obj.setProperty("g", QScriptValue(engine, c[1]));
+	obj.setProperty("b", QScriptValue(engine, c[2]));
+	return obj;
+}
+
+void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
+{
+	c[0] = obj.property("r").toNumber();
+	c[1] = obj.property("g").toNumber();
+	c[2] = obj.property("b").toNumber();
+}
+
+QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
+{
+	Vec3f c;
+	c[0] = context->argument(0).toNumber();
+	c[1] = context->argument(1).toNumber();
+	c[2] = context->argument(2).toNumber();
+	return vec3fToScriptValue(engine, c);
+}
+
 QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 {
+	// Allow Vec3f managment in scripts
+	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
+	// Constructor
+	QScriptValue ctor = engine.newFunction(createVec3f);
+	engine.globalObject().setProperty("Vec3f", ctor);
+	
 	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine.newQObject(mainAPI);
 	engine.globalObject().setProperty("main", objectValue);
@@ -39,12 +72,14 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 QtScriptMgr::~QtScriptMgr()
 {
 }
-
+		
 void QtScriptMgr::test()
 {
 	engine.evaluate("main.JDay = 152200.");
 	//engine.evaluate("modules.ConstellationMgr.setFlagArt(true)");
 	engine.evaluate("modules.ConstellationMgr.flagArt = true");
+	engine.evaluate("modules.ConstellationMgr.flagLines = true");
+	engine.evaluate("modules.ConstellationMgr.linesColor = Vec3f(1.,0.,0.)");
 	if (engine.hasUncaughtException())
 	{
 		qWarning() << engine.uncaughtException().toString() << endl;

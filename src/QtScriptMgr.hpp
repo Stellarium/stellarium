@@ -22,7 +22,9 @@
 
 #include <QObject>
 #include <QtScript>
+#include "vecmath.h"
 
+	
 //! Provide script API for Stellarium global functions
 class StelMainScriptAPI : public QObject
 {
