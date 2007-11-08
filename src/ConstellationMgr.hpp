@@ -40,10 +40,20 @@ class SFont;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT;
-	Q_PROPERTY(bool flagArt READ getFlagArt WRITE setFlagArt)
-		
+	Q_PROPERTY(bool flagArt READ getFlagArt WRITE setFlagArt);
+	Q_PROPERTY(double artFadeDuration READ getArtFadeDuration WRITE setArtFadeDuration);
+	Q_PROPERTY(double artIntensity READ getArtIntensity WRITE setArtIntensity);
+	Q_PROPERTY(bool flagLines READ getFlagLines WRITE setFlagLines);
+	Q_PROPERTY(bool flagBoundaries READ getFlagBoundaries WRITE setFlagBoundaries);
+	Q_PROPERTY(bool flagNames READ getFlagNames WRITE setFlagNames);
+	Q_PROPERTY(bool flagIsolateSelected READ getFlagIsolateSelected WRITE setFlagIsolateSelected);
+	Q_PROPERTY(Vec3f linesColor READ getLinesColor WRITE setLinesColor);		
+	Q_PROPERTY(Vec3f boundariesColor READ getBoundariesColor WRITE setBoundariesColor);
+	Q_PROPERTY(Vec3f namesColor READ getNamesColor WRITE setNamesColor);
+	Q_PROPERTY(double fontSize READ getFontSize WRITE setFontSize);
+	
 public:
-	ConstellationMgr(StarMgr *_hip_stars);
+	ConstellationMgr(StarMgr *stars);
 	virtual ~ConstellationMgr();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -151,8 +161,10 @@ public slots:
 	//! Get label color for names
 	Vec3f getNamesColor() const;
 	
-	//! Define font size to use for constellation names display
+	//! Set the font size used for constellation names display
 	void setFontSize(double newFontSize);
+	//! Get the font size used for constellation names display
+	double getFontSize() const;
 	
 private:
 	//! Read constellation names from the given file.
