@@ -139,6 +139,7 @@ public:
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param lazyLoading if true the texture will be loaded only when it used for the first time
 	ManagedSTextureSP createTexture(const std::string& filename, bool lazyLoading=false);
+	ManagedSTextureSP qcreateTexture(const QString& filename, bool lazyLoading=false);
 	
 	//! Load an image from a file and create a new texture from it in a new thread. The created texture is inserted in
 	//! the passed queue, protected by the given mutex.

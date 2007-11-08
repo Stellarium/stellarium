@@ -214,6 +214,7 @@ SET(stellarium_MOC_HDRS
 	StelModule.hpp
 	StelModuleMgr.hpp
 	ConstellationMgr.hpp
+	LandscapeMgr.hpp
 )
 
 # After this call, stellarium_MOC_SRCS = moc_VirGO.cxx

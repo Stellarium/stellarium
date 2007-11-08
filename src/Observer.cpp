@@ -255,16 +255,16 @@ void Observer::save(const string& file, const string& section) const
 // change settings but don't write to files
 void Observer::setConf(InitParser & conf, const string& section) const
 {
-	conf.set_str(section + ":name", StelUtils::wstringToString(name));
-	conf.set_str(section + ":home_planet", planet->getEnglishName());
+	conf.set_str(section + ":name", QString::fromStdWString(name));
+	conf.set_str(section + ":home_planet", planet->getEnglishName().c_str());
 	conf.set_str(section + ":latitude",
 	             StelUtils::wstringToString(
 	               StelUtils::radToDmsWstr(latitude*M_PI/180.0,
-	                                          true, true)));
+	                                          true, true)).c_str());
 	conf.set_str(section + ":longitude",
 	             StelUtils::wstringToString(
 	               StelUtils::radToDmsWstr(longitude*M_PI/180.0,
-	                                          true, true)));
+										   true, true)).c_str());
 
 	conf.set_int(section + ":altitude", altitude);
 

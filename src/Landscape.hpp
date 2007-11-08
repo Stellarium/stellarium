@@ -42,7 +42,7 @@ public:
 
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
-	virtual void load(const string& file_name, const string& landscapeId) = 0;
+	virtual void load(const QString& file_name, const QString& landscapeId) = 0;
 	
 	//! Set the brightness of the landscape
 	void setBrightness(float b) {sky_brightness = b;}
@@ -76,13 +76,13 @@ public:
 
 protected:
 	//! Load attributes common to all landscapes
-	void loadCommon(const string& landscape_file, const string& landscapeId);
+	void loadCommon(const QString& landscape_file, const QString& landscapeId);
 	
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
 	//! @exception misc possibility of throwing boost:filesystem or "file not found" exceptions
-	const string getTexturePath(const string& basename, const string& landscapeId);
+	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
 	wstring name;
 	float sky_brightness;
@@ -109,7 +109,7 @@ class LandscapeOldStyle : public Landscape
 public:
 	LandscapeOldStyle(float _radius = 2.);
     virtual ~LandscapeOldStyle();
-	virtual void load(const string& fileName, const string& landscapeId);
+	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(bool _fullpath, map<string, string> param);
 private:
@@ -141,9 +141,9 @@ class LandscapeFisheye : public Landscape
 public:
 	LandscapeFisheye(float _radius = 1.);
 	virtual ~LandscapeFisheye();
-	virtual void load(const string& fileName, const string& landscapeId);
+	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(const wstring _name, bool _fullpath, const string _maptex,
+	void create(const wstring _name, bool _fullpath, const QString& _maptex,
 	            double _texturefov, double angle_rotatez);
 private:
 
@@ -158,10 +158,10 @@ class LandscapeSpherical : public Landscape
 public:
 	LandscapeSpherical(float _radius = 1.);
 	virtual ~LandscapeSpherical();
-	virtual void load(const string& fileName, const string& landscapeId);
+	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const wstring _name, bool _fullpath,
-	            const string _maptex, double angle_rotatez);
+	            const QString& _maptex, double angle_rotatez);
 private:
 
 	STextureSP map_tex;

@@ -166,6 +166,11 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
 	return tex;
 }
 
+ManagedSTextureSP StelTextureMgr::qcreateTexture(const QString& filename, bool lazyLoading)
+{
+	return createTexture(filename.toUtf8().constData(), lazyLoading);
+}
+
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
