@@ -454,7 +454,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(lmgr->getLandscapeNames());
+	landscape_sl->addItemList(lmgr->getAllLandscapeNames().toStdString());
 	landscape_sl->adjustSize();
 	sprintf(vs, "%s", StelUtils::wstringToString(lmgr->getLandscapeName()).c_str());
 	landscape_sl->setValue(vs);
@@ -914,9 +914,9 @@ void StelUI::saveLanguageOptions(void)
 	cout << "Saving language in file " << app->getConfigFilePath().toUtf8().data() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage());
-	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage());
-	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
+	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage().c_str());
+	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage().c_str());
+	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir().c_str());
 	conf.save(app->getConfigFilePath());
 }
 
@@ -997,8 +997,8 @@ void StelUI::setVideoOption(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	conf.set_str("projection:type", core->getProjection()->getCurrentProjection());
-	conf.set_str("video:distorter", app->getViewPortDistorterType().toStdString());
+	conf.set_str("projection:type", core->getProjection()->getCurrentProjection().c_str());
+	conf.set_str("video:distorter", app->getViewPortDistorterType());
 
 
 	if (core->getProjection()->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
@@ -1017,7 +1017,7 @@ void StelUI::setVideoOption(void)
 void StelUI::setLandscape(void)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
-	lmgr->setLandscape(lmgr->nameToKey(landscape_sl->getValue()));
+	lmgr->setLandscapeByName(landscape_sl->getValue().c_str());
 	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
 	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());	
 	landscapePlanetLb->setLabel(_("Planet: ") + lmgr->getLandscapePlanetName());

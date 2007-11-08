@@ -151,7 +151,7 @@ public:
 	//! @param val the new value to use for the specified key.
 	//! @return if the entry cannot be found -1 is returned and the entry is created. Else 0 
 	//! is returned.
-	int set_str(const string& key, const string& val);
+	int set_str(const string& key, const QString& val);
 	
 	//! Set the value of a specified setting with the provided value.
 	//! @param key is a compound key consisting of the section and 
