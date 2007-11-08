@@ -226,6 +226,11 @@ void ConstellationMgr::setFontSize(double newFontSize)
 	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
+double ConstellationMgr::getFontSize() const
+{
+	return asterFont->getSize();
+}
+
 // Load line and art data from files
 void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb)
 {
