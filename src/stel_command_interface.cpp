@@ -148,7 +148,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["constellation_art_fade_duration"]!="") cmgr->setArtFadeDuration(StelUtils::stringToDouble(args["constellation_art_fade_duration"]));
 		else if(args["constellation_art_intensity"]!="") cmgr->setArtIntensity(StelUtils::stringToDouble(args["constellation_art_intensity"]));
 		else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"].c_str());
-		else if(args["landscape_name"]!="") lmgr->setLandscape(args["landscape_name"]);
+		else if(args["landscape_name"]!="") lmgr->setLandscapeByName(args["landscape_name"].c_str());
 		else if(args["light_pollution_luminance"]!="") 
 			lmgr->setAtmosphereLightPollutionLuminance(StelUtils::stringToDouble(args["light_pollution_luminance"]));
 		else if(args["max_mag_nebula_name"]!="") nmgr->setMaxMagHints(StelUtils::stringToDouble(args["max_mag_nebula_name"]));

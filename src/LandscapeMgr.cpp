@@ -16,7 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
+#include <QDebug>
+
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -247,7 +249,7 @@ void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
 {
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();
-	setLandscape(conf.get_str("init_location:landscape_name"));
+	setLandscapeByID(conf.get_str("init_location:landscape_name").c_str());
 	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
 	setFlagFog(conf.get_boolean("landscape:flag_fog"));
 	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
@@ -265,41 +267,41 @@ void LandscapeMgr::setColorScheme(const InitParser& conf, const std::string& sec
 	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 }
 
-bool LandscapeMgr::setLandscape(const string& newLandscapeName)
+
+bool LandscapeMgr::setLandscapeByName(const QString& newLandscapeName)
 {
-	if (newLandscapeName.empty())
+	if (newLandscapeName.isEmpty())
 		return 0;
 	
-	// we want to lookup the landscape ID (dir) from the name.
-	map<string,string> nameToDirMap = getNameToDirMap();
-	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
-	Landscape* newLandscape = NULL;
-	
-	if (nameToDirMap[newLandscapeName] != "")
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	if (nameToDirMap.find(newLandscapeName)!=nameToDirMap.end())
 	{
-		try
-		{
-			newLandscape = createFromFile(fileMan.findFile("landscapes/" + nameToDirMap[newLandscapeName] + "/landscape.ini"), nameToDirMap[newLandscapeName]);
-		}
-		catch(exception& e)
-		{
-			cerr << "ERROR while loading landscape ";
-			cerr << "landscapes/" + nameToDirMap[newLandscapeName] + "/landscape.ini";
-			cerr << ", (" << e.what() << ")" << endl;
-		}
+		return setLandscapeByID(nameToDirMap[newLandscapeName]);
 	}
 	else
 	{
-		try
-		{
-			newLandscape = createFromFile(fileMan.findFile("landscapes/" + newLandscapeName + "/landscape.ini"), newLandscapeName);
-		}
-		catch(exception& e)
-		{
-			cerr << "ERROR while loading landscape ";
-			cerr << "landscapes/" + newLandscapeName + "/landscape.ini";
-			cerr << ", (" << e.what() << ")" << endl;
-		}
+		qWarning() << "Can't find a landscape with name=" << newLandscapeName << endl;
+		return false;
+	}
+}
+
+
+bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
+{
+	if (newLandscapeID.isEmpty())
+		return 0;
+	
+	// we want to lookup the landscape ID (dir) from the name.
+	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
+	Landscape* newLandscape = NULL;
+	
+	try
+	{
+		newLandscape = createFromFile(fileMan.qfindFile("landscapes/" + newLandscapeID + "/landscape.ini"), newLandscapeID);
+	}
+	catch(exception& e)
+	{
+		qWarning() << "ERROR while loading landscape " << "landscapes/" + newLandscapeID + "/landscape.ini" << ", (" << e.what() << ")" << endl;
 	}
 
 	if(!newLandscape)
@@ -313,7 +315,7 @@ bool LandscapeMgr::setLandscape(const string& newLandscapeName)
 		delete landscape;
 		landscape = newLandscape;
 	}
-	landscapeSectionName = newLandscapeName;
+	currentLandscapeID = newLandscapeID;
 	
 	if (getFlagLandscapeSetsLocation())
 	{
@@ -352,7 +354,7 @@ bool LandscapeMgr::loadLandscape(map<string, string>& param)
 		delete landscape;
 		landscape = newLandscape;
 	}
-	landscapeSectionName = param["name"];
+	currentLandscapeID = param["name"].c_str();
 	// probably not particularly useful, as not in landscape.ini file
 
 	return 1;
@@ -489,10 +491,10 @@ float LandscapeMgr::getLuminance(void)
 	return atmosphere->getRealDisplayIntensityFactor();
 }
 
-Landscape* LandscapeMgr::createFromFile(const string& landscapeFile, const string& landscapeId)
+Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {
 	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscapeFile.c_str());
+	pd.load(landscapeFile);
 	string s;
 	s = pd.get_str("landscape", "type");
 	Landscape* ldscp = NULL;
@@ -533,14 +535,14 @@ Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
 	else if (param["type"]=="spherical")
 	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"],
+		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, (param["path"] + param["maptex"]).c_str(),
                       StelUtils::stringToDouble(param["angle_rotatez"]));
 		return ldscp;
 	}
 	else
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, param["path"] + param["maptex"],
+		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, (param["path"] + param["maptex"]).c_str(),
 		              StelUtils::stringToDouble(param["texturefov"]),
                       StelUtils::stringToDouble(param["angle_rotatez"]));
 		return ldscp;
@@ -552,31 +554,31 @@ Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
  landscape.ini file).  The result is a string with each name separated
  by a '\n' character.
  *********************************************************************/
-string LandscapeMgr::getLandscapeNames()
+QString LandscapeMgr::getAllLandscapeNames()
 {
-	map<string,string> nameToDirMap = getNameToDirMap();
- 	string result("");
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+ 	QString result;
 	
 	// We just look over the map of names to IDs and extract the keys
-	for(map<string,string>::iterator i=nameToDirMap.begin();
-		   i!=nameToDirMap.end();
-		   i++)
+	foreach (QString i, nameToDirMap.keys())
 	{
-		result += i->first + '\n';
+		result += i + '\n';
 	}
 
 	return result;
 }
 
-string LandscapeMgr::nameToKey(const string& name)
+QString LandscapeMgr::nameToID(const QString& name)
 {
-	map<string,string> nameToDirMap = getNameToDirMap();
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	
-	if ( nameToDirMap[name] == "" ) {
+	if (nameToDirMap.find(name)!=nameToDirMap.end())
+	{
  		assert(0);
 		return "error";
 	}
-	else {
+	else
+	{
 		return nameToDirMap[name];
 	}
 }
@@ -584,12 +586,11 @@ string LandscapeMgr::nameToKey(const string& name)
 /****************************************************************************
  get a map of landscape name (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
-std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
+QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
 {
 	QSet<QString> landscapeDirs;
-	map<string,string> result;
+	QMap<QString,QString> result;
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-	
 	try
 	{
 		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::DIRECTORY);
@@ -599,14 +600,14 @@ std::map<std::string,std::string> LandscapeMgr::getNameToDirMap(void)
 		cerr << "ERROR while trying list list landscapes:" << e.what() << endl;	
 	}
 	
-	for (QSet<QString>::iterator dir=landscapeDirs.begin(); dir!=landscapeDirs.end(); dir++)
+	foreach (QString dir, landscapeDirs)
 	{
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.qfindFile("landscapes/" + *dir + "/landscape.ini"));
-			string k = pd.get_str("landscape", "name");
-			result[k] = (*dir).toStdString();
+			pd.load(fileMan.qfindFile("landscapes/" + dir + "/landscape.ini"));
+			QString k = pd.get_str("landscape", "name").c_str();
+			result[k] = dir;
 		}
 		catch (exception& e)
 		{

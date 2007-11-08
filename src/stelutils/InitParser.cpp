@@ -168,14 +168,14 @@ bool InitParser::get_boolean(const string& section, const string& key, bool def)
 
 // Set the given entry with the provided value. If the entry cannot be found
 // -1 is returned and the entry is created. Else 0 is returned.
-int InitParser::set_str(const string& key, const string& val)
+int InitParser::set_str(const string& key, const QString& val)
 {
 	make_section_from_key(key);
 	int return_val;
 	if (find_entry(key)) return_val = 0;
 	else return_val = -1;
 
-	dictionary_set(dico, key.c_str(), val.c_str());
+	dictionary_set(dico, key.c_str(), val.toUtf8().constData());
 	return return_val;
 }
 

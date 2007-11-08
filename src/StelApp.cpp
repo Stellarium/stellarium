@@ -268,16 +268,7 @@ void StelApp::init()
 	
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
-	StelCommandInterface* commander = new StelCommandInterface(core, this);
-	getModuleMgr().registerModule(commander);
 	
-	ScriptMgr* scripts = new ScriptMgr(commander);
-	scripts->init(conf, lb);
-	getModuleMgr().registerModule(scripts);
-	
-	ImageMgr* script_images = new ImageMgr();
-	script_images->init(conf, lb);
-	getModuleMgr().registerModule(script_images);
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init(conf, lb);
@@ -328,6 +319,17 @@ void StelApp::init()
 // star names are loaded again
 	skyCultureMgr->init(conf);
 	
+	// Those 3 are going to disapear
+	StelCommandInterface* commander = new StelCommandInterface(core, this);
+	getModuleMgr().registerModule(commander);
+	ScriptMgr* scripts = new ScriptMgr(commander);
+	scripts->init(conf, lb);
+	getModuleMgr().registerModule(scripts);
+	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", ""));
+	ImageMgr* script_images = new ImageMgr();
+	script_images->init(conf, lb);
+	getModuleMgr().registerModule(script_images);	
+	
 	StelUI* ui = new StelUI(core, this);
 	ui->init(conf, lb);
 	getModuleMgr().registerModule(ui);
@@ -338,7 +340,7 @@ void StelApp::init()
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
 	setViewPortDistorterType(conf.get_str("video","distorter","none").c_str());
-
+	
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
 	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
@@ -355,8 +357,6 @@ void StelApp::init()
 	
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
-	
-	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", ""));
 	
 	// play startup script, if available
 	scripts->play_startup_script();
@@ -464,9 +464,9 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	if (fullScreen == 1) conf.set_boolean("video:fullscreen", true);
 	else if (fullScreen == 0) conf.set_boolean("video:fullscreen", false);
 	
-	if (landscapeId != "") conf.set_str("init_location:landscape_name", qPrintable(landscapeId));
+	if (landscapeId != "") conf.set_str("init_location:landscape_name", landscapeId);
 	
-	if (homePlanet != "") conf.set_str("init_location:home_planet", qPrintable(homePlanet));
+	if (homePlanet != "") conf.set_str("init_location:home_planet", homePlanet);
 	
 	if (altitude != -1) conf.set_int("init_location:altitude", altitude);
 	
@@ -474,7 +474,7 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	if (longitude != "")
 	{
 		if (longLatRx.exactMatch(longitude))
-			conf.set_str("init_location:longitude", qPrintable(longitude));
+			conf.set_str("init_location:longitude", longitude);
 		else
 			cerr << "WARNING: --longitude argument has unrecognised format" << endl;
 	}
@@ -482,7 +482,7 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	if (latitude != "")
 	{
 		if (longLatRx.exactMatch(latitude))
-			conf.set_str("init_location:latitude", qPrintable(latitude));
+			conf.set_str("init_location:latitude", latitude);
 		else
 			cerr << "WARNING: --latitude argument has unrecognised format" << endl;
 	}
@@ -526,7 +526,7 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 
 	if (fov > 0.0) conf.set_double("navigation:init_fov", fov);
 	
-	if (projectionType != "") conf.set_str("projection:type", qPrintable(projectionType));
+	if (projectionType != "") conf.set_str("projection:type", projectionType);
 }
 
 void StelApp::update(int delta_time)
