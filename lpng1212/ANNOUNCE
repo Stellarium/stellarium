@@ -1,0 +1,51 @@
+
+Libpng 1.2.12 - June 27, 2006
+
+This is a public release of libpng, intended for use in production codes.
+
+Files available for download:
+
+Source files with LF line endings (for Unix/Linux) and with a
+"configure" script
+
+   libpng-1.2.12.tar.gz
+   libpng-1.2.12.tar.bz2
+
+Source files with LF line endings (for Unix/Linux) without the
+"configure" script
+
+   libpng-1.2.12-no-config.tar.gz
+   libpng-1.2.12-no-config.tar.bz2
+
+Source files with CRLF line endings (for Windows), without the
+"configure" script
+
+   lpng1212.zip
+   lpng1212.tar.bz2
+
+Project files
+
+   libpng-1.2.12-project-netware.zip
+   libpng-1.2.12-project-wince.zip
+
+Other information:
+
+   libpng-1.2.12-README.txt
+   libpng-1.2.12-KNOWNBUGS.txt
+   libpng-1.2.12-LICENSE.txt
+   libpng-1.2.12-Y2K-compliance.txt
+
+Changes since the last public release (1.2.11):
+
+version 1.2.12 [June 27, 2006]
+
+version 1.0.20, 1.2.12 [June 27, 2006]
+  Really increased sprintf buffer from 50 to 52 chars in pngrutil.c to avoid
+    buffer overflow.
+
+Send comments/corrections/commendations to png-mng-implement at lists.sf.net
+(subscription required; visit 
+https://lists.sourceforge.net/lists/listinfo/png-mng-implement
+to subscribe) or to glennrp at users.sourceforge.net
+
+Glenn R-P

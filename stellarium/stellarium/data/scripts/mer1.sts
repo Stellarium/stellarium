@@ -1,0 +1,169 @@
+clear state natural
+flag hyper_stars 0
+set star_mag_scale 5
+
+#start from Nizhniy Novgorod
+date local 2007-07-01T21:00:00
+wait duration 3
+#script action end
+
+flag atmosphere 0
+flag cardinal_points 0
+flag constellation_names 0
+flag planet_names 0
+flag nebula_names 0
+flag star_names 0
+flag fog 0
+
+#full day rotation	
+timerate rate 100
+wait duration 60.00
+flag constellation_drawing 1
+wait duration 60.00
+flag constellation_art 1
+wait duration 15.00
+flag constellation_art 0
+flag constellation_drawing 0
+
+set star_mag_scale 5
+flag hyper_stars 1
+set star_limiting_mag 7
+wait duration 2.00
+set star_mag_scale 8
+set star_limiting_mag 8
+wait duration 2.00
+set star_mag_scale 12
+set star_limiting_mag 9
+wait duration 2.00
+set star_mag_scale 16
+set star_limiting_mag 10
+wait duration 2.00
+set star_mag_scale 20
+wait duration 60.00
+set star_mag_scale 15
+set star_limiting_mag 8
+wait duration 2.00
+set star_mag_scale 10
+set star_limiting_mag 7
+wait duration 2.00
+set star_mag_scale 5
+set star_limiting_mag 6
+flag hyper_stars 0
+
+timerate rate 1
+
+flag landscape 0
+select nebula m31 pointer 0
+flag track_object on
+flag bright_nebulae 1
+set center_fov_ratio -0.33333
+zoom fov 10 duration 15
+wait duration 15
+zoom fov 60 duration 15
+wait duration 15
+flag bright_nebulae 0
+
+select planet Moon pointer 0
+flag track_object on
+set center_fov_ratio -0.33333
+zoom fov 3.0 duration 15
+wait duration 15
+
+#Rotate
+flag stop_day_motion 1
+timerate rate 1000
+wait duration 15
+timerate rate 1
+zoom fov 60.0 duration 15
+wait duration 15
+
+zoom auto out duration 3
+wait duration 3
+
+#Move the observer to Moon
+set home_planet "Moon"
+wait duration 1
+date local 2007-07-10T21:00:00
+#Turn Moon landscape on
+#landscape action load name "Moon" type spherical maptex "\..\..\textures\landscapes\apollo17.png"
+#flag landscape 1
+#flag track_object off
+wait duration 1
+#flag landscape 0
+
+#Zoom in Earth
+select planet Earth pointer 0
+flag stop_day_motion 0
+set center_fov_ratio -0.33333
+flag track_object on
+zoom auto in duration 5.0
+wait duration 6.0
+
+#Rotate Earth 
+timerate rate 10000
+wait duration 30.0
+timerate rate 1
+wait duration 1.0
+zoom auto out duration 5.0
+wait duration 6.0
+
+select planet Jupiter pointer 0
+flag track_object on
+date local 2007-07-07T20:00:00
+set center_fov_ratio -0.33333
+zoom fov 0.04 duration 15
+wait duration 15
+
+#Rotate
+flag stop_day_motion 1
+timerate rate 500
+wait duration 20.0
+timerate rate 1
+zoom fov 60.0 duration 15
+wait duration 15
+
+zoom auto out duration 3
+wait duration 3
+
+#Center on Saturn
+set home_planet "Iapetus"
+select planet Saturn pointer 0
+flag track_object on
+wait duration 3.0
+set center_fov_ratio -0.33333
+zoom fov 20 duration 7.0
+wait duration 13.0
+
+#Zoom out from Saturn 
+zoom fov 180.1 duration 7.0
+wait duration 8.0
+
+# goto Mars
+set home_planet "Phobos"
+date local 2007-07-01T18:00:00
+select planet Mars pointer 0
+flag track_object on
+set center_fov_ratio -0.33333
+zoom fov 180 duration 15
+wait duration 15
+#zoom auto in duration 15
+#zoom fov 0.006 duration 15
+#wait duration 15
+#Rotate Mars
+timerate rate 1000
+wait duration 15
+timerate rate 1
+#zoom fov 60 duration 15
+#wait duration 10
+
+select nebula m42 pointer 0
+flag track_object on
+flag bright_nebulae 1
+set center_fov_ratio -0.33333
+zoom fov 6 duration 15
+wait duration 15
+zoom fov 60 duration 15
+wait duration 15
+flag bright_nebulae 0
+
+script action end

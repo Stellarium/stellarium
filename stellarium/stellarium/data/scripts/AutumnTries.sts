@@ -1,0 +1,39 @@
+clear state natural
+set auto_move_duration 10.0
+
+#start from Nizhniy Novgorod
+set landscape_name "nn-kremlin"
+flag landscape 1
+date local 2007-10-15T12:00:00
+
+flag landscape 0
+flag atmosphere 0
+flag constellation_drawing 0
+flag constellation_art 0
+wait duration 5
+
+
+flag constellation_pick 1
+flag sticky_constellation_selection 1
+
+select constellation And
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+flag constellation_drawing 0
+flag constellation_art 0
+wait duration 2
+
+select hp 3333 pointer 0
+flag track_object 1
+wait duration 13.0
+zoom fov 8 duration 8
+wait duration 10
+zoom auto out duration 8
+wait duration 10
+
+flag atmosphere 1
+script action end
+

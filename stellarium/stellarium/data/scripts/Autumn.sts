@@ -1,0 +1,128 @@
+clear state natural
+set auto_move_duration 20.0
+
+# стартуем из Нижегородского кремля
+date local 2007-10-15T09:00:00
+set landscape_name "nn-kremlin"
+look delta_az 1.3
+flag landscape 1
+wait duration 3.0
+
+#  показать закат
+timerate rate 500
+##wait duration 50
+flag atmosphere 0
+flag landscape 0
+
+# показать небо во вращении и остановиться 
+# на созвездии Большой Медведицы
+##wait duration 110
+timerate rate 1.0
+
+flag constellation_pick 1
+flag sticky_constellation_selection 1
+
+#показать Большую медведицу
+select hp 54061 pointer 0
+flag track_object 1
+set center_fov_ratio -0.33333
+wait duration 10.0
+
+select constellation uma
+flag track_object 1
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+select constellation UMi
+flag track_object 1
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+#показать созвездие Дракона
+select constellation Dra
+flag track_object 1
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+
+# показать звезду в середине Цефея
+select hp 4427 pointer 0
+flag track_object 1
+wait duration 12.0
+
+select constellation Cep
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+
+select constellation Cas
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+
+select constellation And
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+flag constellation_art 0
+flag constellation_drawing 0
+wait duration 1.0
+
+select nebula m31 pointer 0
+flag track_object 1
+wait duration 13.0
+zoom fov 8 duration 8
+wait duration 10
+zoom auto out duration 8
+wait duration 10
+
+# показать звезду в середине Персея
+select hp 4427 pointer 0
+flag track_object 1
+set center_fov_ratio -0.2
+wait duration 15.0
+
+select constellation Per
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+select hp 14576 pointer 1
+wait duration 5
+
+select constellation Peg
+flag constellation_drawing 1
+wait duration 3.0
+flag constellation_art 1
+wait duration 3.0
+
+#хотим показать только звезды, поэтому выключаем
+flag constellation_pick 0
+
+#показать звезды треугольника
+flag constellation_pick 0
+select hp 95947 ponter 0
+flag track_object 1
+set center_fov_ratio -0.2
+wait duration 15
+
+flag star_names 1
+wait duration 10
+flag star_names 0
+
+
+date local 2007-10-15T12:00:00
+script action end

@@ -1,0 +1,434 @@
+flag planet_names 0
+flag nebula_names 0
+flag star_names 0
+flag landscape 1
+flag atmosphere 0
+flag hyper_stars 1
+
+#start from Nizhniy Novgorod
+#look to the sky
+#set time to the 1st of July, 12am
+date local 2007-06-01T12:00:00
+
+look delta_az 1.3
+look delta_az 1.45
+wait duration 5
+
+# kremlin panorama
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+wait duration 0.01
+look delta_az 0.003
+ 
+
+//full day rotation	
+timerate rate 1200
+wait duration 41.00
+timerate rate 1
+wait duration 1.0
+
+flag atmosphere 0
+flag landscape 0
+flag hyper_stars 1
+flag fog 0
+
+//Select constellation
+select constellation Leo
+flag sticky_constellation_selection 1
+flag constellation_drawing 1
+flag constellation_pick 1
+wait duration 2.0
+flag constellation_art 1
+wait duration 3.0
+select constellation Vir
+wait duration 3.0
+select constellation Boo
+wait duration 3.0
+select constellation UMa
+wait duration 3.0
+deselect 
+flag sticky_constellation_selection 0
+flag constellation_pick 0
+wait duration 5.0
+
+flag landscape 0
+flag bright_nebulae 1
+
+select nebula "Sunflower galaxy" pointer 0
+#51
+flag track_object 1
+set center_fov_ratio -0.33333
+wait duration 5
+zoom fov 1 duration 10
+wait duration 11
+zoom fov 60 duration 7
+wait duration 8
+
+select nebula "Whirlpool galaxy" pointer 0
+#m63
+flag track_object 1
+set center_fov_ratio -0.33333
+wait duration 5
+zoom fov 1 duration 7
+wait duration 10
+zoom auto out duration 10
+wait duration 11
+
+flag bright_nebulae 0
+flag constellation_drawing 0
+flag constellation_art 0
+
+#fly to the Europa
+# move to iss
+date utc 2007:08:04T10:00:00
+timerate rate 0.001
+landscape action load name "iss" type spherical maptex "\..\..\textures\landscapes\iss.png"
+zoom fov 210 duration 3
+wait duration 3
+flag landscape 1
+wait duration 10.0
+flag landscape 0
+zoom fov 179.9 duration 3
+wait duration 3
+
+select planet Europa pointer 0
+flag track_object 1
+set center_fov_ratio -0.33333
+wait duration 12
+set desired_angle_of_view_selected_object 1.0
+set number_of_flying_steps 1200
+wait duration 2
+set number_of_flying_steps 1000
+wait duration 2
+set number_of_flying_steps 800
+wait duration 2
+set number_of_flying_steps 600
+wait duration 15
+set desired_angle_of_view_selected_object 1.5707
+wait duration 17
+deselect
+
+select planet Mars pointer 0
+flag track_object 1
+set center_fov_ratio -0.33333
+wait duration 11
+set desired_angle_of_view_selected_object 0.95
+set number_of_flying_steps 500
+wait duration 25
+deselect
+
+#Move the observer to Mars
+zoom auto out duration 3
+wait duration 3
+set home_planet "Mars"
+zoom fov 210 duration 3
+wait duration 3
+landscape action load name "Husband Hill" type spherical maptex "\..\..\textures\landscapes\husband-hill.png"
+flag landscape 1
+wait duration 10.0
+flag landscape 0
+zoom fov 179.9 duration 3
+wait duration 3
+
+#Move the observer to Earth
+set home_planet "Earth"
+zoom fov 210 duration 3
+wait duration 3
+landscape action load name "everest" type spherical maptex "..\..\textures\landscapes\everest.png"
+flag landscape 1
+flag hyper_stars 0
+flag atmosphere 1
+timerate rate 4000
+wait duration 10
+timerate rate 1
+wait duration 1
+flag atmosphere 0
+flag hyper_stars 1
+meteors zhr 144000
+wait duration 17.0
+meteors zhr 10
+wait duration 3.0
+
+script action end

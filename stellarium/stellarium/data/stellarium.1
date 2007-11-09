@@ -1,0 +1,46 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH STELLARIUM 1 "19 Jan 2003"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+stellarium \- A real-time realistic planetarium
+.SH SYNOPSIS
+.B stellarium [-vh] [--version] [--help]
+.SH DESCRIPTION
+This manual page documents briefly the
+.B stellarium
+command.
+This manual page was written for the Debian distribution
+because the original program does not have a manual page.
+Instead, it has documentation in the GNU Info format; see below.
+.PP
+\fBstellarium\fP is a free GPL software which renders realistic skies in real time with openGL. It is available for Linux/Unix, Windows and MacOSX. With Stellarium, you really see what you can see with your eyes, binoculars or a small telescope.
+.SH CONFIGURATION
+When you first launch stellarium, it will use the file default_config.ini from /usr/share/stellarium/config/ to create  config.ini into \fB$HOME/.stellarium\fP.
+The configuration options from this file are quite self-explanatory. Some configuration files examples are in /usr/share/doc/stellarium/examples.
+.SH OPTIONS
+.TP
+.B "\-v, \-\-version"
+output version information and exit.
+.TP
+.B "\-h, \-\-help"
+display command usage and exit.
+.SH SEE ALSO
+.BR celestia (1),
+.BR openuniverse (1).
+.SH AUTHOR
+This manual page was written by C�ric Delfosse <cedric@debian.org>,
+for the Debian GNU/Linux system (but may be used by others).

@@ -1,0 +1,18 @@
+#Europa time
+date utc 2007:08:04T5:00:00
+
+flag atmosphere 0
+flag landscape  0
+
+select planet Europa pointer 0
+flag track_object 1
+set center_fov_ratio -0.333
+wait duration 8
+
+
+set desired_angle_of_view_selected_object 1.4
+wait duration 15
+timerate rate 1000.0
+wait duration 15
+
+script action end

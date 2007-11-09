@@ -1,0 +1,6 @@
+  S(extra_0, "EUC-JISX0213", ei_euc_jisx0213 )
+  S(extra_1, "SHIFT_JISX0213", ei_shift_jisx0213 )
+  S(extra_2, "ISO-2022-JP-3", ei_iso2022_jp3 )
+  S(extra_3, "TDS565", ei_tds565 )
+  S(extra_4, "ISO-IR-230", ei_tds565 )
+  S(extra_5, "RISCOS-LATIN1", ei_riscos1 )

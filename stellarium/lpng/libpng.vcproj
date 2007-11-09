@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="8,00"
+	Name="libpng"
+	ProjectGUID="{4E2A7F9D-61EA-438D-8313-D41029238F28}"
+	RootNamespace="libpng"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="LIB Release|Win32"
+			OutputDirectory=".\..\..\Build\lpng_Release"
+			IntermediateDirectory=".\..\..\Build\lpng_Release"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="..\..\lpng;..\..\zlib"
+				PreprocessorDefinitions="WIN32;NDEBUG"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="png.h"
+				WarningLevel="3"
+				CompileAs="0"
+				DisableSpecificWarnings="4996"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/libpng.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="LIB Debug|Win32"
+			OutputDirectory=".\..\..\Build\lpng_Debug"
+			IntermediateDirectory=".\..\..\Build\lpng_Debug"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\lpng;..\..\zlib"
+				PreprocessorDefinitions="WIN32;_DEBUG;DEBUG;PNG_DEBUG=1"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="png.h"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+				CompileAs="0"
+				DisableSpecificWarnings="4996"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/libpngd.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
+			<File
+				RelativePath="..\..\lpng1212\png.c"
+				>
+				<FileConfiguration
+					Name="LIB Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL ASM Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL ASM Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL VB|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngerror.c"
+				>
+				<FileConfiguration
+					Name="LIB Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL ASM Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL ASM Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL VB|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngget.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngmem.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngpread.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngread.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngrio.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngrtran.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngrutil.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngset.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngtrans.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngvcrd.c"
+				>
+				<FileConfiguration
+					Name="LIB Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL VB|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\scripts\pngw32.def"
+				>
+				<FileConfiguration
+					Name="LIB Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL VB|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngwio.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngwrite.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngwtran.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngwutil.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl"
+			>
+			<File
+				RelativePath="..\..\lpng1212\png.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lpng1212\pngconf.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+			>
+			<File
+				RelativePath="..\..\lpng1212\scripts\pngw32.rc"
+				>
+				<FileConfiguration
+					Name="LIB Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB ASM Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\PRJ0041.mak"
+			>
+			<FileConfiguration
+				Name="DLL Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					Description="Create dummy include files to prevent &quot;Cannot find missing dependency...&quot; warnings."
+					CommandLine="nmake -f PRJ0041.mak IntDir=$(IntDir)&#x0D;&#x0A;"
+					Outputs="$(IntDir)\alloc.h;$(IntDir)\fp.h;$(IntDir)\m68881.h;$(IntDir)\mem.h;$(IntDir)\pngusr.h;$(IntDir)\strings.h;$(IntDir)\unistd.h;$(IntDir)\unixio.h"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="DLL Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					Description="Create dummy include files to prevent &quot;Cannot find missing dependency...&quot; warnings."
+					CommandLine="nmake -f PRJ0041.mak IntDir=$(IntDir)&#x0D;&#x0A;"
+					Outputs="$(IntDir)\alloc.h;$(IntDir)\fp.h;$(IntDir)\m68881.h;$(IntDir)\mem.h;$(IntDir)\pngusr.h;$(IntDir)\strings.h;$(IntDir)\unistd.h;$(IntDir)\unixio.h"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="DLL ASM Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					Description="Create dummy include files to prevent &quot;Cannot find missing dependency...&quot; warnings."
+					CommandLine="nmake -f PRJ0041.mak IntDir=$(IntDir)&#x0D;&#x0A;"
+					Outputs="$(IntDir)\alloc.h;$(IntDir)\fp.h;$(IntDir)\m68881.h;$(IntDir)\mem.h;$(IntDir)\pngusr.h;$(IntDir)\strings.h;$(IntDir)\unistd.h;$(IntDir)\unixio.h"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="DLL ASM Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					Description="Create dummy include files to prevent &quot;Cannot find missing dependency...&quot; warnings."
+					CommandLine="nmake -f PRJ0041.mak IntDir=$(IntDir)&#x0D;&#x0A;"
+					Outputs="$(IntDir)\alloc.h;$(IntDir)\fp.h;$(IntDir)\m68881.h;$(IntDir)\mem.h;$(IntDir)\pngusr.h;$(IntDir)\strings.h;$(IntDir)\unistd.h;$(IntDir)\unixio.h"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="DLL VB|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					Description="Create dummy include files to prevent &quot;Cannot find missing dependency...&quot; warnings."
+					CommandLine="nmake -f PRJ0041.mak IntDir=$(IntDir)&#x0D;&#x0A;"
+					Outputs="$(IntDir)\alloc.h;$(IntDir)\fp.h;$(IntDir)\m68881.h;$(IntDir)\mem.h;$(IntDir)\pngusr.h;$(IntDir)\strings.h;$(IntDir)\unistd.h;$(IntDir)\unixio.h"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="README.txt"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

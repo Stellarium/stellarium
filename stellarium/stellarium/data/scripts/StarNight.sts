@@ -1,0 +1,24 @@
+date local 2007-01-01T22:00:00
+meteors 0
+flag stars 1
+flag milky_way 0
+flag star_names 0
+flag star_twinkle 1
+set star_twinkle_amount 0.3
+flag constellation_drawing 1
+flag constellation_names 0
+flag nebula_names 0
+set max_mag_nebula_name 8
+flag planet_names 0
+flag equatorial_grid 0
+flag azimuthal_grid 0
+flag equator_line 0
+flag ecliptic_line 0
+flag landscape 1
+flag cardinal_points 0
+flag atmosphere 0
+flag fog 0
+timerate rate 1000
+wait duration 30.0
+timerate rate 1
+wait duration 1.0

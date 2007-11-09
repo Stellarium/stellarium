@@ -1,0 +1,22 @@
+clear state natural
+flag landscape 0
+flag atmosphere 0
+flag equatorial_grid 1
+
+timerate rate 1000
+wait duration 3
+select hp 11767 pointer 0
+flag track_object 1
+wait duration 3
+set center_fov_ratio -0.1
+wait duration 3
+set center_fov_ratio -0.2
+wait duration 3
+set center_fov_ratio -0.3
+wait duration 3
+set center_fov_ratio -0.4
+wait duration 3
+set center_fov_ratio -0.5
+
+
+script action end

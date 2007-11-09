@@ -1,0 +1,426 @@
+//start from Nizhniy Novgorod
+//look to the sky
+//set time to the 1st of July, 12am
+date local 2007-06-01T12:00:00
+meteors 10000
+//Make the spire in the center
+look delta_az 1.3
+//Rotation for Tolya's camera position
+look delta_az 1.45
+//Turn off direction marks (North, South etc)
+flag cardinal_points 0
+//Turn off all marks (constellation arts etc.) 
+flag constellation_names 0
+flag planet_names 0
+flag nebula_names 0
+flag star_names 0
+//Turn off the Milkyway
+flag milky_way 0
+//5 secs pause
+wait duration 5.00
+//full day rotation	
+timerate rate 1000
+wait duration 30.00
+timerate rate 1
+wait duration 1.0
+
+//Select constellation
+flag atmosphere 0
+flag fog 0
+select constellation Oph
+flag sticky_constellation_selection 1
+flag constellation_drawing 1
+flag constellation_names 1
+flag constellation_pick 1
+wait duration 2.0
+flag constellation_art 1
+wait duration 3.0
+select constellation Cyg 
+wait duration 3.0
+select constellation Dra
+wait duration 3.0
+select constellation Vir
+wait duration 3.0
+deselect 
+flag sticky_constellation_selection 0
+flag constellation_pick 0
+wait duration 5.0
+
+//Turn off the contellations
+//flag constellation_drawing 0
+//flag constellation_names 0
+//flag constellation_pick 0
+meteors 0
+flag constellation_art 0
+
+//Stop day motion and do the full circle around the Sun
+flag stop_day_motion 1
+flag star_names 1 
+flag planet_names 1
+timerate rate 1000
+wait duration 1.0
+timerate rate 5000
+wait duration 1.0
+timerate rate 10000
+wait duration 1.0
+timerate rate 50000
+wait duration 1.0
+timerate rate 100000
+wait duration 1.0
+timerate rate 1000000
+wait duration 23.56
+timerate rate 100000
+wait duration 1.0
+timerate rate 50000
+wait duration 1.1
+timerate rate 10000
+wait duration 1.0
+timerate rate 5000
+wait duration 1.0
+timerate rate 1000
+wait duration 1.0
+timerate rate 1
+wait duration 1.0 
+
+//Move to France
+moveto lat 45.84 lon 3.83673 alt 0 duration 3.0
+zoom fov 200 duration 1.0
+wait duration 4.5
+flag landscape 0
+wait duration 1.0
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+look delta_az -0.00875
+wait duration 5.0
+
+wait duration 2.0
+
+landscape action load name "T60 Pic du Midi" type spherical maptex "\..\..\textures\landscapes\picdumidi-t60.png"
+flag landscape 1
+flag atmosphere 1
+flag fog 1
+wait duration 3.0
+flag stop_day_motion 0
+wait duration 10.0
+
+//Turn off atmosphere effects 
+flag atmosphere 0
+flag fog 0
+flag constellation_drawing 0
+flag constellation_names 0
+flag constellation_pick 0
+flag constellation_art 0
+wait duration 3.0
+
+flag landscape 0
+
+//Center on Saturn
+select planet Saturn pointer 0
+flag track_object on
+wait duration 3.0
+set center_fov_ratio -0.33333
+zoom fov 0.05 duration 7.0
+wait duration 13.0
+
+//Center on Saturn's satellites
+select planet Rhea pointer 0
+flag track_object on
+wait duration 2.0
+zoom fov 0.0004 duration 3.0
+wait duration 6.0
+zoom fov 0.05 duration 3.0
+wait duration 4.0
+select planet Mimas pointer 0
+flag track_object on
+wait duration 2.0
+zoom fov 0.0001 duration 3.0
+wait duration 6.0
+
+//Zoom out from Saturn 
+zoom fov 180.1 duration 7.0
+wait duration 8.0
+
+//Center on Moon
+select planet Moon pointer 0
+flag track_object on
+wait duration 2.0
+zoom auto in duration 4.0
+wait duration 5.0
+
+//Rotate Moon so that it is visible
+flag stop_day_motion 1
+timerate rate 100000
+wait duration 10.0
+timerate rate 1.0
+wait duration 5.0
+
+//Move the observer to Moon
+set center_fov_ratio 0.0
+set home_planet "Moon"
+zoom auto out
+wait duration 1.5
+//Turn Moon landscape on
+landscape action load name "Moon" type spherical maptex "\..\..\textures\landscapes\apollo17.png"
+flag landscape 1
+flag track_object off
+wait duration 10.0
+flag landscape 0
+
+//Zoom in Earth
+flag stop_day_motion 0
+set center_fov_ratio -0.33333
+select planet Earth pointer 0
+flag track_object on
+zoom auto in duration 5.0
+wait duration 6.0
+
+//Rotate Earth 
+timerate rate 10000
+wait duration 5.0
+timerate rate 1
+wait duration 1.0
+
+///Zoom out 
+zoom auto out duration 5.0
+wait duration 6.0
+
+select planet Mars pointer 0
+flag track_object on
+zoom auto in duration 3.0
+zoom auto in duration 5.0
+wait duration 9.0
+
+//Move the observer to Mars
+deselect
+set center_fov_ratio 0.0
+set home_planet "Mars"
+zoom auto out
+zoom fov 200 duration 1.0
+wait duration 1.5
+//Turn Mars landscape on
+landscape action load name "Husband Hill, Mars" type spherical maptex "\..\..\textures\landscapes\husband-hill.png"
+flag landscape 1
+flag track_object off
+timerate rate 1000
+wait duration 10.0
+
+timerate rate 1
+flag landscape 0
+wait duration 1.0
+
+//Center a far star
+select hp 102098
+flag track_object on
+zoom auto in duration 3.0
+wait duration 4.0
+
+//Move the observer to a far star
+deselect
+set home_planet "Solar System Observer"
+zoom auto out
+wait duration 1.5
+select planet Sun pointer 0
+flag track_object on
+wait duration 2.0
+
+//Zoom to the solar system and watch the rotations
+set center_fov_ratio -0.33333
+zoom fov 0.128 duration 7.0
+wait duration 8.0
+timerate rate 1000000
+wait duration 10.0
+
+//Select Earth and watch it's movements
+select planet Earth pointer 0
+zoom auto in
+wait duration 10.0
+
+zoom fov 0.128 duration 7.0
+select planet Sun pointer 0
+wait duration 8.0
+
+//Flat Video pause
+wait duration 160.0
+
+//Show the International station landscape 
+deselect
+timerate rate 1
+date utc 2004:05:04T17:51:00
+set home_planet "Earth"
+zoom auto out
+zoom fov 200 duration 1.0
+wait duration 2.0
+landscape action load name "ISS" type spherical maptex "\..\..\textures\landscapes\iss.png"
+flag landscape 1 
+wait duration 10.0	
+
+flag landscape 0
+wait duration 1.0
+select planet Moon pointer 0
+flag tracking on
+wait duration 2.0
+zoom auto in duration 4.0
+wait duration 4.0
+timerate rate 250
+wait duration 80.0
+
+timerate rate 1
+wait duration 1.0
+script action end

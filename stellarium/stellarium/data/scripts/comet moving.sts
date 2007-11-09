@@ -1,0 +1,125 @@
+clear state natural
+
+wait duration 3
+
+flag atmosphere 0
+flag fog 0
+flag landscape 0
+flag constellation_names 0
+flag planet_names 0
+flag star_names 0
+flag milky_way 0
+
+zoom fov 60 duration 5
+wait duration 7
+
+image filename "comet-liner.png" action load coordinate_system viewport xpos -0.21 ypos -0.21 rotation 30 name comet alpha 0.0 scale 0.08
+wait duration 0.5
+image name comet alpha 0.2
+wait duration 0.2
+image name comet alpha 0.3
+wait duration 0.2
+image name comet alpha 0.4
+wait duration 0.2
+image name comet alpha 0.5
+wait duration 0.2
+image name comet alpha 0.6
+wait duration 0.2
+image name comet alpha 0.7
+wait duration 0.2
+image name comet alpha 0.8
+wait duration 0.2
+image name comet alpha 0.9
+wait duration 0.2
+image name comet alpha 1.0
+wait duration 0.2
+
+image name comet xpos -0.209 ypos -0.211
+wait duration 0.5
+image name comet xpos -0.208 ypos -0.212
+wait duration 0.5
+image name comet xpos -0.207 ypos -0.213
+wait duration 0.5
+image name comet xpos -0.206 ypos -0.214
+wait duration 0.5
+image name comet xpos -0.205 ypos -0.215
+wait duration 0.5
+image name comet xpos -0.204 ypos -0.216
+wait duration 0.5
+image name comet xpos -0.203 ypos -0.217
+wait duration 0.5
+image name comet xpos -0.202 ypos -0.218
+wait duration 0.5
+image name comet xpos -0.201 ypos -0.219
+wait duration 0.5
+image name comet xpos -0.2 ypos -0.22
+wait duration 0.5
+image name comet xpos -0.199 ypos -0.221
+wait duration 0.5
+image name comet xpos -0.198 ypos -0.222
+wait duration 0.5
+image name comet xpos -0.197 ypos -0.223
+wait duration 0.5
+image name comet xpos -0.196 ypos -0.224
+wait duration 0.5
+image name comet xpos -0.195 ypos -0.225
+wait duration 0.5
+image name comet xpos -0.194 ypos -0.226
+wait duration 0.5
+image name comet xpos -0.193 ypos -0.227
+wait duration 0.5
+image name comet xpos -0.192 ypos -0.228
+wait duration 0.5
+image name comet xpos -0.191 ypos -0.229
+wait duration 0.5
+image name comet xpos -0.19 ypos -0.23
+wait duration 0.5
+image name comet xpos -0.189 ypos -0.231
+wait duration 0.5
+image name comet xpos -0.188 ypos -0.232
+wait duration 0.5
+image name comet xpos -0.187 ypos -0.233
+wait duration 0.5
+image name comet xpos -0.186 ypos -0.234
+wait duration 0.5
+image name comet xpos -0.185 ypos -0.235
+wait duration 0.5
+image name comet xpos -0.184 ypos -0.236
+wait duration 0.5
+image name comet xpos -0.183 ypos -0.237
+wait duration 0.5
+image name comet xpos -0.182 ypos -0.238
+wait duration 0.5
+image name comet xpos -0.181 ypos -0.239
+wait duration 0.5
+image name comet xpos -0.18 ypos -0.24
+wait duration 0.5
+
+script action end
+
+#image filename "comet-liner.png" action load coordinate_system horizontal altitude 90 azimuth 180.7 name comet alpha 1.0 scale 10
+
+image name comet altitude 90.7 alpha 1.0 scale 10 rotation 20
+wait duration 3
+
+image name comet altitude 100.7 alpha 1.0 scale 10 rotation 20
+wait duration 3
+
+image name comet altitude 110.7 alpha 1.0 scale 10 rotation 20
+wait duration 3
+
+image name comet azimuth 180.7 alpha 1.0 scale 10 rotation 10
+wait duration 3
+
+image name comet azimuth 180.7 alpha 1.0 scale 10 rotation 20
+wait duration 3
+
+image name comet azimuth 190.7 alpha 1.0 scale 10 rotation 20
+wait duration 3
+
+image filename "Sunset.jpg" action load coordinate_system viewport duration 10 name helloworld alpha 1.0 scale 0.1
+
+# Wait 7 seconds before removing the image from the display
+# I tried using script action pause to just stop the script instead of using wait duration but it doesn't appear to work
+# with image displays.
+wait duration 7

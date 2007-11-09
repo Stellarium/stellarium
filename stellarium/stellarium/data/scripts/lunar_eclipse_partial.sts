@@ -1,0 +1,9 @@
+clear
+date utc 2006:03:14T21:21:32
+select planet Moon pointer off
+wait duration 2
+zoom auto in
+wait duration 2
+timerate rate 500
+script action end
+
