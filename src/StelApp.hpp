@@ -72,17 +72,6 @@ public:
 
 	//! Initialize application and core.
 	virtual void init();
-	
-	//! Processing of command line options which is to be done before config file is read.
-	//! This includes the chance to set the configuration file name.  It is to be done
-	//! in the sub-class of the StelApp, as the sub-class may want to manage the 
-	//! argument list, as is the case with the StelAppQt4 version.
-	virtual void parseCLIArgsPreConfig(void);	
-
-	//! Processing of command line options which is to be done after the config file is
-	//! read.  This gives us the chance to over-ride settings which are in the configuration
-	//! file.
-	virtual void parseCLIArgsPostConfig(InitParser& conf);
 
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
@@ -171,11 +160,6 @@ public:
 	//! @return the full path of the configuration file
 	const QString& getConfigFilePath() { return configFile; }
 	
-	//! Copies the default configuration file.
-	//! This function copies the default_config.ini file to config.ini (or other
-	//! name specified on the command line located in the user data directory.
-	void copyDefaultConfigFile();
-	
 	//! Get the width of the openGL screen.
 	//! @return width of the openGL screen in pixels
 	virtual int getScreenW() const = 0;
@@ -256,10 +240,13 @@ protected:
 
 	//! Call this when you want to make the window (not) resizable.
 	virtual void setResizable(bool resizable) = 0;
-	
-	//! Utility class for file operations, mainly locating files by name
-	StelFileMgr* stelFileMgr;
-	
+		
+private:
+	//! Copies the default configuration file.
+	//! This function copies the default_config.ini file to config.ini (or other
+	//! name specified on the command line located in the user data directory.
+	void copyDefaultConfigFile();
+
 	//! Somewhere to save the command line arguments
 	QStringList* argList;
 	
@@ -321,8 +308,18 @@ protected:
 	//! the option was not found in the argument list before an element which 
 	//! has the value "--".
 	int argsGetYesNoOption(QStringList* args, QString shortOpt, QString longOpt, int defaultValue);
-		
-private:	
+	
+	//! Processing of command line options which is to be done before config file is read.
+	//! This includes the chance to set the configuration file name.  It is to be done
+	//! in the sub-class of the StelApp, as the sub-class may want to manage the 
+	//! argument list, as is the case with the StelAppQt4 version.
+	virtual void parseCLIArgsPreConfig(void);	
+
+	//! Processing of command line options which is to be done after the config file is
+	//! read.  This gives us the chance to over-ride settings which are in the configuration
+	//! file.
+	virtual void parseCLIArgsPostConfig(InitParser& conf);
+	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const QString& fileName, const QString& section);
 
@@ -350,6 +347,9 @@ private:
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
 
+	//! Utility class for file operations, mainly locating files by name
+	StelFileMgr* stelFileMgr;
+	
 	float fps;
 	int frame, timefr, timeBase;		// Used for fps counter
 	
