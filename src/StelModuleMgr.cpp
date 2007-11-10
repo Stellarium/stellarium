@@ -52,7 +52,7 @@ void StelModuleMgr::registerModule(StelModule* m)
 {
 	if (modules.find(m->objectName()) != modules.end())
 	{		
-		qWarning() << "Module \"" << m->objectName() << "\" is already loaded." << endl;
+		qWarning() << "Module \"" << m->objectName() << "\" is already loaded.";
 		return;
 	}
 	modules.insert(m->objectName(), m);
@@ -67,7 +67,7 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 	QMap<QString, StelModule*>::const_iterator iter = modules.find(moduleID);
 	if (iter==modules.end())
 	{
-		qWarning() << "Warning can't find module called " << moduleID << "." << endl;
+		qWarning() << "Warning can't find module called " << moduleID << ".";
 		return NULL;
 	}
 	return iter.value();
@@ -101,16 +101,16 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	QPluginLoader loader(moduleFullPath);
 	if (!loader.load())
 	{
-		qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString() << endl;
-		qWarning() << "Module " << moduleID << " will not be loaded." << endl;
+		qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+		qWarning() << "Module " << moduleID << " will not be loaded.";
 		return NULL;
 	}
 	
 	QObject* obj = loader.instance();
 	if (!obj)
 	{
-		qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString() << endl;
-		qWarning() << "Module " << moduleID << " will not be open." << endl;
+		qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+		qWarning() << "Module " << moduleID << " will not be open.";
 		return NULL;
 	}
 	
@@ -185,7 +185,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 		}
 		catch (exception& e)
 		{
-			qWarning() << "WARNING: unable to successfully read module.ini file from module " << *dir << endl;
+			qWarning() << "WARNING: unable to successfully read module.ini file from module " << *dir;
 		}
 	}
 

@@ -358,6 +358,9 @@ void StelApp::init()
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
 	
+	updateSkyLanguage();
+	updateAppLanguage();
+	
 	// play startup script, if available
 	scripts->play_startup_script();
 	
