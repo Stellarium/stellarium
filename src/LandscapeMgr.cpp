@@ -260,11 +260,11 @@ void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagLandscapeSetsLocation(conf.get_boolean("landscape:flag_landscape_sets_location"));
 }
 
-void LandscapeMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void LandscapeMgr::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"cardinal_color", defaultColor)));
 }
 
 

@@ -87,7 +87,7 @@ public:
 	virtual void selectedObjectChangeCallBack(bool added = false);
 	
 	//! 
-	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////

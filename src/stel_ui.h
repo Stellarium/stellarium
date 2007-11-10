@@ -87,7 +87,7 @@ public:
     void setTitle(const wstring& title);
     wstring getTitleWithAltitude(void);
 
-    void setColorScheme(const InitParser& conf, const string& section);
+    void setColorScheme(const InitParser& conf, const QString& section);
 	double getMouseCursorTimeout() { return MouseCursorTimeout; }
 
 	bool getFlagShowGravityUi() { return FlagShowGravityUi; }

@@ -140,12 +140,12 @@ void TelescopeMgr::update(double deltaTime) {
 	communicate();
 }
 
-void TelescopeMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void TelescopeMgr::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	set_label_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
-	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	set_label_color(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"telescope_label_color", defaultColor)));
+	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"telescope_circle_color", defaultColor)));
 }
 
 vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const

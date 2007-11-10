@@ -72,7 +72,7 @@ public:
 	//! Sets the color of the cardinal points based on the values in the ini parser object.
 	//! @param conf the ini parser object from which to read settings.
 	//! @param section the section of the ini settings to read the color value from.
-	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	
 	//! Get the order in which this module will draw it's objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

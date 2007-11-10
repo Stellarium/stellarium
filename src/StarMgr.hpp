@@ -104,7 +104,7 @@ public:
 	virtual void updateSkyCulture(LoadingBar& lb);
 	
 	//! Sets the colour scheme (night / chart etc).
-	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	
 	//! Used to determine the order in which the various StelModules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
