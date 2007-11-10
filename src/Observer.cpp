@@ -45,13 +45,11 @@ private:
   const wstring orig_name_i18n;
 };
 
-ArtificialPlanet::ArtificialPlanet(const Planet &orig)
-                 :Planet(0,"",0,0,0,0,Vec3f(0,0,0),0,"","",
-                         pos_func_type(),0,false,true),
-//                 :Planet(orig),
-                  dest(0),
-                  orig_name(orig.getEnglishName()),
-                  orig_name_i18n(orig.getNameI18n()) {
+ArtificialPlanet::ArtificialPlanet(const Planet &orig) : 
+		Planet(0, "", 0, 0, 0, 0, Vec3f(0,0,0), 0, "", "",
+		pos_func_type(), 0, false, true), dest(0),
+		orig_name(orig.getEnglishName()), orig_name_i18n(orig.getNameI18n())
+{
   radius = 0;
     // set parent = sun:
   if (orig.get_parent()) {
