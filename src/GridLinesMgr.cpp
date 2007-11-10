@@ -648,15 +648,15 @@ double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 	return 0.;
 }
 
-void GridLinesMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void GridLinesMgr::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	setColorEquatorGrid(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
-	setColorAzimutalGrid(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
-	setColorEquatorLine(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
-	setColorEclipticLine(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
-	setColorMeridianLine(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	setColorEquatorGrid(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"equatorial_color", defaultColor)));
+	setColorAzimutalGrid(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"azimuthal_color", defaultColor)));
+	setColorEquatorLine(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"equator_color", defaultColor)));
+	setColorEclipticLine(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"ecliptic_color", defaultColor)));
+	setColorMeridianLine(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"meridian_color", defaultColor)));
 }
 
 //! Set flag for displaying Azimutal Grid

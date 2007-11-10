@@ -191,12 +191,12 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 void NebulaMgr::updateSkyCulture(LoadingBar& lb)
 {;}
 
-void NebulaMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void NebulaMgr::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
-	setCirclesColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"nebula_label_color", defaultColor)));
+	setCirclesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"nebula_circle_color", defaultColor)));
 }
 
 // search by name

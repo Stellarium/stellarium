@@ -1458,12 +1458,12 @@ wstring StelUI::getTitleWithAltitude(void)
         L" @ " + StelUtils::doubleToWstring(core->getObservatory()->get_altitude()) + L"m";
 }
 
-void StelUI::setColorScheme(const InitParser& conf, const string& section)
+void StelUI::setColorScheme(const InitParser& conf, const QString& section)
 {
 	if (!desktop) return;
 	
-	s_color GuiBaseColor		= StelUtils::str_to_vec3f(conf.get_str(section, "gui_base_color", "0.3,0.4,0.7"));
-	s_color GuiTextColor		= StelUtils::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
+	s_color GuiBaseColor		= StelUtils::str_to_vec3f(conf.get_str(section.toStdString(), "gui_base_color", "0.3,0.4,0.7"));
+	s_color GuiTextColor		= StelUtils::str_to_vec3f(conf.get_str(section.toStdString(), "gui_text_color", "0.7,0.8,0.9"));
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }

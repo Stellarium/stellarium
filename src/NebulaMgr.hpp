@@ -79,7 +79,7 @@ public:
 	//! @param conf The ini parser object.
 	//! @param section The section of the parser object from which to take the 
 	//! new color values.
-	virtual void setColorScheme(const InitParser& conf, const std::string& section);
+	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

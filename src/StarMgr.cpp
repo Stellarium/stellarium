@@ -412,12 +412,12 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void StarMgr::setColorScheme(const InitParser& conf, const std::string& section)
+void StarMgr::setColorScheme(const InitParser& conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section,"default_color");
-	setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
-	setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
+	string defaultColor = conf.get_str(section.toStdString(),"default_color");
+	setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"star_label_color", defaultColor)));
+	setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"star_circle_color", defaultColor)));
 }
 
 /***************************************************************************
