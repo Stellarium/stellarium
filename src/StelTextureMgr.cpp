@@ -176,6 +176,8 @@ ManagedSTextureSP StelTextureMgr::qcreateTexture(const QString& filename, bool l
 *************************************************************************/
 ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
 {
+	if (afilename.empty())
+		return ManagedSTextureSP();
 	string ph;
 	try
 	{
