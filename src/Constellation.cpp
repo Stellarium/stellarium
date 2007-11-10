@@ -92,7 +92,7 @@ void Constellation::drawOptim(Projector* prj) const
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	glColor4f(lineColor[0], lineColor[1], lineColor[2], line_fader.getInterstate());
-
+	
 	Vec3d star1;
 	Vec3d star2;
 	for (unsigned int i=0;i<numberOfSegments;++i)
