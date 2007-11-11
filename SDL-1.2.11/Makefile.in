@@ -1,0 +1,179 @@
+# Makefile to build and install the SDL library
+
+top_builddir = .
+srcdir  = @srcdir@
+objects = build
+depend	= build-deps
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir	= $(DESTDIR)@bindir@
+libdir  = $(DESTDIR)@libdir@
+includedir = $(DESTDIR)@includedir@
+datadir	= $(DESTDIR)@datadir@
+mandir	= $(DESTDIR)@mandir@
+auxdir	= @ac_aux_dir@
+distpath = $(srcdir)/..
+distdir = SDL-@SDL_VERSION@
+distfile = $(distdir).tar.gz
+
+@SET_MAKE@
+SHELL	= @SHELL@
+CC      = @CC@
+INCLUDE = @INCLUDE@
+CFLAGS  = @BUILD_CFLAGS@
+EXTRA_CFLAGS = @EXTRA_CFLAGS@
+LDFLAGS = @BUILD_LDFLAGS@
+EXTRA_LDFLAGS = @EXTRA_LDFLAGS@
+LIBTOOL = @LIBTOOL@
+INSTALL = @INSTALL@
+NASM	= @NASM@ @NASMFLAGS@
+AR	= @AR@
+RANLIB	= @RANLIB@
+
+TARGET  = libSDL.la
+SOURCES = @SOURCES@
+OBJECTS = @OBJECTS@
+
+SDLMAIN_TARGET = libSDLmain.a
+SDLMAIN_SOURCES = @SDLMAIN_SOURCES@
+SDLMAIN_OBJECTS = @SDLMAIN_OBJECTS@
+
+DIST = acinclude.m4 autogen.sh Borland.html Borland.zip BUGS build-scripts configure configure.in COPYING CREDITS CWprojects.sea.bin docs docs.html EpocBuildFiles.zip include INSTALL Makefile.dc Makefile.minimal Makefile.in MPWmake.sea.bin README* sdl-config.in sdl.m4 sdl.pc.in SDL.qpg.in SDL.spec SDL.spec.in src test TODO VisualCE.zip VisualC.html VisualC.zip Watcom-OS2.zip Watcom-Win32.zip WhatsNew Xcode.tar.gz
+
+LT_AGE      = @LT_AGE@
+LT_CURRENT  = @LT_CURRENT@
+LT_RELEASE  = @LT_RELEASE@
+LT_REVISION = @LT_REVISION@
+LT_LDFLAGS  = -no-undefined -rpath $(libdir) -release $(LT_RELEASE) -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
+
+all: $(srcdir)/configure Makefile $(objects) $(objects)/$(TARGET) $(objects)/$(SDLMAIN_TARGET)
+
+$(srcdir)/configure: $(srcdir)/configure.in
+	@echo "Warning, configure.in is out of date"
+	#(cd $(srcdir) && sh autogen.sh && sh configure)
+	@sleep 3
+
+Makefile: $(srcdir)/Makefile.in
+	$(SHELL) config.status $@
+
+$(objects):
+	$(SHELL) $(auxdir)/mkinstalldirs $@
+
+.PHONY: all depend install install-bin install-hdrs install-lib install-data install-man uninstall uninstall-bin uninstall-hdrs uninstall-lib uninstall-data uninstall-man clean distclean dist
+depend:
+	@SOURCES="$(SOURCES)" INCLUDE="$(INCLUDE)" output="$(depend)" \
+	$(SHELL) $(auxdir)/makedep.sh
+	@for src in $(SDLMAIN_SOURCES); do \
+	    obj=`echo $$src | sed -e 's|.*/||' -e 's|\.[^\.]*$$|.o|'`; \
+	    echo "\$$(objects)/$$obj: $$src" >>$(depend); \
+	    echo "	\$$(CC) \$$(CFLAGS) \$$(EXTRA_CFLAGS) -c $$src -o \$$@" >>$(depend); \
+	done
+
+include $(depend)
+
+$(objects)/$(TARGET): $(OBJECTS)
+	$(LIBTOOL) --mode=link $(CC) -o $@ $(OBJECTS) $(LDFLAGS) $(EXTRA_LDFLAGS) $(LT_LDFLAGS)
+
+$(objects)/$(SDLMAIN_TARGET): $(SDLMAIN_OBJECTS)
+	$(AR) cru $@ $(SDLMAIN_OBJECTS)
+	$(RANLIB) $@
+
+install: all install-bin install-hdrs install-lib install-data install-man
+install-bin:
+	$(SHELL) $(auxdir)/mkinstalldirs $(bindir)
+	$(INSTALL) -m 755 sdl-config $(bindir)/sdl-config
+install-hdrs:
+	$(SHELL) $(auxdir)/mkinstalldirs $(includedir)/SDL
+	for src in $(srcdir)/include/*.h; do \
+	    file=`echo $$src | sed -e 's|^.*/||'`; \
+	    $(INSTALL) -m 644 $$src $(includedir)/SDL/$$file; \
+	done
+	$(INSTALL) -m 644 include/SDL_config.h $(includedir)/SDL/SDL_config.h
+install-lib:
+	$(SHELL) $(auxdir)/mkinstalldirs $(libdir)
+	$(LIBTOOL) --mode=install $(INSTALL) $(objects)/$(TARGET) $(libdir)/$(TARGET)
+	$(INSTALL) -m 644 $(objects)/$(SDLMAIN_TARGET) $(libdir)/$(SDLMAIN_TARGET)
+	$(RANLIB) $(libdir)/$(SDLMAIN_TARGET)
+install-data:
+	$(SHELL) $(auxdir)/mkinstalldirs $(datadir)/aclocal
+	$(INSTALL) -m 644 $(srcdir)/sdl.m4 $(datadir)/aclocal/sdl.m4
+	$(SHELL) $(auxdir)/mkinstalldirs $(libdir)/pkgconfig
+	$(INSTALL) -m 644 $(srcdir)/sdl.pc $(libdir)/pkgconfig
+install-man:
+	$(SHELL) $(auxdir)/mkinstalldirs $(mandir)/man3
+	for src in $(srcdir)/docs/man3/*.3; do \
+	    file=`echo $$src | sed -e 's|^.*/||'`; \
+	    $(INSTALL) -m 644 $$src $(mandir)/man3/$$file; \
+	done
+
+uninstall: uninstall-bin uninstall-hdrs uninstall-lib uninstall-data uninstall-man
+uninstall-bin:
+	rm -f $(bindir)/sdl-config
+uninstall-hdrs:
+	for src in $(srcdir)/include/*.h; do \
+	    file=`echo $$src | sed -e 's|^.*/||'`; \
+	    rm -f $(includedir)/SDL/$$file; \
+	done
+	rm -f $(includedir)/SDL/SDL_config.h
+	-rmdir $(includedir)/SDL
+uninstall-lib:
+	$(LIBTOOL) --mode=uninstall rm -f $(libdir)/$(TARGET)
+	rm -f $(libdir)/$(SDLMAIN_TARGET)
+uninstall-data:
+	rm -f $(datadir)/aclocal/sdl.m4
+uninstall-man:
+	for src in $(srcdir)/docs/man3/*.3; do \
+	    file=`echo $$src | sed -e 's|^.*/||'`; \
+	    rm -f $(mandir)/man3/$$file; \
+	done
+
+clean:
+	rm -rf $(objects)
+	if test -f test/Makefile; then (cd test; $(MAKE) $@); fi
+
+distclean: clean
+	rm -f Makefile include/SDL_config.h sdl-config
+	rm -f SDL.qpg
+	rm -f config.status config.cache config.log libtool $(depend)
+	rm -rf $(srcdir)/autom4te*
+	find $(srcdir) \( \
+	    -name '*~' -o \
+	    -name '*.bak' -o \
+	    -name '*.old' -o \
+	    -name '*.rej' -o \
+	    -name '*.orig' -o \
+	    -name '.#*' \) \
+	    -exec rm -f {} \;
+	cp $(srcdir)/include/SDL_config.h.default $(srcdir)/include/SDL_config.h
+	if test -f test/Makefile; then (cd test; $(MAKE) $@); fi
+
+dist $(distfile):
+	$(SHELL) $(auxdir)/mkinstalldirs $(distdir)
+	tar cf - $(DIST) | (cd $(distdir); tar xf -)
+	cp $(distdir)/include/SDL_config.h.default $(distdir)/include/SDL_config.h
+	rm -rf `find $(distdir) -name .svn`
+	find $(distdir) \( \
+	    -name '*~' -o \
+	    -name '*.bak' -o \
+	    -name '*.old' -o \
+	    -name '*.rej' -o \
+	    -name '*.orig' -o \
+	    -name '.#*' \) \
+	    -exec rm -f {} \;
+	if test -f $(distdir)/test/Makefile; then (cd $(distdir)/test && make distclean); fi
+	tar cvf - $(distdir) | gzip --best >$(distfile)
+	rm -rf $(distdir)
+
+rpm: $(distfile)
+	rpmbuild -ta $?
+
+# Create a SVN snapshot that people can run update on
+snapshot:
+	svn co svn://libsdl.org/trunk/SDL
+	(cd SDL && ./autogen.sh && rm -rf autom4te.cache)
+	cp SDL/include/SDL_config.h.default SDL/include/SDL_config.h
+	mv SDL SDL-1.2
+	tar zcf $(HOME)/SDL-1.2.tar.gz SDL-1.2
+	rm -f $(HOME)/SDL-1.2.zip
+	zip -r $(HOME)/SDL-1.2.zip SDL-1.2
+	rm -rf SDL-1.2

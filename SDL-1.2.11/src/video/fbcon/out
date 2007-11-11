@@ -1,0 +1,29 @@
+Index: SDL_fbevents.c
+===================================================================
+--- SDL_fbevents.c	(revision 2338)
++++ SDL_fbevents.c	(working copy)
+@@ -55,6 +55,7 @@
+ #define GPM_NODE_FIFO	"/dev/gpmdata"
+ #endif
+ 
++/*#define DEBUG_KEYBOARD*/
+ /*#define DEBUG_MOUSE*/
+ 
+ /* The translation tables from a console scancode to a SDL keysym */
+@@ -281,8 +282,15 @@
+ 		}
+  		if ( keyboard_fd < 0 ) {
+ 			/* Last resort, maybe our tty is a usable VT */
+-			current_vt = 0;
++			struct vt_stat vtstate;
++
+ 			keyboard_fd = open("/dev/tty", O_RDWR);
++
++			if ( ioctl(keyboard_fd, VT_GETSTATE, &vtstate) == 0 ) {
++				current_vt = vtstate.v_active;
++			} else {
++				current_vt = 0;
++			}
+  		}
+ #ifdef DEBUG_KEYBOARD
+ 		fprintf(stderr, "Current VT: %d\n", current_vt);

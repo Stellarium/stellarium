@@ -1,0 +1,204 @@
+
+All:
+	Audio rate conversion is only implemented by multiplying or dividing
+	by a power of two.  This is a side-effect of the requirement that the
+	raw audio buffer size be a power of two, and can hopefully be fixed.
+	This means 8 KHz audio converted to 22 KHz ends up being 16 KHz. :-/
+
+	When the implementation is writing directly to video memory the mouse
+	cursor doesn't work properly.  Applications which do this should use
+	their own mouse cursor and call SDL_ShowCursor(0) to hide the system
+	cursor.
+
+Linux:
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed)
+
+	The keyboard modifiers are not set to the correct state on startup.
+
+	The AAlib, GGI, and SVGAlib video drivers are not heavily tested.
+
+Win32:
+	The MCI driver can't tell if the CD-ROM drive is paused or stopped.
+
+	The SDL_INIT_EVENTTHREAD flag is not supported on Win32
+	(Idea: create a separate DirectInput polling thread)
+	The main purpose of this flag is for smooth cursor motion in
+	fullscreen environments.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	This requires the ToUnicode() API which is only implemented on
+	Windows NT/2000, not on Windows 95/98.
+	Latin-1 keyboard input works fine.
+
+	Joysticks are only supported under the Win32 MultiMedia API,
+	DirectInput support is not yet implemented.
+
+BeOS:
+	BePPC is not supported, apparently not even by Be Inc.
+
+	SDL_WM_GrabInput() is not implemented.
+	Does anyone know how to do this?  SDL_WM_GrabInput() is designed
+	to prevent the user from switching input and mouse focus away from
+	the SDL application.
+
+	Continuous relative mouse motion is not implemented.
+
+	Wide UNICODE character input (Kanji, etc.) has not been tested.
+	Latin-1 keyboard input works fine.
+
+MacOS:
+	Palette handling isn't implemented in windowed mode yet.
+
+	Audio hasn't been extensively tested, in particular the locking
+	isn't implemented and mixer routines may not call malloc() or free()
+	because they are called at interrupt time.
+
+	SDL_WM_GrabInput() is not implemented.
+	Does anyone know how to do this?  SDL_WM_GrabInput() is designed
+	to prevent the user from switching input and mouse focus away from
+	the SDL application.
+
+	Continuous relative mouse motion is not implemented.
+
+	SDL_AddTimer() and SDL_RemoveTimer() haven't been implemented yet.
+
+	Not all of the keys are properly recognized on the keyboard.
+
+Mac OS X:
+	Depth switching for windowed mode isn't implemented yet.
+	
+	Palette handling isn't implemented in windowed mode yet.
+	
+	Command-line arguments dialog is not implemented yet.
+
+	Fullscreen drawing has some artifacts.
+	
+	Fullscreen OpenGL for the software renderer is broken.
+
+	Some OpenGL parameters are not accounted for, for example color bits customization.
+	
+	Continuous mouse motion perhaps is not as smooth as it should be.
+
+	SDL_WM_GrabInput() is implemented, but it "freezes" the hardware
+	cursor in the center of the window/screen.  Also, mouse moved events
+	are not generated, and the keyboard cannot be grabbed.
+
+	Mac OS X seems to have a broken pthread_cancel() implementation.
+	Actually, it just only has one cancellation point defined.
+	http://lists.apple.com/archives/darwin-development/2004/Jun/24/killingapthread.001.txt
+
+FreeBSD:
+	pthread_cancel() isn't supported by FreeBSD 3.X, so threads don't
+	work on versions of FreeBSD earlier than 4.0.
+
+	The CD-ROM handling doesn't work completely.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+Solaris:
+	The joystick functions are not implemented yet.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+IRIX:
+	The CD-ROM handling doesn't work completely.
+
+	The joystick functions are not implemented yet.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+EPOC:
+    Only Crystal version of Epoc/SymbianOS is currently supported.
+
+    SDL is implemented in static library only. SDL uses static/global
+    variables and that is not allowed in EPOC dll libraries.
+
+    Sound is not yet supported.
+
+    Joystick, OpenGL and cdrom is not supported (think about cdrom in a cell phone:-).
+    
+    No console output screen. Printing to stdout do not have any effect.
+
+QNX:
+	Fullscreen switch doesn't work (disabled for now).
+ 
+
+OpenBSD:  -= NOT YET SUPPORTED =-
+	This is reported to work, but I haven't verified this.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+OSF/Tru64:  -= NOT YET SUPPORTED =-
+	The audio functions are not implemented yet.
+
+	Joysticks and CD-ROM functions are not implemented yet.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+AIX:  -= NOT YET SUPPORTED =-
+	This port has only been tested with AIX 4.3.3
+
+	The OpenGL support doesn't work yet.
+
+	The joystick subsystem isn't implemented yet.
+
+	Endian detection doesn't work yet - needs a unique CPP symbol.
+
+	Wide UNICODE character input (Kanji, etc.) is not yet supported.
+	It requires handling of keyboard mapping events and using the XIM
+	input translation extension.  I will implement it as requested.
+	Latin-1 keyboard input works fine.
+	(UPDATE 04/06/2004: this bug is now fixed but needs testing)
+	
+	The keyboard modifiers are not set to the correct state on startup.
+
+	The AIX port was done by Carsten.Griwodz@KOM.tu-darmstadt.de
+	More information on this port is available at:
+	http://www.kom.e-technik.tu-darmstadt.de/~griff/SDL/
+
+AmigaOS:  -= NOT YET SUPPORTED =-
+	The OpenGL support isn't implemented yet.
+
+	SDL_WM_GrabInput() is not implemented.
+	Does anyone know how to do this?  SDL_WM_GrabInput() is designed
+	to prevent the user from switching input and mouse focus away from
+	the SDL application.
+
+	Continuous relative mouse motion is not implemented.
+
+	The AmigaOS port was done by Gabriele.Greco@galactica.it
+

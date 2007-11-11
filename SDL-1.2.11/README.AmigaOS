@@ -1,0 +1,50 @@
+This is the porting of 1.2.0 version of SDL (the latest stable one)
+to AmigaOS/68k.
+
+All the bugs known of the past version have been corrected. And I've
+added all the new SDL features.
+
+This version of SDL needs Cybergraphx V3 (r69+) or CyberGraphX V4
+and AHI v3+. Probably it works also with P96 or CGXAga, but it's 
+untested.
+
+This version is available as linked library for SAS/C and GCC, only 68k this 
+time, a powerup (ppcemu compatible) and a morphos version will be ready quite 
+soon (i hope).
+
+Implemented:
+
+- 8/16/24/32bit video modes, both fullscreen and windowed.
+- Hardware surfaces.
+- CGX blitting acceleration.
+- CGX colorkey blitting acceleration.
+- AHI audio (8/16 bit, with any audio format), always uses unit 0 for now.
+- Thread support (maybe not 100% compatible with other implementations)
+- Semaphores 
+- Window resizing and backdrop windows (NEW)
+- Joystick/Joypad support.
+
+To do:
+
+- CDRom audio playing support
+- OpenGL (A guy was working on it but I've lost his tracks :( )
+
+The SAS/C library is distributed with debug info attached, to strip debug info 
+simply add STRIPDEBUG argument to the linker.
+
+NOTE: SDL includes debug output using kprintf, to disable it add to your 
+project a function like this:
+
+void kprintf(char *a,...)
+{
+}
+
+Otherwise you can redirect the debug to a console window with sushi, sashimi or
+similar tools (the default output is the internal serial port). 
+
+For info, support, bugfix and other feel free to mail me:
+
+Gabriele Greco (gabriele.greco@aruba.it)
+
+You can find also a small SDL Amiga page at:
+http://ggreco.interfree.it/sdl.html

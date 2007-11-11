@@ -1,0 +1,75 @@
+
+==============================================================================
+Using the Simple DirectMedia Layer with EPOC/SymbianOS 6.0
+==============================================================================
+
+==============================================================================
+I.  Building the Simple DirectMedia Layer libraries:
+
+  You can get Symbian SDK from: 
+    http://www.symbian.com.
+ 
+  First create "Epoc" directory under SDL main directory and unpack 
+  EpocBuildFiles.zip in it.
+   
+  To build the librarys goto "epoc" directory and type:
+    bldmake bldfiles
+    abld makefile vc6 (for creating Microsoft Visual C++ makefiles)
+    abld build wins udeb (building for wins emulator)
+    abld build armi urel (building for real device)
+
+==============================================================================
+II. Building the Simple DirectMedia Layer programs:
+
+  Building SDL test programs is easy once you have built the libraries:
+    abld test build wins udeb
+    abld test build armi urel
+
+  Supported real screen resolutions
+    320 x 200 x  8 bit
+    320 x 200 x 12 bit
+    640 x 200 x  8 bit
+    640 x 200 x 12 bit
+  Supported "emulated" screen resolutions 
+    640 x 400 x  8 bit
+    640 x 400 x 12 bit
+    640 x 480 x  8 bit
+    640 x 480 x 12 bit
+  "Emulated" resolutions are implemented by by shrinking the screen vertically 
+  i.e. only every second scanline is drawn. This is mainly ment to be used for 
+  testing quick ports of programs. Using faked resolutions is a waste of memory 
+  and cpu power!
+
+==============================================================================
+III. Running test programs
+
+  Copy executable to the device and run it from the File manager.   The Esc 
+  key quits demo programs. In Crystal, Exe programs do not appear in task list 
+  nor in Extras :-(. Test programs are tested in Nokia 9210 Communicator.
+
+  Special keys used in SDL:
+    The Caps lock key enables or disables the virtual cursor. 
+    Function keys are mapped as follows: 
+    F1=chr+q, F2=chr+w,..., F8=chr+i, 
+    F9=chr+a,..., F12=chr+d.
+
+==============================================================================
+IV.  Enjoy! :)
+
+  If you have a project you'd like me to know about, or want to ask questions,
+  go ahead and join the SDL developer's mailing list by sending e-mail to:
+
+	sdl-request@libsdl.org
+
+  and put "subscribe" into the subject of the message. Or alternatively you
+  can use the web interface:
+
+	http://www.libsdl.org/mailman/listinfo/sdl
+
+  You can find more info about Epoc version of SDL from Hannu Viitala's 
+  homepage
+    http://www.mbnet.fi/~haviital
+  
+==============================================================================
+
+
