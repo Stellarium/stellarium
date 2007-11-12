@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <QTextStream>
+#include <QFile>
 
 #include "Projector.hpp"
 #include "StarMgr.hpp"
@@ -431,9 +432,8 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 
 	cout << "Loading star data..." << endl;
 
-	const string starsIniFile = StelApp::getInstance().getFileMgr().findFile(string("stars/default/stars.ini"));
 	InitParser conf;
-	conf.load(starsIniFile.c_str());
+	conf.load(StelApp::getInstance().getFileMgr().qfindFile("stars/default/stars.ini"));
 				         
 	for (int i=0; i<100; i++)
 	{

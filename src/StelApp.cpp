@@ -170,13 +170,13 @@ void StelApp::init()
 	QString fontMapFile("");
 	try 
 	{
-		fontMapFile = stelFileMgr->qfindFile("data/fontmap.dat");
+		fontMapFile = stelFileMgr->qfindFile(QFile::decodeName("data/fontmap.dat"));
 	}
 	catch(exception& e)
 	{
 		cerr << "ERROR when locating font map file: " << e.what() << endl;
 	}
-	fontManager = new StelFontMgr(fontMapFile.toStdString());
+	fontManager = new StelFontMgr(QFile::encodeName(fontMapFile).data());
 	
 	skyCultureMgr = new StelSkyCultureMgr();
 	moduleMgr = new StelModuleMgr();

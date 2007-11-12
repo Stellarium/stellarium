@@ -7,6 +7,7 @@
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
+#include <QCoreApplication>
 #include <QFileInfo>
 #include <QDir>
 #include <QString>
@@ -56,7 +57,7 @@ StelFileMgr::~StelFileMgr()
 
 string StelFileMgr::findFile(const string& path, const FLAGS& flags)
 {
-	return qfindFile(QString::fromUtf8(path.c_str()), flags).toUtf8().data();
+	return QFile::encodeName(qfindFile(QFile::decodeName(path.c_str()), flags)).data();
 }
 
 QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
@@ -345,7 +346,7 @@ QString StelFileMgr::getUserDir(void)
 	// wrong, than to lose all the users settings when thy upgrade).
 	if (getenv("APPDATA")!=NULL && !userDir.isDir())
 	{
-		userDir = QString::fromLocal8Bit(getenv("APPDATA")) + "/Stellarium";
+		userDir = QFile::decodeName(getenv("APPDATA")) + "/Stellarium";
 	}
 
 #elif defined(MACOSX)
@@ -373,13 +374,16 @@ QString StelFileMgr::getInstallationDir(void)
 		return ".";
 
 #if defined(MACOSX)
-	QFileInfo installLocation(MacosxDirs::getApplicationResourcesDirectory());
+	QFileInfo MacOSdir(QCoreApplication::applicationDirPath());
+	QDir ResourcesDir = MacOSdir.dir();
+	ResourcesDir.cd(QString("Resources"));
+	QFileInfo installLocation(ResourcesDir.absolutePath());
 	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 #else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
-	QFileInfo installLocation(INSTALL_DATADIR);
-	QFileInfo checkFile(INSTALL_DATADIR "/" CHECK_FILE);
+	QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
+	QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 #endif
 
 	if (checkFile.exists())
@@ -421,7 +425,7 @@ string StelFileMgr::getLocaleDir(void)
 	if (getInstallationDir() == ".")
 		localePath = QFileInfo("./locale");
 	else
-		localePath = QFileInfo(INSTALL_LOCALEDIR);
+		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
 	
 #endif
 	if (localePath.exists())
