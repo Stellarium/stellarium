@@ -40,20 +40,33 @@ class SFont;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT;
+	//! Define whether constellation art is displayed
 	Q_PROPERTY(bool flagArt READ getFlagArt WRITE setFlagArt);
+	//! Constellation art fade duration in second
 	Q_PROPERTY(double artFadeDuration READ getArtFadeDuration WRITE setArtFadeDuration);
+	//! Constellation art intensity (between 0 and 1)
 	Q_PROPERTY(double artIntensity READ getArtIntensity WRITE setArtIntensity);
+	//! Define whether constellation lines are displayed
 	Q_PROPERTY(bool flagLines READ getFlagLines WRITE setFlagLines);
+	//! Define whether constellation boundaries are displayed
 	Q_PROPERTY(bool flagBoundaries READ getFlagBoundaries WRITE setFlagBoundaries);
+	//! Define whether constellation names labels are displayed
 	Q_PROPERTY(bool flagNames READ getFlagNames WRITE setFlagNames);
+	//! Define whether only selected constellations must be displayed
 	Q_PROPERTY(bool flagIsolateSelected READ getFlagIsolateSelected WRITE setFlagIsolateSelected);
+	//! Constellation lines color
 	Q_PROPERTY(Vec3f linesColor READ getLinesColor WRITE setLinesColor);		
+	//! Constellation boundaries color
 	Q_PROPERTY(Vec3f boundariesColor READ getBoundariesColor WRITE setBoundariesColor);
+	//! Constellation name labels colors
 	Q_PROPERTY(Vec3f namesColor READ getNamesColor WRITE setNamesColor);
+	//! Constellation labels font size
 	Q_PROPERTY(double fontSize READ getFontSize WRITE setFontSize);
 	
 public:
+	//! Constructor
 	ConstellationMgr(StarMgr *stars);
+	//! Destructor
 	virtual ~ConstellationMgr();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -86,8 +99,14 @@ public:
 	//! @param added not used at present (?)
 	virtual void selectedObjectChangeCallBack(bool added = false);
 	
-	//! 
+	//! Load color scheme from the given ini file and section name
+	//! @param conf the iniparser containing the configuration items
+	//! @param section the name of the section of the ini file containing the configuration items
 	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	
+	//! Return the value defining the order of call for the given action
+	//! @param actionName the name of the action for which we want the call order
+	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -111,14 +130,14 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	//! Set constellation art fade duration
+	//! Set constellation art fade duration in second
 	void setArtFadeDuration(float duration);
-	//! Get constellation art fade duration
+	//! Get constellation art fade duration in second
 	float getArtFadeDuration() const {return artFadeDuration;}
 		
-	//! Set constellation maximum art intensity
+	//! Set constellation maximum art intensity (between 0 and 1)
 	void setArtIntensity(float f);
-	//! Set constellation maximum art intensity
+	//! Set constellation maximum art intensity (between 0 and 1)
 	float getArtIntensity() const {return artMaxIntensity;}
 	
 	//! Set whether constellation art will be displayed
