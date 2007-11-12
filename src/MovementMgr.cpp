@@ -1,6 +1,26 @@
+/*
+ * Stellarium
+ * Copyright (C) 2007 Fabien Chereau
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 #include "MovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "InitParser.hpp"
 #include "Navigator.hpp"
 
@@ -427,7 +447,7 @@ void MovementMgr::setFlagTracking(bool b)
 	}
 	else
 	{
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()), getAutomoveDuration());
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()), getAutoMoveDuration());
 		flagTracking=true;
 	}
 }
@@ -693,4 +713,9 @@ void MovementMgr::change_fov(double deltaFov)
 {
 	// if we are zooming in or out
 	if (deltaFov) core->getProjection()->setFov(core->getProjection()->getFov()+deltaFov);
+}
+
+double MovementMgr::getAimFov(void) const
+{
+	return (flag_auto_zoom ? zoom_move.aim : core->getProjection()->getFov());
 }

@@ -215,6 +215,10 @@ SET(stellarium_MOC_HDRS
 	StelModuleMgr.hpp
 	ConstellationMgr.hpp
 	LandscapeMgr.hpp
+	GridLinesMgr.hpp
+	MilkyWay.hpp
+	MovementMgr.hpp
+	NebulaMgr.hpp
 )
 
 # After this call, stellarium_MOC_SRCS = moc_VirGO.cxx

@@ -33,6 +33,8 @@ class LoadingBar;
 //! Manages the displaying of the Milky Way.
 class MilkyWay : public StelModule
 {
+	Q_OBJECT
+
 public:
 	MilkyWay();
 	virtual ~MilkyWay();
@@ -58,23 +60,33 @@ public:
 	
 	//! Does nothing in the MilkyWay module.
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	
+	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Setter and getters
+public slots:
 	//! Get Milky Way intensity.
-	float getIntensity() {return intensity;}
+	float getIntensity() const {return intensity;}
 	//! Set Milky Way intensity.
 	void setIntensity(float aintensity) {intensity = aintensity;}
-	//! Set the texture to use for the Milky Way.
-	//! @param texFile the path to a texture file to be loaded.
-	void setTexture(const string& texFile);
-	//! Sets the color used.
-	void setColor(const Vec3f& c) { color=c;}
-	//! Sets the Milky Way rendering on and off.
+	
+	//! Get the color used for rendering the milky way
+	Vec3f getColor() const {return color;}
+	//! Sets the color to use for rendering the milky way
+	void setColor(const Vec3f& c) {color=c;}
+	
+	//! Sets whether to show the Milky Way
 	void setFlagShow(bool b);
-	//! Get the current status of the Milky Way rendering flag.
+	//! Gets whether the Milky Way is displayed
 	bool getFlagShow(void) const;
 	
 private:
+	//! Set the texture to use for the Milky Way.
+	//! @param texFile the path to a texture file to be loaded.
+	void setTexture(const string& texFile);
+	
 	float radius;
 	STextureSP tex;
 	Vec3f color;

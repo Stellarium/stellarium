@@ -41,6 +41,8 @@ using namespace std;
 //! as well as the great circles: Meridian Line, Ecliptic Line and Equator Line.
 class GridLinesMgr : public StelModule
 {
+	Q_OBJECT
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -82,34 +84,42 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
+public slots:
 	//! Set flag for displaying Azimuthal Grid.
 	void setFlagAzimutalGrid(bool b);
 	//! Get flag for displaying Azimuthal Grid.
 	bool getFlagAzimutalGrid(void) const;
 	//! Get the current color of the Azimuthal Grid.
 	Vec3f getColorAzimutalGrid(void) const;
-
+	//! Set the color of the Azimuthal Grid.
+	void setColorAzimutalGrid(const Vec3f& v);
+	
 	//! Set flag for displaying Equatorial Grid.
 	void setFlagEquatorGrid(bool b);
 	//! Get flag for displaying Equatorial Grid.
 	bool getFlagEquatorGrid(void) const;
 	//! Get the current color of the Equatorial Grid.
 	Vec3f getColorEquatorGrid(void) const;
-
+	//! Set the color of the Equatorial Grid.
+	void setColorEquatorGrid(const Vec3f& v);
+	
 	//! Set flag for displaying Equatorial Line.
 	void setFlagEquatorLine(bool b);
 	//! Get flag for displaying Equatorial Line.
 	bool getFlagEquatorLine(void) const;
 	//! Get the current color of the Equatorial Line.
 	Vec3f getColorEquatorLine(void) const;
-
+	//! Set the color of the Meridian Line.
+	void setColorEquatorLine(const Vec3f& v);
+	
 	//! Set flag for displaying Ecliptic Line.
 	void setFlagEclipticLine(bool b);
 	//! Get flag for displaying Ecliptic Line.
 	bool getFlagEclipticLine(void) const;
 	//! Get the current color of the Ecliptic Line.
 	Vec3f getColorEclipticLine(void) const;
-
+	//! Set the color of the Meridian Line.
+	void setColorEclipticLine(const Vec3f& v);
 
 	//! Set flag for displaying Meridian Line.
 	void setFlagMeridianLine(bool b);
@@ -117,15 +127,6 @@ public:
 	bool getFlagMeridianLine(void) const;
 	//! Get the current color of the Meridian Line.
 	Vec3f getColorMeridianLine(void) const;
-
-	//! Set the color of the Azimuthal Grid.
-	void setColorAzimutalGrid(const Vec3f& v);
-	//! Set the color of the Equatorial Grid.
-	void setColorEquatorGrid(const Vec3f& v);
-	//! Set the color of the Meridian Line.
-	void setColorEquatorLine(const Vec3f& v);
-	//! Set the color of the Meridian Line.
-	void setColorEclipticLine(const Vec3f& v);
 	//! Set the color of the Meridian Line.
 	void setColorMeridianLine(const Vec3f& v);
 	

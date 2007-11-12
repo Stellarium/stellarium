@@ -40,6 +40,8 @@ class ToneReproducer;
 //! to display the NGC catalog with information, and textures for some of them.
 class NebulaMgr : public StelObjectModule
 {
+	Q_OBJECT
+			
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -113,24 +115,30 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
+public slots:
 	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);
 	//! Get Nebulae Hints circle scale.
 	float getCircleScale(void) const;
+	
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
+	
 	//! Set flag for displaying Nebulae Hints.
 	void setFlagHints(bool b) {hintsFader=b;}
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
+	
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
 	bool getFlagShow(void) const { return flagShow; }
+	
 	//! Set the color used to draw nebula labels.
 	void setNamesColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f &getNamesColor(void) const;
+	
 	//! Set the color used to draw the nebula circles.
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
@@ -158,6 +166,8 @@ public:
 	//! Get maximum magnitude at which nebulae hints are displayed.
 	float getMaxMagHints(void) const {return maxMagHints;}
 	
+private:
+	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	StelObject* search(const string& name);
 	
@@ -169,7 +179,6 @@ public:
 	//! @param setName a string which corresponds to the directory where the set resides
 	void loadNebulaSet(const string& setName, LoadingBar& lb);
 	
-private:
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
