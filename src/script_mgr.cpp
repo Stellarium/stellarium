@@ -145,6 +145,7 @@ void ScriptMgr::record_script(string script_filename) {
 		string scriptSaveDir;
 		try
 		{
+			// this probably wont work with non-ascii username.  handle this in StelFileMgr?  nkerr
 			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir().toStdString() + "/scripts";
 			if (!StelApp::getInstance().getFileMgr().exists(scriptSaveDir))
 			{

@@ -49,7 +49,7 @@ void InitParser::load(const QString& file)
 
 	if (dico) free_dico();
 	dico = NULL;
-	dico = iniparser_load(file.toLocal8Bit().data());
+	dico = iniparser_load(QFile::encodeName(file).data());
 	if (!dico)
 	{
 		cerr << "ERROR : Couldn't read config file " << qPrintable(file) << endl;
@@ -61,7 +61,7 @@ void InitParser::save(const QString& file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
-	fp = fopen(file_name.toLocal8Bit().data(),"wt");
+	fp = fopen(QFile::encodeName(file_name).data(),"wt");
 	if (fp)
 	{
 		iniparser_dump_ini(dico, fp);
