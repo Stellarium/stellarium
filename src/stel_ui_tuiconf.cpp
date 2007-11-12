@@ -615,7 +615,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_light_pollution->setValue(lmgr->getAtmosphereLightPollutionLuminance());
 	tui_effect_landscape->setValue(lmgr->getLandscapeName());
 	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
-	tui_effect_zoom_duration->setValue(mvmgr->getAutomoveDuration());
+	tui_effect_zoom_duration->setValue(mvmgr->getAutoMoveDuration());
 	tui_effect_manual_zoom->setValue(mvmgr->getFlagManualAutoZoom());
 	tui_effect_object_scale->setValue(smgr->getScale());
 	tui_effect_milkyway_intensity->setValue(mw->getIntensity());

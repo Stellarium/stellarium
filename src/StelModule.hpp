@@ -108,6 +108,8 @@ public:
 	virtual void selectedObjectChangeCallBack(bool added=false) {;}
 	
 	//! Load color scheme from the given ini file and section name
+	//! @param conf the iniparser containing the configuration items
+	//! @param section the name of the section of the ini file containing the configuration items
 	virtual void setColorScheme(const InitParser& conf, const QString& section) {;}
 	
 	//! This method is called for all StelModules when the GL window is resized
@@ -126,7 +128,8 @@ public:
 	//! Return the value defining the order of call for the given action
 	//! For example if stars.callOrder[ACTION_DRAW] == 10 and constellation.callOrder[ACTION_DRAW] == 11, 
 	//! the stars module will be drawn before the constellations
-	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called.
+	//! @param actionName the name of the action for which we want the call order
+	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
 	
 protected:

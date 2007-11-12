@@ -115,6 +115,49 @@ public:
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
 	///////////////////////////////////////////////////////////////////////////
+	// Other public methods
+	//! Get a hash of locale and ssystem.ini names for use with the TUI.
+	//! @return A newline delimited hash of localized:standard planet names.
+	//! Planet translated name is PARENT : NAME
+	wstring getPlanetHashString();
+ 
+	//! Compute the position and transform matrix for every element of the solar system.
+	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
+	//! (Required for light travel time computation.)
+	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+
+	//! Search for SolarSystem objects which are close to the position given 
+	//! in earth equatorial position.
+	//! @param v A position in earth equatorial position.
+	//! @param nav the Navigator object.
+	//! @param prj the Projector object.
+	//! @return a pointer to a StelObject if found, else NULL
+	StelObject* search(Vec3d v, const Navigator * nav, const Projector * prj) const;
+
+	//! Get a pointer to a Planet object.
+	//! @param the English name of the desired planet.
+	//! @return The matching planet pointer if exists or NULL.
+	Planet* searchByEnglishName(string planetEnglishName) const;
+	
+	//! Get the Planet object pointer for the Sun.
+	Planet* getSun(void) const {return sun;}
+	
+	//! Get the Planet object pointer for the Earth.
+	Planet* getEarth(void) const {return earth;}
+	
+	//! Get the Planet object pointer for Earth's moon.
+	Planet* getMoon(void) const {return moon;}
+	
+	//! Start/stop accumulating new trail data (clear old data).
+	void startTrails(bool b);
+	
+	//! Get list of all the translated planets name.
+	vector<wstring> getNamesI18(void);
+	
+	//! Get the list of all the bodies of the solar system.
+	const vector<Planet*>& getAllPlanets() const {return system_planets;}
+	
+	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set flag which determines if planets are drawn or hidden.
 	void setFlagPlanets(bool b);
@@ -175,53 +218,10 @@ public:
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}		
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Other public methods
-	//! Get a hash of locale and ssystem.ini names for use with the TUI.
-	//! @return A newline delimited hash of localized:standard planet names.
-	//! Planet translated name is PARENT : NAME
-	wstring getPlanetHashString();
- 
-	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
-	//! (Required for light travel time computation.)
-	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
-
-	//! Search for SolarSystem objects which are close to the position given 
-	//! in earth equatorial position.
-	//! @param v A position in earth equatorial position.
-	//! @param nav the Navigator object.
-	//! @param prj the Projector object.
-	//! @return a pointer to a StelObject if found, else NULL
-	StelObject* search(Vec3d v, const Navigator * nav, const Projector * prj) const;
-
-	//! Get a pointer to a Planet object.
-	//! @param the English name of the desired planet.
-	//! @return The matching planet pointer if exists or NULL.
-	Planet* searchByEnglishName(string planetEnglishName) const;
-	
-	//! Get the Planet object pointer for the Sun.
-	Planet* getSun(void) const {return sun;}
-	
-	//! Get the Planet object pointer for the Earth.
-	Planet* getEarth(void) const {return earth;}
-	
-	//! Get the Planet object pointer for Earth's moon.
-	Planet* getMoon(void) const {return moon;}
-	
-	//! Start/stop accumulating new trail data (clear old data).
-	void startTrails(bool b);
-	
+private:
 	//! Update the planet motion trails.
 	void updateTrails(const Navigator* nav);
 	
-	//! Get list of all the translated planets name.
-	vector<wstring> getNamesI18(void);
-	
-	//! Get the list of all the bodies of the solar system.
-	const vector<Planet*>& getAllPlanets() const {return system_planets;}
-	
-private:
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
