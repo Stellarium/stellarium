@@ -828,36 +828,6 @@ wstring SolarSystem::getPlanetHashString(void)
 	return str.toStdWString();
 }
 
-
-/*
-
-void SolarSystem::updateTrails(const Navigator* nav)
-{
-
-	vector<Planet*>::iterator iter;
-
-	// If the home planet has changed the trail data is stale
-	// so restart trails
-
-	cout << "Last home: " << lastHomePlanet << " currently: " << nav->getHomePlanet()->getEnglishName() << endl;
-
-	if(nav->getHomePlanet()->getEnglishName() != lastHomePlanet) {
-		lastHomePlanet = nav->getHomePlanet()->getEnglishName(); 
-		
-		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-		{		
-			(*iter)->startTrail(true);
-		}
-	}
-
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-	{		
-		(*iter)->update_trail(nav);
-	}
-
-}
-*/
-
 void SolarSystem::startTrails(bool b)
 {
 	vector<Planet*>::iterator iter;
@@ -1032,19 +1002,20 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 
 void SolarSystem::update(double delta_time)
 {
-	bool startTrails = false;
+	bool restartTrails = false;
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 
-	// Determine if home planet has changed, and restart trails if so
+	// Determine if home planet has changed, and restart planet trails
+	// since the data is no longer useful
 	if(nav->getHomePlanet() != lastHomePlanet) {
 		lastHomePlanet = nav->getHomePlanet();
-		startTrails = true;
+		restartTrails = true;
 	}
 
 	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if(startTrails) (*iter)->startTrail(true);
+		if(restartTrails) (*iter)->startTrail(true);
 		(*iter)->update_trail(nav);
 		(*iter)->update((int)(delta_time*1000));
 		iter++;
