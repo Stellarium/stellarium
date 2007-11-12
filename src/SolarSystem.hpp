@@ -148,9 +148,6 @@ public:
 	//! Get the Planet object pointer for Earth's moon.
 	Planet* getMoon(void) const {return moon;}
 	
-	//! Start/stop accumulating new trail data (clear old data).
-	void startTrails(bool b);
-	
 	//! Get list of all the translated planets name.
 	vector<wstring> getNamesI18(void);
 	
@@ -220,7 +217,10 @@ public:
 	
 private:
 	//! Update the planet motion trails.
-	void updateTrails(const Navigator* nav);
+	// void updateTrails(const Navigator* nav);
+
+	//! Start/stop accumulating new trail data (clear old data).
+	void startTrails(bool b);
 	
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
@@ -275,6 +275,8 @@ private:
 	bool flag_light_travel_time;
 	
 	STextureSP texPointer;			// The selection pointer texture
+
+	const Planet* lastHomePlanet;          // for tracking home planet changes for trails
 };
 
 
