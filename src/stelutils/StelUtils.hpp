@@ -92,40 +92,22 @@ namespace StelUtils {
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
-	string radToHmsStrAdapt(double angle);
-	
-	//! Convert an angle in radian to a hms formatted wstring.
-	//! If the second, minute part is == 0, it is not output
-	//! @param rad input angle in radian
-	wstring radToHmsWstrAdapt(double angle);
+	QString radToHmsStrAdapt(double angle);
 	
 	//! Convert an angle in radian to a hms formatted string.
 	//! @param rad input angle in radian
-	string radToHmsStr(double angle, bool decimal=false);
-	
-	//! Convert an angle in radian to a hms formatted wstring.
-	//! @param rad input angle in radian
-	wstring radToHmsWstr(double angle, bool decimal=false);
-	
-	//! Convert an angle in radian to a dms formatted string.
-	//! If the second, minute part is == 0, it is not output
-	//! @param rad input angle in radian
-	string radToDmsStrAdapt(double angle);
+	QString radToHmsStr(double angle, bool decimal=false);
 	
 	//! Convert an angle in radian to a dms formatted wstring.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
-	//! @param useD Define if letter "d" must be used instead of �
-	wstring radToDmsWstrAdapt(double angle, bool useD=false);
-	
-	//! Convert an angle in radian to a dms formatted string.
-	//! @param rad input angle in radian
-	string radToDmsStr(double angle, bool decimal=false);
+	//! @param useD Define if letter "d" must be used instead of deg sign
+	QString radToDmsStrAdapt(double angle, bool useD=false);
 	
 	//! Convert an angle in radian to a dms formatted wstring.
 	//! @param rad input angle in radian
-	//! @param useD Define if letter "d" must be used instead of �
-	wstring radToDmsWstr(double angle, bool decimal=false, bool useD=false);
+	//! @param useD Define if letter "d" must be used instead of deg sign
+	QString radToDmsStr(double angle, bool decimal=false, bool useD=false);
 	
 	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"

@@ -235,12 +235,10 @@ wstring Telescope::getInfoString(const Navigator *nav) const {
   QString str;
   QTextStream oss(&str);
   oss << QString::fromStdWString(nameI18n) << endl
-      << q_("J2000") << " " << q_("RA/DE: ")
-		  << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,false))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,false)) << endl
-      << q_("Equ of date") << " " << q_("RA/DE: ")
-		  << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ));
+		<< q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,false)
+		<< "/" << StelUtils::radToDmsStr(dec_j2000,false) << endl
+		<< q_("Equ of date") << " " << q_("RA/DE: ")
+		<< StelUtils::radToHmsStr(ra_equ) << "/" << StelUtils::radToDmsStr(dec_equ);
   return str.toStdWString();
 }
 
