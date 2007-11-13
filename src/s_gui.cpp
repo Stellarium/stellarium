@@ -2678,7 +2678,7 @@ void FloatIncDec::draw()
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{
-		wstring l = StelUtils::radToDmsWstr(value*M_PI/180.);
+		wstring l = StelUtils::radToDmsStr(value*M_PI/180.).toStdWString();
 		wstring m = l.substr(1);
 		if (format == FORMAT_LATITUDE)
 		{

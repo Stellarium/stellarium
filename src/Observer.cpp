@@ -255,17 +255,9 @@ void Observer::setConf(InitParser & conf, const string& section) const
 {
 	conf.set_str(section + ":name", QString::fromStdWString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName().c_str());
-	conf.set_str(section + ":latitude",
-	             StelUtils::wstringToString(
-	               StelUtils::radToDmsWstr(latitude*M_PI/180.0,
-	                                          true, true)).c_str());
-	conf.set_str(section + ":longitude",
-	             StelUtils::wstringToString(
-	               StelUtils::radToDmsWstr(longitude*M_PI/180.0,
-										   true, true)).c_str());
-
+	conf.set_str(section + ":latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
+	conf.set_str(section + ":longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
 	conf.set_int(section + ":altitude", altitude);
-
 	// TODO: clear out old timezone settings from this section
 	// if still in loaded conf?  Potential for confusion.
 }
