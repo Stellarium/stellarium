@@ -83,9 +83,6 @@ public:
 	//! Get the current observer description.
 	const Observer* getObservatory() const {return observatory;}
 
-	//! Change the current home planet.
-	bool setHomePlanet(const QString& planet);
-
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
 	Observer* observatory;			// Manage observer position

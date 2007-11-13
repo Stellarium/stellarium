@@ -161,17 +161,3 @@ void StelCore::postDraw()
 {
 	projection->draw_viewport_shape();
 }
-
-
-/*************************************************************************
- Change the current home planet
-*************************************************************************/
-bool StelCore::setHomePlanet(const QString& planet)
-{
-
-	if (observatory->setHomePlanet(planet))
-	{
-		return true;
-	}
-	return false;
-}

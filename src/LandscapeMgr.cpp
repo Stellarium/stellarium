@@ -321,7 +321,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	{
 		// Set the planet and moveto the right location
 		if (landscape->getPlanet()!="") 
-			StelApp::getInstance().getCore()->setHomePlanet(landscape->getPlanet().c_str());
+			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanet().c_str());
 	
 		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
 		{
