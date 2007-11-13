@@ -62,7 +62,7 @@ QtScriptMgr::QtScriptMgr(QObject *parent) : QObject(parent)
 	
 	StelMainScriptAPI *mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine.newQObject(mainAPI);
-	engine.globalObject().setProperty("main", objectValue);
+	engine.globalObject().setProperty("core", objectValue);
 	
 	objectValue = engine.newQObject(&StelApp::getInstance().getModuleMgr());
 	engine.globalObject().setProperty("modules", objectValue);
@@ -75,7 +75,7 @@ QtScriptMgr::~QtScriptMgr()
 		
 void QtScriptMgr::test()
 {
-	engine.evaluate("main.JDay = 152200.");
+	engine.evaluate("core.JDay = 152200.");
 	//engine.evaluate("modules.ConstellationMgr.setFlagArt(true)");
 	engine.evaluate("modules.ConstellationMgr.flagArt = true");
 	engine.evaluate("modules.ConstellationMgr.flagLines = true");

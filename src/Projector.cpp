@@ -1039,7 +1039,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		const wstring str = StelUtils::radToDmsWstrAdapt(lat);
+		const wstring str = StelUtils::radToDmsStrAdapt(lat).toStdWString();
 		float xshift=5;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1105,7 +1105,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
 		//angleDeg += start[1]>=0 ? 1.:180.;
-		wstring str = StelUtils::radToHmsWstrAdapt(lon);
+		wstring str = StelUtils::radToHmsStrAdapt(lon).toStdWString();;
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1126,7 +1126,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			xshift=-font->getStrLen(str)-20.f;
 		}
 		StelUtils::rect_to_sphe(&lon, &lat, v);
-		str = StelUtils::radToHmsWstrAdapt(lon);
+		str = StelUtils::radToHmsStrAdapt(lon).toStdWString();;
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 		
 		if (textColor)

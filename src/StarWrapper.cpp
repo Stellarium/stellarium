@@ -43,18 +43,17 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   oss.setRealNumberNotation(QTextStream::FixedNotation);
   oss.setRealNumberPrecision(2);
   oss << q_("Magnitude: ") << getMagnitude(nav) << " B-V: " << getBV() << endl;
-  oss << q_("J2000") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,true))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,true)) << endl;
-  oss << q_("Equ of date") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ)) << endl;
+  oss << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,true)
+		  << "/" << StelUtils::radToDmsStr(dec_j2000,true) << endl;
+  oss << q_("Equ of date") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_equ)
+		  << "/" << StelUtils::radToDmsStr(dec_equ) << endl;
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
-  oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(az))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(alt)) << endl;
+  oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(az) << "/" << StelUtils::radToDmsStr(alt) << endl;
   
   return str.toStdWString();
 }
@@ -111,11 +110,11 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   oss.setRealNumberNotation(QTextStream::FixedNotation);
   oss.setRealNumberPrecision(2);
   oss << q_("Magnitude: ") << getMagnitude(nav) << " B-V: " << s->getBV() << endl;
-  oss << q_("J2000") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_j2000,true))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_j2000,true)) << endl;
+  oss << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,true)
+		  << "/" << StelUtils::radToDmsStr(dec_j2000,true) << endl;
   
-  oss << q_("Equ of date") << " " << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(ra_equ))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(dec_equ)) << endl;
+  oss << q_("Equ of date") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_equ)
+		  << "/" << StelUtils::radToDmsStr(dec_equ) << endl;
 
     // calculate alt az
   double az,alt;
@@ -123,8 +122,7 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if (az > M_PI*2)
 	  az -= M_PI*2;    
-  oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(az))
-		  << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(alt)) << endl;
+  oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(az) << "/" << StelUtils::radToDmsStr(alt) << endl;
 
   if (s->plx)
   {

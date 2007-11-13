@@ -125,7 +125,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
  Convert an angle in radian to a hms formatted string
  If the minute and second part are null are too small, don't print them
 *************************************************************************/
-string radToHmsStrAdapt(double angle)
+QString radToHmsStrAdapt(double angle)
 {
 	unsigned int h,m;
 	double s;
@@ -144,23 +144,13 @@ string radToHmsStrAdapt(double angle)
 	{
 		os << m << 'm';
 	}
-	return os.str();
+	return QString::fromStdString(os.str());
 }
-
-/*************************************************************************
- Convert an angle in radian to a hms formatted wstring
- If the minute and second part are null are too small, don't print them
-*************************************************************************/
-wstring radToHmsWstrAdapt(double angle)
-{
-	return StelUtils::stringToWstring(radToHmsStrAdapt(angle));
-}
-
 
 /*************************************************************************
  Convert an angle in radian to a hms formatted string
 *************************************************************************/
-string radToHmsStr(double angle, bool decimal)
+QString radToHmsStr(double angle, bool decimal)
 {
 	unsigned int h,m;
 	double s;
@@ -172,50 +162,14 @@ string radToHmsStr(double angle, bool decimal)
 		os << std::setprecision(0) << std::setw(2);
 	
 	os << h << 'h' << m << 'm' << std::fixed << std::setfill('0') << s << 's';
-	return os.str();
-}
-
-/*************************************************************************
- Convert an angle in radian to a hms formatted wstring
-*************************************************************************/
-wstring radToHmsWstr(double angle, bool decimal)
-{
-	return StelUtils::stringToWstring(radToHmsStr(angle, decimal));
-}
-
-/*************************************************************************
- Convert an angle in radian to a dms formatted string
- If the minute and second part are null are too small, don't print them
-*************************************************************************/
-string radToDmsStrAdapt(double angle)
-{
-	bool sign;
-	unsigned int d,m;
-	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	ostringstream os;
-	
-	os << (sign?'+':'-') << d << 'd';
-	if (std::fabs(s*100-(int)s*100)>=1)
-	{
-		os << m << '\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << '\"';
-	}
-	else if ((int)s!=0)
-	{
-		os << m << '\'' << (int)s << '\"';
-	}
-	else if (m!=0)
-	{
-		os << m << '\'';
-	}
-	return os.str();
+	return QString::fromStdString(os.str());
 }
 
 /*************************************************************************
  Convert an angle in radian to a dms formatted wstring
  If the minute and second part are null are too small, don't print them
 *************************************************************************/
-wstring radToDmsWstrAdapt(double angle, bool useD)
+QString radToDmsStrAdapt(double angle, bool useD)
 {
 	QString degsign('d');
 	if (!useD)
@@ -243,37 +197,14 @@ wstring radToDmsWstrAdapt(double angle, bool useD)
 	{
 		os << m << '\'';
 	}
-	return str.toStdWString();
+	return str;
 }
 
-/*************************************************************************
- Convert an angle in radian to a dms formatted string
-*************************************************************************/
-string radToDmsStr(double angle, bool decimal)
-{
-	bool sign;
-	unsigned int d,m;
-	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	ostringstream os;
-	
-	os << (sign?'+':'-') << d << 'd';
-		
-	os << m << '\'' << std::fixed << std::setfill('0');
-	
-	if (decimal)
-		os << std::setprecision(1) << std::setw(4);
-	else
-		os << std::setprecision(0) << std::setw(2);
-		
-	os << s << '\"';
-	return os.str();
-}
 
 /*************************************************************************
  Convert an angle in radian to a dms formatted wstring
 *************************************************************************/
-wstring radToDmsWstr(double angle, bool decimal, bool useD)
+QString radToDmsStr(double angle, bool decimal, bool useD)
 {
 	QString degsign('d');
 	if (!useD)
@@ -305,34 +236,7 @@ wstring radToDmsWstr(double angle, bool decimal, bool useD)
 		<< fixed << qSetFieldWidth(width) << qSetPadChar('0') << s 
 		<< qSetFieldWidth(0) << '\"';
 
-	return str.toStdWString();
-}
-
-/*************************************************************************
- Convert an angle in radian to a dms formatted string
-*************************************************************************/
-string radToDmsWstr(double angle)
-{
-	bool sign;
-	unsigned int d,m;
-	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	ostringstream os;
-	
-	os << (sign?'+':'-') << d << 'd';
-	if (std::fabs(s*100-(int)s*100)>=1)
-	{
-		os << m << '\'' << std::fixed << std::setprecision(2) << std::setw(5) << std::setfill('0') << s << '\"';
-	}
-	else if ((int)s!=0)
-	{
-		os << m << '\'' << (int)s << '\"';
-	}
-	else if (m!=0)
-	{
-		os << m << '\'';
-	}
-	return os.str();
+	return str;
 }
 
 // Obtains a Vec3f from a string with the form x,y,z

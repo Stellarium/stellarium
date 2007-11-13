@@ -94,17 +94,17 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	oss.setRealNumberPrecision(2);
 	oss << q_("Magnitude: ") << mag << endl;	
 	
-	oss << q_("RA/DE: ") << QString::fromStdWString(StelUtils::radToHmsWstr(tempRA)) << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
+	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << q_("Az/Alt: ") << QString::fromStdWString(StelUtils::radToDmsWstr(tempRA)) << "/" << QString::fromStdWString(StelUtils::radToDmsWstr(tempDE)) << endl;
+	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
 	
 	oss << q_("Type: ") << QString::fromStdWString(getTypeString()) << endl;
 	if (angular_size>0)
-		oss << q_("Size: ") << QString::fromStdWString(StelUtils::radToDmsWstr(angular_size*M_PI/180.)) << endl;
+		oss << q_("Size: ") << StelUtils::radToDmsStr(angular_size*M_PI/180.) << endl;
 	
 	return str.toStdWString();
 }
