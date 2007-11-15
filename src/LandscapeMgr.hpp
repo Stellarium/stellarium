@@ -87,6 +87,16 @@ public:
 	//! file and make it the current landscape.
 	bool loadLandscape(map<string, string>& param);
 	
+	//! Create a new landscape from the files which describe it.
+	//! Reads a landscape.ini file which is passed as the first parameter, determines
+	//! the landscape type, and creates a new object for the landscape of the proper
+	//! type.  The load member is then called, passing both parameters.
+	//! @param landscapeFile This is the path to a landscape.ini file.
+	//! @param landscapeId This is the landscape ID, which is also the name of the
+	//! directory in which the files (textures and so on) for the landscape reside.
+	//! @return A pointer to the newly created landscape object.
+	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
+	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
@@ -166,16 +176,6 @@ private:
 	//! This takes a name of the landscape, as described in the landscape:name item in the 
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
 	QString nameToID(const QString& name);
-	
-	//! Create a new landscape from the files which describe it.
-	//! Reads a landscape.ini file which is passed as the first parameter, determines
-	//! the landscape type, and creates a new object for the landscape of the proper
-	//! type.  The load member is then called, passing both parameters.
-	//! @param landscapeFile This is the path to a landscape.ini file.
-	//! @param landscapeId This is the landscape ID, which is also the name of the
-	//! directory in which the files (textures and so on) for the landscape reside.
-	//! @return A pointer to the newly created landscape object.
-	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
 	
 	//! Create landscape from parameters passed in a hash.
 	//! This is similar in function to createFromFile, except the landscape details

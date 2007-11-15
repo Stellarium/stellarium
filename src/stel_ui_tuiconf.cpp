@@ -1084,8 +1084,7 @@ void StelUI::saveCurrentConfig(const QString& confFile)
 	conf.set_boolean("astro:flag_milky_way", mw->getFlagShow());
 	conf.set_double("astro:milky_way_intensity", mw->getIntensity());
 
-	// Get landscape and other observatory info
-	// TODO: shouldn't observator already know what section to save in?
+	// Save observatory info
 	core->getObservatory()->setConf(conf, "init_location");
 
 	conf.save(confFile);
