@@ -22,6 +22,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <QDebug>
+#include <QFile>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -100,7 +102,7 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 {
-	string newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	QString newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	
 	// Check if the sky culture changed since last load, if not don't load anything
@@ -109,23 +111,23 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	string conArtFile("");
+	QString conArtFile;
 	try
 	{
-		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
+		conArtFile = fileMan.qfindFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
 	}
 	catch(exception& e)
 	{
-		cout << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture << endl;
+		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture;
 	}
 				
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
+		loadLinesAndArt(fileMan.qfindFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
 				conArtFile, newSkyCulture, lb);
 			
 		// load constellation names
-		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
+		loadNames(fileMan.qfindFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
@@ -135,13 +137,13 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	}
 	catch(exception& e)
 	{
-		cout << "ERROR: while loading new constellation data for sky culture " 
+		qWarning() << "ERROR: while loading new constellation data for sky culture " 
 			<< newSkyCulture << ", reason: " << e.what() << endl;		
 	}
 		
 	// TODO: do we need to have an else { clearBoundaries(); } ?
 	if (newSkyCulture=="western") 
-		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
+		loadBoundaries(fileMan.qfindFile("data/constellations_boundaries.dat"));
 
 	lastLoadedSkyCulture = newSkyCulture;
 }
@@ -232,13 +234,13 @@ double ConstellationMgr::getFontSize() const
 }
 
 // Load line and art data from files
-void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb)
+void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName, LoadingBar& lb)
 {
-	std::ifstream inf(fileName.c_str());
+	std::ifstream inf(QFile::encodeName(fileName).constData());
 
 	if (!inf.is_open())
 	{
-		printf("Can't open constellation data file %s\n", fileName.c_str());
+		qWarning() << "Can't open constellation data file " << fileName;
 		assert(0);
 	}
 
@@ -268,7 +270,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 		else
 		{
-			cerr << "ERROR on line " << line << "of " << fileName.c_str() << endl;
+			qWarning() << "ERROR on line " << line << "of " << fileName;
 			delete cons;
 		}
 	}
@@ -280,10 +282,10 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	setFlagNames(flagNames);	
 	setFlagBoundaries(flagBoundaries);	
 
-	FILE *fic = fopen(artfileName.c_str(), "r");
+	FILE *fic = fopen(QFile::encodeName(artfileName).constData(), "r");
 	if (!fic)
 	{
-		cerr << "Can't open " << artfileName.c_str() << endl;
+		qWarning() << "Can't open " << artfileName;
 		return; // no art, but still loaded constellation data
 	}
 
@@ -336,30 +338,29 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		else
 		{
 			StelApp::getInstance().getTextureManager().setDefaultParams();
-			string texturePath(texfile);
+			QString texturePath(texfile);
 			try
 			{
-				texturePath = StelApp::getInstance().getFileMgr().findFile(string("skycultures/")+cultureName+"/"+texfile);
+				texturePath = StelApp::getInstance().getFileMgr().qfindFile("skycultures/"+cultureName+"/"+texfile);
 			}
 			catch(exception& e)
 			{
 				// if the texture isn't found in the skycultures/[culture] directory,
 				// try the central textures diectory.
-				cerr << "WARNING, could not locate texture file " << texfile
+				qWarning() << "WARNING, could not locate texture file " << texfile
 				     << " in the skycultures/" << cultureName
-				     << " directory...  looking in general textures/ directory..." 
-				     << endl; 
+				     << " directory...  looking in general textures/ directory...";
 				try
 				{
-					texturePath = StelApp::getInstance().getFileMgr().findFile(string("textures/")+texfile);
+					texturePath = StelApp::getInstance().getFileMgr().qfindFile(QString("textures/")+texfile);
 				}
 				catch(exception& e2)
 				{
-					cerr << "ERROR: could not find texture, " << texfile << ": " << e2.what() << endl;
+					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
 				}
 			}
 			
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(QFile::encodeName(texturePath).constData());
 			int texSizeX, texSizeY;
 			cons->artTexture->getDimensions(texSizeX, texSizeY);
 
@@ -487,7 +488,7 @@ vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitF
 	return vector<StelObjectP>(0);
 }
 
-void ConstellationMgr::loadNames(const string& namesFile)
+void ConstellationMgr::loadNames(const QString& namesFile)
 {
 	// Constellation not loaded yet
 	if (asterisms.empty()) return;
@@ -500,10 +501,10 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	}
 
 	// read in translated common names from file
-	ifstream commonNameFile(namesFile.c_str());
+	ifstream commonNameFile(QFile::encodeName(namesFile).constData());
 	if (!commonNameFile.is_open())
 	{
-		cerr << "Can't open file" << namesFile << endl;
+		qWarning() << "Can't open file" << namesFile;
 		return;
 	}
 	
@@ -727,7 +728,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 	}
 }
 
-bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
+bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 {
 	Constellation *cons = NULL;
 	unsigned int i, j;
@@ -739,15 +740,15 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 	}
 	allBoundarySegments.clear();
 
-	cout << "Loading Constellation boundary data from " << boundaryFile << "... ";
+	cout << "Loading Constellation boundary data from " << qPrintable(boundaryFile) << "... ";
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
 	
 	ifstream dataFile;
-	dataFile.open(boundaryFile.c_str());
+	dataFile.open(QFile::encodeName(boundaryFile).constData());
 	if (!dataFile.is_open())
 	{
-		cerr << "Boundary file " << boundaryFile << " not found" << endl;
+		qWarning() << "Boundary file " << boundaryFile << " not found";
 		return false;
 	}
 

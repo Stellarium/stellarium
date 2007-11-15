@@ -27,6 +27,7 @@
 #include <fstream>
 #include <dirent.h>
 #include <cassert>
+#include <QDebug>
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
@@ -48,11 +49,11 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		{
 			InitParser pd;
 			pd.load(fileMan.qfindFile("skycultures/" + *dir + "/info.ini"));
-			dirToNameEnglish[(*dir).toStdString()] = pd.get_str("info:name");
+			dirToNameEnglish[*dir] = pd.get_str("info:name");
 		}
 		catch (exception& e)
 		{
-			cerr << "WARNING: unable to successfully read info.ini file from skyculture dir" << (*dir).toStdString() << endl;
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir;
 		}
 	}	
 }
@@ -66,17 +67,17 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init(const InitParser& conf)
 {
-	string tmp = conf.get_str("localization", "sky_culture", "western");
+	QString tmp = conf.get_str("localization", "sky_culture", "western").c_str();
 	setSkyCultureDir(tmp);
 }
 
 //! Set the current sky culture from the passed directory
-bool StelSkyCultureMgr::setSkyCultureDir(const string& cultureDir)
+bool StelSkyCultureMgr::setSkyCultureDir(const QString& cultureDir)
 {
 	// make sure culture definition exists before attempting or will die
 	if(directoryToSkyCultureEnglish(cultureDir) == "")
 	{
-		cerr << "Invalid sky culture directory: " << cultureDir << endl;
+		qWarning() << "Invalid sky culture directory: " << cultureDir;
 		return false;
 	}
 	skyCultureDir = cultureDir;
@@ -88,7 +89,7 @@ bool StelSkyCultureMgr::setSkyCultureDir(const string& cultureDir)
 string StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
 	string cultures;
-	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<QString, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		cultures += iter->second + "\n";
 	}
@@ -99,7 +100,7 @@ string StelSkyCultureMgr::getSkyCultureListEnglish(void)
 wstring StelSkyCultureMgr::getSkyCultureListI18(void)
 {
 	wstring cultures;
-	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<QString, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		if (iter != dirToNameEnglish.begin()) cultures += L"\n";
 		cultures += _(iter->second);
@@ -113,7 +114,7 @@ wstring StelSkyCultureMgr::getSkyCultureListI18(void)
 wstring StelSkyCultureMgr::getSkyCultureHash(void) const
 {
 	wstring cultures;
-	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<QString, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		
 		// weed out invalid hash entries from invalid culture lookups in hash
@@ -121,7 +122,7 @@ wstring StelSkyCultureMgr::getSkyCultureHash(void) const
 		if(iter->second == "") continue;
 		
 		cultures += _(iter->second);
-		cultures += wstring(L"\n") + StelUtils::stringToWstring(iter->first) + L"\n";
+		cultures += wstring(L"\n") + (iter->first).toStdWString() + L"\n";
 	}
 	// wcout << cultures << endl;
 	return cultures;
@@ -133,29 +134,27 @@ wstring StelSkyCultureMgr::getSkyCulture() const
 }
 
 
-string StelSkyCultureMgr::directoryToSkyCultureEnglish(const string& directory)
+string StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
 {
 	return dirToNameEnglish[directory];
 }
 
-wstring StelSkyCultureMgr::directoryToSkyCultureI18(const string& directory) const
+wstring StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) const
 {
-	map<string, string>::const_iterator i = dirToNameEnglish.find(directory);
+	map<QString, string>::const_iterator i = dirToNameEnglish.find(directory);
 	if (i==dirToNameEnglish.end())
 	{
-		cout << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
-		     << directory << "\"): could not find directory" << endl;
-//johannes: this is not fatal.
-//		assert(0);
+		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
+		     << directory << "\"): could not find directory";
 		return L"";
 	}
 	else
 		return _(i->second);
 }
 
-string StelSkyCultureMgr::skyCultureToDirectory(const wstring& cultureName)
+QString StelSkyCultureMgr::skyCultureToDirectory(const wstring& cultureName)
 {
-	for ( map<string, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	for ( map<QString, string>::const_iterator iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
 		if (_(iter->second) == cultureName) return iter->first;
 	}
