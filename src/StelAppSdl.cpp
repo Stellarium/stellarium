@@ -518,7 +518,7 @@ void StelAppSdl::saveScreenShot(const QString& filePrefix, const QString& saveDi
 		fclose(f);
 	} else {
 		cerr << "StelAppSdl::saveScreenShot: fopen(" 
-			<< shotPath
+			<< (shotPath.toStdString())
 			<< ") failed"
 			<< endl;
 	}
