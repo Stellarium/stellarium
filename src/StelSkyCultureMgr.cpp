@@ -48,7 +48,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.qfindFile("skycultures/" + *dir + "/info.ini"));
+			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini"));
 			dirToNameEnglish[*dir] = pd.get_str("info:name");
 		}
 		catch (exception& e)

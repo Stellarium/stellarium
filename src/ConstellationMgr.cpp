@@ -114,7 +114,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	QString conArtFile;
 	try
 	{
-		conArtFile = fileMan.qfindFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
+		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
 	}
 	catch(exception& e)
 	{
@@ -123,11 +123,11 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 				
 	try
 	{
-		loadLinesAndArt(fileMan.qfindFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
+		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
 				conArtFile, newSkyCulture, lb);
 			
 		// load constellation names
-		loadNames(fileMan.qfindFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
+		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
 
 		// Translate constellation names for the new sky culture
 		updateI18n();
@@ -143,7 +143,7 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 		
 	// TODO: do we need to have an else { clearBoundaries(); } ?
 	if (newSkyCulture=="western") 
-		loadBoundaries(fileMan.qfindFile("data/constellations_boundaries.dat"));
+		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
 
 	lastLoadedSkyCulture = newSkyCulture;
 }
@@ -341,7 +341,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			QString texturePath(texfile);
 			try
 			{
-				texturePath = StelApp::getInstance().getFileMgr().qfindFile("skycultures/"+cultureName+"/"+texfile);
+				texturePath = StelApp::getInstance().getFileMgr().findFile("skycultures/"+cultureName+"/"+texfile);
 			}
 			catch(exception& e)
 			{
@@ -352,7 +352,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				     << " directory...  looking in general textures/ directory...";
 				try
 				{
-					texturePath = StelApp::getInstance().getFileMgr().qfindFile(QString("textures/")+texfile);
+					texturePath = StelApp::getInstance().getFileMgr().findFile(QString("textures/")+texfile);
 				}
 				catch(exception& e2)
 				{

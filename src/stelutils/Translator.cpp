@@ -34,14 +34,13 @@
 
 // Init static members
 Translator* Translator::lastUsed = NULL;
-map<QString, wstring> Translator::iso639codes;
-
+QMap<QString, wstring> Translator::iso639codes;
 QString Translator::systemLangName = "C";
 
 // Use system locale language by default
 #if defined(MACOSX)
 #include "MacosxDirs.hpp"
-Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory().append( "/locale" ).toStdString(), "system");
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, MacosxDirs::getApplicationResourcesDirectory().append( "/locale" ), "system");
 #else
 Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCALEDIR, "system");
 #endif
@@ -81,8 +80,8 @@ void Translator::initSystemLanguage(void)
 	}
 
 	//change systemLangName to ISO 639 / ISO 3166.
-	string::size_type pos = systemLangName.indexOf(':', 0);
-	if (pos != string::npos) systemLangName.resize(pos+1);
+	int pos = systemLangName.indexOf(':', 0);
+	if (pos != -1) systemLangName.resize(pos+1);
 	pos = systemLangName.indexOf('.', 0);
 	if (pos == 5) systemLangName.resize(pos+1);
 }
@@ -131,10 +130,10 @@ void Translator::reload()
 	setlocale(LC_CTYPE,"");
 #endif
 	assert(domain=="stellarium");
-	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
+	QString result = bind_textdomain_codeset(domain.toUtf8().constData(), "UTF-8");
 	assert(result=="UTF-8");
-	bindtextdomain (domain.c_str(), QFile::encodeName(moDirectory).constData());
-	textdomain (domain.c_str());
+	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
+	textdomain (domain.toUtf8().constData());
 	Translator::lastUsed = this;
 }
 
@@ -151,11 +150,11 @@ std::wstring Translator::iso639_1LanguageCodeToNativeName(const QString& languag
 //! Convert from native language name to ISO639-1 2 letters langage code 
 QString Translator::nativeLanguageNameCodeToIso639_1(const wstring& languageName)
 {
-	std::map<QString, wstring>::iterator iter;
+	QMap<QString, wstring>::iterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
 	{
-		if ((*iter).second == languageName)
-			return (*iter).first;
+		if (iter.value() == languageName)
+			return iter.key();
 	}
 	return QString::fromStdWString(languageName);
 }
@@ -234,7 +233,7 @@ void Translator::initIso639_1LanguageCodes(const QString& fileName)
 		}
 		else
 		{
-			iso639codes.insert(pair<QString, wstring>(record.substr(0, 2).c_str(), StelUtils::stringToWstring(record.substr(pos+1))));
+			iso639codes.insert(record.substr(0, 2).c_str(), StelUtils::stringToWstring(record.substr(pos+1)));
 		}
 	}
 }

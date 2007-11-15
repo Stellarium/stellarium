@@ -91,7 +91,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 #endif
 	try
 	{
-		moduleFullPath = StelApp::getInstance().getFileMgr().qfindFile(moduleFullPath, StelFileMgr::FILE);
+		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE);
 	}
 	catch (exception& e)
 	{
@@ -174,7 +174,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 		{
 			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
 			InitParser pd;
-			pd.load(fileMan.qfindFile("modules/" + *dir + "/module.ini"));
+			pd.load(fileMan.findFile("modules/" + *dir + "/module.ini"));
 			mDesc.key = *dir;
 			mDesc.name = pd.get_str("module", "name").c_str();
 			mDesc.author = pd.get_str("module", "author").c_str();
