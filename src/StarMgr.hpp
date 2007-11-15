@@ -150,12 +150,12 @@ public:
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
-	int load_common_names(const string& commonNameFile);
+	int load_common_names(const QString& commonNameFile);
 	
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
-	void load_sci_names(const string& sciNameFile);
+	void load_sci_names(const QString& sciNameFile);
 	
 	//! Search for the nearest star to some position.
 	//! @param Pos the 3d vector representing the direction to search.

@@ -22,6 +22,7 @@
 
 #include <map>
 #include <string>
+#include <QString>
 
 using namespace std;
 
@@ -60,10 +61,10 @@ public:
 	//! @param cultureDir The sub-directory name inside the "skycultures" 
 	//! directory.
 	//! @return true on success; else false.
-	bool setSkyCultureDir(const string& cultureDir);
+	bool setSkyCultureDir(const QString& cultureDir);
 	
 	//! Get the current sky culture directory name.  
-	string getSkyCultureDir() {return skyCultureDir;}
+	QString getSkyCultureDir() {return skyCultureDir;}
 	
 	//! Get a hash of translated culture names and directories.
 	//! @return A newline delimited list of translated culture names and directories
@@ -81,24 +82,24 @@ public:
 	//! Get the culture name in English associated with a specified directory.
 	//! @param directory The directory name.
 	//! @return The English name for the culture associated with directory.
-	string directoryToSkyCultureEnglish(const string& directory);
+	string directoryToSkyCultureEnglish(const QString& directory);
 	
 	//! Get the culture name translated to current language associated with 
 	//! a specified directory.
 	//! @param directory The directory name.
 	//! @return The translated name for the culture associated with directory.
-	wstring directoryToSkyCultureI18(const string& directory) const;
+	wstring directoryToSkyCultureI18(const QString& directory) const;
 	
 	//! Get the directory associated with a specified translated culture name.
 	//! @param cultureName The culture name in the current language.
 	//! @return The directory assocuated with cultureName.
-	string skyCultureToDirectory(const wstring& cultureName);
+	QString skyCultureToDirectory(const wstring& cultureName);
 	
 private:
-	map<string, string> dirToNameEnglish;
+	map<QString, string> dirToNameEnglish;
 	
 	// The directory containing data for the culture used for constellations, etc.. 
-	string skyCultureDir;
+	QString skyCultureDir;
 };
 
 #endif
