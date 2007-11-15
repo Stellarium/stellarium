@@ -297,7 +297,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	
 	try
 	{
-		newLandscape = createFromFile(fileMan.qfindFile("landscapes/" + newLandscapeID + "/landscape.ini"), newLandscapeID);
+		newLandscape = createFromFile(fileMan.findFile("landscapes/" + newLandscapeID + "/landscape.ini"), newLandscapeID);
 	}
 	catch(exception& e)
 	{
@@ -605,7 +605,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
 		try
 		{
 			InitParser pd;
-			pd.load(fileMan.qfindFile("landscapes/" + dir + "/landscape.ini"));
+			pd.load(fileMan.findFile("landscapes/" + dir + "/landscape.ini"));
 			QString k = pd.get_str("landscape", "name").c_str();
 			result[k] = dir;
 		}

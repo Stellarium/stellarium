@@ -1,11 +1,6 @@
 #include <config.h>
-#include <vector>
-#include <set>
-#include <string>
 #include <iostream>
 #include <stdexcept>
-#include <sstream>
-#include <fstream>
 #include <cstdlib>
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -48,14 +43,14 @@ StelFileMgr::StelFileMgr()
 		cerr << "WARNING: could not locate installation directory" << endl;
 	}
 
-	//outputFileSearchPaths();
+	checkUserDir();
 }
 
 StelFileMgr::~StelFileMgr()
 {
 }
 
-QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
+QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 {
 	// explicitly specified relative paths
 	if (path[0] == '.')
@@ -142,19 +137,11 @@ void StelFileMgr::setSearchPaths(const QStringList& paths)
 	//outputFileSearchPaths();
 }
 
-bool StelFileMgr::exists(const string& path)
-{
-	return QFileInfo(QString::fromUtf8(path.c_str())).exists();
-}
 bool StelFileMgr::exists(const QString& path)
 {
 	return QFileInfo(path).exists();
 }
 
-bool StelFileMgr::isWritable(const string& path)
-{
-	return QFileInfo(QString::fromUtf8(path.c_str())).isWritable();
-}
 bool StelFileMgr::isWritable(const QString& path)
 {
 	return QFileInfo(path).isWritable();
@@ -165,9 +152,9 @@ bool StelFileMgr::isDirectory(const QString& path)
 	return QFileInfo(path).isDir();
 }
 
-bool StelFileMgr::mkDir(const string& path)
+bool StelFileMgr::mkDir(const QString& path)
 {
-	return QDir("/").mkpath(QString::fromUtf8(path.c_str()));
+	return QDir("/").mkpath(path);
 }
 
 QString StelFileMgr::dirName(const QString& path)
@@ -307,7 +294,7 @@ QString StelFileMgr::getDesktopDir(void)
 		}
 	}
 #else
-	result = getenv("HOME");
+	result = QFile::decodeName(getenv("HOME"));
 	result += "/Desktop";
 #endif
 	if (!QFileInfo(result).isDir())
@@ -387,13 +374,9 @@ QString StelFileMgr::getInstallationDir(void)
 	}
 	else
 	{
-		cerr << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< installLocation.filePath().toStdString()
-			<< " (we checked for "
-			<< checkFile.filePath().toStdString()
-			<< ")."
-			<< endl;
-		throw(runtime_error("NOT FOUND"));
+		qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
+			<< installLocation.filePath() << " (we checked for " << checkFile.filePath() << ").";
+		throw (runtime_error("NOT FOUND"));
 	}
 }
 	

@@ -24,7 +24,7 @@
 
 #include <string>
 #include <iostream>
-#include <map>
+#include <QMap>
 #include <vector>
 #include "StelUtils.hpp"
 #include <QString>
@@ -53,19 +53,10 @@ public:
 	//! @param _domain The name of the domain to use for translation
 	//! @param _moDirectory The directory where to look for the domain.mo translation files.
 	//! @param _langName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
-	Translator(const std::string& _domain, const QString& _moDirectory, const QString& _langName) :
+	Translator(const QString& _domain, const QString& _moDirectory, const QString& _langName) :
 			domain(_domain), moDirectory(_moDirectory), langName(_langName)
 	{
 		Translator::lastUsed = NULL;
-	}
-
-	//! Translate input message.
-	//! @param s input string in english.
-	//! @return The translated string in UTF-8 characters.
-	std::string translateUTF8(const std::string& s)
-	{
-		reload();
-		return gettext(s.c_str());
 	}
 
 	//! Translate input message.
@@ -121,11 +112,20 @@ public:
 	static void initIso639_1LanguageCodes(const QString& fileName);
 	
 private:
+	//! Translate input message.
+	//! @param s input string in english.
+	//! @return The translated string in UTF-8 characters.
+	std::string translateUTF8(const std::string& s)
+	{
+		reload();
+		return gettext(s.c_str());
+	}
+	
 	//! Reload the current locale info so that gettext use them
 	void reload();
 
 	//! The domain name
-	string domain;
+	QString domain;
 
 	//! The directory where the locale file tree stands
 	QString moDirectory;
@@ -140,7 +140,7 @@ private:
 	static QString systemLangName;
 	
 	//! Contains the list of all iso639 languages codes
-	static map<QString, wstring> iso639codes;
+	static QMap<QString, wstring> iso639codes;
 };
 
 #endif

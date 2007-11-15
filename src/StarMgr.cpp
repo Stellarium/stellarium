@@ -434,7 +434,7 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 	cout << "Loading star data..." << endl;
 
 	InitParser conf;
-	conf.load(StelApp::getInstance().getFileMgr().qfindFile("stars/default/stars.ini"));
+	conf.load(StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini"));
 				         
 	for (int i=0; i<100; i++)
 	{
@@ -486,7 +486,7 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 	{
 		try
 		{
-			spectral_array.initFromFile(StelApp::getInstance().getFileMgr().qfindFile("stars/default/" + cat_hip_sp_file_name));
+			spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile("stars/default/" + cat_hip_sp_file_name));
 		}
 		catch (exception& e)
 		{
@@ -506,7 +506,7 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 		try
 		{
 			component_array.initFromFile(StelApp::getInstance().getFileMgr()
-			        .qfindFile("stars/default/" + cat_hip_cids_file_name));
+			        .findFile("stars/default/" + cat_hip_cids_file_name));
 		}
 		catch (exception& e)
 		{
@@ -1164,7 +1164,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	// Load culture star names in english
 	try
 	{
-		load_common_names(StelApp::getInstance().getFileMgr().qfindFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(exception& e)
 	{
@@ -1174,7 +1174,7 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	
 	try
 	{
-		load_sci_names(StelApp::getInstance().getFileMgr().qfindFile("stars/default/name.fab"));
+		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
 	}
 	catch(exception& e)
 	{

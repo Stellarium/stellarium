@@ -71,12 +71,12 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	// look in the landscape directory first, and if not found default to global textures directory
 	QString path;
 	try {
-		path = StelApp::getInstance().getFileMgr().qfindFile("landscapes/" + landscapeId + "/" + basename);
+		path = StelApp::getInstance().getFileMgr().findFile("landscapes/" + landscapeId + "/" + basename);
 		return path;
 	}
 	catch (exception& e)
 	{
-		path = StelApp::getInstance().getFileMgr().qfindFile("textures/" + basename);
+		path = StelApp::getInstance().getFileMgr().findFile("textures/" + basename);
 		return path;
 	}
 }
