@@ -177,13 +177,13 @@ ManagedSTextureSP StelTextureMgr::createTexture(const QString& afilename, bool l
 	QString ph;
 	try
 	{
-		ph = StelApp::getInstance().getFileMgr().qfindFile(afilename);
+		ph = StelApp::getInstance().getFileMgr().findFile(afilename);
 	}
 	catch (exception e)
 	{
 		try
 		{
-			ph = StelApp::getInstance().getFileMgr().qfindFile("textures/" + afilename);
+			ph = StelApp::getInstance().getFileMgr().findFile("textures/" + afilename);
 		}
 		catch (exception e)
 		{

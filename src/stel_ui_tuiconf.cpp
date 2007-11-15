@@ -153,7 +153,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	try
 	{
-		tui_time_settmz = new s_tui::Time_zone_item(QFile::encodeName(app->getFileMgr().qfindFile("data/zone.tab")).constData(), wstring(L"2.2 "));
+		tui_time_settmz = new s_tui::Time_zone_item(QFile::encodeName(app->getFileMgr().findFile("data/zone.tab")).constData(), wstring(L"2.2 "));
 	}
 	catch(exception &e)
 	{
@@ -515,7 +515,7 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					QString theParent = app->getFileMgr().qfindFile(QString("scripts/") + SelectedScript.c_str());
+					QString theParent = app->getFileMgr().findFile(QString("scripts/") + SelectedScript.c_str());
 					theParent = app->getFileMgr().dirName(theParent);
 					cmd = "script action play filename \"" + SelectedScript 
 						+ "\" path \"" + QFile::encodeName(theParent).constData() + "/\"";
@@ -684,7 +684,7 @@ void StelUI::tui_cb_admin_save_default(void)
 
 	try
 	{
-		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_save_config ")).constData());
+		system( QFile::encodeName(app->getFileMgr().findFile("data/script_save_config ")).constData());
 	}
 	catch(exception& e)
 	{
@@ -697,7 +697,7 @@ void StelUI::tui_cb_admin_updateme(void)
 {
 	try
 	{
-		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_internet_update ")).constData());
+		system( QFile::encodeName(app->getFileMgr().findFile("data/script_internet_update ")).constData());
 	}
 	catch(exception& e)
 	{
@@ -711,7 +711,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 {
 	try
 	{
-		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_shutdown ")).constData());
+		system( QFile::encodeName(app->getFileMgr().findFile("data/script_shutdown ")).constData());
 	}
 	catch(exception& e)
 	{

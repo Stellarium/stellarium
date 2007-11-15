@@ -85,7 +85,7 @@ SFont& StelFontMgr::getStandardFont(const QString& langageName, double size)
 	{
 		try
 		{
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().qfindFile("data/"+lf.fileName));
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/"+lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}
@@ -112,7 +112,7 @@ SFont& StelFontMgr::getFixedFont(const QString &langageName, double size)
 	else
 	{
 		try {
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().qfindFile("data/" + lf.fileName));
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/" + lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}
@@ -173,8 +173,8 @@ void StelFontMgr::loadFontForLanguage(const QString& fontMapFile)
 
 			try
 			{
-				StelApp::getInstance().getFileMgr().qfindFile("data/" + readFont.fontFileName);
-				StelApp::getInstance().getFileMgr().qfindFile("data/" + readFont.fixedFontFileName);
+				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fontFileName);
+				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fixedFontFileName);
 			}
 			catch(exception& e)
 			{

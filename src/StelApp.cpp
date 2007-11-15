@@ -134,9 +134,6 @@ QString StelApp::getViewPortDistorterType() const
 void StelApp::init()
 {
 	stelFileMgr = new StelFileMgr();
-
-	// Check if the user directory exists, and create it if necessary
-	stelFileMgr->checkUserDir();
 	
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
@@ -170,7 +167,7 @@ void StelApp::init()
 	QString fontMapFile("");
 	try 
 	{
-		fontMapFile = stelFileMgr->qfindFile(QFile::decodeName("data/fontmap.dat"));
+		fontMapFile = stelFileMgr->findFile(QFile::decodeName("data/fontmap.dat"));
 	}
 	catch(exception& e)
 	{
@@ -190,7 +187,7 @@ void StelApp::init()
 	// Load language codes
 	try
 	{
-		Translator::initIso639_1LanguageCodes(stelFileMgr->qfindFile("data/iso639-1.utf8"));
+		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8"));
 	}
 	catch (exception& e)
 	{
@@ -235,7 +232,7 @@ void StelApp::init()
 	QString iconPath;
 	try
 	{
-		iconPath = stelFileMgr->qfindFile("data/icon.bmp");
+		iconPath = stelFileMgr->findFile("data/icon.bmp");
 	}
 	catch(exception& e)
 	{
@@ -416,7 +413,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 			{
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
-				stelFileMgr->qfindFile("landscapes/" + *i + "/landscape.ini");
+				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
 				cout << (*i).toUtf8().data() << endl;
 			}
 			catch(exception& e){}
@@ -732,7 +729,7 @@ void StelApp::setConfigFile(const QString& configName)
 {
 	try
 	{
-		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
 		return;
 	}
 	catch(exception& e)
@@ -742,7 +739,7 @@ void StelApp::setConfigFile(const QString& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::FILE);	
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE);	
 		return;
 	}
 	catch(exception& e)
@@ -752,7 +749,7 @@ void StelApp::setConfigFile(const QString& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->qfindFile(configName, StelFileMgr::NEW);
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW);
 		//cerr << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile << endl;
 		return;
 	}
@@ -768,7 +765,7 @@ void StelApp::copyDefaultConfigFile()
 	QString defaultConfigFilePath;
 	try
 	{
-		defaultConfigFilePath = stelFileMgr->qfindFile("data/default_config.ini");
+		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini");
 	}
 	catch(exception& e)
 	{

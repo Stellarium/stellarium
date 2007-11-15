@@ -618,7 +618,7 @@ void StelUI::load_cities(const string& planetEnglishName)
 	QString fileName;
 	try
 	{
-		fileName = StelApp::getInstance().getFileMgr().qfindFile(QString("data/cities_") + planetEnglishName.c_str() + ".fab");
+		fileName = StelApp::getInstance().getFileMgr().findFile(QString("data/cities_") + planetEnglishName.c_str() + ".fab");
 	}
 	catch (exception& e)
 	{

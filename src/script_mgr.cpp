@@ -75,7 +75,7 @@ bool ScriptMgr::play_script(const QString& script_file, const QString& script_pa
 	{
 		try
 		{
-			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_mount_script_disk")).constData());	  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk")).constData());	  
 			cout << "MOUNT DISK to read script" << endl;
 			RemoveableDirectoryMounted = 1;
 		}
@@ -108,7 +108,7 @@ void ScriptMgr::cancel_script() {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_unmount_script_disk")).constData());  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk")).constData());  
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -143,11 +143,11 @@ void ScriptMgr::record_script(string script_filename) {
 
 	// If we get no script filename as a parameter we should make a new one.
 	if(script_filename == "") {
-		string scriptSaveDir;
+		QString scriptSaveDir;
 		try
 		{
 			// this probably wont work with non-ascii username.  handle this in StelFileMgr?  nkerr
-			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir().toStdString() + "/scripts";
+			scriptSaveDir = StelApp::getInstance().getFileMgr().getUserDir() + "/scripts";
 			if (!StelApp::getInstance().getFileMgr().exists(scriptSaveDir))
 			{
 				if (!StelApp::getInstance().getFileMgr().mkDir(scriptSaveDir))
@@ -162,12 +162,12 @@ void ScriptMgr::record_script(string script_filename) {
 			return;
 		}
 		
-		string scriptPath;
+		QString scriptPath;
 		for(int j=0; j<1000; ++j)
 		{
 			stringstream oss;
 			oss << setfill('0') << setw(3) << j;
-			scriptPath = scriptSaveDir +"/"+ (string("recorded-") + oss.str() + ".sts");
+			scriptPath = scriptSaveDir +"/"+ "recorded-" + oss.str().c_str() + ".sts";
 			if (!StelApp::getInstance().getFileMgr().exists(scriptPath))
 				break;
 		}
@@ -179,7 +179,7 @@ void ScriptMgr::record_script(string script_filename) {
 		}
 		else
 		{
-			script_filename = scriptPath;
+			script_filename = QFile::encodeName(scriptPath).constData();
 		}
 	}
 	
@@ -270,7 +270,7 @@ string ScriptMgr::get_script_list(QString directory) {
 	{
 		try
 		{
-			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_mount_script_disk")).constData());
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk")).constData());
 			cout << "MOUNT DISK to read directory\n";
 			directory += "/scripts";
 			RemoveableDirectoryMounted = 1;
@@ -301,7 +301,7 @@ string ScriptMgr::get_script_list(QString directory) {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_unmount_script_disk")).constData());
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk")).constData());
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -330,7 +330,7 @@ bool ScriptMgr::play_startup_script() {
 	} 
 	else {
 		try {
-			QString fullPath(StelApp::getInstance().getFileMgr().qfindFile("scripts/startup.sts")); 
+			QString fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup.sts")); 
 			QString parentDir(StelApp::getInstance().getFileMgr().dirName(fullPath));
 			play_script(fullPath, parentDir + "/");
 		}

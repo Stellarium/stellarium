@@ -4,9 +4,6 @@
 #define CHECK_FILE "data/ssystem.ini"
 
 #include <QSet>
-#include <string>
-
-#include "fixx11h.h"
 #include <QString>
 #include <QStringList>
 
@@ -35,13 +32,14 @@ public:
   		HIDDEN		= 0x00000020	//!< Include "hidden" paths (starting with a . on POSIX systems).
 	};
 				
-	//! Default Constructor.
+	//! Constructor.
 	//! By default, StelFileMgr will be created with the Stellarium installation directory
 	//! config_root in the search path.  On systems which provide a per-user data/settings
 	//! directory (which we call the user_settings directory, this is also included in 
 	//! the search path, before the <config_root> directory.
 	StelFileMgr();
 	
+	//! Destructor.
 	~StelFileMgr();
 
 	//! Search for a path within the search paths, for example "textures/fog.png".
@@ -62,7 +60,7 @@ public:
 	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	QString qfindFile(const QString& path, const FLAGS& flags=(FLAGS)0);
+	QString findFile(const QString& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -83,7 +81,6 @@ public:
 		
 	//! Check if a path exists.  Note it might be a file or a directory.
 	//! @param path to check
-	static bool exists(const string& path);
 	static bool exists(const QString& path);
 	
 	//! Check if a path is writable
@@ -93,22 +90,16 @@ public:
 	//! In the case of directories, return true if the directory can
 	//! have files created in it.
 	//! @param path to check
-	static bool isWritable(const string& path);
 	static bool isWritable(const QString& path);
 	
 	//! Check if a path exists and is a directory.
 	//! @param path to check
 	static bool isDirectory(const QString& path);
 	
-	//! Check if the user directory exists, is writable and a directory
-	//! Creates it if it does not exist.  Exits the program if any of this
-	//! process fails.
-	void checkUserDir();
-	
 	//! Make a directory
 	//! @param path the path of the directory to create.
 	//! @return true if success, else false
-	static bool mkDir(const string& path);
+	static bool mkDir(const QString& path);
 	
 	//! Convenience function to find the parent directory of a given path
 	//! May return relative paths if the parameter is a relative path
@@ -148,6 +139,11 @@ public:
 	QString getLocaleDir(void);
 
 private:
+	//! Check if the user directory exists, is writable and a directory
+	//! Creates it if it does not exist.  Exits the program if any of this
+	//! process fails.
+	void checkUserDir();
+	
 	//! Convenience function to find the basename of a given path
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
@@ -171,7 +167,6 @@ private:
 	void outputFileSearchPaths(void);
 		
 	QStringList fileLocations;
-	
 };
 
 #endif

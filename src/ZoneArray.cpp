@@ -96,7 +96,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
     use_mmap = true;
   }
   try {
-    fname = StelApp::getInstance().getFileMgr().qfindFile("stars/default/"+fname);
+    fname = StelApp::getInstance().getFileMgr().findFile("stars/default/"+fname);
   } catch (exception &e) {
     qWarning() << "ZoneArray::create(" << extended_file_name << "): "
             "warning while loading \"" << fname
