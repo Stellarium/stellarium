@@ -495,7 +495,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			{
 				// If we're playing the audio file from a script, search for the audio file
 				// in the script directory where the script file exists.
-				audio = new Audio(scripts->get_script_path() + args["filename"],
+				audio = new Audio(scripts->get_script_path().toStdString() + args["filename"],
 						"default track",
       						StelUtils::stringToLong(args["output_rate"]));
 				audio->play(args["loop"]=="on");
