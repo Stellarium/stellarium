@@ -188,14 +188,14 @@ public slots:
 private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names in english
-	void loadNames(const string& names_file);
+	void loadNames(const QString& names_file);
 	
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param fileName The name of the constellation data file
 	//! @param artFileName The name of the constellation art data file
 	//! @param cultureName A string ID of the current skyculture
 	//! @param lb The loading progress bar object
-	void loadLinesAndArt(const string &fileName, const string &artfileName, const string& cultureName, LoadingBar& lb);
+	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName, LoadingBar& lb);
 	
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
@@ -209,9 +209,8 @@ private:
 	//!  - The number of constellations which this boundary separates (always 2).
 	//!  - Two constellation abbreviations representing the constellations which 
 	//!    the boundary separates.
-	//! @param conCatFile the path to the file which contains 
-	//! the constellation boundary data.
-	bool loadBoundaries(const string& conCatFile);
+	//! @param conCatFile the path to the file which contains the constellation boundary data.
+	bool loadBoundaries(const QString& conCatFile);
 	//! Draw the constellation lines.
 	void drawLines(Projector * prj) const;
 	//! Draw the constellation art.
@@ -247,7 +246,7 @@ private:
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
 
-	string lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
+	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 	
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	bool flagNames;

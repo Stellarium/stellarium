@@ -582,7 +582,7 @@ void StelUI::tui_update_widgets(void)
 	tui_time_dateformat->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(StelUtils::stringToWstring(app->getSkyCultureMgr().getSkyCultureDir()));
+	tui_general_sky_culture->setValue(app->getSkyCultureMgr().getSkyCultureDir().toStdWString());
 	tui_general_sky_locale->setValue(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
 
 	// 4. Stars
@@ -980,7 +980,7 @@ void StelUI::saveCurrentConfig(const QString& confFile)
 	conf.set_str	("main:version", PACKAGE_VERSION);
 
 	// localization section
-	conf.set_str    ("localization:sky_culture", skyCultureMgr->getSkyCultureDir().c_str());
+	conf.set_str    ("localization:sky_culture", skyCultureMgr->getSkyCultureDir());
 	conf.set_str    ("localization:sky_locale", localeMgr->getSkyLanguage().c_str());
 	conf.set_str    ("localization:app_locale", localeMgr->getAppLanguage().c_str());
 	conf.set_str	("localization:time_display_format", localeMgr->get_time_format_str().c_str());

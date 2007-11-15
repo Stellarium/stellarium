@@ -154,7 +154,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["max_mag_nebula_name"]!="") nmgr->setMaxMagHints(StelUtils::stringToDouble(args["max_mag_nebula_name"]));
 		else if(args["max_mag_star_name"]!="") smgr->setMaxMagName(StelUtils::stringToDouble(args["max_mag_star_name"]));
 		else if(args["moon_scale"]!="") ssmgr->setMoonScale(StelUtils::stringToDouble(args["moon_scale"]));
-		else if(args["sky_culture"]!="") stapp->getSkyCultureMgr().setSkyCultureDir(args["sky_culture"]);
+		else if(args["sky_culture"]!="") stapp->getSkyCultureMgr().setSkyCultureDir(args["sky_culture"].c_str());
 		else if(args["sky_locale"]!="") stapp->getLocaleMgr().setSkyLanguage(args["sky_locale"]);
 		else if(args["star_mag_scale"]!="") smgr->setMagScale(StelUtils::stringToDouble(args["star_mag_scale"]));
 		else if(args["star_scale"]!="") {

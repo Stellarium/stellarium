@@ -916,7 +916,7 @@ void StelUI::saveLanguageOptions(void)
 	conf.load(app->getConfigFilePath());
 	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage().c_str());
 	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage().c_str());
-	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir().c_str());
+	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
 	conf.save(app->getConfigFilePath());
 }
 

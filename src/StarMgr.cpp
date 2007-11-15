@@ -526,18 +526,19 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 }
 
 // Load common names from file 
-int StarMgr::load_common_names(const string& commonNameFile) {
+int StarMgr::load_common_names(const QString& commonNameFile) {
   common_names_map.clear();
   common_names_map_i18n.clear();
   common_names_index.clear();
   common_names_index_i18n.clear();
 
-  cout << "Loading star names from " << commonNameFile << endl;
+  cout << "Loading star names from " << qPrintable(commonNameFile) << endl;
 
   FILE *cnFile;
-  cnFile=fopen(commonNameFile.c_str(),"r");
-  if (!cnFile) {
-    cerr << "Warning " << commonNameFile << " not found." << endl;
+  cnFile=fopen(QFile::encodeName(commonNameFile).constData(),"r");
+  if (!cnFile)
+  {
+	  cerr << "Warning " << qPrintable(commonNameFile) << " not found." << endl;
     return 0;
   }
 
@@ -547,9 +548,9 @@ int StarMgr::load_common_names(const string& commonNameFile) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
     if (sscanf(line,"%u",&hip)!=1) {
-      cerr << "ERROR: StarMgr::load_common_names(" << commonNameFile
+		cerr << "ERROR: StarMgr::load_common_names(" << qPrintable(commonNameFile)
            << "): bad line: \"" << line << '"' << endl;
-      exit(1);
+      qFatal("Error while loading star common names.");
     }
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
@@ -581,18 +582,20 @@ int StarMgr::load_common_names(const string& commonNameFile) {
 
 
 // Load scientific names from file 
-void StarMgr::load_sci_names(const string& sciNameFile) {
+void StarMgr::load_sci_names(const QString& sciNameFile)
+{
   sci_names_map_i18n.clear();
   sci_names_index_i18n.clear();
 
-  cout << "Loading star sci names from " << sciNameFile << endl;
+  cout << "Loading star sci names from " << qPrintable(sciNameFile) << endl;
 
   FILE *snFile;
-  snFile=fopen(sciNameFile.c_str(),"r");
-  if (!snFile) {
-    cerr << "Warning " << sciNameFile.c_str() << " not found" << endl;
-    return;
-  }
+  snFile=fopen(QFile::encodeName(sciNameFile).constData(),"r");
+  if (!snFile)
+  {
+	cerr << "Warning " << qPrintable(sciNameFile) << " not found." << endl;
+	return;
+	}
 
   // Assign names to the matching stars, now support spaces in names
   char line[256];
@@ -600,9 +603,9 @@ void StarMgr::load_sci_names(const string& sciNameFile) {
     line[sizeof(line)-1] = '\0';
     unsigned int hip;
     if (sscanf(line,"%u",&hip)!=1) {
-      cerr << "ERROR: StarMgr::load_sci_names(" << sciNameFile
+		cerr << "ERROR: StarMgr::load_sci_names(" << qPrintable(sciNameFile)
            << "): bad line: \"" << line << '"' << endl;
-      exit(1);
+		qFatal("Error while loading star sci names.");
     }
 	if (sci_names_map_i18n.find(hip)!=sci_names_map_i18n.end())
 		continue;
@@ -1152,31 +1155,31 @@ vector<wstring> StarMgr::listMatchingObjectsI18n(
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(double newFontSize) {
-  fontSize = newFontSize;
-  starFont = &StelApp::getInstance().getFontManager().getStandardFont(
-               StelApp::getInstance().getLocaleMgr().getSkyLanguage(),
-               fontSize);
+void StarMgr::setFontSize(double newFontSize)
+{
+	fontSize = newFontSize;
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(
+		StelApp::getInstance().getLocaleMgr().getSkyLanguage(),fontSize);
 }
 
 void StarMgr::updateSkyCulture(LoadingBar& lb)
 {
-	string skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	QString skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	
 	// Load culture star names in english
 	try
 	{
-		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		load_common_names(StelApp::getInstance().getFileMgr().qfindFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(exception& e)
 	{
 		cout << "WARNING: could not load star_names.fab for sky culture " 
-			<< skyCultureDir << ": " << e.what() << endl;	
+			<< qPrintable(skyCultureDir) << ": " << e.what() << endl;	
 	}
 	
 	try
 	{
-		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
+		load_sci_names(StelApp::getInstance().getFileMgr().qfindFile("stars/default/name.fab"));
 	}
 	catch(exception& e)
 	{
@@ -1184,6 +1187,6 @@ void StarMgr::updateSkyCulture(LoadingBar& lb)
 	}
 
 	// Turn on sci names/catalog names for western culture only
-	setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
+	setFlagSciNames(skyCultureDir.startsWith("western"));
 	updateI18n();
 }
