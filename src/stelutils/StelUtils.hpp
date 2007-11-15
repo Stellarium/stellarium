@@ -197,9 +197,6 @@ namespace StelUtils {
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
 	double get_dec_angle(const string&);
 	
-	//! Delete the file.
-	bool deleteFile(const std::string& fileName);
-
 	//! Check if the filename is an absolute path.
 	bool checkAbsolutePath(const string& fileName);
 
@@ -210,7 +207,7 @@ namespace StelUtils {
 	int getBiggerPowerOfTwo(int value);
 	
 	//! Download the file from the given URL to the given name using libcurl.
-	bool downloadFile(const std::string& url, const std::string& fullPath, const std::string& referer="Stellarium", const std::string& cookiesFile="");
+	bool downloadFile(const QString& url, const QString& fullPath, const QString& referer="Stellarium", const QString& cookiesFile="");
 	
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);

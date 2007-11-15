@@ -85,7 +85,7 @@ public slots:
 private:
 	//! Set the texture to use for the Milky Way.
 	//! @param texFile the path to a texture file to be loaded.
-	void setTexture(const string& texFile);
+	void setTexture(const QString& texFile);
 	
 	float radius;
 	STextureSP tex;

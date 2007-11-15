@@ -41,6 +41,8 @@
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
+#include <QFile>
+#include <QDebug>
 
 using namespace s_gui;
 
@@ -613,12 +615,12 @@ void StelUI::load_cities(const string& planetEnglishName)
 	// Clear the old cities
 	earth_map->clearCities();
 	
-	string fileName;
+	QString fileName;
 	try
 	{
-		fileName = StelApp::getInstance().getFileMgr().findFile("data/cities_" + planetEnglishName + ".fab");
+		fileName = StelApp::getInstance().getFileMgr().qfindFile(QString("data/cities_") + planetEnglishName.c_str() + ".fab");
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
 		cerr << "INFO StelUI::load_cities " << e.what() << endl;
 		return;
@@ -634,10 +636,10 @@ void StelUI::load_cities(const string& planetEnglishName)
 	int total = 0;
 
 	cout << "Loading Cities data for planet " << planetEnglishName << "...";
-	FILE *fic = fopen(fileName.c_str(), "r");
+	FILE *fic = fopen(QFile::encodeName(fileName).constData(), "r");
 	if (!fic)
 	{
-		cerr << "Can't open " << fileName << endl;
+		qWarning() << "Can't open " << fileName;
 		return;
 	}
 

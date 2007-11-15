@@ -20,6 +20,7 @@
 // manage an assortment of script loaded images
 
 #include <iostream>
+#include <QFile>
 #include "image_mgr.h"
 #include "Projector.hpp"
 #include "Navigator.hpp"
@@ -47,7 +48,7 @@ double ImageMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-int ImageMgr::load_image(string filename, string name, Image::IMAGE_POSITIONING position_type)
+int ImageMgr::load_image(QString filename, string name, Image::IMAGE_POSITIONING position_type)
 {
 
     // if name already exists, replace with new image (hash would have been easier...)
@@ -61,7 +62,7 @@ int ImageMgr::load_image(string filename, string name, Image::IMAGE_POSITIONING 
         }
     }
 
-    Image *img = new Image(filename, name, position_type);
+    Image *img = new Image(QFile::encodeName(filename).constData(), name, position_type);
 
     if (!img || img->image_loaded())
     {

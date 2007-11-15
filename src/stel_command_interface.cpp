@@ -21,6 +21,7 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <QFile>
 
 #include "stel_command_interface.h"
 #include "StelCore.hpp"
@@ -424,21 +425,21 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				else if(args["coordinate_system"] == "equatorial") img_pos = Image::POS_EQUATORIAL;
 				else if(args["coordinate_system"] == "j2000") img_pos = Image::POS_J2000;
 
-				string image_filename;
+				QString image_filename;
 				if(scripts->is_playing())
-					image_filename = scripts->get_script_path() + args["filename"];
+					image_filename = scripts->get_script_path() + args["filename"].c_str();
 				else
-					image_filename = "data/" + args["filename"];
+					image_filename = QString("data/") + args["filename"].c_str();
 					
 				try
 				{
-					image_filename = stapp->getFileMgr().findFile(image_filename);
-					script_images->load_image(image_filename, args["name"], img_pos);
+					image_filename = stapp->getFileMgr().qfindFile(image_filename);
+					script_images->load_image(image_filename, args["name"].c_str(), img_pos);
 				}
 				catch(exception& e)
 				{
 					cerr << "ERROR finding script: " << e.what() << endl;
-					debug_message = _("Unable to open file: ") + StelUtils::stringToWstring(image_filename);
+					debug_message = _("Unable to open file: ") + image_filename.toStdWString();
 				}				  
 			}
 
@@ -506,8 +507,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				// from the pwd and so on.
 				try
 				{
-					string audioFilePath = StelApp::getInstance().getFileMgr().findFile(args["filename"], StelFileMgr::FILE);
-					audio = new Audio(audioFilePath, "default track", StelUtils::stringToLong(args["output_rate"]));
+					QString audioFilePath = StelApp::getInstance().getFileMgr().qfindFile(args["filename"].c_str(), StelFileMgr::FILE);
+					audio = new Audio(QFile::encodeName(audioFilePath).constData(), "default track", StelUtils::stringToLong(args["output_rate"]));
 					audio->play(args["loop"]=="on");
 				}
 				catch(exception& e)
@@ -548,7 +549,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else if(args["action"]=="play" && args["filename"]!="") {
 			if(scripts->is_playing()) {
 
-				string script_path = scripts->get_script_path();
+				QString script_path = scripts->get_script_path();
 
 				// stop script, audio, and unload any loaded images
 				if(audio) {
@@ -559,9 +560,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				script_images->drop_all_images();
 
 				// keep same script path 
-				scripts->play_script(script_path + args["filename"], script_path);
+				scripts->play_script(script_path + args["filename"].c_str(), script_path);
 			} else {
-				scripts->play_script(args["path"] + args["filename"], args["path"]);
+				scripts->play_script(QString(args["path"].c_str()) + args["filename"].c_str(), args["path"].c_str());
 			}
 
 		} else if(args["action"]=="record") {
@@ -628,7 +629,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} else if(command=="landscape" && args["action"] == "load") {
 
 		// textures are relative to script
-		args["path"] = scripts->get_script_path();
+		args["path"] = QFile::encodeName(scripts->get_script_path()).constData();
 		lmgr->loadLandscape(args);
 	  
 	} else if(command=="meteors") {

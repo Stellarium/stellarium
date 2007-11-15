@@ -50,8 +50,8 @@ Planet::Planet(Planet *parent,
                double oblateness,
                Vec3f color,
                float albedo,
-               const string& tex_map_name,
-               const string& tex_halo_name,
+               const QString& tex_map_name,
+               const QString& tex_halo_name,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
 			   bool close_orbit,bool hidden) :
@@ -517,7 +517,7 @@ float Planet::compute_magnitude(const Navigator * nav) const
 	return compute_magnitude(nav->getObserverHelioPos());
 }
 
-void Planet::set_big_halo(const string& halotexfile)
+void Planet::set_big_halo(const QString& halotexfile)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	tex_big_halo = StelApp::getInstance().getTextureManager().createTexture(halotexfile);
@@ -836,7 +836,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	}
 }
 
-Ring::Ring(double radius_min,double radius_max,const string &texname)
+Ring::Ring(double radius_min,double radius_max,const QString &texname)
      :radius_min(radius_min),radius_max(radius_max) {
 	tex = StelApp::getInstance().getTextureManager().createTexture(texname);
 }

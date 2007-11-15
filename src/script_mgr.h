@@ -44,7 +44,7 @@ class ScriptMgr : public StelModule
   virtual void init(const InitParser& conf, LoadingBar& lb);
   virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
   
-  bool play_script(string script_file, string script_path);
+  bool play_script(const QString& script_file, const QString& QScript_path);
   bool play_startup_script();
   void cancel_script();  // stop playing current script
   void pause_script();
@@ -56,15 +56,15 @@ class ScriptMgr : public StelModule
   bool is_paused() { return play_paused; };     // is a script paused?
   bool is_recording() { return recording; };    // is a script being recorded? 
   virtual void update(double delta_time);  // execute commands in running script
-  string get_script_list(string directory);  // get list of scripts in a directory
-  string get_script_path();
+  string get_script_list(QString directory);  // get list of scripts in a directory
+  QString get_script_path();
   string get_record_filename() { return rec_filename; }  // file record is writing to
   void set_allow_ui(bool _aui) { allow_ui = _aui; }
   bool get_allow_ui() { return allow_ui; }
   void set_gui_debug(bool _gdebug) { gui_debug = _gdebug; }  // Should script errors be shown onscreen?
   bool get_gui_debug() { return gui_debug; }
-  void set_removable_media_path(const string& path) { RemoveableScriptDirectory = path; };
-  const string& get_removable_media_path(void) { return RemoveableScriptDirectory; };
+  void set_removable_media_path(const QString& path) { RemoveableScriptDirectory = path; };
+  const QString& get_removable_media_path(void) { return RemoveableScriptDirectory; };
   const bool can_write_files(void) { return scripts_can_write_files; };
 
  private:
@@ -79,7 +79,7 @@ class ScriptMgr : public StelModule
   bool play_paused;// is script playback paused?
   fstream rec_file;
   string rec_filename;
-  string RemoveableScriptDirectory;
+  QString RemoveableScriptDirectory;
   bool RemoveableDirectoryMounted;
   bool allow_ui;    // Allow user interface to function during scripts 
                     // (except for time related keys which control script playback)

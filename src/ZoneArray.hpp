@@ -63,7 +63,7 @@ namespace BigStarCatalogExtension {
 class ZoneArray {
 public:
   static ZoneArray *create(const StarMgr &hip_star_mgr,
-                           const string &extended_file_name,
+                           const QString &extended_file_name,
                            LoadingBar &lb);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
   virtual void generateNativeDebugFile(const char *fname) const = 0;

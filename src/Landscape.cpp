@@ -121,7 +121,7 @@ void LandscapeOldStyle::load(const QString& landscape_file, const QString& lands
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = StelApp::getInstance().getTextureManager().qcreateTexture(getTexturePath(pd.get_str("landscape", tmp).c_str(), landscapeId));
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", tmp).c_str(), landscapeId));
 	}
 
 	// Init sides parameters
@@ -146,7 +146,7 @@ void LandscapeOldStyle::load(const QString& landscape_file, const QString& lands
 	nb_decor_repeat = pd.get_int("landscape", "nb_decor_repeat", 1);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	ground_tex = StelApp::getInstance().getTextureManager().qcreateTexture(getTexturePath(pd.get_str("landscape", "groundtex").c_str(), landscapeId));
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", "groundtex").c_str(), landscapeId));
 	s = pd.get_str("landscape", "ground");
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -156,7 +156,7 @@ void LandscapeOldStyle::load(const QString& landscape_file, const QString& lands
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = StelApp::getInstance().getTextureManager().qcreateTexture(getTexturePath(pd.get_str("landscape", "fogtex").c_str(), landscapeId));
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(pd.get_str("landscape", "fogtex").c_str(), landscapeId));
 	s = pd.get_str("landscape", "fog");
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -193,7 +193,7 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp]);
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param[tmp].c_str());
 	}
 
 	// Init sides parameters
@@ -217,7 +217,7 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 
 	nb_decor_repeat = StelUtils::stringToInt(param["nb_decor_repeat"], 1);
 
-	ground_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param["groundtex"].c_str());
 	s = param["ground"];
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -227,7 +227,7 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"]);
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param["fogtex"].c_str());
 	s = param["fog"];
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -405,7 +405,7 @@ void LandscapeFisheye::create(const wstring _name, bool _fullpath, const QString
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	map_tex = StelApp::getInstance().getTextureManager().qcreateTexture(_maptex);
+	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 	tex_fov = _texturefov*M_PI/180.;
     angle_rotatez = _angle_rotatez*M_PI/180.;
 }
@@ -471,7 +471,7 @@ void LandscapeSpherical::create(const wstring _name, bool _fullpath, const QStri
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	map_tex = StelApp::getInstance().getTextureManager().qcreateTexture(_maptex);
+	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
     angle_rotatez = _angle_rotatez*M_PI/180.;
 }
 

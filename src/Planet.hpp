@@ -71,7 +71,7 @@ public:
 class Ring
 {
 public:
-	Ring(double radius_min,double radius_max,const string &texname);
+	Ring(double radius_min,double radius_max,const QString &texname);
 	~Ring(void);
 	void draw(const Projector* prj,const Mat4d& mat,double screen_sz);
 	double get_size(void) const {return radius_max;}
@@ -93,8 +93,8 @@ public:
            double oblateness,
            Vec3f color,
            float albedo,
-           const string& tex_map_name,
-           const string& tex_halo_name,
+           const QString& tex_map_name,
+           const QString& tex_halo_name,
            pos_func_type _coord_func,
            OsulatingFunctType *osculating_func,
 		   bool close_orbit,bool hidden);
@@ -182,7 +182,7 @@ public:
 
 	const Planet *get_parent(void) const {return parent;}
 
-	void set_big_halo(const string& halotexfile);
+	void set_big_halo(const QString& halotexfile);
 	void set_halo_size(float s) {big_halo_size = s;}
 
 	static void set_font(SFont* f) {planet_name_font = f;}
