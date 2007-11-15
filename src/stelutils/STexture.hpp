@@ -20,7 +20,7 @@
 #ifndef _STEXTURE_H_
 #define _STEXTURE_H_
 
-#include <string>
+#include <QString>
 #include "vecmath.h"
 #include "GLee.h"
 #include "fixx11h.h"
@@ -55,7 +55,7 @@ public:
 protected:
 	GLuint id;
 	
-	std::string fullPath;
+	QString fullPath;
 	bool mipmapsMode;
 	GLint wrapMode;
 	GLint minFilter;

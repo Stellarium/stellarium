@@ -17,6 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QDebug>
+#include <QFile>
+
 #include "ZoneArray.hpp"
 
 #include "StelApp.hpp"
@@ -84,30 +87,29 @@ int ReadInt(FILE *f,unsigned int &x) {
 #endif
 
 ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
-                             const string &extended_file_name,
+                             const QString& extended_file_name,
                              LoadingBar &lb) {
-  string fname(extended_file_name);
+  QString fname(extended_file_name);
   bool use_mmap = false;
-  if (fname.find("mmap:") == 0) {
-    fname.erase(0,5);
+  if (fname.contains("mmap:")) {
+    fname.remove(0,5);
     use_mmap = true;
   }
   try {
-    fname = StelApp::getInstance().getFileMgr()
-                                  .findFile("stars/default/"+fname);
+    fname = StelApp::getInstance().getFileMgr().qfindFile("stars/default/"+fname);
   } catch (exception &e) {
-    cerr << "ZoneArray::create(" << extended_file_name << "): "
+    qWarning() << "ZoneArray::create(" << extended_file_name << "): "
             "warning while loading \"" << fname
-         << "\": " << e.what() << endl;
+         << "\": " << e.what();
     return 0;
   }
-  FILE *f = fopen(fname.c_str(),"rb");
+  FILE *f = fopen(QFile::encodeName(fname).constData(),"rb");
   if (f == 0) {
     fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",
-            extended_file_name.c_str());
+            qPrintable(extended_file_name));
     return 0;
   }
-  printf("Loading %s: ",extended_file_name.c_str());
+  printf("Loading %s: ",qPrintable(extended_file_name));
   unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
   if (ReadInt(f,magic) < 0 ||
       ReadInt(f,type) < 0 ||

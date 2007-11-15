@@ -47,6 +47,8 @@
 #include "fixx11h.h"
 #include <QString>
 #include <QTextStream>
+#include <QFile>
+#include <QDebug>
 
 namespace StelUtils {
 
@@ -468,16 +470,6 @@ double get_dec_angle(const string& str)
 	return (pos);
 }
 
-// Delete the file
-bool deleteFile(const std::string& fileName)
-{
-	if (std::remove(fileName.c_str())==-1)
-	{
-		return false;
-	}
-	return true;
-}
-
 bool checkAbsolutePath(const string& fileName)
 {
 	// Absolute path if starts by '/' or by 'Drive:/' (MS)
@@ -505,8 +497,8 @@ int getBiggerPowerOfTwo(int value)
 }
 
 //! Download the file from the given URL to the given name using libcurl
-bool downloadFile(const std::string& url, const std::string& fullPath, 
-	const std::string& referer, const string& cookiesFile)
+bool downloadFile(const QString& url, const QString& fullPath, 
+	const QString& referer, const QString& cookiesFile)
 {
 #ifndef HAVE_LIBCURL
 	cerr << "Stellarium was compiled without libCurl support. Can't access remote URLs." << endl;
@@ -514,27 +506,27 @@ bool downloadFile(const std::string& url, const std::string& fullPath,
 #else
 	// Download the file using libCurl
 	CURL* handle = curl_easy_init();
-	curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
-	curl_easy_setopt(handle, CURLOPT_REFERER, referer.c_str());
+	curl_easy_setopt(handle, CURLOPT_URL, QFile::encodeName(url).constData());
+	curl_easy_setopt(handle, CURLOPT_REFERER, referer.toUtf8().constData());
 	curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
 	curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0);
-	if (!cookiesFile.empty())
+	if (!cookiesFile.isEmpty())
 	{
 		// Activate cookies
-		curl_easy_setopt(handle, CURLOPT_COOKIEFILE, cookiesFile.c_str());
-		cerr << "Using cookies file: " << cookiesFile << endl;
+		curl_easy_setopt(handle, CURLOPT_COOKIEFILE, QFile::encodeName(cookiesFile).constData());
+		cout << "Using cookies file: " << qPrintable(cookiesFile) << endl;
 	}
-	FILE* fic = fopen(fullPath.c_str(), "wb");
+	FILE* fic = fopen(QFile::encodeName(fullPath).constData(), "wb");
 	if (!fic)
 	{
-		cerr << "Can't create file: " << fullPath << endl;
+		qWarning() << "Can't create file: " << fullPath;
 		return false;
 	}
 	curl_easy_setopt(handle, CURLOPT_WRITEDATA, fic);
 	//curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
 	if (curl_easy_perform(handle)!=0)
 	{
-		cerr << "There was an error while getting file: " << url << endl;
+		qWarning() << "There was an error while getting file: " << url;
 		fclose(fic);
 		curl_easy_cleanup(handle);
 		return false;

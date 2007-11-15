@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <sstream>
 #include <iomanip>
+#include <QFile>
 
 #include "script_mgr.h"
 #include "script.h"
@@ -56,7 +57,7 @@ void ScriptMgr::init(const InitParser& conf, LoadingBar& lb)
 }
 
 // path is used for loading script assets 
-bool ScriptMgr::play_script(string script_file, string script_path) {
+bool ScriptMgr::play_script(const QString& script_file, const QString& script_path) {
 	// load script...
 	
 	if(playing){
@@ -70,11 +71,11 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 	script = new Script();
 
 	// if script is on mountable disk, mount that now
-	if( RemoveableScriptDirectory != "" &&
-		script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
+	if( RemoveableScriptDirectory != "" && script_file.startsWith(RemoveableScriptDirectory))
+	{
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk" ).c_str());	  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_mount_script_disk")).constData());	  
 			cout << "MOUNT DISK to read script" << endl;
 			RemoveableDirectoryMounted = 1;
 		}
@@ -107,7 +108,7 @@ void ScriptMgr::cancel_script() {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk" ).c_str());	  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_unmount_script_disk")).constData());  
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -262,15 +263,14 @@ void ScriptMgr::update(double delta_time)
  returns a string list of script file names, delimited with the '\n' 
  character
 ****************************************************************************/
-string ScriptMgr::get_script_list(string directory) {
+string ScriptMgr::get_script_list(QString directory) {
 	string result="";
 	// if directory is on mountable disk, mount that now
-	if(RemoveableScriptDirectory!="" 
-	   && directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory)==0) 
+	if(RemoveableScriptDirectory!="" && directory.startsWith(RemoveableScriptDirectory)) 
 	{
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_mount_script_disk").c_str());	  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_mount_script_disk")).constData());
 			cout << "MOUNT DISK to read directory\n";
 			directory += "/scripts";
 			RemoveableDirectoryMounted = 1;
@@ -284,7 +284,7 @@ string ScriptMgr::get_script_list(string directory) {
 	try
 	{
 		// we add an entry if there exists <directory>/scriptname/scriptname.sts
-		QSet<QString> scriptList = StelApp::getInstance().getFileMgr().listContents(directory.c_str(), StelFileMgr::FILE);
+		QSet<QString> scriptList = StelApp::getInstance().getFileMgr().listContents(directory, StelFileMgr::FILE);
 		for(QSet<QString>::iterator i=scriptList.begin(); i!=scriptList.end(); i++)
 		{
 			if (i->endsWith(".sts"))
@@ -301,7 +301,7 @@ string ScriptMgr::get_script_list(string directory) {
 	if(RemoveableDirectoryMounted) {
 		try
 		{
-			system(StelApp::getInstance().getFileMgr().findFile("data/script_unmount_script_disk").c_str());	  
+			system(QFile::encodeName(StelApp::getInstance().getFileMgr().qfindFile("data/script_unmount_script_disk")).constData());
 			cout << "UNMOUNT DISK" << endl;
 			RemoveableDirectoryMounted = 0;
 		}
@@ -314,7 +314,7 @@ string ScriptMgr::get_script_list(string directory) {
 	return result;
 }
 
-string ScriptMgr::get_script_path() { 
+QString ScriptMgr::get_script_path() { 
 	if(script) return script->get_path(); 
 	return ""; 
 }
@@ -330,8 +330,8 @@ bool ScriptMgr::play_startup_script() {
 	} 
 	else {
 		try {
-			string fullPath(StelApp::getInstance().getFileMgr().findFile("scripts/startup.sts")); 
-			string parentDir(StelApp::getInstance().getFileMgr().dirName(fullPath));
+			QString fullPath(StelApp::getInstance().getFileMgr().qfindFile("scripts/startup.sts")); 
+			QString parentDir(StelApp::getInstance().getFileMgr().dirName(fullPath));
 			play_script(fullPath, parentDir + "/");
 		}
 		catch(exception& e)

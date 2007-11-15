@@ -503,8 +503,8 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
                                pd.get_double(secname, "oblateness", 0.0),
                                StelUtils::str_to_vec3f(pd.get_str(secname, "color").c_str()),
                                pd.get_double(secname, "albedo"),
-                               pd.get_str(secname, "tex_map"),
-                               pd.get_str(secname, "tex_halo"),
+                               pd.get_str(secname, "tex_map").c_str(),
+                               pd.get_str(secname, "tex_halo").c_str(),
                                posfunc,osculating_func,
                                close_orbit,
                                pd.get_boolean(secname, "hidden", 0));
@@ -526,12 +526,12 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 		if (pd.get_boolean(secname, "rings", 0)) {
 			const double r_min = pd.get_double(secname, "ring_inner_size")/AU;
 			const double r_max = pd.get_double(secname, "ring_outer_size")/AU;
-			Ring *r = new Ring(r_min,r_max,pd.get_str(secname, "tex_ring"));
+			Ring *r = new Ring(r_min,r_max,pd.get_str(secname, "tex_ring").c_str());
 			p->set_rings(r);
 		}
 
-		string bighalotexfile = pd.get_str(secname, "tex_big_halo", "");
-		if (!bighalotexfile.empty())
+		QString bighalotexfile = pd.get_str(secname, "tex_big_halo", "").c_str();
+		if (!bighalotexfile.isEmpty())
 		{
 			p->set_big_halo(bighalotexfile);
 			p->set_halo_size(pd.get_double(secname, "big_halo_size", 50.f));

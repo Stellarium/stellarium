@@ -48,7 +48,7 @@ void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
 	setIntensity(conf.get_double("astro","milky_way_intensity",1.));
 }
 
-void MilkyWay::setTexture(const string& texFile)
+void MilkyWay::setTexture(const QString& texFile)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
