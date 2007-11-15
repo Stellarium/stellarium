@@ -508,7 +508,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	language_lb->setSizex(200);
 	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
-	language_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getAppLanguage()));
+	language_lb->setCurrent(app->getLocaleMgr().getAppLanguage().toStdWString());
 	tab_language->addComponent(language_lb);
 	
 	x=260; y=10;
@@ -524,7 +524,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	languageSky_lb->setSizex(200);
 	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
-	languageSky_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
+	languageSky_lb->setCurrent(app->getLocaleMgr().getSkyLanguage().toStdWString());
 	tab_language->addComponent(languageSky_lb);
 
 	x=150;
@@ -914,8 +914,8 @@ void StelUI::saveLanguageOptions(void)
 	cout << "Saving language in file " << app->getConfigFilePath().toUtf8().data() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage().c_str());
-	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage().c_str());
+	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage());
+	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage());
 	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
 	conf.save(app->getConfigFilePath());
 }

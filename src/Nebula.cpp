@@ -20,6 +20,7 @@
 #include <iostream>
 #include <sstream>
 #include <QTextStream>
+#include <QFile>
 
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
@@ -168,7 +169,7 @@ double Nebula::getCloseViewFov(const Navigator*) const
 
 // Read nebula data from file and compute x,y and z;
 // returns false if can't parse record
-bool Nebula::readTexture(const string& setName, const string& record)
+bool Nebula::readTexture(const QString& setName, const string& record)
 {
 	string tex_name;
 	string name;
@@ -211,7 +212,7 @@ bool Nebula::readTexture(const string& setName, const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = StelApp::getInstance().getTextureManager().createTexture("nebulae/"+setName+"/"+tex_name, false);
+	neb_tex = StelApp::getInstance().getTextureManager().createTexture(QFile::encodeName(QString("nebulae/")+setName+"/"+tex_name.c_str()).constData(), false);
 	
 	luminance = ToneReproducer::magToLuminance(mag, tex_angular_size*tex_angular_size*3600);
 

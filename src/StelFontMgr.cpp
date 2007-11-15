@@ -20,6 +20,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <QDebug>
+#include <QFile>
 
 #include "StelFontMgr.hpp"
 #include "SFont.hpp"
@@ -31,7 +33,7 @@ using namespace std;
 /*************************************************************************
  Constructor for the StelFontMgr class
 *************************************************************************/
-StelFontMgr::StelFontMgr(const string& fontMapFile)
+StelFontMgr::StelFontMgr(const QString& fontMapFile)
 {
 	loadFontForLanguage(fontMapFile);
 }
@@ -63,7 +65,7 @@ bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 /*************************************************************************
  Constructor for the LoadedFont class
 *************************************************************************/
-StelFontMgr::LoadedFont::LoadedFont(string afileName, int asize) : 
+StelFontMgr::LoadedFont::LoadedFont(const QString& afileName, int asize) : 
 		fileName(afileName), size(asize)
 {
 }
@@ -71,7 +73,7 @@ StelFontMgr::LoadedFont::LoadedFont(string afileName, int asize) :
 /*************************************************************************
  Get the standard font associated to the given language ISO code.
 *************************************************************************/
-SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
+SFont& StelFontMgr::getStandardFont(const QString& langageName, double size)
 {
 	FontForLanguage ffl = getFontForLanguage(langageName);
 	LoadedFont lf(ffl.fontFileName, (int)(ffl.fontScale*size*10));
@@ -83,11 +85,11 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 	{
 		try
 		{
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/"+lf.fileName));
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().qfindFile("data/"+lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}
-		catch(exception& e)
+		catch (exception& e)
 		{
 			cerr << "ERROR while trying to load fonts: " << e.what() << endl;
 			SFont* dummy=NULL;
@@ -99,7 +101,7 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 /*************************************************************************
  Get the fixed font associated to the given language ISO code.
 *************************************************************************/
-SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
+SFont& StelFontMgr::getFixedFont(const QString &langageName, double size)
 {
 	FontForLanguage ffl = getFontForLanguage(langageName);
 	LoadedFont lf(ffl.fixedFontFileName, (int)(ffl.fixedFontScale*size*10));
@@ -110,13 +112,13 @@ SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
 	else
 	{
 		try {
-			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().findFile("data/" + lf.fileName));
+			SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getFileMgr().qfindFile("data/" + lf.fileName));
 			loadedFonts[lf]=font;
 			return *font;
 		}
-		catch(exception& e)
+		catch (exception& e)
 		{
-			cerr << "ERROR loading font " << lf.fileName << ": " << e.what() << endl;
+			qWarning() << "ERROR loading font " << lf.fileName << ": " << e.what();
 		}
 	}
 	// Unreachable code
@@ -129,7 +131,7 @@ SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
 /*************************************************************************
  Return the structure describing the fonts and scales to use for a given language
 *************************************************************************/
-StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const std::string &langageName)
+StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const QString& langageName)
 {
 	if (fontMapping.find(langageName)==fontMapping.end())
 		return fontMapping["*"];
@@ -139,7 +141,7 @@ StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const std::string 
 /*************************************************************************
  Load the associations between langages and font file/scaling
 *************************************************************************/
-void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
+void StelFontMgr::loadFontForLanguage(const QString& fontMapFile)
 {	
 	// Add first default font
 	FontForLanguage defaultFont;
@@ -151,11 +153,11 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 	fontMapping["*"] = defaultFont;
 	
 	// Now see if another font should be used as default or for locale
-	ifstream mapFile(fontMapFile.c_str());
+	ifstream mapFile(QFile::encodeName(fontMapFile).constData());
 
 	if (!mapFile.is_open())
 	{
-		cerr << "WARNING: Unable to open font map file " << fontMapFile << " resorting to default fonts." << endl;
+		qWarning() << "WARNING: Unable to open font map file " << fontMapFile << " resorting to default fonts.";
 		return;
 	}
 
@@ -166,13 +168,13 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 	{
 		if( buffer[0] != '#' && buffer[0] != 0)
 		{
-			istringstream record(buffer);
+			QTextStream record(buffer);
 			record >> readFont.langageName >> readFont.fontFileName >> readFont.fontScale >> readFont.fixedFontFileName >> readFont.fixedFontScale;
 
 			try
 			{
-				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fontFileName);
-				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fixedFontFileName);
+				StelApp::getInstance().getFileMgr().qfindFile("data/" + readFont.fontFileName);
+				StelApp::getInstance().getFileMgr().qfindFile("data/" + readFont.fixedFontFileName);
 			}
 			catch(exception& e)
 			{

@@ -21,6 +21,7 @@
 #define _STRING_ARRAY_HPP_
 
 #include <string>
+#include <QString>
 
 using std::string;
 
@@ -36,7 +37,7 @@ public:
   void clear(void) {if (array) {delete[] array;array = 0;} size= 0;}
   int getSize(void) const {return size;}
   string operator[](int i) const {return ((0<=i && i<size) ? array[i] : "");}
-  void initFromFile(const char *file_name);
+  void initFromFile(const QString& file_name);
 private:
   string *array;
   int size;

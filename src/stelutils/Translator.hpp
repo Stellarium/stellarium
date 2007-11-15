@@ -53,7 +53,7 @@ public:
 	//! @param _domain The name of the domain to use for translation
 	//! @param _moDirectory The directory where to look for the domain.mo translation files.
 	//! @param _langName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
-	Translator(const std::string& _domain, const std::string& _moDirectory, const std::string& _langName) :
+	Translator(const std::string& _domain, const QString& _moDirectory, const QString& _langName) :
 			domain(_domain), moDirectory(_moDirectory), langName(_langName)
 	{
 		Translator::lastUsed = NULL;
@@ -89,7 +89,7 @@ public:
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
-	const std::string& getTrueLocaleName(void) const
+	const QString& getTrueLocaleName(void) const
 	{
 		if (langName=="system" || langName=="system_default") {
 			return Translator::systemLangName;
@@ -102,23 +102,23 @@ public:
 	static Translator globalTranslator;
 
 	//! Get available language name in native language from passed locales directory
-	static std::wstring getAvailableLanguagesNamesNative(const string& localeDir);	
+	static std::wstring getAvailableLanguagesNamesNative(const QString& localeDir);	
 	
 	//! Get available language codes from passed locales directory
-	static std::vector<string> getAvailableLanguagesIso639_1Codes(const string& localeDir);
+	static std::vector<QString> getAvailableLanguagesIso639_1Codes(const QString& localeDir);
 
 	//! Convert from ISO639-1 2 letters langage code to native language name
-	static std::wstring iso639_1LanguageCodeToNativeName(const string& languageCode);
+	static std::wstring iso639_1LanguageCodeToNativeName(const QString& languageCode);
 	
 	//! Convert from native language name to ISO639-1 2 letters langage code 
-	static std::string nativeLanguageNameCodeToIso639_1(const wstring& languageName);
+	static QString nativeLanguageNameCodeToIso639_1(const wstring& languageName);
 	
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);
 
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
-	static void initIso639_1LanguageCodes(const string& fileName);
+	static void initIso639_1LanguageCodes(const QString& fileName);
 	
 private:
 	//! Reload the current locale info so that gettext use them
@@ -128,19 +128,19 @@ private:
 	string domain;
 
 	//! The directory where the locale file tree stands
-	string moDirectory;
+	QString moDirectory;
 
 	//! The two letter string defining the current language name
-	string langName;
+	QString langName;
 
 	//! Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call
 	static Translator* lastUsed;
 
 	//! Store the system default language name as taken from LANGUAGE environement variable
-	static string systemLangName;
+	static QString systemLangName;
 	
 	//! Contains the list of all iso639 languages codes
-	static map<string, wstring> iso639codes;
+	static map<QString, wstring> iso639codes;
 };
 
 #endif
