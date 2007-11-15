@@ -77,7 +77,7 @@ public:
 	//! nebula_textures.fab file for that set.
 	//! @param setName The string name of the set of nebulas being processed
 	//! @param record The string containing the current record from nebula_textures.fab
-	bool readTexture(const string& setName, const string& record);
+	bool readTexture(const QString& setName, const string& record);
 	bool readNGC(char *record);
 
 	wstring getNameI18n(void) const {return nameI18;}

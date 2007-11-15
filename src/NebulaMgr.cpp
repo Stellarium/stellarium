@@ -21,6 +21,8 @@
 
 #include <fstream>
 #include <algorithm>
+#include <QDebug>
+#include <QFile>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
@@ -248,21 +250,19 @@ StelObject* NebulaMgr::search(const string& name)
 	if (cat == "IC") return searchIC(num);
 	// if (cat == "UGC") return searchUGC(num);
 	return NULL;
-
-
 }
 
-void NebulaMgr::loadNebulaSet(const string& setName, LoadingBar& lb)
+void NebulaMgr::loadNebulaSet(const QString& setName, LoadingBar& lb)
 {
 	try
 	{
-		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"), lb);
-		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
+		loadNGC(StelApp::getInstance().getFileMgr().qfindFile("nebulae/" + setName + "/ngc2000.dat"), lb);
+		loadNGCNames(StelApp::getInstance().getFileMgr().qfindFile("nebulae/" + setName + "/ngc2000names.dat"));
 		loadTextures(setName, lb);
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
-		cerr << "ERROR while loading nebula data set " << setName << ": " << e.what() << endl;
+		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
 	}
 }
 
@@ -363,17 +363,17 @@ Nebula *NebulaMgr::searchIC(unsigned int IC)
 }*/
 
 // read from stream
-bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
+bool NebulaMgr::loadNGC(const QString& catNGC, LoadingBar& lb)
 {
 	char recordstr[512];
 	unsigned int i;
 	unsigned int data_drop;
 
 	cout << "Loading NGC data... ";
-	FILE * ngcFile = fopen(catNGC.c_str(),"rb");
+	FILE * ngcFile = fopen(QFile::encodeName(catNGC).constData(),"rb");
 	if (!ngcFile)
 	{
-		cerr << "NGC data file " << catNGC << " not found" << endl;
+		qWarning() << "NGC data file " << catNGC << " not found";
 		return false;
 	}
 
@@ -416,14 +416,14 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 }
 
 
-bool NebulaMgr::loadNGCNames(const string& catNGCNames)
+bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 {
 	char recordstr[512];
 	cout << "Loading NGC name data...";
-	FILE * ngcNameFile = fopen(catNGCNames.c_str(),"rb");
+	FILE * ngcNameFile = fopen(QFile::encodeName(catNGCNames).constData(),"rb");
 	if (!ngcNameFile)
 	{
-		cerr << "NGC name data file " << catNGCNames << " not found." << endl;
+		qWarning() << "NGC name data file " << catNGCNames << " not found.";
 		return false;
 	}
 
@@ -490,17 +490,17 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 	return true;
 }
 
-bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
+bool NebulaMgr::loadTextures(const QString& setName, LoadingBar& lb)
 {
-	cout << "Loading Nebula Textures for set " << setName << "...";
-	string texFile;
+	cout << "Loading Nebula Textures for set " << qPrintable(setName) << "...";
+	QString texFile;
 	try
 	{
-		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab");
-		std::ifstream inf(texFile.c_str());
+		texFile = StelApp::getInstance().getFileMgr().qfindFile("nebulae/"+setName+"/nebula_textures.fab");
+		std::ifstream inf(QFile::encodeName(texFile).constData());
 		if (!inf.is_open())
 		{
-			throw(runtime_error("cannot open file for reading: " + texFile));
+			throw (runtime_error(string("cannot open file for reading: ") + qPrintable(texFile)));
 		}
 	
 		// determine total number to be loaded for percent complete display
@@ -535,7 +535,7 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 			{
 				if (!e->readTexture(setName, record)) // reading error
 				{
-					cerr << "Error while reading nebula texture " << setName << "/" << e->englishName << endl;
+					cerr << "Error while reading nebula texture " << qPrintable(setName) << "/" << e->englishName << endl;
 					cerr << "Record was " << record << endl;
 				}
 			} 
@@ -560,9 +560,9 @@ bool NebulaMgr::loadTextures(const string& setName, LoadingBar& lb)
 		cout << "(" << total << " textures loaded)" << endl;
 		return true;	
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
-		cerr << "ERROR: unable to load nebula texture set \"" << setName << "\": " << e.what() << endl;
+		qWarning() << "ERROR: unable to load nebula texture set \"" << setName << "\": " << e.what();
 		return false;		
 	}
 }

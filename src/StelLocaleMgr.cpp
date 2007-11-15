@@ -36,8 +36,8 @@ StelLocaleMgr::~StelLocaleMgr()
 
 void StelLocaleMgr::init(const InitParser& conf)
 {
-	setSkyLanguage(conf.get_str("localization", "sky_locale", "system"));
-	setAppLanguage(conf.get_str("localization", "app_locale", "system"));
+	setSkyLanguage(conf.get_str("localization", "sky_locale", "system").c_str());
+	setAppLanguage(conf.get_str("localization", "app_locale", "system").c_str());
 	
 	time_format = string_to_s_time_format(conf.get_str("localization:time_display_format"));
 	date_format = string_to_s_date_format(conf.get_str("localization:date_display_format"));
@@ -69,11 +69,11 @@ void StelLocaleMgr::init(const InitParser& conf)
 /*************************************************************************
  Set the application locale. This apply to GUI, console messages etc..
 *************************************************************************/
-void StelLocaleMgr::setAppLanguage(const string& newAppLanguageName)
+void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 {
 	// Update the translator with new locale name
 	Translator::globalTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
-	cout << "Application language is " << Translator::globalTranslator.getTrueLocaleName() << endl;
+	cout << "Application language is " << qPrintable(Translator::globalTranslator.getTrueLocaleName()) << endl;
 
 	StelApp::getInstance().updateAppLanguage();
 }
@@ -81,19 +81,18 @@ void StelLocaleMgr::setAppLanguage(const string& newAppLanguageName)
 /*************************************************************************
  Set the sky language.
 *************************************************************************/
-void StelLocaleMgr::setSkyLanguage(const string& newSkyLanguageName)
+void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
-	cout << "Sky language is " << skyTranslator.getTrueLocaleName() << endl;
-	
+	cout << "Sky language is " << qPrintable(skyTranslator.getTrueLocaleName()) << endl;
 	StelApp::getInstance().updateSkyLanguage();
 }
 
 /*************************************************************************
  Get the language currently used for sky objects..
 *************************************************************************/
-string StelLocaleMgr::getSkyLanguage() const
+QString StelLocaleMgr::getSkyLanguage() const
 {
 	return skyTranslator.getTrueLocaleName();
 }
@@ -106,14 +105,14 @@ Translator& StelLocaleMgr::getSkyTranslator()
 
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
-string StelLocaleMgr::get_ISO8601_time_local(double JD) const
+QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 {
 	QDateTime dateTime;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
 	else
 		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
-	return dateTime.toLocalTime().toString(Qt::ISODate).toStdString();
+	return dateTime.toLocalTime().toString(Qt::ISODate);
 }
 
 

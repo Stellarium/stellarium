@@ -190,9 +190,9 @@ void StelApp::init()
 	// Load language codes
 	try
 	{
-		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8"));
+		Translator::initIso639_1LanguageCodes(stelFileMgr->qfindFile("data/iso639-1.utf8"));
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
 		cerr << "ERROR while loading translations: " << e.what() << endl;
 	}

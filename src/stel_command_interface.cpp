@@ -155,7 +155,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["max_mag_star_name"]!="") smgr->setMaxMagName(StelUtils::stringToDouble(args["max_mag_star_name"]));
 		else if(args["moon_scale"]!="") ssmgr->setMoonScale(StelUtils::stringToDouble(args["moon_scale"]));
 		else if(args["sky_culture"]!="") stapp->getSkyCultureMgr().setSkyCultureDir(args["sky_culture"].c_str());
-		else if(args["sky_locale"]!="") stapp->getLocaleMgr().setSkyLanguage(args["sky_locale"]);
+		else if(args["sky_locale"]!="") stapp->getLocaleMgr().setSkyLanguage(args["sky_locale"].c_str());
 		else if(args["star_mag_scale"]!="") smgr->setMagScale(StelUtils::stringToDouble(args["star_mag_scale"]));
 		else if(args["star_scale"]!="") {
 			float scale = StelUtils::stringToDouble(args["star_scale"]);
@@ -339,7 +339,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			if(args["local"][0] == 'T') {
 				// set time only (don't change day)
-				string sky_date = stapp->getLocaleMgr().get_ISO8601_time_local(stcore->getNavigation()->getJDay());
+				string sky_date = stapp->getLocaleMgr().get_ISO8601_time_local(stcore->getNavigation()->getJDay()).toStdString();
 				new_date = sky_date.substr(0,10) + args["local"];
 			} else new_date = args["local"];
 

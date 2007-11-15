@@ -19,6 +19,11 @@
 
 #include "SFont.hpp"
 #include "GLee.h"
+#include "fixx11h.h"
+#include <QFile>
+
+SFont::SFont(float size_i, const QString& ttfFileName) : typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(size_i), 72) 
+{;}
 
 void SFont::print_char_outlined(const wchar_t c) const
 {

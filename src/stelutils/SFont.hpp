@@ -33,8 +33,7 @@
 class SFont
 {
 public:
-    SFont(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) 
-    {;}
+    SFont(float size_i, const QString& ttfFileName);
     ~SFont() {;}
     
     void print(float x, float y, const string& s, int upsidedown = 1) const

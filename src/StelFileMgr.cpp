@@ -411,7 +411,7 @@ QString StelFileMgr::getScreenshotDir(void)
 #endif
 }
 
-string StelFileMgr::getLocaleDir(void)
+QString StelFileMgr::getLocaleDir(void)
 {
 	QFileInfo localePath;
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
@@ -430,7 +430,7 @@ string StelFileMgr::getLocaleDir(void)
 #endif
 	if (localePath.exists())
 	{
-		return localePath.filePath().toStdString();
+		return localePath.filePath();
 	}
 	else
 	{

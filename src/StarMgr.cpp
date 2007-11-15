@@ -25,6 +25,7 @@
 #include <config.h>
 #include <QTextStream>
 #include <QFile>
+#include <QDebug>
 
 #include "Projector.hpp"
 #include "StarMgr.hpp"
@@ -478,9 +479,8 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 		it->second->updateHipIndex(hip_index);
 	}
 
-	const string cat_hip_sp_file_name
-	  = conf.get_str("stars","cat_hip_sp_file_name","");
-	if (cat_hip_sp_file_name.empty())
+	const QString cat_hip_sp_file_name = conf.get_str("stars","cat_hip_sp_file_name","").c_str();
+	if (cat_hip_sp_file_name.isEmpty())
 	{
 		cerr << "ERROR: stars:cat_hip_sp_file_name not found" << endl;
 	}
@@ -488,20 +488,18 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 	{
 		try
 		{
-			spectral_array.initFromFile(StelApp::getInstance().getFileMgr()
-			        .findFile("stars/default/" + cat_hip_sp_file_name).c_str());
+			spectral_array.initFromFile(StelApp::getInstance().getFileMgr().qfindFile("stars/default/" + cat_hip_sp_file_name));
 		}
 		catch (exception& e)
 		{
-			cerr << "ERROR while loading data from "
+			qWarning() << "ERROR while loading data from "
 			     << ("stars/default/" + cat_hip_sp_file_name)
-		    	 << ": " << e.what() << endl;
+		    	 << ": " << e.what();
 		}
 	}
 
-	const string cat_hip_cids_file_name
-	  = conf.get_str("stars","cat_hip_cids_file_name","");
-	if (cat_hip_cids_file_name.empty())
+	const QString cat_hip_cids_file_name = conf.get_str("stars","cat_hip_cids_file_name","").c_str();
+	if (cat_hip_cids_file_name.isEmpty())
 	{
 		cerr << "ERROR: stars:cat_hip_cids_file_name not found" << endl;
 	}
@@ -510,12 +508,11 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 		try
 		{
 			component_array.initFromFile(StelApp::getInstance().getFileMgr()
-			        .findFile("stars/default/" + cat_hip_cids_file_name)
-			        .c_str());
+			        .qfindFile("stars/default/" + cat_hip_cids_file_name));
 		}
 		catch (exception& e)
 		{
-			cerr << "ERROR while loading data from "
+			qWarning() << "ERROR while loading data from "
 			     << ("stars/default/" + cat_hip_cids_file_name)
 		    	 << ": " << e.what() << endl;
 		}
