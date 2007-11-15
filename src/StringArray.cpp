@@ -21,15 +21,16 @@
 
 #include <list>
 #include <iostream>
+#include <QFile>
 
 using namespace std;
 
 namespace BigStarCatalogExtension {
 
-void StringArray::initFromFile(const char *file_name) {
+void StringArray::initFromFile(const QString& file_name) {
   clear();
   list<string> list;
-  FILE *f = fopen(file_name,"r");
+  FILE *f = fopen(QFile::encodeName(file_name).constData(),"r");
   if (f) {
     char line[256];
     while (fgets(line, sizeof(line), f)) {

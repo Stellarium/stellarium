@@ -25,6 +25,8 @@
 #include <fstream>
 #include <clocale>
 #include <cstdlib>
+#include <QFile>
+#include <QDebug>
 
 #include "StelUtils.hpp"
 #include "Translator.hpp"
@@ -32,9 +34,9 @@
 
 // Init static members
 Translator* Translator::lastUsed = NULL;
-map<string, wstring> Translator::iso639codes;
+map<QString, wstring> Translator::iso639codes;
 
-string Translator::systemLangName = "C";
+QString Translator::systemLangName = "C";
 
 // Use system locale language by default
 #if defined(MACOSX)
@@ -63,8 +65,7 @@ void Translator::initSystemLanguage(void)
 		{
 #ifdef WIN32
 			char cc[3];
-			if (GetLocaleInfo(LOCALE_USER_DEFAULT,
-			                  LOCALE_SISO639LANGNAME, cc, 3))
+			if (GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, cc, 3))
 			{
 				cc[2] = '\0';
 				systemLangName = cc;
@@ -80,9 +81,9 @@ void Translator::initSystemLanguage(void)
 	}
 
 	//change systemLangName to ISO 639 / ISO 3166.
-	string::size_type pos = systemLangName.find(':', 0);
+	string::size_type pos = systemLangName.indexOf(':', 0);
 	if (pos != string::npos) systemLangName.resize(pos+1);
-	pos = systemLangName.find('.', 0);
+	pos = systemLangName.indexOf('.', 0);
 	if (pos == 5) systemLangName.resize(pos+1);
 }
 
@@ -95,27 +96,27 @@ void Translator::reload()
 	if (langName=="system" || langName=="system_default")
 #if defined (MACOSX)	// MACOSX
 	{
-		snprintf(envstr, 25, "LANG=%s", Translator::systemLangName.c_str());
+		snprintf(envstr, 25, "LANG=%s", Translator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		snprintf(envstr, 25, "LANG=%s", langName.c_str());
+		snprintf(envstr, 25, "LANG=%s", langName.toUtf8().constData());
 	}
 #elif defined (_MSC_VER) //MSCVER
 	{
-		_snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+		_snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		_snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+		_snprintf(envstr, 25, "LANGUAGE=%s", langName.toUtf8().constData());
 	}
 #else // UNIX
 	{
-		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.toUtf8().constData());
 	}
 	else
 	{
-		snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+		snprintf(envstr, 25, "LANGUAGE=%s", langName.toUtf8().constData());
 	}
 #endif
 
@@ -132,40 +133,40 @@ void Translator::reload()
 	assert(domain=="stellarium");
 	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
 	assert(result=="UTF-8");
-	bindtextdomain (domain.c_str(), moDirectory.c_str());
+	bindtextdomain (domain.c_str(), QFile::encodeName(moDirectory).constData());
 	textdomain (domain.c_str());
 	Translator::lastUsed = this;
 }
 
 
 //! Convert from ISO639-1 2 letters langage code to native language name
-std::wstring Translator::iso639_1LanguageCodeToNativeName(const string& languageCode)
+std::wstring Translator::iso639_1LanguageCodeToNativeName(const QString& languageCode)
 {
 	if (iso639codes.find(languageCode)!=iso639codes.end())
 		return iso639codes[languageCode];
 	else
-		return StelUtils::stringToWstring(languageCode);
+		return languageCode.toStdWString();
 }
 	
 //! Convert from native language name to ISO639-1 2 letters langage code 
-std::string Translator::nativeLanguageNameCodeToIso639_1(const wstring& languageName)
+QString Translator::nativeLanguageNameCodeToIso639_1(const wstring& languageName)
 {
-	std::map<string, wstring>::iterator iter;
+	std::map<QString, wstring>::iterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
 	{
 		if ((*iter).second == languageName)
 			return (*iter).first;
 	}
-	return StelUtils::wstringToString(languageName);
+	return QString::fromStdWString(languageName);
 }
 
 //! Get available language codes from directory tree
-std::wstring Translator::getAvailableLanguagesNamesNative(const string& localeDir)
+std::wstring Translator::getAvailableLanguagesNamesNative(const QString& localeDir)
 {
-	std::vector<string> codeList = getAvailableLanguagesIso639_1Codes(localeDir);
+	std::vector<QString> codeList = getAvailableLanguagesIso639_1Codes(localeDir);
 	
 	wstring output;
-	std::vector<string>::iterator iter;
+	std::vector<QString>::iterator iter;
 	for (iter=codeList.begin();iter!=codeList.end();++iter)
 	{
 		if (iter!=codeList.begin()) output+=L"\n";
@@ -175,25 +176,25 @@ std::wstring Translator::getAvailableLanguagesNamesNative(const string& localeDi
 }
 
 //! Get available language codes from directory tree
-std::vector<string> Translator::getAvailableLanguagesIso639_1Codes(const string& localeDir)
+std::vector<QString> Translator::getAvailableLanguagesIso639_1Codes(const QString& localeDir)
 {
 	struct dirent *entryp;
 	DIR *dp;
-	std::vector<string> result;
+	std::vector<QString> result;
 	
 	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
-	if ((dp = opendir(localeDir.c_str())) == NULL)
+	if ((dp = opendir(QFile::encodeName(localeDir).constData())) == NULL)
 	{
-		cerr << "Unable to find locale directory containing translations:" << localeDir << endl;
+		cerr << "Unable to find locale directory containing translations:" << qPrintable(localeDir) << endl;
 		return result;
 	}
 
 	while ((entryp = readdir(dp)) != NULL)
 	{
-		string tmp = entryp->d_name;
-		string tmpdir = localeDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
-		FILE* fic = fopen(tmpdir.c_str(), "r");
+		QString tmp = entryp->d_name;
+		QString tmpdir = localeDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
+		FILE* fic = fopen(QFile::encodeName(tmpdir).constData(), "r");
 		if (fic)
 		{
 			result.push_back(tmp);
@@ -210,12 +211,12 @@ std::vector<string> Translator::getAvailableLanguagesIso639_1Codes(const string&
 
 //! Initialize the languages code list from the passed file
 //! @param fileName file containing the list of language codes
-void Translator::initIso639_1LanguageCodes(const string& fileName)
+void Translator::initIso639_1LanguageCodes(const QString& fileName)
 {
-	std::ifstream inf(fileName.c_str());
+	std::ifstream inf(QFile::encodeName(fileName).constData());
 	if (!inf.is_open())
 	{
-		cerr << "Can't open ISO639 codes file " << fileName << endl;
+		qWarning() << "Can't open ISO639 codes file " << fileName << endl;
 		assert(0);
 	}
 	
@@ -229,11 +230,11 @@ void Translator::initIso639_1LanguageCodes(const string& fileName)
 		string::size_type pos;
 		if ((pos = record.find('\t', 4))==string::npos)
 		{
-			cerr << "Error: invalid entry in ISO639 codes: " << fileName << endl;
+			qWarning() << "Error: invalid entry in ISO639 codes: " << fileName;
 		}
 		else
 		{
-			iso639codes.insert(pair<string, wstring>(record.substr(0, 2), StelUtils::stringToWstring(record.substr(pos+1))));
+			iso639codes.insert(pair<QString, wstring>(record.substr(0, 2).c_str(), StelUtils::stringToWstring(record.substr(pos+1))));
 		}
 	}
 }

@@ -50,13 +50,13 @@ public:
 	//! Get the application language currently used for GUI etc.
 	//! This function has no permanent effect on the global locale.
 	//! @return the abbreviated name of the language (e.g "fr").
-	string getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
+	QString getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
 	
 	//! Set the application language. 
 	//! This applies to GUI etc. This function has no permanent effect on the 
 	//! global locale.
 	//! @param newAppLocaleName the abbreviated name of the language (e.g fr).
-	void setAppLanguage(const string& newAppLangName);
+	void setAppLanguage(const QString& newAppLangName);
 	
 	//! Get the Translator object currently used for global application.
 	Translator& getAppTranslator() const;
@@ -64,13 +64,13 @@ public:
 	//! Get the language currently used for sky objects.
 	//! This function has no permanent effect on the global locale.
 	//! @return the name of the language (e.g fr).
-	string getSkyLanguage() const;
+	QString getSkyLanguage() const;
 	
 	//! Set the sky language and reload the sky object names with the new 
 	//! translation.  This function has no permanent effect on the global locale.
 	//! @param newSkyLangName The abbreviated name of the locale (e.g fr) to use 
 	//! for sky object labels.
-	void setSkyLanguage(const string& newSkyLangName);
+	void setSkyLanguage(const QString& newSkyLangName);
 	
 	//! Get a reference to the Translator object currently used for sky objects.
 	Translator& getSkyTranslator();
@@ -149,7 +149,7 @@ public:
 	
 	//! Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 	//! @param JD the time and date expressed as a Julian date value.
-	string get_ISO8601_time_local(double JD) const;
+	QString get_ISO8601_time_local(double JD) const;
 private:
 	// The translator used for astronomical object naming
 	Translator skyTranslator;

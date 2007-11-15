@@ -146,7 +146,7 @@ public:
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
-	string getLocaleDir(void);
+	QString getLocaleDir(void);
 
 private:
 	//! Convenience function to find the basename of a given path

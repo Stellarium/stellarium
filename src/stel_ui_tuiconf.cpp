@@ -369,7 +369,7 @@ void StelUI::localizeTui(void)
 {
 	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	
-	cout << "Localizing TUI for locale: " << app->getLocaleMgr().getAppLanguage() << endl;
+	cout << "Localizing TUI for locale: " << qPrintable(app->getLocaleMgr().getAppLanguage()) << endl;
 
 	if(!tui_root) return;  // not initialized yet
 
@@ -583,7 +583,7 @@ void StelUI::tui_update_widgets(void)
 
 	// 3. general
 	tui_general_sky_culture->setValue(app->getSkyCultureMgr().getSkyCultureDir().toStdWString());
-	tui_general_sky_locale->setValue(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
+	tui_general_sky_locale->setValue(app->getLocaleMgr().getSkyLanguage().toStdWString());
 
 	// 4. Stars
 	tui_stars_show->setValue(smgr->getFlagStars());
@@ -638,7 +638,7 @@ void StelUI::tui_update_widgets(void)
 	}
 
 	// 8. admin
-	tui_admin_setlocale->setValue( StelUtils::stringToWstring(app->getLocaleMgr().getAppLanguage()) );
+	tui_admin_setlocale->setValue(app->getLocaleMgr().getAppLanguage().toStdWString());
 
 }
 
@@ -785,7 +785,7 @@ void StelUI::tui_cb_scripts_local() {
 // change UI locale
 void StelUI::tui_cb_admin_set_locale() {
 
-	app->getLocaleMgr().setAppLanguage(StelUtils::wstringToString(tui_admin_setlocale->getCurrent()));
+	app->getLocaleMgr().setAppLanguage(QString::fromStdWString(tui_admin_setlocale->getCurrent()));
 }
 
 
@@ -981,8 +981,8 @@ void StelUI::saveCurrentConfig(const QString& confFile)
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", skyCultureMgr->getSkyCultureDir());
-	conf.set_str    ("localization:sky_locale", localeMgr->getSkyLanguage().c_str());
-	conf.set_str    ("localization:app_locale", localeMgr->getAppLanguage().c_str());
+	conf.set_str    ("localization:sky_locale", localeMgr->getSkyLanguage());
+	conf.set_str    ("localization:app_locale", localeMgr->getAppLanguage());
 	conf.set_str	("localization:time_display_format", localeMgr->get_time_format_str().c_str());
 	conf.set_str	("localization:date_display_format", localeMgr->get_date_format_str().c_str());
 	if (localeMgr->get_tz_format() == StelLocaleMgr::S_TZ_CUSTOM)

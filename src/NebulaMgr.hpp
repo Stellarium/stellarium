@@ -177,7 +177,7 @@ private:
 	//! own nebula_textures.fab file and corresponding image files.
 	//! This function loads a set of textures.
 	//! @param setName a string which corresponds to the directory where the set resides
-	void loadNebulaSet(const string& setName, LoadingBar& lb);
+	void loadNebulaSet(const QString& setName, LoadingBar& lb);
 	
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
@@ -187,13 +187,13 @@ private:
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);
 	Nebula *searchIC(unsigned int IC);
-	bool loadNGC(const string& fileName, LoadingBar& lb);
-	bool loadNGCNames(const string& fileName);
+	bool loadNGC(const QString& fileName, LoadingBar& lb);
+	bool loadNGCNames(const QString& fileName);
 	
 	//! loads the textures for a specified nebula texture setName
 	//! @param setName The name of the sub-directory in .../nebulae in which the set resides
 	//! @param lb the loading progress bar object
-	bool loadTextures(const string& setName, LoadingBar& lb);
+	bool loadTextures(const QString& setName, LoadingBar& lb);
 
 	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;

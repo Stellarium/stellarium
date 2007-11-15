@@ -20,7 +20,7 @@
 #define STELFONTMGR_H
 
 #include <map>
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -33,19 +33,18 @@ class SFont;
 class StelFontMgr
 {
 public:
-	StelFontMgr(const string& fontMapFile);
-
+	StelFontMgr(const QString& fontMapFile);
 	~StelFontMgr();
 	
 	//! Get the standard font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param size the font size in pixels.
-	SFont& getStandardFont(const string &langageName, double size=12.);
+	SFont& getStandardFont(const QString& langageName, double size=12.);
 	
 	//! Get the fixed font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param size the font size in pixels.
-	SFont& getFixedFont(const string &langageName, double size=12.);
+	SFont& getFixedFont(const QString& langageName, double size=12.);
 	
 private:
 	//! @class FontForLanguage
@@ -53,10 +52,10 @@ private:
 	class FontForLanguage
 	{
 		public:
-			string langageName;
-			string fontFileName;
+			QString langageName;
+			QString fontFileName;
 			double fontScale;
-			string fixedFontFileName;
+			QString fixedFontFileName;
 			double fixedFontScale;
 			bool operator == (const FontForLanguage& f) const;
 	};	
@@ -66,8 +65,8 @@ private:
 	class LoadedFont
 	{
 		public:
-			LoadedFont(string fileName, int size);
-			string fileName;
+			LoadedFont(const QString& fileName, int size);
+			QString fileName;
 			int size;	// floating point scale * 10
 	};
 	
@@ -82,13 +81,13 @@ private:
 	};	
 	
 	//! Get the structure describing the fonts and scales to use for a given language.
-	FontForLanguage& getFontForLanguage(const string& langageName);	
+	FontForLanguage& getFontForLanguage(const QString& langageName);	
 	
 	//! Load the associations between languages and font file/scaling.
-	void loadFontForLanguage(const string& fontMapFile);
+	void loadFontForLanguage(const QString& fontMapFile);
 	
 	//! Contains a mapping of font/langage
-	std::map<string, FontForLanguage> fontMapping;
+	std::map<QString, FontForLanguage> fontMapping;
 	
 	//! Keeps references on all loaded fonts
 	std::map<LoadedFont, SFont*, ltLoadedFont> loadedFonts;
