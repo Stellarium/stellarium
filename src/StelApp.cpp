@@ -325,7 +325,7 @@ void StelApp::init()
 	ScriptMgr* scripts = new ScriptMgr(commander);
 	scripts->init(conf, lb);
 	getModuleMgr().registerModule(scripts);
-	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", ""));
+	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init(conf, lb);
 	getModuleMgr().registerModule(script_images);	

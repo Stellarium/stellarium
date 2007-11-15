@@ -21,8 +21,8 @@
 #define STELTEXTUREMGR_H_
 
 #include <config.h>
-#include <string>
-#include <map>
+
+#include <QMap>
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
@@ -99,19 +99,19 @@ public:
 	//! Load the data from the image and store it into tex.texels
 	//! The caller is responsible for freeing the memory allocated in tex.texels
 	//! This method must be thread compliant
-	virtual bool loadImage(const std::string& filename, ManagedSTexture& tex) = 0;
+	virtual bool loadImage(const QString& filename, ManagedSTexture& tex) = 0;
 };
 
 //! Describe queued textures loaded in thread.
 struct QueuedTex
 {
-	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const std::string& aurl, class QFile* afile) :
+	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const QString& aurl, class QFile* afile) :
 		tex(atex), userPtr(auserPtr), url(aurl), file(afile) {;}
 
 	~QueuedTex();
 	ManagedSTextureSP tex;
 	void* userPtr;
-	std::string url;
+	QString url;
 	class QFile* file;
 };
 
@@ -138,8 +138,7 @@ public:
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param lazyLoading if true the texture will be loaded only when it used for the first time
-	ManagedSTextureSP createTexture(const std::string& filename, bool lazyLoading=false);
-	ManagedSTextureSP qcreateTexture(const QString& filename, bool lazyLoading=false);
+	ManagedSTextureSP createTexture(const QString& filename, bool lazyLoading=false);
 	
 	//! Load an image from a file and create a new texture from it in a new thread. The created texture is inserted in
 	//! the passed queue, protected by the given mutex.
@@ -149,9 +148,9 @@ public:
 	//! @param queue the queue where the texture will be inserted once downloaded
 	//! @param queueMutex the mutex protecting the queue
 	//! @param cookiesFile path to a file containing cookies to use for authenticated download
-	bool createTextureThread(const std::string& url, std::vector<QueuedTex*>* queue, 
-		QMutex* queueMutex, void* userPtr=NULL, const std::string& fileExtension="", 
-		const std::string& cookiesFile="");
+	bool createTextureThread(const QString& url, std::vector<QueuedTex*>* queue, 
+		QMutex* queueMutex, void* userPtr=NULL, const QString& fileExtension="", 
+		const QString& cookiesFile="");
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -180,7 +179,7 @@ public:
 	void setDynamicRangeMode(ManagedSTexture::DynamicRangeMode dMode = ManagedSTexture::LINEAR) {dynamicRangeMode = dMode;}
 	
 	//! Register a new image loader for a given image file extension
-	void registerImageLoader(const std::string& fileExtension, ImageLoader* loader)
+	void registerImageLoader(const QString& fileExtension, ImageLoader* loader)
 	{
 		imageLoaders[fileExtension] = loader;
 	}
@@ -188,7 +187,7 @@ private:
 	friend class ManagedSTexture;
 
 	//! Internal
-	ManagedSTextureSP initTex(const std::string& fullPath);
+	ManagedSTextureSP initTex(const QString& fullPath);
 
 	//! Load the image memory. If we use threaded loading, the texture will
 	//! be uploaded to openGL memory at the next update() call.
@@ -202,7 +201,7 @@ private:
 	bool reScale(ManagedSTexture* tex);
 
 	//! List of image loaders providing image loading for the given files extensions
-	std::map<std::string, ImageLoader*> imageLoaders;
+	QMap<QString, ImageLoader*> imageLoaders;
 	
 	bool mipmapsMode;
 	GLint wrapMode;
@@ -227,14 +226,14 @@ private:
 	//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
 	class PngLoader : public ImageLoader
 	{
-		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
+		virtual bool loadImage(const QString& filename, ManagedSTexture& texinfo);
 	};
 	static PngLoader pngLoader;
 	
 	//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
 	class JpgLoader : public ImageLoader
 	{
-		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
+		virtual bool loadImage(const QString& filename, ManagedSTexture& texinfo);
 	};
 	static JpgLoader jpgLoader;
 };

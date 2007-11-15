@@ -62,7 +62,6 @@ public:
 	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	string findFile(const string& path, const FLAGS& flags=(FLAGS)0);
 	QString qfindFile(const QString& path, const FLAGS& flags=(FLAGS)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
@@ -114,7 +113,7 @@ public:
 	//! Convenience function to find the parent directory of a given path
 	//! May return relative paths if the parameter is a relative path
 	//! @param path the path whose parent directory is to be returned
-	string dirName(const string& path);
+	QString dirName(const QString& path);
 	
 	//! Get the user's Desktop directory
 	//! This is a portable way to retrieve the directory for the user's desktop.

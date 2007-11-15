@@ -45,6 +45,7 @@
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
 #include <QTextStream>
+#include <QFile>
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -152,7 +153,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	try
 	{
-		tui_time_settmz = new s_tui::Time_zone_item(app->getFileMgr().findFile("data/zone.tab"), wstring(L"2.2 "));
+		tui_time_settmz = new s_tui::Time_zone_item(QFile::encodeName(app->getFileMgr().qfindFile("data/zone.tab")).constData(), wstring(L"2.2 "));
 	}
 	catch(exception &e)
 	{
@@ -514,10 +515,10 @@ int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 			{
 				try
 				{
-					string theParent = app->getFileMgr().findFile("scripts/" + SelectedScript);
+					QString theParent = app->getFileMgr().qfindFile(QString("scripts/") + SelectedScript.c_str());
 					theParent = app->getFileMgr().dirName(theParent);
 					cmd = "script action play filename \"" + SelectedScript 
-						+ "\" path \"" + theParent + "/\"";
+						+ "\" path \"" + QFile::encodeName(theParent).constData() + "/\"";
 				}
 				catch(exception& e)
 				{
@@ -683,7 +684,7 @@ void StelUI::tui_cb_admin_save_default(void)
 
 	try
 	{
-		system( (app->getFileMgr().findFile("data/script_save_config ") ).c_str() );
+		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_save_config ")).constData());
 	}
 	catch(exception& e)
 	{
@@ -696,7 +697,7 @@ void StelUI::tui_cb_admin_updateme(void)
 {
 	try
 	{
-		system( ( app->getFileMgr().findFile("data/script_internet_update" )).c_str() );
+		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_internet_update ")).constData());
 	}
 	catch(exception& e)
 	{
@@ -710,7 +711,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 {
 	try
 	{
-		system( ( app->getFileMgr().findFile("data/script_shutdown" )).c_str() );
+		system( QFile::encodeName(app->getFileMgr().qfindFile("data/script_shutdown ")).constData());
 	}
 	catch(exception& e)
 	{
@@ -757,7 +758,7 @@ void StelUI::tui_cb_scripts_removeable() {
   } else {
   		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	  SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
-	  SelectedScriptDirectory = scripts->get_removable_media_path();
+	  SelectedScriptDirectory = scripts->get_removable_media_path().toStdString();
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
   } 

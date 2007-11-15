@@ -25,7 +25,6 @@
 
 #include <string>
 
-using std::string;
 using std::wstring;
 
 class SFont;
@@ -56,7 +55,7 @@ public:
 	//! @param extraTextSize the size of the font used for the exta text
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
-	LoadingBar(Projector* prj, float font_size, const string&  splash_tex, 
+	LoadingBar(Projector* prj, float font_size, const QString&  splash_tex, 
 		int screenw, int screenh, const wstring& extraTextString=L"", float extraTextSize = 30.f, 
 		float extraTextPosx = 0.f, float extraTextPosy = 0.f);
 	virtual ~LoadingBar();

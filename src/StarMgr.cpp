@@ -440,12 +440,10 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 	{
 		char key_name[64];
 		sprintf(key_name,"cat_file_name_%02d",i);
-		const string cat_file_name = conf.get_str("stars",key_name,"");
-		if (!cat_file_name.empty()) {
-			lb.SetMessage(_("Loading catalog ")
-			              + StelUtils::stringToWstring(cat_file_name));
-			ZoneArray *const z
-			   = ZoneArray::create(*this,cat_file_name,lb);
+		const QString cat_file_name = conf.get_str("stars",key_name,"").c_str();
+		if (!cat_file_name.isEmpty()) {
+			lb.SetMessage(_("Loading catalog ") + cat_file_name.toStdWString());
+			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
 			if (z)
 			{
 				if (max_geodesic_grid_level < z->level)
@@ -455,7 +453,7 @@ void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
 				ZoneArray *&pos(zone_arrays[z->level]);
 				if (pos)
 				{
-					cerr << cat_file_name << ", " << z->level
+					cerr << qPrintable(cat_file_name) << ", " << z->level
 						 << ": duplicate level" << endl;
 					delete z;
 				}

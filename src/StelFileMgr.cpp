@@ -55,11 +55,6 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-string StelFileMgr::findFile(const string& path, const FLAGS& flags)
-{
-	return QFile::encodeName(qfindFile(QFile::decodeName(path.c_str()), flags)).data();
-}
-
 QString StelFileMgr::qfindFile(const QString& path, const FLAGS& flags)
 {
 	// explicitly specified relative paths
@@ -175,9 +170,9 @@ bool StelFileMgr::mkDir(const string& path)
 	return QDir("/").mkpath(QString::fromUtf8(path.c_str()));
 }
 
-string StelFileMgr::dirName(const string& path)
+QString StelFileMgr::dirName(const QString& path)
 {
-	return QFileInfo(QString::fromUtf8(path.c_str())).dir().canonicalPath().toStdString();
+	return QFileInfo(path).dir().canonicalPath();
 }
 
 QString StelFileMgr::baseName(const QString& path)

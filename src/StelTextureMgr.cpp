@@ -43,7 +43,8 @@ extern "C" {
 #include <QDir>
 #include <QThread>
 #include <QMutexLocker>
-
+#include <QDebug>
+				 
 using namespace std;
 
 // Initialize statics
@@ -54,7 +55,7 @@ void ManagedSTexture::load(void)
 {
 	if (StelApp::getInstance().getTextureManager().loadImage(this)==false || StelApp::getInstance().getTextureManager().glLoadTexture(this)==false)
 	{
-		cerr << "Couldn't load texture " << this->fullPath << endl;
+		qWarning() << "Couldn't load texture " << this->fullPath;
 		loadState = ManagedSTexture::LOAD_ERROR;
 		return;
 	}
@@ -152,7 +153,7 @@ void StelTextureMgr::setDefaultParams()
 /*************************************************************************
  Internal
 *************************************************************************/
-ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
+ManagedSTextureSP StelTextureMgr::initTex(const QString& fullPath)
 {
 	ManagedSTextureSP tex(new ManagedSTexture());
 	// Set parameters than can be set for this texture
@@ -166,32 +167,27 @@ ManagedSTextureSP StelTextureMgr::initTex(const string& fullPath)
 	return tex;
 }
 
-ManagedSTextureSP StelTextureMgr::qcreateTexture(const QString& filename, bool lazyLoading)
-{
-	return createTexture(filename.toUtf8().constData(), lazyLoading);
-}
-
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
-ManagedSTextureSP StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
+ManagedSTextureSP StelTextureMgr::createTexture(const QString& afilename, bool lazyLoading)
 {
-	if (afilename.empty())
+	if (afilename.isEmpty())
 		return ManagedSTextureSP();
-	string ph;
+	QString ph;
 	try
 	{
-		ph = StelApp::getInstance().getFileMgr().findFile(afilename);
+		ph = StelApp::getInstance().getFileMgr().qfindFile(afilename);
 	}
 	catch (exception e)
 	{
 		try
 		{
-			ph = StelApp::getInstance().getFileMgr().findFile("textures/" + afilename);
+			ph = StelApp::getInstance().getFileMgr().qfindFile("textures/" + afilename);
 		}
 		catch (exception e)
 		{
-			cerr << "WARNING : Can't find texture file " << afilename << ": " << e.what() << endl;
+			qWarning() << "WARNING : Can't find texture file " << afilename << ": " << e.what() << endl;
 			return ManagedSTextureSP();
 		}
 	}
@@ -223,14 +219,14 @@ struct LoadQueueParam
 	QThread* thread;
 	ManagedSTextureSP tex;
 	bool toDownload;
-	std::string fileExtension;
+	QString fileExtension;
 	
 	// Those 2 are used to return the final texture
 	std::vector<QueuedTex*>* outQueue;
 	QMutex* outQueueMutex;
-	std::string url;
-	std::string localPath;
-	std::string cookiesFile;
+	QString url;
+	QString localPath;
+	QString cookiesFile;
 	void* userPtr;
 	
 	QFile* file;
@@ -255,8 +251,8 @@ public:
 	{
 		if (param->toDownload)
 		{
-			cout << "Downloading image " << param->url << " to " << param->localPath << endl;
-			StelUtils::downloadFile(param->url, param->localPath, StelApp::getApplicationName().toStdString(), param->cookiesFile);
+			cout << "Downloading image " << qPrintable(param->url) << " to " << qPrintable(param->localPath) << endl;
+			StelUtils::downloadFile(param->url, param->localPath, StelApp::getApplicationName(), param->cookiesFile);
 			param->tex->fullPath = param->localPath;
 		}
 		
@@ -282,12 +278,12 @@ private:
  The created texture is inserted in the passed queue, protected by the given mutex.
  If the texture creation fails for any reasons, its loadState will be set to LOAD_ERROR
 *************************************************************************/
-bool StelTextureMgr::createTextureThread(const std::string& url, 
+bool StelTextureMgr::createTextureThread(const QString& url, 
 	std::vector<QueuedTex*>* outQueue, QMutex* outQueueMutex, void* userPtr, 
-	const std::string& fileExtension, const std::string& cookiesFile)
+	const QString& fileExtension, const QString& cookiesFile)
 {
 	bool toDownload = false;
-	string filename = url;
+	QString filename = url;
 		
 	if (!StelFileMgr::exists(filename))
 	{
@@ -299,7 +295,7 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 		}
 		else
 		{
-			cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
+			qWarning() << "WARNING : Can't find texture file " << filename << "!";
 			return ManagedSTextureSP();
 		}
 	}
@@ -326,17 +322,17 @@ bool StelTextureMgr::createTextureThread(const std::string& url,
 	// Create a temporary file name
 	if (toDownload)
 	{
-		QTemporaryFile* fic = new QTemporaryFile(QDir::tempPath() + "XXXXXX" + QString(tparam->fileExtension.c_str()));
+		QTemporaryFile* fic = new QTemporaryFile(QDir::tempPath() + "XXXXXX" + tparam->fileExtension);
 		if (!fic->open())
 		{
 			cerr << "WARNING in loadTextureThread::operator()(): can't create temp file." << endl;
 		}
 		tparam->file = fic;
-		tparam->localPath = tparam->file->fileName().toStdString();
+		tparam->localPath = tparam->file->fileName();
 	}
 	else
 	{
-		tparam->file = new QFile(tparam->localPath.c_str());
+		tparam->file = new QFile(tparam->localPath);
 	}
 		
 	// Create and run the thread
@@ -409,7 +405,7 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 					return true;
 				}
 				// Unsupported format..
-				cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+				qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 				return false;
 			}
 			case (ManagedSTexture::MINMAX_QUANTILE):
@@ -434,7 +430,7 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				else
 				{
 					// Unsupported format..
-					cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+					qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 					return false;
 				}
 				
@@ -497,14 +493,14 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 				else
 				{
 					// Unsupported format..
-					cerr << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath << endl;
+					qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 					return false;
 				}
 			}
 			break;
 			default:
 				// Unsupported dynamic range mode..
-				cerr << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded."<< endl;
+				qWarning() << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded.";
 				return false;
 		}
 		return true;
@@ -521,26 +517,26 @@ bool StelTextureMgr::reScale(ManagedSTexture* tex)
 *************************************************************************/
 bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 {
-	const string extension = tex->fullPath.substr((tex->fullPath.find_last_of('.', tex->fullPath.size()))+1);\
-	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
+	const QString extension = QFileInfo(tex->fullPath).suffix();
+	QMap<QString, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
 	if (loadFuncIter==imageLoaders.end())
 	{
-		cerr << "Unsupported image file extension: " << extension << " for file: " << tex->fullPath << endl;
+		qWarning() << "Unsupported image file extension: " << extension << " for file: " << tex->fullPath;
 		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
 		return false;
 	}
 
 	// Load the image
-	if (!loadFuncIter->second->loadImage(tex->fullPath, *tex))
+	if (!loadFuncIter.value()->loadImage(tex->fullPath, *tex))
 	{
-		cerr << "Image loading failed for file: " << tex->fullPath << endl;
+		qWarning() << "Image loading failed for file: " << tex->fullPath;
 		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
 		return false;
 	}
 
 	if (!tex->texels)
 	{
-		cerr << "Image loading failed for file: " << tex->fullPath << endl;
+		qWarning() << "Image loading failed for file: " << tex->fullPath;
 		tex->loadState = ManagedSTexture::LOAD_ERROR;	// texture can't be loaded
 		return false;
 	}
@@ -610,7 +606,7 @@ bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 	// Check that the image size is compatible with the hardware 
 	if (tex->width>maxTextureSize)
 	{
-		cerr << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
+		qWarning() << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported.";
 	}
 	
 	// The glLoading will be done later in the main thread
@@ -676,7 +672,7 @@ bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *************************************************************************/
-bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTexture& texinfo)
+bool StelTextureMgr::PngLoader::loadImage(const QString& filename, ManagedSTexture& texinfo)
 {
 	png_byte magic[8];
 	png_structp png_ptr;
@@ -687,10 +683,10 @@ bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTextur
 	int i;
 
 	/* open image file */
-	fp = fopen (filename.c_str(), "rb");
+	fp = fopen (QFile::encodeName(filename).constData(), "rb");
 	if (!fp)
 	{
-		cerr << "error: couldn't open \""<< filename << "\"!\n";
+		qWarning() << "error: couldn't open \""<< filename << "\"!\n";
 		return false;
 	}
 
@@ -700,7 +696,7 @@ bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTextur
 	/* check for valid magic number */
 	if (!png_check_sig (magic, sizeof (magic)))
 	{
-		cerr << "error: \"" << filename << "\" is not a valid PNG image!\n";
+		qWarning() << "error: \"" << filename << "\" is not a valid PNG image!";
 		fclose (fp);
 		return false;
 	}
@@ -899,17 +895,17 @@ void err_exit(j_common_ptr cinfo)
 }
 
 
-bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTexture& texinfo)
+bool StelTextureMgr::JpgLoader::loadImage(const QString& filename, ManagedSTexture& texinfo)
 {
 	FILE *fp = NULL;
 	struct jpeg_decompress_struct cinfo;
 	struct my_error_mgr jerr;
 
 	/* open image file */
-	fp = fopen (filename.c_str(), "rb");
+	fp = fopen(QFile::encodeName(filename).constData(), "rb");
 	if (!fp)
 	{
-		cerr << "Error: couldn't open \"" << filename << "\"!\n";
+		qWarning() << "Error: couldn't open \"" << filename << "\"!\n";
 		return false;
 	}
 
@@ -924,7 +920,7 @@ bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTextur
 	
 	if (setjmp(jerr.setjmp_buffer))
 	{
-		cerr << "Error: couldn't read jpeg file \"" << filename << "\"!\n";
+		qWarning() << "Error: couldn't read jpeg file \"" << filename << "\"!";
 		jpeg_destroy_decompress(&cinfo);
 		if (texinfo.texels)
 		{

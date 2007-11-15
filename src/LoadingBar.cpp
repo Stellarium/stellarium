@@ -24,7 +24,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 
-LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
+LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
@@ -37,7 +37,8 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (!splash_tex.empty()) splash = StelApp::getInstance().getTextureManager().createTexture(splash_tex);
+	if (!splash_tex.isEmpty())
+		splash = StelApp::getInstance().getTextureManager().createTexture(splash_tex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 	timeCounter = StelApp::getInstance().getTotalRunTime();
 }

@@ -19,7 +19,7 @@
 
 #include <iostream>
 #include "script.h"
-
+#include <QFile>
 
 Script::Script()
 {
@@ -33,13 +33,13 @@ Script::~Script()
 		delete input_file;  // closes automatically
 }
 
-int Script::load(string script_file, string script_path)
+int Script::load(QString script_file, QString script_path)
 {
-	input_file = new ifstream(script_file.c_str());
+	input_file = new ifstream(QFile::encodeName(script_file).constData());
 
 	if (! input_file->is_open())
 	{
-		cout << "Unable to open script " << script_file << endl;
+		cout << "Unable to open script " << qPrintable(script_file) << endl;
 		return 0;
 	}
 	path = script_path;
