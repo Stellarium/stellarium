@@ -134,6 +134,15 @@ QString StelApp::getViewPortDistorterType() const
 void StelApp::init()
 {
 	stelFileMgr = new StelFileMgr();
+	// Load language codes
+	try
+	{
+		Translator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
+	}
+	catch (exception& e)
+	{
+		cerr << "ERROR while loading translations: " << e.what() << endl;
+	}
 	
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
@@ -181,18 +190,6 @@ void StelApp::init()
 	core = new StelCore();
 	time_multiplier = 1;
 	distorter = 0;
-	
-	Translator::initSystemLanguage();
-
-	// Load language codes
-	try
-	{
-		Translator::initIso639_1LanguageCodes(stelFileMgr->findFile("data/iso639-1.utf8"));
-	}
-	catch (exception& e)
-	{
-		cerr << "ERROR while loading translations: " << e.what() << endl;
-	}
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
