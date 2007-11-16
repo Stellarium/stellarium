@@ -102,7 +102,7 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	QString str;
 	QTextStream oss(&str);
 
-	oss << q_(englishName);  // UI translation can differ from sky translation
+	oss << q_(englishName.c_str());  // UI translation can differ from sky translation
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphere_scale != 1.f)
@@ -151,7 +151,7 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 	QString str;
 	QTextStream oss(&str);
 
-	oss << q_(englishName);  // UI translation can differ from sky translation
+	oss << q_(englishName.c_str());  // UI translation can differ from sky translation
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);

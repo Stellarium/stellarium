@@ -62,64 +62,57 @@ public:
 	//! Translate input message.
 	//! @param s input string in english.
 	//! @return The translated string in wide characters.
+	//! @deprecated Use qtranslate instead
 	std::wstring translate(const std::string& s)
 	{
 		if (s.empty()) return L"";
-		return StelUtils::stringToWstring(translateUTF8(s));
+		reload();
+		return StelUtils::stringToWstring(gettext(s.c_str()));
 	}
 	
 	//! Translate input message and return it as a QString.
 	//! @param s input string in english.
 	//! @return The translated QString
-	QString qtranslate(const std::string& s)
+	QString qtranslate(const QString& s)
 	{
-		if (s.empty()) return QString();
+		if (s.isEmpty()) return QString();
 		reload();
-		return QString::fromUtf8(gettext(s.c_str()));
+		return QString::fromUtf8(gettext(s.toUtf8().constData()));
 	}
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
 	const QString& getTrueLocaleName(void) const
 	{
-		if (langName=="system" || langName=="system_default") {
+		if (langName=="system" || langName=="system_default")
 			return Translator::systemLangName;
-		} else {
+		else
 			return langName;
-		}
 	}
 
 	//! Used as a global translator by the whole app
 	static Translator globalTranslator;
 
 	//! Get available language name in native language from passed locales directory
-	static std::wstring getAvailableLanguagesNamesNative(const QString& localeDir);	
-	
-	//! Get available language codes from passed locales directory
-	static std::vector<QString> getAvailableLanguagesIso639_1Codes(const QString& localeDir);
+	static QString getAvailableLanguagesNamesNative(const QString& localeDir);	
 
 	//! Convert from ISO639-1 2 letters langage code to native language name
-	static std::wstring iso639_1LanguageCodeToNativeName(const QString& languageCode);
+	static QString iso639_1CodeToNativeName(const QString& languageCode);
 	
 	//! Convert from native language name to ISO639-1 2 letters langage code 
-	static QString nativeLanguageNameCodeToIso639_1(const wstring& languageName);
+	static QString nativeNameToIso639_1Code(const QString& languageName);
 	
-	//! Try to determine system language from system configuration
-	static void initSystemLanguage(void);
-
+	//! Initialize Translation
+	//! @param fileName file containing the list of language codes
+	static void init(const QString& fileName);
+	
+private:
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
 	static void initIso639_1LanguageCodes(const QString& fileName);
 	
-private:
-	//! Translate input message.
-	//! @param s input string in english.
-	//! @return The translated string in UTF-8 characters.
-	std::string translateUTF8(const std::string& s)
-	{
-		reload();
-		return gettext(s.c_str());
-	}
+	//! Get available language codes from passed locales directory
+	static QStringList getAvailableIso639_1Codes(const QString& localeDir);
 	
 	//! Reload the current locale info so that gettext use them
 	void reload();
@@ -136,11 +129,14 @@ private:
 	//! Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call
 	static Translator* lastUsed;
 
+	//! Try to determine system language from system configuration
+	static void initSystemLanguage(void);
+	
 	//! Store the system default language name as taken from LANGUAGE environement variable
 	static QString systemLangName;
 	
 	//! Contains the list of all iso639 languages codes
-	static QMap<QString, wstring> iso639codes;
+	static QMap<QString, QString> iso639codes;
 };
 
 #endif
