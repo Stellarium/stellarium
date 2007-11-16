@@ -819,10 +819,10 @@ wstring SolarSystem::getPlanetHashString(void)
 	{
 		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun")
 		{
-			oss << q_((*iter)->get_parent()->getEnglishName()) << " : ";
+			oss << q_((*iter)->get_parent()->getEnglishName().c_str()) << " : ";
 		}
 		
-		oss << q_((*iter)->getEnglishName()) << endl;
+		oss << q_((*iter)->getEnglishName().c_str()) << endl;
 		oss << (*iter)->getEnglishName().c_str() << endl;
 	}
 	return str.toStdWString();

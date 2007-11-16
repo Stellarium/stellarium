@@ -27,6 +27,7 @@
 #include <cstdlib>
 #include <QFile>
 #include <QDebug>
+#include <QStringList>
 
 #include "StelUtils.hpp"
 #include "Translator.hpp"
@@ -34,8 +35,8 @@
 
 // Init static members
 Translator* Translator::lastUsed = NULL;
-QMap<QString, wstring> Translator::iso639codes;
-QString Translator::systemLangName = "C";
+QMap<QString, QString> Translator::iso639codes;
+QString Translator::systemLangName;
 
 // Use system locale language by default
 #if defined(MACOSX)
@@ -51,6 +52,14 @@ Translator Translator::globalTranslator = Translator(PACKAGE_NAME, INSTALL_LOCAL
 #define putenv(x) _putenv((x))
 #endif
 
+//! Initialize Translation
+//! @param fileName file containing the list of language codes
+void Translator::init(const QString& fileName)
+{
+	Translator::initSystemLanguage();
+	Translator::initIso639_1LanguageCodes(fileName);
+}
+		  
 //! Try to determine system language from system configuration
 void Translator::initSystemLanguage(void)
 {
@@ -88,10 +97,16 @@ void Translator::initSystemLanguage(void)
 
 void Translator::reload()
 {
-	if (Translator::lastUsed == this) return;
+	if (Translator::lastUsed == this)
+		return;
+	
+	// Find out what the system language is if not defined yet
+	if (systemLangName.isEmpty())
+		initSystemLanguage();
+	
+	// Apply that
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
-
 	if (langName=="system" || langName=="system_default")
 #if defined (MACOSX)	// MACOSX
 	{
@@ -119,10 +134,6 @@ void Translator::reload()
 	}
 #endif
 
-#ifndef NDEBUG
-//	printf("Setting locale: %s\n", envstr);
-#endif
-
 	putenv(envstr);
 #if !defined (_MSC_VER)
 	setlocale(LC_MESSAGES, "");
@@ -139,47 +150,45 @@ void Translator::reload()
 
 
 //! Convert from ISO639-1 2 letters langage code to native language name
-std::wstring Translator::iso639_1LanguageCodeToNativeName(const QString& languageCode)
+QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	if (iso639codes.find(languageCode)!=iso639codes.end())
 		return iso639codes[languageCode];
 	else
-		return languageCode.toStdWString();
+		return languageCode;
 }
 	
 //! Convert from native language name to ISO639-1 2 letters langage code 
-QString Translator::nativeLanguageNameCodeToIso639_1(const wstring& languageName)
+QString Translator::nativeNameToIso639_1Code(const QString& languageName)
 {
-	QMap<QString, wstring>::iterator iter;
+	QMap<QString, QString>::iterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
 	{
 		if (iter.value() == languageName)
 			return iter.key();
 	}
-	return QString::fromStdWString(languageName);
+	return languageName;
 }
 
-//! Get available language codes from directory tree
-std::wstring Translator::getAvailableLanguagesNamesNative(const QString& localeDir)
+//! Get available native language names from directory tree
+QString Translator::getAvailableLanguagesNamesNative(const QString& localeDir)
 {
-	std::vector<QString> codeList = getAvailableLanguagesIso639_1Codes(localeDir);
-	
-	wstring output;
-	std::vector<QString>::iterator iter;
-	for (iter=codeList.begin();iter!=codeList.end();++iter)
+	QStringList codeList = getAvailableIso639_1Codes(localeDir);
+	QString output;
+	foreach (QString lang, codeList)
 	{
-		if (iter!=codeList.begin()) output+=L"\n";
-		output+=iso639_1LanguageCodeToNativeName(*iter);
+		output+=iso639_1CodeToNativeName(lang)+"\n";
 	}
+	output.chop(1);
 	return output;
 }
 
 //! Get available language codes from directory tree
-std::vector<QString> Translator::getAvailableLanguagesIso639_1Codes(const QString& localeDir)
+QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir)
 {
 	struct dirent *entryp;
 	DIR *dp;
-	std::vector<QString> result;
+	QStringList result;
 	
 	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
@@ -203,7 +212,7 @@ std::vector<QString> Translator::getAvailableLanguagesIso639_1Codes(const QStrin
 	closedir(dp);
 	
 	// Sort the language names by alphabetic order
-	std::sort(result.begin(), result.end());
+	result.sort();
 	
 	return result;
 }
@@ -212,28 +221,27 @@ std::vector<QString> Translator::getAvailableLanguagesIso639_1Codes(const QStrin
 //! @param fileName file containing the list of language codes
 void Translator::initIso639_1LanguageCodes(const QString& fileName)
 {
-	std::ifstream inf(QFile::encodeName(fileName).constData());
-	if (!inf.is_open())
+	QFile inf(fileName);
+	if (!inf.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Can't open ISO639 codes file " << fileName << endl;
+		qWarning() << "Can't open ISO639 codes file " << fileName;
 		assert(0);
 	}
 	
 	if (!iso639codes.empty())
 		iso639codes.clear();
-		
-	string record;
 	
-	while(!getline(inf, record).eof())
+	while (!inf.atEnd())
 	{
-		string::size_type pos;
-		if ((pos = record.find('\t', 4))==string::npos)
+		QByteArray record = inf.readLine();
+		int pos = record.indexOf('\t', 4);
+		if (pos==-1)
 		{
 			qWarning() << "Error: invalid entry in ISO639 codes: " << fileName;
 		}
 		else
 		{
-			iso639codes.insert(record.substr(0, 2).c_str(), StelUtils::stringToWstring(record.substr(pos+1)));
+			iso639codes.insert(record.left(2), QString::fromUtf8(record.mid(pos+1)));
 		}
 	}
 }

@@ -508,7 +508,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
+	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()).toStdWString());
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
 	language_lb->setCurrent(app->getLocaleMgr().getAppLanguage().toStdWString());
 	tab_language->addComponent(language_lb);
@@ -524,7 +524,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()));
+	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getFileMgr().getLocaleDir()).toStdWString());
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
 	languageSky_lb->setCurrent(app->getLocaleMgr().getSkyLanguage().toStdWString());
 	tab_language->addComponent(languageSky_lb);
@@ -597,12 +597,12 @@ void StelUI::dialogCallback(void)
 
 void StelUI::setSkyLanguage(void)
 {
-	app->getLocaleMgr().setSkyLanguage(Translator::nativeLanguageNameCodeToIso639_1(languageSky_lb->getCurrent()));
+	app->getLocaleMgr().setSkyLanguage(Translator::nativeNameToIso639_1Code(QString::fromStdWString(languageSky_lb->getCurrent())));
 }
 
 void StelUI::setAppLanguage(void)
 {
-	app->getLocaleMgr().setAppLanguage(Translator::nativeLanguageNameCodeToIso639_1(language_lb->getCurrent()));
+	app->getLocaleMgr().setAppLanguage(Translator::nativeNameToIso639_1Code(QString::fromStdWString(language_lb->getCurrent())));
 }
 
 void StelUI::setSkyCulture(void)
