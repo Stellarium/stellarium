@@ -23,8 +23,6 @@
 #include "StelModule.hpp"
 #include "Projector.hpp"
 
-class StelCore;
-
 //! @class MovementMgr
 //! Manages the movement and zoomer operations.
 class MovementMgr : public StelModule
@@ -48,12 +46,12 @@ public:
 	//!
 	//! @param conf the ini parser object.
 	//! @param lb the LoadingBar object.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Update time-dependent things (does nothing).
 	virtual void update(double deltaTime) {;}
 	//! Implement required draw function.  Does nothing.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {return 0.;}
+	virtual double draw(StelCore* core) {return 0.;}
 	//! Handle keyboard events.
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 	//! Handle mouse movement events.

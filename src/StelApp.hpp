@@ -39,6 +39,7 @@ class StelSkyCultureMgr;
 class StelFileMgr;
 class InitParser;
 class QStringList;
+class LoadingBar;
 
 using namespace std;
 
@@ -109,6 +110,10 @@ public:
 	//! It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
 	StelCore* getCore() {return core;}
+	
+	//! Get the main loading bar used by modules for displaying loading informations.
+	//! @return the main LoadingBar instance of the program.
+	LoadingBar* getLoadingBar() {return loadingBar;}
 	
 	//! Update translations and font everywhere in the program.
 	void updateAppLanguage();
@@ -349,6 +354,9 @@ private:
 
 	//! Utility class for file operations, mainly locating files by name
 	StelFileMgr* stelFileMgr;
+	
+	// The main loading bar
+	LoadingBar* loadingBar;
 	
 	float fps;
 	int frame, timefr, timeBase;		// Used for fps counter

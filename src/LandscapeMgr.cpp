@@ -231,8 +231,12 @@ void LandscapeMgr::update(double deltaTime)
 	landscape->setBrightness(landscapeBrightness+0.05);
 }
 
-double LandscapeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double LandscapeMgr::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	ToneReproducer* eye = core->getToneReproducer();
+	
 	// Draw the atmosphere
 	atmosphere->draw(prj);
 
@@ -245,7 +249,7 @@ double LandscapeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *
 	return 0;
 }
 
-void LandscapeMgr::init(const InitParser& conf, LoadingBar& lb)
+void LandscapeMgr::init(const InitParser& conf)
 {
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();

@@ -39,6 +39,7 @@
 #include "StelFileMgr.hpp"
 #include "InitParser.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
 
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
@@ -77,7 +78,7 @@ double NebulaMgr::getCallOrder(StelModuleActionName actionName) const
 }
 
 // read from stream
-void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
+void NebulaMgr::init(const InitParser& conf)
 {
 	// TODO: mechanism to specify which sets get loaded at start time.
 	// candidate methods:
@@ -86,7 +87,7 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	// 3. flag in nebula_textures.fab (yuk)
 	// 4. info.ini file in each set containing a "load at startup" item
 	// For now (0.9.0), just load the default set
-	loadNebulaSet("default", lb);
+	loadNebulaSet("default");
 
 	double fontSize = 12;
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
@@ -110,8 +111,12 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 }
 
 // Draw all the Nebulae
-double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* eye)
+double NebulaMgr::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	ToneReproducer* eye = core->getToneReproducer();
+	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	Nebula::flagShowTexture = flagShowTexture;
 	
@@ -190,7 +195,7 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void NebulaMgr::updateSkyCulture(LoadingBar& lb)
+void NebulaMgr::updateSkyCulture()
 {;}
 
 void NebulaMgr::setColorScheme(const InitParser& conf, const QString& section)
@@ -204,7 +209,6 @@ void NebulaMgr::setColorScheme(const InitParser& conf, const QString& section)
 // search by name
 StelObject* NebulaMgr::search(const string& name)
 {
-
 	string uname = name;
 	transform(uname.begin(), uname.end(), uname.begin(), ::toupper);
 	vector <Nebula*>::const_iterator iter;
@@ -252,13 +256,13 @@ StelObject* NebulaMgr::search(const string& name)
 	return NULL;
 }
 
-void NebulaMgr::loadNebulaSet(const QString& setName, LoadingBar& lb)
+void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	try
 	{
-		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"), lb);
+		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
 		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
-		loadTextures(setName, lb);
+		loadTextures(setName);
 	}
 	catch (exception& e)
 	{
@@ -289,7 +293,7 @@ StelObject* NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	vector<StelObjectP> result;
 	if (!getFlagShow())
@@ -363,12 +367,14 @@ Nebula *NebulaMgr::searchIC(unsigned int IC)
 }*/
 
 // read from stream
-bool NebulaMgr::loadNGC(const QString& catNGC, LoadingBar& lb)
+bool NebulaMgr::loadNGC(const QString& catNGC)
 {
 	char recordstr[512];
 	unsigned int i;
 	unsigned int data_drop;
 
+	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
+	
 	cout << "Loading NGC data... ";
 	FILE * ngcFile = fopen(QFile::encodeName(catNGC).constData(),"rb");
 	if (!ngcFile)
@@ -490,8 +496,9 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	return true;
 }
 
-bool NebulaMgr::loadTextures(const QString& setName, LoadingBar& lb)
+bool NebulaMgr::loadTextures(const QString& setName)
 {
+	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 	cout << "Loading Nebula Textures for set " << qPrintable(setName) << "...";
 	QString texFile;
 	try

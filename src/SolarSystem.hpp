@@ -36,6 +36,9 @@ class InitParser;
 class StelObject;
 class Planet;
 class SFont;
+class StelCore;
+class Projector;
+class Navigator;
 
 //! @class SolarSystem
 //! This StelObjectModule derivative is used to model SolarSystem boies.
@@ -55,8 +58,7 @@ public:
 	//! - set display options from ini parser object settings
 	//!
 	//! @param conf The ini parser object where relevant display settings are found.
-	//! @param lb The LoadingBar object used to show loading progress.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param prj The Projector object.
@@ -64,7 +66,7 @@ public:
 	//! @ToneProducer eye The eye adaptation model.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore *core);
 	
 	//! Update time-varying components.
 	//! This includes planet motion trails.
@@ -88,12 +90,11 @@ public:
 	//! @param v A vector representing a point in the sky.
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
-	//! @param nav The Navigator object.
-	//! @param prj The Projector object.
+	//! @param core the core object
 	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
 	//! objects found in the specified area. This vector is not sorted by distance 
 	//! from v.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param NameI18n The case sensistive translated planet name.
@@ -129,10 +130,9 @@ public:
 	//! Search for SolarSystem objects which are close to the position given 
 	//! in earth equatorial position.
 	//! @param v A position in earth equatorial position.
-	//! @param nav the Navigator object.
-	//! @param prj the Projector object.
+	//! @param core the StelCore object.
 	//! @return a pointer to a StelObject if found, else NULL
-	StelObject* search(Vec3d v, const Navigator * nav, const Projector * prj) const;
+	StelObject* search(Vec3d v, const StelCore* core) const;
 
 	//! Get a pointer to a Planet object.
 	//! @param the English name of the desired planet.
@@ -230,7 +230,7 @@ private:
 	void drawPointer(const Projector* prj, const Navigator * nav);
 
 	//! Load planet data from a file.
-	void loadPlanets(LoadingBar& lb);
+	void loadPlanets();
 
 	Planet* sun;
 	Planet* moon;

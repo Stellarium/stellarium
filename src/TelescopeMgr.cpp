@@ -28,6 +28,7 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
 
 #include <algorithm>
 
@@ -78,7 +79,11 @@ double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
+double TelescopeMgr::draw(StelCore* core)
+{
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
   prj->setCurrentFrame(Projector::FRAME_J2000);
@@ -148,7 +153,7 @@ void TelescopeMgr::setColorScheme(const InitParser& conf, const QString& section
 	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"telescope_circle_color", defaultColor)));
 }
 
-vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
   vector<StelObjectP> result;
   if (!getFlagTelescopes())
@@ -211,7 +216,7 @@ void TelescopeMgr::setFontSize(float font_size) {
 }
 
 
-void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
+void TelescopeMgr::init(const InitParser& conf) {
   setFontSize(12.f);
   StelApp::getInstance().getTextureManager().setDefaultParams();
   telescope_texture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");

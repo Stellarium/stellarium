@@ -50,10 +50,10 @@ public:
 	//! - Set up landscape-releated display flags from ini parser object
 	//! @param conf the ini parser object.
 	//! @param lb the loading bar object used to show loading progress.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Draw the landscape graphics, cardinal points and atmosphere.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore* core);
 	
 	//! Update time-dependent state.
 	//! Includes:
@@ -67,7 +67,7 @@ public:
 	virtual void updateI18n();
 	
 	//! Called for all registered modules if the sky culture changes.
-	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	virtual void updateSkyCulture() {;}
 	
 	//! Sets the color of the cardinal points based on the values in the ini parser object.
 	//! @param conf the ini parser object from which to read settings.
