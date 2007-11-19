@@ -231,11 +231,6 @@ public:
 	//! Get stars twinkle amount.
 	float getTwinkleAmount(void) const {return twinkleAmount;}
 	
-//	//! Set stars limiting display magnitude at 60 degree fov.
-//	void setLimitingMag(float f) {setMagConverterMaxScaled60DegMag(f);}
-//	//! Get stars limiting display magnitude at 60 degree fov.
-//	float getLimitingMag(void) const {return getMagConverterMaxScaled60DegMag();}
-	
 	
 	//! Set MagConverter maximum FOV.
 	//! Usually stars/planet halos are drawn fainter when FOV gets larger, 

@@ -51,7 +51,7 @@ template <class Star> struct SpecialZoneData;
 
 
 static inline float IndexToBV(unsigned char b_v) {
-  return b_v*(4.f/127.f)-0.5f;
+  return (float)b_v*(4.f/127.f)-0.5f;
 }
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
