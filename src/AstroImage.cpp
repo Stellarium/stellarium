@@ -1,6 +1,7 @@
 #include "AstroImage.hpp"
 #include "Projector.hpp"
 #include "STexture.hpp"
+#include "StelCore.hpp"
 
 AstroImage::AstroImage()
 {
@@ -18,9 +19,11 @@ AstroImage::~AstroImage()
 {
 }
 
-void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+void AstroImage::draw(StelCore* core)
 {
 	if (!tex) return;
+	
+	Projector* prj = core->getProjection();
 	
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

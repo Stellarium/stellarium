@@ -24,13 +24,7 @@
 #include "vecmath.h"
 #include "StelModule.hpp"
 
-class LoadingBar;
 class Translator;
-class ToneReproducer;
-class Navigator;
-class Projector;
-class InitParser;
-
 class SkyGrid;
 class SkyLine;
 
@@ -55,7 +49,7 @@ public:
 	//! Equator Line and Ecliptic Line.
 	//! @param conf the ini parser object which contains the grid settings.
 	//! @param lb the LoadingBar object which is used to draw loading progress.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Get the module ID, returns, "gridlines".
 	virtual QString getModuleID() const {return "GridLinesMgr";}
@@ -64,7 +58,7 @@ public:
 	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line 
 	//! and Ecliptic Line according to the various flags which control their
 	//! visibility.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore* core);
 	
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the grid lines and great circles.

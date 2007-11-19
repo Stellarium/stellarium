@@ -59,7 +59,7 @@ public:
 	Navigator(Observer* obs);
     ~Navigator();
 
-	void init(const InitParser& conf, LoadingBar& lb);
+	void init(const InitParser& conf);
 
 	void updateTime(int delta_time);
 	void updateTransformMatrices(void);

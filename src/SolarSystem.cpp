@@ -86,9 +86,9 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 }
 
 // Init and load the solar system data
-void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
+void SolarSystem::init(const InitParser& conf)
 {
-	loadPlanets(lb);	// Load planets data
+	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization assert that center is sun center (only impacts on light speed correction)
@@ -175,7 +175,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 }
 
 // Init and load the solar system data
-void SolarSystem::loadPlanets(LoadingBar& lb)
+void SolarSystem::loadPlanets()
 {
 	cout << "Loading Solar System data...";
 	InitParser pd;	// The Planet data ini file parser
@@ -593,9 +593,14 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos) {
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer* eye)
+double SolarSystem::draw(StelCore* core)
 {
-	if(!Planet::getflagShow()) return 0.0;
+	if(!Planet::getflagShow())
+		return 0.0;
+	
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	ToneReproducer* eye = core->getToneReproducer();
 	
 	Planet::set_font(&planet_name_font);
 	
@@ -729,7 +734,7 @@ StelObjectP SolarSystem::searchByName(const string& name) const
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance
-StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * prj) const
+StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
 	pos.normalize();
 	Planet * closest = NULL;
@@ -739,7 +744,7 @@ StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projecto
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->getEarthEquatorialPos(nav);
+		equPos = (*iter)->getEarthEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
@@ -747,7 +752,6 @@ StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projecto
 			closest = *iter;
 			cos_angle_closest = cos_ang_dist;
 		}
-
 		iter++;
 	}
 
@@ -759,16 +763,13 @@ StelObject* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projecto
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv,
-                                              double limitFov,
-                                              const Navigator * nav,
-                                              const Projector * prj) const
+vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	vector<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
 		
-	Vec3d v = nav->j2000_to_earth_equ(vv);
+	Vec3d v = core->getNavigation()->j2000_to_earth_equ(vv);
 	v.normalize();
 	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
@@ -776,7 +777,7 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv,
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->getEarthEquatorialPos(nav);
+		equPos = (*iter)->getEarthEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
 		{

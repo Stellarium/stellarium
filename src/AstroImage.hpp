@@ -22,8 +22,7 @@
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
 
-class Projector;
-class Navigator;
+class StelCore;
 class ToneReproducer;
 
 //! Base class for any astro image with a fixed position
@@ -45,7 +44,7 @@ public:
 	virtual ~AstroImage();
 	
 	//! Draw the image on the screen. Assume that we are in Orthographic projection mode.
-	void draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	void draw(StelCore* core);
 	
 	//! Return the ConvexPolygon describing the 4 corners of the sky-projected image
 	const StelGeom::ConvexPolygon& getPolygon(void) const {return poly;}

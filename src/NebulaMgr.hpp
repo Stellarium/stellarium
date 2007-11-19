@@ -31,7 +31,6 @@
 using namespace std;
 
 class Nebula;
-class LoadingBar;
 class Translator;
 class ToneReproducer;
 
@@ -58,10 +57,10 @@ public:
 	//! @param conf the ini parser object which contains configuration information
 	//! pertaining to nebulae.
 	//! @param lb the loading bar object used to display loading progress and status
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Draws all nebula objects.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore* core);
 	
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
@@ -74,7 +73,7 @@ public:
 	//! Called when the sky culture is updated, so that the module can respond
 	//! as appropriate.  Does nothing as there are no SkyCulture specific features 
 	//! in the current nebula implementation.
-	virtual void updateSkyCulture(LoadingBar& lb);
+	virtual void updateSkyCulture();
 	
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in the ini parser object.
@@ -97,7 +96,7 @@ public:
 	//! @param prj the Projector object.
 	//! @return an stl vector containing the nebulae located inside the
 	//! limitFov circle around position v.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching nebula object's pointer if exists or NULL.
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
@@ -177,7 +176,7 @@ private:
 	//! own nebula_textures.fab file and corresponding image files.
 	//! This function loads a set of textures.
 	//! @param setName a string which corresponds to the directory where the set resides
-	void loadNebulaSet(const QString& setName, LoadingBar& lb);
+	void loadNebulaSet(const QString& setName);
 	
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
@@ -187,13 +186,13 @@ private:
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);
 	Nebula *searchIC(unsigned int IC);
-	bool loadNGC(const QString& fileName, LoadingBar& lb);
+	bool loadNGC(const QString& fileName);
 	bool loadNGCNames(const QString& fileName);
 	
 	//! loads the textures for a specified nebula texture setName
 	//! @param setName The name of the sub-directory in .../nebulae in which the set resides
 	//! @param lb the loading progress bar object
-	bool loadTextures(const QString& setName, LoadingBar& lb);
+	bool loadTextures(const QString& setName);
 
 	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;

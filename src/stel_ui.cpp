@@ -129,7 +129,7 @@ double StelUI::getCallOrder(StelModuleActionName actionName) const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelUI::init(const InitParser& conf, LoadingBar& lb)
+void StelUI::init(const InitParser& conf)
 {
 	if(initialised)
 	{
@@ -238,7 +238,7 @@ void StelUI::init(const InitParser& conf, LoadingBar& lb)
  	initialised = true;
 }
 
-double StelUI::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double StelUI::draw(StelCore* core)
 {
 	if (initialised)
 		drawTui();

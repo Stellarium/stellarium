@@ -48,6 +48,7 @@
 #include "InitParser.hpp"
 #include "bytes.h"
 #include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
 
 #include "ZoneArray.hpp"
 #include "StringArray.hpp"
@@ -350,8 +351,8 @@ wstring StarMgr::getSciName(int hip) {
 
 
 
-void StarMgr::init(const InitParser &conf,LoadingBar &lb) {
-  load_data(conf,lb);
+void StarMgr::init(const InitParser &conf) {
+  load_data(conf);
   InitColorTableFromConfigFile(conf);
   StelApp::getInstance().getTextureManager().setDefaultParams();
     // Load star texture no mipmap:
@@ -426,8 +427,10 @@ void StarMgr::setColorScheme(const InitParser& conf, const QString& section)
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
 ***************************************************************************/
-void StarMgr::load_data(const InitParser &baseConf,LoadingBar &lb)
+void StarMgr::load_data(const InitParser &baseConf)
 {
+	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
+			
 	// Please do not init twice:
 	assert(max_geodesic_grid_level < 0);
 
@@ -754,7 +757,12 @@ int StarMgr::MagConverter::computeRCMag(float mag,bool point_star,
 }
 
 // Draw all the stars
-double StarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
+double StarMgr::draw(StelCore* core)
+{
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	ToneReproducer* eye = core->getToneReproducer();
+	
     current_JDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
@@ -845,7 +853,7 @@ assert(0);
   pos.normalize();
   vector<StelObjectP > v = searchAround(pos,
                                         0.8, // just an arbitrary number
-                                        NULL, NULL);
+                                        NULL);
   StelObjectP nearest;
   double cos_angle_nearest = -10.0;
   for (vector<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {
@@ -862,8 +870,7 @@ assert(0);
 // inside the lim_fov circle around position v
 vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
                                            double lim_fov, // degrees
-                                           const Navigator * nav,
-                                           const Projector * prj) const {
+                                           const StelCore* core) const {
   vector<StelObjectP > result;
   if (!getFlagStars())
   	return result;
@@ -1157,7 +1164,7 @@ void StarMgr::setFontSize(double newFontSize)
 		StelApp::getInstance().getLocaleMgr().getSkyLanguage(),fontSize);
 }
 
-void StarMgr::updateSkyCulture(LoadingBar& lb)
+void StarMgr::updateSkyCulture()
 {
 	QString skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	

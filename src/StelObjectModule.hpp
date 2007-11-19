@@ -30,12 +30,10 @@
 //! Specialization of StelModule which manages a collection of StelObjects.
 //! Instances deriving from the StelObjectModule class can be managed by the StelObjectMgr.
 //! The class defines extra abstract functions for searching and listing StelObjects.
-//! @author Fabien Chereau
 class StelObjectModule : public StelModule
 {
 public:
 	StelObjectModule();
-
 	~StelObjectModule();
 	
 	//! Search for StelObject in an area around a specifid point.
@@ -43,8 +41,9 @@ public:
 	//! Only visible objects (i.e curretly displayed on screen) should be returned.
 	//! @param v equatorial position at epoch J2000.
 	//! @param limitFov angular diameter of the searching zone in degree.
+	//! @param core the core instance to use.
 	//! @return the list of all the displayed objects contained in the defined zone.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const = 0;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const = 0;
 	
 	//! Find a StelObject by name.
 	//! @param nameI18n The translated name for the current sky locale.

@@ -46,7 +46,7 @@ const Planet *Navigator::getHomePlanet(void) const
 	return position->getHomePlanet();
 }
 
-void Navigator::init(const InitParser& conf, LoadingBar& lb)
+void Navigator::init(const InitParser& conf)
 {
 	setTimeNow();
 	setLocalVision(Vec3f(1,1e-05,0.2));

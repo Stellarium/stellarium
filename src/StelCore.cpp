@@ -76,7 +76,7 @@ void StelCore::initProj(const InitParser& conf)
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init(const InitParser& conf, LoadingBar& lb)
+void StelCore::init(const InitParser& conf)
 {	
 	// Observer
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
@@ -85,10 +85,10 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 
 	// Navigator
 	navigation = new Navigator(observatory);
-	navigation->init(conf, lb);
+	navigation->init(conf);
 	
 	movementMgr = new MovementMgr(this);
-	movementMgr->init(conf, lb);
+	movementMgr->init(conf);
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");

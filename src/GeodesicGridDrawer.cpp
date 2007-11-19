@@ -38,7 +38,7 @@ GeodesicGridDrawer::~GeodesicGridDrawer()
 //	delete geodesic_grid;
 }
 
-void GeodesicGridDrawer::init(const InitParser& conf, LoadingBar& lb)
+void GeodesicGridDrawer::init(const InitParser& conf)
 {
 }
 

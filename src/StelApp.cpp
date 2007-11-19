@@ -68,14 +68,15 @@ StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
 	timeBase(0), draw_mode(StelApp::DM_NORMAL), configFile("config.ini"), initialized(false)
 {
-	distorter=0;
-	skyCultureMgr=0;
-	localeMgr=0;
-	fontManager=0;
-	stelObjectMgr=0;
-	textureMgr=0;
-	moduleMgr=0;
-
+	distorter=NULL;
+	skyCultureMgr=NULL;
+	localeMgr=NULL;
+	fontManager=NULL;
+	stelObjectMgr=NULL;
+	textureMgr=NULL;
+	moduleMgr=NULL;
+	loadingBar=NULL;
+	
 	// Can't create 2 StelApp instances
 	assert(!singleton);
 	singleton = this;
@@ -90,6 +91,7 @@ StelApp::StelApp(int argc, char** argv) :
 *************************************************************************/
 StelApp::~StelApp()
 {
+	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
 	if (distorter) {delete distorter; distorter=NULL;}
 	delete skyCultureMgr; skyCultureMgr=NULL;
@@ -251,62 +253,62 @@ void StelApp::init()
 	swapGLBuffers();
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
+	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              getScreenW(), getScreenH(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-	lb.setClearBuffer(true);	// Prevent flickering
+	loadingBar->setClearBuffer(true);	// Prevent flickering
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
-	stelObjectMgr->init(conf, lb);
+	stelObjectMgr->init(conf);
 	
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
-	ssystem->init(conf, lb);
+	ssystem->init(conf);
 	getModuleMgr().registerModule(ssystem);
 	
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
-	hip_stars->init(conf, lb);
+	hip_stars->init(conf);
 	getModuleMgr().registerModule(hip_stars);	
 	
-	core->init(conf, lb);
+	core->init(conf);
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
-	nebulas->init(conf, lb);
+	nebulas->init(conf);
 	getModuleMgr().registerModule(nebulas);
 	
 	// Init milky way
 	MilkyWay* milky_way = new MilkyWay();
-	milky_way->init(conf, lb);
+	milky_way->init(conf);
 	getModuleMgr().registerModule(milky_way);
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
-	telescope_mgr->init(conf, lb);
+	telescope_mgr->init(conf);
 	getModuleMgr().registerModule(telescope_mgr);
 	
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
-	asterisms->init(conf, lb);
+	asterisms->init(conf);
 	getModuleMgr().registerModule(asterisms);
 	
 	// Landscape, atmosphere & cardinal points section
 	LandscapeMgr* landscape = new LandscapeMgr();
-	landscape->init(conf, lb);
+	landscape->init(conf);
 	getModuleMgr().registerModule(landscape);
 
 	GridLinesMgr* gridLines = new GridLinesMgr();
-	gridLines->init(conf, lb);
+	gridLines->init(conf);
 	getModuleMgr().registerModule(gridLines);
 	
 	// Meteors
 	MeteorMgr* meteors = new MeteorMgr(10, 60);
-	meteors->init(conf, lb);
+	meteors->init(conf);
 	getModuleMgr().registerModule(meteors);
 
 //ugly fix by johannes: call skyCultureMgr->init twice so that
@@ -317,15 +319,15 @@ void StelApp::init()
 	StelCommandInterface* commander = new StelCommandInterface(core, this);
 	getModuleMgr().registerModule(commander);
 	ScriptMgr* scripts = new ScriptMgr(commander);
-	scripts->init(conf, lb);
+	scripts->init(conf);
 	getModuleMgr().registerModule(scripts);
 	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
 	ImageMgr* script_images = new ImageMgr();
-	script_images->init(conf, lb);
+	script_images->init(conf);
 	getModuleMgr().registerModule(script_images);	
 	
 	StelUI* ui = new StelUI(core, this);
-	ui->init(conf, lb);
+	ui->init(conf);
 	getModuleMgr().registerModule(ui);
 	
 	// Initialisation of the color scheme
@@ -344,7 +346,7 @@ void StelApp::init()
 		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
 		if (m!=NULL)
 		{
-			m->init(conf, lb);
+			m->init(conf);
 			moduleMgr->registerModule(m);
 		}
 	}
@@ -575,12 +577,12 @@ double StelApp::draw(int delta_time)
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_DRAW))
 	{
-		double d = i->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+		double d = i->draw(core);
 		if (d>squaredDistance)
 			squaredDistance = d;
 	}
 
-	stelObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproducer());
+	stelObjectMgr->draw(core);
 
 	core->postDraw();
 	distorter->distort();
@@ -844,13 +846,10 @@ void StelApp::updateSkyLanguage()
 // Update and reload sky culture informations everywhere in the program
 void StelApp::updateSkyCulture()
 {
-	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
-				  core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
-					StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		iter->updateSkyCulture(lb);
+		iter->updateSkyCulture();
 	}
 }
 

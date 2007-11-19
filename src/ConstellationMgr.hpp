@@ -25,7 +25,6 @@
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
 
-class LoadingBar;
 class ToneReproducer;
 class StarMgr;
 class Constellation;
@@ -76,10 +75,10 @@ public:
 	//! as constellation objects are loaded for the required sky culture.
 	//! @param conf the ini file parser object
 	//! @param lb a reference to the LoadingBar object
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Draw constellation lines, art, names and boundaries.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); 
+	virtual double draw(StelCore* core); 
 	
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
@@ -91,7 +90,7 @@ public:
 	virtual void updateI18n();
 	
 	//! Loads new constellation data and art if the SkyCulture has changed.
-	virtual void updateSkyCulture(LoadingBar& lb);
+	virtual void updateSkyCulture();
 	
 	//! Limit the number of constellations to draw based on selected stars.
 	//! The selected objects changed, check if some stars are selected and display the 
@@ -111,7 +110,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
@@ -194,8 +193,7 @@ private:
 	//! @param fileName The name of the constellation data file
 	//! @param artFileName The name of the constellation art data file
 	//! @param cultureName A string ID of the current skyculture
-	//! @param lb The loading progress bar object
-	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName, LoadingBar& lb);
+	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName);
 	
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries

@@ -25,9 +25,6 @@
 #include "vecmath.h"
 #include "STextureTypes.hpp"
 
-class Navigator;
-class ToneReproducer;
-class LoadingBar;
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.
@@ -46,10 +43,10 @@ public:
 	//! determines if the Milky Way is displayed or not, and the intensity setting.
 	//! @param conf ini parser object which contains the milky way settings.
 	//! @param lb the LoadingBar object used to display loading progress.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 
 	//! Draw the Milky Way.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore* core);
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Milky way rendering is being changed from on to off or off to on.
@@ -59,7 +56,7 @@ public:
 	virtual void updateI18n() {;}
 	
 	//! Does nothing in the MilkyWay module.
-	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	virtual void updateSkyCulture() {;}
 	
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 1.;}

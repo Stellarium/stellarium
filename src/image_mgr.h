@@ -40,8 +40,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init(const InitParser& conf, LoadingBar& lb) {return;}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void init(const InitParser& conf) {return;}
+	virtual double draw(StelCore* core);
 	virtual void update(double deltaTime);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
