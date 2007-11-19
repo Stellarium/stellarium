@@ -301,7 +301,6 @@ void GLWidget::thereWasAnEvent()
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
 {
-
 	StelMod out = StelMod_NONE;
 	if (m.testFlag(Qt::ShiftModifier))
 	{

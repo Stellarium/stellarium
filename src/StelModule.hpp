@@ -57,7 +57,7 @@ public:
 	virtual double draw(StelCore* core) = 0;
 	
 	//! Update the module with respect to the time.
-	//! @param delta_time the time increment in second since last call.
+	//! @param deltaTime the time increment in second since last call.
 	virtual void update(double deltaTime) = 0;
 	
 	//! Update i18n strings from english names according to current global sky and application language.
