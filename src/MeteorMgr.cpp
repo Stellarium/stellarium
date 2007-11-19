@@ -48,7 +48,7 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 MeteorMgr::~MeteorMgr()
 {}
 
-void MeteorMgr::init(const InitParser& conf, LoadingBar& lb)
+void MeteorMgr::init(const InitParser& conf)
 {
 	setZHR(conf.get_int("astro", "meteor_rate", 10));
 }
@@ -152,13 +152,13 @@ void MeteorMgr::update(double delta_time)
 }
 
 
-double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye)
+double MeteorMgr::draw(StelCore* core)
 {
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return 0.;
 	
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	core->getProjection()->setCurrentFrame(Projector::FRAME_LOCAL);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -167,7 +167,7 @@ double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye
 	// step through and draw all active meteors
 	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
-		(*iter)->draw(prj, nav);
+		(*iter)->draw(core->getProjection(), core->getNavigation());
 	}
 
 	glEnable(GL_TEXTURE_2D);

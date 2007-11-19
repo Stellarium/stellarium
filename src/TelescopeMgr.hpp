@@ -45,15 +45,15 @@ public:
   
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void init(const InitParser& conf);
+	virtual double draw(StelCore *core);
 	virtual void update(double deltaTime);
 	virtual void setColorScheme(const InitParser& conf, const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
 	virtual StelObjectP searchByName(const string& name) const;
 

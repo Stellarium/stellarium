@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "InitParser.hpp"
+#include "StelCore.hpp"
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
@@ -41,7 +42,7 @@ MilkyWay::~MilkyWay()
 	fader = NULL;
 }
 
-void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
+void MilkyWay::init(const InitParser& conf)
 {
 	setTexture("milkyway.png");
 	setFlagShow(conf.get_boolean("astro:flag_milky_way"));
@@ -62,8 +63,12 @@ void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 void MilkyWay::setFlagShow(bool b){*fader = b;}
 bool MilkyWay::getFlagShow(void) const {return *fader;}
 	
-double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double MilkyWay::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	ToneReproducer* eye = core->getToneReproducer();
+	
 	assert(tex);	// A texture must be loaded before calling this
 	
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2

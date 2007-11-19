@@ -27,6 +27,7 @@
 #include "script_mgr.h"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
 
 ImageMgr::ImageMgr()
 {
@@ -118,15 +119,19 @@ void ImageMgr::update(double delta_time)
     }
 }
 
-double ImageMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double ImageMgr::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
         (*iter)->draw(nav, prj);
     }
-	
 
-	if(active_images.begin() == active_images.end()) return 0.0;  
-	else return 100.0;  // TODO: determine max pixel movement from images
+	if(active_images.begin() == active_images.end())
+		return 0.0;
+	else
+		return 100.0;  // TODO: determine max pixel movement from images
 }
 

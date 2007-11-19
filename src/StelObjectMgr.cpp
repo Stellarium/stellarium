@@ -124,7 +124,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	std::vector<StelObjectModule*>::const_iterator iteromgr;
 	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
-		temp = (*iteromgr)->searchAround(v, fov_around, core->getNavigation(), core->getProjection());
+		temp = (*iteromgr)->searchAround(v, fov_around, core);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 	

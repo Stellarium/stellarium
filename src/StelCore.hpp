@@ -44,7 +44,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components from the passed config file.
-	void init(const InitParser& conf, LoadingBar& lb);
+	void init(const InitParser& conf);
 
 	//! Init projection temp TODO remove.
 	void initProj(const InitParser& conf);

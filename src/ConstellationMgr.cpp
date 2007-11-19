@@ -40,6 +40,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelCore.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
@@ -73,11 +74,10 @@ ConstellationMgr::~ConstellationMgr()
 	allBoundarySegments.clear();
 }
 
-void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
+void ConstellationMgr::init(const InitParser& conf)
 {
 	lastLoadedSkyCulture = "dummy";
-	updateSkyCulture(lb);
-	
+	updateSkyCulture();
 	fontSize = conf.get_double("viewing","constellation_font_size",16.);
 	setFlagLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
 	setFlagNames(		conf.get_boolean("viewing:flag_constellation_name"));
@@ -86,7 +86,6 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
 	setFlagArt(			conf.get_boolean("viewing:flag_constellation_art"));
 	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
-	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
@@ -100,7 +99,7 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
+void ConstellationMgr::updateSkyCulture()
 {
 	QString newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
@@ -120,11 +119,10 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	{
 		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture;
 	}
-				
+
 	try
 	{
-		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"),
-				conArtFile, newSkyCulture, lb);
+		loadLinesAndArt(fileMan.findFile("skycultures/"+newSkyCulture+"/constellationship.fab"), conArtFile, newSkyCulture);
 			
 		// load constellation names
 		loadNames(fileMan.findFile("skycultures/" + newSkyCulture + "/constellation_names.eng.fab"));
@@ -234,7 +232,7 @@ double ConstellationMgr::getFontSize() const
 }
 
 // Load line and art data from files
-void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName, LoadingBar& lb)
+void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
 {
 	std::ifstream inf(QFile::encodeName(fileName).constData());
 
@@ -311,6 +309,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	int current = 0;
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
+	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 	while (!feof(fic))
 	{
 		if (fscanf(fic, "%s %s %u %u %u %u %u %u %u %u %u\n", shortname, texfile, &x1, &y1, &hp1, &x2, &y2, &hp2, &x3, &y3, &hp3) != 11)
@@ -394,8 +393,11 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	
 }
 
-double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproducer *)
+double ConstellationMgr::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
 	drawLines(prj);
 	drawNames(prj);
@@ -483,7 +485,7 @@ Constellation* ConstellationMgr::findFromAbbreviation(const string & abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
+vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
 	return vector<StelObjectP>(0);
 }

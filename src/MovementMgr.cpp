@@ -35,7 +35,7 @@ MovementMgr::~MovementMgr()
 {
 }
 
-void MovementMgr::init(const InitParser& conf, LoadingBar& lb)
+void MovementMgr::init(const InitParser& conf)
 {
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);

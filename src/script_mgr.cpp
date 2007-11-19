@@ -50,7 +50,7 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(fals
 ScriptMgr::~ScriptMgr() {
 }
 
-void ScriptMgr::init(const InitParser& conf, LoadingBar& lb)
+void ScriptMgr::init(const InitParser& conf)
 {
 	set_allow_ui( conf.get_boolean("scripts","flag_script_allow_ui",0) );
 	scripts_can_write_files = conf.get_boolean("scripts","scripting_allow_write_files", false);

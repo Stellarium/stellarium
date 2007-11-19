@@ -32,6 +32,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "InitParser.hpp"
+#include "StelCore.hpp"
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.
@@ -614,7 +615,7 @@ double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void GridLinesMgr::init(const InitParser& conf, LoadingBar& lb)
+void GridLinesMgr::init(const InitParser& conf)
 {
 	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
 	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
@@ -633,8 +634,11 @@ void GridLinesMgr::update(double deltaTime)
 	meridian_line->update(deltaTime);
 }
 
-double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
+double GridLinesMgr::draw(StelCore* core)
 {
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+
 	// Draw the equatorial grid
 	equ_grid->draw(prj);
 	// Draw the altazimutal grid

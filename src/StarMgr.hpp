@@ -86,11 +86,11 @@ public:
 	//!
 	//! @param conf The ini parser object containing relevant settings.
 	//! @param lb The LoadingBar object which shows progress and current operation.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw all the stars
+	virtual double draw(StelCore* core); //! Draw all the stars
 	
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
@@ -101,7 +101,7 @@ public:
 	
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
-	virtual void updateSkyCulture(LoadingBar& lb);
+	virtual void updateSkyCulture();
 	
 	//! Sets the colour scheme (night / chart etc).
 	virtual void setColorScheme(const InitParser& conf, const QString& section);
@@ -112,7 +112,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Return a stl vector containing the stars located inside the lim_fov circle around position v
-	virtual vector<StelObjectP > searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	virtual vector<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching Stars object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive star common name or HP
@@ -310,7 +310,7 @@ public:
 	static string convertToComponentIds(int index);
 private:
 	//! Load all the stars from the files.
-	void load_data(const InitParser &conf,LoadingBar &lb);
+	void load_data(const InitParser &conf);
 	
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);

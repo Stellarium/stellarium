@@ -26,10 +26,7 @@
 #include "StelTypes.hpp"
 
 // Predeclaration
-class Projector;
-class Navigator;
-class ToneReproducer;
-class LoadingBar;
+class StelCore;
 class InitParser;
 
 using namespace std;
@@ -52,11 +49,12 @@ public:
 	
 	//! Initialize itself from a configuration (.ini) file
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
-	virtual void init(const InitParser& conf, LoadingBar& lb) = 0;
+	virtual void init(const InitParser& conf) = 0;
 	
-	//! Execute all the openGL drawing functions for this module.
+	//! Execute all the drawing functions for this module.
+	//! @param core the core to use for the drawing
 	//! @return the max squared distance in pixels any single object has moved since the previous update.
-	virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) = 0;
+	virtual double draw(StelCore* core) = 0;
 	
 	//! Update the module with respect to the time.
 	//! @param delta_time the time increment in second since last call.
@@ -68,7 +66,7 @@ public:
 	virtual void updateI18n() {;}
 		   
 	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
-	virtual void updateSkyCulture(LoadingBar& lb) {;}	
+	virtual void updateSkyCulture() {;}	
 	
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;

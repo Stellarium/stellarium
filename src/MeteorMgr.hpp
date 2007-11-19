@@ -42,11 +42,10 @@ public:
 	//! Initialize the MeteorMgr object.
 	//! Takes the meteor rate from the ini parser object.
 	//! @param conf the ini parser object.
-	//! @param lb the loading bar object.
-	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual void init(const InitParser& conf);
 	
 	//! Draw meteors.
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual double draw(StelCore* core);
 	
 	//! Update time-dependent parts of the module.
 	//! This function adds new meteors to the list of currently visiable
