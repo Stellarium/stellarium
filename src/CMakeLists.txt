@@ -134,6 +134,8 @@ SET(stellarium_lib_SRCS
    StelFileMgr.cpp
    StelAppQt4.hpp
    StelAppQt4.cpp
+   SkyDrawer.hpp
+   SkyDrawer.cpp
 
    QtScriptMgr.hpp
    QtScriptMgr.cpp
