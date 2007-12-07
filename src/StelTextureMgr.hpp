@@ -21,74 +21,15 @@
 #define STELTEXTUREMGR_H_
 
 #include <config.h>
-
-#include <QMap>
-#include <vector>
-#include <boost/shared_ptr.hpp>
-
 #include "GLee.h"
 #include "fixx11h.h"
+
+#include <QObject>
+#include <QMap>
+
 #include "STexture.hpp"
-#include "STextureTypes.hpp"
-#include "InitParser.hpp"
 
-class QMutex;
-
-//! @class ManagedSTexture 
-//! Extends STexture by adding functionalities such as lazy loading or luminosity scaling.
-class ManagedSTexture : public STexture
-{
-	friend class StelTextureMgr;
-	friend class ImageLoader;
-public:
-	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
-	//! If the texture was lazy loaded, load it now.
-	virtual void lazyBind();
-	//! Return the average texture luminance.
-	//! @return 0 is black, 1 is white
-	virtual float getAverageLuminance(void);
-
-	virtual ~ManagedSTexture()
-	{
-		if (loadState==ManagedSTexture::LOADING_IMAGE)
-		{
-			// TODO should search in the loading queue the matching thread and kill it
-			assert(0);
-		}
-	}
-	virtual int getLoadState(void) {return loadState;}
-	
-	//! Supported dynamic range modes
-	enum DynamicRangeMode
-	{
-		LINEAR,
-		MINMAX_USER,
-		MINMAX_QUANTILE,
-		MINMAX_GREYLEVEL,
-		MINMAX_GREYLEVEL_AUTO
-	};
-	
-	enum LoadState
-	{
-		UNLOADED=0,
-		LOADED=1,
-		LOAD_ERROR,
-		LOADING_IMAGE
-	};
-	LoadState loadState;
-	
-private:
-	friend struct loadTextureThread;
-
-	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f) {;}
-
-	void load(void);
-	
-	// Cached average luminance
-	float avgLuminance;
-	
-	DynamicRangeMode dynamicRangeMode;
-};
+class InitParser;
 
 //! @class ImageLoader 
 //! Abstract class for any Image loaders.
@@ -99,20 +40,7 @@ public:
 	//! Load the data from the image and store it into tex.texels
 	//! The caller is responsible for freeing the memory allocated in tex.texels
 	//! This method must be thread compliant
-	virtual bool loadImage(const QString& filename, ManagedSTexture& tex) = 0;
-};
-
-//! Describe queued textures loaded in thread.
-struct QueuedTex
-{
-	QueuedTex(ManagedSTextureSP atex, void* auserPtr, const QString& aurl, class QFile* afile) :
-		tex(atex), userPtr(auserPtr), url(aurl), file(afile) {;}
-
-	~QueuedTex();
-	ManagedSTextureSP tex;
-	void* userPtr;
-	QString url;
-	class QFile* file;
+	virtual bool loadImage(const QString& filename, STexture& tex) = 0;
 };
 
 //! Manage textures loading and manipulation.
@@ -120,8 +48,7 @@ struct QueuedTex
 //! that is, whether mimap should be generated, the wrap mode or mag and min filters.
 //! The state should be reinitialized by calling the StelTextureMgr::setDefaultParams method before any texture loading.
 //! It provides function for loading images in a separate threads.
-//! @author Fabien Chereau
-class StelTextureMgr
+class StelTextureMgr : QObject
 {
 public:
 	StelTextureMgr();
@@ -131,26 +58,16 @@ public:
 	//! Must be called after the creation of the GLContext.
 	void init(const InitParser& conf);
 	
-	//! Update loading of textures in threads
-	void update();
-	
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	//! @param lazyLoading if true the texture will be loaded only when it used for the first time
-	ManagedSTextureSP createTexture(const QString& filename, bool lazyLoading=false);
+	STextureSP createTexture(const QString& filename);
 	
-	//! Load an image from a file and create a new texture from it in a new thread. The created texture is inserted in
-	//! the passed queue, protected by the given mutex.
-	//! If the texture creation fails for any reasons, its loadState will be set to LOAD_ERROR
+	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
-	//! @param queue the queue where the texture will be inserted once downloaded
-	//! @param queueMutex the mutex protecting the queue
-	//! @param cookiesFile path to a file containing cookies to use for authenticated download
-	bool createTextureThread(const QString& url, std::vector<QueuedTex*>* queue, 
-		QMutex* queueMutex, void* userPtr=NULL, const QString& fileExtension="", 
-		const QString& cookiesFile="");
+	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
+	STextureSP createTextureThread(const QString& url, const QString& fileExtension="");
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -176,29 +93,28 @@ public:
 	
 	//! Define how the dynamic range of the image will be adapted to fit on 8 bits
 	//! Note that using linear mode on 8 bits images does nothing
-	void setDynamicRangeMode(ManagedSTexture::DynamicRangeMode dMode = ManagedSTexture::LINEAR) {dynamicRangeMode = dMode;}
+	void setDynamicRangeMode(STextureTypes::DynamicRangeMode dMode = STextureTypes::LINEAR) {dynamicRangeMode = dMode;}
 	
 	//! Register a new image loader for a given image file extension
 	void registerImageLoader(const QString& fileExtension, ImageLoader* loader)
 	{
 		imageLoaders[fileExtension] = loader;
 	}
+	
+	//! Get the downloader shared for downloading images
+	class QHttp* getDownloader() {return downloader;}
+	
 private:
-	friend class ManagedSTexture;
+	friend class STexture;
 
 	//! Internal
-	ManagedSTextureSP initTex(const QString& fullPath);
+	STextureSP initTex();
 
-	//! Load the image memory. If we use threaded loading, the texture will
-	//! be uploaded to openGL memory at the next update() call.
-	bool loadImage(ManagedSTexture* tex);
-	
-	//! Load the texture already in the RAM to openGL memory
-	bool glLoadTexture(ManagedSTexture* tex);
+	//! Load the image memory
+	bool loadImage(STexture* tex);
 	
 	//! Adapt the scaling for the texture. Return true if there was no errors
-	//! This method is thread safe
-	bool reScale(ManagedSTexture* tex);
+	bool reScale(STexture* tex);
 
 	//! List of image loaders providing image loading for the given files extensions
 	QMap<QString, ImageLoader*> imageLoaders;
@@ -207,7 +123,7 @@ private:
 	GLint wrapMode;
 	GLint minFilter;
 	GLint magFilter;
-	ManagedSTexture::DynamicRangeMode dynamicRangeMode;
+	STextureTypes::DynamicRangeMode dynamicRangeMode;
 	
 	//! The maximum texture size supported by the video card
 	GLint maxTextureSize;
@@ -217,25 +133,22 @@ private:
 
 	//! Used to correct a bug on some nvidia cards
 	bool isNoPowerOfTwoLUMINANCEAllowed;
-
-	// Everything used for the threaded loading
-	friend struct loadTextureThread;
-	QMutex* loadQueueMutex;
-	std::vector<class LoadQueueParam*> loadQueue;
 	
 	//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
 	class PngLoader : public ImageLoader
 	{
-		virtual bool loadImage(const QString& filename, ManagedSTexture& texinfo);
+		virtual bool loadImage(const QString& filename, STexture& texinfo);
 	};
 	static PngLoader pngLoader;
 	
 	//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
 	class JpgLoader : public ImageLoader
 	{
-		virtual bool loadImage(const QString& filename, ManagedSTexture& texinfo);
+		virtual bool loadImage(const QString& filename, STexture& texinfo);
 	};
 	static JpgLoader jpgLoader;
+	
+	class QHttp* downloader;
 };
 
 #endif /*STELTEXTUREMGR_H_*/

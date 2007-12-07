@@ -1,6 +1,6 @@
 #include "AstroImage.hpp"
 #include "Projector.hpp"
-#include "STexture.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 
 AstroImage::AstroImage()
@@ -35,13 +35,13 @@ void AstroImage::draw(StelCore* core)
 	
 	Vec3d win;
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2dv(tex->texCoordinates[0]);
+        glTexCoord2dv(tex->getCoordinates()[0]);
 		prj->project(poly[2],win); glVertex3dv(win);
-		glTexCoord2dv(tex->texCoordinates[1]);
+		glTexCoord2dv(tex->getCoordinates()[1]);
 		prj->project(poly[3],win); glVertex3dv(win);
-        glTexCoord2dv(tex->texCoordinates[2]);
+		glTexCoord2dv(tex->getCoordinates()[2]);
 		prj->project(poly[1],win); glVertex3dv(win);
-        glTexCoord2dv(tex->texCoordinates[3]);
+		glTexCoord2dv(tex->getCoordinates()[3]);
 		prj->project(poly[0],win); glVertex3dv(win);
     glEnd();
 }
