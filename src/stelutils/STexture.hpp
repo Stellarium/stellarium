@@ -38,7 +38,6 @@ class STexture : public QObject
 	Q_OBJECT;
 	
 	friend class StelTextureMgr;
-	friend class ImageLoader;
 	friend class ImageLoadThread;
 
 public:
@@ -60,6 +59,21 @@ public:
 
 	//! Return the position of the 4 corners of the texture in texture coordinates
 	const Vec2d* getCoordinates() const {return texCoordinates;}
+
+	//! Get the error message which caused the texture loading to fail
+	//! @return the human friendly error message or empty string if no errors occured
+	const QString& getErrorMessage() const {return errorMessage;}
+	
+	//! Return the full path to the image file
+	const QString& getFullPath() const {return fullPath;}
+	
+signals:
+	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
+	//! or when an error occured and the texture will never be available
+	//! In case of error, you can query what the problem was by calling getErrorMessage()
+	//! @param caller the texture instance which emitted the signal
+	//! @param error is equal to true if an error occured while loading the texture
+	void loadingProcessFinished(STexture* caller, bool error);
 	
 private slots:
 	//! Called when the download for the texture file terminated
@@ -83,6 +97,10 @@ private:
 	//! This method is thread safe
 	//! @return false if an error occured
 	bool imageLoad();
+	
+	//! This method should be called if the texture loading failed for any reasons
+	//! @param errorMessage the human friendly error message
+	void reportError(const QString& errorMessage);
 	
 	//! Define the range mode used to rescale the texture when loading
 	STextureTypes::DynamicRangeMode dynamicRangeMode;
@@ -112,6 +130,9 @@ private:
 	GLint minFilter;
 	GLint magFilter;
 	
+	//! Human friendly error message if loading failed
+	QString errorMessage;
+			
 	///////////////////////////////////////////////////////////////////////////
 	// Attributes protected by the Mutex
 	//! Mutex used to protect all the attributes below 

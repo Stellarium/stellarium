@@ -36,11 +36,34 @@ class InitParser;
 class ImageLoader
 {
 public:
+	struct TexInfo
+	{
+		GLsizei width;	//! Texture image width
+		GLsizei height;	//! Texture image height
+		GLenum format;
+		GLint internalFormat;
+		GLubyte* texels;
+		GLenum type;
+		QString fullPath;
+	};
+	
 	virtual ~ImageLoader() {;}
 	//! Load the data from the image and store it into tex.texels
 	//! The caller is responsible for freeing the memory allocated in tex.texels
 	//! This method must be thread compliant
-	virtual bool loadImage(const QString& filename, STexture& tex) = 0;
+	virtual bool loadImage(const QString& filename, TexInfo& texInfo) = 0;
+};
+
+//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
+class PngLoader : public ImageLoader
+{
+	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
+};
+
+//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
+class JpgLoader : public ImageLoader
+{
+	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
 };
 
 //! Manage textures loading and manipulation.
@@ -133,20 +156,6 @@ private:
 
 	//! Used to correct a bug on some nvidia cards
 	bool isNoPowerOfTwoLUMINANCEAllowed;
-	
-	//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
-	class PngLoader : public ImageLoader
-	{
-		virtual bool loadImage(const QString& filename, STexture& texinfo);
-	};
-	static PngLoader pngLoader;
-	
-	//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
-	class JpgLoader : public ImageLoader
-	{
-		virtual bool loadImage(const QString& filename, STexture& texinfo);
-	};
-	static JpgLoader jpgLoader;
 	
 	class QHttp* downloader;
 };

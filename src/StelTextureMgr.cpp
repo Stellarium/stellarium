@@ -44,8 +44,8 @@ extern "C" {
 using namespace std;
 
 // Initialize statics
-StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
-StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
+static PngLoader pngLoader;
+static JpgLoader jpgLoader;
 
 /*************************************************************************
  Constructor for the StelTextureMgr class
@@ -342,13 +342,31 @@ bool StelTextureMgr::loadImage(STexture* tex)
 	}
 
 	// Load the image
-	if (!loadFuncIter.value()->loadImage(tex->fullPath, *tex))
+	// Create a new texInfo withthe proper parameters
+	ImageLoader::TexInfo texInfo;
+	texInfo.format = tex->format;
+	texInfo.width = tex->width;
+	texInfo.height = tex->height;
+	texInfo.type = tex->type;
+	texInfo.internalFormat = tex->internalFormat;
+	texInfo.texels = tex->texels;
+	texInfo.fullPath = tex->fullPath;
+			
+	if (!loadFuncIter.value()->loadImage(tex->fullPath, texInfo))
 	{
 		qWarning() << "Image loading failed for file: " << tex->fullPath;
 		tex->texels = NULL;
 		return false;
 	}
 
+	// Update texture parameters from TexInfo
+	tex->format = texInfo.format;
+	tex->width = texInfo.width;
+	tex->height = texInfo.height;
+	tex->type = texInfo.type;
+	tex->internalFormat = texInfo.internalFormat;
+	tex->texels = texInfo.texels;
+	
 	if (!tex->texels)
 	{
 		qWarning() << "Image loading returned empty texels for file: " << tex->fullPath;
@@ -458,7 +476,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *************************************************************************/
-bool StelTextureMgr::PngLoader::loadImage(const QString& filename, STexture& texinfo)
+bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 {
 	png_byte magic[8];
 	png_structp png_ptr;
@@ -695,7 +713,7 @@ void err_exit(j_common_ptr cinfo)
 }
 
 
-bool StelTextureMgr::JpgLoader::loadImage(const QString& filename, STexture& texinfo)
+bool JpgLoader::loadImage(const QString& filename, TexInfo& texinfo)
 {
 	FILE *fp = NULL;
 	struct jpeg_decompress_struct cinfo;
