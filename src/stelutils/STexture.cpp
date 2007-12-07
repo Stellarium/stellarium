@@ -71,8 +71,21 @@ STexture::~STexture()
 		// std::cerr << "Delete texture with ID=" << id << std::endl;
 	}
 	id = 0;
+	delete mutex;
+	mutex = NULL;
 }
 
+/*************************************************************************
+ This method should be called if the texture loading failed for any reasons
+ *************************************************************************/
+void STexture::reportError(const QString& aerrorMessage)
+{
+	errorOccured = true;
+	errorMessage = aerrorMessage;
+	// Report failure of texture loading
+	emit(loadingProcessFinished(this, true));
+}
+	
 //! Load an image and set the texture parameters in a thread
 class ImageLoadThread : public QThread
 {
@@ -190,6 +203,9 @@ bool STexture::glLoad()
 	// OpenGL has its own copy of texture data
 	free (texels);
 	texels = NULL;
+	
+	// Report success of texture loading
+	emit(loadingProcessFinished(this, false));
 	
 	return true;
 }
