@@ -23,13 +23,15 @@ void AstroImage::draw(StelCore* core)
 {
 	if (!tex) return;
 	
+	if (!tex->bind())
+		return;
+	
 	Projector* prj = core->getProjection();
 	
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glColor4f(1.0,1.0,1.0,1.0);
-	tex->bind();
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
 	
