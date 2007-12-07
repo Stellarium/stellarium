@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-13 08:23-0700\n"
+"POT-Creation-Date: 2007-12-06 18:27+0100\n"
 "PO-Revision-Date: 2007-06-20 12:22+0000\n"
 "Last-Translator: tuan1812 <dohuutuan1812@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Rosetta-Export-Date: 2007-07-06 16:18:16+0000\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:729
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -26,47 +26,43 @@ msgstr ""
 "    và đóng góp ý kiến cho chúng tôi tại: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
-msgid " Light Years"
-msgstr " Năm ánh sáng"
-
-#: src/stel_ui_conf.cpp:1083
+#: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
 msgstr ": Mật độ mưa sao băng Leonid khác thường"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/stel_ui_conf.cpp:1111
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Mật độ cao nhất đã từng có (mưa sao băng Leonids 1966)"
 
-#: src/stel_ui_conf.cpp:1069
+#: src/stel_ui_conf.cpp:1090
 msgid ": Normal rate"
 msgstr ": Tốc độ bình thường"
 
-#: src/stel_ui_conf.cpp:1076
+#: src/stel_ui_conf.cpp:1097
 msgid ": Standard Perseids rate"
 msgstr ": Tốc độ mưa sao băng Perseids"
 
-#: src/Planet.cpp:129 src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
 msgstr "Đơn vị thiên văn"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
 msgstr "Thời gian thực"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
 msgstr "Quản trị "
 
-#: src/stel_ui_conf.cpp:147
+#: src/stel_ui_conf.cpp:149
 msgid "Also display Nebulas without textures"
 msgstr "Cũng hiển thị những đám tinh vân không có hình chụp"
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
 msgstr "Độ cao (mét): "
 
-#: src/stel_ui_conf.cpp:342
+#: src/stel_ui_conf.cpp:344
 msgid "Altitude : "
 msgstr "Độ cao : "
 
@@ -102,7 +98,7 @@ msgstr "Đàn Tế Thần"
 msgid "Aries"
 msgstr "Bạch Dương"
 
-#: src/stel_ui_tuiconf.cpp:636
+#: src/stel_ui_tuiconf.cpp:637
 msgid "Arrow down to load list."
 msgstr "Nhấn phím mủi tên xuống để tải danh sách."
 
@@ -110,11 +106,11 @@ msgstr "Nhấn phím mủi tên xuống để tải danh sách."
 msgid "Arsenal"
 msgstr "Kho chứa vũ khí"
 
-#: src/stel_ui_conf.cpp:218
+#: src/stel_ui_conf.cpp:220
 msgid "Atmosphere"
 msgstr "Khí quyển"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:681
 msgid "Atmosphere [A]"
 msgstr "Bầu khí quyển [A]"
 
@@ -126,20 +122,19 @@ msgstr "Ngự Phu"
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
+#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
 msgstr "Tác giả: "
 
-#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
-#: src/Planet.cpp:125
+#: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
 msgstr "Độ phương/Độ cao: "
 
-#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
 msgid "Azimuthal Grid"
 msgstr "Lưới phương vị"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:673
 msgid "Azimuthal Grid [Z]"
 msgstr "Lưới phương vị [Z]"
 
@@ -187,15 +182,15 @@ msgstr ""
 msgid "Bull's Foreleg"
 msgstr "Chân Trước Con Bò"
 
-#: src/stel_ui_tuiconf.cpp:456
+#: src/stel_ui_tuiconf.cpp:457
 msgid "CD/DVD Script: "
 msgstr "Kịch bản cho CD/DVD: "
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:811
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Thoát\n"
 
-#: src/stel_ui.cpp:807
+#: src/stel_ui.cpp:809
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Thoát\n"
 
@@ -203,7 +198,7 @@ msgstr "CTRL + Q : Thoát\n"
 msgid "Caelum"
 msgstr "Cái Đục"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
 msgstr ""
 
@@ -239,11 +234,11 @@ msgstr "Đại Khuyển"
 msgid "Capricornus"
 msgstr "Dê Biển"
 
-#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
 msgid "Cardinal Points"
 msgstr "Điểm phương hướng"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:679
 msgid "Cardinal Points [Q]"
 msgstr "Điểm phương hướng [Q]"
 
@@ -303,7 +298,7 @@ msgstr "Chematy"
 msgid "Chinese"
 msgstr "Tiếng Trung Quốc"
 
-#: src/stel_ui_conf.cpp:443
+#: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
 msgstr "Chọn phong cảnh :"
 
@@ -323,7 +318,7 @@ msgstr "Cuộn da"
 msgid "Collarbones"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
 msgstr "Màu sắc "
 
@@ -335,48 +330,48 @@ msgstr "Bồ Câu"
 msgid "Coma Berenices"
 msgstr "Tóc Bà Berenices"
 
-#: src/stel_ui.cpp:1030
+#: src/stel_ui.cpp:1032
 msgid "Command recording stopped."
 msgstr "Dừng việc ghi lệnh."
 
-#: src/stel_ui_conf.cpp:55
+#: src/stel_ui_conf.cpp:57
 msgid "Configuration"
 msgstr "Cấu hình"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:689
 #, fuzzy
 msgid "Configuration window [1]"
 msgstr "Thiết lập thông số"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
 msgstr "Độ đậm hình vẽ chòm sao"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:427
 msgid "Constellation Boundaries"
 msgstr "Ranh giới các chòm sao"
 
-#: src/stel_ui_tuiconf.cpp:423
+#: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Lines"
 msgstr "Đường nối chòm sao"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Names"
 msgstr "Tên các chòm sao"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:671
 msgid "Constellations Art [R]"
 msgstr "Hình vẽ các chòm sao [R]"
 
-#: src/stel_ui_conf.cpp:118
+#: src/stel_ui_conf.cpp:120
 msgid "Constellations Boundaries"
 msgstr "Ranh giới các chòm sao"
 
-#: src/stel_ui_conf.cpp:108
+#: src/stel_ui_conf.cpp:110
 msgid "Constellations Lines"
 msgstr "Đường nối các chòm sao"
 
-#: src/stel_ui_conf.cpp:113
+#: src/stel_ui_conf.cpp:115
 msgid "Constellations Names"
 msgstr "Tên các chòm sao"
 
@@ -404,19 +399,19 @@ msgstr "Cá sấu"
 msgid "Crux"
 msgstr "Thập Tự Phương Nam"
 
-#: src/stel_ui_conf.cpp:265
+#: src/stel_ui_conf.cpp:267
 msgid "Current Time :"
 msgstr "Thời gian hiện tại :"
 
-#: src/stel_ui_conf.cpp:1121
+#: src/stel_ui_conf.cpp:1142
 msgid "Current Time Speed is x"
 msgstr "Tốc độ trôi thời gian hiện tại là x"
 
-#: src/stel_ui_conf.cpp:316
+#: src/stel_ui_conf.cpp:318
 msgid "Cursor : "
 msgstr "Địa điểm đang chỉ : "
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/stel_ui_tuiconf.cpp:450
 msgid "Cursor Timeout: "
 msgstr "Thời gian dấu con chuột: "
 
@@ -428,11 +423,11 @@ msgstr "Mảng cong"
 msgid "Cygnus"
 msgstr "Thiên Nga"
 
-#: src/stel_ui_conf.cpp:550
+#: src/stel_ui_conf.cpp:558
 msgid "Date & Time"
 msgstr "Ngày & thời gian"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_tuiconf.cpp:405
 msgid "Date Display Format: "
 msgstr "Dạng ngày hiển thị: "
 
@@ -440,11 +435,11 @@ msgstr "Dạng ngày hiển thị: "
 msgid "Day"
 msgstr "Ngày"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:712
+#: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
 msgstr "Giảm tốc độ trôi thời gian [J]"
 
@@ -456,7 +451,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Cá Heo"
 
-#: src/stel_ui.cpp:781
+#: src/stel_ui.cpp:783
 #, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
@@ -488,11 +483,11 @@ msgstr "Dione"
 msgid "Dipper"
 msgstr "Cái gàu"
 
-#: src/stel_ui_conf.cpp:390
+#: src/stel_ui_conf.cpp:395
 msgid "Disk Viewport"
 msgstr "Tầm nhìn dạng đĩa"
 
-#: src/stel_ui.cpp:769
+#: src/stel_ui.cpp:771
 #, fuzzy
 msgid ""
 "Display options:\n"
@@ -521,8 +516,7 @@ msgstr ""
 "4 , : Đường elip 5 . : Đường xích đạo\n"
 "\n"
 
-#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
-#: src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
 msgstr "Khoảng cách: "
 
@@ -546,7 +540,7 @@ msgstr "Cá Kiếm"
 msgid "Draco"
 msgstr "Thiên Long"
 
-#: src/stel_ui.cpp:665
+#: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
 msgstr "Đường nối trong chòm sao [C]"
 
@@ -562,7 +556,7 @@ msgstr "Trống"
 msgid "Drumstick"
 msgstr "Dùi trống"
 
-#: src/stel_ui.cpp:797
+#: src/stel_ui.cpp:799
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -590,11 +584,11 @@ msgstr "Đền của vị thần trái đất"
 msgid "Eastern Door"
 msgstr "Cửa Đông"
 
-#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:435
+#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
 msgstr "Đường hoàng đạo"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
 msgstr "Hiệu ứng "
 
@@ -618,27 +612,23 @@ msgstr "Trại giam"
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/stel_ui_conf.cpp:872
+#: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
 msgstr "Nhập vào tên nơi quan sát"
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
-msgid "Equ of date"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Đường quỹ đạo"
 
-#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
 msgid "Equatorial Grid"
 msgstr "Lưới quỹ đạo"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
 msgstr "Lưới xích đạo [E]"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Quay theo Equatorial/Altazimuthal [ENTER]"
 
@@ -650,7 +640,7 @@ msgstr "Tiểu Mã"
 msgid "Eridanus"
 msgstr "Sông Eridanus"
 
-#: src/stel_ui.cpp:1044
+#: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
 msgstr "Lỗi: không thể mở file kịch bản để ghi lệnh."
 
@@ -698,12 +688,12 @@ msgstr "Ngủ vị hoàng đế"
 msgid "Flail"
 msgstr "Cái đập lúa"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:706
 #, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Lật theo chiều ngang"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:708
 #, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Lật theo chiều dọc"
@@ -716,11 +706,11 @@ msgstr "Bầy"
 msgid "Flying Corridor"
 msgstr "Hành lang bay"
 
-#: src/stel_ui_conf.cpp:223
+#: src/stel_ui_conf.cpp:225
 msgid "Fog"
 msgstr "Sương mù"
 
-#: src/stel_ui_conf.cpp:426
+#: src/stel_ui_conf.cpp:434
 msgid "For unlisted screen resolution, edit the file :"
 msgstr ""
 "Chọn những độ phân giải không được liệt kê ra ở đây bằng cách sửa file :"
@@ -741,7 +731,7 @@ msgstr "Tứ kênh"
 msgid "Frigate Bird"
 msgstr "Chim chiến"
 
-#: src/stel_ui_conf.cpp:725
+#: src/stel_ui_conf.cpp:733
 msgid "GO"
 msgstr "Bắt đầu"
 
@@ -753,7 +743,7 @@ msgstr "Ganymede"
 msgid "Gemini"
 msgstr "Song Tử"
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:379
 msgid "General "
 msgstr "Tổng quát "
 
@@ -773,7 +763,7 @@ msgstr "Cô gái"
 msgid "Good Gourd"
 msgstr "Quả bầu tốt"
 
-#: src/stel_ui.cpp:702
+#: src/stel_ui.cpp:704
 msgid "Goto selected object [SPACE]"
 msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
 
@@ -781,11 +771,11 @@ msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
 msgid "Great General"
 msgstr "Vị tướng vĩ đại"
 
-#: src/stel_ui_conf.cpp:208
+#: src/stel_ui_conf.cpp:210
 msgid "Ground"
 msgstr "Mặt đất"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:677
 msgid "Ground [G]"
 msgstr "Mặt đất [G]"
 
@@ -801,11 +791,11 @@ msgstr ""
 msgid "Heart"
 msgstr "Trái tim"
 
-#: src/stel_ui.cpp:816
+#: src/stel_ui.cpp:818
 msgid "Help"
 msgstr "Trợ giúp"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:685
 msgid "Help [H]"
 msgstr "Trợ giúp [H]"
 
@@ -817,7 +807,7 @@ msgstr "Dũng Sĩ Hercules"
 msgid "Hippopotamus"
 msgstr "Hà mã"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Nhấn CTRL-R lần nữa để dừng.\n"
 
@@ -865,7 +855,7 @@ msgstr "Lính hoàng cung"
 msgid "Imperial Passageway"
 msgstr "Hành lang hoàng cung"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:718
 msgid "Increase Time Speed [L]"
 msgstr "Tăng tốc độ trôi thời gian [L]"
 
@@ -873,11 +863,11 @@ msgstr "Tăng tốc độ trôi thời gian [L]"
 msgid "Indus"
 msgstr "Người Da Đỏ"
 
-#: src/stel_ui_conf.cpp:1003
+#: src/stel_ui_conf.cpp:1024
 msgid "Info: "
 msgstr "Thông tin: "
 
-#: src/stel_ui.cpp:746
+#: src/stel_ui.cpp:748
 msgid "Information"
 msgstr "Thông tin"
 
@@ -885,17 +875,13 @@ msgstr "Thông tin"
 msgid "Inuit"
 msgstr ""
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:588
 msgid "Invalid Script command"
 msgstr "Mã lệnh sai"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
-
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
-msgid "J2000"
-msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -945,23 +931,23 @@ msgstr ""
 msgid "Lance"
 msgstr "Cây thương"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/stel_ui_tuiconf.cpp:443
 msgid "Landscape: "
 msgstr "Phong cảnh: "
 
-#: src/stel_ui_conf.cpp:552
+#: src/stel_ui_conf.cpp:560
 msgid "Landscapes"
 msgstr "Phong cảnh"
 
-#: src/stel_ui_conf.cpp:549
+#: src/stel_ui_conf.cpp:557
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: src/stel_ui_conf.cpp:334
+#: src/stel_ui_conf.cpp:336
 msgid "Latitude : "
 msgstr "Vĩ tuyến : "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:387
 msgid "Latitude: "
 msgstr "Vĩ độ: "
 
@@ -989,14 +975,9 @@ msgstr "Con Thỏ"
 msgid "Libra"
 msgstr "Thiên Bình"
 
-#: src/stel_ui_tuiconf.cpp:441
+#: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
 msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:420
-#, fuzzy
-msgid "Limiting Magnitude: "
-msgstr "Cấp sao biểu kiến: "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -1006,44 +987,44 @@ msgstr "Sư tử"
 msgid "Lizard"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:460
+#: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
 msgstr "Nạp cấu hình mặc định: "
 
-#: src/ConstellationMgr.cpp:321
+#: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
 msgstr "Đang tải hình vẽ các chòm sao: "
 
-#: src/NebulaMgr.cpp:390
+#: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
 msgstr "Đang tải bảng danh mục NGC: "
 
-#: src/NebulaMgr.cpp:523
+#: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
 msgstr "Đang tải kết cấu các tinh vân:"
 
-#: src/StarMgr.cpp:1622
+#: src/StarMgr.cpp:448
 msgid "Loading catalog "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:453
+#: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
 msgstr "Kịch bản cục bộ: "
 
-#: src/stel_ui_conf.cpp:551
+#: src/stel_ui_conf.cpp:559
 msgid "Location"
 msgstr "Địa điểm"
 
-#: src/stel_ui_conf.cpp:468 src/stel_ui_conf.cpp:1005
+#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
 #, fuzzy
 msgid "Location: "
 msgstr "Địa điểm"
 
-#: src/stel_ui_conf.cpp:326
+#: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
 msgstr "Kinh tuyến : "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Longitude: "
 msgstr "Kinh độ: "
 
@@ -1059,18 +1040,16 @@ msgstr "Mèo Rừng"
 msgid "Lyra"
 msgstr "Thiên Cầm"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude"
 msgstr "Cường độ"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/stel_ui_tuiconf.cpp:446
 #, fuzzy
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Tăng cường độ: "
 
-#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
-#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
-#: src/Planet.cpp:164
+#: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
 msgstr "Cấp sao biểu kiến: "
 
@@ -1082,7 +1061,7 @@ msgstr ""
 msgid "Man's Cart"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
 msgstr "Zoom thủ công: "
 
@@ -1106,11 +1085,11 @@ msgstr "Móc câu cá của Maui"
 msgid "Mausoleum"
 msgstr "Lăng mộ"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Maximum Magnitude to Label: "
 msgstr "Hiện tên vật thể sáng tối đa: "
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Hiện tên đám tinh vân có độ sáng đến: "
 
@@ -1126,11 +1105,11 @@ msgstr "Núi Table"
 msgid "Mercury"
 msgstr "Thuỷ tinh"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
 msgstr "Đường kinh tuyến"
 
-#: src/stel_ui_conf.cpp:1095
+#: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1138,7 +1117,7 @@ msgstr ""
 msgid "Microscopium"
 msgstr "Kính Hiển Vi"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/stel_ui_tuiconf.cpp:447
 msgid "Milky Way intensity: "
 msgstr "Mật độ dãi Ngân Hà "
 
@@ -1150,7 +1129,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Phút"
 
-#: src/stel_ui.cpp:801
+#: src/stel_ui.cpp:803
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1176,7 +1155,7 @@ msgstr "Tháng"
 msgid "Moon"
 msgstr "Mặt trăng"
 
-#: src/stel_ui_conf.cpp:163
+#: src/stel_ui_conf.cpp:165
 msgid "Moon Scale"
 msgstr "Tỉ lệ thật mặt trăng"
 
@@ -1188,7 +1167,7 @@ msgstr "Trụ neo"
 msgid "Mortar"
 msgstr "Vữa"
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:760
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1222,7 +1201,7 @@ msgstr "Con Ruồi"
 msgid "N"
 msgstr "B"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:669
 msgid "Names of the Constellations [V]"
 msgstr "Tên các chòm sao [V]"
 
@@ -1234,19 +1213,19 @@ msgstr ""
 msgid "Navigator's Triangle"
 msgstr "Tam giác hàng hải"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/stel_ui_tuiconf.cpp:438
 msgid "Nebula Circles"
 msgstr "Vòng bao tinh vân"
 
-#: src/stel_ui_tuiconf.cpp:436
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
 msgstr "Tên các chòm sao"
 
-#: src/stel_ui_conf.cpp:134
+#: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
 msgstr "Hiện tên tinh vân sáng đến :"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
 msgstr "Tinh vân [N]"
 
@@ -1262,12 +1241,12 @@ msgstr "Hải vương tinh"
 msgid "Net"
 msgstr "Mạng"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:692
 msgid "Night (red) mode"
 msgstr "Mode ban đêm (menu đỏ)"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2220
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
 msgid "No"
 msgstr "Không"
 
@@ -1292,11 +1271,11 @@ msgstr "Cái gầu phương Bắc"
 msgid "OK"
 msgstr "Đồng ý"
 
-#: src/stel_ui_conf.cpp:700
+#: src/stel_ui_conf.cpp:708
 msgid "Object Search"
 msgstr "Tìm kiếm vật thể"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Object Sizing Rule: "
 msgstr "Quy luật thay đổi cỡ vật thể: "
 
@@ -1331,10 +1310,6 @@ msgstr "Hai ngôi sao"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Cổng cung điện"
-
-#: src/StarMgr.cpp:953
-msgid "Parallax: "
-msgstr ""
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1376,28 +1351,28 @@ msgstr "Song Ngư"
 msgid "Piscis Austrinus"
 msgstr "Nam Ngư"
 
-#: src/stel_ui_tuiconf.cpp:428
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Names"
 msgstr "Tên các hành tinh"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Orbits"
 msgstr "Quỹ đạo các hành tinh"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:431
 msgid "Planet Trails"
 msgstr "Vết các hành tinh"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:1004
+#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
 #, fuzzy
 msgid "Planet: "
 msgstr "Hành tinh"
 
-#: src/stel_ui_conf.cpp:158
+#: src/stel_ui_conf.cpp:160
 msgid "Planets"
 msgstr "Hành tinh"
 
-#: src/stel_ui_conf.cpp:170
+#: src/stel_ui_conf.cpp:172
 msgid "Planets Hints"
 msgstr "Ghi chú các hình tinh"
 
@@ -1405,7 +1380,7 @@ msgstr "Ghi chú các hình tinh"
 msgid "Pluto"
 msgstr "Diêm vương tinh"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Point"
 msgstr "Điểm"
 
@@ -1413,19 +1388,19 @@ msgstr "Điểm"
 msgid "Polynesian"
 msgstr "Người Pô-li-nê-di"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Preset Sky Time: "
 msgstr "Chỉnh thời gian bầu trời: "
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:403
 msgid "Preset Time"
 msgstr "Chỉnh thời gian"
 
-#: src/stel_ui_conf.cpp:494
+#: src/stel_ui_conf.cpp:502
 msgid "Program Language: "
 msgstr "Ngôn ngữ chương trình: "
 
-#: src/stel_ui_conf.cpp:371
+#: src/stel_ui_conf.cpp:376
 msgid "Projection :"
 msgstr "Hình chiếu :"
 
@@ -1445,16 +1420,15 @@ msgstr "Cung điện tím"
 msgid "Pyxis"
 msgstr "La Bàn"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:697
 msgid "Quit [CMD + Q]"
 msgstr "Thoát [CMD + Q]"
 
-#: src/stel_ui.cpp:693
+#: src/stel_ui.cpp:695
 msgid "Quit [CTRL + Q]"
 msgstr "Thoát [CTRL + Q]"
 
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
-#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "Xích kinh/Xích vĩ: "
 
@@ -1470,19 +1444,19 @@ msgstr ""
 msgid "Ramparts"
 msgstr "Thành lũy"
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:716
 msgid "Real Time Speed [K]"
 msgstr "Tốc độ thời gian thực [K]"
 
-#: src/stel_ui.cpp:1038
+#: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
 msgstr "Ghi các lệnh vào file kịch bản:\n"
 
-#: src/stel_ui_conf.cpp:554
+#: src/stel_ui_conf.cpp:562
 msgid "Rendering"
 msgstr "Hiển thị"
 
-#: src/stel_ui_conf.cpp:411
+#: src/stel_ui_conf.cpp:419
 msgid "Restart program for"
 msgstr "Khởi động lại chương trình để"
 
@@ -1490,7 +1464,7 @@ msgstr "Khởi động lại chương trình để"
 msgid "Reticulum"
 msgstr "Lưới Đo Góc"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:720
 #, fuzzy
 msgid "Return to Current Time [8]"
 msgstr "Trở về thời điểm hiện tại"
@@ -1563,20 +1537,20 @@ msgstr ""
 msgid "Saturn"
 msgstr "Thổ tinh"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/stel_ui_tuiconf.cpp:462
 msgid "Save Current Configuration as Default: "
 msgstr "Lưu cấu hình hiện tại thành mặc định: "
 
-#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:484
-#: src/stel_ui_conf.cpp:542
+#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
+#: src/stel_ui_conf.cpp:550
 msgid "Save as default"
 msgstr "Lưu vào mặc định"
 
-#: src/stel_ui_conf.cpp:349
+#: src/stel_ui_conf.cpp:353
 msgid "Save location"
 msgstr "Lưu địa điểm"
 
-#: src/stel_ui_conf.cpp:400
+#: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
 msgstr ""
 
@@ -1588,15 +1562,15 @@ msgstr "Bò Cạp"
 msgid "Screen"
 msgstr "Màn hình"
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:415
 msgid "Screen Resolution :"
 msgstr "Độ phân giải màn hình :"
 
-#: src/stel_ui.cpp:558 src/stel_ui.cpp:700
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
 msgid "Script commander"
 msgstr "Bộ soạn kịch bản"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/stel_ui_tuiconf.cpp:383
 msgid "Scripts "
 msgstr "Kịch bản "
 
@@ -1608,11 +1582,11 @@ msgstr "Nhà Điêu Khắc"
 msgid "Scutum"
 msgstr "Cái Khiên"
 
-#: src/stel_ui_conf.cpp:707
+#: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Tìm kiếm (ví dụ: Saturn, Polaris, HP6218, Orion, M31)"
 
-#: src/stel_ui.cpp:698
+#: src/stel_ui.cpp:700
 #, fuzzy
 msgid "Search for object [CTRL + F]"
 msgstr "Tìm kiếm vật thể"
@@ -1629,11 +1603,11 @@ msgstr "Sek"
 msgid "Select and exit to run."
 msgstr "Chọn và thoát để chạy."
 
-#: src/stel_ui_conf.cpp:321
+#: src/stel_ui_conf.cpp:323
 msgid "Selected : "
 msgstr "Được chọn : "
 
-#: src/stel_ui_conf.cpp:123
+#: src/stel_ui_conf.cpp:125
 msgid "Selected Constellation Only"
 msgstr "Chỉ hiện thị chòm sao được chọn"
 
@@ -1645,27 +1619,27 @@ msgstr "Selkis (1 vị nữ thần Ai Cập)"
 msgid "Serpens"
 msgstr "Con Rắn"
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
 msgstr "Thiết lập địa điểm "
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
 msgstr "Thiết lập thời gian "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Set Time Zone: "
 msgstr "Thiết lập múi thời gian: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/stel_ui_tuiconf.cpp:465
 msgid "Set UI Locale: "
 msgstr "Thiết lập nơi xảy ra UI "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:473
+#: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
 msgstr ""
 
@@ -1689,35 +1663,35 @@ msgstr "Con cừu"
 msgid "Sheepfold"
 msgstr "Bãi rào cừu"
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Show: "
 msgstr "Xem: "
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/stel_ui_tuiconf.cpp:463
 msgid "Shut Down: "
 msgstr "Tắt: "
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
 msgstr ""
 
-#: src/Nebula.cpp:107
+#: src/Nebula.cpp:109
 msgid "Size: "
 msgstr "Kích thuớc: "
 
-#: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
 msgstr "Chòm sao theo : "
 
-#: src/stel_ui_conf.cpp:510 src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
 msgid "Sky Language: "
 msgstr "Ngôn ngữ cho bầu trời: "
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Sky Time At Start-up: "
 msgstr "Thời gian bầu trời lúc bắt đầu: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
 msgstr "Thời gian bầu trời: "
 
@@ -1725,7 +1699,7 @@ msgstr "Thời gian bầu trời: "
 msgid "Snake"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
 msgstr "Những vật thể thuộc hệ mặt trời: "
 
@@ -1745,10 +1719,6 @@ msgstr "Sông Nam"
 msgid "Spear"
 msgstr "Cây giáo"
 
-#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
-msgid "Spectral Type: "
-msgstr "Dạng phổ: "
-
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Mùa xuân"
@@ -1761,24 +1731,24 @@ msgstr "Kho thóc vuông"
 msgid "Star"
 msgstr "Ngôi sao"
 
-#: src/stel_ui_conf.cpp:80
+#: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
 msgstr "Hiện tên ngôi sao sáng đến :"
 
-#: src/stel_ui_conf.cpp:92
+#: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
 msgstr "Số lượng sao nhấp nháy :"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:418
 #, fuzzy
 msgid "Star Value Multiplier: "
 msgstr "Tăng độ sáng biểu kiến sao: "
 
-#: src/stel_ui_conf.cpp:75
+#: src/stel_ui_conf.cpp:77
 msgid "Stars"
 msgstr "Các vì sao"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
 msgstr "Các vì sao "
 
@@ -1847,7 +1817,7 @@ msgstr ""
 msgid "Thunderbolt"
 msgstr "Tiếng sét"
 
-#: src/stel_ui.cpp:789
+#: src/stel_ui.cpp:791
 #, fuzzy
 msgid ""
 "Time & Date:\n"
@@ -1867,15 +1837,15 @@ msgstr ""
 "[ : Lùi 7 ngày ] : Tăng 7 ngày\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
 msgstr "Dạng thời gian hiển thị: "
 
-#: src/stel_ui_conf.cpp:274
+#: src/stel_ui_conf.cpp:276
 msgid "Time Zone :"
 msgstr "Múi thời gian :"
 
-#: src/stel_ui_conf.cpp:287
+#: src/stel_ui_conf.cpp:289
 msgid "Time speed : "
 msgstr "Tốc độ thời gian trôi : "
 
@@ -1911,7 +1881,7 @@ msgstr "Chim Tu-Căng"
 msgid "Turtle"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Twinkling: "
 msgstr "Nhấp nháy: "
 
@@ -1935,7 +1905,7 @@ msgstr ""
 msgid "Two in Front"
 msgstr ""
 
-#: src/Nebula.cpp:105
+#: src/Nebula.cpp:107
 msgid "Type: "
 msgstr "Loại: "
 
@@ -1944,7 +1914,7 @@ msgstr "Loại: "
 msgid "USB Script: "
 msgstr "Kịch bản "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
 msgstr "Cập nhật qua Internet: "
 
@@ -1960,7 +1930,7 @@ msgstr "Đại Hùng"
 msgid "Ursa Minor"
 msgstr "Tiểu Hùng"
 
-#: src/stel_ui_conf.cpp:295
+#: src/stel_ui_conf.cpp:297
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1970,7 +1940,7 @@ msgstr ""
 "   tốc độ thời gian trôi.\n"
 "Sử dụng phím K để chỉnh tốc độ thời gian trôi bình thường."
 
-#: src/stel_ui_conf.cpp:278
+#: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
 msgstr "Sử dụng hệ thống múi thời gian mặc định"
 
@@ -1982,11 +1952,11 @@ msgstr "Buồm Tàu Argo"
 msgid "Venus"
 msgstr "Kim tinh"
 
-#: src/stel_ui_conf.cpp:553
+#: src/stel_ui_conf.cpp:561
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:395
+#: src/stel_ui_conf.cpp:400
 msgid "Viewport Distorter"
 msgstr ""
 
@@ -2067,8 +2037,8 @@ msgstr "Xuanyuan"
 msgid "Year"
 msgstr "Năm"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2239
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
 msgid "Yes"
 msgstr "Đúng"
 
@@ -2076,25 +2046,42 @@ msgstr "Đúng"
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/stel_ui_tuiconf.cpp:449
 msgid "Zoom Duration: "
 msgstr "Khoảng thời gian phóng to/thu nhỏ: "
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:420
 msgid "change to apply."
 msgstr "thay đổi để ghi nhận."
+
+#: src/stel_ui_conf.cpp:350
+msgid "m"
+msgstr ""
 
 #~ msgid " (Variable)"
 #~ msgstr " Biến quang"
 
+#~ msgid " Light Years"
+#~ msgstr " Năm ánh sáng"
+
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: (Các) đối số trong dòng lệnh sai\n"
+
+#~ msgid "J2000"
+#~ msgstr "J2000"
+
+#, fuzzy
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Cấp sao biểu kiến: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Đang tải bảng danh mục Hipparcos:"
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Mật độ sao băng mỗi phút"
+
+#~ msgid "Spectral Type: "
+#~ msgstr "Dạng phổ: "
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Gõ `%s --help' để biết thêm thông tin.\n"

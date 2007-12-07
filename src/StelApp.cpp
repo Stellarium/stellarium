@@ -532,8 +532,6 @@ void StelApp::update(int delta_time)
 {
      if (!initialized)
         return;
-        
-	textureMgr->update();
 	
 	++frame;
 	timefr+=delta_time;

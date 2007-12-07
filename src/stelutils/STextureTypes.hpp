@@ -23,10 +23,21 @@
 #include <boost/shared_ptr.hpp>
 
 class STexture;
-class ManagedSTexture;
 
 //! In stellarium we now use shared pointer to simplify memory managment
 typedef boost::shared_ptr<STexture> STextureSP;
-typedef boost::shared_ptr<ManagedSTexture> ManagedSTextureSP;
 
+namespace STextureTypes
+{
+
+//! Supported dynamic range modes
+enum DynamicRangeMode
+{
+	LINEAR,
+	MINMAX_USER,
+	MINMAX_QUANTILE,
+	MINMAX_GREYLEVEL,
+	MINMAX_GREYLEVEL_AUTO
+};
+}
 #endif /*STEXTURETYPES_HPP_*/

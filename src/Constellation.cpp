@@ -19,12 +19,11 @@
 
 #include <iostream>
 #include <algorithm>
-#include "STexture.hpp"
 #include "Projector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 #include "Navigator.hpp"
-#include "StelTextureMgr.hpp"
+#include "STexture.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
@@ -137,7 +136,9 @@ void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
-			artTexture->bind();
+			// The texture is not fully loaded
+			if (artTexture->bind()==false)
+				return;
 		
 			if ((b0 || b1 || b2 || b3) && (v0[2]<1 && v1[2]<1 && v2[2]<1 && v3[2]<1))
 			{	

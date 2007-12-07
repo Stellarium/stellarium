@@ -19,7 +19,6 @@
 
 #include "Landscape.hpp"
 #include "InitParser.hpp"
-#include "STexture.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"

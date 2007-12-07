@@ -28,6 +28,7 @@
 #include "StelTextureMgr.hpp"
 #include "InitParser.hpp"
 #include "StelCore.hpp"
+#include <QDebug>
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
@@ -55,7 +56,8 @@ void MilkyWay::setTexture(const QString& texFile)
 	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
 
 	// big performance improvement to cache this
-	tex_avg_luminance = tex->getAverageLuminance();
+	if (!tex->getAverageLuminance(tex_avg_luminance))
+		qWarning() << "Luminance used from unloaded image";
 }
 
 void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
