@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-13 08:23-0700\n"
+"POT-Creation-Date: 2007-12-06 18:27+0100\n"
 "PO-Revision-Date: 2007-07-26 20:25+0000\n"
 "Last-Translator: Ali Isingor <isingor@gmail.com>\n"
 "Language-Team: <tr@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "X-Rosetta-Export-Date: 2007-07-29 13:58:33+0000\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:729
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,47 +27,43 @@ msgstr ""
 "    yorumlarınızı http://www.stellarium.org adresine yazın.\n"
 "\n"
 
-#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
-msgid " Light Years"
-msgstr " Işık Yılı"
-
-#: src/stel_ui_conf.cpp:1083
+#: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
 msgstr ": İstisnai Leonid hızı"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/stel_ui_conf.cpp:1111
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Şimdiye kadarki en yüksek hız (1966 Leonids)"
 
-#: src/stel_ui_conf.cpp:1069
+#: src/stel_ui_conf.cpp:1090
 msgid ": Normal rate"
 msgstr "Normal hız"
 
-#: src/stel_ui_conf.cpp:1076
+#: src/stel_ui_conf.cpp:1097
 msgid ": Standard Perseids rate"
 msgstr ": Standart Perseids meteor yağmuru oranı"
 
-#: src/Planet.cpp:129 src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
 msgstr "Şu anki zaman"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
 msgstr "Yönetim "
 
-#: src/stel_ui_conf.cpp:147
+#: src/stel_ui_conf.cpp:149
 msgid "Also display Nebulas without textures"
 msgstr "Dokusuz bulutsuları da göster"
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
 msgstr "Rakım (m): "
 
-#: src/stel_ui_conf.cpp:342
+#: src/stel_ui_conf.cpp:344
 msgid "Altitude : "
 msgstr "Rakım : "
 
@@ -103,7 +99,7 @@ msgstr "Sunak"
 msgid "Aries"
 msgstr "Koç"
 
-#: src/stel_ui_tuiconf.cpp:636
+#: src/stel_ui_tuiconf.cpp:637
 msgid "Arrow down to load list."
 msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
 
@@ -111,11 +107,11 @@ msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
 msgid "Arsenal"
 msgstr "Cephanelik"
 
-#: src/stel_ui_conf.cpp:218
+#: src/stel_ui_conf.cpp:220
 msgid "Atmosphere"
 msgstr "Atmosfer"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:681
 msgid "Atmosphere [A]"
 msgstr "Atmosfer [A]"
 
@@ -127,20 +123,19 @@ msgstr "Arabacı"
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
+#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
 msgstr "Yazar: "
 
-#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
-#: src/Planet.cpp:125
+#: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
-#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
 msgid "Azimuthal Grid"
 msgstr "Azimutal İzdüşüm"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:673
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimutal İzdüşüm [Z]"
 
@@ -188,15 +183,15 @@ msgstr "Kaburga Kemiği"
 msgid "Bull's Foreleg"
 msgstr "Boğanın Ön Ayağı"
 
-#: src/stel_ui_tuiconf.cpp:456
+#: src/stel_ui_tuiconf.cpp:457
 msgid "CD/DVD Script: "
 msgstr "CD/DVD Betikleri: "
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:811
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Çık\n"
 
-#: src/stel_ui.cpp:807
+#: src/stel_ui.cpp:809
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Çık\n"
 
@@ -204,7 +199,7 @@ msgstr "CTRL + Q : Çık\n"
 msgid "Caelum"
 msgstr "Çelikkalem"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
 msgstr ""
 
@@ -240,11 +235,11 @@ msgstr "Küçük Köpek"
 msgid "Capricornus"
 msgstr "Oğlak"
 
-#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
 msgid "Cardinal Points"
 msgstr "Ana Yönler"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:679
 msgid "Cardinal Points [Q]"
 msgstr "Ana Yönler [Q]"
 
@@ -304,7 +299,7 @@ msgstr "Chematy"
 msgid "Chinese"
 msgstr "Çin"
 
-#: src/stel_ui_conf.cpp:443
+#: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
 msgstr "Manzara seçiniz"
 
@@ -324,7 +319,7 @@ msgstr "Kayış"
 msgid "Collarbones"
 msgstr "Köprücük Kemikleri"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
 msgstr "Renkler "
 
@@ -336,48 +331,48 @@ msgstr "Güvercin"
 msgid "Coma Berenices"
 msgstr "Berenis'in Saçı"
 
-#: src/stel_ui.cpp:1030
+#: src/stel_ui.cpp:1032
 msgid "Command recording stopped."
 msgstr "Komut yazımı sona erdi."
 
-#: src/stel_ui_conf.cpp:55
+#: src/stel_ui_conf.cpp:57
 msgid "Configuration"
 msgstr "Yapılandırma"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:689
 #, fuzzy
 msgid "Configuration window [1]"
 msgstr "Yapılandırma Penceresi"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
 msgstr "Takımyıldızı Göstergesi Yoğunluğu"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:427
 msgid "Constellation Boundaries"
 msgstr "Takımyıldızı Sınırları"
 
-#: src/stel_ui_tuiconf.cpp:423
+#: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Lines"
 msgstr "Takımyıldızı Çizgileri"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Names"
 msgstr "Takımyıldızı Adları"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:671
 msgid "Constellations Art [R]"
 msgstr "Takımyıldızı Göstergeleri [R]"
 
-#: src/stel_ui_conf.cpp:118
+#: src/stel_ui_conf.cpp:120
 msgid "Constellations Boundaries"
 msgstr "Takımyıldızı Sınırları"
 
-#: src/stel_ui_conf.cpp:108
+#: src/stel_ui_conf.cpp:110
 msgid "Constellations Lines"
 msgstr "Takımyıldızı Çizgileri"
 
-#: src/stel_ui_conf.cpp:113
+#: src/stel_ui_conf.cpp:115
 msgid "Constellations Names"
 msgstr "Takımyıldızlarının Adları"
 
@@ -405,19 +400,19 @@ msgstr "Timsah"
 msgid "Crux"
 msgstr "Güney Haçı"
 
-#: src/stel_ui_conf.cpp:265
+#: src/stel_ui_conf.cpp:267
 msgid "Current Time :"
 msgstr "Şu Anki Saat :"
 
-#: src/stel_ui_conf.cpp:1121
+#: src/stel_ui_conf.cpp:1142
 msgid "Current Time Speed is x"
 msgstr "Şu Anki Zaman Akış Hızı x"
 
-#: src/stel_ui_conf.cpp:316
+#: src/stel_ui_conf.cpp:318
 msgid "Cursor : "
 msgstr "İmleç : "
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/stel_ui_tuiconf.cpp:450
 msgid "Cursor Timeout: "
 msgstr "İmleç Gecikmesi: "
 
@@ -429,11 +424,11 @@ msgstr "Eğrisel Dizi"
 msgid "Cygnus"
 msgstr "Kuğu"
 
-#: src/stel_ui_conf.cpp:550
+#: src/stel_ui_conf.cpp:558
 msgid "Date & Time"
 msgstr "Tarih ve Saat"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_tuiconf.cpp:405
 msgid "Date Display Format: "
 msgstr "Tarih Gösterim Biçimi: "
 
@@ -441,11 +436,11 @@ msgstr "Tarih Gösterim Biçimi: "
 msgid "Day"
 msgstr "Gün"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:712
+#: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
 msgstr "Zamanı Yavaşlat [J]"
 
@@ -457,7 +452,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Yunus"
 
-#: src/stel_ui.cpp:781
+#: src/stel_ui.cpp:783
 #, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
@@ -489,11 +484,11 @@ msgstr "Dione"
 msgid "Dipper"
 msgstr "Maşrapa"
 
-#: src/stel_ui_conf.cpp:390
+#: src/stel_ui_conf.cpp:395
 msgid "Disk Viewport"
 msgstr "Disk Görünümü"
 
-#: src/stel_ui.cpp:769
+#: src/stel_ui.cpp:771
 #, fuzzy
 msgid ""
 "Display options:\n"
@@ -521,8 +516,7 @@ msgstr ""
 "4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
 "\n"
 
-#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
-#: src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
 msgstr "Uzaklık: "
 
@@ -546,7 +540,7 @@ msgstr "Kılıç Balığı"
 msgid "Draco"
 msgstr "Ejderha"
 
-#: src/stel_ui.cpp:665
+#: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
 msgstr "Takımyıldızlarını Çiz [C]"
 
@@ -562,7 +556,7 @@ msgstr "Davul"
 msgid "Drumstick"
 msgstr "Tokmak"
 
-#: src/stel_ui.cpp:797
+#: src/stel_ui.cpp:799
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -590,11 +584,11 @@ msgstr "Tanrı'nın Yeryüzündeki Evi"
 msgid "Eastern Door"
 msgstr "Doğu Kapısı"
 
-#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:435
+#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
 msgstr "Yörünge Çizgisi"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
 msgstr "Efektler "
 
@@ -618,27 +612,23 @@ msgstr "Ordugâh"
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/stel_ui_conf.cpp:872
+#: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
 msgstr "Gözlem yeri adını girin"
 
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
-msgid "Equ of date"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Ekvator Çizgisi"
 
-#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
 msgid "Equatorial Grid"
 msgstr "Ekvatoral İzdüşüm"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoral İzdüşüm [E]"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoral/Altazimuthal Eksen [ENTER]"
 
@@ -650,7 +640,7 @@ msgstr "Tay"
 msgid "Eridanus"
 msgstr "Irmak"
 
-#: src/stel_ui.cpp:1044
+#: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
 msgstr "Hata: Komutları kaydetmek için betik dosyası açılamadı."
 
@@ -698,12 +688,12 @@ msgstr "Beş Derebeyi"
 msgid "Flail"
 msgstr "Harman Döven"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:706
 #, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Yatay olarak döndür"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:708
 #, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Dikey olarak döndür"
@@ -716,11 +706,11 @@ msgstr "Flok"
 msgid "Flying Corridor"
 msgstr "Uçuş Koridoru"
 
-#: src/stel_ui_conf.cpp:223
+#: src/stel_ui_conf.cpp:225
 msgid "Fog"
 msgstr "Sis"
 
-#: src/stel_ui_conf.cpp:426
+#: src/stel_ui_conf.cpp:434
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Listelenmemiş ekran çözünürlükleri için dosyayı düzenleyin:"
 
@@ -740,7 +730,7 @@ msgstr "Dört Kanal"
 msgid "Frigate Bird"
 msgstr "Fırkateyn Kuşu"
 
-#: src/stel_ui_conf.cpp:725
+#: src/stel_ui_conf.cpp:733
 msgid "GO"
 msgstr "GİT"
 
@@ -752,7 +742,7 @@ msgstr "Ganymede"
 msgid "Gemini"
 msgstr "İkizler"
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:379
 msgid "General "
 msgstr "Genel "
 
@@ -772,7 +762,7 @@ msgstr "Kız"
 msgid "Good Gourd"
 msgstr "Olgun Kabak"
 
-#: src/stel_ui.cpp:702
+#: src/stel_ui.cpp:704
 msgid "Goto selected object [SPACE]"
 msgstr "Seçili Gök Cismine Git [SPACE]"
 
@@ -780,11 +770,11 @@ msgstr "Seçili Gök Cismine Git [SPACE]"
 msgid "Great General"
 msgstr "Büyük General"
 
-#: src/stel_ui_conf.cpp:208
+#: src/stel_ui_conf.cpp:210
 msgid "Ground"
 msgstr "Yeryüzü"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:677
 msgid "Ground [G]"
 msgstr "Yeryüzü [G]"
 
@@ -800,11 +790,11 @@ msgstr "El"
 msgid "Heart"
 msgstr "Yürek"
 
-#: src/stel_ui.cpp:816
+#: src/stel_ui.cpp:818
 msgid "Help"
 msgstr "Yardım"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:685
 msgid "Help [H]"
 msgstr "Yardım [H]"
 
@@ -816,7 +806,7 @@ msgstr "Herkül"
 msgid "Hippopotamus"
 msgstr "Suaygırı"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Bitirmek için CTTL-R tuşlarına tekrar basın.\n"
 
@@ -864,7 +854,7 @@ msgstr "İmparatorluk Muhafızları"
 msgid "Imperial Passageway"
 msgstr "İmparatorluk Geçidi"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:718
 msgid "Increase Time Speed [L]"
 msgstr "Zamanı Hızlandır [L]"
 
@@ -872,11 +862,11 @@ msgstr "Zamanı Hızlandır [L]"
 msgid "Indus"
 msgstr "Kızılderili"
 
-#: src/stel_ui_conf.cpp:1003
+#: src/stel_ui_conf.cpp:1024
 msgid "Info: "
 msgstr "Bilgi: "
 
-#: src/stel_ui.cpp:746
+#: src/stel_ui.cpp:748
 msgid "Information"
 msgstr "Kısayollar"
 
@@ -884,17 +874,13 @@ msgstr "Kısayollar"
 msgid "Inuit"
 msgstr "Eskimo"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:588
 msgid "Invalid Script command"
 msgstr "Geçersiz Betik komutu"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
-
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
-msgid "J2000"
-msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -944,23 +930,23 @@ msgstr ""
 msgid "Lance"
 msgstr "Mızrak"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/stel_ui_tuiconf.cpp:443
 msgid "Landscape: "
 msgstr "Yeryüzü Şekli: "
 
-#: src/stel_ui_conf.cpp:552
+#: src/stel_ui_conf.cpp:560
 msgid "Landscapes"
 msgstr "Yeryüzü Şekilleri"
 
-#: src/stel_ui_conf.cpp:549
+#: src/stel_ui_conf.cpp:557
 msgid "Language"
 msgstr "Dil"
 
-#: src/stel_ui_conf.cpp:334
+#: src/stel_ui_conf.cpp:336
 msgid "Latitude : "
 msgstr "Enlem: "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:387
 msgid "Latitude: "
 msgstr "Enlem: "
 
@@ -988,14 +974,9 @@ msgstr "Tavşan"
 msgid "Libra"
 msgstr "Terazi"
 
-#: src/stel_ui_tuiconf.cpp:441
+#: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
 msgstr "Işık Kirliliği Parlaklığı: "
-
-#: src/stel_ui_tuiconf.cpp:420
-#, fuzzy
-msgid "Limiting Magnitude: "
-msgstr "Kadir: "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -1005,44 +986,44 @@ msgstr "Aslan"
 msgid "Lizard"
 msgstr "Kertenkele"
 
-#: src/stel_ui_tuiconf.cpp:460
+#: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
 msgstr "Öntanımlı Yapılandırmayı Yükle: "
 
-#: src/ConstellationMgr.cpp:321
+#: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
 msgstr "Takımyıldızı Göstergesi Yükleniyor: "
 
-#: src/NebulaMgr.cpp:390
+#: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
 msgstr "NGC kataloğu yükleniyor: "
 
-#: src/NebulaMgr.cpp:523
+#: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
 msgstr "Bulutsu Dokuları Yükleniyor:"
 
-#: src/StarMgr.cpp:1622
+#: src/StarMgr.cpp:448
 msgid "Loading catalog "
 msgstr "Katalog yükleniyor: "
 
-#: src/stel_ui_tuiconf.cpp:453
+#: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
 msgstr "Yerel Betik: "
 
-#: src/stel_ui_conf.cpp:551
+#: src/stel_ui_conf.cpp:559
 msgid "Location"
 msgstr "Konum"
 
-#: src/stel_ui_conf.cpp:468 src/stel_ui_conf.cpp:1005
+#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
 #, fuzzy
 msgid "Location: "
 msgstr "Konum"
 
-#: src/stel_ui_conf.cpp:326
+#: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
 msgstr "Boylam : "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Longitude: "
 msgstr "Boylam: "
 
@@ -1058,18 +1039,16 @@ msgstr "Vaşak"
 msgid "Lyra"
 msgstr "Çalgı"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude"
 msgstr "Kadir"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/stel_ui_tuiconf.cpp:446
 #, fuzzy
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Kadir Numarası Çarpanı: "
 
-#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
-#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
-#: src/Planet.cpp:164
+#: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
 msgstr "Kadir: "
 
@@ -1081,7 +1060,7 @@ msgstr "Ayrık Bacaklı Adam"
 msgid "Man's Cart"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
 msgstr "Elle büyütme: "
 
@@ -1105,11 +1084,11 @@ msgstr "Maui İğnesi"
 msgid "Mausoleum"
 msgstr "Mozole"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Maximum Magnitude to Label: "
 msgstr "En Yüksek Kadir Oranı: "
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "En Yüksek Bulutsu Kadir Oranı: "
 
@@ -1125,11 +1104,11 @@ msgstr "Masa"
 msgid "Mercury"
 msgstr "Merkür"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
 msgstr "Meridyan Çizgisi"
 
-#: src/stel_ui_conf.cpp:1095
+#: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
 msgstr "Saatlik meteor zenith oranı (ZHR)"
 
@@ -1137,7 +1116,7 @@ msgstr "Saatlik meteor zenith oranı (ZHR)"
 msgid "Microscopium"
 msgstr "Mikroskop"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/stel_ui_tuiconf.cpp:447
 msgid "Milky Way intensity: "
 msgstr "Samanyolu Yoğunluğu: "
 
@@ -1149,7 +1128,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Dakika"
 
-#: src/stel_ui.cpp:801
+#: src/stel_ui.cpp:803
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1170,7 +1149,7 @@ msgstr "Ay"
 msgid "Moon"
 msgstr "Ay"
 
-#: src/stel_ui_conf.cpp:163
+#: src/stel_ui_conf.cpp:165
 msgid "Moon Scale"
 msgstr "Ayın Evreleri"
 
@@ -1182,7 +1161,7 @@ msgstr "Palamar Babası"
 msgid "Mortar"
 msgstr "Havan"
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:760
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1216,7 +1195,7 @@ msgstr "Sinek"
 msgid "N"
 msgstr "K"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:669
 msgid "Names of the Constellations [V]"
 msgstr "Takımyıldızı Adları [V]"
 
@@ -1228,19 +1207,19 @@ msgstr "Navajo"
 msgid "Navigator's Triangle"
 msgstr "Denizci'nin Üçgeni"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/stel_ui_tuiconf.cpp:438
 msgid "Nebula Circles"
 msgstr "Bulutsu Çemberleri"
 
-#: src/stel_ui_tuiconf.cpp:436
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
 msgstr "Bulutsu Adları"
 
-#: src/stel_ui_conf.cpp:134
+#: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
 msgstr "Şu kadirden fazla Bulutsu İsimleri:"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
 msgstr "Bulutsular [N]"
 
@@ -1256,12 +1235,12 @@ msgstr "Neptün"
 msgid "Net"
 msgstr "Ağ"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:692
 msgid "Night (red) mode"
 msgstr "Gece (kırmızı) modu"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2220
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
 msgid "No"
 msgstr "Hayır"
 
@@ -1286,11 +1265,11 @@ msgstr "Kuzey Maşrapası"
 msgid "OK"
 msgstr "Tamam"
 
-#: src/stel_ui_conf.cpp:700
+#: src/stel_ui_conf.cpp:708
 msgid "Object Search"
 msgstr "Gök Cismi Arama"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Object Sizing Rule: "
 msgstr "Cisim Boyutlama Kuralı: "
 
@@ -1325,10 +1304,6 @@ msgstr "Yıldız Çifti"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Saray Kapısı"
-
-#: src/StarMgr.cpp:953
-msgid "Parallax: "
-msgstr "Iraklık Açısı "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1370,28 +1345,28 @@ msgstr "Balık"
 msgid "Piscis Austrinus"
 msgstr "Güney Balığı"
 
-#: src/stel_ui_tuiconf.cpp:428
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Names"
 msgstr "Gezegen Adları"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Orbits"
 msgstr "Gezegen Yörüngeleri"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:431
 msgid "Planet Trails"
 msgstr "Gezegen İzleri"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:1004
+#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
 #, fuzzy
 msgid "Planet: "
 msgstr "Gezegenler"
 
-#: src/stel_ui_conf.cpp:158
+#: src/stel_ui_conf.cpp:160
 msgid "Planets"
 msgstr "Gezegenler"
 
-#: src/stel_ui_conf.cpp:170
+#: src/stel_ui_conf.cpp:172
 msgid "Planets Hints"
 msgstr "Gezegen İşaretleyicileri"
 
@@ -1399,7 +1374,7 @@ msgstr "Gezegen İşaretleyicileri"
 msgid "Pluto"
 msgstr "Plüton"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Point"
 msgstr "Nokta"
 
@@ -1407,19 +1382,19 @@ msgstr "Nokta"
 msgid "Polynesian"
 msgstr "Polinezya"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Preset Sky Time: "
 msgstr "Gök Zamanını Ayarla: "
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:403
 msgid "Preset Time"
 msgstr "Saati Ayarla"
 
-#: src/stel_ui_conf.cpp:494
+#: src/stel_ui_conf.cpp:502
 msgid "Program Language: "
 msgstr "Program dili: "
 
-#: src/stel_ui_conf.cpp:371
+#: src/stel_ui_conf.cpp:376
 msgid "Projection :"
 msgstr "Projeksiyon :"
 
@@ -1439,16 +1414,15 @@ msgstr "Kraliyet Sarayı"
 msgid "Pyxis"
 msgstr "Pusula"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:697
 msgid "Quit [CMD + Q]"
 msgstr "Çık [CMD + Q]"
 
-#: src/stel_ui.cpp:693
+#: src/stel_ui.cpp:695
 msgid "Quit [CTRL + Q]"
 msgstr "Çık [CTRL + Q]"
 
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
-#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
@@ -1464,19 +1438,19 @@ msgstr "Koşu Yolu"
 msgid "Ramparts"
 msgstr "Siperler"
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:716
 msgid "Real Time Speed [K]"
 msgstr "Gerçek Zamanlı Hız [K]"
 
-#: src/stel_ui.cpp:1038
+#: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
 msgstr "Komutlar betik dosyasına yazılıyor:\n"
 
-#: src/stel_ui_conf.cpp:554
+#: src/stel_ui_conf.cpp:562
 msgid "Rendering"
 msgstr "Kaplama"
 
-#: src/stel_ui_conf.cpp:411
+#: src/stel_ui_conf.cpp:419
 msgid "Restart program for"
 msgstr "Programı yeniden başlat"
 
@@ -1484,7 +1458,7 @@ msgstr "Programı yeniden başlat"
 msgid "Reticulum"
 msgstr "Ağ"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:720
 #, fuzzy
 msgid "Return to Current Time [8]"
 msgstr "Şu Anki Zamana Dön"
@@ -1557,20 +1531,20 @@ msgstr "Semender"
 msgid "Saturn"
 msgstr "Satürn"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/stel_ui_tuiconf.cpp:462
 msgid "Save Current Configuration as Default: "
 msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
 
-#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:484
-#: src/stel_ui_conf.cpp:542
+#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
+#: src/stel_ui_conf.cpp:550
 msgid "Save as default"
 msgstr "Öntanımlı olarak kaydet"
 
-#: src/stel_ui_conf.cpp:349
+#: src/stel_ui_conf.cpp:353
 msgid "Save location"
 msgstr "Konumu Kaydet"
 
-#: src/stel_ui_conf.cpp:400
+#: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
 msgstr ""
 
@@ -1582,15 +1556,15 @@ msgstr "Akrep"
 msgid "Screen"
 msgstr "Ekran"
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:415
 msgid "Screen Resolution :"
 msgstr "Ekran Çözünürlüğü :"
 
-#: src/stel_ui.cpp:558 src/stel_ui.cpp:700
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
 msgid "Script commander"
 msgstr "Betik yöneticisi"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/stel_ui_tuiconf.cpp:383
 msgid "Scripts "
 msgstr "Betikler "
 
@@ -1602,11 +1576,11 @@ msgstr "Heykeltraş"
 msgid "Scutum"
 msgstr "Kalkan"
 
-#: src/stel_ui_conf.cpp:707
+#: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Şunu ara (ör: Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:698
+#: src/stel_ui.cpp:700
 #, fuzzy
 msgid "Search for object [CTRL + F]"
 msgstr "Gök Cismi Ara"
@@ -1623,11 +1597,11 @@ msgstr "Sek"
 msgid "Select and exit to run."
 msgstr "Başlatmak için seç ve çık"
 
-#: src/stel_ui_conf.cpp:321
+#: src/stel_ui_conf.cpp:323
 msgid "Selected : "
 msgstr "Seçili : "
 
-#: src/stel_ui_conf.cpp:123
+#: src/stel_ui_conf.cpp:125
 msgid "Selected Constellation Only"
 msgstr "Sadece Seçili Takımyıldızları"
 
@@ -1639,27 +1613,27 @@ msgstr "Selkis"
 msgid "Serpens"
 msgstr "Yılan"
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
 msgstr "Konumu Ayarla "
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
 msgstr "Saati Ayarla "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Set Time Zone: "
 msgstr "Zaman Dilimini Ayarla: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/stel_ui_tuiconf.cpp:465
 msgid "Set UI Locale: "
 msgstr "Yerel Saate Ayarla: "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:473
+#: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
 msgstr ""
 
@@ -1683,35 +1657,35 @@ msgstr "Koyun"
 msgid "Sheepfold"
 msgstr "Koyun Ağılı"
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Show: "
 msgstr "Göster: "
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/stel_ui_tuiconf.cpp:463
 msgid "Shut Down: "
 msgstr "Kapat: "
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
 msgstr ""
 
-#: src/Nebula.cpp:107
+#: src/Nebula.cpp:109
 msgid "Size: "
 msgstr "Büyüklük: "
 
-#: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
 msgstr "Gök Kültürü: "
 
-#: src/stel_ui_conf.cpp:510 src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
 msgid "Sky Language: "
 msgstr "Gök Dili: "
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Sky Time At Start-up: "
 msgstr "Açılışta Gök Zamanı: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
 msgstr "Gök Zamanı: "
 
@@ -1719,7 +1693,7 @@ msgstr "Gök Zamanı: "
 msgid "Snake"
 msgstr "Yılan"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
 msgstr "Güneş Sistemi Gezegeni: "
 
@@ -1739,10 +1713,6 @@ msgstr "Güney Irmağı"
 msgid "Spear"
 msgstr "Mızrak"
 
-#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
-msgid "Spectral Type: "
-msgstr "Yüzey Sıcaklığı: "
-
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Bahar"
@@ -1755,24 +1725,24 @@ msgstr "Kare Tahıl Ambarı"
 msgid "Star"
 msgstr "Yıldız"
 
-#: src/stel_ui_conf.cpp:80
+#: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
 msgstr "Şu kadirden fazla Yıldız İsimleri:"
 
-#: src/stel_ui_conf.cpp:92
+#: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
 msgstr "Yıldız Pırıldama Miktarı:"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:418
 #, fuzzy
 msgid "Star Value Multiplier: "
 msgstr "Yıldız Kadir Çarpanı: "
 
-#: src/stel_ui_conf.cpp:75
+#: src/stel_ui_conf.cpp:77
 msgid "Stars"
 msgstr "Yıldızlar"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
 msgstr "Yıldızlar "
 
@@ -1841,7 +1811,7 @@ msgstr "Yıldırım"
 msgid "Thunderbolt"
 msgstr "Yıldırım"
 
-#: src/stel_ui.cpp:789
+#: src/stel_ui.cpp:791
 #, fuzzy
 msgid ""
 "Time & Date:\n"
@@ -1861,15 +1831,15 @@ msgstr ""
 "[ : 7 gün geri git   ] : 7 gün ileri git\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
 msgstr "Zaman Gösterim Biçimi: "
 
-#: src/stel_ui_conf.cpp:274
+#: src/stel_ui_conf.cpp:276
 msgid "Time Zone :"
 msgstr "Zaman Dilimi :"
 
-#: src/stel_ui_conf.cpp:287
+#: src/stel_ui_conf.cpp:289
 msgid "Time speed : "
 msgstr "Zaman akış hızı : "
 
@@ -1905,7 +1875,7 @@ msgstr "Tukan"
 msgid "Turtle"
 msgstr "Kaplumbağa"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Twinkling: "
 msgstr "Pırıldama: "
 
@@ -1929,7 +1899,7 @@ msgstr "İki Güneş Işını"
 msgid "Two in Front"
 msgstr "Karşıda İki Kişi"
 
-#: src/Nebula.cpp:105
+#: src/Nebula.cpp:107
 msgid "Type: "
 msgstr "Türü: "
 
@@ -1938,7 +1908,7 @@ msgstr "Türü: "
 msgid "USB Script: "
 msgstr "Betikler "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
 msgstr "İnternet aracılığı ile güncelle: "
 
@@ -1954,7 +1924,7 @@ msgstr "Büyük Ayı"
 msgid "Ursa Minor"
 msgstr "Küçük Ayı"
 
-#: src/stel_ui_conf.cpp:295
+#: src/stel_ui_conf.cpp:297
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1964,7 +1934,7 @@ msgstr ""
 "   yavaşlatmak için L'ye basınız.\n"
 "K tuşu ile gerçek zaman akışına dönebilirsiniz."
 
-#: src/stel_ui_conf.cpp:278
+#: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
 msgstr "Öntanımlı Sistem Saat Dilimi Kullanılıyor"
 
@@ -1976,11 +1946,11 @@ msgstr "Yelken"
 msgid "Venus"
 msgstr "Venüs"
 
-#: src/stel_ui_conf.cpp:553
+#: src/stel_ui_conf.cpp:561
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:395
+#: src/stel_ui_conf.cpp:400
 msgid "Viewport Distorter"
 msgstr "Görünüm Bozulması"
 
@@ -2061,8 +2031,8 @@ msgstr "Xuanyuan"
 msgid "Year"
 msgstr "Yıl"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2239
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
 msgid "Yes"
 msgstr "Evet"
 
@@ -2070,13 +2040,17 @@ msgstr "Evet"
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/stel_ui_tuiconf.cpp:449
 msgid "Zoom Duration: "
 msgstr "Büyütme Süresi: "
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:420
 msgid "change to apply."
 msgstr "değişiklik uygulanıyor."
+
+#: src/stel_ui_conf.cpp:350
+msgid "m"
+msgstr ""
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -2110,6 +2084,9 @@ msgstr "değişiklik uygulanıyor."
 
 #~ msgid " (Variable)"
 #~ msgstr " (Değişken)"
+
+#~ msgid " Light Years"
+#~ msgstr " Işık Yılı"
 
 #~ msgid " in file "
 #~ msgstr " dosyasında "
@@ -2243,6 +2220,13 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Invalid sky culture directory: "
 #~ msgstr "Geçersiz Gök Kültü dizini: "
 
+#~ msgid "J2000"
+#~ msgstr "J2000"
+
+#, fuzzy
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Kadir: "
+
 #~ msgid "Loading Constellation Art: %d/%d"
 #~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
 
@@ -2324,6 +2308,9 @@ msgstr "değişiklik uygulanıyor."
 #~ msgid "Nebula"
 #~ msgstr "Bulutsu"
 
+#~ msgid "Parallax: "
+#~ msgstr "Iraklık Açısı "
+
 #~ msgid "Planet/Moon"
 #~ msgstr "Gezegen/Ay"
 
@@ -2350,6 +2337,9 @@ msgstr "değişiklik uygulanıyor."
 
 #~ msgid "Saving video size "
 #~ msgstr "Video boyutunu kaydediyor "
+
+#~ msgid "Spectral Type: "
+#~ msgstr "Yüzey Sıcaklığı: "
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"

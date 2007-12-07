@@ -33,6 +33,7 @@
 #include "SFont.hpp"
 #include "ToneReproducer.hpp"
 #include "StelModuleMgr.hpp"
+#include <QDebug>
 
 STextureSP Nebula::tex_circle;
 SFont* Nebula::nebula_font = NULL;
@@ -212,7 +213,7 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = StelApp::getInstance().getTextureManager().createTexture(QFile::encodeName(QString("nebulae/")+setName+"/"+tex_name.c_str()).constData(), false);
+	neb_tex = StelApp::getInstance().getTextureManager().createTextureThread(QString("nebulae/")+setName+"/"+tex_name.c_str());
 	
 	luminance = ToneReproducer::magToLuminance(mag, tex_angular_size*tex_angular_size*3600);
 
@@ -238,7 +239,8 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 {
 	if (!neb_tex || !flagShowTexture) return;
 
-	neb_tex->lazyBind();
+	if (!neb_tex->bind())
+		return;
 	
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
@@ -253,10 +255,13 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
-		float cmag = 3 * ad_lum / neb_tex->getAverageLuminance();
+		float texLum=0;
+		if (!neb_tex->getAverageLuminance(texLum))
+		{
+			qWarning() << "Use undefined texture luminance";
+		}
+		float cmag = 3 * ad_lum / texLum;
 		glColor3f(cmag,cmag,cmag);
-
-		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);
 	}
 
 	glEnable(GL_TEXTURE_2D);

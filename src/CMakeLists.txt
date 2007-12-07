@@ -146,8 +146,8 @@ SET(stellarium_lib_SRCS
    stelutils/InitParser.hpp
    stelutils/SFont.hpp
    stelutils/SFont.cpp
-   stelutils/STexture.cpp
    stelutils/STexture.hpp
+   stelutils/STexture.cpp
    stelutils/typeface.cpp
    stelutils/typeface.h
    stelutils/StelUtils.cpp
@@ -221,6 +221,7 @@ SET(stellarium_MOC_HDRS
 	MilkyWay.hpp
 	MovementMgr.hpp
 	NebulaMgr.hpp
+	stelutils/STexture.hpp
 )
 
 # After this call, stellarium_MOC_SRCS = moc_VirGO.cxx

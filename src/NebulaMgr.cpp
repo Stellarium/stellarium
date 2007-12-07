@@ -134,7 +134,7 @@ double NebulaMgr::draw(StelCore* core)
 	Nebula* n;
 
 	// speed up the computation of n->getOnScreenSize(prj, nav)>5:
-	const float size_limit = 5.0 * (M_PI/180.0) * (prj->getFov()/prj->getViewportHeight());
+	const float size_limit = 5./prj->getPixelPerRadAtCenter()*180./M_PI;
 
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{

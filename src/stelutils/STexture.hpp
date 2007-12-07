@@ -20,31 +20,108 @@
 #ifndef _STEXTURE_H_
 #define _STEXTURE_H_
 
-#include <QString>
-#include "vecmath.h"
 #include "GLee.h"
 #include "fixx11h.h"
+#include "vecmath.h"
+#include "STextureTypes.hpp"
 
-//! Base texture class.
-//! @author Fabien Chereau
-class STexture
+#include <QObject>
+
+class QMutex;
+class QSemaphore;
+class QFile;
+
+//! @class STexture 
+//! Base texture class
+class STexture : public QObject
 {
-public:
-	STexture();
-	virtual ~STexture();
-	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
-	virtual void bind() const {glBindTexture(GL_TEXTURE_2D, id);}
-	//! Return the width and heigth of the texture in pixels
-	void getDimensions(int &width, int &height) const;
-	//! Return the average texture luminance.
-	//! @return 0 is black, 1 is white
-    virtual float getAverageLuminance(void);
-    //! Get the size of the texture data in memory in bytes
-    int getMemorySize() const {return width*height*internalFormat;}
-    
-    GLsizei width;
-	GLsizei height;
+	Q_OBJECT;
 	
+	friend class StelTextureMgr;
+	friend class ImageLoader;
+	friend class ImageLoadThread;
+
+public:
+	//! Destructor
+	virtual ~STexture();
+	
+	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
+	//! If the texture is lazyly loaded, this starts the loading and return false immendiately.
+	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
+	virtual bool bind();
+	
+	//! Get the average texture luminance.
+	//! @param lum 0 is black, 1 is white
+	//! @return true if the returned luminance is known, false if not. In this later case, the value of num is undefined.
+	bool getAverageLuminance(float& lum);
+
+	//! Return the width and heigth of the texture in pixels
+	bool getDimensions(int &width, int &height);
+
+	//! Return the position of the 4 corners of the texture in texture coordinates
+	const Vec2d* getCoordinates() const {return texCoordinates;}
+	
+private slots:
+	//! Called when the download for the texture file terminated
+	//! @param id the identifier of the request.
+	//! @param error true if an error occurred during the processing; otherwise false
+	void downloadFinished(int id, bool error);
+	
+	//! Called when the file loading thread has terminated
+	void fileLoadFinished();
+	
+private:
+	//! Private constructor
+	STexture();
+	
+	//! Load the texture already in the RAM to the openGL memory
+	//! This function uses openGL routines and must be called in the main thread
+	//! @return false if an error occured
+	bool glLoad();
+	
+	//! Loading of the image data.
+	//! This method is thread safe
+	//! @return false if an error occured
+	bool imageLoad();
+	
+	//! Define the range mode used to rescale the texture when loading
+	STextureTypes::DynamicRangeMode dynamicRangeMode;
+	
+	//! Define if the texture was already downloaded if it was a remote one
+	bool downloaded;
+	//! Used internally
+	int downloadId;
+	//! Define whether the image is already loading
+	bool isLoadingImage;
+	
+	//! The URL where to download the file
+	QString fullPath;
+	
+	//! The file where the image is located
+	QFile* imageFile;
+	//! Used ony when creating temporary file
+	QString fileExtension;
+	
+	//! True when something when wrong in the loading process
+	bool errorOccured;
+	
+	//! OpenGL id
+	GLuint id;
+	bool mipmapsMode;
+	GLint wrapMode;
+	GLint minFilter;
+	GLint magFilter;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Attributes protected by the Mutex
+	//! Mutex used to protect all the attributes below 
+	QMutex* mutex;
+
+	//! Cached average luminance
+	float avgLuminance;
+	
+	GLsizei width;	//! Texture image width
+	GLsizei height;	//! Texture image height
 	GLenum format;
 	GLint internalFormat;
 	GLubyte* texels;
@@ -52,14 +129,9 @@ public:
 	
 	//! Position of the 4 corners of the texture in texture coordinates
 	Vec2d texCoordinates[4];
-protected:
-	GLuint id;
 	
-	QString fullPath;
-	bool mipmapsMode;
-	GLint wrapMode;
-	GLint minFilter;
-	GLint magFilter;
+	//! Fix a limit to the number of maximum simultaneous loading threads
+	static QSemaphore* maxLoadThreadSemaphore;
 };
 
 

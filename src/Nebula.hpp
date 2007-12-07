@@ -119,7 +119,7 @@ private:
 	Vec3d XY;						// Store temporary 2D position
 	nebula_type nType;
 
-	ManagedSTextureSP neb_tex;			// Texture
+	STextureSP neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;			// Object luminance to use (value computed to compensate
 						// the texture average luminosity)

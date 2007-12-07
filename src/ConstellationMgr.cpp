@@ -359,9 +359,12 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 			}
 			
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(QFile::encodeName(texturePath).constData());
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 			int texSizeX, texSizeY;
-			cons->artTexture->getDimensions(texSizeX, texSizeY);
+			if (!cons->artTexture->getDimensions(texSizeX, texSizeY))
+			{
+				qWarning() << "Texture dimention not available";
+			}
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos(0);
 			Vec3f s2 = hipStarMgr->searchHP(hp2)->getObsJ2000Pos(0);

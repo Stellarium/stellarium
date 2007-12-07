@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-13 08:23-0700\n"
+"POT-Creation-Date: 2007-12-06 18:27+0100\n"
 "PO-Revision-Date: 2007-06-29 21:21+0000\n"
 "Last-Translator: András Mohari <mayday@vizslamail.hu>\n"
 "Language-Team: Hungarian\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Rosetta-Export-Date: 2007-07-07 03:58:30+0000\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:729
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,47 +27,43 @@ msgstr ""
 "a hibajelentések, javaslatok is: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarMgr.cpp:956 src/StarMgr.cpp:998
-msgid " Light Years"
-msgstr " fényév"
-
-#: src/stel_ui_conf.cpp:1083
+#: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
 msgstr ": Rendkívüli Leonida-gyakoriság"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/stel_ui_conf.cpp:1111
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Az eddigi csúcs (1966, Leonidák)"
 
-#: src/stel_ui_conf.cpp:1069
+#: src/stel_ui_conf.cpp:1090
 msgid ": Normal rate"
 msgstr ": Normál gyakoriság"
 
-#: src/stel_ui_conf.cpp:1076
+#: src/stel_ui_conf.cpp:1097
 msgid ": Standard Perseids rate"
 msgstr ": Szokásos Perzeida-gyakoriság"
 
-#: src/Planet.cpp:129 src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
 msgstr "CsE"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
 msgstr "Idő"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
 msgstr "Adminisztráció "
 
-#: src/stel_ui_conf.cpp:147
+#: src/stel_ui_conf.cpp:149
 msgid "Also display Nebulas without textures"
 msgstr "Láthatók a textúrák nélküli ködök is"
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
 msgstr "Magasság (m): "
 
-#: src/stel_ui_conf.cpp:342
+#: src/stel_ui_conf.cpp:344
 msgid "Altitude : "
 msgstr "Magasság: "
 
@@ -103,7 +99,7 @@ msgstr "Oltár"
 msgid "Aries"
 msgstr "Kos"
 
-#: src/stel_ui_tuiconf.cpp:636
+#: src/stel_ui_tuiconf.cpp:637
 msgid "Arrow down to load list."
 msgstr "Lista betöltése a \"le\" nyílbillentyűvel."
 
@@ -111,11 +107,11 @@ msgstr "Lista betöltése a \"le\" nyílbillentyűvel."
 msgid "Arsenal"
 msgstr "Fegyvertár"
 
-#: src/stel_ui_conf.cpp:218
+#: src/stel_ui_conf.cpp:220
 msgid "Atmosphere"
 msgstr "Légkör"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:681
 msgid "Atmosphere [A]"
 msgstr "Légkör [A]"
 
@@ -127,20 +123,19 @@ msgstr "Szekeres"
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:458 src/stel_ui_conf.cpp:1002
+#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
 msgstr "Szerző: "
 
-#: src/StarMgr.cpp:828 src/StarMgr.cpp:947 src/Nebula.cpp:103
-#: src/Planet.cpp:125
+#: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
 msgstr "Az/h: "
 
-#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
 msgid "Azimuthal Grid"
 msgstr "Horizontális rács"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:673
 msgid "Azimuthal Grid [Z]"
 msgstr "Horizontális rács [Z]"
 
@@ -189,15 +184,15 @@ msgstr "Szegycsont"
 msgid "Bull's Foreleg"
 msgstr "Ökörcomb"
 
-#: src/stel_ui_tuiconf.cpp:456
+#: src/stel_ui_tuiconf.cpp:457
 msgid "CD/DVD Script: "
 msgstr "CD-/DVD-parancsfájl: "
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:811
 msgid "CMD + Q : Quit\n"
 msgstr "CMD+Q : Kilépés\n"
 
-#: src/stel_ui.cpp:807
+#: src/stel_ui.cpp:809
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q: Kilépés\n"
 
@@ -206,7 +201,7 @@ msgid "Caelum"
 msgstr "Véső"
 
 # XXX [mayday]: Úgy mint "Day keys: Calendar". Jobbe lenne a "Calendar Day"...
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
 msgstr "Naptári"
 
@@ -242,11 +237,11 @@ msgstr "Kis Kutya"
 msgid "Capricornus"
 msgstr "Bak"
 
-#: src/stel_ui_conf.cpp:213 src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
 msgid "Cardinal Points"
 msgstr "Égtájak"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:679
 msgid "Cardinal Points [Q]"
 msgstr "Égtájak [Q]"
 
@@ -306,7 +301,7 @@ msgstr "Chematy"
 msgid "Chinese"
 msgstr "Kínai"
 
-#: src/stel_ui_conf.cpp:443
+#: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
 msgstr "Tájkép:"
 
@@ -326,7 +321,7 @@ msgstr "Ostorszíj"
 msgid "Collarbones"
 msgstr "Kulcscsontok"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
 msgstr "Színek "
 
@@ -338,48 +333,48 @@ msgstr "Galamb"
 msgid "Coma Berenices"
 msgstr "Bereniké Haja"
 
-#: src/stel_ui.cpp:1030
+#: src/stel_ui.cpp:1032
 msgid "Command recording stopped."
 msgstr "Parancsrögzítés leállítva."
 
-#: src/stel_ui_conf.cpp:55
+#: src/stel_ui_conf.cpp:57
 msgid "Configuration"
 msgstr "Beállítások"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:689
 #, fuzzy
 msgid "Configuration window [1]"
 msgstr "Beállítások"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
 msgstr "Csillagképek ábráinak intenzitása"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:427
 msgid "Constellation Boundaries"
 msgstr "Csillagképek határai"
 
-#: src/stel_ui_tuiconf.cpp:423
+#: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Lines"
 msgstr "Csillagképek vonalai"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Names"
 msgstr "Csillagképek nevei"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:671
 msgid "Constellations Art [R]"
 msgstr "Csillagképek ábrái [R]"
 
-#: src/stel_ui_conf.cpp:118
+#: src/stel_ui_conf.cpp:120
 msgid "Constellations Boundaries"
 msgstr "Csillagképek határai"
 
-#: src/stel_ui_conf.cpp:108
+#: src/stel_ui_conf.cpp:110
 msgid "Constellations Lines"
 msgstr "Csillagképek vonalai"
 
-#: src/stel_ui_conf.cpp:113
+#: src/stel_ui_conf.cpp:115
 msgid "Constellations Names"
 msgstr "Csillagképek nevei"
 
@@ -407,19 +402,19 @@ msgstr "Krokodil"
 msgid "Crux"
 msgstr "Déli Kereszt"
 
-#: src/stel_ui_conf.cpp:265
+#: src/stel_ui_conf.cpp:267
 msgid "Current Time :"
 msgstr "Jelenlegi idő:"
 
-#: src/stel_ui_conf.cpp:1121
+#: src/stel_ui_conf.cpp:1142
 msgid "Current Time Speed is x"
 msgstr "Az idő múlása jelenleg: x"
 
-#: src/stel_ui_conf.cpp:316
+#: src/stel_ui_conf.cpp:318
 msgid "Cursor : "
 msgstr "Kurzor: "
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/stel_ui_tuiconf.cpp:450
 msgid "Cursor Timeout: "
 msgstr "Egérmutató elrejtési ideje: "
 
@@ -431,11 +426,11 @@ msgstr "Görbe Rend"
 msgid "Cygnus"
 msgstr "Hattyú"
 
-#: src/stel_ui_conf.cpp:550
+#: src/stel_ui_conf.cpp:558
 msgid "Date & Time"
 msgstr "Dátum és idő"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_tuiconf.cpp:405
 msgid "Date Display Format: "
 msgstr "Dátumformátum: "
 
@@ -443,11 +438,11 @@ msgstr "Dátumformátum: "
 msgid "Day"
 msgstr "Nap"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
 msgstr "Napléptető billentyűk: "
 
-#: src/stel_ui.cpp:712
+#: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
 msgstr "Idő lassítása [J]"
 
@@ -459,7 +454,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfin"
 
-#: src/stel_ui.cpp:781
+#: src/stel_ui.cpp:783
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -491,11 +486,11 @@ msgstr "Dione"
 msgid "Dipper"
 msgstr "Merőkanál"
 
-#: src/stel_ui_conf.cpp:390
+#: src/stel_ui_conf.cpp:395
 msgid "Disk Viewport"
 msgstr "Kör alakú látómező"
 
-#: src/stel_ui.cpp:769
+#: src/stel_ui.cpp:771
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -523,8 +518,7 @@ msgstr ""
 "4 ,  : Ekliptika vonala          5 . : Egyenlítő vonala\n"
 "\n"
 
-#: src/StarMgr.cpp:955 src/StarMgr.cpp:997 src/Planet.cpp:129
-#: src/Planet.cpp:168
+#: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
 msgstr "Távolság: "
 
@@ -548,7 +542,7 @@ msgstr "Aranyhal"
 msgid "Draco"
 msgstr "Sárkány"
 
-#: src/stel_ui.cpp:665
+#: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
 msgstr "Csillagképek rajzolása [C]"
 
@@ -564,7 +558,7 @@ msgstr "Dob"
 msgid "Drumstick"
 msgstr "Dobverő"
 
-#: src/stel_ui.cpp:797
+#: src/stel_ui.cpp:799
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -592,11 +586,11 @@ msgstr "Földisten Temploma"
 msgid "Eastern Door"
 msgstr "Keleti Ajtó"
 
-#: src/stel_ui_conf.cpp:197 src/stel_ui_tuiconf.cpp:435
+#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
 msgstr "Ekliptika vonala"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
 msgstr "Effektusok "
 
@@ -620,28 +614,23 @@ msgstr "Táborhely"
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/stel_ui_conf.cpp:872
+#: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
 msgstr "A megfigyelőhely neve"
 
-# XXX [mayday]: "equinox of date", a pillanatnyi ephocha. Vagyis az égi egyenlítő és a tavaszpont pillanatnyi helyére vonatkoznak az RA/D koordináták.
-#: src/StarMgr.cpp:820 src/StarMgr.cpp:938
-msgid "Equ of date"
-msgstr "Pill. epocha"
-
-#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:434
+#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Egyenlítő vonala"
 
-#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
 msgid "Equatorial Grid"
 msgstr "Egyenlítői rács"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
 msgstr "Egyenlítői rács [E]"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Egyenlítői/horizontális koordináta-rendszer [ENTER]"
 
@@ -653,7 +642,7 @@ msgstr "Csikó"
 msgid "Eridanus"
 msgstr "Eridánusz"
 
-#: src/stel_ui.cpp:1044
+#: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
 msgstr "Hiba: Nem lehet megnyitni a parancsfájlt parancsrögzítéshez."
 
@@ -701,12 +690,12 @@ msgstr "Öt Feudális Király"
 msgid "Flail"
 msgstr "Láncos Buzogány"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:706
 #, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Vízszintes tükrözés"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:708
 #, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Függőleges tükrözés"
@@ -719,11 +708,11 @@ msgstr "Nyáj"
 msgid "Flying Corridor"
 msgstr "Repülő Folyosó"
 
-#: src/stel_ui_conf.cpp:223
+#: src/stel_ui_conf.cpp:225
 msgid "Fog"
 msgstr "Köd"
 
-#: src/stel_ui_conf.cpp:426
+#: src/stel_ui_conf.cpp:434
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Más felbontás ebben a fájlban adható meg:"
 
@@ -743,7 +732,7 @@ msgstr "Négy Csatorna"
 msgid "Frigate Bird"
 msgstr "Fregattmadár"
 
-#: src/stel_ui_conf.cpp:725
+#: src/stel_ui_conf.cpp:733
 msgid "GO"
 msgstr "Ugrás"
 
@@ -755,7 +744,7 @@ msgstr "Ganymede"
 msgid "Gemini"
 msgstr "Ikrek"
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:379
 msgid "General "
 msgstr "Általános "
 
@@ -775,7 +764,7 @@ msgstr "Lány"
 msgid "Good Gourd"
 msgstr "Jó Tök"
 
-#: src/stel_ui.cpp:702
+#: src/stel_ui.cpp:704
 msgid "Goto selected object [SPACE]"
 msgstr "Kijelölt égitestre ugrás [SZÓKÖZ]"
 
@@ -783,11 +772,11 @@ msgstr "Kijelölt égitestre ugrás [SZÓKÖZ]"
 msgid "Great General"
 msgstr "Nagyvezér"
 
-#: src/stel_ui_conf.cpp:208
+#: src/stel_ui_conf.cpp:210
 msgid "Ground"
 msgstr "Felszín"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:677
 msgid "Ground [G]"
 msgstr "Felszín [G]"
 
@@ -803,11 +792,11 @@ msgstr "Kéz"
 msgid "Heart"
 msgstr "Szív"
 
-#: src/stel_ui.cpp:816
+#: src/stel_ui.cpp:818
 msgid "Help"
 msgstr "Súgó"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:685
 msgid "Help [H]"
 msgstr "Súgó [H]"
 
@@ -819,7 +808,7 @@ msgstr "Herkules"
 msgid "Hippopotamus"
 msgstr "Víziló"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Leállítás a CTRL+R újabb leütésével.\n"
 
@@ -867,7 +856,7 @@ msgstr "Császári Őrség"
 msgid "Imperial Passageway"
 msgstr "Császári Folyosó"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:718
 msgid "Increase Time Speed [L]"
 msgstr "Idő gyorsítása [L]"
 
@@ -875,11 +864,11 @@ msgstr "Idő gyorsítása [L]"
 msgid "Indus"
 msgstr "Indus"
 
-#: src/stel_ui_conf.cpp:1003
+#: src/stel_ui_conf.cpp:1024
 msgid "Info: "
 msgstr "Információ: "
 
-#: src/stel_ui.cpp:746
+#: src/stel_ui.cpp:748
 msgid "Information"
 msgstr "Információ"
 
@@ -887,17 +876,13 @@ msgstr "Információ"
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:588
 msgid "Invalid Script command"
 msgstr "Érvénytelen parancs"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
-
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:935
-msgid "J2000"
-msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -947,23 +932,23 @@ msgstr "Lámpatartó"
 msgid "Lance"
 msgstr "Lándzsa"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/stel_ui_tuiconf.cpp:443
 msgid "Landscape: "
 msgstr "Tájkép: "
 
-#: src/stel_ui_conf.cpp:552
+#: src/stel_ui_conf.cpp:560
 msgid "Landscapes"
 msgstr "Tájképek"
 
-#: src/stel_ui_conf.cpp:549
+#: src/stel_ui_conf.cpp:557
 msgid "Language"
 msgstr "Nyelv"
 
-#: src/stel_ui_conf.cpp:334
+#: src/stel_ui_conf.cpp:336
 msgid "Latitude : "
 msgstr "Szélesség: "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:387
 msgid "Latitude: "
 msgstr "Szélesség: "
 
@@ -991,13 +976,9 @@ msgstr "Nyúl"
 msgid "Libra"
 msgstr "Mérleg"
 
-#: src/stel_ui_tuiconf.cpp:441
+#: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
 msgstr "Fényszennyezés erőssége: "
-
-#: src/stel_ui_tuiconf.cpp:420
-msgid "Limiting Magnitude: "
-msgstr "Határfényesség: "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -1007,43 +988,43 @@ msgstr "Oroszlán"
 msgid "Lizard"
 msgstr "Gyík"
 
-#: src/stel_ui_tuiconf.cpp:460
+#: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
 msgstr "Alapkonfiguráció betöltése: "
 
-#: src/ConstellationMgr.cpp:321
+#: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
 msgstr "Csillagképek ábráinak betöltése: "
 
-#: src/NebulaMgr.cpp:390
+#: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
 msgstr "NGC-katalógus betöltése: "
 
-#: src/NebulaMgr.cpp:523
+#: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
 msgstr "Csillagködök textúráinak betöltése:"
 
-#: src/StarMgr.cpp:1622
+#: src/StarMgr.cpp:448
 msgid "Loading catalog "
 msgstr "Katalógus betöltése: "
 
-#: src/stel_ui_tuiconf.cpp:453
+#: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
 msgstr "Helyi parancsfájl: "
 
-#: src/stel_ui_conf.cpp:551
+#: src/stel_ui_conf.cpp:559
 msgid "Location"
 msgstr "Hely"
 
-#: src/stel_ui_conf.cpp:468 src/stel_ui_conf.cpp:1005
+#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
 msgid "Location: "
 msgstr "Hely: "
 
-#: src/stel_ui_conf.cpp:326
+#: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
 msgstr "Hosszúság: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Longitude: "
 msgstr "Hosszúság: "
 
@@ -1059,18 +1040,16 @@ msgstr "Hiúz"
 msgid "Lyra"
 msgstr "Lant"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude"
 msgstr "Magnitúdó"
 
 # XXX [mayday]: A csillagok méretét szabályozza a fényességük alapján.
-#: src/stel_ui_tuiconf.cpp:445
+#: src/stel_ui_tuiconf.cpp:446
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Fényességalapú méretezés szorzója: "
 
-#: src/StarMgr.cpp:817 src/StarMgr.cpp:840 src/StarMgr.cpp:934
-#: src/StarMgr.cpp:993 src/Nebula.cpp:95 src/Nebula.cpp:120 src/Planet.cpp:113
-#: src/Planet.cpp:164
+#: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
 msgstr "Fényesség: "
 
@@ -1082,7 +1061,7 @@ msgstr ""
 msgid "Man's Cart"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
 msgstr "Kézi nagyítás: "
 
@@ -1106,11 +1085,11 @@ msgstr "Maui Horga"
 msgid "Mausoleum"
 msgstr "Mauzóleum"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Maximum Magnitude to Label: "
 msgstr "Maximális magnitúdó a címkézéshez: "
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Maximális magnitúdó a ködök címkézéséhez: "
 
@@ -1126,12 +1105,12 @@ msgstr "Táblahegy"
 msgid "Mercury"
 msgstr "Merkúr"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
 msgstr "Meridián vonala"
 
 # XXX [mayday]: A "Meteorok zenitre redukált gyakorisága" sajnos túl hosszú -- miatta nem fér ki az utána következő szöveg az ablakban.
-#: src/stel_ui_conf.cpp:1095
+#: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
 msgstr "Meteorok gyakorisága (ZHR)"
 
@@ -1139,7 +1118,7 @@ msgstr "Meteorok gyakorisága (ZHR)"
 msgid "Microscopium"
 msgstr "Mikroszkóp"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/stel_ui_tuiconf.cpp:447
 msgid "Milky Way intensity: "
 msgstr "Tejút intenzitása: "
 
@@ -1151,7 +1130,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Perc"
 
-#: src/stel_ui.cpp:801
+#: src/stel_ui.cpp:803
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1177,7 +1156,7 @@ msgstr "Hónap"
 msgid "Moon"
 msgstr "Hold"
 
-#: src/stel_ui_conf.cpp:163
+#: src/stel_ui_conf.cpp:165
 msgid "Moon Scale"
 msgstr "Hold nagyítása"
 
@@ -1189,7 +1168,7 @@ msgstr "Kikötőoszlop"
 msgid "Mortar"
 msgstr "Mozsár"
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:760
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1223,7 +1202,7 @@ msgstr "Légy"
 msgid "N"
 msgstr "É"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:669
 msgid "Names of the Constellations [V]"
 msgstr "Csillagképek nevei [V]"
 
@@ -1235,19 +1214,19 @@ msgstr "Navajo"
 msgid "Navigator's Triangle"
 msgstr "Hajósok Háromszöge"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/stel_ui_tuiconf.cpp:438
 msgid "Nebula Circles"
 msgstr "Ködök jelzőkörei"
 
-#: src/stel_ui_tuiconf.cpp:436
+#: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
 msgstr "Ködök nevei"
 
-#: src/stel_ui_conf.cpp:134
+#: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
 msgstr "Ködök nevei. Max. mag.:"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
 msgstr "Ködök [N]"
 
@@ -1263,12 +1242,12 @@ msgstr "Neptunusz"
 msgid "Net"
 msgstr "Háló"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:692
 msgid "Night (red) mode"
 msgstr "Éjjeli (vörös) mód"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2220
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
 msgid "No"
 msgstr "Nem"
 
@@ -1293,11 +1272,11 @@ msgstr "Északi Merőkanál"
 msgid "OK"
 msgstr "OK"
 
-#: src/stel_ui_conf.cpp:700
+#: src/stel_ui_conf.cpp:708
 msgid "Object Search"
 msgstr "Égitest keresése"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Object Sizing Rule: "
 msgstr "Égitestek méretezési módja: "
 
@@ -1332,10 +1311,6 @@ msgstr "Csillagpár"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Palotakapu"
-
-#: src/StarMgr.cpp:953
-msgid "Parallax: "
-msgstr "Parallaxis: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1377,27 +1352,27 @@ msgstr "Halak"
 msgid "Piscis Austrinus"
 msgstr "Déli Hal"
 
-#: src/stel_ui_tuiconf.cpp:428
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Names"
 msgstr "Bolygók nevei"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Orbits"
 msgstr "Bolygópályák"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:431
 msgid "Planet Trails"
 msgstr "Bolygónyomok"
 
-#: src/stel_ui_conf.cpp:463 src/stel_ui_conf.cpp:1004
+#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
 msgid "Planet: "
 msgstr "Bolygó: "
 
-#: src/stel_ui_conf.cpp:158
+#: src/stel_ui_conf.cpp:160
 msgid "Planets"
 msgstr "Bolygók"
 
-#: src/stel_ui_conf.cpp:170
+#: src/stel_ui_conf.cpp:172
 msgid "Planets Hints"
 msgstr "Bolygók jelölése"
 
@@ -1405,7 +1380,7 @@ msgstr "Bolygók jelölése"
 msgid "Pluto"
 msgstr "Plútó"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:445
 msgid "Point"
 msgstr "Pont"
 
@@ -1413,19 +1388,19 @@ msgstr "Pont"
 msgid "Polynesian"
 msgstr "Polinéziai"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Preset Sky Time: "
 msgstr "Előre beállított idő: "
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:403
 msgid "Preset Time"
 msgstr "Előre beállított idő"
 
-#: src/stel_ui_conf.cpp:494
+#: src/stel_ui_conf.cpp:502
 msgid "Program Language: "
 msgstr "A program nyelve: "
 
-#: src/stel_ui_conf.cpp:371
+#: src/stel_ui_conf.cpp:376
 msgid "Projection :"
 msgstr "Vetület:"
 
@@ -1445,16 +1420,15 @@ msgstr "Bíbor Palota"
 msgid "Pyxis"
 msgstr "Tájoló"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:697
 msgid "Quit [CMD + Q]"
 msgstr "Kilépés [CMD+Q]"
 
-#: src/stel_ui.cpp:693
+#: src/stel_ui.cpp:695
 msgid "Quit [CTRL + Q]"
 msgstr "Kilépés [CTRL+Q]"
 
-#: src/StarMgr.cpp:818 src/StarMgr.cpp:820 src/StarMgr.cpp:935
-#: src/StarMgr.cpp:938 src/Nebula.cpp:97 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
 msgstr "RA/D: "
 
@@ -1470,19 +1444,19 @@ msgstr "Versenypálya"
 msgid "Ramparts"
 msgstr "Gátak"
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:716
 msgid "Real Time Speed [K]"
 msgstr "Valós idő [K]"
 
-#: src/stel_ui.cpp:1038
+#: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
 msgstr "Parancsok rögzítése parancsfájlba:\n"
 
-#: src/stel_ui_conf.cpp:554
+#: src/stel_ui_conf.cpp:562
 msgid "Rendering"
 msgstr "Megjelenítés"
 
-#: src/stel_ui_conf.cpp:411
+#: src/stel_ui_conf.cpp:419
 msgid "Restart program for"
 msgstr "A program újraindításakor"
 
@@ -1490,7 +1464,7 @@ msgstr "A program újraindításakor"
 msgid "Reticulum"
 msgstr "Háló"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:720
 #, fuzzy
 msgid "Return to Current Time [8]"
 msgstr "Vissza a jelenbe"
@@ -1563,20 +1537,20 @@ msgstr "Szalamandra"
 msgid "Saturn"
 msgstr "Szaturnusz"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/stel_ui_tuiconf.cpp:462
 msgid "Save Current Configuration as Default: "
 msgstr "Beállítások mentése alapértelmezettként: "
 
-#: src/stel_ui_conf.cpp:253 src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:484
-#: src/stel_ui_conf.cpp:542
+#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
+#: src/stel_ui_conf.cpp:550
 msgid "Save as default"
 msgstr "Mentés alapértelmezettként"
 
-#: src/stel_ui_conf.cpp:349
+#: src/stel_ui_conf.cpp:353
 msgid "Save location"
 msgstr "Hely mentése"
 
-#: src/stel_ui_conf.cpp:400
+#: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
 msgstr ""
 
@@ -1588,15 +1562,15 @@ msgstr "Skorpió"
 msgid "Screen"
 msgstr "Rosta"
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:415
 msgid "Screen Resolution :"
 msgstr "Képernyő felbontása:"
 
-#: src/stel_ui.cpp:558 src/stel_ui.cpp:700
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
 msgid "Script commander"
 msgstr "Parancsbevitel"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/stel_ui_tuiconf.cpp:383
 msgid "Scripts "
 msgstr "Parancsfájlok "
 
@@ -1608,11 +1582,11 @@ msgstr "Szobrász"
 msgid "Scutum"
 msgstr "Pajzs"
 
-#: src/stel_ui_conf.cpp:707
+#: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Keresés (pl. Szaturnusz, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:698
+#: src/stel_ui.cpp:700
 #, fuzzy
 msgid "Search for object [CTRL + F]"
 msgstr "Égitest keresése"
@@ -1629,11 +1603,11 @@ msgstr "Sek"
 msgid "Select and exit to run."
 msgstr "Jelöld ki és lépj ki innen a futtatáshoz."
 
-#: src/stel_ui_conf.cpp:321
+#: src/stel_ui_conf.cpp:323
 msgid "Selected : "
 msgstr "Kijelölve: "
 
-#: src/stel_ui_conf.cpp:123
+#: src/stel_ui_conf.cpp:125
 msgid "Selected Constellation Only"
 msgstr "Csak a kijelölt csillagkép"
 
@@ -1645,27 +1619,27 @@ msgstr "Szelket"
 msgid "Serpens"
 msgstr "Kígyó"
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
 msgstr "Hely beállítása "
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
 msgstr "Idő beállítása "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Set Time Zone: "
 msgstr "Időzóna beállítása: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/stel_ui_tuiconf.cpp:465
 msgid "Set UI Locale: "
 msgstr "Felhasználói felület területi beállítása: "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
 msgstr "A tájkép váltásakor beállítódik a hely: "
 
-#: src/stel_ui_conf.cpp:473
+#: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
 msgstr "A tájkép beállítása módosítja a helyet"
 
@@ -1689,36 +1663,36 @@ msgstr "Birka"
 msgid "Sheepfold"
 msgstr "Karám"
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Show: "
 msgstr "Megjelenítés: "
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/stel_ui_tuiconf.cpp:463
 msgid "Shut Down: "
 msgstr "Leállítás: "
 
 # XXX [mayday]: Úgy mint "Day keys: Sideral". Jobb lenne a "Sideral Day"...
-#: src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
 msgstr "Csillagászati"
 
-#: src/Nebula.cpp:107
+#: src/Nebula.cpp:109
 msgid "Size: "
 msgstr "Méret: "
 
-#: src/stel_ui_conf.cpp:528 src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
 msgstr "Kultúrkör: "
 
-#: src/stel_ui_conf.cpp:510 src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
 msgid "Sky Language: "
 msgstr "Az ég nyelve: "
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Sky Time At Start-up: "
 msgstr "Idő az induláskor: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
 msgstr "Idő: "
 
@@ -1726,7 +1700,7 @@ msgstr "Idő: "
 msgid "Snake"
 msgstr "Kígyó"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
 msgstr "Naprendszerbeli égitest: "
 
@@ -1746,10 +1720,6 @@ msgstr "Déli Folyó"
 msgid "Spear"
 msgstr "Dárda"
 
-#: src/StarMgr.cpp:961 src/StarMgr.cpp:1003
-msgid "Spectral Type: "
-msgstr "Színképtípus: "
-
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Rugó"
@@ -1762,24 +1732,24 @@ msgstr "Szögletes Magtár"
 msgid "Star"
 msgstr "Csillag"
 
-#: src/stel_ui_conf.cpp:80
+#: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
 msgstr "Csillagnevek. Max. mag.:"
 
-#: src/stel_ui_conf.cpp:92
+#: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
 msgstr "Csillagok vibrálása. Érték:"
 
 # XXX [mayday]: A csillagok világosságát szabályozza.
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Star Value Multiplier: "
 msgstr "Csillagok világosságának szorzója: "
 
-#: src/stel_ui_conf.cpp:75
+#: src/stel_ui_conf.cpp:77
 msgid "Stars"
 msgstr "Csillagok"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
 msgstr "Csillagok "
 
@@ -1848,7 +1818,7 @@ msgstr "Viharmadár"
 msgid "Thunderbolt"
 msgstr "Villámlás"
 
-#: src/stel_ui.cpp:789
+#: src/stel_ui.cpp:791
 #, fuzzy
 msgid ""
 "Time & Date:\n"
@@ -1868,15 +1838,15 @@ msgstr ""
 "[ és ]: 7 napot vissza és előre (ALT-ot nyomva 7 csillagnapot)\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
 msgstr "Időformátum: "
 
-#: src/stel_ui_conf.cpp:274
+#: src/stel_ui_conf.cpp:276
 msgid "Time Zone :"
 msgstr "Időzóna:"
 
-#: src/stel_ui_conf.cpp:287
+#: src/stel_ui_conf.cpp:289
 msgid "Time speed : "
 msgstr "Idő múlása: "
 
@@ -1912,7 +1882,7 @@ msgstr "Tukán"
 msgid "Turtle"
 msgstr "Teknős"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/stel_ui_tuiconf.cpp:420
 msgid "Twinkling: "
 msgstr "Vibrálás: "
 
@@ -1936,7 +1906,7 @@ msgstr "Két Napsugár"
 msgid "Two in Front"
 msgstr "Két Elülső"
 
-#: src/Nebula.cpp:105
+#: src/Nebula.cpp:107
 msgid "Type: "
 msgstr "Típus: "
 
@@ -1944,7 +1914,7 @@ msgstr "Típus: "
 msgid "USB Script: "
 msgstr "USB-parancsfájlok: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
 msgstr "Frissítés az Internetről: "
 
@@ -1960,7 +1930,7 @@ msgstr "Nagy Medve"
 msgid "Ursa Minor"
 msgstr "Kis Medve"
 
-#: src/stel_ui_conf.cpp:295
+#: src/stel_ui_conf.cpp:297
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1970,7 +1940,7 @@ msgstr ""
 "   és gyorsítható.\n"
 "K-val állítható vissza a valós sebesség."
 
-#: src/stel_ui_conf.cpp:278
+#: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
 msgstr "A rendszer időzónáját használom"
 
@@ -1982,11 +1952,11 @@ msgstr "Vitorla"
 msgid "Venus"
 msgstr "Vénusz"
 
-#: src/stel_ui_conf.cpp:553
+#: src/stel_ui_conf.cpp:561
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:395
+#: src/stel_ui_conf.cpp:400
 msgid "Viewport Distorter"
 msgstr "Látómező torzítása"
 
@@ -2067,8 +2037,8 @@ msgstr "Xuanyuan"
 msgid "Year"
 msgstr "Év"
 
-#: src/stel_ui_tuiconf.cpp:416 src/stel_ui_tuiconf.cpp:443
-#: src/stel_ui_tuiconf.cpp:450 src/s_gui.cpp:2239
+#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
+#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
 msgid "Yes"
 msgstr "Igen"
 
@@ -2076,19 +2046,26 @@ msgstr "Igen"
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/stel_ui_tuiconf.cpp:449
 msgid "Zoom Duration: "
 msgstr "Nagyítás időtartama: "
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:420
 msgid "change to apply."
 msgstr "lép életbe a változás."
+
+#: src/stel_ui_conf.cpp:350
+msgid "m"
+msgstr ""
 
 #~ msgid " (UTC)"
 #~ msgstr " (UTC)"
 
 #~ msgid " (Variable)"
 #~ msgstr " (változó)"
+
+#~ msgid " Light Years"
+#~ msgstr " fényév"
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Rossz parancssori argumentumok\n"
@@ -2200,11 +2177,21 @@ msgstr "lép életbe a változás."
 #~ "Telepítsd rendesen a programot (POSIX rendszereken a \"make install\"\n"
 #~ "kiadásával), vagy pedig futtasd a stellarium csomag könyvtárából.\n"
 
+# XXX [mayday]: "equinox of date", a pillanatnyi ephocha. Vagyis az égi egyenlítő és a tavaszpont pillanatnyi helyére vonatkoznak az RA/D koordináták.
+#~ msgid "Equ of date"
+#~ msgstr "Pill. epocha"
+
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Halszem vetület"
 
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "J2000"
+#~ msgstr "J2000"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Határfényesség: "
 
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Cadwell-katalógus betöltése:"
@@ -2279,6 +2266,9 @@ msgstr "lép életbe a változás."
 #~ msgid "Object No :"
 #~ msgstr "Égitest száma:"
 
+#~ msgid "Parallax: "
+#~ msgstr "Parallaxis: "
+
 #~ msgid "Planet/Moon"
 #~ msgstr "Bolygó/hold"
 
@@ -2305,6 +2295,9 @@ msgstr "lép életbe a változás."
 
 #~ msgid "Sky language:"
 #~ msgstr "Az ég nyelve:"
+
+#~ msgid "Spectral Type: "
+#~ msgstr "Színképtípus: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Csillagfényesség szorzója: "
