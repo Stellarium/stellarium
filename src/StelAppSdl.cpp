@@ -31,6 +31,7 @@
 #endif
 
 #include <QDebug>
+#include <QCoreApplication>
 #include "StelAppSdl.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
