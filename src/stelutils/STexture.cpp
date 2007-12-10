@@ -86,8 +86,10 @@ void STexture::reportError(const QString& aerrorMessage)
 	// Report failure of texture loading
 	emit(loadingProcessFinished(this, true));
 }
-	
-//! Load an image and set the texture parameters in a thread
+
+/*************************************************************************
+  Class used to load an image and set the texture parameters in a thread
+ *************************************************************************/
 class ImageLoadThread : public QThread
 {
 	public:
