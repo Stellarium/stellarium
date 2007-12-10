@@ -90,7 +90,7 @@ public:
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
-	STextureSP createTextureThread(const QString& url, const QString& fileExtension="");
+	STextureSP createTextureThread(const QString& url, const QString& fileExtension="", bool lazyLoading=true);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
