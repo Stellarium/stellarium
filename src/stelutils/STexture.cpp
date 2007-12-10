@@ -32,6 +32,7 @@
 #include <QSize>
 #include <QHttp>
 #include <QDebug>
+#include <QUrl>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -118,18 +119,20 @@ bool STexture::bind()
 		return false;
 
 	// The texture is not yet fully loaded
-	if (downloaded==false && downloadId!=0 && fullPath.startsWith("http://"))
+	if (downloaded==false && downloadId==0 && fullPath.startsWith("http://"))
 	{
 		// We need to start download
-		imageFile = new QTemporaryFile(QDir::tempPath() + "XXXXXX" + fileExtension, this);
+		imageFile = new QTemporaryFile(QDir::tempPath() + "XXXXXX." + fileExtension, this);
 		if (!imageFile->open(QIODevice::ReadWrite))
 		{
-			qWarning() << "STexture::bind(): can't create temporary file " << QDir::tempPath() + "XXXXXX" + fileExtension;
+			qWarning() << "STexture::bind(): can't create temporary file " << QDir::tempPath() + "XXXXXX." + fileExtension;
 			errorOccured = true;
 			return false;
 		}
 		QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
 		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+		QUrl url(fullPath);
+		http->setHost(url.host(), url.port(80));
 		downloadId = http->get(fullPath, imageFile);
 		fullPath = imageFile->fileName();
 		return false;
@@ -165,6 +168,9 @@ void STexture::downloadFinished(int did, bool error)
 	}
 	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+	
+	// Call bind to activate data loading
+	bind();
 }
 
 /*************************************************************************

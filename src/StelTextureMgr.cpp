@@ -158,7 +158,7 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 /*************************************************************************
  Load an image from a file and create a new texture from it in a new thread. 
 *************************************************************************/
-STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension)
+STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
 {
 	STextureSP tex = initTex();
 	if (!url.startsWith("http://"))
@@ -182,7 +182,13 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
 			}
 		}
 	}
+	else
+	{
+		tex->fullPath = url;
+	}
 	tex->fileExtension = fileExtension;
+	if (!lazyLoading)
+		tex->bind();
 	return tex;
 }
 
