@@ -57,8 +57,8 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 ########### Others ###########
 # Define if we want to manage the main window with SDL or Qt4
 # Note that Qt4 is required in any case anyway
-#SET(USE_QT4 1)
-SET(USE_SDL TRUE)
+SET(USE_QT4 1)
+#SET(USE_SDL TRUE)
 
 # Activate translation with gettext
 SET(ENABLE_NLS 1)
