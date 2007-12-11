@@ -231,7 +231,7 @@ __END__
 
 =head1 NAME 
 
-generate_asteroid_ssystem.pl - genenerate asteroid orbital data for ssystem.ini
+generate_asteroid_ssystem.pl - generate asteroid orbital data for ssystem.ini
 
 =head1 SYNOPSIS
 
