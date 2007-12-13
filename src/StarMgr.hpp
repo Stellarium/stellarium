@@ -137,7 +137,7 @@ public:
 	
 	//! Initializes each triangular face of the geodesic grid.
 	// TODO: But why?
-	void setGrid(void);
+	void setGrid(class GeodesicGrid* grid);
 	
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?

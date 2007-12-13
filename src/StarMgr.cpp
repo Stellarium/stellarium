@@ -385,7 +385,7 @@ void StarMgr::init(const InitParser &conf) {
   texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
-void StarMgr::setGrid(void) {
+void StarMgr::setGrid(GeodesicGrid* geodesic_grid) {
   geodesic_grid->visitTriangles(max_geodesic_grid_level,initTriangleFunc,this);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
@@ -762,12 +762,15 @@ double StarMgr::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	ToneReproducer* eye = core->getToneReproducer();
-	
+		
     current_JDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
     if(!starsFader.getInterstate()) return 0.;
+
+	int max_search_level = getMaxSearchLevel(eye, prj);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),max_search_level);
 
     mag_converter->setFov(prj->getFov());
     mag_converter->setEye(eye);
@@ -792,6 +795,7 @@ double StarMgr::draw(StelCore* core)
     float rcmag_table[2*256];
 //static int count = 0;
 //count++;
+	
     for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
          it!=zone_arrays.end();it++) {
       const float mag_min = 0.001f*it->second->mag_min;
@@ -870,7 +874,7 @@ assert(0);
 // inside the lim_fov circle around position v
 vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
                                            double lim_fov, // degrees
-                                           const StelCore* core) const {
+										   const StelCore* core) const {
   vector<StelObjectP > result;
   if (!getFlagStars())
   	return result;
@@ -913,7 +917,7 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
   e2 *= f;
   e3 *= f;
     // search the triangles
-  geodesic_search_result->search(e0,e1,e2,e3,last_max_search_level);
+ 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e0,e1,e2,e3,last_max_search_level);
     // iterate over the stars inside the triangles:
   f = cos(lim_fov * M_PI/180.);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());

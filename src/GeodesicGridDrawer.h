@@ -37,7 +37,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf);
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye, int max_search_level);
+	virtual double draw(StelCore* core, int max_search_level);
 	virtual void update(double deltaTime) {;}
 	virtual void updateI18n() {;}
 	virtual void updateSkyCulture() {;}
