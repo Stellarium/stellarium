@@ -18,6 +18,7 @@
  */
  
 #include <sstream>
+#include "StelCore.hpp"
 #include "GeodesicGridDrawer.h"
 #include "Projector.hpp"
 #include "StelApp.hpp"
@@ -43,9 +44,13 @@ void GeodesicGridDrawer::init(const InitParser& conf)
 }
 
 
-double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav,
-                                ToneReproductor *eye, int max_search_level)
+double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 {
+	Projector* prj = core->getProjection();
+	GeodesicGrid* geodesic_grid = core->getGeodesicGrid();
+
+	const GeodesicSearchResult* geodesic_search_result = geodesic_grid->search(prj->unprojectViewport(), max_search_level);
+	
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode

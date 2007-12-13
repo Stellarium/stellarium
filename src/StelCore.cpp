@@ -49,11 +49,6 @@ StelCore::~StelCore()
 	delete observatory; observatory=NULL;
 	delete tone_converter; tone_converter=NULL;
 	
-	if (geodesic_search_result)
-	{
-		delete geodesic_search_result;
-		geodesic_search_result = NULL;
-	}
 	if (geodesic_grid)
 	{
 		delete geodesic_grid;
@@ -94,8 +89,7 @@ void StelCore::init(const InitParser& conf)
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	int grid_level = hip_stars->getMaxGridLevel();
 	geodesic_grid = new GeodesicGrid(grid_level);
-	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
-	hip_stars->setGrid();
+	hip_stars->setGrid(geodesic_grid);
 }
 
 
@@ -146,11 +140,6 @@ void StelCore::preDraw()
 	projection->applyViewport();
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
-
-	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
-	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
-	
-	geodesic_search_result->search(projection->unprojectViewport(),max_search_level);
 }
 
 

@@ -37,6 +37,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "SphereGeometry.hpp"
 
+class GeodesicSearchResult;
+
 class GeodesicGrid
 {
 	// Grid of triangles (zones) on the sphere with radius 1,
@@ -48,48 +50,62 @@ class GeodesicGrid
 public:
 	GeodesicGrid(int max_level);
 	~GeodesicGrid(void);
+	
+	
 	int getMaxLevel(void) const {return max_level;}
+	
 	static int nrOfZones(int level)
 	{return (20<<(level<<1));} // 20*4^level
+	
 	int getNrOfZones(void) const {return nrOfZones(max_level);}
+	
+	//! Return the position of the 3 corners for the triangle at the given level and index
 	void getTriangleCorners(int lev, int index, Vec3d& c0, Vec3d& c1, Vec3d& c2) const;
-	// Return the position of the 3 corners for the triangle at the given level and index
+	//! Return the index of the partner triangle with which to form a paralelogram
 	int getPartnerTriangle(int lev, int index) const;
-	// Return the index of the partner triangle with which to form a paralelogram
+	
 	typedef void (VisitFunc)(int lev,int index,
 	                         const Vec3d &c0,
 	                         const Vec3d &c1,
 	                         const Vec3d &c2,
 	                         void *context);
-	void visitTriangles(int max_visit_level,
-	                    VisitFunc *func,void *context) const;
+	
+	void visitTriangles(int max_visit_level, VisitFunc *func,void *context) const;
 
+	//! Find the zone number in which a given point lies.
+	//! prerequisite: v*v==1
+	//! When the point lies on the border of two or more zones,
+	//! one such zone is returned (always the same one,
+	//! because the algorithm is deterministic).
 	int searchZone(const Vec3d &v,int search_level) const;
-	// find the zone number in which a given point lies.
-	// prerequisite: v*v==1
-	// When the point lies on the border of two or more zones,
-	// one such zone is returned (always the same one,
-	// because the algorithm is deterministic).
 
+	//! Find all zones that lie fully(inside) or partly(border)
+	//! in the intersection of the given half spaces.
+	//! The result is accurate when (0,0,0) lies on the border of
+	//! each half space. If this is not the case,
+	//! the result may be inaccurate, because it is assumed, that
+	//! a zone lies in a half space when its 3 corners lie in this half space.
+	//! inside[l] points to the begin of an integer array of size nrOfZones(l),
+	//! border[l] points to one after the end of the same integer array.
+	//! The array will be filled from the beginning with the inside zone numbers
+	//! and from the end with the border zone numbers of the given level l
+	//! for 0<=l<=getMaxLevel().
+	//! inside[l] will not contain zones that are already contained
+	//! in inside[l1] for some l1 < l.
+	//! In order to restrict search depth set max_search_level < max_level,
+	//! for full search depth set max_search_level = max_level,
 	void searchZones(const StelGeom::ConvexS& convex,
 	                 int **inside,int **border,int max_search_level) const;
-	// find all zones that lie fully(inside) or partly(border)
-	// in the intersection of the given half spaces.
-	// The result is accurate when (0,0,0) lies on the border of
-	// each half space. If this is not the case,
-	// the result may be inaccurate, because it is assumed, that
-	// a zone lies in a half space when its 3 corners lie in
-	// this half space.
-	// inside[l] points to the begin of an integer array of size nrOfZones(l),
-	// border[l] points to one after the end of the same integer array.
-	// The array will be filled from the beginning with the inside zone numbers
-	// and from the end with the border zone numbers of the given level l
-	// for 0<=l<=getMaxLevel().
-	// inside[l] will not contain zones that are already contained
-	// in inside[l1] for some l1 < l.
-	// In order to restrict search depth set max_search_level < max_level,
-	// for full search depth set max_search_level = max_level,
 
+	//! Return a search result matching the given spatial region
+	//! The result is cached, meaning that it is very fast to search the same region consecutively
+	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
+	const GeodesicSearchResult* search(const StelGeom::ConvexS& convex, int max_search_level) const;
+	
+	//! Convenience function returning a search result matching the given spatial region
+	//! The result is cached, meaning that it is very fast to search the same region consecutively
+	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
+	const GeodesicSearchResult* search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int max_search_level) const;
 
 private:
 	const Vec3d& getTriangleCorner(int lev, int index, int cornerNumber) const;
@@ -112,7 +128,6 @@ private:
 	                 const bool *corner1_inside,
 	                 const bool *corner2_inside,
 	                 int **inside,int **border,int max_search_level) const;
-private:
 
 	const int max_level;
 	struct Triangle
@@ -122,6 +137,11 @@ private:
 	Triangle **triangles;
 	// 20*(4^0+4^1+...+4^n)=20*(4*(4^n)-1)/3 triangles total
 	// 2+10*4^n corners
+	
+	//! A cached search result used to avoid doing twice the same search
+	mutable GeodesicSearchResult* cacheSearchResult;
+	mutable int lastMaxSearchlevel;
+	mutable StelGeom::ConvexS lastSearchRegion;
 };
 
 class GeodesicSearchResult
@@ -129,14 +149,14 @@ class GeodesicSearchResult
 public:
 	GeodesicSearchResult(const GeodesicGrid &grid);
 	~GeodesicSearchResult(void);
-	void search(const StelGeom::ConvexS& convex,
-	            int max_search_level);
-	void search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,
-	            int max_search_level);
 	void print(void) const;
 private:
 	friend class GeodesicSearchInsideIterator;
 	friend class GeodesicSearchBorderIterator;
+	friend class GeodesicGrid;
+	
+	void search(const StelGeom::ConvexS& convex, int max_search_level);
+	
 	const GeodesicGrid &grid;
 	int **const zones;
 	int **const inside;
@@ -182,10 +202,5 @@ private:
 	int index;
 	int count;
 };
-
-// global variables: very ugly
-extern GeodesicGrid *geodesic_grid;
-extern GeodesicSearchResult *geodesic_search_result;
-
 
 #endif
