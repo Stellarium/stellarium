@@ -91,8 +91,7 @@ static const TopLevelTriangle icosahedron_triangles[20] =
         {{ 8, 9, 5}}  //  8
     };
 
-GeodesicGrid::GeodesicGrid(const int lev)
-		:max_level(lev<0?0:lev)
+GeodesicGrid::GeodesicGrid(const int lev) : max_level(lev<0?0:lev)
 {
 	if (max_level > 0)
 	{
@@ -116,6 +115,7 @@ GeodesicGrid::GeodesicGrid(const int lev)
 	{
 		triangles = 0;
 	}
+	cacheSearchResult = new GeodesicSearchResult(*this);
 }
 
 GeodesicGrid::~GeodesicGrid(void)
@@ -125,6 +125,8 @@ GeodesicGrid::~GeodesicGrid(void)
 		for (int i=max_level-1;i>=0;i--) delete[] triangles[i];
 		delete[] triangles;
 	}
+	delete cacheSearchResult;
+	cacheSearchResult = NULL;
 }
 
 void GeodesicGrid::getTriangleCorners(int lev,int index,
@@ -456,6 +458,32 @@ void GeodesicGrid::searchZones(int lev,int index,
 #endif
 }
 
+/*************************************************************************
+ Return a search result matching the given spatial region
+*************************************************************************/
+const GeodesicSearchResult* GeodesicGrid::search(const StelGeom::ConvexS& convex, int maxSearchLevel) const
+{
+	// Try to use the cached version
+	if (maxSearchLevel==lastMaxSearchlevel && convex==lastSearchRegion)
+	{
+		return cacheSearchResult;
+	}
+	// Else recompute it and update cache parameters
+	lastMaxSearchlevel = maxSearchLevel;
+	lastSearchRegion = convex;
+	cacheSearchResult->search(convex, maxSearchLevel);
+	return cacheSearchResult;
+}
+	
+
+/*************************************************************************
+ Return a search result matching the given spatial region
+*************************************************************************/
+const GeodesicSearchResult* GeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int max_search_level) const
+{
+	StelGeom::ConvexS c(e0, e1, e2, e3);
+	return search(c,max_search_level);
+}
 
 
 GeodesicSearchResult::GeodesicSearchResult(const GeodesicGrid &grid)
@@ -492,16 +520,6 @@ void GeodesicSearchResult::search(const StelGeom::ConvexS& convex,
 	grid.searchZones(convex,inside,border,max_search_level);
 }
 
-void GeodesicSearchResult::search(const Vec3d &e0,const Vec3d &e1,
-                                  const Vec3d &e2,const Vec3d &e3,
-                                  int max_search_level)
-{
-	StelGeom::ConvexS c(e0, e1, e2, e3);
-	search(c,max_search_level);
-}
-
-
-
 void GeodesicSearchInsideIterator::reset(void)
 {
 	level = 0;
@@ -537,9 +555,3 @@ int GeodesicSearchInsideIterator::next(void)
 	}
 	return -1;
 }
-
-
-// global variables: very ugly
-GeodesicGrid *geodesic_grid = 0;
-GeodesicSearchResult *geodesic_search_result = 0;
-
