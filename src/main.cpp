@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <cstdlib>
 #include <clocale>
 
 #include <config.h>
@@ -33,8 +32,6 @@
 	#error You must define either USE_SDL or USE_QT4
  #endif
 #endif
-
-using namespace std;
 
 // Main stellarium procedure
 int main(int argc, char **argv)
