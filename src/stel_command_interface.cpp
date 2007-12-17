@@ -119,7 +119,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	
 	// stellarium specific logic to run each command
 
-	if(command == "flag") {
+	if(command == "echo") {
+		// For debugging purposes
+		cout << commandline << endl;
+
+	} else if (command == "flag") {
 
 		// could loop if want to allow that syntax
 		if(args.begin() != args.end()) {  
