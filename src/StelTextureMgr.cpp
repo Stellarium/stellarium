@@ -320,7 +320,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 			break;
 			default:
 				// Unsupported dynamic range mode..
-				qWarning() << "Dynamic range mode: " << tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded.";
+				qWarning() << "Dynamic range mode: " << (int)tex->dynamicRangeMode << " is not supported by the texture manager, texture " << tex->fullPath << " will not be loaded.";
 				return false;
 		}
 		return true;
