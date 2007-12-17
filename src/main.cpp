@@ -26,10 +26,6 @@
 #include "StelApp.hpp"
 #include "Translator.hpp"
 
-#ifdef HAVE_LIBCURL
- #include <curl/curl.h>
-#endif
-
 #ifdef USE_SDL
  #include "StelAppSdl.hpp"
 #else
@@ -47,10 +43,6 @@ int main(int argc, char **argv)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
-	
-#ifdef HAVE_LIBCURL
-	curl_global_init(CURL_GLOBAL_ALL);
-#endif
 
 #ifdef USE_SDL
 	StelApp* app = new StelAppSdl(argc, argv);
@@ -62,9 +54,6 @@ int main(int argc, char **argv)
 	StelAppQt4::runStellarium(argc, argv);
 #endif
 
-#ifdef HAVE_LIBCURL
-	curl_global_cleanup();
-#endif
 	return 0;
 }
 
