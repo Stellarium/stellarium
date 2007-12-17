@@ -206,9 +206,6 @@ namespace StelUtils {
 	//! Return the first power of two bigger than the given value.
 	int getBiggerPowerOfTwo(int value);
 	
-	//! Download the file from the given URL to the given name using libcurl.
-	bool downloadFile(const QString& url, const QString& fullPath, const QString& referer="Stellarium", const QString& cookiesFile="");
-	
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);
 	
