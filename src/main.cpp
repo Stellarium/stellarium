@@ -21,7 +21,6 @@
 
 #include <config.h>
 #include "StelApp.hpp"
-#include "Translator.hpp"
 
 #ifdef USE_SDL
  #include "StelAppSdl.hpp"
