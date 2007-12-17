@@ -209,7 +209,7 @@ string StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
 	if (tf == S_TIME_SYSTEM_DEFAULT) return "system_default";
 	if (tf == S_TIME_24H) return "24h";
 	if (tf == S_TIME_12H) return "12h";
-	cerr << "WARNING: unrecognized time_display_format value : " << tf << " system_default used." << endl;
+	cerr << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used." << endl;
 	return "system_default";
 }
 
@@ -230,7 +230,7 @@ string StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
 	if (df == S_DATE_MMDDYYYY) return "mmddyyyy";
 	if (df == S_DATE_DDMMYYYY) return "ddmmyyyy";
 	if (df == S_DATE_YYYYMMDD) return "yyyymmdd";
-	cerr << "WARNING: unrecognized date_display_format value : " << df << " system_default used." << endl;
+	cerr << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used." << endl;
 	return "system_default";
 }
 

@@ -376,7 +376,7 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 		setCustomFrame(mat_j2000_to_eye);
 		break;
 	default:
-		cerr << "Unknown reference frame type: " << frameType << "." << endl;
+		cerr << "Unknown reference frame type: " << (int)frameType << "." << endl;
 	}
 }
 
