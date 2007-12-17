@@ -114,6 +114,10 @@ void Image::set_location( float xpos, bool deltax, float ypos, bool deltay, floa
 
 bool Image::update(double delta_time) {
 
+	// Change delta_time to ms
+	delta_time*=1000;
+
+
   if(image_ratio < 0) return 0;
 
   if(flag_alpha) {
