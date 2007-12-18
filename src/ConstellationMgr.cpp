@@ -131,7 +131,7 @@ void ConstellationMgr::updateSkyCulture()
 		updateI18n();
 		
 		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChangeCallBack(false);		
+		selectedObjectChangeCallBack(StelModule::REPLACE_SELECTION);		
 	}
 	catch(exception& e)
 	{
@@ -155,7 +155,7 @@ void ConstellationMgr::setColorScheme(const InitParser& conf, const QString& sec
 	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"const_names_color", defaultColor)));
 }
 
-void ConstellationMgr::selectedObjectChangeCallBack(bool added)
+void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 	if (newSelected.empty())
@@ -171,8 +171,14 @@ void ConstellationMgr::selectedObjectChangeCallBack(bool added)
 	{
 //		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
 //		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
-		// Do not select a star, just the constellation
-		setSelectedConst((Constellation *)newSelectedConst[0].get());
+
+		// If removing this selection
+		if(action == StelModule::REMOVE_FROM_SELECTION) {
+			unsetSelectedConst((Constellation *)newSelectedConst[0].get());
+		} else {
+			// Add constellation to selected list (do not select a star, just the constellation)
+			setSelectedConst((Constellation *)newSelectedConst[0].get());
+		}
 	}
 	else
 	{
@@ -737,6 +743,54 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 	}
 }
+
+
+//! Remove a constellation from the selected constellation list
+void ConstellationMgr::unsetSelectedConst(Constellation * c)
+{
+	if (c != NULL)
+	{
+
+		vector < Constellation * >::const_iterator iter;
+		int n=0;
+		for (iter = selected.begin(); iter != selected.end(); ++iter)
+		{
+			if( (*iter)->getEnglishName() == c->getEnglishName() ) 
+			{
+				selected.erase(selected.begin()+n, selected.begin()+n+1);
+				iter--;
+				n--;
+			}
+			n++;
+		}
+
+		// If no longer any selection, restore all flags on all constellations
+		if (selected.begin() == selected.end()) { 
+
+			// Otherwise apply standard flags to all constellations
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			{
+				(*iter)->setFlagLines(getFlagLines());
+				(*iter)->setFlagName(getFlagNames());
+				(*iter)->setFlagArt(getFlagArt());
+				(*iter)->setFlagBoundaries(getFlagBoundaries());
+			}
+
+			Constellation::singleSelected = false; // For boundaries
+
+		} else if(isolateSelected) {
+
+			// No longer selected constellation
+			c->setFlagLines(false);
+			c->setFlagName(false);
+			c->setFlagArt(false);
+			c->setFlagBoundaries(false);
+
+			Constellation::singleSelected = true;  // For boundaries
+		}
+	}
+}
+
 
 bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 {

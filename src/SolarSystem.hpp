@@ -76,7 +76,7 @@ public:
 	virtual void updateI18n();
 	
 	//! Called when a new object is selected.
-	virtual void selectedObjectChangeCallBack(bool added=false);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	
 	//! Set the color scheme.
 	virtual void setColorScheme(const InitParser& conf, const QString& section);

@@ -1072,7 +1072,7 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 	return result;
 }
 
-void SolarSystem::selectedObjectChangeCallBack(bool added)
+void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
