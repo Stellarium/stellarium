@@ -50,28 +50,28 @@ public:
 	//! Add a new StelObject manager into the list of supported modules.
 	//! Registered modules can have selected objects 
 	void registerStelObjectMgr(StelObjectModule* mgr);
-	
+
 	//! Find and select an object near given equatorial position.
 	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, const Vec3d& pos, bool added=false);
+	bool findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Find and select an object near given screen position.
 	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, int x, int y, bool added=false);
+	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Find and select an object from its translated name.
 	//! @param added add the found object to selection if true, replace if false
 	//! @param nameI18n the case sensitive object translated name
 	//! @return true if a object with the passed name was found
-	bool findAndSelectI18n(const wstring &nameI18n, bool added=false);
+	bool findAndSelectI18n(const wstring &nameI18n, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Find and select an object from its standard program name.
 	//! @param added add the found object to selection if true, replace if false
 	//! @param name the case sensitive object translated name
 	//! @return true if a object with the passed name was found
-	bool findAndSelect(const string &name, bool added=false);
+	bool findAndSelect(const string &name, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -88,13 +88,13 @@ public:
 	//! Notify that we want to select the given object.
 	//! @param added add the object to selection if true, replace if false
 	//! @return true if at least 1 object was sucessfully selected
-	bool setSelectedObject(const StelObjectP obj, bool added=false);
+	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	
 	//! Notify that we want to select the given objects.
 	//! @param objs a vector of objects to select
 	//! @param added add the object to selection if true, replace if false
 	//! @return true if at least 1 object was sucessfully selected
-	bool setSelectedObject(const std::vector<StelObjectP>& objs, bool added=false);
+	bool setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Get the list objects which was recently selected by the user.
 	const std::vector<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}

@@ -74,40 +74,40 @@ StelObjectP StelObjectMgr::searchByName(const string &name) const
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
 //! @return true if an object was found with the passed name
-bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n, bool added)
+bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
 	StelObjectP obj = searchByNameI18n(nameI18n);
 	if (!obj)
 		return false;
 	else
-		return setSelectedObject(obj, added);
+		return setSelectedObject(obj, action);
 }
 
 //! Find and select an object from its standard program name
-bool StelObjectMgr::findAndSelect(const string &name, bool added)
+bool StelObjectMgr::findAndSelect(const string &name, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
 	StelObjectP obj = searchByName(name);
 	if (!obj)
 		return false;
 	else
-		return setSelectedObject(obj, added);
+		return setSelectedObject(obj, action);
 }
 
 
 //! Find and select an object near given equatorial position
-bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, bool added)
+bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)
 {
 	StelObjectP tempselect = cleverFind(core, pos);
-	return setSelectedObject(tempselect, added);
+	return setSelectedObject(tempselect, action);
 }
 
 //! Find and select an object near given screen position
-bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, bool added)
+bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action)
 {
 	StelObjectP tempselect = cleverFind(core, x, y);
-	return setSelectedObject(tempselect, added);
+	return setSelectedObject(tempselect, action);
 }
 
 // Find an object in a "clever" way, v in J2000 frame
@@ -177,14 +177,14 @@ void StelObjectMgr::unSelect(void)
 	// Send the event to every StelModule
 	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
-		iter->selectedObjectChangeCallBack(false);
+		iter->selectedObjectChangeCallBack(StelModule::REMOVE_FROM_SELECTION);
 	}
 }
 
 /*************************************************************************
  Notify that we want to select the given object
 *************************************************************************/
-bool StelObjectMgr::setSelectedObject(const StelObjectP obj, bool added)
+bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action)
 {
 	if (!obj)
 	{
@@ -195,20 +195,20 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, bool added)
 	// An object has been found
 	std::vector<StelObjectP> objs;
 	objs.push_back(obj);
-	return setSelectedObject(objs, added);
+	return setSelectedObject(objs, action);
 }
 
 /*************************************************************************
  Notify that we want to select the given objects
 *************************************************************************/
-bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, bool added)
+bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
 {
 	lastSelectedObjects=objs;
 
 	// Send the event to every StelModule
 	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
-		iter->selectedObjectChangeCallBack(added);
+		iter->selectedObjectChangeCallBack(action);
 	}
 	return true;
 }

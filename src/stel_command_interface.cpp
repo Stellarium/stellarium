@@ -212,23 +212,23 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		
 		if(args["hp"]!=""){
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(string("HP") + args["hp"]), false);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(string("HP") + args["hp"]), StelModule::REPLACE_SELECTION);
 		}
 		else if(args["star"]!="") {
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(args["star"]), false);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( smgr->searchByName(args["star"]), StelModule::REPLACE_SELECTION);
 		} 
 		else if(args["planet"]!=""){
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( ssmgr->searchByName(args["planet"]), false);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( ssmgr->searchByName(args["planet"]), StelModule::REPLACE_SELECTION);
 		} 
 		else if(args["nebula"]!=""){
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( nmgr->searchByName(args["nebula"]), false);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( nmgr->searchByName(args["nebula"]), StelModule::REPLACE_SELECTION);
 		} 
 		else if(args["constellation"]!=""){
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation"]), true);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation"]), StelModule::ADD_TO_SELECTION);
 		} 
 		else if(args["constellation_star"]!=""){
 			// This is no longer supported as easy to just select a star.  Here for backward compatibility.
-			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation_star"]), true);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation_star"]), StelModule::ADD_TO_SELECTION);
 			cout << "WARNING: select constellation_star comand is no longer fully supported.\n";
 		} else {
 			// unselect current selection 
@@ -246,15 +246,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     
 
 	} else if (command == "deselect") {
-		/* TODO
 		if(args["constellation"] != "") { 
-			stcore->unsetSelectedConstellation(args["constellation"]);
+			StelApp::getInstance().getStelObjectMgr().setSelectedObject( cmgr->searchByName(args["constellation"]), StelModule::REMOVE_FROM_SELECTION);
 		} else {
-			stcore->deselect();
+			StelApp::getInstance().getStelObjectMgr().unSelect();
 		}
-		*/
-
-		StelApp::getInstance().getStelObjectMgr().unSelect();
 
 	} else if(command == "look") {  // change direction of view
 

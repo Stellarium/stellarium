@@ -96,7 +96,7 @@ public:
 	//! The selected objects changed, check if some stars are selected and display the 
 	//! matching constellations if isolate_selected mode is activated.
 	//! @param added not used at present (?)
-	virtual void selectedObjectChangeCallBack(bool added = false);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::REPLACE_SELECTION);
 	
 	//! Load color scheme from the given ini file and section name
 	//! @param conf the iniparser containing the configuration items
@@ -219,6 +219,8 @@ private:
 	void drawBoundaries(Projector* prj) const;	
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
+	//! Handle unselecting a single constellation.
+	void unsetSelectedConst(Constellation* c);
 	//! Define which constellation is selected from its abbreviation.
 	void setSelected(const string& abbreviation);
 	//! Define which constellation is selected and return brightest star.
