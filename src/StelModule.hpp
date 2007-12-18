@@ -99,11 +99,20 @@ public:
 	//! @param state the press state of the key. Can be Stel_KEYDOWN or Stel_KEYUP.
 	//! @return false if the event was not intercepted, true otherwise.
 	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state) {return false;}
-	
+
+	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
+	//! the existing selection list.
+	enum StelModuleSelectAction
+	{
+		ADD_TO_SELECTION,
+		REPLACE_SELECTION,
+		REMOVE_FROM_SELECTION
+	};
+
 	//! Indicate that the user requested selection of StelObjects.
 	//! The StelModule should then manage by themself how they handle the event
 	//! @param added true if the user request that the objects are added to the selection
-	virtual void selectedObjectChangeCallBack(bool added=false) {;}
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=REPLACE_SELECTION) {;}
 	
 	//! Load color scheme from the given ini file and section name
 	//! @param conf the iniparser containing the configuration items
@@ -129,7 +138,8 @@ public:
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
-	
+
+
 protected:
 	friend class StelModuleMgr;
 };

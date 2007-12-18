@@ -75,6 +75,16 @@ public:
  
 	//! Return the list of all the external module found in the modules directories
 	static QList<ExternalStelModuleDescriptor> getExternalModuleList();
+
+	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
+	//! the existing selection list.
+	enum selectAction
+	{
+		ADD_TO_SELECTION,
+		REPLACE_SELECTION,
+		REMOVE_FROM_SELECTION
+	};
+
  
 private:
 	//! The main module list associating name:pointer

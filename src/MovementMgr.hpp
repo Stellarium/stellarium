@@ -59,7 +59,7 @@ public:
 	//! Handle mouse click events.
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
 	//! Called then the selected object changes.
-	virtual void selectedObjectChangeCallBack(bool added=false);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to MovementMgr

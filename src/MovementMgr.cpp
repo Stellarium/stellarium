@@ -203,7 +203,7 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
 *************************************************************************/ 
-void MovementMgr::selectedObjectChangeCallBack(bool added)
+void MovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
 	// If an object was selected keep the earth following
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
