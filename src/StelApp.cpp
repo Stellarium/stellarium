@@ -650,9 +650,9 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			}
 
 			// Try to select object at that position
-			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_META) ? StelObjectMgr::ADD_TO_SELECTION : StelObjectMgr::REPLACE_SELECTION);
+			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_META) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
 #else
-			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_CTRL) ? StelObjectMgr::ADD_TO_SELECTION : StelObjectMgr::REPLACE_SELECTION);
+			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_CTRL) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
 #endif
 			// If an object was selected update informations
 			if (getStelObjectMgr().getWasSelected())
