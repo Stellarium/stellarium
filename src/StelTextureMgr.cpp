@@ -124,8 +124,10 @@ STextureSP StelTextureMgr::initTex()
 *************************************************************************/
 STextureSP StelTextureMgr::createTexture(const QString& afilename)
 {
+	if (afilename.isEmpty())
+		return STextureSP();
+	
 	STextureSP tex = initTex();
-
 	try
 	{
 		tex->fullPath = StelApp::getInstance().getFileMgr().findFile(afilename);
@@ -160,6 +162,9 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 *************************************************************************/
 STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
 {
+	if (url.isEmpty())
+		return STextureSP();
+	
 	STextureSP tex = initTex();
 	if (!url.startsWith("http://"))
 	{

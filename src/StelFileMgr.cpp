@@ -52,6 +52,8 @@ StelFileMgr::~StelFileMgr()
 
 QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 {
+	if (path.isEmpty())
+		throw (runtime_error(std::string("Empty file path")));
 	// explicitly specified relative paths
 	if (path[0] == '.')
 		if (fileFlagsCheck(path, flags)) 
