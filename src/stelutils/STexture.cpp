@@ -41,7 +41,7 @@
 #endif
 
 // Initialize statics
-QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(1);
+QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(20);
 
 STexture::STexture() : downloaded(false), downloadId(0), isLoadingImage(false), imageFile(NULL), 
    errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
