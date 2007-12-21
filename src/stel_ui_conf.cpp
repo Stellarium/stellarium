@@ -458,22 +458,22 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	landscape_sl->setPos(x,y);
 	landscape_sl->addItemList(lmgr->getAllLandscapeNames().toStdString());
 	landscape_sl->adjustSize();
-	sprintf(vs, "%s", StelUtils::wstringToString(lmgr->getLandscapeName()).c_str());
+	sprintf(vs, "%s", lmgr->getLandscapeName().toUtf8().constData());
 	landscape_sl->setValue(vs);
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
 
-	landscape_authorlb = new Label(_("Author: ") +lmgr->getLandscapeAuthorName());
+	landscape_authorlb = new Label(_("Author: ") +lmgr->getLandscapeAuthorName().toStdWString());
 	landscape_authorlb->setPos(x+landscape_sl->getSizex()+20, y); 
 	landscape_authorlb->adjustSize();
 	tab_landscapes->addComponent(landscape_authorlb);
 	
-	landscapePlanetLb = new Label(_("Planet: ") + lmgr->getLandscapePlanetName());
+	landscapePlanetLb = new Label(_("Planet: ") + lmgr->getLandscapePlanetName().toStdWString());
 	landscapePlanetLb->setPos(x+landscape_sl->getSizex()+20, y+25); 
 	landscapePlanetLb->adjustSize();
 	tab_landscapes->addComponent(landscapePlanetLb);
 
-	landscapeLocationLb = new Label(_("Location: ") + lmgr->getLandscapeLocationDescription());
+	landscapeLocationLb = new Label(_("Location: ") + lmgr->getLandscapeLocationDescription().toStdWString());
 	landscapeLocationLb->setPos(x+landscape_sl->getSizex()+20, y+50); 
 	landscapeLocationLb->adjustSize();
 	tab_landscapes->addComponent(landscapeLocationLb);
@@ -483,7 +483,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	locationFromLandscapeCheck->setPos(x+landscape_sl->getSizex()+20, y+80); 
 	tab_landscapes->addComponent(locationFromLandscapeCheck);
 	
-	landscape_descriptionlb = new TextLabel(lmgr->getLandscapeDescription());
+	landscape_descriptionlb = new TextLabel(lmgr->getLandscapeDescription().toStdWString());
 	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+110); 
 	landscape_descriptionlb->adjustSize();
 	tab_landscapes->addComponent(landscape_descriptionlb);	
@@ -1020,10 +1020,10 @@ void StelUI::setLandscape(void)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	lmgr->setLandscapeByName(landscape_sl->getValue().c_str());
-	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
-	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());	
-	landscapePlanetLb->setLabel(_("Planet: ") + lmgr->getLandscapePlanetName());
-	landscapeLocationLb->setLabel(_("Location: ") + lmgr->getLandscapeLocationDescription());
+	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName().toStdWString());
+	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription().toStdWString());	
+	landscapePlanetLb->setLabel(_("Planet: ") + lmgr->getLandscapePlanetName().toStdWString());
+	landscapeLocationLb->setLabel(_("Location: ") + lmgr->getLandscapeLocationDescription().toStdWString());
 }
 
 void StelUI::updateVideoVariables(void)

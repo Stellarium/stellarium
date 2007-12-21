@@ -325,7 +325,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	{
 		// Set the planet and moveto the right location
 		if (landscape->getPlanet()!="") 
-			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanet().c_str());
+			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanet());
 	
 		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
 		{
@@ -334,7 +334,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 				landscape->getLongitude(),
 				landscape->getAltitude(),
 				0,
-    				landscape->getName());
+    			landscape->getName().toStdWString());
 		}
 	
 	}
@@ -344,7 +344,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 
 //! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 //! and make it the current landscape
-bool LandscapeMgr::loadLandscape(map<string, string>& param)
+bool LandscapeMgr::loadLandscape(QMap<QString, QString>& param)
 {
 	Landscape* newLandscape = createFromHash(param);
 	if(!newLandscape)
@@ -358,7 +358,7 @@ bool LandscapeMgr::loadLandscape(map<string, string>& param)
 		delete landscape;
 		landscape = newLandscape;
 	}
-	currentLandscapeID = param["name"].c_str();
+	currentLandscapeID = param["name"];
 	// probably not particularly useful, as not in landscape.ini file
 
 	return 1;
@@ -390,32 +390,32 @@ bool LandscapeMgr::getFlagFog(void) const
 	return landscape->getFlagShowFog();
 }
 
-wstring LandscapeMgr::getLandscapeName(void)
+QString LandscapeMgr::getLandscapeName(void)
 {
 	return landscape->getName();
 }
 
-wstring LandscapeMgr::getLandscapeAuthorName(void)
+QString LandscapeMgr::getLandscapeAuthorName(void)
 {
 	return landscape->getAuthorName();
 }
 
-wstring LandscapeMgr::getLandscapeDescription(void)
+QString LandscapeMgr::getLandscapeDescription(void)
 {
 	return landscape->getDescription();
 }
 
-wstring LandscapeMgr::getLandscapePlanetName(void) 
+QString LandscapeMgr::getLandscapePlanetName(void) 
 {
-	string desc("");
+	QString desc;
 	if (landscape->getPlanet() != "")
 	{
 		desc = landscape->getPlanet();
 	}
-	return StelUtils::stringToWstring(desc);
+	return desc;
 }
     
-wstring LandscapeMgr::getLandscapeLocationDescription(void) 
+QString LandscapeMgr::getLandscapeLocationDescription(void) 
 {
 	QString desc;
 //cerr << landscape->getLongitude() << " " << landscape->getLatitude() << endl;
@@ -425,7 +425,7 @@ wstring LandscapeMgr::getLandscapeLocationDescription(void)
 		desc += ", lat " + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
 		desc += QString(", ") + StelUtils::doubleToString(landscape->getAltitude()).c_str() + " m";
 	}
-	return desc.toStdWString();
+	return desc;
 }
 
 //! Set flag for displaying Cardinals Points
@@ -527,7 +527,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	return ldscp;
 }
 
-Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
+Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 {
 	// NOTE: textures should be full filename (and path)
 	if (param["type"]=="old_style")
@@ -539,16 +539,15 @@ Landscape* LandscapeMgr::createFromHash(map<string, string> & param)
 	else if (param["type"]=="spherical")
 	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, (param["path"] + param["maptex"]).c_str(),
-                      StelUtils::stringToDouble(param["angle_rotatez"]));
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"],param["angle_rotatez"].toDouble());
 		return ldscp;
 	}
 	else
 	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(StelUtils::stringToWstring(param["name"]), 1, (param["path"] + param["maptex"]).c_str(),
-		              StelUtils::stringToDouble(param["texturefov"]),
-                      StelUtils::stringToDouble(param["angle_rotatez"]));
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"],
+		              param["texturefov"].toDouble(),
+                      param["angle_rotatez"].toDouble());
 		return ldscp;
 	}
 }

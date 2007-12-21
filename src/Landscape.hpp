@@ -20,7 +20,7 @@
 #ifndef _LANDSCAPE_H_
 #define _LANDSCAPE_H_
 
-#include <string>
+#include <QMap>
 #include "vecmath.h"
 #include "ToneReproducer.hpp"
 #include "Projector.hpp"
@@ -56,17 +56,17 @@ public:
 	//! Get whether fog is displayed
 	bool getFlagShowFog() const {return (bool)fog_fader;}
 	//! Get landscape name
-	wstring getName() const {return name;}
+	QString getName() const {return name;}
 	//! Get landscape author name
-	wstring getAuthorName() const {return author;}
+	QString getAuthorName() const {return author;}
 	//! Get landscape description
-	wstring getDescription() const {return description;}
+	QString getDescription() const {return description;}
 	
 	void update(double deltaTime) {land_fader.update((int)(deltaTime*1000)); fog_fader.update((int)(deltaTime*1000));}
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
 
 	//! Return the (English) planet name for the landscape
-	string getPlanet(void) { return planet; }	
+	QString getPlanet(void) { return planet; }	
 	//! Return the latitude for the landscape
 	double getLatitude(void) { return latitude; }
 	//! Return the longitude for the landscape
@@ -84,14 +84,14 @@ protected:
 	//! @exception misc possibility of throwing boost:filesystem or "file not found" exceptions
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
-	wstring name;
+	QString name;
 	float sky_brightness;
 	bool valid_landscape;   // was a landscape loaded properly?
 	LinearFader land_fader;
 	LinearFader fog_fader;
-	wstring author;
-	wstring description;
-	string planet;
+	QString author;
+	QString description;
+	QString planet;
 	double latitude;
 	double longitude;
 	double altitude;
@@ -111,7 +111,7 @@ public:
     virtual ~LandscapeOldStyle();
 	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(bool _fullpath, map<string, string> param);
+	void create(bool _fullpath, QMap<QString, QString> param);
 private:
 	void draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
@@ -143,7 +143,7 @@ public:
 	virtual ~LandscapeFisheye();
 	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(const wstring _name, bool _fullpath, const QString& _maptex,
+	void create(const QString _name, bool _fullpath, const QString& _maptex,
 	            double _texturefov, double angle_rotatez);
 private:
 
@@ -160,7 +160,7 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const QString& fileName, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
-	void create(const wstring _name, bool _fullpath,
+	void create(const QString _name, bool _fullpath,
 	            const QString& _maptex, double angle_rotatez);
 private:
 
