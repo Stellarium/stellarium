@@ -20,6 +20,7 @@ Fixed bug #1781617 (added altitude unit) and #1751366 (segfault when changing pr
 StelModule now derive from QObject.
 First testing new script engine based on QObject slots.
 Recoded fully the texture manager now based on Qt signal/slots. It handles multithreading loading and downloading of images. As a direct result, loading time is divided by 2!
+Now use Qt4.3, and replaced CURL by QtNetwork.
 
 0.9.0 [2007-06-6]
 Larger star catalog including stars from Hipparcos, Tycho2 and NOMAD
