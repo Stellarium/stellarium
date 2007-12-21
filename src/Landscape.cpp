@@ -44,10 +44,10 @@ void Landscape::loadCommon(const QString& landscape_file, const QString& landsca
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 	// cout << "DEBUG Landscape::loadCommon section name is: " << landscapeId << "file name is " << landscape_file << endl;
-	name = StelUtils::stringToWstring(pd.get_str("landscape", "name"));
-	author = StelUtils::stringToWstring(pd.get_str("landscape", "author"));
-	description = StelUtils::stringToWstring(pd.get_str("landscape", "description"));
-	if(name == L"" )
+	name = QString::fromStdString(pd.get_str("landscape", "name"));
+	author = QString::fromStdString(pd.get_str("landscape", "author"));
+	description = QString::fromStdString(pd.get_str("landscape", "description"));
+	if (name.isEmpty())
 	{
 		qWarning() << "No valid landscape definition found for section "<< landscapeId << " in file " << landscape_file << ". No landscape in use." << endl;
 		valid_landscape = 0;
@@ -59,7 +59,7 @@ void Landscape::loadCommon(const QString& landscape_file, const QString& landsca
 	}
 	
 	// Optional data
-	if (pd.find_entry("location:planet")) planet = pd.get_str("location", "planet");
+	if (pd.find_entry("location:planet")) planet = QString::fromStdString(pd.get_str("location", "planet"));
 	if (pd.find_entry("location:latitude")) latitude = StelUtils::get_dec_angle(pd.get_str("location", "latitude"));
 	if (pd.find_entry("location:longitude")) longitude = StelUtils::get_dec_angle(pd.get_str("location", "longitude"));
 	if (pd.find_entry("location:altitude")) altitude = pd.get_int("location", "altitude");
@@ -177,13 +177,13 @@ void LandscapeOldStyle::load(const QString& landscape_file, const QString& lands
 
 
 // create from a hash of parameters (no ini file needed)
-void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
+void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 {
-	name = StelUtils::stringToWstring(param["name"]);
+	name = param["name"];
 	valid_landscape = 1;  // assume valid if got here
 
 	// Load sides textures
-	nb_side_texs = StelUtils::stringToInt(param["nbsidetex"]);
+	nb_side_texs = param["nbsidetex"].toInt();
 	side_texs = new STextureSP[nb_side_texs];
 	
 	char tmp[255];
@@ -192,20 +192,20 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param[tmp].c_str());
+		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param[tmp]);
 	}
 
 	// Init sides parameters
-	nb_side = StelUtils::stringToInt(param["nbside"]);
+	nb_side = param["nbside"].toInt();
 	sides = new landscape_tex_coord[nb_side];
-	string s;
+	QString s;
 	int texnum;
 	float a,b,c,d;
 	for (int i=0;i<nb_side;++i)
 	{
 		sprintf(tmp,"side%d",i);
 		s = param[tmp];
-		sscanf(s.c_str(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		sscanf(s.toUtf8().constData(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		sides[i].tex = side_texs[texnum];
 		sides[i].tex_coords[0] = a;
 		sides[i].tex_coords[1] = b;
@@ -214,11 +214,14 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 		//printf("%f %f %f %f\n",a,b,c,d);
 	}
 
-	nb_decor_repeat = StelUtils::stringToInt(param["nb_decor_repeat"], 1);
+	bool ok;
+	nb_decor_repeat = param["nb_decor_repeat"].toInt(&ok);
+	if (!ok)
+		nb_decor_repeat = 1;
 
-	ground_tex = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param["groundtex"].c_str());
+	ground_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["groundtex"]);
 	s = param["ground"];
-	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	sscanf(s.toUtf8().constData(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
 	ground_tex_coord.tex_coords[0] = a;
 	ground_tex_coord.tex_coords[1] = b;
@@ -226,23 +229,23 @@ void LandscapeOldStyle::create(bool _fullpath, map<string, string> param)
 	ground_tex_coord.tex_coords[3] = d;
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	fog_tex = StelApp::getInstance().getTextureManager().createTexture(QString(param["path"].c_str()) + param["fogtex"].c_str());
+	fog_tex = StelApp::getInstance().getTextureManager().createTexture(param["path"] + param["fogtex"]);
 	s = param["fog"];
-	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	sscanf(s.toUtf8().constData(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
 	fog_tex_coord.tex_coords[0] = a;
 	fog_tex_coord.tex_coords[1] = b;
 	fog_tex_coord.tex_coords[2] = c;
 	fog_tex_coord.tex_coords[3] = d;
 
-	fog_alt_angle = StelUtils::stringToDouble(param["fog_alt_angle"]);
-	fog_angle_shift = StelUtils::stringToDouble(param["fog_angle_shift"]);
-	decor_alt_angle = StelUtils::stringToDouble(param["decor_alt_angle"]);
-	decor_angle_shift = StelUtils::stringToDouble(param["decor_angle_shift"]);
-	decor_angle_rotatez = StelUtils::stringToDouble(param["decor_angle_rotatez"]);
-	ground_angle_shift = StelUtils::stringToDouble(param["ground_angle_shift"]);
-	ground_angle_rotatez = StelUtils::stringToDouble(param["ground_angle_rotatez"]);
-	draw_ground_first = StelUtils::stringToInt(param["draw_ground_first"]);
+	fog_alt_angle = param["fog_alt_angle"].toDouble();
+	fog_angle_shift = param["fog_angle_shift"].toDouble();
+	decor_alt_angle = param["decor_alt_angle"].toDouble();
+	decor_angle_shift = param["decor_angle_shift"].toDouble();
+	decor_angle_rotatez = param["decor_angle_rotatez"].toDouble();
+	ground_angle_shift = param["ground_angle_shift"].toDouble();
+	ground_angle_rotatez = param["ground_angle_rotatez"].toDouble();
+	draw_ground_first = param["draw_ground_first"].toInt();
 }
 
 void LandscapeOldStyle::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
@@ -397,7 +400,7 @@ void LandscapeFisheye::load(const QString& landscape_file, const QString& landsc
 
 
 // create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const wstring _name, bool _fullpath, const QString& _maptex,
+void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString& _maptex,
 	                          double _texturefov, double _angle_rotatez)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
@@ -463,7 +466,7 @@ void LandscapeSpherical::load(const QString& landscape_file, const QString& land
 
 
 // create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const wstring _name, bool _fullpath, const QString& _maptex,
+void LandscapeSpherical::create(const QString _name, bool _fullpath, const QString& _maptex,
 	                            double _angle_rotatez)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";

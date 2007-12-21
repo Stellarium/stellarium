@@ -605,6 +605,7 @@ void StelUI::cb(void)
 	lmgr->setFlagLandscape(bt_flag_ground->getState());
 	lmgr->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	lmgr->setFlagAtmosphere(bt_flag_atmosphere->getState());
+	lmgr->setFlagFog(bt_flag_atmosphere->getState());
 	
 	nmgr->setFlagHints( bt_flag_nebula_name->getState() );
 	if (bt_flip_horz) core->getProjection()->setFlipHorz( bt_flip_horz->getState() );
