@@ -630,7 +630,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		// textures are relative to script
 		args["path"] = QFile::encodeName(scripts->get_script_path()).constData();
-		lmgr->loadLandscape(args);
+		QMap<QString, QString> tmpArgs;
+		for (std::map<string, string>::const_iterator iter=args.begin();iter!=args.end();++iter)
+			tmpArgs.insert(iter->first.c_str(), iter->second.c_str());
+		lmgr->loadLandscape(tmpArgs);
 	  
 	} else if(command=="meteors") {
 		if(args["zhr"]!="") {
@@ -829,7 +832,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="atmosphere") {
 			newval = !lmgr->getFlagAtmosphere();
 			lmgr->setFlagAtmosphere(newval);
-			if(!newval) lmgr->setFlagFog(false);  // turn off fog with atmosphere
+			lmgr->setFlagFog(newval);
 		}
 		/*		else if(name=="chart") {
 			newval = !stapp->getVisionModeChart();

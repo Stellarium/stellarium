@@ -21,7 +21,6 @@
 #define LANDSCAPEMGR_H_
 
 #include <QMap>
-#include <map>
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 
@@ -32,7 +31,7 @@ class Cardinals;
 //! @class LandscapeMgr 
 //! Manages all the rendering a the level of the observer's surrounding.
 //! This includes landscape textures, fog, atmosphere and cardinal points
-//! I decided to put all these elements together in a single class because there are 
+//! I decided to put all these elements together in a single class because they are 
 //! inherently linked, especially when we start moving the observer in altitude.
 class LandscapeMgr : public StelModule
 {
@@ -85,7 +84,7 @@ public:
 
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini 
 	//! file and make it the current landscape.
-	bool loadLandscape(map<string, string>& param);
+	bool loadLandscape(QMap<QString, QString>& param);
 	
 	//! Create a new landscape from the files which describe it.
 	//! Reads a landscape.ini file which is passed as the first parameter, determines
@@ -108,15 +107,15 @@ public slots:
 	//! Get the current landscape ID.
 	const QString& getLandscapeId() {return currentLandscapeID;}
 	//! Return the real name of the current landscape.
-	wstring getLandscapeName(void);
+	QString getLandscapeName();
 	//! Return the author name of the current landscape.
-	wstring getLandscapeAuthorName(void);
+	QString getLandscapeAuthorName();
 	//! Return the description of the current landscape.
-	wstring getLandscapeDescription(void);
+	QString getLandscapeDescription();
 	//! Return the translated name of the planet where the current landscape is located.
-	wstring getLandscapePlanetName(void);
+	QString getLandscapePlanetName();
 	//! Return a wstring with the longitude, latitude and altitude of the current landscape.
-	wstring getLandscapeLocationDescription(void);
+	QString getLandscapeLocationDescription();
 	
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param newLandscapeName the name of the new landscape, as found in the 
@@ -131,45 +130,45 @@ public slots:
 	//! of that ID was found). True on success.
 	bool setLandscapeByID(const QString& newLandscapeID);
 	
+	//! Get flag for displaying Landscape.
+	bool getFlagLandscape() const;
 	//! Set flag for displaying Landscape.
 	void setFlagLandscape(bool b);
-	//! Get flag for displaying Landscape.
-	bool getFlagLandscape(void) const;
 
+	//! Get flag for displaying Fog.
+	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
 	void setFlagFog(bool b);
-	//! Get flag for displaying Fog.
-	bool getFlagFog(void) const;
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
-	bool getFlagLandscapeSetsLocation(void) const {return flagLandscapeSetsLocation;}
+	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
+	//! Get flag for displaying Cardinals Points.
+	bool getFlagCardinalsPoints() const;
 	//! Set flag for displaying Cardinals Points.
 	void setFlagCardinalsPoints(bool b);
-	//! Get flag for displaying Cardinals Points.
-	bool getFlagCardinalsPoints(void) const;
 
+	//! Get Cardinals Points color.
+	Vec3f getColorCardinalPoints() const;
 	//! Set Cardinals Points color.
 	void setColorCardinalPoints(const Vec3f& v);
-	//! Get Cardinals Points color.
-	Vec3f getColorCardinalPoints(void) const;
 	
+	//! Get flag for displaying Atmosphere.
+	bool getFlagAtmosphere() const;
 	//! Set flag for displaying Atmosphere.
 	void setFlagAtmosphere(bool b);
-	//! Get flag for displaying Atmosphere.
-	bool getFlagAtmosphere(void) const;
 
+	//! Get atmosphere fade duration in s.
+	float getAtmosphereFadeDuration() const;
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(float f);
-	//! Get atmosphere fade duration in s.
-	float getAtmosphereFadeDuration(void) const;
 
+	//! Get light pollution luminance level.
+	float getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
 	void setAtmosphereLightPollutionLuminance(float f);
-	//! Get light pollution luminance level.
-	float getAtmosphereLightPollutionLuminance(void) const;
 	
 private:
 	//! For a given landscape name, return the landscape ID.
@@ -183,7 +182,7 @@ private:
 	//! NOTE: maptex must be full path and filename
 	//! @param param an STL map of the keys and values which describe the landscape.
 	//! @return a pointer to the newly create landscape object.
-	Landscape* createFromHash(map<string, string> & param);
+	Landscape* createFromHash(QMap<QString, QString>& param);
 	
 	//! Return a map of landscape name to landscape ID (directory name).
 	QMap<QString,QString> getNameToDirMap(void);
