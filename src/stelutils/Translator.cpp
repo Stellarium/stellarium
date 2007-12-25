@@ -241,6 +241,8 @@ void Translator::initIso639_1LanguageCodes(const QString& fileName)
 		}
 		else
 		{
+			// remove trailing newline, see QFile.readLine()
+			record.chop(1);
 			iso639codes.insert(record.left(2), QString::fromUtf8(record.mid(pos+1)));
 		}
 	}
