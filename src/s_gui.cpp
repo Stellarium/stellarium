@@ -2723,7 +2723,7 @@ Time_item::Time_item(SFont* _font, const STextureSP tex_up,
 	if (_font) setFont(_font);
 
 	// ranges are +1 and -1 from normal to allow rollover
-	y = new IntIncDec(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
+	y = new IntIncDec(getFont(), tex_up, tex_down, -99999, 99999, 1930, 1);
 	m = new IntIncDec(getFont(), tex_up, tex_down, 1, 12, 12, 1, true);
 	d = new IntIncDec(getFont(), tex_up, tex_down, 1, 31, 11, 1, true);
 	h = new IntIncDec(getFont(), tex_up, tex_down, 0, 23, 16, 1, true);
@@ -2805,14 +2805,29 @@ double Time_item::getJDay(void) const
 // for use with commands - no special characters, just the local date
 string Time_item::getDateString(void)
 {
-	ostringstream os;
-	os << y->getValue() << ":"
-	   << m->getValue() << ":"
-	   << d->getValue() << "T"
-	   << h->getValue() << ":"
-	   << mn->getValue() << ":"
-	   << s->getValue();
-	return os.str();
+	QString outStr;
+	QTextStream os(&outStr); 
+	
+	int yearAbs = (int)abs(y->getValue());
+    //If needed, convert the year to BC and deal with year zero. (year -2 = 3BC, year 0 = 1BC
+	QString yStr;
+	if (y->getValue() <= 0) 
+    {
+        yStr = QString("-%1").arg(yearAbs+1, 3, 10, QLatin1Char('0'));
+    }
+    else 
+    {
+    	yStr = QString("%1").arg(yearAbs, 4, 10, QLatin1Char('0'));
+    }
+    
+	os << yStr << ":"
+		<< QString("%1").arg((int)m->getValue(),2, 10, QLatin1Char('0')) << ":"
+		<< QString("%1").arg((int)d->getValue(),  2, 10, QLatin1Char('0')) << "T"
+		<< QString("%1").arg((int)h->getValue(), 2, 10, QLatin1Char('0')) << ":"
+		<< QString("%1").arg((int)mn->getValue(),  2, 10, QLatin1Char('0')) << ":"
+		<< QString("%1").arg((int)s->getValue(),  2, 10, QLatin1Char('0'));   
+					
+	return outStr.toStdString();
 }
 
 void Time_item::setJDay(double JD)
