@@ -137,9 +137,16 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 	dateTime = dateTime.toLocalTime();
 	
 	QDate date = dateTime.date();
-	const int year = date.year()+yearOffset;
+	int year = date.year()+yearOffset;
 	const int month = date.month();
 	const int day = date.day();
+	QString bcStr;
+	
+	// If needed, convert the year to BC and deal with year zero. (year -2 = 3BC, year 0 = 1BC
+	if (year <= 0) 
+	{
+		--year;
+	}
 	
 	switch (date_format)
 	{
@@ -148,19 +155,19 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 		case S_DATE_MMDDYYYY:
 		{
 			QString str;
-			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10, QLatin1Char('0'));
+			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
 			return str.toStdWString();
 		}
 		case S_DATE_DDMMYYYY:
 		{
 			QString str;
-			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10, QLatin1Char('0'));
+			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
 			return str.toStdWString();
 		}
 		case S_DATE_YYYYMMDD:
 		{
 			QString str;
-			str = QString("%1-%2-%3").arg(year,4,10, QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
+			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
 			return str.toStdWString();
 		}
 		default:

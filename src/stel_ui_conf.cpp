@@ -820,9 +820,9 @@ void StelUI::updateConfigVariables2(void)
 
 void StelUI::setCurrentTimeFromConfig(void)
 {
-	StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
-	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
-	commander->execute_command(string("date local " + time_current->getDateString()));
+	//StelCommandInterface* commander = (StelCommandInterface*)StelApp::getInstance().getModuleMgr().getModule("StelCommandInterface");
+	core->getNavigation()->setJDay(time_current->getJDay() - app->getLocaleMgr().get_GMT_shift(time_current->getJDay())*JD_HOUR);
+	//commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
 void StelUI::setObserverPositionFromMap(void)
