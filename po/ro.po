@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
@@ -15,8 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:59:03+0000\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -344,9 +344,8 @@ msgid "Configuration"
 msgstr "Configurare"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Fereastră de configurare"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -457,7 +456,6 @@ msgid "Delphinus"
 msgstr "Delfinul"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -468,13 +466,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Dialoguri şi alte opţiuni\n"
-"H : Ajutor I : Despre Stellarium\n"
-"M : Meniu text 1 (unu) : Configuraţie\n"
-"CTRL + S : Captură de monitor\n"
-"CTRL + R : Schimbă înregistrarea scriptului\n"
-"CTRL + F : Schimbă motorul de căutare a obiectelor\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -493,7 +484,6 @@ msgid "Disk Viewport"
 msgstr "Vizualizare mod disc"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -508,18 +498,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Afişează opţiuni:\n"
-"ENTER : Montură Ecuatorială/altazimutală\n"
-"F1 : Schimbă imaginea pe tot ecranul daca este posibil.\n"
-"C : Liniile constelaţiilor V : Numele constelaţiilor\n"
-"R : Imaginile constelaţiilor E: Grid ecuatorial\n"
-"Z : Grid azimutal N : Numele nebuloaselor\n"
-"P : Numele planetelor G : Teren\n"
-"A : Atmosferă F : Ceaţă\n"
-"Q : Puncte cardinale O : Schimbă mărimea lunii\n"
-"T : Urmarire obiect S : Stele\n"
-"4, : Linia eclipticii 5. : Linia ecuatorului\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -697,14 +675,12 @@ msgid "Flail"
 msgstr "Biciul"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Întoarce orizontal"
+msgstr ""
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Întoarce vertical"
+msgstr ""
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1028,9 +1004,8 @@ msgid "Location"
 msgstr "Locaţia"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Locaţia"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1057,9 +1032,8 @@ msgid "Magnitude"
 msgstr "Magnitudine"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Multiplicator dimensiune magnitudine: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1268,9 +1242,8 @@ msgid "Norma"
 msgstr "Echerul"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Echerul"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1377,9 +1350,8 @@ msgid "Planet Trails"
 msgstr "Urmele Planetelor"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planete"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1478,9 +1450,8 @@ msgid "Reticulum"
 msgstr "Reticulul"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Revenire la Timpul Curent"
+msgstr ""
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1600,9 +1571,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Caută (de ex. Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Caută un obiect"
+msgstr ""
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1753,9 +1723,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Stele ce clipesc. Numărul lor :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Multiplicator pentru magnitudinea stelelor : "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1802,9 +1771,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Cele Şapte"
+msgstr ""
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1832,7 +1800,6 @@ msgid "Thunderbolt"
 msgstr "Trăznetul"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1843,13 +1810,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Ora şi data:\n"
-"6 : Opreste curgerea timpului 7 : Viteza curgerii timpului 0\n"
-"8 : Setează ora actuală J: Micşorează viteza curgerii timpului\n"
-"K : Viteza normala a curgerii timpului L : Mareste viteza curgerii timpului\n"
-"- : Înapoi cu 24 de ore = : Înainte cu 24 de ore\n"
-"[ : Înapoi cu 7 zile ] : Înainte cu 7 zile\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1926,9 +1886,8 @@ msgid "Type: "
 msgstr "Tipul: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Scripturi "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2041,9 +2000,8 @@ msgid "Woman's Bed"
 msgstr "Patul Femeii"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Patul Femeii"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2083,18 +2041,97 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Linia de comandă conţine comenzi greşite.\n"
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitudine: "
+#~ msgid "Configuration window"
+#~ msgstr "Fereastră de configurare"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialoguri şi alte opţiuni\n"
+#~ "H : Ajutor I : Despre Stellarium\n"
+#~ "M : Meniu text 1 (unu) : Configuraţie\n"
+#~ "CTRL + S : Captură de monitor\n"
+#~ "CTRL + R : Schimbă înregistrarea scriptului\n"
+#~ "CTRL + F : Schimbă motorul de căutare a obiectelor\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Afişează opţiuni:\n"
+#~ "ENTER : Montură Ecuatorială/altazimutală\n"
+#~ "F1 : Schimbă imaginea pe tot ecranul daca este posibil.\n"
+#~ "C : Liniile constelaţiilor V : Numele constelaţiilor\n"
+#~ "R : Imaginile constelaţiilor E: Grid ecuatorial\n"
+#~ "Z : Grid azimutal N : Numele nebuloaselor\n"
+#~ "P : Numele planetelor G : Teren\n"
+#~ "A : Atmosferă F : Ceaţă\n"
+#~ "Q : Puncte cardinale O : Schimbă mărimea lunii\n"
+#~ "T : Urmarire obiect S : Stele\n"
+#~ "4, : Linia eclipticii 5. : Linia ecuatorului\n"
+#~ "\n"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Întoarce orizontal"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Întoarce vertical"
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Încarc catalogul Hipparcos:"
 
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplicator dimensiune magnitudine: "
+
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Rata meteoriţilor pe minut"
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Revenire la Timpul Curent"
+
+#~ msgid "Search for object"
+#~ msgstr "Caută un obiect"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Tipul Spectral: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Multiplicator pentru magnitudinea stelelor : "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ora şi data:\n"
+#~ "6 : Opreste curgerea timpului 7 : Viteza curgerii timpului 0\n"
+#~ "8 : Setează ora actuală J: Micşorează viteza curgerii timpului\n"
+#~ "K : Viteza normala a curgerii timpului L : Mareste viteza curgerii "
+#~ "timpului\n"
+#~ "- : Înapoi cu 24 de ore = : Înainte cu 24 de ore\n"
+#~ "[ : Înapoi cu 7 zile ] : Înainte cu 7 zile\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Încercaţi '%s--ajutor' pentru informaţii suplimentare.\n"

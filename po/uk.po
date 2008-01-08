@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-06-20 12:21+0000\n"
+"PO-Revision-Date: 2007-12-06 02:13+0000\n"
 "Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Ukrainian\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: UKRAINE\n"
+"X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:59:08+0000\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -345,9 +346,8 @@ msgid "Configuration"
 msgstr "Конфіґурація"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Конфіґураційне вікно"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -458,7 +458,6 @@ msgid "Delphinus"
 msgstr "Дельфін"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -469,13 +468,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Діалоги і інше управління:\n"
-"H : Допомога I : Про Stellarium\n"
-"M : Текстове меню 1 (одиниця) : Налаштування\n"
-"CTRL + S : Зробити знімок екрана\n"
-"CTRL + R : Увімкнути запис сценарія\n"
-"CTRL + F : Увімкнути пошук об'єкта\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -495,7 +487,6 @@ msgid "Disk Viewport"
 msgstr "Круглий екран"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -510,18 +501,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Параметри відображення:\n"
-"ENTER : Екваторіальне/азимутальне положення\n"
-"F1 : Повноекранний режим, якщо можливо\n"
-"C : Лінії сузір`їв V : Назви сузір`їв\n"
-"R : Малюнки сузір`їв E : Екваторіальна сітка\n"
-"Z : Азимутальна сітка N : Назви туманностей\n"
-"P : Назви планет G : Земля\n"
-"A : Атмосфера F : Туман\n"
-"Q : Сторони світу O : Увімкнути масштабування місяця\n"
-"T : Сліди об'єктів S : Зірки\n"
-"4 , : Лінія екліптики 5 . : Лінія екватора\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -995,7 +974,7 @@ msgstr "Лев"
 #: src/translations.h:309
 #, fuzzy
 msgid "Lizard"
-msgstr "Птаха"
+msgstr "Ящірка"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
@@ -1027,9 +1006,8 @@ msgid "Location"
 msgstr "Розташування"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Розташування"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1056,9 +1034,8 @@ msgid "Magnitude"
 msgstr "Величина"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Множник зміни величини: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1262,9 +1239,8 @@ msgid "Norma"
 msgstr "Косинець"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Косинець"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1371,9 +1347,8 @@ msgid "Planet Trails"
 msgstr "Сліди від планет"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Планети"
+msgstr "Планета "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1473,9 +1448,8 @@ msgid "Reticulum"
 msgstr "Сітка"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Повернення до поточного часу"
+msgstr ""
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1595,9 +1569,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Шукати (наприклад Сатурн, Полярна зірка, М31 тощо):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Пошук об'єкту"
+msgstr "Шукати об'єкт"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1749,9 +1722,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Зоряне мерехтіння. Величина:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Множник зоряної величини: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1798,9 +1770,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Семірка"
+msgstr ""
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1828,7 +1799,6 @@ msgid "Thunderbolt"
 msgstr "Удар блискавки"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1839,13 +1809,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Час і дата:\n"
-"6 : Зупинити час 7 : Швидкість часу в нуль\n"
-"8 : Встановити поточний час J : Зменшити швидкість часу\n"
-"K : Нормальний плин часу L : Збільшити швидкість часу\n"
-"- : Назад на 24 години = : Вперед на 24 години\n"
-"[ : Назад на 7 днів ] : Вперед на 7 днів\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1922,9 +1885,8 @@ msgid "Type: "
 msgstr "Тип: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Сценарії "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2037,9 +1999,8 @@ msgid "Woman's Bed"
 msgstr "Ліжко жінки"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Ліжко жінки"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2096,6 +2057,9 @@ msgstr ""
 #~ msgid "Choose landscapes :"
 #~ msgstr " Виберіть ландшафти :"
 
+#~ msgid "Configuration window"
+#~ msgstr "Конфіґураційне вікно"
+
 #~ msgid "Constellation"
 #~ msgstr "Сузір'я"
 
@@ -2107,9 +2071,52 @@ msgstr ""
 #~ msgid "Constellation lines: "
 #~ msgstr "Сузір'я "
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Величина: "
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Діалоги і інше управління:\n"
+#~ "H : Допомога I : Про Stellarium\n"
+#~ "M : Текстове меню 1 (одиниця) : Налаштування\n"
+#~ "CTRL + S : Зробити знімок екрана\n"
+#~ "CTRL + R : Увімкнути запис сценарія\n"
+#~ "CTRL + F : Увімкнути пошук об'єкта\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Параметри відображення:\n"
+#~ "ENTER : Екваторіальне/азимутальне положення\n"
+#~ "F1 : Повноекранний режим, якщо можливо\n"
+#~ "C : Лінії сузір`їв V : Назви сузір`їв\n"
+#~ "R : Малюнки сузір`їв E : Екваторіальна сітка\n"
+#~ "Z : Азимутальна сітка N : Назви туманностей\n"
+#~ "P : Назви планет G : Земля\n"
+#~ "A : Атмосфера F : Туман\n"
+#~ "Q : Сторони світу O : Увімкнути масштабування місяця\n"
+#~ "T : Сліди об'єктів S : Зірки\n"
+#~ "4 , : Лінія екліптики 5 . : Лінія екватора\n"
+#~ "\n"
+
+#~ msgid "J2000"
+#~ msgstr "J2000"
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Завантаження каталогу Hipparcos:"
@@ -2120,6 +2127,9 @@ msgstr ""
 #, fuzzy
 #~ msgid "Magnitude : "
 #~ msgstr "Величина "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Множник зміни величини: "
 
 #~ msgid "Message"
 #~ msgstr "Повідомлення"
@@ -2138,17 +2148,47 @@ msgstr ""
 #~ msgid "Nebula"
 #~ msgstr "Туманність"
 
+#, fuzzy
+#~ msgid "Parallax: "
+#~ msgstr "Паралакс "
+
 #~ msgid "Planet/Moon"
 #~ msgstr "Планета/місяць"
 
 #~ msgid "Planets & Moons"
 #~ msgstr "Планети & місяці"
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Повернення до поточного часу"
+
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "Збереження розташування %s до файлу %s\n"
 
+#~ msgid "Search for object"
+#~ msgstr "Пошук об'єкту"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Спектральний тип: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Множник зоряної величини: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Час і дата:\n"
+#~ "6 : Зупинити час 7 : Швидкість часу в нуль\n"
+#~ "8 : Встановити поточний час J : Зменшити швидкість часу\n"
+#~ "K : Нормальний плин часу L : Збільшити швидкість часу\n"
+#~ "- : Назад на 24 години = : Вперед на 24 години\n"
+#~ "[ : Назад на 7 днів ] : Вперед на 7 днів\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Cпробуйте `%s --help' щоб отримати більше інформації.\n"
