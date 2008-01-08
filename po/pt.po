@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-06-20 12:15+0000\n"
+"PO-Revision-Date: 2007-11-06 22:08+0000\n"
 "Last-Translator: VCarvalho <vanesa.carvalho@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:59:01+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -46,10 +46,9 @@ msgstr "Taxa Padrão de Perseidas"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
-msgstr "AU"
+msgstr "UA"
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Actual Time"
 msgstr "Tempo actual"
 
@@ -76,7 +75,7 @@ msgstr "Andromeda"
 #: src/translations.h:341
 #, fuzzy
 msgid "Animal"
-msgstr "Antlia (Máquina Pneumática)"
+msgstr "Animal"
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -152,7 +151,7 @@ msgstr "Estandarte das Três Estrelas"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "Alojamento do Urso"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -160,7 +159,7 @@ msgstr "Ave"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "Recipiente da Gordura de Baleia"
 
 #: src/translations.h:180 src/translations.h:251
 msgid "Boat"
@@ -204,7 +203,7 @@ msgstr "Caelum (Cinzel)"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Calendário"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -337,15 +336,15 @@ msgid "Coma Berenices"
 msgstr "Coma Berenices (Cabeleira de Berenice)"
 
 #: src/stel_ui.cpp:1032
+#, fuzzy
 msgid "Command recording stopped."
-msgstr "Comando de gravação parado."
+msgstr "Gravação de comandos parada."
 
 #: src/stel_ui_conf.cpp:57
 msgid "Configuration"
 msgstr "Configuração"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
 msgstr "Janela de Configuração"
 
@@ -460,7 +459,6 @@ msgid "Delphinus"
 msgstr "Delphinus (Delfim)"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -471,13 +469,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Janelas e outros Controlos:\n"
-"H : Ajuda I : Sobre o Stellarium\n"
-"M : Menu de texto 1 (um) : Configuração\n"
-"CTRL + S : Foto do Écran\n"
-"CTRL + R : Mudar a gravação do script\n"
-"CTRL + F : Mudar de objecto\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -496,7 +487,6 @@ msgid "Disk Viewport"
 msgstr "Visão em Disco"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -511,17 +501,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Mostrar Opções:\n"
-"ENTER : Montagem Equatorial/Azimutal.\n"
-"F1 : Alternar para Écran Total se possível.\n"
-"C : Linhas das constelações V : Nome das constelações.\n"
-"R : Desenhos das constelações E : Linha Equatorial.\n"
-"Z : Linha Azimutal N : Nome das nebulosas.\n"
-"P : Nome dos planetas G : Superfície.\n"
-"A : Atmosfera F : Neblina.\n"
-"Q : Pontos Cardeais O : Mudar a escala da Lua.\n"
-"T : Procurar Objectos S : Estrelas.\n"
-"4 , : Linha Eclíptica 5 . : Linha do Equador\n"
+"Opções de visualização:\n"
+"ENTER : Montagem Equatorial/altazimutal\n"
+"F1  : Alternar entre ecrã inteiro/janela.\n"
+"C   : Linhas das constelações       V   : Etiquetas das constelações\n"
+"R   : Arte das constelações         E   : Grelha equatorial\n"
+"Z   : Grelha azimutal            N   : Etiquetas das nebulosas\n"
+"P   : Etiquetas dos planetas             G   : Superfície\n"
+"A   : Atmosfera                F   : Nevoeiro\n"
+"Q   : Pontos Cardeais           O   : Ligar/desligar escala das luas\n"
+"T   : Procura de objectos           S   : Estrelas\n"
+"4 , : Linha da Eclíptica            5 . : Linha do Equador\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -533,9 +523,8 @@ msgid "Dog"
 msgstr "Cão"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "Cão"
+msgstr "Cães"
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -575,7 +564,7 @@ msgid ""
 msgstr ""
 "Durante a Execução do Script:\n"
 "CTRL + C : Terminar o Script\n"
-"6 : Parar o Script K : Retomar o Script\n"
+"6 : Pausar o Script K : Retomar o Script\n"
 "\n"
 
 #: src/translations.h:65 src/s_gui.cpp:2690
@@ -596,7 +585,7 @@ msgstr "Porta Oriental"
 
 #: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
-msgstr "Linha Eclíptica"
+msgstr "Linha da Eclíptica"
 
 #: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
@@ -608,7 +597,7 @@ msgstr "Egípcio"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "Alces"
 
 #: src/translations.h:266
 msgid "Emptiness"
@@ -636,7 +625,7 @@ msgstr "Grelha Equatorial"
 
 #: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
-msgstr "Grelha do Equador [E]"
+msgstr "Grelha Equatorial [E]"
 
 #: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
@@ -676,7 +665,7 @@ msgstr "Ferry (Cacilheiro)"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "Lareira"
 
 #: src/translations.h:311
 msgid "First Big One"
@@ -699,14 +688,12 @@ msgid "Flail"
 msgstr "Estrela da Manhã"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Inverter horizontalmente"
+msgstr "Inverter a Imagem na Horizontal [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Inverter verticalmente"
+msgstr "Inverter a Imagem na Vertical [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -794,7 +781,7 @@ msgstr "Grus (Grou)"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "Mão"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -881,9 +868,8 @@ msgid "Information"
 msgstr "Informação"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Inuit"
-msgstr "Indus (Índio)"
+msgstr ""
 
 #: src/stel_ui.cpp:588
 msgid "Invalid Script command"
@@ -922,9 +908,8 @@ msgid "Kite of Kawelo"
 msgstr "Papagaio de Kawelo"
 
 #: src/translations.h:72
-#, fuzzy
 msgid "Korean"
-msgstr "Corno"
+msgstr "Coreano"
 
 #: src/translations.h:126
 msgid "Lacerta"
@@ -998,7 +983,7 @@ msgstr "Leão"
 #: src/translations.h:309
 #, fuzzy
 msgid "Lizard"
-msgstr "Ave"
+msgstr "Lagarto"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
@@ -1017,9 +1002,8 @@ msgid "Loading Nebula Textures:"
 msgstr "A carregar Texturas das Nebulosas:"
 
 #: src/StarMgr.cpp:448
-#, fuzzy
 msgid "Loading catalog "
-msgstr "A carregar o catálogo NGC: "
+msgstr "A carregar o catálogo "
 
 #: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
@@ -1030,9 +1014,8 @@ msgid "Location"
 msgstr "Localização"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Localização"
+msgstr "Localização: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1059,9 +1042,8 @@ msgid "Magnitude"
 msgstr "Magnitude"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Multiplicador do Tamanho da Magnitude: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1196,15 +1178,15 @@ msgid ""
 "\n"
 msgstr ""
 "Movimento e Selecção:\n"
-"Teclas do Cursor : Mudar de visão RA/DE.\n"
-"Page Up/Down : Zoom.\n"
-"CTRL+Seta Cima/ Seta Baixo : Zoom.\n"
-"Clique Esquerdo : Seleccionar Objecto.\n"
-"Clique Direito : Anular Selecção.\n"
-"CTRL+Clique Esquerdo : Anular Selecção.\n"
-"\\ : Zoom - Diminuir (Planetas+Luas se Aplicável).\n"
-"/ : Zoom  - Aumentar o Objecto Seleccionado.\n"
-"Barra de espaço : Centrar o Objecto Seleccionado.\n"
+"Teclas do Cursor : Mudar de visão AR/DE\n"
+"Page Up/Down : Zoom\n"
+"CTRL+Seta Cima/ Seta Baixo : Zoom\n"
+"Clique Esquerdo : Seleccionar objecto\n"
+"Clique Direito : Anular selecção\n"
+"CTRL+Clique Esquerdo : Anular Selecção\n"
+"\\ : Zoom - Diminuir (planetas+luas, se aplicável)\n"
+"/ : Zoom  - Aumentar o objecto seleccionado\n"
+"Barra de espaço : Centrar no objecto seleccionado\n"
 "\n"
 
 #: src/translations.h:135
@@ -1238,7 +1220,7 @@ msgstr "Nomes das nebulosas"
 
 #: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
-msgstr "Nomes das Nebulosas. Até a Magnitude:"
+msgstr "Nomes das Nebulosas. Até à Magnitude:"
 
 #: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
@@ -1270,9 +1252,8 @@ msgid "Norma"
 msgstr "Norma (Régua)"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Norma (Régua)"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1379,9 +1360,8 @@ msgid "Planet Trails"
 msgstr "Rasto dos Planetas"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planetas"
+msgstr "Planeta: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1446,15 +1426,15 @@ msgstr "Saír [CTRL + Q]"
 
 #: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
-msgstr "RA/DE: "
+msgstr "AR/DE: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "Trilhas do Coelho"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "Pista de Corrida"
 
 #: src/translations.h:222
 msgid "Ramparts"
@@ -1465,8 +1445,9 @@ msgid "Real Time Speed [K]"
 msgstr "Velocidade Real do Tempo [K]"
 
 #: src/stel_ui.cpp:1040
+#, fuzzy
 msgid "Recording commands to script file:\n"
-msgstr "Comandos de gravação para o arquivo de script:\n"
+msgstr "Gravação de comandos para o arquivo de script:\n"
 
 #: src/stel_ui_conf.cpp:562
 msgid "Rendering"
@@ -1481,9 +1462,8 @@ msgid "Reticulum"
 msgstr "Reticulum (Retículo)"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Regressar ao Tempo Actual"
+msgstr "Voltar ao Tempo Currente"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1527,7 +1507,7 @@ msgstr "Cabaça Podre"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "Corredores"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
@@ -1547,7 +1527,7 @@ msgstr "Sah"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "Salamandra"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1603,9 +1583,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Procurar (ex. Saturno, Estrela Polar, HP6218, Orionte, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Procurar objecto"
+msgstr "Procurar Objecto [CTRL +F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1624,8 +1603,9 @@ msgid "Selected : "
 msgstr "Seleccionado : "
 
 #: src/stel_ui_conf.cpp:125
+#, fuzzy
 msgid "Selected Constellation Only"
-msgstr "Somente Constelações Seleccionadas"
+msgstr "Apenas a Constelação Seleccionada"
 
 #: src/translations.h:182
 msgid "Selkis"
@@ -1665,7 +1645,7 @@ msgstr "Sete Excelências"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "As Sete Raparigas Pequenas"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1713,7 +1693,7 @@ msgstr "Tempo Estelar: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "Cobra"
 
 #: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
@@ -1756,9 +1736,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Cintilação Estelar. Quantidade :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Multiplicador da Magnitude Estelar: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1805,9 +1784,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Os Sete"
+msgstr "O Pescador"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1828,14 +1806,13 @@ msgstr "Trovão e Raio"
 #: src/translations.h:347
 #, fuzzy
 msgid "Thunderbird"
-msgstr "Relâmpago"
+msgstr "Thunderbird"
 
 #: src/translations.h:259
 msgid "Thunderbolt"
 msgstr "Relâmpago"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1846,13 +1823,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Hora e Data:\n"
-"6 : Pausa no tempo 7 : Velocidade do tempo 0.\n"
-"8 : Definir hora actual J : Diminuir velocidade do tempo.\n"
-"K : Velocidade normal do tempo L : Aumentar velocidade do tempo.\n"
-"- : Voltar atrás 24 horas = : Avançar 24 horas.\n"
-"[ : Voltar atrás 7 dias ] : Avançar 7 dias.\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1929,9 +1899,8 @@ msgid "Type: "
 msgstr "Tipo: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Scripts "
+msgstr "USB Script: "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2037,16 +2006,15 @@ msgstr "Cesto de despalhar"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Boca do Lobo"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Leito da Mulher"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Leito da Mulher"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2086,18 +2054,105 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Argumento(s) da linha de comandos incorrecto(s)\n"
 
-#, fuzzy
+#~ msgid "Configuration window"
+#~ msgstr "Janela de Configuração"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Janelas e outros Controlos:\n"
+#~ "H : Ajuda I : Sobre o Stellarium\n"
+#~ "M : Menu de texto 1 (um) : Configuração\n"
+#~ "CTRL + S : Foto do Écran\n"
+#~ "CTRL + R : Mudar a gravação do script\n"
+#~ "CTRL + F : Mudar de objecto\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Mostrar Opções:\n"
+#~ "ENTER : Montagem Equatorial/Azimutal.\n"
+#~ "F1 : Alternar para Écran Total se possível.\n"
+#~ "C : Linhas das constelações V : Nome das constelações.\n"
+#~ "R : Desenhos das constelações E : Linha Equatorial.\n"
+#~ "Z : Linha Azimutal N : Nome das nebulosas.\n"
+#~ "P : Nome dos planetas G : Superfície.\n"
+#~ "A : Atmosfera F : Neblina.\n"
+#~ "Q : Pontos Cardeais O : Mudar a escala da Lua.\n"
+#~ "T : Procurar Objectos S : Estrelas.\n"
+#~ "4 , : Linha Eclíptica 5 . : Linha do Equador\n"
+#~ "\n"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Inverter horizontalmente"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Inverter verticalmente"
+
+#~ msgid "J2000"
+#~ msgstr "Época J2000"
+
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitude: "
+#~ msgstr "Magnitude Limite: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "A carregar o Catálogo Hipparcos:"
 
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplicador do Tamanho da Magnitude: "
+
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Taxa de Meteoros por minuto"
 
+#~ msgid "Parallax: "
+#~ msgstr "Paralaxe: "
+
+#~ msgid "Return to Current Time"
+#~ msgstr "Regressar ao Tempo Actual"
+
+#~ msgid "Search for object"
+#~ msgstr "Procurar objecto"
+
 #~ msgid "Spectral Type: "
-#~ msgstr "Tipo de Espectro: "
+#~ msgstr "Tipo Espectral: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Multiplicador da Magnitude Estelar: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Hora e Data:\n"
+#~ "6 : Pausa no tempo 7 : Velocidade do tempo 0.\n"
+#~ "8 : Definir hora actual J : Diminuir velocidade do tempo.\n"
+#~ "K : Velocidade normal do tempo L : Aumentar velocidade do tempo.\n"
+#~ "- : Voltar atrás 24 horas = : Avançar 24 horas.\n"
+#~ "[ : Voltar atrás 7 dias ] : Avançar 7 dias.\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Tente `%s --ajuda' para mais informações.\n"

@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-06-20 11:53+0000\n"
+"PO-Revision-Date: 2007-11-02 18:17+0000\n"
 "Last-Translator: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:58:46+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 #, fuzzy
@@ -23,8 +24,8 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   لطفا نسخه به روز رسان را بررسی کنید و مشکل به وجود آمده را ارسال کنید\n"
-"    برای ارسال توضیح از این سایت استفاده کنید : http://www.stellarium.org\n"
+"   لطفاً نسخه‌های جدیدتر را ببینید و گزارش اشکالات و نظرات خود\n"
+"    را در سایت http://www.stellarium.org به ما بفرستید.\n"
 "\n"
 
 #: src/stel_ui_conf.cpp:1104
@@ -49,7 +50,7 @@ msgstr "واحد نجومی"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
-msgstr ""
+msgstr "زمان حقیقی"
 
 #: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
@@ -114,7 +115,7 @@ msgstr "جَوّ"
 
 #: src/stel_ui.cpp:681
 msgid "Atmosphere [A]"
-msgstr "جَوّ[A]"
+msgstr "جَو [A]"
 
 #: src/translations.h:100
 msgid "Auriga"
@@ -194,7 +195,7 @@ msgstr ""
 
 #: src/stel_ui.cpp:809
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q :خروج\n"
+msgstr "CTRL + Q : خروج\n"
 
 #: src/translations.h:90
 msgid "Caelum"
@@ -242,7 +243,7 @@ msgstr "چهارجهت اصلی"
 
 #: src/stel_ui.cpp:679
 msgid "Cardinal Points [Q]"
-msgstr "چهارجهت اصلی"
+msgstr "چهارجهت اصلی [Q]"
 
 #: src/translations.h:302
 msgid "Cared for by Moon"
@@ -343,9 +344,8 @@ msgid "Configuration"
 msgstr "پیکربندی"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "پنجره پیکربندی"
+msgstr "پنجره پیکربندی [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -357,11 +357,11 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Lines"
-msgstr ""
+msgstr "خطوط صورت‌های فلکی"
 
 #: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Names"
-msgstr ""
+msgstr "نام صورت‌های فلکی‌"
 
 #: src/stel_ui.cpp:671
 msgid "Constellations Art [R]"
@@ -457,7 +457,6 @@ msgid "Delphinus"
 msgstr "دلفین"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -468,12 +467,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"محاورات و کنترلهای دیگر: /nدرباره Stellarium :  I    کمک: H \n"
-"پیکربندی:  ۱    منوی متنی:  M \n"
-"عکس گرفتن از صفحه: CTRL + S \n"
-"تعویض ضبط اسکریپت: CTRL + R \n"
-"تعویض جرم‌یاب: CTRL + F\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -493,7 +486,6 @@ msgid "Disk Viewport"
 msgstr "نمایش از روی دیسک"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -508,16 +500,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"نمایش گزینه‌ها:/nاستقرار سمت‌ارتفاعی/استوایی: ENTER \n"
-"تمام صفحه کردن در صورت امکان.: F1 \n"
-"برچسب صوَر فلکی:  V    خطوط صوَر فلکی:  C \n"
-"تقسیمات استوایی: E    تصویر صوَر فلکی:  R \n"
-"برچسب سحابی‌ها: N    تقسیمات سمتی:  Z /nزمین:  G    برچسب سیارات:  P \n"
-"مِه:  F     جَوّ:  A \n"
-"تعویض مقیاس ماه: O     چهارجهت اصلی:  Q \n"
-"ستارگان:  S    ردیابی اجرام:  T \n"
-"خط استوای سماوی: ۵    خط دایرة‌البروج: ۴\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -634,7 +616,7 @@ msgstr "تقسیمات استوایی"
 
 #: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "استقرار سمت‌ارتفاعی/استوایی[ENTER]"
+msgstr "استقرار سمت‌ارتفاعی/استوایی [ENTER]"
 
 #: src/translations.h:144
 msgid "Equuleus"
@@ -693,14 +675,12 @@ msgid "Flail"
 msgstr ""
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "قرینه‌سازی افقی"
+msgstr "برگرداندن افقی [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "قرینه‌سازی عمودی"
+msgstr "برگرداندن عمودی [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -800,7 +780,7 @@ msgstr "راهنما"
 
 #: src/stel_ui.cpp:685
 msgid "Help [H]"
-msgstr "کمک[H]"
+msgstr "کمک [H]"
 
 #: src/translations.h:121
 msgid "Hercules"
@@ -868,7 +848,7 @@ msgstr "هندی"
 
 #: src/stel_ui_conf.cpp:1024
 msgid "Info: "
-msgstr ""
+msgstr "اطلاعات: "
 
 #: src/stel_ui.cpp:748
 msgid "Information"
@@ -917,7 +897,7 @@ msgstr ""
 
 #: src/translations.h:72
 msgid "Korean"
-msgstr ""
+msgstr "کره‌ای‌"
 
 #: src/translations.h:126
 msgid "Lacerta"
@@ -998,20 +978,20 @@ msgstr ":بارگیری پیکربندی پیش‌فرض "
 
 #: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
-msgstr "بارگیری تصاویر صوَر فلکی: "
+msgstr "بارگذاری تصاویر صوَر فلکی: "
 
 #: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
-msgstr "بارگیری کاتالوگ NGC: "
+msgstr "بارگذاری کاتالوگ NGC: "
 
 #: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
-msgstr "بارگیری بافت سحابی‌ها:"
+msgstr "بارگذاری بافت سحابی‌ها:"
 
 #: src/StarMgr.cpp:448
 #, fuzzy
 msgid "Loading catalog "
-msgstr "بارگیری کاتالوگ NGC: "
+msgstr "بارگذاری کاتالوگ NGC: "
 
 #: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
@@ -1022,9 +1002,8 @@ msgid "Location"
 msgstr "موقعیت"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "موقعیت"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1112,7 +1091,7 @@ msgstr "عُطارِد"
 
 #: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
-msgstr ""
+msgstr "خط نصف‌النهار"
 
 #: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
@@ -1182,15 +1161,15 @@ msgid ""
 "\n"
 msgstr ""
 "جابجایی و انتخاب:\n"
-"کلیدهای جهتی       : تغییر بُعدومِیل درحال نمایش\n"
-"Page Up/Down       : زوم\n"
-"CTRL+Up/Down     : زوم\n"
-"کلیک چپ      : انتخاب جرم\n"
-"کلیک راست       :حذف انتخاب\n"
-"کلیک چپ+ CTRL      : حذف انتخاب\n"
-"\\       : بیرون‌آمدن از زوم (سیارات و ماه در صورت امکان)\n"
-"/       : زوم روی جرم منتخب\n"
-"SPACE       : در مرکز نهادن جرم منتخب\n"
+"کلیدهای جهتی : تغییر بُعدومِیل درحال نمایش\n"
+"Page Up/Down : بزرگنمایی\n"
+"CTRL+Up/Down : بزرگنمایی\n"
+"کلیک چپ : اتنخاب جرم\n"
+"کلیک راست : حذف انتخاب\n"
+"کلیک چپ+CTRL : حذف انتخاب\n"
+"\\ : کوچک نمایی (سیارات و ماه در صورت امکان)\n"
+"/ : بزرگنمایی روی جرم منتخب\n"
+"SPACE : در مرکز نهادن جرم منتخب\n"
 "\n"
 
 #: src/translations.h:135
@@ -1220,7 +1199,7 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
-msgstr ""
+msgstr "نام سحابی‌ها"
 
 #: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
@@ -1228,7 +1207,7 @@ msgstr ":نام سحابی‌ها تا قدرِ"
 
 #: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
-msgstr "سحابی‌ها[N]"
+msgstr "سحابی‌ها [N]"
 
 #: src/translations.h:288
 msgid "Neck"
@@ -1256,9 +1235,8 @@ msgid "Norma"
 msgstr "گونیا"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "گونیا"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1354,20 +1332,19 @@ msgstr "حوت جنوبی"
 
 #: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Names"
-msgstr ""
+msgstr "نام سیاره‌ها"
 
 #: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Orbits"
-msgstr ""
+msgstr "مدار سیاره‌ها"
 
 #: src/stel_ui_tuiconf.cpp:431
 msgid "Planet Trails"
-msgstr ""
+msgstr "دنبالهٔ سیاره‌ها"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "سیارات"
+msgstr "سیاره: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1423,11 +1400,11 @@ msgstr "قطب‌نما"
 
 #: src/stel_ui.cpp:697
 msgid "Quit [CMD + Q]"
-msgstr "خروج[CMD + Q]"
+msgstr "خروج [CMD + Q]"
 
 #: src/stel_ui.cpp:695
 msgid "Quit [CTRL + Q]"
-msgstr "خروج[CTRL + Q]"
+msgstr "خروج [CTRL + Q]"
 
 #: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
@@ -1466,9 +1443,8 @@ msgid "Reticulum"
 msgstr "تور"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "بازگشت به زمان فعلی"
+msgstr "بازگشت به زمان فعلی [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1588,9 +1564,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "جستجو برای (نمونه : Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "جستجوی جرم"
+msgstr "جستجوی اجرام [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1817,7 +1792,6 @@ msgid "Thunderbolt"
 msgstr ""
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1828,13 +1802,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"زمان و تاریخ: \n"
-"صفر‌کردن نرخ گذر زمان:  ۷    توقف نرخ گذر زمان:  ۶ \n"
-"کاهش نرخ گذر زمان:  J    اِعمال زمان فعلی:  ۸ \n"
-"افزایش نرخ گذر زمان:  L    نرخ گذر زمان نرمال:  K \n"
-"۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به "
-"عقب:  [\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1909,9 +1876,8 @@ msgid "Type: "
 msgstr "نوع: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "اسکریپت‌ها "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2107,6 +2073,9 @@ msgstr ""
 #~ msgid "Choose landscapes :"
 #~ msgstr ":مناظر را انتخاب کنید"
 
+#~ msgid "Configuration window"
+#~ msgstr "پنجره پیکربندی"
+
 #~ msgid "Constellation"
 #~ msgstr "صورت فلکی"
 
@@ -2119,18 +2088,67 @@ msgstr ""
 #~ msgid "DE : "
 #~ msgstr "مِیل : "
 
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "محاورات و کنترلهای دیگر: /nدرباره Stellarium :  I    کمک: H \n"
+#~ "پیکربندی:  ۱    منوی متنی:  M \n"
+#~ "عکس گرفتن از صفحه: CTRL + S \n"
+#~ "تعویض ضبط اسکریپت: CTRL + R \n"
+#~ "تعویض جرم‌یاب: CTRL + F\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "نمایش گزینه‌ها:/nاستقرار سمت‌ارتفاعی/استوایی: ENTER \n"
+#~ "تمام صفحه کردن در صورت امکان.: F1 \n"
+#~ "برچسب صوَر فلکی:  V    خطوط صوَر فلکی:  C \n"
+#~ "تقسیمات استوایی: E    تصویر صوَر فلکی:  R \n"
+#~ "برچسب سحابی‌ها: N    تقسیمات سمتی:  Z /nزمین:  G    برچسب سیارات:  P \n"
+#~ "مِه:  F     جَوّ:  A \n"
+#~ "تعویض مقیاس ماه: O     چهارجهت اصلی:  Q \n"
+#~ "ستارگان:  S    ردیابی اجرام:  T \n"
+#~ "خط استوای سماوی: ۵    خط دایرة‌البروج: ۴\n"
+#~ "\n"
+
 #~ msgid "Distance : "
 #~ msgstr "فاصله : "
 
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "حالت تصویر‌کردن چشم‌ماهی"
 
+#~ msgid "Flip horizontally"
+#~ msgstr "قرینه‌سازی افقی"
+
+#~ msgid "Flip vertically"
+#~ msgstr "قرینه‌سازی عمودی"
+
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP ۶۰۷۱۸, HD ۱۰۸۲۴۸, SAO ۲۵۱۹۰۴"
 
-#, fuzzy
+#~ msgid "J2000"
+#~ msgstr "J2000"
+
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "قدر: "
+#~ msgstr "قدر حدّی: "
 
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP: %d/%d"
@@ -2166,6 +2184,9 @@ msgstr ""
 #~ msgid "Nebula"
 #~ msgstr "سحابی"
 
+#~ msgid "Parallax: "
+#~ msgstr "اختلاف منظر: "
+
 #~ msgid "Planet/Moon"
 #~ msgstr "قمر/سیاره"
 
@@ -2178,6 +2199,12 @@ msgstr ""
 #~ msgid "RA : "
 #~ msgstr "بُعد : "
 
+#~ msgid "Return to Current Time"
+#~ msgstr "بازگشت به زمان فعلی"
+
+#~ msgid "Search for object"
+#~ msgstr "جستجوی جرم"
+
 #~ msgid "Size : "
 #~ msgstr "اندازه: "
 
@@ -2189,6 +2216,23 @@ msgstr ""
 
 #~ msgid "Star No./Name"
 #~ msgstr "نام/ شماره ستاره"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "زمان و تاریخ: \n"
+#~ "صفر‌کردن نرخ گذر زمان:  ۷    توقف نرخ گذر زمان:  ۶ \n"
+#~ "کاهش نرخ گذر زمان:  J    اِعمال زمان فعلی:  ۸ \n"
+#~ "افزایش نرخ گذر زمان:  L    نرخ گذر زمان نرمال:  K \n"
+#~ "۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به "
+#~ "عقب:  [\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "برای اطلاعات بیشتر «%s --help» را امتحان کنید.\n"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-07-26 20:25+0000\n"
+"PO-Revision-Date: 2007-12-20 08:09+0000\n"
 "Last-Translator: Ali Isingor <isingor@gmail.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
-"X-Rosetta-Export-Date: 2007-07-29 13:58:33+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -45,7 +45,7 @@ msgstr ": Standart Perseids meteor yağmuru oranı"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
-msgstr "AU"
+msgstr "AB"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
@@ -120,8 +120,9 @@ msgid "Auriga"
 msgstr "Arabacı"
 
 #: src/translations.h:316
+#, fuzzy
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Aurvandil'in Ayak Parmağı"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
@@ -189,11 +190,12 @@ msgstr "CD/DVD Betikleri: "
 
 #: src/stel_ui.cpp:811
 msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : Çık\n"
+msgstr "CMD + Q : Çıkış\n"
 
 #: src/stel_ui.cpp:809
+#, fuzzy
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Çık\n"
+msgstr "CTRL + Q : Çıkış\n"
 
 #: src/translations.h:90
 msgid "Caelum"
@@ -201,7 +203,7 @@ msgstr "Çelikkalem"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Takvim"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -213,7 +215,7 @@ msgstr "Zürafa"
 
 #: src/s_gui.cpp:2226 src/s_gui.cpp:2272
 msgid "Cancel"
-msgstr "Vazgeç"
+msgstr "İptal"
 
 #: src/translations.h:92
 msgid "Cancer"
@@ -284,8 +286,9 @@ msgid "Chariot"
 msgstr "Savaş Arabası"
 
 #: src/translations.h:260
+#, fuzzy
 msgid "Chariot Yard"
-msgstr "Atlı Araba Ağılı"
+msgstr "At Arabası Avulu"
 
 #: src/translations.h:59
 msgid "Charon"
@@ -340,9 +343,8 @@ msgid "Configuration"
 msgstr "Yapılandırma"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Yapılandırma Penceresi"
+msgstr "Yapılandırma penceresi [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -438,7 +440,7 @@ msgstr "Gün"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
-msgstr ""
+msgstr "Gün Anahtarı "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
@@ -453,7 +455,6 @@ msgid "Delphinus"
 msgstr "Yunus"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -464,12 +465,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Kısayollar & diğer komutlar: \n"
-"H : Yardım    I : Stellarium Hakkında\n"
-"M : Text menu    1 : Yapılandırma\n"
-"CTRL + S : Ekran görüntüsü al\n"
-"CTRL + R : Betik kayıt modu\n"
-"CTRL + F : Gök Cismi arama modu\n"
+"Dialoglar ve diğer kontroller :\n"
+"H: Yardım I : Stellarium Hakkında \n"
+"M : Metin menüsü 1 (bir) : Konfigürasyon\n"
+"CTRL+S : Ekran görüntüsü al\n"
+"CTRL+R : Komut kaydına geçiş \n"
+"CTRL+F : Nesne bulmaya geçiş\n"
+"CTRL+G : Seçilen güneş sistemi cismine git\n"
 "\n"
 
 #: src/translations.h:310
@@ -489,7 +491,6 @@ msgid "Disk Viewport"
 msgstr "Disk Görünümü"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -504,16 +505,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Görüntü ayarları:\n"
-"ENTER : Ekvatoral/Altazimutal eksen\n"
-"F1 : Tam ekran boyutuna geçmeyi dene.\n"
-"C: Takımyıldızı çizgileri  V : Takımyıldızı adları\n"
-"Z : Azimutal İzdüşüm  N : Bulutsu adları\n"
-"P : Gezegen adları  G : Yeryüzü\n"
-"A : Atmosfer  F : Sis\n"
-"Q : Ana Yönler  O : Ay ölçekleme modu\n"
-"T : Gök cismi takibi  S : Yıldızlar\n"
-"4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
+"Götrüntü seçenekleri : \n"
+"ENTER : Ekvatoral/altazimutal montaj\n"
+"F1 : Tam ekran/ pencere.\n"
+"C: Takımyıldızı çizgileri V:Takımyıldızı etiketleri\n"
+"R: Takımyıldızı fotoğrafı E: Ekvatoryal ızgara\n"
+"Z:Azimutal ızgara N:Bulutsu Etiketleri\n"
+"P:Gezegen etiketleri G:Yer\n"
+"A:Atmosfer F: Sis\n"
+"Q:Ana yönler O:Ay Ölçeklemesine Geçiş\n"
+"T:Nesne takibi S: Yıldızlar\n"
+"4,:Ekliptik Çizgisi 5.:Ekvator çizgisi\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -542,7 +544,7 @@ msgstr "Ejderha"
 
 #: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
-msgstr "Takımyıldızlarını Çiz [C]"
+msgstr "Takımyıldızı Çizimleri [C]"
 
 #: src/translations.h:344
 msgid "Dried Willow"
@@ -557,15 +559,16 @@ msgid "Drumstick"
 msgstr "Tokmak"
 
 #: src/stel_ui.cpp:799
+#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"Betik Çalışması Sırasında:\n"
-"CTRL + C : Betiği sona erdir\n"
-"6 :  Betiği beklet   K : Betiği tekrar çalıştır\n"
+"Komut Çalışması Süresince :\n"
+"CTRL+C : Komutu Sonlandır \n"
+"6: Komutu Durdur K : Komuta devam et\n"
 "\n"
 
 #: src/translations.h:65 src/s_gui.cpp:2690
@@ -578,7 +581,7 @@ msgstr "Dünya"
 
 #: src/translations.h:254
 msgid "Earth God's Temple"
-msgstr "Tanrı'nın Yeryüzündeki Evi"
+msgstr "Allah'ın Evi"
 
 #: src/translations.h:282
 msgid "Eastern Door"
@@ -654,7 +657,7 @@ msgstr "Europa"
 
 #: src/translations.h:245
 msgid "Extended Net"
-msgstr "Gerili Ağ"
+msgstr "Genişletilmiş Ağ"
 
 #: src/translations.h:283
 msgid "Farmland"
@@ -689,14 +692,12 @@ msgid "Flail"
 msgstr "Harman Döven"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Yatay olarak döndür"
+msgstr "Yatay dondur [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Dikey olarak döndür"
+msgstr "Dikey dondur"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -764,7 +765,7 @@ msgstr "Olgun Kabak"
 
 #: src/stel_ui.cpp:704
 msgid "Goto selected object [SPACE]"
-msgstr "Seçili Gök Cismine Git [SPACE]"
+msgstr "Seçilen Gökcismine Git [SPACE]"
 
 #: src/translations.h:218
 msgid "Great General"
@@ -868,7 +869,7 @@ msgstr "Bilgi: "
 
 #: src/stel_ui.cpp:748
 msgid "Information"
-msgstr "Kısayollar"
+msgstr "Bilgi"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -876,7 +877,7 @@ msgstr "Eskimo"
 
 #: src/stel_ui.cpp:588
 msgid "Invalid Script command"
-msgstr "Geçersiz Betik komutu"
+msgstr "Geçersiz Komut Emri"
 
 #: src/translations.h:42
 msgid "Io"
@@ -924,7 +925,7 @@ msgstr "Lakota (Kuzey Amerika yerlileri)"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
-msgstr ""
+msgstr "Şamdan"
 
 #: src/translations.h:250
 msgid "Lance"
@@ -1015,9 +1016,8 @@ msgid "Location"
 msgstr "Konum"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Konum"
+msgstr "Konum: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1044,9 +1044,8 @@ msgid "Magnitude"
 msgstr "Kadir"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Kadir Numarası Çarpanı: "
+msgstr "Kadir Ölçekleme Çarpanı: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1058,7 +1057,7 @@ msgstr "Ayrık Bacaklı Adam"
 
 #: src/translations.h:320
 msgid "Man's Cart"
-msgstr ""
+msgstr "Bey'in At Arabası"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
@@ -1069,8 +1068,9 @@ msgid "Market"
 msgstr "Pazar Yeri"
 
 #: src/translations.h:290
+#, fuzzy
 msgid "Market Officer"
-msgstr "Pazaryeri Amiri"
+msgstr "Pazar Görevlisi"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -1136,6 +1136,11 @@ msgid ""
 "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
+"Çeşitli :\n"
+"9: Meteor yağmuru oranlarına geçiş\n"
+"CTRL + 0,..,9 : Teleskop için 0,..9 GİT komutunu çalıştır\n"
+"CTRL + SHIFT + H:Yatay görüntü döndürmeye geçiş\n"
+"CTRL + SHIFT + V: Dkey görüntü döndürmeye geçiş\n"
 
 #: src/translations.h:127
 msgid "Monoceros"
@@ -1158,8 +1163,9 @@ msgid "Mooring Post"
 msgstr "Palamar Babası"
 
 #: src/translations.h:257
+#, fuzzy
 msgid "Mortar"
-msgstr "Havan"
+msgstr "Havan Topu"
 
 #: src/stel_ui.cpp:760
 msgid ""
@@ -1197,7 +1203,7 @@ msgstr "K"
 
 #: src/stel_ui.cpp:669
 msgid "Names of the Constellations [V]"
-msgstr "Takımyıldızı Adları [V]"
+msgstr "Takımyıldzlarının İsimleri [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
@@ -1249,9 +1255,8 @@ msgid "Norma"
 msgstr "Cetvel"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Cetvel"
+msgstr "Viking"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1263,7 +1268,7 @@ msgstr "Kuzey Maşrapası"
 
 #: src/s_gui.cpp:2244 src/s_gui.cpp:2270
 msgid "OK"
-msgstr "Tamam"
+msgstr "TAMAM"
 
 #: src/stel_ui_conf.cpp:708
 msgid "Object Search"
@@ -1319,7 +1324,7 @@ msgstr "Kahraman"
 
 #: src/translations.h:256
 msgid "Pestle"
-msgstr "Havaneli"
+msgstr "Tokmak"
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -1358,9 +1363,8 @@ msgid "Planet Trails"
 msgstr "Gezegen İzleri"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Gezegenler"
+msgstr "Gezegen: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1459,9 +1463,8 @@ msgid "Reticulum"
 msgstr "Ağ"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Şu Anki Zamana Dön"
+msgstr "Şimdiki zamana dön [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1488,8 +1491,9 @@ msgid "Rolled Tongue"
 msgstr "Yuvarlanmış Dil"
 
 #: src/translations.h:258
+#, fuzzy
 msgid "Rooftop"
-msgstr "Çatı"
+msgstr "Çatının dış yüzeyi"
 
 #: src/translations.h:271
 msgid "Room"
@@ -1546,7 +1550,7 @@ msgstr "Konumu Kaydet"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Ayarlar şu anki tam ekran konumuyla birlikte kaydedilecek"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1562,7 +1566,7 @@ msgstr "Ekran Çözünürlüğü :"
 
 #: src/stel_ui.cpp:560 src/stel_ui.cpp:702
 msgid "Script commander"
-msgstr "Betik yöneticisi"
+msgstr "Komut Yönetici"
 
 #: src/stel_ui_tuiconf.cpp:383
 msgid "Scripts "
@@ -1581,9 +1585,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Şunu ara (ör: Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Gök Cismi Ara"
+msgstr "Nesne Ara [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1631,11 +1634,11 @@ msgstr "Yerel Saate Ayarla: "
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "Konum Belirleme Ayarı "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "Konum Güncelleme Ayarı"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1643,7 +1646,7 @@ msgstr "Yedi Ekselans"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr "Yedi Küçük Kız"
+msgstr "Yedi Kandilli Süreyya"
 
 #: src/translations.h:159
 msgid "Sextans"
@@ -1667,11 +1670,11 @@ msgstr "Kapat: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr ""
+msgstr "Yıldız"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
-msgstr "Büyüklük: "
+msgstr "Boyut: "
 
 #: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
@@ -1734,9 +1737,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Yıldız Pırıldama Miktarı:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Yıldız Kadir Çarpanı: "
+msgstr "Yıldız Değeri Çarpanı: "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1780,12 +1782,11 @@ msgstr "Tethys"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "Asar Muharebe Meydanı"
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Yedili"
+msgstr "Balıkçı"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1823,12 +1824,13 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Saat & Tarih:\n"
-"6 : Zaman akışına ara ver   7 : Zaman akışı 0\n"
-"8 : Şu anki saate ayarla   J : Zamanı yavaşlat\n"
-"K : Normal zaman akışı   L : Zamanı hızlandır\n"
-"- : 24 saat geri git   = : 24 saat ileri git\n"
-"[ : 7 gün geri git   ] : 7 gün ileri git\n"
+"Zaman & Tarih \n"
+"6 : Zaman hızı durdurma 7 : Zaman hızı 0\n"
+"8: Şimdiki zamanı ayarla J: Zaman hızını arttır\n"
+"K : Normal zaman hızı L : Zaman hızını arttır\n"
+"-ve=bir gün geri veya ileri git ( yıldız günü için ALT'a bas)\n"
+"[ ve ] : 7 gün geri veya ileri  git (yıldız günü için ALT'a bas)\n"
+"CTRL+ - : Bir saat geri CTRL+= : Bir saat ileri\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1885,7 +1887,7 @@ msgstr "İki Çene"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
-msgstr ""
+msgstr "İki Ayrı Yerleşim"
 
 #: src/translations.h:172
 msgid "Two Poles"
@@ -1906,7 +1908,7 @@ msgstr "Türü: "
 #: src/translations.h:355
 #, fuzzy
 msgid "USB Script: "
-msgstr "Betikler "
+msgstr "USB Komutu "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2012,16 +2014,15 @@ msgstr "Harman Eleği"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Kurt Ağzı"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
-msgstr "Kadının Yatağı"
+msgstr "Kadın Yatağı"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Kadının Yatağı"
+msgstr "Hanım'ın At Arabası"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2183,11 +2184,57 @@ msgstr ""
 #~ "Eğer  %s  dizini kaybolmuşsa lütfen onu elle oluşturun.\n"
 #~ "Aksi takdirde %s dizinine erişim hakkınız olmayacaktır.\n"
 
+#~ msgid "Configuration window"
+#~ msgstr "Yapılandırma Penceresi"
+
 #~ msgid "Constellation"
 #~ msgstr "Takımyıldızı"
 
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Kısayollar & diğer komutlar: \n"
+#~ "H : Yardım    I : Stellarium Hakkında\n"
+#~ "M : Text menu    1 : Yapılandırma\n"
+#~ "CTRL + S : Ekran görüntüsü al\n"
+#~ "CTRL + R : Betik kayıt modu\n"
+#~ "CTRL + F : Gök Cismi arama modu\n"
+#~ "\n"
+
 #~ msgid "Did not recognize locale language code "
 #~ msgstr "Yerel dil kodu tanımlanamadı "
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Görüntü ayarları:\n"
+#~ "ENTER : Ekvatoral/Altazimutal eksen\n"
+#~ "F1 : Tam ekran boyutuna geçmeyi dene.\n"
+#~ "C: Takımyıldızı çizgileri  V : Takımyıldızı adları\n"
+#~ "Z : Azimutal İzdüşüm  N : Bulutsu adları\n"
+#~ "P : Gezegen adları  G : Yeryüzü\n"
+#~ "A : Atmosfer  F : Sis\n"
+#~ "Q : Ana Yönler  O : Ay ölçekleme modu\n"
+#~ "T : Gök cismi takibi  S : Yıldızlar\n"
+#~ "4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
+#~ "\n"
 
 #~ msgid "E-W Centering Offset: "
 #~ msgstr "D-B Merkezli Konumlandırma: "
@@ -2211,8 +2258,17 @@ msgstr ""
 #~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "%d satırında %s hatası\n"
 
+#~ msgid "Equ of date"
+#~ msgstr "zaman eşitliği"
+
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Balıkgözü Gösterimi"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Yatay olarak döndür"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Dikey olarak döndür"
 
 #~ msgid "HP No./Name"
 #~ msgstr "HP No./Adı"
@@ -2223,9 +2279,8 @@ msgstr ""
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "Kadir: "
+#~ msgstr "Kadiri Sınırlama: "
 
 #~ msgid "Loading Constellation Art: %d/%d"
 #~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
@@ -2253,6 +2308,9 @@ msgstr ""
 
 #~ msgid "Loading nebulas data "
 #~ msgstr "Nebula Verileri Yükleniyor "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Kadir Numarası Çarpanı: "
 
 #~ msgid "Message"
 #~ msgstr "İleti"
@@ -2309,7 +2367,7 @@ msgstr ""
 #~ msgstr "Bulutsu"
 
 #~ msgid "Parallax: "
-#~ msgstr "Iraklık Açısı "
+#~ msgstr "Paralaks "
 
 #~ msgid "Planet/Moon"
 #~ msgstr "Gezegen/Ay"
@@ -2329,6 +2387,9 @@ msgstr ""
 #~ msgid "Please save option in tab \"Location\""
 #~ msgstr "Lütfen \"Konum\" sekmesinden"
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Şu Anki Zamana Dön"
+
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "%s konumu %s dosyasına kaydediliyor\n"
 
@@ -2338,8 +2399,14 @@ msgstr ""
 #~ msgid "Saving video size "
 #~ msgstr "Video boyutunu kaydediyor "
 
+#~ msgid "Search for object"
+#~ msgstr "Gök Cismi Ara"
+
 #~ msgid "Spectral Type: "
-#~ msgstr "Yüzey Sıcaklığı: "
+#~ msgstr "Spektrum Tipi "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Yıldız Kadir Çarpanı: "
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2356,6 +2423,23 @@ msgstr ""
 #~ "Mevcut yapılandırma dosyası eski ayarların aktarılmasına izin vermeyecek "
 #~ "kadar eski(%s).\n"
 #~ "Bu dosya öntanımlı yapılandırma dosyası ile değiştirilecek.\n"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Saat & Tarih:\n"
+#~ "6 : Zaman akışına ara ver   7 : Zaman akışı 0\n"
+#~ "8 : Şu anki saate ayarla   J : Zamanı yavaşlat\n"
+#~ "K : Normal zaman akışı   L : Zamanı hızlandır\n"
+#~ "- : 24 saat geri git   = : 24 saat ileri git\n"
+#~ "[ : 7 gün geri git   ] : 7 gün ileri git\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Daha fazla bilgi için `%s --help' yazın.\n"

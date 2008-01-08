@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-08-12 14:48+0000\n"
-"Last-Translator: Jos Polfliet <jos.polfliet@gmail.com>\n"
+"PO-Revision-Date: 2007-10-31 15:17+0000\n"
+"Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
-"X-Poedit-Language: Dutch\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
-"X-Rosetta-Export-Date: 2007-08-12 16:48:15+0000\n"
+"X-Poedit-Language: Dutch\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -153,7 +153,7 @@ msgstr "Banier van de Drie Sterren"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "De Hut van de Beer"
 
 #: src/translations.h:176
 msgid "Bird"
@@ -205,7 +205,7 @@ msgstr "Griffel"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -346,9 +346,8 @@ msgid "Configuration"
 msgstr "Configuratie"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Configuratievenster"
+msgstr "Configuratiescherm [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -459,7 +458,6 @@ msgid "Delphinus"
 msgstr "Dolfijn"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -470,12 +468,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Vensters & andere bedieningselementen:\n"
+"Dialogen en andere besturingen:\n"
 "H : Help I : Over Stellarium\n"
-"M : Tekst menu 1 (één) : Configuratie\n"
-"Ctrl+S: Maak een schermafbeelding\n"
-"Ctrl+R: Script opnemen aan/uit\n"
-"Ctrl+F: Objectzoeker aan/uit\n"
+"M : Tekst menu 1 (een): Configuratie\n"
+"CTRL + S : Neem een schermafdruk\n"
+"CTRL + R : Schakel scriptopname\n"
+"CTRL + F : Schakel objectzoeker\n"
+"CTRL + G : Ga naar geselecteerd zonnestelsel-object\n"
 "\n"
 
 #: src/translations.h:310
@@ -495,7 +494,6 @@ msgid "Disk Viewport"
 msgstr "Schijfvormig venster"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -510,15 +508,15 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Weergaveopties:\n"
-"ENTER : Equatoriale/Azimutale opstelling\n"
-"F1 : Volledig scherm indien mogelijk\n"
-"C : Lijntekeningen sterrenbeelden V : Namen sterrenbeelden\n"
-"R : Afbeeldingen sterrenbeelden E : Equatoriaal raster\n"
-"Z : Azimutaal rooster N : Namen nevels\n"
-"P : Namen planeten G : Grond\n"
-"A : Atmosfeer F : Nevel\n"
-"Q : Hoofdstreken O : De maan op schaal tonen\n"
+"Scherminstellingen:\n"
+"ENTER: Equatoriale/azimutale opstelling\n"
+"F1 : Schakel tussen fullscreen / venster\n"
+"C : Lijnen sterrenbeeld V : Namen van sterrenbeelden\n"
+"R : Afbeeldingen van de sterrenbeelden E : Equatoriaal raster\n"
+"Z : Azimutaal raster N : Namen van nevels\n"
+"P : Hints voor planeten G : Grond\n"
+"A : Atmosfeer F : Mist\n"
+"Q : Windrichtingen O : Grootte maan\n"
 "T : Object volgen S : Sterren\n"
 "4 , : Ecliptica 5 . : Hemelequator\n"
 "\n"
@@ -534,7 +532,7 @@ msgstr "Hond"
 #: src/translations.h:326
 #, fuzzy
 msgid "Dogs"
-msgstr "Hond"
+msgstr "Honden"
 
 #: src/translations.h:303
 msgid "Dolphin"
@@ -699,14 +697,12 @@ msgid "Flail"
 msgstr "Dorsvlegel"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Horizontaal spiegelen"
+msgstr "Spiegel horizontaal [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Verticaal spiegelen"
+msgstr "Spiegel verticaal [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1029,9 +1025,8 @@ msgid "Location"
 msgstr "Locatie"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Locatie"
+msgstr "Locatie: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1058,9 +1053,8 @@ msgid "Magnitude"
 msgstr "Magnitude"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Vermenigvuldiger grootte magnitude: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1269,9 +1263,8 @@ msgid "Norma"
 msgstr "Winkelhaak"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Winkelhaak"
+msgstr "Noors"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1378,9 +1371,8 @@ msgid "Planet Trails"
 msgstr "Planeetsporen"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planeten"
+msgstr "Planeet: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1480,9 +1472,8 @@ msgid "Reticulum"
 msgstr "Net"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Terug naar huidige tijd"
+msgstr "Terug naar Huidige Tijd [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1569,6 +1560,7 @@ msgstr "Positie opslaan"
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
 msgstr ""
+"Het opslaan van de instellingen zal de huidige full screen status opslaan"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1603,9 +1595,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Zoeken naar (bvb. Saturnus, Polaris, HP6318, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Zoek een object"
+msgstr "Zoeken naar object [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1653,11 +1644,11 @@ msgstr "Selecteer UI locale: "
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "Het instellen van een landschap stelt  de locatie in: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "Het instellen van een landschap verandert de locatie"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1757,9 +1748,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Fonkelen van sterren. Intensiteit :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Vermenigvuldiger stermagnitude: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1806,9 +1796,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "De Zeven"
+msgstr "De Visser"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1836,7 +1825,6 @@ msgid "Thunderbolt"
 msgstr "Bliksemschicht"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1847,12 +1835,13 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Tijd & Datum:\n"
-"6 : Pauzeer tijd 7 : Stop tijd\n"
-"8 : Naar huidig tijdstip J : Vertraag tijd\n"
-"K : Normale tijd L : Versnel tijd\n"
-"- : 24 uur terug = : 24 uur vooruit\n"
-"[ : 7 dagen terug ] : 7 dagen vooruit\n"
+"Tijd en datum:\n"
+"6 : Pauzeer tijd 7 : Pauzeer tijd\n"
+"7 : Terug naar huidige tijd J : Vertraag tijd\n"
+"K : Normaal tijdsverloop L : Versnel tijd\n"
+"- en = : Een dag terug en vooruit (druk op ALT voor siderische dag)\n"
+"[ en ] : Zeven dagen terug en vooruit (druk op ALT voor siderische dagen)\n"
+"CTRL + - : Een uur terug CTRL + = : Een uur vooruit\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1930,9 +1919,8 @@ msgid "Type: "
 msgstr "Type: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Scripts "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2038,16 +2026,15 @@ msgstr "Wan"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Mond van de Wolf"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Vrouwenbed"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Vrouwenbed"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2252,6 +2239,9 @@ msgstr ""
 #~ msgid "Chart mode"
 #~ msgstr "Kaartmodus"
 
+#~ msgid "Configuration window"
+#~ msgstr "Configuratievenster"
+
 #~ msgid "Constellation"
 #~ msgstr "Sterrenbeeld"
 
@@ -2263,6 +2253,50 @@ msgstr ""
 
 #~ msgid "DE : "
 #~ msgstr "DE : "
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vensters & andere bedieningselementen:\n"
+#~ "H : Help I : Over Stellarium\n"
+#~ "M : Tekst menu 1 (één) : Configuratie\n"
+#~ "Ctrl+S: Maak een schermafbeelding\n"
+#~ "Ctrl+R: Script opnemen aan/uit\n"
+#~ "Ctrl+F: Objectzoeker aan/uit\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Weergaveopties:\n"
+#~ "ENTER : Equatoriale/Azimutale opstelling\n"
+#~ "F1 : Volledig scherm indien mogelijk\n"
+#~ "C : Lijntekeningen sterrenbeelden V : Namen sterrenbeelden\n"
+#~ "R : Afbeeldingen sterrenbeelden E : Equatoriaal raster\n"
+#~ "Z : Azimutaal rooster N : Namen nevels\n"
+#~ "P : Namen planeten G : Grond\n"
+#~ "A : Atmosfeer F : Nevel\n"
+#~ "Q : Hoofdstreken O : De maan op schaal tonen\n"
+#~ "T : Object volgen S : Sterren\n"
+#~ "4 , : Ecliptica 5 . : Hemelequator\n"
+#~ "\n"
 
 #~ msgid "Distance : "
 #~ msgstr "Afstand : "
@@ -2291,15 +2325,17 @@ msgstr ""
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Vissenoogprojectie (fish-eye)"
 
+#~ msgid "Flip horizontally"
+#~ msgstr "Horizontaal spiegelen"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Verticaal spiegelen"
+
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP 60718, HD 108248, SAO 251904"
 
 #~ msgid "J2000"
 #~ msgstr "J2000"
-
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitude: "
 
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Laden Cadwell sterrencataloog:"
@@ -2379,6 +2415,9 @@ msgstr ""
 
 #~ msgid "Magnitude : "
 #~ msgstr "Magnitude : "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Vermenigvuldiger grootte magnitude: "
 
 #~ msgid "Message"
 #~ msgstr "Bericht"
@@ -2500,6 +2539,9 @@ msgstr ""
 #~ msgid "RA : "
 #~ msgstr "RK : "
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Terug naar huidige tijd"
+
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "Opslaan positie %s in bestand %s\n"
 
@@ -2509,6 +2551,9 @@ msgstr ""
 #~ msgid "Saving video size "
 #~ msgstr "Opslaan videogrootte "
 
+#~ msgid "Search for object"
+#~ msgstr "Zoek een object"
+
 #~ msgid "Size : "
 #~ msgstr "Grootte : "
 
@@ -2517,6 +2562,9 @@ msgstr ""
 
 #~ msgid "Spectral Type: "
 #~ msgstr "Spectraaltype: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Vermenigvuldiger stermagnitude: "
 
 #~ msgid "Star No./Name"
 #~ msgstr "Ster Nr./Naam"
@@ -2538,6 +2586,23 @@ msgstr ""
 #~ "Het huidige configuratiebestand is van een te oude programmaversie om "
 #~ "parameters te importeren (%s).\n"
 #~ "Het zal worden vervangen door een standaard configuratiebestand.\n"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Tijd & Datum:\n"
+#~ "6 : Pauzeer tijd 7 : Stop tijd\n"
+#~ "8 : Naar huidig tijdstip J : Vertraag tijd\n"
+#~ "K : Normale tijd L : Versnel tijd\n"
+#~ "- : 24 uur terug = : 24 uur vooruit\n"
+#~ "[ : 7 dagen terug ] : 7 dagen vooruit\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Typ `%s --help' voor meer informatie.\n"

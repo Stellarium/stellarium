@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-08-03 14:41+0000\n"
-"Last-Translator: Liu Chunbin <liu_chunbin@126.com>\n"
+"PO-Revision-Date: 2007-11-27 09:26+0000\n"
+"Last-Translator: - <->\n"
 "Language-Team: Chinese (China) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-08-11 11:08:28+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -70,9 +71,8 @@ msgid "Andromeda"
 msgstr "仙女座"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "动物"
+msgstr "唧筒座"
 
 #: src/translations.h:133
 msgid "Antlia"
@@ -119,8 +119,9 @@ msgid "Auriga"
 msgstr "御夫座"
 
 #: src/translations.h:316
+#, fuzzy
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Aurvandil's Toe"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
@@ -128,7 +129,7 @@ msgstr "作者: "
 
 #: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
-msgstr "方位角/高度: "
+msgstr "方位角/高度角 : "
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
 msgid "Azimuthal Grid"
@@ -206,7 +207,7 @@ msgstr "雕具座"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "日历"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -323,9 +324,8 @@ msgid "Coiled Thong"
 msgstr "贯索"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "锁骨"
+msgstr "星座连线"
 
 #: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
@@ -348,7 +348,6 @@ msgid "Configuration"
 msgstr "设置"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
 msgstr "设置窗口"
 
@@ -447,7 +446,7 @@ msgstr "日"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
-msgstr ""
+msgstr "日期基调 "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
@@ -462,7 +461,6 @@ msgid "Delphinus"
 msgstr "海豚座"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -473,12 +471,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"对话与其它控制: \n"
-"H   : 帮助             I   : 关于Stellarium\n"
-"M   : 文字菜单         1 (数字一) : 设置\n"
-"CTRL + S : 屏幕截图\n"
-"CTRL + R : 开始/停止记录脚本\n"
-"CTRL + F : 打开/关闭天体搜索框\n"
+"对话和其它控制:\n"
+"H : 帮助 I : 关于Stellarium\n"
+"M : 文字菜单 1 (数字1) : 配置\n"
+"CTRL + S : 抓图\n"
+"CTRL + R : 开启/关闭脚本录制\n"
+"CTRL + F : 开启/关闭对象搜索\n"
+"CTRL + G : 转到选择对象的位置\n"
 "\n"
 
 #: src/translations.h:310
@@ -499,7 +498,6 @@ msgid "Disk Viewport"
 msgstr "圆形视野(模拟望远镜视野)"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -514,17 +512,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"显示选项: \n"
-"ENTER : 赤道仪/经纬仪\n"
-"F1  : 全屏显示(如果系统支持)\n"
-"C   : 星座连线         V   : 星座名称\n"
-"R   : 星座想象图       E   : 赤道坐标网格\n"
-"Z   : 地平坐标网格     N   : 星云名称\n"
-"P   : 行星名称         G   : 地面\n"
-"A   : 大气             F   : 雾\n"
-"Q   : 方位基点         O   : 月球缩放\n"
-"T   : 跟踪天体         S   : 恒星\n"
-"4 , : 黄道             5 . : 天赤道\n"
+"显示选项：\n"
+"回车：赤道仪/经纬仪\n"
+"F1：切换全屏/窗口模式\n"
+"C：星座连线\tV：星座名称\n"
+"R：星座图象\tE：赤道坐标网格\n"
+"Z：地平坐标网格\tN：星云名称\n"
+"P：行星名称\tG：地面\n"
+"A：大气\t\tF：雾\n"
+"Q：方向基点\tO：切换月球缩放比例\n"
+"T：对象跟踪\tS：恒星\n"
+"4：黄道\t\t5：赤道\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -557,9 +555,8 @@ msgid "Drawing of the Constellations [C]"
 msgstr "星座连线 [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "枯柳"
+msgstr "柳宿"
 
 #: src/translations.h:209
 msgid "Drum"
@@ -675,7 +672,6 @@ msgid "Farmland"
 msgstr "天田(角宿)"
 
 #: src/translations.h:179
-#, fuzzy
 msgid "Ferry Boat"
 msgstr "渡船座"
 
@@ -707,14 +703,12 @@ msgid "Flail"
 msgstr "天棓"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "水平翻转"
+msgstr "水平翻转[CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "垂直翻转"
+msgstr "垂直翻转[CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 #, fuzzy
@@ -805,7 +799,7 @@ msgstr "天鹤座"
 #: src/translations.h:336
 #, fuzzy
 msgid "Hand"
-msgstr "手"
+msgstr "马腹一"
 
 #: src/translations.h:270
 msgid "Heart"
@@ -1006,14 +1000,12 @@ msgid "Light Pollution Luminance: "
 msgstr "光污染程度: "
 
 #: src/translations.h:173
-#, fuzzy
 msgid "Lion"
 msgstr "狮子座"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "蜥蜴"
+msgstr "开阳"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
@@ -1021,7 +1013,7 @@ msgstr "载入默认设置: "
 
 #: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
-msgstr "载入星座想象图: "
+msgstr "正在载入星座图像: "
 
 #: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
@@ -1041,12 +1033,11 @@ msgstr "本地脚本: "
 
 #: src/stel_ui_conf.cpp:559
 msgid "Location"
-msgstr "观测点"
+msgstr "地点"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "观测点"
+msgstr "观测地点 "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1073,9 +1064,8 @@ msgid "Magnitude"
 msgstr "星等"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "等倍增大视面: "
+msgstr "星等缩放加倍： "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1087,8 +1077,9 @@ msgid "Man with Feet Apart"
 msgstr "无脚男人"
 
 #: src/translations.h:320
+#, fuzzy
 msgid "Man's Cart"
-msgstr ""
+msgstr "Man's Cart"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
@@ -1268,9 +1259,8 @@ msgid "Neptune"
 msgstr "海王星"
 
 #: src/translations.h:191 src/translations.h:230
-#, fuzzy
 msgid "Net"
-msgstr "天网座"
+msgstr "毕宿"
 
 #: src/stel_ui.cpp:692
 msgid "Night (red) mode"
@@ -1286,9 +1276,8 @@ msgid "Norma"
 msgstr "矩尺座"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "弧矢增二十二"
+msgstr "挪威"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1337,7 +1326,7 @@ msgstr "牛宿"
 #: src/translations.h:189
 #, fuzzy
 msgid "Pair of Stars"
-msgstr "双星座"
+msgstr "双星"
 
 #: src/translations.h:265
 msgid "Palace Gate"
@@ -1396,9 +1385,8 @@ msgid "Planet Trails"
 msgstr "行星轨迹"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "行星"
+msgstr "行星 "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1500,9 +1488,8 @@ msgid "Reticulum"
 msgstr "网罟座"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "回到当前时间"
+msgstr "返回到当前时间"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1569,7 +1556,7 @@ msgstr "Sah 座"
 #: src/translations.h:345
 #, fuzzy
 msgid "Salamander"
-msgstr "火蜥蜴"
+msgstr "沙罗曼蛇"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -1590,7 +1577,7 @@ msgstr "保存观测点"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "保存设置会同时保存当前全屏状态"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1622,12 +1609,11 @@ msgstr "盾牌座"
 
 #: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "目标(比如: Saturn, Polaris, HP6218, Orion, M31):"
+msgstr "搜索目标(比如: Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "搜索天体"
+msgstr "查找目标[CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1661,7 +1647,7 @@ msgstr "巨蛇座"
 
 #: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
-msgstr "设置观测点 "
+msgstr "设置当前地点 "
 
 #: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
@@ -1677,11 +1663,11 @@ msgstr "用户界面语言设置 "
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "设置地貌和观测地点: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "设置地景后更新观测地点"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1716,7 +1702,7 @@ msgstr "退出程序 "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr ""
+msgstr "恒星的"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
@@ -1732,7 +1718,7 @@ msgstr "星空语言: "
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Sky Time At Start-up: "
-msgstr "启动时星空时间: "
+msgstr "启动时的星空时间: "
 
 #: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
@@ -1741,7 +1727,7 @@ msgstr "星空时间: "
 #: src/translations.h:337
 #, fuzzy
 msgid "Snake"
-msgstr "蛇"
+msgstr "宋"
 
 #: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
@@ -1784,9 +1770,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "恒星闪烁程度:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "等倍增亮恒星: "
+msgstr "恒星数量： "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1831,12 +1816,12 @@ msgstr "土卫三(特提斯)"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "The Asar Battlefield"
 
 #: src/translations.h:318
 #, fuzzy
 msgid "The Fishermen"
-msgstr "七者"
+msgstr "The Fishermen"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1855,16 +1840,14 @@ msgid "Thunder and Lightning"
 msgstr "雷电"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
-msgstr "雷鸟"
+msgstr "霹雳"
 
 #: src/translations.h:259
 msgid "Thunderbolt"
 msgstr "霹雳"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1875,12 +1858,13 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"时间与日期: \n"
-"6   : 暂停时间           7   : 停止时间\n"
-"8   : 回到当前时间       J   : 减慢时间速度\n"
-"K   : 正常时间速度       L   : 增加时间速度\n"
-"-   : 后退24小时         =   : 前进24小時\n"
-"[   : 后退7天            ]   : 前进7天\n"
+"时间和日期:\n"
+"6 : 时间停止 7 : 时间速率 0\n"
+"8 : 回到当前时间 J : 减少时间速率\n"
+"K : 正常时间速率 L : 增加时间速率\n"
+"- and = : 往后或往前跳一日 (同时按ALT键则按恒星日算)\n"
+"[ and ] : 往后或往前跳七日 (同时按ALT键则按恒星日算)\n"
+"CTRL + - : 往后跳一小时 CTRL + = : 往前跳一小时\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1904,7 +1888,6 @@ msgid "Toilet"
 msgstr "厕"
 
 #: src/translations.h:178
-#, fuzzy
 msgid "Triangle"
 msgstr "三角座"
 
@@ -1925,7 +1908,6 @@ msgid "Tucana"
 msgstr "杜鹃座"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
 msgstr "天鳖"
 
@@ -1944,9 +1926,8 @@ msgid "Two Placed Far Apart"
 msgstr "远处二星"
 
 #: src/translations.h:172
-#, fuzzy
 msgid "Two Poles"
-msgstr "双柱座"
+msgstr "两极"
 
 #: src/translations.h:324
 #, fuzzy
@@ -1963,9 +1944,8 @@ msgid "Type: "
 msgstr "类型: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "脚本 "
+msgstr "USB脚本： "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2068,8 +2048,9 @@ msgid "Winnowing Basket"
 msgstr "箕宿"
 
 #: src/translations.h:317
+#, fuzzy
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Wolf's Mouth"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
@@ -2078,7 +2059,7 @@ msgstr "女床"
 #: src/translations.h:319
 #, fuzzy
 msgid "Woman's Cart"
-msgstr "女床"
+msgstr "Woman's Cart"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2406,6 +2387,9 @@ msgstr ""
 #~ msgid "Cone nebula "
 #~ msgstr "椎状星云 "
 
+#~ msgid "Configuration window"
+#~ msgstr "设置窗口"
+
 #~ msgid "Cor Caroli"
 #~ msgstr "常陈一"
 
@@ -2475,6 +2459,12 @@ msgstr ""
 #~ msgid "Flaming Star nebula "
 #~ msgstr "烽火恒星云 "
 
+#~ msgid "Flip horizontally"
+#~ msgstr "水平翻转"
+
+#~ msgid "Flip vertically"
+#~ msgstr "垂直翻转"
+
 #~ msgid "Fomalhaut"
 #~ msgstr "北落师门"
 
@@ -2539,7 +2529,7 @@ msgstr ""
 #~ msgstr "梗河一"
 
 #~ msgid "J2000"
-#~ msgstr "以J2000(2000年1月1.5日)天赤道为基准坐标系"
+#~ msgstr "以J2000(公元2000年1月1.5日,即儒略日2﹐451﹐545.0)的赤道为基准坐标系"
 
 #~ msgid "Jewel Box "
 #~ msgstr "珠宝盒星团 "
@@ -2580,9 +2570,8 @@ msgstr ""
 #~ msgid "Lesath"
 #~ msgstr "尾宿九"
 
-#, fuzzy
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "星等: "
+#~ msgstr "星等限制： "
 
 #~ msgid "Little Dumbbell "
 #~ msgstr "小哑铃星云 "
@@ -2592,6 +2581,9 @@ msgstr ""
 
 #~ msgid "Maasym"
 #~ msgstr "赵"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "等倍增大视面: "
 
 #~ msgid "Maia"
 #~ msgstr "昴宿四"
@@ -2700,6 +2692,9 @@ msgstr ""
 #~ msgid "Muscida"
 #~ msgstr "内阶一"
 
+#~ msgid "Naos"
+#~ msgstr "弧矢增二十二"
+
 #~ msgid "Nashira"
 #~ msgstr "垒壁阵三"
 
@@ -2790,6 +2785,9 @@ msgstr ""
 #~ msgid "Regulus"
 #~ msgstr "轩辕十四"
 
+#~ msgid "Return to Current Time"
+#~ msgstr "回到当前时间"
+
 #~ msgid "Rigel"
 #~ msgstr "参宿七"
 
@@ -2838,6 +2836,9 @@ msgstr ""
 #~ msgid "Sculptor galaxy "
 #~ msgstr "玉夫座星系 "
 
+#~ msgid "Search for object"
+#~ msgstr "搜索天体"
+
 #~ msgid "Seginus"
 #~ msgstr "招摇"
 
@@ -2872,13 +2873,16 @@ msgstr ""
 #~ msgstr "草帽星系 "
 
 #~ msgid "Spectral Type: "
-#~ msgstr "光谱型: "
+#~ msgstr "光谱类型: "
 
 #~ msgid "Spica"
 #~ msgstr "角宿一"
 
 #~ msgid "Spindle galaxy "
 #~ msgstr "纺锤星系 "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "等倍增亮恒星: "
 
 #~ msgid "Sualocin"
 #~ msgstr "瓠瓜一"
@@ -2927,6 +2931,23 @@ msgstr ""
 
 #~ msgid "Thuban"
 #~ msgstr "右枢"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "时间与日期: \n"
+#~ "6   : 暂停时间           7   : 停止时间\n"
+#~ "8   : 回到当前时间       J   : 减慢时间速度\n"
+#~ "K   : 正常时间速度       L   : 增加时间速度\n"
+#~ "-   : 后退24小时         =   : 前进24小時\n"
+#~ "[   : 后退7天            ]   : 前进7天\n"
+#~ "\n"
 
 #~ msgid "Titania"
 #~ msgstr "天卫三(蒂但尼亚)"

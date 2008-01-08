@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-08-14 00:58+0000\n"
+"PO-Revision-Date: 2007-09-23 20:39+0000\n"
 "Last-Translator: Virgo Rustianto <vrustianto@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-08-16 21:18:54+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -22,44 +23,41 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   Tolong periksa versi terbaru dan kirim laporan kerusakan\n"
-"    dan uraiannya kepada kami di: http://www.stellarium.org\n"
+"   Silahkan periksa versi terbaru dan kirimkan laporan kerusakan\n"
+"    dan ulasannya kepada kami di: http://www.stellarium.org\n"
 "\n"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
-msgstr ": Penampakan khusus jumlah Leonids shower"
+msgstr ": Penampakan khusus jumlah hujan Leonids"
 
 #: src/stel_ui_conf.cpp:1111
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Jumlah terbanyak sejak (1966 Leonid shower)"
+msgstr ": Jumlah terbanyak (Hujan Meteor Leonid 1966)"
 
 #: src/stel_ui_conf.cpp:1090
 msgid ": Normal rate"
 msgstr ": Laju normal"
 
 #: src/stel_ui_conf.cpp:1097
-#, fuzzy
 msgid ": Standard Perseids rate"
 msgstr ": Standar laju Perseids"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
-#, fuzzy
 msgid "AU"
-msgstr "AU"
+msgstr "SA"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
-msgstr "Waktu Sekarang"
+msgstr "Waktu Kini"
 
 #: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
 msgstr "Administrasi "
 
 #: src/stel_ui_conf.cpp:149
-#, fuzzy
 msgid "Also display Nebulas without textures"
-msgstr "Juga tampilkan gugusan bintang tanpa tekstur"
+msgstr "Tampilkan juga gugusan bintang tanpa pola"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
@@ -122,15 +120,15 @@ msgid "Auriga"
 msgstr "Auriga"
 
 #: src/translations.h:316
+#, fuzzy
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Jari Kaki Aurvandil"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
 msgstr "Pengarang: "
 
 #: src/Nebula.cpp:105 src/Planet.cpp:124
-#, fuzzy
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
@@ -139,9 +137,8 @@ msgid "Azimuthal Grid"
 msgstr "Garis bantu Azimut"
 
 #: src/stel_ui.cpp:673
-#, fuzzy
 msgid "Azimuthal Grid [Z]"
-msgstr "Grid Azimut [Z]"
+msgstr "Garis Bantu Azimut [Z]"
 
 #: src/translations.h:294
 msgid "Bailer"
@@ -149,7 +146,7 @@ msgstr "Gayung"
 
 #: src/translations.h:291
 msgid "Banner of Three Stars"
-msgstr "Bendera dengan 3 bintang"
+msgstr "Bendera 3 bintang"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
@@ -205,7 +202,7 @@ msgstr "Caelum"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -241,12 +238,11 @@ msgstr "Capricornus"
 
 #: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
 msgid "Cardinal Points"
-msgstr "Titik Kardinal"
+msgstr "Titik Arah Mata Angin"
 
 #: src/stel_ui.cpp:679
-#, fuzzy
 msgid "Cardinal Points [Q]"
-msgstr "Titik Kardinal [Q]"
+msgstr "Arah Mata Angin [Q]"
 
 #: src/translations.h:302
 msgid "Cared for by Moon"
@@ -266,7 +262,7 @@ msgstr "Cassiopeia"
 
 #: src/translations.h:295
 msgid "Cat's Cradle"
-msgstr "Tempat ayunan kucing"
+msgstr "Ayunan kucing"
 
 #: src/translations.h:96
 msgid "Centaurus"
@@ -286,7 +282,7 @@ msgstr "Chamaeleon"
 
 #: src/translations.h:205
 msgid "Chariot"
-msgstr "Kereta perang"
+msgstr "Kereta kuda"
 
 #: src/translations.h:260
 msgid "Chariot Yard"
@@ -302,11 +298,11 @@ msgstr "Chematy"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr "Chinese"
+msgstr "Bahasa Mandarin"
 
 #: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
-msgstr "Pilih landscape:"
+msgstr "Pilih pemandangan:"
 
 #: src/translations.h:102
 msgid "Circinus"
@@ -317,16 +313,18 @@ msgid "Circular Granary"
 msgstr "Gudang berbentuk bundar"
 
 #: src/translations.h:203
+#, fuzzy
 msgid "Coiled Thong"
 msgstr "Gulungan tali kulit"
 
 #: src/translations.h:327
+#, fuzzy
 msgid "Collarbones"
 msgstr "Tulang selangka"
 
 #: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
-msgstr "Warna "
+msgstr "Warna-warna "
 
 #: src/translations.h:101
 msgid "Columba"
@@ -345,13 +343,12 @@ msgid "Configuration"
 msgstr "Konfigurasi"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
 msgstr "Jendela Konfigurasi"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
-msgstr "Seni intensitas konstelasi"
+msgstr "Intensitas Seni konstelasi"
 
 #: src/stel_ui_tuiconf.cpp:427
 msgid "Constellation Boundaries"
@@ -366,21 +363,20 @@ msgid "Constellation Names"
 msgstr "Nama Konstelasi"
 
 #: src/stel_ui.cpp:671
-#, fuzzy
 msgid "Constellations Art [R]"
-msgstr "Seni Konstelasi [R]"
+msgstr "Seni Rasi Bintang [R]"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Constellations Boundaries"
-msgstr "Batas Konstelasi"
+msgstr "Batas-batas Rasi Bintang"
 
 #: src/stel_ui_conf.cpp:110
 msgid "Constellations Lines"
-msgstr "Garis Konstelasi"
+msgstr "Garis-garis Rasi Bintang"
 
 #: src/stel_ui_conf.cpp:115
 msgid "Constellations Names"
-msgstr "Nama Konstelasi"
+msgstr "Nama-nama Rasi Bintang"
 
 #: src/translations.h:104
 msgid "Corona Australis"
@@ -420,11 +416,11 @@ msgstr "Kursor : "
 
 #: src/stel_ui_tuiconf.cpp:450
 msgid "Cursor Timeout: "
-msgstr "Cursor Timeout: "
+msgstr "Batas Waktu Kursor: "
 
 #: src/translations.h:202
 msgid "Curved Array"
-msgstr "Deretan kurva"
+msgstr "Deretan melengkung"
 
 #: src/translations.h:108
 msgid "Cygnus"
@@ -443,8 +439,9 @@ msgid "Day"
 msgstr "Hari"
 
 #: src/stel_ui_tuiconf.cpp:397
+#, fuzzy
 msgid "Day keys: "
-msgstr ""
+msgstr "Kunci hari: "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
@@ -459,7 +456,6 @@ msgid "Delphinus"
 msgstr "Delphinus"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -470,12 +466,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Dialog & kontrol lain:\n"
+"Dialog & Kontrol Lain\n"
 "H : Bantuan I : Tentang Stellarium\n"
-"M : Menu Text 1 (satu) : Konfigurasi\n"
-"CTRL + S : Ambil gambar layar\n"
-"CTRL + R : Toggle perekaman skrip\n"
-"CTRL + F : Toggle pencari objek\n"
+"M : Menu Teks 1 : Konfigurasi\n"
+"CTRL + S : Mengambil Gambar Layar\n"
+"CTRL + R : Rekam Skrip\n"
+"CTRL + F : Pencari Objek\n"
+"CTRL + G : Lompat ke Objek Sistem Tata Surya\n"
 "\n"
 
 #: src/translations.h:310
@@ -488,15 +485,13 @@ msgstr "Dione"
 
 #: src/translations.h:208 src/translations.h:339
 msgid "Dipper"
-msgstr "Gayung"
+msgstr "Dipper"
 
 #: src/stel_ui_conf.cpp:395
-#, fuzzy
 msgid "Disk Viewport"
-msgstr "Tampilan port cakram"
+msgstr "Tingkap cakram"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -511,17 +506,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Pilihan Tampilan:\n"
-"ENTER : Puncak Equatorial/altazimuthal\n"
-"F1 : Toggle mode fullscreen jika dimungkinkan.\n"
-"C : Garis-garis Konstelasi V : Nama-nama Konstelasi\n"
-"R : Seni Konstelasi  E : Equatorial grid\n"
-"Z : Grid Azimut N : Nama-nama Gugus Bintang\n"
-"P : Nama-nama Planet G : Permukaan Bumi\n"
+"Pilihan Tampilan :\n"
+"ENTER : Bangun Khatulistiwa/Azimut\n"
+"F1 : Pindah antara Layar Penuh/Jendela.\n"
+"C : Garis Konstelasi V : Label Konstelasi\n"
+"R : Seni Konstelasi E : Garis Kotak-Kotak Khatulistiwa\n"
+"Z : Garis Kotak-Kotak Azimut N : Label Nebula\n"
+"P : Label Planet G : Permukaan Bumi\n"
 "A : Atmosfir F : Kabut\n"
-"Q : Titik-titik Kardinal O : Toggle skala bulan\n"
-"T : Penelusuran objek S : Bintang-bintang\n"
-"4 , : Garis putar matahari 5 . : Garis Katulistiwa\n"
+"Q : Titik Kardinal O : Skala Bulan\n"
+"T : Menilik Obyek S : Bintang\n"
+"4 , : Garis Edar 5 . : Garis Khatulistiwa\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -550,7 +545,7 @@ msgstr "Draco"
 
 #: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
-msgstr "Gambar Konstelasi [C]"
+msgstr "Gambar Rasi Bintang [C]"
 
 #: src/translations.h:344
 msgid "Dried Willow"
@@ -561,11 +556,11 @@ msgid "Drum"
 msgstr "Drum"
 
 #: src/translations.h:278
+#, fuzzy
 msgid "Drumstick"
-msgstr "tongkat pemukul drum"
+msgstr "Tabuh genderang"
 
 #: src/stel_ui.cpp:799
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -574,7 +569,7 @@ msgid ""
 msgstr ""
 "Selama Pemutaran Skrip:\n"
 "CTRL + C : Akhiri Skrip\n"
-"6 : Interupsi skrip K : Lanjutkan skrip\n"
+"6 : Jedakan skrip K : Lanjutkan skrip\n"
 "\n"
 
 #: src/translations.h:65 src/s_gui.cpp:2690
@@ -591,10 +586,9 @@ msgstr "Kuli dewa bumi"
 
 #: src/translations.h:282
 msgid "Eastern Door"
-msgstr "Pintu sebelah Timur"
+msgstr "Pintu  Timur"
 
 #: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "Garis Edar Matahari"
 
@@ -624,7 +618,7 @@ msgstr "Enceladus"
 
 #: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
-msgstr "Masukkan nama observatori"
+msgstr "Masukkan nama observatorium"
 
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
@@ -632,16 +626,15 @@ msgstr "Garis Katulistiwa"
 
 #: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
 msgid "Equatorial Grid"
-msgstr "Garis Equatorial"
+msgstr "Garis Bantu Khatulistiwa"
 
 #: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
-msgstr "Grid Equatorial [E]"
+msgstr "Garis Bantu Khatulistiwa [E]"
 
 #: src/stel_ui.cpp:687
-#, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Puncak Katulistiwa/Altazimut [ENTER]"
+msgstr "Equatorial/Altazimut [ENTER]"
 
 #: src/translations.h:144
 msgid "Equuleus"
@@ -653,7 +646,7 @@ msgstr "Eridanus"
 
 #: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
-msgstr "Error: Tak bisa membuka file skrip untuk merekam perintah."
+msgstr "Kesalahan: File skrip tidak dapat di buka untuk merekam perintah."
 
 #: src/translations.h:273
 msgid "Establishment"
@@ -677,13 +670,14 @@ msgstr "Kapal Ferry"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr "Rumah Api"
+msgstr "Perapian"
 
 #: src/translations.h:311
 msgid "First Big One"
 msgstr "Paling besar yang pertama"
 
 #: src/translations.h:313
+#, fuzzy
 msgid "First Slim One"
 msgstr "Yang terlangsing"
 
@@ -700,14 +694,12 @@ msgid "Flail"
 msgstr "Cambuk"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Memutar ke arah Horizontal"
+msgstr "Balikkan secara horizontal"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Memutar ke arah Vertical"
+msgstr "Balikkan secara vertikal"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -726,6 +718,7 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr "Untuk resolusi layar yang tak terdaftar, ubah file :"
 
 #: src/translations.h:225
+#, fuzzy
 msgid "Ford"
 msgstr "Sungai dangkal"
 
@@ -763,7 +756,7 @@ msgstr "Hantu"
 
 #: src/translations.h:186
 msgid "Giant"
-msgstr "Besar"
+msgstr "Raksasa"
 
 #: src/translations.h:268
 msgid "Girl"
@@ -811,7 +804,7 @@ msgstr "Bantuan [H]"
 
 #: src/translations.h:121
 msgid "Hercules"
-msgstr "Hercules"
+msgstr "Herkules"
 
 #: src/translations.h:187
 msgid "Hippopotamus"
@@ -819,7 +812,7 @@ msgstr "Kuda Nil"
 
 #: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Tekan CTRL-R agar untuk menghentikan.\n"
+msgstr "Tekan CTRL-R sekali lagi untuk menghentikan.\n"
 
 #: src/translations.h:247
 msgid "Hook"
@@ -867,7 +860,7 @@ msgstr "Jalan terusan kekaisaran"
 
 #: src/stel_ui.cpp:718
 msgid "Increase Time Speed [L]"
-msgstr "Naikkan Kecepatan Waktu"
+msgstr "Naikkan Kecepatan Waktu [L]"
 
 #: src/translations.h:125
 msgid "Indus"
@@ -879,7 +872,7 @@ msgstr "Keterangan: "
 
 #: src/stel_ui.cpp:748
 msgid "Information"
-msgstr "Informasi"
+msgstr "Keterangan"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -947,7 +940,7 @@ msgstr "Pemandangan "
 
 #: src/stel_ui_conf.cpp:560
 msgid "Landscapes"
-msgstr "Landscape"
+msgstr "Pemandangan"
 
 #: src/stel_ui_conf.cpp:557
 msgid "Language"
@@ -955,7 +948,7 @@ msgstr "Bahasa"
 
 #: src/stel_ui_conf.cpp:336
 msgid "Latitude : "
-msgstr "Baris Lintang : "
+msgstr "Garis Lintang : "
 
 #: src/stel_ui_tuiconf.cpp:387
 msgid "Latitude: "
@@ -963,7 +956,7 @@ msgstr "Garis lintang "
 
 #: src/translations.h:277
 msgid "Left Flag"
-msgstr "Bendera sebelah kiri"
+msgstr "Bendera  kiri"
 
 #: src/translations.h:220
 msgid "Legs"
@@ -987,7 +980,7 @@ msgstr "Libra"
 
 #: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
-msgstr "Polusi cahaya luminans "
+msgstr "Kecerlangan Polusi cahaya "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -999,23 +992,23 @@ msgstr "Kadal"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
-msgstr "Baca Konfigurasi Default: "
+msgstr "Baca Konfigurasi Standar: "
 
 #: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
-msgstr "Panggil Gambar Konstelasi "
+msgstr "Gunakan Seni Rasi Bintang: "
 
 #: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
-msgstr "Memanggil daftar NGC: "
+msgstr "Gunakan daftar NGC: "
 
 #: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
-msgstr "Panggil Gambar Nebula:"
+msgstr "Gunakan Susunan Nebula:"
 
 #: src/StarMgr.cpp:448
 msgid "Loading catalog "
-msgstr "Memanggil daftar NGC: "
+msgstr "Gunakan katalog "
 
 #: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
@@ -1026,9 +1019,8 @@ msgid "Location"
 msgstr "Lokasi"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Lokasi"
+msgstr "Lokasi: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1055,21 +1047,21 @@ msgid "Magnitude"
 msgstr "Magnitudo"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Ukuran pengali Magnitudo "
+msgstr "Pengali Skala Magnitudo: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
-msgstr "Magnitudo "
+msgstr "Magnitudo: "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr "Manusia yang kakinya saling berjauhan"
 
 #: src/translations.h:320
+#, fuzzy
 msgid "Man's Cart"
-msgstr ""
+msgstr "Kereta Pria"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
@@ -1081,7 +1073,7 @@ msgstr "Pasar"
 
 #: src/translations.h:290
 msgid "Market Officer"
-msgstr "Bangsal polisi"
+msgstr "Polisi pasar"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -1117,7 +1109,7 @@ msgstr "Merkurius"
 
 #: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
-msgstr "Garis Meredian"
+msgstr "Garis Meridian"
 
 #: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
@@ -1147,7 +1139,7 @@ msgid ""
 "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
-"Lain:\n"
+"Lain-Lain:\n"
 "9   : Tombol untuk kemunculan meteor shower \n"
 "CTRL + 0,..,9 : Eksekusi perintah GOTO untuk telescope 0,..,9\n"
 "CTRL + SHIFT + H: Tombol memutar gambar arah horizontal \n"
@@ -1171,14 +1163,13 @@ msgstr "Skala Bulan"
 
 #: src/translations.h:193
 msgid "Mooring Post"
-msgstr "Pos tempat sandaran"
+msgstr "Tiang sandaran"
 
 #: src/translations.h:257
 msgid "Mortar"
 msgstr "Lesung"
 
 #: src/stel_ui.cpp:760
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1213,9 +1204,8 @@ msgid "N"
 msgstr "U"
 
 #: src/stel_ui.cpp:669
-#, fuzzy
 msgid "Names of the Constellations [V]"
-msgstr "Nama Konstelasi [V]"
+msgstr "Nama Rasi Bintang [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
@@ -1227,7 +1217,7 @@ msgstr "Segitiga pengemudi"
 
 #: src/stel_ui_tuiconf.cpp:438
 msgid "Nebula Circles"
-msgstr "Nebula bentuk melingkar"
+msgstr "Lingkaran Nebula"
 
 #: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
@@ -1235,10 +1225,9 @@ msgstr "Nama Nebula"
 
 #: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
-msgstr "Nama-nama gugusa bintang. Hingga magnitude :"
+msgstr "Nama-nama gugusan bintang. Hingga magnitudo :"
 
 #: src/stel_ui.cpp:683
-#, fuzzy
 msgid "Nebulas [N]"
 msgstr "Nebula [N]"
 
@@ -1256,7 +1245,7 @@ msgstr "Jala"
 
 #: src/stel_ui.cpp:692
 msgid "Night (red) mode"
-msgstr "Mode ke waktu malam (merah)"
+msgstr "Modus Malam (merah)"
 
 #: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
 #: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
@@ -1268,9 +1257,8 @@ msgid "Norma"
 msgstr "Norma"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Norma"
+msgstr "Norse"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1278,7 +1266,7 @@ msgstr "Sungai Utara"
 
 #: src/translations.h:201
 msgid "Northern Dipper"
-msgstr "Gayung utara"
+msgstr "Dipper utara"
 
 #: src/s_gui.cpp:2244 src/s_gui.cpp:2270
 msgid "OK"
@@ -1314,7 +1302,7 @@ msgstr "Pagar bagian terluar"
 
 #: src/translations.h:269
 msgid "Ox"
-msgstr "Buntut"
+msgstr "Banteng"
 
 #: src/translations.h:189
 msgid "Pair of Stars"
@@ -1337,6 +1325,7 @@ msgid "Perseus"
 msgstr "Perseus"
 
 #: src/translations.h:256
+#, fuzzy
 msgid "Pestle"
 msgstr "Alat penumbuk"
 
@@ -1373,13 +1362,13 @@ msgid "Planet Orbits"
 msgstr "Orbit Planet"
 
 #: src/stel_ui_tuiconf.cpp:431
+#, fuzzy
 msgid "Planet Trails"
 msgstr "Garis lintasan planet"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planet-planet"
+msgstr "Planet "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1403,11 +1392,11 @@ msgstr "Polynesia"
 
 #: src/stel_ui_tuiconf.cpp:400
 msgid "Preset Sky Time: "
-msgstr "Menyetel kembali ke waktu awal: "
+msgstr "Tentukan ulang ke waktu awal: "
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Preset Time"
-msgstr "Menyetel waktu"
+msgstr "Atur waktu"
 
 #: src/stel_ui_conf.cpp:502
 msgid "Program Language: "
@@ -1415,7 +1404,7 @@ msgstr "Bahasa Program: "
 
 #: src/stel_ui_conf.cpp:376
 msgid "Projection :"
-msgstr "Proyeksi"
+msgstr "Proyeksi :"
 
 #: src/translations.h:183
 msgid "Prow"
@@ -1427,7 +1416,7 @@ msgstr "Puppis"
 
 #: src/translations.h:244
 msgid "Purple Palace"
-msgstr "Istana jingga"
+msgstr "Istana ungu"
 
 #: src/translations.h:88
 msgid "Pyxis"
@@ -1442,9 +1431,8 @@ msgid "Quit [CTRL + Q]"
 msgstr "Keluar [CTRL + Q]"
 
 #: src/Nebula.cpp:99 src/Planet.cpp:117
-#, fuzzy
 msgid "RA/DE: "
-msgstr "RA/DE: "
+msgstr "Ar/Dek: "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
@@ -1452,14 +1440,13 @@ msgstr "Jalur kelinci"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr "Jalur pacuan"
+msgstr "Jalur pacu"
 
 #: src/translations.h:222
 msgid "Ramparts"
-msgstr "Serampangan"
+msgstr "Dinding Benteng"
 
 #: src/stel_ui.cpp:716
-#, fuzzy
 msgid "Real Time Speed [K]"
 msgstr "Kecepatan Waktu Nyata [K]"
 
@@ -1473,16 +1460,15 @@ msgstr "Salinan"
 
 #: src/stel_ui_conf.cpp:419
 msgid "Restart program for"
-msgstr "Restart program untuk"
+msgstr "Jalankan ulang program untuk"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "Reticulum"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Kembali ke Waktu Sekarang"
+msgstr "Kembali ke Waktu Sekarang [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1498,7 +1484,7 @@ msgstr "Rhea"
 
 #: src/translations.h:276
 msgid "Right Flag"
-msgstr "Bendera sebelah kanan"
+msgstr "Bendera  kanan"
 
 #: src/translations.h:216
 msgid "River Turtle"
@@ -1506,7 +1492,7 @@ msgstr "Sungai Kura kura"
 
 #: src/translations.h:229
 msgid "Rolled Tongue"
-msgstr "Gulungan lidah"
+msgstr "Lidah Tergulung"
 
 #: src/translations.h:258
 msgid "Rooftop"
@@ -1518,7 +1504,7 @@ msgstr "Ruangan"
 
 #: src/translations.h:221
 msgid "Root"
-msgstr "Pangkal"
+msgstr "Akar"
 
 #: src/translations.h:262
 msgid "Rotten Gourd"
@@ -1554,13 +1540,12 @@ msgstr "Saturnus"
 
 #: src/stel_ui_tuiconf.cpp:462
 msgid "Save Current Configuration as Default: "
-msgstr "Simpan Konfigurasi Saat Ini sebagai Default: "
+msgstr "Simpan Konfigurasi Saat Ini sebagai Standar: "
 
 #: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
 #: src/stel_ui_conf.cpp:550
-#, fuzzy
 msgid "Save as default"
-msgstr "Simpan sebagai default"
+msgstr "Simpan sebagai standar"
 
 #: src/stel_ui_conf.cpp:353
 msgid "Save location"
@@ -1568,7 +1553,7 @@ msgstr "Simpan lokasi"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Menyimpan penataan akan menyimpan status layar penuh sekarang"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1604,9 +1589,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Cari (contoh: Saturnus, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Mencari objek"
+msgstr "Mencari Obyek [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1625,9 +1609,8 @@ msgid "Selected : "
 msgstr "Terpilih : "
 
 #: src/stel_ui_conf.cpp:125
-#, fuzzy
 msgid "Selected Constellation Only"
-msgstr "Hanya Konstelasi yang terpilih"
+msgstr "Hanya Rasi Bintang yang terpilih"
 
 #: src/translations.h:182
 msgid "Selkis"
@@ -1639,27 +1622,28 @@ msgstr "Serpens"
 
 #: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
-msgstr "Set Lokasi "
+msgstr "Tentukan Tempat "
 
 #: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
-msgstr "Set Waktu "
+msgstr "Tentukan Waktu "
 
 #: src/stel_ui_tuiconf.cpp:396
 msgid "Set Time Zone: "
-msgstr "Menyetel Zona Waktu: "
+msgstr "Tentukan Zona Waktu: "
 
 #: src/stel_ui_tuiconf.cpp:465
 msgid "Set UI Locale: "
 msgstr "Set UI lokal: "
 
 #: src/stel_ui_tuiconf.cpp:451
+#, fuzzy
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "Atur Lokasi Kumpulan Pemandangan: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "Menyetel pemandangan memperbaharui tempat lokasi"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1691,19 +1675,17 @@ msgstr "Shut Down: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr ""
+msgstr "Sideris"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
 msgstr "Ukuran: "
 
 #: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
-#, fuzzy
 msgid "Sky Culture: "
 msgstr "Budaya Langit "
 
 #: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
-#, fuzzy
 msgid "Sky Language: "
 msgstr "Bahasa Langit: "
 
@@ -1713,7 +1695,7 @@ msgstr "Waktu langit saat mulai: "
 
 #: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
-msgstr "Menyetel Waktu: "
+msgstr "Waktu Langit: "
 
 #: src/translations.h:337
 msgid "Snake"
@@ -1721,7 +1703,7 @@ msgstr "Ular"
 
 #: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
-msgstr "Bentuk solar system: "
+msgstr "Bentuk Tata Surya: "
 
 #: src/translations.h:60
 msgid "Solar System Observer"
@@ -1729,7 +1711,7 @@ msgstr "Pengamat Tata Surya"
 
 #: src/translations.h:233
 msgid "Soldiers Market"
-msgstr "Bangsal tentara"
+msgstr "Pasar tentara"
 
 #: src/translations.h:238
 msgid "South River"
@@ -1753,16 +1735,15 @@ msgstr "Bintang"
 
 #: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
-msgstr "Nama-nama Bintang. Hingga magnitude :"
+msgstr "Nama-nama Bintang. Hingga magnitudo :"
 
 #: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
 msgstr "Kelipan Bintang. Jumlah :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Pengali Magnitude Bintang: "
+msgstr "Pengali Nilai Bintang: "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1770,7 +1751,7 @@ msgstr "Bintang-bintang"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
-msgstr "Bintang "
+msgstr "Bintang-bintang "
 
 #: src/translations.h:198
 msgid "Stars of Water"
@@ -1805,13 +1786,14 @@ msgid "Tethys"
 msgstr "Tethys"
 
 #: src/translations.h:321
+#, fuzzy
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "Pertempuran Asar"
 
 #: src/translations.h:318
 #, fuzzy
 msgid "The Fishermen"
-msgstr "Ketujuh"
+msgstr "Sang Nelayan"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1838,7 +1820,6 @@ msgid "Thunderbolt"
 msgstr "Halilintar"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1849,12 +1830,13 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Waktu & Tanggal:\n"
-"6 : Laju Waktu Jeda 7 : Laju Waktu 0\n"
-"8 : Set waktu sekarang J : Turunkan laju waktu\n"
-"K : Laju Waktu Normal L : Naikkan laju waktu\n"
-"- : Mundur 24 jam = : Maju 24 jam\n"
-"[ : Mundur 7 hari ] : Maju 7 hari\n"
+"Waktu & Tanggal\n"
+"6 : Jedakan Waktu 7 : Waktu Berhenti\n"
+"8 : Ke Waktu Sekarang J : Turunkan gerakan waktu (-)\n"
+"K : Gerakan Waktu Normal L : Tambahkan gerakan waktu (+)\n"
+"- dan = : mundur dan maju 1 hari (tekan ALT untuk hari sidereal)\n"
+"[ dan ] : mundur dan maju 7 hari (tekan ALT untuk hari sidereal)\n"
+"CTRL + - : mundur 1 jam CTRL + = : maju 1 jam\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1866,7 +1848,6 @@ msgid "Time Zone :"
 msgstr "Zona Waktu :"
 
 #: src/stel_ui_conf.cpp:289
-#, fuzzy
 msgid "Time speed : "
 msgstr "Kecepatan Waktu : "
 
@@ -1908,7 +1889,7 @@ msgstr "Berkelip: "
 
 #: src/translations.h:174
 msgid "Two Jaws"
-msgstr "2 Ikan Hiu"
+msgstr "Dua Rahang"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
@@ -1919,8 +1900,9 @@ msgid "Two Poles"
 msgstr "Dua kutub"
 
 #: src/translations.h:324
+#, fuzzy
 msgid "Two Sunbeams"
-msgstr "Sinar matahari"
+msgstr "Dua sinar matahari"
 
 #: src/translations.h:330
 msgid "Two in Front"
@@ -1931,9 +1913,8 @@ msgid "Type: "
 msgstr "Jenis: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Scripts "
+msgstr "Skrip USB "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -1952,7 +1933,6 @@ msgid "Ursa Minor"
 msgstr "Ursa Minor"
 
 #: src/stel_ui_conf.cpp:297
-#, fuzzy
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1964,7 +1944,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
-msgstr "Gunakan Zona Waktu Default Sistem"
+msgstr "Gunakan Zona Waktu Asli Sistem"
 
 #: src/translations.h:168
 msgid "Vela"
@@ -1980,7 +1960,7 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Viewport Distorter"
-msgstr "Merubah arah pemandangan"
+msgstr "Perusak Tingkap"
 
 #: src/translations.h:167
 msgid "Virgo"
@@ -1988,7 +1968,7 @@ msgstr "Virgo"
 
 #: src/translations.h:296
 msgid "Voice of Joy"
-msgstr "Suara yang bersuka-cita"
+msgstr "Suara suka-cita"
 
 #: src/translations.h:152
 msgid "Volans"
@@ -2000,7 +1980,7 @@ msgstr "Vulpecula"
 
 #: src/translations.h:66 src/s_gui.cpp:2691
 msgid "W"
-msgstr "W"
+msgstr "B"
 
 #: src/translations.h:219
 msgid "Wall"
@@ -2024,7 +2004,7 @@ msgstr "Eropa Barat"
 
 #: src/translations.h:281
 msgid "Western Door"
-msgstr "Pintu sebelah Barat"
+msgstr "Pintu  Barat"
 
 #: src/translations.h:213
 msgid "Willow"
@@ -2035,21 +2015,22 @@ msgid "Wings"
 msgstr "Sayap"
 
 #: src/translations.h:207
+#, fuzzy
 msgid "Winnowing Basket"
 msgstr "Penampi"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Mulut Srigala"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
-msgstr "Ranjang untuk perempuan"
+msgstr "Ranjang  perempuan"
 
 #: src/translations.h:319
 #, fuzzy
 msgid "Woman's Cart"
-msgstr "Ranjang untuk perempuan"
+msgstr "Kereta Wanita"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2070,10 +2051,9 @@ msgstr "Zaofu"
 
 #: src/stel_ui_tuiconf.cpp:449
 msgid "Zoom Duration: "
-msgstr "Jarak Pembesaran: "
+msgstr "Lama Pembesaran: "
 
 #: src/stel_ui_conf.cpp:420
-#, fuzzy
 msgid "change to apply."
 msgstr "ubah untuk digunakan."
 
@@ -2087,8 +2067,54 @@ msgstr ""
 #~ msgid " Light Years"
 #~ msgstr " Tahun Cahaya"
 
-#~ msgid "%s: Bad command line argument(s)\n"
-#~ msgstr "%s: Argumen perintah salah\n"
+#~ msgid "Configuration window"
+#~ msgstr "Jendela Konfigurasi"
+
+#, fuzzy
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialog & kontrol lain:\n"
+#~ "H : Bantuan I : Tentang Stellarium\n"
+#~ "M : Menu Text 1 (satu) : Konfigurasi\n"
+#~ "CTRL + S : Ambil gambar layar\n"
+#~ "CTRL + R : Toggle perekaman skrip\n"
+#~ "CTRL + F : Toggle pencari objek\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Pilihan Tampilan:\n"
+#~ "ENTER : Puncak Equatorial/altazimuthal\n"
+#~ "F1 : Toggle mode fullscreen jika dimungkinkan.\n"
+#~ "C : Garis-garis Konstelasi V : Nama-nama Konstelasi\n"
+#~ "R : Seni Konstelasi  E : Equatorial grid\n"
+#~ "Z : Grid Azimut N : Nama-nama Gugus Bintang\n"
+#~ "P : Nama-nama Planet G : Permukaan Bumi\n"
+#~ "A : Atmosfir F : Kabut\n"
+#~ "Q : Titik-titik Kardinal O : Toggle skala bulan\n"
+#~ "T : Penelusuran objek S : Bintang-bintang\n"
+#~ "4 , : Garis putar matahari 5 . : Garis Katulistiwa\n"
+#~ "\n"
 
 #~ msgid "Equ of date"
 #~ msgstr "Tanggal sama dengan"
@@ -2096,9 +2122,8 @@ msgstr ""
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitudo "
+#~ msgstr "Magnitudo Ambang: "
 
 #, fuzzy
 #~ msgid "Loading Hipparcos catalog:"
@@ -2108,11 +2133,38 @@ msgstr ""
 #~ msgstr "Jumlah Meteor per menit"
 
 #~ msgid "Parallax: "
-#~ msgstr "Parallax "
+#~ msgstr "Parallaks: "
 
 #, fuzzy
+#~ msgid "Return to Current Time"
+#~ msgstr "Kembali ke Waktu Sekarang"
+
+#~ msgid "Search for object"
+#~ msgstr "Mencari objek"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Jenis Spektrum "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Pengali Magnitude Bintang: "
+
+#, fuzzy
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Waktu & Tanggal:\n"
+#~ "6 : Laju Waktu Jeda 7 : Laju Waktu 0\n"
+#~ "8 : Set waktu sekarang J : Turunkan laju waktu\n"
+#~ "K : Laju Waktu Normal L : Naikkan laju waktu\n"
+#~ "- : Mundur 24 jam = : Maju 24 jam\n"
+#~ "[ : Mundur 7 hari ] : Maju 7 hari\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Coba '%s --help' untuk info selanjutnya.\n"

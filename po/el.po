@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-07-09 17:12+0000\n"
+"PO-Revision-Date: 2007-12-07 14:39+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-13 00:18:20+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -41,7 +41,7 @@ msgstr ": Κανονικός ρυθμός"
 
 #: src/stel_ui_conf.cpp:1097
 msgid ": Standard Perseids rate"
-msgstr ": Τυπικός ρυθμός Περσίδων"
+msgstr ": Κανονικός ρυθμός Περσίδων"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
@@ -57,7 +57,7 @@ msgstr "Διεύθυνση "
 
 #: src/stel_ui_conf.cpp:149
 msgid "Also display Nebulas without textures"
-msgstr "Επίσης εμφάνιση νεφελωμάτων χωρίς σύσταση"
+msgstr "Επίσης εμφάνιση νεφελωμάτων χωρίς υφή"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
@@ -121,11 +121,11 @@ msgstr "Ηνίοχος"
 
 #: src/translations.h:316
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Δάχτυλο του Αουρβαντίλ"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
-msgstr "Συγγραφέας "
+msgstr "Συγγραφέας: "
 
 #: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
@@ -137,7 +137,7 @@ msgstr "Πλέγμα Αζιμούθιου"
 
 #: src/stel_ui.cpp:673
 msgid "Azimuthal Grid [Z]"
-msgstr "Πλέγμα Αζιμούθιου [Z]"
+msgstr "Αζιμουθιακό Πλέγμα [Z]"
 
 #: src/translations.h:294
 msgid "Bailer"
@@ -201,7 +201,7 @@ msgstr "Γλυφείον"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Ημερολόγιο"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -257,7 +257,7 @@ msgstr "Τρόπις"
 
 #: src/translations.h:95
 msgid "Cassiopeia"
-msgstr "Κασσιώπη"
+msgstr "Κασσιόπη"
 
 #: src/translations.h:295
 msgid "Cat's Cradle"
@@ -289,7 +289,7 @@ msgstr "Περίβολος Αρμάτων"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr "Χάρος"
+msgstr "Χάρον"
 
 #: src/translations.h:195
 msgid "Chematy"
@@ -340,9 +340,8 @@ msgid "Configuration"
 msgstr "Ρυθμίσεις"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Παράθυρο ρυθμίσεων"
+msgstr "Ρυθμίσεις"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -426,7 +425,7 @@ msgstr "Κύκνος"
 
 #: src/stel_ui_conf.cpp:558
 msgid "Date & Time"
-msgstr "Ημέρα & Ώρα"
+msgstr "Ημερομηνία & ώρα"
 
 #: src/stel_ui_tuiconf.cpp:405
 msgid "Date Display Format: "
@@ -438,11 +437,11 @@ msgstr "Μέρα"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
-msgstr ""
+msgstr "Πλήκτρα Ημέρας: "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
-msgstr "Μείωση Ταχύτητα Χρόνου [J]"
+msgstr "Μείωση Ταχύτητας Χρόνου [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -453,7 +452,6 @@ msgid "Delphinus"
 msgstr "Δελφίνι"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -464,12 +462,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Διάλογοι και άλλες ρυθμίσεις\n"
-"H : Βοήθεια | : Περί Stellarium\n"
-"M : Κείμενο Καταλόγου 1 (ένα) :Διαμόρφωση\n"
-"CTRL + S : Πάρτε φωτογραφία\n"
-"CTRL + R : Ενεργοποίηση / Απενεργοποίηση εγγραφής σεναρίου\n"
-"CTRL + F : Ενεργοποίηση / Απενεργοποίηση ερευνητή αντικειμένου\n"
+"Διάλογοι & Ρυθμίσεις:\n"
+"H: Βοήθεια I: Σχετικά με το Stellarium\n"
+"M: Μενού κειμένου 1 (ένα): Ρύθμιση\n"
+"CTRL + S : Πάρε φωτογραφία της οθόνης\n"
+"CTRL + R : Μαγνητοσκόπιση\n"
+"CTRL + F : Εύρεση Αντικειμένου\n"
+"CTRL + G : Πήγαινε στο Επιλεγμένο Αντικείμενο του Ηλιακού Συστήματος\n"
 "\n"
 
 #: src/translations.h:310
@@ -489,7 +488,6 @@ msgid "Disk Viewport"
 msgstr "Άποψη δίσκου"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -504,17 +502,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Επιλογές προβολής:\n"
-"ENTER : Ισημερινή/Αζιμουθιακή στήριξη\n"
-"F1 : Αλλαγή σε πλήρη οθόνη αν είναι δυνατόν.\n"
-"C : Γραμμές Αστερισμών  V : Ετικέτες αστερισμών\n"
-"R : Καλλιτεχνία Αστερισμών      E : Πλέγμα ισημερινού\n"
-"Z : Πλέγμα Αζιμούθιου    N : Ονόματα γαλαξιακών νεφελωμάτων\n"
-"P : Ονόματα Πλανητών    G : Έδαφος\n"
-"A : Ατμόσφαιρα              F : Ομίχλη\n"
-"Q : Σημεία του ορίζοντα  O : Αλλαγή μεγένθυσης φεγγαριού\n"
-"T : Παρακολούθηση αντικειμένου S : Αστέρια\n"
-"4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
+"Επιλογές εμφάνισης:\n"
+"ENTER: Ισημερινή/Αλταζιμουθιακή Στήριξη\n"
+"F1: Εναλλαγή πλήρους οθόνης / Παραθύρου\n"
+"C: Γραμμές Αστερισμών V: Ονόματα Αστερισμών\n"
+"R: Καλλιτεχνική Απεικόνιση Αστερισμών E: Πλέγμα Ισημερινού\n"
+"Z: Αζιμουθιακό Πλέγμα N: Ονόματα Νεφελωμάτων\n"
+"P: Ονόματα Πλανητών G: Έδαφος\n"
+"A: Ατμόσφαιρα F: Ομίχλη\n"
+"Q: Σημεία του Ορίζοντα O: Μέγεθος Σελήνης\n"
+"T: Ακολούθηση Αντικειμένου S: Αστέρες\n"
+"4,: Εκλειπτική 5.: Γραμμή Ισημερινού\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -539,7 +537,7 @@ msgstr "Δοράς"
 
 #: src/translations.h:111
 msgid "Draco"
-msgstr "Δράκον"
+msgstr "Δράκοντας"
 
 #: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
@@ -564,9 +562,9 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"Κατά Την Διάρκεια Αναπαρωγής Σεναρίου\n"
+"Κατά Την Διάρκεια Αναπαραγωγής Σεναρίου\n"
 "CTRL + C : Τερματισμός Σεναρίου\n"
-"6 : παύση σεναρίου k : συνέχιση σεναρίου\n"
+"6 : παύση σεναρίου Κ : συνέχιση σεναρίου\n"
 "\n"
 
 #: src/translations.h:65 src/s_gui.cpp:2690
@@ -587,7 +585,7 @@ msgstr "Ανατολική Θύρα"
 
 #: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
-msgstr "Εκλειπτική Γραμμή"
+msgstr "Εκλειπτική"
 
 #: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
@@ -627,7 +625,7 @@ msgstr "Πλέγμα Ισημερινού"
 
 #: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
-msgstr "Πλέγμα Ισημερινού [Ε]"
+msgstr "Ισημερινό Πλέγμα [Ε]"
 
 #: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
@@ -644,8 +642,8 @@ msgstr "Ηριδανός"
 #: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
-"Λάθος: Δεν είναι δυνατόν να ανοίξει το αρχείο σεναρίου για την εγγραφή "
-"εντολών"
+"Σφάλμα : Δεν είναι δυνατόν να ανοίξει το αρχείο σεναρίου για την εγγραφή "
+"εντολών."
 
 #: src/translations.h:273
 msgid "Establishment"
@@ -692,14 +690,12 @@ msgid "Flail"
 msgstr "Δάρτης"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Οριζόντια περιστροφή"
+msgstr "Οριζόντια Αναστροφή"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Κάθετη περιστροφή"
+msgstr "Κατακόρυφη Αναστροφή"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -827,7 +823,7 @@ msgstr "Ωρολόγιον"
 
 #: src/translations.h:184
 msgid "Horus"
-msgstr "Χόρους"
+msgstr "Χωρός"
 
 #: src/s_gui.cpp:2749
 msgid "Hour"
@@ -979,7 +975,7 @@ msgstr "Ζυγός"
 
 #: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
-msgstr "θάμπωση φωτορύπανσης "
+msgstr "Ένταση Φωτορύπανσης "
 
 #: src/translations.h:173
 msgid "Lion"
@@ -1018,9 +1014,8 @@ msgid "Location"
 msgstr "Τοποθεσία"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Τοποθεσία"
+msgstr "Τοποθεσία: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1047,9 +1042,8 @@ msgid "Magnitude"
 msgstr "Μέγεθος"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
+msgstr "Πολλαπλασιαστής κλίμακας Μεγεθών "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1061,11 +1055,11 @@ msgstr "Άντρας με τα πόδια ανοιχτά"
 
 #: src/translations.h:320
 msgid "Man's Cart"
-msgstr ""
+msgstr "Το Όχημα του Άντρα"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
-msgstr "Χειροκίνητη εστιάση: "
+msgstr "Χειροκίνητη εστίαση: "
 
 #: src/translations.h:227
 msgid "Market"
@@ -1089,11 +1083,11 @@ msgstr "Μαυσωλείο"
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Maximum Magnitude to Label: "
-msgstr "Μέγιστη Απόσταση παρουσίασης Ονομάτων: "
+msgstr "Ονομασία μέχρι το Μέγεθος: "
 
 #: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Μέγιστη Φωτεινότητα Νεφελωμάτων για ετικέτα "
+msgstr "Ονομασία Νεφελωμάτων Μέγιστης Φωτεινότητας: "
 
 #: src/translations.h:242
 msgid "Meadows"
@@ -1184,8 +1178,8 @@ msgid ""
 "\n"
 msgstr ""
 "Κίνηση & επιλογή:\n"
-"Πλήκτρα Βέλη : Αλάξτε όψη RA/DE\n"
-"PAge Up/Down : Ζουμ\n"
+"Πλήκτρα Βέλη : Αλλαγή στην εμφάνιση RA/DE\n"
+"Page Up/Down : Ζουμ\n"
 "CTRL+Up/Down : Ζουμ\n"
 "Αριστερό κλικ : Επιλέξτε αντικείμενο\n"
 "Δεξί κλικ : Ακύρωση επιλογής αντικειμένου\n"
@@ -1193,8 +1187,6 @@ msgstr ""
 "\\ : Μακρύτερη εμφάνιση (πλανήτη + φεγγάρια αν υπάρχουν)\n"
 "/ : Ζουμ στο επιλεγμένο αντικείμενο\n"
 "ΚΕΝΟ : Κεντράρισμα στο επιλεγμένο αντικείμενο\n"
-"\n"
-"...\n"
 "\n"
 
 #: src/translations.h:135
@@ -1227,11 +1219,11 @@ msgstr "Ονόματα Νεφελωμάτων"
 
 #: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
-msgstr "Ονόματα νεφελωμάτων. Μέχρι το μέγεθος:"
+msgstr "Ονόματα Νεφελωμάτων. Μέχρι το μέγεθος:"
 
 #: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
-msgstr "Γαλαξιακά Νεφελώματα [Ν]"
+msgstr "Νεφελώματα [Ν]"
 
 #: src/translations.h:288
 msgid "Neck"
@@ -1259,9 +1251,8 @@ msgid "Norma"
 msgstr "Γνώμων"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Γνώμων"
+msgstr "Σκανδιναβική"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1281,7 +1272,7 @@ msgstr "Αναζήτηση Αντικειμένου"
 
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Object Sizing Rule: "
-msgstr "Κανόνας Εστίασης Αντικειμένων: "
+msgstr "Κανόνας Μεγέθους Αντικειμένων: "
 
 #: src/translations.h:136
 msgid "Octans"
@@ -1309,7 +1300,7 @@ msgstr "Βόδι"
 
 #: src/translations.h:189
 msgid "Pair of Stars"
-msgstr "Ζευγάρι από αστέρια"
+msgstr "Ζεύγος Αστέρων"
 
 #: src/translations.h:265
 msgid "Palace Gate"
@@ -1368,9 +1359,8 @@ msgid "Planet Trails"
 msgstr "Ίχνη Πλανητών"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Πλανήτες"
+msgstr "Πλανήτης: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1378,7 +1368,7 @@ msgstr "Πλανήτες"
 
 #: src/stel_ui_conf.cpp:172
 msgid "Planets Hints"
-msgstr "Υποδείξεις Πλανητών"
+msgstr "Στοιχεία Πλανητών"
 
 #: src/translations.h:58
 msgid "Pluto"
@@ -1450,7 +1440,7 @@ msgstr "Προμαχώνες"
 
 #: src/stel_ui.cpp:716
 msgid "Real Time Speed [K]"
-msgstr "Πραγματική Ταχύτητας Χρόνου [K]"
+msgstr "Πραγματική Ταχύτητα Χρόνου [K]"
 
 #: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
@@ -1469,9 +1459,8 @@ msgid "Reticulum"
 msgstr "Δίκτυον"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Επιστροφή στην Τρέχουσα Χρόνου"
+msgstr "Επιστροφή στον Πραγματικό Χρόνο"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1556,7 +1545,7 @@ msgstr "Αποθήκευση τοποθεσίας"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Σώζοντας τις επιλογές σας θα διατηρήσετε την επιλογή πλήρους οθόνης"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1588,12 +1577,11 @@ msgstr "Ασπίδα"
 
 #: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Αναζήτηση για (π.χ. Κρόνο, Πολικό, HP6218, Ορίωνα, M31):"
+msgstr "Αναζήτηση για (π.χ. Κρόνος, Πολικός Αστέρας, HP6218, Ορίωνα, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Αναζήτηση για αντικείμενο"
+msgstr "Εύρεση Αντικειμένου"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1613,7 +1601,7 @@ msgstr "Επιλεγμένο : "
 
 #: src/stel_ui_conf.cpp:125
 msgid "Selected Constellation Only"
-msgstr "Επιλεγμένοι Αστερισμοί Μόνο"
+msgstr "Μόνο Επιλεγμένοι Αστερισμοί"
 
 #: src/translations.h:182
 msgid "Selkis"
@@ -1641,11 +1629,11 @@ msgstr "Ρύθμιση περιβάλλοντος διασύνδεσης χρή�
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "Ορισμός Θέσης Τοπίων: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "Αλλάζοντας τοπίο ανανεώνεται η τοποθεσία"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1677,7 +1665,7 @@ msgstr "Τερματισμός: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr ""
+msgstr "Συνοδικός"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
@@ -1733,28 +1721,27 @@ msgstr "Τετράγωνη Σιταποθήκη"
 
 #: src/translations.h:284
 msgid "Star"
-msgstr "Αστέρι"
+msgstr "Αστέρας"
 
 #: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
-msgstr "Ονόματα Άστρων. Μέχρι το μέγεθος:"
+msgstr "Ονόματα Άστερων. Μέχρι το μέγεθος:"
 
 #: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
-msgstr "Αναλαμπές Άστρων. Ποσοστό :"
+msgstr "Αστρικός Σπινθιρισμός. Ποσοστό :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Πολλαπλασιαστής Μεγέθους Αστέρων: "
+msgstr "Πολλαπλασιαστής Αριθμού Αστέρων: "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
-msgstr "Άστρα"
+msgstr "Αστέρες"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
-msgstr "Αστέρια "
+msgstr "Αστέρες "
 
 #: src/translations.h:198
 msgid "Stars of Water"
@@ -1790,12 +1777,11 @@ msgstr "Τήθυς"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "Το Πεδίο Μάχης του Άσαρ"
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Οι Επτά"
+msgstr "Οι Ψαράδες"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1822,7 +1808,6 @@ msgid "Thunderbolt"
 msgstr "Κεραυνός"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1834,11 +1819,12 @@ msgid ""
 "\n"
 msgstr ""
 "Χρόνος & Ημερομηνία:\n"
-"6 : Παύση ρυθμού χρόνου 7 : Ρυθμός χρόνου 0\n"
-"8 : Ρυθμίστε τρέχων χρόνο J : Μειώστε ρυθμό χρόνου\n"
-"K: Κανονικός ρυθμός χρόνου L : Αυξήστε ρυθμό χρόνου\n"
-"- : Πίσω 24 ώρες = : Μπροστά 24 ώρες\n"
-"[ : Πίσω 7 ημέρες ] : Μπροστά 7 ημέρες\n"
+"6 : Παύση Ροής Χρόνου 7 : Ροή Χρόνου 0\n"
+"8 : Επιλογή Τωρινού Χρόνου J : Μείωση Ροής Χρόνου\n"
+"K : Κανονική Ροή Χρόνου L : Αύξηση Ροής Χρόνου\n"
+"- και = : Πίσω και Εμπρός μια Μέρα ( Πιέστε ALT για συνοδική ημέρα) \n"
+"[ και ] : Πίσω και Εμπρός 7 Μέρες ( Πιέστε ALT για συνοδικές ημέρες)\n"
+"CRTL + - : Πίσω μια Ώρα CRTL + = : Εμπρός μια Ώρα\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1887,7 +1873,7 @@ msgstr "Χελώνα"
 
 #: src/stel_ui_tuiconf.cpp:420
 msgid "Twinkling: "
-msgstr "Αναλαμπές: "
+msgstr "Σπινθιρισμός: "
 
 #: src/translations.h:174
 msgid "Two Jaws"
@@ -1914,9 +1900,8 @@ msgid "Type: "
 msgstr "Τύπος: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Σενάριο "
+msgstr "USB Σενάριο "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -1940,9 +1925,9 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Χρησιμοποιείστε τα πλήκτρα J και L για να μειώστε και να αυξήστε\n"
+"Χρησιμοποιήστε τα πλήκτρα J και L για να μειώστε και να αυξήστε\n"
 "   την ταχύτητα της ώρας.\n"
-"Χρησιμοποιείστε το πλήκτρο K για να επιστρέψτε στην κανονική ταχύτητα ώρας."
+"Χρησιμοποιήστε το πλήκτρο K για να επιστρέψτε στην κανονική ταχύτητα ώρας."
 
 #: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
@@ -2022,16 +2007,15 @@ msgstr "Κόσκινο"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Στόμα του Λύκου"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Κρεβάτι Γυναίκας"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Κρεβάτι Γυναίκας"
+msgstr "Το Όχημα της Γυναίκας"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2071,18 +2055,73 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Λάθος γραμμής εντολής σύνοψης\n"
 
+#~ msgid "Configuration window"
+#~ msgstr "Παράθυρο ρυθμίσεων"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Διάλογοι και άλλες ρυθμίσεις\n"
+#~ "H : Βοήθεια | : Περί Stellarium\n"
+#~ "M : Κείμενο Καταλόγου 1 (ένα) :Διαμόρφωση\n"
+#~ "CTRL + S : Πάρτε φωτογραφία\n"
+#~ "CTRL + R : Ενεργοποίηση / Απενεργοποίηση εγγραφής σεναρίου\n"
+#~ "CTRL + F : Ενεργοποίηση / Απενεργοποίηση ερευνητή αντικειμένου\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Επιλογές προβολής:\n"
+#~ "ENTER : Ισημερινή/Αζιμουθιακή στήριξη\n"
+#~ "F1 : Αλλαγή σε πλήρη οθόνη αν είναι δυνατόν.\n"
+#~ "C : Γραμμές Αστερισμών  V : Ετικέτες αστερισμών\n"
+#~ "R : Καλλιτεχνία Αστερισμών      E : Πλέγμα ισημερινού\n"
+#~ "Z : Πλέγμα Αζιμούθιου    N : Ονόματα γαλαξιακών νεφελωμάτων\n"
+#~ "P : Ονόματα Πλανητών    G : Έδαφος\n"
+#~ "A : Ατμόσφαιρα              F : Ομίχλη\n"
+#~ "Q : Σημεία του ορίζοντα  O : Αλλαγή μεγένθυσης φεγγαριού\n"
+#~ "T : Παρακολούθηση αντικειμένου S : Αστέρια\n"
+#~ "4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
+#~ "\n"
+
 #~ msgid "Equ of date"
 #~ msgstr "Εξίσωση ημερομηνίας"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Οριζόντια περιστροφή"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Κάθετη περιστροφή"
 
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "Μέγεθος: "
+#~ msgstr "Όριο Μεγέθους: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Φόρτωση καταλόγου Hipparcos:"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Ρυθμός Μετεωρήτων ανα λεπτό"
@@ -2090,8 +2129,34 @@ msgstr ""
 #~ msgid "Parallax: "
 #~ msgstr "Παράλλαξη: "
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Επιστροφή στην Τρέχουσα Χρόνου"
+
+#~ msgid "Search for object"
+#~ msgstr "Αναζήτηση για αντικείμενο"
+
 #~ msgid "Spectral Type: "
-#~ msgstr "Τύπος φάσματος "
+#~ msgstr "Φασματικός Τύπος "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Πολλαπλασιαστής Μεγέθους Αστέρων: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Χρόνος & Ημερομηνία:\n"
+#~ "6 : Παύση ρυθμού χρόνου 7 : Ρυθμός χρόνου 0\n"
+#~ "8 : Ρυθμίστε τρέχων χρόνο J : Μειώστε ρυθμό χρόνου\n"
+#~ "K: Κανονικός ρυθμός χρόνου L : Αυξήστε ρυθμό χρόνου\n"
+#~ "- : Πίσω 24 ώρες = : Μπροστά 24 ώρες\n"
+#~ "[ : Πίσω 7 ημέρες ] : Μπροστά 7 ημέρες\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Δοκιμάστε `%s --help' για περισσότερες πληροφορίες.\n"
