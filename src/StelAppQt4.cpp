@@ -131,7 +131,9 @@ void StelAppQt4::terminateApplication(void)
 
 // Set mouse cursor display
 void StelAppQt4::showCursor(bool b)
-{;}
+{
+	winOpenGL->setCursor(b ? Qt::ArrowCursor : Qt::BlankCursor);
+}
 
 //! Swap GL buffer, should be called only for special condition
 void StelAppQt4::swapGLBuffers()
