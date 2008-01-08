@@ -44,9 +44,9 @@ void Landscape::loadCommon(const QString& landscape_file, const QString& landsca
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 	// cout << "DEBUG Landscape::loadCommon section name is: " << landscapeId << "file name is " << landscape_file << endl;
-	name = QString::fromStdString(pd.get_str("landscape", "name"));
-	author = QString::fromStdString(pd.get_str("landscape", "author"));
-	description = QString::fromStdString(pd.get_str("landscape", "description"));
+	name = QString::fromUtf8(pd.get_str("landscape", "name").c_str());
+	author = QString::fromUtf8(pd.get_str("landscape", "author").c_str());
+	description = QString::fromUtf8(pd.get_str("landscape", "description").c_str());
 	if (name.isEmpty())
 	{
 		qWarning() << "No valid landscape definition found for section "<< landscapeId << " in file " << landscape_file << ". No landscape in use." << endl;

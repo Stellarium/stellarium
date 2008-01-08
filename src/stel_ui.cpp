@@ -725,8 +725,8 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-		wstring(L"                 \u2022   Stellarium  October 2006  \u2022\n\n") +
-		L"\u2022   Copyright (c) 2000-2006 Fabien Chereau et al.\n\n" +
+		wstring(L"                 \u2022   Stellarium  January 2008  \u2022\n\n") +
+		L"\u2022   Copyright (c) 2000-2008 Fabien Chereau et al.\n\n" +
 		L"\u2022" + _("   Please check for newer versions and send bug reports\n\
     and comments to us at: http://www.stellarium.org\n\n") +
 		L"\u2022   This program is free software; you can redistribute it and/or\n\

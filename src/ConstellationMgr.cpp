@@ -372,7 +372,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 #endif
 			
 			int texSizeX, texSizeY;
-			if (!cons->artTexture->getDimensions(texSizeX, texSizeY))
+			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
 				qWarning() << "Texture dimention not available";
 			}
