@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-07-18 09:39+0000\n"
+"PO-Revision-Date: 2007-09-27 14:34+0000\n"
 "Last-Translator: lmichnovic <ladislav.michnovic@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-22 04:28:13+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -121,7 +121,7 @@ msgstr "Povozník"
 
 #: src/translations.h:316
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Aurvandilov palec na nohe"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
@@ -201,7 +201,7 @@ msgstr "Rydlo"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendár"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -340,7 +340,6 @@ msgid "Configuration"
 msgstr "Nastavenia"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
 msgstr "Okno s nastaveniami [1]"
 
@@ -438,7 +437,7 @@ msgstr "deň"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
-msgstr ""
+msgstr "Kľúče dní: "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
@@ -453,7 +452,6 @@ msgid "Delphinus"
 msgstr "Delfín"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -464,12 +462,13 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Dialógy a ďalšie ovládanie:\n"
-"H : Pomocník             I : O programe Stellarium\n"
-"M : Textové menu    1 : Konfigurácia\n"
-"CTRL + S : urobiť snímku\n"
-"CTRL + R : prepínač zaznamenávania skriptu\n"
-"CTRL + F : prepínač vyhľadávača objektov\n"
+"Dialógy a ďalšie možnosti ovládania:\n"
+"H : zobrazí nápovedu   I : informácie o programe\n"
+"M : Textové menu   1 (číslo jeden) : Nastavenie\n"
+"CTRL + S : vytvoriť snímok obrazovky\n"
+"CTRL + R : prepína medzi zaznamenávaním skriptu\n"
+"CTRL + F : prepína medzi hľadačom objektov\n"
+"CTRL + G : ísť na zvolený objekt Slnečnej sústavy\n"
 "\n"
 
 #: src/translations.h:310
@@ -489,7 +488,6 @@ msgid "Disk Viewport"
 msgstr "Orezať pohľad"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -506,14 +504,15 @@ msgid ""
 msgstr ""
 "Možnosti zobrazenia:\n"
 "ENTER : ekvatoriálna/paralaktická montáž\n"
-"F1 :          Prepnúť na celú obrazovku, ak je možné.\n"
-"C : čiary súhvezdí            V : názvy súhvezdí\n"
-"R : obrázky súhvezdí      E : rovníková mriežka\n"
-"Z : azimutálna mriežka  G : zem\n"
-"A : atmosféra                    F : hmla\n"
-"Q : svetové strany            O : prepnúť mierku mesiaca\n"
-"T : sledovanie objektu     S : hviezdy\n"
-"4 : čiara ekliptiky               5 : ekvatoriálna čiara\n"
+"F1 : prepína medzi zobrazením v okne a celou obrazovkou\n"
+"C : čiary súhvezdí   V : popisky súhvezdí\n"
+"R : kresby súhvezdí   E : ekvatoriálna mriežka\n"
+"Z : azimutálna mriežka   N : popisky hmlovín\n"
+"P : popisky planét   G : zem\n"
+"A : Atmosphere   F : hmla\n"
+"Q : svetové strany   O : prepína zobrazenie Mesiaca\n"
+"T : stopovanie objektu   S : hviezdy\n"
+"4 , : čiara ekliptiky   5 . : ekvatoriálna čiara\n"
 "\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
@@ -689,14 +688,12 @@ msgid "Flail"
 msgstr "Cep"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Zrkadliť horizontálne"
+msgstr "Preklopiť horizontálne [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Zrkadliť vertikálne"
+msgstr "Preklopiť vertikálne [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1015,9 +1012,8 @@ msgid "Location"
 msgstr "Umiestnenie"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Umiestnenie"
+msgstr "Miesto: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1044,9 +1040,8 @@ msgid "Magnitude"
 msgstr "Magnitúda"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Násobiteľ kalibrovania magnitúdy: "
+msgstr "Násobič mierky magnitúdy: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1058,7 +1053,7 @@ msgstr "Človek s roztiahnutými nohami"
 
 #: src/translations.h:320
 msgid "Man's Cart"
-msgstr ""
+msgstr "Mužský kočiar"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
@@ -1207,7 +1202,7 @@ msgstr "Názvy súhvezdí [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
-msgstr "Indiánska - kmeň Navaho"
+msgstr "Navaho"
 
 #: src/translations.h:299
 msgid "Navigator's Triangle"
@@ -1255,9 +1250,8 @@ msgid "Norma"
 msgstr "Pravítko"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Pravítko"
+msgstr "Škandinávska"
 
 #: src/translations.h:239
 msgid "North River"
@@ -1364,9 +1358,8 @@ msgid "Planet Trails"
 msgstr "Stopy planét"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planéty"
+msgstr "Planéta: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1465,9 +1458,8 @@ msgid "Reticulum"
 msgstr "Sieť"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Nastaviť súčasný čas [8]"
+msgstr "Návrat na aktuálny čas [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1552,7 +1544,7 @@ msgstr "Uložiť miesto"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Uloženie nastavení uloží aj súčasný celoobrazovkový režim"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1587,7 +1579,6 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Hľadať (napr.: Venuša, Polaris, HP6218, Orión, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
 msgstr "Hľadať objekt [CTRL + F]"
 
@@ -1637,11 +1628,11 @@ msgstr "Nastav jazyk pre UI: "
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "Nastavenie krajiny nastaví miesto: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "Nastavujem krajinu podľa miesta"
 
 #: src/translations.h:226
 msgid "Seven Excellencies"
@@ -1673,7 +1664,7 @@ msgstr "Vypnúť: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr ""
+msgstr "Siderický"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
@@ -1740,9 +1731,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Mihotanie hviezd. Rozsah:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Násobiteľ hviezdnej veľkosti: "
+msgstr "Násobič  hodnoty hviezd: "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1786,12 +1776,11 @@ msgstr "Tethys"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "Bojisko Azarov"
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Sedmička"
+msgstr "Rybári"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1818,7 +1807,6 @@ msgid "Thunderbolt"
 msgstr "Blesk"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1829,12 +1817,13 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Čas a Dátum :\n"
-"6 : pozastaviť urýchlenie času   7 : rýchlosť času 0\n"
-"8 : nastaviť aktuálny čas             J : znížiť rýchlosť plynutia času\n"
-"K : normálna rýchlosť času         L : zvýšiť rýchlosť plynutia času\n"
-"- : späť o 24 hodín                        = : dopredu o 24 hodín\n"
-"[ : späť o 7 dní                                ] : dopredu o 7 dní\n"
+"Čas a Dátum:\n"
+"6 : pozastavenie iného tempa času   7 : tempo plynutia času na 0\n"
+"8 : nastaví aktuálny čas   J : zníži tempo plynutia času\n"
+"K : normálne tempo plynutia času   L : zvýši tempo plynutia času\n"
+"- a = : dozadu a dopredu o jeden deň (stlačte ALT pre siderický deň)\n"
+"[ a ] : dozadu a dopredu o 7 dní (stlačte ALT pre siderický deň)\n"
+"CTRL + - : o hodinu naspäť   CTRL + = : o hodinu dopredu\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -1910,9 +1899,8 @@ msgid "Type: "
 msgstr "Typ: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Skripty "
+msgstr "USB skript: "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2018,16 +2006,15 @@ msgstr "Preosievací kôš"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Vlčia tlama"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Posteľ ženy"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Posteľ ženy"
+msgstr "Ženský kočiar"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2067,18 +2054,72 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Nesprávne argumenty príkazu\n"
 
+#~ msgid "Configuration window"
+#~ msgstr "Okno s nastaveniami [1]"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialógy a ďalšie ovládanie:\n"
+#~ "H : Pomocník             I : O programe Stellarium\n"
+#~ "M : Textové menu    1 : Konfigurácia\n"
+#~ "CTRL + S : urobiť snímku\n"
+#~ "CTRL + R : prepínač zaznamenávania skriptu\n"
+#~ "CTRL + F : prepínač vyhľadávača objektov\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Možnosti zobrazenia:\n"
+#~ "ENTER : ekvatoriálna/paralaktická montáž\n"
+#~ "F1 :          Prepnúť na celú obrazovku, ak je možné.\n"
+#~ "C : čiary súhvezdí            V : názvy súhvezdí\n"
+#~ "R : obrázky súhvezdí      E : rovníková mriežka\n"
+#~ "Z : azimutálna mriežka  G : zem\n"
+#~ "A : atmosféra                    F : hmla\n"
+#~ "Q : svetové strany            O : prepnúť mierku mesiaca\n"
+#~ "T : sledovanie objektu     S : hviezdy\n"
+#~ "4 : čiara ekliptiky               5 : ekvatoriálna čiara\n"
+#~ "\n"
+
 #~ msgid "Equ of date"
 #~ msgstr "Ekvinokcium"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Zrkadliť horizontálne"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Zrkadliť vertikálne"
 
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
 #~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitúda: "
+#~ msgstr "Limitná magnitúda: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Nahrávam katalóg Hipparcos:"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Násobiteľ kalibrovania magnitúdy: "
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Počet meteorov/min."
@@ -2086,8 +2127,34 @@ msgstr ""
 #~ msgid "Parallax: "
 #~ msgstr "paralaxa: "
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Nastaviť súčasný čas [8]"
+
+#~ msgid "Search for object"
+#~ msgstr "Hľadať objekt [CTRL + F]"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Spektrálny typ: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Násobiteľ hviezdnej veľkosti: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Čas a Dátum :\n"
+#~ "6 : pozastaviť urýchlenie času   7 : rýchlosť času 0\n"
+#~ "8 : nastaviť aktuálny čas             J : znížiť rýchlosť plynutia času\n"
+#~ "K : normálna rýchlosť času         L : zvýšiť rýchlosť plynutia času\n"
+#~ "- : späť o 24 hodín                        = : dopredu o 24 hodín\n"
+#~ "[ : späť o 7 dní                                ] : dopredu o 7 dní\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Viac informácií získate príkazom `%s --help'.\n"

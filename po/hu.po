@@ -9,13 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-06-29 21:21+0000\n"
+"PO-Revision-Date: 2007-12-20 13:25+0000\n"
 "Last-Translator: András Mohari <mayday@vizslamail.hu>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:58:30+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -45,7 +46,7 @@ msgstr ": Szokásos Perzeida-gyakoriság"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
-msgstr "CsE"
+msgstr "CSE"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
@@ -342,9 +343,8 @@ msgid "Configuration"
 msgstr "Beállítások"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Beállítások"
+msgstr "Beállítások ablak [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -691,14 +691,12 @@ msgid "Flail"
 msgstr "Láncos Buzogány"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Vízszintes tükrözés"
+msgstr "Vízszintes tükrözés [CTRL+SHIFT+H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Függőleges tükrözés"
+msgstr "Függőleges tükrözés [CTRL+SHIFT+V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1140,7 +1138,7 @@ msgid ""
 msgstr ""
 "Egyebek:\n"
 "9           : Meteorzápor gyakoriságának váltása\n"
-"CTRL+0...9  : A 0-ás...9-es távcső célra irányítása\n"
+"CTRL+0...9  : A 0-s...9-es távcső célra irányítása\n"
 "CTRL+SHIFT+H: Kép vízszintes tükrözése\n"
 "CTRL+SHIFT+V: Kép függőleges tükrözése\n"
 
@@ -1256,9 +1254,8 @@ msgid "Norma"
 msgstr "Szögmérő"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Szögmérő"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1465,9 +1462,8 @@ msgid "Reticulum"
 msgstr "Háló"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Vissza a jelenbe"
+msgstr "Vissza a jelenbe [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1552,7 +1548,7 @@ msgstr "Hely mentése"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Mentéskor a teljes képernyős mód állapota is tárolódik"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1587,9 +1583,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Keresés (pl. Szaturnusz, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Égitest keresése"
+msgstr "Égitest keresése [CTRL+F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1790,9 +1785,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "A Hetek"
+msgstr "A Halászok"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1819,7 +1813,6 @@ msgid "Thunderbolt"
 msgstr "Villámlás"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1836,6 +1829,7 @@ msgstr ""
 "K: Valós idő                     L: Idő gyorsítása\n"
 "- és =: 1 napot vissza és előre (ALT-ot nyomva 1 csillagnapot)\n"
 "[ és ]: 7 napot vissza és előre (ALT-ot nyomva 7 csillagnapot)\n"
+"CTRL+-: 1 órát vissza       CTRL+=: 1 órát előre\n"
 "\n"
 
 #: src/stel_ui_tuiconf.cpp:404
@@ -2018,16 +2012,15 @@ msgstr "Rostálókosár"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Farkasszáj"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Asszony Ágya"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Asszony Ágya"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2088,9 +2081,6 @@ msgstr ""
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD+Q : Kilépés\n"
 
-#~ msgid "CTRL + G : set observer onto the selected planet\n"
-#~ msgstr "CTRL+G: A megfigyelő kijelölt bolygóra helyezése\n"
-
 #~ msgid "CW 113, SH 40"
 #~ msgstr "CW 113, SH 40"
 
@@ -2118,50 +2108,6 @@ msgstr ""
 #~ msgid "DE : "
 #~ msgstr "DE: "
 
-#~ msgid ""
-#~ "Dialogs & other controls:\n"
-#~ "H   : Help                      I   : About Stellarium\n"
-#~ "M   : Text menu                 1 (one)  : Configuration\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ "CTRL + F : Toggle object finder\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Párbeszédablakok és más vezérlőelemek:\n"
-#~ "H     : Súgó                     I      : Stellarium névjegye\n"
-#~ "M     : Szövegmenü               1 (egy): Beállítások\n"
-#~ "CTRL+S: Képernyőmentés\n"
-#~ "CTRL+R: Parancsfájl rögzítése ki/be\n"
-#~ "CTRL+F: Égitestkereső ki/be\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Display options:\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "F1  : Toggle fullscreen if possible.\n"
-#~ "C   : Constellation lines       V   : Constellation labels\n"
-#~ "R   : Constellation art         E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
-#~ "P   : Planet labels             G   : Ground\n"
-#~ "A   : Atmosphere                F   : Fog\n"
-#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
-#~ "T   : Object tracking           S   : Stars\n"
-#~ "4 , : Ecliptic line             5 . : Equator line\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Megjelenítés:\n"
-#~ "ENTER: Egyenlítői/horizontális koordináta-rendszer\n"
-#~ "F1   : Teljes képernyő ki/be, ha lehetséges.\n"
-#~ "C    : Csillagképek vonalai      V   : Csillagképek nevei\n"
-#~ "R    : Csillagképek ábrái        E   : Egyenlítői rács\n"
-#~ "Z    : Horizontális rács         N   : Csillagködök nevei\n"
-#~ "P    : Bolygók nevei             G   : Felszín\n"
-#~ "A    : Légkör                    F   : Köd\n"
-#~ "Q    : Égtájak                   O   : Hold nagyítása ki/be\n"
-#~ "T    : Égitest követése          S   : Csillagok\n"
-#~ "4 ,  : Ekliptika vonala          5 . : Egyenlítő vonala\n"
-#~ "\n"
-
 #~ msgid "E-W Centering Offset: "
 #~ msgstr "K-Ny középvonal eltolása: "
 
@@ -2181,191 +2127,14 @@ msgstr ""
 #~ msgid "Equ of date"
 #~ msgstr "Pill. epocha"
 
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Halszem vetület"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Határfényesség: "
 
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Cadwell-katalógus betöltése:"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "HIP-katalógus betöltése: %d/%d"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "HIP-/SAO-katalógus betöltése: %d/%d"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Hipparcos-katalógus betöltése:"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "SAO-katalógus betöltése: %d/%d"
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Sharpless-katalógus betöltése:"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Fényességalapú méretezés szorzója: "
-
-#~ msgid "Message"
-#~ msgstr "Üzenet"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Meteorgyakoriság (db/perc)"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Egyebek:\n"
-#~ "9: Meteorzápor gyakoriságának váltása\n"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-#~ "CTRL + SHIFT + H: toggle horizontal image flipping\n"
-#~ "CTRL + SHIFT + V: toggle vertical image flipping\n"
-#~ msgstr ""
-#~ "Egyebek:\n"
-#~ "9     : Meteorzápor gyakoriságának váltása\n"
-#~ "CTRL+0...9 : GOTO parancs kiadása a 0-ás, ... 9-es távcsőnek\n"
-#~ "CTRL+SHIFT+H: kép vízszintes tükrözése\n"
-#~ "CTRL+SHIFT+V: kép függőleges tükrözése\n"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-#~ "CTRL + SHIFT + H: toggle horizontal image flipping\n"
-#~ "CTRL + SHIFT + V: toggle vertical image flipping\n"
-#~ "CTRL + Q : Quit\n"
-#~ "CMD + Q  : Quit\n"
-#~ msgstr ""
-#~ "Egyebek:\n"
-#~ "9     : Meteorzápor gyakoriságának váltása\n"
-#~ "CTRL+0...9 : GOTO parancs kiadása a 0-ás, ... 9-es távcsőnek\n"
-#~ "CTRL+SHIFT+H: kép vízszintes tükrözése\n"
-#~ "CTRL+SHIFT+V: kép függőleges tükrözése\n"
-#~ "CTRL+Q: Kilépés\n"
-#~ "CMD+Q : Kilépés\n"
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "É-D középvonal eltolása: "
-
-#~ msgid "Name : "
-#~ msgstr "Név: "
-
-#~ msgid "Object No :"
-#~ msgstr "Égitest száma:"
-
 #~ msgid "Parallax: "
 #~ msgstr "Parallaxis: "
 
-#~ msgid "Planet/Moon"
-#~ msgstr "Bolygó/hold"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Bolygók és holdak"
-
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Friss verziót keresel, hibát találtál, megjegyzésed\n"
-#~ "van? Lásd a honlapot: http://www.stellarium.org\n"
-#~ "\n"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "A \"Hely\" fül beállításainak elmentésével"
-
-#~ msgid "RA : "
-#~ msgstr "RA: "
-
-#~ msgid "Sky culture:"
-#~ msgstr "Kultúrkör:"
-
-#~ msgid "Sky language:"
-#~ msgstr "Az ég nyelve:"
-
 #~ msgid "Spectral Type: "
 #~ msgstr "Színképtípus: "
-
-#~ msgid "Star Magnitude Multiplier: "
-#~ msgstr "Csillagfényesség szorzója: "
-
-#~ msgid "Star No./Name"
-#~ msgstr "Csillag sz./neve"
-
-#~ msgid ""
-#~ "Time & Date:\n"
-#~ "6   : Time rate pause           7   : Time rate 0\n"
-#~ "8   : Set current time          J   : Decrease time rate\n"
-#~ "K   : Normal time rate          L   : Increase time rate\n"
-#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
-#~ "[   : Back 7 days               ]   : Forward 7 days\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Idő és dátum:\n"
-#~ "6: Idő megállítása               7: Idő múlása 0-ra\n"
-#~ "8: Vissza a jelenbe              J: Idő lassítása\n"
-#~ "K: Valós idő                     L: Idő gyorsítása\n"
-#~ "-: 24 órát vissza                =: 24 órát előre\n"
-#~ "[: 7 napot vissza                ]: 7 napot előre\n"
-#~ "\n"
-
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "Próbáld a \"%s --help\" parancsot további információkért.\n"
-
-#~ msgid ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-#~ msgstr ""
-#~ "Használat: %s [OPCIÓ] ...\n"
-#~ " -v, --version          Kiírja a verziót és kilép.\n"
-#~ " -h, --help             Kiírja ezt a segítséget és kilép.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Ide kerülnek a konfigurációs fájlok: %s\n"
-
-#~ msgid "e.g. : 1432, 83"
-#~ msgstr "pl.: 1432, 83"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "pl. 60718 (aCrux) vagy Canopus"
-
-#~ msgid "eg. Crux"
-#~ msgstr "pl. Déli Kereszt"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "pl. M83, NGC 7009, IC 2118"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "pl. Plútó vagy Io"
-
-#~ msgid "flip horizontal"
-#~ msgstr "vízszintes tükrözés"
-
-#~ msgid "flip horizontally"
-#~ msgstr "vízszintes tükrözés"
-
-#~ msgid "flip vertical"
-#~ msgstr "függőleges tükrözés"
-
-#~ msgid "flip vertically"
-#~ msgstr "függőleges tükrözés"
-
-#~ msgid "ly"
-#~ msgstr "fé"
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "tehető alapértelmezetté a jelenlegi tájkép."

@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
@@ -15,7 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-07 03:58:48+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -340,9 +340,8 @@ msgid "Configuration"
 msgstr "Cumraíocht"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Príomh-roghchlár"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -453,7 +452,6 @@ msgid "Delphinus"
 msgstr "an Deilf"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -464,13 +462,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Dialóga is rialuithe eile:\n"
-"H: Cabhair I: Faoi Stellarium\n"
-"M: Téacs-roghchlár 1 (aon): Cumraíocht\n"
-"CTRL + S: Seat den scáileán\n"
-"CTRL + R: Scoranáigh taifeadadh na script\n"
-"CTRL + F: Scoranáigh aimsitheoir na hoibiachta\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -489,7 +480,6 @@ msgid "Disk Viewport"
 msgstr ""
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -504,18 +494,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Roghanna na taispeáint:\n"
-"ENTER: Gléasadh meánchriosach/asamatach\n"
-"F1: Scoranáigh lánshcáileán más é féideartha é\n"
-"C: Línte na realtbhuíonta V: Lipéid na realtbhuíonta\n"
-"R: Líníocht na realtbhuíonta E: Eangach mheánchriosach\n"
-"Z: Eangach asamatach N: Lipéid na réaltnéalta\n"
-"P: Lepéid na bpláinéad G: Talamh\n"
-"A: Atmaisféar F: Ceo\n"
-"Q: Príomhairde O: Scoránaigh scálú na gealaí\n"
-"T: Rianú na hoibiachta S: Réaltaí\n"
-"4, : Líne éiclipteach 5. : Líne an mheánchiorcail\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -1017,9 +995,8 @@ msgid "Location"
 msgstr "Áit"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Áit"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1251,9 +1228,8 @@ msgid "Norma"
 msgstr "an Riail"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "an Riail"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1360,9 +1336,8 @@ msgid "Planet Trails"
 msgstr "Rianta na bpláinéad"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Pláinéid"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1461,9 +1436,8 @@ msgid "Reticulum"
 msgstr "an Líontán"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Am reatha :"
+msgstr ""
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1583,9 +1557,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Cuardaigh (m.sh. Satarn, Polaris, HP6218, Oiríon, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Cuardaigh rudaí"
+msgstr ""
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1784,9 +1757,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "na Seacht"
+msgstr ""
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1898,9 +1870,8 @@ msgid "Type: "
 msgstr "Tíopa: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Scripteanna "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2048,12 +2019,58 @@ msgstr ""
 #~ msgid " Light Years"
 #~ msgstr " Solasblianta"
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Méid: "
+#~ msgid "Configuration window"
+#~ msgstr "Príomh-roghchlár"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialóga is rialuithe eile:\n"
+#~ "H: Cabhair I: Faoi Stellarium\n"
+#~ "M: Téacs-roghchlár 1 (aon): Cumraíocht\n"
+#~ "CTRL + S: Seat den scáileán\n"
+#~ "CTRL + R: Scoranáigh taifeadadh na script\n"
+#~ "CTRL + F: Scoranáigh aimsitheoir na hoibiachta\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Roghanna na taispeáint:\n"
+#~ "ENTER: Gléasadh meánchriosach/asamatach\n"
+#~ "F1: Scoranáigh lánshcáileán más é féideartha é\n"
+#~ "C: Línte na realtbhuíonta V: Lipéid na realtbhuíonta\n"
+#~ "R: Líníocht na realtbhuíonta E: Eangach mheánchriosach\n"
+#~ "Z: Eangach asamatach N: Lipéid na réaltnéalta\n"
+#~ "P: Lepéid na bpláinéad G: Talamh\n"
+#~ "A: Atmaisféar F: Ceo\n"
+#~ "Q: Príomhairde O: Scoránaigh scálú na gealaí\n"
+#~ "T: Rianú na hoibiachta S: Réaltaí\n"
+#~ "4, : Líne éiclipteach 5. : Líne an mheánchiorcail\n"
+#~ "\n"
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Lódálaim an chatalog Chipparcois"
+
+#~ msgid "Search for object"
+#~ msgstr "Cuardaigh rudaí"
 
 #~ msgid "Spectral Type: "
 #~ msgstr "Aicme speictreach: "

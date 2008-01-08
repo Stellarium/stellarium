@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
 "PO-Revision-Date: 2007-07-24 08:52+0000\n"
-"Last-Translator: Tor Egil Hoftun Kvæstad <toregilhk@hotmail.com>\n"
+"Last-Translator: eikland <eikland@users.sourceforge.net>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-07-29 13:58:38+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -343,9 +343,8 @@ msgid "Configuration"
 msgstr "Oppsett"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Innstillingar"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -456,7 +455,6 @@ msgid "Delphinus"
 msgstr "Delfinen"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -467,14 +465,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Vindauge & andre val:\n"
-"H : Hjelp                            1 : Innstillingar\n"
-"I : Om Stellarium                    M : Tekstmeny (avanserte "
-"innstillingar)\n"
-"Ctrl+S : Kopiere skjermbilete\n"
-"Ctrl+R : Registrering av skript\n"
-"Ctrl+F : Søkje etter objekt\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -493,7 +483,6 @@ msgid "Disk Viewport"
 msgstr "Linseforma vising"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -508,19 +497,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Val for vising:\n"
-"F1 : Vis i heil skjerm, om mogleg.\n"
-"C : Stjernebilete - strekteikning     V : Namn på stjernebilete\n"
-"R : Stjernebilete - grafikk          Shift+C : Grenser til stjernebilete\n"
-"S : Stjerner                         D : Namn på stjerner\n"
-"F : Tåke                             N : Namn på stjernetåker\n"
-"T : Følgje objekt                    P : Namn på planetar\n"
-"A : Atmosfære                        G : Horisont\n"
-"Q : Himmelretningar                  O : Skalering av månen\n"
-"4 : Ekliptisk line (eller ,)         5 : Ekvatorline (eller .)\n"
-"Z : Planprojiserte ruter (azimutial) E : Sylinderprojiserte (ekvatorial)\n"
-"Enter: Sylinder-/planprojisering\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -697,14 +673,12 @@ msgid "Flail"
 msgstr "Treske"
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Vend vannrett"
+msgstr ""
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Vend loddrett"
+msgstr ""
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1028,9 +1002,8 @@ msgid "Location"
 msgstr "Stad"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Stad"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1057,9 +1030,8 @@ msgid "Magnitude"
 msgstr "Storleik"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Multiplikator for lysstyrke: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1267,9 +1239,8 @@ msgid "Norma"
 msgstr "Vinkelhaka"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Vinkelhaka"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1376,9 +1347,8 @@ msgid "Planet Trails"
 msgstr "Planetspor"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planetar"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1477,9 +1447,8 @@ msgid "Reticulum"
 msgstr "Nettet"
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Tilbake til dato/tid i dag"
+msgstr ""
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1599,9 +1568,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Søk etter (f.eks: Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Søk etter eit objekt"
+msgstr ""
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1752,9 +1720,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Stjernefunkling - intensitet:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Forsterking av stjerner: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1801,9 +1768,8 @@ msgid "The Asar Battlefield"
 msgstr ""
 
 #: src/translations.h:318
-#, fuzzy
 msgid "The Fishermen"
-msgstr "Dei sju"
+msgstr ""
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1831,7 +1797,6 @@ msgid "Thunderbolt"
 msgstr "Lyn"
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1842,13 +1807,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Tid & dato:\n"
-"6 : Stopp klokka (pause)             7 : Stopp klokka (fart 0)\n"
-"8 : Still klokka til notid           J : Reduser farten på klokka\n"
-"K : Normal fart på klokka            L : Auk farten på klokka\n"
-"- : Tilbake 24 timar                 = : Framover 24 timar\n"
-"[ : Tilbake 7 dagar                  ] : Framover 7 dagar\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1925,9 +1883,8 @@ msgid "Type: "
 msgstr "Type: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Skript "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2042,9 +1999,8 @@ msgid "Woman's Bed"
 msgstr "Kvinneseng"
 
 #: src/translations.h:319
-#, fuzzy
 msgid "Woman's Cart"
-msgstr "Kvinneseng"
+msgstr ""
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2084,18 +2040,72 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Ugyldig(e) kommandolinjeargument\n"
 
+#~ msgid "Configuration window"
+#~ msgstr "Innstillingar"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vindauge & andre val:\n"
+#~ "H : Hjelp                            1 : Innstillingar\n"
+#~ "I : Om Stellarium                    M : Tekstmeny (avanserte "
+#~ "innstillingar)\n"
+#~ "Ctrl+S : Kopiere skjermbilete\n"
+#~ "Ctrl+R : Registrering av skript\n"
+#~ "Ctrl+F : Søkje etter objekt\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Val for vising:\n"
+#~ "F1 : Vis i heil skjerm, om mogleg.\n"
+#~ "C : Stjernebilete - strekteikning     V : Namn på stjernebilete\n"
+#~ "R : Stjernebilete - grafikk          Shift+C : Grenser til stjernebilete\n"
+#~ "S : Stjerner                         D : Namn på stjerner\n"
+#~ "F : Tåke                             N : Namn på stjernetåker\n"
+#~ "T : Følgje objekt                    P : Namn på planetar\n"
+#~ "A : Atmosfære                        G : Horisont\n"
+#~ "Q : Himmelretningar                  O : Skalering av månen\n"
+#~ "4 : Ekliptisk line (eller ,)         5 : Ekvatorline (eller .)\n"
+#~ "Z : Planprojiserte ruter (azimutial) E : Sylinderprojiserte (ekvatorial)\n"
+#~ "Enter: Sylinder-/planprojisering\n"
+#~ "\n"
+
 #~ msgid "Equ of date"
 #~ msgstr "Ekvatortid"
+
+#~ msgid "Flip horizontally"
+#~ msgstr "Vend vannrett"
+
+#~ msgid "Flip vertically"
+#~ msgstr "Vend loddrett"
 
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Lysstyrke: "
-
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Hentar Hipparcos stjernekatalog:"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplikator for lysstyrke: "
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Antal meteorar per minutt"
@@ -2103,8 +2113,34 @@ msgstr ""
 #~ msgid "Parallax: "
 #~ msgstr "Parallakse: "
 
+#~ msgid "Return to Current Time"
+#~ msgstr "Tilbake til dato/tid i dag"
+
+#~ msgid "Search for object"
+#~ msgstr "Søk etter eit objekt"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Sprektaltype: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Forsterking av stjerner: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Tid & dato:\n"
+#~ "6 : Stopp klokka (pause)             7 : Stopp klokka (fart 0)\n"
+#~ "8 : Still klokka til notid           J : Reduser farten på klokka\n"
+#~ "K : Normal fart på klokka            L : Auk farten på klokka\n"
+#~ "- : Tilbake 24 timar                 = : Framover 24 timar\n"
+#~ "[ : Tilbake 7 dagar                  ] : Framover 7 dagar\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Prøv '%s --help' for meir informasjon.\n"

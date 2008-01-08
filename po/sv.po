@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-08-15 19:25+0000\n"
-"Last-Translator: Magnus <koma@lysator.liu.se>\n"
+"PO-Revision-Date: 2007-09-23 17:39+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-08-16 21:18:32+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -48,7 +49,7 @@ msgstr "AE"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
-msgstr ""
+msgstr "Aktuell tid"
 
 #: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
@@ -121,7 +122,7 @@ msgstr "Kusken"
 
 #: src/translations.h:316
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "Aurvandils tå"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
@@ -201,7 +202,7 @@ msgstr "Gravstickeln"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -250,7 +251,7 @@ msgstr ""
 #: src/translations.h:329
 #, fuzzy
 msgid "Caribou"
-msgstr "Stenbocken"
+msgstr "Renen"
 
 #: src/translations.h:94
 msgid "Carina"
@@ -298,7 +299,7 @@ msgstr ""
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr ""
+msgstr "Kinesisk"
 
 #: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
@@ -341,9 +342,8 @@ msgid "Configuration"
 msgstr "Konfiguration"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Konfigurationsfönster"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:426
 #, fuzzy
@@ -455,7 +455,6 @@ msgid "Delphinus"
 msgstr "Delfinen"
 
 #: src/stel_ui.cpp:783
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -466,13 +465,6 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
-"Dialoger & andra kontroller:\n"
-"H   : Hjälp                     I   : Om Stellarium\n"
-"M   : Textmeny                  1 (ett) : Konfiguration\n"
-"CTRL + S : Ta en skärmbild\n"
-"CTRL + R : Växla skriptinspelning\n"
-"CTRL + F : Växla objektsökning\n"
-"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
@@ -491,7 +483,6 @@ msgid "Disk Viewport"
 msgstr "Linsformad visning"
 
 #: src/stel_ui.cpp:771
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -506,18 +497,6 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Visningsalternativ:\n"
-"ENTER : Ekvatorial/altazimutal montering\n"
-"F1  : Växla helskärm om möjligt.\n"
-"C   : Stjärnbildslinjer         V   : Stjärnbildsetiketter\n"
-"R   : Stjärnbildsgrafik         E   : Konprojicerat rutnät\n"
-"Z   : Planprojicerat rutnät     N   : Nebulosamärkning\n"
-"P   : Planetetiketter           G   : Marknivå\n"
-"A   : Atmosfär                  F   : Dimma\n"
-"Q   : Kardinalpunkter           O   : Växla månskalning\n"
-"T   : Objektspårning            S   : Stjärnor\n"
-"4 , : Ekliptisk linje           5 . : Ekvatorlinje\n"
-"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
@@ -598,7 +577,7 @@ msgstr "Effekter "
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr ""
+msgstr "Egyptisk"
 
 #: src/translations.h:342
 msgid "Elk"
@@ -693,14 +672,12 @@ msgid "Flail"
 msgstr ""
 
 #: src/stel_ui.cpp:706
-#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Vänd horisontellt"
+msgstr "Vänd horisontellt [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Vänd vertikalt"
+msgstr "Vänd vertikalt [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -756,7 +733,7 @@ msgstr ""
 
 #: src/translations.h:186
 msgid "Giant"
-msgstr ""
+msgstr "Jätten"
 
 #: src/translations.h:268
 msgid "Girl"
@@ -808,7 +785,7 @@ msgstr "Herkules"
 
 #: src/translations.h:187
 msgid "Hippopotamus"
-msgstr ""
+msgstr "Flodhästen"
 
 #: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
@@ -828,7 +805,7 @@ msgstr "Pendeluret"
 
 #: src/translations.h:184
 msgid "Horus"
-msgstr ""
+msgstr "Horus"
 
 #: src/s_gui.cpp:2749
 msgid "Hour"
@@ -986,11 +963,11 @@ msgstr ""
 
 #: src/translations.h:173
 msgid "Lion"
-msgstr ""
+msgstr "Lejonet"
 
 #: src/translations.h:309
 msgid "Lizard"
-msgstr ""
+msgstr "Ödlan"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
@@ -1022,9 +999,8 @@ msgid "Location"
 msgstr "Plats"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Plats"
+msgstr "Plats: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1051,9 +1027,8 @@ msgid "Magnitude"
 msgstr "Magnitud"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Faktor för magnitud: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1065,7 +1040,7 @@ msgstr ""
 
 #: src/translations.h:320
 msgid "Man's Cart"
-msgstr ""
+msgstr "Mansvagnen"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
@@ -1257,9 +1232,8 @@ msgid "Norma"
 msgstr "Vinkelhaken"
 
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Vinkelhaken"
+msgstr ""
 
 #: src/translations.h:239
 msgid "North River"
@@ -1367,9 +1341,8 @@ msgid "Planet Trails"
 msgstr "Planetspår"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planeter"
+msgstr "Planet: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1470,7 +1443,7 @@ msgstr "Rombiska nätet"
 #: src/stel_ui.cpp:720
 #, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Återgå till nuvarande tid"
+msgstr "Återvänd till aktuell tid [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1590,9 +1563,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Sök efter (t.ex. Saturnus, Jupiter, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Sök efter objekt"
+msgstr "Sök efter objekt [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1660,7 +1632,7 @@ msgstr "Sextanten"
 
 #: src/translations.h:197
 msgid "Sheep"
-msgstr ""
+msgstr "Fåret"
 
 #: src/translations.h:185
 msgid "Sheepfold"
@@ -1672,7 +1644,7 @@ msgstr "Visa: "
 
 #: src/stel_ui_tuiconf.cpp:463
 msgid "Shut Down: "
-msgstr ""
+msgstr "Stäng av: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
@@ -1743,9 +1715,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Stjärnblink. Intensitet :"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Faktor för stjärnans magnitud: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1789,11 +1760,11 @@ msgstr "Tethys"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "Asastriden"
 
 #: src/translations.h:318
 msgid "The Fishermen"
-msgstr ""
+msgstr "Friggs spinnrock"
 
 #: src/translations.h:297
 msgid "The Seven"
@@ -1820,7 +1791,6 @@ msgid "Thunderbolt"
 msgstr ""
 
 #: src/stel_ui.cpp:791
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1831,13 +1801,6 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
-"Tid & Datum:\n"
-"6   : Paus för tidshastighet    7   : Tidshastighet 0\n"
-"8   : Ställ in nuvarande tid    J   : Minska tidshastighet\n"
-"K   : Normal tidshastighet      L   : Öka tidshastighet\n"
-"-   : Bakåt 24 timmar           =   : Framåt 24 timmar\n"
-"[   : Bakåt 7 dagar             ]   : Framåt 7 dagar\n"
-"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
@@ -1861,7 +1824,7 @@ msgstr ""
 
 #: src/translations.h:178
 msgid "Triangle"
-msgstr ""
+msgstr "Triangeln"
 
 #: src/translations.h:164
 msgid "Triangulum"
@@ -1901,7 +1864,7 @@ msgstr ""
 
 #: src/translations.h:324
 msgid "Two Sunbeams"
-msgstr ""
+msgstr "Två solstrålar"
 
 #: src/translations.h:330
 msgid "Two in Front"
@@ -1912,9 +1875,8 @@ msgid "Type: "
 msgstr "Typ: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Skript "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -1999,8 +1961,9 @@ msgid "Well"
 msgstr ""
 
 #: src/translations.h:77
+#, fuzzy
 msgid "Western"
-msgstr ""
+msgstr "Västeuropeisk"
 
 #: src/translations.h:281
 msgid "Western Door"
@@ -2020,7 +1983,7 @@ msgstr ""
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "Vargens gap"
 
 #: src/translations.h:280
 msgid "Woman's Bed"
@@ -2028,7 +1991,7 @@ msgstr ""
 
 #: src/translations.h:319
 msgid "Woman's Cart"
-msgstr ""
+msgstr "Kvinnovagnen"
 
 #: src/translations.h:286
 msgid "Xuanyuan"
@@ -2071,12 +2034,58 @@ msgstr ""
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q  : Avsluta\n"
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitud: "
+#~ msgid "Configuration window"
+#~ msgstr "Konfigurationsfönster"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialoger & andra kontroller:\n"
+#~ "H   : Hjälp                     I   : Om Stellarium\n"
+#~ "M   : Textmeny                  1 (ett) : Konfiguration\n"
+#~ "CTRL + S : Ta en skärmbild\n"
+#~ "CTRL + R : Växla skriptinspelning\n"
+#~ "CTRL + F : Växla objektsökning\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen if possible.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Visningsalternativ:\n"
+#~ "ENTER : Ekvatorial/altazimutal montering\n"
+#~ "F1  : Växla helskärm om möjligt.\n"
+#~ "C   : Stjärnbildslinjer         V   : Stjärnbildsetiketter\n"
+#~ "R   : Stjärnbildsgrafik         E   : Konprojicerat rutnät\n"
+#~ "Z   : Planprojicerat rutnät     N   : Nebulosamärkning\n"
+#~ "P   : Planetetiketter           G   : Marknivå\n"
+#~ "A   : Atmosfär                  F   : Dimma\n"
+#~ "Q   : Kardinalpunkter           O   : Växla månskalning\n"
+#~ "T   : Objektspårning            S   : Stjärnor\n"
+#~ "4 , : Ekliptisk linje           5 . : Ekvatorlinje\n"
+#~ "\n"
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Läser in Hipparcos-katalog:"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Faktor för magnitud: "
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Meteorintensitet per minut"
@@ -2088,8 +2097,37 @@ msgstr ""
 #~ "Diverse:\n"
 #~ "9   : Växla intensitet för meteorregn\n"
 
+#~ msgid "Parallax: "
+#~ msgstr "Parallax: "
+
+#~ msgid "Return to Current Time"
+#~ msgstr "Återgå till nuvarande tid"
+
+#~ msgid "Search for object"
+#~ msgstr "Sök efter objekt"
+
 #~ msgid "Spectral Type: "
 #~ msgstr "Spektralklass: "
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Faktor för stjärnans magnitud: "
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "-   : Back 24 hours             =   : Forward 24 hours\n"
+#~ "[   : Back 7 days               ]   : Forward 7 days\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Tid & Datum:\n"
+#~ "6   : Paus för tidshastighet    7   : Tidshastighet 0\n"
+#~ "8   : Ställ in nuvarande tid    J   : Minska tidshastighet\n"
+#~ "K   : Normal tidshastighet      L   : Öka tidshastighet\n"
+#~ "-   : Bakåt 24 timmar           =   : Framåt 24 timmar\n"
+#~ "[   : Bakåt 7 dagar             ]   : Framåt 7 dagar\n"
+#~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Prova \"%s --help\" för mer information.\n"

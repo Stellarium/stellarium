@@ -1,4 +1,4 @@
-# Japanese translation for stellarium
+# Hebrew translation for stellarium
 # Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-11-09 13:50+0000\n"
-"Last-Translator: sigma <example@example.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2007-08-28 08:42+0000\n"
+"Last-Translator: roil13 <roil@pookmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,452 +23,433 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   新しいバージョンを調べるか、バグレポートやコメントを\n"
-"    右記に送ってください。: http://www.stellarium.org\n"
+"   אנא בדוק האם קיימת גירסה עדכנית יותר ושלח דו\"ח שגיאות\n"
+"    והערות באתר: http://www.stellarium.org\n"
 "\n"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
-msgstr ": 獅子座流星群の多いときぐらい"
+msgstr "קצב יוצא דופן:"
 
 #: src/stel_ui_conf.cpp:1111
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": 最も多いときぐらい (1966年の獅子座流星群)"
+msgstr "הקצב הגבוה ביותר שנצפה (ליאונידים ב-1966)"
 
 #: src/stel_ui_conf.cpp:1090
 msgid ": Normal rate"
-msgstr ": 一般的な数"
+msgstr "קצב נורמלי:"
 
 #: src/stel_ui_conf.cpp:1097
 msgid ": Standard Perseids rate"
-msgstr ": ペルセウス座流星群ぐらい"
+msgstr "קצב פרסאידים נורמלי:"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "AU"
-msgstr "天文単位"
+msgstr "י\"א"
 
 #: src/stel_ui_tuiconf.cpp:402
 msgid "Actual Time"
-msgstr "現在の時刻"
+msgstr "זמן עכשווי"
 
 #: src/stel_ui_tuiconf.cpp:384
 msgid "Administration "
-msgstr "管理 "
+msgstr "אדמיניסטרציה "
 
 #: src/stel_ui_conf.cpp:149
 msgid "Also display Nebulas without textures"
-msgstr "テクスチャーなしで、星雲を表示"
+msgstr "בנוסף הצג ערפיליות ללא טקסטורה"
 
 #: src/stel_ui_tuiconf.cpp:389
 msgid "Altitude (m): "
-msgstr "標高(m): "
+msgstr "גובה במטרים: "
 
 #: src/stel_ui_conf.cpp:344
 msgid "Altitude : "
-msgstr "標高 : "
+msgstr "גובה: "
 
 #: src/translations.h:81
 msgid "Andromeda"
-msgstr "アンドロメダ"
+msgstr "אנדרומדה"
 
 #: src/translations.h:341
-#, fuzzy
 msgid "Animal"
-msgstr "ポンプ"
+msgstr "בעל חיים"
 
 #: src/translations.h:133
 msgid "Antlia"
-msgstr "ポンプ"
+msgstr "משאבת-מים"
 
 #: src/translations.h:137
 msgid "Apus"
-msgstr "ふうちょう"
+msgstr "ציפור גן עדן"
 
 #: src/translations.h:166
 msgid "Aquarius"
-msgstr "みずがめ"
+msgstr "דלי"
 
 #: src/translations.h:80
 msgid "Aquila"
-msgstr "わし"
+msgstr "נשר"
 
 #: src/translations.h:83
 msgid "Ara"
-msgstr "さいだん"
+msgstr "מזבח"
 
 #: src/translations.h:86
 msgid "Aries"
-msgstr "おひつじ"
+msgstr "טלה"
 
 #: src/stel_ui_tuiconf.cpp:637
 msgid "Arrow down to load list."
-msgstr "↓キーで一覧を表示します。"
+msgstr "לחץ על חץ למטה כדי לטעון רשימה."
 
 #: src/translations.h:246
-#, fuzzy
 msgid "Arsenal"
-msgstr "庫樓(ころう：青龍)"
+msgstr "מחסן נשק"
 
 #: src/stel_ui_conf.cpp:220
 msgid "Atmosphere"
-msgstr "大気"
+msgstr "אטמוספירה"
 
 #: src/stel_ui.cpp:681
 msgid "Atmosphere [A]"
-msgstr "大気"
+msgstr "אטמוספירה [A]"
 
 #: src/translations.h:100
 msgid "Auriga"
-msgstr "ぎょしゃ"
+msgstr "עגלון"
 
 #: src/translations.h:316
 msgid "Aurvandil's Toe"
-msgstr ""
+msgstr "הבוהן של אורבנדיל"
 
 #: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
 msgid "Author: "
-msgstr "作者: "
+msgstr "מחבר: "
 
 #: src/Nebula.cpp:105 src/Planet.cpp:124
 msgid "Az/Alt: "
-msgstr "方位/高度: "
+msgstr "נטיה/גובה: "
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
 msgid "Azimuthal Grid"
-msgstr "地平座標"
+msgstr "רשת אזימוטלית"
 
 #: src/stel_ui.cpp:673
 msgid "Azimuthal Grid [Z]"
-msgstr "高度・方位 [Z]"
+msgstr "רשת אזימוטלית [Z]"
 
 #: src/translations.h:294
-#, fuzzy
 msgid "Bailer"
-msgstr "Bailer(ひしゃく)"
+msgstr "דלי"
 
 #: src/translations.h:291
-#, fuzzy
 msgid "Banner of Three Stars"
-msgstr "参旗(しんき：白虎)"
+msgstr "דגל שלושת הכוכבים"
 
 #: src/translations.h:348
 msgid "Bear's Lodge"
-msgstr ""
+msgstr "מעון הדוב"
 
 #: src/translations.h:176
-#, fuzzy
 msgid "Bird"
-msgstr "Bird(鳥)"
+msgstr "ציפור"
 
 #: src/translations.h:333
 msgid "Blubber Container"
-msgstr ""
+msgstr "נאד שומן"
 
 #: src/translations.h:180 src/translations.h:251
-#, fuzzy
 msgid "Boat"
-msgstr "天船(てんせん：白虎)/Boat(水運搬船)"
+msgstr "אנייה"
 
 #: src/translations.h:279
-#, fuzzy
 msgid "Bond"
-msgstr "婁(ろう：白虎)"
+msgstr "קשר"
 
 #: src/translations.h:89
 msgid "Bootes"
-msgstr "うしかい"
+msgstr "רועה הדובים"
 
 #: src/translations.h:255
-#, fuzzy
 msgid "Bow and Arrow"
-msgstr "弧矢(こし：朱雀)"
+msgstr "חץ וקשת"
 
 #: src/translations.h:331
 msgid "Breastbone"
-msgstr ""
+msgstr "עצם החזה"
 
 #: src/translations.h:171
-#, fuzzy
 msgid "Bull's Foreleg"
-msgstr "Bull's Foreleg(おうしの前足)"
+msgstr "רגל קדמית של שור"
 
 #: src/stel_ui_tuiconf.cpp:457
 msgid "CD/DVD Script: "
-msgstr "CD/DVD スクリプト : "
+msgstr "סקריפט CD/DVD : "
 
 #: src/stel_ui.cpp:811
 msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : 終了\n"
+msgstr "CMD + Q : יציאה\n"
 
 #: src/stel_ui.cpp:809
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : 終了\n"
+msgstr "CTRL + Q : יציאה\n"
 
 #: src/translations.h:90
 msgid "Caelum"
-msgstr "ちょうこくぐ"
+msgstr "מפסלת"
 
 #: src/stel_ui_tuiconf.cpp:398
 msgid "Calendar"
-msgstr ""
+msgstr "לוח שנה"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr "カリスト"
+msgstr "קליסטו"
 
 #: src/translations.h:117
 msgid "Camelopardalis"
-msgstr "きりん"
+msgstr "ג'ירף נמרי"
 
 #: src/s_gui.cpp:2226 src/s_gui.cpp:2272
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr "ביטול"
 
 #: src/translations.h:92
 msgid "Cancer"
-msgstr "かに"
+msgstr "סרטן"
 
 #: src/translations.h:99
 msgid "Canes Venatici"
-msgstr "りょうけん"
+msgstr "כלבי ציד"
 
 #: src/translations.h:118
 msgid "Canis Major"
-msgstr "おおいぬ"
+msgstr "כלב גדול"
 
 #: src/translations.h:145
 msgid "Canis Minor"
-msgstr "こいぬ"
+msgstr "כלב קטן"
 
 #: src/translations.h:93
 msgid "Capricornus"
-msgstr "やぎ"
+msgstr "גדי"
 
 #: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
 msgid "Cardinal Points"
-msgstr "方位"
+msgstr "נקודות ראשיות"
 
 #: src/stel_ui.cpp:679
 msgid "Cardinal Points [Q]"
-msgstr "方位 [Q]"
+msgstr "נקודות ראשיות [Q]"
 
 #: src/translations.h:302
-#, fuzzy
 msgid "Cared for by Moon"
-msgstr "Cared for by Moon(月の導き)"
+msgstr "מושגח על ידי הירח"
 
 #: src/translations.h:329
-#, fuzzy
 msgid "Caribou"
-msgstr "軫(しん：朱雀)"
+msgstr "ראם"
 
 #: src/translations.h:94
 msgid "Carina"
-msgstr "りゅうこつ"
+msgstr "שדרית"
 
 #: src/translations.h:95
 msgid "Cassiopeia"
-msgstr "カシオペヤ"
+msgstr "קסיופאה"
 
 #: src/translations.h:295
-#, fuzzy
 msgid "Cat's Cradle"
-msgstr "Cat's Cradle(あやとり)"
+msgstr "עריסת החתול"
 
 #: src/translations.h:96
 msgid "Centaurus"
-msgstr "ケンタウルス"
+msgstr "קנטאור"
 
 #: src/translations.h:97
 msgid "Cepheus"
-msgstr "ケフェウス"
+msgstr "קפיאוס"
 
 #: src/translations.h:85
 msgid "Cetus"
-msgstr "くじら"
+msgstr "לויתן"
 
 #: src/translations.h:91
 msgid "Chamaeleon"
-msgstr "カメレオン"
+msgstr "זיקית"
 
 #: src/translations.h:205
-#, fuzzy
 msgid "Chariot"
-msgstr "軫(しん：朱雀)"
+msgstr "מרכבה"
 
 #: src/translations.h:260
-#, fuzzy
 msgid "Chariot Yard"
-msgstr "車府(しゃふ：玄武)"
+msgstr "מגרש מרכבות"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr "カロン"
+msgstr "כארון"
 
 #: src/translations.h:195
 msgid "Chematy"
-msgstr ""
+msgstr "צ'מאטי"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr "中国"
+msgstr "סיני"
 
 #: src/stel_ui_conf.cpp:451
 msgid "Choose landscapes:"
-msgstr "背景の選択:"
+msgstr "בחר נוף:"
 
 #: src/translations.h:102
 msgid "Circinus"
-msgstr "コンパス"
+msgstr "מחוגה"
 
 #: src/translations.h:243
-#, fuzzy
 msgid "Circular Granary"
-msgstr "天囷(てんきん：白虎)"
+msgstr "אסם עגול"
 
 #: src/translations.h:203
-#, fuzzy
 msgid "Coiled Thong"
-msgstr "貫索(かんさく：天市垣)"
+msgstr "רצועה מסולסלת"
 
 #: src/translations.h:327
-#, fuzzy
 msgid "Collarbones"
-msgstr "星座線"
+msgstr "עצמות הבריח"
 
 #: src/stel_ui_tuiconf.cpp:381
 msgid "Colors "
-msgstr "色 "
+msgstr "צבעים "
 
 #: src/translations.h:101
 msgid "Columba"
-msgstr "はと"
+msgstr "יונה"
 
 #: src/translations.h:98
 msgid "Coma Berenices"
-msgstr "かみのけ"
+msgstr "שערות ורוניקה"
 
 #: src/stel_ui.cpp:1032
 msgid "Command recording stopped."
-msgstr "コマンド記録停止"
+msgstr "הקלטת פקודות הופסקה"
 
 #: src/stel_ui_conf.cpp:57
 msgid "Configuration"
-msgstr "環境設定"
+msgstr "קונפיגורציה"
 
 #: src/stel_ui.cpp:689
 msgid "Configuration window [1]"
-msgstr "設定[1]"
+msgstr "חלון תצורה"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
-msgstr "星座絵の明るさ"
+msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
 
 #: src/stel_ui_tuiconf.cpp:427
 msgid "Constellation Boundaries"
-msgstr "星座の境界線"
+msgstr "גבולות קבוצות כוכבים"
 
 #: src/stel_ui_tuiconf.cpp:424
 msgid "Constellation Lines"
-msgstr "星座線"
+msgstr "קווי קבוצות כוכבים"
 
 #: src/stel_ui_tuiconf.cpp:425
 msgid "Constellation Names"
-msgstr "星座名"
+msgstr "שמות קבוצות כוכבים"
 
 #: src/stel_ui.cpp:671
 msgid "Constellations Art [R]"
-msgstr "星座絵 [R]"
+msgstr "ציורי קבוצות כוכבים [R]"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Constellations Boundaries"
-msgstr "星座の境界線"
+msgstr "גבולות קבוצות הכוכבים"
 
 #: src/stel_ui_conf.cpp:110
 msgid "Constellations Lines"
-msgstr "星座線"
+msgstr "קווי קבוצות הכוכבים"
 
 #: src/stel_ui_conf.cpp:115
 msgid "Constellations Names"
-msgstr "星座名"
+msgstr "שמות קבוצות הכוכבים"
 
 #: src/translations.h:104
 msgid "Corona Australis"
-msgstr "みなみのかんむり"
+msgstr "כתר דרומי"
 
 #: src/translations.h:105
 msgid "Corona Borealis"
-msgstr "かんむり"
+msgstr "כתר צפוני"
 
 #: src/translations.h:106
 msgid "Corvus"
-msgstr "からす"
+msgstr "עורב"
 
 #: src/translations.h:103
 msgid "Crater"
-msgstr "コップ"
+msgstr "גביע"
 
 #: src/translations.h:181
-#, fuzzy
 msgid "Crocodile"
-msgstr "Crocodile(ワニ)"
+msgstr "קרוקודיל"
 
 #: src/translations.h:107
 msgid "Crux"
-msgstr "みなみじゅうじ"
+msgstr "הצלב הדרומי"
 
 #: src/stel_ui_conf.cpp:267
 msgid "Current Time :"
-msgstr "現在時刻 :"
+msgstr "זמן נוכחי:"
 
 #: src/stel_ui_conf.cpp:1142
 msgid "Current Time Speed is x"
-msgstr "現在の時間の早さはx"
+msgstr "מהירות זמן נוכחית היא X"
 
 #: src/stel_ui_conf.cpp:318
 msgid "Cursor : "
-msgstr "カーソル : "
+msgstr "סמן: "
 
 #: src/stel_ui_tuiconf.cpp:450
 msgid "Cursor Timeout: "
-msgstr "カーソル表示時間 : "
+msgstr "גבול זמן לסמן: "
 
 #: src/translations.h:202
-#, fuzzy
 msgid "Curved Array"
-msgstr "勾陳(こうちん：紫微垣)"
+msgstr "מערך מעוקל"
 
 #: src/translations.h:108
 msgid "Cygnus"
-msgstr "はくちょう"
+msgstr "ברבור"
 
 #: src/stel_ui_conf.cpp:558
 msgid "Date & Time"
-msgstr "日付と時刻"
+msgstr "תאריך ושעה"
 
 #: src/stel_ui_tuiconf.cpp:405
 msgid "Date Display Format: "
-msgstr "日付表示形式 : "
+msgstr "פורמט תאריך: "
 
 #: src/s_gui.cpp:2746
 msgid "Day"
-msgstr "日"
+msgstr "יום"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Day keys: "
-msgstr ""
+msgstr "מקשי יום: "
 
 #: src/stel_ui.cpp:714
 msgid "Decrease Time Speed [J]"
-msgstr "時間を減速 [J]"
+msgstr "האט מהירות הזמן [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
-msgstr "ダイモス"
+msgstr "דימוס"
 
 #: src/translations.h:109
 msgid "Delphinus"
-msgstr "いるか"
+msgstr "דולפין"
 
 #: src/stel_ui.cpp:783
 msgid ""
@@ -481,23 +462,30 @@ msgid ""
 "CTRL + G : Goto selected solar system object\n"
 "\n"
 msgstr ""
+"דיאלוגים ובקרים אחרים:\n"
+"H: עזרה  I: אודות סטלריום\n"
+"M: תפריט טקסט  1 (אחת):  הגדרות\n"
+"CTRL + S : שמירת תמונת מסך\n"
+"CTRL + R : התחל הקלטת סקריפט\n"
+"CTRL + F : הפעל מאתר עצמים\n"
+"CTRL + G : לך לעצם נבחר במערכת השמש\n"
+"\n"
 
 #: src/translations.h:310
 msgid "Dilyehe"
-msgstr ""
+msgstr "דילייה"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr "ディオーネ"
+msgstr "דיון"
 
 #: src/translations.h:208 src/translations.h:339
-#, fuzzy
 msgid "Dipper"
-msgstr "斗(と：玄武)"
+msgstr "מצקת"
 
 #: src/stel_ui_conf.cpp:395
 msgid "Disk Viewport"
-msgstr "表示領域を円形のみに"
+msgstr "אשנב דיסק"
 
 #: src/stel_ui.cpp:771
 msgid ""
@@ -514,52 +502,58 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"אפשרויות תצוגה:\n"
+"ENTER: חצובה משוונית/אזימוטלית\n"
+"F1: מעבר בין תצוגת מסך מלא לתצוגת חלון.\n"
+"C: קווי קבוצות כוכבים  V: שמות קבוצות הכוכבים\n"
+"R: ציורי קבוצות כוכבים  E: רשת משוונית\n"
+"Z:רשת אזימוטלית  N: שמות ערפיליות\n"
+"P: שמות כוכבי הלכת  G: אדמה\n"
+"A: אטמוספירה  F: ערפל\n"
+"Q: נקודות מרכזיות  O: צור סקאלת ירח\n"
+"T: מעקב אחרי העצם  S: כוכבים\n"
+"4,: קו המילקה  5.: קו המשווה\n"
+"\n"
 
 #: src/Planet.cpp:127 src/Planet.cpp:166
 msgid "Distance: "
-msgstr "距離: "
+msgstr "מרחק: "
 
 #: src/translations.h:253
-#, fuzzy
 msgid "Dog"
-msgstr "天狗(てんこう：朱雀)"
+msgstr "כלב"
 
 #: src/translations.h:326
-#, fuzzy
 msgid "Dogs"
-msgstr "天狗(てんこう：朱雀)"
+msgstr "כלבים"
 
 #: src/translations.h:303
-#, fuzzy
 msgid "Dolphin"
-msgstr "Dolphin(いるか)"
+msgstr "דולפין"
 
 #: src/translations.h:110
 msgid "Dorado"
-msgstr "かじき"
+msgstr "דג זהב"
 
 #: src/translations.h:111
 msgid "Draco"
-msgstr "りゅう"
+msgstr "דרקון"
 
 #: src/stel_ui.cpp:667
 msgid "Drawing of the Constellations [C]"
-msgstr "星座線 [C]"
+msgstr "קווים של קבוצות הכוכבים [C]"
 
 #: src/translations.h:344
-#, fuzzy
 msgid "Dried Willow"
-msgstr "柳(りゅう：朱雀)"
+msgstr "ערבה יבשה"
 
 #: src/translations.h:209
-#, fuzzy
 msgid "Drum"
-msgstr "河鼓(かこ：玄武)"
+msgstr "תוף"
 
 #: src/translations.h:278
-#, fuzzy
 msgid "Drumstick"
-msgstr "天桴(てんぷ：玄武)"
+msgstr "מקל תיפוף"
 
 #: src/stel_ui.cpp:799
 msgid ""
@@ -568,608 +562,566 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"スクリプト再生中\n"
-"CTRL + C : スクリプト終了\n"
-"6 : スクリプト停止    K : スクリプト再開\n"
+"במהלך הרצת סקריפט\n"
+"CTRL + C : עצור סקריפט\n"
+"6 : השהה סקריפט K : המשך הרצת סקריפט\n"
 "\n"
 
 #: src/translations.h:65 src/s_gui.cpp:2690
 msgid "E"
-msgstr "東"
+msgstr "מז'"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "地球"
+msgstr "ארץ"
 
 #: src/translations.h:254
-#, fuzzy
 msgid "Earth God's Temple"
-msgstr "天社(てんしゃ：朱雀)"
+msgstr "מקדש אל האדמה"
 
 #: src/translations.h:282
-#, fuzzy
 msgid "Eastern Door"
-msgstr "東咸(とうかん：青龍)"
+msgstr "דלת מזרחית"
 
 #: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
 msgid "Ecliptic Line"
-msgstr "黄道線"
+msgstr "קו מלקה"
 
 #: src/stel_ui_tuiconf.cpp:382
 msgid "Effects "
-msgstr "効果 "
+msgstr "אפקטים "
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr "エジプト"
+msgstr "מצרי"
 
 #: src/translations.h:342
 msgid "Elk"
-msgstr ""
+msgstr "דישון"
 
 #: src/translations.h:266
-#, fuzzy
 msgid "Emptiness"
-msgstr "虚(きょ：玄武)"
+msgstr "ריקנות"
 
 #: src/translations.h:263
-#, fuzzy
 msgid "Encampment"
-msgstr "室(しつ：玄武)"
+msgstr "מחנה"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr "エンケラドス"
+msgstr "אנקלדוס"
 
 #: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
-msgstr "観測所の名前を入力"
+msgstr "הכנס שם מצפה"
 
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
-msgstr "赤道線"
+msgstr "קו המשווה"
 
 #: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
 msgid "Equatorial Grid"
-msgstr "赤道座標"
+msgstr "רשת משוונית"
 
 #: src/stel_ui.cpp:675
 msgid "Equatorial Grid [E]"
-msgstr "赤経・赤緯 [E]"
+msgstr "רשת מישוונית [E]"
 
 #: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "赤道儀/経緯台 [ENTER]"
+msgstr "חצובה משוונית/אזימוטלית [ENTER]"
 
 #: src/translations.h:144
 msgid "Equuleus"
-msgstr "こうま"
+msgstr "סוסון"
 
 #: src/translations.h:113
 msgid "Eridanus"
-msgstr "エリダヌス"
+msgstr "ארידנוס (נהר)"
 
 #: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
-msgstr "エラー: スクリプトファイルを開けません"
+msgstr "שגיאה: לא ניתן לפתוח את קובץ הסקריפט כדי להקליט פקודות."
 
 #: src/translations.h:273
-#, fuzzy
 msgid "Establishment"
-msgstr "建(けん：玄武)"
+msgstr "מוסד"
 
 #: src/translations.h:43
 msgid "Europa"
-msgstr "エウロパ"
+msgstr "אירופה"
 
 #: src/translations.h:245
-#, fuzzy
 msgid "Extended Net"
-msgstr "張(ちょう：朱雀)"
+msgstr "רשת ארוכה"
 
 #: src/translations.h:283
-#, fuzzy
 msgid "Farmland"
-msgstr "天田(てんでん：青龍)"
+msgstr "אדמה חקלאית"
 
 #: src/translations.h:179
-#, fuzzy
 msgid "Ferry Boat"
-msgstr "Ferry Boat(渡し船)"
+msgstr "מעבורת"
 
 #: src/translations.h:338
 msgid "Fireplace"
-msgstr ""
+msgstr "אח"
 
 #: src/translations.h:311
 msgid "First Big One"
-msgstr ""
+msgstr "הגדול הראשון"
 
 #: src/translations.h:313
 msgid "First Slim One"
-msgstr ""
+msgstr "הצנום הראשון"
 
 #: src/translations.h:228
-#, fuzzy
 msgid "Five Chariots"
-msgstr "五車(ごしゃ：白虎)"
+msgstr "חמש מרכבות"
 
 #: src/translations.h:240
-#, fuzzy
 msgid "Five Feudal Kings"
-msgstr "五諸侯(ごしょこう：朱雀)"
+msgstr "חמישה מלכים פאודלים"
 
 #: src/translations.h:274
-#, fuzzy
 msgid "Flail"
-msgstr "天棓(てんぽう：紫微垣)"
+msgstr "מחבט"
 
 #: src/stel_ui.cpp:706
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr ""
+msgstr "הפוך אופקית [Ctrl + Shift + H]"
 
 #: src/stel_ui.cpp:708
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr ""
+msgstr "הפוך אנכית [Ctrl + Shift + V]"
 
 #: src/translations.h:188
-#, fuzzy
 msgid "Flock"
-msgstr "Flock(群集)"
+msgstr "להק"
 
 #: src/translations.h:223
-#, fuzzy
 msgid "Flying Corridor"
-msgstr "騰蛇(とうだ：玄武)"
+msgstr "מסדרון מעופף"
 
 #: src/stel_ui_conf.cpp:225
 msgid "Fog"
-msgstr "もや"
+msgstr "ערפל"
 
 #: src/stel_ui_conf.cpp:434
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "リストにない画面解像度は、次のファイルを編集してください :"
+msgstr "לרזולוצייה שלא ברשימה, ערוך את הקובץ:"
 
 #: src/translations.h:225
-#, fuzzy
 msgid "Ford"
-msgstr "天津(てんしん：玄武)"
+msgstr "אזור צליחה"
 
 #: src/translations.h:115
 msgid "Fornax"
-msgstr "ろ"
+msgstr "כבשן"
 
 #: src/translations.h:236
-#, fuzzy
 msgid "Four Channels"
-msgstr "四涜(しとく：朱雀)"
+msgstr "ארבעה ערוצים"
 
 #: src/translations.h:301
-#, fuzzy
 msgid "Frigate Bird"
-msgstr "Frigate Bird(グンカンドリ)"
+msgstr "פריגטה"
 
 #: src/stel_ui_conf.cpp:733
 msgid "GO"
-msgstr "検索"
+msgstr "לך"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr "ガニメデ"
+msgstr "גנימד"
 
 #: src/translations.h:116
 msgid "Gemini"
-msgstr "ふたご"
+msgstr "תאומים"
 
 #: src/stel_ui_tuiconf.cpp:379
 msgid "General "
-msgstr "一般 "
+msgstr "כללי "
 
 #: src/translations.h:285
-#, fuzzy
 msgid "Ghosts"
-msgstr "鬼(き：朱雀)"
+msgstr "רוחות"
 
 #: src/translations.h:186
-#, fuzzy
 msgid "Giant"
-msgstr "Giant(巨人)"
+msgstr "ענק"
 
 #: src/translations.h:268
-#, fuzzy
 msgid "Girl"
-msgstr "女(じょ：玄武)"
+msgstr "נערה"
 
 #: src/translations.h:261
-#, fuzzy
 msgid "Good Gourd"
-msgstr "瓠瓜(こか：玄武)"
+msgstr "דלעת טרייה"
 
 #: src/stel_ui.cpp:704
 msgid "Goto selected object [SPACE]"
-msgstr "選択した天体へ移動 [スペース]"
+msgstr "עקוב אחרי עצם נבחר [רווח]"
 
 #: src/translations.h:218
-#, fuzzy
 msgid "Great General"
-msgstr "天大将軍(てんだいしょうぐん：白虎)"
+msgstr "גנרל גדול"
 
 #: src/stel_ui_conf.cpp:210
 msgid "Ground"
-msgstr "地表"
+msgstr "אדמה"
 
 #: src/stel_ui.cpp:677
 msgid "Ground [G]"
-msgstr "地表 [G]"
+msgstr "אדמה [G]"
 
 #: src/translations.h:120
 msgid "Grus"
-msgstr "つる"
+msgstr "עגור"
 
 #: src/translations.h:336
 msgid "Hand"
-msgstr ""
+msgstr "יד"
 
 #: src/translations.h:270
-#, fuzzy
 msgid "Heart"
-msgstr "心(しん：青龍)"
+msgstr "לב"
 
 #: src/stel_ui.cpp:818
 msgid "Help"
-msgstr "ヘルプ"
+msgstr "עזרה"
 
 #: src/stel_ui.cpp:685
 msgid "Help [H]"
-msgstr "ヘルプ [H]"
+msgstr "עזרה [H]"
 
 #: src/translations.h:121
 msgid "Hercules"
-msgstr "ヘルクレス"
+msgstr "הרקולס"
 
 #: src/translations.h:187
-#, fuzzy
 msgid "Hippopotamus"
-msgstr "Hippopotamus(カバ)"
+msgstr "היפופוטם"
 
 #: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "停止するには CTRL-R キーをもう一度押してください\n"
+msgstr "לחץ שוב על CTRL-R על מנת לעצור.\n"
 
 #: src/translations.h:247
-#, fuzzy
 msgid "Hook"
-msgstr "天鉤(てんこう：玄武)"
+msgstr "קרס"
 
 #: src/translations.h:212
-#, fuzzy
 msgid "Horn"
-msgstr "角(かく：青龍)"
+msgstr "קרן"
 
 #: src/translations.h:122
 msgid "Horologium"
-msgstr "とけい"
+msgstr "שעון מטוטלת"
 
 #: src/translations.h:184
-#, fuzzy
 msgid "Horus"
-msgstr "Horus(ホルス神)"
+msgstr "הורוס"
 
 #: src/s_gui.cpp:2749
 msgid "Hour"
-msgstr "時"
+msgstr "שעה"
 
 #: src/translations.h:123
 msgid "Hydra"
-msgstr "うみへび"
+msgstr "נחש מים"
 
 #: src/translations.h:124
 msgid "Hydrus"
-msgstr "みずへび"
+msgstr "נחש מים קטן"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr "ヒペリオン"
+msgstr "היפריון"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr "イアペトゥス"
+msgstr "יאפטוס"
 
 #: src/translations.h:211
-#, fuzzy
 msgid "Imperial Guards"
-msgstr "騎官(きかん：青龍)"
+msgstr "שומרים אימפריילים"
 
 #: src/translations.h:214
-#, fuzzy
 msgid "Imperial Passageway"
-msgstr "輦道(れんどう：玄武)"
+msgstr "מעבר אימפריילי"
 
 #: src/stel_ui.cpp:718
 msgid "Increase Time Speed [L]"
-msgstr "時間を加速 [L]"
+msgstr "הגבר מהירות זמן [L]"
 
 #: src/translations.h:125
 msgid "Indus"
-msgstr "インディアン"
+msgstr "אינדיאני"
 
 #: src/stel_ui_conf.cpp:1024
 msgid "Info: "
-msgstr "情報: "
+msgstr "מידע: "
 
 #: src/stel_ui.cpp:748
 msgid "Information"
-msgstr "情報"
+msgstr "מידע"
 
 #: src/translations.h:71
 msgid "Inuit"
-msgstr "イヌイット"
+msgstr "אינואטים"
 
 #: src/stel_ui.cpp:588
 msgid "Invalid Script command"
-msgstr "無効なスクリプトコマンド"
+msgstr "פקודת SCRIPT לא חוקית"
 
 #: src/translations.h:42
 msgid "Io"
-msgstr "イオ"
+msgstr "איו"
 
 #: src/translations.h:249
-#, fuzzy
 msgid "Jade Well"
-msgstr "玉井(ぎょくせい：白虎)"
+msgstr "באר יבשה"
 
 #: src/translations.h:192
-#, fuzzy
 msgid "Jaw"
-msgstr "Jaw(あご)"
+msgstr "לסת"
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr "木星"
+msgstr "צדק"
 
 #: src/translations.h:194
 msgid "Kenemet"
-msgstr ""
+msgstr "קנמט"
 
 #: src/translations.h:190
 msgid "Khanuwy Fish"
-msgstr ""
+msgstr "דג קהנווי"
 
 #: src/translations.h:215
-#, fuzzy
 msgid "Kitchen"
-msgstr "天厨(てんちゅう：紫微垣)"
+msgstr "מטבח"
 
 #: src/translations.h:300
-#, fuzzy
 msgid "Kite of Kawelo"
-msgstr "Kite of Kawelo(カウェロの凧)"
+msgstr "העפיפון של קוולו"
 
 #: src/translations.h:72
 msgid "Korean"
-msgstr "韓国"
+msgstr "קוראנית"
 
 #: src/translations.h:126
 msgid "Lacerta"
-msgstr "とかげ"
+msgstr "לטאה"
 
 #: src/translations.h:73
 msgid "Lakota"
-msgstr "ラコタ"
+msgstr "לקוטה"
 
 #: src/translations.h:328
 msgid "Lamp Stand"
-msgstr ""
+msgstr "בסיס הנורה"
 
 #: src/translations.h:250
-#, fuzzy
 msgid "Lance"
-msgstr "梗河(こうが：青龍)"
+msgstr "חנית"
 
 #: src/stel_ui_tuiconf.cpp:443
 msgid "Landscape: "
-msgstr "背景 : "
+msgstr "נוף: "
 
 #: src/stel_ui_conf.cpp:560
 msgid "Landscapes"
-msgstr "背景"
+msgstr "נופים"
 
 #: src/stel_ui_conf.cpp:557
 msgid "Language"
-msgstr "言語"
+msgstr "שפה"
 
 #: src/stel_ui_conf.cpp:336
 msgid "Latitude : "
-msgstr "緯度 : "
+msgstr "קו רוחב: "
 
 #: src/stel_ui_tuiconf.cpp:387
 msgid "Latitude: "
-msgstr "緯度 : "
+msgstr "קו רוחב: "
 
 #: src/translations.h:277
-#, fuzzy
 msgid "Left Flag"
-msgstr "左旗(さき：玄武)"
+msgstr "דגל שמאלי"
 
 #: src/translations.h:220
-#, fuzzy
 msgid "Legs"
-msgstr "奎(けい：白虎)"
+msgstr "רגליים"
 
 #: src/translations.h:129
 msgid "Leo"
-msgstr "しし"
+msgstr "אריה"
 
 #: src/translations.h:146
 msgid "Leo Minor"
-msgstr "こじし"
+msgstr "אריה קטן"
 
 #: src/translations.h:128
 msgid "Lepus"
-msgstr "うさぎ"
+msgstr "ארנבת"
 
 #: src/translations.h:84
 msgid "Libra"
-msgstr "てんびん"
+msgstr "מאזניים"
 
 #: src/stel_ui_tuiconf.cpp:442
 msgid "Light Pollution Luminance: "
-msgstr "光害の明るさ: "
+msgstr "תאורת זיהום אור: "
 
 #: src/translations.h:173
-#, fuzzy
 msgid "Lion"
-msgstr "Lion(ライオン)"
+msgstr "אריה"
 
 #: src/translations.h:309
-#, fuzzy
 msgid "Lizard"
-msgstr "Bird(鳥)"
+msgstr "לטאה"
 
 #: src/stel_ui_tuiconf.cpp:461
 msgid "Load Default Configuration: "
-msgstr "標準の環境設定を再設定 : "
+msgstr "טען קונפיגורציית ברירת מחדל: "
 
 #: src/ConstellationMgr.cpp:328
 msgid "Loading Constellation Art: "
-msgstr "星座絵をロード中: "
+msgstr "טוען גרפיקת קבוצות כוכבים: "
 
 #: src/NebulaMgr.cpp:399
 msgid "Loading NGC catalog: "
-msgstr "NGC カタログをロード中: "
+msgstr "טוען קטלוג NGC: "
 
 #: src/NebulaMgr.cpp:534
 msgid "Loading Nebula Textures:"
-msgstr "星雲・星団のテクスチャをロード中"
+msgstr "טוען טקסטורת ערפילית:"
 
 #: src/StarMgr.cpp:448
 msgid "Loading catalog "
-msgstr "恒星カタログをロード中 "
+msgstr "טוען קטלוג "
 
 #: src/stel_ui_tuiconf.cpp:454
 msgid "Local Script: "
-msgstr "ローカルスクリプト : "
+msgstr "סקריפט מקומי: "
 
 #: src/stel_ui_conf.cpp:559
 msgid "Location"
-msgstr "観測場所"
+msgstr "מיקום"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
 msgid "Location: "
-msgstr ""
+msgstr "מיקום: ‏ "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
-msgstr "経度 : "
+msgstr "קו אורך: "
 
 #: src/stel_ui_tuiconf.cpp:388
 msgid "Longitude: "
-msgstr "経度 : "
+msgstr "קו אורך: "
 
 #: src/translations.h:130
 msgid "Lupus"
-msgstr "おおかみ"
+msgstr "זאב"
 
 #: src/translations.h:131
 msgid "Lynx"
-msgstr "やまねこ"
+msgstr "לינכס"
 
 #: src/translations.h:132
 msgid "Lyra"
-msgstr "こと"
+msgstr "נבל"
 
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Magnitude"
-msgstr "等級"
+msgstr "בהירות"
 
 #: src/stel_ui_tuiconf.cpp:446
 msgid "Magnitude Scaling Multiplier: "
-msgstr "等級による倍率 "
+msgstr "מכפיל סקאלת בהירות "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
-msgstr "等級: "
+msgstr "מגניטודה: "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
-msgstr ""
+msgstr "גבר עם כפות רגליים פשוקות"
 
 #: src/translations.h:320
 msgid "Man's Cart"
-msgstr ""
+msgstr "עגלת הגבר"
 
 #: src/stel_ui_tuiconf.cpp:444
 msgid "Manual zoom: "
-msgstr "手動ズーム : "
+msgstr "זום ידני: "
 
 #: src/translations.h:227
-#, fuzzy
 msgid "Market"
-msgstr "天市垣(てんいちえん：天市垣)"
+msgstr "שוק"
 
 #: src/translations.h:290
-#, fuzzy
 msgid "Market Officer"
-msgstr "天弁(てんべん：玄武)"
+msgstr "שוטר השוק"
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr "火星"
+msgstr "מאדים"
 
 #: src/translations.h:298
-#, fuzzy
 msgid "Maui's Fishhook"
-msgstr "Maui's Fishhook(マウイの釣針)"
+msgstr "קרס הדיג של מאווי"
 
 #: src/translations.h:252
-#, fuzzy
 msgid "Mausoleum"
-msgstr "大陵(たいりょう：白虎)"
+msgstr "מבנה קבורה (מוזוליאום)"
 
 #: src/stel_ui_tuiconf.cpp:419
 msgid "Maximum Magnitude to Label: "
-msgstr "名前を表示する最大等級 "
+msgstr "שמות כוכבים עד בהירות: "
 
 #: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "名前を表示する星雲・星団の最大等級 : "
+msgstr "עוצמת ערפילית מירבית לסימון: "
 
 #: src/translations.h:242
-#, fuzzy
 msgid "Meadows"
-msgstr "天苑(てんえん：白虎)"
+msgstr "אחו"
 
 #: src/translations.h:160
 msgid "Mensa"
-msgstr "テーブルさん"
+msgstr "הר השולחן"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "水星"
+msgstr "כוכב חמה"
 
 #: src/stel_ui_tuiconf.cpp:432
 msgid "Meridian Line"
-msgstr "子午線"
+msgstr "המרידיאן"
 
 #: src/stel_ui_conf.cpp:1116
 msgid "Meteor zenith hourly rate"
-msgstr "１時間あたりの流れ星の数"
+msgstr "קצב זניתי לשעה של מטאורים"
 
 #: src/translations.h:134
 msgid "Microscopium"
-msgstr "けんびきょう"
+msgstr "מיקרוסקופ"
 
 #: src/stel_ui_tuiconf.cpp:447
 msgid "Milky Way intensity: "
-msgstr "天の川の明るさ : "
+msgstr "עוצמת הארה של שביל החלב: "
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr "ミマス"
+msgstr "מימאס"
 
 #: src/s_gui.cpp:2752
 msgid "Minutes"
-msgstr "分"
+msgstr "דקות"
 
 #: src/stel_ui.cpp:803
 msgid ""
@@ -1179,37 +1131,35 @@ msgid ""
 "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
-"その他:\n"
-"9   : 流れ星の数の切り替え\n"
-"CTRL + 0,..,9 : 0,...9番の望遠鏡にコマンドを送信\n"
-"CTRL + SHIFT + H: 水平方向に画面を反転する\n"
-"CTRL + SHIFT + V: 垂直方向に画面を反転する\n"
+"שונות:\n"
+"9: הפעל קצב מטר מטאורים\n"
+"CTRL + 0..9: בצע פקודת לך אל, עבור טלסקופ 0,...,9\n"
+"CTRL + SHIFT + H: הפעל היפוך תמונה אופקי\n"
+"CTRL + SHIFT + V: הפעל היפוך תמונה אנכי\n"
 
 #: src/translations.h:127
 msgid "Monoceros"
-msgstr "いっかくじゅう"
+msgstr "חד קרן"
 
 #: src/s_gui.cpp:2743
 msgid "Month"
-msgstr "月"
+msgstr "חודש"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "月"
+msgstr "ירח"
 
 #: src/stel_ui_conf.cpp:165
 msgid "Moon Scale"
-msgstr "月の拡大図"
+msgstr "סקלת ירח"
 
 #: src/translations.h:193
-#, fuzzy
 msgid "Mooring Post"
-msgstr "Mooring Post(係船柱)"
+msgstr "מעגן"
 
 #: src/translations.h:257
-#, fuzzy
 msgid "Mortar"
-msgstr "臼(きゅう：玄武)"
+msgstr "מרגמה"
 
 #: src/stel_ui.cpp:760
 msgid ""
@@ -1225,678 +1175,635 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
-"移動と選択:\n"
-"矢印キー : 観察方向 RA/DE\n"
-"Page Up/Down : ズーム\n"
-"CTRL+Up/Down : ズーム\n"
-"左 Click : 天体選択\n"
-"右 Click : 選択解除\n"
-"CTRL+左 Click : 選択解除\n"
-"\\ : ズームアウト (惑星 + 衛星)\n"
-"/ : 選択した天体にズーム\n"
-"スペース : 選択した天体を中央に\n"
+"תנועה ובחירה:\n"
+"חיצי כיוון: שינוי עלי\"ש ונטיה\n"
+"Page Up/Down: התמקדות (זום)\n"
+"CTRL+מעלה/מטה: התמקדום (זום)\n"
+"לחיץ שמאלי: בחר עצם\n"
+"לחיץ ימני: בטל בחירת עצם\n"
+"CTRL+לחיץ שמאלי: בטל בחירה\n"
+"\\: התרחקות (מכוכבי לכת וירחיו אם ניתן)\n"
+"/: התמקדות על אוביקט נבחר\n"
+"רווח: מרכז אוביקט נבחר\n"
 "\n"
 
 #: src/translations.h:135
 msgid "Musca"
-msgstr "はえ"
+msgstr "זבוב"
 
 #: src/translations.h:63 src/s_gui.cpp:2685
 msgid "N"
-msgstr "北"
+msgstr "צ'"
 
 #: src/stel_ui.cpp:669
 msgid "Names of the Constellations [V]"
-msgstr "星座名 [V]"
+msgstr "שמות קבוצות הכוכבים [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
-msgstr "ナバホ"
+msgstr "נבאחו"
 
 #: src/translations.h:299
-#, fuzzy
 msgid "Navigator's Triangle"
-msgstr "Navigator's Triangle(三角形の先導者)"
+msgstr "משולש נווטים"
 
 #: src/stel_ui_tuiconf.cpp:438
 msgid "Nebula Circles"
-msgstr "星雲の円"
+msgstr "מעגלי ערפיליות"
 
 #: src/stel_ui_tuiconf.cpp:437
 msgid "Nebula Names"
-msgstr "星雲の名前"
+msgstr "שמות ערפיליות"
 
 #: src/stel_ui_conf.cpp:136
 msgid "Nebulas Names. Up to mag :"
-msgstr "この等級より明るい星雲名を表示 :"
+msgstr "שמות ערפיליות. עד למגניטודה:"
 
 #: src/stel_ui.cpp:683
 msgid "Nebulas [N]"
-msgstr "星雲名 [N]"
+msgstr "ערפיליות [N]"
 
 #: src/translations.h:288
-#, fuzzy
 msgid "Neck"
-msgstr "亢(こう：青龍)"
+msgstr "צוואר"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr "海王星"
+msgstr "נפטון"
 
 #: src/translations.h:191 src/translations.h:230
-#, fuzzy
 msgid "Net"
-msgstr "畢(ひつ：白虎)/Net(網)"
+msgstr "רשת"
 
 #: src/stel_ui.cpp:692
 msgid "Night (red) mode"
-msgstr "夜間モード（赤）"
+msgstr "מצב לילה (אדום)"
 
 #: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
 #: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
 msgid "No"
-msgstr "いいえ"
+msgstr "לא"
 
 #: src/translations.h:112
 msgid "Norma"
-msgstr "じょうぎ"
+msgstr "סרגל"
 
 #: src/translations.h:75
 msgid "Norse"
-msgstr "北欧"
+msgstr "נורדים"
 
 #: src/translations.h:239
-#, fuzzy
 msgid "North River"
-msgstr "北河(ほくか：朱雀)"
+msgstr "נהר צפוני"
 
 #: src/translations.h:201
-#, fuzzy
 msgid "Northern Dipper"
-msgstr "北斗(ほくと：紫微垣)"
+msgstr "הטובל הצפוני"
 
 #: src/s_gui.cpp:2244 src/s_gui.cpp:2270
 msgid "OK"
-msgstr "了解"
+msgstr "אישור"
 
 #: src/stel_ui_conf.cpp:708
 msgid "Object Search"
-msgstr "天体検索"
+msgstr "חיפוש גרם שמיים"
 
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Object Sizing Rule: "
-msgstr "天体の大きさ設定 : "
+msgstr "כלל להגדלת עצם: "
 
 #: src/translations.h:136
 msgid "Octans"
-msgstr "はちぶんぎ"
+msgstr "אוקטנט"
 
 #: src/translations.h:138
 msgid "Ophiuchus"
-msgstr "へびつかい"
+msgstr "נושא הנחש"
 
 #: src/translations.h:241
-#, fuzzy
 msgid "Orchard"
-msgstr "天園(てんえん：白虎)"
+msgstr "בוסתן"
 
 #: src/translations.h:139
 msgid "Orion"
-msgstr "オリオン"
+msgstr "אוריון"
 
 #: src/translations.h:224
-#, fuzzy
 msgid "Outer Fence"
-msgstr "外屏(がいへい：白虎)"
+msgstr "גדר חיצונית"
 
 #: src/translations.h:269
-#, fuzzy
 msgid "Ox"
-msgstr "牛(ぎゅう：玄武)"
+msgstr "שור"
 
 #: src/translations.h:189
-#, fuzzy
 msgid "Pair of Stars"
-msgstr "Pair of Stars(双子星)"
+msgstr "צמד כוכבים"
 
 #: src/translations.h:265
-#, fuzzy
 msgid "Palace Gate"
-msgstr "闕丘(けっきゅう：朱雀)"
+msgstr "שער ארמון"
 
 #: src/translations.h:140
 msgid "Pavo"
-msgstr "くじゃく"
+msgstr "טווס"
 
 #: src/translations.h:141
 msgid "Pegasus"
-msgstr "ペガスス"
+msgstr "פגסוס"
 
 #: src/translations.h:143
 msgid "Perseus"
-msgstr "ペルセウス"
+msgstr "פרסאוס"
 
 #: src/translations.h:256
-#, fuzzy
 msgid "Pestle"
-msgstr "杵(しょ：玄武)"
+msgstr "עלי"
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr "フォボス"
+msgstr "פובוס"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr "フェーベ"
+msgstr "פיבי"
 
 #: src/translations.h:149
 msgid "Phoenix"
-msgstr "ほうおう"
+msgstr "עוף החול"
 
 #: src/translations.h:142
 msgid "Pictor"
-msgstr "がか"
+msgstr "צייר"
 
 #: src/translations.h:151
 msgid "Pisces"
-msgstr "うお"
+msgstr "דגים"
 
 #: src/translations.h:150
 msgid "Piscis Austrinus"
-msgstr "みなみのうお"
+msgstr "דגים דרומיים"
 
 #: src/stel_ui_tuiconf.cpp:429
 msgid "Planet Names"
-msgstr "惑星の名前"
+msgstr "שמות כוכבי לכת"
 
 #: src/stel_ui_tuiconf.cpp:430
 msgid "Planet Orbits"
-msgstr "惑星の軌道"
+msgstr "מסלולי כוכבי לכת"
 
 #: src/stel_ui_tuiconf.cpp:431
 msgid "Planet Trails"
-msgstr "惑星の通った跡"
+msgstr "עקבות כוכבי לכת"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
 msgid "Planet: "
-msgstr ""
+msgstr "כוכב לכת "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
-msgstr "惑星"
+msgstr "כוכבי לכת"
 
 #: src/stel_ui_conf.cpp:172
 msgid "Planets Hints"
-msgstr "惑星を囲む円と名前"
+msgstr "רמזים לכוכב לכת"
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr "冥王星"
+msgstr "פלוטו"
 
 #: src/stel_ui_tuiconf.cpp:445
 msgid "Point"
-msgstr "点"
+msgstr "נקודה"
 
 #: src/translations.h:76
 msgid "Polynesian"
-msgstr "ポリネシア"
+msgstr "פולינזי"
 
 #: src/stel_ui_tuiconf.cpp:400
 msgid "Preset Sky Time: "
-msgstr "天の時間の設定 : "
+msgstr "זמן שמיים קבוע מראש: "
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Preset Time"
-msgstr "設定された時刻"
+msgstr "זמן קבוע מראש"
 
 #: src/stel_ui_conf.cpp:502
 msgid "Program Language: "
-msgstr "操作パネルの言語: "
+msgstr "שפת תוכנה: "
 
 #: src/stel_ui_conf.cpp:376
 msgid "Projection :"
-msgstr "投影法 :"
+msgstr "הקרנה:"
 
 #: src/translations.h:183
-#, fuzzy
 msgid "Prow"
-msgstr "Prow(船首)"
+msgstr "חרטום"
 
 #: src/translations.h:153
 msgid "Puppis"
-msgstr "とも"
+msgstr "ירכתי הספינה"
 
 #: src/translations.h:244
-#, fuzzy
 msgid "Purple Palace"
-msgstr "紫微垣(しびえん：紫微垣)"
+msgstr "ארמון סגול"
 
 #: src/translations.h:88
 msgid "Pyxis"
-msgstr "らしんばん"
+msgstr "מצפן"
 
 #: src/stel_ui.cpp:697
 msgid "Quit [CMD + Q]"
-msgstr "終了 [CMD + Q]"
+msgstr "יציאה [CMD + Q]"
 
 #: src/stel_ui.cpp:695
 msgid "Quit [CTRL + Q]"
-msgstr "終了 [CTRL + Q]"
+msgstr "יציאה [CRTL + Q]"
 
 #: src/Nebula.cpp:99 src/Planet.cpp:117
 msgid "RA/DE: "
-msgstr "赤経/赤緯: "
+msgstr "עליה ישרה/נטיה "
 
 #: src/translations.h:312
 msgid "Rabbit Tracks"
-msgstr ""
+msgstr "עקבות ארנב"
 
 #: src/translations.h:340
 msgid "Race Track"
-msgstr ""
+msgstr "מסלול מרוצים"
 
 #: src/translations.h:222
-#, fuzzy
 msgid "Ramparts"
-msgstr "塁壁陣(るいへきじん：玄武)"
+msgstr "ביצורים"
 
 #: src/stel_ui.cpp:716
 msgid "Real Time Speed [K]"
-msgstr "実時間速度 [K]"
+msgstr "מהירות זמן נורמלית [K]"
 
 #: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
-msgstr "スクリプトファイルへのコマンド記録:\n"
+msgstr "מקליט פקודות לקובץ סקריפט:\n"
 
 #: src/stel_ui_conf.cpp:562
 msgid "Rendering"
-msgstr "描画"
+msgstr "עיבוד תמונה"
 
 #: src/stel_ui_conf.cpp:419
 msgid "Restart program for"
-msgstr "変更を適用するために"
+msgstr "אתחל תוכנה לשם"
 
 #: src/translations.h:154
 msgid "Reticulum"
-msgstr "レチクル"
+msgstr "רשת"
 
 #: src/stel_ui.cpp:720
 msgid "Return to Current Time [8]"
-msgstr "現在に戻る[8]"
+msgstr "חזור אל הזמן הנוכחי [8]"
 
 #: src/translations.h:307
 msgid "Revolving Female"
-msgstr ""
+msgstr "נקבה מסתובבת"
 
 #: src/translations.h:306
 msgid "Revolving Male"
-msgstr ""
+msgstr "זכר מסתובב"
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr "レア"
+msgstr "ריאה"
 
 #: src/translations.h:276
-#, fuzzy
 msgid "Right Flag"
-msgstr "右旗(うき：玄武)"
+msgstr "דגל ימני"
 
 #: src/translations.h:216
-#, fuzzy
 msgid "River Turtle"
-msgstr "鱉(べつ：玄武)"
+msgstr "צב נהרות"
 
 #: src/translations.h:229
-#, fuzzy
 msgid "Rolled Tongue"
-msgstr "卷舌(けんぜつ：白虎)"
+msgstr "לשון מגולגלת"
 
 #: src/translations.h:258
-#, fuzzy
 msgid "Rooftop"
-msgstr "危(き：玄武)"
+msgstr "קצה הגג"
 
 #: src/translations.h:271
-#, fuzzy
 msgid "Room"
-msgstr "房(ぼう：青龍)"
+msgstr "חדר"
 
 #: src/translations.h:221
-#, fuzzy
 msgid "Root"
-msgstr "氐(てい：青龍)"
+msgstr "שורש"
 
 #: src/translations.h:262
-#, fuzzy
 msgid "Rotten Gourd"
-msgstr "敗瓜(はいか：玄武)"
+msgstr "דלעת רקובה"
 
 #: src/translations.h:332
 msgid "Runners"
-msgstr ""
+msgstr "רצים"
 
 #: src/translations.h:64 src/s_gui.cpp:2686
 msgid "S"
-msgstr "南"
+msgstr "ד'"
 
 #: src/translations.h:114
 msgid "Sagitta"
-msgstr "や"
+msgstr "חץ"
 
 #: src/translations.h:155
 msgid "Sagittarius"
-msgstr "いて"
+msgstr "קשת"
 
 #: src/translations.h:175
-#, fuzzy
 msgid "Sah"
-msgstr "Sah(オシリス神)"
+msgstr "סאה"
 
 #: src/translations.h:345
 msgid "Salamander"
-msgstr ""
+msgstr "סלמנדרה"
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr "土星"
+msgstr "שבתאי"
 
 #: src/stel_ui_tuiconf.cpp:462
 msgid "Save Current Configuration as Default: "
-msgstr "現在の設定を標準として保存 : "
+msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
 
 #: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
 #: src/stel_ui_conf.cpp:550
 msgid "Save as default"
-msgstr "デフォルトとして保存"
+msgstr "שמור כברירת מחדל"
 
 #: src/stel_ui_conf.cpp:353
 msgid "Save location"
-msgstr "観測地保存"
+msgstr "שמור מיקום"
 
 #: src/stel_ui_conf.cpp:405
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "שמירת ההגדרות תשמור את מצב המסך כרגע"
 
 #: src/translations.h:156
 msgid "Scorpius"
-msgstr "さそり"
+msgstr "עקרב"
 
 #: src/translations.h:232
-#, fuzzy
 msgid "Screen"
-msgstr "屏(へい：白虎)"
+msgstr "מסך"
 
 #: src/stel_ui_conf.cpp:415
 msgid "Screen Resolution :"
-msgstr "画面解像度 :"
+msgstr "רזולוציית מסך:"
 
 #: src/stel_ui.cpp:560 src/stel_ui.cpp:702
 msgid "Script commander"
-msgstr "スクリプトバー"
+msgstr "פקד SCRIPT"
 
 #: src/stel_ui_tuiconf.cpp:383
 msgid "Scripts "
-msgstr "スクリプト "
+msgstr "סקריפטים "
 
 #: src/translations.h:82
 msgid "Sculptor"
-msgstr "ちょうこくしつ"
+msgstr "פסל"
 
 #: src/translations.h:87 src/translations.h:157
 msgid "Scutum"
-msgstr "たて"
+msgstr "מגן"
 
 #: src/stel_ui_conf.cpp:715
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "検索する天体名(例 Polaris, HP6218, Procyon, M31):"
+msgstr "חפש את (לדוגמא: שבתאי, פולאריס, HP6218, אוריון, M31):"
 
 #: src/stel_ui.cpp:700
 msgid "Search for object [CTRL + F]"
-msgstr "検索[CTRL+F]"
+msgstr "חפש עצם [Ctrl + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
-msgstr "秒"
+msgstr "שניות"
 
 #: src/translations.h:177
 msgid "Sek"
-msgstr ""
+msgstr "סק"
 
 #: src/translations.h:354
 msgid "Select and exit to run."
-msgstr "選択しメニューを抜けるとスタートします。"
+msgstr "בחר וצא להרצה"
 
 #: src/stel_ui_conf.cpp:323
 msgid "Selected : "
-msgstr "選択 : "
+msgstr "נבחר: "
 
 #: src/stel_ui_conf.cpp:125
 msgid "Selected Constellation Only"
-msgstr "選択した星座のみ"
+msgstr "קבוצות כוכבים נבחרות בלבד"
 
 #: src/translations.h:182
-#, fuzzy
 msgid "Selkis"
-msgstr "Selkis(セルケト神)"
+msgstr "סלקיס"
 
 #: src/translations.h:158
 msgid "Serpens"
-msgstr "へび"
+msgstr "נחש"
 
 #: src/stel_ui_tuiconf.cpp:377
 msgid "Set Location "
-msgstr "場所の指定 "
+msgstr "קבע מיקום "
 
 #: src/stel_ui_tuiconf.cpp:378
 msgid "Set Time "
-msgstr "時刻の設定 "
+msgstr "קבע זמן "
 
 #: src/stel_ui_tuiconf.cpp:396
 msgid "Set Time Zone: "
-msgstr "タイムゾーンの設定 : "
+msgstr "קבע אזור זמן: "
 
 #: src/stel_ui_tuiconf.cpp:465
 msgid "Set UI Locale: "
-msgstr "操作パネルの言語: "
+msgstr "קבע שפת ממשק: "
 
 #: src/stel_ui_tuiconf.cpp:451
 msgid "Setting Landscape Sets Location: "
-msgstr ""
+msgstr "קביעת נוף קובעת את המיקום: "
 
 #: src/stel_ui_conf.cpp:481
 msgid "Setting landscape updates the location"
-msgstr ""
+msgstr "קביעת הנוף תעדכן את המיקום"
 
 #: src/translations.h:226
-#, fuzzy
 msgid "Seven Excellencies"
-msgstr "七公(しちこう：天市垣)"
+msgstr "שבעה מלכים"
 
 #: src/translations.h:343
 msgid "Seven Little Girls"
-msgstr ""
+msgstr "שבע ילדות קטנות"
 
 #: src/translations.h:159
 msgid "Sextans"
-msgstr "ろくぶんぎ"
+msgstr "סכסטנט"
 
 #: src/translations.h:197
-#, fuzzy
 msgid "Sheep"
-msgstr "Sheep(羊)"
+msgstr "כבשה"
 
 #: src/translations.h:185
-#, fuzzy
 msgid "Sheepfold"
-msgstr "Sheepfold(羊小屋)"
+msgstr "גדרת כבשים"
 
 #: src/stel_ui_tuiconf.cpp:417
 msgid "Show: "
-msgstr "表示 : "
+msgstr "הצג: "
 
 #: src/stel_ui_tuiconf.cpp:463
 msgid "Shut Down: "
-msgstr "終了する : "
+msgstr "כיבוי: "
 
 #: src/stel_ui_tuiconf.cpp:399
 msgid "Sidereal"
-msgstr "恒星時"
+msgstr "סידרי"
 
 #: src/Nebula.cpp:109
 msgid "Size: "
-msgstr "大きさ : "
+msgstr "גודל: "
 
 #: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
-msgstr "星座の地域: "
+msgstr "שמי תרבות: "
 
 #: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
 msgid "Sky Language: "
-msgstr "天体名の言語: "
+msgstr "שפת שמיים: "
 
 #: src/stel_ui_tuiconf.cpp:401
 msgid "Sky Time At Start-up: "
-msgstr "開始時の天の時間 : "
+msgstr "זמן שמיים באתחול: "
 
 #: src/stel_ui_tuiconf.cpp:395
 msgid "Sky Time: "
-msgstr "天の時間 : "
+msgstr "זמן שמיים: "
 
 #: src/translations.h:337
 msgid "Snake"
-msgstr ""
+msgstr "נחש"
 
 #: src/stel_ui_tuiconf.cpp:390
 msgid "Solar System Body: "
-msgstr "観測地の星名: "
+msgstr "עצם במערכת שמש: "
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr "太陽系の外から"
+msgstr "צופה מערכת השמש"
 
 #: src/translations.h:233
-#, fuzzy
 msgid "Soldiers Market"
-msgstr "軍市(ぐんし：朱雀)"
+msgstr "שוק חיילים"
 
 #: src/translations.h:238
-#, fuzzy
 msgid "South River"
-msgstr "南河(なんか：朱雀)"
+msgstr "נהר דרומי"
 
 #: src/translations.h:275
-#, fuzzy
 msgid "Spear"
-msgstr "天槍(てんそう：紫微垣)"
+msgstr "חנית"
 
 #: src/translations.h:272
-#, fuzzy
 msgid "Spring"
-msgstr "天淵(てんえん：玄武)"
+msgstr "קפיץ"
 
 #: src/translations.h:234
-#, fuzzy
 msgid "Square Granary"
-msgstr "天倉(てんそう：白虎)"
+msgstr "אסם מרובע"
 
 #: src/translations.h:284
-#, fuzzy
 msgid "Star"
-msgstr "星(せい：朱雀)"
+msgstr "כוכב"
 
 #: src/stel_ui_conf.cpp:82
 msgid "Star Names. Up to mag :"
-msgstr "この等級より明るい恒星名を表示 :"
+msgstr "שמות כוכבים. עד מגניטודה:"
 
 #: src/stel_ui_conf.cpp:94
 msgid "Star Twinkle. Amount :"
-msgstr "星のまたたく量 :"
+msgstr "הבהוב כוכבים. כמות:"
 
 #: src/stel_ui_tuiconf.cpp:418
 msgid "Star Value Multiplier: "
-msgstr "星の明るさの倍率: "
+msgstr "מכפיל ערך כוכבים "
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
-msgstr "恒星"
+msgstr "כוכבים"
 
 #: src/stel_ui_tuiconf.cpp:380
 msgid "Stars "
-msgstr "恒星 "
+msgstr "כוכבים "
 
 #: src/translations.h:198
-#, fuzzy
 msgid "Stars of Water"
-msgstr "Stars of Water(水の星)"
+msgstr "כוכבי המים"
 
 #: src/translations.h:217
-#, fuzzy
 msgid "Stomach"
-msgstr "胃(い：白虎)"
+msgstr "קיבה"
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr "太陽"
+msgstr "שמש"
 
 #: src/translations.h:248
-#, fuzzy
 msgid "Supreme Palace"
-msgstr "太微垣(たいびえん：太微垣)"
+msgstr "ארמון עליון"
 
 #: src/translations.h:206
-#, fuzzy
 msgid "Tail"
-msgstr "尾(び：青龍)"
+msgstr "זנב"
 
 #: src/translations.h:161
 msgid "Taurus"
-msgstr "おうし"
+msgstr "שור"
 
 #: src/translations.h:162
 msgid "Telescopium"
-msgstr "ぼうえんきょう"
+msgstr "טלסקופ"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr "テティス"
+msgstr "תטיס"
 
 #: src/translations.h:321
 msgid "The Asar Battlefield"
-msgstr ""
+msgstr "שדה הקרב של האייסיר"
 
 #: src/translations.h:318
 msgid "The Fishermen"
-msgstr ""
+msgstr "הדייגים"
 
 #: src/translations.h:297
-#, fuzzy
 msgid "The Seven"
-msgstr "The Seven(七つ星)"
+msgstr "השבעה"
 
 #: src/translations.h:235
-#, fuzzy
 msgid "Three Stars"
-msgstr "参(しん：白虎)"
+msgstr "שלושה כוכבים"
 
 #: src/translations.h:210
-#, fuzzy
 msgid "Three Steps"
-msgstr "三台(さんだい：太微垣)"
+msgstr "שלושה צעדים"
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Thunder and Lightning"
-msgstr "雷電(らいでん：玄武)"
+msgstr "רעם וברק"
 
 #: src/translations.h:347
-#, fuzzy
 msgid "Thunderbird"
-msgstr "霹靂(へきれき：玄武)"
+msgstr "ציפור רעם"
 
 #: src/translations.h:259
-#, fuzzy
 msgid "Thunderbolt"
-msgstr "霹靂(へきれき：玄武)"
+msgstr "ברק"
 
 #: src/stel_ui.cpp:791
 msgid ""
@@ -1909,105 +1816,103 @@ msgid ""
 "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 "\n"
 msgstr ""
+"זמן ותאריך:\n"
+"6 : קצב זמן מוקפא 7 : קצב זמן אפס\n"
+"8 : כוון לזמן הנוכחי J : האט את קצב הזמן\n"
+"K : קצב זמן נורמלי L : האץ את קצב הזמן\n"
+"\n"
 
 #: src/stel_ui_tuiconf.cpp:404
 msgid "Time Display Format: "
-msgstr "時間表示形式 : "
+msgstr "פורמט זמן: "
 
 #: src/stel_ui_conf.cpp:276
 msgid "Time Zone :"
-msgstr "タイムゾーン :"
+msgstr "אזור זמן:"
 
 #: src/stel_ui_conf.cpp:289
 msgid "Time speed : "
-msgstr "時間の速さ : "
+msgstr "מהירות זמן: "
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr "タイタン"
+msgstr "טיטן"
 
 #: src/translations.h:231
-#, fuzzy
 msgid "Toilet"
-msgstr "廁(し：白虎)"
+msgstr "שירותים"
 
 #: src/translations.h:178
-#, fuzzy
 msgid "Triangle"
-msgstr "Triangle(三角形)"
+msgstr "משולש"
 
 #: src/translations.h:164
 msgid "Triangulum"
-msgstr "さんかく"
+msgstr "משולש"
 
 #: src/translations.h:165
 msgid "Triangulum Australe"
-msgstr "みなみのさんかく"
+msgstr "משולש דרומי"
 
 #: src/translations.h:287
-#, fuzzy
 msgid "Tripod"
-msgstr "周鼎(しゅうてい：青龍)"
+msgstr "חצובה"
 
 #: src/translations.h:163
 msgid "Tucana"
-msgstr "きょしちょう"
+msgstr "טוקאן"
 
 #: src/translations.h:346
-#, fuzzy
 msgid "Turtle"
-msgstr "鱉(べつ：玄武)"
+msgstr "צב"
 
 #: src/stel_ui_tuiconf.cpp:420
 msgid "Twinkling: "
-msgstr "星のまたたく量 : "
+msgstr "הבהוב: "
 
 #: src/translations.h:174
-#, fuzzy
 msgid "Two Jaws"
-msgstr "Two Jaws(割れあご)"
+msgstr "שתי מלתעות"
 
 #: src/translations.h:325
 msgid "Two Placed Far Apart"
-msgstr ""
+msgstr "שניים הממוקמים רחוק"
 
 #: src/translations.h:172
-#, fuzzy
 msgid "Two Poles"
-msgstr "Two Poles(二本の棍棒)"
+msgstr "שני קטבים"
 
 #: src/translations.h:324
-#, fuzzy
 msgid "Two Sunbeams"
-msgstr "Two Jaws(割れあご)"
+msgstr "שתי קרני שמש"
 
 #: src/translations.h:330
 msgid "Two in Front"
-msgstr ""
+msgstr "השניים שמלפנים"
 
 #: src/Nebula.cpp:107
 msgid "Type: "
-msgstr "型 : "
+msgstr "סוג: "
 
 #: src/translations.h:355
 msgid "USB Script: "
-msgstr ""
+msgstr "סקריפט USB "
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
-msgstr "インターネットによる更新 : "
+msgstr "עדכן אותי דרך אינטרנט: "
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr "天王星"
+msgstr "אוראנוס"
 
 #: src/translations.h:119
 msgid "Ursa Major"
-msgstr "おおぐま"
+msgstr "הדובה הגדולה"
 
 #: src/translations.h:148
 msgid "Ursa Minor"
-msgstr "こぐま"
+msgstr "הדובה הקטנה"
 
 #: src/stel_ui_conf.cpp:297
 msgid ""
@@ -2015,148 +1920,138 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Jキーで時間の速さを加速、Lキーで減速\n"
-"Kキーで実際の速さへ戻ります"
+"השתמש במקש J ו-L להנמיך ולהגביר\n"
+"   את מהירות הזמן.\n"
+"השתמש במקש K כדי לחזור למהירות זמן אמיתי."
 
 #: src/stel_ui_conf.cpp:280
 msgid "Using System Default Time Zone"
-msgstr "システムのタイムゾーンをデフォルトとして使用"
+msgstr "משתמש באזור זמן ברירת המחדל של המערכת"
 
 #: src/translations.h:168
 msgid "Vela"
-msgstr "ほ"
+msgstr "מפרש"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr "金星"
+msgstr "נגה"
 
 #: src/stel_ui_conf.cpp:561
 msgid "Video"
-msgstr "画面"
+msgstr "וידאו"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Viewport Distorter"
-msgstr ""
+msgstr "עיוות של נקודת המבט"
 
 #: src/translations.h:167
 msgid "Virgo"
-msgstr "おとめ"
+msgstr "בתולה"
 
 #: src/translations.h:296
-#, fuzzy
 msgid "Voice of Joy"
-msgstr "Voice of Joy(歓喜の歌)"
+msgstr "קול ההנאה"
 
 #: src/translations.h:152
 msgid "Volans"
-msgstr "とびうお"
+msgstr "דג מעופף"
 
 #: src/translations.h:147
 msgid "Vulpecula"
-msgstr "こぎつね"
+msgstr "שועלון"
 
 #: src/translations.h:66 src/s_gui.cpp:2691
 msgid "W"
-msgstr "西"
+msgstr "מע'"
 
 #: src/translations.h:219
-#, fuzzy
 msgid "Wall"
-msgstr "壁(へき：玄武)"
+msgstr "חומה"
 
 #: src/translations.h:196
 msgid "Waty Bekety"
-msgstr ""
+msgstr "וואטי בקטי"
 
 #: src/translations.h:267
-#, fuzzy
 msgid "Weaving Girl"
-msgstr "織女(しょくじょ：玄武)"
+msgstr "נערה אורגת"
 
 #: src/translations.h:237
-#, fuzzy
 msgid "Well"
-msgstr "井(せい：朱雀)"
+msgstr "באר"
 
 #: src/translations.h:77
 msgid "Western"
-msgstr "西洋"
+msgstr "מערבי"
 
 #: src/translations.h:281
-#, fuzzy
 msgid "Western Door"
-msgstr "西咸(せいかん：青龍)"
+msgstr "דלת מערבית"
 
 #: src/translations.h:213
-#, fuzzy
 msgid "Willow"
-msgstr "柳(りゅう：朱雀)"
+msgstr "ערבה"
 
 #: src/translations.h:204
-#, fuzzy
 msgid "Wings"
-msgstr "翼(よく：朱雀)"
+msgstr "כנפיים"
 
 #: src/translations.h:207
-#, fuzzy
 msgid "Winnowing Basket"
-msgstr "箕(き：青龍)"
+msgstr "נפה"
 
 #: src/translations.h:317
 msgid "Wolf's Mouth"
-msgstr ""
+msgstr "פי הזאב"
 
 #: src/translations.h:280
-#, fuzzy
 msgid "Woman's Bed"
-msgstr "女床(じょしょう：天市垣)"
+msgstr "מיטת אישה"
 
 #: src/translations.h:319
 msgid "Woman's Cart"
-msgstr ""
+msgstr "עגלת האישה"
 
 #: src/translations.h:286
-#, fuzzy
 msgid "Xuanyuan"
-msgstr "軒轅(けんえん：朱雀)"
+msgstr "שואניון"
 
 #: src/s_gui.cpp:2740
 msgid "Year"
-msgstr "年"
+msgstr "שנה"
 
 #: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
 #: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
 msgid "Yes"
-msgstr "はい"
+msgstr "כן"
 
 #: src/translations.h:289
-#, fuzzy
 msgid "Zaofu"
-msgstr "造父(ぞうほ：玄武)"
+msgstr "צאופו"
 
 #: src/stel_ui_tuiconf.cpp:449
 msgid "Zoom Duration: "
-msgstr "ズーム時間 : "
+msgstr "משך זמן לזום: "
 
 #: src/stel_ui_conf.cpp:420
 msgid "change to apply."
-msgstr "プログラムを再起動してください"
+msgstr "שנה להחל."
 
 #: src/stel_ui_conf.cpp:350
 msgid "m"
 msgstr ""
 
 #~ msgid " (Variable)"
-#~ msgstr " （変光星）"
+#~ msgstr " (נתון משתנה)"
 
 #~ msgid " Light Years"
-#~ msgstr " 光年"
+#~ msgstr " שנות אור"
 
 #~ msgid "%s: Bad command line argument(s)\n"
-#~ msgstr "%s: コマンド行の引数が違います\n"
+#~ msgstr "%s: Bad command line argument(s)\n"
 
 #~ msgid "Configuration window"
-#~ msgstr "環境設定"
+#~ msgstr "חלון קונפיגורציה"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -2167,12 +2062,12 @@ msgstr ""
 #~ "CTRL + F : Toggle object finder\n"
 #~ "\n"
 #~ msgstr ""
-#~ "ウィンドウその他\n"
-#~ "H : ヘルプ I : Stellariumについて\n"
-#~ "M : テキストメニュー 1 (数字) : 環境設定\n"
-#~ "CTRL + S : スクリーンショット撮影\n"
-#~ "CTRL + R : スクリプト記録\n"
-#~ "CTRL + F : 天体検索\n"
+#~ "דו שיח ובקרים אחרים:\n"
+#~ "H: עזרה I: אודות סטלריום\n"
+#~ "M: תפריט טקסט 1(אחת): הגדרות\n"
+#~ "CTRL+S: לכוד תמונת מסך\n"
+#~ "CTRL+R: התחל הקלטת סקריפט\n"
+#~ "CTRL+F: הפעל מציאת עצם\n"
 #~ "\n"
 
 #~ msgid ""
@@ -2189,51 +2084,52 @@ msgstr ""
 #~ "4 , : Ecliptic line             5 . : Equator line\n"
 #~ "\n"
 #~ msgstr ""
-#~ "表示オプション:\n"
-#~ "ENTER : 赤道儀/経緯台\n"
-#~ "F1 : フルスクリーン切り替え（可能な場合）\n"
-#~ "C : 星座線 V : 星座名\n"
-#~ "R : 星座絵 E : 赤道座標\n"
-#~ "Z : 地平座標 N : 星雲・星団名\n"
-#~ "P : 惑星 G : 地表\n"
-#~ "A : 大気 F : もや\n"
-#~ "Q : 方位 O : 月の拡大\n"
-#~ "T : 天体追尾 S : 恒星\n"
-#~ "4 , : 黄道線 5 . : 赤道線\n"
+#~ "אפשרויות תצוגה:\n"
+#~ "Enter: מעמד משווני / אזימוטלי\n"
+#~ "F1: מפעיל מצב מסך מלא אם אפשרי.\n"
+#~ "C: קווי קבוצות כוכבים V: שמות קבוצות כוכבים\n"
+#~ "R: תמונות קבוצות כוכבים E: רשת משוונית\n"
+#~ "Z: רשת אזימוטלית N: שמות ערפיליות\n"
+#~ "P: שמות כוכבי לכת G: אדמה\n"
+#~ "A: אטמוספירה F: ערפל\n"
+#~ "Q: נקודות חשובות O: התאמת גודל ירח\n"
+#~ "T: עקיבה אחר עצם S: כוכבים\n"
+#~ "4:, קו המילקה 5.:קו המשווה\n"
 #~ "\n"
 
-#~ msgid "Flip horizontally"
-#~ msgstr "画面の反転(水平方向)"
-
-#~ msgid "Flip vertically"
-#~ msgstr "画面の反転(垂直方向)"
+#~ msgid "Equ of date"
+#~ msgstr "משוואת הזמן"
 
 #~ msgid "J2000"
-#~ msgstr "2000年分点"
+#~ msgstr "J2000"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "בהירות מגבילה "
 
 #~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "ヒッパルコスカタログをロード中:"
+#~ msgstr "טוען קטלוג היפקרוס:"
 
+#, fuzzy
 #~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "等級による倍率 : "
+#~ msgstr "מכפיל מגניטודה: "
 
 #~ msgid "Meteor Rate per minute"
-#~ msgstr "1分あたりの流れ星の数"
+#~ msgstr "מטאורים לדקה"
 
 #~ msgid "Parallax: "
-#~ msgstr "年周視差: "
+#~ msgstr "פרלקסה: "
 
 #~ msgid "Return to Current Time"
-#~ msgstr "現在時間に戻る"
+#~ msgstr "חזור לזמן נוכחי"
 
 #~ msgid "Search for object"
-#~ msgstr "天体検索"
+#~ msgstr "חיפוש גרם שמיים"
 
 #~ msgid "Spectral Type: "
-#~ msgstr "スペクトル型: "
+#~ msgstr "סיווג ספקטרלי: "
 
 #~ msgid "Star Magnitude Multiplier: "
-#~ msgstr "星の明るさの倍率 : "
+#~ msgstr "מכפיל עוצמת כוכב: "
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2244,22 +2140,22 @@ msgstr ""
 #~ "[   : Back 7 days               ]   : Forward 7 days\n"
 #~ "\n"
 #~ msgstr ""
-#~ "日付と時刻:\n"
-#~ "6 : 時間よとまれ    7 : 時間\n"
-#~ "8 : 現在時刻に設定    J : 時間速度を減速\n"
-#~ "K : 通常の時間速度    L : 時間速度を加速\n"
-#~ "- : 24時間戻る    = : 24時間進む\n"
-#~ "[ : 7日戻る    ] : 7日進む\n"
+#~ "זמן ותאריך:\n"
+#~ "6: עצור את הזמן 7: קצב התקדמות 0\n"
+#~ "8: כוון לזמן נוכחי J: האט את קצב הזמן\n"
+#~ "K: קצב זמן רגיל L: הגבר את קצב הזמן\n"
+#~ "-: חזור אחורה 24 שעות =: זוז קדימה 24 שעות\n"
+#~ "]: חזור שבוע אחורה [: זוז שבוע קדימה\n"
 #~ "\n"
 
 #~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "より詳しい情報は `%s --help' を試してください\n"
+#~ msgstr "Try `%s --help' for more information.\n"
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
 #~ " -v, --version          Output version information and exit.\n"
 #~ " -h, --help             Display this help and exit.\n"
 #~ msgstr ""
-#~ "使用法: %s [オプション] ...\n"
-#~ " -v, --version バージョン情報を出力し、終了する。\n"
-#~ " -h, --help このヘルプを出力し、終了する。\n"
+#~ "Usage: %s [OPTION] ...\n"
+#~ " -v, --version          Output version information and exit.\n"
+#~ " -h, --help             Display this help and exit.\n"

@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-06 18:27+0100\n"
-"PO-Revision-Date: 2007-08-12 18:14+0000\n"
-"Last-Translator: Veljko <veljko.tasic@gmail.com>\n"
+"PO-Revision-Date: 2007-11-06 00:00+0000\n"
+"Last-Translator: djura <djura@apolo.co.yu>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-08-13 22:08:12+0000\n"
+"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:729
 msgid ""
@@ -348,9 +348,8 @@ msgid "Configuration"
 msgstr "Konfiguracija"
 
 #: src/stel_ui.cpp:689
-#, fuzzy
 msgid "Configuration window [1]"
-msgstr "Konfiguracioni prozor"
+msgstr "Prozor za podešavanje [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -626,7 +625,7 @@ msgstr "Ekvatorijalna mreža [E]"
 
 #: src/stel_ui.cpp:687
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
+msgstr "Ekvatorijalni/Azimutalni nosač [ENTER]"
 
 #: src/translations.h:144
 msgid "Equuleus"
@@ -688,12 +687,12 @@ msgstr ""
 #: src/stel_ui.cpp:706
 #, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Okreni horizontalno"
+msgstr "Izvrni po horizontali [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:708
 #, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Okreni vertikalno"
+msgstr "Izvrni po vertikali [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1019,9 +1018,8 @@ msgid "Location"
 msgstr "Lokacija"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-#, fuzzy
 msgid "Location: "
-msgstr "Lokacija"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:328
 #, fuzzy
@@ -1049,9 +1047,8 @@ msgid "Magnitude"
 msgstr "Magnituda"
 
 #: src/stel_ui_tuiconf.cpp:446
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Faktor uvećanja magnitude: "
+msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
 msgid "Magnitude: "
@@ -1366,9 +1363,8 @@ msgid "Planet Trails"
 msgstr "Tragovi planeta"
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-#, fuzzy
 msgid "Planet: "
-msgstr "Planete"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1469,9 +1465,8 @@ msgid "Reticulum"
 msgstr ""
 
 #: src/stel_ui.cpp:720
-#, fuzzy
 msgid "Return to Current Time [8]"
-msgstr "Vrati se na trenutno vreme"
+msgstr ""
 
 #: src/translations.h:307
 msgid "Revolving Female"
@@ -1592,9 +1587,8 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Traži (npr. Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui.cpp:700
-#, fuzzy
 msgid "Search for object [CTRL + F]"
-msgstr "Pretraga objekata"
+msgstr "Pretraga objekta [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1750,9 +1744,8 @@ msgid "Star Twinkle. Amount :"
 msgstr "Treperenje Zvezda. Količina:"
 
 #: src/stel_ui_tuiconf.cpp:418
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Faktor uvećanja magnitude: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:77
 msgid "Stars"
@@ -1913,9 +1906,8 @@ msgid "Type: "
 msgstr "Tip: "
 
 #: src/translations.h:355
-#, fuzzy
 msgid "USB Script: "
-msgstr "Skripte "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:464
 msgid "Update me via Internet: "
@@ -2069,13 +2061,9 @@ msgstr ""
 #~ msgid "J2000"
 #~ msgstr "J2000"
 
-#, fuzzy
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnituda "
+#~ msgid "Parallax: "
+#~ msgstr "Paralaksa "
 
 #, fuzzy
 #~ msgid "Spectral Type: "
 #~ msgstr "Spektralni tip: "
-
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "Pokušajte `%s --help` za više informacija.\n"
