@@ -24,6 +24,8 @@
 #include "InitParser.hpp"
 #include "StelFileMgr.hpp"
 
+#include <QLocale>
+
 using namespace std;
 
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMT_shift(0)
@@ -190,7 +192,7 @@ wstring StelLocaleMgr::get_printable_time_local(double JD) const
 	switch (time_format)
 	{
 		case S_TIME_SYSTEM_DEFAULT:
-			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
+			return dateTime.time().toString().toStdWString();
 		case S_TIME_24H:
 			return dateTime.time().toString("hh:mm:ss").toStdWString();
 		case S_TIME_12H:
