@@ -224,7 +224,7 @@ SET(stellarium_MOC_HDRS
 	stelutils/STexture.hpp
 )
 
-# After this call, stellarium_MOC_SRCS = moc_VirGO.cxx
+# After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
 QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 
 SET(stellarium_exe_SRCS
