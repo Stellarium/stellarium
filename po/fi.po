@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-12-13 14:18+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -26,6 +26,10 @@ msgstr ""
 "   Tarkasta uudet versiot ja lähetä virheraportit\n"
 "    sekä kommentit osoitteeseen http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " valovuotta"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -96,6 +100,10 @@ msgstr "Kotka"
 msgid "Ara"
 msgstr "Alttari"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Oinas"
@@ -112,7 +120,7 @@ msgstr "Varikko"
 msgid "Atmosphere"
 msgstr "Ilmakehä"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Ilmakehä [A]"
 
@@ -128,7 +136,8 @@ msgstr ""
 msgid "Author: "
 msgstr "Tekijä: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Atsim./Kork.: "
 
@@ -136,7 +145,7 @@ msgstr "Atsim./Kork.: "
 msgid "Azimuthal Grid"
 msgstr "Atsimuuttiasteikko"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Atsimuuttiasteikko [Z]"
 
@@ -188,11 +197,11 @@ msgstr "Härän etujalat"
 msgid "CD/DVD Script: "
 msgstr "CD/DVD-komentojono: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Lopeta\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Lopeta\n"
 
@@ -240,7 +249,7 @@ msgstr "Kauris"
 msgid "Cardinal Points"
 msgstr "Ilmansuunnat"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Ilmansuunnat [Q]"
 
@@ -334,7 +343,7 @@ msgstr "Kyyhkynen"
 msgid "Coma Berenices"
 msgstr "Bereniken hiukset"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Komentojen tallennus pysäytetty."
 
@@ -342,7 +351,7 @@ msgstr "Komentojen tallennus pysäytetty."
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Asetukset [1]"
 
@@ -362,7 +371,7 @@ msgstr "Tähtikuvioviivat"
 msgid "Constellation Names"
 msgstr "Tähdistöjen nimet"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Tähdistökuvat [R]"
 
@@ -442,7 +451,7 @@ msgstr "Päivä"
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Pienennä aika-askelta [J]"
 
@@ -454,7 +463,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfiini"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -482,7 +491,7 @@ msgstr "Kauha"
 msgid "Disk Viewport"
 msgstr "Putkinäkymä"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -498,9 +507,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Etäisyys: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Koira"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -515,6 +530,11 @@ msgstr "Koira"
 msgid "Dolphin"
 msgstr "Delfiini"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Dione"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Kultakala"
@@ -523,7 +543,7 @@ msgstr "Kultakala"
 msgid "Draco"
 msgstr "Lohikäärme"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Tähdistöviivat [C]"
 
@@ -540,7 +560,7 @@ msgstr "Rumpu"
 msgid "Drumstick"
 msgstr "Rumpukapula"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -600,6 +620,10 @@ msgstr "Enceladus"
 msgid "Enter observatory name"
 msgstr "Anna observatorion nimi"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr ""
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Ekvaattori"
@@ -608,11 +632,11 @@ msgstr "Ekvaattori"
 msgid "Equatorial Grid"
 msgstr "Ekvatoriaaliasteikko"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriaaliasteikko [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoriaali/atsimutaalijalusta [ENTER]"
 
@@ -624,7 +648,7 @@ msgstr "Pieni hevonen"
 msgid "Eridanus"
 msgstr "Eridanus"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Virhe: komentojonotiedostoa ei voida avata komentojen tallennusta varten."
@@ -673,12 +697,12 @@ msgstr "Viisi feodaalikuningasta"
 msgid "Flail"
 msgstr "Varsta"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 #, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Näkymän kääntö horisonttaalisesti [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 #, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Näkymän kääntö vertikaalisesti [CTRL + SHIFT + V]"
@@ -747,7 +771,7 @@ msgstr "Tyttö"
 msgid "Good Gourd"
 msgstr "Hyvä kurpitsa"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Siirry valittuun kohteeseen [SPACE]"
 
@@ -759,7 +783,7 @@ msgstr "Suuri kenraali"
 msgid "Ground"
 msgstr "Maanpinta"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Maanpinta [G]"
 
@@ -775,11 +799,11 @@ msgstr "Käsi"
 msgid "Heart"
 msgstr "Sydän"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Apua"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Apua [H]"
 
@@ -791,7 +815,7 @@ msgstr "Herkules"
 msgid "Hippopotamus"
 msgstr "Virtahepo"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Anna CTRL-R uudelleen pysäyttääksesi.\n"
 
@@ -839,7 +863,7 @@ msgstr "Keisarilliset vartijat"
 msgid "Imperial Passageway"
 msgstr "Keisarillinen käytävä"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Kasvata aika-askelta [L]"
 
@@ -851,7 +875,7 @@ msgstr "Intiaani"
 msgid "Info: "
 msgstr "Tiedot: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Tiedot"
 
@@ -867,6 +891,10 @@ msgstr "Virheellinen komentosarjan komento"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -979,7 +1007,7 @@ msgstr "Lintu"
 msgid "Load Default Configuration: "
 msgstr "Hae oletusasetukset: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Luetaan tähdistökuvia: "
 
@@ -1037,6 +1065,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitudi: "
 
@@ -1116,7 +1146,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Minuutit"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1154,7 +1184,7 @@ msgstr "Kiinnityspaikka"
 msgid "Mortar"
 msgstr "Muurilaasti"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1188,7 +1218,7 @@ msgstr "Kärpänen"
 msgid "N"
 msgstr "P"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Tähdistöjen nimet [V]"
 
@@ -1213,7 +1243,7 @@ msgstr "Tähtisumujen nimet"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Sumujen nimet. Magnitudiin :"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Tähtisumut [N]"
 
@@ -1229,7 +1259,7 @@ msgstr "Neptunus"
 msgid "Net"
 msgstr "Verkko"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Yötila (punainen)"
 
@@ -1297,6 +1327,10 @@ msgstr "Tähtipari"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Palatsin portti"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "Parallaksi "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1406,15 +1440,17 @@ msgstr "Purppurapalatsi"
 msgid "Pyxis"
 msgstr "Kompassi"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Lopeta [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Lopeta [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Rekt./Dekl: "
 
@@ -1430,11 +1466,11 @@ msgstr "Kilpapolku"
 msgid "Ramparts"
 msgstr "Vallivarustus"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Normaali aika-askel [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Tallennetaan toimintoja komentojonotiedostoon:\n"
 
@@ -1450,7 +1486,7 @@ msgstr "Käynnistä ohjelma uudelleen"
 msgid "Reticulum"
 msgstr "Verkko"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 #, fuzzy
 msgid "Return to Current Time [8]"
 msgstr "Ajan palautus nykyhetkeen [8]"
@@ -1552,7 +1588,7 @@ msgstr "Kaihdin"
 msgid "Screen Resolution :"
 msgstr "Näytön tarkkuus :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Komentosarjat"
 
@@ -1572,7 +1608,7 @@ msgstr "Kilpi"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Etsi kohdetta (esim. Saturnus, Altair, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Kohteen etsintä [CTRL + F]"
 
@@ -1704,6 +1740,10 @@ msgstr "Eteläinen joki"
 msgid "Spear"
 msgstr "Keihäs"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Spektriluokka: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Kevät"
@@ -1801,7 +1841,7 @@ msgstr "Ukonnuoli"
 msgid "Thunderbolt"
 msgstr "Ukonnuoli"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2037,9 +2077,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (muuttuja)"
 
-#~ msgid " Light Years"
-#~ msgstr " valovuotta"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Väärä komentoriviparametri\n"
 
@@ -2099,9 +2136,6 @@ msgstr ""
 #~ msgid "Flip vertically"
 #~ msgstr "Peilaa pystysuunnassa"
 
-#~ msgid "J2000"
-#~ msgstr "J2000"
-
 #, fuzzy
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Rajamagnitudi: "
@@ -2122,17 +2156,11 @@ msgstr ""
 #~ "Muut:\n"
 #~ "9   : Vaihda meteoriparven aktiivisuutta\n"
 
-#~ msgid "Parallax: "
-#~ msgstr "Parallaksi "
-
 #~ msgid "Return to Current Time"
 #~ msgstr "Palaa nykyhetkeen"
 
 #~ msgid "Search for object"
 #~ msgstr "Etsi kohdetta"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Spektriluokka: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Tähden magnitudin kerroin: "
