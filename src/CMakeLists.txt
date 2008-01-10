@@ -240,10 +240,17 @@ ENDIF(MACOSX)
 
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
-ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS})
-TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
-INSTALL(TARGETS stelMain DESTINATION lib)
+IF(WIN32)
+ # On WIN32 we need to split the main binary into a small binary and a dll
+ # This is for allowing to link plug-ins afterward
+ ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS})
+ TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
+ INSTALL(TARGETS stelMain DESTINATION lib)
+ ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+ TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
+ELSE(WIN32)
+ ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_exe_SRCS})
+ TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption})
+ENDIF(WIN32)
 
-ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
-TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
 INSTALL(TARGETS stellarium DESTINATION bin)
