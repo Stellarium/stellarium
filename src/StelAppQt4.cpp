@@ -155,8 +155,6 @@ void StelAppQt4::startMainLoop()
 	winOpenGL->resizeGL(getScreenW(), getScreenH());
 	winOpenGL->timerId = winOpenGL->startTimer(10);
 	winOpenGL->qtime.start();
-	
-	
 }
 
 void StelAppQt4::saveScreenShot(const QString& filePrefix, const QString& saveDir) const

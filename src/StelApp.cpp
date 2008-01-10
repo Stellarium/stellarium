@@ -153,7 +153,7 @@ void StelApp::init()
 	// OK, print the console splash and get on with loading the program
 	cout << " -------------------------------------------------------" << endl;
 	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
-	cout << "[ Copyright (C) 2000-2007 Fabien Chereau et al         ]" << endl;
+	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al         ]" << endl;
 	cout << " -------------------------------------------------------" << endl;
 	
 	QStringList p=stelFileMgr->getSearchPaths();
@@ -164,7 +164,7 @@ void StelApp::init()
 		cout << " " << n << ". " << qPrintable(i) << endl;
 		++n;
 	}
-	cout << "config file is: " << qPrintable(configFile) << endl;
+	cout << "Config file is: " << qPrintable(configFile) << endl;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
@@ -199,6 +199,16 @@ void StelApp::init()
 
 	// Main section
 	string version = conf.get_str("main:version");
+	
+	if (version.empty())
+	{
+		qWarning() << "Found an invalid config file. Overwrite with default.";
+		QFile::remove(getConfigFilePath());
+		copyDefaultConfigFile();
+		conf.load(getConfigFilePath());  // Read new config
+		version = conf.get_str("main:version");
+	}
+	
 	if (version!=string(PACKAGE_VERSION))
 	{
 		std::istringstream istr(version);
