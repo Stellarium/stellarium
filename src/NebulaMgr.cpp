@@ -127,7 +127,8 @@ double NebulaMgr::draw(StelCore* core)
 	Vec3f pXYZ;
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
-	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(50);
+	// Use a 1 degree margin
+	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(1.*M_PI/180.*prj->getPixelPerRadAtCenter());
 	nebGrid.filterIntersect(p);
 	
 	// Print all the stars of all the selected zones
@@ -410,7 +411,6 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		else
 		{
 			neb_array.push_back(e);
-			//nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
 			nebGrid.insert(e);
 		}
 		i++;
@@ -526,7 +526,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 		int NGC;
 		while(!getline(inf, record).eof())
 		{
-		// Draw loading bar
+			// Draw loading bar
 			if (record.empty() || record[0]=='#')
 				continue;
 
@@ -548,17 +548,19 @@ bool NebulaMgr::loadTextures(const QString& setName)
 			} 
 			else
 			{
-			// Allow non NGC nebulas/textures!
-				if (NGC != -1) cout << "Nebula with unrecognized NGC number " << NGC << endl;
+				// Allow non NGC nebulas/textures!
+				if (NGC != -1)
+					cout << "Nebula with unrecognized NGC number " << NGC << endl;
 				e = new Nebula;
-				if (!e->readTexture(setName, record)) { // reading error
+				if (!e->readTexture(setName, record))
+				{
+					// reading error
 					cerr << "Error while reading texture " << e->englishName << endl;
 					delete e;
 				} 
 				else 
 				{
 					neb_array.push_back(e);
-					// nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
 					nebGrid.insert(e);
 				}
 			}

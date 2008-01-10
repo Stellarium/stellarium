@@ -51,6 +51,7 @@ Nebula::Nebula() :
 		IC_nb(0)
 {
 	nameI18 = L"";
+	angular_size = -1;
 }
 
 Nebula::~Nebula()
@@ -224,6 +225,10 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
+	
+	// Only in case the texture was not previously loaded from NGC cat
+	if (angular_size<0)
+		angular_size = tex_angular_size;
 
 	// Precomputation of the rotation/translation matrix
 	Mat4f mat_precomp = Mat4f::translation(XYZ) *
