@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-11-30 16:13+0000\n"
 "Last-Translator: Devon <devon01@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,6 +27,10 @@ msgstr ""
 "segnalazioni di bug\n"
 "    e commenti a: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " Anni Luce"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -96,6 +100,10 @@ msgstr "Aquila"
 msgid "Ara"
 msgstr "Altare"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Ariete"
@@ -112,7 +120,7 @@ msgstr "Arsenale"
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Atmosfera [A]"
 
@@ -128,7 +136,8 @@ msgstr "L'alluce di Aurvandil"
 msgid "Author: "
 msgstr "Autore: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
@@ -136,7 +145,7 @@ msgstr "Az/Alt: "
 msgid "Azimuthal Grid"
 msgstr "Griglia azimutale"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Griglia azimutale [Z]"
 
@@ -188,11 +197,11 @@ msgstr "Toro - Zampa Anteriore"
 msgid "CD/DVD Script: "
 msgstr "Script CD/DVD: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Esci\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Esci\n"
 
@@ -240,7 +249,7 @@ msgstr "Capricorno"
 msgid "Cardinal Points"
 msgstr "Punti Cardinali"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Punti Cardinali [Q]"
 
@@ -332,7 +341,7 @@ msgstr "Colomba"
 msgid "Coma Berenices"
 msgstr "Chioma di Berenice"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "La registrazione del comando è stata interrotta."
 
@@ -340,7 +349,7 @@ msgstr "La registrazione del comando è stata interrotta."
 msgid "Configuration"
 msgstr "Configurazione"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Pannello di configurazione [1]"
 
@@ -360,7 +369,7 @@ msgstr "Linee delle Costellazioni"
 msgid "Constellation Names"
 msgstr "Nomi delle Costellazioni"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Figure artistiche delle Costellazioni [R]"
 
@@ -440,7 +449,7 @@ msgstr "Giorno"
 msgid "Day keys: "
 msgstr "Tasti dei giorni "
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Fai scorrere il tempo più lentamente"
 
@@ -452,7 +461,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfino"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -488,7 +497,7 @@ msgstr "Calatore"
 msgid "Disk Viewport"
 msgstr "Vignettatura circolare"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -516,9 +525,15 @@ msgstr ""
 "4 , : Linea dell'eclittica 5 . : Linea dell'equatore\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Distanza: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Cane"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -532,6 +547,11 @@ msgstr "Cani"
 msgid "Dolphin"
 msgstr "Delfino"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Dione"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Dorado"
@@ -540,7 +560,7 @@ msgstr "Dorado"
 msgid "Draco"
 msgstr "Dragone"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Linee delle Costellazioni [C]"
 
@@ -556,7 +576,7 @@ msgstr "Tamburo"
 msgid "Drumstick"
 msgstr "Bacchetta"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -616,6 +636,10 @@ msgstr "Encelado"
 msgid "Enter observatory name"
 msgstr "Inserisci il nome dell'osservatorio"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr "Equazione del tempo"
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Linea dell'Equatore"
@@ -624,11 +648,11 @@ msgstr "Linea dell'Equatore"
 msgid "Equatorial Grid"
 msgstr "Griglia equatoriale"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Griglia equatoriale [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Montatura Equatoriale/Altazimutale [INVIO]"
 
@@ -640,7 +664,7 @@ msgstr "Cavalluccio"
 msgid "Eridanus"
 msgstr "Eridano"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Errore: Impossibile aprire il file di script per registrare i comandi."
 
@@ -688,11 +712,11 @@ msgstr "Cinque Re Feudatari"
 msgid "Flail"
 msgstr "Correggiato"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Capovolgi orizzontalmente [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Capovolgi verticalmente [CTRL + SHIFT + V]"
 
@@ -760,7 +784,7 @@ msgstr "Ragazza"
 msgid "Good Gourd"
 msgstr "Zucca Buona"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Vai all'oggetto selezionato [SPAZIO]"
 
@@ -772,7 +796,7 @@ msgstr "Grande Generale"
 msgid "Ground"
 msgstr "Terreno"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Terreno [G]"
 
@@ -788,11 +812,11 @@ msgstr "Mano"
 msgid "Heart"
 msgstr "Cuore"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Aiuto"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Aiuto [H]"
 
@@ -804,7 +828,7 @@ msgstr "Ercole"
 msgid "Hippopotamus"
 msgstr "Ippopotamo"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Premi di nuovo CTRL+R per interrompere.\n"
 
@@ -852,7 +876,7 @@ msgstr "Guardie Imperiali"
 msgid "Imperial Passageway"
 msgstr "Attraversamento Imperiale"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Fai scorrere il tempo più velocemente"
 
@@ -864,7 +888,7 @@ msgstr "Indiano"
 msgid "Info: "
 msgstr "Informazioni: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Informazioni"
 
@@ -879,6 +903,10 @@ msgstr "Comando di script non valido"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "j2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -988,7 +1016,7 @@ msgstr "Lucertola"
 msgid "Load Default Configuration: "
 msgstr "Carica la configurazione di default: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Caricamento delle figure delle Costellazioni in corso... "
 
@@ -1045,6 +1073,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "Moltiplicatore di scala di magnitudine: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitudine: "
 
@@ -1124,7 +1154,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Minuti"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1164,7 +1194,7 @@ msgstr "Banchina d'Ormeggo"
 msgid "Mortar"
 msgstr "Mortaio"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1198,7 +1228,7 @@ msgstr "Mosca"
 msgid "N"
 msgstr "N"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Nomi delle Costellazioni [V]"
 
@@ -1222,7 +1252,7 @@ msgstr "Nomi delle Nebulose"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Nomi delle Nebulose. Fino alla magnitudine:"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Nebulose [N]"
 
@@ -1238,7 +1268,7 @@ msgstr "Nettuno"
 msgid "Net"
 msgstr "Rete"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Modalità notturna (rossa)"
 
@@ -1306,6 +1336,10 @@ msgstr "Coppia di stelle"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Cancello del Palazzo"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "Parallasse: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1415,15 +1449,17 @@ msgstr "Palazzo Porpureo"
 msgid "Pyxis"
 msgstr "Bussola"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Esci [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Esci [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "AR/DE: "
 
@@ -1439,11 +1475,11 @@ msgstr "Circuito"
 msgid "Ramparts"
 msgstr "Bastioni"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Velocità normale del tempo [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Registrazione dei comandi nel file di script:\n"
 
@@ -1459,7 +1495,7 @@ msgstr "Riavvia il programma affinchè la modifica di"
 msgid "Reticulum"
 msgstr "Reticolo"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "Ripristina l'ora corrente"
 
@@ -1562,7 +1598,7 @@ msgstr "Schermo"
 msgid "Screen Resolution :"
 msgstr "Risoluzione dello schermo:"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Script commander"
 
@@ -1582,7 +1618,7 @@ msgstr "Scudo"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Cerca (es. Saturno, Polare, HP6218, Orione, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Ricerca un corpo celeste [CTRL + F]"
 
@@ -1716,6 +1752,10 @@ msgstr "Fiume del Sud"
 msgid "Spear"
 msgstr "Lancia"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Tipo Spettrale: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Primavera"
@@ -1812,7 +1852,7 @@ msgstr "Uccello del tuono"
 msgid "Thunderbolt"
 msgstr "Lampo"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2054,9 +2094,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (Variabile)"
 
-#~ msgid " Light Years"
-#~ msgstr " Anni Luce"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Parametri della linea di comando errati\n"
 
@@ -2107,17 +2144,11 @@ msgstr ""
 #~ "4 , : Linea dell'eclittica 5 . : Linea equatoriale\n"
 #~ "\n"
 
-#~ msgid "Equ of date"
-#~ msgstr "Equazione del tempo"
-
 #~ msgid "Flip horizontally"
 #~ msgstr "Capovolgi orizzontalmente"
 
 #~ msgid "Flip vertically"
 #~ msgstr "Capovolgi verticalmente"
-
-#~ msgid "J2000"
-#~ msgstr "j2000"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Magnitudine limite: "
@@ -2131,17 +2162,11 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Frequenza meteorica per minuto"
 
-#~ msgid "Parallax: "
-#~ msgstr "Parallasse: "
-
 #~ msgid "Return to Current Time"
 #~ msgstr "Torna all'ora attuale"
 
 #~ msgid "Search for object"
 #~ msgstr "Cerca un oggetto"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Tipo Spettrale: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Moltiplicatore della magnitudine stellare: "

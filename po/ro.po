@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-06-20 12:17+0000\n"
 "Last-Translator: Nicolae Crefelean <kneekoo@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,6 +27,10 @@ msgstr ""
 "   Pentru noi versiuni , buguri ale programului\n"
 "    şi pentru comentarii accesaţi: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " Ani lumină"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -97,6 +101,10 @@ msgstr "Acvila"
 msgid "Ara"
 msgstr "Altarul"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Berbecul"
@@ -113,7 +121,7 @@ msgstr "Arsenalul"
 msgid "Atmosphere"
 msgstr "Atmosferă"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Atmosferă [A]"
 
@@ -129,7 +137,8 @@ msgstr ""
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
@@ -137,7 +146,7 @@ msgstr "Az/Alt: "
 msgid "Azimuthal Grid"
 msgstr "Tabel azimutal"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Grid azimutal [Z]"
 
@@ -189,11 +198,11 @@ msgstr "Piciorul Taurului"
 msgid "CD/DVD Script: "
 msgstr "Scriptul pentru CD/DVD: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Renunţă\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Ieşire\n"
 
@@ -241,7 +250,7 @@ msgstr "Capricornul"
 msgid "Cardinal Points"
 msgstr "Puncte cardinale"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Puncte cardinale [Q]"
 
@@ -335,7 +344,7 @@ msgstr "Porumbelul"
 msgid "Coma Berenices"
 msgstr "Părul Berenicei"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Înregistrarea comenzii a fost oprită."
 
@@ -343,7 +352,7 @@ msgstr "Înregistrarea comenzii a fost oprită."
 msgid "Configuration"
 msgstr "Configurare"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr ""
 
@@ -363,7 +372,7 @@ msgstr "Liniile Constelaţiilor"
 msgid "Constellation Names"
 msgstr "Numele Constelaţiilor"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Imaginile constelaţiilor [R]"
 
@@ -443,7 +452,7 @@ msgstr "Ziua"
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Micşorează viteza de rulare [J]"
 
@@ -455,7 +464,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfinul"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -483,7 +492,7 @@ msgstr "Căuşul"
 msgid "Disk Viewport"
 msgstr "Vizualizare mod disc"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -499,9 +508,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Distanţă: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Câinele"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -516,6 +531,11 @@ msgstr "Câinele"
 msgid "Dolphin"
 msgstr "Delfinul"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Dione"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Peştele de Aur"
@@ -524,7 +544,7 @@ msgstr "Peştele de Aur"
 msgid "Draco"
 msgstr "Dragonul"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Trasarea constelaţiilor [C]"
 
@@ -541,7 +561,7 @@ msgstr "Toba"
 msgid "Drumstick"
 msgstr "Băţul Tobei"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -601,6 +621,10 @@ msgstr "Enceladus"
 msgid "Enter observatory name"
 msgstr "Introduceţi numele observatorului"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr ""
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Ecuatorul"
@@ -609,11 +633,11 @@ msgstr "Ecuatorul"
 msgid "Equatorial Grid"
 msgstr "Tabel ecuatorial"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Grid ecuatorial [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Montură Ecuatorială/Altazimutală [ENTER]"
 
@@ -625,7 +649,7 @@ msgstr "Mânzul"
 msgid "Eridanus"
 msgstr "Eridan"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Eroare: Nu se poate deschide fişierul script pentru a înregistra comenzile."
@@ -674,11 +698,11 @@ msgstr "Cinci Regi Feudali"
 msgid "Flail"
 msgstr "Biciul"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr ""
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr ""
 
@@ -746,7 +770,7 @@ msgstr "Fata"
 msgid "Good Gourd"
 msgstr "Dovleacul Bun"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Deplasare la obiectul selectat [SPAŢIU]"
 
@@ -758,7 +782,7 @@ msgstr "Marele General"
 msgid "Ground"
 msgstr "Teren"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Teren [G]"
 
@@ -774,11 +798,11 @@ msgstr ""
 msgid "Heart"
 msgstr "Inima"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Ajutor [H]"
 
@@ -790,7 +814,7 @@ msgstr "Hercule"
 msgid "Hippopotamus"
 msgstr "Hipopotamul"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Apasă CRTL-R încă o dată pentru oprire.\n"
 
@@ -838,7 +862,7 @@ msgstr "Gărzile Imperiale"
 msgid "Imperial Passageway"
 msgstr "Pasajul Imperial"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Măreşte viteza de rulare [L]"
 
@@ -850,7 +874,7 @@ msgstr "Indianul"
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Informaţii"
 
@@ -866,6 +890,10 @@ msgstr "Comandă greşită în script"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr ""
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -978,7 +1006,7 @@ msgstr "Pasărea"
 msgid "Load Default Configuration: "
 msgstr "Încărcare a configuraţiei implicite : "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Încarc imaginile constelaţiilor: "
 
@@ -1036,6 +1064,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitudine: "
 
@@ -1115,7 +1145,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Minute"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1153,7 +1183,7 @@ msgstr "Stîlpul Odgonului"
 msgid "Mortar"
 msgstr "Mojarul"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1187,7 +1217,7 @@ msgstr "Musca"
 msgid "N"
 msgstr "N"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Numele constelaţiilor [V]"
 
@@ -1212,7 +1242,7 @@ msgstr "Numele Nebuloaselor"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Numele nebuloaselor. Până la magnitudinea :"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Nebuloase [N]"
 
@@ -1228,7 +1258,7 @@ msgstr "Neptun"
 msgid "Net"
 msgstr "Pânza"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Vizualizare in mod noapte"
 
@@ -1296,6 +1326,10 @@ msgstr "Perechea de Stele"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Poarta Palatului"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr ""
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1405,15 +1439,17 @@ msgstr "Palatul Violet"
 msgid "Pyxis"
 msgstr "Busola"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Închide [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Închide [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "AD/DE: "
 
@@ -1429,11 +1465,11 @@ msgstr ""
 msgid "Ramparts"
 msgstr "Meterezele"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Rulare în timp real [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Înregistrează comenzile într-un fişier script:\n"
 
@@ -1449,7 +1485,7 @@ msgstr "Reporneşte aplicaţia pentru"
 msgid "Reticulum"
 msgstr "Reticulul"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr ""
 
@@ -1550,7 +1586,7 @@ msgstr "Ecranul"
 msgid "Screen Resolution :"
 msgstr "Rezoluţie ecran :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Editor scripturi"
 
@@ -1570,7 +1606,7 @@ msgstr "Scutul"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Caută (de ex. Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr ""
 
@@ -1702,6 +1738,10 @@ msgstr "Râul de Sud"
 msgid "Spear"
 msgstr "Suliţa"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Tipul Spectral: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Primăvara"
@@ -1799,7 +1839,7 @@ msgstr "Trăznetul"
 msgid "Thunderbolt"
 msgstr "Trăznetul"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2035,9 +2075,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (Variabilă)"
 
-#~ msgid " Light Years"
-#~ msgstr " Ani lumină"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Linia de comandă conţine comenzi greşite.\n"
 
@@ -2108,9 +2145,6 @@ msgstr ""
 
 #~ msgid "Search for object"
 #~ msgstr "Caută un obiect"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Tipul Spectral: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Multiplicator pentru magnitudinea stelelor : "
