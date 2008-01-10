@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-06-20 11:39+0000\n"
 "Last-Translator: Jeyhun <jeyhun.mamedov@ibar.az>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -26,6 +26,10 @@ msgstr ""
 "   ...Zehmet olmasa http://www.stellarium.org saytında yeni versiyaları\n"
 ".... yoxlayın, sehvler barede şerhlerinizi bize gönderin....\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " İşıq ili"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -95,6 +99,10 @@ msgstr ""
 msgid "Ara"
 msgstr ""
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Oğlaq"
@@ -111,7 +119,7 @@ msgstr ""
 msgid "Atmosphere"
 msgstr "Atmosfer"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Atmosfer"
 
@@ -127,7 +135,8 @@ msgstr ""
 msgid "Author: "
 msgstr ""
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr ""
 
@@ -135,7 +144,7 @@ msgstr ""
 msgid "Azimuthal Grid"
 msgstr "Azimut şebekesi"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimut şebekesi"
 
@@ -187,11 +196,11 @@ msgstr ""
 msgid "CD/DVD Script: "
 msgstr "CD/DVD skripti: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Çıxış\n"
 
@@ -239,7 +248,7 @@ msgstr "Oğlaq"
 msgid "Cardinal Points"
 msgstr ""
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr ""
 
@@ -332,7 +341,7 @@ msgstr ""
 msgid "Coma Berenices"
 msgstr ""
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Komandanın yazılması kesildi"
 
@@ -340,7 +349,7 @@ msgstr "Komandanın yazılması kesildi"
 msgid "Configuration"
 msgstr "Konfiqurasiya"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr ""
 
@@ -360,7 +369,7 @@ msgstr ""
 msgid "Constellation Names"
 msgstr ""
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Bürclerin tesviri"
 
@@ -440,7 +449,7 @@ msgstr "Gün"
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Zaman süretini azalt [J]"
 
@@ -452,7 +461,7 @@ msgstr ""
 msgid "Delphinus"
 msgstr "Delfin"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -480,7 +489,7 @@ msgstr ""
 msgid "Disk Viewport"
 msgstr ""
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -496,9 +505,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Mesafe "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Köpek"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -513,6 +528,10 @@ msgstr "Köpek"
 msgid "Dolphin"
 msgstr ""
 
+#: src/s_tui.h:275 src/s_tui.h:292
+msgid "Done"
+msgstr ""
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr ""
@@ -521,7 +540,7 @@ msgstr ""
 msgid "Draco"
 msgstr "Ejdaha"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Bürclerin tesviri"
 
@@ -538,7 +557,7 @@ msgstr "Tebil"
 msgid "Drumstick"
 msgstr ""
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -594,6 +613,10 @@ msgstr ""
 msgid "Enter observatory name"
 msgstr "Observatoriyanın adını daxil et"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr ""
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Ekvator xetti"
@@ -602,11 +625,11 @@ msgstr "Ekvator xetti"
 msgid "Equatorial Grid"
 msgstr "Ekvator şebekesi"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Ekvator şebekesi"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr ""
 
@@ -618,7 +641,7 @@ msgstr ""
 msgid "Eridanus"
 msgstr ""
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Sehv: Komandaları yazmaq üçün skript faylı açıla bilmedi"
 
@@ -666,11 +689,11 @@ msgstr ""
 msgid "Flail"
 msgstr ""
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr ""
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr ""
 
@@ -738,7 +761,7 @@ msgstr "Qız"
 msgid "Good Gourd"
 msgstr ""
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Seçilmiş obyekte keç"
 
@@ -750,7 +773,7 @@ msgstr ""
 msgid "Ground"
 msgstr "Torpaq"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Torpaq"
 
@@ -766,11 +789,11 @@ msgstr ""
 msgid "Heart"
 msgstr "Ürek"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Kömek"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Kömek"
 
@@ -782,7 +805,7 @@ msgstr "Herkules"
 msgid "Hippopotamus"
 msgstr "Hippopotam"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Dayandırmaq üçün yeniden CTRL-R -i basın\n"
 
@@ -830,7 +853,7 @@ msgstr "İmperia gözetçileri"
 msgid "Imperial Passageway"
 msgstr "İmperia keçidi"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Zaman süretini artır [L]"
 
@@ -842,7 +865,7 @@ msgstr "Hindu"
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Melumat"
 
@@ -857,6 +880,10 @@ msgstr "Sehv skript komandası"
 
 #: src/translations.h:42
 msgid "Io"
+msgstr ""
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
 msgstr ""
 
 #: src/translations.h:249
@@ -969,7 +996,7 @@ msgstr "Quş"
 msgid "Load Default Configuration: "
 msgstr "Standart konfiqurasiyanı yükle: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr ""
 
@@ -1026,6 +1053,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr ""
 
@@ -1105,7 +1134,7 @@ msgstr ""
 msgid "Minutes"
 msgstr "Deqiqe"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1138,7 +1167,7 @@ msgstr ""
 msgid "Mortar"
 msgstr ""
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1161,7 +1190,7 @@ msgstr ""
 msgid "N"
 msgstr "Şm"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Bürclerin sayı"
 
@@ -1186,7 +1215,7 @@ msgstr ""
 msgid "Nebulas Names. Up to mag :"
 msgstr "Dumanlıqların adları. Böyütmek üçün Up:"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Dumanlıqlar"
 
@@ -1202,7 +1231,7 @@ msgstr "Neptun"
 msgid "Net"
 msgstr "Tor"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Gece (qırmızı) rejimi"
 
@@ -1270,6 +1299,10 @@ msgstr "Ulduzlar cütü"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Saray darvazası"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr ""
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1379,15 +1412,17 @@ msgstr ""
 msgid "Pyxis"
 msgstr "Mücrü"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Çıxış [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Çıxış [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr ""
 
@@ -1403,11 +1438,11 @@ msgstr ""
 msgid "Ramparts"
 msgstr ""
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Real Zaman süreti [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Komanda skript faylına yazılır:\n"
 
@@ -1423,7 +1458,7 @@ msgstr "Programı yeniden yükle"
 msgid "Reticulum"
 msgstr ""
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr ""
 
@@ -1524,7 +1559,7 @@ msgstr ""
 msgid "Screen Resolution :"
 msgstr "Ekran ölçüleri :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr ""
 
@@ -1544,7 +1579,7 @@ msgstr ""
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Axtar (mes. Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr ""
 
@@ -1676,6 +1711,10 @@ msgstr ""
 msgid "Spear"
 msgstr ""
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Spektral tip "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr ""
@@ -1772,7 +1811,7 @@ msgstr ""
 msgid "Thunderbolt"
 msgstr ""
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2007,9 +2046,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " Deyişen"
 
-#~ msgid " Light Years"
-#~ msgstr " İşıq ili"
-
 #~ msgid "Configuration window"
 #~ msgstr "Konfiqurasiya penceresi"
 
@@ -2021,9 +2057,6 @@ msgstr ""
 
 #~ msgid "Search for object"
 #~ msgstr "Obyekti axtar"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Spektral tip "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Ulduz miqyası emsalı: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-12-27 14:35+0000\n"
 "Last-Translator: siulamvictor <victorlamhk@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -26,6 +26,10 @@ msgstr ""
 "   如需檢查最新版本、回報程式錯誤或是給予我們意見，請瀏覽\n"
 "    http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " 光年"
 
 #: src/stel_ui_conf.cpp:1104
 #, fuzzy
@@ -101,6 +105,10 @@ msgstr "天鷹座"
 msgid "Ara"
 msgstr "天壇座"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "牡羊座"
@@ -117,7 +125,7 @@ msgstr "庫樓"
 msgid "Atmosphere"
 msgstr "大氣"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "大氣層 [A]"
 
@@ -133,7 +141,8 @@ msgstr ""
 msgid "Author: "
 msgstr "作者: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "方位角/仰角: "
 
@@ -141,7 +150,7 @@ msgstr "方位角/仰角: "
 msgid "Azimuthal Grid"
 msgstr "地平座標系統"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "方位投影方格 [Z]"
 
@@ -193,11 +202,11 @@ msgstr ""
 msgid "CD/DVD Script: "
 msgstr "CD/DVD劇本: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : 離開\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : 離開↵\n"
 
@@ -245,7 +254,7 @@ msgstr "摩羯座"
 msgid "Cardinal Points"
 msgstr "方位座標"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "方位座標 [Q]"
 
@@ -339,7 +348,7 @@ msgstr "天鴿座"
 msgid "Coma Berenices"
 msgstr "后髮座"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "指令記錄經已停止"
 
@@ -347,7 +356,7 @@ msgstr "指令記錄經已停止"
 msgid "Configuration"
 msgstr "設定"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "設定視窗 [1]"
 
@@ -368,7 +377,7 @@ msgstr "星座連線"
 msgid "Constellation Names"
 msgstr "星座名稱"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "星座插畫 [R]"
 
@@ -448,7 +457,7 @@ msgstr "日"
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "減慢時間速度 [J]"
 
@@ -460,7 +469,7 @@ msgstr "火衛二(戴摩斯)"
 msgid "Delphinus"
 msgstr "海豚座"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 #, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
@@ -497,7 +506,7 @@ msgstr "斗宿"
 msgid "Disk Viewport"
 msgstr "星座盤模式"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 #, fuzzy
 msgid ""
 "Display options:\n"
@@ -526,9 +535,15 @@ msgstr ""
 "4 , : 黃道 5 . : 赤道\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "距離: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "天狗"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -543,6 +558,11 @@ msgstr "天狗"
 msgid "Dolphin"
 msgstr "鰭豚"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "土衛四(戴奧妮)"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "劍魚座"
@@ -551,7 +571,7 @@ msgstr "劍魚座"
 msgid "Draco"
 msgstr "天龍座"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "星座連線 [C]"
 
@@ -568,7 +588,7 @@ msgstr "河鼓"
 msgid "Drumstick"
 msgstr "天桴"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -628,6 +648,10 @@ msgstr "土衛二(恩瑟阿達斯)"
 msgid "Enter observatory name"
 msgstr "輸入天文臺名稱"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr ""
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "赤道"
@@ -636,11 +660,11 @@ msgstr "赤道"
 msgid "Equatorial Grid"
 msgstr "赤道座標系統"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "赤道座標方格 [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "赤道/地平裝置 [ENTER]"
 
@@ -652,7 +676,7 @@ msgstr "小馬座"
 msgid "Eridanus"
 msgstr "波江座"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "錯誤: 無法開啟用作記錄指令碼的指令碼檔"
 
@@ -700,11 +724,11 @@ msgstr "五諸侯(井宿)"
 msgid "Flail"
 msgstr "天棓"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "水平翻轉[CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "垂直翻轉[CTRL + SHIFT + V]"
 
@@ -772,7 +796,7 @@ msgstr "女宿"
 msgid "Good Gourd"
 msgstr "瓠瓜"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "移至選取天體 [SPACE]"
 
@@ -784,7 +808,7 @@ msgstr "天大將軍"
 msgid "Ground"
 msgstr "地面"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "地面 [G]"
 
@@ -800,11 +824,11 @@ msgstr ""
 msgid "Heart"
 msgstr "心宿"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "說明"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "說明 [H]"
 
@@ -816,7 +840,7 @@ msgstr "武仙座"
 msgid "Hippopotamus"
 msgstr ""
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "按CTRL+R以停止記錄↵\n"
 
@@ -864,7 +888,7 @@ msgstr "常陳"
 msgid "Imperial Passageway"
 msgstr "輦道"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "加快時間速度 [L]"
 
@@ -876,7 +900,7 @@ msgstr "印第安座"
 msgid "Info: "
 msgstr "資訊: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "軟體資訊"
 
@@ -892,6 +916,10 @@ msgstr "無效的指令碼"
 #: src/translations.h:42
 msgid "Io"
 msgstr "木衛一(伊奧)"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -1004,7 +1032,7 @@ msgstr ""
 msgid "Load Default Configuration: "
 msgstr "載入預設值: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "載入星座插圖: "
 
@@ -1063,6 +1091,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "星等倍大基數: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "視星等: "
 
@@ -1143,7 +1173,7 @@ msgstr "土衛一(邁馬斯)"
 msgid "Minutes"
 msgstr "分"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1181,7 +1211,7 @@ msgstr ""
 msgid "Mortar"
 msgstr "臼"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1215,7 +1245,7 @@ msgstr "天蠅座"
 msgid "N"
 msgstr "北"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "星座名稱 [V]"
 
@@ -1240,7 +1270,7 @@ msgstr "星雲名稱"
 msgid "Nebulas Names. Up to mag :"
 msgstr "顯示星雲的最高星等:"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "星雲 [N]"
 
@@ -1256,7 +1286,7 @@ msgstr "海王星"
 msgid "Net"
 msgstr ""
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "夜間模式 (紅)"
 
@@ -1325,6 +1355,10 @@ msgstr "雙星"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "闕丘"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "視差 "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1436,15 +1470,17 @@ msgstr "紫微垣"
 msgid "Pyxis"
 msgstr "羅盤座"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "結束 [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "結束 [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "赤經/赤緯: "
 
@@ -1460,11 +1496,11 @@ msgstr ""
 msgid "Ramparts"
 msgstr "壘壁陣"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "真實時間速度 [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "記錄指令至指令碼檔:↵\n"
 
@@ -1481,7 +1517,7 @@ msgstr "重新啟動程式"
 msgid "Reticulum"
 msgstr "網罟座"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "返回現在時間 [8]"
 
@@ -1582,7 +1618,7 @@ msgstr "屏"
 msgid "Screen Resolution :"
 msgstr "螢幕解析度"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "指令碼控制器"
 
@@ -1603,7 +1639,7 @@ msgstr "天盾座"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "目標 (如Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "尋找天體 [CTRL + F]"
 
@@ -1737,6 +1773,10 @@ msgstr "南河"
 msgid "Spear"
 msgstr "天槍"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "光譜型: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "天淵"
@@ -1835,7 +1875,7 @@ msgstr "霹靂"
 msgid "Thunderbolt"
 msgstr "霹靂"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2077,9 +2117,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (變星)"
 
-#~ msgid " Light Years"
-#~ msgstr " 光年"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: 指令錯誤\n"
 
@@ -2119,9 +2156,6 @@ msgstr ""
 #~ msgid "Flip vertically"
 #~ msgstr "垂直倒轉"
 
-#~ msgid "J2000"
-#~ msgstr "J2000"
-
 #, fuzzy
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "星等限制: "
@@ -2135,14 +2169,8 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "流星每分鐘發生率"
 
-#~ msgid "Parallax: "
-#~ msgstr "視差 "
-
 #~ msgid "Search for object"
 #~ msgstr "搜尋天體"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "光譜型: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "星等顯示加成: "

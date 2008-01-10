@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-12-07 18:17+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.alomar@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -29,6 +29,10 @@ msgstr ""
 "   Comproveu noves versions i envieu-nos informes\n"
 "    d'error i comentaris a: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " Anys llum"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -98,6 +102,10 @@ msgstr "Àguila"
 msgid "Ara"
 msgstr "Altar"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Àries"
@@ -114,7 +122,7 @@ msgstr "Arsenal"
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Atmosfera [A]"
 
@@ -130,7 +138,8 @@ msgstr "Dit del peu d'Aurvandil"
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
@@ -138,7 +147,7 @@ msgstr "Az/Alt: "
 msgid "Azimuthal Grid"
 msgstr "Quadrícula Azimutal"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Quadrícula Azimutal [Z]"
 
@@ -190,11 +199,11 @@ msgstr "Pota de Brau"
 msgid "CD/DVD Script: "
 msgstr "Script CD/DVD: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Sortir\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Sortir\n"
 
@@ -242,7 +251,7 @@ msgstr "Capricorni"
 msgid "Cardinal Points"
 msgstr "Punts cardinals"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Punts Cardinals [Q]"
 
@@ -334,7 +343,7 @@ msgstr "Coloma"
 msgid "Coma Berenices"
 msgstr "Cabellera de Berenice"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "S'ha aturat l'enregistrament d'ordres."
 
@@ -342,7 +351,7 @@ msgstr "S'ha aturat l'enregistrament d'ordres."
 msgid "Configuration"
 msgstr "Configuració"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Finestra de configuració [1]"
 
@@ -362,7 +371,7 @@ msgstr "Línies de les constel·lacions"
 msgid "Constellation Names"
 msgstr "Nom de constel·lacions"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Representació de les Constel·lacions [R]"
 
@@ -442,7 +451,7 @@ msgstr "Dia"
 msgid "Day keys: "
 msgstr "Claus del Dia: "
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Disminueix la Velocitat del Temps [J]"
 
@@ -454,7 +463,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Dofí"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -490,7 +499,7 @@ msgstr "Cullerot"
 msgid "Disk Viewport"
 msgstr "Punt de vista de disc"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -518,9 +527,15 @@ msgstr ""
 "4 , : Línia de l'eclíptica 5 . : Línia del equador\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Distància: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Gos"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -534,6 +549,11 @@ msgstr "Gossos"
 msgid "Dolphin"
 msgstr "Dofí"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Dione"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Orada"
@@ -542,7 +562,7 @@ msgstr "Orada"
 msgid "Draco"
 msgstr "Drac"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Línies de les Constel·lacions [C]"
 
@@ -558,7 +578,7 @@ msgstr "Tambor"
 msgid "Drumstick"
 msgstr "Pal de Timbal"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -618,6 +638,10 @@ msgstr "Encelade"
 msgid "Enter observatory name"
 msgstr "Introduïu el nom de l’observatori"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr "Data Equ"
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Línia de l'equador"
@@ -626,11 +650,11 @@ msgstr "Línia de l'equador"
 msgid "Equatorial Grid"
 msgstr "Quadrícula Equatorial"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Quadrícula Equatorial [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Muntura Equatorial/Altazimutal [RETORN]"
 
@@ -642,7 +666,7 @@ msgstr "Cavallet"
 msgid "Eridanus"
 msgstr "Eridà"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: No s'ha pogut obrir un fitxer d'escript per enregistrar ordres."
 
@@ -690,11 +714,11 @@ msgstr "Cinc Reis Feudals"
 msgid "Flail"
 msgstr "Batolla"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Volteja horitzontalment [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Volteja verticalment [CTRL + SHIFT + V]"
 
@@ -762,7 +786,7 @@ msgstr "Noia"
 msgid "Good Gourd"
 msgstr "Bona Carbassa Silvestre"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Vés a l’objecte seleccionat [ESPAI]"
 
@@ -774,7 +798,7 @@ msgstr "Gran General"
 msgid "Ground"
 msgstr "Sòl"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Terra [G]"
 
@@ -790,11 +814,11 @@ msgstr "Mà"
 msgid "Heart"
 msgstr "Cor"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Ajuda [H]"
 
@@ -806,7 +830,7 @@ msgstr "Hèrcules"
 msgid "Hippopotamus"
 msgstr "Hipopòtam"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Torneu a prémer CTRL-R per aturar-ho.\n"
 
@@ -854,7 +878,7 @@ msgstr "Guardes Imperials"
 msgid "Imperial Passageway"
 msgstr "Passatge Imperial"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Incrementa la velocitat del Temps [L]"
 
@@ -866,7 +890,7 @@ msgstr "Indi"
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Informació"
 
@@ -881,6 +905,10 @@ msgstr "Comanda de script invàlida"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -990,7 +1018,7 @@ msgstr "Llangardaix"
 msgid "Load Default Configuration: "
 msgstr "Carrega la Configuració per Omissió: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Carregant dibuix de les constel·lacions: "
 
@@ -1047,6 +1075,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "Multiplicador d'Escalat de la Magnitud: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitud: "
 
@@ -1126,7 +1156,7 @@ msgstr "Mimes"
 msgid "Minutes"
 msgstr "Minuts"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1164,7 +1194,7 @@ msgstr "Pal d'amarratge"
 msgid "Mortar"
 msgstr "Morter"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1198,7 +1228,7 @@ msgstr "Mosca"
 msgid "N"
 msgstr "N"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Noms de les Constel·lacions [V]"
 
@@ -1222,7 +1252,7 @@ msgstr "Noms de les Nebuloses"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Nom de nebuloses. Fins mag :"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Nebuloses [N]"
 
@@ -1238,7 +1268,7 @@ msgstr "Neptú"
 msgid "Net"
 msgstr "Xarxa"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Mode nocturn (vermell)"
 
@@ -1306,6 +1336,10 @@ msgstr "Parella d'estels"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Porta de Palau"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "﻿Paral·laxi: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1415,15 +1449,17 @@ msgstr "Palau Púrpura"
 msgid "Pyxis"
 msgstr "Brúixola"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Sortir [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Sortir [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "AR/DEC: "
 
@@ -1439,11 +1475,11 @@ msgstr "Pista de Cursa"
 msgid "Ramparts"
 msgstr "Muralles"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Velocitat de Temps Real [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "S'estan enregistrant ordres a un fitxer d'escript:\n"
 
@@ -1459,7 +1495,7 @@ msgstr "Reiniciar el programa per"
 msgid "Reticulum"
 msgstr "Reticle"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "Torna al Temps Actual [8]"
 
@@ -1560,7 +1596,7 @@ msgstr "Pantalla"
 msgid "Screen Resolution :"
 msgstr "Resolució de pantalla :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Comanda de script"
 
@@ -1580,7 +1616,7 @@ msgstr "Escut"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Cerca (ex. Saturn, Polaris, HP6218, Orió, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Cerca objecte [CTRL + F]"
 
@@ -1712,6 +1748,10 @@ msgstr "Riu del Sud"
 msgid "Spear"
 msgstr "Arpó"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Tipus Espectral: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Primavera"
@@ -1808,7 +1848,7 @@ msgstr "Ocell Tro"
 msgid "Thunderbolt"
 msgstr "Llamp"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2050,26 +2090,17 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (Variable)"
 
-#~ msgid " Light Years"
-#~ msgstr " Anys llum"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Argument(s) erronis a la línia d'ordres\n"
 
 #~ msgid "Configuration window"
 #~ msgstr "Finestra de configuració"
 
-#~ msgid "Equ of date"
-#~ msgstr "Data Equ"
-
 #~ msgid "Flip horizontally"
 #~ msgstr "Volteja horitzontalment"
 
 #~ msgid "Flip vertically"
 #~ msgstr "Volteja verticalment"
-
-#~ msgid "J2000"
-#~ msgstr "J2000"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Limitador de Magnitud: "
@@ -2083,17 +2114,11 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Ràtio de Meteorits per minut"
 
-#~ msgid "Parallax: "
-#~ msgstr "﻿Paral·laxi: "
-
 #~ msgid "Return to Current Time"
 #~ msgstr "Torna al Temps Actual"
 
 #~ msgid "Search for object"
 #~ msgstr "Cerca un objecte"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Tipus Espectral: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"

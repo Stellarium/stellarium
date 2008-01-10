@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-10-11 03:11+0000\n"
 "Last-Translator: Geir Håkon Eikland\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -29,6 +29,10 @@ msgstr ""
 "   Sjekk om det finnes en nyere versjon før du melder\n"
 "    feil eller kommentarer til oss på: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " lysår"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -98,6 +102,10 @@ msgstr "Ørnen"
 msgid "Ara"
 msgstr "Alteret"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Væren"
@@ -114,7 +122,7 @@ msgstr "Arsenal"
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Atmosfære [A]"
 
@@ -130,7 +138,8 @@ msgstr "Aurvandils tå"
 msgid "Author: "
 msgstr "Forfatter: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Asimut/høyde: "
 
@@ -138,7 +147,7 @@ msgstr "Asimut/høyde: "
 msgid "Azimuthal Grid"
 msgstr "Planprojesert rutenett"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Planprojisert/asimutalt rutenett [Z]"
 
@@ -190,11 +199,11 @@ msgstr "Forbeinet til okse"
 msgid "CD/DVD Script: "
 msgstr "CD/DVD skript: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD+Q: Avslutt\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "Ctrl+Q : Avslutt\n"
 
@@ -242,7 +251,7 @@ msgstr "Steinbukken"
 msgid "Cardinal Points"
 msgstr "Himmelretninger"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Himmelretninger [Q]"
 
@@ -334,7 +343,7 @@ msgstr "Duen"
 msgid "Coma Berenices"
 msgstr "Berenikes hår"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Registrering av kommandoer er stoppet."
 
@@ -342,7 +351,7 @@ msgstr "Registrering av kommandoer er stoppet."
 msgid "Configuration"
 msgstr "Innstillinger"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Innstillinger [1]"
 
@@ -362,7 +371,7 @@ msgstr "Linjer i stjernebilder"
 msgid "Constellation Names"
 msgstr "Navn på stjernebilder"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Stjernebilder - grafikk [R]"
 
@@ -442,7 +451,7 @@ msgstr "Dag"
 msgid "Day keys: "
 msgstr "Info om dagen: "
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Reduser klokkehastighet [J]"
 
@@ -454,7 +463,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfinen"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -491,7 +500,7 @@ msgstr "Øse"
 msgid "Disk Viewport"
 msgstr "Linseformet visning"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -519,9 +528,15 @@ msgstr ""
 "4 , : Ekliptisk linje                5 . : Ekvatorlinje\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Avstand: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Hund"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -535,6 +550,11 @@ msgstr "Hunder"
 msgid "Dolphin"
 msgstr "Delfin"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Dione"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Gullfisken (sverdfisken)"
@@ -543,7 +563,7 @@ msgstr "Gullfisken (sverdfisken)"
 msgid "Draco"
 msgstr "Dragen"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Stjernebilder - strek [C]"
 
@@ -559,7 +579,7 @@ msgstr "Tromme"
 msgid "Drumstick"
 msgstr "Trommestikke"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -619,6 +639,10 @@ msgstr "Enceladus"
 msgid "Enter observatory name"
 msgstr "Angi navn på observatorium"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr "Ekvatortid"
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Ekvatorlinje"
@@ -627,11 +651,11 @@ msgstr "Ekvatorlinje"
 msgid "Equatorial Grid"
 msgstr "Sylinderprojesert rutenett"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Sylinderprojisert/ekvatorialt rutenett [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Sylinder-/planprojisert visning [Enter]"
 
@@ -643,7 +667,7 @@ msgstr "Den lille hest (føllet)"
 msgid "Eridanus"
 msgstr "Floden"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Feil: Klarte ikke å åpne skriptfilen for å registrere kommandoer."
 
@@ -691,11 +715,11 @@ msgstr "Fem føydalkonger"
 msgid "Flail"
 msgstr "Treske"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Vend vannrett [Ctrl + Shift + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Vend loddrett [Ctrl + Shift + V]"
 
@@ -763,7 +787,7 @@ msgstr "Jente"
 msgid "Good Gourd"
 msgstr "Godt gresskar"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Sentrer valgt objekt [Mellomrom]"
 
@@ -775,7 +799,7 @@ msgstr "Stor general"
 msgid "Ground"
 msgstr "Horisont"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Horisont [G]"
 
@@ -791,11 +815,11 @@ msgstr "Hånd"
 msgid "Heart"
 msgstr "Hjerte"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Hjelp"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Hjelp [H]"
 
@@ -807,7 +831,7 @@ msgstr "Herkules"
 msgid "Hippopotamus"
 msgstr "Flodhest"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Trykk Ctrl+R en gang til for å stoppe.\n"
 
@@ -855,7 +879,7 @@ msgstr "Keisergarden"
 msgid "Imperial Passageway"
 msgstr "Keiserlig passasje"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Øk klokkehastighet [L]"
 
@@ -867,7 +891,7 @@ msgstr "Indianeren"
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Informasjon"
 
@@ -882,6 +906,10 @@ msgstr "Ugyldig skript-kommando"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -991,7 +1019,7 @@ msgstr "Øgle"
 msgid "Load Default Configuration: "
 msgstr "Hent standard oppsett: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Henter stjernebildene: "
 
@@ -1048,6 +1076,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "Faktor for forstørrelse: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Lysstyrke: "
 
@@ -1127,7 +1157,7 @@ msgstr "Mimas"
 msgid "Minutes"
 msgstr "Minutter"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1166,7 +1196,7 @@ msgstr "Fortøyningspåle"
 msgid "Mortar"
 msgstr "Murer"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1198,7 +1228,7 @@ msgstr "Fluen"
 msgid "N"
 msgstr "N"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Navn på stjernebilder [V]"
 
@@ -1222,7 +1252,7 @@ msgstr "Navn på stjernetåker"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Stjernetåkenavn                         Forsterkning:"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Stjernetåker [N]"
 
@@ -1238,7 +1268,7 @@ msgstr "Neptun"
 msgid "Net"
 msgstr "Nett"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Nattmodus (rød)"
 
@@ -1306,6 +1336,10 @@ msgstr "Stjernepar"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Palassport"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "Parallakse: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1415,15 +1449,17 @@ msgstr "Purpur-palass"
 msgid "Pyxis"
 msgstr "Kompasset"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Avslutt [Cmd + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Avslutt [Ctrl + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Rekt./Dekl.: "
 
@@ -1439,11 +1475,11 @@ msgstr "Racebane"
 msgid "Ramparts"
 msgstr "Festningsvoller"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Normal klokkehastighet [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Registrering av kommandoer til skriptfilen:\n"
 
@@ -1459,7 +1495,7 @@ msgstr "Du må starte programmet på nytt"
 msgid "Reticulum"
 msgstr "Nettet"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "Retur til dagens tidspunkt [8]"
 
@@ -1562,7 +1598,7 @@ msgstr "Skjerm"
 msgid "Screen Resolution :"
 msgstr "Skjermoppløsning:"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Skript-kommandoer"
 
@@ -1582,7 +1618,7 @@ msgstr "Skjoldet"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Søk etter (f.eks: Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Søk etter et objekt [Ctrl + F]"
 
@@ -1714,6 +1750,10 @@ msgstr "Sørlige elv"
 msgid "Spear"
 msgstr "Spyd"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Spektraltype: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Vår"
@@ -1810,7 +1850,7 @@ msgstr "Tordenvær"
 msgid "Thunderbolt"
 msgstr "Lyn"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2068,9 +2108,6 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (Variabel)"
 
-#~ msgid " Light Years"
-#~ msgstr " lysår"
-
 #~ msgid " in file "
 #~ msgstr " i fil "
 
@@ -2292,9 +2329,6 @@ msgstr ""
 #~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "FEIL i linje %d i %s\n"
 
-#~ msgid "Equ of date"
-#~ msgstr "Ekvatortid"
-
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Fiskeøye-projeksjon"
 
@@ -2309,9 +2343,6 @@ msgstr ""
 
 #~ msgid "Invalid sky culture directory: "
 #~ msgstr "Ugyldig mappe for himmelkultur: "
-
-#~ msgid "J2000"
-#~ msgstr "J2000"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Begrense størrelse: "
@@ -2440,9 +2471,6 @@ msgstr ""
 #~ msgid "Nebula"
 #~ msgstr "Tåke"
 
-#~ msgid "Parallax: "
-#~ msgstr "Parallakse: "
-
 #~ msgid "Planet/Moon"
 #~ msgstr "Planet/måne"
 
@@ -2485,9 +2513,6 @@ msgstr ""
 
 #~ msgid "Spectral : "
 #~ msgstr "Spektral : "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Spektraltype: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Forsterkning av stjerner: "

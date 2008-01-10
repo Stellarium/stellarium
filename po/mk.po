@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-08-23 13:32+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Macedonian <mk@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -26,6 +26,10 @@ msgstr ""
 "   Ве молам проверете за понови верзии и испратете извештај за грешка\n"
 "    и коментари на http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " Светлосни години"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -95,6 +99,10 @@ msgstr "Акила"
 msgid "Ara"
 msgstr "Олтар"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Овен"
@@ -111,7 +119,7 @@ msgstr "Арсенал"
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Атмосфера [A]"
 
@@ -127,7 +135,8 @@ msgstr "Палецот на Аурвандил"
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
@@ -135,7 +144,7 @@ msgstr "Az/Alt: "
 msgid "Azimuthal Grid"
 msgstr "Азимутална мрежа"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Азимутална мрежа [Z]"
 
@@ -187,11 +196,11 @@ msgstr "Бикова нога"
 msgid "CD/DVD Script: "
 msgstr "CD/DVD Скрипта: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Излез\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Излез\n"
 
@@ -239,7 +248,7 @@ msgstr "Јарец"
 msgid "Cardinal Points"
 msgstr "Клучни точки"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Клучни точки [Q]"
 
@@ -331,7 +340,7 @@ msgstr "Гулаб"
 msgid "Coma Berenices"
 msgstr "Береникина коса"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Снимање на командите е прекинато"
 
@@ -339,7 +348,7 @@ msgstr "Снимање на командите е прекинато"
 msgid "Configuration"
 msgstr "Конфигурација"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Конфигурациски прозорец [1]"
 
@@ -359,7 +368,7 @@ msgstr "Линии на соѕвездијата"
 msgid "Constellation Names"
 msgstr "Имиња на соѕвездијата"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Графици на соѕвездијата [R]"
 
@@ -439,7 +448,7 @@ msgstr "Ден"
 msgid "Day keys: "
 msgstr "Копчиња за денови: "
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Успори проток на времето [J]"
 
@@ -451,7 +460,7 @@ msgstr "Деимос"
 msgid "Delphinus"
 msgstr "Делфин"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -487,7 +496,7 @@ msgstr "Црпалка"
 msgid "Disk Viewport"
 msgstr "Поглед како диск"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -515,9 +524,15 @@ msgstr ""
 "4 , : Линија на еклиптиката 5 . : Линија на екваторот\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Оддалеченост: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Куче"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -531,6 +546,11 @@ msgstr "Кучиња"
 msgid "Dolphin"
 msgstr "Делфин"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Диона"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Златна риба"
@@ -539,7 +559,7 @@ msgstr "Златна риба"
 msgid "Draco"
 msgstr "Змеј"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Цртање на соѕвездијата [C]"
 
@@ -555,7 +575,7 @@ msgstr "Тапан"
 msgid "Drumstick"
 msgstr "Рачка за тапан"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -615,6 +635,10 @@ msgstr "Енцелад"
 msgid "Enter observatory name"
 msgstr "Внеси име на опсерваторијата"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr "Тековно"
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Линија на екваторот"
@@ -623,11 +647,11 @@ msgstr "Линија на екваторот"
 msgid "Equatorial Grid"
 msgstr "Екваторијална мрежа"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Екваторијална мрежа [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Екваторијалнa/Азимутска Монтажа [ENTER]"
 
@@ -639,7 +663,7 @@ msgstr "Ждребе"
 msgid "Eridanus"
 msgstr "Еридан (Река)"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Грешка: не е можно да се одвори датотеката за запис на команди."
 
@@ -687,11 +711,11 @@ msgstr "Пет феудални кралеви"
 msgid "Flail"
 msgstr "Буздоган"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Преврти по хоризонтала [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Преврти по вертикала [CTRL + SHIFT + V]"
 
@@ -759,7 +783,7 @@ msgstr "Девојка"
 msgid "Good Gourd"
 msgstr "Добра лушпа"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Иди на избраниот објект [SPACE]"
 
@@ -771,7 +795,7 @@ msgstr "Голем генерал"
 msgid "Ground"
 msgstr "Земја"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Земја [G]"
 
@@ -787,11 +811,11 @@ msgstr "Рака"
 msgid "Heart"
 msgstr "Срце"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Помош"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Помош [H]"
 
@@ -803,7 +827,7 @@ msgstr "Херкулес"
 msgid "Hippopotamus"
 msgstr "Нилски коњ"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Притиснете CTRL-R повторно за стопирање.\n"
 
@@ -851,7 +875,7 @@ msgstr "Кралски чувари"
 msgid "Imperial Passageway"
 msgstr "Царски премин"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Забрзај проток на времето [L]"
 
@@ -863,7 +887,7 @@ msgstr "Индус"
 msgid "Info: "
 msgstr "Информација: "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Информација"
 
@@ -878,6 +902,10 @@ msgstr "Некоректна скрипт команда"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Ио"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "Ј2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -987,7 +1015,7 @@ msgstr "Гуштер"
 msgid "Load Default Configuration: "
 msgstr "Вчитај основна конфигурација: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Вчитувам податоци за соѕвездијата: "
 
@@ -1044,6 +1072,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "Множител за големина на магнитудата: "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Магнитуда: "
 
@@ -1123,7 +1153,7 @@ msgstr "Мимас"
 msgid "Minutes"
 msgstr "Минути"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1161,7 +1191,7 @@ msgstr "Сидриште"
 msgid "Mortar"
 msgstr "Mortar"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1195,7 +1225,7 @@ msgstr "Мува"
 msgid "N"
 msgstr "N"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Имиња на соѕвездијата [V]"
 
@@ -1219,7 +1249,7 @@ msgstr "Имиња на маглини"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Имиња на маглини. До магнитуда :"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Маглина [N]"
 
@@ -1235,7 +1265,7 @@ msgstr "Нептун"
 msgid "Net"
 msgstr "Мрежа"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Ноќен [црвен] приказ"
 
@@ -1303,6 +1333,10 @@ msgstr "Две скали"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Врата на палатата"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "Паралакс: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1412,15 +1446,17 @@ msgstr "Розова палата"
 msgid "Pyxis"
 msgstr "Пиксис"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Излез [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Излез [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
@@ -1436,11 +1472,11 @@ msgstr "Тркачка патека"
 msgid "Ramparts"
 msgstr "Тврдина"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Реален тек на времето [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Снимање на команди во скрипт датотека:\n"
 
@@ -1456,7 +1492,7 @@ msgstr "Рестартирај го програмот за"
 msgid "Reticulum"
 msgstr "Мрежичка"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "Врати се на сегашно време [8]"
 
@@ -1557,7 +1593,7 @@ msgstr "Слика"
 msgid "Screen Resolution :"
 msgstr "Резолуција на екранот :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Скрипт командер"
 
@@ -1577,7 +1613,7 @@ msgstr "Штит"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Барај (пр. Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Барај објекти [CTRL + F]"
 
@@ -1709,6 +1745,10 @@ msgstr "Јужна река"
 msgid "Spear"
 msgstr "Копје"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Спектрален тип: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Пружина"
@@ -1805,7 +1845,7 @@ msgstr "Огнена птица"
 msgid "Thunderbolt"
 msgstr "Молња"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2044,20 +2084,5 @@ msgstr "измените да станат активни."
 msgid "m"
 msgstr ""
 
-#~ msgid " Light Years"
-#~ msgstr " Светлосни години"
-
-#~ msgid "Equ of date"
-#~ msgstr "Тековно"
-
-#~ msgid "J2000"
-#~ msgstr "Ј2000"
-
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Ограничување на магнитудата: "
-
-#~ msgid "Parallax: "
-#~ msgstr "Паралакс: "
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Спектрален тип: "

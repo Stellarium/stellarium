@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-06 18:27+0100\n"
+"POT-Creation-Date: 2008-01-10 21:57+0100\n"
 "PO-Revision-Date: 2007-11-29 11:55+0000\n"
 "Last-Translator: Nkolay Parukhin <nik@sevpinro.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:730
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,6 +27,10 @@ msgstr ""
 "версий и присылайте сообщения об ошибках\n"
 "и комментарии нам на: http://www.stellarium.org\n"
 "\n"
+
+#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+msgid " Light Years"
+msgstr " световых лет"
 
 #: src/stel_ui_conf.cpp:1104
 msgid ": Exceptional Leonid rate"
@@ -96,6 +100,10 @@ msgstr "Орёл"
 msgid "Ara"
 msgstr "Жертвенник"
 
+#: src/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
 #: src/translations.h:86
 msgid "Aries"
 msgstr "Овен"
@@ -112,7 +120,7 @@ msgstr "Арсенал"
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/stel_ui.cpp:681
+#: src/stel_ui.cpp:682
 msgid "Atmosphere [A]"
 msgstr "Атмосфера [A]"
 
@@ -128,7 +136,8 @@ msgstr "Палец Орвандила"
 msgid "Author: "
 msgstr "Автор : "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124
+#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Азимут/Высота "
 
@@ -136,7 +145,7 @@ msgstr "Азимут/Высота "
 msgid "Azimuthal Grid"
 msgstr "Азимутальная сетка"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:674
 msgid "Azimuthal Grid [Z]"
 msgstr "Азимутальная сетка [Z]"
 
@@ -188,11 +197,11 @@ msgstr "Передние ноги быка"
 msgid "CD/DVD Script: "
 msgstr "CD/DVD сценарий: "
 
-#: src/stel_ui.cpp:811
+#: src/stel_ui.cpp:812
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Выход\n"
 
-#: src/stel_ui.cpp:809
+#: src/stel_ui.cpp:810
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Выход\n"
 
@@ -240,7 +249,7 @@ msgstr "Козерог"
 msgid "Cardinal Points"
 msgstr "Стороны света"
 
-#: src/stel_ui.cpp:679
+#: src/stel_ui.cpp:680
 msgid "Cardinal Points [Q]"
 msgstr "Стороны света [Q]"
 
@@ -333,7 +342,7 @@ msgstr "Голубь"
 msgid "Coma Berenices"
 msgstr "Волосы Вероники"
 
-#: src/stel_ui.cpp:1032
+#: src/stel_ui.cpp:1033
 msgid "Command recording stopped."
 msgstr "Запись команд остановлена."
 
@@ -341,7 +350,7 @@ msgstr "Запись команд остановлена."
 msgid "Configuration"
 msgstr "Настройка"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
 msgstr "Окно настроек [1]"
 
@@ -361,7 +370,7 @@ msgstr "Линии созвездий"
 msgid "Constellation Names"
 msgstr "Названия созвездий"
 
-#: src/stel_ui.cpp:671
+#: src/stel_ui.cpp:672
 msgid "Constellations Art [R]"
 msgstr "Изображения созвездий [R]"
 
@@ -442,7 +451,7 @@ msgstr "День"
 msgid "Day keys: "
 msgstr "Подсказки по дням "
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
 msgstr "Замедление времени [J]"
 
@@ -454,7 +463,7 @@ msgstr "Деймос"
 msgid "Delphinus"
 msgstr "Дельфин"
 
-#: src/stel_ui.cpp:783
+#: src/stel_ui.cpp:784
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -490,7 +499,7 @@ msgstr "Ковш"
 msgid "Disk Viewport"
 msgstr "Дисковая проекция"
 
-#: src/stel_ui.cpp:771
+#: src/stel_ui.cpp:772
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -518,9 +527,15 @@ msgstr ""
 "4, : линия эклиптики 5, : линия экватора\n"
 "\n"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Расстояние: "
+
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Do"
+msgstr "Пёс"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -534,6 +549,11 @@ msgstr "Собаки"
 msgid "Dolphin"
 msgstr "Дельфин"
 
+#: src/s_tui.h:275 src/s_tui.h:292
+#, fuzzy
+msgid "Done"
+msgstr "Диона"
+
 #: src/translations.h:110
 msgid "Dorado"
 msgstr "Золотая рыба"
@@ -542,7 +562,7 @@ msgstr "Золотая рыба"
 msgid "Draco"
 msgstr "Дракон"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:668
 msgid "Drawing of the Constellations [C]"
 msgstr "Линии созвездий [C]"
 
@@ -558,7 +578,7 @@ msgstr "Барабан"
 msgid "Drumstick"
 msgstr "Барабанная палочка"
 
-#: src/stel_ui.cpp:799
+#: src/stel_ui.cpp:800
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -618,6 +638,10 @@ msgstr "Энцелад"
 msgid "Enter observatory name"
 msgstr "Введите название обсерватории"
 
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+msgid "Equ of date"
+msgstr "Текущие"
+
 #: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
 msgid "Equator Line"
 msgstr "Линия экватора"
@@ -626,11 +650,11 @@ msgstr "Линия экватора"
 msgid "Equatorial Grid"
 msgstr "Экваториальная сетка"
 
-#: src/stel_ui.cpp:675
+#: src/stel_ui.cpp:676
 msgid "Equatorial Grid [E]"
 msgstr "Экваториальная сетка [E]"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:688
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Экваториальная/Азимутальная система [ENTER]"
 
@@ -642,7 +666,7 @@ msgstr "Малый Конь"
 msgid "Eridanus"
 msgstr "Эридан"
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1047
 msgid "Error: Unable to open script file to record commands."
 msgstr "Ошибка: Невозможно открыть файл сценария для записи команд."
 
@@ -690,11 +714,11 @@ msgstr "Пять феодальных королей"
 msgid "Flail"
 msgstr "Цеп"
 
-#: src/stel_ui.cpp:706
+#: src/stel_ui.cpp:707
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Отразить горизонтально [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:709
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Отразить вертикально [CTRL + SHIFT + V]"
 
@@ -762,7 +786,7 @@ msgstr "девушка"
 msgid "Good Gourd"
 msgstr "Хорошая тыква"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:705
 msgid "Goto selected object [SPACE]"
 msgstr "Переход к выбранному объекту [ПРОБЕЛ]"
 
@@ -774,7 +798,7 @@ msgstr "Великий полководец"
 msgid "Ground"
 msgstr "Земля"
 
-#: src/stel_ui.cpp:677
+#: src/stel_ui.cpp:678
 msgid "Ground [G]"
 msgstr "Земля [G]"
 
@@ -790,11 +814,11 @@ msgstr "Рука"
 msgid "Heart"
 msgstr "Сердце"
 
-#: src/stel_ui.cpp:818
+#: src/stel_ui.cpp:819
 msgid "Help"
 msgstr "Справка"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:686
 msgid "Help [H]"
 msgstr "Справка [H]"
 
@@ -806,7 +830,7 @@ msgstr "Геркулес"
 msgid "Hippopotamus"
 msgstr "Гиппопотам"
 
-#: src/stel_ui.cpp:1042
+#: src/stel_ui.cpp:1043
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Нажмите снова CTRL + R чтобы остановить.\n"
 
@@ -855,7 +879,7 @@ msgstr "Имперская гвардия"
 msgid "Imperial Passageway"
 msgstr "Имперский пассаж"
 
-#: src/stel_ui.cpp:718
+#: src/stel_ui.cpp:719
 msgid "Increase Time Speed [L]"
 msgstr "Ускорить ход времени [L]"
 
@@ -867,7 +891,7 @@ msgstr "Индеец"
 msgid "Info: "
 msgstr "Сведения : "
 
-#: src/stel_ui.cpp:748
+#: src/stel_ui.cpp:749
 msgid "Information"
 msgstr "Информация"
 
@@ -882,6 +906,10 @@ msgstr "Неверная команда сценария"
 #: src/translations.h:42
 msgid "Io"
 msgstr "Ио"
+
+#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+msgid "J2000"
+msgstr "J2000"
 
 #: src/translations.h:249
 msgid "Jade Well"
@@ -993,7 +1021,7 @@ msgstr "Ящерица"
 msgid "Load Default Configuration: "
 msgstr "Загрузить настройки по умолчанию: "
 
-#: src/ConstellationMgr.cpp:328
+#: src/ConstellationMgr.cpp:334
 msgid "Loading Constellation Art: "
 msgstr "Загружаются изображения созвездий: "
 
@@ -1050,6 +1078,8 @@ msgid "Magnitude Scaling Multiplier: "
 msgstr "коэффициент яркости звезд "
 
 #: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
+#: src/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Звездная величина "
 
@@ -1130,7 +1160,7 @@ msgstr "Мимас"
 msgid "Minutes"
 msgstr "Минут"
 
-#: src/stel_ui.cpp:803
+#: src/stel_ui.cpp:804
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1168,7 +1198,7 @@ msgstr "Швартовая тумба"
 msgid "Mortar"
 msgstr "Ступка"
 
-#: src/stel_ui.cpp:760
+#: src/stel_ui.cpp:761
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1202,7 +1232,7 @@ msgstr "Муха"
 msgid "N"
 msgstr "С"
 
-#: src/stel_ui.cpp:669
+#: src/stel_ui.cpp:670
 msgid "Names of the Constellations [V]"
 msgstr "Названия созвездий [V]"
 
@@ -1226,7 +1256,7 @@ msgstr "Названия туманностей"
 msgid "Nebulas Names. Up to mag :"
 msgstr "Названия туманностей до величины :"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:684
 msgid "Nebulas [N]"
 msgstr "Туманности [N]"
 
@@ -1242,7 +1272,7 @@ msgstr "Нептун"
 msgid "Net"
 msgstr "Сеть"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:693
 msgid "Night (red) mode"
 msgstr "Ночной (красный) режим"
 
@@ -1310,6 +1340,10 @@ msgstr "Пара звезд"
 #: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Дворцовые ворота"
+
+#: src/StarWrapper.cpp:130
+msgid "Parallax: "
+msgstr "Параллакс: "
 
 #: src/translations.h:140
 msgid "Pavo"
@@ -1419,15 +1453,17 @@ msgstr "Пурпурный дворец"
 msgid "Pyxis"
 msgstr "Компас"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:698
 msgid "Quit [CMD + Q]"
 msgstr "Выход [CMD + Q]"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:696
 msgid "Quit [CTRL + Q]"
 msgstr "Выход [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117
+#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
+#: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Радианы/Градусы: "
 
@@ -1443,11 +1479,11 @@ msgstr "Траектория пути"
 msgid "Ramparts"
 msgstr "Бастионы"
 
-#: src/stel_ui.cpp:716
+#: src/stel_ui.cpp:717
 msgid "Real Time Speed [K]"
 msgstr "Реальная скорость времени [K]"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1041
 msgid "Recording commands to script file:\n"
 msgstr "Запись команд в файл сценария:\n"
 
@@ -1463,7 +1499,7 @@ msgstr "Перезапустите программу для"
 msgid "Reticulum"
 msgstr "Сетка"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:721
 msgid "Return to Current Time [8]"
 msgstr "Возврат в настоящее время [8]"
 
@@ -1565,7 +1601,7 @@ msgstr "Экран"
 msgid "Screen Resolution :"
 msgstr "Разрешение экрана :"
 
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:702
+#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
 msgid "Script commander"
 msgstr "Редактор сценария"
 
@@ -1585,7 +1621,7 @@ msgstr "Щит"
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Поиск (напр. Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:700
+#: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
 msgstr "Поиск объекта [CTRL + F]"
 
@@ -1719,6 +1755,10 @@ msgstr "Южная река"
 msgid "Spear"
 msgstr "Копьё"
 
+#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+msgid "Spectral Type: "
+msgstr "Спектральный класс: "
+
 #: src/translations.h:272
 msgid "Spring"
 msgstr "Источник"
@@ -1815,7 +1855,7 @@ msgstr "Буревестник"
 msgid "Thunderbolt"
 msgstr "Удар молнии"
 
-#: src/stel_ui.cpp:791
+#: src/stel_ui.cpp:792
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -2057,26 +2097,17 @@ msgstr ""
 #~ msgid " (Variable)"
 #~ msgstr " (переменная)"
 
-#~ msgid " Light Years"
-#~ msgstr " световых лет"
-
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Неверный(е) аргумент(ы) командной строки.\n"
 
 #~ msgid "Configuration window"
 #~ msgstr "Окно настройки"
 
-#~ msgid "Equ of date"
-#~ msgstr "Текущие"
-
 #~ msgid "Flip horizontally"
 #~ msgstr "Отразить по горизонтали"
 
 #~ msgid "Flip vertically"
 #~ msgstr "Отразить по вертикали"
-
-#~ msgid "J2000"
-#~ msgstr "J2000"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "максимальная звездная величина: "
@@ -2087,17 +2118,11 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Метеорный поток в минуту"
 
-#~ msgid "Parallax: "
-#~ msgstr "Параллакс: "
-
 #~ msgid "Return to Current Time"
 #~ msgstr "Возврат в текущее время"
 
 #~ msgid "Search for object"
 #~ msgstr "Поиск объекта"
-
-#~ msgid "Spectral Type: "
-#~ msgstr "Спектральный класс: "
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Коэфф. Звездной величины: "
