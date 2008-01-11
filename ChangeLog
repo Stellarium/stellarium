@@ -21,6 +21,8 @@ StelModule now derive from QObject.
 First testing new script engine based on QObject slots.
 Recoded fully the texture manager now based on Qt signal/slots. It handles multithreading loading and downloading of images. As a direct result, loading time is divided by 2!
 Now use Qt4.3, and replaced CURL by QtNetwork.
+Fixed some date display bugs in config window.
+Year zero is now removed, i.e. before year 1 is year -1 (or 1 BC)
 Added new translations for th ml he fil tl eo lt mk
 
 0.9.0 [2007-06-6]
