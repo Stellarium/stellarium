@@ -945,40 +945,28 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	for (unsigned int i=0;i<ws.length();++i)
 	{
-		if (ws[i]>=16 && ws[i]<=18)
+		if( !speed_optimize )
 		{
-			// handle hilight colors (TUI)
-			// Note: this is hard coded - not generalized
-			if( ws[i]==17 )
-				glColor3f(0.5,1,0.5);  // normal
-			if( ws[i]==18 )
-				glColor3f(1,1,1);    // hilight
+			font->print_char_outlined(ws[i]);
 		}
 		else
 		{
-			if( !speed_optimize )
-			{
-				font->print_char_outlined(ws[i]);
-			}
-			else
-			{
-				font->print_char(ws[i]);
-			}
-
-			// with typeface need to manually advance
-			// TODO, absolute rotation would be better than relative
-			// TODO: would look better with kerning information...
-			glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
-
-			if( !speed_optimize )
-			{
-				psi = std::atan2((float)font->getStrLen(ws.substr(i,1))*1.05f,(float)d) * 180./M_PI;
-				if (psi>5)
-					psi = 5;
-			}
-			
-			glRotatef(psi,0,0,-1);
+			font->print_char(ws[i]);
 		}
+
+		// with typeface need to manually advance
+		// TODO, absolute rotation would be better than relative
+		// TODO: would look better with kerning information...
+		glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
+
+		if( !speed_optimize )
+		{
+			psi = std::atan2((float)font->getStrLen(ws.substr(i,1))*1.05f,(float)d) * 180./M_PI;
+			if (psi>5)
+				psi = 5;
+		}
+		
+		glRotatef(psi,0,0,-1);
 	}
 	glPopMatrix();
 }

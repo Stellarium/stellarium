@@ -847,13 +847,29 @@ TypeFace::bindTexture(const CacheEntry& aCacheEntry) const
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void
-TypeFace::renderGlyphs(const std::wstring& aString)
+TypeFace::renderGlyphs(const std::wstring& aString, bool useColorSwitch)
 {
     Vec2f pos(0.0f, 0.0f);
     size_t leftChar = 0;
     std::wstring::const_iterator it = aString.begin();
     while(it != aString.end())
     {
+		if (useColorSwitch)
+		{
+			// Manage color highlight here
+			if( *it==L'\21' )
+			{
+				glColor3f(0.5,1,0.5);  // normal
+				++it;
+				continue;
+			}
+			if( *it==L'\22' )
+			{
+				glColor3f(1,1,1);    // hilight
+				++it;
+				continue;
+			}
+		}
         size_t rightChar = FT_Get_Char_Index(data_->face_, *it);
         pos += kerning(leftChar, rightChar);
         pos += renderGlyph(rightChar, pos);

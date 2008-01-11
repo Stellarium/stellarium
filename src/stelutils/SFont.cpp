@@ -40,25 +40,25 @@ void SFont::print_char_outlined(const wchar_t c) const
 	
 	glPushMatrix();
 	glTranslatef(1,1,0);		
-	typeFace.renderGlyphs((wstring(wc)));
+	typeFace.renderGlyphs(wstring(wc), false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,-1,0);		
-	typeFace.renderGlyphs((wstring(wc)));
+	typeFace.renderGlyphs(wstring(wc), false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(1,-1,0);		
-	typeFace.renderGlyphs((wstring(wc)));
+	typeFace.renderGlyphs(wstring(wc), false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,1,0);		
-	typeFace.renderGlyphs((wstring(wc)));
+	typeFace.renderGlyphs(wstring(wc), false);
 	glPopMatrix();
 	
 	glColor4fv(current_color);
 	
-	typeFace.renderGlyphs((wstring(wc)));
+	typeFace.renderGlyphs(wstring(wc),false);
 }

@@ -562,29 +562,30 @@ bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool 
 // to julian day
 int string_to_jday(string date, double &jd)
 {
+	cerr << date << endl;
 	// Handle also strings with : instead of - in date part
-	for(int i=0; i<2; i++)
-	{
-		string::size_type p = date.find(":", 0);
-		if (p != string::npos)
-			date.replace(p, 1, "-");
-	}
+// 	for(int i=0; i<2; i++)
+// 	{
+// 		string::size_type p = date.find(":", 0);
+// 		if (p != string::npos)
+// 			date.replace(p, 1, "-");
+// 	}
 
-	// handle lack of 0 padding
-	if (date.find("-",5) == 6)
-		date.replace(5, 0, "0");
-
-	if (date.find("T",7) == 9)
-		date.replace(8, 0, "0");
-
-	if (date.find(":",11) == 12)
-		date.replace(11, 0, "0");
-
-	if (date.find(":",14) == 15)
-		date.replace(14, 0, "0");
-
-	if (date.length() == 18)
-		date.replace(17, 0, "0");
+// 	// handle lack of 0 padding
+// 	if (date.find("-",5) == 6)
+// 		date.replace(5, 0, "0");
+// 
+// 	if (date.find("T",7) == 9)
+// 		date.replace(8, 0, "0");
+// 
+// 	if (date.find(":",11) == 12)
+// 		date.replace(11, 0, "0");
+// 
+// 	if (date.find(":",14) == 15)
+// 		date.replace(14, 0, "0");
+// 
+// 	if (date.length() == 18)
+// 		date.replace(17, 0, "0");
 
 	jd = StelUtils::qDateTimeToJd(QDateTime::fromString(date.c_str(), Qt::ISODate));
 	return 1;

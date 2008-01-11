@@ -19,8 +19,6 @@
 
 #include <cassert>
 #include <iostream>
-#include <string>
-#include <vector>
 
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -84,9 +82,9 @@ void StelTextureMgr::init(const InitParser& conf)
 	isNoPowerOfTwoAllowed = isNoPowerOfTwoAllowed && (GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0);
 	
 	// Check vendor and renderer
-	string glRenderer((char*)glGetString(GL_RENDERER));
-	string glVendor((char*)glGetString(GL_VENDOR));
-	string glVersion((char*)glGetString(GL_VERSION));
+	QString glRenderer((char*)glGetString(GL_RENDERER));
+	QString glVendor((char*)glGetString(GL_VENDOR));
+	QString glVersion((char*)glGetString(GL_VERSION));
 
 	// Get Maximum Texture Size Supported by the video card
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
