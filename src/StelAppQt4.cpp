@@ -22,12 +22,6 @@
 #ifdef USE_QT4
 
 #include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <string>
-#include <vector>
-#include <set>
-
 #include "StelAppQt4.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -51,7 +45,7 @@ using namespace std;
 class StelMainWindow : public QMainWindow
 {
 public:
-	StelMainWindow(class StelAppQt4* app) : stelApp(app) {;}
+	StelMainWindow(class StelAppQt4* app) : stelApp(app) {setWindowTitle(StelApp::getApplicationName());}
 	void keyPressEvent(QKeyEvent*);
 	void keyReleaseEvent(QKeyEvent*);
 private:
@@ -187,9 +181,7 @@ void StelAppQt4::saveScreenShot(const QString& filePrefix, const QString& saveDi
 	QString shotPath;
 	for(int j=0; j<1000; ++j)
 	{
-		stringstream oss;
-		oss << setfill('0') << setw(3) << j;
-		shotPath = shotDir+"/"+filePrefix + oss.str().c_str() + ".bmp";
+		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".bmp";
 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
 			break;
 	}

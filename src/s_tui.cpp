@@ -632,12 +632,11 @@ wstring Time_item::getDateString(void)
 {
 	compute_ymdhms();  // possibly redundant
 
-	return y->getString() + L":" +
-	   m->getString() + L":" +
-	   d->getString() + L"T" +
-	   h->getString() + L":" +
-	   mn->getString() + L":" +
-	   s->getString();
+	QString str;
+	str.sprintf("%.4d",y->getValue()); 
+	str += QString("-%2-%3T%4:%5:%6").arg(m->getValue(),2,10,QLatin1Char('0')).arg(d->getValue(),2,10,QLatin1Char('0'))
+			.arg(h->getValue(),2,10,QLatin1Char('0')).arg(mn->getValue(),2,10,QLatin1Char('0')).arg(s->getValue(),2,10,QLatin1Char('0'));
+	return str.toStdWString();
 }
 
 

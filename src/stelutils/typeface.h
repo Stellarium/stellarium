@@ -118,7 +118,7 @@ private:
     Vec2f kerning(size_t leftGlyphIndex, size_t rightGlyphIndex) const;
 
     //! Renders the glyphs of the passed in string
-    void renderGlyphs(const std::wstring& aString);
+    void renderGlyphs(const std::wstring& aString, bool useColorSwitch=true);
 
     //! binds the passed in cache entry's texture
     void bindTexture(const CacheEntry& aCacheEntry) const;
