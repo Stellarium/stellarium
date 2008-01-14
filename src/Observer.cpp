@@ -31,6 +31,7 @@
   // setting the titlebar text:
 
 #include <cassert>
+#include <QDebug>
 
 class ArtificialPlanet : public Planet {
 public:
@@ -194,6 +195,7 @@ Mat4d Observer::getRotLocalToEquatorial(double jd) const {
   // This is a kludge
   if( lat > 89.5 )  lat = 89.5;
   if( lat < -89.5 ) lat = -89.5;
+  //qWarning() << getHomePlanet()->getEnglishName().c_str() << " " << getHomePlanet()->getSiderealTime(10)-getHomePlanet()->getSiderealTime(9);
   return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+longitude)*(M_PI/180.))
        * Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
@@ -278,28 +280,35 @@ wstring Observer::get_name(void) const {
 }
 
 
-bool Observer::setHomePlanet(const QString &english_name) {
-  Planet *p = ssystem.searchByEnglishName(english_name.toStdString());
-  if (p==NULL)
-  	return false;
-  setHomePlanet(p);
-  return true;
+bool Observer::setHomePlanet(const QString &english_name)
+{
+	Planet *p = ssystem.searchByEnglishName(english_name.toStdString());
+	if (p==NULL)
+	{
+		qWarning() << "Can't set home planet to " + english_name + " because it is unknown";
+  		return false;
+	}
+	setHomePlanet(p);
+	return true;
 }
 
-void Observer::setHomePlanet(const Planet *p,float transit_seconds) {
-  assert(p); // Assertion enables to track bad calls. Please keep it this way.
-  if (planet != p) {
-    if (planet) {
-      if (!artificial_planet) {
-        artificial_planet = new ArtificialPlanet(*planet);
-	name = L"";
-      }
-
-      artificial_planet->setDest(*p);
-      time_to_go = (int)(1000.f * transit_seconds); // milliseconds
-    }
-    planet = p;
-  }
+void Observer::setHomePlanet(const Planet *p, float transit_seconds)
+{
+	assert(p); // Assertion enables to track bad calls. Please keep it this way.
+	if (planet != p)
+	{
+		if (planet)
+		{
+			if (!artificial_planet)
+			{
+				artificial_planet = new ArtificialPlanet(*planet);
+				name = L"";
+			}
+			artificial_planet->setDest(*p);
+			time_to_go = (int)(1000.f * transit_seconds); // milliseconds
+    	}
+		planet = p; 
+	}
 }
 
 const Planet *Observer::getHomePlanet(void) const {
@@ -330,35 +339,38 @@ void Observer::moveTo(double lat, double lon, double alt, int duration, const ws
 
 // for moving observator position gradually
 // TODO need to work on direction of motion...
-void Observer::update(int delta_time) {
-  if (artificial_planet) {
-    time_to_go -= delta_time;
-    if (time_to_go <= 0) {
-      delete artificial_planet;
-      artificial_planet = 0;
-      StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
-      if (objmgr.getWasSelected() &&
-          objmgr.getSelectedObject()[0].get()==planet) {
-        objmgr.unSelect();
-      }
-    } else {
-      const double f1 = time_to_go/(double)(time_to_go + delta_time);
-      artificial_planet->computeAverage(f1);
-    }
-  }
+void Observer::update(int delta_time)
+{
+	if (artificial_planet)
+	{
+		time_to_go -= delta_time;
+		if (time_to_go <= 0)
+		{
+			delete artificial_planet;
+			artificial_planet = NULL;
+			StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
+			if (objmgr.getWasSelected() && objmgr.getSelectedObject()[0].get()==planet)
+			{
+				objmgr.unSelect();
+			}
+		}
+		else
+		{
+			const double f1 = time_to_go/(double)(time_to_go + delta_time);
+			artificial_planet->computeAverage(f1);
+		}
+	}
 
-  if (flag_move_to) {
-    move_to_mult += move_to_coef*delta_time;
-
-    if (move_to_mult >= 1.f) {
-      move_to_mult = 1.f;
-      flag_move_to = false;
-    }
-
-    latitude = start_lat - move_to_mult*(start_lat-end_lat);
-    longitude = start_lon - move_to_mult*(start_lon-end_lon);
-    altitude = int(start_alt - move_to_mult*(start_alt-end_alt));
-
-  }
+	if (flag_move_to)
+	{
+		move_to_mult += move_to_coef*delta_time;
+		if (move_to_mult >= 1.f)
+		{
+			move_to_mult = 1.f;
+			flag_move_to = false;
+		}
+		latitude = start_lat - move_to_mult*(start_lat-end_lat);
+		longitude = start_lon - move_to_mult*(start_lon-end_lon);
+		altitude = int(start_alt - move_to_mult*(start_alt-end_alt));
+	}
 }
-

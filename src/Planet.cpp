@@ -22,6 +22,7 @@
 #include <iomanip>
 
 #include <QTextStream>
+#include <QDebug>
 
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
@@ -399,8 +400,11 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m) {
 // Compute the z rotation to use from equatorial to geographic coordinates
 double Planet::getSiderealTime(double jd) const
 {
-	if (englishName=="Earth") return get_apparent_sidereal_time(jd);
-
+	if (englishName=="Earth")
+	{
+		return get_apparent_sidereal_time(jd);
+	}
+ 
 	double t = jd - re.epoch;
 	double rotations = t / (double) re.period;
 	double wholeRotations = floor(rotations);
