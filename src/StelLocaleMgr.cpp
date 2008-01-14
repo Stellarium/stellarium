@@ -25,6 +25,7 @@
 #include "StelFileMgr.hpp"
 
 #include <QLocale>
+#include <QDebug>
 
 using namespace std;
 
@@ -136,6 +137,7 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
 	else
 		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
+	
 	dateTime = dateTime.toLocalTime();
 	
 	QDate date = dateTime.date();
@@ -147,7 +149,7 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 	// If needed, convert the year to BC and deal with year zero. (year -2 = 3BC, year 0 = 1BC
 	if (year <= 0) 
 	{
-		--year;
+		//--year; Qt already does that apparently
 	}
 	
 	switch (date_format)
