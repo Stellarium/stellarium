@@ -599,7 +599,7 @@ void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
                                    const fd_set &write_fds) {
   if (!IS_INVALID_SOCKET(fd)) {
     if (wait_for_connection_establishment) {
-      if (FD_ISSET(fd,&write_fds)) {
+		if (FD_ISSET(fd,const_cast<fd_set *>(&write_fds))) {
         wait_for_connection_establishment = false;
         int err = 0;
         SOCKLEN_T length = sizeof(err);
@@ -619,10 +619,10 @@ void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
         }
       }
     } else { // connection already established
-      if (FD_ISSET(fd,&write_fds)) {
+		if (FD_ISSET(fd,const_cast<fd_set *>(&write_fds))) {
         performWriting();
       }
-      if (!IS_INVALID_SOCKET(fd) && FD_ISSET(fd,&read_fds)) {
+	  if (!IS_INVALID_SOCKET(fd) && FD_ISSET(fd,const_cast<fd_set *>(&read_fds))) {
         performReading();
       }
     }
