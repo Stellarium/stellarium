@@ -137,8 +137,7 @@ public:
     //! Special constructor for 3 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2):
 	    ConvexS(e0, e1, e2), Polygon(e0, e1, e2)
-	{
-	}
+	{}
 	
 	//! Special constructor for 4 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3):
@@ -161,6 +160,9 @@ public:
 	
 	//! Return the convex polygon area in steradians
 	double getArea() const;
+	
+	//! Return the convex polygon barycenter
+	Vec3d getBarycenter() const;
 	
 	//! Cast to Polygon in case of ambiguity
 	Polygon& asPolygon() {return static_cast<Polygon&>(*this);}
