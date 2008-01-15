@@ -138,7 +138,7 @@ public:
 	// Return longitude in rad
 	inline T longitude() const;
 	
-	// Distance in radian between two normalized vectors
+	// Distance in radian between two
 	inline T angle(const Vector3<T>&) const;
 
     inline T length() const;
@@ -536,7 +536,7 @@ template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
 // Angle in radian between two normalized vectors
 template<class T> T Vector3<T>::angle(const Vector3<T>& b) const
 {
-	return std::acos(dot(b));
+	return std::acos(dot(b)/sqrt(lengthSquared()*b.lengthSquared()));
 }
 
 template<class T> T Vector3<T>::length() const

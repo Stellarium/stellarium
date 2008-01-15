@@ -78,14 +78,16 @@ double ConvexPolygon::getArea() const
 	double angleSum=0.;
 	const int size = asPolygon().size();
 	const ConvexS& cvx = asConvex();
-	
-	// Angles
+
+	// Sum the angles at each corner of the polygon
+	// (the non cartesian angle is found from the plan normals)
 	for (int i=0;i<size-1;++i)
-		angleSum += std::acos(cvx[i].n.dot(cvx[i+1].n));
+	{
+		angleSum += M_PI-cvx[i].n.angle(cvx[i+1].n);
+	}
 	// Last angle
-	angleSum += std::acos(cvx[size-1].n.dot(cvx[0].n));
-	qWarning() << angleSum;
-	return angleSum - (double)(size-2)*M_PI;
+	angleSum += M_PI-cvx[size-1].n.angle(cvx[0].n);
+	return angleSum - M_PI*(size-2);
 }
 	
 /*
