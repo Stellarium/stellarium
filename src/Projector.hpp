@@ -345,6 +345,10 @@ public:
 	void drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 
+	//! Draw the given polygon
+	//! @param poly The polygon to draw
+	void drawPolygon(const StelGeom::Polygon& poly) const;
+	
 	//! Draw a parallel arc in the current frame.  The arc start from point start
 	//! going in the positive longitude direction and with the given length in radian.
 	//! @param start the starting position of the parallel in the current frame.

@@ -34,6 +34,7 @@
 #include "InitParser.hpp"
 #include "MappingClasses.hpp"
 #include "StelApp.hpp"
+#include <QDebug>
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
@@ -224,6 +225,10 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double margin) const
 	unProject(getViewportWidth()+margin,0-margin,e1);
 	unProject(getViewportWidth()+margin,getViewportHeight()+margin,e2);
 	unProject(0-margin,getViewportHeight()+margin,e3);
+	e0.normalize();
+	e1.normalize();
+	e2.normalize();
+	e3.normalize();
 	return StelGeom::ConvexPolygon(e0, e3, e2, e1);
 }
 
@@ -1201,6 +1206,26 @@ void Projector::drawSprite2dMode(double x, double y, double size, double rotatio
 	glEnd();
 	glPopMatrix();
 }
+
+/*************************************************************************
+ Draw the given polygon
+*************************************************************************/
+void Projector::drawPolygon(const StelGeom::Polygon& poly) const
+{
+	const int size = poly.size();
+	if (size<3)
+		return;
+
+	Vec3d win;	
+	glBegin(GL_LINE_LOOP);
+	for (int i=0;i<size;++i)
+	{
+		project(poly[i], win);
+		glVertex3dv(win);
+	}
+	glEnd();
+}
+	
 
 /*************************************************************************
  Draw a GL_POINT at the given position
