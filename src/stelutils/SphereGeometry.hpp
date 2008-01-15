@@ -157,6 +157,9 @@ public:
 	    return Polygon::operator[](i);
 	}
 	
+	//! Return the convex polygon area in steradians
+	double getArea() const;
+	
 	//! Cast to Polygon in case of ambiguity
 	Polygon& asPolygon() {return static_cast<Polygon&>(*this);}
 	
