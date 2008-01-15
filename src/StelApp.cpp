@@ -599,6 +599,9 @@ double StelApp::draw(int delta_time)
 	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
 	ui->drawGui();
 
+	// Test code
+	// qWarning() << core->getProjection()->getViewportConvexPolygon().getArea() * 3282.8063500117441;
+	
 	return squaredDistance;
 }
 

@@ -18,6 +18,7 @@
  */
 
 #include "SphereGeometry.hpp"
+#include <QDebug>
 
 using namespace StelGeom;
 
@@ -70,7 +71,23 @@ Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e
     push_back(e3);
 }
 
-
+//! Return the convex polygon area in steradians
+double ConvexPolygon::getArea() const
+{
+	// Use Girard's theorem
+	double angleSum=0.;
+	const int size = asPolygon().size();
+	const ConvexS& cvx = asConvex();
+	
+	// Angles
+	for (int i=0;i<size-1;++i)
+		angleSum += std::acos(cvx[i].n.dot(cvx[i+1].n));
+	// Last angle
+	angleSum += std::acos(cvx[size-1].n.dot(cvx[0].n));
+	qWarning() << angleSum;
+	return angleSum - (double)(size-2)*M_PI;
+}
+	
 /*
 
 void ConvexPolygon::getBoundingLonLat(double result[4]) const
