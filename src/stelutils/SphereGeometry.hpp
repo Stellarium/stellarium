@@ -25,6 +25,7 @@
 #include <functional>
 
 #include "vecmath.h"
+#include <QDebug> 
 
 //! In this namespace we define different geometrical shapes :
 //! <ul>
@@ -58,8 +59,8 @@ struct HalfSpace
     HalfSpace(const Vec3d& an) : n(an), d(0) {}
 	//! Construct a HalfSpace from its direction and aperture
 	//! @param an a unit vector indicating the direction
-    //! @param ar the aperture radius in radian
-    HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {}
+    //! @param ar cosinus of the aperture
+    HalfSpace(const Vec3d& an, double ar) : n(an), d(ar) {;}
     HalfSpace(const HalfSpace& other) : n(other.n), d(other.d) {}
 	bool contains(const Vec3d &v) const {return (v*n>=d);}
 	bool operator==(const HalfSpace& other) const {return (n==other.n && d==other.d);}
@@ -136,7 +137,8 @@ public:
     //! Special constructor for 3 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2):
 	    ConvexS(e0, e1, e2), Polygon(e0, e1, e2)
-	{}
+	{
+	}
 	
 	//! Special constructor for 4 points
 	ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3):
