@@ -90,6 +90,14 @@ double ConvexPolygon::getArea() const
 	return angleSum - M_PI*(size-2);
 }
 	
+//! Return the convex polygon barycenter
+Vec3d ConvexPolygon::getBarycenter() const
+{
+	assert(0);
+	// TODO
+}
+
+	
 /*
 
 void ConvexPolygon::getBoundingLonLat(double result[4]) const
