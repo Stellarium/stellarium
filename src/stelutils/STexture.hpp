@@ -45,7 +45,7 @@ public:
 	virtual ~STexture();
 	
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
-	//! If the texture is lazyly loaded, this starts the loading and return false immendiately.
+	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
 	virtual bool bind();
 	
