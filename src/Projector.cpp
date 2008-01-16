@@ -218,13 +218,13 @@ std::vector<Vec2d> Projector::getViewportVertices2d() const
  Return a convex polygon on the sphere which includes the viewport in the 
  current frame
 *************************************************************************/
-StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double margin) const
+StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, double marginY) const
 {
 	Vec3d e0, e1, e2, e3;
-	unProject(0-margin,0-margin,e0);
-	unProject(getViewportWidth()+margin,0-margin,e1);
-	unProject(getViewportWidth()+margin,getViewportHeight()+margin,e2);
-	unProject(0-margin,getViewportHeight()+margin,e3);
+	unProject(0-marginX,0-marginY,e0);
+	unProject(getViewportWidth()+marginX,0-marginY,e1);
+	unProject(getViewportWidth()+marginX,getViewportHeight()+marginY,e2);
+	unProject(0-marginX,getViewportHeight()+marginY,e3);
 	e0.normalize();
 	e1.normalize();
 	e2.normalize();
