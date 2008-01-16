@@ -37,7 +37,6 @@ Source: "QtOpenGL4.dll"; DestDir: "{app}";
 Source: "QtNetwork4.dll"; DestDir: "{app}";
 Source: "libeay32.dll"; DestDir: "{app}";
 Source: "libssl32.dll"; DestDir: "{app}";
-Source: "libcurl-4.dll"; DestDir: "{app}";
 Source: "builds\msys\_CPack_Packages\win32\TGZ\Stellarium-0.9.1-win32\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "builds\msys\_CPack_Packages\win32\TGZ\Stellarium-0.9.1-win32\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
