@@ -1284,7 +1284,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		case StelKey_EQUALS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				commander->execute_command( "date sidereal 1");
-			else if (mod & StelMod_CTRL)
+			else if (mod & COMPATIBLE_StelMod_CTRL)
 				commander->execute_command( "date relative 0.04166666666666666667");
 			else
 				commander->execute_command( "date relative 1");
@@ -1292,7 +1292,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 		case StelKey_MINUS:
 			if ((mod & StelMod_ALT) || getDayKeyMode() == "sidereal")
 				commander->execute_command( "date sidereal -1");
-			else if (mod & StelMod_CTRL)
+			else if (mod & COMPATIBLE_StelMod_CTRL)
 				commander->execute_command( "date relative -0.04166666666666666667");
 			else
 				commander->execute_command( "date relative -1");

@@ -113,12 +113,12 @@ bool MovementMgr::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 sta
 		if (key==StelKey_RIGHT) turn_right(1);
 		if (key==StelKey_UP)
 		{
-			if (mod & StelMod_CTRL) zoom_in(1);
+			if (mod & COMPATIBLE_StelMod_CTRL) zoom_in(1);
 			else turn_up(1);
 		}
 		if (key==StelKey_DOWN)
 		{
-			if (mod & StelMod_CTRL) zoom_out(1);
+			if (mod & COMPATIBLE_StelMod_CTRL) zoom_out(1);
 			else turn_down(1);
 		}
 		if (key==StelKey_PAGEUP) zoom_in(1);
@@ -129,7 +129,7 @@ bool MovementMgr::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 sta
 		// When a deplacement key is released stop mooving
 		if (key==StelKey_LEFT) turn_left(0);
 		if (key==StelKey_RIGHT) turn_right(0);
-		if (mod & StelMod_CTRL)
+		if (mod & COMPATIBLE_StelMod_CTRL)
 		{
 			if (key==StelKey_UP) zoom_in(0);
 			if (key==StelKey_DOWN) zoom_out(0);
