@@ -1261,14 +1261,14 @@ bool EditBox::onKey(Uint16 k, Uint8 s, StelMod mod)
         }
   		else if (k == StelKey_LEFT)  		
   		{
-            if (mod & StelMod_CTRL)
+            if (mod & COMPATIBLE_StelMod_CTRL)
                 cursorToPrevWord();
             else
                 if (cursorPos > 0) cursorPos--;
         }
         else if (k == StelKey_RIGHT)
         {
-            if (mod & StelMod_CTRL)
+            if (mod & COMPATIBLE_StelMod_CTRL)
                 cursorToNextWord();
             else
               if (cursorPos < text.length()) cursorPos++;
@@ -3188,7 +3188,7 @@ bool MapPicture::onKey(Uint16 k, Uint8 s, StelMod mod)
 
 void MapPicture::calcPointerPos(int x, int y, StelMod mod)
 {
-	if (mod & StelMod_CTRL)
+	if (mod & COMPATIBLE_StelMod_CTRL)
 	{
 		nearestIndex = cities.getNearest(getLongitudeFromx(x - pos[0]), getLatitudeFromy(y - pos[1]));
 		if (nearestIndex != -1)

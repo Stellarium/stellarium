@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-10 21:57+0100\n"
-"PO-Revision-Date: 2007-06-20 11:44+0000\n"
+"PO-Revision-Date: 2008-01-11 22:06+0000\n"
 "Last-Translator: DavidLam <david.lamhauge@skolekom.dk>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: DENMARK\n"
 "X-Poedit-Language: Danish\n"
@@ -356,7 +356,7 @@ msgstr "Opsætning"
 
 #: src/stel_ui.cpp:690
 msgid "Configuration window [1]"
-msgstr ""
+msgstr "Opsætning [1]"
 
 #: src/stel_ui_tuiconf.cpp:426
 msgid "Constellation Art Intensity"
@@ -456,7 +456,7 @@ msgstr ""
 
 #: src/stel_ui.cpp:715
 msgid "Decrease Time Speed [J]"
-msgstr "Reducer tids hastighed [J]"
+msgstr "Deaccelerer tid [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -516,9 +516,8 @@ msgid "Distance: "
 msgstr "Afstand "
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Do"
-msgstr "Hund"
+msgstr ""
 
 #: src/translations.h:253
 msgid "Dog"
@@ -534,9 +533,8 @@ msgid "Dolphin"
 msgstr "Delfinen"
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Done"
-msgstr "Dione"
+msgstr ""
 
 #: src/translations.h:110
 msgid "Dorado"
@@ -699,12 +697,14 @@ msgid "Flail"
 msgstr ""
 
 #: src/stel_ui.cpp:707
+#, fuzzy
 msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr ""
+msgstr "Flip horisontalt [CTRL + SHIFT + H]"
 
 #: src/stel_ui.cpp:709
+#, fuzzy
 msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr ""
+msgstr "Flip vertikalt [CTRL + SHIFT + V]"
 
 #: src/translations.h:188
 msgid "Flock"
@@ -1035,7 +1035,7 @@ msgstr "Hjemsted"
 
 #: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
 msgid "Location: "
-msgstr ""
+msgstr "Sted: "
 
 #: src/stel_ui_conf.cpp:328
 msgid "Longitude : "
@@ -1069,7 +1069,7 @@ msgstr ""
 #: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
 #: src/StarWrapper.cpp:170
 msgid "Magnitude: "
-msgstr "Størrelse "
+msgstr "Lysstyrke: "
 
 #: src/translations.h:308
 msgid "Man with Feet Apart"
@@ -1175,7 +1175,7 @@ msgstr "Måne"
 
 #: src/stel_ui_conf.cpp:165
 msgid "Moon Scale"
-msgstr "Skaler månen"
+msgstr "Forstørrelse af Månen"
 
 #: src/translations.h:193
 msgid "Mooring Post"
@@ -1387,7 +1387,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
 msgid "Planet: "
-msgstr ""
+msgstr "Planet: "
 
 #: src/stel_ui_conf.cpp:160
 msgid "Planets"
@@ -1613,7 +1613,7 @@ msgstr "Søg efter (f.eks. Saturn, Månen, HP6218, Orion, M31)"
 
 #: src/stel_ui.cpp:701
 msgid "Search for object [CTRL + F]"
-msgstr ""
+msgstr "Søg efter objekt [CTRL + F]"
 
 #: src/s_gui.cpp:2755
 msgid "Seconds"
@@ -1705,7 +1705,7 @@ msgstr "Størrelse "
 
 #: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
 msgid "Sky Culture: "
-msgstr ""
+msgstr "Kulturel påvirkning "
 
 #: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
 msgid "Sky Language: "

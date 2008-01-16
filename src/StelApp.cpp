@@ -660,7 +660,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 		{
 #ifdef MACOSX
 			// CTRL + left clic = right clic for 1 button mouse
-			if (mod & StelMod_CTRL)
+			if (mod & COMPATIBLE_StelMod_CTRL)
 			{
 				commander->execute_command("select");
 				return 1;
@@ -669,7 +669,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			// Try to select object at that position
 			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_META) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
 #else
-			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_CTRL) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
+			getStelObjectMgr().findAndSelect(core, x, y, (mod & COMPATIBLE_StelMod_CTRL) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
 #endif
 			// If an object was selected update informations
 			if (getStelObjectMgr().getWasSelected())
