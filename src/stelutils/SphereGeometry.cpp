@@ -79,6 +79,7 @@ Polygon::Polygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e
 }
 
 //! Return the convex polygon area in steradians
+// TODO Optimize using add oc formulas from http://en.wikipedia.org/wiki/Solid_angle
 double ConvexPolygon::getArea() const
 {
 	// Use Girard's theorem
