@@ -600,11 +600,11 @@ double StelApp::draw(int delta_time)
 	ui->drawGui();
 
 	// Test code
-/*	ConvexPolygon poly = core->getProjection()->getViewportConvexPolygon(-100);
-	double area = poly.getArea() * 3282.8063500117441;
-	glColor3f(1,1,1);
-	core->getProjection()->drawPolygon(poly);
-	qWarning() << area;*/
+// 	ConvexPolygon poly = core->getProjection()->getViewportConvexPolygon(-100);
+// 	double area = poly.getArea() * 3282.8063500117441;
+// 	glColor3f(1,1,1);
+// 	core->getProjection()->drawPolygon(poly);
+// 	qWarning() << area;
 	
 	return squaredDistance;
 }
