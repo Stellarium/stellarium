@@ -378,7 +378,7 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 	if (event->modifiers() == Qt::ShiftModifier)
 		mod = StelMod_SHIFT;
 	if (event->modifiers() == Qt::ControlModifier)
-		mod = StelMod_CTRL;
+		mod = COMPATIBLE_StelMod_CTRL;
 
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
 	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);

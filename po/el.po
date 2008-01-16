@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-10 21:57+0100\n"
-"PO-Revision-Date: 2007-12-07 14:39+0000\n"
+"PO-Revision-Date: 2008-01-16 18:01+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:730
@@ -101,7 +101,7 @@ msgstr "Βωμός"
 
 #: src/s_tui.h:292
 msgid "Are you sure ?"
-msgstr ""
+msgstr "Είστε σίγουροι;"
 
 #: src/translations.h:86
 msgid "Aries"
@@ -530,9 +530,8 @@ msgid "Distance: "
 msgstr "Απόσταση: "
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Do"
-msgstr "Σκύλος"
+msgstr "Κάνε"
 
 #: src/translations.h:253
 msgid "Dog"
@@ -547,9 +546,8 @@ msgid "Dolphin"
 msgstr "Δελφίνη"
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Done"
-msgstr "Διώνη"
+msgstr "Έτοιμο"
 
 #: src/translations.h:110
 msgid "Dorado"
@@ -2084,7 +2082,7 @@ msgstr "αλλάξτε για εφαρμογή."
 
 #: src/stel_ui_conf.cpp:350
 msgid "m"
-msgstr ""
+msgstr "μ"
 
 #~ msgid " (Variable)"
 #~ msgstr " (Μεταβλητή)"
@@ -2144,9 +2142,6 @@ msgstr ""
 
 #~ msgid "Flip vertically"
 #~ msgstr "Κάθετη περιστροφή"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Όριο Μεγέθους: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Φόρτωση καταλόγου Hipparcos:"

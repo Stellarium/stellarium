@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-10 21:57+0100\n"
-"PO-Revision-Date: 2007-12-06 17:12+0000\n"
+"PO-Revision-Date: 2008-01-01 19:32+0000\n"
 "Last-Translator: Ivaylo Stoimenov <ivaylo.stoimenov@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2007-12-28 11:09+0000\n"
+"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/stel_ui.cpp:730
@@ -314,8 +314,9 @@ msgid "Choose landscapes:"
 msgstr "Избери пейзажи:"
 
 #: src/translations.h:102
+#, fuzzy
 msgid "Circinus"
-msgstr ""
+msgstr "Пергел"
 
 #: src/translations.h:243
 msgid "Circular Granary"
@@ -346,7 +347,6 @@ msgid "Command recording stopped."
 msgstr "Записването на команди е спряно."
 
 #: src/stel_ui_conf.cpp:57
-#, fuzzy
 msgid "Configuration"
 msgstr "Настройки"
 
@@ -399,8 +399,9 @@ msgid "Corvus"
 msgstr "Гарван"
 
 #: src/translations.h:103
+#, fuzzy
 msgid "Crater"
-msgstr ""
+msgstr "Кратер"
 
 #: src/translations.h:181
 msgid "Crocodile"
@@ -532,9 +533,8 @@ msgid "Distance: "
 msgstr "Разстояние: "
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Do"
-msgstr "Куче"
+msgstr ""
 
 #: src/translations.h:253
 msgid "Dog"
@@ -549,9 +549,8 @@ msgid "Dolphin"
 msgstr ""
 
 #: src/s_tui.h:275 src/s_tui.h:292
-#, fuzzy
 msgid "Done"
-msgstr "Диона"
+msgstr ""
 
 #: src/translations.h:110
 msgid "Dorado"
@@ -631,7 +630,7 @@ msgstr ""
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr ""
+msgstr "Енцелад"
 
 #: src/stel_ui_conf.cpp:880
 msgid "Enter observatory name"
@@ -895,8 +894,9 @@ msgid "Information"
 msgstr "Информация"
 
 #: src/translations.h:71
+#, fuzzy
 msgid "Inuit"
-msgstr ""
+msgstr "Inuit"
 
 #: src/stel_ui.cpp:588
 msgid "Invalid Script command"
@@ -1113,8 +1113,9 @@ msgid "Mausoleum"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:419
+#, fuzzy
 msgid "Maximum Magnitude to Label: "
-msgstr ""
+msgstr "Показвай имена с максимална величина от: "
 
 #: src/stel_ui_tuiconf.cpp:448
 msgid "Maximum Nebula Magnitude to Label: "
@@ -1302,8 +1303,9 @@ msgid "Object Search"
 msgstr "Търсене на обект"
 
 #: src/stel_ui_tuiconf.cpp:445
+#, fuzzy
 msgid "Object Sizing Rule: "
-msgstr ""
+msgstr "Правило за осъразмеряване на обектите: "
 
 #: src/translations.h:136
 msgid "Octans"
@@ -1583,8 +1585,9 @@ msgid "Save location"
 msgstr "Запази местоположението"
 
 #: src/stel_ui_conf.cpp:405
+#, fuzzy
 msgid "Saving settings will save current full screen status"
-msgstr ""
+msgstr "Записването на настройките ще запази текущия размер на екрана"
 
 #: src/translations.h:156
 msgid "Scorpius"
@@ -1927,8 +1930,9 @@ msgid "Two Placed Far Apart"
 msgstr ""
 
 #: src/translations.h:172
+#, fuzzy
 msgid "Two Poles"
-msgstr ""
+msgstr "Двата Полюса"
 
 #: src/translations.h:324
 msgid "Two Sunbeams"
@@ -2078,8 +2082,9 @@ msgid "Zaofu"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:449
+#, fuzzy
 msgid "Zoom Duration: "
-msgstr ""
+msgstr "Продължителност на увеличението: "
 
 #: src/stel_ui_conf.cpp:420
 msgid "change to apply."
@@ -2100,9 +2105,6 @@ msgstr ""
 
 #~ msgid "Flip vertically"
 #~ msgstr "Вертикално обръщане"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Максимална величина: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Зареждане на каталога на Хипарх:"
