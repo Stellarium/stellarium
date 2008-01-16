@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 21:57+0100\n"
+"POT-Creation-Date: 2008-01-16 23:52+0100\n"
 "PO-Revision-Date: 2007-11-09 13:50+0000\n"
 "Last-Translator: sigma <example@example.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ": 一般的な数"
 msgid ": Standard Perseids rate"
 msgstr ": ペルセウス座流星群ぐらい"
 
-#: src/Planet.cpp:127 src/Planet.cpp:166
+#: src/Planet.cpp:128 src/Planet.cpp:167
 msgid "AU"
 msgstr "天文単位"
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Author: "
 msgstr "作者: "
 
-#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
+#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
 #: src/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "方位/高度: "
@@ -524,7 +524,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
+#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
 #: src/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "距離: "
@@ -1060,11 +1060,11 @@ msgstr "標準の環境設定を再設定 : "
 msgid "Loading Constellation Art: "
 msgstr "星座絵をロード中: "
 
-#: src/NebulaMgr.cpp:399
+#: src/NebulaMgr.cpp:401
 msgid "Loading NGC catalog: "
 msgstr "NGC カタログをロード中: "
 
-#: src/NebulaMgr.cpp:534
+#: src/NebulaMgr.cpp:535
 msgid "Loading Nebula Textures:"
 msgstr "星雲・星団のテクスチャをロード中"
 
@@ -1112,7 +1112,7 @@ msgstr "等級"
 msgid "Magnitude Scaling Multiplier: "
 msgstr "等級による倍率 "
 
-#: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
+#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
 #: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
 #: src/StarWrapper.cpp:170
 msgid "Magnitude: "
@@ -1515,7 +1515,7 @@ msgstr "終了 [CMD + Q]"
 msgid "Quit [CTRL + Q]"
 msgstr "終了 [CTRL + Q]"
 
-#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
+#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
 #: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
 #: src/Telescope.cpp:238 src/Telescope.cpp:240
 msgid "RA/DE: "
@@ -1776,7 +1776,7 @@ msgstr "終了する : "
 msgid "Sidereal"
 msgstr "恒星時"
 
-#: src/Nebula.cpp:109
+#: src/Nebula.cpp:110
 msgid "Size: "
 msgstr "大きさ : "
 
@@ -2023,7 +2023,7 @@ msgstr "Two Jaws(割れあご)"
 msgid "Two in Front"
 msgstr ""
 
-#: src/Nebula.cpp:107
+#: src/Nebula.cpp:108
 msgid "Type: "
 msgstr "型 : "
 

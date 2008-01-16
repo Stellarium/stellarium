@@ -10,7 +10,7 @@ SET(PACKAGE stellarium)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING
+  SET(CMAKE_BUILD_TYPE Release CACHE STRING
       "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
       FORCE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
@@ -97,6 +97,7 @@ IF(ENABLE_NLS)
     PATHS 
     /usr/lib/
     /usr/local/lib)
+  FIND_PACKAGE(Gettext REQUIRED)
 ENDIF(ENABLE_NLS)
 
 FIND_PACKAGE(OpenGL REQUIRED)
@@ -104,7 +105,6 @@ FIND_PACKAGE(PNG REQUIRED)
 FIND_PACKAGE(JPEG REQUIRED)
 FIND_PACKAGE(Boost REQUIRED)
 FIND_PACKAGE(FreeType2 REQUIRED)
-FIND_PACKAGE(Gettext REQUIRED)
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
