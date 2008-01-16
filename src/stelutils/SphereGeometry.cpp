@@ -29,6 +29,9 @@ ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
     push_back(e0^e1);
     push_back(e1^e2);
     push_back(e2^e0);
+	
+	// Warning: vectors not normalized while they should be
+	// In this case it works because d==0 for each HalfSpace
 }
 
 //! Special constructor for 4 halfspaces convex
@@ -42,11 +45,15 @@ ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e
 		push_back(e1^e2);
 		push_back(e2^e3);
 		push_back(e3^e0);
+		
+		// Warning: vectors not normalized while they should be
+		// In this case it works because d==0 for each HalfSpace
 	}
 	else
 	{
 		push_back((e1-e0)^(e2-e0));
 		(*begin()).d = d;
+		(*begin()).n.normalize();
 	}
 }
 
@@ -76,8 +83,14 @@ double ConvexPolygon::getArea() const
 {
 	// Use Girard's theorem
 	double angleSum=0.;
-	const int size = asPolygon().size();
 	const ConvexS& cvx = asConvex();
+	const int size = cvx.size();
+			
+	if (size==1)
+	{
+		// Handle special case for > 180 degree polygons
+		return cvx[0].getArea();
+	}
 
 	// Sum the angles at each corner of the polygon
 	// (the non cartesian angle is found from the plan normals)
@@ -91,10 +104,16 @@ double ConvexPolygon::getArea() const
 }
 	
 //! Return the convex polygon barycenter
+// TODO this code is quite wrong but good for triangles
 Vec3d ConvexPolygon::getBarycenter() const
 {
-	assert(0);
-	// TODO
+	Vec3d barycenter;
+	for (unsigned int i=0;i<Polygon::size();++i)
+	{
+		barycenter += Polygon::operator[](i);
+	}
+	barycenter.normalize();
+	return barycenter;
 }
 
 	
