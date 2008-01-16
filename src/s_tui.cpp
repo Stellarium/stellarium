@@ -633,8 +633,9 @@ wstring Time_item::getDateString(void)
 	compute_ymdhms();  // possibly redundant
 
 	QString str;
-	str.sprintf("%.4d",y->getValue()); 
-	str += QString("-%2-%3T%4:%5:%6").arg(m->getValue(),2,10,QLatin1Char('0')).arg(d->getValue(),2,10,QLatin1Char('0'))
+	char tmp[512];
+	sprintf(tmp, "%.4d",y->getValue()); 
+	str += tmp + QString("-%2-%3T%4:%5:%6").arg(m->getValue(),2,10,QLatin1Char('0')).arg(d->getValue(),2,10,QLatin1Char('0'))
 			.arg(h->getValue(),2,10,QLatin1Char('0')).arg(mn->getValue(),2,10,QLatin1Char('0')).arg(s->getValue(),2,10,QLatin1Char('0'));
 	return str.toStdWString();
 }
