@@ -34,6 +34,7 @@ Source: "iconv.dll"; DestDir: "{app}";
 Source: "QtCore4.dll"; DestDir: "{app}";
 Source: "QtGui4.dll"; DestDir: "{app}";
 Source: "QtOpenGL4.dll"; DestDir: "{app}";
+Source: "QtNetwork4.dll"; DestDir: "{app}";
 Source: "libeay32.dll"; DestDir: "{app}";
 Source: "libssl32.dll"; DestDir: "{app}";
 Source: "libcurl-4.dll"; DestDir: "{app}";
