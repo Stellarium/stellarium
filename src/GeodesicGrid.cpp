@@ -91,7 +91,7 @@ static const TopLevelTriangle icosahedron_triangles[20] =
         {{ 8, 9, 5}}  //  8
     };
 
-GeodesicGrid::GeodesicGrid(const int lev) : max_level(lev<0?0:lev)
+GeodesicGrid::GeodesicGrid(const int lev) : max_level(lev<0?0:lev), lastMaxSearchlevel(-1)
 {
 	if (max_level > 0)
 	{

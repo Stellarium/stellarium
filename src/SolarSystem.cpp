@@ -46,7 +46,7 @@ SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL),selected(NULL),
 	moonScale(1.), fontSize(14.),
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
-	flagOrbits(false),flag_light_travel_time(false)
+	flagOrbits(false),flag_light_travel_time(false), lastHomePlanet(NULL)
 {
 	setObjectName("SolarSystem");
 }

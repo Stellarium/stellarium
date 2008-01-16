@@ -46,7 +46,13 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 }
 
 MeteorMgr::~MeteorMgr()
-{}
+{
+	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	{
+		delete *iter;
+		active.erase(iter);
+	}
+}
 
 void MeteorMgr::init(const InitParser& conf)
 {
