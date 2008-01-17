@@ -1859,7 +1859,8 @@ void TextLabel::setLabel(const wstring& _label)
     unsigned int i = 0;
 	unsigned int lineHeight = (int)painter.getFont()->getLineHeight()+1;
 
-	QTextStream is(QString::fromStdWString(label).toUtf8());
+    QString sp = QString::fromStdWString(label);
+	QTextStream is(&sp);
 	is.reset();
 	while(!is.atEnd())
 	{
