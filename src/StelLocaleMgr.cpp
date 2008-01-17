@@ -149,7 +149,7 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 	// If needed, convert the year to BC and deal with year zero. (year -2 = 3BC, year 0 = 1BC
 	if (year <= 0) 
 	{
-		//--year; Qt already does that apparently
+		++year; // We want a year zero, unlike what Qt wants
 	}
 	
 	switch (date_format)

@@ -1,4 +1,4 @@
-0.9.1 [In developement]
+0.9.1 [2008-01-17]
 Got rid of autoconf/automake (Hooray!)
 Fixed a grid RA labeling bug.
 Improved the plug-in managment.
@@ -22,7 +22,6 @@ First testing new script engine based on QObject slots.
 Recoded fully the texture manager now based on Qt signal/slots. It handles multithreading loading and downloading of images. As a direct result, loading time is divided by 2!
 Now use Qt4.3, and replaced CURL by QtNetwork.
 Fixed some date display bugs in config window.
-Year zero is now removed, i.e. before year 1 is year -1 (or 1 BC)
 Added new translations for th ml he fil tl eo lt mk
 Added new sky culture, Tupi-Guarani from Brazil (thanks to pmarcelopontes)
 
