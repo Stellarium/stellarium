@@ -156,6 +156,7 @@ SET(CPACK_SOURCE_GENERATOR "TGZ")
 SET(CPACK_GENERATOR "TGZ")
 SET(CPACK_STRIP_FILES "bin/stellarium")
 SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
+set(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "builds/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "~$" "\\\\.swp$" "\\\\.#" "/#")
 INCLUDE(CPack)
 
 ########### Generate doxygen doc ###############
