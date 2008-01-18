@@ -402,7 +402,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				<< "--home-planet           : Specify observer planet (English name)" << endl
 				<< "--altitude              : Specify observer altitude in meters" << endl
 				<< "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
-				<< "--latitude              : Specify longitude, e.g. -1d4\\'27.48\\\"" << endl 
+				<< "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << endl 
 				<< "--list-landscapes       : Print a list of value landscape IDs" << endl 
 				<< "--landscape             : Start using landscape whose ID (dir name)" << endl
 				<< "                          is passed as parameter to option" << endl
