@@ -43,7 +43,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods from StelApp
-	///////////////////////////////////////////////////////////////////////////	
 	
 	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop(void);
@@ -78,6 +77,8 @@ public:
 	//! Get whether fullscreen is activated or not
 	bool getFullScreen() const;
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Specific methods
 	//! Return the instance of the main window of the program
 	class StelMainWindow* getMainWindow() {return mainWindow;}
 

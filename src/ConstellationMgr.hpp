@@ -39,28 +39,6 @@ class SFont;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT;
-	//! Define whether constellation art is displayed
-	Q_PROPERTY(bool flagArt READ getFlagArt WRITE setFlagArt);
-	//! Constellation art fade duration in second
-	Q_PROPERTY(double artFadeDuration READ getArtFadeDuration WRITE setArtFadeDuration);
-	//! Constellation art intensity (between 0 and 1)
-	Q_PROPERTY(double artIntensity READ getArtIntensity WRITE setArtIntensity);
-	//! Define whether constellation lines are displayed
-	Q_PROPERTY(bool flagLines READ getFlagLines WRITE setFlagLines);
-	//! Define whether constellation boundaries are displayed
-	Q_PROPERTY(bool flagBoundaries READ getFlagBoundaries WRITE setFlagBoundaries);
-	//! Define whether constellation names labels are displayed
-	Q_PROPERTY(bool flagNames READ getFlagNames WRITE setFlagNames);
-	//! Define whether only selected constellations must be displayed
-	Q_PROPERTY(bool flagIsolateSelected READ getFlagIsolateSelected WRITE setFlagIsolateSelected);
-	//! Constellation lines color
-	Q_PROPERTY(Vec3f linesColor READ getLinesColor WRITE setLinesColor);		
-	//! Constellation boundaries color
-	Q_PROPERTY(Vec3f boundariesColor READ getBoundariesColor WRITE setBoundariesColor);
-	//! Constellation name labels colors
-	Q_PROPERTY(Vec3f namesColor READ getNamesColor WRITE setNamesColor);
-	//! Constellation labels font size
-	Q_PROPERTY(double fontSize READ getFontSize WRITE setFontSize);
 	
 public:
 	//! Constructor

@@ -20,52 +20,76 @@
 #ifndef _OBSERVER_H_
 #define _OBSERVER_H_
 
+#include <QObject>
 #include <QString>
 #include "vecmath.h"
-
-using namespace std;
 
 class InitParser;
 class SolarSystem;
 class Planet;
 class ArtificialPlanet;
 
-class Observer
+class Observer : public QObject
 {
-public:
+	Q_OBJECT;
 
+public:
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
-	bool setHomePlanet(const QString& english_name);
-    void setHomePlanet(const Planet *p,float transit_seconds=2.f);
-    const Planet *getHomePlanet(void) const;
-    string getHomePlanetEnglishName(void) const;
-    wstring getHomePlanetNameI18n(void) const;
-	wstring get_name(void) const;
 
-    Vec3d getCenterVsop87Pos(void) const;
-    double getDistanceFromCenter(void) const;
-    Mat4d getRotLocalToEquatorial(double jd) const;
-    Mat4d getRotEquatorialToVsop87(void) const;
-
-	void save(const string& file, const string& section) const;
-	void setConf(InitParser& conf, const string& section) const;
-	void load(const string& file, const string& section);
-	void load(const InitParser& conf, const string& section);
-
-	void set_latitude(double l) {latitude=l;}
-	double get_latitude(void) const {return latitude;}
-	void set_longitude(double l) {longitude=l;}
-	double get_longitude(void) const {return longitude;}
-	void set_altitude(int a) {altitude=a;}
-	int get_altitude(void) const {return altitude;}
-
-	void moveTo(double lat, double lon, double alt, int duration, const wstring& _name);  // duration in ms
 	void update(int delta_time);  // for moving observing position 
+	void setHomePlanet(const Planet *p,float transit_seconds=2.f);
+	const Planet *getHomePlanet(void) const;
+	
+	void setConf(InitParser& conf, const std::string& section) const;
+	void load(const InitParser& conf, const std::string& section);
+	
+	//! TODO: Move to MovementMgr
+	//! @param duration in ms
+	void moveTo(double lat, double lon, double alt, int duration, const QString& locationName);
+	
+	Vec3d getCenterVsop87Pos(void) const;
+	double getDistanceFromCenter(void) const;
+	Mat4d getRotLocalToEquatorial(double jd) const;
+	Mat4d getRotEquatorialToVsop87(void) const;
+	
+public slots:
+	///////////////////////////////////////////////////////////////////////////
+	// Method callable from script and GUI
+	//! Set the home planet from its english name
+	bool setHomePlanet(const QString& englishName);
+	
+	//! Get the english home planet name
+	QString getHomePlanetEnglishName(void) const;
+	//! Get the translated home planet name
+	QString getHomePlanetNameI18n(void) const;
+	
+	//! Get the observatory name
+	QString getLocationName(void) const;
+	
+	//! Get the latitude in degrees
+	double getLatitude(void) const {return latitude;}
+	//! Set the latitude in degrees
+	void setLatitude(double l) {latitude=l;}
+	
+	//! Get the longitude in degrees
+	double getLongitude(void) const {return longitude;}
+	//! Set the longitude in degrees
+	void setLongitude(double l) {longitude=l;}
+	
+	//! Get the altitude in meters
+	int getAltitude(void) const {return altitude;}
+	//! Set the altitude in meters
+	void setAltitude(int a) {altitude=a;}
 
+	//! Load observatory informations from the given config file
+	void load(const QString& file, const QString& section);
+	//! Save observatory informations to the given config file
+	void save(const QString& file, const QString& section) const;
+	
 private:
     const SolarSystem &ssystem;
-	wstring name;			// Position name
+	QString locationName;			// Position name
 
 	const Planet *planet;
     ArtificialPlanet *artificial_planet;
@@ -81,7 +105,6 @@ private:
 	double start_lon, end_lon;
 	double start_alt, end_alt;
 	float move_to_coef, move_to_mult;
-
 };
 
 #endif

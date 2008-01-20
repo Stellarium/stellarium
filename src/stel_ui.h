@@ -126,6 +126,11 @@ public:
 	void updatePlanetMap(const string& englishName);
 	
 private:
+	//! Set the drawing mode in 2D for drawing in the full screen.
+	void set2DfullscreenProjection() const;
+	//! Restore previous projection mode
+	void restoreFrom2DfullscreenProjection() const;
+	
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
 	

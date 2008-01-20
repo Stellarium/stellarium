@@ -221,6 +221,10 @@ SET(stellarium_MOC_HDRS
 	MilkyWay.hpp
 	MovementMgr.hpp
 	NebulaMgr.hpp
+	SolarSystem.hpp
+	MeteorMgr.hpp
+	Observer.hpp
+	StarMgr.hpp
 	stelutils/STexture.hpp
 )
 

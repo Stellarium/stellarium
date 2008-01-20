@@ -69,7 +69,9 @@ namespace BigStarCatalogExtension {
 //! which points from the observer (at the centre of the geodesic sphere)
 //! to the position of the star as observed on the celestial sphere.
 class StarMgr : public StelObjectModule
-{
+{	
+	Q_OBJECT;
+	
 public:
 	StarMgr(void);
 	~StarMgr(void);
@@ -129,34 +131,44 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
+public slots:
 	///////////////////////////////////////////////////////////////////////////
-	// Properties setters and getters
-	//! Get the maximum level of the geodesic sphere used.
-	//! See the class description for a short introduction to the meaning of this value.
-	int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
+	// Methods callable from script and GUI
+	//! Set the color used to label bright stars.
+	void setLabelColor(const Vec3f& c) {label_color = c;}
+	//! Get the current color used to label bright stars.
+	Vec3f getLabelColor(void) const {return label_color;}
 	
-	//! Initializes each triangular face of the geodesic grid.
-	// TODO: But why?
-	void setGrid(class GeodesicGrid* grid);
+	//! Set display flag for Stars.
+	void setFlagStars(bool b) {starsFader=b;}
+	//! Get display flag for Stars 
+	bool getFlagStars(void) const {return starsFader==true;}
 	
-	//! Gets the maximum search level.
-	// TODO: add a non-lame description - what is the purpose of the max search level?
-	int getMaxSearchLevel(const ToneReproducer *eye, const Projector *prj) const;
+	//! Set display flag for Star names (labels).
+	void setFlagNames(bool b) {names_fader=b;}
+	//! Get display flag for Star names (labels).
+	bool getFlagNames(void) const {return names_fader==true;}
 	
-	//! Sets the time it takes for star names to fade and off.
-	//! @param duration the time in seconds.
-	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
+	//! Set display flag for Star Scientific names.
+	void setFlagStarsSciNames(bool b) {flagStarSciName=b;}
+	//! Get display flag for Star Scientific names.
+	bool getFlagStarsSciNames(void) const {return flagStarSciName;}
 	
-	//! Loads common names for stars from a file.
-	//! Called when the SkyCulture is updated.
-	//! @param the path to a file containing the common names for bright stars.
-	int load_common_names(const QString& commonNameFile);
+	//! Set maximum magnitude at which stars names are displayed.
+	void setMaxMagName(float b) {maxMagStarName=b;}
+	//! Get maximum magnitude at which stars names are displayed.
+	float getMaxMagName(void) const {return maxMagStarName;} 
 	
-	//! Loads scientific names for stars from a file.
-	//! Called when the SkyCulture is updated.
-	//! @param the path to a file containing the scientific names for bright stars.
-	void load_sci_names(const QString& sciNameFile);
+	//! Define font size to use for star names display.
+	void setFontSize(double newFontSize);
 	
+	//! Show scientific or catalog names on stars without common names.
+	static void setFlagSciNames(bool f) {flagSciNames = f;}
+	static bool getFlagSciNames(void) {return flagSciNames;}
+
+public:
+	///////////////////////////////////////////////////////////////////////////
+	// Other methods
 	//! Search for the nearest star to some position.
 	//! @param Pos the 3d vector representing the direction to search.
 	//! @return the nearest star from the specified position, or an 
@@ -175,31 +187,32 @@ public:
 	//! one was not found.
 	StelObjectP searchHP(int num) const;
 	
-	//! Set the color used to label bright stars.
-	void setLabelColor(const Vec3f& c) {label_color = c;}
+	//! Get the (translated) common name for a star with a specified 
+	//! Hipparcos catalogue number.
+	static wstring getCommonName(int hip);
 	
-	//! Get the current color used to label bright stars.
-	Vec3f getLabelColor(void) const {return label_color;}
+	//! Get the (translated) scientific name for a star with a specified 
+	//! Hipparcos catalogue number.
+	static wstring getSciName(int hip);
 	
-	// TODO: *Doxygen* what is this? Is it obsolete?
-	void setCircleColor(const Vec3f& c) {circle_color = c;}
-	Vec3f getCircleColor(void) const {return circle_color;}
+	// TODO: the StarMgr it self should call core()->getGeodesicGrid()->setMaxlevel etc..
+	//! Get the maximum level of the geodesic sphere used.
+	//! See the class description for a short introduction to the meaning of this value.
+	int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
+	//! Initializes each triangular face of the geodesic grid.
+	void setGrid(class GeodesicGrid* grid);
 	
-	//! Set display flag for Stars.
-	void setFlagStars(bool b) {starsFader=b;}
+	static double getCurrentJDay(void) {return current_JDay;}
 	
-	//! Get display flag for Stars 
-	bool getFlagStars(void) const {return starsFader==true;}
+	static Vec3f color_table[128];
+	static string convertToSpectralType(int index);
+	static string convertToComponentIds(int index);
 	
-	//! Set display flag for Star names (labels).
-	void setFlagNames(bool b) {names_fader=b;}
-	//! Get display flag for Star names (labels).
-	bool getFlagNames(void) const {return names_fader==true;}
-	
-	//! Set display flag for Star Scientific names.
-	void setFlagStarsSciNames(bool b) {flagStarSciName=b;}
-	//! Get display flag for Star Scientific names.
-	bool getFlagStarsSciNames(void) const {return flagStarSciName;}
+	///////////////////////////////////////////////////////////////////////////
+	// Methods to be migrated to SkyDrawer
+	//! Draw a star of specified position, magnitude and color.
+	int drawStar(const Projector *prj, const Vec3d &XY,
+				 const float rc_mag[2], const Vec3f &color) const;
 	
 	//! Set flag for Star twinkling.
 	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
@@ -210,11 +223,6 @@ public:
 	void setFlagPointStar(bool b) {flagPointStar=b;}
 	//! Get flag for displaying Star as GLpoints (faster on some hardware but not so nice).
 	bool getFlagPointStar(void) const {return flagPointStar;}
-	
-	//! Set maximum magnitude at which stars names are displayed.
-	void setMaxMagName(float b) {maxMagStarName=b;}
-	//! Get maximum magnitude at which stars names are displayed.
-	float getMaxMagName(void) const {return maxMagStarName;} 
 	
 	//! Set base stars display scaling factor.
 	void setScale(float b) {starScale=b;}
@@ -272,38 +280,29 @@ public:
 	
 	//! Compute RMag and CMag from magnitude.
 	//! Useful for conststent drawing of Planet halos.
-	int computeRCMag(float mag, bool point_star, float fov, 
-			 const ToneReproducer *eye, float rc_mag[2]) const
+	int computeRCMag(float mag, bool point_star, float fov, const ToneReproducer *eye, float rc_mag[2]) const
 	{
 		mag_converter->setFov(fov);
 		mag_converter->setEye(eye);
 		return mag_converter->computeRCMag(mag,point_star,eye,rc_mag);
 	}
 	
-	//! Define font size to use for star names display.
-	void setFontSize(double newFontSize);
-	
-	//! Show scientific or catalog names on stars without common names.
-	static void setFlagSciNames(bool f) {flagSciNames = f;}
-	static bool getFlagSciNames(void) {return flagSciNames;}
-	
-	//! Draw a star of specified position, magnitude and color.
-	int drawStar(const Projector *prj, const Vec3d &XY,
-			const float rc_mag[2], const Vec3f &color) const;
-	
-	//! Get the (translated) common name for a star with a specified 
-	//! Hipparcos catalogue number.
-	static wstring getCommonName(int hip);
-	
-	//! Get the (translated) scientifc name for a star with a specified 
-	//! Hipparcos catalogue number.
-	static wstring getSciName(int hip);
-
-	static Vec3f color_table[128];
-	static double getCurrentJDay(void) {return current_JDay;}
-	static string convertToSpectralType(int index);
-	static string convertToComponentIds(int index);
 private:
+	
+	//! Loads common names for stars from a file.
+	//! Called when the SkyCulture is updated.
+	//! @param the path to a file containing the common names for bright stars.
+	int load_common_names(const QString& commonNameFile);
+	
+	//! Loads scientific names for stars from a file.
+	//! Called when the SkyCulture is updated.
+	//! @param the path to a file containing the scientific names for bright stars.
+	void load_sci_names(const QString& sciNameFile);
+	
+	//! Gets the maximum search level.
+	// TODO: add a non-lame description - what is the purpose of the max search level?
+	int getMaxSearchLevel(const ToneReproducer *eye, const Projector *prj) const;
+	
 	//! Load all the stars from the files.
 	void load_data(const InitParser &conf);
 	
@@ -392,11 +391,10 @@ private:
 	double fontSize;
 	SFont *starFont;
 	static bool flagSciNames;
-	Vec3f label_color, circle_color;
+	Vec3f label_color;
 	float twinkle_amount;
 	
 	STextureSP texPointer;		// The selection pointer texture
-
 };
 
 
