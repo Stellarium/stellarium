@@ -98,7 +98,7 @@ public:
 	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
-	// Method callable from script and GUI
+	// Methods callable from script and GUI
 	//! Retrieve a \n separated list of the names of all the available landscape in the
 	//! file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files

@@ -177,7 +177,7 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d moonPos = nav->helio_to_local(ssystem->getMoon()->get_heliocentric_ecliptic_pos());
 	atmosphere->compute_color(nav->getJDay(), sunPos, moonPos,
 	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
-	                          eye, prj, obs->get_latitude(), obs->get_altitude(),
+	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
 	eye->setWorldAdaptationLuminance(3.75+atmosphere->getAverageLuminance()*3.5);
@@ -244,7 +244,7 @@ double LandscapeMgr::draw(StelCore* core)
 	landscape->draw(eye, prj, nav);
 
 	// Draw the cardinal points
-	cardinals_points->draw(prj, StelApp::getInstance().getCore()->getObservatory()->get_latitude());
+	cardinals_points->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getLatitude());
 	
 	return 0;
 }
@@ -334,7 +334,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 				landscape->getLongitude(),
 				landscape->getAltitude(),
 				0,
-    			landscape->getName().toStdWString());
+    			landscape->getName());
 		}
 	
 	}

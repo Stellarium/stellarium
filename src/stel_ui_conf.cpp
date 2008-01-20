@@ -312,7 +312,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
 	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), 9.5)));
-	load_cities(core->getObservatory()->getHomePlanetEnglishName());
+	load_cities(core->getObservatory()->getHomePlanetEnglishName().toStdString());
 	
 	y += 5;
 	Label * lblcursor = new Label(_("Cursor : "));
@@ -1115,24 +1115,24 @@ void StelUI::updateConfigForm(void)
 		meteor_rate_144000->setState(false);
 	meteorlbl->setLabel(_("Meteor zenith hourly rate")+meteorRate);
 
-	earth_map->setPointerLongitude(core->getObservatory()->get_longitude());
-	earth_map->setPointerLatitude(core->getObservatory()->get_latitude());
-	long_incdec->setValue(core->getObservatory()->get_longitude());
-	lat_incdec->setValue(core->getObservatory()->get_latitude());
-	alt_incdec->setValue(core->getObservatory()->get_altitude());
+	earth_map->setPointerLongitude(core->getObservatory()->getLongitude());
+	earth_map->setPointerLatitude(core->getObservatory()->getLatitude());
+	long_incdec->setValue(core->getObservatory()->getLongitude());
+	lat_incdec->setValue(core->getObservatory()->getLatitude());
+	alt_incdec->setValue(core->getObservatory()->getAltitude());
 	lblMapLocation->setLabel(StelUtils::stringToWstring(earth_map->getCursorString()));
 	if (!waitOnLocation)
 		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 	else
 	{
-		earth_map->findPosition(core->getObservatory()->get_longitude(),core->getObservatory()->get_latitude());
+		earth_map->findPosition(core->getObservatory()->getLongitude(),core->getObservatory()->getLatitude());
 		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}
 	
 	const Planet* p = core->getObservatory()->getHomePlanet();
 	if (p != mapLastPlanet) {
-		updatePlanetMap(core->getObservatory()->getHomePlanetEnglishName());
+		updatePlanetMap(core->getObservatory()->getHomePlanetEnglishName().toStdString());
 		mapLastPlanet = const_cast<Planet*>(p);
 	}
 

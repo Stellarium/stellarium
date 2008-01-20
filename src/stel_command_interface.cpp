@@ -392,9 +392,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			const Observer* observatory = stcore->getObservatory();
 
-			double lat = observatory->get_latitude();
-			double lon = observatory->get_longitude();
-			double alt = observatory->get_altitude();
+			double lat = observatory->getLatitude();
+			double lon = observatory->getLongitude();
+			double alt = observatory->getAltitude();
 			
 			string name;
 			int delay = 0;
@@ -406,7 +406,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			
 			if (args["delay"]!="") delay = (int)(1000.*StelUtils::stringToDouble(args["duration"]));
 		  
-			stcore->getObservatory()->moveTo(lat,lon,alt,delay,StelUtils::stringToWstring(name));
+			stcore->getObservatory()->moveTo(lat,lon,alt,delay,name.c_str());
 		} else status = 0;
 
 	} else if(command=="image") {

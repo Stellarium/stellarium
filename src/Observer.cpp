@@ -171,7 +171,7 @@ Observer::Observer(const SolarSystem &ssystem)
           planet(0), artificial_planet(0),
           longitude(0.), latitude(0.), altitude(0)
 {
-	name = L"Anonymous_Location";
+	locationName = "Anonymous_Location";
 	flag_move_to = false;
 }
 
@@ -204,32 +204,31 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const {
   return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-void Observer::load(const string& file, const string& section)
+void Observer::load(const QString& file, const QString& section)
 {
 	InitParser conf;
-	conf.load(file.c_str());
-	if (!conf.find_entry(section))
+	conf.load(file);
+	if (!conf.find_entry(section.toStdString()))
 	{
-		cerr << "ERROR : Can't find observator section " << section << " in file " << file << endl;
-		assert(0);
+		qWarning() << "ERROR : Can't find observator section " << section << " in file " << file;
 	}
-	load(conf, section);
+	load(conf, section.toStdString());
 }
 
 void Observer::load(const InitParser& conf, const string& section)
 {
-	name = _(conf.get_str(section, "name").c_str());
+	locationName = q_(conf.get_str(section, "name").c_str());
 
-	for (string::size_type i=0;i<name.length();++i)
+	for (int i=0;i<locationName.size();++i)
 	{
-		if (name[i]=='_') name[i]=' ';
+		if (locationName[i]=='_') locationName[i]=' ';
 	}
 
     if (!setHomePlanet(conf.get_str(section, "home_planet", "Earth").c_str())) {
       planet = ssystem.getEarth();
     }
     
-    cout << "Loading location: \"" << StelUtils::wstringToString(name) <<"\", on " << planet->getEnglishName() << endl;
+	cout << "Loading location: \"" << qPrintable(locationName) <<"\", on " << planet->getEnglishName() << endl;
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
@@ -239,23 +238,20 @@ void Observer::load(const InitParser& conf, const string& section)
 	altitude = conf.get_int(section, "altitude");
 }
 
-void Observer::save(const string& file, const string& section) const
+void Observer::save(const QString& file, const QString& section) const
 {
-	printf("Saving location %s to file %s\n",StelUtils::wstringToString(name).c_str(), file.c_str());
-
+	printf("Saving location %s to file %s\n", qPrintable(locationName), qPrintable(file));
 	InitParser conf;
-	conf.load(file.c_str());
-
-	setConf(conf,section);
-
-	conf.save(file.c_str());
+	conf.load(file);
+	setConf(conf, section.toStdString());
+	conf.save(file);
 }
 
 
 // change settings but don't write to files
 void Observer::setConf(InitParser & conf, const string& section) const
 {
-	conf.set_str(section + ":name", QString::fromStdWString(name));
+	conf.set_str(section + ":name", locationName);
 	conf.set_str(section + ":home_planet", planet->getEnglishName().c_str());
 	conf.set_str(section + ":latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
 	conf.set_str(section + ":longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
@@ -265,18 +261,18 @@ void Observer::setConf(InitParser & conf, const string& section) const
 }
 
 
-string Observer::getHomePlanetEnglishName(void) const {
+QString Observer::getHomePlanetEnglishName(void) const {
   const Planet *p = getHomePlanet();
-  return p ? p->getEnglishName() : "";
+  return p ? p->getEnglishName().c_str() : "";
 }
 
-wstring Observer::getHomePlanetNameI18n(void) const {
+QString Observer::getHomePlanetNameI18n(void) const {
   const Planet *p = getHomePlanet();
-  return p ? p->getNameI18n() : L"";
+  return p ? QString::fromStdWString(p->getNameI18n()) : "";
 }
 
-wstring Observer::get_name(void) const {
-	return artificial_planet ? L"" : name;
+QString Observer::getLocationName(void) const {
+	return artificial_planet ? "" : locationName;
 }
 
 
@@ -302,7 +298,7 @@ void Observer::setHomePlanet(const Planet *p, float transit_seconds)
 			if (!artificial_planet)
 			{
 				artificial_planet = new ArtificialPlanet(*planet);
-				name = L"";
+				locationName = "";
 			}
 			artificial_planet->setDest(*p);
 			time_to_go = (int)(1000.f * transit_seconds); // milliseconds
@@ -317,7 +313,7 @@ const Planet *Observer::getHomePlanet(void) const {
 
 
 // move gradually to a new observation location
-void Observer::moveTo(double lat, double lon, double alt, int duration, const wstring& _name)
+void Observer::moveTo(double lat, double lon, double alt, int duration, const QString& _name)
 {
   flag_move_to = true;
 
@@ -333,7 +329,7 @@ void Observer::moveTo(double lat, double lon, double alt, int duration, const ws
   move_to_coef = 1.0f/duration;
   move_to_mult = 0;
 
-  name = _name;
+  locationName = _name;
 }
 
 

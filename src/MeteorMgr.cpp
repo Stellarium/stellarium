@@ -79,7 +79,7 @@ int MeteorMgr::getZHR()
 	return ZHR;
 }
 
-void MeteorMgr::set_max_velocity(int maxv)
+void MeteorMgr::setMaxVelocity(int maxv)
 {
 	max_velocity = maxv;
 }

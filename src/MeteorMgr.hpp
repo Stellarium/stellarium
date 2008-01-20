@@ -29,6 +29,8 @@ class Meteor;
 //! Simulates meteor showers.
 class MeteorMgr : public StelModule
 {
+	Q_OBJECT;
+
 public:
 	//! Construct a MeteorMgr object.
 	//! @param zhr the base zenith hourly rate - i.e. the rate when there is no
@@ -56,6 +58,9 @@ public:
 	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
+public slots:
+	///////////////////////////////////////////////////////////////////////////
+	// Method callable from script and GUI
 	//! Set the zenith hourly rate.
 	void setZHR(int zhr);
 	
@@ -63,7 +68,7 @@ public:
 	int getZHR(void);
 	
 	//! Set the maximum velocity in km/s
-	void set_max_velocity(int maxv);
+	void setMaxVelocity(int maxv);
 	
 private:
 	vector<Meteor*> active;		// Vector containing all active meteors

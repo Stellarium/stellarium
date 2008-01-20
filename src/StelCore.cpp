@@ -48,12 +48,7 @@ StelCore::~StelCore()
 	delete projection; projection=NULL;
 	delete observatory; observatory=NULL;
 	delete tone_converter; tone_converter=NULL;
-	
-	if (geodesic_grid)
-	{
-		delete geodesic_grid;
-		geodesic_grid = NULL;
-	}
+	delete geodesic_grid; geodesic_grid = NULL;
 }
 
 

@@ -72,7 +72,7 @@ void StelUI::draw_gravity_ui(void)
 		// label location if not on earth
 		if(core->getObservatory()->getHomePlanetEnglishName() != "Earth") {
 			os << " ";
-			os << q_(core->getObservatory()->getHomePlanetEnglishName().c_str());
+			os << q_(core->getObservatory()->getHomePlanetEnglishName());
 		}
 
 		if (FlagShowFov)
@@ -568,9 +568,9 @@ void StelUI::tui_update_widgets(void)
 	MovementMgr* mvmgr = (MovementMgr*)app->getModuleMgr().getModule("MovementMgr");
 	
 	// 1. Location
-	tui_location_latitude->setValue(core->getObservatory()->get_latitude());
-	tui_location_longitude->setValue(core->getObservatory()->get_longitude());
-	tui_location_altitude->setValue(core->getObservatory()->get_altitude());
+	tui_location_latitude->setValue(core->getObservatory()->getLatitude());
+	tui_location_longitude->setValue(core->getObservatory()->getLongitude());
+	tui_location_altitude->setValue(core->getObservatory()->getAltitude());
 
 
 	// 2. Date & Time
@@ -949,7 +949,7 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	// reset those options to the current values now
 	// (can not do this in tui_update_widgets)
 
-	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory()->getHomePlanetEnglishName()));
+	tui_location_planet->setValue(core->getObservatory()->getHomePlanetEnglishName().toStdWString());
 
 	// Reread local script directory (in case new files)
 	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");

@@ -724,21 +724,6 @@ int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 }
 
 
-//! Set the drawing mode in 2D for drawing in the full screen
-void StelApp::set2DfullscreenProjection() const
-{
-	glViewport(0,0,getScreenW(),getScreenH());
-	glMatrixMode(GL_PROJECTION);		// projection matrix mode
-	glPushMatrix();						// store previous matrix
-	glLoadIdentity();
-	glOrtho(0,getScreenW(),0,getScreenH(),-1,1);	// set a 2D orthographic projection
-	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-	glPushMatrix();
-	glLoadIdentity();
-	glScalef(1, -1, 1);					// invert the y axis, down is positive
-	glTranslatef(0, -getScreenH(), 0);		// move the origin from the bottom left corner to the upper left corner
-}
-
 void StelApp::setConfigFile(const QString& configName)
 {
 	try
@@ -793,15 +778,6 @@ void StelApp::copyDefaultConfigFile()
 		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath.toUtf8().data() << " to " << configFile.toUtf8().data() << ". You could try to copy it by hand." << endl;
 		exit(1);
 	}
-}
-
-//! Restore previous projection mode
-void StelApp::restoreFrom2DfullscreenProjection() const
-{
-	glMatrixMode(GL_PROJECTION);		// Restore previous matrix
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
 }
 
 // Set the colorscheme for all the modules
