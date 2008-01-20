@@ -800,16 +800,6 @@ void SolarSystem::updateI18n()
 	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
-vector<wstring> SolarSystem::getNamesI18(void)
-{
-	vector<wstring> names;
-	vector < Planet * >::iterator iter;
-
-	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
-		names.push_back((*iter)->getNameI18n());
-	return names;
-}
-
 wstring SolarSystem::getPlanetHashString(void)
 {
 	QString str;

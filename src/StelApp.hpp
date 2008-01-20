@@ -148,19 +148,6 @@ public:
 	//! @return the integer time multiplier
 	const int getTimeMultiplier() { return time_multiplier; }
 	
-	//! Set the drawing mode in 2D for drawing in the full screen.
-	void set2DfullscreenProjection() const;
-	//! Restore previous projection mode
-	void restoreFrom2DfullscreenProjection() const;
-	
-	//! Sets the name of the configuration file.
-	//! It is possible to set the configuration by passing either a full path
-	//! a relative path of an existing file, or path segment which will be appended
-	//! to the serach path.  The configuration file must be writable, or there will
-	//! be trouble!
-	//! @param configName the name or full path of the configuration file
-	void setConfigFile(const QString& configName);
-	
 	//! Retrieve the full path of the current configuration file.
 	//! @return the full path of the configuration file
 	const QString& getConfigFilePath() { return configFile; }
@@ -247,6 +234,14 @@ protected:
 	virtual void setResizable(bool resizable) = 0;
 		
 private:
+	//! Sets the name of the configuration file.
+	//! It is possible to set the configuration by passing either a full path
+	//! a relative path of an existing file, or path segment which will be appended
+	//! to the serach path.  The configuration file must be writable, or there will
+	//! be trouble!
+	//! @param configName the name or full path of the configuration file
+	void setConfigFile(const QString& configName);
+	
 	//! Copies the default configuration file.
 	//! This function copies the default_config.ini file to config.ini (or other
 	//! name specified on the command line located in the user data directory.

@@ -852,13 +852,13 @@ void StelUI::drawGui(void)
 
 	glEnable(GL_BLEND);
 
-	app->set2DfullscreenProjection();	// 2D coordinate
+	set2DfullscreenProjection();	// 2D coordinate
 	Component::enableScissor();
 
 	desktop->draw();
 
 	Component::disableScissor();
-	app->restoreFrom2DfullscreenProjection();	// Restore the other coordinate
+	restoreFrom2DfullscreenProjection();	// Restore the other coordinate
 
 }
 
@@ -1346,6 +1346,32 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 	return 0;
 }
 
+//! Set the drawing mode in 2D for drawing in the full screen
+void StelUI::set2DfullscreenProjection() const
+{
+	const int screenH = core->getProjection()->getViewportHeight();
+	const int screenW = core->getProjection()->getViewportHeight();
+	glViewport(0,0,screenW,screenH);
+	glMatrixMode(GL_PROJECTION);		// projection matrix mode
+	glPushMatrix();						// store previous matrix
+	glLoadIdentity();
+	glOrtho(0,screenW,0,screenH,-1,1);	// set a 2D orthographic projection
+	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
+	glPushMatrix();
+	glLoadIdentity();
+	glScalef(1, -1, 1);					// invert the y axis, down is positive
+	glTranslatef(0, -screenH, 0);		// move the origin from the bottom left corner to the upper left corner
+}
+
+//! Restore previous projection mode
+void StelUI::restoreFrom2DfullscreenProjection() const
+{
+	glMatrixMode(GL_PROJECTION);		// Restore previous matrix
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+}
+
 // Update changing values
 void StelUI::gui_update_widgets(int delta_time)
 {
@@ -1454,9 +1480,10 @@ void StelUI::setTitle(const wstring& title)
 
 wstring StelUI::getTitleWithAltitude(void)
 {
-	return core->getObservatory()->getHomePlanetNameI18n() +
-        L", " + core->getObservatory()->get_name() +
-        L" @ " + StelUtils::doubleToWstring(core->getObservatory()->get_altitude()) + L"m";
+	QString result = core->getObservatory()->getHomePlanetNameI18n() +
+        ", " + core->getObservatory()->getLocationName() +
+        " @ " + QString::fromStdString(StelUtils::doubleToString(core->getObservatory()->getAltitude())) + "m";
+	return result.toStdWString();
 }
 
 void StelUI::setColorScheme(const InitParser& conf, const QString& section)
