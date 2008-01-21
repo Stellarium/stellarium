@@ -614,26 +614,16 @@ void StelUI::cb(void)
 	help_win->setVisible(FlagHelp);
 	core->getNavigation()->setMountMode(bt_flag_equatorial_mode->getState() ? Navigator::MOUNT_EQUATORIAL : Navigator::MOUNT_ALTAZIMUTAL);
 	FlagConfig			= bt_flag_config->getState();
-// 	if  (app->getVisionModeChart() != bt_flag_chart->getState())
-// 	{
-// 		if (bt_flag_night->getState())
-// 		{
-// 			app->setVisionModeChart();
-// 		}
-// 		else
-// 		{
-// 			app->setVisionModeNormal();
-// 		}
-// 	}
+
 	if  (app->getVisionModeNight() != bt_flag_night->getState())
 	{
 		if (bt_flag_night->getState())
 		{
-			app->setVisionModeNight();
+			app->setVisionModeNight(true);
 		}
 		else
 		{
-			app->setVisionModeNormal();
+			app->setVisionModeNight(false);
 		}
 	}
 	config_win->setVisible(FlagConfig);

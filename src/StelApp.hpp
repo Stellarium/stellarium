@@ -25,6 +25,7 @@
 #include "StelTypes.hpp"
 #include "fixx11h.h"
 #include <QString>
+#include <QObject>
 
 // Predeclaration of some classes
 class StelCore;
@@ -54,8 +55,10 @@ using namespace std;
 //! The StelApp class is also the one managing the StelModule in a generic manner
 //! by calling their update, drawing and other methods when needed.
 //! @author Fabien Chereau
-class StelApp
+class StelApp : public QObject
 {
+	Q_OBJECT;
+	
 public:
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
@@ -67,9 +70,6 @@ public:
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
-	
-	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
-	static QString getApplicationName();
 
 	//! Initialize application and core.
 	virtual void init();
@@ -124,20 +124,15 @@ public:
 	//! Update and reload sky culture informations everywhere in the program.
 	void updateSkyCulture();	
 	
-	//! Set flag for activating night vision mode.
-	void setVisionModeNight();
-	//! Get flag for activating night vision mode.
-	bool getVisionModeNight() const {return draw_mode==DM_NIGHT;}
-
-	//! Set flag for activating chart vision mode.
-	// ["color" section name used for easier backward compatibility for older configs - Rob]
-	void setVisionModeNormal();
-	//! Get flag for activating chart vision mode.
-	bool getVisionModeNormal() const {return draw_mode==DM_NORMAL;}
-
-	void setViewPortDistorterType(const QString &type);
-	QString getViewPortDistorterType() const;
-
+	//! Retrieve the full path of the current configuration file.
+	//! @return the full path of the configuration file
+	const QString& getConfigFilePath() { return configFile; }
+	
+	//! Swap GL buffer, should be called only for special condition.
+	virtual void swapGLBuffers() = 0;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Deprecated methods
 	//! Set the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
 	//! @param multiplier new value for the time multiplier
@@ -148,9 +143,25 @@ public:
 	//! @return the integer time multiplier
 	const int getTimeMultiplier() { return time_multiplier; }
 	
-	//! Retrieve the full path of the current configuration file.
-	//! @return the full path of the configuration file
-	const QString& getConfigFilePath() { return configFile; }
+	//! Return a list of working fullscreen hardware video modes (one per line).
+	virtual QString getVideoModeList() const = 0;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Scriptable methods
+public slots:
+	//! Return the full name of stellarium, i.e. "Stellarium 0.9.0".
+	static QString getApplicationName();
+	
+	//! Set flag for activating night vision mode.
+	void setVisionModeNight(bool);
+	//! Get flag for activating night vision mode.
+	bool getVisionModeNight() const {return flagNightVision;}
+
+	//! Define the type of viewport distorter to use
+	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
+	void setViewPortDistorterType(const QString& type);
+	//! Get the type of viewport distorter currently used
+	QString getViewPortDistorterType() const;
 	
 	//! Get the width of the openGL screen.
 	//! @return width of the openGL screen in pixels
@@ -171,20 +182,14 @@ public:
 	//! Start the main loop and return when the program ends.
 	virtual void startMainLoop() = 0;
 	
-	//! Return a list of working fullscreen hardware video modes (one per line).
-	virtual QString getVideoModeList() const = 0;
+	//! Terminate the application.
+	virtual void terminateApplication() = 0;
 	
 	//! Return the time since when stellarium is running in second.
 	virtual double getTotalRunTime() const = 0;
 	
 	//! Set mouse cursor display.
 	virtual void showCursor(bool b) = 0;
-	
-	//! Swap GL buffer, should be called only for special condition.
-	virtual void swapGLBuffers() = 0;
-	
-	//! Terminate the application.
-	virtual void terminateApplication() = 0;
 	
 	//! Alternate fullscreen mode/windowed mode if possible.
 	virtual void toggleFullScreen() = 0;
@@ -361,9 +366,8 @@ private:
 
 	int time_multiplier;	// used for adjusting delta_time for script speeds
 	
-	//! Possible drawing modes.
-	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
-	DRAWMODE draw_mode;					// Current draw mode
+	//! Define whether we are in night vision mode
+	bool flagNightVision;
 	
 	QString configFile;
 	

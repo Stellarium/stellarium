@@ -66,8 +66,10 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-	timeBase(0), draw_mode(StelApp::DM_NORMAL), configFile("config.ini"), initialized(false)
+		   timeBase(0), flagNightVision(false), configFile("config.ini"), initialized(false)
 {
+	setObjectName("StelApp");
+	
 	distorter=NULL;
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
@@ -341,9 +343,9 @@ void StelApp::init()
 	getModuleMgr().registerModule(ui);
 	
 	// Initialisation of the color scheme
-	draw_mode = draw_mode=DM_NIGHT;  // fool caching
-	setVisionModeNormal();
-	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
+	flagNightVision=true;  // fool caching
+	setVisionModeNight(false);
+	setVisionModeNight(conf.get_boolean("viewing:flag_night"));
 
 	setViewPortDistorterType(conf.get_str("video","distorter","none").c_str());
 	
@@ -792,24 +794,13 @@ void StelApp::setColorScheme(const QString& fileName, const QString& section)
 }
 
 //! Set flag for activating night vision mode
-void StelApp::setVisionModeNight()
+void StelApp::setVisionModeNight(bool b)
 {
-	if (!getVisionModeNight())
+	if (flagNightVision!=b)
 	{
-		setColorScheme(getConfigFilePath(), "night_color");
+		setColorScheme(getConfigFilePath(), b ? "night_color" : "color");
 	}
-	draw_mode=DM_NIGHT;
-}
-
-//! Set flag for activating chart vision mode
-// ["color" section name used for easier backward compatibility for older configs - Rob]
-void StelApp::setVisionModeNormal()
-{
-	if (!getVisionModeNormal())
-	{
-		setColorScheme(getConfigFilePath(), "color");
-	}
-	draw_mode=DM_NORMAL;
+	flagNightVision=b;
 }
 
 // Update translations and font everywhere in the program
