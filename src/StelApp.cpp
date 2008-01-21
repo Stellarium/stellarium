@@ -647,12 +647,10 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 	
 	// Manage the event for the main window
 	{
-		StelCommandInterface* commander = (StelCommandInterface*)getModuleMgr().getModule("StelCommandInterface");
-		
 		// Deselect the selected object
 		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
 		{
-			commander->execute_command("select");
+			getStelObjectMgr().unSelect();
 			return 1;
 		}
 		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("MovementMgr");
@@ -662,7 +660,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			// CTRL + left clic = right clic for 1 button mouse
 			if (mod & COMPATIBLE_StelMod_CTRL)
 			{
-				commander->execute_command("select");
+				getStelObjectMgr().unSelect();
 				return 1;
 			}
 
