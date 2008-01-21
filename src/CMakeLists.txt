@@ -225,6 +225,7 @@ SET(stellarium_MOC_HDRS
 	MeteorMgr.hpp
 	Observer.hpp
 	StarMgr.hpp
+	StelApp.hpp
 	stelutils/STexture.hpp
 )
 
