@@ -1350,7 +1350,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 void StelUI::set2DfullscreenProjection() const
 {
 	const int screenH = core->getProjection()->getViewportHeight();
-	const int screenW = core->getProjection()->getViewportHeight();
+	const int screenW = core->getProjection()->getViewportWidth();
 	glViewport(0,0,screenW,screenH);
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
 	glPushMatrix();						// store previous matrix
