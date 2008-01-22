@@ -22,8 +22,6 @@
 
 #include "StelApp.hpp"
 
-#ifdef USE_QT4
-
 class GLWidget;
 class StelMainWindow;
 
@@ -43,13 +41,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods from StelApp
-	
-	//! Start the main loop and return when the program ends.
-	virtual void startMainLoop(void);
-	
-	//! Return a list of working fullscreen hardware video modes (one per line)
-	virtual QString getVideoModeList(void) const;
-	
 	//! Return the time since when stellarium is running in second
 	virtual double getTotalRunTime() const;
 	
@@ -58,9 +49,6 @@ public:
 	
 	//! Swap GL buffer, should be called only for special condition
 	virtual void swapGLBuffers();
-
-	//! Empty in the case of StelAppQt4
-	virtual void init(void) {;}
 	
 	//! Get the width of the openGL screen
 	virtual int getScreenW() const;
@@ -113,7 +101,5 @@ private:
 	class StelMainWindow* mainWindow;
 	class GLWidget* winOpenGL;
 };
-
-#endif // USE_QT4
 
 #endif /*STELAPPQT4_HPP_*/

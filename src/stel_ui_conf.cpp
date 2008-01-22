@@ -411,33 +411,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	
 	// Should fix bug 1751366
 	screen_size_sl = NULL;
-#ifndef USE_QT4
-	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
-	lblvideo2->setPos(x+10, y);
-	tab_video->addComponent(lblvideo2); y+=24;
-
-	Label * lblvideo3 = new Label(_("Restart program for"));
-	Label * lblvideo4 = new Label(_("change to apply."));
-	lblvideo3->setPos(x+10, y+145);
-	lblvideo4->setPos(x+10, y+160);
-	tab_video->addComponent(lblvideo3);
-	tab_video->addComponent(lblvideo4);
-
-	screen_size_sl = new ListBox(6);
-	screen_size_sl->setPos(x+20,y);
-	screen_size_sl->setSizex(200);
-	screen_size_sl->addItemList(app->getVideoModeList().toStdWString());
-	sprintf(vs, "%dx%d", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
-	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
-	tab_video->addComponent(screen_size_sl);
-
-	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
-	Label * lblvideo6 = new Label(app->getConfigFilePath().toStdWString());
-	lblvideo5->setPos(30, tab_video->getSizey()-125);
-	lblvideo6->setPos(30, tab_video->getSizey()-110);
-	tab_video->addComponent(lblvideo5);
-	tab_video->addComponent(lblvideo6);
-#endif
+	
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);
