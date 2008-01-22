@@ -19,8 +19,6 @@
 
 #include <config.h>
 
-#ifdef USE_QT4
-
 #include <iostream>
 #include "StelAppQt4.hpp"
 #include "StelCore.hpp"
@@ -111,12 +109,6 @@ int StelAppQt4::getScreenH() const
 	return winOpenGL->height();
 }
 
-QString StelAppQt4::getVideoModeList(void) const
-{
-	return "";
-}
-
-
 // Terminate the application
 void StelAppQt4::terminateApplication(void)
 {
@@ -139,16 +131,6 @@ void StelAppQt4::swapGLBuffers()
 double StelAppQt4::getTotalRunTime() const
 {
 	return (double)(winOpenGL->qtime.elapsed())/1000;
-}
-
-void StelAppQt4::startMainLoop()
-{
-	StelApp::init();
-	
-	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
-	winOpenGL->resizeGL(getScreenW(), getScreenH());
-	winOpenGL->timerId = winOpenGL->startTimer(10);
-	winOpenGL->qtime.start();
 }
 
 void StelAppQt4::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
@@ -546,12 +528,17 @@ void StelAppQt4::runStellarium(int argc, char **argv)
 	openGLWin.show();
 	
 	stelApp->setQtWins(&mainWin, &openGLWin);
-	stelApp->startMainLoop();
+	
+	stelApp->init();
+	
+	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
+	openGLWin.resizeGL(stelApp->getScreenW(), stelApp->getScreenH());
+	openGLWin.timerId = openGLWin.startTimer(10);
+	openGLWin.qtime.start();
+	
 	app.exec();
 	
 	// At this point it is important to still have a valid GL context because the textures are deallocated
 	// The GL Context is still valid because openGLWin is still in the current scope
 	delete stelApp;
 }
-		
-#endif
