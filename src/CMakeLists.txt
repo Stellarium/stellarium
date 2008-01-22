@@ -82,8 +82,6 @@ SET(stellarium_lib_SRCS
    solve.h
    StelApp.cpp
    StelApp.hpp
-   StelAppSdl.hpp
-   StelAppSdl.cpp
    audio.cpp
    audio.h
    command_interface.cpp

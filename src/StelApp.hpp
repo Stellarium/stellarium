@@ -143,9 +143,6 @@ public:
 	//! @return the integer time multiplier
 	const int getTimeMultiplier() { return time_multiplier; }
 	
-	//! Return a list of working fullscreen hardware video modes (one per line).
-	virtual QString getVideoModeList() const = 0;
-	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -178,9 +175,6 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods overidded for SDL / QT
 	///////////////////////////////////////////////////////////////////////////	
-	
-	//! Start the main loop and return when the program ends.
-	virtual void startMainLoop() = 0;
 	
 	//! Terminate the application.
 	virtual void terminateApplication() = 0;

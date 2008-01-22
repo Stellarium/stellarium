@@ -20,33 +20,13 @@
 #include <clocale>
 
 #include <config.h>
-#include "StelApp.hpp"
-
-#ifdef USE_SDL
- #include "StelAppSdl.hpp"
-#else
- #ifdef USE_QT4
-  #include "StelAppQt4.hpp"
- #else
-	#error You must define either USE_SDL or USE_QT4
- #endif
-#endif
+#include "StelAppQt4.hpp"
 
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
-
-#ifdef USE_SDL
-	StelApp* app = new StelAppSdl(argc, argv);
-	app->init();
-	app->startMainLoop();
-	delete app;
-#endif
-#ifdef USE_QT4
 	StelAppQt4::runStellarium(argc, argv);
-#endif
-
 	return 0;
 }

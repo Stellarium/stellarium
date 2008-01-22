@@ -60,65 +60,49 @@ void Projector::init(const InitParser& conf)
 {
 	// Video Section
 	string tmpstr = conf.get_str("projection:viewport");
-	const Projector::PROJECTOR_MASK_TYPE
-	  projMaskType = Projector::stringToMaskType(tmpstr);
+	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	const bool maximized = (tmpstr=="maximized");
 	const int screen_w = StelApp::getInstance().getScreenW();
 	const int screen_h = StelApp::getInstance().getScreenH();
 	const int screen_min_wh = MY_MIN(screen_w,screen_h);
-	const int viewport_width
-	  = conf.get_int("projection","viewport_width",
-	                    maximized ? screen_w : screen_min_wh);
-	const int viewport_height
-	  = conf.get_int("projection","viewport_height",
-	                    maximized ? screen_h : screen_min_wh);
-	const int viewport_x
-	  = conf.get_int("projection","viewport_x",
-	                 (screen_w-viewport_width)/2);
-	const int viewport_y
-	  = conf.get_int("projection","viewport_y",
-	                 (screen_h-viewport_height)/2);
-	const double viewport_center_x
-	  = conf.get_double("projection","viewport_center_x",0.5*viewport_width);
-	const double viewport_center_y
-	  = conf.get_double("projection","viewport_center_y",0.5*viewport_height);
-	const double viewport_fov_diameter
-	  = conf.get_double("projection","viewport_fov_diameter",
-                        MY_MIN(viewport_width,viewport_height));
-	setViewport(viewport_x,viewport_y,viewport_width,viewport_height,
-	            viewport_center_x,viewport_center_y,
-	            viewport_fov_diameter);
+	const int viewport_width = conf.get_int("projection","viewport_width", maximized ? screen_w : screen_min_wh);
+	const int viewport_height = conf.get_int("projection","viewport_height", maximized ? screen_h : screen_min_wh);
+	const int viewport_x = conf.get_int("projection","viewport_x", (screen_w-viewport_width)/2);
+	const int viewport_y = conf.get_int("projection","viewport_y", (screen_h-viewport_height)/2);
+	const double viewport_center_x = conf.get_double("projection","viewport_center_x",0.5*viewport_width);
+	const double viewport_center_y = conf.get_double("projection","viewport_center_y",0.5*viewport_height);
+	const double viewport_fov_diameter = conf.get_double("projection","viewport_fov_diameter", MY_MIN(viewport_width,viewport_height));
+	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewport_center_x,viewport_center_y, viewport_fov_diameter);
 
-
-	double overwrite_max_fov
-	  = conf.get_double("projection","equal_area_max_fov",0.0);
-	if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
+	double overwrite_max_fov = conf.get_double("projection","equal_area_max_fov",0.0);
+	if (overwrite_max_fov > 360.0)
+		overwrite_max_fov = 360.0;
 	if (overwrite_max_fov > 0.0)
 		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov
-	  = conf.get_double("projection","stereographic_max_fov",0.0);
-	if (overwrite_max_fov > 359.999999) overwrite_max_fov = 359.999999;
+	overwrite_max_fov = conf.get_double("projection","stereographic_max_fov",0.0);
+	if (overwrite_max_fov > 359.999999)
+		overwrite_max_fov = 359.999999;
 	if (overwrite_max_fov > 0.0)
 		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov
-	  = conf.get_double("projection","fisheye_max_fov",0.0);
-	if (overwrite_max_fov > 360.0) overwrite_max_fov = 360.0;
+	overwrite_max_fov = conf.get_double("projection","fisheye_max_fov",0.0);
+	if (overwrite_max_fov > 360.0)
+		overwrite_max_fov = 360.0;
 	if (overwrite_max_fov > 0.0)
 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov
-	  = conf.get_double("projection","cylinder_max_fov",0.0);
-	if (overwrite_max_fov > 540.0) overwrite_max_fov = 540.0;
+	overwrite_max_fov = conf.get_double("projection","cylinder_max_fov",0.0);
+	if (overwrite_max_fov > 540.0)
+		overwrite_max_fov = 540.0;
 	if (overwrite_max_fov > 0.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov
-	  = conf.get_double("projection","perspective_max_fov",0.0);
-	if (overwrite_max_fov > 179.999999) overwrite_max_fov = 179.999999;
+	overwrite_max_fov = conf.get_double("projection","perspective_max_fov",0.0);
+	if (overwrite_max_fov > 179.999999)
+		overwrite_max_fov = 179.999999;
 	if (overwrite_max_fov > 0.0)
 		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov
-	  = conf.get_double("projection","orthographic_max_fov",0.0);
-	if (overwrite_max_fov > 180.0) overwrite_max_fov = 180.0;
+	overwrite_max_fov = conf.get_double("projection","orthographic_max_fov",0.0);
+	if (overwrite_max_fov > 180.0)
+		overwrite_max_fov = 180.0;
 	if (overwrite_max_fov > 0.0)
 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 
