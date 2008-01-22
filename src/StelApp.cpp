@@ -19,6 +19,7 @@
  
 #include <cstdlib>
 #include "StelApp.hpp"
+#include "StelAppQt4.hpp"
 
 #include "StelCore.hpp"
 #include "ViewportDistorter.hpp"
@@ -940,3 +941,72 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 	}
 }
 
+
+int StelApp::getScreenW() const
+{
+	return StelAppQt4::getInstance().getScreenW();
+}
+	
+int StelApp::getScreenH() const
+{
+	return StelAppQt4::getInstance().getScreenH();
+}
+	
+//! Terminate the application.
+void StelApp::terminateApplication()
+{
+	StelAppQt4::getInstance().terminateApplication();
+}
+
+//! Return the time since when stellarium is running in second.
+double StelApp::getTotalRunTime() const
+{
+	return StelAppQt4::getInstance().getTotalRunTime();
+}
+
+//! Set mouse cursor display.
+void StelApp::showCursor(bool b)
+{
+	StelAppQt4::getInstance().showCursor(b);
+}
+
+//! Alternate fullscreen mode/windowed mode if possible.
+void StelApp::toggleFullScreen()
+{
+	StelAppQt4::getInstance().toggleFullScreen();
+}
+
+//! Return whether we are in fullscreen mode.
+bool StelApp::getFullScreen() const
+{
+	return StelAppQt4::getInstance().getFullScreen();
+}
+
+//! Save a screen shot.
+//! The format of the file, and hence the filename extension 
+//! depends on the architecture and build type.
+//! @arg filePrefix changes the beginning of the file name
+//! @arg shotDir changes the drectory where the screenshot is saved
+//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
+void StelApp::saveScreenShot(const QString& filePrefix, const QString& shotDir) const
+{
+	StelAppQt4::getInstance().saveScreenShot(filePrefix, shotDir);
+}
+
+//! Initialize openGL screen.
+void StelApp::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
+{
+	StelAppQt4::getInstance().initOpenGL(w, h, bbpMode, fullScreen, iconFile);
+}
+
+//! Call this when you want to make the window (not) resizable.
+void StelApp::setResizable(bool resizable)
+{
+	StelAppQt4::getInstance().setResizable(resizable);
+}
+
+//! Swap GL buffer, should be called only for special condition.
+void StelApp::swapGLBuffers()
+{
+	StelAppQt4::getInstance().swapGLBuffers();
+}
