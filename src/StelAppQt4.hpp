@@ -20,71 +20,65 @@
 #ifndef STELAPPQT4_HPP_
 #define STELAPPQT4_HPP_
 
-#include "StelApp.hpp"
-
-class GLWidget;
-class StelMainWindow;
+#include <QMainWindow>
+#include <cassert>
 
 //! Implementation of StelApp based on a Qt4 main window.
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
-class StelAppQt4 : public StelApp
+class StelAppQt4 : public QMainWindow
 {
 	friend class GLWidget;
-	friend class StelMainWindow;
 public:
 	
 	//! Constructor
-	//! @param argc The number of command line parameters
-	//! @param argv an array of char* command line arguments
-	StelAppQt4(int argc, char **argv);
+	StelAppQt4();
 	virtual ~StelAppQt4();
 
+	//! Get the StelAppQt4 singleton instance.
+	//! @return the StelAppQt4 singleton instance
+	static StelAppQt4& getInstance() {assert(singleton); return *singleton;}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Override events
+	virtual void keyPressEvent(QKeyEvent*);
+	virtual void keyReleaseEvent(QKeyEvent*);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods from StelApp
 	//! Return the time since when stellarium is running in second
-	virtual double getTotalRunTime() const;
+	double getTotalRunTime() const;
 	
 	//! Set mouse cursor display
-	virtual void showCursor(bool b);
+	void showCursor(bool b);
 	
 	//! Swap GL buffer, should be called only for special condition
-	virtual void swapGLBuffers();
+	void swapGLBuffers();
 	
 	//! Get the width of the openGL screen
-	virtual int getScreenW() const;
+	int getScreenW() const;
 	
 	//! Get the height of the openGL screen
-	virtual int getScreenH() const;
+	int getScreenH() const;
 	
 	//! Terminate the application
-	virtual void terminateApplication(void);
+	void terminateApplication(void);
 	
 	//! Alternate fullscreen mode/windowed mode if possible
-	virtual void toggleFullScreen();
+	void toggleFullScreen();
 	
 	//! Get whether fullscreen is activated or not
 	bool getFullScreen() const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
-	//! Return the instance of the main window of the program
-	class StelMainWindow* getMainWindow() {return mainWindow;}
-
 	//! Run the whole stellarium program and return at the end, i.e after deinitialization
 	//! The caller doesn't have to do anything after this call.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
 	static void runStellarium(int argc, char **argv);
-	
-	//! Used by the init sequence, set the main windows and GL widget
-	//! @param mainW the Qt main window in which Stellarium is going to run
-	//! @param glW the GL widget in which Stellarium GL drawing will occur
-	void setQtWins(StelMainWindow* mainW, GLWidget* glW);
-	
-protected:
 
 	//! Initialize openGL screen
-	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
+	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
 	
 	//! Save a screen shot.
 	//! The format of the file, and hence the filename extension 
@@ -92,14 +86,15 @@ protected:
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the drectory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	virtual void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
+	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 	
 	//! Call this when you want to make the window (not) resizable
-	virtual void setResizable(bool resizable);
+	void setResizable(bool resizable);
 
 private:
-	class StelMainWindow* mainWindow;
-	class GLWidget* winOpenGL;
+	
+	// The StelApp singleton
+	static StelAppQt4* singleton;
 };
 
 #endif /*STELAPPQT4_HPP_*/
