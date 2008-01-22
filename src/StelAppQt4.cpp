@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include "StelAppQt4.hpp"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
@@ -32,7 +33,6 @@ using namespace std;
 #include <QtGui/QImage>
 #include <QtGui/QApplication>
 #include <QtOpenGL>
-#include <QMainWindow>
 #include <QStringList>
 #include <QCoreApplication>
 #include <QRegExp>
@@ -40,20 +40,13 @@ using namespace std;
 #include <QTime>
 #include <QDateTime>
 
-class StelMainWindow : public QMainWindow
-{
-public:
-	StelMainWindow(class StelAppQt4* app) : stelApp(app) {setWindowTitle(StelApp::getApplicationName());}
-	void keyPressEvent(QKeyEvent*);
-	void keyReleaseEvent(QKeyEvent*);
-private:
-	class StelAppQt4* stelApp;
-};
-
+// Initialize static variables
+StelAppQt4* StelAppQt4::singleton = NULL;
+		 
 class GLWidget : public QGLWidget
 {
 public:
-	GLWidget(QWidget *parent, class StelAppQt4* app);
+	GLWidget(QWidget *parent);
 	~GLWidget();
 	void initializeGL();
 	void resizeGL(int w, int h);
@@ -70,14 +63,20 @@ public:
 	int timerId;
 	
 private:
-	class StelAppQt4* stelApp;
 	int previousTime;
 	double lastEventTimeSec;
 	
 };
 
-StelAppQt4::StelAppQt4(int argc, char **argv) : StelApp(argc, argv)
+StelAppQt4::StelAppQt4()
 {
+	// Can't create 2 StelApp instances
+	assert(!singleton);
+	singleton = this;
+	
+	setWindowTitle(StelApp::getApplicationName());
+	this->QObject::setObjectName("stellariumMainWin");
+	setMinimumSize(400,400);
 }
 
 StelAppQt4::~StelAppQt4()
@@ -86,13 +85,13 @@ StelAppQt4::~StelAppQt4()
 
 void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
 {
-	mainWindow->setWindowIcon(QIcon(iconFile));
-	mainWindow->resize(w, h);
+	setWindowIcon(QIcon(iconFile));
+	resize(w, h);
 	if (fullScreen)
 	{
-		mainWindow->showFullScreen();
+		showFullScreen();
 		QDesktopWidget* desktop = QApplication::desktop();
-		mainWindow->resize(desktop->screenGeometry(mainWindow).width(),desktop->screenGeometry(mainWindow).height());
+		resize(desktop->screenGeometry(this).width(),desktop->screenGeometry(this).height());
 	}
 	
 }
@@ -100,13 +99,13 @@ void StelAppQt4::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QS
 // Get the width of the openGL screen
 int StelAppQt4::getScreenW() const
 {
-	return winOpenGL->width();
+	return findChild<GLWidget*>("stellariumOpenGLWidget")->width();
 }
 	
 // Get the height of the openGL screen
 int StelAppQt4::getScreenH() const
 {
-	return winOpenGL->height();
+	return findChild<GLWidget*>("stellariumOpenGLWidget")->height();
 }
 
 // Terminate the application
@@ -118,25 +117,25 @@ void StelAppQt4::terminateApplication(void)
 // Set mouse cursor display
 void StelAppQt4::showCursor(bool b)
 {
-	winOpenGL->setCursor(b ? Qt::ArrowCursor : Qt::BlankCursor);
+	findChild<GLWidget*>("stellariumOpenGLWidget")->setCursor(b ? Qt::ArrowCursor : Qt::BlankCursor);
 }
 
 //! Swap GL buffer, should be called only for special condition
 void StelAppQt4::swapGLBuffers()
 {
-	winOpenGL->swapBuffers();
+	findChild<GLWidget*>("stellariumOpenGLWidget")->swapBuffers();
 }
 
 //! Return the time since when stellarium is running in second
 double StelAppQt4::getTotalRunTime() const
 {
-	return (double)(winOpenGL->qtime.elapsed())/1000;
+	return (double)(findChild<GLWidget*>("stellariumOpenGLWidget")->qtime.elapsed())/1000;
 }
 
 void StelAppQt4::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
 	QString shotDir;
-	QImage im = winOpenGL->grabFrameBuffer();
+	QImage im = findChild<GLWidget*>("stellariumOpenGLWidget")->grabFrameBuffer();
 
 	if (saveDir == "")
 	{
@@ -178,11 +177,11 @@ void StelAppQt4::setResizable(bool resizable)
 {
 	if (resizable)
 	{
-		mainWindow->setMaximumSize(10000,10000);
+		setMaximumSize(10000,10000);
 	}
 	else
 	{
-		mainWindow->setFixedSize(mainWindow->size());
+		setFixedSize(size());
 	}
 }
 
@@ -192,20 +191,20 @@ void StelAppQt4::setResizable(bool resizable)
 void StelAppQt4::toggleFullScreen()
 {
 	// Toggle full screen
-	if (!mainWindow->isFullScreen())
+	if (!isFullScreen())
 	{
-		mainWindow->showFullScreen();
+		showFullScreen();
 	}
 	else
 	{
-		mainWindow->showNormal();
+		showNormal();
 	}
 }
 
 
 bool StelAppQt4::getFullScreen() const
 {
-	return mainWindow->isFullScreen();
+	return isFullScreen();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -213,7 +212,7 @@ bool StelAppQt4::getFullScreen() const
 //////////////////////////////////////////////////////////////////////////
 
 
-GLWidget::GLWidget(QWidget *parent, StelAppQt4* stapp) : QGLWidget(QGLFormat::defaultFormat(), parent), stelApp(stapp)
+GLWidget::GLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), parent)
 {
 	lastEventTimeSec = (double)(qtime.elapsed()/1000);
 	previousTime = qtime.elapsed();
@@ -240,7 +239,7 @@ void GLWidget::initializeGL()
 void GLWidget::resizeGL(int w, int h)
 {
 	//cerr << "GLWidget::resizeGL(" << w << "x" << h << ")" << endl;
-	stelApp->glWindowHasBeenResized(w, h);
+	StelApp::getInstance().glWindowHasBeenResized(w, h);
 }
 
 void GLWidget::paintGL()
@@ -250,8 +249,8 @@ void GLWidget::paintGL()
 	
 	if (dt<0)	// This fix the star scale bug!!
 		return;
-	stelApp->update(dt);
-	stelApp->draw(dt);
+	StelApp::getInstance().update(dt);
+	StelApp::getInstance().draw(dt);
 	swapBuffers();
 }
 
@@ -259,9 +258,9 @@ void GLWidget::timerEvent(QTimerEvent *)
 {
 	update();
 	killTimer(timerId);
-	double duration = 1./stelApp->minfps;
-	if (stelApp->getTotalRunTime()-lastEventTimeSec<2.5)
-		duration = 1./stelApp->maxfps;
+	double duration = 1./StelApp::getInstance().minfps;
+	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
+		duration = 1./StelApp::getInstance().maxfps;
 	timerId = startTimer((int)(duration*1000));
 }
 
@@ -270,7 +269,7 @@ void GLWidget::thereWasAnEvent()
 	// Refresh screen ASAP
 	killTimer(timerId);
 	timerId = startTimer(0);
-	lastEventTimeSec = stelApp->getTotalRunTime();
+	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
 }
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
@@ -312,7 +311,7 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 	if (event->type() == QEvent::MouseButtonRelease)
 		state = Stel_MOUSEBUTTONUP;
 	
-	stelApp->handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
+	StelApp::getInstance().handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -334,7 +333,7 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* event)
 	if (event->type() == QEvent::MouseButtonRelease)
 		state = Stel_MOUSEBUTTONUP;
 	
-	stelApp->handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
+	StelApp::getInstance().handleClick(event->x(), event->y(), button, state, qtModToStelMod(event->modifiers()));
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -342,7 +341,7 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* event)
 
 void GLWidget::mouseMoveEvent(QMouseEvent* event)
 {
-	stelApp->handleMove(event->x(), event->y(), qtModToStelMod(event->modifiers()));
+	StelApp::getInstance().handleMove(event->x(), event->y(), qtModToStelMod(event->modifiers()));
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -362,8 +361,8 @@ void GLWidget::wheelEvent(QWheelEvent* event)
 	if (event->modifiers() == Qt::ControlModifier)
 		mod = COMPATIBLE_StelMod_CTRL;
 
-	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
-	stelApp->handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
+	StelApp::getInstance().handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
+	StelApp::getInstance().handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -483,28 +482,22 @@ StelKey qtKeyToStelKey(Qt::Key k)
 	return StelKey_UNKNOWN; 
 }
 
-void StelMainWindow::keyPressEvent(QKeyEvent* event)
+void StelAppQt4::keyPressEvent(QKeyEvent* event)
 {
 	if ((Qt::Key)event->key()==Qt::Key_F1)
 	{
-		stelApp->toggleFullScreen();
+		StelApp::getInstance().toggleFullScreen();
 	}
-	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
+	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 	// Refresh screen ASAP
-	stelApp->winOpenGL->thereWasAnEvent();
+	findChild<GLWidget*>("stellariumOpenGLWidget")->thereWasAnEvent();
 }
 
-void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
+void StelAppQt4::keyReleaseEvent(QKeyEvent* event)
 {
-	stelApp->handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
+	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
 	// Refresh screen ASAP
-	stelApp->winOpenGL->thereWasAnEvent();
-}
-
-void StelAppQt4::setQtWins( StelMainWindow* mW, GLWidget* glW)
-{
-	mainWindow = mW;
-	winOpenGL = glW;
+	findChild<GLWidget*>("stellariumOpenGLWidget")->thereWasAnEvent();
 }
 
 void StelAppQt4::runStellarium(int argc, char **argv)
@@ -515,19 +508,15 @@ void StelAppQt4::runStellarium(int argc, char **argv)
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
 	}
 	
-	StelAppQt4* stelApp = new StelAppQt4(argc, argv);
+	StelApp* stelApp = new StelApp(argc, argv);
 	
-	StelMainWindow mainWin(stelApp);
-	mainWin.setMinimumSize(400,400);
-	
-	GLWidget openGLWin(&mainWin, stelApp);
-	openGLWin.setObjectName(QString::fromUtf8("stellariumOpenGLWin"));
+	StelAppQt4 mainWin;
+	GLWidget openGLWin(&mainWin);
+	openGLWin.setObjectName("stellariumOpenGLWidget");
 	mainWin.setCentralWidget(&openGLWin);
 
 	mainWin.show();
 	openGLWin.show();
-	
-	stelApp->setQtWins(&mainWin, &openGLWin);
 	
 	stelApp->init();
 	

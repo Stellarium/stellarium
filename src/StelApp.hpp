@@ -57,6 +57,9 @@ using namespace std;
 //! @author Fabien Chereau
 class StelApp : public QObject
 {
+friend class StelAppQt4;
+friend class GLWidget;
+
 	Q_OBJECT;
 	
 public:
@@ -129,7 +132,7 @@ public:
 	const QString& getConfigFilePath() { return configFile; }
 	
 	//! Swap GL buffer, should be called only for special condition.
-	virtual void swapGLBuffers() = 0;
+	void swapGLBuffers();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Deprecated methods
@@ -160,36 +163,32 @@ public slots:
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
 	
-	//! Get the width of the openGL screen.
-	//! @return width of the openGL screen in pixels
-	virtual int getScreenW() const = 0;
-	
-	//! Get the height of the openGL screen.
-	//! @return height of the openGL screen in pixels
-	virtual int getScreenH() const = 0;
-	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods overidded for SDL / QT
-	///////////////////////////////////////////////////////////////////////////	
+	//! Get the width of the openGL screen.
+	//! @return width of the openGL screen in pixels
+	int getScreenW() const;
+	
+	//! Get the height of the openGL screen.
+	//! @return height of the openGL screen in pixels
+	int getScreenH() const;
 	
 	//! Terminate the application.
-	virtual void terminateApplication() = 0;
+	void terminateApplication();
 	
 	//! Return the time since when stellarium is running in second.
-	virtual double getTotalRunTime() const = 0;
+	double getTotalRunTime() const;
 	
 	//! Set mouse cursor display.
-	virtual void showCursor(bool b) = 0;
+	void showCursor(bool b);
 	
 	//! Alternate fullscreen mode/windowed mode if possible.
-	virtual void toggleFullScreen() = 0;
+	void toggleFullScreen();
 	
 	//! Return whether we are in fullscreen mode.
-	virtual bool getFullScreen() const = 0;
+	bool getFullScreen() const;
 	
 	//! Save a screen shot.
 	//! The format of the file, and hence the filename extension 
@@ -197,9 +196,9 @@ public slots:
 	//! @arg filePrefix changes the beginning of the file name
 	//! @arg shotDir changes the drectory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	virtual void saveScreenShot(const QString& filePrefix="stellarium-", const QString& shotDir="") const =0;
-	
-protected:
+	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& shotDir="") const;
+
+private:
 	//! Update all object according to the delta time.
 	void update(int delta_time);
 
@@ -224,15 +223,14 @@ protected:
 	///////////////////////////////////////////////////////////////////////////	
 	
 	//! Initialize openGL screen.
-	virtual void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile) =0;
+	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
 	
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);
 
 	//! Call this when you want to make the window (not) resizable.
-	virtual void setResizable(bool resizable) = 0;
-		
-private:
+	void setResizable(bool resizable);
+
 	//! Sets the name of the configuration file.
 	//! It is possible to set the configuration by passing either a full path
 	//! a relative path of an existing file, or path segment which will be appended
