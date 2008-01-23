@@ -19,7 +19,7 @@
  
 #include <cstdlib>
 #include "StelApp.hpp"
-#include "StelAppQt4.hpp"
+#include "StelMainWindow.hpp"
 
 #include "StelCore.hpp"
 #include "ViewportDistorter.hpp"
@@ -944,42 +944,42 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 
 int StelApp::getScreenW() const
 {
-	return StelAppQt4::getInstance().getScreenW();
+	return StelMainWindow::getInstance().getScreenW();
 }
 	
 int StelApp::getScreenH() const
 {
-	return StelAppQt4::getInstance().getScreenH();
+	return StelMainWindow::getInstance().getScreenH();
 }
 	
 //! Terminate the application.
 void StelApp::terminateApplication()
 {
-	StelAppQt4::getInstance().terminateApplication();
+	StelMainWindow::getInstance().terminateApplication();
 }
 
 //! Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime() const
 {
-	return StelAppQt4::getInstance().getTotalRunTime();
+	return StelMainWindow::getInstance().getTotalRunTime();
 }
 
 //! Set mouse cursor display.
 void StelApp::showCursor(bool b)
 {
-	StelAppQt4::getInstance().showCursor(b);
+	StelMainWindow::getInstance().showCursor(b);
 }
 
 //! Alternate fullscreen mode/windowed mode if possible.
 void StelApp::toggleFullScreen()
 {
-	StelAppQt4::getInstance().toggleFullScreen();
+	StelMainWindow::getInstance().toggleFullScreen();
 }
 
 //! Return whether we are in fullscreen mode.
 bool StelApp::getFullScreen() const
 {
-	return StelAppQt4::getInstance().getFullScreen();
+	return StelMainWindow::getInstance().getFullScreen();
 }
 
 //! Save a screen shot.
@@ -990,23 +990,23 @@ bool StelApp::getFullScreen() const
 //! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 void StelApp::saveScreenShot(const QString& filePrefix, const QString& shotDir) const
 {
-	StelAppQt4::getInstance().saveScreenShot(filePrefix, shotDir);
+	StelMainWindow::getInstance().saveScreenShot(filePrefix, shotDir);
 }
 
 //! Initialize openGL screen.
 void StelApp::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
 {
-	StelAppQt4::getInstance().initOpenGL(w, h, bbpMode, fullScreen, iconFile);
+	StelMainWindow::getInstance().initOpenGL(w, h, bbpMode, fullScreen, iconFile);
 }
 
 //! Call this when you want to make the window (not) resizable.
 void StelApp::setResizable(bool resizable)
 {
-	StelAppQt4::getInstance().setResizable(resizable);
+	StelMainWindow::getInstance().setResizable(resizable);
 }
 
 //! Swap GL buffer, should be called only for special condition.
 void StelApp::swapGLBuffers()
 {
-	StelAppQt4::getInstance().swapGLBuffers();
+	StelMainWindow::getInstance().swapGLBuffers();
 }
