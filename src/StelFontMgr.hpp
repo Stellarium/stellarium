@@ -33,7 +33,7 @@ class SFont;
 class StelFontMgr
 {
 public:
-	StelFontMgr(const QString& fontMapFile);
+	StelFontMgr();
 	~StelFontMgr();
 	
 	//! Get the standard font associated to the given language ISO code.

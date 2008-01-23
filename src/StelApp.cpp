@@ -24,13 +24,11 @@
 #include "StelCore.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelUtils.hpp"
-#include "stel_command_interface.h"
 #include "stel_ui.h"
-#include "script_mgr.h"
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
-#include "image_mgr.h"
+
 #include "TelescopeMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -51,6 +49,10 @@
 #include "StelFileMgr.hpp"
 #include "QtScriptMgr.hpp"
 
+#include "stel_command_interface.h"
+#include "image_mgr.h"
+#include "script_mgr.h"
+
 #include <QStringList>
 #include <QString>
 #include <QFile>
@@ -67,7 +69,7 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv) :
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-		   timeBase(0), flagNightVision(false), configFile("config.ini"), initialized(false)
+		   timeBase(0), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
 	setObjectName("StelApp");
 	
@@ -87,6 +89,45 @@ StelApp::StelApp(int argc, char** argv) :
 	argList = new QStringList;
 	for(int i=0; i<argc; i++)
 		*argList << argv[i];
+	
+	stelFileMgr = new StelFileMgr();
+	// Load language codes
+	try
+	{
+		Translator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
+	}
+	catch (exception& e)
+	{
+		cerr << "ERROR while loading translations: " << e.what() << endl;
+	}
+	
+	// Parse for first set of CLI arguments - stuff we want to process before other
+	// output, such as --help and --version, and if we want to set the configFile value.
+	parseCLIArgsPreConfig();
+	
+	// OK, print the console splash and get on with loading the program
+	cout << " -------------------------------------------------------" << endl;
+	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
+	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al         ]" << endl;
+	cout << " -------------------------------------------------------" << endl;
+	
+	QStringList p=stelFileMgr->getSearchPaths();
+	cout << "File search paths:" << endl;
+	int n=0;
+	foreach (QString i, p)
+	{
+		cout << " " << n << ". " << qPrintable(i) << endl;
+		++n;
+	}
+	cout << "Config file is: " << qPrintable(configFile) << endl;
+	
+	if (!stelFileMgr->exists(configFile))
+	{
+		cerr << "config file \"" << qPrintable(configFile) << "\" does not exist - copying the default file." << endl;
+		copyDefaultConfigFile();
+	}
+
+	confSettings = new QSettings(getConfigFilePath());
 }
 
 /*************************************************************************
@@ -137,69 +178,23 @@ QString StelApp::getViewPortDistorterType() const
 
 
 void StelApp::init()
-{
-	stelFileMgr = new StelFileMgr();
-	// Load language codes
-	try
-	{
-		Translator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
-	}
-	catch (exception& e)
-	{
-		cerr << "ERROR while loading translations: " << e.what() << endl;
-	}
-	
-	// Parse for first set of CLI arguments - stuff we want to process before other
-	// output, such as --help and --version, and if we want to set the configFile value.
-	parseCLIArgsPreConfig();
-	
-	// OK, print the console splash and get on with loading the program
-	cout << " -------------------------------------------------------" << endl;
-	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
-	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al         ]" << endl;
-	cout << " -------------------------------------------------------" << endl;
-	
-	QStringList p=stelFileMgr->getSearchPaths();
-	cout << "File search paths:" << endl;
-	int n=0;
-	foreach (QString i, p)
-	{
-		cout << " " << n << ". " << qPrintable(i) << endl;
-		++n;
-	}
-	cout << "Config file is: " << qPrintable(configFile) << endl;
-	
-	if (!stelFileMgr->exists(configFile))
-	{
-		cerr << "config file \"" << qPrintable(configFile) << "\" does not exist - copying the default file." << endl;
-		copyDefaultConfigFile();
-	}
-	
+{	
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
-	
-	QString fontMapFile("");
-	try 
-	{
-		fontMapFile = stelFileMgr->findFile(QFile::decodeName("data/fontmap.dat"));
-	}
-	catch(exception& e)
-	{
-		cerr << "ERROR when locating font map file: " << e.what() << endl;
-	}
-	fontManager = new StelFontMgr(QFile::encodeName(fontMapFile).data());
-	
+	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	moduleMgr = new StelModuleMgr();
-	
 	core = new StelCore();
 	time_multiplier = 1;
-	distorter = 0;
+	distorter = NULL;
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
 	conf.load(getConfigFilePath());
 
+	// QSettings confQt(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(), QCoreApplication::applicationName());
+	// qWarning() << confQt.allKeys();
+			
 	// Main section
 	string version = conf.get_str("main:version");
 	
@@ -328,27 +323,28 @@ void StelApp::init()
 // star names are loaded again
 	skyCultureMgr->init(conf);
 	
-	// Those 3 are going to disapear
-	StelCommandInterface* commander = new StelCommandInterface(core, this);
-	getModuleMgr().registerModule(commander);
-	ScriptMgr* scripts = new ScriptMgr(commander);
-	scripts->init(conf);
-	getModuleMgr().registerModule(scripts);
-	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
-	ImageMgr* script_images = new ImageMgr();
-	script_images->init(conf);
-	getModuleMgr().registerModule(script_images);	
-	
-	StelUI* ui = new StelUI(core, this);
-	ui->init(conf);
-	getModuleMgr().registerModule(ui);
-	
 	// Initialisation of the color scheme
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
 	setVisionModeNight(conf.get_boolean("viewing:flag_night"));
 
 	setViewPortDistorterType(conf.get_str("video","distorter","none").c_str());
+	
+	// Those 3 are going to disapear
+	StelCommandInterface* commander = new StelCommandInterface(getCore(), this);
+	getModuleMgr().registerModule(commander, true);
+	ScriptMgr* scripts = new ScriptMgr(commander);
+	scripts->init(conf);
+	// play startup script, if available
+	scripts->play_startup_script();
+	getModuleMgr().registerModule(scripts, true);
+	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
+	ImageMgr* script_images = new ImageMgr();
+	script_images->init(conf);
+	getModuleMgr().registerModule(script_images, true);	
+	StelUI* ui = new StelUI(core, this);
+	ui->init(conf);
+	getModuleMgr().registerModule(ui, true);
 	
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
@@ -370,13 +366,12 @@ void StelApp::init()
 	updateSkyLanguage();
 	updateAppLanguage();
 	
-	// play startup script, if available
-	scripts->play_startup_script();
-	
 	//QtScriptMgr scriptMgr;
 	//scriptMgr.test();
 	
 	initialized = true;
+	
+
 }
 
 void StelApp::parseCLIArgsPreConfig(void)
