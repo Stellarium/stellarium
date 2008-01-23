@@ -130,8 +130,8 @@ SET(stellarium_lib_SRCS
    StelObjectMgr.cpp
    StelFileMgr.hpp
    StelFileMgr.cpp
-   StelAppQt4.hpp
-   StelAppQt4.cpp
+   StelMainWindow.hpp
+   StelMainWindow.cpp
    SkyDrawer.hpp
    SkyDrawer.cpp
 
