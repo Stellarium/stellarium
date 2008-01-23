@@ -21,6 +21,10 @@
 #define STELMAINWINDOW_HPP_
 
 #include <QMainWindow>
+#include <QTime>
+#include "GLee.h"
+#include "fixx11h.h"
+#include <QGLWidget>
 #include <cassert>
 
 //! Implementation of StelApp based on a Qt4 main window.
@@ -69,12 +73,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
-	//! Run the whole stellarium program and return at the end, i.e after deinitialization
-	//! The caller doesn't have to do anything after this call.
-	//! @param argc The number of command line parameters
-	//! @param argv an array of char* command line arguments
-	static void runStellarium(int argc, char **argv);
-
 	//! Initialize openGL screen
 	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
 	
@@ -93,6 +91,30 @@ private:
 	
 	// The StelApp singleton
 	static StelMainWindow* singleton;
+};
+
+class GLWidget : public QGLWidget
+{
+public:
+	GLWidget(QWidget *parent);
+	~GLWidget();
+	void initializeGL();
+	void resizeGL(int w, int h);
+	void paintGL();
+	void timerEvent(QTimerEvent*);
+	void mousePressEvent(QMouseEvent*);
+	void mouseReleaseEvent(QMouseEvent*);
+	void mouseMoveEvent(QMouseEvent*);
+	void wheelEvent(QWheelEvent*);
+//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
+	void thereWasAnEvent();
+
+	QTime qtime;
+	int timerId;
+
+private:
+	int previousTime;
+	double lastEventTimeSec;
 };
 
 #endif /*STELMAINWINDOW_HPP_*/

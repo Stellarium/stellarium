@@ -18,15 +18,45 @@
  */
 
 #include <clocale>
-
 #include <config.h>
+#include <QtGui/QApplication>
+#include <QtGui/QMessageBox>
 #include "StelMainWindow.hpp"
+#include "StelApp.hpp"
 
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
-	StelMainWindow::runStellarium(argc, argv);
+	
+	QApplication app(argc, argv);
+	if (!QGLFormat::hasOpenGL())
+	{
+		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
+	}
+	
+	StelApp* stelApp = new StelApp(argc, argv);
+	
+	StelMainWindow mainWin;
+	GLWidget openGLWin(&mainWin);
+	openGLWin.setObjectName("stellariumOpenGLWidget");
+	mainWin.setCentralWidget(&openGLWin);
+
+	mainWin.show();
+	openGLWin.show();
+	
+	stelApp->init();
+	
+	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
+	openGLWin.resizeGL(stelApp->getScreenW(), stelApp->getScreenH());
+	openGLWin.timerId = openGLWin.startTimer(10);
+	openGLWin.qtime.start();
+	
+	app.exec();
+	
+	// At this point it is important to still have a valid GL context because the textures are deallocated
+	// The GL Context is still valid because openGLWin is still in the current scope
+	delete stelApp;
 	return 0;
 }
