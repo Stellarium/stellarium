@@ -23,6 +23,7 @@
 #include <QtGui/QMessageBox>
 #include "StelMainWindow.hpp"
 #include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
 
 // Main stellarium procedure
 int main(int argc, char **argv)

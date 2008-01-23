@@ -41,8 +41,8 @@ class StelFileMgr;
 class InitParser;
 class QStringList;
 class LoadingBar;
+class QSettings;
 
-using namespace std;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -134,6 +134,9 @@ public:
 	//! Swap GL buffer, should be called only for special condition.
 	void swapGLBuffers();
 	
+	//! Return the main configuration options
+	QSettings* getSettings() {return confSettings;}
+			
 	///////////////////////////////////////////////////////////////////////////
 	// Deprecated methods
 	//! Set the time multiplier used when fast forwarding scripts.
@@ -366,6 +369,7 @@ private:
 	bool flagNightVision;
 	
 	QString configFile;
+	QSettings* confSettings;
 	
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;

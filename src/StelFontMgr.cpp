@@ -33,8 +33,17 @@ using namespace std;
 /*************************************************************************
  Constructor for the StelFontMgr class
 *************************************************************************/
-StelFontMgr::StelFontMgr(const QString& fontMapFile)
+StelFontMgr::StelFontMgr()
 {
+	QString fontMapFile("");
+	try 
+	{
+		fontMapFile = StelApp::getInstance().getFileMgr().findFile("data/fontmap.dat");
+	}
+	catch(exception& e)
+	{
+		cerr << "ERROR when locating font map file: " << e.what() << endl;
+	}
 	loadFontForLanguage(fontMapFile);
 }
 
