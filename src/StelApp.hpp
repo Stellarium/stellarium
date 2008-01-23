@@ -57,7 +57,7 @@ using namespace std;
 //! @author Fabien Chereau
 class StelApp : public QObject
 {
-friend class StelAppQt4;
+friend class StelMainWindow;
 friend class GLWidget;
 
 	Q_OBJECT;
@@ -309,7 +309,7 @@ private:
 	//! Processing of command line options which is to be done before config file is read.
 	//! This includes the chance to set the configuration file name.  It is to be done
 	//! in the sub-class of the StelApp, as the sub-class may want to manage the 
-	//! argument list, as is the case with the StelAppQt4 version.
+	//! argument list, as is the case with the StelMainWindow version.
 	virtual void parseCLIArgsPreConfig(void);	
 
 	//! Processing of command line options which is to be done after the config file is

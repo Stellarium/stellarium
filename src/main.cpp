@@ -20,13 +20,13 @@
 #include <clocale>
 
 #include <config.h>
-#include "StelAppQt4.hpp"
+#include "StelMainWindow.hpp"
 
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
-	StelAppQt4::runStellarium(argc, argv);
+	StelMainWindow::runStellarium(argc, argv);
 	return 0;
 }

@@ -17,26 +17,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELAPPQT4_HPP_
-#define STELAPPQT4_HPP_
+#ifndef STELMAINWINDOW_HPP_
+#define STELMAINWINDOW_HPP_
 
 #include <QMainWindow>
 #include <cassert>
 
 //! Implementation of StelApp based on a Qt4 main window.
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
-class StelAppQt4 : public QMainWindow
+class StelMainWindow : public QMainWindow
 {
-	friend class GLWidget;
 public:
-	
 	//! Constructor
-	StelAppQt4();
-	virtual ~StelAppQt4();
+	StelMainWindow();
+	virtual ~StelMainWindow();
 
-	//! Get the StelAppQt4 singleton instance.
-	//! @return the StelAppQt4 singleton instance
-	static StelAppQt4& getInstance() {assert(singleton); return *singleton;}
+	//! Get the StelMainWindow singleton instance.
+	//! @return the StelMainWindow singleton instance
+	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Override events
@@ -94,7 +92,7 @@ public:
 private:
 	
 	// The StelApp singleton
-	static StelAppQt4* singleton;
+	static StelMainWindow* singleton;
 };
 
-#endif /*STELAPPQT4_HPP_*/
+#endif /*STELMAINWINDOW_HPP_*/
