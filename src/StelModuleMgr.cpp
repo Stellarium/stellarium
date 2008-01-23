@@ -48,7 +48,7 @@ StelModuleMgr::~StelModuleMgr()
 /*************************************************************************
  Register a new StelModule to the list
 *************************************************************************/
-void StelModuleMgr::registerModule(StelModule* m)
+void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 {
 	if (modules.find(m->objectName()) != modules.end())
 	{		
@@ -57,6 +57,9 @@ void StelModuleMgr::registerModule(StelModule* m)
 	}
 	modules.insert(m->objectName(), m);
 	m->setParent(this);
+	
+	if (fgenerateCallingLists)
+		generateCallingLists();
 }
 
 /*************************************************************************

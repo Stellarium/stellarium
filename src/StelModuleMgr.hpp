@@ -37,7 +37,7 @@ public:
 	~StelModuleMgr();
 	
 	//! Register a new StelModule to the list
-	void registerModule(StelModule* m);
+	void registerModule(StelModule* m, bool generateCallingLists=false);
 	
 	//! Load dynamically a module
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
