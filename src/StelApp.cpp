@@ -1010,3 +1010,10 @@ void StelApp::swapGLBuffers()
 {
 	StelMainWindow::getInstance().swapGLBuffers();
 }
+
+//! Return the main widget in which any new GUI elements should be added e.g. by external modules
+//! @return the main widget, it can normally be casted to a QMainWindow*
+QWidget* StelApp::getMainWidget()
+{
+	return &StelMainWindow::getInstance();
+}

@@ -198,6 +198,10 @@ public slots:
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& shotDir="") const;
 
+	//! Return the main widget in which any new GUI elements should be added e.g. by external modules
+	//! @return the main widget, it can normally be casted to a QMainWindow*
+	class QWidget* getMainWidget();
+	
 private:
 	//! Update all object according to the delta time.
 	void update(int delta_time);
@@ -310,12 +314,12 @@ private:
 	//! This includes the chance to set the configuration file name.  It is to be done
 	//! in the sub-class of the StelApp, as the sub-class may want to manage the 
 	//! argument list, as is the case with the StelMainWindow version.
-	virtual void parseCLIArgsPreConfig(void);	
+	void parseCLIArgsPreConfig(void);	
 
 	//! Processing of command line options which is to be done after the config file is
 	//! read.  This gives us the chance to over-ride settings which are in the configuration
 	//! file.
-	virtual void parseCLIArgsPostConfig(InitParser& conf);
+	void parseCLIArgsPostConfig(InitParser& conf);
 	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const QString& fileName, const QString& section);
