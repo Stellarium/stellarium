@@ -31,7 +31,6 @@
 using namespace std;
 
 #include <QtGui/QImage>
-#include <QtGui/QApplication>
 #include <QtOpenGL>
 #include <QStringList>
 #include <QCoreApplication>
@@ -42,31 +41,6 @@ using namespace std;
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
-		 
-class GLWidget : public QGLWidget
-{
-public:
-	GLWidget(QWidget *parent);
-	~GLWidget();
-	void initializeGL();
-	void resizeGL(int w, int h);
-	void paintGL();
-	void timerEvent(QTimerEvent*);
-	void mousePressEvent(QMouseEvent*);
-	void mouseReleaseEvent(QMouseEvent*);
-	void mouseMoveEvent(QMouseEvent*);
-	void wheelEvent(QWheelEvent*);
-	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
-	void thereWasAnEvent();
-	
-	QTime qtime;
-	int timerId;
-	
-private:
-	int previousTime;
-	double lastEventTimeSec;
-	
-};
 
 StelMainWindow::StelMainWindow()
 {
@@ -498,36 +472,4 @@ void StelMainWindow::keyReleaseEvent(QKeyEvent* event)
 	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
 	// Refresh screen ASAP
 	findChild<GLWidget*>("stellariumOpenGLWidget")->thereWasAnEvent();
-}
-
-void StelMainWindow::runStellarium(int argc, char **argv)
-{
-	QApplication app(argc, argv);
-	if (!QGLFormat::hasOpenGL())
-	{
-		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
-	}
-	
-	StelApp* stelApp = new StelApp(argc, argv);
-	
-	StelMainWindow mainWin;
-	GLWidget openGLWin(&mainWin);
-	openGLWin.setObjectName("stellariumOpenGLWidget");
-	mainWin.setCentralWidget(&openGLWin);
-
-	mainWin.show();
-	openGLWin.show();
-	
-	stelApp->init();
-	
-	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
-	openGLWin.resizeGL(stelApp->getScreenW(), stelApp->getScreenH());
-	openGLWin.timerId = openGLWin.startTimer(10);
-	openGLWin.qtime.start();
-	
-	app.exec();
-	
-	// At this point it is important to still have a valid GL context because the textures are deallocated
-	// The GL Context is still valid because openGLWin is still in the current scope
-	delete stelApp;
 }
