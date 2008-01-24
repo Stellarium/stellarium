@@ -39,6 +39,8 @@
 #include "StelModuleMgr.hpp"
 #include "Planet.hpp"
 #include <QTextStream>
+#include <QSettings>
+#include <QVariant>
 
 using namespace std;
 
@@ -86,23 +88,26 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 }
 
 // Init and load the solar system data
-void SolarSystem::init(const InitParser& conf)
+void SolarSystem::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization assert that center is sun center (only impacts on light speed correction)
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
-	setScale(conf.get_double ("stars:star_scale"));  // if reload config
-	setFlagMoonScale(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", false)));  // name change
-	setMoonScale(conf.get_double ("viewing","moon_scale",5.));
-	setFlagPlanets(conf.get_boolean("astro:flag_planets"));
-	setFlagHints(conf.get_boolean("astro:flag_planets_hints"));
-	setFlagOrbits(conf.get_boolean("astro:flag_planets_orbits"));
-	setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
-	setFlagTrails(conf.get_boolean("astro", "flag_object_trails", false));
-	startTrails(conf.get_boolean("astro", "flag_object_trails", false));	
+	setScale(conf->value("stars/star_scale",1.1).toDouble());  // if reload config
+	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
+	setMoonScale(conf->value("viewing/moon_scale", 5.0).toDouble());
+	setFlagPlanets(conf->value("astro/flag_planets").toBool());
+	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
+	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
+	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
+	startTrails(conf->value("astro/flag_object_trails", false).toBool());	
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
