@@ -67,12 +67,14 @@ StelApp* StelApp::singleton = NULL;
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(int argc, char** argv) :
-	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0), 
-		   timeBase(0), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
+StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) :
+	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0.), 
+		   timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
 	setObjectName("StelApp");
-	
+	assert(amainWin!=NULL);
+	mainWin = amainWin;
+			
 	distorter=NULL;
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
@@ -91,6 +93,10 @@ StelApp::StelApp(int argc, char** argv) :
 		*argList << argv[i];
 	
 	stelFileMgr = new StelFileMgr();
+	
+	qtime = new QTime();
+	qtime->start();
+	
 	// Load language codes
 	try
 	{
@@ -128,65 +134,6 @@ StelApp::StelApp(int argc, char** argv) :
 	}
 
 	confSettings = new QSettings(getConfigFilePath());
-}
-
-/*************************************************************************
- Deinitialize and destroy the main Stellarium application.
-*************************************************************************/
-StelApp::~StelApp()
-{
-	delete loadingBar; loadingBar=NULL;
-	delete core; core=NULL;
-	if (distorter) {delete distorter; distorter=NULL;}
-	delete skyCultureMgr; skyCultureMgr=NULL;
-	delete localeMgr; localeMgr=NULL;
-	delete fontManager; fontManager=NULL;
-	delete stelObjectMgr; stelObjectMgr=NULL;
-	delete stelFileMgr; stelFileMgr=NULL;
-	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
-	delete textureMgr; textureMgr=NULL;
-	delete argList; argList=NULL;
-}
-
-/*************************************************************************
- Return the full name of stellarium, i.e. "stellarium 0.9.0"
-*************************************************************************/
-QString StelApp::getApplicationName()
-{
-	return QString("Stellarium")+" "+PACKAGE_VERSION;
-}
-
-void StelApp::setViewPortDistorterType(const QString &type)
-{
-	if (type != getViewPortDistorterType()) setResizable(type == "none");
-	if (distorter)
-	{
-		delete distorter;
-		distorter = 0;
-	}
-	InitParser conf;
-	conf.load(getConfigFilePath());
-	distorter = ViewportDistorter::create(type.toStdString(),getScreenW(),getScreenH(),core->getProjection(),conf);
-}
-
-QString StelApp::getViewPortDistorterType() const
-{
-	if (distorter)
-            return distorter->getType().c_str();
-	return "none";
-}
-
-
-void StelApp::init()
-{	
-	textureMgr = new StelTextureMgr();
-	localeMgr = new StelLocaleMgr();
-	fontManager = new StelFontMgr();
-	skyCultureMgr = new StelSkyCultureMgr();
-	moduleMgr = new StelModuleMgr();
-	core = new StelCore();
-	time_multiplier = 1;
-	distorter = NULL;
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
@@ -220,11 +167,10 @@ void StelApp::init()
 		{
 			// The config file is too old to try an importation
 			cout << "The current config file is from a version too old for parameters to be imported (" 
-					<< (version.empty() ? "<0.6.0" : version.c_str())
-					<< ")." << endl 
+					<< (version.empty() ? "<0.6.0" : version.c_str()) << ")." << endl 
 					<< "It will be replaced by the default config file." << endl;
 
-            copyDefaultConfigFile();
+			copyDefaultConfigFile();
 			conf.load(getConfigFilePath());  // Read new config
 		}
 		else
@@ -234,18 +180,82 @@ void StelApp::init()
 	}
 	
 	parseCLIArgsPostConfig(conf);
+}
 
-	// Create openGL context first
-	QString iconPath;
-	try
+/*************************************************************************
+ Deinitialize and destroy the main Stellarium application.
+*************************************************************************/
+StelApp::~StelApp()
+{
+	delete loadingBar; loadingBar=NULL;
+	delete core; core=NULL;
+	if (distorter) {delete distorter; distorter=NULL;}
+	delete skyCultureMgr; skyCultureMgr=NULL;
+	delete localeMgr; localeMgr=NULL;
+	delete fontManager; fontManager=NULL;
+	delete stelObjectMgr; stelObjectMgr=NULL;
+	delete stelFileMgr; stelFileMgr=NULL;
+	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
+	delete textureMgr; textureMgr=NULL;
+	delete argList; argList=NULL;
+	delete qtime; qtime=NULL;
+}
+
+/*************************************************************************
+ Return the full name of stellarium, i.e. "stellarium 0.9.0"
+*************************************************************************/
+QString StelApp::getApplicationName()
+{
+	return QString("Stellarium")+" "+PACKAGE_VERSION;
+}
+
+void StelApp::setViewPortDistorterType(const QString &type)
+{
+	if (type != getViewPortDistorterType()) setResizable(type == "none");
+	if (distorter)
 	{
-		iconPath = stelFileMgr->findFile("data/icon.bmp");
+		delete distorter;
+		distorter = 0;
 	}
-	catch(exception& e)
-	{
-		cerr << "ERROR when trying to locate icon file: " << e.what() << endl;
-	}
-	initOpenGL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), iconPath);
+	InitParser conf;
+	conf.load(getConfigFilePath());
+	distorter = ViewportDistorter::create(type.toStdString(),getScreenW(),getScreenH(),core->getProjection(),conf);
+}
+
+QString StelApp::getViewPortDistorterType() const
+{
+	if (distorter)
+            return distorter->getType().c_str();
+	return "none";
+}
+
+
+void StelApp::init()
+{
+	// Create the OpenGL widget in which the main modules will be drawn
+	GLWidget* openGLWin = new GLWidget(mainWin);
+	mainWin->setCentralWidget(openGLWin);
+	
+	// Show the window during loading for the loading bar
+	mainWin->show();
+	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+
+	
+	textureMgr = new StelTextureMgr();
+	localeMgr = new StelLocaleMgr();
+	fontManager = new StelFontMgr();
+	skyCultureMgr = new StelSkyCultureMgr();
+	moduleMgr = new StelModuleMgr();
+	core = new StelCore();
+	time_multiplier = 1;
+	distorter = NULL;
+	
+	// Initialize video device and other sdl parameters
+	InitParser conf;
+	conf.load(getConfigFilePath());
+
+	// QSettings confQt(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(), QCoreApplication::applicationName());
+	// qWarning() << confQt.allKeys();
 
 	// Initialize AFTER creation of openGL context
 	textureMgr->init(conf);
@@ -369,9 +379,11 @@ void StelApp::init()
 	//QtScriptMgr scriptMgr;
 	//scriptMgr.test();
 	
-	initialized = true;
+	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
+	openGLWin->timerId = openGLWin->startTimer(10);
 	
-
+	
+	initialized = true;
 }
 
 void StelApp::parseCLIArgsPreConfig(void)
@@ -536,36 +548,36 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	if (projectionType != "") conf.set_str("projection:type", projectionType);
 }
 
-void StelApp::update(int delta_time)
+void StelApp::update(double deltaTime)
 {
      if (!initialized)
         return;
 	
 	++frame;
-	timefr+=delta_time;
-	if (timefr-timeBase > 1000)
+	timefr+=deltaTime;
+	if (timefr-timeBase > 1.)
 	{
-		fps=frame*1000.0/(timefr-timeBase);				// Calc the FPS rate
+		fps=(double)frame/(timefr-timeBase);				// Calc the FPS rate
 		frame = 0;
-		timeBase+=1000;
+		timeBase+=1.;
 	}
 
 	// change time rate if needed to fast forward scripts
-	delta_time *= time_multiplier;
+	deltaTime *= time_multiplier;
 
-	core->update(delta_time);
+	core->update(deltaTime);
 	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_UPDATE))
 	{
-		i->update((double)delta_time/1000);
+		i->update(deltaTime);
 	}
 	
-	stelObjectMgr->update((double)delta_time/1000);
+	stelObjectMgr->update(deltaTime);
 }
 
 //! Main drawing function called at each frame
-double StelApp::draw(int delta_time)
+double StelApp::draw()
 {
      if (!initialized)
         return 0.;
@@ -939,76 +951,34 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 
 int StelApp::getScreenW() const
 {
-	return StelMainWindow::getInstance().getScreenW();
+	return mainWin->getScreenW();
 }
 	
 int StelApp::getScreenH() const
 {
-	return StelMainWindow::getInstance().getScreenH();
-}
-	
-//! Terminate the application.
-void StelApp::terminateApplication()
-{
-	StelMainWindow::getInstance().terminateApplication();
+	return mainWin->getScreenH();
 }
 
 //! Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime() const
 {
-	return StelMainWindow::getInstance().getTotalRunTime();
-}
-
-//! Set mouse cursor display.
-void StelApp::showCursor(bool b)
-{
-	StelMainWindow::getInstance().showCursor(b);
-}
-
-//! Alternate fullscreen mode/windowed mode if possible.
-void StelApp::toggleFullScreen()
-{
-	StelMainWindow::getInstance().toggleFullScreen();
-}
-
-//! Return whether we are in fullscreen mode.
-bool StelApp::getFullScreen() const
-{
-	return StelMainWindow::getInstance().getFullScreen();
-}
-
-//! Save a screen shot.
-//! The format of the file, and hence the filename extension 
-//! depends on the architecture and build type.
-//! @arg filePrefix changes the beginning of the file name
-//! @arg shotDir changes the drectory where the screenshot is saved
-//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-void StelApp::saveScreenShot(const QString& filePrefix, const QString& shotDir) const
-{
-	StelMainWindow::getInstance().saveScreenShot(filePrefix, shotDir);
-}
-
-//! Initialize openGL screen.
-void StelApp::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
-{
-	StelMainWindow::getInstance().initOpenGL(w, h, bbpMode, fullScreen, iconFile);
+	return (double)qtime->elapsed()/1000;
 }
 
 //! Call this when you want to make the window (not) resizable.
 void StelApp::setResizable(bool resizable)
 {
-	StelMainWindow::getInstance().setResizable(resizable);
+	mainWin->setResizable(resizable);
 }
 
 //! Swap GL buffer, should be called only for special condition.
 void StelApp::swapGLBuffers()
 {
-	StelMainWindow::getInstance().swapGLBuffers();
+	mainWin->swapGLBuffers();
 }
 
 //! Return the main widget in which any new GUI elements should be added e.g. by external modules
-//! @return the main widget, it can normally be casted to a QMainWindow*
-QWidget* StelApp::getMainWidget()
+StelMainWindow* StelApp::getMainWindow()
 {
-	return &StelMainWindow::getInstance();
+	return mainWin;
 }

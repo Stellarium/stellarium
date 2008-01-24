@@ -91,11 +91,11 @@ void StelCore::init(const InitParser& conf)
 /*************************************************************************
  Update all the objects in function of the time
 *************************************************************************/
-void StelCore::update(int delta_time)
+void StelCore::update(double deltaTime)
 {
 	// Update the position of observation and time etc...
-	observatory->update(delta_time);
-	navigation->updateTime(delta_time);
+	observatory->update((int)(deltaTime*1000));
+	navigation->updateTime(deltaTime);
 
 	// Position of sun and all the satellites (ie planets)
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
@@ -106,7 +106,7 @@ void StelCore::update(int delta_time)
 	navigation->updateTransformMatrices();
 	
 	// Update direction of vision/Zoom level
-	movementMgr->updateMotion((double)delta_time/1000);	
+	movementMgr->updateMotion(deltaTime);	
 	
 	// Give the updated standard projection matrices to the projector.
 	// atmosphere->compute_color needs the projection matrices, so we must

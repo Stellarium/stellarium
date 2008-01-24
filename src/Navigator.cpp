@@ -124,9 +124,9 @@ void Navigator::setPrecEquVision(const Vec3d& _pos)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Increment time
-void Navigator::updateTime(int delta_time)
+void Navigator::updateTime(double deltaTime)
 {
-	JDay+=time_speed*(double)delta_time/1000.;
+	JDay+=time_speed*deltaTime;
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;

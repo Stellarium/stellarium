@@ -51,8 +51,8 @@ public:
 	void initProj(const InitParser& conf);
 
 	//! Update all the objects with respect to the time.
-	//! @param deltaTime the time increment in ms.
-	void update(int deltaTime);
+	//! @param deltaTime the time increment in sec.
+	void update(double deltaTime);
 
 	//! Update core state before drawing modules.
 	void preDraw();
