@@ -17,11 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelApp.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "InitParser.hpp"
 #include "Observer.hpp"
+
+#include <QSettings>
+#include <QDebug>
 
 ////////////////////////////////////////////////////////////////////////////////
 Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(obs)
@@ -46,14 +50,17 @@ const Planet *Navigator::getHomePlanet(void) const
 	return position->getHomePlanet();
 }
 
-void Navigator::init(const InitParser& conf)
+void Navigator::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	setTimeNow();
 	setLocalVision(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
 	updateModelViewMat();
-	string tmpstr = conf.get_str("navigation:viewing_mode");
+	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
 		setViewingMode(Navigator::VIEW_EQUATOR);
 	else
@@ -62,16 +69,16 @@ void Navigator::init(const InitParser& conf)
 			setViewingMode(Navigator::VIEW_HORIZON);
 		else
 		{
-			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
+			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
 			assert(0);
 		}
 	}
-	initViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos"));
+	initViewPos = StelUtils::str_to_vec3f(conf->value("navigation/init_view_pos").toString());
 	setLocalVision(initViewPos);
 	
 	// Navigation section
-	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
-	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
+	PresetSkyTime 		= conf->value("navigation/preset_sky_time",2451545.).toDouble();
+	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "now").toString().toStdString();
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		setJDay(PresetSkyTime - get_GMT_shift_from_system(PresetSkyTime) * JD_HOUR);
 	else setTimeNow();
