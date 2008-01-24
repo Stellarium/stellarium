@@ -280,7 +280,7 @@ void StelApp::init()
 	
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
-	hip_stars->init(conf);
+	hip_stars->init();
 	getModuleMgr().registerModule(hip_stars);	
 	
 	core->init(conf);
