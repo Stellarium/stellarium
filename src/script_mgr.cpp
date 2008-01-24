@@ -24,6 +24,7 @@
 #include <sstream>
 #include <iomanip>
 #include <QFile>
+#include <QSettings>
 
 #include "script_mgr.h"
 #include "script.h"
@@ -50,10 +51,13 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(fals
 ScriptMgr::~ScriptMgr() {
 }
 
-void ScriptMgr::init(const InitParser& conf)
+void ScriptMgr::init()
 {
-	set_allow_ui( conf.get_boolean("scripts","flag_script_allow_ui",0) );
-	scripts_can_write_files = conf.get_boolean("scripts","scripting_allow_write_files", false);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	set_allow_ui(conf->value("scripts/flag_script_allow_ui",false).toBool());
+	scripts_can_write_files = conf->value("scripts/scripting_allow_write_files", false).toBool();
 }
 
 // path is used for loading script assets 
