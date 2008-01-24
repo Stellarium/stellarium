@@ -25,6 +25,8 @@
 #include <config.h>
 #include <QTextStream>
 #include <QFile>
+#include <QSettings>
+#include <QString>
 #include <QDebug>
 
 #include "Projector.hpp"
@@ -244,37 +246,48 @@ static Vec3f Gamma(double gamma,const Vec3f &x) {
   return Vec3f(Gamma(gamma,x[0]),Gamma(gamma,x[1]),Gamma(gamma,x[2]));
 }
 
-static
-void InitColorTableFromConfigFile(const InitParser &conf) {
-  std::map<float,Vec3f> color_map;
-  for (float b_v=-0.5f;b_v<=4.0f;b_v+=0.01) {
-    char entry[256];
-    sprintf(entry,"bv_color_%+5.2f",b_v);
-    const string s(conf.get_str("stars",entry,""));
-    if (!s.empty()) {
-      const Vec3f c(StelUtils::str_to_vec3f(s));
-      color_map[b_v] = Gamma(1/0.45,c);
-    }
-  }
-  if (color_map.size() > 1) {
-    for (int i=0;i<128;i++) {
-      const float b_v = IndexToBV(i);
-      std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(b_v));
-      if (greater == color_map.begin()) {
-        StarMgr::color_table[i] = greater->second;
-      } else {
-        std::map<float,Vec3f>::const_iterator less(greater);--less;
-        if (greater == color_map.end()) {
-          StarMgr::color_table[i] = less->second;
-        } else {
-          StarMgr::color_table[i] = Gamma(0.45,
-                                          ((b_v-less->first)*greater->second
-                                          + (greater->first-b_v)*less->second)
-                                          *(1.f/(greater->first-less->first)));
-                      }
-      }
-    }
-  }
+static void InitColorTableFromConfigFile() 
+{
+	std::map<float,Vec3f> color_map;
+	for (float b_v=-0.5f;b_v<=4.0f;b_v+=0.01) 
+	{
+		char entry[256];
+		sprintf(entry,"bv_color_%+5.2f",b_v);
+		const QString s(StelApp::getInstance().getSettings()->value(QString("stars") + entry).toString());
+		if (!s.isEmpty())
+		{
+			const Vec3f c(StelUtils::str_to_vec3f(s));
+			color_map[b_v] = Gamma(1/0.45,c);
+		}
+	}
+
+	if (color_map.size() > 1) 
+	{
+		for (int i=0;i<128;i++) 
+		{
+			const float b_v = IndexToBV(i);
+			std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(b_v));
+			if (greater == color_map.begin()) 
+			{
+				StarMgr::color_table[i] = greater->second;
+			} 
+			else 
+			{
+				std::map<float,Vec3f>::const_iterator less(greater);--less;
+				if (greater == color_map.end()) 
+				{
+					StarMgr::color_table[i] = less->second;
+				} 
+				else 
+				{
+					StarMgr::color_table[i] = Gamma(0.45,
+					  ((b_v-less->first)*greater->second
+					  + (greater->first-b_v)*less->second)
+					  *(1.f/(greater->first-less->first)));
+				}
+			}
+		}
+	}
 }
 
 
@@ -351,38 +364,37 @@ wstring StarMgr::getSciName(int hip) {
 
 
 
-void StarMgr::init(const InitParser &conf) {
-  load_data(conf);
-  InitColorTableFromConfigFile(conf);
-  StelApp::getInstance().getTextureManager().setDefaultParams();
-    // Load star texture no mipmap:
-  starTexture = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
-  double fontSize = 12;
-  starFont = &StelApp::getInstance().getFontManager()
-                .getStandardFont(StelApp::getInstance()
-                                   .getLocaleMgr().getSkyLanguage(),
-                                 fontSize);
-  setFlagStars(conf.get_boolean("astro:flag_stars"));
-  setFlagNames(conf.get_boolean("astro:flag_star_name"));
-  setScale(conf.get_double ("stars:star_scale"));
-  setMagScale(conf.get_double ("stars:star_mag_scale"));
-  setTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
-  setMaxMagName(conf.get_double ("stars:max_mag_star_name"));
-  setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
-  setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
-//  setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
-  setMagConverterMaxFov(conf.get_double("stars","mag_converter_max_fov",60.0));
-  setMagConverterMinFov(conf.get_double("stars","mag_converter_min_fov",0.1));
-  setMagConverterMagShift(
-    conf.get_double("stars","mag_converter_mag_shift",0.0));
-  setMagConverterMaxMag(
-    conf.get_double("stars","mag_converter_max_mag",30.0));
-  setMagConverterMaxScaled60DegMag(
-    conf.get_double("stars","mag_converter_max_scaled_60deg_mag",6.5f));
-  
-  StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
-  
-  texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
+void StarMgr::init() {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	load_data();
+	InitColorTableFromConfigFile();
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	// Load star texture no mipmap:
+	starTexture = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
+	double fontSize = 12;
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(
+			StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 
+			fontSize);
+
+	setFlagStars(conf->value("astro/flag_stars", true).toBool());
+	setFlagNames(conf->value("astro/flag_star_name",true).toBool());
+	setScale(conf->value("stars/star_scale",1.1).toDouble());
+	setMagScale(conf->value("stars/star_mag_scale",1.3).toDouble());
+	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
+	setMaxMagName(conf->value("stars/max_mag_star_name",1.5).toDouble());
+	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
+	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
+	setMagConverterMaxFov(conf->value("stars/mag_converter_max_fov",60.0).toDouble());
+	setMagConverterMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
+	setMagConverterMagShift(conf->value("stars/mag_converter_mag_shift",0.0).toDouble());
+	setMagConverterMaxMag(conf->value("stars/mag_converter_max_mag",30.0).toDouble());
+	setMagConverterMaxScaled60DegMag(conf->value("stars/mag_converter_max_scaled_60deg_mag",6.5).toDouble());
+
+	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
 void StarMgr::setGrid(GeodesicGrid* geodesic_grid) {
@@ -426,7 +438,7 @@ void StarMgr::setColorScheme(const InitParser& conf, const QString& section)
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
 ***************************************************************************/
-void StarMgr::load_data(const InitParser &baseConf)
+void StarMgr::load_data()
 {
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 			

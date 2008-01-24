@@ -85,10 +85,7 @@ public:
 	//! - Loads the star font (for labels on named stars)
 	//! - Loads the texture of the sar selection indicator
 	//! - Lets various display flags from the ini parser object
-	//!
-	//! @param conf The ini parser object containing relevant settings.
-	//! @param lb The LoadingBar object which shows progress and current operation.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	
 	//! Draw the stars and the star selection indicator if necessary.
@@ -304,7 +301,7 @@ private:
 	int getMaxSearchLevel(const ToneReproducer *eye, const Projector *prj) const;
 	
 	//! Load all the stars from the files.
-	void load_data(const InitParser &conf);
+	void load_data();
 	
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);
