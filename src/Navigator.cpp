@@ -25,6 +25,7 @@
 #include "Observer.hpp"
 
 #include <QSettings>
+#include <QStringList>
 #include <QDebug>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +74,8 @@ void Navigator::init()
 			assert(0);
 		}
 	}
-	initViewPos = StelUtils::str_to_vec3f(conf->value("navigation/init_view_pos").toString());
+	
+	initViewPos = StelUtils::str_to_vec3f(conf->value("navigation/init_view_pos").toStringList());
 	setLocalVision(initViewPos);
 	
 	// Navigation section
