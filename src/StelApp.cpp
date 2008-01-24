@@ -67,9 +67,9 @@ StelApp* StelApp::singleton = NULL;
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) :
+StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) : QObject(amainWin),
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0.), 
-		   timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
+	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
 	setObjectName("StelApp");
 	assert(amainWin!=NULL);
@@ -232,15 +232,6 @@ QString StelApp::getViewPortDistorterType() const
 
 void StelApp::init()
 {
-	// Create the OpenGL widget in which the main modules will be drawn
-	GLWidget* openGLWin = new GLWidget(mainWin);
-	mainWin->setCentralWidget(openGLWin);
-	
-	// Show the window during loading for the loading bar
-	mainWin->show();
-	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-
-	
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
@@ -266,15 +257,14 @@ void StelApp::init()
 	core->initProj();
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
-// 	glClearColor(0.0, 0.0, 0.0, 0.0);
-// 	glClear(GL_COLOR_BUFFER_BIT);
-// 	swapGLBuffers();
-// 	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	swapGLBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              getScreenW(), getScreenH(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-	loadingBar->setClearBuffer(false);	// Prevent flickering. Check that it's still usefull
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
@@ -379,8 +369,6 @@ void StelApp::init()
 	//QtScriptMgr scriptMgr;
 	//scriptMgr.test();
 	initialized = true;
-	
-	openGLWin->mainTimer->start(10);
 }
 
 void StelApp::parseCLIArgsPreConfig(void)

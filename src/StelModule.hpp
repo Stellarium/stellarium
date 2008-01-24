@@ -144,10 +144,6 @@ public:
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
-
-
-protected:
-	friend class StelModuleMgr;
 };
 
 #endif

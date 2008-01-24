@@ -39,11 +39,47 @@ using namespace std;
 #include <QTime>
 #include <QDateTime>
 
-StelMainWindow::StelMainWindow()
+StelMainWindow::StelMainWindow(int argc, char** argv)
 {
 	setWindowTitle(StelApp::getApplicationName());
 	setObjectName("stellariumMainWin");
 	setMinimumSize(400,400);
+	
+	// Create the main instance of stellarium
+	StelApp* stelApp = new StelApp(argc, argv, this);
+	
+	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
+	QString iconPath;
+	try
+	{
+		iconPath = stelApp->getFileMgr().findFile("data/icon.bmp");
+	}
+	catch (exception& e)
+	{
+		qWarning() << "ERROR when trying to locate icon file: " << e.what();
+	}
+	setWindowIcon(QIcon(iconPath));
+	
+	QSettings* settings = stelApp->getSettings();
+	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	if (settings->value("video/fullscreen", true).toBool())
+	{
+		showFullScreen();
+	}
+	
+	// Create the OpenGL widget in which the main modules will be drawn
+	GLWidget* openGLWin = new GLWidget(this);
+	setCentralWidget(openGLWin);
+	
+	// Show the window during loading for the loading bar
+	show();
+	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	
+	stelApp->init();
+	
+	openGLWin->mainTimer->start(10);
+	
+	
 }
 
 StelMainWindow::~StelMainWindow()
