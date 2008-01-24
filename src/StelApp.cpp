@@ -133,7 +133,7 @@ StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) :
 		copyDefaultConfigFile();
 	}
 
-	confSettings = new QSettings(getConfigFilePath());
+	confSettings = new QSettings(getConfigFilePath(), QSettings::IniFormat);
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
@@ -281,7 +281,7 @@ void StelApp::init()
 	stelObjectMgr->init(conf);
 	
 	localeMgr->init(conf);
-	skyCultureMgr->init(conf);
+	skyCultureMgr->init();
 	
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
@@ -329,9 +329,9 @@ void StelApp::init()
 	meteors->init(conf);
 	getModuleMgr().registerModule(meteors);
 
-//ugly fix by johannes: call skyCultureMgr->init twice so that
+// ugly fix by Johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
-	skyCultureMgr->init(conf);
+	skyCultureMgr->init();
 	
 	// Initialisation of the color scheme
 	flagNightVision=true;  // fool caching

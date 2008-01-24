@@ -27,6 +27,8 @@
 #include <fstream>
 #include <dirent.h>
 #include <cassert>
+#include <QSettings>
+#include <QVariant>
 #include <QDebug>
 
 StelSkyCultureMgr::StelSkyCultureMgr()
@@ -65,10 +67,9 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 
 
 //! Init itself from a config file.
-void StelSkyCultureMgr::init(const InitParser& conf)
+void StelSkyCultureMgr::init()
 {
-	QString tmp = conf.get_str("localization", "sky_culture", "western").c_str();
-	setSkyCultureDir(tmp);
+	setSkyCultureDir(StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString());
 }
 
 //! Set the current sky culture from the passed directory

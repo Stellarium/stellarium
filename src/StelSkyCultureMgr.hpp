@@ -40,11 +40,9 @@ public:
 	~StelSkyCultureMgr();
 	
 	//! Initialize the StelSkyCultureMgr object.
-	//! Gets the default sky culture name from the ini parser object and 
+	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setSkyCultureDir().
-	//! @param conf The ini parser object which contains the default sky 
-	//! culture setting.
-	void init(const InitParser& conf);
+	void init();
 	
 	//! Set the sky culture from i18n name.
 	//! @return true on success; false and doesn't change if skyculture is invalid.
