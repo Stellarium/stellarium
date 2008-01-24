@@ -33,7 +33,7 @@ class StelMainWindow : public QMainWindow
 {
 public:
 	//! Constructor
-	StelMainWindow();
+	StelMainWindow(int argc, char** argv);
 	virtual ~StelMainWindow();
 	
 	///////////////////////////////////////////////////////////////////////////
