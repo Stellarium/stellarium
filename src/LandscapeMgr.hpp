@@ -45,11 +45,9 @@ public:
 	// Methods defined in the StelModule class
 	//! Initialize the LandscapeManager class.
 	//! Operations performed:
-	//! - Load the default landscape as specified in the ini parser object
+	//! - Load the default landscape as specified in the application configuration
 	//! - Set up landscape-releated display flags from ini parser object
-	//! @param conf the ini parser object.
-	//! @param lb the loading bar object used to show loading progress.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Draw the landscape graphics, cardinal points and atmosphere.
 	virtual double draw(StelCore* core);

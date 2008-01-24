@@ -307,7 +307,7 @@ void StelApp::init()
 	
 	// Landscape, atmosphere & cardinal points section
 	LandscapeMgr* landscape = new LandscapeMgr();
-	landscape->init(conf);
+	landscape->init();
 	getModuleMgr().registerModule(landscape);
 
 	GridLinesMgr* gridLines = new GridLinesMgr();
