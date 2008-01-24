@@ -41,7 +41,7 @@ class ScriptMgr : public StelModule
   ScriptMgr(StelCommandInterface * command_interface);
   virtual ~ScriptMgr();
   
-  virtual void init(const InitParser& conf);
+  virtual void init();
   virtual double draw(StelCore* core) {return 0;}
   
   bool play_script(const QString& script_file, const QString& QScript_path);

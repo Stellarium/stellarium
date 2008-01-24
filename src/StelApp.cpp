@@ -334,13 +334,13 @@ void StelApp::init()
 	StelCommandInterface* commander = new StelCommandInterface(getCore(), this);
 	getModuleMgr().registerModule(commander, true);
 	ScriptMgr* scripts = new ScriptMgr(commander);
-	scripts->init(conf);
+	scripts->init();
 	// play startup script, if available
 	scripts->play_startup_script();
 	getModuleMgr().registerModule(scripts, true);
 	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
 	ImageMgr* script_images = new ImageMgr();
-	script_images->init(conf);
+	script_images->init();
 	getModuleMgr().registerModule(script_images, true);	
 	StelUI* ui = new StelUI(core, this);
 	ui->init(conf);
