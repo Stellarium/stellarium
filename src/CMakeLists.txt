@@ -224,6 +224,7 @@ SET(stellarium_MOC_HDRS
 	Observer.hpp
 	StarMgr.hpp
 	StelApp.hpp
+	StelMainWindow.hpp
 	stelutils/STexture.hpp
 )
 

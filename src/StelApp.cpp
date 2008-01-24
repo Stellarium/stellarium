@@ -266,15 +266,15 @@ void StelApp::init()
 	core->initProj(conf);
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	swapGLBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);
+// 	glClearColor(0.0, 0.0, 0.0, 0.0);
+// 	glClear(GL_COLOR_BUFFER_BIT);
+// 	swapGLBuffers();
+// 	glClear(GL_COLOR_BUFFER_BIT);
 
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              getScreenW(), getScreenH(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-	loadingBar->setClearBuffer(true);	// Prevent flickering
+	loadingBar->setClearBuffer(false);	// Prevent flickering. Check that it's still usefull
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
@@ -378,12 +378,9 @@ void StelApp::init()
 	
 	//QtScriptMgr scriptMgr;
 	//scriptMgr.test();
-	
-	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
-	openGLWin->timerId = openGLWin->startTimer(10);
-	
-	
 	initialized = true;
+	
+	openGLWin->mainTimer->start(10);
 }
 
 void StelApp::parseCLIArgsPreConfig(void)
