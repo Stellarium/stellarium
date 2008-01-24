@@ -162,7 +162,7 @@ void StelUI::init_tui(void)
 		cerr << "ERROR locating zone file: " << e.what() << endl;
 	}
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
-	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
+	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name().toStdString());
 
 	tui_time_day_key = new s_tui::MultiSet2_item<wstring>(wstring(L"2.2 ") );
 	tui_time_day_key->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_day_key));
@@ -577,7 +577,7 @@ void StelUI::tui_update_widgets(void)
 
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->getNavigation()->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getNavigation()->getJDay())*JD_HOUR);
-	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
+	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name().toStdString());
 	tui_time_day_key->setCurrent(StelUtils::stringToWstring(getDayKeyMode()));
 	tui_time_presetskytime->setJDay(core->getNavigation()->getPresetSkyTime());
 	tui_time_startuptime->setCurrent(StelUtils::stringToWstring(core->getNavigation()->getStartupTimeMode()));
@@ -653,14 +653,14 @@ void StelUI::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
 	// system( ( core->getDataDir() + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	app->getLocaleMgr().set_custom_tz_name(tui_time_settmz->gettz());
+	app->getLocaleMgr().set_custom_tz_name(QString::fromStdString(tui_time_settmz->gettz()));
 }
 
 // Set time format mode
 void StelUI::tui_cb_settimedisplayformat(void)
 {
-	app->getLocaleMgr().set_time_format_str(StelUtils::wstringToString(tui_time_displayformat->getCurrent()));
-	app->getLocaleMgr().set_date_format_str(StelUtils::wstringToString(tui_time_dateformat->getCurrent()));
+	app->getLocaleMgr().set_time_format_str(QString::fromStdWString(tui_time_displayformat->getCurrent()));
+	app->getLocaleMgr().set_date_format_str(QString::fromStdWString(tui_time_dateformat->getCurrent()));
 }
 
 // 7. Administration actions functions
@@ -990,7 +990,7 @@ void StelUI::saveCurrentConfig(const QString& confFile)
 	conf.set_str	("localization:date_display_format", localeMgr->get_date_format_str().c_str());
 	if (localeMgr->get_tz_format() == StelLocaleMgr::S_TZ_CUSTOM)
 	{
-		conf.set_str("localization:time_zone", localeMgr->get_custom_tz_name().c_str());
+		conf.set_str("localization:time_zone", qPrintable(localeMgr->get_custom_tz_name()));
 	}
 	if (localeMgr->get_tz_format() == StelLocaleMgr::S_TZ_SYSTEM_DEFAULT)
 	{

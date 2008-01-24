@@ -26,6 +26,7 @@
 
 #include <QLocale>
 #include <QDebug>
+#include <QSettings>
 
 using namespace std;
 
@@ -37,16 +38,19 @@ StelLocaleMgr::~StelLocaleMgr()
 {}
 
 
-void StelLocaleMgr::init(const InitParser& conf)
+void StelLocaleMgr::init()
 {
-	setSkyLanguage(conf.get_str("localization", "sky_locale", "system").c_str());
-	setAppLanguage(conf.get_str("localization", "app_locale", "system").c_str());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
+	setAppLanguage(conf->value("localization/app_locale", "system").toString());
 	
-	time_format = string_to_s_time_format(conf.get_str("localization:time_display_format"));
-	date_format = string_to_s_date_format(conf.get_str("localization:date_display_format"));
+	time_format = string_to_s_time_format(conf->value("localization:time_display_format", "system_default").toString());
+	date_format = string_to_s_date_format(conf->value("localization:date_display_format", "system_default").toString());
 	// time_zone used to be in init_location section of config,
 	// so use that as fallback when reading config - Rob
-	string tzstr = conf.get_str("localization", "time_zone", conf.get_str("init_location", "time_zone", "system_default"));
+	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
 	if (tzstr == "system_default")
 	{
 		time_zone_mode = S_TZ_SYSTEM_DEFAULT;
@@ -206,12 +210,12 @@ wstring StelLocaleMgr::get_printable_time_local(double JD) const
 }
 
 // Convert the time format enum to its associated string and reverse
-StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const string& tf) const
+StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const QString& tf) const
 {
 	if (tf == "system_default") return S_TIME_SYSTEM_DEFAULT;
 	if (tf == "24h") return S_TIME_24H;
 	if (tf == "12h") return S_TIME_12H;
-	cerr << "WARNING: unrecognized time_display_format : " << tf << " system_default used." << endl;
+	cerr << "WARNING: unrecognized time_display_format : " << qPrintable(tf) << " system_default used." << endl;
 	return S_TIME_SYSTEM_DEFAULT;
 }
 
@@ -225,13 +229,13 @@ string StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
 }
 
 // Convert the date format enum to its associated string and reverse
-StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const string& df) const
+StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const QString& df) const
 {
 	if (df == "system_default") return S_DATE_SYSTEM_DEFAULT;
 	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;
 	if (df == "ddmmyyyy") return S_DATE_DDMMYYYY;
 	if (df == "yyyymmdd") return S_DATE_YYYYMMDD;  // iso8601
-	cerr << "WARNING: unrecognized date_display_format : " << df << " system_default used." << endl;
+	cerr << "WARNING: unrecognized date_display_format : " << qPrintable(df) << " system_default used." << endl;
 	return S_DATE_SYSTEM_DEFAULT;
 }
 
@@ -245,7 +249,7 @@ string StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
 	return "system_default";
 }
 
-void StelLocaleMgr::set_custom_tz_name(const string& tzname)
+void StelLocaleMgr::set_custom_tz_name(const QString& tzname)
 {
 	custom_tz_name = tzname;
 	time_zone_mode = S_TZ_CUSTOM;
@@ -253,7 +257,7 @@ void StelLocaleMgr::set_custom_tz_name(const string& tzname)
 	if( custom_tz_name != "")
 	{
 		// set the TZ environement variable and update c locale stuff
-		putenv(strdup((string("TZ=") + custom_tz_name).c_str()));
+		putenv(strdup(qPrintable("TZ=" + custom_tz_name)));
 		tzset();
 	}
 }
