@@ -30,6 +30,8 @@
 #include "Mapping.hpp"
 #include "SphereGeometry.hpp"
 
+#include <QString>
+
 class InitParser;
 
 //! @class Projector
@@ -69,7 +71,7 @@ public:
 	//!   object and the detected hardware capabilities.
 	//!
 	//! @param conf The ini parser object.
-	void init(const InitParser& conf);
+	void init();
 	
 	//! Set the standard modelview matrices used for projection.
 	// TODO: more complete description of what they are used for.
@@ -106,7 +108,7 @@ public:
 	static const char *maskTypeToString(PROJECTOR_MASK_TYPE type);
 	
 	//! Get a PROJECTOR_MASK_TYPE from a string description.
-	static PROJECTOR_MASK_TYPE stringToMaskType(const string &s);
+	static PROJECTOR_MASK_TYPE stringToMaskType(const QString &s);
 	
 	//! Get the current type of the mask if any.
 	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
@@ -301,10 +303,10 @@ public:
 	//! Set the current projection mapping to use.
 	//! The mapping must have been registered before being used.
 	//! @param projectionName a string which can be e.g. "perspective", "stereographic", "fisheye", "cylinder".
-	void setCurrentProjection(const std::string& projectionName);
+	void setCurrentProjection(const QString& projectionName);
 	
 	//! Get the current projection mapping name.
-	std::string getCurrentProjection() {return currentProjectionType;}
+	QString getCurrentProjection() {return currentProjectionType;}
 
 
 	///////////////////////////////////////////////////////////////////////////
@@ -482,7 +484,7 @@ private:
 	const Mapping *mapping;
 	std::map<std::string,const Mapping*> projectionMapping;
 	
-	std::string currentProjectionType;	// Type of the projection currently used
+	QString currentProjectionType;	// Type of the projection currently used
 	
 };
 

@@ -44,6 +44,7 @@
 #include "StelMainWindow.hpp"
 #include <QFile>
 #include <QDebug>
+#include <QString>
 
 using namespace s_gui;
 
@@ -388,7 +389,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	projection_sl->addItem("stereographic");
 	projection_sl->addItem("cylinder");
 	projection_sl->adjustSize();
-	projection_sl->setValue(core->getProjection()->getCurrentProjection());
+	projection_sl->setValue(qPrintable(core->getProjection()->getCurrentProjection()));
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
 	projection_sl->setPos(x+20,y); y+=140;
@@ -951,7 +952,7 @@ void StelUI::setVideoOption(void)
 	}
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
-	cout << "Saving video settings: projection=" << core->getProjection()->getCurrentProjection()
+	cout << "Saving video settings: projection=" << qPrintable(core->getProjection()->getCurrentProjection())
 			<< ", distorter=" << qPrintable(app->getViewPortDistorterType());
 	if ( w && h ) cout << ", res=" << w << "x" << h;
 	cout << " in file " << qPrintable(app->getConfigFilePath()) << endl;
@@ -959,7 +960,7 @@ void StelUI::setVideoOption(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	conf.set_str("projection:type", core->getProjection()->getCurrentProjection().c_str());
+	conf.set_str("projection:type", qPrintable(core->getProjection()->getCurrentProjection()));
 	conf.set_str("video:distorter", app->getViewPortDistorterType());
 
 
@@ -988,7 +989,7 @@ void StelUI::setLandscape(void)
 
 void StelUI::updateVideoVariables(void)
 {
-	core->getProjection()->setCurrentProjection(projection_sl->getValue());
+	core->getProjection()->setCurrentProjection(QString::fromStdString(projection_sl->getValue()));
     
 	if (disk_viewport_cbx->getState() && !core->getProjection()->getViewportMaskDisk())
 	{
@@ -1101,7 +1102,7 @@ void StelUI::updateConfigForm(void)
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getNavigation()->getTimeSpeed()/JD_SECOND));
 
-	projection_sl->setValue(core->getProjection()->getCurrentProjection());
+	projection_sl->setValue(qPrintable(core->getProjection()->getCurrentProjection()));
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
 	viewport_distorter_cbx->setState(app->getViewPortDistorterType()!="none");
 	
