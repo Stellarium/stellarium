@@ -285,7 +285,7 @@ void StelApp::init()
 	
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
-	ssystem->init(conf);
+	ssystem->init();
 	getModuleMgr().registerModule(ssystem);
 	
 	// Load hipparcos stars & names

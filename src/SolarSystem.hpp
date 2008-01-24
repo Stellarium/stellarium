@@ -57,10 +57,12 @@ public:
 	//! Includes:
 	//! - loading planetary body orbital and model data from data/ssystem.ini
 	//! - perform initial planet position calculation
-	//! - set display options from ini parser object settings
-	//!
-	//! @param conf The ini parser object where relevant display settings are found.
-	virtual void init(const InitParser& conf);
+	//! - set display options from application settings
+	virtual void init();
+
+	// TODO - remove this when this virtual function is removed from StelModule
+	// when ::init refactoring is ended
+	virtual void init(const InitParser& conf) {;}
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param prj The Projector object.
