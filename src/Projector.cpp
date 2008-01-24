@@ -35,6 +35,8 @@
 #include "MappingClasses.hpp"
 #include "StelApp.hpp"
 #include <QDebug>
+#include <QString>
+#include <QSettings>
 
 const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
@@ -44,7 +46,7 @@ const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 		return "none";
 }
 
-Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const string &s)
+Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const QString &s)
 {
 	if (s=="disk")
 		return DISK;
@@ -56,57 +58,61 @@ void Projector::registerProjectionMapping(Mapping *c)
 	if (c) projectionMapping[c->getName()] = c;
 }
 
-void Projector::init(const InitParser& conf)
+void Projector::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	// Video Section
-	string tmpstr = conf.get_str("projection:viewport");
+	// string tmpstr = conf.get_str("projection:viewport");
+	QString tmpstr = conf->value("projection/viewport").toString();
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	const bool maximized = (tmpstr=="maximized");
 	const int screen_w = StelApp::getInstance().getScreenW();
 	const int screen_h = StelApp::getInstance().getScreenH();
 	const int screen_min_wh = MY_MIN(screen_w,screen_h);
-	const int viewport_width = conf.get_int("projection","viewport_width", maximized ? screen_w : screen_min_wh);
-	const int viewport_height = conf.get_int("projection","viewport_height", maximized ? screen_h : screen_min_wh);
-	const int viewport_x = conf.get_int("projection","viewport_x", (screen_w-viewport_width)/2);
-	const int viewport_y = conf.get_int("projection","viewport_y", (screen_h-viewport_height)/2);
-	const double viewport_center_x = conf.get_double("projection","viewport_center_x",0.5*viewport_width);
-	const double viewport_center_y = conf.get_double("projection","viewport_center_y",0.5*viewport_height);
-	const double viewport_fov_diameter = conf.get_double("projection","viewport_fov_diameter", MY_MIN(viewport_width,viewport_height));
+	const int viewport_width = conf->value("projection/viewport_width", maximized ? screen_w : screen_min_wh).toInt();
+	const int viewport_height = conf->value("projection/viewport_height", maximized ? screen_h : screen_min_wh).toInt();
+	const int viewport_x = conf->value("projection/viewport_x", (screen_w-viewport_width)/2).toInt();
+	const int viewport_y = conf->value("projection/viewport_y", (screen_h-viewport_height)/2).toInt();
+	const double viewport_center_x = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
+	const double viewport_center_y = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
+	const double viewport_fov_diameter = conf->value("projection/viewport_fov_diameter", MY_MIN(viewport_width,viewport_height)).toDouble();
 	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewport_center_x,viewport_center_y, viewport_fov_diameter);
 
-	double overwrite_max_fov = conf.get_double("projection","equal_area_max_fov",0.0);
+	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 360.0)
 		overwrite_max_fov = 360.0;
 	if (overwrite_max_fov > 0.0)
 		MappingEqualArea::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf.get_double("projection","stereographic_max_fov",0.0);
+	overwrite_max_fov = conf->value("projection/stereographic_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 359.999999)
 		overwrite_max_fov = 359.999999;
 	if (overwrite_max_fov > 0.0)
 		MappingStereographic::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf.get_double("projection","fisheye_max_fov",0.0);
+	overwrite_max_fov = conf->value("projection/fisheye_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 360.0)
 		overwrite_max_fov = 360.0;
 	if (overwrite_max_fov > 0.0)
 		MappingFisheye::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf.get_double("projection","cylinder_max_fov",0.0);
+	overwrite_max_fov = conf->value("projection/cylinder_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 540.0)
 		overwrite_max_fov = 540.0;
 	if (overwrite_max_fov > 0.0)
 		MappingCylinder::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf.get_double("projection","perspective_max_fov",0.0);
+	overwrite_max_fov = conf->value("projection/perspective_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 179.999999)
 		overwrite_max_fov = 179.999999;
 	if (overwrite_max_fov > 0.0)
 		MappingPerspective::getMapping()->maxFov = overwrite_max_fov;
-	overwrite_max_fov = conf.get_double("projection","orthographic_max_fov",0.0);
+	overwrite_max_fov = conf->value("projection/orthographic_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 180.0)
 		overwrite_max_fov = 180.0;
 	if (overwrite_max_fov > 0.0)
 		MappingOrthographic::getMapping()->maxFov = overwrite_max_fov;
 
-	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
+	setFlagGravityLabels( conf->value("viewing/flag_gravity_labels").toBool() );
 
 	// Register the default mappings
 	registerProjectionMapping(MappingEqualArea::getMapping());
@@ -116,15 +122,15 @@ void Projector::init(const InitParser& conf)
 	registerProjectionMapping(MappingPerspective::getMapping());
 	registerProjectionMapping(MappingOrthographic::getMapping());
 
-	tmpstr = conf.get_str("projection:type");
+	tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentProjection(tmpstr);
 
-	initFov	= conf.get_double ("navigation","init_fov",60.);
+	initFov	= conf->value("navigation/init_fov",60.).toDouble();
 	setFov(initFov);
 
 	//glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
 
-	flagGlPointSprite = conf.get_boolean("projection","flag_use_gl_point_sprite",false);
+	flagGlPointSprite = conf->value("projection/flag_use_gl_point_sprite",false).toBool();
 	flagGlPointSprite = flagGlPointSprite && GLEE_ARB_point_sprite;
 	if (flagGlPointSprite)
 	{
@@ -409,13 +415,13 @@ void Projector::initGlMatrixOrtho2d(void) const
 /*************************************************************************
  Set the current projection mapping to use
 *************************************************************************/
-void Projector::setCurrentProjection(const std::string& projectionName)
+void Projector::setCurrentProjection(const QString& projectionName)
 {
 	if (currentProjectionType==projectionName)
 		return;
 
 	std::map<std::string,const Mapping*>::const_iterator
-		i(projectionMapping.find(projectionName));
+		i(projectionMapping.find(projectionName.toStdString()));
 	if (i!=projectionMapping.end())
 	{
 		currentProjectionType = projectionName;
@@ -430,7 +436,7 @@ void Projector::setCurrentProjection(const std::string& projectionName)
 	}
 	else
 	{
-		cerr << "Unknown projection type: " << projectionName << "." << endl;
+		qWarning() << "Unknown projection type: " << qPrintable(projectionName);
 	}
 }
 

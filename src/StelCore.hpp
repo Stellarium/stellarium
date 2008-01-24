@@ -48,7 +48,7 @@ public:
 	void init(const InitParser& conf);
 
 	//! Init projection temp TODO remove.
-	void initProj(const InitParser& conf);
+	void initProj();
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
