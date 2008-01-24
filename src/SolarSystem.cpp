@@ -506,7 +506,7 @@ void SolarSystem::loadPlanets()
                                pd.get_boolean(secname, "lighting"),
                                pd.get_double(secname, "radius")/AU,
                                pd.get_double(secname, "oblateness", 0.0),
-                               StelUtils::str_to_vec3f(pd.get_str(secname, "color").c_str()),
+                               StelUtils::str_to_vec3f(pd.get_str(secname, "color")),
                                pd.get_double(secname, "albedo"),
                                pd.get_str(secname, "tex_map").c_str(),
                                pd.get_str(secname, "tex_halo").c_str(),

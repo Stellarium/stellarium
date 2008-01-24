@@ -255,6 +255,14 @@ Vec3f str_to_vec3f(const string& s)
 	return Vec3f(x,y,z);
 }
 
+// Obtains a Vec3f from a string with the form x,y,z
+Vec3f str_to_vec3f(const QString& s)
+{
+	float x, y, z;
+	if (s.isEmpty() || (sscanf(qPrintable(s),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
+	return Vec3f(x,y,z);
+}
+
 // Obtains a string from a Vec3f with the form x,y,z
 string vec3f_to_str(const Vec3f& v)
 {
