@@ -259,7 +259,7 @@ Vec3f str_to_vec3f(const string& s)
 // Obtains a Vec3f from a string with the form x,y,z
 Vec3f str_to_vec3f(const QStringList& s)
 {
-	if (s.size()!=3)
+	if (s.size()<3)
 		 return Vec3f(0.f,0.f,0.f);
 	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
 }
