@@ -378,6 +378,7 @@ void StarMgr::init() {
 			StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 
 			fontSize);
 
+	bool ok = true;
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagNames(conf->value("astro/flag_star_name",true).toBool());
 	setScale(conf->value("stars/star_scale",1.1).toDouble());
@@ -388,9 +389,27 @@ void StarMgr::init() {
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
 	setMagConverterMaxFov(conf->value("stars/mag_converter_max_fov",60.0).toDouble());
 	setMagConverterMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
-	setMagConverterMagShift(conf->value("stars/mag_converter_mag_shift",0.0).toDouble());
-	setMagConverterMaxMag(conf->value("stars/mag_converter_max_mag",30.0).toDouble());
-	setMagConverterMaxScaled60DegMag(conf->value("stars/mag_converter_max_scaled_60deg_mag",6.5).toDouble());
+	setMagConverterMagShift(conf->value("stars/mag_converter_mag_shift",0.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/mag_converter_mag_shift",0.0);
+		setMagConverterMagShift(0.0);
+		ok = true;
+	}
+	setMagConverterMaxMag(conf->value("stars/mag_converter_max_mag",30.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/mag_converter_max_mag",30.0);
+		setMagConverterMaxMag(30.0);
+		ok = true;
+	}
+	setMagConverterMaxScaled60DegMag(conf->value("stars/mag_converter_max_scaled_60deg_mag",6.5).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/mag_converter_max_scaled_60deg_mag",6.5);
+		setMagConverterMaxScaled60DegMag(6.5);
+		ok = true;
+	}
 
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 
