@@ -54,10 +54,7 @@ public:
 	//!  - Load the pointer texture.
 	//!  - Set flags values from ini parser which relate to nebula display.
 	//!  - call updateI18n() to translate names.
-	//! @param conf the ini parser object which contains configuration information
-	//! pertaining to nebulae.
-	//! @param lb the loading bar object used to display loading progress and status
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Draws all nebula objects.
 	virtual double draw(StelCore* core);
