@@ -292,7 +292,7 @@ void StelApp::init()
 	
 	// Init milky way
 	MilkyWay* milky_way = new MilkyWay();
-	milky_way->init(conf);
+	milky_way->init();
 	getModuleMgr().registerModule(milky_way);
 	
 	// Telescope manager
