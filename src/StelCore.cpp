@@ -30,6 +30,8 @@
 #include "StelModuleMgr.hpp"
 #include "Planet.hpp"
 
+#include <QSettings>
+
 /*************************************************************************
  Constructor
 *************************************************************************/
@@ -75,10 +77,10 @@ void StelCore::init(const InitParser& conf)
 
 	// Navigator
 	navigation = new Navigator(observatory);
-	navigation->init(conf);
+	navigation->init();
 	
 	movementMgr = new MovementMgr(this);
-	movementMgr->init(conf);
+	movementMgr->init();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);	
 	
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
