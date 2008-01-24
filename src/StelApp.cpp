@@ -297,7 +297,7 @@ void StelApp::init()
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
-	telescope_mgr->init(conf);
+	telescope_mgr->init();
 	getModuleMgr().registerModule(telescope_mgr);
 	
 	// Constellations
