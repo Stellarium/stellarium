@@ -60,10 +60,6 @@ public:
 	//! - set display options from application settings
 	virtual void init();
 
-	// TODO - remove this when this virtual function is removed from StelModule
-	// when ::init refactoring is ended
-	virtual void init(const InitParser& conf) {;}
-	
 	//! Draw SolarSystem objects (planets).
 	//! @param prj The Projector object.
 	//! @param nav The Navigator object.
