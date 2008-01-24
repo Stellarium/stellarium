@@ -24,6 +24,8 @@
 #include "InitParser.hpp"
 #include "Navigator.hpp"
 
+#include <QSettings>
+
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
 	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
 {
@@ -35,16 +37,19 @@ MovementMgr::~MovementMgr()
 {
 }
 
-void MovementMgr::init(const InitParser& conf)
+void MovementMgr::init()
 {
-	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
-	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
-	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
-	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
-	move_speed			= conf.get_double("navigation","move_speed",0.0004);
-	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
-	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
-	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	FlagEnableMoveMouse = conf->value("navigation/flag_enable_move_mouse",1).toBool();
+	MouseZoom = conf->value("navigation/mouse_zoom",30).toInt();
+	FlagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
+	FlagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
+	move_speed = conf->value("navigation/move_speed",0.0004).toDouble();
+	zoom_speed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
+	auto_move_duration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
+	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 }	
 	
 bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y, StelMod mod)

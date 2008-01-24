@@ -35,7 +35,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	//! Initializes the object based on the settings in the ini parser object.
+	//! Initializes the object based on the application settings
 	//! Includes:
 	//! - Enabling/disabling the movement keys
 	//! - Enabling/disabling the zoom keys
@@ -43,10 +43,7 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	//!
-	//! @param conf the ini parser object.
-	//! @param lb the LoadingBar object.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Update time-dependent things (does nothing).
 	virtual void update(double deltaTime) {;}
