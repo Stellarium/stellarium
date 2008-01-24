@@ -31,6 +31,7 @@
 #include "StelCore.hpp"
 
 #include <algorithm>
+#include <QSettings>
 
 #ifdef WIN32
   #include <winsock2.h> // select
@@ -216,39 +217,45 @@ void TelescopeMgr::setFontSize(float font_size) {
 }
 
 
-void TelescopeMgr::init(const InitParser& conf) {
-  setFontSize(12.f);
-  StelApp::getInstance().getTextureManager().setDefaultParams();
-  telescope_texture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
+void TelescopeMgr::init() {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	setFontSize(12.f);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	telescope_texture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 #ifdef WIN32
-  if (!wsa_ok) return;
+	if (!wsa_ok) return;
 #endif
-  telescope_map.clear();
-  for (int i=0;i<9;i++) {
-    char name[2] = {'0'+i,'\0'};
-    const string telescope_name(name);
-    const string url = conf.get_str("telescopes",telescope_name,"");
-    if (!url.empty()) {
-      Telescope *t = Telescope::create(url);
-      if (t) {
-        for (int j=0;j<9;j++) {
-          name[0] = '0'+j;
-          const double fov = conf.get_double(
-                               "telescopes",
-                               telescope_name+"_ocular_"+name,-1.0);
-          t->addOcular(fov);
-        }
-        telescope_map[i] = t;
-      }
-    }
-  }
-  
-  setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
-  setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
-  
-  StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
-  
-  texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
+	telescope_map.clear();
+	for (int i=0;i<9;i++) 
+	{
+		char name[2] = {'0'+i,'\0'};
+		const QString telescope_name(name);
+		const QString url = conf->value("telescopes/"+telescope_name,"").toString();
+		if (!url.isEmpty()) 
+		{
+			Telescope *t = Telescope::create(url.toStdString());
+			if (t) 
+			{
+				for (int j=0;j<9;j++) 
+				{
+					name[0] = '0'+j;
+					const double fov = conf->value("telescopes/"+telescope_name+"_ocular_"+name, -1.0).toDouble();
+					t->addOcular(fov);
+				}
+				telescope_map[i] = t;
+			}
+		}
+	}
+
+	setFlagTelescopes(conf->value("astro/flag_telescopes",false).toBool());
+	setFlagTelescopeName(conf->value("astro/flag_telescope_name",false).toBool());  
+
+	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+
+	// Load pointer texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   
 }
 
 
