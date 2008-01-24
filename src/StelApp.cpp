@@ -287,7 +287,7 @@ void StelApp::init()
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
-	nebulas->init(conf);
+	nebulas->init();
 	getModuleMgr().registerModule(nebulas);
 	
 	// Init milky way
