@@ -253,7 +253,7 @@ static void InitColorTableFromConfigFile()
 	{
 		char entry[256];
 		sprintf(entry,"bv_color_%+5.2f",b_v);
-		const QString s(StelApp::getInstance().getSettings()->value(QString("stars") + entry).toString());
+		const QStringList s(StelApp::getInstance().getSettings()->value(QString("stars") + entry).toStringList());
 		if (!s.isEmpty())
 		{
 			const Vec3f c(StelUtils::str_to_vec3f(s));

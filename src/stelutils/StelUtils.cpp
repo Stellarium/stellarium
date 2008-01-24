@@ -42,6 +42,7 @@
 
 #include "fixx11h.h"
 #include <QString>
+#include <QStringList>
 #include <QTextStream>
 #include <QFile>
 #include <QDebug>
@@ -256,11 +257,11 @@ Vec3f str_to_vec3f(const string& s)
 }
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const QString& s)
+Vec3f str_to_vec3f(const QStringList& s)
 {
-	float x, y, z;
-	if (s.isEmpty() || (sscanf(qPrintable(s),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
-	return Vec3f(x,y,z);
+	if (s.size()!=3)
+		 return Vec3f(0.f,0.f,0.f);
+	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
 }
 
 // Obtains a string from a Vec3f with the form x,y,z
