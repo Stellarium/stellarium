@@ -42,7 +42,7 @@ class InitParser;
 class QStringList;
 class LoadingBar;
 class QSettings;
-
+class StelMainWindow;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -69,7 +69,7 @@ public:
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(int argc, char** argv);
+	StelApp(int argc, char** argv, StelMainWindow* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -178,40 +178,20 @@ public slots:
 	//! @return height of the openGL screen in pixels
 	int getScreenH() const;
 	
-	//! Terminate the application.
-	void terminateApplication();
-	
 	//! Return the time since when stellarium is running in second.
 	double getTotalRunTime() const;
-	
-	//! Set mouse cursor display.
-	void showCursor(bool b);
-	
-	//! Alternate fullscreen mode/windowed mode if possible.
-	void toggleFullScreen();
-	
-	//! Return whether we are in fullscreen mode.
-	bool getFullScreen() const;
-	
-	//! Save a screen shot.
-	//! The format of the file, and hence the filename extension 
-	//! depends on the architecture and build type.
-	//! @arg filePrefix changes the beginning of the file name
-	//! @arg shotDir changes the drectory where the screenshot is saved
-	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& shotDir="") const;
 
 	//! Return the main widget in which any new GUI elements should be added e.g. by external modules
-	//! @return the main widget, it can normally be casted to a QMainWindow*
-	class QWidget* getMainWidget();
+	//! @return the main window
+	class StelMainWindow* getMainWindow();
 	
 private:
-	//! Update all object according to the delta time.
-	void update(int delta_time);
+	//! Update all object according to the deltaTime in seconds.
+	void update(double deltaTime);
 
 	//! Draw all registered StelModule in the order defined by the order lists.
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
-	double draw(int delta_time);
+	double draw();
 	
 	//! Handle mouse clics.
 	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
@@ -358,7 +338,8 @@ private:
 	LoadingBar* loadingBar;
 	
 	float fps;
-	int frame, timefr, timeBase;		// Used for fps counter
+	int frame;
+	double timefr, timeBase;		// Used for fps counter
 	
 	// Main elements of the stel_app
 	ViewportDistorter *distorter;
@@ -373,6 +354,11 @@ private:
 	
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
+	
+	// The main window in which the OpenGL window must be created
+	StelMainWindow* mainWin;
+	
+	class QTime* qtime;
 };
 
 #endif

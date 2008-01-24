@@ -46,6 +46,8 @@
 #include "InitParser.hpp"
 #include <QTextStream>
 #include <QFile>
+#include "StelMainWindow.hpp"
+#include <QCoreApplication>
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -717,7 +719,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 	{
 		cerr << "ERROR while calling script_shutdown: " << e.what() << endl;
 	}
-	app->terminateApplication();
+	QCoreApplication::quit();
 }
 
 // Set a new landscape skin

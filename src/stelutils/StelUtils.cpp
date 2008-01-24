@@ -73,6 +73,16 @@ string intToString(int i)
 	return QString::number(i).toStdString();
 }
 
+string underscoresToSpaces(char * c)
+{
+	string str = c;
+	for (string::size_type i=0;i<str.length();++i)
+	{
+		if (str[i]=='_') str[i]=' ';
+	}
+	return str;
+}
+
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;

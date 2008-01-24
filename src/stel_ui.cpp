@@ -45,6 +45,8 @@
 #include "Observer.hpp"
 #include "Planet.hpp"
 #include "script_mgr.h"
+#include "StelMainWindow.hpp"
+#include <QCoreApplication>
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -637,7 +639,7 @@ void StelUI::cb(void)
 	}
 	bt_flag_goto->setState(false);
 
-	if (!bt_flag_quit->getState()) app->terminateApplication();
+	if (!bt_flag_quit->getState()) QCoreApplication::quit();
 }
 
 void StelUI::bt_flag_ctrOnMouseInOut(void)
@@ -861,7 +863,7 @@ int StelUI::handleMouseMoves(int x, int y, StelMod mod)
 	if(scripts->is_playing()) return 0;
 
 	// Show cursor
-	StelApp::getInstance().showCursor(true);
+	StelApp::getInstance().getMainWindow()->showCursor(true);
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	if (desktop->onMove(x, y, mod)) return 1;
@@ -881,7 +883,7 @@ int StelUI::handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod m
 	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(true);
 
 	// Show cursor
-	StelApp::getInstance().showCursor(true);
+	StelApp::getInstance().getMainWindow()->showCursor(true);
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	if (desktop->onClic((int)x, (int)y, button, state, mod))
@@ -927,13 +929,13 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 
 		if (key == StelKey_q && (mod & COMPATIBLE_StelMod_CTRL))
 		{
-			app->terminateApplication();
+			QCoreApplication::quit();
 		}
 
 		// ctrl-s saves screenshot
 		if (key == StelKey_s && (mod & COMPATIBLE_StelMod_CTRL))
 		{
-			app->saveScreenShot();
+			app->getMainWindow()->saveScreenShot();
 		}
 
 		// if script is running, only script control keys are accessible
@@ -1379,7 +1381,7 @@ void StelUI::gui_update_widgets(int delta_time)
 		{
 			// hide cursor
 			MouseTimeLeft = 0;
-			StelApp::getInstance().showCursor(false);
+			StelApp::getInstance().getMainWindow()->showCursor(false);
 		}
 	}
 

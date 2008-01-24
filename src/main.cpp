@@ -23,7 +23,11 @@
 #include <QtGui/QMessageBox>
 #include "StelMainWindow.hpp"
 #include "StelApp.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelFileMgr.hpp"
+#include <QDebug>
+#include <QIcon>
+#include <QSettings>
+#include <QDesktopWidget>
 
 // Main stellarium procedure
 int main(int argc, char **argv)
@@ -37,23 +41,31 @@ int main(int argc, char **argv)
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
 	}
 	
-	StelApp* stelApp = new StelApp(argc, argv);
-	
 	StelMainWindow mainWin;
-	GLWidget openGLWin(&mainWin);
-	openGLWin.setObjectName("stellariumOpenGLWidget");
-	mainWin.setCentralWidget(&openGLWin);
-
-	mainWin.show();
-	openGLWin.show();
+	StelApp* stelApp = new StelApp(argc, argv, &mainWin);
+	
+	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
+	QString iconPath;
+	try
+	{
+		iconPath = stelApp->getFileMgr().findFile("data/icon.bmp");
+	}
+	catch (exception& e)
+	{
+		qWarning() << "ERROR when trying to locate icon file: " << e.what();
+	}
+	mainWin.setWindowIcon(QIcon(iconPath));
+	
+	QSettings* settings = stelApp->getSettings();
+	mainWin.resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	if (settings->value("video/fullscreen", true).toBool())
+	{
+		mainWin.showFullScreen();
+		//QDesktopWidget* desktop = QApplication::desktop();
+		//mainWin.resize(desktop->screenGeometry(&mainWin).width(),desktop->screenGeometry(&mainWin).height());
+	}
 	
 	stelApp->init();
-	
-	// Update GL screen size because the last time it was called, the Projector was not yet properly initialized
-	openGLWin.resizeGL(stelApp->getScreenW(), stelApp->getScreenH());
-	openGLWin.timerId = openGLWin.startTimer(10);
-	openGLWin.qtime.start();
-	
 	app.exec();
 	
 	// At this point it is important to still have a valid GL context because the textures are deallocated

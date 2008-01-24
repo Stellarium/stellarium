@@ -35,10 +35,6 @@ public:
 	//! Constructor
 	StelMainWindow();
 	virtual ~StelMainWindow();
-
-	//! Get the StelMainWindow singleton instance.
-	//! @return the StelMainWindow singleton instance
-	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Override events
@@ -62,9 +58,6 @@ public:
 	//! Get the height of the openGL screen
 	int getScreenH() const;
 	
-	//! Terminate the application
-	void terminateApplication(void);
-	
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
 	
@@ -73,9 +66,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
-	//! Initialize openGL screen
-	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
-	
 	//! Save a screen shot.
 	//! The format of the file, and hence the filename extension 
 	//! depends on the architecture and build type.
@@ -86,11 +76,6 @@ public:
 	
 	//! Call this when you want to make the window (not) resizable
 	void setResizable(bool resizable);
-
-private:
-	
-	// The StelApp singleton
-	static StelMainWindow* singleton;
 };
 
 class GLWidget : public QGLWidget
@@ -106,14 +91,13 @@ public:
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent*);
-//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
+	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
 	void thereWasAnEvent();
 
-	QTime qtime;
 	int timerId;
 
 private:
-	int previousTime;
+	double previousTime;
 	double lastEventTimeSec;
 };
 
