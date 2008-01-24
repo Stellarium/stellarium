@@ -278,9 +278,9 @@ void StelApp::init()
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
-	stelObjectMgr->init(conf);
+	stelObjectMgr->init();
 	
-	localeMgr->init(conf);
+	localeMgr->init();
 	skyCultureMgr->init();
 	
 	// Init the solar system first

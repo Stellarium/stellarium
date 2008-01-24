@@ -174,7 +174,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				nmgr->setCircleScale(scale);
 			} 
 		else if(args["star_twinkle_amount"]!="") smgr->setTwinkleAmount(StelUtils::stringToDouble(args["star_twinkle_amount"]));
-		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(args["time_zone"]);
+		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(QString::fromStdString(args["time_zone"]));
 		else if(args["milky_way_intensity"]!="") {
 			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("MilkyWay");
 			mw->setIntensity(StelUtils::stringToDouble(args["milky_way_intensity"]));

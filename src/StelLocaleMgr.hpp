@@ -40,9 +40,7 @@ public:
 	//! - Setting the sky and application languages
 	//! - Setting the time and date formats
 	//! - Setting up the time zone
-	//!
-	//! @param conf The ini parser object holding the settings to be used.
-	void init(const InitParser& conf);
+	void init();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// MESSAGES TRANSLATIONS
@@ -88,7 +86,7 @@ public:
 	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
 	//! Set the time format from a format string.
 	//! @tf value values are the same as the return values for get_time_format_str().
-	void set_time_format_str(const string& tf) {time_format=string_to_s_time_format(tf);}
+	void set_time_format_str(const QString& tf) {time_format=string_to_s_time_format(tf);}
 	//! Get the format string which describes the current date format.
 	//! Valid values:
 	//! - "mmddyyyy"
@@ -98,12 +96,12 @@ public:
 	//!
 	//! These values correspond to the similarly named values in the S_DATE_FORMAT enum.
 	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
-	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
+	void set_date_format_str(const QString& df) {date_format=string_to_s_date_format(df);}
 	
 	//! Set the time zone.
 	//! @param _time_zone the time zone string as parsed from the TZ environment 
 	//! varibale by the tzset function from libc.
-	void setCustomTimezone(string _time_zone) { set_custom_tz_name(_time_zone); }
+	void setCustomTimezone(QString _time_zone) { set_custom_tz_name(_time_zone); }
 
 	//! @enum S_TIME_FORMAT
 	//! The time display format.
@@ -141,9 +139,9 @@ public:
 	//! Get the current time shift at observator time zone with respect to GMT time.
 	float get_GMT_shift(double JD = 0) const;
 	//! Set the timezone by a TZ-style string (see tzset in the libc manual).
-	void set_custom_tz_name(const string& tzname);
+	void set_custom_tz_name(const QString& tzname);
 	//! Get the timezone name (a TZ-style string - see tzset in the libc manual).
-	string get_custom_tz_name(void) const {return custom_tz_name;}
+	QString get_custom_tz_name(void) const {return custom_tz_name;}
 	//! Get the current timezone format mode.
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
 	
@@ -159,15 +157,15 @@ private:
 	S_DATE_FORMAT date_format;
 	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
 	
-	string custom_tz_name;			// Something like "Europe/Paris"
+	QString custom_tz_name;			// Something like "Europe/Paris"
 	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
 	
 	// Convert the time format enum to its associated string and reverse
-	S_TIME_FORMAT string_to_s_time_format(const string&) const;
+	S_TIME_FORMAT string_to_s_time_format(const QString&) const;
 	string s_time_format_to_string(S_TIME_FORMAT) const;
 	
 	// Convert the date format enum to its associated string and reverse
-	S_DATE_FORMAT string_to_s_date_format(const string& df) const;
+	S_DATE_FORMAT string_to_s_date_format(const QString& df) const;
 	string s_date_format_to_string(S_DATE_FORMAT df) const;
 };
 
