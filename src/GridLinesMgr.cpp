@@ -18,6 +18,7 @@
  */
  
 #include <set>
+#include <QSettings>
 
 #include "GridLinesMgr.hpp"
 
@@ -615,13 +616,16 @@ double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void GridLinesMgr::init(const InitParser& conf)
+void GridLinesMgr::init()
 {
-	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
-	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
-	setFlagEquatorLine(conf.get_boolean("viewing:flag_equator_line"));
-	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
-	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	setFlagAzimutalGrid(conf->value("viewing/flag_azimutal_grid").toBool());
+	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
+	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
+	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
+	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 }	
 	
 void GridLinesMgr::update(double deltaTime)
