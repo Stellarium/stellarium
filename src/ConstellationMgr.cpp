@@ -24,6 +24,7 @@
 #include <vector>
 #include <QDebug>
 #include <QFile>
+#include <QSettings>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -74,18 +75,22 @@ ConstellationMgr::~ConstellationMgr()
 	allBoundarySegments.clear();
 }
 
-void ConstellationMgr::init(const InitParser& conf)
+void ConstellationMgr::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	lastLoadedSkyCulture = "dummy";
 	updateSkyCulture();
-	fontSize = conf.get_double("viewing","constellation_font_size",16.);
-	setFlagLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
-	setFlagNames(		conf.get_boolean("viewing:flag_constellation_name"));
-	setFlagBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
-	setArtIntensity(	conf.get_double("viewing","constellation_art_intensity", 0.5));
-	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
-	setFlagArt(			conf.get_boolean("viewing:flag_constellation_art"));
-	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
+	fontSize = conf->value("viewing/constellation_font_size",16.).toDouble();
+	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
+	setFlagNames(conf->value("viewing/flag_constellation_name").toBool());
+	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
+	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5).toDouble());
+	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.).toDouble());
+	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
+	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
+				conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
 
