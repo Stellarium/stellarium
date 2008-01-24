@@ -29,6 +29,7 @@
 #include "InitParser.hpp"
 #include "StelCore.hpp"
 #include <QDebug>
+#include <QSettings>
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
@@ -43,11 +44,14 @@ MilkyWay::~MilkyWay()
 	fader = NULL;
 }
 
-void MilkyWay::init(const InitParser& conf)
+void MilkyWay::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	setTexture("milkyway.png");
-	setFlagShow(conf.get_boolean("astro:flag_milky_way"));
-	setIntensity(conf.get_double("astro","milky_way_intensity",1.));
+	setFlagShow(conf->value("astro/flag_milky_way").toBool());
+	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
 }
 
 void MilkyWay::setTexture(const QString& texFile)

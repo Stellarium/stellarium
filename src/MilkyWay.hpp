@@ -39,11 +39,9 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the class.  Here we load the texture for the Milky Way and 
-	//! get the display settings from the ini parser object, namely the flag which
+	//! get the display settings from application settings, namely the flag which
 	//! determines if the Milky Way is displayed or not, and the intensity setting.
-	//! @param conf ini parser object which contains the milky way settings.
-	//! @param lb the LoadingBar object used to display loading progress.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 
 	//! Draw the Milky Way.
 	virtual double draw(StelCore* core);
