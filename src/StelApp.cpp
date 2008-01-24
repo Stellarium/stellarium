@@ -302,7 +302,7 @@ void StelApp::init()
 	
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
-	asterisms->init(conf);
+	asterisms->init();
 	getModuleMgr().registerModule(asterisms);
 	
 	// Landscape, atmosphere & cardinal points section

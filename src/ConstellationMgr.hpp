@@ -51,9 +51,7 @@ public:
 	//! Initialize the ConstellationMgr.
 	//! Reads from the configuration parser object and updates the loading bar
 	//! as constellation objects are loaded for the required sky culture.
-	//! @param conf the ini file parser object
-	//! @param lb a reference to the LoadingBar object
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Draw constellation lines, art, names and boundaries.
 	virtual double draw(StelCore* core); 
