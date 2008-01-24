@@ -41,6 +41,7 @@
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
+#include "StelMainWindow.hpp"
 #include <QFile>
 #include <QDebug>
 
@@ -600,14 +601,11 @@ void StelUI::load_cities(const string& planetEnglishName)
 		return;
 	}
 
-	float time;
 
 	char linetmp[200];
 	char cname[50],cstate[50],ccountry[50],clat[20],clon[20],ctime[20];
 	int showatzoom;
 	int alt;
-	char tmpstr[2000];
-	int total = 0;
 
 	cout << "Loading Cities data for planet " << planetEnglishName << "...";
 	FILE *fic = fopen(QFile::encodeName(fileName).constData(), "r");
@@ -617,59 +615,47 @@ void StelUI::load_cities(const string& planetEnglishName)
 		return;
 	}
 
-	// determine total number to be loaded for percent complete display
-	while (fgets(tmpstr, 2000, fic)) {++total;}
-	rewind(fic);
-
 	int line = 0;
-	while (!feof(fic))
+	int skipped = 0;
+	while ( fgets(linetmp, 200, fic) )
 	{
-		fgets(linetmp, 100, fic);
-		if (linetmp[0] != '#')
+		line++;
+		if (linetmp[0] == '#')
+		{
+			skipped++;
+			continue;
+		}
+		else
 		{
 			if (sscanf(linetmp, "%s %s %s %s %s %d %s %d\n", cname, cstate, ccountry, clat, 
 				clon, &alt, ctime, &showatzoom) != 8)
 			{
-				if (feof(fic))
-				{
-					// Empty city file
-					fclose(fic);
-					return;		
-				}
-				cerr << "ERROR while loading city data in line " << line << endl;
+				cerr << endl << "ERROR while loading city data in line " << line << endl;
 				assert(0);
+				skipped++;
+				continue;
 			}
-			
-			string name, state, country;
-			name = cname;
-		    for (string::size_type i=0;i<name.length();++i)
+
+			// we use 'x' as 'todo' marker
+			float time = 0;
+			if ( (ctime[0] != 'x') && (!sscanf(ctime,"%f",&time)))
 			{
-				if (name[i]=='_') name[i]=' ';
-			}	
-			state = cstate;
-		    for (string::size_type i=0;i<state.length();++i)
-			{
-				if (state[i]=='_') state[i]=' ';
+				cerr << endl << "ERROR while parsing timezone in line " << line << endl;
+				assert(0);
+				skipped++;
+				continue;
 			}
-			country = ccountry;
-		    for (string::size_type i=0;i<country.length();++i)
-			{
-				if (country[i]=='_') country[i]=' ';
-			}	
-			if (ctime[0] == 'x')
-				time = 0;
-			else 
-				sscanf(ctime,"%f",&time);
-			earth_map->addCity(name, 
-				state, 
-				country, 
+
+			earth_map->addCity(
+				StelUtils::underscoresToSpaces(cname),
+				StelUtils::underscoresToSpaces(cstate),
+				StelUtils::underscoresToSpaces(ccountry),
 				StelUtils::get_dec_angle(clon), 
 				StelUtils::get_dec_angle(clat), time, showatzoom, alt);
 		}
-		line++;
 	}
 	fclose(fic);
-	cout << "(" << line << " cities loaded)" << endl;
+	cout << "Done. (lines parsed: " << line << ", lines skipped: " << skipped << ")" << endl;
 }
 
 // Create Search window widgets
@@ -985,7 +971,7 @@ void StelUI::setVideoOption(void)
 		conf.set_int("video:screen_h", h);
 	}
 	
-	conf.set_boolean("video:fullscreen", app->getFullScreen());
+	conf.set_boolean("video:fullscreen", app->getMainWindow()->getFullScreen());
 
 	conf.save(app->getConfigFilePath());
 }

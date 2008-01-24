@@ -169,6 +169,11 @@ namespace StelUtils {
 	//! @return the matching string
 	string doubleToString(double dbl);
 	
+	//! Replace all "_" with " " 
+	//! @param c the input character array
+	//! @return a string with underscores replaced
+	string underscoresToSpaces(char * c); 
+
 	//! Extract the long int value from a string.
 	//! @param str the input string
 	//! @return the matching long int value

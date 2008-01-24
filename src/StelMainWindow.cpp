@@ -39,35 +39,15 @@ using namespace std;
 #include <QTime>
 #include <QDateTime>
 
-// Initialize static variables
-StelMainWindow* StelMainWindow::singleton = NULL;
-
 StelMainWindow::StelMainWindow()
 {
-	// Can't create 2 StelApp instances
-	assert(!singleton);
-	singleton = this;
-	
 	setWindowTitle(StelApp::getApplicationName());
-	this->QObject::setObjectName("stellariumMainWin");
+	setObjectName("stellariumMainWin");
 	setMinimumSize(400,400);
 }
 
 StelMainWindow::~StelMainWindow()
 {
-}
-
-void StelMainWindow::initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile)
-{
-	setWindowIcon(QIcon(iconFile));
-	resize(w, h);
-	if (fullScreen)
-	{
-		showFullScreen();
-		QDesktopWidget* desktop = QApplication::desktop();
-		resize(desktop->screenGeometry(this).width(),desktop->screenGeometry(this).height());
-	}
-	
 }
 
 // Get the width of the openGL screen
@@ -82,12 +62,6 @@ int StelMainWindow::getScreenH() const
 	return findChild<GLWidget*>("stellariumOpenGLWidget")->height();
 }
 
-// Terminate the application
-void StelMainWindow::terminateApplication(void)
-{
-	QCoreApplication::quit();
-}
-
 // Set mouse cursor display
 void StelMainWindow::showCursor(bool b)
 {
@@ -100,11 +74,6 @@ void StelMainWindow::swapGLBuffers()
 	findChild<GLWidget*>("stellariumOpenGLWidget")->swapBuffers();
 }
 
-//! Return the time since when stellarium is running in second
-double StelMainWindow::getTotalRunTime() const
-{
-	return (double)(findChild<GLWidget*>("stellariumOpenGLWidget")->qtime.elapsed())/1000;
-}
 
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
@@ -188,8 +157,9 @@ bool StelMainWindow::getFullScreen() const
 
 GLWidget::GLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), parent)
 {
-	lastEventTimeSec = (double)(qtime.elapsed()/1000);
-	previousTime = qtime.elapsed();
+	setObjectName("stellariumOpenGLWidget");
+	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
+	previousTime = lastEventTimeSec;
 	setFocusPolicy(Qt::ClickFocus);
 	setMouseTracking(true);
 	// make openGL context current
@@ -203,7 +173,6 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
-	//cerr << "GLWidget::initializeGL()" << endl;
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	swapBuffers();
@@ -218,13 +187,14 @@ void GLWidget::resizeGL(int w, int h)
 
 void GLWidget::paintGL()
 {
-	int dt = qtime.elapsed()-previousTime;
-	previousTime = qtime.elapsed();
+	const double now = StelApp::getInstance().getTotalRunTime();
+	double dt = now-previousTime;
+	previousTime = now;
 	
 	if (dt<0)	// This fix the star scale bug!!
 		return;
 	StelApp::getInstance().update(dt);
-	StelApp::getInstance().draw(dt);
+	StelApp::getInstance().draw();
 	swapBuffers();
 }
 
@@ -460,7 +430,7 @@ void StelMainWindow::keyPressEvent(QKeyEvent* event)
 {
 	if ((Qt::Key)event->key()==Qt::Key_F1)
 	{
-		StelApp::getInstance().toggleFullScreen();
+		StelApp::getInstance().getMainWindow()->toggleFullScreen();
 	}
 	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
 	// Refresh screen ASAP

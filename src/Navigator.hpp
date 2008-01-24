@@ -61,7 +61,7 @@ public:
 
 	void init(const InitParser& conf);
 
-	void updateTime(int delta_time);
+	void updateTime(double deltaTime);
 	void updateTransformMatrices(void);
 	
 	//! Set current mount type
