@@ -311,12 +311,12 @@ void StelApp::init()
 	getModuleMgr().registerModule(landscape);
 
 	GridLinesMgr* gridLines = new GridLinesMgr();
-	gridLines->init(conf);
+	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
 	
 	// Meteors
 	MeteorMgr* meteors = new MeteorMgr(10, 60);
-	meteors->init(conf);
+	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
 // ugly fix by Johannes: call skyCultureMgr->init twice so that
