@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <QDebug>
 #include <QFile>
+#include <QSettings>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
@@ -78,7 +79,7 @@ double NebulaMgr::getCallOrder(StelModuleActionName actionName) const
 }
 
 // read from stream
-void NebulaMgr::init(const InitParser& conf)
+void NebulaMgr::init()
 {
 	// TODO: mechanism to specify which sets get loaded at start time.
 	// candidate methods:
@@ -89,6 +90,9 @@ void NebulaMgr::init(const InitParser& conf)
 	// For now (0.9.0), just load the default set
 	loadNebulaSet("default");
 
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	double fontSize = 12;
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
@@ -98,12 +102,12 @@ void NebulaMgr::init(const InitParser& conf)
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
 	setFlagShowTexture(true);
-	setFlagShow(conf.get_boolean("astro:flag_nebula"));
-	setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
-	setMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
-	setCircleScale(conf.get_double("astro", "nebula_scale",1.0f));
-	setFlagDisplayNoTexture(conf.get_boolean("astro", "flag_nebula_display_no_texture", false));
-	setFlagBright(conf.get_boolean("astro:flag_bright_nebulae"));
+	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
+	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
+	setMaxMagHints(conf->value("astro/max_mag_nebula_name", 99).toDouble());
+	setCircleScale(conf->value("astro/nebula_scale",1.0f).toDouble());
+	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
+	setFlagBright(conf->value("astro/flag_bright_nebulae",false).toBool());
 	
 	updateI18n();
 	
