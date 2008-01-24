@@ -18,6 +18,7 @@
  */
 
 #include <QDebug>
+#include <QSettings>
 
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -249,19 +250,22 @@ double LandscapeMgr::draw(StelCore* core)
 	return 0;
 }
 
-void LandscapeMgr::init(const InitParser& conf)
+void LandscapeMgr::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();
-	setLandscapeByID(conf.get_str("init_location:landscape_name").c_str());
-	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
-	setFlagFog(conf.get_boolean("landscape:flag_fog"));
-	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
-	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
-	setAtmosphereLightPollutionLuminance(conf.get_double("viewing","light_pollution_luminance",0.0));
+	setLandscapeByID(conf->value("init_location/landscape_name").toString());
+	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
+	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
+	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
+	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",1.5).toDouble());
+	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toDouble());
 	cardinals_points = new Cardinals();
-	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
-	setFlagLandscapeSetsLocation(conf.get_boolean("landscape:flag_landscape_sets_location"));
+	cardinals_points->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
+	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 }
 
 void LandscapeMgr::setColorScheme(const InitParser& conf, const QString& section)
