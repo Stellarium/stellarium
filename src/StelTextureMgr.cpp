@@ -38,6 +38,7 @@ extern "C" {
 #include <QFile>
 #include <QDebug>
 #include <QThread>
+#include <QSettings>
 				 				 
 using namespace std;
 
@@ -75,10 +76,13 @@ StelTextureMgr::~StelTextureMgr()
  Initialize some variable from the openGL context.
  Must be called after the creation of the openGL context.
 *************************************************************************/
-void StelTextureMgr::init(const InitParser& conf)
+void StelTextureMgr::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
-	isNoPowerOfTwoAllowed = conf.get_boolean("video","non_power_of_two_textures", true);
+	isNoPowerOfTwoAllowed = conf->value("video/non_power_of_two_textures", true).toBool();
 	isNoPowerOfTwoAllowed = isNoPowerOfTwoAllowed && (GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0);
 	
 	// Check vendor and renderer
