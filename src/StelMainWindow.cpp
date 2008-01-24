@@ -165,6 +165,8 @@ GLWidget::GLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), pare
 	// make openGL context current
 	makeCurrent();
 	setAutoBufferSwap(false);
+	mainTimer = new QTimer(this);
+	connect(mainTimer, SIGNAL(timeout()), this, SLOT(recompute()));
 }
 
 GLWidget::~GLWidget()
@@ -198,21 +200,19 @@ void GLWidget::paintGL()
 	swapBuffers();
 }
 
-void GLWidget::timerEvent(QTimerEvent *)
+void GLWidget::recompute()
 {
 	update();
-	killTimer(timerId);
 	double duration = 1./StelApp::getInstance().minfps;
 	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
-	timerId = startTimer((int)(duration*1000));
+	mainTimer->start((int)(duration*1000));
 }
 
 void GLWidget::thereWasAnEvent()
 {
 	// Refresh screen ASAP
-	killTimer(timerId);
-	timerId = startTimer(0);
+	mainTimer->start(0);
 	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
 }
 

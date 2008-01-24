@@ -80,13 +80,13 @@ public:
 
 class GLWidget : public QGLWidget
 {
+	Q_OBJECT;
 public:
 	GLWidget(QWidget *parent);
 	~GLWidget();
 	void initializeGL();
 	void resizeGL(int w, int h);
 	void paintGL();
-	void timerEvent(QTimerEvent*);
 	void mousePressEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
@@ -94,8 +94,12 @@ public:
 	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
 	void thereWasAnEvent();
 
-	int timerId;
-
+	class QTimer* mainTimer;
+	
+private slots:
+	//! Called when screen needs to be refreshed
+	void recompute();
+		
 private:
 	double previousTime;
 	double lastEventTimeSec;
