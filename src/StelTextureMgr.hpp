@@ -79,7 +79,7 @@ public:
 	
 	//! Initialize some variable from the openGL contex.
 	//! Must be called after the creation of the GLContext.
-	void init(const InitParser& conf);
+	void init();
 	
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise

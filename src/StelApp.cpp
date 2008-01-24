@@ -258,7 +258,7 @@ void StelApp::init()
 	// qWarning() << confQt.allKeys();
 
 	// Initialize AFTER creation of openGL context
-	textureMgr->init(conf);
+	textureMgr->init();
 	
 	maxfps = conf.get_double ("video","maximum_fps",10000);
 	minfps = conf.get_double ("video","minimum_fps",10000);
