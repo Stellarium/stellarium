@@ -18,6 +18,7 @@
  */
 
 #include <functional>
+#include <QSettings>
 
 #include "Projector.hpp"
 #include "Navigator.hpp"
@@ -54,9 +55,9 @@ MeteorMgr::~MeteorMgr()
 	}
 }
 
-void MeteorMgr::init(const InitParser& conf)
+void MeteorMgr::init()
 {
-	setZHR(conf.get_int("astro", "meteor_rate", 10));
+	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
 }
 
 /*************************************************************************

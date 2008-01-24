@@ -44,12 +44,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the GridLinesMgr. This process checks the values in the
-	//! ini parser object which is passed, and according to the settings there
+	//! application settings, and according to the settings there
 	//! sets the visibility of the Equatorial Grid, Azimuthal Grid, Meridian Line,
 	//! Equator Line and Ecliptic Line.
-	//! @param conf the ini parser object which contains the grid settings.
-	//! @param lb the LoadingBar object which is used to draw loading progress.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Get the module ID, returns, "gridlines".
 	virtual QString getModuleID() const {return "GridLinesMgr";}

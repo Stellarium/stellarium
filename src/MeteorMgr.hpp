@@ -42,9 +42,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the MeteorMgr object.
-	//! Takes the meteor rate from the ini parser object.
-	//! @param conf the ini parser object.
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	
 	//! Draw meteors.
 	virtual double draw(StelCore* core);
