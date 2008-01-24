@@ -55,11 +55,11 @@ StelCore::~StelCore()
 /*************************************************************************
  Init projection temp TODO remove
 *************************************************************************/
-void StelCore::initProj(const InitParser& conf)
+void StelCore::initProj()
 {
 	// Projector
 	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
-	projection->init(conf);
+	projection->init();
 }
 
 
