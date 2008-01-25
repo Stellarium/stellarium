@@ -296,9 +296,18 @@ void StelGLWidget::wheelEvent(QWheelEvent* event)
 		mod = StelMod_SHIFT;
 	if (event->modifiers() == Qt::ControlModifier)
 		mod = COMPATIBLE_StelMod_CTRL;
-
-	StelApp::getInstance().handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONDOWN,  mod);
-	StelApp::getInstance().handleClick(event->x(), event->y(), button, Stel_MOUSEBUTTONUP,  mod);
+	
+	int x = event->x();
+	int y = event->y();
+	
+	if (ui->handleClick(x, y, button, Stel_MOUSEBUTTONDOWN, qtModToStelMod(event->modifiers())))
+		return;
+	
+	y = height() - 1 - y;
+	distorter->distortXY(x,y);
+	
+	StelApp::getInstance().handleClick(x, y, button, Stel_MOUSEBUTTONDOWN,  mod);
+	StelApp::getInstance().handleClick(x, y, button, Stel_MOUSEBUTTONUP,  mod);
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
