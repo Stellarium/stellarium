@@ -258,6 +258,14 @@ void StelUI::update(double deltaTime)
 	tui_update_widgets();
 }
 
+void StelUI::selectedObjectChangeCallBack(StelModuleSelectAction action)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	{
+		updateInfoSelectString();
+	}
+}
+
 void StelUI::resize()
 {
 	Component::initScissor(StelGLWidget::getInstance().width(), StelGLWidget::getInstance().height());

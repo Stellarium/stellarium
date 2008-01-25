@@ -23,7 +23,6 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "stel_ui.h"
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
@@ -47,10 +46,6 @@
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "QtScriptMgr.hpp"
-
-#include "stel_command_interface.h"
-#include "image_mgr.h"
-#include "script_mgr.h"
 
 #include <QStringList>
 #include <QString>
@@ -291,19 +286,6 @@ void StelApp::init()
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 	
-	// Those 3 are going to disapear
-	StelCommandInterface* commander = new StelCommandInterface(getCore(), this);
-	getModuleMgr().registerModule(commander);
-	ScriptMgr* scripts = new ScriptMgr(commander);
-	scripts->init();
-	// play startup script, if available
-	scripts->play_startup_script();
-	getModuleMgr().registerModule(scripts);
-	scripts->set_removable_media_path(confSettings->value("files/removable_media_path", "").toString());
-	ImageMgr* script_images = new ImageMgr();
-	script_images->init();
-	getModuleMgr().registerModule(script_images);	
-	
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
 	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
@@ -321,8 +303,7 @@ void StelApp::init()
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
 	
-	updateSkyLanguage();
-	updateAppLanguage();
+	updateI18n();
 	
 	//QtScriptMgr scriptMgr;
 	//scriptMgr.test();
@@ -525,11 +506,8 @@ double StelApp::draw()
      if (!initialized)
         return 0.;
         
-    // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	// (because ui can draw outside the main viewport)
+    // Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	
 
 	core->preDraw();
 
@@ -543,17 +521,7 @@ double StelApp::draw()
 			squaredDistance = d;
 	}
 
-	stelObjectMgr->draw(core);
-
 	core->postDraw();
-
-
-	// Test code
-// 	ConvexPolygon poly = core->getProjection()->getViewportConvexPolygon(-100, -100);
-// 	double area = poly.getArea() * 3282.8063500117441;
-// 	glColor3f(1,1,1);
-// 	core->getProjection()->drawPolygon(poly);
-	// qWarning() << area;
 	
 	return squaredDistance;
 }
@@ -609,8 +577,6 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 			if (getStelObjectMgr().getWasSelected())
 			{
 				((MovementMgr*)moduleMgr->getModule("MovementMgr"))->setFlagTracking(false);
-				StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-				ui->updateInfoSelectString();
 			}
 		}
 	}
@@ -722,18 +688,8 @@ void StelApp::setVisionModeNight(bool b)
 	flagNightVision=b;
 }
 
-// Update translations and font everywhere in the program
-void StelApp::updateAppLanguage()
-{
-	// update translations and font in tui
-	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-	if (ui)
-		ui->localizeTui();
-}
-
-
 // Update translations and font for sky everywhere in the program
-void StelApp::updateSkyLanguage()
+void StelApp::updateI18n()
 {
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())

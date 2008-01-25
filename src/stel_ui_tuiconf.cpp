@@ -363,12 +363,11 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
 	// Now add in translated labels
-	localizeTui();
-
+	updateI18n();
 }
 
 // Update fonts, labels and lists for a new app locale
-void StelUI::localizeTui(void)
+void StelUI::updateI18n()
 {
 	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
 	

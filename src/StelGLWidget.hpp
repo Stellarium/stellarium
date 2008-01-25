@@ -21,8 +21,6 @@
 #define STELGLWIDGET_HPP_
 
 #include <QTime>
-#include "GLee.h"
-#include "fixx11h.h"
 #include <cassert>
 #include <QGLWidget>
 
