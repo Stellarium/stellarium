@@ -35,7 +35,7 @@
 // Initialize static variables
 StelGLWidget* StelGLWidget::singleton = NULL;
 
-StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), parent)
+StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), parent), ui(NULL)
 {
 	setObjectName("StelGLWidget");
 	
@@ -104,7 +104,8 @@ void StelGLWidget::paintGL()
 	StelApp::getInstance().draw();
 	distorter->distort();
 	// Draw the Graphical ui
-	ui->drawGui();
+	if (ui)
+		ui->drawGui();
 	
 	swapBuffers();
 }
