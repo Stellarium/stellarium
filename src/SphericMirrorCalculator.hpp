@@ -23,11 +23,11 @@
 
 #include "vecmath.h"
 
-class InitParser;
+class QSettings;
 
 class SphericMirrorCalculator {
 public:
-  SphericMirrorCalculator(const InitParser &conf);
+  SphericMirrorCalculator(const QSettings& conf);
   double getHorzZoomFactor(void) const {return horz_zoom_factor;}
   double getVertZoomFactor(void) const {return vert_zoom_factor;}
   bool transform(const Vec3d &v,double &x,double &y) const;

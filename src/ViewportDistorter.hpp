@@ -36,8 +36,7 @@ class ViewportDistorter {
 public:
   static ViewportDistorter *create(const string &type,
                                    int width,int height,
-                                   Projector *prj,
-                                   const InitParser &conf);
+                                   Projector *prj);
     // StelCore is needed for getProjectionType and setMaxFov
   virtual ~ViewportDistorter(void) {}
   virtual string getType(void) const = 0;

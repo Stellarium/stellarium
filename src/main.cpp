@@ -28,6 +28,7 @@
 #include <QIcon>
 #include <QSettings>
 #include <QDesktopWidget>
+#include <QGLWidget>
 
 // Main stellarium procedure
 int main(int argc, char **argv)

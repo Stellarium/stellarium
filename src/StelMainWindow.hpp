@@ -24,7 +24,6 @@
 #include <QTime>
 #include "GLee.h"
 #include "fixx11h.h"
-#include <QGLWidget>
 #include <cassert>
 
 //! Implementation of StelApp based on a Qt4 main window.
@@ -36,27 +35,9 @@ public:
 	StelMainWindow(int argc, char** argv);
 	virtual ~StelMainWindow();
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Override events
-	virtual void keyPressEvent(QKeyEvent*);
-	virtual void keyReleaseEvent(QKeyEvent*);
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods from StelApp
-	//! Return the time since when stellarium is running in second
-	double getTotalRunTime() const;
-	
-	//! Set mouse cursor display
-	void showCursor(bool b);
-	
-	//! Swap GL buffer, should be called only for special condition
-	void swapGLBuffers();
-	
-	//! Get the width of the openGL screen
-	int getScreenW() const;
-	
-	//! Get the height of the openGL screen
-	int getScreenH() const;
+	//! Get the StelMainWindow singleton instance.
+	//! @return the StelMainWindow singleton instance
+	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
@@ -74,35 +55,9 @@ public:
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 	
-	//! Call this when you want to make the window (not) resizable
-	void setResizable(bool resizable);
-};
-
-class GLWidget : public QGLWidget
-{
-	Q_OBJECT;
-public:
-	GLWidget(QWidget *parent);
-	~GLWidget();
-	void initializeGL();
-	void resizeGL(int w, int h);
-	void paintGL();
-	void mousePressEvent(QMouseEvent*);
-	void mouseReleaseEvent(QMouseEvent*);
-	void mouseMoveEvent(QMouseEvent*);
-	void wheelEvent(QWheelEvent*);
-	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
-	void thereWasAnEvent();
-
-	class QTimer* mainTimer;
-	
-private slots:
-	//! Called when screen needs to be refreshed
-	void recompute();
-		
 private:
-	double previousTime;
-	double lastEventTimeSec;
+	// The StelMainWindow singleton
+	static StelMainWindow* singleton;
 };
 
 #endif /*STELMAINWINDOW_HPP_*/

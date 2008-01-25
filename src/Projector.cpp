@@ -69,8 +69,8 @@ void Projector::init()
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	const bool maximized = (tmpstr=="maximized");
-	const int screen_w = StelApp::getInstance().getScreenW();
-	const int screen_h = StelApp::getInstance().getScreenH();
+	const int screen_w = conf->value("video/screen_w", 800).toInt();
+	const int screen_h = conf->value("video/screen_h", 600).toInt();
 	const int screen_min_wh = MY_MIN(screen_w,screen_h);
 	const int viewport_width = conf->value("projection/viewport_width", maximized ? screen_w : screen_min_wh).toInt();
 	const int viewport_height = conf->value("projection/viewport_height", maximized ? screen_h : screen_min_wh).toInt();
