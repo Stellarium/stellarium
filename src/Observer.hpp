@@ -28,6 +28,7 @@ class InitParser;
 class SolarSystem;
 class Planet;
 class ArtificialPlanet;
+class QSettings;
 
 class Observer : public QObject
 {
@@ -42,7 +43,7 @@ public:
 	const Planet *getHomePlanet(void) const;
 	
 	void setConf(InitParser& conf, const std::string& section) const;
-	void load(const InitParser& conf, const std::string& section);
+	void load(QSettings* conf, const QString& section);
 	
 	//! TODO: Move to MovementMgr
 	//! @param duration in ms
