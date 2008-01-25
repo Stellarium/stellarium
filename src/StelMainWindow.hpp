@@ -21,12 +21,9 @@
 #define STELMAINWINDOW_HPP_
 
 #include <QMainWindow>
-#include <QTime>
-#include "GLee.h"
-#include "fixx11h.h"
 #include <cassert>
 
-//! Implementation of StelApp based on a Qt4 main window.
+//! The main Stellarium window. It creates an instance of StelGLWidget and starts it
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
 class StelMainWindow : public QMainWindow
 {

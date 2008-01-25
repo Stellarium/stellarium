@@ -27,10 +27,13 @@
 #include "StelGLWidget.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelMainWindow.hpp"
-#include <QtGui/QImage>
 #include <QtOpenGL>
-#include "stel_ui.h"
 #include "StelModuleMgr.hpp"
+
+#include "stel_ui.h"
+#include "stel_command_interface.h"
+#include "image_mgr.h"
+#include "script_mgr.h"
 
 // Initialize static variables
 StelGLWidget* StelGLWidget::singleton = NULL;
@@ -67,9 +70,22 @@ StelGLWidget::~StelGLWidget()
 void StelGLWidget::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
+	
+	// Everything below is going to disapear
+	StelCommandInterface* commander = new StelCommandInterface(StelApp::getInstance().getCore(), &StelApp::getInstance());
+	StelApp::getInstance().getModuleMgr().registerModule(commander);
+	
+	ScriptMgr* scripts = new ScriptMgr(commander);
+	scripts->init();
+	StelApp::getInstance().getModuleMgr().registerModule(scripts);
+		
 	ui = new StelUI(StelApp::getInstance().getCore(), &StelApp::getInstance());
 	ui->init();
 	StelApp::getInstance().getModuleMgr().registerModule(ui, true);
+	
+	ImageMgr* script_images = new ImageMgr();
+	script_images->init();
+	StelApp::getInstance().getModuleMgr().registerModule(script_images);
 }
 
 void StelGLWidget::initializeGL()
