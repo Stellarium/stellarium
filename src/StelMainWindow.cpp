@@ -82,7 +82,7 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	// Show the window during loading for the loading bar
 	show();
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	openGLWin->initializeGL();
+	//openGLWin->initializeGL();
 	
 	stelApp->init();
 	openGLWin->init();
