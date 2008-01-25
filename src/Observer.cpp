@@ -32,6 +32,8 @@
 
 #include <cassert>
 #include <QDebug>
+#include <QSettings>
+#include <QStringList>
 
 class ArtificialPlanet : public Planet {
 public:
@@ -206,36 +208,42 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const {
 
 void Observer::load(const QString& file, const QString& section)
 {
-	InitParser conf;
-	conf.load(file);
-	if (!conf.find_entry(section.toStdString()))
+	QSettings conf(file, QSettings::IniFormat);
+	if (conf.status() != QSettings::NoError)
+	{
+		qDebug() << "ERROR parsing ini file " << file;
+		assert(0);
+	}
+
+	if (!conf.childGroups().contains(section))
 	{
 		qWarning() << "ERROR : Can't find observator section " << section << " in file " << file;
 	}
-	load(conf, section.toStdString());
+	load(&conf, section);
 }
 
-void Observer::load(const InitParser& conf, const string& section)
+void Observer::load(QSettings* conf, const QString& section)
 {
-	locationName = q_(conf.get_str(section, "name").c_str());
+	assert(conf);
+	locationName = conf->value(section + "/name").toString();
 
 	for (int i=0;i<locationName.size();++i)
 	{
 		if (locationName[i]=='_') locationName[i]=' ';
 	}
 
-    if (!setHomePlanet(conf.get_str(section, "home_planet", "Earth").c_str())) {
-      planet = ssystem.getEarth();
-    }
+	if (!setHomePlanet(conf->value(section+"/home_planet", "Earth").toString())) {
+		planet = ssystem.getEarth();
+	}
     
 	cout << "Loading location: \"" << qPrintable(locationName) <<"\", on " << planet->getEnglishName() << endl;
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
 //           planet->getEnglishName().c_str());
-	latitude  = StelUtils::get_dec_angle(conf.get_str(section, "latitude"));
-	longitude = StelUtils::get_dec_angle(conf.get_str(section, "longitude"));
-	altitude = conf.get_int(section, "altitude");
+	latitude  = StelUtils::get_dec_angle(conf->value(section+"/latitude").toString().toStdString());
+	longitude = StelUtils::get_dec_angle(conf->value(section+"/longitude").toString().toStdString());
+	altitude = conf->value(section+"/altitude",0).toInt();
 }
 
 void Observer::save(const QString& file, const QString& section) const

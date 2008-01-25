@@ -73,7 +73,7 @@ void StelCore::init(const InitParser& conf)
 	// Observer
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	observatory = new Observer(*solsystem);
-	observatory->load(conf, "init_location");
+	observatory->load(StelApp::getInstance().getSettings(), "init_location");
 
 	// Navigator
 	navigation = new Navigator(observatory);
