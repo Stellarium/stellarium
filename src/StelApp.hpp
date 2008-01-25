@@ -29,7 +29,6 @@
 
 // Predeclaration of some classes
 class StelCore;
-class ViewportDistorter;
 class SkyLocalizer;
 class StelTextureMgr;
 class StelObjectMgr;
@@ -117,11 +116,8 @@ public:
 	//! @return the main LoadingBar instance of the program.
 	LoadingBar* getLoadingBar() {return loadingBar;}
 	
-	//! Update translations and font everywhere in the program.
-	void updateAppLanguage();
-	
-	//! Update translations and font for sky everywhere in the program.
-	void updateSkyLanguage();	
+	//! Update translations, font for GUI and sky everywhere in the program.
+	void updateI18n();	
 	
 	//! Update and reload sky culture informations everywhere in the program.
 	void updateSkyCulture();	

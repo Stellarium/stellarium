@@ -19,26 +19,18 @@
 
 #include <config.h>
 
-#include <iostream>
+#include "GLee.h"
+#include "fixx11h.h"
+
 #include "StelMainWindow.hpp"
 #include "StelGLWidget.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
-#include "InitParser.hpp"
-#include "fixx11h.h"
-
-using namespace std;
-
-#include <QtGui/QImage>
-#include <QtOpenGL>
-#include <QStringList>
+#include <QIcon>
+#include <QSettings>
 #include <QCoreApplication>
-#include <QRegExp>
-#include <QDate>
-#include <QTime>
-#include <QDateTime>
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
@@ -86,6 +78,7 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	
 	stelApp->init();
 	openGLWin->init();
+
 }
 
 StelMainWindow::~StelMainWindow()

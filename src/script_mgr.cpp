@@ -58,6 +58,9 @@ void ScriptMgr::init()
 
 	set_allow_ui(conf->value("scripts/flag_script_allow_ui",false).toBool());
 	scripts_can_write_files = conf->value("scripts/scripting_allow_write_files", false).toBool();
+	// play startup script, if available
+	play_startup_script();
+	set_removable_media_path(conf->value("files/removable_media_path", "").toString());
 }
 
 // path is used for loading script assets 

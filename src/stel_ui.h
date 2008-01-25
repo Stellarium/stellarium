@@ -72,9 +72,11 @@ public:
 	// Handle key press and release
 	int handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
 
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=REPLACE_SELECTION);
+	
 	// Text UI
 	void init_tui(void);
-	void localizeTui(void);
+	void updateI18n();
 	void draw_tui(void);		// Display the tui
 	int handle_keys_tui(Uint16 key, Uint8 state);
 	int handle_keysGUI(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);

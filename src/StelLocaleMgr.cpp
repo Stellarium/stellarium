@@ -81,8 +81,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 	// Update the translator with new locale name
 	Translator::globalTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
 	cout << "Application language is " << qPrintable(Translator::globalTranslator.getTrueLocaleName()) << endl;
-
-	StelApp::getInstance().updateAppLanguage();
+	StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
@@ -93,7 +92,7 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
 	cout << "Sky language is " << qPrintable(skyTranslator.getTrueLocaleName()) << endl;
-	StelApp::getInstance().updateSkyLanguage();
+	StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
