@@ -47,6 +47,7 @@
 #include "script_mgr.h"
 #include "StelMainWindow.hpp"
 #include <QCoreApplication>
+#include <QSettings>
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -131,8 +132,11 @@ double StelUI::getCallOrder(StelModuleActionName actionName) const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelUI::init(const InitParser& conf)
+void StelUI::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
 	if(initialised)
 	{
 		// delete existing objects before recreating
@@ -140,27 +144,27 @@ void StelUI::init(const InitParser& conf)
 	}
 
 	// Ui section
-	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
-	FlagMenu			= conf.get_boolean("gui:flag_menu");
-	FlagHelp			= conf.get_boolean("gui:flag_help");
-	FlagInfos			= conf.get_boolean("gui:flag_infos");
-	FlagShowTopBar		= conf.get_boolean("gui:flag_show_topbar");
-	FlagShowTime		= conf.get_boolean("gui:flag_show_time");
-	FlagShowDate		= conf.get_boolean("gui:flag_show_date");
-	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
-	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
-	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	baseFontSize		= conf.get_double ("gui","base_font_size",15);
-	baseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
-	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
-	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
-	setDayKeyMode( conf.get_str("gui","day_key_mode","calendar"));
+	FlagShowFps = conf->value("gui/flag_show_fps").toBool();
+	FlagMenu = conf->value("gui/flag_menu").toBool();
+	FlagHelp = conf->value("gui/flag_help").toBool();
+	FlagInfos = conf->value("gui/flag_infos").toBool();
+	FlagShowTopBar = conf->value("gui/flag_show_topbar").toBool();
+	FlagShowTime = conf->value("gui/flag_show_time").toBool();
+	FlagShowDate = conf->value("gui/flag_show_date").toBool();
+	FlagShowAppName	= conf->value("gui/flag_show_appname").toBool();
+	FlagShowFov = conf->value("gui/flag_show_fov").toBool();
+	FlagShowSelectedObjectInfo = conf->value("gui/flag_show_selected_object_info").toBool();
+	baseFontSize = conf->value ("gui:base_font_size",15.).toDouble();
+	baseCFontSize = conf->value ("gui:base_cfont_size",12.5).toDouble();
+	FlagShowScriptBar = conf->value("gui:flag_show_script_bar",false).toBool();
+	MouseCursorTimeout = conf->value("gui:mouse_cursor_timeout",0.).toDouble();
+	setDayKeyMode(conf->value("gui:day_key_mode","calendar").toString().toStdString());
 
 	// Text ui section
-	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
-	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
-	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
-	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
+	FlagEnableTuiMenu = conf->value("tui/flag_enable_tui_menu").toBool();
+	FlagShowGravityUi = conf->value("tui/flag_show_gravity_ui").toBool();
+	FlagShowTuiDateTime = conf->value("tui/flag_show_tui_datetime").toBool();
+	FlagShowTuiShortObjInfo = conf->value("tui/flag_show_tui_short_obj_info").toBool();
 
 	
 	SFont& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
@@ -217,7 +221,7 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(message_win);
 
 	desktop->addComponent(createTopBar(baseFont));
-	desktop->addComponent(createFlagButtons(conf));
+	desktop->addComponent(createFlagButtons());
 	desktop->addComponent(createTimeControlButtons());
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
@@ -362,7 +366,7 @@ void StelUI::updateTopBar(void)
 #define UI_PADDING 5
 #define UI_BT 25
 #define UI_SCRIPT_BAR 300
-Component* StelUI::createFlagButtons(const InitParser &conf)
+Component* StelUI::createFlagButtons()
 {
 	int x = 0;
 
@@ -452,7 +456,7 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(x,0);x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(x,0); x+=UI_BT;
-	if (conf.get_boolean("gui","flag_show_flip_buttons",false)) {
+	if (StelApp::getInstance().getSettings()->value("gui:flag_show_flip_buttons",false).toBool()) {
 		bt_flip_horz = new FlagButton(true, STextureSP(), StelApp::getInstance().getTextureManager().createTexture("bt_flip_horz.png"));
 		bt_flip_horz->setOnPressCallback(callback<void>(this, &StelUI::cb));
 		bt_flip_horz->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
