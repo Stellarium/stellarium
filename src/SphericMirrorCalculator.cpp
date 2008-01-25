@@ -19,66 +19,56 @@
  */
 
 #include "SphericMirrorCalculator.hpp"
-#include "InitParser.hpp"
+#include <QSettings>
 
-SphericMirrorCalculator::SphericMirrorCalculator(const InitParser &conf) {
+SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf) {
   const Vec3d mirror_position(
-                conf.get_double("spheric_mirror","mirror_position_x",0.0),
-                conf.get_double("spheric_mirror","mirror_position_y",2.0),
-                conf.get_double("spheric_mirror","mirror_position_z",0.0));
-  const double mirror_radius(conf.get_double("spheric_mirror",
-                                             "mirror_radius",0.25));
+conf.value("spheric_mirror/mirror_position_x",0.0).toDouble(),
+conf.value("spheric_mirror/mirror_position_y",2.0).toDouble(),
+conf.value("spheric_mirror/mirror_position_z",0.0).toDouble());
+  const double mirror_radius(conf.value("spheric_mirror/mirror_radius",0.25).toDouble());
   DomeCenter = mirror_position * (-1.0/mirror_radius);
-  const double dome_radius(conf.get_double("spheric_mirror",
-                                           "dome_radius",2.5));
+  const double dome_radius(conf.value("spheric_mirror/dome_radius",2.5).toDouble());
   DomeRadius = dome_radius / mirror_radius;
   const Vec3d projector_position(
-                conf.get_double("spheric_mirror","projector_position_x",0.0),
-                conf.get_double("spheric_mirror","projector_position_y",1.0),
-                conf.get_double("spheric_mirror","projector_position_z",-0.2));
+conf.value("spheric_mirror/projector_position_x",0.0).toDouble(),
+conf.value("spheric_mirror/projector_position_y",1.0).toDouble(),
+conf.value("spheric_mirror/projector_position_z",-0.2).toDouble());
   P = (projector_position - mirror_position) * (1.0/mirror_radius);
   PP = P.lengthSquared();
   lP = sqrt(PP);
   p = P * (1.0/lP);
   double image_distance_div_height
-    = conf.get_double("spheric_mirror","image_distance_div_height",-1e100);
-  if (image_distance_div_height <= -1e100) {
-    const double scaling_factor = conf.get_double("spheric_mirror",
-                                                "scaling_factor",
-                                                0.8);
+			  = conf.value("spheric_mirror/image_distance_div_height",-1e100).toDouble();
+  if (image_distance_div_height <= -1e100)
+  { const double scaling_factor = conf.value("spheric_mirror/scaling_factor", 0.8).toDouble();
     image_distance_div_height = sqrt(PP-1.0) * scaling_factor;
-    cout << "INFO: spheric_mirror:scaling_factor is deprecated "
-            "and may be removed in future versions." << endl
-         << "      In order to keep your setup unchanged, please use "
-            "spheric_mirror:image_distance_div_height = "
-         << image_distance_div_height << " instead" << endl;
+    std::cout << "INFO: spheric_mirror:scaling_factor is deprecated and may be removed in future versions." << std::endl
+         << "      In order to keep your setup unchanged, please use spheric_mirror:image_distance_div_height = "
+         << image_distance_div_height << " instead" << std::endl;
   }
-  horz_zoom_factor = conf.get_boolean("spheric_mirror","flip_horz",true)
+  horz_zoom_factor = conf.value("spheric_mirror/flip_horz",true).toBool()
                    ? (-image_distance_div_height)
                    : image_distance_div_height;
-  vert_zoom_factor = conf.get_boolean("spheric_mirror","flip_vert",false)
+  vert_zoom_factor = conf.value("spheric_mirror/flip_vert",false).toBool()
                    ? (-image_distance_div_height)
                    : image_distance_div_height;
 
-  const double alpha = conf.get_double("spheric_mirror","projector_alpha",0.0)
-                     * (M_PI/180);
-  const double phi = conf.get_double("spheric_mirror","projector_phi",0.0)
-                   * (M_PI/180);
-  double delta = conf.get_double("spheric_mirror","projector_delta",-1e100);
+  const double alpha = conf.value("spheric_mirror/projector_alpha",0.0).toDouble() * (M_PI/180);
+  const double phi = conf.value("spheric_mirror/projector_phi",0.0).toDouble() * (M_PI/180);
+  double delta = conf.value("spheric_mirror/projector_delta",-1e100).toDouble();
   if (delta <= -1e100) {
     double x,y;
       // before calling transform() horz_zoom_factor,vert_zoom_factor,
       // alpha_delta_phi must already be initialized
     initRotMatrix(0.0,0.0,0.0);
     transform(Vec3d(0,0,1),x,y);
-    const double zenith_y(conf.get_double("spheric_mirror","zenith_y",0.125));
+	const double zenith_y(conf.value("spheric_mirror/zenith_y",0.125).toDouble());
     delta = -atan(y/image_distance_div_height)
           + atan(zenith_y/image_distance_div_height);
-    cout << "INFO: spheric_mirror:zenith_y is deprecated "
-            "and may be removed in future versions." << endl
-         << "      In order to keep your setup unchanged, please use "
-            "spheric_mirror:projector_delta = "
-         << (delta*(180.0/M_PI)) << " instead" << endl;
+ std::cout << "INFO: spheric_mirror:zenith_y is deprecated and may be removed in future versions." << std::endl
+         << "      In order to keep your setup unchanged, please use spheric_mirror:projector_delta = "
+         << (delta*(180.0/M_PI)) << " instead" << std::endl;
   } else {
     delta *= (M_PI/180);
   }

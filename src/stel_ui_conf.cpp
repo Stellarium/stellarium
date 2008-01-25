@@ -42,6 +42,7 @@
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
 #include "StelMainWindow.hpp"
+#include "StelGLWidget.hpp"
 #include <QFile>
 #include <QDebug>
 #include <QString>
@@ -937,8 +938,8 @@ void StelUI::setVideoOption(void)
 	if (screen_size_sl==NULL)
 	{
 		// In QT build the screen_size_sl does not exist.
-		w = StelApp::getInstance().getScreenW();
-		h = StelApp::getInstance().getScreenH();
+		w = StelGLWidget::getInstance().width();
+		h = StelGLWidget::getInstance().height();
 	}
 	else
 	{
@@ -953,7 +954,7 @@ void StelUI::setVideoOption(void)
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
 	cout << "Saving video settings: projection=" << qPrintable(core->getProjection()->getCurrentProjection())
-			<< ", distorter=" << qPrintable(app->getViewPortDistorterType());
+			<< ", distorter=" << qPrintable(StelGLWidget::getInstance().getViewPortDistorterType());
 	if ( w && h ) cout << ", res=" << w << "x" << h;
 	cout << " in file " << qPrintable(app->getConfigFilePath()) << endl;
 
@@ -961,7 +962,7 @@ void StelUI::setVideoOption(void)
 	conf.load(app->getConfigFilePath());
 
 	conf.set_str("projection:type", qPrintable(core->getProjection()->getCurrentProjection()));
-	conf.set_str("video:distorter", app->getViewPortDistorterType());
+	conf.set_str("video:distorter", StelGLWidget::getInstance().getViewPortDistorterType());
 
 
 	if (core->getProjection()->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
@@ -972,7 +973,7 @@ void StelUI::setVideoOption(void)
 		conf.set_int("video:screen_h", h);
 	}
 	
-	conf.set_boolean("video:fullscreen", app->getMainWindow()->getFullScreen());
+	conf.set_boolean("video:fullscreen", StelMainWindow::getInstance().getFullScreen());
 
 	conf.save(app->getConfigFilePath());
 }
@@ -1000,7 +1001,7 @@ void StelUI::updateVideoVariables(void)
 		core->getProjection()->setViewportMaskNone();
 	}
 
-	app->setViewPortDistorterType(viewport_distorter_cbx->getState()
+	StelGLWidget::getInstance().setViewPortDistorterType(viewport_distorter_cbx->getState()
 	                              ? "fisheye_to_spheric_mirror" : "none");
 }
 
@@ -1104,7 +1105,7 @@ void StelUI::updateConfigForm(void)
 
 	projection_sl->setValue(qPrintable(core->getProjection()->getCurrentProjection()));
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
-	viewport_distorter_cbx->setState(app->getViewPortDistorterType()!="none");
+	viewport_distorter_cbx->setState(StelGLWidget::getInstance().getViewPortDistorterType()!="none");
 	
 	locationFromLandscapeCheck->setState(lmgr->getFlagLandscapeSetsLocation());
 }

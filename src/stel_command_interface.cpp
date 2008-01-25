@@ -703,7 +703,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			}
 			else
 				{
-					StelApp::getInstance().getMainWindow()->saveScreenShot(args["prefix"].c_str(), args["dir"].c_str());
+					StelMainWindow::getInstance().saveScreenShot(args["prefix"].c_str(), args["dir"].c_str());
 				status = 1;
 
 			}

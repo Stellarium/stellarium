@@ -69,14 +69,6 @@ public:
 	//! float which should take a value between 0.0 and 1.0.
 	void Draw(float val);
 
-	//! Sets the value of clearBuffer flag.
-	//! If the clearBuffer flag is set to true, glClear is called 
-	//! at the end of each Draw() operation, else it is not.  This
-	//! can be useful to prevent flickering when only the LoadingBar
-	//! screen is visible.
-	//! The default value of the clearBuffer flag is false.
-	void setClearBuffer(bool b) {clearBuffer=b;}
-	
 private:
 	wstring message;
 	Projector* prj;
@@ -87,7 +79,6 @@ private:
 	wstring extraText;
 	Vec2f extraTextPos;
 	double timeCounter;
-	bool clearBuffer;
 };
 
 #endif //_LOADINGBAR_H_

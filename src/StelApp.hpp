@@ -42,7 +42,6 @@ class InitParser;
 class QStringList;
 class LoadingBar;
 class QSettings;
-class StelMainWindow;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -58,7 +57,7 @@ class StelMainWindow;
 class StelApp : public QObject
 {
 friend class StelMainWindow;
-friend class GLWidget;
+friend class StelGLWidget;
 
 	Q_OBJECT;
 	
@@ -69,7 +68,7 @@ public:
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(int argc, char** argv, StelMainWindow* parent);
+	StelApp(int argc, char** argv, QObject* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -131,9 +130,6 @@ public:
 	//! @return the full path of the configuration file
 	const QString& getConfigFilePath() { return configFile; }
 	
-	//! Swap GL buffer, should be called only for special condition.
-	void swapGLBuffers();
-	
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
 			
@@ -159,31 +155,13 @@ public slots:
 	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
-
-	//! Define the type of viewport distorter to use
-	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
-	void setViewPortDistorterType(const QString& type);
-	//! Get the type of viewport distorter currently used
-	QString getViewPortDistorterType() const;
 	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
-	
-	//! Get the width of the openGL screen.
-	//! @return width of the openGL screen in pixels
-	int getScreenW() const;
-	
-	//! Get the height of the openGL screen.
-	//! @return height of the openGL screen in pixels
-	int getScreenH() const;
-	
+
 	//! Return the time since when stellarium is running in second.
 	double getTotalRunTime() const;
-
-	//! Return the main widget in which any new GUI elements should be added e.g. by external modules
-	//! @return the main window
-	class StelMainWindow* getMainWindow();
 	
 private:
 	//! Update all object according to the deltaTime in seconds.
@@ -205,18 +183,9 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 
-	///////////////////////////////////////////////////////////////////////////
-	// Methods overidded for SDL / QT
-	///////////////////////////////////////////////////////////////////////////	
-	
-	//! Initialize openGL screen.
-	void initOpenGL(int w, int h, int bbpMode, bool fullScreen, const QString& iconFile);
-	
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);
 
-	//! Call this when you want to make the window (not) resizable.
-	void setResizable(bool resizable);
 
 	//! Sets the name of the configuration file.
 	//! It is possible to set the configuration by passing either a full path
@@ -340,9 +309,6 @@ private:
 	float fps;
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
-	
-	// Main elements of the stel_app
-	ViewportDistorter *distorter;
 
 	int time_multiplier;	// used for adjusting delta_time for script speeds
 	
@@ -354,9 +320,6 @@ private:
 	
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
-	
-	// The main window in which the OpenGL window must be created
-	StelMainWindow* mainWin;
 	
 	class QTime* qtime;
 };
