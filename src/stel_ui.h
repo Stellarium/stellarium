@@ -50,7 +50,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init(const InitParser& conf);
+	virtual void init();
 	virtual double draw(StelCore* core);
 	virtual void update(double deltaTime);
 	virtual void glWindowHasBeenResized(int w, int h) {resize();}
@@ -211,7 +211,7 @@ private:
     void cbEditScriptKey(void);
     void cbEditScriptWordCount(void);
 
-	Component* createFlagButtons(const InitParser &conf);
+	Component* createFlagButtons();
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
 	void cbr(void);

@@ -241,18 +241,11 @@ void StelApp::init()
 	time_multiplier = 1;
 	distorter = NULL;
 	
-	// Initialize video device and other sdl parameters
-	InitParser conf;
-	conf.load(getConfigFilePath());
-
-	// QSettings confQt(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(), QCoreApplication::applicationName());
-	// qWarning() << confQt.allKeys();
-
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 	
-	maxfps = conf.get_double ("video","maximum_fps",10000);
-	minfps = conf.get_double ("video","minimum_fps",10000);
+	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
+	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
 
 	core->initProj();
 
@@ -326,9 +319,9 @@ void StelApp::init()
 	// Initialisation of the color scheme
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
-	setVisionModeNight(conf.get_boolean("viewing:flag_night"));
+	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
-	setViewPortDistorterType(conf.get_str("video","distorter","none").c_str());
+	setViewPortDistorterType(confSettings->value("video/distorter","none").toString());
 	
 	// Those 3 are going to disapear
 	StelCommandInterface* commander = new StelCommandInterface(getCore(), this);
@@ -338,12 +331,12 @@ void StelApp::init()
 	// play startup script, if available
 	scripts->play_startup_script();
 	getModuleMgr().registerModule(scripts, true);
-	scripts->set_removable_media_path(conf.get_str("files","removable_media_path", "").c_str());
+	scripts->set_removable_media_path(confSettings->value("files/removable_media_path", "").toString());
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init();
 	getModuleMgr().registerModule(script_images, true);	
 	StelUI* ui = new StelUI(core, this);
-	ui->init(conf);
+	ui->init();
 	getModuleMgr().registerModule(ui, true);
 	
 	// Load dynamically all the modules found in the modules/ directories
@@ -355,7 +348,7 @@ void StelApp::init()
 		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
 		if (m!=NULL)
 		{
-			m->init(conf);
+			m->init();
 			moduleMgr->registerModule(m);
 		}
 	}
