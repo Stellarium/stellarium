@@ -130,8 +130,6 @@ SET(stellarium_lib_SRCS
    StelObjectMgr.cpp
    StelFileMgr.hpp
    StelFileMgr.cpp
-   StelMainWindow.hpp
-   StelMainWindow.cpp
    SkyDrawer.hpp
    SkyDrawer.cpp
 
@@ -204,6 +202,11 @@ SET(stellarium_lib_SRCS
    planetsephems/sideral_time.h
    planetsephems/stellplanet.c
    planetsephems/stellplanet.h
+   
+   StelMainWindow.hpp
+   StelMainWindow.cpp
+   StelGLWidget.hpp
+   StelGLWidget.cpp
 )
 
 ################# compiles moc files ############
@@ -224,7 +227,7 @@ SET(stellarium_MOC_HDRS
 	Observer.hpp
 	StarMgr.hpp
 	StelApp.hpp
-	StelMainWindow.hpp
+	StelGLWidget.hpp
 	stelutils/STexture.hpp
 )
 

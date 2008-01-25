@@ -22,16 +22,14 @@
 
 #include "fixx11h.h"
 #include "ViewportDistorter.hpp"
-#include "StelApp.hpp"
 #include "SphericMirrorCalculator.hpp"
-#include "InitParser.hpp"
+#include <QSettings>
 #include "Projector.hpp"
-
+#include "StelApp.hpp"
 #include <fstream>
+#include <cmath>
 
 using namespace std;
-
-#include <math.h>
 
 class ViewportDistorterDummy : public ViewportDistorter {
 private:
@@ -47,8 +45,7 @@ class ViewportDistorterFisheyeToSphericMirror : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
   ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h,
-                                          Projector *prj,
-                                          const InitParser &conf);
+                                          Projector *prj);
   ~ViewportDistorterFisheyeToSphericMirror(void);
   string getType(void) const {return "fisheye_to_spheric_mirror";}
   void cleanup(void);
@@ -98,8 +95,7 @@ struct VertexPoint {
 
 ViewportDistorterFisheyeToSphericMirror
    ::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h,
-                                             Projector *prj,
-                                             const InitParser &conf)
+                                             Projector *prj)
     :prj(prj),screen_w(screen_w),screen_h(screen_h),
      original_max_fov(prj->getMapping().maxFov),
      original_viewport(prj->getViewport()),
@@ -107,14 +103,14 @@ ViewportDistorterFisheyeToSphericMirror
      original_viewport_fov_diameter(prj->getViewportFovDiameter()),
      texture_point_array(0) {
 
+ QSettings& conf = *StelApp::getInstance().getSettings();
+		 
   flag_use_ext_framebuffer_object = GLEE_EXT_framebuffer_object;
-  if (flag_use_ext_framebuffer_object) {
-    flag_use_ext_framebuffer_object
-      = conf.get_boolean("spheric_mirror",
-                         "flag_use_ext_framebuffer_object",true);
+  if (flag_use_ext_framebuffer_object)
+  {
+    flag_use_ext_framebuffer_object = conf.value("spheric_mirror/flag_use_ext_framebuffer_object",true).toBool();
   }
-  cout << "INFO: flag_use_ext_framebuffer_object = "
-       << flag_use_ext_framebuffer_object << endl;
+  cout << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object << endl;
   if (flag_use_ext_framebuffer_object && !GLEE_EXT_packed_depth_stencil) {
     cout << "WARNING: "
             "using EXT_framebuffer_object, but EXT_packed_depth_stencil "
@@ -122,35 +118,28 @@ ViewportDistorterFisheyeToSphericMirror
   }
 
     // initialize viewport parameters and texture size:
-  double distorter_max_fov
-    = conf.get_double("spheric_mirror","distorter_max_fov",175.0);
+  double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.0).toDouble();
   if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
   else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
   if (distorter_max_fov > prj->getMapping().maxFov)
     distorter_max_fov = prj->getMapping().maxFov;
   prj->setMaxFov(distorter_max_fov);
   
-  viewport_w = conf.get_int("spheric_mirror","viewport_width",
-                            original_viewport[2]);
+  viewport_w = conf.value("spheric_mirror/viewport_width", original_viewport[2]).toInt();
   if (viewport_w <= 0) {
     viewport_w = original_viewport[2];
   } else if (!flag_use_ext_framebuffer_object && viewport_w > screen_w) {
     viewport_w = screen_w;
   }
-  viewport_h = conf.get_int("spheric_mirror","viewport_height",
-                            original_viewport[3]);
+  viewport_h = conf.value("spheric_mirror/viewport_height", original_viewport[3]).toInt();
   if (viewport_h <= 0) {
     viewport_h = original_viewport[3];
   } else if (!flag_use_ext_framebuffer_object && viewport_h > screen_h) {
     viewport_h = screen_h;
   }
-  viewport_center[0] = conf.get_double("spheric_mirror","viewport_center_x",
-                                       0.5*viewport_w);
-  viewport_center[1] = conf.get_double("spheric_mirror","viewport_center_y",
-                                       0.5*viewport_h);
-  viewport_fov_diameter
-	= conf.get_double("spheric_mirror","viewport_fov_diameter",
-                      MY_MIN(viewport_w,viewport_h));
+  viewport_center[0] = conf.value("spheric_mirror/viewport_center_x", 0.5*viewport_w).toDouble();
+  viewport_center[1] = conf.value("spheric_mirror/viewport_center_y", 0.5*viewport_h).toDouble();
+  viewport_fov_diameter = conf.value("spheric_mirror/viewport_fov_diameter", MY_MIN(viewport_w,viewport_h)).toDouble();
 
   texture_wh = 1;
   while (texture_wh < viewport_w || texture_wh < viewport_h)
@@ -237,11 +226,9 @@ ViewportDistorterFisheyeToSphericMirror
 
     // init transformation
   VertexPoint *vertex_point_array = 0;
-  const string custom_distortion_file
-    = conf.get_str("spheric_mirror","custom_distortion_file","");  
+  const string custom_distortion_file = conf.value("spheric_mirror/custom_distortion_file","").toString().toStdString();  
   if (custom_distortion_file.empty()) {
-    double texture_triangle_base_length
-      = conf.get_double("spheric_mirror","texture_triangle_base_length",16.0);  
+    double texture_triangle_base_length = conf.value("spheric_mirror/texture_triangle_base_length",16.0).toDouble();  
     if (texture_triangle_base_length > 256.0)
       texture_triangle_base_length = 256.0;
     else if (texture_triangle_base_length < 2.0)
@@ -253,8 +240,7 @@ ViewportDistorterFisheyeToSphericMirror
   //cout << "max_x: " << max_x << ", max_y: " << max_y
   //     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
 
-    double gamma
-      = conf.get_double("spheric_mirror","projector_gamma",0.45);
+    double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
     if (gamma < 0.0) gamma = 0.0;
     const float view_scaling_factor
       = 0.5 * viewport_fov_diameter
@@ -525,12 +511,9 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
 }
 
 
-ViewportDistorter *ViewportDistorter::create(const string &type,
-                                             int width,int height,
-                                             Projector *prj,
-                                             const InitParser &conf) {
+ViewportDistorter *ViewportDistorter::create(const string &type, int width,int height, Projector *prj) {
   if (type == "fisheye_to_spheric_mirror") {
-    return new ViewportDistorterFisheyeToSphericMirror(width,height,prj,conf);
+    return new ViewportDistorterFisheyeToSphericMirror(width,height,prj);
   }
   return new ViewportDistorterDummy;
 }

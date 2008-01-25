@@ -23,6 +23,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelGLWidget.hpp"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
@@ -30,7 +31,7 @@ LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
 barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), font_size)),
 extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
-			  extraText(extraTextString), clearBuffer(false)
+			  extraText(extraTextString)
 {
 	splashx = prj->getViewportPosX() + (screenw - width)/2;
 	splashy = prj->getViewportPosY() + (screenh - height)/2;
@@ -109,7 +110,5 @@ void LoadingBar::Draw(float val)
 	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
 	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
-	StelApp::getInstance().swapGLBuffers();	// And swap the buffers
-	if (clearBuffer)
-		glClear(GL_COLOR_BUFFER_BIT);
+	StelGLWidget::getInstance().swapBuffers();	// And swap the buffers
 }

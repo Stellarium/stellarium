@@ -22,7 +22,6 @@
 #include "StelMainWindow.hpp"
 
 #include "StelCore.hpp"
-#include "ViewportDistorter.hpp"
 #include "StelUtils.hpp"
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"
@@ -67,15 +66,13 @@ StelApp* StelApp::singleton = NULL;
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) : QObject(amainWin),
+StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0.), 
 	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
 	setObjectName("StelApp");
-	assert(amainWin!=NULL);
-	mainWin = amainWin;
 			
-	distorter=NULL;
+
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
 	fontManager=NULL;
@@ -180,6 +177,10 @@ StelApp::StelApp(int argc, char** argv, StelMainWindow* amainWin) : QObject(amai
 	}
 	
 	parseCLIArgsPostConfig(conf);
+	
+	core = new StelCore();
+	core->initProj();
+	moduleMgr = new StelModuleMgr();
 }
 
 /*************************************************************************
@@ -189,7 +190,6 @@ StelApp::~StelApp()
 {
 	delete loadingBar; loadingBar=NULL;
 	delete core; core=NULL;
-	if (distorter) {delete distorter; distorter=NULL;}
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete fontManager; fontManager=NULL;
@@ -209,26 +209,6 @@ QString StelApp::getApplicationName()
 	return QString("Stellarium")+" "+PACKAGE_VERSION;
 }
 
-void StelApp::setViewPortDistorterType(const QString &type)
-{
-	if (type != getViewPortDistorterType()) setResizable(type == "none");
-	if (distorter)
-	{
-		delete distorter;
-		distorter = 0;
-	}
-	InitParser conf;
-	conf.load(getConfigFilePath());
-	distorter = ViewportDistorter::create(type.toStdString(),getScreenW(),getScreenH(),core->getProjection(),conf);
-}
-
-QString StelApp::getViewPortDistorterType() const
-{
-	if (distorter)
-            return distorter->getType().c_str();
-	return "none";
-}
-
 
 void StelApp::init()
 {
@@ -236,10 +216,8 @@ void StelApp::init()
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	moduleMgr = new StelModuleMgr();
-	core = new StelCore();
+	
 	time_multiplier = 1;
-	distorter = NULL;
 	
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
@@ -247,16 +225,8 @@ void StelApp::init()
 	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
 	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
 
-	core->initProj();
-
-	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	swapGLBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
-	              getScreenW(), getScreenH(),
+	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	
 	// Stel Object Data Base manager
@@ -320,24 +290,19 @@ void StelApp::init()
 	flagNightVision=true;  // fool caching
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
-
-	setViewPortDistorterType(confSettings->value("video/distorter","none").toString());
 	
 	// Those 3 are going to disapear
 	StelCommandInterface* commander = new StelCommandInterface(getCore(), this);
-	getModuleMgr().registerModule(commander, true);
+	getModuleMgr().registerModule(commander);
 	ScriptMgr* scripts = new ScriptMgr(commander);
 	scripts->init();
 	// play startup script, if available
 	scripts->play_startup_script();
-	getModuleMgr().registerModule(scripts, true);
+	getModuleMgr().registerModule(scripts);
 	scripts->set_removable_media_path(confSettings->value("files/removable_media_path", "").toString());
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init();
-	getModuleMgr().registerModule(script_images, true);	
-	StelUI* ui = new StelUI(core, this);
-	ui->init();
-	getModuleMgr().registerModule(ui, true);
+	getModuleMgr().registerModule(script_images);	
 	
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
@@ -564,7 +529,7 @@ double StelApp::draw()
 	// (because ui can draw outside the main viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	distorter->prepare();
+	
 
 	core->preDraw();
 
@@ -581,11 +546,7 @@ double StelApp::draw()
 	stelObjectMgr->draw(core);
 
 	core->postDraw();
-	distorter->distort();
 
-	// Draw the Graphical ui
-	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-	ui->drawGui();
 
 	// Test code
 // 	ConvexPolygon poly = core->getProjection()->getViewportConvexPolygon(-100, -100);
@@ -602,30 +563,17 @@ double StelApp::draw()
 *************************************************************************/
 void StelApp::glWindowHasBeenResized(int w, int h)
 {
-	// no resizing allowed in distortion mode
-	if (distorter && distorter->getType() == "none") {
-		if (core && core->getProjection())
-			core->getProjection()->windowHasBeenResized(getScreenW(),
-			                                            getScreenH());
-		// Send the event to every StelModule
-		foreach (StelModule* iter, moduleMgr->getAllModules())
-		{
-			iter->glWindowHasBeenResized(w, h);
-		}
+	core->getProjection()->windowHasBeenResized(w, h);
+	// Send the event to every StelModule
+	foreach (StelModule* iter, moduleMgr->getAllModules())
+	{
+		iter->glWindowHasBeenResized(w, h);
 	}
 }
 
 // Handle mouse clics
 int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 {
-	const int ui_x = x;
-	const int ui_y = y;
-	y = getScreenH() - 1 - y;
-	distorter->distortXY(x,y);
-
-	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-	if (ui->handleClick(ui_x, ui_y, button, state, mod)) return 1;
-
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
 	{
@@ -673,40 +621,25 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
 // Handle mouse move
 int StelApp::handleMove(int x, int y, StelMod mod)
 {
-	const int ui_x = x;
-	const int ui_y = y;
-	y = getScreenH() - 1 - y;
-	distorter->distortXY(x,y);
-	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
 		if (i->handleMouseMoves(x, y, mod)==true)
 			return 1;
 	}
-	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-	return ui->handleMouseMoves(ui_x,ui_y, mod);
+	return 0;
 }
 
 // Handle key press and release
 int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 {
-	StelUI* ui = (StelUI*)getModuleMgr().getModule("StelUI");
-	// Standard keys should not be able to be hijacked by modules - Rob
-	// (this could be debated)
-	if (ui->handle_keys_tui(key, state)) return 1;
-
-	if (ui->handle_keysGUI(key, mod, unicode, state)) return 1;
-
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS))
 	{
 		if (i->handleKeys(key, mod, unicode, state)==true)
 			return 1;
 	}
-
-	// Non widget key handling
-	return ui->handle_keys(key, mod, unicode, state);
+	return 0;
 }
 
 
@@ -926,37 +859,9 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 	}
 }
 
-
-int StelApp::getScreenW() const
-{
-	return mainWin->getScreenW();
-}
-	
-int StelApp::getScreenH() const
-{
-	return mainWin->getScreenH();
-}
-
 //! Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime() const
 {
 	return (double)qtime->elapsed()/1000;
 }
 
-//! Call this when you want to make the window (not) resizable.
-void StelApp::setResizable(bool resizable)
-{
-	mainWin->setResizable(resizable);
-}
-
-//! Swap GL buffer, should be called only for special condition.
-void StelApp::swapGLBuffers()
-{
-	mainWin->swapGLBuffers();
-}
-
-//! Return the main widget in which any new GUI elements should be added e.g. by external modules
-StelMainWindow* StelApp::getMainWindow()
-{
-	return mainWin;
-}
