@@ -68,7 +68,7 @@ void StelCore::initProj()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init(const InitParser& conf)
+void StelCore::init()
 {	
 	// Observer
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");

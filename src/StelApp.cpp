@@ -283,7 +283,7 @@ void StelApp::init()
 	hip_stars->init();
 	getModuleMgr().registerModule(hip_stars);	
 	
-	core->init(conf);
+	core->init();
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
