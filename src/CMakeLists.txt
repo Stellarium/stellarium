@@ -140,6 +140,8 @@ SET(stellarium_lib_SRCS
    stelutils/gettext.h
    stelutils/InitParser.cpp
    stelutils/InitParser.hpp
+   stelutils/StelIniParser.cpp
+   stelutils/StelIniParser.hpp
    stelutils/SFont.hpp
    stelutils/SFont.cpp
    stelutils/STexture.hpp
