@@ -37,6 +37,7 @@
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
 #include "InitParser.hpp"
+#include "StelIniParser.hpp"
 #include "Projector.hpp"
 
 #include "StelModuleMgr.hpp"
@@ -125,25 +126,21 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		copyDefaultConfigFile();
 	}
 
-	confSettings = new QSettings(getConfigFilePath(), QSettings::IniFormat);
+	// Load the configuration file
+	confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
 	
-	// Initialize video device and other sdl parameters
-	InitParser conf;
-	conf.load(getConfigFilePath());
-
-	// QSettings confQt(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(), QCoreApplication::applicationName());
-	// qWarning() << confQt.allKeys();
-			
 	// Main section
-	string version = conf.get_str("main:version");
+	string version = confSettings->value("main/version").toString().toStdString();
 	
 	if (version.empty())
 	{
 		qWarning() << "Found an invalid config file. Overwrite with default.";
+		delete confSettings;
 		QFile::remove(getConfigFilePath());
 		copyDefaultConfigFile();
-		conf.load(getConfigFilePath());  // Read new config
-		version = conf.get_str("main:version");
+		confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
+		// get the new version value from the updated config file
+		version = confSettings->value("main/version").toString().toStdString();
 	}
 	
 	if (version!=string(PACKAGE_VERSION))
@@ -162,8 +159,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 					<< (version.empty() ? "<0.6.0" : version.c_str()) << ")." << endl 
 					<< "It will be replaced by the default config file." << endl;
 
+			delete confSettings;
+			QFile::remove(getConfigFilePath());
 			copyDefaultConfigFile();
-			conf.load(getConfigFilePath());  // Read new config
+			confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
 		}
 		else
 		{
@@ -171,7 +170,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		}
 	}
 	
-	parseCLIArgsPostConfig(conf);
+	parseCLIArgsPostConfig();
 	
 	core = new StelCore();
 	core->initProj();
@@ -375,7 +374,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	}
 }
 
-void StelApp::parseCLIArgsPostConfig(InitParser& conf)
+void StelApp::parseCLIArgsPostConfig()
 {
 	// Over-ride config file options with command line options
 	// We should catch exceptions from argsGetOptionWithArg...
@@ -404,20 +403,20 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	}
 
 	// Will be -1 if option is not found, in which case we don't change anything.
-	if (fullScreen == 1) conf.set_boolean("video:fullscreen", true);
-	else if (fullScreen == 0) conf.set_boolean("video:fullscreen", false);
+	if (fullScreen == 1) confSettings->setValue("video/fullscreen", true);
+	else if (fullScreen == 0) confSettings->setValue("video/fullscreen", false);
 	
-	if (landscapeId != "") conf.set_str("init_location:landscape_name", landscapeId);
+	if (landscapeId != "") confSettings->setValue("init_location/landscape_name", landscapeId);
 	
-	if (homePlanet != "") conf.set_str("init_location:home_planet", homePlanet);
+	if (homePlanet != "") confSettings->setValue("init_location/home_planet", homePlanet);
 	
-	if (altitude != -1) conf.set_int("init_location:altitude", altitude);
+	if (altitude != -1) confSettings->setValue("init_location/altitude", altitude);
 	
 	QRegExp longLatRx("[\\-+]?\\d+d\\d+\\'\\d+(\\.\\d+)?\"");
 	if (longitude != "")
 	{
 		if (longLatRx.exactMatch(longitude))
-			conf.set_str("init_location:longitude", longitude);
+			confSettings->setValue("init_location/longitude", longitude);
 		else
 			cerr << "WARNING: --longitude argument has unrecognised format" << endl;
 	}
@@ -425,7 +424,7 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 	if (latitude != "")
 	{
 		if (longLatRx.exactMatch(latitude))
-			conf.set_str("init_location:latitude", latitude);
+			confSettings->setValue("init_location/latitude", latitude);
 		else
 			cerr << "WARNING: --latitude argument has unrecognised format" << endl;
 	}
@@ -463,13 +462,13 @@ void StelApp::parseCLIArgsPostConfig(InitParser& conf)
 				cerr << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)" << endl;
 		}
 
-		conf.set_str("navigation:startup_time_mode", "preset");
-		conf.set_double ("navigation:preset_sky_time", skyDatePart + skyTimePart);
+		confSettings->setValue("navigation/startup_time_mode", "preset");
+		confSettings->setValue("navigation/preset_sky_time", skyDatePart + skyTimePart);
 	}
 
-	if (fov > 0.0) conf.set_double("navigation:init_fov", fov);
+	if (fov > 0.0) confSettings->setValue("navigation/init_fov", fov);
 	
-	if (projectionType != "") conf.set_str("projection:type", projectionType);
+	if (projectionType != "") confSettings->setValue("projection/type", projectionType);
 }
 
 void StelApp::update(double deltaTime)

@@ -40,7 +40,7 @@ class StelCommandInterface : CommandInterface, public StelModule
  public:
   StelCommandInterface(StelCore * core, StelApp * app);
   virtual ~StelCommandInterface();
-  virtual void init(const InitParser& conf) {return;}
+  virtual void init() {return;}
   virtual double draw(StelCore* core) {return 0;}
   
   virtual int execute_command(string commandline);

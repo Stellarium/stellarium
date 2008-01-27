@@ -267,7 +267,7 @@ private:
 	//! Processing of command line options which is to be done after the config file is
 	//! read.  This gives us the chance to over-ride settings which are in the configuration
 	//! file.
-	void parseCLIArgsPostConfig(InitParser& conf);
+	void parseCLIArgsPostConfig();
 	
 	// Set the colorscheme for all the modules
 	void setColorScheme(const QString& fileName, const QString& section);
