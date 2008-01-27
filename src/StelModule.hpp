@@ -49,13 +49,7 @@ public:
 	
 	//! Initialize itself.
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
-	//! TODO - make pure virtual when all init(const InitParser& conf) have been removed
-	virtual void init() {};
-	
-	//! Initialize itself from a configuration (.ini) file
-	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
-	//! @deprecated - TODO  - to be removed when all derived classes use init()
-	virtual void init(const InitParser& conf) {};
+	virtual void init() = 0;
 	
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
