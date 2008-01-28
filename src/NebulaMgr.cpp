@@ -38,7 +38,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "InitParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 
@@ -204,12 +203,12 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
 void NebulaMgr::updateSkyCulture()
 {;}
 
-void NebulaMgr::setColorScheme(const InitParser& conf, const QString& section)
+void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"nebula_label_color", defaultColor)));
-	setCirclesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"nebula_circle_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
+	setCirclesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
 }
 
 // search by name

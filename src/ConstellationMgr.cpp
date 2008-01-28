@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
+#include <QString>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -32,7 +33,6 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "InitParser.hpp"
 #include "Projector.hpp"
 #include "LoadingBar.hpp"
 #include "StelObjectMgr.hpp"
@@ -151,13 +151,13 @@ void ConstellationMgr::updateSkyCulture()
 	lastLoadedSkyCulture = newSkyCulture;
 }
 
-void ConstellationMgr::setColorScheme(const InitParser& conf, const QString& section)
+void ConstellationMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"const_lines_color", defaultColor)));
-	setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"const_boundary_color", "0.8,0.3,0.3")));
-	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"const_names_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	setLinesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_lines_color",    defaultColor).toString()));
+	setBoundariesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
+	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_names_color",    defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)

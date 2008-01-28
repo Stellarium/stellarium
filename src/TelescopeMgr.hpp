@@ -31,12 +31,12 @@
 
 using namespace std;
 
-class InitParser;
 class Projector;
 class Navigator;
 class SFont;
 class StelObject;
 class Telescope;
+class QSettings;
 
 class TelescopeMgr : public StelObjectModule {
 public:
@@ -48,7 +48,7 @@ public:
 	virtual void init();
 	virtual double draw(StelCore *core);
 	virtual void update(double deltaTime);
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////

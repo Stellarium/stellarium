@@ -21,7 +21,6 @@
 #include "Telescope.hpp"
 #include "StelObject.hpp"
 #include "Projector.hpp"
-#include "InitParser.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -146,12 +145,12 @@ void TelescopeMgr::update(double deltaTime) {
 	communicate();
 }
 
-void TelescopeMgr::setColorScheme(const InitParser& conf, const QString& section)
+void TelescopeMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	set_label_color(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"telescope_label_color", defaultColor)));
-	set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"telescope_circle_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	set_label_color(StelUtils::str_to_vec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
+	set_circle_color(StelUtils::str_to_vec3f(conf->value(section+"/telescope_circle_color", defaultColor).toString()));
 }
 
 vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const

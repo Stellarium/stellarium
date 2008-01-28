@@ -268,11 +268,11 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 }
 
-void LandscapeMgr::setColorScheme(const InitParser& conf, const QString& section)
+void LandscapeMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"cardinal_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	setColorCardinalPoints(StelUtils::str_to_vec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
 

@@ -115,6 +115,8 @@ namespace StelUtils {
 	//! @deprecated Use the >> operator from Vec3f class
 	Vec3f str_to_vec3f(const string& s);
 	Vec3f str_to_vec3f(const QStringList& s);
+	Vec3f str_to_vec3f(const QString& s);
+	Vec3f str_to_vec3f(const char* s);
 	
 	//! Obtains a string from a Vec3f.
 	//! @param v The vector
