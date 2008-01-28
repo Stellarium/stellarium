@@ -44,7 +44,7 @@ public:
 
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
-	virtual void load(const QString& file_name, const QString& landscapeId) = 0;
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
 	
 	//! Set the brightness of the landscape
 	void setBrightness(float b) {sky_brightness = b;}
@@ -113,7 +113,7 @@ class LandscapeOldStyle : public Landscape
 public:
 	LandscapeOldStyle(float _radius = 2.);
     virtual ~LandscapeOldStyle();
-	virtual void load(const QString& fileName, const QString& landscapeId);
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(bool _fullpath, QMap<QString, QString> param);
 private:
@@ -145,7 +145,7 @@ class LandscapeFisheye : public Landscape
 public:
 	LandscapeFisheye(float _radius = 1.);
 	virtual ~LandscapeFisheye();
-	virtual void load(const QString& fileName, const QString& landscapeId);
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath, const QString& _maptex,
 	            double _texturefov, double angle_rotatez);
@@ -162,7 +162,7 @@ class LandscapeSpherical : public Landscape
 public:
 	LandscapeSpherical(float _radius = 1.);
 	virtual ~LandscapeSpherical();
-	virtual void load(const QString& fileName, const QString& landscapeId);
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath,
 	            const QString& _maptex, double angle_rotatez);
