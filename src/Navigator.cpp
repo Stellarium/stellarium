@@ -21,7 +21,6 @@
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
-#include "InitParser.hpp"
 #include "Observer.hpp"
 
 #include <QSettings>
