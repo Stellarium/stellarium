@@ -47,10 +47,10 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "InitParser.hpp"
 #include "bytes.h"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "StelIniParser.hpp"
 
 #include "ZoneArray.hpp"
 #include "StringArray.hpp"
@@ -466,14 +466,29 @@ void StarMgr::load_data()
 
 	cout << "Loading star data..." << endl;
 
-	InitParser conf;
-	conf.load(StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini"));
+	QString iniFile;
+	try
+	{
+		iniFile = StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini");
+	}
+	catch (exception& e)
+	{
+		qWarning() << "ERROR - could not find stars/default/stars.ini : " << e.what() << iniFile;
+		return;
+	}
+
+	QSettings conf(iniFile, StelIniFormat);
+	if (conf.status() != QSettings::NoError)
+	{
+		qWarning() << "ERROR while parsing " << iniFile;
+		return;
+	}
 				         
 	for (int i=0; i<100; i++)
 	{
 		char key_name[64];
 		sprintf(key_name,"cat_file_name_%02d",i);
-		const QString cat_file_name = conf.get_str("stars",key_name,"").c_str();
+		const QString cat_file_name = conf.value(QString("stars/")+key_name,"").toString();
 		if (!cat_file_name.isEmpty()) {
 			lb.SetMessage(_("Loading catalog ") + cat_file_name.toStdWString());
 			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
@@ -510,7 +525,7 @@ void StarMgr::load_data()
 		it->second->updateHipIndex(hip_index);
 	}
 
-	const QString cat_hip_sp_file_name = conf.get_str("stars","cat_hip_sp_file_name","").c_str();
+	const QString cat_hip_sp_file_name = conf.value("stars/cat_hip_sp_file_name","").toString();
 	if (cat_hip_sp_file_name.isEmpty())
 	{
 		cerr << "ERROR: stars:cat_hip_sp_file_name not found" << endl;
@@ -529,7 +544,7 @@ void StarMgr::load_data()
 		}
 	}
 
-	const QString cat_hip_cids_file_name = conf.get_str("stars","cat_hip_cids_file_name","").c_str();
+	const QString cat_hip_cids_file_name = conf.value("stars/cat_hip_cids_file_name","").toString();
 	if (cat_hip_cids_file_name.isEmpty())
 	{
 		cerr << "ERROR: stars:cat_hip_cids_file_name not found" << endl;

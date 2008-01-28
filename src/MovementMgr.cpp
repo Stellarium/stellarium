@@ -21,7 +21,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "InitParser.hpp"
 #include "Navigator.hpp"
 
 #include <QSettings>
