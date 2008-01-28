@@ -30,9 +30,9 @@
 #include "StelFontMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "InitParser.hpp"
 #include "Planet.hpp"
 #include "Observer.hpp"
+#include "StelIniParser.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -501,33 +501,33 @@ float LandscapeMgr::getLuminance(void)
 
 Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {
-	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscapeFile);
-	string s;
-	s = pd.get_str("landscape", "type");
-	Landscape* ldscp = NULL;
-	if (s=="old_style")
+	QSettings landscapeIni(landscapeFile, StelIniFormat);
+	QString s;
+	if (landscapeIni.status() != QSettings::NoError)
 	{
-		ldscp = new LandscapeOldStyle();
-	}
-	else if (s=="spherical")
-	{
-		ldscp = new LandscapeSpherical();
-	}
-	else if (s=="fisheye")
-	{
-		ldscp = new LandscapeFisheye();
+		qWarning() << "ERROR parsing landscape.ini file: " << landscapeFile;
+		s = "";
 	}
 	else
+		s = landscapeIni.value("landscape/type").toString();
+
+	Landscape* ldscp = NULL;
+	if      (s=="old_style")
+		ldscp = new LandscapeOldStyle();
+	else if (s=="spherical")
+		ldscp = new LandscapeSpherical();
+	else if (s=="fisheye")
+		ldscp = new LandscapeFisheye();
+	else
 	{
-		cerr << "Unknown landscape type: " << s << endl;
+		qDebug() << "Unknown landscape type: \"" << s << "\"";
 
 		// to avoid making this a fatal error, will load as a fisheye
 		// if this fails, it just won't draw
 		ldscp = new LandscapeFisheye();
 	}
 	
-	ldscp->load(landscapeFile, landscapeId);
+	ldscp->load(landscapeIni, landscapeId);
 	return ldscp;
 }
 
@@ -611,9 +611,8 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
 	{
 		try
 		{
-			InitParser pd;
-			pd.load(fileMan.findFile("landscapes/" + dir + "/landscape.ini"));
-			QString k = pd.get_str("landscape", "name").c_str();
+			QSettings landscapeIni(fileMan.findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
+			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
 		}
 		catch (exception& e)
