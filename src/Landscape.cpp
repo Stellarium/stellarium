@@ -42,13 +42,6 @@ Landscape::~Landscape()
 // Load attributes common to all landscapes
 void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landscapeId)
 {
-	if (landscapeIni.status() != QSettings::NoError)
-	{
-		qWarning() << "Failed to parse landscape.ini file for landscape with ID " << landscapeId;
-		valid_landscape = 0;
-		return;
-	}
-
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
 	description = landscapeIni.value("landscape/description").toString();
@@ -102,10 +95,9 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	if (sides) delete [] sides;
 }
 
-void LandscapeOldStyle::load(const QString& landscapeFile, const QString& landscapeId)
+void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
 	// TODO: put values into hash and call create method to consolidate code
-	QSettings landscapeIni(landscapeFile, StelIniFormat);
 	loadCommon(landscapeIni, landscapeId);
 
 	QString type = landscapeIni.value("landscape/type").toString();
@@ -385,9 +377,8 @@ LandscapeFisheye::~LandscapeFisheye()
 {
 }
 
-void LandscapeFisheye::load(const QString& landscapeFile, const QString& landscapeId)
+void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
-	QSettings landscapeIni(landscapeFile, StelIniFormat);
 	loadCommon(landscapeIni, landscapeId);
 	
 	QString type = landscapeIni.value("landscape/type").toString();
@@ -448,9 +439,8 @@ LandscapeSpherical::~LandscapeSpherical()
 {
 }
 
-void LandscapeSpherical::load(const QString& landscapeFile, const QString& landscapeId)
+void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
-	QSettings landscapeIni(landscapeFile, StelIniFormat);
 	loadCommon(landscapeIni, landscapeId);
 	
 	QString type = landscapeIni.value("landscape/type").toString();
