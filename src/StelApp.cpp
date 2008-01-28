@@ -36,7 +36,6 @@
 #include "MeteorMgr.hpp"
 #include "StarMgr.hpp"
 #include "SolarSystem.hpp"
-#include "InitParser.hpp"
 #include "StelIniParser.hpp"
 #include "Projector.hpp"
 
@@ -665,15 +664,12 @@ void StelApp::copyDefaultConfigFile()
 }
 
 // Set the colorscheme for all the modules
-void StelApp::setColorScheme(const QString& fileName, const QString& section)
+void StelApp::setColorScheme(const QString& section)
 {
-	InitParser conf;
-	conf.load(fileName);
-	
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		iter->setColorScheme(conf, section);
+		iter->setColorScheme(confSettings, section);
 	}
 }
 
@@ -682,7 +678,7 @@ void StelApp::setVisionModeNight(bool b)
 {
 	if (flagNightVision!=b)
 	{
-		setColorScheme(getConfigFilePath(), b ? "night_color" : "color");
+		setColorScheme(b ? "night_color" : "color");
 	}
 	flagNightVision=b;
 }

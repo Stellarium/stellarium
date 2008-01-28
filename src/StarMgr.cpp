@@ -446,11 +446,12 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void StarMgr::setColorScheme(const InitParser& conf, const QString& section)
+void StarMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"star_label_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	qDebug() << "DEBUG star_label_color is " << conf->value(section+"/star_label_color", defaultColor).toString();
+	setLabelColor(StelUtils::str_to_vec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
 /***************************************************************************

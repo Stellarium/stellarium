@@ -74,10 +74,10 @@ public:
 	//! @param added not used at present (?)
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::REPLACE_SELECTION);
 	
-	//! Load color scheme from the given ini file and section name
-	//! @param conf the iniparser containing the configuration items
-	//! @param section the name of the section of the ini file containing the configuration items
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	//! Load a color scheme from a configration object
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order

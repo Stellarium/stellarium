@@ -37,7 +37,6 @@ class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
 class StelFileMgr;
-class InitParser;
 class QStringList;
 class LoadingBar;
 class QSettings;
@@ -270,7 +269,7 @@ private:
 	void parseCLIArgsPostConfig();
 	
 	// Set the colorscheme for all the modules
-	void setColorScheme(const QString& fileName, const QString& section);
+	void setColorScheme(const QString& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;

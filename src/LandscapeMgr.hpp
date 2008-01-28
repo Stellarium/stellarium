@@ -27,6 +27,7 @@
 class Landscape;
 class Atmosphere;
 class Cardinals;
+class QSettings;
 
 //! @class LandscapeMgr 
 //! Manages all the rendering a the level of the observer's surrounding.
@@ -66,10 +67,10 @@ public:
 	//! Called for all registered modules if the sky culture changes.
 	virtual void updateSkyCulture() {;}
 	
-	//! Sets the color of the cardinal points based on the values in the ini parser object.
-	//! @param conf the ini parser object from which to read settings.
-	//! @param section the section of the ini settings to read the color value from.
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	//! Load a color scheme from a configration object
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	//! Get the order in which this module will draw it's objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

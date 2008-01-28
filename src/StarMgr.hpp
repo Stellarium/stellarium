@@ -39,6 +39,7 @@ class Projector;
 class Navigator;
 class LoadingBar;
 class SFont;
+class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
@@ -102,8 +103,10 @@ public:
 	//! Loads common and scientific names of stars for a given sky culture.
 	virtual void updateSkyCulture();
 	
-	//! Sets the colour scheme (night / chart etc).
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	//! Load a color scheme from a configration object
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	//! Used to determine the order in which the various StelModules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

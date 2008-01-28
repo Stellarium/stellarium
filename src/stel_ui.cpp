@@ -1491,12 +1491,12 @@ wstring StelUI::getTitleWithAltitude(void)
 	return result.toStdWString();
 }
 
-void StelUI::setColorScheme(const InitParser& conf, const QString& section)
+void StelUI::setColorScheme(const QSettings* conf, const QString& section)
 {
 	if (!desktop) return;
 	
-	s_color GuiBaseColor		= StelUtils::str_to_vec3f(conf.get_str(section.toStdString(), "gui_base_color", "0.3,0.4,0.7"));
-	s_color GuiTextColor		= StelUtils::str_to_vec3f(conf.get_str(section.toStdString(), "gui_text_color", "0.7,0.8,0.9"));
+	s_color GuiBaseColor = StelUtils::str_to_vec3f(conf->value(section+"/gui_base_color", "0.3,0.4,0.7").toString());
+	s_color GuiTextColor = StelUtils::str_to_vec3f(conf->value(section+"/gui_text_color", "0.7,0.8,0.9").toString());
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
