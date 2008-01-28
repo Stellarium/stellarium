@@ -204,6 +204,8 @@ namespace StelUtils {
 
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
 	double get_dec_angle(const string&);
+	double get_dec_angle(const QString&);
+	double get_dec_angle(const char*);
 	
 	//! Check if the filename is an absolute path.
 	bool checkAbsolutePath(const string& fileName);
