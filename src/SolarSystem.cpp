@@ -685,13 +685,13 @@ double SolarSystem::draw(StelCore* core)
 	return maxSquaredDistance;
 }
 
-void SolarSystem::setColorScheme(const InitParser& conf, const QString& section)
+void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
-	string defaultColor = conf.get_str(section.toStdString(),"default_color");
-	setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"planet_names_color", defaultColor)));
-	setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"planet_orbits_color", defaultColor)));
-	setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section.toStdString(),"object_trails_color", defaultColor)));
+	QString defaultColor = conf->value(section+"/default_color").toString();
+	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
+	setTrailsColor(StelUtils::str_to_vec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
 
 Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const

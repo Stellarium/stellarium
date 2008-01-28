@@ -32,13 +32,13 @@
 class Orbit;
 class LoadingBar;
 class Translator;
-class InitParser;
 class StelObject;
 class Planet;
 class SFont;
 class StelCore;
 class Projector;
 class Navigator;
+class QSettings;
 
 //! @class SolarSystem
 //! This StelObjectModule derivative is used to model SolarSystem boies.
@@ -78,8 +78,10 @@ public:
 	//! Called when a new object is selected.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	
-	//! Set the color scheme.
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	//! Load a color scheme from a configration object
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

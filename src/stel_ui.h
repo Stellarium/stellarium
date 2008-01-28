@@ -41,6 +41,7 @@ class Projector;
 class Navigator;
 class ToneReproducer;
 class LoadingBar;
+class QSettings;
 
 class StelUI : public StelModule
 {
@@ -84,12 +85,15 @@ public:
 	void tui_update_widgets(void);
 	void tuiUpdateIndependentWidgets(void); // For widgets that aren't tied directly to current settings
 	void show_message(wstring _message, int _time_out=0);
-    void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
-    void setTitleObservatoryName(const wstring& name);
-    void setTitle(const wstring& title);
-    wstring getTitleWithAltitude(void);
+	void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
+	void setTitleObservatoryName(const wstring& name);
+	void setTitle(const wstring& title);
+	wstring getTitleWithAltitude(void);
 
-    void setColorScheme(const InitParser& conf, const QString& section);
+	//! Load a color scheme from a configration object
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	void setColorScheme(const QSettings* conf, const QString& section);
 	double getMouseCursorTimeout() { return MouseCursorTimeout; }
 
 	bool getFlagShowGravityUi() { return FlagShowGravityUi; }

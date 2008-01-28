@@ -27,6 +27,7 @@
 class Translator;
 class SkyGrid;
 class SkyLine;
+class QSettings;
 
 using namespace std;
 
@@ -63,13 +64,11 @@ public:
 	virtual void update(double deltaTime);
 	
 	//! Sets the colors of the grids and great circles.
-	//! Reads setting from an ini parser object and sets the colors of the 
-	//! Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line and
-	//! Ecliptic Line.
-	//! @param conf the ini parser object which contains the color settings.
-	//! @param section the section of the ini parser in which to locate the
-	//! relevant settings.
-	virtual void setColorScheme(const InitParser& conf, const QString& section);
+	//! Sets the colors of the Equatorial Grid, Azimuthal Grid, 
+	//! Meridian Line, Equator Line and Ecliptic Line.
+	//! @param conf the configuration object containing the color scheme
+	//! @param section of conf containing the color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

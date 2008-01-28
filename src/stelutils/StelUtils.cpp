@@ -264,6 +264,17 @@ Vec3f str_to_vec3f(const QStringList& s)
 	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
 }
 
+Vec3f str_to_vec3f(const QString& s)
+{
+	return str_to_vec3f(s.toStdString());
+}
+
+Vec3f str_to_vec3f(const char* s)
+{
+	return str_to_vec3f(string(s));
+}
+
+
 // Obtains a string from a Vec3f with the form x,y,z
 string vec3f_to_str(const Vec3f& v)
 {
