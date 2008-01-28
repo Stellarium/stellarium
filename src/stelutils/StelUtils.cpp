@@ -496,6 +496,16 @@ double get_dec_angle(const string& str)
 	return (pos);
 }
 
+double get_dec_angle(const QString& str)
+{
+	return get_dec_angle(str.toStdString());
+}
+
+double get_dec_angle(const char* str)
+{
+	return get_dec_angle(string(str));
+}
+
 bool checkAbsolutePath(const string& fileName)
 {
 	// Absolute path if starts by '/' or by 'Drive:/' (MS)
