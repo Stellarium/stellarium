@@ -32,8 +32,6 @@
 
 #include <QString>
 
-class InitParser;
-
 //! @class Projector
 //! Provides functions for drawing operations which are performed with some sort of 
 //! "projection" according to the current projection mode.  This projection 

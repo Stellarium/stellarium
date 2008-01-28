@@ -26,7 +26,6 @@
 #include "ToneReproducer.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
-#include "InitParser.hpp"
 #include "StelCore.hpp"
 #include <QDebug>
 #include <QSettings>

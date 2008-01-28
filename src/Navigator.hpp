@@ -37,7 +37,6 @@ extern const Mat4d mat_vsop87_to_j2000;
 class Observer;
 class StelObject;
 class LoadingBar;
-class InitParser;
 class Planet;
 
 // Class which manages a navigation context

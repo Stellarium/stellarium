@@ -31,7 +31,6 @@
 #endif
 
 #include "Projector.hpp"
-#include "InitParser.hpp"
 #include "MappingClasses.hpp"
 #include "StelApp.hpp"
 #include <QDebug>
