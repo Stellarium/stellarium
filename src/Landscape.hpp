@@ -29,6 +29,8 @@
 #include "StelUtils.hpp"
 #include "STextureTypes.hpp"
 
+class QSettings;
+
 // Class which manages the displaying of the Landscape
 class Landscape
 {
@@ -76,7 +78,9 @@ public:
 
 protected:
 	//! Load attributes common to all landscapes
-	void loadCommon(const QString& landscape_file, const QString& landscapeId);
+	//! @param A reference to an existant QSettings object which describes the landscape
+	//! @param The name of the directory for the landscape files (e.g. "ocean")
+	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
 	
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
