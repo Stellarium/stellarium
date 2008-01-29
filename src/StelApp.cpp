@@ -595,12 +595,12 @@ int StelApp::handleMove(int x, int y, StelMod mod)
 }
 
 // Handle key press and release
-int StelApp::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
+int StelApp::handleKeys(QKeyEvent* event)
 {
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS))
 	{
-		if (i->handleKeys(key, mod, unicode, state)==true)
+		if (i->handleKeys(event)==true)
 			return 1;
 	}
 	return 0;

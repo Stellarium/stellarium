@@ -171,7 +171,7 @@ private:
 	//! Handle mouse move.
 	int handleMove(int x, int y, StelMod mod);
 	//! Handle key press and release.
-	int handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
+	int handleKeys(class QKeyEvent* event);
 
 	//! The minimum desired frame rate in frame per second.
 	float minfps;

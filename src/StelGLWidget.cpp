@@ -429,15 +429,10 @@ StelKey qtKeyToStelKey(Qt::Key k)
 
 void StelGLWidget::keyPressEvent(QKeyEvent* event)
 {
-	if ((Qt::Key)event->key()==Qt::Key_F1)
-	{
-		StelMainWindow::getInstance().toggleFullScreen();
-	}
-	
 	if (ui->handle_keys_tui(qtKeyToStelKey((Qt::Key)event->key()), Stel_KEYDOWN)) return;
 	if (ui->handle_keysGUI(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN)) return;
 	
-	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
+	StelApp::getInstance().handleKeys(event);
 	
 	// Non widget key handling
 	ui->handle_keys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYDOWN);
@@ -451,7 +446,7 @@ void StelGLWidget::keyReleaseEvent(QKeyEvent* event)
 	if (ui->handle_keys_tui(qtKeyToStelKey((Qt::Key)event->key()), Stel_KEYUP)) return;
 	if (ui->handle_keysGUI(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP)) return;
 	
-	StelApp::getInstance().handleKeys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);
+	StelApp::getInstance().handleKeys(event);
 	
 	// Non widget key handling
 	ui->handle_keys(qtKeyToStelKey((Qt::Key)event->key()), qtModToStelMod(event->modifiers()), event->text().utf16()[0], Stel_KEYUP);

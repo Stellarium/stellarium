@@ -93,12 +93,9 @@ public:
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
-	//! @param key the key code.
-	//! @param mod the current mod state, needed to determine whether e.g CTRL or SHIFT key are pressed.
-	//! @param unicode the unicode key code.
-	//! @param state the press state of the key. Can be Stel_KEYDOWN or Stel_KEYUP.
+	//! @param event the Key event
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state) {return false;}
+	virtual bool handleKeys(class QKeyEvent* event) {return false;}
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
 	//! the existing selection list.
