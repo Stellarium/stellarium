@@ -167,9 +167,11 @@ private:
 	double draw();
 	
 	//! Handle mouse clics.
-	int handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod);
+	int handleClick(class QMouseEvent* event);
+	//! Handle mouse wheel.
+	int handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	int handleMove(int x, int y, StelMod mod);
+	int handleMove(class QMouseEvent* event);
 	//! Handle key press and release.
 	int handleKeys(class QKeyEvent* event);
 

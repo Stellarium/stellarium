@@ -225,6 +225,7 @@ void StelApp::init()
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init();
+	getModuleMgr().registerModule(stelObjectMgr);
 	
 	localeMgr->init();
 	skyCultureMgr->init();
@@ -538,57 +539,36 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 }
 
 // Handle mouse clics
-int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state, StelMod mod)
+int StelApp::handleClick(QMouseEvent* event)
 {
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
 	{
-		if (i->handleMouseClicks(x, y, button, state, mod)==true)
+		if (i->handleMouseClicks(event)==true)
 			return 1;
 	}
-	
-	// Manage the event for the main window
-	{
-		// Deselect the selected object
-		if (button==Stel_BUTTON_RIGHT && state==Stel_MOUSEBUTTONUP)
-		{
-			getStelObjectMgr().unSelect();
-			return 1;
-		}
-		MovementMgr* mvmgr = (MovementMgr*)getModuleMgr().getModule("MovementMgr");
-		if (button==Stel_BUTTON_LEFT && state==Stel_MOUSEBUTTONUP && !mvmgr->getHasDragged())
-		{
-#ifdef MACOSX
-			// CTRL + left clic = right clic for 1 button mouse
-			if (mod & COMPATIBLE_StelMod_CTRL)
-			{
-				getStelObjectMgr().unSelect();
-				return 1;
-			}
-
-			// Try to select object at that position
-			getStelObjectMgr().findAndSelect(core, x, y, (mod & StelMod_META) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
-#else
-			getStelObjectMgr().findAndSelect(core, x, y, (mod & COMPATIBLE_StelMod_CTRL) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
-#endif
-			// If an object was selected update informations
-			if (getStelObjectMgr().getWasSelected())
-			{
-				((MovementMgr*)moduleMgr->getModule("MovementMgr"))->setFlagTracking(false);
-			}
-		}
-	}
-	
 	return 0;
 }
 
+// Handle mouse wheel.
+int StelApp::handleWheel(QWheelEvent* event)
+{
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
+	{
+		if (i->handleMouseWheel(event)==true)
+			return 1;
+	}
+	return 0;
+}
+	
 // Handle mouse move
-int StelApp::handleMove(int x, int y, StelMod mod)
+int StelApp::handleMove(QMouseEvent* event)
 {
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
-		if (i->handleMouseMoves(x, y, mod)==true)
+		if (i->handleMouseMoves(event)==true)
 			return 1;
 	}
 	return 0;
