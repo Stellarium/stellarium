@@ -25,6 +25,8 @@
 #include <QList>
 #include "StelModule.hpp"
 
+#define GETSTELMODULE( m ) StelApp::getInstance().getModuleMgr().getModule( m )
+
 //! @class StelModuleMgr
 //! Manage a collection of StelModules including both core and plugin modules.
 //! 
