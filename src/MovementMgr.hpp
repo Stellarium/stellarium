@@ -79,8 +79,8 @@ public slots:
 	//! Get whether auto zoom can go further than normal.
 	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}
 	
-	//! Set object tracking on/off.
-	void setFlagTracking(bool b);
+	//! Set object tracking on/off and go to selected object
+	void setFlagTracking(bool b=true);
 	//! Get current object tracking status.
 	bool getFlagTracking(void) const {return flagTracking;}
 
@@ -120,15 +120,17 @@ public slots:
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
 
+	//! Viewing direction function : true move, false stop.
+	void turnRight(bool);
+	void turnLeft(bool);
+	void turnUp(bool);
+	void turnDown(bool);
+	void zoomIn(bool);
+	void zoomOut(bool);
+	
 private:
-	// Viewing direction function : 1 move, 0 stop.
-	void turn_right(int);
-	void turn_left(int);
-	void turn_up(int);
-	void turn_down(int);
-	void zoom_in(int);
-	void zoom_out(int);
-	void change_fov(double deltaFov);
+	
+	void changeFov(double deltaFov);
 	   
 	void updateVisionVector(double deltaTime); 
 	void update_auto_zoom(double deltaTime); // Update auto_zoom if activated
