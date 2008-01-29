@@ -19,7 +19,6 @@
 
 #include "Observer.hpp"
 #include "StelUtils.hpp"
-#include "InitParser.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "Translator.hpp"
@@ -248,22 +247,19 @@ void Observer::load(QSettings* conf, const QString& section)
 
 void Observer::save(const QString& file, const QString& section) const
 {
-	printf("Saving location %s to file %s\n", qPrintable(locationName), qPrintable(file));
-	InitParser conf;
-	conf.load(file);
-	setConf(conf, section.toStdString());
-	conf.save(file);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	setConf(conf, section);
 }
 
 
 // change settings but don't write to files
-void Observer::setConf(InitParser & conf, const string& section) const
+void Observer::setConf(QSettings* conf, const QString& section) const
 {
-	conf.set_str(section + ":name", locationName);
-	conf.set_str(section + ":home_planet", planet->getEnglishName().c_str());
-	conf.set_str(section + ":latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
-	conf.set_str(section + ":longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
-	conf.set_int(section + ":altitude", altitude);
+	conf->setValue(section + "/name", locationName);
+	conf->setValue(section + "/home_planet", planet->getEnglishName().c_str());
+	conf->setValue(section + "/latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
+	conf->setValue(section + "/longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
+	conf->setValue(section + "/altitude", altitude);
 	// TODO: clear out old timezone settings from this section
 	// if still in loaded conf?  Potential for confusion.
 }
