@@ -21,8 +21,6 @@
 #define STELAPP_H
 
 #include <cassert>
-#include "StelKey.hpp"
-#include "StelTypes.hpp"
 #include "fixx11h.h"
 #include <QString>
 #include <QObject>
@@ -54,12 +52,11 @@ class QSettings;
 //! @author Fabien Chereau
 class StelApp : public QObject
 {
-friend class StelMainWindow;
-friend class StelGLWidget;
-
 	Q_OBJECT;
 	
 public:
+	friend class StelGLWidget;
+		
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters
 	//! @param argv an array of char* command line arguments
@@ -175,15 +172,12 @@ private:
 	//! Handle key press and release.
 	int handleKeys(class QKeyEvent* event);
 
-	//! The minimum desired frame rate in frame per second.
-	float minfps;
-	//! The maximum desired frame rate in frame per second.
-	float maxfps;
-
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);
 
-
+	//! Set the colorscheme for all the modules
+	void setColorScheme(const QString& section);
+	
 	//! Sets the name of the configuration file.
 	//! It is possible to set the configuration by passing either a full path
 	//! a relative path of an existing file, or path segment which will be appended
@@ -269,9 +263,6 @@ private:
 	//! read.  This gives us the chance to over-ride settings which are in the configuration
 	//! file.
 	void parseCLIArgsPostConfig();
-	
-	// Set the colorscheme for all the modules
-	void setColorScheme(const QString& section);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -304,6 +295,11 @@ private:
 	LoadingBar* loadingBar;
 	
 	float fps;
+	//! The minimum desired frame rate in frame per second.
+	float minfps;
+	//! The maximum desired frame rate in frame per second.
+	float maxfps;
+	
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
 
