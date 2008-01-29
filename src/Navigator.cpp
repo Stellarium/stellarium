@@ -105,7 +105,28 @@ bool Navigator::getIsTimeNow(void) const
 	return previousResult;
 }
 
+//! Increase the time speed
+void Navigator::increaseTimeSpeed()
+{
+	double s = getTimeSpeed();
+	if (s>=JD_SECOND) s*=10.;
+	else if (s<-JD_SECOND) s/=10.;
+	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
+	else if (s>=-JD_SECOND && s<0.) s=0.;
+	setTimeSpeed(s);
+}
 
+//! Decrease the time speed
+void Navigator::decreaseTimeSpeed()
+{
+	double s = getTimeSpeed();
+	if (s>JD_SECOND) s/=10.;
+	else if (s<=-JD_SECOND) s*=10.;
+	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+	else if (s>0. && s<=JD_SECOND) s=0.;
+	setTimeSpeed(s);
+}
+	
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setLocalVision(const Vec3d& _pos)
 {

@@ -59,33 +59,33 @@ bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y, StelMod mod)
 	{
 		if (x == 0)
 		{
-			turn_left(1);
+			turnLeft(1);
 			is_mouse_moving_horiz = true;
 		}
 		else if (x == core->getProjection()->getViewportWidth() - 1)
 		{
-			turn_right(1);
+			turnRight(1);
 			is_mouse_moving_horiz = true;
 		}
 		else if (is_mouse_moving_horiz)
 		{
-			turn_left(0);
+			turnLeft(0);
 			is_mouse_moving_horiz = false;
 		}
 
 		if (y == 0)
 		{
-			turn_up(1);
+			turnUp(1);
 			is_mouse_moving_vert = true;
 		}
 		else if (y == core->getProjection()->getViewportHeight() - 1)
 		{
-			turn_down(1);
+			turnDown(1);
 			is_mouse_moving_vert = true;
 		}
 		else if (is_mouse_moving_vert)
 		{
-			turn_up(0);
+			turnUp(0);
 			is_mouse_moving_vert = false;
 		}
 	}
@@ -113,38 +113,38 @@ bool MovementMgr::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 sta
 	if (state == Stel_KEYDOWN)
 	{
 		// Direction and zoom deplacements
-		if (key==StelKey_LEFT) turn_left(1);
-		if (key==StelKey_RIGHT) turn_right(1);
+		if (key==StelKey_LEFT) turnLeft(1);
+		if (key==StelKey_RIGHT) turnRight(1);
 		if (key==StelKey_UP)
 		{
-			if (mod & COMPATIBLE_StelMod_CTRL) zoom_in(1);
-			else turn_up(1);
+			if (mod & COMPATIBLE_StelMod_CTRL) zoomIn(1);
+			else turnUp(1);
 		}
 		if (key==StelKey_DOWN)
 		{
-			if (mod & COMPATIBLE_StelMod_CTRL) zoom_out(1);
-			else turn_down(1);
+			if (mod & COMPATIBLE_StelMod_CTRL) zoomOut(1);
+			else turnDown(1);
 		}
-		if (key==StelKey_PAGEUP) zoom_in(1);
-		if (key==StelKey_PAGEDOWN) zoom_out(1);
+		if (key==StelKey_PAGEUP) zoomIn(1);
+		if (key==StelKey_PAGEDOWN) zoomOut(1);
 	}
 	else
 	{
 		// When a deplacement key is released stop mooving
-		if (key==StelKey_LEFT) turn_left(0);
-		if (key==StelKey_RIGHT) turn_right(0);
+		if (key==StelKey_LEFT) turnLeft(0);
+		if (key==StelKey_RIGHT) turnRight(0);
 		if (mod & COMPATIBLE_StelMod_CTRL)
 		{
-			if (key==StelKey_UP) zoom_in(0);
-			if (key==StelKey_DOWN) zoom_out(0);
+			if (key==StelKey_UP) zoomIn(0);
+			if (key==StelKey_DOWN) zoomOut(0);
 		}
 		else
 		{
-			if (key==StelKey_UP) turn_up(0);
-			if (key==StelKey_DOWN) turn_down(0);
+			if (key==StelKey_UP) turnUp(0);
+			if (key==StelKey_DOWN) turnDown(0);
 		}
-		if (key==StelKey_PAGEUP) zoom_in(0);
-		if (key==StelKey_PAGEDOWN) zoom_out(0);
+		if (key==StelKey_PAGEUP) zoomIn(0);
+		if (key==StelKey_PAGEDOWN) zoomOut(0);
 	}
 	if (key==StelKey_LEFT || key==StelKey_RIGHT || key==StelKey_UP || key==StelKey_DOWN || key==StelKey_PAGEUP || key==StelKey_PAGEDOWN)
 	{
@@ -218,7 +218,7 @@ void MovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 	}
 }
 
-void MovementMgr::turn_right(int s)
+void MovementMgr::turnRight(bool s)
 {
 	if (s && FlagEnableMoveKeys)
 	{
@@ -230,20 +230,19 @@ void MovementMgr::turn_right(int s)
 		deltaAz = 0;
 }
 
-void MovementMgr::turn_left(int s)
+void MovementMgr::turnLeft(bool s)
 {
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = -1;
 		setFlagTracking(false);
 		setFlagLockEquPos(false);
-
 	}
 	else
 		deltaAz = 0;
 }
 
-void MovementMgr::turn_up(int s)
+void MovementMgr::turnUp(bool s)
 {
 	if (s && FlagEnableMoveKeys)
 	{
@@ -255,7 +254,7 @@ void MovementMgr::turn_up(int s)
 		deltaAlt = 0;
 }
 
-void MovementMgr::turn_down(int s)
+void MovementMgr::turnDown(bool s)
 {
 	if (s && FlagEnableMoveKeys)
 	{
@@ -268,13 +267,13 @@ void MovementMgr::turn_down(int s)
 }
 
 
-void MovementMgr::zoom_in(int s)
+void MovementMgr::zoomIn(bool s)
 {
 	if (FlagEnableZoomKeys)
 		deltaFov = -1*(s!=0);
 }
 
-void MovementMgr::zoom_out(int s)
+void MovementMgr::zoomOut(bool s)
 {
 	if (FlagEnableZoomKeys)
 		deltaFov = (s!=0);
@@ -343,7 +342,7 @@ void MovementMgr::updateMotion(double deltaTime)
 
 	if(deltaFov != 0 )
 	{
-		change_fov(deltaFov);
+		changeFov(deltaFov);
 		std::ostringstream oss;
 		oss << "zoom delta_fov " << deltaFov;
 	}
@@ -713,7 +712,7 @@ void MovementMgr::zoomTo(double aim_fov, float move_duration)
     flag_auto_zoom = true;
 }
 
-void MovementMgr::change_fov(double deltaFov)
+void MovementMgr::changeFov(double deltaFov)
 {
 	// if we are zooming in or out
 	if (deltaFov) core->getProjection()->setFov(core->getProjection()->getFov()+deltaFov);

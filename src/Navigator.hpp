@@ -23,6 +23,9 @@
 #include <string>
 #include "vecmath.h"
 
+#include "fixx11h.h"
+#include <QObject>
+
 using std::string;
 
 // Conversion in standar Julian time format
@@ -41,8 +44,10 @@ class Planet;
 
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
-class Navigator
+class Navigator : public QObject
 {
+	Q_OBJECT;
+	
 public:
 
 	enum ViewingModeType
@@ -67,20 +72,7 @@ public:
 	void setMountMode(MOUNT_MODE m) {setViewingMode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
 	//! Get current mount type
 	MOUNT_MODE getMountMode(void) {return ((getViewingMode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
-	//! Toggle current mount mode between equatorial and altazimutal
-	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
 
-
-	// Time controls
-	//! Set the current date in Julian Day
-	void setJDay(double JD) {JDay=JD;}
-	//! Get the current date in Julian Day
-	double getJDay(void) const {return JDay;}
-	
-	//! Set time speed in JDay/sec
-	void setTimeSpeed(double ts) {time_speed=ts;}
-	//! Get time speed in JDay/sec
-	double getTimeSpeed(void) const {return time_speed;}
 
 	// Get vision direction
 	const Vec3d& getEquVision(void) const {return equ_vision;}
@@ -127,11 +119,6 @@ public:
 
 	const Vec3d& getinitViewPos() {return initViewPos;}
 	
-	//! Set stellarium time to current real world time
-	void setTimeNow();
-	//! Get wether the current stellarium time is the real world time
-	bool getIsTimeNow(void) const;
-	
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const {return PresetSkyTime;}
 	void setPresetSkyTime(double d) {PresetSkyTime=d;}
@@ -142,6 +129,37 @@ public:
 	
 	// Update the modelview matrices
 	void updateModelViewMat(void);
+	
+public slots:
+	//! Toggle current mount mode between equatorial and altazimutal
+	void toggleMountMode() {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
+	//! Define whether we should use equatorial mount or altazimutal
+	void setEquatorialMount(bool b) {setMountMode(b ? MOUNT_EQUATORIAL : MOUNT_ALTAZIMUTAL);}
+	
+	//! Set the current date in Julian Day
+	void setJDay(double JD) {JDay=JD;}
+	//! Get the current date in Julian Day
+	double getJDay() const {return JDay;}
+	
+	//! Set time speed in JDay/sec
+	void setTimeSpeed(double ts) {time_speed=ts;}
+	//! Get time speed in JDay/sec
+	double getTimeSpeed() const {return time_speed;}
+	
+	//! Increase the time speed
+	void increaseTimeSpeed();
+	//! Decrease the time speed
+	void decreaseTimeSpeed();
+	
+	//! Set real time speed, i.e. 1 sec/sec
+	void setRealTimeSpeed() {setTimeSpeed(JD_SECOND);}
+	//! Get time speed in JDay/sec
+	double getTimeTimeSpeed() const {return (fabs(time_speed-JD_SECOND)<0.0000001);}
+	
+	//! Set stellarium time to current real world time
+	void setTimeNow();
+	//! Get wether the current stellarium time is the real world time
+	bool getIsTimeNow() const;
 	
 private:
 	// Matrices used for every coordinate transfo
