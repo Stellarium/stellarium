@@ -57,6 +57,8 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 ########### Others ###########
 # Activate translation with gettext
 SET(ENABLE_NLS 1)
+# Generate python wrappers
+SET(GENERATE_PYTHON_WRAPPERS 0)
 
 ########### Find packages ###########
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -164,7 +166,9 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae ) 
 ADD_SUBDIRECTORY( scripts ) 
 ADD_SUBDIRECTORY( stars ) 
-
+IF (GENERATE_PYTHON_WRAPPERS)
+ ADD_SUBDIRECTORY( sip ) 
+ENDIF(GENERATE_PYTHON_WRAPPERS)
 ########### Macosx Bundling ###############
 IF(MACOSX)
 ADD_CUSTOM_TARGET(macosx_bundle mv ${CMAKE_INSTALL_PREFIX}/bin ${CMAKE_INSTALL_PREFIX}/MacOS COMMAND mv ${CMAKE_INSTALL_PREFIX}/share ${CMAKE_INSTALL_PREFIX}/Resources COMMAND mv ${CMAKE_INSTALL_PREFIX}/Resources/stellarium/* ${CMAKE_INSTALL_PREFIX}/Resources COMMAND rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium COMMAND mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks COMMAND perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
