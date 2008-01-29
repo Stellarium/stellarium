@@ -42,7 +42,7 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 {
 	setWindowTitle(StelApp::getApplicationName());
 	setObjectName("stellariumMainWin");
-	setMinimumSize(400,400);
+	
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
@@ -68,10 +68,10 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	setWindowIcon(QIcon(iconPath));
 	
 	QSettings* settings = stelApp->getSettings();
-	//resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
 	if (settings->value("video/fullscreen", true).toBool())
 	{
-		showFullScreen();
+		//showFullScreen();
 	}
 	
 	// Create the OpenGL widget in which the main modules will be drawn
