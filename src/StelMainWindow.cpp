@@ -82,9 +82,14 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	stelApp->init();
 	openGLWin->init();
 
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Set up the new GUI
+	
 	Ui_Form testUi;
 	testUi.setupUi(this);
 	
+	// The actions need to be added to the main form to be effective
 	foreach (QObject* obj, this->children())
 	{
 		QAction* a = qobject_cast<QAction *>(obj);
