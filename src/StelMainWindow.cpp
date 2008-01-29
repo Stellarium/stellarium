@@ -81,7 +81,7 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	
 	stelApp->init();
 	openGLWin->init();
-
+	openGLWin->setFocus();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
@@ -127,6 +127,9 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	
 	module = GETSTELMODULE("MovementMgr");
 	QObject::connect(testUi.actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
+	
+	testUi.actionSet_Full_Screen->setChecked(isFullScreen());
+	QObject::connect(testUi.actionSet_Full_Screen, SIGNAL(toggled(bool)), this, SLOT(setFullScreen(bool)));
 	
 }
 
@@ -192,8 +195,21 @@ void StelMainWindow::toggleFullScreen()
 	}
 }
 
-
+/*************************************************************************
+ Get whether fullscreen is activated or not
+*************************************************************************/
 bool StelMainWindow::getFullScreen() const
 {
 	return isFullScreen();
+}
+
+/*************************************************************************
+ Set whether fullscreen is activated or not
+ *************************************************************************/
+void StelMainWindow::setFullScreen(bool b)
+{
+	if (b)
+		showFullScreen();
+	else
+		showNormal();
 }

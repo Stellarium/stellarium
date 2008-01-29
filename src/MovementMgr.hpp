@@ -50,7 +50,7 @@ public:
 	//! Implement required draw function.  Does nothing.
 	virtual double draw(StelCore* core) {return 0.;}
 	//! Handle keyboard events.
-	virtual bool handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state);
+	virtual bool handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod);
 	//! Handle mouse click events.

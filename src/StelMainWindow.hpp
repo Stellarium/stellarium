@@ -27,6 +27,7 @@
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
 class StelMainWindow : public QMainWindow
 {
+	Q_OBJECT;
 public:
 	//! Constructor
 	StelMainWindow(int argc, char** argv);
@@ -36,11 +37,14 @@ public:
 	//! @return the StelMainWindow singleton instance
 	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
+public slots:
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
 	
 	//! Get whether fullscreen is activated or not
 	bool getFullScreen() const;
+	//! Set whether fullscreen is activated or not
+	void setFullScreen(bool);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
