@@ -52,9 +52,11 @@ public:
 	//! Handle keyboard events.
 	virtual bool handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod);
+	virtual bool handleMouseMoves(class QMouseEvent* event);
+	//! Handle mouse wheel events.
+	virtual bool handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
-	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod);
+	virtual bool handleMouseClicks(class QMouseEvent* event);
 	//! Called then the selected object changes.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	
