@@ -10,9 +10,9 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Form</string>
+   <string>Stellarium</string>
   </property>
-  <widget class="QDockWidget" name="dockWidgetSearch" >
+  <widget class="QDockWidget" name="dockWidgetSearchSkyObject" >
    <property name="geometry" >
     <rect>
      <x>90</x>
@@ -59,10 +59,10 @@
         <number>2</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit" />
+        <widget class="QLineEdit" name="lineEditSearchSkyObject" />
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton" >
+        <widget class="QPushButton" name="pushButtonGotoSearchSkyObject" >
          <property name="text" >
           <string>Go</string>
          </property>
@@ -72,6 +72,57 @@
         </widget>
        </item>
       </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetHelp" >
+   <property name="geometry" >
+    <rect>
+     <x>90</x>
+     <y>200</y>
+     <width>291</width>
+     <height>56</height>
+    </rect>
+   </property>
+   <property name="floating" >
+    <bool>true</bool>
+   </property>
+   <property name="features" >
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas" >
+    <set>Qt::NoDockWidgetArea</set>
+   </property>
+   <property name="windowTitle" >
+    <string>Help</string>
+   </property>
+   <widget class="QWidget" name="dockWidgetContents_2" >
+    <layout class="QGridLayout" >
+     <property name="leftMargin" >
+      <number>2</number>
+     </property>
+     <property name="topMargin" >
+      <number>2</number>
+     </property>
+     <property name="rightMargin" >
+      <number>2</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>2</number>
+     </property>
+     <property name="horizontalSpacing" >
+      <number>2</number>
+     </property>
+     <property name="verticalSpacing" >
+      <number>2</number>
+     </property>
+     <item row="0" column="0" >
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Help about Stellarium</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -338,7 +389,7 @@
   <connection>
    <sender>actionShow_Search_Window</sender>
    <signal>toggled(bool)</signal>
-   <receiver>dockWidgetSearch</receiver>
+   <receiver>dockWidgetSearchSkyObject</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -364,6 +415,22 @@
     <hint type="destinationlabel" >
      <x>324</x>
      <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShow_Help_Window</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetHelp</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>235</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>
