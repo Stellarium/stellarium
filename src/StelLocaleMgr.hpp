@@ -25,9 +25,6 @@
 
 using namespace std;
 
-// Predeclaration of some classes
-class InitParser;
-
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau

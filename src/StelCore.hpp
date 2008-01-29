@@ -24,7 +24,6 @@
 class Navigator;
 class Projector;
 class ToneReproducer;
-class InitParser;
 class LoadingBar;
 class Observer;
 class GeodesicGrid;

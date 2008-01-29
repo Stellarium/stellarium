@@ -31,7 +31,6 @@
 #include "stel_command_interface.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "InitParser.hpp"
 
 using namespace std;
 

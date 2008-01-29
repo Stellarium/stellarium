@@ -26,8 +26,6 @@
 
 using namespace std;
 
-class InitParser;
-
 //! @class StelSkyCultureMgr
 //! Manage sky cultures for stellarium.
 //! Different human cultures have used different names for stars, and visualised

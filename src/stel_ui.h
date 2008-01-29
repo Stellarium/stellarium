@@ -35,7 +35,6 @@ using namespace s_gui;
 class StelApp;
 class StelCore;
 class StelCommandInterface;
-class InitParser;
 class Planet;
 class Projector;
 class Navigator;
