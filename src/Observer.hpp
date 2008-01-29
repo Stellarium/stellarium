@@ -24,7 +24,6 @@
 #include <QString>
 #include "vecmath.h"
 
-class InitParser;
 class SolarSystem;
 class Planet;
 class ArtificialPlanet;
@@ -42,7 +41,7 @@ public:
 	void setHomePlanet(const Planet *p,float transit_seconds=2.f);
 	const Planet *getHomePlanet(void) const;
 	
-	void setConf(InitParser& conf, const std::string& section) const;
+	void setConf(QSettings* conf, const QString& section) const;
 	void load(QSettings* conf, const QString& section);
 	
 	//! TODO: Move to MovementMgr
