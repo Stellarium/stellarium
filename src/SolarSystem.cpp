@@ -25,7 +25,6 @@
 #include "STexture.hpp"
 #include "stellplanet.h"
 #include "orbit.h"
-#include "InitParser.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
@@ -37,10 +36,16 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelIniParser.hpp"
 #include "Planet.hpp"
 #include <QTextStream>
 #include <QSettings>
 #include <QVariant>
+#include <QString>
+#include <QStringList>
+#include <QMap>
+#include <QMultiMap>
+#include <QMapIterator>
 
 using namespace std;
 
@@ -183,33 +188,111 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 void SolarSystem::loadPlanets()
 {
 	cout << "Loading Solar System data...";
-	InitParser pd;	// The Planet data ini file parser
+	QString iniFile;
 	try
 	{
-		pd.load(StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini"));
+		iniFile = StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini");
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR while loading ssysyem.ini: " << e.what() << endl;
+		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << e.what() << endl;
+		return;
+	}
+	QSettings pd(iniFile, StelIniFormat);
+	if (pd.status() != QSettings::NoError)
+	{
+		qWarning() << "ERROR while parsing ssysyem.ini file";
 		return;
 	}
 
-	int nbSections = pd.get_nsec();
-	for (int i = 0;i<nbSections;++i)
+	// QSettings does not allow us to say that the sections of the file
+	// will be listed in the same order  as in the file like the old 
+	// InitParser used to so we can no longer assume that.  
+	//
+	// This means we must first decide what order to read the sections
+	// of the file in (each section contains one planet) to avoid setting
+	// the parent Planet* to one which has not yet been created.
+	//
+	// Stage 1: Make a map of body names back to the section names 
+	// which they come from. Also make a map of body name to parent body 
+	// name. These two maps can be made in a single pass through the 
+	// sections of the file.
+	//
+	// Stage 2: Make an ordered list of section names such that each
+	// item is only ever dependent on items which appear earlier in the
+	// list.
+	// 2a: Make a QMultiMap relating the number of levels of dependency
+	//     to the body name, i.e. 
+	//     0 -> Sun
+	//     1 -> Mercury
+	//     1 -> Venus
+	//     1 -> Earth
+	//     2 -> Moon
+	//     etc.
+	// 2b: Populate an ordered list of section names by iterating over
+	//     the QMultiMap.  This type of contains is always sorted on the
+	//     key, so it's easy.
+	//     i.e. [sol, earth, moon] is fine, but not [sol, moon, earth]
+	//
+	// Stage 3: iterate over the ordered sections decided in stage 2,
+	// creating the planet objects from the QSettings data.
+	
+	// Stage 1 (as described above).
+	QMap<QString, QString> secNameMap;
+	QMap<QString, QString> parentMap;
+	QStringList sections = pd.childGroups();
+	for (int i=0; i<sections.size(); ++i)
 	{
-		const string secname = pd.get_secname(i);
-		const string englishName = pd.get_str(secname, "name");
+		const QString secname = sections.at(i);
+		const QString englishName = pd.value(secname+"/name").toString();
+		const QString strParent = pd.value(secname+"/parent").toString();
+		secNameMap[englishName] = secname;
+		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
+			parentMap[englishName] = strParent;
+	}
 
-		const string str_parent = pd.get_str(secname, "parent");
-		Planet *parent = NULL;
+	// Stage 2a (as described above).
+	QMultiMap<int, QString> depLevelMap;
+	for (int i=0; i<sections.size(); ++i)
+	{
+		const QString englishName = pd.value(sections.at(i)+"/name").toString();
 
-		if (str_parent!="none")
+		// follow dependencies, incrementing level when we have one 
+		// till we run out.
+		QString p=englishName;
+		int level = 0;
+		while(parentMap.contains(p) && parentMap[p]!="none")
 		{
-			// Look in the other planets the one named with str_parent
+			level++;
+			p = parentMap[p];
+		}
+
+		depLevelMap.insert(level, secNameMap[englishName]);
+	}
+
+	// Stage 2b (as described above).
+	QStringList orderedSections;
+	QMapIterator<int, QString> levelMapIt(depLevelMap);
+	while(levelMapIt.hasNext())
+	{
+		levelMapIt.next();
+		orderedSections << levelMapIt.value();
+	}
+
+	// Stage 3 (as described above).
+	for (int i = 0;i<orderedSections.size();++i)
+	{
+		const QString secname = orderedSections.at(i);
+		const QString englishName = pd.value(secname+"/name").toString();
+		const QString strParent = pd.value(secname+"/parent").toString();
+		Planet *parent = NULL;
+ 		if (strParent!="none")
+		{
+			// Look in the other planets the one named with strParent
 			vector<Planet*>::iterator iter = system_planets.begin();
 			while (iter != system_planets.end())
 			{
-				if ((*iter)->getEnglishName()==str_parent)
+				if ((*iter)->getEnglishName()==strParent.toStdString())
 				{
 					parent = (*iter);
 				}
@@ -217,30 +300,29 @@ void SolarSystem::loadPlanets()
 			}
 			if (parent == NULL)
 			{
-				cout << "ERROR : can't find parent for " << englishName << endl;
+				qWarning() << "ERROR : can't find parent solar system body for " << englishName;
 				assert(0);
 			}
 		}
 
-		const string funcname = pd.get_str(secname, "coord_func");
+		const QString funcName = pd.value(secname+"/coord_func").toString();
 		pos_func_type posfunc;
 		OsulatingFunctType *osculating_func = 0;
-		bool close_orbit = pd.get_boolean(secname, "close_orbit", 1);
+		bool close_orbit = pd.value(secname+"/close_orbit", true).toBool();
 
-		if (funcname=="ell_orbit")
+		if (funcName=="ell_orbit")
 		{
 			// Read the orbital elements
-			const double epoch = pd.get_double(secname, "orbit_Epoch",J2000);
-			const double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity").toDouble();
 			if (eccentricity >= 1.0) close_orbit = false;
-			double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance",-1e100);
+			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
 			if (pericenter_distance <= 0.0) {
-				semi_major_axis = pd.get_double(secname,"orbit_SemiMajorAxis",-1e100);
+				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
-					cerr << "ERROR: " << englishName
-					     << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis"
-					     << endl;
+					qDebug() << "ERROR: " << englishName
+						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
 					assert(0);
 				} else {
 					semi_major_axis /= AU;
@@ -253,10 +335,10 @@ void SolarSystem::loadPlanets()
 				                ? 0.0 // parabolic orbits have no semi_major_axis
 				                : pericenter_distance / (1.0-eccentricity);
 			}
-			double mean_motion = pd.get_double(secname,"orbit_MeanMotion",-1e100);
+			double mean_motion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
 			double period;
 			if (mean_motion <= -1e100) {
-				period = pd.get_double(secname,"orbit_Period",-1e100);
+				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					mean_motion = (eccentricity == 1.0)
 					            ? 0.01720209895 * (1.5/pericenter_distance)
@@ -271,28 +353,28 @@ void SolarSystem::loadPlanets()
 			} else {
 				period = 2.0*M_PI/mean_motion;
 			}
-			const double inclination = pd.get_double(secname, "orbit_Inclination")*(M_PI/180.0);
-			const double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*(M_PI/180.0);
-			double arg_of_pericenter = pd.get_double(secname,"orbit_ArgOfPericenter",-1e100);
+			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
+			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
+			double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter",-1e100).toDouble();
 			double long_of_pericenter;
 			if (arg_of_pericenter <= -1e100) {
-				long_of_pericenter = pd.get_double(secname,"orbit_LongOfPericenter")*(M_PI/180.0);
+				long_of_pericenter = pd.value(secname+"/orbit_LongOfPericenter").toDouble()*(M_PI/180.0);
 				arg_of_pericenter = long_of_pericenter - ascending_node;
 			} else {
-            	arg_of_pericenter *= (M_PI/180.0);
+				arg_of_pericenter *= (M_PI/180.0);
 				long_of_pericenter = arg_of_pericenter + ascending_node;
 			}
-			double mean_anomaly = pd.get_double(secname,"orbit_MeanAnomaly",-1e100);
-            double mean_longitude;
+			double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble();
+			double mean_longitude;
 			if (mean_anomaly <= -1e100) {
-				mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*(M_PI/180.0);
+				mean_longitude = pd.value(secname+"/orbit_MeanLongitude").toDouble()*(M_PI/180.0);
 				mean_anomaly = mean_longitude - long_of_pericenter;
 			} else {
-            	mean_anomaly *= (M_PI/180.0);
+				mean_anomaly *= (M_PI/180.0);
 				mean_longitude = mean_anomaly + long_of_pericenter;
 			}
 
-			  // when the parent is the sun use ecliptic rathe than sun equator:
+			// when the parent is the sun use ecliptic rathe than sun equator:
 			const double parent_rot_obliquity = parent->get_parent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
@@ -314,19 +396,18 @@ void SolarSystem::loadPlanets()
 
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
 		} else
-		if (funcname=="comet_orbit")
+		if (funcName=="comet_orbit")
 		{
 			// Read the orbital elements
-			const double eccentricity = pd.get_double(secname,"orbit_Eccentricity",0.0);
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
 			if (eccentricity >= 1.0) close_orbit = false;
-			double pericenter_distance = pd.get_double(secname,"orbit_PericenterDistance",-1e100);
+			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
 			if (pericenter_distance <= 0.0) {
-				semi_major_axis = pd.get_double(secname,"orbit_SemiMajorAxis",-1e100);
+				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
-					cerr << "ERROR: " << englishName
-					     << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis"
-					     << endl;
+					qWarning() << "ERROR: " << englishName
+						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
 					assert(0);
 				} else {
 					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
@@ -337,10 +418,10 @@ void SolarSystem::loadPlanets()
 				                ? 0.0 // parabolic orbits have no semi_major_axis
 				                : pericenter_distance / (1.0-eccentricity);
 			}
-			double mean_motion = pd.get_double(secname,"orbit_MeanMotion",-1e100);
+			double mean_motion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
 			double period;
 			if (mean_motion <= -1e100) {
-				period = pd.get_double(secname,"orbit_Period",-1e100);
+				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					mean_motion = (eccentricity == 1.0)
 					            ? 0.01720209895 * (1.5/pericenter_distance)
@@ -355,15 +436,14 @@ void SolarSystem::loadPlanets()
 			} else {
 				period = 2.0*M_PI/mean_motion;
 			}
-			double time_at_pericenter = pd.get_double(secname,"orbit_TimeAtPericenter",-1e100);
+			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
 			if (time_at_pericenter <= -1e100) {
-				const double epoch = pd.get_double(secname,"orbit_Epoch",-1e100);
-				double mean_anomaly = pd.get_double(secname,"orbit_MeanAnomaly",-1e100);
+				const double epoch = pd.value(secname+"/orbit_Epoch",-1e100).toDouble();
+				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble();
 				if (epoch <= -1e100 || mean_anomaly <= -1e100) {
-					cerr << "ERROR: " << englishName
-					     << ": when you do not provide orbit_TimeAtPericenter, you must provide both "
-					        "orbit_Epoch and orbit_MeanAnomaly"
-					     << endl;
+					qWarning() << "ERROR: " << englishName
+						<< ": when you do not provide orbit_TimeAtPericenter, you must provide both "
+						<< "orbit_Epoch and orbit_MeanAnomaly";
 					assert(0);
 				} else {
 					mean_anomaly *= (M_PI/180.0);
@@ -371,9 +451,9 @@ void SolarSystem::loadPlanets()
 					time_at_pericenter = epoch - mean_anomaly / mean_motion;
 				}
 			}
-			const double inclination = pd.get_double(secname,"orbit_Inclination")*(M_PI/180.0);
-			const double ascending_node = pd.get_double(secname,"orbit_AscendingNode")*(M_PI/180.0);
-			const double arg_of_pericenter = pd.get_double(secname,"orbit_ArgOfPericenter")*(M_PI/180.0);
+			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
+			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
+			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			CometOrbit *orb = new CometOrbit(pericenter_distance,
 			                                 eccentricity,
 			                                 inclination,
@@ -386,160 +466,161 @@ void SolarSystem::loadPlanets()
 			posfunc = pos_func_type(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
 		}
 
-		if (funcname=="sun_special")
+		if (funcName=="sun_special")
 			posfunc = pos_func_type(get_sun_helio_coordsv);
 
-		if (funcname=="mercury_special") {
+		if (funcName=="mercury_special") {
 			posfunc = pos_func_type(get_mercury_helio_coordsv);
 			osculating_func = &get_mercury_helio_osculating_coords;
 		}
         
-		if (funcname=="venus_special") {
+		if (funcName=="venus_special") {
 			posfunc = pos_func_type(get_venus_helio_coordsv);
 			osculating_func = &get_venus_helio_osculating_coords;
 		}
 
-		if (funcname=="earth_special") {
+		if (funcName=="earth_special") {
 			posfunc = pos_func_type(get_earth_helio_coordsv);
 			osculating_func = &get_earth_helio_osculating_coords;
 		}
 
-		if (funcname=="lunar_special")
+		if (funcName=="lunar_special")
 			posfunc = pos_func_type(get_lunar_parent_coordsv);
 
-		if (funcname=="mars_special") {
+		if (funcName=="mars_special") {
 			posfunc = pos_func_type(get_mars_helio_coordsv);
 			osculating_func = &get_mars_helio_osculating_coords;
 		}
 
-		if (funcname=="phobos_special")
+		if (funcName=="phobos_special")
 			posfunc = pos_func_type(get_phobos_parent_coordsv);
 
-		if (funcname=="deimos_special")
+		if (funcName=="deimos_special")
 			posfunc = pos_func_type(get_deimos_parent_coordsv);
 
-		if (funcname=="jupiter_special") {
+		if (funcName=="jupiter_special") {
 			posfunc = pos_func_type(get_jupiter_helio_coordsv);
 			osculating_func = &get_jupiter_helio_osculating_coords;
 		}
 
-		if (funcname=="europa_special")
+		if (funcName=="europa_special")
 			posfunc = pos_func_type(get_europa_parent_coordsv);
 
-		if (funcname=="calisto_special")
+		if (funcName=="calisto_special")
 			posfunc = pos_func_type(get_callisto_parent_coordsv);
 
-		if (funcname=="io_special")
+		if (funcName=="io_special")
 			posfunc = pos_func_type(get_io_parent_coordsv);
 
-		if (funcname=="ganymede_special")
+		if (funcName=="ganymede_special")
 			posfunc = pos_func_type(get_ganymede_parent_coordsv);
 
-		if (funcname=="saturn_special") {
+		if (funcName=="saturn_special") {
 			posfunc = pos_func_type(get_saturn_helio_coordsv);
 			osculating_func = &get_saturn_helio_osculating_coords;
 		}
 
-		if (funcname=="mimas_special")
+		if (funcName=="mimas_special")
 			posfunc = pos_func_type(get_mimas_parent_coordsv);
 
-		if (funcname=="enceladus_special")
+		if (funcName=="enceladus_special")
 			posfunc = pos_func_type(get_enceladus_parent_coordsv);
 
-		if (funcname=="tethys_special")
+		if (funcName=="tethys_special")
 			posfunc = pos_func_type(get_tethys_parent_coordsv);
 
-		if (funcname=="dione_special")
+		if (funcName=="dione_special")
 			posfunc = pos_func_type(get_dione_parent_coordsv);
 
-		if (funcname=="rhea_special")
+		if (funcName=="rhea_special")
 			posfunc = pos_func_type(get_rhea_parent_coordsv);
 
-		if (funcname=="titan_special")
+		if (funcName=="titan_special")
 			posfunc = pos_func_type(get_titan_parent_coordsv);
 
-		if (funcname=="iapetus_special")
+		if (funcName=="iapetus_special")
 			posfunc = pos_func_type(get_iapetus_parent_coordsv);
 
-		if (funcname=="hyperion_special")
+		if (funcName=="hyperion_special")
 			posfunc = pos_func_type(get_hyperion_parent_coordsv);
 
-		if (funcname=="uranus_special") {
+		if (funcName=="uranus_special") {
 			posfunc = pos_func_type(get_uranus_helio_coordsv);
 			osculating_func = &get_uranus_helio_osculating_coords;
 		}
 
-		if (funcname=="miranda_special")
+		if (funcName=="miranda_special")
 			posfunc = pos_func_type(get_miranda_parent_coordsv);
 
-		if (funcname=="ariel_special")
+		if (funcName=="ariel_special")
 			posfunc = pos_func_type(get_ariel_parent_coordsv);
 
-		if (funcname=="umbriel_special")
+		if (funcName=="umbriel_special")
 			posfunc = pos_func_type(get_umbriel_parent_coordsv);
 
-		if (funcname=="titania_special")
+		if (funcName=="titania_special")
 			posfunc = pos_func_type(get_titania_parent_coordsv);
 
-		if (funcname=="oberon_special")
+		if (funcName=="oberon_special")
 			posfunc = pos_func_type(get_oberon_parent_coordsv);
 
-		if (funcname=="neptune_special") {
+		if (funcName=="neptune_special") {
 			posfunc = pos_func_type(get_neptune_helio_coordsv);
 			osculating_func = &get_neptune_helio_osculating_coords;
 		}
 
-		if (funcname=="pluto_special")
+		if (funcName=="pluto_special")
 			posfunc = pos_func_type(get_pluto_helio_coordsv);
 
 
 		if (posfunc.empty())
 		{
-			cout << "ERROR : can't find posfunc " << funcname << " for " << englishName << endl;
+			qWarning() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
 		}
 
 		// Create the Planet and add it to the list
 		Planet* p = new Planet(parent,
-                               englishName,
-                               pd.get_boolean(secname, "halo"),
-                               pd.get_boolean(secname, "lighting"),
-                               pd.get_double(secname, "radius")/AU,
-                               pd.get_double(secname, "oblateness", 0.0),
-                               StelUtils::str_to_vec3f(pd.get_str(secname, "color")),
-                               pd.get_double(secname, "albedo"),
-                               pd.get_str(secname, "tex_map").c_str(),
-                               pd.get_str(secname, "tex_halo").c_str(),
-                               posfunc,osculating_func,
-                               close_orbit,
-                               pd.get_boolean(secname, "hidden", 0));
+					englishName.toStdString(),
+					pd.value(secname+"/halo").toBool(),
+					pd.value(secname+"/lighting").toBool(),
+					pd.value(secname+"/radius").toDouble()/AU,
+					pd.value(secname+"/oblateness", 0.0).toDouble(),
+					StelUtils::str_to_vec3f(pd.value(secname+"/color").toString()),
+					pd.value(secname+"/albedo").toDouble(),
+					pd.value(secname+"/tex_map").toString(),
+					pd.value(secname+"/tex_halo").toString(),
+					posfunc,
+					osculating_func,
+					close_orbit,
+					pd.value(secname+"/hidden", 0).toBool());
 
 		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
 		p->set_rotation_elements(
-		    pd.get_double(secname, "rot_periode", pd.get_double(secname, "orbit_Period", 24.))/24.,
-		    pd.get_double(secname, "rot_rotation_offset",0.),
-		    pd.get_double(secname, "rot_epoch", J2000),
-		    pd.get_double(secname, "rot_obliquity",0.)*(M_PI/180.0),
-		    pd.get_double(secname, "rot_equator_ascending_node",0.)*(M_PI/180.0),
-		    pd.get_double(secname, "rot_precession_rate",0.)*M_PI/(180*36525),
-		    pd.get_double(secname, "sidereal_period",0.) );
+		    pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
+		    pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
+		    pd.value(secname+"/rot_epoch", J2000).toDouble(),
+		    pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI/180.0),
+		    pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI/180.0),
+		    pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
+		    pd.value(secname+"/sidereal_period",0.).toDouble());
 
 
-		if (pd.get_boolean(secname, "rings", 0)) {
-			const double r_min = pd.get_double(secname, "ring_inner_size")/AU;
-			const double r_max = pd.get_double(secname, "ring_outer_size")/AU;
-			Ring *r = new Ring(r_min,r_max,pd.get_str(secname, "tex_ring").c_str());
+		if (pd.value(secname+"/rings", 0).toBool()) {
+			const double r_min = pd.value(secname+"/ring_inner_size").toDouble()/AU;
+			const double r_max = pd.value(secname+"/ring_outer_size").toDouble()/AU;
+			Ring *r = new Ring(r_min,r_max,pd.value(secname+"/tex_ring").toString());
 			p->set_rings(r);
 		}
 
-		QString bighalotexfile = pd.get_str(secname, "tex_big_halo", "").c_str();
+		QString bighalotexfile = pd.value(secname+"/tex_big_halo", "").toString();
 		if (!bighalotexfile.isEmpty())
 		{
 			p->set_big_halo(bighalotexfile);
-			p->set_halo_size(pd.get_double(secname, "big_halo_size", 50.f));
+			p->set_halo_size(pd.value(secname+"/big_halo_size", 50.f).toDouble());
 		}
 
 		system_planets.push_back(p);
