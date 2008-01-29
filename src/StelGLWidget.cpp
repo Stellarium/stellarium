@@ -26,7 +26,6 @@
 #include "fixx11h.h"
 #include "StelGLWidget.hpp"
 #include "ViewportDistorter.hpp"
-#include "StelMainWindow.hpp"
 #include <QtOpenGL>
 #include "StelModuleMgr.hpp"
 
@@ -42,7 +41,7 @@ StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat
 {
 	setObjectName("StelGLWidget");
 	
-	// Can't create 2 StelMainWindow instances
+	// Can't create 2 StelGLWidget instances
 	assert(!singleton);
 	singleton = this;
 	

@@ -19,7 +19,6 @@
  
 #include <cstdlib>
 #include "StelApp.hpp"
-#include "StelMainWindow.hpp"
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
@@ -62,7 +61,7 @@ StelApp* StelApp::singleton = NULL;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
-	maxfps(10000.f), core(NULL), fps(0), frame(0), timefr(0.), 
+				 core(NULL), fps(0), maxfps(10000.f), frame(0), timefr(0.), 
 	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
 	setObjectName("StelApp");

@@ -34,6 +34,7 @@ public:
 	virtual ~StelMainWindow();
 	
 	//! Get the StelMainWindow singleton instance.
+	//! @deprecated
 	//! @return the StelMainWindow singleton instance
 	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
