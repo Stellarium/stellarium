@@ -138,8 +138,6 @@ SET(stellarium_lib_SRCS
 
    stelutils/bytes.h
    stelutils/gettext.h
-   stelutils/InitParser.cpp
-   stelutils/InitParser.hpp
    stelutils/StelIniParser.cpp
    stelutils/StelIniParser.hpp
    stelutils/SFont.hpp
@@ -172,13 +170,6 @@ SET(stellarium_lib_SRCS
    stelutils/TreeGrid.hpp
    stelutils/TreeGrid.cpp
    stelutils/GridObject.hpp
-
-   stelutils/iniparser/dictionary.c
-   stelutils/iniparser/dictionary.h
-   stelutils/iniparser/iniparser.c
-   stelutils/iniparser/iniparser.h
-   stelutils/iniparser/strlib.c
-   stelutils/iniparser/strlib.h
 
    planetsephems/vsop87.c
    planetsephems/vsop87.h
