@@ -74,7 +74,7 @@ void StelMainWindow::init(int argc, char** argv)
 	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
 	if (settings->value("video/fullscreen", true).toBool())
 	{
-		//showFullScreen();
+		showFullScreen();
 	}
 	
 	// Create the OpenGL widget in which the main modules will be drawn
