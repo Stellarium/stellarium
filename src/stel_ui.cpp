@@ -28,7 +28,6 @@
 #include "ConstellationMgr.hpp"
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
-#include "InitParser.hpp"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.hpp"
 #include "LandscapeMgr.hpp"

@@ -29,8 +29,6 @@
 
 #include "STexture.hpp"
 
-class InitParser;
-
 //! @class ImageLoader 
 //! Abstract class for any Image loaders.
 class ImageLoader

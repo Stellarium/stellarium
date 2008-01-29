@@ -30,7 +30,6 @@ typedef std::string string;
 using namespace std;
 
 class Projector;
-class InitParser;
 
 class ViewportDistorter {
 public:

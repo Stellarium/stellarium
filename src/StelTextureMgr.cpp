@@ -23,7 +23,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
-#include "InitParser.hpp"
 
 extern "C" {
 #include <jpeglib.h>
