@@ -71,6 +71,7 @@ void StelGLWidget::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
 	
+	
 	// Everything below is going to disapear
 	StelCommandInterface* commander = new StelCommandInterface(StelApp::getInstance().getCore(), &StelApp::getInstance());
 	StelApp::getInstance().getModuleMgr().registerModule(commander);
@@ -100,7 +101,7 @@ void StelGLWidget::resizeGL(int w, int h)
 {
 	//cerr << "StelGLWidget::resizeGL(" << w << "x" << h << ")" << endl;
 	// no resizing allowed in distortion mode
-	if (distorter && distorter->getType() == "none")
+	if (!distorter || distorter && distorter->getType() == "none")
 	{
 		StelApp::getInstance().glWindowHasBeenResized(w, h);
 	}
