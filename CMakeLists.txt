@@ -59,6 +59,14 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 SET(ENABLE_NLS 1)
 # Generate python wrappers
 SET(GENERATE_PYTHON_WRAPPERS 0)
+# Create a dynamic library libstelMain
+SET(GENERATE_STELMAINLIB 0)
+
+# On WIN32 we need to split the main binary into a small binary and a dll
+# This is for allowing to link plug-ins afterward
+IF (WIN32 OR GENERATE_PYTHON_WRAPPERS)
+ SET(GENERATE_STELMAINLIB 1)
+ENDIF(WIN32 OR GENERATE_PYTHON_WRAPPERS)
 
 ########### Find packages ###########
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)

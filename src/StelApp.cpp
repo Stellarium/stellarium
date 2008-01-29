@@ -64,8 +64,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 				 core(NULL), fps(0), maxfps(10000.f), frame(0), timefr(0.), 
 	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
 {
+	// Used for getting system date formatting
+	setlocale(LC_TIME, "");
+	
 	setObjectName("StelApp");
-			
 
 	skyCultureMgr=NULL;
 	localeMgr=NULL;

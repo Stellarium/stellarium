@@ -1,25 +1,20 @@
 // Define the SIP wrapper to the stelMain library.
 
-%Module stelapp 0
+%Module pystellarium 0
 
-
-class StelAppQt4
+class StelMainWindow
 {
 
 %TypeHeaderCode
-#include <StelAppQt4.hpp>
+#include "StelMainWindow.hpp"
 %End
 
 public:
-	StelAppQt4();
-%MethodCode
+	StelMainWindow();			
+	void init()
+	%MethodCode
 		char* args[] = {"stellarium"};
-		sipCpp = new StelAppQt4(1, args);
-%End
-			
-	void startMainLoop();
-	
-private:	
-	StelAppQt4(const StelAppQt4&);
+		sipCpp->init(1, args);
+	%End
 };
 
