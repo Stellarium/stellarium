@@ -43,13 +43,17 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	setWindowTitle(StelApp::getApplicationName());
 	setObjectName("stellariumMainWin");
 	setMinimumSize(400,400);
-	
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
 	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);
+	
+	show();
+	
+	Ui_Form testUi;
+	testUi.setupUi(this);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QString iconPath;
@@ -64,7 +68,7 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	setWindowIcon(QIcon(iconPath));
 	
 	QSettings* settings = stelApp->getSettings();
-	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
+	//resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
 	if (settings->value("video/fullscreen", true).toBool())
 	{
 		showFullScreen();
@@ -73,22 +77,16 @@ StelMainWindow::StelMainWindow(int argc, char** argv)
 	// Create the OpenGL widget in which the main modules will be drawn
 	StelGLWidget* openGLWin = new StelGLWidget(this);
 	setCentralWidget(openGLWin);
-	
-	// Show the window during loading for the loading bar
-	show();
-	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	openGLWin->initializeGL();
-	
+	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	// Show the window during loading for the loading bar
+	openGLWin->initializeGL();
 	stelApp->init();
 	openGLWin->init();
 	openGLWin->setFocus();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
-	
-	Ui_Form testUi;
-	testUi.setupUi(this);
-	
 	// The actions need to be added to the main form to be effective
 	foreach (QObject* obj, this->children())
 	{
