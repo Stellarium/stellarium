@@ -59,7 +59,11 @@
         <number>2</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEditSearchSkyObject" />
+        <widget class="QLineEdit" name="lineEditSearchSkyObject" >
+         <property name="text" >
+          <string>Up</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonGotoSearchSkyObject" >
@@ -381,6 +385,20 @@
    </property>
    <property name="shortcut" >
     <string>8</string>
+   </property>
+  </action>
+  <action name="actionSet_Full_Screen" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Set Full Screen</string>
+   </property>
+   <property name="shortcut" >
+    <string>F1</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
    </property>
   </action>
  </widget>

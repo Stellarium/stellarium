@@ -24,6 +24,7 @@
 #include "Navigator.hpp"
 
 #include <QSettings>
+#include <QKeyEvent>
 
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
 	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
@@ -108,52 +109,59 @@ bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y, StelMod mod)
 }
 
 
-bool MovementMgr::handleKeys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
+bool MovementMgr::handleKeys(QKeyEvent* event)
 {
-	if (state == Stel_KEYDOWN)
+	if (event->type() == QEvent::KeyPress)
 	{
 		// Direction and zoom deplacements
-		if (key==StelKey_LEFT) turnLeft(1);
-		if (key==StelKey_RIGHT) turnRight(1);
-		if (key==StelKey_UP)
+		switch (event->key())
 		{
-			if (mod & COMPATIBLE_StelMod_CTRL) zoomIn(1);
-			else turnUp(1);
+			case Qt::Key_Left:
+				turnLeft(true); break;
+			case Qt::Key_Right:
+				turnRight(true); break;
+			case Qt::Key_Up:
+				if (event->modifiers().testFlag(Qt::ControlModifier)) zoomIn(true);
+				else turnUp(true);
+				break;
+			case Qt::Key_Down:
+				if (event->modifiers().testFlag(Qt::ControlModifier)) zoomOut(true);
+				else turnDown(true);
+				break;
+			case Qt::Key_PageUp:
+				zoomIn(true); break;
+			case Qt::Key_PageDown:
+				zoomOut(true); break;
+			default:
+				return false;
 		}
-		if (key==StelKey_DOWN)
-		{
-			if (mod & COMPATIBLE_StelMod_CTRL) zoomOut(1);
-			else turnDown(1);
-		}
-		if (key==StelKey_PAGEUP) zoomIn(1);
-		if (key==StelKey_PAGEDOWN) zoomOut(1);
 	}
 	else
 	{
 		// When a deplacement key is released stop mooving
-		if (key==StelKey_LEFT) turnLeft(0);
-		if (key==StelKey_RIGHT) turnRight(0);
-		if (mod & COMPATIBLE_StelMod_CTRL)
+		switch (event->key())
 		{
-			if (key==StelKey_UP) zoomIn(0);
-			if (key==StelKey_DOWN) zoomOut(0);
+			case Qt::Key_Left:
+				turnLeft(false); break;
+			case Qt::Key_Right:
+				turnRight(false); break;
+			case Qt::Key_Up:
+				zoomIn(false);
+				turnUp(false);
+				break;
+			case Qt::Key_Down:
+				zoomOut(false);
+				turnDown(false);
+				break;
+			case Qt::Key_PageUp:
+				zoomIn(false); break;
+			case Qt::Key_PageDown:
+				zoomOut(false); break;
+			default:
+				return false;
 		}
-		else
-		{
-			if (key==StelKey_UP) turnUp(0);
-			if (key==StelKey_DOWN) turnDown(0);
-		}
-		if (key==StelKey_PAGEUP) zoomIn(0);
-		if (key==StelKey_PAGEDOWN) zoomOut(0);
 	}
-	if (key==StelKey_LEFT || key==StelKey_RIGHT || key==StelKey_UP || key==StelKey_DOWN || key==StelKey_PAGEUP || key==StelKey_PAGEDOWN)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return true;
 }
 
 bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)

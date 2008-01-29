@@ -227,6 +227,7 @@ SET(stellarium_MOC_HDRS
 	StelApp.hpp
 	Navigator.hpp
 	StelGLWidget.hpp
+	StelMainWindow.hpp
 	stelutils/STexture.hpp
 )
 
