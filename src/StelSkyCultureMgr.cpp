@@ -20,14 +20,16 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "Translator.hpp"
-#include "InitParser.hpp"
 #include "StelApp.hpp"
+#include "StelIniParser.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <dirent.h>
 #include <cassert>
 #include <QSettings>
+#include <QString>
+#include <QStringList>
 #include <QVariant>
 #include <QDebug>
 
@@ -49,9 +51,8 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 	{
 		try
 		{
-			InitParser pd;
-			pd.load(fileMan.findFile("skycultures/" + *dir + "/info.ini"));
-			dirToNameEnglish[*dir] = pd.get_str("info:name");
+			QSettings pd(fileMan.findFile("skycultures/" + *dir + "/info.ini"), StelIniFormat);
+			dirToNameEnglish[*dir] = pd.value("info/name").toString().toStdString();
 		}
 		catch (exception& e)
 		{

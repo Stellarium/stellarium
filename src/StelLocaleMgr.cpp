@@ -21,7 +21,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "InitParser.hpp"
 #include "StelFileMgr.hpp"
 
 #include <QLocale>

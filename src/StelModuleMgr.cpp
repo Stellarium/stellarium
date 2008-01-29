@@ -22,13 +22,14 @@
 
 #include <QDebug>
 #include <QPluginLoader>
+#include <QSettings>
 
-#include "InitParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModule.hpp"
 #include "StelFileMgr.hpp"
 #include "StelPluginInterface.hpp"
+#include "StelIniParser.hpp"
 
 
 StelModuleMgr::StelModuleMgr()
@@ -176,14 +177,13 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 		try
 		{
 			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
-			InitParser pd;
-			pd.load(fileMan.findFile("modules/" + *dir + "/module.ini"));
+			QSettings pd(fileMan.findFile("modules/" + *dir + "/module.ini"), StelIniFormat);
 			mDesc.key = *dir;
-			mDesc.name = pd.get_str("module", "name").c_str();
-			mDesc.author = pd.get_str("module", "author").c_str();
-			mDesc.contact = pd.get_str("module", "contact").c_str();
-			mDesc.description = pd.get_str("module", "description").c_str();
-			mDesc.loadAtStartup = pd.get_boolean("module", "load_at_startup");
+			mDesc.name = pd.value("module/name").toString();
+			mDesc.author = pd.value("module/author").toString();
+			mDesc.contact = pd.value("module/contact").toString();
+			mDesc.description = pd.value("module/description").toString();
+			mDesc.loadAtStartup = pd.value("module/load_at_startup").toBool();
 			result.push_back(mDesc);
 		}
 		catch (exception& e)
