@@ -1,0 +1,371 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>650</width>
+    <height>534</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <widget class="QDockWidget" name="dockWidgetSearch" >
+   <property name="geometry" >
+    <rect>
+     <x>90</x>
+     <y>120</y>
+     <width>291</width>
+     <height>56</height>
+    </rect>
+   </property>
+   <property name="floating" >
+    <bool>true</bool>
+   </property>
+   <property name="features" >
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas" >
+    <set>Qt::NoDockWidgetArea</set>
+   </property>
+   <property name="windowTitle" >
+    <string>Find Object</string>
+   </property>
+   <widget class="QWidget" name="dockWidgetContents" >
+    <layout class="QGridLayout" >
+     <property name="leftMargin" >
+      <number>2</number>
+     </property>
+     <property name="topMargin" >
+      <number>2</number>
+     </property>
+     <property name="rightMargin" >
+      <number>2</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>2</number>
+     </property>
+     <property name="horizontalSpacing" >
+      <number>2</number>
+     </property>
+     <property name="verticalSpacing" >
+      <number>2</number>
+     </property>
+     <item row="0" column="0" >
+      <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="lineEdit" />
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton" >
+         <property name="text" >
+          <string>Go</string>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionShow_Constellation_Lines" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Constellation Lines</string>
+   </property>
+   <property name="shortcut" >
+    <string>C</string>
+   </property>
+   <property name="shortcutContext" >
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+   <property name="visible" >
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionShow_Constellation_Art" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Constellation Art</string>
+   </property>
+   <property name="shortcut" >
+    <string>R</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Constellation_Labels" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Constellation Labels</string>
+   </property>
+   <property name="shortcut" >
+    <string>V</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Azimutal_Grid" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Azimutal Grid</string>
+   </property>
+   <property name="shortcut" >
+    <string>Z</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Equatorial_Grid" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Equatorial Grid</string>
+   </property>
+   <property name="shortcut" >
+    <string>E</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Ground" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Ground</string>
+   </property>
+   <property name="shortcut" >
+    <string>G</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Cardinal_points" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Cardinal points</string>
+   </property>
+   <property name="shortcut" >
+    <string>Q</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Atmosphere" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Atmosphere</string>
+   </property>
+   <property name="shortcut" >
+    <string>A</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Nebulas" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Nebulas</string>
+   </property>
+   <property name="shortcut" >
+    <string>N</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionSwitch_Equatorial_Mount" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Switch Equatorial Mount</string>
+   </property>
+   <property name="shortcut" >
+    <string>Return</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionGoto_Selected_Object" >
+   <property name="text" >
+    <string>Goto Selected Object</string>
+   </property>
+   <property name="shortcut" >
+    <string>Space</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Search_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Search Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+F</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Config_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Config Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+C</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Night_Mode" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Night Mode</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionQuit" >
+   <property name="text" >
+    <string>Quit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Help_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Help Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+H</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDecrease_Time_Speed" >
+   <property name="text" >
+    <string>Decrease Time Speed</string>
+   </property>
+   <property name="shortcut" >
+    <string>J</string>
+   </property>
+  </action>
+  <action name="actionIncrease_Time_Speed" >
+   <property name="text" >
+    <string>Increase Time Speed</string>
+   </property>
+   <property name="shortcut" >
+    <string>L</string>
+   </property>
+  </action>
+  <action name="actionSet_Real_Time_Speed" >
+   <property name="text" >
+    <string>Set Real Time Speed</string>
+   </property>
+   <property name="shortcut" >
+    <string>K</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionReturn_To_Current_Time" >
+   <property name="text" >
+    <string>Return To Current Time</string>
+   </property>
+   <property name="shortcut" >
+    <string>8</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionShow_Search_Window</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetSearch</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>235</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>324</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
