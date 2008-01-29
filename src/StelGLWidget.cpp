@@ -230,7 +230,8 @@ void StelGLWidget::mousePressEvent(QMouseEvent* event)
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
 	
-	StelApp::getInstance().handleClick(x, y, button, state, qtModToStelMod(event->modifiers()));
+	QMouseEvent newEvent(event->type(), QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -260,7 +261,8 @@ void StelGLWidget::mouseReleaseEvent(QMouseEvent* event)
 	
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
-	StelApp::getInstance().handleClick(x, y, button, state, qtModToStelMod(event->modifiers()));
+	QMouseEvent newEvent(event->type(), QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
@@ -274,8 +276,8 @@ void StelGLWidget::mouseMoveEvent(QMouseEvent* event)
 	const int ui_y = y;
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
-	
-	StelApp::getInstance().handleMove(x, y, qtModToStelMod(event->modifiers()));
+	QMouseEvent newEvent(event->type(), QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleMove(&newEvent);
 	
 	ui->handleMouseMoves(ui_x,ui_y, qtModToStelMod(event->modifiers()));
 	
@@ -305,9 +307,8 @@ void StelGLWidget::wheelEvent(QWheelEvent* event)
 	
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
-	
-	StelApp::getInstance().handleClick(x, y, button, Stel_MOUSEBUTTONDOWN,  mod);
-	StelApp::getInstance().handleClick(x, y, button, Stel_MOUSEBUTTONUP,  mod);
+	QWheelEvent newEvent(QPoint(x,y), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	StelApp::getInstance().handleWheel(&newEvent);
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();

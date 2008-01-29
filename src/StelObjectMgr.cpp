@@ -23,6 +23,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
+#include "MovementMgr.hpp"
+#include <QMouseEvent>
 
 StelObjectMgr::StelObjectMgr()
 {
@@ -33,7 +35,45 @@ StelObjectMgr::StelObjectMgr()
 StelObjectMgr::~StelObjectMgr()
 {
 }
-		
+
+/*************************************************************************
+ Handle mouse click events.
+*************************************************************************/
+bool StelObjectMgr::handleMouseClicks(QMouseEvent* event)
+{
+	// Deselect the selected object
+	if (event->button()==Qt::RightButton && event->type()==QEvent::MouseButtonRelease)
+	{
+		unSelect();
+		return true;
+	}
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
+	{
+#ifdef MACOSX
+		// CTRL + left clic = right clic for 1 button mouse
+		if (event->modifiers().testFlag(Qt::ControlModifier))
+		{
+			unSelect();
+			return true;
+		}
+
+		// Try to select object at that position
+		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
+			event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
+#else
+		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
+			event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
+#endif
+		// If an object was selected update informations
+		if (getWasSelected())
+		{
+			mvmgr->setFlagTracking(false);
+		}
+	}
+	return false;
+}
+	
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/

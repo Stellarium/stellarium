@@ -78,19 +78,16 @@ public:
 	virtual QString getAuthorEmail() const {return "http://www.stellarium.org";}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module. 
-	//! @param x X mouse position in pixels.
-	//! @param y Y mouse position in pixels.
-	//! @param button the mouse button. Can be Stel_BUTTON_LEFT, Stel_BUTTON_RIGHT, Stel_BUTTON_MIDDLE,
-	//!   Stel_BUTTON_WHEELUP, Stel_BUTTON_WHEELDOWN
-	//! @param state the state of the button. Can be Stel_MOUSEBUTTONDOWN, Stel_MOUSEBUTTONUP.
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod) {return false;}
+	virtual bool handleMouseClicks(class QMouseEvent* event) {return false;}
+	
+	//! Handle mouse wheel. Please note that most of the interactions will be done through the GUI module. 
+	//! @return false if the event was not intercepted, true otherwise.
+	virtual bool handleMouseWheel(class QWheelEvent* event) {return false;}
 	
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
-	//! @param x X mouse position in pixels.
-	//! @param y Y mouse position in pixels.
 	//! @return false if the event was not intercepted, true otherwise.
-	virtual bool handleMouseMoves(Uint16 x, Uint16 y, StelMod mod) {return false;}
+	virtual bool handleMouseMoves(class QMouseEvent* event) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param event the Key event

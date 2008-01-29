@@ -52,50 +52,50 @@ void MovementMgr::init()
 	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 }	
 	
-bool MovementMgr::handleMouseMoves(Uint16 x, Uint16 y, StelMod mod)
+bool MovementMgr::handleMouseMoves(QMouseEvent* event)
 {
 	// Turn if the mouse is at the edge of the screen.
 	// unless config asks otherwise
-	if(FlagEnableMoveMouse)
-	{
-		if (x == 0)
-		{
-			turnLeft(1);
-			is_mouse_moving_horiz = true;
-		}
-		else if (x == core->getProjection()->getViewportWidth() - 1)
-		{
-			turnRight(1);
-			is_mouse_moving_horiz = true;
-		}
-		else if (is_mouse_moving_horiz)
-		{
-			turnLeft(0);
-			is_mouse_moving_horiz = false;
-		}
-
-		if (y == 0)
-		{
-			turnUp(1);
-			is_mouse_moving_vert = true;
-		}
-		else if (y == core->getProjection()->getViewportHeight() - 1)
-		{
-			turnDown(1);
-			is_mouse_moving_vert = true;
-		}
-		else if (is_mouse_moving_vert)
-		{
-			turnUp(0);
-			is_mouse_moving_vert = false;
-		}
-	}
+// 	if(FlagEnableMoveMouse)
+// 	{
+// 		if (x == 0)
+// 		{
+// 			turnLeft(1);
+// 			is_mouse_moving_horiz = true;
+// 		}
+// 		else if (x == core->getProjection()->getViewportWidth() - 1)
+// 		{
+// 			turnRight(1);
+// 			is_mouse_moving_horiz = true;
+// 		}
+// 		else if (is_mouse_moving_horiz)
+// 		{
+// 			turnLeft(0);
+// 			is_mouse_moving_horiz = false;
+// 		}
+// 
+// 		if (y == 0)
+// 		{
+// 			turnUp(1);
+// 			is_mouse_moving_vert = true;
+// 		}
+// 		else if (y == core->getProjection()->getViewportHeight() - 1)
+// 		{
+// 			turnDown(1);
+// 			is_mouse_moving_vert = true;
+// 		}
+// 		else if (is_mouse_moving_vert)
+// 		{
+// 			turnUp(0);
+// 			is_mouse_moving_vert = false;
+// 		}
+// 	}
 	
+	int x=event->x();
+	int y=event->y();
 	if (is_dragging)
 	{
-		if (has_dragged ||
-		    (std::sqrt((double)((x-previous_x)*(x-previous_x)
-								+(y-previous_y)*(y-previous_y)))>4.))
+		if (has_dragged || (std::sqrt((double)((x-previous_x)*(x-previous_x) +(y-previous_y)*(y-previous_y)))>4.))
 		{
 			has_dragged = true;
 			setFlagTracking(false);
@@ -164,51 +164,53 @@ bool MovementMgr::handleKeys(QKeyEvent* event)
 	return true;
 }
 
-bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod mod)
+//! Handle mouse wheel events.
+bool MovementMgr::handleMouseWheel(QWheelEvent* event)
 {
-	switch (button)
+	int numDegrees = event->delta() / 8;
+	int numSteps = numDegrees / 15;
+	zoomTo(getAimFov()-MouseZoom*numSteps*getAimFov()/60., 0.2);
+	return true;
+}
+
+bool MovementMgr::handleMouseClicks(QMouseEvent* event)
+{
+	switch (event->button())
 	{
-	case Stel_BUTTON_WHEELUP :
-		zoomTo(getAimFov()-MouseZoom*getAimFov()/60., 0.2);
-		return true;
-	case Stel_BUTTON_WHEELDOWN :
-		zoomTo(getAimFov()+MouseZoom*getAimFov()/60., 0.2);
-		return true;
-	case Stel_BUTTON_RIGHT : break;
-	case Stel_BUTTON_LEFT :
-		if (state==Stel_MOUSEBUTTONDOWN)
-		{
-			is_dragging = true;
-			has_dragged = false;
-			previous_x = x;
-			previous_y = y;
-			return true;
-		}
-		else
-		{
-			if (is_dragging)
+		case Qt::RightButton : break;
+		case Qt::LeftButton :
+			if (event->type()==QEvent::MouseButtonPress)
 			{
-				is_dragging = false;
-				if (has_dragged)
-					return true;
-				else
-					return false;
+				is_dragging = true;
+				has_dragged = false;
+				previous_x = event->x();
+				previous_y = event->y();
+				return true;
 			}
-		}
-		break;
-	case Stel_BUTTON_MIDDLE :
-		if (state==Stel_MOUSEBUTTONUP)
-		{
-			if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+			else
 			{
-				moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()),auto_move_duration);
-				setFlagTracking(true);
+				if (is_dragging)
+				{
+					is_dragging = false;
+					if (has_dragged)
+						return true;
+					else
+						return false;
+				}
 			}
-		}
-		break;
-	default: break;
+			break;
+		case Qt::MidButton :
+			if (event->type()==QEvent::MouseButtonRelease)
+			{
+				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+				{
+					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()),auto_move_duration);
+					setFlagTracking(true);
+				}
+			}
+			break;
+		default: break;
 	}
-	
 	return false;
 }
 
