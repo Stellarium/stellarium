@@ -36,7 +36,6 @@
 #include "StelFontMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
-#include "InitParser.hpp"
 #include "Observer.hpp"
 #include "Navigator.hpp"
 #include "StelFileMgr.hpp"
@@ -46,6 +45,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QString>
+#include <QSettings>
 
 using namespace s_gui;
 
@@ -847,49 +847,33 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveLandscapeOptions(void)
 {
-	cout << "Saving landscape name in file " << app->getConfigFilePath().toUtf8().data() << endl;
-	InitParser conf;
-	conf.load(app->getConfigFilePath());
+	QSettings* conf = app->getSettings();
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("LandscapeMgr");
-	conf.set_str("init_location:landscape_name", lmgr->getLandscapeId());
-	conf.set_boolean("landscape:flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
-	conf.save(app->getConfigFilePath());
+	conf->setValue("init_location/landscape_name", lmgr->getLandscapeId());
+	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 }
 
 void StelUI::setLandscapeUpdatesLocation(void)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("LandscapeMgr");
 	lmgr->setFlagLandscapeSetsLocation(locationFromLandscapeCheck->getState());
-	InitParser conf;
-	conf.load(app->getConfigFilePath());
-	conf.set_boolean("landscape:flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	if (lmgr->getFlagLandscapeSetsLocation())
-	{
 		cout << "Landscape changes will now update the location" << endl;
-	}
 	else
-	{
 		cout << "Landscape changes not update the location" << endl;
-	}
 }
 
 void StelUI::saveLanguageOptions(void)
 {
-	cout << "Saving language in file " << app->getConfigFilePath().toUtf8().data() << endl;
-	InitParser conf;
-	conf.load(app->getConfigFilePath());
-	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage());
-	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage());
-	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
-	conf.save(app->getConfigFilePath());
+	QSettings* conf = app->getSettings();
+	conf->setValue("localization/sky_locale", app->getLocaleMgr().getSkyLanguage());
+	conf->setValue("localization/app_locale", app->getLocaleMgr().getAppLanguage());
+	conf->setValue("localization/sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
 }
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << app->getConfigFilePath().toUtf8().data() << endl;
-
-	InitParser conf;
-	conf.load(app->getConfigFilePath());
+	QSettings* conf = app->getSettings();
 
 	StarMgr* smgr = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr");
@@ -899,37 +883,36 @@ void StelUI::saveRenderOptions(void)
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
 	
-	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
-	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
-	conf.set_double("stars:max_mag_star_name", smgr->getMaxMagName());
-	conf.set_boolean("stars:flag_star_twinkle", smgr->getFlagTwinkle());
-	conf.set_double("stars:star_twinkle_amount", smgr->getTwinkleAmount());
+	conf->setValue("astro/flag_stars", smgr->getFlagStars());
+	conf->setValue("astro/flag_star_name", smgr->getFlagNames());
+	conf->setValue("astro/flag_nebula", nmgr->getFlagShow());
+	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
+	conf->setValue("astro/max_mag_nebula_name", nmgr->getMaxMagHints());
+	conf->setValue("astro/flag_nebula_display_no_texture", nmgr->getFlagDisplayNoTexture());
+	conf->setValue("astro/meteor_rate", metmgr->getZHR());
+	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
+	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
+
+	conf->setValue("stars/max_mag_star_name", smgr->getMaxMagName());
+	conf->setValue("stars/flag_star_twinkle", smgr->getFlagTwinkle());
+	conf->setValue("stars/star_twinkle_amount", smgr->getTwinkleAmount());
 	
-	conf.set_boolean("viewing:flag_constellation_drawing", cmgr->getFlagLines());
-	conf.set_boolean("viewing:flag_constellation_name", cmgr->getFlagNames());
-	conf.set_boolean("viewing:flag_constellation_boundaries", cmgr->getFlagBoundaries());
-	conf.set_boolean("viewing:flag_constellation_pick", cmgr->getFlagIsolateSelected());
+	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
+	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagNames());
+	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
+	conf->setValue("viewing/flag_constellation_pick", cmgr->getFlagIsolateSelected());
+	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
+	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf->setValue("viewing/flag_night", app->getVisionModeNight());
+	conf->setValue("viewing/flag_equatorial_grid", grlmgr->getFlagEquatorGrid());
+	conf->setValue("viewing/flag_azimutal_grid", grlmgr->getFlagAzimutalGrid());
+	conf->setValue("viewing/flag_equator_line", grlmgr->getFlagEquatorLine());
+	conf->setValue("viewing/flag_ecliptic_line", grlmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	
-	conf.set_boolean("astro:flag_nebula", nmgr->getFlagShow());
-	conf.set_boolean("astro:flag_nebula_name", nmgr->getFlagHints());
-	conf.set_double("astro:max_mag_nebula_name", nmgr->getMaxMagHints());
-	conf.set_boolean("astro:flag_nebula_display_no_texture", nmgr->getFlagDisplayNoTexture());
-	
-	conf.set_boolean("astro:flag_planets", ssmgr->getFlagPlanets());
-	conf.set_boolean("astro:flag_planets_hints", ssmgr->getFlagHints());
-	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
-	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
-	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
-	conf.set_boolean("viewing:flag_equatorial_grid", grlmgr->getFlagEquatorGrid());
-	conf.set_boolean("viewing:flag_azimutal_grid", grlmgr->getFlagAzimutalGrid());
-	conf.set_boolean("viewing:flag_equator_line", grlmgr->getFlagEquatorLine());
-	conf.set_boolean("viewing:flag_ecliptic_line", grlmgr->getFlagEclipticLine());
-	conf.set_boolean("landscape:flag_landscape", lmgr->getFlagLandscape());
-	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
-	conf.set_boolean("landscape:flag_atmosphere", lmgr->getFlagAtmosphere());
-	conf.set_boolean("landscape:flag_fog", lmgr->getFlagFog());
-	conf.set_int("astro:meteor_rate", metmgr->getZHR());
-	conf.save(app->getConfigFilePath());
+	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
+	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 }
 
 void StelUI::setVideoOption(void)
@@ -958,24 +941,19 @@ void StelUI::setVideoOption(void)
 	if ( w && h ) cout << ", res=" << w << "x" << h;
 	cout << " in file " << qPrintable(app->getConfigFilePath()) << endl;
 
-	InitParser conf;
-	conf.load(app->getConfigFilePath());
+	QSettings* conf = app->getSettings();
 
-	conf.set_str("projection:type", qPrintable(core->getProjection()->getCurrentProjection()));
-	conf.set_str("video:distorter", StelGLWidget::getInstance().getViewPortDistorterType());
+	conf->setValue("projection/type", core->getProjection()->getCurrentProjection());
+	conf->setValue("video/distorter", StelGLWidget::getInstance().getViewPortDistorterType());
 
-
-	if (core->getProjection()->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
-	else conf.set_str("projection:viewport", "maximized");
+	if (core->getProjection()->getViewportMaskDisk()) conf->setValue("projection/viewport", "disk");
+	else conf->setValue("projection/viewport", "maximized");
 
 	if ( w && h ) {   
-		conf.set_int("video:screen_w", w);
-		conf.set_int("video:screen_h", h);
+		conf->setValue("video/screen_w", w);
+		conf->setValue("video/screen_h", h);
 	}
-	
-	conf.set_boolean("video:fullscreen", StelMainWindow::getInstance().getFullScreen());
-
-	conf.save(app->getConfigFilePath());
+	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
 }
 
 void StelUI::setLandscape(void)
