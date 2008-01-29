@@ -38,14 +38,17 @@
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 		 
-StelMainWindow::StelMainWindow(int argc, char** argv)
+StelMainWindow::StelMainWindow()
 {
-	setWindowTitle(StelApp::getApplicationName());
-	setObjectName("stellariumMainWin");
-	
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
+}
+
+void StelMainWindow::init(int argc, char** argv)
+{
+	setWindowTitle(StelApp::getApplicationName());
+	setObjectName("stellariumMainWin");
 	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);

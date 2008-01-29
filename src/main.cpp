@@ -17,32 +17,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <clocale>
-#include <config.h>
 #include <QtGui/QApplication>
 #include <QtGui/QMessageBox>
 #include "StelMainWindow.hpp"
-#include "StelApp.hpp"
-#include "StelFileMgr.hpp"
-#include <QDebug>
-#include <QIcon>
-#include <QSettings>
-#include <QDesktopWidget>
-#include <QGLWidget>
+#include <QGLFormat>
 
 // Main stellarium procedure
 int main(int argc, char **argv)
-{
-	// Used for getting system date formatting
-	setlocale(LC_TIME, "");
-	
+{	
 	QApplication app(argc, argv);
 	if (!QGLFormat::hasOpenGL())
 	{
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
 	}
-	StelMainWindow mainWin(argc, argv);
+	StelMainWindow mainWin;
+	mainWin.init(argc, argv);
 	app.exec();
-
 	return 0;
 }

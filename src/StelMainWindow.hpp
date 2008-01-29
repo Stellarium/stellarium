@@ -30,9 +30,12 @@ class StelMainWindow : public QMainWindow
 	Q_OBJECT;
 public:
 	//! Constructor
-	StelMainWindow(int argc, char** argv);
+	StelMainWindow();
 	virtual ~StelMainWindow();
 	
+	//! Init the application
+	void init(int argc, char** argv);
+			
 	//! Get the StelMainWindow singleton instance.
 	//! @deprecated
 	//! @return the StelMainWindow singleton instance
