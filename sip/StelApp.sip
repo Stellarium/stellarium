@@ -11,10 +11,12 @@ class StelMainWindow
 
 public:
 	StelMainWindow();			
-	void init()
-	%MethodCode
-		char* args[] = {"stellarium"};
-		sipCpp->init(1, args);
-	%End
+	void init();
+%MethodCode
+	char* args[] = {"stellarium"};
+	sipCpp->init(1, args);
+%End
+private:
+	StelMainWindow(const StelMainWindow&);
 };
 

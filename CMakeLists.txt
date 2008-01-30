@@ -58,7 +58,7 @@ CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
 # Activate translation with gettext
 SET(ENABLE_NLS 1)
 # Generate python wrappers
-SET(GENERATE_PYTHON_WRAPPERS 0)
+SET(GENERATE_PYTHON_WRAPPERS 0 CACHE BOOL "Define whether python wrapper should be build using SIP, options are: 1 or 0.")
 # Create a dynamic library libstelMain
 SET(GENERATE_STELMAINLIB 0)
 
