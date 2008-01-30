@@ -36,8 +36,10 @@ class StelModule : QObject
 %TypeHeaderCode
 	#include "StelModule.hpp"
 %End
-
+	
 public:
+	explicit StelModule();
+	virtual ~StelModule();
 	virtual void init() = 0;
 	virtual double draw(StelCore* core) = 0;
 	virtual void update(double deltaTime) = 0;
@@ -54,7 +56,7 @@ class StelModuleMgr
 
 public:
 	StelModule* getModule(const QString&);
-	void registerModule(StelModule* m, bool generateCallingLists=false);
+	void registerModule(StelModule* m /TransferThis/, bool generateCallingLists=false);
 private:
 	StelModuleMgr(const StelModuleMgr&);
 };

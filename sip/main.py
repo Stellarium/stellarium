@@ -26,17 +26,19 @@ QtCore.QObject.connect(ui.actionShow_Constellation_Lines,QtCore.SIGNAL("toggled(
 QtCore.QObject.connect(ui.actionShow_Constellation_Labels,QtCore.SIGNAL("toggled(bool)"),module, QtCore.SLOT("setFlagNames(bool)"))
 QtCore.QObject.connect(ui.actionShow_Constellation_Art,QtCore.SIGNAL("toggled(bool)"),module, QtCore.SLOT("setFlagArt(bool)"))
 
-
 class PyStelModule(StelModule):
-	def init():
+	def __init__(self):
+		StelModule.__init__(self)
+		self.setObjectName("PyStelModule")
+	def init(self):
 		print "init"
-	def draw(core):
+	def draw(self, core):
 		print "draw"
 		return 0.
-	def update(deltaTime):
+	def update(self, deltaTime):
 		print deltaTime
 
 testModule = PyStelModule()
-modMgr.registerModule(testModule)
+modMgr.registerModule(testModule, True)
 
 sys.exit(app.exec_())
