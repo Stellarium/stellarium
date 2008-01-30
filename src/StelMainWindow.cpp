@@ -40,23 +40,21 @@ StelMainWindow* StelMainWindow::singleton = NULL;
 		 
 StelMainWindow::StelMainWindow()
 {
+	setObjectName("stellariumMainWin");
+	
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
+	show();
 }
 
 void StelMainWindow::init(int argc, char** argv)
 {
-	setWindowTitle(StelApp::getApplicationName());
-	setObjectName("stellariumMainWin");
+	Ui_Form testUi;
+	testUi.setupUi(this);
 	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);
-	
-	show();
-	
-	Ui_Form testUi;
-	testUi.setupUi(this);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QString iconPath;
