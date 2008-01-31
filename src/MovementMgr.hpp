@@ -50,13 +50,13 @@ public:
 	//! Implement required draw function.  Does nothing.
 	virtual double draw(StelCore* core) {return 0.;}
 	//! Handle keyboard events.
-	virtual bool handleKeys(QKeyEvent* event);
+	virtual void handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(class QMouseEvent* event);
+	virtual void handleMouseMoves(class QMouseEvent* event);
 	//! Handle mouse wheel events.
-	virtual bool handleMouseWheel(class QWheelEvent* event);
+	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
-	virtual bool handleMouseClicks(class QMouseEvent* event);
+	virtual void handleMouseClicks(class QMouseEvent* event);
 	//! Called then the selected object changes.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 	

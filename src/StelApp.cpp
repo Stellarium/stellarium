@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include <cstdlib>
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
@@ -51,8 +50,7 @@
 #include <QFile>
 #include <QRegExp>
 #include <QTextStream>
-#include <set>
-#include <string>
+#include <QMouseEvent>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -130,9 +128,9 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
 	
 	// Main section
-	string version = confSettings->value("main/version").toString().toStdString();
+	QString version = confSettings->value("main/version").toString();
 	
-	if (version.empty())
+	if (version.isEmpty())
 	{
 		qWarning() << "Found an invalid config file. Overwrite with default.";
 		delete confSettings;
@@ -140,12 +138,12 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		copyDefaultConfigFile();
 		confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
 		// get the new version value from the updated config file
-		version = confSettings->value("main/version").toString().toStdString();
+		version = confSettings->value("main/version").toString();
 	}
 	
-	if (version!=string(PACKAGE_VERSION))
+	if (version!=QString(PACKAGE_VERSION))
 	{
-		std::istringstream istr(version);
+		QTextStream istr(&version);
 		char tmp;
 		int v1 =0;
 		int v2 =0;
@@ -156,7 +154,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		{
 			// The config file is too old to try an importation
 			cout << "The current config file is from a version too old for parameters to be imported (" 
-					<< (version.empty() ? "<0.6.0" : version.c_str()) << ")." << endl 
+					<< (version.isEmpty() ? "<0.6.0" : qPrintable(version)) << ")." << endl 
 					<< "It will be replaced by the default config file." << endl;
 
 			delete confSettings;
@@ -540,51 +538,55 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 }
 
 // Handle mouse clics
-int StelApp::handleClick(QMouseEvent* event)
+void StelApp::handleClick(QMouseEvent* event)
 {
+	event->setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
 	{
-		if (i->handleMouseClicks(event)==true)
-			return 1;
+		i->handleMouseClicks(event);
+		if (event->isAccepted())
+			return;
 	}
-	return 0;
 }
 
 // Handle mouse wheel.
-int StelApp::handleWheel(QWheelEvent* event)
+void StelApp::handleWheel(QWheelEvent* event)
 {
+	event->setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
 	{
-		if (i->handleMouseWheel(event)==true)
-			return 1;
+		i->handleMouseWheel(event);
+		if (event->isAccepted())
+			return;
 	}
-	return 0;
 }
 	
 // Handle mouse move
-int StelApp::handleMove(QMouseEvent* event)
+void StelApp::handleMove(QMouseEvent* event)
 {
+	event->setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
-		if (i->handleMouseMoves(event)==true)
-			return 1;
+		i->handleMouseMoves(event);
+		if (event->isAccepted())
+			return;
 	}
-	return 0;
 }
 
 // Handle key press and release
-int StelApp::handleKeys(QKeyEvent* event)
+void StelApp::handleKeys(QKeyEvent* event)
 {
+	event->setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS))
 	{
-		if (i->handleKeys(event)==true)
-			return 1;
+		i->handleKeys(event);
+		if (event->isAccepted())
+			return;
 	}
-	return 0;
 }
 
 

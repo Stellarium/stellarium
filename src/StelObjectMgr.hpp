@@ -45,7 +45,7 @@ public:
 	virtual double draw(StelCore* core) {return 0.;}
 	virtual void update(double deltaTime) {;}
 	//! Handle mouse click events.
-	virtual bool handleMouseClicks(class QMouseEvent* event);
+	virtual void handleMouseClicks(class QMouseEvent* event);
 	
 	///////////////////////////////////////////////////////////////////////////
 	
