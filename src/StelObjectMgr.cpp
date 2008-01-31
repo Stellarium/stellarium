@@ -39,13 +39,14 @@ StelObjectMgr::~StelObjectMgr()
 /*************************************************************************
  Handle mouse click events.
 *************************************************************************/
-bool StelObjectMgr::handleMouseClicks(QMouseEvent* event)
+void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 {
 	// Deselect the selected object
 	if (event->button()==Qt::RightButton && event->type()==QEvent::MouseButtonRelease)
 	{
 		unSelect();
-		return true;
+		event->accept();
+		return;
 	}
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	if (event->button()==Qt::LeftButton && event->type()==QEvent::MouseButtonRelease && !mvmgr->getHasDragged())
@@ -55,7 +56,8 @@ bool StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 		if (event->modifiers().testFlag(Qt::ControlModifier))
 		{
 			unSelect();
-			return true;
+			event->accept();
+			return;
 		}
 
 		// Try to select object at that position
@@ -71,7 +73,7 @@ bool StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 			mvmgr->setFlagTracking(false);
 		}
 	}
-	return false;
+	return;
 }
 	
 /*************************************************************************
