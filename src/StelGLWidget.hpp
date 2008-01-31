@@ -35,7 +35,7 @@ public:
 	// Override virtual methods
 	virtual void initializeGL();
 	virtual void resizeGL(int w, int h);
-	virtual void paintGL();
+	virtual void paintEvent(QPaintEvent *event);
 	virtual void mousePressEvent(QMouseEvent*);
 	virtual void mouseReleaseEvent(QMouseEvent*);
 	virtual void mouseMoveEvent(QMouseEvent*);

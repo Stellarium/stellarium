@@ -3,6 +3,16 @@
 %Module PyStellarium 0
 
 %Import QtGui/QtGuimod.sip
+%Import QtOpenGL/QtOpenGLmod.sip
+
+class StelGLWidget : QGLWidget
+{
+%TypeHeaderCode
+	#include "StelGLWidget.hpp"
+%End
+private:
+	StelGLWidget(const StelGLWidget&);
+};
 
 class StelMainWindow : QMainWindow
 {
@@ -17,6 +27,7 @@ public:
 	char* args[] = {"stellarium"};
 	sipCpp->init(1, args);
 %End
+	StelGLWidget* getOpenGLWin();
 private:
 	StelMainWindow(const StelMainWindow&);
 };
@@ -36,14 +47,23 @@ class StelModule : QObject
 %TypeHeaderCode
 	#include "StelModule.hpp"
 %End
-	
+
 public:
+	enum StelModuleActionName
+	{
+		ACTION_DRAW,
+		ACTION_UPDATE,
+		ACTION_HANDLEMOUSECLICKS,
+		ACTION_HANDLEMOUSEMOVES,
+		ACTION_HANDLEKEYS
+	};
+	
 	explicit StelModule();
 	virtual ~StelModule();
 	virtual void init() = 0;
 	virtual double draw(StelCore* core) = 0;
 	virtual void update(double deltaTime) = 0;
-	
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 private:
 	StelModule(const StelModule&);
 };
