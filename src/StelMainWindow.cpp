@@ -38,7 +38,7 @@
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 		 
-StelMainWindow::StelMainWindow()
+StelMainWindow::StelMainWindow() : openGLWin(NULL)
 {
 	setObjectName("stellariumMainWin");
 	
@@ -50,8 +50,8 @@ StelMainWindow::StelMainWindow()
 
 void StelMainWindow::init(int argc, char** argv)
 {
-	Ui_Form testUi;
-	testUi.setupUi(this);
+// 	Ui_Form testUi;
+// 	testUi.setupUi(this);
 	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);
@@ -76,7 +76,7 @@ void StelMainWindow::init(int argc, char** argv)
 	}
 	
 	// Create the OpenGL widget in which the main modules will be drawn
-	StelGLWidget* openGLWin = new StelGLWidget(this);
+	openGLWin = new StelGLWidget(this);
 	setCentralWidget(openGLWin);
 	openGLWin->initializeGL();
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);

@@ -23,6 +23,8 @@
 #include <QMainWindow>
 #include <cassert>
 
+class StelGLWidget;
+
 //! The main Stellarium window. It creates an instance of StelGLWidget and starts it
 //! The fullscreen mode is just resizing the window to screen dimension and hiding the decoration
 class StelMainWindow : public QMainWindow
@@ -41,6 +43,9 @@ public:
 	//! @return the StelMainWindow singleton instance
 	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
 	
+	//! Get the main QGLWidget
+	StelGLWidget* getOpenGLWin() {return openGLWin;}
+			
 public slots:
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
@@ -61,6 +66,9 @@ public slots:
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 	
 private:
+	//! The openGL window
+	StelGLWidget* openGLWin;
+	
 	// The StelMainWindow singleton
 	static StelMainWindow* singleton;
 };

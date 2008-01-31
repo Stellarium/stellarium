@@ -53,6 +53,7 @@ StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat
 	// make openGL context current
 	makeCurrent();
 	setAutoBufferSwap(false);
+	setAutoFillBackground(false);
 	mainTimer = new QTimer(this);
 	connect(mainTimer, SIGNAL(timeout()), this, SLOT(recompute()));
 }
@@ -106,7 +107,7 @@ void StelGLWidget::resizeGL(int w, int h)
 	}
 }
 
-void StelGLWidget::paintGL()
+void StelGLWidget::paintEvent(QPaintEvent *event)
 {
 	const double now = StelApp::getInstance().getTotalRunTime();
 	double dt = now-previousTime;
@@ -115,7 +116,7 @@ void StelGLWidget::paintGL()
 	if (dt<0)	// This fix the star scale bug!!
 		return;
 	StelApp::getInstance().update(dt);
-	
+		
 	distorter->prepare();
 	StelApp::getInstance().draw();
 	distorter->distort();
