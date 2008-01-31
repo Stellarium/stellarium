@@ -1187,9 +1187,7 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
 				if (mod & StelMod_SHIFT) {
 					core->getProjection()->setFlipVert(!core->getProjection()->getFlipVert());
 				}
-            } else {
-				commander->execute_command( "flag constellation_names toggle");
-            }
+            } 
             break;
 
 		case StelKey_f:
@@ -1201,12 +1199,6 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             }
 			break;
 
-		case StelKey_r:
-            commander->execute_command( "flag constellation_art toggle");
-            break;
-		case StelKey_c:
-            commander->execute_command( "flag constellation_drawing toggle");
-            break;
 		case StelKey_b:
             commander->execute_command( "flag constellation_boundaries toggle");
             break;

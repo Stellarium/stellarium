@@ -20,25 +20,37 @@ for a in mainWin.children():
 		mainWin.addAction(a);
 
 modMgr = StelApp.getInstance().getModuleMgr()
-
 module = modMgr.getModule("ConstellationMgr")
 QtCore.QObject.connect(ui.actionShow_Constellation_Lines,QtCore.SIGNAL("toggled(bool)"),module, QtCore.SLOT("setFlagLines(bool)"))
 QtCore.QObject.connect(ui.actionShow_Constellation_Labels,QtCore.SIGNAL("toggled(bool)"),module, QtCore.SLOT("setFlagNames(bool)"))
 QtCore.QObject.connect(ui.actionShow_Constellation_Art,QtCore.SIGNAL("toggled(bool)"),module, QtCore.SLOT("setFlagArt(bool)"))
 
 class PyStelModule(StelModule):
-	def __init__(self):
+	def __init__(self, paintDevice):
 		StelModule.__init__(self)
 		self.setObjectName("PyStelModule")
+		self.paintDevice = paintDevice
+		self.scene = QtGui.QGraphicsScene()
+		self.scene.addText("Hello, world! Ca va?")
+		for i in range(1,100):
+			self.scene.addEllipse(i,i,i,i)
+		self.painter = QtGui.QPainter()
+	def getCallOrder(self, actionName):
+		if (actionName==StelModule.ACTION_DRAW):
+			return 10000.
+		return 0.
 	def init(self):
-		print "init"
+		pass
 	def draw(self, core):
-		print "draw"
+		self.painter.begin(self.paintDevice)
+		self.painter.setRenderHint(QtGui.QPainter.Antialiasing)
+		self.scene.render(self.painter, QtCore.QRectF(100,100,100,100))
+		self.painter.end()
 		return 0.
 	def update(self, deltaTime):
-		print deltaTime
+		pass
 
-testModule = PyStelModule()
+testModule = PyStelModule(mainWin.getOpenGLWin())
 modMgr.registerModule(testModule, True)
 
 sys.exit(app.exec_())
