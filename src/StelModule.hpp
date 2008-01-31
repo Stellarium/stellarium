@@ -22,14 +22,10 @@
 
 #include <QString>
 #include <QObject>
-#include "StelKey.hpp"
-#include "StelTypes.hpp"
 
 // Predeclaration
 class StelCore;
 class QSettings;
-
-using namespace std;
 
 //! This is the common base class for all the main components of stellarium.
 //! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
