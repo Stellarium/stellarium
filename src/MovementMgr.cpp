@@ -52,47 +52,47 @@ void MovementMgr::init()
 	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 }	
 	
-bool MovementMgr::handleMouseMoves(QMouseEvent* event)
+void MovementMgr::handleMouseMoves(QMouseEvent* event)
 {
-	// Turn if the mouse is at the edge of the screen.
-	// unless config asks otherwise
-// 	if(FlagEnableMoveMouse)
-// 	{
-// 		if (x == 0)
-// 		{
-// 			turnLeft(1);
-// 			is_mouse_moving_horiz = true;
-// 		}
-// 		else if (x == core->getProjection()->getViewportWidth() - 1)
-// 		{
-// 			turnRight(1);
-// 			is_mouse_moving_horiz = true;
-// 		}
-// 		else if (is_mouse_moving_horiz)
-// 		{
-// 			turnLeft(0);
-// 			is_mouse_moving_horiz = false;
-// 		}
-// 
-// 		if (y == 0)
-// 		{
-// 			turnUp(1);
-// 			is_mouse_moving_vert = true;
-// 		}
-// 		else if (y == core->getProjection()->getViewportHeight() - 1)
-// 		{
-// 			turnDown(1);
-// 			is_mouse_moving_vert = true;
-// 		}
-// 		else if (is_mouse_moving_vert)
-// 		{
-// 			turnUp(0);
-// 			is_mouse_moving_vert = false;
-// 		}
-// 	}
-	
 	int x=event->x();
 	int y=event->y();
+	
+	// Turn if the mouse is at the edge of the screen unless config asks otherwise
+	if(FlagEnableMoveMouse)
+	{
+		if (x == 0)
+		{
+			turnLeft(1);
+			is_mouse_moving_horiz = true;
+		}
+		else if (x == core->getProjection()->getViewportWidth() - 1)
+		{
+			turnRight(1);
+			is_mouse_moving_horiz = true;
+		}
+		else if (is_mouse_moving_horiz)
+		{
+			turnLeft(0);
+			is_mouse_moving_horiz = false;
+		}
+
+		if (y == 0)
+		{
+			turnUp(1);
+			is_mouse_moving_vert = true;
+		}
+		else if (y == core->getProjection()->getViewportHeight() - 1)
+		{
+			turnDown(1);
+			is_mouse_moving_vert = true;
+		}
+		else if (is_mouse_moving_vert)
+		{
+			turnUp(0);
+			is_mouse_moving_vert = false;
+		}
+	}
+	
 	if (is_dragging)
 	{
 		if (has_dragged || (std::sqrt((double)((x-previous_x)*(x-previous_x) +(y-previous_y)*(y-previous_y)))>4.))
@@ -102,14 +102,13 @@ bool MovementMgr::handleMouseMoves(QMouseEvent* event)
 			dragView(previous_x, previous_y, x, y);
 			previous_x = x;
 			previous_y = y;
-			return true;
+			event->accept();
 		}
 	}
-	return false;
 }
 
 
-bool MovementMgr::handleKeys(QKeyEvent* event)
+void MovementMgr::handleKeys(QKeyEvent* event)
 {
 	if (event->type() == QEvent::KeyPress)
 	{
@@ -133,7 +132,7 @@ bool MovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_PageDown:
 				zoomOut(true); break;
 			default:
-				return false;
+				return;
 		}
 	}
 	else
@@ -158,22 +157,22 @@ bool MovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_PageDown:
 				zoomOut(false); break;
 			default:
-				return false;
+				return;
 		}
 	}
-	return true;
+	event->accept();
 }
 
 //! Handle mouse wheel events.
-bool MovementMgr::handleMouseWheel(QWheelEvent* event)
+void MovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	int numDegrees = event->delta() / 8;
 	int numSteps = numDegrees / 15;
 	zoomTo(getAimFov()-MouseZoom*numSteps*getAimFov()/60., 0.2);
-	return true;
+	event->accept();
 }
 
-bool MovementMgr::handleMouseClicks(QMouseEvent* event)
+void MovementMgr::handleMouseClicks(QMouseEvent* event)
 {
 	switch (event->button())
 	{
@@ -185,7 +184,8 @@ bool MovementMgr::handleMouseClicks(QMouseEvent* event)
 				has_dragged = false;
 				previous_x = event->x();
 				previous_y = event->y();
-				return true;
+				event->accept();
+				return;
 			}
 			else
 			{
@@ -193,9 +193,12 @@ bool MovementMgr::handleMouseClicks(QMouseEvent* event)
 				{
 					is_dragging = false;
 					if (has_dragged)
-						return true;
+					{
+						event->accept();
+						return;
+					}
 					else
-						return false;
+						return;
 				}
 			}
 			break;
@@ -211,7 +214,7 @@ bool MovementMgr::handleMouseClicks(QMouseEvent* event)
 			break;
 		default: break;
 	}
-	return false;
+	return;
 }
 
 /*************************************************************************

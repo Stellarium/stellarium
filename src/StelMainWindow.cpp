@@ -57,17 +57,6 @@ void StelMainWindow::init(int argc, char** argv)
 	StelApp* stelApp = new StelApp(argc, argv, this);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
-	QString iconPath;
-	try
-	{
-		iconPath = stelApp->getFileMgr().findFile("data/icon.bmp");
-	}
-	catch (exception& e)
-	{
-		qWarning() << "ERROR when trying to locate icon file: " << e.what();
-	}
-	setWindowIcon(QIcon(iconPath));
-	
 	QSettings* settings = stelApp->getSettings();
 	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
 	if (settings->value("video/fullscreen", true).toBool())

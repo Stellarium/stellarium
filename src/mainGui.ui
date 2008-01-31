@@ -18,6 +18,9 @@
   <property name="windowTitle" >
    <string>Stellarium</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../data/mainRes.qrc" >:/mainWindow/icon.bmp</iconset>
+  </property>
   <widget class="QDockWidget" name="dockWidgetSearchSkyObject" >
    <property name="geometry" >
     <rect>
@@ -67,7 +70,7 @@
        <item>
         <widget class="QLineEdit" name="lineEditSearchSkyObject" >
          <property name="text" >
-          <string>Up</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -89,7 +92,7 @@
   <widget class="QDockWidget" name="dockWidgetHelp" >
    <property name="geometry" >
     <rect>
-     <x>90</x>
+     <x>100</x>
      <y>200</y>
      <width>291</width>
      <height>56</height>
@@ -408,7 +411,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../data/mainRes.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>actionShow_Search_Window</sender>

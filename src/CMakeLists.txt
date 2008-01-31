@@ -207,6 +207,11 @@ SET(stellarium_UIS
   mainGui.ui)
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
+################# compiles resources files ############
+SET(stellarium_RES
+  ../data/mainRes.qrc)
+QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+
 ################# compiles moc files ############
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
@@ -232,7 +237,7 @@ SET(stellarium_MOC_HDRS
 )
 
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
-QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS} ${stellarium_UIS_H})
+QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 
 SET(stellarium_exe_SRCS
    main.cpp
@@ -248,13 +253,13 @@ ENDIF(MACOSX)
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
 IF(GENERATE_STELMAINLIB)
- ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS})
+ ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
  INSTALL(TARGETS stelMain DESTINATION lib)
  ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
 ELSE(GENERATE_STELMAINLIB)
- ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_exe_SRCS})
+ ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption})
 ENDIF(GENERATE_STELMAINLIB)
 

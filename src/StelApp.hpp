@@ -164,13 +164,13 @@ private:
 	double draw();
 	
 	//! Handle mouse clics.
-	int handleClick(class QMouseEvent* event);
+	void handleClick(class QMouseEvent* event);
 	//! Handle mouse wheel.
-	int handleWheel(class QWheelEvent* event);
+	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	int handleMove(class QMouseEvent* event);
+	void handleMove(class QMouseEvent* event);
 	//! Handle key press and release.
-	int handleKeys(class QKeyEvent* event);
+	void handleKeys(class QKeyEvent* event);
 
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(int w, int h);
