@@ -50,8 +50,8 @@ StelMainWindow::StelMainWindow() : openGLWin(NULL)
 
 void StelMainWindow::init(int argc, char** argv)
 {
-// 	Ui_Form testUi;
-// 	testUi.setupUi(this);
+ 	Ui_Form testUi;
+ 	testUi.setupUi(this);
 	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);
