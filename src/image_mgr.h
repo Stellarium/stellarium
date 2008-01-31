@@ -25,12 +25,13 @@
 #include <string>
 #include "StelModule.hpp"
 #include "image.h"
+
+using namespace std;
+
 /**
  * Manage images displayed at the request of the command interface (scripts)
  * @author Robert Spearman <rob@digitaliseducation.com>
  */
-
-
 class ImageMgr : public StelModule
 {
 

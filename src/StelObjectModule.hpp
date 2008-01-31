@@ -26,6 +26,8 @@
 #include "StelObjectType.hpp"
 #include "vecmath.h"
 
+using namespace std;
+
 //! @class StelObjectModule
 //! Specialization of StelModule which manages a collection of StelObjects.
 //! Instances deriving from the StelObjectModule class can be managed by the StelObjectMgr.
