@@ -22,9 +22,10 @@
 
 #include <QTime>
 #include <cassert>
+#include <QGraphicsView>
 #include <QGLWidget>
 
-class StelGLWidget : public QGLWidget
+class StelGLWidget : public QGraphicsView
 {
 	Q_OBJECT;
 public:
@@ -34,14 +35,6 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Override virtual methods
 	virtual void initializeGL();
-	virtual void resizeGL(int w, int h);
-	virtual void paintEvent(QPaintEvent *event);
-	virtual void mousePressEvent(QMouseEvent*);
-	virtual void mouseReleaseEvent(QMouseEvent*);
-	virtual void mouseMoveEvent(QMouseEvent*);
-	virtual void wheelEvent(QWheelEvent*);
-	virtual void keyPressEvent(QKeyEvent*);
-	virtual void keyReleaseEvent(QKeyEvent*);
 
 	//! Get the StelGLWidget singleton instance.
 	//! @return the StelGLWidget singleton instance
@@ -61,6 +54,18 @@ public:
 	//! Start the main drawing loop
 	void startDrawingLoop();
 	
+	class QGLWidget* glWidget;
+	
+protected:
+	virtual void resizeEvent(QResizeEvent * event);
+ 	virtual void paintEvent(QPaintEvent *event);
+	virtual void mousePressEvent(QMouseEvent*);
+	virtual void mouseReleaseEvent(QMouseEvent*);
+	virtual void mouseMoveEvent(QMouseEvent*);
+	virtual void wheelEvent(QWheelEvent*);
+	virtual void keyPressEvent(QKeyEvent*);
+	virtual void keyReleaseEvent(QKeyEvent*);
+		
 private slots:
 	//! Called when screen needs to be refreshed
 	void recompute();
