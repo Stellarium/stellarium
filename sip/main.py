@@ -32,9 +32,10 @@ class PyStelModule(StelModule):
 		self.paintDevice = paintDevice
 		self.scene = QtGui.QGraphicsScene()
 		self.scene.addText("Hello, world! Ca va?")
-		for i in range(1,100):
-			self.scene.addEllipse(i,i,i,i)
+		#for i in range(1,1000):
+		#	self.scene.addEllipse(i,i,i,i)
 		self.painter = QtGui.QPainter()
+		self.view = QtGui.QGraphicsView(self.scene)
 	def getCallOrder(self, actionName):
 		if (actionName==StelModule.ACTION_DRAW):
 			return 10000.
@@ -44,7 +45,8 @@ class PyStelModule(StelModule):
 	def draw(self, core):
 		self.painter.begin(self.paintDevice)
 		self.painter.setRenderHint(QtGui.QPainter.Antialiasing)
-		self.scene.render(self.painter, QtCore.QRectF(100,100,100,100))
+		self.view.render(self.painter, QtCore.QRectF(100,100,100,100))
+		#self.scene.render(self.painter, QtCore.QRectF(100,100,100,100))
 		self.painter.end()
 		return 0.
 	def update(self, deltaTime):
