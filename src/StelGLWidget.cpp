@@ -34,16 +34,30 @@
 #include "image_mgr.h"
 #include "script_mgr.h"
 
+class TGLWidget : public QGLWidget
+{
+public:
+	TGLWidget(QWidget* parent) : QGLWidget(QGLFormat::defaultFormat(), parent)
+	{
+		setAutoBufferSwap(false);
+	}
+};
+
 // Initialize static variables
 StelGLWidget* StelGLWidget::singleton = NULL;
 
-StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat(), parent), ui(NULL)
+StelGLWidget::StelGLWidget(QWidget *parent) : ui(NULL)
 {
+	setFrameShape(QFrame::NoFrame);
+	
 	setObjectName("StelGLWidget");
 	
 	// Can't create 2 StelGLWidget instances
 	assert(!singleton);
 	singleton = this;
+	
+	glWidget = new TGLWidget(parent);
+	setViewport(glWidget);
 	
 	distorter = ViewportDistorter::create("none",width(),height(),NULL);
 	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
@@ -51,9 +65,8 @@ StelGLWidget::StelGLWidget(QWidget *parent) : QGLWidget(QGLFormat::defaultFormat
 	setFocusPolicy(Qt::ClickFocus);
 	setMouseTracking(true);
 	// make openGL context current
-	makeCurrent();
-	setAutoBufferSwap(false);
-	setAutoFillBackground(false);
+	glWidget->makeCurrent();
+	glWidget->setAutoFillBackground(false);
 	mainTimer = new QTimer(this);
 	connect(mainTimer, SIGNAL(timeout()), this, SLOT(recompute()));
 }
@@ -87,23 +100,32 @@ void StelGLWidget::init()
 	ImageMgr* script_images = new ImageMgr();
 	script_images->init();
 	StelApp::getInstance().getModuleMgr().registerModule(script_images);
+
+// 	QGraphicsScene* scene = new QGraphicsScene(this);
+// 	scene->addLine(0, 0, 1000, 1000);
+// 	scene->addLine(300, 500, 300, 0);
+// 	scene->addEllipse(50,50,50,50);
+// 	scene->setSceneRect(rect());
+// 	setScene(scene);
+	
+	//setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
 void StelGLWidget::initializeGL()
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
-	swapBuffers();
+	glWidget->swapBuffers();
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void StelGLWidget::resizeGL(int w, int h)
+void StelGLWidget::resizeEvent(QResizeEvent * event)
 {
 	//cerr << "StelGLWidget::resizeGL(" << w << "x" << h << ")" << endl;
 	// no resizing allowed in distortion mode
 	if (!distorter || distorter && distorter->getType() == "none")
 	{
-		StelApp::getInstance().glWindowHasBeenResized(w, h);
+		StelApp::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
 	}
 }
 
@@ -112,7 +134,7 @@ void StelGLWidget::paintEvent(QPaintEvent *event)
 	const double now = StelApp::getInstance().getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
-	
+	//qWarning() << now;
 	if (dt<0)	// This fix the star scale bug!!
 		return;
 	StelApp::getInstance().update(dt);
@@ -124,22 +146,30 @@ void StelGLWidget::paintEvent(QPaintEvent *event)
 	if (ui)
 		ui->drawGui();
 	
-	swapBuffers();
+	QPainter painter;
+	painter.begin(glWidget);
+	render(&painter);
+	painter.end();
+	
+	glWidget->swapBuffers();
 }
 
 void StelGLWidget::recompute()
 {
-	update();
+	QList<QRectF> l;
+	l.append(rect());
+	updateScene(l);
 	double duration = 1./StelApp::getInstance().minfps;
 	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
+	//qWarning() << "recompute";
 	mainTimer->start((int)(duration*1000));
 }
 
 void StelGLWidget::thereWasAnEvent()
 {
 	// Refresh screen ASAP
-	mainTimer->start(0);
+	recompute();
 	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
 }
 
@@ -180,7 +210,7 @@ void StelGLWidget::showCursor(bool b)
 // Start the main drawing loop
 void StelGLWidget::startDrawingLoop()
 {
-	mainTimer->start(10);
+	mainTimer->start(5);
 }
 	
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)

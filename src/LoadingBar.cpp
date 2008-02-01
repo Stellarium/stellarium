@@ -110,6 +110,6 @@ void LoadingBar::Draw(float val)
 	prj->drawText(&barfont, barx, bary-barfont.getLineHeight()-1, message);
 	prj->drawText(&extraTextFont, splashx + extraTextPos[0], splashy + extraTextPos[1]-extraTextFont.getLineHeight()-1, extraText);
 	
-	StelGLWidget::getInstance().swapBuffers();	// And swap the buffers
+	StelGLWidget::getInstance().glWidget->swapBuffers();	// And swap the buffers
 	glClear(GL_COLOR_BUFFER_BIT);
 }

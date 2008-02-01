@@ -32,6 +32,8 @@
 #include <QSettings>
 #include <QCoreApplication>
 
+#include <QGraphicsView>
+
 #include "ui_mainGui.h"
 #include "StelModuleMgr.hpp"
 
@@ -71,9 +73,11 @@ void StelMainWindow::init(int argc, char** argv)
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 	// Show the window during loading for the loading bar
 	openGLWin->initializeGL();
+
 	stelApp->init();
 	openGLWin->init();
 	openGLWin->setFocus();
+	
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
@@ -119,6 +123,7 @@ void StelMainWindow::init(int argc, char** argv)
 	testUi.actionSet_Full_Screen->setChecked(isFullScreen());
 	QObject::connect(testUi.actionSet_Full_Screen, SIGNAL(toggled(bool)), this, SLOT(setFullScreen(bool)));
 	
+	openGLWin->startDrawingLoop();
 }
 
 StelMainWindow::~StelMainWindow()
@@ -128,7 +133,7 @@ StelMainWindow::~StelMainWindow()
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
 	QString shotDir;
-	QImage im = findChild<StelGLWidget*>("stellariumOpenStelGLWidget")->grabFrameBuffer();
+	QImage im = findChild<StelGLWidget*>("stellariumOpenStelGLWidget")->glWidget->grabFrameBuffer();
 
 	if (saveDir == "")
 	{
