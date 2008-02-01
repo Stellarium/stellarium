@@ -237,7 +237,7 @@ SET(stellarium_MOC_HDRS
 )
 
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
-QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
+QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS} ${stellarium_UIS_H})
 
 SET(stellarium_exe_SRCS
    main.cpp
