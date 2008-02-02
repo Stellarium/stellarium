@@ -1,205 +1,205 @@
-ADD_SUBDIRECTORY( planetsephems ) 
-ADD_SUBDIRECTORY( stelutils ) 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/intl ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
+
+
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/deprecated ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 
 ########### next target ###############
 
 SET(stellarium_lib_SRCS
-   Projector.cpp
-   Projector.hpp
-   Mapping.hpp
-   Mapping.cpp
-   MappingClasses.hpp
-   MappingClasses.cpp
-   SphericMirrorCalculator.cpp
-   SphericMirrorCalculator.hpp
-   ViewportDistorter.cpp
-   ViewportDistorter.hpp
-   Navigator.cpp
-   Navigator.hpp
-   Observer.cpp
-   Observer.hpp
-   GeodesicGrid.cpp
-   GeodesicGrid.hpp
-   StelObject.cpp
-   StelObject.hpp
-   StelObjectType.hpp
-   ZoneData.hpp
-   Star.cpp
-   Star.hpp
-   StarWrapper.cpp
-   StarWrapper.hpp
-   ZoneArray.cpp
-   ZoneArray.hpp
-   ZoneData.hpp
-   StringArray.cpp
-   StringArray.hpp
-   StarMgr.cpp
-   StarMgr.hpp
-   Nebula.cpp
-   Nebula.hpp
-   NebulaMgr.cpp
-   NebulaMgr.hpp
-   Constellation.cpp
-   Constellation.hpp
-   ConstellationMgr.cpp
-   ConstellationMgr.hpp
-   Meteor.cpp
-   Meteor.hpp
-   MeteorMgr.cpp
-   MeteorMgr.hpp
-   Planet.cpp
-   Planet.hpp
-   orbit.cpp
-   orbit.h
-   SolarSystem.cpp
-   SolarSystem.hpp
-   Telescope.cpp
-   Telescope.hpp
-   TelescopeMgr.cpp
-   TelescopeMgr.hpp
-   Atmosphere.cpp
-   Atmosphere.hpp
-   image.cpp
-   image.h
-   image_mgr.cpp
-   image_mgr.h
-   Landscape.cpp
-   Landscape.hpp
-   LoadingBar.cpp
-   LoadingBar.hpp
-   script.cpp
-   script.h
-   script_mgr.cpp
-   script_mgr.h
-   s_gui.cpp
-   s_gui.h
-   Skybright.cpp
-   Skybright.hpp
-   Skylight.cpp
-   Skylight.hpp
-   solve.h
-   StelApp.cpp
-   StelApp.hpp
-   audio.cpp
-   audio.h
-   command_interface.cpp
-   command_interface.h
-   stel_command_interface.cpp
-   stel_command_interface.h
-   StelCore.cpp
-   StelCore.hpp
-   stel_ui_conf.cpp
-   stel_ui.cpp
-   stel_ui.h
-   stel_ui_tuiconf.cpp
-   s_tui.cpp
-   s_tui.h
-   StelPluginInterface.hpp
-   ToneReproducer.cpp
-   ToneReproducer.hpp
-   translations.h
-   StelObjectModule.hpp
-   StelObjectModule.cpp
-   StelModule.hpp
-   StelModule.cpp
-   StelModuleMgr.cpp
-   StelModuleMgr.hpp
-   StelFontMgr.hpp
-   StelFontMgr.cpp
-   StelLocaleMgr.hpp
-   StelLocaleMgr.cpp
-   StelSkyCultureMgr.hpp
-   StelSkyCultureMgr.cpp
-   GeodesicGridDrawer.h
-   GeodesicGridDrawer.cpp
-   StelTextureMgr.hpp
-   StelTextureMgr.cpp
-   AstroImage.hpp
-   AstroImage.cpp
-   LandscapeMgr.hpp
-   LandscapeMgr.cpp
-   GridLinesMgr.hpp
-   GridLinesMgr.cpp
-   MilkyWay.hpp
-   MilkyWay.cpp
-   MovementMgr.hpp
-   MovementMgr.cpp
-   StelObjectMgr.hpp
-   StelObjectMgr.cpp
-   StelFileMgr.hpp
-   StelFileMgr.cpp
-   SkyDrawer.hpp
-   SkyDrawer.cpp
+core/AstroImage.cpp
+core/AstroImage.hpp
+core/audio.cpp
+core/audio.h
+core/GeodesicGrid.cpp
+core/GeodesicGridDrawer.cpp
+core/GeodesicGridDrawer.hpp
+core/GeodesicGrid.hpp
+core/LoadingBar.cpp
+core/LoadingBar.hpp
+core/MappingClasses.cpp
+core/MappingClasses.hpp
+core/Mapping.cpp
+core/Mapping.hpp
+core/MovementMgr.cpp
+core/MovementMgr.hpp
+core/Navigator.cpp
+core/Navigator.hpp
+core/Observer.cpp
+core/Observer.hpp
+core/Projector.cpp
+core/Projector.hpp
+core/SFont.cpp
+core/SFont.hpp
+core/SkyDrawer.cpp
+core/SkyDrawer.hpp
+core/SphericMirrorCalculator.cpp
+core/SphericMirrorCalculator.hpp
+core/StelApp.cpp
+core/StelApp.hpp
+core/StelCore.cpp
+core/StelCore.hpp
+core/StelFileMgr.cpp
+core/StelFileMgr.hpp
+core/StelFontMgr.cpp
+core/StelFontMgr.hpp
+core/StelGLWidget.cpp
+core/StelGLWidget.hpp
+core/StelLocaleMgr.cpp
+core/StelLocaleMgr.hpp
+core/StelModule.cpp
+core/StelModule.hpp
+core/StelModuleMgr.cpp
+core/StelModuleMgr.hpp
+core/StelObject.cpp
+core/StelObject.hpp
+core/StelObjectMgr.cpp
+core/StelObjectMgr.hpp
+core/StelObjectModule.cpp
+core/StelObjectModule.hpp
+core/StelObjectType.hpp
+core/StelPluginInterface.hpp
+core/StelSkyCultureMgr.cpp
+core/StelSkyCultureMgr.hpp
+core/StelTextureMgr.cpp
+core/StelTextureMgr.hpp
+core/STexture.cpp
+core/STexture.hpp
+core/STextureTypes.hpp
+core/ToneReproducer.cpp
+core/ToneReproducer.hpp
+core/ViewportDistorter.cpp
+core/ViewportDistorter.hpp
 
-   QtScriptMgr.hpp
-   QtScriptMgr.cpp
+stelutils/bytes.h
+stelutils/callback_helpers.hpp
+stelutils/callbacks.hpp
+stelutils/Fader.hpp
+stelutils/fixx11h.h
+stelutils/gettext.h
+stelutils/GLee.c
+stelutils/GLee.h
+stelutils/Grid.cpp
+stelutils/Grid.hpp
+stelutils/GridObject.hpp
+stelutils/SimpleGrid.cpp
+stelutils/SimpleGrid.hpp
+stelutils/SphereGeometry.cpp
+stelutils/SphereGeometry.hpp
+stelutils/StelIniParser.cpp
+stelutils/StelIniParser.hpp
+stelutils/StelUtils.cpp
+stelutils/StelUtils.hpp
+stelutils/Translator.cpp
+stelutils/Translator.hpp
+stelutils/TreeGrid.cpp
+stelutils/TreeGrid.hpp
+stelutils/typeface.cpp
+stelutils/typeface.h
+stelutils/vecmath.h
 
-   stelutils/bytes.h
-   stelutils/gettext.h
-   stelutils/StelIniParser.cpp
-   stelutils/StelIniParser.hpp
-   stelutils/SFont.hpp
-   stelutils/SFont.cpp
-   stelutils/STexture.hpp
-   stelutils/STexture.cpp
-   stelutils/typeface.cpp
-   stelutils/typeface.h
-   stelutils/StelUtils.cpp
-   stelutils/StelUtils.hpp
-   stelutils/Translator.cpp
-   stelutils/Translator.hpp
-   stelutils/vecmath.h
-   stelutils/callbacks.hpp
-   stelutils/callback_helpers.hpp
-   stelutils/SphereGeometry.hpp
-   stelutils/SphereGeometry.cpp
-   stelutils/Fader.hpp
-   stelutils/STextureTypes.hpp
-   stelutils/GLee.c
-   stelutils/GLee.h
-   stelutils/StelKey.hpp
-   stelutils/StelTypes.hpp
-   stelutils/fixx11h.h
+planetsephems/calc_interpolated_elements.c
+planetsephems/calc_interpolated_elements.h
+planetsephems/elliptic_to_rectangular.c
+planetsephems/elliptic_to_rectangular.h
+planetsephems/elp82b.c
+planetsephems/elp82b.h
+planetsephems/gust86.c
+planetsephems/gust86.h
+planetsephems/l1.c
+planetsephems/l1.h
+planetsephems/marssat.c
+planetsephems/marssat.h
+planetsephems/misc_stellplanet.c
+planetsephems/misc_stellplanet.h
+planetsephems/pluto.c
+planetsephems/pluto.h
+planetsephems/sideral_time.c
+planetsephems/sideral_time.h
+planetsephems/stellplanet.c
+planetsephems/stellplanet.h
+planetsephems/tass17.c
+planetsephems/tass17.h
+planetsephems/vsop87.c
+planetsephems/vsop87.h
 
-   stelutils/Grid.cpp
-   stelutils/Grid.hpp
-   stelutils/SimpleGrid.cpp
-   stelutils/SimpleGrid.hpp
-   stelutils/TreeGrid.hpp
-   stelutils/TreeGrid.cpp
-   stelutils/GridObject.hpp
+deprecated/command_interface.cpp
+deprecated/command_interface.h
+deprecated/image.cpp
+deprecated/image.h
+deprecated/image_mgr.cpp
+deprecated/image_mgr.h
+deprecated/script.cpp
+deprecated/script.h
+deprecated/script_mgr.cpp
+deprecated/script_mgr.h
+deprecated/s_gui.cpp
+deprecated/s_gui.h
+deprecated/stel_command_interface.cpp
+deprecated/stel_command_interface.h
+deprecated/StelKey.hpp
+deprecated/StelTypes.hpp
+deprecated/stel_ui_conf.cpp
+deprecated/stel_ui.cpp
+deprecated/stel_ui.h
+deprecated/stel_ui_tuiconf.cpp
+deprecated/s_tui.cpp
+deprecated/s_tui.h
 
-   planetsephems/vsop87.c
-   planetsephems/vsop87.h
-   planetsephems/pluto.c
-   planetsephems/pluto.h
-   planetsephems/l1.c
-   planetsephems/l1.h
-   planetsephems/tass17.c
-   planetsephems/tass17.h
-   planetsephems/gust86.c
-   planetsephems/gust86.h
-   planetsephems/marssat.c
-   planetsephems/marssat.h
-   planetsephems/elp82b.c
-   planetsephems/elp82b.h
-   planetsephems/elliptic_to_rectangular.c
-   planetsephems/elliptic_to_rectangular.h
-   planetsephems/misc_stellplanet.c
-   planetsephems/misc_stellplanet.h
-   planetsephems/calc_interpolated_elements.c
-   planetsephems/calc_interpolated_elements.h
-   planetsephems/sideral_time.c
-   planetsephems/sideral_time.h
-   planetsephems/stellplanet.c
-   planetsephems/stellplanet.h
-   
-   StelMainWindow.hpp
-   StelMainWindow.cpp
-   StelGLWidget.hpp
-   StelGLWidget.cpp
+Atmosphere.cpp
+Atmosphere.hpp
+Constellation.cpp
+Constellation.hpp
+ConstellationMgr.cpp
+ConstellationMgr.hpp
+GridLinesMgr.cpp
+GridLinesMgr.hpp
+Landscape.cpp
+Landscape.hpp
+LandscapeMgr.cpp
+LandscapeMgr.hpp
+main.cpp
+mainGui.ui
+Meteor.cpp
+Meteor.hpp
+MeteorMgr.cpp
+MeteorMgr.hpp
+MilkyWay.cpp
+MilkyWay.hpp
+Nebula.cpp
+Nebula.hpp
+NebulaMgr.cpp
+NebulaMgr.hpp
+orbit.cpp
+orbit.h
+Planet.cpp
+Planet.hpp
+QtScriptMgr.cpp
+QtScriptMgr.hpp
+Skybright.cpp
+Skybright.hpp
+Skylight.cpp
+Skylight.hpp
+SolarSystem.cpp
+SolarSystem.hpp
+solve.h
+Star.cpp
+Star.hpp
+StarMgr.cpp
+StarMgr.hpp
+StarWrapper.cpp
+StarWrapper.hpp
+StelMainWindow.cpp
+StelMainWindow.hpp
+StringArray.cpp
+StringArray.hpp
+Telescope.cpp
+Telescope.hpp
+TelescopeMgr.cpp
+TelescopeMgr.hpp
+translations.h
+ZoneArray.cpp
+ZoneArray.hpp
+ZoneData.hpp
 )
 
 ################# compiles .ui files ############
@@ -217,23 +217,23 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
 	QtScriptMgr.hpp
-	StelModule.hpp
-	StelModuleMgr.hpp
+	core/StelModule.hpp
+	core/StelModuleMgr.hpp
 	ConstellationMgr.hpp
 	LandscapeMgr.hpp
 	GridLinesMgr.hpp
 	MilkyWay.hpp
-	MovementMgr.hpp
+	core/MovementMgr.hpp
 	NebulaMgr.hpp
 	SolarSystem.hpp
 	MeteorMgr.hpp
-	Observer.hpp
+	core/Observer.hpp
 	StarMgr.hpp
-	StelApp.hpp
-	Navigator.hpp
-	StelGLWidget.hpp
+	core/StelApp.hpp
+	core/Navigator.hpp
+	core/StelGLWidget.hpp
 	StelMainWindow.hpp
-	stelutils/STexture.hpp
+	core/STexture.hpp
 )
 
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
