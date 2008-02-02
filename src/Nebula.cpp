@@ -215,11 +215,7 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	
-#ifndef USE_SDL
 	neb_tex = StelApp::getInstance().getTextureManager().createTextureThread(QString("nebulae/")+setName+"/"+tex_name.c_str());
-#else
-	neb_tex = StelApp::getInstance().getTextureManager().createTexture(QString("nebulae/")+setName+"/"+tex_name.c_str());
-#endif
 	
 	luminance = ToneReproducer::magToLuminance(mag, tex_angular_size*tex_angular_size*3600);
 
