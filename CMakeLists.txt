@@ -39,8 +39,6 @@ ENDIF(MACOSX)
 
 ########### Check headers ###########
 INCLUDE(CheckIncludeFiles)
-CHECK_INCLUDE_FILES( unistd.h HAVE_UNISTD_H)
-CHECK_INCLUDE_FILES( string.h HAVE_STRING_H)
 CHECK_INCLUDE_FILES( byteswap.h HAVE_BYTESWAP_H)
 
 ########### Check functions ###########
@@ -125,7 +123,6 @@ ENDIF(UNIX AND NOT WIN32)
 ########### Generate a config.h ###########
 INCLUDE(TestBigEndian)
 TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
-SET(HAVE_LIBCURL ${CURL_FOUND})
 SET(PACKAGE_VERSION ${VERSION})
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 

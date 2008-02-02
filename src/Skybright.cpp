@@ -19,9 +19,7 @@
 #include <cstdio>
 #include <cmath>
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 #ifndef HAVE_POW10
 # include <math.h>
 # define pow10(x) pow(10,(x))
