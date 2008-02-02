@@ -80,6 +80,22 @@ StelGLWidget::~StelGLWidget()
 	}
 }
 
+class StelButton : public QGraphicsPixmapItem
+{
+public:
+	StelButton(const QPixmap& pix) : QGraphicsPixmapItem(pix) {setShapeMode(QGraphicsPixmapItem::BoundingRectShape);}
+protected:
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event)
+	{
+		qWarning() << "Pressed!";
+		event->accept();
+	}
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+	{
+		qWarning() << "Released!";
+	}
+};
+
 void StelGLWidget::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
@@ -101,14 +117,18 @@ void StelGLWidget::init()
 	script_images->init();
 	StelApp::getInstance().getModuleMgr().registerModule(script_images);
 
-// 	QGraphicsScene* scene = new QGraphicsScene(this);
-// 	scene->addLine(0, 0, 1000, 1000);
-// 	scene->addLine(300, 500, 300, 0);
-// 	scene->addEllipse(50,50,50,50);
-// 	scene->setSceneRect(rect());
-// 	setScene(scene);
-	
-	//setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+	QGraphicsScene* scene = new QGraphicsScene(this);
+//  	scene->addLine(0, 0, 1000, 1000);
+//  	scene->addLine(300, 500, 300, 0);
+//  	scene->addEllipse(50,50,50,50);
+// 	QPixmap pxmap(":/mainWindow/icon.bmp");
+// 	QPixmap pxmap2(":/graphicGui/1-off-time.png");
+// 	qWarning() << pxmap2.size();
+// 	StelButton* button = new StelButton(pxmap2);
+// 	button->setPos(200,200);
+// 	scene->addItem(button);
+ 	scene->setSceneRect(rect());
+ 	setScene(scene);
 }
 
 void StelGLWidget::initializeGL()
@@ -258,6 +278,10 @@ void StelGLWidget::mousePressEvent(QMouseEvent* event)
 	if (ui->handleClick(x, y, button, state, qtModToStelMod(event->modifiers())))
 		return;
 	
+	QGraphicsView::mousePressEvent(event);
+	if (scene()->mouseGrabberItem()!=0)
+		return;
+	
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
 	
@@ -286,6 +310,13 @@ void StelGLWidget::mouseReleaseEvent(QMouseEvent* event)
 	
 	int x = event->x();
 	int y = event->y();
+
+	if (scene()->mouseGrabberItem()!=0)
+	{
+		QGraphicsView::mouseReleaseEvent(event);
+		return;
+	}
+	QGraphicsView::mouseReleaseEvent(event);
 	
 	if (ui->handleClick(x, y, button, state, qtModToStelMod(event->modifiers())))
 		return;
