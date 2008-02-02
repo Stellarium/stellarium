@@ -133,7 +133,7 @@ StelMainWindow::~StelMainWindow()
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
 	QString shotDir;
-	QImage im = findChild<StelGLWidget*>("stellariumOpenStelGLWidget")->glWidget->grabFrameBuffer();
+	QImage im = findChild<StelGLWidget*>("StelGLWidget")->glWidget->grabFrameBuffer();
 
 	if (saveDir == "")
 	{
