@@ -370,11 +370,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 			}
 			
-#ifndef USE_SDL
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
-#else
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
-#endif
 			
 			int texSizeX, texSizeY;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))

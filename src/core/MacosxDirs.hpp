@@ -19,10 +19,7 @@
 #ifndef MACOSXDIRS_HPP_
 #define MACOSXDIRS_HPP_
 
-#include <string>
 #include <QString>
-
-using namespace std;
 
 /**
  * Functions to use MacOSX's Carbon Framework to retrieve and make
