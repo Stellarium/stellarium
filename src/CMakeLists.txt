@@ -246,8 +246,8 @@ SET(stellarium_exe_SRCS
 IF(MACOSX)
   SET(stellarium_lib_SRCS 
     ${stellarium_lib_SRCS}
-    MacosxDirs.cpp
-    MacosxDirs.hpp)
+    stelutils/MacosxDirs.cpp
+    stelutils/MacosxDirs.hpp)
 ENDIF(MACOSX)
 
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
