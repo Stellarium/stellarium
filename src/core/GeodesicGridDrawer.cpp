@@ -19,7 +19,7 @@
  
 #include <sstream>
 #include "StelCore.hpp"
-#include "GeodesicGridDrawer.h"
+#include "GeodesicGridDrawer.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
 #include "StelFontMgr.hpp"
