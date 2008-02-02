@@ -427,6 +427,97 @@
        </property>
        <item>
         <widget class="QLineEdit" name="lineEditSearchSkyObject" >
+         <property name="palette" >
+          <palette>
+           <active>
+            <colorrole role="Light" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>0</red>
+               <green>74</green>
+               <blue>108</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>79</red>
+               <green>86</green>
+               <blue>99</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="HighlightedText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="Light" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>0</red>
+               <green>74</green>
+               <blue>108</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>79</red>
+               <green>86</green>
+               <blue>99</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="HighlightedText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="Light" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>0</red>
+               <green>74</green>
+               <blue>108</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>134</red>
+               <green>134</green>
+               <blue>134</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="HighlightedText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
          <property name="text" >
           <string>Up</string>
          </property>
