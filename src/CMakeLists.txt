@@ -11,8 +11,6 @@ core/AstroImage.hpp
 core/audio.cpp
 core/audio.h
 core/GeodesicGrid.cpp
-core/GeodesicGridDrawer.cpp
-core/GeodesicGridDrawer.hpp
 core/GeodesicGrid.hpp
 core/LoadingBar.cpp
 core/LoadingBar.hpp
