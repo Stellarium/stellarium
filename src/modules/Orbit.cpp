@@ -9,10 +9,10 @@
 
 #include <functional>
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 
-#include "solve.h"
-#include "orbit.h"
+#include "Solve.hpp"
+#include "Orbit.hpp"
 
 using namespace std;
 

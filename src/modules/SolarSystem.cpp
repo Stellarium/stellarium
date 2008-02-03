@@ -24,7 +24,7 @@
 #include "SolarSystem.hpp"
 #include "STexture.hpp"
 #include "stellplanet.h"
-#include "orbit.h"
+#include "Orbit.hpp"
 #include "Navigator.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
@@ -38,6 +38,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
+#include "SFont.hpp"
+
 #include <QTextStream>
 #include <QSettings>
 #include <QVariant>

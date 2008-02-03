@@ -33,6 +33,9 @@
 #include "Projector.hpp"
 #include "MappingClasses.hpp"
 #include "StelApp.hpp"
+#include "StelUtils.hpp"
+#include "SFont.hpp"
+
 #include <QDebug>
 #include <QString>
 #include <QSettings>
@@ -963,6 +966,15 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
 		glRotatef(psi,0,0,-1);
 	}
 	glPopMatrix();
+}
+
+/*************************************************************************
+ Draw the string at the given position and angle with the given font
+*************************************************************************/
+void Projector::drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg, 
+	float xshift, float yshift, bool noGravity) const
+{
+	drawText(font, x, y, StelUtils::stringToWstring(str), angleDeg, xshift, yshift);
 }
 
 /*************************************************************************

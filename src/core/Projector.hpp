@@ -26,11 +26,12 @@
 #include "GLee.h"
 #include "fixx11h.h"
 #include "vecmath.h"
-#include "SFont.hpp"
 #include "Mapping.hpp"
 #include "SphereGeometry.hpp"
 
 #include <QString>
+
+class SFont;
 
 //! @class Projector
 //! Provides functions for drawing operations which are performed with some sort of 
@@ -327,11 +328,8 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const string& str, float angleDeg=0.f, 
-		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const
-	{
-		drawText(font, x, y, StelUtils::stringToWstring(str), angleDeg, xshift, yshift);
-	}
+	void drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg=0.f, 
+		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
 	//! Draw the (multi-byte) string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -342,7 +340,7 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg=0.f, 
+	void drawText(const SFont* font, float x, float y, const std::wstring& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 
 	//! Draw the given polygon
@@ -444,7 +442,7 @@ public:
 
 
 private:
-	void drawTextGravity180(const SFont* font, float x, float y, const wstring& str, 
+	void drawTextGravity180(const SFont* font, float x, float y, const std::wstring& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 		
 	//! Init the real openGL Matrices to a 2d orthographic projection

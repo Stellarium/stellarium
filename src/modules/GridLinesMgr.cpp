@@ -33,6 +33,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "SFont.hpp"
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.

@@ -33,6 +33,7 @@
 #include "Planet.hpp"
 #include "Observer.hpp"
 #include "StelIniParser.hpp"
+#include "SFont.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals

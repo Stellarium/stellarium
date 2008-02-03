@@ -23,11 +23,12 @@
 #include "fixx11h.h"
 #include "ViewportDistorter.hpp"
 #include "SphericMirrorCalculator.hpp"
-#include <QSettings>
+#include "StelUtils.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
 #include <fstream>
 #include <cmath>
+#include <QSettings>
 
 using namespace std;
 
