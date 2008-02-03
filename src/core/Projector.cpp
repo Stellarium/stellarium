@@ -196,9 +196,9 @@ void Projector::setViewport(int x, int y, int w, int h,
  Return a polygon matching precisely the real viewport defined by the area on the screen 
  where projection is valid.
 *************************************************************************/
-std::vector<Vec2d> Projector::getViewportVertices2d() const
+QList<Vec2d> Projector::getViewportVertices2d() const
 {
-	std::vector<Vec2d> result;
+	QList<Vec2d> result;
 	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]));
 	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]));
 	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]+viewport_xywh[3]));
@@ -422,14 +422,13 @@ void Projector::setCurrentProjection(const QString& projectionName)
 	if (currentProjectionType==projectionName)
 		return;
 
-	std::map<std::string,const Mapping*>::const_iterator
-		i(projectionMapping.find(projectionName.toStdString()));
+	QMap<QString,const Mapping*>::const_iterator i(projectionMapping.find(projectionName));
 	if (i!=projectionMapping.end())
 	{
 		currentProjectionType = projectionName;
 
 		// Redefine the projection functions
-		mapping = i->second;
+		mapping = i.value();
 		min_fov = mapping->minFov;
 		max_fov = mapping->maxFov;
 

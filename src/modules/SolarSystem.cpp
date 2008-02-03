@@ -48,6 +48,7 @@
 #include <QMap>
 #include <QMultiMap>
 #include <QMapIterator>
+#include <QDebug>
 
 using namespace std;
 

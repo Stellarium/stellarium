@@ -20,9 +20,6 @@
 #ifndef _PROJECTOR_H_
 #define _PROJECTOR_H_
 
-#include <vector>
-#include <map>
-
 #include "GLee.h"
 #include "fixx11h.h"
 #include "vecmath.h"
@@ -30,6 +27,8 @@
 #include "SphereGeometry.hpp"
 
 #include <QString>
+#include <QList>
+#include <QMap>
 
 class SFont;
 
@@ -159,7 +158,7 @@ public:
 	//! Normally, nothing should be drawn outside this area. This viewport 
 	//! is usually the rectangle defined by the screen, but in case of 
 	//! non-linear projection, it can also be a more complex shape.
-	std::vector<Vec2d> getViewportVertices2d() const;
+	QList<Vec2d> getViewportVertices2d() const;
 	
 	//! Return a convex polygon on the sphere which includes the viewport 
 	//! in the current frame.
@@ -478,7 +477,7 @@ private:
 	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
 	
 	const Mapping *mapping;
-	std::map<std::string,const Mapping*> projectionMapping;
+	QMap<QString,const Mapping*> projectionMapping;
 	
 	QString currentProjectionType;	// Type of the projection currently used
 	

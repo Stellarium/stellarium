@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <iostream>
 
 #include "GLee.h"
 #include "fixx11h.h"
@@ -31,7 +32,7 @@
 #include <QIcon>
 #include <QSettings>
 #include <QCoreApplication>
-
+#include <QDebug>
 #include <QGraphicsView>
 
 #include "ui_mainGui.h"
@@ -142,13 +143,13 @@ void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& sa
 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
 			{
-				cerr << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir) << endl;
+				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
 				return;
 			}
 		}
 		catch(exception& e)
 		{
-			cerr << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what() << endl;
+			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
 			return;
 		}
 	}
@@ -167,7 +168,7 @@ void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& sa
 	// TODO - if no more filenames available, don't just overwrite the last one
 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
 	
-	cout << "Saving screenshot in file: " << qPrintable(shotPath) << endl;
+	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
 	im.save(shotPath);
 }
 

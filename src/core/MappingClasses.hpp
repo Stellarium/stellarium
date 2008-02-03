@@ -7,7 +7,7 @@ class MappingPerspective : public Mapping
 {
 public:
     MappingPerspective(void);
-	std::string getName(void) const {return "perspective";} 
+	QString getName(void) const {return "perspective";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingPerspective instance;
@@ -22,7 +22,7 @@ class MappingEqualArea : public Mapping
 {
 public:
     MappingEqualArea(void);
-	std::string getName(void) const {return "equal_area";} 
+	QString getName(void) const {return "equal_area";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingEqualArea instance;
@@ -37,7 +37,7 @@ class MappingStereographic : public Mapping
 {
 public:
     MappingStereographic(void);
-	std::string getName(void) const {return "stereographic";} 
+	QString getName(void) const {return "stereographic";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingStereographic instance;
@@ -52,7 +52,7 @@ class MappingFisheye : public Mapping
 {
 public:
     MappingFisheye(void);
-	std::string getName(void) const {return "fisheye";} 
+	QString getName(void) const {return "fisheye";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingFisheye instance;
@@ -67,7 +67,7 @@ class MappingCylinder : public Mapping
 {
 public:
     MappingCylinder(void);
-	std::string getName(void) const {return "cylinder";} 
+	QString getName(void) const {return "cylinder";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingCylinder instance;
@@ -82,7 +82,7 @@ class MappingOrthographic : public Mapping
 {
 public:
     MappingOrthographic(void);
-	std::string getName(void) const {return "orthographic";} 
+	QString getName(void) const {return "orthographic";} 
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingOrthographic instance;
