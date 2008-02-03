@@ -24,6 +24,8 @@
 #ifndef _ZONE_ARRAY_HPP_
 #define _ZONE_ARRAY_HPP_
 
+#include <iostream>
+
 #include "ZoneData.hpp"
 #include "Star.hpp"
 

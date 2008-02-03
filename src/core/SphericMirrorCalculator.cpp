@@ -20,6 +20,7 @@
 
 #include "SphericMirrorCalculator.hpp"
 #include <QSettings>
+#include <iostream>
 
 SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf) {
   const Vec3d mirror_position(

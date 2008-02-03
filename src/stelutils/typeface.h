@@ -24,6 +24,7 @@
 #include <string>
 
 #include "vecmath.h"
+typedef Vector2<size_t> Vec2size_t;
 
 struct Data;
 struct CacheEntry;

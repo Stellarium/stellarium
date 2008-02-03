@@ -25,8 +25,6 @@
 #define _VECMATH_H_
 
 #include <cmath>
-#include <cstdio>
-#include <iostream>
 #include <cassert>
  
 template<class T> class Vector2;
@@ -37,7 +35,6 @@ template<class T> class Matrix4;
 typedef Vector2<double>	Vec2d;
 typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
-typedef Vector2<size_t> Vec2size_t;
 
 typedef Vector3<float>	Vec3f;
 typedef Vector3<double>	Vec3d;
@@ -387,10 +384,10 @@ template<class T> void Vector2<T>::normalize()
     v[1] *= s;
 }
 
-template<class T> 
-std::ostream& operator<<(std::ostream &o,const Vector2<T> &v) {
-  return o << '[' << v[0] << ',' << v[1] << ']';
-}
+// template<class T> 
+// std::ostream& operator<<(std::ostream &o,const Vector2<T> &v) {
+//   return o << '[' << v[0] << ',' << v[1] << ']';
+// }
 
 ////////////////////////// Vector3 class methods ///////////////////////////////
 
@@ -578,24 +575,24 @@ template<class T> T Vector3<T>::longitude() const
 	return std::atan2(v[1],v[0]);
 }
 
-template<class T> 
-std::ostream& operator<<(std::ostream &o,const Vector3<T> &v) {
-  return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ']';
-}
+// template<class T> 
+// std::ostream& operator<<(std::ostream &o,const Vector3<T> &v) {
+//   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ']';
+// }
 
-template<class T> 
-std::istream& operator>> (std::istream& is, Vector3<T> &v) {
-	while(is.get()!='[' && !is.eof()) {;}
-	assert(!is.eof() && "Vector must start with a '['");
-	is >> v[0];
-	is.ignore(256, ',');
-	is >> v[1];
-	is.ignore(256, ',');
-	is >> v[2];
-	while(is.get()!=']' && !is.eof()) {;}
-	assert(!is.eof() && "Vector must be terminated by a ']'");
-	return is;
-}
+// template<class T> 
+// std::istream& operator>> (std::istream& is, Vector3<T> &v) {
+// 	while(is.get()!='[' && !is.eof()) {;}
+// 	assert(!is.eof() && "Vector must start with a '['");
+// 	is >> v[0];
+// 	is.ignore(256, ',');
+// 	is >> v[1];
+// 	is.ignore(256, ',');
+// 	is >> v[2];
+// 	while(is.get()!=']' && !is.eof()) {;}
+// 	assert(!is.eof() && "Vector must be terminated by a ']'");
+// 	return is;
+// }
 		
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
@@ -753,11 +750,11 @@ template<class T> void Vector4<T>::transfo4d(const Mat4d& m)
 {
 	(*this)=m*(*this);
 }
-
+/*
 template<class T> 
 std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
   return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ',' << v[3] << ']';
-}
+}*/
 
 
 ////////////////////////// Matrix4 class methods ///////////////////////////////
