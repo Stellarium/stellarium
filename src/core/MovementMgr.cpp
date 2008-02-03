@@ -22,6 +22,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Navigator.hpp"
+#include "StelUtils.hpp"
+#include <sstream>
 
 #include <QSettings>
 #include <QKeyEvent>

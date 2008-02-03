@@ -26,7 +26,7 @@
 #include "stel_command_interface.h"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
-#include "audio.h"
+#include "Audio.hpp"
 #include "image.h"
 #include "stel_ui.h"
 #include "script_mgr.h"

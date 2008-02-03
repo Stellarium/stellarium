@@ -22,6 +22,7 @@
 #include "StelObjectModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "StelUtils.hpp"
 #include "Projector.hpp"
 #include "MovementMgr.hpp"
 #include <QMouseEvent>

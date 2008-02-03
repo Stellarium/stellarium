@@ -22,7 +22,7 @@
 #include <iostream>
 #include <config.h>
 
-#include "audio.h"
+#include "Audio.hpp"
 #include "Translator.hpp"
 
 #ifdef HAVE_SDL_SDL_MIXER_H

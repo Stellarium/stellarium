@@ -24,6 +24,7 @@
 #include "StarMgr.hpp"
 #include "Navigator.hpp"
 #include "STexture.hpp"
+#include "SFont.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
