@@ -42,6 +42,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
+#include "SFont.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :

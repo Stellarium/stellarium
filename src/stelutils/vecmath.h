@@ -25,7 +25,6 @@
 #define _VECMATH_H_
 
 #include <cmath>
-#include <cstring>
 #include <cstdio>
 #include <iostream>
 #include <cassert>
