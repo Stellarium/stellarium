@@ -21,11 +21,7 @@
 #define SPHEREGEOMETRY_HPP_
 
 #include <vector>
-#include <algorithm>
-#include <functional>
-
 #include "vecmath.h"
-#include <QDebug> 
 
 //! In this namespace we define different geometrical shapes :
 //! <ul>

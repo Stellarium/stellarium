@@ -27,6 +27,7 @@
 #include "Projector.hpp"
 #include "StelApp.hpp"
 #include <fstream>
+#include <iostream>
 #include <cmath>
 #include <QSettings>
 
@@ -111,7 +112,7 @@ ViewportDistorterFisheyeToSphericMirror
   {
     flag_use_ext_framebuffer_object = conf.value("spheric_mirror/flag_use_ext_framebuffer_object",true).toBool();
   }
-  cout << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object << endl;
+ std::cout << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object << endl;
   if (flag_use_ext_framebuffer_object && !GLEE_EXT_packed_depth_stencil) {
     cout << "WARNING: "
             "using EXT_framebuffer_object, but EXT_packed_depth_stencil "

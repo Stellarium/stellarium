@@ -2,13 +2,14 @@
 #define MAPPING_HPP_
 
 #include "vecmath.h"
+#include <QString>
 
 class Mapping
 {
 public:
 	Mapping(void);
 	virtual ~Mapping(void) {}
-	virtual std::string getName(void) const = 0;
+	virtual QString getName(void) const = 0;
 
 	//! Apply the transformation in the forward direction
 	//! After transformation v[2] will always contain the length

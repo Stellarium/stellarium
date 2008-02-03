@@ -374,8 +374,8 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	map<int, set<double> > resultsParallels;
 	map<int, set<double> > resultsMeridians;
-	const vector<Vec2d> viewportVertices = prj->getViewportVertices2d();
-	for (unsigned int i=0;i<viewportVertices.size();++i)
+	const QList<Vec2d> viewportVertices = prj->getViewportVertices2d();
+	for (int i=0;i<viewportVertices.size();++i)
 	{
 		// The segment of the viewport is between v0 and v1
 		Vec2d vertex0 = viewportVertices[i];

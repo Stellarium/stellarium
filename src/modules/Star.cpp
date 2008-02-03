@@ -23,6 +23,7 @@
 
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
+#include <iostream>
 
 namespace BigStarCatalogExtension {
 
@@ -165,7 +166,7 @@ void Star1::repack(bool from_be) {
 }
 
 void Star1::print(void) {
-  cout << "hip: " << hip
+ std::cout << "hip: " << hip
        << ", component_ids: " << ((unsigned int)component_ids)
        << ", x0: " << x0
        << ", x1: " << x1
@@ -201,7 +202,7 @@ void Star2::repack(bool from_be) {
 }
 
 void Star2::print(void) {
-  cout << "x0: " << x0
+ std::cout << "x0: " << x0
        << ", x1: " << x1
        << ", dx0: " << dx0
        << ", dx1: " << dx1
@@ -227,7 +228,7 @@ void Star3::repack(bool from_be) {
 }
 
 void Star3::print(void) {
-  cout << "x0: " << x0
+  std::cout << "x0: " << x0
        << ", x1: " << x1
        << ", b_v: " << b_v
        << ", mag: " << mag
