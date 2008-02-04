@@ -171,7 +171,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	parseCLIArgsPostConfig();
 	
 	core = new StelCore();
-	core->initProj();
 	moduleMgr = new StelModuleMgr();
 }
 

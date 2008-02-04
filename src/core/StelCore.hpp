@@ -46,9 +46,6 @@ public:
 	//! Init and load all main core components.
 	void init();
 
-	//! Init projection temp TODO remove.
-	void initProj();
-
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
 	void update(double deltaTime);

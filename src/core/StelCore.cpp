@@ -35,9 +35,11 @@
 /*************************************************************************
  Constructor
 *************************************************************************/
-StelCore::StelCore() : projection(NULL)
+StelCore::StelCore()
 {
 	tone_converter = new ToneReproducer();
+	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
+	projection->init();
 }
 
 
@@ -52,18 +54,6 @@ StelCore::~StelCore()
 	delete tone_converter; tone_converter=NULL;
 	delete geodesic_grid; geodesic_grid = NULL;
 }
-
-
-/*************************************************************************
- Init projection temp TODO remove
-*************************************************************************/
-void StelCore::initProj()
-{
-	// Projector
-	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
-	projection->init();
-}
-
 
 /*************************************************************************
  Load core data and initialize with default values
