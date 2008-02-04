@@ -59,8 +59,9 @@ StelApp* StelApp::singleton = NULL;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
-				 core(NULL), fps(0), maxfps(10000.f), frame(0), timefr(0.), 
-	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL), initialized(false)
+	core(NULL), fps(0), maxfps(10000.f), frame(0), timefr(0.), 
+	timeBase(0.), flagNightVision(false), configFile("config.ini"), confSettings(NULL),
+	initialized(false), saveProjW(-1), saveProjH(-1)
 {
 	// Used for getting system date formatting
 	setlocale(LC_TIME, "");
@@ -202,6 +203,8 @@ QString StelApp::getApplicationName()
 void StelApp::init()
 {
 	core = new StelCore();
+	if (saveProjW!=-1 && saveProjH!=-1)
+		core->getProjection()->windowHasBeenResized(saveProjW, saveProjH);
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
@@ -529,6 +532,11 @@ void StelApp::glWindowHasBeenResized(int w, int h)
 {
 	if (core)
 		core->getProjection()->windowHasBeenResized(w, h);
+	else
+	{
+		saveProjW = w;
+		saveProjH = h;
+	}
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
