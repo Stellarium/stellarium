@@ -912,5 +912,37 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>dockWidgetSearchSkyObject</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionShow_Search_Window</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>355</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dockWidgetHelp</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionShow_Help_Window</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>235</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>

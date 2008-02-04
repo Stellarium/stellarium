@@ -74,22 +74,6 @@ StelGLWidget::~StelGLWidget()
 	}
 }
 
-class StelButton : public QGraphicsPixmapItem
-{
-public:
-	StelButton(const QPixmap& pix) : QGraphicsPixmapItem(pix) {setShapeMode(QGraphicsPixmapItem::BoundingRectShape);}
-protected:
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event)
-	{
-		qWarning() << "Pressed!";
-		event->accept();
-	}
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
-	{
-		qWarning() << "Released!";
-	}
-};
-
 void StelGLWidget::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
@@ -111,15 +95,7 @@ void StelGLWidget::init()
 	script_images->init();
 	StelApp::getInstance().getModuleMgr().registerModule(script_images);
 
-	QGraphicsScene* scene = new QGraphicsScene(this);
-//  scene->addLine(0, 0, 1000, 1000);
-//  scene->addLine(300, 500, 300, 0);
-//  scene->addEllipse(50,50,50,50);
-// 	QPixmap pxmap2(":/graphicGui/1-off-time.png");
-// 	StelButton* button = new StelButton(pxmap2);
-// 	button->setPos(200,200);
-// 	scene->addItem(button);
-	
+	QGraphicsScene* scene = new QGraphicsScene(this);	
  	scene->setSceneRect(rect());
  	setScene(scene);
 }
@@ -136,6 +112,8 @@ void StelGLWidget::resizeEvent(QResizeEvent * event)
 {
 	//cerr << "StelGLWidget::resizeGL(" << w << "x" << h << ")" << endl;
 	// no resizing allowed in distortion mode
+	if (scene())
+		scene()->setSceneRect(rect());
 	if (!distorter || (distorter && distorter->getType() == "none"))
 	{
 		StelApp::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
@@ -164,6 +142,7 @@ void StelGLWidget::paintEvent(QPaintEvent *event)
 	
 	// Draw the QGraphicScene
 	// Swap of the openGL is automatic in this call
+	setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
 	QGraphicsView::paintEvent(event);
 }
 

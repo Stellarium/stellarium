@@ -29,6 +29,8 @@
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
+#include "StelModuleMgr.hpp"
+
 #include <QIcon>
 #include <QSettings>
 #include <QCoreApplication>
@@ -36,7 +38,7 @@
 #include <QGraphicsView>
 
 #include "ui_mainGui.h"
-#include "StelModuleMgr.hpp"
+#include "gui/NewGui.hpp"
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
@@ -78,6 +80,9 @@ void StelMainWindow::init(int argc, char** argv)
 	openGLWin->init();
 	openGLWin->setFocus();
 	
+	NewGui* newGui = new NewGui(&testUi);
+	newGui->init();
+	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
@@ -88,40 +93,6 @@ void StelMainWindow::init(int argc, char** argv)
 		if (a)
 			this->addAction(a);
 	}
-	
-	// Connect all the GUI actions signals with the Core of Stellarium
-	QObject* module = GETSTELMODULE("ConstellationMgr");
-	QObject::connect(testUi.actionShow_Constellation_Lines, SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
-	QObject::connect(testUi.actionShow_Constellation_Art, SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
-	QObject::connect(testUi.actionShow_Constellation_Labels, SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
-	
-	module = GETSTELMODULE("GridLinesMgr");
-	QObject::connect(testUi.actionShow_Equatorial_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
-	QObject::connect(testUi.actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
-	
-	module = GETSTELMODULE("LandscapeMgr");
-	QObject::connect(testUi.actionShow_Ground, SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
-	QObject::connect(testUi.actionShow_Cardinal_points, SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
-	QObject::connect(testUi.actionShow_Atmosphere, SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
-	
-	module = GETSTELMODULE("NebulaMgr");
-	QObject::connect(testUi.actionShow_Nebulas, SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
-	
-	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
-	QObject::connect(testUi.actionIncrease_Time_Speed, SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
-	QObject::connect(testUi.actionDecrease_Time_Speed, SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
-	QObject::connect(testUi.actionSet_Real_Time_Speed, SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
-	QObject::connect(testUi.actionReturn_To_Current_Time, SIGNAL(triggered()), module, SLOT(setTimeNow()));
-	QObject::connect(testUi.actionSwitch_Equatorial_Mount, SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
-			
-	module = &StelApp::getInstance();
-	QObject::connect(testUi.actionShow_Night_Mode, SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
-	
-	module = GETSTELMODULE("MovementMgr");
-	QObject::connect(testUi.actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
-	
-	testUi.actionSet_Full_Screen->setChecked(isFullScreen());
-	QObject::connect(testUi.actionSet_Full_Screen, SIGNAL(toggled(bool)), this, SLOT(setFullScreen(bool)));
 	
 	openGLWin->startDrawingLoop();
 }
