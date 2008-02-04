@@ -169,8 +169,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	}
 	
 	parseCLIArgsPostConfig();
-	
-	core = new StelCore();
 	moduleMgr = new StelModuleMgr();
 }
 
@@ -203,6 +201,7 @@ QString StelApp::getApplicationName()
 
 void StelApp::init()
 {
+	core = new StelCore();
 	textureMgr = new StelTextureMgr();
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
@@ -528,7 +527,8 @@ double StelApp::draw()
 *************************************************************************/
 void StelApp::glWindowHasBeenResized(int w, int h)
 {
-	core->getProjection()->windowHasBeenResized(w, h);
+	if (core)
+		core->getProjection()->windowHasBeenResized(w, h);
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{

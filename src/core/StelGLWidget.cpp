@@ -48,7 +48,9 @@ StelGLWidget::StelGLWidget(QWidget *parent) : ui(NULL)
 	assert(!singleton);
 	singleton = this;
 	
-	glWidget = new QGLWidget(parent);
+	// Create the OpenGL widget in which the main modules will be drawn
+	// This creates a GL context before initializing StelApp
+	glWidget = new QGLWidget(this);
 	setViewport(glWidget);
 	
 	distorter = ViewportDistorter::create("none",width(),height(),NULL);

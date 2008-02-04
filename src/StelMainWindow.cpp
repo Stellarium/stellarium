@@ -67,7 +67,6 @@ void StelMainWindow::init(int argc, char** argv)
 		showFullScreen();
 	}
 	
-	// Create the OpenGL widget in which the main modules will be drawn
 	openGLWin = new StelGLWidget(this);
 	setCentralWidget(openGLWin);
 	openGLWin->initializeGL();
