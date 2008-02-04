@@ -303,24 +303,20 @@ void StelGLWidget::mouseReleaseEvent(QMouseEvent* event)
 	thereWasAnEvent();
 }
 
-void StelGLWidget::mouseMoveEvent(QMouseEvent* event)
+void StelGLWidget::mouseMoveEvent(QMouseEvent* mevent)
 {
-	if (scene()->mouseGrabberItem()!=0)
-	{
-		QGraphicsView::mouseMoveEvent(event);
-		return;
-	}
+	QGraphicsView::mouseMoveEvent(mevent);
 	
-	int x = event->x();
-	int y = event->y();
+	int x = mevent->x();
+	int y = mevent->y();
 	const int ui_x = x;
 	const int ui_y = y;
 	y = height() - 1 - y;
 	distorter->distortXY(x,y);
-	QMouseEvent newEvent(event->type(), QPoint(x,y), event->button(), event->buttons(), event->modifiers());
+	QMouseEvent newEvent(mevent->type(), QPoint(x,y), mevent->button(), mevent->buttons(), mevent->modifiers());
 	StelApp::getInstance().handleMove(&newEvent);
 	
-	ui->handleMouseMoves(ui_x,ui_y, qtModToStelMod(event->modifiers()));
+	ui->handleMouseMoves(ui_x,ui_y, qtModToStelMod(mevent->modifiers()));
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
