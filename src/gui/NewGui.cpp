@@ -36,18 +36,40 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItemGroup>
 
-StelWinBarButton::StelWinBarButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff) : QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), checked(false)
+StelWinBarButton::StelWinBarButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff, const QPixmap& apixHover) : QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover), checked(false)
 {
 	assert(!pixOn.isNull());
 	assert(!pixOff.isNull());
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+	setAcceptsHoverEvents(true);
 }
 
 void StelWinBarButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
+	QGraphicsItem::mousePressEvent(event);
 	event->accept();
 	setChecked(!checked);
 	emit(toggled(checked));
+}
+
+void StelWinBarButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
+{
+	qWarning() << "Enter" << event << event->scenePos() << event->pos();
+	QPixmap pix = pixmap();
+	QPainter painter(&pix);
+	painter.drawPixmap(0,0, pixHover);
+	setPixmap(pix);
+}
+		
+void StelWinBarButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+{
+	qWarning() << "Leave" << event->scenePos();
+	setPixmap(checked ? pixOn : pixOff);
+}
+	
+void StelWinBarButton::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
+{
+	qWarning() << "Move" << event->scenePos();
 }
 
 void StelWinBarButton::setChecked(bool b)
@@ -140,41 +162,39 @@ void NewGui::init()
 	
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	
-	
+
 	return;
-	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
-	
 	winBar = new StelBar(NULL);
 	
+	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
 	QPixmap pxmapOff(":/graphicGui/gui/1-off-time.png");
-	StelWinBarButton* b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	StelWinBarButton* b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/2-off-location.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);	
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);	
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/3-on-sky.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/3-off-sky.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/4-on-skylore.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/4-off-skylore.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/6-off-search.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	b->setChecked(ui->actionShow_Search_Window->isChecked());
 	QObject::connect(ui->actionShow_Search_Window, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
 	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Search_Window, SLOT(setChecked(bool)));
@@ -182,22 +202,23 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/7-on-plugins.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/7-off-plugins.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/8-off-settings.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/9-off-help.png");
-	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff);
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow);
 	b->setChecked(ui->actionShow_Help_Window->isChecked());
 	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
 	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Help_Window, SLOT(setChecked(bool)));
 	winBar->addButton(b);
 	
+	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
 	scene->addItem(winBar);
 	winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
 	
