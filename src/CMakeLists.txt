@@ -215,7 +215,7 @@ SET(stellarium_exe_SRCS
 
 ################# compiles .ui files ############
 SET(stellarium_UIS
-  mainGui.ui)
+  gui/mainGui.ui)
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
 ################# compiles resources files ############
