@@ -23,6 +23,7 @@
 #include "Projector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGLWidget.hpp"
+#include "StelMainWindow.hpp"
 
 #include "ui_mainGui.h"
 
@@ -86,6 +87,7 @@ void StelBar::updatePath()
 
 NewGui::NewGui(Ui_Form* aui) : ui(aui)
 {
+	winBar = NULL;
 }
 
 NewGui::~NewGui()
@@ -105,6 +107,42 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 
 void NewGui::init()
 {
+	// Connect all the GUI actions signals with the Core of Stellarium
+	QObject* module = GETSTELMODULE("ConstellationMgr");
+	QObject::connect(ui->actionShow_Constellation_Lines, SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
+	QObject::connect(ui->actionShow_Constellation_Art, SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
+	QObject::connect(ui->actionShow_Constellation_Labels, SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
+	
+	module = GETSTELMODULE("GridLinesMgr");
+	QObject::connect(ui->actionShow_Equatorial_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
+	QObject::connect(ui->actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
+	
+	module = GETSTELMODULE("LandscapeMgr");
+	QObject::connect(ui->actionShow_Ground, SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
+	QObject::connect(ui->actionShow_Cardinal_points, SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
+	QObject::connect(ui->actionShow_Atmosphere, SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
+	
+	module = GETSTELMODULE("NebulaMgr");
+	QObject::connect(ui->actionShow_Nebulas, SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
+	
+	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
+	QObject::connect(ui->actionIncrease_Time_Speed, SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
+	QObject::connect(ui->actionDecrease_Time_Speed, SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
+	QObject::connect(ui->actionSet_Real_Time_Speed, SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
+	QObject::connect(ui->actionReturn_To_Current_Time, SIGNAL(triggered()), module, SLOT(setTimeNow()));
+	QObject::connect(ui->actionSwitch_Equatorial_Mount, SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
+			
+	module = &StelApp::getInstance();
+	QObject::connect(ui->actionShow_Night_Mode, SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
+	
+	module = GETSTELMODULE("MovementMgr");
+	QObject::connect(ui->actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
+	
+	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
+	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	
+	
+	return;
 	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
 	
 	winBar = new StelBar(NULL);
@@ -176,7 +214,8 @@ double NewGui::draw(StelCore* core)
 void NewGui::glWindowHasBeenResized(int w, int h)
 {
 	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
-	winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
+	if (winBar)
+		winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
 }
 
 // Update state which is time dependent.

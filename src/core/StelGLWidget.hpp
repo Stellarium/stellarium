@@ -25,6 +25,8 @@
 #include <QGraphicsView>
 #include <QGLWidget>
 
+class QGraphicsScene;
+
 class StelGLWidget : public QGraphicsView
 {
 	Q_OBJECT;
@@ -53,6 +55,9 @@ public:
 	
 	//! Start the main drawing loop
 	void startDrawingLoop();
+	
+	//! Get the main QGraphicsScene containing all the items managed by the QGraphicsView
+	QGraphicsScene* getScene() {return scene();}
 	
 	class QGLWidget* glWidget;
 	
@@ -83,7 +88,7 @@ private:
 	
 	// The StelGLWidget singleton
 	static StelGLWidget* singleton;
-	
+
 	class StelUI* ui;
 };
 

@@ -192,6 +192,9 @@ SET(stellarium_lib_SRCS
 	modules/ZoneArray.hpp
 	modules/ZoneData.hpp
 	
+	gui/NewGui.hpp
+	gui/NewGui.cpp
+	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
 	StelMainWindow.cpp
@@ -217,7 +220,7 @@ QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
 ################# compiles resources files ############
 SET(stellarium_RES
-  ../data/mainRes.qrc)
+  ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
 QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 
 ################# compiles moc files ############
@@ -240,6 +243,7 @@ SET(stellarium_MOC_HDRS
 	modules/SolarSystem.hpp
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
+	gui/NewGui.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )
