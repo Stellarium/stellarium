@@ -31,7 +31,7 @@ class StelWinBarButton : public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT;
 public:
-	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff);
+	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap());
 
 signals:
 	//! Triggered when the button state changes
@@ -42,10 +42,13 @@ public slots:
 
 protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {;}
+	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
+	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
 private:
 	QPixmap pixOn;
 	QPixmap pixOff;
+	QPixmap pixHover;
 	bool checked;
 };
 
