@@ -232,9 +232,8 @@ double NewGui::draw(StelCore* core)
 
 void NewGui::glWindowHasBeenResized(int w, int h)
 {
-	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
 	if (winBar)
-		winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
+		winBar->setPos(0, h-winBar->boundingRect().height()-42);
 }
 
 // Update state which is time dependent.
