@@ -186,17 +186,17 @@ void StelUI::init()
 	Painter p(baseTex, &baseFont, s_color(s_vec3(0.5, 0.5, 0.5)), s_color(s_vec3(1., 1., 1.)));
 	Component::setDefaultPainter(p);
 
-	Component::initScissor(StelGLWidget::getInstance().width(), StelGLWidget::getInstance().height());
+	Component::initScissor(StelAppGraphicsItem::getInstance().width(), StelAppGraphicsItem::getInstance().height());
 
 	desktop = new Container(true);
-	desktop->reshape(0,0,StelGLWidget::getInstance().width(),StelGLWidget::getInstance().height());
+	desktop->reshape(0,0,StelAppGraphicsItem::getInstance().width(),StelAppGraphicsItem::getInstance().height());
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,StelGLWidget::getInstance().height()-41-(int)baseFont.getDescent());
+	bt_flag_help_lbl->setPos(3,StelAppGraphicsItem::getInstance().height()-41-(int)baseFont.getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(StelGLWidget::getInstance().width()-210,StelGLWidget::getInstance().height()-41-(int)baseFont.getDescent());
+	bt_flag_time_control_lbl->setPos(StelAppGraphicsItem::getInstance().width()-210,StelAppGraphicsItem::getInstance().height()-41-(int)baseFont.getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -267,19 +267,19 @@ void StelUI::selectedObjectChangeCallBack(StelModuleSelectAction action)
 
 void StelUI::resize()
 {
-	Component::initScissor(StelGLWidget::getInstance().width(), StelGLWidget::getInstance().height());
+	Component::initScissor(StelAppGraphicsItem::getInstance().width(), StelAppGraphicsItem::getInstance().height());
 	if (!desktop)
 		return;
 		
-	desktop->reshape(0,0,StelGLWidget::getInstance().width(),StelGLWidget::getInstance().height());
-	top_bar_ctr->reshape(0,0,StelGLWidget::getInstance().width(),top_bar_ctr->getSizey());
-	top_bar_fps_lbl->setPos(StelGLWidget::getInstance().width()-100,1);
-	top_bar_fov_lbl->setPos(StelGLWidget::getInstance().width()-220,1);
-	top_bar_appName_lbl->setPos(StelGLWidget::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
-	bt_flag_ctr->setPos(0,StelGLWidget::getInstance().height()-25);
-	bt_flag_help_lbl->setPos(3,StelGLWidget::getInstance().height()-41-4);
-	bt_time_control_ctr->reshape(StelGLWidget::getInstance().width()-4*25-1, StelGLWidget::getInstance().height()-25, 4*25, 25);
-	bt_flag_time_control_lbl->setPos(StelGLWidget::getInstance().width()-210,StelGLWidget::getInstance().height()-41-4);
+	desktop->reshape(0,0,StelAppGraphicsItem::getInstance().width(),StelAppGraphicsItem::getInstance().height());
+	top_bar_ctr->reshape(0,0,StelAppGraphicsItem::getInstance().width(),top_bar_ctr->getSizey());
+	top_bar_fps_lbl->setPos(StelAppGraphicsItem::getInstance().width()-100,1);
+	top_bar_fov_lbl->setPos(StelAppGraphicsItem::getInstance().width()-220,1);
+	top_bar_appName_lbl->setPos(StelAppGraphicsItem::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
+	bt_flag_ctr->setPos(0,StelAppGraphicsItem::getInstance().height()-25);
+	bt_flag_help_lbl->setPos(3,StelAppGraphicsItem::getInstance().height()-41-4);
+	bt_time_control_ctr->reshape(StelAppGraphicsItem::getInstance().width()-4*25-1, StelAppGraphicsItem::getInstance().height()-25, 4*25, 25);
+	bt_flag_time_control_lbl->setPos(StelAppGraphicsItem::getInstance().width()-210,StelAppGraphicsItem::getInstance().height()-41-4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -303,12 +303,12 @@ Component* StelUI::createTopBar(SFont& baseFont)
 {
 	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
-	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelGLWidget::getInstance().width()-100,1);
-	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelGLWidget::getInstance().width()-220,1);
+	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(StelAppGraphicsItem::getInstance().width()-100,1);
+	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(StelAppGraphicsItem::getInstance().width()-220,1);
 	top_bar_appName_lbl = new Label(StelApp::getApplicationName().toStdWString(), &baseFont);
-	top_bar_appName_lbl->setPos(StelGLWidget::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(StelAppGraphicsItem::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,StelGLWidget::getInstance().width(),(int)(baseFont.getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,StelAppGraphicsItem::getInstance().width(),(int)(baseFont.getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -495,7 +495,7 @@ Component* StelUI::createFlagButtons()
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, StelGLWidget::getInstance().height()-25, x-1, 25);
+	bt_flag_ctr->reshape(0, StelAppGraphicsItem::getInstance().height()-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -529,7 +529,7 @@ Component* StelUI::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
 	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
-	bt_time_control_ctr->reshape(StelGLWidget::getInstance().width()-4*25-1, StelGLWidget::getInstance().height()-25, 4*25, 25);
+	bt_time_control_ctr->reshape(StelAppGraphicsItem::getInstance().width()-4*25-1, StelAppGraphicsItem::getInstance().height()-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
@@ -875,7 +875,7 @@ int StelUI::handleMouseMoves(int x, int y, StelMod mod)
 	if(scripts->is_playing()) return 0;
 
 	// Show cursor
-	StelGLWidget::getInstance().showCursor(true);
+	StelAppGraphicsItem::getInstance().showCursor(true);
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	if (desktop->onMove(x, y, mod)) return 1;
@@ -895,7 +895,7 @@ int StelUI::handleClick(Uint16 x, Uint16 y, Uint8 button, Uint8 state, StelMod m
 	StelApp::getInstance().getStelObjectMgr().setFlagSelectedObjectPointer(true);
 
 	// Show cursor
-	StelGLWidget::getInstance().showCursor(true);
+	StelAppGraphicsItem::getInstance().showCursor(true);
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	if (desktop->onClic((int)x, (int)y, button, state, mod))
@@ -1385,7 +1385,7 @@ void StelUI::gui_update_widgets(int delta_time)
 		{
 			// hide cursor
 			MouseTimeLeft = 0;
-			StelGLWidget::getInstance().showCursor(false);
+			StelAppGraphicsItem::getInstance().showCursor(false);
 		}
 	}
 
@@ -1465,7 +1465,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 			top_bar_appName_lbl->setLabel(StelApp::getApplicationName().toStdWString());
 		else
 			top_bar_appName_lbl->setLabel(StelApp::getApplicationName().toStdWString() + L" (" + name + L")");
-		top_bar_appName_lbl->setPos(StelGLWidget::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
+		top_bar_appName_lbl->setPos(StelAppGraphicsItem::getInstance().width()/2-top_bar_appName_lbl->getSizex()/2,1);
 	}
 }
 

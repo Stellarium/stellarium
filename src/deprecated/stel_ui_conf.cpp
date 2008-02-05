@@ -921,8 +921,8 @@ void StelUI::setVideoOption(void)
 	if (screen_size_sl==NULL)
 	{
 		// In QT build the screen_size_sl does not exist.
-		w = StelGLWidget::getInstance().width();
-		h = StelGLWidget::getInstance().height();
+		w = StelAppGraphicsItem::getInstance().width();
+		h = StelAppGraphicsItem::getInstance().height();
 	}
 	else
 	{
@@ -937,14 +937,14 @@ void StelUI::setVideoOption(void)
 
         // cheap hack to prevent bug #1483662 - MNG, 20060508
 	cout << "Saving video settings: projection=" << qPrintable(core->getProjection()->getCurrentProjection())
-			<< ", distorter=" << qPrintable(StelGLWidget::getInstance().getViewPortDistorterType());
+			<< ", distorter=" << qPrintable(StelAppGraphicsItem::getInstance().getViewPortDistorterType());
 	if ( w && h ) cout << ", res=" << w << "x" << h;
 	cout << " in file " << qPrintable(app->getConfigFilePath()) << endl;
 
 	QSettings* conf = app->getSettings();
 
 	conf->setValue("projection/type", core->getProjection()->getCurrentProjection());
-	conf->setValue("video/distorter", StelGLWidget::getInstance().getViewPortDistorterType());
+	conf->setValue("video/distorter", StelAppGraphicsItem::getInstance().getViewPortDistorterType());
 
 	if (core->getProjection()->getViewportMaskDisk()) conf->setValue("projection/viewport", "disk");
 	else conf->setValue("projection/viewport", "maximized");
@@ -979,7 +979,7 @@ void StelUI::updateVideoVariables(void)
 		core->getProjection()->setViewportMaskNone();
 	}
 
-	StelGLWidget::getInstance().setViewPortDistorterType(viewport_distorter_cbx->getState()
+	StelAppGraphicsItem::getInstance().setViewPortDistorterType(viewport_distorter_cbx->getState()
 	                              ? "fisheye_to_spheric_mirror" : "none");
 }
 
@@ -1083,7 +1083,7 @@ void StelUI::updateConfigForm(void)
 
 	projection_sl->setValue(qPrintable(core->getProjection()->getCurrentProjection()));
 	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
-	viewport_distorter_cbx->setState(StelGLWidget::getInstance().getViewPortDistorterType()!="none");
+	viewport_distorter_cbx->setState(StelAppGraphicsItem::getInstance().getViewPortDistorterType()!="none");
 	
 	locationFromLandscapeCheck->setState(lmgr->getFlagLandscapeSetsLocation());
 }
