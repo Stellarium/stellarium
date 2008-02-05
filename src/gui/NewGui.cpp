@@ -163,7 +163,7 @@ void NewGui::init()
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 
-	return;
+
 	winBar = new StelBar(NULL);
 	
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
