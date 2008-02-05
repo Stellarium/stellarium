@@ -52,7 +52,8 @@ StelAppGraphicsItem::StelAppGraphicsItem() : ui(NULL)
 	
 	setAcceptsHoverEvents(true);
 	setFlags(QGraphicsItem::ItemIsFocusable);
-// 	setAcceptedMouseButtons(Qt::LeftButton);
+
+	setZValue(-1);
 }
 
 StelAppGraphicsItem::~StelAppGraphicsItem()

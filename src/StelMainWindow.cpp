@@ -101,8 +101,6 @@ void StelMainWindow::init(int argc, char** argv)
 	
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
-	mainItem->glWindowHasBeenResized(width(), height());
-			
 	stelApp->init();
 	mainItem->init();
 	view->setFocus();
