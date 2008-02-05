@@ -305,7 +305,7 @@ void StelGLWidget::mouseReleaseEvent(QMouseEvent* event)
 
 void StelGLWidget::mouseMoveEvent(QMouseEvent* mevent)
 {
-	QGraphicsView::mouseMoveEvent(mevent);
+	//QGraphicsView::mouseMoveEvent(mevent);
 	
 	int x = mevent->x();
 	int y = mevent->y();
