@@ -20,27 +20,20 @@
 #ifndef STELGLWIDGET_HPP_
 #define STELGLWIDGET_HPP_
 
-#include <QTime>
 #include <cassert>
-#include <QGraphicsView>
-#include <QGLWidget>
+#include <QGraphicsRectItem>
 
-class QGraphicsScene;
-
-class StelGLWidget : public QGraphicsView
+class StelAppGraphicsItem : public QObject, public QGraphicsRectItem
 {
 	Q_OBJECT;
 public:
-	StelGLWidget(QWidget *parent);
-	~StelGLWidget();
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Override virtual methods
-	virtual void initializeGL();
+	StelAppGraphicsItem();
+	~StelAppGraphicsItem();
 
-	//! Get the StelGLWidget singleton instance.
-	//! @return the StelGLWidget singleton instance
-	static StelGLWidget& getInstance() {assert(singleton); return *singleton;}
+	//! Get the StelMainWindow singleton instance.
+	//! @deprecated
+	//! @return the StelMainWindow singleton instance
+	static StelAppGraphicsItem& getInstance() {assert(singleton); return *singleton;}
 	
 	void init();
 
@@ -56,21 +49,24 @@ public:
 	//! Start the main drawing loop
 	void startDrawingLoop();
 	
-	//! Get the main QGraphicsScene containing all the items managed by the QGraphicsView
-	QGraphicsScene* getScene() {return scene();}
+	//! Paint the whole Core of stellarium
+	//! This method is called automatically by the GraphicsView
+	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
 	
-	class QGLWidget* glWidget;
+	void glWindowHasBeenResized(int w, int h);
+	
+	int width() {return rect().width();}
+	int height() {return rect().height();}
 	
 protected:
-	virtual void resizeEvent(QResizeEvent * event);
- 	virtual void paintEvent(QPaintEvent *event);
-	virtual void mousePressEvent(QMouseEvent*);
-	virtual void mouseReleaseEvent(QMouseEvent*);
-	virtual void mouseMoveEvent(QMouseEvent*);
-	virtual void wheelEvent(QWheelEvent*);
-	virtual void keyPressEvent(QKeyEvent*);
-	virtual void keyReleaseEvent(QKeyEvent*);
-		
+// 	virtual bool sceneEvent(QEvent* event);
+	virtual void keyPressEvent(QKeyEvent* event);
+	virtual void keyReleaseEvent(QKeyEvent* event);
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+	virtual void wheelEvent(QGraphicsSceneWheelEvent* event);
+	
 private slots:
 	//! Called when screen needs to be refreshed
 	void recompute();
@@ -85,11 +81,10 @@ private:
 	
 	// Main elements of the stel_app
 	class ViewportDistorter *distorter;
-	
-	// The StelGLWidget singleton
-	static StelGLWidget* singleton;
-
 	class StelUI* ui;
+	
+	// The StelAppGraphicsItem singleton
+	static StelAppGraphicsItem* singleton;
 };
 
 #endif /*STELGLWIDGET_HPP_*/

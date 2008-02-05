@@ -31,19 +31,42 @@
 #include "Projector.hpp"
 #include "StelModuleMgr.hpp"
 
-#include <QIcon>
+#include <QGLWidget>
 #include <QSettings>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QGraphicsView>
+#include <QResizeEvent>
 
 #include "ui_mainGui.h"
 #include "gui/NewGui.hpp"
 
+class StelQGraphicsView : public QGraphicsView
+{
+public:
+	StelQGraphicsView(QGraphicsScene* ascene, QWidget* parent) : QGraphicsView(ascene, parent) {;}
+protected:	
+	virtual void resizeEvent(QResizeEvent* event)
+	{
+		setSceneRect(0,0,event->size().width(), event->size().height());
+		StelAppGraphicsItem::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
+	}
+// 	void keyPressEvent(QKeyEvent* e) {qWarning() << "coucou"; QGraphicsView::keyPressEvent(e);}
+};
+
+class StelQGraphicsScene : public QGraphicsScene
+{
+public:
+	StelQGraphicsScene(QObject* parent) : QGraphicsScene(parent) {;}
+protected:	
+// 	void keyPressEvent(QKeyEvent* e) {}
+// 	void mousePressEvent(QGraphicsSceneMouseEvent *event) {qWarning() << mouseGrabberItem() << items(); QGraphicsScene::mousePressEvent(event);}
+};
+
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
 		 
-StelMainWindow::StelMainWindow() : openGLWin(NULL)
+StelMainWindow::StelMainWindow()
 {
 	setObjectName("stellariumMainWin");
 	
@@ -69,16 +92,30 @@ void StelMainWindow::init(int argc, char** argv)
 		showFullScreen();
 	}
 	
-	openGLWin = new StelGLWidget(this);
-	setCentralWidget(openGLWin);
-	openGLWin->initializeGL();
+	// Create a graphicScene and a GraphicView drawing in an openGL widget
+	StelQGraphicsScene* scene = new StelQGraphicsScene(this);
+	StelAppGraphicsItem* mainItem = new StelAppGraphicsItem();
+	scene->addItem(mainItem);
+	mainItem->setFocus();
+	view = new StelQGraphicsView(scene, this);
+	view->setFrameShape(QFrame::NoFrame);
+	view->setFocusPolicy(Qt::ClickFocus);
+	glWidget = new QGLWidget(this);
+	glWidget->setAutoFillBackground(false);
+	view->setViewport(glWidget);
+ 	view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+// 	view->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
+	
+	// Use it as a central widget
+	setCentralWidget(view);
+	
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	// Show the window during loading for the loading bar
-	openGLWin->initializeGL();
 
+	mainItem->glWindowHasBeenResized(width(), height());
+			
 	stelApp->init();
-	openGLWin->init();
-	openGLWin->setFocus();
+	mainItem->init();
+	view->setFocus();
 	
 	NewGui* newGui = new NewGui(&testUi);
 	newGui->init();
@@ -94,7 +131,7 @@ void StelMainWindow::init(int argc, char** argv)
 			this->addAction(a);
 	}
 	
-	openGLWin->startDrawingLoop();
+	mainItem->startDrawingLoop();
 }
 
 StelMainWindow::~StelMainWindow()
@@ -103,43 +140,43 @@ StelMainWindow::~StelMainWindow()
 
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
-	QString shotDir;
-	QImage im = findChild<StelGLWidget*>("StelGLWidget")->glWidget->grabFrameBuffer();
-
-	if (saveDir == "")
-	{
-		try
-		{
-			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
-			{
-				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
-				return;
-			}
-		}
-		catch(exception& e)
-		{
-			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
-			return;
-		}
-	}
-	else
-	{
-		shotDir = saveDir;
-	}
-
-	QString shotPath;
-	for(int j=0; j<1000; ++j)
-	{
-		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".bmp";
-		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
-			break;
-	}
-	// TODO - if no more filenames available, don't just overwrite the last one
-	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
-	
-	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
-	im.save(shotPath);
+// 	QString shotDir;
+// 	QImage im = findChild<StelGLWidget*>("StelGLWidget")->glWidget->grabFrameBuffer();
+// 
+// 	if (saveDir == "")
+// 	{
+// 		try
+// 		{
+// 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+// 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+// 			{
+// 				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
+// 				return;
+// 			}
+// 		}
+// 		catch(exception& e)
+// 		{
+// 			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
+// 			return;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		shotDir = saveDir;
+// 	}
+// 
+// 	QString shotPath;
+// 	for(int j=0; j<1000; ++j)
+// 	{
+// 		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".bmp";
+// 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
+// 			break;
+// 	}
+// 	// TODO - if no more filenames available, don't just overwrite the last one
+// 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
+// 	
+// 	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
+// 	im.save(shotPath);
 }
 
 

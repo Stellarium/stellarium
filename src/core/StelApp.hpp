@@ -55,7 +55,7 @@ class StelApp : public QObject
 	Q_OBJECT;
 	
 public:
-	friend class StelGLWidget;
+	friend class StelAppGraphicsItem;
 		
 	//! Create and initialize the main Stellarium application.
 	//! @param argc The number of command line parameters

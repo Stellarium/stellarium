@@ -44,7 +44,7 @@ protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+// 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
 private:
 	QPixmap pixOn;
 	QPixmap pixOff;
