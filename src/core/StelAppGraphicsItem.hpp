@@ -55,8 +55,8 @@ public:
 	
 	void glWindowHasBeenResized(int w, int h);
 	
-	int width() {return rect().width();}
-	int height() {return rect().height();}
+	int width() {return (int)(rect().width());}
+	int height() {return (int)(rect().height());}
 	
 protected:
 // 	virtual bool sceneEvent(QEvent* event);

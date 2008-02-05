@@ -24,7 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
 #include "fixx11h.h"
-#include "StelGLWidget.hpp"
+#include "StelAppGraphicsItem.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainWindow.hpp"
@@ -122,7 +122,7 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	
-	StelApp::getInstance().glWindowHasBeenResized(rect().width(), rect().height());
+	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
 	// And draw them
 	distorter->prepare();
 	StelApp::getInstance().draw();
@@ -167,7 +167,7 @@ void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
 		}
 		else
 		{
-			StelMainWindow::getInstance().getOpenGLWin()->setFixedSize(rect().size().width(), rect().size().height());
+			StelMainWindow::getInstance().getOpenGLWin()->setFixedSize((int)(rect().width()), (int)(rect().height()));
 		}
 	}
 	if (distorter)
@@ -175,7 +175,7 @@ void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = ViewportDistorter::create(type.toStdString(),rect().width(),rect().height(),StelApp::getInstance().getCore()->getProjection());
+	distorter = ViewportDistorter::create(type.toStdString(),(int)(rect().width()),(int)(rect().height()),StelApp::getInstance().getCore()->getProjection());
 }
 
 QString StelAppGraphicsItem::getViewPortDistorterType() const
@@ -238,8 +238,8 @@ void StelAppGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 	Uint8 state = Stel_MOUSEBUTTONDOWN;
 	
-	int x = event->pos().x();
-	int y = event->pos().y();
+	int x = (int)event->pos().x();
+	int y = (int)event->pos().y();
 	
 	if (ui->handleClick(x, y, button, state, qtModToStelMod(event->modifiers())))
 		return;
@@ -267,8 +267,8 @@ void StelAppGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 
 	Uint8 state = Stel_MOUSEBUTTONUP;
 	
-	int x = event->pos().x();
-	int y = event->pos().y();
+	int x = (int)event->pos().x();
+	int y = (int)event->pos().y();
 
 	if (ui->handleClick(x, y, button, state, qtModToStelMod(event->modifiers())))
 		return;
@@ -284,11 +284,11 @@ void StelAppGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 
 void StelAppGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* mevent)
 {	
-	int x = mevent->pos().x();
-	int y = mevent->pos().y();
+	int x = (int)mevent->pos().x();
+	int y = (int)mevent->pos().y();
 	const int ui_x = x;
 	const int ui_y = y;
-	y = rect().height() - 1 - y;
+	y = (int)rect().height() - 1 - y;
 	distorter->distortXY(x,y);
  	QMouseEvent newEvent(mevent->type(), QPoint(x,y), mevent->button(), mevent->buttons(), mevent->modifiers());
 	StelApp::getInstance().handleMove(&newEvent);
@@ -312,13 +312,13 @@ void StelAppGraphicsItem::wheelEvent(QGraphicsSceneWheelEvent* event)
 	if (event->modifiers() == Qt::ControlModifier)
 		mod = COMPATIBLE_StelMod_CTRL;
 	
-	int x = event->pos().x();
-	int y = event->pos().y();
+	int x = (int)event->pos().x();
+	int y = (int)event->pos().y();
 	
 	if (ui->handleClick(x, y, button, Stel_MOUSEBUTTONDOWN, qtModToStelMod(event->modifiers())))
 		return;
 	
-	y = rect().height() - 1 - y;
+	y = (int)rect().height() - 1 - y;
 	distorter->distortXY(x,y);
 	QWheelEvent newEvent(QPoint(x,y), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);

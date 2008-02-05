@@ -40,8 +40,8 @@ SET(stellarium_lib_SRCS
 	core/StelFileMgr.hpp
 	core/StelFontMgr.cpp
 	core/StelFontMgr.hpp
-	core/StelGLWidget.cpp
-	core/StelGLWidget.hpp
+	core/StelAppGraphicsItem.cpp
+	core/StelAppGraphicsItem.hpp
 	core/StelLocaleMgr.cpp
 	core/StelLocaleMgr.hpp
 	core/StelModule.cpp
@@ -232,7 +232,7 @@ SET(stellarium_MOC_HDRS
 	core/Observer.hpp
 	core/StelApp.hpp
 	core/Navigator.hpp
-	core/StelGLWidget.hpp
+	core/StelAppGraphicsItem.hpp
 	core/STexture.hpp
 	core/MovementMgr.hpp
 	modules/ConstellationMgr.hpp

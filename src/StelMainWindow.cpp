@@ -24,7 +24,7 @@
 #include "fixx11h.h"
 
 #include "StelMainWindow.hpp"
-#include "StelGLWidget.hpp"
+#include "StelAppGraphicsItem.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
