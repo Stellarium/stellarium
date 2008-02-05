@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELGLWIDGET_HPP_
-#define STELGLWIDGET_HPP_
+#ifndef STELAPPGRAPHICITEM_HPP_
+#define STELAPPGRAPHICITEM_HPP_
 
 #include <cassert>
 #include <QGraphicsRectItem>
@@ -87,4 +87,4 @@ private:
 	static StelAppGraphicsItem* singleton;
 };
 
-#endif /*STELGLWIDGET_HPP_*/
+#endif /*STELAPPGRAPHICITEM_HPP_*/
