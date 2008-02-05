@@ -51,16 +51,6 @@ protected:
 		setSceneRect(0,0,event->size().width(), event->size().height());
 		StelAppGraphicsItem::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
 	}
-// 	void keyPressEvent(QKeyEvent* e) {qWarning() << "coucou"; QGraphicsView::keyPressEvent(e);}
-};
-
-class StelQGraphicsScene : public QGraphicsScene
-{
-public:
-	StelQGraphicsScene(QObject* parent) : QGraphicsScene(parent) {;}
-protected:	
-// 	void keyPressEvent(QKeyEvent* e) {}
-// 	void mousePressEvent(QGraphicsSceneMouseEvent *event) {qWarning() << mouseGrabberItem() << items(); QGraphicsScene::mousePressEvent(event);}
 };
 
 // Initialize static variables
@@ -93,7 +83,7 @@ void StelMainWindow::init(int argc, char** argv)
 	}
 	
 	// Create a graphicScene and a GraphicView drawing in an openGL widget
-	StelQGraphicsScene* scene = new StelQGraphicsScene(this);
+	QGraphicsScene* scene = new QGraphicsScene(this);
 	StelAppGraphicsItem* mainItem = new StelAppGraphicsItem();
 	scene->addItem(mainItem);
 	mainItem->setFocus();
