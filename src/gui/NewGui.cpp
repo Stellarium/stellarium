@@ -54,7 +54,6 @@ void StelWinBarButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void StelWinBarButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
-	qWarning() << "Enter" << event << event->scenePos() << event->pos();
 	QPixmap pix = pixmap();
 	QPainter painter(&pix);
 	painter.drawPixmap(0,0, pixHover);
@@ -63,14 +62,13 @@ void StelWinBarButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 		
 void StelWinBarButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
-	qWarning() << "Leave" << event->scenePos();
 	setPixmap(checked ? pixOn : pixOff);
 }
 	
-void StelWinBarButton::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
-{
-	qWarning() << "Move" << event->scenePos();
-}
+// void StelWinBarButton::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
+// {
+// 	qWarning() << "Move" << event->scenePos();
+// }
 
 void StelWinBarButton::setChecked(bool b)
 {
@@ -85,8 +83,8 @@ StelBar::StelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 void StelBar::addButton(StelWinBarButton* button)
 {
 	QRectF rectCh = childrenBoundingRect();
-	button->setPos(0, rectCh.height());
 	button->setParentItem(this);
+	button->setPos(2.5, rectCh.bottom()+10);
 	updatePath();
 }
 
@@ -101,9 +99,9 @@ void StelBar::updatePath()
 	QRectF rectCh = childrenBoundingRect();
 	double roundSize = 5.;
 	newPath.moveTo(0, -roundSize);
-	newPath.lineTo(rectCh.width()-roundSize,-roundSize);
- 	newPath.arcTo(rectCh.width()-2*roundSize, -roundSize, 2*roundSize, 2*roundSize, 90, -90);
-	newPath.lineTo(rectCh.width(), rectCh.height());
+	newPath.lineTo(rectCh.width(),-roundSize);
+ 	newPath.arcTo(rectCh.width()-roundSize, -roundSize, 2*roundSize, 2*roundSize, 90, -90);
+	newPath.lineTo(rectCh.width()+roundSize, rectCh.height());
 	setPath(newPath);
 }
 
@@ -218,7 +216,7 @@ void NewGui::init()
 	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Help_Window, SLOT(setChecked(bool)));
 	winBar->addButton(b);
 	
-	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
+	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
 	scene->addItem(winBar);
 	winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
 	
@@ -234,7 +232,7 @@ double NewGui::draw(StelCore* core)
 
 void NewGui::glWindowHasBeenResized(int w, int h)
 {
-	QGraphicsScene* scene = StelGLWidget::getInstance().getScene();
+	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
 	if (winBar)
 		winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
 }
