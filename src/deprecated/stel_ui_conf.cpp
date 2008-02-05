@@ -41,7 +41,7 @@
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
 #include "StelMainWindow.hpp"
-#include "StelGLWidget.hpp"
+#include "StelAppGraphicsItem.hpp"
 #include <QFile>
 #include <QDebug>
 #include <QString>

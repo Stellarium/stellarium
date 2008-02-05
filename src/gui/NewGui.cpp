@@ -22,7 +22,7 @@
 #include "StelCore.hpp"
 #include "Projector.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelGLWidget.hpp"
+#include "StelAppGraphicsItem.hpp"
 #include "StelMainWindow.hpp"
 
 #include "ui_mainGui.h"
