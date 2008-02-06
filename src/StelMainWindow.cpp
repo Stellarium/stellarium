@@ -90,7 +90,8 @@ void StelMainWindow::init(int argc, char** argv)
 	glWidget->setAutoFillBackground(false);
 	view->setViewport(glWidget);
  	view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
- 	//view->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
+// 	view->setRenderHint(QPainter::TextAntialiasing, false);
+//  	view->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
 	
 	// Use it as a central widget
 	setCentralWidget(view);

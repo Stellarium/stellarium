@@ -108,6 +108,7 @@ public:
 	void setFlagShowFov(int b) {FlagShowFov=b;}
 	
 	void setFlagShowFlagButtons(bool b);
+	void setFlagShowTopBar(bool b);
 	
 	void setFlagShowConfigWin(bool b);
 	bool getFlagShowConfigWin() const {return config_win->getVisible();}
