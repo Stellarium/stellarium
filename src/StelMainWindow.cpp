@@ -115,8 +115,18 @@ void StelMainWindow::init(int argc, char** argv)
 	foreach (QObject* obj, this->children())
 	{
 		QAction* a = qobject_cast<QAction *>(obj);
-		if (a)
+		if (a) {
+			if (!a->shortcut().isEmpty())
+			{
+				testUi.helpBrowser->setKey(
+							a->property("helpGroup").toString(),
+							"",
+							a->shortcut().toString(),
+							a->text());
+				qDebug() << "adding key" << a->shortcut().toString();
+			}
 			this->addAction(a);
+		}
 	}
 	
 	mainItem->startDrawingLoop();

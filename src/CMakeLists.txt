@@ -1,7 +1,7 @@
 
 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/deprecated ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/deprecated ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 
 ########### next target ###############
 
@@ -194,6 +194,8 @@ SET(stellarium_lib_SRCS
 	
 	gui/NewGui.hpp
 	gui/NewGui.cpp
+	gui/StelHelpBrowser.hpp
+	gui/StelHelpBrowser.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -244,6 +246,7 @@ SET(stellarium_MOC_HDRS
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
 	gui/NewGui.hpp
+	gui/StelHelpBrowser.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )
