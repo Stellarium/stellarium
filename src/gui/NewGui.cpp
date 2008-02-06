@@ -180,7 +180,9 @@ NewGui::NewGui()
 	buttonBar = NULL;
 	buttonHelpLabel = NULL;
 	ui = new Ui_Form();
+	QSize oldSize = StelMainWindow::getInstance().size();
 	ui->setupUi(&StelMainWindow::getInstance());
+	StelMainWindow::getInstance().resize(oldSize);
 }
 
 NewGui::~NewGui()
