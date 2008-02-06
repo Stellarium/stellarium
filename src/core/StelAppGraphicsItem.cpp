@@ -118,10 +118,16 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	StelApp::getInstance().update(dt);
 	
 	// Save openGL projection state
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	glShadeModel(GL_SMOOTH);
+	glDisable(GL_DEPTH_TEST);
+	//glEnable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
+	//glEnable(GL_MULTISAMPLE);
 	
 	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
 	// And draw them
@@ -138,6 +144,7 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
+	glPopAttrib();
 }
 
 void StelAppGraphicsItem::recompute()
