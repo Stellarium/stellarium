@@ -123,7 +123,6 @@ void StelMainWindow::init(int argc, char** argv)
 							"",
 							a->shortcut().toString(),
 							a->text());
-				qDebug() << "adding key" << a->shortcut().toString();
 			}
 			this->addAction(a);
 		}
