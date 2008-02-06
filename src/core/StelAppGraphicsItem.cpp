@@ -52,7 +52,6 @@ StelAppGraphicsItem::StelAppGraphicsItem() : ui(NULL)
 	
 	setAcceptsHoverEvents(true);
 	setFlags(QGraphicsItem::ItemIsFocusable);
-
 	setZValue(-1);
 }
 
@@ -80,6 +79,7 @@ void StelAppGraphicsItem::init()
 	ui = new StelUI(StelApp::getInstance().getCore(), &StelApp::getInstance());
 	ui->init();
 	ui->setFlagShowFlagButtons(false);
+	ui->setFlagShowTopBar(false);
 	StelApp::getInstance().getModuleMgr().registerModule(ui, true);
 	
 	ImageMgr* script_images = new ImageMgr();

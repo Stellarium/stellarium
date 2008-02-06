@@ -1516,6 +1516,10 @@ void StelUI::setFlagShowFlagButtons(bool b)
 	bt_flag_ctr->setVisible(b);
 }
 
+void StelUI::setFlagShowTopBar(bool b)
+{
+	FlagShowTopBar = b;
+}
 
 void StelUI::setDayKeyMode(const string dayMode) 
 {

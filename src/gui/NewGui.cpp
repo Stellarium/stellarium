@@ -29,6 +29,9 @@
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
+#include "Observer.hpp"
+#include "StelLocaleMgr.hpp"
+#include "Navigator.hpp"
 
 #include "ui_mainGui.h"
 
@@ -148,14 +151,32 @@ void LeftStelBar::updatePath()
 BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 {
 	roundSize = 5;
+	
+	QFont font("DejaVuSans", 10);
+	QColor color = QColor::fromRgbF(1,1,1,1);
+	datetime = new QGraphicsTextItem("2008-02-06  17:33", this);
+	location = new QGraphicsTextItem("Munich, Earth, 500m", this);
+	fov = new QGraphicsTextItem("FOV 43.45", this);
+	fps = new QGraphicsTextItem("43.2 FPS", this);
+	
+	datetime->setFont(font);
+	datetime->setDefaultTextColor(color);
+	location->setFont(font);
+	location->setDefaultTextColor(color);
+	fov->setFont(font);
+	fov->setDefaultTextColor(color);
+	fps->setFont(font);
+	fps->setDefaultTextColor(color);
 }
 
 void BottomStelBar::addButton(StelButton* button)
 {
-	QRectF rectCh = childrenBoundingRect();
+	double y = datetime->boundingRect().height()+3;
+	QRectF rectCh = getButtonsBoundingRect();
 	button->setParentItem(this);
-	button->setPos(rectCh.right(), roundSize);
+	button->setPos(rectCh.right(), y+roundSize);
 	updatePath();
+	updateText();
 }
 
 void BottomStelBar::updatePath()
@@ -172,6 +193,65 @@ void BottomStelBar::updatePath()
 	newPath.arcTo(rectCh.width()-2.*roundSize, 0, 2.*roundSize, 2.*roundSize, 90, -90);
 	newPath.lineTo(rectCh.width(), rectCh.height()+roundSize);
 	setPath(newPath);
+}
+
+QRectF BottomStelBar::getButtonsBoundingRect()
+{
+	location->setParentItem(NULL);
+	datetime->setParentItem(NULL);
+	fov->setParentItem(NULL);
+	fps->setParentItem(NULL);
+	
+	QRectF rectCh = childrenBoundingRect();
+	
+	location->setParentItem(this);
+	datetime->setParentItem(this);
+	fov->setParentItem(this);
+	fps->setParentItem(this);
+	
+	return rectCh;
+}
+
+void BottomStelBar::updateText()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double jd = core->getNavigation()->getJDay();
+	
+	datetime->setPlainText(QString::fromStdWString(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd))+
+			"   "+QString::fromStdWString(StelApp::getInstance().getLocaleMgr().get_printable_time_local(jd)));
+	
+	location->setPlainText(core->getObservatory()->getHomePlanetNameI18n() +
+			", " + core->getObservatory()->getLocationName() +
+			QString(", %1m").arg(core->getObservatory()->getAltitude()));
+	
+	QString str;
+	QTextStream wos(&str);
+	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QString::fromWCharArray(L"\u00B0");
+	fov->setPlainText(str);
+	
+	str="";
+	QTextStream wos2(&str);
+	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
+	fps->setPlainText(str);
+	
+	datetime->setPos(10, 5);
+
+	QRectF rectCh = getButtonsBoundingRect();
+	
+	fov->setPos(rectCh.right()-150, 5);
+	fps->setPos(rectCh.right()-70, 5);
+	
+	double left = datetime->pos().x()+datetime->boundingRect().width();
+	double right = fov->pos().x();
+	double newPosX = left+(right-left)/2.-location->boundingRect().width()/2.;
+	if (std::fabs(newPosX-location->pos().x())>20)
+		location->setPos(newPosX,5);
+}
+
+void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+	updateText();
+	QGraphicsPathItem::paint(painter, option, widget);
 }
 
 NewGui::NewGui()
@@ -283,7 +363,7 @@ void NewGui::init()
 	
 	// Create the help label
 	buttonHelpLabel = new QGraphicsTextItem("");
-	buttonHelpLabel->setFont(QFont("DejaVu", 13));
+	buttonHelpLabel->setFont(QFont("DejaVuSans", 12));
 	buttonHelpLabel->setDefaultTextColor(QColor::fromRgbF(1,1,1,1));
 	
 	// Construct the Windows buttons bar
