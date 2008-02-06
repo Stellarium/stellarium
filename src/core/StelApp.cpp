@@ -571,18 +571,14 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 	
 // Handle mouse move
-void StelApp::handleMove(QMouseEvent* event)
+void StelApp::handleMove(int x, int y)
 {
-	bool tmp = event->isAccepted();
-	event->setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
-		i->handleMouseMoves(event);
-		if (event->isAccepted())
+		if (i->handleMouseMoves(x, y))
 			return;
 	}
-	event->setAccepted(tmp);
 }
 
 // Handle key press and release

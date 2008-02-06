@@ -206,11 +206,37 @@ void StelAppGraphicsItem::startDrawingLoop()
 	mainTimer->start(5);
 }
 
-// bool StelAppGraphicsItem::sceneEvent(QEvent* event)
-// {
-// 	qWarning() << event->type();
-// 	return false;
-// }
+bool StelAppGraphicsItem::sceneEvent(QEvent* event)
+{
+	if (event->type()==QEvent::GraphicsSceneMouseMove)
+	{
+		QGraphicsSceneMouseEvent* mevent = (QGraphicsSceneMouseEvent*)event;
+		int x = (int)mevent->pos().x();
+		int y = (int)mevent->pos().y();
+		const int ui_x = x;
+		const int ui_y = y;
+		y = (int)rect().height() - 1 - y;
+		distorter->distortXY(x,y);
+		StelApp::getInstance().handleMove(x, y);
+		ui->handleMouseMoves(ui_x,ui_y, StelMod_NONE);
+		
+		// Refresh screen ASAP
+		thereWasAnEvent();
+	}
+	if (event->type()==QEvent::GraphicsSceneHoverMove)
+	{
+		QGraphicsSceneHoverEvent* mevent = (QGraphicsSceneHoverEvent*)event;
+		int x = (int)mevent->pos().x();
+		int y = (int)mevent->pos().y();
+		const int ui_x = x;
+		const int ui_y = y;
+		y = (int)rect().height() - 1 - y;
+		distorter->distortXY(x,y);
+		StelApp::getInstance().handleMove(x, y);
+		ui->handleMouseMoves(ui_x,ui_y, StelMod_NONE);
+	}
+	return QGraphicsItem::sceneEvent(event);
+}
 
 StelMod qtModToStelMod(Qt::KeyboardModifiers m)
 {
@@ -289,22 +315,6 @@ void StelAppGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	
 	// Refresh screen ASAP
 	thereWasAnEvent();
-}
-
-void StelAppGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* mevent)
-{	
-	int x = (int)mevent->pos().x();
-	int y = (int)mevent->pos().y();
-	const int ui_x = x;
-	const int ui_y = y;
-	y = (int)rect().height() - 1 - y;
-	distorter->distortXY(x,y);
- 	QMouseEvent newEvent(mevent->type(), QPoint(x,y), mevent->button(), mevent->buttons(), mevent->modifiers());
-	StelApp::getInstance().handleMove(&newEvent);
-	ui->handleMouseMoves(ui_x,ui_y, qtModToStelMod(mevent->modifiers()));
-	
-	// Refresh screen ASAP
- 	thereWasAnEvent();
 }
 
 void StelAppGraphicsItem::wheelEvent(QGraphicsSceneWheelEvent* event)

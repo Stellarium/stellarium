@@ -27,6 +27,7 @@
 
 #include <QSettings>
 #include <QKeyEvent>
+#include <QDebug>
 
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
 	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
@@ -54,11 +55,8 @@ void MovementMgr::init()
 	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 }	
 	
-void MovementMgr::handleMouseMoves(QMouseEvent* event)
+bool MovementMgr::handleMouseMoves(int x, int y)
 {
-	int x=event->x();
-	int y=event->y();
-	
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
 	if(FlagEnableMoveMouse)
 	{
@@ -104,9 +102,10 @@ void MovementMgr::handleMouseMoves(QMouseEvent* event)
 			dragView(previous_x, previous_y, x, y);
 			previous_x = x;
 			previous_y = y;
-			event->accept();
+			return true;
 		}
 	}
+	return false;
 }
 
 
