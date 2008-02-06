@@ -174,9 +174,13 @@ void BottomStelBar::updatePath()
 	setPath(newPath);
 }
 
-NewGui::NewGui(Ui_Form* aui) : ui(aui)
+NewGui::NewGui()
 {
 	winBar = NULL;
+	buttonBar = NULL;
+	buttonHelpLabel = NULL;
+	ui = new Ui_Form();
+	ui->setupUi(&StelMainWindow::getInstance());
 }
 
 NewGui::~NewGui()
@@ -195,7 +199,7 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 
 
 void NewGui::init()
-{
+{	
 	QString fName;
 	try
 	{
@@ -207,7 +211,25 @@ void NewGui::init()
 	}
 	if (!fName.isEmpty())
 		QFontDatabase::addApplicationFont(fName);
-			
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Set up the new GUI
+	// The actions need to be added to the main form to be effective
+	foreach (QObject* obj, StelMainWindow::getInstance().children())
+	{
+		QAction* a = qobject_cast<QAction *>(obj);
+		if (a)
+		{
+			if (!a->shortcut().isEmpty())
+			{
+				ui->helpBrowser->setKey(
+					a->property("helpGroup").toString(), "",
+					a->shortcut().toString(), a->text());
+			}
+			StelMainWindow::getInstance().addAction(a);
+		}
+	}
+	
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
