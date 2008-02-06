@@ -27,12 +27,13 @@
 
 class Ui_Form;
 class QTimeLine;
+class QAction;
 
 class StelWinBarButton : public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT;
 public:
-	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap());
+	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(), QAction* action=NULL);
 
 signals:
 	//! Triggered when the button state changes
