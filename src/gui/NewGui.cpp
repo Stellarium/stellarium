@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItemGroup>
+#include <QTimeLine>
 
 StelWinBarButton::StelWinBarButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff, const QPixmap& apixHover) : QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover), checked(false)
 {
@@ -42,6 +43,8 @@ StelWinBarButton::StelWinBarButton(QGraphicsItem* parent, const QPixmap& apixOn,
 	assert(!pixOff.isNull());
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
+	timeLine = new QTimeLine(200, this);
+	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 }
 
 void StelWinBarButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -54,26 +57,34 @@ void StelWinBarButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void StelWinBarButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
-	QPixmap pix = pixmap();
-	QPainter painter(&pix);
-	painter.drawPixmap(0,0, pixHover);
-	setPixmap(pix);
+	timeLine->setDirection(QTimeLine::Forward);
+	if (timeLine->state()!=QTimeLine::Running)
+		timeLine->start();
 }
 		
 void StelWinBarButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
-	setPixmap(checked ? pixOn : pixOff);
+	timeLine->setDirection(QTimeLine::Backward);
+	if (timeLine->state()!=QTimeLine::Running)
+		timeLine->start();
 }
-	
-// void StelWinBarButton::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
-// {
-// 	qWarning() << "Move" << event->scenePos();
-// }
+
+void StelWinBarButton::animValueChanged(qreal value)
+{
+	QPixmap pix = checked ? pixOn : pixOff;
+	if (value>0)
+	{
+		QPainter painter(&pix);
+		painter.setOpacity(value);
+		painter.drawPixmap(0,0, pixHover);
+	}
+	setPixmap(pix);
+}
 
 void StelWinBarButton::setChecked(bool b)
 {
 	checked=b;
-	setPixmap(checked ? pixOn : pixOff);
+	animValueChanged(timeLine->currentValue());
 }
 
 StelBar::StelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)

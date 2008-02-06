@@ -26,6 +26,7 @@
 #include <QGraphicsSceneMouseEvent>
 
 class Ui_Form;
+class QTimeLine;
 
 class StelWinBarButton : public QObject, public QGraphicsPixmapItem
 {
@@ -44,12 +45,14 @@ protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-// 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+private slots:
+	void animValueChanged(qreal value);	
 private:
 	QPixmap pixOn;
 	QPixmap pixOff;
 	QPixmap pixHover;
 	bool checked;
+	QTimeLine* timeLine;
 };
 
 class StelBar : public QGraphicsPathItem
