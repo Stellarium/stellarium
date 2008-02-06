@@ -45,6 +45,7 @@
 #include <QGraphicsTextItem>
 #include <QTimeLine>
 #include <QFontDatabase>
+#include <QMouseEvent>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, QGraphicsTextItem* ahelpLabel) : 
@@ -256,6 +257,7 @@ void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* opt
 
 NewGui::NewGui()
 {
+	setObjectName("NewGui");
 	winBar = NULL;
 	buttonBar = NULL;
 	buttonHelpLabel = NULL;
@@ -263,6 +265,11 @@ NewGui::NewGui()
 	QSize oldSize = StelMainWindow::getInstance().size();
 	ui->setupUi(&StelMainWindow::getInstance());
 	StelMainWindow::getInstance().resize(oldSize);
+	
+	animLeftBarTimeLine = new QTimeLine(300, this);
+	animLeftBarTimeLine->stop();
+	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animLeftBarChanged(qreal)));
 }
 
 NewGui::~NewGui()
@@ -276,6 +283,8 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ACTION_DRAW)
 		return 100000;
+	if (actionName==StelModule::ACTION_HANDLEMOUSEMOVES)
+		return -1;
 	return 0;
 }
 
@@ -516,6 +525,8 @@ void NewGui::init()
 	winBar->setPen(winBarPen);
 	buttonBar->setPen(winBarPen);
 	
+	winBar->setPos(-winBar->boundingRect().width(),winBar->pos().y());
+	
 	// Readjust position
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
@@ -525,13 +536,14 @@ double NewGui::draw(StelCore* core)
 	return 0.;
 }
 
-void NewGui::glWindowHasBeenResized(int w, int h)
+void NewGui::glWindowHasBeenResized(int ww, int hh)
 {
+	double h=hh;
 	if (!winBar || !buttonBar || !buttonHelpLabel)
 		return;
-	winBar->setPos(0, h-winBar->boundingRect().height()-buttonBar->boundingRect().height());
-	buttonBar->setPos(winBar->boundingRect().right(), h-buttonBar->boundingRect().height());
-	buttonHelpLabel->setPos(winBar->boundingRect().right()+10, h-buttonBar->boundingRect().height()-25);
+	winBar->setPos(winBar->pos().x(), h-winBar->boundingRect().height()-buttonBar->boundingRect().height()+0.5);
+	buttonBar->setPos(winBar->boundingRect().right()+winBar->pos().x(), h-buttonBar->boundingRect().height());
+	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+10, h-buttonBar->boundingRect().height()-25);
 }
 
 // Update state which is time dependent.
@@ -541,4 +553,26 @@ void NewGui::update(double deltaTime)
 
 void NewGui::updateI18n()
 {
+}
+
+bool NewGui::handleMouseMoves(int x, int y)
+{
+	if (x<winBar->boundingRect().width() && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<-1)
+	{
+		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
+		animLeftBarTimeLine->start();
+	}
+	if (x>winBar->boundingRect().width() && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=-1)
+	{
+		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
+		animLeftBarTimeLine->start();
+	}
+	return false;
+}
+
+void NewGui::animLeftBarChanged(qreal value)
+{
+	winBar->setPos(-winBar->boundingRect().width()+value*winBar->boundingRect().width(), winBar->pos().y());
+	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(),
+		StelMainWindow::getInstance().getGraphicsView()->size().height());
 }

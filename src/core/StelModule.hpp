@@ -82,8 +82,8 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event) {return;}
 	
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
-	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseMoves(class QMouseEvent* event) {return;}
+	//! @return true if the event was intercepted
+	virtual bool handleMouseMoves(int x, int y) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param event the Key event

@@ -168,7 +168,7 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	void handleMove(class QMouseEvent* event);
+	void handleMove(int x, int y);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 

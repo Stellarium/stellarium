@@ -80,6 +80,7 @@ public:
 private:
 	void updatePath();
 	double roundSize;
+	QTimeLine* hideTimeLine;
 };
 
 //! The button bar on the bottom containing actions toggle buttons
@@ -104,6 +105,7 @@ private:
 //! New GUI based on QGraphicView
 class NewGui : public StelModule
 {
+	Q_OBJECT;
 public:
 	NewGui();
 	virtual ~NewGui();
@@ -128,12 +130,18 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	virtual void glWindowHasBeenResized(int w, int h);
-	
+
+	virtual bool handleMouseMoves(int x, int y);
+
+private slots:
+	void animLeftBarChanged(qreal value);	
+
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
 	QGraphicsTextItem* buttonHelpLabel;
 	Ui_Form* ui;
+	QTimeLine* animLeftBarTimeLine;
 };
 
 #endif // _NEWGUI_H_
