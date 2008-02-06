@@ -29,6 +29,7 @@ class Ui_Form;
 class QTimeLine;
 class QAction;
 class QGraphicsTextItem;
+class QTimer;
 
 //! Implement a button for use in Stellarium's graphic widgets
 class StelButton : public QObject, public QGraphicsPixmapItem
@@ -87,9 +88,16 @@ class BottomStelBar : public QGraphicsPathItem
 public:
 	BottomStelBar(QGraphicsItem* parent);
 	void addButton(StelButton* button);
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 private:
 	void updatePath();
+	void updateText();
 	double roundSize;
+	QRectF getButtonsBoundingRect();
+	QGraphicsTextItem* location;
+	QGraphicsTextItem* datetime;
+	QGraphicsTextItem* fov;
+	QGraphicsTextItem* fps;
 };
 
 //! @class NewGui
