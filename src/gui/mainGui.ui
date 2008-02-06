@@ -24,8 +24,8 @@
   <widget class="QDockWidget" name="dockWidgetSearchSkyObject" >
    <property name="geometry" >
     <rect>
-     <x>250</x>
-     <y>100</y>
+     <x>360</x>
+     <y>110</y>
      <width>291</width>
      <height>56</height>
     </rect>
@@ -544,10 +544,10 @@
   <widget class="QDockWidget" name="dockWidgetHelp" >
    <property name="geometry" >
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>50</y>
-     <width>361</width>
-     <height>381</height>
+     <width>370</width>
+     <height>380</height>
     </rect>
    </property>
    <property name="palette" >
@@ -925,26 +925,15 @@
    </property>
    <widget class="QWidget" name="dockWidgetContents_2" >
     <layout class="QGridLayout" >
-     <property name="leftMargin" >
-      <number>2</number>
-     </property>
-     <property name="topMargin" >
-      <number>2</number>
-     </property>
-     <property name="rightMargin" >
-      <number>2</number>
-     </property>
-     <property name="bottomMargin" >
-      <number>2</number>
-     </property>
-     <property name="horizontalSpacing" >
-      <number>2</number>
-     </property>
-     <property name="verticalSpacing" >
-      <number>2</number>
-     </property>
      <item row="0" column="0" >
-      <widget class="StelHelpBrowser" name="helpBrowser" />
+      <widget class="StelHelpBrowser" native="1" name="helpBrowser" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -1136,7 +1125,7 @@
     <bool>false</bool>
    </property>
    <property name="helpGroup" stdset="0" >
-    <string>Selection</string>
+    <string>Move &amp; Select</string>
    </property>
   </action>
   <action name="actionShow_Search_Window" >
@@ -1184,7 +1173,7 @@
     <bool>false</bool>
    </property>
    <property name="helpGroup" stdset="0" >
-    <string>DIsplay options</string>
+    <string>Display options</string>
    </property>
   </action>
   <action name="actionQuit" >
@@ -1286,8 +1275,9 @@
  <customwidgets>
   <customwidget>
    <class>StelHelpBrowser</class>
-   <extends>QTextBrowser</extends>
+   <extends>QWidget</extends>
    <header>StelHelpBrowser.hpp</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
