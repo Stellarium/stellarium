@@ -43,7 +43,8 @@ StelWinBarButton::StelWinBarButton(QGraphicsItem* parent, const QPixmap& apixOn,
 	assert(!pixOff.isNull());
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
-	timeLine = new QTimeLine(200, this);
+	timeLine = new QTimeLine(300, this);
+	timeLine->setCurveShape(QTimeLine::EaseInOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 }
 
@@ -53,6 +54,7 @@ void StelWinBarButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	event->accept();
 	setChecked(!checked);
 	emit(toggled(checked));
+	emit(triggered());
 }
 
 void StelWinBarButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
@@ -87,19 +89,20 @@ void StelWinBarButton::setChecked(bool b)
 	animValueChanged(timeLine->currentValue());
 }
 
-StelBar::StelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 {
+	roundSize = 5;
 }
 
-void StelBar::addButton(StelWinBarButton* button)
+void LeftStelBar::addButton(StelWinBarButton* button)
 {
 	QRectF rectCh = childrenBoundingRect();
 	button->setParentItem(this);
-	button->setPos(2.5, rectCh.bottom()+10);
+	button->setPos(roundSize, rectCh.bottom()+10);
 	updatePath();
 }
 
-void StelBar::updatePath()
+void LeftStelBar::updatePath()
 {
 	QPainterPath newPath;
 	if (children().isEmpty())
@@ -108,11 +111,39 @@ void StelBar::updatePath()
 		return;
 	}
 	QRectF rectCh = childrenBoundingRect();
-	double roundSize = 5.;
-	newPath.moveTo(0, -roundSize);
-	newPath.lineTo(rectCh.width(),-roundSize);
- 	newPath.arcTo(rectCh.width()-roundSize, -roundSize, 2*roundSize, 2*roundSize, 90, -90);
-	newPath.lineTo(rectCh.width()+roundSize, rectCh.height());
+	newPath.moveTo(0, 0);
+	newPath.lineTo(rectCh.width()+roundSize,0);
+ 	newPath.arcTo(rectCh.width(), 0, 2.*roundSize, 2.*roundSize, 90, -90);
+	newPath.lineTo(rectCh.width()+2.*roundSize, rectCh.height());
+	setPath(newPath);
+}
+
+BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+{
+	roundSize = 5;
+}
+
+void BottomStelBar::addButton(StelWinBarButton* button)
+{
+	QRectF rectCh = childrenBoundingRect();
+	button->setParentItem(this);
+	button->setPos(rectCh.right(), roundSize);
+	updatePath();
+}
+
+void BottomStelBar::updatePath()
+{
+	QPainterPath newPath;
+	if (children().isEmpty())
+	{
+		setPath(newPath);
+		return;
+	}
+	QRectF rectCh = childrenBoundingRect();
+	newPath.moveTo(0, 0);
+	newPath.lineTo(rectCh.width()-roundSize,0);
+	newPath.arcTo(rectCh.width()-2.*roundSize, 0, 2.*roundSize, 2.*roundSize, 90, -90);
+	newPath.lineTo(rectCh.width(), rectCh.height()+roundSize);
 	setPath(newPath);
 }
 
@@ -150,7 +181,7 @@ void NewGui::init()
 	
 	module = GETSTELMODULE("LandscapeMgr");
 	QObject::connect(ui->actionShow_Ground, SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
-	QObject::connect(ui->actionShow_Cardinal_points, SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
+	QObject::connect(ui->actionShow_Cardinal_Points, SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
 	QObject::connect(ui->actionShow_Atmosphere, SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
 	
 	module = GETSTELMODULE("NebulaMgr");
@@ -171,9 +202,10 @@ void NewGui::init()
 	
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-
-
-	winBar = new StelBar(NULL);
+	
+	
+	// Construct the Windows buttons bar
+	winBar = new LeftStelBar(NULL);
 	
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
@@ -227,13 +259,163 @@ void NewGui::init()
 	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Help_Window, SLOT(setChecked(bool)));
 	winBar->addButton(b);
 	
+	
+	// Construct the bottom buttons bar
+	buttonBar = new BottomStelBar(NULL);
+	
+	QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+	QPixmap pxmapBlank(":/graphicGui/gui/btBlank.png");
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLines-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLines-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Constellation_Lines->isChecked());
+	QObject::connect(ui->actionShow_Constellation_Lines, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Constellation_Lines, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLabels-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLabels-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Constellation_Labels->isChecked());
+	QObject::connect(ui->actionShow_Constellation_Labels, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Constellation_Labels, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationArt-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationArt-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Constellation_Art->isChecked());
+	QObject::connect(ui->actionShow_Constellation_Art, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Constellation_Art, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialGrid-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialGrid-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Equatorial_Grid->isChecked());
+	QObject::connect(ui->actionShow_Equatorial_Grid, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Equatorial_Grid, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btAzimutalGrid-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btAzimutalGrid-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Azimutal_Grid->isChecked());
+	QObject::connect(ui->actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Azimutal_Grid, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btGround-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btGround-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Ground->isChecked());
+	QObject::connect(ui->actionShow_Ground, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Ground, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btCardinalPoints-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btCardinalPoints-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Cardinal_Points->isChecked());
+	QObject::connect(ui->actionShow_Cardinal_Points, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Cardinal_Points, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btAtmosphere-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btAtmosphere-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Atmosphere->isChecked());
+	QObject::connect(ui->actionShow_Atmosphere, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Atmosphere, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btNebula-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btNebula-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Nebulas->isChecked());
+	QObject::connect(ui->actionShow_Nebulas, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Nebulas, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionSwitch_Equatorial_Mount->isChecked());
+	QObject::connect(ui->actionSwitch_Equatorial_Mount, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionSwitch_Equatorial_Mount, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionGoto_Selected_Object->isChecked());
+	QObject::connect(ui->actionGoto_Selected_Object, SIGNAL(triggered(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionGoto_Selected_Object, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionShow_Night_Mode->isChecked());
+	QObject::connect(ui->actionShow_Night_Mode, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(toggled(bool)), ui->actionShow_Night_Mode, SLOT(setChecked(bool)));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32);
+	b->setChecked(ui->actionQuit->isChecked());
+	QObject::connect(ui->actionQuit, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionQuit, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	b = new StelWinBarButton(NULL, pxmapBlank, pxmapBlank, pxmapBlank);
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionDecrease_Time_Speed->isChecked());
+	QObject::connect(ui->actionDecrease_Time_Speed, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionDecrease_Time_Speed, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionSet_Real_Time_Speed->isChecked());
+	QObject::connect(ui->actionSet_Real_Time_Speed, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionSet_Real_Time_Speed, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btTimeNow-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionReturn_To_Current_Time->isChecked());
+	QObject::connect(ui->actionReturn_To_Current_Time, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionReturn_To_Current_Time, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btTimeForward-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btTimeForward-off.png");
+	b = new StelWinBarButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32);
+	b->setChecked(ui->actionIncrease_Time_Speed->isChecked());
+	QObject::connect(ui->actionIncrease_Time_Speed, SIGNAL(toggled(bool)), b, SLOT(setChecked(bool)));
+	QObject::connect(b, SIGNAL(triggered()), ui->actionIncrease_Time_Speed, SLOT(trigger()));
+	buttonBar->addButton(b);
+	
+	
 	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
 	scene->addItem(winBar);
-	winBar->setPos(0, scene->sceneRect().height()-winBar->boundingRect().height()-42);
+	scene->addItem(buttonBar);
 	
 	QPen winBarPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	winBarPen.setWidthF(1.);
 	winBar->setPen(winBarPen);
+	buttonBar->setPen(winBarPen);
+	
+	// Readjust position
+	glWindowHasBeenResized(scene->sceneRect().width(),scene->sceneRect().height());
 }
 
 double NewGui::draw(StelCore* core)
@@ -243,8 +425,10 @@ double NewGui::draw(StelCore* core)
 
 void NewGui::glWindowHasBeenResized(int w, int h)
 {
-	if (winBar)
-		winBar->setPos(0, h-winBar->boundingRect().height()-42);
+	if (!winBar || !buttonBar)
+		return;
+	winBar->setPos(0, h-winBar->boundingRect().height()-buttonBar->boundingRect().height());
+	buttonBar->setPos(winBar->boundingRect().right(), h-buttonBar->boundingRect().height());
 }
 
 // Update state which is time dependent.
