@@ -59,10 +59,9 @@ public:
 	int height() {return (int)(rect().height());}
 	
 protected:
-// 	virtual bool sceneEvent(QEvent* event);
+ 	virtual bool sceneEvent(QEvent* event);
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event);
