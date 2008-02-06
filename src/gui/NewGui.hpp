@@ -30,16 +30,25 @@ class QTimeLine;
 class QAction;
 class QGraphicsTextItem;
 
-class StelWinBarButton : public QObject, public QGraphicsPixmapItem
+//! Implement a button for use in Stellarium's graphic widgets
+class StelButton : public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT;
 public:
-	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
+	//! Constructor
+	//! @param parent the parent item
+	//! @param pixOn the pixmap to display when the button is toggled
+	//! @param pixOff the pixmap to display when the button is not toggled
+	//! @param pixHover a pixmap slowly blended when mouse is over the button
+	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param helpLabel the label in which the button will display it's help when hovered
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
 		QAction* action=NULL, QGraphicsTextItem* helpLabel=NULL);
 
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
+	//! Triggered when the button state changes
 	void triggered();
 
 public slots:
@@ -61,21 +70,23 @@ private:
 	QGraphicsTextItem* helpLabel;
 };
 
+//! The button bar on the left containing windows toggle buttons
 class LeftStelBar : public QGraphicsPathItem
 {
 public:
 	LeftStelBar(QGraphicsItem* parent);
-	void addButton(StelWinBarButton* button);
+	void addButton(StelButton* button);
 private:
 	void updatePath();
 	double roundSize;
 };
 
+//! The button bar on the bottom containing actions toggle buttons
 class BottomStelBar : public QGraphicsPathItem
 {
 public:
 	BottomStelBar(QGraphicsItem* parent);
-	void addButton(StelWinBarButton* button);
+	void addButton(StelButton* button);
 private:
 	void updatePath();
 	double roundSize;
@@ -85,7 +96,6 @@ private:
 //! New GUI based on QGraphicView
 class NewGui : public StelModule
 {
-
 public:
 	NewGui();
 	virtual ~NewGui();
