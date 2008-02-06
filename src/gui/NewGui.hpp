@@ -37,6 +37,7 @@ public:
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
+	void triggered();
 
 public slots:
 	void setChecked(bool b);
@@ -55,13 +56,24 @@ private:
 	QTimeLine* timeLine;
 };
 
-class StelBar : public QGraphicsPathItem
+class LeftStelBar : public QGraphicsPathItem
 {
 public:
-	StelBar(QGraphicsItem* parent);
+	LeftStelBar(QGraphicsItem* parent);
 	void addButton(StelWinBarButton* button);
 private:
 	void updatePath();
+	double roundSize;
+};
+
+class BottomStelBar : public QGraphicsPathItem
+{
+public:
+	BottomStelBar(QGraphicsItem* parent);
+	void addButton(StelWinBarButton* button);
+private:
+	void updatePath();
+	double roundSize;
 };
 
 //! @class NewGui
@@ -95,7 +107,8 @@ public:
 	virtual void glWindowHasBeenResized(int w, int h);
 	
 private:
-	StelBar* winBar;
+	LeftStelBar* winBar;
+	BottomStelBar* buttonBar;
 	Ui_Form* ui;
 };
 
