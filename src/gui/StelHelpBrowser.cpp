@@ -23,6 +23,7 @@
 #include "StelLocaleMgr.hpp"
 #include <QString>
 #include <QTextBrowser>
+#include <QVBoxLayout>
 #include <QWidget>
 #include <QSettings>
 #include <QResizeEvent>
@@ -34,27 +35,39 @@
 #include <QPair>
 
 StelHelpBrowser::StelHelpBrowser(QWidget* parent)
-	: QTextBrowser(parent)
+	: QWidget(parent), browser(this)
 {
-	this->setReadOnly(true);
-	this->setOpenExternalLinks(true);
-	this->setOpenLinks(true);
+	browser.setReadOnly(true);
+	browser.setOpenExternalLinks(true);
+	browser.setOpenLinks(true);
 
 	// TODO: internationalise the non tag strings here
 	headerText = "<html><head><title>Stellarium Help</title></head><body>\n";
 	headerText += "<a name=\"top\"><h2>Keys</h2></a>\n";
 
+	// Add keys for those keys which do not have actions.
+	setKey("Move & Select", "", "Arrow keys & left mouse drag", "Pan view around the sky");
+	setKey("Move & Select", "", "Page Up/Down", "Zoom");
+	setKey("Move & Select", "", "CTRL + Up/Down", "Zoom");
+	setKey("Move & Select", "", "CTRL + Up/Down", "Zoom");
+	setKey("Move & Select", "", "Left click", "Select object");
+	setKey("Move & Select", "", "Right click", "Unselect");
+	setKey("Move & Select", "", "CTRL + Left click", "Unselect");
+
 	footerText = "<h3>Further Reading</h3>\n";
 	footerText += "The following links are external web links, and will launch your web browser:\n";
-	footerText += "<ul>\n";
-	footerText += "<li>The Stellarium User Guide: <a href=\"http://downloads.sourceforge.net/stellarium/stellarium_user_guide-0.9.1-1.pdf\">PDF</a> | <a href=\"http://porpoisehead.net/mysw/stellarium_user_guide_html-0.9.0-1/\">HTML</a></li>";
-	footerText += "<li><a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">Frequently Asked Questions</a> about Stellarium.  Answers too.</li>\n";
-	footerText += "<li><a href=\"http://stellarium.org/wiki/\">The Stellarium Wiki</a> - General information.  You can also find user-contributed landscapes and scripts here.</li>\n";
-	footerText += "<li><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454374\">Support ticket system</a> - if you need help using Stellarium, post a support request here and we'll try to help.</li>\n";
-	footerText += "<li><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454373\">Bug reporting system</a> - if something doesn't work properly and is not listed in the FAQ list, you can open bug reports here.</li>\n";
-	footerText += "<li><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454376\">Feature request system</a> - if you have an idea for a new feature, send it to us. We can't promise to implement every idea, but we appreciate the feedback and review the list when we are planning future features.</li>\n";
-	footerText += "<li><a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">Forums</a> - discuss Stellarium with other users.</li>\n";
-	footerText += "</ul></body></html>\n";
+	footerText += "<p>The Stellarium User Guide: <a href=\"http://downloads.sourceforge.net/stellarium/stellarium_user_guide-0.9.1-1.pdf\">PDF</a> | <a href=\"http://porpoisehead.net/mysw/stellarium_user_guide_html-0.9.0-1/\">HTML</a></p>";
+	footerText += "<p><a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">Frequently Asked Questions</a> about Stellarium.  Answers too.</p>\n";
+	footerText += "<p><a href=\"http://stellarium.org/wiki/\">The Stellarium Wiki</a> - General information.  You can also find user-contributed landscapes and scripts here.</p>\n";
+	footerText += "<p><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454374\">Support ticket system</a> - if you need help using Stellarium, post a support request here and we'll try to help.</p>\n";
+	footerText += "<p><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454373\">Bug reporting system</a> - if something doesn't work properly and is not listed in the FAQ list, you can open bug reports here.</p>\n";
+	footerText += "<p><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454376\">Feature request system</a> - if you have an idea for a new feature, send it to us. We can't promise to implement every idea, but we appreciate the feedback and review the list when we are planning future features.</p>\n";
+	footerText += "<p><a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">Forums</a> - discuss Stellarium with other users.</p>\n";
+	footerText += "</body></html>\n";
+
+	QVBoxLayout *layout = new QVBoxLayout;
+	layout->addWidget(&browser);
+	this->setLayout(layout);
 
 	updateText();
 }
@@ -126,8 +139,8 @@ void StelHelpBrowser::updateText(void)
 	newHtml += "</table>";
 	newHtml += footerText;
 	
-	this->clear();
-	this->insertHtml(newHtml);
-	this->scrollToAnchor("top");
+	browser.clear();
+	browser.insertHtml(newHtml);
+	browser.scrollToAnchor("top");
 }
 
