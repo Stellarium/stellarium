@@ -28,7 +28,7 @@
 
 //! @class StellHelpBrowser
 //! Implementation of the help window
-class StelHelpBrowser : public QTextBrowser
+class StelHelpBrowser : public QWidget
 {
 	Q_OBJECT
 
@@ -47,13 +47,13 @@ private:
 	//! up the help text.
 	void updateText(void);
 
-	QString headerText;
-
 	//! This uses the group key description as the key to the map, and a 
 	//! containing the helpGroup and description as the map value.
 	//! code and description.
 	QMultiMap<QString, QPair<QString, QString> > keyData;
+	QString headerText;
 	QString footerText;
+	QTextBrowser browser;
 
 };
 
