@@ -38,7 +38,6 @@
 #include <QGraphicsView>
 #include <QResizeEvent>
 
-#include "ui_mainGui.h"
 #include "gui/NewGui.hpp"
 
 class StelQGraphicsView : public QGraphicsView
@@ -68,9 +67,6 @@ StelMainWindow::StelMainWindow()
 
 void StelMainWindow::init(int argc, char** argv)
 {
- 	Ui_Form testUi;
- 	testUi.setupUi(this);
-	
 	// Create the main instance of stellarium
 	StelApp* stelApp = new StelApp(argc, argv, this);
 	
@@ -105,28 +101,9 @@ void StelMainWindow::init(int argc, char** argv)
 	mainItem->init();
 	view->setFocus();
 	
-	NewGui* newGui = new NewGui(&testUi);
+	NewGui* newGui = new NewGui();
 	newGui->init();
 	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Set up the new GUI
-	// The actions need to be added to the main form to be effective
-	foreach (QObject* obj, this->children())
-	{
-		QAction* a = qobject_cast<QAction *>(obj);
-		if (a) {
-			if (!a->shortcut().isEmpty())
-			{
-				testUi.helpBrowser->setKey(
-							a->property("helpGroup").toString(),
-							"",
-							a->shortcut().toString(),
-							a->text());
-			}
-			this->addAction(a);
-		}
-	}
 	
 	mainItem->startDrawingLoop();
 }

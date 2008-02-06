@@ -87,7 +87,7 @@ class NewGui : public StelModule
 {
 
 public:
-	NewGui(Ui_Form* ui);
+	NewGui();
 	virtual ~NewGui();
 
 	///////////////////////////////////////////////////////////////////////////
