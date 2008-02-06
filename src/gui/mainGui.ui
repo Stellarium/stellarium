@@ -18,11 +18,14 @@
   <property name="windowTitle" >
    <string>Stellarium</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../../data/mainRes.qrc" >:/mainWindow/icon.bmp</iconset>
+  </property>
   <widget class="QDockWidget" name="dockWidgetSearchSkyObject" >
    <property name="geometry" >
     <rect>
-     <x>350</x>
-     <y>0</y>
+     <x>250</x>
+     <y>100</y>
      <width>291</width>
      <height>56</height>
     </rect>
@@ -541,8 +544,8 @@
   <widget class="QDockWidget" name="dockWidgetHelp" >
    <property name="geometry" >
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>50</x>
+     <y>50</y>
      <width>361</width>
      <height>381</height>
     </rect>
