@@ -23,17 +23,19 @@
 #include "StelModule.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
-#include <QGraphicsSceneMouseEvent>
 
+class QGraphicsSceneMouseEvent;
 class Ui_Form;
 class QTimeLine;
 class QAction;
+class QGraphicsTextItem;
 
 class StelWinBarButton : public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT;
 public:
-	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(), QAction* action=NULL);
+	StelWinBarButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
+		QAction* action=NULL, QGraphicsTextItem* helpLabel=NULL);
 
 signals:
 	//! Triggered when the button state changes
@@ -55,6 +57,8 @@ private:
 	QPixmap pixHover;
 	bool checked;
 	QTimeLine* timeLine;
+	QAction* action;
+	QGraphicsTextItem* helpLabel;
 };
 
 class LeftStelBar : public QGraphicsPathItem
@@ -110,6 +114,7 @@ public:
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
+	QGraphicsTextItem* buttonHelpLabel;
 	Ui_Form* ui;
 };
 
