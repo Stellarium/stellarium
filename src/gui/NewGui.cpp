@@ -25,6 +25,9 @@
 #include "StelAppGraphicsItem.hpp"
 #include "StelMainWindow.hpp"
 #include "LandscapeMgr.hpp"
+#include "ConstellationMgr.hpp"
+#include "GridLinesMgr.hpp"
+#include "NebulaMgr.hpp"
 
 #include "ui_mainGui.h"
 
@@ -186,13 +189,20 @@ void NewGui::init()
 {
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject* module = GETSTELMODULE("ConstellationMgr");
+	ConstellationMgr* cmgr = (ConstellationMgr*)module;
 	QObject::connect(ui->actionShow_Constellation_Lines, SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
+	ui->actionShow_Constellation_Lines->setChecked(cmgr->getFlagLines());
 	QObject::connect(ui->actionShow_Constellation_Art, SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
+	ui->actionShow_Constellation_Art->setChecked(cmgr->getFlagArt());
 	QObject::connect(ui->actionShow_Constellation_Labels, SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
+	ui->actionShow_Constellation_Labels->setChecked(cmgr->getFlagNames());
 	
 	module = GETSTELMODULE("GridLinesMgr");
+	GridLinesMgr* gmgr = (GridLinesMgr*)module;
 	QObject::connect(ui->actionShow_Equatorial_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
+	ui->actionShow_Equatorial_Grid->setChecked(gmgr->getFlagEquatorGrid());
 	QObject::connect(ui->actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
+	ui->actionShow_Azimutal_Grid->setChecked(gmgr->getFlagAzimutalGrid());
 	
 	module = GETSTELMODULE("LandscapeMgr");
 	LandscapeMgr* lmgr = (LandscapeMgr*)module;
@@ -204,7 +214,9 @@ void NewGui::init()
 	ui->actionShow_Atmosphere->setChecked(lmgr->getFlagAtmosphere());
 	
 	module = GETSTELMODULE("NebulaMgr");
+	NebulaMgr* nmgr = (NebulaMgr*)module;
 	QObject::connect(ui->actionShow_Nebulas, SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
+	ui->actionShow_Nebulas->setChecked(nmgr->getFlagHints());
 	
 	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
 	QObject::connect(ui->actionIncrease_Time_Speed, SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
@@ -215,13 +227,13 @@ void NewGui::init()
 			
 	module = &StelApp::getInstance();
 	QObject::connect(ui->actionShow_Night_Mode, SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
+	ui->actionShow_Night_Mode->setChecked(StelApp::getInstance().getVisionModeNight());
 	
 	module = GETSTELMODULE("MovementMgr");
 	QObject::connect(ui->actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
 	
-	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	
+	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(NULL);
