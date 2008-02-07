@@ -43,126 +43,11 @@ QLabel {
    font-weight: bold;
 }</string>
   </property>
-  <widget class="QDockWidget" name="dockWidgetSearchSkyObject" >
-   <property name="geometry" >
-    <rect>
-     <x>450</x>
-     <y>20</y>
-     <width>291</width>
-     <height>56</height>
-    </rect>
-   </property>
-   <property name="palette" >
-    <palette>
-     <active/>
-     <inactive/>
-     <disabled/>
-    </palette>
-   </property>
-   <property name="floating" >
-    <bool>true</bool>
-   </property>
-   <property name="features" >
-    <set>QDockWidget::AllDockWidgetFeatures</set>
-   </property>
-   <property name="allowedAreas" >
-    <set>Qt::NoDockWidgetArea</set>
-   </property>
-   <property name="windowTitle" >
-    <string>Find Object</string>
-   </property>
-   <widget class="QWidget" name="dockWidgetContents" >
-    <layout class="QGridLayout" >
-     <property name="leftMargin" >
-      <number>2</number>
-     </property>
-     <property name="topMargin" >
-      <number>2</number>
-     </property>
-     <property name="rightMargin" >
-      <number>2</number>
-     </property>
-     <property name="bottomMargin" >
-      <number>2</number>
-     </property>
-     <property name="horizontalSpacing" >
-      <number>2</number>
-     </property>
-     <property name="verticalSpacing" >
-      <number>2</number>
-     </property>
-     <item row="0" column="0" >
-      <layout class="QHBoxLayout" >
-       <property name="spacing" >
-        <number>2</number>
-       </property>
-       <item>
-        <widget class="QLineEdit" name="lineEditSearchSkyObject" >
-         <property name="palette" >
-          <palette>
-           <active/>
-           <inactive/>
-           <disabled/>
-          </palette>
-         </property>
-         <property name="text" >
-          <string>Up</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonGotoSearchSkyObject" >
-         <property name="text" >
-          <string>Go</string>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QDockWidget" name="dockWidgetHelp" >
-   <property name="geometry" >
-    <rect>
-     <x>430</x>
-     <y>100</y>
-     <width>370</width>
-     <height>380</height>
-    </rect>
-   </property>
-   <property name="palette" >
-    <palette>
-     <active/>
-     <inactive/>
-     <disabled/>
-    </palette>
-   </property>
-   <property name="font" >
-    <font/>
-   </property>
-   <property name="floating" >
-    <bool>true</bool>
-   </property>
-   <property name="features" >
-    <set>QDockWidget::AllDockWidgetFeatures</set>
-   </property>
-   <property name="allowedAreas" >
-    <set>Qt::NoDockWidgetArea</set>
-   </property>
-   <property name="windowTitle" >
-    <string>Help</string>
-   </property>
-   <widget class="QWidget" name="dockWidgetContents_2" />
-  </widget>
   <widget class="DialogFrame" name="HelpDialog" >
    <property name="geometry" >
     <rect>
-     <x>40</x>
-     <y>110</y>
+     <x>10</x>
+     <y>40</y>
      <width>351</width>
      <height>401</height>
     </rect>
@@ -411,6 +296,249 @@ QLabel {
         </disabled>
        </palette>
       </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="DialogFrame" name="SearchDialog" >
+   <property name="geometry" >
+    <rect>
+     <x>50</x>
+     <y>480</y>
+     <width>291</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>16777215</width>
+     <height>55</height>
+    </size>
+   </property>
+   <property name="mouseTracking" >
+    <bool>true</bool>
+   </property>
+   <property name="frameShape" >
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <layout class="QVBoxLayout" >
+    <property name="spacing" >
+     <number>0</number>
+    </property>
+    <property name="leftMargin" >
+     <number>0</number>
+    </property>
+    <property name="topMargin" >
+     <number>0</number>
+    </property>
+    <property name="rightMargin" >
+     <number>0</number>
+    </property>
+    <property name="bottomMargin" >
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="BarFrame" name="TitleSearchDialog" >
+      <property name="minimumSize" >
+       <size>
+        <width>16</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>4</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2" >
+         <property name="palette" >
+          <palette>
+           <active>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>186</red>
+               <green>189</green>
+               <blue>196</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
+         <property name="font" >
+          <font>
+           <family>DejaVu</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text" >
+          <string>Find Object</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QToolButton" name="closeSearchDialog" >
+         <property name="maximumSize" >
+          <size>
+           <width>17</width>
+           <height>17</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>X</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>2</number>
+       </property>
+       <property name="leftMargin" >
+        <number>2</number>
+       </property>
+       <property name="topMargin" >
+        <number>2</number>
+       </property>
+       <property name="rightMargin" >
+        <number>2</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="lineEditSearchSkyObject" >
+         <property name="palette" >
+          <palette>
+           <active/>
+           <inactive/>
+           <disabled/>
+          </palette>
+         </property>
+         <property name="text" >
+          <string>Orion</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonGotoSearchSkyObject_2" >
+         <property name="text" >
+          <string>Go</string>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -774,22 +902,6 @@ QLabel {
  </resources>
  <connections>
   <connection>
-   <sender>actionShow_Search_Window</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>dockWidgetSearchSkyObject</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>235</x>
-     <y>147</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionQuit</sender>
    <signal>triggered()</signal>
    <receiver>Form</receiver>
@@ -822,38 +934,6 @@ QLabel {
    </hints>
   </connection>
   <connection>
-   <sender>dockWidgetSearchSkyObject</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionShow_Search_Window</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>355</x>
-     <y>77</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dockWidgetHelp</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionShow_Help_Window</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>235</x>
-     <y>227</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>closeHelp</sender>
    <signal>clicked()</signal>
    <receiver>actionShow_Help_Window</receiver>
@@ -862,6 +942,38 @@ QLabel {
     <hint type="sourcelabel" >
      <x>295</x>
      <y>65</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShow_Search_Window</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SearchDialog</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>170</x>
+     <y>490</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>closeSearchDialog</sender>
+   <signal>clicked()</signal>
+   <receiver>actionShow_Search_Window</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>298</x>
+     <y>472</y>
     </hint>
     <hint type="destinationlabel" >
      <x>-1</x>
