@@ -151,6 +151,7 @@ void LeftStelBar::updatePath()
 
 BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 {
+	leftNoPathMargin = 0;
 	roundSize = 5;
 	
 	QFont font("DejaVuSans", 10);
@@ -189,11 +190,19 @@ void BottomStelBar::updatePath()
 		return;
 	}
 	QRectF rectCh = childrenBoundingRect();
-	newPath.moveTo(0, 0);
+	newPath.moveTo(leftNoPathMargin, 0);
 	newPath.lineTo(rectCh.width()-roundSize,0);
 	newPath.arcTo(rectCh.width()-2.*roundSize, 0, 2.*roundSize, 2.*roundSize, 90, -90);
 	newPath.lineTo(rectCh.width(), rectCh.height()+roundSize);
 	setPath(newPath);
+}
+
+void BottomStelBar::setLeftNoPathMargin(double margin)
+{
+	if (leftNoPathMargin==margin)
+		return;
+	leftNoPathMargin=margin;
+	updatePath();
 }
 
 QRectF BottomStelBar::getButtonsBoundingRect()
@@ -542,7 +551,8 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	if (!winBar || !buttonBar || !buttonHelpLabel)
 		return;
 	winBar->setPos(winBar->pos().x(), h-winBar->boundingRect().height()-buttonBar->boundingRect().height()+0.5);
-	buttonBar->setPos(winBar->boundingRect().right()+winBar->pos().x(), h-buttonBar->boundingRect().height());
+	buttonBar->setLeftNoPathMargin(winBar->pos().x()+winBar->boundingRect().right());
+	buttonBar->setPos(0, h-buttonBar->boundingRect().height());
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+10, h-buttonBar->boundingRect().height()-25);
 }
 
