@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 00:07+0100\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-11-29 20:09+0000\n"
 "Last-Translator: Jānis Jātnieks <sg30022@lanet.lv>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:730
+#: src/deprecated/stel_ui.cpp:734
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,47 +27,47 @@ msgstr ""
 "     ziņotu par kļūdām un izmēģinātu jaunākās versijas.\n"
 "\n"
 
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " gaismas gadi"
 
-#: src/stel_ui_conf.cpp:1104
+#: src/deprecated/stel_ui_conf.cpp:1044
 msgid ": Exceptional Leonid rate"
 msgstr ": Liels daudzums Leonīdiem"
 
-#: src/stel_ui_conf.cpp:1111
+#: src/deprecated/stel_ui_conf.cpp:1051
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Augstākais Leonīdiem (1966.g)"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/deprecated/stel_ui_conf.cpp:1030
 msgid ": Normal rate"
 msgstr ": Normāls daudzums"
 
-#: src/stel_ui_conf.cpp:1097
+#: src/deprecated/stel_ui_conf.cpp:1037
 msgid ": Standard Perseids rate"
 msgstr ": raksturīgi Perseīdiem"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "AU (astr.vien.)"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/deprecated/stel_ui_tuiconf.cpp:403
 msgid "Actual Time"
 msgstr "Reālais Laiks"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/deprecated/stel_ui_tuiconf.cpp:385
 msgid "Administration "
 msgstr "Administrācija "
 
-#: src/stel_ui_conf.cpp:149
+#: src/deprecated/stel_ui_conf.cpp:152
 msgid "Also display Nebulas without textures"
 msgstr "Rādīt arī miglājus kuriem nav tekstūru"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/deprecated/stel_ui_tuiconf.cpp:390
 msgid "Altitude (m): "
 msgstr "Augst.vjl.(m): "
 
-#: src/stel_ui_conf.cpp:344
+#: src/deprecated/stel_ui_conf.cpp:347
 msgid "Altitude : "
 msgstr "Augst.vjl.: "
 
@@ -99,7 +99,7 @@ msgstr "Ērglis"
 msgid "Ara"
 msgstr "Altāris"
 
-#: src/s_tui.h:292
+#: src/deprecated/s_tui.h:292
 msgid "Are you sure ?"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Aries"
 msgstr "Auns"
 
-#: src/stel_ui_tuiconf.cpp:637
+#: src/deprecated/stel_ui_tuiconf.cpp:638
 msgid "Arrow down to load list."
 msgstr "Bultiņa uz leju ielādē sarakstu."
 
@@ -115,11 +115,11 @@ msgstr "Bultiņa uz leju ielādē sarakstu."
 msgid "Arsenal"
 msgstr "Arsenāls"
 
-#: src/stel_ui_conf.cpp:220
+#: src/deprecated/stel_ui_conf.cpp:223
 msgid "Atmosphere"
 msgstr "Atmosfēra"
 
-#: src/stel_ui.cpp:682
+#: src/deprecated/stel_ui.cpp:686
 msgid "Atmosphere [A]"
 msgstr "Atmosfēra [A]"
 
@@ -131,20 +131,20 @@ msgstr "Vedējs"
 msgid "Aurvandil's Toe"
 msgstr "Aurvandila Kājas Pirksts"
 
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
 msgid "Author: "
 msgstr "Autors: "
 
-#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Az/Augst: "
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
 msgid "Azimuthal Grid"
 msgstr "Azimutālais tīkls"
 
-#: src/stel_ui.cpp:674
+#: src/deprecated/stel_ui.cpp:678
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimutālais tīkls [Z]"
 
@@ -192,15 +192,15 @@ msgstr "Krūšu Kauls"
 msgid "Bull's Foreleg"
 msgstr "Buļļa priekškāja"
 
-#: src/stel_ui_tuiconf.cpp:457
+#: src/deprecated/stel_ui_tuiconf.cpp:458
 msgid "CD/DVD Script: "
 msgstr "CD/DVD scenārijs: "
 
-#: src/stel_ui.cpp:812
+#: src/deprecated/stel_ui.cpp:816
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Iziet no Stellarium\n"
 
-#: src/stel_ui.cpp:810
+#: src/deprecated/stel_ui.cpp:814
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Iziet no Stellarium\n"
 
@@ -208,7 +208,7 @@ msgstr "CTRL + Q : Iziet no Stellarium\n"
 msgid "Caelum"
 msgstr "Greblis"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/deprecated/stel_ui_tuiconf.cpp:399
 msgid "Calendar"
 msgstr "Kalendārs"
 
@@ -220,7 +220,7 @@ msgstr "Kalisto"
 msgid "Camelopardalis"
 msgstr "Žirafe"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
 msgid "Cancel"
 msgstr "Atcelt"
 
@@ -244,11 +244,11 @@ msgstr "Mazais Suns"
 msgid "Capricornus"
 msgstr "Mežāzis"
 
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
 msgid "Cardinal Points"
 msgstr "Debess puses"
 
-#: src/stel_ui.cpp:680
+#: src/deprecated/stel_ui.cpp:684
 msgid "Cardinal Points [Q]"
 msgstr "Debess puses [Q]"
 
@@ -308,7 +308,7 @@ msgstr "Krāpnieks"
 msgid "Chinese"
 msgstr "Ķīniešu"
 
-#: src/stel_ui_conf.cpp:451
+#: src/deprecated/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "Izvēlieties ainavu:"
 
@@ -328,7 +328,7 @@ msgstr "Satītā Pātaga"
 msgid "Collarbones"
 msgstr "Atslēgas kauli"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/deprecated/stel_ui_tuiconf.cpp:382
 msgid "Colors "
 msgstr "Krāsas "
 
@@ -340,47 +340,47 @@ msgstr "Balodis"
 msgid "Coma Berenices"
 msgstr "Berenikes Mati"
 
-#: src/stel_ui.cpp:1033
+#: src/deprecated/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "Scenārija komandu ierakstīšana pārtraukta."
 
-#: src/stel_ui_conf.cpp:57
+#: src/deprecated/stel_ui_conf.cpp:60
 msgid "Configuration"
 msgstr "Konfigurācija"
 
-#: src/stel_ui.cpp:690
+#: src/deprecated/stel_ui.cpp:694
 msgid "Configuration window [1]"
 msgstr "Konfigurācijas logs [1]"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/deprecated/stel_ui_tuiconf.cpp:427
 msgid "Constellation Art Intensity"
 msgstr "Zvaigznāju mākslas intensitāte"
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/deprecated/stel_ui_tuiconf.cpp:428
 msgid "Constellation Boundaries"
 msgstr "Zvaigznāju robežas"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/deprecated/stel_ui_tuiconf.cpp:425
 msgid "Constellation Lines"
 msgstr "Zvaigznāju līnijas"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/deprecated/stel_ui_tuiconf.cpp:426
 msgid "Constellation Names"
 msgstr "Zvaigznāju nosaukumi"
 
-#: src/stel_ui.cpp:672
+#: src/deprecated/stel_ui.cpp:676
 msgid "Constellations Art [R]"
 msgstr "Zvaigznāju zīmējumi [R]"
 
-#: src/stel_ui_conf.cpp:120
+#: src/deprecated/stel_ui_conf.cpp:123
 msgid "Constellations Boundaries"
 msgstr "Zvaigznāju robežas"
 
-#: src/stel_ui_conf.cpp:110
+#: src/deprecated/stel_ui_conf.cpp:113
 msgid "Constellations Lines"
 msgstr "Zvaigznāju kontūras"
 
-#: src/stel_ui_conf.cpp:115
+#: src/deprecated/stel_ui_conf.cpp:118
 msgid "Constellations Names"
 msgstr "Zvaigznāju nosaukumi"
 
@@ -408,19 +408,19 @@ msgstr "Krokodils"
 msgid "Crux"
 msgstr "Krusts"
 
-#: src/stel_ui_conf.cpp:267
+#: src/deprecated/stel_ui_conf.cpp:270
 msgid "Current Time :"
 msgstr "Laiks šobrīd :"
 
-#: src/stel_ui_conf.cpp:1142
+#: src/deprecated/stel_ui_conf.cpp:1082
 msgid "Current Time Speed is x"
 msgstr "Šobrīd laika ātrums ir x"
 
-#: src/stel_ui_conf.cpp:318
+#: src/deprecated/stel_ui_conf.cpp:321
 msgid "Cursor : "
 msgstr "Kursors : "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/deprecated/stel_ui_tuiconf.cpp:451
 msgid "Cursor Timeout: "
 msgstr "Kursora taimauts: "
 
@@ -432,23 +432,23 @@ msgstr "Līkumotā Rinda"
 msgid "Cygnus"
 msgstr "Gulbis"
 
-#: src/stel_ui_conf.cpp:558
+#: src/deprecated/stel_ui_conf.cpp:535
 msgid "Date & Time"
 msgstr "Laiks un Datums"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/deprecated/stel_ui_tuiconf.cpp:406
 msgid "Date Display Format: "
 msgstr "Datuma formāts: "
 
-#: src/s_gui.cpp:2746
+#: src/deprecated/s_gui.cpp:2747
 msgid "Day"
 msgstr "Diena"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/deprecated/stel_ui_tuiconf.cpp:398
 msgid "Day keys: "
 msgstr "Dienu atslēgtas: "
 
-#: src/stel_ui.cpp:715
+#: src/deprecated/stel_ui.cpp:719
 msgid "Decrease Time Speed [J]"
 msgstr "Palēnināt laiku [J]"
 
@@ -460,7 +460,7 @@ msgstr "Deimoss"
 msgid "Delphinus"
 msgstr "Delfīns"
 
-#: src/stel_ui.cpp:784
+#: src/deprecated/stel_ui.cpp:788
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -492,11 +492,11 @@ msgstr "Diona"
 msgid "Dipper"
 msgstr "Smeļamais"
 
-#: src/stel_ui_conf.cpp:395
+#: src/deprecated/stel_ui_conf.cpp:398
 msgid "Disk Viewport"
 msgstr "Diskveida skata lauks"
 
-#: src/stel_ui.cpp:772
+#: src/deprecated/stel_ui.cpp:776
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -524,12 +524,12 @@ msgstr ""
 "4 , : Ekliptikas līnija 5 . : Ekvatora līnija\n"
 "\n"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Attālums: "
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Do"
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr "Suņi"
 msgid "Dolphin"
 msgstr "Delfīns"
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Done"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr "Zelta Zivs"
 msgid "Draco"
 msgstr "Pūķis"
 
-#: src/stel_ui.cpp:668
+#: src/deprecated/stel_ui.cpp:672
 msgid "Drawing of the Constellations [C]"
 msgstr "Zvaigznāju apveidu izzīmēšana [C]"
 
@@ -573,7 +573,7 @@ msgstr "Bungas"
 msgid "Drumstick"
 msgstr "Bungu vālīte"
 
-#: src/stel_ui.cpp:800
+#: src/deprecated/stel_ui.cpp:804
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -585,7 +585,7 @@ msgstr ""
 "6 : Pauze scenārija izpildei K : Turpina izpildi\n"
 "\n"
 
-#: src/translations.h:65 src/s_gui.cpp:2690
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "A"
 
@@ -601,11 +601,11 @@ msgstr "Zemes Dieva Templis"
 msgid "Eastern Door"
 msgstr "Austrumu Durvis"
 
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
 msgid "Ecliptic Line"
 msgstr "Ekliptikas plakne"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/deprecated/stel_ui_tuiconf.cpp:383
 msgid "Effects "
 msgstr "Efekti "
 
@@ -629,27 +629,28 @@ msgstr "Apmentne"
 msgid "Enceladus"
 msgstr "Encelads"
 
-#: src/stel_ui_conf.cpp:880
+#: src/deprecated/stel_ui_conf.cpp:842
 msgid "Enter observatory name"
 msgstr "Ievadiet novērojumu vietas nosaukumu"
 
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr "Ekvinokcijas datums"
 
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
 msgid "Equator Line"
 msgstr "Ekvatora plakne"
 
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
 msgid "Equatorial Grid"
 msgstr "Ekvatoriālais tīkls"
 
-#: src/stel_ui.cpp:676
+#: src/deprecated/stel_ui.cpp:680
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriālais tīkls [E]"
 
-#: src/stel_ui.cpp:688
+#: src/deprecated/stel_ui.cpp:692
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoriālais/Azimutālais montējums [ENTER]"
 
@@ -661,7 +662,7 @@ msgstr "Mazais Zirgs"
 msgid "Eridanus"
 msgstr "Eridāna"
 
-#: src/stel_ui.cpp:1047
+#: src/deprecated/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "Kļūda: Nevarēja atvērt skripta failu komandu ierakstīšanai."
 
@@ -709,11 +710,11 @@ msgstr "Pieci Karaļi"
 msgid "Flail"
 msgstr "Sprigulis"
 
-#: src/stel_ui.cpp:707
+#: src/deprecated/stel_ui.cpp:711
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Horizontāls spoguļattēls [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:709
+#: src/deprecated/stel_ui.cpp:713
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Vertikāls spoguļattēls [CTRL + SHIFT + V]"
 
@@ -725,13 +726,9 @@ msgstr "Ganāmpulks"
 msgid "Flying Corridor"
 msgstr "Lidojošais Gaitenis"
 
-#: src/stel_ui_conf.cpp:225
+#: src/deprecated/stel_ui_conf.cpp:228
 msgid "Fog"
 msgstr "Dūmaka"
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "Lai iegūtu citu izšķirtspēju rediģējiet failu :"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -749,7 +746,7 @@ msgstr "Četri Kanāli"
 msgid "Frigate Bird"
 msgstr "Fregatputns"
 
-#: src/stel_ui_conf.cpp:733
+#: src/deprecated/stel_ui_conf.cpp:695
 msgid "GO"
 msgstr "Izpildīt"
 
@@ -761,7 +758,7 @@ msgstr "Ganimēds"
 msgid "Gemini"
 msgstr "Dvīņi"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/deprecated/stel_ui_tuiconf.cpp:380
 msgid "General "
 msgstr "Vispārīgi "
 
@@ -781,7 +778,7 @@ msgstr "Meitene"
 msgid "Good Gourd"
 msgstr "Svaigais Ķirbis"
 
-#: src/stel_ui.cpp:705
+#: src/deprecated/stel_ui.cpp:709
 msgid "Goto selected object [SPACE]"
 msgstr "Parādīt izvēlēto objektu [SPACE]"
 
@@ -789,11 +786,11 @@ msgstr "Parādīt izvēlēto objektu [SPACE]"
 msgid "Great General"
 msgstr "Lielais Ģenerālis"
 
-#: src/stel_ui_conf.cpp:210
+#: src/deprecated/stel_ui_conf.cpp:213
 msgid "Ground"
 msgstr "Apvārsnis"
 
-#: src/stel_ui.cpp:678
+#: src/deprecated/stel_ui.cpp:682
 msgid "Ground [G]"
 msgstr "Apvārsnis [G]"
 
@@ -809,11 +806,11 @@ msgstr "Roka"
 msgid "Heart"
 msgstr "Sirds"
 
-#: src/stel_ui.cpp:819
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "Paskaidrojumi"
 
-#: src/stel_ui.cpp:686
+#: src/deprecated/stel_ui.cpp:690
 msgid "Help [H]"
 msgstr "Palīdzība [H]"
 
@@ -825,7 +822,7 @@ msgstr "Herkuless"
 msgid "Hippopotamus"
 msgstr "Nīlzirgs"
 
-#: src/stel_ui.cpp:1043
+#: src/deprecated/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Nospiediet CTRL-R vēlreiz lai pārtrauktu.\n"
 
@@ -845,7 +842,7 @@ msgstr "Pulkstenis"
 msgid "Horus"
 msgstr "Hors"
 
-#: src/s_gui.cpp:2749
+#: src/deprecated/s_gui.cpp:2750
 msgid "Hour"
 msgstr "Stunda"
 
@@ -873,7 +870,7 @@ msgstr "Imperiālie sargi"
 msgid "Imperial Passageway"
 msgstr "Imperatora Eja"
 
-#: src/stel_ui.cpp:719
+#: src/deprecated/stel_ui.cpp:723
 msgid "Increase Time Speed [L]"
 msgstr "Paātrināt laiku [L]"
 
@@ -881,11 +878,11 @@ msgstr "Paātrināt laiku [L]"
 msgid "Indus"
 msgstr "Indiānis"
 
-#: src/stel_ui_conf.cpp:1024
+#: src/deprecated/stel_ui_conf.cpp:964
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui.cpp:749
+#: src/deprecated/stel_ui.cpp:753
 msgid "Information"
 msgstr "Informācija"
 
@@ -893,7 +890,7 @@ msgstr "Informācija"
 msgid "Inuit"
 msgstr "Inuitu"
 
-#: src/stel_ui.cpp:588
+#: src/deprecated/stel_ui.cpp:602
 msgid "Invalid Script command"
 msgstr "Nepareiza skripta komanda"
 
@@ -901,7 +898,8 @@ msgstr "Nepareiza skripta komanda"
 msgid "Io"
 msgstr "Jo"
 
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
@@ -953,23 +951,23 @@ msgstr "Lampas Statīvs"
 msgid "Lance"
 msgstr "Pīķis"
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/deprecated/stel_ui_tuiconf.cpp:444
 msgid "Landscape: "
 msgstr "Ainava: "
 
-#: src/stel_ui_conf.cpp:560
+#: src/deprecated/stel_ui_conf.cpp:537
 msgid "Landscapes"
 msgstr "Ainavas"
 
-#: src/stel_ui_conf.cpp:557
+#: src/deprecated/stel_ui_conf.cpp:534
 msgid "Language"
 msgstr "Valoda"
 
-#: src/stel_ui_conf.cpp:336
+#: src/deprecated/stel_ui_conf.cpp:339
 msgid "Latitude : "
 msgstr "Ģeog.plat.: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/deprecated/stel_ui_tuiconf.cpp:388
 msgid "Latitude: "
 msgstr "Ģeog.plat.: "
 
@@ -997,7 +995,7 @@ msgstr "Zaķis"
 msgid "Libra"
 msgstr "Svari"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/deprecated/stel_ui_tuiconf.cpp:443
 msgid "Light Pollution Luminance: "
 msgstr "Gaismas piesārņojuma spožums: "
 
@@ -1009,43 +1007,43 @@ msgstr "Lauva"
 msgid "Lizard"
 msgstr "Ķirzaka"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/deprecated/stel_ui_tuiconf.cpp:462
 msgid "Load Default Configuration: "
 msgstr "Ielādēt noklusējuma konfigurāciju: "
 
-#: src/ConstellationMgr.cpp:334
+#: src/modules/ConstellationMgr.cpp:340
 msgid "Loading Constellation Art: "
 msgstr "Ielādē zvaigznāju zīmējumus: "
 
-#: src/NebulaMgr.cpp:401
+#: src/modules/NebulaMgr.cpp:404
 msgid "Loading NGC catalog: "
 msgstr "Ielādē NGC katalogu: "
 
-#: src/NebulaMgr.cpp:535
+#: src/modules/NebulaMgr.cpp:538
 msgid "Loading Nebula Textures:"
 msgstr "Ielādē miglāju tekstūras:"
 
-#: src/StarMgr.cpp:448
+#: src/modules/StarMgr.cpp:493
 msgid "Loading catalog "
 msgstr "Ielādē katalogu "
 
-#: src/stel_ui_tuiconf.cpp:454
+#: src/deprecated/stel_ui_tuiconf.cpp:455
 msgid "Local Script: "
 msgstr "Lokālais scenārijs: "
 
-#: src/stel_ui_conf.cpp:559
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "Vieta"
 
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
 msgid "Location: "
 msgstr "Atrašanās vieta: "
 
-#: src/stel_ui_conf.cpp:328
+#: src/deprecated/stel_ui_conf.cpp:331
 msgid "Longitude : "
 msgstr "Ģeog.gar.: "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/deprecated/stel_ui_tuiconf.cpp:389
 msgid "Longitude: "
 msgstr "Ģeog.gar.: "
 
@@ -1061,17 +1059,18 @@ msgstr "Lūsis"
 msgid "Lyra"
 msgstr "Lira"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Magnitude"
 msgstr "Zvaigžņlieluma"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/deprecated/stel_ui_tuiconf.cpp:447
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
 
-#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Zvaigžņlielums: "
 
@@ -1083,7 +1082,7 @@ msgstr "Vīrs ar Ieplestām Kājām"
 msgid "Man's Cart"
 msgstr "Vīrieša Rati"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/deprecated/stel_ui_tuiconf.cpp:445
 msgid "Manual zoom: "
 msgstr "Manuālā tuvināšana: "
 
@@ -1107,11 +1106,11 @@ msgstr "Maui Makšķerāķis"
 msgid "Mausoleum"
 msgstr "Mauzalejs"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/deprecated/stel_ui_tuiconf.cpp:420
 msgid "Maximum Magnitude to Label: "
 msgstr "Nosaukumi līdz zvaigžņlielumam: "
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/deprecated/stel_ui_tuiconf.cpp:449
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
 
@@ -1127,11 +1126,11 @@ msgstr "Galds"
 msgid "Mercury"
 msgstr "Merkurs"
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/deprecated/stel_ui_tuiconf.cpp:433
 msgid "Meridian Line"
 msgstr "Meridiāna līnija"
 
-#: src/stel_ui_conf.cpp:1116
+#: src/deprecated/stel_ui_conf.cpp:1056
 msgid "Meteor zenith hourly rate"
 msgstr "Meteoru skaits stundā"
 
@@ -1139,7 +1138,7 @@ msgstr "Meteoru skaits stundā"
 msgid "Microscopium"
 msgstr "Mikroskops"
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/deprecated/stel_ui_tuiconf.cpp:448
 msgid "Milky Way intensity: "
 msgstr "Piena Ceļa intensitāte: "
 
@@ -1147,11 +1146,11 @@ msgstr "Piena Ceļa intensitāte: "
 msgid "Mimas"
 msgstr "Mimass"
 
-#: src/s_gui.cpp:2752
+#: src/deprecated/s_gui.cpp:2753
 msgid "Minutes"
 msgstr "Minūtes"
 
-#: src/stel_ui.cpp:804
+#: src/deprecated/stel_ui.cpp:808
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1169,7 +1168,7 @@ msgstr ""
 msgid "Monoceros"
 msgstr "Vienradzis"
 
-#: src/s_gui.cpp:2743
+#: src/deprecated/s_gui.cpp:2744
 msgid "Month"
 msgstr "Mēn."
 
@@ -1177,7 +1176,7 @@ msgstr "Mēn."
 msgid "Moon"
 msgstr "Mēness"
 
-#: src/stel_ui_conf.cpp:165
+#: src/deprecated/stel_ui_conf.cpp:168
 msgid "Moon Scale"
 msgstr "Rādīt Mēnesi redzamajā izmērā"
 
@@ -1189,7 +1188,7 @@ msgstr "Enkura Vieta"
 msgid "Mortar"
 msgstr "Java"
 
-#: src/stel_ui.cpp:761
+#: src/deprecated/stel_ui.cpp:765
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1219,11 +1218,11 @@ msgstr ""
 msgid "Musca"
 msgstr "Muša"
 
-#: src/translations.h:63 src/s_gui.cpp:2685
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "Z"
 
-#: src/stel_ui.cpp:670
+#: src/deprecated/stel_ui.cpp:674
 msgid "Names of the Constellations [V]"
 msgstr "Zvaigznāju nosaukumi [V]"
 
@@ -1235,19 +1234,19 @@ msgstr "Navajo"
 msgid "Navigator's Triangle"
 msgstr "Stūrmaņa Trijstūris"
 
-#: src/stel_ui_tuiconf.cpp:438
+#: src/deprecated/stel_ui_tuiconf.cpp:439
 msgid "Nebula Circles"
 msgstr "Miglāju apļi"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/deprecated/stel_ui_tuiconf.cpp:438
 msgid "Nebula Names"
 msgstr "Miglāju nosaukumi"
 
-#: src/stel_ui_conf.cpp:136
+#: src/deprecated/stel_ui_conf.cpp:139
 msgid "Nebulas Names. Up to mag :"
 msgstr "Miglāju nosauk. līdz zvaigžņl.:"
 
-#: src/stel_ui.cpp:684
+#: src/deprecated/stel_ui.cpp:688
 msgid "Nebulas [N]"
 msgstr "Miglāji [N]"
 
@@ -1263,12 +1262,13 @@ msgstr "Neptūns"
 msgid "Net"
 msgstr "Tīkls"
 
-#: src/stel_ui.cpp:693
+#: src/deprecated/stel_ui.cpp:697
 msgid "Night (red) mode"
 msgstr "Nakts režīms (sarkans)"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
 msgid "No"
 msgstr "Nē"
 
@@ -1288,15 +1288,15 @@ msgstr "Ziemeļu Upe"
 msgid "Northern Dipper"
 msgstr "Ziemeļu Kauss"
 
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
 msgid "OK"
 msgstr "OK"
 
-#: src/stel_ui_conf.cpp:708
+#: src/deprecated/stel_ui_conf.cpp:670
 msgid "Object Search"
 msgstr "Objektu meklēšana"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Object Sizing Rule: "
 msgstr "Objekta izmēri pēc: "
 
@@ -1332,7 +1332,7 @@ msgstr "Zvaigžņu Pāris"
 msgid "Palace Gate"
 msgstr "Pils Vārti"
 
-#: src/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:130
 msgid "Parallax: "
 msgstr "Paralakse: "
 
@@ -1376,27 +1376,27 @@ msgstr "Zivis"
 msgid "Piscis Austrinus"
 msgstr "Dienvidu Zivs"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/deprecated/stel_ui_tuiconf.cpp:430
 msgid "Planet Names"
 msgstr "Planētu nosaukumi"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/deprecated/stel_ui_tuiconf.cpp:431
 msgid "Planet Orbits"
 msgstr "Planētu orbītas"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/deprecated/stel_ui_tuiconf.cpp:432
 msgid "Planet Trails"
 msgstr "Planētu ceļi"
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
 msgid "Planet: "
 msgstr "Planēta: "
 
-#: src/stel_ui_conf.cpp:160
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "Planētas"
 
-#: src/stel_ui_conf.cpp:172
+#: src/deprecated/stel_ui_conf.cpp:175
 msgid "Planets Hints"
 msgstr "Izcelt planētas"
 
@@ -1404,7 +1404,7 @@ msgstr "Izcelt planētas"
 msgid "Pluto"
 msgstr "Plutons"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Point"
 msgstr "Punkta"
 
@@ -1412,19 +1412,19 @@ msgstr "Punkta"
 msgid "Polynesian"
 msgstr "Polinēziešu"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/deprecated/stel_ui_tuiconf.cpp:401
 msgid "Preset Sky Time: "
 msgstr "Šobrīdējais debess laiks: "
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/deprecated/stel_ui_tuiconf.cpp:404
 msgid "Preset Time"
 msgstr "Iestatītais Laiks"
 
-#: src/stel_ui_conf.cpp:502
+#: src/deprecated/stel_ui_conf.cpp:479
 msgid "Program Language: "
 msgstr "Programmas valoda: "
 
-#: src/stel_ui_conf.cpp:376
+#: src/deprecated/stel_ui_conf.cpp:379
 msgid "Projection :"
 msgstr "Projekcija :"
 
@@ -1444,17 +1444,18 @@ msgstr "Purpurkrāsas Pils"
 msgid "Pyxis"
 msgstr "Kompass"
 
-#: src/stel_ui.cpp:698
+#: src/deprecated/stel_ui.cpp:702
 msgid "Quit [CMD + Q]"
 msgstr "Beigt [CMD + Q]"
 
-#: src/stel_ui.cpp:696
+#: src/deprecated/stel_ui.cpp:700
 msgid "Quit [CTRL + Q]"
 msgstr "Beigt [CTRL + Q]"
 
-#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
@@ -1470,27 +1471,23 @@ msgstr "Sacīkšu Trase"
 msgid "Ramparts"
 msgstr "Vaļņi"
 
-#: src/stel_ui.cpp:717
+#: src/deprecated/stel_ui.cpp:721
 msgid "Real Time Speed [K]"
 msgstr "Normāls laika ātrums [K]"
 
-#: src/stel_ui.cpp:1041
+#: src/deprecated/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr "Scenārija komandas tiek rakstītas skripta failā:\n"
 
-#: src/stel_ui_conf.cpp:562
+#: src/deprecated/stel_ui_conf.cpp:539
 msgid "Rendering"
 msgstr "Izzīmēšana"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "Lai izmaiņas stātos spēkā"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "Tīkliņš"
 
-#: src/stel_ui.cpp:721
+#: src/deprecated/stel_ui.cpp:725
 msgid "Return to Current Time [8]"
 msgstr "Atgriezties tagdnē"
 
@@ -1538,7 +1535,7 @@ msgstr "Spuvušais Ķirbis"
 msgid "Runners"
 msgstr "Skrējēji"
 
-#: src/translations.h:64 src/s_gui.cpp:2686
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "D"
 
@@ -1562,20 +1559,20 @@ msgstr "Salamandra"
 msgid "Saturn"
 msgstr "Saturns"
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/deprecated/stel_ui_tuiconf.cpp:463
 msgid "Save Current Configuration as Default: "
 msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
 
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
 msgid "Save as default"
 msgstr "Saglabāt kā noklusējumu"
 
-#: src/stel_ui_conf.cpp:353
+#: src/deprecated/stel_ui_conf.cpp:356
 msgid "Save location"
 msgstr "Saglabāt vietu"
 
-#: src/stel_ui_conf.cpp:405
+#: src/deprecated/stel_ui_conf.cpp:408
 msgid "Saving settings will save current full screen status"
 msgstr "Iestatījumi tiks saglabāti ar pilnekrāna stāvokli"
 
@@ -1587,15 +1584,11 @@ msgstr "Skorpions"
 msgid "Screen"
 msgstr "Aizslietnis"
 
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "Ekrāna izšķirtspēja :"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
 msgid "Script commander"
 msgstr "Skriptu pavēlnieks"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/deprecated/stel_ui_tuiconf.cpp:384
 msgid "Scripts "
 msgstr "Scenāriji "
 
@@ -1607,15 +1600,15 @@ msgstr "Tēlnieks"
 msgid "Scutum"
 msgstr "Vairogs"
 
-#: src/stel_ui_conf.cpp:715
+#: src/deprecated/stel_ui_conf.cpp:677
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Meklēt (piem. Saturns, Polaris, HP6218, Orions, M31):"
 
-#: src/stel_ui.cpp:701
+#: src/deprecated/stel_ui.cpp:705
 msgid "Search for object [CTRL + F]"
 msgstr "Meklēt objektu [CTRL + F]"
 
-#: src/s_gui.cpp:2755
+#: src/deprecated/s_gui.cpp:2756
 msgid "Seconds"
 msgstr "Sekundes"
 
@@ -1627,11 +1620,11 @@ msgstr "Seks"
 msgid "Select and exit to run."
 msgstr "Izvēlieties un izejiet lai palaistu."
 
-#: src/stel_ui_conf.cpp:323
+#: src/deprecated/stel_ui_conf.cpp:326
 msgid "Selected : "
 msgstr "Izvēlēts : "
 
-#: src/stel_ui_conf.cpp:125
+#: src/deprecated/stel_ui_conf.cpp:128
 msgid "Selected Constellation Only"
 msgstr "Tikai izvēlētajiem zvaigznājiem"
 
@@ -1643,27 +1636,27 @@ msgstr "Selkisa"
 msgid "Serpens"
 msgstr "Čūska"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/deprecated/stel_ui_tuiconf.cpp:378
 msgid "Set Location "
 msgstr "Iestatīt vietu "
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/deprecated/stel_ui_tuiconf.cpp:379
 msgid "Set Time "
 msgstr "Iestatīt laiku "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/deprecated/stel_ui_tuiconf.cpp:397
 msgid "Set Time Zone: "
 msgstr "Iestatīt laika zonu: "
 
-#: src/stel_ui_tuiconf.cpp:465
+#: src/deprecated/stel_ui_tuiconf.cpp:466
 msgid "Set UI Locale: "
 msgstr "Iestatīt interfeisa valodu: "
 
-#: src/stel_ui_tuiconf.cpp:451
+#: src/deprecated/stel_ui_tuiconf.cpp:452
 msgid "Setting Landscape Sets Location: "
 msgstr "Ainava saistīta ar novērojumu vietu: "
 
-#: src/stel_ui_conf.cpp:481
+#: src/deprecated/stel_ui_conf.cpp:458
 msgid "Setting landscape updates the location"
 msgstr "Ainavas ielādēt ar to atrašnās vietas koordinātēm:"
 
@@ -1687,35 +1680,35 @@ msgstr "Aita"
 msgid "Sheepfold"
 msgstr "Aitu aploks"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/deprecated/stel_ui_tuiconf.cpp:418
 msgid "Show: "
 msgstr "Parādīt: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/deprecated/stel_ui_tuiconf.cpp:464
 msgid "Shut Down: "
 msgstr "Izslēgt: "
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/deprecated/stel_ui_tuiconf.cpp:400
 msgid "Sidereal"
 msgstr "Zvaigžņu laiks"
 
-#: src/Nebula.cpp:110
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "Izmērs: "
 
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
 msgid "Sky Culture: "
 msgstr "Debesu kultūra: "
 
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
 msgid "Sky Language: "
 msgstr "Debesu valoda: "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/deprecated/stel_ui_tuiconf.cpp:402
 msgid "Sky Time At Start-up: "
 msgstr "Debess laiks sākumā: "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/deprecated/stel_ui_tuiconf.cpp:396
 msgid "Sky Time: "
 msgstr "Debesu laiks: "
 
@@ -1723,7 +1716,7 @@ msgstr "Debesu laiks: "
 msgid "Snake"
 msgstr "Čūska"
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/deprecated/stel_ui_tuiconf.cpp:391
 msgid "Solar System Body: "
 msgstr "Saules sistēmas objekts: "
 
@@ -1743,7 +1736,7 @@ msgstr "Dienvidu Upe"
 msgid "Spear"
 msgstr "Šķēps"
 
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "Spektra klase: "
 
@@ -1759,23 +1752,23 @@ msgstr "Klēts"
 msgid "Star"
 msgstr "Zvaigzne"
 
-#: src/stel_ui_conf.cpp:82
+#: src/deprecated/stel_ui_conf.cpp:85
 msgid "Star Names. Up to mag :"
 msgstr "Nosaukt līdz zvaigžņlielumam :"
 
-#: src/stel_ui_conf.cpp:94
+#: src/deprecated/stel_ui_conf.cpp:97
 msgid "Star Twinkle. Amount :"
 msgstr "Zvaigžņu mirgošanas apmērs :"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:419
 msgid "Star Value Multiplier: "
 msgstr "Zvaigžņu vērtības reizinātājs: "
 
-#: src/stel_ui_conf.cpp:77
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "Zvaigznes"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/deprecated/stel_ui_tuiconf.cpp:381
 msgid "Stars "
 msgstr "Zvaigznes "
 
@@ -1843,7 +1836,7 @@ msgstr "Pērkona Dievs"
 msgid "Thunderbolt"
 msgstr "Zibens"
 
-#: src/stel_ui.cpp:792
+#: src/deprecated/stel_ui.cpp:796
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1863,15 +1856,15 @@ msgstr ""
 "CTRL + - : Atpakaļ par stundu CTRL + = : Stundu uz priekšu\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/deprecated/stel_ui_tuiconf.cpp:405
 msgid "Time Display Format: "
 msgstr "Laika formāts: "
 
-#: src/stel_ui_conf.cpp:276
+#: src/deprecated/stel_ui_conf.cpp:279
 msgid "Time Zone :"
 msgstr "Laika zona :"
 
-#: src/stel_ui_conf.cpp:289
+#: src/deprecated/stel_ui_conf.cpp:292
 msgid "Time speed : "
 msgstr "Laika ātrums : "
 
@@ -1907,7 +1900,7 @@ msgstr "Tukans"
 msgid "Turtle"
 msgstr "Upes Bruņurupucis"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/deprecated/stel_ui_tuiconf.cpp:421
 msgid "Twinkling: "
 msgstr "Mirgošana: "
 
@@ -1931,7 +1924,7 @@ msgstr "Divi Saules Stari"
 msgid "Two in Front"
 msgstr "Divi Priekšā"
 
-#: src/Nebula.cpp:108
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "Tips: "
 
@@ -1939,7 +1932,7 @@ msgstr "Tips: "
 msgid "USB Script: "
 msgstr "USB scenārijs: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/deprecated/stel_ui_tuiconf.cpp:465
 msgid "Update me via Internet: "
 msgstr "Atjaunot no interneta: "
 
@@ -1955,7 +1948,7 @@ msgstr "Lielais Lācis"
 msgid "Ursa Minor"
 msgstr "Mazais Lācis"
 
-#: src/stel_ui_conf.cpp:297
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1965,7 +1958,7 @@ msgstr ""
 "   laika ātrumu.\n"
 "Ar taustiņu K var atjaunot normālu laika ātrumu."
 
-#: src/stel_ui_conf.cpp:280
+#: src/deprecated/stel_ui_conf.cpp:283
 msgid "Using System Default Time Zone"
 msgstr "Tiek izmantota sistēmas (default) laika zona"
 
@@ -1977,11 +1970,11 @@ msgstr "Buras"
 msgid "Venus"
 msgstr "Venera"
 
-#: src/stel_ui_conf.cpp:561
+#: src/deprecated/stel_ui_conf.cpp:538
 msgid "Video"
 msgstr "Videorežīmi"
 
-#: src/stel_ui_conf.cpp:400
+#: src/deprecated/stel_ui_conf.cpp:403
 msgid "Viewport Distorter"
 msgstr "Skata lauka deformācija"
 
@@ -2001,7 +1994,7 @@ msgstr "Lidojošā Zivs"
 msgid "Vulpecula"
 msgstr "Lapsiņa"
 
-#: src/translations.h:66 src/s_gui.cpp:2691
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "R"
 
@@ -2057,12 +2050,13 @@ msgstr "Sievietes Rati"
 msgid "Xuanyuan"
 msgstr "Suanjuanas pilsēta"
 
-#: src/s_gui.cpp:2740
+#: src/deprecated/s_gui.cpp:2741
 msgid "Year"
 msgstr "Gads"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
 msgid "Yes"
 msgstr "Jā"
 
@@ -2070,15 +2064,11 @@ msgstr "Jā"
 msgid "Zaofu"
 msgstr "Džaofu"
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/deprecated/stel_ui_tuiconf.cpp:450
 msgid "Zoom Duration: "
 msgstr "Tuvināšanas ilgums: "
 
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "ir nepieciešams pārstartēt programmu."
-
-#: src/stel_ui_conf.cpp:350
+#: src/deprecated/stel_ui_conf.cpp:353
 msgid "m"
 msgstr ""
 
@@ -2141,6 +2131,9 @@ msgstr ""
 #~ msgid "Flip vertically"
 #~ msgstr "Sagriezt vertikāli"
 
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr "Lai iegūtu citu izšķirtspēju rediģējiet failu :"
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Ielādē Hipparcos katalogu:"
 
@@ -2150,8 +2143,14 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Meteoru daudzums minūtē"
 
+#~ msgid "Restart program for"
+#~ msgstr "Lai izmaiņas stātos spēkā"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "Atgriezties šobrīdējā laikā"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "Ekrāna izšķirtspēja :"
 
 #~ msgid "Search for object"
 #~ msgstr "Meklēt objektu"
@@ -2188,3 +2187,6 @@ msgstr ""
 #~ " -v, --version Izvada informāciju par programmas veersiju un izbeidz "
 #~ "programmas darbību.\n"
 #~ " -h, --help Parāda pamācību un izbeidz programmas darbību.\n"
+
+#~ msgid "change to apply."
+#~ msgstr "ir nepieciešams pārstartēt programmu."
