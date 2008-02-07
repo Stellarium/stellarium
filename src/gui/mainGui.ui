@@ -62,7 +62,49 @@ QPushButton {
 QPushButton:pressed {
  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
    stop: 0 #babbde, stop: 1 #d6d7fa);
-}</string>
+}
+
+QScrollBar:vertical {
+ border: 1px solid #2e2e36;
+ background: #4a4b50;
+ width: 15px;
+         margin: 22px 0px 22px 0px;
+     }
+
+     QScrollBar::handle:vertical {
+border: 2px solid #4a4b50;
+         background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+   stop: 0 #f6f7fa, stop: 1 #dadbde);
+		border-radius: 4px;
+         min-height: 20px;
+     }
+     QScrollBar::add-line:vertical {
+         border: 3px solid #2e2e36;
+         background: #36375c;
+         height: 20px;
+         border-radius: 5px;
+         subcontrol-position: bottom;
+         subcontrol-origin: margin;
+     }
+
+     QScrollBar::sub-line:vertical {
+         border: 3px solid #2e2e36;
+         background: #36375c;
+         height: 20px;
+         border-radius: 5px;
+         subcontrol-position: top;
+         subcontrol-origin: margin;
+     }
+QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
+         border: 2px solid grey;
+         width: 3px;
+         height: 3px;
+         background: white;
+     }
+
+     QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+         background: none;
+     }</string>
   </property>
   <widget class="DialogFrame" name="HelpDialog" >
    <property name="geometry" >
@@ -237,6 +279,19 @@ QPushButton:pressed {
            <height>17</height>
           </size>
          </property>
+         <property name="styleSheet" >
+          <string>QToolButton {
+color: white;
+font-weight: bold;
+background: None;
+border: 1px solid #2e2e36;
+  border-radius: 2px;
+}
+
+QToolButton:pressed {
+color: darkgray;
+}</string>
+         </property>
          <property name="text" >
           <string>X</string>
          </property>
@@ -316,6 +371,9 @@ QPushButton:pressed {
          </colorrole>
         </disabled>
        </palette>
+      </property>
+      <property name="styleSheet" >
+       <string/>
       </property>
      </widget>
     </item>
@@ -505,6 +563,19 @@ QPushButton:pressed {
            <width>17</width>
            <height>17</height>
           </size>
+         </property>
+         <property name="styleSheet" >
+          <string>QToolButton {
+color: white;
+font-weight: bold;
+background: None;
+border: 1px solid #2e2e36;
+  border-radius: 2px;
+}
+
+QToolButton:pressed {
+color: darkgray;
+}</string>
          </property>
          <property name="text" >
           <string>X</string>
