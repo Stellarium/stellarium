@@ -41,6 +41,27 @@ DialogFrame {
 QLabel {
 	background: None;
    font-weight: bold;
+}
+
+QLineEdit {
+     border: 1.5px solid #2e2e36;
+     border-radius: 10px;
+     padding: 0 8px;
+     background: white;
+     selection-background-color: darkgray;
+ }
+
+QPushButton {
+  border: 1.5px solid #2e2e36;
+  border-radius: 10px;
+  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+   stop: 0 #f6f7fa, stop: 1 #dadbde);
+   min-width: 80px;
+}
+
+QPushButton:pressed {
+ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+   stop: 0 #babbde, stop: 1 #d6d7fa);
 }</string>
   </property>
   <widget class="DialogFrame" name="HelpDialog" >
@@ -305,8 +326,8 @@ QLabel {
     <rect>
      <x>50</x>
      <y>480</y>
-     <width>291</width>
-     <height>55</height>
+     <width>311</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="sizePolicy" >
@@ -318,7 +339,7 @@ QLabel {
    <property name="maximumSize" >
     <size>
      <width>16777215</width>
-     <height>55</height>
+     <height>16777215</height>
     </size>
    </property>
    <property name="mouseTracking" >
@@ -500,28 +521,91 @@ QLabel {
       </property>
       <layout class="QHBoxLayout" >
        <property name="spacing" >
-        <number>2</number>
+        <number>6</number>
        </property>
        <property name="leftMargin" >
-        <number>2</number>
+        <number>6</number>
        </property>
        <property name="topMargin" >
-        <number>2</number>
+        <number>6</number>
        </property>
        <property name="rightMargin" >
-        <number>2</number>
+        <number>6</number>
        </property>
        <property name="bottomMargin" >
-        <number>2</number>
+        <number>6</number>
        </property>
        <item>
         <widget class="QLineEdit" name="lineEditSearchSkyObject" >
          <property name="palette" >
           <palette>
-           <active/>
-           <inactive/>
-           <disabled/>
+           <active>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>169</red>
+               <green>169</green>
+               <blue>169</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>169</red>
+               <green>169</green>
+               <blue>169</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Highlight" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>169</red>
+               <green>169</green>
+               <blue>169</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
           </palette>
+         </property>
+         <property name="font" >
+          <font/>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>false</bool>
          </property>
          <property name="text" >
           <string>Orion</string>
@@ -534,7 +618,7 @@ QLabel {
           <string>Go</string>
          </property>
          <property name="checkable" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
