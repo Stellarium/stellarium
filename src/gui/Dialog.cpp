@@ -28,7 +28,7 @@ DialogFrame::DialogFrame(QWidget *parent) :
       followTop(false), followBottom(false)
 {
   setMouseTracking(true);
-  setMinimumSize(100,100);
+  setMinimumSize(50,20);
 }
 
 void DialogFrame::mouseMoveEvent(QMouseEvent *event)
