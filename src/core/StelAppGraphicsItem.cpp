@@ -219,9 +219,6 @@ bool StelAppGraphicsItem::sceneEvent(QEvent* event)
 		distorter->distortXY(x,y);
 		StelApp::getInstance().handleMove(x, y);
 		ui->handleMouseMoves(ui_x,ui_y, StelMod_NONE);
-		
-		// Refresh screen ASAP
-		thereWasAnEvent();
 	}
 	if (event->type()==QEvent::GraphicsSceneHoverMove)
 	{

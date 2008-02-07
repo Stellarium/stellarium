@@ -90,10 +90,12 @@ public:
 	BottomStelBar(QGraphicsItem* parent);
 	void addButton(StelButton* button);
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	void setLeftNoPathMargin(double margin);
 private:
 	void updatePath();
 	void updateText();
 	double roundSize;
+	double leftNoPathMargin;
 	QRectF getButtonsBoundingRect();
 	QGraphicsTextItem* location;
 	QGraphicsTextItem* datetime;
