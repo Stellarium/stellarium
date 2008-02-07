@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 00:07+0100\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-08-28 08:42+0000\n"
 "Last-Translator: roil13 <roil@pookmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:730
+#: src/deprecated/stel_ui.cpp:734
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,47 +27,47 @@ msgstr ""
 "    והערות באתר: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " שנות אור"
 
-#: src/stel_ui_conf.cpp:1104
+#: src/deprecated/stel_ui_conf.cpp:1044
 msgid ": Exceptional Leonid rate"
 msgstr "קצב יוצא דופן:"
 
-#: src/stel_ui_conf.cpp:1111
+#: src/deprecated/stel_ui_conf.cpp:1051
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr "הקצב הגבוה ביותר שנצפה (ליאונידים ב-1966)"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/deprecated/stel_ui_conf.cpp:1030
 msgid ": Normal rate"
 msgstr "קצב נורמלי:"
 
-#: src/stel_ui_conf.cpp:1097
+#: src/deprecated/stel_ui_conf.cpp:1037
 msgid ": Standard Perseids rate"
 msgstr "קצב פרסאידים נורמלי:"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "י\"א"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/deprecated/stel_ui_tuiconf.cpp:403
 msgid "Actual Time"
 msgstr "זמן עכשווי"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/deprecated/stel_ui_tuiconf.cpp:385
 msgid "Administration "
 msgstr "אדמיניסטרציה "
 
-#: src/stel_ui_conf.cpp:149
+#: src/deprecated/stel_ui_conf.cpp:152
 msgid "Also display Nebulas without textures"
 msgstr "בנוסף הצג ערפיליות ללא טקסטורה"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/deprecated/stel_ui_tuiconf.cpp:390
 msgid "Altitude (m): "
 msgstr "גובה במטרים: "
 
-#: src/stel_ui_conf.cpp:344
+#: src/deprecated/stel_ui_conf.cpp:347
 msgid "Altitude : "
 msgstr "גובה: "
 
@@ -99,7 +99,7 @@ msgstr "נשר"
 msgid "Ara"
 msgstr "מזבח"
 
-#: src/s_tui.h:292
+#: src/deprecated/s_tui.h:292
 msgid "Are you sure ?"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Aries"
 msgstr "טלה"
 
-#: src/stel_ui_tuiconf.cpp:637
+#: src/deprecated/stel_ui_tuiconf.cpp:638
 msgid "Arrow down to load list."
 msgstr "לחץ על חץ למטה כדי לטעון רשימה."
 
@@ -115,11 +115,11 @@ msgstr "לחץ על חץ למטה כדי לטעון רשימה."
 msgid "Arsenal"
 msgstr "מחסן נשק"
 
-#: src/stel_ui_conf.cpp:220
+#: src/deprecated/stel_ui_conf.cpp:223
 msgid "Atmosphere"
 msgstr "אטמוספירה"
 
-#: src/stel_ui.cpp:682
+#: src/deprecated/stel_ui.cpp:686
 msgid "Atmosphere [A]"
 msgstr "אטמוספירה [A]"
 
@@ -131,20 +131,20 @@ msgstr "עגלון"
 msgid "Aurvandil's Toe"
 msgstr "הבוהן של אורבנדיל"
 
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
 msgid "Author: "
 msgstr "מחבר: "
 
-#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "נטיה/גובה: "
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
 msgid "Azimuthal Grid"
 msgstr "רשת אזימוטלית"
 
-#: src/stel_ui.cpp:674
+#: src/deprecated/stel_ui.cpp:678
 msgid "Azimuthal Grid [Z]"
 msgstr "רשת אזימוטלית [Z]"
 
@@ -192,15 +192,15 @@ msgstr "עצם החזה"
 msgid "Bull's Foreleg"
 msgstr "רגל קדמית של שור"
 
-#: src/stel_ui_tuiconf.cpp:457
+#: src/deprecated/stel_ui_tuiconf.cpp:458
 msgid "CD/DVD Script: "
 msgstr "סקריפט CD/DVD : "
 
-#: src/stel_ui.cpp:812
+#: src/deprecated/stel_ui.cpp:816
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : יציאה\n"
 
-#: src/stel_ui.cpp:810
+#: src/deprecated/stel_ui.cpp:814
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : יציאה\n"
 
@@ -208,7 +208,7 @@ msgstr "CTRL + Q : יציאה\n"
 msgid "Caelum"
 msgstr "מפסלת"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/deprecated/stel_ui_tuiconf.cpp:399
 msgid "Calendar"
 msgstr "לוח שנה"
 
@@ -220,7 +220,7 @@ msgstr "קליסטו"
 msgid "Camelopardalis"
 msgstr "ג'ירף נמרי"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -244,11 +244,11 @@ msgstr "כלב קטן"
 msgid "Capricornus"
 msgstr "גדי"
 
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
 msgid "Cardinal Points"
 msgstr "נקודות ראשיות"
 
-#: src/stel_ui.cpp:680
+#: src/deprecated/stel_ui.cpp:684
 msgid "Cardinal Points [Q]"
 msgstr "נקודות ראשיות [Q]"
 
@@ -308,7 +308,7 @@ msgstr "צ'מאטי"
 msgid "Chinese"
 msgstr "סיני"
 
-#: src/stel_ui_conf.cpp:451
+#: src/deprecated/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "בחר נוף:"
 
@@ -328,7 +328,7 @@ msgstr "רצועה מסולסלת"
 msgid "Collarbones"
 msgstr "עצמות הבריח"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/deprecated/stel_ui_tuiconf.cpp:382
 msgid "Colors "
 msgstr "צבעים "
 
@@ -340,47 +340,47 @@ msgstr "יונה"
 msgid "Coma Berenices"
 msgstr "שערות ורוניקה"
 
-#: src/stel_ui.cpp:1033
+#: src/deprecated/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "הקלטת פקודות הופסקה"
 
-#: src/stel_ui_conf.cpp:57
+#: src/deprecated/stel_ui_conf.cpp:60
 msgid "Configuration"
 msgstr "קונפיגורציה"
 
-#: src/stel_ui.cpp:690
+#: src/deprecated/stel_ui.cpp:694
 msgid "Configuration window [1]"
 msgstr "חלון תצורה"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/deprecated/stel_ui_tuiconf.cpp:427
 msgid "Constellation Art Intensity"
 msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/deprecated/stel_ui_tuiconf.cpp:428
 msgid "Constellation Boundaries"
 msgstr "גבולות קבוצות כוכבים"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/deprecated/stel_ui_tuiconf.cpp:425
 msgid "Constellation Lines"
 msgstr "קווי קבוצות כוכבים"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/deprecated/stel_ui_tuiconf.cpp:426
 msgid "Constellation Names"
 msgstr "שמות קבוצות כוכבים"
 
-#: src/stel_ui.cpp:672
+#: src/deprecated/stel_ui.cpp:676
 msgid "Constellations Art [R]"
 msgstr "ציורי קבוצות כוכבים [R]"
 
-#: src/stel_ui_conf.cpp:120
+#: src/deprecated/stel_ui_conf.cpp:123
 msgid "Constellations Boundaries"
 msgstr "גבולות קבוצות הכוכבים"
 
-#: src/stel_ui_conf.cpp:110
+#: src/deprecated/stel_ui_conf.cpp:113
 msgid "Constellations Lines"
 msgstr "קווי קבוצות הכוכבים"
 
-#: src/stel_ui_conf.cpp:115
+#: src/deprecated/stel_ui_conf.cpp:118
 msgid "Constellations Names"
 msgstr "שמות קבוצות הכוכבים"
 
@@ -408,19 +408,19 @@ msgstr "קרוקודיל"
 msgid "Crux"
 msgstr "הצלב הדרומי"
 
-#: src/stel_ui_conf.cpp:267
+#: src/deprecated/stel_ui_conf.cpp:270
 msgid "Current Time :"
 msgstr "זמן נוכחי:"
 
-#: src/stel_ui_conf.cpp:1142
+#: src/deprecated/stel_ui_conf.cpp:1082
 msgid "Current Time Speed is x"
 msgstr "מהירות זמן נוכחית היא X"
 
-#: src/stel_ui_conf.cpp:318
+#: src/deprecated/stel_ui_conf.cpp:321
 msgid "Cursor : "
 msgstr "סמן: "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/deprecated/stel_ui_tuiconf.cpp:451
 msgid "Cursor Timeout: "
 msgstr "גבול זמן לסמן: "
 
@@ -432,23 +432,23 @@ msgstr "מערך מעוקל"
 msgid "Cygnus"
 msgstr "ברבור"
 
-#: src/stel_ui_conf.cpp:558
+#: src/deprecated/stel_ui_conf.cpp:535
 msgid "Date & Time"
 msgstr "תאריך ושעה"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/deprecated/stel_ui_tuiconf.cpp:406
 msgid "Date Display Format: "
 msgstr "פורמט תאריך: "
 
-#: src/s_gui.cpp:2746
+#: src/deprecated/s_gui.cpp:2747
 msgid "Day"
 msgstr "יום"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/deprecated/stel_ui_tuiconf.cpp:398
 msgid "Day keys: "
 msgstr "מקשי יום: "
 
-#: src/stel_ui.cpp:715
+#: src/deprecated/stel_ui.cpp:719
 msgid "Decrease Time Speed [J]"
 msgstr "האט מהירות הזמן [J]"
 
@@ -460,7 +460,7 @@ msgstr "דימוס"
 msgid "Delphinus"
 msgstr "דולפין"
 
-#: src/stel_ui.cpp:784
+#: src/deprecated/stel_ui.cpp:788
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -492,11 +492,11 @@ msgstr "דיון"
 msgid "Dipper"
 msgstr "מצקת"
 
-#: src/stel_ui_conf.cpp:395
+#: src/deprecated/stel_ui_conf.cpp:398
 msgid "Disk Viewport"
 msgstr "אשנב דיסק"
 
-#: src/stel_ui.cpp:772
+#: src/deprecated/stel_ui.cpp:776
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -524,12 +524,12 @@ msgstr ""
 "4,: קו המילקה  5.: קו המשווה\n"
 "\n"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "מרחק: "
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Do"
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr "כלבים"
 msgid "Dolphin"
 msgstr "דולפין"
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Done"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr "דג זהב"
 msgid "Draco"
 msgstr "דרקון"
 
-#: src/stel_ui.cpp:668
+#: src/deprecated/stel_ui.cpp:672
 msgid "Drawing of the Constellations [C]"
 msgstr "קווים של קבוצות הכוכבים [C]"
 
@@ -573,7 +573,7 @@ msgstr "תוף"
 msgid "Drumstick"
 msgstr "מקל תיפוף"
 
-#: src/stel_ui.cpp:800
+#: src/deprecated/stel_ui.cpp:804
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -585,7 +585,7 @@ msgstr ""
 "6 : השהה סקריפט K : המשך הרצת סקריפט\n"
 "\n"
 
-#: src/translations.h:65 src/s_gui.cpp:2690
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "מז'"
 
@@ -601,11 +601,11 @@ msgstr "מקדש אל האדמה"
 msgid "Eastern Door"
 msgstr "דלת מזרחית"
 
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
 msgid "Ecliptic Line"
 msgstr "קו מלקה"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/deprecated/stel_ui_tuiconf.cpp:383
 msgid "Effects "
 msgstr "אפקטים "
 
@@ -629,27 +629,28 @@ msgstr "מחנה"
 msgid "Enceladus"
 msgstr "אנקלדוס"
 
-#: src/stel_ui_conf.cpp:880
+#: src/deprecated/stel_ui_conf.cpp:842
 msgid "Enter observatory name"
 msgstr "הכנס שם מצפה"
 
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr "משוואת הזמן"
 
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
 msgid "Equator Line"
 msgstr "קו המשווה"
 
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
 msgid "Equatorial Grid"
 msgstr "רשת משוונית"
 
-#: src/stel_ui.cpp:676
+#: src/deprecated/stel_ui.cpp:680
 msgid "Equatorial Grid [E]"
 msgstr "רשת מישוונית [E]"
 
-#: src/stel_ui.cpp:688
+#: src/deprecated/stel_ui.cpp:692
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "חצובה משוונית/אזימוטלית [ENTER]"
 
@@ -661,7 +662,7 @@ msgstr "סוסון"
 msgid "Eridanus"
 msgstr "ארידנוס (נהר)"
 
-#: src/stel_ui.cpp:1047
+#: src/deprecated/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "שגיאה: לא ניתן לפתוח את קובץ הסקריפט כדי להקליט פקודות."
 
@@ -709,11 +710,11 @@ msgstr "חמישה מלכים פאודלים"
 msgid "Flail"
 msgstr "מחבט"
 
-#: src/stel_ui.cpp:707
+#: src/deprecated/stel_ui.cpp:711
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "הפוך אופקית [Ctrl + Shift + H]"
 
-#: src/stel_ui.cpp:709
+#: src/deprecated/stel_ui.cpp:713
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "הפוך אנכית [Ctrl + Shift + V]"
 
@@ -725,13 +726,9 @@ msgstr "להק"
 msgid "Flying Corridor"
 msgstr "מסדרון מעופף"
 
-#: src/stel_ui_conf.cpp:225
+#: src/deprecated/stel_ui_conf.cpp:228
 msgid "Fog"
 msgstr "ערפל"
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "לרזולוצייה שלא ברשימה, ערוך את הקובץ:"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -749,7 +746,7 @@ msgstr "ארבעה ערוצים"
 msgid "Frigate Bird"
 msgstr "פריגטה"
 
-#: src/stel_ui_conf.cpp:733
+#: src/deprecated/stel_ui_conf.cpp:695
 msgid "GO"
 msgstr "לך"
 
@@ -761,7 +758,7 @@ msgstr "גנימד"
 msgid "Gemini"
 msgstr "תאומים"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/deprecated/stel_ui_tuiconf.cpp:380
 msgid "General "
 msgstr "כללי "
 
@@ -781,7 +778,7 @@ msgstr "נערה"
 msgid "Good Gourd"
 msgstr "דלעת טרייה"
 
-#: src/stel_ui.cpp:705
+#: src/deprecated/stel_ui.cpp:709
 msgid "Goto selected object [SPACE]"
 msgstr "עקוב אחרי עצם נבחר [רווח]"
 
@@ -789,11 +786,11 @@ msgstr "עקוב אחרי עצם נבחר [רווח]"
 msgid "Great General"
 msgstr "גנרל גדול"
 
-#: src/stel_ui_conf.cpp:210
+#: src/deprecated/stel_ui_conf.cpp:213
 msgid "Ground"
 msgstr "אדמה"
 
-#: src/stel_ui.cpp:678
+#: src/deprecated/stel_ui.cpp:682
 msgid "Ground [G]"
 msgstr "אדמה [G]"
 
@@ -809,11 +806,11 @@ msgstr "יד"
 msgid "Heart"
 msgstr "לב"
 
-#: src/stel_ui.cpp:819
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "עזרה"
 
-#: src/stel_ui.cpp:686
+#: src/deprecated/stel_ui.cpp:690
 msgid "Help [H]"
 msgstr "עזרה [H]"
 
@@ -825,7 +822,7 @@ msgstr "הרקולס"
 msgid "Hippopotamus"
 msgstr "היפופוטם"
 
-#: src/stel_ui.cpp:1043
+#: src/deprecated/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "לחץ שוב על CTRL-R על מנת לעצור.\n"
 
@@ -845,7 +842,7 @@ msgstr "שעון מטוטלת"
 msgid "Horus"
 msgstr "הורוס"
 
-#: src/s_gui.cpp:2749
+#: src/deprecated/s_gui.cpp:2750
 msgid "Hour"
 msgstr "שעה"
 
@@ -873,7 +870,7 @@ msgstr "שומרים אימפריילים"
 msgid "Imperial Passageway"
 msgstr "מעבר אימפריילי"
 
-#: src/stel_ui.cpp:719
+#: src/deprecated/stel_ui.cpp:723
 msgid "Increase Time Speed [L]"
 msgstr "הגבר מהירות זמן [L]"
 
@@ -881,11 +878,11 @@ msgstr "הגבר מהירות זמן [L]"
 msgid "Indus"
 msgstr "אינדיאני"
 
-#: src/stel_ui_conf.cpp:1024
+#: src/deprecated/stel_ui_conf.cpp:964
 msgid "Info: "
 msgstr "מידע: "
 
-#: src/stel_ui.cpp:749
+#: src/deprecated/stel_ui.cpp:753
 msgid "Information"
 msgstr "מידע"
 
@@ -893,7 +890,7 @@ msgstr "מידע"
 msgid "Inuit"
 msgstr "אינואטים"
 
-#: src/stel_ui.cpp:588
+#: src/deprecated/stel_ui.cpp:602
 msgid "Invalid Script command"
 msgstr "פקודת SCRIPT לא חוקית"
 
@@ -901,7 +898,8 @@ msgstr "פקודת SCRIPT לא חוקית"
 msgid "Io"
 msgstr "איו"
 
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
@@ -953,23 +951,23 @@ msgstr "בסיס הנורה"
 msgid "Lance"
 msgstr "חנית"
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/deprecated/stel_ui_tuiconf.cpp:444
 msgid "Landscape: "
 msgstr "נוף: "
 
-#: src/stel_ui_conf.cpp:560
+#: src/deprecated/stel_ui_conf.cpp:537
 msgid "Landscapes"
 msgstr "נופים"
 
-#: src/stel_ui_conf.cpp:557
+#: src/deprecated/stel_ui_conf.cpp:534
 msgid "Language"
 msgstr "שפה"
 
-#: src/stel_ui_conf.cpp:336
+#: src/deprecated/stel_ui_conf.cpp:339
 msgid "Latitude : "
 msgstr "קו רוחב: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/deprecated/stel_ui_tuiconf.cpp:388
 msgid "Latitude: "
 msgstr "קו רוחב: "
 
@@ -997,7 +995,7 @@ msgstr "ארנבת"
 msgid "Libra"
 msgstr "מאזניים"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/deprecated/stel_ui_tuiconf.cpp:443
 msgid "Light Pollution Luminance: "
 msgstr "תאורת זיהום אור: "
 
@@ -1009,43 +1007,43 @@ msgstr "אריה"
 msgid "Lizard"
 msgstr "לטאה"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/deprecated/stel_ui_tuiconf.cpp:462
 msgid "Load Default Configuration: "
 msgstr "טען קונפיגורציית ברירת מחדל: "
 
-#: src/ConstellationMgr.cpp:334
+#: src/modules/ConstellationMgr.cpp:340
 msgid "Loading Constellation Art: "
 msgstr "טוען גרפיקת קבוצות כוכבים: "
 
-#: src/NebulaMgr.cpp:401
+#: src/modules/NebulaMgr.cpp:404
 msgid "Loading NGC catalog: "
 msgstr "טוען קטלוג NGC: "
 
-#: src/NebulaMgr.cpp:535
+#: src/modules/NebulaMgr.cpp:538
 msgid "Loading Nebula Textures:"
 msgstr "טוען טקסטורת ערפילית:"
 
-#: src/StarMgr.cpp:448
+#: src/modules/StarMgr.cpp:493
 msgid "Loading catalog "
 msgstr "טוען קטלוג "
 
-#: src/stel_ui_tuiconf.cpp:454
+#: src/deprecated/stel_ui_tuiconf.cpp:455
 msgid "Local Script: "
 msgstr "סקריפט מקומי: "
 
-#: src/stel_ui_conf.cpp:559
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "מיקום"
 
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
 msgid "Location: "
 msgstr "מיקום: ‏ "
 
-#: src/stel_ui_conf.cpp:328
+#: src/deprecated/stel_ui_conf.cpp:331
 msgid "Longitude : "
 msgstr "קו אורך: "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/deprecated/stel_ui_tuiconf.cpp:389
 msgid "Longitude: "
 msgstr "קו אורך: "
 
@@ -1061,17 +1059,18 @@ msgstr "לינכס"
 msgid "Lyra"
 msgstr "נבל"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Magnitude"
 msgstr "בהירות"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/deprecated/stel_ui_tuiconf.cpp:447
 msgid "Magnitude Scaling Multiplier: "
 msgstr "מכפיל סקאלת בהירות "
 
-#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "מגניטודה: "
 
@@ -1083,7 +1082,7 @@ msgstr "גבר עם כפות רגליים פשוקות"
 msgid "Man's Cart"
 msgstr "עגלת הגבר"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/deprecated/stel_ui_tuiconf.cpp:445
 msgid "Manual zoom: "
 msgstr "זום ידני: "
 
@@ -1107,11 +1106,11 @@ msgstr "קרס הדיג של מאווי"
 msgid "Mausoleum"
 msgstr "מבנה קבורה (מוזוליאום)"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/deprecated/stel_ui_tuiconf.cpp:420
 msgid "Maximum Magnitude to Label: "
 msgstr "שמות כוכבים עד בהירות: "
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/deprecated/stel_ui_tuiconf.cpp:449
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "עוצמת ערפילית מירבית לסימון: "
 
@@ -1127,11 +1126,11 @@ msgstr "הר השולחן"
 msgid "Mercury"
 msgstr "כוכב חמה"
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/deprecated/stel_ui_tuiconf.cpp:433
 msgid "Meridian Line"
 msgstr "המרידיאן"
 
-#: src/stel_ui_conf.cpp:1116
+#: src/deprecated/stel_ui_conf.cpp:1056
 msgid "Meteor zenith hourly rate"
 msgstr "קצב זניתי לשעה של מטאורים"
 
@@ -1139,7 +1138,7 @@ msgstr "קצב זניתי לשעה של מטאורים"
 msgid "Microscopium"
 msgstr "מיקרוסקופ"
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/deprecated/stel_ui_tuiconf.cpp:448
 msgid "Milky Way intensity: "
 msgstr "עוצמת הארה של שביל החלב: "
 
@@ -1147,11 +1146,11 @@ msgstr "עוצמת הארה של שביל החלב: "
 msgid "Mimas"
 msgstr "מימאס"
 
-#: src/s_gui.cpp:2752
+#: src/deprecated/s_gui.cpp:2753
 msgid "Minutes"
 msgstr "דקות"
 
-#: src/stel_ui.cpp:804
+#: src/deprecated/stel_ui.cpp:808
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1169,7 +1168,7 @@ msgstr ""
 msgid "Monoceros"
 msgstr "חד קרן"
 
-#: src/s_gui.cpp:2743
+#: src/deprecated/s_gui.cpp:2744
 msgid "Month"
 msgstr "חודש"
 
@@ -1177,7 +1176,7 @@ msgstr "חודש"
 msgid "Moon"
 msgstr "ירח"
 
-#: src/stel_ui_conf.cpp:165
+#: src/deprecated/stel_ui_conf.cpp:168
 msgid "Moon Scale"
 msgstr "סקלת ירח"
 
@@ -1189,7 +1188,7 @@ msgstr "מעגן"
 msgid "Mortar"
 msgstr "מרגמה"
 
-#: src/stel_ui.cpp:761
+#: src/deprecated/stel_ui.cpp:765
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1219,11 +1218,11 @@ msgstr ""
 msgid "Musca"
 msgstr "זבוב"
 
-#: src/translations.h:63 src/s_gui.cpp:2685
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "צ'"
 
-#: src/stel_ui.cpp:670
+#: src/deprecated/stel_ui.cpp:674
 msgid "Names of the Constellations [V]"
 msgstr "שמות קבוצות הכוכבים [V]"
 
@@ -1235,19 +1234,19 @@ msgstr "נבאחו"
 msgid "Navigator's Triangle"
 msgstr "משולש נווטים"
 
-#: src/stel_ui_tuiconf.cpp:438
+#: src/deprecated/stel_ui_tuiconf.cpp:439
 msgid "Nebula Circles"
 msgstr "מעגלי ערפיליות"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/deprecated/stel_ui_tuiconf.cpp:438
 msgid "Nebula Names"
 msgstr "שמות ערפיליות"
 
-#: src/stel_ui_conf.cpp:136
+#: src/deprecated/stel_ui_conf.cpp:139
 msgid "Nebulas Names. Up to mag :"
 msgstr "שמות ערפיליות. עד למגניטודה:"
 
-#: src/stel_ui.cpp:684
+#: src/deprecated/stel_ui.cpp:688
 msgid "Nebulas [N]"
 msgstr "ערפיליות [N]"
 
@@ -1263,12 +1262,13 @@ msgstr "נפטון"
 msgid "Net"
 msgstr "רשת"
 
-#: src/stel_ui.cpp:693
+#: src/deprecated/stel_ui.cpp:697
 msgid "Night (red) mode"
 msgstr "מצב לילה (אדום)"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
 msgid "No"
 msgstr "לא"
 
@@ -1288,15 +1288,15 @@ msgstr "נהר צפוני"
 msgid "Northern Dipper"
 msgstr "הטובל הצפוני"
 
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
 msgid "OK"
 msgstr "אישור"
 
-#: src/stel_ui_conf.cpp:708
+#: src/deprecated/stel_ui_conf.cpp:670
 msgid "Object Search"
 msgstr "חיפוש גרם שמיים"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Object Sizing Rule: "
 msgstr "כלל להגדלת עצם: "
 
@@ -1332,7 +1332,7 @@ msgstr "צמד כוכבים"
 msgid "Palace Gate"
 msgstr "שער ארמון"
 
-#: src/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:130
 msgid "Parallax: "
 msgstr "פרלקסה: "
 
@@ -1376,27 +1376,27 @@ msgstr "דגים"
 msgid "Piscis Austrinus"
 msgstr "דגים דרומיים"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/deprecated/stel_ui_tuiconf.cpp:430
 msgid "Planet Names"
 msgstr "שמות כוכבי לכת"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/deprecated/stel_ui_tuiconf.cpp:431
 msgid "Planet Orbits"
 msgstr "מסלולי כוכבי לכת"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/deprecated/stel_ui_tuiconf.cpp:432
 msgid "Planet Trails"
 msgstr "עקבות כוכבי לכת"
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
 msgid "Planet: "
 msgstr "כוכב לכת "
 
-#: src/stel_ui_conf.cpp:160
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "כוכבי לכת"
 
-#: src/stel_ui_conf.cpp:172
+#: src/deprecated/stel_ui_conf.cpp:175
 msgid "Planets Hints"
 msgstr "רמזים לכוכב לכת"
 
@@ -1404,7 +1404,7 @@ msgstr "רמזים לכוכב לכת"
 msgid "Pluto"
 msgstr "פלוטו"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Point"
 msgstr "נקודה"
 
@@ -1412,19 +1412,19 @@ msgstr "נקודה"
 msgid "Polynesian"
 msgstr "פולינזי"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/deprecated/stel_ui_tuiconf.cpp:401
 msgid "Preset Sky Time: "
 msgstr "זמן שמיים קבוע מראש: "
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/deprecated/stel_ui_tuiconf.cpp:404
 msgid "Preset Time"
 msgstr "זמן קבוע מראש"
 
-#: src/stel_ui_conf.cpp:502
+#: src/deprecated/stel_ui_conf.cpp:479
 msgid "Program Language: "
 msgstr "שפת תוכנה: "
 
-#: src/stel_ui_conf.cpp:376
+#: src/deprecated/stel_ui_conf.cpp:379
 msgid "Projection :"
 msgstr "הקרנה:"
 
@@ -1444,17 +1444,18 @@ msgstr "ארמון סגול"
 msgid "Pyxis"
 msgstr "מצפן"
 
-#: src/stel_ui.cpp:698
+#: src/deprecated/stel_ui.cpp:702
 msgid "Quit [CMD + Q]"
 msgstr "יציאה [CMD + Q]"
 
-#: src/stel_ui.cpp:696
+#: src/deprecated/stel_ui.cpp:700
 msgid "Quit [CTRL + Q]"
 msgstr "יציאה [CRTL + Q]"
 
-#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "עליה ישרה/נטיה "
 
@@ -1470,27 +1471,23 @@ msgstr "מסלול מרוצים"
 msgid "Ramparts"
 msgstr "ביצורים"
 
-#: src/stel_ui.cpp:717
+#: src/deprecated/stel_ui.cpp:721
 msgid "Real Time Speed [K]"
 msgstr "מהירות זמן נורמלית [K]"
 
-#: src/stel_ui.cpp:1041
+#: src/deprecated/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr "מקליט פקודות לקובץ סקריפט:\n"
 
-#: src/stel_ui_conf.cpp:562
+#: src/deprecated/stel_ui_conf.cpp:539
 msgid "Rendering"
 msgstr "עיבוד תמונה"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "אתחל תוכנה לשם"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "רשת"
 
-#: src/stel_ui.cpp:721
+#: src/deprecated/stel_ui.cpp:725
 msgid "Return to Current Time [8]"
 msgstr "חזור אל הזמן הנוכחי [8]"
 
@@ -1538,7 +1535,7 @@ msgstr "דלעת רקובה"
 msgid "Runners"
 msgstr "רצים"
 
-#: src/translations.h:64 src/s_gui.cpp:2686
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "ד'"
 
@@ -1562,20 +1559,20 @@ msgstr "סלמנדרה"
 msgid "Saturn"
 msgstr "שבתאי"
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/deprecated/stel_ui_tuiconf.cpp:463
 msgid "Save Current Configuration as Default: "
 msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
 
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
 msgid "Save as default"
 msgstr "שמור כברירת מחדל"
 
-#: src/stel_ui_conf.cpp:353
+#: src/deprecated/stel_ui_conf.cpp:356
 msgid "Save location"
 msgstr "שמור מיקום"
 
-#: src/stel_ui_conf.cpp:405
+#: src/deprecated/stel_ui_conf.cpp:408
 msgid "Saving settings will save current full screen status"
 msgstr "שמירת ההגדרות תשמור את מצב המסך כרגע"
 
@@ -1587,15 +1584,11 @@ msgstr "עקרב"
 msgid "Screen"
 msgstr "מסך"
 
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "רזולוציית מסך:"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
 msgid "Script commander"
 msgstr "פקד SCRIPT"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/deprecated/stel_ui_tuiconf.cpp:384
 msgid "Scripts "
 msgstr "סקריפטים "
 
@@ -1607,15 +1600,15 @@ msgstr "פסל"
 msgid "Scutum"
 msgstr "מגן"
 
-#: src/stel_ui_conf.cpp:715
+#: src/deprecated/stel_ui_conf.cpp:677
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "חפש את (לדוגמא: שבתאי, פולאריס, HP6218, אוריון, M31):"
 
-#: src/stel_ui.cpp:701
+#: src/deprecated/stel_ui.cpp:705
 msgid "Search for object [CTRL + F]"
 msgstr "חפש עצם [Ctrl + F]"
 
-#: src/s_gui.cpp:2755
+#: src/deprecated/s_gui.cpp:2756
 msgid "Seconds"
 msgstr "שניות"
 
@@ -1627,11 +1620,11 @@ msgstr "סק"
 msgid "Select and exit to run."
 msgstr "בחר וצא להרצה"
 
-#: src/stel_ui_conf.cpp:323
+#: src/deprecated/stel_ui_conf.cpp:326
 msgid "Selected : "
 msgstr "נבחר: "
 
-#: src/stel_ui_conf.cpp:125
+#: src/deprecated/stel_ui_conf.cpp:128
 msgid "Selected Constellation Only"
 msgstr "קבוצות כוכבים נבחרות בלבד"
 
@@ -1643,27 +1636,27 @@ msgstr "סלקיס"
 msgid "Serpens"
 msgstr "נחש"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/deprecated/stel_ui_tuiconf.cpp:378
 msgid "Set Location "
 msgstr "קבע מיקום "
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/deprecated/stel_ui_tuiconf.cpp:379
 msgid "Set Time "
 msgstr "קבע זמן "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/deprecated/stel_ui_tuiconf.cpp:397
 msgid "Set Time Zone: "
 msgstr "קבע אזור זמן: "
 
-#: src/stel_ui_tuiconf.cpp:465
+#: src/deprecated/stel_ui_tuiconf.cpp:466
 msgid "Set UI Locale: "
 msgstr "קבע שפת ממשק: "
 
-#: src/stel_ui_tuiconf.cpp:451
+#: src/deprecated/stel_ui_tuiconf.cpp:452
 msgid "Setting Landscape Sets Location: "
 msgstr "קביעת נוף קובעת את המיקום: "
 
-#: src/stel_ui_conf.cpp:481
+#: src/deprecated/stel_ui_conf.cpp:458
 msgid "Setting landscape updates the location"
 msgstr "קביעת הנוף תעדכן את המיקום"
 
@@ -1687,35 +1680,35 @@ msgstr "כבשה"
 msgid "Sheepfold"
 msgstr "גדרת כבשים"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/deprecated/stel_ui_tuiconf.cpp:418
 msgid "Show: "
 msgstr "הצג: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/deprecated/stel_ui_tuiconf.cpp:464
 msgid "Shut Down: "
 msgstr "כיבוי: "
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/deprecated/stel_ui_tuiconf.cpp:400
 msgid "Sidereal"
 msgstr "סידרי"
 
-#: src/Nebula.cpp:110
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "גודל: "
 
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
 msgid "Sky Culture: "
 msgstr "שמי תרבות: "
 
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
 msgid "Sky Language: "
 msgstr "שפת שמיים: "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/deprecated/stel_ui_tuiconf.cpp:402
 msgid "Sky Time At Start-up: "
 msgstr "זמן שמיים באתחול: "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/deprecated/stel_ui_tuiconf.cpp:396
 msgid "Sky Time: "
 msgstr "זמן שמיים: "
 
@@ -1723,7 +1716,7 @@ msgstr "זמן שמיים: "
 msgid "Snake"
 msgstr "נחש"
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/deprecated/stel_ui_tuiconf.cpp:391
 msgid "Solar System Body: "
 msgstr "עצם במערכת שמש: "
 
@@ -1743,7 +1736,7 @@ msgstr "נהר דרומי"
 msgid "Spear"
 msgstr "חנית"
 
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "סיווג ספקטרלי: "
 
@@ -1759,23 +1752,23 @@ msgstr "אסם מרובע"
 msgid "Star"
 msgstr "כוכב"
 
-#: src/stel_ui_conf.cpp:82
+#: src/deprecated/stel_ui_conf.cpp:85
 msgid "Star Names. Up to mag :"
 msgstr "שמות כוכבים. עד מגניטודה:"
 
-#: src/stel_ui_conf.cpp:94
+#: src/deprecated/stel_ui_conf.cpp:97
 msgid "Star Twinkle. Amount :"
 msgstr "הבהוב כוכבים. כמות:"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:419
 msgid "Star Value Multiplier: "
 msgstr "מכפיל ערך כוכבים "
 
-#: src/stel_ui_conf.cpp:77
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "כוכבים"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/deprecated/stel_ui_tuiconf.cpp:381
 msgid "Stars "
 msgstr "כוכבים "
 
@@ -1843,7 +1836,7 @@ msgstr "ציפור רעם"
 msgid "Thunderbolt"
 msgstr "ברק"
 
-#: src/stel_ui.cpp:792
+#: src/deprecated/stel_ui.cpp:796
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1860,15 +1853,15 @@ msgstr ""
 "K : קצב זמן נורמלי L : האץ את קצב הזמן\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/deprecated/stel_ui_tuiconf.cpp:405
 msgid "Time Display Format: "
 msgstr "פורמט זמן: "
 
-#: src/stel_ui_conf.cpp:276
+#: src/deprecated/stel_ui_conf.cpp:279
 msgid "Time Zone :"
 msgstr "אזור זמן:"
 
-#: src/stel_ui_conf.cpp:289
+#: src/deprecated/stel_ui_conf.cpp:292
 msgid "Time speed : "
 msgstr "מהירות זמן: "
 
@@ -1904,7 +1897,7 @@ msgstr "טוקאן"
 msgid "Turtle"
 msgstr "צב"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/deprecated/stel_ui_tuiconf.cpp:421
 msgid "Twinkling: "
 msgstr "הבהוב: "
 
@@ -1928,7 +1921,7 @@ msgstr "שתי קרני שמש"
 msgid "Two in Front"
 msgstr "השניים שמלפנים"
 
-#: src/Nebula.cpp:108
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "סוג: "
 
@@ -1936,7 +1929,7 @@ msgstr "סוג: "
 msgid "USB Script: "
 msgstr "סקריפט USB "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/deprecated/stel_ui_tuiconf.cpp:465
 msgid "Update me via Internet: "
 msgstr "עדכן אותי דרך אינטרנט: "
 
@@ -1952,7 +1945,7 @@ msgstr "הדובה הגדולה"
 msgid "Ursa Minor"
 msgstr "הדובה הקטנה"
 
-#: src/stel_ui_conf.cpp:297
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1962,7 +1955,7 @@ msgstr ""
 "   את מהירות הזמן.\n"
 "השתמש במקש K כדי לחזור למהירות זמן אמיתי."
 
-#: src/stel_ui_conf.cpp:280
+#: src/deprecated/stel_ui_conf.cpp:283
 msgid "Using System Default Time Zone"
 msgstr "משתמש באזור זמן ברירת המחדל של המערכת"
 
@@ -1974,11 +1967,11 @@ msgstr "מפרש"
 msgid "Venus"
 msgstr "נגה"
 
-#: src/stel_ui_conf.cpp:561
+#: src/deprecated/stel_ui_conf.cpp:538
 msgid "Video"
 msgstr "וידאו"
 
-#: src/stel_ui_conf.cpp:400
+#: src/deprecated/stel_ui_conf.cpp:403
 msgid "Viewport Distorter"
 msgstr "עיוות של נקודת המבט"
 
@@ -1998,7 +1991,7 @@ msgstr "דג מעופף"
 msgid "Vulpecula"
 msgstr "שועלון"
 
-#: src/translations.h:66 src/s_gui.cpp:2691
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "מע'"
 
@@ -2054,12 +2047,13 @@ msgstr "עגלת האישה"
 msgid "Xuanyuan"
 msgstr "שואניון"
 
-#: src/s_gui.cpp:2740
+#: src/deprecated/s_gui.cpp:2741
 msgid "Year"
 msgstr "שנה"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
 msgid "Yes"
 msgstr "כן"
 
@@ -2067,15 +2061,11 @@ msgstr "כן"
 msgid "Zaofu"
 msgstr "צאופו"
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/deprecated/stel_ui_tuiconf.cpp:450
 msgid "Zoom Duration: "
 msgstr "משך זמן לזום: "
 
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "שנה להחל."
-
-#: src/stel_ui_conf.cpp:350
+#: src/deprecated/stel_ui_conf.cpp:353
 msgid "m"
 msgstr ""
 
@@ -2132,6 +2122,9 @@ msgstr ""
 #~ "4:, קו המילקה 5.:קו המשווה\n"
 #~ "\n"
 
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr "לרזולוצייה שלא ברשימה, ערוך את הקובץ:"
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "טוען קטלוג היפקרוס:"
 
@@ -2142,8 +2135,14 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "מטאורים לדקה"
 
+#~ msgid "Restart program for"
+#~ msgstr "אתחל תוכנה לשם"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "חזור לזמן נוכחי"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "רזולוציית מסך:"
 
 #~ msgid "Search for object"
 #~ msgstr "חיפוש גרם שמיים"
@@ -2179,3 +2178,6 @@ msgstr ""
 #~ "Usage: %s [OPTION] ...\n"
 #~ " -v, --version          Output version information and exit.\n"
 #~ " -h, --help             Display this help and exit.\n"
+
+#~ msgid "change to apply."
+#~ msgstr "שנה להחל."
