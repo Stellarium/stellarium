@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 00:07+0100\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-09-27 14:34+0000\n"
 "Last-Translator: lmichnovic <ladislav.michnovic@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/stel_ui.cpp:730
+#: src/deprecated/stel_ui.cpp:734
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -27,47 +27,47 @@ msgstr ""
 "   chybové hlásenia s komentárom na http://www.stellarium.org\n"
 "\n"
 
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " svetelných rokov"
 
-#: src/stel_ui_conf.cpp:1104
+#: src/deprecated/stel_ui_conf.cpp:1044
 msgid ": Exceptional Leonid rate"
 msgstr ": Mimoriadna intenzita Leoníd"
 
-#: src/stel_ui_conf.cpp:1111
+#: src/deprecated/stel_ui_conf.cpp:1051
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Najvyššia známa intenzita (Leonidy 1966)"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/deprecated/stel_ui_conf.cpp:1030
 msgid ": Normal rate"
 msgstr ": Normálna intenzita"
 
-#: src/stel_ui_conf.cpp:1097
+#: src/deprecated/stel_ui_conf.cpp:1037
 msgid ": Standard Perseids rate"
 msgstr ": Štandardná intenzita Perzeíd"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/deprecated/stel_ui_tuiconf.cpp:403
 msgid "Actual Time"
 msgstr "Aktuálny čas"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/deprecated/stel_ui_tuiconf.cpp:385
 msgid "Administration "
 msgstr "Administrácia "
 
-#: src/stel_ui_conf.cpp:149
+#: src/deprecated/stel_ui_conf.cpp:152
 msgid "Also display Nebulas without textures"
 msgstr "Zobraziť aj hmloviny bez textúr"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/deprecated/stel_ui_tuiconf.cpp:390
 msgid "Altitude (m): "
 msgstr "Výška (m): "
 
-#: src/stel_ui_conf.cpp:344
+#: src/deprecated/stel_ui_conf.cpp:347
 msgid "Altitude : "
 msgstr "Výška : "
 
@@ -99,7 +99,7 @@ msgstr "Orol"
 msgid "Ara"
 msgstr "Oltár"
 
-#: src/s_tui.h:292
+#: src/deprecated/s_tui.h:292
 msgid "Are you sure ?"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Aries"
 msgstr "Baran"
 
-#: src/stel_ui_tuiconf.cpp:637
+#: src/deprecated/stel_ui_tuiconf.cpp:638
 msgid "Arrow down to load list."
 msgstr "Stlač šipku dolu pre nahratie zoznamu."
 
@@ -115,11 +115,11 @@ msgstr "Stlač šipku dolu pre nahratie zoznamu."
 msgid "Arsenal"
 msgstr "Zbrojnica"
 
-#: src/stel_ui_conf.cpp:220
+#: src/deprecated/stel_ui_conf.cpp:223
 msgid "Atmosphere"
 msgstr "Atmosféra"
 
-#: src/stel_ui.cpp:682
+#: src/deprecated/stel_ui.cpp:686
 msgid "Atmosphere [A]"
 msgstr "Atmosféra [A]"
 
@@ -131,20 +131,20 @@ msgstr "Povozník"
 msgid "Aurvandil's Toe"
 msgstr "Aurvandilov palec na nohe"
 
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Azimut/Výška: "
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
 msgid "Azimuthal Grid"
 msgstr "Azimutálna mriežka"
 
-#: src/stel_ui.cpp:674
+#: src/deprecated/stel_ui.cpp:678
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimutálna mriežka [Z]"
 
@@ -192,15 +192,15 @@ msgstr "Hrudná kosť"
 msgid "Bull's Foreleg"
 msgstr "Predné nohy býka"
 
-#: src/stel_ui_tuiconf.cpp:457
+#: src/deprecated/stel_ui_tuiconf.cpp:458
 msgid "CD/DVD Script: "
 msgstr "Skript z CD/DVD: "
 
-#: src/stel_ui.cpp:812
+#: src/deprecated/stel_ui.cpp:816
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Ukončiť\n"
 
-#: src/stel_ui.cpp:810
+#: src/deprecated/stel_ui.cpp:814
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Ukončiť\n"
 
@@ -208,7 +208,7 @@ msgstr "CTRL + Q : Ukončiť\n"
 msgid "Caelum"
 msgstr "Rydlo"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/deprecated/stel_ui_tuiconf.cpp:399
 msgid "Calendar"
 msgstr "Kalendár"
 
@@ -220,7 +220,7 @@ msgstr "Callisto"
 msgid "Camelopardalis"
 msgstr "Žirafa"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -244,11 +244,11 @@ msgstr "Malý pes"
 msgid "Capricornus"
 msgstr "Kozorožec"
 
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
 msgid "Cardinal Points"
 msgstr "Svetové strany"
 
-#: src/stel_ui.cpp:680
+#: src/deprecated/stel_ui.cpp:684
 msgid "Cardinal Points [Q]"
 msgstr "Svetové strany [Q]"
 
@@ -308,7 +308,7 @@ msgstr "Chematy"
 msgid "Chinese"
 msgstr "Čínska"
 
-#: src/stel_ui_conf.cpp:451
+#: src/deprecated/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "Zvoľ okolitú krajinu:"
 
@@ -328,7 +328,7 @@ msgstr "Zvinutý remeň"
 msgid "Collarbones"
 msgstr "Kľúčne kosti"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/deprecated/stel_ui_tuiconf.cpp:382
 msgid "Colors "
 msgstr "Farby "
 
@@ -340,47 +340,47 @@ msgstr "Holubica"
 msgid "Coma Berenices"
 msgstr "Vlasy Bereniky"
 
-#: src/stel_ui.cpp:1033
+#: src/deprecated/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "Záznamenávanie príkazov ukončené."
 
-#: src/stel_ui_conf.cpp:57
+#: src/deprecated/stel_ui_conf.cpp:60
 msgid "Configuration"
 msgstr "Nastavenia"
 
-#: src/stel_ui.cpp:690
+#: src/deprecated/stel_ui.cpp:694
 msgid "Configuration window [1]"
 msgstr "Okno s nastaveniami [1]"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/deprecated/stel_ui_tuiconf.cpp:427
 msgid "Constellation Art Intensity"
 msgstr "Intenzita kresieb súhvezdí"
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/deprecated/stel_ui_tuiconf.cpp:428
 msgid "Constellation Boundaries"
 msgstr "Hranice súhvezdí"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/deprecated/stel_ui_tuiconf.cpp:425
 msgid "Constellation Lines"
 msgstr "Čiary súhvezdí"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/deprecated/stel_ui_tuiconf.cpp:426
 msgid "Constellation Names"
 msgstr "Názvy súhvezdí"
 
-#: src/stel_ui.cpp:672
+#: src/deprecated/stel_ui.cpp:676
 msgid "Constellations Art [R]"
 msgstr "Kresby súhvezdí [R]"
 
-#: src/stel_ui_conf.cpp:120
+#: src/deprecated/stel_ui_conf.cpp:123
 msgid "Constellations Boundaries"
 msgstr "Hranice súhvezdí"
 
-#: src/stel_ui_conf.cpp:110
+#: src/deprecated/stel_ui_conf.cpp:113
 msgid "Constellations Lines"
 msgstr "čiary súhvezdí"
 
-#: src/stel_ui_conf.cpp:115
+#: src/deprecated/stel_ui_conf.cpp:118
 msgid "Constellations Names"
 msgstr "Názvy súhvezdí"
 
@@ -408,19 +408,19 @@ msgstr "Krokodíl"
 msgid "Crux"
 msgstr "Južný kríž"
 
-#: src/stel_ui_conf.cpp:267
+#: src/deprecated/stel_ui_conf.cpp:270
 msgid "Current Time :"
 msgstr "Aktuálny čas :"
 
-#: src/stel_ui_conf.cpp:1142
+#: src/deprecated/stel_ui_conf.cpp:1082
 msgid "Current Time Speed is x"
 msgstr "Rýchlosť času je x"
 
-#: src/stel_ui_conf.cpp:318
+#: src/deprecated/stel_ui_conf.cpp:321
 msgid "Cursor : "
 msgstr "Kurzor : "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/deprecated/stel_ui_tuiconf.cpp:451
 msgid "Cursor Timeout: "
 msgstr "Miznutie kurzora (sekundy): "
 
@@ -432,23 +432,23 @@ msgstr "Krivé pole"
 msgid "Cygnus"
 msgstr "Labuť"
 
-#: src/stel_ui_conf.cpp:558
+#: src/deprecated/stel_ui_conf.cpp:535
 msgid "Date & Time"
 msgstr "Dátum a čas"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/deprecated/stel_ui_tuiconf.cpp:406
 msgid "Date Display Format: "
 msgstr "Formát zobrazovania dátumu: "
 
-#: src/s_gui.cpp:2746
+#: src/deprecated/s_gui.cpp:2747
 msgid "Day"
 msgstr "deň"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/deprecated/stel_ui_tuiconf.cpp:398
 msgid "Day keys: "
 msgstr "Kľúče dní: "
 
-#: src/stel_ui.cpp:715
+#: src/deprecated/stel_ui.cpp:719
 msgid "Decrease Time Speed [J]"
 msgstr "Znížiť rýchlosť času [J]"
 
@@ -460,7 +460,7 @@ msgstr "Deimos"
 msgid "Delphinus"
 msgstr "Delfín"
 
-#: src/stel_ui.cpp:784
+#: src/deprecated/stel_ui.cpp:788
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -492,11 +492,11 @@ msgstr "Dione"
 msgid "Dipper"
 msgstr "Potápka"
 
-#: src/stel_ui_conf.cpp:395
+#: src/deprecated/stel_ui_conf.cpp:398
 msgid "Disk Viewport"
 msgstr "Orezať pohľad"
 
-#: src/stel_ui.cpp:772
+#: src/deprecated/stel_ui.cpp:776
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -524,12 +524,12 @@ msgstr ""
 "4 , : čiara ekliptiky   5 . : ekvatoriálna čiara\n"
 "\n"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Vzdialenosť: "
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Do"
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr "Psy"
 msgid "Dolphin"
 msgstr "Delfín"
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Done"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr "Mečiar"
 msgid "Draco"
 msgstr "Drak"
 
-#: src/stel_ui.cpp:668
+#: src/deprecated/stel_ui.cpp:672
 msgid "Drawing of the Constellations [C]"
 msgstr "Vykresliť súhvezdia [C]"
 
@@ -573,7 +573,7 @@ msgstr "Bubon"
 msgid "Drumstick"
 msgstr "Palička na bubnovanie"
 
-#: src/stel_ui.cpp:800
+#: src/deprecated/stel_ui.cpp:804
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -585,7 +585,7 @@ msgstr ""
 "6 : pozastaviť skript            K : pokračovat v skripte\n"
 "\n"
 
-#: src/translations.h:65 src/s_gui.cpp:2690
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "Východ"
 
@@ -601,11 +601,11 @@ msgstr "Chrám Boha Zeme"
 msgid "Eastern Door"
 msgstr "Východné dvere"
 
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
 msgid "Ecliptic Line"
 msgstr "čiara ekliptiky"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/deprecated/stel_ui_tuiconf.cpp:383
 msgid "Effects "
 msgstr "Efekty "
 
@@ -629,27 +629,28 @@ msgstr "Tábor"
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/stel_ui_conf.cpp:880
+#: src/deprecated/stel_ui_conf.cpp:842
 msgid "Enter observatory name"
 msgstr "Zadaj meno observatória"
 
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr "Ekvinokcium"
 
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
 msgid "Equator Line"
 msgstr "Rovníková čiara"
 
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
 msgid "Equatorial Grid"
 msgstr "Ekvatoriálna mriežka"
 
-#: src/stel_ui.cpp:676
+#: src/deprecated/stel_ui.cpp:680
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriálna mriežka [E]"
 
-#: src/stel_ui.cpp:688
+#: src/deprecated/stel_ui.cpp:692
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoriálna/Paralaktická montáž [ENTER]"
 
@@ -661,7 +662,7 @@ msgstr "Koník"
 msgid "Eridanus"
 msgstr "Eridanus"
 
-#: src/stel_ui.cpp:1047
+#: src/deprecated/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "Chyba: Nie je možné otvoriť skriptovací súbor pre zanamenávanie."
 
@@ -709,11 +710,11 @@ msgstr "Päť feudálnych kráľov"
 msgid "Flail"
 msgstr "Cep"
 
-#: src/stel_ui.cpp:707
+#: src/deprecated/stel_ui.cpp:711
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "Preklopiť horizontálne [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:709
+#: src/deprecated/stel_ui.cpp:713
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "Preklopiť vertikálne [CTRL + SHIFT + V]"
 
@@ -725,13 +726,9 @@ msgstr "Kŕdeľ"
 msgid "Flying Corridor"
 msgstr "Lietajúci koridór"
 
-#: src/stel_ui_conf.cpp:225
+#: src/deprecated/stel_ui_conf.cpp:228
 msgid "Fog"
 msgstr "Hmla"
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "Pre nezobrazené rozlíšenia obrazovky edituj súbor :"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -749,7 +746,7 @@ msgstr "Štyri kanály"
 msgid "Frigate Bird"
 msgstr "Fregata (vták)"
 
-#: src/stel_ui_conf.cpp:733
+#: src/deprecated/stel_ui_conf.cpp:695
 msgid "GO"
 msgstr "Choď"
 
@@ -761,7 +758,7 @@ msgstr "Ganymedes"
 msgid "Gemini"
 msgstr "Blíženci"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/deprecated/stel_ui_tuiconf.cpp:380
 msgid "General "
 msgstr "Hlavné "
 
@@ -781,7 +778,7 @@ msgstr "Dievča"
 msgid "Good Gourd"
 msgstr "Čerstvá tekvica"
 
-#: src/stel_ui.cpp:705
+#: src/deprecated/stel_ui.cpp:709
 msgid "Goto selected object [SPACE]"
 msgstr "Choď na vybraný objekt [MEDZERNÍK]"
 
@@ -789,11 +786,11 @@ msgstr "Choď na vybraný objekt [MEDZERNÍK]"
 msgid "Great General"
 msgstr "Veľký generál"
 
-#: src/stel_ui_conf.cpp:210
+#: src/deprecated/stel_ui_conf.cpp:213
 msgid "Ground"
 msgstr "Zem"
 
-#: src/stel_ui.cpp:678
+#: src/deprecated/stel_ui.cpp:682
 msgid "Ground [G]"
 msgstr "Zem [G]"
 
@@ -809,11 +806,11 @@ msgstr "Ruka"
 msgid "Heart"
 msgstr "Srdce"
 
-#: src/stel_ui.cpp:819
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "Nápoveda"
 
-#: src/stel_ui.cpp:686
+#: src/deprecated/stel_ui.cpp:690
 msgid "Help [H]"
 msgstr "Pomocník [H]"
 
@@ -825,7 +822,7 @@ msgstr "Herkules"
 msgid "Hippopotamus"
 msgstr "Hroch"
 
-#: src/stel_ui.cpp:1043
+#: src/deprecated/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Stlač CTRL-R opäť pre zastavenie.\n"
 
@@ -845,7 +842,7 @@ msgstr "Hodiny"
 msgid "Horus"
 msgstr "Horus"
 
-#: src/s_gui.cpp:2749
+#: src/deprecated/s_gui.cpp:2750
 msgid "Hour"
 msgstr "hodina"
 
@@ -873,7 +870,7 @@ msgstr "Cisárska stráž"
 msgid "Imperial Passageway"
 msgstr "Cisárska cestička"
 
-#: src/stel_ui.cpp:719
+#: src/deprecated/stel_ui.cpp:723
 msgid "Increase Time Speed [L]"
 msgstr "Zvýšiť rýchlosť času [L]"
 
@@ -881,11 +878,11 @@ msgstr "Zvýšiť rýchlosť času [L]"
 msgid "Indus"
 msgstr "Indián"
 
-#: src/stel_ui_conf.cpp:1024
+#: src/deprecated/stel_ui_conf.cpp:964
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui.cpp:749
+#: src/deprecated/stel_ui.cpp:753
 msgid "Information"
 msgstr "Informácie"
 
@@ -893,7 +890,7 @@ msgstr "Informácie"
 msgid "Inuit"
 msgstr "Eskimácka"
 
-#: src/stel_ui.cpp:588
+#: src/deprecated/stel_ui.cpp:602
 msgid "Invalid Script command"
 msgstr "Nesprávny skriptovací príkaz"
 
@@ -901,7 +898,8 @@ msgstr "Nesprávny skriptovací príkaz"
 msgid "Io"
 msgstr "Io"
 
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
@@ -953,23 +951,23 @@ msgstr "Stojan pre lampáš"
 msgid "Lance"
 msgstr "Kopija"
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/deprecated/stel_ui_tuiconf.cpp:444
 msgid "Landscape: "
 msgstr "Terén: "
 
-#: src/stel_ui_conf.cpp:560
+#: src/deprecated/stel_ui_conf.cpp:537
 msgid "Landscapes"
 msgstr "Terén"
 
-#: src/stel_ui_conf.cpp:557
+#: src/deprecated/stel_ui_conf.cpp:534
 msgid "Language"
 msgstr "Jazyk"
 
-#: src/stel_ui_conf.cpp:336
+#: src/deprecated/stel_ui_conf.cpp:339
 msgid "Latitude : "
 msgstr "Zem.  šírka : "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/deprecated/stel_ui_tuiconf.cpp:388
 msgid "Latitude: "
 msgstr "Zemepisná šírka: "
 
@@ -997,7 +995,7 @@ msgstr "Zajac"
 msgid "Libra"
 msgstr "Váhy"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/deprecated/stel_ui_tuiconf.cpp:443
 msgid "Light Pollution Luminance: "
 msgstr "Jas svetelneho znečistenia: "
 
@@ -1009,43 +1007,43 @@ msgstr "Lev"
 msgid "Lizard"
 msgstr "Jašterica"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/deprecated/stel_ui_tuiconf.cpp:462
 msgid "Load Default Configuration: "
 msgstr "Nahraj pôvodné nastavenie: "
 
-#: src/ConstellationMgr.cpp:334
+#: src/modules/ConstellationMgr.cpp:340
 msgid "Loading Constellation Art: "
 msgstr "Nahrávam obrázky súhvezdí: "
 
-#: src/NebulaMgr.cpp:401
+#: src/modules/NebulaMgr.cpp:404
 msgid "Loading NGC catalog: "
 msgstr "Nahrávam katalóg NGC: "
 
-#: src/NebulaMgr.cpp:535
+#: src/modules/NebulaMgr.cpp:538
 msgid "Loading Nebula Textures:"
 msgstr "Nahrávam textúry hmlovín:"
 
-#: src/StarMgr.cpp:448
+#: src/modules/StarMgr.cpp:493
 msgid "Loading catalog "
 msgstr "Nahrávam katalóg "
 
-#: src/stel_ui_tuiconf.cpp:454
+#: src/deprecated/stel_ui_tuiconf.cpp:455
 msgid "Local Script: "
 msgstr "Lokálny Skript: "
 
-#: src/stel_ui_conf.cpp:559
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "Umiestnenie"
 
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
 msgid "Location: "
 msgstr "Miesto: "
 
-#: src/stel_ui_conf.cpp:328
+#: src/deprecated/stel_ui_conf.cpp:331
 msgid "Longitude : "
 msgstr "Zem. dĺžka : "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/deprecated/stel_ui_tuiconf.cpp:389
 msgid "Longitude: "
 msgstr "Zemepisná dĺžka: "
 
@@ -1061,17 +1059,18 @@ msgstr "Rys"
 msgid "Lyra"
 msgstr "Lýra"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Magnitude"
 msgstr "Magnitúda"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/deprecated/stel_ui_tuiconf.cpp:447
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Násobič mierky magnitúdy: "
 
-#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitúda: "
 
@@ -1083,7 +1082,7 @@ msgstr "Človek s roztiahnutými nohami"
 msgid "Man's Cart"
 msgstr "Mužský kočiar"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/deprecated/stel_ui_tuiconf.cpp:445
 msgid "Manual zoom: "
 msgstr "Ručné zväčšenie: "
 
@@ -1107,11 +1106,11 @@ msgstr "Mauiho udica"
 msgid "Mausoleum"
 msgstr "Mauzóleum"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/deprecated/stel_ui_tuiconf.cpp:420
 msgid "Maximum Magnitude to Label: "
 msgstr "Popisky iba do magnitúdy: "
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/deprecated/stel_ui_tuiconf.cpp:449
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Popisky hmlovín iba do magnitúdy: "
 
@@ -1127,11 +1126,11 @@ msgstr "Stolový vrch"
 msgid "Mercury"
 msgstr "Merkúr"
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/deprecated/stel_ui_tuiconf.cpp:433
 msgid "Meridian Line"
 msgstr "Poludník"
 
-#: src/stel_ui_conf.cpp:1116
+#: src/deprecated/stel_ui_conf.cpp:1056
 msgid "Meteor zenith hourly rate"
 msgstr "hod. intenzita meteorov"
 
@@ -1139,7 +1138,7 @@ msgstr "hod. intenzita meteorov"
 msgid "Microscopium"
 msgstr "Mikroskop"
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/deprecated/stel_ui_tuiconf.cpp:448
 msgid "Milky Way intensity: "
 msgstr "Intenzita Mliečnej dráhy "
 
@@ -1147,11 +1146,11 @@ msgstr "Intenzita Mliečnej dráhy "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/s_gui.cpp:2752
+#: src/deprecated/s_gui.cpp:2753
 msgid "Minutes"
 msgstr "minúty"
 
-#: src/stel_ui.cpp:804
+#: src/deprecated/stel_ui.cpp:808
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1170,7 +1169,7 @@ msgstr ""
 msgid "Monoceros"
 msgstr "Jednorožec"
 
-#: src/s_gui.cpp:2743
+#: src/deprecated/s_gui.cpp:2744
 msgid "Month"
 msgstr "mesiac"
 
@@ -1178,7 +1177,7 @@ msgstr "mesiac"
 msgid "Moon"
 msgstr "Mesiac"
 
-#: src/stel_ui_conf.cpp:165
+#: src/deprecated/stel_ui_conf.cpp:168
 msgid "Moon Scale"
 msgstr "Mesačná škála"
 
@@ -1190,7 +1189,7 @@ msgstr "Prístavište"
 msgid "Mortar"
 msgstr "Mažiar"
 
-#: src/stel_ui.cpp:761
+#: src/deprecated/stel_ui.cpp:765
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1220,11 +1219,11 @@ msgstr ""
 msgid "Musca"
 msgstr "Mucha"
 
-#: src/translations.h:63 src/s_gui.cpp:2685
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "Sever"
 
-#: src/stel_ui.cpp:670
+#: src/deprecated/stel_ui.cpp:674
 msgid "Names of the Constellations [V]"
 msgstr "Názvy súhvezdí [V]"
 
@@ -1236,19 +1235,19 @@ msgstr "Navaho"
 msgid "Navigator's Triangle"
 msgstr "Trojuholník navigátora"
 
-#: src/stel_ui_tuiconf.cpp:438
+#: src/deprecated/stel_ui_tuiconf.cpp:439
 msgid "Nebula Circles"
 msgstr "Kruhy hmlovín"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/deprecated/stel_ui_tuiconf.cpp:438
 msgid "Nebula Names"
 msgstr "Názvy hmlovín"
 
-#: src/stel_ui_conf.cpp:136
+#: src/deprecated/stel_ui_conf.cpp:139
 msgid "Nebulas Names. Up to mag :"
 msgstr "Názvy hmlovín. Do magnitúdy :"
 
-#: src/stel_ui.cpp:684
+#: src/deprecated/stel_ui.cpp:688
 msgid "Nebulas [N]"
 msgstr "Hmloviny [N]"
 
@@ -1264,12 +1263,13 @@ msgstr "Neptún"
 msgid "Net"
 msgstr "Sieť"
 
-#: src/stel_ui.cpp:693
+#: src/deprecated/stel_ui.cpp:697
 msgid "Night (red) mode"
 msgstr "Nočný (červený) mód"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
 msgid "No"
 msgstr "Nie"
 
@@ -1289,15 +1289,15 @@ msgstr "Severná rieka"
 msgid "Northern Dipper"
 msgstr "Severná potápka"
 
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
 msgid "OK"
 msgstr "Potvrdiť"
 
-#: src/stel_ui_conf.cpp:708
+#: src/deprecated/stel_ui_conf.cpp:670
 msgid "Object Search"
 msgstr "Hľadanie Objektu"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Object Sizing Rule: "
 msgstr "Pravidlo pre zmenu veľkosti objektu: "
 
@@ -1333,7 +1333,7 @@ msgstr "Pár hviezd"
 msgid "Palace Gate"
 msgstr "Palácová brána"
 
-#: src/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:130
 msgid "Parallax: "
 msgstr "paralaxa: "
 
@@ -1377,27 +1377,27 @@ msgstr "Ryby"
 msgid "Piscis Austrinus"
 msgstr "Južná ryba"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/deprecated/stel_ui_tuiconf.cpp:430
 msgid "Planet Names"
 msgstr "Názvy planét"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/deprecated/stel_ui_tuiconf.cpp:431
 msgid "Planet Orbits"
 msgstr "Dráhy planét"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/deprecated/stel_ui_tuiconf.cpp:432
 msgid "Planet Trails"
 msgstr "Stopy planét"
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
 msgid "Planet: "
 msgstr "Planéta: "
 
-#: src/stel_ui_conf.cpp:160
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "Planéty"
 
-#: src/stel_ui_conf.cpp:172
+#: src/deprecated/stel_ui_conf.cpp:175
 msgid "Planets Hints"
 msgstr "Popisky planét"
 
@@ -1405,7 +1405,7 @@ msgstr "Popisky planét"
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Point"
 msgstr "Bod"
 
@@ -1413,19 +1413,19 @@ msgstr "Bod"
 msgid "Polynesian"
 msgstr "Polynézska"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/deprecated/stel_ui_tuiconf.cpp:401
 msgid "Preset Sky Time: "
 msgstr "Prednastavený čas oblohy: "
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/deprecated/stel_ui_tuiconf.cpp:404
 msgid "Preset Time"
 msgstr "Prednastaviť čas"
 
-#: src/stel_ui_conf.cpp:502
+#: src/deprecated/stel_ui_conf.cpp:479
 msgid "Program Language: "
 msgstr "Jazyk programu: "
 
-#: src/stel_ui_conf.cpp:376
+#: src/deprecated/stel_ui_conf.cpp:379
 msgid "Projection :"
 msgstr "Projekcia"
 
@@ -1445,17 +1445,18 @@ msgstr "Purpurový palác"
 msgid "Pyxis"
 msgstr "Kompas"
 
-#: src/stel_ui.cpp:698
+#: src/deprecated/stel_ui.cpp:702
 msgid "Quit [CMD + Q]"
 msgstr "Skončiť [PRÍKAZ + Q]"
 
-#: src/stel_ui.cpp:696
+#: src/deprecated/stel_ui.cpp:700
 msgid "Quit [CTRL + Q]"
 msgstr "Skončiť [CTRL + Q]"
 
-#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Rekt./Dekl.: "
 
@@ -1471,27 +1472,23 @@ msgstr "Bežecká dráha"
 msgid "Ramparts"
 msgstr "Hradby"
 
-#: src/stel_ui.cpp:717
+#: src/deprecated/stel_ui.cpp:721
 msgid "Real Time Speed [K]"
 msgstr "Reálna rýchlosť času [K]"
 
-#: src/stel_ui.cpp:1041
+#: src/deprecated/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr "Zaznamenávam príkazy do skriptovacieho súboru.\n"
 
-#: src/stel_ui_conf.cpp:562
+#: src/deprecated/stel_ui_conf.cpp:539
 msgid "Rendering"
 msgstr "Vykresľovanie"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "Reštartuj program,"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "Sieť"
 
-#: src/stel_ui.cpp:721
+#: src/deprecated/stel_ui.cpp:725
 msgid "Return to Current Time [8]"
 msgstr "Návrat na aktuálny čas [8]"
 
@@ -1539,7 +1536,7 @@ msgstr "Zhnitá tekvica"
 msgid "Runners"
 msgstr "Bežci"
 
-#: src/translations.h:64 src/s_gui.cpp:2686
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "Juh"
 
@@ -1563,20 +1560,20 @@ msgstr "Salamander"
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/deprecated/stel_ui_tuiconf.cpp:463
 msgid "Save Current Configuration as Default: "
 msgstr "Ulož aktuálne nastavenie ako štandardné: "
 
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
 msgid "Save as default"
 msgstr "Nastaviť ako predvolené"
 
-#: src/stel_ui_conf.cpp:353
+#: src/deprecated/stel_ui_conf.cpp:356
 msgid "Save location"
 msgstr "Uložiť miesto"
 
-#: src/stel_ui_conf.cpp:405
+#: src/deprecated/stel_ui_conf.cpp:408
 msgid "Saving settings will save current full screen status"
 msgstr "Uloženie nastavení uloží aj súčasný celoobrazovkový režim"
 
@@ -1588,15 +1585,11 @@ msgstr "Škorpión"
 msgid "Screen"
 msgstr "Obrazovka"
 
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "Rozlíšenie obrazovky :"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
 msgid "Script commander"
 msgstr "Skriptovací commander"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/deprecated/stel_ui_tuiconf.cpp:384
 msgid "Scripts "
 msgstr "Skripty "
 
@@ -1608,15 +1601,15 @@ msgstr "Sochár"
 msgid "Scutum"
 msgstr "Štít"
 
-#: src/stel_ui_conf.cpp:715
+#: src/deprecated/stel_ui_conf.cpp:677
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Hľadať (napr.: Venuša, Polaris, HP6218, Orión, M31):"
 
-#: src/stel_ui.cpp:701
+#: src/deprecated/stel_ui.cpp:705
 msgid "Search for object [CTRL + F]"
 msgstr "Hľadať objekt [CTRL + F]"
 
-#: src/s_gui.cpp:2755
+#: src/deprecated/s_gui.cpp:2756
 msgid "Seconds"
 msgstr "sekundy"
 
@@ -1628,11 +1621,11 @@ msgstr "Sek"
 msgid "Select and exit to run."
 msgstr "Vybrať. Po ukončení sa spustí."
 
-#: src/stel_ui_conf.cpp:323
+#: src/deprecated/stel_ui_conf.cpp:326
 msgid "Selected : "
 msgstr "Zvolené : "
 
-#: src/stel_ui_conf.cpp:125
+#: src/deprecated/stel_ui_conf.cpp:128
 msgid "Selected Constellation Only"
 msgstr "Iba vybrané súhvezdia"
 
@@ -1644,27 +1637,27 @@ msgstr "Selkis"
 msgid "Serpens"
 msgstr "Had"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/deprecated/stel_ui_tuiconf.cpp:378
 msgid "Set Location "
 msgstr "Nastav umiestnenie "
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/deprecated/stel_ui_tuiconf.cpp:379
 msgid "Set Time "
 msgstr "Nastav čas "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/deprecated/stel_ui_tuiconf.cpp:397
 msgid "Set Time Zone: "
 msgstr "Nastav časovú zónu: "
 
-#: src/stel_ui_tuiconf.cpp:465
+#: src/deprecated/stel_ui_tuiconf.cpp:466
 msgid "Set UI Locale: "
 msgstr "Nastav jazyk pre UI: "
 
-#: src/stel_ui_tuiconf.cpp:451
+#: src/deprecated/stel_ui_tuiconf.cpp:452
 msgid "Setting Landscape Sets Location: "
 msgstr "Nastavenie krajiny nastaví miesto: "
 
-#: src/stel_ui_conf.cpp:481
+#: src/deprecated/stel_ui_conf.cpp:458
 msgid "Setting landscape updates the location"
 msgstr "Nastavujem krajinu podľa miesta"
 
@@ -1688,35 +1681,35 @@ msgstr "Ovca"
 msgid "Sheepfold"
 msgstr "Salaš"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/deprecated/stel_ui_tuiconf.cpp:418
 msgid "Show: "
 msgstr "Ukázať: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/deprecated/stel_ui_tuiconf.cpp:464
 msgid "Shut Down: "
 msgstr "Vypnúť: "
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/deprecated/stel_ui_tuiconf.cpp:400
 msgid "Sidereal"
 msgstr "Siderický"
 
-#: src/Nebula.cpp:110
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "Veľkosť: "
 
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
 msgid "Sky Culture: "
 msgstr "Kultúra (týka sa súhvezdí): "
 
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
 msgid "Sky Language: "
 msgstr "Jazyk pre oblohu: "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/deprecated/stel_ui_tuiconf.cpp:402
 msgid "Sky Time At Start-up: "
 msgstr "čas oblohy na začiatku: "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/deprecated/stel_ui_tuiconf.cpp:396
 msgid "Sky Time: "
 msgstr "Čas oblohy: "
 
@@ -1724,7 +1717,7 @@ msgstr "Čas oblohy: "
 msgid "Snake"
 msgstr "Had"
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/deprecated/stel_ui_tuiconf.cpp:391
 msgid "Solar System Body: "
 msgstr "Teleso Slnečnej sústavy: "
 
@@ -1744,7 +1737,7 @@ msgstr "Južná rieka"
 msgid "Spear"
 msgstr "Kopija"
 
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "Spektrálny typ: "
 
@@ -1760,23 +1753,23 @@ msgstr "Štvorcová sýpka"
 msgid "Star"
 msgstr "Hviezda"
 
-#: src/stel_ui_conf.cpp:82
+#: src/deprecated/stel_ui_conf.cpp:85
 msgid "Star Names. Up to mag :"
 msgstr "Názvy hviezd. Do magnitúdy :"
 
-#: src/stel_ui_conf.cpp:94
+#: src/deprecated/stel_ui_conf.cpp:97
 msgid "Star Twinkle. Amount :"
 msgstr "Mihotanie hviezd. Rozsah:"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:419
 msgid "Star Value Multiplier: "
 msgstr "Násobič  hodnoty hviezd: "
 
-#: src/stel_ui_conf.cpp:77
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "Hviezdy"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/deprecated/stel_ui_tuiconf.cpp:381
 msgid "Stars "
 msgstr "Hviezdy "
 
@@ -1844,7 +1837,7 @@ msgstr "Hromový vták"
 msgid "Thunderbolt"
 msgstr "Blesk"
 
-#: src/stel_ui.cpp:792
+#: src/deprecated/stel_ui.cpp:796
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1864,15 +1857,15 @@ msgstr ""
 "CTRL + - : o hodinu naspäť   CTRL + = : o hodinu dopredu\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/deprecated/stel_ui_tuiconf.cpp:405
 msgid "Time Display Format: "
 msgstr "Formát zobrazovania času: "
 
-#: src/stel_ui_conf.cpp:276
+#: src/deprecated/stel_ui_conf.cpp:279
 msgid "Time Zone :"
 msgstr "Časová zóna :"
 
-#: src/stel_ui_conf.cpp:289
+#: src/deprecated/stel_ui_conf.cpp:292
 msgid "Time speed : "
 msgstr "Rýchlosť plynutia času : "
 
@@ -1908,7 +1901,7 @@ msgstr "Tukan"
 msgid "Turtle"
 msgstr "Korytnačka"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/deprecated/stel_ui_tuiconf.cpp:421
 msgid "Twinkling: "
 msgstr "Mihotanie: "
 
@@ -1932,7 +1925,7 @@ msgstr "Dva slnečné lúče"
 msgid "Two in Front"
 msgstr "Dvojica vpredu"
 
-#: src/Nebula.cpp:108
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "Typ: "
 
@@ -1940,7 +1933,7 @@ msgstr "Typ: "
 msgid "USB Script: "
 msgstr "USB skript: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/deprecated/stel_ui_tuiconf.cpp:465
 msgid "Update me via Internet: "
 msgstr "Aktualizuj cez internet: "
 
@@ -1956,7 +1949,7 @@ msgstr "Veľká medvedica"
 msgid "Ursa Minor"
 msgstr "Malá medvedica"
 
-#: src/stel_ui_conf.cpp:297
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1966,7 +1959,7 @@ msgstr ""
 "klávesou L zvýšite rýchlosť plynutia času.\n"
 "Klávesou K nastavíte reálnu rýchlosť plynutia času."
 
-#: src/stel_ui_conf.cpp:280
+#: src/deprecated/stel_ui_conf.cpp:283
 msgid "Using System Default Time Zone"
 msgstr "Používam systémom predvolenú časovú zónu"
 
@@ -1978,11 +1971,11 @@ msgstr "Plachty"
 msgid "Venus"
 msgstr "Venuša"
 
-#: src/stel_ui_conf.cpp:561
+#: src/deprecated/stel_ui_conf.cpp:538
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:400
+#: src/deprecated/stel_ui_conf.cpp:403
 msgid "Viewport Distorter"
 msgstr "Zakrivenie pohľadu"
 
@@ -2002,7 +1995,7 @@ msgstr "Lietajúca ryba"
 msgid "Vulpecula"
 msgstr "Líška"
 
-#: src/translations.h:66 src/s_gui.cpp:2691
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "Západ"
 
@@ -2058,12 +2051,13 @@ msgstr "Ženský kočiar"
 msgid "Xuanyuan"
 msgstr "Xuanyuan"
 
-#: src/s_gui.cpp:2740
+#: src/deprecated/s_gui.cpp:2741
 msgid "Year"
 msgstr "rok"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
 msgid "Yes"
 msgstr "Áno"
 
@@ -2071,15 +2065,11 @@ msgstr "Áno"
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/deprecated/stel_ui_tuiconf.cpp:450
 msgid "Zoom Duration: "
 msgstr "Trvanie zväčšenia: "
 
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "aby sa zmeny použili."
-
-#: src/stel_ui_conf.cpp:350
+#: src/deprecated/stel_ui_conf.cpp:353
 msgid "m"
 msgstr ""
 
@@ -2141,6 +2131,9 @@ msgstr ""
 #~ msgid "Flip vertically"
 #~ msgstr "Zrkadliť vertikálne"
 
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr "Pre nezobrazené rozlíšenia obrazovky edituj súbor :"
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Nahrávam katalóg Hipparcos:"
 
@@ -2150,8 +2143,14 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Počet meteorov/min."
 
+#~ msgid "Restart program for"
+#~ msgstr "Reštartuj program,"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "Nastaviť súčasný čas [8]"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "Rozlíšenie obrazovky :"
 
 #~ msgid "Search for object"
 #~ msgstr "Hľadať objekt [CTRL + F]"
@@ -2187,3 +2186,6 @@ msgstr ""
 #~ "Použitie: %s [VOĽBA] ...\n"
 #~ " -v, --version Vypíše informáciu o verzii a skončí.\n"
 #~ " -h, --help Vypíše tento text a skončí.\n"
+
+#~ msgid "change to apply."
+#~ msgstr "aby sa zmeny použili."

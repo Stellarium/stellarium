@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 00:07+0100\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-12-06 02:13+0000\n"
 "Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/stel_ui.cpp:730
+#: src/deprecated/stel_ui.cpp:734
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -30,47 +30,47 @@ msgstr ""
 "    повідомлення про помилки в програмі на http://www.stellarium.org\n"
 "\n"
 
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " Світлові роки"
 
-#: src/stel_ui_conf.cpp:1104
+#: src/deprecated/stel_ui_conf.cpp:1044
 msgid ": Exceptional Leonid rate"
 msgstr ": Виняткова кількість Леонід"
 
-#: src/stel_ui_conf.cpp:1111
+#: src/deprecated/stel_ui_conf.cpp:1051
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Найбільша кількість Леонід (як у 1966)"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/deprecated/stel_ui_conf.cpp:1030
 msgid ": Normal rate"
 msgstr ": Нормальна"
 
-#: src/stel_ui_conf.cpp:1097
+#: src/deprecated/stel_ui_conf.cpp:1037
 msgid ": Standard Perseids rate"
 msgstr ": Стандартна кількість Персеїд"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "АО"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/deprecated/stel_ui_tuiconf.cpp:403
 msgid "Actual Time"
 msgstr "Справжній час"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/deprecated/stel_ui_tuiconf.cpp:385
 msgid "Administration "
 msgstr "Управління "
 
-#: src/stel_ui_conf.cpp:149
+#: src/deprecated/stel_ui_conf.cpp:152
 msgid "Also display Nebulas without textures"
 msgstr "Також показувати туманності без текстур"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/deprecated/stel_ui_tuiconf.cpp:390
 msgid "Altitude (m): "
 msgstr "Висота (m): "
 
-#: src/stel_ui_conf.cpp:344
+#: src/deprecated/stel_ui_conf.cpp:347
 msgid "Altitude : "
 msgstr "Висота : "
 
@@ -103,7 +103,7 @@ msgstr "Орел"
 msgid "Ara"
 msgstr "Жертівник"
 
-#: src/s_tui.h:292
+#: src/deprecated/s_tui.h:292
 msgid "Are you sure ?"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Aries"
 msgstr "Овен"
 
-#: src/stel_ui_tuiconf.cpp:637
+#: src/deprecated/stel_ui_tuiconf.cpp:638
 msgid "Arrow down to load list."
 msgstr "Стрілка донизу для завантаження списку"
 
@@ -119,11 +119,11 @@ msgstr "Стрілка донизу для завантаження списку
 msgid "Arsenal"
 msgstr "Арсенал"
 
-#: src/stel_ui_conf.cpp:220
+#: src/deprecated/stel_ui_conf.cpp:223
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/stel_ui.cpp:682
+#: src/deprecated/stel_ui.cpp:686
 msgid "Atmosphere [A]"
 msgstr "Атмосфера [A]"
 
@@ -135,20 +135,20 @@ msgstr "Візничий"
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Азимут/Висота: "
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
 msgid "Azimuthal Grid"
 msgstr "Азимутна сітка"
 
-#: src/stel_ui.cpp:674
+#: src/deprecated/stel_ui.cpp:678
 msgid "Azimuthal Grid [Z]"
 msgstr "Азимутальна сітка [Z]"
 
@@ -196,15 +196,15 @@ msgstr ""
 msgid "Bull's Foreleg"
 msgstr "Передня нога бика"
 
-#: src/stel_ui_tuiconf.cpp:457
+#: src/deprecated/stel_ui_tuiconf.cpp:458
 msgid "CD/DVD Script: "
 msgstr "Сценарій CD/DVD: "
 
-#: src/stel_ui.cpp:812
+#: src/deprecated/stel_ui.cpp:816
 msgid "CMD + Q : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:810
+#: src/deprecated/stel_ui.cpp:814
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Вихід\n"
 
@@ -212,7 +212,7 @@ msgstr "CTRL + Q : Вихід\n"
 msgid "Caelum"
 msgstr "Різець"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/deprecated/stel_ui_tuiconf.cpp:399
 msgid "Calendar"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr "Калісто"
 msgid "Camelopardalis"
 msgstr "Жирафа"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
 msgid "Cancel"
 msgstr "Відміна"
 
@@ -248,11 +248,11 @@ msgstr "Малий Пес"
 msgid "Capricornus"
 msgstr "Козоріг"
 
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
 msgid "Cardinal Points"
 msgstr "Сторони світу"
 
-#: src/stel_ui.cpp:680
+#: src/deprecated/stel_ui.cpp:684
 msgid "Cardinal Points [Q]"
 msgstr "Сторони світу [Q]"
 
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Chinese"
 msgstr "Китайська"
 
-#: src/stel_ui_conf.cpp:451
+#: src/deprecated/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "Оберіть пейзажі:"
 
@@ -334,7 +334,7 @@ msgstr "Намотаний батіг"
 msgid "Collarbones"
 msgstr "Сузір'я"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/deprecated/stel_ui_tuiconf.cpp:382
 msgid "Colors "
 msgstr "Кольори "
 
@@ -346,47 +346,47 @@ msgstr "Голуб"
 msgid "Coma Berenices"
 msgstr "Волосся Вероніки"
 
-#: src/stel_ui.cpp:1033
+#: src/deprecated/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "Запис команди зупинено"
 
-#: src/stel_ui_conf.cpp:57
+#: src/deprecated/stel_ui_conf.cpp:60
 msgid "Configuration"
 msgstr "Конфіґурація"
 
-#: src/stel_ui.cpp:690
+#: src/deprecated/stel_ui.cpp:694
 msgid "Configuration window [1]"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/deprecated/stel_ui_tuiconf.cpp:427
 msgid "Constellation Art Intensity"
 msgstr "Яскравість малюнків сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/deprecated/stel_ui_tuiconf.cpp:428
 msgid "Constellation Boundaries"
 msgstr "Межі сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/deprecated/stel_ui_tuiconf.cpp:425
 msgid "Constellation Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/deprecated/stel_ui_tuiconf.cpp:426
 msgid "Constellation Names"
 msgstr "Назви сузір'їв"
 
-#: src/stel_ui.cpp:672
+#: src/deprecated/stel_ui.cpp:676
 msgid "Constellations Art [R]"
 msgstr "Малюнки сузір'їв [R]"
 
-#: src/stel_ui_conf.cpp:120
+#: src/deprecated/stel_ui_conf.cpp:123
 msgid "Constellations Boundaries"
 msgstr "Кордони сузір'їв"
 
-#: src/stel_ui_conf.cpp:110
+#: src/deprecated/stel_ui_conf.cpp:113
 msgid "Constellations Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/stel_ui_conf.cpp:115
+#: src/deprecated/stel_ui_conf.cpp:118
 msgid "Constellations Names"
 msgstr "Назви сузір'їв"
 
@@ -414,19 +414,19 @@ msgstr "Крокодил"
 msgid "Crux"
 msgstr "Хрест (Південний)"
 
-#: src/stel_ui_conf.cpp:267
+#: src/deprecated/stel_ui_conf.cpp:270
 msgid "Current Time :"
 msgstr "Поточний час :"
 
-#: src/stel_ui_conf.cpp:1142
+#: src/deprecated/stel_ui_conf.cpp:1082
 msgid "Current Time Speed is x"
 msgstr "Поточний коефіцієнт часу: x"
 
-#: src/stel_ui_conf.cpp:318
+#: src/deprecated/stel_ui_conf.cpp:321
 msgid "Cursor : "
 msgstr "Курсор: "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/deprecated/stel_ui_tuiconf.cpp:451
 msgid "Cursor Timeout: "
 msgstr "Затримка курсора: "
 
@@ -438,23 +438,23 @@ msgstr "Крива низка"
 msgid "Cygnus"
 msgstr "Лебідь"
 
-#: src/stel_ui_conf.cpp:558
+#: src/deprecated/stel_ui_conf.cpp:535
 msgid "Date & Time"
 msgstr "Дата та час"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/deprecated/stel_ui_tuiconf.cpp:406
 msgid "Date Display Format: "
 msgstr "Формат відображення дати: "
 
-#: src/s_gui.cpp:2746
+#: src/deprecated/s_gui.cpp:2747
 msgid "Day"
 msgstr "День"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/deprecated/stel_ui_tuiconf.cpp:398
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:715
+#: src/deprecated/stel_ui.cpp:719
 msgid "Decrease Time Speed [J]"
 msgstr "Зменшити швидкість часу [J]"
 
@@ -466,7 +466,7 @@ msgstr "Деймос"
 msgid "Delphinus"
 msgstr "Дельфін"
 
-#: src/stel_ui.cpp:784
+#: src/deprecated/stel_ui.cpp:788
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -490,12 +490,12 @@ msgstr "Діона"
 msgid "Dipper"
 msgstr "Ківш"
 
-#: src/stel_ui_conf.cpp:395
+#: src/deprecated/stel_ui_conf.cpp:398
 #, fuzzy
 msgid "Disk Viewport"
 msgstr "Круглий екран"
 
-#: src/stel_ui.cpp:772
+#: src/deprecated/stel_ui.cpp:776
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -511,12 +511,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Відстань: "
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Do"
 msgstr ""
 
@@ -533,7 +533,7 @@ msgstr "Пес"
 msgid "Dolphin"
 msgstr "Дельфін"
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Done"
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr "Золота Риба"
 msgid "Draco"
 msgstr "Дракон"
 
-#: src/stel_ui.cpp:668
+#: src/deprecated/stel_ui.cpp:672
 msgid "Drawing of the Constellations [C]"
 msgstr "Малюнок сузір'їв [C]"
 
@@ -562,7 +562,7 @@ msgstr "Барабан"
 msgid "Drumstick"
 msgstr "Барабанна паличка"
 
-#: src/stel_ui.cpp:800
+#: src/deprecated/stel_ui.cpp:804
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -574,7 +574,7 @@ msgstr ""
 "6 : Зупинити сценарій K : Продовжити сценарій\n"
 "\n"
 
-#: src/translations.h:65 src/s_gui.cpp:2690
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "Сх"
 
@@ -590,11 +590,11 @@ msgstr "Храм земного бога"
 msgid "Eastern Door"
 msgstr "Східні двері"
 
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
 msgid "Ecliptic Line"
 msgstr "Лінія екліптики"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/deprecated/stel_ui_tuiconf.cpp:383
 msgid "Effects "
 msgstr "Ефекти "
 
@@ -618,27 +618,28 @@ msgstr "Табір"
 msgid "Enceladus"
 msgstr "Енцелад"
 
-#: src/stel_ui_conf.cpp:880
+#: src/deprecated/stel_ui_conf.cpp:842
 msgid "Enter observatory name"
 msgstr "Введіть ім'я обсерваторії"
 
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
 msgid "Equator Line"
 msgstr "Лінія екватора"
 
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
 msgid "Equatorial Grid"
 msgstr "Екваторіальна сітка"
 
-#: src/stel_ui.cpp:676
+#: src/deprecated/stel_ui.cpp:680
 msgid "Equatorial Grid [E]"
 msgstr "Екваторіальна сітка [E]"
 
-#: src/stel_ui.cpp:688
+#: src/deprecated/stel_ui.cpp:692
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Екваторіальне/Азимутальне положення"
 
@@ -650,7 +651,7 @@ msgstr "Малий Кінь"
 msgid "Eridanus"
 msgstr "Ерідан"
 
-#: src/stel_ui.cpp:1047
+#: src/deprecated/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "Помилка: Не можу відкрити файл сценарію для запису команд."
 
@@ -698,11 +699,11 @@ msgstr "П'ять феодальних королів"
 msgid "Flail"
 msgstr "Ціп"
 
-#: src/stel_ui.cpp:707
+#: src/deprecated/stel_ui.cpp:711
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr ""
 
-#: src/stel_ui.cpp:709
+#: src/deprecated/stel_ui.cpp:713
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr ""
 
@@ -714,13 +715,9 @@ msgstr "Натовп"
 msgid "Flying Corridor"
 msgstr "Летючий коридор"
 
-#: src/stel_ui_conf.cpp:225
+#: src/deprecated/stel_ui_conf.cpp:228
 msgid "Fog"
 msgstr "Туман"
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "Щоб використати роздільні здатності поза списком, відредагуйте файл:"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -738,7 +735,7 @@ msgstr "Чотири канали"
 msgid "Frigate Bird"
 msgstr "Птаха Фрегат"
 
-#: src/stel_ui_conf.cpp:733
+#: src/deprecated/stel_ui_conf.cpp:695
 msgid "GO"
 msgstr "ПЕРЕЙТИ"
 
@@ -750,7 +747,7 @@ msgstr "Ґанімед"
 msgid "Gemini"
 msgstr "Близнюки"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/deprecated/stel_ui_tuiconf.cpp:380
 msgid "General "
 msgstr "Загальне "
 
@@ -770,7 +767,7 @@ msgstr "Дівчина"
 msgid "Good Gourd"
 msgstr "Хороший гарбуз"
 
-#: src/stel_ui.cpp:705
+#: src/deprecated/stel_ui.cpp:709
 msgid "Goto selected object [SPACE]"
 msgstr "Йти до виділеного об'єкту [ПРОПУСК]"
 
@@ -778,11 +775,11 @@ msgstr "Йти до виділеного об'єкту [ПРОПУСК]"
 msgid "Great General"
 msgstr "Великий генерал"
 
-#: src/stel_ui_conf.cpp:210
+#: src/deprecated/stel_ui_conf.cpp:213
 msgid "Ground"
 msgstr "Земля"
 
-#: src/stel_ui.cpp:678
+#: src/deprecated/stel_ui.cpp:682
 msgid "Ground [G]"
 msgstr "Земля [G]"
 
@@ -798,11 +795,11 @@ msgstr ""
 msgid "Heart"
 msgstr "Серце"
 
-#: src/stel_ui.cpp:819
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "Допомога"
 
-#: src/stel_ui.cpp:686
+#: src/deprecated/stel_ui.cpp:690
 msgid "Help [H]"
 msgstr "Допомога [H]"
 
@@ -814,7 +811,7 @@ msgstr "Геркулес"
 msgid "Hippopotamus"
 msgstr "Гіпопотам"
 
-#: src/stel_ui.cpp:1043
+#: src/deprecated/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Знову натисніть CTRL-R, щоб зупинити.\n"
 
@@ -834,7 +831,7 @@ msgstr "Годинник"
 msgid "Horus"
 msgstr "Horus (бог з головою сокола)"
 
-#: src/s_gui.cpp:2749
+#: src/deprecated/s_gui.cpp:2750
 msgid "Hour"
 msgstr "Година"
 
@@ -862,7 +859,7 @@ msgstr "Імперська ґвардія"
 msgid "Imperial Passageway"
 msgstr "Імперський прохід"
 
-#: src/stel_ui.cpp:719
+#: src/deprecated/stel_ui.cpp:723
 msgid "Increase Time Speed [L]"
 msgstr "Прискорити час [L]"
 
@@ -870,11 +867,11 @@ msgstr "Прискорити час [L]"
 msgid "Indus"
 msgstr "Індієць"
 
-#: src/stel_ui_conf.cpp:1024
+#: src/deprecated/stel_ui_conf.cpp:964
 msgid "Info: "
 msgstr "Інформація: "
 
-#: src/stel_ui.cpp:749
+#: src/deprecated/stel_ui.cpp:753
 msgid "Information"
 msgstr "Інформація"
 
@@ -883,7 +880,7 @@ msgstr "Інформація"
 msgid "Inuit"
 msgstr "Індієць"
 
-#: src/stel_ui.cpp:588
+#: src/deprecated/stel_ui.cpp:602
 msgid "Invalid Script command"
 msgstr "Непрацездатна команда сценарію"
 
@@ -891,7 +888,8 @@ msgstr "Непрацездатна команда сценарію"
 msgid "Io"
 msgstr "Іо"
 
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
@@ -945,23 +943,23 @@ msgstr ""
 msgid "Lance"
 msgstr "Спис"
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/deprecated/stel_ui_tuiconf.cpp:444
 msgid "Landscape: "
 msgstr "Ландшафт: "
 
-#: src/stel_ui_conf.cpp:560
+#: src/deprecated/stel_ui_conf.cpp:537
 msgid "Landscapes"
 msgstr "Пейзажі"
 
-#: src/stel_ui_conf.cpp:557
+#: src/deprecated/stel_ui_conf.cpp:534
 msgid "Language"
 msgstr "Мова"
 
-#: src/stel_ui_conf.cpp:336
+#: src/deprecated/stel_ui_conf.cpp:339
 msgid "Latitude : "
 msgstr "Широта: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/deprecated/stel_ui_tuiconf.cpp:388
 msgid "Latitude: "
 msgstr "Широта: "
 
@@ -989,7 +987,7 @@ msgstr "Заєць"
 msgid "Libra"
 msgstr "Ваги"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/deprecated/stel_ui_tuiconf.cpp:443
 msgid "Light Pollution Luminance: "
 msgstr ""
 
@@ -1002,44 +1000,44 @@ msgstr "Лев"
 msgid "Lizard"
 msgstr "Ящірка"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/deprecated/stel_ui_tuiconf.cpp:462
 msgid "Load Default Configuration: "
 msgstr "Завантажити типову конфіґурацію: "
 
-#: src/ConstellationMgr.cpp:334
+#: src/modules/ConstellationMgr.cpp:340
 msgid "Loading Constellation Art: "
 msgstr "Завантаження малюнка сузір'я: "
 
-#: src/NebulaMgr.cpp:401
+#: src/modules/NebulaMgr.cpp:404
 msgid "Loading NGC catalog: "
 msgstr "Завантаження каталогу NGC: "
 
-#: src/NebulaMgr.cpp:535
+#: src/modules/NebulaMgr.cpp:538
 msgid "Loading Nebula Textures:"
 msgstr "Завантаження текстур туманностей:"
 
-#: src/StarMgr.cpp:448
+#: src/modules/StarMgr.cpp:493
 #, fuzzy
 msgid "Loading catalog "
 msgstr "Завантаження каталогу NGC: "
 
-#: src/stel_ui_tuiconf.cpp:454
+#: src/deprecated/stel_ui_tuiconf.cpp:455
 msgid "Local Script: "
 msgstr "Локальний сценарій: "
 
-#: src/stel_ui_conf.cpp:559
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "Розташування"
 
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
 msgid "Location: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:328
+#: src/deprecated/stel_ui_conf.cpp:331
 msgid "Longitude : "
 msgstr "Довгота: "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/deprecated/stel_ui_tuiconf.cpp:389
 msgid "Longitude: "
 msgstr "Довгота: "
 
@@ -1055,17 +1053,18 @@ msgstr "Рись"
 msgid "Lyra"
 msgstr "Ліра"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Magnitude"
 msgstr "Величина"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/deprecated/stel_ui_tuiconf.cpp:447
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
-#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Величина: "
 
@@ -1077,7 +1076,7 @@ msgstr ""
 msgid "Man's Cart"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/deprecated/stel_ui_tuiconf.cpp:445
 msgid "Manual zoom: "
 msgstr "Ручний масштаб: "
 
@@ -1101,11 +1100,11 @@ msgstr "Риболовецький гачок Мауї"
 msgid "Mausoleum"
 msgstr "Мавзолей"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/deprecated/stel_ui_tuiconf.cpp:420
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимальна величина для напису: "
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/deprecated/stel_ui_tuiconf.cpp:449
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Максимальна величина туманності для напису: "
 
@@ -1121,11 +1120,11 @@ msgstr "Столова Гора"
 msgid "Mercury"
 msgstr "Меркурій"
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/deprecated/stel_ui_tuiconf.cpp:433
 msgid "Meridian Line"
 msgstr "Лінія зеніту"
 
-#: src/stel_ui_conf.cpp:1116
+#: src/deprecated/stel_ui_conf.cpp:1056
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
@@ -1133,7 +1132,7 @@ msgstr ""
 msgid "Microscopium"
 msgstr "Мікроскоп"
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/deprecated/stel_ui_tuiconf.cpp:448
 msgid "Milky Way intensity: "
 msgstr "Інтенсивність Чумацького шляху: "
 
@@ -1141,11 +1140,11 @@ msgstr "Інтенсивність Чумацького шляху: "
 msgid "Mimas"
 msgstr "Мімас"
 
-#: src/s_gui.cpp:2752
+#: src/deprecated/s_gui.cpp:2753
 msgid "Minutes"
 msgstr "Хвилини"
 
-#: src/stel_ui.cpp:804
+#: src/deprecated/stel_ui.cpp:808
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1158,7 +1157,7 @@ msgstr ""
 msgid "Monoceros"
 msgstr "Одноріг"
 
-#: src/s_gui.cpp:2743
+#: src/deprecated/s_gui.cpp:2744
 msgid "Month"
 msgstr "Місяць"
 
@@ -1166,7 +1165,7 @@ msgstr "Місяць"
 msgid "Moon"
 msgstr "Місяць"
 
-#: src/stel_ui_conf.cpp:165
+#: src/deprecated/stel_ui_conf.cpp:168
 msgid "Moon Scale"
 msgstr "Масштабування місяця"
 
@@ -1178,7 +1177,7 @@ msgstr "Причальний стовп"
 msgid "Mortar"
 msgstr "Ступка"
 
-#: src/stel_ui.cpp:761
+#: src/deprecated/stel_ui.cpp:765
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1208,11 +1207,11 @@ msgstr ""
 msgid "Musca"
 msgstr "Муха"
 
-#: src/translations.h:63 src/s_gui.cpp:2685
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "Пн"
 
-#: src/stel_ui.cpp:670
+#: src/deprecated/stel_ui.cpp:674
 msgid "Names of the Constellations [V]"
 msgstr "Імена сузір'їв [V]"
 
@@ -1225,19 +1224,19 @@ msgstr "Павич"
 msgid "Navigator's Triangle"
 msgstr "Трикутник Навігатора"
 
-#: src/stel_ui_tuiconf.cpp:438
+#: src/deprecated/stel_ui_tuiconf.cpp:439
 msgid "Nebula Circles"
 msgstr "Кільця туманностей"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/deprecated/stel_ui_tuiconf.cpp:438
 msgid "Nebula Names"
 msgstr "Імена туманностей"
 
-#: src/stel_ui_conf.cpp:136
+#: src/deprecated/stel_ui_conf.cpp:139
 msgid "Nebulas Names. Up to mag :"
 msgstr "Назви туманностей. До величини:"
 
-#: src/stel_ui.cpp:684
+#: src/deprecated/stel_ui.cpp:688
 msgid "Nebulas [N]"
 msgstr "Туманності [N]"
 
@@ -1253,12 +1252,13 @@ msgstr "Нептун"
 msgid "Net"
 msgstr "Мережа"
 
-#: src/stel_ui.cpp:693
+#: src/deprecated/stel_ui.cpp:697
 msgid "Night (red) mode"
 msgstr "Нічний режим"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
 msgid "No"
 msgstr "Ні"
 
@@ -1278,15 +1278,15 @@ msgstr "Північна ріка"
 msgid "Northern Dipper"
 msgstr "Північний ківш"
 
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
 msgid "OK"
 msgstr "Гаразд"
 
-#: src/stel_ui_conf.cpp:708
+#: src/deprecated/stel_ui_conf.cpp:670
 msgid "Object Search"
 msgstr "Пошук об'єкту"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Object Sizing Rule: "
 msgstr "Правило зміни розміру об'єкту: "
 
@@ -1322,7 +1322,7 @@ msgstr "Пара зірок"
 msgid "Palace Gate"
 msgstr "Ворота палацу"
 
-#: src/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:130
 #, fuzzy
 msgid "Parallax: "
 msgstr "Паралакс "
@@ -1367,27 +1367,27 @@ msgstr "Риби"
 msgid "Piscis Austrinus"
 msgstr "Південна Риба"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/deprecated/stel_ui_tuiconf.cpp:430
 msgid "Planet Names"
 msgstr "Імена планет"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/deprecated/stel_ui_tuiconf.cpp:431
 msgid "Planet Orbits"
 msgstr "Орбіти планет"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/deprecated/stel_ui_tuiconf.cpp:432
 msgid "Planet Trails"
 msgstr "Сліди від планет"
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
 msgid "Planet: "
 msgstr "Планета "
 
-#: src/stel_ui_conf.cpp:160
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "Планети"
 
-#: src/stel_ui_conf.cpp:172
+#: src/deprecated/stel_ui_conf.cpp:175
 msgid "Planets Hints"
 msgstr "Назви планет"
 
@@ -1395,7 +1395,7 @@ msgstr "Назви планет"
 msgid "Pluto"
 msgstr "Плутон"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Point"
 msgstr "Точка"
 
@@ -1403,19 +1403,19 @@ msgstr "Точка"
 msgid "Polynesian"
 msgstr "Полінезійська"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/deprecated/stel_ui_tuiconf.cpp:401
 msgid "Preset Sky Time: "
 msgstr "Встановлений астрономічний час: "
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/deprecated/stel_ui_tuiconf.cpp:404
 msgid "Preset Time"
 msgstr "Заданий час"
 
-#: src/stel_ui_conf.cpp:502
+#: src/deprecated/stel_ui_conf.cpp:479
 msgid "Program Language: "
 msgstr "Мова програми: "
 
-#: src/stel_ui_conf.cpp:376
+#: src/deprecated/stel_ui_conf.cpp:379
 #, fuzzy
 msgid "Projection :"
 msgstr "Розташування :"
@@ -1436,17 +1436,18 @@ msgstr "Фіолетовий палац"
 msgid "Pyxis"
 msgstr "Компас"
 
-#: src/stel_ui.cpp:698
+#: src/deprecated/stel_ui.cpp:702
 msgid "Quit [CMD + Q]"
 msgstr "Вихід [CMD + Q]"
 
-#: src/stel_ui.cpp:696
+#: src/deprecated/stel_ui.cpp:700
 msgid "Quit [CTRL + Q]"
 msgstr "Вихід [CTRL + Q]"
 
-#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Радіани/Градуси: "
 
@@ -1462,27 +1463,23 @@ msgstr ""
 msgid "Ramparts"
 msgstr "Твердині"
 
-#: src/stel_ui.cpp:717
+#: src/deprecated/stel_ui.cpp:721
 msgid "Real Time Speed [K]"
 msgstr "Реальна швидкість часу [K]"
 
-#: src/stel_ui.cpp:1041
+#: src/deprecated/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr "Запис команд до файлу сценарію:\n"
 
-#: src/stel_ui_conf.cpp:562
+#: src/deprecated/stel_ui_conf.cpp:539
 msgid "Rendering"
 msgstr "Промальовка"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "Перезапустіть програму для"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "Сітка"
 
-#: src/stel_ui.cpp:721
+#: src/deprecated/stel_ui.cpp:725
 msgid "Return to Current Time [8]"
 msgstr ""
 
@@ -1530,7 +1527,7 @@ msgstr "Гнилий гарбуз"
 msgid "Runners"
 msgstr ""
 
-#: src/translations.h:64 src/s_gui.cpp:2686
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "Пд"
 
@@ -1554,20 +1551,20 @@ msgstr ""
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/deprecated/stel_ui_tuiconf.cpp:463
 msgid "Save Current Configuration as Default: "
 msgstr "Зберегти поточну конфіґурацію як типову: "
 
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
 msgid "Save as default"
 msgstr "Зберегти як типове значення"
 
-#: src/stel_ui_conf.cpp:353
+#: src/deprecated/stel_ui_conf.cpp:356
 msgid "Save location"
 msgstr "Зберегти положення"
 
-#: src/stel_ui_conf.cpp:405
+#: src/deprecated/stel_ui_conf.cpp:408
 msgid "Saving settings will save current full screen status"
 msgstr ""
 
@@ -1579,15 +1576,11 @@ msgstr "Скорпіон"
 msgid "Screen"
 msgstr "Екран"
 
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "Роздільна здатність екрану:"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
 msgid "Script commander"
 msgstr "Командир сценарію"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/deprecated/stel_ui_tuiconf.cpp:384
 msgid "Scripts "
 msgstr "Сценарії "
 
@@ -1599,15 +1592,15 @@ msgstr "Скульптор"
 msgid "Scutum"
 msgstr "Щит"
 
-#: src/stel_ui_conf.cpp:715
+#: src/deprecated/stel_ui_conf.cpp:677
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Шукати (наприклад Сатурн, Полярна зірка, М31 тощо):"
 
-#: src/stel_ui.cpp:701
+#: src/deprecated/stel_ui.cpp:705
 msgid "Search for object [CTRL + F]"
 msgstr "Шукати об'єкт"
 
-#: src/s_gui.cpp:2755
+#: src/deprecated/s_gui.cpp:2756
 msgid "Seconds"
 msgstr "Секунди"
 
@@ -1619,11 +1612,11 @@ msgstr ""
 msgid "Select and exit to run."
 msgstr "Вибрати та вийти для перезапуску."
 
-#: src/stel_ui_conf.cpp:323
+#: src/deprecated/stel_ui_conf.cpp:326
 msgid "Selected : "
 msgstr "Вибране: "
 
-#: src/stel_ui_conf.cpp:125
+#: src/deprecated/stel_ui_conf.cpp:128
 msgid "Selected Constellation Only"
 msgstr "Тільки обране сузір'я"
 
@@ -1635,27 +1628,27 @@ msgstr ""
 msgid "Serpens"
 msgstr "Змія"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/deprecated/stel_ui_tuiconf.cpp:378
 msgid "Set Location "
 msgstr "Встановити місцезнаходження "
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/deprecated/stel_ui_tuiconf.cpp:379
 msgid "Set Time "
 msgstr "Встановити час "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/deprecated/stel_ui_tuiconf.cpp:397
 msgid "Set Time Zone: "
 msgstr "Встановити часовий пояс: "
 
-#: src/stel_ui_tuiconf.cpp:465
+#: src/deprecated/stel_ui_tuiconf.cpp:466
 msgid "Set UI Locale: "
 msgstr "Встановити локаль інтерфейсу: "
 
-#: src/stel_ui_tuiconf.cpp:451
+#: src/deprecated/stel_ui_tuiconf.cpp:452
 msgid "Setting Landscape Sets Location: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:481
+#: src/deprecated/stel_ui_conf.cpp:458
 msgid "Setting landscape updates the location"
 msgstr ""
 
@@ -1679,35 +1672,35 @@ msgstr "Вівця"
 msgid "Sheepfold"
 msgstr "Кошара"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/deprecated/stel_ui_tuiconf.cpp:418
 msgid "Show: "
 msgstr "Показ: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/deprecated/stel_ui_tuiconf.cpp:464
 msgid "Shut Down: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/deprecated/stel_ui_tuiconf.cpp:400
 msgid "Sidereal"
 msgstr ""
 
-#: src/Nebula.cpp:110
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "Розмір: "
 
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
 msgid "Sky Culture: "
 msgstr "Культура неба: "
 
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
 msgid "Sky Language: "
 msgstr "Мова неба: "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/deprecated/stel_ui_tuiconf.cpp:402
 msgid "Sky Time At Start-up: "
 msgstr "Астрономічний час при запуску: "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/deprecated/stel_ui_tuiconf.cpp:396
 msgid "Sky Time: "
 msgstr "Астрономічний час: "
 
@@ -1715,7 +1708,7 @@ msgstr "Астрономічний час: "
 msgid "Snake"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/deprecated/stel_ui_tuiconf.cpp:391
 #, fuzzy
 msgid "Solar System Body: "
 msgstr "Тіло із сонячної системи: "
@@ -1736,7 +1729,7 @@ msgstr "Південна ріка"
 msgid "Spear"
 msgstr "Спис"
 
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "Спектральний тип: "
 
@@ -1752,23 +1745,23 @@ msgstr "Прямокутна комора"
 msgid "Star"
 msgstr "Зірка"
 
-#: src/stel_ui_conf.cpp:82
+#: src/deprecated/stel_ui_conf.cpp:85
 msgid "Star Names. Up to mag :"
 msgstr "Назви зірок. До величини:"
 
-#: src/stel_ui_conf.cpp:94
+#: src/deprecated/stel_ui_conf.cpp:97
 msgid "Star Twinkle. Amount :"
 msgstr "Зоряне мерехтіння. Величина:"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:419
 msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:77
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "Зірки"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/deprecated/stel_ui_tuiconf.cpp:381
 msgid "Stars "
 msgstr "Зірки "
 
@@ -1837,7 +1830,7 @@ msgstr "Удар блискавки"
 msgid "Thunderbolt"
 msgstr "Удар блискавки"
 
-#: src/stel_ui.cpp:792
+#: src/deprecated/stel_ui.cpp:796
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1849,15 +1842,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/deprecated/stel_ui_tuiconf.cpp:405
 msgid "Time Display Format: "
 msgstr "Формат відображення часу: "
 
-#: src/stel_ui_conf.cpp:276
+#: src/deprecated/stel_ui_conf.cpp:279
 msgid "Time Zone :"
 msgstr "Часовий пояс :"
 
-#: src/stel_ui_conf.cpp:289
+#: src/deprecated/stel_ui_conf.cpp:292
 msgid "Time speed : "
 msgstr "Швидкість часу : "
 
@@ -1894,7 +1887,7 @@ msgstr "Тукан"
 msgid "Turtle"
 msgstr "Річкова черепаха"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/deprecated/stel_ui_tuiconf.cpp:421
 msgid "Twinkling: "
 msgstr "Мерехтіння: "
 
@@ -1919,7 +1912,7 @@ msgstr "Дві щелепи"
 msgid "Two in Front"
 msgstr ""
 
-#: src/Nebula.cpp:108
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "Тип: "
 
@@ -1927,7 +1920,7 @@ msgstr "Тип: "
 msgid "USB Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/deprecated/stel_ui_tuiconf.cpp:465
 msgid "Update me via Internet: "
 msgstr "Оновити мене через Інтернет: "
 
@@ -1943,7 +1936,7 @@ msgstr "Велика Ведмедиця"
 msgid "Ursa Minor"
 msgstr "Мала Ведмедиця"
 
-#: src/stel_ui_conf.cpp:297
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1953,7 +1946,7 @@ msgstr ""
 "   швидкості часу.\n"
 "K - повернення до реальної швидкості."
 
-#: src/stel_ui_conf.cpp:280
+#: src/deprecated/stel_ui_conf.cpp:283
 msgid "Using System Default Time Zone"
 msgstr "Використання типового системного часового поясу"
 
@@ -1965,11 +1958,11 @@ msgstr "Паруси"
 msgid "Venus"
 msgstr "Венера"
 
-#: src/stel_ui_conf.cpp:561
+#: src/deprecated/stel_ui_conf.cpp:538
 msgid "Video"
 msgstr "Відео"
 
-#: src/stel_ui_conf.cpp:400
+#: src/deprecated/stel_ui_conf.cpp:403
 msgid "Viewport Distorter"
 msgstr ""
 
@@ -1989,7 +1982,7 @@ msgstr "Летюча Риба"
 msgid "Vulpecula"
 msgstr "Лисичка"
 
-#: src/translations.h:66 src/s_gui.cpp:2691
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "Зх"
 
@@ -2045,12 +2038,13 @@ msgstr ""
 msgid "Xuanyuan"
 msgstr "Xuanyuan (Жовтий Імператор)"
 
-#: src/s_gui.cpp:2740
+#: src/deprecated/s_gui.cpp:2741
 msgid "Year"
 msgstr "Рік"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
 msgid "Yes"
 msgstr "Так"
 
@@ -2058,15 +2052,11 @@ msgstr "Так"
 msgid "Zaofu"
 msgstr "Тринога"
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/deprecated/stel_ui_tuiconf.cpp:450
 msgid "Zoom Duration: "
 msgstr "Трівалість збільшення: "
 
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "застосування змін."
-
-#: src/stel_ui_conf.cpp:350
+#: src/deprecated/stel_ui_conf.cpp:353
 msgid "m"
 msgstr ""
 
@@ -2151,6 +2141,10 @@ msgstr ""
 #~ "4 , : Лінія екліптики 5 . : Лінія екватора\n"
 #~ "\n"
 
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr ""
+#~ "Щоб використати роздільні здатності поза списком, відредагуйте файл:"
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Завантаження каталогу Hipparcos:"
 
@@ -2187,11 +2181,17 @@ msgstr ""
 #~ msgid "Planets & Moons"
 #~ msgstr "Планети & місяці"
 
+#~ msgid "Restart program for"
+#~ msgstr "Перезапустіть програму для"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "Повернення до поточного часу"
 
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "Збереження розташування %s до файлу %s\n"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "Роздільна здатність екрану:"
 
 #~ msgid "Search for object"
 #~ msgstr "Пошук об'єкту"
@@ -2227,6 +2227,9 @@ msgstr ""
 #~ "Використання: %s [ОПЦІЯ] ...\n"
 #~ " -v, --version         Виведення інформації про версію та вихід.\n"
 #~ " -h, --help             Відображення цієї допомоги та вихід.\n"
+
+#~ msgid "change to apply."
+#~ msgstr "застосування змін."
 
 #~ msgid "eg. 60718 (aCrux) or Canopus"
 #~ msgstr "наприклад 60718 (aCrux) або Канопус"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 00:07+0100\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-12-25 07:58+0000\n"
 "Last-Translator: Surin <surinbjn@yahoo.com>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
-#: src/stel_ui.cpp:730
+#: src/deprecated/stel_ui.cpp:734
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -29,47 +29,47 @@ msgstr ""
 "    และเสนอแนะเราที่: http://www.stellarium.org\n"
 "\n"
 
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " ปีแสง"
 
-#: src/stel_ui_conf.cpp:1104
+#: src/deprecated/stel_ui_conf.cpp:1044
 msgid ": Exceptional Leonid rate"
 msgstr "อัตราสูงเป็นพิเศษ (ฝนดาวตกลีโอนิดส์)"
 
-#: src/stel_ui_conf.cpp:1111
+#: src/deprecated/stel_ui_conf.cpp:1051
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr "อัตราสูงสุดในประวัติศาสตร์ (ฝนดาวตกลีโอนิดส์ ปี ค.ศ. 1966)"
 
-#: src/stel_ui_conf.cpp:1090
+#: src/deprecated/stel_ui_conf.cpp:1030
 msgid ": Normal rate"
 msgstr ": อัตราปกติ"
 
-#: src/stel_ui_conf.cpp:1097
+#: src/deprecated/stel_ui_conf.cpp:1037
 msgid ": Standard Perseids rate"
 msgstr ": อัตรามาตราฐาน (ฝนดาวตกเพอร์ซิดส์)"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "หน่วยดาราศาสตร์"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/deprecated/stel_ui_tuiconf.cpp:403
 msgid "Actual Time"
 msgstr "เวลาจริง"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/deprecated/stel_ui_tuiconf.cpp:385
 msgid "Administration "
 msgstr "ผู้บริหาร "
 
-#: src/stel_ui_conf.cpp:149
+#: src/deprecated/stel_ui_conf.cpp:152
 msgid "Also display Nebulas without textures"
 msgstr "แสดงตำแหน่งเนบิวลาโดยไม่ใส่ภาพ"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/deprecated/stel_ui_tuiconf.cpp:390
 msgid "Altitude (m): "
 msgstr "ระดับสูง (m): "
 
-#: src/stel_ui_conf.cpp:344
+#: src/deprecated/stel_ui_conf.cpp:347
 msgid "Altitude : "
 msgstr "มุมเงย "
 
@@ -101,7 +101,7 @@ msgstr "นกอินทรี"
 msgid "Ara"
 msgstr "แท่นบูชา"
 
-#: src/s_tui.h:292
+#: src/deprecated/s_tui.h:292
 msgid "Are you sure ?"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Aries"
 msgstr "แกะ"
 
-#: src/stel_ui_tuiconf.cpp:637
+#: src/deprecated/stel_ui_tuiconf.cpp:638
 msgid "Arrow down to load list."
 msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
 
@@ -117,11 +117,11 @@ msgstr "ใช้ลูกศรลงเพื่อโหลดรายกา
 msgid "Arsenal"
 msgstr "คลังแสง"
 
-#: src/stel_ui_conf.cpp:220
+#: src/deprecated/stel_ui_conf.cpp:223
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/stel_ui.cpp:682
+#: src/deprecated/stel_ui.cpp:686
 msgid "Atmosphere [A]"
 msgstr "บรรยากาศ [A]"
 
@@ -133,20 +133,20 @@ msgstr "สารถี"
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
 msgid "Author: "
 msgstr "ผู้สร้าง: "
 
-#: src/Nebula.cpp:106 src/Planet.cpp:125 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "มุมอะซิมุธ/มุมเงย "
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
 msgid "Azimuthal Grid"
 msgstr "กริดพิกัดอะซิมุธ"
 
-#: src/stel_ui.cpp:674
+#: src/deprecated/stel_ui.cpp:678
 msgid "Azimuthal Grid [Z]"
 msgstr "กริดพิกัดอะซิมุธ [Z]"
 
@@ -194,15 +194,15 @@ msgstr "กระดูกหน้าอก"
 msgid "Bull's Foreleg"
 msgstr "ขาหน้าของวัว"
 
-#: src/stel_ui_tuiconf.cpp:457
+#: src/deprecated/stel_ui_tuiconf.cpp:458
 msgid "CD/DVD Script: "
 msgstr "สคริปต์ CD/DVD: "
 
-#: src/stel_ui.cpp:812
+#: src/deprecated/stel_ui.cpp:816
 msgid "CMD + Q : Quit\n"
 msgstr "กด CTRL + Q : ออก\n"
 
-#: src/stel_ui.cpp:810
+#: src/deprecated/stel_ui.cpp:814
 msgid "CTRL + Q : Quit\n"
 msgstr "กด CTRL + Q : ออก\n"
 
@@ -210,7 +210,7 @@ msgstr "กด CTRL + Q : ออก\n"
 msgid "Caelum"
 msgstr "สิ่ว"
 
-#: src/stel_ui_tuiconf.cpp:398
+#: src/deprecated/stel_ui_tuiconf.cpp:399
 msgid "Calendar"
 msgstr "ปฏิทิน"
 
@@ -222,7 +222,7 @@ msgstr "คัสลิสโต"
 msgid "Camelopardalis"
 msgstr "ยีราฟ"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
 msgid "Cancel"
 msgstr "ยกเลิก"
 
@@ -246,11 +246,11 @@ msgstr "สุนัขเล็ก"
 msgid "Capricornus"
 msgstr "แพะทะเล"
 
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
 msgid "Cardinal Points"
 msgstr "ทิศ"
 
-#: src/stel_ui.cpp:680
+#: src/deprecated/stel_ui.cpp:684
 msgid "Cardinal Points [Q]"
 msgstr "แสดงตำแหน่งทิศ [Q]"
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Chinese"
 msgstr "จีน"
 
-#: src/stel_ui_conf.cpp:451
+#: src/deprecated/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "เลือกลักษณะภูมิประเทศ:"
 
@@ -330,7 +330,7 @@ msgstr "แส้เกลียว"
 msgid "Collarbones"
 msgstr "กระดูกไหปลาร้า"
 
-#: src/stel_ui_tuiconf.cpp:381
+#: src/deprecated/stel_ui_tuiconf.cpp:382
 msgid "Colors "
 msgstr "สี "
 
@@ -342,47 +342,47 @@ msgstr "นกเขา"
 msgid "Coma Berenices"
 msgstr "ผมของเบเรนิซ"
 
-#: src/stel_ui.cpp:1033
+#: src/deprecated/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "การบันทึกคำสั่งหยุด"
 
-#: src/stel_ui_conf.cpp:57
+#: src/deprecated/stel_ui_conf.cpp:60
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/stel_ui.cpp:690
+#: src/deprecated/stel_ui.cpp:694
 msgid "Configuration window [1]"
 msgstr "หน้าต่างปรับตั้งค่า [1]"
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/deprecated/stel_ui_tuiconf.cpp:427
 msgid "Constellation Art Intensity"
 msgstr "Intensity รูปวาดของกลุ่มดาว"
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/deprecated/stel_ui_tuiconf.cpp:428
 msgid "Constellation Boundaries"
 msgstr "อาณาเขตกลุ่มดาว"
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/deprecated/stel_ui_tuiconf.cpp:425
 msgid "Constellation Lines"
 msgstr "เส้นกลุ่มดาว"
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/deprecated/stel_ui_tuiconf.cpp:426
 msgid "Constellation Names"
 msgstr "ชื่อของกลุ่มดาว"
 
-#: src/stel_ui.cpp:672
+#: src/deprecated/stel_ui.cpp:676
 msgid "Constellations Art [R]"
 msgstr "รูปภาพกลุ่มดาว [R]"
 
-#: src/stel_ui_conf.cpp:120
+#: src/deprecated/stel_ui_conf.cpp:123
 msgid "Constellations Boundaries"
 msgstr "เขตกลุ่มดาว"
 
-#: src/stel_ui_conf.cpp:110
+#: src/deprecated/stel_ui_conf.cpp:113
 msgid "Constellations Lines"
 msgstr "เส้นกลุ่มดาว"
 
-#: src/stel_ui_conf.cpp:115
+#: src/deprecated/stel_ui_conf.cpp:118
 msgid "Constellations Names"
 msgstr "ชื่อกลุ่มดาว"
 
@@ -410,19 +410,19 @@ msgstr "จระเข้"
 msgid "Crux"
 msgstr "กางเขนใต้"
 
-#: src/stel_ui_conf.cpp:267
+#: src/deprecated/stel_ui_conf.cpp:270
 msgid "Current Time :"
 msgstr "เวลาปัจจุบัน :"
 
-#: src/stel_ui_conf.cpp:1142
+#: src/deprecated/stel_ui_conf.cpp:1082
 msgid "Current Time Speed is x"
 msgstr "ความเร็วของเวลาปัจจุบันคือ x"
 
-#: src/stel_ui_conf.cpp:318
+#: src/deprecated/stel_ui_conf.cpp:321
 msgid "Cursor : "
 msgstr "ตัวชี้เมาส์ : "
 
-#: src/stel_ui_tuiconf.cpp:450
+#: src/deprecated/stel_ui_tuiconf.cpp:451
 msgid "Cursor Timeout: "
 msgstr "Cursor Timeout: "
 
@@ -434,23 +434,23 @@ msgstr "แถวโค้ง"
 msgid "Cygnus"
 msgstr "หงส์"
 
-#: src/stel_ui_conf.cpp:558
+#: src/deprecated/stel_ui_conf.cpp:535
 msgid "Date & Time"
 msgstr "วันและเวลา"
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/deprecated/stel_ui_tuiconf.cpp:406
 msgid "Date Display Format: "
 msgstr "รูปแบบวันที่: "
 
-#: src/s_gui.cpp:2746
+#: src/deprecated/s_gui.cpp:2747
 msgid "Day"
 msgstr "วัน"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/deprecated/stel_ui_tuiconf.cpp:398
 msgid "Day keys: "
 msgstr ""
 
-#: src/stel_ui.cpp:715
+#: src/deprecated/stel_ui.cpp:719
 msgid "Decrease Time Speed [J]"
 msgstr "ลดความเร็วเวลา [J]"
 
@@ -462,7 +462,7 @@ msgstr "ดีมอส"
 msgid "Delphinus"
 msgstr "ปลาโลมา"
 
-#: src/stel_ui.cpp:784
+#: src/deprecated/stel_ui.cpp:788
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -494,11 +494,11 @@ msgstr "ไดโอเน"
 msgid "Dipper"
 msgstr "กระบวย"
 
-#: src/stel_ui_conf.cpp:395
+#: src/deprecated/stel_ui_conf.cpp:398
 msgid "Disk Viewport"
 msgstr "มุมมองแบบกล้องดูดาว"
 
-#: src/stel_ui.cpp:772
+#: src/deprecated/stel_ui.cpp:776
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -526,12 +526,12 @@ msgstr ""
 "4 , : เส้นสุริยวิถี 5 . : เส้นศูนย์สูตรฟ้า\n"
 "\n"
 
-#: src/Planet.cpp:128 src/Planet.cpp:167 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "ระยะห่าง: "
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Do"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr "ฝูงสุนัข"
 msgid "Dolphin"
 msgstr "โลมา"
 
-#: src/s_tui.h:275 src/s_tui.h:292
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
 msgid "Done"
 msgstr ""
 
@@ -559,7 +559,7 @@ msgstr "ปลาปากดาบ"
 msgid "Draco"
 msgstr "มังกร"
 
-#: src/stel_ui.cpp:668
+#: src/deprecated/stel_ui.cpp:672
 msgid "Drawing of the Constellations [C]"
 msgstr "เส้นรูปร่างกลุ่มดาว [C]"
 
@@ -575,7 +575,7 @@ msgstr "กลอง"
 msgid "Drumstick"
 msgstr "ไม้ตีกลอง"
 
-#: src/stel_ui.cpp:800
+#: src/deprecated/stel_ui.cpp:804
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -587,7 +587,7 @@ msgstr ""
 "6   : หยุดใช้ชุดคำสั่งชั่วคราว K   : ใช้ชุดคำสั่งต่อไป\n"
 "\n"
 
-#: src/translations.h:65 src/s_gui.cpp:2690
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "ตะวันออก"
 
@@ -603,11 +603,11 @@ msgstr "วิหารพระแม่ธรณี"
 msgid "Eastern Door"
 msgstr "ประตูตะวันออก"
 
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
 msgid "Ecliptic Line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/deprecated/stel_ui_tuiconf.cpp:383
 msgid "Effects "
 msgstr "เอฟเฟค "
 
@@ -631,27 +631,28 @@ msgstr "ค่ายพักแรม"
 msgid "Enceladus"
 msgstr "เอ็สเซลาดุส"
 
-#: src/stel_ui_conf.cpp:880
+#: src/deprecated/stel_ui_conf.cpp:842
 msgid "Enter observatory name"
 msgstr "กรอกชื่อของแหล่งสังเกตุการณ์"
 
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
 msgid "Equator Line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
 msgid "Equatorial Grid"
 msgstr "กริดพิกัดศูนย์สูตร"
 
-#: src/stel_ui.cpp:676
+#: src/deprecated/stel_ui.cpp:680
 msgid "Equatorial Grid [E]"
 msgstr "กริดพิกัดศูนย์สูตร [E]"
 
-#: src/stel_ui.cpp:688
+#: src/deprecated/stel_ui.cpp:692
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "ตั้งระดับเส้นศูนย์สูตรและอะซิมุท [ENTER]"
 
@@ -663,7 +664,7 @@ msgstr "ม้าแกลบ"
 msgid "Eridanus"
 msgstr "แม่น้ำ"
 
-#: src/stel_ui.cpp:1047
+#: src/deprecated/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "ผิดพลาด: ไม่สามารถเปิดไฟล์ชุดคำสั่งเพื่อบันทึก"
 
@@ -711,11 +712,11 @@ msgstr "ห้ากษัตริย์"
 msgid "Flail"
 msgstr "แส้"
 
-#: src/stel_ui.cpp:707
+#: src/deprecated/stel_ui.cpp:711
 msgid "Flip horizontally [CTRL + SHIFT + H]"
 msgstr "พลิกแผนที่ตามแนวนอน [CTRL + SHIFT + H]"
 
-#: src/stel_ui.cpp:709
+#: src/deprecated/stel_ui.cpp:713
 msgid "Flip vertically [CTRL + SHIFT + V]"
 msgstr "พลิกแผนที่ตามแนวตั้ง [CTRL + SHIFT + V]"
 
@@ -727,13 +728,9 @@ msgstr "ฝูงสัตว์"
 msgid "Flying Corridor"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:225
+#: src/deprecated/stel_ui_conf.cpp:228
 msgid "Fog"
 msgstr "หมอก"
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "สำหรับความละเอียดหน้าจอที่ไม่มีในรายการ, ให้ไปแก้ไขที่ไฟล์ :"
 
 #: src/translations.h:225
 msgid "Ford"
@@ -751,7 +748,7 @@ msgstr "คลองทั้งสี่"
 msgid "Frigate Bird"
 msgstr "นกทะเลฟรีเกต"
 
-#: src/stel_ui_conf.cpp:733
+#: src/deprecated/stel_ui_conf.cpp:695
 msgid "GO"
 msgstr "ไป"
 
@@ -763,7 +760,7 @@ msgstr "แกนีมีด"
 msgid "Gemini"
 msgstr "คนคู่"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/deprecated/stel_ui_tuiconf.cpp:380
 msgid "General "
 msgstr "ทั่วไป "
 
@@ -783,7 +780,7 @@ msgstr "หญิงสาว"
 msgid "Good Gourd"
 msgstr "น้ำเต้าสด"
 
-#: src/stel_ui.cpp:705
+#: src/deprecated/stel_ui.cpp:709
 msgid "Goto selected object [SPACE]"
 msgstr "ไปยังวัตถุที่เลือก [SPACE]"
 
@@ -791,11 +788,11 @@ msgstr "ไปยังวัตถุที่เลือก [SPACE]"
 msgid "Great General"
 msgstr "ขุนศึก"
 
-#: src/stel_ui_conf.cpp:210
+#: src/deprecated/stel_ui_conf.cpp:213
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/stel_ui.cpp:678
+#: src/deprecated/stel_ui.cpp:682
 msgid "Ground [G]"
 msgstr "พื้น [G]"
 
@@ -811,11 +808,11 @@ msgstr "มือ"
 msgid "Heart"
 msgstr "หัวใจ"
 
-#: src/stel_ui.cpp:819
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "ช่วยเหลือ"
 
-#: src/stel_ui.cpp:686
+#: src/deprecated/stel_ui.cpp:690
 msgid "Help [H]"
 msgstr "ช่วยเหลือ [H]"
 
@@ -827,7 +824,7 @@ msgstr "เฮอร์คิวลิส"
 msgid "Hippopotamus"
 msgstr "ฮิปโปโปเตมัส"
 
-#: src/stel_ui.cpp:1043
+#: src/deprecated/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "กด CTRL-R อีกครั้งเพื่อหยุด\n"
 
@@ -847,7 +844,7 @@ msgstr "นาฬิกา"
 msgid "Horus"
 msgstr "เทพโฮรัส"
 
-#: src/s_gui.cpp:2749
+#: src/deprecated/s_gui.cpp:2750
 msgid "Hour"
 msgstr "ชั่วโมง"
 
@@ -875,7 +872,7 @@ msgstr "ราชองครักษ์"
 msgid "Imperial Passageway"
 msgstr "เส้นทางเดินจักรพรรดิ์"
 
-#: src/stel_ui.cpp:719
+#: src/deprecated/stel_ui.cpp:723
 msgid "Increase Time Speed [L]"
 msgstr "เพิ่มความเร็วเวลา [L]"
 
@@ -883,11 +880,11 @@ msgstr "เพิ่มความเร็วเวลา [L]"
 msgid "Indus"
 msgstr "คนอินเดีย"
 
-#: src/stel_ui_conf.cpp:1024
+#: src/deprecated/stel_ui_conf.cpp:964
 msgid "Info: "
 msgstr "ข้อมูล: "
 
-#: src/stel_ui.cpp:749
+#: src/deprecated/stel_ui.cpp:753
 msgid "Information"
 msgstr "ข้อมูล"
 
@@ -895,7 +892,7 @@ msgstr "ข้อมูล"
 msgid "Inuit"
 msgstr "อินูอิท"
 
-#: src/stel_ui.cpp:588
+#: src/deprecated/stel_ui.cpp:602
 msgid "Invalid Script command"
 msgstr "ชุดคำสั่งบกพร่อง"
 
@@ -903,7 +900,8 @@ msgstr "ชุดคำสั่งบกพร่อง"
 msgid "Io"
 msgstr "ไอโอ"
 
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
@@ -955,23 +953,23 @@ msgstr "ฐานตะเกียง"
 msgid "Lance"
 msgstr "ทวน"
 
-#: src/stel_ui_tuiconf.cpp:443
+#: src/deprecated/stel_ui_tuiconf.cpp:444
 msgid "Landscape: "
 msgstr "ภูมิประเทศ: "
 
-#: src/stel_ui_conf.cpp:560
+#: src/deprecated/stel_ui_conf.cpp:537
 msgid "Landscapes"
 msgstr "ภูมิประเทศ"
 
-#: src/stel_ui_conf.cpp:557
+#: src/deprecated/stel_ui_conf.cpp:534
 msgid "Language"
 msgstr "ภาษา"
 
-#: src/stel_ui_conf.cpp:336
+#: src/deprecated/stel_ui_conf.cpp:339
 msgid "Latitude : "
 msgstr "ละติจูด : "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/deprecated/stel_ui_tuiconf.cpp:388
 msgid "Latitude: "
 msgstr "ละติจูด: "
 
@@ -999,7 +997,7 @@ msgstr "กระต่ายป่า"
 msgid "Libra"
 msgstr "คันชั่ง"
 
-#: src/stel_ui_tuiconf.cpp:442
+#: src/deprecated/stel_ui_tuiconf.cpp:443
 msgid "Light Pollution Luminance: "
 msgstr "ปริมาณมลภาวะทางแสง: "
 
@@ -1011,44 +1009,44 @@ msgstr "สิงโต"
 msgid "Lizard"
 msgstr "กิ้งก่า"
 
-#: src/stel_ui_tuiconf.cpp:461
+#: src/deprecated/stel_ui_tuiconf.cpp:462
 msgid "Load Default Configuration: "
 msgstr "โหลดค่ามาตรฐาน: "
 
-#: src/ConstellationMgr.cpp:334
+#: src/modules/ConstellationMgr.cpp:340
 #, fuzzy
 msgid "Loading Constellation Art: "
 msgstr "กำลังโหลดภาพกลุ่มดาว: "
 
-#: src/NebulaMgr.cpp:401
+#: src/modules/NebulaMgr.cpp:404
 msgid "Loading NGC catalog: "
 msgstr "กำลังโหลดฐานข้อมูล NGC: "
 
-#: src/NebulaMgr.cpp:535
+#: src/modules/NebulaMgr.cpp:538
 msgid "Loading Nebula Textures:"
 msgstr "กำลังโหลดภาพเนบิวลา่"
 
-#: src/StarMgr.cpp:448
+#: src/modules/StarMgr.cpp:493
 msgid "Loading catalog "
 msgstr "กำลังโหลดฐานข้อมูล "
 
-#: src/stel_ui_tuiconf.cpp:454
+#: src/deprecated/stel_ui_tuiconf.cpp:455
 msgid "Local Script: "
 msgstr "Local Script: "
 
-#: src/stel_ui_conf.cpp:559
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "ตำแหน่ง"
 
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
 msgid "Location: "
 msgstr "ตำแหน่ง: "
 
-#: src/stel_ui_conf.cpp:328
+#: src/deprecated/stel_ui_conf.cpp:331
 msgid "Longitude : "
 msgstr "ลองจิจูด : "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/deprecated/stel_ui_tuiconf.cpp:389
 msgid "Longitude: "
 msgstr "ลองจิจูด : "
 
@@ -1064,17 +1062,18 @@ msgstr "แมวป่า"
 msgid "Lyra"
 msgstr "พิณ"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Magnitude"
 msgstr "ความสว่าง"
 
-#: src/stel_ui_tuiconf.cpp:446
+#: src/deprecated/stel_ui_tuiconf.cpp:447
 msgid "Magnitude Scaling Multiplier: "
 msgstr "ค่าคงที่ของแมกนิจูดปรากฏ: "
 
-#: src/Nebula.cpp:98 src/Nebula.cpp:123 src/Planet.cpp:114 src/Planet.cpp:163
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "แมกนิจูดปรากฏ "
 
@@ -1086,7 +1085,7 @@ msgstr "คนกางขา"
 msgid "Man's Cart"
 msgstr "รถเข็นของชายหนุ่ม"
 
-#: src/stel_ui_tuiconf.cpp:444
+#: src/deprecated/stel_ui_tuiconf.cpp:445
 msgid "Manual zoom: "
 msgstr "ซูมด้วยมือ: "
 
@@ -1110,11 +1109,11 @@ msgstr "เบ็ดมาอุย"
 msgid "Mausoleum"
 msgstr "สุสาน"
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/deprecated/stel_ui_tuiconf.cpp:420
 msgid "Maximum Magnitude to Label: "
 msgstr "ความสว่างปรากฏน้อยที่สุดที่จะแสดงชื่อ "
 
-#: src/stel_ui_tuiconf.cpp:448
+#: src/deprecated/stel_ui_tuiconf.cpp:449
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "ความใหญ่ของเนบิวลาสูงสุดที่จะแสดงชื่อ: "
 
@@ -1130,11 +1129,11 @@ msgstr "ภูเขา"
 msgid "Mercury"
 msgstr "ดาวพุธ"
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/deprecated/stel_ui_tuiconf.cpp:433
 msgid "Meridian Line"
 msgstr "เส้นเมอริเดียน"
 
-#: src/stel_ui_conf.cpp:1116
+#: src/deprecated/stel_ui_conf.cpp:1056
 msgid "Meteor zenith hourly rate"
 msgstr "อัตราเมื่อจุดศูนย์กลางการตกอยู่เหนือศีรษะ"
 
@@ -1142,7 +1141,7 @@ msgstr "อัตราเมื่อจุดศูนย์กลางกา
 msgid "Microscopium"
 msgstr "กล้องจุลทรรศน์"
 
-#: src/stel_ui_tuiconf.cpp:447
+#: src/deprecated/stel_ui_tuiconf.cpp:448
 msgid "Milky Way intensity: "
 msgstr "intensity ของทางช้างเผือก: "
 
@@ -1150,11 +1149,11 @@ msgstr "intensity ของทางช้างเผือก: "
 msgid "Mimas"
 msgstr "ไมมาส"
 
-#: src/s_gui.cpp:2752
+#: src/deprecated/s_gui.cpp:2753
 msgid "Minutes"
 msgstr "นาที"
 
-#: src/stel_ui.cpp:804
+#: src/deprecated/stel_ui.cpp:808
 #, fuzzy
 msgid ""
 "Misc:\n"
@@ -1173,7 +1172,7 @@ msgstr ""
 msgid "Monoceros"
 msgstr "ยูนิคอร์น"
 
-#: src/s_gui.cpp:2743
+#: src/deprecated/s_gui.cpp:2744
 msgid "Month"
 msgstr "เดือน"
 
@@ -1181,7 +1180,7 @@ msgstr "เดือน"
 msgid "Moon"
 msgstr "ดวงจันทร์"
 
-#: src/stel_ui_conf.cpp:165
+#: src/deprecated/stel_ui_conf.cpp:168
 msgid "Moon Scale"
 msgstr "ขนาดดวงจันทร์"
 
@@ -1193,7 +1192,7 @@ msgstr "เสาเทียบเรือ"
 msgid "Mortar"
 msgstr "ครก"
 
-#: src/stel_ui.cpp:761
+#: src/deprecated/stel_ui.cpp:765
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -1223,11 +1222,11 @@ msgstr ""
 msgid "Musca"
 msgstr "แมลงวัน"
 
-#: src/translations.h:63 src/s_gui.cpp:2685
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "เหนือ"
 
-#: src/stel_ui.cpp:670
+#: src/deprecated/stel_ui.cpp:674
 msgid "Names of the Constellations [V]"
 msgstr "ชื่อกลุ่มดาว [V]"
 
@@ -1239,19 +1238,19 @@ msgstr "นาวนโฮ"
 msgid "Navigator's Triangle"
 msgstr "สามเหลี่ยมของคนเดินเรือ"
 
-#: src/stel_ui_tuiconf.cpp:438
+#: src/deprecated/stel_ui_tuiconf.cpp:439
 msgid "Nebula Circles"
 msgstr "วงกลมเนบิวลา"
 
-#: src/stel_ui_tuiconf.cpp:437
+#: src/deprecated/stel_ui_tuiconf.cpp:438
 msgid "Nebula Names"
 msgstr "ชื่อเนบิวลา"
 
-#: src/stel_ui_conf.cpp:136
+#: src/deprecated/stel_ui_conf.cpp:139
 msgid "Nebulas Names. Up to mag :"
 msgstr "ชื่อเนบิวลาถึงแมกนิจูดปรากฏ:"
 
-#: src/stel_ui.cpp:684
+#: src/deprecated/stel_ui.cpp:688
 msgid "Nebulas [N]"
 msgstr "เนบิวลา [N]"
 
@@ -1268,12 +1267,13 @@ msgstr "ดาวเนปจูน"
 msgid "Net"
 msgstr "ตาข่าย"
 
-#: src/stel_ui.cpp:693
+#: src/deprecated/stel_ui.cpp:697
 msgid "Night (red) mode"
 msgstr "โหมดกลางคืน (สีแดง)"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
 msgid "No"
 msgstr "ไม่"
 
@@ -1293,15 +1293,15 @@ msgstr "แม่น้ำทิศเหนือ"
 msgid "Northern Dipper"
 msgstr "กระบวยเหนือ"
 
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
 msgid "OK"
 msgstr "ตกลง"
 
-#: src/stel_ui_conf.cpp:708
+#: src/deprecated/stel_ui_conf.cpp:670
 msgid "Object Search"
 msgstr "การค้นหาวัตถุ"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Object Sizing Rule: "
 msgstr "กฎการจัดกลุ่มตามขนาดวัตถุ: "
 
@@ -1337,7 +1337,7 @@ msgstr "ดาวคู่"
 msgid "Palace Gate"
 msgstr "ประตูปราสาท"
 
-#: src/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:130
 msgid "Parallax: "
 msgstr "ค่าแพแรลแลกซ์: "
 
@@ -1381,27 +1381,27 @@ msgstr "ปลา"
 msgid "Piscis Austrinus"
 msgstr "ปลาทางใต้"
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/deprecated/stel_ui_tuiconf.cpp:430
 msgid "Planet Names"
 msgstr "ชื่อดาวเคราะห์"
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/deprecated/stel_ui_tuiconf.cpp:431
 msgid "Planet Orbits"
 msgstr "วงโคจรดาวเคราะห์"
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/deprecated/stel_ui_tuiconf.cpp:432
 msgid "Planet Trails"
 msgstr "ทางเดินของดาวเคราะห์"
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
 msgid "Planet: "
 msgstr "ดาวเคราะห์: "
 
-#: src/stel_ui_conf.cpp:160
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "ดาวเคราะห์"
 
-#: src/stel_ui_conf.cpp:172
+#: src/deprecated/stel_ui_conf.cpp:175
 msgid "Planets Hints"
 msgstr "ข้อมูลเกี่ยวกับดาวเคราะห์"
 
@@ -1409,7 +1409,7 @@ msgstr "ข้อมูลเกี่ยวกับดาวเคราะห
 msgid "Pluto"
 msgstr "ดาวพลูโต"
 
-#: src/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:446
 msgid "Point"
 msgstr "ตำแหน่ง"
 
@@ -1417,19 +1417,19 @@ msgstr "ตำแหน่ง"
 msgid "Polynesian"
 msgstr "โพลีนีเชีย"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/deprecated/stel_ui_tuiconf.cpp:401
 msgid "Preset Sky Time: "
 msgstr "ชุกรูปแบบเวลาท้องฟ้า: "
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/deprecated/stel_ui_tuiconf.cpp:404
 msgid "Preset Time"
 msgstr "เวลาที่ตั้งไว้"
 
-#: src/stel_ui_conf.cpp:502
+#: src/deprecated/stel_ui_conf.cpp:479
 msgid "Program Language: "
 msgstr "ภาษาของโปรแกรม: "
 
-#: src/stel_ui_conf.cpp:376
+#: src/deprecated/stel_ui_conf.cpp:379
 msgid "Projection :"
 msgstr "แบบการฉายแผนที่:"
 
@@ -1449,17 +1449,18 @@ msgstr "ปราสาทสีม่วง"
 msgid "Pyxis"
 msgstr "เข็มทิศเดินเรือ"
 
-#: src/stel_ui.cpp:698
+#: src/deprecated/stel_ui.cpp:702
 msgid "Quit [CMD + Q]"
 msgstr "ออก [CMD + Q]"
 
-#: src/stel_ui.cpp:696
+#: src/deprecated/stel_ui.cpp:700
 msgid "Quit [CTRL + Q]"
 msgstr "ออก [CTRL + Q]"
 
-#: src/Nebula.cpp:100 src/Planet.cpp:118 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
@@ -1475,27 +1476,23 @@ msgstr "ลู่วิ่ง"
 msgid "Ramparts"
 msgstr "จรวด"
 
-#: src/stel_ui.cpp:717
+#: src/deprecated/stel_ui.cpp:721
 msgid "Real Time Speed [K]"
 msgstr "ความเร็วเวลาตามจริง [K]"
 
-#: src/stel_ui.cpp:1041
+#: src/deprecated/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr "บันทึกคำสั่งไปเป็นไฟล์ชุดคำสั่ง:\n"
 
-#: src/stel_ui_conf.cpp:562
+#: src/deprecated/stel_ui_conf.cpp:539
 msgid "Rendering"
 msgstr "การจำลอง"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "เริ่มโปรแกรมใหม่เพื่อ"
 
 #: src/translations.h:154
 msgid "Reticulum"
 msgstr "ตาข่าย"
 
-#: src/stel_ui.cpp:721
+#: src/deprecated/stel_ui.cpp:725
 msgid "Return to Current Time [8]"
 msgstr "กลับไปที่เวลาปัจจุบัน [8]"
 
@@ -1543,7 +1540,7 @@ msgstr "น้ำเต้าเน่า"
 msgid "Runners"
 msgstr "หมู่นักวิ่ง"
 
-#: src/translations.h:64 src/s_gui.cpp:2686
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "ใต้"
 
@@ -1567,20 +1564,20 @@ msgstr "ซาลามานเดอร์"
 msgid "Saturn"
 msgstr "ดาวเสาร์"
 
-#: src/stel_ui_tuiconf.cpp:462
+#: src/deprecated/stel_ui_tuiconf.cpp:463
 msgid "Save Current Configuration as Default: "
 msgstr "บันทึกค่าปัจจุบันเป็นค่ามาตรฐาน: "
 
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
 msgid "Save as default"
 msgstr "บันทึกเป็นค่ามาตรฐาน"
 
-#: src/stel_ui_conf.cpp:353
+#: src/deprecated/stel_ui_conf.cpp:356
 msgid "Save location"
 msgstr "บันทึกตำแหน่ง"
 
-#: src/stel_ui_conf.cpp:405
+#: src/deprecated/stel_ui_conf.cpp:408
 msgid "Saving settings will save current full screen status"
 msgstr "บันทึกการตั้งค่าโดยบันทึกค่าเต็มจอปัจจุบัน"
 
@@ -1592,15 +1589,11 @@ msgstr "แมงป่อง"
 msgid "Screen"
 msgstr "จอฉายหนัง"
 
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "ความละเอียดหน้าจอ :"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
 msgid "Script commander"
 msgstr "กำหนดชุดคำสั่ง"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/deprecated/stel_ui_tuiconf.cpp:384
 msgid "Scripts "
 msgstr "สคริปต์ "
 
@@ -1612,15 +1605,15 @@ msgstr "ช่างแกะสลัก"
 msgid "Scutum"
 msgstr "โล่"
 
-#: src/stel_ui_conf.cpp:715
+#: src/deprecated/stel_ui_conf.cpp:677
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "ใส่คำค้นหา (เช่น Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui.cpp:701
+#: src/deprecated/stel_ui.cpp:705
 msgid "Search for object [CTRL + F]"
 msgstr "ค้นหาวัตถุ [CTRL + F]"
 
-#: src/s_gui.cpp:2755
+#: src/deprecated/s_gui.cpp:2756
 msgid "Seconds"
 msgstr "วินาที"
 
@@ -1632,11 +1625,11 @@ msgstr ""
 msgid "Select and exit to run."
 msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
 
-#: src/stel_ui_conf.cpp:323
+#: src/deprecated/stel_ui_conf.cpp:326
 msgid "Selected : "
 msgstr "ที่เลือกไว้ : "
 
-#: src/stel_ui_conf.cpp:125
+#: src/deprecated/stel_ui_conf.cpp:128
 msgid "Selected Constellation Only"
 msgstr "เฉพาะกลุ่มดาวที่เลือกเท่านั้น"
 
@@ -1648,27 +1641,27 @@ msgstr "เทพแมงป่อง"
 msgid "Serpens"
 msgstr "งู"
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/deprecated/stel_ui_tuiconf.cpp:378
 msgid "Set Location "
 msgstr "ตั้งตำแหน่ง "
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/deprecated/stel_ui_tuiconf.cpp:379
 msgid "Set Time "
 msgstr "ตั้งเวลา "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/deprecated/stel_ui_tuiconf.cpp:397
 msgid "Set Time Zone: "
 msgstr "ตั้งโซนเวลา: "
 
-#: src/stel_ui_tuiconf.cpp:465
+#: src/deprecated/stel_ui_tuiconf.cpp:466
 msgid "Set UI Locale: "
 msgstr "ตั้ง UI สถานที่: "
 
-#: src/stel_ui_tuiconf.cpp:451
+#: src/deprecated/stel_ui_tuiconf.cpp:452
 msgid "Setting Landscape Sets Location: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:481
+#: src/deprecated/stel_ui_conf.cpp:458
 msgid "Setting landscape updates the location"
 msgstr "ตั้งค่า landscape และ ตั้งค่าตำแหน่งเป็นปัจจุบัน"
 
@@ -1692,35 +1685,35 @@ msgstr "แกะ"
 msgid "Sheepfold"
 msgstr "คอกแกะ"
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/deprecated/stel_ui_tuiconf.cpp:418
 msgid "Show: "
 msgstr "แสดง: "
 
-#: src/stel_ui_tuiconf.cpp:463
+#: src/deprecated/stel_ui_tuiconf.cpp:464
 msgid "Shut Down: "
 msgstr "ปิดเครื่อง "
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/deprecated/stel_ui_tuiconf.cpp:400
 msgid "Sidereal"
 msgstr "เวลาไซดีเรียล"
 
-#: src/Nebula.cpp:110
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "ขนาด: "
 
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
 msgid "Sky Culture: "
 msgstr "รูปแบบภาษาของท้องฟ้า: "
 
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
 msgid "Sky Language: "
 msgstr "ภาษาบนท้องฟ้า: "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/deprecated/stel_ui_tuiconf.cpp:402
 msgid "Sky Time At Start-up: "
 msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น: "
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/deprecated/stel_ui_tuiconf.cpp:396
 msgid "Sky Time: "
 msgstr "เวลาท้องฟ้า: "
 
@@ -1728,7 +1721,7 @@ msgstr "เวลาท้องฟ้า: "
 msgid "Snake"
 msgstr "งู"
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/deprecated/stel_ui_tuiconf.cpp:391
 msgid "Solar System Body: "
 msgstr "ส่วนประกอบหลักระบบสุริยะ: "
 
@@ -1748,7 +1741,7 @@ msgstr "แม่น้ำทิศใต้"
 msgid "Spear"
 msgstr "ทวน"
 
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "ประเภทสเปกตรัม: "
 
@@ -1764,23 +1757,23 @@ msgstr "ยุ้งข้าว"
 msgid "Star"
 msgstr "ดาว"
 
-#: src/stel_ui_conf.cpp:82
+#: src/deprecated/stel_ui_conf.cpp:85
 msgid "Star Names. Up to mag :"
 msgstr "แสดงชื่อดาวถึงแมกนิจูดปรากฏ:"
 
-#: src/stel_ui_conf.cpp:94
+#: src/deprecated/stel_ui_conf.cpp:97
 msgid "Star Twinkle. Amount :"
 msgstr "ค่าการกระพริบของดาว :"
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:419
 msgid "Star Value Multiplier: "
 msgstr "ตัวคูณค่าของดาวฤกษ์ "
 
-#: src/stel_ui_conf.cpp:77
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "ดาวฤกษ์"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/deprecated/stel_ui_tuiconf.cpp:381
 msgid "Stars "
 msgstr "ดาวฤกษ์ "
 
@@ -1848,7 +1841,7 @@ msgstr "วิหคสายฟ้า"
 msgid "Thunderbolt"
 msgstr "สายฟ้า"
 
-#: src/stel_ui.cpp:792
+#: src/deprecated/stel_ui.cpp:796
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -1868,15 +1861,15 @@ msgstr ""
 "CTRL + - : ถอยหลังหนึ่งชั่วโมง CTRL + = : ไปข้างหน้าหนึ่งชั่วโมง\n"
 "\n"
 
-#: src/stel_ui_tuiconf.cpp:404
+#: src/deprecated/stel_ui_tuiconf.cpp:405
 msgid "Time Display Format: "
 msgstr "รูปแบบเวลา: "
 
-#: src/stel_ui_conf.cpp:276
+#: src/deprecated/stel_ui_conf.cpp:279
 msgid "Time Zone :"
 msgstr "เขตเวลา:"
 
-#: src/stel_ui_conf.cpp:289
+#: src/deprecated/stel_ui_conf.cpp:292
 msgid "Time speed : "
 msgstr "ความเร็วของเวลา : "
 
@@ -1912,7 +1905,7 @@ msgstr "นกทูแคน"
 msgid "Turtle"
 msgstr "เต่า"
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/deprecated/stel_ui_tuiconf.cpp:421
 msgid "Twinkling: "
 msgstr "การกระพริบ: "
 
@@ -1936,7 +1929,7 @@ msgstr "ลำแสงอาทิตย์"
 msgid "Two in Front"
 msgstr ""
 
-#: src/Nebula.cpp:108
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "ประเภท: "
 
@@ -1944,7 +1937,7 @@ msgstr "ประเภท: "
 msgid "USB Script: "
 msgstr "ชุดคำสั่งที่ใชักับพอร์ต USB: "
 
-#: src/stel_ui_tuiconf.cpp:464
+#: src/deprecated/stel_ui_tuiconf.cpp:465
 msgid "Update me via Internet: "
 msgstr "อัพเดทผ่านอินเตอร์เน็ต: "
 
@@ -1960,7 +1953,7 @@ msgstr "หมีใหญ่"
 msgid "Ursa Minor"
 msgstr "หมีเล็ก"
 
-#: src/stel_ui_conf.cpp:297
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -1970,7 +1963,7 @@ msgstr ""
 "   ความเร็วเวลา\n"
 "ใช้คีย์ K เพื่อกลับมาสู่เวลาปัจจุบัน"
 
-#: src/stel_ui_conf.cpp:280
+#: src/deprecated/stel_ui_conf.cpp:283
 msgid "Using System Default Time Zone"
 msgstr "ใช้ค่าโซนเวลาจากระบบปฏิบัติการ"
 
@@ -1982,11 +1975,11 @@ msgstr "ใบเรือ"
 msgid "Venus"
 msgstr "ดาวศุกร์"
 
-#: src/stel_ui_conf.cpp:561
+#: src/deprecated/stel_ui_conf.cpp:538
 msgid "Video"
 msgstr "ระบบภาพ"
 
-#: src/stel_ui_conf.cpp:400
+#: src/deprecated/stel_ui_conf.cpp:403
 msgid "Viewport Distorter"
 msgstr ""
 
@@ -2006,7 +1999,7 @@ msgstr "ปลาบิน"
 msgid "Vulpecula"
 msgstr "สุนัขจิ้งจอก"
 
-#: src/translations.h:66 src/s_gui.cpp:2691
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "ตะวันตก"
 
@@ -2062,12 +2055,13 @@ msgstr "รถเข็นของหญิงสาว"
 msgid "Xuanyuan"
 msgstr "ซวนหยวน"
 
-#: src/s_gui.cpp:2740
+#: src/deprecated/s_gui.cpp:2741
 msgid "Year"
 msgstr "ปี"
 
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
 msgid "Yes"
 msgstr "ใช่"
 
@@ -2075,15 +2069,11 @@ msgstr "ใช่"
 msgid "Zaofu"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:449
+#: src/deprecated/stel_ui_tuiconf.cpp:450
 msgid "Zoom Duration: "
 msgstr "ช่วงของการซูม: "
 
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "นำค่าที่เปลี่ยนแปลงไปใช้"
-
-#: src/stel_ui_conf.cpp:350
+#: src/deprecated/stel_ui_conf.cpp:353
 msgid "m"
 msgstr ""
 
@@ -2147,6 +2137,9 @@ msgstr ""
 #~ msgid "Flip vertically"
 #~ msgstr "พลิกตามแนวตั้ง"
 
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr "สำหรับความละเอียดหน้าจอที่ไม่มีในรายการ, ให้ไปแก้ไขที่ไฟล์ :"
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "กำลังโหลดบัญชี Hipparcos:"
 
@@ -2173,8 +2166,14 @@ msgstr ""
 #~ "CTRL + Q   : ออก\n"
 #~ "CMD + Q    : ออก\n"
 
+#~ msgid "Restart program for"
+#~ msgstr "เริ่มโปรแกรมใหม่เพื่อ"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "กลับไปยังเวลาปัจจุบัน"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "ความละเอียดหน้าจอ :"
 
 #~ msgid "Search for object"
 #~ msgstr "ค้นหาวัตถุ"
@@ -2210,3 +2209,6 @@ msgstr ""
 #~ "การใช้งาน: %s [ตัวเลือก] ...\n"
 #~ " -v, --เวอร์ชั่น          ส่งออกข้อมูลเวอร์ชั่นและออกจากโปรแกรม\n"
 #~ " -h, --ชวยเหลือ        แสดงผลการช่วยเหลือและออกจากโปรแกรม\n"
+
+#~ msgid "change to apply."
+#~ msgstr "นำค่าที่เปลี่ยนแปลงไปใช้"

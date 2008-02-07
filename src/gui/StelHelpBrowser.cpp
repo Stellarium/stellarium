@@ -66,6 +66,7 @@ StelHelpBrowser::StelHelpBrowser(QWidget* parent)
 	footerText += "</body></html>\n";
 
 	QVBoxLayout *layout = new QVBoxLayout;
+	layout->setMargin(0);
 	layout->addWidget(&browser);
 	this->setLayout(layout);
 
