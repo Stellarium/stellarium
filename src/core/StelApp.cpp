@@ -89,6 +89,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	qtime = new QTime();
 	qtime->start();
 	
+	// Parse for first set of CLI arguments - stuff we want to process before other
+	// output, such as --help and --version, and if we want to set the configFile value.
+	parseCLIArgsPreConfig();
+	
 	// Load language codes
 	try
 	{
@@ -98,10 +102,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	{
 		cerr << "ERROR while loading translations: " << e.what() << endl;
 	}
-	
-	// Parse for first set of CLI arguments - stuff we want to process before other
-	// output, such as --help and --version, and if we want to set the configFile value.
-	parseCLIArgsPreConfig();
 	
 	// OK, print the console splash and get on with loading the program
 	cout << " -------------------------------------------------------" << endl;
@@ -330,6 +330,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				<< "--version (or -v)       : Print program name and version and exit." << endl
 				<< "--help (or -h)          : This cruft." << endl
 				<< "--config-file (or -c)   : Use an alternative name for the config file" << endl
+				<< "--user-dir (or -u)      : Use an alternative user data directory" << endl
 				<< "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
 				<< "                          the full screen setting in the config file" << endl
 				<< "--home-planet           : Specify observer planet (English name)" << endl
@@ -362,10 +363,22 @@ void StelApp::parseCLIArgsPreConfig(void)
 		}
 		exit(0);
 	}
+
+	QString newUserDir;
+	try
+	{
+		newUserDir = argsGetOptionWithArg<QString>(argList, "-u", "--user-dir", "");
+		stelFileMgr->setUserDir(newUserDir);
+	}
+	catch(exception& e)
+	{
+		qWarning() << "ERROR: while processing --user-dir option: " << e.what();
+		exit(1);
+	}
 	
 	try
 	{
-		setConfigFile(qPrintable(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini")));
+		setConfigFile(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini"));
 	}
 	catch(exception& e)
 	{
