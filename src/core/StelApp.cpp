@@ -92,7 +92,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
 	parseCLIArgsPreConfig();
-	
+
 	// Load language codes
 	try
 	{
@@ -375,6 +375,16 @@ void StelApp::parseCLIArgsPreConfig(void)
 	{
 		qWarning() << "ERROR: while processing --user-dir option: " << e.what();
 		exit(1);
+	}
+	
+	// If the chosen user directory does not exist we will create it
+	if (!StelFileMgr::exists(stelFileMgr->getUserDir()))
+	{
+		if (!StelFileMgr::mkDir(stelFileMgr->getUserDir()))
+		{
+			qDebug() << "ERROR - cannot create non-existent user directory" << stelFileMgr->getUserDir();
+			exit(1);
+		}
 	}
 	
 	try

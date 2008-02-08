@@ -12,6 +12,7 @@
 # include <windows.h>
 # ifndef _SHOBJ_H
 # include <shlobj.h>
+# include <QLibrary>
 # endif 
 #endif
 
@@ -42,11 +43,22 @@ StelFileMgr::StelFileMgr()
 	}
 
 	// In 0.9.0 we forgot to check the %APPDATA% env var, which might
-	// be set in XP or newer.  In this case, we want to use it, but
-	// only if there is not already an existing data directory in the
-	// "wrong place" (better to use an existing location which is slightly
-	// wrong, than to lose all the users settings when thy upgrade).
-	if (getenv("APPDATA")!=NULL && !userDirFI.isDir())
+	// be set in XP or newer.  In this case, we want to use it.
+	// We use the Windows API call SHGetSpecialFolderPathW if we
+	// can.  If not, we will try the environment variable APPDATA
+	// This code from QT's QSettings implementation
+	QLibrary library(QLatin1String("shell32"));
+	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+	if (SHGetSpecialFolderPath)
+	{
+		TCHAR path[MAX_PATH];
+		SHGetSpecialFolderPath(0,path, CSIDL_APPDATA, FALSE);
+		QString winPath(QString::fromUtf16((ushort*)path));
+		winPath += "\\Stellarium";
+		userDirFI = QFileInfo(winPath);
+	}
+	else if (getenv("APPDATA")!=NULL)
 	{
 		userDirFI = QFile::decodeName(getenv("APPDATA")) + "/Stellarium";
 	}
