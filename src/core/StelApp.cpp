@@ -106,7 +106,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	// OK, print the console splash and get on with loading the program
 	cout << " -------------------------------------------------------" << endl;
 	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
-	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al         ]" << endl;
+	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al          ]" << endl;
 	cout << " -------------------------------------------------------" << endl;
 	
 	QStringList p=stelFileMgr->getSearchPaths();
@@ -368,7 +368,8 @@ void StelApp::parseCLIArgsPreConfig(void)
 	try
 	{
 		newUserDir = argsGetOptionWithArg<QString>(argList, "-u", "--user-dir", "");
-		stelFileMgr->setUserDir(newUserDir);
+		if (newUserDir!="" && !newUserDir.isEmpty())
+			stelFileMgr->setUserDir(newUserDir);
 	}
 	catch(exception& e)
 	{
