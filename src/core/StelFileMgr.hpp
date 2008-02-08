@@ -125,6 +125,11 @@ public:
 	//! @return the path to the user private data directory	
 	//! @exceptions NOT_FOUND if the directory could not be found
 	QString getUserDir(void);
+
+	//! Sets the user directory.  This updates the search paths (first element)
+	//! @param newDir the new value of the user directory
+	//! @exceptions NOT_VALID if the specified user directory is not usable
+	void setUserDir(const QString& newDir);
 	
 	//! This is the directory into which screenshots will be saved
 	//! It is $HOME on Linux, BSD, Solaris etc.
@@ -167,6 +172,9 @@ private:
 	void outputFileSearchPaths(void);
 		
 	QStringList fileLocations;
+
+	//! Used to store the user data directory
+	QString userDir;
 };
 
 #endif

@@ -25,14 +25,52 @@ using namespace std;
 
 StelFileMgr::StelFileMgr()
 {
-	try
+	// Set the userDir member.
+	QFileInfo userDirFI;
+#if defined(WIN32)
+	QString homeString = QDir::homePath();
+	if (homeString == QDir::rootPath() || homeString.toUpper() == "C:\\")
 	{
-		fileLocations.append(getUserDir());
+		// This case happens in Win98 with no user profiles.  In this case
+		// We don't want to bother with a separate user dir - we just 
+		// return the install directory.
+		userDirFI = getInstallationDir();
 	}
-	catch(exception &e)
+	else
 	{
-		cerr << "WARNING: could not locate user directory" << endl;
+		userDirFI = homeString + "/Stellarium";
 	}
+
+	// In 0.9.0 we forgot to check the %APPDATA% env var, which might
+	// be set in XP or newer.  In this case, we want to use it, but
+	// only if there is not already an existing data directory in the
+	// "wrong place" (better to use an existing location which is slightly
+	// wrong, than to lose all the users settings when thy upgrade).
+	if (getenv("APPDATA")!=NULL && !userDirFI.isDir())
+	{
+		userDirFI = QFile::decodeName(getenv("APPDATA")) + "/Stellarium";
+	}
+
+#elif defined(MACOSX)
+	userDirFI.setFile(QDir::homePath() + "/Library/Preferences/Stellarium");
+#else 
+	userDirFI.setFile(QDir::homePath() + "/.stellarium");
+#endif
+	if (!userDirFI.exists() || !userDirFI.isDir())
+	{
+		qWarning() << "WARNING StelFileMgr::StelFileMgr user dir does not exist: "
+			<< userDirFI.filePath();
+	}
+	else if (!userDirFI.isWritable())
+	{
+		qWarning() << "WARNING StelFileMgr::StelFileMgr user dir is not writable: "
+			<< userDirFI.filePath();
+	}
+	userDir = userDirFI.filePath();
+
+	// OK, now we have the userDir set, we will add it and the installation 
+	// dir to the search path.  The user directory is first.
+	fileLocations.append(userDir);
 	
 	try
 	{
@@ -42,8 +80,6 @@ StelFileMgr::StelFileMgr()
 	{
 		cerr << "WARNING: could not locate installation directory" << endl;
 	}
-
-	checkUserDir();
 }
 
 StelFileMgr::~StelFileMgr()
@@ -260,7 +296,7 @@ void StelFileMgr::outputFileSearchPaths(void)
 	cout << "File search path set to:" << endl;		   
 	foreach (QString i, fileLocations)
 	{
-		cout << " " << ++count << ") " << qPrintable(i) << endl;
+		qDebug() << " " << ++count << ") " << i;
 	}
 }
 
@@ -308,47 +344,26 @@ QString StelFileMgr::getDesktopDir(void)
 
 QString StelFileMgr::getUserDir(void)
 {
-	QFileInfo userDir;
-#if defined(WIN32)
-	QString homeString = QDir::homePath();
-	if (homeString == QDir::rootPath() || homeString.toUpper() == "C:\\")
-	{
-		// This case happens in Win98 with no user profiles.  In this case
-		// We don't want to bother with a separate user dir - we just 
-		// return the install directory.
-		userDir = getInstallationDir();
-	}
-	else
-	{
-		userDir = homeString + "/Stellarium";
-	}
+	return userDir;
+}
 
-	// In 0.9.0 we forgot to check the %APPDATA% env var, which might
-	// be set in XP or newer.  In this case, we want to use it, but
-	// only if there is not already an existing data directory in the
-	// "wrong place" (better to use an existing location which is slightly
-	// wrong, than to lose all the users settings when thy upgrade).
-	if (getenv("APPDATA")!=NULL && !userDir.isDir())
+void StelFileMgr::setUserDir(const QString& newDir)
+{
+	QFileInfo userDirFI(newDir);
+	if (!userDirFI.exists() || !userDirFI.isDir())
 	{
-		userDir = QFile::decodeName(getenv("APPDATA")) + "/Stellarium";
+		qWarning() << "WARNING StelFileMgr::setUserDir user dir does not exist: "
+			<< userDirFI.filePath();
+		throw (runtime_error(std::string("NOT_VALID")));
 	}
-
-#elif defined(MACOSX)
-	userDir.setFile(QDir::homePath() + "/Library/Preferences/Stellarium");
-#else 
-	userDir.setFile(QDir::homePath() + "/.stellarium");
-#endif
-	if (!userDir.exists() || !userDir.isDir())
+	else if (!userDirFI.isWritable())
 	{
-		qWarning() << "WARNING StelFileMgr::getUserDir user dir does not exist: "
-			<< userDir.filePath() << endl;
+		qWarning() << "WARNING StelFileMgr::setUserDir user dir is not writable: "
+			<< userDirFI.filePath();
+		throw (runtime_error(std::string("NOT_VALID")));
 	}
-	else if (!userDir.isWritable())
-	{
-		qWarning() << "WARNING StelFileMgr::getUserDir user dir is not writable: "
-			<< userDir.filePath() << endl;
-	}
-	return userDir.filePath();
+	userDir = userDirFI.filePath();
+	fileLocations.replace(0, userDir);
 }
 
 QString StelFileMgr::getInstallationDir(void)
