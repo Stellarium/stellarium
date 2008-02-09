@@ -271,9 +271,20 @@ NewGui::NewGui()
 	buttonBar = NULL;
 	buttonHelpLabel = NULL;
 	ui = new Ui_Form();
-	QSize oldSize = StelMainWindow::getInstance().size();
+
+	// These ugly minimum and maximum sizes are to prevent the setupUi
+	// from setting the window size (which we have already set from
+	// the values in config.ini)
+	QSize windowSize = StelMainWindow::getInstance().size();
+	QSize oldMinSize = StelMainWindow::getInstance().minimumSize();
+	QSize oldMaxSize = StelMainWindow::getInstance().maximumSize();
+	StelMainWindow::getInstance().setMinimumSize(windowSize);
+	StelMainWindow::getInstance().setMaximumSize(windowSize);
 	ui->setupUi(&StelMainWindow::getInstance());
-	StelMainWindow::getInstance().resize(oldSize);
+	
+	// OK, un-fix the window size again
+	StelMainWindow::getInstance().setMinimumSize(oldMinSize);
+	StelMainWindow::getInstance().setMaximumSize(oldMaxSize);
 	
 	animLeftBarTimeLine = new QTimeLine(300, this);
 	animLeftBarTimeLine->stop();
