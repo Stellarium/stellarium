@@ -100,7 +100,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 		if (!reKeyXt.exactMatch(k))
 		{
 			// this is for those keys without a section
-			outputLine = QString("%1").arg(k,0-maxKeyWidth) + " = " + map[k].toString() + "\n";
+			outputLine = QString("%1").arg(k,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
 			device.write(outputLine.toLocal8Bit());
 		}
 	}
@@ -119,10 +119,10 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 			{
 				currentSection = sec;
 				
-				outputLine =  "\n[" + currentSection + "]" + "\n";
+				outputLine = stelEndl + "[" + currentSection + "]" + stelEndl;
 				device.write(outputLine.toLocal8Bit());
 			}
-			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[k].toString() + "\n";
+			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
 			device.write(outputLine.toLocal8Bit());
 		}
 	}
