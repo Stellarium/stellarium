@@ -29,38 +29,10 @@ StelFileMgr::StelFileMgr()
 	// Set the userDir member.
 	QFileInfo userDirFI;
 #if defined(WIN32)
-	QString homeString = QDir::homePath();
-	if (homeString == QDir::rootPath() || homeString.toUpper() == "C:\\")
+	QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
+	if (!winApiPath.isEmpty()) 
 	{
-		// This case happens in Win98 with no user profiles.  In this case
-		// We don't want to bother with a separate user dir - we just 
-		// return the install directory.
-		userDirFI = getInstallationDir();
-	}
-	else
-	{
-		userDirFI = homeString + "/Stellarium";
-	}
-
-	// In 0.9.0 we forgot to check the %APPDATA% env var, which might
-	// be set in XP or newer.  In this case, we want to use it.
-	// We use the Windows API call SHGetSpecialFolderPathW if we
-	// can.  If not, we will try the environment variable APPDATA
-	// This code from QT's QSettings implementation
-	QLibrary library(QLatin1String("shell32"));
-	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
-	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
-	if (SHGetSpecialFolderPath)
-	{
-		TCHAR path[MAX_PATH];
-		SHGetSpecialFolderPath(0,path, CSIDL_APPDATA, FALSE);
-		QString winPath(QString::fromUtf16((ushort*)path));
-		winPath += "\\Stellarium";
-		userDirFI = QFileInfo(winPath);
-	}
-	else if (getenv("APPDATA")!=NULL)
-	{
-		userDirFI = QFile::decodeName(getenv("APPDATA")) + "/Stellarium";
+		userDirFI = QFileInfo(winApiPath + "\\Stellarium");
 	}
 
 #elif defined(MACOSX)
@@ -92,6 +64,13 @@ StelFileMgr::StelFileMgr()
 	{
 		cerr << "WARNING: could not locate installation directory" << endl;
 	}
+
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
+	screenshotDir = getDesktopDir();
+#else
+	screenshotDir = QDir::homePath();
+#endif
+
 }
 
 StelFileMgr::~StelFileMgr()
@@ -314,36 +293,13 @@ void StelFileMgr::outputFileSearchPaths(void)
 
 QString StelFileMgr::getDesktopDir(void)
 {
-	// TODO: Test Windows and MAC builds.  I edited the code but have
-	// not got a build platform -MNG
 	QString result;
 #if defined(WIN32)
-	char path[MAX_PATH];
-	path[MAX_PATH-1] = '\0';
-	// Previous version used SHGetFolderPath and made app crash on window 95/98..
-	//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
-	LPITEMIDLIST tmp;
-	if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
-	{
-		SHGetPathFromIDList(tmp, path);                      
-		result = path;
-	}
-	else
-	{	
-		if(getenv("USERPROFILE")!=NULL)
-		{
-			//for Win XP etc.
-			result = QString(getenv("USERPROFILE")) + "\\Desktop";
-		}
-		else
-		{
-			//for Win 98 etc.
-			//note: will not work well for users who installed windows in a 
-			//non-default location.  Ugly & a source of problems.
-			result = "C:\\Windows\\Desktop";
-		}
-	}
+	result = getWin32SpecialDirPath(CSIDL_DESKTOPDIRECTORY);
 #else
+	// TODO: this is not going to work for machines which are non-English...
+	// For Linux and perhaps some BSDs, we can call the external program
+	// "xdg-user-dir DESKTOP" if it exists, but I'm not sure about OSX.
 	result = QFile::decodeName(getenv("HOME"));
 	result += "/Desktop";
 #endif
@@ -411,11 +367,25 @@ QString StelFileMgr::getInstallationDir(void)
 	
 QString StelFileMgr::getScreenshotDir(void)
 {
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
-	return getDesktopDir();
-#else
-	return QDir::homePath();
-#endif
+	return screenshotDir;
+}
+
+void StelFileMgr::setScreenshotDir(const QString& newDir)
+{
+	QFileInfo userDirFI(newDir);
+	if (!userDirFI.exists() || !userDirFI.isDir())
+	{
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: "
+			<< userDirFI.filePath();
+		throw (runtime_error(std::string("NOT_VALID")));
+	}
+	else if (!userDirFI.isWritable())
+	{
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: "
+			<< userDirFI.filePath();
+		throw (runtime_error(std::string("NOT_VALID")));
+	}
+	screenshotDir = userDirFI.filePath();
 }
 
 QString StelFileMgr::getLocaleDir(void)
@@ -445,4 +415,36 @@ QString StelFileMgr::getLocaleDir(void)
 		return "";
 	}
 }
+
+#if defined(WIN32)
+
+QString StelFileMgr::getWin32SpecialDirPath(const int csidlId)
+{
+	// This function is implemented using code from QSettings implementation in QT
+	// (GPL edition, version 4.3).
+	QLibrary library(QLatin1String("shell32"));
+	QT_WA( {
+		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+		if (SHGetSpecialFolderPath)
+		{
+			TCHAR tpath[MAX_PATH];
+			SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
+			return QString::fromUtf16((ushort*)tpath);
+		}
+	} , {
+		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, char*, int, BOOL);
+		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathA");
+		if (SHGetSpecialFolderPath)
+		{
+			char cpath[MAX_PATH];
+			SHGetSpecialFolderPath(0, cpath, csidlId, FALSE);
+			return QString::fromLocal8Bit(cpath);
+		}
+	} );
+
+	return QString();
+}
+
+#endif
 

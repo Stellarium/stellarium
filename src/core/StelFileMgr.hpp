@@ -138,6 +138,13 @@ public:
 	//! @return the path to the directory where screenshots are saved
 	//! @exceptions NOT_FOUND if the directory could not be found
 	QString getScreenshotDir(void);
+
+	//! Sets the screenshot directory.
+	//! This is set to platform-specific values in the StelFileMgr constructor,
+	//! but it is settable using this function to make it possible to implement
+	//! the command-line option which specifies where screenshots go.
+	//! @param newDir the new value of the screenshot directory
+	void setScreenshotDir(const QString& newDir);
 		
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
@@ -175,6 +182,16 @@ private:
 
 	//! Used to store the user data directory
 	QString userDir;
+
+	//! Used to store the screenshot directory
+	QString screenshotDir;
+
+#if defined(WIN32)
+	//! For internal use - retreives windows special named directories.
+	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
+	static QString getWin32SpecialDirPath(const int csidlId);
+#endif
+
 };
 
 #endif
