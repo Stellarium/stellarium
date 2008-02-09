@@ -22,6 +22,18 @@
 
 #include <QSettings>
 
+// QSettings only gives us a binary file handle when writing the
+// ini file, so we must handle alternative end of line marks
+// ourselves.
+#if defined(WIN32)
+	static const QString stelEndl="\r\n";
+#elif defined(MACOSX)
+	static const QString stelEndl="\r";
+#else
+	static const QString stelEndl="\n";
+#endif
+	
+
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map);
 bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map);
 
