@@ -118,6 +118,9 @@ StelMainWindow::~StelMainWindow()
 
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
+	// TODO - re-implement this when the new gui is done.
+	qWarning() << "StelMainWindow::saveScreenShot needs to be FIXED";
+	qDebug() << "screenshot directory is: " << StelApp::getInstance().getFileMgr().getScreenshotDir();
 // 	QString shotDir;
 // 	QImage im = findChild<StelGLWidget*>("StelGLWidget")->glWidget->grabFrameBuffer();
 // 
