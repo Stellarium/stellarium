@@ -333,6 +333,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				<< "--user-dir (or -u)      : Use an alternative user data directory" << endl
 				<< "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
 				<< "                          the full screen setting in the config file" << endl
+				<< "--screenshot-dir        : Specify directory to save screenshots" << endl
 				<< "--home-planet           : Specify observer planet (English name)" << endl
 				<< "--altitude              : Specify observer altitude in meters" << endl
 				<< "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
@@ -364,9 +365,9 @@ void StelApp::parseCLIArgsPreConfig(void)
 		exit(0);
 	}
 
-	QString newUserDir;
 	try
 	{
+		QString newUserDir;
 		newUserDir = argsGetOptionWithArg<QString>(argList, "-u", "--user-dir", "");
 		if (newUserDir!="" && !newUserDir.isEmpty())
 			stelFileMgr->setUserDir(newUserDir);
@@ -395,6 +396,17 @@ void StelApp::parseCLIArgsPreConfig(void)
 	{
 		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
 		setConfigFile("config.ini");		
+	}
+
+	try
+	{
+		QString newShotDir = argsGetOptionWithArg<QString>(argList, "", "--screenshot-dir", "");
+		if (!newShotDir.isEmpty() && newShotDir!="")
+			stelFileMgr->setScreenshotDir(newShotDir);
+	}
+	catch(exception& e)
+	{
+		qWarning() << "ERROR: while setting screenshot directory for --screenshot-dir option: " << e.what();
 	}
 }
 
