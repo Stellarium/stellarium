@@ -28,16 +28,8 @@
 
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 {
-	// Lazy IO - slurp it all up into memory and process from there.
-	// it's a reasonable assumption, after all the map which holds the
-	// keys and values exists in memory.
-	qint64 s = device.size();
-	char buf[s+1];
-	if(device.read(buf, s)!=s)
-		return false;
-
 	// Is this the right conversion?
-	QString data = QString::fromLocal8Bit(buf);
+	QString data = QString::fromLocal8Bit(device.readAll().data());
 
 	// Split by a RE which should match any platform's line breaking rules
 	QStringList lines = data.split(QRegExp("[\\n\\r]+"), QString::SkipEmptyParts);
