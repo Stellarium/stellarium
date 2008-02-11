@@ -29,7 +29,7 @@
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 {
 	// Is this the right conversion?
-	QString data = QString::fromLocal8Bit(device.readAll().data());
+	QString data = QString::fromUtf8(device.readAll().data());
 
 	// Split by a RE which should match any platform's line breaking rules
 	QStringList lines = data.split(QRegExp("[\\n\\r]+"), QString::SkipEmptyParts);
@@ -93,7 +93,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 		{
 			// this is for those keys without a section
 			outputLine = QString("%1").arg(k,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
-			device.write(outputLine.toLocal8Bit());
+			device.write(outputLine.toUtf8());
 		}
 	}
 	
@@ -112,10 +112,10 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 				currentSection = sec;
 				
 				outputLine = stelEndl + "[" + currentSection + "]" + stelEndl;
-				device.write(outputLine.toLocal8Bit());
+				device.write(outputLine.toUtf8());
 			}
 			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
-			device.write(outputLine.toLocal8Bit());
+			device.write(outputLine.toUtf8());
 		}
 	}
 	return true;
