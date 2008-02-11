@@ -27,6 +27,6 @@ public:
 	virtual ~StelPluginInterface() {}
 	virtual class StelModule* getStelModule() const = 0;
 };
-Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0")
+Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0");
 
 #endif /*STELPLUGININTERFACE_HPP_*/

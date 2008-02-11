@@ -1081,9 +1081,12 @@ int StelUI::handle_keys(StelKey key, StelMod mod, Uint16 unicode, Uint8 state)
             }
             break;
 		case StelKey_1:
-            if (mod & COMPATIBLE_StelMod_CTRL && objmgr.getWasSelected()) {
+            if (mod & COMPATIBLE_StelMod_CTRL && objmgr.getWasSelected())
+			{
             	telmgr->telescopeGoto(1,objmgr.getSelectedObject()[0]->getObsJ2000Pos(core->getNavigation()));
-            } else {
+            }
+			else
+			{
 				FlagConfig=!FlagConfig;
 				config_win->setVisible(FlagConfig);
             }

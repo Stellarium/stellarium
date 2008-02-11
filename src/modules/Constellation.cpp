@@ -26,8 +26,8 @@
 #include "STexture.hpp"
 #include "SFont.hpp"
 
-Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
-Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
+Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
+Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 
