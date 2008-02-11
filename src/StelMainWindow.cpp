@@ -106,8 +106,7 @@ void StelMainWindow::init(int argc, char** argv)
 	newGui->init();
 	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
 	
-// 	QWidget* dialog = this->findChild<QWidget*>("HelpDialog");
-// 	dialog->setParent(0);
+	stelApp->initPlugIns();
 	
 	mainItem->startDrawingLoop();
 }
