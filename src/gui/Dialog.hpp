@@ -30,25 +30,7 @@ class DialogFrame : public QFrame
 {
 Q_OBJECT
 public:
-    QPoint mouse_pos;
-    int border;
-    bool followLeft;
-    bool followRight;
-    bool followTop;
-    bool followBottom;
-    
-    bool onLeft(const QPoint& pos) const {return pos.x() < border;}
-    bool onRight(const QPoint& pos) const {return pos.x() > size().width() -
-border;}
-    bool onTop(const QPoint& pos) const {return pos.y() < border;}
-    bool onBottom(const QPoint& pos) const {return pos.y() > size().height() -
-border;}
-    
-    DialogFrame(QWidget *parent);
-      
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
+    DialogFrame(QWidget *parent) : QFrame(parent) {}
 };
 
 
@@ -65,5 +47,20 @@ public:
   }
   void mouseMoveEvent(QMouseEvent *event);
 };
+
+class ResizeFrame : public QFrame
+{
+Q_OBJECT
+public:
+  QPoint mouse_pos;
+  
+  ResizeFrame(QWidget* parent) : QFrame(parent) {}
+  
+  void mousePressEvent(QMouseEvent *event) {
+    mouse_pos = event->pos();
+  }
+  void mouseMoveEvent(QMouseEvent *event);
+};
+
 
 #endif // _DIALOG_H_
