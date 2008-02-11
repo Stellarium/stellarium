@@ -285,20 +285,6 @@ void StelApp::init()
 	setVisionModeNight(false);
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 	
-	// Load dynamically all the modules found in the modules/ directories
-	// which are configured to be loaded at startup
-	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
-	{
-		if (i.loadAtStartup==false)
-			continue;
-		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
-		if (m!=NULL)
-		{
-			m->init();
-			moduleMgr->registerModule(m);
-		}
-	}
-	
 	// Generate dependency Lists for all modules
 	moduleMgr->generateCallingLists();
 	
@@ -309,6 +295,24 @@ void StelApp::init()
 	initialized = true;
 }
 
+// Load and initialize external modules (plugins)
+void StelApp::initPlugIns()
+{
+	// Load dynamically all the modules found in the modules/ directories
+	// which are configured to be loaded at startup
+	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
+	{
+		if (i.loadAtStartup==false)
+			continue;
+		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
+		if (m!=NULL)
+		{
+			moduleMgr->registerModule(m, true);
+			m->init();
+		}
+	}
+}
+	
 void StelApp::parseCLIArgsPreConfig(void)
 {	
 	if (argsGetOption(argList, "-v", "--version"))

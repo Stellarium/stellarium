@@ -68,9 +68,12 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
-	//! Initialize application and core.
-	virtual void init();
+	//! Initialize core and default modules.
+	void init();
 
+	//! Load and initialize external modules (plugins)
+	void initPlugIns();
+	
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {assert(singleton); return *singleton;}
