@@ -28,7 +28,7 @@
      background-position: up;
 	border: 0px;
 	color : #babdc4;
-   font-family: "DejaVu"
+   font-family: "DejaVu";
 }
 
 DialogFrame {
@@ -36,6 +36,14 @@ DialogFrame {
   border-width: 1px;
   border-style: solid;
   border-color: #2e2e36;
+}
+
+
+ResizeFrame {
+/* background: qlineargradient(x1: 0.5, y1: 0.5, x2: 0.6, y2: 0.6,
+			stop: 0  rgba(0,0,0,0%), stop: 1   rgba(0,0,0,50%));
+*/
+   background-image: url(data/gui/resize.png);
 }
 
 QLabel {
@@ -109,9 +117,9 @@ QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
   <widget class="DialogFrame" name="HelpDialog" >
    <property name="geometry" >
     <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>351</width>
+     <x>50</x>
+     <y>30</y>
+     <width>401</width>
      <height>401</height>
     </rect>
    </property>
@@ -375,6 +383,86 @@ color: darkgray;
       <property name="styleSheet" >
        <string/>
       </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_3" >
+      <property name="minimumSize" >
+       <size>
+        <width>16</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>271</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="ResizeFrame" name="frame_4" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="cursor" >
+          <cursorShape>SizeFDiagCursor</cursorShape>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>false</bool>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -1047,6 +1135,12 @@ color: darkgray;
   </customwidget>
   <customwidget>
    <class>DialogFrame</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ResizeFrame</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
