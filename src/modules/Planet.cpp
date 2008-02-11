@@ -38,9 +38,9 @@
 
 SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
-Vec3f Planet::label_color = Vec3f(.4,.4,.8);
-Vec3f Planet::orbit_color = Vec3f(1,.6,1);
-Vec3f Planet::trail_color = Vec3f(1,.7,.7);
+Vec3f Planet::label_color = Vec3f(0.4,0.4,0.8);
+Vec3f Planet::orbit_color = Vec3f(1,0.6,1);
+Vec3f Planet::trail_color = Vec3f(1,0.7,0.7);
 LinearFader Planet::flagShow;
 
 Planet::Planet(Planet *parent,

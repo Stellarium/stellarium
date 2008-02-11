@@ -635,4 +635,4 @@ class Translations
 		N_("Select and exit to run.");
 		N_("USB Script: ");  // Placeholder for translating - Rob
 	}
-}
+};
