@@ -412,7 +412,7 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/2-off-location.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);	
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Location_Window, buttonHelpLabel);	
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/3-on-sky.png");
