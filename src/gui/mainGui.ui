@@ -84,7 +84,7 @@ QScrollBar:vertical {
      QScrollBar::handle:vertical {
 border: 2px solid #4a4b50;
          background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
-   stop: 0 #f6f7fa, stop: 1 #dadbde);
+   stop: 0 #c6c7ca, stop: 1 #aaabae);
 		border-radius: 4px;
          min-height: 20px;
      }
@@ -121,7 +121,7 @@ QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
     <rect>
      <x>70</x>
      <y>20</y>
-     <width>401</width>
+     <width>351</width>
      <height>401</height>
     </rect>
    </property>
@@ -318,7 +318,7 @@ color: darkgray;
        </palette>
       </property>
       <property name="autoFillBackground" >
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="styleSheet" >
        <string/>
@@ -413,8 +413,8 @@ color: darkgray;
   <widget class="DialogFrame" name="SearchDialog" >
    <property name="geometry" >
     <rect>
-     <x>30</x>
-     <y>480</y>
+     <x>60</x>
+     <y>430</y>
      <width>311</width>
      <height>61</height>
     </rect>
@@ -686,7 +686,7 @@ color: darkgray;
     <bool>true</bool>
    </property>
    <property name="autoFillBackground" >
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="frameShape" >
     <enum>QFrame::StyledPanel</enum>
@@ -971,6 +971,250 @@ color: darkgray;
        </item>
        <item>
         <widget class="ResizeFrame" name="locationDownBarResizeFrame" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="cursor" >
+          <cursorShape>SizeFDiagCursor</cursorShape>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>false</bool>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="DialogFrame" name="SkyloreDialog" >
+   <property name="geometry" >
+    <rect>
+     <x>410</x>
+     <y>430</y>
+     <width>271</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="mouseTracking" >
+    <bool>true</bool>
+   </property>
+   <property name="autoFillBackground" >
+    <bool>false</bool>
+   </property>
+   <property name="frameShape" >
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <layout class="QVBoxLayout" >
+    <property name="spacing" >
+     <number>0</number>
+    </property>
+    <property name="leftMargin" >
+     <number>0</number>
+    </property>
+    <property name="topMargin" >
+     <number>1</number>
+    </property>
+    <property name="rightMargin" >
+     <number>0</number>
+    </property>
+    <property name="bottomMargin" >
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="BarFrame" name="frame_5" >
+      <property name="minimumSize" >
+       <size>
+        <width>16</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="autoFillBackground" >
+       <bool>false</bool>
+      </property>
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>4</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>SkyLore</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QToolButton" name="closeHelp_2" >
+         <property name="maximumSize" >
+          <size>
+           <width>17</width>
+           <height>17</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string>QToolButton {
+color: white;
+font-weight: bold;
+background: None;
+border: 1px solid #2e2e36;
+  border-radius: 2px;
+}
+
+QToolButton:pressed {
+color: darkgray;
+}</string>
+         </property>
+         <property name="text" >
+          <string>X</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_8" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <widget class="QListView" name="CultureListView" >
+       <property name="geometry" >
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>141</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6" >
+       <property name="geometry" >
+        <rect>
+         <x>190</x>
+         <y>20</y>
+         <width>73</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Description</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_6" >
+      <property name="minimumSize" >
+       <size>
+        <width>16</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="autoFillBackground" >
+       <bool>false</bool>
+      </property>
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>271</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="ResizeFrame" name="frame_7" >
          <property name="sizePolicy" >
           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
@@ -1353,6 +1597,17 @@ color: darkgray;
    </property>
    <property name="helpGroup" stdset="0" >
     <string>Dialogs</string>
+   </property>
+  </action>
+  <action name="actionShow_Skylore_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Skylore Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+G</string>
    </property>
   </action>
  </widget>
