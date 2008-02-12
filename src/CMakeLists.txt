@@ -198,6 +198,8 @@ SET(stellarium_lib_SRCS
 	gui/StelHelpBrowser.cpp
 	gui/Dialog.hpp
 	gui/Dialog.cpp
+	gui/MapView.hpp
+	gui/MapView.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -250,6 +252,7 @@ SET(stellarium_MOC_HDRS
 	gui/NewGui.hpp
 	gui/StelHelpBrowser.hpp
 	gui/Dialog.hpp
+	gui/MapView.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )
