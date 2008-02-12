@@ -569,7 +569,7 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
 	
 	double rangeY = buttonBar->boundingRect().height()-19;
-	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
+	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+1.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
 	buttonBarPath->updatePath(buttonBar, winBar);
 }
