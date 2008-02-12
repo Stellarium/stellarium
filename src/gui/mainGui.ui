@@ -685,6 +685,9 @@ color: darkgray;
    <property name="mouseTracking" >
     <bool>true</bool>
    </property>
+   <property name="autoFillBackground" >
+    <bool>true</bool>
+   </property>
    <property name="frameShape" >
     <enum>QFrame::StyledPanel</enum>
    </property>
