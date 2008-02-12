@@ -144,8 +144,7 @@ public:
 	virtual bool handleMouseMoves(int x, int y);
 
 private slots:
-	void animLeftBarChanged(qreal value);	
-
+	void updateBarsPos(qreal value);	
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
@@ -153,6 +152,7 @@ private:
 	QGraphicsTextItem* buttonHelpLabel;
 	Ui_Form* ui;
 	QTimeLine* animLeftBarTimeLine;
+	QTimeLine* animBottomBarTimeLine;
 };
 
 #endif // _NEWGUI_H_
