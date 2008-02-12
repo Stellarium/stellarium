@@ -64,6 +64,22 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 }
 
 /*************************************************************************
+ Unregister and delete a StelModule.
+*************************************************************************/
+void StelModuleMgr::removeModule(const QString& moduleID)
+{
+	StelModule* m = getModule(moduleID);
+	if (!m)
+	{
+		qWarning() << "Module \"" << moduleID << "\" is not loaded.";
+		return;
+	}
+	modules.remove(moduleID);
+	generateCallingLists();
+	m->deleteLater();
+}
+
+/*************************************************************************
  Get the corresponding module or NULL if can't find it.
 *************************************************************************/
 StelModule* StelModuleMgr::getModule(const QString& moduleID)

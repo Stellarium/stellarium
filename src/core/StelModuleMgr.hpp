@@ -41,6 +41,10 @@ public:
 	//! Register a new StelModule to the list
 	void registerModule(StelModule* m, bool generateCallingLists=false);
 	
+	//! Unregister and delete a StelModule. The program will hang if other modules depend on the removed one
+	//! @param moduleID the unique ID of the module, by convention equal to the class name
+	void removeModule(const QString& moduleID);
+	
 	//! Load dynamically a module
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
@@ -48,6 +52,7 @@ public:
 	StelModule* loadExternalPlugin(const QString& moduleID);
 
 	//! Get the corresponding module or NULL if can't find it.
+	//! @param moduleID the unique ID of the module, by convention equal to the class name
 	StelModule* getModule(const QString& moduleID);
 	
 	//! Get the list of all the currently registered modules
