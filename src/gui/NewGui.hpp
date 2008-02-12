@@ -117,11 +117,11 @@ public:
 	//! Initialize the NewGui object.
 	virtual void init();
 	
-	//! Draws all nebula objects.
-	virtual double draw(StelCore* core);
+	//! Draws
+	virtual double draw(StelCore* core) {return 0;}
 	
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) {;}
 	
 	//! Update i18 names from English names according to passed translator.
 	//! The translation is done using gettext with translated strings defined 

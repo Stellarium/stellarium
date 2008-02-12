@@ -87,10 +87,11 @@ void StelMainWindow::init(int argc, char** argv)
 	view->setFrameShape(QFrame::NoFrame);
 	view->setFocusPolicy(Qt::ClickFocus);
 	glWidget = new QGLWidget(this);
+	glWidget->setObjectName("StelGLWidget");
 	glWidget->setAutoFillBackground(false);
 	view->setViewport(glWidget);
  	view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-// 	view->setRenderHint(QPainter::TextAntialiasing, false);
+ 	view->setRenderHint(QPainter::TextAntialiasing, false);
 //  	view->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
 	
 	// Use it as a central widget
@@ -117,46 +118,41 @@ StelMainWindow::~StelMainWindow()
 
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
-	// TODO - re-implement this when the new gui is done.
-	qWarning() << "StelMainWindow::saveScreenShot needs to be FIXED";
-	qDebug() << "screenshot directory is: " << StelApp::getInstance().getFileMgr().getScreenshotDir();
-// 	QString shotDir;
-// 	QImage im = findChild<StelGLWidget*>("StelGLWidget")->glWidget->grabFrameBuffer();
-// 
-// 	if (saveDir == "")
-// 	{
-// 		try
-// 		{
-// 			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-// 			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
-// 			{
-// 				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
-// 				return;
-// 			}
-// 		}
-// 		catch(exception& e)
-// 		{
-// 			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
-// 			return;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		shotDir = saveDir;
-// 	}
-// 
-// 	QString shotPath;
-// 	for(int j=0; j<1000; ++j)
-// 	{
-// 		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".bmp";
-// 		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
-// 			break;
-// 	}
-// 	// TODO - if no more filenames available, don't just overwrite the last one
-// 	// we should at least warn the user, perhaps prompt her, "do you want to overwrite?"
-// 	
-// 	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
-// 	im.save(shotPath);
+	QString shotDir;
+	QImage im = findChild<QGLWidget*>("StelGLWidget")->grabFrameBuffer();
+
+	if (saveDir == "")
+	{
+		try
+		{
+			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
+			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
+			{
+				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
+				return;
+			}
+		}
+		catch(exception& e)
+		{
+			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
+			return;
+		}
+	}
+	else
+	{
+		shotDir = saveDir;
+	}
+
+	QString shotPath;
+	for (int j=0; j<100000; ++j)
+	{
+		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png";
+		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
+			break;
+	}
+	
+	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
+	im.save(shotPath);
 }
 
 
