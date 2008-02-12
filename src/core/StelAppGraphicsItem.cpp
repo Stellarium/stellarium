@@ -87,14 +87,6 @@ void StelAppGraphicsItem::init()
 	StelApp::getInstance().getModuleMgr().registerModule(script_images);
 }
 
-// void StelAppGraphicsItem::initializeGL()
-// {
-// 	glClearColor(0.0, 0.0, 0.0, 0.0);
-// 	glClear(GL_COLOR_BUFFER_BIT);
-// 	glWidget->swapBuffers();
-// 	glClear(GL_COLOR_BUFFER_BIT);
-// }
-
 void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 {
 	setRect(QRect(0,0,w,h));
@@ -131,6 +123,12 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	//glEnable(GL_MULTISAMPLE);
 	
 	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
+	
+// 	glClearColor(0.0, 0.0, 0.0, 0.0);
+// 	glClear(GL_COLOR_BUFFER_BIT);
+// 	glWidget->swapBuffers();
+// 	glClear(GL_COLOR_BUFFER_BIT);
+	
 	// And draw them
 	distorter->prepare();
 	StelApp::getInstance().draw();

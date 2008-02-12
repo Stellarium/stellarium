@@ -120,40 +120,32 @@ void StelButton::setChecked(bool b)
 	animValueChanged(timeLine->currentValue());
 }
 
-LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
-	roundSize = 5;
+}
+
+LeftStelBar::~LeftStelBar()
+{
 }
 
 void LeftStelBar::addButton(StelButton* button)
 {
 	QRectF rectCh = childrenBoundingRect();
 	button->setParentItem(this);
-	button->setPos(roundSize, rectCh.bottom()+10);
-	updatePath();
+	button->setPos(0, rectCh.bottom()+10);
 }
 
-void LeftStelBar::updatePath()
+void LeftStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	QPainterPath newPath;
-	if (children().isEmpty())
-	{
-		setPath(newPath);
-		return;
-	}
-	QRectF rectCh = childrenBoundingRect();
-	newPath.moveTo(0, 0);
-	newPath.lineTo(rectCh.width()+roundSize,0);
- 	newPath.arcTo(rectCh.width(), 0, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(rectCh.width()+2.*roundSize, rectCh.height());
-	setPath(newPath);
 }
 
-BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+QRectF LeftStelBar::boundingRect() const
 {
-	leftNoPathMargin = 0;
-	roundSize = 5;
-	
+	return childrenBoundingRect();
+}
+
+BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
+{
 	QFont font("DejaVuSans", 10);
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	datetime = new QGraphicsTextItem("2008-02-06  17:33", this);
@@ -176,34 +168,10 @@ void BottomStelBar::addButton(StelButton* button)
 	double y = datetime->boundingRect().height()+3;
 	QRectF rectCh = getButtonsBoundingRect();
 	button->setParentItem(this);
-	button->setPos(rectCh.right(), y+roundSize);
-	updatePath();
+	button->setPos(rectCh.right(), y);
 	updateText();
 }
 
-void BottomStelBar::updatePath()
-{
-	QPainterPath newPath;
-	if (children().isEmpty())
-	{
-		setPath(newPath);
-		return;
-	}
-	QRectF rectCh = childrenBoundingRect();
-	newPath.moveTo(leftNoPathMargin, 0);
-	newPath.lineTo(rectCh.width()-roundSize,0);
-	newPath.arcTo(rectCh.width()-2.*roundSize, 0, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(rectCh.width(), rectCh.height()+roundSize);
-	setPath(newPath);
-}
-
-void BottomStelBar::setLeftNoPathMargin(double margin)
-{
-	if (leftNoPathMargin==margin)
-		return;
-	leftNoPathMargin=margin;
-	updatePath();
-}
 
 QRectF BottomStelBar::getButtonsBoundingRect()
 {
@@ -244,31 +212,63 @@ void BottomStelBar::updateText()
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
 	fps->setPlainText(str);
 	
-	datetime->setPos(10, 5);
+	datetime->setPos(10, 0);
 
 	QRectF rectCh = getButtonsBoundingRect();
 	
-	fov->setPos(rectCh.right()-150, 5);
-	fps->setPos(rectCh.right()-70, 5);
+	fov->setPos(rectCh.right()-150, 0);
+	fps->setPos(rectCh.right()-70, 0);
 	
 	double left = datetime->pos().x()+datetime->boundingRect().width();
 	double right = fov->pos().x();
 	double newPosX = left+(right-left)/2.-location->boundingRect().width()/2.;
 	if (std::fabs(newPosX-location->pos().x())>20)
-		location->setPos(newPosX,5);
+		location->setPos(newPosX,0);
 }
 
 void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	updateText();
-	QGraphicsPathItem::paint(painter, option, widget);
 }
+
+QRectF BottomStelBar::boundingRect() const
+{
+	return childrenBoundingRect();
+}
+
+StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+{
+	roundSize = 5;
+	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	aPen.setWidthF(1.);
+	setPen(aPen);
+}
+
+void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
+{
+	QPainterPath newPath;
+	QPointF p = lef->pos();
+	QRectF r = lef->boundingRect();
+	QPointF p2 = bot->pos();
+	QRectF r2 = bot->boundingRect();
+	
+	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
+	newPath.lineTo(p.x()+r.width(),p.y()-roundSize);
+	newPath.arcTo(p.x()+r.width()-roundSize, p.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
+	newPath.lineTo(p.x()+r.width()+roundSize, p2.y()-roundSize);
+	newPath.lineTo(p2.x()+r2.width(),p2.y()-roundSize);
+	newPath.arcTo(p2.x()+r2.width()-roundSize, p2.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
+	newPath.lineTo(p2.x()+r2.width()+roundSize, p2.y()+r2.height()+roundSize);
+	setPath(newPath);
+}
+
 
 NewGui::NewGui()
 {
 	setObjectName("NewGui");
 	winBar = NULL;
 	buttonBar = NULL;
+	buttonBarPath = NULL;
 	buttonHelpLabel = NULL;
 	ui = new Ui_Form();
 
@@ -294,8 +294,10 @@ NewGui::NewGui()
 
 NewGui::~NewGui()
 {
-//	delete winBar;
-//	delete buttonBar;
+	// When the QGraphicsItems are deleted, they are automatically removed from the scene
+	delete winBar;
+	delete buttonBar;
+	delete buttonBarPath;
 }
 
 /*************************************************************************
@@ -540,20 +542,18 @@ void NewGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionIncrease_Time_Speed, buttonHelpLabel);
 	buttonBar->addButton(b);
 	
+	// The path drawn around the button bars
+	buttonBarPath = new StelBarsPath(NULL);
+	buttonBarPath->updatePath(buttonBar, winBar);
 	
 	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
 	scene->addItem(buttonHelpLabel);
 	scene->addItem(winBar);
 	scene->addItem(buttonBar);
-	
-	QPen winBarPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	winBarPen.setWidthF(1.);
-	winBar->setPen(winBarPen);
-	buttonBar->setPen(winBarPen);
-	
-	winBar->setPos(-winBar->boundingRect().width(),winBar->pos().y());
+	scene->addItem(buttonBarPath);
 	
 	// Readjust position
+	animLeftBarChanged(0);
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
 
@@ -562,10 +562,10 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	double h=hh;
 	if (!winBar || !buttonBar || !buttonHelpLabel)
 		return;
-	winBar->setPos(winBar->pos().x(), h-winBar->boundingRect().height()-buttonBar->boundingRect().height()+0.5);
-	buttonBar->setLeftNoPathMargin(winBar->pos().x()+winBar->boundingRect().right());
-	buttonBar->setPos(0, h-buttonBar->boundingRect().height());
-	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+10, h-buttonBar->boundingRect().height()-25);
+	winBar->setPos(winBar->pos().x(), h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
+	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5);
+	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
+	buttonBarPath->updatePath(buttonBar, winBar);
 }
 
 
@@ -573,14 +573,17 @@ void NewGui::updateI18n()
 {
 }
 
+
 bool NewGui::handleMouseMoves(int x, int y)
 {
-	if (x<winBar->boundingRect().width() && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<-1)
+	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
+	double minX = 0;
+	if (x<maxX && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if (x>winBar->boundingRect().width() && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=-1)
+	if (x>maxX && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
@@ -590,7 +593,8 @@ bool NewGui::handleMouseMoves(int x, int y)
 
 void NewGui::animLeftBarChanged(qreal value)
 {
-	winBar->setPos(-winBar->boundingRect().width()+value*winBar->boundingRect().width(), winBar->pos().y());
+	double range = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
+	winBar->setPos(buttonBarPath->getRoundSize()-(1.-value)*range, winBar->pos().y());
 	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(),
 		StelMainWindow::getInstance().getGraphicsView()->size().height());
 }
