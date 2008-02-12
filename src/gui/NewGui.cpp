@@ -294,6 +294,8 @@ NewGui::NewGui()
 
 NewGui::~NewGui()
 {
+//	delete winBar;
+//	delete buttonBar;
 }
 
 /*************************************************************************
@@ -391,6 +393,9 @@ void NewGui::init()
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	
+	///////////////////////////////////////////////////////////////////////////
+	//// QGraphicsView based GUI
+	///////////////////////////////////////////////////////////////////////////
 	// Create the help label
 	buttonHelpLabel = new QGraphicsTextItem("");
 	buttonHelpLabel->setFont(QFont("DejaVuSans", 12));
@@ -552,11 +557,6 @@ void NewGui::init()
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
 
-double NewGui::draw(StelCore* core)
-{
-	return 0.;
-}
-
 void NewGui::glWindowHasBeenResized(int ww, int hh)
 {
 	double h=hh;
@@ -568,10 +568,6 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+10, h-buttonBar->boundingRect().height()-25);
 }
 
-// Update state which is time dependent.
-void NewGui::update(double deltaTime)
-{
-}
 
 void NewGui::updateI18n()
 {

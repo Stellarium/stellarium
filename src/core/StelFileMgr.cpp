@@ -88,6 +88,10 @@ QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 		else
 			throw (runtime_error(std::string("file does not match flags: ") + qPrintable(path)));
 
+	// Qt resource files
+	if (path.startsWith(":/"))
+		return path;
+		
 	// explicitly specified absolute paths
 	QFileInfo thePath(path);
 	if ( thePath.isAbsolute() )
@@ -95,7 +99,7 @@ QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 			return path;
 		else
 			throw (runtime_error(std::string("file does not match flags: ") + qPrintable(path)));
-	
+		
 	foreach (QString i, fileLocations)
 	{
 		if (fileFlagsCheck(i + "/" + path, flags))
