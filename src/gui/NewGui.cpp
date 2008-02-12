@@ -238,7 +238,7 @@ QRectF BottomStelBar::boundingRect() const
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 {
-	roundSize = 5;
+	roundSize = 6;
 	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	aPen.setWidthF(1.);
 	setPen(aPen);
@@ -286,10 +286,13 @@ NewGui::NewGui()
 	StelMainWindow::getInstance().setMinimumSize(oldMinSize);
 	StelMainWindow::getInstance().setMaximumSize(oldMaxSize);
 	
-	animLeftBarTimeLine = new QTimeLine(300, this);
-	animLeftBarTimeLine->stop();
+	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animLeftBarChanged(qreal)));
+	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos(qreal)));
+	
+	animBottomBarTimeLine = new QTimeLine(200, this);
+	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos(qreal)));
 }
 
 NewGui::~NewGui()
@@ -553,7 +556,6 @@ void NewGui::init()
 	scene->addItem(buttonBarPath);
 	
 	// Readjust position
-	animLeftBarChanged(0);
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
 
@@ -562,8 +564,12 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	double h=hh;
 	if (!winBar || !buttonBar || !buttonHelpLabel)
 		return;
-	winBar->setPos(winBar->pos().x(), h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
-	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5);
+	
+	double rangeX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
+	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
+	
+	double rangeY = buttonBar->boundingRect().height()-19;
+	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
 	buttonBarPath->updatePath(buttonBar, winBar);
 }
@@ -588,13 +594,23 @@ bool NewGui::handleMouseMoves(int x, int y)
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
 	}
+	
+	double maxY = buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
+	if (y<maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
+	{
+		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
+		animBottomBarTimeLine->start();
+	}
+	if (y>maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	{
+		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
+		animBottomBarTimeLine->start();
+	}
+	
 	return false;
 }
 
-void NewGui::animLeftBarChanged(qreal value)
+void NewGui::updateBarsPos(qreal value)
 {
-	double range = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	winBar->setPos(buttonBarPath->getRoundSize()-(1.-value)*range, winBar->pos().y());
-	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(),
-		StelMainWindow::getInstance().getGraphicsView()->size().height());
+	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(), StelMainWindow::getInstance().getGraphicsView()->size().height());
 }
