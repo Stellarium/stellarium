@@ -72,35 +72,43 @@ private:
 };
 
 //! The button bar on the left containing windows toggle buttons
-class LeftStelBar : public QGraphicsPathItem
+class LeftStelBar : public QGraphicsItem
 {
 public:
 	LeftStelBar(QGraphicsItem* parent);
+	~LeftStelBar();
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
 private:
-	void updatePath();
-	double roundSize;
 	QTimeLine* hideTimeLine;
 };
 
 //! The button bar on the bottom containing actions toggle buttons
-class BottomStelBar : public QGraphicsPathItem
+class BottomStelBar : public QGraphicsItem
 {
 public:
 	BottomStelBar(QGraphicsItem* parent);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	void setLeftNoPathMargin(double margin);
 private:
-	void updatePath();
 	void updateText();
-	double roundSize;
-	double leftNoPathMargin;
 	QRectF getButtonsBoundingRect();
 	QGraphicsTextItem* location;
 	QGraphicsTextItem* datetime;
 	QGraphicsTextItem* fov;
 	QGraphicsTextItem* fps;
+};
+
+class StelBarsPath : public QGraphicsPathItem
+{
+public:
+	StelBarsPath(QGraphicsItem* parent);
+	void updatePath(BottomStelBar* bot, LeftStelBar* lef);
+	double getRoundSize() const {return roundSize;}
+private:
+	double roundSize;
 };
 
 //! @class NewGui
@@ -141,6 +149,7 @@ private slots:
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
+	StelBarsPath* buttonBarPath;
 	QGraphicsTextItem* buttonHelpLabel;
 	Ui_Form* ui;
 	QTimeLine* animLeftBarTimeLine;
