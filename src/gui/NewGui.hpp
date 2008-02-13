@@ -44,7 +44,7 @@ public:
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
 	//! @param helpLabel the label in which the button will display it's help when hovered
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
-		QAction* action=NULL, QGraphicsTextItem* helpLabel=NULL);
+		QAction* action=NULL, QGraphicsSimpleTextItem* helpLabel=NULL);
 
 signals:
 	//! Triggered when the button state changes
@@ -68,7 +68,7 @@ private:
 	bool checked;
 	QTimeLine* timeLine;
 	QAction* action;
-	QGraphicsTextItem* helpLabel;
+	QGraphicsSimpleTextItem* helpLabel;
 };
 
 //! The button bar on the left containing windows toggle buttons
@@ -95,10 +95,10 @@ public:
 private:
 	void updateText();
 	QRectF getButtonsBoundingRect();
-	QGraphicsTextItem* location;
-	QGraphicsTextItem* datetime;
-	QGraphicsTextItem* fov;
-	QGraphicsTextItem* fps;
+	QGraphicsSimpleTextItem* location;
+	QGraphicsSimpleTextItem* datetime;
+	QGraphicsSimpleTextItem* fov;
+	QGraphicsSimpleTextItem* fps;
 };
 
 class StelBarsPath : public QGraphicsPathItem
@@ -149,7 +149,7 @@ private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
 	StelBarsPath* buttonBarPath;
-	QGraphicsTextItem* buttonHelpLabel;
+	QGraphicsSimpleTextItem* buttonHelpLabel;
 	Ui_Form* ui;
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
