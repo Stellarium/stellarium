@@ -56,8 +56,8 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	assert(!pixOff.isNull());
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
-	timeLine = new QTimeLine(300, this);
-	timeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	timeLine = new QTimeLine(250, this);
+	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 	
 	if (action!=NULL)
