@@ -91,7 +91,7 @@ protected:
 	static QPen pen;
 	
 	City city;
-	QGraphicsTextItem* label;
+	QGraphicsSimpleTextItem* label;
 	MapView* view;
 public:
 	CityItem(const City& city_, MapView* view);
@@ -112,8 +112,8 @@ CityItem::CityItem(const City& city_, MapView* v):
 	setPen(pen);
 	setAcceptsHoverEvents(true);
 	
-	label = new QGraphicsTextItem(city.getName(), this);
-	label->setDefaultTextColor(pen.color());
+	label = new QGraphicsSimpleTextItem(city.getName(), this);
+	label->setBrush(QBrush(pen.color()));
 	label->setPos(4, -20);
 }
 
