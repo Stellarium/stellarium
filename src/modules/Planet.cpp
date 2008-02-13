@@ -654,10 +654,6 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 {
 	if(!hint_fader.getInterstate()) return;
 
-	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
-
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getOnScreenSize(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
@@ -670,6 +666,8 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate()/tmp);
 
 	// Draw the 2D small circle
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glCircle(screenPos, 8);
 }
 
