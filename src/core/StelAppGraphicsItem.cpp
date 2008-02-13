@@ -118,9 +118,12 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	glPushMatrix();
 	glShadeModel(GL_SMOOTH);
 	glDisable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_LIGHTING);
 	//glEnable(GL_MULTISAMPLE);
+	glDisable(GL_DITHER);
+	glDisable(GL_ALPHA_TEST);
 	
 	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
 	

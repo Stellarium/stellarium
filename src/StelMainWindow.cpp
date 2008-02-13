@@ -85,14 +85,22 @@ void StelMainWindow::init(int argc, char** argv)
 	mainItem->setFocus();
 	view = new StelQGraphicsView(scene, this);
 	view->setFrameShape(QFrame::NoFrame);
+	view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	view->setFocusPolicy(Qt::ClickFocus);
-	glWidget = new QGLWidget(this);
+
+	QGLFormat glFormat(QGL::StencilBuffer);
+	//glFormat.setSamples(1);
+	glWidget = new QGLWidget(glFormat, this);
 	glWidget->setObjectName("StelGLWidget");
 	glWidget->setAutoFillBackground(false);
+	view->setAutoFillBackground(false);
 	view->setViewport(glWidget);
  	view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
- 	view->setRenderHint(QPainter::TextAntialiasing, false);
-//  	view->setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
+	
+	//view->setCacheMode(QGraphicsView::CacheBackground);
+	// Antialiasing works only with SampleBuffer, but it's much slower
+	view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	
 	// Use it as a central widget
 	setCentralWidget(view);
