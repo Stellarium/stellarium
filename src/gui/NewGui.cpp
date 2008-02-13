@@ -48,7 +48,7 @@
 #include <QMouseEvent>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
-		const QPixmap& apixHover, QAction* aaction, QGraphicsTextItem* ahelpLabel) : 
+		const QPixmap& apixHover, QAction* aaction, QGraphicsSimpleTextItem* ahelpLabel) : 
 		QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
 		checked(false), action(aaction), helpLabel(ahelpLabel)
 {
@@ -90,7 +90,7 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
 	if (helpLabel && action)
-		helpLabel->setPlainText(action->toolTip() + "  [" + action->shortcut().toString() + "]");
+		helpLabel->setText(action->toolTip() + "  [" + action->shortcut().toString() + "]");
 }
 		
 void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
@@ -99,7 +99,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
 	if (helpLabel && action)
-		helpLabel->setPlainText("");
+		helpLabel->setText("");
 }
 
 void StelButton::animValueChanged(qreal value)
@@ -148,19 +148,20 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	QFont font("DejaVuSans", 10);
 	QColor color = QColor::fromRgbF(1,1,1,1);
-	datetime = new QGraphicsTextItem("2008-02-06  17:33", this);
-	location = new QGraphicsTextItem("Munich, Earth, 500m", this);
-	fov = new QGraphicsTextItem("FOV 43.45", this);
-	fps = new QGraphicsTextItem("43.2 FPS", this);
+	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
+	location = new QGraphicsSimpleTextItem("Munich, Earth, 500m", this);
+	fov = new QGraphicsSimpleTextItem("FOV 43.45", this);
+	fps = new QGraphicsSimpleTextItem("43.2 FPS", this);
 	
 	datetime->setFont(font);
-	datetime->setDefaultTextColor(color);
+	QBrush brush(color);
+	datetime->setBrush(brush);
 	location->setFont(font);
-	location->setDefaultTextColor(color);
+	location->setBrush(brush);
 	fov->setFont(font);
-	fov->setDefaultTextColor(color);
+	fov->setBrush(brush);
 	fps->setFont(font);
-	fps->setDefaultTextColor(color);
+	fps->setBrush(brush);
 }
 
 void BottomStelBar::addButton(StelButton* button)
@@ -195,22 +196,22 @@ void BottomStelBar::updateText()
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
-	datetime->setPlainText(QString::fromStdWString(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd))+
+	datetime->setText(QString::fromStdWString(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd))+
 			"   "+QString::fromStdWString(StelApp::getInstance().getLocaleMgr().get_printable_time_local(jd)));
 	
-	location->setPlainText(core->getObservatory()->getHomePlanetNameI18n() +
+	location->setText(core->getObservatory()->getHomePlanetNameI18n() +
 			", " + core->getObservatory()->getLocationName() +
 			QString(", %1m").arg(core->getObservatory()->getAltitude()));
 	
 	QString str;
 	QTextStream wos(&str);
 	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QString::fromWCharArray(L"\u00B0");
-	fov->setPlainText(str);
+	fov->setText(str);
 	
 	str="";
 	QTextStream wos2(&str);
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
-	fps->setPlainText(str);
+	fps->setText(str);
 	
 	datetime->setPos(10, 0);
 
@@ -402,9 +403,9 @@ void NewGui::init()
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
 	// Create the help label
-	buttonHelpLabel = new QGraphicsTextItem("");
+	buttonHelpLabel = new QGraphicsSimpleTextItem("");
 	buttonHelpLabel->setFont(QFont("DejaVuSans", 12));
-	buttonHelpLabel->setDefaultTextColor(QColor::fromRgbF(1,1,1,1));
+	buttonHelpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(NULL);
