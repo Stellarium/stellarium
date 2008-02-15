@@ -33,5 +33,7 @@ void ResizeFrame::mouseMoveEvent(QMouseEvent *event)
 {
   QPoint dpos = event->pos() - mouse_pos;
   QWidget* p = dynamic_cast<QWidget*>(QFrame::parent()->parent());
+  p->setUpdatesEnabled(false);
   p->resize(p->size().width() + dpos.x(), p->size().height() + dpos.y());
+  p->setUpdatesEnabled(true);
 }
