@@ -23,6 +23,7 @@
 
 #include <QGraphicsView>
 
+class City;
 
 class MapView : public QGraphicsView
 {
@@ -33,6 +34,7 @@ protected:
 	QGraphicsScene scene;
     QPixmap pix;
     QGraphicsPixmapItem* pixItem;
+    QList<City> cities;
 public:
 	float getScale() const {return scale;}
 	MapView(QWidget *parent = 0);

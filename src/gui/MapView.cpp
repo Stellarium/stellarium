@@ -19,6 +19,7 @@
 
 #include <QWheelEvent>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
 #include <QLabel>
 #include <QFile>
 #include <QDebug>
@@ -36,13 +37,15 @@ public:
 	/// Construct a city from a text line using the city .fab format
 	static City fromLine(const QString& line);
 	
-	QString getName(void) { return name; }
-	QString getState(void) { return state; }
-	QString getCountry(void) { return country; }
-	double getLatitude(void) { return latitude; }
-	double getLongitude(void) { return longitude; }
-	int getShowAtZoom(void) { return showatzoom; }
-	int getAltitude(void) { return altitude; }
+	QString getName(void) const { return name; }
+	QString getState(void) const { return state; }
+	QString getCountry(void) const { return country; }
+	double getLatitude(void) const { return latitude; }
+	double getLongitude(void) const { return longitude; }
+	int getShowAtZoom(void) const { return showatzoom; }
+	int getAltitude(void) const { return altitude; }
+	float getRadius(void) const { return radius; }
+	void setRadius(float r) { radius = r; }
 private:
 	QString name;
 	QString state;
@@ -52,6 +55,7 @@ private:
 	float zone;
 	int showatzoom;
 	int altitude;
+	float radius;
 };
 
 
@@ -84,67 +88,72 @@ City City::fromLine(const QString& line)
 
 
 
-class CityItem : public QGraphicsEllipseItem
+class CityItem : public QGraphicsItem
 {
 protected:
 	static QBrush brush;
 	static QPen pen;
 	
-	City city;
-	QGraphicsSimpleTextItem* label;
+	const City* city;
+	bool selected;
 	MapView* view;
+	
+	virtual QRectF boundingRect() const;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 public:
-	CityItem(const City& city_, MapView* view);
+	CityItem(const City* city_, MapView* view);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-	virtual void advance(int phase);
 };
 
 QBrush CityItem::brush(QColor(255,0,0));
-QPen CityItem::pen(QColor(255,0,0));
 
-CityItem::CityItem(const City& city_, MapView* v):
-	QGraphicsEllipseItem(- 2, - 2, 4, 4), city(city_), view(v)
+CityItem::CityItem(const City* city_, MapView* v):
+	city(city_), selected(false), view(v)
 {
-	setPos(city.getLongitude(), -city.getLatitude());
-	
-	setBrush(brush);
-	setPen(pen);
+	setPos(city->getLongitude(), -city->getLatitude());
 	setAcceptsHoverEvents(true);
+
+}
+
+QRectF CityItem::boundingRect() const
+{
+	float r = city->getRadius();
+	return QRectF(-r, -r, 2 * r, 2 * r);
+}
+
+void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	int cityZoom = city->getShowAtZoom();
+	if (cityZoom == 0) cityZoom = 8;
+	if (view->getScale() < cityZoom) return;
+
+	// Draw the point
+	QPointF pos = view->mapFromScene(this->pos());
+	painter->save();
+	painter->resetMatrix();
+	painter->drawEllipse((int)pos.x() - 2, (int)pos.y() - 2, 4, 4);
 	
-	label = new QGraphicsSimpleTextItem(city.getName(), this);
-	label->setBrush(QBrush(pen.color()));
-	label->setPos(4, -20);
+	// then the text
+	if (city->getShowAtZoom() != 0) {
+		painter->drawText((int)pos.x() + 2, (int)pos.y() - 2, city->getName());
+	}
+	painter->restore();
 }
 
 void CityItem::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
+	selected = true;
 	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
-	cityName->setText(city.getName());
+	cityName->setText(city->getName());
+	cityName->update();
 }
 
 void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
+	selected = false;
 	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
 	cityName->setText("");
-}
-
-/// Update the scale of the item to compensate the map zoom
-void CityItem::advance(int phase)
-{
-	if (phase != 1) return;
-	int cityZoom = city.getShowAtZoom();
-	if (cityZoom != 0 && view->getScale() >= cityZoom)
-	{
-		setVisible(true);
-		float scale = 1 / view->getScale();
-		resetMatrix();
-		this->scale(scale, scale);
-	}
-	else
-	{
-		setVisible(false);
-	}
 }
 
 MapView::MapView(QWidget *parent)
@@ -177,10 +186,12 @@ void MapView::wheelEvent(QWheelEvent* event)
 
 void MapView::updateScale()
 {
+	this->setUpdatesEnabled(false);
 	resetMatrix();
 	QGraphicsView::scale(scale, scale);
 	QGraphicsView::centerOn(center);
 	scene.advance(); // Update the items scales
+	this->setUpdatesEnabled(true);
 }
 
 void MapView::populate(const QString& filename)
@@ -199,8 +210,30 @@ void MapView::populate(const QString& filename)
 	{
 		QString line = file.readLine();
 		if (line.startsWith("#")) continue;
-		City city = City::fromLine(line);
-		scene.addItem(new CityItem(city, this));
+		cities.append(City::fromLine(line));
+	}
+	
+	// Now we have to set the cities radii
+	QList<City>::iterator city;
+	for(city = cities.begin(); city < cities.end(); ++city)
+	{
+		float min_dist = 360;
+		QPointF p1(city->getLatitude(), city->getLongitude());
+		QList<City>::const_iterator city2;
+		for(city2 = cities.begin(); city2 < cities.end(); ++city2)
+		{
+			QPointF p2(city2->getLatitude(), city2->getLongitude());
+			QPointF d = p1 - p2;
+			float dist = sqrt(pow(d.x(), 2) + pow(d.y(), 2));
+			if (dist < min_dist && dist != 0) min_dist = dist;
+		}
+		city->setRadius(min_dist / 2);
+	}
+	
+	// We add the cities in the view
+	for(city = cities.begin(); city < cities.end(); ++city)
+	{
+		scene.addItem(new CityItem(&*city, this));
 	}
 	qDebug("end populate");
 }

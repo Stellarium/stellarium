@@ -38,28 +38,29 @@ class BarFrame : public QFrame
 {
 Q_OBJECT
 public:
-  QPoint mouse_pos;
+	QPoint mouse_pos;
   
-  BarFrame(QWidget* parent) : QFrame(parent) {}
+	BarFrame(QWidget* parent) : QFrame(parent), moving(false) {}
   
-  void mousePressEvent(QMouseEvent *event) {
-    mouse_pos = event->pos();
-  }
-  void mouseMoveEvent(QMouseEvent *event);
+	virtual void mousePressEvent(QMouseEvent *event);
+	virtual void mouseReleaseEvent(QMouseEvent *event);
+	virtual void mouseMoveEvent(QMouseEvent *event);
+protected:
+	bool moving;
 };
 
 class ResizeFrame : public QFrame
 {
 Q_OBJECT
 public:
-  QPoint mouse_pos;
+	QPoint mouse_pos;
   
-  ResizeFrame(QWidget* parent) : QFrame(parent) {}
+	ResizeFrame(QWidget* parent) : QFrame(parent) {}
   
-  void mousePressEvent(QMouseEvent *event) {
-    mouse_pos = event->pos();
-  }
-  void mouseMoveEvent(QMouseEvent *event);
+	virtual void mousePressEvent(QMouseEvent *event) {
+		mouse_pos = event->pos();
+	}
+	virtual void mouseMoveEvent(QMouseEvent *event);
 };
 
 
