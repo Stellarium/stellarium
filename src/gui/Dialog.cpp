@@ -17,23 +17,34 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QDebug>
 
 #include "Dialog.hpp"
 
-#include <iostream>
+void BarFrame::mousePressEvent(QMouseEvent *event)
+{
+	mouse_pos = event->pos();
+	moving = true;
+}
+
+void BarFrame::mouseReleaseEvent(QMouseEvent *event)
+{
+	moving = false;
+}
 
 void BarFrame::mouseMoveEvent(QMouseEvent *event)
 {
-  QPoint dpos = event->pos() - mouse_pos;
-  QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
-  p->move(p->pos() + dpos);
+	if (!moving) return;
+	QPoint dpos = event->pos() - mouse_pos;
+	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
+	p->move(p->pos() + dpos);
 }
 
 void ResizeFrame::mouseMoveEvent(QMouseEvent *event)
 {
-  QPoint dpos = event->pos() - mouse_pos;
-  QWidget* p = dynamic_cast<QWidget*>(QFrame::parent()->parent());
-  p->setUpdatesEnabled(false);
-  p->resize(p->size().width() + dpos.x(), p->size().height() + dpos.y());
-  p->setUpdatesEnabled(true);
+	QPoint dpos = event->pos() - mouse_pos;
+	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent()->parent());
+	p->setUpdatesEnabled(false);
+	p->resize(p->size().width() + dpos.x(), p->size().height() + dpos.y());
+	p->setUpdatesEnabled(true);
 }
