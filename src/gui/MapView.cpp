@@ -29,6 +29,9 @@
 #include "StelUtils.hpp"
 #include "MapView.hpp"
 
+
+//! @class City
+//! Contains informations relative to a city (name, location, etc)
 class City 
 {
 public:
@@ -44,6 +47,8 @@ public:
 	double getLongitude(void) const { return longitude; }
 	int getShowAtZoom(void) const { return showatzoom; }
 	int getAltitude(void) const { return altitude; }
+	//! Get the larger radius of a circle centered on the city not overlaping other cities radius.
+	//! This method is used to implement city selection.
 	float getRadius(void) const { return radius; }
 	void setRadius(float r) { radius = r; }
 private:
@@ -65,7 +70,7 @@ City::City(const QString& _name, const QString& _state, const QString& _country,
 {
 }
 
-/// Construct a city from a text line using the city .fab format
+//! Construct a city from a text line using the city .fab format
 City City::fromLine(const QString& line)
 {
 	City ret;
@@ -87,11 +92,11 @@ City City::fromLine(const QString& line)
 }
 
 
-
+//! @class CityItem
+//! QGraphicsItem representing a city
 class CityItem : public QGraphicsItem
 {
 protected:
-	static QBrush brush;
 	static QPen pen;
 	
 	const City* city;
@@ -101,12 +106,14 @@ protected:
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 public:
+	//! @param city_  the city pointer
+	//! @param view   the view we draw on
 	CityItem(const City* city_, MapView* view);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 };
 
-QBrush CityItem::brush(QColor(255,0,0));
+QPen CityItem::pen(QColor(255,0,0));
 
 CityItem::CityItem(const City* city_, MapView* v):
 	city(city_), selected(false), view(v)
@@ -122,11 +129,19 @@ QRectF CityItem::boundingRect() const
 	return QRectF(-r, -r, 2 * r, 2 * r);
 }
 
+//! Paint the city item
+//! We redefine this method to bypass all the matrix transformation and gain speed
 void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	int cityZoom = city->getShowAtZoom();
 	if (cityZoom == 0) cityZoom = 8;
-	if (view->getScale() < cityZoom) return;
+	if (view->getScale() < cityZoom && !selected) return;
+	
+	if (selected)
+	{
+		// painter->setBrush(brush);
+		painter->setPen(pen);
+	}
 
 	// Draw the point
 	QPointF pos = view->mapFromScene(this->pos());
@@ -135,7 +150,8 @@ void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	painter->drawEllipse((int)pos.x() - 2, (int)pos.y() - 2, 4, 4);
 	
 	// then the text
-	if (city->getShowAtZoom() != 0) {
+	if (city->getShowAtZoom() != 0 || selected)
+	{
 		painter->drawText((int)pos.x() + 2, (int)pos.y() - 2, city->getName());
 	}
 	painter->restore();
@@ -147,6 +163,7 @@ void CityItem::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
 	cityName->setText(city->getName());
 	cityName->update();
+	view->update();
 }
 
 void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
@@ -154,6 +171,7 @@ void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	selected = false;
 	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
 	cityName->setText("");
+	view->update();
 }
 
 MapView::MapView(QWidget *parent)
@@ -196,6 +214,7 @@ void MapView::updateScale()
 
 void MapView::populate(const QString& filename)
 {
+	// TODO: use config file to get the cities filename
 	qDebug("populate");
 	QFile file(filename);
 	
@@ -205,6 +224,7 @@ void MapView::populate(const QString& filename)
 		return;
 	}
 	
+	// Parse the cities file
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{
@@ -214,6 +234,7 @@ void MapView::populate(const QString& filename)
 	}
 	
 	// Now we have to set the cities radii
+	// For every city the radius is half the distance to the closest other city
 	QList<City>::iterator city;
 	for(city = cities.begin(); city < cities.end(); ++city)
 	{
