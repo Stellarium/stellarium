@@ -25,23 +25,32 @@
 
 class City;
 
+
+//! @class MapView
+//! Special QGraphicsView that shows a worl map and permits city selections
 class MapView : public QGraphicsView
 {
 Q_OBJECT
 protected:
 	float scale;
+	//! The center position used when scaling
 	QPointF center;
+	//! The scene
 	QGraphicsScene scene;
+	//! The world map image
     QPixmap pix;
     QGraphicsPixmapItem* pixItem;
+    //! The list of all the cities in the map
     QList<City> cities;
 public:
+	//! Get the scale at wich we are seeing the map
 	float getScale() const {return scale;}
 	MapView(QWidget *parent = 0);
 	void updateScale();
 	void wheelEvent(QWheelEvent * event);
 	~MapView();
 protected:
+	//! Add all the cities into the scene
 	void populate(const QString& filename = "data/cities_Earth.fab");
 
 };
