@@ -15,42 +15,21 @@ run stellarium.dmg
 Look for the binary package matching your distribution.
 
 
+
 ===============================================================================
-        COMPILATION from the source package (stellarium-XXX.tgz)
+Special instructions for COMPILATION on Linux and other unix-likes:
 ===============================================================================
-If you can't find a suited binary package or if you are curious you can also 
-compile the software by yourself.
 
-Make sure you install all the necessary dependencies. See this wiki page:
+See the wiki:
+http://stellarium.org/wiki/index.php/Compilation_on_Linux
 
-http://stellarium.org/wiki/index.php/Build_Dependencies
-
-Once they are installed you are ready to compile Stellarium sources:
-
-Untar the tar.gz archive:
-~$ tar -xzf stellarium-XXX.tar.gz
-~$ cd stellarium-XXX
-
-Then type:
-~$ cmake .
-~$ make
-
-Then to launch the local version of the program type:
-~$ ./src/stellarium
-
-To fully install Stellarium (so that it will be launch-able from everywhere) 
-type as root:
-~$ make install
-
-Once installed you may want to clean the build directory:
-~$ make clean
 
 ===============================================================================
 Special instructions for COMPILATION on MACOSX with Xcode 
 ===============================================================================
 
 See the wiki:
-http://stellarium.org/wiki/index.php/Building_universal_Stellarium_0.8.1_on_an_Intel_Mac
+http://stellarium.org/wiki/index.php/Compilation_on_Macosx
 
 
 ===============================================================================
@@ -71,11 +50,12 @@ You can browse the SVN tree from
 
 http://stellarium.svn.sourceforge.net/viewvc/stellarium/
 
+
 For build instructions see these pages on the Stellarium wiki:
 
 http://stellarium.org/wiki/index.php/Compilation_on_Linux
 http://stellarium.org/wiki/index.php/Windows_Build_Instructions
-http://stellarium.org/wiki/index.php/Building_universal_Stellarium_0.8.1_on_an_Intel_Mac
+http://stellarium.org/wiki/index.php/Compilation_on_Macosx
 
 
 You can have a look at the src/ directory where you will find the source 
@@ -97,4 +77,9 @@ with a clear comment on what is the patch doing.
 A project member will then have a look at it and decide whether the patch is 
 accepted or rejected for integration into Stellarium.
 
+You might also want to subscribe to the stellarium-pubdevel mailing list to
+keep up with the latest discussions about Stellarium development.  You 
+can subscribe here:
+
+https://lists.sourceforge.net/lists/listinfo/stellarium-pubdevel
 
