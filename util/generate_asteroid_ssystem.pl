@@ -151,6 +151,11 @@ sub load_data {
 
 		if ( ! defined($gh_selection{$id}) && ! $gs_flg_all ) { next; }
 
+		# The epoch (first data field) from the input data is 
+		# "Modified Julian Day" (MJD), but we want JD.  Here's how to convert:
+		# JD = MJD + 2400000.5
+		$data[0] += 2400000.5;
+
 		my %datahash;
 		for(my $i=0; $i<=$#ga_field_order; $i++) {
 			$data[$i] =~ s/^\s+//;
