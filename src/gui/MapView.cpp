@@ -27,6 +27,8 @@
 #include <cmath>
 
 #include "StelUtils.hpp"
+#include "StelFileMgr.hpp"
+#include "StelApp.hpp"
 #include "MapView.hpp"
 
 
@@ -215,12 +217,21 @@ void MapView::updateScale()
 void MapView::populate(const QString& filename)
 {
 	// TODO: use config file to get the cities filename
-	qDebug("populate");
-	QFile file(filename);
-	
+	QString cityDataPath;
+	try
+	{
+		cityDataPath = StelApp::getInstance().getFileMgr().findFile(filename);
+	}
+	catch (exception& e)
+	{
+		qWarning() << "ERROR: Failed to locate city data for location map: " << filename << e.what();
+		return;
+	}
+
+	QFile file(cityDataPath);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug("can't open");
+		qWarning() << "ERROR: Could not open city data file for location map: " << cityDataPath;
 		return;
 	}
 	
@@ -251,11 +262,13 @@ void MapView::populate(const QString& filename)
 		city->setRadius(min_dist / 2);
 	}
 	
+	int count=0;
 	// We add the cities in the view
 	for(city = cities.begin(); city < cities.end(); ++city)
 	{
 		scene.addItem(new CityItem(&*city, this));
+		count++;
 	}
-	qDebug("end populate");
+	qDebug() << "DEBUG MapView::populate: loaded " << count << " cities from " << filename;
 }
 
