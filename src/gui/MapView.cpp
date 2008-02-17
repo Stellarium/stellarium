@@ -199,8 +199,10 @@ MapView::~MapView()
 
 void MapView::wheelEvent(QWheelEvent* event)
 {
-	center = mapToScene(event->pos());
-	scale *= exp(event->delta() / 240.);
+	// The new center is the middle point of the current center and the mouse position
+	center = (mapToScene(event->pos()) + center) / 2;
+	scale *= exp(event->delta() / 240.);	// We use an exponential scaling
+	scale = (scale >= 1)? scale : 1; 		// prevent scale below 1
 	updateScale();
 }
 
@@ -210,7 +212,6 @@ void MapView::updateScale()
 	resetMatrix();
 	QGraphicsView::scale(scale, scale);
 	QGraphicsView::centerOn(center);
-	scene.advance(); // Update the items scales
 	this->setUpdatesEnabled(true);
 }
 
