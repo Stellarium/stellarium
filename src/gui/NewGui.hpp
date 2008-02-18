@@ -46,6 +46,9 @@ public:
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
 		QAction* action=NULL, QGraphicsSimpleTextItem* helpLabel=NULL);
 
+	//! Get whether the button is checked
+	bool isChecked() const {return checked;}
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -53,6 +56,7 @@ signals:
 	void triggered();
 
 public slots:
+	//! set whether the button is checked
 	void setChecked(bool b);
 
 protected:
@@ -129,7 +133,7 @@ public:
 	virtual double draw(StelCore* core) {return 0;}
 	
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) {;}
+	virtual void update(double deltaTime);
 	
 	//! Update i18 names from English names according to passed translator.
 	//! The translation is done using gettext with translated strings defined 
@@ -153,6 +157,13 @@ private:
 	Ui_Form* ui;
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
+	
+	StelButton* buttonTimeRewind;
+	StelButton* buttonTimeRealTimeSpeed;
+	StelButton* buttonTimeCurrent;
+	StelButton* buttonTimeForward;
+	
+	StelButton* buttonGotoSelectedObject;
 };
 
 #endif // _NEWGUI_H_
