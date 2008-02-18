@@ -153,8 +153,8 @@ public slots:
 	
 	//! Set real time speed, i.e. 1 sec/sec
 	void setRealTimeSpeed() {setTimeSpeed(JD_SECOND);}
-	//! Get time speed in JDay/sec
-	double getTimeTimeSpeed() const {return (fabs(time_speed-JD_SECOND)<0.0000001);}
+	//! Get whether it is real time speed, i.e. 1 sec/sec
+	bool getRealTimeSpeed() const {return (fabs(time_speed-JD_SECOND)<0.0000001);}
 	
 	//! Set stellarium time to current real world time
 	void setTimeNow();

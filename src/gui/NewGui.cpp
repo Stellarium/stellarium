@@ -21,6 +21,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
+#include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelAppGraphicsItem.hpp"
@@ -502,8 +503,8 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionGoto_Selected_Object, buttonHelpLabel);
-	buttonBar->addButton(b);
+	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionGoto_Selected_Object, buttonHelpLabel);
+	buttonBar->addButton(buttonGotoSelectedObject);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
@@ -519,23 +520,23 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionDecrease_Time_Speed, buttonHelpLabel);
-	buttonBar->addButton(b);
+	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionDecrease_Time_Speed, buttonHelpLabel);
+	buttonBar->addButton(buttonTimeRewind);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionSet_Real_Time_Speed, buttonHelpLabel);
-	buttonBar->addButton(b);
+	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionSet_Real_Time_Speed, buttonHelpLabel);
+	buttonBar->addButton(buttonTimeRealTimeSpeed);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeNow-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionReturn_To_Current_Time, buttonHelpLabel);
-	buttonBar->addButton(b);
+	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionReturn_To_Current_Time, buttonHelpLabel);
+	buttonBar->addButton(buttonTimeCurrent);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeForward-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionIncrease_Time_Speed, buttonHelpLabel);
-	buttonBar->addButton(b);
+	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionIncrease_Time_Speed, buttonHelpLabel);
+	buttonBar->addButton(buttonTimeForward);
 	
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(NULL);
@@ -571,6 +572,25 @@ void NewGui::updateI18n()
 {
 }
 
+void NewGui::update(double deltaTime)
+{
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	if (buttonTimeRewind->isChecked())
+		buttonTimeRewind->setChecked(false);
+	if (buttonTimeForward->isChecked())
+		buttonTimeForward->setChecked(false);
+	if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
+	{
+		buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
+	}
+	const bool isTimeNow=nav->getIsTimeNow();
+	if (buttonTimeCurrent->isChecked()!=isTimeNow)
+		buttonTimeCurrent->setChecked(isTimeNow);
+	MovementMgr* mmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	const bool b = mmgr->getFlagTracking();
+	if (buttonGotoSelectedObject->isChecked()!=b)
+		buttonGotoSelectedObject->setChecked(b);
+}
 
 bool NewGui::handleMouseMoves(int x, int y)
 {
