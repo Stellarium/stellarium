@@ -170,6 +170,7 @@ void BottomStelBar::addButton(StelButton* button)
 	QRectF rectCh = getButtonsBoundingRect();
 	button->setParentItem(this);
 	button->setPos(rectCh.right(), y);
+	//qWarning() << rectCh << boundingRect();
 	updateText();
 }
 
@@ -421,16 +422,6 @@ void NewGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Location_Window, buttonHelpLabel);	
 	winBar->addButton(b);
 	
-	pxmapOn = QPixmap(":/graphicGui/gui/3-on-sky.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/3-off-sky.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);
-	winBar->addButton(b);	
-	
-	pxmapOn = QPixmap(":/graphicGui/gui/4-on-skylore.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/4-off-skylore.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);
-	winBar->addButton(b);	
-	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);
@@ -570,7 +561,7 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
 	
 	double rangeY = buttonBar->boundingRect().height()-7.-buttonBarPath->getRoundSize();
-	buttonBar->setPos(buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
+	buttonBar->setPos(winBar->boundingRect().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
 	buttonBarPath->updatePath(buttonBar, winBar);
 }

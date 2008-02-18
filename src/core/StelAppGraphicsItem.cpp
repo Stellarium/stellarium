@@ -121,7 +121,7 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_LIGHTING);
-	//glEnable(GL_MULTISAMPLE);
+	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
 	
