@@ -51,6 +51,7 @@
 #include "Planet.hpp"
 #include "Observer.hpp"
 #include "StelMainWindow.hpp"
+#include "SkyDrawer.hpp"
 
 using namespace std;
 
@@ -117,7 +118,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("MeteorMgr");
 	ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
-	
+	SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	// stellarium specific logic to run each command
 
 	if(command == "echo") {
@@ -162,18 +163,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["moon_scale"]!="") ssmgr->setMoonScale(StelUtils::stringToDouble(args["moon_scale"]));
 		else if(args["sky_culture"]!="") stapp->getSkyCultureMgr().setSkyCultureDir(args["sky_culture"].c_str());
 		else if(args["sky_locale"]!="") stapp->getLocaleMgr().setSkyLanguage(args["sky_locale"].c_str());
-		else if(args["star_mag_scale"]!="") smgr->setMagScale(StelUtils::stringToDouble(args["star_mag_scale"]));
+		else if(args["star_mag_scale"]!="") skyDrawer->setMagScale(StelUtils::stringToDouble(args["star_mag_scale"]));
 		else if(args["star_scale"]!="") {
 			float scale = StelUtils::stringToDouble(args["star_scale"]);
-			smgr->setScale(scale);
-			ssmgr->setScale(scale);
+			skyDrawer->setScale(scale);
 		} 
 		else if(args["nebula_scale"]!="")
 			{
 				float scale = StelUtils::stringToDouble(args["nebula_scale"]);
 				nmgr->setCircleScale(scale);
 			} 
-		else if(args["star_twinkle_amount"]!="") smgr->setTwinkleAmount(StelUtils::stringToDouble(args["star_twinkle_amount"]));
+			else if(args["star_twinkle_amount"]!="") skyDrawer->setTwinkleAmount(StelUtils::stringToDouble(args["star_twinkle_amount"]));
 		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(QString::fromStdString(args["time_zone"]));
 		else if(args["milky_way_intensity"]!="") {
 			MilkyWay* mw = (MilkyWay*)stapp->getModuleMgr().getModule("MilkyWay");
@@ -790,7 +790,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
 		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
-		
+		SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
 			cmgr->setFlagLines(newval);
@@ -812,12 +812,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
              cmgr->setFlagIsolateSelected(newval);
         }
 		else if(name=="star_twinkle") {
-			newval = !smgr->getFlagTwinkle();
-			smgr->setFlagTwinkle(newval);
+			newval = !skyDrawer->getFlagTwinkle();
+			skyDrawer->setFlagTwinkle(newval);
 		}
 		else if(name=="point_star") {
-			newval = !smgr->getFlagPointStar();
-			smgr->setFlagPointStar(newval);
+			newval = !skyDrawer->getFlagPointStar();
+			skyDrawer->setFlagPointStar(newval);
 		}
 		else if(name=="show_selected_object_info") newval = (ui->FlagShowSelectedObjectInfo = !ui->FlagShowSelectedObjectInfo);
 		else if(name=="show_tui_datetime") newval = (ui->FlagShowTuiDateTime = !ui->FlagShowTuiDateTime);
@@ -976,14 +976,14 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 		StelUI* ui = (StelUI*)StelApp::getInstance().getModuleMgr().getModule("StelUI");
 		ScriptMgr* scripts = (ScriptMgr*)StelApp::getInstance().getModuleMgr().getModule("ScriptMgr");
-		
+		SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
 		else if(name=="constellation_art") cmgr->setFlagArt(newval);
 		else if(name=="constellation_boundaries") cmgr->setFlagBoundaries(newval);
      	else if(name=="constellation_pick") cmgr->setFlagIsolateSelected(newval);
-		else if(name=="star_twinkle") smgr->setFlagTwinkle(newval);
-		else if(name=="point_star") smgr->setFlagPointStar(newval);
+		else if(name=="star_twinkle") skyDrawer->setFlagTwinkle(newval);
+		else if(name=="point_star") skyDrawer->setFlagPointStar(newval);
 		else if(name=="show_selected_object_info") ui->FlagShowSelectedObjectInfo = newval;
 		else if(name=="show_tui_datetime") ui->FlagShowTuiDateTime = newval;
 		else if(name=="show_tui_short_obj_info") ui->FlagShowTuiShortObjInfo = newval;

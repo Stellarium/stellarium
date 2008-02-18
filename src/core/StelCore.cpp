@@ -21,6 +21,7 @@
 #include "Observer.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
+#include "SkyDrawer.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "GeodesicGrid.hpp"
@@ -40,6 +41,7 @@ StelCore::StelCore()
 	tone_converter = new ToneReproducer();
 	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
 	projection->init();
+	skyDrawer = new SkyDrawer(projection, tone_converter);
 }
 
 
@@ -52,7 +54,8 @@ StelCore::~StelCore()
 	delete projection; projection=NULL;
 	delete observatory; observatory=NULL;
 	delete tone_converter; tone_converter=NULL;
-	delete geodesic_grid; geodesic_grid = NULL;
+	delete geodesic_grid; geodesic_grid=NULL;
+	delete skyDrawer; skyDrawer=NULL;
 }
 
 /*************************************************************************
@@ -77,6 +80,8 @@ void StelCore::init()
 	int grid_level = hip_stars->getMaxGridLevel();
 	geodesic_grid = new GeodesicGrid(grid_level);
 	hip_stars->setGrid(geodesic_grid);
+	
+	skyDrawer->init();
 }
 
 
@@ -112,6 +117,8 @@ void StelCore::update(double deltaTime)
 	                                    navigation->get_helio_to_eye_mat(),
 	                                    navigation->get_local_to_eye_mat(),
 	                                    navigation->get_j2000_to_eye_mat());
+	
+	skyDrawer->update(deltaTime);
 }
 
 

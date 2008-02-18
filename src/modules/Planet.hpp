@@ -258,7 +258,6 @@ protected:
 	Mat4d rot_local_to_parent;
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
     STextureSP tex_map;			// Planet map texture
-	STextureSP tex_halo;			// Little halo texture
 	STextureSP tex_big_halo;		// Big halo texture
 
 	float big_halo_size;				// Halo size on screen

@@ -94,12 +94,12 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	y+=15;
 
-	star_twinkle_cbx = new LabeledCheckBox(smgr->getFlagTwinkle(), _("Star Twinkle. Amount :"));
+	star_twinkle_cbx = new LabeledCheckBox(false, _("Star Twinkle. Amount :"));
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
 
-	star_twinkle_amount = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 0.6, smgr->getTwinkleAmount(), 0.1);
+	star_twinkle_amount = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 0.6, false, 0.1);
 	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
 	star_twinkle_amount->setPos(x + 320,y);
@@ -893,9 +893,9 @@ void StelUI::saveRenderOptions(void)
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
 
-	conf->setValue("stars/max_mag_star_name", smgr->getMaxMagName());
-	conf->setValue("stars/flag_star_twinkle", smgr->getFlagTwinkle());
-	conf->setValue("stars/star_twinkle_amount", smgr->getTwinkleAmount());
+	//conf->setValue("stars/max_mag_star_name", smgr->getMaxMagName());
+	//conf->setValue("stars/flag_star_twinkle", smgr->getFlagTwinkle());
+	//conf->setValue("stars/star_twinkle_amount", smgr->getTwinkleAmount());
 	
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagNames());
@@ -997,8 +997,8 @@ void StelUI::updateConfigForm(void)
 	stars_cbx->setState(smgr->getFlagStars());
 	star_names_cbx->setState(smgr->getFlagNames());
 	max_mag_star_name->setValue(smgr->getMaxMagName());
-	star_twinkle_cbx->setState(smgr->getFlagTwinkle());
-	star_twinkle_amount->setValue(smgr->getTwinkleAmount());
+//	star_twinkle_cbx->setState(smgr->getFlagTwinkle());
+//	star_twinkle_amount->setValue(smgr->getTwinkleAmount());
 	
 	// Constellations
 	constellation_cbx->setState(cmgr->getFlagLines());
