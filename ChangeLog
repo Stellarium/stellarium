@@ -1,7 +1,8 @@
 0.10.0 [in development]
 Don't support SDL main application anymore. Only Qt.
-The whole StelApp class is managed as a QGraphicsItem.
+The whole StelApp class is managed as a QGraphicsItem, inside a QGraphicsView.
 Extracted deprecated sources from the core of stellarium.
+Continued API cleaning.
 Re-organized the source files into sub-directories.
 Created the new GUI button bars based on QGraphicsView
 Moved stars/planets halo rendering into SkyDrawer.

@@ -104,8 +104,6 @@ void SkyDrawer::update(double deltaTime)
 	
 	min_rmag = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(max_scaled_60deg_mag + 
 			mag_shift + 12.12331f)) * (108064.73f / 3600.f))) * 30.f;
-	
-	qWarning() << min_rmag;
 }
 
 void SkyDrawer::prepareDraw()
