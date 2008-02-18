@@ -24,6 +24,7 @@
 class Navigator;
 class Projector;
 class ToneReproducer;
+class SkyDrawer;
 class LoadingBar;
 class Observer;
 class GeodesicGrid;
@@ -71,6 +72,11 @@ public:
 	//! Get the current tone reproducer used in the core.
 	const ToneReproducer* getToneReproducer() const {return tone_converter;}
 
+	//! Get the current SkyDrawer used in the core.
+	SkyDrawer* getSkyDrawer() {return skyDrawer;}
+	//! Get the current SkyDrawer used in the core.
+	const SkyDrawer* getSkyDrawer() const {return skyDrawer;}
+	
 	//! Get the current observer description.
 	Observer* getObservatory() {return observatory;}
 	//! Get the current observer description.
@@ -86,6 +92,7 @@ private:
 	Observer* observatory;			// Manage observer position
 	Projector* projection;			// Manage the projection mode and matrix
 	ToneReproducer* tone_converter;		// Tones conversion between stellarium world and display device
+	SkyDrawer* skyDrawer;
 	class MovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid

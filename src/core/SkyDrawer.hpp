@@ -20,6 +20,9 @@
 #ifndef SKYDRAWER_HPP
 #define SKYDRAWER_HPP
 
+#include "STextureTypes.hpp"
+#include "vecmath.h"
+
 class Projector;
 class ToneReproducer;
 
@@ -34,9 +37,15 @@ public:
 	//! Destructor
     ~SkyDrawer();
 
+	//! Init parameters from config file
+	void init();
+	
 	//! Update with respect to the time and Projector/ToneReproducer state
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
+	
+	//! Set the proper openGL state before making calls to drawPointSource
+	void prepareDraw();
 	
 	//! Draw a point source halo.
 	//! @param x the x position of the object on the screen
@@ -45,15 +54,16 @@ public:
 	//! @param b_v the source B-V
 	//! @return true if the source was actually visible and drawn
 	bool drawPointSource(double x, double y, float mag, float b_v);
-
+	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
+	
 	//! Draw a disk source halo.
 	//! @param x the x position of the disk center in pixel
 	//! @param y the y position of the disk centre in pixel
 	//! @param r radius of the disk in pixel
 	//! @param mag the source magnitude
-	//! @param b_v the source B-V
+	//! @param color the source RGB color
 	//! @return true if the source was actually visible and drawn
-	bool drawDiskSource(double x, double y, double r, float mag, float b_v);
+	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
 	//! Set base source display scaling factor.
 	void setScale(float b) {starScale=b;}
@@ -81,47 +91,59 @@ public:
 	bool getFlagPointStar(void) const {return flagPointStar;}
 	
 	
-	//! Get MagConverter maximum FOV.
+	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return max_fov;}
-	//! Set MagConverter maximum FOV.
+	//! Set SkyDrawer maximum FOV.
 	//! Usually stars/planet halos are drawn fainter when FOV gets larger, 
 	//! but when FOV gets larger than this value, the stars do not become
 	//! fainter any more. Must be >= 60.0.
 	void setMaxFov(float fov) {max_fov = (fov < 60.f) ? 60.f : fov;}
 	
-	//! Get MagConverter minimum FOV.
+	//! Get SkyDrawer minimum FOV.
 	float getMinFov(void) const {return min_fov;}
-	//! Set MagConverter minimum FOV.
+	//! Set SkyDrawer minimum FOV.
 	//! Usually stars/planet halos are drawn brighter when FOV gets smaller.
 	//! But when FOV gets smaller than this value, the stars do not become
 	//! brighter any more. Must be <= 60.0.
 	void setMinFov(float fov) {min_fov = (fov > 60.f) ? 60.f : fov;}
 	
-	//! Get MagConverter magnitude shift.
+	//! Get SkyDrawer magnitude shift.
 	float getMagShift(void) const {return mag_shift;}
-	//! Set MagConverter magnitude shift.
+	//! Set SkyDrawer magnitude shift.
 	//! draw the stars/planet halos as if they were brighter of fainter
 	//! by this amount of magnitude
 	void setMagShift(float d) {mag_shift = d;}
 	
-	//! Get MagConverter maximum magnitude.
+	//! Get SkyDrawer maximum magnitude.
 	float getMaxMag(void) const {return max_mag;}
-	//! Set MagConverter maximum magnitude.
+	//! Set SkyDrawer maximum magnitude.
 	//! stars/planet halos, whose original (unshifted) magnitude is greater
 	//! than this value will not be drawn.
 	void setMaxMag(float mag) {max_mag = mag;}
 	
-	//! Get MagConverter maximum scaled magnitude wrt 60 degree FOV.
+	//! Get SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
 	float getMaxScaled60DegMag(void) const {return max_scaled_60deg_mag;}
-	//! Set MagConverter maximum scaled magnitude wrt 60 degree FOV.
+	//! Set SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
 	//! Stars/planet halos, whose original (unshifted) magnitude is greater
 	//! than this value will not be drawn at 60 degree FOV.
 	void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
 	
-private:
+
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;
 	
+	//! Convert quantized B-V index to float B-V
+	static inline float indexToBV(unsigned char b_v)
+	{
+		return (float)b_v*(4.f/127.f)-0.5f;
+	}
+	
+	static inline const Vec3f& indexToColor(unsigned char b_v)
+	{
+		return colorTable[b_v];
+	}
+	
+private:
 	Projector* prj;
 	ToneReproducer* eye;
 	float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag, min_rmag, fov_factor;
@@ -130,6 +152,15 @@ private:
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
+	
+	//! Little halo texture
+	STextureSP texHalo;
+	
+	//! Load B-V conversion parameters from config file
+	static void initColorTableFromConfigFile(class QSettings* conf);
+	
+	//! Contains 
+	static Vec3f colorTable[128];
 };
 
 #endif

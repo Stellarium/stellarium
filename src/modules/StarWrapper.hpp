@@ -24,6 +24,7 @@
 #include "Navigator.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
+#include "SkyDrawer.hpp"
 
 namespace BigStarCatalogExtension {
 
@@ -75,7 +76,7 @@ protected:
   }
   Vec3d getEarthEquatorialPos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
-  Vec3f getInfoColor(void) const {return StarMgr::color_table[s->b_v];}
+  Vec3f getInfoColor(void) const {return SkyDrawer::indexToColor(s->b_v);}
   float getMagnitude(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
   float getSelectPriority(const Navigator *nav) const

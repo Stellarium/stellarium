@@ -204,88 +204,8 @@ public:
 	
 	static double getCurrentJDay(void) {return current_JDay;}
 	
-	static Vec3f color_table[128];
 	static string convertToSpectralType(int index);
 	static string convertToComponentIds(int index);
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods to be migrated to SkyDrawer
-	//! Draw a star of specified position, magnitude and color.
-	int drawStar(const Projector *prj, const Vec3d &XY,
-				 const float rc_mag[2], const Vec3f &color) const;
-	
-	//! Set flag for Star twinkling.
-	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
-	//! Get flag for Star twinkling.
-	bool getFlagTwinkle(void) const {return flagStarTwinkle;}
-	
-	//! Set flag for displaying Star as GLpoints (faster on some hardware but not so nice).
-	void setFlagPointStar(bool b) {flagPointStar=b;}
-	//! Get flag for displaying Star as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar(void) const {return flagPointStar;}
-	
-	//! Set base stars display scaling factor.
-	void setScale(float b) {starScale=b;}
-	//! Get base stars display scaling factor.
-	float getScale(void) const {return starScale;}
-	
-	//! Set stars display scaling factor wrt magnitude.
-	void setMagScale(float b) {starMagScale=b;}
-	//! Get base stars display scaling factor wrt magnitude.
-	float getMagScale(void) const {return starMagScale;}
-	
-	//! Set stars twinkle amount.
-	void setTwinkleAmount(float b) {twinkleAmount=b;}
-	//! Get stars twinkle amount.
-	float getTwinkleAmount(void) const {return twinkleAmount;}
-	
-	
-	//! Set MagConverter maximum FOV.
-	//! Usually stars/planet halos are drawn fainter when FOV gets larger, 
-	//! but when FOV gets larger than this value, the stars do not become
-	//! fainter any more. Must be >= 60.0.
-	void setMagConverterMaxFov(float x) {mag_converter->setMaxFov(x);}
-	
-	//! Set MagConverter minimum FOV.
-	//! Usually stars/planet halos are drawn brighter when FOV gets smaller.
-	//! But when FOV gets smaller than this value, the stars do not become
-	//! brighter any more. Must be <= 60.0.
-	void setMagConverterMinFov(float x) {mag_converter->setMinFov(x);}
-	
-	//! Set MagConverter magnitude shift.
-	//! draw the stars/planet halos as if they were brighter of fainter
-	//! by this amount of magnitude
-	void setMagConverterMagShift(float x) {mag_converter->setMagShift(x);}
-	
-	//! Set MagConverter maximum magnitude.
-	//! stars/planet halos, whose original (unshifted) magnitude is greater
-	//! than this value will not be drawn.
-	void setMagConverterMaxMag(float mag) {mag_converter->setMaxMag(mag);}
-	
-	//! Set MagConverter maximum scaled magnitude wrt 60 degree FOV.
-	//! Stars/planet halos, whose original (unshifted) magnitude is greater
-	//! than this value will not be drawn at 60 degree FOV.
-	void setMagConverterMaxScaled60DegMag(float mag) {mag_converter->setMaxScaled60DegMag(mag);}
-	
-	//! Get MagConverter maximum FOV.
-	float getMagConverterMaxFov(void) const {return mag_converter->getMaxFov();}
-	//! Get MagConverter minimum FOV.
-	float getMagConverterMinFov(void) const {return mag_converter->getMinFov();}
-	//! Get MagConverter magnitude shift.
-	float getMagConverterMagShift(void) const {return mag_converter->getMagShift();}
-	//! Get MagConverter maximum magnitude.
-	float getMagConverterMaxMag(void) const {return mag_converter->getMaxMag();}
-	//! Get MagConverter maximum scaled magnitude wrt 60 degree FOV.
-	float getMagConverterMaxScaled60DegMag(void) const {return mag_converter->getMaxScaled60DegMag();}
-	
-	//! Compute RMag and CMag from magnitude.
-	//! Useful for conststent drawing of Planet halos.
-	int computeRCMag(float mag, bool point_star, float fov, const ToneReproducer *eye, float rc_mag[2]) const
-	{
-		mag_converter->setFov(fov);
-		mag_converter->setEye(eye);
-		return mag_converter->computeRCMag(mag,point_star,eye,rc_mag);
-	}
 	
 private:
 	
@@ -301,7 +221,7 @@ private:
 	
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
-	int getMaxSearchLevel(const ToneReproducer *eye, const Projector *prj) const;
+	int getMaxSearchLevel() const;
 	
 	//! Load all the stars from the files.
 	void load_data();
@@ -312,17 +232,10 @@ private:
 	LinearFader names_fader;
 	LinearFader starsFader;
 	
-	float starScale;
-	float starMagScale;
 	bool flagStarName;
 	bool flagStarSciName;
 	float maxMagStarName;
-	bool flagStarTwinkle;
-	float twinkleAmount;
-	bool flagPointStar;
 	bool gravityLabel;
-	
-	STextureSP starTexture; // star texture
 	
 	int max_geodesic_grid_level;
 	int last_max_search_level;
@@ -344,40 +257,6 @@ private:
 	
 	BigStarCatalogExtension::HipIndexStruct *hip_index; // array of hiparcos stars
 	
-	class MagConverter
-	{
-	public:
-		MagConverter(const StarMgr &mgr) : mgr(mgr)
-		{
-			setMaxFov(180.f);
-			setMinFov(0.1f);
-			setFov(180.f);
-			setMagShift(0.f);
-			setMaxMag(30.f);
-			min_rmag = 0.01f;
-		}
-		void setMaxFov(float fov) {max_fov = (fov < 60.f) ? 60.f : fov;}
-		void setMinFov(float fov) {min_fov = (fov > 60.f) ? 60.f : fov;}
-		void setMagShift(float d) {mag_shift = d;}
-		void setMaxMag(float mag) {max_mag = mag;}
-		void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
-		float getMaxFov(void) const {return max_fov;}
-		float getMinFov(void) const {return min_fov;}
-		float getMagShift(void) const {return mag_shift;}
-		float getMaxMag(void) const {return max_mag;}
-		float getMaxScaled60DegMag(void) const {return max_scaled_60deg_mag;}
-		void setFov(float fov);
-		void setEye(const ToneReproducer *eye);
-		int computeRCMag(float mag, bool point_star,
-	                 const ToneReproducer *eye, float rc_mag[2]) const;
-	private:
-		const StarMgr &mgr;
-		float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag,
-		min_rmag, fov_factor;
-	};
-
-	MagConverter *mag_converter;
-	
 	static map<int, string> common_names_map;
 	static map<int, wstring> common_names_map_i18n;
 	static map<string, int> common_names_index;
@@ -392,7 +271,6 @@ private:
 	SFont *starFont;
 	static bool flagSciNames;
 	Vec3f label_color;
-	float twinkle_amount;
 	
 	STextureSP texPointer;		// The selection pointer texture
 };

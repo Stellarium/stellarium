@@ -43,6 +43,8 @@
 #include "Navigator.hpp"
 #include "Observer.hpp"
 #include "StelFileMgr.hpp"
+#include "SkyDrawer.hpp"
+
 #include <QTextStream>
 #include <QFile>
 #include <QSettings>
@@ -567,6 +569,7 @@ void StelUI::tui_update_widgets(void)
 	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("LandscapeMgr");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)app->getModuleMgr().getModule("GridLinesMgr");
 	MovementMgr* mvmgr = (MovementMgr*)app->getModuleMgr().getModule("MovementMgr");
+	SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory()->getLatitude());
@@ -590,8 +593,8 @@ void StelUI::tui_update_widgets(void)
 	// 4. Stars
 	tui_stars_show->setValue(smgr->getFlagStars());
 	tui_star_labelmaxmag->setValue(smgr->getMaxMagName());
-	tui_stars_twinkle->setValue(smgr->getTwinkleAmount());
-	tui_star_magscale->setValue(smgr->getMagScale());
+// 	tui_stars_twinkle->setValue(smgr->getTwinkleAmount());
+// 	tui_star_magscale->setValue(smgr->getMagScale());
 // TODO	tui_star_limitingmag->setValue(core->getStarLimitingMag());
 
 
@@ -616,10 +619,10 @@ void StelUI::tui_update_widgets(void)
 	// 6. effects
 	tui_effect_light_pollution->setValue(lmgr->getAtmosphereLightPollutionLuminance());
 	tui_effect_landscape->setValue(lmgr->getLandscapeName().toStdWString());
-	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
+	tui_effect_pointobj->setValue(skyDrawer->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(mvmgr->getAutoMoveDuration());
 	tui_effect_manual_zoom->setValue(mvmgr->getFlagManualAutoZoom());
-	tui_effect_object_scale->setValue(smgr->getScale());
+	tui_effect_object_scale->setValue(skyDrawer->getScale());
 	tui_effect_milkyway_intensity->setValue(mw->getIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(nmgr->getMaxMagHints());
@@ -1031,12 +1034,13 @@ void StelUI::saveCurrentConfig(const QString& confFile)
 
 	// Star section
 	StarMgr* smgr = (StarMgr*)moduleMgr->getModule("StarMgr");
-	conf->setValue("stars/star_scale", smgr->getScale());
-	conf->setValue("stars/star_mag_scale", smgr->getMagScale());
-	conf->setValue("stars/flag_point_star", smgr->getFlagPointStar());
+	SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	conf->setValue("stars/star_scale", skyDrawer->getScale());
+	conf->setValue("stars/star_mag_scale", skyDrawer->getMagScale());
+	conf->setValue("stars/flag_point_star", skyDrawer->getFlagPointStar());
 	conf->setValue("stars/max_mag_star_name", smgr->getMaxMagName());
-	conf->setValue("stars/flag_star_twinkle", smgr->getFlagTwinkle());
-	conf->setValue("stars/star_twinkle_amount", smgr->getTwinkleAmount());
+	conf->setValue("stars/flag_star_twinkle", skyDrawer->getFlagTwinkle());
+	conf->setValue("stars/star_twinkle_amount", skyDrawer->getTwinkleAmount());
 	conf->setValue("astro/flag_stars", smgr->getFlagStars());
 	conf->setValue("astro/flag_star_name", smgr->getFlagNames());
 

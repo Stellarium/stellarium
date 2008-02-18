@@ -33,6 +33,9 @@
 
 #include "LoadingBar.hpp"
 #include "Projector.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "SkyDrawer.hpp"
 #include "STexture.hpp"
 #include "StarMgr.hpp"
 #include "bytes.h"
@@ -76,8 +79,7 @@ public:
   virtual void draw(int index,bool is_inside,
                     const float *rcmag_table, Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
-                    SFont *starFont,
-                    STextureSP starTexture) const = 0;
+                    SFont *starFont) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
                     const Vec3d &c0,
@@ -124,7 +126,7 @@ private:
   void draw(int index,bool is_inside,
             const float *rcmag_table, Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
-            SFont *starFont,STextureSP starTexture) const;
+            SFont *starFont) const;
 };
 
 template<class Star>
@@ -383,51 +385,35 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   Projector *prj,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
-                                  SFont *starFont,
-                                  STextureSP starTexture) const {
-  if (hip_star_mgr.getFlagPointStar()) {
-    glDisable(GL_TEXTURE_2D);
-    glPointSize(0.1);
-  }
-  SpecialZoneData<Star> *const z = getZones() + index;
-  Vec3d xy;
-  const Star *const end = z->getStars() + z->size;
-  const double d2000 = 2451545.0;
-  const double movement_factor = (M_PI/180)*(0.0001/3600)
-                           * ((StarMgr::getCurrentJDay()-d2000)/365.25)
-                           / star_position_scale;            
-  for (const Star *s=z->getStars();s<end;s++) {
-    if (is_inside
-        ? prj->project(s->getJ2000Pos(z,movement_factor),xy)
-        : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy)) {
-      if (0 > hip_star_mgr.drawStar(prj,xy,rcmag_table + 2*(s->mag),
-                                    StarMgr::color_table[s->b_v])) {
-        break;
-      }
-      if (s->mag < max_mag_star_name) {
-        const wstring starname = s->getNameI18n();
-        if (!starname.empty()) {
-          glColor4f(StarMgr::color_table[s->b_v][0]*0.75,
-                    StarMgr::color_table[s->b_v][1]*0.75,
-                    StarMgr::color_table[s->b_v][2]*0.75,
-                    names_brightness);
-          if (hip_star_mgr.getFlagPointStar()) {
-            glEnable(GL_TEXTURE_2D);
-          }
-
-          prj->drawText(starFont,xy[0],xy[1], starname, 0, 4, 4, false);
-          if (hip_star_mgr.getFlagPointStar()) {
-            glDisable(GL_TEXTURE_2D);
-          } else {
-            starTexture->bind();
-          }
-        }
-      }
-    }
-  }
-  if (hip_star_mgr.getFlagPointStar()) {
-    glEnable(GL_TEXTURE_2D);
-  }
+                                  SFont *starFont) const
+{
+	SkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	SpecialZoneData<Star> *const z = getZones() + index;
+	Vec3d xy;
+	const Star *const end = z->getStars() + z->size;
+	const double d2000 = 2451545.0;
+	const double movement_factor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;            
+	for (const Star *s=z->getStars();s<end;s++)
+	{
+		if (is_inside ? prj->project(s->getJ2000Pos(z,movement_factor),xy)
+			: prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy))
+		{
+			if (0 > drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->b_v))
+			{
+				break;
+			}
+			if (s->mag < max_mag_star_name)
+			{
+				const wstring starname = s->getNameI18n();
+				if (!starname.empty())
+				{
+					const Vec3f& colorr = SkyDrawer::indexToColor(s->b_v)*0.75;
+					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);
+					prj->drawText(starFont,xy[0],xy[1], starname, 0, 4, 4, false);
+				}
+			}
+		}
+	}
 }
 
 
