@@ -25,6 +25,8 @@
 #include <QDebug>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "SkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "STexture.hpp"
 #include "Planet.hpp"
@@ -71,8 +73,6 @@ Planet::Planet(Planet *parent,
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
 	tex_map = StelApp::getInstance().getTextureManager().createTexture(tex_map_name);
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (flagHalo) tex_halo = StelApp::getInstance().getTextureManager().createTexture(tex_halo_name);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -616,9 +616,11 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 			if(stencil) glDisable(GL_STENCIL_TEST);
 		}
 
-		if (tex_halo)
+		if (!tex_big_halo)
 		{
-			draw_halo(nav, prj, eye);
+			SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+			skyDrawer->prepareDraw();
+			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(prj, nav), compute_magnitude(nav->getObserverHelioPos()), color);
 		}
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
 	}
@@ -715,50 +717,6 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 }
 
-
-
-void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
-{
-	float rc_mag[2];
-	const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
-                                  .getModuleMgr().getModule("StarMgr");
-
-	if (smgr->computeRCMag(
-                compute_magnitude(nav->getObserverHelioPos()),smgr->getFlagPointStar(),
-                prj->getFov(),eye,rc_mag) < 0) return;
-
-	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = getOnScreenSize(prj, nav);
-	if (smgr->getFlagPointStar()) {
-		if (screen_r<=1.f)
-		{
-			glDisable(GL_TEXTURE_2D);
-			glPointSize(0.1);
-			glColor3fv(color*rc_mag[1]);
-			prj->drawPoint2d(screenPos[0], screenPos[1]);
-		}
-	} else {
-		// Global scaling with star_scale already done
-		//	rc_mag[0]*=Planet::object_scale;
-
-		if (screen_r<1.f) screen_r=1.f;
-		rc_mag[1] *= 0.5*rc_mag[0]/(screen_r*screen_r*screen_r);
-		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
-
-		if (rc_mag[0]<screen_r)
-		{
-			rc_mag[1]*= (rc_mag[0]/screen_r);
-			rc_mag[0] = screen_r;
-		}
-		if (tex_halo) tex_halo->bind();
-		glEnable(GL_TEXTURE_2D);
-		glColor3fv(color*rc_mag[1]);
-		prj->drawSprite2dMode(screenPos[0], screenPos[1], rc_mag[0]*2);
-	}
-}
-
 void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
 	if (englishName=="Moon")
@@ -799,11 +757,9 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	else
 	{
 		float rc_mag[2];
-		const StarMgr *const smgr = (const StarMgr*)StelApp::getInstance()
-	                                  .getModuleMgr().getModule("StarMgr");
-		if (smgr->computeRCMag(
-    	            compute_magnitude(nav->getObserverHelioPos()),false,
-        	        prj->getFov(),eye,rc_mag) < 0) return;
+		
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(compute_magnitude(nav->getObserverHelioPos()), rc_mag) < 0)
+			return;
 		glBlendFunc(GL_ONE, GL_ONE);
 		float screen_r = 0.25*getOnScreenSize(prj, nav);
 		if (screen_r<1.f) screen_r=1.f;
