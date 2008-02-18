@@ -1433,6 +1433,9 @@ color: darkgray;
    </property>
   </action>
   <action name="actionGoto_Selected_Object" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
    <property name="text" >
     <string>Goto Selected Object</string>
    </property>
@@ -1526,6 +1529,9 @@ color: darkgray;
    </property>
   </action>
   <action name="actionDecrease_Time_Speed" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
    <property name="text" >
     <string>Decrease Time Speed</string>
    </property>
@@ -1537,6 +1543,9 @@ color: darkgray;
    </property>
   </action>
   <action name="actionIncrease_Time_Speed" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
    <property name="text" >
     <string>Increase Time Speed</string>
    </property>
@@ -1548,6 +1557,9 @@ color: darkgray;
    </property>
   </action>
   <action name="actionSet_Real_Time_Speed" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
    <property name="text" >
     <string>Set Real Time Speed</string>
    </property>
@@ -1562,6 +1574,9 @@ color: darkgray;
    </property>
   </action>
   <action name="actionReturn_To_Current_Time" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
    <property name="text" >
     <string>Return To Current Time</string>
    </property>
