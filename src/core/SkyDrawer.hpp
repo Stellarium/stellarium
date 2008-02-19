@@ -53,8 +53,8 @@ public:
 	//! @param mag the source magnitude
 	//! @param b_v the source B-V
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(double x, double y, float mag, float b_v);
-	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
+	int drawPointSource(double x, double y, float mag, float b_v);
+	int drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
 	
 	//! Draw a disk source halo.
 	//! @param x the x position of the disk center in pixel

@@ -160,7 +160,7 @@ bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Ve
 }
 
 // Draw a point source halo.
-bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
+int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
 {	
 	// cout << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
 	// assert(rc_mag[1]>= 0.f);
