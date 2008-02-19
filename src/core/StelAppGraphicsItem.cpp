@@ -100,7 +100,6 @@ void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 //! This method is called automatically by the GraphicsView
 void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	//qWarning() << "PaintEvent" << rect();
 	const double now = StelApp::getInstance().getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
