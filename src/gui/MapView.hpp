@@ -49,6 +49,8 @@ public:
 	void updateScale();
 	void wheelEvent(QWheelEvent * event);
 	~MapView();
+	//! Select a city
+	void select(const City* city);
 protected:
 	//! Add all the cities into the scene
 	void populate(const QString& filename = "data/cities_Earth.fab");

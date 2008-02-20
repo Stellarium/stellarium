@@ -200,6 +200,8 @@ SET(stellarium_lib_SRCS
 	gui/Dialog.cpp
 	gui/MapView.hpp
 	gui/MapView.cpp
+	gui/SpinBox.hpp
+	gui/SpinBox.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -253,6 +255,7 @@ SET(stellarium_MOC_HDRS
 	gui/StelHelpBrowser.hpp
 	gui/Dialog.hpp
 	gui/MapView.hpp
+	gui/SpinBox.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )
