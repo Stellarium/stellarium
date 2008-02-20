@@ -30,6 +30,7 @@
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "MapView.hpp"
+#include "SpinBox.hpp"
 
 
 //! @class City
@@ -79,7 +80,7 @@ City City::fromLine(const QString& line)
 	static QRegExp exp("\\s+");
 	QStringList tokens = line.split(exp, QString::SkipEmptyParts);
 	if (tokens.size() != 8) {
-		qDebug() << "error " << tokens;
+		qWarning() << "error " << tokens;
 	}
 	ret.name = tokens[0]; 
 	ret.state = tokens[1];
@@ -89,7 +90,6 @@ City City::fromLine(const QString& line)
 	ret.altitude = tokens[5].toInt();
 	ret.zone = tokens[6].toFloat();
 	ret.showatzoom = tokens[7].toInt();
-	// qDebug() << "loaded" << ret.name << "," << ret.longitude << "," << ret.latitude;
 	return ret;
 }
 
@@ -113,6 +113,7 @@ public:
 	CityItem(const City* city_, MapView* view);
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 };
 
 QPen CityItem::pen(QColor(255,0,0));
@@ -174,6 +175,11 @@ void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
 	cityName->setText("");
 	view->update();
+}
+
+void CityItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+	view->select(city);
 }
 
 MapView::MapView(QWidget *parent)
@@ -270,6 +276,15 @@ void MapView::populate(const QString& filename)
 		scene.addItem(new CityItem(&*city, this));
 		count++;
 	}
-	qDebug() << "DEBUG MapView::populate: loaded " << count << " cities from " << filename;
 }
+
+void MapView::select(const City* city)
+{
+	// We set the longitude
+	LongitudeSpinBox* longitudeSpinBox = parent()->findChild<LongitudeSpinBox*>("longitudeSpinBox");
+	longitudeSpinBox->setValue(city->getLongitude());
+	QLabel* label = parent()->findChild<QLabel*>("selectedLabel");
+	label->setText(city->getName());
+}
+
 
