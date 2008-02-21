@@ -123,7 +123,7 @@ CityItem::CityItem(const City* city_, MapView* v):
 {
 	setPos(city->getLongitude(), -city->getLatitude());
 	setAcceptsHoverEvents(true);
-
+	setCursor(Qt::ArrowCursor);
 }
 
 QRectF CityItem::boundingRect() const
@@ -183,7 +183,7 @@ void CityItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 }
 
 MapView::MapView(QWidget *parent)
- : QGraphicsView(parent), scale(1), pix("./data/gui/world.png")
+ : QGraphicsView(parent), pix("./data/gui/world.png")
 {
 	
 	scene.setSceneRect(-180, -90, 360, 180);
@@ -191,12 +191,14 @@ MapView::MapView(QWidget *parent)
 	pixItem = scene.addPixmap(pix);
 	pixItem->translate(-180, -90);
 	pixItem->scale(360. / pix.size().width(), 180. / pix.size().height());
+	float scale = 2; // TODO: find a way to get the real initial scalling !!!
+	QGraphicsView::scale(scale, scale);
+	setDragMode(ScrollHandDrag);
 	
 	populate();
 	
 	setScene(&scene);
 	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-	updateScale();
 }
 
 MapView::~MapView()
@@ -205,20 +207,8 @@ MapView::~MapView()
 
 void MapView::wheelEvent(QWheelEvent* event)
 {
-	// The new center is the middle point of the current center and the mouse position
-	center = (mapToScene(event->pos()) + center) / 2;
-	scale *= exp(event->delta() / 240.);	// We use an exponential scaling
-	scale = (scale >= 1)? scale : 1; 		// prevent scale below 1
-	updateScale();
-}
-
-void MapView::updateScale()
-{
-	this->setUpdatesEnabled(false);
-	resetMatrix();
+	float scale = exp(event->delta() / 240.);	// We use an exponential scaling
 	QGraphicsView::scale(scale, scale);
-	QGraphicsView::centerOn(center);
-	this->setUpdatesEnabled(true);
 }
 
 void MapView::populate(const QString& filename)
