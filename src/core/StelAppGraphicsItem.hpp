@@ -80,7 +80,6 @@ private:
 	
 	// Main elements of the stel_app
 	class ViewportDistorter *distorter;
-	class StelUI* ui;
 	
 	// The StelAppGraphicsItem singleton
 	static StelAppGraphicsItem* singleton;

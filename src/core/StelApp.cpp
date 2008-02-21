@@ -43,7 +43,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "QtScriptMgr.hpp"
+//#include "QtScriptMgr.hpp"
 
 #include <QStringList>
 #include <QString>
@@ -51,6 +51,7 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QMouseEvent>
+#include <QDebug>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
