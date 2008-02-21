@@ -24,8 +24,14 @@
 # include <config.h>
 #endif
 
+#include <string>
+#include <QString>
+#include <QChar>
+
 #include "StelUtils.hpp"
 #include "typeface.h"
+
+using namespace std;
 
 /*
  * Wrapper class on the TypeFace class used to display fonts in openGL
@@ -33,47 +39,58 @@
 class SFont
 {
 public:
-    SFont(float size_i, const QString& ttfFileName);
-    ~SFont() {;}
+	SFont(float size_i, const QString& ttfFileName);
+	~SFont() {;}
     
-    void print(float x, float y, const string& s, int upsidedown = 1) const
-    {
-    	typeFace.render(StelUtils::stringToWstring(s), Vec2f(x, y), upsidedown==1);
-    }
+	void print(float x, float y, const QString& s, int upsidedown = 1) const
+	{
+		typeFace.render(s, Vec2f(x, y), upsidedown==1);
+	}
+    
+	void print(float x, float y, const string& s, int upsidedown = 1) const
+	{
+		typeFace.render(QString::fromStdString(s), Vec2f(x, y), upsidedown==1);
+	}
     
 	void print(float x, float y, const wstring& ws, int upsidedown = 1) const
 	{
-		typeFace.render(ws, Vec2f(x, y), upsidedown==1);
+		typeFace.render(QString::fromStdWString(ws), Vec2f(x, y), upsidedown==1);
 	}
 	
+	void print_char(const QChar c) const
+	{
+		typeFace.renderGlyphs(c);
+	}
+
+	//! @deprecated - use QString / QChar
 	void print_char(const wchar_t c) const
 	{
-		wchar_t wc[] = L"xx";
-		wc[0] = c;
-		wc[1] = 0;  // terminate string
-		typeFace.renderGlyphs((wstring(wc)));
+		print_char(QChar(c));
 	}
 
-	void print_char_outlined(const wchar_t c) const;
+	void print_char_outlined(const QChar c) const;
+
+	void print_char_outlined(const wchar_t c) const {
+		print_char_outlined(QChar(c));
+	}
 	
-	void print_char(const unsigned char c) const
-	{
-		wchar_t wc[] = L"xx";
-		wc[0] = c;
-		wc[1] = 0;  // terminate string
-		typeFace.renderGlyphs((wstring(wc)));
-	}
-
 	void print_char_outlined(const unsigned char c) const
 	{
-		print_char_outlined(wchar_t(c));
+		print_char_outlined(QChar(c));
 	}
 
-    float getStrLen(const wstring& s) const {return typeFace.width(s);}
-    float getStrLen(const string& s) const {return typeFace.width(StelUtils::stringToWstring(s));}
-    float getLineHeight(void) const {return typeFace.lineHeight();}
-    float getAscent(void) const {return typeFace.ascent();}
-    float getDescent(void) const {return typeFace.descent();}
+	//! @deprecated - use QString / QChar
+	void print_char(const unsigned char c) const
+	{
+		print_char(QChar(c));
+	}
+
+	float getStrLen(const wstring& s) const {return typeFace.width(QString::fromStdWString(s));}
+	float getStrLen(const string& s)  const {return typeFace.width(QString::fromStdString(s));}
+	float getStdLen(const QString& s) const {return typeFace.width(s);}
+	float getLineHeight(void) const {return typeFace.lineHeight();}
+	float getAscent(void) const {return typeFace.ascent();}
+	float getDescent(void) const {return typeFace.descent();}
 	float getSize(void) const {return typeFace.pointSize();}
 	
 private:

@@ -21,18 +21,16 @@
 #include "GLee.h"
 #include "fixx11h.h"
 #include <QFile>
+#include <QChar>
+#include <QString>
 
-SFont::SFont(float size_i, const QString& ttfFileName) : typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(size_i), 72) 
-{;}
-
-void SFont::print_char_outlined(const wchar_t c) const
+SFont::SFont(float size_i, const QString& ttfFileName) 
+	: typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(size_i), 72) 
 {
-	// This is not the most elegant way to do this,
-	// but avoids needing two fonts loaded
-	wchar_t wc[] = L"xx";
-	wc[0] = c;
-	wc[1] = 0;  // terminate string
-	
+}
+
+void SFont::print_char_outlined(const QChar c) const
+{
 	GLfloat current_color[4];
 	glGetFloatv(GL_CURRENT_COLOR, current_color);	 
 	 
@@ -40,25 +38,26 @@ void SFont::print_char_outlined(const wchar_t c) const
 	
 	glPushMatrix();
 	glTranslatef(1,1,0);		
-	typeFace.renderGlyphs(wstring(wc), false);
+	typeFace.renderGlyphs(c, false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,-1,0);		
-	typeFace.renderGlyphs(wstring(wc), false);
+	typeFace.renderGlyphs(c, false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(1,-1,0);		
-	typeFace.renderGlyphs(wstring(wc), false);
+	typeFace.renderGlyphs(c, false);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-1,1,0);		
-	typeFace.renderGlyphs(wstring(wc), false);
+	typeFace.renderGlyphs(c, false);
 	glPopMatrix();
 	
 	glColor4fv(current_color);
 	
-	typeFace.renderGlyphs(wstring(wc),false);
+	typeFace.renderGlyphs(c,false);
 }
+
