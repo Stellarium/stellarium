@@ -170,9 +170,9 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			sky.get_xyY_valuev(b2);
 
 			// Use the Skybright.cpp 's models for brightness which gives better results.
-			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
-			                                 moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
-			                                 sun_pos[2]*b2.pos[2], b2.pos[2]);
+ 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
+ 			                                 moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+ 			                                 sun_pos[2]*b2.pos[2], b2.pos[2]);
 			b2.color[2] *= eclipseFactor;
 			b2.color[2] += 0.0001 + lightPollutionLuminance;
 			
@@ -200,7 +200,8 @@ void Atmosphere::draw(Projector* prj)
 	{
 		// TEST
 		//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 

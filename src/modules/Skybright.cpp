@@ -117,16 +117,8 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float bKX = pow10(-0.4f * K * X);
 
 	// Dark night sky brightness
-	const float b_night = (0.4f + 0.6f
-	                       / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
-	                    * b_night_term * bKX;
-
-	/* From original BASIC code for comparison
-	const float b_night = b_night_term 
-		* (0.4f + 0.6f / std::sqrt(1.f - 0.96f 
-								   * std::sin(dist_zenith)*std::sin(dist_zenith)))
-		* bKX;
-		*/
+	const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
+			* b_night_term * bKX;
 
 	// Moonlight brightness
 	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
@@ -150,11 +142,9 @@ float Skybright::get_luminance(float cos_dist_moon,
 	// took out 20070223 Rob :	b_moon *= 2.f;
 
 	// Total sky brightness
-	const float b_total = b_night + b_moon
-	                    + ((b_twilight<b_daylight) ? b_twilight : b_daylight);
+	const float b_total = b_night + b_moon + ((b_twilight<b_daylight) ? b_twilight : b_daylight);
 
-	return (b_total<0.f) ? 0.f
-	                     : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2;
+	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2;
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
 }
