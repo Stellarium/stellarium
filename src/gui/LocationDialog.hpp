@@ -15,41 +15,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
+*/
+ 
+#ifndef _LOCATIONDIALOG_HPP_
+#define _LOCATIONDIALOG_HPP_
 
+#include <QObject>
 
-#ifndef _MAPVIEW_HPP_
-#define _MAPVIEW_HPP_
+class Ui_locationDialogForm;
 
-#include <QGraphicsView>
-
-class City;
-
-
-//! @class MapView
-//! Special QGraphicsView that shows a worl map and permits city selections
-class MapView : public QGraphicsView
+class LocationDialog : public QObject
 {
 Q_OBJECT
-protected:
-	//! The scene
-	QGraphicsScene scene;
-	//! The world map image
-    QPixmap pix;
-    QGraphicsPixmapItem* pixItem;
-    //! The list of all the cities in the map
-    QList<City> cities;
 public:
-	//! Get the scale at wich we are seeing the map
-	float getScale() const {return matrix().m11();}
-	MapView(QWidget *parent = 0);
-	void wheelEvent(QWheelEvent * event);
-	~MapView();
-	//! Select a city
-	void select(const City* city);
+	LocationDialog();
+public slots:
+	void setVisible(bool);
+	void close();
+signals:
+	void closed();
 protected:
-	//! Add all the cities into the scene
-	void populate(const QString& filename = "data/cities_Earth.fab");
+	QWidget* dialog;
+	Ui_locationDialogForm* ui;
 };
 
-#endif // _MAPVIEW_HPP_
+#endif // _LOCATIONDIALOG_HPP_

@@ -15,36 +15,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
-
-#include <QDebug>
+*/
 
 #include "Dialog.hpp"
+#include "LocationDialog.hpp"
+#include "StelMainWindow.hpp"
+#include "ui_locationDialogGui.h"
 
-void BarFrame::mousePressEvent(QMouseEvent *event)
+#include <QDebug>
+#include <QFrame>
+
+LocationDialog::LocationDialog() : dialog(0)
 {
-	mousePos = event->pos();
-	moving = true;
+	ui = new Ui_locationDialogForm;
 }
 
-void BarFrame::mouseReleaseEvent(QMouseEvent *event)
+void LocationDialog::close()
 {
-	moving = false;
+	emit closed();
 }
 
-void BarFrame::mouseMoveEvent(QMouseEvent *event)
+void LocationDialog::setVisible(bool v)
 {
-	if (!moving) return;
-	QPoint dpos = event->pos() - mousePos;
-	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
-	p->move(p->pos() + dpos);
-}
-
-void ResizeFrame::mouseMoveEvent(QMouseEvent *event)
-{
-	QPoint dpos = event->pos() - mousePos;
-	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent()->parent());
-	p->setUpdatesEnabled(false);
-	p->resize(p->size().width() + dpos.x(), p->size().height() + dpos.y());
-	p->setUpdatesEnabled(true);
+	if (v) 
+	{
+		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		ui->setupUi(dialog);
+		dialog->raise();
+		dialog->move(200, 100);	// TODO: put in the center of the screen
+		dialog->setVisible(true);
+		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
+	}
+	else
+	{
+		dialog->deleteLater();
+		dialog = 0;
+	}
 }
