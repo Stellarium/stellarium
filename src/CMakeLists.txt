@@ -1,7 +1,7 @@
 
 
 
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/deprecated ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
+INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 
 ########### next target ###############
 
@@ -119,29 +119,6 @@ SET(stellarium_lib_SRCS
 	planetsephems/tass17.h
 	planetsephems/vsop87.c
 	planetsephems/vsop87.h
-	
-	deprecated/command_interface.cpp
-	deprecated/command_interface.h
-	deprecated/image.cpp
-	deprecated/image.h
-	deprecated/image_mgr.cpp
-	deprecated/image_mgr.h
-	deprecated/script.cpp
-	deprecated/script.h
-	deprecated/script_mgr.cpp
-	deprecated/script_mgr.h
-	deprecated/s_gui.cpp
-	deprecated/s_gui.h
-	deprecated/stel_command_interface.cpp
-	deprecated/stel_command_interface.h
-	deprecated/StelKey.hpp
-	deprecated/StelTypes.hpp
-	deprecated/stel_ui_conf.cpp
-	deprecated/stel_ui.cpp
-	deprecated/stel_ui.h
-	deprecated/stel_ui_tuiconf.cpp
-	deprecated/s_tui.cpp
-	deprecated/s_tui.h
 	
 	modules/Atmosphere.cpp
 	modules/Atmosphere.hpp
