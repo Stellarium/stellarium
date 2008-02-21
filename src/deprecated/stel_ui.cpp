@@ -22,6 +22,8 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <QCoreApplication>
+#include <QSettings>
 #include "stel_ui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -46,8 +48,6 @@
 #include "script_mgr.h"
 #include "StelMainWindow.hpp"
 #include "StelAppGraphicsItem.hpp"
-#include <QCoreApplication>
-#include <QSettings>
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
