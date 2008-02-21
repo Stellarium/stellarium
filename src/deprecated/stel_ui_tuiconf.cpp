@@ -19,10 +19,16 @@
 
 // Class which handles a stellarium User Interface in Text mode
 
+#include <QTextStream>
+#include <QFile>
+#include <QSettings>
+#include "StelMainWindow.hpp"
+#include <QCoreApplication>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <string>
+
 #include "stel_ui.h"
 #include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -44,12 +50,6 @@
 #include "Observer.hpp"
 #include "StelFileMgr.hpp"
 #include "SkyDrawer.hpp"
-
-#include <QTextStream>
-#include <QFile>
-#include <QSettings>
-#include "StelMainWindow.hpp"
-#include <QCoreApplication>
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)

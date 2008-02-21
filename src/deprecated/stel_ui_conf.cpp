@@ -17,6 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QFile>
+#include <QDebug>
+#include <QString>
+#include <QSettings>
+
 #include "stel_ui.h"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -42,10 +47,7 @@
 #include "Planet.hpp"
 #include "StelMainWindow.hpp"
 #include "StelAppGraphicsItem.hpp"
-#include <QFile>
-#include <QDebug>
-#include <QString>
-#include <QSettings>
+#include "SFont.hpp"
 
 using namespace s_gui;
 

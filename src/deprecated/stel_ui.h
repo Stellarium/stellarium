@@ -26,6 +26,7 @@
 #include "s_gui.h"
 #include "s_tui.h"
 #include "StelModule.hpp"
+#include "SFont.hpp"
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
 
