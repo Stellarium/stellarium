@@ -202,6 +202,8 @@ SET(stellarium_lib_SRCS
 	gui/MapView.cpp
 	gui/SpinBox.hpp
 	gui/SpinBox.cpp
+	gui/LocationDialog.hpp
+	gui/LocationDialog.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -223,7 +225,9 @@ SET(stellarium_exe_SRCS
 
 ################# compiles .ui files ############
 SET(stellarium_UIS
-  gui/mainGui.ui)
+  gui/mainGui.ui
+  gui/locationDialogGui.ui
+  )
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
 ################# compiles resources files ############
@@ -256,6 +260,7 @@ SET(stellarium_MOC_HDRS
 	gui/Dialog.hpp
 	gui/MapView.hpp
 	gui/SpinBox.hpp
+	gui/LocationDialog.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )

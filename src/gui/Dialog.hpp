@@ -38,7 +38,7 @@ class BarFrame : public QFrame
 {
 Q_OBJECT
 public:
-	QPoint mouse_pos;
+	QPoint mousePos;
   
 	BarFrame(QWidget* parent) : QFrame(parent), moving(false) {}
   
@@ -53,12 +53,12 @@ class ResizeFrame : public QFrame
 {
 Q_OBJECT
 public:
-	QPoint mouse_pos;
+	QPoint mousePos;
   
 	ResizeFrame(QWidget* parent) : QFrame(parent) {}
   
 	virtual void mousePressEvent(QMouseEvent *event) {
-		mouse_pos = event->pos();
+		mousePos = event->pos();
 	}
 	virtual void mouseMoveEvent(QMouseEvent *event);
 };

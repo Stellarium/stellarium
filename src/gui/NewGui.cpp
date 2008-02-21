@@ -400,7 +400,12 @@ void NewGui::init()
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
+	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	
+	QObject::connect(ui->actionShow_Location_Window, SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
+	QObject::connect(&locationDialog, SIGNAL(closed()), ui->actionShow_Location_Window, SLOT(toggle()));
+	
+	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
@@ -626,3 +631,4 @@ void NewGui::updateBarsPos(qreal value)
 {
 	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(), StelMainWindow::getInstance().getGraphicsView()->size().height());
 }
+

@@ -21,6 +21,7 @@
 #define _NEWGUI_H_
 
 #include "StelModule.hpp"
+#include "LocationDialog.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
 
@@ -164,6 +165,8 @@ private:
 	StelButton* buttonTimeForward;
 	
 	StelButton* buttonGotoSelectedObject;
+	
+	LocationDialog locationDialog;
 };
 
 #endif // _NEWGUI_H_
