@@ -341,7 +341,7 @@ ViewportDistorterFisheyeToSphericMirror
 		{
 			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file << e.what();
 		}
-		assert(file.status()==QFile::NoError);
+		assert(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
 		assert(in.status()==QDataStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
@@ -366,7 +366,7 @@ ViewportDistorterFisheyeToSphericMirror
 				>> vertex_point.color[1]
 				>> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
-				assert(in==QFile::NoError);
+				assert(in.status()!=QDataStream::Ok);
 				//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
 				//      else if (x > viewport_w) {x=viewport_w;vertex_point.h=0;}
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
