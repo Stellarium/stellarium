@@ -92,17 +92,17 @@ void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-void Skylight::get_xyY_value(skylight_struct * p)
-{
-	float cos_dist_sun = std::cos(p->dist_sun);
-	float one_over_cos_zenith_angle = 1.f/std::cos(p->zenith_angle);
-	p->color[0] = term_x * (1.f + Ax * std::exp(Bx * one_over_cos_zenith_angle)) * (1.f + Cx * std::exp(Dx*p->dist_sun) +
-		Ex * cos_dist_sun * cos_dist_sun);
-	p->color[1] = term_y * (1.f + Ay * std::exp(By * one_over_cos_zenith_angle)) * (1.f + Cy * std::exp(Dy*p->dist_sun) +
-		Ey * cos_dist_sun * cos_dist_sun);
-	p->color[2] = term_Y * (1.f + AY * std::exp(BY * one_over_cos_zenith_angle)) * (1.f + CY * std::exp(DY*p->dist_sun) +
-		EY * cos_dist_sun * cos_dist_sun);
-}
+// void Skylight::get_xyY_value(skylight_struct * p)
+// {
+// 	float cos_dist_sun = std::cos(p->dist_sun);
+// 	float one_over_cos_zenith_angle = 1.f/std::cos(p->zenith_angle);
+// 	p->color[0] = term_x * (1.f + Ax * std::exp(Bx * one_over_cos_zenith_angle)) * (1.f + Cx * std::exp(Dx*p->dist_sun) +
+// 		Ex * cos_dist_sun * cos_dist_sun);
+// 	p->color[1] = term_y * (1.f + Ay * std::exp(By * one_over_cos_zenith_angle)) * (1.f + Cy * std::exp(Dy*p->dist_sun) +
+// 		Ey * cos_dist_sun * cos_dist_sun);
+// 	p->color[2] = term_Y * (1.f + AY * std::exp(BY * one_over_cos_zenith_angle)) * (1.f + CY * std::exp(DY*p->dist_sun) +
+// 		EY * cos_dist_sun * cos_dist_sun);
+// }
 
 // Compute the sky color at the given position in the CIE color system and store it in p.color
 // p.color[0] is CIE x color component
