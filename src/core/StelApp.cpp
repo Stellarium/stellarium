@@ -221,7 +221,7 @@ void StelApp::init()
 
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
-	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+	              QString::fromStdString(PACKAGE_VERSION), 45, 320, 121);
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
