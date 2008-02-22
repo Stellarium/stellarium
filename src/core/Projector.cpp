@@ -973,7 +973,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 void Projector::drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg, 
 	float xshift, float yshift, bool noGravity) const
 {
-	drawText(font, x, y, QString::fromStdString(str), angleDeg, xshift, yshift);
+	drawText(font, x, y, QString::fromStdString(str), angleDeg, xshift, yshift, noGravity);
 }
 
 /*************************************************************************
@@ -982,7 +982,7 @@ void Projector::drawText(const SFont* font, float x, float y, const std::string&
 void Projector::drawText(const SFont* font, float x, float y, const std::wstring& str, float angleDeg, 
 	float xshift, float yshift, bool noGravity) const
 {
-	drawText(font, x, y, QString::fromStdWString(str), angleDeg, xshift, yshift);
+	drawText(font, x, y, QString::fromStdWString(str), angleDeg, xshift, yshift, noGravity);
 }
 
 /*************************************************************************
@@ -1041,7 +1041,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
-		const wstring str = StelUtils::radToDmsStrAdapt(lat).toStdWString();
+		const QString str = StelUtils::radToDmsStrAdapt(lat);
 		float xshift=5;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1107,7 +1107,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
 		//angleDeg += start[1]>=0 ? 1.:180.;
-		wstring str = StelUtils::radToHmsStrAdapt(lon).toStdWString();;
+		QString str = StelUtils::radToHmsStrAdapt(lon);
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1128,7 +1128,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			xshift=-font->getStrLen(str)-20.f;
 		}
 		StelUtils::rect_to_sphe(&lon, &lat, v);
-		str = StelUtils::radToHmsStrAdapt(lon).toStdWString();;
+		str = StelUtils::radToHmsStrAdapt(lon);
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 		
 		if (textColor)
