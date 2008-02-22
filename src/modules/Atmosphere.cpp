@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
 #include "GLee.h"
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
@@ -142,6 +141,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	Vec3d point(1., 0., 0.);
 	skylight_struct2 b2;
 	const float atm_intensity = fader.getInterstate();
+	float lumi;
 	
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
@@ -161,23 +161,32 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 				// The sky below the ground is the symetric of the one above :
 				// it looks nice and gives proper values for brightness estimation
 			}
-
-			b2.pos[0] = point[0];
-			b2.pos[1] = point[1];
-			b2.pos[2] = point[2];
-
-			// Use the Skylight model for the color
-			sky.get_xyY_valuev(b2);
-
-			// Use the Skybright.cpp 's models for brightness which gives better results.
- 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
- 			                                 moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
- 			                                 sun_pos[2]*b2.pos[2], b2.pos[2]);
-			b2.color[2] *= eclipseFactor;
-			b2.color[2] += 0.0001 + lightPollutionLuminance;
 			
-			sum_lum+=b2.color[2];
+			// Use the Skybright.cpp 's models for brightness which gives better results.
+			lumi = skyb.get_luminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
+					moon_pos[2]*point[2], sun_pos[0]*point[0]+sun_pos[1]*point[1]+
+					sun_pos[2]*point[2], point[2]);
+			lumi *= eclipseFactor;
+			lumi += 0.0001 + lightPollutionLuminance;
+
+			sum_lum+=lumi;
 			++nb_lum;
+			
+			if (lumi>0.01)
+			{
+				b2.pos[0] = point[0];
+				b2.pos[1] = point[1];
+				b2.pos[2] = point[2];
+				// Use the Skylight model for the color
+				sky.get_xyY_valuev(b2);
+			}
+			else
+			{
+				// Too dark to see atmosphere color, don't bother computing it
+				b2.color[0]=0.;
+				b2.color[1]=0.;
+			}
+			b2.color[2] = lumi;
 			
 			eye->xyYToRGB(b2.color);
 			grid[y*(1+sky_resolution_x)+x].color.set(

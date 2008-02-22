@@ -1261,18 +1261,6 @@ void Projector::drawRectSprite2dMode(double x, double y, double sizex, double si
 	glPopMatrix();
 }
 
-/*************************************************************************
- Generalisation of glVertex3v for non linear mode. This method does not
- set correct values for the lighting operations.
-*************************************************************************/
-void Projector::drawVertex3v(const Vec3d& v) const
-{
-	Vec3d win;
-	project(v, win);
-	glVertex3dv(win);
-}
-
-
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 

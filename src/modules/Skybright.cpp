@@ -116,18 +116,6 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
 	const float bKX = pow10(-0.4f * K * X);
 
-	// Dark night sky brightness
-	const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith))
-			* b_night_term * bKX;
-
-	// Moonlight brightness
-	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
-	               + pow10(6.15f - (dist_moon+0.001f) * 1.43239f)
-	               + 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
-	float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
-
-
-
 	// Daylight brightness
 	const float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f)
 	               + pow10(6.15f - (dist_sun+0.001f)* 1.43239f)
@@ -142,8 +130,25 @@ float Skybright::get_luminance(float cos_dist_moon,
 	// took out 20070223 Rob :	b_moon *= 2.f;
 
 	// Total sky brightness
-	const float b_total = b_night + b_moon + ((b_twilight<b_daylight) ? b_twilight : b_daylight);
+	float b_total = ((b_twilight<b_daylight) ? b_twilight : b_daylight);
 
+	// Moonlight brightness, don't compute if less than 1% daylight
+	if ((b_moon_term1 * (1.f - bKX) * (28860205.1341274269 * C3 + 440000.f * (1.f - C3)))/b_total>0.01f)
+	{
+		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
+			+ pow10(6.15f - (dist_moon+0.001f) * 1.43239f)
+			+ 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
+		float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
+		b_total += b_moon;
+	}
+	
+	// Dark night sky brightness, don't compute if less than 1% daylight
+	if (b_night_term*bKX/b_total>0.01f)
+	{
+		const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith)) * b_night_term * bKX;
+		b_total += b_night;
+	}
+	
 	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2;
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
