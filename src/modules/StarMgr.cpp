@@ -256,7 +256,7 @@ void StarMgr::load_data()
 		sprintf(key_name,"cat_file_name_%02d",i);
 		const QString cat_file_name = conf.value(QString("stars/")+key_name,"").toString();
 		if (!cat_file_name.isEmpty()) {
-			lb.SetMessage(QString("Loading catalog %1").arg(cat_file_name));
+			lb.SetMessage(q_("Loading catalog %1").arg(cat_file_name));
 			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
 			if (z)
 			{

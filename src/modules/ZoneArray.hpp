@@ -25,6 +25,7 @@
 #define _ZONE_ARRAY_HPP_
 
 #include <iostream>
+#include <QString>
 
 #include "ZoneData.hpp"
 #include "Star.hpp"
@@ -404,8 +405,8 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 			}
 			if (s->mag < max_mag_star_name)
 			{
-				const wstring starname = s->getNameI18n();
-				if (!starname.empty())
+				const QString starname = QString::fromStdWString(s->getNameI18n());
+				if (!starname.isEmpty())
 				{
 					const Vec3f& colorr = SkyDrawer::indexToColor(s->b_v)*0.75;
 					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);

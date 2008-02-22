@@ -31,6 +31,7 @@
 
 #include <algorithm>
 #include <QSettings>
+#include <QString>
 
 #ifdef WIN32
   #include <winsock2.h> // select
@@ -126,7 +127,7 @@ double TelescopeMgr::draw(StelCore* core)
         }
         if (name_fader.getInterstate() >= 0) {
           glColor4f(label_color[0],label_color[1],label_color[2], name_fader.getInterstate());
-          prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
+          prj->drawText(telescope_font, XY[0],XY[1],QString::fromStdWString(it->second->getNameI18n()), 0, 6, -4, false);
           telescope_texture->bind();
         }
       }

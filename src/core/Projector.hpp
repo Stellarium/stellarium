@@ -331,31 +331,6 @@ public:
 	void drawText(const SFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
 		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
 	
-	//! Draw the string at the given position and angle with the given font.
-	//! @deprecated - use the QString version instead
-	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
-	//! @param xshift shift in pixel in the rotated x direction.
-	//! @param yshift shift in pixel in the rotated y direction.
-	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg=0.f, 
-		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
-	
-	//! Draw the (multi-byte) string at the given position and angle with the given font.
-	//! If the gravity label flag is set, uses drawTextGravity180.
-	//! @deprecated - use the QString version instead
-	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
-	//! @param xshift shift in pixel in the rotated x direction.
-	//! @param yshift shift in pixel in the rotated y direction.
-	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(const SFont* font, float x, float y, const std::wstring& str, float angleDeg=0.f, 
-		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
-
 	//! Draw the given polygon
 	//! @param poly The polygon to draw
 	void drawPolygon(const StelGeom::Polygon& poly) const;
