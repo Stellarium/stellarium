@@ -337,7 +337,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 
 		// Draw loading bar
-		lb.SetMessage(_("Loading Constellation Art: ") + StelUtils::intToWstring(current+1) + L"/" + StelUtils::intToWstring(total));
+		lb.SetMessage(QString("Loading Constellation Art: %1/%2").arg(current+1).arg(total));
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;

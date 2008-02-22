@@ -23,9 +23,7 @@
 #include "STextureTypes.hpp"
 #include "vecmath.h"
 
-#include <string>
-
-using std::wstring;
+#include <QString>
 
 class SFont;
 class Projector;
@@ -56,13 +54,14 @@ public:
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
 	LoadingBar(Projector* prj, float font_size, const QString&  splash_tex, 
-		int screenw, int screenh, const wstring& extraTextString=L"", float extraTextSize = 30.f, 
-		float extraTextPosx = 0.f, float extraTextPosy = 0.f);
+	           int screenw, int screenh, const QString& extraTextString="", 
+	           float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f);
+
 	virtual ~LoadingBar();
 	
 	//! Set the message for the loading bar.
-	//! @param m a wstring message to display under the loading bar
-	void SetMessage(wstring m) {message=m;}
+	//! @param m a QString message to display under the loading bar
+	void SetMessage(QString m) {message=m;}
 	
 	//! Draw the LoadingBar, setting the value.
 	//! @param val the value which the progress bar should display. This is a 
@@ -70,13 +69,13 @@ public:
 	void Draw(float val);
 
 private:
-	wstring message;
+	QString message;
 	Projector* prj;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	SFont& barfont;
 	SFont& extraTextFont;
 	STextureSP splash;
-	wstring extraText;
+	QString extraText;
 	Vec2f extraTextPos;
 	double timeCounter;
 };

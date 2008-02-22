@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
+#include <QString>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
@@ -401,8 +402,8 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			lb.SetMessage(_("Loading NGC catalog: ") + StelUtils::intToWstring((i == catalogSize-1 ? catalogSize : i)) + 
-				L"/" + StelUtils::intToWstring(catalogSize));
+			lb.SetMessage(QString("Loading NGC catalog: %1/%2").arg((i == catalogSize-1 ? catalogSize : i))
+			                                                   .arg(catalogSize));
 			lb.Draw((float)i/catalogSize);
 		}
 		Nebula *e = new Nebula;
@@ -535,7 +536,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 				continue;
 
 			++current;
-			lb.SetMessage(_("Loading Nebula Textures:") + StelUtils::intToWstring(current) + L"/" + StelUtils::intToWstring(total));
+			lb.SetMessage(QString("Loading Nebula Textures:%1/%2").arg(current).arg(total));
 			lb.Draw((float)current/total);
 
 			istringstream istr(record);

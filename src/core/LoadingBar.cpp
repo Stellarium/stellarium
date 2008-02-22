@@ -28,7 +28,7 @@
 #include <QGLWidget>
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_tex, 
-	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
+	int screenw, int screenh, const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
 barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), font_size)),
