@@ -28,8 +28,7 @@
 #include <QSettings>
 #include <QDebug>
 
-SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) :
-		prj(aprj), eye(aeye)
+SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aeye)
 {
 	setMaxFov(180.f);
 	setMinFov(0.1f);
