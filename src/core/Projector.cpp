@@ -912,7 +912,7 @@ void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, 
 }
 
 
-void Projector::drawTextGravity180(const SFont* font, float x, float y, const wstring& ws,
+void Projector::drawTextGravity180(const SFont* font, float x, float y, const QString& ws,
                                    bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
@@ -939,7 +939,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	for (unsigned int i=0;i<ws.length();++i)
+	for (int i=0;i<ws.length();++i)
 	{
 		if( !speed_optimize )
 		{
@@ -953,11 +953,11 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
 		// with typeface need to manually advance
 		// TODO, absolute rotation would be better than relative
 		// TODO: would look better with kerning information...
-		glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
+		glTranslatef(font->getStrLen(ws.mid(i,1)) * 1.05, 0, 0);
 
 		if( !speed_optimize )
 		{
-			psi = std::atan2((float)font->getStrLen(ws.substr(i,1))*1.05f,(float)d) * 180./M_PI;
+			psi = std::atan2((float)font->getStrLen(ws.mid(i,1))*1.05f,(float)d) * 180./M_PI;
 			if (psi>5)
 				psi = 5;
 		}
@@ -973,13 +973,22 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const ws
 void Projector::drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg, 
 	float xshift, float yshift, bool noGravity) const
 {
-	drawText(font, x, y, StelUtils::stringToWstring(str), angleDeg, xshift, yshift);
+	drawText(font, x, y, QString::fromStdString(str), angleDeg, xshift, yshift);
 }
 
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void Projector::drawText(const SFont* font, float x, float y, const wstring& str, float angleDeg, float xshift, float yshift, bool noGravity) const
+void Projector::drawText(const SFont* font, float x, float y, const std::wstring& str, float angleDeg, 
+	float xshift, float yshift, bool noGravity) const
+{
+	drawText(font, x, y, QString::fromStdWString(str), angleDeg, xshift, yshift);
+}
+
+/*************************************************************************
+ Draw the string at the given position and angle with the given font
+*************************************************************************/
+void Projector::drawText(const SFont* font, float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
 	if (gravityLabels && !noGravity)
 	{

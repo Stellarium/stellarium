@@ -320,6 +320,19 @@ public:
 	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
 
 	//! Draw the string at the given position and angle with the given font.
+	//! If the gravity label flag is set, uses drawTextGravity180.
+	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param str the text to print.
+	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
+	//! @param xshift shift in pixel in the rotated x direction.
+	//! @param yshift shift in pixel in the rotated y direction.
+	//! @param noGravity don't take into account the fact that the text should be written with gravity.
+	void drawText(const SFont* font, float x, float y, const QString& str, float angleDeg=0.f, 
+		      float xshift=0.f, float yshift=0.f, bool noGravity=true) const;
+	
+	//! Draw the string at the given position and angle with the given font.
+	//! @deprecated - use the QString version instead
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
@@ -332,6 +345,7 @@ public:
 	
 	//! Draw the (multi-byte) string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
+	//! @deprecated - use the QString version instead
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
@@ -441,7 +455,7 @@ public:
 
 
 private:
-	void drawTextGravity180(const SFont* font, float x, float y, const std::wstring& str, 
+	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 		
 	//! Init the real openGL Matrices to a 2d orthographic projection

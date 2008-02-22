@@ -47,16 +47,6 @@ public:
 		typeFace.render(s, Vec2f(x, y), upsidedown==1);
 	}
     
-	void print(float x, float y, const string& s, int upsidedown = 1) const
-	{
-		typeFace.render(QString::fromStdString(s), Vec2f(x, y), upsidedown==1);
-	}
-    
-	void print(float x, float y, const wstring& ws, int upsidedown = 1) const
-	{
-		typeFace.render(QString::fromStdWString(ws), Vec2f(x, y), upsidedown==1);
-	}
-	
 	void print_char(const QChar c) const
 	{
 		typeFace.renderGlyphs(c);
@@ -74,6 +64,7 @@ public:
 		print_char_outlined(QChar(c));
 	}
 	
+	//! @deprecated - use QString / QChar
 	void print_char_outlined(const unsigned char c) const
 	{
 		print_char_outlined(QChar(c));
@@ -85,9 +76,14 @@ public:
 		print_char(QChar(c));
 	}
 
+	float getStrLen(const QString& s) const {return typeFace.width(s);}
+
+	//! @deprecated - use QString / QChar
 	float getStrLen(const wstring& s) const {return typeFace.width(QString::fromStdWString(s));}
+
+	//! @deprecated - use QString / QChar
 	float getStrLen(const string& s)  const {return typeFace.width(QString::fromStdString(s));}
-	float getStdLen(const QString& s) const {return typeFace.width(s);}
+
 	float getLineHeight(void) const {return typeFace.lineHeight();}
 	float getAscent(void) const {return typeFace.ascent();}
 	float getDescent(void) const {return typeFace.descent();}
