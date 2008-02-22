@@ -929,6 +929,8 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 
 	if (psi>5)
 		psi = 5;
+	
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	if(gravityLabels)
@@ -965,6 +967,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 		glRotatef(psi,0,0,-1);
 	}
 	glPopMatrix();
+	glPopAttrib();
 }
 
 /*************************************************************************
