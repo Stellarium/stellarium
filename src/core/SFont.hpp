@@ -24,7 +24,6 @@
 # include <config.h>
 #endif
 
-#include <string>
 #include <QString>
 #include <QChar>
 
@@ -52,38 +51,8 @@ public:
 		typeFace.renderGlyphs(c);
 	}
 
-	//! @deprecated - use QString / QChar
-	void print_char(const wchar_t c) const
-	{
-		print_char(QChar(c));
-	}
-
 	void print_char_outlined(const QChar c) const;
-
-	void print_char_outlined(const wchar_t c) const {
-		print_char_outlined(QChar(c));
-	}
-	
-	//! @deprecated - use QString / QChar
-	void print_char_outlined(const unsigned char c) const
-	{
-		print_char_outlined(QChar(c));
-	}
-
-	//! @deprecated - use QString / QChar
-	void print_char(const unsigned char c) const
-	{
-		print_char(QChar(c));
-	}
-
 	float getStrLen(const QString& s) const {return typeFace.width(s);}
-
-	//! @deprecated - use QString / QChar
-	float getStrLen(const wstring& s) const {return typeFace.width(QString::fromStdWString(s));}
-
-	//! @deprecated - use QString / QChar
-	float getStrLen(const string& s)  const {return typeFace.width(QString::fromStdString(s));}
-
 	float getLineHeight(void) const {return typeFace.lineHeight();}
 	float getAscent(void) const {return typeFace.ascent();}
 	float getDescent(void) const {return typeFace.descent();}
