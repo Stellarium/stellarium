@@ -157,13 +157,13 @@ void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
 		delete distorter;
 		distorter = NULL;
 	}
-	distorter = ViewportDistorter::create(type.toStdString(),(int)(rect().width()),(int)(rect().height()),StelApp::getInstance().getCore()->getProjection());
+	distorter = ViewportDistorter::create(type,(int)(rect().width()),(int)(rect().height()),StelApp::getInstance().getCore()->getProjection());
 }
 
 QString StelAppGraphicsItem::getViewPortDistorterType() const
 {
 	if (distorter)
-		return distorter->getType().c_str();
+		return distorter->getType();
 	return "none";
 }
 
