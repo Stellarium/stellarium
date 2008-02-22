@@ -100,7 +100,7 @@ void SkyDrawer::update(double deltaTime)
 		if (fov < min_fov)
 			fov = min_fov;
 	}
-	fov_factor = 108064.73f / (fov*fov);
+	lnfov_factor = std::log(108064.73f / (fov*fov));
 	
 	min_rmag = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(max_scaled_60deg_mag + 
 			mag_shift + 12.12331f)) * (108064.73f / 3600.f))) * 30.f;
@@ -195,7 +195,8 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	}
 
     // rmag:
-	rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
+	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
+	rc_mag[0] = eye->sqrtAdaptLuminanceLn(-0.92103f*(mag + mag_shift + 12.12331f)+ lnfov_factor) * 30.f;
 
 	if (rc_mag[0] < min_rmag)
 	{
@@ -205,21 +206,21 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 
 	if (flagPointStar)
 	{
-		if (rc_mag[0] * getScale() < 0.1f)
+		if (rc_mag[0] * starScale < 0.1f)
 		{
 			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
 			return -1;
 		}
 		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] * getMagScale() < 0.1f)
+		if (rc_mag[1] * starMagScale < 0.1f)
 		{
 			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
 			return -1;
 		}
     	// Global scaling
-		rc_mag[1] *= getMagScale();
+		rc_mag[1] *= starMagScale;
 	}
 	else
 	{
@@ -227,13 +228,13 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		// And we compensate the difference of brighteness with cmag
 		if (rc_mag[0]<1.2f)
 		{
-			if (rc_mag[0] * getScale() < 0.1f)
+			if ((rc_mag[0] * starScale) < 0.1f)
 			{
 				rc_mag[0] = rc_mag[1] = 0.f;
 				return -1;
 			}
 			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-			if (rc_mag[1] * getMagScale() < 0.1f)
+			if (rc_mag[1] * starMagScale < 0.1f)
 			{
 				rc_mag[0] = rc_mag[1] = 0.f;
 				return -1;
@@ -250,8 +251,8 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 			}
 		}
 		// Global scaling
-		rc_mag[0] *= getScale();
-		rc_mag[1] *= getMagScale();
+		rc_mag[0] *= starScale;
+		rc_mag[1] *= starMagScale;
 	}
 	return 0;
 }
