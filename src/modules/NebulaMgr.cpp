@@ -402,7 +402,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			lb.SetMessage(QString("Loading NGC catalog: %1/%2").arg((i == catalogSize-1 ? catalogSize : i))
+			lb.SetMessage(q_("Loading NGC catalog: %1/%2").arg((i == catalogSize-1 ? catalogSize : i))
 			                                                   .arg(catalogSize));
 			lb.Draw((float)i/catalogSize);
 		}
@@ -536,7 +536,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 				continue;
 
 			++current;
-			lb.SetMessage(QString("Loading Nebula Textures:%1/%2").arg(current).arg(total));
+			lb.SetMessage(q_("Loading Nebula Textures:%1/%2").arg(current).arg(total));
 			lb.Draw((float)current/total);
 
 			istringstream istr(record);

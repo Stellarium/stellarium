@@ -108,19 +108,19 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[0]), 0., -shift, -shift);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[1]), 0., -shift, -shift);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[2]), 0., -shift, -shift);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[3]), 0., -shift, -shift);
 
 }
 

@@ -314,14 +314,14 @@ void Nebula::draw_name(const Projector* prj)
 	float size = getOnScreenSize(prj);
 	float shift = 4.f + size/1.8f;
 
-	wstring nebulaname = getNameI18n();
+	QString nebulaname = QString::fromStdWString(getNameI18n());
 
 	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 
 	// draw image credit, if it fits easily
 	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(QString::fromStdString(credit)))
 	{
-		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, credit, 0, 0, 0, false);
+		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, QString::fromStdString(credit), 0, 0, 0, false);
 	}
 }
 
