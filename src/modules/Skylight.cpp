@@ -26,6 +26,15 @@
 #include <cstdio>
 #include <cstdlib>
 
+/// Compute acos(x)
+inline float fastAcos(float x)
+{
+	return M_PI/2.f - (
+					   x + 1.f/6.f * x*x*x + 3.f/40.f * x*x*x*x*x +
+			5.f/112.f * x*x*x*x*x*x*x
+					  );
+}
+
 Skylight::Skylight() : thetas(0.f), T(0.f)
 {
 }
@@ -107,7 +116,7 @@ void Skylight::get_xyY_valuev(skylight_struct2& p) const
 	float dist_sun;
 	if (cos_dist_sun <= -1.f ) {cos_dist_sun = -1.f;dist_sun = M_PI;}
 	else if (cos_dist_sun >= 1.f ) {cos_dist_sun = 1.f;dist_sun = 0.f;}
-	else dist_sun = std::acos(cos_dist_sun);
+	else dist_sun = fastAcos(cos_dist_sun);
 	const float cos_dist_sun_q = cos_dist_sun*cos_dist_sun;
 
 	float Fx = 0.f;
