@@ -18,6 +18,7 @@
 
 #include <cstdio>
 #include <cmath>
+#include <cassert>
 
 #include <config.h>
 #ifndef HAVE_POW10
@@ -26,6 +27,23 @@
 #endif
 
 #include "Skybright.hpp"
+
+/// Compute exp(x) for small x
+inline float fastExp(float x)
+{
+	return (x>=0)?
+		1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f)))):
+		1.f / fastExp(-x);
+}
+
+/// Compute acos(x)
+inline float fastAcos(float x)
+{
+	return M_PI/2.f - (
+		x + 1.f/6.f * x*x*x + 3.f/40.f * x*x*x*x*x +
+		5.f/112.f * x*x*x*x*x*x*x
+	);
+}
 
 Skybright::Skybright() : SN(1.f)
 {
@@ -97,23 +115,24 @@ float Skybright::get_luminance(float cos_dist_moon,
                                float cos_dist_zenith) const
 {
 	float dist_moon,dist_sun,dist_zenith;
-
+	
     // catch rounding errors here or end up with white flashes in some cases
 
 	if (cos_dist_moon <= -1.f) {cos_dist_moon = -1.f;dist_moon = M_PI;}
 	else if (cos_dist_moon >= 1.f) {cos_dist_moon = 1.f;dist_moon = 0.f;}
-	else dist_moon = std::acos(cos_dist_moon);
+	else dist_moon = fastAcos(cos_dist_moon);
 
 	if (cos_dist_sun <= -1.f) {cos_dist_sun = -1.f;dist_sun = M_PI;}
 	else if (cos_dist_sun >= 1.f) {cos_dist_sun = 1.f;dist_sun = 0.f;}
-	else dist_sun = std::acos(cos_dist_sun);
+	else dist_sun = fastAcos(cos_dist_sun);
 
 	if (cos_dist_zenith <= -1.f) {cos_dist_zenith = -1.f;dist_zenith = M_PI;}
 	else if (cos_dist_zenith >= 1.f) {cos_dist_zenith = 1.f;dist_zenith = 0.f;}
-	else dist_zenith = std::acos(cos_dist_zenith);
+	else dist_zenith = fastAcos(cos_dist_zenith);
 
 	// Air mass
-	const float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
+	// const float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
+	const float X = 1.f / (cos_dist_zenith + 0.025f*fastExp(-11.f*cos_dist_zenith));
 	const float bKX = pow10(-0.4f * K * X);
 
 	// Daylight brightness
