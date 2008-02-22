@@ -146,7 +146,7 @@ public:
 private:
 	Projector* prj;
 	ToneReproducer* eye;
-	float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag, min_rmag, fov_factor;
+	float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag, min_rmag, lnfov_factor;
 	float starScale;
 	float starMagScale;
 	bool flagPointStar;
