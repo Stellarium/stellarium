@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QString>
 
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -103,7 +104,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
-	float shift = font.getStrLen(sNorth)/2;
+	float shift = font.getStrLen(QString::fromStdWString(sNorth))/2;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);

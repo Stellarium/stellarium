@@ -21,6 +21,7 @@
 #include <sstream>
 #include <QTextStream>
 #include <QFile>
+#include <QString>
 
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
@@ -318,7 +319,7 @@ void Nebula::draw_name(const Projector* prj)
 	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 
 	// draw image credit, if it fits easily
-	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
+	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(QString::fromStdString(credit)))
 	{
 		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, credit, 0, 0, 0, false);
 	}
