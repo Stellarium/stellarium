@@ -17,30 +17,41 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELHELPBROWSER_HPP_
-#define STELHELPBROWSER_HPP_
+#ifndef _HELPDIALOG_HPP_
+#define _HELPDIALOG_HPP_
 
 #include <QWidget>
 #include <QTextBrowser>
 #include <QString>
+#include <QObject>
 #include <QMultiMap>
 #include <QPair>
 
-//! @class StellHelpBrowser
-//! Implementation of the help window
-class StelHelpBrowser : public QWidget
+class Ui_helpDialogForm;
+
+class HelpDialog : public QObject
 {
 	Q_OBJECT
 
 public:
-	StelHelpBrowser(QWidget* parent=0);
-	~StelHelpBrowser();
+	HelpDialog();
 
 	//! Set a key and description.
 	//! @param group is the help group.  e.g. "Movement" or "Time & Date"
 	//! @param key is the textual representation of a key, e.g. "CTRL + H"
 	//! @param description is a short description of what the key does
 	void setKey(QString group, QString oldKey, QString newKey, QString description);
+
+public slots:
+	void setVisible(bool);
+	void close();
+
+signals:
+	void closed();
+
+protected:
+	QWidget* dialog;
+	Ui_helpDialogForm* ui;
 
 private:
 	//! This function concatenates the header, key codes and footer to build
@@ -53,9 +64,8 @@ private:
 	QMultiMap<QString, QPair<QString, QString> > keyData;
 	QString headerText;
 	QString footerText;
-	QTextBrowser browser;
 
 };
 
-#endif /*STELHELPBROWSER_HPP_*/
+#endif /*_HELPDIALOG_HPP_*/
 

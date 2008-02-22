@@ -22,6 +22,7 @@
 
 #include "StelModule.hpp"
 #include "LocationDialog.hpp"
+#include "HelpDialog.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
 
@@ -167,6 +168,7 @@ private:
 	StelButton* buttonGotoSelectedObject;
 	
 	LocationDialog locationDialog;
+	HelpDialog helpDialog;
 };
 
 #endif // _NEWGUI_H_
