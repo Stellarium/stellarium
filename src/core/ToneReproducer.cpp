@@ -70,6 +70,7 @@ void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
 	sqrtTerm2 = std::sqrt(term2);
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
 
 /*********************************************************************
@@ -88,6 +89,7 @@ void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
 	sqrtTerm2 = std::sqrt(term2);
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
 
 
@@ -132,8 +134,9 @@ void ToneReproducer::xyYToRGB(float* color) const
 	}
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	color[2] = std::pow(adaptLuminance(color[2]) * oneOverMaxdL, oneOverGamma);
-
+	// color[2] = std::pow(adaptLuminance(color[2]) * oneOverMaxdL, oneOverGamma);
+	color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+	
 	// Convert from xyY to XZY
 	const float X = color[0] * color[2] / color[1];
 	const float Y = color[2];
