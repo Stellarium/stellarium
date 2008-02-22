@@ -316,7 +316,12 @@ public:
 	
 	//! Generalisation of glVertex3v for non-linear projections. 
 	//! This method does not manage the lighting operations properly.
-	void drawVertex3v(const Vec3d& v) const;
+	void drawVertex3v(const Vec3d& v) const
+	{
+		Vec3d win;
+		project(v, win);
+		glVertex3dv(win);
+	}
 	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
 
 	//! Draw the string at the given position and angle with the given font.

@@ -63,16 +63,6 @@ MappingEqualArea::MappingEqualArea(void)
 
 MappingEqualArea MappingEqualArea::instance;
 
-bool MappingEqualArea::forward(Vec3d &v) const
-{
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-	const double f = std::sqrt(2.0/(r*(r-v[2])));
-	v[0] *= f;
-	v[1] *= f;
-	v[2] = r;
-	return true;
-}
-
 bool MappingEqualArea::backward(Vec3d &v) const
 {
 	const double dq = v[0]*v[0] + v[1]*v[1];
@@ -119,22 +109,6 @@ MappingStereographic::MappingStereographic(void)
 
 MappingStereographic MappingStereographic::instance;
 
-bool MappingStereographic::forward(Vec3d &v) const
-{
-	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-	const double h = 0.5*(r-v[2]);
-	if (h <= 0.0) {
-		v[0] = 1e99;
-		v[1] = 1e99;
-		v[2] = -1e99;
-		return false;
-	}
-	const double f = 1.0 / h;
-	v[0] *= f;
-	v[1] *= f;
-	v[2] = r;
-	return true;
-}
 
 bool MappingStereographic::backward(Vec3d &v) const
 {
@@ -169,29 +143,6 @@ MappingFisheye::MappingFisheye(void)
 }
 
 MappingFisheye MappingFisheye::instance;
-
-bool MappingFisheye::forward(Vec3d &v) const
-{
-	const double rq1 = v[0]*v[0] + v[1]*v[1];
-	if (rq1 > 0.0) {
-		const double h = std::sqrt(rq1);
-		const double f = std::atan2(h,-v[2]) / h;
-		v[0] *= f;
-		v[1] *= f;
-		v[2] = std::sqrt(rq1 + v[2]*v[2]);
-		return true;
-	}
-	if (v[2] < 0.0) {
-		v[0] = 0.0;
-		v[1] = 0.0;
-		v[2] = 1.0;
-		return true;
-	}
-	v[0] = 1e99;
-	v[1] = 1e99;
-	v[2] = -1e99;
-	return false;
-}
 
 bool MappingFisheye::backward(Vec3d &v) const
 {
