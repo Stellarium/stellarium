@@ -162,7 +162,7 @@ float Skybright::get_luminance(float cos_dist_moon,
 	}
 	
 	// Dark night sky brightness, don't compute if less than 1% daylight
-	if (b_night_term*bKX/b_total>0.01f)
+	if ((b_night_term*bKX)/b_total>0.01f)
 	{
 		const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith)) * b_night_term * bKX;
 		b_total += b_night;
