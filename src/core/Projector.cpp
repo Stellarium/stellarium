@@ -970,24 +970,6 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-void Projector::drawText(const SFont* font, float x, float y, const std::string& str, float angleDeg, 
-	float xshift, float yshift, bool noGravity) const
-{
-	drawText(font, x, y, QString::fromStdString(str), angleDeg, xshift, yshift, noGravity);
-}
-
-/*************************************************************************
- Draw the string at the given position and angle with the given font
-*************************************************************************/
-void Projector::drawText(const SFont* font, float x, float y, const std::wstring& str, float angleDeg, 
-	float xshift, float yshift, bool noGravity) const
-{
-	drawText(font, x, y, QString::fromStdWString(str), angleDeg, xshift, yshift, noGravity);
-}
-
-/*************************************************************************
- Draw the string at the given position and angle with the given font
-*************************************************************************/
 void Projector::drawText(const SFont* font, float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity) const
 {
 	if (gravityLabels && !noGravity)
