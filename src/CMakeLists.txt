@@ -171,8 +171,8 @@ SET(stellarium_lib_SRCS
 	
 	gui/NewGui.hpp
 	gui/NewGui.cpp
-	gui/StelHelpBrowser.hpp
-	gui/StelHelpBrowser.cpp
+	gui/HelpDialog.hpp
+	gui/HelpDialog.cpp
 	gui/Dialog.hpp
 	gui/Dialog.cpp
 	gui/MapView.hpp
@@ -204,6 +204,7 @@ SET(stellarium_exe_SRCS
 SET(stellarium_UIS
   gui/mainGui.ui
   gui/locationDialogGui.ui
+  gui/helpDialogGui.ui
   )
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
@@ -233,7 +234,7 @@ SET(stellarium_MOC_HDRS
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
 	gui/NewGui.hpp
-	gui/StelHelpBrowser.hpp
+	gui/HelpDialog.hpp
 	gui/Dialog.hpp
 	gui/MapView.hpp
 	gui/SpinBox.hpp

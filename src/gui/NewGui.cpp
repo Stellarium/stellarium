@@ -344,9 +344,10 @@ void NewGui::init()
 		{
 			if (!a->shortcut().isEmpty())
 			{
-				ui->helpBrowser->setKey(
-					a->property("helpGroup").toString(), "",
-					a->shortcut().toString(), a->text());
+				helpDialog.setKey(a->property("helpGroup").toString(), 
+				                   "",
+				                   a->shortcut().toString(), 
+				                   a->text());
 			}
 			StelMainWindow::getInstance().addAction(a);
 		}
@@ -404,6 +405,9 @@ void NewGui::init()
 	
 	QObject::connect(ui->actionShow_Location_Window, SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	QObject::connect(&locationDialog, SIGNAL(closed()), ui->actionShow_Location_Window, SLOT(toggle()));
+
+	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
+	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));
 	
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	///////////////////////////////////////////////////////////////////////////

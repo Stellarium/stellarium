@@ -17,10 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "StelHelpBrowser.hpp"
-#include "StelApp.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include <QString>
 #include <QTextBrowser>
 #include <QVBoxLayout>
@@ -33,13 +29,23 @@
 #include <QMap>
 #include <QMapIterator>
 #include <QPair>
+#include <QFrame>
 
-StelHelpBrowser::StelHelpBrowser(QWidget* parent)
-	: QWidget(parent), browser(this)
+#include "ui_helpDialogGui.h"
+
+#include "HelpDialog.hpp"
+#include "StelApp.hpp"
+#include "StelFileMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelMainWindow.hpp"
+
+
+
+
+HelpDialog::HelpDialog() 
+	: dialog(0)
 {
-	browser.setReadOnly(true);
-	browser.setOpenExternalLinks(true);
-	browser.setOpenLinks(true);
+	ui = new Ui_helpDialogForm;
 
 	// TODO: internationalise the non tag strings here
 	headerText = "<html><head><title>Stellarium Help</title></head><body>\n";
@@ -64,21 +70,34 @@ StelHelpBrowser::StelHelpBrowser(QWidget* parent)
 	footerText += "<p><a href=\"http://sourceforge.net/tracker/?group_id=48857&atid=454376\">Feature request system</a> - if you have an idea for a new feature, send it to us. We can't promise to implement every idea, but we appreciate the feedback and review the list when we are planning future features.</p>\n";
 	footerText += "<p><a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">Forums</a> - discuss Stellarium with other users.</p>\n";
 	footerText += "</body></html>\n";
-
-	QVBoxLayout *layout = new QVBoxLayout;
-	layout->setMargin(0);
-	layout->addWidget(&browser);
-	this->setLayout(layout);
-
-	updateText();
 }
 
-StelHelpBrowser::~StelHelpBrowser()
+void HelpDialog::close()
 {
-
+        emit closed();
 }
 
-void StelHelpBrowser::setKey(QString group, QString oldKey, QString newKey, QString description)
+void HelpDialog::setVisible(bool v)
+{
+        if (v)
+        {
+                dialog = new DialogFrame(&StelMainWindow::getInstance());
+                ui->setupUi(dialog);
+		updateText();
+
+                dialog->raise();
+                dialog->move(190, 90); // TODO: put in the center of the screen
+                dialog->setVisible(true);
+                connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
+        }
+        else
+        {
+                dialog->deleteLater();
+                dialog = 0;
+        }
+}
+
+void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
 {
 	// For adding keys like this, the choice of a QMultiMap seems like
 	// madness.  However, when we update the text it does the grouping
@@ -89,7 +108,8 @@ void StelHelpBrowser::setKey(QString group, QString oldKey, QString newKey, QStr
 	if (oldKey.isEmpty())
 	{
 		keyData.insert(group, QPair<QString, QString>(newKey, description));
-		this->updateText();
+		// if (ui->helpBrowser!=NULL)
+		// 	this->updateText();
 		return;
 	}
 	
@@ -106,10 +126,11 @@ void StelHelpBrowser::setKey(QString group, QString oldKey, QString newKey, QStr
 	}
 
 	keyData.insert(group, QPair<QString, QString>(newKey, description));
-	this->updateText();
+	// if (ui->helpBrowser!=NULL)
+	// 	this->updateText();
 }
 
-void StelHelpBrowser::updateText(void)
+void HelpDialog::updateText(void)
 {
 	QString newHtml(headerText);
 
@@ -140,8 +161,8 @@ void StelHelpBrowser::updateText(void)
 	newHtml += "</table>";
 	newHtml += footerText;
 	
-	browser.clear();
-	browser.insertHtml(newHtml);
-	browser.scrollToAnchor("top");
+	ui->helpBrowser->clear();
+	ui->helpBrowser->insertHtml(newHtml);
+	ui->helpBrowser->scrollToAnchor("top");
 }
 
