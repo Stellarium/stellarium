@@ -71,11 +71,13 @@ public:
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
 	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2
-	void setMaxDisplayLuminance(float maxdL) {oneOverMaxdL = 1.f/maxdL;}
+	void setMaxDisplayLuminance(float maxdL)
+	{oneOverMaxdL = 1.f/maxdL; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
 	//! Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.3
-	void setDisplayGamma(float gamma) {oneOverGamma = 1.f/gamma;}
+	void setDisplayGamma(float gamma)
+	{oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
 	//! Return adapted luminance from world to display
 	//! @param worldLuminance the world luminance to convert in cd/m^2
@@ -119,6 +121,8 @@ private:
 	float alphaWaOverAlphaDa;
 	float term2;
 	float sqrtTerm2;
+	
+	float term2TimesOneOverMaxdLpOneOverGamma;
 };
 
 #endif // _TONE_REPRODUCER_H_
