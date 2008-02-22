@@ -22,7 +22,7 @@
 #include <config.h>
 #ifndef HAVE_POW10
 # include <math.h>
-# define pow10(x) std::exp((x) * 2.3025850930)
+# define pow10(x) std::exp((x) * 2.3025850930f)
 #endif
 
 #include "Skybright.hpp"
@@ -122,7 +122,7 @@ float Skybright::get_luminance(float cos_dist_moon,
 
 	// Moonlight brightness
 	const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
-	               + pow10(6.15f - (dist_moon+0.001) * 1.43239f)
+	               + pow10(6.15f - (dist_moon+0.001f) * 1.43239f)
 	               + 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
 	float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 
@@ -130,7 +130,7 @@ float Skybright::get_luminance(float cos_dist_moon,
 
 	// Daylight brightness
 	const float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f)
-	               + pow10(6.15f - (dist_sun+0.001)* 1.43239f)
+	               + pow10(6.15f - (dist_sun+0.001f)* 1.43239f)
 	               + 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
 	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
