@@ -21,33 +21,30 @@
 #ifndef _VIEWPORT_DISTORTER_H_
 #define _VIEWPORT_DISTORTER_H_
 
-#include <string>
-
-#if defined(__sun) || defined(__sun__)
-typedef std::string string;
-#endif
-
-using namespace std;
-
 class Projector;
+class QString;
 
-class ViewportDistorter {
+class ViewportDistorter
+{
 public:
-  static ViewportDistorter *create(const string &type,
-                                   int width,int height,
-                                   Projector *prj);
-    // StelCore is needed for getProjectionType and setMaxFov
-  virtual ~ViewportDistorter(void) {}
-  virtual string getType(void) const = 0;
-  virtual void prepare(void) const = 0;
-  virtual void distort(void) const = 0;
-  virtual bool distortXY(int &x,int &y) const = 0;
+	static ViewportDistorter *create(const QString &type,
+	                                 int width,int height,
+	                                 Projector *prj);
+	// StelCore is needed for getProjectionType and setMaxFov
+	virtual ~ViewportDistorter(void) {}
+	virtual QString getType(void) const = 0;
+	virtual void prepare(void) const = 0;
+	virtual void distort(void) const = 0;
+	virtual bool distortXY(int &x,int &y) const = 0;
+
 protected:
-  ViewportDistorter(void) {}
+	ViewportDistorter(void) {}
+
 private:
-    // no copying:
-  ViewportDistorter(const ViewportDistorter&);
-  const ViewportDistorter &operator=(const ViewportDistorter&);
+	// no copying:
+	ViewportDistorter(const ViewportDistorter&);
+	const ViewportDistorter &operator=(const ViewportDistorter&);
+
 };
 
 #endif
