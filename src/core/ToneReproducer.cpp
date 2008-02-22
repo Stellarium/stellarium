@@ -25,7 +25,8 @@ using namespace std;
 
 # include <config.h>
 #ifndef HAVE_POW10
-# define pow10(x) pow(10,(x))
+//# define pow10(x) pow(10,(x))
+# define pow10(x) std::exp((x) * 2.3025850930)
 #endif
 
 #include "ToneReproducer.hpp"
@@ -36,7 +37,7 @@ using namespace std;
 ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
 {
 	// Update alphaDa and betaDa values
-	float log10Lwa = log10f(Lwa);
+	float log10Lwa = std::log10(Lwa);
 	alphaWa = 0.4f * log10Lwa + 1.519f;
 	betaWa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 	
@@ -61,15 +62,15 @@ void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	Lda = _Lda;
 
 	// Update alphaDa and betaDa values
-	float log10Lda = log10f(Lda);
+	float log10Lda = std::log10(Lda);
 	alphaDa = 0.4f * log10Lda + 1.519f;
 	betaDa = -0.4f * log10Lda*log10Lda + 0.218f * log10Lda + 6.1642f;
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
+	sqrtTerm2 = std::sqrt(term2);
 }
-
 
 /*********************************************************************
  Set the eye adaptation luminance for the world (and precompute what can be)
@@ -79,14 +80,14 @@ void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	Lwa = _Lwa;
 
 	// Update alphaDa and betaDa values
-	float log10Lwa = log10f(Lwa);
+	float log10Lwa = std::log10(Lwa);
 	alphaWa = 0.4f * log10Lwa + 1.519f;
 	betaWa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
-
+	sqrtTerm2 = std::sqrt(term2);
 }
 
 
@@ -105,7 +106,7 @@ void ToneReproducer::xyYToRGB(float* color) const
 	}
 	else
 	{
-		log10Y = log10f(color[2]);
+		log10Y = std::log10(color[2]);
 	}
 
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
@@ -150,5 +151,5 @@ void ToneReproducer::xyYToRGB(float* color) const
 *********************************************************************/
 float ToneReproducer::magToLuminance(float mag, float surface)
 {
-	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
+	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * std::log10(surface)))) * 108064.73f;
 }

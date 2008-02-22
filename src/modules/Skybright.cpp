@@ -22,7 +22,7 @@
 #include <config.h>
 #ifndef HAVE_POW10
 # include <math.h>
-# define pow10(x) pow(10,(x))
+# define pow10(x) std::exp((x) * 2.3025850930)
 #endif
 
 #include "Skybright.hpp"

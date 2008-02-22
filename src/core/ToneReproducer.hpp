@@ -85,6 +85,15 @@ public:
 		return std::pow((float)(worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
 	}
 
+	//! Return adapted ln(luminance) from world to display
+	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
+	//! @return the converted display luminance in cd/m^2
+	float sqrtAdaptLuminanceLn(float lnWorldLuminance) const
+	{
+		const float lnPix0p0001 = -8.0656104861;
+		return std::exp((lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa*0.5)*sqrtTerm2;
+	}
+	
 	//! Convert from xyY color system to RGB.
 	//! The first two components x and y indicate the "color", the Y is luminance in cd/m^2.
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
@@ -109,6 +118,7 @@ private:
 	float betaWa;
 	float alphaWaOverAlphaDa;
 	float term2;
+	float sqrtTerm2;
 };
 
 #endif // _TONE_REPRODUCER_H_
