@@ -19,6 +19,8 @@
 
 #include <iostream>
 #include <algorithm>
+#include <QString>
+#include <QDebug>
 #include "Projector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
@@ -49,10 +51,9 @@ bool Constellation::read(const string& record, StarMgr *starMgr)
 	numberOfSegments = 0;
 
 	std::istringstream istr(record);
-	if (!(istr >> abbreviation >> numberOfSegments)) return false;
-		
-	// make short_name uppercase for case insensitive searches
-	transform(abbreviation.begin(),abbreviation.end(), abbreviation.begin(), ::toupper);
+	std::string abb;
+	if (!(istr >> abb >> numberOfSegments)) return false;
+	abbreviation = QString::fromStdString(abb).toUpper();
 
 	asterism = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
@@ -68,7 +69,7 @@ bool Constellation::read(const string& record, StarMgr *starMgr)
 		asterism[i]=starMgr->searchHP(HP);
 		if (!asterism[i])
 		{
-			cout << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP << endl;
+			qWarning() << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP;
 			// delete[] asterism;
 			return false;
 		}

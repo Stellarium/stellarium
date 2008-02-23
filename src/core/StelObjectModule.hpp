@@ -54,7 +54,7 @@ public:
 
 	//! Return the matching StelObject if exists or the empty StelObject if not found
 	//! @param name the english object name
-	virtual StelObjectP searchByName(const string& name) const = 0;
+	virtual StelObjectP searchByName(const QString& name) const = 0;
 	
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
 	//! @param objPrefix the first letters of the searched object
