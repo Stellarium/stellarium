@@ -79,7 +79,7 @@ void Navigator::init()
 	
 	// Navigation section
 	PresetSkyTime 		= conf->value("navigation/preset_sky_time",2451545.).toDouble();
-	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "now").toString().toStdString();
+	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "now").toString();
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		setJDay(PresetSkyTime - get_GMT_shift_from_system(PresetSkyTime) * JD_HOUR);
 	else setTimeNow();

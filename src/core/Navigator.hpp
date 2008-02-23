@@ -20,13 +20,11 @@
 #ifndef _NAVIGATOR_H_
 #define _NAVIGATOR_H_
 
-#include <string>
 #include "vecmath.h"
 
 #include "fixx11h.h"
 #include <QObject>
-
-using std::string;
+#include <QString>
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
@@ -124,8 +122,8 @@ public:
 	void setPresetSkyTime(double d) {PresetSkyTime=d;}
 	
 	//! Return the startup mode, can be preset|Preset or anything else
-	string getStartupTimeMode() {return StartupTimeMode;}
-	void setStartupTimeMode(const string& s) {StartupTimeMode = s;}
+	QString getStartupTimeMode() {return StartupTimeMode;}
+	void setStartupTimeMode(const QString& s) {StartupTimeMode = s;}
 	
 	// Update the modelview matrices
 	void updateModelViewMat(void);
@@ -184,7 +182,7 @@ private:
 	double JDay;        			// Curent time in Julian day
 
 	double PresetSkyTime;
-	string StartupTimeMode;
+	QString StartupTimeMode;
 
 	// Position variables
 	Observer* position;
