@@ -119,7 +119,7 @@ public:
 	const STextureSP getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName.toStdString());}
+	void translateName(Translator& trans) {nameI18 = QString::fromStdWString(trans.translate(englishName.toStdString()));}
 	
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -174,7 +174,7 @@ public:
 	Vec3d getObsJ2000Pos(const Navigator *nav) const;
 
 	QString getEnglishName(void) const {return englishName;}
-	wstring getNameI18n(void) const {return nameI18;}
+	QString getNameI18n(void) const {return nameI18;}
 
 	void set_rings(Ring* r) {rings = r;}
 
@@ -243,7 +243,7 @@ protected:
 
 
 	QString englishName;            // english planet name
-	wstring nameI18;                // International translated name
+	QString nameI18;                // International translated name
 	int flagHalo;                   // Set wether a little "star like" halo will be drawn
 	int flag_lighting;              // Set wether light computation has to be proceed
 	RotationElements re;            // Rotation param

@@ -81,7 +81,7 @@ public:
 	bool readTexture(const QString& setName, const string& record);
 	bool readNGC(char *record);
 
-	wstring getNameI18n(void) const {return nameI18;}
+	QString getNameI18n(void) const {return nameI18;}
 	QString getEnglishName(void) const {return englishName;}
     
 	//! Get the printable nebula Type.
@@ -89,7 +89,7 @@ public:
 	wstring getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName.toStdString());}
+	void translateName(Translator& trans) {nameI18 = QString::fromStdWString(trans.translate(englishName.toStdString()));}
 	
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
 	{
@@ -112,7 +112,7 @@ private:
 	unsigned int IC_nb;// Index Catalog number
 	//unsigned int UGC_nb;            // Uppsala General  Catalog number
 	QString englishName;             // English name
-	wstring nameI18;                // Nebula name
+	QString nameI18;                // Nebula name
 	string credit;                  // Nebula image credit
 	float mag;                      // Apparent magnitude
 	float angular_size;             // Angular size in degree

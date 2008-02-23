@@ -27,7 +27,7 @@
 #include <boost/intrusive_ptr.hpp>
 
 #include <string>
-
+#include <QString>
 
 class StelObject;
 
@@ -78,7 +78,7 @@ struct Star1 { // 28 byte
     return pos;
   }
   float getBV(void) const {return IndexToBV(b_v);}
-  std::wstring getNameI18n(void) const;
+  QString getNameI18n(void) const;
   void repack(bool from_be);
   void print(void);
 }
@@ -113,7 +113,7 @@ struct Star2 {  // 10 byte
     return pos;
   }
   float getBV(void) const {return IndexToBV(b_v);}
-  std::wstring getNameI18n(void) const {return L"";}
+  QString getNameI18n(void) const {return "";}
   void repack(bool from_be);
   void print(void);
 }
@@ -144,7 +144,7 @@ struct Star3 {  // 6 byte
     return pos;
   }
   float getBV(void) const {return IndexToBV(b_v);}
-  std::wstring getNameI18n(void) const {return L"";}
+  QString getNameI18n(void) const {return "";}
   void repack(bool from_be);
   void print(void);
 }

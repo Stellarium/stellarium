@@ -84,7 +84,7 @@ Planet::Planet(Planet *parent,
 	trail_on = 0;
 	first_point = 1;
 
-	nameI18 = englishName.toStdWString();
+	nameI18 = englishName;
 	if (englishName!="Pluto") {
 	  deltaJD = 0.001*JD_SECOND;
 	}
@@ -134,16 +134,16 @@ QString Planet::getInfoString(const Navigator * nav) const
 //! Get sky label (sky translation)
 wstring Planet::getSkyLabel(const Navigator * nav) const
 {
-	wstring ws = nameI18;
-	ostringstream oss;
-	oss.setf(ios::fixed);
-	oss.precision(1);
+	QString str;
+	QTextStream oss(&str);
+	oss.setRealNumberPrecision(2);
+	oss << nameI18;
+
 	if (sphere_scale != 1.f)
 	{
 		oss << " (x" << sphere_scale << ")";
-		ws += StelUtils::stringToWstring(oss.str());
 	}
-	return ws;
+	return str.toStdWString();
 }
 
 

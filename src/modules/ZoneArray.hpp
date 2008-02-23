@@ -405,7 +405,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 			}
 			if (s->mag < max_mag_star_name)
 			{
-				const QString starname = QString::fromStdWString(s->getNameI18n());
+				const QString starname = s->getNameI18n();
 				if (!starname.isEmpty())
 				{
 					const Vec3f& colorr = SkyDrawer::indexToColor(s->b_v)*0.75;

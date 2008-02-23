@@ -49,7 +49,7 @@ private:
 	//! @param nav a pointer to the Navigator object (unused).
 	QString getInfoString(const Navigator * nav) const
 	{
-		return QString::fromStdWString(getNameI18n() + L"(" + StelUtils::stringToWstring(getShortName()) + L"°");
+		return getNameI18n() + "(" + QString::fromStdString(getShortName()) + "°";
 	}
 
 	//! Get a brief information string about a Constellation.
@@ -58,7 +58,7 @@ private:
 	//! is used for the constellation label.
 	//! @param nav a pointer to the navigator object.
 	//! @return short description (name).
-	QString getShortInfoString(const Navigator* nav) const {return QString::fromStdWString(getNameI18n());}
+	QString getShortInfoString(const Navigator* nav) const {return getNameI18n();}
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
@@ -100,7 +100,7 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	wstring getNameI18n(void) const {return nameI18;}
+	QString getNameI18n(void) const {return nameI18;}
 	//! Get the English name for the Constellation (returns the abbreviation).
 	QString getEnglishName(void) const {return QString::fromStdString(abbreviation);}
 	//! Get the short name for the Constellation (returns the abbreviation).
@@ -139,7 +139,7 @@ private:
 	bool getFlagArt(void) const {return art_fader;}
 	
 	//! International name (translated using gettext)
-	wstring nameI18;
+	QString nameI18;
 	//! Name in english
 	QString englishName;
 	//! Abbreviation (of the latin name for western constellations)

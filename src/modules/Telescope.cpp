@@ -222,7 +222,7 @@ Telescope *Telescope::create(const string &url) {
 
 Telescope::Telescope(const string &name) : name(QString::fromStdString(name))
 {
-	nameI18n = StelUtils::stringToWstring(name);
+	nameI18n = QString::fromStdString(name);
 }
 
 QString Telescope::getInfoString(const Navigator *nav) const {
@@ -234,16 +234,16 @@ QString Telescope::getInfoString(const Navigator *nav) const {
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   QString str;
   QTextStream oss(&str);
-  oss << QString::fromStdWString(nameI18n) << endl
-		<< q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,false)
-		<< "/" << StelUtils::radToDmsStr(dec_j2000,false) << endl
-		<< q_("Equ of date") << " " << q_("RA/DE: ")
-		<< StelUtils::radToHmsStr(ra_equ) << "/" << StelUtils::radToDmsStr(dec_equ);
+  oss << nameI18n << endl
+      << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,false)
+      << "/" << StelUtils::radToDmsStr(dec_j2000,false) << endl
+      << q_("Equ of date") << " " << q_("RA/DE: ")
+      << StelUtils::radToHmsStr(ra_equ) << "/" << StelUtils::radToDmsStr(dec_equ);
   return str;
 }
 
 QString Telescope::getShortInfoString(const Navigator*) const {
-  return QString::fromStdWString(nameI18n);
+  return nameI18n;
 }
 
 
