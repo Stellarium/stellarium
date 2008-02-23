@@ -22,6 +22,7 @@
 
 #include "StelModule.hpp"
 #include "LocationDialog.hpp"
+#include "StelObjectType.hpp"
 #include "HelpDialog.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
@@ -107,6 +108,18 @@ private:
 	QGraphicsSimpleTextItem* fps;
 };
 
+//! The button bar on the bottom containing actions toggle buttons
+class InfoPanel : public QGraphicsItem
+{
+public:
+	InfoPanel(QGraphicsItem* parent);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual QRectF boundingRect() const;
+private:
+	QGraphicsSimpleTextItem* text;
+	StelObjectP object;
+};
+
 class StelBarsPath : public QGraphicsPathItem
 {
 public:
@@ -154,6 +167,7 @@ private slots:
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
+	InfoPanel* infoPanel;
 	StelBarsPath* buttonBarPath;
 	QGraphicsSimpleTextItem* buttonHelpLabel;
 	Ui_Form* ui;

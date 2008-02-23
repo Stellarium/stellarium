@@ -59,7 +59,7 @@ Nebula::~Nebula()
 {
 }
 
-wstring Nebula::getInfoString(const Navigator* nav) const
+QString Nebula::getInfoString(const Navigator* nav) const
 {
 	double tempDE, tempRA;
 
@@ -110,10 +110,10 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	if (angular_size>0)
 		oss << q_("Size: ") << StelUtils::radToDmsStr(angular_size*M_PI/180.) << endl;
 	
-	return str.toStdWString();
+	return str;
 }
 
-wstring Nebula::getShortInfoString(const Navigator*) const
+QString Nebula::getShortInfoString(const Navigator*) const
 {
 	if (nameI18!=L"")
 	{
@@ -123,27 +123,27 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 		if (mag < 99)
 			oss << q_("Magnitude: ") << mag;
 		
-		return str.toStdWString();
+		return str;
 	}
 	else
 	{
 		if (M_nb > 0)
 		{
-			return L"M " + StelUtils::intToWstring(M_nb);
+			return QString("M %1").arg(M_nb);
 		}
 		else if (NGC_nb > 0)
 		{
-			return L"NGC " + StelUtils::intToWstring(NGC_nb);
+			return QString("NGC %1").arg(NGC_nb);
 		}
 		else if (IC_nb > 0)
 		{
-			return L"IC " + StelUtils::intToWstring(IC_nb);
+			return QString("IC %1").arg(IC_nb);
 		}
 	}
 	
 	// All nebula have at least an NGC or IC number
 	assert(false);
-	return L"";
+	return "";
 }
 
  float Nebula::getSelectPriority(const Navigator *nav) const
@@ -202,7 +202,7 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 			{
 				if (name[i]=='_') name[i]=' ';
 			}
-		englishName = name;
+		englishName = QString::fromStdString(name);
 	}
 
 	// Calc the RA and DE from the datas

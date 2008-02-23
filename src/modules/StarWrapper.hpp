@@ -20,6 +20,7 @@
 #ifndef _STAR_WRAPPER_HPP_
 #define _STAR_WRAPPER_HPP_
 
+#include <QString>
 #include "StelObject.hpp"
 #include "Navigator.hpp"
 #include "StarMgr.hpp"
@@ -47,12 +48,12 @@ class StarWrapperBase : public StelObject {
 protected:
   StarWrapperBase(void) : ref_count(0) {}
   virtual ~StarWrapperBase(void) {}
-  std::string getType(void) const {return "Star";}
+  QString getType(void) const {return "Star";}
 
-  string getEnglishName(void) const {return "";}
+  QString getEnglishName(void) const {return "";}
   wstring getNameI18n(void) const = 0;
-  wstring getInfoString(const Navigator *nav) const;
-  wstring getShortInfoString(const Navigator *nav) const;
+  QString getInfoString(const Navigator *nav) const;
+  QString getShortInfoString(const Navigator *nav) const;
   virtual float getBV(void) const = 0;
 private:
   int ref_count;
@@ -84,7 +85,7 @@ protected:
   	return getMagnitude(nav);
   }
   float getBV(void) const {return s->getBV();}
-  string getEnglishName(void) const {
+  QString getEnglishName(void) const {
     return "";
   }
   wstring getNameI18n(void) const {
@@ -102,9 +103,9 @@ public:
   StarWrapper1(const SpecialZoneArray<Star1> *a,
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
-  wstring getInfoString(const Navigator *nav) const;
-  wstring getShortInfoString(const Navigator *nav) const;
-  string getEnglishName(void) const;
+  QString getInfoString(const Navigator *nav) const;
+  QString getShortInfoString(const Navigator *nav) const;
+  QString getEnglishName(void) const;
 };
 
 class StarWrapper2 : public StarWrapper<Star2> {

@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <boost/intrusive_ptr.hpp>
+#include <QString>
 
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
@@ -46,9 +47,9 @@ private:
 	// StelObject method to override
    	//! Write I18n information about the object in wstring.
 	//! @param nav a pointer to the Navigator object (unused).
-	wstring getInfoString(const Navigator * nav) const
+	QString getInfoString(const Navigator * nav) const
 	{
-		return getNameI18n() + L"(" + StelUtils::stringToWstring(getShortName()) + L"°";
+		return QString::fromStdWString(getNameI18n() + L"(" + StelUtils::stringToWstring(getShortName()) + L"°");
 	}
 
 	//! Get a brief information string about a Constellation.
@@ -57,11 +58,11 @@ private:
 	//! is used for the constellation label.
 	//! @param nav a pointer to the navigator object.
 	//! @return short description (name).
-	wstring getShortInfoString(const Navigator * nav) const {return getNameI18n();}
+	QString getShortInfoString(const Navigator* nav) const {return QString::fromStdWString(getNameI18n());}
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
-	std::string getType(void) const {return "Constellation";}
+	QString getType(void) const {return "Constellation";}
 
 	//! Get position in earth equatorial frame.
 	Vec3d getEarthEquatorialPos(const Navigator *nav) const {return XYZname;}
@@ -101,7 +102,7 @@ private:
 	//! Get the translated name for the Constellation.
 	wstring getNameI18n(void) const {return nameI18;}
 	//! Get the English name for the Constellation (returns the abbreviation).
-	string getEnglishName(void) const {return abbreviation;}
+	QString getEnglishName(void) const {return QString::fromStdString(abbreviation);}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	string getShortName(void) const {return abbreviation;}
 	//! Draw the lines for the Constellation.
@@ -140,7 +141,7 @@ private:
 	//! International name (translated using gettext)
 	wstring nameI18;
 	//! Name in english
-	string englishName;
+	QString englishName;
 	//! Abbreviation (of the latin name for western constellations)
 	string abbreviation;
 	//! Direction vector pointing on constellation name drawing position 

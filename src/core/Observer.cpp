@@ -43,7 +43,7 @@ private:
   void setRot(const Vec3d &r);
   static Vec3d GetRot(const Planet *p);
   const Planet *dest;
-  const string orig_name;
+  const QString orig_name;
   const wstring orig_name_i18n;
 };
 
@@ -235,7 +235,7 @@ void Observer::load(QSettings* conf, const QString& section)
 		planet = ssystem.getEarth();
 	}
     
-	cout << "Loading location: \"" << qPrintable(locationName) <<"\", on " << planet->getEnglishName() << endl;
+	cout << "Loading location: \"" << qPrintable(locationName) <<"\", on " << qPrintable(planet->getEnglishName()) << endl;
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
@@ -256,7 +256,7 @@ void Observer::save(const QString& file, const QString& section) const
 void Observer::setConf(QSettings* conf, const QString& section) const
 {
 	conf->setValue(section + "/name", locationName);
-	conf->setValue(section + "/home_planet", planet->getEnglishName().c_str());
+	conf->setValue(section + "/home_planet", planet->getEnglishName());
 	conf->setValue(section + "/latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
 	conf->setValue(section + "/longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
 	conf->setValue(section + "/altitude", altitude);
@@ -267,7 +267,7 @@ void Observer::setConf(QSettings* conf, const QString& section) const
 
 QString Observer::getHomePlanetEnglishName(void) const {
   const Planet *p = getHomePlanet();
-  return p ? p->getEnglishName().c_str() : "";
+  return p ? p->getEnglishName() : "";
 }
 
 QString Observer::getHomePlanetNameI18n(void) const {

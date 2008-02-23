@@ -260,7 +260,7 @@ bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, Stel
  Return the list objects of type "withType" which was recently selected by
   the user
 *************************************************************************/
-std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const std::string& type)
+std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 {
 	std::vector<StelObjectP> result;
 	for (std::vector<StelObjectP>::iterator iter=lastSelectedObjects.begin();iter!=lastSelectedObjects.end();++iter)
