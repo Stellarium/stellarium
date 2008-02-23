@@ -557,7 +557,7 @@ void ConstellationMgr::updateI18n()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = QString::fromStdWString(trans.translate((*iter)->englishName.toStdString().c_str()));
+		(*iter)->nameI18 = trans.translate((*iter)->englishName);
 	}
 	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }

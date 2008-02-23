@@ -364,23 +364,21 @@ int StarMgr::load_common_names(const QString& commonNameFile) {
     unsigned int i = 0;
     while (line[i]!='|' && i<sizeof(line)-2) ++i;
     i++;
-    string englishCommonName =  line+i;
+    QString englishCommonName =  line+i;
     // remove newline
-    englishCommonName.erase(englishCommonName.length()-1, 1);
+    englishCommonName.chop(1);
 
 //cout << hip << ": \"" << englishCommonName << '"' << endl;
 
     // remove underscores
-    for (string::size_type j=0;j<englishCommonName.length();++j) {
-        if (englishCommonName[j]=='_') englishCommonName[j]=' ';
-    }
-    const wstring commonNameI18n = _(englishCommonName.c_str());
+    englishCommonName.replace(QChar('_'), "_");
+    const wstring commonNameI18n = q_(englishCommonName).toStdWString();
     wstring commonNameI18n_cap = commonNameI18n;
     transform(commonNameI18n.begin(), commonNameI18n.end(),
               commonNameI18n_cap.begin(), ::toupper);
 
-    common_names_map[hip] = englishCommonName;
-    common_names_index[englishCommonName] = hip;
+    common_names_map[hip] = englishCommonName.toStdString();
+    common_names_index[englishCommonName.toStdString()] = hip;
     common_names_map_i18n[hip] = commonNameI18n;
     common_names_index_i18n[commonNameI18n_cap] = hip;
   }
@@ -645,7 +643,7 @@ void StarMgr::updateI18n() {
   for (map<int,string>::iterator it(common_names_map.begin());
        it!=common_names_map.end();it++) {
     const int i = it->first;
-    const wstring t(trans.translate(it->second));
+    const wstring t(trans.translate(QString::fromStdString(it->second)).toStdWString());
     common_names_map_i18n[i] = t;
     wstring t_cap = t;
     transform(t.begin(), t.end(), t_cap.begin(), ::toupper);

@@ -63,11 +63,11 @@ public:
 	//! @param s input string in english.
 	//! @return The translated string in wide characters.
 	//! @deprecated Use qtranslate instead
-	std::wstring translate(const std::string& s)
+	QString translate(const QString& s)
 	{
-		if (s.empty()) return L"";
+		if (s.isEmpty()) return "";
 		reload();
-		return StelUtils::stringToWstring(gettext(s.c_str()));
+		return QString::fromUtf8(gettext(s.toLocal8Bit()));
 	}
 	
 	//! Translate input message and return it as a QString.
