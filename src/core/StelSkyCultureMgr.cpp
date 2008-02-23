@@ -23,10 +23,6 @@
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <dirent.h>
-#include <cassert>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -90,7 +86,7 @@ bool StelSkyCultureMgr::setSkyCultureDir(const QString& cultureDir)
 }
 
 //! returns newline delimited list of human readable culture names in english
-string StelSkyCultureMgr::getSkyCultureListEnglish(void)
+QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
 	QString cultures;
 	QMapIterator<QString, QString> i(dirToNameEnglish);
@@ -99,11 +95,11 @@ string StelSkyCultureMgr::getSkyCultureListEnglish(void)
 		i.next();
 		cultures += QString("%1\n").arg(i.value());
 	}
-	return cultures.toStdString();
+	return cultures;
 }
 
 //! returns newline delimited list of human readable culture names translated to current locale
-wstring StelSkyCultureMgr::getSkyCultureListI18(void)
+QString StelSkyCultureMgr::getSkyCultureListI18(void)
 {
 	QString cultures;
 	QMapIterator<QString, QString> i(dirToNameEnglish);
@@ -114,12 +110,12 @@ wstring StelSkyCultureMgr::getSkyCultureListI18(void)
 	}
 	// remove last newline - strangly inconsistent with getSkyCultureListEnglish...
 	cultures.chop(1);
-	return cultures.toStdWString();
+	return cultures;
 }
 
 //! returns newline delimited hash of human readable culture names translated to current locale
 //! and the directory names
-wstring StelSkyCultureMgr::getSkyCultureHash(void) const
+QString StelSkyCultureMgr::getSkyCultureHash(void) const
 {
 	QString cultures;
 	QMapIterator<QString, QString> i(dirToNameEnglish);
@@ -130,39 +126,39 @@ wstring StelSkyCultureMgr::getSkyCultureHash(void) const
 		cultures += QString("%1\n%2\n").arg(q_(i.value())).arg(i.key());
 	}
 
-	return cultures.toStdWString();
+	return cultures;
 }
 
-wstring StelSkyCultureMgr::getSkyCulture() const
+QString StelSkyCultureMgr::getSkyCulture() const
 {
 	return directoryToSkyCultureI18(skyCultureDir);
 }
 
 
-string StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
+QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
 {
-	return dirToNameEnglish[directory].toStdString();
+	return dirToNameEnglish[directory];
 }
 
-wstring StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) const
+QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) const
 {
 	QString culture = dirToNameEnglish[directory];
 	if (culture=="")
 	{
 		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
 		           << directory << "\"): could not find directory";
-		return L"";
+		return "";
 	}
-	return q_(culture).toStdWString();
+	return q_(culture);
 }
 
-QString StelSkyCultureMgr::skyCultureToDirectory(const wstring& cultureName)
+QString StelSkyCultureMgr::skyCultureToDirectory(const QString& cultureName)
 {
 	QMapIterator<QString, QString> i(dirToNameEnglish);
 	while(i.hasNext())
 	{
 		i.next();
-		if (q_(i.value()) == QString::fromStdWString(cultureName))
+		if (q_(i.value()) == cultureName)
 			return i.key();
 	}
 	return "";
