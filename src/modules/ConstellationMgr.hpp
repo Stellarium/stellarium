@@ -90,7 +90,7 @@ public:
 	
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
-	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	
 	//! Return the matching constellation if exists or NULL
 	//! @param name The case sensistive standard program name (three letter abbreviation)

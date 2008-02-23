@@ -799,12 +799,12 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 	return NULL;
 }
 
-StelObjectP SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
+StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if( (*iter)->getNameI18n().toStdWString() == planetNameI18 ) return (*iter);  // also check standard ini file names
+		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
 	return NULL;

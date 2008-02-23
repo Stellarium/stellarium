@@ -171,10 +171,10 @@ vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov,
   return result;
 }
 
-StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
+StelObjectP TelescopeMgr::searchByNameI18n(const QString &nameI18n) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
-    if (it->second->getNameI18n().toStdWString() == nameI18n) return it->second;
+    if (it->second->getNameI18n() == nameI18n) return it->second;
   }
   return 0;
 }
