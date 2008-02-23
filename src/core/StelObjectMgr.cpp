@@ -100,7 +100,7 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 }
 
 //! Find any kind of object by its standard program name
-StelObjectP StelObjectMgr::searchByName(const string &name) const
+StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
 	StelObjectP rval;
 	std::vector<StelObjectModule*>::const_iterator iter;
@@ -128,7 +128,7 @@ bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelM
 }
 
 //! Find and select an object from its standard program name
-bool StelObjectMgr::findAndSelect(const string &name, StelModule::StelModuleSelectAction action)
+bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
 	StelObjectP obj = searchByName(name);

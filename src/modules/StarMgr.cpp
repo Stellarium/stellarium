@@ -714,13 +714,15 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 
 	// Search by I18n common name
 	map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw.toStdWString()));
-	if (it!=common_names_index_i18n.end()) {
+	if (it!=common_names_index_i18n.end()) 
+	{
 		return searchHP(it->second);
 	}
 
 	// Search by sci name
 	it = sci_names_index_i18n.find(objw.toStdWString());
-	if (it!=sci_names_index_i18n.end()) {
+	if (it!=sci_names_index_i18n.end()) 
+	{
 		return searchHP(it->second);
 	}
 
@@ -728,58 +730,33 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 }
 
 
-StelObjectP StarMgr::searchByName(const string& name) const
+StelObjectP StarMgr::searchByName(const QString& name) const
 {
-    wstring objw = StelUtils::stringToWstring(name);
-    transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
-    
-    // Search by HP number if it's an HP formated number
-    // Please help, if you know a better way to do this:
-    if (name.length() >= 2 && name[0]=='H' && name[1]=='P')
-    {
-        bool hp_ok = false;
-        string::size_type i=2;
-        // ignore spaces
-        for (;i<name.length();i++)
-        {
-            if (name[i] != ' ') break;
-        }
-        // parse the number
-        unsigned int nr = 0;
-        for (;i<name.length();i++)
-        {
-            if (hp_ok = ('0' <= name[i] && name[i] <= '9'))
-            {
-                nr = 10*nr+(name[i]-'0');
-            }
-            else
-            {
-                break;
-            }
-        }
-        if (hp_ok)
-        {
-            return searchHP(nr);
-        }
-    }
+	QString objw = name.toUpper();
+
+	// Search by HP number if it's an HP formated number
+	QRegExp rx("^\\s*HP\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx.exactMatch(objw))
+	{
+		return searchHP(rx.capturedTexts().at(1).toInt());
+	}
 
 
-  map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw));
+	/* Should we try this anyway?
+	// Search by common name
+	map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw));
 
-/* Should we try this anyway?
-    // Search by common name
+	if (it!=common_names_index_i18n.end()) {
+		return searchHP(it->second);
+	} */
 
-  if (it!=common_names_index_i18n.end()) {
-    return searchHP(it->second);
-  }
-*/
-    // Search by sci name
-  it = sci_names_index_i18n.find(objw);
-  if (it!=sci_names_index_i18n.end()) {
-    return searchHP(it->second);
-  }
+	// Search by sci name
+	map<wstring,int>::const_iterator it = sci_names_index_i18n.find(objw.toStdWString());
+	if (it!=sci_names_index_i18n.end()) {
+		return searchHP(it->second);
+	}
 
-  return StelObjectP();
+	return StelObjectP();
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing

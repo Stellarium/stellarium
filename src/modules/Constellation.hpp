@@ -102,9 +102,9 @@ private:
 	//! Get the translated name for the Constellation.
 	QString getNameI18n(void) const {return nameI18;}
 	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName(void) const {return QString::fromStdString(abbreviation);}
+	QString getEnglishName(void) const {return abbreviation;}
 	//! Get the short name for the Constellation (returns the abbreviation).
-	string getShortName(void) const {return abbreviation;}
+	string getShortName(void) const {return abbreviation.toStdString();}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru 
 	//! the class ConstellationMgr only).
@@ -143,7 +143,7 @@ private:
 	//! Name in english
 	QString englishName;
 	//! Abbreviation (of the latin name for western constellations)
-	string abbreviation;
+	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position 
 	Vec3f XYZname;
 	Vec3d XYname;
