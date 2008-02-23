@@ -86,7 +86,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 }
 
 
-StelObjectP StelObjectMgr::searchByNameI18n(const wstring &name) const
+StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
 	StelObjectP rval;
 	std::vector<StelObjectModule*>::const_iterator iter;
@@ -117,7 +117,7 @@ StelObjectP StelObjectMgr::searchByName(const string &name) const
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
 //! @return true if an object was found with the passed name
-bool StelObjectMgr::findAndSelectI18n(const wstring &nameI18n, StelModule::StelModuleSelectAction action)
+bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
 	StelObjectP obj = searchByNameI18n(nameI18n);

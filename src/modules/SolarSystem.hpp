@@ -101,7 +101,7 @@ public:
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param NameI18n The case sensistive translated planet name.
 	//! @return A StelObjectP for the object if found, else NULL.
-	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param NameI18n The case sensistive translated planet name.

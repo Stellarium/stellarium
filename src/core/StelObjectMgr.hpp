@@ -68,7 +68,7 @@ public:
 	//! @param added add the found object to selection if true, replace if false
 	//! @param nameI18n the case sensitive object translated name
 	//! @return true if a object with the passed name was found
-	bool findAndSelectI18n(const wstring &nameI18n, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
 
 	//! Find and select an object from its standard program name.
 	//! @param added add the found object to selection if true, replace if false
@@ -117,7 +117,7 @@ private:
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
 	//! Find any kind of object by its translated name.
-	StelObjectP searchByNameI18n(const wstring &name) const;
+	StelObjectP searchByNameI18n(const QString &name) const;
 
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const string &name) const;
