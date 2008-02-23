@@ -98,7 +98,7 @@ public:
 	
 	//! Return the matching nebula object's pointer if exists or NULL.
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
-	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	
 	//! Return the matching nebula if exists or NULL.
 	//! @param name The case sensistive standard program name

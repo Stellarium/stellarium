@@ -897,9 +897,9 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 ///  return 0;
 ///}
 
-StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = QString::fromStdWString(nameI18n).toUpper();
+	QString objw = nameI18n.toUpper();
 	
 	vector <Constellation*>::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)

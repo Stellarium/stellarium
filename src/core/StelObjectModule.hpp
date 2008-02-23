@@ -50,7 +50,7 @@ public:
 	//! Find a StelObject by name.
 	//! @param nameI18n The translated name for the current sky locale.
 	//! @return The matching StelObject if exists or the empty StelObject if not found.
-	virtual StelObjectP searchByNameI18n(const wstring& nameI18n) const = 0;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const = 0;
 
 	//! Return the matching StelObject if exists or the empty StelObject if not found
 	//! @param name the english object name

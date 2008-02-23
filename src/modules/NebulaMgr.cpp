@@ -593,20 +593,18 @@ void NebulaMgr::updateI18n()
 
 
 //! Return the matching Nebula object's pointer if exists or NULL
-StelObjectP NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	wstring objw = nameI18n;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = nameI18n.toUpper();
 	vector <Nebula*>::const_iterator iter;
 	
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	if (objw.substr(0, 3) == L"NGC")
+	if (objw.mid(0, 3) == "NGC")
 	{
 		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 		{
-			if ((L"NGC" + StelUtils::intToWstring((*iter)->NGC_nb)) == objw ||
-			 (L"NGC " + StelUtils::intToWstring((*iter)->NGC_nb)) == objw)
-			 return *iter;
+			if (QString("NGC%1").arg((*iter)->NGC_nb) == objw || QString("NGC %1").arg((*iter)->NGC_nb) == objw)
+				return *iter;
 		}
 	}
 	
@@ -614,17 +612,17 @@ StelObjectP NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
 		QString objwcap = (*iter)->nameI18.toUpper();
-		if (objwcap.toStdWString()==objw) return *iter;
+		if (objwcap==objw) 
+			return *iter;
 	}
 	
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
-	if (objw.substr(0, 1) == L"M")
+	if (objw.mid(0, 1) == "M")
 	{
 		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 		{
-			if ((L"M" + StelUtils::intToWstring((*iter)->M_nb)) == objw ||
-			 (L"M " + StelUtils::intToWstring((*iter)->M_nb)) == objw)
-			 return *iter;
+			if (QString("M%1").arg((*iter)->M_nb) == objw || QString("M %1").arg((*iter)->M_nb) == objw)
+				return *iter;
 		}
 	}
 	

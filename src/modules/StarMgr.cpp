@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QString>
+#include <QRegExp>
 #include <QDebug>
 
 #include "Projector.hpp"
@@ -700,54 +701,30 @@ StelObjectP StarMgr::searchHP(int _HP) const {
   return StelObjectP();
 }
 
-StelObjectP StarMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
-    wstring objw = nameI18n;
-    transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
-    
-    // Search by HP number if it's an HP formated number
-    // Please help, if you know a better way to do this:
-    if (nameI18n.length() >= 2 && nameI18n[0]==L'H' && nameI18n[1]==L'P')
-    {
-        bool hp_ok = false;
-        wstring::size_type i=2;
-        // ignore spaces
-        for (;i<nameI18n.length();i++)
-        {
-            if (nameI18n[i] != L' ') break;
-        }
-        // parse the number
-        unsigned int nr = 0;
-        for (;i<nameI18n.length();i++)
-        {
-            if (hp_ok = (L'0' <= nameI18n[i] && nameI18n[i] <= L'9'))
-            {
-                nr = 10*nr+(nameI18n[i]-L'0');
-            }
-            else
-            {
-                break;
-            }
-        }
-        if (hp_ok)
-        {
-            return searchHP(nr);
-        }
-    }
+	QString objw = nameI18n.toUpper();
 
-    // Search by I18n common name
-  map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw));
-  if (it!=common_names_index_i18n.end()) {
-    return searchHP(it->second);
-  }
+	// Search by HP number if it's an HP formated number
+	QRegExp rx("^\\s*HP\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx.exactMatch(objw))
+	{
+		return searchHP(rx.capturedTexts().at(1).toInt());
+	}
 
-    // Search by sci name
-  it = sci_names_index_i18n.find(objw);
-  if (it!=sci_names_index_i18n.end()) {
-    return searchHP(it->second);
-  }
+	// Search by I18n common name
+	map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw.toStdWString()));
+	if (it!=common_names_index_i18n.end()) {
+		return searchHP(it->second);
+	}
 
-  return StelObjectP();
+	// Search by sci name
+	it = sci_names_index_i18n.find(objw.toStdWString());
+	if (it!=sci_names_index_i18n.end()) {
+		return searchHP(it->second);
+	}
+
+	return StelObjectP();
 }
 
 
