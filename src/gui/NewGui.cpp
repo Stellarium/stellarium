@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelAppGraphicsItem.hpp"
 #include "StelMainWindow.hpp"
+#include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
@@ -33,6 +34,8 @@
 #include "Observer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "Navigator.hpp"
+#include "StelObjectType.hpp"
+#include "StelObject.hpp"
 
 #include "ui_mainGui.h"
 
@@ -41,12 +44,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsLineItem>
+#include <QRectF>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsTextItem>
 #include <QTimeLine>
 #include <QFontDatabase>
 #include <QMouseEvent>
+#include <vector>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, QGraphicsSimpleTextItem* ahelpLabel) : 
@@ -239,6 +244,39 @@ QRectF BottomStelBar::boundingRect() const
 	return childrenBoundingRect();
 }
 
+InfoPanel::InfoPanel(QGraphicsItem* parent)
+	: QGraphicsItem(parent)
+{
+	QFont font("DejaVuSans", 10);
+	QColor color = QColor::fromRgbF(.8,.8,.8,1);
+	QBrush brush(color);
+	text = new QGraphicsSimpleTextItem("", this);
+
+	text->setFont(font);
+	text->setBrush(brush);
+
+	object = NULL;
+}
+
+void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	std::vector<StelObjectP> selected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+
+	if (selected.size() == 0)
+		text->setText("");
+	else
+	{
+		// just print details of the first item for now
+		StelCore* core = StelApp::getInstance().getCore();
+		text->setText(selected[0]->getInfoString(core->getNavigation()));
+	}
+}
+
+QRectF InfoPanel::boundingRect() const
+{
+	return childrenBoundingRect();
+}
+
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 {
 	roundSize = 6;
@@ -271,6 +309,7 @@ NewGui::NewGui()
 	setObjectName("NewGui");
 	winBar = NULL;
 	buttonBar = NULL;
+	infoPanel = NULL;
 	buttonBarPath = NULL;
 	buttonHelpLabel = NULL;
 	ui = new Ui_Form();
@@ -303,6 +342,7 @@ NewGui::~NewGui()
 	// When the QGraphicsItems are deleted, they are automatically removed from the scene
 	delete winBar;
 	delete buttonBar;
+	delete infoPanel;
 	delete buttonBarPath;
 }
 
@@ -456,6 +496,8 @@ void NewGui::init()
 	
 	// Construct the bottom buttons bar
 	buttonBar = new BottomStelBar(NULL);
+
+	infoPanel = new InfoPanel(NULL);
 	
 	QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
 	QPixmap pxmapBlank(":/graphicGui/gui/btBlank.png");
@@ -556,6 +598,7 @@ void NewGui::init()
 	scene->addItem(winBar);
 	scene->addItem(buttonBar);
 	scene->addItem(buttonBarPath);
+	scene->addItem(infoPanel);
 	
 	// Readjust position
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
@@ -574,6 +617,8 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	buttonBar->setPos(winBar->boundingRect().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
 	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
 	buttonBarPath->updatePath(buttonBar, winBar);
+
+	infoPanel->setPos(8,8);
 }
 
 

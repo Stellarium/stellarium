@@ -21,6 +21,7 @@
 #define STELOBJECTMGR_HPP_
 
 #include <vector>
+#include <QString>
 #include "vecmath.h"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -103,7 +104,7 @@ public:
 	
 	//! Return the list objects of type "withType" which was recently selected by the user.
 	//! @param type return only objects of the given type 
-	std::vector<StelObjectP> getSelectedObject(const std::string& type);
+	std::vector<StelObjectP> getSelectedObject(const QString& type);
 
 	//! Set whether a pointer is to be drawn over selected object.
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }

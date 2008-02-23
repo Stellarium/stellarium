@@ -183,7 +183,7 @@ StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
 StelObjectP TelescopeMgr::searchByName(const string &name) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
-    if (it->second->getEnglishName() == name) return it->second;
+    if (it->second->getEnglishName().toStdString() == name) return it->second;
   }
   return 0;
 }

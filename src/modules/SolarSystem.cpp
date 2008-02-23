@@ -295,7 +295,7 @@ void SolarSystem::loadPlanets()
 			vector<Planet*>::iterator iter = system_planets.begin();
 			while (iter != system_planets.end())
 			{
-				if ((*iter)->getEnglishName()==strParent.toStdString())
+				if ((*iter)->getEnglishName()==strParent)
 				{
 					parent = (*iter);
 				}
@@ -584,7 +584,7 @@ void SolarSystem::loadPlanets()
 
 		// Create the Planet and add it to the list
 		Planet* p = new Planet(parent,
-					englishName.toStdString(),
+					englishName,
 					pd.value(secname+"/halo").toBool(),
 					pd.value(secname+"/lighting").toBool(),
 					pd.value(secname+"/radius").toDouble()/AU,
@@ -791,7 +791,7 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 //printf("SolarSystem::searchByEnglishName(\"%s\"): %s\n",
 //       planetEnglishName.c_str(),
 //       (*iter)->getEnglishName().c_str());
-		if( (*iter)->getEnglishName() == planetEnglishName ) return (*iter);  // also check standard ini file names
+		if( (*iter)->getEnglishName().toStdString() == planetEnglishName ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
 //printf("SolarSystem::searchByEnglishName(\"%s\"): not found\n",
@@ -816,7 +816,7 @@ StelObjectP SolarSystem::searchByName(const string& name) const
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if( (*iter)->getEnglishName() == name ) return (*iter); 
+		if( (*iter)->getEnglishName().toStdString() == name ) return (*iter); 
 		++iter;
 	}
 	return NULL;
@@ -899,11 +899,11 @@ wstring SolarSystem::getPlanetHashString(void)
 	{
 		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun")
 		{
-			oss << q_((*iter)->get_parent()->getEnglishName().c_str()) << " : ";
+			oss << (*iter)->get_parent()->getEnglishName() << " : ";
 		}
 		
-		oss << q_((*iter)->getEnglishName().c_str()) << endl;
-		oss << (*iter)->getEnglishName().c_str() << endl;
+		oss << (*iter)->getEnglishName() << endl;
+		oss << (*iter)->getEnglishName() << endl;
 	}
 	return str.toStdWString();
 }

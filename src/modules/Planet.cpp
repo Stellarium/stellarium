@@ -47,7 +47,7 @@ Vec3f Planet::trail_color = Vec3f(1,0.7,0.7);
 LinearFader Planet::flagShow;
 
 Planet::Planet(Planet *parent,
-               const string& englishName,
+               const QString& englishName,
                int flagHalo,
                int flag_lighting,
                double radius,
@@ -84,7 +84,7 @@ Planet::Planet(Planet *parent,
 	trail_on = 0;
 	first_point = 1;
 
-	nameI18 = StelUtils::stringToWstring(englishName);
+	nameI18 = englishName.toStdWString();
 	if (englishName!="Pluto") {
 	  deltaJD = 0.001*JD_SECOND;
 	}
@@ -97,14 +97,14 @@ Planet::~Planet()
 }
 
 // Return the information string "ready to print" :)
-wstring Planet::getInfoString(const Navigator * nav) const
+QString Planet::getInfoString(const Navigator * nav) const
 {
 	double tempDE, tempRA;
 	
 	QString str;
 	QTextStream oss(&str);
 
-	oss << q_(englishName.c_str());  // UI translation can differ from sky translation
+	oss << englishName;  // UI translation can differ from sky translation
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphere_scale != 1.f)
@@ -128,7 +128,7 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	oss.setRealNumberPrecision(8);
 	oss << q_("Distance: ") << equPos.length() << q_("AU") << endl;
 	
-	return str.toStdWString();
+	return str;
 }
 
 //! Get sky label (sky translation)
@@ -148,12 +148,12 @@ wstring Planet::getSkyLabel(const Navigator * nav) const
 
 
 // Return the information string "ready to print" :)
-wstring Planet::getShortInfoString(const Navigator * nav) const
+QString Planet::getShortInfoString(const Navigator * nav) const
 {
 	QString str;
 	QTextStream oss(&str);
 
-	oss << q_(englishName.c_str());  // UI translation can differ from sky translation
+	oss << englishName;  // UI translation can differ from sky translation
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
@@ -167,7 +167,7 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 	oss.setRealNumberPrecision(5);
 	oss << "  " << q_("Distance: ") << equPos.length() << q_("AU");
 
-	return str.toStdWString();
+	return str;
 }
 
 float Planet::getSelectPriority(const Navigator *nav) const

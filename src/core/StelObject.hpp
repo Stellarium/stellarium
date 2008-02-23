@@ -21,6 +21,7 @@
 #define _STEL_OBJECT_H_
 
 #include <string>
+#include <QString>
 #include "vecmath.h"
 #include "StelObjectType.hpp"
 #include "GridObject.hpp"
@@ -56,17 +57,17 @@ public:
 	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
 	virtual void release(void) {;}
 	
-	//! Write I18n information about the object in wstring. 
-	virtual wstring getInfoString(const Navigator *nav) const = 0;
+	//! Write I18n information about the object in QString. 
+	virtual QString getInfoString(const Navigator *nav) const = 0;
 	
-	//! The returned wstring can typically be used for object labeling in the sky
-	virtual wstring getShortInfoString(const Navigator *nav) const = 0;
+	//! The returned QString can typically be used for object labeling in the sky
+	virtual QString getShortInfoString(const Navigator *nav) const = 0;
 	
 	//! Return object's type. It should be the name of the class.
-	virtual std::string getType(void) const = 0;
+	virtual QString getType(void) const = 0;
 	
 	//! Return object's name in english
-	virtual string getEnglishName(void) const = 0;
+	virtual QString getEnglishName(void) const = 0;
 	
 	//! Return translated object's name
 	virtual wstring getNameI18n(void) const = 0;

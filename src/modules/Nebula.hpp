@@ -20,6 +20,7 @@
 #ifndef _NEBULA_H_
 #define _NEBULA_H_
 
+#include <QString>
 #include "StelObject.hpp"
 #include "Projector.hpp"
 #include "Navigator.hpp"
@@ -54,12 +55,12 @@ friend class NebulaMgr;
 public:
 	enum nebula_type { NEB_GX, NEB_OC, NEB_GC, NEB_N, NEB_PN, NEB_DN, NEB_IG, NEB_CN, NEB_UNKNOWN };
 
-    Nebula();
-    ~Nebula();
+	Nebula();
+	~Nebula();
 
-	wstring getInfoString(const Navigator * nav) const;
-	wstring getShortInfoString(const Navigator * nav = NULL) const;
-	std::string getType(void) const {return "Nebula";}
+	QString getInfoString(const Navigator * nav) const;
+	QString getShortInfoString(const Navigator * nav = NULL) const;
+	QString getType(void) const {return "Nebula";}
 	Vec3d getEarthEquatorialPos(const Navigator *nav) const {return nav->j2000_to_earth_equ(XYZ);}
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
@@ -81,14 +82,14 @@ public:
 	bool readNGC(char *record);
 
 	wstring getNameI18n(void) const {return nameI18;}
-	string getEnglishName(void) const {return englishName;}
+	QString getEnglishName(void) const {return englishName;}
     
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
 	wstring getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	void translateName(Translator& trans) {nameI18 = trans.translate(englishName.toStdString());}
 	
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
 	{
@@ -102,36 +103,36 @@ private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
 	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
-    void draw_name(const Projector* prj);
-    void draw_circle(const Projector* prj, const Navigator * nav);
-    bool hasTex(void) {return neb_tex;}
+	void draw_name(const Projector* prj);
+	void draw_circle(const Projector* prj, const Navigator * nav);
+	bool hasTex(void) {return neb_tex;}
     
-	unsigned int M_nb;			// Messier Catalog number
-	unsigned int NGC_nb;			// New General Catalog number
-	unsigned int IC_nb;			// Index Catalog number
-	/*unsigned int UGC_nb;			// Uppsala General  Catalog number*/
-	string englishName;				// English name
-	wstring nameI18;				// Nebula name
-	string credit;					// Nebula image credit
-	float mag;						// Apparent magnitude
-	float angular_size;				// Angular size in degree
-	Vec3f XYZ;						// Cartesian equatorial position
-	Vec3d XY;						// Store temporary 2D position
+	unsigned int M_nb;              // Messier Catalog number
+	unsigned int NGC_nb;            // New General Catalog number
+	unsigned int IC_nb;// Index Catalog number
+	//unsigned int UGC_nb;            // Uppsala General  Catalog number
+	QString englishName;             // English name
+	wstring nameI18;                // Nebula name
+	string credit;                  // Nebula image credit
+	float mag;                      // Apparent magnitude
+	float angular_size;             // Angular size in degree
+	Vec3f XYZ;                      // Cartesian equatorial position
+	Vec3d XY;                       // Store temporary 2D position
 	nebula_type nType;
 
-	STextureSP neb_tex;			// Texture
-	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
-	float luminance;			// Object luminance to use (value computed to compensate
-						// the texture average luminosity)
+	STextureSP neb_tex;             // Texture
+	Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
+	float luminance;                // Object luminance to use (value computed to compensate
+	                                // the texture average luminosity)
 	
-	static STextureSP tex_circle;	// The symbolic circle texture
-	static SFont* nebula_font;		// Font used for names printing
+	static STextureSP tex_circle;   // The symbolic circle texture
+	static SFont* nebula_font;      // Font used for names printing
 	static float hints_brightness;
 
 	static Vec3f label_color, circle_color;
-	static float circleScale;		// Define the scaling of the hints circle
-	static bool flagBright;			// Define if nebulae must be drawn in bright mode
-	static bool flagShowTexture;	// Define if textures must be drawn
+	static float circleScale;       // Define the scaling of the hints circle
+	static bool flagBright;         // Define if nebulae must be drawn in bright mode
+	static bool flagShowTexture;    // Define if textures must be drawn
 	
 	static const float RADIUS_NEB;
 };

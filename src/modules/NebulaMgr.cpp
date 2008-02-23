@@ -221,10 +221,8 @@ StelObject* NebulaMgr::search(const string& name)
 
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
-		string testName = (*iter)->getEnglishName();
-		transform(testName.begin(), testName.end(), testName.begin(), ::toupper);
-		//		if(testName != "" ) cout << ">" << testName << "< " << endl;
-		if (testName==uname) return *iter;
+		QString testName = (*iter)->getEnglishName().toUpper();
+		if (testName.toStdString()==uname) return *iter;
 	}
 	
 	// If no match found, try search by catalog reference
@@ -488,7 +486,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				e->M_nb=(unsigned int)(num);
 				
 				oss << "M" << num;
-				e->englishName = oss.str();
+				e->englishName = QString::fromStdString(oss.str());
 			}
 		}
 		else
@@ -547,7 +545,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 			{
 				if (!e->readTexture(setName, record)) // reading error
 				{
-					cerr << "Error while reading nebula texture " << qPrintable(setName) << "/" << e->englishName << endl;
+					cerr << "Error while reading nebula texture " << qPrintable(setName) << "/" << qPrintable(e->englishName) << endl;
 					cerr << "Record was " << record << endl;
 				}
 			} 
@@ -560,7 +558,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 				if (!e->readTexture(setName, record))
 				{
 					// reading error
-					cerr << "Error while reading texture " << e->englishName << endl;
+					cerr << "Error while reading texture " << qPrintable(e->englishName) << endl;
 					delete e;
 				} 
 				else 
@@ -656,7 +654,7 @@ StelObjectP NebulaMgr::searchByName(const string& name) const
 	// Search by common names
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
-		string objwcap = (*iter)->englishName;
+		string objwcap = (*iter)->englishName.toStdString();
 		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
 		if (objwcap==objw) return *iter;
 	}
