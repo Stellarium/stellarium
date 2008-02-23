@@ -106,7 +106,7 @@ public:
 	//! Search for a SolarSystem object based on the English name.
 	//! @param NameI18n The case sensistive translated planet name.
 	//! @return A StelObjectP for the object if found, else NULL.
-	virtual StelObjectP searchByName(const string& name) const;
+	virtual StelObjectP searchByName(const QString& name) const;
 	
 	//! Find objects by translated name prefix.
 	//! Find and return the list of at most maxNbItem objects auto-completing 

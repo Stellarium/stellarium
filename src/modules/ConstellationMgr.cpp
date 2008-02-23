@@ -485,11 +485,10 @@ Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 	return NULL;
 }
 
-Constellation* ConstellationMgr::findFromAbbreviation(const string & abbreviation) const
+Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
 {
 	// search in uppercase only
-	string tname = abbreviation;
-	transform(tname.begin(), tname.end(), tname.begin(),::toupper);
+	QString tname = abbreviation.toUpper();
 	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -540,7 +539,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 			//	cout << "working on short name " << tmpShortName << endl;
 
-			aster = findFromAbbreviation(tmpShortName);
+			aster = findFromAbbreviation(QString::fromStdString(tmpShortName));
 			if (aster != NULL)
 			{
 				// Read the names in english
@@ -664,7 +663,7 @@ StelObject* ConstellationMgr::getSelected(void) const {
 
 void ConstellationMgr::setSelected(const string& abbreviation) 
 {
-	Constellation * c = findFromAbbreviation(abbreviation);
+	Constellation * c = findFromAbbreviation(QString::fromStdString(abbreviation));
 
 	if(c != NULL) setSelectedConst(c);
 
@@ -672,7 +671,7 @@ void ConstellationMgr::setSelected(const string& abbreviation)
 
 StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation) 
 {
-	Constellation * c = findFromAbbreviation(abbreviation);
+	Constellation * c = findFromAbbreviation(QString::fromStdString(abbreviation));
 
 	if(c != NULL) {
 		setSelectedConst(c);
@@ -860,7 +859,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 			// not used?
 			if (consname == "SER1" || consname == "SER2") consname = "SER";
 			
-			cons = findFromAbbreviation(consname);
+			cons = findFromAbbreviation(QString::fromStdString(consname));
 				if (!cons) cout << "ERROR : Can't find constellation called : " << consname << endl;
 			else cons->isolatedBoundarySegments.push_back(points);
 		}
@@ -910,19 +909,17 @@ StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-StelObjectP ConstellationMgr::searchByName(const string& name) const
+StelObjectP ConstellationMgr::searchByName(const QString& name) const
 {
-	string objw = name;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
-	
+	QString objw = name.toUpper();
 	vector <Constellation*>::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		string objwcap = (*iter)->englishName.toStdString();
-		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		QString objwcap = (*iter)->englishName.toUpper();
 		if (objwcap==objw) return *iter;
 
-		if ((*iter)->abbreviation==objw) return *iter;
+		objwcap = (*iter)->abbreviation.toUpper();
+		if (objwcap==objw) return *iter;
 	}
 	return NULL;
 }

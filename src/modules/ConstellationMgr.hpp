@@ -94,7 +94,7 @@ public:
 	
 	//! Return the matching constellation if exists or NULL
 	//! @param name The case sensistive standard program name (three letter abbreviation)
-	virtual StelObjectP searchByName(const string& name) const;
+	virtual StelObjectP searchByName(const QString& name) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -213,7 +213,7 @@ private:
 	vector<Constellation*> selected; // More than one can be selected at a time
 	
 	Constellation* isStarIn(const StelObject *s) const;
-	Constellation* findFromAbbreviation(const string& abbreviation) const;		
+	Constellation* findFromAbbreviation(const QString& abbreviation) const;		
 	vector<Constellation*> asterisms;
 	double fontSize;
 	SFont* asterFont;

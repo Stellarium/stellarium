@@ -811,12 +811,12 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 }
 
 
-StelObjectP SolarSystem::searchByName(const string& name) const
+StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if( (*iter)->getEnglishName().toStdString() == name ) return (*iter); 
+		if( (*iter)->getEnglishName() == name ) return (*iter); 
 		++iter;
 	}
 	return NULL;
