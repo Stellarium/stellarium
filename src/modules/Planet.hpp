@@ -17,11 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PLANET_H_
-#define _PLANET_H_
+#ifndef _PLANET_HPP_
+#define _PLANET_HPP_
 
 #include <list>
 #include <string>
+#include <QString>
 
 #include "StelObject.hpp"
 #include "ToneReproducer.hpp"
@@ -86,28 +87,28 @@ class Planet : public StelObject
 {
 public:
 	Planet(Planet *parent,
-           const string& englishName,
-           int flagHalo,
-           int flag_lighting,
-           double radius,
-           double oblateness,
-           Vec3f color,
-           float albedo,
-           const QString& tex_map_name,
-           const QString& tex_halo_name,
-           pos_func_type _coord_func,
-           OsulatingFunctType *osculating_func,
-		   bool close_orbit,bool hidden);
+	       const QString& englishName,
+	       int flagHalo,
+	       int flag_lighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& tex_map_name,
+	       const QString& tex_halo_name,
+	       pos_func_type _coord_func,
+	       OsulatingFunctType *osculating_func,
+	       bool close_orbit,bool hidden);
 
-    ~Planet();
+	~Planet();
 
-    double getRadius(void) const {return radius;}
+	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
 
 	// Return the information string "ready to print" :)
 	wstring getSkyLabel(const Navigator * nav) const;
-	wstring getInfoString(const Navigator * nav) const;
-	wstring getShortInfoString(const Navigator * nav) const;
+	QString getInfoString(const Navigator * nav) const;
+	QString getShortInfoString(const Navigator * nav) const;
 	double getCloseViewFov(const Navigator * nav) const;
 	double get_satellites_fov(const Navigator * nav) const;
 	double get_parent_satellites_fov(const Navigator * nav) const;
@@ -115,14 +116,14 @@ public:
 	float getSelectPriority(const Navigator *nav) const;
 	Vec3f getInfoColor(void) const;
 	
-    const STextureSP getMapTexture(void) const {return tex_map;}
+	const STextureSP getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	void translateName(Translator& trans) {nameI18 = trans.translate(englishName.toStdString());}
 	
-    // Compute the z rotation to use from equatorial to geographic coordinates
-    double getSiderealTime(double jd) const;
-    Mat4d getRotEquatorialToVsop87(void) const;
+	// Compute the z rotation to use from equatorial to geographic coordinates
+	double getSiderealTime(double jd) const;
+	Mat4d getRotEquatorialToVsop87(void) const;
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
@@ -150,8 +151,8 @@ public:
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
 	float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
-    double getRotAscendingnode(void) const {return re.ascendingNode;}
-    double getRotObliquity(void) const {return re.obliquity;}
+	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	double getRotObliquity(void) const {return re.obliquity;}
 
 
 	// Get the Planet position in the parent Planet ecliptic coordinate
@@ -165,14 +166,14 @@ public:
 	double compute_distance(const Vec3d& obs_helio_pos);
 	double get_distance(void) const {return distance;}
 
-	std::string getType(void) const {return "Planet";}
+	QString getType(void) const {return "Planet";}
 
 	// Return the Planet position in rectangular earth equatorial coordinate
 	Vec3d getEarthEquatorialPos(const Navigator *nav) const;
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const;
 
-	string getEnglishName(void) const {return englishName;}
+	QString getEnglishName(void) const {return englishName;}
 	wstring getNameI18n(void) const {return nameI18;}
 
 	void set_rings(Ring* r) {rings = r;}
@@ -241,39 +242,39 @@ protected:
 	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
 
 
-	string englishName; // english planet name
-	wstring nameI18;				// International translated name
-	int flagHalo;					// Set wether a little "star like" halo will be drawn
-	int flag_lighting;				// Set wether light computation has to be proceed
-	RotationElements re;			// Rotation param
-	double radius;					// Planet radius in UA
+	QString englishName;            // english planet name
+	wstring nameI18;                // International translated name
+	int flagHalo;                   // Set wether a little "star like" halo will be drawn
+	int flag_lighting;              // Set wether light computation has to be proceed
+	RotationElements re;            // Rotation param
+	double radius;                  // Planet radius in UA
 	double one_minus_oblateness;    // (polar radius)/(equatorial radius)
 	Vec3d orbit[ORBIT_SEGMENTS];    // store heliocentric coordinates for drawing the orbit
-	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
-									// centered on the parent Planet
-	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
-	Vec3d previousScreenPos;			// The position of this planet in the previous frame.
+	Vec3d ecliptic_pos;             // Position in UA in the rectangular ecliptic coordinate system
+	                                // centered on the parent Planet
+	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
+	Vec3d previousScreenPos;        // The position of this planet in the previous frame.
 	Vec3f color;
-	float albedo;					// Planet albedo
+	float albedo;                   // Planet albedo
 	Mat4d rot_local_to_parent;
-	float axis_rotation;			// Rotation angle of the Planet on it's axis
-    STextureSP tex_map;			// Planet map texture
-	STextureSP tex_big_halo;		// Big halo texture
+	float axis_rotation;            // Rotation angle of the Planet on it's axis
+	STextureSP tex_map;             // Planet map texture
+	STextureSP tex_big_halo;        // Big halo texture
 
-	float big_halo_size;				// Halo size on screen
+	float big_halo_size;            // Halo size on screen
 
-	Ring* rings;					// Planet rings
+	Ring* rings;                    // Planet rings
 
-	double distance;				// Temporary variable used to store the distance to a given point
-									// it is used for sorting while drawing
+	double distance;                // Temporary variable used to store the distance to a given point
+	                                // it is used for sorting while drawing
 
-	float sphere_scale;				// Artificial scaling for better viewing
+	float sphere_scale;             // Artificial scaling for better viewing
 
 	double lastJD;
 	double last_orbitJD;
 	double deltaJD;
 	double delta_orbitJD;
-	bool orbit_cached;       // whether orbit calculations are cached for drawing orbit yet
+	bool orbit_cached;              // whether orbit calculations are cached for drawing orbit yet
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
@@ -282,21 +283,21 @@ protected:
 	                  // the end: good for elliptical orbits, bad for parabolic
 	                  // and hyperbolic orbits
 
-	const Planet *parent;				// Planet parent i.e. sun for earth
-	list<Planet *> satellites;		// satellites of the Planet
+	const Planet *parent;           // Planet parent i.e. sun for earth
+	list<Planet *> satellites;      // satellites of the Planet
 
-	static SFont* planet_name_font;// Font for names
+	static SFont* planet_name_font; // Font for names
 	static float object_scale;
 	static Vec3f label_color;
 	static Vec3f orbit_color;
 	static Vec3f trail_color;
 
 	list<TrailPoint>trail;
-	bool trail_on;  // accumulate trail data if true
+	bool trail_on;                  // accumulate trail data if true
 	double DeltaTrail;
 	int MaxTrail;
 	double last_trailJD;
-	bool first_point;  // if need to take first point of trail still
+	bool first_point;               // if need to take first point of trail still
 
 	static LinearFader flagShow;
 	
@@ -308,4 +309,4 @@ protected:
 
 };
 
-#endif // _PLANET_H_
+#endif // _PLANET_HPP_

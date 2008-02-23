@@ -31,7 +31,7 @@
 
 namespace BigStarCatalogExtension {
 
-wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
+QString StarWrapperBase::getInfoString(const Navigator *nav) const {
   const Vec3d j2000_pos = getObsJ2000Pos(nav);
   double dec_j2000, ra_j2000;
   StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
@@ -55,21 +55,21 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   if(az > M_PI*2) az -= M_PI*2;    
   oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(az) << "/" << StelUtils::radToDmsStr(alt) << endl;
   
-  return str.toStdWString();
+  return str;
 }
 
-wstring StarWrapperBase::getShortInfoString(const Navigator *nav) const
+QString StarWrapperBase::getShortInfoString(const Navigator *nav) const
 {
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(2);
 	oss << q_("Magnitude: ") << getMagnitude(nav);
-	return str.toStdWString();
+	return str;
 }
 
 
-string StarWrapper1::getEnglishName(void) const {
+QString StarWrapper1::getEnglishName(void) const {
   if (s->hip) {
     char buff[64];
     sprintf(buff,"HP %d",s->hip);
@@ -78,7 +78,7 @@ string StarWrapper1::getEnglishName(void) const {
   return StarWrapperBase::getEnglishName();
 }
 
-wstring StarWrapper1::getInfoString(const Navigator *nav) const {
+QString StarWrapper1::getInfoString(const Navigator *nav) const {
   const Vec3d j2000_pos = getObsJ2000Pos(nav);
   double dec_j2000, ra_j2000;
   StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
@@ -137,11 +137,11 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   {
     oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int).c_str() << endl;
   }
-  return str.toStdWString();
+  return str;
 }
 
 
-wstring StarWrapper1::getShortInfoString(const Navigator *nav) const
+QString StarWrapper1::getShortInfoString(const Navigator *nav) const
 {
 	QString str;
 	QTextStream oss(&str);
@@ -179,7 +179,7 @@ wstring StarWrapper1::getShortInfoString(const Navigator *nav) const
 	{
 		oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int).c_str();
 	}
-	return str.toStdWString();
+	return str;
 }
 
 

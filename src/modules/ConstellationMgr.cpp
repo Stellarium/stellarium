@@ -557,7 +557,7 @@ void ConstellationMgr::updateI18n()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
+		(*iter)->nameI18 = trans.translate((*iter)->englishName.toStdString().c_str());
 	}
 	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
@@ -920,7 +920,7 @@ StelObjectP ConstellationMgr::searchByName(const string& name) const
 	vector <Constellation*>::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		string objwcap = (*iter)->englishName;
+		string objwcap = (*iter)->englishName.toStdString();
 		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
 		if (objwcap==objw) return *iter;
 
