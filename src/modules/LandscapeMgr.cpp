@@ -55,7 +55,7 @@ private:
 	double fontSize;
 	SFont& font;
 	Vec3f color;
-	wstring sNorth, sSouth, sEast, sWest;
+	QString sNorth, sSouth, sEast, sWest;
 	LinearFader fader;
 };
 
@@ -65,10 +65,10 @@ font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstanc
 {
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
-	sNorth = L"N";
-	sSouth = L"S";
-	sEast = L"E";
-	sWest = L"W";
+	sNorth = "N";
+	sSouth = "S";
+	sEast = "E";
+	sWest = "W";
 }
 
 Cardinals::~Cardinals()
@@ -82,7 +82,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	if (!fader.getInterstate()) return;
 
 	// direction text
-	wstring d[4];
+	QString d[4];
 	
 	d[0] = sNorth;
 	d[1] = sSouth;
@@ -104,23 +104,23 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 
-	float shift = font.getStrLen(QString::fromStdWString(sNorth))/2;
+	float shift = font.getStrLen(sNorth)/2;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[0]), 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[0], 0., -shift, -shift);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[1]), 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[1], 0., -shift, -shift);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[2]), 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[2], 0., -shift, -shift);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], QString::fromStdWString(d[3]), 0., -shift, -shift);
+	if (prj->project(pos,xy)) prj->drawText(&font, xy[0], xy[1], d[3], 0., -shift, -shift);
 
 }
 

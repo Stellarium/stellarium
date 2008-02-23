@@ -20,7 +20,6 @@
 #ifndef _STEL_OBJECT_H_
 #define _STEL_OBJECT_H_
 
-#include <string>
 #include <QString>
 #include "vecmath.h"
 #include "StelObjectType.hpp"

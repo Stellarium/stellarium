@@ -20,8 +20,8 @@
 #ifndef STELSKYCULTUREMGR_H
 #define STELSKYCULTUREMGR_H
 
-#include <map>
 #include <string>
+#include <QMap>
 #include <QString>
 
 using namespace std;
@@ -92,7 +92,7 @@ public:
 	QString skyCultureToDirectory(const wstring& cultureName);
 	
 private:
-	map<QString, string> dirToNameEnglish;
+	QMap<QString, QString> dirToNameEnglish;
 	
 	// The directory containing data for the culture used for constellations, etc.. 
 	QString skyCultureDir;
