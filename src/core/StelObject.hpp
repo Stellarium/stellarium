@@ -70,7 +70,7 @@ public:
 	virtual QString getEnglishName(void) const = 0;
 	
 	//! Return translated object's name
-	virtual wstring getNameI18n(void) const = 0;
+	virtual QString getNameI18n(void) const = 0;
 	
 	//! Get position in earth equatorial frame
 	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const = 0;

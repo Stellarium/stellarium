@@ -557,7 +557,7 @@ void ConstellationMgr::updateI18n()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = trans.translate((*iter)->englishName.toStdString().c_str());
+		(*iter)->nameI18 = QString::fromStdWString(trans.translate((*iter)->englishName.toStdString().c_str()));
 	}
 	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
@@ -899,14 +899,12 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 
 StelObjectP ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 {
-	wstring objw = nameI18n;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = QString::fromStdWString(nameI18n).toUpper();
 	
 	vector <Constellation*>::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		wstring objwcap = (*iter)->nameI18;
-		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		QString objwcap = (*iter)->nameI18.toUpper();
 		if (objwcap==objw) return *iter;
 	}
 	return NULL;
@@ -934,17 +932,15 @@ vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPref
 	vector<wstring> result;
 	if (maxNbItem==0) return result;
 		
-	wstring objw = objPrefix;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = QString::fromStdWString(objPrefix).toUpper();
 	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		wstring constw = (*iter)->getNameI18n().substr(0, objw.size());
-		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
 		{
-			result.push_back((*iter)->getNameI18n());
+			result.push_back((*iter)->getNameI18n().toStdWString());
 			if (result.size()==maxNbItem)
 				return result;
 		}

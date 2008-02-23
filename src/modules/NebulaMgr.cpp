@@ -613,9 +613,8 @@ StelObjectP NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 	// Search by common names
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
-		wstring objwcap = (*iter)->nameI18;
-		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
-		if (objwcap==objw) return *iter;
+		QString objwcap = (*iter)->nameI18.toUpper();
+		if (objwcap.toStdWString()==objw) return *iter;
 	}
 	
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
@@ -729,11 +728,10 @@ vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, uns
 	// Search by common names
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
-		wstring constw = (*iter)->nameI18.substr(0, objw.size());
-		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
-		if (constw==objw)
+		QString constw = (*iter)->nameI18.mid(0, objw.size()).toUpper();
+		if (constw.toStdWString()==objw)
 		{
-			result.push_back((*iter)->nameI18);
+			result.push_back((*iter)->nameI18.toStdWString());
 		}
 	}
 	

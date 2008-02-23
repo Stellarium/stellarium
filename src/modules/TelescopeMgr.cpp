@@ -127,7 +127,7 @@ double TelescopeMgr::draw(StelCore* core)
         }
         if (name_fader.getInterstate() >= 0) {
           glColor4f(label_color[0],label_color[1],label_color[2], name_fader.getInterstate());
-          prj->drawText(telescope_font, XY[0],XY[1],QString::fromStdWString(it->second->getNameI18n()), 0, 6, -4, false);
+          prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
           telescope_texture->bind();
         }
       }
@@ -174,7 +174,7 @@ vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov,
 StelObjectP TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
-    if (it->second->getNameI18n() == nameI18n) return it->second;
+    if (it->second->getNameI18n().toStdWString() == nameI18n) return it->second;
   }
   return 0;
 }
@@ -197,10 +197,9 @@ vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
   std::transform(objw.begin(),objw.end(),objw.begin(),::toupper);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
-    wstring constw = it->second->getNameI18n().substr(0, objw.size());
-    std::transform(constw.begin(),constw.end(),constw.begin(),::toupper);
-    if (constw==objw) {
-      result.push_back(it->second->getNameI18n());
+    QString constw = it->second->getNameI18n().mid(0, objw.size()).toUpper();
+    if (constw.toStdWString()==objw) {
+      result.push_back(it->second->getNameI18n().toStdWString());
     }
   }
   sort(result.begin(),result.end());
