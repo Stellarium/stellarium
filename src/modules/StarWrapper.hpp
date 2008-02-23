@@ -51,7 +51,7 @@ protected:
   QString getType(void) const {return "Star";}
 
   QString getEnglishName(void) const {return "";}
-  wstring getNameI18n(void) const = 0;
+  QString getNameI18n(void) const = 0;
   QString getInfoString(const Navigator *nav) const;
   QString getShortInfoString(const Navigator *nav) const;
   virtual float getBV(void) const = 0;
@@ -88,7 +88,7 @@ protected:
   QString getEnglishName(void) const {
     return "";
   }
-  wstring getNameI18n(void) const {
+  QString getNameI18n(void) const {
     return s->getNameI18n();
   }
 protected:

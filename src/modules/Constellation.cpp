@@ -111,8 +111,8 @@ void Constellation::drawName(SFont *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
-	prj->drawText(constfont, XYname[0], XYname[1], QString::fromStdWString(nameI18), 
-	              0., -constfont->getStrLen(QString::fromStdWString(nameI18))/2, 0, false);
+	prj->drawText(constfont, XYname[0], XYname[1], nameI18, 
+	              0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
 void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const

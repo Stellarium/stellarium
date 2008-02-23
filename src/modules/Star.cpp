@@ -27,17 +27,17 @@
 
 namespace BigStarCatalogExtension {
 
-wstring Star1::getNameI18n(void) const {
+QString Star1::getNameI18n(void) const {
   if (hip) {
-    const wstring commonNameI18 = StarMgr::getCommonName(hip);
-    if (!commonNameI18.empty()) return commonNameI18;
+    const QString commonNameI18 = QString::fromStdWString(StarMgr::getCommonName(hip));
+    if (!commonNameI18.isEmpty()) return commonNameI18;
     if (StarMgr::getFlagSciNames()) {
-      const wstring sciName = StarMgr::getSciName(hip);
-      if (!sciName.empty()) return sciName;
-      return L"HP " + StelUtils::intToWstring(hip);
+      const QString sciName = QString::fromStdWString(StarMgr::getSciName(hip));
+      if (!sciName.isEmpty()) return sciName;
+      return QString("HP %1").arg(hip);
     }
   }
-  return L"";
+  return "";
 }
 
 

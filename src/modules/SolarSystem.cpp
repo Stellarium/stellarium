@@ -804,7 +804,7 @@ StelObjectP SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
+		if( (*iter)->getNameI18n().toStdWString() == planetNameI18 ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
 	return NULL;
@@ -1139,11 +1139,10 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 	vector < Planet * >::const_iterator iter;
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
-		wstring constw = (*iter)->getNameI18n().substr(0, objw.size());
-		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
-		if (constw==objw)
+		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
+		if (constw.toStdWString()==objw)
 		{
-			result.push_back((*iter)->getNameI18n());
+			result.push_back((*iter)->getNameI18n().toStdWString());
 			if (result.size()==maxNbItem)
 				return result;
 		}

@@ -44,7 +44,7 @@ private:
   static Vec3d GetRot(const Planet *p);
   const Planet *dest;
   const QString orig_name;
-  const wstring orig_name_i18n;
+  const QString orig_name_i18n;
 };
 
 ArtificialPlanet::ArtificialPlanet(const Planet &orig) : 
@@ -67,8 +67,8 @@ ArtificialPlanet::ArtificialPlanet(const Planet &orig) :
 
 void ArtificialPlanet::setDest(const Planet &dest) {
   ArtificialPlanet::dest = &dest;
-  englishName = orig_name + "->" + dest.getEnglishName(),
-  nameI18 = orig_name_i18n + L"->" + dest.getNameI18n();
+  englishName = QString("%1->%2").arg(orig_name).arg(dest.getEnglishName());
+  nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest.getNameI18n());
 
     // rotation:
   const RotationElements &r(dest.getRotationElements());
@@ -272,7 +272,7 @@ QString Observer::getHomePlanetEnglishName(void) const {
 
 QString Observer::getHomePlanetNameI18n(void) const {
   const Planet *p = getHomePlanet();
-  return p ? QString::fromStdWString(p->getNameI18n()) : "";
+  return p ? p->getNameI18n() : "";
 }
 
 QString Observer::getLocationName(void) const {

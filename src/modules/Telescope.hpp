@@ -41,7 +41,7 @@ public:
   static Telescope *create(const string &url);
   virtual ~Telescope(void) {}
   QString getEnglishName(void) const {return name;}
-  wstring getNameI18n(void) const {return nameI18n;}
+  QString getNameI18n(void) const {return nameI18n;}
   QString getInfoString(const Navigator * nav) const;
   QString getShortInfoString(const Navigator * nav) const;
   QString getType(void) const {return "Telescope";}
@@ -61,7 +61,7 @@ public:
   const std::list<double> &getOculars(void) const {return oculars;}
 protected:
   Telescope(const string &name);
-  wstring nameI18n;
+  QString nameI18n;
   const QString name;
 private:
   bool isInitialized(void) const {return true;}

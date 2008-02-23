@@ -51,7 +51,7 @@ Nebula::Nebula() :
 		NGC_nb(0),
 		IC_nb(0)
 {
-	nameI18 = L"";
+	nameI18 = "";
 	angular_size = -1;
 }
 
@@ -68,9 +68,9 @@ QString Nebula::getInfoString(const Navigator* nav) const
 
 	QString str;
 	QTextStream oss(&str);
-	if (nameI18!=L"")
+	if (nameI18!="")
 	{
-		oss << QString::fromStdWString(nameI18) << " (";
+		oss << nameI18 << " (";
 	}
 	if ((M_nb > 0) && (M_nb < 111))
 	{
@@ -88,7 +88,7 @@ QString Nebula::getInfoString(const Navigator* nav) const
 	{
 		oss << L"UGC " << UGC_nb;
 	}*/
-	if (nameI18!=L"")
+	if (nameI18!="")
 	{
 		oss << ")";
 	}
@@ -115,11 +115,11 @@ QString Nebula::getInfoString(const Navigator* nav) const
 
 QString Nebula::getShortInfoString(const Navigator*) const
 {
-	if (nameI18!=L"")
+	if (nameI18!="")
 	{
 		QString str;
 		QTextStream oss(&str);
-		oss << QString::fromStdWString(nameI18) << L"  ";
+		oss << nameI18 << L"  ";
 		if (mag < 99)
 			oss << q_("Magnitude: ") << mag;
 		
@@ -314,7 +314,7 @@ void Nebula::draw_name(const Projector* prj)
 	float size = getOnScreenSize(prj);
 	float shift = 4.f + size/1.8f;
 
-	QString nebulaname = QString::fromStdWString(getNameI18n());
+	QString nebulaname = getNameI18n();
 
 	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 
