@@ -20,7 +20,6 @@
 #ifndef STELSKYCULTUREMGR_H
 #define STELSKYCULTUREMGR_H
 
-#include <string>
 #include <QMap>
 #include <QString>
 
@@ -44,10 +43,10 @@ public:
 	
 	//! Set the sky culture from i18n name.
 	//! @return true on success; false and doesn't change if skyculture is invalid.
-	bool setSkyCulture(const wstring& cultureName) {return setSkyCultureDir(skyCultureToDirectory(cultureName));}
+	bool setSkyCulture(const QString& cultureName) {return setSkyCultureDir(skyCultureToDirectory(cultureName));}
 	
 	//! Get the current sky culture i18n name.
-	wstring getSkyCulture() const;
+	QString getSkyCulture() const;
 	
 	//! Set the current sky culture from the passed directory.
 	//! In in the installatiom data directory and user data directory, 
@@ -65,31 +64,31 @@ public:
 	//! Get a hash of translated culture names and directories.
 	//! @return A newline delimited list of translated culture names and directories
 	//! e.g. "name1\ndir1\name2\ndir2".
-	wstring getSkyCultureHash() const;	
+	QString getSkyCultureHash() const;	
 	
 	//! Get a list of sky culture names in English.
 	//! @return A new-line delimited list of English sky culture names.
-	string getSkyCultureListEnglish(void);
+	QString getSkyCultureListEnglish(void);
 	
 	//! Get a list of sky culture names in the current language.
 	//! @return A new-line delimited list of translated sky culture names.
-	wstring getSkyCultureListI18(void);
+	QString getSkyCultureListI18(void);
 	
 	//! Get the culture name in English associated with a specified directory.
 	//! @param directory The directory name.
 	//! @return The English name for the culture associated with directory.
-	string directoryToSkyCultureEnglish(const QString& directory);
+	QString directoryToSkyCultureEnglish(const QString& directory);
 	
 	//! Get the culture name translated to current language associated with 
 	//! a specified directory.
 	//! @param directory The directory name.
 	//! @return The translated name for the culture associated with directory.
-	wstring directoryToSkyCultureI18(const QString& directory) const;
+	QString directoryToSkyCultureI18(const QString& directory) const;
 	
 	//! Get the directory associated with a specified translated culture name.
 	//! @param cultureName The culture name in the current language.
 	//! @return The directory assocuated with cultureName.
-	QString skyCultureToDirectory(const wstring& cultureName);
+	QString skyCultureToDirectory(const QString& cultureName);
 	
 private:
 	QMap<QString, QString> dirToNameEnglish;
