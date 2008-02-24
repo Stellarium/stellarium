@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <iostream>
 #include <cstdio>
 #include <cassert>
 #include <map>
@@ -137,9 +136,9 @@ void Projector::init()
 		glTexEnvf( GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE );
 		glEnable(GL_POINT_SPRITE_ARB);
 		glEnable(GL_POINT_SMOOTH);
-		cout << "INFO: using GL_ARB_point_sprite" << endl;
+		qDebug() << "INFO: using GL_ARB_point_sprite";
 	} else {
-		//cerr << "WARNING: GL_ARB_point_sprite not available" << endl;
+		//qDebug() << "WARNING: GL_ARB_point_sprite not available";
 	}
 }
 
@@ -311,7 +310,7 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
 void Projector::setFov(double f)
 {
 
-//	cout << "Set fov to " << f << " " << max_fov << " " << min_fov << endl;
+	// qDebug() << "Set fov to " << f << " " << max_fov << " " << min_fov;
 	fov = f;
 	if (f>max_fov)
 		fov = max_fov;
@@ -371,7 +370,7 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 		setCustomFrame(mat_j2000_to_eye);
 		break;
 	default:
-		cerr << "Unknown reference frame type: " << (int)frameType << "." << endl;
+		qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
 }
 

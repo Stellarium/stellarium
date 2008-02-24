@@ -19,7 +19,6 @@
 
 // manage an audio track (SDL mixer music track)
 
-#include <iostream>
 #include <config.h>
 #include <QString>
 #include <QDebug>
@@ -70,7 +69,7 @@ void Audio::play(bool loop) {
 		else Mix_PlayMusic(track, 0);
 		isPlaying = 1;
 		elapsedSeconds = 0;
-		//		std::cout << "now playing audio\n";
+		// qDebug() << "now playing audio";
 	}
 }
 

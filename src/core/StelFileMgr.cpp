@@ -1,5 +1,4 @@
 #include <config.h>
-#include <iostream>
 #include <stdexcept>
 #include <cstdlib>
 #include <QCoreApplication>
@@ -62,7 +61,7 @@ StelFileMgr::StelFileMgr()
 	}
 	catch(exception &e)
 	{
-		cerr << "WARNING: could not locate installation directory" << endl;
+		qWarning() << "WARNING: could not locate installation directory";
 	}
 
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
@@ -167,7 +166,6 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 void StelFileMgr::setSearchPaths(const QStringList& paths)
 {
 	fileLocations = paths;
-	//outputFileSearchPaths();
 }
 
 bool StelFileMgr::exists(const QString& path)
@@ -213,8 +211,7 @@ void StelFileMgr::checkUserDir()
 			}
 			else
 			{
-				cerr << "ERROR StelFileMgr::checkUserDir: user directory is not a writable directory: " << qPrintable(uDir.filePath()) << endl;
-				qFatal("User directory is not a writable directory");
+				qCritical() << "ERROR: User directory is not a writable directory: " << uDir.filePath() ;
 			}
 		}
 		else
@@ -222,16 +219,14 @@ void StelFileMgr::checkUserDir()
 			// The user directory doesn't exist, lets create it.
 			if (!QDir("/").mkpath(uDir.filePath()))
 			{
-				cerr << "ERROR: could not create user directory: " << qPrintable(uDir.filePath()) << endl;
-				qFatal("Could not create user directory");
+				qCritical() << "ERROR: Could not create user directory: " << uDir.filePath();
 			}
 		}
 	}
 	catch(exception& e)
 	{
 		// This should never happen  ;)
-		cerr << "ERROR: cannot work out the user directory: " << e.what() << endl;
-		qFatal("Cannot work out the user directory");
+		qCritical() << "ERROR: cannot work out the user directory: " << e.what();
 	}	
 }
 
@@ -283,16 +278,6 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const FLAGS& flags)
 	}
 		
 	return(true);
-}
-
-void StelFileMgr::outputFileSearchPaths(void)
-{
-	int count = 0;
-	cout << "File search path set to:" << endl;		   
-	foreach (QString i, fileLocations)
-	{
-		qDebug() << " " << ++count << ") " << i;
-	}
 }
 
 QString StelFileMgr::getDesktopDir(void)
@@ -415,7 +400,7 @@ QString StelFileMgr::getLocaleDir(void)
 	}
 	else
 	{
-		cerr << "WARNING in StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"" << endl;
+		qWarning() << "WARNING in StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
 		return "";
 	}
 }

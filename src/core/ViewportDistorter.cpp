@@ -18,8 +18,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <fstream>
-#include <iostream>
 #include <cmath>
 #include <QSettings>
 #include <QString>
@@ -121,7 +119,7 @@ ViewportDistorterFisheyeToSphericMirror
 	{
 		flag_use_ext_framebuffer_object = conf.value("spheric_mirror/flag_use_ext_framebuffer_object",true).toBool();
 	}
-	std::cout << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object << endl;
+	qDebug() << "INFO: flag_use_ext_framebuffer_object = " << flag_use_ext_framebuffer_object;
 	if (flag_use_ext_framebuffer_object && !GLEE_EXT_packed_depth_stencil)
 	{
 		qWarning() << "WARNING: "
@@ -175,14 +173,14 @@ ViewportDistorterFisheyeToSphericMirror
 		viewport[0] = (screen_w-viewport_w) >> 1;
 		viewport[1] = (screen_h-viewport_h) >> 1;
 	}
-	//cout << "texture_wh: " << texture_wh << endl;
-	//cout << "viewport_fov_diameter: " << viewport_fov_diameter << endl;
-	//cout << "screen: " << screen_w << ", " << screen_h << endl;
-	//cout << "viewport: " << viewport[0] << ", " << viewport[1] << ", "
-	//     << viewport_w << ", " << viewport_h << endl;
-	//cout << "viewport_texture_offset: "
-	//     << viewport_texture_offset[0] << ", "
-	//     << viewport_texture_offset[1] << endl;
+	//qDebug() << "texture_wh: " << texture_wh;
+	//qDebug() << "viewport_fov_diameter: " << viewport_fov_diameter;
+	//qDebug() << "screen: " << screen_w << ", " << screen_h;
+	//qDebug() << "viewport: " << viewport[0] << ", " << viewport[1] << ", "
+	//         << viewport_w << ", " << viewport_h;
+	//qDebug() << "viewport_texture_offset: "
+	//         << viewport_texture_offset[0] << ", "
+	//         << viewport_texture_offset[1];
 	prj->setViewport(viewport[0],viewport[1],
 	                 viewport_w,viewport_h,
 	                 viewport_center[0],viewport_center[1],
@@ -228,7 +226,7 @@ ViewportDistorterFisheyeToSphericMirror
 		const GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 		if (status != GL_FRAMEBUFFER_COMPLETE_EXT)
 		{
-			cout << "could not initialize GL_FRAMEBUFFER_EXT" << endl;
+			qDebug() << "could not initialize GL_FRAMEBUFFER_EXT";
 			assert(0);
 		}
 		// clear the texture
@@ -263,8 +261,8 @@ ViewportDistorterFisheyeToSphericMirror
 		step_x = screen_w / (double)(max_x-0.5);
 		max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
 		step_y = screen_h/ (double)max_y;
-		//cout << "max_x: " << max_x << ", max_y: " << max_y
-		//     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
+		//qDebug() << "max_x: " << max_x << ", max_y: " << max_y
+		//         << ", step_x: " << step_x << ", step_y: " << step_y;
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
 		if (gamma < 0.0) gamma = 0.0;
@@ -346,8 +344,8 @@ ViewportDistorterFisheyeToSphericMirror
 		assert(in.status()==QDataStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
 		step_y = screen_h/ (double)max_y;
-		//cout << "max_x: " << max_x << ", max_y: " << max_y
-		//     << ", step_x: " << step_x << ", step_y: " << step_y << endl;
+		//qDebug() << "max_x: " << max_x << ", max_y: " << max_y
+		//         << ", step_x: " << step_x << ", step_y: " << step_y;
 		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		for (int j=0;j<=max_y;j++)

@@ -175,9 +175,6 @@ private:
 	//! @exceptions misc 
 	bool fileFlagsCheck(const QString& path, const FLAGS& flags=(FLAGS)0);
 	
-	//! Used to print info to stdout on the current state of the file paths.
-	void outputFileSearchPaths(void);
-		
 	QStringList fileLocations;
 
 	//! Used to store the user data directory

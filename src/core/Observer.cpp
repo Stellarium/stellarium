@@ -235,7 +235,7 @@ void Observer::load(QSettings* conf, const QString& section)
 		planet = ssystem.getEarth();
 	}
     
-	cout << "Loading location: \"" << qPrintable(locationName) <<"\", on " << qPrintable(planet->getEnglishName()) << endl;
+	qDebug() << "Loading location: " << locationName <<", on " << planet->getEnglishName();
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
