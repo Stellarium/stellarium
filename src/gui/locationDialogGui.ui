@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>525</height>
+    <width>559</width>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -198,6 +198,13 @@ color: darkgray;
      </property>
      <layout class="QVBoxLayout" >
       <item>
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Use the mouse wheel to zoom on the map, press shift to drag the view.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="MapView" name="graphicsView" >
         <property name="verticalScrollBarPolicy" >
          <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -209,7 +216,7 @@ color: darkgray;
       </item>
       <item>
        <layout class="QGridLayout" >
-        <item row="0" column="0" >
+        <item row="1" column="0" >
          <widget class="QLabel" name="label_5" >
           <property name="enabled" >
            <bool>true</bool>
@@ -222,7 +229,7 @@ color: darkgray;
           </property>
          </widget>
         </item>
-        <item row="0" column="1" >
+        <item row="1" column="1" >
          <widget class="QLabel" name="cursorLabel" >
           <property name="minimumSize" >
            <size>
@@ -235,7 +242,7 @@ color: darkgray;
           </property>
          </widget>
         </item>
-        <item row="1" column="0" >
+        <item row="2" column="0" >
          <widget class="QLabel" name="label_4" >
           <property name="text" >
            <string>Selected :</string>
@@ -245,14 +252,14 @@ color: darkgray;
           </property>
          </widget>
         </item>
-        <item row="1" column="1" >
+        <item row="2" column="1" >
          <widget class="QLabel" name="selectedLabel" >
           <property name="text" >
            <string/>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" >
+        <item row="3" column="0" >
          <widget class="QLabel" name="label_8" >
           <property name="text" >
            <string>Longitude :</string>
@@ -262,7 +269,7 @@ color: darkgray;
           </property>
          </widget>
         </item>
-        <item row="3" column="0" >
+        <item row="4" column="0" >
          <widget class="QLabel" name="label_9" >
           <property name="text" >
            <string>Latitude :</string>
@@ -272,13 +279,13 @@ color: darkgray;
           </property>
          </widget>
         </item>
-        <item row="2" column="1" >
+        <item row="3" column="1" >
          <layout class="QHBoxLayout" >
           <item>
            <widget class="LongitudeSpinBox" name="longitudeSpinBox" >
             <property name="minimumSize" >
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>0</height>
              </size>
             </property>
@@ -299,16 +306,54 @@ color: darkgray;
           </item>
          </layout>
         </item>
-        <item row="3" column="1" >
+        <item row="4" column="1" >
          <layout class="QHBoxLayout" >
           <item>
-           <widget class="QSpinBox" name="spinBox_2" >
+           <widget class="LatitudeSpinBox" name="latitudeSpinBox" >
             <property name="minimumSize" >
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>0</height>
              </size>
             </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0" >
+         <widget class="QLabel" name="label" >
+          <property name="text" >
+           <string>Selection Mode :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" >
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QComboBox" name="selectionModeComboBox" >
+            <item>
+             <property name="text" >
+              <string>Cities</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Positions</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
@@ -433,6 +478,11 @@ color: darkgray;
   </customwidget>
   <customwidget>
    <class>LongitudeSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>SpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>LatitudeSpinBox</class>
    <extends>QSpinBox</extends>
    <header>SpinBox.hpp</header>
   </customwidget>

@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QFile>
 #include <QDebug>
+#include <QScrollBar>
 
 #include <cmath>
 
@@ -50,10 +51,6 @@ public:
 	double getLongitude(void) const { return longitude; }
 	int getShowAtZoom(void) const { return showatzoom; }
 	int getAltitude(void) const { return altitude; }
-	//! Get the larger radius of a circle centered on the city not overlaping other cities radius.
-	//! This method is used to implement city selection.
-	float getRadius(void) const { return radius; }
-	void setRadius(float r) { radius = r; }
 private:
 	QString name;
 	QString state;
@@ -63,7 +60,6 @@ private:
 	float zone;
 	int showatzoom;
 	int altitude;
-	float radius;
 };
 
 
@@ -128,8 +124,7 @@ CityItem::CityItem(const City* city_, MapView* v):
 
 QRectF CityItem::boundingRect() const
 {
-	float r = city->getRadius();
-	return QRectF(-r, -r, 2 * r, 2 * r);
+	return QRect(-10, -10, 20, 20);
 }
 
 //! Paint the city item
@@ -138,7 +133,21 @@ void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
 	int cityZoom = city->getShowAtZoom();
 	if (cityZoom == 0) cityZoom = 8;
-	if (view->getScale() < cityZoom && !selected) return;
+	if (view->getScale() < cityZoom && !selected) 
+	{
+		// If the city is not visible, we can't select it either
+		// setEnabled(false);
+		setAcceptsHoverEvents(false);
+		setAcceptedMouseButtons(0);
+		return;
+	}
+	// If the city is visible we can select it with the mouse
+	// setEnabled(true);
+	setAcceptsHoverEvents(true);
+	setAcceptedMouseButtons(Qt::LeftButton);
+	// We scale the city so that the selection shape stays the same
+	float scale = 1. / view->getScale();
+	setMatrix(QMatrix(scale, 0, 0, scale, 0, 0));
 	
 	if (selected)
 	{
@@ -183,7 +192,7 @@ void CityItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 }
 
 MapView::MapView(QWidget *parent)
- : QGraphicsView(parent), pix("./data/gui/world.png")
+ : QGraphicsView(parent), pix("./data/gui/world.png"), pointeurPix("./data/gui/map-pointeur.png")
 {
 	
 	scene.setSceneRect(-180, -90, 360, 180);
@@ -191,9 +200,9 @@ MapView::MapView(QWidget *parent)
 	pixItem = scene.addPixmap(pix);
 	pixItem->translate(-180, -90);
 	pixItem->scale(360. / pix.size().width(), 180. / pix.size().height());
+	
 	float scale = 2; // TODO: find a way to get the real initial scalling !!!
 	QGraphicsView::scale(scale, scale);
-	setDragMode(ScrollHandDrag);
 	
 	populate();
 	
@@ -213,7 +222,6 @@ void MapView::wheelEvent(QWheelEvent* event)
 
 void MapView::populate(const QString& filename)
 {
-	// TODO: use config file to get the cities filename
 	QString cityDataPath;
 	try
 	{
@@ -241,40 +249,77 @@ void MapView::populate(const QString& filename)
 		cities.append(City::fromLine(line));
 	}
 	
-	// Now we have to set the cities radii
-	// For every city the radius is half the distance to the closest other city
 	QList<City>::iterator city;
 	for(city = cities.begin(); city < cities.end(); ++city)
 	{
-		float min_dist = 360;
-		QPointF p1(city->getLatitude(), city->getLongitude());
-		QList<City>::const_iterator city2;
-		for(city2 = cities.begin(); city2 < cities.end(); ++city2)
-		{
-			QPointF p2(city2->getLatitude(), city2->getLongitude());
-			QPointF d = p1 - p2;
-			float dist = sqrt(pow(d.x(), 2) + pow(d.y(), 2));
-			if (dist < min_dist && dist != 0) min_dist = dist;
-		}
-		city->setRadius(min_dist / 2);
-	}
-	
-	int count=0;
-	// We add the cities in the view
-	for(city = cities.begin(); city < cities.end(); ++city)
-	{
 		scene.addItem(new CityItem(&*city, this));
-		count++;
 	}
 }
 
 void MapView::select(const City* city)
 {
-	// We set the longitude
-	LongitudeSpinBox* longitudeSpinBox = parent()->findChild<LongitudeSpinBox*>("longitudeSpinBox");
-	longitudeSpinBox->setValue(city->getLongitude());
+	select(city->getLongitude(), city->getLatitude());
 	QLabel* label = parent()->findChild<QLabel*>("selectedLabel");
 	label->setText(city->getName());
+	update();
 }
+
+void MapView::select(float longitude, float latitude)
+{
+	// Set the longitude
+	LongitudeSpinBox* longitudeSpinBox = parent()->findChild<LongitudeSpinBox*>("longitudeSpinBox");
+	assert(longitudeSpinBox);
+	longitudeSpinBox->setValue(longitude);
+	// Set the latitude
+	LatitudeSpinBox* latitudeSpinBox = parent()->findChild<LatitudeSpinBox*>("latitudeSpinBox");
+	assert(latitudeSpinBox);
+	latitudeSpinBox->setValue(latitude);
+	// Set the pointeur to the position
+	pointeurPos = QPointF(longitude, -latitude);
+	update();
+}
+
+void MapView::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[])
+{
+	// First we paint as usual
+	QGraphicsView::drawItems(painter, numItems, items, options);
+	// Then we paint the pointeur, without doing any zoom
+	QPointF pos = mapFromScene(pointeurPos);
+	painter->save();
+	painter->resetMatrix();
+	painter->drawPixmap(pos - QPointF(pointeurPix.width() / 2, pointeurPix.height() / 2), pointeurPix);
+	painter->restore();
+}
+
+void MapView::mousePressEvent(QMouseEvent * event)
+{
+	if(event->modifiers() & Qt::ShiftModifier)
+	{
+		setDragMode(ScrollHandDrag);
+		setInteractive(false);
+	}
+	else if (selectionMode == SELECT_POSITIONS)
+	{
+		QPointF pos = mapToScene(event->pos());
+		select(pos.x(), -pos.y());
+		return;
+	}
+	QGraphicsView::mousePressEvent(event);
+}
+
+void MapView::mouseReleaseEvent(QMouseEvent * event)
+{
+	QGraphicsView::mouseReleaseEvent(event);
+	setDragMode(NoDrag);
+	setInteractive(true);
+}
+
+
+void MapView::setSelectionMode(int mode)
+{
+	selectionMode = (SelectionMode)mode;
+}
+
+
 
 

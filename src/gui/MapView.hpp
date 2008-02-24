@@ -22,6 +22,8 @@
 #define _MAPVIEW_HPP_
 
 #include <QGraphicsView>
+#include <QGraphicsItem>
+#include <QPainter>
 
 class City;
 
@@ -31,25 +33,42 @@ class City;
 class MapView : public QGraphicsView
 {
 Q_OBJECT
+public:
+	enum SelectionMode {SELECT_CITIES = 0, SELECT_POSITIONS}; 
 protected:
 	//! The scene
 	QGraphicsScene scene;
 	//! The world map image
     QPixmap pix;
     QGraphicsPixmapItem* pixItem;
+    //! The pointeur image
+    QPixmap pointeurPix;
+    //! The seleted position
+    QPointF pointeurPos;
     //! The list of all the cities in the map
     QList<City> cities;
+    //! The selection mode
+    SelectionMode selectionMode;
 public:
 	//! Get the scale at wich we are seeing the map
 	float getScale() const {return matrix().m11();}
 	MapView(QWidget *parent = 0);
-	void wheelEvent(QWheelEvent * event);
+	virtual void wheelEvent(QWheelEvent * event);
+	virtual void mousePressEvent(QMouseEvent * event);
+	virtual void mouseReleaseEvent(QMouseEvent * event);
 	~MapView();
 	//! Select a city
 	void select(const City* city);
+	//! Select a position
+	void select(float longitude, float latitude);
+public slots:
+	//! Set the selection mode
+	void setSelectionMode(int mode);
 protected:
 	//! Add all the cities into the scene
 	void populate(const QString& filename = "data/cities_Earth.fab");
+	
+	virtual void drawItems(QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[]);
 };
 
 #endif // _MAPVIEW_HPP_

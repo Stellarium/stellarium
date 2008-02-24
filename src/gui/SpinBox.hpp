@@ -58,5 +58,13 @@ public:
 	void setValue(double value);
 };
 
+class LatitudeSpinBox : public SpinBox
+{
+Q_OBJECT
+public:
+	LatitudeSpinBox(QWidget *parent = 0);
+	void setValue(double value);
+};
+
 
 #endif // _SPINBOX_HPP_

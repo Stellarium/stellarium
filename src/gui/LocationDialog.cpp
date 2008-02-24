@@ -45,6 +45,8 @@ void LocationDialog::setVisible(bool v)
 		dialog->move(200, 100);	// TODO: put in the center of the screen
 		dialog->setVisible(true);
 		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
+		connect(ui->selectionModeComboBox, SIGNAL(currentIndexChanged(int)),
+				ui->graphicsView, SLOT(setSelectionMode(int)));
 	}
 	else
 	{
