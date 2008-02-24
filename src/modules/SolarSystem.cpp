@@ -1128,21 +1128,20 @@ bool SolarSystem::near_lunar_eclipse(const Navigator * nav, Projector *prj)
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
-	vector<wstring> result;
+	QStringList result;
 	if (maxNbItem==0) return result;
 	
-	wstring objw = objPrefix;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = objPrefix.toUpper();
 	
-	vector < Planet * >::const_iterator iter;
-	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+	vector <Planet*>::const_iterator iter;
+	for (iter=system_planets.begin(); iter!=system_planets.end(); ++iter)
 	{
 		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw.toStdWString()==objw)
+		if (constw==objw)
 		{
-			result.push_back((*iter)->getNameI18n().toStdWString());
+			result << (*iter)->getNameI18n();
 			if (result.size()==maxNbItem)
 				return result;
 		}

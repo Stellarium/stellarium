@@ -26,6 +26,8 @@
 #include "Projector.hpp"
 #include "MovementMgr.hpp"
 #include <QMouseEvent>
+#include <QString>
+#include <QStringList>
 
 StelObjectMgr::StelObjectMgr()
 {
@@ -276,9 +278,9 @@ std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
  Find and return the list of at most maxNbItem objects auto-completing 
  passed object I18 name
 *************************************************************************/
-vector<wstring> StelObjectMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
 {
-	vector<wstring> result;
+	QStringList result;
 	vector <wstring>::const_iterator iter;
 
 	// For all StelObjectmodules..
@@ -286,13 +288,11 @@ vector<wstring> StelObjectMgr::listMatchingObjectsI18n(const wstring& objPrefix,
 	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
 		// Get matching object for this module
-		vector<wstring> matchingObj = (*iteromgr)->listMatchingObjectsI18n(objPrefix, maxNbItem);
-		for (iter = matchingObj.begin(); iter != matchingObj.end(); ++iter)
-			result.push_back(*iter);
+		QStringList matchingObj = (*iteromgr)->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
 
-	sort(result.begin(), result.end());
-
+	result.sort();
 	return result;
 }

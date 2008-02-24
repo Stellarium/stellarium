@@ -113,9 +113,8 @@ public:
 	//! the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object.
 	//! @param maxNbItem the maximum number of returned object names.
-	//! @return a vector of matching object name by order of relevance, or an 
-	//! empty vector if nothing matchs.
-	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

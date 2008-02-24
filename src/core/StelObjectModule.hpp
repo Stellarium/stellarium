@@ -21,6 +21,8 @@
 #define STELOBJECTMODULE_H
 
 #include <vector>
+#include <QString>
+#include <QStringList>
 #include <boost/intrusive_ptr.hpp>
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
@@ -60,7 +62,7 @@ public:
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
-	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const = 0;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const = 0;
 };
 
 #endif

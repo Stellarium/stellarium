@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
@@ -670,68 +671,67 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
-	vector<wstring> result;
+	QStringList result;
 	if (maxNbItem==0) return result;
 		
-	wstring objw = objPrefix;
-	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = objPrefix.toUpper();
 	
 	vector <Nebula*>::const_iterator iter;
 	
 	// Search by messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size() >= 1 && objw[0]==L'M')
+	if (objw.size()>=1 && objw[0]=='M')
 	{
-		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
 		{
 			if ((*iter)->M_nb==0) continue;
-			wstring constw = L"M" + StelUtils::intToWstring((*iter)->M_nb);
-			wstring constws = constw.substr(0, objw.size());
+			QString constw = QString("M%1").arg((*iter)->M_nb);
+			QString constws = constw.mid(0, objw.size());
 			if (constws==objw)
 			{
-				result.push_back(constw);
+				result << constw;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = L"M " + StelUtils::intToWstring((*iter)->M_nb);
-			constws = constw.substr(0, objw.size());
+			constw = QString("M %1").arg((*iter)->M_nb);
+			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 			{
-				result.push_back(constw);
+				result << constw;
 			}
 		}
 	}
 	
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
 	{
 		if ((*iter)->NGC_nb==0) continue;
-		wstring constw = L"NGC" + StelUtils::intToWstring((*iter)->NGC_nb);
-		wstring constws = constw.substr(0, objw.size());
+		QString constw = QString("NGC%1").arg((*iter)->NGC_nb);
+		QString constws = constw.mid(0, objw.size());
 		if (constws==objw)
 		{
-			result.push_back(constw);
+			result << constw;
 			continue;
 		}
-		constw = L"NGC " + StelUtils::intToWstring((*iter)->NGC_nb);
-		constws = constw.substr(0, objw.size());
+		constw = QString("NGC %1").arg((*iter)->NGC_nb);
+		constws = constw.mid(0, objw.size());
 		if (constws==objw)
 		{
-			result.push_back(constw);
+			result << constw;
 		}
 	}
 	
 	// Search by common names
-	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
 	{
 		QString constw = (*iter)->nameI18.mid(0, objw.size()).toUpper();
-		if (constw.toStdWString()==objw)
+		if (constw==objw)
 		{
-			result.push_back((*iter)->nameI18.toStdWString());
+			result << (*iter)->nameI18;
 		}
 	}
 	
-	sort(result.begin(), result.end());
+	result.sort();
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 	
 	return result;
