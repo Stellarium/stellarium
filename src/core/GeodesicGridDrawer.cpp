@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include <sstream>
+#include <QString>
 #include "StelCore.hpp"
 #include "GeodesicGridDrawer.hpp"
 #include "Projector.hpp"
@@ -58,8 +58,10 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 	glColor4f(0.2,0.3,0.2,1);
 	
 	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;
-	if (lev>geodesic_grid->getMaxLevel()) lev = geodesic_grid->getMaxLevel();
-    lev = max_search_level;
+	if (lev>geodesic_grid->getMaxLevel()) 
+		lev = geodesic_grid->getMaxLevel();
+
+	lev = max_search_level;
 //	Vec3d e0, e1, e2, e3;
 	Vec3d win1, win2;
 //	prj->unproject_j2000(0,0,e0);
@@ -70,39 +72,39 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 	int index;
 	Vec3d v0, v1, v2;
 	{
-	GeodesicSearchInsideIterator it1(*geodesic_search_result, lev);
-	while((index = it1.next()) >= 0)
-	{
-		Vec3d center;
-		geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
-		prj->project(v0, win1);
-		prj->project(v1, win2);
-		center += win1;
-		glBegin (GL_LINES);
-			glVertex2f(win1[0],win1[1]);
-			glVertex2f(win2[0],win2[1]);
-        glEnd();
-		prj->project(v1, win1);
-		prj->project(v2, win2);
-		glBegin (GL_LINES);
-			glVertex2f(win1[0],win1[1]);
-			glVertex2f(win2[0],win2[1]);
-        glEnd();
-        center += win1;
-		prj->project(v2, win1);
-		prj->project(v0, win2);
-		glBegin (GL_LINES);
-			glVertex2f(win1[0],win1[1]);
-			glVertex2f(win2[0],win2[1]);
-        glEnd();
-        center += win1;
-        center*=0.33333;
-        ostringstream os;
-        os << index << " (" << geodesic_grid->getPartnerTriangle(lev, index) << ")";
-        glEnable(GL_TEXTURE_2D);
-		prj->drawText(font,center[0]-6, center[1]+6, os.str());
-		glDisable(GL_TEXTURE_2D);
-	}
+		GeodesicSearchInsideIterator it1(*geodesic_search_result, lev);
+		while((index = it1.next()) >= 0)
+		{
+			Vec3d center;
+			geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
+			prj->project(v0, win1);
+			prj->project(v1, win2);
+			center += win1;
+			glBegin (GL_LINES);
+				glVertex2f(win1[0],win1[1]);
+				glVertex2f(win2[0],win2[1]);
+			glEnd();
+			prj->project(v1, win1);
+			prj->project(v2, win2);
+			glBegin (GL_LINES);
+				glVertex2f(win1[0],win1[1]);
+				glVertex2f(win2[0],win2[1]);
+			glEnd();
+			center += win1;
+			prj->project(v2, win1);
+			prj->project(v0, win2);
+			glBegin (GL_LINES);
+				glVertex2f(win1[0],win1[1]);
+				glVertex2f(win2[0],win2[1]);
+			glEnd();
+			center += win1;
+			center*=0.33333;
+			QString str = QString("%1 (%2)").arg(index)
+			                                .arg(geodesic_grid->getPartnerTriangle(lev, index));
+			glEnable(GL_TEXTURE_2D);
+				prj->drawText(font,center[0]-6, center[1]+6, str);
+			glDisable(GL_TEXTURE_2D);
+		}
 	}
 	GeodesicSearchBorderIterator it1(*geodesic_search_result, lev);
 	while((index = it1.next()) >= 0)
@@ -115,26 +117,26 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 		glBegin (GL_LINES);
 			glVertex2f(win1[0],win1[1]);
 			glVertex2f(win2[0],win2[1]);
-        glEnd();
+		glEnd();
 		prj->project(v1, win1);
 		prj->project(v2, win2);
 		glBegin (GL_LINES);
 			glVertex2f(win1[0],win1[1]);
 			glVertex2f(win2[0],win2[1]);
-        glEnd();
-        center += win1;
+		glEnd();
+		center += win1;
 		prj->project(v2, win1);
 		prj->project(v0, win2);
 		glBegin (GL_LINES);
 			glVertex2f(win1[0],win1[1]);
 			glVertex2f(win2[0],win2[1]);
-        glEnd();
-        center += win1;
-        center*=0.33333;
-        ostringstream os;
-        os << index << " (" << geodesic_grid->getPartnerTriangle(lev, index) << ")";
-        glEnable(GL_TEXTURE_2D);
-		prj->drawText(font,center[0]-6, center[1]+6, os.str());
+		glEnd();
+		center += win1;
+		center*=0.33333;
+		QString str = QString("%1 (%2)").arg(index)
+		                                .arg(geodesic_grid->getPartnerTriangle(lev, index));
+		glEnable(GL_TEXTURE_2D);
+			prj->drawText(font,center[0]-6, center[1]+6, str);
 		glDisable(GL_TEXTURE_2D);
 	}
 	
