@@ -66,7 +66,6 @@ void Projector::init()
 	assert(conf);
 
 	// Video Section
-	// string tmpstr = conf.get_str("projection:viewport");
 	QString tmpstr = conf->value("projection/viewport").toString();
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);

@@ -26,6 +26,7 @@
 #include <QLocale>
 #include <QDebug>
 #include <QSettings>
+#include <QString>
 
 using namespace std;
 
@@ -122,7 +123,7 @@ QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 
 
 // Return a string with the local date formated according to the date_format variable
-wstring StelLocaleMgr::get_printable_date_local(double JD) const
+QString StelLocaleMgr::get_printable_date_local(double JD) const
 {
 	// Ugly hack to fix Qt limitation with JD<0 dates..
 	// It assumes that there are no strange date leap between JD=0 and JD=800
@@ -157,34 +158,34 @@ wstring StelLocaleMgr::get_printable_date_local(double JD) const
 	switch (date_format)
 	{
 		case S_DATE_SYSTEM_DEFAULT:
-			return dateTime.date().toString(Qt::LocaleDate).toStdWString();
+			return dateTime.date().toString(Qt::LocaleDate);
 		case S_DATE_MMDDYYYY:
 		{
 			QString str;
 			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
-			return str.toStdWString();
+			return str;
 		}
 		case S_DATE_DDMMYYYY:
 		{
 			QString str;
 			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
-			return str.toStdWString();
+			return str;
 		}
 		case S_DATE_YYYYMMDD:
 		{
 			QString str;
 			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
-			return str.toStdWString();
+			return str;
 		}
 		default:
 			cerr << "Warning, unknown date format, fallback to system default" << endl;
-			return dateTime.date().toString(Qt::LocaleDate).toStdWString();
+			return dateTime.date().toString(Qt::LocaleDate);
 	}
 }
 
 // Return a string with the local time (according to time_zone_mode variable) formated
 // according to the time_format variable
-wstring StelLocaleMgr::get_printable_time_local(double JD) const
+QString StelLocaleMgr::get_printable_time_local(double JD) const
 {
 	QDateTime dateTime;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
@@ -196,14 +197,14 @@ wstring StelLocaleMgr::get_printable_time_local(double JD) const
 	switch (time_format)
 	{
 		case S_TIME_SYSTEM_DEFAULT:
-			return dateTime.time().toString().toStdWString();
+			return dateTime.time().toString();
 		case S_TIME_24H:
-			return dateTime.time().toString("hh:mm:ss").toStdWString();
+			return dateTime.time().toString("hh:mm:ss");
 		case S_TIME_12H:
-			return dateTime.time().toString("hh:mm:ss ap").toStdWString();
+			return dateTime.time().toString("hh:mm:ss ap");
 		default:
 			cerr << "Warning, unknown date format, fallback to system default" << endl;
-			return dateTime.time().toString(Qt::LocaleDate).toStdWString();
+			return dateTime.time().toString(Qt::LocaleDate);
 	}
 }
 
@@ -217,12 +218,12 @@ StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const QStrin
 	return S_TIME_SYSTEM_DEFAULT;
 }
 
-string StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
+QString StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
 {
 	if (tf == S_TIME_SYSTEM_DEFAULT) return "system_default";
 	if (tf == S_TIME_24H) return "24h";
 	if (tf == S_TIME_12H) return "12h";
-	cerr << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used." << endl;
+	qWarning() << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used.";
 	return "system_default";
 }
 
@@ -237,13 +238,13 @@ StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const QStrin
 	return S_DATE_SYSTEM_DEFAULT;
 }
 
-string StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
+QString StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
 {
 	if (df == S_DATE_SYSTEM_DEFAULT) return "system_default";
 	if (df == S_DATE_MMDDYYYY) return "mmddyyyy";
 	if (df == S_DATE_DDMMYYYY) return "ddmmyyyy";
 	if (df == S_DATE_YYYYMMDD) return "yyyymmdd";
-	cerr << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used." << endl;
+	qWarning() << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used.";
 	return "system_default";
 }
 
