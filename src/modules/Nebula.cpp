@@ -17,8 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <iostream>
-#include <sstream>
 #include <QTextStream>
 #include <QFile>
 #include <QString>
@@ -52,7 +50,7 @@ Nebula::Nebula() :
 		IC_nb(0)
 {
 	nameI18 = "";
-	angular_size = -1;
+	angularSize = -1;
 }
 
 Nebula::~Nebula()
@@ -106,9 +104,9 @@ QString Nebula::getInfoString(const Navigator* nav) const
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
 	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
 	
-	oss << q_("Type: ") << QString::fromStdWString(getTypeString()) << endl;
-	if (angular_size>0)
-		oss << q_("Size: ") << StelUtils::radToDmsStr(angular_size*M_PI/180.) << endl;
+	oss << q_("Type: ") << getTypeString() << endl;
+	if (angularSize>0)
+		oss << q_("Size: ") << StelUtils::radToDmsStr(angularSize*M_PI/180.) << endl;
 	
 	return str;
 }
@@ -167,42 +165,41 @@ Vec3f Nebula::getInfoColor(void) const
 
 double Nebula::getCloseViewFov(const Navigator*) const
 {
-	return angular_size * 4;
+	return angularSize * 4;
 }
 
 // Read nebula data from file and compute x,y and z;
 // returns false if can't parse record
-bool Nebula::readTexture(const QString& setName, const string& record)
+bool Nebula::readTexture(const QString& setName, const QString& record)
 {
-	string tex_name;
-	string name;
+	QString tex_name;
+	QString name;
 	float ra;
 	float de;
 	float tex_angular_size;
 	float tex_rotation;
 	int ngc;
 	
-	std::istringstream istr(record);
+	QString buf = record;
+	QTextStream istr(&buf);
 
-	if (!(istr >> ngc >> ra >> de >> mag >> tex_angular_size >> tex_rotation >> name >> tex_name >> credit)) return false ;
+
+	istr >> ngc >> ra >> de >> mag >> tex_angular_size >> tex_rotation >> name >> tex_name >> credit;
+	if (istr.status() != QTextStream::Ok)
+		return false;
 
 	if (credit  == "none")
 		credit = "";
 	else
-		credit = string("Credit: ") + credit;
+		credit = "Credit: " + credit;
 
-	for (string::size_type i=0;i<credit.length();++i)
-	{
-		if (credit[i]=='_') credit[i]=' ';
-	}
+	credit.replace('_', " ");
 
 	// Only set name if not already set from NGC data
-	if(englishName == "") {
-		for (string::size_type i=0;i<name.length();++i)
-			{
-				if (name[i]=='_') name[i]=' ';
-			}
-		englishName = QString::fromStdString(name);
+	if(englishName == "") 
+	{
+		name.replace('_', " ");
+		englishName = name;
 	}
 
 	// Calc the RA and DE from the datas
@@ -216,27 +213,26 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	
-	neb_tex = StelApp::getInstance().getTextureManager().createTextureThread(QString("nebulae/")+setName+"/"+tex_name.c_str());
+	nebTex = StelApp::getInstance().getTextureManager().createTextureThread(QString("nebulae/")+setName+"/"+tex_name);
 	
 	luminance = ToneReproducer::magToLuminance(mag, tex_angular_size*tex_angular_size*3600);
 
-
-	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
+	float texSize = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 	
 	// Only in case the texture was not previously loaded from NGC cat
-	if (angular_size<0)
-		angular_size = tex_angular_size;
+	if (angularSize<0)
+		angularSize = tex_angular_size;
 
 	// Precomputation of the rotation/translation matrix
-	Mat4f mat_precomp = Mat4f::translation(XYZ) *
-	                    Mat4f::zrotation(RaRad) *
-	                    Mat4f::yrotation(-DecRad) *
-	                    Mat4f::xrotation(tex_rotation*M_PI/180.);
+	Mat4f matPrecomp = Mat4f::translation(XYZ) *
+	                   Mat4f::zrotation(RaRad) *
+	                   Mat4f::yrotation(-DecRad) *
+	                   Mat4f::xrotation(tex_rotation*M_PI/180.);
 
-	tex_quad_vertex[0] = mat_precomp * Vec3f(0.,-tex_size,-tex_size); // Bottom Right
-	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
-	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
-	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
+	tex_quad_vertex[0] = matPrecomp * Vec3f(0.,-texSize,-texSize);
+	tex_quad_vertex[1] = matPrecomp * Vec3f(0., texSize,-texSize);
+	tex_quad_vertex[2] = matPrecomp * Vec3f(0.,-texSize, texSize);
+	tex_quad_vertex[3] = matPrecomp * Vec3f(0., texSize, texSize);
 
 	return true;
 }
@@ -244,9 +240,9 @@ bool Nebula::readTexture(const QString& setName, const string& record)
 
 void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer* eye)
 {
-	if (!neb_tex || !flagShowTexture) return;
+	if (!nebTex || !flagShowTexture) return;
 
-	if (!neb_tex->bind())
+	if (!nebTex->bind())
 		return;
 	
 	// if start zooming in, turn up brightness to full for DSO images
@@ -263,7 +259,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
 		float texLum=0;
-		if (!neb_tex->getAverageLuminance(texLum))
+		if (!nebTex->getAverageLuminance(texLum))
 		{
 			qWarning() << "Use undefined texture luminance";
 		}
@@ -319,9 +315,9 @@ void Nebula::draw_name(const Projector* prj)
 	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 
 	// draw image credit, if it fits easily
-	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(QString::fromStdString(credit)))
+	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
 	{
-		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, QString::fromStdString(credit), 0, 0, 0, false);
+		prj->drawText(nebula_font,XY[0]+shift, XY[1]-shift, credit, 0, 0, 0, false);
 	}
 }
 
@@ -364,9 +360,9 @@ bool Nebula::readNGC(char *recordstr)
 	float size;
 	sscanf(&recordstr[40],"%f",&size);
 
-	angular_size = size/60;
-	if (angular_size<0)
-		angular_size=0;
+	angularSize = size/60;
+	if (angularSize<0)
+		angularSize=0;
 	
 	if (size < 0)
 		size = 1;
@@ -393,35 +389,35 @@ bool Nebula::readNGC(char *recordstr)
 	return true;
 }
 
-wstring Nebula::getTypeString(void) const
+QString Nebula::getTypeString(void) const
 {
-	wstring wsType;
+	QString wsType;
 
 	switch(nType)
-	   {
+	{
 		case NEB_GX:
-			wsType = L"Galaxy";
+			wsType = "Galaxy";
 			break;
 		case NEB_OC:
-			wsType = L"Open cluster";
+			wsType = "Open cluster";
 			break;
 		case NEB_GC:
-			wsType = L"Globular cluster";
+			wsType = "Globular cluster";
 			break;
 		case NEB_N:
-			wsType = L"Nebula";
+			wsType = "Nebula";
 			break;
 		case NEB_PN:
-			wsType = L"Planetary nebula";
+			wsType = "Planetary nebula";
 			break;
 		case NEB_CN:
-			wsType = L"Cluster associated with nebulosity";
+			wsType = "Cluster associated with nebulosity";
 			break;
 		case NEB_UNKNOWN:
-			wsType = L"Unknown";
+			wsType = "Unknown";
 			break;
 		default:
-			wsType = L"Undocumented type";
+			wsType = "Undocumented type";
 			break;
 	}
 	return wsType;

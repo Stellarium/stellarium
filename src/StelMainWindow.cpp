@@ -18,7 +18,6 @@
  */
 
 #include <config.h>
-#include <iostream>
 
 #include "GLee.h"
 #include "fixx11h.h"
@@ -37,6 +36,7 @@
 #include <QDebug>
 #include <QGraphicsView>
 #include <QResizeEvent>
+#include <QDebug>
 
 #include "gui/NewGui.hpp"
 
@@ -159,7 +159,7 @@ void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& sa
 			break;
 	}
 	
-	std::cout << "Saving screenshot in file: " << qPrintable(shotPath) << std::endl;
+	qDebug() << "Saving screenshot in file: " << shotPath;
 	im.save(shotPath);
 }
 
