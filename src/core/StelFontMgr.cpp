@@ -19,9 +19,9 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <QDebug>
 #include <QFile>
+#include <QRegExp>
 
 #include "StelFontMgr.hpp"
 #include "SFont.hpp"
@@ -74,8 +74,8 @@ bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 /*************************************************************************
  Constructor for the LoadedFont class
 *************************************************************************/
-StelFontMgr::LoadedFont::LoadedFont(const QString& afileName, int asize) : 
-		fileName(afileName), size(asize)
+StelFontMgr::LoadedFont::LoadedFont(const QString& afileName, int asize) 
+	: fileName(afileName), size(asize)
 {
 }
 
@@ -162,24 +162,22 @@ void StelFontMgr::loadFontForLanguage(const QString& fontMapFile)
 	fontMapping["*"] = defaultFont;
 	
 	// Now see if another font should be used as default or for locale
-	ifstream mapFile(QFile::encodeName(fontMapFile).constData());
-
-	if (!mapFile.is_open())
+	QFile file(fontMapFile);
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "WARNING: Unable to open font map file " << fontMapFile << " resorting to default fonts.";
 		return;
 	}
 
-	char buffer[1000];
 	FontForLanguage readFont;
-
-	while (mapFile.getline(buffer,999) && !mapFile.eof())
-	{
-		if( buffer[0] != '#' && buffer[0] != 0)
+	QRegExp commentRx("^\\s*#.*$");
+	while (!file.atEnd()) {
+		QByteArray buffer = file.readLine();
+		QString line(buffer);
+		if (!commentRx.exactMatch(line))
 		{
-			QTextStream record(buffer);
+			QTextStream record(&line);
 			record >> readFont.langageName >> readFont.fontFileName >> readFont.fontScale >> readFont.fixedFontFileName >> readFont.fixedFontScale;
-
 			try
 			{
 				StelApp::getInstance().getFileMgr().findFile("data/" + readFont.fontFileName);
@@ -195,5 +193,6 @@ void StelFontMgr::loadFontForLanguage(const QString& fontMapFile)
 			fontMapping[readFont.langageName]=readFont;
 		}
 	}
-	mapFile.close();
+
+	file.close();
 }
