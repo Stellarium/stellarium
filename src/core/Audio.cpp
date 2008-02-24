@@ -21,34 +21,36 @@
 
 #include <iostream>
 #include <config.h>
+#include <QString>
+#include <QDebug>
 
 #include "Audio.hpp"
 #include "Translator.hpp"
 
 #ifdef HAVE_SDL_SDL_MIXER_H
 
-float Audio::master_volume = 0.5;
+float Audio::masterVolume = 0.5;
 
-Audio::Audio(std::string filename, std::string name, long int output_rate) {
-
-	if(output_rate < 1000) output_rate = 22050;
+Audio::Audio(const QString& filename, const QString& name, long int outputRate) {
+	if(outputRate < 1000) outputRate = 22050;
 
 	// initialize audio
-	if(Mix_OpenAudio(output_rate, MIX_DEFAULT_FORMAT, 2, 4096)) {
-		printf("Unable to open audio output!\n");
+	if(Mix_OpenAudio(outputRate, MIX_DEFAULT_FORMAT, 2, 4096)) {
+		qWarning() << "ERROR - Unable to open initialize audio output system";
 		track = NULL;
 		return;
 	}
 
-	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 
-	track = Mix_LoadMUS(filename.c_str());
+	track = Mix_LoadMUS(filename.toLocal8Bit());
 	if(track == NULL) {
-		is_playing = 0;
-		std::cout << "Could not load audio file " << filename << "\n";
-	} else is_playing = 1;
+		isPlaying = 0;
+		qWarning() << "ERRIR - Could not load audio file: " << filename;
+	} else 
+		isPlaying = 1;
 
-	track_name = name;
+	trackName = name;
 }
 
 Audio::~Audio() {
@@ -66,16 +68,16 @@ void Audio::play(bool loop) {
 	if(track) {
 		if(loop) Mix_PlayMusic(track, -1);
 		else Mix_PlayMusic(track, 0);
-		is_playing = 1;
-		elapsed_seconds = 0;
+		isPlaying = 1;
+		elapsedSeconds = 0;
 		//		std::cout << "now playing audio\n";
 	}
 }
 
 // used solely to track elapsed seconds of play
-void Audio::update(double delta_time) {
+void Audio::update(double deltaTime) {
 	
-	if(track) elapsed_seconds += delta_time/1000.f;
+	if(track) elapsedSeconds += deltaTime/1000.f;
 
 }
 
@@ -83,54 +85,54 @@ void Audio::update(double delta_time) {
 void Audio::sync() {
 	if(track==NULL) return;
 
-	Mix_SetMusicPosition(elapsed_seconds);  // ISSUE doesn't work for all audio formats
+	Mix_SetMusicPosition(elapsedSeconds);  // ISSUE doesn't work for all audio formats
 	Mix_ResumeMusic();
-	is_playing = 1;
+	isPlaying = 1;
 
-	// printf("Synced audio to %f seconds\n", elapsed_seconds);
+	// printf("Synced audio to %f seconds\n", elapsedSeconds);
 }
 
 void Audio::pause() {
 	Mix_PauseMusic();
-	is_playing=0;
+	isPlaying=0;
 }
 
 void Audio::resume() {
 	Mix_ResumeMusic();
-	is_playing=1;
+	isPlaying=1;
 }
 
 void Audio::stop() {
 	Mix_HaltMusic();
-	is_playing=0;
+	isPlaying=0;
 }
 
 // _volume should be between 0 and 1
-void Audio::set_volume(float _volume) {
+void Audio::setVolume(float _volume) {
 	if(_volume >= 0 && _volume <= 1) {
-		master_volume = _volume;
-		Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+		masterVolume = _volume;
+		Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 	}
 }
 
-void Audio::increment_volume() {
-	master_volume += 0.1f;  // 10%
+void Audio::incrementVolume() {
+	masterVolume += 0.1f;  // 10%
 
-	if(master_volume > 1) master_volume = 1;
+	if(masterVolume > 1) masterVolume = 1;
 
-	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 
-	// printf("volume %f\n", master_volume);
+	// printf("volume %f\n", masterVolume);
 }
 
-void Audio::decrement_volume() {
-	master_volume -= 0.1f;  // 10%
+void Audio::decrementVolume() {
+	masterVolume -= 0.1f;  // 10%
 
-	if(master_volume < 0) master_volume = 0;
+	if(masterVolume < 0) masterVolume = 0;
 
-	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 
-	//	printf("volume %f\n", master_volume);
+	//	printf("volume %f\n", masterVolume);
 }
 
 #else
