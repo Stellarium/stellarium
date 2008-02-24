@@ -23,8 +23,9 @@
 #include "StelCore.hpp"
 #include "Navigator.hpp"
 #include "StelUtils.hpp"
-#include <sstream>
 
+#include <QString>
+#include <QTextStream>
 #include <QSettings>
 #include <QKeyEvent>
 #include <QDebug>
@@ -357,15 +358,17 @@ void MovementMgr::updateMotion(double deltaTime)
 	if(deltaFov != 0 )
 	{
 		changeFov(deltaFov);
-		std::ostringstream oss;
-		oss << "zoom delta_fov " << deltaFov;
+		QString tss;
+		QTextStream ts(&tss);
+		ts << "zoom delta_fov " << deltaFov;
 	}
 
 	if(deltaAz != 0 || deltaAlt != 0)
 	{
 		panView(deltaAz, deltaAlt);
-		std::ostringstream oss;
-		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
+		QString tss;
+		QTextStream ts(&tss);
+		ts << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
 	}
 	else
 	{
