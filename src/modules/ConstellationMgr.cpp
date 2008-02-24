@@ -26,6 +26,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -924,12 +925,12 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
-	vector<wstring> result;
+	QStringList result;
 	if (maxNbItem==0) return result;
 		
-	QString objw = QString::fromStdWString(objPrefix).toUpper();
+	QString objw = objPrefix.toUpper();
 	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -937,7 +938,7 @@ vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPref
 		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
 		{
-			result.push_back((*iter)->getNameI18n().toStdWString());
+			result << (*iter)->getNameI18n();
 			if (result.size()==maxNbItem)
 				return result;
 		}

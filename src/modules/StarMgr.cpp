@@ -761,45 +761,45 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 //! Find and return the list of at most maxNbItem objects auto-completing
 //! the passed object I18n name
-vector<wstring> StarMgr::listMatchingObjectsI18n(
-                              const wstring& objPrefix,
-                              unsigned int maxNbItem) const {
-  vector<wstring> result;
-  if (maxNbItem==0) return result;
+QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const 
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
 
-  wstring objw = objPrefix;
-  transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	QString objw = objPrefix.toUpper();
 
-    // Search for common names
-  for (map<wstring,int>::const_iterator
-       it(common_names_index_i18n.lower_bound(objw));
-       it!=common_names_index_i18n.end();it++) {
-    const wstring constw(it->first.substr(0,objw.size()));
-    if (constw == objw) {
-      if (maxNbItem == 0) break;
-      result.push_back(getCommonName(it->second));
-      maxNbItem--;
-    } else {
-      break;
-    }
-  }
-    // Search for sci names
-  for (map<wstring,int>::const_iterator
-       it(sci_names_index_i18n.lower_bound(objw));
-       it!=sci_names_index_i18n.end();it++) {
-    const wstring constw(it->first.substr(0,objw.size()));
-    if (constw == objw) {
-      if (maxNbItem == 0) break;
-      result.push_back(getSciName(it->second));
-      maxNbItem--;
-    } else {
-      break;
-    }
-  }
+	// Search for common names
+	for (map<wstring,int>::const_iterator it(common_names_index_i18n.lower_bound(objw.toStdWString()));
+	     it!=common_names_index_i18n.end();
+	     it++) 
+	{
+		const QString constw(QString::fromStdWString(it->first.substr(0,objw.size())));
+		if (constw==objw) {
+			if (maxNbItem==0) break;
+			result << QString::fromStdWString(getCommonName(it->second));
+			maxNbItem--;
+		} 
+		else 
+			break;
+	}
 
-  sort(result.begin(), result.end());
+	// Search for sci names
+	for (map<wstring,int>::const_iterator it(sci_names_index_i18n.lower_bound(objw.toStdWString()));
+	     it!=sci_names_index_i18n.end();
+	     it++) 
+	{
+		const QString constw(QString::fromStdWString(it->first.substr(0,objw.size())));
+		if (constw==objw) {
+			if (maxNbItem==0) break;
+			result << QString::fromStdWString(getSciName(it->second));
+			maxNbItem--;
+		} 
+		else 
+			break;
+	}
 
-  return result;
+	result.sort();
+	return result;
 }
 
 
