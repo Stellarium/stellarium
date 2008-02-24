@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QRegExp>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
@@ -150,11 +151,11 @@ double NebulaMgr::draw(StelCore* core)
 
 		// improve performance by skipping if too small to see
 		// TODO: skip if too faint to see
-		if (n->angular_size>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
+		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
 		{
 			prj->project(n->XYZ,n->XY);
 
-			if (n->angular_size>size_limit)
+			if (n->angularSize>size_limit)
 			{
 				if (n->hasTex())
 					n->draw_tex(prj, nav, eye);
@@ -503,42 +504,46 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 bool NebulaMgr::loadTextures(const QString& setName)
 {
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
-	cout << "Loading Nebula Textures for set " << qPrintable(setName) << "...";
+	qDebug() << "Loading Nebula Textures for set " << setName;
 	QString texFile;
 	try
 	{
 		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab");
-		std::ifstream inf(QFile::encodeName(texFile).constData());
-		if (!inf.is_open())
+		QFile inFile(texFile);
+		if (!inFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			throw (runtime_error(string("cannot open file for reading: ") + qPrintable(texFile)));
+			throw (runtime_error("cannot open file for reading"));
 		}
-	
-		// determine total number to be loaded for percent complete display
-		string record;
-		int total=0;
-		while(!getline(inf, record).eof())
-		{
-			if (record.empty() || record[0]=='#')
-				continue;
-			++total;
-		}
-		inf.clear();
-		inf.seekg(0);
 
-		int current = 0;
+		QTextStream in(&inFile);
+		// count input lines (for progress bar)
+		int totalRecords = 0;
+		QString record;
+		QRegExp commentRx("^(\\s*#.*|\\s*)$");
+		while (!in.atEnd()) 
+		{
+			record = in.readLine();
+			if (!commentRx.exactMatch(record))
+				totalRecords++;
+		}
+
+		in.reset();
+		inFile.seek(0);
+		int currentRecord = 0;
+		int currentLineNumber = 0;
+		int readOk = 0;
 		int NGC;
-		while(!getline(inf, record).eof())
+		while (!in.atEnd()) 
 		{
-			// Draw loading bar
-			if (record.empty() || record[0]=='#')
+			record = in.readLine();
+			++currentLineNumber;
+			if (commentRx.exactMatch(record))
 				continue;
 
-			++current;
-			lb.SetMessage(q_("Loading Nebula Textures:%1/%2").arg(current).arg(total));
-			lb.Draw((float)current/total);
-
-			istringstream istr(record);
+			++currentRecord;
+			lb.SetMessage(q_("Loading Nebula Textures:%1/%2").arg(currentRecord).arg(totalRecords));
+			lb.Draw((float)currentRecord/totalRecords);
+			QTextStream istr(&record);
 			istr >> NGC;
 
 			Nebula *e = (Nebula*)searchNGC(NGC);
@@ -546,31 +551,37 @@ bool NebulaMgr::loadTextures(const QString& setName)
 			{
 				if (!e->readTexture(setName, record)) // reading error
 				{
-					cerr << "Error while reading nebula texture " << qPrintable(setName) << "/" << qPrintable(e->englishName) << endl;
-					cerr << "Record was " << record << endl;
+					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
 				}
-			} 
+				else
+					++readOk;
+			}
 			else
 			{
 				// Allow non NGC nebulas/textures!
 				if (NGC != -1)
-					cout << "Nebula with unrecognized NGC number " << NGC << endl;
+				{
+					qWarning() << "Nebula with unrecognized NGC number (" << NGC << ") at line " 
+					           << currentLineNumber << setName << "/" << e->englishName;
+				}
+
 				e = new Nebula;
 				if (!e->readTexture(setName, record))
 				{
 					// reading error
-					cerr << "Error while reading texture " << qPrintable(e->englishName) << endl;
+					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
 					delete e;
 				} 
 				else 
 				{
 					neb_array.push_back(e);
 					nebGrid.insert(e);
+					++readOk;
 				}
 			}
 	
 		}
-		cout << "(" << total << " textures loaded)" << endl;
+		qDebug() << " ... successfully read " << readOk << " of " << totalRecords << " nebula textures";
 		return true;	
 	}
 	catch (exception& e)

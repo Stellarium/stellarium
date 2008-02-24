@@ -78,7 +78,7 @@ public:
 	//! nebula_textures.fab file for that set.
 	//! @param setName The string name of the set of nebulas being processed
 	//! @param record The string containing the current record from nebula_textures.fab
-	bool readTexture(const QString& setName, const string& record);
+	bool readTexture(const QString& setName, const QString& record);
 	bool readNGC(char *record);
 
 	QString getNameI18n(void) const {return nameI18;}
@@ -86,14 +86,14 @@ public:
     
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
-	wstring getTypeString(void) const;
+	QString getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
 	
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
 	{
-		return angular_size * (prj->getViewportHeight()/prj->getFov());
+		return angularSize * (prj->getViewportHeight()/prj->getFov());
 	}
 
 	//! Get the convex polygon matching the nebula image in J2000 frame
@@ -105,7 +105,7 @@ private:
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
 	void draw_name(const Projector* prj);
 	void draw_circle(const Projector* prj, const Navigator * nav);
-	bool hasTex(void) {return neb_tex;}
+	bool hasTex(void) {return nebTex;}
     
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -113,14 +113,14 @@ private:
 	//unsigned int UGC_nb;            // Uppsala General  Catalog number
 	QString englishName;             // English name
 	QString nameI18;                // Nebula name
-	string credit;                  // Nebula image credit
+	QString credit;                  // Nebula image credit
 	float mag;                      // Apparent magnitude
-	float angular_size;             // Angular size in degree
+	float angularSize;             // Angular size in degree
 	Vec3f XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
 	nebula_type nType;
 
-	STextureSP neb_tex;             // Texture
+	STextureSP nebTex;             // Texture
 	Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
 	float luminance;                // Object luminance to use (value computed to compensate
 	                                // the texture average luminosity)
