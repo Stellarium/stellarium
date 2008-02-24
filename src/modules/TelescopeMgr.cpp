@@ -32,6 +32,7 @@
 #include <algorithm>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
 
 #ifdef WIN32
   #include <winsock2.h> // select
@@ -188,21 +189,21 @@ StelObjectP TelescopeMgr::searchByName(const QString &name) const {
   return 0;
 }
 
-vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
-                                const wstring& objPrefix,
-                                unsigned int maxNbItem) const {
-  vector<wstring> result;
+QStringList TelescopeMgr::listMatchingObjectsI18n(
+                                const QString& objPrefix,
+                                int maxNbItem) const {
+  QStringList result;
   if (maxNbItem==0) return result;
-  wstring objw = objPrefix;
-  std::transform(objw.begin(),objw.end(),objw.begin(),::toupper);
+
+  QString objw = objPrefix.toUpper();
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
     QString constw = it->second->getNameI18n().mid(0, objw.size()).toUpper();
-    if (constw.toStdWString()==objw) {
-      result.push_back(it->second->getNameI18n().toStdWString());
+    if (constw==objw) {
+      result << it->second->getNameI18n();
     }
   }
-  sort(result.begin(),result.end());
+  result.sort();
   if (result.size()>maxNbItem) {
     result.erase(result.begin()+maxNbItem, result.end());
   }

@@ -28,6 +28,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <QString>
+#include <QStringList>
 
 using namespace std;
 
@@ -57,7 +59,7 @@ public:
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
 
   void communicate(void);
