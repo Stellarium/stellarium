@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include <iostream>
 #include <config.h>
 
 #include <QDebug>
@@ -115,7 +114,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	}
 	catch (exception& e)
 	{
-		cerr << "ERROR while locating module path: " << e.what() << endl;
+		qWarning() << "ERROR while locating module path: " << e.what();
 	}
 
 	QPluginLoader loader(moduleFullPath);
@@ -136,7 +135,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	
 	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
 	StelModule* sMod = plugInt->getStelModule();
-	cout << "Loaded external module " << moduleID.toStdString() << "." << endl;
+	qDebug() << "Loaded external module " << moduleID << ".";
 	return sMod;
 }
 
@@ -185,7 +184,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR while trying list list modules:" << e.what() << endl;	
+		qWarning() << "ERROR while trying list list modules:" << e.what();	
 	}
 	
 	for (QSet<QString>::iterator dir=moduleDirs.begin(); dir!=moduleDirs.end(); dir++)

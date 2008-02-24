@@ -18,7 +18,6 @@
  */
 
 #include <cassert>
-#include <iostream>
 
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -291,7 +290,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 				}
 				free(histo);
 				
-				cerr << "minCut=" << minCut << " maxCut=" << maxCut << endl;
+				qDebug() << "minCut=" << minCut << " maxCut=" << maxCut;
 				
 				if (tex->internalFormat==1)
 				{
@@ -401,15 +400,17 @@ bool StelTextureMgr::loadImage(STexture* tex)
 	// Repair texture size if non power of 2 is not allowed by the video driver
 	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
-		//cerr << "Can't load natively non power of 2 textures for texture: " << tex->fullPath << endl;
+		//qDebug() << "Can't load natively non power of 2 textures for texture: " << tex->fullPath;
 		int w = StelUtils::getBiggerPowerOfTwo(tex->width);
 		int h = StelUtils::getBiggerPowerOfTwo(tex->height);
-		//cerr << "Resize to " << w << "x" << h << endl;
+		//qDebug() << "Resize to " << w << "x" << h;
 		
 		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
 		if (texels2==NULL)
 		{
-			cerr << "Unsufficient memory for image data allocation: need to allocate array of " << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat << " bytes per pixels." << endl;
+			qWarning() << "Insufficient memory for image data allocation: need to allocate array of " 
+			           << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat 
+			           << " bytes per pixels.";
 			free(tex->texels);
 			tex->texels = NULL;
 			return false;

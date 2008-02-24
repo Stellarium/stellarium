@@ -20,7 +20,7 @@
 
 #include "SphericMirrorCalculator.hpp"
 #include <QSettings>
-#include <iostream>
+#include <QDebug>
 
 SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf) {
   const Vec3d mirror_position(
@@ -44,9 +44,9 @@ conf.value("spheric_mirror/projector_position_z",-0.2).toDouble());
   if (image_distance_div_height <= -1e100)
   { const double scaling_factor = conf.value("spheric_mirror/scaling_factor", 0.8).toDouble();
     image_distance_div_height = sqrt(PP-1.0) * scaling_factor;
-    std::cout << "INFO: spheric_mirror:scaling_factor is deprecated and may be removed in future versions." << std::endl
-         << "      In order to keep your setup unchanged, please use spheric_mirror:image_distance_div_height = "
-         << image_distance_div_height << " instead" << std::endl;
+    qDebug() << "INFO: spheric_mirror:scaling_factor is deprecated and may be removed in future versions.";
+    qDebug() << "      In order to keep your setup unchanged, please use spheric_mirror:image_distance_div_height = "
+             << image_distance_div_height << " instead";
   }
   horz_zoom_factor = conf.value("spheric_mirror/flip_horz",true).toBool()
                    ? (-image_distance_div_height)
@@ -67,9 +67,9 @@ conf.value("spheric_mirror/projector_position_z",-0.2).toDouble());
 	const double zenith_y(conf.value("spheric_mirror/zenith_y",0.125).toDouble());
     delta = -atan(y/image_distance_div_height)
           + atan(zenith_y/image_distance_div_height);
- std::cout << "INFO: spheric_mirror:zenith_y is deprecated and may be removed in future versions." << std::endl
-         << "      In order to keep your setup unchanged, please use spheric_mirror:projector_delta = "
-         << (delta*(180.0/M_PI)) << " instead" << std::endl;
+    qDebug() << "INFO: spheric_mirror:zenith_y is deprecated and may be removed in future versions.";
+    qDebug() << "      In order to keep your setup unchanged, please use spheric_mirror:projector_delta = "
+             << (delta*(180.0/M_PI)) << " instead";
   } else {
     delta *= (M_PI/180);
   }
@@ -112,13 +112,13 @@ void SphericMirrorCalculator::initRotMatrix(double alpha,
         prod1 -= 1.0;
       }
       if (fabs(prod0)>1e-10) {
-        cout << "i: " << i << ", j: " << j
-             << ", prod0: " << prod0 << ", prod1: " << prod1 << endl;
+        qDebug() << "i: " << i << ", j: " << j
+                 << ", prod0: " << prod0 << ", prod1: " << prod1;
         assert(0);
       }
       if (fabs(prod1)>1e-10) {
-        cout << "i: " << i << ", j: " << j
-             << ", prod0: " << prod0 << ", prod1: " << prod1 << endl;
+        qDebug << "i: " << i << ", j: " << j
+               << ", prod0: " << prod0 << ", prod1: " << prod1;
         assert(0);
       }
     }

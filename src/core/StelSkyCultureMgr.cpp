@@ -42,7 +42,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR while trying list sky cultures:" << e.what() << endl;	
+		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
 	}
 	
 	for(QSet<QString>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)

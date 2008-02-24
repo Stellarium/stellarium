@@ -65,12 +65,12 @@ STexture::~STexture()
 	texels = NULL;
 	if (glIsTexture(id)==GL_FALSE)
 	{
-		// std::cerr << "Warning: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError() << std::endl;
+		// qDebug() << "WARNING: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
 	}
 	else
 	{
 		glDeleteTextures(1, &id);
-		// std::cerr << "Delete texture with ID=" << id << std::endl;
+		// qDebug() << "Delete texture with ID=" << id;
 	}
 	id = 0;
 	delete mutex;

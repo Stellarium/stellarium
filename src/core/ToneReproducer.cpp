@@ -19,7 +19,6 @@
 #include <cstdio>
 #include <cmath>
 #include <cassert>
-#include <iostream>
 
 using namespace std;
 
@@ -103,7 +102,7 @@ void ToneReproducer::xyYToRGB(float* color) const
 	// 1. Hue conversion
 	if (color[2] <= 0.f)
 	{
-//		cerr << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2] << endl;
+		// qDebug() << "ToneReproducer::xyYToRGB: BIG WARNING: color[2]<=0: " << color[2];
 		log10Y = -9e50;
 	}
 	else
