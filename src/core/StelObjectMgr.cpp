@@ -27,6 +27,7 @@
 #include "MovementMgr.hpp"
 #include <QMouseEvent>
 #include <QString>
+#include <QDebug>
 #include <QStringList>
 
 StelObjectMgr::StelObjectMgr()
@@ -189,7 +190,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 		core->getProjection()->project((*iter)->getEarthEquatorialPos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter)->getSelectPriority(core->getNavigation());
-//		cerr << StelUtils::wstringToString((*iter).getShortInfoString(core->getNavigation())) << ": " << priority << " " << distance << endl;
+		// qDebug() << (*iter).getShortInfoString(core->getNavigation()) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
 		{
 			best_object_value = distance + priority;
@@ -281,7 +282,6 @@ std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
 {
 	QStringList result;
-	vector <wstring>::const_iterator iter;
 
 	// For all StelObjectmodules..
 	std::vector<StelObjectModule*>::const_iterator iteromgr;
