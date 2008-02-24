@@ -778,24 +778,15 @@ void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
 	setTrailsColor(StelUtils::str_to_vec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
 
-Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
+Planet* SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
-//printf("SolarSystem::searchByEnglishName(\"%s\"): start\n",
-//       planetEnglishName.c_str());
-	// side effect - bad?
-//	transform(planetEnglishName.begin(), planetEnglishName.end(), planetEnglishName.begin(), ::tolower);
-
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-//printf("SolarSystem::searchByEnglishName(\"%s\"): %s\n",
-//       planetEnglishName.c_str(),
-//       (*iter)->getEnglishName().c_str());
-		if( (*iter)->getEnglishName().toStdString() == planetEnglishName ) return (*iter);  // also check standard ini file names
+		if((*iter)->getEnglishName() == planetEnglishName) return (*iter);  // also check standard ini file names
 		++iter;
 	}
-//printf("SolarSystem::searchByEnglishName(\"%s\"): not found\n",
-//       planetEnglishName.c_str());
+
 	return NULL;
 }
 
@@ -1196,7 +1187,7 @@ void SolarSystem::setMoonScale(float f)
 }
 
 // Set selected planets by englishName
-void SolarSystem::setSelected(const string& englishName)
+void SolarSystem::setSelected(const QString& englishName)
 {
 	setSelected(searchByEnglishName(englishName));
 }

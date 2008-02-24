@@ -240,8 +240,8 @@ void Observer::load(QSettings* conf, const QString& section)
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
 //           planet->getEnglishName().c_str());
-	latitude  = StelUtils::get_dec_angle(conf->value(section+"/latitude").toString().toStdString());
-	longitude = StelUtils::get_dec_angle(conf->value(section+"/longitude").toString().toStdString());
+	latitude  = StelUtils::get_dec_angle(conf->value(section+"/latitude").toString());
+	longitude = StelUtils::get_dec_angle(conf->value(section+"/longitude").toString());
 	altitude = conf->value(section+"/altitude",0).toInt();
 }
 
@@ -282,7 +282,7 @@ QString Observer::getLocationName(void) const {
 
 bool Observer::setHomePlanet(const QString &english_name)
 {
-	Planet *p = ssystem.searchByEnglishName(english_name.toStdString());
+	Planet *p = ssystem.searchByEnglishName(english_name);
 	if (p==NULL)
 	{
 		qWarning() << "Can't set home planet to " + english_name + " because it is unknown";

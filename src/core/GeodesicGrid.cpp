@@ -34,6 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "GeodesicGrid.hpp"
 
+#include <QDebug>
 #include <cmath>
 #include <cstdlib>
 #include <cassert>
@@ -314,7 +315,7 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
 			return i;
 		}
 	}
-	cerr << "software error: not found" << endl;
+	qWarning() << "ERROR GeodesicGrid::searchZone - not found";
 	exit(-1);
 	// shut up the compiler
 	return -1;
