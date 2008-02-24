@@ -80,7 +80,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
 {
 	// Update the translator with new locale name
 	Translator::globalTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newAppLanguageName);
-	cout << "Application language is " << qPrintable(Translator::globalTranslator.getTrueLocaleName()) << endl;
+	qDebug() << "Application language is " << Translator::globalTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
 
@@ -91,7 +91,7 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 {
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getFileMgr().getLocaleDir(), newSkyLanguageName);
-	cout << "Sky language is " << qPrintable(skyTranslator.getTrueLocaleName()) << endl;
+	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
 	StelApp::getInstance().updateI18n();
 }
 
@@ -178,7 +178,7 @@ QString StelLocaleMgr::get_printable_date_local(double JD) const
 			return str;
 		}
 		default:
-			cerr << "Warning, unknown date format, fallback to system default" << endl;
+			qWarning() << "WARNING: unknown date format fallback to system default";
 			return dateTime.date().toString(Qt::LocaleDate);
 	}
 }
@@ -203,7 +203,7 @@ QString StelLocaleMgr::get_printable_time_local(double JD) const
 		case S_TIME_12H:
 			return dateTime.time().toString("hh:mm:ss ap");
 		default:
-			cerr << "Warning, unknown date format, fallback to system default" << endl;
+			qWarning() << "WARNING: unknown date format, fallback to system default";
 			return dateTime.time().toString(Qt::LocaleDate);
 	}
 }
@@ -214,7 +214,7 @@ StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const QStrin
 	if (tf == "system_default") return S_TIME_SYSTEM_DEFAULT;
 	if (tf == "24h") return S_TIME_24H;
 	if (tf == "12h") return S_TIME_12H;
-	cerr << "WARNING: unrecognized time_display_format : " << qPrintable(tf) << " system_default used." << endl;
+	qWarning() << "WARNING: unrecognized time_display_format : " << tf << " system_default used.";
 	return S_TIME_SYSTEM_DEFAULT;
 }
 
@@ -234,7 +234,7 @@ StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const QStrin
 	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;
 	if (df == "ddmmyyyy") return S_DATE_DDMMYYYY;
 	if (df == "yyyymmdd") return S_DATE_YYYYMMDD;  // iso8601
-	cerr << "WARNING: unrecognized date_display_format : " << qPrintable(df) << " system_default used." << endl;
+	qWarning() << "WARNING: unrecognized date_display_format : " << df << " system_default used.";
 	return S_DATE_SYSTEM_DEFAULT;
 }
 
@@ -266,3 +266,4 @@ float StelLocaleMgr::get_GMT_shift(double JD) const
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
 	else return get_GMT_shift_from_system(JD);
 }
+

@@ -17,8 +17,6 @@
  */
 
 #include <cmath>
-#include <fstream>
-#include <iostream>
 #include <QDebug>
 #include <QFile>
 #include <QRegExp>
@@ -42,7 +40,7 @@ StelFontMgr::StelFontMgr()
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR when locating font map file: " << e.what() << endl;
+		qWarning() << "ERROR when locating font map file: " << e.what();
 	}
 	loadFontForLanguage(fontMapFile);
 }
@@ -100,7 +98,7 @@ SFont& StelFontMgr::getStandardFont(const QString& langageName, double size)
 		}
 		catch (exception& e)
 		{
-			cerr << "ERROR while trying to load fonts: " << e.what() << endl;
+			qWarning() << "ERROR while trying to load fonts: " << e.what();
 			SFont* dummy=NULL;
 			return *dummy;
 		}

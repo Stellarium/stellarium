@@ -101,28 +101,28 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	}
 	catch (exception& e)
 	{
-		cerr << "ERROR while loading translations: " << e.what() << endl;
+		qDebug() << "ERROR while loading translations: " << e.what() << endl;
 	}
 	
 	// OK, print the console splash and get on with loading the program
 	cout << " -------------------------------------------------------" << endl;
-	cout << "[ This is "<< qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
+	cout << "[ This is " << qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
 	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al          ]" << endl;
 	cout << " -------------------------------------------------------" << endl;
 	
 	QStringList p=stelFileMgr->getSearchPaths();
-	cout << "File search paths:" << endl;
+	qDebug() << "File search paths:";
 	int n=0;
 	foreach (QString i, p)
 	{
-		cout << " " << n << ". " << qPrintable(i) << endl;
+		qDebug() << " " << n << ". " << i;
 		++n;
 	}
-	cout << "Config file is: " << qPrintable(configFile) << endl;
+	qDebug() << "Config file is: " << configFile;
 	
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "config file \"" << qPrintable(configFile) << "\" does not exist - copying the default file." << endl;
+		qDebug() << "config file " << configFile << " does not exist - copying the default file.";
 		copyDefaultConfigFile();
 	}
 
@@ -152,12 +152,12 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		istr >> v1 >> tmp >> v2;
 
 		// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
-		if( v1 == 0 && v2 < 6 )
+		if(v1==0 && v2<6)
 		{
 			// The config file is too old to try an importation
-			cout << "The current config file is from a version too old for parameters to be imported (" 
-					<< (version.isEmpty() ? "<0.6.0" : qPrintable(version)) << ")." << endl 
-					<< "It will be replaced by the default config file." << endl;
+			qDebug() << "The current config file is from a version too old for parameters to be imported (" 
+			         << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
+			         << "It will be replaced by the default config file.";
 
 			delete confSettings;
 			QFile::remove(getConfigFilePath());
@@ -166,7 +166,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 		}
 		else
 		{
-			cout << "Attempting to use an existing older config file." << endl;
+			qDebug() << "Attempting to use an existing older config file.";
 		}
 	}
 	
@@ -221,7 +221,7 @@ void StelApp::init()
 
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
-	              QString::fromStdString(PACKAGE_VERSION), 45, 320, 121);
+	              PACKAGE_VERSION, 45, 320, 121);
 	
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
@@ -329,27 +329,27 @@ void StelApp::parseCLIArgsPreConfig(void)
 		binName.remove(QRegExp("^.*[/\\\\]"));
 		
 		cout << "Usage:" << endl
-				<< "  " 
-				<< qPrintable(binName) << " [options]" << endl << endl
-				<< "Options:" << endl
-				<< "--version (or -v)       : Print program name and version and exit." << endl
-				<< "--help (or -h)          : This cruft." << endl
-				<< "--config-file (or -c)   : Use an alternative name for the config file" << endl
-				<< "--user-dir (or -u)      : Use an alternative user data directory" << endl
-				<< "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
-				<< "                          the full screen setting in the config file" << endl
-				<< "--screenshot-dir        : Specify directory to save screenshots" << endl
-				<< "--home-planet           : Specify observer planet (English name)" << endl
-				<< "--altitude              : Specify observer altitude in meters" << endl
-				<< "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
-				<< "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << endl 
-				<< "--list-landscapes       : Print a list of value landscape IDs" << endl 
-				<< "--landscape             : Start using landscape whose ID (dir name)" << endl
-				<< "                          is passed as parameter to option" << endl
-				<< "--sky-date              : Specify sky date in format yyyymmdd" << endl
-				<< "--sky-time              : Specify sky time in format hh:mm:ss" << endl
-				<< "--fov                   : Specify the field of view (degrees)" << endl
-				<< "--projection-type       : Specify projection type, e.g. stereographic" << endl;
+		     << "  " 
+		     << qPrintable(binName) << " [options]" << endl << endl
+		     << "Options:" << endl
+		     << "--version (or -v)       : Print program name and version and exit." << endl
+		     << "--help (or -h)          : This cruft." << endl
+		     << "--config-file (or -c)   : Use an alternative name for the config file" << endl
+		     << "--user-dir (or -u)      : Use an alternative user data directory" << endl
+		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
+		     << "                          the full screen setting in the config file" << endl
+		     << "--screenshot-dir        : Specify directory to save screenshots" << endl
+		     << "--home-planet           : Specify observer planet (English name)" << endl
+		     << "--altitude              : Specify observer altitude in meters" << endl
+		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
+		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << endl 
+		     << "--list-landscapes       : Print a list of value landscape IDs" << endl 
+		     << "--landscape             : Start using landscape whose ID (dir name)" << endl
+		     << "                          is passed as parameter to option" << endl
+		     << "--sky-date              : Specify sky date in format yyyymmdd" << endl
+		     << "--sky-time              : Specify sky time in format hh:mm:ss" << endl
+		     << "--fov                   : Specify the field of view (degrees)" << endl
+		     << "--projection-type       : Specify projection type, e.g. stereographic" << endl;
 		exit(0);
 	}
 	
@@ -363,7 +363,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
-				cout << (*i).toUtf8().data() << endl;
+				cout << qPrintable(*i) << endl;
 			}
 			catch(exception& e){}
 		}
@@ -379,7 +379,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	}
 	catch(exception& e)
 	{
-		qWarning() << "ERROR: while processing --user-dir option: " << e.what();
+		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
 		exit(1);
 	}
 	
@@ -388,7 +388,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	{
 		if (!StelFileMgr::mkDir(stelFileMgr->getUserDir()))
 		{
-			qDebug() << "ERROR - cannot create non-existent user directory" << stelFileMgr->getUserDir();
+			qCritical() << "ERROR - cannot create non-existent user directory" << stelFileMgr->getUserDir();
 			exit(1);
 		}
 	}
@@ -399,7 +399,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"" << endl;
+		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
 		setConfigFile("config.ini");		
 	}
 
@@ -411,7 +411,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	}
 	catch(exception& e)
 	{
-		qWarning() << "ERROR: while setting screenshot directory for --screenshot-dir option: " << e.what();
+		qWarning() << "WARNING: problem while setting screenshot directory for --screenshot-dir option: " << e.what();
 	}
 }
 
@@ -439,7 +439,7 @@ void StelApp::parseCLIArgsPostConfig()
 	}
 	catch (exception& e)
 	{
-		cerr << "ERROR while checking command line options: " << e.what() << endl;
+		qCritical() << "ERROR while checking command line options: " << e.what();
 		exit(0);
 	}
 
@@ -459,7 +459,7 @@ void StelApp::parseCLIArgsPostConfig()
 		if (longLatRx.exactMatch(longitude))
 			confSettings->setValue("init_location/longitude", longitude);
 		else
-			cerr << "WARNING: --longitude argument has unrecognised format" << endl;
+			qWarning() << "WARNING: --longitude argument has unrecognised format";
 	}
 	
 	if (latitude != "")
@@ -467,7 +467,7 @@ void StelApp::parseCLIArgsPostConfig()
 		if (longLatRx.exactMatch(latitude))
 			confSettings->setValue("init_location/latitude", latitude);
 		else
-			cerr << "WARNING: --latitude argument has unrecognised format" << endl;
+			qWarning() << "WARNING: --latitude argument has unrecognised format";
 	}
 	
 	if (skyDate != "" || skyTime != "")
@@ -491,7 +491,7 @@ void StelApp::parseCLIArgsPostConfig()
 			if (dateRx.exactMatch(skyDate.remove("-")))
 				skyDatePart = QDate::fromString(skyDate, "yyyyMMdd").toJulianDay();
 			else
-				cerr << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)" << endl;
+				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
 		}
 		
 		if (skyTime != "")
@@ -500,7 +500,7 @@ void StelApp::parseCLIArgsPostConfig()
 			if (timeRx.exactMatch(skyTime))
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else
-				cerr << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)" << endl;
+				qWarning() << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)";
 		}
 
 		confSettings->setValue("navigation/startup_time_mode", "preset");
@@ -645,7 +645,7 @@ void StelApp::setConfigFile(const QString& configName)
 	}
 	catch(exception& e)
 	{
-		//cerr << "DEBUG StelApp::setConfigFile could not locate writable config file " << configName << endl;
+		//qDebug() << "DEBUG StelApp::setConfigFile could not locate writable config file " << configName;
 	}
 	
 	try
@@ -655,18 +655,18 @@ void StelApp::setConfigFile(const QString& configName)
 	}
 	catch(exception& e)
 	{
-		//cerr << "DEBUG StelApp::setConfigFile could not find read only config file " << configName << endl;
+		//qDebug() << "DEBUG StelApp::setConfigFile could not find read only config file " << configName;
 	}		
 	
 	try
 	{
 		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW);
-		//cerr << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile << endl;
+		//qDebug() << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile;
 		return;
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName.toUtf8().data() << endl;
+		qCritical() << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName;
 		exit(1);
 	}
 }
@@ -680,14 +680,15 @@ void StelApp::copyDefaultConfigFile()
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR (copyDefaultConfigFile): failed to locate data/default_config.ini.  Please check your installation." << endl;
+		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to locate data/default_config.ini.  Please check your installation.";
 		exit(1);
 	}
 	
 	QFile::copy(defaultConfigFilePath, configFile);
 	if (!stelFileMgr->exists(configFile))
 	{
-		cerr << "ERROR (copyDefaultConfigFile): failed to copy file " << defaultConfigFilePath.toUtf8().data() << " to " << configFile.toUtf8().data() << ". You could try to copy it by hand." << endl;
+		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to copy file " << defaultConfigFilePath 
+		         << " to " << configFile << ". You could try to copy it by hand.";
 		exit(1);
 	}
 }
