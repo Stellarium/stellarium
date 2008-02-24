@@ -202,7 +202,7 @@ public:
 	//! Get a pointer to a Planet object.
 	//! @param the English name of the desired planet.
 	//! @return The matching planet pointer if exists or NULL.
-	Planet* searchByEnglishName(string planetEnglishName) const;
+	Planet* searchByEnglishName(QString planetEnglishName) const;
 	
 	//! Get the Planet object pointer for the Sun.
 	Planet* getSun(void) const {return sun;}
@@ -239,7 +239,7 @@ private:
 	
 	//! Set selected planets by englishName.
 	//! @param englishName The planet name or "" to select no planet
-	void setSelected(const string& englishName);
+	void setSelected(const QString& englishName);
 	//! Set selected object from its pointer.
 	void setSelected(StelObject* obj);	
 	//! Get selected object's pointer.
