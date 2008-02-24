@@ -20,7 +20,6 @@
 #ifndef STELLOCALEMGR_H
 #define STELLOCALEMGR_H
 
-#include <string>
 #include "Translator.hpp"
 
 using namespace std;
@@ -80,7 +79,7 @@ public:
 	//! - "12h"
 	//!
 	//! These values correspond to the similarly named values in the S_TIME_FORMAT enum.
-	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
+	QString get_time_format_str(void) const {return s_time_format_to_string(time_format);}
 	//! Set the time format from a format string.
 	//! @tf value values are the same as the return values for get_time_format_str().
 	void set_time_format_str(const QString& tf) {time_format=string_to_s_time_format(tf);}
@@ -92,7 +91,7 @@ public:
 	//! - "yyyymmdd"
 	//!
 	//! These values correspond to the similarly named values in the S_DATE_FORMAT enum.
-	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
+	QString get_date_format_str(void) const {return s_date_format_to_string(date_format);}
 	void set_date_format_str(const QString& df) {date_format=string_to_s_date_format(df);}
 	
 	//! Set the time zone.
@@ -118,10 +117,10 @@ public:
 	};
 	
 	//! Get a localized, formatted string representation of the date component of a Julian date.
-	wstring get_printable_date_local(double JD) const;
+	QString get_printable_date_local(double JD) const;
 	
 	//! Get a localized, formatted string representation of the time component of a Julian date.
-	wstring get_printable_time_local(double JD) const;
+	QString get_printable_time_local(double JD) const;
 	
 	//! @enum S_TZ_FORMAT
 	enum S_TZ_FORMAT
@@ -159,11 +158,11 @@ private:
 	
 	// Convert the time format enum to its associated string and reverse
 	S_TIME_FORMAT string_to_s_time_format(const QString&) const;
-	string s_time_format_to_string(S_TIME_FORMAT) const;
+	QString s_time_format_to_string(S_TIME_FORMAT) const;
 	
 	// Convert the date format enum to its associated string and reverse
 	S_DATE_FORMAT string_to_s_date_format(const QString& df) const;
-	string s_date_format_to_string(S_DATE_FORMAT df) const;
+	QString s_date_format_to_string(S_DATE_FORMAT df) const;
 };
 
 #endif
