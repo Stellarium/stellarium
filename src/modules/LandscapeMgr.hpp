@@ -113,7 +113,7 @@ public slots:
 	QString getLandscapeDescription();
 	//! Return the translated name of the planet where the current landscape is located.
 	QString getLandscapePlanetName();
-	//! Return a wstring with the longitude, latitude and altitude of the current landscape.
+	//! Return a string with the longitude, latitude and altitude of the current landscape.
 	QString getLandscapeLocationDescription();
 	
 	//! Change the current landscape to the landscape with the name specified.

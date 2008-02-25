@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <iostream>
 #include <algorithm>
 #include <QString>
+#include <QTextStream>
 #include <QDebug>
 #include "Projector.hpp"
 #include "Constellation.hpp"
@@ -43,17 +43,21 @@ Constellation::~Constellation()
 	asterism = NULL;
 }
 
-bool Constellation::read(const string& record, StarMgr *starMgr)
+bool Constellation::read(const QString& record, StarMgr *starMgr)
 {   
 	unsigned int HP;
 
 	abbreviation.clear();
 	numberOfSegments = 0;
 
-	std::istringstream istr(record);
-	std::string abb;
-	if (!(istr >> abb >> numberOfSegments)) return false;
-	abbreviation = QString::fromStdString(abb).toUpper();
+	QString buf(record);
+	QTextStream istr(&buf, QIODevice::ReadOnly);
+	QString abb;
+	istr >> abb >> numberOfSegments;
+	if (istr.status()!=QTextStream::Ok) 
+		return false;
+
+	abbreviation = abb.toUpper();
 
 	asterism = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
@@ -62,6 +66,7 @@ bool Constellation::read(const string& record, StarMgr *starMgr)
 		istr >> HP;
 		if(HP == 0)
 		{
+			// TODO: why is this delete commented?
 			// delete[] asterism;
 			return false;
 		}
@@ -70,6 +75,7 @@ bool Constellation::read(const string& record, StarMgr *starMgr)
 		if (!asterism[i])
 		{
 			qWarning() << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP;
+			// TODO: why is this delete commented?
 			// delete[] asterism;
 			return false;
 		}
@@ -204,7 +210,7 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 		// asterism[i]==s test was not working
 		if (asterism[i]->getEnglishName()==s->getEnglishName())
 		{
-			// cout << "Const matched. " << getEnglishName() << endl;
+			// qDebug() << "Const matched. " << getEnglishName();
 			return this;
 		}
 	}

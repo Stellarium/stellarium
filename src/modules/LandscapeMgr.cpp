@@ -201,15 +201,15 @@ void LandscapeMgr::update(double deltaTime)
 //		{
 //			// Compute the Illuminance E of the ground caused by the planet in lux = lumen/m^2
 //			float E = pow10(((*i)->get_mag(nav)+13.988)/-2.5);
-//			//cerr << "mag=" << (*i)->get_mag(nav) << " illum=" << E << endl;
+//			//qDebug() << "mag=" << (*i)->get_mag(nav) << " illum=" << E;
 //			// Luminance in cd/m^2
 //			groundLuminance += E/0.44*pos[2]*pos[2]; // 1m^2 from 1.5 m above the ground is 0.44 sr.
 //		}
 //	}
 //	groundLuminance*=atmosphere->getFadeIntensity();
 //	groundLuminance=atmosphere->getAverageLuminance()/50;
-//	cout << "Atmosphere lum=" << atmosphere->getAverageLuminance() << " ground lum=" <<  groundLuminance << endl;
-	//cout << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance) << endl;
+//	qDebug() << "Atmosphere lum=" << atmosphere->getAverageLuminance() << " ground lum=" <<  groundLuminance;
+//	qDebug() << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance);
 	
 	// compute global ground brightness in a simplistic way, directly in RGB
 	float landscapeBrightness = 0;
@@ -424,7 +424,7 @@ QString LandscapeMgr::getLandscapePlanetName(void)
 QString LandscapeMgr::getLandscapeLocationDescription(void) 
 {
 	QString desc;
-//cerr << landscape->getLongitude() << " " << landscape->getLatitude() << endl;
+	//qDebug() << landscape->getLongitude() << " " << landscape->getLatitude();
 	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
 	{
 		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
@@ -606,7 +606,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
 	}
 	catch(exception& e)
 	{
-		cerr << "ERROR while trying list list landscapes:" << e.what() << endl;	
+		qDebug() << "ERROR while trying list landscapes:" << e.what();
 	}
 	
 	foreach (QString dir, landscapeDirs)
@@ -619,7 +619,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
 		}
 		catch (exception& e)
 		{
-			//cerr << "WARNING: unable to successfully read landscape.ini file from landscape " << *dir << endl;
+			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
 
