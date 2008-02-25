@@ -45,15 +45,15 @@ private:
 	~Constellation();
     
 	// StelObject method to override
-   	//! Write I18n information about the object in wstring.
+   	//! Write I18n information about the object in string.
 	//! @param nav a pointer to the Navigator object (unused).
 	QString getInfoString(const Navigator * nav) const
 	{
-		return getNameI18n() + "(" + QString::fromStdString(getShortName()) + "°";
+		return getNameI18n() + "(" + getShortName() + "°";
 	}
 
 	//! Get a brief information string about a Constellation.
-	//! This member function returns a wstring containing a short 
+	//! This member function returns a string containing a short 
 	//! description of a Constellation object.  This short description 
 	//! is used for the constellation label.
 	//! @param nav a pointer to the navigator object.
@@ -77,7 +77,7 @@ private:
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
-	bool read(const string& record, StarMgr *starMgr);
+	bool read(const QString& record, StarMgr *starMgr);
 	
 	//! Draw the constellation name
 	void drawName(SFont * constfont, Projector* prj) const;
@@ -104,7 +104,7 @@ private:
 	//! Get the English name for the Constellation (returns the abbreviation).
 	QString getEnglishName(void) const {return abbreviation;}
 	//! Get the short name for the Constellation (returns the abbreviation).
-	string getShortName(void) const {return abbreviation.toStdString();}
+	QString getShortName(void) const {return abbreviation;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru 
 	//! the class ConstellationMgr only).

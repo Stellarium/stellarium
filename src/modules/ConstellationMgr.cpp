@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
+#include <QRegExp>
 #include <QString>
 #include <QStringList>
 
@@ -247,45 +248,57 @@ double ConstellationMgr::getFontSize() const
 // Load line and art data from files
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
 {
-	std::ifstream inf(QFile::encodeName(fileName).constData());
-
-	if (!inf.is_open())
+	QFile in(fileName);
+	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation data file " << fileName;
+		qWarning() << "Can't open constellation data file" << fileName  << "for culture" << cultureName;
 		assert(0);
 	}
+
+	int totalRecords=0;
+	QString record;
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	while (!in.atEnd()) 
+	{
+		record = in.readLine();
+		if (!commentRx.exactMatch(record))
+			totalRecords++;
+	}
+	in.seek(0);
 
 	// delete existing data, if any
 	vector < Constellation * >::iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
 		delete(*iter);
-	}
+
 	asterisms.clear();
-
 	selected.clear();
-
 	Constellation *cons = NULL;
 
-	string record;
-	int line=0;
-	while(!std::getline(inf, record).eof())
+	// read the file, adding a record per non-comment line
+	int currentLineNumber = 0;	// line in file
+	int readOk = 0;			// count of records processed OK
+	while (!in.atEnd()) 
 	{
-		line++;
-		if (record.size()!=0 && record[0]=='#')
+		record = in.readLine();
+		currentLineNumber++;
+		if (commentRx.exactMatch(record))
 			continue;
+
 		cons = new Constellation;
 		if(cons->read(record, hipStarMgr))
 		{
 			asterisms.push_back(cons);
+			++readOk;
 		}
 		else
 		{
-			qWarning() << "ERROR on line " << line << "of " << fileName;
+			qWarning() << "ERROR reading constellation rec at line " << currentLineNumber << "for culture" << cultureName;
 			delete cons;
 		}
 	}
-	inf.close();
+	in.close();
+	qDebug() << "read " << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
 
 	// Set current states
 	setFlagArt(flagArt);
@@ -293,12 +306,22 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	setFlagNames(flagNames);	
 	setFlagBoundaries(flagBoundaries);	
 
-	FILE *fic = fopen(QFile::encodeName(artfileName).constData(), "r");
-	if (!fic)
+	QFile fic(artfileName);
+	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open " << artfileName;
-		return; // no art, but still loaded constellation data
+		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
+		return; // possible to have no art - just constellations
+		assert(0);
 	}
+
+	totalRecords=0;
+	while (!fic.atEnd()) 
+	{
+		record = fic.readLine();
+		if (!commentRx.exactMatch(record))
+			totalRecords++;
+	}
+	fic.seek(0);
 
 	// Read the constellation art file with the following format :
 	// ShortName texture_file x1 y1 hp1 x2 y2 hp2
@@ -308,44 +331,43 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	// x1 y1 are the x and y texture coordinates in pixels of the star of hipparcos number hp1
 	// x2 y2 are the x and y texture coordinates in pixels of the star of hipparcos number hp2
 	// The coordinate are taken with (0,0) at the top left corner of the image file
-	char shortname[20];
-	char texfile[255];
+	QString shortname;
+	QString texfile;
 	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
-	
-	char tmpstr[2000];
-	int total = 0;
+	QString tmpstr;
 
-	// determine total number to be loaded for percent complete display
-	while (fgets(tmpstr, 2000, fic)) {++total;}
-	rewind(fic);
-
-	int current = 0;
+	currentLineNumber = 0;	// line in file
+	readOk = 0;		// count of records processed OK
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
-	while (!feof(fic))
+	while (!fic.atEnd()) 
 	{
-		if (fscanf(fic, "%s %s %u %u %u %u %u %u %u %u %u\n", shortname, texfile, &x1, &y1, &hp1, &x2, &y2, &hp2, &x3, &y3, &hp3) != 11)
-		{
-			if (feof(fic))
-			{
-				// Empty constellation file
-				fclose(fic);
-				return;		// no art is OK
-			}
-			cerr << "Error while loading art for constellation " <<  shortname << endl;;
-			assert(0);
-		}
+		++currentLineNumber;
+		record = fic.readLine();
+		if (commentRx.exactMatch(record))
+			continue;
 
+		// prevent leaving zeros on numbers from being interpretted as octal numbers
+		record.replace(" 0", " ");
+		QTextStream rStr(&record);
+		rStr >> shortname >> texfile >> x1 >> y1 >> hp1 >> x2 >> y2 >> hp2 >> x3 >> y3 >> hp3;
+		if (rStr.status()!=QTextStream::Ok)
+		{
+			qWarning() << "ERROR parsing constellation art record at line" << currentLineNumber << "of art file for culture" << cultureName;
+			continue;
+		}
+		
 		// Draw loading bar
-		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(current+1).arg(total));
-		lb.Draw((float)(current+1)/total);
+		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(currentLineNumber).arg(totalRecords));
+		lb.Draw((float)(currentLineNumber)/totalRecords);
 		
 		cons = NULL;
 		cons = findFromAbbreviation(shortname);
 		if (!cons)
 		{
-			cerr << "ERROR : Can't find constellation called : " << shortname << endl;
+			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << cultureName
+			           << "constellation" << shortname << "unknown";
 		}
 		else
 		{
@@ -377,7 +399,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			int texSizeX, texSizeY;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
-				qWarning() << "Texture dimention not available";
+				qWarning() << "Texture dimension not available";
 			}
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos(0);
@@ -403,11 +425,12 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			cons->art_vertex[7] = Vec3f(X * Vec3f(texSizeX / 2 + 0, texSizeY / 2 + texSizeY / 2, 0));
 			cons->art_vertex[8] = Vec3f(X * Vec3f(0, texSizeY / 2 + texSizeY / 2, 0));
 
-			current++;
+			++readOk;
 		}
 	}
-	fclose(fic);
-	
+
+	qDebug() << "Loaded " << readOk << "/" << totalRecords << "constellation art records successfully for culture" << cultureName;
+	fic.close();
 }
 
 double ConstellationMgr::draw(StelCore* core)
