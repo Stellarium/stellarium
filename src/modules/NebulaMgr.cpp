@@ -214,51 +214,29 @@ void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
 	setCirclesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
 }
 
-// search by name
-StelObject* NebulaMgr::search(const string& name)
+// Search by name
+StelObject* NebulaMgr::search(const QString& name)
 {
-	string uname = name;
-	transform(uname.begin(), uname.end(), uname.begin(), ::toupper);
+	QString uname = name.toUpper();
 	vector <Nebula*>::const_iterator iter;
 
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
 		QString testName = (*iter)->getEnglishName().toUpper();
-		if (testName.toStdString()==uname) return *iter;
+		if (testName==uname) return *iter;
 	}
 	
 	// If no match found, try search by catalog reference
-
- 	string         cat;
-	istringstream  iss_cats;
-	string         n = name;
-	int            num;
-	bool           catfound = false;
-
-	iss_cats.str("M NGC ARP TCP");
-
-	while(iss_cats >> cat) {
-		if ( ! n.find(cat, 0) ) {
-			n.replace(0, cat.length(), "");
-			catfound = true;
-			break;
-		} 
+	QRegExp catNumRx("^(M|NGC|IC)\\s*(\\d+)$");
+	if (catNumRx.exactMatch(uname))
+	{
+		QString cat = catNumRx.capturedTexts().at(1);
+		int num = catNumRx.capturedTexts().at(2).toInt();
+		
+		if (cat == "M") return searchM(num);
+		if (cat == "NGC") return searchNGC(num);
+		if (cat == "IC") return searchIC(num);
 	}
-
-	if ( ! catfound ) { 
-		return NULL;
-	}
-
-	istringstream ss(n); 
-	ss >> num;
-	if ( ss.fail() ) {
-		return NULL;
-	}
-	
-	if (cat == "M") return searchM(num);
-	if (cat == "NGC") return searchNGC(num);
-	if (cat == "IC") return searchIC(num);
-	// if (cat == "UGC") return searchUGC(num);
 	return NULL;
 }
 
@@ -375,54 +353,62 @@ Nebula *NebulaMgr::searchIC(unsigned int IC)
 // read from stream
 bool NebulaMgr::loadNGC(const QString& catNGC)
 {
-	char recordstr[512];
-	unsigned int i;
-	unsigned int data_drop;
-
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
-	
-	cout << "Loading NGC data... ";
-	FILE * ngcFile = fopen(QFile::encodeName(catNGC).constData(),"rb");
-	if (!ngcFile)
-	{
-		qWarning() << "NGC data file " << catNGC << " not found";
+	QFile in(catNGC);
+	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 		return false;
+
+	int totalRecords=0;
+	QString record;
+	// HERE
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	while (!in.atEnd()) 
+	{
+		record = in.readLine();
+		if (!commentRx.exactMatch(record))
+			totalRecords++;
 	}
 
-	// read the number of lines
-	unsigned int catalogSize = 0;
-	while (fgets(recordstr,512,ngcFile)) catalogSize++;
-	rewind(ngcFile);
+	// rewind the file to the start
+	in.seek(0);
 
-	// Read the NGC entries
-	i = 0;
-	data_drop = 0;
-	while (fgets(recordstr,512,ngcFile)) // temporary for testing
+	int currentLineNumber = 0;	// what input line we are on
+	int currentRecordNumber = 0;	// what record number we are on
+	int readOk = 0;			// how many records weree rad without problems
+	while (!in.atEnd())
 	{
-		if (!(i%200) || (i == catalogSize-1))
+		record = in.readLine();
+		++currentLineNumber;
+
+		// skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		++currentRecordNumber;
+
+		// Update the status bar every 200 record 
+		if (!(currentRecordNumber%200) || (currentRecordNumber == totalRecords))
 		{
-			// Draw loading bar
-			lb.SetMessage(q_("Loading NGC catalog: %1/%2").arg((i == catalogSize-1 ? catalogSize : i))
-			                                                   .arg(catalogSize));
-			lb.Draw((float)i/catalogSize);
+			lb.SetMessage(q_("Loading NGC catalog: %1/%2").arg(currentRecordNumber).arg(totalRecords));
+			lb.Draw((float)currentRecordNumber/totalRecords);
 		}
+
+		// Create a new Nebula record
 		Nebula *e = new Nebula;
-		if (!e->readNGC(recordstr)) // reading error
+		if (!e->readNGC((char*)record.toLocal8Bit().data())) // reading error
 		{
 			delete e;
 			e = NULL;
-			data_drop++;
 		}
 		else
 		{
 			neb_array.push_back(e);
 			nebGrid.insert(e);
+			++readOk;
 		}
-		i++;
 	}
-	fclose(ngcFile);
-	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-    //printf("Grid depth = %d\n", nebGrid.depth());
+	in.close();
+	qDebug() << "Loaded " << readOk << "/" << totalRecords << " NGC records";
 	return true;
 }
 
@@ -529,6 +515,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 
 		in.reset();
 		inFile.seek(0);
+
 		int currentRecord = 0;
 		int currentLineNumber = 0;
 		int readOk = 0;
@@ -581,6 +568,8 @@ bool NebulaMgr::loadTextures(const QString& setName)
 			}
 	
 		}
+		inFile.close();
+
 		qDebug() << " ... successfully read " << readOk << " of " << totalRecords << " nebula textures";
 		return true;	
 	}

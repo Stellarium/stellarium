@@ -168,7 +168,7 @@ public slots:
 private:
 	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
-	StelObject* search(const string& name);
+	StelObject* search(const QString& name);
 	
 	//! Load a set of nebula images.
 	//! Each sub-directory of the INSTALLDIR/nebulae directory contains a set of
