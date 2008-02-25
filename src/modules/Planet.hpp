@@ -21,7 +21,6 @@
 #define _PLANET_HPP_
 
 #include <list>
-#include <string>
 #include <QString>
 
 #include "StelObject.hpp"
@@ -106,7 +105,7 @@ public:
 	double getSiderealDay(void) const {return re.period;}
 
 	// Return the information string "ready to print" :)
-	wstring getSkyLabel(const Navigator * nav) const;
+	QString getSkyLabel(const Navigator * nav) const;
 	QString getInfoString(const Navigator * nav) const;
 	QString getShortInfoString(const Navigator * nav) const;
 	double getCloseViewFov(const Navigator * nav) const;
