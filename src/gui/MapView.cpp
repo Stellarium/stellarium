@@ -136,13 +136,11 @@ void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	if (view->getScale() < cityZoom && !selected) 
 	{
 		// If the city is not visible, we can't select it either
-		// setEnabled(false);
 		setAcceptsHoverEvents(false);
 		setAcceptedMouseButtons(0);
 		return;
 	}
 	// If the city is visible we can select it with the mouse
-	// setEnabled(true);
 	setAcceptsHoverEvents(true);
 	setAcceptedMouseButtons(Qt::LeftButton);
 	// We scale the city so that the selection shape stays the same
@@ -172,17 +170,14 @@ void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 void CityItem::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
 	selected = true;
-	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
-	cityName->setText(city->getName());
-	cityName->update();
+	view->highlightCity(city);
 	view->update();
 }
 
 void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
 	selected = false;
-	QLabel* cityName = view->parent()->findChild<QLabel*>("cursorLabel");
-	cityName->setText("");
+	view->highlightCity(0);
 	view->update();
 }
 
@@ -258,25 +253,30 @@ void MapView::populate(const QString& filename)
 
 void MapView::select(const City* city)
 {
-	select(city->getLongitude(), city->getLatitude());
-	QLabel* label = parent()->findChild<QLabel*>("selectedLabel");
-	label->setText(city->getName());
+	// Set the pointeur to the position
+	pointeurPos = QPointF(city->getLongitude(), -city->getLatitude());
 	update();
+	emit(positionSelected(city->getLongitude(), city->getLatitude(), city->getName()));
 }
 
 void MapView::select(float longitude, float latitude)
 {
-	// Set the longitude
-	LongitudeSpinBox* longitudeSpinBox = parent()->findChild<LongitudeSpinBox*>("longitudeSpinBox");
-	assert(longitudeSpinBox);
-	longitudeSpinBox->setValue(longitude);
-	// Set the latitude
-	LatitudeSpinBox* latitudeSpinBox = parent()->findChild<LatitudeSpinBox*>("latitudeSpinBox");
-	assert(latitudeSpinBox);
-	latitudeSpinBox->setValue(latitude);
 	// Set the pointeur to the position
 	pointeurPos = QPointF(longitude, -latitude);
 	update();
+	emit(positionSelected(longitude, latitude, ""));
+}
+
+void MapView::highlightCity(const City* city)
+{
+	if (city == 0)
+	{
+		emit(positionHighlighted(0, 0, ""));
+	}
+	else
+	{
+		emit(positionHighlighted(city->getLongitude(), city->getLatitude(), city->getName()));
+	}
 }
 
 void MapView::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[], const QStyleOptionGraphicsItem options[])
