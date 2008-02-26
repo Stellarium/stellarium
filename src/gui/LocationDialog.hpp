@@ -29,9 +29,14 @@ class LocationDialog : public QObject
 Q_OBJECT
 public:
 	LocationDialog();
+	virtual ~LocationDialog();
 public slots:
 	void setVisible(bool);
 	void close();
+	//! Called when the mapView emit the positionSelected signal
+	void selectPosition(float longitude, float latitude, QString city);
+	//! Called when the mapView emit the positionHighlighted signal
+	void highlightPosition(float longitude, float latitude, QString city);
 signals:
 	void closed();
 protected:
