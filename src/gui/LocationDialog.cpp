@@ -30,6 +30,11 @@ LocationDialog::LocationDialog() : dialog(0)
 	ui = new Ui_locationDialogForm;
 }
 
+LocationDialog::~LocationDialog()
+{
+	delete ui;
+}
+
 void LocationDialog::close()
 {
 	emit closed();
@@ -47,6 +52,10 @@ void LocationDialog::setVisible(bool v)
 		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
 		connect(ui->selectionModeComboBox, SIGNAL(currentIndexChanged(int)),
 				ui->graphicsView, SLOT(setSelectionMode(int)));
+		connect(ui->graphicsView, SIGNAL(positionSelected(float, float, QString)),
+				this, SLOT(selectPosition(float, float, QString)));
+		connect(ui->graphicsView, SIGNAL(positionHighlighted(float, float, QString)),
+				this, SLOT(highlightPosition(float, float, QString)));
 	}
 	else
 	{
@@ -54,3 +63,20 @@ void LocationDialog::setVisible(bool v)
 		dialog = 0;
 	}
 }
+
+void LocationDialog::selectPosition(float longitude, float latitude, QString city)
+{
+	// Set the longitude
+	ui->longitudeSpinBox->setValue(longitude);
+	// Set the latitude
+	ui->latitudeSpinBox->setValue(latitude);
+	// Set the city name
+	ui->selectedLabel->setText(city);
+}
+
+void LocationDialog::highlightPosition(float longitude, float latitude, QString city)
+{
+	ui->cursorLabel->setText(city);
+	ui->cursorLabel->update();
+}
+

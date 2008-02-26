@@ -61,6 +61,15 @@ public:
 	void select(const City* city);
 	//! Select a position
 	void select(float longitude, float latitude);
+	//! Highlight a city (0) if unhighlighted
+	void highlightCity(const City* city);
+signals:
+	//! Signal emitted when we select a new location
+	//! If no city is selected we set city to the empty string
+	void positionSelected(float longitude, float latitude, QString city);
+	//! Signal emitted when we move over a city
+	//! When we move out we emmit the same signal with city set to the empty string
+	void positionHighlighted(float longitude, float latitude, QString city);
 public slots:
 	//! Set the selection mode
 	void setSelectionMode(int mode);
