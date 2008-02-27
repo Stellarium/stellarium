@@ -60,22 +60,15 @@ QString StarWrapperBase::getInfoString(const Navigator *nav) const {
 
 QString StarWrapperBase::getShortInfoString(const Navigator *nav) const
 {
-	QString str;
-	QTextStream oss(&str);
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(2);
-	oss << q_("Magnitude: ") << getMagnitude(nav);
-	return str;
+	return q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2);
 }
 
 
 QString StarWrapper1::getEnglishName(void) const {
-  if (s->hip) {
-    char buff[64];
-    sprintf(buff,"HP %d",s->hip);
-    return buff;
-  }
-  return StarWrapperBase::getEnglishName();
+	if (s->hip) {
+		return QString("HP %1").arg(s->hip);
+	}
+	return StarWrapperBase::getEnglishName();
 }
 
 QString StarWrapper1::getInfoString(const Navigator *nav) const {
@@ -89,20 +82,20 @@ QString StarWrapper1::getInfoString(const Navigator *nav) const {
   QTextStream oss(&str);
   if (s->hip)
   {
-    const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
-    const wstring sciName = StarMgr::getSciName(s->hip);
-    if (commonNameI18!=L"" || sciName!=L"")
-	{
-		oss << QString::fromStdWString(commonNameI18) << (commonNameI18 == L"" ? "" : " ");
-		if (commonNameI18!=L"" && sciName!=L"") oss << "(";
-		oss << (sciName==L"" ? "" : QString::fromStdWString(sciName));
-		if (commonNameI18!=L"" && sciName!=L"") oss << ")";
-		oss << endl;
+    const QString commonNameI18 = StarMgr::getCommonName(s->hip);
+    const QString sciName = StarMgr::getSciName(s->hip);
+    if (commonNameI18!="" || sciName!="")
+    {
+      oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
+      if (commonNameI18!="" && sciName!="") oss << "(";
+        oss << (sciName=="" ? "" : sciName);
+      if (commonNameI18!="" && sciName!="") oss << ")";
+        oss << endl;
     }
     oss << "HP " << s->hip;
     if (s->component_ids)
 	{
-		oss << " " << StarMgr::convertToComponentIds(s->component_ids).c_str();
+		oss << " " << StarMgr::convertToComponentIds(s->component_ids);
     }
     oss << endl;
   }
@@ -135,7 +128,7 @@ QString StarWrapper1::getInfoString(const Navigator *nav) const {
 
   if (s->sp_int)
   {
-    oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int).c_str() << endl;
+    oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int) << endl;
   }
   return str;
 }
@@ -147,20 +140,20 @@ QString StarWrapper1::getShortInfoString(const Navigator *nav) const
 	QTextStream oss(&str);
 	if (s->hip)
 	{
-		const wstring commonNameI18 = StarMgr::getCommonName(s->hip);
-		const wstring sciName = StarMgr::getSciName(s->hip);
-		if (commonNameI18!=L"" || sciName!=L"")
+		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
+		const QString sciName = StarMgr::getSciName(s->hip);
+		if (commonNameI18!="" || sciName!="")
 		{
-			oss << QString::fromStdWString(commonNameI18) << (commonNameI18 == L"" ? "" : " ");
-			if (commonNameI18!=L"" && sciName!=L"") oss << "(";
-			oss << (sciName==L"" ? "" : QString::fromStdWString(sciName));
-			if (commonNameI18!=L"" && sciName!=L"") oss << ")";
+			oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
+			if (commonNameI18!="" && sciName!="") oss << "(";
+			oss << (sciName=="" ? "" : sciName);
+			if (commonNameI18!="" && sciName!="") oss << ")";
 			oss << "  ";
 		}
 		oss << "HP " << s->hip;
 		if (s->component_ids)
 		{
-			oss << " " << StarMgr::convertToComponentIds(s->component_ids).c_str();
+			oss << " " << StarMgr::convertToComponentIds(s->component_ids);
 		}
 		oss << "  ";
 	}
@@ -177,7 +170,7 @@ QString StarWrapper1::getShortInfoString(const Navigator *nav) const
 	
 	if (s->sp_int)
 	{
-		oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int).c_str();
+		oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int);
 	}
 	return str;
 }
