@@ -19,6 +19,7 @@
 
 #include <QWheelEvent>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsSceneMouseEvent>
 #include <QGraphicsItem>
 #include <QLabel>
 #include <QFile>
@@ -110,6 +111,7 @@ public:
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 };
 
 QPen CityItem::pen(QColor(255,0,0));
@@ -182,6 +184,10 @@ void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 }
 
 void CityItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+}
+
+void CityItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	view->select(city);
 }
@@ -257,6 +263,7 @@ void MapView::select(const City* city)
 	pointeurPos = QPointF(city->getLongitude(), -city->getLatitude());
 	update();
 	emit(positionSelected(city->getLongitude(), city->getLatitude(), city->getName()));
+	justSelected = true;
 }
 
 void MapView::select(float longitude, float latitude)
@@ -293,31 +300,40 @@ void MapView::drawItems(QPainter* painter, int numItems, QGraphicsItem* items[],
 
 void MapView::mousePressEvent(QMouseEvent * event)
 {
-	if(event->modifiers() & Qt::ShiftModifier)
+	QGraphicsView::mousePressEvent(event);
+}
+
+void MapView::mouseMoveEvent(QMouseEvent * event)
+{
+	if (dragMode() == ScrollHandDrag)
+	{
+		return QGraphicsView::mouseMoveEvent(event);
+	}
+	if (event->buttons() & Qt::LeftButton)
 	{
 		setDragMode(ScrollHandDrag);
 		setInteractive(false);
+		mousePressEvent(new QMouseEvent(QEvent::MouseButtonPress, event->pos(), Qt::LeftButton, event->buttons(), event->modifiers()));
 	}
-	else if (selectionMode == SELECT_POSITIONS)
-	{
-		QPointF pos = mapToScene(event->pos());
-		select(pos.x(), -pos.y());
-		return;
-	}
-	QGraphicsView::mousePressEvent(event);
+	QGraphicsView::mouseMoveEvent(event);
 }
 
 void MapView::mouseReleaseEvent(QMouseEvent * event)
 {
+	justSelected = false;
 	QGraphicsView::mouseReleaseEvent(event);
-	setDragMode(NoDrag);
-	setInteractive(true);
-}
 
+	if (dragMode() == ScrollHandDrag)
+	{
+		setDragMode(NoDrag);
+		setInteractive(true);
+		return;
+	}
 
-void MapView::setSelectionMode(int mode)
-{
-	selectionMode = (SelectionMode)mode;
+	if (justSelected) return;
+
+	QPointF pos = mapToScene(event->pos());
+	select(pos.x(), -pos.y());
 }
 
 
