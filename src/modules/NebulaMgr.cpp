@@ -19,7 +19,6 @@
 
 // class used to manage groups of Nebulas
 
-#include <fstream>
 #include <algorithm>
 #include <QDebug>
 #include <QFile>
@@ -415,26 +414,32 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 
 bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 {
-	char recordstr[512];
-	cout << "Loading NGC name data...";
-	FILE * ngcNameFile = fopen(QFile::encodeName(catNGCNames).constData(),"rb");
-	if (!ngcNameFile)
+	qDebug() << "Loading NGC name data ...";
+	QFile ngcNameFile(catNGCNames);
+	if (!ngcNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "NGC name data file " << catNGCNames << " not found.";
 		return false;
 	}
 
 	// Read the names of the NGC objects
-	int i = 0;
-	char n[40];
-	int nb, k;
+	QString name, record;
+	int totalRecords=0;
+	int lineNumber=0;
+	int readOk=0;
+	int nb;
 	Nebula *e;
-
-	while (fgets(recordstr,512,ngcNameFile))
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	while (!ngcNameFile.atEnd())
 	{
-
-		sscanf(&recordstr[38],"%d",&nb);
-		if (recordstr[37] == 'I')
+		record = ngcNameFile.readLine();
+		lineNumber++;
+		if (commentRx.exactMatch(record))
+			continue;
+	
+		totalRecords++;
+		nb = record.mid(38,4).toInt();
+		if (record[37] == 'I')
 		{
 			e = (Nebula*)searchIC(nb);
 		}
@@ -443,46 +448,43 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 			e = (Nebula*)searchNGC(nb);
 		}
 
-		strncpy(n, recordstr, 36);
-		// trim the white spaces at the back
-		n[36] = '\0';
-		k = 36;
-		while (n[--k] == ' ' && k >= 0)
-		{
-			n[k] = '\0';
-		}
+		// get name, trimmed of whitespace
+		name = record.left(36).trimmed();
 		
 		if (e)
 		{
 			// If the name is not a messier number perhaps one is already
 			// defined for this object
-			if (strncmp(n, "M ",2))
+			if (name.left(2).toUpper() != "M ")
 			{
-				e->englishName = n;
+				e->englishName = name;
 			}
-
-			// If it's a messiernumber, we will call it a messier if there is no better name
-			if (!strncmp(n, "M ",2))
+			else
 			{
-				istringstream iss(string(n).substr(1));  // remove the 'M'
-				ostringstream oss;
+				// If it's a messiernumber, we will call it a messier if there is no better name
+				name = name.mid(2); // remove "M "
 
+				// read the Messier number
+				QTextStream istr(&name);
 				int num;
+				istr >> num;
+				if (istr.status()!=QTextStream::Ok)
+				{
+					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << catNGCNames;
+					continue;
+				}
 
-				// Let us keep the right number in the Messier catalog
-				iss >> num;
 				e->M_nb=(unsigned int)(num);
-				
-				oss << "M" << num;
-				e->englishName = QString::fromStdString(oss.str());
+				e->englishName = QString("M%1").arg(num);
 			}
+
+			readOk++;
 		}
 		else
-			cerr << endl << "...no position data for " << n;
-		i++;
+			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << catNGCNames;
 	}
-	fclose(ngcNameFile);
-	cout << "( " << i << " names loaded)" << endl;
+	ngcNameFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC name records successfully";
 
 	return true;
 }
