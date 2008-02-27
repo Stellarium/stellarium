@@ -47,8 +47,8 @@ protected:
     QPointF pointeurPos;
     //! The list of all the cities in the map
     QList<City> cities;
-    //! The selection mode
-    SelectionMode selectionMode;
+    //! Set to true just after we select a new position
+    bool justSelected;
 public:
 	//! Get the scale at wich we are seeing the map
 	float getScale() const {return matrix().m11();}
@@ -56,6 +56,7 @@ public:
 	virtual void wheelEvent(QWheelEvent * event);
 	virtual void mousePressEvent(QMouseEvent * event);
 	virtual void mouseReleaseEvent(QMouseEvent * event);
+	virtual void mouseMoveEvent(QMouseEvent * event);
 	~MapView();
 	//! Select a city
 	void select(const City* city);
@@ -70,9 +71,6 @@ signals:
 	//! Signal emitted when we move over a city
 	//! When we move out we emmit the same signal with city set to the empty string
 	void positionHighlighted(float longitude, float latitude, QString city);
-public slots:
-	//! Set the selection mode
-	void setSelectionMode(int mode);
 protected:
 	//! Add all the cities into the scene
 	void populate(const QString& filename = "data/cities_Earth.fab");
