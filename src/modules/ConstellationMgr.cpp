@@ -267,7 +267,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd()) 
 	{
-		record = in.readLine();
+		record = QString::fromUtf8(in.readLine());
 		if (!commentRx.exactMatch(record))
 			totalRecords++;
 	}
@@ -287,7 +287,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	int readOk = 0;			// count of records processed OK
 	while (!in.atEnd()) 
 	{
-		record = in.readLine();
+		record = QString::fromUtf8(in.readLine());
 		currentLineNumber++;
 		if (commentRx.exactMatch(record))
 			continue;
@@ -324,7 +324,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	totalRecords=0;
 	while (!fic.atEnd()) 
 	{
-		record = fic.readLine();
+		record = QString::fromUtf8(fic.readLine());
 		if (!commentRx.exactMatch(record))
 			totalRecords++;
 	}
@@ -351,7 +351,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	while (!fic.atEnd()) 
 	{
 		++currentLineNumber;
-		record = fic.readLine();
+		record = QString::fromUtf8(fic.readLine());
 		if (commentRx.exactMatch(record))
 			continue;
 
@@ -574,7 +574,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	int lineNumber=0;
 	while (!commonNameFile.atEnd()) 
 	{
-		record = commonNameFile.readLine();
+		record = QString::fromUtf8(commonNameFile.readLine());
 		lineNumber++;
 
 		// Skip comments

@@ -22,11 +22,6 @@
 
 #include <vector>
 #include <map>
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <cstdlib>
-#include <cstdio>
 #include "Fader.hpp"
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
@@ -179,7 +174,7 @@ public:
 	//! @param id the catalogue identifier for the required star.
 	//! @return the requested StelObjectP or an empty objecy if the requested
 	//! one was not found.
-	StelObjectP search(const string& id) const;
+	StelObjectP search(const QString& id) const;
 	
 	//! Search bu Hipparcos catalogue number.
 	//! @param num the Hipparcos catalogue number of the star which is required.
@@ -189,11 +184,11 @@ public:
 	
 	//! Get the (translated) common name for a star with a specified 
 	//! Hipparcos catalogue number.
-	static wstring getCommonName(int hip);
+	static QString getCommonName(int hip);
 	
 	//! Get the (translated) scientific name for a star with a specified 
 	//! Hipparcos catalogue number.
-	static wstring getSciName(int hip);
+	static QString getSciName(int hip);
 	
 	// TODO: the StarMgr it self should call core()->getGeodesicGrid()->setMaxlevel etc..
 	//! Get the maximum level of the geodesic sphere used.
@@ -204,8 +199,8 @@ public:
 	
 	static double getCurrentJDay(void) {return current_JDay;}
 	
-	static string convertToSpectralType(int index);
-	static string convertToComponentIds(int index);
+	static QString convertToSpectralType(int index);
+	static QString convertToComponentIds(int index);
 	
 private:
 	
@@ -257,13 +252,13 @@ private:
 	
 	BigStarCatalogExtension::HipIndexStruct *hip_index; // array of hiparcos stars
 	
-	static map<int, string> common_names_map;
-	static map<int, wstring> common_names_map_i18n;
-	static map<string, int> common_names_index;
-	static map<wstring, int> common_names_index_i18n;
+	static map<int, QString> common_names_map;
+	static map<int, QString> common_names_map_i18n;
+	static map<QString, int> common_names_index;
+	static map<QString, int> common_names_index_i18n;
 	
-	static map<int, wstring> sci_names_map_i18n;
-	static map<wstring, int> sci_names_index_i18n;
+	static map<int, QString> sci_names_map_i18n;
+	static map<QString, int> sci_names_index_i18n;
 
 	static double current_JDay;
 	
