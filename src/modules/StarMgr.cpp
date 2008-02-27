@@ -56,11 +56,9 @@
 #include "ZoneArray.hpp"
 #include "StringArray.hpp"
 
-#include <string>
 #include <list>
 
 #include <errno.h>
-#include <string.h>
 #include <unistd.h>
 
 using namespace BigStarCatalogExtension;
@@ -68,28 +66,23 @@ using namespace BigStarCatalogExtension;
 static StringArray spectral_array;
 static StringArray component_array;
 
-string StarMgr::convertToSpectralType(int index) {
+QString StarMgr::convertToSpectralType(int index) {
   if (index < 0 || index >= spectral_array.getSize()) {
-    cout << "convertToSpectralType: bad index: " << index
-         << ", max: " << spectral_array.getSize() << endl;
+    qDebug() << "convertToSpectralType: bad index: " << index
+             << ", max: " << spectral_array.getSize();
     return "";
   }
   return spectral_array[index];
 }
 
-string StarMgr::convertToComponentIds(int index) {
+QString StarMgr::convertToComponentIds(int index) {
   if (index < 0 || index >= component_array.getSize()) {
-    cout << "convertToComponentIds: bad index: " << index
-         << ", max: " << component_array.getSize() << endl;
+    qDebug() << "convertToComponentIds: bad index: " << index
+             << ", max: " << component_array.getSize();
     return "";
   }
   return component_array[index];
 }
-
-
-
-
-
 
 
 
@@ -142,24 +135,24 @@ StarMgr::~StarMgr(void) {
 
 bool StarMgr::flagSciNames = true;
 double StarMgr::current_JDay = 0;
-map<int,string> StarMgr::common_names_map;
-map<int,wstring> StarMgr::common_names_map_i18n;
-map<string,int> StarMgr::common_names_index;
-map<wstring,int> StarMgr::common_names_index_i18n;
+map<int,QString> StarMgr::common_names_map;
+map<int,QString> StarMgr::common_names_map_i18n;
+map<QString,int> StarMgr::common_names_index;
+map<QString,int> StarMgr::common_names_index_i18n;
 
-map<int,wstring> StarMgr::sci_names_map_i18n;
-map<wstring,int> StarMgr::sci_names_index_i18n;
+map<int,QString> StarMgr::sci_names_map_i18n;
+map<QString,int> StarMgr::sci_names_index_i18n;
 
-wstring StarMgr::getCommonName(int hip) {
-  map<int,wstring>::const_iterator it(common_names_map_i18n.find(hip));
+QString StarMgr::getCommonName(int hip) {
+  map<int,QString>::const_iterator it(common_names_map_i18n.find(hip));
   if (it!=common_names_map_i18n.end()) return it->second;
-  return L"";
+  return "";
 }
 
-wstring StarMgr::getSciName(int hip) {
-  map<int,wstring>::const_iterator it(sci_names_map_i18n.find(hip));
+QString StarMgr::getSciName(int hip) {
+  map<int,QString>::const_iterator it(sci_names_map_i18n.find(hip));
   if (it!=sci_names_map_i18n.end()) return it->second;
-  return L"";
+  return "";
 }
 
 
@@ -231,7 +224,7 @@ void StarMgr::load_data()
 	// Please do not init twice:
 	assert(max_geodesic_grid_level < 0);
 
-	cout << "Loading star data..." << endl;
+	qDebug() << "Loading star data ...";
 
 	QString iniFile;
 	try
@@ -253,9 +246,9 @@ void StarMgr::load_data()
 				         
 	for (int i=0; i<100; i++)
 	{
-		char key_name[64];
-		sprintf(key_name,"cat_file_name_%02d",i);
-		const QString cat_file_name = conf.value(QString("stars/")+key_name,"").toString();
+		//sprintf(key_name,"cat_file_name_%02d",i);
+		QString keyName = QString("cat_file_name_%1").arg(i,2,10,QChar('0'));
+		const QString cat_file_name = conf.value(QString("stars/")+keyName,"").toString();
 		if (!cat_file_name.isEmpty()) {
 			lb.SetMessage(q_("Loading catalog %1").arg(cat_file_name));
 			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
@@ -268,8 +261,7 @@ void StarMgr::load_data()
 				ZoneArray *&pos(zone_arrays[z->level]);
 				if (pos)
 				{
-					cerr << qPrintable(cat_file_name) << ", " << z->level
-						 << ": duplicate level" << endl;
+					qDebug() << cat_file_name << ", " << z->level << ": duplicate level";
 					delete z;
 				}
 				else
@@ -295,7 +287,7 @@ void StarMgr::load_data()
 	const QString cat_hip_sp_file_name = conf.value("stars/cat_hip_sp_file_name","").toString();
 	if (cat_hip_sp_file_name.isEmpty())
 	{
-		cerr << "ERROR: stars:cat_hip_sp_file_name not found" << endl;
+		qWarning() << "ERROR: stars:cat_hip_sp_file_name not found";
 	}
 	else
 	{
@@ -306,15 +298,15 @@ void StarMgr::load_data()
 		catch (exception& e)
 		{
 			qWarning() << "ERROR while loading data from "
-			     << ("stars/default/" + cat_hip_sp_file_name)
-		    	 << ": " << e.what();
+			           << ("stars/default/" + cat_hip_sp_file_name)
+			           << ": " << e.what();
 		}
 	}
 
 	const QString cat_hip_cids_file_name = conf.value("stars/cat_hip_cids_file_name","").toString();
 	if (cat_hip_cids_file_name.isEmpty())
 	{
-		cerr << "ERROR: stars:cat_hip_cids_file_name not found" << endl;
+		qWarning() << "ERROR: stars:cat_hip_cids_file_name not found";
 	}
 	else
 	{
@@ -326,119 +318,170 @@ void StarMgr::load_data()
 		catch (exception& e)
 		{
 			qWarning() << "ERROR while loading data from "
-			     << ("stars/default/" + cat_hip_cids_file_name)
-		    	 << ": " << e.what() << endl;
+			           << ("stars/default/" + cat_hip_cids_file_name)
+			           << ": " << e.what();
 		}
 	}
 
 	last_max_search_level = max_geodesic_grid_level;
-	cout << "finished, max_geodesic_level: " << max_geodesic_grid_level << endl;
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << max_geodesic_grid_level;
 }
 
 // Load common names from file 
 int StarMgr::load_common_names(const QString& commonNameFile) {
-  common_names_map.clear();
-  common_names_map_i18n.clear();
-  common_names_index.clear();
-  common_names_index_i18n.clear();
+	common_names_map.clear();
+	common_names_map_i18n.clear();
+	common_names_index.clear();
+	common_names_index_i18n.clear();
 
-  cout << "Loading star names from " << qPrintable(commonNameFile) << endl;
+	qDebug() << "Loading star names from" << commonNameFile;
+	QFile cnFile(commonNameFile);
+	if (!cnFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << commonNameFile;
+		return 0;
+	}
 
-  FILE *cnFile;
-  cnFile=fopen(QFile::encodeName(commonNameFile).constData(),"r");
-  if (!cnFile)
-  {
-	  cerr << "Warning " << qPrintable(commonNameFile) << " not found." << endl;
-    return 0;
-  }
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	QString record;
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	// record structure is delimited with a | character.  We will
+	// use a QRegExp to extract the fields. with whitespace padding permitted 
+	// (i.e. it will be stripped automatically) Example record strings:
+	// " 10819|c_And"
+	// "113726|1_And"
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|(.*)\\n");
 
-  // Assign names to the matching stars, now support spaces in names
-  char line[256];
-  while (fgets(line, sizeof(line), cnFile)) {
-    line[sizeof(line)-1] = '\0';
-    unsigned int hip;
-    if (sscanf(line,"%u",&hip)!=1) {
-		cerr << "ERROR: StarMgr::load_common_names(" << qPrintable(commonNameFile)
-           << "): bad line: \"" << line << '"' << endl;
-      qFatal("Error while loading star common names.");
-    }
-    unsigned int i = 0;
-    while (line[i]!='|' && i<sizeof(line)-2) ++i;
-    i++;
-    QString englishCommonName =  line+i;
-    // remove newline
-    englishCommonName.chop(1);
+	while(!cnFile.atEnd())
+	{
+		record = QString::fromUtf8(cnFile.readLine());
+		lineNumber++;
+		if (commentRx.exactMatch(record))
+			continue;
 
-//cout << hip << ": \"" << englishCommonName << '"' << endl;
+		totalRecords++;
+		if (!recordRx.exactMatch(record))
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
+				continue;
+			}
+			QString englishCommonName = recordRx.capturedTexts().at(2).trimmed();
+			if (englishCommonName.isEmpty())
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile 
+					   << " - empty name field";
+				continue;
+			}
 
-    // remove underscores
-    englishCommonName.replace(QChar('_'), "_");
-    const wstring commonNameI18n = q_(englishCommonName).toStdWString();
-    wstring commonNameI18n_cap = commonNameI18n;
-    transform(commonNameI18n.begin(), commonNameI18n.end(),
-              commonNameI18n_cap.begin(), ::toupper);
+			englishCommonName.replace('_', ' ');
+			const QString commonNameI18n = q_(englishCommonName);
+			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
-    common_names_map[hip] = englishCommonName.toStdString();
-    common_names_index[englishCommonName.toStdString()] = hip;
-    common_names_map_i18n[hip] = commonNameI18n;
-    common_names_index_i18n[commonNameI18n_cap] = hip;
-  }
+			common_names_map[hip] = englishCommonName;
+			common_names_index[englishCommonName] = hip;
+			common_names_map_i18n[hip] = commonNameI18n;
+			common_names_index_i18n[commonNameI18n_cap] = hip;
+			readOk++;
+		}
+	}
+	cnFile.close();
 
-  fclose(cnFile);
-  return 1;
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "common star names";
+	return 1;
 }
 
 
 // Load scientific names from file 
 void StarMgr::load_sci_names(const QString& sciNameFile)
 {
-  sci_names_map_i18n.clear();
-  sci_names_index_i18n.clear();
+	sci_names_map_i18n.clear();
+	sci_names_index_i18n.clear();
 
-  cout << "Loading star sci names from " << qPrintable(sciNameFile) << endl;
-
-  FILE *snFile;
-  snFile=fopen(QFile::encodeName(sciNameFile).constData(),"r");
-  if (!snFile)
-  {
-	cerr << "Warning " << qPrintable(sciNameFile) << " not found." << endl;
-	return;
+	qDebug() << "Loading star names from" << sciNameFile;
+	QFile snFile(sciNameFile);
+	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << sciNameFile;
+		return;
 	}
 
-  // Assign names to the matching stars, now support spaces in names
-  char line[256];
-  while (fgets(line, sizeof(line), snFile)) {
-    line[sizeof(line)-1] = '\0';
-    unsigned int hip;
-    if (sscanf(line,"%u",&hip)!=1) {
-		cerr << "ERROR: StarMgr::load_sci_names(" << qPrintable(sciNameFile)
-           << "): bad line: \"" << line << '"' << endl;
-		qFatal("Error while loading star sci names.");
-    }
-	if (sci_names_map_i18n.find(hip)!=sci_names_map_i18n.end())
-		continue;
-    unsigned int i = 0;
-    while (line[i]!='|' && i<sizeof(line)-2) ++i;
-    i++;
-    char *tempc = line+i;
-    string sci_name = tempc;
-    sci_name.erase(sci_name.length()-1, 1);
-    wstring sci_name_i18n = StelUtils::stringToWstring(sci_name);
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	QString record;
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	// record structure is delimited with a | character.  We will
+	// use a QRegExp to extract the fields. with whitespace padding permitted 
+	// (i.e. it will be stripped automatically) Example record strings:
+	// " 10819|c_And"
+	// "113726|1_And"
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|(.*)\\n");
 
-    // remove underscores
-    for (wstring::size_type j=0;j<sci_name_i18n.length();++j) {
-      if (sci_name_i18n[j]==L'_') sci_name_i18n[j]=L' ';
-    }
+	while(!snFile.atEnd())
+	{
+		record = QString::fromUtf8(snFile.readLine());
+		lineNumber++;
+		if (commentRx.exactMatch(record))
+			continue;
 
-    wstring sci_name_i18n_cap = sci_name_i18n;
-    transform(sci_name_i18n.begin(), sci_name_i18n.end(),
-              sci_name_i18n_cap.begin(), ::toupper);
-    
-    sci_names_map_i18n[hip] = sci_name_i18n;
-    sci_names_index_i18n[sci_name_i18n_cap] = hip;
-  }
+		totalRecords++;
+		if (!recordRx.exactMatch(record))
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
+				continue;
+			}
 
-  fclose(snFile);
+			// Don't set the sci name if it's already set
+			if (sci_names_map_i18n.find(hip)!=sci_names_map_i18n.end())
+			{
+				//qWarning() << "WARNING - duplicate name for HP" << hip << "at line" 
+				//           << lineNumber << "in" << sciNameFile << "SKIPPING";
+				continue;
+			}
+
+			QString sci_name_i18n = recordRx.capturedTexts().at(2).trimmed();
+			if (sci_name_i18n.isEmpty())
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile 
+					   << " - empty name field";
+				continue;
+			}
+
+			sci_name_i18n.replace('_',' ');
+			QString sci_name_i18n_cap = sci_name_i18n.toUpper();
+			sci_names_map_i18n[hip] = sci_name_i18n;
+			sci_names_index_i18n[sci_name_i18n_cap] = hip;
+			readOk++;
+		}
+	}
+	snFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
 }
 
 
@@ -641,51 +684,42 @@ void StarMgr::updateI18n() {
   Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   common_names_map_i18n.clear();
   common_names_index_i18n.clear();
-  for (map<int,string>::iterator it(common_names_map.begin());
+  for (map<int,QString>::iterator it(common_names_map.begin());
        it!=common_names_map.end();it++) {
     const int i = it->first;
-    const wstring t(trans.translate(QString::fromStdString(it->second)).toStdWString());
+    const QString t(trans.translate(it->second));
     common_names_map_i18n[i] = t;
-    wstring t_cap = t;
-    transform(t.begin(), t.end(), t_cap.begin(), ::toupper);
-    common_names_index_i18n[t_cap] = i;
+    common_names_index_i18n[t.toUpper()] = i;
   }
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 
-StelObjectP StarMgr::search(const string& name) const
+StelObjectP StarMgr::search(const QString& name) const
 {
-    const string catalogs("HP HD SAO");
+	// Use this QRegExp to extract the catalogue number and prefix
+	QRegExp catRx("^(HP|HD|SAO)\\s*(\\d+)$");
+	QString n = name.toUpper();
+	n.replace('_', ' ');
 
-    string n = name;
-    for (string::size_type i=0;i<n.length();++i)
-    {
-        if (n[i]=='_') n[i]=' ';
-    }    
-    
-    istringstream ss(n);
-    string cat;
-    unsigned int num;
-    
-    ss >> cat;
-    
-    // check if a valid catalog reference
-    if (catalogs.find(cat,0) == string::npos)
-    {
-        // try see if the string is a HP number
-        istringstream cat_to_num(cat);
-        cat_to_num >> num;
-        if (!cat_to_num.fail()) return searchHP(num);
-        return NULL;
-    }
-
-    ss >> num;
-    if (ss.fail()) return NULL;
-
-    if (cat == "HP") return searchHP(num);
-    assert(0);
-    return NULL;
+	if (catRx.exactMatch(n))
+	{
+		QString cat = catRx.capturedTexts().at(1);
+		if (cat=="HP")
+			return searchHP(catRx.capturedTexts().at(2).toInt());
+		else // currently we only support searching by string for HP catalogue
+			return NULL;
+	}
+	else 
+	{
+		// Maybe the HP prefix is missing and we just have a number...
+		bool ok;
+		int num = n.toInt(&ok);
+		if (!ok)
+			return NULL;
+		else
+			return searchHP(num);
+	}
 }    
 
 // Search the star by HP number
@@ -713,14 +747,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by I18n common name
-	map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw.toStdWString()));
+	map<QString,int>::const_iterator it(common_names_index_i18n.find(objw));
 	if (it!=common_names_index_i18n.end()) 
 	{
 		return searchHP(it->second);
 	}
 
 	// Search by sci name
-	it = sci_names_index_i18n.find(objw.toStdWString());
+	it = sci_names_index_i18n.find(objw);
 	if (it!=sci_names_index_i18n.end()) 
 	{
 		return searchHP(it->second);
@@ -744,14 +778,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	/* Should we try this anyway?
 	// Search by common name
-	map<wstring,int>::const_iterator it(common_names_index_i18n.find(objw));
+	map<QString,int>::const_iterator it(common_names_index_i18n.find(objw));
 
 	if (it!=common_names_index_i18n.end()) {
 		return searchHP(it->second);
 	} */
 
 	// Search by sci name
-	map<wstring,int>::const_iterator it = sci_names_index_i18n.find(objw.toStdWString());
+	map<QString,int>::const_iterator it = sci_names_index_i18n.find(objw);
 	if (it!=sci_names_index_i18n.end()) {
 		return searchHP(it->second);
 	}
@@ -769,14 +803,14 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (map<wstring,int>::const_iterator it(common_names_index_i18n.lower_bound(objw.toStdWString()));
+	for (map<QString,int>::const_iterator it(common_names_index_i18n.lower_bound(objw));
 	     it!=common_names_index_i18n.end();
 	     it++) 
 	{
-		const QString constw(QString::fromStdWString(it->first.substr(0,objw.size())));
+		const QString constw(it->first.mid(0,objw.size()));
 		if (constw==objw) {
 			if (maxNbItem==0) break;
-			result << QString::fromStdWString(getCommonName(it->second));
+			result << getCommonName(it->second);
 			maxNbItem--;
 		} 
 		else 
@@ -784,14 +818,14 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	// Search for sci names
-	for (map<wstring,int>::const_iterator it(sci_names_index_i18n.lower_bound(objw.toStdWString()));
+	for (map<QString,int>::const_iterator it(sci_names_index_i18n.lower_bound(objw));
 	     it!=sci_names_index_i18n.end();
 	     it++) 
 	{
-		const QString constw(QString::fromStdWString(it->first.substr(0,objw.size())));
+		const QString constw(it->first.mid(0,objw.size()));
 		if (constw==objw) {
 			if (maxNbItem==0) break;
-			result << QString::fromStdWString(getSciName(it->second));
+			result << getSciName(it->second);
 			maxNbItem--;
 		} 
 		else 

@@ -363,7 +363,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd()) 
 	{
-		record = in.readLine();
+		record = QString::fromUtf8(in.readLine());
 		if (!commentRx.exactMatch(record))
 			totalRecords++;
 	}
@@ -376,7 +376,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 	int readOk = 0;			// how many records weree rad without problems
 	while (!in.atEnd())
 	{
-		record = in.readLine();
+		record = QString::fromUtf8(in.readLine());
 		++currentLineNumber;
 
 		// skip comments
@@ -432,7 +432,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!ngcNameFile.atEnd())
 	{
-		record = ngcNameFile.readLine();
+		record = QString::fromUtf8(ngcNameFile.readLine());
 		lineNumber++;
 		if (commentRx.exactMatch(record))
 			continue;
@@ -504,6 +504,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 		}
 
 		QTextStream in(&inFile);
+		in.setCodec("UTF-8");
 		// count input lines (for progress bar)
 		int totalRecords = 0;
 		QString record;

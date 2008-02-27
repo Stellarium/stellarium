@@ -17,40 +17,39 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "StringArray.hpp"
-
-#include <list>
-#include <iostream>
+#include <cstdlib>
+#include <QString>
+#include <QStringList>
 #include <QFile>
+#include <QDebug>
 
-using namespace std;
+#include "StringArray.hpp"
 
 namespace BigStarCatalogExtension {
 
 void StringArray::initFromFile(const QString& file_name) {
   clear();
-  list<string> list;
-  FILE *f = fopen(QFile::encodeName(file_name).constData(),"r");
-  if (f) {
-    char line[256];
-    while (fgets(line, sizeof(line), f)) {
-      string s = line;
-      // remove newline
-      s.erase(s.length()-1,1);
-      list.push_back(s);
-      size++;
+  QStringList list;
+  QFile f(file_name);
+  if (f.open(QIODevice::ReadOnly | QIODevice::Text))
+  {
+    while(!f.atEnd())
+    {
+      QString s = QString::fromUtf8(f.readLine());
+      s.chop(1);
+      list << s;
     }
-    fclose(f);
+    f.close();
+    size = list.size();
   }
   if (size > 0) {
-    array = new string[size];
+    array = new QString[size];
     if (array == 0) {
-      cerr << "ERROR: StringArray::initFromFile: no memory" << endl;
+      qCritical() << "ERROR: StringArray::initFromFile: out of memory";
       exit(1);
     }
     for (int i=0;i<size;i++) {
-      array[i] = list.front();
-      list.pop_front();
+      array[i] = list.at(i);
     }
   }
 }

@@ -30,10 +30,10 @@ namespace BigStarCatalogExtension {
 
 QString Star1::getNameI18n(void) const {
   if (hip) {
-    const QString commonNameI18 = QString::fromStdWString(StarMgr::getCommonName(hip));
+    const QString commonNameI18 = StarMgr::getCommonName(hip);
     if (!commonNameI18.isEmpty()) return commonNameI18;
     if (StarMgr::getFlagSciNames()) {
-      const QString sciName = QString::fromStdWString(StarMgr::getSciName(hip));
+      const QString sciName = StarMgr::getSciName(hip);
       if (!sciName.isEmpty()) return sciName;
       return QString("HP %1").arg(hip);
     }
