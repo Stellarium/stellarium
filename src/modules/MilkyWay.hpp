@@ -20,11 +20,9 @@
 #ifndef __MILKYWAY_H__
 #define __MILKYWAY_H__
 
-#include <string>
 #include "StelModule.hpp"
 #include "vecmath.h"
 #include "STextureTypes.hpp"
-
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.

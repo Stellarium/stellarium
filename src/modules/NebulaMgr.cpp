@@ -407,7 +407,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		}
 	}
 	in.close();
-	qDebug() << "Loaded " << readOk << "/" << totalRecords << " NGC records";
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC records";
 	return true;
 }
 
@@ -418,7 +418,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	QFile ngcNameFile(catNGCNames);
 	if (!ngcNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "NGC name data file " << catNGCNames << " not found.";
+		qWarning() << "NGC name data file" << catNGCNames << "not found.";
 		return false;
 	}
 
