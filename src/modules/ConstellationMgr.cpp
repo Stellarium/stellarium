@@ -19,8 +19,6 @@
 
 // Class used to manage group of constellation
 
-#include <iostream>
-#include <fstream>
 #include <vector>
 #include <QDebug>
 #include <QFile>
@@ -149,7 +147,16 @@ void ConstellationMgr::updateSkyCulture()
 		
 	// TODO: do we need to have an else { clearBoundaries(); } ?
 	if (newSkyCulture=="western") 
-		loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
+	{
+		try
+		{
+			loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
+		}
+		catch(exception& e)
+		{
+			qWarning() << "ERROR loading constellation boundaries file: " << e.what();
+		}
+	}
 
 	lastLoadedSkyCulture = newSkyCulture;
 }
@@ -298,7 +305,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 	}
 	in.close();
-	qDebug() << "read " << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
+	qDebug() << "Loaded " << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
 
 	// Set current states
 	setFlagArt(flagArt);
@@ -541,37 +548,63 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		(*iter)->englishName.clear();
 	}
 
-	// read in translated common names from file
-	ifstream commonNameFile(QFile::encodeName(namesFile).constData());
-	if (!commonNameFile.is_open())
+	// Open file
+	QFile commonNameFile(namesFile);
+	if (!commonNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open file" << namesFile;
+		qDebug() << "Cannot open file" << namesFile;
 		return;
 	}
-	
-	// find matching constellation and update name
-	string record;
-	string tmpShortName;
+
+	// Now parse the file
+	// lines to ignore which start with a # or are empty
+	QRegExp commentRx("^(\\s*#.*|\\s*)$"); 
+
+	// lines which look like records - we use the RE to extract the fields
+	// which will be available in recRx.capturedTexts()
+	QRegExp recRx("^\\s*(\\w+)\\s+(.*)\\n");    
+
+	// Some more variables to use in the parsing
 	Constellation *aster;
-	while (!std::getline(commonNameFile, record).eof())
+	QString record, shortName;
+
+	// keep track of how many records we processed.
+	int totalRecords=0;
+	int readOk=0; 
+	int lineNumber=0;
+	while (!commonNameFile.atEnd()) 
 	{
+		record = commonNameFile.readLine();
+		lineNumber++;
 
-		if( record != "") 
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		totalRecords++;
+
+		if (!recRx.exactMatch(record))
 		{
-			istringstream in(record); 
-			in >> tmpShortName;
-
-			//	cout << "working on short name " << tmpShortName << endl;
-
-			aster = findFromAbbreviation(QString::fromStdString(tmpShortName));
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << namesFile;
+		}
+		else
+		{
+			shortName = recRx.capturedTexts().at(1);
+			aster = findFromAbbreviation(shortName);
+			// If the constellation exists, set the English name
 			if (aster != NULL)
 			{
-				// Read the names in english
-				aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
+				aster->englishName = recRx.capturedTexts().at(2);
+				readOk++;
+			}
+			else 
+			{
+				qWarning() << "WARNING - constellation abbreviation" << shortName << "not found when loading constellation names";
 			}
 		}
 	}
 	commonNameFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
 }
 
 void ConstellationMgr::updateI18n()
@@ -822,6 +855,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	Constellation *cons = NULL;
 	unsigned int i, j;
 	
+	// delete existing boundaries if any exist
 	vector<vector<Vec3f> *>::iterator iter;
 	for (iter = allBoundarySegments.begin(); iter != allBoundarySegments.end(); ++iter)
 	{
@@ -829,36 +863,36 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	}
 	allBoundarySegments.clear();
 
-	cout << "Loading Constellation boundary data from " << qPrintable(boundaryFile) << "... ";
+	qDebug() << "Loading constellation boundary data ... ";
+
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
-	
-	ifstream dataFile;
-	dataFile.open(QFile::encodeName(boundaryFile).constData());
-	if (!dataFile.is_open())
+	QFile dataFile(boundaryFile);
+	if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning() << "Boundary file " << boundaryFile << " not found";
 		return false;
 	}
 
+	QTextStream istr(&dataFile);
 	float DE, RA;
 	float oDE, oRA;
 	Vec3f XYZ;
 	unsigned num, numc;
 	vector<Vec3f> *points = NULL;
-	string consname;
+	QString consname;
 	i = 0;
-	while (!dataFile.eof())	
+	while (!istr.atEnd())	
 	{
 		points = new vector<Vec3f>;
 
 		num = 0;
-		dataFile >> num;
+		istr >> num;
 		if(num == 0) continue;  // empty line
 
 		for (j=0;j<num;j++)
 		{
-			dataFile >> RA >> DE;
+			istr >> RA >> DE;
 
 			oRA =RA;
 			oDE= DE;
@@ -874,18 +908,20 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		// this list is for the de-allocation
 		allBoundarySegments.push_back(points);
 
-		dataFile >> numc;  
+		istr >> numc;  
 		// there are 2 constellations per boundary
 		
 		for (j=0;j<numc;j++)
 		{
-			dataFile >> consname;
+			istr >> consname;
 			// not used?
 			if (consname == "SER1" || consname == "SER2") consname = "SER";
 			
-			cons = findFromAbbreviation(QString::fromStdString(consname));
-				if (!cons) cout << "ERROR : Can't find constellation called : " << consname << endl;
-			else cons->isolatedBoundarySegments.push_back(points);
+			cons = findFromAbbreviation(consname);
+			if (!cons)
+				qWarning() << "ERROR while processing boundary file - cannot find constellation: " << consname;
+			else 
+				cons->isolatedBoundarySegments.push_back(points);
 		}
 
 		if (cons) cons->sharedBoundarySegments.push_back(points);
@@ -893,7 +929,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 	}
 	dataFile.close();
-	cout << "(" << i << " segments loaded)" << endl;
+	qDebug() << "Loaded" << i << "constellation boundary segments";
 	delete points;
 
 	return true;

@@ -490,7 +490,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 bool NebulaMgr::loadTextures(const QString& setName)
 {
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
-	qDebug() << "Loading Nebula Textures for set " << setName;
+	qDebug() << "Loading nebula texture set" << setName;
 	QString texFile;
 	try
 	{
@@ -570,7 +570,7 @@ bool NebulaMgr::loadTextures(const QString& setName)
 		}
 		inFile.close();
 
-		qDebug() << " ... successfully read " << readOk << " of " << totalRecords << " nebula textures";
+		qDebug() << "Loaded " << readOk << "/" << totalRecords << "nebula textures successfully from set" << setName;
 		return true;	
 	}
 	catch (exception& e)
