@@ -200,9 +200,9 @@ private:
 	//! Handle unselecting a single constellation.
 	void unsetSelectedConst(Constellation* c);
 	//! Define which constellation is selected from its abbreviation.
-	void setSelected(const string& abbreviation);
+	void setSelected(const QString& abbreviation);
 	//! Define which constellation is selected and return brightest star.
-	StelObjectP setSelectedStar(const string& abbreviation);
+	StelObjectP setSelectedStar(const QString& abbreviation);
 	//! Define which constellation is selected from a star number.
 	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(isStarIn(s));}
 	//! Remove all selected constellations.

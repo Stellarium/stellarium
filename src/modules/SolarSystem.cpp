@@ -20,7 +20,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include "SolarSystem.hpp"
 #include "STexture.hpp"
 #include "stellplanet.h"
@@ -190,7 +189,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 // Init and load the solar system data
 void SolarSystem::loadPlanets()
 {
-	cout << "Loading Solar System data...";
+	qDebug() << "Loading Solar System data ...";
 	QString iniFile;
 	try
 	{
@@ -283,8 +282,11 @@ void SolarSystem::loadPlanets()
 	}
 
 	// Stage 3 (as described above).
+	int readOk=0;
+	int totalPlanets=0;
 	for (int i = 0;i<orderedSections.size();++i)
 	{
+		totalPlanets++;
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString();
 		const QString strParent = pd.value(secname+"/parent").toString();
@@ -305,6 +307,7 @@ void SolarSystem::loadPlanets()
 			{
 				qWarning() << "ERROR : can't find parent solar system body for " << englishName;
 				assert(0);
+				continue;
 			}
 		}
 
@@ -398,8 +401,8 @@ void SolarSystem::loadPlanets()
 			orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
-		} else
-		if (funcName=="comet_orbit")
+		} 
+		else if (funcName=="comet_orbit")
 		{
 			// Read the orbital elements
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
@@ -627,13 +630,14 @@ void SolarSystem::loadPlanets()
 		}
 
 		system_planets.push_back(p);
+		readOk++;
 	}
 
 	// special case: load earth shadow texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	tex_earth_shadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 	
-	cout << "(loaded)" << endl;
+	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";
 }
 
 // Compute the position for every elements of the solar system.
@@ -880,7 +884,7 @@ void SolarSystem::updateI18n()
 	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
-wstring SolarSystem::getPlanetHashString(void)
+QString SolarSystem::getPlanetHashString(void)
 {
 	QString str;
 	QTextStream oss(&str);
@@ -896,7 +900,7 @@ wstring SolarSystem::getPlanetHashString(void)
 		oss << (*iter)->getEnglishName() << endl;
 		oss << (*iter)->getEnglishName() << endl;
 	}
-	return str.toStdWString();
+	return str;
 }
 
 void SolarSystem::startTrails(bool b)
