@@ -19,11 +19,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "Star.hpp"
+#include <QDebug>
+#include <QString>
 
+#include "Star.hpp"
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
-#include <iostream>
 
 namespace BigStarCatalogExtension {
 
@@ -166,17 +167,16 @@ void Star1::repack(bool from_be) {
 }
 
 void Star1::print(void) {
- std::cout << "hip: " << hip
-       << ", component_ids: " << ((unsigned int)component_ids)
-       << ", x0: " << x0
-       << ", x1: " << x1
-       << ", b_v: " << ((unsigned int)b_v)
-       << ", mag: " << ((unsigned int)mag)
-       << ", sp_int: " << sp_int
-       << ", dx0: " << dx0
-       << ", dx1: " << dx1
-       << ", plx: " << plx
-       << endl;
+ qDebug() << "hip: " << hip
+          << ", component_ids: " << ((unsigned int)component_ids)
+          << ", x0: " << x0
+          << ", x1: " << x1
+          << ", b_v: " << ((unsigned int)b_v)
+          << ", mag: " << ((unsigned int)mag)
+          << ", sp_int: " << sp_int
+          << ", dx0: " << dx0
+          << ", dx1: " << dx1
+          << ", plx: " << plx;
 }
 
 
@@ -202,13 +202,12 @@ void Star2::repack(bool from_be) {
 }
 
 void Star2::print(void) {
- std::cout << "x0: " << x0
-       << ", x1: " << x1
-       << ", dx0: " << dx0
-       << ", dx1: " << dx1
-       << ", b_v: " << b_v
-       << ", mag: " << mag
-       << endl;
+ qDebug() << "x0: " << x0
+          << ", x1: " << x1
+          << ", dx0: " << dx0
+          << ", dx1: " << dx1
+          << ", b_v: " << b_v
+          << ", mag: " << mag;
 }
 
 
@@ -228,11 +227,10 @@ void Star3::repack(bool from_be) {
 }
 
 void Star3::print(void) {
-  std::cout << "x0: " << x0
-       << ", x1: " << x1
-       << ", b_v: " << b_v
-       << ", mag: " << mag
-       << endl;
+  qDebug() << "x0: " << x0
+           << ", x1: " << x1
+           << ", b_v: " << b_v
+           << ", mag: " << mag;
 }
 
 } // namespace BigStarCatalogExtension

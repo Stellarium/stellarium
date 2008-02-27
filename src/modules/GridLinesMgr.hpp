@@ -20,7 +20,6 @@
 #ifndef GRIDLINES_H_
 #define GRIDLINES_H_
 
-#include <string>
 #include "vecmath.h"
 #include "StelModule.hpp"
 

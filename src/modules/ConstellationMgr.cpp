@@ -305,7 +305,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 	}
 	in.close();
-	qDebug() << "Loaded " << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
 
 	// Set current states
 	setFlagArt(flagArt);
@@ -436,7 +436,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 	}
 
-	qDebug() << "Loaded " << readOk << "/" << totalRecords << "constellation art records successfully for culture" << cultureName;
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation art records successfully for culture" << cultureName;
 	fic.close();
 }
 
@@ -718,18 +718,15 @@ StelObject* ConstellationMgr::getSelected(void) const {
 	return *selected.begin();  // TODO return all or just remove this method
 }
 
-void ConstellationMgr::setSelected(const string& abbreviation) 
+void ConstellationMgr::setSelected(const QString& abbreviation) 
 {
-	Constellation * c = findFromAbbreviation(QString::fromStdString(abbreviation));
-
+	Constellation * c = findFromAbbreviation(abbreviation);
 	if(c != NULL) setSelectedConst(c);
-
 }
 
-StelObjectP ConstellationMgr::setSelectedStar(const string& abbreviation) 
+StelObjectP ConstellationMgr::setSelectedStar(const QString& abbreviation) 
 {
-	Constellation * c = findFromAbbreviation(QString::fromStdString(abbreviation));
-
+	Constellation * c = findFromAbbreviation(abbreviation);
 	if(c != NULL) {
 		setSelectedConst(c);
 		return c->getBrightestStarInConstellation();

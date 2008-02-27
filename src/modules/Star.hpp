@@ -26,7 +26,6 @@
 
 #include <boost/intrusive_ptr.hpp>
 
-#include <string>
 #include <QString>
 
 class StelObject;

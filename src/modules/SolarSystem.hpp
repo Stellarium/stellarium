@@ -185,7 +185,7 @@ public:
 	//! Get a hash of locale and ssystem.ini names for use with the TUI.
 	//! @return A newline delimited hash of localized:standard planet names.
 	//! Planet translated name is PARENT : NAME
-	wstring getPlanetHashString();
+	QString getPlanetHashString();
  
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
