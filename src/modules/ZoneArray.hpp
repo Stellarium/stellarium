@@ -24,8 +24,8 @@
 #ifndef _ZONE_ARRAY_HPP_
 #define _ZONE_ARRAY_HPP_
 
-#include <iostream>
 #include <QString>
+#include <QDebug>
 
 #include "ZoneData.hpp"
 #include "Star.hpp"
@@ -192,15 +192,15 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
 	lb.Draw(0.f);
     zones = new SpecialZoneData<Star>[nr_of_zones];
     if (zones == 0) {
-      cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
-              "no memory (1)" << endl;
+      qWarning() << "ERROR: SpecialZoneArray(" << level 
+                 << ")::SpecialZoneArray: no memory (1)";
       exit(1);
     }
     {
       unsigned int *zone_size = new unsigned int[nr_of_zones];
       if (zone_size == 0) {
-        cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
-                "no memory (2)" << endl;
+        qWarning() << "ERROR: SpecialZoneArray(" << level 
+                   << ")::SpecialZoneArray: no memory (2)";
         exit(1);
       }
       if (nr_of_zones != fread(zone_size,sizeof(unsigned int),nr_of_zones,f)) {
@@ -241,11 +241,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
                           MAP_PRIVATE | MAP_NORESERVE,
                           fileno(f),start_in_file-mmap_offset);
         if (mmap_start == MAP_FAILED) {
-          cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
-                  "mmap(" << fileno(f)
-               << ',' << start_in_file
-               << ',' << (sizeof(Star)*nr_of_stars)
-               << ") failed: " << strerror(errno) << endl;
+          qWarning() << "ERROR: SpecialZoneArray(" << level 
+                     << ")::SpecialZoneArray: mmap(" << fileno(f)
+                     << ',' << start_in_file
+                     << ',' << (sizeof(Star)*nr_of_stars)
+                     << ") failed: " << strerror(errno);
           stars = 0;
           nr_of_stars = 0;
           delete[] getZones();
@@ -262,17 +262,16 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
 #else
         HANDLE file_handle = (void*)_get_osfhandle(_fileno(f));
         if (file_handle == INVALID_HANDLE_VALUE) {
-          cerr << "ERROR: SpecialZoneArray(" << level
-               << ")::SpecialZoneArray: "
-                  "_get_osfhandle(_fileno(f)) failed" << endl;
+          qWarning() << "ERROR: SpecialZoneArray(" << level
+                     << ")::SpecialZoneArray: _get_osfhandle(_fileno(f)) failed";
         } else {
           mapping_handle = CreateFileMapping(file_handle,NULL,PAGE_READONLY,
                                              0,0,NULL);
           if (mapping_handle == NULL) {
               // yes, NULL indicates failure, not INVALID_HANDLE_VALUE
-            cerr << "ERROR: SpecialZoneArray(" << level
-                 << ")::SpecialZoneArray: "
-                    "CreateFileMapping failed: " << GetLastError() << endl;
+            qWarning() << "ERROR: SpecialZoneArray(" << level
+                       << ")::SpecialZoneArray: CreateFileMapping failed: " 
+                       << GetLastError();
           } else {
             mmap_start = MapViewOfFile(mapping_handle, 
                                        FILE_MAP_READ, 
@@ -280,11 +279,11 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
                                        start_in_file-mmap_offset, 
                                        mmap_offset+sizeof(Star)*nr_of_stars);
             if (mmap_start == NULL) {
-              cerr << "ERROR: SpecialZoneArray(" << level
-                   << ")::SpecialZoneArray: "
-                      "MapViewOfFile failed: " << GetLastError()
-                   << ", page_size: " << page_size << endl;
-                   //<< endl;
+              qWarning() << "ERROR: SpecialZoneArray(" << level
+                         << ")::SpecialZoneArray: "
+                         << "MapViewOfFile failed: " 
+                         << GetLastError()
+                         << ", page_size: " << page_size;
               stars = 0;
               nr_of_stars = 0;
               delete[] getZones();
@@ -304,8 +303,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
       } else {
         stars = new Star[nr_of_stars];
         if (stars == 0) {
-          cerr << "ERROR: SpecialZoneArray(" << level << ")::SpecialZoneArray: "
-                  "no memory (3)" << endl;
+          qWarning() << "ERROR: SpecialZoneArray(" << level 
+                     << ")::SpecialZoneArray: no memory (3)";
           exit(1);
         }
         if (!readFileWithLoadingBar(f,stars,sizeof(Star)*nr_of_stars,lb)) {
