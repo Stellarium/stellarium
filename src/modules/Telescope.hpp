@@ -30,6 +30,8 @@
 #include <list>
 #include <string>
 
+using namespace std;
+
 long long int GetNow(void);
 
 #ifdef __MINGW32__

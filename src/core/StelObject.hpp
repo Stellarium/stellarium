@@ -25,8 +25,6 @@
 #include "StelObjectType.hpp"
 #include "GridObject.hpp"
 
-using namespace std;
-
 class Navigator;
 class Projector;
 class STexture;
