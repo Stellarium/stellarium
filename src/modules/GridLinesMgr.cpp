@@ -19,6 +19,7 @@
  
 #include <set>
 #include <QSettings>
+#include <QDebug>
 
 #include "GridLinesMgr.hpp"
 
@@ -389,7 +390,7 @@ void SkyGrid::draw(const Projector* prj) const
 	{
 		if (iter->second.size()%2!=0)
 		{
-			cerr << "Error parallel "<< (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			qWarning() << "ERROR drawing skygrid - parallel "<< (double)iter->first/DEGREE_MAS << iter->second.size();
 		}
 		else
 		{
@@ -457,19 +458,19 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	for (map<int, set<double> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
 	{
-//		cerr << "------- lon1802=" << iter->first << "--------" << endl;
+//		qDebug() << "------- lon1802=" << iter->first << "--------";
 //		for (map<double, Vec2d>::const_iterator k = iter->second.begin();k!=iter->second.end();++k)
 //		{
 //			Vec3d v;
 //			prj->unProject(k->second[0], k->second[1], v);
 //			double llon, llat;
 //			rectToSpheType2(llon, llat, v);
-//			cerr << k->second << " lat=" << k->first*180./M_PI << " Llon="<< llon*180./M_PI << " Llat=" << llat*180./M_PI << (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first) ?" *":"") << endl;
+//			qDebug() << k->second << " lat=" << k->first*180./M_PI << " Llon="<< llon*180./M_PI << " Llat=" << llat*180./M_PI << (isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, k->first) ?" *":"");
 //		}
 		
 		if (iter->second.size()%2!=0)
 		{
-			//cerr << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size() << endl;
+			//qDebug() << "Error meridian " << (double)iter->first/DEGREE_MAS << " " << iter->second.size();
 		}
 		else
 		{
@@ -531,7 +532,7 @@ void SkyGrid::draw(const Projector* prj) const
 	{
 		int nbMeridian = (int)(2.*M_PI/gridStepMeridianRad);
 		int dLatMas = 360*60*60*1000/nbMeridian;
-		//cerr << resultsMeridiansOrdered.size()+1 << "/" << nbMeridian/2 << " dLatMas=" << dLatMas/1000/60/60 << endl;
+		// qDebug() << resultsMeridiansOrdered.size()+1 << "/" << nbMeridian/2 << " dLatMas=" << dLatMas/1000/60/60;
 		for (int latMas=0;latMas<360*60*60*1000/2;latMas+=dLatMas) 
 		{
 			if (resultsMeridiansOrdered.find(latMas)==resultsMeridiansOrdered.end() && latMas!=0)

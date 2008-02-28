@@ -42,8 +42,6 @@ typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 
 class SFont;
 
-using namespace std;
-
 struct TrailPoint {
   Vec3d point;
   double date;

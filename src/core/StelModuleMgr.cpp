@@ -112,7 +112,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 	{
 		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE);
 	}
-	catch (exception& e)
+	catch (std::exception& e)
 	{
 		qWarning() << "ERROR while locating module path: " << e.what();
 	}
@@ -182,7 +182,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 	{
 		moduleDirs = fileMan.listContents("modules",StelFileMgr::DIRECTORY);
 	}
-	catch(exception& e)
+	catch(std::exception& e)
 	{
 		qWarning() << "ERROR while trying list list modules:" << e.what();	
 	}
@@ -201,7 +201,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 			mDesc.loadAtStartup = pd.value("module/load_at_startup").toBool();
 			result.push_back(mDesc);
 		}
-		catch (exception& e)
+		catch (std::exception& e)
 		{
 			qWarning() << "WARNING: unable to successfully read module.ini file from module " << *dir;
 		}

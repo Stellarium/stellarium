@@ -103,7 +103,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "old_style")
 	{
-		qWarning() << "Landscape type mismatch for landscape "<< landscapeId << ", expected old_style, found " << type << ".  No landscape in use.\n";
+		qWarning() << "Landscape type mismatch for landscape " << landscapeId 
+		           << ", expected old_style, found " << type << ".  No landscape in use.";
 		valid_landscape = 0;
 		return;
 	}
@@ -111,41 +112,39 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Load sides textures
 	nb_side_texs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
 	side_texs = new STextureSP[nb_side_texs];
-	char tmp[255];
-	//StelTextureMgr texMgr = StelApp::getInstance().getTextureManager();
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_CLAMP_TO_EDGE);
 	for (int i=0;i<nb_side_texs;++i)
 	{
-		sprintf(tmp,"tex%d",i);
+		QString tmp = QString("tex%1").arg(i);
 		side_texs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value(QString("landscape/")+tmp).toString(), landscapeId));
 	}
 
 	// Init sides parameters
 	nb_side = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscape_tex_coord[nb_side];
-	string s;
+	QString s;
 	int texnum;
 	float a,b,c,d;
 	for (int i=0;i<nb_side;++i)
 	{
-		sprintf(tmp,"side%d",i);
-		s = landscapeIni.value(QString("landscape/")+tmp).toString().toStdString();
-		sscanf(s.c_str(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		QString tmp = QString("side%1").arg(i);
+		s = landscapeIni.value(QString("landscape/")+tmp).toString();
+		sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		sides[i].tex = side_texs[texnum];
 		sides[i].tex_coords[0] = a;
 		sides[i].tex_coords[1] = b;
 		sides[i].tex_coords[2] = c;
 		sides[i].tex_coords[3] = d;
-		//printf("%f %f %f %f\n",a,b,c,d);
+		// qDebug("%f %f %f %f\n",a,b,c,d);
 	}
 
 	nb_decor_repeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	ground_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/groundtex").toString(), landscapeId));
-	s = landscapeIni.value("landscape/ground").toString().toStdString();
-	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	s = landscapeIni.value("landscape/ground").toString();
+	sscanf(s.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
 	ground_tex_coord.tex_coords[0] = a;
 	ground_tex_coord.tex_coords[1] = b;
@@ -154,8 +153,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
 	fog_tex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/fogtex").toString(), landscapeId));
-	s = landscapeIni.value("landscape/fog").toString().toStdString();
-	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	s = landscapeIni.value("landscape/fog").toString();
+	sscanf(s.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
 	fog_tex_coord.tex_coords[0] = a;
 	fog_tex_coord.tex_coords[1] = b;
@@ -209,7 +208,7 @@ void LandscapeOldStyle::create(bool _fullpath, QMap<QString, QString> param)
 		sides[i].tex_coords[1] = b;
 		sides[i].tex_coords[2] = c;
 		sides[i].tex_coords[3] = d;
-		//printf("%f %f %f %f\n",a,b,c,d);
+		//qDebug("%f %f %f %f\n",a,b,c,d);
 	}
 
 	bool ok;
@@ -398,13 +397,13 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 void LandscapeFisheye::create(const QString _name, bool _fullpath, const QString& _maptex,
 	                          double _texturefov, double _angle_rotatez)
 {
-	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
+	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
 	tex_fov = _texturefov*M_PI/180.;
-    angle_rotatez = _angle_rotatez*M_PI/180.;
+	angle_rotatez = _angle_rotatez*M_PI/180.;
 }
 
 
@@ -462,12 +461,12 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 void LandscapeSpherical::create(const QString _name, bool _fullpath, const QString& _maptex,
 	                            double _angle_rotatez)
 {
-	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
+	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	map_tex = StelApp::getInstance().getTextureManager().createTexture(_maptex);
-    angle_rotatez = _angle_rotatez*M_PI/180.;
+	angle_rotatez = _angle_rotatez*M_PI/180.;
 }
 
 

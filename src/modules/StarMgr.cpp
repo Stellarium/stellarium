@@ -104,7 +104,7 @@ StarMgr::StarMgr(void) :
 {
 	setObjectName("StarMgr");
   if (hip_index == 0) {
-    cerr << "ERROR: StarMgr::StarMgr: no memory" << endl;
+    qWarning() << "ERROR: StarMgr::StarMgr: no memory";
     exit(1);
   }
   max_geodesic_grid_level = -1;
@@ -655,20 +655,19 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
   f = cos(lim_fov * M_PI/180.);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
-//cout << "search inside(" << it->first << "):";
+//qDebug() << "search inside(" << it->first << "):";
     int zone;
     for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
          (zone = it1.next()) >= 0;) {
       it->second->searchAround(zone,v,f,result);
-//cout << " " << zone;
+//qDebug() << " " << zone;
     }
-//cout << endl << "search border(" << it->first << "):";
+//qDebug() << endl << "search border(" << it->first << "):";
     for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);
          (zone = it1.next()) >= 0;) {
       it->second->searchAround(zone,v,f,result);
-//cout << " " << zone;
+//qDebug() << " " << zone;
     }
-//cout << endl << endl;
   }
   return result;
 }
@@ -856,8 +855,8 @@ void StarMgr::updateSkyCulture()
 	}
 	catch(exception& e)
 	{
-		cout << "WARNING: could not load star_names.fab for sky culture " 
-			<< qPrintable(skyCultureDir) << ": " << e.what() << endl;	
+		qWarning() << "WARNING: could not load star_names.fab for sky culture " 
+		           << skyCultureDir << ": " << e.what();	
 	}
 	
 	try
@@ -866,7 +865,7 @@ void StarMgr::updateSkyCulture()
 	}
 	catch(exception& e)
 	{
-		cout << "WARNING: could not load scientific star names file: " << e.what() << endl;	
+		qWarning() << "WARNING: could not load scientific star names file: " << e.what();
 	}
 
 	// Turn on sci names/catalog names for western culture only

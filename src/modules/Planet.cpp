@@ -275,7 +275,7 @@ void Planet::compute_position(const double date)
 		}
 		double new_date = last_orbitJD + delta_points*date_increment;
 
-		// printf( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), delta_orbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), delta_orbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbit_cached)
 		{
@@ -1033,7 +1033,7 @@ void Planet::startTrail(bool b)
 	if (b)
 	{
 		first_point = 1;
-		//  printf("trail for %s: %f\n", name.c_str(), re.sidereal_period);
+		//  qDebug("trail for %s: %f\n", name.c_str(), re.sidereal_period);
 		// only interested in trails for planets
 		if(re.sidereal_period > 0) trail_on = 1;
 	}

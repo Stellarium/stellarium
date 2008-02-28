@@ -30,8 +30,6 @@
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
-using namespace std;
-
 class Nebula;
 class Translator;
 class ToneReproducer;

@@ -140,7 +140,7 @@ void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& sa
 				return;
 			}
 		}
-		catch(exception& e)
+		catch(std::exception& e)
 		{
 			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
 			return;

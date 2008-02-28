@@ -26,8 +26,6 @@
 #include "StelObjectModule.hpp"
 #include "STextureTypes.hpp"
 
-using namespace std;
-
 class StelObject;
 class ToneReproducer;
 class Projector;

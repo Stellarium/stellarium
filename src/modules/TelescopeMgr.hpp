@@ -27,11 +27,8 @@
 
 #include <vector>
 #include <map>
-#include <string>
 #include <QString>
 #include <QStringList>
-
-using namespace std;
 
 class Projector;
 class Navigator;
