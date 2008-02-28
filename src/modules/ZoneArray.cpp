@@ -90,6 +90,7 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                              const QString& extended_file_name,
                              LoadingBar &lb) {
   QString fname(extended_file_name);
+  QString dbStr; // for debugging output.
   bool use_mmap = false;
   if (fname.contains("mmap:")) {
     fname.remove(0,5);
@@ -98,18 +99,15 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   try {
     fname = StelApp::getInstance().getFileMgr().findFile("stars/default/"+fname);
   } catch (exception &e) {
-    qWarning() << "ZoneArray::create(" << extended_file_name << "): "
-            "warning while loading \"" << fname
-         << "\": " << e.what();
+    qWarning() << "Loading" << extended_file_name << e.what();
     return 0;
   }
   FILE *f = fopen(QFile::encodeName(fname).constData(),"rb");
   if (f == 0) {
-    fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",
-            qPrintable(extended_file_name));
+    qWarning() << "Loading" << extended_file_name << "failed to open file.";
     return 0;
   }
-  printf("Loading %s: ",qPrintable(extended_file_name));
+  dbStr = "Loading \"" + extended_file_name + "\": ";
   unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
   if (ReadInt(f,magic) < 0 ||
       ReadInt(f,type) < 0 ||
@@ -119,21 +117,23 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       ReadInt(f,mag_min) < 0 ||
       ReadInt(f,mag_range) < 0 ||
       ReadInt(f,mag_steps) < 0) {
-    printf("bad file\n");
+    dbStr += "error - file format is bad.";
+    qWarning(qPrintable(dbStr));
     return 0;
   }
   const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
   if (byte_swap) {
       // ok, FILE_MAGIC_OTHER_ENDIAN, must swap
     if (use_mmap) {
-      printf("you must convert catalogue "
+      dbStr += "warning - must convert catalogue ";
 #if (!defined(__GNUC__))
-             "to native format "
+      dbStr += "to native format ";
 #endif
-             "before mmap loading\n");
+      dbStr += "before mmap loading";
+      qWarning(qPrintable(dbStr));
       return 0;
     }
-    printf("byteswap ");
+    dbStr += "byteswap ";
     type = bswap_32(type);
     major = bswap_32(major);
     minor = bswap_32(minor);
@@ -145,25 +145,30 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
       // ok, FILE_MAGIC
 #if (!defined(__GNUC__))
     if (use_mmap) {
-        // mmap only with gcc:
-      printf("you must convert catalogue "
-             "to native format "
-             "before mmap loading\n");
+      // mmap only with gcc:
+      dbStr += "warning - you must convert catalogue " 
+            += "to native format before mmap loading";
+      qWarning(qPrintable(dbStr));
+
       return 0;
     }
 #endif
   } else if (magic == FILE_MAGIC_NATIVE) {
       // ok, will work for any architecture and any compiler
   } else {
-    printf("no star catalogue file\n");
+    dbStr += "error - not a catalogue file.";
+    qWarning(qPrintable(dbStr));
     return 0;
   }
   ZoneArray *rval = 0;
-  printf("%u_%uv%u_%u; ",level,type,major,minor);
+  dbStr += QString("%1_%2v%3_%4; ").arg(level)
+                                 .arg(type)
+                                 .arg(major)
+                                 .arg(minor);
   switch (type) {
     case 0:
       if (major > MAX_MAJOR_FILE_VERSION) {
-        printf("unsupported version, ");
+        dbStr += "warning - unsupported version ";
       } else {
           // When this assertion fails you must redefine Star1
           // for your compiler.
@@ -173,13 +178,13 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
         rval = new ZoneArray1(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps);
         if (rval == 0) {
-          printf("no memory, ");
+          dbStr += "error - no memory ";
         }
       }
       break;
     case 1:
       if (major > MAX_MAJOR_FILE_VERSION) {
-        printf("unsupported version, ");
+        dbStr += "warning - unsupported version ";
       } else {
           // When this assertion fails you must redefine Star2
           // for your compiler.
@@ -190,13 +195,13 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                                            level,
                                            mag_min,mag_range,mag_steps);
         if (rval == 0) {
-          printf("no memory, ");
+          dbStr += "error - no memory ";
         }
       }
       break;
     case 2:
       if (major > MAX_MAJOR_FILE_VERSION) {
-        printf("unsupported version, ");
+        dbStr += "warning - unsupported version ";
       } else {
           // When this assertion fails you must redefine Star3
           // for your compiler.
@@ -207,19 +212,21 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
                                            level,
                                            mag_min,mag_range,mag_steps);
         if (rval == 0) {
-          printf("no memory, ");
+          dbStr += "error - no memory ";
         }
       }
       break;
     default:
-      printf("bad file type, ");
+      dbStr += "error - bad file type ";
       break;
   }
   if (rval && rval->isInitialized()) {
-    printf("stars: %d\n",rval->getNrOfStars());
+    dbStr += QString("%1").arg(rval->getNrOfStars());
+    qDebug(qPrintable(dbStr));
 //    rval->generateNativeDebugFile((fname+".debug").c_str());
   } else {
-    printf("initialization failed\n");
+    dbStr += " - initialization failed";
+    qWarning(qPrintable(dbStr));
     if (rval) {
       delete rval;
       rval = 0;
@@ -228,7 +235,6 @@ ZoneArray *ZoneArray::create(const StarMgr &hip_star_mgr,
   fclose(f);
   return rval;
 }
-
 
 
 ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
@@ -271,8 +277,8 @@ void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
     for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--) {
       const int hip = s->hip;
       if (hip < 0 || NR_OF_HIP < hip) {
-        cerr << "ERROR: ZoneArray1::updateHipIndex: invalid HP number: "
-             << hip << endl;
+        qDebug() << "ERROR: ZoneArray1::updateHipIndex: invalid HP number:"
+                 << hip;
         exit(1);
       }
       if (hip != 0) {
