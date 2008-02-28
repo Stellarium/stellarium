@@ -146,7 +146,7 @@ LongitudeSpinBox::LongitudeSpinBox(QWidget *parent):
 {
 	mins << -180 << 0 << 0;
 	ranges << 360 << 60 << 60;
-	delimiters << QChar(176) << "\"" << "'";
+	delimiters << QChar(176) << "'" << "\"";
 	setRange(0, 60 * 60 * 360 - 1);
 	setValue(0.);
 }
@@ -161,7 +161,7 @@ LatitudeSpinBox::LatitudeSpinBox(QWidget *parent):
 {
 	mins << -90 << 0 << 0;
 	ranges << 180 << 60 << 60;
-	delimiters << QChar(176) << "\"" << "'";
+	delimiters << QChar(176) << "'" << "\"";
 	setRange(0, 60 * 60 * 180 - 1);
 	setValue(0.);
 }
