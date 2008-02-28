@@ -190,11 +190,11 @@ QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir)
 	DIR *dp;
 	QStringList result;
 	
-	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
+	//qDebug() << "Reading stellarium translations in directory: " << localeDir;
 
 	if ((dp = opendir(QFile::encodeName(localeDir).constData())) == NULL)
 	{
-		cerr << "Unable to find locale directory containing translations:" << qPrintable(localeDir) << endl;
+		qWarning() << "Unable to find locale directory containing translations:" << localeDir;
 		return result;
 	}
 

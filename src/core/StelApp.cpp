@@ -45,6 +45,7 @@
 #include "StelFileMgr.hpp"
 //#include "QtScriptMgr.hpp"
 
+#include <iostream>
 #include <QStringList>
 #include <QString>
 #include <QFile>
@@ -105,10 +106,10 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	}
 	
 	// OK, print the console splash and get on with loading the program
-	cout << " -------------------------------------------------------" << endl;
-	cout << "[ This is " << qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << endl;
-	cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al          ]" << endl;
-	cout << " -------------------------------------------------------" << endl;
+	std::cout << " -------------------------------------------------------" << std::endl;
+	std::cout << "[ This is " << qPrintable(StelApp::getApplicationName()) << " - http://www.stellarium.org ]" << std::endl;
+	std::cout << "[ Copyright (C) 2000-2008 Fabien Chereau et al          ]" << std::endl;
+	std::cout << " -------------------------------------------------------" << std::endl;
 	
 	QStringList p=stelFileMgr->getSearchPaths();
 	qDebug() << "File search paths:";
