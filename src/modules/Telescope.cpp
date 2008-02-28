@@ -26,6 +26,9 @@
 #include <math.h>
 
 #include <QTextStream>
+#include <QString>
+#include <QStringList>
+#include <QRegExp>
 #include <QDebug>
 
 #ifdef WIN32
@@ -112,7 +115,7 @@ T &operator<<(T &o,const PrintRaDec &x) {
 
 class TelescopeDummy : public Telescope {
 public:
-  TelescopeDummy(const string &name,const string &params) : Telescope(name) {
+  TelescopeDummy(const QString &name,const QString &params) : Telescope(name) {
     desired_pos[0] = XYZ[0] = 1.0;
     desired_pos[1] = XYZ[1] = 0.0;
     desired_pos[2] = XYZ[2] = 0.0;
@@ -138,7 +141,7 @@ private:
 
 class TelescopeTcp : public Telescope {
 public:
-  TelescopeTcp(const string &name,const string &params);
+  TelescopeTcp(const QString &name,const QString &params);
   ~TelescopeTcp(void) {hangup();}
 private:
   bool isConnected(void) const
@@ -174,43 +177,43 @@ private:
     {return (position_pointer->client_micros!=0x7FFFFFFFFFFFFFFFLL);}
 };
 
-Telescope *Telescope::create(const string &url) {
-  string::size_type i = url.find(':');
-  if (i == string::npos) {
-    qDebug() << "Telescope::create(" << url.c_str() << "): bad url: \"" << url.c_str()
-             << "\", ':' missing";
-    return 0;
+Telescope *Telescope::create(const QString &url) {
+  // example url: My_first_telescope:TCP:localhost:10000:500000
+  // split to:
+  // name    = My_first_telescope
+  // type    = TCP
+  // params  = localhost:10000:500000
+  //
+  // The params part is optional.  We will use QRegExp to validate
+  // the url and extact the components.
+
+  // note, in a reg exp, [^:] matches any chararacter except ':'
+  QRegExp recRx("^([^:]*):([^:]*)(:(.*))?$");
+  QString name, type, params;
+  if (recRx.exactMatch(url))
+  {
+    // trimmed removes whitespace on either end of a QString
+    name = recRx.capturedTexts().at(1).trimmed();
+    type = recRx.capturedTexts().at(2).trimmed();
+    params = recRx.capturedTexts().at(4).trimmed();
   }
-  const string name = url.substr(0,i);
-  if (i+2 > url.length()) {
-    qDebug() << "Telescope::create(" << url.c_str() << "): bad url: \"" << url.c_str()
-             << "\", too short";
-    return 0;
+  else
+  {
+    qWarning() << "WARNING - telescope definition" << url << "not recognised";
+    return NULL;
   }
-  string::size_type j = url.find(':',i+1);
-  if (j == string::npos) {
-    qDebug() << "Telescope::create(" << url.c_str() << "): bad url: \"" << url.c_str()
-             << "\", 2nd ':' missing";
-    return 0;
-  }
-  const string type = url.substr(i+1,j-i-1);
-  if (j+2 > url.length()) {
-    qDebug() << "Telescope::create(" << url.c_str() << "): bad url: \"" << url.c_str()
-             << "\", too short";
-    return 0;
-  }
-  const string params = url.substr(j+1);
-  qDebug() << "Telescope::create(" << url.c_str() << "): trying to create telescope \""
-           << name.c_str() << "\" of type \"" << type.c_str() << "\" with parameters \""
-           << params.c_str() << '"';
+
+  qDebug() << "Creating telescope" << url 
+           << "; name/type/params:" << name 
+           << type << params;
+
   Telescope *rval = 0;
   if (type == "Dummy") {
     rval = new TelescopeDummy(name,params);
   } else if (type == "TCP") {
     rval = new TelescopeTcp(name,params);
   } else {
-    qDebug() << "Telescope::create(" << url.c_str() << "): unknown telescop type \""
-             << type.c_str() << '"';
+    qWarning() << "WARNING - unknown telescope type" << type << "- not creating a telescope object for url" << url;
   }
   if (rval && !rval->isInitialized()) {
     delete rval;
@@ -220,9 +223,9 @@ Telescope *Telescope::create(const string &url) {
 }
 
 
-Telescope::Telescope(const string &name) : name(QString::fromStdString(name))
+Telescope::Telescope(const QString &name) : name(name)
 {
-	nameI18n = QString::fromStdString(name);
+	nameI18n = name;
 }
 
 QString Telescope::getInfoString(const Navigator *nav) const {
@@ -260,53 +263,53 @@ long long int GetNow(void) {
 #endif
 }
 
-TelescopeTcp::TelescopeTcp(const string &name,const string &params)
-             :Telescope(name),fd(INVALID_SOCKET),
-              end_position(positions+(sizeof(positions)/sizeof(positions[0]))) {
+TelescopeTcp::TelescopeTcp(const QString &name,const QString &params)
+  : Telescope(name),fd(INVALID_SOCKET),
+    end_position(positions+(sizeof(positions)/sizeof(positions[0]))) {
   hangup();
   address.sin_port = htons(0);
-  string::size_type i = params.find(':');
-  if (i == string::npos) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "bad params: ':' missing";
-    return;
-  }
-  const string host = params.substr(0,i);
-  if (i+2 > params.length()) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "bad params: too short"
-        ;
-    return;
-  }
-  string::size_type j = params.find(':',i+1);
-  if (j == string::npos) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "bad params: ':' missing";
-    return;
-  }
+
+  // Example params:
+  // localhost:10000:500000
+  // split into:
+  // host       = localhost
+  // port       = 10000 (int)
+  // time_delay = 500000 (int)
+
+  QRegExp paramRx("^([^:]*):(\\d+):(\\d+)$");
+  QString host;
   int port;
-  if (1!=sscanf(params.substr(i+1,j-i-1).c_str(),"%d",&port) ||
-      port<=0 || port>0xFFFF) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "bad port";
+  if (paramRx.exactMatch(params))
+  {
+    // I will not use the ok param to toInt as the 
+    // QRegExp only matches valid integers.
+    host       = paramRx.capturedTexts().at(1).trimmed();
+    port       = paramRx.capturedTexts().at(2).toInt();
+    time_delay = paramRx.capturedTexts().at(3).toInt();
+  }
+  else
+  {
+    qWarning() << "WARNING - incorrect TelescopeTcp parameters";
     return;
   }
-  if (1!=sscanf(params.substr(j+1).c_str(),"%d",&time_delay) ||
-      time_delay<=0 || time_delay>10000000) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "bad time_delay";
+
+  qDebug() << "TelescopeTcp paramaters host, port, time_delay:" << host << port << time_delay;
+
+  if (port<=0 || port>0xFFFF) {
+    qWarning() << "ERROR creating TelescopeTcp - port not valid (should be less than 32767)";
     return;
   }
-  struct hostent *hep = gethostbyname(host.c_str());
+  if (time_delay<=0 || time_delay>10000000) {
+    qWarning() << "ERROR creating TelescopeTcp - time_delay not valid (should be less than 10000000)";
+    return;
+  }
+  struct hostent *hep = gethostbyname(host.toLocal8Bit());
   if (hep == 0) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "unknown host";
+    qDebug() << "ERROR creating TelescopeTcp - unknown host" << host;
     return;
   }
   if (hep->h_length != 4) {
-    qDebug() << "TelescopeTcp::TelescopeTcp(" << name.c_str() << ',' << params.c_str() << "): "
-             << "only IPv4 implemented"
-        ;
+    qDebug() << "ERROR creating TelescopeTcp - host address is not IPv4";
     return;
   }
   memset(&address,0,sizeof(struct sockaddr_in));
