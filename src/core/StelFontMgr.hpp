@@ -22,8 +22,6 @@
 #include <map>
 #include <QString>
 
-using namespace std;
-
 class SFont;
 
 //! @class StelFontMgr

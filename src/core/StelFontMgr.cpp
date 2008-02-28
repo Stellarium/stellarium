@@ -26,8 +26,6 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 
-using namespace std;
-
 /*************************************************************************
  Constructor for the StelFontMgr class
 *************************************************************************/

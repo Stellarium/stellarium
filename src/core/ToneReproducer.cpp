@@ -18,9 +18,6 @@
 
 #include <cmath>
 #include <cassert>
-
-using namespace std;
-
 # include <config.h>
 #ifndef HAVE_POW10
 //# define pow10(x) pow(10,(x))
