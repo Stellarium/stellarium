@@ -7,8 +7,6 @@
 #include <QString>
 #include <QStringList>
 
-using namespace std;
-
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of 
 //! directories in which to look for files called the search path. Typcially this

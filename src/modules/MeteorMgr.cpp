@@ -97,11 +97,11 @@ void MeteorMgr::update(double delta_time)
 	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		n++;
-		//printf("Meteor %d update\n", ++n);
+		//qDebug("Meteor %d update\n", ++n);
 		if( !( (*iter)->update(delta_time) ) )
 		{
 			// remove dead meteor
-			//      printf("Meteor \tdied\n");
+			//      qDebug("Meteor \tdied\n");
 
 			delete *iter;
 			active.erase(iter);
@@ -152,7 +152,7 @@ void MeteorMgr::update(double delta_time)
 		}
 	}
 
-	//  printf("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhr_to_wsr, delta_time);
+	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhr_to_wsr, delta_time);
 
 
 }

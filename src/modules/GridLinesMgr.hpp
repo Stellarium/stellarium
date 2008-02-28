@@ -28,8 +28,6 @@ class SkyGrid;
 class SkyLine;
 class QSettings;
 
-using namespace std;
-
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal and Equatorial Grids,
 //! as well as the great circles: Meridian Line, Ecliptic Line and Equator Line.

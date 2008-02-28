@@ -23,7 +23,6 @@
 #include "Skylight.hpp"
 
 #include <cmath>
-#include <cstdio>
 #include <cstdlib>
 
 /// Compute acos(x)

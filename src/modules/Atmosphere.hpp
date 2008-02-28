@@ -26,8 +26,6 @@
 #include "Skybright.hpp"
 #include "Fader.hpp"
 
-using namespace std;
-
 class Projector;
 class ToneReproducer;
 

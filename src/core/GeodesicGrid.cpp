@@ -39,8 +39,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <cstdlib>
 #include <cassert>
 
-using namespace std;
-
 static const double icosahedron_G = 0.5*(1.0+sqrt(5.0));
 static const double icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
 static const double icosahedron_a = icosahedron_b*icosahedron_G;

@@ -105,7 +105,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
 
   pos_train[2] = position[2] = start_h;
 
-  //  printf("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], start_h, end_h, velocity);
+  //  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], start_h, end_h, velocity);
 
   alive = 1;
   train=0;
@@ -177,7 +177,7 @@ bool Meteor::update(double delta_time)
     pos_train[2] -= velocity*delta_time/1000.0f;
   }
 
-  //printf("meteor position: %f delta_t %d\n", position[2], delta_time);
+  //qDebug("meteor position: %f delta_t %d\n", position[2], delta_time);
 
   // determine visual magnitude based on distance to observer
   double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );
@@ -217,7 +217,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	// don't draw if not visible (but may come into view)
 	if( t1 + t2 == 0 ) return 1;
 
-	//  printf("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
+	//  qDebug("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
 
 	if( train ) {
 		// connect this point with last drawn point

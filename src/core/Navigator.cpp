@@ -32,8 +32,8 @@ Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(
 {
 	if (!position)
 	{
-		printf("ERROR : Can't create a Navigator without a valid Observator\n");
-		exit(-1);
+		qCritical() << "ERROR : Can't create a Navigator without a valid Observator";
+		exit(1);
 	}
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
