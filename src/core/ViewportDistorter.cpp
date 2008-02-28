@@ -35,8 +35,6 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 
-using namespace std;
-
 class ViewportDistorterDummy : public ViewportDistorter
 {
 private:

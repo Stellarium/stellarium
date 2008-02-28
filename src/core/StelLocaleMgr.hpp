@@ -22,8 +22,6 @@
 
 #include "Translator.hpp"
 
-using namespace std;
-
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau

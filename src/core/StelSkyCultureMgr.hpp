@@ -23,8 +23,6 @@
 #include <QMap>
 #include <QString>
 
-using namespace std;
-
 //! @class StelSkyCultureMgr
 //! Manage sky cultures for stellarium.
 //! Different human cultures have used different names for stars, and visualised

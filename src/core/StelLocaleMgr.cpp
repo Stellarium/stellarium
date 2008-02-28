@@ -28,8 +28,6 @@
 #include <QSettings>
 #include <QString>
 
-using namespace std;
-
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMT_shift(0)
 {}
 

@@ -38,8 +38,6 @@ extern "C" {
 #include <QThread>
 #include <QSettings>
 				 				 
-using namespace std;
-
 // Initialize statics
 static PngLoader pngLoader;
 static JpgLoader jpgLoader;
