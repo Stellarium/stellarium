@@ -363,7 +363,7 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 
 void NewGui::init()
 {	
-	std::cout << "Creating GUI" << std::endl;
+	qDebug() << "Creating GUI ...";
 	QString fName;
 	try
 	{

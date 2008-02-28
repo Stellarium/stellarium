@@ -22,20 +22,16 @@
 
 #include <config.h>
 
-#include <string>
-#include <iostream>
 #include <QMap>
+#include <QString>
 #include <vector>
 #include "StelUtils.hpp"
-#include <QString>
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
 #define _(String) Translator::globalTranslator.translate( gettext_noop(String) ).c_str()
 #define q_(String) Translator::globalTranslator.qtranslate( gettext_noop(String) )
 #define N_(String) gettext_noop(String)
-
-using namespace std;
 
 //! Class used to translate strings to any language.
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
@@ -140,3 +136,4 @@ private:
 };
 
 #endif
+
