@@ -20,17 +20,15 @@
 #ifndef _TELESCOPE_H_
 #define _TELESCOPE_H_
 
+#include <list>
 #include <QString>
-#include "StelObject.hpp"
-#include "Navigator.hpp"
+
 #if defined (_MSC_VER)
 #include <winsock2.h>
 #endif
 
-#include <list>
-#include <string>
-
-using namespace std;
+#include "StelObject.hpp"
+#include "Navigator.hpp"
 
 long long int GetNow(void);
 
@@ -40,7 +38,7 @@ struct fd_set;
 
 class Telescope : public StelObject {
 public:
-  static Telescope *create(const string &url);
+  static Telescope *create(const QString &url);
   virtual ~Telescope(void) {}
   QString getEnglishName(void) const {return name;}
   QString getNameI18n(void) const {return nameI18n;}
@@ -62,7 +60,7 @@ public:
   void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
   const std::list<double> &getOculars(void) const {return oculars;}
 protected:
-  Telescope(const string &name);
+  Telescope(const QString &name);
   QString nameI18n;
   const QString name;
 private:

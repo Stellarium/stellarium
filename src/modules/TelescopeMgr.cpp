@@ -235,7 +235,7 @@ void TelescopeMgr::init() {
 		const QString url = conf->value("telescopes/"+telescope_name,"").toString();
 		if (!url.isEmpty()) 
 		{
-			Telescope *t = Telescope::create(url.toStdString());
+			Telescope *t = Telescope::create(url);
 			if (t) 
 			{
 				for (int j=0;j<9;j++) 
