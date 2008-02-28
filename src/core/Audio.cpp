@@ -88,7 +88,7 @@ void Audio::sync() {
 	Mix_ResumeMusic();
 	isPlaying = 1;
 
-	// printf("Synced audio to %f seconds\n", elapsedSeconds);
+	// qDebug("Synced audio to %f seconds\n", elapsedSeconds);
 }
 
 void Audio::pause() {
@@ -121,7 +121,7 @@ void Audio::incrementVolume() {
 
 	Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 
-	// printf("volume %f\n", masterVolume);
+	// qDebug("volume %f\n", masterVolume);
 }
 
 void Audio::decrementVolume() {
@@ -131,7 +131,7 @@ void Audio::decrementVolume() {
 
 	Mix_VolumeMusic(int(MIX_MAX_VOLUME*masterVolume));
 
-	//	printf("volume %f\n", masterVolume);
+	// qDebug("volume %f\n", masterVolume);
 }
 
 #else

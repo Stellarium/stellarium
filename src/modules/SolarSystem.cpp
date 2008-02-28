@@ -19,7 +19,6 @@
 
 
 #include <algorithm>
-#include <iostream>
 #include "SolarSystem.hpp"
 #include "STexture.hpp"
 #include "stellplanet.h"
@@ -48,8 +47,6 @@
 #include <QMultiMap>
 #include <QMapIterator>
 #include <QDebug>
-
-using namespace std;
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL),selected(NULL),

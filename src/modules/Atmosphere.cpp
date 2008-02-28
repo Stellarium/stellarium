@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <QDebug>
+
 #include "GLee.h"
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
@@ -49,10 +51,9 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		}
 		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];
-//cout << "Atmosphere::compute_color: "
-//     << (1+sky_resolution_x)*(1+sky_resolution_y)
-//     << " Gridpoints instead of " << (48*48)
-//     << endl;
+		//qDebug() << "Atmosphere::compute_color: "
+		//         << (1+sky_resolution_x)*(1+sky_resolution_y)
+		//         << " Gridpoints instead of " << (48*48);
 		float stepX = (float)prj->getViewportWidth() / (sky_resolution_x-0.5);
 		float stepY = (float)prj->getViewportHeight() / sky_resolution_y;
 		float viewport_left = (float)prj->getViewportPosX();
@@ -79,7 +80,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	sunPos.normalize();
 	moonPos.normalize();
 	double separation_angle = std::acos(sunPos.dot(moonPos));  // angle between them
-	//	printf("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
+	// qDebug("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
 	// TODO: use better coverage function (non-linear)

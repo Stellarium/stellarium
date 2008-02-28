@@ -30,8 +30,6 @@
 #include "StelUtils.hpp"
 #include "typeface.h"
 
-using namespace std;
-
 /*
  * Wrapper class on the TypeFace class used to display fonts in openGL
  */

@@ -359,7 +359,6 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 
 	int totalRecords=0;
 	QString record;
-	// HERE
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd()) 
 	{
