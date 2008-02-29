@@ -33,6 +33,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QDebug>
 
 #ifdef WIN32
   #include <winsock2.h> // select
