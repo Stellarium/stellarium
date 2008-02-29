@@ -26,7 +26,6 @@
 #include <ctime>
 #include <config.h>
 #include <cstdio>
-#include <iostream>
 #include <iomanip>
 #include <vector>
 #include <algorithm>
@@ -602,7 +601,7 @@ bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool 
 // to julian day
 int string_to_jday(string date, double &jd)
 {
-	cerr << date << endl;
+	//qDebug() << date;
 	// Handle also strings with : instead of - in date part
 // 	for(int i=0; i<2; i++)
 // 	{
