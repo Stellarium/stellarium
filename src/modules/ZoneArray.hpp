@@ -340,13 +340,13 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,bool byte_swap,bool use_mmap,
               );
             }
           }
-//           cout << endl
+//           qDebug() << "\n"
 //                << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//                << "): repack test start" << endl;
+//                << "): repack test start";
 //           stars[0].print();
 //           stars[1].print();
-//           cout << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
-//                << "): repack test end" << endl;
+//           qDebug() << "SpecialZoneArray<Star>::SpecialZoneArray(" << level
+//                << "): repack test end";
         }
       }
     }
