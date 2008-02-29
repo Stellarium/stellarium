@@ -113,8 +113,8 @@ void SkyGrid::setFontSize(double newFontSize)
 }
 
 // Conversion into mas = milli arcsecond
-const static double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
-const static double DEGREE_MAS = 1000.*60.*60.;
+static const double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
+static const double DEGREE_MAS = 1000.*60.*60.;
 
 //! Return the standard longitude in radian [-pi;+pi] for a position given in the viewport
 static double getLonFrom2dPos(const Projector* prj, const Vec2d& p)
