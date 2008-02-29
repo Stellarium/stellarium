@@ -108,6 +108,12 @@ double ConvexPolygon::getArea() const
 // TODO this code is quite wrong but good for triangles
 Vec3d ConvexPolygon::getBarycenter() const
 {
+	if (ConvexS::size()==1)
+	{
+		// Handle special case for > 180 degree polygons
+		return asConvex()[0].n;
+	}
+	
 	Vec3d barycenter;
 	for (unsigned int i=0;i<Polygon::size();++i)
 	{
