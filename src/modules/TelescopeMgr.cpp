@@ -54,8 +54,8 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
   if (WSAStartup(0x202,&wsaData) == 0) {
     wsa_ok = true;
   } else {
-    cout << "TelescopeMgr::TelescopeMgr: WSAStartup failed, "
-            "you will not be able to control telescopes" << endl;
+    qWarning() << "WARNING TelescopeMgr::TelescopeMgr: WSAStartup failed, "
+               << "you will not be able to control telescopes";
     wsa_ok = false;
   }
 #else
@@ -312,6 +312,6 @@ void TelescopeMgr::communicate(void) {
       }
     }
 //    t = GetNow() - t;
-//    cout << "TelescopeMgr::communicate: " << t << endl;
+//    qDebug() << "TelescopeMgr::communicate: " << t;
   }
 }
