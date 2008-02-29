@@ -214,7 +214,8 @@ void Atmosphere::draw(Projector* prj)
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
-
+// 		glCullFace(GL_FRONT);
+// 		glEnable(GL_CULL_FACE);
 		for (int y2=0; y2<sky_resolution_y; ++y2)
 		{
 			const GridPoint *g0 = grid + y2*(1+sky_resolution_x);
