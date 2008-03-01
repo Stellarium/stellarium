@@ -25,10 +25,12 @@
 #include "vecmath.h"
 #include <sstream>
 #include <algorithm>
+#include <exception>
 #include <stdexcept>
 
 #include "fixx11h.h"
 #include <QDateTime>
+#include <QString>
 
 using namespace std;
 
@@ -40,23 +42,6 @@ using namespace std;
 
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
-
-//! @class StellariumException 
-//! Errors occuring because of Stellarium's code should throw this exception, or subclass of it.
-class StellariumException : public std::exception
-{
-public:
-	//! Constructor
-	//! @param msg a string message which will be appended to the error message 
-	//! which will be output when the exception occurs.  It will be appended to
-	//! "StellariumException occured: ".
-	StellariumException(const std::string& msg) : message("StellariumException occured: " + msg) {;}
-	~StellariumException() throw() {;}
-	//! Get a string describing the exception.
-	//! @return the exception message.
-	virtual const char* what() const throw() {return message.c_str();}
-	std::string message;
-};
 
 namespace StelUtils {
 
