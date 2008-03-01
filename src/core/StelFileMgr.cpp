@@ -1,12 +1,12 @@
 #include <config.h>
-#include <stdexcept>
-#include <string>
 #include <cstdlib>
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <QDir>
 #include <QString>
 #include <QDebug>
+
+#include "StelUtils.hpp"
 
 #ifdef WIN32
 # include <windows.h>
@@ -78,13 +78,13 @@ StelFileMgr::~StelFileMgr()
 QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 {
 	if (path.isEmpty())
-		throw (std::runtime_error(std::string("Empty file path")));
+		throw (std::runtime_error("Empty file path"));
 	// explicitly specified relative paths
 	if (path[0] == '.')
 		if (fileFlagsCheck(path, flags)) 
 			return path;
 		else
-			throw (std::runtime_error(std::string("file does not match flags: ") + path.toStdString()));
+			throw (std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData()));
 
 	// Qt resource files
 	if (path.startsWith(":/"))
@@ -96,7 +96,7 @@ QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 		if (fileFlagsCheck(path, flags))
 			return path;
 		else
-			throw (std::runtime_error(std::string("file does not match flags: ") + path.toStdString()));
+			throw (std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData()));
 		
 	foreach (QString i, fileLocations)
 	{
@@ -104,7 +104,7 @@ QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 			return i + "/" + path;
 	}
 	
-	throw(std::runtime_error(std::string("file not found: ") + path.toStdString()));
+	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::FLAGS& flags)
@@ -310,13 +310,13 @@ void StelFileMgr::setUserDir(const QString& newDir)
 	{
 		qWarning() << "WARNING StelFileMgr::setUserDir user dir does not exist: "
 			<< userDirFI.filePath();
-		throw (std::runtime_error(std::string("NOT_VALID")));
+		throw (std::runtime_error("NOT_VALID"));
 	}
 	else if (!userDirFI.isWritable())
 	{
 		qWarning() << "WARNING StelFileMgr::setUserDir user dir is not writable: "
 			<< userDirFI.filePath();
-		throw (std::runtime_error(std::string("NOT_VALID")));
+		throw (std::runtime_error("NOT_VALID"));
 	}
 	userDir = userDirFI.filePath();
 	fileLocations.replace(0, userDir);
@@ -364,14 +364,14 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	if (!userDirFI.exists() || !userDirFI.isDir())
 	{
 		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: "
-			<< userDirFI.filePath();
-		throw (std::runtime_error(std::string("NOT_VALID")));
+		           << userDirFI.filePath();
+		throw (std::runtime_error("NOT_VALID"));
 	}
 	else if (!userDirFI.isWritable())
 	{
 		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: "
-			<< userDirFI.filePath();
-		throw (std::runtime_error(std::string("NOT_VALID")));
+		           << userDirFI.filePath();
+		throw (std::runtime_error("NOT_VALID"));
 	}
 	screenshotDir = userDirFI.filePath();
 }
