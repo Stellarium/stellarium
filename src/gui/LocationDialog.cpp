@@ -54,6 +54,11 @@ void LocationDialog::setVisible(bool v)
 				this, SLOT(selectPosition(float, float, QString)));
 		connect(ui->graphicsView, SIGNAL(positionHighlighted(float, float, QString)),
 				this, SLOT(highlightPosition(float, float, QString)));
+		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(int)), this,
+				SLOT(spinBoxChanged(void)));
+		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(int)), this,
+				SLOT(spinBoxChanged(void)));
+				
 	}
 	else
 	{
@@ -78,3 +83,9 @@ void LocationDialog::highlightPosition(float longitude, float latitude, QString 
 	ui->cursorLabel->update();
 }
 
+void LocationDialog::spinBoxChanged()
+{
+	float longitude = ui->longitudeSpinBox->getValue();
+	float latitude = ui->latitudeSpinBox->getValue();
+	ui->graphicsView->select(longitude, latitude);
+}
