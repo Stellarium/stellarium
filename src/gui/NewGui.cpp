@@ -136,9 +136,14 @@ LeftStelBar::~LeftStelBar()
 
 void LeftStelBar::addButton(StelButton* button)
 {
-	QRectF rectCh = childrenBoundingRect();
+	double posY = 0;
+	if (children().size()!=0)
+	{
+		const QRectF& r = childrenBoundingRect();
+		posY += r.bottom()-1;
+	}
 	button->setParentItem(this);
-	button->setPos(0, rectCh.bottom()+10);
+	button->setPos(0.5, posY+10.5);
 }
 
 void LeftStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -176,7 +181,6 @@ void BottomStelBar::addButton(StelButton* button)
 	QRectF rectCh = getButtonsBoundingRect();
 	button->setParentItem(this);
 	button->setPos(rectCh.right(), y);
-	//qWarning() << rectCh << boundingRect();
 	updateText();
 }
 
@@ -188,7 +192,7 @@ QRectF BottomStelBar::getButtonsBoundingRect()
 	fov->setParentItem(NULL);
 	fps->setParentItem(NULL);
 	
-	QRectF rectCh = childrenBoundingRect();
+	QRectF rectCh = boundingRect();
 	
 	location->setParentItem(this);
 	datetime->setParentItem(this);
@@ -226,14 +230,14 @@ void BottomStelBar::updateText()
 
 	QRectF rectCh = getButtonsBoundingRect();
 	
-	fov->setPos(rectCh.right()-150, 0);
-	fps->setPos(rectCh.right()-70, 0);
+	fov->setPos(rectCh.right()-170, 0);
+	fps->setPos(rectCh.right()-60, 0);
 	
 	double left = datetime->pos().x()+datetime->boundingRect().width();
 	double right = fov->pos().x();
 	double newPosX = left+(right-left)/2.-location->boundingRect().width()/2.;
 	if (std::fabs(newPosX-location->pos().x())>20)
-		location->setPos(newPosX,0);
+		location->setPos((int)newPosX,0);
 }
 
 void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -243,11 +247,14 @@ void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* opt
 
 QRectF BottomStelBar::boundingRect() const
 {
-	return childrenBoundingRect();
+	if (children().size()==0)
+		return QRectF();
+	const QRectF& r = childrenBoundingRect();
+	return QRectF(0, 0, r.width()-1, r.height()-1);
 }
 
-InfoPanel::InfoPanel(QGraphicsItem* parent)
-	: QGraphicsItem(parent)
+
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	QFont font("DejaVuSans", 10);
 	QColor color = QColor::fromRgbF(.8,.8,.8,1);
@@ -457,7 +464,7 @@ void NewGui::init()
 	///////////////////////////////////////////////////////////////////////////
 	// Create the help label
 	buttonHelpLabel = new QGraphicsSimpleTextItem("");
-	buttonHelpLabel->setFont(QFont("DejaVuSans", 12));
+	buttonHelpLabel->setFont(QFont("DejaVuSans", 11));
 	buttonHelpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	
 	// Construct the Windows buttons bar
@@ -615,9 +622,11 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	double rangeX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
 	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
 	
-	double rangeY = buttonBar->boundingRect().height()-7.-buttonBarPath->getRoundSize();
+	double rangeY = buttonBar->boundingRect().height()+0.5-7.-buttonBarPath->getRoundSize();
 	buttonBar->setPos(winBar->boundingRect().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
-	buttonHelpLabel->setPos(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+10, buttonBar->pos().y()-buttonBarPath->getRoundSize()-25);
+	
+	buttonHelpLabel->setPos((int)(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+8), (int)(buttonBar->pos().y()-buttonBarPath->getRoundSize()-20));
+	
 	buttonBarPath->updatePath(buttonBar, winBar);
 
 	infoPanel->setPos(8,8);
