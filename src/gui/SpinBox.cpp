@@ -156,6 +156,11 @@ void LongitudeSpinBox::setValue(double value)
 	SpinBox::setValue((int)((value + 180) * 60 * 60));
 }
 
+float LongitudeSpinBox::getValue()
+{
+	return (float)value() / (60 * 60) - 180;
+}
+
 LatitudeSpinBox::LatitudeSpinBox(QWidget *parent):
 		SpinBox(parent)
 {
@@ -169,4 +174,9 @@ LatitudeSpinBox::LatitudeSpinBox(QWidget *parent):
 void LatitudeSpinBox::setValue(double value)
 {
 	SpinBox::setValue((int)((value + 90) * 60 * 60));
+}
+
+float LatitudeSpinBox::getValue()
+{
+	return (float)value() / (60 * 60) - 90;
 }
