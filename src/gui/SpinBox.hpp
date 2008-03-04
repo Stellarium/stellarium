@@ -56,6 +56,7 @@ Q_OBJECT
 public:
 	LongitudeSpinBox(QWidget *parent = 0);
 	void setValue(double value);
+	float getValue();
 };
 
 class LatitudeSpinBox : public SpinBox
@@ -64,6 +65,7 @@ Q_OBJECT
 public:
 	LatitudeSpinBox(QWidget *parent = 0);
 	void setValue(double value);
+	float getValue();
 };
 
 
