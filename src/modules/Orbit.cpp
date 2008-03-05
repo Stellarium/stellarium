@@ -10,6 +10,7 @@
 #include <functional>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 
 #include "Solve.hpp"
 #include "Orbit.hpp"
