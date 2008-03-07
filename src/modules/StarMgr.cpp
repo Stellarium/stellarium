@@ -650,7 +650,7 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
   e2 *= f;
   e3 *= f;
     // search the triangles
- 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e0,e1,e2,e3,last_max_search_level);
+ 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e3,e2,e1,e0,last_max_search_level);
     // iterate over the stars inside the triangles:
   f = cos(lim_fov * M_PI/180.);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
