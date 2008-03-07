@@ -112,7 +112,6 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	{
 		foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
 		{
-			qWarning() << intersect(viewPortPoly, poly);
 			if (contains(viewPortPoly, poly))
 			{
 				intersectScreen = true;
@@ -125,9 +124,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			}
 		}
 	}
-	
-// 	if (!fullInScreen && intersectScreen)
-// 		qWarning() << intersectScreen << fullInScreen;
+
 	if (!intersectScreen)
 		return;
 	

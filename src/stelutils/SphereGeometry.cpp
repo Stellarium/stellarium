@@ -26,9 +26,9 @@ using namespace StelGeom;
 ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
 {
     reserve(3);
-    push_back(e0^e1);
-    push_back(e1^e2);
-    push_back(e2^e0);
+    push_back(e1^e0);
+    push_back(e2^e1);
+	push_back(e0^e2);
 	
 	// Warning: vectors not normalized while they should be
 	// In this case it works because d==0 for each HalfSpace
@@ -38,20 +38,20 @@ ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2)
 ConvexS::ConvexS(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)
 {
     reserve(4);
-	const double d = e0*((e1-e0)^(e2-e0));
+	const double d = e3*((e2-e3)^(e1-e3));
 	if (d > 0)
 	{
-		push_back(e0^e1);
-		push_back(e1^e2);
-		push_back(e2^e3);
-		push_back(e3^e0);
+		push_back(e1^e0);
+		push_back(e2^e1);
+		push_back(e3^e2);
+		push_back(e0^e3);
 		
 		// Warning: vectors not normalized while they should be
 		// In this case it works because d==0 for each HalfSpace
 	}
 	else
 	{
-		push_back((e1-e0)^(e2-e0));
+		push_back((e2-e3)^(e1-e3));
 		(*begin()).d = d;
 		(*begin()).n.normalize();
 	}
