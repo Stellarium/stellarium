@@ -117,7 +117,7 @@ void NebulaMgr::init()
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 	
 	// Debug
-	dssTile = new SkyImageTile("/home/fab1/Desktop/N874/N874_00_00_x64.json");
+	// dssTile = new SkyImageTile("/home/fab1/Desktop/N874/N874_00_00_x64.json");
 }
 
 // Draw all the Nebulae
@@ -176,7 +176,7 @@ double NebulaMgr::draw(StelCore* core)
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
-	dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
+	// dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
 	return 0;
 }
 
