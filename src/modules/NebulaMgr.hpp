@@ -204,6 +204,9 @@ private:
 	bool flagShowTexture;			// Define if nebula textures are displayed
 	
 	STextureSP texPointer;			// The selection pointer texture
+	
+	// Debug
+	class SkyImageTile* dssTile;
 };
 
 #endif // _NEBULA_MGR_H_
