@@ -173,6 +173,13 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	
 	parseCLIArgsPostConfig();
 	moduleMgr = new StelModuleMgr();
+	
+	// testing code
+// 	QtJsonParser parser;
+// 	QFile file("/home/fabien/Desktop/N874_00_00_x64.json");
+// 	file.open(QIODevice::ReadOnly);
+// 	qWarning() << parser.parse(file);
+	return;
 }
 
 /*************************************************************************

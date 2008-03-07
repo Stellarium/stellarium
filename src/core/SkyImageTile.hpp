@@ -22,20 +22,32 @@
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
 #include <QList>
+#include <QString>
+#include <QStringList>
+
+class QIODevice;
+class StelCore;
 
 //! Base class for any astro image with a fixed position
 class SkyImageTile
 {
 public:
 	//! Constructor
-	SkyImageTile();
+	SkyImageTile(const QString& url, SkyImageTile* parent);
 
-	//! Desctructor
+	//! Destructor
 	virtual ~SkyImageTile();
 	
 	//! Draw the image on the screen.
 	virtual void draw(StelCore* core);
+
+	//! Return the base URL prefixed to relative URL
+	QString getBaseUrl() const {return baseUrl;}
 	
+protected:
+	//! Load the tile information from a JSON file
+	void loadFromJSON(QIODevice& input);
+		
 private:
 	// Image credits
 	QString credits;
@@ -44,7 +56,10 @@ private:
 	QString infoUrl;
 	
 	// URL where the image is located
-	QString url;
+	QString imageUrl;
+	
+	// Base URL to prefix to relative URL
+	QString baseUrl;
 	
 	// Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
@@ -56,10 +71,16 @@ private:
 	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
 	
 	// Positions of the vertex of each convex polygons in texture space
-	QList< QList<Vec3f> > textureCoords;
+	QList< QList<Vec2f> > textureCoords;
 	
-	// The list of all the subtiles for this tile
+	// The list of all the subTiles URL for this tile
+	QStringList subTilesUrls;
+	
+	// The list of all the created subtiles for this tile
 	QList<SkyImageTile*> subTiles;
+	
+	// Set to true if an error occured with this tile and it should not be displayed
+	bool errorOccured;
 };
 
 #endif /*SKYIMAGETILE_H_*/
