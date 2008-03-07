@@ -43,6 +43,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 
+#include "SkyImageTile.hpp"
+
 void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
 const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
@@ -113,6 +115,9 @@ void NebulaMgr::init()
 	updateI18n();
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	
+	// Debug
+	//dssTile = new SkyImageTile("/home/fab1/Desktop/N874/N874_00_00_x64.json");
 }
 
 // Draw all the Nebulae
@@ -171,6 +176,7 @@ double NebulaMgr::draw(StelCore* core)
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
+	//dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
 	return 0;
 }
 
