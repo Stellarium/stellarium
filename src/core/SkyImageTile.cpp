@@ -28,12 +28,15 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QHttp>
+#include <QUrl>
+#include <QBuffer>
 #include <stdexcept>
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccured(false)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccured(false), downloading(false), downloadId(0), downloadBuff(NULL)
 {
-	if (!url.startsWith("http://"))
+	if (!url.startsWith("http://") && !parent->getBaseUrl().startsWith("http://"))
 	{
 		// Assume a local file
 		QString fileName;
@@ -47,7 +50,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 			{
 				fileName = StelApp::getInstance().getFileMgr().findFile(parent->getBaseUrl()+url);
 			}
-			catch (std::exception e)
+			catch (std::runtime_error e)
 			{
 				qWarning() << "WARNING : Can't find JSON Image Tile description: " << url << ": " << e.what() << endl;
 				errorOccured = true;
@@ -60,7 +63,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 		{
 			loadFromJSON(f);
 		}
-		catch (std::exception e)
+		catch (std::runtime_error e)
 		{
 			qWarning() << "WARNING : Can't parse JSON Image Tile description: " << fileName << ": " << e.what() << endl;
 			errorOccured = true;
@@ -73,7 +76,25 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 	}
 	else
 	{
-		assert(0); // TODO, manage remote loading
+		QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
+		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+		QUrl qurl;
+		if (url.startsWith("http://"))
+		{
+			qurl.setUrl(url);
+		}
+		else
+		{
+			assert(parent->getBaseUrl().startsWith("http://"));
+			qurl.setUrl(parent->getBaseUrl()+url);
+		}
+		http->setHost(qurl.host(), qurl.port(80));
+		downloadBuff = new QBuffer();
+		downloadBuff->open(QIODevice::WriteOnly);
+		downloading = true;
+		downloadId = http->get(qurl.toEncoded(), downloadBuff);
+		QString turl = qurl.toString();
+		baseUrl = turl.left(turl.lastIndexOf('/')+1);
 	}
 }
 
@@ -88,9 +109,14 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	if (errorOccured)
 		return;
 	
+	if (downloading)
+		return;
+	
 	if (!tex)
 	{
 		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
+		texMgr.setDefaultParams();
+		
 		tex = texMgr.createTextureThread(baseUrl+imageUrl);
 		if (!tex)
 		{
@@ -125,7 +151,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 		}
 	}
 
-	if (!intersectScreen)
+	if (fullInScreen==false && intersectScreen==false)
 		return;
 	
 	Projector* prj = core->getProjection();
@@ -189,14 +215,14 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 	QtJsonParser parser;
 	QVariantMap map = parser.parse(input).toMap();
 	if (map.isEmpty())
-		throw std::runtime_error("WARNING: empty JSON file, cannot load image tile");
+		throw std::runtime_error("empty JSON file, cannot load image tile");
 	credits = map.value("credits").toString();
 	infoUrl = map.value("infoUrl").toString();
 	imageUrl = map.value("imageUrl").toString();
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
-		throw std::runtime_error("WARNING: minResolution expect a double value");
+		throw std::runtime_error("minResolution expect a double value");
 	
 	// Load the convex polygons
 	QVariantList polyList = map.value("skyConvexPolygons").toList();
@@ -209,7 +235,7 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 			Vec3d v;
 			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
 			if (!ok)
-				throw std::runtime_error("WARNING: wrong Ra and Dec, expect a double value");
+				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);
 		}
 		assert(vertices.size()==4);
@@ -226,18 +252,51 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 			const QVariantList vl = vXY.toList();
 			vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
 			if (!ok)
-				throw std::runtime_error("WARNING: wrong X and Y, expect a double value");
+				throw std::runtime_error("wrong X and Y, expect a double value");
 		}
 		assert(vertices.size()==4);
 		textureCoords.append(vertices);
 	}
 	
 	if (skyConvexPolygons.size()!=textureCoords.size())
-		throw std::runtime_error("WARNING: the number of convex polygons does not match the number of texture space polygon");
+		throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	
 	QVariantList subTiles = map.value("subTiles").toList();
 	foreach (QVariant subTile, subTiles)
 	{
 		subTilesUrls.append(subTile.toString());
 	}
+}
+
+// Called when the download for the JSON file terminated
+void SkyImageTile::downloadFinished(int id, bool error)
+{
+	if (id!=downloadId)
+		return;
+	downloading = false;
+	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
+	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+	if (error)
+	{
+		delete downloadBuff;
+		downloadBuff = NULL;
+		errorOccured = true;
+		return;
+	}
+	
+	try
+	{
+		downloadBuff->close();
+		downloadBuff->open(QIODevice::ReadOnly);
+		loadFromJSON(*downloadBuff);
+		downloadBuff->close();
+	}
+	catch (std::runtime_error e)
+	{
+		downloadBuff->close();
+		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
+		errorOccured = true;
+	}
+	delete downloadBuff;
+	downloadBuff = NULL;
 }

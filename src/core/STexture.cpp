@@ -143,7 +143,7 @@ bool STexture::bind()
 	
 	// From this point we assume that fullPath is valid
 	// Start loading the image in a thread and return imediately
-	if (!isLoadingImage)
+	if (!isLoadingImage && downloaded==true)
 	{
 		isLoadingImage = true;
 		ImageLoadThread* thread = new ImageLoadThread(this);
@@ -161,16 +161,19 @@ void STexture::downloadFinished(int did, bool error)
 {
 	if (did!=downloadId)
 		return;
+	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
+	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+	
 	imageFile->close();
 	downloaded=true;
 	downloadId=0;
-	if (error)
+	if (error || errorOccured)
 	{
 		qWarning() << "Texture download failed for " + imageFile->fileName()+ ": " + StelApp::getInstance().getTextureManager().getDownloader()->errorString();
 		errorOccured = true;
+		imageFile->deleteLater();
+		return;
 	}
-	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
-	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 	
 	// Call bind to activate data loading
 	bind();
@@ -279,6 +282,9 @@ bool STexture::getDimensions(int &awidth, int &aheight)
 bool STexture::imageLoad()
 {
 	QMutexLocker lock(mutex);
-	return StelApp::getInstance().getTextureManager().loadImage(this);
+	const bool res = StelApp::getInstance().getTextureManager().loadImage(this);
+	if (imageFile)
+		imageFile->deleteLater();
+	return res;
 }
 

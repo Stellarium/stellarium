@@ -44,6 +44,7 @@
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 //#include "QtScriptMgr.hpp"
+#include "QtJsonParser.hpp"
 
 #include <iostream>
 #include <QStringList>
