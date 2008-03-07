@@ -217,7 +217,7 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	return StelGeom::ConvexPolygon(e0, e3, e2, e1);
+	return StelGeom::ConvexPolygon(e0, e1, e2, e3);
 }
 
 StelGeom::ConvexS Projector::unprojectViewport(void) const {
@@ -276,10 +276,10 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
           h2.contains(e0) && h2.contains(e1) &&
           h3.contains(e1) && h3.contains(e2)) {
         StelGeom::ConvexS rval(4);
-        rval[0] = h0;
-        rval[1] = h1;
-        rval[2] = h2;
-        rval[3] = h3;
+        rval[0] = h3;
+        rval[1] = h2;
+        rval[2] = h1;
+        rval[3] = h0;
         return rval;
       } else {
         Vec3d middle;
