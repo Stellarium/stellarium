@@ -30,6 +30,8 @@ SET(stellarium_lib_SRCS
 	core/SFont.hpp
 	core/SkyDrawer.cpp
 	core/SkyDrawer.hpp
+	core/SkyImageTile.hpp
+	core/SkyImageTile.cpp
 	core/SphericMirrorCalculator.cpp
 	core/SphericMirrorCalculator.hpp
 	core/StelApp.cpp
@@ -94,6 +96,8 @@ SET(stellarium_lib_SRCS
 	stelutils/typeface.cpp
 	stelutils/typeface.h
 	stelutils/vecmath.h
+	stelutils/QtJsonParser.hpp
+	stelutils/QtJsonParser.cpp
 	
 	planetsephems/calc_interpolated_elements.c
 	planetsephems/calc_interpolated_elements.h
