@@ -459,6 +459,9 @@ void NewGui::init()
 	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));
 	
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
+	
+	QObject::connect(ui->actionSave_Screenshot, SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
+	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
