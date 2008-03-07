@@ -29,8 +29,9 @@ class QIODevice;
 class StelCore;
 
 //! Base class for any astro image with a fixed position
-class SkyImageTile
+class SkyImageTile : public QObject
 {
+	Q_OBJECT;
 public:
 	//! Constructor
 	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
@@ -47,6 +48,12 @@ public:
 protected:
 	//! Load the tile information from a JSON file
 	void loadFromJSON(QIODevice& input);
+		
+private slots:
+	//! Called when the download for the JSON file terminated
+	//! @param id the identifier of the request.
+	//! @param error true if an error occurred during the processing; otherwise false
+	void downloadFinished(int id, bool error);
 		
 private:
 	// Image credits
@@ -81,6 +88,11 @@ private:
 	
 	// Set to true if an error occured with this tile and it should not be displayed
 	bool errorOccured;
+	
+	// true if the JSON descriptor file is currently downloading
+	bool downloading;
+	int downloadId;
+	class QBuffer* downloadBuff;
 };
 
 #endif /*SKYIMAGETILE_H_*/

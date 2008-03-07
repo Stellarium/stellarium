@@ -229,6 +229,7 @@ SET(stellarium_MOC_HDRS
 	core/StelAppGraphicsItem.hpp
 	core/STexture.hpp
 	core/MovementMgr.hpp
+	core/SkyImageTile.hpp
 	modules/ConstellationMgr.hpp
 	modules/LandscapeMgr.hpp
 	modules/GridLinesMgr.hpp
