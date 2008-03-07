@@ -33,13 +33,13 @@ class SkyImageTile
 {
 public:
 	//! Constructor
-	SkyImageTile(const QString& url, SkyImageTile* parent);
+	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
 
 	//! Destructor
 	virtual ~SkyImageTile();
 	
 	//! Draw the image on the screen.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
 
 	//! Return the base URL prefixed to relative URL
 	QString getBaseUrl() const {return baseUrl;}
