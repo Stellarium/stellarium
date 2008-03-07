@@ -21,6 +21,10 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#include "STexture.hpp"
+#include "Projector.hpp"
+#include "StelCore.hpp"
+#include "StelTextureMgr.hpp"
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -65,7 +69,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 		}
 		f.close();
 		QFileInfo finf(fileName);
-		baseUrl = finf.absolutePath();
+		baseUrl = finf.absolutePath()+'/';
 	}
 	else
 	{
@@ -79,8 +83,107 @@ SkyImageTile::~SkyImageTile()
 }
 	
 // Draw the image on the screen.
-void SkyImageTile::draw(StelCore* core)
+void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
+	if (errorOccured)
+		return;
+	
+	if (!tex)
+	{
+		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
+		tex = texMgr.createTextureThread(baseUrl+imageUrl);
+		if (!tex)
+		{
+			errorOccured = true;
+			return;
+		}
+	}
+	
+	if (!tex->bind())
+		return;
+	
+	const float factorX = tex->getCoordinates()[2][0];
+	const float factorY = tex->getCoordinates()[2][1];
+	
+	// Check that we are in the screen
+	bool fullInScreen = true;
+	bool intersectScreen = false;
+	if (recheckIntersect)
+	{
+		foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
+		{
+			qWarning() << intersect(viewPortPoly, poly);
+			if (contains(viewPortPoly, poly))
+			{
+				intersectScreen = true;
+			}
+			else
+			{
+				fullInScreen = false;
+				if (intersect(viewPortPoly, poly))
+					intersectScreen = true;
+			}
+		}
+	}
+	
+// 	if (!fullInScreen && intersectScreen)
+// 		qWarning() << intersectScreen << fullInScreen;
+	if (!intersectScreen)
+		return;
+	
+	Projector* prj = core->getProjection();
+	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glColor4f(1.0,1.0,1.0,1.0);
+	
+	for (int p=0;p<skyConvexPolygons.size();++p)
+	{
+		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
+		const QList<Vec2f>& texCoords = textureCoords.at(p);
+		
+		assert((int)poly.size()==texCoords.size());
+				
+		Vec3d win;
+		const int N=poly.size()-1;
+		int idx=N;
+		int diff = 0;
+		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
+		glBegin(GL_TRIANGLE_STRIP);
+		for (int i=0;i<=N;++i)
+		{
+			idx = (diff==0 ? N-i/2 : i/2);
+			++diff;
+			if (diff>1) diff=0;
+			
+			glTexCoord2f(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
+			prj->project(poly[idx],win);
+			glVertex3dv(win);
+		}
+		glEnd();
+	}
+	
+	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
+	if (degPerPixel < minResolution && !subTilesUrls.isEmpty())
+	{
+		if (subTiles.isEmpty())
+		{
+			// Load the sub tiles because we reached the maximum resolution
+			// and they are not yet loaded
+			foreach (QString url, subTilesUrls)
+			{
+				subTiles.append(new SkyImageTile(url, this));
+			}
+		}
+		else
+		{
+			// Draw the subtiles
+			foreach (SkyImageTile* tile, subTiles)
+			{
+				tile->draw(core, viewPortPoly, !fullInScreen);
+			}
+		}
+	}
 }
 	
 // Load the tile information from a JSON file
@@ -107,7 +210,7 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok), v);
+			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
 			if (!ok)
 				throw std::runtime_error("WARNING: wrong Ra and Dec, expect a double value");
 			vertices.append(v);
