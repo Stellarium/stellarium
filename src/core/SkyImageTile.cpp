@@ -34,8 +34,9 @@
 #include <stdexcept>
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccured(false), downloading(false), downloadId(0), downloadBuff(NULL)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (!url.startsWith("http://") && !parent->getBaseUrl().startsWith("http://"))
 	{
 		// Assume a local file
@@ -76,8 +77,6 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 	}
 	else
 	{
-		QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
-		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 		QUrl qurl;
 		if (url.startsWith("http://"))
 		{
@@ -88,11 +87,11 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 			assert(parent->getBaseUrl().startsWith("http://"));
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
+		http = new QHttp(this);
+		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 		http->setHost(qurl.host(), qurl.port(80));
-		downloadBuff = new QBuffer();
-		downloadBuff->open(QIODevice::WriteOnly);
 		downloading = true;
-		downloadId = http->get(qurl.toEncoded(), downloadBuff);
+		downloadId = http->get(qurl.toEncoded());
 		QString turl = qurl.toString();
 		baseUrl = turl.left(turl.lastIndexOf('/')+1);
 	}
@@ -101,11 +100,14 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
+	
 }
 	
 // Draw the image on the screen.
 void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
+	
 	if (errorOccured)
 		return;
 	
@@ -154,6 +156,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	if (fullInScreen==false && intersectScreen==false)
 		return;
 	
+	// Draw the real texture for this image
 	Projector* prj = core->getProjection();
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -186,6 +189,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 		glEnd();
 	}
 	
+	// Check if we reach the resolution limit
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution && !subTilesUrls.isEmpty())
 	{
@@ -261,8 +265,8 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 	if (skyConvexPolygons.size()!=textureCoords.size())
 		throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	
-	QVariantList subTiles = map.value("subTiles").toList();
-	foreach (QVariant subTile, subTiles)
+	QVariantList subTilesl = map.value("subTiles").toList();
+	foreach (QVariant subTile, subTilesl)
 	{
 		subTilesUrls.append(subTile.toString());
 	}
@@ -273,30 +277,60 @@ void SkyImageTile::downloadFinished(int id, bool error)
 {
 	if (id!=downloadId)
 		return;
+	//qWarning() << "Downloaded JSON " << http->currentRequest().path();
 	downloading = false;
-	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 	if (error)
 	{
-		delete downloadBuff;
-		downloadBuff = NULL;
 		errorOccured = true;
 		return;
 	}
 	
 	try
 	{
-		downloadBuff->close();
-		downloadBuff->open(QIODevice::ReadOnly);
-		loadFromJSON(*downloadBuff);
-		downloadBuff->close();
+		QByteArray content = http->readAll();
+		QBuffer buf(&content);
+		buf.open(QIODevice::ReadOnly);
+		loadFromJSON(buf);
+		buf.close();
 	}
 	catch (std::runtime_error e)
 	{
-		downloadBuff->close();
 		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
 		errorOccured = true;
 	}
-	delete downloadBuff;
-	downloadBuff = NULL;
+}
+
+// Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
+void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
+{
+	double now = StelApp::getInstance().getTotalRunTime();
+	bool deleteAll = true;
+	foreach (SkyImageTile* tile, subTiles)
+	{
+		// At least one of the subtiles is displayed
+		if (now-tile->getLastTimeDraw()<lastDrawTrigger)
+		{
+			deleteAll = false;
+			break;
+		}
+	}
+	
+	if (deleteAll==true)
+	{
+		// None of the subtiles are displayed: delete all
+		foreach (SkyImageTile* tile, subTiles)
+		{
+			//qWarning() << "Delete " << tile->getImageUrl();
+			tile->deleteLater();
+		}
+		subTiles.clear();
+		return;
+	}
+	
+	// Propagate
+	foreach (SkyImageTile* tile, subTiles)
+	{
+		tile->deleteUnusedTiles(lastDrawTrigger);
+	}
 }
