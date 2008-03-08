@@ -105,6 +105,9 @@ private:
 	//! Define the range mode used to rescale the texture when loading
 	STextureTypes::DynamicRangeMode dynamicRangeMode;
 	
+	//! Used to download remote files if needed
+	class QHttp* http;
+	
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
 	//! Used internally
