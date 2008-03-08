@@ -21,6 +21,9 @@
 #include "LocationDialog.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_locationDialogGui.h"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "Observer.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -59,6 +62,9 @@ void LocationDialog::setVisible(bool v)
 		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(int)), this,
 				SLOT(spinBoxChanged(void)));
 				
+		selectPosition(StelApp::getInstance().getCore()->getObservatory()->getLongitude(),
+						StelApp::getInstance().getCore()->getObservatory()->getLatitude(), "");
+				
 	}
 	else
 	{
@@ -75,6 +81,9 @@ void LocationDialog::selectPosition(float longitude, float latitude, QString cit
 	ui->latitudeSpinBox->setValue(latitude);
 	// Set the city name
 	ui->selectedLabel->setText(city);
+	
+	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
+	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
 }
 
 void LocationDialog::highlightPosition(float longitude, float latitude, QString city)
