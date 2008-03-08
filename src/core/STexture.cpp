@@ -44,7 +44,7 @@
 // Initialize statics
 QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(20);
 
-STexture::STexture() : downloaded(false), downloadId(0), isLoadingImage(false), imageFile(NULL), 
+STexture::STexture() : http(NULL), downloaded(false), downloadId(0), isLoadingImage(false), imageFile(NULL), 
    errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
 {
 	mutex = new QMutex();
@@ -132,7 +132,8 @@ bool STexture::bind()
 			errorOccured = true;
 			return false;
 		}
-		QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
+		if (http==NULL)
+			http = new QHttp(this);
 		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 		QUrl url(fullPath);
 		http->setHost(url.host(), url.port(80));
@@ -161,7 +162,6 @@ void STexture::downloadFinished(int did, bool error)
 {
 	if (did!=downloadId)
 		return;
-	QHttp* http = StelApp::getInstance().getTextureManager().getDownloader();
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 	
 	imageFile->close();
@@ -169,7 +169,7 @@ void STexture::downloadFinished(int did, bool error)
 	downloadId=0;
 	if (error || errorOccured)
 	{
-		qWarning() << "Texture download failed for " + imageFile->fileName()+ ": " + StelApp::getInstance().getTextureManager().getDownloader()->errorString();
+		qWarning() << "Texture download failed for " + imageFile->fileName()+ ": " + http->errorString();
 		errorOccured = true;
 		imageFile->deleteLater();
 		return;

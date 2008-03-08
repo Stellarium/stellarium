@@ -42,8 +42,20 @@ public:
 	//! Draw the image on the screen.
 	virtual void draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
 
+	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
+	void deleteUnusedTiles(double lastDrawTrigger=5.);
+	
+	//! Return the last time the tile content was actually drawn
+	double getLastTimeDraw() const {return lastTimeDraw;}
+	
 	//! Return the base URL prefixed to relative URL
 	QString getBaseUrl() const {return baseUrl;}
+	
+	//! Return the image URL as written in the JSON file
+	QString getImageUrl() const  {return imageUrl;}
+	
+	//! Return the QHttp used by this instance. Childs can use it.
+	class QHttp* getHttp() {return http;}
 	
 protected:
 	//! Load the tile information from a JSON file
@@ -89,10 +101,15 @@ private:
 	// Set to true if an error occured with this tile and it should not be displayed
 	bool errorOccured;
 	
+	// Used to download remote JSON files if needed
+	class QHttp* http;
+	
 	// true if the JSON descriptor file is currently downloading
 	bool downloading;
 	int downloadId;
-	class QBuffer* downloadBuff;
+	
+	// Store the time of the last draw
+	double lastTimeDraw;
 };
 
 #endif /*SKYIMAGETILE_H_*/

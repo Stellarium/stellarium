@@ -69,6 +69,8 @@ NebulaMgr::~NebulaMgr()
 	}
 	
 	Nebula::tex_circle = STextureSP();
+	
+	dssTile->deleteLater();
 }
 
 /*************************************************************************
@@ -177,6 +179,7 @@ double NebulaMgr::draw(StelCore* core)
 	//nebGrid.draw(prj, p);
 
 	dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
+	dssTile->deleteUnusedTiles();
 	return 0;
 }
 

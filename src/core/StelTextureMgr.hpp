@@ -121,7 +121,6 @@ public:
 	{
 		imageLoaders[fileExtension] = loader;
 	}
-	
 	//! Get the downloader shared for downloading images
 	class QHttp* getDownloader() {return downloader;}
 	
