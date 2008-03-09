@@ -174,7 +174,7 @@ void STexture::downloadFinished(int did, bool error)
 		imageFile->deleteLater();
 		return;
 	}
-	
+	http->close();
 	// Call bind to activate data loading
 	bind();
 }
