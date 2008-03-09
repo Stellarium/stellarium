@@ -134,7 +134,6 @@ void StelAppGraphicsItem::recompute()
 	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
 	int dur = (int)(duration*1000);
-	qWarning() << dur;
 	mainTimer->start(dur<5 ? 5 : dur);
 }
 
@@ -182,7 +181,7 @@ void StelAppGraphicsItem::showCursor(bool b)
 // Start the main drawing loop
 void StelAppGraphicsItem::startDrawingLoop()
 {
-	//mainTimer->start(500);
+	mainTimer->start(5);
 }
 
 bool StelAppGraphicsItem::sceneEvent(QEvent* event)
