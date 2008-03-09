@@ -70,7 +70,9 @@ NebulaMgr::~NebulaMgr()
 	
 	Nebula::tex_circle = STextureSP();
 	
+#ifdef DEBUG_SKYIMAGE_TILE
 	dssTile->deleteLater();
+#endif
 }
 
 /*************************************************************************
@@ -118,8 +120,9 @@ void NebulaMgr::init()
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 	
-	// Debug
+#ifdef DEBUG_SKYIMAGE_TILE
 	dssTile = new SkyImageTile("http://www.eso.org/~fchereau/N874/N874_00_00_x64.json");
+#endif
 }
 
 // Draw all the Nebulae
@@ -178,8 +181,12 @@ double NebulaMgr::draw(StelCore* core)
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
+#ifdef DEBUG_SKYIMAGE_TILE
+	prj->setCurrentFrame(Projector::FRAME_J2000);
  	dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
  	dssTile->deleteUnusedTiles();
+#endif
+	
 	return 0;
 }
 
