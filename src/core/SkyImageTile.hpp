@@ -26,9 +26,10 @@
 #include <QStringList>
 #include <QVariantMap>
 
+#define DEBUG_SKYIMAGE_TILE 1
+
 class QIODevice;
 class StelCore;
-
 
 //! Base class for any astro image with a fixed position
 class SkyImageTile : public QObject
@@ -57,9 +58,6 @@ public:
 	
 	//! Return the image URL as written in the JSON file
 	QString getImageUrl() const  {return imageUrl;}
-	
-	//! Return the QHttp used by this instance. Childs can use it.
-	class QHttp* getHttp() {return http;}
 	
 protected:
 	//! Load the tile information from a JSON file
@@ -116,6 +114,10 @@ private:
 	
 	// Store the time of the last draw
 	double lastTimeDraw;
+	
+#ifdef DEBUG_SKYIMAGE_TILE
+	static class SFont* debugFont;
+#endif
 };
 
 #endif /*SKYIMAGETILE_H_*/

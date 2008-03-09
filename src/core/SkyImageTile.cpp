@@ -33,6 +33,13 @@
 #include <QBuffer>
 #include <stdexcept>
 
+#ifdef DEBUG_SKYIMAGE_TILE
+ #include "SFont.hpp"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+ SFont* SkyImageTile::debugFont = NULL;
+#endif
+
 // Constructor
 SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
@@ -120,6 +127,11 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	if (downloading)
 		return;
 	
+	Projector* prj = core->getProjection();
+	bool fullInScreen = true;
+	bool intersectScreen = false;
+
+	// The tile cannot be discarded: draw the texture
 	if (!tex)
 	{
 		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
@@ -136,12 +148,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	if (!tex->bind())
 		return;
 	
-	const float factorX = tex->getCoordinates()[2][0];
-	const float factorY = tex->getCoordinates()[2][1];
-	
 	// Check that we are in the screen
-	bool fullInScreen = true;
-	bool intersectScreen = false;
 	if (recheckIntersect)
 	{
 		foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
@@ -158,12 +165,13 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			}
 		}
 	}
-
 	if (fullInScreen==false && intersectScreen==false)
 		return;
 	
+	const float factorX = tex->getCoordinates()[2][0];
+	const float factorY = tex->getCoordinates()[2][1];
+	
 	// Draw the real texture for this image
-	Projector* prj = core->getProjection();
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -188,13 +196,31 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			++diff;
 			if (diff>1) diff=0;
 			
-			glTexCoord2f(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
+			glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
 			prj->project(poly[idx],win);
 			glVertex3dv(win);
 		}
 		glEnd();
 	}
-	
+
+#ifdef DEBUG_SKYIMAGE_TILE
+	if (getImageUrl()=="x1/N874_11_31_x1.jpg")
+	{
+		if (debugFont==NULL)
+		{
+			debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
+		}
+		Vec3d win;
+		Vec3d bary = skyConvexPolygons.at(0).getBarycenter();
+		prj->project(bary,win);
+		prj->drawText(debugFont, win[0], win[1], getImageUrl());
+		
+		glDisable(GL_TEXTURE_2D);
+		prj->drawPolygon(skyConvexPolygons.at(0));
+		glEnable(GL_TEXTURE_2D);
+	}
+#endif
+
 	// Check if we reach the resolution limit
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution && !subTilesUrls.isEmpty())
