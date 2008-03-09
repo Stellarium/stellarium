@@ -552,9 +552,9 @@ void StelApp::update(double deltaTime)
 //! Main drawing function called at each frame
 double StelApp::draw()
 {
-     if (!initialized)
-        return 0.;
-        
+	if (!initialized)
+		return 0.;
+
     // Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
 

@@ -455,6 +455,9 @@ void NewGui::init()
 	QObject::connect(ui->actionShow_Location_Window, SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	QObject::connect(&locationDialog, SIGNAL(closed()), ui->actionShow_Location_Window, SLOT(toggle()));
 
+	QObject::connect(ui->actionShow_SkyView_Window, SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
+	QObject::connect(&viewDialog, SIGNAL(closed()), ui->actionShow_SkyView_Window, SLOT(toggle()));
+	
 	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
 	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));
 	
@@ -486,7 +489,7 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_SkyView_Window, buttonHelpLabel);
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");

@@ -22,6 +22,7 @@
 
 #include "StelModule.hpp"
 #include "LocationDialog.hpp"
+#include "ViewDialog.hpp"
 #include "StelObjectType.hpp"
 #include "HelpDialog.hpp"
 #include <QGraphicsPixmapItem>
@@ -183,6 +184,7 @@ private:
 	
 	LocationDialog locationDialog;
 	HelpDialog helpDialog;
+	ViewDialog viewDialog;
 };
 
 #endif // _NEWGUI_H_
