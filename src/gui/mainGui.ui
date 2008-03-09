@@ -114,7 +114,26 @@ QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
 
      QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
          background: none;
-     }</string>
+     }
+
+QGroupBox {
+     border: 1px solid #2e2e36;
+     border-radius: 5px;
+     margin-top: 1ex;
+ }
+
+QGroupBox::title {
+     subcontrol-origin: margin;
+
+     padding: 0px 3px;
+     color : #babdc4;
+left: 15px
+ }
+
+QCheckBox {
+color : #babdc4;
+ }
+</string>
   </property>
   <widget class="DialogFrame" name="SearchDialog" >
    <property name="geometry" >
@@ -744,12 +763,12 @@ color: darkgray;
     <string>Dialogs</string>
    </property>
   </action>
-  <action name="actionShow_Skylore_Window" >
+  <action name="actionShow_SkyView_Window" >
    <property name="checkable" >
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Show Skylore Window</string>
+    <string>Show Sky and Viewing option Window</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+G</string>

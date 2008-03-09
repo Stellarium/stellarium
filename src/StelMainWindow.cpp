@@ -96,11 +96,12 @@ void StelMainWindow::init(int argc, char** argv)
 	glWidget->setAutoFillBackground(false);
 	view->setAutoFillBackground(false);
 	view->setViewport(glWidget);
- 	view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+	view->setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	
+	view->setCacheMode(QGraphicsView::CacheNone);
 	//view->setCacheMode(QGraphicsView::CacheBackground);
 	// Antialiasing works only with SampleBuffer, but it's much slower
-	view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
+	//view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	
 	// Use it as a central widget
 	setCentralWidget(view);
