@@ -49,7 +49,7 @@ public:
 	
 	//! Get the main QGraphicsView
 	QGraphicsView* getGraphicsView() {return view;}
-			
+	
 public slots:
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();

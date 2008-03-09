@@ -77,6 +77,8 @@ void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 //! This method is called automatically by the GraphicsView
 void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+	scene()->views().at(0)->setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	
 	const double now = StelApp::getInstance().getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
@@ -124,12 +126,16 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 void StelAppGraphicsItem::recompute()
 {
 	// Update the whole scene because the openGL background is fully rendered
+	scene()->views().at(0)->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	update(rect());
+	
 	
 	double duration = 1./StelApp::getInstance().minfps;
 	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
-	mainTimer->start((int)(duration*1000));
+	int dur = (int)(duration*1000);
+	qWarning() << dur;
+	mainTimer->start(dur<5 ? 5 : dur);
 }
 
 void StelAppGraphicsItem::thereWasAnEvent()
@@ -176,7 +182,7 @@ void StelAppGraphicsItem::showCursor(bool b)
 // Start the main drawing loop
 void StelAppGraphicsItem::startDrawingLoop()
 {
-	mainTimer->start(5);
+	//mainTimer->start(500);
 }
 
 bool StelAppGraphicsItem::sceneEvent(QEvent* event)
