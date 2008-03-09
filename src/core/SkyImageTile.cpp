@@ -34,7 +34,7 @@
 #include <stdexcept>
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (!url.startsWith("http://") && !parent->getBaseUrl().startsWith("http://"))
@@ -97,10 +97,16 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : errorOccu
 	}
 }
 
+// Constructor from a map used for JSON files with more than 1 level
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent)
+{
+	assert(0); // TODO
+}
+	
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
-	
+
 }
 	
 // Draw the image on the screen.
@@ -220,6 +226,12 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 	QVariantMap map = parser.parse(input).toMap();
 	if (map.isEmpty())
 		throw std::runtime_error("empty JSON file, cannot load image tile");
+	loadFromQVariantMap(map);
+}
+
+// Load the tile from a valid QVariantMap
+void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
+{
 	credits = map.value("credits").toString();
 	infoUrl = map.value("infoUrl").toString();
 	imageUrl = map.value("imageUrl").toString();
@@ -268,10 +280,19 @@ void SkyImageTile::loadFromJSON(QIODevice& input)
 	QVariantList subTilesl = map.value("subTiles").toList();
 	foreach (QVariant subTile, subTilesl)
 	{
-		subTilesUrls.append(subTile.toString());
+		// The JSON file contains a nested tile structure
+		if (subTile.type()==QVariant::Map)
+		{
+			subTiles.append(new SkyImageTile(subTile.toMap(), this));
+		}
+		else
+		{
+			// This is an URL to the child tile
+			subTilesUrls.append(subTile.toString());
+		}
 	}
 }
-
+	
 // Called when the download for the JSON file terminated
 void SkyImageTile::downloadFinished(int id, bool error)
 {
@@ -299,6 +320,7 @@ void SkyImageTile::downloadFinished(int id, bool error)
 		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
 		errorOccured = true;
 	}
+	http->close();
 }
 
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds

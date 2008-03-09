@@ -24,9 +24,11 @@
 #include <QList>
 #include <QString>
 #include <QStringList>
+#include <QVariantMap>
 
 class QIODevice;
 class StelCore;
+
 
 //! Base class for any astro image with a fixed position
 class SkyImageTile : public QObject
@@ -35,7 +37,9 @@ class SkyImageTile : public QObject
 public:
 	//! Constructor
 	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
-
+	//! Constructor
+	SkyImageTile(const QVariantMap& map, SkyImageTile* parent);
+	
 	//! Destructor
 	virtual ~SkyImageTile();
 	
@@ -60,7 +64,9 @@ public:
 protected:
 	//! Load the tile information from a JSON file
 	void loadFromJSON(QIODevice& input);
-		
+	//! Load the tile from a valid QVariantMap
+	void loadFromQVariantMap(const QVariantMap& map);
+	
 private slots:
 	//! Called when the download for the JSON file terminated
 	//! @param id the identifier of the request.
