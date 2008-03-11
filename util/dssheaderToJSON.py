@@ -2,9 +2,14 @@
 # Simple script which convert the FITS headers associated to Brian McLean DSS images into simplified JSON files
 # Fabien Chereau fchereau@eso.org
 
+import sys
 from astLib import astWCS
 
-imgName = 'N874'
+if len(sys.argv) < 2:
+	print "Usage: "+sys.argv[0]+" DSSDirName"
+	exit(0)
+imgName = sys.argv[1]
+
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
 curLevel = 0
 for lstr in levels:
@@ -22,13 +27,13 @@ for lstr in levels:
 			naxis1 = wcs.header.get('NAXIS1')
 			naxis2 = wcs.header.get('NAXIS2')
 			pos = wcs.pix2wcs(0.5,0.5)
-			f.write('[%f, %f], ' % (pos[0], pos[1]))
+			f.write('[%.8f, %.8f], ' % (pos[0], pos[1]))
 			pos = wcs.pix2wcs(naxis1+0.5,0.5)
-			f.write('[%f, %f], ' % (pos[0], pos[1]))
+			f.write('[%.8f, %.8f], ' % (pos[0], pos[1]))
 			pos = wcs.pix2wcs(naxis1+0.5,naxis2+0.5)
-			f.write('[%f, %f], ' % (pos[0], pos[1]))
+			f.write('[%.8f, %.8f], ' % (pos[0], pos[1]))
 			pos = wcs.pix2wcs(0.5,naxis2+0.5)
-			f.write('[%f, %f]' % (pos[0], pos[1]))
+			f.write('[%.8f, %.8f]' % (pos[0], pos[1]))
 			f.write(']],\n')
 			f.write('\t"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],\n')
 			pos10 = wcs.pix2wcs(1,0)

@@ -41,10 +41,10 @@
 #endif
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
-	if (!url.startsWith("http://") && !parent->getBaseUrl().startsWith("http://"))
+	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
 	{
 		// Assume a local file
 		QString fileName;
@@ -56,6 +56,8 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 		{
 			try
 			{
+				if (parent==NULL)
+					throw std::runtime_error("NULL parent");
 				fileName = StelApp::getInstance().getFileMgr().findFile(parent->getBaseUrl()+url);
 			}
 			catch (std::runtime_error e)
@@ -131,81 +133,82 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	bool fullInScreen = true;
 	bool intersectScreen = false;
 
-	// The tile cannot be discarded: draw the texture
-	if (!tex)
+	if (noTexture==false)
 	{
-		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-		texMgr.setDefaultParams();
-		
-		tex = texMgr.createTextureThread(baseUrl+imageUrl);
+		// The tile cannot be discarded: draw the texture
 		if (!tex)
 		{
-			errorOccured = true;
-			return;
-		}
-	}
-	
-	if (!tex->bind())
-		return;
-	
-	// Check that we are in the screen
-	if (recheckIntersect)
-	{
-		foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
-		{
-			if (contains(viewPortPoly, poly))
+			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
+			texMgr.setDefaultParams();
+/*			
+			static int countG=0;
+			qWarning() << countG++;*/
+			tex = texMgr.createTextureThread(baseUrl+imageUrl);
+			if (!tex)
 			{
-				intersectScreen = true;
-			}
-			else
-			{
-				fullInScreen = false;
-				if (intersect(viewPortPoly, poly))
-					intersectScreen = true;
+				errorOccured = true;
+				return;
 			}
 		}
-	}
-	if (fullInScreen==false && intersectScreen==false)
-		return;
-	
-	const float factorX = tex->getCoordinates()[2][0];
-	const float factorY = tex->getCoordinates()[2][1];
-	
-	// Draw the real texture for this image
-	glEnable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glColor4f(1.0,1.0,1.0,1.0);
-	
-	for (int p=0;p<skyConvexPolygons.size();++p)
-	{
-		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
-		const QList<Vec2f>& texCoords = textureCoords.at(p);
 		
-		assert((int)poly.size()==texCoords.size());
-				
-		Vec3d win;
-		const int N=poly.size()-1;
-		int idx=N;
-		int diff = 0;
-		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
-		glBegin(GL_TRIANGLE_STRIP);
-		for (int i=0;i<=N;++i)
+		if (!tex->bind())
+			return;
+		
+		// Check that we are in the screen
+		if (recheckIntersect)
 		{
-			idx = (diff==0 ? N-i/2 : i/2);
-			++diff;
-			if (diff>1) diff=0;
-			
-			glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
-			prj->project(poly[idx],win);
-			glVertex3dv(win);
+			foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
+			{
+				if (contains(viewPortPoly, poly))
+				{
+					intersectScreen = true;
+				}
+				else
+				{
+					fullInScreen = false;
+					if (intersect(viewPortPoly, poly))
+						intersectScreen = true;
+				}
+			}
 		}
-		glEnd();
-	}
-
-#ifdef DEBUG_SKYIMAGE_TILE
-	if (getImageUrl()=="x1/N874_11_31_x1.jpg")
-	{
+		if (fullInScreen==false && intersectScreen==false)
+			return;
+	
+		const float factorX = tex->getCoordinates()[2][0];
+		const float factorY = tex->getCoordinates()[2][1];
+		
+		// Draw the real texture for this image
+		glEnable(GL_TEXTURE_2D);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glColor4f(1.0,1.0,1.0,1.0);
+		
+		for (int p=0;p<skyConvexPolygons.size();++p)
+		{
+			const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
+			const QList<Vec2f>& texCoords = textureCoords.at(p);
+			
+			assert((int)poly.size()==texCoords.size());
+					
+			Vec3d win;
+			const int N=poly.size()-1;
+			int idx=N;
+			int diff = 0;
+			// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
+			glBegin(GL_TRIANGLE_STRIP);
+			for (int i=0;i<=N;++i)
+			{
+				idx = (diff==0 ? N-i/2 : i/2);
+				++diff;
+				if (diff>1) diff=0;
+				
+				glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
+				prj->project(poly[idx],win);
+				glVertex3dv(win);
+			}
+			glEnd();
+		}
+#if 0
 		if (debugFont==NULL)
 		{
 			debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -218,9 +221,13 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 		glDisable(GL_TEXTURE_2D);
 		prj->drawPolygon(skyConvexPolygons.at(0));
 		glEnable(GL_TEXTURE_2D);
-	}
 #endif
-
+	}
+	else
+	{
+		fullInScreen = false;
+	}
+	
 	// Check if we reach the resolution limit
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution && !subTilesUrls.isEmpty())
@@ -260,48 +267,57 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 {
 	credits = map.value("credits").toString();
 	infoUrl = map.value("infoUrl").toString();
-	imageUrl = map.value("imageUrl").toString();
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
 		throw std::runtime_error("minResolution expect a double value");
 	
-	// Load the convex polygons
-	QVariantList polyList = map.value("skyConvexPolygons").toList();
-	foreach (const QVariant& polyRaDec, polyList)
+	if (map.contains("imageUrl"))
 	{
-		QList<Vec3d> vertices;
-		foreach (QVariant vRaDec, polyRaDec.toList())
+		imageUrl = map.value("imageUrl").toString();
+		
+		// Load the convex polygons
+		QVariantList polyList = map.value("skyConvexPolygons").toList();
+		foreach (const QVariant& polyRaDec, polyList)
 		{
-			const QVariantList vl = vRaDec.toList();
-			Vec3d v;
-			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
-			if (!ok)
-				throw std::runtime_error("wrong Ra and Dec, expect a double value");
-			vertices.append(v);
+			QList<Vec3d> vertices;
+			foreach (QVariant vRaDec, polyRaDec.toList())
+			{
+				const QVariantList vl = vRaDec.toList();
+				Vec3d v;
+				StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+	//			qWarning() << QStringvl.at(0).toDouble(&ok) << vl.at(1).toDouble(&ok);
+				if (!ok)
+					throw std::runtime_error("wrong Ra and Dec, expect a double value");
+				vertices.append(v);
+			}
+			assert(vertices.size()==4);
+			skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
 		}
-		assert(vertices.size()==4);
-		skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
+		
+		// Load the matching textures positions
+		polyList = map.value("textureCoords").toList();
+		foreach (const QVariant& polyXY, polyList)
+		{
+			QList<Vec2f> vertices;
+			foreach (QVariant vXY, polyXY.toList())
+			{
+				const QVariantList vl = vXY.toList();
+				vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
+				if (!ok)
+					throw std::runtime_error("wrong X and Y, expect a double value");
+			}
+			assert(vertices.size()==4);
+			textureCoords.append(vertices);
+		}
+		
+		if (skyConvexPolygons.size()!=textureCoords.size())
+			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	}
-	
-	// Load the matching textures positions
-	polyList = map.value("textureCoords").toList();
-	foreach (const QVariant& polyXY, polyList)
+	else
 	{
-		QList<Vec2f> vertices;
-		foreach (QVariant vXY, polyXY.toList())
-		{
-			const QVariantList vl = vXY.toList();
-			vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
-			if (!ok)
-				throw std::runtime_error("wrong X and Y, expect a double value");
-		}
-		assert(vertices.size()==4);
-		textureCoords.append(vertices);
+		noTexture = true;
 	}
-	
-	if (skyConvexPolygons.size()!=textureCoords.size())
-		throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	
 	QVariantList subTilesl = map.value("subTiles").toList();
 	foreach (QVariant subTile, subTilesl)
@@ -317,6 +333,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			subTilesUrls.append(subTile.toString());
 		}
 	}
+	// qWarning() << skyConvexPolygons.at(0)[0][0] << skyConvexPolygons.at(0)[0][1] << skyConvexPolygons.at(0)[0][2];
 }
 	
 // Called when the download for the JSON file terminated
