@@ -50,6 +50,9 @@ public:
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 	void deleteUnusedTiles(double lastDrawTrigger=5.);
 	
+	//! Delete the texture from memory. It will be reloaded automatically if needed
+	void deleteTexture() {tex.reset();}
+	
 	//! Return the last time the tile content was actually drawn
 	double getLastTimeDraw() const {return lastTimeDraw;}
 	
