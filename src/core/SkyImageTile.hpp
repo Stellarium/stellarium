@@ -42,11 +42,31 @@ public:
 	SkyImageTile(const QVariantMap& map, SkyImageTile* parent);
 	
 	//! Destructor
-	virtual ~SkyImageTile();
+	~SkyImageTile();
+
+	//! Draw the image on the screen.
+	void draw(StelCore* core);
+	
+private slots:
+	//! Called when the download for the JSON file terminated
+	//! @param id the identifier of the request.
+	//! @param error true if an error occurred during the processing; otherwise false
+	void downloadFinished(int id, bool error);
+		
+private:
+	//! Load the tile information from a JSON file
+	void loadFromJSON(QIODevice& input);
+	
+	//! Load the tile from a valid QVariantMap
+	void loadFromQVariantMap(const QVariantMap& map);
+	
+	//! Return the list of tiles which should be drawn.
+	//! @param result a map containing resolution, pointer to the tiles
+	void getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
 	
 	//! Draw the image on the screen.
-	virtual void draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
-
+	void drawTile(StelCore* core);
+	
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 	void deleteUnusedTiles(double lastDrawTrigger=5.);
 	
@@ -62,19 +82,9 @@ public:
 	//! Return the image URL as written in the JSON file
 	QString getImageUrl() const  {return imageUrl;}
 	
-protected:
-	//! Load the tile information from a JSON file
-	void loadFromJSON(QIODevice& input);
-	//! Load the tile from a valid QVariantMap
-	void loadFromQVariantMap(const QVariantMap& map);
+	//! Return the minimum resolution
+	double getMinResolution() const {return minResolution;}
 	
-private slots:
-	//! Called when the download for the JSON file terminated
-	//! @param id the identifier of the request.
-	//! @param error true if an error occurred during the processing; otherwise false
-	void downloadFinished(int id, bool error);
-		
-private:
 	// Image credits
 	QString credits;
 	

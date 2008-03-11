@@ -119,48 +119,50 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
+}
 
+void SkyImageTile::draw(StelCore* core)
+{
+	Projector* prj = core->getProjection();
+	QMultiMap<double, SkyImageTile*> result;
+	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
+	
+	QMap<double, SkyImageTile*>::Iterator i = result.end();
+	while (i!=result.begin())
+	{
+		--i;
+		i.value()->drawTile(core);
+	}
+	
+	deleteUnusedTiles();
 }
 	
+			
 // Draw the image on the screen.
-void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
+void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	
+	// An error occured during loading
 	if (errorOccured)
 		return;
 	
+	// The JSON file is currently being downloaded
 	if (downloading)
 		return;
 	
-	Projector* prj = core->getProjection();
+	// Check that we are in the screen
 	bool fullInScreen = true;
 	bool intersectScreen = false;
-
-	if (noTexture==false)
+	if (recheckIntersect)
 	{
-		// The tile cannot be discarded: draw the texture
-		if (!tex)
+		if (skyConvexPolygons.isEmpty())
 		{
-			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			texMgr.setDefaultParams();
-/*			
-			static int countG=0;
-			qWarning() << countG++;*/
-			tex = texMgr.createTextureThread(baseUrl+imageUrl);
-			if (!tex)
-			{
-				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl << ": " << tex->getErrorMessage();
-				errorOccured = true;
-				return;
-			}
+			// If no polygon is defined, we assume that the tile cover the whole sky
+			fullInScreen=false;
+			intersectScreen=true;
 		}
-		
-		if (!tex->bind())
-			return;
-		
-		// Check that we are in the screen
-		if (recheckIntersect)
+		else
 		{
 			foreach (const StelGeom::ConvexPolygon poly, skyConvexPolygons)
 			{
@@ -176,74 +178,52 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 				}
 			}
 		}
-		if (fullInScreen==false && intersectScreen==false)
-			return;
-	
-		const float factorX = tex->getCoordinates()[2][0];
-		const float factorY = tex->getCoordinates()[2][1];
-		
-		// Draw the real texture for this image
-		glEnable(GL_TEXTURE_2D);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glColor4f(1.0,1.0,1.0,1.0);
-		
-		for (int p=0;p<skyConvexPolygons.size();++p)
-		{
-			const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
-			const QList<Vec2f>& texCoords = textureCoords.at(p);
-			
-			assert((int)poly.size()==texCoords.size());
-					
-			Vec3d win;
-			const int N=poly.size()-1;
-			int idx=N;
-			int diff = 0;
-			// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
-			glBegin(GL_TRIANGLE_STRIP);
-			for (int i=0;i<=N;++i)
-			{
-				idx = (diff==0 ? N-i/2 : i/2);
-				++diff;
-				if (diff>1) diff=0;
-				
-				glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
-				prj->project(poly[idx],win);
-				glVertex3dv(win);
-			}
-			glEnd();
-		}
-#if 0
-		if (debugFont==NULL)
-		{
-			debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
-		}
-		Vec3d win;
-		Vec3d bary = skyConvexPolygons.at(0).getBarycenter();
-		prj->project(bary,win);
-		prj->drawText(debugFont, win[0], win[1], getImageUrl());
-		
-		glDisable(GL_TEXTURE_2D);
-		prj->drawPolygon(skyConvexPolygons.at(0));
-		glEnable(GL_TEXTURE_2D);
-#endif
 	}
-	else
+	// The tile is outside screen
+	if (fullInScreen==false && intersectScreen==false)
+		return;
+	
+	if (noTexture==false)
 	{
-		fullInScreen = false;
+		if (!tex)
+		{
+			// The tile has an associated texture, but it is not yet loaded: load it now
+			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
+			texMgr.setDefaultParams();
+			// static int countG=0;
+			// qWarning() << countG++;
+			tex = texMgr.createTextureThread(baseUrl+imageUrl);
+			if (!tex)
+			{
+				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl << ": " << tex->getErrorMessage();
+				errorOccured = true;
+				return;
+			}
+		}
+		
+		// Every test passed :) The tile will be displayed
+		result.insert(minResolution, this);
+		
+		// Check that the texture is now fully loaded before trying to load sub tiles
+		if (tex->canBind()==false)
+			return;
 	}
 	
 	// Check if we reach the resolution limit
+	Projector* prj = core->getProjection();
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
 	if (degPerPixel < minResolution)
 	{
-		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
+		if (subTiles.isEmpty())
 		{
-			// Load the sub tiles because we reached the maximum resolution
-			// and they are not yet loaded
-			foreach (QString url, subTilesUrls)
+			if (!subTilesUrls.isEmpty())
 			{
-				subTiles.append(new SkyImageTile(url, this));
+				// Load the sub tiles because we reached the maximum resolution
+				// and they are not yet loaded
+				foreach (QString url, subTilesUrls)
+				{
+					subTiles.append(new SkyImageTile(url, this));
+				}
 			}
 		}
 		else
@@ -251,12 +231,68 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			// Draw the subtiles
 			foreach (SkyImageTile* tile, subTiles)
 			{
-				tile->draw(core, viewPortPoly, !fullInScreen);
+				tile->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);
 			}
 		}
 	}
 }
 	
+// Draw the image on the screen.
+void SkyImageTile::drawTile(StelCore* core)
+{
+	if (!tex->bind())
+		return;
+
+	Projector* prj = core->getProjection();
+	
+	const float factorX = tex->getCoordinates()[2][0];
+	const float factorY = tex->getCoordinates()[2][1];
+
+	// Draw the real texture for this image
+	glEnable(GL_TEXTURE_2D);
+#if 1
+	for (int p=0;p<skyConvexPolygons.size();++p)
+	{
+		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
+		const QList<Vec2f>& texCoords = textureCoords.at(p);
+				
+		assert((int)poly.size()==texCoords.size());
+						
+		Vec3d win;
+		const int N=poly.size()-1;
+		int idx=N;
+		int diff = 0;
+				// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
+		glBegin(GL_TRIANGLE_STRIP);
+		for (int i=0;i<=N;++i)
+		{
+			idx = (diff==0 ? N-i/2 : i/2);
+			++diff;
+			if (diff>1) diff=0;
+					
+			glTexCoord2d(texCoords[idx][0]*factorX, texCoords[idx][1]*factorY);
+			prj->project(poly[idx],win);
+			glVertex3dv(win);
+		}
+		glEnd();
+	}
+#endif
+#if 0
+	if (debugFont==NULL)
+	{
+		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
+	}
+	Vec3d win;
+	Vec3d bary = skyConvexPolygons.at(0).getBarycenter();
+	prj->project(bary,win);
+	prj->drawText(debugFont, win[0], win[1], getImageUrl());
+	
+	glDisable(GL_TEXTURE_2D);
+	prj->drawPolygon(skyConvexPolygons.at(0));
+	glEnable(GL_TEXTURE_2D);
+#endif
+}
+
 // Load the tile information from a JSON file
 void SkyImageTile::loadFromJSON(QIODevice& input)
 {
@@ -396,17 +432,25 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 		// embeded into the same JSON file as the parent. Therefore it cannot be deleted
 		// without deleting also the parent because it couldn't be reloaded alone.
 		const bool removeOnlyTextures = subTilesUrls.isEmpty();
-			
-		// None of the subtiles are displayed: delete all
-		foreach (SkyImageTile* tile, subTiles)
+		
+		if (removeOnlyTextures)
 		{
-			//qWarning() << "Delete " << tile->getImageUrl();
-			if (removeOnlyTextures)
+			foreach (SkyImageTile* tile, subTiles)
+			{
 				tile->deleteTexture();
-			else
-				tile->deleteLater();
+				tile->deleteUnusedTiles(lastDrawTrigger);
+			}
 		}
-		subTiles.clear();
+		else
+		{
+			// None of the subtiles are displayed: delete all
+			foreach (SkyImageTile* tile, subTiles)
+			{
+				//qWarning() << "Delete " << tile->getImageUrl();
+				tile->deleteLater();
+			}
+			subTiles.clear();
+		}
 		return;
 	}
 	
