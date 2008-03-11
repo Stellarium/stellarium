@@ -183,8 +183,10 @@ double NebulaMgr::draw(StelCore* core)
 
 #ifdef DEBUG_SKYIMAGE_TILE
 	prj->setCurrentFrame(Projector::FRAME_J2000);
- 	dssTile->draw(core, prj->getViewportConvexPolygon(0, 0));
- 	dssTile->deleteUnusedTiles();
+// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 	glDisable(GL_BLEND);
+	glColor4f(1.0,1.0,1.0,1.0);
+ 	dssTile->draw(core);
 #endif
 	
 	return 0;
