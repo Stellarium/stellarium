@@ -62,7 +62,7 @@ StelMainWindow::StelMainWindow()
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
-	show();
+	setStyleSheet(QString("QMainWindow {background: #000;}"));
 }
 
 void StelMainWindow::init(int argc, char** argv)
@@ -77,6 +77,10 @@ void StelMainWindow::init(int argc, char** argv)
 	{
 		showFullScreen();
 	}
+	else
+	{
+		show();
+	}
 	
 	// Create a graphicScene and a GraphicView drawing in an openGL widget
 	QGraphicsScene* scene = new QGraphicsScene(this);
@@ -84,6 +88,7 @@ void StelMainWindow::init(int argc, char** argv)
 	scene->addItem(mainItem);
 	mainItem->setFocus();
 	view = new StelQGraphicsView(scene, this);
+	view->setStyleSheet(QString("QGraphicsView {background: #000;}"));
 	view->setFrameShape(QFrame::NoFrame);
 	view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
