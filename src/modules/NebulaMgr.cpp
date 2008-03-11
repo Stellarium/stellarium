@@ -132,6 +132,14 @@ double NebulaMgr::draw(StelCore* core)
 	Projector* prj = core->getProjection();
 	ToneReproducer* eye = core->getToneReproducer();
 	
+#ifdef DEBUG_SKYIMAGE_TILE
+	prj->setCurrentFrame(Projector::FRAME_J2000);
+// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_BLEND);
+	glColor4f(1.5,1.5,1.5,1.0);
+	dssTile->draw(core);
+#endif
+	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	Nebula::flagShowTexture = flagShowTexture;
 	
@@ -181,13 +189,7 @@ double NebulaMgr::draw(StelCore* core)
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
-#ifdef DEBUG_SKYIMAGE_TILE
-	prj->setCurrentFrame(Projector::FRAME_J2000);
-// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
- 	glDisable(GL_BLEND);
-	glColor4f(1.0,1.0,1.0,1.0);
- 	dssTile->draw(core);
-#endif
+
 	
 	return 0;
 }
