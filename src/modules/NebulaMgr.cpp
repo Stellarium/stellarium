@@ -121,7 +121,7 @@ void NebulaMgr::init()
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 	
 #ifdef DEBUG_SKYIMAGE_TILE
-	dssTile = new SkyImageTile("/home/fab1/Desktop/allDSS/allDSS.json");
+	dssTile = new SkyImageTile("/home/fabien/Desktop/tmp.txt");
 #endif
 }
 
