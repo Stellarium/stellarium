@@ -89,6 +89,8 @@ private:
 	
 	// The texture of the tile
 	STextureSP tex;
+	// True if the tile is just a list of other tiles without texture for itself
+	bool noTexture;
 	
 	// Direction of the vertices of each polygons in ICRS frame
 	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
