@@ -23,6 +23,7 @@
 #include "StelUtils.hpp"
 #include "STexture.hpp"
 #include "Projector.hpp"
+#include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
 #include <QDebug>
@@ -41,7 +42,7 @@
 #endif
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
@@ -107,7 +108,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	if (parent!=NULL)
 	{
@@ -192,10 +193,20 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			texMgr.setDefaultParams();
 			// static int countG=0;
 			// qWarning() << countG++;
-			tex = texMgr.createTextureThread(baseUrl+imageUrl);
+			QString fullTexFileName;
+			try
+			{
+				fullTexFileName = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
+			}
+			catch (std::runtime_error er)
+			{
+				// Maybe the user meant a file in stellarium loical files
+				fullTexFileName = imageUrl;
+			}
+			tex = texMgr.createTextureThread(fullTexFileName);
 			if (!tex)
 			{
-				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl << ": " << tex->getErrorMessage();
+				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl;
 				errorOccured = true;
 				return;
 			}
@@ -244,6 +255,12 @@ void SkyImageTile::drawTile(StelCore* core)
 		return;
 
 	Projector* prj = core->getProjection();
+	
+	if (luminance>0)
+	{
+		float ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
+		glColor3f(ad_lum,ad_lum,ad_lum);
+	}
 	
 	const float factorX = tex->getCoordinates()[2][0];
 	const float factorY = tex->getCoordinates()[2][1];
@@ -312,6 +329,13 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
 		throw std::runtime_error("minResolution expect a double value");
+	
+	if (map.contains("luminance"))
+	{
+		luminance = map.value("luminance").toDouble(&ok);
+		if (!ok)
+			throw std::runtime_error("luminance expect a float value");
+	}
 	
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("skyConvexPolygons").toList();
