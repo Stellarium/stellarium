@@ -67,6 +67,8 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 				return;
 			}
 		}
+		QFileInfo finf(fileName);
+		baseUrl = finf.absolutePath()+'/';
 		QFile f(fileName);
 		f.open(QIODevice::ReadOnly);
 		try
@@ -81,8 +83,6 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			return;
 		}
 		f.close();
-		QFileInfo finf(fileName);
-		baseUrl = finf.absolutePath()+'/';
 	}
 	else
 	{
@@ -107,9 +107,13 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
-	assert(0); // TODO
+	if (parent!=NULL)
+	{
+		baseUrl = parent->getBaseUrl();
+	}
+	loadFromQVariantMap(map);
 }
 	
 // Destructor
@@ -146,6 +150,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			tex = texMgr.createTextureThread(baseUrl+imageUrl);
 			if (!tex)
 			{
+				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl << ": " << tex->getErrorMessage();
 				errorOccured = true;
 				return;
 			}
@@ -208,7 +213,7 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 			}
 			glEnd();
 		}
-#if 0
+#if 1
 		if (debugFont==NULL)
 		{
 			debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -230,9 +235,9 @@ void SkyImageTile::draw(StelCore* core, const StelGeom::ConvexPolygon& viewPortP
 	
 	// Check if we reach the resolution limit
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
-	if (degPerPixel < minResolution && !subTilesUrls.isEmpty())
+	if (degPerPixel < minResolution)
 	{
-		if (subTiles.isEmpty())
+		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
 		{
 			// Load the sub tiles because we reached the maximum resolution
 			// and they are not yet loaded
@@ -346,6 +351,7 @@ void SkyImageTile::downloadFinished(int id, bool error)
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 	if (error)
 	{
+		qWarning() << "WARNING : Problem while downloading JSON Image Tile description: " << http->errorString();
 		errorOccured = true;
 		return;
 	}
@@ -369,6 +375,9 @@ void SkyImageTile::downloadFinished(int id, bool error)
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 {
+	if (subTiles.isEmpty())
+		return;
+	
 	double now = StelApp::getInstance().getTotalRunTime();
 	bool deleteAll = true;
 	foreach (SkyImageTile* tile, subTiles)
@@ -383,11 +392,19 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 	
 	if (deleteAll==true)
 	{
+		// If there is no subTilesUrls stored it means that the tile description was
+		// embeded into the same JSON file as the parent. Therefore it cannot be deleted
+		// without deleting also the parent because it couldn't be reloaded alone.
+		const bool removeOnlyTextures = subTilesUrls.isEmpty();
+			
 		// None of the subtiles are displayed: delete all
 		foreach (SkyImageTile* tile, subTiles)
 		{
 			//qWarning() << "Delete " << tile->getImageUrl();
-			tile->deleteLater();
+			if (removeOnlyTextures)
+				tile->deleteTexture();
+			else
+				tile->deleteLater();
 		}
 		subTiles.clear();
 		return;
