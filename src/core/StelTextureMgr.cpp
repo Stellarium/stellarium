@@ -184,6 +184,7 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
 				return STextureSP();
 			}
 		}
+		tex->downloaded = true;
 	}
 	else
 	{
