@@ -313,50 +313,48 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	if (!ok)
 		throw std::runtime_error("minResolution expect a double value");
 	
+	// Load the convex polygons (if any)
+	QVariantList polyList = map.value("skyConvexPolygons").toList();
+	foreach (const QVariant& polyRaDec, polyList)
+	{
+		QList<Vec3d> vertices;
+		foreach (QVariant vRaDec, polyRaDec.toList())
+		{
+			const QVariantList vl = vRaDec.toList();
+			Vec3d v;
+			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+			if (!ok)
+				throw std::runtime_error("wrong Ra and Dec, expect a double value");
+			vertices.append(v);
+		}
+		assert(vertices.size()==4);
+		skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
+	}
+	
+	// Load the matching textures positions (if any)
+	polyList = map.value("textureCoords").toList();
+	foreach (const QVariant& polyXY, polyList)
+	{
+		QList<Vec2f> vertices;
+		foreach (QVariant vXY, polyXY.toList())
+		{
+			const QVariantList vl = vXY.toList();
+			vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
+			if (!ok)
+				throw std::runtime_error("wrong X and Y, expect a double value");
+		}
+		assert(vertices.size()==4);
+		textureCoords.append(vertices);
+	}
+	
 	if (map.contains("imageUrl"))
 	{
 		imageUrl = map.value("imageUrl").toString();
-		
-		// Load the convex polygons
-		QVariantList polyList = map.value("skyConvexPolygons").toList();
-		foreach (const QVariant& polyRaDec, polyList)
-		{
-			QList<Vec3d> vertices;
-			foreach (QVariant vRaDec, polyRaDec.toList())
-			{
-				const QVariantList vl = vRaDec.toList();
-				Vec3d v;
-				StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
-	//			qWarning() << QStringvl.at(0).toDouble(&ok) << vl.at(1).toDouble(&ok);
-				if (!ok)
-					throw std::runtime_error("wrong Ra and Dec, expect a double value");
-				vertices.append(v);
-			}
-			assert(vertices.size()==4);
-			skyConvexPolygons.append(StelGeom::ConvexPolygon(vertices[0], vertices[1], vertices[2], vertices[3]));
-		}
-		
-		// Load the matching textures positions
-		polyList = map.value("textureCoords").toList();
-		foreach (const QVariant& polyXY, polyList)
-		{
-			QList<Vec2f> vertices;
-			foreach (QVariant vXY, polyXY.toList())
-			{
-				const QVariantList vl = vXY.toList();
-				vertices.append(Vec2f(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok)));
-				if (!ok)
-					throw std::runtime_error("wrong X and Y, expect a double value");
-			}
-			assert(vertices.size()==4);
-			textureCoords.append(vertices);
-		}
-		
-		if (skyConvexPolygons.size()!=textureCoords.size())
-			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	}
 	else
 	{
+		if (skyConvexPolygons.size()!=textureCoords.size())
+			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 		noTexture = true;
 	}
 	
@@ -374,7 +372,6 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			subTilesUrls.append(subTile.toString());
 		}
 	}
-	// qWarning() << skyConvexPolygons.at(0)[0][0] << skyConvexPolygons.at(0)[0][1] << skyConvexPolygons.at(0)[0][2];
 }
 	
 // Called when the download for the JSON file terminated
