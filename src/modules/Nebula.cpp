@@ -34,6 +34,8 @@
 #include "StelModuleMgr.hpp"
 #include <QDebug>
 
+//#include <iostream>
+
 STextureSP Nebula::tex_circle;
 SFont* Nebula::nebula_font = NULL;
 float Nebula::circleScale = 1.f;
@@ -231,9 +233,39 @@ bool Nebula::readTexture(const QString& setName, const QString& record)
 
 	tex_quad_vertex[0] = matPrecomp * Vec3f(0.,-texSize,-texSize);
 	tex_quad_vertex[1] = matPrecomp * Vec3f(0., texSize,-texSize);
-	tex_quad_vertex[2] = matPrecomp * Vec3f(0.,-texSize, texSize);
-	tex_quad_vertex[3] = matPrecomp * Vec3f(0., texSize, texSize);
+	tex_quad_vertex[3] = matPrecomp * Vec3f(0.,-texSize, texSize);
+	tex_quad_vertex[2] = matPrecomp * Vec3f(0., texSize, texSize);
 
+// 	QString outJSON;
+// 
+// 	Vec3d vv[4];
+// 	vv[0] = tex_quad_vertex[1];
+// 	vv[1] = tex_quad_vertex[0];
+// 	vv[2] = tex_quad_vertex[3];
+// 	vv[3] = tex_quad_vertex[2];
+// 	int w,h;
+// 	nebTex->getDimensions(w,h);
+// 	double resolution = MY_MIN(tex_quad_vertex[0].angle(tex_quad_vertex[1]), tex_quad_vertex[0].angle(tex_quad_vertex[2]));
+// 	resolution*=180./M_PI;
+// 	outJSON += "{\n\
+// \t\"credit\" : \""+credit+"\",\n\
+// \t\"imageUrl\" : \"nebulae/default/"+tex_name+"\",\n\
+// \t\"skyConvexPolygons\" : [[";
+// 	double lon, lat;
+// 	for (int i=0;i<4;++i)
+// 	{
+// 		StelUtils::rect_to_sphe(&lon, &lat, vv[i]);
+// 		outJSON+=QString("[%1, %2]").arg(lon*180./M_PI, 0, 'g', 10).arg(lat*180./M_PI, 0, 'g', 8);
+// 		if (i!=3)
+// 			outJSON+=", ";
+// 	}
+// 	outJSON += QString("]],\n\
+// \t\"textureCoords\" : [[[0,0], [1,0], [1,1], [0,1]]],\n\
+// \t\"minResolution\" : %1,\n\
+// \t\"luminance\" : %2\n\
+// },\n").arg(resolution, 0, 'g', 10).arg(luminance, 0, 'g', 8);
+	//std::cout << outJSON.toStdString();
+	
 	return true;
 }
 
@@ -278,9 +310,9 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
         glTexCoord2i(0,0);              // Bottom Left
 		prj->drawVertex3v(tex_quad_vertex[1]);
         glTexCoord2i(1,1);              // Top Right
-		prj->drawVertex3v(tex_quad_vertex[2]);
-        glTexCoord2i(0,1);              // Top Left
 		prj->drawVertex3v(tex_quad_vertex[3]);
+        glTexCoord2i(0,1);              // Top Left
+		prj->drawVertex3v(tex_quad_vertex[2]);
     glEnd();
 }
 

@@ -136,9 +136,9 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 		{
 			tex->fullPath = StelApp::getInstance().getFileMgr().findFile("textures/" + afilename);
 		}
-		catch (exception e)
+		catch (std::runtime_error er)
 		{
-			qWarning() << "WARNING : Can't find texture file " << afilename << ": " << e.what() << endl;
+			qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
 			tex->errorOccured = true;
 			return STextureSP();
 		}
@@ -177,9 +177,9 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
 			{
 				tex->fullPath = StelApp::getInstance().getFileMgr().findFile("textures/" + url);
 			}
-			catch (exception e)
+			catch (std::runtime_error er)
 			{
-				qWarning() << "WARNING : Can't find texture file " << url << ": " << e.what() << endl;
+				qWarning() << "WARNING : Can't find texture file " << url << ": " << er.what() << endl;
 				tex->errorOccured = true;
 				return STextureSP();
 			}

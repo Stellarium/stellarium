@@ -26,7 +26,7 @@
 #include <QStringList>
 #include <QVariantMap>
 
-#define DEBUG_SKYIMAGE_TILE 1
+//#define DEBUG_SKYIMAGE_TILE
 
 class QIODevice;
 class StelCore;
@@ -99,6 +99,9 @@ private:
 	
 	// Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
+	
+	// The image luminance in cd/m^2
+	float luminance;
 	
 	// The texture of the tile
 	STextureSP tex;
