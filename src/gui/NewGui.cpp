@@ -36,6 +36,7 @@
 #include "Navigator.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
+#include "Projector.hpp"
 
 #include "ui_mainGui.h"
 
@@ -427,6 +428,8 @@ void NewGui::init()
 	ui->actionShow_Cardinal_Points->setChecked(lmgr->getFlagCardinalsPoints());
 	QObject::connect(ui->actionShow_Atmosphere, SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
 	ui->actionShow_Atmosphere->setChecked(lmgr->getFlagAtmosphere());
+	QObject::connect(ui->actionShow_Fog, SIGNAL(toggled(bool)), module, SLOT(setFlagFog(bool)));
+	ui->actionShow_Fog->setChecked(lmgr->getFlagFog());
 	
 	module = GETSTELMODULE("NebulaMgr");
 	NebulaMgr* nmgr = (NebulaMgr*)module;
@@ -446,6 +449,11 @@ void NewGui::init()
 	
 	module = GETSTELMODULE("MovementMgr");
 	QObject::connect(ui->actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
+	QObject::connect(ui->actionZoom_In_Auto, SIGNAL(triggered()), module, SLOT(autoZoomIn()));
+	QObject::connect(ui->actionZoom_Out_Auto, SIGNAL(triggered()), module, SLOT(autoZoomOut()));
+	QObject::connect(ui->actionSet_Tracking, SIGNAL(toggled(bool)), module, SLOT(setFlagTracking(bool)));
+	MovementMgr* mmgr = (MovementMgr*)module;
+	ui->actionSet_Tracking->setChecked(mmgr->getFlagTracking());
 	
 	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
@@ -464,6 +472,12 @@ void NewGui::init()
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	QObject::connect(ui->actionSave_Screenshot, SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
+
+	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	QObject::connect(ui->actionHorizontal_Flip, SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
+	ui->actionHorizontal_Flip->setChecked(proj->getFlipHorz());
+	QObject::connect(ui->actionVertical_Flip, SIGNAL(toggled(bool)), proj, SLOT(setFlipVert(bool)));
+	ui->actionVertical_Flip->setChecked(proj->getFlipVert());
 	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
