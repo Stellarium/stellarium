@@ -158,6 +158,42 @@ public slots:
 	void setTimeNow();
 	//! Get wether the current stellarium time is the real world time
 	bool getIsTimeNow() const;
+
+	//! Add one [Earth, solar] hour to the current simulation time.
+	void addHour() {addSolarDays(0.04166666666666666667);}
+	//! Add one [Earth, solar] day to the current simulation time.
+	void addDay() {addSolarDays(1.0);}
+	//! Add one [Earth, solar] week to the current simulation time.
+	void addWeek() {addSolarDays(7.0);}
+
+	//! Add one sidereal day to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void addSiderealDay() {addSiderealDays(1.0);}
+	//! Add one sidereal week to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void addSiderealWeek() {addSiderealDays(7.0);}
+
+	//! Subtract one [Earth, solar] hour to the current simulation time.
+	void subtractHour() {addSolarDays(-0.04166666666666666667);}
+	//! Subtract one [Earth, solar] day to the current simulation time.
+	void subtractDay() {addSolarDays(-1.0);}
+	//! Subtract one [Earth, solar] week to the current simulation time.
+	void subtractWeek() {addSolarDays(-7.0);}
+
+	//! Subtract one sidereal week to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void subtractSiderealDay() {addSiderealDays(-1.0);}
+	//! Subtract one sidereal week to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void subtractSiderealWeek() {addSiderealDays(-7.0);}
+
+	//! Add a number of Earth Solar days to the current simulation time
+	//! @param d the decimal number of days to add (use negative values to subtract)
+	void addSolarDays(double d);
+	//! Add a number of sidereal days to the current simulation time, 
+	//! based on the observer body's rotational period.
+	//! @param d the decimal number of sidereal days to add (use negative values to subtract)
+	void addSiderealDays(double d);
 	
 private:
 	// Matrices used for every coordinate transfo
