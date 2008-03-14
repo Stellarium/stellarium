@@ -27,6 +27,7 @@
 #include "SphereGeometry.hpp"
 
 #include <QString>
+#include <QObject>
 #include <QList>
 #include <QMap>
 
@@ -40,9 +41,12 @@ class SFont;
 //! functions to enable non-linear projection, such as fisheye or stereographic 
 //! projections. This class also provide drawing primitives that are optimized 
 //! according to the projection mode.
-class Projector
+class Projector : public QObject
 {
+	Q_OBJECT;
+
 public:
+
 	//! Supported reference frame types
 	enum FRAME_TYPE
 	{
@@ -190,25 +194,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling the PROJECTION matrix
-	//! Get the state of the horizontal flip.
-	//! @return True if flipped horizontally, else false.
-	bool getFlipHorz(void) const {return (flip_horz < 0.0);}
-	//! Get the state of the vertical flip.
-	//! @return True if flipped vertically, else false.
-	bool getFlipVert(void) const {return (flip_vert < 0.0);}
-	//! Set the horizontal flip status.
-	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipHorz(bool flip) {
-		flip_horz = flip ? -1.0 : 1.0;
-		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
-	}
-	//! Set the vertical flip status.
-	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipVert(bool flip) {
-		flip_vert = flip ? -1.0 : 1.0;
-		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
-	}
-	
 	// TODO Doxygen docs: What is this for?
 	bool needGlFrontFaceCW(void) const
 		{return (flip_horz*flip_vert < 0.0);}
@@ -363,7 +348,7 @@ public:
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
 			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 
-    //! draw a simple circle, 2d viewport coordinates in pixel
+	//! draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;
 
 	//! Draw a square using the current texture at the given projected 2d position.
@@ -432,6 +417,26 @@ public:
 	//! Reimplementation of gluSphere for use in linear mode.
 	void sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, 
 			   GLint stacks, int orient_inside = 0) const;
+
+public slots:
+	//! Get the state of the horizontal flip.
+	//! @return True if flipped horizontally, else false.
+	bool getFlipHorz(void) const {return (flip_horz < 0.0);}
+	//! Get the state of the vertical flip.
+	//! @return True if flipped vertically, else false.
+	bool getFlipVert(void) const {return (flip_vert < 0.0);}
+	//! Set the horizontal flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	void setFlipHorz(bool flip) {
+		flip_horz = flip ? -1.0 : 1.0;
+		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
+	}
+	//! Set the vertical flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	void setFlipVert(bool flip) {
+		flip_vert = flip ? -1.0 : 1.0;
+		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
+	}
 
 
 private:
