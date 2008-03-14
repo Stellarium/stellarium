@@ -22,6 +22,7 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Observer.hpp"
+#include "Planet.hpp"
 
 #include <QSettings>
 #include <QStringList>
@@ -103,6 +104,19 @@ bool Navigator::getIsTimeNow(void) const
 		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
 	}
 	return previousResult;
+}
+
+void Navigator::addSolarDays(double d)
+{
+	setJDay(getJDay() + d);
+}
+
+void Navigator::addSiderealDays(double d)
+{
+	const Planet* home = position->getHomePlanet();
+	if (home->getEnglishName() != "Solar System Observer")
+	d *= home->getSiderealDay();
+	setJDay(getJDay() + d);
 }
 
 //! Increase the time speed

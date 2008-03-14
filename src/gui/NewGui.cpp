@@ -442,6 +442,16 @@ void NewGui::init()
 	QObject::connect(ui->actionSet_Real_Time_Speed, SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
 	QObject::connect(ui->actionReturn_To_Current_Time, SIGNAL(triggered()), module, SLOT(setTimeNow()));
 	QObject::connect(ui->actionSwitch_Equatorial_Mount, SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
+	QObject::connect(ui->actionAdd_Solar_Hour, SIGNAL(triggered()), module, SLOT(addHour()));
+	QObject::connect(ui->actionAdd_Solar_Day, SIGNAL(triggered()), module, SLOT(addDay()));
+	QObject::connect(ui->actionAdd_Solar_Week, SIGNAL(triggered()), module, SLOT(addWeek()));
+	QObject::connect(ui->actionSubtract_Solar_Hour, SIGNAL(triggered()), module, SLOT(subtractHour()));
+	QObject::connect(ui->actionSubtract_Solar_Day, SIGNAL(triggered()), module, SLOT(subtractDay()));
+	QObject::connect(ui->actionSubtract_Solar_Week, SIGNAL(triggered()), module, SLOT(subtractWeek()));
+	QObject::connect(ui->actionAdd_Sidereal_Day, SIGNAL(triggered()), module, SLOT(addSiderealDay()));
+	QObject::connect(ui->actionAdd_Sidereal_Week, SIGNAL(triggered()), module, SLOT(addSiderealWeek()));
+	QObject::connect(ui->actionSubtract_Sidereal_Day, SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
+	QObject::connect(ui->actionSubtract_Sidereal_Week, SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
 			
 	module = &StelApp::getInstance();
 	QObject::connect(ui->actionShow_Night_Mode, SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
