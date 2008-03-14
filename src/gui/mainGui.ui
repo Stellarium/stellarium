@@ -866,6 +866,116 @@ color: darkgray;
     <string>Move &amp; Select</string>
    </property>
   </action>
+  <action name="actionAdd_Solar_Hour" >
+   <property name="text" >
+    <string>Add 1 solar hour</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+=</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionSubtract_Solar_Hour" >
+   <property name="text" >
+    <string>Subtract 1 solar hour</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+-</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionAdd_Solar_Day" >
+   <property name="text" >
+    <string>Add 1 solar day</string>
+   </property>
+   <property name="shortcut" >
+    <string>=</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionSubtract_Solar_Day" >
+   <property name="text" >
+    <string>Subtract 1 solar day</string>
+   </property>
+   <property name="shortcut" >
+    <string>-</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionAdd_Solar_Week" >
+   <property name="text" >
+    <string>Add 1 solar week</string>
+   </property>
+   <property name="shortcut" >
+    <string>]</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionSubtract_Solar_Week" >
+   <property name="text" >
+    <string>Subtract 1 solar week</string>
+   </property>
+   <property name="shortcut" >
+    <string>[</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionAdd_Sidereal_Day" >
+   <property name="text" >
+    <string>Add 1 sidereal day</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+=</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionSubtract_Sidereal_Day" >
+   <property name="text" >
+    <string>Subtract 1 sidereal day</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+-</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionAdd_Sidereal_Week" >
+   <property name="text" >
+    <string>Add 1 sidereal week</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+]</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
+  <action name="actionSubtract_Sidereal_Week" >
+   <property name="text" >
+    <string>Subtract 1 sidereal week</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+[</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
