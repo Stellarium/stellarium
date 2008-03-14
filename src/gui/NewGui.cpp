@@ -419,6 +419,10 @@ void NewGui::init()
 	ui->actionShow_Equatorial_Grid->setChecked(gmgr->getFlagEquatorGrid());
 	QObject::connect(ui->actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
 	ui->actionShow_Azimutal_Grid->setChecked(gmgr->getFlagAzimutalGrid());
+	QObject::connect(ui->actionShow_Ecliptic_Line, SIGNAL(toggled(bool)), module, SLOT(setFlagEclipticLine(bool)));
+	ui->actionShow_Ecliptic_Line->setChecked(gmgr->getFlagEclipticLine());
+	QObject::connect(ui->actionShow_Equator_Line, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorLine(bool)));
+	ui->actionShow_Equator_Line->setChecked(gmgr->getFlagEquatorLine());
 	
 	module = GETSTELMODULE("LandscapeMgr");
 	LandscapeMgr* lmgr = (LandscapeMgr*)module;

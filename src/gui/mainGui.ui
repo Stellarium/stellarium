@@ -976,6 +976,34 @@ color: darkgray;
     <string>Date and time</string>
    </property>
   </action>
+  <action name="actionShow_Ecliptic_Line" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Ecliptic Line</string>
+   </property>
+   <property name="shortcut" >
+    <string>,</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
+  <action name="actionShow_Equator_Line" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Equator Line</string>
+   </property>
+   <property name="shortcut" >
+    <string>.</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
