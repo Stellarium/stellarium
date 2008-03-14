@@ -229,6 +229,7 @@ SET(stellarium_MOC_HDRS
 	core/Observer.hpp
 	core/StelApp.hpp
 	core/Navigator.hpp
+	core/Projector.hpp
 	core/StelAppGraphicsItem.hpp
 	core/STexture.hpp
 	core/MovementMgr.hpp

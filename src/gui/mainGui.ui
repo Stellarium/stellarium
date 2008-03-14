@@ -784,6 +784,87 @@ color: darkgray;
    <property name="shortcut" >
     <string>Ctrl+S</string>
    </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Misc</string>
+   </property>
+  </action>
+  <action name="actionZoom_In_Auto" >
+   <property name="text" >
+    <string>actionZoomInSelected</string>
+   </property>
+   <property name="shortcut" >
+    <string>/</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Move &amp; Select</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out_Auto" >
+   <property name="text" >
+    <string>actionZoomOut</string>
+   </property>
+   <property name="shortcut" >
+    <string>\</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Move &amp; Select</string>
+   </property>
+  </action>
+  <action name="actionShow_Fog" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Fog</string>
+   </property>
+   <property name="shortcut" >
+    <string>F</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
+  <action name="actionHorizontal_Flip" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Horizontal Flip</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+H</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
+  <action name="actionVertical_Flip" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Vertical Flip</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+V</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
+  <action name="actionSet_Tracking" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Set Tracking</string>
+   </property>
+   <property name="shortcut" >
+    <string>T</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Move &amp; Select</string>
+   </property>
   </action>
  </widget>
  <customwidgets>
