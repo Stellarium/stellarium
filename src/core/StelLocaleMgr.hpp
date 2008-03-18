@@ -129,19 +129,35 @@ public:
 	};
 	
 	//! Get the current time shift at observator time zone with respect to GMT time.
-	void set_GMT_shift(int t) {GMT_shift=t;}
+	void set_GMT_shift(int t)
+	{
+		GMT_shift=t;
+	}
 	//! Get the current time shift at observator time zone with respect to GMT time.
 	float get_GMT_shift(double JD = 0) const;
 	//! Set the timezone by a TZ-style string (see tzset in the libc manual).
 	void set_custom_tz_name(const QString& tzname);
 	//! Get the timezone name (a TZ-style string - see tzset in the libc manual).
-	QString get_custom_tz_name(void) const {return custom_tz_name;}
+	QString get_custom_tz_name(void) const
+	{
+		return custom_tz_name;
+	}
 	//! Get the current timezone format mode.
-	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
+	S_TZ_FORMAT get_tz_format(void) const
+	{
+		return time_zone_mode;
+	}
 	
-	//! Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
+	//! Return the time in ISO 8601 format that is : %Y-%m-%dT%H:%M:%S
 	//! @param JD the time and date expressed as a Julian date value.
 	QString get_ISO8601_time_local(double JD) const;
+
+	//! Return the JD time for a local time ISO 8601 format that is:
+	//! %Y-%m-%dT%H:%M:%S, but %Y can be a large number with sign, and
+	//! %Y can be zero.
+	//! @param JD the time and date expressed as a Julian date value.
+	double get_jd_from_ISO8601_time_local(const QString&) const;
+
 private:
 	// The translator used for astronomical object naming
 	Translator skyTranslator;

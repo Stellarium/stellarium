@@ -45,8 +45,10 @@
 #include <QTextStream>
 #include <QFile>
 #include <QDebug>
+#include <QLocale>
 
-namespace StelUtils {
+namespace StelUtils
+{
 
 std::wstring stringToWstring(const string& s)
 {
@@ -408,9 +410,11 @@ double get_dec_angle(const string& str)
 	double seconds = 0.0, pos;
 	short count;
 
-	enum _type{
+	enum _type
+	{
 		HOURS, DEGREES, LAT, LONG
-	}type;
+	}
+	type;
 
 	if (s == NULL || !*s)
 		return(-0.0);
@@ -520,7 +524,10 @@ bool checkAbsolutePath(const string& fileName)
 }
 
 // Check if a number is a power of 2
-bool isPowerOfTwo (int value) {return (value & -value) == value;}
+bool isPowerOfTwo(int value)
+{
+	return (value & -value) == value;
+}
 
 // Return the first power of two bigger than the given value 
 int getBiggerPowerOfTwo(int value)
@@ -545,24 +552,227 @@ double qDateTimeToJd(const QDateTime& dateTime)
 	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime().msecsTo(dateTime.time())-0.5;
 }
 
-/*************************************************************************
- Convert a julian day to a QT QDateTime class. 
- Warning if JD < 0 the date is invalid (any date before 2 January 4713 B.C.)
-*************************************************************************/
-QDateTime jdToQDateTime(double jd)
+// based on QDateTime's original handling, but expanded to handle 0.0 and earlier.
+void getDateFromJulianDay(double jd, int *year, int *month, int *day)
 {
-	jd+=0.5;
-	const int ms = (int)( (jd-(int)jd) *24.*60.*60.*1000. +0.5);
-	QDateTime dateTime(QDate::fromJulianDay((int)jd));
-	return dateTime.addMSecs(ms).toUTC();
+	int y, m, d;
+
+	// put us in the right calendar day for the time of day.
+	double fraction = jd - floor(jd);
+	if (fraction >= .5)
+	{
+		jd += 1.0;
 }
 
-/*************************************************************************
- Calculate julian day from system time.
-*************************************************************************/
+	if (jd >= 2299161)
+	{
+		// Gregorian calendar starting from October 15, 1582
+		// This algorithm is from Henry F. Fliegel and Thomas C. Van Flandern
+		qulonglong ell, n, i, j;
+		ell = qulonglong(floor(jd)) + 68569;
+		n = (4 * ell) / 146097;
+		ell = ell - (146097 * n + 3) / 4;
+		i = (4000 * (ell + 1)) / 1461001;
+		ell = ell - (1461 * i) / 4 + 31;
+		j = (80 * ell) / 2447;
+		d = ell - (2447 * j) / 80;
+		ell = j / 11;
+		m = j + 2 - (12 * ell);
+		y = 100 * (n - 49) + i + ell;
+	}
+	else
+	{
+		// Julian calendar until October 4, 1582
+		// Algorithm from Frequently Asked Questions about Calendars by Claus Toendering
+		int julianDay = floor(jd);
+		julianDay += 32082;
+		int dd = (4 * julianDay + 3) / 1461;
+		int ee = julianDay - (1461 * dd) / 4;
+		int mm = ((5 * ee) + 2) / 153;
+		d = ee - (153 * mm + 2) / 5 + 1;
+		m = mm + 3 - 12 * (mm / 10);
+		y = dd - 4800 + (mm / 10);
+	}
+	*year = y;
+	*month = m;
+	*day = d;
+}
+
+void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second)
+{
+	double frac = julianDay - (floor(julianDay));
+	int s = (int)floor(frac * 24 * 60 * 60);
+
+	*hour = ((s / (60 * 60))+12)%24;
+	*minute = (s/(60))%60;
+	*second = s % 60;
+}
+
+
+QString jdToIsoString(double jd)
+{
+	int year, month, day, hour, minute, second;
+	getDateFromJulianDay(jd, &year, &month, &day);
+	getTimeFromJulianDay(jd, &hour, &minute, &second);
+
+	// formatting a negative doesnt work the way i expect
+
+	QString dt = QString("%1-%2-%3T%4:%5:%6")
+	             .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
+	             .arg(month,2,10,QLatin1Char('0'))
+	             .arg(day,2,10,QLatin1Char('0'))
+	             .arg(hour,2,10,QLatin1Char('0'))
+	             .arg(minute,2,10,QLatin1Char('0'))
+	             .arg(second,2,10,QLatin1Char('0'));
+
+	if (year < 0)
+	{
+		dt.prepend("-");
+	}
+	return dt;
+}
+
+// Format the date per the fmt.
+QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt)
+{
+	/* we have to handle the year zero, and the years before qdatetime can represent. */
+	const QLatin1Char quote('\'');
+	QString out;
+	int quotestartedat = -1;
+
+	for (int i = 0; i < (int)fmt.length(); i++)
+	{
+		if (fmt.at(i) == quote)
+		{
+			if (quotestartedat >= 0)
+			{
+				if ((quotestartedat+1) == i)
+				{
+					out += quote;
+					quotestartedat = -1;
+				}
+				else
+				{
+					out += fmt.mid(quotestartedat+1, i-(quotestartedat+1));
+					quotestartedat = -1;
+				}
+			}
+			else
+			{
+				quotestartedat = i;
+			}
+		}
+		else if (quotestartedat > 0)
+		{
+			out += fmt.at(i);
+		}
+		else if (fmt.at(i) == QLatin1Char('d') ||
+		         fmt.at(i) == QLatin1Char('M') ||
+		         fmt.at(i) == QLatin1Char('y'))
+		{
+			int j = i+1;
+			while (j < fmt.length() && fmt.at(j) == fmt.at(i) && (4 <= (j-i)))
+			{
+				j++;
+			}
+
+			QString frag = fmt.mid(i,(j-i+1));
+			if (frag == "d")
+			{
+				out += QString("%1").arg(day);
+			}
+			else if (frag == "dd")
+			{
+				out += QString("%1").arg(day, 2, 10, QLatin1Char('0'));
+			}
+			else if (frag == "ddd")
+			{
+				out += QDate::shortDayName(dayOfWeek+1);
+			}
+			else if (frag == "dddd")
+			{
+				out += QDate::longDayName(dayOfWeek+1);
+			}
+			else if (frag == "M")
+			{
+				out += QString("%1").arg(month);
+			}
+			else if (frag == "MM")
+			{
+				out += QString("%1").arg(month, 2, 10, QLatin1Char('0'));
+			}
+			else if (frag == "MMM")
+			{
+				out += QDate::shortMonthName(month);
+			}
+			else if (frag == "MMMM")
+			{
+				out += QDate::longMonthName(month);
+			}
+			else if (frag == "y")
+			{
+				out += frag;
+			}
+			else if (frag == "yy")
+			{
+				int dispyear = year % 100;
+				out += QString("%1").arg(dispyear,2,10,QLatin1Char('0'));
+			}
+			else if (frag == "yyy")
+			{
+				// assume greedy: understand yy before y.
+				int dispyear = year % 100;
+				out += QString("%1").arg(dispyear,2,10,QLatin1Char('0'));
+				out += QLatin1Char('y');
+			}
+			else if (frag == "yyyy")
+			{
+				int dispyear = (year >= 0 ? year : -1 * year);
+				if (year <  0)
+				{
+					out += QLatin1Char('-');
+				}
+				out += QString("%1").arg(dispyear,4,10,QLatin1Char('0'));
+			}
+
+			i = j;
+		}
+		else
+		{
+			out += fmt.at(i);
+		}
+
+
+	}
+
+	return out;
+}
+
+//! try to get a reasonable locale date string from the system, trying to work around
+//! limitations of qdatetime for large dates in the past.  see QDateTime::toString().
+QString localeDateString(int year, int month, int day, int dayOfWeek)
+{
+
+	// try the QDateTime first
+	QDate test(year, month, day);
+
+	if (test.isValid() && !test.toString(Qt::LocaleDate).isEmpty())
+	{
+		return test.toString(Qt::LocaleDate);
+	}
+	else
+	{
+		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));
+	}
+}
+
+
+//! use QDateTime to get a Julian Date from the system's current time.
+//! this is an acceptable use of QDateTime because the system's current
+//! time is more than likely always going to be expressible by QDateTime.
 double getJDFromSystem(void)
 {
-	return StelUtils::qDateTimeToJd(QDateTime::currentDateTime().toUTC());
+	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
 
 double qTimeToJDFraction(const QTime& time)
@@ -594,126 +804,25 @@ bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool 
 	return result;
 }
 
+// Use Qt's own sense of time and offset instead of platform specific code.
+float get_GMT_shift_from_QT(double JD)
+{
+	int year, month, day, hour, minute, second;
+	getDateFromJulianDay(JD, &year, &month, &day);
+	getTimeFromJulianDay(JD, &hour, &minute, &second);
+	QDateTime current(QDate(year, month, day), QTime(hour, minute, second));
+	if (! current.isValid())
+{
+		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		current = QDateTime::currentDateTime();
+}
+	QDateTime c1 = QDateTime::fromString(current.toString(Qt::ISODate),Qt::ISODate);
+	QDateTime u1 = QDateTime::fromString(current.toUTC().toString(Qt::ISODate),Qt::ISODate);
+
+	int secsto = u1.secsTo(c1);
+	float hrsto = secsto / 3600.0f;
+	return hrsto;
+}
+
 } // end of the StelUtils namespace
-////////////////////////////////////////////////////////////////////////////////////////////
 
-// convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
-// to julian day
-int string_to_jday(string date, double &jd)
-{
-	//qDebug() << date;
-	// Handle also strings with : instead of - in date part
-// 	for(int i=0; i<2; i++)
-// 	{
-// 		string::size_type p = date.find(":", 0);
-// 		if (p != string::npos)
-// 			date.replace(p, 1, "-");
-// 	}
-
-// 	// handle lack of 0 padding
-// 	if (date.find("-",5) == 6)
-// 		date.replace(5, 0, "0");
-// 
-// 	if (date.find("T",7) == 9)
-// 		date.replace(8, 0, "0");
-// 
-// 	if (date.find(":",11) == 12)
-// 		date.replace(11, 0, "0");
-// 
-// 	if (date.find(":",14) == 15)
-// 		date.replace(14, 0, "0");
-// 
-// 	if (date.length() == 18)
-// 		date.replace(17, 0, "0");
-
-	jd = StelUtils::qDateTimeToJd(QDateTime::fromString(date.c_str(), Qt::ISODate));
-	return 1;
-}
-
-
-// Calculate tm struct from julian day
-void get_tm_from_julian(double JD, struct tm * tm_time)
-{
-	QDateTime dateTime = StelUtils::jdToQDateTime(JD);
-	tm_time->tm_sec = dateTime.time().second();
-	tm_time->tm_min = dateTime.time().minute();
-	tm_time->tm_hour = dateTime.time().hour();
-	tm_time->tm_wday = (int)fmod(JD + 1.0,7);
-	tm_time->tm_mday = dateTime.date().day();
-	tm_time->tm_mon = dateTime.date().month() - 1;
-	tm_time->tm_year = dateTime.date().year() - 1900;
-	tm_time->tm_isdst = -1;
-}
-
-//! Dummy wrapper used to remove a boring warning when using strftime directly
-size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
-{
-	return strftime(s, max, fmt, tm);
-}
-
-// Return the number of hours to add to gmt time to get the local time in day JD
-// taking the parameters from system. This takes into account the daylight saving
-// time if there is. (positive for Est of GMT)
-// TODO : %z in strftime only works on GNU compiler
-// Fixed 31-05-2004 Now use the extern variables set by tzset()
-float get_GMT_shift_from_system(double JD)
-{
-#if !defined(WIN32)
-	struct tm * timeinfo;
-	struct tm rawtime;
-	get_tm_from_julian(JD, &rawtime);
-#ifdef HAVE_TIMEGM
-	time_t ltime = timegm(&rawtime);
-#endif
-#ifndef HAVE_TIMEGM
-#ifdef HAVE_MKTIME
-	time_t ltime = mktime(&rawtime);
-#else
-	// This does not work
-	time_t ltime = my_timegm(&rawtime);
-#endif	
-#endif
-	timeinfo = localtime(&ltime);
-
-	static char heure[20];
-	heure[0] = '\0';
-
-	my_strftime(heure, 19, "%z", timeinfo);
-	
-	heure[5] = '\0';
-	float min = 1.f/60.f * atoi(&heure[3]);
-	heure[3] = '\0';
-	return min + atoi(heure);
-#else
-     struct tm *timeinfo;
-     time_t rawtime;
-	 time(&rawtime);
-	 timeinfo = localtime(&rawtime);
-	 return -(float)timezone/3600 + (timeinfo->tm_isdst!=0);
-#endif
-}
-
-// Calculate time_t from julian day
-time_t get_time_t_from_julian(double JD)
-{
-	return StelUtils::jdToQDateTime(JD).toTime_t();
-}
-
-// Return the time zone name taken from system locale
-wstring get_time_zone_name_from_system(double JD)
-{
-	// Windows will crash if date before 1970
-	// And no changes on Linux before that year either
-	// TODO: ALSO, on Win XP timezone never changes anyway??? 
-	if(JD < 2440588 ) JD = 2440588;
-
-	// The timezone name depends on the day because of the summer time
-	time_t rawtime = get_time_t_from_julian(JD);
-
-	struct tm * timeinfo;
-	timeinfo = localtime(&rawtime);
-	static char timez[255];
-	timez[0] = 0;
-	my_strftime(timez, 254, "%Z", timeinfo);
-	return StelUtils::stringToWstring(timez);
-}

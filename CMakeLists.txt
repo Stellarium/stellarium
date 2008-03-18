@@ -160,6 +160,9 @@ INCLUDE(CPack)
 ########### Generate doxygen doc ###############
 ADD_CUSTOM_TARGET(doc doxygen Doxyfile WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Generate the doxygen documentation into the builds/doc directory.")
 
+########### enable testing ###########
+ENABLE_TESTING()
+
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data ) 
 ADD_SUBDIRECTORY( src ) 

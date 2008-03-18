@@ -763,6 +763,23 @@ color: darkgray;
     <string>Dialogs</string>
    </property>
   </action>
+  <action name="actionShow_DateTime_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Date/Time Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+T</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Date and time</string>
+   </property>
+  </action>
   <action name="actionShow_SkyView_Window" >
    <property name="checkable" >
     <bool>true</bool>
