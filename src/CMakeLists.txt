@@ -1,6 +1,5 @@
 
 
-
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/core ${CMAKE_SOURCE_DIR}/src/gui ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/src/planetsephems ${CMAKE_SOURCE_DIR}/src/stelutils ${CMAKE_SOURCE_DIR}/src/stelutils/iniparser ${FreeType2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} ${JPEG_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${SDL_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} ${INTL_INCLUDE_DIR} ${SDLMIXER_INCLUDE_DIR} ${QT_INCLUDE_DIR}/QtScript ${QT_QTSCRIPT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 
 ########### next target ###############
@@ -89,6 +88,8 @@ SET(stellarium_lib_SRCS
 	stelutils/StelIniParser.hpp
 	stelutils/StelUtils.cpp
 	stelutils/StelUtils.hpp
+	stelutils/TextEntryDateTimeValidator.cpp
+	stelutils/TextEntryDateTimeValidator.hpp
 	stelutils/Translator.cpp
 	stelutils/Translator.hpp
 	stelutils/TreeGrid.cpp
@@ -185,6 +186,8 @@ SET(stellarium_lib_SRCS
 	gui/SpinBox.cpp
 	gui/LocationDialog.hpp
 	gui/LocationDialog.cpp
+	gui/DateTimeDialog.hpp
+	gui/DateTimeDialog.cpp
 	gui/ViewDialog.hpp
 	gui/ViewDialog.cpp
 	
@@ -211,6 +214,7 @@ SET(stellarium_UIS
   gui/mainGui.ui
   gui/locationDialogGui.ui
   gui/helpDialogGui.ui
+  gui/dateTimeDialogGui.ui
   gui/viewDialog.ui
   )
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
@@ -248,6 +252,7 @@ SET(stellarium_MOC_HDRS
 	gui/MapView.hpp
 	gui/SpinBox.hpp
 	gui/LocationDialog.hpp
+	gui/DateTimeDialog.hpp
 	gui/ViewDialog.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
@@ -271,3 +276,13 @@ ELSE(GENERATE_STELMAINLIB)
 ENDIF(GENERATE_STELMAINLIB)
 
 INSTALL(TARGETS stellarium DESTINATION bin)
+
+## tests
+
+SET(tests_testdates_SRCS
+	stelutils/StelUtils.cpp
+	stelutils/StelUtils.hpp
+	tests/testdates.cpp)
+ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
+TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
+ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)

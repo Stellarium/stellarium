@@ -483,6 +483,9 @@ void NewGui::init()
 	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
 	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));
 	
+	QObject::connect(ui->actionShow_DateTime_Window, SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
+	QObject::connect(&dateTimeDialog, SIGNAL(closed()), ui->actionShow_DateTime_Window, SLOT(toggle()));
+
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	QObject::connect(ui->actionSave_Screenshot, SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
@@ -507,7 +510,7 @@ void NewGui::init()
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
 	QPixmap pxmapOff(":/graphicGui/gui/1-off-time.png");
-	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, NULL, buttonHelpLabel);
+	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_DateTime_Window, buttonHelpLabel);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");

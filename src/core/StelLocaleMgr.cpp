@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "TextEntryDateTimeValidator.hpp"
 
 #include <QLocale>
 #include <QDebug>
@@ -111,98 +112,129 @@ Translator& StelLocaleMgr::getSkyTranslator()
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 {
-	QDateTime dateTime;
+	double shift = 0.0;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
+	{
+		shift = GMT_shift;
+	}
 	else
-		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
-	return dateTime.toLocalTime().toString(Qt::ISODate);
+	{
+		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+}
+	return StelUtils::jdToIsoString(JD + shift);
 }
 
+//! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
+//! of them.
+double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
+{
+	vector<int> numbers = TextEntryDateTimeValidator::get_ints_from_ISO8601_string(t);
+
+	if (numbers.size() == 6)
+{
+		int y = numbers[0];
+		int m = numbers[1];
+		int d = numbers[2];
+		int h = numbers[3];
+		int mn = numbers[4];
+		int s = numbers[5];
+
+		// day
+		double jd = (double)((1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075);
+		// modified by time
+		double delta_time = (h / 24.0) + (mn / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
+		jd += delta_time;
+
+		// modified by shift
+	if (time_zone_mode == S_TZ_GMT_SHIFT)
+			jd -= GMT_shift;
+	else
+			jd -= StelUtils::get_GMT_shift_from_QT(jd)*0.041666666666;
+	
+		return jd;
+	
+	}
+	else
+	{
+		qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: did not get 6 ints back from TextEntryDateTimeValidator for input " << t << ", returning beginning of epoch!";
+		return 0.0;
+	}
+}
+	
 
 // Return a string with the local date formated according to the date_format variable
 QString StelLocaleMgr::get_printable_date_local(double JD) const
-{
-	// Ugly hack to fix Qt limitation with JD<0 dates..
-	// It assumes that there are no strange date leap between JD=0 and JD=800
-	int yearOffset = 0;
-	if (JD<0)
 	{
-		const double jdSave = JD;
-		JD = std::fmod(JD,800*365)+800*365;
-		yearOffset = (int)(jdSave-JD-0.5);
-		yearOffset/=365;
-	}
-	QDateTime dateTime;
+	int year, month, day, dayOfWeek;
+	double shift = 0.0;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
-	else
-		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
-	
-	dateTime = dateTime.toLocalTime();
-	
-	QDate date = dateTime.date();
-	int year = date.year()+yearOffset;
-	const int month = date.month();
-	const int day = date.day();
-	QString bcStr;
-	
-	// If needed, convert the year to BC and deal with year zero. (year -2 = 3BC, year 0 = 1BC
-	if (year <= 0) 
 	{
-		++year; // We want a year zero, unlike what Qt wants
+		shift = GMT_shift;
 	}
+	else
+	{
+		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+	}
+	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
+	dayOfWeek = (int)floor(fmod(JD, 7));
+	QString str;
 	
 	switch (date_format)
 	{
-		case S_DATE_SYSTEM_DEFAULT:
-			return dateTime.date().toString(Qt::LocaleDate);
 		case S_DATE_MMDDYYYY:
 		{
-			QString str;
 			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
-			return str;
+		break;
 		}
 		case S_DATE_DDMMYYYY:
 		{
-			QString str;
 			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
-			return str;
+		break;
 		}
 		case S_DATE_YYYYMMDD:
 		{
-			QString str;
 			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
-			return str;
+		break;
 		}
+	case S_DATE_SYSTEM_DEFAULT:
+		str = StelUtils::localeDateString(year, month, day, dayOfWeek);
+		break;
 		default:
 			qWarning() << "WARNING: unknown date format fallback to system default";
-			return dateTime.date().toString(Qt::LocaleDate);
+		str = StelUtils::localeDateString(year, month, day, dayOfWeek);
 	}
+	return str;
 }
 
 // Return a string with the local time (according to time_zone_mode variable) formated
 // according to the time_format variable
 QString StelLocaleMgr::get_printable_time_local(double JD) const
 {
-	QDateTime dateTime;
+	int hour, minute, second;
+	double shift = 0.0;
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
-		dateTime = StelUtils::jdToQDateTime(JD + GMT_shift);
+	{
+		shift = GMT_shift;
+	}
 	else
-		dateTime = StelUtils::jdToQDateTime(JD + get_GMT_shift_from_system(JD)*0.041666666666);
-	dateTime = dateTime.toLocalTime();
+	{
+		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+	}
+	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
 	
+	QTime t(hour, minute, second);
+
 	switch (time_format)
 	{
 		case S_TIME_SYSTEM_DEFAULT:
-			return dateTime.time().toString();
+		return t.toString();
 		case S_TIME_24H:
-			return dateTime.time().toString("hh:mm:ss");
+		return t.toString("hh:mm:ss");
 		case S_TIME_12H:
-			return dateTime.time().toString("hh:mm:ss ap");
+		return t.toString("hh:mm:ss ap");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
-			return dateTime.time().toString(Qt::LocaleDate);
+		return t.toString(Qt::LocaleDate);
 	}
 }
 
@@ -262,6 +294,6 @@ void StelLocaleMgr::set_custom_tz_name(const QString& tzname)
 float StelLocaleMgr::get_GMT_shift(double JD) const
 {
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
-	else return get_GMT_shift_from_system(JD);
+	else return StelUtils::get_GMT_shift_from_QT(JD);
 }
 

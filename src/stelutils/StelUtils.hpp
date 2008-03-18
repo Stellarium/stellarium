@@ -43,7 +43,8 @@ using namespace std;
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
-namespace StelUtils {
+namespace StelUtils
+{
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
@@ -286,16 +287,21 @@ namespace StelUtils {
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions. 
 	
-	//! Convert a QT QDateTime class to julian day.
-	//! @param dateTime the UTC QDateTime to convert
-	//! @result the matching decimal Julian Day
-	double qDateTimeToJd(const QDateTime& dateTime);
+//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
+void getDateFromJulianDay(double julianDay, int *year, int *month, int *day);
 
-	//! Convert a  julian day to a QT QDateTime class.
-	//! Warning if JD < 0 the date is invalid (any date before 2 January 4713 B.C.)
-	//! @param the decimal Julian Day
-	//! @result the matching UTC QDateTime
-	QDateTime jdToQDateTime(double jd);
+//! Make from julianDay an hour, minute, second.
+void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second);
+
+QString jdToIsoString(double jd);
+
+//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
+//! @return QString representing the formatted date
+QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
+
+//! Format the date and day-of-week per the default locale's QLocale::ShortFormat.
+//! @return QString representing the formatted date
+QString localeDateString(int year, int month, int day, int dayOfWeek);
 
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
@@ -305,25 +311,15 @@ namespace StelUtils {
 	//! Note that a Julian Day starts at 12:00, not 0:00, and 
 	//! so 12:00 == 0.0 and 0:00 == 0.5
 	double qTimeToJDFraction(const QTime& time);
+
+//! Return number of hours offset from GMT, using Qt functions.
+float get_GMT_shift_from_QT(double JD);
+
+//! Convert a QT QDateTime class to julian day.
+//! @param dateTime the UTC QDateTime to convert
+//! @result the matching decimal Julian Day
+double qDateTimeToJd(const QDateTime& dateTime);
+
 }
-
-///////////////////////////////////////////////////
-// Old General Calendar Functions. 
-// They should be migrated to more protable ones based on Qt
-
-//! Return the number of hours to add to gmt time to get the local time at time JD.
-//! taking the parameters from system. This takes into account the daylight saving
-//! time if there is. (positive for Est of GMT)
-//! @deprecated in favor of QT-based calendar functions.
-float get_GMT_shift_from_system(double JD);
-
-//! Return the time zone name taken from system locale.
-//! @deprecated in favor of QT-based calendar functions.
-wstring get_time_zone_name_from_system(double JD);
-
-//! convert string in ISO 8601-like format to julian day.
-//! @param date string in ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timezone offset)
-//! @deprecated in favor of QT-based calendar functions.
-int string_to_jday(string date, double &jd);
 
 #endif
