@@ -584,7 +584,7 @@ void getDateFromJulianDay(double jd, int *year, int *month, int *day)
 	{
 		// Julian calendar until October 4, 1582
 		// Algorithm from Frequently Asked Questions about Calendars by Claus Toendering
-		int julianDay = floor(jd);
+		int julianDay = (int)floor(jd);
 		julianDay += 32082;
 		int dd = (4 * julianDay + 3) / 1461;
 		int ee = julianDay - (1461 * dd) / 4;
