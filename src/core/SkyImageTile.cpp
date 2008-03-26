@@ -299,14 +299,17 @@ void SkyImageTile::drawTile(StelCore* core)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
 	}
-	Vec3d win;
-	Vec3d bary = skyConvexPolygons.at(0).getBarycenter();
-	prj->project(bary,win);
-	prj->drawText(debugFont, win[0], win[1], getImageUrl());
-	
-	glDisable(GL_TEXTURE_2D);
-	prj->drawPolygon(skyConvexPolygons.at(0));
-	glEnable(GL_TEXTURE_2D);
+	foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
+	{
+		Vec3d win;
+		Vec3d bary = poly.getBarycenter();
+		prj->project(bary,win);
+		prj->drawText(debugFont, win[0], win[1], getImageUrl());
+		
+		glDisable(GL_TEXTURE_2D);
+		prj->drawPolygon(poly);
+		glEnable(GL_TEXTURE_2D);
+	}
 #endif
 }
 

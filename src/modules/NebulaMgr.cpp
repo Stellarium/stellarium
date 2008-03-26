@@ -136,7 +136,7 @@ double NebulaMgr::draw(StelCore* core)
 	prj->setCurrentFrame(Projector::FRAME_J2000);
 // 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_BLEND);
-	glColor4f(1.5,1.5,1.5,1.0);
+	glColor3f(10.5,10.5,10.5);
 	dssTile->draw(core);
 #endif
 	
