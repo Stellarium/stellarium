@@ -279,7 +279,8 @@ void SkyImageTile::drawTile(StelCore* core)
 		const int N=poly.size()-1;
 		int idx=N;
 		int diff = 0;
-				// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
+		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
+		glColor4f(2.5,2.5,2.5,1);
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i=0;i<=N;++i)
 		{

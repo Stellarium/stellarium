@@ -3,6 +3,7 @@
 # Fabien Chereau fchereau@eso.org
 
 import sys
+import os
 from astLib import astWCS
 
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
@@ -94,37 +95,33 @@ def writeTile(imgName, polys, curLevel, i,j, f):
 		f.write(',\n')
 		f.write('\t"subTiles" :\n\t[\n')
 		if curLevel%2==0:
-			hasWritten = false
 			if getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j)!=None:
-				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i,2*j) +levels[curLevel+1]+'.json"\n')
+				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i,2*j) +levels[curLevel+1]+'.json",\n')
 			if getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j)!=None:
-				if (hasWritten==True):
-					f.write('\n,')
-				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i+1,2*j) +levels[curLevel+1]+'.json"\n')
+				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i+1,2*j) +levels[curLevel+1]+'.json",\n')
 			if getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j+1)!=None:
-				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i+1,2*j+1) +levels[curLevel+1]+'.json"\n')
-				if (hasWritten==True)
-					f.write(',')
+				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i+1,2*j+1) +levels[curLevel+1]+'.json",\n')
 			if getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j+1)!=None:
-				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i,2*j+1) +levels[curLevel+1]+'.json"\n')
+				f.write('\t\t"'+imgName+"_%.2d_%.2d_" % (2*i,2*j+1) +levels[curLevel+1]+'.json",\n')
 		else:
-			hasWritten = false
-			if getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j)!=None:
-				writeTile(imgName, polys, curLevel+1, 2*i,2*j, f)
-				hasWritten = True
-			if getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j)!=None:
-				writeTile(imgName, polys, curLevel+1, 2*i+1,2*j, f)
-				if (hasWritten==True)
-					f.write(',')
-				hasWritten = True
-			if getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j+1)!=None:
-				writeTile(imgName, polys, curLevel+1, 2*i+1,2*j+1, f)
-				if (hasWritten==True)
-					f.write(',')
-				hasWritten = True
-			if getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j+1)!=None:
-				writeTile(imgName, polys, curLevel+1, 2*i,2*j+1, f)
-		f.write('\t]\n')
+			polys2 = getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j)
+			if polys2!=None:
+				writeTile(imgName, polys2, curLevel+1, 2*i,2*j, f)
+				f.write(",\n")
+			polys2 = getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j)
+			if polys2!=None:
+				writeTile(imgName, polys2, curLevel+1, 2*i+1,2*j, f)
+				f.write(",\n")
+			polys2 = getIntersectPoly(baseFileName, curLevel+1, 2*i+1, 2*j+1)
+			if polys2!=None:
+				writeTile(imgName, polys2, curLevel+1, 2*i+1,2*j+1, f)
+				f.write(",\n")
+			polys2 = getIntersectPoly(baseFileName, curLevel+1, 2*i, 2*j+1)
+			if polys2!=None:
+				writeTile(imgName, polys2, curLevel+1, 2*i,2*j+1, f)
+				f.write(",\n")
+		f.seek(-2, os.SEEK_CUR)
+		f.write('\n\t]\n')
 	else:
 		f.write('\n')
 	f.write('}')
