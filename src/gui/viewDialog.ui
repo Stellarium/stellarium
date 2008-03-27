@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>448</width>
-    <height>446</height>
+    <width>447</width>
+    <height>404</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -14,32 +14,24 @@
   </property>
   <property name="styleSheet" >
    <string>QFrame {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#4a4b50, stop: 1 #36373c);
-     background-repeat: repeat-x;
-     background-position: up;
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
 	border: 0px;
 	color : #babdc4;
    font-family: "DejaVu";
 }
 
 DialogFrame {
-	border: 0px;
   border-width: 1px;
   border-style: solid;
-  border-color: #2e2e36;
+  border-color: #081f25;
 }
 
-
 ResizeFrame {
-/* background: qlineargradient(x1: 0.5, y1: 0.5, x2: 0.6, y2: 0.6,
-			stop: 0  rgba(0,0,0,0%), stop: 1   rgba(0,0,0,50%));
-*/
-   background-image: url(data/gui/resize.png);
+ background-image: url(data/gui/resize.png);
 }
 
 QLabel {
 	background: None;
-   font-weight: bold;
 }
 
 QLineEdit {
@@ -69,59 +61,110 @@ QScrollBar:vertical {
          margin: 22px 0px 22px 0px;
      }
 
-     QScrollBar::handle:vertical {
-border: 2px solid #4a4b50;
-         background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+QScrollBar::handle:vertical {
+    border: 2px solid #4a4b50;
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
    stop: 0 #c6c7ca, stop: 1 #aaabae);
-		border-radius: 4px;
-         min-height: 20px;
-     }
-     QScrollBar::add-line:vertical {
+	border-radius: 4px;
+	min-height: 20px;
+}
+
+QScrollBar::add-line:vertical {
          border: 3px solid #2e2e36;
          background: #36375c;
          height: 20px;
          border-radius: 5px;
          subcontrol-position: bottom;
          subcontrol-origin: margin;
-     }
+ }
 
-     QScrollBar::sub-line:vertical {
+QScrollBar::sub-line:vertical {
          border: 3px solid #2e2e36;
          background: #36375c;
          height: 20px;
          border-radius: 5px;
          subcontrol-position: top;
          subcontrol-origin: margin;
-     }
+ }
+
 QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
          border: 2px solid grey;
          width: 3px;
          height: 3px;
          background: white;
-     }
+ }
 
-     QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
          background: none;
-     }
+ }
 
 QGroupBox {
-     border: 1px solid #2e2e36;
-     border-radius: 5px;
+     border: 1px solid #0f1f25;
+     border-radius: 4px;
      margin-top: 1ex;
+     font-weight: bold;
  }
 
 QGroupBox::title {
      subcontrol-origin: margin;
-
      padding: 0px 3px;
      color : #babdc4;
-left: 15px
+	 left: 15px
  }
 
 QCheckBox {
 color : #babdc4;
  }
-</string>
+
+QTabWidget::pane {
+   border-top: 2px solid #348483;
+}
+
+     /* Style the tab using the tab sub-control. Note that
+         it reads QTabBar _not_ QTabWidget */
+     QTabBar::tab {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+         border: 2px solid #348483;
+         border-bottom-color: #348483; /* same as the pane color */
+         border-top-left-radius: 4px;
+         border-top-right-radius: 4px;
+         min-width: 8ex;
+         padding: 2px;
+         color: #babdc4;
+         font-weight : bold;
+     }
+
+     QTabBar::tab:selected, QTabBar::tab:hover {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
+     }
+
+     QTabBar::tab:selected {
+         border-color: #A2A78B;
+         border-bottom-color: #2a3b50; /* same as pane color */
+     }
+
+     QTabBar::tab:!selected {
+         margin-top: 2px; /* make non-selected tabs look smaller */
+     }
+
+     /* make use of negative margins for overlapping tabs */
+     QTabBar::tab:selected {
+         /* expand/overlap to the left and right by 4px */
+         margin-left: -4px;
+         margin-right: -4px;
+     }
+
+     QTabBar::tab:first:selected {
+         margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+     }
+
+     QTabBar::tab:last:selected {
+         margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+     }
+
+     QTabBar::tab:only-one {
+         margin: 0; /* if there is only one tab, we don't want overlapping margins */
+     }</string>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
@@ -150,7 +193,7 @@ color : #babdc4;
      <property name="maximumSize" >
       <size>
        <width>16777215</width>
-       <height>30</height>
+       <height>25</height>
       </size>
      </property>
      <property name="frameShape" >
@@ -251,12 +294,10 @@ color : #babdc4;
         <property name="font" >
          <font>
           <family>DejaVu</family>
-          <weight>75</weight>
-          <bold>true</bold>
          </font>
         </property>
         <property name="text" >
-         <string>Sky</string>
+         <string>View</string>
         </property>
        </widget>
       </item>
@@ -274,7 +315,7 @@ color : #babdc4;
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="closeLocation" >
+       <widget class="QToolButton" name="closeView" >
         <property name="maximumSize" >
          <size>
           <width>17</width>
@@ -307,283 +348,7 @@ color: darkgray;
      <property name="frameShape" >
       <enum>QFrame::StyledPanel</enum>
      </property>
-     <layout class="QVBoxLayout" >
-      <property name="spacing" >
-       <number>3</number>
-      </property>
-      <item>
-       <widget class="QGroupBox" name="groupBox" >
-        <property name="title" >
-         <string>Show Stars</string>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignLeading</set>
-        </property>
-        <property name="flat" >
-         <bool>false</bool>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="checked" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="horizontalSpacing" >
-          <number>6</number>
-         </property>
-         <property name="verticalSpacing" >
-          <number>0</number>
-         </property>
-         <item row="0" column="0" >
-          <widget class="QCheckBox" name="checkBox_13" >
-           <property name="text" >
-            <string>Show marker (double)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QCheckBox" name="checkBox_2" >
-             <property name="text" >
-              <string>Twinkle</string>
-             </property>
-             <property name="checked" >
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>21</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_2" >
-             <property name="text" >
-              <string>Amount:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="spinBox_2" />
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QCheckBox" name="checkBox_3" >
-           <property name="text" >
-            <string>Render as points</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_5" >
-             <property name="text" >
-              <string>Scale (Radius/Mag):</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="doubleSpinBox" />
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_2" />
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_2" >
-        <property name="title" >
-         <string>Show Planets and Satellites</string>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <item row="0" column="0" >
-          <widget class="QCheckBox" name="checkBox_5" >
-           <property name="text" >
-            <string>Show marker</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <widget class="QCheckBox" name="checkBox_6" >
-           <property name="text" >
-            <string>Show orbits</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2" >
-          <widget class="QCheckBox" name="checkBox_8" >
-           <property name="text" >
-            <string>Simulate light speed</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QCheckBox" name="checkBox_7" >
-           <property name="text" >
-            <string>Scale Moon</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_4" >
-        <property name="title" >
-         <string>Nebula and Milky Way</string>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="horizontalSpacing" >
-          <number>0</number>
-         </property>
-         <property name="verticalSpacing" >
-          <number>0</number>
-         </property>
-         <item row="0" column="0" >
-          <widget class="QCheckBox" name="checkBox" >
-           <property name="text" >
-            <string>Label with short names</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <widget class="QCheckBox" name="checkBox_11" >
-           <property name="text" >
-            <string>Use bright textures</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QCheckBox" name="checkBox_14" >
-           <property name="text" >
-            <string>Show Milky Way</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QCheckBox" name="checkBox_12" >
-           <property name="text" >
-            <string>Download images dynamically</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_5" >
-        <property name="title" >
-         <string>Labels and markers (relative to FOV)</string>
-        </property>
-        <layout class="QGridLayout" >
-         <property name="verticalSpacing" >
-          <number>0</number>
-         </property>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Master:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <widget class="QSlider" name="horizontalSlider_2" >
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QCheckBox" name="checkBox_9" >
-           <property name="text" >
-            <string>Stars:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QSlider" name="horizontalSlider_4" >
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" >
-          <widget class="QCheckBox" name="checkBox_4" >
-           <property name="text" >
-            <string>Planets:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" >
-          <widget class="QSlider" name="horizontalSlider_3" >
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" >
-          <widget class="QCheckBox" name="checkBox_10" >
-           <property name="text" >
-            <string>Nebula:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" >
-          <widget class="QSlider" name="horizontalSlider_5" >
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="viewDownBar" >
-     <property name="minimumSize" >
-      <size>
-       <width>16</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>16777215</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout" >
-      <property name="spacing" >
-       <number>0</number>
-      </property>
+     <layout class="QGridLayout" >
       <property name="leftMargin" >
        <number>0</number>
       </property>
@@ -596,48 +361,628 @@ color: darkgray;
       <property name="bottomMargin" >
        <number>0</number>
       </property>
-      <item>
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
+      <property name="horizontalSpacing" >
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing" >
+       <number>0</number>
+      </property>
+      <item row="0" column="0" >
+       <widget class="QTabWidget" name="tabWidget" >
+        <property name="tabPosition" >
+         <enum>QTabWidget::North</enum>
         </property>
-        <property name="sizeHint" >
-         <size>
-          <width>271</width>
-          <height>20</height>
-         </size>
+        <property name="tabShape" >
+         <enum>QTabWidget::Rounded</enum>
         </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="ResizeFrame" name="viewDownBarResizeFrame" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="currentIndex" >
+         <number>1</number>
         </property>
-        <property name="minimumSize" >
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="cursor" >
-         <cursorShape>SizeFDiagCursor</cursorShape>
-        </property>
-        <property name="autoFillBackground" >
-         <bool>false</bool>
-        </property>
-        <property name="frameShape" >
-         <enum>QFrame::StyledPanel</enum>
-        </property>
+        <widget class="QWidget" name="tabSky" >
+         <attribute name="title" >
+          <string>Sky</string>
+         </attribute>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QGridLayout" >
+            <item row="0" column="0" >
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>21</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0" >
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="showStarsCheckBox" >
+                <property name="text" >
+                 <string>Show</string>
+                </property>
+                <property name="checked" >
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QGroupBox" name="starGroupBox" >
+            <property name="title" >
+             <string>Stars</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading</set>
+            </property>
+            <property name="flat" >
+             <bool>false</bool>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <property name="checked" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="topMargin" >
+              <number>9</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>2</number>
+             </property>
+             <property name="horizontalSpacing" >
+              <number>6</number>
+             </property>
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="starMarkersCheckBox" >
+               <property name="text" >
+                <string>Show marker</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <layout class="QHBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="starTwinkleCheckBox" >
+                 <property name="text" >
+                  <string>Twinkle</string>
+                 </property>
+                 <property name="checked" >
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" >
+                  <size>
+                   <width>21</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_2" >
+                 <property name="text" >
+                  <string>Amount:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="twinkleAmountSpinBox" />
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="starPointCheckBox" >
+               <property name="text" >
+                <string>Render as points</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <layout class="QHBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_5" >
+                 <property name="text" >
+                  <string>Scale:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox" />
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_10" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/bt_planet.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="showPlanetCheckBox" >
+                <property name="text" >
+                 <string>Show</string>
+                </property>
+                <property name="checked" >
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QGroupBox" name="planetsGroupBox" >
+            <property name="title" >
+             <string>Planets and Satellites</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="topMargin" >
+              <number>9</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>2</number>
+             </property>
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="planetMarkerCheckBox" >
+               <property name="text" >
+                <string>Show marker</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QCheckBox" name="planetOrbitCheckBox" >
+               <property name="text" >
+                <string>Show orbits</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="planetScaleMoonCheckBox" >
+               <property name="text" >
+                <string>Scale Moon</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QCheckBox" name="planetLightSpeedCheckBox" >
+               <property name="text" >
+                <string>Simulate light speed</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_3" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btNebula-on.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="showNebulaCheckBox" >
+                <property name="text" >
+                 <string>Show</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QGroupBox" name="nebulaGroupBox" >
+            <property name="title" >
+             <string>Nebula and Milky Way</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="topMargin" >
+              <number>9</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>2</number>
+             </property>
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="nebulaShortLabelCheckBox" >
+               <property name="text" >
+                <string>Label with short names</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QCheckBox" name="nebulaBrightCheckBox" >
+               <property name="text" >
+                <string>Use bright textures</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="nebulaMilkyWayCheckBox" >
+               <property name="text" >
+                <string>Show Milky Way</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QCheckBox" name="nebulaDownloadCheckBox" >
+               <property name="text" >
+                <string>Download images</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>16</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_9" >
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="pixmap" >
+               <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/5-on-labels.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>16</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QGroupBox" name="groupBox_5" >
+            <property name="title" >
+             <string>Labels and markers</string>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="bottomMargin" >
+              <number>2</number>
+             </property>
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label" >
+               <property name="text" >
+                <string>Master:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QSlider" name="masterLabelsHorizontalSlider" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="starLabelCheckBox" >
+               <property name="text" >
+                <string>Stars:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QSlider" name="starLabelsHorizontalSlider" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" >
+              <widget class="QCheckBox" name="planetLabelCheckBox" >
+               <property name="text" >
+                <string>Planets:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QSlider" name="planetLabelsHorizontalSlider" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" >
+              <widget class="QCheckBox" name="nebulaLabelCheckBox" >
+               <property name="text" >
+                <string>Nebula:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" >
+              <widget class="QSlider" name="nebulaLabelsHorizontalSlider" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2" >
+         <attribute name="title" >
+          <string>Lines</string>
+         </attribute>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -652,13 +997,9 @@ color: darkgray;
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>ResizeFrame</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/mainRes.qrc" />
+ </resources>
  <connections/>
 </ui>

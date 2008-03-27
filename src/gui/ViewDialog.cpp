@@ -51,7 +51,8 @@ void ViewDialog::setVisible(bool v)
 		dialog->raise();
 		dialog->move(200, 100);	// TODO: put in the center of the screen
 		dialog->setVisible(true);
-		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
+		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
+//		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChanged(void)));
 	}
 	else
 	{
