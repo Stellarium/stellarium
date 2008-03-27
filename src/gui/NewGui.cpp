@@ -593,6 +593,11 @@ void NewGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Nebulas, buttonHelpLabel);
 	buttonBar->addButton(b);
 	
+	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_DSS, buttonHelpLabel);
+	buttonBar->addButton(b);
+	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionSwitch_Equatorial_Mount, buttonHelpLabel);
