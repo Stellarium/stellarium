@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>447</width>
-    <height>404</height>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -368,7 +368,7 @@ color: darkgray;
        <number>0</number>
       </property>
       <item row="0" column="0" >
-       <widget class="QTabWidget" name="tabWidget" >
+       <widget class="QTabWidget" name="viewTabWidget" >
         <property name="tabPosition" >
          <enum>QTabWidget::North</enum>
         </property>
@@ -376,7 +376,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -384,8 +384,11 @@ color: darkgray;
          </attribute>
          <layout class="QGridLayout" >
           <item row="0" column="0" >
-           <layout class="QGridLayout" >
-            <item row="0" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
              <spacer>
               <property name="orientation" >
                <enum>Qt::Vertical</enum>
@@ -393,12 +396,52 @@ color: darkgray;
               <property name="sizeHint" >
                <size>
                 <width>20</width>
-                <height>21</height>
+                <height>16</height>
                </size>
               </property>
              </spacer>
             </item>
-            <item row="1" column="0" >
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_15" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/bt_planet.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" >
               <item>
                <spacer>
@@ -437,6 +480,19 @@ color: darkgray;
                </spacer>
               </item>
              </layout>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
@@ -837,7 +893,7 @@ color: darkgray;
              <item row="0" column="0" >
               <widget class="QCheckBox" name="nebulaShortLabelCheckBox" >
                <property name="text" >
-                <string>Label with short names</string>
+                <string>Short labels</string>
                </property>
               </widget>
              </item>
@@ -866,6 +922,190 @@ color: darkgray;
            </widget>
           </item>
           <item row="3" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_13" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btNebula-on.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="showShoutingStarsCheckBox" >
+                <property name="text" >
+                 <string>Show</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QGroupBox" name="planetsGroupBox_4" >
+            <property name="title" >
+             <string>Shouting Stars</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="bottomMargin" >
+              <number>0</number>
+             </property>
+             <property name="horizontalSpacing" >
+              <number>2</number>
+             </property>
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_14" >
+               <property name="text" >
+                <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Hourly &lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">zenith rate&lt;/p>&lt;/body>&lt;/html></string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QRadioButton" name="radioButton" >
+                 <property name="text" >
+                  <string>10</string>
+                 </property>
+                 <property name="checked" >
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioButton_2" >
+                 <property name="text" >
+                  <string>80</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioButton_3" >
+                 <property name="text" >
+                  <string>10000</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioButton_4" >
+                 <property name="text" >
+                  <string>144000</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QLabel" name="label_16" >
+               <property name="text" >
+                <string>Normal rate</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="0" >
            <layout class="QHBoxLayout" >
             <item>
              <spacer>
@@ -905,73 +1145,57 @@ color: darkgray;
             </item>
            </layout>
           </item>
-          <item row="3" column="1" >
+          <item row="4" column="1" >
            <widget class="QGroupBox" name="groupBox_5" >
             <property name="title" >
              <string>Labels and markers</string>
             </property>
-            <layout class="QGridLayout" >
-             <property name="bottomMargin" >
-              <number>2</number>
-             </property>
-             <property name="verticalSpacing" >
-              <number>0</number>
-             </property>
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label" >
-               <property name="text" >
-                <string>Master:</string>
-               </property>
-              </widget>
+            <layout class="QVBoxLayout" >
+             <item>
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QCheckBox" name="starLabelCheckBox" >
+                 <property name="text" >
+                  <string>Stars</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetLabelCheckBox" >
+                 <property name="text" >
+                  <string>Planets</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="nebulaLabelCheckBox" >
+                 <property name="text" >
+                  <string>Nebula</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <item row="0" column="1" >
-              <widget class="QSlider" name="masterLabelsHorizontalSlider" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QCheckBox" name="starLabelCheckBox" >
-               <property name="text" >
-                <string>Stars:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QSlider" name="starLabelsHorizontalSlider" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QCheckBox" name="planetLabelCheckBox" >
-               <property name="text" >
-                <string>Planets:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QSlider" name="planetLabelsHorizontalSlider" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" >
-              <widget class="QCheckBox" name="nebulaLabelCheckBox" >
-               <property name="text" >
-                <string>Nebula:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" >
-              <widget class="QSlider" name="nebulaLabelsHorizontalSlider" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
+             <item>
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QLabel" name="label" >
+                 <property name="text" >
+                  <string>Amount:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="masterLabelsHorizontalSlider" >
+                 <property name="value" >
+                  <number>33</number>
+                 </property>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -980,8 +1204,662 @@ color: darkgray;
         </widget>
         <widget class="QWidget" name="tab_2" >
          <attribute name="title" >
-          <string>Lines</string>
+          <string>Ground</string>
          </attribute>
+         <widget class="QWidget" name="layoutWidget_6" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>88</width>
+            <height>78</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_17" >
+               <property name="text" >
+                <string/>
+               </property>
+               <property name="pixmap" >
+                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btGround-on.png</pixmap>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="planetsGroupBox_5" >
+          <property name="geometry" >
+           <rect>
+            <x>110</x>
+            <y>10</y>
+            <width>335</width>
+            <height>72</height>
+           </rect>
+          </property>
+          <property name="title" >
+           <string>Options</string>
+          </property>
+          <property name="checkable" >
+           <bool>false</bool>
+          </property>
+          <layout class="QGridLayout" >
+           <property name="topMargin" >
+            <number>9</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>2</number>
+           </property>
+           <property name="verticalSpacing" >
+            <number>0</number>
+           </property>
+           <item row="0" column="0" >
+            <widget class="QCheckBox" name="planetMarkerCheckBox_4" >
+             <property name="text" >
+              <string>Show ground</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QCheckBox" name="planetOrbitCheckBox_4" >
+             <property name="text" >
+              <string>Show fog</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" >
+            <widget class="QCheckBox" name="planetScaleMoonCheckBox_4" >
+             <property name="text" >
+              <string>Show atmosphere</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="label_18" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>140</y>
+            <width>311</width>
+            <height>211</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Description</string>
+          </property>
+          <property name="textFormat" >
+           <enum>Qt::RichText</enum>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap" >
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks" >
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QListWidget" name="culturesListWidget_2" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>101</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <item>
+           <property name="text" >
+            <string>Guereins</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Apollo</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="label_19" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>100</y>
+            <width>111</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Name: </string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="starloreLanguageCheckBox_2" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>380</y>
+            <width>391</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Use associated planet and position</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_20" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>120</y>
+            <width>111</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Author: </string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_21" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>360</y>
+            <width>191</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Location: Lon/Lat/Alt Planet</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tabMarking" >
+         <attribute name="title" >
+          <string>Marking</string>
+         </attribute>
+         <widget class="QWidget" name="layoutWidget" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>81</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_11" >
+               <property name="text" >
+                <string/>
+               </property>
+               <property name="pixmap" >
+                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btEquatorialGrid-on.png</pixmap>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="planetsGroupBox_2" >
+          <property name="geometry" >
+           <rect>
+            <x>100</x>
+            <y>20</y>
+            <width>341</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="title" >
+           <string>Sky Marking</string>
+          </property>
+          <property name="checkable" >
+           <bool>false</bool>
+          </property>
+          <widget class="QCheckBox" name="planetMarkerCheckBox_2" >
+           <property name="geometry" >
+            <rect>
+             <x>170</x>
+             <y>40</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Equatorial grid</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetOrbitCheckBox_2" >
+           <property name="geometry" >
+            <rect>
+             <x>172</x>
+             <y>17</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Azimutal grid</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetScaleMoonCheckBox_2" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Meridian line</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetLightSpeedCheckBox_2" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Ecliptic line</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetLightSpeedCheckBox_3" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Equator line</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetMarkerCheckBox_3" >
+           <property name="geometry" >
+            <rect>
+             <x>170</x>
+             <y>60</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Cardinal points</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_2" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>130</y>
+            <width>81</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" >
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_12" >
+               <property name="text" >
+                <string/>
+               </property>
+               <property name="pixmap" >
+                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btConstellationLines-on.png</pixmap>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>16</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="planetsGroupBox_3" >
+          <property name="geometry" >
+           <rect>
+            <x>100</x>
+            <y>130</y>
+            <width>341</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="title" >
+           <string>Constellations</string>
+          </property>
+          <property name="checkable" >
+           <bool>false</bool>
+          </property>
+          <widget class="QCheckBox" name="planetOrbitCheckBox_3" >
+           <property name="geometry" >
+            <rect>
+             <x>172</x>
+             <y>17</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Show boundaries</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetScaleMoonCheckBox_3" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Show lines</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetLightSpeedCheckBox_4" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Show labels</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="planetLightSpeedCheckBox_5" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Show art</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_3" >
+           <property name="geometry" >
+            <rect>
+             <x>170</x>
+             <y>50</y>
+             <width>162</width>
+             <height>29</height>
+            </rect>
+           </property>
+           <layout class="QHBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_6" >
+              <property name="text" >
+               <string>Art brightness: </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox_2" />
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="planetsGroupBox_6" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>240</y>
+            <width>421</width>
+            <height>131</height>
+           </rect>
+          </property>
+          <property name="title" >
+           <string>Projection</string>
+          </property>
+          <property name="checkable" >
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QListWidget" name="culturesListWidget_3" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <item>
+              <property name="text" >
+               <string>Guereins</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Apollo</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_22" >
+             <property name="text" >
+              <string>Description</string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::RichText</enum>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap" >
+              <bool>true</bool>
+             </property>
+             <property name="openExternalLinks" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab" >
+         <attribute name="title" >
+          <string>Starlore</string>
+         </attribute>
+         <widget class="QListWidget" name="culturesListWidget" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>101</width>
+            <height>301</height>
+           </rect>
+          </property>
+          <item>
+           <property name="text" >
+            <string>Western</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Polynesian</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QCheckBox" name="starloreLanguageCheckBox" >
+          <property name="geometry" >
+           <rect>
+            <x>20</x>
+            <y>320</y>
+            <width>341</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Use associated language for sky labeling</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4" >
+          <property name="geometry" >
+           <rect>
+            <x>130</x>
+            <y>50</y>
+            <width>311</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Description</string>
+          </property>
+          <property name="textFormat" >
+           <enum>Qt::RichText</enum>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap" >
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks" >
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_7" >
+          <property name="geometry" >
+           <rect>
+            <x>130</x>
+            <y>10</y>
+            <width>111</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Name: </string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_8" >
+          <property name="geometry" >
+           <rect>
+            <x>130</x>
+            <y>30</y>
+            <width>111</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Author: </string>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -1001,5 +1879,70 @@ color: darkgray;
  <resources>
   <include location="../../data/mainRes.qrc" />
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>starPointCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_5</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>217</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>281</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>starPointCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>starScaleRadiusDoubleSpinBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>231</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>409</x>
+     <y>126</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>starTwinkleCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>312</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>356</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>starTwinkleCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>twinkleAmountSpinBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>272</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>416</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
