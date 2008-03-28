@@ -29,7 +29,7 @@
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
 	border: 0px;
 	color : #babdc4;
-   font-family: "DejaVu";
+    font-family: "DejaVu";
 }
 
 DialogFrame {
@@ -111,10 +111,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
  }
 
 QGroupBox {
-     border: 1px solid #0f1f25;
+     border: 1px solid #1f2f25;
      border-radius: 4px;
      margin-top: 1ex;
      font-weight: bold;
+     background: solid #223B34;
  }
 
 QGroupBox::title {
@@ -126,8 +127,66 @@ QGroupBox::title {
 
 QCheckBox {
 color : #babdc4;
+font-family: "DejaVu";
  }
-</string>
+
+QTabWidget::pane {
+   border-top: 2px solid #348483;
+}
+
+     /* Style the tab using the tab sub-control. Note that
+         it reads QTabBar _not_ QTabWidget */
+     QTabBar::tab {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+         border: 2px solid #348483;
+         border-bottom-color: #348483; /* same as the pane color */
+         border-top-left-radius: 4px;
+         border-top-right-radius: 4px;
+         min-width: 10ex;
+         padding: 2px;
+         color: #babdc4;
+         font-weight : bold;
+     }
+
+     QTabBar::tab:selected, QTabBar::tab:hover {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
+     }
+
+     QTabBar::tab:selected {
+         border-color: #A2A78B;
+         border-bottom-color: #2a3b50; /* same as pane color */
+     }
+
+     QTabBar::tab:!selected {
+         margin-top: 2px; /* make non-selected tabs look smaller */
+     }
+
+     /* make use of negative margins for overlapping tabs */
+     QTabBar::tab:selected {
+         /* expand/overlap to the left and right by 4px */
+         margin-left: -4px;
+         margin-right: -4px;
+     }
+
+     QTabBar::tab:first:selected {
+         margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+     }
+
+     QTabBar::tab:last:selected {
+         margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+     }
+
+     QTabBar::tab:only-one {
+         margin: 0; /* if there is only one tab, we don't want overlapping margins */
+     }
+
+QListWidget {
+ 	background: solid #121324;
+	border: 1px;
+    border-radius: 4px;
+    border-color: #081f25;
+    border-style: solid;
+}</string>
   </property>
   <widget class="DialogFrame" name="SearchDialog" >
    <property name="geometry" >
