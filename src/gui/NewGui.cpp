@@ -485,6 +485,9 @@ void NewGui::init()
 	
 	QObject::connect(ui->actionShow_DateTime_Window, SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
 	QObject::connect(&dateTimeDialog, SIGNAL(closed()), ui->actionShow_DateTime_Window, SLOT(toggle()));
+	
+	QObject::connect(ui->actionShow_Search_Window, SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
+	QObject::connect(&searchDialog, SIGNAL(closed()), ui->actionShow_Search_Window, SLOT(toggle()));
 
 	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
 	

@@ -26,6 +26,7 @@
 #include "StelObjectType.hpp"
 #include "HelpDialog.hpp"
 #include "DateTimeDialog.hpp"
+#include "SearchDialog.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
 
@@ -186,6 +187,7 @@ private:
 	LocationDialog locationDialog;
 	HelpDialog helpDialog;
 	DateTimeDialog dateTimeDialog;
+	SearchDialog searchDialog;
 	ViewDialog viewDialog;
 };
 
