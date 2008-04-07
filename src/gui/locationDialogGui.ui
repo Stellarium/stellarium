@@ -282,12 +282,18 @@ Click and drag the mouse to move the screen</string>
       <item row="2" column="4" >
        <layout class="QHBoxLayout" >
         <item>
-         <widget class="LongitudeSpinBox" name="longitudeSpinBox" >
+         <widget class="AngleSpinBox" name="longitudeSpinBox" >
           <property name="minimumSize" >
            <size>
-            <width>100</width>
+            <width>150</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="toolTip" >
+           <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -349,12 +355,18 @@ Click and drag the mouse to move the screen</string>
       <item row="3" column="4" >
        <layout class="QHBoxLayout" >
         <item>
-         <widget class="LatitudeSpinBox" name="latitudeSpinBox" >
+         <widget class="AngleSpinBox" name="latitudeSpinBox" >
           <property name="minimumSize" >
            <size>
-            <width>100</width>
+            <width>150</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="toolTip" >
+           <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -477,14 +489,9 @@ Click and drag the mouse to move the screen</string>
    <header>MapView.hpp</header>
   </customwidget>
   <customwidget>
-   <class>LongitudeSpinBox</class>
+   <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
-   <header>SpinBox.hpp</header>
-  </customwidget>
-  <customwidget>
-   <class>LatitudeSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>SpinBox.hpp</header>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
