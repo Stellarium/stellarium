@@ -816,6 +816,20 @@ QListWidget {
     <string>Show DSS</string>
    </property>
   </action>
+  <action name="actionShow_Constellation_Boundaries" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show_Constellation_Boundaries</string>
+   </property>
+   <property name="shortcut" >
+    <string>B</string>
+   </property>
+   <property name="helpGroup" stdset="0" >
+    <string>Display options</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../../data/mainRes.qrc" />
