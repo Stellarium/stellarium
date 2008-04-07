@@ -32,8 +32,6 @@
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "MapView.hpp"
-#include "SpinBox.hpp"
-
 
 //! @class City
 //! Contains informations relative to a city (name, location, etc)
