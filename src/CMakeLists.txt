@@ -182,8 +182,8 @@ SET(stellarium_lib_SRCS
 	gui/Dialog.cpp
 	gui/MapView.hpp
 	gui/MapView.cpp
-	gui/SpinBox.hpp
-	gui/SpinBox.cpp
+	gui/AngleSpinBox.hpp
+	gui/AngleSpinBox.cpp
 	gui/LocationDialog.hpp
 	gui/LocationDialog.cpp
 	gui/DateTimeDialog.hpp
@@ -253,7 +253,7 @@ SET(stellarium_MOC_HDRS
 	gui/HelpDialog.hpp
 	gui/Dialog.hpp
 	gui/MapView.hpp
-	gui/SpinBox.hpp
+	gui/AngleSpinBox.hpp
 	gui/LocationDialog.hpp
 	gui/DateTimeDialog.hpp
 	gui/ViewDialog.hpp

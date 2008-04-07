@@ -52,19 +52,20 @@ void LocationDialog::setVisible(bool v)
 		dialog->raise();
 		dialog->move(200, 100);	// TODO: put in the center of the screen
 		dialog->setVisible(true);
+
+		ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+		ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
+		ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+		ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
+
 		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
-		connect(ui->graphicsView, SIGNAL(positionSelected(float, float, QString)),
-				this, SLOT(selectPosition(float, float, QString)));
-		connect(ui->graphicsView, SIGNAL(positionHighlighted(float, float, QString)),
-				this, SLOT(highlightPosition(float, float, QString)));
-		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(int)), this,
-				SLOT(spinBoxChanged(void)));
-		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(int)), this,
-				SLOT(spinBoxChanged(void)));
+		connect(ui->graphicsView, SIGNAL(positionSelected(float, float, QString)), this, SLOT(selectPosition(float, float, QString)));
+		connect(ui->graphicsView, SIGNAL(positionHighlighted(float, float, QString)), this, SLOT(highlightPosition(float, float, QString)));
+		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
+		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 				
-		selectPosition(StelApp::getInstance().getCore()->getObservatory()->getLongitude(),
-						StelApp::getInstance().getCore()->getObservatory()->getLatitude(), "");
-				
+		selectPosition(StelApp::getInstance().getCore()->getObservatory()->getLongitude(), StelApp::getInstance().getCore()->getObservatory()->getLatitude(), "");
+		spinBoxChanged();
 	}
 	else
 	{
@@ -76,9 +77,9 @@ void LocationDialog::setVisible(bool v)
 void LocationDialog::selectPosition(float longitude, float latitude, QString city)
 {
 	// Set the longitude
-	ui->longitudeSpinBox->setValue(longitude);
+	ui->longitudeSpinBox->setDegrees(longitude);
 	// Set the latitude
-	ui->latitudeSpinBox->setValue(latitude);
+	ui->latitudeSpinBox->setDegrees(latitude);
 	// Set the city name
 	ui->selectedLabel->setText(city);
 	
@@ -94,7 +95,8 @@ void LocationDialog::highlightPosition(float longitude, float latitude, QString 
 
 void LocationDialog::spinBoxChanged()
 {
-	float longitude = ui->longitudeSpinBox->getValue();
-	float latitude = ui->latitudeSpinBox->getValue();
+	float longitude = ui->longitudeSpinBox->valueDegrees();
+	float latitude = ui->latitudeSpinBox->valueDegrees();
 	ui->graphicsView->select(longitude, latitude);
 }
+
