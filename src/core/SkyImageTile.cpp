@@ -63,7 +63,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			}
 			catch (std::runtime_error e)
 			{
-				qWarning() << "WARNING : Can't find JSON Image Tile description: " << url << ": " << e.what() << endl;
+				qWarning() << "WARNING : Can't find JSON Image Tile description: " << url << ": " << e.what();
 				errorOccured = true;
 				return;
 			}
@@ -78,7 +78,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 		}
 		catch (std::runtime_error e)
 		{
-			qWarning() << "WARNING : Can't parse JSON Image Tile description: " << fileName << ": " << e.what() << endl;
+			qWarning() << "WARNING : Can't parse JSON Image Tile description: " << fileName << ": " << e.what();
 			errorOccured = true;
 			f.close();
 			return;
