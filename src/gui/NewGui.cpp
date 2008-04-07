@@ -412,6 +412,8 @@ void NewGui::init()
 	ui->actionShow_Constellation_Art->setChecked(cmgr->getFlagArt());
 	QObject::connect(ui->actionShow_Constellation_Labels, SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
 	ui->actionShow_Constellation_Labels->setChecked(cmgr->getFlagNames());
+	QObject::connect(ui->actionShow_Constellation_Boundaries, SIGNAL(toggled(bool)), module, SLOT(setFlagBoundaries(bool)));
+	ui->actionShow_Constellation_Boundaries->setChecked(cmgr->getFlagBoundaries());
 	
 	module = GETSTELMODULE("GridLinesMgr");
 	GridLinesMgr* gmgr = (GridLinesMgr*)module;
