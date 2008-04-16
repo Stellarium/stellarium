@@ -125,10 +125,6 @@ QGroupBox::title {
 	 left: 15px
  }
 
-QCheckBox {
-color : #babdc4;
-font-family: "DejaVu";
- }
 
 QTabWidget::pane {
    border-top: 2px solid #348483;
@@ -186,7 +182,13 @@ QListWidget {
     border-radius: 4px;
     border-color: #081f25;
     border-style: solid;
-}</string>
+}
+
+QCheckBox
+{
+  color : #babdc4;
+}
+</string>
   </property>
   <action name="actionShow_Constellation_Lines" >
    <property name="checkable" >
