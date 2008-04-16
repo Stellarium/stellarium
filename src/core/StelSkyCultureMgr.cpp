@@ -45,12 +45,13 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
 	}
 	
-	for(QSet<QString>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
+	for (QSet<QString>::iterator dir=cultureDirNames.begin(); dir!=cultureDirNames.end(); dir++)
 	{
 		try
 		{
 			QSettings pd(fileMan.findFile("skycultures/" + *dir + "/info.ini"), StelIniFormat);
-			dirToNameEnglish[*dir] = pd.value("info/name").toString();
+			dirToNameEnglish[*dir].englishName = pd.value("info/name").toString();
+			dirToNameEnglish[*dir].author = pd.value("info/author").toString();
 		}
 		catch (exception& e)
 		{
@@ -75,41 +76,42 @@ void StelSkyCultureMgr::init()
 bool StelSkyCultureMgr::setSkyCultureDir(const QString& cultureDir)
 {
 	// make sure culture definition exists before attempting or will die
-	if(directoryToSkyCultureEnglish(cultureDir) == "")
+	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
 		qWarning() << "Invalid sky culture directory: " << cultureDir;
 		return false;
 	}
-	skyCultureDir = cultureDir;
+	currentSkyCultureDir = cultureDir;
+	currentSkyCulture = dirToNameEnglish[cultureDir];
 	StelApp::getInstance().updateSkyCulture();
 	return true;
 }
+
+QString StelSkyCultureMgr::getSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
 
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
 	QString cultures;
-	QMapIterator<QString, QString> i(dirToNameEnglish);
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while(i.hasNext())
 	{
 		i.next();
-		cultures += QString("%1\n").arg(i.value());
+		cultures += QString("%1\n").arg(i.value().englishName);
 	}
 	return cultures;
 }
 
 //! returns newline delimited list of human readable culture names translated to current locale
-QString StelSkyCultureMgr::getSkyCultureListI18(void)
+QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 {
-	QString cultures;
-	QMapIterator<QString, QString> i(dirToNameEnglish);
-	while(i.hasNext())
+	QStringList cultures;
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	while (i.hasNext())
 	{
 		i.next();
-		cultures += QString("%1\n").arg(q_(i.value()));
+		cultures += q_(i.value().englishName);
 	}
-	// remove last newline - strangly inconsistent with getSkyCultureListEnglish...
-	cultures.chop(1);
 	return cultures;
 }
 
@@ -118,31 +120,26 @@ QString StelSkyCultureMgr::getSkyCultureListI18(void)
 QString StelSkyCultureMgr::getSkyCultureHash(void) const
 {
 	QString cultures;
-	QMapIterator<QString, QString> i(dirToNameEnglish);
-	while(i.hasNext())
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	while (i.hasNext())
 	{
 		i.next();
-		if(i.value() == "") continue;
-		cultures += QString("%1\n%2\n").arg(q_(i.value())).arg(i.key());
+		if(i.value().englishName == "") continue;
+		cultures += QString("%1\n%2\n").arg(q_(i.value().englishName)).arg(i.key());
 	}
 
 	return cultures;
 }
 
-QString StelSkyCultureMgr::getSkyCulture() const
-{
-	return directoryToSkyCultureI18(skyCultureDir);
-}
-
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
 {
-	return dirToNameEnglish[directory];
+	return dirToNameEnglish[directory].englishName;
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) const
 {
-	QString culture = dirToNameEnglish[directory];
+	QString culture = dirToNameEnglish[directory].englishName;
 	if (culture=="")
 	{
 		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
@@ -152,13 +149,13 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	return q_(culture);
 }
 
-QString StelSkyCultureMgr::skyCultureToDirectory(const QString& cultureName)
+QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) const
 {
-	QMapIterator<QString, QString> i(dirToNameEnglish);
-	while(i.hasNext())
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	while (i.hasNext())
 	{
 		i.next();
-		if (q_(i.value()) == cultureName)
+		if (q_(i.value().englishName) == cultureName)
 			return i.key();
 	}
 	return "";
