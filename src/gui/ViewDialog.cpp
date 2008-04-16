@@ -23,11 +23,15 @@
 #include "ui_viewDialog.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelSkyCultureMgr.hpp"
+#include "StelFileMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
+#include <QFile>
 
-ViewDialog::ViewDialog() : dialog(0)
+ViewDialog::ViewDialog() : dialog(NULL)
 {
 	ui = new Ui_viewDialogForm;
 }
@@ -53,10 +57,55 @@ void ViewDialog::setVisible(bool v)
 		dialog->setVisible(true);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
 //		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChanged(void)));
+		
+		// Fill the culture list widget from the available list
+		QListWidget* l = ui->culturesListWidget;
+		l->clear();
+		l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
+		updateSkyCultureText();
+		ui->culturesListWidget->setCurrentItem(ui->culturesListWidget->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
+		connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 	}
 	else
 	{
 		dialog->deleteLater();
-		dialog = 0;
+		dialog = NULL;
+	}
+}
+
+void ViewDialog::skyCultureChanged(const QString& cultureName)
+{
+	StelApp::getInstance().getSkyCultureMgr().setSkyCulture(cultureName);
+	updateSkyCultureText();
+}
+
+void ViewDialog::updateSkyCultureText()
+{	
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	QString descPath;
+	try
+	{
+		descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir() + "/description."+StelApp::getInstance().getLocaleMgr().getAppLanguage()+".utf8");
+	}
+	catch (exception& e)
+	{
+		try
+		{
+			descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir() + "/description.en.utf8");
+		}
+		catch (exception& e)
+		{
+			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+		}
+	}
+	if (descPath.isEmpty())
+	{
+		ui->skyCultureTextBrowser->setHtml("No description");
+	}
+	else
+	{
+		QFile f(descPath);
+		f.open(QIODevice::ReadOnly);
+		ui->skyCultureTextBrowser->setHtml(QString::fromUtf8(f.readAll()));
 	}
 }

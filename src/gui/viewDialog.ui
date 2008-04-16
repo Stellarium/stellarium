@@ -170,6 +170,7 @@ QListWidget {
     border-radius: 4px;
     border-color: #081f25;
     border-style: solid;
+  selection-background-color: #2a3b50;
 }
 
 QCheckBox
@@ -493,7 +494,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1954,7 +1955,7 @@ p, li { white-space: pre-wrap; }
             <x>10</x>
             <y>10</y>
             <width>101</width>
-            <height>301</height>
+            <height>351</height>
            </rect>
           </property>
           <item>
@@ -1971,8 +1972,8 @@ p, li { white-space: pre-wrap; }
          <widget class="QCheckBox" name="starloreLanguageCheckBox" >
           <property name="geometry" >
            <rect>
-            <x>20</x>
-            <y>320</y>
+            <x>10</x>
+            <y>370</y>
             <width>341</width>
             <height>23</height>
            </rect>
@@ -1981,55 +1982,17 @@ p, li { white-space: pre-wrap; }
            <string>Use associated language for sky labeling</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_4" >
+         <widget class="QTextBrowser" name="skyCultureTextBrowser" >
           <property name="geometry" >
            <rect>
-            <x>130</x>
-            <y>50</y>
-            <width>301</width>
-            <height>251</height>
+            <x>120</x>
+            <y>10</y>
+            <width>311</width>
+            <height>351</height>
            </rect>
-          </property>
-          <property name="text" >
-           <string>Description</string>
-          </property>
-          <property name="textFormat" >
-           <enum>Qt::RichText</enum>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-          </property>
-          <property name="wordWrap" >
-           <bool>true</bool>
           </property>
           <property name="openExternalLinks" >
            <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_7" >
-          <property name="geometry" >
-           <rect>
-            <x>130</x>
-            <y>10</y>
-            <width>111</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Name: </string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_8" >
-          <property name="geometry" >
-           <rect>
-            <x>130</x>
-            <y>30</y>
-            <width>111</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Author: </string>
           </property>
          </widget>
         </widget>

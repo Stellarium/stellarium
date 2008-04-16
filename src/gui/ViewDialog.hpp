@@ -38,6 +38,10 @@ signals:
 protected:
 	QWidget* dialog;
 	Ui_viewDialogForm* ui;
+private slots:
+	void skyCultureChanged(const QString& cultureName);
+private:
+	void updateSkyCultureText();	
 };
 
 #endif // _VIEWDIALOG_HPP_
