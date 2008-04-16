@@ -113,10 +113,6 @@ QGroupBox::title {
 	 left: 15px
  }
 
-QCheckBox {
-color : #babdc4;
-font-family: "DejaVu";
- }
 
 QTabWidget::pane {
    border-top: 2px solid #348483;
@@ -174,7 +170,118 @@ QListWidget {
     border-radius: 4px;
     border-color: #081f25;
     border-style: solid;
-}</string>
+}
+
+QCheckBox
+{
+  color : #babdc4;
+}
+QCheckBox::indicator
+{
+  width: 13px;
+  height: 13px;
+  background-color: #225555;
+}
+QCheckBox::indicator:checked
+{
+     image: url(:/graphicGui/gui/checkbox-checked.png);
+}
+QCheckBox::indicator:unchecked
+{
+     image: url(:/graphicGui/gui/checkbox-unchecked.png);
+}
+
+QRadioButton
+{
+  color : #babdc4;
+}
+QRadioButton::indicator
+{
+  width: 13px;
+  height: 13px;
+  margin-left: 4px;
+}
+QRadioButton::indicator:checked
+{
+     image: url(:/graphicGui/gui/radio-checked.png);
+}
+QRadioButton::indicator:unchecked
+{
+     image: url(:/graphicGui/gui/radio-unchecked.png);
+}
+
+QSpinBox {
+     padding-right: 15px; /* make room for the arrows */
+     border-image: url(:/images/frame.png) 4;
+     border-width: 3;
+background-color: #225555;
+color : #babdc4;
+ }
+
+ QSpinBox::up-button {
+     subcontrol-origin: border;
+     subcontrol-position: top right; /* position at the top right corner */
+
+     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
+     border-image: url(:/images/spinup.png) 1;
+     border-width: 1px;
+ }
+
+ QSpinBox::up-button:hover {
+     border-image: url(:/images/spinup_hover.png) 1;
+ }
+
+ QSpinBox::up-button:pressed {
+     border-image: url(:/images/spinup_pressed.png) 1;
+ }
+
+ QSpinBox::up-arrow {
+     image: url(:/images/up_arrow.png);
+     width: 7px;
+     height: 7px;
+ }
+
+ QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when value is max */
+    image: url(:/images/up_arrow_disabled.png);
+ }
+
+ QSpinBox::down-button {
+     subcontrol-origin: border;
+     subcontrol-position: bottom right; /* position at bottom right corner */
+
+     width: 16px;
+     border-image: url(:/images/spindown.png) 1;
+     border-width: 1px;
+     border-top-width: 0;
+ }
+
+ QSpinBox::down-button:hover {
+     border-image: url(:/images/spindown_hover.png) 1;
+ }
+
+ QSpinBox::down-button:pressed {
+     border-image: url(:/images/spindown_pressed.png) 1;
+ }
+
+ QSpinBox::down-arrow {
+     image: url(:/images/down_arrow.png);
+     width: 7px;
+     height: 7px;
+ }
+
+ QSpinBox::down-arrow:disabled,
+ QSpinBox::down-arrow:off { /* off state when value in min */
+    image: url(:/images/down_arrow_disabled.png);
+ }
+
+QDoubleSpinBox {
+     padding-right: 15px; /* make room for the arrows */
+     border-image: url(:/images/frame.png) 4;
+     border-width: 3;
+background-color: #225555;
+color : #babdc4;
+ }
+</string>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
