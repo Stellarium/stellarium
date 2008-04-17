@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
-    <height>451</height>
+    <width>438</width>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -494,7 +494,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1482,32 +1482,7 @@ p, li { white-space: pre-wrap; }
            </item>
           </layout>
          </widget>
-         <widget class="QLabel" name="label_18" >
-          <property name="geometry" >
-           <rect>
-            <x>120</x>
-            <y>140</y>
-            <width>311</width>
-            <height>211</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Description</string>
-          </property>
-          <property name="textFormat" >
-           <enum>Qt::RichText</enum>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-          </property>
-          <property name="wordWrap" >
-           <bool>true</bool>
-          </property>
-          <property name="openExternalLinks" >
-           <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="QListWidget" name="culturesListWidget_2" >
+         <widget class="QListWidget" name="landscapesListWidget" >
           <property name="geometry" >
            <rect>
             <x>10</x>
@@ -1515,6 +1490,9 @@ p, li { white-space: pre-wrap; }
             <width>101</width>
             <height>251</height>
            </rect>
+          </property>
+          <property name="horizontalScrollBarPolicy" >
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <item>
            <property name="text" >
@@ -1526,19 +1504,6 @@ p, li { white-space: pre-wrap; }
             <string>Apollo</string>
            </property>
           </item>
-         </widget>
-         <widget class="QLabel" name="label_19" >
-          <property name="geometry" >
-           <rect>
-            <x>120</x>
-            <y>100</y>
-            <width>111</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Name: </string>
-          </property>
          </widget>
          <widget class="QCheckBox" name="starloreLanguageCheckBox_2" >
           <property name="geometry" >
@@ -1553,19 +1518,6 @@ p, li { white-space: pre-wrap; }
            <string>Use associated planet and position</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_20" >
-          <property name="geometry" >
-           <rect>
-            <x>120</x>
-            <y>120</y>
-            <width>111</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Author: </string>
-          </property>
-         </widget>
          <widget class="QLabel" name="label_21" >
           <property name="geometry" >
            <rect>
@@ -1577,6 +1529,19 @@ p, li { white-space: pre-wrap; }
           </property>
           <property name="text" >
            <string>Location: Lon/Lat/Alt Planet</string>
+          </property>
+         </widget>
+         <widget class="QTextBrowser" name="landscapeTextBrowser" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>100</y>
+            <width>311</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <property name="openExternalLinks" >
+           <bool>true</bool>
           </property>
          </widget>
         </widget>
@@ -1887,7 +1852,7 @@ p, li { white-space: pre-wrap; }
             <x>10</x>
             <y>240</y>
             <width>421</width>
-            <height>131</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title" >
@@ -1897,19 +1862,31 @@ p, li { white-space: pre-wrap; }
            <bool>false</bool>
           </property>
           <layout class="QHBoxLayout" >
+           <property name="spacing" >
+            <number>2</number>
+           </property>
            <item>
-            <widget class="QListWidget" name="culturesListWidget_3" >
+            <widget class="QListWidget" name="projectionListWidget" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize" >
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="maximumSize" >
               <size>
                <width>100</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="horizontalScrollBarPolicy" >
+              <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
              <item>
               <property name="text" >
@@ -1924,19 +1901,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_22" >
-             <property name="text" >
-              <string>Description</string>
-             </property>
-             <property name="textFormat" >
-              <enum>Qt::RichText</enum>
-             </property>
-             <property name="alignment" >
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-             <property name="wordWrap" >
-              <bool>true</bool>
-             </property>
+            <widget class="QTextBrowser" name="projectionTextBrowser" >
              <property name="openExternalLinks" >
               <bool>true</bool>
              </property>
@@ -1954,9 +1919,12 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>101</width>
+            <width>81</width>
             <height>351</height>
            </rect>
+          </property>
+          <property name="horizontalScrollBarPolicy" >
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <item>
            <property name="text" >
@@ -1985,9 +1953,9 @@ p, li { white-space: pre-wrap; }
          <widget class="QTextBrowser" name="skyCultureTextBrowser" >
           <property name="geometry" >
            <rect>
-            <x>120</x>
+            <x>100</x>
             <y>10</y>
-            <width>311</width>
+            <width>331</width>
             <height>351</height>
            </rect>
           </property>

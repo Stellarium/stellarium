@@ -1,8 +1,19 @@
 #include "MappingClasses.hpp"
+#include "Translator.hpp"
 
 MappingPerspective::MappingPerspective(void)
 {
 	maxFov = 150.0;
+}
+
+QString MappingPerspective::getNameI18() const
+{
+	return q_("Perspective");
+}
+
+QString MappingPerspective::getDescriptionI18() const
+{
+	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
 }
 
 MappingPerspective MappingPerspective::instance;
@@ -61,6 +72,16 @@ MappingEqualArea::MappingEqualArea(void)
 	maxFov = 360.0;
 }
 
+QString MappingEqualArea::getNameI18() const
+{
+	return q_("Equal Area");
+}
+
+QString MappingEqualArea::getDescriptionI18() const
+{
+	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>.");
+}
+
 MappingEqualArea MappingEqualArea::instance;
 
 bool MappingEqualArea::backward(Vec3d &v) const
@@ -107,6 +128,16 @@ MappingStereographic::MappingStereographic(void)
 	maxFov = 235.0;
 }
 
+QString MappingStereographic::getNameI18() const
+{
+	return q_("Stereographic");
+}
+
+QString MappingStereographic::getDescriptionI18() const
+{
+	return q_("This mode is similar to fish-eye projection mode.");
+}
+
 MappingStereographic MappingStereographic::instance;
 
 
@@ -142,6 +173,16 @@ MappingFisheye::MappingFisheye(void)
 	maxFov = 180.00001;
 }
 
+QString MappingFisheye::getNameI18() const
+{
+	return q_("Fish-eye");
+}
+
+QString MappingFisheye::getDescriptionI18() const
+{
+	return q_("In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight lines become curves when they appear a large angular distance from the centre of the field of view (like the distortions seen with very wide angle camera lenses).");
+}
+
 MappingFisheye MappingFisheye::instance;
 
 bool MappingFisheye::backward(Vec3d &v) const
@@ -175,6 +216,16 @@ MappingCylinder::MappingCylinder(void)
 {
 	// assume aspect ration of 4/3 for getting a full 360 degree horizon:
 	maxFov = 175.0 * 4/3;
+}
+
+QString MappingCylinder::getNameI18() const
+{
+	return q_("Cylinder");
+}
+
+QString MappingCylinder::getDescriptionI18() const
+{
+	return q_("The full name of this projection mode is <i>cylindrical equidistant projection</i>.");
 }
 
 MappingCylinder MappingCylinder::instance;
@@ -218,6 +269,16 @@ double MappingCylinder::deltaZoom(double fov) const
 MappingOrthographic::MappingOrthographic(void)
 {
   maxFov = 180.0;
+}
+
+QString MappingOrthographic::getNameI18() const
+{
+	return q_("Orthographic");
+}
+
+QString MappingOrthographic::getDescriptionI18() const
+{
+	return q_("Orthographic projection is related to perspective projection, but the point of perspective is set to an infinite distance.");
 }
 
 MappingOrthographic MappingOrthographic::instance;
