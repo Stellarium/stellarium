@@ -9,8 +9,11 @@ class Mapping
 public:
 	Mapping(void);
 	virtual ~Mapping(void) {}
-	virtual QString getName(void) const = 0;
-
+	virtual QString getId() const = 0;
+	virtual QString getNameI18() const = 0;
+	virtual QString getDescriptionI18() const {return "No description";}
+	QString getHtmlSummary() const;
+	
 	//! Apply the transformation in the forward direction
 	//! After transformation v[2] will always contain the length
 	//! of the original v: sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])

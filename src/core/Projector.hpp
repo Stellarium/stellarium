@@ -107,7 +107,7 @@ public:
 	};
 	
 	//! Get a string description of a PROJECTOR_MASK_TYPE.
-	static const char *maskTypeToString(PROJECTOR_MASK_TYPE type);
+	static const QString maskTypeToString(PROJECTOR_MASK_TYPE type);
 	
 	//! Get a PROJECTOR_MASK_TYPE from a string description.
 	static PROJECTOR_MASK_TYPE stringToMaskType(const QString &s);
@@ -128,8 +128,7 @@ public:
 	//! @param cx The center of the viewport in the x axis (relative to left edge).
 	//! @param cy The center of the viewport in the y axis (relative to bottom edge).
 	//! @param fov_diam The field of view diameter.
-	void setViewport(int x, int y, int w, int h,
-	                 double cx, double cy, double fov_diam);
+	void setViewport(int x, int y, int w, int h, double cx, double cy, double fov_diam);
 
 	//! Get the lower left corner of the viewport and the width, height.
 	const Vector4<GLint>& getViewport(void) const {return viewport_xywh;}
@@ -137,8 +136,7 @@ public:
 	//! Get the center of the viewport relative to the lower left corner.
 	Vec2d getViewportCenter(void) const
 	{
-		return Vec2d(viewport_center[0]-viewport_xywh[0],
-			     viewport_center[1]-viewport_xywh[1]);
+		return Vec2d(viewport_center[0]-viewport_xywh[0],viewport_center[1]-viewport_xywh[1]);
 	}
 
 	//! Get the diameter of the FOV disk.
@@ -150,8 +148,9 @@ public:
 	//! Get the vertical viewport offset in pixels.
 	int getViewportPosY(void) const {return viewport_xywh[1];}
 	
-	//! Get the viewport size in pixels.
+	//! Get the viewport width in pixels.
 	int getViewportWidth(void) const {return viewport_xywh[2];}
+	//! Get the viewport height in pixels.
 	int getViewportHeight(void) const {return viewport_xywh[3];}
 	
 	//! Handle the resizing of the window.
@@ -181,7 +180,8 @@ public:
 	void setViewportMaskNone(void) {setMaskType(Projector::NONE);}
 	
 	//! Set the current OpenGL viewport to projector's viewport.
-	void applyViewport(void) const {
+	void applyViewport(void) const
+	{
 		glViewport(viewport_xywh[0], viewport_xywh[1], viewport_xywh[2], viewport_xywh[3]);
 	}	
 	
@@ -261,8 +261,6 @@ public:
 	bool unProject(const Vec3d& win, Vec3d& v) const {return unProject(win[0], win[1], v);}
 	bool unProject(double x, double y, Vec3d& v) const;
 
-	const Mapping &getMapping(void) const {return *mapping;}
-
 	//! Project the vectors v1 and v2 from the current frame into the viewport.
 	//! @param v1 the first vector in the current frame.
 	//! @param v2 the second vector in the current frame.
@@ -285,13 +283,16 @@ public:
 
 	//! Set the current projection mapping to use.
 	//! The mapping must have been registered before being used.
-	//! @param projectionName a string which can be e.g. "perspective", "stereographic", "fisheye", "cylinder".
-	void setCurrentProjection(const QString& projectionName);
+	//! @param mappingId a string which can be e.g. "perspective", "stereographic", "fisheye", "cylinder".
+	void setCurrentMapping(const QString& mappingId);
+
+	//! Get the current Mapping used by the Projection
+	const Mapping& getCurrentMapping(void) const {return *mapping;}
+
+	//! Get the list of all the registered mappings
+	//! @return a map associating each mappingId to its instance
+	const QMap<QString,const Mapping*>& getAllMappings() const {return projectionMapping;}
 	
-	//! Get the current projection mapping name.
-	QString getCurrentProjection() {return currentProjectionType;}
-
-
 	///////////////////////////////////////////////////////////////////////////
 	// Standard methods for drawing primitives in general (non-linear) mode
 	///////////////////////////////////////////////////////////////////////////

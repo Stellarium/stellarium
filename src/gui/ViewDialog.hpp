@@ -40,6 +40,7 @@ protected:
 	Ui_viewDialogForm* ui;
 private slots:
 	void skyCultureChanged(const QString& cultureName);
+	void projectionChanged(const QString& projectionName);
 private:
 	void updateSkyCultureText();	
 };

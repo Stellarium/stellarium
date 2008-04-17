@@ -26,6 +26,8 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "Mapping.hpp"
+#include "Projector.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -65,6 +67,20 @@ void ViewDialog::setVisible(bool v)
 		updateSkyCultureText();
 		ui->culturesListWidget->setCurrentItem(ui->culturesListWidget->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
 		connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
+		
+		// Fill the projection list
+		l = ui->projectionListWidget;
+		l->clear();
+		const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
+		QMapIterator<QString, const Mapping*> i(mappings);
+		while (i.hasNext())
+		{
+			i.next();
+			l->addItem(q_(i.value()->getNameI18()));
+		}
+		ui->projectionListWidget->setCurrentItem(ui->projectionListWidget->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
+		ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
+		connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
 	}
 	else
 	{
@@ -108,4 +124,19 @@ void ViewDialog::updateSkyCultureText()
 		f.open(QIODevice::ReadOnly);
 		ui->skyCultureTextBrowser->setHtml(QString::fromUtf8(f.readAll()));
 	}
+}
+
+void ViewDialog::projectionChanged(const QString& projectionName)
+{
+	const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
+	QMapIterator<QString, const Mapping*> i(mappings);
+	while (i.hasNext())
+	{
+		i.next();
+		if (q_(i.value()->getNameI18()) == projectionName)
+			break;
+	}
+
+	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
+	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
 }

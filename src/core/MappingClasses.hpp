@@ -7,7 +7,9 @@ class MappingPerspective : public Mapping
 {
 public:
     MappingPerspective(void);
-	QString getName(void) const {return "perspective";} 
+	virtual QString getId() const {return "perspective";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingPerspective instance;
@@ -22,7 +24,9 @@ class MappingEqualArea : public Mapping
 {
 public:
     MappingEqualArea(void);
-	QString getName(void) const {return "equal_area";} 
+	virtual QString getId(void) const {return "equal_area";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingEqualArea instance;
@@ -45,7 +49,9 @@ class MappingStereographic : public Mapping
 {
 public:
     MappingStereographic(void);
-	QString getName(void) const {return "stereographic";} 
+	virtual QString getId(void) const {return "stereographic";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingStereographic instance;
@@ -75,7 +81,9 @@ class MappingFisheye : public Mapping
 {
 public:
     MappingFisheye(void);
-	QString getName(void) const {return "fisheye";} 
+	virtual QString getId(void) const {return "fisheye";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingFisheye instance;
@@ -111,7 +119,9 @@ class MappingCylinder : public Mapping
 {
 public:
     MappingCylinder(void);
-	QString getName(void) const {return "cylinder";} 
+	virtual QString getId(void) const {return "cylinder";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingCylinder instance;
@@ -126,7 +136,9 @@ class MappingOrthographic : public Mapping
 {
 public:
     MappingOrthographic(void);
-	QString getName(void) const {return "orthographic";} 
+	virtual QString getId(void) const {return "orthographic";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
 	static Mapping *getMapping(void) {return &instance;}
 private:
 	static MappingOrthographic instance;
