@@ -104,7 +104,7 @@ struct VertexPoint
 ViewportDistorterFisheyeToSphericMirror
 ::ViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h, Projector *prj)
 	: prj(prj),screen_w(screen_w),screen_h(screen_h),
-	  original_max_fov(prj->getMapping().maxFov),
+	  original_max_fov(prj->getCurrentMapping().maxFov),
 	  original_viewport(prj->getViewport()),
 	  original_viewport_center(prj->getViewportCenter()),
 	  original_viewport_fov_diameter(prj->getViewportFovDiameter()),
@@ -129,8 +129,8 @@ ViewportDistorterFisheyeToSphericMirror
 	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.0).toDouble();
 	if (distorter_max_fov > 240.0) distorter_max_fov = 240.0;
 	else if (distorter_max_fov < 120.0) distorter_max_fov = 120.0;
-	if (distorter_max_fov > prj->getMapping().maxFov)
-		distorter_max_fov = prj->getMapping().maxFov;
+	if (distorter_max_fov > prj->getCurrentMapping().maxFov)
+		distorter_max_fov = prj->getCurrentMapping().maxFov;
 	prj->setMaxFov(distorter_max_fov);
 
 	viewport_w = conf.value("spheric_mirror/viewport_width", original_viewport[2]).toInt();
@@ -266,7 +266,7 @@ ViewportDistorterFisheyeToSphericMirror
 		if (gamma < 0.0) gamma = 0.0;
 		const float view_scaling_factor
 		= 0.5 * viewport_fov_diameter
-		  / prj->getMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
+		  / prj->getCurrentMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
 		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		double max_h = 0;
@@ -286,7 +286,7 @@ ViewportDistorterFisheyeToSphericMirror
 				              (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
 				              (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
 				              v,v_x,v_y);
-				rc &= prj->getMapping().forward(v);
+				rc &= prj->getCurrentMapping().forward(v);
 				const float x = viewport_center[0] + v[0] * view_scaling_factor;
 				const float y = viewport_center[1] + v[1] * view_scaling_factor;
 				vertex_point.h = rc ? (v_x^v_y).length() : 0.0;

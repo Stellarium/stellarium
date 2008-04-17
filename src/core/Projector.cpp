@@ -37,9 +37,9 @@
 #include <QString>
 #include <QSettings>
 
-const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
+const QString Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
-	if(type == DISK )
+	if (type == DISK )
 		return "disk";
 	else
 		return "none";
@@ -54,7 +54,7 @@ Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const QString &s)
 
 void Projector::registerProjectionMapping(Mapping *c)
 {
-	if (c) projectionMapping[c->getName()] = c;
+	if (c) projectionMapping[c->getId()] = c;
 }
 
 void Projector::init()
@@ -121,7 +121,7 @@ void Projector::init()
 	registerProjectionMapping(MappingOrthographic::getMapping());
 
 	tmpstr = conf->value("projection/type", "stereographic").toString();
-	setCurrentProjection(tmpstr);
+	setCurrentMapping(tmpstr);
 
 	initFov	= conf->value("navigation/init_fov",60.).toDouble();
 	setFov(initFov);
@@ -413,15 +413,15 @@ void Projector::initGlMatrixOrtho2d(void) const
 /*************************************************************************
  Set the current projection mapping to use
 *************************************************************************/
-void Projector::setCurrentProjection(const QString& projectionName)
+void Projector::setCurrentMapping(const QString& mappingId)
 {
-	if (currentProjectionType==projectionName)
+	if (currentProjectionType==mappingId)
 		return;
 
-	QMap<QString,const Mapping*>::const_iterator i(projectionMapping.find(projectionName));
+	QMap<QString,const Mapping*>::const_iterator i(projectionMapping.find(mappingId));
 	if (i!=projectionMapping.end())
 	{
-		currentProjectionType = projectionName;
+		currentProjectionType = mappingId;
 
 		// Redefine the projection functions
 		mapping = i.value();
@@ -433,10 +433,11 @@ void Projector::setCurrentProjection(const QString& projectionName)
 	}
 	else
 	{
-		qWarning() << "Unknown projection type: " << qPrintable(projectionName);
+		qWarning() << "Unknown projection type: " << qPrintable(mappingId);
 	}
 }
 
+	
 /*************************************************************************
  Project the vector v from the current frame into the viewport
 *************************************************************************/
