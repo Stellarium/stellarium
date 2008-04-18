@@ -20,9 +20,11 @@
 #ifndef LANDSCAPEMGR_H_
 #define LANDSCAPEMGR_H_
 
-#include <QMap>
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
+
+#include <QMap>
+#include <QStringList>
 
 class Landscape;
 class Atmosphere;
@@ -98,23 +100,19 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Retrieve a \n separated list of the names of all the available landscape in the
+	//! Retrieve list of the names of all the available landscape in the
 	//! file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
-	QString getAllLandscapeNames();
+	QStringList getAllLandscapeNames() const;
 		
 	//! Get the current landscape ID.
-	const QString& getLandscapeId() {return currentLandscapeID;}
-	//! Return the real name of the current landscape.
-	QString getLandscapeName();
-	//! Return the author name of the current landscape.
-	QString getLandscapeAuthorName();
-	//! Return the description of the current landscape.
-	QString getLandscapeDescription();
-	//! Return the translated name of the planet where the current landscape is located.
-	QString getLandscapePlanetName();
-	//! Return a string with the longitude, latitude and altitude of the current landscape.
-	QString getLandscapeLocationDescription();
+	const QString& getLandscapeId() const {return currentLandscapeID;}
+	
+	//! Get the current landscape name.
+	QString getCurrentLandscapeName() const;
+	
+	//! Return a pseudo HTML formated string with all informations on the current landscape
+	QString getCurrentLandscapeHtmlDescription() const;
 	
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param newLandscapeName the name of the new landscape, as found in the 
@@ -184,7 +182,7 @@ private:
 	Landscape* createFromHash(QMap<QString, QString>& param);
 	
 	//! Return a map of landscape name to landscape ID (directory name).
-	QMap<QString,QString> getNameToDirMap(void);
+	QMap<QString,QString> getNameToDirMap(void) const;
 		
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinals_points;		// Cardinals points
