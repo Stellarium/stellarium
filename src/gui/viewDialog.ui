@@ -707,6 +707,19 @@ color: darkgray;
                 <number>0</number>
                </property>
                <item>
+                <spacer>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" >
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QLabel" name="label_5" >
                  <property name="text" >
                   <string>Scale:</string>

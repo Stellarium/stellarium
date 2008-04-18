@@ -181,11 +181,10 @@ QString radToHmsStr(double angle, bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(double angle, bool useD)
 {
-	QString degsign('d');
+	QChar degsign('d');
 	if (!useD)
 	{
-		const wchar_t degsignw = L'\u00B0';
-		degsign = QString::fromWCharArray(&degsignw, 1);
+		degsign = 0x00B0;
 	}
 	bool sign;
 	unsigned int d,m;
@@ -216,11 +215,10 @@ QString radToDmsStrAdapt(double angle, bool useD)
 *************************************************************************/
 QString radToDmsStr(double angle, bool decimal, bool useD)
 {
-	QString degsign('d');
+	QChar degsign('d');
 	if (!useD)
 	{
-		const wchar_t degsignw = L'\u00B0';
-		degsign = QString::fromWCharArray(&degsignw, 1);
+		degsign = 0x00B0;
 	}
 	bool sign;
 	unsigned int d,m;

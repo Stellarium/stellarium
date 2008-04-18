@@ -25,5 +25,5 @@ Mapping::Mapping() : minFov(0.0001), maxFov(100.)
 
 QString Mapping::getHtmlSummary() const
 {
-	return QString("<h3>%1</h3><p>%2</p>").arg(getNameI18()).arg(getDescriptionI18());
+	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(maxFov)+QChar(0x00B0);
 }
