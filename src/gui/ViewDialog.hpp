@@ -42,6 +42,7 @@ private slots:
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(const QString& landscapeName);
+	void shoutingStarsZHRChanged();
 private:
 	void updateSkyCultureText();	
 };
