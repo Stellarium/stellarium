@@ -31,21 +31,20 @@
 
 class QSettings;
 
-// Class which manages the displaying of the Landscape
+//! Store and manages the displaying of the Landscape
 class Landscape
 {
 public:
-	enum LANDSCAPE_TYPE
-	{
-		OLD_STYLE,
-		FISHEYE,
-		SPHERICAL
-	};
-
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
-	
+	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
+	void update(double deltaTime)
+	{
+		land_fader.update((int)(deltaTime*1000));
+		fog_fader.update((int)(deltaTime*1000));
+	}
+
 	//! Set the brightness of the landscape
 	void setBrightness(float b) {sky_brightness = b;}
 	
@@ -64,16 +63,13 @@ public:
 	//! Get landscape description
 	QString getDescription() const {return description;}
 	
-	void update(double deltaTime) {land_fader.update((int)(deltaTime*1000)); fog_fader.update((int)(deltaTime*1000));}
-	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
-
 	//! Return the (English) planet name for the landscape
-	QString getPlanet(void) { return planet; }	
-	//! Return the latitude for the landscape
+	QString getPlanetName(void) { return planet; }	
+	//! Return the latitude for the landscape in degree
 	double getLatitude(void) { return latitude; }
-	//! Return the longitude for the landscape
+	//! Return the longitude for the landscape in degree
 	double getLongitude(void) { return longitude; }
-	//! Return the altitude for the landscape
+	//! Return the altitude for the landscape in m
 	double getAltitude(void) { return altitude; }
 
 protected:
@@ -100,11 +96,11 @@ protected:
 	double longitude;
 	double altitude;
 	
-typedef struct
-{
-	STextureSP tex;
-	float tex_coords[4];
-} landscape_tex_coord;
+	typedef struct
+	{
+		STextureSP tex;
+		float tex_coords[4];
+	} landscape_tex_coord;
 };
 
 

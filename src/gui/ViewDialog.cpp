@@ -28,6 +28,8 @@
 #include "StelLocaleMgr.hpp"
 #include "Mapping.hpp"
 #include "Projector.hpp"
+#include "LandscapeMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -65,8 +67,8 @@ void ViewDialog::setVisible(bool v)
 		l->clear();
 		l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
 		updateSkyCultureText();
-		ui->culturesListWidget->setCurrentItem(ui->culturesListWidget->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
-		connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
+		l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
+		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 		
 		// Fill the projection list
 		l = ui->projectionListWidget;
@@ -78,9 +80,18 @@ void ViewDialog::setVisible(bool v)
 			i.next();
 			l->addItem(q_(i.value()->getNameI18()));
 		}
-		ui->projectionListWidget->setCurrentItem(ui->projectionListWidget->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
+		l->setCurrentItem(l->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
 		ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
-		connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+		
+		// Fill the landscape list
+		l = ui->landscapesListWidget;
+		l->clear();
+		LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+		l->addItems(lmgr->getAllLandscapeNames());
+		l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
+		ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(landscapeChanged(const QString&)));
 	}
 	else
 	{
@@ -139,4 +150,11 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 
 	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
 	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
+}
+
+void ViewDialog::landscapeChanged(const QString& landscapeName)
+{
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	lmgr->setLandscapeByName(landscapeName);
+	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 }
