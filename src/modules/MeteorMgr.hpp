@@ -59,11 +59,15 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
+	//! Get the current zenith hourly rate.
+	int getZHR(void);
 	//! Set the zenith hourly rate.
 	void setZHR(int zhr);
 	
-	//! Get the current zenith hourly rate.
-	int getZHR(void);
+	//! Set flag used to turn on and off meteor rendering.
+	void setFlagShow(bool b) { flagShow = b; }
+	//! Get value of flag used to turn on and off meteor rendering.
+	bool getFlagShow(void) const { return flagShow; }
 	
 	//! Set the maximum velocity in km/s
 	void setMaxVelocity(int maxv);
@@ -73,7 +77,7 @@ private:
 	int ZHR;
 	int max_velocity;
 	double zhr_to_wsr;  // factor to convert from zhr to whole earth per second rate
-	
+	bool flagShow;
 };
 
 
