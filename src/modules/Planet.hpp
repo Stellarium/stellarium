@@ -210,6 +210,9 @@ public:
 	void setFlagHints(bool b){hint_fader = b;}
 	bool getFlagHints(void) const {return hint_fader;}
 	
+	void setFlagLabels(bool b){labelsFader = b;}
+	bool getFlagLabels(void) const {return labelsFader;}
+	
 	void setFlagOrbits(bool b){orbit_fader = b;}
 	bool getFlagOrbits(void) const {return orbit_fader;}	
 	
@@ -299,6 +302,7 @@ protected:
 	static LinearFader flagShow;
 	
 	LinearFader hint_fader;
+	LinearFader labelsFader;
 	LinearFader orbit_fader;
 	LinearFader trail_fader;
 	

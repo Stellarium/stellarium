@@ -139,6 +139,8 @@ class NewGui : public StelModule
 {
 	Q_OBJECT;
 public:
+	friend class ViewDialog;
+	
 	NewGui();
 	virtual ~NewGui();
 
@@ -166,7 +168,7 @@ public:
 	virtual bool handleMouseMoves(int x, int y);
 
 private slots:
-	void updateBarsPos(qreal value);	
+	void updateBarsPos(qreal value);
 private:
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;

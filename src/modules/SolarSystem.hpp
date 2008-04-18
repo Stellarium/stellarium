@@ -123,22 +123,27 @@ public slots:
 	//! Set flag which determines if planets are drawn or hidden.
 	void setFlagPlanets(bool b);
 	//! Get the current value of the flag which determines if planet are drawn or hidden.
-	bool getFlagPlanets(void) const;
+	bool getFlagPlanets() const;
 
 	//! Set flag which determines if planet trails are drawn or hidden.
 	void setFlagTrails(bool b);
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
-	bool getFlagTrails(void) const;
+	bool getFlagTrails() const;
 	
-	//! Set flag which determines if planet hints are drawn or hidden.
+	//! Set flag which determines if planet hints are drawn or hidden along labels
 	void setFlagHints(bool b);
-	//! Get the current value of the flag which determines if planet hints are drawn or hidden.
-	bool getFlagHints(void) const;	
+	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
+	bool getFlagHints() const;	
+	
+	//! Set flag which determines if planet labels are drawn or hidden.
+	void setFlagLabels(bool b);
+	//! Get the current value of the flag which determines if planet labels are drawn or hidden.
+	bool getFlagLabels() const;
 	
 	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
-	bool getFlagOrbits(void) const {return flagOrbits;}
+	bool getFlagOrbits() const {return flagOrbits;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b) {flag_light_travel_time = b;}

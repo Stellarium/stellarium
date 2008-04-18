@@ -30,6 +30,9 @@
 #include "Projector.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StarMgr.hpp"
+#include "SkyDrawer.hpp"
+#include "SolarSystem.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -92,6 +95,49 @@ void ViewDialog::setVisible(bool v)
 		l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 		ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(landscapeChanged(const QString&)));
+		
+		// Connect and initialize checkboxes and other widgets
+		
+		// Stars section
+		StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+		ui->showStarsCheckBox->setChecked(smgr->getFlagStars());
+		QAction* a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Stars");
+		connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->starLabelCheckBox->setChecked(smgr->getFlagNames());
+		connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagNames(bool)));
+		
+		ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
+		connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
+		
+		ui->starScaleRadiusDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getScale());
+		connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setScale(double)));
+		
+		ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
+		connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
+		
+		// Planets section
+		SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+		ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
+		connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
+		
+		ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Planets_Hints");
+		connect(a, SIGNAL(toggled(bool)), ui->planetMarkerCheckBox, SLOT(setChecked(bool)));
+		connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
+		connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
+		
+		ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
+		connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
+		
+		ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
+		connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+		
+		ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
+		connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 	}
 	else
 	{

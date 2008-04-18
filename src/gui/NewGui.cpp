@@ -28,6 +28,7 @@
 #include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "StarMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -37,6 +38,7 @@
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "Projector.hpp"
+#include "SolarSystem.hpp"
 
 #include "ui_mainGui.h"
 
@@ -387,7 +389,7 @@ void NewGui::init()
 	// The actions need to be added to the main form to be effective
 	foreach (QObject* obj, StelMainWindow::getInstance().children())
 	{
-		QAction* a = qobject_cast<QAction *>(obj);
+		QAction* a = qobject_cast<QAction*>(obj);
 		if (a)
 		{
 			if (!a->shortcut().isEmpty())
@@ -498,6 +500,14 @@ void NewGui::init()
 	ui->actionHorizontal_Flip->setChecked(proj->getFlipHorz());
 	QObject::connect(ui->actionVertical_Flip, SIGNAL(toggled(bool)), proj, SLOT(setFlipVert(bool)));
 	ui->actionVertical_Flip->setChecked(proj->getFlipVert());
+	
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	QObject::connect(ui->actionShow_Stars, SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
+	ui->actionShow_Stars->setChecked(smgr->getFlagStars());
+	
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	QObject::connect(ui->actionShow_Planets_Hints, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
+	ui->actionShow_Planets_Hints->setChecked(ssmgr->getFlagHints());
 	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -700,6 +710,10 @@ void NewGui::update(double deltaTime)
 	const bool b = mmgr->getFlagTracking();
 	if (buttonGotoSelectedObject->isChecked()!=b)
 		buttonGotoSelectedObject->setChecked(b);
+	
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	if (ui->actionShow_Stars->isChecked()!=smgr->getFlagStars())
+		ui->actionShow_Stars->setChecked(smgr->getFlagStars());
 }
 
 bool NewGui::handleMouseMoves(int x, int y)
