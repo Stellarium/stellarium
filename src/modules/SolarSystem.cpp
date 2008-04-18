@@ -108,6 +108,7 @@ void SolarSystem::init()
 	setMoonScale(conf->value("viewing/moon_scale", 5.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
+	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
@@ -938,9 +939,27 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (vector<Planet*>::const_iterator iter = system_planets.begin();
-        iter != system_planets.end(); iter++ ) {
+	for (vector<Planet*>::const_iterator iter = system_planets.begin(); iter != system_planets.end(); iter++)
+	{
 		if ((*iter)->getFlagHints()) return true;
+	}
+	return false;
+}
+
+void SolarSystem::setFlagLabels(bool b)
+{
+	vector<Planet*>::iterator iter;
+	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	{
+		(*iter)->setFlagLabels(b);
+	}
+}
+
+bool SolarSystem::getFlagLabels() const
+{
+	for (vector<Planet*>::const_iterator iter = system_planets.begin(); iter != system_planets.end(); iter++)
+	{
+		if ((*iter)->getFlagLabels()) return true;
 	}
 	return false;
 }

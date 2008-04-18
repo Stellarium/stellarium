@@ -23,14 +23,17 @@
 #include "STextureTypes.hpp"
 #include "vecmath.h"
 
+#include <QObject>
+
 class Projector;
 class ToneReproducer;
 
 //! @class SkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
 //! eyes adaptation, zoom level and instrument model
-class SkyDrawer
+class SkyDrawer : public QObject
 {
+	Q_OBJECT;
 public:
 	//! Constructor
     SkyDrawer(Projector* prj, ToneReproducer* eye);
@@ -65,20 +68,21 @@ public:
 	//! @return true if the source was actually visible and drawn
 	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
+public slots:
 	//! Set base source display scaling factor.
-	void setScale(float b) {starScale=b;}
+	void setScale(double b) {starScale=b;}
 	//! Get base source display scaling factor.
-	float getScale(void) const {return starScale;}
+	double getScale(void) const {return starScale;}
 	
 	//! Set source display scaling factor wrt magnitude.
-	void setMagScale(float b) {starMagScale=b;}
+	void setMagScale(double b) {starMagScale=b;}
 	//! Get base source display scaling factor wrt magnitude.
-	float getMagScale(void) const {return starMagScale;}
+	double getMagScale(void) const {return starMagScale;}
 	
 	//! Set source twinkle amount.
-	void setTwinkleAmount(float b) {twinkleAmount=b;}
+	void setTwinkleAmount(double b) {twinkleAmount=b;}
 	//! Get source twinkle amount.
-	float getTwinkleAmount(void) const {return twinkleAmount;}
+	double getTwinkleAmount(void) const {return twinkleAmount;}
 	
 	//! Set flag for source twinkling.
 	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
@@ -128,7 +132,7 @@ public:
 	//! than this value will not be drawn at 60 degree FOV.
 	void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
 	
-
+public:
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;
 	

@@ -832,6 +832,31 @@ QCheckBox
     <string>Display options</string>
    </property>
   </action>
+  <action name="actionShow_Stars" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Stars</string>
+   </property>
+   <property name="shortcut" >
+    <string>S</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShow_Planets_Hints" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Planets Hints</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../../data/mainRes.qrc" />

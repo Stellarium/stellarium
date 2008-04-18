@@ -668,18 +668,21 @@ void glCircle(const Vec3d& pos, float radius)
 
 void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 {
-	if(!hint_fader.getInterstate()) return;
+	if (!labelsFader.getInterstate())
+		return;
 
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getOnScreenSize(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
-	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
+	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate());
 	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
+	if (!hint_fader.getInterstate())
+		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate()/tmp);
+	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
@@ -1046,6 +1049,7 @@ void Planet::startTrail(bool b)
 void Planet::update(int delta_time)
 {
 	hint_fader.update(delta_time);
+	labelsFader.update(delta_time);
 	orbit_fader.update(delta_time);
 	trail_fader.update(delta_time);
 }
