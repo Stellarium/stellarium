@@ -33,6 +33,8 @@
 #include "StarMgr.hpp"
 #include "SkyDrawer.hpp"
 #include "SolarSystem.hpp"
+#include "NebulaMgr.hpp"
+#include "MeteorMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -138,6 +140,21 @@ void ViewDialog::setVisible(bool v)
 		
 		ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 		connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
+		
+		// Nebula section
+		NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+		ui->showNebulaCheckBox->setChecked(nmgr->getFlagShow());
+		connect(ui->showNebulaCheckBox, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagShow(bool)));
+		
+		// Shouting stars section
+		MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+		ui->showShoutingStarsCheckBox->setChecked(mmgr->getFlagShow());
+		connect(ui->showShoutingStarsCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagShow(bool)));
+		
+		connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+		connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+		connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+		connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	}
 	else
 	{
@@ -203,4 +220,36 @@ void ViewDialog::landscapeChanged(const QString& landscapeName)
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
 	lmgr->setLandscapeByName(landscapeName);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+}
+
+void ViewDialog::shoutingStarsZHRChanged()
+{
+	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	int zhr;
+	if (ui->zhr10->isChecked())
+		zhr = 10;
+	if (ui->zhr80->isChecked())
+		zhr = 80;
+	if (ui->zhr10000->isChecked())
+		zhr = 10000;
+	if (ui->zhr144000->isChecked())
+		zhr = 144000;
+	if (zhr==mmgr->getZHR())
+		return;
+	mmgr->setZHR(zhr);
+	switch (zhr)
+	{
+		case 10:
+			ui->zhrLabel->setText(q_("Normal rate"));
+			break;
+		case 80:
+			ui->zhrLabel->setText(q_("Standard Perseids rate"));
+			break;
+		case 10000:
+			ui->zhrLabel->setText(q_("Exceptional Leonid rate"));
+			break;
+		case 144000:
+			ui->zhrLabel->setText(q_("Highest rate ever (1966 Leonids)"));
+			break;
+	}
 }

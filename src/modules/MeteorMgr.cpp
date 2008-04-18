@@ -29,7 +29,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
 
-MeteorMgr::MeteorMgr(int zhr, int maxv )
+MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 {
 	setObjectName("MeteorMgr");
 			
@@ -86,6 +86,9 @@ void MeteorMgr::setMaxVelocity(int maxv)
 
 void MeteorMgr::update(double delta_time)
 {
+	if (!flagShow)
+		return;
+	
 	delta_time*=1000;
 	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
@@ -160,6 +163,9 @@ void MeteorMgr::update(double delta_time)
 
 double MeteorMgr::draw(StelCore* core)
 {
+	if (!flagShow)
+		return 0;
+	
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return 0.;
