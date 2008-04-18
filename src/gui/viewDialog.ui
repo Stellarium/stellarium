@@ -494,7 +494,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1440,7 +1440,7 @@ p, li { white-space: pre-wrap; }
             <x>110</x>
             <y>10</y>
             <width>321</width>
-            <height>72</height>
+            <height>81</height>
            </rect>
           </property>
           <property name="title" >
@@ -1450,15 +1450,6 @@ p, li { white-space: pre-wrap; }
            <bool>false</bool>
           </property>
           <layout class="QGridLayout" >
-           <property name="topMargin" >
-            <number>9</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>2</number>
-           </property>
-           <property name="verticalSpacing" >
-            <number>0</number>
-           </property>
            <item row="0" column="0" >
             <widget class="QCheckBox" name="planetMarkerCheckBox_4" >
              <property name="text" >
@@ -1479,6 +1470,20 @@ p, li { white-space: pre-wrap; }
               <string>Show atmosphere</string>
              </property>
             </widget>
+           </item>
+           <item row="1" column="1" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="label_4" >
+               <property name="text" >
+                <string>Light pollution:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinBox" />
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -1505,7 +1510,7 @@ p, li { white-space: pre-wrap; }
            </property>
           </item>
          </widget>
-         <widget class="QCheckBox" name="starloreLanguageCheckBox_2" >
+         <widget class="QCheckBox" name="landscapePositionCheckBox" >
           <property name="geometry" >
            <rect>
             <x>10</x>
@@ -1516,19 +1521,6 @@ p, li { white-space: pre-wrap; }
           </property>
           <property name="text" >
            <string>Use associated planet and position</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_21" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>360</y>
-            <width>191</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Location: Lon/Lat/Alt Planet</string>
           </property>
          </widget>
          <widget class="QTextBrowser" name="landscapeTextBrowser" >
@@ -1542,6 +1534,19 @@ p, li { white-space: pre-wrap; }
           </property>
           <property name="openExternalLinks" >
            <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="landscapeDateTimeCheckBox" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>360</y>
+            <width>391</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Go to associated date and time</string>
           </property>
          </widget>
         </widget>

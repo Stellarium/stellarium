@@ -319,7 +319,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 
 	if (landscape)
 	{
-		// Copy parameters from previous landscape to new one
+		// Copy display parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		delete landscape;
@@ -330,8 +330,8 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	if (getFlagLandscapeSetsLocation())
 	{
 		// Set the planet and moveto the right location
-		if (landscape->getPlanet()!="") 
-			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanet());
+		if (landscape->getPlanetName()!="") 
+			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanetName());
 	
 		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
 		{
@@ -396,40 +396,42 @@ bool LandscapeMgr::getFlagFog(void) const
 	return landscape->getFlagShowFog();
 }
 
-QString LandscapeMgr::getLandscapeName(void)
+/*********************************************************************
+ Retrieve list of the names of all the available landscapes
+ *********************************************************************/
+QStringList LandscapeMgr::getAllLandscapeNames() const
+{
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	QStringList result;
+	
+	// We just look over the map of names to IDs and extract the keys
+	foreach (QString i, nameToDirMap.keys())
+	{
+		result += i;
+	}
+	return result;
+}
+
+QString LandscapeMgr::getCurrentLandscapeName() const
 {
 	return landscape->getName();
 }
-
-QString LandscapeMgr::getLandscapeAuthorName(void)
+   
+QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
-	return landscape->getAuthorName();
-}
-
-QString LandscapeMgr::getLandscapeDescription(void)
-{
-	return landscape->getDescription();
-}
-
-QString LandscapeMgr::getLandscapePlanetName(void) 
-{
-	QString desc;
-	if (landscape->getPlanet() != "")
-	{
-		desc = landscape->getPlanet();
-	}
-	return desc;
-}
-    
-QString LandscapeMgr::getLandscapeLocationDescription(void) 
-{
-	QString desc;
-	//qDebug() << landscape->getLongitude() << " " << landscape->getLatitude();
+	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
+	desc += landscape->getDescription();
+	desc+="<br><br>";
+	desc+="<b>"+q_("Author: ")+"</b>";
+	desc+=landscape->getAuthorName();
+	desc+="<br>";
+	desc+="<b>"+q_("Location: ")+"</b>";
 	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
 	{
-		desc = "lon " + StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
-		desc += ", lat " + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
-		desc += QString(", ") + StelUtils::doubleToString(landscape->getAltitude()).c_str() + " m";
+		desc += StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
+		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
+		desc += QString(q_(", %1 m")).arg(landscape->getAltitude());
+		desc += "<br><br>";
 	}
 	return desc;
 }
@@ -514,7 +516,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 		s = landscapeIni.value("landscape/type").toString();
 
 	Landscape* ldscp = NULL;
-	if      (s=="old_style")
+	if (s=="old_style")
 		ldscp = new LandscapeOldStyle();
 	else if (s=="spherical")
 		ldscp = new LandscapeSpherical();
@@ -558,25 +560,6 @@ Landscape* LandscapeMgr::createFromHash(QMap<QString, QString>& param)
 	}
 }
 
-/*********************************************************************
- return a list of distinct landscape names (the name field from each 
- landscape.ini file).  The result is a string with each name separated
- by a '\n' character.
- *********************************************************************/
-QString LandscapeMgr::getAllLandscapeNames()
-{
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
- 	QString result;
-	
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.keys())
-	{
-		result += i + '\n';
-	}
-
-	return result;
-}
-
 QString LandscapeMgr::nameToID(const QString& name)
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
@@ -595,7 +578,7 @@ QString LandscapeMgr::nameToID(const QString& name)
 /****************************************************************************
  get a map of landscape name (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
-QMap<QString,QString> LandscapeMgr::getNameToDirMap(void)
+QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 {
 	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
