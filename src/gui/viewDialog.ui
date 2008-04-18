@@ -494,7 +494,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -635,26 +635,40 @@ color: darkgray;
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" >
-             <property name="topMargin" >
-              <number>9</number>
-             </property>
              <property name="bottomMargin" >
-              <number>2</number>
-             </property>
-             <property name="horizontalSpacing" >
-              <number>6</number>
+              <number>3</number>
              </property>
              <property name="verticalSpacing" >
               <number>0</number>
              </property>
              <item row="0" column="0" >
-              <widget class="QCheckBox" name="starMarkersCheckBox" >
-               <property name="text" >
-                <string>Show marker</string>
+              <layout class="QHBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
                </property>
-              </widget>
+               <item>
+                <widget class="QLabel" name="label_5" >
+                 <property name="text" >
+                  <string>Scale:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox" >
+                 <property name="decimals" >
+                  <number>1</number>
+                 </property>
+                 <property name="maximum" >
+                  <double>9.000000000000000</double>
+                 </property>
+                 <property name="singleStep" >
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <item row="0" column="1" >
+             <item row="0" column="2" >
               <layout class="QHBoxLayout" >
                <property name="spacing" >
                 <number>0</number>
@@ -676,7 +690,7 @@ color: darkgray;
                  </property>
                  <property name="sizeHint" >
                   <size>
-                   <width>21</width>
+                   <width>20</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -685,51 +699,37 @@ color: darkgray;
                <item>
                 <widget class="QLabel" name="label_2" >
                  <property name="text" >
-                  <string>Amount:</string>
+                  <string>amount:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="twinkleAmountSpinBox" />
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QCheckBox" name="starPointCheckBox" >
-               <property name="text" >
-                <string>Render as points</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <layout class="QHBoxLayout" >
-               <property name="spacing" >
-                <number>0</number>
-               </property>
-               <item>
-                <spacer>
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox" >
+                 <property name="decimals" >
+                  <number>1</number>
                  </property>
-                 <property name="sizeHint" >
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                 <property name="maximum" >
+                  <double>1.500000000000000</double>
                  </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_5" >
-                 <property name="text" >
-                  <string>Scale:</string>
+                 <property name="singleStep" >
+                  <double>0.100000000000000</double>
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox" />
-               </item>
               </layout>
+             </item>
+             <item row="0" column="1" >
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1626,9 +1626,9 @@ p, li { white-space: pre-wrap; }
           <property name="geometry" >
            <rect>
             <x>100</x>
-            <y>20</y>
+            <y>10</y>
             <width>331</width>
-            <height>91</height>
+            <height>111</height>
            </rect>
           </property>
           <property name="title" >
@@ -1705,8 +1705,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QCheckBox" name="planetMarkerCheckBox_3" >
            <property name="geometry" >
             <rect>
-             <x>170</x>
-             <y>60</y>
+             <x>10</x>
+             <y>80</y>
              <width>156</width>
              <height>23</height>
             </rect>
@@ -1715,12 +1715,25 @@ p, li { white-space: pre-wrap; }
             <string>Cardinal points</string>
            </property>
           </widget>
+          <widget class="QCheckBox" name="planetMarkerCheckBox_5" >
+           <property name="geometry" >
+            <rect>
+             <x>170</x>
+             <y>70</y>
+             <width>156</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Equatorial J2000 grid</string>
+           </property>
+          </widget>
          </widget>
          <widget class="QWidget" name="layoutWidget_2" >
           <property name="geometry" >
            <rect>
             <x>10</x>
-            <y>130</y>
+            <y>140</y>
             <width>81</width>
             <height>91</height>
            </rect>
@@ -1775,7 +1788,7 @@ p, li { white-space: pre-wrap; }
           <property name="geometry" >
            <rect>
             <x>100</x>
-            <y>130</y>
+            <y>140</y>
             <width>331</width>
             <height>91</height>
            </rect>
@@ -2002,66 +2015,18 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections>
   <connection>
-   <sender>starPointCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label_5</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>217</x>
-     <y>124</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>281</x>
-     <y>122</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>starPointCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>starScaleRadiusDoubleSpinBox</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>231</x>
-     <y>130</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>409</x>
-     <y>126</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>starTwinkleCheckBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_2</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>312</x>
-     <y>92</y>
+     <x>243</x>
+     <y>98</y>
     </hint>
     <hint type="destinationlabel" >
      <x>356</x>
      <y>93</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>starTwinkleCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>twinkleAmountSpinBox</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>272</x>
-     <y>98</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>416</x>
-     <y>101</y>
     </hint>
    </hints>
   </connection>
