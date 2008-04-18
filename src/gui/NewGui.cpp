@@ -208,18 +208,16 @@ void BottomStelBar::updateText()
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
-	datetime->setText(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd)
-	                  +"   "
+	datetime->setText(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd) +"   "
 	                  +StelApp::getInstance().getLocaleMgr().get_printable_time_local(jd));
 	
-	location->setText(core->getObservatory()->getHomePlanetNameI18n()
-	                  +", "
+	location->setText(core->getObservatory()->getHomePlanetNameI18n() +", "
 	                  +core->getObservatory()->getLocationName()
-	                  +QString(", %1m").arg(core->getObservatory()->getAltitude()));
+	                  +q_(", %1m").arg(core->getObservatory()->getAltitude()));
 	
 	QString str;
 	QTextStream wos(&str);
-	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QString::fromWCharArray(L"\u00B0");
+	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QChar(0x00B0);
 	fov->setText(str);
 	
 	str="";
