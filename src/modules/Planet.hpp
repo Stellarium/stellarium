@@ -99,6 +99,8 @@ public:
 
 	~Planet();
 
+	//! Get the radius of the planet in AU.
+	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
 
