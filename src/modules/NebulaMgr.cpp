@@ -69,10 +69,6 @@ NebulaMgr::~NebulaMgr()
 	}
 	
 	Nebula::tex_circle = STextureSP();
-	
-#ifdef DEBUG_SKYIMAGE_TILE
-	dssTile->deleteLater();
-#endif
 }
 
 /*************************************************************************
@@ -119,10 +115,6 @@ void NebulaMgr::init()
 	updateI18n();
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
-	
-#ifdef DEBUG_SKYIMAGE_TILE
-	dssTile = new SkyImageTile("/home/fab1/Desktop/allDSS/allDSS.json");
-#endif
 }
 
 // Draw all the Nebulae
@@ -131,13 +123,6 @@ double NebulaMgr::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	ToneReproducer* eye = core->getToneReproducer();
-	
-#ifdef DEBUG_SKYIMAGE_TILE
-	prj->setCurrentFrame(Projector::FRAME_J2000);
-// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_BLEND);
-	dssTile->draw(core);
-#endif
 	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	Nebula::flagShowTexture = flagShowTexture;
@@ -188,8 +173,6 @@ double NebulaMgr::draw(StelCore* core)
 	drawPointer(prj, nav);
 	//nebGrid.draw(prj, p);
 
-
-	
 	return 0;
 }
 
