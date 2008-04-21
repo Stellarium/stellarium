@@ -33,7 +33,7 @@
 #include <QTimer>
 
 StelAppGraphicsItem* StelAppGraphicsItem::singleton = NULL;
-
+ 
 StelAppGraphicsItem::StelAppGraphicsItem() 
 {
 	assert(!singleton);
@@ -62,6 +62,15 @@ StelAppGraphicsItem::~StelAppGraphicsItem()
 void StelAppGraphicsItem::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
+	
+//  Test a Qt 4.4 OpenGL rendered complex styled window :)
+// 	QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(this, Qt::Tool);
+// 	QDialog* cal = new QDialog(0);
+// 	Ui_viewDialogForm ui;
+// 	ui.setupUi(cal);
+// 	proxy->setWidget(cal);
+// 	proxy->setWindowFrameMargins(0,0,0,0);
+// 	proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)

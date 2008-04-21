@@ -403,6 +403,9 @@ void NewGui::init()
 		}
 	}
 	
+	// Creat windows
+	viewDialog = new ViewDialog(this);
+	
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
@@ -479,8 +482,8 @@ void NewGui::init()
 	QObject::connect(ui->actionShow_Location_Window, SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	QObject::connect(&locationDialog, SIGNAL(closed()), ui->actionShow_Location_Window, SLOT(toggle()));
 
-	QObject::connect(ui->actionShow_SkyView_Window, SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
-	QObject::connect(&viewDialog, SIGNAL(closed()), ui->actionShow_SkyView_Window, SLOT(toggle()));
+	QObject::connect(ui->actionShow_SkyView_Window, SIGNAL(toggled(bool)), viewDialog, SLOT(setVisible(bool)));
+	QObject::connect(viewDialog, SIGNAL(closed()), ui->actionShow_SkyView_Window, SLOT(toggle()));
 	
 	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
 	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));

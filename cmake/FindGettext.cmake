@@ -29,7 +29,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 	# Update message strings from the code [TODO: run even if pot file exists!]
 	ADD_CUSTOM_COMMAND( 
     	OUTPUT ${_absPotFile}
-        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --keyword=N_ -C --default-domain=stellarium --directory=${PROJECT_SOURCE_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Fabien Chereau et al"  
+        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --qt --keyword=N_ -C --default-domain=stellarium --directory=${PROJECT_SOURCE_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Fabien Chereau et al"  
         DEPENDS POTFILES.in
     )
 
