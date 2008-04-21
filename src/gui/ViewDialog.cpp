@@ -40,7 +40,7 @@
 #include <QFrame>
 #include <QFile>
 
-ViewDialog::ViewDialog() : dialog(NULL)
+ViewDialog::ViewDialog(QObject* parent) : QObject(parent), dialog(NULL)
 {
 	ui = new Ui_viewDialogForm;
 }
@@ -61,7 +61,6 @@ void ViewDialog::setVisible(bool v)
 	{
 		dialog = new DialogFrame(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->raise();
 		dialog->move(200, 100);	// TODO: put in the center of the screen
 		dialog->setVisible(true);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
@@ -155,6 +154,10 @@ void ViewDialog::setVisible(bool v)
 		connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+		
+		dialog->show();
+		dialog->raise();dialog->raise();
+		dialog->setFocus();
 	}
 	else
 	{

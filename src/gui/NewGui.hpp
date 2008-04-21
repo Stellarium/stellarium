@@ -190,7 +190,7 @@ private:
 	HelpDialog helpDialog;
 	DateTimeDialog dateTimeDialog;
 	SearchDialog searchDialog;
-	ViewDialog viewDialog;
+	ViewDialog* viewDialog;
 };
 
 #endif // _NEWGUI_H_

@@ -100,6 +100,7 @@ QString readString(QIODevice& input)
 			throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	}
 	assert(0);
+	return "";
 }
 
 QVariant readOther(QIODevice& input)
