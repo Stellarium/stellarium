@@ -68,10 +68,9 @@ public:
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
 
-	//! Set the sensor diameter and expTime. The 2 terms are multiplied to give a global scaling applied to every input luminance.
-	//! @param diameter diameter of the sensor light collecting area in m. The default is 7mm, which is the eye pupil diameter
-	//! @param expTime the sensor exposure time in second. The default is 1/30 sec
-	void setSensorCharacteristics(float area=0.007, float expTime=0.33) {globalScale=area*expTime*1968.5; lnGlobalScale=std::log(globalScale);}
+	//! Set the global scale applied to input lumiances
+	//! @param scale the global scale
+	void setGlobalScale(float scale=1.f);
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range

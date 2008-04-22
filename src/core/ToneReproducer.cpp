@@ -32,9 +32,7 @@
 ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
 {
 	// Initialize  sensor
-	// setSensorCharacteristics();
-	lnGlobalScale=0;
-	globalScale = 1;
+	setGlobalScale();
 	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
@@ -53,7 +51,15 @@ ToneReproducer::~ToneReproducer()
 {
 }
 
-
+/*********************************************************************
+ Set the global scale
+*********************************************************************/
+void ToneReproducer::setGlobalScale(float scale)
+{
+	globalScale=scale;
+	lnGlobalScale=std::log(globalScale);
+}
+	
 /*********************************************************************
  Set the eye adaptation luminance for the display (and precompute what can be)
 *********************************************************************/
