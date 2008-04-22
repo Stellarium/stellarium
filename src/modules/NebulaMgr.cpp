@@ -122,7 +122,7 @@ double NebulaMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
-	ToneReproducer* eye = core->getToneReproducer();
+//	ToneReproducer* eye = core->getToneReproducer();
 	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	Nebula::flagShowTexture = flagShowTexture;
@@ -148,7 +148,7 @@ double NebulaMgr::draw(StelCore* core)
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
 		n = static_cast<Nebula*>(*iter);
-		if (!displayNoTexture && !n->hasTex()) continue;
+		//if (!displayNoTexture) continue;
 
 		// improve performance by skipping if too small to see
 		// TODO: skip if too faint to see
@@ -158,9 +158,9 @@ double NebulaMgr::draw(StelCore* core)
 
 			if (n->angularSize>size_limit)
 			{
-				if (n->hasTex())
-					n->draw_tex(prj, nav, eye);
-				else n->draw_no_tex(prj, nav, eye);
+				//if (n->hasTex())
+				//	n->draw_tex(prj, nav, eye);
+				//else n->draw_no_tex(prj, nav, eye);
 			}
 
 			if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
@@ -243,16 +243,16 @@ StelObject* NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	try
-	{
-		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
-		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
-		loadTextures(setName);
-	}
-	catch (exception& e)
-	{
-		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
-	}
+		try
+		{
+			loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
+			loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
+			loadTextures(setName);
+		}
+		catch (exception& e)
+		{
+			qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
+		}
 }
 
 // Look for a nebulae by XYZ coords
@@ -540,11 +540,11 @@ bool NebulaMgr::loadTextures(const QString& setName)
 			Nebula *e = (Nebula*)searchNGC(NGC);
 			if (e)
 			{
-				if (!e->readTexture(setName, record)) // reading error
-				{
-					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
-				}
-				else
+// 				if (!e->readTexture(setName, record)) // reading error
+// 				{
+// 					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
+// 				}
+// 				else
 					++readOk;
 			}
 			else
@@ -557,18 +557,18 @@ bool NebulaMgr::loadTextures(const QString& setName)
 				}
 
 				e = new Nebula;
-				if (!e->readTexture(setName, record))
-				{
-					// reading error
-					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
-					delete e;
-				} 
-				else 
-				{
+// 				if (!e->readTexture(setName, record))
+// 				{
+// 					// reading error
+// 					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
+// 					delete e;
+// 				} 
+// 				else 
+// 				{
 					neb_array.push_back(e);
 					nebGrid.insert(e);
 					++readOk;
-				}
+
 			}
 	
 		}

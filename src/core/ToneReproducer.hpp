@@ -68,6 +68,11 @@ public:
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
 
+	//! Set the sensor diameter and expTime. The 2 terms are multiplied to give a global scaling applied to every input luminance.
+	//! @param diameter diameter of the sensor light collecting area in m. The default is 7mm, which is the eye pupil diameter
+	//! @param expTime the sensor exposure time in second. The default is 1/30 sec
+	void setSensorCharacteristics(float area=0.007, float expTime=0.33) {globalScale=area*expTime*1968.5; lnGlobalScale=std::log(globalScale);}
+	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
 	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2
@@ -84,7 +89,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow((float)(worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
+		return std::pow((float)(worldLuminance*globalScale*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
 	}
 
 	//! Return adapted ln(luminance) from world to display
@@ -93,7 +98,7 @@ public:
 	float sqrtAdaptLuminanceLn(float lnWorldLuminance) const
 	{
 		const float lnPix0p0001 = -8.0656104861;
-		return std::exp((lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa*0.5)*sqrtTerm2;
+		return std::exp((lnWorldLuminance+lnGlobalScale+lnPix0p0001)*alphaWaOverAlphaDa*0.5)*sqrtTerm2;
 	}
 	
 	//! Convert from xyY color system to RGB.
@@ -108,6 +113,10 @@ public:
 	static float magToLuminance(float mag, float surface);
 	
 private:
+	// The global luminance scaling
+	float globalScale;
+	float lnGlobalScale;
+	
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)
 	float oneOverMaxdL;	// 1 / Display maximum luminance (in cd/m^2)

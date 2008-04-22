@@ -78,7 +78,7 @@ public:
 	//! nebula_textures.fab file for that set.
 	//! @param setName The string name of the set of nebulas being processed
 	//! @param record The string containing the current record from nebula_textures.fab
-	bool readTexture(const QString& setName, const QString& record);
+	//bool readTexture(const QString& setName, const QString& record);
 	bool readNGC(char *record);
 
 	QString getNameI18n(void) const {return nameI18;}
@@ -101,11 +101,11 @@ public:
 	
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
-	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
+	//void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
 	void draw_name(const Projector* prj);
 	void draw_circle(const Projector* prj, const Navigator * nav);
-	bool hasTex(void) {return nebTex;}
+	//bool hasTex(void) {return nebTex;}
     
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -120,9 +120,9 @@ private:
 	Vec3d XY;                       // Store temporary 2D position
 	nebula_type nType;
 
-	STextureSP nebTex;             // Texture
-	Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
-	float luminance;                // Object luminance to use (value computed to compensate
+	//STextureSP nebTex;             // Texture
+	//Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
+	//float luminance;                // Object luminance to use (value computed to compensate
 	                                // the texture average luminosity)
 	
 	static STextureSP tex_circle;   // The symbolic circle texture

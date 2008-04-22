@@ -31,6 +31,11 @@
 *********************************************************************/
 ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
 {
+	// Initialize  sensor
+	// setSensorCharacteristics();
+	lnGlobalScale=0;
+	globalScale = 1;
+	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
 	alphaWa = 0.4f * log10Lwa + 1.519f;
