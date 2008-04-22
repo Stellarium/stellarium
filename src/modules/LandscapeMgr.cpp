@@ -184,7 +184,6 @@ void LandscapeMgr::update(double deltaTime)
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
 	eye->setWorldAdaptationLuminance(3.75+atmosphere->getAverageLuminance()*3.5);
-	//eye->setSensorCharacteristics(1./prj->getFov()/6);
 	
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;

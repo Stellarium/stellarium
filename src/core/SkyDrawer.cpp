@@ -22,6 +22,7 @@
 #include "ToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelUtils.hpp"
 
 #include <QStringList>
@@ -99,10 +100,12 @@ void SkyDrawer::update(double deltaTime)
 		if (fov < min_fov)
 			fov = min_fov;
 	}
-	lnfov_factor = std::log(108064.73f / (fov*fov));
 	
-	min_rmag = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(max_scaled_60deg_mag + 
-			mag_shift + 12.12331f)) * (108064.73f / 3600.f))) * 30.f;
+	lnfov_factor = 1;//std::log(108064.73f / (fov*fov));
+	eye->setGlobalScale(108064.73f / (60*60));
+	min_rmag =  std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(max_scaled_60deg_mag + mag_shift + 12.12331f)))) * 30.f;
+	
+	eye->setGlobalScale(108064.73f / (fov*fov));
 }
 
 void SkyDrawer::prepareDraw()
@@ -195,7 +198,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 
     // rmag:
 	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
-	rc_mag[0] = eye->sqrtAdaptLuminanceLn(-0.92103f*(mag + mag_shift + 12.12331f)+ lnfov_factor) * 30.f;
+	rc_mag[0] = eye->sqrtAdaptLuminanceLn(-0.92103f*(mag + mag_shift + 12.12331f)) * 30.f;
 
 	if (rc_mag[0] < min_rmag)
 	{
