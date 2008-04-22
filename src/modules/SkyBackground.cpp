@@ -17,15 +17,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <QDebug>
-#include <QString>
-
 #include "SkyBackground.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "Projector.hpp"
 #include "SkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
+
+#include <stdexcept>
+#include <QDebug>
+#include <QString>
 
 SkyBackground::SkyBackground(void)
 {
@@ -52,7 +54,14 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 void SkyBackground::init()
 {
 	allSkyImages.append(new SkyImageTile("/home/fab1/Desktop/allDSS/allDSS.json"));
-	
+	try
+	{
+		allSkyImages.append(new SkyImageTile(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json")));
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
+	}
 }
 
 // Draw all the multi-res images collection

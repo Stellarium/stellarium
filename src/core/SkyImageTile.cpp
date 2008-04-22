@@ -45,6 +45,8 @@
 SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
+	if (parent!=NULL)
+		luminance = parent->luminance;
 	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
 	{
 		// Assume a local file
@@ -113,6 +115,7 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 	if (parent!=NULL)
 	{
 		baseUrl = parent->getBaseUrl();
+		luminance = parent->luminance;
 	}
 	loadFromQVariantMap(map);
 }
@@ -260,6 +263,8 @@ void SkyImageTile::drawTile(StelCore* core)
 	{
 		float ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
 		glColor3f(ad_lum,ad_lum,ad_lum);
+		if (ad_lum<0.01)
+			return;
 	}
 	
 	const float factorX = tex->getCoordinates()[2][0];
@@ -280,7 +285,6 @@ void SkyImageTile::drawTile(StelCore* core)
 		int idx=N;
 		int diff = 0;
 		// Using TRIANGLE STRIP requires to use the following vertex order N-0,0,N-1,1,N-2,2 etc..
-		glColor4f(2.5,2.5,2.5,1);
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i=0;i<=N;++i)
 		{
@@ -295,11 +299,12 @@ void SkyImageTile::drawTile(StelCore* core)
 		glEnd();
 	}
 #endif
-#if 0
+#if 1
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
 	}
+	glColor3f(1.0,0.5,0.5);
 	foreach (const StelGeom::ConvexPolygon& poly, skyConvexPolygons)
 	{
 		Vec3d win;
