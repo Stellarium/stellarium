@@ -272,7 +272,6 @@ void SkyImageTile::drawTile(StelCore* core)
 
 	// Draw the real texture for this image
 	glEnable(GL_TEXTURE_2D);
-#if 1
 	for (int p=0;p<skyConvexPolygons.size();++p)
 	{
 		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
@@ -298,8 +297,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#endif
-#if 1
+#if 0
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
