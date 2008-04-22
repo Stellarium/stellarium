@@ -45,6 +45,7 @@
 #include "StelFileMgr.hpp"
 //#include "QtScriptMgr.hpp"
 #include "QtJsonParser.hpp"
+#include "SkyBackground.hpp"
 
 #include <iostream>
 #include <QStringList>
@@ -261,6 +262,11 @@ void StelApp::init()
 	MilkyWay* milky_way = new MilkyWay();
 	milky_way->init();
 	getModuleMgr().registerModule(milky_way);
+	
+	// Init sky background
+	SkyBackground* skyBackground = new SkyBackground();
+	skyBackground->init();
+	getModuleMgr().registerModule(skyBackground);
 	
 	// Telescope manager
 	TelescopeMgr* telescope_mgr = new TelescopeMgr();
