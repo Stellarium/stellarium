@@ -170,6 +170,7 @@ double Nebula::getCloseViewFov(const Navigator*) const
 	return angularSize * 4;
 }
 
+#if 0
 // Read nebula data from file and compute x,y and z;
 // returns false if can't parse record
 bool Nebula::readTexture(const QString& setName, const QString& record)
@@ -192,8 +193,8 @@ bool Nebula::readTexture(const QString& setName, const QString& record)
 
 	if (credit  == "none")
 		credit = "";
-	else
-		credit = "Credit: " + credit;
+	//else
+	//	credit = "Credit: " + credit;
 
 	credit.replace('_', " ");
 
@@ -236,7 +237,7 @@ bool Nebula::readTexture(const QString& setName, const QString& record)
 	tex_quad_vertex[3] = matPrecomp * Vec3f(0.,-texSize, texSize);
 	tex_quad_vertex[2] = matPrecomp * Vec3f(0., texSize, texSize);
 
-#if 0
+#if 1
 	QString outJSON;
 
 	Vec3d vv[4];
@@ -260,12 +261,20 @@ bool Nebula::readTexture(const QString& setName, const QString& record)
 		if (i!=3)
 			outJSON+=", ";
 	}
+	float texLum;
+	if (!nebTex->getAverageLuminance(texLum))
+	{
+		qWarning() << "Use undefined texture luminance";
+	}
+	float cmag = 3. * luminance / texLum;
 	outJSON += QString("]],\n\
 \t\"textureCoords\" : [[[0,0], [1,0], [1,1], [0,1]]],\n\
 \t\"minResolution\" : %1,\n\
 \t\"luminance\" : %2\n\
-},\n").arg(resolution, 0, 'g', 10).arg(luminance, 0, 'g', 8);
-	//std::cout << outJSON.toStdString();
+},\n").arg(resolution, 0, 'g', 10).arg(cmag, 0, 'g', 8);
+	//QFile f("coucou.txt");
+	//f.open(QIODevice::Append);
+	//f.write(outJSON.toUtf8());
 #endif
 					   
 	return true;
@@ -317,7 +326,8 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer
 		prj->drawVertex3v(tex_quad_vertex[2]);
     glEnd();
 }
-
+#endif
+						   
 void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (4.f/getOnScreenSize(prj, nav)<0.1) return;
@@ -401,9 +411,9 @@ bool Nebula::readNGC(char *recordstr)
 	if (size < 0)
 		size = 1;
 
-	luminance = ToneReproducer::magToLuminance(mag, size*size*3600);
-	if (luminance < 0)
-		luminance = .0075;
+// 	luminance = ToneReproducer::magToLuminance(mag, size*size*3600);
+// 	if (luminance < 0)
+// 		luminance = .0075;
 
 	// this is a huge performance drag if called every frame, so cache here
 	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
