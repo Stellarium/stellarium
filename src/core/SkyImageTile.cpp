@@ -42,11 +42,14 @@
 #endif
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (parent!=NULL)
+	{
 		luminance = parent->luminance;
+		alphaBlend = parent->alphaBlend;
+	}
 	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
 	{
 		// Assume a local file
@@ -116,6 +119,7 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 	{
 		baseUrl = parent->getBaseUrl();
 		luminance = parent->luminance;
+		alphaBlend = parent->alphaBlend;
 	}
 	loadFromQVariantMap(map);
 }
@@ -272,6 +276,10 @@ void SkyImageTile::drawTile(StelCore* core)
 
 	// Draw the real texture for this image
 	glEnable(GL_TEXTURE_2D);
+	if (alphaBlend==true)
+		glEnable(GL_BLEND);
+	else
+		glDisable(GL_BLEND);
 	for (int p=0;p<skyConvexPolygons.size();++p)
 	{
 		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
@@ -342,6 +350,11 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		luminance = map.value("luminance").toDouble(&ok);
 		if (!ok)
 			throw std::runtime_error("luminance expect a float value");
+	}
+	
+	if (map.contains("alphaBlend"))
+	{
+		alphaBlend = map.value("alphaBlend").toBool();
 	}
 	
 	// Load the convex polygons (if any)

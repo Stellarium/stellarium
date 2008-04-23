@@ -103,6 +103,9 @@ private:
 	// The image luminance in cd/m^2
 	float luminance;
 	
+	// Whether the texture must be blended
+	bool alphaBlend;
+	
 	// The texture of the tile
 	STextureSP tex;
 	// True if the tile is just a list of other tiles without texture for itself
