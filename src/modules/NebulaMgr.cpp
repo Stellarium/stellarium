@@ -51,8 +51,6 @@ void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
 const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circle_color;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
-void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
-bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
 
 NebulaMgr::NebulaMgr(void) : nebGrid(10000), displayNoTexture(false)
@@ -104,14 +102,12 @@ void NebulaMgr::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
-	setFlagShowTexture(true);
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setMaxMagHints(conf->value("astro/max_mag_nebula_name", 99).toDouble());
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toDouble());
 	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
-	setFlagBright(conf->value("astro/flag_bright_nebulae",false).toBool());
-	
+
 	updateI18n();
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
@@ -122,10 +118,8 @@ double NebulaMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
-//	ToneReproducer* eye = core->getToneReproducer();
 	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
-	Nebula::flagShowTexture = flagShowTexture;
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -148,26 +142,13 @@ double NebulaMgr::draw(StelCore* core)
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
 		n = static_cast<Nebula*>(*iter);
-		//if (!displayNoTexture) continue;
 
 		// improve performance by skipping if too small to see
-		// TODO: skip if too faint to see
 		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
 		{
 			prj->project(n->XYZ,n->XY);
-
-			if (n->angularSize>size_limit)
-			{
-				//if (n->hasTex())
-				//	n->draw_tex(prj, nav, eye);
-				//else n->draw_no_tex(prj, nav, eye);
-			}
-
-			if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
-			{
-				n->draw_name(prj);
-				n->draw_circle(prj, nav);
-			} 
+			n->draw_name(prj);
+			n->draw_circle(prj, nav);
 		}
 	}
 	drawPointer(prj, nav);
@@ -247,7 +228,6 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		{
 			loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
 			loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
-			loadTextures(setName);
 		}
 		catch (exception& e)
 		{
@@ -270,7 +250,7 @@ StelObject* NebulaMgr::search(Vec3f Pos)
 			plusProche=(*iter);
 		}
 	}
-	if (anglePlusProche>Nebula::RADIUS_NEB*0.999)
+	if (anglePlusProche>0.999)
 	{
 		return plusProche;
 	}
@@ -490,99 +470,6 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	return true;
 }
 
-bool NebulaMgr::loadTextures(const QString& setName)
-{
-	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
-	qDebug() << "Loading nebula texture set" << setName;
-	QString texFile;
-	try
-	{
-		texFile = StelApp::getInstance().getFileMgr().findFile("nebulae/"+setName+"/nebula_textures.fab");
-		QFile inFile(texFile);
-		if (!inFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			throw (runtime_error("cannot open file for reading"));
-		}
-
-		QTextStream in(&inFile);
-		in.setCodec("UTF-8");
-		// count input lines (for progress bar)
-		int totalRecords = 0;
-		QString record;
-		QRegExp commentRx("^(\\s*#.*|\\s*)$");
-		while (!in.atEnd()) 
-		{
-			record = in.readLine();
-			if (!commentRx.exactMatch(record))
-				totalRecords++;
-		}
-
-		in.reset();
-		inFile.seek(0);
-
-		int currentRecord = 0;
-		int currentLineNumber = 0;
-		int readOk = 0;
-		int NGC;
-		while (!in.atEnd()) 
-		{
-			record = in.readLine();
-			++currentLineNumber;
-			if (commentRx.exactMatch(record))
-				continue;
-
-			++currentRecord;
-			lb.SetMessage(q_("Loading Nebula Textures:%1/%2").arg(currentRecord).arg(totalRecords));
-			lb.Draw((float)currentRecord/totalRecords);
-			QTextStream istr(&record);
-			istr >> NGC;
-
-			Nebula *e = (Nebula*)searchNGC(NGC);
-			if (e)
-			{
-// 				if (!e->readTexture(setName, record)) // reading error
-// 				{
-// 					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
-// 				}
-// 				else
-					++readOk;
-			}
-			else
-			{
-				// Allow non NGC nebulas/textures!
-				if (NGC != -1)
-				{
-					qWarning() << "Nebula with unrecognized NGC number (" << NGC << ") at line " 
-					           << currentLineNumber << setName << "/" << e->englishName;
-				}
-
-				e = new Nebula;
-// 				if (!e->readTexture(setName, record))
-// 				{
-// 					// reading error
-// 					qWarning() << "ERROR reading nebula record at line " << currentLineNumber << setName << "/" << e->englishName;
-// 					delete e;
-// 				} 
-// 				else 
-// 				{
-					neb_array.push_back(e);
-					nebGrid.insert(e);
-					++readOk;
-
-			}
-	
-		}
-		inFile.close();
-
-		qDebug() << "Loaded " << readOk << "/" << totalRecords << "nebula textures successfully from set" << setName;
-		return true;	
-	}
-	catch (exception& e)
-	{
-		qWarning() << "ERROR: unable to load nebula texture set \"" << setName << "\": " << e.what();
-		return false;		
-	}
-}
 
 void NebulaMgr::updateI18n()
 {

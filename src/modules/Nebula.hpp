@@ -73,12 +73,6 @@ public:
 	void setLabelColor(const Vec3f& v) {label_color = v;}
 	void setCircleColor(const Vec3f& v) {circle_color = v;}
 
-	//! reads a texture into memory
-	//! read a nebula texture for a given nebula set and record of the
-	//! nebula_textures.fab file for that set.
-	//! @param setName The string name of the set of nebulas being processed
-	//! @param record The string containing the current record from nebula_textures.fab
-	//bool readTexture(const QString& setName, const QString& record);
 	bool readNGC(char *record);
 
 	QString getNameI18n(void) const {return nameI18;}
@@ -96,9 +90,6 @@ public:
 		return angularSize * (prj->getViewportHeight()/prj->getFov());
 	}
 
-	//! Get the convex polygon matching the nebula image in J2000 frame
-//	StelGeom::ConvexPolygon getConvexPolygon() {return StelGeom::ConvexPolygon(tex_quad_vertex[0], tex_quad_vertex[1], tex_quad_vertex[2], tex_quad_vertex[3]);}
-	
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
 	//void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
@@ -113,7 +104,6 @@ private:
 	//unsigned int UGC_nb;            // Uppsala General  Catalog number
 	QString englishName;             // English name
 	QString nameI18;                // Nebula name
-	QString credit;                  // Nebula image credit
 	float mag;                      // Apparent magnitude
 	float angularSize;             // Angular size in degree
 	Vec3f XYZ;                      // Cartesian equatorial position
@@ -124,17 +114,12 @@ private:
 	//Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
 	//float luminance;                // Object luminance to use (value computed to compensate
 	                                // the texture average luminosity)
-	
 	static STextureSP tex_circle;   // The symbolic circle texture
 	static SFont* nebula_font;      // Font used for names printing
 	static float hints_brightness;
 
 	static Vec3f label_color, circle_color;
 	static float circleScale;       // Define the scaling of the hints circle
-	static bool flagBright;         // Define if nebulae must be drawn in bright mode
-	static bool flagShowTexture;    // Define if textures must be drawn
-	
-	static const float RADIUS_NEB;
 };
 
 #endif // _NEBULA_H_

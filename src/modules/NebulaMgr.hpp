@@ -141,22 +141,10 @@ public slots:
 	//! Get current value of the nebula circle color.
 	const Vec3f &getCirclesColor(void) const;
 	
-	//! Set flag for displaying nebulae as bright to show all details.
-	//! Turning on the bright flag turns off magnitude compensation when rendering nebulae.
-	void setFlagBright(bool b);
-	//! Get whether we display nebulae as bright to show all details.
-	//! Turning on the bright flag turns off magnitude compensation when rendering nebulae.
-	bool getFlagBright(void) const;
-	
 	//! Set flag for displaying nebulae even without textures.
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
 	//! Get flag for displaying nebulae without textures.
 	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
-	
-	//! Display textures for nebulae which have one.
-	void setFlagShowTexture(bool b) {flagShowTexture = b;}
-	//! Get whether textures are displayed for nebulas which have one.
-	bool getFlagShowTexture(void) const {return flagShowTexture;}	
 	
 	//! Set maximum magnitude at which nebulae hints are displayed.
 	void setMaxMagHints(float f) {maxMagHints = f;}
@@ -164,7 +152,6 @@ public slots:
 	float getMaxMagHints(void) const {return maxMagHints;}
 	
 private:
-	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	StelObject* search(const QString& name);
 	
@@ -186,22 +173,15 @@ private:
 	Nebula *searchIC(unsigned int IC);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCNames(const QString& fileName);
-	
-	//! loads the textures for a specified nebula texture setName
-	//! @param setName The name of the sub-directory in .../nebulae in which the set resides
-	//! @param lb the loading progress bar object
-	bool loadTextures(const QString& setName);
 
 	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
 	TreeGrid nebGrid;
-	//SimpleGrid nebGrid;
 	
 	float maxMagHints;			// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
-	bool flagShowTexture;			// Define if nebula textures are displayed
 	
 	STextureSP texPointer;			// The selection pointer texture
 };
