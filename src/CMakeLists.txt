@@ -267,8 +267,10 @@ SET(stellarium_MOC_HDRS
 )
 
 # After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
-QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS} ${stellarium_UIS_H})
+QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
 
+# Dummy target depending on ${stellarium_UIS_H} to trigger ui compilations
+ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
