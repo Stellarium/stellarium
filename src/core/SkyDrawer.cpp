@@ -101,11 +101,14 @@ void SkyDrawer::update(double deltaTime)
 			fov = min_fov;
 	}
 	
-	lnfov_factor = 1;//std::log(108064.73f / (fov*fov));
-	eye->setGlobalScale(108064.73f / (60*60));
-	min_rmag =  std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(max_scaled_60deg_mag + mag_shift + 12.12331f)))) * 30.f;
+	// Temporary use a fake 60 deg fov to compute min rmag
+	lnfov_factor = std::log(108064.73f / (60*60));
+	//eye->setGlobalScale(100.*60./60);
+	min_rmag =  std::sqrt(eye->adaptLuminance(pointSourceMagToLuminance(max_scaled_60deg_mag)))*30;
 	
-	eye->setGlobalScale(108064.73f / (fov*fov));
+	// Set the fov factor for point source luminance computation
+	lnfov_factor = std::log(108064.73f / (fov*fov));
+	//eye->setGlobalScale(100.*60./fov);
 }
 
 void SkyDrawer::prepareDraw()
@@ -187,6 +190,12 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 	return 0;
 }
 
+// Compute the log of the luminance for a point source with the given mag for the current FOV
+float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
+{
+	return -0.92103f*(mag + mag_shift + 12.12331f) + lnfov_factor;
+}
+	
 // Compute RMag and CMag from magnitude.
 int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 {
@@ -198,7 +207,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 
     // rmag:
 	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
-	rc_mag[0] = eye->sqrtAdaptLuminanceLn(-0.92103f*(mag + mag_shift + 12.12331f)) * 30.f;
+	rc_mag[0] = eye->sqrtAdaptLuminanceLn(pointSourceMagToLnLuminance(mag))*30;
 
 	if (rc_mag[0] < min_rmag)
 	{

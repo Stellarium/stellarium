@@ -148,6 +148,17 @@ public:
 	}
 	
 private:
+	
+	//! Compute the luminance for a point source with the given mag for the current FOV
+	//! @param mag V magnitude of the point source
+	//! @return the luminance in log(cd/m^2)
+	inline float pointSourceMagToLuminance(float mag) const {return std::exp(pointSourceMagToLnLuminance(mag));}
+	
+	//! Compute the log of the luminance for a point source with the given mag for the current FOV
+	//! @param mag V magnitude of the point source
+	//! @return the luminance in cd/m^2
+	inline float pointSourceMagToLnLuminance(float mag) const;
+	
 	Projector* prj;
 	ToneReproducer* eye;
 	float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag, min_rmag, lnfov_factor;
