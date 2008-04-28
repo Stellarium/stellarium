@@ -118,7 +118,7 @@ public:
 	const STextureSP getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;

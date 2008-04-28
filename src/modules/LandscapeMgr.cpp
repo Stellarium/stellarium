@@ -128,10 +128,10 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 void Cardinals::updateI18n()
 {
 	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	sNorth = trans.translate("N");
-	sSouth = trans.translate("S");
-	sEast = trans.translate("E");
-	sWest = trans.translate("W");	
+	sNorth = trans.qtranslate("N");
+	sSouth = trans.qtranslate("S");
+	sEast = trans.qtranslate("E");
+	sWest = trans.qtranslate("W");	
 	font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 

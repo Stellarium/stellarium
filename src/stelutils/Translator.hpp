@@ -29,7 +29,6 @@
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
-#define _(String) Translator::globalTranslator.translate( gettext_noop(String) ).c_str()
 #define q_(String) Translator::globalTranslator.qtranslate( gettext_noop(String) )
 #define N_(String) gettext_noop(String)
 
@@ -46,24 +45,13 @@ public:
 	//! If the passed locale name cannot be handled by the system, default value will be used.
 	//! The passed language name is a language code string like "fr" or "fr_FR".
 	//! This class wrap gettext to simulate an object oriented multiplateform gettext UTF8 translator
-	//! @param _domain The name of the domain to use for translation
-	//! @param _moDirectory The directory where to look for the domain.mo translation files.
-	//! @param _langName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
-	Translator(const QString& _domain, const QString& _moDirectory, const QString& _langName) :
-			domain(_domain), moDirectory(_moDirectory), langName(_langName)
+	//! @param adomain The name of the domain to use for translation
+	//! @param amoDirectory The directory where to look for the domain.mo translation files.
+	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
+	Translator(const QString& adomain, const QString& amoDirectory, const QString& alangName) :
+			domain(adomain), moDirectory(amoDirectory), langName(alangName)
 	{
 		Translator::lastUsed = NULL;
-	}
-
-	//! Translate input message.
-	//! @param s input string in english.
-	//! @return The translated string in wide characters.
-	//! @deprecated Use qtranslate instead
-	QString translate(const QString& s)
-	{
-		if (s.isEmpty()) return "";
-		reload();
-		return QString::fromUtf8(gettext(s.toLocal8Bit()));
 	}
 	
 	//! Translate input message and return it as a QString.
