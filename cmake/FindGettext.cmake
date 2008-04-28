@@ -29,10 +29,9 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 	# Update message strings from the code [TODO: run even if pot file exists!]
 	ADD_CUSTOM_COMMAND( 
     	OUTPUT ${_absPotFile}
-        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --qt --keyword=N_ -C --default-domain=stellarium --directory=${PROJECT_SOURCE_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Fabien Chereau et al"  
+        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --qt --keyword=N_ --keyword=translate:2 -C --default-domain=${_potBaseName} --directory=${PROJECT_SOURCE_DIR} --directory=${CMAKE_BINARY_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Fabien Chereau et al"  
         DEPENDS POTFILES.in
     )
-
 
    SET(_addToAll)
    IF(${_firstPoFile} STREQUAL "ALL")
@@ -48,7 +47,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
       ADD_CUSTOM_COMMAND( 
          OUTPUT ${_gmoFile} 
-         COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
+         COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update -m --backup=none -s ${_absFile} ${_absPotFile}
          COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
          DEPENDS ${_absPotFile} ${_absFile} 
       )
@@ -58,7 +57,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
    ENDFOREACH (_currentPoFile )
 
-   ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS stellarium.pot ${_gmoFiles})
+   ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_potFile} ${_gmoFiles})
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 
