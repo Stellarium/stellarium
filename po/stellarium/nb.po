@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-07 17:48+0100\n"
+"POT-Creation-Date: 2008-04-29 01:00+0200\n"
 "PO-Revision-Date: 2007-10-11 03:11+0000\n"
 "Last-Translator: Geir Håkon Eikland\n"
 "Language-Team: \n"
@@ -20,576 +20,122 @@ msgstr ""
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
-#: src/deprecated/stel_ui.cpp:734
-msgid ""
-"   Please check for newer versions and send bug reports\n"
-"    and comments to us at: http://www.stellarium.org\n"
-"\n"
-msgstr ""
-"   Sjekk om det finnes en nyere versjon før du melder\n"
-"    feil eller kommentarer til oss på: http://www.stellarium.org\n"
-"\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:168
 msgid " Light Years"
 msgstr " lysår"
 
-#: src/deprecated/stel_ui_conf.cpp:1044
-msgid ": Exceptional Leonid rate"
-msgstr ": Uvanlig antall leonid meteorsverm"
+#: src/ui_viewDialog.h:1280
+msgid "10"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1051
-msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Høyeste antall (1966 Leonider)"
+#: src/ui_viewDialog.h:1282
+#, fuzzy
+msgid "10000"
+msgstr "J2000"
 
-#: src/deprecated/stel_ui_conf.cpp:1030
-msgid ": Normal rate"
-msgstr ": Normalt antall"
+#: src/ui_viewDialog.h:1283
+msgid "144000"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1037
-msgid ": Standard Perseids rate"
-msgstr ": Vanlig antall i perseid meteorsverm"
+#: src/ui_viewDialog.h:1281
+msgid "80"
+msgstr ""
 
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/ui_viewDialog.h:1275
+msgid ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
+"html>"
+msgstr ""
+
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
 msgid "AU"
 msgstr "AE"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:403
-msgid "Actual Time"
-msgstr "Faktisk tid"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:385
-msgid "Administration "
-msgstr "Administrasjon "
-
-#: src/deprecated/stel_ui_conf.cpp:152
-msgid "Also display Nebulas without textures"
-msgstr "Vis også stjernetåker uten bilder"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:390
-msgid "Altitude (m): "
-msgstr "Høyde (m): "
-
-#: src/deprecated/stel_ui_conf.cpp:347
-msgid "Altitude : "
-msgstr "Høyde : "
-
-#: src/translations.h:81
-msgid "Andromeda"
-msgstr "Andromeda"
-
-#: src/translations.h:341
-msgid "Animal"
-msgstr "Dyr"
-
-#: src/translations.h:133
-msgid "Antlia"
-msgstr "Luftpumpen"
-
-#: src/translations.h:137
-msgid "Apus"
-msgstr "Paradisfuglen"
-
-#: src/translations.h:166
-msgid "Aquarius"
-msgstr "Vannmannen"
-
-#: src/translations.h:80
-msgid "Aquila"
-msgstr "Ørnen"
-
-#: src/translations.h:83
-msgid "Ara"
-msgstr "Alteret"
-
-#: src/deprecated/s_tui.h:292
-msgid "Are you sure ?"
+#: src/ui_viewDialog.h:1290
+msgid "Amount:"
 msgstr ""
 
-#: src/translations.h:86
-msgid "Aries"
-msgstr "Væren"
+#: src/ui_viewDialog.h:1304
+msgid "Apollo"
+msgstr ""
 
-#: src/deprecated/stel_ui_tuiconf.cpp:638
-msgid "Arrow down to load list."
-msgstr "Pil ned for å vise liste."
+#: src/ui_viewDialog.h:1322
+msgid "Art brightness: "
+msgstr ""
 
-#: src/translations.h:246
-msgid "Arsenal"
-msgstr "Arsenal"
-
-#: src/deprecated/stel_ui_conf.cpp:223
-msgid "Atmosphere"
-msgstr "Atmosfære"
-
-#: src/deprecated/stel_ui.cpp:686
-msgid "Atmosphere [A]"
-msgstr "Atmosfære [A]"
-
-#: src/translations.h:100
-msgid "Auriga"
-msgstr "Kusken"
-
-#: src/translations.h:316
-msgid "Aurvandil's Toe"
-msgstr "Aurvandils tå"
-
-#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
-msgid "Author: "
-msgstr "Forfatter: "
-
-#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:118
 msgid "Az/Alt: "
 msgstr "Asimut/høyde: "
 
-#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
-msgid "Azimuthal Grid"
+#: src/ui_viewDialog.h:1310
+#, fuzzy
+msgid "Azimutal grid"
 msgstr "Planprojesert rutenett"
-
-#: src/deprecated/stel_ui.cpp:678
-msgid "Azimuthal Grid [Z]"
-msgstr "Planprojisert/asimutalt rutenett [Z]"
-
-#: src/translations.h:294
-msgid "Bailer"
-msgstr "Øser"
-
-#: src/translations.h:291
-msgid "Banner of Three Stars"
-msgstr "Det trestjernede banner"
-
-#: src/translations.h:348
-msgid "Bear's Lodge"
-msgstr "Bjørnehi"
-
-#: src/translations.h:176
-msgid "Bird"
-msgstr "Fugl"
-
-#: src/translations.h:333
-msgid "Blubber Container"
-msgstr "Speklager"
-
-#: src/translations.h:180 src/translations.h:251
-msgid "Boat"
-msgstr "Båt"
-
-#: src/translations.h:279
-msgid "Bond"
-msgstr "Bånd"
-
-#: src/translations.h:89
-msgid "Bootes"
-msgstr "Bjørnevokteren"
-
-#: src/translations.h:255
-msgid "Bow and Arrow"
-msgstr "Pil og bue"
-
-#: src/translations.h:331
-msgid "Breastbone"
-msgstr "Ribbein"
-
-#: src/translations.h:171
-msgid "Bull's Foreleg"
-msgstr "Forbeinet til okse"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:458
-msgid "CD/DVD Script: "
-msgstr "CD/DVD skript: "
-
-#: src/deprecated/stel_ui.cpp:816
-msgid "CMD + Q : Quit\n"
-msgstr "CMD+Q: Avslutt\n"
-
-#: src/deprecated/stel_ui.cpp:814
-msgid "CTRL + Q : Quit\n"
-msgstr "Ctrl+Q : Avslutt\n"
-
-#: src/translations.h:90
-msgid "Caelum"
-msgstr "Meiselen"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:399
-msgid "Calendar"
-msgstr "Kalender"
 
 #: src/translations.h:45
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/translations.h:117
-msgid "Camelopardalis"
-msgstr "Giraffen"
-
-#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: src/translations.h:92
-msgid "Cancer"
-msgstr "Krepsen"
-
-#: src/translations.h:99
-msgid "Canes Venatici"
-msgstr "Jakthundene"
-
-#: src/translations.h:118
-msgid "Canis Major"
-msgstr "Den store hund"
-
-#: src/translations.h:145
-msgid "Canis Minor"
-msgstr "Den lille hund"
-
-#: src/translations.h:93
-msgid "Capricornus"
-msgstr "Steinbukken"
-
-#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
-msgid "Cardinal Points"
-msgstr "Himmelretninger"
-
-#: src/deprecated/stel_ui.cpp:684
-msgid "Cardinal Points [Q]"
-msgstr "Himmelretninger [Q]"
-
-#: src/translations.h:302
-msgid "Cared for by Moon"
-msgstr "Tatt hånd om av månen"
-
-#: src/translations.h:329
-msgid "Caribou"
-msgstr "Reinsdyr"
-
-#: src/translations.h:94
-msgid "Carina"
-msgstr "Kjølen"
-
-#: src/translations.h:95
-msgid "Cassiopeia"
-msgstr "Kassiopeia"
-
-#: src/translations.h:295
-msgid "Cat's Cradle"
-msgstr "Katteseng"
-
-#: src/translations.h:96
-msgid "Centaurus"
-msgstr "Kentauren"
-
-#: src/translations.h:97
-msgid "Cepheus"
-msgstr "Kefeus"
-
-#: src/translations.h:85
-msgid "Cetus"
-msgstr "Hvalfisken"
-
-#: src/translations.h:91
-msgid "Chamaeleon"
-msgstr "Kameleonen"
-
-#: src/translations.h:205
-msgid "Chariot"
-msgstr "Stridsvogn"
-
-#: src/translations.h:260
-msgid "Chariot Yard"
-msgstr "Stridsvognplass"
+#: src/ui_viewDialog.h:1314
+#, fuzzy
+msgid "Cardinal points"
+msgstr "Kardinalpunkter "
 
 #: src/translations.h:59
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:195
-msgid "Chematy"
-msgstr "Chematy"
-
 #: src/translations.h:69
 msgid "Chinese"
 msgstr "Kinesisk"
 
-#: src/deprecated/stel_ui_conf.cpp:428
-msgid "Choose landscapes:"
-msgstr "Velg landskap:"
+#: src/ui_searchDialogGui.h:225
+#, fuzzy
+msgid "Completions"
+msgstr "Tomhet"
 
-#: src/translations.h:102
-msgid "Circinus"
-msgstr "Passeren"
+#: src/ui_viewDialog.h:1317
+#, fuzzy
+msgid "Constellations"
+msgstr "Stjernebilder"
 
-#: src/translations.h:243
-msgid "Circular Granary"
-msgstr "Rundt kornkammer"
-
-#: src/translations.h:203
-msgid "Coiled Thong"
-msgstr "Tvunnet lærreim"
-
-#: src/translations.h:327
-msgid "Collarbones"
-msgstr "Kravebein"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:382
-msgid "Colors "
-msgstr "Farger "
-
-#: src/translations.h:101
-msgid "Columba"
-msgstr "Duen"
-
-#: src/translations.h:98
-msgid "Coma Berenices"
-msgstr "Berenikes hår"
-
-#: src/deprecated/stel_ui.cpp:1037
-msgid "Command recording stopped."
-msgstr "Registrering av kommandoer er stoppet."
-
-#: src/deprecated/stel_ui_conf.cpp:60
-msgid "Configuration"
-msgstr "Innstillinger"
-
-#: src/deprecated/stel_ui.cpp:694
-msgid "Configuration window [1]"
-msgstr "Innstillinger [1]"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:427
-msgid "Constellation Art Intensity"
-msgstr "Intensitet til stjernebilder - grafikk"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:428
-msgid "Constellation Boundaries"
-msgstr "Grenser til stjernebilder"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:425
-msgid "Constellation Lines"
-msgstr "Linjer i stjernebilder"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:426
-msgid "Constellation Names"
-msgstr "Navn på stjernebilder"
-
-#: src/deprecated/stel_ui.cpp:676
-msgid "Constellations Art [R]"
-msgstr "Stjernebilder - grafikk [R]"
-
-#: src/deprecated/stel_ui_conf.cpp:123
-msgid "Constellations Boundaries"
-msgstr "Grenser til stjernebildene"
-
-#: src/deprecated/stel_ui_conf.cpp:113
-msgid "Constellations Lines"
-msgstr "Strektegnede stjernebilder"
-
-#: src/deprecated/stel_ui_conf.cpp:118
-msgid "Constellations Names"
-msgstr "Navn på stjernebilder"
-
-#: src/translations.h:104
-msgid "Corona Australis"
-msgstr "Den sydlige krone"
-
-#: src/translations.h:105
-msgid "Corona Borealis"
-msgstr "Den nordlige krone"
-
-#: src/translations.h:106
-msgid "Corvus"
-msgstr "Ravnen"
-
-#: src/translations.h:103
-msgid "Crater"
-msgstr "Begeret"
-
-#: src/translations.h:181
-msgid "Crocodile"
-msgstr "Krokodille"
-
-#: src/translations.h:107
-msgid "Crux"
-msgstr "Sydkorset"
-
-#: src/deprecated/stel_ui_conf.cpp:270
-msgid "Current Time :"
-msgstr "Gjeldende tid :"
-
-#: src/deprecated/stel_ui_conf.cpp:1082
-msgid "Current Time Speed is x"
-msgstr "Klokkehastigheten er nå x"
-
-#: src/deprecated/stel_ui_conf.cpp:321
-msgid "Cursor : "
+#: src/ui_locationDialogGui.h:269
+#, fuzzy
+msgid "Cursor :"
 msgstr "Angitt sted : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:451
-msgid "Cursor Timeout: "
-msgstr "Markør fjernes etter: "
-
-#: src/translations.h:202
-msgid "Curved Array"
-msgstr "Bøyd pil"
-
-#: src/translations.h:108
-msgid "Cygnus"
-msgstr "Svanen"
-
-#: src/deprecated/stel_ui_conf.cpp:535
-msgid "Date & Time"
+#: src/ui_dateTimeDialogGui.h:124
+#, fuzzy
+msgid "Date and Time"
 msgstr "Dato og tid"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:406
-msgid "Date Display Format: "
-msgstr "Visning av dato: "
-
-#: src/deprecated/s_gui.cpp:2747
-msgid "Day"
-msgstr "Dag"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:398
-msgid "Day keys: "
-msgstr "Info om dagen: "
-
-#: src/deprecated/stel_ui.cpp:719
-msgid "Decrease Time Speed [J]"
-msgstr "Reduser klokkehastighet [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/translations.h:109
-msgid "Delphinus"
-msgstr "Delfinen"
-
-#: src/deprecated/stel_ui.cpp:788
-msgid ""
-"Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"CTRL + G : Goto selected solar system object\n"
-"\n"
-msgstr ""
-"Vinduer & andre valg:\n"
-"H : Hjelp                            1 : Innstillinger\n"
-"I : Om Stellarium                    M : Tekstmeny (avanserte "
-"innstillinger)\n"
-"Ctrl + S : Kopiere skjermbildet\n"
-"Ctrl + R : Registrering av skript\n"
-"Ctrl + F : Søke etter objekt\n"
-"Ctrl + G : Gå til valgt objekt i solsystemet\n"
-"\n"
-
-#: src/translations.h:310
-msgid "Dilyehe"
-msgstr "Dilyehe"
-
 #: src/translations.h:50
 msgid "Dione"
 msgstr "Dione"
 
-#: src/translations.h:208 src/translations.h:339
-msgid "Dipper"
-msgstr "Øse"
-
-#: src/deprecated/stel_ui_conf.cpp:398
-msgid "Disk Viewport"
-msgstr "Linseformet visning"
-
-#: src/deprecated/stel_ui.cpp:776
-msgid ""
-"Display options:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen / window.\n"
-"C   : Constellation lines       V   : Constellation labels\n"
-"R   : Constellation art         E   : Equatorial grid\n"
-"Z   : Azimuthal grid            N   : Nebula labels\n"
-"P   : Planet labels             G   : Ground\n"
-"A   : Atmosphere                F   : Fog\n"
-"Q   : Cardinal points           O   : Toggle moon scaling\n"
-"T   : Object tracking           S   : Stars\n"
-"4 , : Ecliptic line             5 . : Equator line\n"
-"\n"
-msgstr ""
-"Valg for visning:\n"
-"ENTER : Sylinder-/planprojesert visning\n"
-"F1 : Bytt mellom hel skjerm og vindu.\n"
-"C : Strektegning av stjernebildene   V : Navn på stjernebildene\n"
-"R : Stjernebilder                    N : Navn på stjernetåker\n"
-"Z : Planprojeserte ruter (azimutial) E : Sylinderprojeserte (ekvatorial)\n"
-"P : Navn på planeter                 G : Horisont\n"
-"A : Atmosfære                        F : Tåke\n"
-"Q : Kardinalpunkter                  O : Bytt skalering av månen\n"
-"T : Følge objekt                     S : Stjerner\n"
-"4 , : Ekliptisk linje                5 . : Ekvatorlinje\n"
-"\n"
-
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
+#: src/modules/StarWrapper.cpp:125 src/modules/StarWrapper.cpp:167
 msgid "Distance: "
 msgstr "Avstand: "
 
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Do"
+#: src/ui_viewDialog.h:1271
+msgid "Download images"
 msgstr ""
 
-#: src/translations.h:253
-msgid "Dog"
-msgstr "Hund"
-
-#: src/translations.h:326
-msgid "Dogs"
-msgstr "Hunder"
-
-#: src/translations.h:303
-msgid "Dolphin"
-msgstr "Delfin"
-
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Done"
-msgstr ""
-
-#: src/translations.h:110
-msgid "Dorado"
-msgstr "Gullfisken (sverdfisken)"
-
-#: src/translations.h:111
-msgid "Draco"
-msgstr "Dragen"
-
-#: src/deprecated/stel_ui.cpp:672
-msgid "Drawing of the Constellations [C]"
-msgstr "Stjernebilder - strek [C]"
-
-#: src/translations.h:344
-msgid "Dried Willow"
-msgstr "Tørket piletre"
-
-#: src/translations.h:209
-msgid "Drum"
-msgstr "Tromme"
-
-#: src/translations.h:278
-msgid "Drumstick"
-msgstr "Trommestikke"
-
-#: src/deprecated/stel_ui.cpp:804
-msgid ""
-"During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
-msgstr ""
-"Under avspilling av skript:\n"
-"Ctrl+C : Avslutt skript\n"
-"6 : Pause skript                     K : Fortsett skript\n"
-"\n"
-
-#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
+#: src/translations.h:65
 msgid "E"
 msgstr "Ø"
 
@@ -597,266 +143,70 @@ msgstr "Ø"
 msgid "Earth"
 msgstr "Jorda"
 
-#: src/translations.h:254
-msgid "Earth God's Temple"
-msgstr "Jordgudens tempel"
-
-#: src/translations.h:282
-msgid "Eastern Door"
-msgstr "Østre dør"
-
-#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
-msgid "Ecliptic Line"
+#: src/ui_viewDialog.h:1312
+#, fuzzy
+msgid "Ecliptic line"
 msgstr "Ekliptisk linje"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:383
-msgid "Effects "
-msgstr "Effekter "
 
 #: src/translations.h:70
 msgid "Egyptian"
 msgstr "Egyptisk"
 
-#: src/translations.h:342
-msgid "Elk"
-msgstr "Elg"
-
-#: src/translations.h:266
-msgid "Emptiness"
-msgstr "Tomhet"
-
-#: src/translations.h:263
-msgid "Encampment"
-msgstr "Leirsted"
-
 #: src/translations.h:48
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/deprecated/stel_ui_conf.cpp:842
-msgid "Enter observatory name"
-msgstr "Angi navn på observatorium"
-
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:243
 msgid "Equ of date"
 msgstr "Ekvatortid"
 
-#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
-msgid "Equator Line"
+#: src/ui_viewDialog.h:1313
+#, fuzzy
+msgid "Equator line"
 msgstr "Ekvatorlinje"
 
-#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
-msgid "Equatorial Grid"
+#: src/ui_viewDialog.h:1315
+#, fuzzy
+msgid "Equatorial J2000 grid"
 msgstr "Sylinderprojesert rutenett"
 
-#: src/deprecated/stel_ui.cpp:680
-msgid "Equatorial Grid [E]"
-msgstr "Sylinderprojisert/ekvatorialt rutenett [E]"
-
-#: src/deprecated/stel_ui.cpp:692
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Sylinder-/planprojisert visning [Enter]"
-
-#: src/translations.h:144
-msgid "Equuleus"
-msgstr "Den lille hest (føllet)"
-
-#: src/translations.h:113
-msgid "Eridanus"
-msgstr "Floden"
-
-#: src/deprecated/stel_ui.cpp:1051
-msgid "Error: Unable to open script file to record commands."
-msgstr "Feil: Klarte ikke å åpne skriptfilen for å registrere kommandoer."
-
-#: src/translations.h:273
-msgid "Establishment"
-msgstr "Anlegg"
+#: src/ui_viewDialog.h:1309
+#, fuzzy
+msgid "Equatorial grid"
+msgstr "Sylinderprojesert rutenett"
 
 #: src/translations.h:43
 msgid "Europa"
 msgstr "Europa"
 
-#: src/translations.h:245
-msgid "Extended Net"
-msgstr "Utvidet nett"
+#: src/ui_searchDialogGui.h:210
+msgid "Find Object"
+msgstr ""
 
-#: src/translations.h:283
-msgid "Farmland"
-msgstr "Bondeland"
-
-#: src/translations.h:179
-msgid "Ferry Boat"
-msgstr "Båtferge"
-
-#: src/translations.h:338
-msgid "Fireplace"
-msgstr "Ildsted"
-
-#: src/translations.h:311
-msgid "First Big One"
-msgstr "Den første store"
-
-#: src/translations.h:313
-msgid "First Slim One"
-msgstr "Den første slanke"
-
-#: src/translations.h:228
-msgid "Five Chariots"
-msgstr "Fem vogner"
-
-#: src/translations.h:240
-msgid "Five Feudal Kings"
-msgstr "Fem føydalkonger"
-
-#: src/translations.h:274
-msgid "Flail"
-msgstr "Treske"
-
-#: src/deprecated/stel_ui.cpp:711
-msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Vend vannrett [Ctrl + Shift + H]"
-
-#: src/deprecated/stel_ui.cpp:713
-msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Vend loddrett [Ctrl + Shift + V]"
-
-#: src/translations.h:188
-msgid "Flock"
-msgstr "Flokk"
-
-#: src/translations.h:223
-msgid "Flying Corridor"
-msgstr "Fluktvei"
-
-#: src/deprecated/stel_ui_conf.cpp:228
-msgid "Fog"
-msgstr "Tåke"
-
-#: src/translations.h:225
-msgid "Ford"
+#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
+#: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
+#: src/ui_viewDialog.h:962
+#, fuzzy
+msgid "Form"
 msgstr "Vadested"
-
-#: src/translations.h:115
-msgid "Fornax"
-msgstr "Smelteovnen"
-
-#: src/translations.h:236
-msgid "Four Channels"
-msgstr "Fire kanaler"
-
-#: src/translations.h:301
-msgid "Frigate Bird"
-msgstr "Fregattfugl"
-
-#: src/deprecated/stel_ui_conf.cpp:695
-msgid "GO"
-msgstr "Søk"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ganymedes"
 
-#: src/translations.h:116
-msgid "Gemini"
-msgstr "Tvillingene"
+#: src/ui_searchDialogGui.h:224
+msgid "Go"
+msgstr ""
 
-#: src/deprecated/stel_ui_tuiconf.cpp:380
-msgid "General "
-msgstr "Generelt "
+#: src/ui_viewDialog.h:1301
+#, fuzzy
+msgid "Guereins"
+msgstr "Slangen"
 
-#: src/translations.h:285
-msgid "Ghosts"
-msgstr "Spøkelser"
-
-#: src/translations.h:186
-msgid "Giant"
-msgstr "Kjempe"
-
-#: src/translations.h:268
-msgid "Girl"
-msgstr "Jente"
-
-#: src/translations.h:261
-msgid "Good Gourd"
-msgstr "Godt gresskar"
-
-#: src/deprecated/stel_ui.cpp:709
-msgid "Goto selected object [SPACE]"
-msgstr "Sentrer valgt objekt [Mellomrom]"
-
-#: src/translations.h:218
-msgid "Great General"
-msgstr "Stor general"
-
-#: src/deprecated/stel_ui_conf.cpp:213
-msgid "Ground"
-msgstr "Horisont"
-
-#: src/deprecated/stel_ui.cpp:682
-msgid "Ground [G]"
-msgstr "Horisont [G]"
-
-#: src/translations.h:120
-msgid "Grus"
-msgstr "Tranen"
-
-#: src/translations.h:336
-msgid "Hand"
-msgstr "Hånd"
-
-#: src/translations.h:270
-msgid "Heart"
-msgstr "Hjerte"
-
-#: src/deprecated/stel_ui.cpp:823
+#: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "Hjelp"
-
-#: src/deprecated/stel_ui.cpp:690
-msgid "Help [H]"
-msgstr "Hjelp [H]"
-
-#: src/translations.h:121
-msgid "Hercules"
-msgstr "Herkules"
-
-#: src/translations.h:187
-msgid "Hippopotamus"
-msgstr "Flodhest"
-
-#: src/deprecated/stel_ui.cpp:1047
-msgid "Hit CTRL-R again to stop.\n"
-msgstr "Trykk Ctrl+R en gang til for å stoppe.\n"
-
-#: src/translations.h:247
-msgid "Hook"
-msgstr "Krok"
-
-#: src/translations.h:212
-msgid "Horn"
-msgstr "Horn"
-
-#: src/translations.h:122
-msgid "Horologium"
-msgstr "Uret"
-
-#: src/translations.h:184
-msgid "Horus"
-msgstr "Horus - skyguden"
-
-#: src/deprecated/s_gui.cpp:2750
-msgid "Hour"
-msgstr "Time"
-
-#: src/translations.h:123
-msgid "Hydra"
-msgstr "Vannslangen"
-
-#: src/translations.h:124
-msgid "Hydrus"
-msgstr "Den sydlige vannslange"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -866,494 +216,158 @@ msgstr "Hyperion"
 msgid "Iapetus"
 msgstr "Iapetus"
 
-#: src/translations.h:211
-msgid "Imperial Guards"
-msgstr "Keisergarden"
-
-#: src/translations.h:214
-msgid "Imperial Passageway"
-msgstr "Keiserlig passasje"
-
-#: src/deprecated/stel_ui.cpp:723
-msgid "Increase Time Speed [L]"
-msgstr "Øk klokkehastighet [L]"
-
-#: src/translations.h:125
-msgid "Indus"
-msgstr "Indianeren"
-
-#: src/deprecated/stel_ui_conf.cpp:964
-msgid "Info: "
-msgstr "Info: "
-
-#: src/deprecated/stel_ui.cpp:753
-msgid "Information"
-msgstr "Informasjon"
-
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Inuit (indianere)"
-
-#: src/deprecated/stel_ui.cpp:602
-msgid "Invalid Script command"
-msgstr "Ugyldig skript-kommando"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:106
+#: src/modules/Telescope.cpp:241
 msgid "J2000"
 msgstr "J2000"
-
-#: src/translations.h:249
-msgid "Jade Well"
-msgstr "Jade-brønn"
-
-#: src/translations.h:192
-msgid "Jaw"
-msgstr "Kjeve"
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: src/translations.h:194
-msgid "Kenemet"
-msgstr "Kenemet"
-
-#: src/translations.h:190
-msgid "Khanuwy Fish"
-msgstr "Khanuwy-fisk"
-
-#: src/translations.h:215
-msgid "Kitchen"
-msgstr "Kjøkken"
-
-#: src/translations.h:300
-msgid "Kite of Kawelo"
-msgstr "Kawelos drage"
-
 #: src/translations.h:72
 msgid "Korean"
 msgstr "Koreansk"
 
-#: src/translations.h:126
-msgid "Lacerta"
-msgstr "Firfislen"
+#: src/ui_viewDialog.h:1286
+msgid "Labels and markers"
+msgstr ""
 
 #: src/translations.h:73
 msgid "Lakota"
 msgstr "Lakota (indianere)"
 
-#: src/translations.h:328
-msgid "Lamp Stand"
-msgstr "Stålampe"
-
-#: src/translations.h:250
-msgid "Lance"
-msgstr "Lanse"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:444
-msgid "Landscape: "
-msgstr "Landskap: "
-
-#: src/deprecated/stel_ui_conf.cpp:537
-msgid "Landscapes"
+#: src/ui_viewDialog.h:1306
+#, fuzzy
+msgid "Landscape"
 msgstr "Landskap"
 
-#: src/deprecated/stel_ui_conf.cpp:534
-msgid "Language"
-msgstr "Språk"
-
-#: src/deprecated/stel_ui_conf.cpp:339
-msgid "Latitude : "
+#: src/ui_locationDialogGui.h:275
+#, fuzzy
+msgid "Latitude :"
 msgstr "Breddegrad : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:388
-msgid "Latitude: "
-msgstr "Breddegrad: "
-
-#: src/translations.h:277
-msgid "Left Flag"
-msgstr "Venstre flagg"
-
-#: src/translations.h:220
-msgid "Legs"
-msgstr "Bein"
-
-#: src/translations.h:129
-msgid "Leo"
-msgstr "Løven"
-
-#: src/translations.h:146
-msgid "Leo Minor"
-msgstr "Den lille løve"
-
-#: src/translations.h:128
-msgid "Lepus"
-msgstr "Haren"
-
-#: src/translations.h:84
-msgid "Libra"
-msgstr "Vekten"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:443
-msgid "Light Pollution Luminance: "
+#: src/ui_viewDialog.h:1297
+#, fuzzy
+msgid "Light pollution:"
 msgstr "Lysstyrke av litt luftforurensing: "
 
-#: src/translations.h:173
-msgid "Lion"
-msgstr "Løve"
-
-#: src/translations.h:309
-msgid "Lizard"
-msgstr "Øgle"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:462
-msgid "Load Default Configuration: "
-msgstr "Hent standard oppsett: "
-
-#: src/modules/ConstellationMgr.cpp:340
-msgid "Loading Constellation Art: "
+#: src/modules/ConstellationMgr.cpp:369
+#, fuzzy, qt-format
+msgid "Loading Constellation Art: %1/%2"
 msgstr "Henter stjernebildene: "
 
-#: src/modules/NebulaMgr.cpp:404
-msgid "Loading NGC catalog: "
+#: src/modules/NebulaMgr.cpp:372
+#, fuzzy, qt-format
+msgid "Loading NGC catalog: %1/%2"
 msgstr "Henter NGC-katalog: "
 
-#: src/modules/NebulaMgr.cpp:538
-msgid "Loading Nebula Textures:"
-msgstr "Henter stjernetåkebilder:"
-
-#: src/modules/StarMgr.cpp:493
-msgid "Loading catalog "
+#: src/modules/StarMgr.cpp:253
+#, fuzzy, qt-format
+msgid "Loading catalog %1"
 msgstr "Henter katalogen "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:455
-msgid "Local Script: "
-msgstr "Lokalt skript: "
-
-#: src/deprecated/stel_ui_conf.cpp:536
+#: src/ui_locationDialogGui.h:254
 msgid "Location"
 msgstr "Sted"
 
-#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
-msgid "Location: "
-msgstr "Plassering: "
-
-#: src/deprecated/stel_ui_conf.cpp:331
-msgid "Longitude : "
+#: src/ui_locationDialogGui.h:271
+#, fuzzy
+msgid "Longitude :"
 msgstr "Lengdegrad : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:389
-msgid "Longitude: "
-msgstr "Lengdegrad: "
-
-#: src/translations.h:130
-msgid "Lupus"
-msgstr "Ulven"
-
-#: src/translations.h:131
-msgid "Lynx"
-msgstr "Gaupen"
-
-#: src/translations.h:132
-msgid "Lyra"
-msgstr "Lyren"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Magnitude"
-msgstr "Størrelse"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:447
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Faktor for forstørrelse: "
-
-#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
-#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
-#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
-#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
+#: src/modules/Planet.cpp:117 src/modules/Planet.cpp:166
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:105
+#: src/modules/StarWrapper.cpp:163
 msgid "Magnitude: "
 msgstr "Lysstyrke: "
 
-#: src/translations.h:308
-msgid "Man with Feet Apart"
-msgstr "Mann med løsrevet fot"
+#: src/modules/StarWrapper.cpp:63
+#, fuzzy, qt-format
+msgid "Magnitude: %1"
+msgstr "Lysstyrke: "
 
-#: src/translations.h:320
-msgid "Man's Cart"
-msgstr "Mannsvognen"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-msgid "Manual zoom: "
-msgstr "Manuell zoom: "
-
-#: src/translations.h:227
-msgid "Market"
-msgstr "Marked"
-
-#: src/translations.h:290
-msgid "Market Officer"
-msgstr "Markedsoffiser"
+#: src/ui_viewDialog.h:1331
+#, fuzzy
+msgid "Marking"
+msgstr "Kjølen"
 
 #: src/translations.h:38
 msgid "Mars"
 msgstr "Mars"
 
-#: src/translations.h:298
-msgid "Maui's Fishhook"
-msgstr "Mauis fiskekrok"
-
-#: src/translations.h:252
-msgid "Mausoleum"
-msgstr "Mausoleum"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:420
-msgid "Maximum Magnitude to Label: "
-msgstr "Maks størrelse å navngi: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:449
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maks lysstyrke på stjernetåke før visning: "
-
-#: src/translations.h:242
-msgid "Meadows"
-msgstr "Enger"
-
-#: src/translations.h:160
-msgid "Mensa"
-msgstr "Bordet"
-
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Merkur"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:433
-msgid "Meridian Line"
+#: src/ui_viewDialog.h:1311
+#, fuzzy
+msgid "Meridian line"
 msgstr "Meridianlinje"
-
-#: src/deprecated/stel_ui_conf.cpp:1056
-msgid "Meteor zenith hourly rate"
-msgstr "Antall meteorer over senit per time"
-
-#: src/translations.h:134
-msgid "Microscopium"
-msgstr "Mikroskopet"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:448
-msgid "Milky Way intensity: "
-msgstr "Intensitet for Melkeveien: "
 
 #: src/translations.h:47
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/deprecated/s_gui.cpp:2753
-msgid "Minutes"
-msgstr "Minutter"
-
-#: src/deprecated/stel_ui.cpp:808
-msgid ""
-"Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"
-msgstr ""
-"Annet:                               Definisjoner:\n"
-"9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 km\n"
-"Ctrl+Shift+H: Vend bilde vannrett    Lysstyrke: Sola -26 (lys)  Pluto +14 "
-"(svak)\n"
-"Ctrl+Shift+V: Vend bilde loddrett\n"
-"Ctrl+0,...9 : Gå-til-kommando for teleskop 0,...9\n"
-
-#: src/translations.h:127
-msgid "Monoceros"
-msgstr "Enhjørningen"
-
-#: src/deprecated/s_gui.cpp:2744
-msgid "Month"
-msgstr "Måned"
-
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Månen"
 
-#: src/deprecated/stel_ui_conf.cpp:168
-msgid "Moon Scale"
-msgstr "Måneforstørrelse"
-
-#: src/translations.h:193
-msgid "Mooring Post"
-msgstr "Fortøyningspåle"
-
-#: src/translations.h:257
-msgid "Mortar"
-msgstr "Murer"
-
-#: src/deprecated/stel_ui.cpp:765
-msgid ""
-"Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
-"\n"
-msgstr ""
-"Flytte & valg av objekt:\n"
-"Piltaster      : Forandre synsvinkel\n"
-"Page Up / Down : Zoom inn/ut         (eller Ctrl + pil opp / ned)\n"
-"Venstre-klikk  : Velg objekt\n"
-"Høyre-klikk    : Opphev valg         (eller Ctrl + venstre-klikk)\n"
-"Mellomrom      : Sentrer valgt objekt\n"
-"\\ : Zoom tilbake (til startpunkt eller planet med måner hvis zoomet)\n"
-"/ : Zoom inn til valgt objekt\n"
-"\n"
-
-#: src/translations.h:135
-msgid "Musca"
-msgstr "Fluen"
-
-#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
+#: src/translations.h:63
 msgid "N"
 msgstr "N"
-
-#: src/deprecated/stel_ui.cpp:674
-msgid "Names of the Constellations [V]"
-msgstr "Navn på stjernebilder [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
 msgstr "Navajo (indianere)"
 
-#: src/translations.h:299
-msgid "Navigator's Triangle"
-msgstr "Navigatørens triangel"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:439
-msgid "Nebula Circles"
-msgstr "Stjernetåkesirkler"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:438
-msgid "Nebula Names"
-msgstr "Navn på stjernetåker"
-
-#: src/deprecated/stel_ui_conf.cpp:139
-msgid "Nebulas Names. Up to mag :"
-msgstr "Stjernetåkenavn                         Forsterkning:"
-
-#: src/deprecated/stel_ui.cpp:688
-msgid "Nebulas [N]"
-msgstr "Stjernetåker [N]"
-
-#: src/translations.h:288
-msgid "Neck"
-msgstr "Nakke"
+#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
+msgid "Nebula"
+msgstr "Tåke"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "Neptun"
 
-#: src/translations.h:191 src/translations.h:230
-msgid "Net"
-msgstr "Nett"
-
-#: src/deprecated/stel_ui.cpp:697
-msgid "Night (red) mode"
-msgstr "Nattmodus (rød)"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
-msgid "No"
-msgstr "Nei"
-
-#: src/translations.h:112
-msgid "Norma"
-msgstr "Vinkelhaken"
+#: src/ui_viewDialog.h:1284
+#, fuzzy
+msgid "Normal rate"
+msgstr ": Normalt antall"
 
 #: src/translations.h:75
 msgid "Norse"
 msgstr "Norrøn"
 
-#: src/translations.h:239
-msgid "North River"
-msgstr "Nordlige elv"
+#: src/ui_viewDialog.h:1293
+#, fuzzy
+msgid "Options"
+msgstr "Orion"
 
-#: src/translations.h:201
-msgid "Northern Dipper"
-msgstr "Nordlige øse"
-
-#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
-msgid "OK"
-msgstr "OK"
-
-#: src/deprecated/stel_ui_conf.cpp:670
-msgid "Object Search"
-msgstr "Søke etter objekt"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Object Sizing Rule: "
-msgstr "Regel for størrelse på objekt: "
-
-#: src/translations.h:136
-msgid "Octans"
-msgstr "Oktanten"
-
-#: src/translations.h:138
-msgid "Ophiuchus"
-msgstr "Slangebæreren"
-
-#: src/translations.h:241
-msgid "Orchard"
-msgstr "Frukthage"
-
-#: src/translations.h:139
+#: src/ui_searchDialogGui.h:223
 msgid "Orion"
 msgstr "Orion"
 
-#: src/translations.h:224
-msgid "Outer Fence"
-msgstr "Ytre gjerde"
+#: src/ui_viewDialog.h:1330
+msgid "Orthographic"
+msgstr ""
 
-#: src/translations.h:269
-msgid "Ox"
-msgstr "Okse"
-
-#: src/translations.h:189
-msgid "Pair of Stars"
-msgstr "Stjernepar"
-
-#: src/translations.h:265
-msgid "Palace Gate"
-msgstr "Palassport"
-
-#: src/modules/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:123
 msgid "Parallax: "
 msgstr "Parallakse: "
 
-#: src/translations.h:140
-msgid "Pavo"
-msgstr "Påfuglen"
-
-#: src/translations.h:141
-msgid "Pegasus"
-msgstr "Pegasus"
-
-#: src/translations.h:143
-msgid "Perseus"
-msgstr "Persevs"
-
-#: src/translations.h:256
-msgid "Pestle"
-msgstr "Støter"
+#: src/ui_viewDialog.h:1327
+#, fuzzy
+msgid "Perspective"
+msgstr "Forhåndsvalgt tid"
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -1363,722 +377,553 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:149
-msgid "Phoenix"
-msgstr "Føniks"
-
-#: src/translations.h:142
-msgid "Pictor"
-msgstr "Maleren"
-
-#: src/translations.h:151
-msgid "Pisces"
-msgstr "Fiskene"
-
-#: src/translations.h:150
-msgid "Piscis Austrinus"
-msgstr "Den sydlige fisk"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:430
-msgid "Planet Names"
-msgstr "Planetnavn"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:431
-msgid "Planet Orbits"
-msgstr "Planetbaner"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:432
-msgid "Planet Trails"
-msgstr "Planetspor"
-
-#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
-msgid "Planet: "
-msgstr "Planet: "
-
-#: src/deprecated/stel_ui_conf.cpp:163
+#: src/ui_viewDialog.h:1288
 msgid "Planets"
 msgstr "Planeter"
 
-#: src/deprecated/stel_ui_conf.cpp:175
-msgid "Planets Hints"
+#: src/ui_viewDialog.h:1262
+#, fuzzy
+msgid "Planets and Satellites"
 msgstr "Tips om planeter"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Point"
-msgstr "Punkt"
-
-#: src/translations.h:76
+#: src/translations.h:76 src/ui_viewDialog.h:1338
 msgid "Polynesian"
 msgstr "Polynesisk"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:401
-msgid "Preset Sky Time: "
-msgstr "Forhåndsvalgt himmeltid: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:404
-msgid "Preset Time"
-msgstr "Forhåndsvalgt tid"
-
-#: src/deprecated/stel_ui_conf.cpp:479
-msgid "Program Language: "
-msgstr "Språk i programmet: "
-
-#: src/deprecated/stel_ui_conf.cpp:379
-msgid "Projection :"
+#: src/ui_viewDialog.h:1323
+#, fuzzy
+msgid "Projection"
 msgstr "Projeksjon:"
 
-#: src/translations.h:183
-msgid "Prow"
-msgstr "Frampart"
+#: src/ui_viewDialog.h:963
+msgid ""
+"QFrame {\n"
+"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
+"stop: 1 #19233c);\n"
+"\tborder: 0px;\n"
+"\tcolor : #babdc4;\n"
+"    font-family: \"DejaVu\";\n"
+"}\n"
+"\n"
+"DialogFrame {\n"
+"  border-width: 1px;\n"
+"  border-style: solid;\n"
+"  border-color: #081f25;\n"
+"}\n"
+"\n"
+"ResizeFrame {\n"
+" background-image: url(data/gui/resize.png);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"\tbackground: None;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"     border: 1.5px solid #2e2e36;\n"
+"     border-radius: 10px;\n"
+"     padding: 0 8px;\n"
+"     background: white;\n"
+"     selection-background-color: darkgray;\n"
+" }\n"
+"\n"
+"QPushButton {\n"
+"  border: 1.5px solid #2e2e36;\n"
+"  border-radius: 10px;\n"
+"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+" border: 1px solid #2e2e36;\n"
+" background: #4a4b50;\n"
+" width: 15px;\n"
+"         margin: 22px 0px 22px 0px;\n"
+"     }\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    border: 2px solid #4a4b50;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
+"\tborder-radius: 4px;\n"
+"\tmin-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: bottom;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: top;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
+"         border: 2px solid grey;\n"
+"         width: 3px;\n"
+"         height: 3px;\n"
+"         background: white;\n"
+" }\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"         background: none;\n"
+" }\n"
+"\n"
+"QGroupBox {\n"
+"     border: 1px solid #1f2f25;\n"
+"     border-radius: 4px;\n"
+"     margin-top: 1ex;\n"
+"     font-weight: bold;\n"
+"     background: solid #223B34;\n"
+" }\n"
+"\n"
+"QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     padding: 0px 3px;\n"
+"     color : #babdc4;\n"
+"\t left: 15px\n"
+" }\n"
+"\n"
+"\n"
+"QTabWidget::pane {\n"
+"   border-top: 2px solid #348483;\n"
+"}\n"
+"\n"
+"     /* Style the tab using the tab sub-control. Note that\n"
+"         it reads QTabBar _not_ QTabWidget */\n"
+"     QTabBar::tab {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#2a3b50, stop: 1 #19233c);\n"
+"         border: 2px solid #348483;\n"
+"         border-bottom-color: #348483; /* same as the pane color */\n"
+"         border-top-left-radius: 4px;\n"
+"         border-top-right-radius: 4px;\n"
+"         min-width: 10ex;\n"
+"         padding: 2px;\n"
+"         color: #babdc4;\n"
+"         font-weight : bold;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#19233c, stop: 1 #2a3b50);\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected {\n"
+"         border-color: #A2A78B;\n"
+"         border-bottom-color: #2a3b50; /* same as pane color */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:!selected {\n"
+"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
+"     }\n"
+"\n"
+"     /* make use of negative margins for overlapping tabs */\n"
+"     QTabBar::tab:selected {\n"
+"         /* expand/overlap to the left and right by 4px */\n"
+"         margin-left: -4px;\n"
+"         margin-right: -4px;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:first:selected {\n"
+"         margin-left: 0; /* the first selected tab has nothing to overlap "
+"with on the left */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:last:selected {\n"
+"         margin-right: 0; /* the last selected tab has nothing to overlap "
+"with on the right */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:only-one {\n"
+"         margin: 0; /* if there is only one tab, we don't want overlapping "
+"margins */\n"
+"     }\n"
+"\n"
+"QListWidget {\n"
+" \tbackground: solid #121324;\n"
+"\tborder: 1px;\n"
+"    border-radius: 4px;\n"
+"    border-color: #081f25;\n"
+"    border-style: solid;\n"
+"  selection-background-color: #2a3b50;\n"
+"}\n"
+"\n"
+"QCheckBox\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QCheckBox::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  background-color: #225555;\n"
+"}\n"
+"QCheckBox::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
+"}\n"
+"\n"
+"QRadioButton\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QRadioButton::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  margin-left: 4px;\n"
+"}\n"
+"QRadioButton::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-checked.png);\n"
+"}\n"
+"QRadioButton::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
+"border */\n"
+"     border-image: url(:/images/spinup.png) 1;\n"
+"     border-width: 1px;\n"
+"\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:hover {\n"
+"     border-image: url(:/images/spinup_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:pressed {\n"
+"     border-image: url(:/images/spinup_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/images/up_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
+"value is max */\n"
+"    image: url(:/images/up_arrow_disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: bottom right; /* position at bottom right corner "
+"*/\n"
+"\n"
+"     width: 16px;\n"
+"     border-image: url(:/images/spindown.png) 1;\n"
+"     border-width: 1px;\n"
+"     border-top-width: 0;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:hover {\n"
+"     border-image: url(:/images/spindown_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:pressed {\n"
+"     border-image: url(:/images/spindown_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/images/down_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow:disabled,\n"
+" QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"    image: url(:/images/down_arrow_disabled.png);\n"
+" }\n"
+"\n"
+"QDoubleSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+msgstr ""
 
-#: src/translations.h:153
-msgid "Puppis"
-msgstr "Akterstavnen"
+#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
+#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
+msgid ""
+"QToolButton {\n"
+"color: white;\n"
+"font-weight: bold;\n"
+"background: None;\n"
+"border: 1px solid #2e2e36;\n"
+"  border-radius: 2px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"color: darkgray;\n"
+"}"
+msgstr ""
 
-#: src/translations.h:244
-msgid "Purple Palace"
-msgstr "Purpur-palass"
+#: src/ui_dateTimeDialogGui.h:125
+msgid ""
+"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
+"solid\n"
+"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
+"darkgray; }"
+msgstr ""
 
-#: src/translations.h:88
-msgid "Pyxis"
-msgstr "Kompasset"
-
-#: src/deprecated/stel_ui.cpp:702
-msgid "Quit [CMD + Q]"
-msgstr "Avslutt [Cmd + Q]"
-
-#: src/deprecated/stel_ui.cpp:700
-msgid "Quit [CTRL + Q]"
-msgstr "Avslutt [Ctrl + Q]"
-
-#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "Rekt./Dekl.: "
-
-#: src/translations.h:312
-msgid "Rabbit Tracks"
-msgstr "Harespor"
-
-#: src/translations.h:340
-msgid "Race Track"
-msgstr "Racebane"
-
-#: src/translations.h:222
-msgid "Ramparts"
-msgstr "Festningsvoller"
-
-#: src/deprecated/stel_ui.cpp:721
-msgid "Real Time Speed [K]"
-msgstr "Normal klokkehastighet [K]"
-
-#: src/deprecated/stel_ui.cpp:1045
-msgid "Recording commands to script file:\n"
-msgstr "Registrering av kommandoer til skriptfilen:\n"
-
-#: src/deprecated/stel_ui_conf.cpp:539
-msgid "Rendering"
-msgstr "Tilpassing"
-
-#: src/translations.h:154
-msgid "Reticulum"
-msgstr "Nettet"
-
-#: src/deprecated/stel_ui.cpp:725
-msgid "Return to Current Time [8]"
-msgstr "Retur til dagens tidspunkt [8]"
-
-#: src/translations.h:307
-msgid "Revolving Female"
-msgstr "Dreibar kvinne"
-
-#: src/translations.h:306
-msgid "Revolving Male"
-msgstr "Dreibar mann"
 
 #: src/translations.h:51
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/translations.h:276
-msgid "Right Flag"
-msgstr "Høyre flagg"
-
-#: src/translations.h:216
-msgid "River Turtle"
-msgstr "Elveskilpadde"
-
-#: src/translations.h:229
-msgid "Rolled Tongue"
-msgstr "Rullet tunge"
-
-#: src/translations.h:258
-msgid "Rooftop"
-msgstr "Hustak"
-
-#: src/translations.h:271
-msgid "Room"
-msgstr "Rom"
-
-#: src/translations.h:221
-msgid "Root"
-msgstr "Rot"
-
-#: src/translations.h:262
-msgid "Rotten Gourd"
-msgstr "Råttent gresskar"
-
-#: src/translations.h:332
-msgid "Runners"
-msgstr "Løpere"
-
-#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
+#: src/translations.h:64
 msgid "S"
 msgstr "S"
-
-#: src/translations.h:114
-msgid "Sagitta"
-msgstr "Pilen"
-
-#: src/translations.h:155
-msgid "Sagittarius"
-msgstr "Skytten"
-
-#: src/translations.h:175
-msgid "Sah"
-msgstr "Sah"
-
-#: src/translations.h:345
-msgid "Salamander"
-msgstr "Salamander"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:463
-msgid "Save Current Configuration as Default: "
-msgstr "Lagre dette oppsettet som standard: "
-
-#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
-#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
-msgid "Save as default"
-msgstr "Lagre som standard"
-
-#: src/deprecated/stel_ui_conf.cpp:356
-msgid "Save location"
+#: src/ui_viewDialog.h:1265
+#, fuzzy
+msgid "Scale Moon"
 msgstr "Lagre sted"
 
-#: src/deprecated/stel_ui_conf.cpp:408
-msgid "Saving settings will save current full screen status"
-msgstr ""
-"Ved å lagre innstillingene, vil du også lagre status for nåværende full "
-"skjerm"
+#: src/ui_viewDialog.h:1257
+#, fuzzy
+msgid "Scale:"
+msgstr "Måneforstørrelse"
 
-#: src/translations.h:156
-msgid "Scorpius"
-msgstr "Skorpionen"
-
-#: src/translations.h:232
-msgid "Screen"
-msgstr "Skjerm"
-
-#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
-msgid "Script commander"
-msgstr "Skript-kommandoer"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:384
-msgid "Scripts "
-msgstr "Skript "
-
-#: src/translations.h:82
-msgid "Sculptor"
-msgstr "Billedhuggeren"
-
-#: src/translations.h:87 src/translations.h:157
-msgid "Scutum"
-msgstr "Skjoldet"
-
-#: src/deprecated/stel_ui_conf.cpp:677
-msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Søk etter (f.eks: Saturn, Polaris, HP6218, Orion, M31):"
-
-#: src/deprecated/stel_ui.cpp:705
-msgid "Search for object [CTRL + F]"
-msgstr "Søk etter et objekt [Ctrl + F]"
-
-#: src/deprecated/s_gui.cpp:2756
-msgid "Seconds"
-msgstr "Sekunder"
-
-#: src/translations.h:177
-msgid "Sek"
-msgstr "Sek"
-
-#: src/translations.h:354
+#: src/translations.h:81
 msgid "Select and exit to run."
 msgstr "Velg og lukk for å utføre."
 
-#: src/deprecated/stel_ui_conf.cpp:326
-msgid "Selected : "
+#: src/ui_locationDialogGui.h:273
+#, fuzzy
+msgid "Selected :"
 msgstr "Valgt : "
 
-#: src/deprecated/stel_ui_conf.cpp:128
-msgid "Selected Constellation Only"
-msgstr "Kun valgte stjernebilde"
+#: src/ui_viewDialog.h:1270
+msgid "Short labels"
+msgstr ""
 
-#: src/translations.h:182
-msgid "Selkis"
-msgstr "Selkis"
+#: src/ui_viewDialog.h:1274
+msgid "Shouting Stars"
+msgstr ""
 
-#: src/translations.h:158
-msgid "Serpens"
-msgstr "Slangen"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:378
-msgid "Set Location "
-msgstr "Angi sted "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:379
-msgid "Set Time "
-msgstr "Angi tid "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:397
-msgid "Set Time Zone: "
-msgstr "Angi tidssone: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:466
-msgid "Set UI Locale: "
-msgstr "Språk i programmet: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:452
-msgid "Setting Landscape Sets Location: "
-msgstr "Angi lokalisering av landskapet: "
-
-#: src/deprecated/stel_ui_conf.cpp:458
-msgid "Setting landscape updates the location"
-msgstr "Oppdater plassering ved endring av landskap"
-
-#: src/translations.h:226
-msgid "Seven Excellencies"
-msgstr "Syv høyheter"
-
-#: src/translations.h:343
-msgid "Seven Little Girls"
-msgstr "Syv små jenter"
-
-#: src/translations.h:159
-msgid "Sextans"
-msgstr "Sekstanten"
-
-#: src/translations.h:197
-msgid "Sheep"
-msgstr "Sau"
-
-#: src/translations.h:185
-msgid "Sheepfold"
-msgstr "Saueflokk"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-msgid "Show: "
+#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1273
+#, fuzzy
+msgid "Show"
 msgstr "Vis: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:464
-msgid "Shut Down: "
-msgstr "Avslutte: "
+#: src/ui_viewDialog.h:1321
+#, fuzzy
+msgid "Show art"
+msgstr "Vis: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:400
-msgid "Sidereal"
-msgstr "Kosmisk (sidereal)"
+#: src/ui_viewDialog.h:1296
+#, fuzzy
+msgid "Show atmosphere"
+msgstr "Atmosfære"
 
-#: src/modules/Nebula.cpp:110
+#: src/ui_viewDialog.h:1318
+msgid "Show boundaries"
+msgstr ""
+
+#: src/ui_viewDialog.h:1295
+#, fuzzy
+msgid "Show fog"
+msgstr "Vis: "
+
+#: src/ui_viewDialog.h:1294
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1320
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1319
+#, fuzzy
+msgid "Show lines"
+msgstr "Vis: "
+
+#: src/ui_viewDialog.h:1263
+msgid "Show marker"
+msgstr ""
+
+#: src/ui_viewDialog.h:1264
+msgid "Show orbits"
+msgstr ""
+
+#: src/ui_viewDialog.h:1266
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/modules/Nebula.cpp:101
 msgid "Size: "
 msgstr "Størrelse: "
 
-#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
-msgid "Sky Culture: "
-msgstr "Stjernebilder utfra kultur: "
+#: src/ui_viewDialog.h:1291
+#, fuzzy
+msgid "Sky"
+msgstr "Sek"
 
-#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
-msgid "Sky Language: "
-msgstr "Språk på himmelen: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:402
-msgid "Sky Time At Start-up: "
-msgstr "Himmeltid ved oppstart: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:396
-msgid "Sky Time: "
-msgstr "Himmeltid: "
-
-#: src/translations.h:337
-msgid "Snake"
-msgstr "Slange"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:391
-msgid "Solar System Body: "
-msgstr "Hjemmeplanet i solsystemet: "
+#: src/ui_viewDialog.h:1308
+msgid "Sky Marking"
+msgstr ""
 
 #: src/translations.h:60
 msgid "Solar System Observer"
 msgstr "Observatør av solsystem"
 
-#: src/translations.h:233
-msgid "Soldiers Market"
-msgstr "Soldatmarked"
-
-#: src/translations.h:238
-msgid "South River"
-msgstr "Sørlige elv"
-
-#: src/translations.h:275
-msgid "Spear"
-msgstr "Spyd"
-
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:131 src/modules/StarWrapper.cpp:173
 msgid "Spectral Type: "
 msgstr "Spektraltype: "
 
-#: src/translations.h:272
-msgid "Spring"
-msgstr "Vår"
-
-#: src/translations.h:234
-msgid "Square Granary"
-msgstr "Firkantet kornkammer"
-
-#: src/translations.h:284
-msgid "Star"
+#: src/ui_viewDialog.h:1340
+#, fuzzy
+msgid "Starlore"
 msgstr "Stjerne"
 
-#: src/deprecated/stel_ui_conf.cpp:85
-msgid "Star Names. Up to mag :"
-msgstr "Stjernenavn                                Forsterkning:"
-
-#: src/deprecated/stel_ui_conf.cpp:97
-msgid "Star Twinkle. Amount :"
-msgstr "Stjernefunkling                            Intensitet :"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:419
-msgid "Star Value Multiplier: "
-msgstr "Forsterking av stjerneverdi: "
-
-#: src/deprecated/stel_ui_conf.cpp:80
+#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
 msgid "Stars"
 msgstr "Stjerner"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:381
-msgid "Stars "
-msgstr "Stjerner "
-
-#: src/translations.h:198
-msgid "Stars of Water"
-msgstr "Vannstjerner"
-
-#: src/translations.h:217
-msgid "Stomach"
-msgstr "Mage"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Sola"
 
-#: src/translations.h:248
-msgid "Supreme Palace"
-msgstr "Høyeste palass"
-
-#: src/translations.h:206
-msgid "Tail"
-msgstr "Hale"
-
-#: src/translations.h:161
-msgid "Taurus"
-msgstr "Tyren"
-
-#: src/translations.h:162
-msgid "Telescopium"
-msgstr "Teleskopet"
-
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "Tethys"
-
-#: src/translations.h:321
-msgid "The Asar Battlefield"
-msgstr "Æsestriden"
-
-#: src/translations.h:318
-msgid "The Fishermen"
-msgstr "Fiskekarer"
-
-#: src/translations.h:297
-msgid "The Seven"
-msgstr "De syv"
-
-#: src/translations.h:235
-msgid "Three Stars"
-msgstr "Tre stjerner"
-
-#: src/translations.h:210
-msgid "Three Steps"
-msgstr "Tre trinn"
-
-#: src/translations.h:264
-msgid "Thunder and Lightning"
-msgstr "Lyn og torden"
-
-#: src/translations.h:347
-msgid "Thunderbird"
-msgstr "Tordenvær"
-
-#: src/translations.h:259
-msgid "Thunderbolt"
-msgstr "Lyn"
-
-#: src/deprecated/stel_ui.cpp:796
-msgid ""
-"Time & Date:\n"
-"6   : Time rate pause           7   : Time rate 0\n"
-"8   : Set current time          J   : Decrease time rate\n"
-"K   : Normal time rate          L   : Increase time rate\n"
-"- and = :  Back and forward one day (press ALT for sidereal day)\n"
-"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-"CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-"\n"
-msgstr ""
-"Tid & dato:\n"
-"6 : Klokkehastighet pause            7 : Klokkehastighet 0\n"
-"8 : Still klokka til nåtid           J : Senk klokkehastigheten\n"
-"K : Normal klokkehastighet           L : Øk klokkehastigheten\n"
-"- : Tilbake 1 dag                    = : Fram 1 dag   (Alt+-/= for kosmisk "
-"dag)\n"
-"[ : Tilbake 1 uke                    ] : Fram 1 uke   (Alt+[/] for kosmisk "
-"uke)\n"
-"Ctrl + - : Tilbake 1 time            Ctrl + = : Fram 1 time\n"
-"\n"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:405
-msgid "Time Display Format: "
-msgstr "Visning av tid: "
-
-#: src/deprecated/stel_ui_conf.cpp:279
-msgid "Time Zone :"
-msgstr "Tidssone :"
-
-#: src/deprecated/stel_ui_conf.cpp:292
-msgid "Time speed : "
-msgstr "Klokkehastighet : "
 
 #: src/translations.h:52
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:231
-msgid "Toilet"
-msgstr "Toalett"
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
 
-#: src/translations.h:178
-msgid "Triangle"
+#: src/ui_viewDialog.h:1258
+#, fuzzy
+msgid "Twinkle"
 msgstr "Trekant"
 
-#: src/translations.h:164
-msgid "Triangulum"
-msgstr "Triangelet"
-
-#: src/translations.h:165
-msgid "Triangulum Australe"
-msgstr "Det sydlige triangelet"
-
-#: src/translations.h:287
-msgid "Tripod"
-msgstr "Trebent stativ"
-
-#: src/translations.h:163
-msgid "Tucana"
-msgstr "Tukanen"
-
-#: src/translations.h:346
-msgid "Turtle"
-msgstr "Skilpadde"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:421
-msgid "Twinkling: "
-msgstr "Funkling: "
-
-#: src/translations.h:174
-msgid "Two Jaws"
-msgstr "To kjever"
-
-#: src/translations.h:325
-msgid "Two Placed Far Apart"
-msgstr "To plassert langt vekk"
-
-#: src/translations.h:172
-msgid "Two Poles"
-msgstr "To poler"
-
-#: src/translations.h:324
-msgid "Two Sunbeams"
-msgstr "To solstråler"
-
-#: src/translations.h:330
-msgid "Two in Front"
-msgstr "To foran"
-
-#: src/modules/Nebula.cpp:108
+#: src/modules/Nebula.cpp:99
 msgid "Type: "
 msgstr "Type: "
 
-#: src/translations.h:355
+#: src/translations.h:82
 msgid "USB Script: "
 msgstr "USB-skript: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:465
-msgid "Update me via Internet: "
-msgstr "Oppdater programmet via internett: "
 
 #: src/translations.h:57
 msgid "Uranus"
 msgstr "Uranus"
 
-#: src/translations.h:119
-msgid "Ursa Major"
-msgstr "Storebjørn"
-
-#: src/translations.h:148
-msgid "Ursa Minor"
-msgstr "Lillebjørn"
-
-#: src/deprecated/stel_ui_conf.cpp:300
-msgid ""
-"Use key J and L to decrease and increase\n"
-"   time speed.\n"
-"Use key K to return to real time speed."
+#: src/ui_viewDialog.h:1339
+msgid "Use associated language for sky labeling"
 msgstr ""
-"Hurtigtaster for å endre klokkehastigheten:\n"
-"J :  Reduserer\n"
-"L :  Øker\n"
-"K : Tilbakestiller til vanlig"
 
-#: src/deprecated/stel_ui_conf.cpp:283
-msgid "Using System Default Time Zone"
-msgstr "Bruker tidssonen angitt i operativsystem"
+#: src/ui_viewDialog.h:1305
+msgid "Use associated planet and position"
+msgstr ""
 
-#: src/translations.h:168
-msgid "Vela"
-msgstr "Seilet"
+#: src/ui_locationDialogGui.h:267
+msgid ""
+"Use the mouse wheel to zoom on the map.\n"
+"Click and drag the mouse to move the screen"
+msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "Venus"
 
-#: src/deprecated/stel_ui_conf.cpp:538
-msgid "Video"
+#: src/ui_viewDialog.h:1241
+#, fuzzy
+msgid "View"
 msgstr "Skjermbilde"
 
-#: src/deprecated/stel_ui_conf.cpp:403
-msgid "Viewport Distorter"
-msgstr "Forvrengning av bildefelt"
-
-#: src/translations.h:167
-msgid "Virgo"
-msgstr "Jomfruen"
-
-#: src/translations.h:296
-msgid "Voice of Joy"
-msgstr "Gledens stemme"
-
-#: src/translations.h:152
-msgid "Volans"
-msgstr "Flygefisken"
-
-#: src/translations.h:147
-msgid "Vulpecula"
-msgstr "Reven"
-
-#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
+#: src/translations.h:66
 msgid "W"
 msgstr "V"
 
-#: src/translations.h:219
-msgid "Wall"
-msgstr "Vegg"
-
-#: src/translations.h:196
-msgid "Waty Bekety"
-msgstr "Waty Bekety"
-
-#: src/translations.h:267
-msgid "Weaving Girl"
-msgstr "Vevende jente"
-
-#: src/translations.h:237
-msgid "Well"
-msgstr "Brønn"
-
-#: src/translations.h:77
+#: src/translations.h:77 src/ui_viewDialog.h:1335
 msgid "Western"
 msgstr "Vestlig"
 
-#: src/translations.h:281
-msgid "Western Door"
-msgstr "Vestre dør"
-
-#: src/translations.h:213
-msgid "Willow"
-msgstr "Piletre"
-
-#: src/translations.h:204
-msgid "Wings"
-msgstr "Vinger"
-
-#: src/translations.h:207
-msgid "Winnowing Basket"
-msgstr "Rensekurv"
-
-#: src/translations.h:317
-msgid "Wolf's Mouth"
-msgstr "Ulvens kjeft"
-
-#: src/translations.h:280
-msgid "Woman's Bed"
-msgstr "Kvinneseng"
-
-#: src/translations.h:319
-msgid "Woman's Cart"
-msgstr "Kvinnevognen"
-
-#: src/translations.h:286
-msgid "Xuanyuan"
-msgstr "Xuanyuan"
-
-#: src/deprecated/s_gui.cpp:2741
-msgid "Year"
-msgstr "År"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
-msgid "Yes"
-msgstr "Ja"
-
-#: src/translations.h:289
-msgid "Zaofu"
-msgstr "Zaofu"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:450
-msgid "Zoom Duration: "
-msgstr "Trinn for zoom : "
-
-#: src/deprecated/stel_ui_conf.cpp:353
-msgid "m"
+#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
+#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
+#: src/ui_viewDialog.h:1253
+msgid "X"
 msgstr ""
+
+#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+
+#: src/ui_viewDialog.h:1259
+msgid "amount:"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:128
+msgid "explain"
+msgstr ""
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "    and comments to us at: http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Sjekk om det finnes en nyere versjon før du melder\n"
+#~ "    feil eller kommentarer til oss på: http://www.stellarium.org\n"
+#~ "\n"
 
 #, fuzzy
 #~ msgid ""
@@ -2123,14 +968,66 @@ msgstr ""
 #~ msgid ". Defaulting to english sky labels\n"
 #~ msgstr ". Bruker derfor engelske navn\n"
 
+#~ msgid ": Exceptional Leonid rate"
+#~ msgstr ": Uvanlig antall leonid meteorsverm"
+
+#~ msgid ": Highest rate ever (1966 Leonids)"
+#~ msgstr ": Høyeste antall (1966 Leonider)"
+
+#~ msgid ": Standard Perseids rate"
+#~ msgstr ": Vanlig antall i perseid meteorsverm"
+
 #~ msgid ": mag "
 #~ msgstr ":forsterket "
 
 #~ msgid "> Found data files in %s : local version.\n"
 #~ msgstr "> Datafiler funnet i %s : lokal versjon.\n"
 
+#~ msgid "Actual Time"
+#~ msgstr "Faktisk tid"
+
+#~ msgid "Administration "
+#~ msgstr "Administrasjon "
+
+#~ msgid "Also display Nebulas without textures"
+#~ msgstr "Vis også stjernetåker uten bilder"
+
 #~ msgid "Alt : "
 #~ msgstr "Høyde (m): "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Høyde (m): "
+
+#~ msgid "Altitude : "
+#~ msgstr "Høyde : "
+
+#~ msgid "Andromeda"
+#~ msgstr "Andromeda"
+
+#~ msgid "Animal"
+#~ msgstr "Dyr"
+
+#, fuzzy
+#~ msgid "Anta"
+#~ msgstr "Luftpumpen"
+
+#~ msgid "Antlia"
+#~ msgstr "Luftpumpen"
+
+#~ msgid "Apus"
+#~ msgstr "Paradisfuglen"
+
+#~ msgid "Aquarius"
+#~ msgstr "Vannmannen"
+
+#~ msgid "Aquila"
+#~ msgstr "Ørnen"
+
+#~ msgid "Ara"
+#~ msgstr "Alteret"
+
+#~ msgid "Aries"
+#~ msgstr "Væren"
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -2198,14 +1095,94 @@ msgstr ""
 #~ "CTRL + S : Kopier stjernebildet\n"
 #~ "CTRL + R : Start registrering av skript\n"
 
+#~ msgid "Arrow down to load list."
+#~ msgstr "Pil ned for å vise liste."
+
+#~ msgid "Arsenal"
+#~ msgstr "Arsenal"
+
+#~ msgid "Atmosphere [A]"
+#~ msgstr "Atmosfære [A]"
+
+#~ msgid "Auriga"
+#~ msgstr "Kusken"
+
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Aurvandils tå"
+
+#~ msgid "Author: "
+#~ msgstr "Forfatter: "
+
 #~ msgid "Az  : "
 #~ msgstr "Az : "
+
+#~ msgid "Azimuthal Grid [Z]"
+#~ msgstr "Planprojisert/asimutalt rutenett [Z]"
+
+#~ msgid "Bailer"
+#~ msgstr "Øser"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Det trestjernede banner"
+
+#~ msgid "Bear's Lodge"
+#~ msgstr "Bjørnehi"
+
+#~ msgid "Bird"
+#~ msgstr "Fugl"
+
+#~ msgid "Blubber Container"
+#~ msgstr "Speklager"
+
+#, fuzzy
+#~ msgid "Bo"
+#~ msgstr "Båt"
+
+#~ msgid "Boat"
+#~ msgstr "Båt"
+
+#~ msgid "Bond"
+#~ msgstr "Bånd"
+
+#~ msgid "Bootes"
+#~ msgstr "Bjørnevokteren"
+
+#~ msgid "Bow and Arrow"
+#~ msgstr "Pil og bue"
+
+#~ msgid "Breastbone"
+#~ msgstr "Ribbein"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Forbeinet til okse"
+
+#, fuzzy
+#~ msgid "Byeong"
+#~ msgstr "Bånd"
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD skript: "
 
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "Cmd+Q : Avslutt\n"
 
+#~ msgid "CMD + Q : Quit\n"
+#~ msgstr "CMD+Q: Avslutt\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "Ctrl+Q : Avslutt\n"
+
 #~ msgid "CW 113, SH 40"
 #~ msgstr "CW 113, SH 40"
+
+#~ msgid "Caelum"
+#~ msgstr "Meiselen"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Camelopardalis"
+#~ msgstr "Giraffen"
 
 #~ msgid ""
 #~ "Can't create the file %sconfig.ini\n"
@@ -2216,23 +1193,174 @@ msgstr ""
 #~ "Dersom mappen %s ikke finnes, må du lage den selv.\n"
 #~ "Dersom mappe %s finnes, sjekk lese-/skriverettighetene dine\n"
 
-#~ msgid "Cardinal points: "
-#~ msgstr "Kardinalpunkter "
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Cancer"
+#~ msgstr "Krepsen"
+
+#~ msgid "Canes Venatici"
+#~ msgstr "Jakthundene"
+
+#~ msgid "Canis Major"
+#~ msgstr "Den store hund"
+
+#~ msgid "Canis Minor"
+#~ msgstr "Den lille hund"
+
+#~ msgid "Capricornus"
+#~ msgstr "Steinbukken"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Himmelretninger"
+
+#~ msgid "Cardinal Points [Q]"
+#~ msgstr "Himmelretninger [Q]"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Tatt hånd om av månen"
+
+#~ msgid "Caribou"
+#~ msgstr "Reinsdyr"
+
+#~ msgid "Carina"
+#~ msgstr "Kjølen"
+
+#~ msgid "Cassiopeia"
+#~ msgstr "Kassiopeia"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Katteseng"
 
 #~ msgid "Cat: NGC "
 #~ msgstr "Kat: NGC "
 
+#~ msgid "Centaurus"
+#~ msgstr "Kentauren"
+
+#~ msgid "Cepheus"
+#~ msgstr "Kefeus"
+
+#~ msgid "Cetus"
+#~ msgstr "Hvalfisken"
+
+#~ msgid "Chamaeleon"
+#~ msgstr "Kameleonen"
+
+#~ msgid "Chariot"
+#~ msgstr "Stridsvogn"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Stridsvognplass"
+
 #~ msgid "Chart mode"
 #~ msgstr "Diagram-modus"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#, fuzzy
+#~ msgid "CheonAa"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonBu"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonByeon"
+#~ msgstr "Kameleonen"
+
+#, fuzzy
+#~ msgid "CheonGa"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonGo"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonGu"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonJeon"
+#~ msgstr "Kameleonen"
+
+#, fuzzy
+#~ msgid "CheonJu"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonSa"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "CheonSeon"
+#~ msgstr "Kameleonen"
+
+#, fuzzy
+#~ msgid "CheonYu"
+#~ msgstr "Charon"
+
+#, fuzzy
+#~ msgid "Cheuk"
+#~ msgstr "Kefeus"
+
+#, fuzzy
+#~ msgid "ChilGong"
+#~ msgstr "Tvunnet lærreim"
 
 #~ msgid "Choose landscapes :"
 #~ msgstr "Velg landskap :"
 
+#~ msgid "Choose landscapes:"
+#~ msgstr "Velg landskap:"
+
+#~ msgid "Circinus"
+#~ msgstr "Passeren"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Rundt kornkammer"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Tvunnet lærreim"
+
+#~ msgid "Collarbones"
+#~ msgstr "Kravebein"
+
+#~ msgid "Colors "
+#~ msgstr "Farger "
+
+#~ msgid "Columba"
+#~ msgstr "Duen"
+
+#~ msgid "Coma Berenices"
+#~ msgstr "Berenikes hår"
+
+#~ msgid "Command recording stopped."
+#~ msgstr "Registrering av kommandoer er stoppet."
+
+#~ msgid "Configuration"
+#~ msgstr "Innstillinger"
+
 #~ msgid "Configuration window"
 #~ msgstr "Innstillinger"
 
-#~ msgid "Constellation"
-#~ msgstr "Stjernebilder"
+#~ msgid "Configuration window [1]"
+#~ msgstr "Innstillinger [1]"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensitet til stjernebilder - grafikk"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Grenser til stjernebilder"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Linjer i stjernebilder"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Navn på stjernebilder"
 
 #~ msgid "Constellation labels: "
 #~ msgstr "Navn på stjernebilder "
@@ -2240,8 +1368,68 @@ msgstr ""
 #~ msgid "Constellation lines: "
 #~ msgstr "Stjernebilder: "
 
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Stjernebilder - grafikk [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Grenser til stjernebildene"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Strektegnede stjernebilder"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Navn på stjernebilder"
+
+#~ msgid "Corona Australis"
+#~ msgstr "Den sydlige krone"
+
+#~ msgid "Corona Borealis"
+#~ msgstr "Den nordlige krone"
+
+#~ msgid "Corvus"
+#~ msgstr "Ravnen"
+
+#~ msgid "Crater"
+#~ msgstr "Begeret"
+
+#~ msgid "Crocodile"
+#~ msgstr "Krokodille"
+
+#~ msgid "Crux"
+#~ msgstr "Sydkorset"
+
+#~ msgid "Current Time :"
+#~ msgstr "Gjeldende tid :"
+
+#~ msgid "Current Time Speed is x"
+#~ msgstr "Klokkehastigheten er nå x"
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Markør fjernes etter: "
+
+#~ msgid "Curved Array"
+#~ msgstr "Bøyd pil"
+
+#~ msgid "Cygnus"
+#~ msgstr "Svanen"
+
 #~ msgid "DE : "
 #~ msgstr "DE : "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Visning av dato: "
+
+#~ msgid "Day"
+#~ msgstr "Dag"
+
+#~ msgid "Day keys: "
+#~ msgstr "Info om dagen: "
+
+#~ msgid "Decrease Time Speed [J]"
+#~ msgstr "Reduser klokkehastighet [J]"
+
+#~ msgid "Delphinus"
+#~ msgstr "Delfinen"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -2261,8 +1449,64 @@ msgstr ""
 #~ "Ctrl+F : Søke etter objekt\n"
 #~ "\n"
 
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vinduer & andre valg:\n"
+#~ "H : Hjelp                            1 : Innstillinger\n"
+#~ "I : Om Stellarium                    M : Tekstmeny (avanserte "
+#~ "innstillinger)\n"
+#~ "Ctrl + S : Kopiere skjermbildet\n"
+#~ "Ctrl + R : Registrering av skript\n"
+#~ "Ctrl + F : Søke etter objekt\n"
+#~ "Ctrl + G : Gå til valgt objekt i solsystemet\n"
+#~ "\n"
+
 #~ msgid "Did not recognize locale language code "
 #~ msgstr "Gjenkjente ikke valgte språkkode "
+
+#~ msgid "Dilyehe"
+#~ msgstr "Dilyehe"
+
+#~ msgid "Dipper"
+#~ msgstr "Øse"
+
+#~ msgid "Disk Viewport"
+#~ msgstr "Linseformet visning"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Valg for visning:\n"
+#~ "ENTER : Sylinder-/planprojesert visning\n"
+#~ "F1 : Bytt mellom hel skjerm og vindu.\n"
+#~ "C : Strektegning av stjernebildene   V : Navn på stjernebildene\n"
+#~ "R : Stjernebilder                    N : Navn på stjernetåker\n"
+#~ "Z : Planprojeserte ruter (azimutial) E : Sylinderprojeserte (ekvatorial)\n"
+#~ "P : Navn på planeter                 G : Horisont\n"
+#~ "A : Atmosfære                        F : Tåke\n"
+#~ "Q : Kardinalpunkter                  O : Bytt skalering av månen\n"
+#~ "T : Følge objekt                     S : Stjerner\n"
+#~ "4 , : Ekliptisk linje                5 . : Ekvatorlinje\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -2295,6 +1539,48 @@ msgstr ""
 #~ msgid "Distance : "
 #~ msgstr "Avstand : "
 
+#~ msgid "Dog"
+#~ msgstr "Hund"
+
+#~ msgid "Dogs"
+#~ msgstr "Hunder"
+
+#~ msgid "Dolphin"
+#~ msgstr "Delfin"
+
+#, fuzzy
+#~ msgid "DonGu"
+#~ msgstr "Dione"
+
+#~ msgid "Dorado"
+#~ msgstr "Gullfisken (sverdfisken)"
+
+#~ msgid "Draco"
+#~ msgstr "Dragen"
+
+#~ msgid "Drawing of the Constellations [C]"
+#~ msgstr "Stjernebilder - strek [C]"
+
+#~ msgid "Dried Willow"
+#~ msgstr "Tørket piletre"
+
+#~ msgid "Drum"
+#~ msgstr "Tromme"
+
+#~ msgid "Drumstick"
+#~ msgstr "Trommestikke"
+
+#~ msgid ""
+#~ "During Script Playback:\n"
+#~ "CTRL + C : End Script\n"
+#~ "6   : pause script              K   : resume script\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Under avspilling av skript:\n"
+#~ "Ctrl+C : Avslutt skript\n"
+#~ "6 : Pause skript                     K : Fortsett skript\n"
+#~ "\n"
+
 #~ msgid "E-W Centering Offset: "
 #~ msgstr "Sentrer visning Ø-V: "
 
@@ -2317,23 +1603,343 @@ msgstr ""
 #~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "FEIL i linje %d i %s\n"
 
+#~ msgid "Earth God's Temple"
+#~ msgstr "Jordgudens tempel"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Østre dør"
+
+#~ msgid "Effects "
+#~ msgstr "Effekter "
+
+#~ msgid "Elk"
+#~ msgstr "Elg"
+
+#~ msgid "Emptiness"
+#~ msgstr "Tomhet"
+
+#~ msgid "Encampment"
+#~ msgstr "Leirsted"
+
+#~ msgid "Enter observatory name"
+#~ msgstr "Angi navn på observatorium"
+
+#, fuzzy
+#~ msgid "Eo"
+#~ msgstr "Ø"
+
+#~ msgid "Equatorial Grid [E]"
+#~ msgstr "Sylinderprojisert/ekvatorialt rutenett [E]"
+
+#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
+#~ msgstr "Sylinder-/planprojisert visning [Enter]"
+
+#~ msgid "Equuleus"
+#~ msgstr "Den lille hest (føllet)"
+
+#~ msgid "Eridanus"
+#~ msgstr "Floden"
+
+#~ msgid "Error: Unable to open script file to record commands."
+#~ msgstr "Feil: Klarte ikke å åpne skriptfilen for å registrere kommandoer."
+
+#~ msgid "Establishment"
+#~ msgstr "Anlegg"
+
+#, fuzzy
+#~ msgid "Eup"
+#~ msgstr "Europa"
+
+#~ msgid "Extended Net"
+#~ msgstr "Utvidet nett"
+
+#~ msgid "Farmland"
+#~ msgstr "Bondeland"
+
+#~ msgid "Ferry Boat"
+#~ msgstr "Båtferge"
+
+#~ msgid "Fireplace"
+#~ msgstr "Ildsted"
+
+#~ msgid "First Big One"
+#~ msgstr "Den første store"
+
+#~ msgid "First Slim One"
+#~ msgstr "Den første slanke"
+
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "Fiskeøye-projeksjon"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Fem vogner"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Fem føydalkonger"
+
+#~ msgid "Flail"
+#~ msgstr "Treske"
 
 #~ msgid "Flip horizontally"
 #~ msgstr "Vend vannrett"
 
+#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
+#~ msgstr "Vend vannrett [Ctrl + Shift + H]"
+
 #~ msgid "Flip vertically"
 #~ msgstr "Vend loddrett"
+
+#~ msgid "Flip vertically [CTRL + SHIFT + V]"
+#~ msgstr "Vend loddrett [Ctrl + Shift + V]"
+
+#~ msgid "Flock"
+#~ msgstr "Flokk"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Fluktvei"
+
+#~ msgid "Fog"
+#~ msgstr "Tåke"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "For andre skjermoppløsninger, rediger filen :"
 
+#~ msgid "Ford"
+#~ msgstr "Vadested"
+
+#~ msgid "Fornax"
+#~ msgstr "Smelteovnen"
+
+#~ msgid "Four Channels"
+#~ msgstr "Fire kanaler"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Fregattfugl"
+
+#~ msgid "GO"
+#~ msgstr "Søk"
+
+#, fuzzy
+#~ msgid "Gaang"
+#~ msgstr "Kjempe"
+
+#~ msgid "Gemini"
+#~ msgstr "Tvillingene"
+
+#~ msgid "General "
+#~ msgstr "Generelt "
+
+#, fuzzy
+#~ msgid "GeoGii"
+#~ msgstr "Tvillingene"
+
+#, fuzzy
+#~ msgid "Geon"
+#~ msgstr "Tvillingene"
+
+#~ msgid "Ghosts"
+#~ msgstr "Spøkelser"
+
+#, fuzzy
+#~ msgid "GiGwan"
+#~ msgstr "Kjempe"
+
+#~ msgid "Giant"
+#~ msgstr "Kjempe"
+
+#~ msgid "Girl"
+#~ msgstr "Jente"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Godt gresskar"
+
+#~ msgid "Goto selected object [SPACE]"
+#~ msgstr "Sentrer valgt objekt [Mellomrom]"
+
+#~ msgid "Great General"
+#~ msgstr "Stor general"
+
+#~ msgid "Ground"
+#~ msgstr "Horisont"
+
+#~ msgid "Ground [G]"
+#~ msgstr "Horisont [G]"
+
+#~ msgid "Grus"
+#~ msgstr "Tranen"
+
+#, fuzzy
+#~ msgid "Gu"
+#~ msgstr "Tranen"
+
+#, fuzzy
+#~ msgid "Gwan"
+#~ msgstr "Kjempe"
+
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP 60718, HD 108248, SAO 251904"
 
+#~ msgid "Hand"
+#~ msgstr "Hånd"
+
+#, fuzzy
+#~ msgid "Hang"
+#~ msgstr "Hånd"
+
+#~ msgid "Heart"
+#~ msgstr "Hjerte"
+
+#~ msgid "Help [H]"
+#~ msgstr "Hjelp [H]"
+
+#, fuzzy
+#~ msgid "Heo"
+#~ msgstr "Løven"
+
+#~ msgid "Hercules"
+#~ msgstr "Herkules"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Flodhest"
+
+#~ msgid "Hit CTRL-R again to stop.\n"
+#~ msgstr "Trykk Ctrl+R en gang til for å stoppe.\n"
+
+#, fuzzy
+#~ msgid "Ho"
+#~ msgstr "Krok"
+
+#, fuzzy
+#~ msgid "HoBuun"
+#~ msgstr "Horn"
+
+#~ msgid "Hook"
+#~ msgstr "Krok"
+
+#~ msgid "Horn"
+#~ msgstr "Horn"
+
+#~ msgid "Horologium"
+#~ msgstr "Uret"
+
+#~ msgid "Horus"
+#~ msgstr "Horus - skyguden"
+
+#~ msgid "Hour"
+#~ msgstr "Time"
+
+#~ msgid "Hydra"
+#~ msgstr "Vannslangen"
+
+#~ msgid "Hydrus"
+#~ msgstr "Den sydlige vannslange"
+
+#, fuzzy
+#~ msgid "HyeonGwa"
+#~ msgstr "Hyperion"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Keisergarden"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Keiserlig passasje"
+
+#~ msgid "Increase Time Speed [L]"
+#~ msgstr "Øk klokkehastighet [L]"
+
+#~ msgid "Indus"
+#~ msgstr "Indianeren"
+
+#~ msgid "Info: "
+#~ msgstr "Info: "
+
+#~ msgid "Information"
+#~ msgstr "Informasjon"
+
+#~ msgid "Invalid Script command"
+#~ msgstr "Ugyldig skript-kommando"
+
 #~ msgid "Invalid sky culture directory: "
 #~ msgstr "Ugyldig mappe for himmelkultur: "
+
+#~ msgid "Jade Well"
+#~ msgstr "Jade-brønn"
+
+#, fuzzy
+#~ msgid "JaeJwa"
+#~ msgstr "Kjeve"
+
+#, fuzzy
+#~ msgid "JaeSeok"
+#~ msgstr "Sek"
+
+#~ msgid "Jaw"
+#~ msgstr "Kjeve"
+
+#, fuzzy
+#~ msgid "Jeo"
+#~ msgstr "Løven"
+
+#, fuzzy
+#~ msgid "JinHyeon"
+#~ msgstr "Hyperion"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Khanuwy-fisk"
+
+#~ msgid "Kitchen"
+#~ msgstr "Kjøkken"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Kawelos drage"
+
+#~ msgid "Lacerta"
+#~ msgstr "Firfislen"
+
+#~ msgid "Lamp Stand"
+#~ msgstr "Stålampe"
+
+#~ msgid "Lance"
+#~ msgstr "Lanse"
+
+#~ msgid "Landscape: "
+#~ msgstr "Landskap: "
+
+#~ msgid "Language"
+#~ msgstr "Språk"
+
+#~ msgid "Latitude: "
+#~ msgstr "Breddegrad: "
+
+#~ msgid "Left Flag"
+#~ msgstr "Venstre flagg"
+
+#~ msgid "Legs"
+#~ msgstr "Bein"
+
+#~ msgid "Leo"
+#~ msgstr "Løven"
+
+#~ msgid "Leo Minor"
+#~ msgstr "Den lille løve"
+
+#~ msgid "Lepus"
+#~ msgstr "Haren"
+
+#~ msgid "Libra"
+#~ msgstr "Vekten"
+
+#~ msgid "Lion"
+#~ msgstr "Løve"
+
+#~ msgid "Lizard"
+#~ msgstr "Øgle"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Hent standard oppsett: "
 
 #, fuzzy
 #~ msgid "Loading Cadwell catalog:"
@@ -2350,6 +1956,9 @@ msgstr ""
 
 #~ msgid "Loading Hipparcos star data "
 #~ msgstr "Henter Hipparcos stjernedata "
+
+#~ msgid "Loading Nebula Textures:"
+#~ msgstr "Henter stjernetåkebilder:"
 
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Henter Sao-katalog: %d/%d"
@@ -2370,11 +1979,68 @@ msgstr ""
 #~ msgid "Loading nebulas data "
 #~ msgstr "Henter data om tåker "
 
+#~ msgid "Local Script: "
+#~ msgstr "Lokalt skript: "
+
+#~ msgid "Location: "
+#~ msgstr "Plassering: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Lengdegrad: "
+
+#~ msgid "Lupus"
+#~ msgstr "Ulven"
+
+#~ msgid "Lynx"
+#~ msgstr "Gaupen"
+
+#~ msgid "Lyra"
+#~ msgstr "Lyren"
+
+#~ msgid "Magnitude"
+#~ msgstr "Størrelse"
+
 #~ msgid "Magnitude : "
 #~ msgstr "Lysstyrke : "
 
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Faktor for forstørrelse: "
+
 #~ msgid "Magnitude Sizing Multiplier: "
 #~ msgstr "Multiplikator for lysstyrke: "
+
+#~ msgid "Man with Feet Apart"
+#~ msgstr "Mann med løsrevet fot"
+
+#~ msgid "Man's Cart"
+#~ msgstr "Mannsvognen"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Manuell zoom: "
+
+#~ msgid "Market"
+#~ msgstr "Marked"
+
+#~ msgid "Market Officer"
+#~ msgstr "Markedsoffiser"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Mauis fiskekrok"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Mausoleum"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Maks størrelse å navngi: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Maks lysstyrke på stjernetåke før visning: "
+
+#~ msgid "Meadows"
+#~ msgstr "Enger"
+
+#~ msgid "Mensa"
+#~ msgstr "Bordet"
 
 #~ msgid "Message"
 #~ msgstr "Beskjed"
@@ -2384,6 +2050,18 @@ msgstr ""
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Antall meteorer per minutt"
+
+#~ msgid "Meteor zenith hourly rate"
+#~ msgstr "Antall meteorer over senit per time"
+
+#~ msgid "Microscopium"
+#~ msgstr "Mikroskopet"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensitet for Melkeveien: "
+
+#~ msgid "Minutes"
+#~ msgstr "Minutter"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2395,8 +2073,73 @@ msgstr ""
 #~ "                                     Lysstyrke: Sola -26 (lys)  Pluto +14 "
 #~ "(svak)\n"
 
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+#~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+#~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
+#~ msgstr ""
+#~ "Annet:                               Definisjoner:\n"
+#~ "9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 "
+#~ "km\n"
+#~ "Ctrl+Shift+H: Vend bilde vannrett    Lysstyrke: Sola -26 (lys)  Pluto +14 "
+#~ "(svak)\n"
+#~ "Ctrl+Shift+V: Vend bilde loddrett\n"
+#~ "Ctrl+0,...9 : Gå-til-kommando for teleskop 0,...9\n"
+
+#~ msgid "Monoceros"
+#~ msgstr "Enhjørningen"
+
+#~ msgid "Month"
+#~ msgstr "Måned"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Fortøyningspåle"
+
+#~ msgid "Mortar"
+#~ msgstr "Murer"
+
+#~ msgid ""
+#~ "Movement & selection:\n"
+#~ "Arrow Keys       : Change viewing RA/DE\n"
+#~ "Page Up/Down     : Zoom\n"
+#~ "CTRL+Up/Down     : Zoom\n"
+#~ "Left Click       : Select object\n"
+#~ "Right Click      : Unselect\n"
+#~ "CTRL+Left Click  : Unselect\n"
+#~ "\\                : Zoom out (planet + moons if applicable)\n"
+#~ "/                : Zoom to selected object\n"
+#~ "SPACE            : Center on selected object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Flytte & valg av objekt:\n"
+#~ "Piltaster      : Forandre synsvinkel\n"
+#~ "Page Up / Down : Zoom inn/ut         (eller Ctrl + pil opp / ned)\n"
+#~ "Venstre-klikk  : Velg objekt\n"
+#~ "Høyre-klikk    : Opphev valg         (eller Ctrl + venstre-klikk)\n"
+#~ "Mellomrom      : Sentrer valgt objekt\n"
+#~ "\\ : Zoom tilbake (til startpunkt eller planet med måner hvis zoomet)\n"
+#~ "/ : Zoom inn til valgt objekt\n"
+#~ "\n"
+
+#~ msgid "Musca"
+#~ msgstr "Fluen"
+
 #~ msgid "N-S Centering Offset: "
 #~ msgstr "Sentrer visning N-S: "
+
+#, fuzzy
+#~ msgid "NaaEon"
+#~ msgstr "Navajo (indianere)"
+
+#, fuzzy
+#~ msgid "NaamDoo"
+#~ msgstr "Navajo (indianere)"
+
+#, fuzzy
+#~ msgid "NamHa"
+#~ msgstr "Vinkelhaken"
 
 #~ msgid "Name : "
 #~ msgstr "Navn : "
@@ -2456,11 +2199,118 @@ msgstr ""
 #~ "Lysstyrke : %.2f\n"
 #~ "Avstand : %.8f AE"
 
-#~ msgid "Nebula"
-#~ msgstr "Tåke"
+#~ msgid "Names of the Constellations [V]"
+#~ msgstr "Navn på stjernebilder [V]"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Navigatørens triangel"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Stjernetåkesirkler"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Navn på stjernetåker"
+
+#~ msgid "Nebulas Names. Up to mag :"
+#~ msgstr "Stjernetåkenavn                         Forsterkning:"
+
+#~ msgid "Nebulas [N]"
+#~ msgstr "Stjernetåker [N]"
+
+#~ msgid "Neck"
+#~ msgstr "Nakke"
+
+#~ msgid "Net"
+#~ msgstr "Nett"
+
+#~ msgid "Night (red) mode"
+#~ msgstr "Nattmodus (rød)"
+
+#, fuzzy
+#~ msgid "Noin"
+#~ msgstr "Nei"
+
+#~ msgid "Norma"
+#~ msgstr "Vinkelhaken"
+
+#~ msgid "North River"
+#~ msgstr "Nordlige elv"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Nordlige øse"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Object Search"
+#~ msgstr "Søke etter objekt"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regel for størrelse på objekt: "
+
+#~ msgid "Octans"
+#~ msgstr "Oktanten"
+
+#~ msgid "Ophiuchus"
+#~ msgstr "Slangebæreren"
+
+#~ msgid "Orchard"
+#~ msgstr "Frukthage"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Ytre gjerde"
+
+#~ msgid "Ox"
+#~ msgstr "Okse"
+
+#~ msgid "Pair of Stars"
+#~ msgstr "Stjernepar"
+
+#, fuzzy
+#~ msgid "PalGok"
+#~ msgstr "Påfuglen"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Palassport"
+
+#~ msgid "Pavo"
+#~ msgstr "Påfuglen"
+
+#~ msgid "Pegasus"
+#~ msgstr "Pegasus"
+
+#~ msgid "Perseus"
+#~ msgstr "Persevs"
+
+#~ msgid "Pestle"
+#~ msgstr "Støter"
+
+#~ msgid "Phoenix"
+#~ msgstr "Føniks"
+
+#~ msgid "Pictor"
+#~ msgstr "Maleren"
+
+#~ msgid "Pisces"
+#~ msgstr "Fiskene"
+
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Den sydlige fisk"
+
+#~ msgid "Planet Names"
+#~ msgstr "Planetnavn"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Planetbaner"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Planetspor"
 
 #~ msgid "Planet/Moon"
 #~ msgstr "Planet/måne"
+
+#~ msgid "Planet: "
+#~ msgstr "Planet: "
 
 #~ msgid "Planets & Moons"
 #~ msgstr "Planeter & måner"
@@ -2478,14 +2328,117 @@ msgstr ""
 #~ msgid "Please save option in tab \"Location\""
 #~ msgstr "Endringer lagres under arkfanen \"Hjemsted\""
 
+#~ msgid "Point"
+#~ msgstr "Punkt"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Forhåndsvalgt himmeltid: "
+
+#~ msgid "Program Language: "
+#~ msgstr "Språk i programmet: "
+
+#~ msgid "Prow"
+#~ msgstr "Frampart"
+
+#~ msgid "Puppis"
+#~ msgstr "Akterstavnen"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Purpur-palass"
+
+#~ msgid "Pyxis"
+#~ msgstr "Kompasset"
+
+#~ msgid "Quit [CMD + Q]"
+#~ msgstr "Avslutt [Cmd + Q]"
+
+#~ msgid "Quit [CTRL + Q]"
+#~ msgstr "Avslutt [Ctrl + Q]"
+
 #~ msgid "RA : "
 #~ msgstr "RA : "
+
+#~ msgid "Rabbit Tracks"
+#~ msgstr "Harespor"
+
+#~ msgid "Race Track"
+#~ msgstr "Racebane"
+
+#~ msgid "Ramparts"
+#~ msgstr "Festningsvoller"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Normal klokkehastighet [K]"
+
+#~ msgid "Recording commands to script file:\n"
+#~ msgstr "Registrering av kommandoer til skriptfilen:\n"
+
+#~ msgid "Rendering"
+#~ msgstr "Tilpassing"
 
 #~ msgid "Restart program for"
 #~ msgstr "Du må starte programmet på nytt"
 
+#~ msgid "Reticulum"
+#~ msgstr "Nettet"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "Tilbake til dagens dato/tid"
+
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Retur til dagens tidspunkt [8]"
+
+#~ msgid "Revolving Female"
+#~ msgstr "Dreibar kvinne"
+
+#~ msgid "Revolving Male"
+#~ msgstr "Dreibar mann"
+
+#~ msgid "Right Flag"
+#~ msgstr "Høyre flagg"
+
+#~ msgid "River Turtle"
+#~ msgstr "Elveskilpadde"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Rullet tunge"
+
+#~ msgid "Rooftop"
+#~ msgstr "Hustak"
+
+#~ msgid "Room"
+#~ msgstr "Rom"
+
+#~ msgid "Root"
+#~ msgstr "Rot"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Råttent gresskar"
+
+#~ msgid "Runners"
+#~ msgstr "Løpere"
+
+#, fuzzy
+#~ msgid "SaamTae"
+#~ msgstr "Salamander"
+
+#~ msgid "Sagitta"
+#~ msgstr "Pilen"
+
+#~ msgid "Sagittarius"
+#~ msgstr "Skytten"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Salamander"
+#~ msgstr "Salamander"
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Lagre dette oppsettet som standard: "
+
+#~ msgid "Save as default"
+#~ msgstr "Lagre som standard"
 
 #~ msgid "Saving location %s to file %s\n"
 #~ msgstr "Lagrer hjemstedet %s i filen %s\n"
@@ -2493,26 +2446,197 @@ msgstr ""
 #~ msgid "Saving rendering options in file "
 #~ msgstr "Lagre valgene i fil "
 
+#~ msgid "Saving settings will save current full screen status"
+#~ msgstr ""
+#~ "Ved å lagre innstillingene, vil du også lagre status for nåværende full "
+#~ "skjerm"
+
 #~ msgid "Saving video size "
 #~ msgstr "Lagre video-størrelse "
+
+#~ msgid "Scorpius"
+#~ msgstr "Skorpionen"
+
+#~ msgid "Screen"
+#~ msgstr "Skjerm"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Skjermoppløsning:"
 
+#~ msgid "Script commander"
+#~ msgstr "Skript-kommandoer"
+
+#~ msgid "Scripts "
+#~ msgstr "Skript "
+
+#~ msgid "Sculptor"
+#~ msgstr "Billedhuggeren"
+
+#~ msgid "Scutum"
+#~ msgstr "Skjoldet"
+
+#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+#~ msgstr "Søk etter (f.eks: Saturn, Polaris, HP6218, Orion, M31):"
+
 #~ msgid "Search for object"
 #~ msgstr "Søk etter objekt"
+
+#~ msgid "Search for object [CTRL + F]"
+#~ msgstr "Søk etter et objekt [Ctrl + F]"
+
+#~ msgid "Sek"
+#~ msgstr "Sek"
+
+#~ msgid "Selected Constellation Only"
+#~ msgstr "Kun valgte stjernebilde"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis"
+
+#, fuzzy
+#~ msgid "Seong"
+#~ msgstr "Sekunder"
+
+#~ msgid "Serpens"
+#~ msgstr "Slangen"
+
+#~ msgid "Set Location "
+#~ msgstr "Angi sted "
+
+#~ msgid "Set Time "
+#~ msgstr "Angi tid "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Angi tidssone: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Språk i programmet: "
+
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "Angi lokalisering av landskapet: "
+
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "Oppdater plassering ved endring av landskap"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Syv høyheter"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Syv små jenter"
+
+#~ msgid "Sextans"
+#~ msgstr "Sekstanten"
+
+#~ msgid "Sheep"
+#~ msgstr "Sau"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Saueflokk"
+
+#~ msgid "Shut Down: "
+#~ msgstr "Avslutte: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Kosmisk (sidereal)"
 
 #~ msgid "Size : "
 #~ msgstr "Størrelse : "
 
+#~ msgid "Sky Culture: "
+#~ msgstr "Stjernebilder utfra kultur: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Språk på himmelen: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Himmeltid ved oppstart: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Himmeltid: "
+
+#~ msgid "Snake"
+#~ msgstr "Slange"
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Hjemmeplanet i solsystemet: "
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Soldatmarked"
+
+#, fuzzy
+#~ msgid "Soun"
+#~ msgstr "Sola"
+
+#~ msgid "South River"
+#~ msgstr "Sørlige elv"
+
+#~ msgid "Spear"
+#~ msgstr "Spyd"
+
 #~ msgid "Spectral : "
 #~ msgstr "Spektral : "
+
+#~ msgid "Spring"
+#~ msgstr "Vår"
+
+#~ msgid "Square Granary"
+#~ msgstr "Firkantet kornkammer"
+
+#~ msgid "Star"
+#~ msgstr "Stjerne"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Forsterkning av stjerner: "
 
+#~ msgid "Star Names. Up to mag :"
+#~ msgstr "Stjernenavn                                Forsterkning:"
+
 #~ msgid "Star No./Name"
 #~ msgstr "Stjernenr./-navn"
+
+#~ msgid "Star Twinkle. Amount :"
+#~ msgstr "Stjernefunkling                            Intensitet :"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Forsterking av stjerneverdi: "
+
+#~ msgid "Stars "
+#~ msgstr "Stjerner "
+
+#~ msgid "Stars of Water"
+#~ msgstr "Vannstjerner"
+
+#~ msgid "Stomach"
+#~ msgstr "Mage"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Høyeste palass"
+
+#, fuzzy
+#~ msgid "TaeMi"
+#~ msgstr "Hale"
+
+#, fuzzy
+#~ msgid "Tae_iil"
+#~ msgstr "Hale"
+
+#~ msgid "Tail"
+#~ msgstr "Hale"
+
+#~ msgid "Taurus"
+#~ msgstr "Tyren"
+
+#~ msgid "Telescopium"
+#~ msgstr "Teleskopet"
+
+#~ msgid "The Asar Battlefield"
+#~ msgstr "Æsestriden"
+
+#~ msgid "The Fishermen"
+#~ msgstr "Fiskekarer"
+
+#~ msgid "The Seven"
+#~ msgstr "De syv"
 
 #~ msgid ""
 #~ "The current config file is from a previous version (>=0.6.0).\n"
@@ -2529,6 +2653,21 @@ msgstr ""
 #~ "Nåværende oppsettsfil tilhører en versjon som ikke støttesfor å bli "
 #~ "importert (%s).\n"
 #~ "Den vil nå bli erstattet med en standard oppsettsfil.\n"
+
+#~ msgid "Three Stars"
+#~ msgstr "Tre stjerner"
+
+#~ msgid "Three Steps"
+#~ msgstr "Tre trinn"
+
+#~ msgid "Thunder and Lightning"
+#~ msgstr "Lyn og torden"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Tordenvær"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Lyn"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2547,14 +2686,92 @@ msgstr ""
 #~ "[ : Tilbake 7 dager                  ] : Framover 7 dager\n"
 #~ "\n"
 
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Tid & dato:\n"
+#~ "6 : Klokkehastighet pause            7 : Klokkehastighet 0\n"
+#~ "8 : Still klokka til nåtid           J : Senk klokkehastigheten\n"
+#~ "K : Normal klokkehastighet           L : Øk klokkehastigheten\n"
+#~ "- : Tilbake 1 dag                    = : Fram 1 dag   (Alt+-/= for "
+#~ "kosmisk dag)\n"
+#~ "[ : Tilbake 1 uke                    ] : Fram 1 uke   (Alt+[/] for "
+#~ "kosmisk uke)\n"
+#~ "Ctrl + - : Tilbake 1 time            Ctrl + = : Fram 1 time\n"
+#~ "\n"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Visning av tid: "
+
+#~ msgid "Time Zone :"
+#~ msgstr "Tidssone :"
+
+#~ msgid "Time speed : "
+#~ msgstr "Klokkehastighet : "
+
+#~ msgid "Toilet"
+#~ msgstr "Toalett"
+
+#~ msgid "Triangle"
+#~ msgstr "Trekant"
+
+#~ msgid "Triangulum"
+#~ msgstr "Triangelet"
+
+#~ msgid "Triangulum Australe"
+#~ msgstr "Det sydlige triangelet"
+
+#~ msgid "Tripod"
+#~ msgstr "Trebent stativ"
+
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Prøv `%s --help' for mer informasjon.\n"
 
 #~ msgid "Try to create directory %s\n"
 #~ msgstr "Prøv å lage mappen %s\n"
 
+#~ msgid "Tucana"
+#~ msgstr "Tukanen"
+
+#~ msgid "Turtle"
+#~ msgstr "Skilpadde"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Funkling: "
+
+#~ msgid "Two Jaws"
+#~ msgstr "To kjever"
+
+#~ msgid "Two Placed Far Apart"
+#~ msgstr "To plassert langt vekk"
+
+#~ msgid "Two Poles"
+#~ msgstr "To poler"
+
+#~ msgid "Two Sunbeams"
+#~ msgstr "To solstråler"
+
+#~ msgid "Two in Front"
+#~ msgstr "To foran"
+
 #~ msgid "Type : "
 #~ msgstr "Type : "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Oppdater programmet via internett: "
+
+#~ msgid "Ursa Major"
+#~ msgstr "Storebjørn"
+
+#~ msgid "Ursa Minor"
+#~ msgstr "Lillebjørn"
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2565,11 +2782,99 @@ msgstr ""
 #~ " -v, --version Viser versjonsinformasjon og avslutter.\n"
 #~ " -h, --help Viser hjelp og avslutter.\n"
 
+#~ msgid ""
+#~ "Use key J and L to decrease and increase\n"
+#~ "   time speed.\n"
+#~ "Use key K to return to real time speed."
+#~ msgstr ""
+#~ "Hurtigtaster for å endre klokkehastigheten:\n"
+#~ "J :  Reduserer\n"
+#~ "L :  Øker\n"
+#~ "K : Tilbakestiller til vanlig"
+
+#~ msgid "Using System Default Time Zone"
+#~ msgstr "Bruker tidssonen angitt i operativsystem"
+
 #~ msgid "Using sky language from environment locale: "
 #~ msgstr "Bruker språk fra lokal mappe: "
 
+#, fuzzy
+#~ msgid "Veado"
+#~ msgstr "Enger"
+
+#~ msgid "Vela"
+#~ msgstr "Seilet"
+
+#, fuzzy
+#~ msgid "Vespeiro"
+#~ msgstr "Jomfruen"
+
+#~ msgid "Viewport Distorter"
+#~ msgstr "Forvrengning av bildefelt"
+
+#~ msgid "Virgo"
+#~ msgstr "Jomfruen"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Gledens stemme"
+
+#~ msgid "Volans"
+#~ msgstr "Flygefisken"
+
+#~ msgid "Vulpecula"
+#~ msgstr "Reven"
+
+#~ msgid "Wall"
+#~ msgstr "Vegg"
+
+#~ msgid "Waty Bekety"
+#~ msgstr "Waty Bekety"
+
+#~ msgid "Weaving Girl"
+#~ msgstr "Vevende jente"
+
+#~ msgid "Well"
+#~ msgstr "Brønn"
+
+#~ msgid "Western Door"
+#~ msgstr "Vestre dør"
+
 #~ msgid "Will create config files in %s\n"
 #~ msgstr "Vil lage oppsettsfiler i %s\n"
+
+#~ msgid "Willow"
+#~ msgstr "Piletre"
+
+#~ msgid "Wings"
+#~ msgstr "Vinger"
+
+#~ msgid "Winnowing Basket"
+#~ msgstr "Rensekurv"
+
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Ulvens kjeft"
+
+#~ msgid "Woman's Bed"
+#~ msgstr "Kvinneseng"
+
+#~ msgid "Woman's Cart"
+#~ msgstr "Kvinnevognen"
+
+#~ msgid "Xuanyuan"
+#~ msgstr "Xuanyuan"
+
+#, fuzzy
+#~ msgid "YeoSa"
+#~ msgstr "År"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "Zaofu"
+#~ msgstr "Zaofu"
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Trinn for zoom : "
 
 #~ msgid "change to apply."
 #~ msgstr "for å vise endringene."
