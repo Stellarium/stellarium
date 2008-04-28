@@ -686,7 +686,7 @@ void StarMgr::updateI18n() {
   for (map<int,QString>::iterator it(common_names_map.begin());
        it!=common_names_map.end();it++) {
     const int i = it->first;
-    const QString t(trans.translate(it->second));
+    const QString t(trans.qtranslate(it->second));
     common_names_map_i18n[i] = t;
     common_names_index_i18n[t.toUpper()] = i;
   }
