@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-28 22:08+0200\n"
+"POT-Creation-Date: 2008-02-07 17:48+0100\n"
 "PO-Revision-Date: 2007-12-13 14:18+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -17,317 +17,284 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:168
+#: src/deprecated/stel_ui.cpp:734
+msgid ""
+"   Please check for newer versions and send bug reports\n"
+"    and comments to us at: http://www.stellarium.org\n"
+"\n"
+msgstr ""
+"   Tarkasta uudet versiot ja lähetä virheraportit\n"
+"    sekä kommentit osoitteeseen http://www.stellarium.org\n"
+"\n"
+
+#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
 msgid " Light Years"
 msgstr " valovuotta"
 
-#: src/ui_viewDialog.h:1280
-msgid "10"
-msgstr ""
+#: src/deprecated/stel_ui_conf.cpp:1044
+msgid ": Exceptional Leonid rate"
+msgstr ": Poikkeuksellinen leonidien aktiivisuus"
 
-#: src/ui_viewDialog.h:1282
-#, fuzzy
-msgid "10000"
-msgstr "J2000"
+#: src/deprecated/stel_ui_conf.cpp:1051
+msgid ": Highest rate ever (1966 Leonids)"
+msgstr ": Suurin tunnettu aktiivisuus (1966 leonidit)"
 
-#: src/ui_viewDialog.h:1283
-#, fuzzy
-msgid "144000"
-msgstr "J2000"
+#: src/deprecated/stel_ui_conf.cpp:1030
+msgid ": Normal rate"
+msgstr ": Normaali aktiivisuus"
 
-#: src/ui_viewDialog.h:1281
-msgid "80"
-msgstr ""
+#: src/deprecated/stel_ui_conf.cpp:1037
+msgid ": Standard Perseids rate"
+msgstr ": Perseidien normaaliaktiivisuus"
 
-#: src/ui_viewDialog.h:1275
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
 msgid "AU"
 msgstr "AU"
 
-#: src/translations.h:561
-msgid "AlZaa"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:403
+msgid "Actual Time"
+msgstr "Nykyinen aika"
 
-#: src/ui_viewDialog.h:1290
-msgid "Amount:"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:385
+msgid "Administration "
+msgstr "Hallinta "
 
-#: src/translations.h:82
+#: src/deprecated/stel_ui_conf.cpp:152
+msgid "Also display Nebulas without textures"
+msgstr "Näytä myös kuvattomat tähtisumut"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:390
+msgid "Altitude (m): "
+msgstr "Korkeus (m): "
+
+#: src/deprecated/stel_ui_conf.cpp:347
+msgid "Altitude : "
+msgstr "Korkeus : "
+
+#: src/translations.h:81
 msgid "Andromeda"
 msgstr "Andromeda"
 
-#: src/translations.h:342
+#: src/translations.h:341
 #, fuzzy
 msgid "Animal"
 msgstr "Ilmapumppu"
 
-#: src/translations.h:628
-#, fuzzy
-msgid "Anta"
-msgstr "Ilmapumppu"
-
-#: src/translations.h:134
+#: src/translations.h:133
 msgid "Antlia"
 msgstr "Ilmapumppu"
 
-#: src/ui_viewDialog.h:1304
-msgid "Apollo"
-msgstr ""
-
-#: src/translations.h:138
+#: src/translations.h:137
 msgid "Apus"
 msgstr "Paratiisilintu"
 
-#: src/translations.h:167
+#: src/translations.h:166
 msgid "Aquarius"
 msgstr "Vesimies"
 
-#: src/translations.h:81
+#: src/translations.h:80
 msgid "Aquila"
 msgstr "Kotka"
 
-#: src/translations.h:84
+#: src/translations.h:83
 msgid "Ara"
 msgstr "Alttari"
 
-#: src/translations.h:87
+#: src/deprecated/s_tui.h:292
+msgid "Are you sure ?"
+msgstr ""
+
+#: src/translations.h:86
 msgid "Aries"
 msgstr "Oinas"
 
-#: src/translations.h:247
+#: src/deprecated/stel_ui_tuiconf.cpp:638
+msgid "Arrow down to load list."
+msgstr "Hae lista alanuolella."
+
+#: src/translations.h:246
 msgid "Arsenal"
 msgstr "Varikko"
 
-#: src/ui_viewDialog.h:1322
-msgid "Art brightness: "
-msgstr ""
+#: src/deprecated/stel_ui_conf.cpp:223
+msgid "Atmosphere"
+msgstr "Ilmakehä"
 
-#: src/translations.h:101
+#: src/deprecated/stel_ui.cpp:686
+msgid "Atmosphere [A]"
+msgstr "Ilmakehä [A]"
+
+#: src/translations.h:100
 msgid "Auriga"
 msgstr "Ajomies"
 
-#: src/translations.h:317
+#: src/translations.h:316
 msgid "Aurvandil's Toe"
 msgstr ""
 
-#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:128
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:118
+#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
+msgid "Author: "
+msgstr "Tekijä: "
+
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
 msgid "Az/Alt: "
 msgstr "Atsim./Kork.: "
 
-#: src/ui_viewDialog.h:1310
-#, fuzzy
-msgid "Azimutal grid"
+#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
+msgid "Azimuthal Grid"
 msgstr "Atsimuuttiasteikko"
 
-#: src/translations.h:379
-#, fuzzy
-msgid "Baang"
-msgstr "Jättiläinen"
+#: src/deprecated/stel_ui.cpp:678
+msgid "Azimuthal Grid [Z]"
+msgstr "Atsimuuttiasteikko [Z]"
 
-#: src/translations.h:615
-msgid "BaekTaak"
-msgstr ""
-
-#: src/translations.h:295
+#: src/translations.h:294
 msgid "Bailer"
 msgstr "Äyskäri"
 
-#: src/translations.h:292
+#: src/translations.h:291
 msgid "Banner of Three Stars"
 msgstr "Kolmen tähden nauha"
 
-#: src/translations.h:349
+#: src/translations.h:348
 msgid "Bear's Lodge"
 msgstr "Karhun maja"
 
-#: src/translations.h:378 src/translations.h:501
-#, fuzzy
-msgid "Beol"
-msgstr "Vene"
-
-#: src/translations.h:177
+#: src/translations.h:176
 msgid "Bird"
 msgstr "Lintu"
 
-#: src/translations.h:334
+#: src/translations.h:333
 msgid "Blubber Container"
 msgstr "Valaanrasva-astia"
 
-#: src/translations.h:571
-#, fuzzy
-msgid "Bo"
-msgstr "Vene"
-
-#: src/translations.h:181 src/translations.h:252
+#: src/translations.h:180 src/translations.h:251
 msgid "Boat"
 msgstr "Vene"
 
-#: src/translations.h:280
+#: src/translations.h:279
 msgid "Bond"
 msgstr "Side"
 
-#: src/translations.h:90
+#: src/translations.h:89
 msgid "Bootes"
 msgstr "Karhunvartija"
 
-#: src/translations.h:256
+#: src/translations.h:255
 msgid "Bow and Arrow"
 msgstr "Jousi ja nuoli"
 
-#: src/translations.h:332
+#: src/translations.h:331
 msgid "Breastbone"
 msgstr "Rintalasta"
 
-#: src/translations.h:453
-#, fuzzy
-msgid "BuRo"
-msgstr "Vene"
-
-#: src/translations.h:386
-msgid "BuYeol"
-msgstr ""
-
-#: src/translations.h:570
-msgid "BukDuu"
-msgstr ""
-
-#: src/translations.h:587
-msgid "BukGeuk"
-msgstr ""
-
-#: src/translations.h:443
-msgid "BukRakSaMuun"
-msgstr ""
-
-#: src/translations.h:172
+#: src/translations.h:171
 msgid "Bull's Foreleg"
 msgstr "Härän etujalat"
 
-#: src/translations.h:433
-msgid "BunMyo"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:458
+msgid "CD/DVD Script: "
+msgstr "CD/DVD-komentojono: "
 
-#: src/translations.h:411
-#, fuzzy
-msgid "BuuGwang"
-msgstr "Jättiläinen"
+#: src/deprecated/stel_ui.cpp:816
+msgid "CMD + Q : Quit\n"
+msgstr "CMD + Q : Lopeta\n"
 
-#: src/translations.h:509
-msgid "BuukHa"
-msgstr ""
+#: src/deprecated/stel_ui.cpp:814
+msgid "CTRL + Q : Quit\n"
+msgstr "CTRL + Q : Lopeta\n"
 
-#: src/translations.h:448
-msgid "ByeokRyeok"
-msgstr ""
-
-#: src/translations.h:401
-#, fuzzy
-msgid "Byeol"
-msgstr "Side"
-
-#: src/translations.h:504 src/translations.h:559
-#, fuzzy
-msgid "Byeong"
-msgstr "Side"
-
-#: src/translations.h:91
+#: src/translations.h:90
 msgid "Caelum"
 msgstr "Veistotaltta"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:399
+msgid "Calendar"
+msgstr ""
 
 #: src/translations.h:45
 msgid "Callisto"
 msgstr "Kallisto"
 
-#: src/translations.h:118
+#: src/translations.h:117
 msgid "Camelopardalis"
 msgstr "Kirahvi"
 
-#: src/translations.h:93
+#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
+msgid "Cancel"
+msgstr "Hylkää"
+
+#: src/translations.h:92
 msgid "Cancer"
 msgstr "Krapu"
 
-#: src/translations.h:100
+#: src/translations.h:99
 msgid "Canes Venatici"
 msgstr "Ajokoirat"
 
-#: src/translations.h:119
+#: src/translations.h:118
 msgid "Canis Major"
 msgstr "Iso koira"
 
-#: src/translations.h:146
+#: src/translations.h:145
 msgid "Canis Minor"
 msgstr "Pieni koira"
 
-#: src/translations.h:94
+#: src/translations.h:93
 msgid "Capricornus"
 msgstr "Kauris"
 
-#: src/ui_viewDialog.h:1314
-#, fuzzy
-msgid "Cardinal points"
+#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
+msgid "Cardinal Points"
 msgstr "Ilmansuunnat"
 
-#: src/translations.h:303
+#: src/deprecated/stel_ui.cpp:684
+msgid "Cardinal Points [Q]"
+msgstr "Ilmansuunnat [Q]"
+
+#: src/translations.h:302
 msgid "Cared for by Moon"
 msgstr "Kuun kaitsema"
 
-#: src/translations.h:330
+#: src/translations.h:329
 #, fuzzy
 msgid "Caribou"
 msgstr "Ajuri"
 
-#: src/translations.h:95
+#: src/translations.h:94
 msgid "Carina"
 msgstr "Köli"
 
-#: src/translations.h:96
+#: src/translations.h:95
 msgid "Cassiopeia"
 msgstr "Kassiopeia"
 
-#: src/translations.h:296
+#: src/translations.h:295
 msgid "Cat's Cradle"
 msgstr "Kissankehto"
 
-#: src/translations.h:97
+#: src/translations.h:96
 msgid "Centaurus"
 msgstr "Kentauri"
 
-#: src/translations.h:98
+#: src/translations.h:97
 msgid "Cepheus"
 msgstr "Kefeus"
 
-#: src/translations.h:86
+#: src/translations.h:85
 msgid "Cetus"
 msgstr "Valas"
 
-#: src/translations.h:451
-#, fuzzy
-msgid "Chaek"
-msgstr "Kefeus"
-
-#: src/translations.h:92
+#: src/translations.h:91
 msgid "Chamaeleon"
 msgstr "Kameleontti"
 
-#: src/translations.h:206
+#: src/translations.h:205
 msgid "Chariot"
 msgstr "Ajuri"
 
-#: src/translations.h:261
+#: src/translations.h:260
 msgid "Chariot Yard"
 msgstr "Hevospiha"
 
@@ -335,336 +302,180 @@ msgstr "Hevospiha"
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:196
+#: src/translations.h:195
 msgid "Chematy"
 msgstr "Chematy"
-
-#: src/translations.h:477
-#, fuzzy
-msgid "CheonAa"
-msgstr "Charon"
-
-#: src/translations.h:567
-#, fuzzy
-msgid "CheonBae"
-msgstr "Charon"
-
-#: src/translations.h:407
-#, fuzzy
-msgid "CheonBu"
-msgstr "Charon"
-
-#: src/translations.h:394
-#, fuzzy
-msgid "CheonByeon"
-msgstr "Kameleontti"
-
-#: src/translations.h:474
-#, fuzzy
-msgid "CheonCham"
-msgstr "Charon"
-
-#: src/translations.h:463 src/translations.h:582
-#, fuzzy
-msgid "CheonChang"
-msgstr "Charon"
-
-#: src/translations.h:478
-#, fuzzy
-msgid "CheonEum"
-msgstr "Charon"
-
-#: src/translations.h:490
-#, fuzzy
-msgid "CheonGa"
-msgstr "Charon"
-
-#: src/translations.h:396
-#, fuzzy
-msgid "CheonGae"
-msgstr "Charon"
-
-#: src/translations.h:385
-#, fuzzy
-msgid "CheonGang"
-msgstr "Charon"
-
-#: src/translations.h:599
-#, fuzzy
-msgid "CheonGii"
-msgstr "Charon"
-
-#: src/translations.h:491
-#, fuzzy
-msgid "CheonGo"
-msgstr "Charon"
-
-#: src/translations.h:445 src/translations.h:529 src/translations.h:531
-#, fuzzy
-msgid "CheonGu"
-msgstr "Charon"
-
-#: src/translations.h:488
-#, fuzzy
-msgid "CheonGwan"
-msgstr "Charon"
-
-#: src/translations.h:471
-#, fuzzy
-msgid "CheonGyun"
-msgstr "Charon"
-
-#: src/translations.h:457
-#, fuzzy
-msgid "CheonHoun"
-msgstr "Kameleontti"
-
-#: src/translations.h:486
-#, fuzzy
-msgid "CheonHwang"
-msgstr "Charon"
-
-#: src/translations.h:590
-msgid "CheonHwangTaeJae"
-msgstr ""
-
-#: src/translations.h:459
-#, fuzzy
-msgid "CheonJaangGuun"
-msgstr "Charon"
-
-#: src/translations.h:493
-#, fuzzy
-msgid "CheonJeol"
-msgstr "Kameleontti"
-
-#: src/translations.h:353 src/translations.h:623
-#, fuzzy
-msgid "CheonJeon"
-msgstr "Kameleontti"
-
-#: src/translations.h:413
-#, fuzzy
-msgid "CheonJin"
-msgstr "Kameleontti"
-
-#: src/translations.h:586 src/translations.h:592
-#, fuzzy
-msgid "CheonJu"
-msgstr "Charon"
-
-#: src/translations.h:511
-#, fuzzy
-msgid "CheonJuun"
-msgstr "Charon"
-
-#: src/translations.h:444
-#, fuzzy
-msgid "CheonMang"
-msgstr "Charon"
-
-#: src/translations.h:356
-#, fuzzy
-msgid "CheonMun"
-msgstr "Charon"
-
-#: src/translations.h:540
-#, fuzzy
-msgid "CheonMyo"
-msgstr "Charon"
-
-#: src/translations.h:371
-#, fuzzy
-msgid "CheonPouk"
-msgstr "Charon"
-
-#: src/translations.h:470
-#, fuzzy
-msgid "CheonReum"
-msgstr "Charon"
-
-#: src/translations.h:425
-#, fuzzy
-msgid "CheonRuSeong"
-msgstr "Kameleontti"
-
-#: src/translations.h:579
-#, fuzzy
-msgid "CheonRyoe"
-msgstr "Charon"
-
-#: src/translations.h:532
-#, fuzzy
-msgid "CheonSa"
-msgstr "Charon"
-
-#: src/translations.h:465
-#, fuzzy
-msgid "CheonSeon"
-msgstr "Kameleontti"
-
-#: src/translations.h:602 src/translations.h:603
-#, fuzzy
-msgid "CheonShi"
-msgstr "Charon"
-
-#: src/translations.h:496
-#, fuzzy
-msgid "CheonWon"
-msgstr "Kameleontti"
-
-#: src/translations.h:464
-#, fuzzy
-msgid "CheonYu"
-msgstr "Charon"
-
-#: src/translations.h:368
-#, fuzzy
-msgid "CheonYuu"
-msgstr "Charon"
-
-#: src/translations.h:573
-#, fuzzy
-msgid "Cheon_iil"
-msgstr "Charon"
-
-#: src/translations.h:480
-#, fuzzy
-msgid "Cheonwon"
-msgstr "Kameleontti"
-
-#: src/translations.h:505
-#, fuzzy
-msgid "Cheuk"
-msgstr "Kefeus"
-
-#: src/translations.h:600
-#, fuzzy
-msgid "ChilGong"
-msgstr "Kierretty hihna"
 
 #: src/translations.h:69
 msgid "Chinese"
 msgstr "Kiinalainen"
 
-#: src/translations.h:427
-#, fuzzy
-msgid "ChoBo"
-msgstr "Charon"
+#: src/deprecated/stel_ui_conf.cpp:428
+msgid "Choose landscapes:"
+msgstr "Valitse maisemat"
 
-#: src/translations.h:364
-#, fuzzy
-msgid "ChoYo"
-msgstr "Charon"
-
-#: src/translations.h:479
-#, fuzzy
-msgid "ChuuGo"
-msgstr "Charon"
-
-#: src/translations.h:103
+#: src/translations.h:102
 msgid "Circinus"
 msgstr "Harppi"
 
-#: src/translations.h:244
+#: src/translations.h:243
 msgid "Circular Granary"
 msgstr "Pyöreä vilja-aitta"
 
-#: src/translations.h:204
+#: src/translations.h:203
 msgid "Coiled Thong"
 msgstr "Kierretty hihna"
 
-#: src/translations.h:328
+#: src/translations.h:327
 #, fuzzy
 msgid "Collarbones"
 msgstr "Tähtikuvioviivat"
 
-#: src/translations.h:102
+#: src/deprecated/stel_ui_tuiconf.cpp:382
+msgid "Colors "
+msgstr "Värit "
+
+#: src/translations.h:101
 msgid "Columba"
 msgstr "Kyyhkynen"
 
-#: src/translations.h:99
+#: src/translations.h:98
 msgid "Coma Berenices"
 msgstr "Bereniken hiukset"
 
-#: src/ui_searchDialogGui.h:225
-#, fuzzy
-msgid "Completions"
-msgstr "Orion"
+#: src/deprecated/stel_ui.cpp:1037
+msgid "Command recording stopped."
+msgstr "Komentojen tallennus pysäytetty."
 
-#: src/ui_viewDialog.h:1317
-#, fuzzy
-msgid "Constellations"
+#: src/deprecated/stel_ui_conf.cpp:60
+msgid "Configuration"
+msgstr "Asetukset"
+
+#: src/deprecated/stel_ui.cpp:694
+msgid "Configuration window [1]"
+msgstr "Asetukset [1]"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:427
+msgid "Constellation Art Intensity"
+msgstr "Tähdistökuvien voimakkuus"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:428
+msgid "Constellation Boundaries"
+msgstr "Tähdistöjen rajat"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:425
+msgid "Constellation Lines"
 msgstr "Tähtikuvioviivat"
 
-#: src/translations.h:105
+#: src/deprecated/stel_ui_tuiconf.cpp:426
+msgid "Constellation Names"
+msgstr "Tähdistöjen nimet"
+
+#: src/deprecated/stel_ui.cpp:676
+msgid "Constellations Art [R]"
+msgstr "Tähdistökuvat [R]"
+
+#: src/deprecated/stel_ui_conf.cpp:123
+msgid "Constellations Boundaries"
+msgstr "Tähdistöjen rajat"
+
+#: src/deprecated/stel_ui_conf.cpp:113
+msgid "Constellations Lines"
+msgstr "Tähdistöviivat"
+
+#: src/deprecated/stel_ui_conf.cpp:118
+msgid "Constellations Names"
+msgstr "Tähdistöjen nimet"
+
+#: src/translations.h:104
 msgid "Corona Australis"
 msgstr "Etelän kruunu"
 
-#: src/translations.h:106
+#: src/translations.h:105
 msgid "Corona Borealis"
 msgstr "Pohjan kruunu"
 
-#: src/translations.h:107
+#: src/translations.h:106
 msgid "Corvus"
 msgstr "Korppi"
 
-#: src/translations.h:104
+#: src/translations.h:103
 msgid "Crater"
 msgstr "Malja"
 
-#: src/translations.h:182
+#: src/translations.h:181
 msgid "Crocodile"
 msgstr "Krokotiili"
 
-#: src/translations.h:108
+#: src/translations.h:107
 msgid "Crux"
 msgstr "Etelän risti"
 
-#: src/ui_locationDialogGui.h:269
-#, fuzzy
-msgid "Cursor :"
+#: src/deprecated/stel_ui_conf.cpp:270
+msgid "Current Time :"
+msgstr "Nykyhetki :"
+
+#: src/deprecated/stel_ui_conf.cpp:1082
+msgid "Current Time Speed is x"
+msgstr "Nykyinen aika-askel on x"
+
+#: src/deprecated/stel_ui_conf.cpp:321
+msgid "Cursor : "
 msgstr "Kohdistin : "
 
-#: src/translations.h:203
+#: src/deprecated/stel_ui_tuiconf.cpp:451
+msgid "Cursor Timeout: "
+msgstr "Kohdistimen aikakatkaisu: "
+
+#: src/translations.h:202
 msgid "Curved Array"
 msgstr "Kaareva nuoli"
 
-#: src/translations.h:109
+#: src/translations.h:108
 msgid "Cygnus"
 msgstr "Joutsen"
 
-#: src/translations.h:360
-msgid "DaeGaak"
-msgstr ""
-
-#: src/translations.h:467
-msgid "DaeReung"
-msgstr ""
-
-#: src/translations.h:596
-#, fuzzy
-msgid "DaeRii"
-msgstr "Häntä"
-
-#: src/ui_dateTimeDialogGui.h:124
-#, fuzzy
-msgid "Date and Time"
+#: src/deprecated/stel_ui_conf.cpp:535
+msgid "Date & Time"
 msgstr "Päivays & aika"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:406
+msgid "Date Display Format: "
+msgstr "Päiväyksen muoto: "
+
+#: src/deprecated/s_gui.cpp:2747
+msgid "Day"
+msgstr "Päivä"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:398
+msgid "Day keys: "
+msgstr ""
+
+#: src/deprecated/stel_ui.cpp:719
+msgid "Decrease Time Speed [J]"
+msgstr "Pienennä aika-askelta [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/translations.h:110
+#: src/translations.h:109
 msgid "Delphinus"
 msgstr "Delfiini"
 
-#: src/translations.h:436
-msgid "DeungSaa"
+#: src/deprecated/stel_ui.cpp:788
+msgid ""
+"Dialogs & other controls:\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
+"CTRL + F : Toggle object finder\n"
+"CTRL + G : Goto selected solar system object\n"
+"\n"
 msgstr ""
 
-#: src/translations.h:311
+#: src/translations.h:310
 msgid "Dilyehe"
 msgstr ""
 
@@ -672,86 +483,94 @@ msgstr ""
 msgid "Dione"
 msgstr "Dione"
 
-#: src/translations.h:209 src/translations.h:340
+#: src/translations.h:208 src/translations.h:339
 msgid "Dipper"
 msgstr "Kauha"
 
-#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
-#: src/modules/StarWrapper.cpp:125 src/modules/StarWrapper.cpp:167
+#: src/deprecated/stel_ui_conf.cpp:398
+msgid "Disk Viewport"
+msgstr "Putkinäkymä"
+
+#: src/deprecated/stel_ui.cpp:776
+msgid ""
+"Display options:\n"
+"ENTER : Equatorial/altazimuthal mount\n"
+"F1  : Toggle fullscreen / window.\n"
+"C   : Constellation lines       V   : Constellation labels\n"
+"R   : Constellation art         E   : Equatorial grid\n"
+"Z   : Azimuthal grid            N   : Nebula labels\n"
+"P   : Planet labels             G   : Ground\n"
+"A   : Atmosphere                F   : Fog\n"
+"Q   : Cardinal points           O   : Toggle moon scaling\n"
+"T   : Object tracking           S   : Stars\n"
+"4 , : Ecliptic line             5 . : Equator line\n"
+"\n"
+msgstr ""
+
+#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
 msgid "Distance: "
 msgstr "Etäisyys: "
 
-#: src/translations.h:616
-#, fuzzy
-msgid "DoSaa"
-msgstr "Vuosi"
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
+msgid "Do"
+msgstr ""
 
-#: src/translations.h:254
+#: src/translations.h:253
 msgid "Dog"
 msgstr "Koira"
 
-#: src/translations.h:327
+#: src/translations.h:326
 #, fuzzy
 msgid "Dogs"
 msgstr "Koira"
 
-#: src/translations.h:304
+#: src/translations.h:303
 msgid "Dolphin"
 msgstr "Delfiini"
 
-#: src/translations.h:542
-#, fuzzy
-msgid "DonGu"
-msgstr "Dione"
-
-#: src/translations.h:446
-#, fuzzy
-msgid "DongByeok"
-msgstr "Kameleontti"
-
-#: src/translations.h:375
-msgid "DongHaam"
+#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
+msgid "Done"
 msgstr ""
 
-#: src/translations.h:512
-#, fuzzy
-msgid "DongJeong"
-msgstr "Kameleontti"
-
-#: src/translations.h:111
+#: src/translations.h:110
 msgid "Dorado"
 msgstr "Kultakala"
 
-#: src/ui_viewDialog.h:1271
-msgid "Download images"
-msgstr ""
-
-#: src/translations.h:112
+#: src/translations.h:111
 msgid "Draco"
 msgstr "Lohikäärme"
 
-#: src/translations.h:345
+#: src/deprecated/stel_ui.cpp:672
+msgid "Drawing of the Constellations [C]"
+msgstr "Tähdistöviivat [C]"
+
+#: src/translations.h:344
 #, fuzzy
 msgid "Dried Willow"
 msgstr "Paju"
 
-#: src/translations.h:210
+#: src/translations.h:209
 msgid "Drum"
 msgstr "Rumpu"
 
-#: src/translations.h:279
+#: src/translations.h:278
 msgid "Drumstick"
 msgstr "Rumpukapula"
 
-#: src/translations.h:612
-msgid "Duu"
+#: src/deprecated/stel_ui.cpp:804
+msgid ""
+"During Script Playback:\n"
+"CTRL + C : End Script\n"
+"6   : pause script              K   : resume script\n"
+"\n"
 msgstr ""
+"Komentojonon suorituksessa:\n"
+"CTRL + C : Lopeta komentojono\n"
+"6   : Pysäytä komentojono       K   : jatka komentojonoa\n"
+"\n"
 
-#: src/translations.h:363
-msgid "DuunWaan"
-msgstr ""
-
-#: src/translations.h:65
+#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
 msgid "E"
 msgstr "I"
 
@@ -759,36 +578,35 @@ msgstr "I"
 msgid "Earth"
 msgstr "Maa"
 
-#: src/translations.h:255
+#: src/translations.h:254
 msgid "Earth God's Temple"
 msgstr "Maan jumalien temppeli"
 
-#: src/translations.h:283
+#: src/translations.h:282
 msgid "Eastern Door"
 msgstr "Itäinen ovi"
 
-#: src/ui_viewDialog.h:1312
-#, fuzzy
-msgid "Ecliptic line"
+#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
+msgid "Ecliptic Line"
 msgstr "Ekliptika"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:383
+msgid "Effects "
+msgstr "Tehosteet "
 
 #: src/translations.h:70
 msgid "Egyptian"
 msgstr "Egyptiläinen"
 
-#: src/translations.h:343
+#: src/translations.h:342
 msgid "Elk"
 msgstr "Hirvi"
 
-#: src/translations.h:626
-msgid "Ema"
-msgstr ""
-
-#: src/translations.h:267
+#: src/translations.h:266
 msgid "Emptiness"
 msgstr "Tyhjyys"
 
-#: src/translations.h:264
+#: src/translations.h:263
 msgid "Encampment"
 msgstr "Leiripaikka"
 
@@ -796,433 +614,233 @@ msgstr "Leiripaikka"
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/translations.h:387
-#, fuzzy
-msgid "Eo"
-msgstr "I"
+#: src/deprecated/stel_ui_conf.cpp:842
+msgid "Enter observatory name"
+msgstr "Anna observatorion nimi"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:109
-#: src/modules/Telescope.cpp:243
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:240
 msgid "Equ of date"
 msgstr ""
 
-#: src/ui_viewDialog.h:1313
-#, fuzzy
-msgid "Equator line"
+#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
+msgid "Equator Line"
 msgstr "Ekvaattori"
 
-#: src/ui_viewDialog.h:1315
-#, fuzzy
-msgid "Equatorial J2000 grid"
+#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
+msgid "Equatorial Grid"
 msgstr "Ekvatoriaaliasteikko"
 
-#: src/ui_viewDialog.h:1309
-#, fuzzy
-msgid "Equatorial grid"
-msgstr "Ekvatoriaaliasteikko"
+#: src/deprecated/stel_ui.cpp:680
+msgid "Equatorial Grid [E]"
+msgstr "Ekvatoriaaliasteikko [E]"
 
-#: src/translations.h:145
+#: src/deprecated/stel_ui.cpp:692
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr "Ekvatoriaali/atsimutaalijalusta [ENTER]"
+
+#: src/translations.h:144
 msgid "Equuleus"
 msgstr "Pieni hevonen"
 
-#: src/translations.h:114
+#: src/translations.h:113
 msgid "Eridanus"
 msgstr "Eridanus"
 
-#: src/translations.h:274
+#: src/deprecated/stel_ui.cpp:1051
+msgid "Error: Unable to open script file to record commands."
+msgstr ""
+"Virhe: komentojonotiedostoa ei voida avata komentojen tallennusta varten."
+
+#: src/translations.h:273
 msgid "Establishment"
 msgstr "Perustus"
-
-#: src/translations.h:572
-msgid "EumDeok"
-msgstr ""
-
-#: src/translations.h:424
-#, fuzzy
-msgid "Eup"
-msgstr "Europa"
 
 #: src/translations.h:43
 msgid "Europa"
 msgstr "Europa"
 
-#: src/translations.h:246
+#: src/translations.h:245
 msgid "Extended Net"
 msgstr "Levitetty verkko"
 
-#: src/translations.h:284
+#: src/translations.h:283
 msgid "Farmland"
 msgstr "Maaseutu"
 
-#: src/translations.h:180
+#: src/translations.h:179
 msgid "Ferry Boat"
 msgstr "Lautta"
 
-#: src/ui_searchDialogGui.h:210
-msgid "Find Object"
-msgstr ""
-
-#: src/translations.h:339
+#: src/translations.h:338
 msgid "Fireplace"
 msgstr "Tulisija"
 
-#: src/translations.h:312
+#: src/translations.h:311
 msgid "First Big One"
 msgstr "Suuri ensimmäinen"
 
-#: src/translations.h:314
+#: src/translations.h:313
 msgid "First Slim One"
 msgstr "Ensimmäinen laiha"
 
-#: src/translations.h:229
+#: src/translations.h:228
 msgid "Five Chariots"
 msgstr "Viisi ajuria"
 
-#: src/translations.h:241
+#: src/translations.h:240
 msgid "Five Feudal Kings"
 msgstr "Viisi feodaalikuningasta"
 
-#: src/translations.h:275
+#: src/translations.h:274
 msgid "Flail"
 msgstr "Varsta"
 
-#: src/translations.h:189
+#: src/deprecated/stel_ui.cpp:711
+#, fuzzy
+msgid "Flip horizontally [CTRL + SHIFT + H]"
+msgstr "Näkymän kääntö horisonttaalisesti [CTRL + SHIFT + H]"
+
+#: src/deprecated/stel_ui.cpp:713
+#, fuzzy
+msgid "Flip vertically [CTRL + SHIFT + V]"
+msgstr "Näkymän kääntö vertikaalisesti [CTRL + SHIFT + V]"
+
+#: src/translations.h:188
 msgid "Flock"
 msgstr "Lauma"
 
-#: src/translations.h:224
+#: src/translations.h:223
 msgid "Flying Corridor"
 msgstr "Lentoväylä"
 
-#: src/translations.h:226
+#: src/deprecated/stel_ui_conf.cpp:228
+msgid "Fog"
+msgstr "Sumu"
+
+#: src/translations.h:225
 msgid "Ford"
 msgstr "Kahluupaikka"
 
-#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
-#: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:962
-#, fuzzy
-msgid "Form"
-msgstr "Kahluupaikka"
-
-#: src/translations.h:116
+#: src/translations.h:115
 msgid "Fornax"
 msgstr "Sulatusuuni"
 
-#: src/translations.h:237
+#: src/translations.h:236
 msgid "Four Channels"
 msgstr "Nejä kanaalia"
 
-#: src/translations.h:302
+#: src/translations.h:301
 msgid "Frigate Bird"
 msgstr "Fregattilintu"
 
-#: src/translations.h:450
-#, fuzzy
-msgid "GaakDo"
-msgstr "Riikinkukko"
-
-#: src/translations.h:393 src/translations.h:589
-#, fuzzy
-msgid "Gaang"
-msgstr "Jättiläinen"
-
-#: src/translations.h:434
-#, fuzzy
-msgid "GaeOok"
-msgstr "Sek"
+#: src/deprecated/stel_ui_conf.cpp:695
+msgid "GO"
+msgstr "MENE"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ganymedes"
 
-#: src/translations.h:117
+#: src/translations.h:116
 msgid "Gemini"
 msgstr "Kaksoset"
 
-#: src/translations.h:428
-#, fuzzy
-msgid "GeoBuu"
-msgstr "Torvi"
+#: src/deprecated/stel_ui_tuiconf.cpp:380
+msgid "General "
+msgstr "Yleistä "
 
-#: src/translations.h:374
-#, fuzzy
-msgid "GeoGii"
-msgstr "Kaksoset"
-
-#: src/translations.h:614
-#, fuzzy
-msgid "GeoSaa"
-msgstr "Vuosi"
-
-#: src/translations.h:395
-#, fuzzy
-msgid "Geon"
-msgstr "Kaksoset"
-
-#: src/translations.h:376
-#, fuzzy
-msgid "GeonPae"
-msgstr "Kaksoset"
-
-#: src/translations.h:286
+#: src/translations.h:285
 msgid "Ghosts"
 msgstr "Aaveet"
 
-#: src/translations.h:373
-#, fuzzy
-msgid "GiGwan"
-msgstr "Jättiläinen"
-
-#: src/translations.h:372
-msgid "GiJinJangGuun"
-msgstr ""
-
-#: src/translations.h:187
+#: src/translations.h:186
 msgid "Giant"
 msgstr "Jättiläinen"
 
-#: src/translations.h:269
+#: src/translations.h:268
 msgid "Girl"
 msgstr "Tyttö"
 
-#: src/ui_searchDialogGui.h:224
-#, fuzzy
-msgid "Go"
-msgstr "Kaksoset"
-
-#: src/translations.h:423 src/translations.h:611
-#, fuzzy
-msgid "Gok"
-msgstr "Kaksoset"
-
-#: src/translations.h:398
-#, fuzzy
-msgid "Goo"
-msgstr "Kaksoset"
-
-#: src/translations.h:262
+#: src/translations.h:261
 msgid "Good Gourd"
 msgstr "Hyvä kurpitsa"
 
-#: src/translations.h:219
+#: src/deprecated/stel_ui.cpp:709
+msgid "Goto selected object [SPACE]"
+msgstr "Siirry valittuun kohteeseen [SPACE]"
+
+#: src/translations.h:218
 msgid "Great General"
 msgstr "Suuri kenraali"
 
-#: src/translations.h:121
+#: src/deprecated/stel_ui_conf.cpp:213
+msgid "Ground"
+msgstr "Maanpinta"
+
+#: src/deprecated/stel_ui.cpp:682
+msgid "Ground [G]"
+msgstr "Maanpinta [G]"
+
+#: src/translations.h:120
 msgid "Grus"
 msgstr "Kurki"
 
-#: src/translations.h:431
-#, fuzzy
-msgid "Gu"
-msgstr "Kurki"
-
-#: src/translations.h:377
-#, fuzzy
-msgid "GuGeom"
-msgstr "Kaksoset"
-
-#: src/translations.h:554
-#, fuzzy
-msgid "GuGyeong"
-msgstr "Side"
-
-#: src/translations.h:588
-msgid "GuJiin"
-msgstr ""
-
-#: src/translations.h:495
-msgid "GuJuJuGu"
-msgstr ""
-
-#: src/ui_viewDialog.h:1301
-#, fuzzy
-msgid "Guereins"
-msgstr "Käärme"
-
-#: src/translations.h:426
-#, fuzzy
-msgid "Guu"
-msgstr "Kurki"
-
-#: src/translations.h:399
-msgid "GuuGuuk"
-msgstr ""
-
-#: src/translations.h:494
-msgid "GuuYuu"
-msgstr ""
-
-#: src/translations.h:502
-#, fuzzy
-msgid "GuunJeong"
-msgstr "Kaksoset"
-
-#: src/translations.h:545
-msgid "GuunMuun"
-msgstr ""
-
-#: src/translations.h:455
-msgid "GuunNaamMun"
-msgstr ""
-
-#: src/translations.h:521
-msgid "GuunShii"
-msgstr ""
-
-#: src/translations.h:414
-#, fuzzy
-msgid "Gwa"
-msgstr "Jättiläinen"
-
-#: src/translations.h:526
-#, fuzzy
-msgid "Gwan"
-msgstr "Jättiläinen"
-
-#: src/translations.h:601
-#, fuzzy
-msgid "GwanSak"
-msgstr "Jättiläinen"
-
-#: src/translations.h:517
-msgid "GwolGu"
-msgstr ""
-
-#: src/translations.h:473
-msgid "GwonSeol"
-msgstr ""
-
-#: src/translations.h:409
-#, fuzzy
-msgid "GyeonUu"
-msgstr "Kaksoset"
-
-#: src/translations.h:365
-#, fuzzy
-msgid "GyeongHaa"
-msgstr "Side"
-
-#: src/translations.h:454
-#, fuzzy
-msgid "Gyu"
-msgstr "Kurki"
-
-#: src/translations.h:406
-#, fuzzy
-msgid "HaGo"
-msgstr "Kaksoset"
-
-#: src/translations.h:482
-msgid "HaamJii"
-msgstr ""
-
-#: src/translations.h:412
-#, fuzzy
-msgid "HaeJuung"
-msgstr "Käsi"
-
-#: src/translations.h:337
+#: src/translations.h:336
 msgid "Hand"
 msgstr "Käsi"
 
-#: src/translations.h:361
-#, fuzzy
-msgid "Hang"
-msgstr "Käsi"
-
-#: src/translations.h:367
-#, fuzzy
-msgid "HangJii"
-msgstr "Käsi"
-
-#: src/translations.h:271
+#: src/translations.h:270
 msgid "Heart"
 msgstr "Sydän"
 
-#: src/ui_helpDialogGui.h:146
+#: src/deprecated/stel_ui.cpp:823
 msgid "Help"
 msgstr "Apua"
 
-#: src/translations.h:422
-#, fuzzy
-msgid "Heo"
-msgstr "Leijona"
+#: src/deprecated/stel_ui.cpp:690
+msgid "Help [H]"
+msgstr "Apua [H]"
 
-#: src/translations.h:622
-#, fuzzy
-msgid "HeoRyang"
-msgstr "Käsi"
-
-#: src/translations.h:536
-#, fuzzy
-msgid "HeonWon"
-msgstr "Kameleontti"
-
-#: src/translations.h:122
+#: src/translations.h:121
 msgid "Hercules"
 msgstr "Herkules"
 
-#: src/translations.h:188
+#: src/translations.h:187
 msgid "Hippopotamus"
 msgstr "Virtahepo"
 
-#: src/translations.h:518
-#, fuzzy
-msgid "Ho"
-msgstr "Koukku"
+#: src/deprecated/stel_ui.cpp:1047
+msgid "Hit CTRL-R again to stop.\n"
+msgstr "Anna CTRL-R uudelleen pysäyttääksesi.\n"
 
-#: src/translations.h:555
-#, fuzzy
-msgid "HoBuun"
-msgstr "Torvi"
-
-#: src/translations.h:627
-msgid "Homem"
-msgstr ""
-
-#: src/translations.h:248
+#: src/translations.h:247
 msgid "Hook"
 msgstr "Koukku"
 
-#: src/translations.h:213
+#: src/translations.h:212
 msgid "Horn"
 msgstr "Torvi"
 
-#: src/translations.h:123
+#: src/translations.h:122
 msgid "Horologium"
 msgstr "Heilurikello"
 
-#: src/translations.h:185
+#: src/translations.h:184
 msgid "Horus"
 msgstr "Horus"
 
-#: src/translations.h:604
-#, fuzzy
-msgid "Huu"
-msgstr "Torvi"
+#: src/deprecated/s_gui.cpp:2750
+msgid "Hour"
+msgstr "Tunti"
 
-#: src/translations.h:583
-msgid "HwaGae"
-msgstr ""
-
-#: src/translations.h:613
-msgid "HwanJaa"
-msgstr ""
-
-#: src/translations.h:124
+#: src/translations.h:123
 msgid "Hydra"
 msgstr "Vesikäärme"
 
-#: src/translations.h:125
+#: src/translations.h:124
 msgid "Hydrus"
 msgstr "Etelän vesikäärme"
-
-#: src/translations.h:576
-#, fuzzy
-msgid "HyeonGwa"
-msgstr "Hyperion"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -1232,230 +850,73 @@ msgstr "Hyperion"
 msgid "Iapetus"
 msgstr "Japetus"
 
-#: src/translations.h:212
+#: src/translations.h:211
 msgid "Imperial Guards"
 msgstr "Keisarilliset vartijat"
 
-#: src/translations.h:215
+#: src/translations.h:214
 msgid "Imperial Passageway"
 msgstr "Keisarillinen käytävä"
 
-#: src/translations.h:126
+#: src/deprecated/stel_ui.cpp:723
+msgid "Increase Time Speed [L]"
+msgstr "Kasvata aika-askelta [L]"
+
+#: src/translations.h:125
 msgid "Indus"
 msgstr "Intiaani"
+
+#: src/deprecated/stel_ui_conf.cpp:964
+msgid "Info: "
+msgstr "Tiedot: "
+
+#: src/deprecated/stel_ui.cpp:753
+msgid "Information"
+msgstr "Tiedot"
 
 #: src/translations.h:71
 #, fuzzy
 msgid "Inuit"
 msgstr "Intiaani"
 
+#: src/deprecated/stel_ui.cpp:602
+msgid "Invalid Script command"
+msgstr "Virheellinen komentosarjan komento"
+
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:106
-#: src/modules/Telescope.cpp:241
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
+#: src/modules/Telescope.cpp:238
 msgid "J2000"
 msgstr "J2000"
 
-#: src/translations.h:597 src/translations.h:598
-#, fuzzy
-msgid "JaMi"
-msgstr "Häntä"
-
-#: src/translations.h:404
-#, fuzzy
-msgid "JaamDae"
-msgstr "Salamanteri"
-
-#: src/translations.h:539
-#, fuzzy
-msgid "Jaang"
-msgstr "Jättiläinen"
-
-#: src/translations.h:250
+#: src/translations.h:249
 msgid "Jade Well"
 msgstr "Jadelähde"
 
-#: src/translations.h:605
-#, fuzzy
-msgid "JaeJwa"
-msgstr "Hai"
-
-#: src/translations.h:366
-#, fuzzy
-msgid "JaeSeok"
-msgstr "Sek"
-
-#: src/translations.h:487
-#, fuzzy
-msgid "JaeWaang"
-msgstr "Jättiläinen"
-
-#: src/translations.h:544
-msgid "JangSaa"
-msgstr ""
-
-#: src/translations.h:193
+#: src/translations.h:192
 msgid "Jaw"
 msgstr "Hai"
-
-#: src/translations.h:369
-#, fuzzy
-msgid "Jeo"
-msgstr "Leijona"
-
-#: src/translations.h:384
-#, fuzzy
-msgid "JeokJol"
-msgstr "Leijona"
-
-#: src/translations.h:468
-#, fuzzy
-msgid "JeokShi"
-msgstr "Leijona"
-
-#: src/translations.h:528
-msgid "JeokShii"
-msgstr ""
-
-#: src/translations.h:507
-msgid "JeokShin"
-msgstr ""
-
-#: src/translations.h:466 src/translations.h:508
-#, fuzzy
-msgid "JeokSuu"
-msgstr "Leijona"
-
-#: src/translations.h:362
-#, fuzzy
-msgid "JeolWii"
-msgstr "Kaksoset"
-
-#: src/translations.h:440
-msgid "JeonNwoe"
-msgstr ""
-
-#: src/translations.h:565
-#, fuzzy
-msgid "JeonSaa"
-msgstr "Charon"
-
-#: src/translations.h:538
-msgid "Jiik"
-msgstr ""
-
-#: src/translations.h:403
-#, fuzzy
-msgid "JikNyeo"
-msgstr "Hyperion"
-
-#: src/translations.h:543
-msgid "Jin"
-msgstr ""
-
-#: src/translations.h:370
-#, fuzzy
-msgid "JinGeo"
-msgstr "Hyperion"
-
-#: src/translations.h:355
-#, fuzzy
-msgid "JinHyeon"
-msgstr "Hyperion"
-
-#: src/translations.h:609
-msgid "JongDaeBuu"
-msgstr ""
-
-#: src/translations.h:380 src/translations.h:557
-#, fuzzy
-msgid "JongGwan"
-msgstr "Jättiläinen"
-
-#: src/translations.h:607
-#, fuzzy
-msgid "JongJeong"
-msgstr "Kameleontti"
-
-#: src/translations.h:606
-#, fuzzy
-msgid "JongSeong"
-msgstr "Sekunnit"
-
-#: src/translations.h:608
-msgid "Jong_iin"
-msgstr ""
-
-#: src/translations.h:630
-#, fuzzy
-msgid "Joykexo"
-msgstr "Leijona"
-
-#: src/translations.h:483 src/translations.h:484 src/translations.h:485
-msgid "Ju"
-msgstr ""
-
-#: src/translations.h:593
-msgid "JuHaSa"
-msgstr ""
-
-#: src/translations.h:352
-#, fuzzy
-msgid "JuJeong"
-msgstr "Sekunnit"
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: src/translations.h:533
-msgid "JuuGii"
-msgstr ""
-
-#: src/translations.h:354
-msgid "JwaGak"
-msgstr ""
-
-#: src/translations.h:405
-msgid "JwaGi"
-msgstr ""
-
-#: src/translations.h:497
-msgid "JwaGii"
-msgstr ""
-
-#: src/translations.h:461
-#, fuzzy
-msgid "JwaGyeong"
-msgstr "Side"
-
-#: src/translations.h:618
-msgid "JwaHaal"
-msgstr ""
-
-#: src/translations.h:620
-msgid "JwaJipBeop"
-msgstr ""
-
-#: src/translations.h:195
+#: src/translations.h:194
 msgid "Kenemet"
 msgstr "Kenemet"
 
-#: src/translations.h:191
+#: src/translations.h:190
 msgid "Khanuwy Fish"
 msgstr "Khanuvvy-kala"
 
-#: src/translations.h:391
-msgid "Kii"
-msgstr ""
-
-#: src/translations.h:216
+#: src/translations.h:215
 msgid "Kitchen"
 msgstr "Keittiö"
 
-#: src/translations.h:301
+#: src/translations.h:300
 msgid "Kite of Kawelo"
 msgstr "Kawelon leija"
 
@@ -1464,19 +925,7 @@ msgstr "Kawelon leija"
 msgid "Korean"
 msgstr "Torvi"
 
-#: src/translations.h:388
-msgid "Ku"
-msgstr ""
-
-#: src/translations.h:527
-msgid "Kwii"
-msgstr ""
-
-#: src/ui_viewDialog.h:1286
-msgid "Labels and markers"
-msgstr ""
-
-#: src/translations.h:127
+#: src/translations.h:126
 msgid "Lacerta"
 msgstr "Sisilisko"
 
@@ -1485,148 +934,184 @@ msgstr "Sisilisko"
 msgid "Lakota"
 msgstr "Sisilisko"
 
-#: src/translations.h:329
+#: src/translations.h:328
 msgid "Lamp Stand"
 msgstr "Lampunjalka"
 
-#: src/translations.h:251
+#: src/translations.h:250
 msgid "Lance"
 msgstr "Peitsi"
 
-#: src/ui_viewDialog.h:1306
-#, fuzzy
-msgid "Landscape"
+#: src/deprecated/stel_ui_tuiconf.cpp:444
+msgid "Landscape: "
+msgstr "Maisema: "
+
+#: src/deprecated/stel_ui_conf.cpp:537
+msgid "Landscapes"
 msgstr "Maisemat"
 
-#: src/ui_locationDialogGui.h:275
-#, fuzzy
-msgid "Latitude :"
+#: src/deprecated/stel_ui_conf.cpp:534
+msgid "Language"
+msgstr "Kieli"
+
+#: src/deprecated/stel_ui_conf.cpp:339
+msgid "Latitude : "
 msgstr "Leveys : "
 
-#: src/translations.h:278
+#: src/deprecated/stel_ui_tuiconf.cpp:388
+msgid "Latitude: "
+msgstr "Leveysaste: "
+
+#: src/translations.h:277
 msgid "Left Flag"
 msgstr "Vasen lippu"
 
-#: src/translations.h:221
+#: src/translations.h:220
 msgid "Legs"
 msgstr "Jalat"
 
-#: src/translations.h:130
+#: src/translations.h:129
 msgid "Leo"
 msgstr "Leijona"
 
-#: src/translations.h:147
+#: src/translations.h:146
 msgid "Leo Minor"
 msgstr "Pieni leijona"
 
-#: src/translations.h:129
+#: src/translations.h:128
 msgid "Lepus"
 msgstr "Jänis"
 
-#: src/translations.h:85
+#: src/translations.h:84
 msgid "Libra"
 msgstr "Vaaka"
 
-#: src/ui_viewDialog.h:1297
-#, fuzzy
-msgid "Light pollution:"
+#: src/deprecated/stel_ui_tuiconf.cpp:443
+msgid "Light Pollution Luminance: "
 msgstr "Valosaasteen kirkkaus "
 
-#: src/translations.h:174
+#: src/translations.h:173
 msgid "Lion"
 msgstr "Leijona"
 
-#: src/translations.h:310
+#: src/translations.h:309
 #, fuzzy
 msgid "Lizard"
 msgstr "Lintu"
 
-#: src/modules/ConstellationMgr.cpp:369
-#, fuzzy, qt-format
-msgid "Loading Constellation Art: %1/%2"
+#: src/deprecated/stel_ui_tuiconf.cpp:462
+msgid "Load Default Configuration: "
+msgstr "Hae oletusasetukset: "
+
+#: src/modules/ConstellationMgr.cpp:340
+msgid "Loading Constellation Art: "
 msgstr "Luetaan tähdistökuvia: "
 
-#: src/modules/NebulaMgr.cpp:372
-#, fuzzy, qt-format
-msgid "Loading NGC catalog: %1/%2"
+#: src/modules/NebulaMgr.cpp:404
+msgid "Loading NGC catalog: "
 msgstr "Luetaan NGC-luetteloa: "
 
-#: src/modules/StarMgr.cpp:253
-#, fuzzy, qt-format
-msgid "Loading catalog %1"
+#: src/modules/NebulaMgr.cpp:538
+msgid "Loading Nebula Textures:"
+msgstr "Luetaan tähtisumujen kuvia:"
+
+#: src/modules/StarMgr.cpp:493
+#, fuzzy
+msgid "Loading catalog "
 msgstr "Luetaan NGC-luetteloa: "
 
-#: src/ui_locationDialogGui.h:254
+#: src/deprecated/stel_ui_tuiconf.cpp:455
+msgid "Local Script: "
+msgstr "Paikallinen komentojono: "
+
+#: src/deprecated/stel_ui_conf.cpp:536
 msgid "Location"
 msgstr "Paikkakunta"
 
-#: src/ui_locationDialogGui.h:271
-#, fuzzy
-msgid "Longitude :"
+#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
+msgid "Location: "
+msgstr "Sijainti: "
+
+#: src/deprecated/stel_ui_conf.cpp:331
+msgid "Longitude : "
 msgstr "Pituus : "
 
-#: src/translations.h:131
+#: src/deprecated/stel_ui_tuiconf.cpp:389
+msgid "Longitude: "
+msgstr "Pituusaste: "
+
+#: src/translations.h:130
 msgid "Lupus"
 msgstr "Susi"
 
-#: src/translations.h:132
+#: src/translations.h:131
 msgid "Lynx"
 msgstr "Ilves"
 
-#: src/translations.h:133
+#: src/translations.h:132
 msgid "Lyra"
 msgstr "Lyyra"
 
-#: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
-#: src/modules/Planet.cpp:117 src/modules/Planet.cpp:166
-#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:105
-#: src/modules/StarWrapper.cpp:163
+#: src/deprecated/stel_ui_tuiconf.cpp:446
+msgid "Magnitude"
+msgstr "Magnitudi"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:447
+msgid "Magnitude Scaling Multiplier: "
+msgstr ""
+
+#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
+#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
+#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
 msgid "Magnitude: "
 msgstr "Magnitudi: "
 
-#: src/modules/StarWrapper.cpp:63
-#, fuzzy, qt-format
-msgid "Magnitude: %1"
-msgstr "Magnitudi: "
-
-#: src/translations.h:309
+#: src/translations.h:308
 msgid "Man with Feet Apart"
 msgstr "Mies haara-asennossa"
 
-#: src/translations.h:321
+#: src/translations.h:320
 msgid "Man's Cart"
 msgstr ""
 
-#: src/translations.h:228
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+msgid "Manual zoom: "
+msgstr "Käsisuurennus: "
+
+#: src/translations.h:227
 msgid "Market"
 msgstr "Tori"
 
-#: src/translations.h:291
+#: src/translations.h:290
 msgid "Market Officer"
 msgstr "Markkinavirkailija"
-
-#: src/ui_viewDialog.h:1331
-#, fuzzy
-msgid "Marking"
-msgstr "Köli"
 
 #: src/translations.h:38
 msgid "Mars"
 msgstr "Mars"
 
-#: src/translations.h:299
+#: src/translations.h:298
 msgid "Maui's Fishhook"
 msgstr "Mauin kalastuskoukko"
 
-#: src/translations.h:253
+#: src/translations.h:252
 msgid "Mausoleum"
 msgstr "Mausoleumi"
 
-#: src/translations.h:243
+#: src/deprecated/stel_ui_tuiconf.cpp:420
+msgid "Maximum Magnitude to Label: "
+msgstr "Maksimimagnitudi nimelle: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:449
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maksimimagnitudi tähtisumujen nimelle: "
+
+#: src/translations.h:242
 msgid "Meadows"
 msgstr "Laaksot"
 
-#: src/translations.h:161
+#: src/translations.h:160
 msgid "Mensa"
 msgstr "Pöytävuori"
 
@@ -1634,112 +1119,132 @@ msgstr "Pöytävuori"
 msgid "Mercury"
 msgstr "Merkurius"
 
-#: src/ui_viewDialog.h:1311
-#, fuzzy
-msgid "Meridian line"
+#: src/deprecated/stel_ui_tuiconf.cpp:433
+msgid "Meridian Line"
 msgstr "Meridiaaniviiva"
 
-#: src/translations.h:135
+#: src/deprecated/stel_ui_conf.cpp:1056
+msgid "Meteor zenith hourly rate"
+msgstr "Meteorien ZHR-arvo"
+
+#: src/translations.h:134
 msgid "Microscopium"
 msgstr "Mikroskooppi"
 
-#: src/translations.h:389
-msgid "Mii"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:448
+msgid "Milky Way intensity: "
+msgstr "Linnunradan voimakkuus: "
 
 #: src/translations.h:47
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/translations.h:128
+#: src/deprecated/s_gui.cpp:2753
+msgid "Minutes"
+msgstr "Minuutit"
+
+#: src/deprecated/stel_ui.cpp:808
+msgid ""
+"Misc:\n"
+"9   : Toggle meteor shower rates\n"
+"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: Toggle vertical image flipping\n"
+msgstr ""
+"Sekalaista:\n"
+"9 : Vaihda meteoriparven aktiivisuutta\n"
+"CTRL + 0,..,9 : Käynnistä GOTO-komento kaukoputkelle 0,..,9\n"
+"CTRL + SHIFT + H: Vaihda kuvan vaakasuuntainen peilaus\n"
+"CTRL + SHIFT + V: Vaihda kuvan pystysuuntainen peilaus\n"
+
+#: src/translations.h:127
 msgid "Monoceros"
 msgstr "Yksisarvinen"
+
+#: src/deprecated/s_gui.cpp:2744
+msgid "Month"
+msgstr "Kk"
 
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Kuu"
 
-#: src/translations.h:194
+#: src/deprecated/stel_ui_conf.cpp:168
+msgid "Moon Scale"
+msgstr "Kuun koko"
+
+#: src/translations.h:193
 msgid "Mooring Post"
 msgstr "Kiinnityspaikka"
 
-#: src/translations.h:258
+#: src/translations.h:257
 msgid "Mortar"
 msgstr "Muurilaasti"
 
-#: src/translations.h:580
-msgid "MunChang"
+#: src/deprecated/stel_ui.cpp:765
+msgid ""
+"Movement & selection:\n"
+"Arrow Keys       : Change viewing RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"\\                : Zoom out (planet + moons if applicable)\n"
+"/                : Zoom to selected object\n"
+"SPACE            : Center on selected object\n"
+"\n"
 msgstr ""
+"Siirtyminen ja valinnat:\n"
+"Nuolinäppäimet           : Vaihda rekt./dekl.\n"
+"Page Up/Down             : Suurenna/pienennä\n"
+"CTRL+Up/Down             : Suurenna/pienennä\n"
+"Napsauta vasemmalla      : Valitse kohde\n"
+"Napsauta oikealla        : Poista valinta\n"
+"CTRL+Napsauta vasemmalla : Poista valinta\n"
+"\\                        : Pienennä (planeetta + kuut, jos sallittu)\n"
+"/                        : Suurenna valittuun kohteeseen\n"
+"VÄLILYÖNTI               : Keskitä valittu kohde\n"
+"\n"
 
-#: src/translations.h:136
+#: src/translations.h:135
 msgid "Musca"
 msgstr "Kärpänen"
 
-#: src/translations.h:562
-#, fuzzy
-msgid "MyeongDang"
-msgstr "Side"
-
-#: src/translations.h:475
-msgid "Myo"
-msgstr ""
-
-#: src/translations.h:63
+#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
 msgid "N"
 msgstr "P"
 
-#: src/translations.h:410
-#, fuzzy
-msgid "NaaEon"
-msgstr "Riikinkukko"
-
-#: src/translations.h:397
-#, fuzzy
-msgid "NaamDoo"
-msgstr "Riikinkukko"
-
-#: src/translations.h:581
-msgid "NaeGae"
-msgstr ""
-
-#: src/translations.h:430
-#, fuzzy
-msgid "NaeJeo"
-msgstr "Leijona"
-
-#: src/translations.h:575
-msgid "NaeJuu"
-msgstr ""
-
-#: src/translations.h:535
-#, fuzzy
-msgid "NaePyeong"
-msgstr "Side"
-
-#: src/translations.h:516
-#, fuzzy
-msgid "NamHa"
-msgstr "Kulmaviivoitin"
-
-#: src/translations.h:547
-msgid "NangJaang"
-msgstr ""
+#: src/deprecated/stel_ui.cpp:674
+msgid "Names of the Constellations [V]"
+msgstr "Tähdistöjen nimet [V]"
 
 #: src/translations.h:74
 #, fuzzy
 msgid "Navajo"
 msgstr "Riikinkukko"
 
-#: src/translations.h:300
+#: src/translations.h:299
 msgid "Navigator's Triangle"
 msgstr "Merenkulkijan kolmio"
 
-#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
-#, fuzzy
-msgid "Nebula"
+#: src/deprecated/stel_ui_tuiconf.cpp:439
+msgid "Nebula Circles"
+msgstr "Tähtisumujen ympyrät"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:438
+msgid "Nebula Names"
+msgstr "Tähtisumujen nimet"
+
+#: src/deprecated/stel_ui_conf.cpp:139
+msgid "Nebulas Names. Up to mag :"
+msgstr "Sumujen nimet. Magnitudiin :"
+
+#: src/deprecated/stel_ui.cpp:688
+msgid "Nebulas [N]"
 msgstr "Tähtisumut [N]"
 
-#: src/translations.h:289
+#: src/translations.h:288
 msgid "Neck"
 msgstr "Kaula"
 
@@ -1747,151 +1252,97 @@ msgstr "Kaula"
 msgid "Neptune"
 msgstr "Neptunus"
 
-#: src/translations.h:192 src/translations.h:231
+#: src/translations.h:191 src/translations.h:230
 msgid "Net"
 msgstr "Verkko"
 
-#: src/translations.h:525
-#, fuzzy
-msgid "Noin"
+#: src/deprecated/stel_ui.cpp:697
+msgid "Night (red) mode"
+msgstr "Yötila (punainen)"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
+msgid "No"
 msgstr "Ei"
 
-#: src/translations.h:400
-msgid "NongJaang_iin"
-msgstr ""
-
-#: src/translations.h:113
+#: src/translations.h:112
 msgid "Norma"
 msgstr "Kulmaviivoitin"
 
-#: src/ui_viewDialog.h:1284
-#, fuzzy
-msgid "Normal rate"
-msgstr ": Normaali aktiivisuus"
-
 #: src/translations.h:75
-#, fuzzy
 msgid "Norse"
-msgstr "Horus"
+msgstr ""
 
-#: src/translations.h:240
+#: src/translations.h:239
 msgid "North River"
 msgstr "Pohjoinen joki"
 
-#: src/translations.h:202
+#: src/translations.h:201
 msgid "Northern Dipper"
 msgstr "Pohjoinen kauha"
 
-#: src/translations.h:441
-#, fuzzy
-msgid "NuByeokJin"
-msgstr "Side"
+#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
+msgid "OK"
+msgstr "OK"
 
-#: src/translations.h:558
-#, fuzzy
-msgid "OJe"
-msgstr "Leijona"
+#: src/deprecated/stel_ui_conf.cpp:670
+msgid "Object Search"
+msgstr "Kohteen etsintä"
 
-#: src/translations.h:510
-msgid "OJeHuu"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:446
+msgid "Object Sizing Rule: "
+msgstr "Kohteen mittakaavan sääntö: "
 
-#: src/translations.h:584
-#, fuzzy
-msgid "OJeJwa"
-msgstr "Hai"
-
-#: src/translations.h:549
-msgid "OZehu"
-msgstr ""
-
-#: src/translations.h:137
+#: src/translations.h:136
 msgid "Octans"
 msgstr "Oktantti"
 
-#: src/translations.h:503
-#, fuzzy
-msgid "OkJeong"
-msgstr "Sekunnit"
-
-#: src/translations.h:481
-#, fuzzy
-msgid "OoGeo"
-msgstr "Kaksoset"
-
-#: src/translations.h:139
+#: src/translations.h:138
 msgid "Ophiuchus"
 msgstr "Käärmeenkantaja"
 
-#: src/ui_viewDialog.h:1293
-#, fuzzy
-msgid "Options"
-msgstr "Orion"
-
-#: src/translations.h:242
+#: src/translations.h:241
 msgid "Orchard"
 msgstr "Hedelmätarha"
 
-#: src/translations.h:140 src/ui_searchDialogGui.h:223
+#: src/translations.h:139
 msgid "Orion"
 msgstr "Orion"
 
-#: src/ui_viewDialog.h:1330
-msgid "Orthographic"
-msgstr ""
-
-#: src/translations.h:225
+#: src/translations.h:224
 msgid "Outer Fence"
 msgstr "Ulompi aitaus"
 
-#: src/translations.h:270
+#: src/translations.h:269
 msgid "Ox"
 msgstr "Härkä"
 
-#: src/translations.h:435
-msgid "PaeGuu"
-msgstr ""
-
-#: src/translations.h:415
-#, fuzzy
-msgid "PaeGwa"
-msgstr "Hai"
-
-#: src/translations.h:190
+#: src/translations.h:189
 msgid "Pair of Stars"
 msgstr "Tähtipari"
 
-#: src/translations.h:566
-#, fuzzy
-msgid "PalGok"
-msgstr "Riikinkukko"
-
-#: src/translations.h:266
+#: src/translations.h:265
 msgid "Palace Gate"
 msgstr "Palatsin portti"
 
-#: src/modules/StarWrapper.cpp:123
+#: src/modules/StarWrapper.cpp:130
 msgid "Parallax: "
 msgstr "Parallaksi "
 
-#: src/translations.h:141
+#: src/translations.h:140
 msgid "Pavo"
 msgstr "Riikinkukko"
 
-#: src/translations.h:142
+#: src/translations.h:141
 msgid "Pegasus"
 msgstr "Pegasus"
 
-#: src/translations.h:144
+#: src/translations.h:143
 msgid "Perseus"
 msgstr "Perseus"
 
-#: src/ui_viewDialog.h:1327
-#, fuzzy
-msgid "Perspective"
-msgstr "Asetettu aika"
-
-#: src/translations.h:257
+#: src/translations.h:256
 msgid "Pestle"
 msgstr "Survin"
 
@@ -1903,413 +1354,143 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:150
+#: src/translations.h:149
 msgid "Phoenix"
 msgstr "Feeniks"
 
-#: src/translations.h:143
+#: src/translations.h:142
 msgid "Pictor"
 msgstr "Maalari"
 
-#: src/translations.h:492
-msgid "Piil"
-msgstr ""
-
-#: src/translations.h:152
+#: src/translations.h:151
 msgid "Pisces"
 msgstr "Kalat"
 
-#: src/translations.h:151
+#: src/translations.h:150
 msgid "Piscis Austrinus"
 msgstr "Etelän kala"
 
-#: src/ui_viewDialog.h:1288
+#: src/deprecated/stel_ui_tuiconf.cpp:430
+msgid "Planet Names"
+msgstr "Planeettojen nimet"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:431
+msgid "Planet Orbits"
+msgstr "Planeettojen radat"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:432
+msgid "Planet Trails"
+msgstr "Planeettojen reitit"
+
+#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
+msgid "Planet: "
+msgstr "Planeetta: "
+
+#: src/deprecated/stel_ui_conf.cpp:163
 msgid "Planets"
 msgstr "Planeetat"
 
-#: src/ui_viewDialog.h:1262
-#, fuzzy
-msgid "Planets and Satellites"
+#: src/deprecated/stel_ui_conf.cpp:175
+msgid "Planets Hints"
 msgstr "Planeettojen osoittimet"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/translations.h:76 src/ui_viewDialog.h:1338
+#: src/deprecated/stel_ui_tuiconf.cpp:446
+msgid "Point"
+msgstr "Piste"
+
+#: src/translations.h:76
 msgid "Polynesian"
 msgstr "Polynesialainen"
 
-#: src/ui_viewDialog.h:1323
-#, fuzzy
-msgid "Projection"
+#: src/deprecated/stel_ui_tuiconf.cpp:401
+msgid "Preset Sky Time: "
+msgstr "Esiasetettu taivaan aika: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:404
+msgid "Preset Time"
+msgstr "Asetettu aika"
+
+#: src/deprecated/stel_ui_conf.cpp:479
+msgid "Program Language: "
+msgstr "Ohjelma kieli: "
+
+#: src/deprecated/stel_ui_conf.cpp:379
+msgid "Projection :"
 msgstr "Projektio :"
 
-#: src/translations.h:184
+#: src/translations.h:183
 msgid "Prow"
 msgstr "Keula"
 
-#: src/translations.h:154
+#: src/translations.h:153
 msgid "Puppis"
 msgstr "Peräkeula"
 
-#: src/translations.h:245
+#: src/translations.h:244
 msgid "Purple Palace"
 msgstr "Purppurapalatsi"
 
-#: src/translations.h:357
-#, fuzzy
-msgid "Pyeong"
-msgstr "Side"
-
-#: src/translations.h:89
+#: src/translations.h:88
 msgid "Pyxis"
 msgstr "Kompassi"
 
-#: src/ui_viewDialog.h:963
-msgid ""
-"QFrame {\n"
-"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
-"stop: 1 #19233c);\n"
-"\tborder: 0px;\n"
-"\tcolor : #babdc4;\n"
-"    font-family: \"DejaVu\";\n"
-"}\n"
-"\n"
-"DialogFrame {\n"
-"  border-width: 1px;\n"
-"  border-style: solid;\n"
-"  border-color: #081f25;\n"
-"}\n"
-"\n"
-"ResizeFrame {\n"
-" background-image: url(data/gui/resize.png);\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"\tbackground: None;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"     border: 1.5px solid #2e2e36;\n"
-"     border-radius: 10px;\n"
-"     padding: 0 8px;\n"
-"     background: white;\n"
-"     selection-background-color: darkgray;\n"
-" }\n"
-"\n"
-"QPushButton {\n"
-"  border: 1.5px solid #2e2e36;\n"
-"  border-radius: 10px;\n"
-"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
-"}\n"
-"\n"
-"QScrollBar:vertical {\n"
-" border: 1px solid #2e2e36;\n"
-" background: #4a4b50;\n"
-" width: 15px;\n"
-"         margin: 22px 0px 22px 0px;\n"
-"     }\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    border: 2px solid #4a4b50;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
-"\tborder-radius: 4px;\n"
-"\tmin-height: 20px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: bottom;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar::sub-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: top;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
-"         border: 2px solid grey;\n"
-"         width: 3px;\n"
-"         height: 3px;\n"
-"         background: white;\n"
-" }\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-"         background: none;\n"
-" }\n"
-"\n"
-"QGroupBox {\n"
-"     border: 1px solid #1f2f25;\n"
-"     border-radius: 4px;\n"
-"     margin-top: 1ex;\n"
-"     font-weight: bold;\n"
-"     background: solid #223B34;\n"
-" }\n"
-"\n"
-"QGroupBox::title {\n"
-"     subcontrol-origin: margin;\n"
-"     padding: 0px 3px;\n"
-"     color : #babdc4;\n"
-"\t left: 15px\n"
-" }\n"
-"\n"
-"\n"
-"QTabWidget::pane {\n"
-"   border-top: 2px solid #348483;\n"
-"}\n"
-"\n"
-"     /* Style the tab using the tab sub-control. Note that\n"
-"         it reads QTabBar _not_ QTabWidget */\n"
-"     QTabBar::tab {\n"
-"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#2a3b50, stop: 1 #19233c);\n"
-"         border: 2px solid #348483;\n"
-"         border-bottom-color: #348483; /* same as the pane color */\n"
-"         border-top-left-radius: 4px;\n"
-"         border-top-right-radius: 4px;\n"
-"         min-width: 10ex;\n"
-"         padding: 2px;\n"
-"         color: #babdc4;\n"
-"         font-weight : bold;\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
-"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#19233c, stop: 1 #2a3b50);\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:selected {\n"
-"         border-color: #A2A78B;\n"
-"         border-bottom-color: #2a3b50; /* same as pane color */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:!selected {\n"
-"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
-"     }\n"
-"\n"
-"     /* make use of negative margins for overlapping tabs */\n"
-"     QTabBar::tab:selected {\n"
-"         /* expand/overlap to the left and right by 4px */\n"
-"         margin-left: -4px;\n"
-"         margin-right: -4px;\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:first:selected {\n"
-"         margin-left: 0; /* the first selected tab has nothing to overlap "
-"with on the left */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:last:selected {\n"
-"         margin-right: 0; /* the last selected tab has nothing to overlap "
-"with on the right */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:only-one {\n"
-"         margin: 0; /* if there is only one tab, we don't want overlapping "
-"margins */\n"
-"     }\n"
-"\n"
-"QListWidget {\n"
-" \tbackground: solid #121324;\n"
-"\tborder: 1px;\n"
-"    border-radius: 4px;\n"
-"    border-color: #081f25;\n"
-"    border-style: solid;\n"
-"  selection-background-color: #2a3b50;\n"
-"}\n"
-"\n"
-"QCheckBox\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QCheckBox::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  background-color: #225555;\n"
-"}\n"
-"QCheckBox::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
-"}\n"
-"QCheckBox::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
-"}\n"
-"\n"
-"QRadioButton\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QRadioButton::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  margin-left: 4px;\n"
-"}\n"
-"QRadioButton::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-checked.png);\n"
-"}\n"
-"QRadioButton::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: top right; /* position at the top right corner */\n"
-"\n"
-"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
-"border */\n"
-"     border-image: url(:/images/spinup.png) 1;\n"
-"     border-width: 1px;\n"
-"\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:hover {\n"
-"     border-image: url(:/images/spinup_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:pressed {\n"
-"     border-image: url(:/images/spinup_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow {\n"
-"     image: url(:/images/up_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
-"value is max */\n"
-"    image: url(:/images/up_arrow_disabled.png);\n"
-" }\n"
-"\n"
-" QSpinBox::down-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: bottom right; /* position at bottom right corner "
-"*/\n"
-"\n"
-"     width: 16px;\n"
-"     border-image: url(:/images/spindown.png) 1;\n"
-"     border-width: 1px;\n"
-"     border-top-width: 0;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:hover {\n"
-"     border-image: url(:/images/spindown_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:pressed {\n"
-"     border-image: url(:/images/spindown_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow {\n"
-"     image: url(:/images/down_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow:disabled,\n"
-" QSpinBox::down-arrow:off { /* off state when value in min */\n"
-"    image: url(:/images/down_arrow_disabled.png);\n"
-" }\n"
-"\n"
-"QDoubleSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-msgstr ""
+#: src/deprecated/stel_ui.cpp:702
+msgid "Quit [CMD + Q]"
+msgstr "Lopeta [CMD + Q]"
 
-#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
-#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
-msgid ""
-"QToolButton {\n"
-"color: white;\n"
-"font-weight: bold;\n"
-"background: None;\n"
-"border: 1px solid #2e2e36;\n"
-"  border-radius: 2px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"color: darkgray;\n"
-"}"
-msgstr ""
+#: src/deprecated/stel_ui.cpp:700
+msgid "Quit [CTRL + Q]"
+msgstr "Lopeta [CTRL + Q]"
 
-#: src/ui_dateTimeDialogGui.h:125
-msgid ""
-"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
-"solid\n"
-"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
-"darkgray; }"
-msgstr ""
-
-#: src/translations.h:632
-msgid "Queixada"
-msgstr ""
-
-#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
+#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
-#: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
-#: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
+#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
+#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
 msgid "RA/DE: "
 msgstr "Rekt./Dekl: "
 
-#: src/translations.h:313
+#: src/translations.h:312
 msgid "Rabbit Tracks"
 msgstr "Jäniksen jäljet"
 
-#: src/translations.h:341
+#: src/translations.h:340
 msgid "Race Track"
 msgstr "Kilpapolku"
 
-#: src/translations.h:223
+#: src/translations.h:222
 msgid "Ramparts"
 msgstr "Vallivarustus"
 
-#: src/translations.h:519
-#, fuzzy
-msgid "RangSeong"
-msgstr "Sekunnit"
+#: src/deprecated/stel_ui.cpp:721
+msgid "Real Time Speed [K]"
+msgstr "Normaali aika-askel [K]"
 
-#: src/translations.h:155
+#: src/deprecated/stel_ui.cpp:1045
+msgid "Recording commands to script file:\n"
+msgstr "Tallennetaan toimintoja komentojonotiedostoon:\n"
+
+#: src/deprecated/stel_ui_conf.cpp:539
+msgid "Rendering"
+msgstr "Esitysasetukset"
+
+#: src/translations.h:154
 msgid "Reticulum"
 msgstr "Verkko"
 
-#: src/translations.h:308
+#: src/deprecated/stel_ui.cpp:725
+#, fuzzy
+msgid "Return to Current Time [8]"
+msgstr "Ajan palautus nykyhetkeen [8]"
+
+#: src/translations.h:307
 msgid "Revolving Female"
 msgstr "Kiertyvä nainen"
 
-#: src/translations.h:307
+#: src/translations.h:306
 msgid "Revolving Male"
 msgstr "Kiertyvä mies"
 
@@ -2317,381 +1498,280 @@ msgstr "Kiertyvä mies"
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/translations.h:277
+#: src/translations.h:276
 msgid "Right Flag"
 msgstr "Oikea lippu"
 
-#: src/translations.h:217
+#: src/translations.h:216
 msgid "River Turtle"
 msgstr "Jokikilpikonna"
 
-#: src/translations.h:230
+#: src/translations.h:229
 msgid "Rolled Tongue"
 msgstr "Rullattu kieli"
 
-#: src/translations.h:259
+#: src/translations.h:258
 msgid "Rooftop"
 msgstr "Katonharja"
 
-#: src/translations.h:272
+#: src/translations.h:271
 msgid "Room"
 msgstr "Huone"
 
-#: src/translations.h:222
+#: src/translations.h:221
 msgid "Root"
 msgstr "Juuri"
 
-#: src/translations.h:263
+#: src/translations.h:262
 msgid "Rotten Gourd"
 msgstr "Mätä kurpitsa"
 
-#: src/translations.h:333
+#: src/translations.h:332
 msgid "Runners"
 msgstr "Juoksijat"
 
-#: src/translations.h:460
-msgid "Ruu"
-msgstr ""
-
-#: src/translations.h:472
-#, fuzzy
-msgid "RyeoSeok"
-msgstr "Sek"
-
-#: src/translations.h:534
-msgid "Ryu"
-msgstr ""
-
-#: src/translations.h:64
+#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
 msgid "S"
 msgstr "E"
 
-#: src/translations.h:418
-msgid "SaaBii"
-msgstr ""
-
-#: src/translations.h:515
-#, fuzzy
-msgid "SaaDok"
-msgstr "Riikinkukko"
-
-#: src/translations.h:458
-#, fuzzy
-msgid "SaaGong"
-msgstr "Jättiläinen"
-
-#: src/translations.h:498
-#, fuzzy
-msgid "SaaGwae"
-msgstr "Salamanteri"
-
-#: src/translations.h:421
-#, fuzzy
-msgid "SaaMyeong"
-msgstr "Sekunnit"
-
-#: src/translations.h:420
-msgid "SaaRok"
-msgstr ""
-
-#: src/translations.h:419
-msgid "SaaWii"
-msgstr ""
-
-#: src/translations.h:500
-#, fuzzy
-msgid "Saam"
-msgstr "Salamanteri"
-
-#: src/translations.h:489
-msgid "SaamGii"
-msgstr ""
-
-#: src/translations.h:560
-msgid "SaamGongNaeJwa"
-msgstr ""
-
-#: src/translations.h:548
-#, fuzzy
-msgid "SaamTae"
-msgstr "Salamanteri"
-
-#: src/translations.h:577
-#, fuzzy
-msgid "Saang"
-msgstr "Jättiläinen"
-
-#: src/translations.h:591
-#, fuzzy
-msgid "SaangSeo"
-msgstr "Jättiläinen"
-
-#: src/translations.h:115
+#: src/translations.h:114
 msgid "Sagitta"
 msgstr "Nuoli"
 
-#: src/translations.h:156
+#: src/translations.h:155
 msgid "Sagittarius"
 msgstr "Jousimies"
 
-#: src/translations.h:176
+#: src/translations.h:175
 msgid "Sah"
 msgstr "Sah"
 
-#: src/translations.h:346
+#: src/translations.h:345
 msgid "Salamander"
 msgstr "Salamanteri"
-
-#: src/translations.h:568 src/translations.h:569
-#, fuzzy
-msgid "SamGong"
-msgstr "Sekunnit"
-
-#: src/translations.h:550
-msgid "SangJiin"
-msgstr ""
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Saturnus"
 
-#: src/ui_viewDialog.h:1265
-#, fuzzy
-msgid "Scale Moon"
+#: src/deprecated/stel_ui_tuiconf.cpp:463
+msgid "Save Current Configuration as Default: "
+msgstr "Tallenna nykyiset asetukset oletusarvoiksi: "
+
+#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
+#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
+msgid "Save as default"
+msgstr "Tallenna oletusarvot"
+
+#: src/deprecated/stel_ui_conf.cpp:356
+msgid "Save location"
 msgstr "Tallenna paikkakunta"
 
-#: src/ui_viewDialog.h:1257
-#, fuzzy
-msgid "Scale:"
-msgstr "Kuun koko"
+#: src/deprecated/stel_ui_conf.cpp:408
+msgid "Saving settings will save current full screen status"
+msgstr ""
 
-#: src/translations.h:157
+#: src/translations.h:156
 msgid "Scorpius"
 msgstr "Skorpioni"
 
-#: src/translations.h:233
+#: src/translations.h:232
 msgid "Screen"
 msgstr "Kaihdin"
 
-#: src/translations.h:83
+#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
+msgid "Script commander"
+msgstr "Komentosarjat"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:384
+msgid "Scripts "
+msgstr "Komentojonot "
+
+#: src/translations.h:82
 msgid "Sculptor"
 msgstr "Kuvanveistäjä"
 
-#: src/translations.h:88 src/translations.h:158
+#: src/translations.h:87 src/translations.h:157
 msgid "Scutum"
 msgstr "Kilpi"
 
-#: src/translations.h:178
+#: src/deprecated/stel_ui_conf.cpp:677
+msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+msgstr "Etsi kohdetta (esim. Saturnus, Altair, HP6218, Orion, M31):"
+
+#: src/deprecated/stel_ui.cpp:705
+msgid "Search for object [CTRL + F]"
+msgstr "Kohteen etsintä [CTRL + F]"
+
+#: src/deprecated/s_gui.cpp:2756
+msgid "Seconds"
+msgstr "Sekunnit"
+
+#: src/translations.h:177
 msgid "Sek"
 msgstr "Sek"
 
-#: src/translations.h:635
+#: src/translations.h:354
 msgid "Select and exit to run."
 msgstr "Valitse ja poistu käynnistääkseni."
 
-#: src/ui_locationDialogGui.h:273
-#, fuzzy
-msgid "Selected :"
+#: src/deprecated/stel_ui_conf.cpp:326
+msgid "Selected : "
 msgstr "Valittu : "
 
-#: src/translations.h:183
+#: src/deprecated/stel_ui_conf.cpp:128
+msgid "Selected Constellation Only"
+msgstr "Vain valitut tähdistöt"
+
+#: src/translations.h:182
 msgid "Selkis"
 msgstr "Selkis"
 
-#: src/translations.h:382
-msgid "SeoHaam"
-msgstr ""
-
-#: src/translations.h:537
-#, fuzzy
-msgid "Seong"
-msgstr "Sekunnit"
-
-#: src/translations.h:358 src/translations.h:359
-msgid "SeopJae"
-msgstr ""
-
-#: src/translations.h:159
+#: src/translations.h:158
 msgid "Serpens"
 msgstr "Käärme"
 
-#: src/translations.h:227
+#: src/deprecated/stel_ui_tuiconf.cpp:378
+msgid "Set Location "
+msgstr "Aseta paikkakunta "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:379
+msgid "Set Time "
+msgstr "Aseta aika "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:397
+msgid "Set Time Zone: "
+msgstr "Aseta aikavyöhyke: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:466
+msgid "Set UI Locale: "
+msgstr "Aseta käyttöliittymän kieli: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:452
+msgid "Setting Landscape Sets Location: "
+msgstr ""
+
+#: src/deprecated/stel_ui_conf.cpp:458
+msgid "Setting landscape updates the location"
+msgstr ""
+
+#: src/translations.h:226
 msgid "Seven Excellencies"
 msgstr "Seitsemän ylhäistä"
 
-#: src/translations.h:344
+#: src/translations.h:343
 msgid "Seven Little Girls"
 msgstr "Seitsemän pientä tyttöä"
 
-#: src/translations.h:160
+#: src/translations.h:159
 msgid "Sextans"
 msgstr "Sektantti"
 
-#: src/translations.h:198
+#: src/translations.h:197
 msgid "Sheep"
 msgstr "Lammas"
 
-#: src/translations.h:186
+#: src/translations.h:185
 msgid "Sheepfold"
 msgstr "Lammastarha"
 
-#: src/translations.h:610
-msgid "ShiRuu"
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+msgid "Show: "
+msgstr "Näytä: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:464
+msgid "Shut Down: "
+msgstr "Sulje tietokone: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:400
+msgid "Sidereal"
 msgstr ""
 
-#: src/translations.h:506
-msgid "Shii"
-msgstr ""
-
-#: src/translations.h:437
-msgid "Shil"
-msgstr ""
-
-#: src/translations.h:383
-msgid "Shim"
-msgstr ""
-
-#: src/translations.h:390
-msgid "ShinGuung"
-msgstr ""
-
-#: src/ui_viewDialog.h:1270
-#, fuzzy
-msgid "Short labels"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1274
-msgid "Shouting Stars"
-msgstr ""
-
-#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
-#: src/ui_viewDialog.h:1273
-#, fuzzy
-msgid "Show"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1321
-#, fuzzy
-msgid "Show art"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1296
-#, fuzzy
-msgid "Show atmosphere"
-msgstr "Ilmakehä"
-
-#: src/ui_viewDialog.h:1318
-#, fuzzy
-msgid "Show boundaries"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1295
-#, fuzzy
-msgid "Show fog"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1294
-#, fuzzy
-msgid "Show ground"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1320
-#, fuzzy
-msgid "Show labels"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1319
-#, fuzzy
-msgid "Show lines"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1263
-#, fuzzy
-msgid "Show marker"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1264
-#, fuzzy
-msgid "Show orbits"
-msgstr "Näytä: "
-
-#: src/ui_viewDialog.h:1266
-msgid "Simulate light speed"
-msgstr ""
-
-#: src/modules/Nebula.cpp:101
+#: src/modules/Nebula.cpp:110
 msgid "Size: "
 msgstr "Koko: "
 
-#: src/ui_viewDialog.h:1291
-#, fuzzy
-msgid "Sky"
-msgstr "Sek"
+#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
+msgid "Sky Culture: "
+msgstr "Tähtitaivaskulttuuri: "
 
-#: src/ui_viewDialog.h:1308
-#, fuzzy
-msgid "Sky Marking"
-msgstr "Köli"
+#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
+msgid "Sky Language: "
+msgstr "Tähtitaivaskieli: "
 
-#: src/translations.h:338
+#: src/deprecated/stel_ui_tuiconf.cpp:402
+msgid "Sky Time At Start-up: "
+msgstr "Taivaan aika aloitettaessa: "
+
+#: src/deprecated/stel_ui_tuiconf.cpp:396
+msgid "Sky Time: "
+msgstr "Taivaan aika: "
+
+#: src/translations.h:337
 msgid "Snake"
 msgstr "Käärme"
 
-#: src/translations.h:551
-msgid "SoMii"
-msgstr ""
+#: src/deprecated/stel_ui_tuiconf.cpp:391
+msgid "Solar System Body: "
+msgstr "Aurinkokunnan kohde: "
 
 #: src/translations.h:60
 msgid "Solar System Observer"
 msgstr "Aurinkokunnan havaitsija"
 
-#: src/translations.h:234
+#: src/translations.h:233
 msgid "Soldiers Market"
 msgstr "Sotilaiden tori"
 
-#: src/translations.h:522
-#, fuzzy
-msgid "Soun"
-msgstr "Aurinko"
-
-#: src/translations.h:239
+#: src/translations.h:238
 msgid "South River"
 msgstr "Eteläinen joki"
 
-#: src/translations.h:276
+#: src/translations.h:275
 msgid "Spear"
 msgstr "Keihäs"
 
-#: src/modules/StarWrapper.cpp:131 src/modules/StarWrapper.cpp:173
+#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
 msgid "Spectral Type: "
 msgstr "Spektriluokka: "
 
-#: src/translations.h:273
+#: src/translations.h:272
 msgid "Spring"
 msgstr "Kevät"
 
-#: src/translations.h:235
+#: src/translations.h:234
 msgid "Square Granary"
 msgstr "Vilja-aitta"
 
-#: src/translations.h:285
+#: src/translations.h:284
 msgid "Star"
 msgstr "Tähti"
 
-#: src/ui_viewDialog.h:1340
-#, fuzzy
-msgid "Starlore"
-msgstr "Tähti"
+#: src/deprecated/stel_ui_conf.cpp:85
+msgid "Star Names. Up to mag :"
+msgstr "Tähtien nimet. Magnitudiin :"
 
-#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
+#: src/deprecated/stel_ui_conf.cpp:97
+msgid "Star Twinkle. Amount :"
+msgstr "Tähtien tuikkiminen. Tiheys :"
+
+#: src/deprecated/stel_ui_tuiconf.cpp:419
+msgid "Star Value Multiplier: "
+msgstr ""
+
+#: src/deprecated/stel_ui_conf.cpp:80
 msgid "Stars"
 msgstr "Tähdet"
 
-#: src/translations.h:199
+#: src/deprecated/stel_ui_tuiconf.cpp:381
+msgid "Stars "
+msgstr "Tähdet "
+
+#: src/translations.h:198
 msgid "Stars of Water"
 msgstr "Vesitähdet"
 
-#: src/translations.h:218
+#: src/translations.h:217
 msgid "Stomach"
 msgstr "Vatsa"
 
@@ -2699,49 +1779,19 @@ msgstr "Vatsa"
 msgid "Sun"
 msgstr "Aurinko"
 
-#: src/translations.h:249
+#: src/translations.h:248
 msgid "Supreme Palace"
 msgstr "Ylin palatsi"
 
-#: src/translations.h:513
-msgid "SuuBuu"
-msgstr ""
-
-#: src/translations.h:417
-msgid "SuuNyeo"
-msgstr ""
-
-#: src/translations.h:514
-msgid "SuuWii"
-msgstr ""
-
-#: src/translations.h:552 src/translations.h:553
-#, fuzzy
-msgid "TaeMi"
-msgstr "Häntä"
-
-#: src/translations.h:578
-msgid "TaeYaangSuu"
-msgstr ""
-
-#: src/translations.h:574
-#, fuzzy
-msgid "Tae_iil"
-msgstr "Häntä"
-
-#: src/translations.h:207
+#: src/translations.h:206
 msgid "Tail"
 msgstr "Häntä"
 
-#: src/translations.h:162
+#: src/translations.h:161
 msgid "Taurus"
 msgstr "Härkä"
 
-#: src/translations.h:556
-msgid "TeaJaa"
-msgstr ""
-
-#: src/translations.h:163
+#: src/translations.h:162
 msgid "Telescopium"
 msgstr "Kaukoputki"
 
@@ -2749,181 +1799,160 @@ msgstr "Kaukoputki"
 msgid "Tethys"
 msgstr "Tethys"
 
-#: src/translations.h:322
+#: src/translations.h:321
 msgid "The Asar Battlefield"
 msgstr ""
 
-#: src/translations.h:319
-#, fuzzy
+#: src/translations.h:318
 msgid "The Fishermen"
-msgstr "Seitsemän"
+msgstr ""
 
-#: src/translations.h:298
+#: src/translations.h:297
 msgid "The Seven"
 msgstr "Seitsemän"
 
-#: src/translations.h:236
+#: src/translations.h:235
 msgid "Three Stars"
 msgstr "Kolme tähteä"
 
-#: src/translations.h:211
+#: src/translations.h:210
 msgid "Three Steps"
 msgstr "Kome porrasta"
 
-#: src/translations.h:265
+#: src/translations.h:264
 msgid "Thunder and Lightning"
 msgstr "Ukkonen ja salamat"
 
-#: src/translations.h:348
+#: src/translations.h:347
 #, fuzzy
 msgid "Thunderbird"
 msgstr "Ukonnuoli"
 
-#: src/translations.h:260
+#: src/translations.h:259
 msgid "Thunderbolt"
 msgstr "Ukonnuoli"
+
+#: src/deprecated/stel_ui.cpp:796
+msgid ""
+"Time & Date:\n"
+"6   : Time rate pause           7   : Time rate 0\n"
+"8   : Set current time          J   : Decrease time rate\n"
+"K   : Normal time rate          L   : Increase time rate\n"
+"- and = :  Back and forward one day (press ALT for sidereal day)\n"
+"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+"CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+"\n"
+msgstr ""
+
+#: src/deprecated/stel_ui_tuiconf.cpp:405
+msgid "Time Display Format: "
+msgstr "Kellonajan muoto: "
+
+#: src/deprecated/stel_ui_conf.cpp:279
+msgid "Time Zone :"
+msgstr "Aikavyöhyke :"
+
+#: src/deprecated/stel_ui_conf.cpp:292
+msgid "Time speed : "
+msgstr "Aika-askel : "
 
 #: src/translations.h:52
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:232
+#: src/translations.h:231
 msgid "Toilet"
 msgstr "Vessa"
 
-#: src/translations.h:447
-msgid "TouGong"
-msgstr ""
-
-#: src/translations.h:439
-msgid "TouGongRi"
-msgstr ""
-
-#: src/translations.h:546
-msgid "TouSaaGong"
-msgstr ""
-
-#: src/translations.h:179
+#: src/translations.h:178
 msgid "Triangle"
 msgstr "Kolmio"
 
-#: src/translations.h:165
+#: src/translations.h:164
 msgid "Triangulum"
 msgstr "Kolmio"
 
-#: src/translations.h:166
+#: src/translations.h:165
 msgid "Triangulum Australe"
 msgstr "Etelän kolmio"
 
-#: src/translations.h:288
+#: src/translations.h:287
 msgid "Tripod"
 msgstr "Kolmijalka"
 
-#: src/translations.h:164
+#: src/translations.h:163
 msgid "Tucana"
 msgstr "Tukaani"
 
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr ""
-
-#: src/translations.h:347
+#: src/translations.h:346
 #, fuzzy
 msgid "Turtle"
 msgstr "Jokikilpikonna"
 
-#: src/ui_viewDialog.h:1258
-#, fuzzy
-msgid "Twinkle"
-msgstr "Kolmio"
+#: src/deprecated/stel_ui_tuiconf.cpp:421
+msgid "Twinkling: "
+msgstr "Tuikkiminen: "
 
-#: src/translations.h:175
+#: src/translations.h:174
 msgid "Two Jaws"
 msgstr "Kaksi kitaa"
 
-#: src/translations.h:326
+#: src/translations.h:325
 msgid "Two Placed Far Apart"
 msgstr "Kaksi erotettua"
 
-#: src/translations.h:173
+#: src/translations.h:172
 msgid "Two Poles"
 msgstr "Kaksi napaa"
 
-#: src/translations.h:325
+#: src/translations.h:324
 #, fuzzy
 msgid "Two Sunbeams"
 msgstr "Kaksi kitaa"
 
-#: src/translations.h:331
+#: src/translations.h:330
 msgid "Two in Front"
 msgstr "Kaksi edessä"
 
-#: src/modules/Nebula.cpp:99
+#: src/modules/Nebula.cpp:108
 msgid "Type: "
 msgstr "Tyyppi: "
 
-#: src/translations.h:442
-msgid "URimGuun"
+#: src/translations.h:355
+msgid "USB Script: "
 msgstr ""
 
-#: src/translations.h:636
-#, fuzzy
-msgid "USB Script: "
-msgstr "Komentojonot "
+#: src/deprecated/stel_ui_tuiconf.cpp:465
+msgid "Update me via Internet: "
+msgstr "Päivitä Internetin kautta: "
 
 #: src/translations.h:57
 msgid "Uranus"
 msgstr "Uranus"
 
-#: src/translations.h:120
+#: src/translations.h:119
 msgid "Ursa Major"
 msgstr "Iso karhu"
 
-#: src/translations.h:149
+#: src/translations.h:148
 msgid "Ursa Minor"
 msgstr "Pieni karhu"
 
-#: src/ui_viewDialog.h:1339
-msgid "Use associated language for sky labeling"
-msgstr ""
-
-#: src/ui_viewDialog.h:1305
-msgid "Use associated planet and position"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:267
+#: src/deprecated/stel_ui_conf.cpp:300
 msgid ""
-"Use the mouse wheel to zoom on the map.\n"
-"Click and drag the mouse to move the screen"
+"Use key J and L to decrease and increase\n"
+"   time speed.\n"
+"Use key K to return to real time speed."
 msgstr ""
+"Käytä J- ja L-näppäimiä kasvattaaksesi\n"
+"tai pienentääksesi aika-askelta.\n"
+"Käytä K-näppäintä palataksesi normaalinopeuteen."
 
-#: src/translations.h:408
-msgid "UuGi"
-msgstr ""
+#: src/deprecated/stel_ui_conf.cpp:283
+msgid "Using System Default Time Zone"
+msgstr "Käytä järjestelmän oletusaikavyöhykettä"
 
-#: src/translations.h:462
-#, fuzzy
-msgid "UuGyeong"
-msgstr "Side"
-
-#: src/translations.h:619
-msgid "UuHaal"
-msgstr ""
-
-#: src/translations.h:621
-msgid "UuJipBeop"
-msgstr ""
-
-#: src/translations.h:449
-msgid "UunUu"
-msgstr ""
-
-#: src/translations.h:629
-#, fuzzy
-msgid "Veado"
-msgstr "Laaksot"
-
-#: src/translations.h:169
+#: src/translations.h:168
 msgid "Vela"
 msgstr "Purje"
 
@@ -2931,219 +1960,107 @@ msgstr "Purje"
 msgid "Venus"
 msgstr "Venus"
 
-#: src/translations.h:631
-#, fuzzy
-msgid "Vespeiro"
-msgstr "Neitsyt"
-
-#: src/ui_viewDialog.h:1241
-#, fuzzy
-msgid "View"
+#: src/deprecated/stel_ui_conf.cpp:538
+msgid "Video"
 msgstr "Video"
 
-#: src/translations.h:168
+#: src/deprecated/stel_ui_conf.cpp:403
+msgid "Viewport Distorter"
+msgstr ""
+
+#: src/translations.h:167
 msgid "Virgo"
 msgstr "Neitsyt"
 
-#: src/translations.h:297
+#: src/translations.h:296
 msgid "Voice of Joy"
 msgstr "Ilon ääni"
 
-#: src/translations.h:153
+#: src/translations.h:152
 msgid "Volans"
 msgstr "Lentokala"
 
-#: src/translations.h:148
+#: src/translations.h:147
 msgid "Vulpecula"
 msgstr "Kettu"
 
-#: src/translations.h:66
+#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
 msgid "W"
 msgstr "L"
 
-#: src/translations.h:452
-msgid "WaangRaang"
-msgstr ""
-
-#: src/translations.h:456
-#, fuzzy
-msgid "WaeByeong"
-msgstr "Side"
-
-#: src/translations.h:392
-#, fuzzy
-msgid "WaeJeo"
-msgstr "Leijona"
-
-#: src/translations.h:530
-msgid "WaeJuu"
-msgstr ""
-
-#: src/translations.h:220
+#: src/translations.h:219
 msgid "Wall"
 msgstr "Muuri"
 
-#: src/translations.h:197
+#: src/translations.h:196
 msgid "Waty Bekety"
 msgstr "Waty Bekety"
 
-#: src/translations.h:268
+#: src/translations.h:267
 msgid "Weaving Girl"
 msgstr "Vilkuttava tyttö"
 
-#: src/translations.h:238
+#: src/translations.h:237
 msgid "Well"
 msgstr "Lähde"
 
-#: src/translations.h:77 src/ui_viewDialog.h:1335
+#: src/translations.h:77
 msgid "Western"
 msgstr "Länsimainen"
 
-#: src/translations.h:282
+#: src/translations.h:281
 msgid "Western Door"
 msgstr "Läntinen ovi"
 
-#: src/translations.h:432 src/translations.h:469
-msgid "Wii"
-msgstr ""
-
-#: src/translations.h:214
+#: src/translations.h:213
 msgid "Willow"
 msgstr "Paju"
 
-#: src/translations.h:205
+#: src/translations.h:204
 msgid "Wings"
 msgstr "Siivet"
 
-#: src/translations.h:208
+#: src/translations.h:207
 msgid "Winnowing Basket"
 msgstr "Seulontapussi"
 
-#: src/translations.h:476
-msgid "Wol"
-msgstr ""
-
-#: src/translations.h:318
+#: src/translations.h:317
 msgid "Wolf's Mouth"
 msgstr ""
 
-#: src/translations.h:281
+#: src/translations.h:280
 msgid "Woman's Bed"
 msgstr "Vaimon vuode"
 
-#: src/translations.h:320
-#, fuzzy
+#: src/translations.h:319
 msgid "Woman's Cart"
-msgstr "Vaimon vuode"
-
-#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
-#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1253
-msgid "X"
 msgstr ""
 
-#: src/translations.h:287
+#: src/translations.h:286
 msgid "Xuanyuan"
 msgstr "Xuanyuan"
 
-#: src/translations.h:520
-msgid "YaGae"
-msgstr ""
-
-#: src/translations.h:564
-#, fuzzy
-msgid "YeoEoGwan"
-msgstr "Jättiläinen"
-
-#: src/translations.h:594
-#, fuzzy
-msgid "YeoSa"
+#: src/deprecated/s_gui.cpp:2741
+msgid "Year"
 msgstr "Vuosi"
 
-#: src/translations.h:595
-#, fuzzy
-msgid "YeoSaang"
-msgstr "Vuosi"
+#: src/deprecated/stel_ui_tuiconf.cpp:418
+#: src/deprecated/stel_ui_tuiconf.cpp:445
+#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
+msgid "Yes"
+msgstr "Kyllä"
 
-#: src/translations.h:617
-#, fuzzy
-msgid "YeolSaa"
-msgstr "Vuosi"
-
-#: src/translations.h:402
-#, fuzzy
-msgid "YeonDo"
-msgstr "Charon"
-
-#: src/translations.h:563
-#, fuzzy
-msgid "YeongDae"
-msgstr "Sekunnit"
-
-#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-
-#: src/translations.h:585
-msgid "YuukGaap"
-msgstr ""
-
-#: src/translations.h:523
-msgid "Za"
-msgstr ""
-
-#: src/translations.h:499
-msgid "Zaa"
-msgstr ""
-
-#: src/translations.h:524
-msgid "Zaang_iin"
-msgstr ""
-
-#: src/translations.h:290
+#: src/translations.h:289
 msgid "Zaofu"
 msgstr "Zaofu"
 
-#: src/ui_viewDialog.h:1259
-msgid "amount:"
+#: src/deprecated/stel_ui_tuiconf.cpp:450
+msgid "Zoom Duration: "
+msgstr "Suurennuksen kesto: "
+
+#: src/deprecated/stel_ui_conf.cpp:353
+msgid "m"
 msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:128
-msgid "explain"
-msgstr ""
-
-#: src/translations.h:438
-msgid "iiGuung"
-msgstr ""
-
-#: src/translations.h:416
-msgid "iiJuu"
-msgstr ""
-
-#: src/translations.h:541
-msgid "iik"
-msgstr ""
-
-#: src/translations.h:381
-#, fuzzy
-msgid "iil"
-msgstr "Häntä"
-
-#: src/translations.h:429
-#, fuzzy
-msgid "iinSeong"
-msgstr "Sekunnit"
-
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "    and comments to us at: http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   Tarkasta uudet versiot ja lähetä virheraportit\n"
-#~ "    sekä kommentit osoitteeseen http://www.stellarium.org\n"
-#~ "\n"
 
 #~ msgid " (Variable)"
 #~ msgstr " (muuttuja)"
@@ -3151,116 +2068,11 @@ msgstr "Sekunnit"
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Väärä komentoriviparametri\n"
 
-#~ msgid ": Exceptional Leonid rate"
-#~ msgstr ": Poikkeuksellinen leonidien aktiivisuus"
-
-#~ msgid ": Highest rate ever (1966 Leonids)"
-#~ msgstr ": Suurin tunnettu aktiivisuus (1966 leonidit)"
-
-#~ msgid ": Standard Perseids rate"
-#~ msgstr ": Perseidien normaaliaktiivisuus"
-
-#~ msgid "Actual Time"
-#~ msgstr "Nykyinen aika"
-
-#~ msgid "Administration "
-#~ msgstr "Hallinta "
-
-#~ msgid "Also display Nebulas without textures"
-#~ msgstr "Näytä myös kuvattomat tähtisumut"
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Korkeus (m): "
-
-#~ msgid "Altitude : "
-#~ msgstr "Korkeus : "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Hae lista alanuolella."
-
-#~ msgid "Atmosphere [A]"
-#~ msgstr "Ilmakehä [A]"
-
-#~ msgid "Author: "
-#~ msgstr "Tekijä: "
-
-#~ msgid "Azimuthal Grid [Z]"
-#~ msgstr "Atsimuuttiasteikko [Z]"
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD-komentojono: "
-
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q : Lopeta\n"
 
-#~ msgid "CMD + Q : Quit\n"
-#~ msgstr "CMD + Q : Lopeta\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : Lopeta\n"
-
-#~ msgid "Cancel"
-#~ msgstr "Hylkää"
-
-#~ msgid "Cardinal Points [Q]"
-#~ msgstr "Ilmansuunnat [Q]"
-
-#~ msgid "Choose landscapes:"
-#~ msgstr "Valitse maisemat"
-
-#~ msgid "Colors "
-#~ msgstr "Värit "
-
-#~ msgid "Command recording stopped."
-#~ msgstr "Komentojen tallennus pysäytetty."
-
-#~ msgid "Configuration"
-#~ msgstr "Asetukset"
-
 #~ msgid "Configuration window"
 #~ msgstr "Asetusikkuna"
-
-#~ msgid "Configuration window [1]"
-#~ msgstr "Asetukset [1]"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Tähdistökuvien voimakkuus"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Tähdistöjen rajat"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Tähdistöjen nimet"
-
-#~ msgid "Constellations Art [R]"
-#~ msgstr "Tähdistökuvat [R]"
-
-#~ msgid "Constellations Boundaries"
-#~ msgstr "Tähdistöjen rajat"
-
-#~ msgid "Constellations Lines"
-#~ msgstr "Tähdistöviivat"
-
-#~ msgid "Constellations Names"
-#~ msgstr "Tähdistöjen nimet"
-
-#~ msgid "Current Time :"
-#~ msgstr "Nykyhetki :"
-
-#~ msgid "Current Time Speed is x"
-#~ msgstr "Nykyinen aika-askel on x"
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Kohdistimen aikakatkaisu: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Päiväyksen muoto: "
-
-#~ msgid "Day"
-#~ msgstr "Päivä"
-
-#~ msgid "Decrease Time Speed [J]"
-#~ msgstr "Pienennä aika-askelta [J]"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -3278,9 +2090,6 @@ msgstr "Sekunnit"
 #~ "CTRL + R : Komentojonon tallennus päälle/pois\n"
 #~ "CTRL + F : Kohteiden etsintä päälle/pois\n"
 #~ "\n"
-
-#~ msgid "Disk Viewport"
-#~ msgstr "Putkinäkymä"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -3309,145 +2118,23 @@ msgstr "Sekunnit"
 #~ "4 , : Ekliptika                 5 . : Ekvaattori\n"
 #~ "\n"
 
-#~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "Tähdistöviivat [C]"
-
-#~ msgid ""
-#~ "During Script Playback:\n"
-#~ "CTRL + C : End Script\n"
-#~ "6   : pause script              K   : resume script\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Komentojonon suorituksessa:\n"
-#~ "CTRL + C : Lopeta komentojono\n"
-#~ "6   : Pysäytä komentojono       K   : jatka komentojonoa\n"
-#~ "\n"
-
-#~ msgid "Effects "
-#~ msgstr "Tehosteet "
-
-#~ msgid "Enter observatory name"
-#~ msgstr "Anna observatorion nimi"
-
-#~ msgid "Equatorial Grid [E]"
-#~ msgstr "Ekvatoriaaliasteikko [E]"
-
-#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "Ekvatoriaali/atsimutaalijalusta [ENTER]"
-
-#~ msgid "Error: Unable to open script file to record commands."
-#~ msgstr ""
-#~ "Virhe: komentojonotiedostoa ei voida avata komentojen tallennusta varten."
-
 #~ msgid "Flip horizontally"
 #~ msgstr "Peilaa vaakasuunnassa"
-
-#, fuzzy
-#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
-#~ msgstr "Näkymän kääntö horisonttaalisesti [CTRL + SHIFT + H]"
 
 #~ msgid "Flip vertically"
 #~ msgstr "Peilaa pystysuunnassa"
 
-#, fuzzy
-#~ msgid "Flip vertically [CTRL + SHIFT + V]"
-#~ msgstr "Näkymän kääntö vertikaalisesti [CTRL + SHIFT + V]"
-
-#~ msgid "Fog"
-#~ msgstr "Sumu"
-
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Luettelosta puuttuvalle tarkkuudelle, muokkaa tiedostoa :"
-
-#~ msgid "GO"
-#~ msgstr "MENE"
-
-#~ msgid "General "
-#~ msgstr "Yleistä "
-
-#~ msgid "Goto selected object [SPACE]"
-#~ msgstr "Siirry valittuun kohteeseen [SPACE]"
-
-#~ msgid "Ground"
-#~ msgstr "Maanpinta"
-
-#~ msgid "Ground [G]"
-#~ msgstr "Maanpinta [G]"
-
-#~ msgid "Help [H]"
-#~ msgstr "Apua [H]"
-
-#~ msgid "Hit CTRL-R again to stop.\n"
-#~ msgstr "Anna CTRL-R uudelleen pysäyttääksesi.\n"
-
-#~ msgid "Hour"
-#~ msgstr "Tunti"
-
-#~ msgid "Increase Time Speed [L]"
-#~ msgstr "Kasvata aika-askelta [L]"
-
-#~ msgid "Info: "
-#~ msgstr "Tiedot: "
-
-#~ msgid "Information"
-#~ msgstr "Tiedot"
-
-#~ msgid "Invalid Script command"
-#~ msgstr "Virheellinen komentosarjan komento"
-
-#~ msgid "Landscape: "
-#~ msgstr "Maisema: "
-
-#~ msgid "Language"
-#~ msgstr "Kieli"
-
-#~ msgid "Latitude: "
-#~ msgstr "Leveysaste: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Hae oletusasetukset: "
 
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Luetaan Hipparcos-luetteloa:"
 
-#~ msgid "Loading Nebula Textures:"
-#~ msgstr "Luetaan tähtisumujen kuvia:"
-
-#~ msgid "Local Script: "
-#~ msgstr "Paikallinen komentojono: "
-
-#~ msgid "Location: "
-#~ msgstr "Sijainti: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Pituusaste: "
-
-#~ msgid "Magnitude"
-#~ msgstr "Magnitudi"
-
 #~ msgid "Magnitude Sizing Multiplier: "
 #~ msgstr "Magnitudin kokokerroin: "
 
-#~ msgid "Manual zoom: "
-#~ msgstr "Käsisuurennus: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maksimimagnitudi nimelle: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Maksimimagnitudi tähtisumujen nimelle: "
-
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Meteoria minuutissa"
-
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "Meteorien ZHR-arvo"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Linnunradan voimakkuus: "
-
-#~ msgid "Minutes"
-#~ msgstr "Minuutit"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -3456,182 +2143,20 @@ msgstr "Sekunnit"
 #~ "Muut:\n"
 #~ "9   : Vaihda meteoriparven aktiivisuutta\n"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-#~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-#~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
-#~ msgstr ""
-#~ "Sekalaista:\n"
-#~ "9 : Vaihda meteoriparven aktiivisuutta\n"
-#~ "CTRL + 0,..,9 : Käynnistä GOTO-komento kaukoputkelle 0,..,9\n"
-#~ "CTRL + SHIFT + H: Vaihda kuvan vaakasuuntainen peilaus\n"
-#~ "CTRL + SHIFT + V: Vaihda kuvan pystysuuntainen peilaus\n"
-
-#~ msgid "Month"
-#~ msgstr "Kk"
-
-#~ msgid ""
-#~ "Movement & selection:\n"
-#~ "Arrow Keys       : Change viewing RA/DE\n"
-#~ "Page Up/Down     : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Left Click       : Select object\n"
-#~ "Right Click      : Unselect\n"
-#~ "CTRL+Left Click  : Unselect\n"
-#~ "\\                : Zoom out (planet + moons if applicable)\n"
-#~ "/                : Zoom to selected object\n"
-#~ "SPACE            : Center on selected object\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Siirtyminen ja valinnat:\n"
-#~ "Nuolinäppäimet           : Vaihda rekt./dekl.\n"
-#~ "Page Up/Down             : Suurenna/pienennä\n"
-#~ "CTRL+Up/Down             : Suurenna/pienennä\n"
-#~ "Napsauta vasemmalla      : Valitse kohde\n"
-#~ "Napsauta oikealla        : Poista valinta\n"
-#~ "CTRL+Napsauta vasemmalla : Poista valinta\n"
-#~ "\\                        : Pienennä (planeetta + kuut, jos sallittu)\n"
-#~ "/                        : Suurenna valittuun kohteeseen\n"
-#~ "VÄLILYÖNTI               : Keskitä valittu kohde\n"
-#~ "\n"
-
-#~ msgid "Names of the Constellations [V]"
-#~ msgstr "Tähdistöjen nimet [V]"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Tähtisumujen ympyrät"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Tähtisumujen nimet"
-
-#~ msgid "Nebulas Names. Up to mag :"
-#~ msgstr "Sumujen nimet. Magnitudiin :"
-
-#~ msgid "Night (red) mode"
-#~ msgstr "Yötila (punainen)"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Object Search"
-#~ msgstr "Kohteen etsintä"
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Kohteen mittakaavan sääntö: "
-
-#~ msgid "Planet Names"
-#~ msgstr "Planeettojen nimet"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planeettojen radat"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planeettojen reitit"
-
-#~ msgid "Planet: "
-#~ msgstr "Planeetta: "
-
-#~ msgid "Point"
-#~ msgstr "Piste"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Esiasetettu taivaan aika: "
-
-#~ msgid "Program Language: "
-#~ msgstr "Ohjelma kieli: "
-
-#~ msgid "Quit [CMD + Q]"
-#~ msgstr "Lopeta [CMD + Q]"
-
-#~ msgid "Quit [CTRL + Q]"
-#~ msgstr "Lopeta [CTRL + Q]"
-
-#~ msgid "Real Time Speed [K]"
-#~ msgstr "Normaali aika-askel [K]"
-
-#~ msgid "Recording commands to script file:\n"
-#~ msgstr "Tallennetaan toimintoja komentojonotiedostoon:\n"
-
-#~ msgid "Rendering"
-#~ msgstr "Esitysasetukset"
-
 #~ msgid "Restart program for"
 #~ msgstr "Käynnistä ohjelma uudelleen"
 
 #~ msgid "Return to Current Time"
 #~ msgstr "Palaa nykyhetkeen"
 
-#, fuzzy
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "Ajan palautus nykyhetkeen [8]"
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Tallenna nykyiset asetukset oletusarvoiksi: "
-
-#~ msgid "Save as default"
-#~ msgstr "Tallenna oletusarvot"
-
 #~ msgid "Screen Resolution :"
 #~ msgstr "Näytön tarkkuus :"
-
-#~ msgid "Script commander"
-#~ msgstr "Komentosarjat"
-
-#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-#~ msgstr "Etsi kohdetta (esim. Saturnus, Altair, HP6218, Orion, M31):"
 
 #~ msgid "Search for object"
 #~ msgstr "Etsi kohdetta"
 
-#~ msgid "Search for object [CTRL + F]"
-#~ msgstr "Kohteen etsintä [CTRL + F]"
-
-#~ msgid "Selected Constellation Only"
-#~ msgstr "Vain valitut tähdistöt"
-
-#~ msgid "Set Location "
-#~ msgstr "Aseta paikkakunta "
-
-#~ msgid "Set Time "
-#~ msgstr "Aseta aika "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Aseta aikavyöhyke: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Aseta käyttöliittymän kieli: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Sulje tietokone: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Tähtitaivaskulttuuri: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Tähtitaivaskieli: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Taivaan aika aloitettaessa: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Taivaan aika: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Aurinkokunnan kohde: "
-
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Tähden magnitudin kerroin: "
-
-#~ msgid "Star Names. Up to mag :"
-#~ msgstr "Tähtien nimet. Magnitudiin :"
-
-#~ msgid "Star Twinkle. Amount :"
-#~ msgstr "Tähtien tuikkiminen. Tiheys :"
-
-#~ msgid "Stars "
-#~ msgstr "Tähdet "
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -3650,23 +2175,8 @@ msgstr "Sekunnit"
 #~ "[   : 7 päivää taakse           ]   : 7 päivää eteen\n"
 #~ "\n"
 
-#~ msgid "Time Display Format: "
-#~ msgstr "Kellonajan muoto: "
-
-#~ msgid "Time Zone :"
-#~ msgstr "Aikavyöhyke :"
-
-#~ msgid "Time speed : "
-#~ msgstr "Aika-askel : "
-
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Kirjoita '%s --help' saadaksesi lisätietoa.\n"
-
-#~ msgid "Twinkling: "
-#~ msgstr "Tuikkiminen: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Päivitä Internetin kautta: "
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -3676,24 +2186,6 @@ msgstr "Sekunnit"
 #~ "Komento: %s [OPTIO] ...\n"
 #~ " -v, --version Näytä versiotieto ja lopeta.\n"
 #~ " -h, --help Näytä tämä avustusteksti ja lopeta.\n"
-
-#~ msgid ""
-#~ "Use key J and L to decrease and increase\n"
-#~ "   time speed.\n"
-#~ "Use key K to return to real time speed."
-#~ msgstr ""
-#~ "Käytä J- ja L-näppäimiä kasvattaaksesi\n"
-#~ "tai pienentääksesi aika-askelta.\n"
-#~ "Käytä K-näppäintä palataksesi normaalinopeuteen."
-
-#~ msgid "Using System Default Time Zone"
-#~ msgstr "Käytä järjestelmän oletusaikavyöhykettä"
-
-#~ msgid "Yes"
-#~ msgstr "Kyllä"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Suurennuksen kesto: "
 
 #~ msgid "change to apply."
 #~ msgstr "muutoksen vahvistamiseksi."
