@@ -83,7 +83,7 @@ public:
 	QString getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
-	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
 	{
