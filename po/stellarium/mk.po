@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-07 17:48+0100\n"
+"POT-Creation-Date: 2008-04-29 01:00+0200\n"
 "PO-Revision-Date: 2007-08-23 13:32+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Macedonian <mk@li.org>\n"
@@ -17,575 +17,122 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/deprecated/stel_ui.cpp:734
-msgid ""
-"   Please check for newer versions and send bug reports\n"
-"    and comments to us at: http://www.stellarium.org\n"
-"\n"
-msgstr ""
-"   Ве молам проверете за понови верзии и испратете извештај за грешка\n"
-"    и коментари на http://www.stellarium.org\n"
-"\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:168
 msgid " Light Years"
 msgstr " Светлосни години"
 
-#: src/deprecated/stel_ui_conf.cpp:1044
-msgid ": Exceptional Leonid rate"
-msgstr ": Вонредна активност на Персеидите"
+#: src/ui_viewDialog.h:1280
+msgid "10"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1051
-msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Највисока активност до сега (1966 Леониди)"
+#: src/ui_viewDialog.h:1282
+#, fuzzy
+msgid "10000"
+msgstr "Ј2000"
 
-#: src/deprecated/stel_ui_conf.cpp:1030
-msgid ": Normal rate"
-msgstr ": Нормален ритам"
+#: src/ui_viewDialog.h:1283
+msgid "144000"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1037
-msgid ": Standard Perseids rate"
-msgstr ": Стандарна активност на Персеидите"
+#: src/ui_viewDialog.h:1281
+msgid "80"
+msgstr ""
 
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/ui_viewDialog.h:1275
+msgid ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
+"html>"
+msgstr ""
+
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
 msgid "AU"
 msgstr "AU"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:403
-msgid "Actual Time"
-msgstr "Сегашно време"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:385
-msgid "Administration "
-msgstr "Администрација "
-
-#: src/deprecated/stel_ui_conf.cpp:152
-msgid "Also display Nebulas without textures"
-msgstr "Прикажи и маглини без текстури"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:390
-msgid "Altitude (m): "
-msgstr "Висина (м): "
-
-#: src/deprecated/stel_ui_conf.cpp:347
-msgid "Altitude : "
-msgstr "Висина : "
-
-#: src/translations.h:81
-msgid "Andromeda"
-msgstr "Андромеда"
-
-#: src/translations.h:341
-msgid "Animal"
-msgstr "Животно"
-
-#: src/translations.h:133
-msgid "Antlia"
-msgstr "Шмрк"
-
-#: src/translations.h:137
-msgid "Apus"
-msgstr "Рајска птица"
-
-#: src/translations.h:166
-msgid "Aquarius"
-msgstr "Водолија"
-
-#: src/translations.h:80
-msgid "Aquila"
-msgstr "Акила"
-
-#: src/translations.h:83
-msgid "Ara"
-msgstr "Олтар"
-
-#: src/deprecated/s_tui.h:292
-msgid "Are you sure ?"
+#: src/ui_viewDialog.h:1290
+msgid "Amount:"
 msgstr ""
 
-#: src/translations.h:86
-msgid "Aries"
-msgstr "Овен"
+#: src/ui_viewDialog.h:1304
+msgid "Apollo"
+msgstr ""
 
-#: src/deprecated/stel_ui_tuiconf.cpp:638
-msgid "Arrow down to load list."
-msgstr "Стрелка надолу за вчитување на листата."
+#: src/ui_viewDialog.h:1322
+msgid "Art brightness: "
+msgstr ""
 
-#: src/translations.h:246
-msgid "Arsenal"
-msgstr "Арсенал"
-
-#: src/deprecated/stel_ui_conf.cpp:223
-msgid "Atmosphere"
-msgstr "Атмосфера"
-
-#: src/deprecated/stel_ui.cpp:686
-msgid "Atmosphere [A]"
-msgstr "Атмосфера [A]"
-
-#: src/translations.h:100
-msgid "Auriga"
-msgstr "Кочијаш"
-
-#: src/translations.h:316
-msgid "Aurvandil's Toe"
-msgstr "Палецот на Аурвандил"
-
-#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
-msgid "Author: "
-msgstr "Автор: "
-
-#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:118
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
-#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
-msgid "Azimuthal Grid"
+#: src/ui_viewDialog.h:1310
+#, fuzzy
+msgid "Azimutal grid"
 msgstr "Азимутална мрежа"
-
-#: src/deprecated/stel_ui.cpp:678
-msgid "Azimuthal Grid [Z]"
-msgstr "Азимутална мрежа [Z]"
-
-#: src/translations.h:294
-msgid "Bailer"
-msgstr "Кофа"
-
-#: src/translations.h:291
-msgid "Banner of Three Stars"
-msgstr "Знамето на трите ѕвезди"
-
-#: src/translations.h:348
-msgid "Bear's Lodge"
-msgstr "Мечкина јазбина"
-
-#: src/translations.h:176
-msgid "Bird"
-msgstr "Птица"
-
-#: src/translations.h:333
-msgid "Blubber Container"
-msgstr "Сад за сало"
-
-#: src/translations.h:180 src/translations.h:251
-msgid "Boat"
-msgstr "Брод"
-
-#: src/translations.h:279
-msgid "Bond"
-msgstr "Окови"
-
-#: src/translations.h:89
-msgid "Bootes"
-msgstr "Кравар"
-
-#: src/translations.h:255
-msgid "Bow and Arrow"
-msgstr "Лак и стрела"
-
-#: src/translations.h:331
-msgid "Breastbone"
-msgstr "Градна коска"
-
-#: src/translations.h:171
-msgid "Bull's Foreleg"
-msgstr "Бикова нога"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:458
-msgid "CD/DVD Script: "
-msgstr "CD/DVD Скрипта: "
-
-#: src/deprecated/stel_ui.cpp:816
-msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : Излез\n"
-
-#: src/deprecated/stel_ui.cpp:814
-msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Излез\n"
-
-#: src/translations.h:90
-msgid "Caelum"
-msgstr "Длето"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:399
-msgid "Calendar"
-msgstr "Календар"
 
 #: src/translations.h:45
 msgid "Callisto"
 msgstr "Калисто"
 
-#: src/translations.h:117
-msgid "Camelopardalis"
-msgstr "Жирафа"
-
-#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
-msgid "Cancel"
-msgstr "Откажи"
-
-#: src/translations.h:92
-msgid "Cancer"
-msgstr "Рак"
-
-#: src/translations.h:99
-msgid "Canes Venatici"
-msgstr "Ловачки пес"
-
-#: src/translations.h:118
-msgid "Canis Major"
-msgstr "Големо куче"
-
-#: src/translations.h:145
-msgid "Canis Minor"
-msgstr "Мало куче"
-
-#: src/translations.h:93
-msgid "Capricornus"
-msgstr "Јарец"
-
-#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
-msgid "Cardinal Points"
+#: src/ui_viewDialog.h:1314
+#, fuzzy
+msgid "Cardinal points"
 msgstr "Клучни точки"
-
-#: src/deprecated/stel_ui.cpp:684
-msgid "Cardinal Points [Q]"
-msgstr "Клучни точки [Q]"
-
-#: src/translations.h:302
-msgid "Cared for by Moon"
-msgstr "Cared for by Moon"
-
-#: src/translations.h:329
-msgid "Caribou"
-msgstr "Карибу елен"
-
-#: src/translations.h:94
-msgid "Carina"
-msgstr "Прамец"
-
-#: src/translations.h:95
-msgid "Cassiopeia"
-msgstr "Касиопеја"
-
-#: src/translations.h:295
-msgid "Cat's Cradle"
-msgstr "Мачкина лулка"
-
-#: src/translations.h:96
-msgid "Centaurus"
-msgstr "Бик"
-
-#: src/translations.h:97
-msgid "Cepheus"
-msgstr "Цефеј"
-
-#: src/translations.h:85
-msgid "Cetus"
-msgstr "Кит"
-
-#: src/translations.h:91
-msgid "Chamaeleon"
-msgstr "Камелеон"
-
-#: src/translations.h:205
-msgid "Chariot"
-msgstr "Кочија"
-
-#: src/translations.h:260
-msgid "Chariot Yard"
-msgstr "Двор на кочиите"
 
 #: src/translations.h:59
 msgid "Charon"
 msgstr "Харон"
 
-#: src/translations.h:195
-msgid "Chematy"
-msgstr "Chematy"
-
 #: src/translations.h:69
 msgid "Chinese"
 msgstr "Кинески"
 
-#: src/deprecated/stel_ui_conf.cpp:428
-msgid "Choose landscapes:"
-msgstr "Изберете пејзаж:"
+#: src/ui_searchDialogGui.h:225
+#, fuzzy
+msgid "Completions"
+msgstr "Празнина"
 
-#: src/translations.h:102
-msgid "Circinus"
-msgstr "Шестар"
-
-#: src/translations.h:243
-msgid "Circular Granary"
-msgstr "Кружен амбар"
-
-#: src/translations.h:203
-msgid "Coiled Thong"
-msgstr "Coiled Thong"
-
-#: src/translations.h:327
-msgid "Collarbones"
-msgstr "Клучна коска"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:382
-msgid "Colors "
-msgstr "Бои "
-
-#: src/translations.h:101
-msgid "Columba"
-msgstr "Гулаб"
-
-#: src/translations.h:98
-msgid "Coma Berenices"
-msgstr "Береникина коса"
-
-#: src/deprecated/stel_ui.cpp:1037
-msgid "Command recording stopped."
-msgstr "Снимање на командите е прекинато"
-
-#: src/deprecated/stel_ui_conf.cpp:60
-msgid "Configuration"
-msgstr "Конфигурација"
-
-#: src/deprecated/stel_ui.cpp:694
-msgid "Configuration window [1]"
-msgstr "Конфигурациски прозорец [1]"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:427
-msgid "Constellation Art Intensity"
-msgstr "Интензитет на цртежите на соѕвездијата"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:428
-msgid "Constellation Boundaries"
-msgstr "Граници на соѕвездијата"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:425
-msgid "Constellation Lines"
+#: src/ui_viewDialog.h:1317
+#, fuzzy
+msgid "Constellations"
 msgstr "Линии на соѕвездијата"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:426
-msgid "Constellation Names"
-msgstr "Имиња на соѕвездијата"
-
-#: src/deprecated/stel_ui.cpp:676
-msgid "Constellations Art [R]"
-msgstr "Графици на соѕвездијата [R]"
-
-#: src/deprecated/stel_ui_conf.cpp:123
-msgid "Constellations Boundaries"
-msgstr "Граници на соѕвездијата"
-
-#: src/deprecated/stel_ui_conf.cpp:113
-msgid "Constellations Lines"
-msgstr "Линии на соѕвездијата"
-
-#: src/deprecated/stel_ui_conf.cpp:118
-msgid "Constellations Names"
-msgstr "Имиња на соѕвездијата"
-
-#: src/translations.h:104
-msgid "Corona Australis"
-msgstr "Јужна круна"
-
-#: src/translations.h:105
-msgid "Corona Borealis"
-msgstr "Северна круна"
-
-#: src/translations.h:106
-msgid "Corvus"
-msgstr "Гавран"
-
-#: src/translations.h:103
-msgid "Crater"
-msgstr "Пехар"
-
-#: src/translations.h:181
-msgid "Crocodile"
-msgstr "Крокодил"
-
-#: src/translations.h:107
-msgid "Crux"
-msgstr "Јужен крст"
-
-#: src/deprecated/stel_ui_conf.cpp:270
-msgid "Current Time :"
-msgstr "Моментално време :"
-
-#: src/deprecated/stel_ui_conf.cpp:1082
-msgid "Current Time Speed is x"
-msgstr "Моментална брзина на времето е x"
-
-#: src/deprecated/stel_ui_conf.cpp:321
-msgid "Cursor : "
+#: src/ui_locationDialogGui.h:269
+#, fuzzy
+msgid "Cursor :"
 msgstr "Курсор: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:451
-msgid "Cursor Timeout: "
-msgstr "Време на истекување на курсорот "
-
-#: src/translations.h:202
-msgid "Curved Array"
-msgstr "Искривена низа"
-
-#: src/translations.h:108
-msgid "Cygnus"
-msgstr "Лебед"
-
-#: src/deprecated/stel_ui_conf.cpp:535
-msgid "Date & Time"
+#: src/ui_dateTimeDialogGui.h:124
+#, fuzzy
+msgid "Date and Time"
 msgstr "Датум и време"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:406
-msgid "Date Display Format: "
-msgstr "Формат на прикажување на датите: "
-
-#: src/deprecated/s_gui.cpp:2747
-msgid "Day"
-msgstr "Ден"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:398
-msgid "Day keys: "
-msgstr "Копчиња за денови: "
-
-#: src/deprecated/stel_ui.cpp:719
-msgid "Decrease Time Speed [J]"
-msgstr "Успори проток на времето [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Деимос"
 
-#: src/translations.h:109
-msgid "Delphinus"
-msgstr "Делфин"
-
-#: src/deprecated/stel_ui.cpp:788
-msgid ""
-"Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"CTRL + G : Goto selected solar system object\n"
-"\n"
-msgstr ""
-"Дијалози и останати контроли:\n"
-"H : Помош I : За Stellarium\n"
-"M : Текстуално мени 1 (еден) : Конфигурација\n"
-"CTRL + S : Зачувај screenshot\n"
-"CTRL + R : Снимање на скрипта\n"
-"CTRL + F : Пребарувач на објекти\n"
-"CTRL + G : Иди на избраниот објект\n"
-"\n"
-
-#: src/translations.h:310
-msgid "Dilyehe"
-msgstr "Dilyehe"
-
 #: src/translations.h:50
 msgid "Dione"
 msgstr "Диона"
 
-#: src/translations.h:208 src/translations.h:339
-msgid "Dipper"
-msgstr "Црпалка"
-
-#: src/deprecated/stel_ui_conf.cpp:398
-msgid "Disk Viewport"
-msgstr "Поглед како диск"
-
-#: src/deprecated/stel_ui.cpp:776
-msgid ""
-"Display options:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen / window.\n"
-"C   : Constellation lines       V   : Constellation labels\n"
-"R   : Constellation art         E   : Equatorial grid\n"
-"Z   : Azimuthal grid            N   : Nebula labels\n"
-"P   : Planet labels             G   : Ground\n"
-"A   : Atmosphere                F   : Fog\n"
-"Q   : Cardinal points           O   : Toggle moon scaling\n"
-"T   : Object tracking           S   : Stars\n"
-"4 , : Ecliptic line             5 . : Equator line\n"
-"\n"
-msgstr ""
-"Опции за приказ:\n"
-"ENTER: Екваторијално/Азимутално монтирање\n"
-"F1 : Префрли цел екран/прозорец.\n"
-"C : Линии на констелации V : Имиња на констелации\n"
-"R : Цртежи на констелациите E: Екваторијална мрежа\n"
-"Z : Азимутална мрежа N : Имиња на маглини\n"
-"P : Имиња на планети G: Земја\n"
-"А : Атмосфера F : Магла\n"
-"Q : Клучни точки O: Промена на размер на месечината\n"
-"T : Следење на објекти S: Ѕвезди\n"
-"4 , : Линија на еклиптиката 5 . : Линија на екваторот\n"
-"\n"
-
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
+#: src/modules/StarWrapper.cpp:125 src/modules/StarWrapper.cpp:167
 msgid "Distance: "
 msgstr "Оддалеченост: "
 
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Do"
+#: src/ui_viewDialog.h:1271
+msgid "Download images"
 msgstr ""
 
-#: src/translations.h:253
-msgid "Dog"
-msgstr "Куче"
-
-#: src/translations.h:326
-msgid "Dogs"
-msgstr "Кучиња"
-
-#: src/translations.h:303
-msgid "Dolphin"
-msgstr "Делфин"
-
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Done"
-msgstr ""
-
-#: src/translations.h:110
-msgid "Dorado"
-msgstr "Златна риба"
-
-#: src/translations.h:111
-msgid "Draco"
-msgstr "Змеј"
-
-#: src/deprecated/stel_ui.cpp:672
-msgid "Drawing of the Constellations [C]"
-msgstr "Цртање на соѕвездијата [C]"
-
-#: src/translations.h:344
-msgid "Dried Willow"
-msgstr "Сува врба"
-
-#: src/translations.h:209
-msgid "Drum"
-msgstr "Тапан"
-
-#: src/translations.h:278
-msgid "Drumstick"
-msgstr "Рачка за тапан"
-
-#: src/deprecated/stel_ui.cpp:804
-msgid ""
-"During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
-msgstr ""
-"За време на извршување на скриптата:\n"
-"CTRL + C : Крај на скриптата\n"
-"6 : Пауза К : продолжи со скриптата\n"
-"\n"
-
-#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
+#: src/translations.h:65
 msgid "E"
 msgstr "И"
 
@@ -593,266 +140,70 @@ msgstr "И"
 msgid "Earth"
 msgstr "Земја"
 
-#: src/translations.h:254
-msgid "Earth God's Temple"
-msgstr "Храм на богот на земјата"
-
-#: src/translations.h:282
-msgid "Eastern Door"
-msgstr "Источна порта"
-
-#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
-msgid "Ecliptic Line"
+#: src/ui_viewDialog.h:1312
+#, fuzzy
+msgid "Ecliptic line"
 msgstr "Линија на еклиптиката"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:383
-msgid "Effects "
-msgstr "Ефекти "
 
 #: src/translations.h:70
 msgid "Egyptian"
 msgstr "Египетски"
 
-#: src/translations.h:342
-msgid "Elk"
-msgstr "Елк"
-
-#: src/translations.h:266
-msgid "Emptiness"
-msgstr "Празнина"
-
-#: src/translations.h:263
-msgid "Encampment"
-msgstr "Утврдување"
-
 #: src/translations.h:48
 msgid "Enceladus"
 msgstr "Енцелад"
 
-#: src/deprecated/stel_ui_conf.cpp:842
-msgid "Enter observatory name"
-msgstr "Внеси име на опсерваторијата"
-
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:243
 msgid "Equ of date"
 msgstr "Тековно"
 
-#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
-msgid "Equator Line"
+#: src/ui_viewDialog.h:1313
+#, fuzzy
+msgid "Equator line"
 msgstr "Линија на екваторот"
 
-#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
-msgid "Equatorial Grid"
+#: src/ui_viewDialog.h:1315
+#, fuzzy
+msgid "Equatorial J2000 grid"
 msgstr "Екваторијална мрежа"
 
-#: src/deprecated/stel_ui.cpp:680
-msgid "Equatorial Grid [E]"
-msgstr "Екваторијална мрежа [E]"
-
-#: src/deprecated/stel_ui.cpp:692
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Екваторијалнa/Азимутска Монтажа [ENTER]"
-
-#: src/translations.h:144
-msgid "Equuleus"
-msgstr "Ждребе"
-
-#: src/translations.h:113
-msgid "Eridanus"
-msgstr "Еридан (Река)"
-
-#: src/deprecated/stel_ui.cpp:1051
-msgid "Error: Unable to open script file to record commands."
-msgstr "Грешка: не е можно да се одвори датотеката за запис на команди."
-
-#: src/translations.h:273
-msgid "Establishment"
-msgstr "Утврдување"
+#: src/ui_viewDialog.h:1309
+#, fuzzy
+msgid "Equatorial grid"
+msgstr "Екваторијална мрежа"
 
 #: src/translations.h:43
 msgid "Europa"
 msgstr "Европа"
 
-#: src/translations.h:245
-msgid "Extended Net"
-msgstr "Раширена мрежа"
+#: src/ui_searchDialogGui.h:210
+msgid "Find Object"
+msgstr ""
 
-#: src/translations.h:283
-msgid "Farmland"
-msgstr "Фарма"
-
-#: src/translations.h:179
-msgid "Ferry Boat"
-msgstr "Траект"
-
-#: src/translations.h:338
-msgid "Fireplace"
-msgstr "Огниште"
-
-#: src/translations.h:311
-msgid "First Big One"
-msgstr "Прв Голем"
-
-#: src/translations.h:313
-msgid "First Slim One"
-msgstr "Прв тенок"
-
-#: src/translations.h:228
-msgid "Five Chariots"
-msgstr "Пет кочии"
-
-#: src/translations.h:240
-msgid "Five Feudal Kings"
-msgstr "Пет феудални кралеви"
-
-#: src/translations.h:274
-msgid "Flail"
-msgstr "Буздоган"
-
-#: src/deprecated/stel_ui.cpp:711
-msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Преврти по хоризонтала [CTRL + SHIFT + H]"
-
-#: src/deprecated/stel_ui.cpp:713
-msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Преврти по вертикала [CTRL + SHIFT + V]"
-
-#: src/translations.h:188
-msgid "Flock"
-msgstr "Стадо"
-
-#: src/translations.h:223
-msgid "Flying Corridor"
-msgstr "Летечка патека"
-
-#: src/deprecated/stel_ui_conf.cpp:228
-msgid "Fog"
-msgstr "Магла"
-
-#: src/translations.h:225
-msgid "Ford"
+#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
+#: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
+#: src/ui_viewDialog.h:962
+#, fuzzy
+msgid "Form"
 msgstr "Ford"
-
-#: src/translations.h:115
-msgid "Fornax"
-msgstr "Печка"
-
-#: src/translations.h:236
-msgid "Four Channels"
-msgstr "Четири канали"
-
-#: src/translations.h:301
-msgid "Frigate Bird"
-msgstr "Frigate Bird"
-
-#: src/deprecated/stel_ui_conf.cpp:695
-msgid "GO"
-msgstr "Тргни"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ганимед"
 
-#: src/translations.h:116
-msgid "Gemini"
-msgstr "Близнаци"
+#: src/ui_searchDialogGui.h:224
+msgid "Go"
+msgstr ""
 
-#: src/deprecated/stel_ui_tuiconf.cpp:380
-msgid "General "
-msgstr "Општо "
+#: src/ui_viewDialog.h:1301
+#, fuzzy
+msgid "Guereins"
+msgstr "Змија"
 
-#: src/translations.h:285
-msgid "Ghosts"
-msgstr "Духови"
-
-#: src/translations.h:186
-msgid "Giant"
-msgstr "Џин"
-
-#: src/translations.h:268
-msgid "Girl"
-msgstr "Девојка"
-
-#: src/translations.h:261
-msgid "Good Gourd"
-msgstr "Добра лушпа"
-
-#: src/deprecated/stel_ui.cpp:709
-msgid "Goto selected object [SPACE]"
-msgstr "Иди на избраниот објект [SPACE]"
-
-#: src/translations.h:218
-msgid "Great General"
-msgstr "Голем генерал"
-
-#: src/deprecated/stel_ui_conf.cpp:213
-msgid "Ground"
-msgstr "Земја"
-
-#: src/deprecated/stel_ui.cpp:682
-msgid "Ground [G]"
-msgstr "Земја [G]"
-
-#: src/translations.h:120
-msgid "Grus"
-msgstr "Штрк"
-
-#: src/translations.h:336
-msgid "Hand"
-msgstr "Рака"
-
-#: src/translations.h:270
-msgid "Heart"
-msgstr "Срце"
-
-#: src/deprecated/stel_ui.cpp:823
+#: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "Помош"
-
-#: src/deprecated/stel_ui.cpp:690
-msgid "Help [H]"
-msgstr "Помош [H]"
-
-#: src/translations.h:121
-msgid "Hercules"
-msgstr "Херкулес"
-
-#: src/translations.h:187
-msgid "Hippopotamus"
-msgstr "Нилски коњ"
-
-#: src/deprecated/stel_ui.cpp:1047
-msgid "Hit CTRL-R again to stop.\n"
-msgstr "Притиснете CTRL-R повторно за стопирање.\n"
-
-#: src/translations.h:247
-msgid "Hook"
-msgstr "Јадица"
-
-#: src/translations.h:212
-msgid "Horn"
-msgstr "Хорна"
-
-#: src/translations.h:122
-msgid "Horologium"
-msgstr "Часовник"
-
-#: src/translations.h:184
-msgid "Horus"
-msgstr "Хорус"
-
-#: src/deprecated/s_gui.cpp:2750
-msgid "Hour"
-msgstr "Час"
-
-#: src/translations.h:123
-msgid "Hydra"
-msgstr "Хидра"
-
-#: src/translations.h:124
-msgid "Hydrus"
-msgstr "Хидрус"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -862,495 +213,159 @@ msgstr "Хиперион"
 msgid "Iapetus"
 msgstr "Јапет"
 
-#: src/translations.h:211
-msgid "Imperial Guards"
-msgstr "Кралски чувари"
-
-#: src/translations.h:214
-msgid "Imperial Passageway"
-msgstr "Царски премин"
-
-#: src/deprecated/stel_ui.cpp:723
-msgid "Increase Time Speed [L]"
-msgstr "Забрзај проток на времето [L]"
-
-#: src/translations.h:125
-msgid "Indus"
-msgstr "Индус"
-
-#: src/deprecated/stel_ui_conf.cpp:964
-msgid "Info: "
-msgstr "Информација: "
-
-#: src/deprecated/stel_ui.cpp:753
-msgid "Information"
-msgstr "Информација"
-
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Инуитски"
-
-#: src/deprecated/stel_ui.cpp:602
-msgid "Invalid Script command"
-msgstr "Некоректна скрипт команда"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Ио"
 
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:106
+#: src/modules/Telescope.cpp:241
 msgid "J2000"
 msgstr "Ј2000"
-
-#: src/translations.h:249
-msgid "Jade Well"
-msgstr "Ѕид од жад"
-
-#: src/translations.h:192
-msgid "Jaw"
-msgstr "Вилица"
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Јупитер"
 
-#: src/translations.h:194
-msgid "Kenemet"
-msgstr "Кенемет"
-
-#: src/translations.h:190
-msgid "Khanuwy Fish"
-msgstr "Khanuwy риба"
-
-#: src/translations.h:215
-msgid "Kitchen"
-msgstr "Кујна"
-
-#: src/translations.h:300
-msgid "Kite of Kawelo"
-msgstr "Змејот на Кавело"
-
 #: src/translations.h:72
 msgid "Korean"
 msgstr "Корејски"
 
-#: src/translations.h:126
-msgid "Lacerta"
-msgstr "Гуштер"
+#: src/ui_viewDialog.h:1286
+msgid "Labels and markers"
+msgstr ""
 
 #: src/translations.h:73
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:328
-msgid "Lamp Stand"
-msgstr "Свеќник"
-
-#: src/translations.h:250
-msgid "Lance"
-msgstr "Lance"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:444
-msgid "Landscape: "
-msgstr "Пејзаж: "
-
-#: src/deprecated/stel_ui_conf.cpp:537
-msgid "Landscapes"
+#: src/ui_viewDialog.h:1306
+#, fuzzy
+msgid "Landscape"
 msgstr "Пејзажи"
 
-#: src/deprecated/stel_ui_conf.cpp:534
-msgid "Language"
-msgstr "Јазици"
-
-#: src/deprecated/stel_ui_conf.cpp:339
-msgid "Latitude : "
+#: src/ui_locationDialogGui.h:275
+#, fuzzy
+msgid "Latitude :"
 msgstr "Ширина : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:388
-msgid "Latitude: "
-msgstr "Ширина: "
-
-#: src/translations.h:277
-msgid "Left Flag"
-msgstr "Лево знаме"
-
-#: src/translations.h:220
-msgid "Legs"
-msgstr "Нозе"
-
-#: src/translations.h:129
-msgid "Leo"
-msgstr "Лав"
-
-#: src/translations.h:146
-msgid "Leo Minor"
-msgstr "Мал лав"
-
-#: src/translations.h:128
-msgid "Lepus"
-msgstr "Зајак"
-
-#: src/translations.h:84
-msgid "Libra"
-msgstr "Терезија"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:443
-msgid "Light Pollution Luminance: "
+#: src/ui_viewDialog.h:1297
+#, fuzzy
+msgid "Light pollution:"
 msgstr "Луминанција на светлосното загадување: "
 
-#: src/translations.h:173
-msgid "Lion"
-msgstr "Лав"
-
-#: src/translations.h:309
-msgid "Lizard"
-msgstr "Гуштер"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:462
-msgid "Load Default Configuration: "
-msgstr "Вчитај основна конфигурација: "
-
-#: src/modules/ConstellationMgr.cpp:340
-msgid "Loading Constellation Art: "
+#: src/modules/ConstellationMgr.cpp:369
+#, fuzzy, qt-format
+msgid "Loading Constellation Art: %1/%2"
 msgstr "Вчитувам податоци за соѕвездијата: "
 
-#: src/modules/NebulaMgr.cpp:404
-msgid "Loading NGC catalog: "
+#: src/modules/NebulaMgr.cpp:372
+#, fuzzy, qt-format
+msgid "Loading NGC catalog: %1/%2"
 msgstr "Вчитувам NGC каталог: "
 
-#: src/modules/NebulaMgr.cpp:538
-msgid "Loading Nebula Textures:"
-msgstr "Вчитувам текстури на маглините:"
-
-#: src/modules/StarMgr.cpp:493
-msgid "Loading catalog "
+#: src/modules/StarMgr.cpp:253
+#, fuzzy, qt-format
+msgid "Loading catalog %1"
 msgstr "Вчитување на каталогот "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:455
-msgid "Local Script: "
-msgstr "Локална скрипта: "
-
-#: src/deprecated/stel_ui_conf.cpp:536
+#: src/ui_locationDialogGui.h:254
 msgid "Location"
 msgstr "Локација:"
 
-#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
-msgid "Location: "
-msgstr "Локација: "
-
-#: src/deprecated/stel_ui_conf.cpp:331
-msgid "Longitude : "
+#: src/ui_locationDialogGui.h:271
+#, fuzzy
+msgid "Longitude :"
 msgstr "Должина : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:389
-msgid "Longitude: "
-msgstr "Должина: "
-
-#: src/translations.h:130
-msgid "Lupus"
-msgstr "Волк"
-
-#: src/translations.h:131
-msgid "Lynx"
-msgstr "Рис"
-
-#: src/translations.h:132
-msgid "Lyra"
-msgstr "Лира"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Magnitude"
-msgstr "Магнитуда"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:447
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Множител за големина на магнитудата: "
-
-#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
-#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
-#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
-#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
+#: src/modules/Planet.cpp:117 src/modules/Planet.cpp:166
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:105
+#: src/modules/StarWrapper.cpp:163
 msgid "Magnitude: "
 msgstr "Магнитуда: "
 
-#: src/translations.h:308
-msgid "Man with Feet Apart"
-msgstr "Маж со разделени нозе"
+#: src/modules/StarWrapper.cpp:63
+#, fuzzy, qt-format
+msgid "Magnitude: %1"
+msgstr "Магнитуда: "
 
-#: src/translations.h:320
-msgid "Man's Cart"
-msgstr "Машка количка"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-msgid "Manual zoom: "
-msgstr "Мануелен зум: "
-
-#: src/translations.h:227
-msgid "Market"
-msgstr "Пазар"
-
-#: src/translations.h:290
-msgid "Market Officer"
-msgstr "Market Officer"
+#: src/ui_viewDialog.h:1331
+#, fuzzy
+msgid "Marking"
+msgstr "Прамец"
 
 #: src/translations.h:38
 msgid "Mars"
 msgstr "Марс"
 
-#: src/translations.h:298
-msgid "Maui's Fishhook"
-msgstr "Јадицата на Мауи"
-
-#: src/translations.h:252
-msgid "Mausoleum"
-msgstr "Мавзолеј"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:420
-msgid "Maximum Magnitude to Label: "
-msgstr "Максимална магнитуда за лабела: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:449
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Максимална магнитуда на маглините за лабела: "
-
-#: src/translations.h:242
-msgid "Meadows"
-msgstr "Ливади"
-
-#: src/translations.h:160
-msgid "Mensa"
-msgstr "Трпеза"
-
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Меркур"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:433
-msgid "Meridian Line"
+#: src/ui_viewDialog.h:1311
+#, fuzzy
+msgid "Meridian line"
 msgstr "Линии на меридијаните"
-
-#: src/deprecated/stel_ui_conf.cpp:1056
-msgid "Meteor zenith hourly rate"
-msgstr "Максимална активност на метеорите"
-
-#: src/translations.h:134
-msgid "Microscopium"
-msgstr "Микроскоп"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:448
-msgid "Milky Way intensity: "
-msgstr "Нагласеност на Млечниот пат: "
 
 #: src/translations.h:47
 msgid "Mimas"
 msgstr "Мимас"
 
-#: src/deprecated/s_gui.cpp:2753
-msgid "Minutes"
-msgstr "Минути"
-
-#: src/deprecated/stel_ui.cpp:808
-msgid ""
-"Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"
-msgstr ""
-"Разно:\n"
-"9 : Подесувања на метеорските дождови\n"
-"CTRL + 0,..,9 : Изврши ИДИ НА команда за телескопот 0,..,9\n"
-"CTRL + SHIFT + H: Превртување на сликата по хоризонтала\n"
-"CTRL + SHIFT + V: Превртување на сликата по вертикала\n"
-
-#: src/translations.h:127
-msgid "Monoceros"
-msgstr "Еднорог"
-
-#: src/deprecated/s_gui.cpp:2744
-msgid "Month"
-msgstr "Месец"
-
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Месечина"
 
-#: src/deprecated/stel_ui_conf.cpp:168
-msgid "Moon Scale"
-msgstr "Размер на месечината"
-
-#: src/translations.h:193
-msgid "Mooring Post"
-msgstr "Сидриште"
-
-#: src/translations.h:257
-msgid "Mortar"
-msgstr "Mortar"
-
-#: src/deprecated/stel_ui.cpp:765
-msgid ""
-"Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
-"\n"
-msgstr ""
-"Движене и обележување:\n"
-"Стрелки: Промена на погледот RA/DE\n"
-"Page Up/Down : Зумирање\n"
-"CTRL+Горе/Доле : Зумирање\n"
-"Лев клик : Избери објект\n"
-"Десен клик : Деселектирај\n"
-"CTRL+Лев клик : Деселектирај\n"
-"\\ : Одзумирај (планета и месечини доколку е можно)\n"
-"/ : Зумирај на избран објект\n"
-"SPACE : Центрирај на избраниот објект\n"
-"\n"
-
-#: src/translations.h:135
-msgid "Musca"
-msgstr "Мува"
-
-#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
+#: src/translations.h:63
 msgid "N"
 msgstr "N"
-
-#: src/deprecated/stel_ui.cpp:674
-msgid "Names of the Constellations [V]"
-msgstr "Имиња на соѕвездијата [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:299
-msgid "Navigator's Triangle"
-msgstr "Триаголник на навигаторот"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:439
-msgid "Nebula Circles"
-msgstr "Кругови околу маглините"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:438
-msgid "Nebula Names"
-msgstr "Имиња на маглини"
-
-#: src/deprecated/stel_ui_conf.cpp:139
-msgid "Nebulas Names. Up to mag :"
-msgstr "Имиња на маглини. До магнитуда :"
-
-#: src/deprecated/stel_ui.cpp:688
-msgid "Nebulas [N]"
+#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
+#, fuzzy
+msgid "Nebula"
 msgstr "Маглина [N]"
-
-#: src/translations.h:288
-msgid "Neck"
-msgstr "Врат"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/translations.h:191 src/translations.h:230
-msgid "Net"
-msgstr "Мрежа"
-
-#: src/deprecated/stel_ui.cpp:697
-msgid "Night (red) mode"
-msgstr "Ноќен [црвен] приказ"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
-msgid "No"
-msgstr "Не"
-
-#: src/translations.h:112
-msgid "Norma"
-msgstr "Агломер"
+#: src/ui_viewDialog.h:1284
+#, fuzzy
+msgid "Normal rate"
+msgstr ": Нормален ритам"
 
 #: src/translations.h:75
 msgid "Norse"
 msgstr "Норсе"
 
-#: src/translations.h:239
-msgid "North River"
-msgstr "Северна река"
+#: src/ui_viewDialog.h:1293
+#, fuzzy
+msgid "Options"
+msgstr "Орион"
 
-#: src/translations.h:201
-msgid "Northern Dipper"
-msgstr "Северна црпалка"
-
-#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
-msgid "OK"
-msgstr "Во ред"
-
-#: src/deprecated/stel_ui_conf.cpp:670
-msgid "Object Search"
-msgstr "Пребарување на објектите"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Object Sizing Rule: "
-msgstr "Правило за големина на објектите: "
-
-#: src/translations.h:136
-msgid "Octans"
-msgstr "Октант"
-
-#: src/translations.h:138
-msgid "Ophiuchus"
-msgstr "Змијоносец"
-
-#: src/translations.h:241
-msgid "Orchard"
-msgstr "Лозје"
-
-#: src/translations.h:139
+#: src/ui_searchDialogGui.h:223
 msgid "Orion"
 msgstr "Орион"
 
-#: src/translations.h:224
-msgid "Outer Fence"
-msgstr "Надворешна ограда"
+#: src/ui_viewDialog.h:1330
+msgid "Orthographic"
+msgstr ""
 
-#: src/translations.h:269
-msgid "Ox"
-msgstr "Вол"
-
-#: src/translations.h:189
-msgid "Pair of Stars"
-msgstr "Две скали"
-
-#: src/translations.h:265
-msgid "Palace Gate"
-msgstr "Врата на палатата"
-
-#: src/modules/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:123
 msgid "Parallax: "
 msgstr "Паралакс: "
 
-#: src/translations.h:140
-msgid "Pavo"
-msgstr "Паун"
-
-#: src/translations.h:141
-msgid "Pegasus"
-msgstr "Пегаз"
-
-#: src/translations.h:143
-msgid "Perseus"
-msgstr "Персеј"
-
-#: src/translations.h:256
-msgid "Pestle"
-msgstr "Pestle"
+#: src/ui_viewDialog.h:1327
+#, fuzzy
+msgid "Perspective"
+msgstr "Предподесено време"
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -1360,726 +375,1816 @@ msgstr "Фобос"
 msgid "Phoebe"
 msgstr "Феба"
 
-#: src/translations.h:149
-msgid "Phoenix"
-msgstr "Феникс"
-
-#: src/translations.h:142
-msgid "Pictor"
-msgstr "Сликар"
-
-#: src/translations.h:151
-msgid "Pisces"
-msgstr "Риби"
-
-#: src/translations.h:150
-msgid "Piscis Austrinus"
-msgstr "Јужна риба"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:430
-msgid "Planet Names"
-msgstr "Имиња на планети"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:431
-msgid "Planet Orbits"
-msgstr "Орбити на планети"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:432
-msgid "Planet Trails"
-msgstr "Патеки на планетите"
-
-#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
-msgid "Planet: "
-msgstr "Планета: "
-
-#: src/deprecated/stel_ui_conf.cpp:163
+#: src/ui_viewDialog.h:1288
 msgid "Planets"
 msgstr "Планети"
 
-#: src/deprecated/stel_ui_conf.cpp:175
-msgid "Planets Hints"
+#: src/ui_viewDialog.h:1262
+#, fuzzy
+msgid "Planets and Satellites"
 msgstr "Податоци за планетите"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Плутон"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Point"
-msgstr "Точка"
-
-#: src/translations.h:76
+#: src/translations.h:76 src/ui_viewDialog.h:1338
 msgid "Polynesian"
 msgstr "Полинезиски"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:401
-msgid "Preset Sky Time: "
-msgstr "Предподесено Небесно време: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:404
-msgid "Preset Time"
-msgstr "Предподесено време"
-
-#: src/deprecated/stel_ui_conf.cpp:479
-msgid "Program Language: "
-msgstr "Јазик на програмата: "
-
-#: src/deprecated/stel_ui_conf.cpp:379
-msgid "Projection :"
+#: src/ui_viewDialog.h:1323
+#, fuzzy
+msgid "Projection"
 msgstr "Проекција :"
 
-#: src/translations.h:183
-msgid "Prow"
-msgstr "Прамец"
+#: src/ui_viewDialog.h:963
+msgid ""
+"QFrame {\n"
+"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
+"stop: 1 #19233c);\n"
+"\tborder: 0px;\n"
+"\tcolor : #babdc4;\n"
+"    font-family: \"DejaVu\";\n"
+"}\n"
+"\n"
+"DialogFrame {\n"
+"  border-width: 1px;\n"
+"  border-style: solid;\n"
+"  border-color: #081f25;\n"
+"}\n"
+"\n"
+"ResizeFrame {\n"
+" background-image: url(data/gui/resize.png);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"\tbackground: None;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"     border: 1.5px solid #2e2e36;\n"
+"     border-radius: 10px;\n"
+"     padding: 0 8px;\n"
+"     background: white;\n"
+"     selection-background-color: darkgray;\n"
+" }\n"
+"\n"
+"QPushButton {\n"
+"  border: 1.5px solid #2e2e36;\n"
+"  border-radius: 10px;\n"
+"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+" border: 1px solid #2e2e36;\n"
+" background: #4a4b50;\n"
+" width: 15px;\n"
+"         margin: 22px 0px 22px 0px;\n"
+"     }\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    border: 2px solid #4a4b50;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
+"\tborder-radius: 4px;\n"
+"\tmin-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: bottom;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: top;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
+"         border: 2px solid grey;\n"
+"         width: 3px;\n"
+"         height: 3px;\n"
+"         background: white;\n"
+" }\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"         background: none;\n"
+" }\n"
+"\n"
+"QGroupBox {\n"
+"     border: 1px solid #1f2f25;\n"
+"     border-radius: 4px;\n"
+"     margin-top: 1ex;\n"
+"     font-weight: bold;\n"
+"     background: solid #223B34;\n"
+" }\n"
+"\n"
+"QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     padding: 0px 3px;\n"
+"     color : #babdc4;\n"
+"\t left: 15px\n"
+" }\n"
+"\n"
+"\n"
+"QTabWidget::pane {\n"
+"   border-top: 2px solid #348483;\n"
+"}\n"
+"\n"
+"     /* Style the tab using the tab sub-control. Note that\n"
+"         it reads QTabBar _not_ QTabWidget */\n"
+"     QTabBar::tab {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#2a3b50, stop: 1 #19233c);\n"
+"         border: 2px solid #348483;\n"
+"         border-bottom-color: #348483; /* same as the pane color */\n"
+"         border-top-left-radius: 4px;\n"
+"         border-top-right-radius: 4px;\n"
+"         min-width: 10ex;\n"
+"         padding: 2px;\n"
+"         color: #babdc4;\n"
+"         font-weight : bold;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#19233c, stop: 1 #2a3b50);\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected {\n"
+"         border-color: #A2A78B;\n"
+"         border-bottom-color: #2a3b50; /* same as pane color */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:!selected {\n"
+"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
+"     }\n"
+"\n"
+"     /* make use of negative margins for overlapping tabs */\n"
+"     QTabBar::tab:selected {\n"
+"         /* expand/overlap to the left and right by 4px */\n"
+"         margin-left: -4px;\n"
+"         margin-right: -4px;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:first:selected {\n"
+"         margin-left: 0; /* the first selected tab has nothing to overlap "
+"with on the left */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:last:selected {\n"
+"         margin-right: 0; /* the last selected tab has nothing to overlap "
+"with on the right */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:only-one {\n"
+"         margin: 0; /* if there is only one tab, we don't want overlapping "
+"margins */\n"
+"     }\n"
+"\n"
+"QListWidget {\n"
+" \tbackground: solid #121324;\n"
+"\tborder: 1px;\n"
+"    border-radius: 4px;\n"
+"    border-color: #081f25;\n"
+"    border-style: solid;\n"
+"  selection-background-color: #2a3b50;\n"
+"}\n"
+"\n"
+"QCheckBox\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QCheckBox::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  background-color: #225555;\n"
+"}\n"
+"QCheckBox::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
+"}\n"
+"\n"
+"QRadioButton\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QRadioButton::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  margin-left: 4px;\n"
+"}\n"
+"QRadioButton::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-checked.png);\n"
+"}\n"
+"QRadioButton::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
+"border */\n"
+"     border-image: url(:/images/spinup.png) 1;\n"
+"     border-width: 1px;\n"
+"\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:hover {\n"
+"     border-image: url(:/images/spinup_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:pressed {\n"
+"     border-image: url(:/images/spinup_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/images/up_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
+"value is max */\n"
+"    image: url(:/images/up_arrow_disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: bottom right; /* position at bottom right corner "
+"*/\n"
+"\n"
+"     width: 16px;\n"
+"     border-image: url(:/images/spindown.png) 1;\n"
+"     border-width: 1px;\n"
+"     border-top-width: 0;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:hover {\n"
+"     border-image: url(:/images/spindown_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:pressed {\n"
+"     border-image: url(:/images/spindown_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/images/down_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow:disabled,\n"
+" QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"    image: url(:/images/down_arrow_disabled.png);\n"
+" }\n"
+"\n"
+"QDoubleSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+msgstr ""
 
-#: src/translations.h:153
-msgid "Puppis"
-msgstr "Крма"
+#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
+#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
+msgid ""
+"QToolButton {\n"
+"color: white;\n"
+"font-weight: bold;\n"
+"background: None;\n"
+"border: 1px solid #2e2e36;\n"
+"  border-radius: 2px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"color: darkgray;\n"
+"}"
+msgstr ""
 
-#: src/translations.h:244
-msgid "Purple Palace"
-msgstr "Розова палата"
+#: src/ui_dateTimeDialogGui.h:125
+msgid ""
+"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
+"solid\n"
+"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
+"darkgray; }"
+msgstr ""
 
-#: src/translations.h:88
-msgid "Pyxis"
-msgstr "Пиксис"
-
-#: src/deprecated/stel_ui.cpp:702
-msgid "Quit [CMD + Q]"
-msgstr "Излез [CMD + Q]"
-
-#: src/deprecated/stel_ui.cpp:700
-msgid "Quit [CTRL + Q]"
-msgstr "Излез [CTRL + Q]"
-
-#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "RA/DE: "
-
-#: src/translations.h:312
-msgid "Rabbit Tracks"
-msgstr "Траги од зајак"
-
-#: src/translations.h:340
-msgid "Race Track"
-msgstr "Тркачка патека"
-
-#: src/translations.h:222
-msgid "Ramparts"
-msgstr "Тврдина"
-
-#: src/deprecated/stel_ui.cpp:721
-msgid "Real Time Speed [K]"
-msgstr "Реален тек на времето [K]"
-
-#: src/deprecated/stel_ui.cpp:1045
-msgid "Recording commands to script file:\n"
-msgstr "Снимање на команди во скрипт датотека:\n"
-
-#: src/deprecated/stel_ui_conf.cpp:539
-msgid "Rendering"
-msgstr "Рендирам"
-
-#: src/translations.h:154
-msgid "Reticulum"
-msgstr "Мрежичка"
-
-#: src/deprecated/stel_ui.cpp:725
-msgid "Return to Current Time [8]"
-msgstr "Врати се на сегашно време [8]"
-
-#: src/translations.h:307
-msgid "Revolving Female"
-msgstr "Ротирачка жена"
-
-#: src/translations.h:306
-msgid "Revolving Male"
-msgstr "Ротирачки маж"
 
 #: src/translations.h:51
 msgid "Rhea"
 msgstr "Реа"
 
-#: src/translations.h:276
-msgid "Right Flag"
-msgstr "Десно знаме"
-
-#: src/translations.h:216
-msgid "River Turtle"
-msgstr "Речна желка"
-
-#: src/translations.h:229
-msgid "Rolled Tongue"
-msgstr "Превртен јазик"
-
-#: src/translations.h:258
-msgid "Rooftop"
-msgstr "Кров"
-
-#: src/translations.h:271
-msgid "Room"
-msgstr "Соба"
-
-#: src/translations.h:221
-msgid "Root"
-msgstr "Корен"
-
-#: src/translations.h:262
-msgid "Rotten Gourd"
-msgstr "Расипана лушпа"
-
-#: src/translations.h:332
-msgid "Runners"
-msgstr "Тркачи"
-
-#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
+#: src/translations.h:64
 msgid "S"
 msgstr "С"
-
-#: src/translations.h:114
-msgid "Sagitta"
-msgstr "Стрела"
-
-#: src/translations.h:155
-msgid "Sagittarius"
-msgstr "Стрелец"
-
-#: src/translations.h:175
-msgid "Sah"
-msgstr "Сах"
-
-#: src/translations.h:345
-msgid "Salamander"
-msgstr "Саламандер"
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:463
-msgid "Save Current Configuration as Default: "
-msgstr "Сними ја сегашната конфигурација како основна: "
-
-#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
-#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
-msgid "Save as default"
-msgstr "Зачувај како стандардно"
-
-#: src/deprecated/stel_ui_conf.cpp:356
-msgid "Save location"
+#: src/ui_viewDialog.h:1265
+#, fuzzy
+msgid "Scale Moon"
 msgstr "Зачувај ја локацијата"
 
-#: src/deprecated/stel_ui_conf.cpp:408
-msgid "Saving settings will save current full screen status"
-msgstr "Зачувување на измените ќе го зачува сегашниот статус на цел екран"
+#: src/ui_viewDialog.h:1257
+#, fuzzy
+msgid "Scale:"
+msgstr "Размер на месечината"
 
-#: src/translations.h:156
-msgid "Scorpius"
-msgstr "Скорпија"
-
-#: src/translations.h:232
-msgid "Screen"
-msgstr "Слика"
-
-#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
-msgid "Script commander"
-msgstr "Скрипт командер"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:384
-msgid "Scripts "
-msgstr "Скрипти "
-
-#: src/translations.h:82
-msgid "Sculptor"
-msgstr "Скулптор"
-
-#: src/translations.h:87 src/translations.h:157
-msgid "Scutum"
-msgstr "Штит"
-
-#: src/deprecated/stel_ui_conf.cpp:677
-msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Барај (пр. Saturn, Polaris, HP6218, Orion, M31):"
-
-#: src/deprecated/stel_ui.cpp:705
-msgid "Search for object [CTRL + F]"
-msgstr "Барај објекти [CTRL + F]"
-
-#: src/deprecated/s_gui.cpp:2756
-msgid "Seconds"
-msgstr "Секунди"
-
-#: src/translations.h:177
-msgid "Sek"
-msgstr "Сек"
-
-#: src/translations.h:354
+#: src/translations.h:81
 msgid "Select and exit to run."
 msgstr "Избери и излези за да се изврши."
 
-#: src/deprecated/stel_ui_conf.cpp:326
-msgid "Selected : "
+#: src/ui_locationDialogGui.h:273
+#, fuzzy
+msgid "Selected :"
 msgstr "Избран : "
 
-#: src/deprecated/stel_ui_conf.cpp:128
-msgid "Selected Constellation Only"
-msgstr "Само избраното соѕвездие"
+#: src/ui_viewDialog.h:1270
+msgid "Short labels"
+msgstr ""
 
-#: src/translations.h:182
-msgid "Selkis"
-msgstr "Селкис"
+#: src/ui_viewDialog.h:1274
+msgid "Shouting Stars"
+msgstr ""
 
-#: src/translations.h:158
-msgid "Serpens"
-msgstr "Змија"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:378
-msgid "Set Location "
-msgstr "Подеси локација "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:379
-msgid "Set Time "
-msgstr "Подеси време "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:397
-msgid "Set Time Zone: "
-msgstr "Подеси временска зона: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:466
-msgid "Set UI Locale: "
-msgstr "Подеси локален кориснички интерфејс: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:452
-msgid "Setting Landscape Sets Location: "
-msgstr "Подесување на пејзажот ја менува локацијата: "
-
-#: src/deprecated/stel_ui_conf.cpp:458
-msgid "Setting landscape updates the location"
-msgstr "Подесување на пејзажот ја менува локацијата"
-
-#: src/translations.h:226
-msgid "Seven Excellencies"
-msgstr "Седум екселенции"
-
-#: src/translations.h:343
-msgid "Seven Little Girls"
-msgstr "Седум мали девојчиња"
-
-#: src/translations.h:159
-msgid "Sextans"
-msgstr "Секстант"
-
-#: src/translations.h:197
-msgid "Sheep"
-msgstr "Овца"
-
-#: src/translations.h:185
-msgid "Sheepfold"
-msgstr "Трло"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-msgid "Show: "
+#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1273
+#, fuzzy
+msgid "Show"
 msgstr "Прикажи: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:464
-msgid "Shut Down: "
-msgstr "Изгаси: "
+#: src/ui_viewDialog.h:1321
+#, fuzzy
+msgid "Show art"
+msgstr "Прикажи: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:400
-msgid "Sidereal"
-msgstr "Ѕвезден"
+#: src/ui_viewDialog.h:1296
+#, fuzzy
+msgid "Show atmosphere"
+msgstr "Атмосфера"
 
-#: src/modules/Nebula.cpp:110
+#: src/ui_viewDialog.h:1318
+msgid "Show boundaries"
+msgstr ""
+
+#: src/ui_viewDialog.h:1295
+#, fuzzy
+msgid "Show fog"
+msgstr "Прикажи: "
+
+#: src/ui_viewDialog.h:1294
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1320
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1319
+#, fuzzy
+msgid "Show lines"
+msgstr "Прикажи: "
+
+#: src/ui_viewDialog.h:1263
+msgid "Show marker"
+msgstr ""
+
+#: src/ui_viewDialog.h:1264
+msgid "Show orbits"
+msgstr ""
+
+#: src/ui_viewDialog.h:1266
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/modules/Nebula.cpp:101
 msgid "Size: "
 msgstr "Големина: "
 
-#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
-msgid "Sky Culture: "
-msgstr "Култура на небото: "
+#: src/ui_viewDialog.h:1291
+#, fuzzy
+msgid "Sky"
+msgstr "Сек"
 
-#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
-msgid "Sky Language: "
-msgstr "Јазик на небото: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:402
-msgid "Sky Time At Start-up: "
-msgstr "Време на небото на стартување: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:396
-msgid "Sky Time: "
-msgstr "Небесно време: "
-
-#: src/translations.h:337
-msgid "Snake"
-msgstr "Змија"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:391
-msgid "Solar System Body: "
-msgstr "Сончев систем: "
+#: src/ui_viewDialog.h:1308
+msgid "Sky Marking"
+msgstr ""
 
 #: src/translations.h:60
 msgid "Solar System Observer"
 msgstr "Solar System Observer"
 
-#: src/translations.h:233
-msgid "Soldiers Market"
-msgstr "Војнички пазар"
-
-#: src/translations.h:238
-msgid "South River"
-msgstr "Јужна река"
-
-#: src/translations.h:275
-msgid "Spear"
-msgstr "Копје"
-
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:131 src/modules/StarWrapper.cpp:173
 msgid "Spectral Type: "
 msgstr "Спектрален тип: "
 
-#: src/translations.h:272
-msgid "Spring"
-msgstr "Пружина"
-
-#: src/translations.h:234
-msgid "Square Granary"
-msgstr "Квадратен амбар"
-
-#: src/translations.h:284
-msgid "Star"
+#: src/ui_viewDialog.h:1340
+#, fuzzy
+msgid "Starlore"
 msgstr "Ѕвезда"
 
-#: src/deprecated/stel_ui_conf.cpp:85
-msgid "Star Names. Up to mag :"
-msgstr "До магнитуда :"
-
-#: src/deprecated/stel_ui_conf.cpp:97
-msgid "Star Twinkle. Amount :"
-msgstr "Трепкање на ѕведи. Количина :"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:419
-msgid "Star Value Multiplier: "
-msgstr "Множител на вредноста на ѕвездите: "
-
-#: src/deprecated/stel_ui_conf.cpp:80
+#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
 msgid "Stars"
 msgstr "Ѕвезди"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:381
-msgid "Stars "
-msgstr "Ѕвезди "
-
-#: src/translations.h:198
-msgid "Stars of Water"
-msgstr "Водени ѕвезди"
-
-#: src/translations.h:217
-msgid "Stomach"
-msgstr "Стомак"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Сонце"
 
-#: src/translations.h:248
-msgid "Supreme Palace"
-msgstr "Врховна палата"
-
-#: src/translations.h:206
-msgid "Tail"
-msgstr "Опашка"
-
-#: src/translations.h:161
-msgid "Taurus"
-msgstr "Бик"
-
-#: src/translations.h:162
-msgid "Telescopium"
-msgstr "Телескоп"
-
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "Тетида"
-
-#: src/translations.h:321
-msgid "The Asar Battlefield"
-msgstr "Боиштето на Асар"
-
-#: src/translations.h:318
-msgid "The Fishermen"
-msgstr "Рибар"
-
-#: src/translations.h:297
-msgid "The Seven"
-msgstr "Седумте"
-
-#: src/translations.h:235
-msgid "Three Stars"
-msgstr "Три ѕвезди"
-
-#: src/translations.h:210
-msgid "Three Steps"
-msgstr "Три скали"
-
-#: src/translations.h:264
-msgid "Thunder and Lightning"
-msgstr "Молња и гром"
-
-#: src/translations.h:347
-msgid "Thunderbird"
-msgstr "Огнена птица"
-
-#: src/translations.h:259
-msgid "Thunderbolt"
-msgstr "Молња"
-
-#: src/deprecated/stel_ui.cpp:796
-msgid ""
-"Time & Date:\n"
-"6   : Time rate pause           7   : Time rate 0\n"
-"8   : Set current time          J   : Decrease time rate\n"
-"K   : Normal time rate          L   : Increase time rate\n"
-"- and = :  Back and forward one day (press ALT for sidereal day)\n"
-"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-"CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-"\n"
-msgstr ""
-"Време и датум:\n"
-"6 : Пауза 7 : Временска брзина 0\n"
-"8 : Подеси сегашно време J : Намали брзина\n"
-"K : Нормална брзина L : Зголеми брзина\n"
-"- и = : Назад и напред еден ден (притиснете ALT за ѕвезден ден)\n"
-"[ и ] : Назад и напред 7 дена (притиснете ALT за ѕвезден ден)\n"
-"CTRL + - : Назад 1 час CTRL + = : напред 1 час\n"
-"\n"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:405
-msgid "Time Display Format: "
-msgstr "Формат на прикажување на времето: "
-
-#: src/deprecated/stel_ui_conf.cpp:279
-msgid "Time Zone :"
-msgstr "Временска зона:"
-
-#: src/deprecated/stel_ui_conf.cpp:292
-msgid "Time speed : "
-msgstr "Брзина на времето : "
 
 #: src/translations.h:52
 msgid "Titan"
 msgstr "Титан"
 
-#: src/translations.h:231
-msgid "Toilet"
-msgstr "Тоалет"
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
 
-#: src/translations.h:178
-msgid "Triangle"
+#: src/ui_viewDialog.h:1258
+#, fuzzy
+msgid "Twinkle"
 msgstr "Триаголник"
 
-#: src/translations.h:164
-msgid "Triangulum"
-msgstr "Триаголник"
-
-#: src/translations.h:165
-msgid "Triangulum Australe"
-msgstr "Јужен триаголник"
-
-#: src/translations.h:287
-msgid "Tripod"
-msgstr "Троножец"
-
-#: src/translations.h:163
-msgid "Tucana"
-msgstr "Тукан"
-
-#: src/translations.h:346
-msgid "Turtle"
-msgstr "Желка"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:421
-msgid "Twinkling: "
-msgstr "Трепкање: "
-
-#: src/translations.h:174
-msgid "Two Jaws"
-msgstr "Две вилици"
-
-#: src/translations.h:325
-msgid "Two Placed Far Apart"
-msgstr "Двајца разделени"
-
-#: src/translations.h:172
-msgid "Two Poles"
-msgstr "Два стапа"
-
-#: src/translations.h:324
-msgid "Two Sunbeams"
-msgstr "Два сончеви зрака"
-
-#: src/translations.h:330
-msgid "Two in Front"
-msgstr "Двајца од напред"
-
-#: src/modules/Nebula.cpp:108
+#: src/modules/Nebula.cpp:99
 msgid "Type: "
 msgstr "Тип: "
 
-#: src/translations.h:355
+#: src/translations.h:82
 msgid "USB Script: "
 msgstr "USB Скрипта: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:465
-msgid "Update me via Internet: "
-msgstr "Ажурирај преку интернет: "
 
 #: src/translations.h:57
 msgid "Uranus"
 msgstr "Уран"
 
-#: src/translations.h:119
-msgid "Ursa Major"
-msgstr "Голема мечка"
-
-#: src/translations.h:148
-msgid "Ursa Minor"
-msgstr "Мала мечка"
-
-#: src/deprecated/stel_ui_conf.cpp:300
-msgid ""
-"Use key J and L to decrease and increase\n"
-"   time speed.\n"
-"Use key K to return to real time speed."
+#: src/ui_viewDialog.h:1339
+msgid "Use associated language for sky labeling"
 msgstr ""
-"Користете ги тастерите J и L за успорување и забрзување\n"
-"на времето.\n"
-"Користете го тастерот K за да се вретите во реална брзина на времето."
 
-#: src/deprecated/stel_ui_conf.cpp:283
-msgid "Using System Default Time Zone"
-msgstr "Користи системска временска зона"
+#: src/ui_viewDialog.h:1305
+msgid "Use associated planet and position"
+msgstr ""
 
-#: src/translations.h:168
-msgid "Vela"
-msgstr "Едра"
+#: src/ui_locationDialogGui.h:267
+msgid ""
+"Use the mouse wheel to zoom on the map.\n"
+"Click and drag the mouse to move the screen"
+msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "Венера"
 
-#: src/deprecated/stel_ui_conf.cpp:538
-msgid "Video"
+#: src/ui_viewDialog.h:1241
+#, fuzzy
+msgid "View"
 msgstr "Видео"
 
-#: src/deprecated/stel_ui_conf.cpp:403
-msgid "Viewport Distorter"
-msgstr "Дисторзија на погледот"
-
-#: src/translations.h:167
-msgid "Virgo"
-msgstr "Девица"
-
-#: src/translations.h:296
-msgid "Voice of Joy"
-msgstr "Гласот на радоста"
-
-#: src/translations.h:152
-msgid "Volans"
-msgstr "Летечка риба"
-
-#: src/translations.h:147
-msgid "Vulpecula"
-msgstr "Лисица"
-
-#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
+#: src/translations.h:66
 msgid "W"
 msgstr "З"
 
-#: src/translations.h:219
-msgid "Wall"
-msgstr "Ѕид"
-
-#: src/translations.h:196
-msgid "Waty Bekety"
-msgstr "Waty Bekety"
-
-#: src/translations.h:267
-msgid "Weaving Girl"
-msgstr "Девојка што мавта"
-
-#: src/translations.h:237
-msgid "Well"
-msgstr "Бунар"
-
-#: src/translations.h:77
+#: src/translations.h:77 src/ui_viewDialog.h:1335
 msgid "Western"
 msgstr "Западни"
 
-#: src/translations.h:281
-msgid "Western Door"
-msgstr "Западна порта"
-
-#: src/translations.h:213
-msgid "Willow"
-msgstr "Врба"
-
-#: src/translations.h:204
-msgid "Wings"
-msgstr "Крилја"
-
-#: src/translations.h:207
-msgid "Winnowing Basket"
-msgstr "Корба за одвејување"
-
-#: src/translations.h:317
-msgid "Wolf's Mouth"
-msgstr "Волчја уста"
-
-#: src/translations.h:280
-msgid "Woman's Bed"
-msgstr "Женски кревет"
-
-#: src/translations.h:319
-msgid "Woman's Cart"
-msgstr "Женска количка"
-
-#: src/translations.h:286
-msgid "Xuanyuan"
-msgstr "Xuanyuan"
-
-#: src/deprecated/s_gui.cpp:2741
-msgid "Year"
-msgstr "Година"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
-msgid "Yes"
-msgstr "Да"
-
-#: src/translations.h:289
-msgid "Zaofu"
-msgstr "Заофу"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:450
-msgid "Zoom Duration: "
-msgstr "Траење на зумирањето "
-
-#: src/deprecated/stel_ui_conf.cpp:353
-msgid "m"
+#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
+#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
+#: src/ui_viewDialog.h:1253
+msgid "X"
 msgstr ""
+
+#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+
+#: src/ui_viewDialog.h:1259
+msgid "amount:"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:128
+msgid "explain"
+msgstr ""
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "    and comments to us at: http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Ве молам проверете за понови верзии и испратете извештај за грешка\n"
+#~ "    и коментари на http://www.stellarium.org\n"
+#~ "\n"
+
+#~ msgid ": Exceptional Leonid rate"
+#~ msgstr ": Вонредна активност на Персеидите"
+
+#~ msgid ": Highest rate ever (1966 Leonids)"
+#~ msgstr ": Највисока активност до сега (1966 Леониди)"
+
+#~ msgid ": Standard Perseids rate"
+#~ msgstr ": Стандарна активност на Персеидите"
+
+#~ msgid "Actual Time"
+#~ msgstr "Сегашно време"
+
+#~ msgid "Administration "
+#~ msgstr "Администрација "
+
+#~ msgid "Also display Nebulas without textures"
+#~ msgstr "Прикажи и маглини без текстури"
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Висина (м): "
+
+#~ msgid "Altitude : "
+#~ msgstr "Висина : "
+
+#~ msgid "Andromeda"
+#~ msgstr "Андромеда"
+
+#~ msgid "Animal"
+#~ msgstr "Животно"
+
+#~ msgid "Antlia"
+#~ msgstr "Шмрк"
+
+#~ msgid "Apus"
+#~ msgstr "Рајска птица"
+
+#~ msgid "Aquarius"
+#~ msgstr "Водолија"
+
+#~ msgid "Aquila"
+#~ msgstr "Акила"
+
+#~ msgid "Ara"
+#~ msgstr "Олтар"
+
+#~ msgid "Aries"
+#~ msgstr "Овен"
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Стрелка надолу за вчитување на листата."
+
+#~ msgid "Arsenal"
+#~ msgstr "Арсенал"
+
+#~ msgid "Atmosphere [A]"
+#~ msgstr "Атмосфера [A]"
+
+#~ msgid "Auriga"
+#~ msgstr "Кочијаш"
+
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Палецот на Аурвандил"
+
+#~ msgid "Author: "
+#~ msgstr "Автор: "
+
+#~ msgid "Azimuthal Grid [Z]"
+#~ msgstr "Азимутална мрежа [Z]"
+
+#~ msgid "Bailer"
+#~ msgstr "Кофа"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Знамето на трите ѕвезди"
+
+#~ msgid "Bear's Lodge"
+#~ msgstr "Мечкина јазбина"
+
+#~ msgid "Bird"
+#~ msgstr "Птица"
+
+#~ msgid "Blubber Container"
+#~ msgstr "Сад за сало"
+
+#~ msgid "Boat"
+#~ msgstr "Брод"
+
+#~ msgid "Bond"
+#~ msgstr "Окови"
+
+#~ msgid "Bootes"
+#~ msgstr "Кравар"
+
+#~ msgid "Bow and Arrow"
+#~ msgstr "Лак и стрела"
+
+#~ msgid "Breastbone"
+#~ msgstr "Градна коска"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Бикова нога"
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD Скрипта: "
+
+#~ msgid "CMD + Q : Quit\n"
+#~ msgstr "CMD + Q : Излез\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL + Q : Излез\n"
+
+#~ msgid "Caelum"
+#~ msgstr "Длето"
+
+#~ msgid "Calendar"
+#~ msgstr "Календар"
+
+#~ msgid "Camelopardalis"
+#~ msgstr "Жирафа"
+
+#~ msgid "Cancel"
+#~ msgstr "Откажи"
+
+#~ msgid "Cancer"
+#~ msgstr "Рак"
+
+#~ msgid "Canes Venatici"
+#~ msgstr "Ловачки пес"
+
+#~ msgid "Canis Major"
+#~ msgstr "Големо куче"
+
+#~ msgid "Canis Minor"
+#~ msgstr "Мало куче"
+
+#~ msgid "Capricornus"
+#~ msgstr "Јарец"
+
+#~ msgid "Cardinal Points [Q]"
+#~ msgstr "Клучни точки [Q]"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Cared for by Moon"
+
+#~ msgid "Caribou"
+#~ msgstr "Карибу елен"
+
+#~ msgid "Cassiopeia"
+#~ msgstr "Касиопеја"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Мачкина лулка"
+
+#~ msgid "Centaurus"
+#~ msgstr "Бик"
+
+#~ msgid "Cepheus"
+#~ msgstr "Цефеј"
+
+#~ msgid "Cetus"
+#~ msgstr "Кит"
+
+#~ msgid "Chamaeleon"
+#~ msgstr "Камелеон"
+
+#~ msgid "Chariot"
+#~ msgstr "Кочија"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Двор на кочиите"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Choose landscapes:"
+#~ msgstr "Изберете пејзаж:"
+
+#~ msgid "Circinus"
+#~ msgstr "Шестар"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Кружен амбар"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Coiled Thong"
+
+#~ msgid "Collarbones"
+#~ msgstr "Клучна коска"
+
+#~ msgid "Colors "
+#~ msgstr "Бои "
+
+#~ msgid "Columba"
+#~ msgstr "Гулаб"
+
+#~ msgid "Coma Berenices"
+#~ msgstr "Береникина коса"
+
+#~ msgid "Command recording stopped."
+#~ msgstr "Снимање на командите е прекинато"
+
+#~ msgid "Configuration"
+#~ msgstr "Конфигурација"
+
+#~ msgid "Configuration window [1]"
+#~ msgstr "Конфигурациски прозорец [1]"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Интензитет на цртежите на соѕвездијата"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Граници на соѕвездијата"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Имиња на соѕвездијата"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Графици на соѕвездијата [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Граници на соѕвездијата"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Линии на соѕвездијата"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Имиња на соѕвездијата"
+
+#~ msgid "Corona Australis"
+#~ msgstr "Јужна круна"
+
+#~ msgid "Corona Borealis"
+#~ msgstr "Северна круна"
+
+#~ msgid "Corvus"
+#~ msgstr "Гавран"
+
+#~ msgid "Crater"
+#~ msgstr "Пехар"
+
+#~ msgid "Crocodile"
+#~ msgstr "Крокодил"
+
+#~ msgid "Crux"
+#~ msgstr "Јужен крст"
+
+#~ msgid "Current Time :"
+#~ msgstr "Моментално време :"
+
+#~ msgid "Current Time Speed is x"
+#~ msgstr "Моментална брзина на времето е x"
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Време на истекување на курсорот "
+
+#~ msgid "Curved Array"
+#~ msgstr "Искривена низа"
+
+#~ msgid "Cygnus"
+#~ msgstr "Лебед"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Формат на прикажување на датите: "
+
+#~ msgid "Day"
+#~ msgstr "Ден"
+
+#~ msgid "Day keys: "
+#~ msgstr "Копчиња за денови: "
+
+#~ msgid "Decrease Time Speed [J]"
+#~ msgstr "Успори проток на времето [J]"
+
+#~ msgid "Delphinus"
+#~ msgstr "Делфин"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Дијалози и останати контроли:\n"
+#~ "H : Помош I : За Stellarium\n"
+#~ "M : Текстуално мени 1 (еден) : Конфигурација\n"
+#~ "CTRL + S : Зачувај screenshot\n"
+#~ "CTRL + R : Снимање на скрипта\n"
+#~ "CTRL + F : Пребарувач на објекти\n"
+#~ "CTRL + G : Иди на избраниот објект\n"
+#~ "\n"
+
+#~ msgid "Dilyehe"
+#~ msgstr "Dilyehe"
+
+#~ msgid "Dipper"
+#~ msgstr "Црпалка"
+
+#~ msgid "Disk Viewport"
+#~ msgstr "Поглед како диск"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Опции за приказ:\n"
+#~ "ENTER: Екваторијално/Азимутално монтирање\n"
+#~ "F1 : Префрли цел екран/прозорец.\n"
+#~ "C : Линии на констелации V : Имиња на констелации\n"
+#~ "R : Цртежи на констелациите E: Екваторијална мрежа\n"
+#~ "Z : Азимутална мрежа N : Имиња на маглини\n"
+#~ "P : Имиња на планети G: Земја\n"
+#~ "А : Атмосфера F : Магла\n"
+#~ "Q : Клучни точки O: Промена на размер на месечината\n"
+#~ "T : Следење на објекти S: Ѕвезди\n"
+#~ "4 , : Линија на еклиптиката 5 . : Линија на екваторот\n"
+#~ "\n"
+
+#~ msgid "Dog"
+#~ msgstr "Куче"
+
+#~ msgid "Dogs"
+#~ msgstr "Кучиња"
+
+#~ msgid "Dolphin"
+#~ msgstr "Делфин"
+
+#~ msgid "Dorado"
+#~ msgstr "Златна риба"
+
+#~ msgid "Draco"
+#~ msgstr "Змеј"
+
+#~ msgid "Drawing of the Constellations [C]"
+#~ msgstr "Цртање на соѕвездијата [C]"
+
+#~ msgid "Dried Willow"
+#~ msgstr "Сува врба"
+
+#~ msgid "Drum"
+#~ msgstr "Тапан"
+
+#~ msgid "Drumstick"
+#~ msgstr "Рачка за тапан"
+
+#~ msgid ""
+#~ "During Script Playback:\n"
+#~ "CTRL + C : End Script\n"
+#~ "6   : pause script              K   : resume script\n"
+#~ "\n"
+#~ msgstr ""
+#~ "За време на извршување на скриптата:\n"
+#~ "CTRL + C : Крај на скриптата\n"
+#~ "6 : Пауза К : продолжи со скриптата\n"
+#~ "\n"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Храм на богот на земјата"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Источна порта"
+
+#~ msgid "Effects "
+#~ msgstr "Ефекти "
+
+#~ msgid "Elk"
+#~ msgstr "Елк"
+
+#~ msgid "Encampment"
+#~ msgstr "Утврдување"
+
+#~ msgid "Enter observatory name"
+#~ msgstr "Внеси име на опсерваторијата"
+
+#~ msgid "Equatorial Grid [E]"
+#~ msgstr "Екваторијална мрежа [E]"
+
+#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
+#~ msgstr "Екваторијалнa/Азимутска Монтажа [ENTER]"
+
+#~ msgid "Equuleus"
+#~ msgstr "Ждребе"
+
+#~ msgid "Eridanus"
+#~ msgstr "Еридан (Река)"
+
+#~ msgid "Error: Unable to open script file to record commands."
+#~ msgstr "Грешка: не е можно да се одвори датотеката за запис на команди."
+
+#~ msgid "Establishment"
+#~ msgstr "Утврдување"
+
+#~ msgid "Extended Net"
+#~ msgstr "Раширена мрежа"
+
+#~ msgid "Farmland"
+#~ msgstr "Фарма"
+
+#~ msgid "Ferry Boat"
+#~ msgstr "Траект"
+
+#~ msgid "Fireplace"
+#~ msgstr "Огниште"
+
+#~ msgid "First Big One"
+#~ msgstr "Прв Голем"
+
+#~ msgid "First Slim One"
+#~ msgstr "Прв тенок"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Пет кочии"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Пет феудални кралеви"
+
+#~ msgid "Flail"
+#~ msgstr "Буздоган"
+
+#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
+#~ msgstr "Преврти по хоризонтала [CTRL + SHIFT + H]"
+
+#~ msgid "Flip vertically [CTRL + SHIFT + V]"
+#~ msgstr "Преврти по вертикала [CTRL + SHIFT + V]"
+
+#~ msgid "Flock"
+#~ msgstr "Стадо"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Летечка патека"
+
+#~ msgid "Fog"
+#~ msgstr "Магла"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "За резолуција која не е во листата, едитирај ја датотеката :"
 
+#~ msgid "Fornax"
+#~ msgstr "Печка"
+
+#~ msgid "Four Channels"
+#~ msgstr "Четири канали"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Frigate Bird"
+
+#~ msgid "GO"
+#~ msgstr "Тргни"
+
+#~ msgid "Gemini"
+#~ msgstr "Близнаци"
+
+#~ msgid "General "
+#~ msgstr "Општо "
+
+#~ msgid "Ghosts"
+#~ msgstr "Духови"
+
+#~ msgid "Giant"
+#~ msgstr "Џин"
+
+#~ msgid "Girl"
+#~ msgstr "Девојка"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Добра лушпа"
+
+#~ msgid "Goto selected object [SPACE]"
+#~ msgstr "Иди на избраниот објект [SPACE]"
+
+#~ msgid "Great General"
+#~ msgstr "Голем генерал"
+
+#~ msgid "Ground"
+#~ msgstr "Земја"
+
+#~ msgid "Ground [G]"
+#~ msgstr "Земја [G]"
+
+#~ msgid "Grus"
+#~ msgstr "Штрк"
+
+#~ msgid "Hand"
+#~ msgstr "Рака"
+
+#~ msgid "Heart"
+#~ msgstr "Срце"
+
+#~ msgid "Help [H]"
+#~ msgstr "Помош [H]"
+
+#~ msgid "Hercules"
+#~ msgstr "Херкулес"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Нилски коњ"
+
+#~ msgid "Hit CTRL-R again to stop.\n"
+#~ msgstr "Притиснете CTRL-R повторно за стопирање.\n"
+
+#~ msgid "Hook"
+#~ msgstr "Јадица"
+
+#~ msgid "Horn"
+#~ msgstr "Хорна"
+
+#~ msgid "Horologium"
+#~ msgstr "Часовник"
+
+#~ msgid "Horus"
+#~ msgstr "Хорус"
+
+#~ msgid "Hour"
+#~ msgstr "Час"
+
+#~ msgid "Hydra"
+#~ msgstr "Хидра"
+
+#~ msgid "Hydrus"
+#~ msgstr "Хидрус"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Кралски чувари"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Царски премин"
+
+#~ msgid "Increase Time Speed [L]"
+#~ msgstr "Забрзај проток на времето [L]"
+
+#~ msgid "Indus"
+#~ msgstr "Индус"
+
+#~ msgid "Info: "
+#~ msgstr "Информација: "
+
+#~ msgid "Information"
+#~ msgstr "Информација"
+
+#~ msgid "Invalid Script command"
+#~ msgstr "Некоректна скрипт команда"
+
+#~ msgid "Jade Well"
+#~ msgstr "Ѕид од жад"
+
+#~ msgid "Jaw"
+#~ msgstr "Вилица"
+
+#~ msgid "Kenemet"
+#~ msgstr "Кенемет"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Khanuwy риба"
+
+#~ msgid "Kitchen"
+#~ msgstr "Кујна"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Змејот на Кавело"
+
+#~ msgid "Lacerta"
+#~ msgstr "Гуштер"
+
+#~ msgid "Lamp Stand"
+#~ msgstr "Свеќник"
+
+#~ msgid "Lance"
+#~ msgstr "Lance"
+
+#~ msgid "Landscape: "
+#~ msgstr "Пејзаж: "
+
+#~ msgid "Language"
+#~ msgstr "Јазици"
+
+#~ msgid "Latitude: "
+#~ msgstr "Ширина: "
+
+#~ msgid "Left Flag"
+#~ msgstr "Лево знаме"
+
+#~ msgid "Legs"
+#~ msgstr "Нозе"
+
+#~ msgid "Leo"
+#~ msgstr "Лав"
+
+#~ msgid "Leo Minor"
+#~ msgstr "Мал лав"
+
+#~ msgid "Lepus"
+#~ msgstr "Зајак"
+
+#~ msgid "Libra"
+#~ msgstr "Терезија"
+
+#~ msgid "Lion"
+#~ msgstr "Лав"
+
+#~ msgid "Lizard"
+#~ msgstr "Гуштер"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Вчитај основна конфигурација: "
+
+#~ msgid "Loading Nebula Textures:"
+#~ msgstr "Вчитувам текстури на маглините:"
+
+#~ msgid "Local Script: "
+#~ msgstr "Локална скрипта: "
+
+#~ msgid "Location: "
+#~ msgstr "Локација: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Должина: "
+
+#~ msgid "Lupus"
+#~ msgstr "Волк"
+
+#~ msgid "Lynx"
+#~ msgstr "Рис"
+
+#~ msgid "Lyra"
+#~ msgstr "Лира"
+
+#~ msgid "Magnitude"
+#~ msgstr "Магнитуда"
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Множител за големина на магнитудата: "
+
+#~ msgid "Man with Feet Apart"
+#~ msgstr "Маж со разделени нозе"
+
+#~ msgid "Man's Cart"
+#~ msgstr "Машка количка"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Мануелен зум: "
+
+#~ msgid "Market"
+#~ msgstr "Пазар"
+
+#~ msgid "Market Officer"
+#~ msgstr "Market Officer"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Јадицата на Мауи"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Мавзолеј"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Максимална магнитуда за лабела: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Максимална магнитуда на маглините за лабела: "
+
+#~ msgid "Meadows"
+#~ msgstr "Ливади"
+
+#~ msgid "Mensa"
+#~ msgstr "Трпеза"
+
+#~ msgid "Meteor zenith hourly rate"
+#~ msgstr "Максимална активност на метеорите"
+
+#~ msgid "Microscopium"
+#~ msgstr "Микроскоп"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Нагласеност на Млечниот пат: "
+
+#~ msgid "Minutes"
+#~ msgstr "Минути"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+#~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+#~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
+#~ msgstr ""
+#~ "Разно:\n"
+#~ "9 : Подесувања на метеорските дождови\n"
+#~ "CTRL + 0,..,9 : Изврши ИДИ НА команда за телескопот 0,..,9\n"
+#~ "CTRL + SHIFT + H: Превртување на сликата по хоризонтала\n"
+#~ "CTRL + SHIFT + V: Превртување на сликата по вертикала\n"
+
+#~ msgid "Monoceros"
+#~ msgstr "Еднорог"
+
+#~ msgid "Month"
+#~ msgstr "Месец"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Сидриште"
+
+#~ msgid "Mortar"
+#~ msgstr "Mortar"
+
+#~ msgid ""
+#~ "Movement & selection:\n"
+#~ "Arrow Keys       : Change viewing RA/DE\n"
+#~ "Page Up/Down     : Zoom\n"
+#~ "CTRL+Up/Down     : Zoom\n"
+#~ "Left Click       : Select object\n"
+#~ "Right Click      : Unselect\n"
+#~ "CTRL+Left Click  : Unselect\n"
+#~ "\\                : Zoom out (planet + moons if applicable)\n"
+#~ "/                : Zoom to selected object\n"
+#~ "SPACE            : Center on selected object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Движене и обележување:\n"
+#~ "Стрелки: Промена на погледот RA/DE\n"
+#~ "Page Up/Down : Зумирање\n"
+#~ "CTRL+Горе/Доле : Зумирање\n"
+#~ "Лев клик : Избери објект\n"
+#~ "Десен клик : Деселектирај\n"
+#~ "CTRL+Лев клик : Деселектирај\n"
+#~ "\\ : Одзумирај (планета и месечини доколку е можно)\n"
+#~ "/ : Зумирај на избран објект\n"
+#~ "SPACE : Центрирај на избраниот објект\n"
+#~ "\n"
+
+#~ msgid "Musca"
+#~ msgstr "Мува"
+
+#~ msgid "Names of the Constellations [V]"
+#~ msgstr "Имиња на соѕвездијата [V]"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Триаголник на навигаторот"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Кругови околу маглините"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Имиња на маглини"
+
+#~ msgid "Nebulas Names. Up to mag :"
+#~ msgstr "Имиња на маглини. До магнитуда :"
+
+#~ msgid "Neck"
+#~ msgstr "Врат"
+
+#~ msgid "Net"
+#~ msgstr "Мрежа"
+
+#~ msgid "Night (red) mode"
+#~ msgstr "Ноќен [црвен] приказ"
+
+#~ msgid "No"
+#~ msgstr "Не"
+
+#~ msgid "Norma"
+#~ msgstr "Агломер"
+
+#~ msgid "North River"
+#~ msgstr "Северна река"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Северна црпалка"
+
+#~ msgid "OK"
+#~ msgstr "Во ред"
+
+#~ msgid "Object Search"
+#~ msgstr "Пребарување на објектите"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Правило за големина на објектите: "
+
+#~ msgid "Octans"
+#~ msgstr "Октант"
+
+#~ msgid "Ophiuchus"
+#~ msgstr "Змијоносец"
+
+#~ msgid "Orchard"
+#~ msgstr "Лозје"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Надворешна ограда"
+
+#~ msgid "Ox"
+#~ msgstr "Вол"
+
+#~ msgid "Pair of Stars"
+#~ msgstr "Две скали"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Врата на палатата"
+
+#~ msgid "Pavo"
+#~ msgstr "Паун"
+
+#~ msgid "Pegasus"
+#~ msgstr "Пегаз"
+
+#~ msgid "Perseus"
+#~ msgstr "Персеј"
+
+#~ msgid "Pestle"
+#~ msgstr "Pestle"
+
+#~ msgid "Phoenix"
+#~ msgstr "Феникс"
+
+#~ msgid "Pictor"
+#~ msgstr "Сликар"
+
+#~ msgid "Pisces"
+#~ msgstr "Риби"
+
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Јужна риба"
+
+#~ msgid "Planet Names"
+#~ msgstr "Имиња на планети"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Орбити на планети"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Патеки на планетите"
+
+#~ msgid "Planet: "
+#~ msgstr "Планета: "
+
+#~ msgid "Point"
+#~ msgstr "Точка"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Предподесено Небесно време: "
+
+#~ msgid "Program Language: "
+#~ msgstr "Јазик на програмата: "
+
+#~ msgid "Prow"
+#~ msgstr "Прамец"
+
+#~ msgid "Puppis"
+#~ msgstr "Крма"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Розова палата"
+
+#~ msgid "Pyxis"
+#~ msgstr "Пиксис"
+
+#~ msgid "Quit [CMD + Q]"
+#~ msgstr "Излез [CMD + Q]"
+
+#~ msgid "Quit [CTRL + Q]"
+#~ msgstr "Излез [CTRL + Q]"
+
+#~ msgid "Rabbit Tracks"
+#~ msgstr "Траги од зајак"
+
+#~ msgid "Race Track"
+#~ msgstr "Тркачка патека"
+
+#~ msgid "Ramparts"
+#~ msgstr "Тврдина"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Реален тек на времето [K]"
+
+#~ msgid "Recording commands to script file:\n"
+#~ msgstr "Снимање на команди во скрипт датотека:\n"
+
+#~ msgid "Rendering"
+#~ msgstr "Рендирам"
+
 #~ msgid "Restart program for"
 #~ msgstr "Рестартирај го програмот за"
 
+#~ msgid "Reticulum"
+#~ msgstr "Мрежичка"
+
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Врати се на сегашно време [8]"
+
+#~ msgid "Revolving Female"
+#~ msgstr "Ротирачка жена"
+
+#~ msgid "Revolving Male"
+#~ msgstr "Ротирачки маж"
+
+#~ msgid "Right Flag"
+#~ msgstr "Десно знаме"
+
+#~ msgid "River Turtle"
+#~ msgstr "Речна желка"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Превртен јазик"
+
+#~ msgid "Rooftop"
+#~ msgstr "Кров"
+
+#~ msgid "Room"
+#~ msgstr "Соба"
+
+#~ msgid "Root"
+#~ msgstr "Корен"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Расипана лушпа"
+
+#~ msgid "Runners"
+#~ msgstr "Тркачи"
+
+#~ msgid "Sagitta"
+#~ msgstr "Стрела"
+
+#~ msgid "Sagittarius"
+#~ msgstr "Стрелец"
+
+#~ msgid "Sah"
+#~ msgstr "Сах"
+
+#~ msgid "Salamander"
+#~ msgstr "Саламандер"
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Сними ја сегашната конфигурација како основна: "
+
+#~ msgid "Save as default"
+#~ msgstr "Зачувај како стандардно"
+
+#~ msgid "Saving settings will save current full screen status"
+#~ msgstr "Зачувување на измените ќе го зачува сегашниот статус на цел екран"
+
+#~ msgid "Scorpius"
+#~ msgstr "Скорпија"
+
+#~ msgid "Screen"
+#~ msgstr "Слика"
+
 #~ msgid "Screen Resolution :"
 #~ msgstr "Резолуција на екранот :"
+
+#~ msgid "Script commander"
+#~ msgstr "Скрипт командер"
+
+#~ msgid "Scripts "
+#~ msgstr "Скрипти "
+
+#~ msgid "Sculptor"
+#~ msgstr "Скулптор"
+
+#~ msgid "Scutum"
+#~ msgstr "Штит"
+
+#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+#~ msgstr "Барај (пр. Saturn, Polaris, HP6218, Orion, M31):"
+
+#~ msgid "Search for object [CTRL + F]"
+#~ msgstr "Барај објекти [CTRL + F]"
+
+#~ msgid "Seconds"
+#~ msgstr "Секунди"
+
+#~ msgid "Selected Constellation Only"
+#~ msgstr "Само избраното соѕвездие"
+
+#~ msgid "Selkis"
+#~ msgstr "Селкис"
+
+#~ msgid "Set Location "
+#~ msgstr "Подеси локација "
+
+#~ msgid "Set Time "
+#~ msgstr "Подеси време "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Подеси временска зона: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Подеси локален кориснички интерфејс: "
+
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "Подесување на пејзажот ја менува локацијата: "
+
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "Подесување на пејзажот ја менува локацијата"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Седум екселенции"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Седум мали девојчиња"
+
+#~ msgid "Sextans"
+#~ msgstr "Секстант"
+
+#~ msgid "Sheep"
+#~ msgstr "Овца"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Трло"
+
+#~ msgid "Shut Down: "
+#~ msgstr "Изгаси: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Ѕвезден"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Култура на небото: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Јазик на небото: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Време на небото на стартување: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Небесно време: "
+
+#~ msgid "Snake"
+#~ msgstr "Змија"
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Сончев систем: "
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Војнички пазар"
+
+#~ msgid "South River"
+#~ msgstr "Јужна река"
+
+#~ msgid "Spear"
+#~ msgstr "Копје"
+
+#~ msgid "Spring"
+#~ msgstr "Пружина"
+
+#~ msgid "Square Granary"
+#~ msgstr "Квадратен амбар"
+
+#~ msgid "Star Names. Up to mag :"
+#~ msgstr "До магнитуда :"
+
+#~ msgid "Star Twinkle. Amount :"
+#~ msgstr "Трепкање на ѕведи. Количина :"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Множител на вредноста на ѕвездите: "
+
+#~ msgid "Stars "
+#~ msgstr "Ѕвезди "
+
+#~ msgid "Stars of Water"
+#~ msgstr "Водени ѕвезди"
+
+#~ msgid "Stomach"
+#~ msgstr "Стомак"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Врховна палата"
+
+#~ msgid "Tail"
+#~ msgstr "Опашка"
+
+#~ msgid "Taurus"
+#~ msgstr "Бик"
+
+#~ msgid "Telescopium"
+#~ msgstr "Телескоп"
+
+#~ msgid "The Asar Battlefield"
+#~ msgstr "Боиштето на Асар"
+
+#~ msgid "The Fishermen"
+#~ msgstr "Рибар"
+
+#~ msgid "The Seven"
+#~ msgstr "Седумте"
+
+#~ msgid "Three Stars"
+#~ msgstr "Три ѕвезди"
+
+#~ msgid "Three Steps"
+#~ msgstr "Три скали"
+
+#~ msgid "Thunder and Lightning"
+#~ msgstr "Молња и гром"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Огнена птица"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Молња"
+
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Време и датум:\n"
+#~ "6 : Пауза 7 : Временска брзина 0\n"
+#~ "8 : Подеси сегашно време J : Намали брзина\n"
+#~ "K : Нормална брзина L : Зголеми брзина\n"
+#~ "- и = : Назад и напред еден ден (притиснете ALT за ѕвезден ден)\n"
+#~ "[ и ] : Назад и напред 7 дена (притиснете ALT за ѕвезден ден)\n"
+#~ "CTRL + - : Назад 1 час CTRL + = : напред 1 час\n"
+#~ "\n"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Формат на прикажување на времето: "
+
+#~ msgid "Time Zone :"
+#~ msgstr "Временска зона:"
+
+#~ msgid "Time speed : "
+#~ msgstr "Брзина на времето : "
+
+#~ msgid "Toilet"
+#~ msgstr "Тоалет"
+
+#~ msgid "Triangulum"
+#~ msgstr "Триаголник"
+
+#~ msgid "Triangulum Australe"
+#~ msgstr "Јужен триаголник"
+
+#~ msgid "Tripod"
+#~ msgstr "Троножец"
+
+#~ msgid "Tucana"
+#~ msgstr "Тукан"
+
+#~ msgid "Turtle"
+#~ msgstr "Желка"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Трепкање: "
+
+#~ msgid "Two Jaws"
+#~ msgstr "Две вилици"
+
+#~ msgid "Two Placed Far Apart"
+#~ msgstr "Двајца разделени"
+
+#~ msgid "Two Poles"
+#~ msgstr "Два стапа"
+
+#~ msgid "Two Sunbeams"
+#~ msgstr "Два сончеви зрака"
+
+#~ msgid "Two in Front"
+#~ msgstr "Двајца од напред"
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Ажурирај преку интернет: "
+
+#~ msgid "Ursa Major"
+#~ msgstr "Голема мечка"
+
+#~ msgid "Ursa Minor"
+#~ msgstr "Мала мечка"
+
+#~ msgid ""
+#~ "Use key J and L to decrease and increase\n"
+#~ "   time speed.\n"
+#~ "Use key K to return to real time speed."
+#~ msgstr ""
+#~ "Користете ги тастерите J и L за успорување и забрзување\n"
+#~ "на времето.\n"
+#~ "Користете го тастерот K за да се вретите во реална брзина на времето."
+
+#~ msgid "Using System Default Time Zone"
+#~ msgstr "Користи системска временска зона"
+
+#~ msgid "Vela"
+#~ msgstr "Едра"
+
+#~ msgid "Viewport Distorter"
+#~ msgstr "Дисторзија на погледот"
+
+#~ msgid "Virgo"
+#~ msgstr "Девица"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Гласот на радоста"
+
+#~ msgid "Volans"
+#~ msgstr "Летечка риба"
+
+#~ msgid "Vulpecula"
+#~ msgstr "Лисица"
+
+#~ msgid "Wall"
+#~ msgstr "Ѕид"
+
+#~ msgid "Waty Bekety"
+#~ msgstr "Waty Bekety"
+
+#~ msgid "Weaving Girl"
+#~ msgstr "Девојка што мавта"
+
+#~ msgid "Well"
+#~ msgstr "Бунар"
+
+#~ msgid "Western Door"
+#~ msgstr "Западна порта"
+
+#~ msgid "Willow"
+#~ msgstr "Врба"
+
+#~ msgid "Wings"
+#~ msgstr "Крилја"
+
+#~ msgid "Winnowing Basket"
+#~ msgstr "Корба за одвејување"
+
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Волчја уста"
+
+#~ msgid "Woman's Bed"
+#~ msgstr "Женски кревет"
+
+#~ msgid "Woman's Cart"
+#~ msgstr "Женска количка"
+
+#~ msgid "Xuanyuan"
+#~ msgstr "Xuanyuan"
+
+#~ msgid "Year"
+#~ msgstr "Година"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#~ msgid "Zaofu"
+#~ msgstr "Заофу"
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Траење на зумирањето "
 
 #~ msgid "change to apply."
 #~ msgstr "измените да станат активни."

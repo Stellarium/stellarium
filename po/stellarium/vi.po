@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-07 17:48+0100\n"
+"POT-Creation-Date: 2008-04-29 01:00+0200\n"
 "PO-Revision-Date: 2007-06-30 19:52+0000\n"
 "Last-Translator: Duy Linh <sochummy@yahoo.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -17,555 +17,122 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/deprecated/stel_ui.cpp:734
-msgid ""
-"   Please check for newer versions and send bug reports\n"
-"    and comments to us at: http://www.stellarium.org\n"
-"\n"
-msgstr ""
-"   Xin vui lòng kiểm tra phiên bản mới hơn và gởi thông báo lỗi\n"
-"    và đóng góp ý kiến cho chúng tôi tại: http://www.stellarium.org\n"
-"\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:168
 msgid " Light Years"
 msgstr " Năm ánh sáng"
 
-#: src/deprecated/stel_ui_conf.cpp:1044
-msgid ": Exceptional Leonid rate"
-msgstr ": Mật độ mưa sao băng Leonid khác thường"
+#: src/ui_viewDialog.h:1280
+msgid "10"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1051
-msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Mật độ cao nhất đã từng có (mưa sao băng Leonids 1966)"
+#: src/ui_viewDialog.h:1282
+#, fuzzy
+msgid "10000"
+msgstr "J2000"
 
-#: src/deprecated/stel_ui_conf.cpp:1030
-msgid ": Normal rate"
-msgstr ": Tốc độ bình thường"
+#: src/ui_viewDialog.h:1283
+msgid "144000"
+msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:1037
-msgid ": Standard Perseids rate"
-msgstr ": Tốc độ mưa sao băng Perseids"
+#: src/ui_viewDialog.h:1281
+msgid "80"
+msgstr ""
 
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
+#: src/ui_viewDialog.h:1275
+msgid ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
+"html>"
+msgstr ""
+
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
 msgid "AU"
 msgstr "Đơn vị thiên văn"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:403
-msgid "Actual Time"
-msgstr "Thời gian thực"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:385
-msgid "Administration "
-msgstr "Quản trị "
-
-#: src/deprecated/stel_ui_conf.cpp:152
-msgid "Also display Nebulas without textures"
-msgstr "Cũng hiển thị những đám tinh vân không có hình chụp"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:390
-msgid "Altitude (m): "
-msgstr "Độ cao (mét): "
-
-#: src/deprecated/stel_ui_conf.cpp:347
-msgid "Altitude : "
-msgstr "Độ cao : "
-
-#: src/translations.h:81
-msgid "Andromeda"
-msgstr "Tiên Nữ"
-
-#: src/translations.h:341
-msgid "Animal"
+#: src/ui_viewDialog.h:1290
+msgid "Amount:"
 msgstr ""
 
-#: src/translations.h:133
-msgid "Antlia"
-msgstr "Máy Bơm Không Khí"
-
-#: src/translations.h:137
-msgid "Apus"
-msgstr "Chim Thiên Đường"
-
-#: src/translations.h:166
-msgid "Aquarius"
-msgstr "Bảo Bình"
-
-#: src/translations.h:80
-msgid "Aquila"
-msgstr "Thiên Ưng"
-
-#: src/translations.h:83
-msgid "Ara"
-msgstr "Đàn Tế Thần"
-
-#: src/deprecated/s_tui.h:292
-msgid "Are you sure ?"
+#: src/ui_viewDialog.h:1304
+msgid "Apollo"
 msgstr ""
 
-#: src/translations.h:86
-msgid "Aries"
-msgstr "Bạch Dương"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:638
-msgid "Arrow down to load list."
-msgstr "Nhấn phím mủi tên xuống để tải danh sách."
-
-#: src/translations.h:246
-msgid "Arsenal"
-msgstr "Kho chứa vũ khí"
-
-#: src/deprecated/stel_ui_conf.cpp:223
-msgid "Atmosphere"
-msgstr "Khí quyển"
-
-#: src/deprecated/stel_ui.cpp:686
-msgid "Atmosphere [A]"
-msgstr "Bầu khí quyển [A]"
-
-#: src/translations.h:100
-msgid "Auriga"
-msgstr "Ngự Phu"
-
-#: src/translations.h:316
-msgid "Aurvandil's Toe"
+#: src/ui_viewDialog.h:1322
+msgid "Art brightness: "
 msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:443 src/deprecated/stel_ui_conf.cpp:963
-msgid "Author: "
-msgstr "Tác giả: "
-
-#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:125
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:125
+#: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:118
 msgid "Az/Alt: "
 msgstr "Độ phương/Độ cao: "
 
-#: src/deprecated/stel_ui_conf.cpp:192 src/deprecated/stel_ui_tuiconf.cpp:434
-msgid "Azimuthal Grid"
+#: src/ui_viewDialog.h:1310
+#, fuzzy
+msgid "Azimutal grid"
 msgstr "Lưới phương vị"
-
-#: src/deprecated/stel_ui.cpp:678
-msgid "Azimuthal Grid [Z]"
-msgstr "Lưới phương vị [Z]"
-
-#: src/translations.h:294
-msgid "Bailer"
-msgstr "Gàu tát nước"
-
-#: src/translations.h:291
-msgid "Banner of Three Stars"
-msgstr "Ngọn cờ ba sao"
-
-#: src/translations.h:348
-msgid "Bear's Lodge"
-msgstr ""
-
-#: src/translations.h:176
-msgid "Bird"
-msgstr "Chim"
-
-#: src/translations.h:333
-msgid "Blubber Container"
-msgstr ""
-
-#: src/translations.h:180 src/translations.h:251
-msgid "Boat"
-msgstr "Thuyền"
-
-#: src/translations.h:279
-msgid "Bond"
-msgstr "Liên kết"
-
-#: src/translations.h:89
-msgid "Bootes"
-msgstr "Mục Phu"
-
-#: src/translations.h:255
-msgid "Bow and Arrow"
-msgstr "Cung và tên"
-
-#: src/translations.h:331
-msgid "Breastbone"
-msgstr ""
-
-#: src/translations.h:171
-msgid "Bull's Foreleg"
-msgstr "Chân Trước Con Bò"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:458
-msgid "CD/DVD Script: "
-msgstr "Kịch bản cho CD/DVD: "
-
-#: src/deprecated/stel_ui.cpp:816
-msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : Thoát\n"
-
-#: src/deprecated/stel_ui.cpp:814
-msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Thoát\n"
-
-#: src/translations.h:90
-msgid "Caelum"
-msgstr "Cái Đục"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:399
-msgid "Calendar"
-msgstr ""
 
 #: src/translations.h:45
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/translations.h:117
-msgid "Camelopardalis"
-msgstr "Hươu Cao Cổ"
-
-#: src/deprecated/s_gui.cpp:2227 src/deprecated/s_gui.cpp:2273
-msgid "Cancel"
-msgstr "Hủy bỏ"
-
-#: src/translations.h:92
-msgid "Cancer"
-msgstr "Con Cua"
-
-#: src/translations.h:99
-msgid "Canes Venatici"
-msgstr "Chó Săn"
-
-#: src/translations.h:118
-msgid "Canis Major"
-msgstr "Đại Khuyển"
-
-#: src/translations.h:145
-msgid "Canis Minor"
-msgstr "Đại Khuyển"
-
-#: src/translations.h:93
-msgid "Capricornus"
-msgstr "Dê Biển"
-
-#: src/deprecated/stel_ui_conf.cpp:218 src/deprecated/stel_ui_tuiconf.cpp:429
-msgid "Cardinal Points"
+#: src/ui_viewDialog.h:1314
+#, fuzzy
+msgid "Cardinal points"
 msgstr "Điểm phương hướng"
-
-#: src/deprecated/stel_ui.cpp:684
-msgid "Cardinal Points [Q]"
-msgstr "Điểm phương hướng [Q]"
-
-#: src/translations.h:302
-msgid "Cared for by Moon"
-msgstr "Cared for by Moon"
-
-#: src/translations.h:329
-msgid "Caribou"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Carina"
-msgstr "Sống Tàu Argo"
-
-#: src/translations.h:95
-msgid "Cassiopeia"
-msgstr "Thiên Hậu"
-
-#: src/translations.h:295
-msgid "Cat's Cradle"
-msgstr "Cái nôi mèo"
-
-#: src/translations.h:96
-msgid "Centaurus"
-msgstr "Nhân Mã"
-
-#: src/translations.h:97
-msgid "Cepheus"
-msgstr "Thiên Vương"
-
-#: src/translations.h:85
-msgid "Cetus"
-msgstr "Kình Ngư"
-
-#: src/translations.h:91
-msgid "Chamaeleon"
-msgstr "Tắc Kè"
-
-#: src/translations.h:205
-msgid "Chariot"
-msgstr "Xe ngựa"
-
-#: src/translations.h:260
-msgid "Chariot Yard"
-msgstr "Bãi rào xe ngựa"
 
 #: src/translations.h:59
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:195
-msgid "Chematy"
-msgstr "Chematy"
-
 #: src/translations.h:69
 msgid "Chinese"
 msgstr "Tiếng Trung Quốc"
 
-#: src/deprecated/stel_ui_conf.cpp:428
-msgid "Choose landscapes:"
-msgstr "Chọn phong cảnh :"
+#: src/ui_searchDialogGui.h:225
+#, fuzzy
+msgid "Completions"
+msgstr "Trống rỗng"
 
-#: src/translations.h:102
-msgid "Circinus"
-msgstr "Compa"
-
-#: src/translations.h:243
-msgid "Circular Granary"
-msgstr "Vựa lúa tròn"
-
-#: src/translations.h:203
-msgid "Coiled Thong"
-msgstr "Cuộn da"
-
-#: src/translations.h:327
-msgid "Collarbones"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:382
-msgid "Colors "
-msgstr "Màu sắc "
-
-#: src/translations.h:101
-msgid "Columba"
-msgstr "Bồ Câu"
-
-#: src/translations.h:98
-msgid "Coma Berenices"
-msgstr "Tóc Bà Berenices"
-
-#: src/deprecated/stel_ui.cpp:1037
-msgid "Command recording stopped."
-msgstr "Dừng việc ghi lệnh."
-
-#: src/deprecated/stel_ui_conf.cpp:60
-msgid "Configuration"
-msgstr "Cấu hình"
-
-#: src/deprecated/stel_ui.cpp:694
-msgid "Configuration window [1]"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:427
-msgid "Constellation Art Intensity"
-msgstr "Độ đậm hình vẽ chòm sao"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:428
-msgid "Constellation Boundaries"
-msgstr "Ranh giới các chòm sao"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:425
-msgid "Constellation Lines"
+#: src/ui_viewDialog.h:1317
+#, fuzzy
+msgid "Constellations"
 msgstr "Đường nối chòm sao"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:426
-msgid "Constellation Names"
-msgstr "Tên các chòm sao"
-
-#: src/deprecated/stel_ui.cpp:676
-msgid "Constellations Art [R]"
-msgstr "Hình vẽ các chòm sao [R]"
-
-#: src/deprecated/stel_ui_conf.cpp:123
-msgid "Constellations Boundaries"
-msgstr "Ranh giới các chòm sao"
-
-#: src/deprecated/stel_ui_conf.cpp:113
-msgid "Constellations Lines"
-msgstr "Đường nối các chòm sao"
-
-#: src/deprecated/stel_ui_conf.cpp:118
-msgid "Constellations Names"
-msgstr "Tên các chòm sao"
-
-#: src/translations.h:104
-msgid "Corona Australis"
-msgstr "Nam Miện"
-
-#: src/translations.h:105
-msgid "Corona Borealis"
-msgstr "Bắc Miện"
-
-#: src/translations.h:106
-msgid "Corvus"
-msgstr "Con Quạ"
-
-#: src/translations.h:103
-msgid "Crater"
-msgstr "Cái Ly"
-
-#: src/translations.h:181
-msgid "Crocodile"
-msgstr "Cá sấu"
-
-#: src/translations.h:107
-msgid "Crux"
-msgstr "Thập Tự Phương Nam"
-
-#: src/deprecated/stel_ui_conf.cpp:270
-msgid "Current Time :"
-msgstr "Thời gian hiện tại :"
-
-#: src/deprecated/stel_ui_conf.cpp:1082
-msgid "Current Time Speed is x"
-msgstr "Tốc độ trôi thời gian hiện tại là x"
-
-#: src/deprecated/stel_ui_conf.cpp:321
-msgid "Cursor : "
+#: src/ui_locationDialogGui.h:269
+#, fuzzy
+msgid "Cursor :"
 msgstr "Địa điểm đang chỉ : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:451
-msgid "Cursor Timeout: "
-msgstr "Thời gian dấu con chuột: "
-
-#: src/translations.h:202
-msgid "Curved Array"
-msgstr "Mảng cong"
-
-#: src/translations.h:108
-msgid "Cygnus"
-msgstr "Thiên Nga"
-
-#: src/deprecated/stel_ui_conf.cpp:535
-msgid "Date & Time"
+#: src/ui_dateTimeDialogGui.h:124
+#, fuzzy
+msgid "Date and Time"
 msgstr "Ngày & thời gian"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:406
-msgid "Date Display Format: "
-msgstr "Dạng ngày hiển thị: "
-
-#: src/deprecated/s_gui.cpp:2747
-msgid "Day"
-msgstr "Ngày"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:398
-msgid "Day keys: "
-msgstr ""
-
-#: src/deprecated/stel_ui.cpp:719
-msgid "Decrease Time Speed [J]"
-msgstr "Giảm tốc độ trôi thời gian [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/translations.h:109
-msgid "Delphinus"
-msgstr "Cá Heo"
-
-#: src/deprecated/stel_ui.cpp:788
-msgid ""
-"Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"CTRL + G : Goto selected solar system object\n"
-"\n"
-msgstr ""
-
-#: src/translations.h:310
-msgid "Dilyehe"
-msgstr ""
-
 #: src/translations.h:50
 msgid "Dione"
 msgstr "Dione"
 
-#: src/translations.h:208 src/translations.h:339
-msgid "Dipper"
-msgstr "Cái gàu"
-
-#: src/deprecated/stel_ui_conf.cpp:398
-msgid "Disk Viewport"
-msgstr "Tầm nhìn dạng đĩa"
-
-#: src/deprecated/stel_ui.cpp:776
-msgid ""
-"Display options:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen / window.\n"
-"C   : Constellation lines       V   : Constellation labels\n"
-"R   : Constellation art         E   : Equatorial grid\n"
-"Z   : Azimuthal grid            N   : Nebula labels\n"
-"P   : Planet labels             G   : Ground\n"
-"A   : Atmosphere                F   : Fog\n"
-"Q   : Cardinal points           O   : Toggle moon scaling\n"
-"T   : Object tracking           S   : Stars\n"
-"4 , : Ecliptic line             5 . : Equator line\n"
-"\n"
-msgstr ""
-
-#: src/modules/Planet.cpp:128 src/modules/Planet.cpp:167
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
+#: src/modules/Planet.cpp:131 src/modules/Planet.cpp:170
+#: src/modules/StarWrapper.cpp:125 src/modules/StarWrapper.cpp:167
 msgid "Distance: "
 msgstr "Khoảng cách: "
 
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Do"
+#: src/ui_viewDialog.h:1271
+msgid "Download images"
 msgstr ""
 
-#: src/translations.h:253
-msgid "Dog"
-msgstr "Con chó"
-
-#: src/translations.h:326
-msgid "Dogs"
-msgstr ""
-
-#: src/translations.h:303
-msgid "Dolphin"
-msgstr "Cá heo"
-
-#: src/deprecated/s_tui.h:275 src/deprecated/s_tui.h:292
-msgid "Done"
-msgstr ""
-
-#: src/translations.h:110
-msgid "Dorado"
-msgstr "Cá Kiếm"
-
-#: src/translations.h:111
-msgid "Draco"
-msgstr "Thiên Long"
-
-#: src/deprecated/stel_ui.cpp:672
-msgid "Drawing of the Constellations [C]"
-msgstr "Đường nối trong chòm sao [C]"
-
-#: src/translations.h:344
-msgid "Dried Willow"
-msgstr ""
-
-#: src/translations.h:209
-msgid "Drum"
-msgstr "Trống"
-
-#: src/translations.h:278
-msgid "Drumstick"
-msgstr "Dùi trống"
-
-#: src/deprecated/stel_ui.cpp:804
-msgid ""
-"During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
-msgstr ""
-"Trong suốt quá trình trình chiếu kịch bản\n"
-"CTRL + C : Kết thúc kịch bản\n"
-"6 : dừng kịch bản K : trở lại kịch bản\n"
-"\n"
-
-#: src/deprecated/s_gui.cpp:2691 src/translations.h:65
+#: src/translations.h:65
 msgid "E"
 msgstr "Đ"
 
@@ -573,266 +140,70 @@ msgstr "Đ"
 msgid "Earth"
 msgstr "Trái đất"
 
-#: src/translations.h:254
-msgid "Earth God's Temple"
-msgstr "Đền của vị thần trái đất"
-
-#: src/translations.h:282
-msgid "Eastern Door"
-msgstr "Cửa Đông"
-
-#: src/deprecated/stel_ui_conf.cpp:202 src/deprecated/stel_ui_tuiconf.cpp:437
-msgid "Ecliptic Line"
+#: src/ui_viewDialog.h:1312
+#, fuzzy
+msgid "Ecliptic line"
 msgstr "Đường hoàng đạo"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:383
-msgid "Effects "
-msgstr "Hiệu ứng "
 
 #: src/translations.h:70
 msgid "Egyptian"
 msgstr "Người Ai Cập"
 
-#: src/translations.h:342
-msgid "Elk"
-msgstr ""
-
-#: src/translations.h:266
-msgid "Emptiness"
-msgstr "Trống rỗng"
-
-#: src/translations.h:263
-msgid "Encampment"
-msgstr "Trại giam"
-
 #: src/translations.h:48
 msgid "Enceladus"
 msgstr "Enceladus"
 
-#: src/deprecated/stel_ui_conf.cpp:842
-msgid "Enter observatory name"
-msgstr "Nhập vào tên nơi quan sát"
-
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:243
 msgid "Equ of date"
 msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:197 src/deprecated/stel_ui_tuiconf.cpp:436
-msgid "Equator Line"
+#: src/ui_viewDialog.h:1313
+#, fuzzy
+msgid "Equator line"
 msgstr "Đường quỹ đạo"
 
-#: src/deprecated/stel_ui_conf.cpp:187 src/deprecated/stel_ui_tuiconf.cpp:435
-msgid "Equatorial Grid"
+#: src/ui_viewDialog.h:1315
+#, fuzzy
+msgid "Equatorial J2000 grid"
 msgstr "Lưới quỹ đạo"
 
-#: src/deprecated/stel_ui.cpp:680
-msgid "Equatorial Grid [E]"
-msgstr "Lưới xích đạo [E]"
-
-#: src/deprecated/stel_ui.cpp:692
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Quay theo Equatorial/Altazimuthal [ENTER]"
-
-#: src/translations.h:144
-msgid "Equuleus"
-msgstr "Tiểu Mã"
-
-#: src/translations.h:113
-msgid "Eridanus"
-msgstr "Sông Eridanus"
-
-#: src/deprecated/stel_ui.cpp:1051
-msgid "Error: Unable to open script file to record commands."
-msgstr "Lỗi: không thể mở file kịch bản để ghi lệnh."
-
-#: src/translations.h:273
-msgid "Establishment"
-msgstr "Sự thiết lập"
+#: src/ui_viewDialog.h:1309
+#, fuzzy
+msgid "Equatorial grid"
+msgstr "Lưới quỹ đạo"
 
 #: src/translations.h:43
 msgid "Europa"
 msgstr "Europa"
 
-#: src/translations.h:245
-msgid "Extended Net"
-msgstr "Mạng mở rộng"
-
-#: src/translations.h:283
-msgid "Farmland"
-msgstr "Đất trồng trọt"
-
-#: src/translations.h:179
-msgid "Ferry Boat"
-msgstr "Phà"
-
-#: src/translations.h:338
-msgid "Fireplace"
+#: src/ui_searchDialogGui.h:210
+msgid "Find Object"
 msgstr ""
 
-#: src/translations.h:311
-msgid "First Big One"
-msgstr ""
-
-#: src/translations.h:313
-msgid "First Slim One"
-msgstr ""
-
-#: src/translations.h:228
-msgid "Five Chariots"
-msgstr "5 cỗ xe ngựa"
-
-#: src/translations.h:240
-msgid "Five Feudal Kings"
-msgstr "Ngủ vị hoàng đế"
-
-#: src/translations.h:274
-msgid "Flail"
-msgstr "Cái đập lúa"
-
-#: src/deprecated/stel_ui.cpp:711
-msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr ""
-
-#: src/deprecated/stel_ui.cpp:713
-msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr ""
-
-#: src/translations.h:188
-msgid "Flock"
-msgstr "Bầy"
-
-#: src/translations.h:223
-msgid "Flying Corridor"
-msgstr "Hành lang bay"
-
-#: src/deprecated/stel_ui_conf.cpp:228
-msgid "Fog"
-msgstr "Sương mù"
-
-#: src/translations.h:225
-msgid "Ford"
+#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
+#: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
+#: src/ui_viewDialog.h:962
+#, fuzzy
+msgid "Form"
 msgstr "Chỗ cạn"
-
-#: src/translations.h:115
-msgid "Fornax"
-msgstr "Cái Lò"
-
-#: src/translations.h:236
-msgid "Four Channels"
-msgstr "Tứ kênh"
-
-#: src/translations.h:301
-msgid "Frigate Bird"
-msgstr "Chim chiến"
-
-#: src/deprecated/stel_ui_conf.cpp:695
-msgid "GO"
-msgstr "Bắt đầu"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ganymede"
 
-#: src/translations.h:116
-msgid "Gemini"
-msgstr "Song Tử"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:380
-msgid "General "
-msgstr "Tổng quát "
-
-#: src/translations.h:285
-msgid "Ghosts"
-msgstr "Những con ma"
-
-#: src/translations.h:186
-msgid "Giant"
-msgstr "Khổng lồ"
-
-#: src/translations.h:268
-msgid "Girl"
-msgstr "Cô gái"
-
-#: src/translations.h:261
-msgid "Good Gourd"
-msgstr "Quả bầu tốt"
-
-#: src/deprecated/stel_ui.cpp:709
-msgid "Goto selected object [SPACE]"
-msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
-
-#: src/translations.h:218
-msgid "Great General"
-msgstr "Vị tướng vĩ đại"
-
-#: src/deprecated/stel_ui_conf.cpp:213
-msgid "Ground"
-msgstr "Mặt đất"
-
-#: src/deprecated/stel_ui.cpp:682
-msgid "Ground [G]"
-msgstr "Mặt đất [G]"
-
-#: src/translations.h:120
-msgid "Grus"
-msgstr "Con Sếu"
-
-#: src/translations.h:336
-msgid "Hand"
+#: src/ui_searchDialogGui.h:224
+msgid "Go"
 msgstr ""
 
-#: src/translations.h:270
-msgid "Heart"
-msgstr "Trái tim"
+#: src/ui_viewDialog.h:1301
+#, fuzzy
+msgid "Guereins"
+msgstr "Con Rắn"
 
-#: src/deprecated/stel_ui.cpp:823
+#: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "Trợ giúp"
-
-#: src/deprecated/stel_ui.cpp:690
-msgid "Help [H]"
-msgstr "Trợ giúp [H]"
-
-#: src/translations.h:121
-msgid "Hercules"
-msgstr "Dũng Sĩ Hercules"
-
-#: src/translations.h:187
-msgid "Hippopotamus"
-msgstr "Hà mã"
-
-#: src/deprecated/stel_ui.cpp:1047
-msgid "Hit CTRL-R again to stop.\n"
-msgstr "Nhấn CTRL-R lần nữa để dừng.\n"
-
-#: src/translations.h:247
-msgid "Hook"
-msgstr "Cái móc"
-
-#: src/translations.h:212
-msgid "Horn"
-msgstr "Sừng"
-
-#: src/translations.h:122
-msgid "Horologium"
-msgstr "Đồ Hồ Quả Lắc"
-
-#: src/translations.h:184
-msgid "Horus"
-msgstr "Horus (một vì thần Ai Cập cổ đại, con trai của Isis and Osiris)"
-
-#: src/deprecated/s_gui.cpp:2750
-msgid "Hour"
-msgstr "Giờ"
-
-#: src/translations.h:123
-msgid "Hydra"
-msgstr "Trường Xà"
-
-#: src/translations.h:124
-msgid "Hydrus"
-msgstr "Rắn Nước"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -842,495 +213,158 @@ msgstr "Hyperion"
 msgid "Iapetus"
 msgstr "Iapetus"
 
-#: src/translations.h:211
-msgid "Imperial Guards"
-msgstr "Lính hoàng cung"
-
-#: src/translations.h:214
-msgid "Imperial Passageway"
-msgstr "Hành lang hoàng cung"
-
-#: src/deprecated/stel_ui.cpp:723
-msgid "Increase Time Speed [L]"
-msgstr "Tăng tốc độ trôi thời gian [L]"
-
-#: src/translations.h:125
-msgid "Indus"
-msgstr "Người Da Đỏ"
-
-#: src/deprecated/stel_ui_conf.cpp:964
-msgid "Info: "
-msgstr "Thông tin: "
-
-#: src/deprecated/stel_ui.cpp:753
-msgid "Information"
-msgstr "Thông tin"
-
 #: src/translations.h:71
 msgid "Inuit"
 msgstr ""
-
-#: src/deprecated/stel_ui.cpp:602
-msgid "Invalid Script command"
-msgstr "Mã lệnh sai"
 
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:238
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:106
+#: src/modules/Telescope.cpp:241
 msgid "J2000"
 msgstr "J2000"
-
-#: src/translations.h:249
-msgid "Jade Well"
-msgstr "Giếng ngọc bích"
-
-#: src/translations.h:192
-msgid "Jaw"
-msgstr "Quai hàm"
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Mộc tinh"
 
-#: src/translations.h:194
-msgid "Kenemet"
-msgstr "Kenemet"
-
-#: src/translations.h:190
-msgid "Khanuwy Fish"
-msgstr "Cá Khanuwy"
-
-#: src/translations.h:215
-msgid "Kitchen"
-msgstr "Nhà bếp"
-
-#: src/translations.h:300
-msgid "Kite of Kawelo"
-msgstr "Diều của Kawelo"
-
 #: src/translations.h:72
 msgid "Korean"
 msgstr ""
 
-#: src/translations.h:126
-msgid "Lacerta"
-msgstr "Thằn Lằn"
+#: src/ui_viewDialog.h:1286
+msgid "Labels and markers"
+msgstr ""
 
 #: src/translations.h:73
 msgid "Lakota"
 msgstr ""
 
-#: src/translations.h:328
-msgid "Lamp Stand"
-msgstr ""
-
-#: src/translations.h:250
-msgid "Lance"
-msgstr "Cây thương"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:444
-msgid "Landscape: "
-msgstr "Phong cảnh: "
-
-#: src/deprecated/stel_ui_conf.cpp:537
-msgid "Landscapes"
+#: src/ui_viewDialog.h:1306
+#, fuzzy
+msgid "Landscape"
 msgstr "Phong cảnh"
 
-#: src/deprecated/stel_ui_conf.cpp:534
-msgid "Language"
-msgstr "Ngôn ngữ"
-
-#: src/deprecated/stel_ui_conf.cpp:339
-msgid "Latitude : "
+#: src/ui_locationDialogGui.h:275
+#, fuzzy
+msgid "Latitude :"
 msgstr "Vĩ tuyến : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:388
-msgid "Latitude: "
-msgstr "Vĩ độ: "
-
-#: src/translations.h:277
-msgid "Left Flag"
-msgstr "Cờ trái"
-
-#: src/translations.h:220
-msgid "Legs"
-msgstr "Chân"
-
-#: src/translations.h:129
-msgid "Leo"
-msgstr "Sư Tử"
-
-#: src/translations.h:146
-msgid "Leo Minor"
-msgstr "Tiểu Khuyển"
-
-#: src/translations.h:128
-msgid "Lepus"
-msgstr "Con Thỏ"
-
-#: src/translations.h:84
-msgid "Libra"
-msgstr "Thiên Bình"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:443
-msgid "Light Pollution Luminance: "
+#: src/ui_viewDialog.h:1297
+msgid "Light pollution:"
 msgstr ""
 
-#: src/translations.h:173
-msgid "Lion"
-msgstr "Sư tử"
-
-#: src/translations.h:309
-msgid "Lizard"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:462
-msgid "Load Default Configuration: "
-msgstr "Nạp cấu hình mặc định: "
-
-#: src/modules/ConstellationMgr.cpp:340
-msgid "Loading Constellation Art: "
+#: src/modules/ConstellationMgr.cpp:369
+#, fuzzy, qt-format
+msgid "Loading Constellation Art: %1/%2"
 msgstr "Đang tải hình vẽ các chòm sao: "
 
-#: src/modules/NebulaMgr.cpp:404
-msgid "Loading NGC catalog: "
+#: src/modules/NebulaMgr.cpp:372
+#, fuzzy, qt-format
+msgid "Loading NGC catalog: %1/%2"
 msgstr "Đang tải bảng danh mục NGC: "
 
-#: src/modules/NebulaMgr.cpp:538
-msgid "Loading Nebula Textures:"
-msgstr "Đang tải kết cấu các tinh vân:"
+#: src/modules/StarMgr.cpp:253
+#, fuzzy, qt-format
+msgid "Loading catalog %1"
+msgstr "Đang tải bảng danh mục NGC: "
 
-#: src/modules/StarMgr.cpp:493
-msgid "Loading catalog "
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:455
-msgid "Local Script: "
-msgstr "Kịch bản cục bộ: "
-
-#: src/deprecated/stel_ui_conf.cpp:536
+#: src/ui_locationDialogGui.h:254
 msgid "Location"
 msgstr "Địa điểm"
 
-#: src/deprecated/stel_ui_conf.cpp:453 src/deprecated/stel_ui_conf.cpp:966
-msgid "Location: "
-msgstr ""
-
-#: src/deprecated/stel_ui_conf.cpp:331
-msgid "Longitude : "
+#: src/ui_locationDialogGui.h:271
+#, fuzzy
+msgid "Longitude :"
 msgstr "Kinh tuyến : "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:389
-msgid "Longitude: "
-msgstr "Kinh độ: "
-
-#: src/translations.h:130
-msgid "Lupus"
-msgstr "Chó Sói"
-
-#: src/translations.h:131
-msgid "Lynx"
-msgstr "Mèo Rừng"
-
-#: src/translations.h:132
-msgid "Lyra"
-msgstr "Thiên Cầm"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Magnitude"
-msgstr "Cường độ"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:447
-msgid "Magnitude Scaling Multiplier: "
-msgstr ""
-
-#: src/modules/Nebula.cpp:98 src/modules/Nebula.cpp:123
-#: src/modules/Planet.cpp:114 src/modules/Planet.cpp:163
-#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:67
-#: src/modules/StarWrapper.cpp:112 src/modules/StarWrapper.cpp:170
+#: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
+#: src/modules/Planet.cpp:117 src/modules/Planet.cpp:166
+#: src/modules/StarWrapper.cpp:45 src/modules/StarWrapper.cpp:105
+#: src/modules/StarWrapper.cpp:163
 msgid "Magnitude: "
 msgstr "Cấp sao biểu kiến: "
 
-#: src/translations.h:308
-msgid "Man with Feet Apart"
-msgstr ""
+#: src/modules/StarWrapper.cpp:63
+#, fuzzy, qt-format
+msgid "Magnitude: %1"
+msgstr "Cấp sao biểu kiến: "
 
-#: src/translations.h:320
-msgid "Man's Cart"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-msgid "Manual zoom: "
-msgstr "Zoom thủ công: "
-
-#: src/translations.h:227
-msgid "Market"
-msgstr "Chợ"
-
-#: src/translations.h:290
-msgid "Market Officer"
-msgstr "Nhân viên thị trường"
+#: src/ui_viewDialog.h:1331
+#, fuzzy
+msgid "Marking"
+msgstr "Sống Tàu Argo"
 
 #: src/translations.h:38
 msgid "Mars"
 msgstr "Hỏa tinh"
 
-#: src/translations.h:298
-msgid "Maui's Fishhook"
-msgstr "Móc câu cá của Maui"
-
-#: src/translations.h:252
-msgid "Mausoleum"
-msgstr "Lăng mộ"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:420
-msgid "Maximum Magnitude to Label: "
-msgstr "Hiện tên vật thể sáng tối đa: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:449
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Hiện tên đám tinh vân có độ sáng đến: "
-
-#: src/translations.h:242
-msgid "Meadows"
-msgstr "Bãi cỏ"
-
-#: src/translations.h:160
-msgid "Mensa"
-msgstr "Núi Table"
-
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Thuỷ tinh"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:433
-msgid "Meridian Line"
+#: src/ui_viewDialog.h:1311
+#, fuzzy
+msgid "Meridian line"
 msgstr "Đường kinh tuyến"
-
-#: src/deprecated/stel_ui_conf.cpp:1056
-msgid "Meteor zenith hourly rate"
-msgstr ""
-
-#: src/translations.h:134
-msgid "Microscopium"
-msgstr "Kính Hiển Vi"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:448
-msgid "Milky Way intensity: "
-msgstr "Mật độ dãi Ngân Hà "
 
 #: src/translations.h:47
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/deprecated/s_gui.cpp:2753
-msgid "Minutes"
-msgstr "Phút"
-
-#: src/deprecated/stel_ui.cpp:808
-msgid ""
-"Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"
-msgstr ""
-"Những tuỳ chọn khác:\n"
-"9 : Bật tắt mật độ mưa sao băng\n"
-"CTRL + 0,...,9 : Thi hành lệnh GOTO cho KTV 0,...,9\n"
-"CTRL + SHIFT + H : bật tắt chức năng lật hình ngang\n"
-"CTRL + SHIFT + V : bật tắt chức năng lật hình dọc\n"
-
-#: src/translations.h:127
-msgid "Monoceros"
-msgstr "Kỳ Lân"
-
-#: src/deprecated/s_gui.cpp:2744
-msgid "Month"
-msgstr "Tháng"
-
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Mặt trăng"
 
-#: src/deprecated/stel_ui_conf.cpp:168
-msgid "Moon Scale"
-msgstr "Tỉ lệ thật mặt trăng"
-
-#: src/translations.h:193
-msgid "Mooring Post"
-msgstr "Trụ neo"
-
-#: src/translations.h:257
-msgid "Mortar"
-msgstr "Vữa"
-
-#: src/deprecated/stel_ui.cpp:765
-msgid ""
-"Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
-"\n"
-msgstr ""
-"Di chuyển & Lựa chọn\n"
-"Phím mũi tên: thay đổi Xích kinh (RA) / Xích vĩ (DE)\n"
-"Page Up/Down : Phóng lớn/nhỏ\n"
-"CTRL+Up/Down : Phóng lớn/nhỏ\n"
-"Click chuột trái: Chọn vật thể\n"
-"Click chuột phải: Bỏ chọn\n"
-"CTRL+ Click trái: Bỏ chọn\n"
-"\\ : Thu nhỏ lại (hành tinh + các mặt trăng nếu phù hợp)\n"
-"/ : Phóng to vật thể được chọn\n"
-"SPACE: Đưa vật thể được chọn vào giữa màn hình\n"
-"\n"
-
-#: src/translations.h:135
-msgid "Musca"
-msgstr "Con Ruồi"
-
-#: src/deprecated/s_gui.cpp:2686 src/translations.h:63
+#: src/translations.h:63
 msgid "N"
 msgstr "B"
-
-#: src/deprecated/stel_ui.cpp:674
-msgid "Names of the Constellations [V]"
-msgstr "Tên các chòm sao [V]"
 
 #: src/translations.h:74
 msgid "Navajo"
 msgstr ""
 
-#: src/translations.h:299
-msgid "Navigator's Triangle"
-msgstr "Tam giác hàng hải"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:439
-msgid "Nebula Circles"
-msgstr "Vòng bao tinh vân"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:438
-msgid "Nebula Names"
-msgstr "Tên các chòm sao"
-
-#: src/deprecated/stel_ui_conf.cpp:139
-msgid "Nebulas Names. Up to mag :"
-msgstr "Hiện tên tinh vân sáng đến :"
-
-#: src/deprecated/stel_ui.cpp:688
-msgid "Nebulas [N]"
+#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
+#, fuzzy
+msgid "Nebula"
 msgstr "Tinh vân [N]"
-
-#: src/translations.h:288
-msgid "Neck"
-msgstr "Cổ"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "Hải vương tinh"
 
-#: src/translations.h:191 src/translations.h:230
-msgid "Net"
-msgstr "Mạng"
-
-#: src/deprecated/stel_ui.cpp:697
-msgid "Night (red) mode"
-msgstr "Mode ban đêm (menu đỏ)"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2221
-msgid "No"
-msgstr "Không"
-
-#: src/translations.h:112
-msgid "Norma"
-msgstr "Thước Đo Độ Bằng"
+#: src/ui_viewDialog.h:1284
+#, fuzzy
+msgid "Normal rate"
+msgstr ": Tốc độ bình thường"
 
 #: src/translations.h:75
 msgid "Norse"
 msgstr ""
 
-#: src/translations.h:239
-msgid "North River"
-msgstr "Sông Bắc"
+#: src/ui_viewDialog.h:1293
+#, fuzzy
+msgid "Options"
+msgstr "Tráng Sĩ"
 
-#: src/translations.h:201
-msgid "Northern Dipper"
-msgstr "Cái gầu phương Bắc"
-
-#: src/deprecated/s_gui.cpp:2245 src/deprecated/s_gui.cpp:2271
-msgid "OK"
-msgstr "Đồng ý"
-
-#: src/deprecated/stel_ui_conf.cpp:670
-msgid "Object Search"
-msgstr "Tìm kiếm vật thể"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Object Sizing Rule: "
-msgstr "Quy luật thay đổi cỡ vật thể: "
-
-#: src/translations.h:136
-msgid "Octans"
-msgstr "Kính Bát Phân"
-
-#: src/translations.h:138
-msgid "Ophiuchus"
-msgstr "Người Cầm Rắn"
-
-#: src/translations.h:241
-msgid "Orchard"
-msgstr "Vườn cây ăn quả"
-
-#: src/translations.h:139
+#: src/ui_searchDialogGui.h:223
 msgid "Orion"
 msgstr "Tráng Sĩ"
 
-#: src/translations.h:224
-msgid "Outer Fence"
-msgstr "Hàng rào bên ngoài"
+#: src/ui_viewDialog.h:1330
+msgid "Orthographic"
+msgstr ""
 
-#: src/translations.h:269
-msgid "Ox"
-msgstr "Con bò"
-
-#: src/translations.h:189
-msgid "Pair of Stars"
-msgstr "Hai ngôi sao"
-
-#: src/translations.h:265
-msgid "Palace Gate"
-msgstr "Cổng cung điện"
-
-#: src/modules/StarWrapper.cpp:130
+#: src/modules/StarWrapper.cpp:123
 msgid "Parallax: "
 msgstr ""
 
-#: src/translations.h:140
-msgid "Pavo"
-msgstr "Con Công"
-
-#: src/translations.h:141
-msgid "Pegasus"
-msgstr "Phi Mã"
-
-#: src/translations.h:143
-msgid "Perseus"
-msgstr "Anh Tiên"
-
-#: src/translations.h:256
-msgid "Pestle"
-msgstr "Cái chày"
+#: src/ui_viewDialog.h:1327
+#, fuzzy
+msgid "Perspective"
+msgstr "Chỉnh thời gian"
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -1340,709 +374,553 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:149
-msgid "Phoenix"
-msgstr "Phượng Hoàng"
-
-#: src/translations.h:142
-msgid "Pictor"
-msgstr "Giá Vẽ"
-
-#: src/translations.h:151
-msgid "Pisces"
-msgstr "Song Ngư"
-
-#: src/translations.h:150
-msgid "Piscis Austrinus"
-msgstr "Nam Ngư"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:430
-msgid "Planet Names"
-msgstr "Tên các hành tinh"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:431
-msgid "Planet Orbits"
-msgstr "Quỹ đạo các hành tinh"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:432
-msgid "Planet Trails"
-msgstr "Vết các hành tinh"
-
-#: src/deprecated/stel_ui_conf.cpp:448 src/deprecated/stel_ui_conf.cpp:965
-msgid "Planet: "
-msgstr ""
-
-#: src/deprecated/stel_ui_conf.cpp:163
+#: src/ui_viewDialog.h:1288
 msgid "Planets"
 msgstr "Hành tinh"
 
-#: src/deprecated/stel_ui_conf.cpp:175
-msgid "Planets Hints"
+#: src/ui_viewDialog.h:1262
+#, fuzzy
+msgid "Planets and Satellites"
 msgstr "Ghi chú các hình tinh"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Diêm vương tinh"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:446
-msgid "Point"
-msgstr "Điểm"
-
-#: src/translations.h:76
+#: src/translations.h:76 src/ui_viewDialog.h:1338
 msgid "Polynesian"
 msgstr "Người Pô-li-nê-di"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:401
-msgid "Preset Sky Time: "
-msgstr "Chỉnh thời gian bầu trời: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:404
-msgid "Preset Time"
-msgstr "Chỉnh thời gian"
-
-#: src/deprecated/stel_ui_conf.cpp:479
-msgid "Program Language: "
-msgstr "Ngôn ngữ chương trình: "
-
-#: src/deprecated/stel_ui_conf.cpp:379
-msgid "Projection :"
+#: src/ui_viewDialog.h:1323
+#, fuzzy
+msgid "Projection"
 msgstr "Hình chiếu :"
 
-#: src/translations.h:183
-msgid "Prow"
-msgstr "Mũi thuyền"
+#: src/ui_viewDialog.h:963
+msgid ""
+"QFrame {\n"
+"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
+"stop: 1 #19233c);\n"
+"\tborder: 0px;\n"
+"\tcolor : #babdc4;\n"
+"    font-family: \"DejaVu\";\n"
+"}\n"
+"\n"
+"DialogFrame {\n"
+"  border-width: 1px;\n"
+"  border-style: solid;\n"
+"  border-color: #081f25;\n"
+"}\n"
+"\n"
+"ResizeFrame {\n"
+" background-image: url(data/gui/resize.png);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"\tbackground: None;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"     border: 1.5px solid #2e2e36;\n"
+"     border-radius: 10px;\n"
+"     padding: 0 8px;\n"
+"     background: white;\n"
+"     selection-background-color: darkgray;\n"
+" }\n"
+"\n"
+"QPushButton {\n"
+"  border: 1.5px solid #2e2e36;\n"
+"  border-radius: 10px;\n"
+"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+" border: 1px solid #2e2e36;\n"
+" background: #4a4b50;\n"
+" width: 15px;\n"
+"         margin: 22px 0px 22px 0px;\n"
+"     }\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    border: 2px solid #4a4b50;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
+"\tborder-radius: 4px;\n"
+"\tmin-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: bottom;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: top;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
+"         border: 2px solid grey;\n"
+"         width: 3px;\n"
+"         height: 3px;\n"
+"         background: white;\n"
+" }\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"         background: none;\n"
+" }\n"
+"\n"
+"QGroupBox {\n"
+"     border: 1px solid #1f2f25;\n"
+"     border-radius: 4px;\n"
+"     margin-top: 1ex;\n"
+"     font-weight: bold;\n"
+"     background: solid #223B34;\n"
+" }\n"
+"\n"
+"QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     padding: 0px 3px;\n"
+"     color : #babdc4;\n"
+"\t left: 15px\n"
+" }\n"
+"\n"
+"\n"
+"QTabWidget::pane {\n"
+"   border-top: 2px solid #348483;\n"
+"}\n"
+"\n"
+"     /* Style the tab using the tab sub-control. Note that\n"
+"         it reads QTabBar _not_ QTabWidget */\n"
+"     QTabBar::tab {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#2a3b50, stop: 1 #19233c);\n"
+"         border: 2px solid #348483;\n"
+"         border-bottom-color: #348483; /* same as the pane color */\n"
+"         border-top-left-radius: 4px;\n"
+"         border-top-right-radius: 4px;\n"
+"         min-width: 10ex;\n"
+"         padding: 2px;\n"
+"         color: #babdc4;\n"
+"         font-weight : bold;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#19233c, stop: 1 #2a3b50);\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected {\n"
+"         border-color: #A2A78B;\n"
+"         border-bottom-color: #2a3b50; /* same as pane color */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:!selected {\n"
+"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
+"     }\n"
+"\n"
+"     /* make use of negative margins for overlapping tabs */\n"
+"     QTabBar::tab:selected {\n"
+"         /* expand/overlap to the left and right by 4px */\n"
+"         margin-left: -4px;\n"
+"         margin-right: -4px;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:first:selected {\n"
+"         margin-left: 0; /* the first selected tab has nothing to overlap "
+"with on the left */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:last:selected {\n"
+"         margin-right: 0; /* the last selected tab has nothing to overlap "
+"with on the right */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:only-one {\n"
+"         margin: 0; /* if there is only one tab, we don't want overlapping "
+"margins */\n"
+"     }\n"
+"\n"
+"QListWidget {\n"
+" \tbackground: solid #121324;\n"
+"\tborder: 1px;\n"
+"    border-radius: 4px;\n"
+"    border-color: #081f25;\n"
+"    border-style: solid;\n"
+"  selection-background-color: #2a3b50;\n"
+"}\n"
+"\n"
+"QCheckBox\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QCheckBox::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  background-color: #225555;\n"
+"}\n"
+"QCheckBox::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
+"}\n"
+"\n"
+"QRadioButton\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QRadioButton::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  margin-left: 4px;\n"
+"}\n"
+"QRadioButton::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-checked.png);\n"
+"}\n"
+"QRadioButton::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
+"border */\n"
+"     border-image: url(:/images/spinup.png) 1;\n"
+"     border-width: 1px;\n"
+"\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:hover {\n"
+"     border-image: url(:/images/spinup_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:pressed {\n"
+"     border-image: url(:/images/spinup_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/images/up_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
+"value is max */\n"
+"    image: url(:/images/up_arrow_disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: bottom right; /* position at bottom right corner "
+"*/\n"
+"\n"
+"     width: 16px;\n"
+"     border-image: url(:/images/spindown.png) 1;\n"
+"     border-width: 1px;\n"
+"     border-top-width: 0;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:hover {\n"
+"     border-image: url(:/images/spindown_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:pressed {\n"
+"     border-image: url(:/images/spindown_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/images/down_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow:disabled,\n"
+" QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"    image: url(:/images/down_arrow_disabled.png);\n"
+" }\n"
+"\n"
+"QDoubleSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+msgstr ""
 
-#: src/translations.h:153
-msgid "Puppis"
-msgstr "Đuôi Tàu Argo"
+#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
+#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
+msgid ""
+"QToolButton {\n"
+"color: white;\n"
+"font-weight: bold;\n"
+"background: None;\n"
+"border: 1px solid #2e2e36;\n"
+"  border-radius: 2px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"color: darkgray;\n"
+"}"
+msgstr ""
 
-#: src/translations.h:244
-msgid "Purple Palace"
-msgstr "Cung điện tím"
+#: src/ui_dateTimeDialogGui.h:125
+msgid ""
+"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
+"solid\n"
+"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
+"darkgray; }"
+msgstr ""
 
-#: src/translations.h:88
-msgid "Pyxis"
-msgstr "La Bàn"
-
-#: src/deprecated/stel_ui.cpp:702
-msgid "Quit [CMD + Q]"
-msgstr "Thoát [CMD + Q]"
-
-#: src/deprecated/stel_ui.cpp:700
-msgid "Quit [CTRL + Q]"
-msgstr "Thoát [CTRL + Q]"
-
-#: src/modules/Nebula.cpp:100 src/modules/Planet.cpp:118
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:238 src/modules/Telescope.cpp:240
+#: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "Xích kinh/Xích vĩ: "
-
-#: src/translations.h:312
-msgid "Rabbit Tracks"
-msgstr ""
-
-#: src/translations.h:340
-msgid "Race Track"
-msgstr ""
-
-#: src/translations.h:222
-msgid "Ramparts"
-msgstr "Thành lũy"
-
-#: src/deprecated/stel_ui.cpp:721
-msgid "Real Time Speed [K]"
-msgstr "Tốc độ thời gian thực [K]"
-
-#: src/deprecated/stel_ui.cpp:1045
-msgid "Recording commands to script file:\n"
-msgstr "Ghi các lệnh vào file kịch bản:\n"
-
-#: src/deprecated/stel_ui_conf.cpp:539
-msgid "Rendering"
-msgstr "Hiển thị"
-
-#: src/translations.h:154
-msgid "Reticulum"
-msgstr "Lưới Đo Góc"
-
-#: src/deprecated/stel_ui.cpp:725
-msgid "Return to Current Time [8]"
-msgstr ""
-
-#: src/translations.h:307
-msgid "Revolving Female"
-msgstr ""
-
-#: src/translations.h:306
-msgid "Revolving Male"
-msgstr ""
 
 #: src/translations.h:51
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/translations.h:276
-msgid "Right Flag"
-msgstr "Cờ phải"
-
-#: src/translations.h:216
-msgid "River Turtle"
-msgstr "Rùa sông"
-
-#: src/translations.h:229
-msgid "Rolled Tongue"
-msgstr "Lưỡi cuốn"
-
-#: src/translations.h:258
-msgid "Rooftop"
-msgstr "Vòm trần"
-
-#: src/translations.h:271
-msgid "Room"
-msgstr "Phòng"
-
-#: src/translations.h:221
-msgid "Root"
-msgstr "Gốc"
-
-#: src/translations.h:262
-msgid "Rotten Gourd"
-msgstr "Quả bầu hư"
-
-#: src/translations.h:332
-msgid "Runners"
-msgstr ""
-
-#: src/deprecated/s_gui.cpp:2687 src/translations.h:64
+#: src/translations.h:64
 msgid "S"
 msgstr "N"
-
-#: src/translations.h:114
-msgid "Sagitta"
-msgstr "Mũi Tên"
-
-#: src/translations.h:155
-msgid "Sagittarius"
-msgstr "Nhân Mã Cung Thủ"
-
-#: src/translations.h:175
-msgid "Sah"
-msgstr "Sah"
-
-#: src/translations.h:345
-msgid "Salamander"
-msgstr ""
 
 #: src/translations.h:46
 msgid "Saturn"
 msgstr "Thổ tinh"
 
-#: src/deprecated/stel_ui_tuiconf.cpp:463
-msgid "Save Current Configuration as Default: "
-msgstr "Lưu cấu hình hiện tại thành mặc định: "
-
-#: src/deprecated/stel_ui_conf.cpp:258 src/deprecated/stel_ui_conf.cpp:418
-#: src/deprecated/stel_ui_conf.cpp:469 src/deprecated/stel_ui_conf.cpp:527
-msgid "Save as default"
-msgstr "Lưu vào mặc định"
-
-#: src/deprecated/stel_ui_conf.cpp:356
-msgid "Save location"
+#: src/ui_viewDialog.h:1265
+#, fuzzy
+msgid "Scale Moon"
 msgstr "Lưu địa điểm"
 
-#: src/deprecated/stel_ui_conf.cpp:408
-msgid "Saving settings will save current full screen status"
-msgstr ""
+#: src/ui_viewDialog.h:1257
+#, fuzzy
+msgid "Scale:"
+msgstr "Tỉ lệ thật mặt trăng"
 
-#: src/translations.h:156
-msgid "Scorpius"
-msgstr "Bò Cạp"
-
-#: src/translations.h:232
-msgid "Screen"
-msgstr "Màn hình"
-
-#: src/deprecated/stel_ui.cpp:574 src/deprecated/stel_ui.cpp:707
-msgid "Script commander"
-msgstr "Bộ soạn kịch bản"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:384
-msgid "Scripts "
-msgstr "Kịch bản "
-
-#: src/translations.h:82
-msgid "Sculptor"
-msgstr "Nhà Điêu Khắc"
-
-#: src/translations.h:87 src/translations.h:157
-msgid "Scutum"
-msgstr "Cái Khiên"
-
-#: src/deprecated/stel_ui_conf.cpp:677
-msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Tìm kiếm (ví dụ: Saturn, Polaris, HP6218, Orion, M31)"
-
-#: src/deprecated/stel_ui.cpp:705
-msgid "Search for object [CTRL + F]"
-msgstr ""
-
-#: src/deprecated/s_gui.cpp:2756
-msgid "Seconds"
-msgstr "Giây"
-
-#: src/translations.h:177
-msgid "Sek"
-msgstr "Sek"
-
-#: src/translations.h:354
+#: src/translations.h:81
 msgid "Select and exit to run."
 msgstr "Chọn và thoát để chạy."
 
-#: src/deprecated/stel_ui_conf.cpp:326
-msgid "Selected : "
+#: src/ui_locationDialogGui.h:273
+#, fuzzy
+msgid "Selected :"
 msgstr "Được chọn : "
 
-#: src/deprecated/stel_ui_conf.cpp:128
-msgid "Selected Constellation Only"
-msgstr "Chỉ hiện thị chòm sao được chọn"
-
-#: src/translations.h:182
-msgid "Selkis"
-msgstr "Selkis (1 vị nữ thần Ai Cập)"
-
-#: src/translations.h:158
-msgid "Serpens"
-msgstr "Con Rắn"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:378
-msgid "Set Location "
-msgstr "Thiết lập địa điểm "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:379
-msgid "Set Time "
-msgstr "Thiết lập thời gian "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:397
-msgid "Set Time Zone: "
-msgstr "Thiết lập múi thời gian: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:466
-msgid "Set UI Locale: "
-msgstr "Thiết lập nơi xảy ra UI "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:452
-msgid "Setting Landscape Sets Location: "
+#: src/ui_viewDialog.h:1270
+msgid "Short labels"
 msgstr ""
 
-#: src/deprecated/stel_ui_conf.cpp:458
-msgid "Setting landscape updates the location"
+#: src/ui_viewDialog.h:1274
+msgid "Shouting Stars"
 msgstr ""
 
-#: src/translations.h:226
-msgid "Seven Excellencies"
-msgstr "Thất nương"
-
-#: src/translations.h:343
-msgid "Seven Little Girls"
-msgstr "Bảy cô gái"
-
-#: src/translations.h:159
-msgid "Sextans"
-msgstr "Kính Lục Phân"
-
-#: src/translations.h:197
-msgid "Sheep"
-msgstr "Con cừu"
-
-#: src/translations.h:185
-msgid "Sheepfold"
-msgstr "Bãi rào cừu"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-msgid "Show: "
+#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1273
+#, fuzzy
+msgid "Show"
 msgstr "Xem: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:464
-msgid "Shut Down: "
-msgstr "Tắt: "
+#: src/ui_viewDialog.h:1321
+#, fuzzy
+msgid "Show art"
+msgstr "Xem: "
 
-#: src/deprecated/stel_ui_tuiconf.cpp:400
-msgid "Sidereal"
+#: src/ui_viewDialog.h:1296
+#, fuzzy
+msgid "Show atmosphere"
+msgstr "Khí quyển"
+
+#: src/ui_viewDialog.h:1318
+msgid "Show boundaries"
 msgstr ""
 
-#: src/modules/Nebula.cpp:110
+#: src/ui_viewDialog.h:1295
+#, fuzzy
+msgid "Show fog"
+msgstr "Xem: "
+
+#: src/ui_viewDialog.h:1294
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1320
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1319
+#, fuzzy
+msgid "Show lines"
+msgstr "Xem: "
+
+#: src/ui_viewDialog.h:1263
+msgid "Show marker"
+msgstr ""
+
+#: src/ui_viewDialog.h:1264
+msgid "Show orbits"
+msgstr ""
+
+#: src/ui_viewDialog.h:1266
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/modules/Nebula.cpp:101
 msgid "Size: "
 msgstr "Kích thuớc: "
 
-#: src/deprecated/stel_ui_conf.cpp:513 src/deprecated/stel_ui_tuiconf.cpp:411
-msgid "Sky Culture: "
-msgstr "Chòm sao theo : "
+#: src/ui_viewDialog.h:1291
+#, fuzzy
+msgid "Sky"
+msgstr "Sek"
 
-#: src/deprecated/stel_ui_conf.cpp:495 src/deprecated/stel_ui_tuiconf.cpp:415
-msgid "Sky Language: "
-msgstr "Ngôn ngữ cho bầu trời: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:402
-msgid "Sky Time At Start-up: "
-msgstr "Thời gian bầu trời lúc bắt đầu: "
-
-#: src/deprecated/stel_ui_tuiconf.cpp:396
-msgid "Sky Time: "
-msgstr "Thời gian bầu trời: "
-
-#: src/translations.h:337
-msgid "Snake"
+#: src/ui_viewDialog.h:1308
+msgid "Sky Marking"
 msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:391
-msgid "Solar System Body: "
-msgstr "Những vật thể thuộc hệ mặt trời: "
 
 #: src/translations.h:60
 msgid "Solar System Observer"
 msgstr "Người quan sát hệ mặt trời"
 
-#: src/translations.h:233
-msgid "Soldiers Market"
-msgstr "Chợ quân nhân"
-
-#: src/translations.h:238
-msgid "South River"
-msgstr "Sông Nam"
-
-#: src/translations.h:275
-msgid "Spear"
-msgstr "Cây giáo"
-
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
+#: src/modules/StarWrapper.cpp:131 src/modules/StarWrapper.cpp:173
 msgid "Spectral Type: "
 msgstr "Dạng phổ: "
 
-#: src/translations.h:272
-msgid "Spring"
-msgstr "Mùa xuân"
-
-#: src/translations.h:234
-msgid "Square Granary"
-msgstr "Kho thóc vuông"
-
-#: src/translations.h:284
-msgid "Star"
+#: src/ui_viewDialog.h:1340
+#, fuzzy
+msgid "Starlore"
 msgstr "Ngôi sao"
 
-#: src/deprecated/stel_ui_conf.cpp:85
-msgid "Star Names. Up to mag :"
-msgstr "Hiện tên ngôi sao sáng đến :"
-
-#: src/deprecated/stel_ui_conf.cpp:97
-msgid "Star Twinkle. Amount :"
-msgstr "Số lượng sao nhấp nháy :"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:419
-msgid "Star Value Multiplier: "
-msgstr ""
-
-#: src/deprecated/stel_ui_conf.cpp:80
+#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
 msgid "Stars"
 msgstr "Các vì sao"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:381
-msgid "Stars "
-msgstr "Các vì sao "
-
-#: src/translations.h:198
-msgid "Stars of Water"
-msgstr "Những ngôi sao của nước"
-
-#: src/translations.h:217
-msgid "Stomach"
-msgstr "Dạ dày"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Mặt trời"
 
-#: src/translations.h:248
-msgid "Supreme Palace"
-msgstr "Cung điện tối cao"
-
-#: src/translations.h:206
-msgid "Tail"
-msgstr "Đuôi"
-
-#: src/translations.h:161
-msgid "Taurus"
-msgstr "Kim Ngưu"
-
-#: src/translations.h:162
-msgid "Telescopium"
-msgstr "Kính Viễn Vọng"
-
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "Tethys"
-
-#: src/translations.h:321
-msgid "The Asar Battlefield"
-msgstr ""
-
-#: src/translations.h:318
-msgid "The Fishermen"
-msgstr ""
-
-#: src/translations.h:297
-msgid "The Seven"
-msgstr "Số Bảy"
-
-#: src/translations.h:235
-msgid "Three Stars"
-msgstr "3 ngôi sao"
-
-#: src/translations.h:210
-msgid "Three Steps"
-msgstr "Ba bước"
-
-#: src/translations.h:264
-msgid "Thunder and Lightning"
-msgstr "Sấm sét"
-
-#: src/translations.h:347
-msgid "Thunderbird"
-msgstr ""
-
-#: src/translations.h:259
-msgid "Thunderbolt"
-msgstr "Tiếng sét"
-
-#: src/deprecated/stel_ui.cpp:796
-msgid ""
-"Time & Date:\n"
-"6   : Time rate pause           7   : Time rate 0\n"
-"8   : Set current time          J   : Decrease time rate\n"
-"K   : Normal time rate          L   : Increase time rate\n"
-"- and = :  Back and forward one day (press ALT for sidereal day)\n"
-"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-"CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-"\n"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:405
-msgid "Time Display Format: "
-msgstr "Dạng thời gian hiển thị: "
-
-#: src/deprecated/stel_ui_conf.cpp:279
-msgid "Time Zone :"
-msgstr "Múi thời gian :"
-
-#: src/deprecated/stel_ui_conf.cpp:292
-msgid "Time speed : "
-msgstr "Tốc độ thời gian trôi : "
 
 #: src/translations.h:52
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:231
-msgid "Toilet"
-msgstr "Nhà vệ sinh"
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
 
-#: src/translations.h:178
-msgid "Triangle"
+#: src/ui_viewDialog.h:1258
+#, fuzzy
+msgid "Twinkle"
 msgstr "Tam giác"
 
-#: src/translations.h:164
-msgid "Triangulum"
-msgstr "Tam Giác"
-
-#: src/translations.h:165
-msgid "Triangulum Australe"
-msgstr "Tam Giác Phương Nam"
-
-#: src/translations.h:287
-msgid "Tripod"
-msgstr "Kiềng ba chân"
-
-#: src/translations.h:163
-msgid "Tucana"
-msgstr "Chim Tu-Căng"
-
-#: src/translations.h:346
-msgid "Turtle"
-msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:421
-msgid "Twinkling: "
-msgstr "Nhấp nháy: "
-
-#: src/translations.h:174
-msgid "Two Jaws"
-msgstr "Hai hàm"
-
-#: src/translations.h:325
-msgid "Two Placed Far Apart"
-msgstr ""
-
-#: src/translations.h:172
-msgid "Two Poles"
-msgstr "Hai cực"
-
-#: src/translations.h:324
-msgid "Two Sunbeams"
-msgstr ""
-
-#: src/translations.h:330
-msgid "Two in Front"
-msgstr ""
-
-#: src/modules/Nebula.cpp:108
+#: src/modules/Nebula.cpp:99
 msgid "Type: "
 msgstr "Loại: "
 
-#: src/translations.h:355
+#: src/translations.h:82
 msgid "USB Script: "
 msgstr ""
-
-#: src/deprecated/stel_ui_tuiconf.cpp:465
-msgid "Update me via Internet: "
-msgstr "Cập nhật qua Internet: "
 
 #: src/translations.h:57
 msgid "Uranus"
 msgstr "Thiên vương tinh"
 
-#: src/translations.h:119
-msgid "Ursa Major"
-msgstr "Đại Hùng"
-
-#: src/translations.h:148
-msgid "Ursa Minor"
-msgstr "Tiểu Hùng"
-
-#: src/deprecated/stel_ui_conf.cpp:300
-msgid ""
-"Use key J and L to decrease and increase\n"
-"   time speed.\n"
-"Use key K to return to real time speed."
+#: src/ui_viewDialog.h:1339
+msgid "Use associated language for sky labeling"
 msgstr ""
-"Sử dụng phím J và L để giảm hoặc tăng\n"
-"   tốc độ thời gian trôi.\n"
-"Sử dụng phím K để chỉnh tốc độ thời gian trôi bình thường."
 
-#: src/deprecated/stel_ui_conf.cpp:283
-msgid "Using System Default Time Zone"
-msgstr "Sử dụng hệ thống múi thời gian mặc định"
+#: src/ui_viewDialog.h:1305
+msgid "Use associated planet and position"
+msgstr ""
 
-#: src/translations.h:168
-msgid "Vela"
-msgstr "Buồm Tàu Argo"
+#: src/ui_locationDialogGui.h:267
+msgid ""
+"Use the mouse wheel to zoom on the map.\n"
+"Click and drag the mouse to move the screen"
+msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "Kim tinh"
 
-#: src/deprecated/stel_ui_conf.cpp:538
-msgid "Video"
+#: src/ui_viewDialog.h:1241
+#, fuzzy
+msgid "View"
 msgstr "Video"
 
-#: src/deprecated/stel_ui_conf.cpp:403
-msgid "Viewport Distorter"
-msgstr ""
-
-#: src/translations.h:167
-msgid "Virgo"
-msgstr "Trinh Nữ"
-
-#: src/translations.h:296
-msgid "Voice of Joy"
-msgstr "Âm thanh vui mừng"
-
-#: src/translations.h:152
-msgid "Volans"
-msgstr "Cá Chuồn"
-
-#: src/translations.h:147
-msgid "Vulpecula"
-msgstr "Con Cáo"
-
-#: src/deprecated/s_gui.cpp:2692 src/translations.h:66
+#: src/translations.h:66
 msgid "W"
 msgstr "T"
 
-#: src/translations.h:219
-msgid "Wall"
-msgstr "Bức tường"
-
-#: src/translations.h:196
-msgid "Waty Bekety"
-msgstr "Waty Bekety"
-
-#: src/translations.h:267
-msgid "Weaving Girl"
-msgstr "Cô gái dệt"
-
-#: src/translations.h:237
-msgid "Well"
-msgstr "Giếng"
-
-#: src/translations.h:77
+#: src/translations.h:77 src/ui_viewDialog.h:1335
 msgid "Western"
 msgstr "Phương Tây"
 
-#: src/translations.h:281
-msgid "Western Door"
-msgstr "Cửa Tây"
-
-#: src/translations.h:213
-msgid "Willow"
-msgstr "Cây liễu"
-
-#: src/translations.h:204
-msgid "Wings"
-msgstr "Cánh"
-
-#: src/translations.h:207
-msgid "Winnowing Basket"
-msgstr "Giỏ lọc"
-
-#: src/translations.h:317
-msgid "Wolf's Mouth"
+#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
+#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
+#: src/ui_viewDialog.h:1253
+msgid "X"
 msgstr ""
 
-#: src/translations.h:280
-msgid "Woman's Bed"
-msgstr "Giường phụ nữ"
-
-#: src/translations.h:319
-msgid "Woman's Cart"
+#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
 msgstr ""
 
-#: src/translations.h:286
-msgid "Xuanyuan"
-msgstr "Xuanyuan"
-
-#: src/deprecated/s_gui.cpp:2741
-msgid "Year"
-msgstr "Năm"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:418
-#: src/deprecated/stel_ui_tuiconf.cpp:445
-#: src/deprecated/stel_ui_tuiconf.cpp:452 src/deprecated/s_gui.cpp:2240
-msgid "Yes"
-msgstr "Đúng"
-
-#: src/translations.h:289
-msgid "Zaofu"
-msgstr "Zaofu"
-
-#: src/deprecated/stel_ui_tuiconf.cpp:450
-msgid "Zoom Duration: "
-msgstr "Khoảng thời gian phóng to/thu nhỏ: "
-
-#: src/deprecated/stel_ui_conf.cpp:353
-msgid "m"
+#: src/ui_viewDialog.h:1259
+msgid "amount:"
 msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:128
+msgid "explain"
+msgstr ""
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "    and comments to us at: http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Xin vui lòng kiểm tra phiên bản mới hơn và gởi thông báo lỗi\n"
+#~ "    và đóng góp ý kiến cho chúng tôi tại: http://www.stellarium.org\n"
+#~ "\n"
 
 #~ msgid " (Variable)"
 #~ msgstr " Biến quang"
@@ -2050,8 +928,254 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: (Các) đối số trong dòng lệnh sai\n"
 
+#~ msgid ": Exceptional Leonid rate"
+#~ msgstr ": Mật độ mưa sao băng Leonid khác thường"
+
+#~ msgid ": Highest rate ever (1966 Leonids)"
+#~ msgstr ": Mật độ cao nhất đã từng có (mưa sao băng Leonids 1966)"
+
+#~ msgid ": Standard Perseids rate"
+#~ msgstr ": Tốc độ mưa sao băng Perseids"
+
+#~ msgid "Actual Time"
+#~ msgstr "Thời gian thực"
+
+#~ msgid "Administration "
+#~ msgstr "Quản trị "
+
+#~ msgid "Also display Nebulas without textures"
+#~ msgstr "Cũng hiển thị những đám tinh vân không có hình chụp"
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Độ cao (mét): "
+
+#~ msgid "Altitude : "
+#~ msgstr "Độ cao : "
+
+#~ msgid "Andromeda"
+#~ msgstr "Tiên Nữ"
+
+#~ msgid "Antlia"
+#~ msgstr "Máy Bơm Không Khí"
+
+#~ msgid "Apus"
+#~ msgstr "Chim Thiên Đường"
+
+#~ msgid "Aquarius"
+#~ msgstr "Bảo Bình"
+
+#~ msgid "Aquila"
+#~ msgstr "Thiên Ưng"
+
+#~ msgid "Ara"
+#~ msgstr "Đàn Tế Thần"
+
+#~ msgid "Aries"
+#~ msgstr "Bạch Dương"
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Nhấn phím mủi tên xuống để tải danh sách."
+
+#~ msgid "Arsenal"
+#~ msgstr "Kho chứa vũ khí"
+
+#~ msgid "Atmosphere [A]"
+#~ msgstr "Bầu khí quyển [A]"
+
+#~ msgid "Auriga"
+#~ msgstr "Ngự Phu"
+
+#~ msgid "Author: "
+#~ msgstr "Tác giả: "
+
+#~ msgid "Azimuthal Grid [Z]"
+#~ msgstr "Lưới phương vị [Z]"
+
+#~ msgid "Bailer"
+#~ msgstr "Gàu tát nước"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Ngọn cờ ba sao"
+
+#~ msgid "Bird"
+#~ msgstr "Chim"
+
+#~ msgid "Boat"
+#~ msgstr "Thuyền"
+
+#~ msgid "Bond"
+#~ msgstr "Liên kết"
+
+#~ msgid "Bootes"
+#~ msgstr "Mục Phu"
+
+#~ msgid "Bow and Arrow"
+#~ msgstr "Cung và tên"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Chân Trước Con Bò"
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Kịch bản cho CD/DVD: "
+
+#~ msgid "CMD + Q : Quit\n"
+#~ msgstr "CMD + Q : Thoát\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL + Q : Thoát\n"
+
+#~ msgid "Caelum"
+#~ msgstr "Cái Đục"
+
+#~ msgid "Camelopardalis"
+#~ msgstr "Hươu Cao Cổ"
+
+#~ msgid "Cancel"
+#~ msgstr "Hủy bỏ"
+
+#~ msgid "Cancer"
+#~ msgstr "Con Cua"
+
+#~ msgid "Canes Venatici"
+#~ msgstr "Chó Săn"
+
+#~ msgid "Canis Major"
+#~ msgstr "Đại Khuyển"
+
+#~ msgid "Canis Minor"
+#~ msgstr "Đại Khuyển"
+
+#~ msgid "Capricornus"
+#~ msgstr "Dê Biển"
+
+#~ msgid "Cardinal Points [Q]"
+#~ msgstr "Điểm phương hướng [Q]"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Cared for by Moon"
+
+#~ msgid "Cassiopeia"
+#~ msgstr "Thiên Hậu"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Cái nôi mèo"
+
+#~ msgid "Centaurus"
+#~ msgstr "Nhân Mã"
+
+#~ msgid "Cepheus"
+#~ msgstr "Thiên Vương"
+
+#~ msgid "Cetus"
+#~ msgstr "Kình Ngư"
+
+#~ msgid "Chamaeleon"
+#~ msgstr "Tắc Kè"
+
+#~ msgid "Chariot"
+#~ msgstr "Xe ngựa"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Bãi rào xe ngựa"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Choose landscapes:"
+#~ msgstr "Chọn phong cảnh :"
+
+#~ msgid "Circinus"
+#~ msgstr "Compa"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Vựa lúa tròn"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Cuộn da"
+
+#~ msgid "Colors "
+#~ msgstr "Màu sắc "
+
+#~ msgid "Columba"
+#~ msgstr "Bồ Câu"
+
+#~ msgid "Coma Berenices"
+#~ msgstr "Tóc Bà Berenices"
+
+#~ msgid "Command recording stopped."
+#~ msgstr "Dừng việc ghi lệnh."
+
+#~ msgid "Configuration"
+#~ msgstr "Cấu hình"
+
 #~ msgid "Configuration window"
 #~ msgstr "Thiết lập thông số"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Độ đậm hình vẽ chòm sao"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Ranh giới các chòm sao"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Tên các chòm sao"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Hình vẽ các chòm sao [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Ranh giới các chòm sao"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Đường nối các chòm sao"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Tên các chòm sao"
+
+#~ msgid "Corona Australis"
+#~ msgstr "Nam Miện"
+
+#~ msgid "Corona Borealis"
+#~ msgstr "Bắc Miện"
+
+#~ msgid "Corvus"
+#~ msgstr "Con Quạ"
+
+#~ msgid "Crater"
+#~ msgstr "Cái Ly"
+
+#~ msgid "Crocodile"
+#~ msgstr "Cá sấu"
+
+#~ msgid "Crux"
+#~ msgstr "Thập Tự Phương Nam"
+
+#~ msgid "Current Time :"
+#~ msgstr "Thời gian hiện tại :"
+
+#~ msgid "Current Time Speed is x"
+#~ msgstr "Tốc độ trôi thời gian hiện tại là x"
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Thời gian dấu con chuột: "
+
+#~ msgid "Curved Array"
+#~ msgstr "Mảng cong"
+
+#~ msgid "Cygnus"
+#~ msgstr "Thiên Nga"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Dạng ngày hiển thị: "
+
+#~ msgid "Day"
+#~ msgstr "Ngày"
+
+#~ msgid "Decrease Time Speed [J]"
+#~ msgstr "Giảm tốc độ trôi thời gian [J]"
+
+#~ msgid "Delphinus"
+#~ msgstr "Cá Heo"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -2069,6 +1193,12 @@ msgstr ""
 #~ "CTRL + R : Bật tắt chế độ ghi kịch bản\n"
 #~ "CTRL + F : Bật tắt chức năng tìm kiếm vật thể\n"
 #~ "\n"
+
+#~ msgid "Dipper"
+#~ msgstr "Cái gàu"
+
+#~ msgid "Disk Viewport"
+#~ msgstr "Tầm nhìn dạng đĩa"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -2097,39 +1227,709 @@ msgstr ""
 #~ "4 , : Đường elip 5 . : Đường xích đạo\n"
 #~ "\n"
 
+#~ msgid "Dog"
+#~ msgstr "Con chó"
+
+#~ msgid "Dolphin"
+#~ msgstr "Cá heo"
+
+#~ msgid "Dorado"
+#~ msgstr "Cá Kiếm"
+
+#~ msgid "Draco"
+#~ msgstr "Thiên Long"
+
+#~ msgid "Drawing of the Constellations [C]"
+#~ msgstr "Đường nối trong chòm sao [C]"
+
+#~ msgid "Drum"
+#~ msgstr "Trống"
+
+#~ msgid "Drumstick"
+#~ msgstr "Dùi trống"
+
+#~ msgid ""
+#~ "During Script Playback:\n"
+#~ "CTRL + C : End Script\n"
+#~ "6   : pause script              K   : resume script\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Trong suốt quá trình trình chiếu kịch bản\n"
+#~ "CTRL + C : Kết thúc kịch bản\n"
+#~ "6 : dừng kịch bản K : trở lại kịch bản\n"
+#~ "\n"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Đền của vị thần trái đất"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Cửa Đông"
+
+#~ msgid "Effects "
+#~ msgstr "Hiệu ứng "
+
+#~ msgid "Encampment"
+#~ msgstr "Trại giam"
+
+#~ msgid "Enter observatory name"
+#~ msgstr "Nhập vào tên nơi quan sát"
+
+#~ msgid "Equatorial Grid [E]"
+#~ msgstr "Lưới xích đạo [E]"
+
+#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
+#~ msgstr "Quay theo Equatorial/Altazimuthal [ENTER]"
+
+#~ msgid "Equuleus"
+#~ msgstr "Tiểu Mã"
+
+#~ msgid "Eridanus"
+#~ msgstr "Sông Eridanus"
+
+#~ msgid "Error: Unable to open script file to record commands."
+#~ msgstr "Lỗi: không thể mở file kịch bản để ghi lệnh."
+
+#~ msgid "Establishment"
+#~ msgstr "Sự thiết lập"
+
+#~ msgid "Extended Net"
+#~ msgstr "Mạng mở rộng"
+
+#~ msgid "Farmland"
+#~ msgstr "Đất trồng trọt"
+
+#~ msgid "Ferry Boat"
+#~ msgstr "Phà"
+
+#~ msgid "Five Chariots"
+#~ msgstr "5 cỗ xe ngựa"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Ngủ vị hoàng đế"
+
+#~ msgid "Flail"
+#~ msgstr "Cái đập lúa"
+
 #~ msgid "Flip horizontally"
 #~ msgstr "Lật theo chiều ngang"
 
 #~ msgid "Flip vertically"
 #~ msgstr "Lật theo chiều dọc"
 
+#~ msgid "Flock"
+#~ msgstr "Bầy"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Hành lang bay"
+
+#~ msgid "Fog"
+#~ msgstr "Sương mù"
+
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr ""
 #~ "Chọn những độ phân giải không được liệt kê ra ở đây bằng cách sửa file :"
 
+#~ msgid "Fornax"
+#~ msgstr "Cái Lò"
+
+#~ msgid "Four Channels"
+#~ msgstr "Tứ kênh"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Chim chiến"
+
+#~ msgid "GO"
+#~ msgstr "Bắt đầu"
+
+#~ msgid "Gemini"
+#~ msgstr "Song Tử"
+
+#~ msgid "General "
+#~ msgstr "Tổng quát "
+
+#~ msgid "Ghosts"
+#~ msgstr "Những con ma"
+
+#~ msgid "Giant"
+#~ msgstr "Khổng lồ"
+
+#~ msgid "Girl"
+#~ msgstr "Cô gái"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Quả bầu tốt"
+
+#~ msgid "Goto selected object [SPACE]"
+#~ msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
+
+#~ msgid "Great General"
+#~ msgstr "Vị tướng vĩ đại"
+
+#~ msgid "Ground"
+#~ msgstr "Mặt đất"
+
+#~ msgid "Ground [G]"
+#~ msgstr "Mặt đất [G]"
+
+#~ msgid "Grus"
+#~ msgstr "Con Sếu"
+
+#~ msgid "Heart"
+#~ msgstr "Trái tim"
+
+#~ msgid "Help [H]"
+#~ msgstr "Trợ giúp [H]"
+
+#~ msgid "Hercules"
+#~ msgstr "Dũng Sĩ Hercules"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Hà mã"
+
+#~ msgid "Hit CTRL-R again to stop.\n"
+#~ msgstr "Nhấn CTRL-R lần nữa để dừng.\n"
+
+#~ msgid "Hook"
+#~ msgstr "Cái móc"
+
+#~ msgid "Horn"
+#~ msgstr "Sừng"
+
+#~ msgid "Horologium"
+#~ msgstr "Đồ Hồ Quả Lắc"
+
+#~ msgid "Horus"
+#~ msgstr "Horus (một vì thần Ai Cập cổ đại, con trai của Isis and Osiris)"
+
+#~ msgid "Hour"
+#~ msgstr "Giờ"
+
+#~ msgid "Hydra"
+#~ msgstr "Trường Xà"
+
+#~ msgid "Hydrus"
+#~ msgstr "Rắn Nước"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Lính hoàng cung"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Hành lang hoàng cung"
+
+#~ msgid "Increase Time Speed [L]"
+#~ msgstr "Tăng tốc độ trôi thời gian [L]"
+
+#~ msgid "Indus"
+#~ msgstr "Người Da Đỏ"
+
+#~ msgid "Info: "
+#~ msgstr "Thông tin: "
+
+#~ msgid "Information"
+#~ msgstr "Thông tin"
+
+#~ msgid "Invalid Script command"
+#~ msgstr "Mã lệnh sai"
+
+#~ msgid "Jade Well"
+#~ msgstr "Giếng ngọc bích"
+
+#~ msgid "Jaw"
+#~ msgstr "Quai hàm"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Cá Khanuwy"
+
+#~ msgid "Kitchen"
+#~ msgstr "Nhà bếp"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Diều của Kawelo"
+
+#~ msgid "Lacerta"
+#~ msgstr "Thằn Lằn"
+
+#~ msgid "Lance"
+#~ msgstr "Cây thương"
+
+#~ msgid "Landscape: "
+#~ msgstr "Phong cảnh: "
+
+#~ msgid "Language"
+#~ msgstr "Ngôn ngữ"
+
+#~ msgid "Latitude: "
+#~ msgstr "Vĩ độ: "
+
+#~ msgid "Left Flag"
+#~ msgstr "Cờ trái"
+
+#~ msgid "Legs"
+#~ msgstr "Chân"
+
+#~ msgid "Leo"
+#~ msgstr "Sư Tử"
+
+#~ msgid "Leo Minor"
+#~ msgstr "Tiểu Khuyển"
+
+#~ msgid "Lepus"
+#~ msgstr "Con Thỏ"
+
+#~ msgid "Libra"
+#~ msgstr "Thiên Bình"
+
+#~ msgid "Lion"
+#~ msgstr "Sư tử"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Nạp cấu hình mặc định: "
+
 #~ msgid "Loading Hipparcos catalog:"
 #~ msgstr "Đang tải bảng danh mục Hipparcos:"
+
+#~ msgid "Loading Nebula Textures:"
+#~ msgstr "Đang tải kết cấu các tinh vân:"
+
+#~ msgid "Local Script: "
+#~ msgstr "Kịch bản cục bộ: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Kinh độ: "
+
+#~ msgid "Lupus"
+#~ msgstr "Chó Sói"
+
+#~ msgid "Lynx"
+#~ msgstr "Mèo Rừng"
+
+#~ msgid "Lyra"
+#~ msgstr "Thiên Cầm"
+
+#~ msgid "Magnitude"
+#~ msgstr "Cường độ"
 
 #~ msgid "Magnitude Sizing Multiplier: "
 #~ msgstr "Tăng cường độ: "
 
+#~ msgid "Manual zoom: "
+#~ msgstr "Zoom thủ công: "
+
+#~ msgid "Market"
+#~ msgstr "Chợ"
+
+#~ msgid "Market Officer"
+#~ msgstr "Nhân viên thị trường"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Móc câu cá của Maui"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Lăng mộ"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Hiện tên vật thể sáng tối đa: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Hiện tên đám tinh vân có độ sáng đến: "
+
+#~ msgid "Meadows"
+#~ msgstr "Bãi cỏ"
+
+#~ msgid "Mensa"
+#~ msgstr "Núi Table"
+
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Mật độ sao băng mỗi phút"
+
+#~ msgid "Microscopium"
+#~ msgstr "Kính Hiển Vi"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Mật độ dãi Ngân Hà "
+
+#~ msgid "Minutes"
+#~ msgstr "Phút"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+#~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+#~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
+#~ msgstr ""
+#~ "Những tuỳ chọn khác:\n"
+#~ "9 : Bật tắt mật độ mưa sao băng\n"
+#~ "CTRL + 0,...,9 : Thi hành lệnh GOTO cho KTV 0,...,9\n"
+#~ "CTRL + SHIFT + H : bật tắt chức năng lật hình ngang\n"
+#~ "CTRL + SHIFT + V : bật tắt chức năng lật hình dọc\n"
+
+#~ msgid "Monoceros"
+#~ msgstr "Kỳ Lân"
+
+#~ msgid "Month"
+#~ msgstr "Tháng"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Trụ neo"
+
+#~ msgid "Mortar"
+#~ msgstr "Vữa"
+
+#~ msgid ""
+#~ "Movement & selection:\n"
+#~ "Arrow Keys       : Change viewing RA/DE\n"
+#~ "Page Up/Down     : Zoom\n"
+#~ "CTRL+Up/Down     : Zoom\n"
+#~ "Left Click       : Select object\n"
+#~ "Right Click      : Unselect\n"
+#~ "CTRL+Left Click  : Unselect\n"
+#~ "\\                : Zoom out (planet + moons if applicable)\n"
+#~ "/                : Zoom to selected object\n"
+#~ "SPACE            : Center on selected object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Di chuyển & Lựa chọn\n"
+#~ "Phím mũi tên: thay đổi Xích kinh (RA) / Xích vĩ (DE)\n"
+#~ "Page Up/Down : Phóng lớn/nhỏ\n"
+#~ "CTRL+Up/Down : Phóng lớn/nhỏ\n"
+#~ "Click chuột trái: Chọn vật thể\n"
+#~ "Click chuột phải: Bỏ chọn\n"
+#~ "CTRL+ Click trái: Bỏ chọn\n"
+#~ "\\ : Thu nhỏ lại (hành tinh + các mặt trăng nếu phù hợp)\n"
+#~ "/ : Phóng to vật thể được chọn\n"
+#~ "SPACE: Đưa vật thể được chọn vào giữa màn hình\n"
+#~ "\n"
+
+#~ msgid "Musca"
+#~ msgstr "Con Ruồi"
+
+#~ msgid "Names of the Constellations [V]"
+#~ msgstr "Tên các chòm sao [V]"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Tam giác hàng hải"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Vòng bao tinh vân"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Tên các chòm sao"
+
+#~ msgid "Nebulas Names. Up to mag :"
+#~ msgstr "Hiện tên tinh vân sáng đến :"
+
+#~ msgid "Neck"
+#~ msgstr "Cổ"
+
+#~ msgid "Net"
+#~ msgstr "Mạng"
+
+#~ msgid "Night (red) mode"
+#~ msgstr "Mode ban đêm (menu đỏ)"
+
+#~ msgid "No"
+#~ msgstr "Không"
+
+#~ msgid "Norma"
+#~ msgstr "Thước Đo Độ Bằng"
+
+#~ msgid "North River"
+#~ msgstr "Sông Bắc"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Cái gầu phương Bắc"
+
+#~ msgid "OK"
+#~ msgstr "Đồng ý"
+
+#~ msgid "Object Search"
+#~ msgstr "Tìm kiếm vật thể"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Quy luật thay đổi cỡ vật thể: "
+
+#~ msgid "Octans"
+#~ msgstr "Kính Bát Phân"
+
+#~ msgid "Ophiuchus"
+#~ msgstr "Người Cầm Rắn"
+
+#~ msgid "Orchard"
+#~ msgstr "Vườn cây ăn quả"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Hàng rào bên ngoài"
+
+#~ msgid "Ox"
+#~ msgstr "Con bò"
+
+#~ msgid "Pair of Stars"
+#~ msgstr "Hai ngôi sao"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Cổng cung điện"
+
+#~ msgid "Pavo"
+#~ msgstr "Con Công"
+
+#~ msgid "Pegasus"
+#~ msgstr "Phi Mã"
+
+#~ msgid "Perseus"
+#~ msgstr "Anh Tiên"
+
+#~ msgid "Pestle"
+#~ msgstr "Cái chày"
+
+#~ msgid "Phoenix"
+#~ msgstr "Phượng Hoàng"
+
+#~ msgid "Pictor"
+#~ msgstr "Giá Vẽ"
+
+#~ msgid "Pisces"
+#~ msgstr "Song Ngư"
+
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Nam Ngư"
+
+#~ msgid "Planet Names"
+#~ msgstr "Tên các hành tinh"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Quỹ đạo các hành tinh"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Vết các hành tinh"
+
+#~ msgid "Point"
+#~ msgstr "Điểm"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Chỉnh thời gian bầu trời: "
+
+#~ msgid "Program Language: "
+#~ msgstr "Ngôn ngữ chương trình: "
+
+#~ msgid "Prow"
+#~ msgstr "Mũi thuyền"
+
+#~ msgid "Puppis"
+#~ msgstr "Đuôi Tàu Argo"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Cung điện tím"
+
+#~ msgid "Pyxis"
+#~ msgstr "La Bàn"
+
+#~ msgid "Quit [CMD + Q]"
+#~ msgstr "Thoát [CMD + Q]"
+
+#~ msgid "Quit [CTRL + Q]"
+#~ msgstr "Thoát [CTRL + Q]"
+
+#~ msgid "Ramparts"
+#~ msgstr "Thành lũy"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Tốc độ thời gian thực [K]"
+
+#~ msgid "Recording commands to script file:\n"
+#~ msgstr "Ghi các lệnh vào file kịch bản:\n"
+
+#~ msgid "Rendering"
+#~ msgstr "Hiển thị"
 
 #~ msgid "Restart program for"
 #~ msgstr "Khởi động lại chương trình để"
 
+#~ msgid "Reticulum"
+#~ msgstr "Lưới Đo Góc"
+
 #~ msgid "Return to Current Time"
 #~ msgstr "Trở về thời điểm hiện tại"
+
+#~ msgid "Right Flag"
+#~ msgstr "Cờ phải"
+
+#~ msgid "River Turtle"
+#~ msgstr "Rùa sông"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Lưỡi cuốn"
+
+#~ msgid "Rooftop"
+#~ msgstr "Vòm trần"
+
+#~ msgid "Room"
+#~ msgstr "Phòng"
+
+#~ msgid "Root"
+#~ msgstr "Gốc"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Quả bầu hư"
+
+#~ msgid "Sagitta"
+#~ msgstr "Mũi Tên"
+
+#~ msgid "Sagittarius"
+#~ msgstr "Nhân Mã Cung Thủ"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Lưu cấu hình hiện tại thành mặc định: "
+
+#~ msgid "Save as default"
+#~ msgstr "Lưu vào mặc định"
+
+#~ msgid "Scorpius"
+#~ msgstr "Bò Cạp"
+
+#~ msgid "Screen"
+#~ msgstr "Màn hình"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Độ phân giải màn hình :"
 
+#~ msgid "Script commander"
+#~ msgstr "Bộ soạn kịch bản"
+
+#~ msgid "Scripts "
+#~ msgstr "Kịch bản "
+
+#~ msgid "Sculptor"
+#~ msgstr "Nhà Điêu Khắc"
+
+#~ msgid "Scutum"
+#~ msgstr "Cái Khiên"
+
+#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+#~ msgstr "Tìm kiếm (ví dụ: Saturn, Polaris, HP6218, Orion, M31)"
+
 #~ msgid "Search for object"
 #~ msgstr "Tìm kiếm vật thể"
 
+#~ msgid "Seconds"
+#~ msgstr "Giây"
+
+#~ msgid "Selected Constellation Only"
+#~ msgstr "Chỉ hiện thị chòm sao được chọn"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis (1 vị nữ thần Ai Cập)"
+
+#~ msgid "Set Location "
+#~ msgstr "Thiết lập địa điểm "
+
+#~ msgid "Set Time "
+#~ msgstr "Thiết lập thời gian "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Thiết lập múi thời gian: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Thiết lập nơi xảy ra UI "
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Thất nương"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Bảy cô gái"
+
+#~ msgid "Sextans"
+#~ msgstr "Kính Lục Phân"
+
+#~ msgid "Sheep"
+#~ msgstr "Con cừu"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Bãi rào cừu"
+
+#~ msgid "Shut Down: "
+#~ msgstr "Tắt: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Chòm sao theo : "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Ngôn ngữ cho bầu trời: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Thời gian bầu trời lúc bắt đầu: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Thời gian bầu trời: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Những vật thể thuộc hệ mặt trời: "
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Chợ quân nhân"
+
+#~ msgid "South River"
+#~ msgstr "Sông Nam"
+
+#~ msgid "Spear"
+#~ msgstr "Cây giáo"
+
+#~ msgid "Spring"
+#~ msgstr "Mùa xuân"
+
+#~ msgid "Square Granary"
+#~ msgstr "Kho thóc vuông"
+
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Tăng độ sáng biểu kiến sao: "
+
+#~ msgid "Star Names. Up to mag :"
+#~ msgstr "Hiện tên ngôi sao sáng đến :"
+
+#~ msgid "Star Twinkle. Amount :"
+#~ msgstr "Số lượng sao nhấp nháy :"
+
+#~ msgid "Stars "
+#~ msgstr "Các vì sao "
+
+#~ msgid "Stars of Water"
+#~ msgstr "Những ngôi sao của nước"
+
+#~ msgid "Stomach"
+#~ msgstr "Dạ dày"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Cung điện tối cao"
+
+#~ msgid "Tail"
+#~ msgstr "Đuôi"
+
+#~ msgid "Taurus"
+#~ msgstr "Kim Ngưu"
+
+#~ msgid "Telescopium"
+#~ msgstr "Kính Viễn Vọng"
+
+#~ msgid "The Seven"
+#~ msgstr "Số Bảy"
+
+#~ msgid "Three Stars"
+#~ msgstr "3 ngôi sao"
+
+#~ msgid "Three Steps"
+#~ msgstr "Ba bước"
+
+#~ msgid "Thunder and Lightning"
+#~ msgstr "Sấm sét"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Tiếng sét"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2148,8 +1948,50 @@ msgstr ""
 #~ "[ : Lùi 7 ngày ] : Tăng 7 ngày\n"
 #~ "\n"
 
+#~ msgid "Time Display Format: "
+#~ msgstr "Dạng thời gian hiển thị: "
+
+#~ msgid "Time Zone :"
+#~ msgstr "Múi thời gian :"
+
+#~ msgid "Time speed : "
+#~ msgstr "Tốc độ thời gian trôi : "
+
+#~ msgid "Toilet"
+#~ msgstr "Nhà vệ sinh"
+
+#~ msgid "Triangulum"
+#~ msgstr "Tam Giác"
+
+#~ msgid "Triangulum Australe"
+#~ msgstr "Tam Giác Phương Nam"
+
+#~ msgid "Tripod"
+#~ msgstr "Kiềng ba chân"
+
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Gõ `%s --help' để biết thêm thông tin.\n"
+
+#~ msgid "Tucana"
+#~ msgstr "Chim Tu-Căng"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Nhấp nháy: "
+
+#~ msgid "Two Jaws"
+#~ msgstr "Hai hàm"
+
+#~ msgid "Two Poles"
+#~ msgstr "Hai cực"
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Cập nhật qua Internet: "
+
+#~ msgid "Ursa Major"
+#~ msgstr "Đại Hùng"
+
+#~ msgid "Ursa Minor"
+#~ msgstr "Tiểu Hùng"
 
 #~ msgid ""
 #~ "Usage: %s [OPTION] ...\n"
@@ -2159,6 +2001,75 @@ msgstr ""
 #~ "Cách sử dụng: %s [TÙY CHỌN] ...\n"
 #~ "-v, --phiên bản Xuất thông tin về phiên bản và thoát\n"
 #~ "-h, --trợ giúp Hiển thị trợ giúp và thoát\n"
+
+#~ msgid ""
+#~ "Use key J and L to decrease and increase\n"
+#~ "   time speed.\n"
+#~ "Use key K to return to real time speed."
+#~ msgstr ""
+#~ "Sử dụng phím J và L để giảm hoặc tăng\n"
+#~ "   tốc độ thời gian trôi.\n"
+#~ "Sử dụng phím K để chỉnh tốc độ thời gian trôi bình thường."
+
+#~ msgid "Using System Default Time Zone"
+#~ msgstr "Sử dụng hệ thống múi thời gian mặc định"
+
+#~ msgid "Vela"
+#~ msgstr "Buồm Tàu Argo"
+
+#~ msgid "Virgo"
+#~ msgstr "Trinh Nữ"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Âm thanh vui mừng"
+
+#~ msgid "Volans"
+#~ msgstr "Cá Chuồn"
+
+#~ msgid "Vulpecula"
+#~ msgstr "Con Cáo"
+
+#~ msgid "Wall"
+#~ msgstr "Bức tường"
+
+#~ msgid "Waty Bekety"
+#~ msgstr "Waty Bekety"
+
+#~ msgid "Weaving Girl"
+#~ msgstr "Cô gái dệt"
+
+#~ msgid "Well"
+#~ msgstr "Giếng"
+
+#~ msgid "Western Door"
+#~ msgstr "Cửa Tây"
+
+#~ msgid "Willow"
+#~ msgstr "Cây liễu"
+
+#~ msgid "Wings"
+#~ msgstr "Cánh"
+
+#~ msgid "Winnowing Basket"
+#~ msgstr "Giỏ lọc"
+
+#~ msgid "Woman's Bed"
+#~ msgstr "Giường phụ nữ"
+
+#~ msgid "Xuanyuan"
+#~ msgstr "Xuanyuan"
+
+#~ msgid "Year"
+#~ msgstr "Năm"
+
+#~ msgid "Yes"
+#~ msgstr "Đúng"
+
+#~ msgid "Zaofu"
+#~ msgstr "Zaofu"
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Khoảng thời gian phóng to/thu nhỏ: "
 
 #~ msgid "change to apply."
 #~ msgstr "thay đổi để ghi nhận."
