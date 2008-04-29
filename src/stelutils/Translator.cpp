@@ -140,7 +140,6 @@ void Translator::reload()
 #else
 	setlocale(LC_CTYPE,"");
 #endif
-	assert(domain=="stellarium");
 	QString result = bind_textdomain_codeset(domain.toUtf8().constData(), "UTF-8");
 	assert(result=="UTF-8");
 	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
