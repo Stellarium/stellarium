@@ -19,13 +19,31 @@
 
 #include <QtGui/QApplication>
 #include <QtGui/QMessageBox>
+#include <QTranslator>
 #include "StelMainWindow.hpp"
+#include "Translator.hpp"
 #include <QGLFormat>
+
+// The GettextTranslator class provides i18n support through gettext.
+class GettextTranslator : public QTranslator
+{
+public:
+	virtual bool isEmpty() const { return false; }
+
+	virtual QString translate(const char* context,
+				  const char* sourceText,
+				  const char* comment=0) const
+	{
+		return q_(sourceText);
+	}
+};
 
 // Main stellarium procedure
 int main(int argc, char **argv)
 {	
 	QApplication app(argc, argv);
+	GettextTranslator trans;
+	app.installTranslator(&trans);
 	if (!QGLFormat::hasOpenGL())
 	{
 		QMessageBox::information(0, "Stellarium", "This system does not support OpenGL.");
