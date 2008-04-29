@@ -1,6 +1,7 @@
 src/modules/ConstellationMgr.cpp
 src/modules/StarMgr.cpp
 src/modules/Landscape.cpp
+src/modules/LandscapeMgr.cpp
 src/modules/Nebula.cpp
 src/modules/NebulaMgr.cpp
 src/modules/Planet.cpp
@@ -9,9 +10,13 @@ src/modules/StarWrapper.cpp
 src/modules/Telescope.cpp
 src/core/Observer.cpp
 src/core/StelCore.cpp
+src/core/MappingClasses.cpp
+src/core/Mapping.cpp
+src/gui/NewGui.cpp
 src/translations.h
 src/ui_dateTimeDialogGui.h
 src/ui_helpDialogGui.h
 src/ui_locationDialogGui.h
 src/ui_searchDialogGui.h
 src/ui_viewDialog.h
+src/ui_configurationDialog.h
