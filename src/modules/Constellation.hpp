@@ -142,6 +142,8 @@ private:
 	QString nameI18;
 	//! Name in english
 	QString englishName;
+	//! Name in native language
+	QString nativeName;
 	//! Abbreviation (of the latin name for western constellations)
 	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position 
