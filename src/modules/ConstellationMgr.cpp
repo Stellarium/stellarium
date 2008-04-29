@@ -562,7 +562,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+(.*)\\n");    
+	QRegExp recRx("^\\s*(\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");    
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
@@ -594,7 +594,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 			// If the constellation exists, set the English name
 			if (aster != NULL)
 			{
-				aster->englishName = recRx.capturedTexts().at(2);
+				aster->nativeName = recRx.capturedTexts().at(2);
+				aster->englishName = recRx.capturedTexts().at(3);
 				readOk++;
 			}
 			else 
