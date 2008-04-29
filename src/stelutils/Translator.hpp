@@ -78,7 +78,7 @@ public:
 	static Translator globalTranslator;
 
 	//! Get available language name in native language from passed locales directory
-	static QString getAvailableLanguagesNamesNative(const QString& localeDir);	
+	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="") const;	
 
 	//! Convert from ISO639-1 2 letters langage code to native language name
 	static QString iso639_1CodeToNativeName(const QString& languageCode);
@@ -96,7 +96,7 @@ private:
 	static void initIso639_1LanguageCodes(const QString& fileName);
 	
 	//! Get available language codes from passed locales directory
-	static QStringList getAvailableIso639_1Codes(const QString& localeDir);
+	QStringList getAvailableIso639_1Codes(const QString& localeDir="") const;
 	
 	//! Reload the current locale info so that gettext use them
 	void reload();

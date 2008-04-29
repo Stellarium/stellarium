@@ -171,28 +171,31 @@ QString Translator::nativeNameToIso639_1Code(const QString& languageName)
 }
 
 //! Get available native language names from directory tree
-QString Translator::getAvailableLanguagesNamesNative(const QString& localeDir)
+QStringList Translator::getAvailableLanguagesNamesNative(const QString& localeDir) const
 {
-	QStringList codeList = getAvailableIso639_1Codes(localeDir);
-	QString output;
+	QString tmpDir = localeDir;
+	if (tmpDir.isEmpty())
+		tmpDir = moDirectory;
+	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
+	QStringList output;
 	foreach (QString lang, codeList)
 	{
-		output+=iso639_1CodeToNativeName(lang)+"\n";
+		output+=iso639_1CodeToNativeName(lang);
 	}
-	output.chop(1);
 	return output;
 }
 
 //! Get available language codes from directory tree
-QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir)
+QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir) const
 {
+	QString locDir = localeDir;
+	if (locDir.isEmpty())
+		locDir = moDirectory;
 	struct dirent *entryp;
 	DIR *dp;
 	QStringList result;
-	
-	//qDebug() << "Reading stellarium translations in directory: " << localeDir;
 
-	if ((dp = opendir(QFile::encodeName(localeDir).constData())) == NULL)
+	if ((dp = opendir(QFile::encodeName(locDir).constData())) == NULL)
 	{
 		qWarning() << "Unable to find locale directory containing translations:" << localeDir;
 		return result;
@@ -201,7 +204,7 @@ QStringList Translator::getAvailableIso639_1Codes(const QString& localeDir)
 	while ((entryp = readdir(dp)) != NULL)
 	{
 		QString tmp = entryp->d_name;
-		QString tmpdir = localeDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
+		QString tmpdir = locDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
 		FILE* fic = fopen(QFile::encodeName(tmpdir).constData(), "r");
 		if (fic)
 		{
