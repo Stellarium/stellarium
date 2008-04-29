@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-29 01:00+0200\n"
+"POT-Creation-Date: 2008-04-30 00:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,19 @@ msgstr ""
 #: src/modules/StarMgr.cpp:253
 #, qt-format
 msgid "Loading catalog %1"
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:433
+#, qt-format
+msgid ", %1 m"
 msgstr ""
 
 #: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
@@ -92,6 +105,75 @@ msgstr ""
 
 #: src/modules/StarWrapper.cpp:131 src/modules/StarWrapper.cpp:173
 msgid "Spectral Type: "
+msgstr ""
+
+#: src/core/MappingClasses.cpp:11 src/ui_viewDialog.h:1327
+msgid "Perspective"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:16
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:133
+msgid "Stereographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:138
+msgid "This mode is similar to fish-eye projection mode."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:183
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:228
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:276 src/ui_viewDialog.h:1330
+msgid "Orthographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:281
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr ""
+
+#: src/gui/NewGui.cpp:218
+#, c-format, qt-format
+msgid ", %1m"
 msgstr ""
 
 #: src/translations.h:33
@@ -272,7 +354,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:962
+#: src/ui_viewDialog.h:962 src/ui_configurationDialog.h:137
 msgid "Form"
 msgstr ""
 
@@ -290,7 +372,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
 #: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1253 src/ui_configurationDialog.h:428
 msgid "X"
 msgstr ""
 
@@ -304,6 +386,7 @@ msgstr ""
 
 #: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
 #: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
+#: src/ui_configurationDialog.h:417
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -366,7 +449,7 @@ msgstr ""
 msgid "Completions"
 msgstr ""
 
-#: src/ui_viewDialog.h:963
+#: src/ui_viewDialog.h:963 src/ui_configurationDialog.h:138
 msgid ""
 "QFrame {\n"
 "\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
@@ -856,14 +939,6 @@ msgstr ""
 msgid "Projection"
 msgstr ""
 
-#: src/ui_viewDialog.h:1327
-msgid "Perspective"
-msgstr ""
-
-#: src/ui_viewDialog.h:1330
-msgid "Orthographic"
-msgstr ""
-
 #: src/ui_viewDialog.h:1331
 msgid "Marking"
 msgstr ""
@@ -874,4 +949,16 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1340
 msgid "Starlore"
+msgstr ""
+
+#: src/ui_configurationDialog.h:416
+msgid "Configuration"
+msgstr ""
+
+#: src/ui_configurationDialog.h:429
+msgid "Program language:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:430
+msgid "Main"
 msgstr ""
