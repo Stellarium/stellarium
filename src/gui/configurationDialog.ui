@@ -510,6 +510,9 @@ color: darkgray;
             <height>25</height>
            </rect>
           </property>
+          <property name="sizeAdjustPolicy" >
+           <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+          </property>
          </widget>
          <widget class="QLabel" name="label" >
           <property name="geometry" >
