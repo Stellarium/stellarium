@@ -28,7 +28,7 @@ class ViewDialog : public QObject
 {
 Q_OBJECT
 public:
-	ViewDialog(QObject* parent);
+	ViewDialog();
 	virtual ~ViewDialog();
 public slots:
 	void setVisible(bool);

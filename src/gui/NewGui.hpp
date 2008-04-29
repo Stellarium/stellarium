@@ -27,6 +27,7 @@
 #include "HelpDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
+#include "ConfigurationDialog.hpp"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
 
@@ -190,7 +191,8 @@ private:
 	HelpDialog helpDialog;
 	DateTimeDialog dateTimeDialog;
 	SearchDialog searchDialog;
-	ViewDialog* viewDialog;
+	ViewDialog viewDialog;
+	ConfigurationDialog configurationDialog;
 };
 
 #endif // _NEWGUI_H_

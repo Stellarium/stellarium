@@ -194,6 +194,8 @@ SET(stellarium_lib_SRCS
 	gui/ViewDialog.cpp
 	gui/SearchDialog.hpp
 	gui/SearchDialog.cpp
+	gui/ConfigurationDialog.hpp
+	gui/ConfigurationDialog.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -221,6 +223,7 @@ SET(stellarium_UIS
   gui/dateTimeDialogGui.ui
   gui/viewDialog.ui
   gui/searchDialogGui.ui
+  gui/configurationDialog.ui
   )
 QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
@@ -262,6 +265,7 @@ SET(stellarium_MOC_HDRS
 	gui/DateTimeDialog.hpp
 	gui/ViewDialog.hpp
 	gui/SearchDialog.hpp
+	gui/ConfigurationDialog.hpp
 	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )

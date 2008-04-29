@@ -857,6 +857,20 @@ QCheckBox
     <bool>false</bool>
    </property>
   </action>
+  <action name="actionShow_Configuration_Window" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Configuration Window</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+C</string>
+   </property>
+   <property name="autoRepeat" >
+    <bool>false</bool>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../../data/mainRes.qrc" />

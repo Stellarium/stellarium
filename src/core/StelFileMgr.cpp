@@ -388,9 +388,14 @@ QString StelFileMgr::getLocaleDir(void)
 	// but first, if we are in the development tree, don't rely on an 
 	// install having been done.
 	if (getInstallationDir() == ".")
+	{
 		localePath = QFileInfo("./locale");
+		if (!localePath.exists())
+			localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
+	}
 	else
 		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
+
 	
 #endif
 	if (localePath.exists())
