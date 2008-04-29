@@ -40,7 +40,7 @@
 #include <QFrame>
 #include <QFile>
 
-ViewDialog::ViewDialog(QObject* parent) : QObject(parent), dialog(NULL)
+ViewDialog::ViewDialog() : dialog(NULL)
 {
 	ui = new Ui_viewDialogForm;
 }
@@ -156,7 +156,7 @@ void ViewDialog::setVisible(bool v)
 		connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		
 		dialog->show();
-		dialog->raise();dialog->raise();
+		dialog->raise();
 		dialog->setFocus();
 	}
 	else
