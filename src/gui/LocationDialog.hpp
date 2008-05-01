@@ -34,9 +34,9 @@ public slots:
 	void setVisible(bool);
 	void close();
 	//! Called when the mapView emit the positionSelected signal
-	void selectPosition(float longitude, float latitude, QString city);
+	void selectPosition(double longitude, double latitude, QString city);
 	//! Called when the mapView emit the positionHighlighted signal
-	void highlightPosition(float longitude, float latitude, QString city);
+	void highlightPosition(double longitude, double latitude, QString city);
 	//! Called when the user direclty change the location from the spinbox
 	void spinBoxChanged();
 signals:
