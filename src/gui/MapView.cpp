@@ -120,6 +120,7 @@ CityItem::CityItem(const City* city_, MapView* v):
 	setPos(city->getLongitude(), -city->getLatitude());
 	setAcceptsHoverEvents(true);
 	setCursor(Qt::ArrowCursor);
+	setZValue(1);	// We want to assure the cities are over the map
 }
 
 QRectF CityItem::boundingRect() const
@@ -264,7 +265,7 @@ void MapView::select(const City* city)
 	justSelected = true;
 }
 
-void MapView::select(float longitude, float latitude)
+void MapView::select(double longitude, double latitude)
 {
 	// Set the pointeur to the position
 	pointeurPos = QPointF(longitude, -latitude);
