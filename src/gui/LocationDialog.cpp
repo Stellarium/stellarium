@@ -59,8 +59,8 @@ void LocationDialog::setVisible(bool v)
 		ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 
 		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
-		connect(ui->graphicsView, SIGNAL(positionSelected(float, float, QString)), this, SLOT(selectPosition(float, float, QString)));
-		connect(ui->graphicsView, SIGNAL(positionHighlighted(float, float, QString)), this, SLOT(highlightPosition(float, float, QString)));
+		connect(ui->graphicsView, SIGNAL(positionSelected(double, double, QString)), this, SLOT(selectPosition(double, double, QString)));
+		connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, QString)), this, SLOT(highlightPosition(double, double, QString)));
 		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 				
@@ -74,7 +74,7 @@ void LocationDialog::setVisible(bool v)
 	}
 }
 
-void LocationDialog::selectPosition(float longitude, float latitude, QString city)
+void LocationDialog::selectPosition(double longitude, double latitude, QString city)
 {
 	// Set the longitude
 	ui->longitudeSpinBox->setDegrees(longitude);
@@ -87,7 +87,7 @@ void LocationDialog::selectPosition(float longitude, float latitude, QString cit
 	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
 }
 
-void LocationDialog::highlightPosition(float longitude, float latitude, QString city)
+void LocationDialog::highlightPosition(double longitude, double latitude, QString city)
 {
 	ui->cursorLabel->setText(city);
 	ui->cursorLabel->update();
@@ -95,8 +95,8 @@ void LocationDialog::highlightPosition(float longitude, float latitude, QString 
 
 void LocationDialog::spinBoxChanged()
 {
-	float longitude = ui->longitudeSpinBox->valueDegrees();
-	float latitude = ui->latitudeSpinBox->valueDegrees();
+	double longitude = ui->longitudeSpinBox->valueDegrees();
+	double latitude = ui->latitudeSpinBox->valueDegrees();
 	ui->graphicsView->select(longitude, latitude);
 }
 
