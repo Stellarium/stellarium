@@ -5,13 +5,286 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>494</width>
+    <height>58</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string>QFrame {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+	border: 0px;
+	color : #babdc4;
+    font-family: "DejaVu";
+}
+
+DialogFrame {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #081f25;
+}
+
+ResizeFrame {
+ background-image: url(data/gui/resize.png);
+}
+
+QLabel {
+	background: None;
+}
+
+QLineEdit {
+     border: 1.5px solid #2e2e36;
+     border-radius: 10px;
+     padding: 0 8px;
+     background: white;
+     selection-background-color: darkgray;
+ }
+
+QPushButton {
+  border: 1.5px solid #2e2e36;
+  border-radius: 10px;
+  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+   stop: 0 #f6f7fa, stop: 1 #dadbde);
+}
+
+QPushButton:pressed {
+ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+   stop: 0 #babbde, stop: 1 #d6d7fa);
+}
+
+QScrollBar:vertical {
+ border: 1px solid #2e2e36;
+ background: #4a4b50;
+ width: 15px;
+         margin: 22px 0px 22px 0px;
+     }
+
+QScrollBar::handle:vertical {
+    border: 2px solid #4a4b50;
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+   stop: 0 #c6c7ca, stop: 1 #aaabae);
+	border-radius: 4px;
+	min-height: 20px;
+}
+
+QScrollBar::add-line:vertical {
+         border: 3px solid #2e2e36;
+         background: #36375c;
+         height: 20px;
+         border-radius: 5px;
+         subcontrol-position: bottom;
+         subcontrol-origin: margin;
+ }
+
+QScrollBar::sub-line:vertical {
+         border: 3px solid #2e2e36;
+         background: #36375c;
+         height: 20px;
+         border-radius: 5px;
+         subcontrol-position: top;
+         subcontrol-origin: margin;
+ }
+
+QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
+         border: 2px solid grey;
+         width: 3px;
+         height: 3px;
+         background: white;
+ }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+         background: none;
+ }
+
+QGroupBox {
+     border: 1px solid #1f2f25;
+     border-radius: 4px;
+     margin-top: 1ex;
+     font-weight: bold;
+     background: solid #223B34;
+ }
+
+QGroupBox::title {
+     subcontrol-origin: margin;
+     padding: 0px 3px;
+     color : #babdc4;
+	 left: 15px
+ }
+
+
+QTabWidget::pane {
+   border-top: 2px solid #348483;
+}
+
+     /* Style the tab using the tab sub-control. Note that
+         it reads QTabBar _not_ QTabWidget */
+     QTabBar::tab {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+         border: 2px solid #348483;
+         border-bottom-color: #348483; /* same as the pane color */
+         border-top-left-radius: 4px;
+         border-top-right-radius: 4px;
+         min-width: 10ex;
+         padding: 2px;
+         color: #babdc4;
+         font-weight : bold;
+     }
+
+     QTabBar::tab:selected, QTabBar::tab:hover {
+         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
+     }
+
+     QTabBar::tab:selected {
+         border-color: #A2A78B;
+         border-bottom-color: #2a3b50; /* same as pane color */
+     }
+
+     QTabBar::tab:!selected {
+         margin-top: 2px; /* make non-selected tabs look smaller */
+     }
+
+     /* make use of negative margins for overlapping tabs */
+     QTabBar::tab:selected {
+         /* expand/overlap to the left and right by 4px */
+         margin-left: -4px;
+         margin-right: -4px;
+     }
+
+     QTabBar::tab:first:selected {
+         margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+     }
+
+     QTabBar::tab:last:selected {
+         margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+     }
+
+     QTabBar::tab:only-one {
+         margin: 0; /* if there is only one tab, we don't want overlapping margins */
+     }
+
+QListWidget {
+ 	background: solid #121324;
+	border: 1px;
+    border-radius: 4px;
+    border-color: #081f25;
+    border-style: solid;
+  selection-background-color: #2a3b50;
+}
+
+QCheckBox
+{
+  color : #babdc4;
+}
+QCheckBox::indicator
+{
+  width: 13px;
+  height: 13px;
+  background-color: #225555;
+}
+QCheckBox::indicator:checked
+{
+     image: url(:/graphicGui/gui/checkbox-checked.png);
+}
+QCheckBox::indicator:unchecked
+{
+     image: url(:/graphicGui/gui/checkbox-unchecked.png);
+}
+
+QRadioButton
+{
+  color : #babdc4;
+}
+QRadioButton::indicator
+{
+  width: 13px;
+  height: 13px;
+  margin-left: 4px;
+}
+QRadioButton::indicator:checked
+{
+     image: url(:/graphicGui/gui/radio-checked.png);
+}
+QRadioButton::indicator:unchecked
+{
+     image: url(:/graphicGui/gui/radio-unchecked.png);
+}
+
+QSpinBox {
+     padding-right: 15px; /* make room for the arrows */
+     border-image: url(:/images/frame.png) 4;
+     border-width: 3;
+background-color: #225555;
+color : #babdc4;
+ }
+
+ QSpinBox::up-button {
+     subcontrol-origin: border;
+     subcontrol-position: top right; /* position at the top right corner */
+
+     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
+     border-image: url(:/images/spinup.png) 1;
+     border-width: 1px;
+
+ }
+
+ QSpinBox::up-button:hover {
+     border-image: url(:/images/spinup_hover.png) 1;
+ }
+
+ QSpinBox::up-button:pressed {
+     border-image: url(:/images/spinup_pressed.png) 1;
+ }
+
+ QSpinBox::up-arrow {
+     image: url(:/images/up_arrow.png);
+     width: 7px;
+     height: 7px;
+ }
+
+ QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when value is max */
+    image: url(:/images/up_arrow_disabled.png);
+ }
+
+ QSpinBox::down-button {
+     subcontrol-origin: border;
+     subcontrol-position: bottom right; /* position at bottom right corner */
+
+     width: 16px;
+     border-image: url(:/images/spindown.png) 1;
+     border-width: 1px;
+     border-top-width: 0;
+ }
+
+ QSpinBox::down-button:hover {
+     border-image: url(:/images/spindown_hover.png) 1;
+ }
+
+ QSpinBox::down-button:pressed {
+     border-image: url(:/images/spindown_pressed.png) 1;
+ }
+
+ QSpinBox::down-arrow {
+     image: url(:/images/down_arrow.png);
+     width: 7px;
+     height: 7px;
+ }
+
+ QSpinBox::down-arrow:disabled,
+ QSpinBox::down-arrow:off { /* off state when value in min */
+    image: url(:/images/down_arrow_disabled.png);
+ }
+
+QDoubleSpinBox {
+     padding-right: 15px; /* make room for the arrows */
+     border-image: url(:/images/frame.png) 4;
+     border-width: 3;
+background-color: #225555;
+color : #babdc4;
+ }
+</string>
+</property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
@@ -175,8 +448,17 @@
          </font>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton { color: white; font-weight: bold; background: None; border: 1px solid
-          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: darkgray; }</string>
+         <string>QToolButton {
+color: white;
+font-weight: bold;
+background: None;
+border: 1px solid #2e2e36;
+  border-radius: 2px;
+}
+
+QToolButton:pressed {
+color: darkgray;
+}</string>
         </property>
         <property name="text" >
          <string>X</string>
@@ -187,29 +469,103 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QVBoxLayout" >
      <item>
-      <widget class="QLineEdit" name="time8601" >
-       <property name="font" >
-        <font>
-         <family>DejaVu Sans Mono</family>
-        </font>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QSpinBox" name="spinner_year" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>-1000000</number>
+         </property>
+         <property name="maximum" >
+          <number>1000000</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinner_month" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>0</number>
+         </property>
+         <property name="maximum" >
+          <number>13</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinner_day" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>0</number>
+         </property>
+         <property name="maximum" >
+          <number>32</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinner_hour" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>-1</number>
+         </property>
+         <property name="maximum" >
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinner_minute" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>-1</number>
+         </property>
+         <property name="maximum" >
+          <number>60</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinner_second" >
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum" >
+          <number>-1</number>
+         </property>
+         <property name="maximum" >
+          <number>60</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="explain" >
-     <property name="font" >
-      <font>
-       <family>DejaVu Sans</family>
-      </font>
-     </property>
-     <property name="text" >
-      <string>explain</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
