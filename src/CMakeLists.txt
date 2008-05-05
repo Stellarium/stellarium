@@ -296,7 +296,9 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 SET(tests_testdates_SRCS
 	stelutils/StelUtils.cpp
 	stelutils/StelUtils.hpp
-	tests/testdates.cpp)
+	tests/testdates.cpp
+	stelutils/TextEntryDateTimeValidator.hpp
+	stelutils/TextEntryDateTimeValidator.cpp)
 ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
 TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
