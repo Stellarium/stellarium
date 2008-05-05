@@ -91,6 +91,15 @@ public slots:
 	//! Set the color of the Equatorial Grid.
 	void setColorEquatorGrid(const Vec3f& v);
 	
+	//! Set flag for displaying Equatorial Grid.
+	void setFlagEquatorJ2000Grid(bool b);
+	//! Get flag for displaying Equatorial Grid.
+	bool getFlagEquatorJ2000Grid(void) const;
+	//! Get the current color of the Equatorial J2000 Grid.
+	Vec3f getColorEquatorJ2000Grid(void) const;
+	//! Set the color of the Equatorial J2000 Grid.
+	void setColorEquatorJ2000Grid(const Vec3f& v);
+	
 	//! Set flag for displaying Equatorial Line.
 	void setFlagEquatorLine(bool b);
 	//! Get flag for displaying Equatorial Line.
@@ -120,6 +129,7 @@ public slots:
 	
 private:
 	SkyGrid * equ_grid;					// Equatorial grid
+	SkyGrid * equJ2000_grid;			// Equatorial J2000 grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
 	SkyLine * ecliptic_line;			// Ecliptic line

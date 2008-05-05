@@ -592,6 +592,7 @@ GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
 	equ_grid = new SkyGrid(Projector::FRAME_EARTH_EQU);
+	equJ2000_grid = new SkyGrid(Projector::FRAME_J2000);
 	azi_grid = new SkyGrid(Projector::FRAME_LOCAL);
 	equator_line = new SkyLine(SkyLine::EQUATOR);
 	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
@@ -601,6 +602,7 @@ GridLinesMgr::GridLinesMgr()
 GridLinesMgr::~GridLinesMgr()
 {
 	delete equ_grid;
+	delete equJ2000_grid;
 	delete azi_grid;
 	delete equator_line;
 	delete ecliptic_line;
@@ -624,6 +626,7 @@ void GridLinesMgr::init()
 
 	setFlagAzimutalGrid(conf->value("viewing/flag_azimutal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
+	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
@@ -633,6 +636,7 @@ void GridLinesMgr::update(double deltaTime)
 {
 	// Update faders
 	equ_grid->update(deltaTime);
+	equJ2000_grid->update(deltaTime);
 	azi_grid->update(deltaTime);
 	equator_line->update(deltaTime);
 	ecliptic_line->update(deltaTime);
@@ -646,6 +650,8 @@ double GridLinesMgr::draw(StelCore* core)
 
 	// Draw the equatorial grid
 	equ_grid->draw(prj);
+	// Draw the equatorial grid
+	equJ2000_grid->draw(prj);
 	// Draw the altazimutal grid
 	azi_grid->draw(prj);
 	// Draw the celestial equator line
@@ -662,6 +668,7 @@ void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::str_to_vec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
+	setColorEquatorJ2000Grid(StelUtils::str_to_vec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
 	setColorAzimutalGrid(StelUtils::str_to_vec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::str_to_vec3f(conf->value(section+"/equator_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::str_to_vec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
@@ -679,6 +686,12 @@ void GridLinesMgr::setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
 //! Get flag for displaying Equatorial Grid
 bool GridLinesMgr::getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
 Vec3f GridLinesMgr::getColorEquatorGrid(void) const {return equ_grid->getColor();}
+
+//! Set flag for displaying Equatorial J2000 Grid
+void GridLinesMgr::setFlagEquatorJ2000Grid(bool b) {equJ2000_grid->setFlagshow(b);}
+//! Get flag for displaying Equatorial J2000 Grid
+bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const {return equJ2000_grid->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const {return equJ2000_grid->getColor();}
 
 //! Set flag for displaying Equatorial Line
 void GridLinesMgr::setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
@@ -701,6 +714,7 @@ Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridian_line->getC
 
 void GridLinesMgr::setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
 void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
+void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& v) { equJ2000_grid->setColor(v);}
 void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
 void GridLinesMgr::setColorEclipticLine(const Vec3f& v) { ecliptic_line->setColor(v);}
 void GridLinesMgr::setColorMeridianLine(const Vec3f& v) { meridian_line->setColor(v);}
