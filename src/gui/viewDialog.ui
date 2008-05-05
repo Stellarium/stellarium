@@ -9,6 +9,9 @@
     <height>460</height>
    </rect>
   </property>
+  <property name="font" >
+   <font/>
+  </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
@@ -118,19 +121,19 @@ QTabWidget::pane {
    border-top: 2px solid #348483;
 }
 
-     /* Style the tab using the tab sub-control. Note that
+/* Style the tab using the tab sub-control. Note that
          it reads QTabBar _not_ QTabWidget */
-     QTabBar::tab {
-         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
-         border: 2px solid #348483;
-         border-bottom-color: #348483; /* same as the pane color */
-         border-top-left-radius: 4px;
-         border-top-right-radius: 4px;
-         min-width: 10ex;
-         padding: 2px;
-         color: #babdc4;
-         font-weight : bold;
-     }
+QTabBar::tab {
+    font : bold;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+    border: 2px solid #348483;
+    border-bottom-color: #348483; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 10ex;
+    padding: 2px;
+    color: #babdc4;
+}
 
      QTabBar::tab:selected, QTabBar::tab:hover {
          background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
@@ -415,6 +418,9 @@ color : #babdc4;
           <family>DejaVu</family>
          </font>
         </property>
+        <property name="styleSheet" >
+         <string/>
+        </property>
         <property name="text" >
          <string>View</string>
         </property>
@@ -488,6 +494,9 @@ color: darkgray;
       </property>
       <item row="0" column="0" >
        <widget class="QTabWidget" name="viewTabWidget" >
+        <property name="styleSheet" >
+         <string/>
+        </property>
         <property name="tabPosition" >
          <enum>QTabWidget::North</enum>
         </property>

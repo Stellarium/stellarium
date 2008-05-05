@@ -29,8 +29,17 @@
 
 #include <QDebug>
 #include <QFrame>
+#include <QLineEdit>
+#include <QValidator>
 
-DateTimeDialog::DateTimeDialog() : dialog(0)
+DateTimeDialog::DateTimeDialog() : 
+  dialog(0), 
+  year(0),
+  month(0),
+  day(0),
+  hour(0),
+  minute(0),
+  second(0)
 {
 	ui = new Ui_dateTimeDialogForm;
 }
@@ -49,38 +58,133 @@ void DateTimeDialog::setVisible(bool v)
 		dialog->raise();
 		dialog->move(200, 200);	// TODO: put in the center of the screen
 		dialog->setVisible(true);
+		double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+		setDateTime(jd
+			    + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
+
 		connect(ui->closeDateTime, SIGNAL(clicked()), this, SLOT(close()));
 
-		QValidator * val = new TextEntryDateTimeValidator(this);
-		ui->time8601->setValidator(val);
-		setDateTime(StelApp::getInstance().getCore()->getNavigation()->getJDay());
-		connect(ui->time8601, SIGNAL(textEdited(const QString &)), this, SLOT(dateTimeEdited(const QString &)));
+		connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
+		connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
+		connect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
+		connect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
+		connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
+		connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
+
 		connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigation(), SLOT(setJDay(double)));
+
 	}
 	else
 	{
-		disconnect(ui->time8601);
-		disconnect(this, 0, StelApp::getInstance().getCore()->getNavigation(), 0);
+		disconnect(ui->spinner_year);
+		disconnect(ui->spinner_month);
+		disconnect(ui->spinner_day);
+		disconnect(ui->spinner_hour);
+		disconnect(ui->spinner_minute);
+		disconnect(ui->spinner_second);
+
+		disconnect(this);
+
+		dialog->setVisible(false);
 		dialog->deleteLater();
 		dialog = 0;
 	}
 }
 
-/************************************************************************
-Send along new JD value from time8601's QString to to connected slots.
- ************************************************************************/
-void DateTimeDialog::dateTimeEdited(const QString &v)
+//! take in values, adjust for calendrical correctness if needed, and push to
+//! the widgets and signals
+
+bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 {
-	qDebug() << "dateTimeEdited " << v ;
-	double jd = StelApp::getInstance().getLocaleMgr().get_jd_from_ISO8601_time_local(v);
-	emit dateTimeChanged(jd);
+  int dy, dm, dd, dh, dmin, ds;
+
+  if ( ! StelUtils::changeDateTimeForRollover(y, m, d, h, min, s,
+					      &dy, &dm, &dd, &dh, &dmin, &ds) ) {
+    dy = y;
+    dm = m;
+    dd = d;
+    dh = h;
+    dmin = min;
+    ds = s;
+  }
+
+  year = dy;
+  month = dm;
+  day = dd;
+  hour = dh;
+  minute = dmin;
+  second = ds;
+  pushToWidgets();
+  emit dateTimeChanged(newJd());
+  return true;
 }
 
 /************************************************************************
-Send newJd to time8601 as a ISO-8601-formatted QString.
+ year slider or dial changed
+************************************************************************/
+
+void DateTimeDialog::yearChanged(int newyear)
+{
+  if ( year != newyear ) {
+    valid( newyear, month, day, hour, minute, second );
+  }
+}
+void DateTimeDialog::monthChanged(int newmonth)
+{
+  if ( month != newmonth ) {
+    valid( year, newmonth, day, hour, minute, second );
+  }
+}
+void DateTimeDialog::dayChanged(int newday)
+{
+  if ( day != newday ) {
+    valid( year, month, newday, hour, minute, second );
+  }
+}
+void DateTimeDialog::hourChanged(int newhour)
+{
+  if ( hour != newhour ) {
+    valid( year, month, day, newhour, minute, second );
+  }
+}
+void DateTimeDialog::minuteChanged(int newminute)
+{
+  if ( minute != newminute ) {
+    valid( year, month, day, hour, newminute, second );
+  }
+}
+void DateTimeDialog::secondChanged(int newsecond)
+{
+  if ( second != newsecond ) {
+    valid( year, month, day, hour, minute, newsecond );
+  }
+}
+
+double DateTimeDialog::newJd()
+{
+  double jd;
+  StelUtils::getJDFromDate(&jd,year, month, day, hour, minute, second);
+  jd -= (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0); // local tz -> UTC
+  return jd;
+}
+
+void DateTimeDialog::pushToWidgets()
+{
+  ui->spinner_year->setValue(year);
+  ui->spinner_month->setValue(month);
+  ui->spinner_day->setValue(day);
+  ui->spinner_hour->setValue(hour);
+  ui->spinner_minute->setValue(minute);
+  ui->spinner_second->setValue(second);
+}
+
+/************************************************************************
+Send newJd to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
-	ui->time8601->setText(StelApp::getInstance().getLocaleMgr().get_ISO8601_time_local(newJd).replace("T"," "));
+  StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
+  StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
+  pushToWidgets();
 }
 

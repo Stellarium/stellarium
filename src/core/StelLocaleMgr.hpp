@@ -133,7 +133,7 @@ public:
 	{
 		GMT_shift=t;
 	}
-	//! Get the current time shift at observator time zone with respect to GMT time.
+	//! Get the current time shift in hours at observator time zone with respect to GMT time.
 	float get_GMT_shift(double JD = 0) const;
 	//! Set the timezone by a TZ-style string (see tzset in the libc manual).
 	void set_custom_tz_name(const QString& tzname);

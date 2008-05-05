@@ -293,6 +293,9 @@ void getDateFromJulianDay(double julianDay, int *year, int *month, int *day);
 //! Make from julianDay an hour, minute, second.
 void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second);
 
+//! Utility for formatting to a simple iso 8601 string.
+QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second );
+
 QString jdToIsoString(double jd);
 
 //! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
@@ -319,6 +322,12 @@ float get_GMT_shift_from_QT(double JD);
 //! @param dateTime the UTC QDateTime to convert
 //! @result the matching decimal Julian Day
 double qDateTimeToJd(const QDateTime& dateTime);
+
+bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s);
+
+  int numberOfDaysInMonthInYear(int month, int year);
+  bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
+			     int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
 }
 

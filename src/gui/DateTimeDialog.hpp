@@ -29,20 +29,53 @@ class DateTimeDialog : public QObject
 	Q_OBJECT
 public:
 	DateTimeDialog();
+  double newJd();
+  bool valid(int y, int m, int d, int h, int min, int s);
 public slots:
 	void setVisible(bool);
 	void close();
-	//! Called when the time8601 emits textEditing(const QString&)
-	void dateTimeEdited(const QString &v);
+// 	//! Called when the time8601 emits textEditing(const QString&)
+// 	void dateTimeEdited(const QString &v);
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
+  //! year slider or dial changed
+  void yearChanged(int ny);
+  //! year slider or dial changed
+  void monthChanged(int nm);
+  //! year slider or dial changed
+  void dayChanged(int nd);
+  //! year slider or dial changed
+  void hourChanged(int nh);
+  //! year slider or dial changed
+  void minuteChanged(int nm);
+  //! year slider or dial changed
+  void secondChanged(int ns);
 signals:
 	void closed();
 	//! signals that a new, valid JD is available.
 	void dateTimeChanged(double newJd);
+  //! year slider or dial update
+  void yearUpdate(int ny);
+  //! year slider or dial update
+  void monthUpdate(int nm);
+  //! year slider or dial update
+  void dayUpdate(int nd);
+  //! year slider or dial update
+  void hourUpdate(int nh);
+  //! year slider or dial update
+  void minuteUpdate(int nm);
+  //! year slider or dial update
+  void secondUpdate(int ns);
 protected:
 	QWidget* dialog;
 	Ui_dateTimeDialogForm* ui;
+  int year;
+  int month;
+  int day;
+  int hour;
+  int minute;
+  int second;
+  void pushToWidgets();
 };
 
 #endif // _DATETIMEDIALOG_HPP_
