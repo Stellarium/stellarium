@@ -504,7 +504,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1451,21 +1451,21 @@ p, li { white-space: pre-wrap; }
           </property>
           <layout class="QGridLayout" >
            <item row="0" column="0" >
-            <widget class="QCheckBox" name="planetMarkerCheckBox_4" >
+            <widget class="QCheckBox" name="showGroundCheckBox" >
              <property name="text" >
               <string>Show ground</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1" >
-            <widget class="QCheckBox" name="planetOrbitCheckBox_4" >
+            <widget class="QCheckBox" name="showFogCheckBox" >
              <property name="text" >
               <string>Show fog</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0" >
-            <widget class="QCheckBox" name="planetScaleMoonCheckBox_4" >
+            <widget class="QCheckBox" name="showAtmosphereCheckBox" >
              <property name="text" >
               <string>Show atmosphere</string>
              </property>
@@ -1481,7 +1481,7 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox" />
+              <widget class="QSpinBox" name="lightPollutionSpinBox" />
              </item>
             </layout>
            </item>
@@ -1614,7 +1614,7 @@ p, li { white-space: pre-wrap; }
           <property name="checkable" >
            <bool>false</bool>
           </property>
-          <widget class="QCheckBox" name="planetMarkerCheckBox_2" >
+          <widget class="QCheckBox" name="showEquatorialGridCheckBox" >
            <property name="geometry" >
             <rect>
              <x>170</x>
@@ -1627,7 +1627,7 @@ p, li { white-space: pre-wrap; }
             <string>Equatorial grid</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetOrbitCheckBox_2" >
+          <widget class="QCheckBox" name="showAzimutalGridCheckBox" >
            <property name="geometry" >
             <rect>
              <x>172</x>
@@ -1640,7 +1640,7 @@ p, li { white-space: pre-wrap; }
             <string>Azimutal grid</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetScaleMoonCheckBox_2" >
+          <widget class="QCheckBox" name="showMeridianLineCheckBox" >
            <property name="geometry" >
             <rect>
              <x>10</x>
@@ -1653,7 +1653,7 @@ p, li { white-space: pre-wrap; }
             <string>Meridian line</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetLightSpeedCheckBox_2" >
+          <widget class="QCheckBox" name="showEclipticLineCheckBox" >
            <property name="geometry" >
             <rect>
              <x>10</x>
@@ -1666,7 +1666,7 @@ p, li { white-space: pre-wrap; }
             <string>Ecliptic line</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetLightSpeedCheckBox_3" >
+          <widget class="QCheckBox" name="showEquatorLineCheckBox" >
            <property name="geometry" >
             <rect>
              <x>10</x>
@@ -1679,7 +1679,7 @@ p, li { white-space: pre-wrap; }
             <string>Equator line</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetMarkerCheckBox_3" >
+          <widget class="QCheckBox" name="showCardinalPointsCheckBox" >
            <property name="geometry" >
             <rect>
              <x>10</x>
@@ -1692,7 +1692,7 @@ p, li { white-space: pre-wrap; }
             <string>Cardinal points</string>
            </property>
           </widget>
-          <widget class="QCheckBox" name="planetMarkerCheckBox_5" >
+          <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox" >
            <property name="geometry" >
             <rect>
              <x>170</x>

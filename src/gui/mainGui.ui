@@ -871,6 +871,22 @@ QCheckBox
     <bool>false</bool>
    </property>
   </action>
+  <action name="actionShow_Meridian_Line" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Meridian Line</string>
+   </property>
+  </action>
+  <action name="actionShow_Equatorial_J2000_Grid" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Equatorial J2000 Grid</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../../data/mainRes.qrc" />

@@ -512,6 +512,12 @@ void NewGui::init()
 	QObject::connect(ui->actionShow_Planets_Hints, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
 	ui->actionShow_Planets_Hints->setChecked(ssmgr->getFlagHints());
 	
+	QObject::connect(ui->actionShow_Meridian_Line, SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
+	ui->actionShow_Meridian_Line->setChecked(gmgr->getFlagMeridianLine());
+	
+	QObject::connect(ui->actionShow_Equatorial_J2000_Grid, SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
+	ui->actionShow_Equatorial_J2000_Grid->setChecked(gmgr->getFlagEquatorJ2000Grid());
+	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
