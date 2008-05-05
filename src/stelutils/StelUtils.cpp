@@ -606,13 +606,8 @@ void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second)
 	*second = s % 60;
 }
 
-
-QString jdToIsoString(double jd)
+QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second )
 {
-	int year, month, day, hour, minute, second;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second);
-
 	// formatting a negative doesnt work the way i expect
 
 	QString dt = QString("%1-%2-%3T%4:%5:%6")
@@ -628,6 +623,15 @@ QString jdToIsoString(double jd)
 		dt.prepend("-");
 	}
 	return dt;
+}
+
+QString jdToIsoString(double jd)
+{
+	int year, month, day, hour, minute, second;
+	getDateFromJulianDay(jd, &year, &month, &day);
+	getTimeFromJulianDay(jd, &hour, &minute, &second);
+
+	return sixIntsToIsoString(year, month, day, hour, minute, second);
 }
 
 // Format the date per the fmt.
@@ -651,7 +655,6 @@ QString localeDateString(int year, int month, int day, int dayOfWeek, QString fm
 				}
 				else
 				{
-					out += fmt.mid(quotestartedat+1, i-(quotestartedat+1));
 					quotestartedat = -1;
 				}
 			}
@@ -669,12 +672,13 @@ QString localeDateString(int year, int month, int day, int dayOfWeek, QString fm
 		         fmt.at(i) == QLatin1Char('y'))
 		{
 			int j = i+1;
-			while (j < fmt.length() && fmt.at(j) == fmt.at(i) && (4 <= (j-i)))
+			while ((j < fmt.length()) && (fmt.at(j) == fmt.at(i)) && (4 >= (j-i+1)))
 			{
 				j++;
 			}
 
-			QString frag = fmt.mid(i,(j-i+1));
+			QString frag = fmt.mid(i,(j-i));
+
 			if (frag == "d")
 			{
 				out += QString("%1").arg(day);
@@ -733,7 +737,7 @@ QString localeDateString(int year, int month, int day, int dayOfWeek, QString fm
 				out += QString("%1").arg(dispyear,4,10,QLatin1Char('0'));
 			}
 
-			i = j;
+			i = j-1;
 		}
 		else
 		{
@@ -810,10 +814,10 @@ float get_GMT_shift_from_QT(double JD)
 	getTimeFromJulianDay(JD, &hour, &minute, &second);
 	QDateTime current(QDate(year, month, day), QTime(hour, minute, second));
 	if (! current.isValid())
-{
+	{
 		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		current = QDateTime::currentDateTime();
-}
+	}
 	QDateTime c1 = QDateTime::fromString(current.toString(Qt::ISODate),Qt::ISODate);
 	QDateTime u1 = QDateTime::fromString(current.toUTC().toString(Qt::ISODate),Qt::ISODate);
 
@@ -821,6 +825,187 @@ float get_GMT_shift_from_QT(double JD)
 	float hrsto = secsto / 3600.0f;
 	return hrsto;
 }
+// UTC !
+bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s)
+{
+  double delta_time = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
+  QDate test((y <= 0 ? y-1 : y), m, d);
+  // if QDate will oblige, do so.
+  if ( test.isValid() ) {
+    double qdjd = (double)test.toJulianDay();
+    qdjd += delta_time;
+    *newjd = qdjd;
+    return true;
+  } else {
+    double jd = (double)((1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075) - 38;
+    jd += delta_time;
+    *newjd = jd;
+    return true;
+  }
+  return false;
+}
+double getJDFromDate_alg2(int y, int m, int d, int h, int min, int s)
+{
+  
+  double extra = (100.0* y) + m - 190002.5;
+  double rjd = 367.0 * y;
+  rjd -= floor(7.0*(y+floor((m+9.0)/12.0))/4.0);
+  rjd += floor(275.0*m/9.0) ;
+  rjd += d;
+  rjd += (h + (min + s/60.0)/60.)/24.0;
+  rjd += 1721013.5;
+  rjd -= 0.5*extra/abs(extra);
+  rjd += 0.5;
+  return rjd;
+}
+
+  int numberOfDaysInMonthInYear(int month, int year)
+{
+  switch(month) {
+  case 1:
+  case 3:
+  case 5:
+  case 7:
+  case 8:
+  case 10:
+  case 12:
+    return 31;
+    break;
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    return 30;
+    break;
+
+  case 2:
+    if ( year > 1582 ) {
+      if ( year % 4 == 0 ) {
+	if ( year % 100 == 0 ) {
+	  if ( year % 400 == 0 ) {
+	    return 29;
+	  } else {
+	    return 28;
+	  }
+	} else {
+	  return 29;
+	}
+      } else {
+	return 28;
+      }
+    } else {
+      if ( year % 4 == 0 ) {
+	return 29;
+      } else {
+	return 28;
+      }
+    }
+
+    break;
+
+  case 0:
+    return numberOfDaysInMonthInYear(12, year-1);
+    break;
+  case 13:
+    return numberOfDaysInMonthInYear(1, year+1);
+    break;
+
+  default:
+    break;
+  }
+
+  return 0;
+}
+
+//! given the submitted year/month/day hour:minute:second, try to
+//! normalize into an actual year/month/day.  values can be positive, 0,
+//! or negative.  start assessing from seconds to larger increments.
+
+bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
+			       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
+{
+  bool change = false;
+
+  while ( os > 59 ) {
+    os -= 60;
+    omin += 1;
+    change = true;
+  }
+  while ( os < 0 ) {
+    os += 60;
+    omin -= 1;
+    change = true;
+  }
+
+  while (omin > 59 ) {
+    omin -= 60;
+    oh += 1;
+    change = true;
+  }
+  while (omin < 0 ) {
+    omin += 60;
+    oh -= 1;
+    change = true;
+  }
+
+  while ( oh > 23 ) {
+    oh -= 24;
+    od += 1;
+    change = true;
+  }
+  while ( oh < 0 ) {
+    oh += 24;
+    od -= 1;
+    change = true;
+  }
+
+  while ( od > numberOfDaysInMonthInYear(om, oy) ) {
+    od -= numberOfDaysInMonthInYear(om, oy);
+    om++;
+    if ( om > 12 ) {
+      om -= 12;
+      oy += 1;
+    }
+    change = true;
+  }
+  while ( od < 1 ) {
+    od += numberOfDaysInMonthInYear(om-1,oy);
+    om--;
+    if ( om < 1 ) {
+      om += 12;
+      oy -= 1;
+    }
+    change = true;
+  }
+
+  while ( om > 12 ) {
+    om -= 12;
+    oy += 1;
+    change = true;
+  }
+  while ( om < 1 ) {
+    om += 12;
+    oy -= 1;
+    change = true;
+  }
+
+  // and the julian-gregorian epoch hole: round up to the 15th
+  if ( oy == 1582 && om == 10 && ( od > 4 && od < 15 ) ) {
+    od = 15;
+    change = true;
+  }
+  
+  if ( change ) {
+    *ry = oy;
+    *rm = om;
+    *rd = od;
+    *rh = oh;
+    *rmin = omin;
+    *rs = os;
+  }
+  return change;
+}
+
 
 } // end of the StelUtils namespace
 

@@ -139,11 +139,13 @@ double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 		int mn = numbers[4];
 		int s = numbers[5];
 
-		// day
-		double jd = (double)((1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075);
-		// modified by time
-		double delta_time = (h / 24.0) + (mn / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
-		jd += delta_time;
+		double jd;
+
+		if ( ! StelUtils::getJDFromDate(&jd, y, m, d, h, mn, s) )
+		  {
+		    qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
+		    return 0.0;
+		  }
 
 		// modified by shift
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
