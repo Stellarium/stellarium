@@ -35,6 +35,7 @@
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
+#include "GridLinesMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -154,6 +155,58 @@ void ViewDialog::setVisible(bool v)
 		connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+		
+		// Landscape section
+		ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Ground");
+		connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
+		connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
+		
+		ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Atmosphere");
+		connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		
+		// Grid and lines
+		GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+		ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Equator_Line");
+		connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showEclipticLineCheckBox->setChecked(glmgr->getFlagEclipticLine());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Ecliptic_Line");
+		connect(a, SIGNAL(toggled(bool)), ui->showEclipticLineCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showMeridianLineCheckBox->setChecked(glmgr->getFlagMeridianLine());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Meridian_Line");
+		connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Equatorial_Grid");
+		connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showAzimutalGridCheckBox->setChecked(glmgr->getFlagAzimutalGrid());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Azimutal_Grid");
+		connect(a, SIGNAL(toggled(bool)), ui->showAzimutalGridCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showAzimutalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Equatorial_J2000_Grid");
+		connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Cardinal_Points");
+		connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 		
 		dialog->show();
 		dialog->raise();
