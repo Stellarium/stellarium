@@ -607,27 +607,29 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 			draw_hints(nav, prj);
 		}
 
-		if (rings && screen_sz>1)
+		if (screen_sz>1)
 		{
-			const double dist = getEarthEquatorialPos(nav).length();
-			double z_near = 0.9*(dist - rings->get_size());
-			double z_far  = 1.1*(dist + rings->get_size());
-			if (z_near < 0.0) z_near = 0.0;
-			double n,f;
-			prj->get_clipping_planes(&n,&f); // Save clipping planes
-			prj->set_clipping_planes(z_near,z_far);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_DEPTH_TEST);
-			draw_sphere(prj,mat,screen_sz);
-			rings->draw(prj,mat,screen_sz);
-			glDisable(GL_DEPTH_TEST);
-			prj->set_clipping_planes(n,f);  // Restore old clipping planes
-		}
-		else
-		{
-			if(stencil) glEnable(GL_STENCIL_TEST);
-			draw_sphere(prj, mat, screen_sz);
-			if(stencil) glDisable(GL_STENCIL_TEST);
+			if(rings) {
+				const double dist = getEarthEquatorialPos(nav).length();
+				double z_near = 0.9*(dist - rings->get_size());
+				double z_far  = 1.1*(dist + rings->get_size());
+				if (z_near < 0.0) z_near = 0.0;
+				double n,f;
+				prj->get_clipping_planes(&n,&f); // Save clipping planes
+				prj->set_clipping_planes(z_near,z_far);
+				glClear(GL_DEPTH_BUFFER_BIT);
+				glEnable(GL_DEPTH_TEST);
+				draw_sphere(prj,mat,screen_sz);
+				rings->draw(prj,mat,screen_sz);
+				glDisable(GL_DEPTH_TEST);
+				prj->set_clipping_planes(n,f);  // Restore old clipping planes
+			}
+			else
+			{
+				if(stencil) glEnable(GL_STENCIL_TEST);
+				draw_sphere(prj, mat, screen_sz);
+				if(stencil) glDisable(GL_STENCIL_TEST);
+			}
 		}
 
 		if (!tex_big_halo)
