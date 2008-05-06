@@ -749,6 +749,20 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 
 void NewGui::updateI18n()
 {
+	// Translate all action texts
+	foreach (QObject* obj, StelMainWindow::getInstance().children())
+	{
+		QAction* a = qobject_cast<QAction*>(obj);
+		if (a)
+		{
+			const QString& englishText = a->property("englishText").toString();
+			if (!englishText.isEmpty())
+			{
+				a->setText(q_(englishText));
+				qWarning() << q_(englishText);
+			}
+		}
+	}
 }
 
 void NewGui::update(double deltaTime)

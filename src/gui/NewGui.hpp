@@ -172,8 +172,6 @@ private slots:
 private:
 	void addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 	QAction* getGuiActions(const QString& actionName);
-			
-	void createActions();
 	void retranslateUi(QWidget *Form);
 	
 	LeftStelBar* winBar;
