@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Fabien\ Chereau\ et\ al
+# Copyright (C) YEAR Stellarium's\ team
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-30 00:04+0200\n"
+"POT-Creation-Date: 2008-05-06 09:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Spectral Type: "
 msgstr ""
 
-#: src/core/MappingClasses.cpp:11 src/ui_viewDialog.h:1327
+#: src/core/MappingClasses.cpp:11
 msgid "Perspective"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid ""
 "projection</i>."
 msgstr ""
 
-#: src/core/MappingClasses.cpp:276 src/ui_viewDialog.h:1330
+#: src/core/MappingClasses.cpp:276
 msgid "Orthographic"
 msgstr ""
 
@@ -174,6 +174,30 @@ msgstr ""
 #: src/gui/NewGui.cpp:218
 #, c-format, qt-format
 msgid ", %1m"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:249
+msgid "No description"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:299 src/ui_viewDialog.h:1288
+msgid "Normal rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:302
+msgid "Standard Perseids rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:305
+msgid "Exceptional Leonid rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:308
+msgid "Highest rate ever (1966 Leonids)"
+msgstr ""
+
+#: src/main.cpp:49
+msgid "This system does not support OpenGL."
 msgstr ""
 
 #: src/translations.h:33
@@ -332,11 +356,11 @@ msgstr ""
 msgid "Norse"
 msgstr ""
 
-#: src/translations.h:76 src/ui_viewDialog.h:1338
+#: src/translations.h:76
 msgid "Polynesian"
 msgstr ""
 
-#: src/translations.h:77 src/ui_viewDialog.h:1335
+#: src/translations.h:77
 msgid "Western"
 msgstr ""
 
@@ -352,104 +376,13 @@ msgstr ""
 msgid "USB Script: "
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
+#: src/ui_dateTimeDialogGui.h:172 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:962 src/ui_configurationDialog.h:137
+#: src/ui_viewDialog.h:964 src/ui_configurationDialog.h:137
 msgid "Form"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:124
-msgid "Date and Time"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:125
-msgid ""
-"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
-"solid\n"
-"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
-"darkgray; }"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
-#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1253 src/ui_configurationDialog.h:428
-msgid "X"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:128
-msgid "explain"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:146
-msgid "Help"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
-#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
-#: src/ui_configurationDialog.h:417
-msgid ""
-"QToolButton {\n"
-"color: white;\n"
-"font-weight: bold;\n"
-"background: None;\n"
-"border: 1px solid #2e2e36;\n"
-"  border-radius: 2px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"color: darkgray;\n"
-"}"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:254
-msgid "Location"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:267
-msgid ""
-"Use the mouse wheel to zoom on the map.\n"
-"Click and drag the mouse to move the screen"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:269
-msgid "Cursor :"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:271
-msgid "Longitude :"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:273
-msgid "Selected :"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:275
-msgid "Latitude :"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:210
-msgid "Find Object"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:223
-msgid "Orion"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:224
-msgid "Go"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:225
-msgid "Completions"
-msgstr ""
-
-#: src/ui_viewDialog.h:963 src/ui_configurationDialog.h:138
+#: src/ui_dateTimeDialogGui.h:173 src/ui_configurationDialog.h:138
 msgid ""
 "QFrame {\n"
 "\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
@@ -732,68 +665,422 @@ msgid ""
 " }\n"
 msgstr ""
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_dateTimeDialogGui.h:451
+msgid "Date and Time"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:452 src/ui_helpDialogGui.h:147
+#: src/ui_locationDialogGui.h:255 src/ui_searchDialogGui.h:211
+#: src/ui_viewDialog.h:1245 src/ui_configurationDialog.h:417
+msgid ""
+"QToolButton {\n"
+"color: white;\n"
+"font-weight: bold;\n"
+"background: None;\n"
+"border: 1px solid #2e2e36;\n"
+"  border-radius: 2px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"color: darkgray;\n"
+"}"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:463 src/ui_helpDialogGui.h:158
+#: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
+#: src/ui_viewDialog.h:1256 src/ui_configurationDialog.h:428
+msgid "X"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:146
+msgid "Help"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:254
+msgid "Location"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:267
+msgid ""
+"Use the mouse wheel to zoom on the map.\n"
+"Click and drag the mouse to move the screen."
+msgstr ""
+
+#: src/ui_locationDialogGui.h:269
+msgid "Cursor:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:271
+msgid "Longitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:272 src/ui_locationDialogGui.h:276
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:273
+msgid "Selected:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:275
+msgid "Latitude:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:210
+msgid "Find Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:224
+msgid "Go"
+msgstr ""
+
+#: src/ui_viewDialog.h:965
+msgid ""
+"QFrame {\n"
+"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
+"stop: 1 #19233c);\n"
+"\tborder: 0px;\n"
+"\tcolor : #babdc4;\n"
+"    font-family: \"DejaVu\";\n"
+"}\n"
+"\n"
+"DialogFrame {\n"
+"  border-width: 1px;\n"
+"  border-style: solid;\n"
+"  border-color: #081f25;\n"
+"}\n"
+"\n"
+"ResizeFrame {\n"
+" background-image: url(data/gui/resize.png);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"\tbackground: None;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"     border: 1.5px solid #2e2e36;\n"
+"     border-radius: 10px;\n"
+"     padding: 0 8px;\n"
+"     background: white;\n"
+"     selection-background-color: darkgray;\n"
+" }\n"
+"\n"
+"QPushButton {\n"
+"  border: 1.5px solid #2e2e36;\n"
+"  border-radius: 10px;\n"
+"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+" border: 1px solid #2e2e36;\n"
+" background: #4a4b50;\n"
+" width: 15px;\n"
+"         margin: 22px 0px 22px 0px;\n"
+"     }\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    border: 2px solid #4a4b50;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
+"\tborder-radius: 4px;\n"
+"\tmin-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: bottom;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: top;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
+"         border: 2px solid grey;\n"
+"         width: 3px;\n"
+"         height: 3px;\n"
+"         background: white;\n"
+" }\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"         background: none;\n"
+" }\n"
+"\n"
+"QGroupBox {\n"
+"     border: 1px solid #1f2f25;\n"
+"     border-radius: 4px;\n"
+"     margin-top: 1ex;\n"
+"     font-weight: bold;\n"
+"     background: solid #223B34;\n"
+" }\n"
+"\n"
+"QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     padding: 0px 3px;\n"
+"     color : #babdc4;\n"
+"\t left: 15px\n"
+" }\n"
+"\n"
+"\n"
+"QTabWidget::pane {\n"
+"   border-top: 2px solid #348483;\n"
+"}\n"
+"\n"
+"/* Style the tab using the tab sub-control. Note that\n"
+"         it reads QTabBar _not_ QTabWidget */\n"
+"QTabBar::tab {\n"
+"    font : bold;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#2a3b50, stop: 1 #19233c);\n"
+"    border: 2px solid #348483;\n"
+"    border-bottom-color: #348483; /* same as the pane color */\n"
+"    border-top-left-radius: 4px;\n"
+"    border-top-right-radius: 4px;\n"
+"    min-width: 10ex;\n"
+"    padding: 2px;\n"
+"    color: #babdc4;\n"
+"}\n"
+"\n"
+"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#19233c, stop: 1 #2a3b50);\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected {\n"
+"         border-color: #A2A78B;\n"
+"         border-bottom-color: #2a3b50; /* same as pane color */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:!selected {\n"
+"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
+"     }\n"
+"\n"
+"     /* make use of negative margins for overlapping tabs */\n"
+"     QTabBar::tab:selected {\n"
+"         /* expand/overlap to the left and right by 4px */\n"
+"         margin-left: -4px;\n"
+"         margin-right: -4px;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:first:selected {\n"
+"         margin-left: 0; /* the first selected tab has nothing to overlap "
+"with on the left */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:last:selected {\n"
+"         margin-right: 0; /* the last selected tab has nothing to overlap "
+"with on the right */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:only-one {\n"
+"         margin: 0; /* if there is only one tab, we don't want overlapping "
+"margins */\n"
+"     }\n"
+"\n"
+"QListWidget {\n"
+" \tbackground: solid #121324;\n"
+"\tborder: 1px;\n"
+"    border-radius: 4px;\n"
+"    border-color: #081f25;\n"
+"    border-style: solid;\n"
+"  selection-background-color: #2a3b50;\n"
+"}\n"
+"\n"
+"QCheckBox\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QCheckBox::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  background-color: #225555;\n"
+"}\n"
+"QCheckBox::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
+"}\n"
+"\n"
+"QRadioButton\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QRadioButton::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  margin-left: 4px;\n"
+"}\n"
+"QRadioButton::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-checked.png);\n"
+"}\n"
+"QRadioButton::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
+"border */\n"
+"     border-image: url(:/images/spinup.png) 1;\n"
+"     border-width: 1px;\n"
+"\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:hover {\n"
+"     border-image: url(:/images/spinup_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:pressed {\n"
+"     border-image: url(:/images/spinup_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/images/up_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
+"value is max */\n"
+"    image: url(:/images/up_arrow_disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: bottom right; /* position at bottom right corner "
+"*/\n"
+"\n"
+"     width: 16px;\n"
+"     border-image: url(:/images/spindown.png) 1;\n"
+"     border-width: 1px;\n"
+"     border-top-width: 0;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:hover {\n"
+"     border-image: url(:/images/spindown_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:pressed {\n"
+"     border-image: url(:/images/spindown_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/images/down_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow:disabled,\n"
+" QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"    image: url(:/images/down_arrow_disabled.png);\n"
+" }\n"
+"\n"
+"QDoubleSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+msgstr ""
+
+#: src/ui_viewDialog.h:1244
 msgid "View"
 msgstr ""
 
-#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1259 src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1272
+#: src/ui_viewDialog.h:1277
 msgid "Show"
 msgstr ""
 
-#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1260 src/ui_viewDialog.h:1291
 msgid "Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1261
 msgid "Scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1262
 msgid "Twinkle"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1263
 msgid "amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1266
 msgid "Planets and Satellites"
 msgstr ""
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1267
 msgid "Show marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1268
 msgid "Show orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1269
 msgid "Scale Moon"
 msgstr ""
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1270
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
-msgid "Nebula"
-msgstr ""
-
-#: src/ui_viewDialog.h:1270
-msgid "Short labels"
-msgstr ""
-
-#: src/ui_viewDialog.h:1271
-msgid "Download images"
+#: src/ui_viewDialog.h:1273 src/ui_viewDialog.h:1293
+msgid "Nebulas"
 msgstr ""
 
 #: src/ui_viewDialog.h:1274
-msgid "Shouting Stars"
+msgid "Short labels"
 msgstr ""
 
 #: src/ui_viewDialog.h:1275
+msgid "Download images"
+msgstr ""
+
+#: src/ui_viewDialog.h:1278
+msgid "Shooting Stars"
+msgstr ""
+
+#: src/ui_viewDialog.h:1279
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
@@ -807,147 +1094,135 @@ msgid ""
 "html>"
 msgstr ""
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1284
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1285
 msgid "80"
 msgstr ""
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1286
 msgid "10000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1287
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1284
-msgid "Normal rate"
-msgstr ""
-
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1290
 msgid "Labels and markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1288
+#: src/ui_viewDialog.h:1292
 msgid "Planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1294
 msgid "Amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1295
 msgid "Sky"
 msgstr ""
 
-#: src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1297
 msgid "Options"
 msgstr ""
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1298
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1299
 msgid "Show fog"
 msgstr ""
 
-#: src/ui_viewDialog.h:1296
+#: src/ui_viewDialog.h:1300
 msgid "Show atmosphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1301
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1301
-msgid "Guereins"
-msgstr ""
-
-#: src/ui_viewDialog.h:1304
-msgid "Apollo"
-msgstr ""
-
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1302
 msgid "Use associated planet and position"
 msgstr ""
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1303
 msgid "Landscape"
 msgstr ""
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1305
 msgid "Sky Marking"
 msgstr ""
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1306
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1307
 msgid "Azimutal grid"
 msgstr ""
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1308
 msgid "Meridian line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1309
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1313
+#: src/ui_viewDialog.h:1310
 msgid "Equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1311
 msgid "Cardinal points"
 msgstr ""
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1312
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1314
 msgid "Constellations"
 msgstr ""
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1315
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1316
 msgid "Show lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1317
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1318
 msgid "Show art"
 msgstr ""
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1319
 msgid "Art brightness: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1320
 msgid "Projection"
 msgstr ""
 
-#: src/ui_viewDialog.h:1331
+#: src/ui_viewDialog.h:1321
 msgid "Marking"
 msgstr ""
 
-#: src/ui_viewDialog.h:1339
+#: src/ui_viewDialog.h:1322
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1340
+#: src/ui_viewDialog.h:1323
 msgid "Starlore"
 msgstr ""
 
