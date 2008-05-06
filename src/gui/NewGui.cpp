@@ -391,62 +391,62 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
-	addGuiActions("actionShow_Constellation_Lines", q_("Show Constellation Lines"), "C", "Display options", true, false);
-	addGuiActions("actionShow_Constellation_Art", q_("Show Constellation Art"), "R", "Display options", true, false);
-	addGuiActions("actionShow_Constellation_Labels", q_("Show Constellation Labels"), "V", "Display options", true, false);
-	addGuiActions("actionShow_Constellation_Boundaries", q_("Show Constellation Boundaries"), "B", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Lines", N_("Show Constellation Lines"), "C", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Art", N_("Show Constellation Art"), "R", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Labels", N_("Show Constellation Labels"), "V", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Boundaries", N_("Show Constellation Boundaries"), "B", "Display options", true, false);
 	
-	addGuiActions("actionShow_Azimutal_Grid", q_("Show Azimutal Grid"), "Z", "Display options", true, false);
-	addGuiActions("actionShow_Equatorial_Grid", q_("Show Equatorial Grid"), "E", "Display options", true, false);
-	addGuiActions("actionShow_Equatorial_J2000_Grid", q_("Show Equatorial J2000 Grid"), "", "Display options", true, false);
-	addGuiActions("actionShow_Ecliptic_Line", q_("Show Ecliptic Line"), ",", "Display options", true, false);
-	addGuiActions("actionShow_Equator_Line", q_("Show Equator Line"), ".", "Display options", true, false);
-	addGuiActions("actionShow_Meridian_Line", q_("Show Meridian Line"), "", "Display options", true, false);
-	addGuiActions("actionShow_Cardinal_Points", q_("Show Cardinal Points"), "Q", "Display options", true, false);
+	addGuiActions("actionShow_Azimutal_Grid", N_("Show Azimutal Grid"), "Z", "Display options", true, false);
+	addGuiActions("actionShow_Equatorial_Grid", N_("Show Equatorial Grid"), "E", "Display options", true, false);
+	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Show Equatorial J2000 Grid"), "", "Display options", true, false);
+	addGuiActions("actionShow_Ecliptic_Line", N_("Show Ecliptic Line"), ",", "Display options", true, false);
+	addGuiActions("actionShow_Equator_Line", N_("Show Equator Line"), ".", "Display options", true, false);
+	addGuiActions("actionShow_Meridian_Line", N_("Show Meridian Line"), "", "Display options", true, false);
+	addGuiActions("actionShow_Cardinal_Points", N_("Show Cardinal Points"), "Q", "Display options", true, false);
 
-	addGuiActions("actionShow_Ground", q_("Show Ground"), "G", "Display options", true, false);
-	addGuiActions("actionShow_Atmosphere", q_("Show Atmosphere"), "A", "Display options", true, false);
-	addGuiActions("actionShow_Fog", q_("Show Fog"), "F", "Display options", true, false);
+	addGuiActions("actionShow_Ground", N_("Show Ground"), "G", "Display options", true, false);
+	addGuiActions("actionShow_Atmosphere", N_("Show Atmosphere"), "A", "Display options", true, false);
+	addGuiActions("actionShow_Fog", N_("Show Fog"), "F", "Display options", true, false);
 	
-	addGuiActions("actionShow_Nebulas", q_("Show Nebulas"), "N", "Display options", true, false);
-	addGuiActions("actionShow_DSS", q_("Show DSS"), "", "Display options", true, false);
-	addGuiActions("actionShow_Stars", q_("Show Stars"), "S", "Display options", true, false);
-	addGuiActions("actionShow_Planets_Hints", q_("Show Planets Hints"), "P", "Display options", true, false);
+	addGuiActions("actionShow_Nebulas", N_("Show Nebulas"), "N", "Display options", true, false);
+	addGuiActions("actionShow_DSS", N_("Show DSS"), "", "Display options", true, false);
+	addGuiActions("actionShow_Stars", N_("Show Stars"), "S", "Display options", true, false);
+	addGuiActions("actionShow_Planets_Hints", N_("Show Planets Hints"), "P", "Display options", true, false);
 	
-	addGuiActions("actionShow_Search_Window", q_("Show Search Window"), "Ctrl+F", "Dialogs", true, false);
-	addGuiActions("actionShow_Help_Window", q_("Show Help Window"), "Ctrl+H", "Dialogs", true, false);
-	addGuiActions("actionShow_Location_Window", q_("Show Location Window"), "Ctrl+L", "Dialogs", true, false);
-	addGuiActions("actionShow_DateTime_Window", q_("Show Date/Time Window"), "Ctrl+T", "Dialogs", true, false);
-	addGuiActions("actionShow_SkyView_Window", q_("Show Sky and Viewing option Window"), "Ctrl+G", "Dialogs", true, false);
-	addGuiActions("actionShow_Configuration_Window", q_("Show Configuration Window"), "Ctrl+C", "Dialogs", true, false);
+	addGuiActions("actionShow_Search_Window", N_("Show Search Window"), "Ctrl+F", "Dialogs", true, false);
+	addGuiActions("actionShow_Help_Window", N_("Show Help Window"), "Ctrl+H", "Dialogs", true, false);
+	addGuiActions("actionShow_Location_Window", N_("Show Location Window"), "Ctrl+L", "Dialogs", true, false);
+	addGuiActions("actionShow_DateTime_Window", N_("Show Date/Time Window"), "Ctrl+T", "Dialogs", true, false);
+	addGuiActions("actionShow_SkyView_Window", N_("Show Sky and Viewing option Window"), "Ctrl+G", "Dialogs", true, false);
+	addGuiActions("actionShow_Configuration_Window", N_("Show Configuration Window"), "Ctrl+C", "Dialogs", true, false);
 	
-	addGuiActions("actionDecrease_Time_Speed", q_("Decrease Time Speed"), "J", "Date and time", false, false);
-	addGuiActions("actionIncrease_Time_Speed", q_("Increase Time Speed"), "L", "Date and time", false, false);
-	addGuiActions("actionSet_Real_Time_Speed", q_("Set Real Time Speed"), "K", "Date and time", false, false);
-	addGuiActions("actionReturn_To_Current_Time", q_("Return To Current Time"), "8", "Date and time", false, false);
-	addGuiActions("actionAdd_Solar_Hour", q_("Add 1 solar hour"), "Ctrl+=", "Date and time", false, true);
-	addGuiActions("actionSubtract_Solar_Hour", q_("Subtract 1 solar hour"), "Ctrl+-", "Date and time", false, true);
-	addGuiActions("actionAdd_Solar_Day", q_("Add 1 solar day"), "=", "Date and time", false, true);
-	addGuiActions("actionSubtract_Solar_Day", q_("Subtract 1 solar day"), "-", "Date and time", false, true);
-	addGuiActions("actionAdd_Solar_Week", q_("Add 1 solar week"), "]", "Date and time", false, true);
-	addGuiActions("actionSubtract_Solar_Week", q_("Subtract 1 solar week"), "[", "Date and time", false, true);
-	addGuiActions("actionAdd_Sidereal_Day", q_("Add 1 sidereal day"), "Alt+=", "Date and time", false, true);
-	addGuiActions("actionSubtract_Sidereal_Day", q_("Subtract 1 sidereal day"), "Alt+-", "Date and time", false, true);
-	addGuiActions("actionAdd_Sidereal_Week", q_("Add 1 sidereal week"), "Alt+]", "Date and time", false, true);
-	addGuiActions("actionSubtract_Sidereal_Week", q_("Subtract 1 sidereal week"), "Alt+[", "Date and time", false, true);
+	addGuiActions("actionDecrease_Time_Speed", N_("Decrease Time Speed"), "J", "Date and time", false, false);
+	addGuiActions("actionIncrease_Time_Speed", N_("Increase Time Speed"), "L", "Date and time", false, false);
+	addGuiActions("actionSet_Real_Time_Speed", N_("Set Real Time Speed"), "K", "Date and time", false, false);
+	addGuiActions("actionReturn_To_Current_Time", N_("Return To Current Time"), "8", "Date and time", false, false);
+	addGuiActions("actionAdd_Solar_Hour", N_("Add 1 solar hour"), "Ctrl+=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Hour", N_("Subtract 1 solar hour"), "Ctrl+-", "Date and time", false, true);
+	addGuiActions("actionAdd_Solar_Day", N_("Add 1 solar day"), "=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Day", N_("Subtract 1 solar day"), "-", "Date and time", false, true);
+	addGuiActions("actionAdd_Solar_Week", N_("Add 1 solar week"), "]", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Week", N_("Subtract 1 solar week"), "[", "Date and time", false, true);
+	addGuiActions("actionAdd_Sidereal_Day", N_("Add 1 sidereal day"), "Alt+=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Sidereal_Day", N_("Subtract 1 sidereal day"), "Alt+-", "Date and time", false, true);
+	addGuiActions("actionAdd_Sidereal_Week", N_("Add 1 sidereal week"), "Alt+]", "Date and time", false, true);
+	addGuiActions("actionSubtract_Sidereal_Week", N_("Subtract 1 sidereal week"), "Alt+[", "Date and time", false, true);
 	
-	addGuiActions("actionGoto_Selected_Object", q_("Goto Selected Object"), "Space", "Move & Select", false, false);
-	addGuiActions("actionSet_Tracking", q_("Set Tracking"), "T", "Move & Select", true, false);
-	addGuiActions("actionZoom_In_Auto", q_("Zoom in to Selected Object"), "/", "Move & Select", false, false);
-	addGuiActions("actionZoom_Out_Auto", q_("Zoom out"), "\\", "Move & Select", false, false);
+	addGuiActions("actionGoto_Selected_Object", N_("Goto Selected Object"), "Space", "Move & Select", false, false);
+	addGuiActions("actionSet_Tracking", N_("Set Tracking"), "T", "Move & Select", true, false);
+	addGuiActions("actionZoom_In_Auto", N_("Zoom in to Selected Object"), "/", "Move & Select", false, false);
+	addGuiActions("actionZoom_Out_Auto", N_("Zoom out"), "\\", "Move & Select", false, false);
 	
-	addGuiActions("actionSwitch_Equatorial_Mount", q_("Switch Equatorial Mount"), "Ctrl+M", "Misc", true, false);
-	addGuiActions("actionShow_Night_Mode", q_("Show Night Mode"), "Q", "Display options", true, false);
-	addGuiActions("actionQuit", q_("Quit"), "Ctrl+Q", "Misc", false, false);
-	addGuiActions("actionSet_Full_Screen", q_("Set Full Screen"), "F1", "Display options", true, false);
-	addGuiActions("actionSave_Screenshot", q_("Save Screenshot"), "Ctrl+S", "Misc", false, false);
-	addGuiActions("actionHorizontal_Flip", q_("Horizontal Flip"), "Ctrl+Shift+H", "Display options", true, false);
-	addGuiActions("actionVertical_Flip", q_("Vertical Flip"), "Ctrl+Shift+V", "Display options", true, false);
+	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch Equatorial Mount"), "Ctrl+M", "Misc", true, false);
+	addGuiActions("actionShow_Night_Mode", N_("Show Night Mode"), "Q", "Display options", true, false);
+	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", "Misc", false, false);
+	addGuiActions("actionSet_Full_Screen", N_("Set Full Screen"), "F1", "Display options", true, false);
+	addGuiActions("actionSave_Screenshot", N_("Save Screenshot"), "Ctrl+S", "Misc", false, false);
+	addGuiActions("actionHorizontal_Flip", N_("Horizontal Flip"), "Ctrl+Shift+H", "Display options", true, false);
+	addGuiActions("actionVertical_Flip", N_("Vertical Flip"), "Ctrl+Shift+V", "Display options", true, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
@@ -829,7 +829,7 @@ void NewGui::addGuiActions(const QString& actionName, const QString& text, const
 	QAction* a;
 	a = new QAction(&StelMainWindow::getInstance());
 	a->setObjectName(actionName);
-	a->setText(text);
+	a->setText(q_(text));
 	a->setShortcut(shortCut);
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
