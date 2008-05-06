@@ -632,7 +632,7 @@ void ConstellationMgr::update(double delta_time)
 }
 
 
-void ConstellationMgr::setArtIntensity(float _max)
+void ConstellationMgr::setArtIntensity(double _max)
 {
 	artMaxIntensity = _max;
 	vector < Constellation * >::const_iterator iter;
