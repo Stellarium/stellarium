@@ -163,9 +163,9 @@ public slots:
 	void setAtmosphereFadeDuration(float f);
 
 	//! Get light pollution luminance level.
-	float getAtmosphereLightPollutionLuminance() const;
+	double getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
-	void setAtmosphereLightPollutionLuminance(float f);
+	void setAtmosphereLightPollutionLuminance(double f);
 	
 private:
 	//! For a given landscape name, return the landscape ID.
