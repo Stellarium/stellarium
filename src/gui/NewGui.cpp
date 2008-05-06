@@ -40,8 +40,6 @@
 #include "Projector.hpp"
 #include "SolarSystem.hpp"
 
-#include "ui_mainGui.h"
-
 #include <QPaintDevice>
 #include <QPainter>
 #include <QGraphicsScene>
@@ -54,6 +52,10 @@
 #include <QTimeLine>
 #include <QFontDatabase>
 #include <QMouseEvent>
+#include <QAction>
+#include <QApplication>
+#include <QFile>
+
 #include <vector>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
@@ -322,21 +324,6 @@ NewGui::NewGui()
 	infoPanel = NULL;
 	buttonBarPath = NULL;
 	buttonHelpLabel = NULL;
-	ui = new Ui_Form();
-
-	// These ugly minimum and maximum sizes are to prevent the setupUi
-	// from setting the window size (which we have already set from
-	// the values in config.ini)
-	QSize windowSize = StelMainWindow::getInstance().size();
-	QSize oldMinSize = StelMainWindow::getInstance().minimumSize();
-	QSize oldMaxSize = StelMainWindow::getInstance().maximumSize();
-	StelMainWindow::getInstance().setMinimumSize(windowSize);
-	StelMainWindow::getInstance().setMaximumSize(windowSize);
-	ui->setupUi(&StelMainWindow::getInstance());
-	
-	// OK, un-fix the window size again
-	StelMainWindow::getInstance().setMinimumSize(oldMinSize);
-	StelMainWindow::getInstance().setMaximumSize(oldMaxSize);
 	
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
@@ -386,137 +373,200 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
-	// The actions need to be added to the main form to be effective
-	foreach (QObject* obj, StelMainWindow::getInstance().children())
-	{
-		QAction* a = qobject_cast<QAction*>(obj);
-		if (a)
-		{
-			if (!a->shortcut().isEmpty())
-			{
-				helpDialog.setKey(a->property("helpGroup").toString(), 
-				                   "",
-				                   a->shortcut().toString(), 
-				                   a->text());
-			}
-			StelMainWindow::getInstance().addAction(a);
-		}
-	}
+	StelMainWindow::getInstance().setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	QString styleFilePath;
+	try
+	{
+		styleFilePath = fileMan.findFile("data/gui/normalStyle.css");
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: can't find Qt style sheet";
+	}
+	QFile styleFile(styleFilePath);
+	styleFile.open(QIODevice::ReadOnly);
+	StelMainWindow::getInstance().setStyleSheet(styleFile.readAll());
+	
+	///////////////////////////////////////////////////////////////////////
+	// Create all the main actions of the program, associated with shortcuts
+	addGuiActions("actionShow_Constellation_Lines", q_("Show Constellation Lines"), "C", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Art", q_("Show Constellation Art"), "R", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Labels", q_("Show Constellation Labels"), "V", "Display options", true, false);
+	addGuiActions("actionShow_Constellation_Boundaries", q_("Show Constellation Boundaries"), "B", "Display options", true, false);
+	
+	addGuiActions("actionShow_Azimutal_Grid", q_("Show Azimutal Grid"), "Z", "Display options", true, false);
+	addGuiActions("actionShow_Equatorial_Grid", q_("Show Equatorial Grid"), "E", "Display options", true, false);
+	addGuiActions("actionShow_Equatorial_J2000_Grid", q_("Show Equatorial J2000 Grid"), "", "Display options", true, false);
+	addGuiActions("actionShow_Ecliptic_Line", q_("Show Ecliptic Line"), ",", "Display options", true, false);
+	addGuiActions("actionShow_Equator_Line", q_("Show Equator Line"), ".", "Display options", true, false);
+	addGuiActions("actionShow_Meridian_Line", q_("Show Meridian Line"), "", "Display options", true, false);
+	addGuiActions("actionShow_Cardinal_Points", q_("Show Cardinal Points"), "Q", "Display options", true, false);
+
+	addGuiActions("actionShow_Ground", q_("Show Ground"), "G", "Display options", true, false);
+	addGuiActions("actionShow_Atmosphere", q_("Show Atmosphere"), "A", "Display options", true, false);
+	addGuiActions("actionShow_Fog", q_("Show Fog"), "F", "Display options", true, false);
+	
+	addGuiActions("actionShow_Nebulas", q_("Show Nebulas"), "N", "Display options", true, false);
+	addGuiActions("actionShow_DSS", q_("Show DSS"), "", "Display options", true, false);
+	addGuiActions("actionShow_Stars", q_("Show Stars"), "S", "Display options", true, false);
+	addGuiActions("actionShow_Planets_Hints", q_("Show Planets Hints"), "P", "Display options", true, false);
+	
+	addGuiActions("actionShow_Search_Window", q_("Show Search Window"), "Ctrl+F", "Dialogs", true, false);
+	addGuiActions("actionShow_Help_Window", q_("Show Help Window"), "Ctrl+H", "Dialogs", true, false);
+	addGuiActions("actionShow_Location_Window", q_("Show Location Window"), "Ctrl+L", "Dialogs", true, false);
+	addGuiActions("actionShow_DateTime_Window", q_("Show Date/Time Window"), "Ctrl+T", "Dialogs", true, false);
+	addGuiActions("actionShow_SkyView_Window", q_("Show Sky and Viewing option Window"), "Ctrl+G", "Dialogs", true, false);
+	addGuiActions("actionShow_Configuration_Window", q_("Show Configuration Window"), "Ctrl+C", "Dialogs", true, false);
+	
+	addGuiActions("actionDecrease_Time_Speed", q_("Decrease Time Speed"), "J", "Date and time", false, false);
+	addGuiActions("actionIncrease_Time_Speed", q_("Increase Time Speed"), "L", "Date and time", false, false);
+	addGuiActions("actionSet_Real_Time_Speed", q_("Set Real Time Speed"), "K", "Date and time", false, false);
+	addGuiActions("actionReturn_To_Current_Time", q_("Return To Current Time"), "8", "Date and time", false, false);
+	addGuiActions("actionAdd_Solar_Hour", q_("Add 1 solar hour"), "Ctrl+=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Hour", q_("Subtract 1 solar hour"), "Ctrl+-", "Date and time", false, true);
+	addGuiActions("actionAdd_Solar_Day", q_("Add 1 solar day"), "=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Day", q_("Subtract 1 solar day"), "-", "Date and time", false, true);
+	addGuiActions("actionAdd_Solar_Week", q_("Add 1 solar week"), "]", "Date and time", false, true);
+	addGuiActions("actionSubtract_Solar_Week", q_("Subtract 1 solar week"), "[", "Date and time", false, true);
+	addGuiActions("actionAdd_Sidereal_Day", q_("Add 1 sidereal day"), "Alt+=", "Date and time", false, true);
+	addGuiActions("actionSubtract_Sidereal_Day", q_("Subtract 1 sidereal day"), "Alt+-", "Date and time", false, true);
+	addGuiActions("actionAdd_Sidereal_Week", q_("Add 1 sidereal week"), "Alt+]", "Date and time", false, true);
+	addGuiActions("actionSubtract_Sidereal_Week", q_("Subtract 1 sidereal week"), "Alt+[", "Date and time", false, true);
+	
+	addGuiActions("actionGoto_Selected_Object", q_("Goto Selected Object"), "Space", "Move & Select", false, false);
+	addGuiActions("actionSet_Tracking", q_("Set Tracking"), "T", "Move & Select", true, false);
+	addGuiActions("actionZoom_In_Auto", q_("Zoom in to Selected Object"), "/", "Move & Select", false, false);
+	addGuiActions("actionZoom_Out_Auto", q_("Zoom out"), "\\", "Move & Select", false, false);
+	
+	addGuiActions("actionSwitch_Equatorial_Mount", q_("Switch Equatorial Mount"), "Ctrl+M", "Misc", true, false);
+	addGuiActions("actionShow_Night_Mode", q_("Show Night Mode"), "Q", "Display options", true, false);
+	addGuiActions("actionQuit", q_("Quit"), "Ctrl+Q", "Misc", false, false);
+	addGuiActions("actionSet_Full_Screen", q_("Set Full Screen"), "F1", "Display options", true, false);
+	addGuiActions("actionSave_Screenshot", q_("Save Screenshot"), "Ctrl+S", "Misc", false, false);
+	addGuiActions("actionHorizontal_Flip", q_("Horizontal Flip"), "Ctrl+Shift+H", "Display options", true, false);
+	addGuiActions("actionVertical_Flip", q_("Vertical Flip"), "Ctrl+Shift+V", "Display options", true, false);
+	
+	//QMetaObject::connectSlotsByName(Form);
+	
+	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
+	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
+	
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
-	QObject::connect(ui->actionShow_Constellation_Lines, SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
-	ui->actionShow_Constellation_Lines->setChecked(cmgr->getFlagLines());
-	QObject::connect(ui->actionShow_Constellation_Art, SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
-	ui->actionShow_Constellation_Art->setChecked(cmgr->getFlagArt());
-	QObject::connect(ui->actionShow_Constellation_Labels, SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
-	ui->actionShow_Constellation_Labels->setChecked(cmgr->getFlagNames());
-	QObject::connect(ui->actionShow_Constellation_Boundaries, SIGNAL(toggled(bool)), module, SLOT(setFlagBoundaries(bool)));
-	ui->actionShow_Constellation_Boundaries->setChecked(cmgr->getFlagBoundaries());
+	QObject::connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
+	getGuiActions("actionShow_Constellation_Lines")->setChecked(cmgr->getFlagLines());
+	QObject::connect(getGuiActions("actionShow_Constellation_Art"), SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
+	getGuiActions("actionShow_Constellation_Art")->setChecked(cmgr->getFlagArt());
+	QObject::connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
+	getGuiActions("actionShow_Constellation_Labels")->setChecked(cmgr->getFlagNames());
+	QObject::connect(getGuiActions("actionShow_Constellation_Boundaries"), SIGNAL(toggled(bool)), module, SLOT(setFlagBoundaries(bool)));
+	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(cmgr->getFlagBoundaries());
 	
 	module = GETSTELMODULE("GridLinesMgr");
 	GridLinesMgr* gmgr = (GridLinesMgr*)module;
-	QObject::connect(ui->actionShow_Equatorial_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
-	ui->actionShow_Equatorial_Grid->setChecked(gmgr->getFlagEquatorGrid());
-	QObject::connect(ui->actionShow_Azimutal_Grid, SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
-	ui->actionShow_Azimutal_Grid->setChecked(gmgr->getFlagAzimutalGrid());
-	QObject::connect(ui->actionShow_Ecliptic_Line, SIGNAL(toggled(bool)), module, SLOT(setFlagEclipticLine(bool)));
-	ui->actionShow_Ecliptic_Line->setChecked(gmgr->getFlagEclipticLine());
-	QObject::connect(ui->actionShow_Equator_Line, SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorLine(bool)));
-	ui->actionShow_Equator_Line->setChecked(gmgr->getFlagEquatorLine());
+	QObject::connect(getGuiActions("actionShow_Equatorial_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorGrid(bool)));
+	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gmgr->getFlagEquatorGrid());
+	QObject::connect(getGuiActions("actionShow_Azimutal_Grid"), SIGNAL(toggled(bool)), module, SLOT(setFlagAzimutalGrid(bool)));
+	getGuiActions("actionShow_Azimutal_Grid")->setChecked(gmgr->getFlagAzimutalGrid());
+	QObject::connect(getGuiActions("actionShow_Ecliptic_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEclipticLine(bool)));
+	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gmgr->getFlagEclipticLine());
+	QObject::connect(getGuiActions("actionShow_Equator_Line"), SIGNAL(toggled(bool)), module, SLOT(setFlagEquatorLine(bool)));
+	getGuiActions("actionShow_Equator_Line")->setChecked(gmgr->getFlagEquatorLine());
 	
 	module = GETSTELMODULE("LandscapeMgr");
 	LandscapeMgr* lmgr = (LandscapeMgr*)module;
-	QObject::connect(ui->actionShow_Ground, SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
-	ui->actionShow_Ground->setChecked(lmgr->getFlagLandscape());
-	QObject::connect(ui->actionShow_Cardinal_Points, SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
-	ui->actionShow_Cardinal_Points->setChecked(lmgr->getFlagCardinalsPoints());
-	QObject::connect(ui->actionShow_Atmosphere, SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
-	ui->actionShow_Atmosphere->setChecked(lmgr->getFlagAtmosphere());
-	QObject::connect(ui->actionShow_Fog, SIGNAL(toggled(bool)), module, SLOT(setFlagFog(bool)));
-	ui->actionShow_Fog->setChecked(lmgr->getFlagFog());
+	QObject::connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), module, SLOT(setFlagLandscape(bool)));
+	getGuiActions("actionShow_Ground")->setChecked(lmgr->getFlagLandscape());
+	QObject::connect(getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), module, SLOT(setFlagCardinalsPoints(bool)));
+	getGuiActions("actionShow_Cardinal_Points")->setChecked(lmgr->getFlagCardinalsPoints());
+	QObject::connect(getGuiActions("actionShow_Atmosphere"), SIGNAL(toggled(bool)), module, SLOT(setFlagAtmosphere(bool)));
+	getGuiActions("actionShow_Atmosphere")->setChecked(lmgr->getFlagAtmosphere());
+	QObject::connect(getGuiActions("actionShow_Fog"), SIGNAL(toggled(bool)), module, SLOT(setFlagFog(bool)));
+	getGuiActions("actionShow_Fog")->setChecked(lmgr->getFlagFog());
 	
 	module = GETSTELMODULE("NebulaMgr");
 	NebulaMgr* nmgr = (NebulaMgr*)module;
-	QObject::connect(ui->actionShow_Nebulas, SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
-	ui->actionShow_Nebulas->setChecked(nmgr->getFlagHints());
+	QObject::connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
+	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
 	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
-	QObject::connect(ui->actionIncrease_Time_Speed, SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
-	QObject::connect(ui->actionDecrease_Time_Speed, SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
-	QObject::connect(ui->actionSet_Real_Time_Speed, SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
-	QObject::connect(ui->actionReturn_To_Current_Time, SIGNAL(triggered()), module, SLOT(setTimeNow()));
-	QObject::connect(ui->actionSwitch_Equatorial_Mount, SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
-	QObject::connect(ui->actionAdd_Solar_Hour, SIGNAL(triggered()), module, SLOT(addHour()));
-	QObject::connect(ui->actionAdd_Solar_Day, SIGNAL(triggered()), module, SLOT(addDay()));
-	QObject::connect(ui->actionAdd_Solar_Week, SIGNAL(triggered()), module, SLOT(addWeek()));
-	QObject::connect(ui->actionSubtract_Solar_Hour, SIGNAL(triggered()), module, SLOT(subtractHour()));
-	QObject::connect(ui->actionSubtract_Solar_Day, SIGNAL(triggered()), module, SLOT(subtractDay()));
-	QObject::connect(ui->actionSubtract_Solar_Week, SIGNAL(triggered()), module, SLOT(subtractWeek()));
-	QObject::connect(ui->actionAdd_Sidereal_Day, SIGNAL(triggered()), module, SLOT(addSiderealDay()));
-	QObject::connect(ui->actionAdd_Sidereal_Week, SIGNAL(triggered()), module, SLOT(addSiderealWeek()));
-	QObject::connect(ui->actionSubtract_Sidereal_Day, SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
-	QObject::connect(ui->actionSubtract_Sidereal_Week, SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
+	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
+	QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(decreaseTimeSpeed()));
+	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), module, SLOT(setRealTimeSpeed()));
+	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), module, SLOT(setTimeNow()));
+	QObject::connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), module, SLOT(setEquatorialMount(bool)));
+	QObject::connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), module, SLOT(addHour()));
+	QObject::connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), module, SLOT(addDay()));
+	QObject::connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), module, SLOT(addWeek()));
+	QObject::connect(getGuiActions("actionSubtract_Solar_Hour"), SIGNAL(triggered()), module, SLOT(subtractHour()));
+	QObject::connect(getGuiActions("actionSubtract_Solar_Day"), SIGNAL(triggered()), module, SLOT(subtractDay()));
+	QObject::connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), module, SLOT(subtractWeek()));
+	QObject::connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(addSiderealDay()));
+	QObject::connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(addSiderealWeek()));
+	QObject::connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
+	QObject::connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
 			
 	module = &StelApp::getInstance();
-	QObject::connect(ui->actionShow_Night_Mode, SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
-	ui->actionShow_Night_Mode->setChecked(StelApp::getInstance().getVisionModeNight());
+	QObject::connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
+	getGuiActions("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
 	
 	module = GETSTELMODULE("MovementMgr");
-	QObject::connect(ui->actionGoto_Selected_Object, SIGNAL(triggered()), module, SLOT(setFlagTracking()));
-	QObject::connect(ui->actionZoom_In_Auto, SIGNAL(triggered()), module, SLOT(autoZoomIn()));
-	QObject::connect(ui->actionZoom_Out_Auto, SIGNAL(triggered()), module, SLOT(autoZoomOut()));
-	QObject::connect(ui->actionSet_Tracking, SIGNAL(toggled(bool)), module, SLOT(setFlagTracking(bool)));
+	QObject::connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), module, SLOT(setFlagTracking()));
+	QObject::connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomIn()));
+	QObject::connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), module, SLOT(autoZoomOut()));
+	QObject::connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), module, SLOT(setFlagTracking(bool)));
 	MovementMgr* mmgr = (MovementMgr*)module;
-	ui->actionSet_Tracking->setChecked(mmgr->getFlagTracking());
+	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
-	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
-	QObject::connect(ui->actionSet_Full_Screen, SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	
-	QObject::connect(ui->actionShow_Location_Window, SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&locationDialog, SIGNAL(closed()), ui->actionShow_Location_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
+	QObject::connect(&locationDialog, SIGNAL(closed()), getGuiActions("actionShow_Location_Window"), SLOT(toggle()));
 
-	QObject::connect(ui->actionShow_Configuration_Window, SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&configurationDialog, SIGNAL(closed()), ui->actionShow_Configuration_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_Configuration_Window"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
+	QObject::connect(&configurationDialog, SIGNAL(closed()), getGuiActions("actionShow_Configuration_Window"), SLOT(toggle()));
 	
-	QObject::connect(ui->actionShow_SkyView_Window, SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
-	QObject::connect(&viewDialog, SIGNAL(closed()), ui->actionShow_SkyView_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_SkyView_Window"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
+	QObject::connect(&viewDialog, SIGNAL(closed()), getGuiActions("actionShow_SkyView_Window"), SLOT(toggle()));
 	
-	QObject::connect(ui->actionShow_Help_Window, SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
-	QObject::connect(&helpDialog, SIGNAL(closed()), ui->actionShow_Help_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_Help_Window"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
+	QObject::connect(&helpDialog, SIGNAL(closed()), getGuiActions("actionShow_Help_Window"), SLOT(toggle()));
 	
-	QObject::connect(ui->actionShow_DateTime_Window, SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
-	QObject::connect(&dateTimeDialog, SIGNAL(closed()), ui->actionShow_DateTime_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_DateTime_Window"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
+	QObject::connect(&dateTimeDialog, SIGNAL(closed()), getGuiActions("actionShow_DateTime_Window"), SLOT(toggle()));
 	
-	QObject::connect(ui->actionShow_Search_Window, SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
-	QObject::connect(&searchDialog, SIGNAL(closed()), ui->actionShow_Search_Window, SLOT(toggle()));
+	QObject::connect(getGuiActions("actionShow_Search_Window"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
+	QObject::connect(&searchDialog, SIGNAL(closed()), getGuiActions("actionShow_Search_Window"), SLOT(toggle()));
 
-	ui->actionSet_Full_Screen->setChecked(StelMainWindow::getInstance().isFullScreen());
+	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
-	QObject::connect(ui->actionSave_Screenshot, SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
+	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
 
 	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	QObject::connect(ui->actionHorizontal_Flip, SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
-	ui->actionHorizontal_Flip->setChecked(proj->getFlipHorz());
-	QObject::connect(ui->actionVertical_Flip, SIGNAL(toggled(bool)), proj, SLOT(setFlipVert(bool)));
-	ui->actionVertical_Flip->setChecked(proj->getFlipVert());
+	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
+	getGuiActions("actionHorizontal_Flip")->setChecked(proj->getFlipHorz());
+	QObject::connect(getGuiActions("actionVertical_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipVert(bool)));
+	getGuiActions("actionVertical_Flip")->setChecked(proj->getFlipVert());
 	
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-	QObject::connect(ui->actionShow_Stars, SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
-	ui->actionShow_Stars->setChecked(smgr->getFlagStars());
+	QObject::connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
+	getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 	
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
-	QObject::connect(ui->actionShow_Planets_Hints, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
-	ui->actionShow_Planets_Hints->setChecked(ssmgr->getFlagHints());
+	QObject::connect(getGuiActions("actionShow_Planets_Hints"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
+	getGuiActions("actionShow_Planets_Hints")->setChecked(ssmgr->getFlagHints());
 	
-	QObject::connect(ui->actionShow_Meridian_Line, SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
-	ui->actionShow_Meridian_Line->setChecked(gmgr->getFlagMeridianLine());
+	QObject::connect(getGuiActions("actionShow_Meridian_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
+	getGuiActions("actionShow_Meridian_Line")->setChecked(gmgr->getFlagMeridianLine());
 	
-	QObject::connect(ui->actionShow_Equatorial_J2000_Grid, SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
-	ui->actionShow_Equatorial_J2000_Grid->setChecked(gmgr->getFlagEquatorJ2000Grid());
+	QObject::connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
+	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
 	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -532,33 +582,33 @@ void NewGui::init()
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
 	QPixmap pxmapOff(":/graphicGui/gui/1-off-time.png");
-	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_DateTime_Window, buttonHelpLabel);
+	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"), buttonHelpLabel);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/2-off-location.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Location_Window, buttonHelpLabel);	
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"), buttonHelpLabel);	
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_SkyView_Window, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window"), buttonHelpLabel);
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/6-off-search.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Search_Window, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window"), buttonHelpLabel);
 	winBar->addButton(b);	
 	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/8-off-settings.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Configuration_Window, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window"), buttonHelpLabel);
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/9-off-help.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, ui->actionShow_Help_Window, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window"), buttonHelpLabel);
 	winBar->addButton(b);
 	
 	
@@ -572,71 +622,71 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLines-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLines-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Constellation_Lines, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Lines"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLabels-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLabels-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Constellation_Labels, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Labels"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationArt-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationArt-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Constellation_Art, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Art"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Equatorial_Grid, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Equatorial_Grid"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btAzimutalGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAzimutalGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Azimutal_Grid, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimutal_Grid"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGround-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGround-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Ground, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Ground"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btCardinalPoints-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btCardinalPoints-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Cardinal_Points, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Cardinal_Points"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btAtmosphere-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAtmosphere-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Atmosphere, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Atmosphere"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btNebula-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNebula-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Nebulas, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_DSS, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionSwitch_Equatorial_Mount, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
-	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionGoto_Selected_Object, buttonHelpLabel);
+	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionGoto_Selected_Object"), buttonHelpLabel);
 	buttonBar->addButton(buttonGotoSelectedObject);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionShow_Night_Mode, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Night_Mode"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, ui->actionQuit, buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit"), buttonHelpLabel);
 	buttonBar->addButton(b);
 	
 	b = new StelButton(NULL, pxmapBlank, pxmapBlank, pxmapBlank);
@@ -644,22 +694,22 @@ void NewGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
-	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionDecrease_Time_Speed, buttonHelpLabel);
+	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionDecrease_Time_Speed"), buttonHelpLabel);
 	buttonBar->addButton(buttonTimeRewind);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
-	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionSet_Real_Time_Speed, buttonHelpLabel);
+	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"), buttonHelpLabel);
 	buttonBar->addButton(buttonTimeRealTimeSpeed);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeNow-off.png");
-	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionReturn_To_Current_Time, buttonHelpLabel);
+	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionReturn_To_Current_Time"), buttonHelpLabel);
 	buttonBar->addButton(buttonTimeCurrent);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeForward-off.png");
-	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, ui->actionIncrease_Time_Speed, buttonHelpLabel);
+	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionIncrease_Time_Speed"), buttonHelpLabel);
 	buttonBar->addButton(buttonTimeForward);
 	
 	// The path drawn around the button bars
@@ -721,8 +771,8 @@ void NewGui::update(double deltaTime)
 		buttonGotoSelectedObject->setChecked(b);
 	
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-	if (ui->actionShow_Stars->isChecked()!=smgr->getFlagStars())
-		ui->actionShow_Stars->setChecked(smgr->getFlagStars());
+	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
+		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 }
 
 bool NewGui::handleMouseMoves(int x, int y)
@@ -760,3 +810,32 @@ void NewGui::updateBarsPos(qreal value)
 	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(), StelMainWindow::getInstance().getGraphicsView()->size().height());
 }
 
+void NewGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+{
+	QAction* a;
+	a = new QAction(&StelMainWindow::getInstance());
+	a->setObjectName(actionName);
+	a->setText(text);
+	a->setShortcut(shortCut);
+	a->setCheckable(checkable);
+	a->setAutoRepeat(autoRepeat);
+	a->setProperty("englishText", QVariant(text));
+	if (!shortCut.isEmpty())
+		helpDialog.setKey(helpGroup, "", shortCut, text);
+	StelMainWindow::getInstance().addAction(a);
+}
+
+QAction* NewGui::getGuiActions(const QString& actionName)
+{
+	QAction* a = StelMainWindow::getInstance().findChild<QAction*>(actionName);
+	if (!a)
+		qWarning() << "Can't find action " << actionName;
+	Q_ASSERT(a);
+	return a;
+}
+
+
+void NewGui::retranslateUi(QWidget *Form)
+{
+	Form->setWindowTitle(QApplication::translate("Form", "Stellarium", 0, QApplication::UnicodeUTF8));
+} // retranslateUi
