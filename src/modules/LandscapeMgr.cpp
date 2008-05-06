@@ -487,13 +487,13 @@ float LandscapeMgr::getAtmosphereFadeDuration(void) const
 }
 
 //! Set light pollution luminance level
-void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f) 
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(double f) 
 {
 	atmosphere->setLightPollutionLuminance(f);
 }
 
 //! Get light pollution luminance level
-float LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const 
+double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const 
 {
 	return atmosphere->getLightPollutionLuminance();
 }

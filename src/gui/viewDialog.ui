@@ -504,7 +504,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1470,7 +1470,14 @@ p, li { white-space: pre-wrap; }
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="lightPollutionSpinBox" />
+                <widget class="QSpinBox" name="lightPollutionSpinBox" >
+                 <property name="minimum" >
+                  <number>1</number>
+                 </property>
+                 <property name="maximum" >
+                  <number>9</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
