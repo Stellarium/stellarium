@@ -18,6 +18,7 @@
 
 #include <cmath>
 #include <cassert>
+#include <QDebug>
 
 #include <config.h>
 #ifndef HAVE_POW10
@@ -72,7 +73,7 @@ void Skybright::set_loc(float latitude, float altitude, float temperature, float
 	float KR = 0.1066f * std::exp(-altitude/8200.f);
 	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relative_humidity/100.f) ,1.33f) *
 		(1.f + 0.33f * sign_latitude * std::sin(RA));
-	float KO = 0.031f * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f;
+	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f;
 	float KW = 0.031f * 0.94f * (relative_humidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f);
 	K = KR + KA + KO + KW;
 }
@@ -86,15 +87,15 @@ void Skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 	else air_mass_moon = 1.f / (cos_dist_moon_zenith+0.025f*std::exp(-11.f*cos_dist_moon_zenith));
 
 	// Air mass for Sun
-	if (cos_dist_sun_zenith<0) air_mass_sun = 40;
+	if (cos_dist_sun_zenith<0) air_mass_sun = 40.f;
 	else air_mass_sun = 1.f / (cos_dist_sun_zenith+0.025f*std::exp(-11.f*cos_dist_sun_zenith));
 
 	b_moon_term1 = pow10(-0.4f * (mag_moon + 54.32f));
 
 	// Moon should have no impact if below the horizon
 	// .05 is ad hoc fadeout range - Rob
-	if( cos_dist_moon_zenith < 0 ) b_moon_term1 *= 1 + cos_dist_moon_zenith/.05;
-	if(cos_dist_moon_zenith < -.05) b_moon_term1 = 0;
+	if( cos_dist_moon_zenith < 0.f ) b_moon_term1 *= 1.f + cos_dist_moon_zenith/0.05f;
+	if(cos_dist_moon_zenith < -0.05f) b_moon_term1 = 0.f;
 
 
 	C3 = pow10(-0.4f*K*air_mass_moon);	// Term for moon brightness computation
@@ -141,8 +142,8 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
-	const float b_twilight = pow10(b_twilight_term + 0.063661977f * dist_zenith/K)
-	                       * (1.7453293f / dist_sun) * (1.f-bKX);
+	const float Ktrimed = K> 0.05f ? K : 0.05f;
+	const float b_twilight = pow10(b_twilight_term + 0.063661977f * dist_zenith/Ktrimed) * (1.7453293f / dist_sun) * (1.f-bKX);
 
 	// 27/08/2003 : Decide increase moonlight for more halo effect...
 	// took out 20070223 Rob :	b_moon *= 2.f;
