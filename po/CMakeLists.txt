@@ -1,2 +1,2 @@
 ADD_SUBDIRECTORY( stellarium ) 
-ADD_SUBDIRECTORY( skycultures ) 
+ADD_SUBDIRECTORY( stellarium-skycultures ) 
