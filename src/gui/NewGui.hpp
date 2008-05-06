@@ -32,7 +32,6 @@
 #include <QDebug>
 
 class QGraphicsSceneMouseEvent;
-class Ui_Form;
 class QTimeLine;
 class QAction;
 class QGraphicsTextItem;
@@ -171,12 +170,18 @@ public:
 private slots:
 	void updateBarsPos(qreal value);
 private:
+	void addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	QAction* getGuiActions(const QString& actionName);
+			
+	void createActions();
+	void retranslateUi(QWidget *Form);
+	
 	LeftStelBar* winBar;
 	BottomStelBar* buttonBar;
 	InfoPanel* infoPanel;
 	StelBarsPath* buttonBarPath;
 	QGraphicsSimpleTextItem* buttonHelpLabel;
-	Ui_Form* ui;
+
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
 	

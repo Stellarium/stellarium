@@ -217,7 +217,6 @@ SET(stellarium_exe_SRCS
 
 ################# compiles .ui files ############
 SET(stellarium_UIS
-  gui/mainGui.ui
   gui/locationDialogGui.ui
   gui/helpDialogGui.ui
   gui/dateTimeDialogGui.ui
