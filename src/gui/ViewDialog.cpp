@@ -246,7 +246,7 @@ void ViewDialog::updateSkyCultureText()
 	}
 	if (descPath.isEmpty())
 	{
-		ui->skyCultureTextBrowser->setHtml("No description");
+		ui->skyCultureTextBrowser->setHtml(q_("No description"));
 	}
 	else
 	{

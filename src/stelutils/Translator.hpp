@@ -29,7 +29,7 @@
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
-#define q_(String) Translator::globalTranslator.qtranslate( gettext_noop(String) )
+#define q_(String) Translator::globalTranslator.qtranslate(String)
 #define N_(String) gettext_noop(String)
 
 //! Class used to translate strings to any language.

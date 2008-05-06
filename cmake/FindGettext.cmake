@@ -29,7 +29,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 	# Update message strings from the code [TODO: run even if pot file exists!]
 	ADD_CUSTOM_COMMAND( 
     	OUTPUT ${_absPotFile}
-        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --qt --keyword=N_ --keyword=translate:2 -C --default-domain=${_potBaseName} --directory=${PROJECT_SOURCE_DIR} --directory=${CMAKE_BINARY_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Fabien Chereau et al"  
+        COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${_absPotFile} --keyword=_ --keyword=q_ --qt --keyword=N_ --add-comments=TRANSLATORS: --keyword=translate:2 -C --default-domain=${_potBaseName} --directory=${PROJECT_SOURCE_DIR} --directory=${CMAKE_BINARY_DIR} --files-from=${_absPotFileIn}  --copyright-holder="Stellarium's team"  
         DEPENDS POTFILES.in
     )
 

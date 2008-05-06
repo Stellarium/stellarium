@@ -1019,7 +1019,7 @@ color: darkgray;
           <item row="4" column="1" >
            <widget class="QGroupBox" name="nebulaGroupBox" >
             <property name="title" >
-             <string>Nebula</string>
+             <string>Nebulas</string>
             </property>
             <property name="checkable" >
              <bool>false</bool>
@@ -1155,7 +1155,7 @@ color: darkgray;
           <item row="6" column="1" >
            <widget class="QGroupBox" name="planetsGroupBox_4" >
             <property name="title" >
-             <string>Shouting Stars</string>
+             <string>Shooting Stars</string>
             </property>
             <property name="checkable" >
              <bool>false</bool>
@@ -1291,7 +1291,7 @@ p, li { white-space: pre-wrap; }
                <item>
                 <widget class="QCheckBox" name="nebulaLabelCheckBox" >
                  <property name="text" >
-                  <string>Nebula</string>
+                  <string>Nebulas</string>
                  </property>
                 </widget>
                </item>
@@ -1499,16 +1499,6 @@ p, li { white-space: pre-wrap; }
           <property name="horizontalScrollBarPolicy" >
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
-          <item>
-           <property name="text" >
-            <string>Guereins</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>Apollo</string>
-           </property>
-          </item>
          </widget>
          <widget class="QCheckBox" name="landscapePositionCheckBox" >
           <property name="geometry" >
@@ -1896,16 +1886,6 @@ p, li { white-space: pre-wrap; }
              <property name="horizontalScrollBarPolicy" >
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
-             <item>
-              <property name="text" >
-               <string>Perspective</string>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>Orthographic</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item>
@@ -1934,16 +1914,6 @@ p, li { white-space: pre-wrap; }
           <property name="horizontalScrollBarPolicy" >
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
-          <item>
-           <property name="text" >
-            <string>Western</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>Polynesian</string>
-           </property>
-          </item>
          </widget>
          <widget class="QCheckBox" name="starloreLanguageCheckBox" >
           <property name="geometry" >
