@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>435</width>
-    <height>460</height>
+    <width>440</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="font" >
@@ -1379,568 +1379,456 @@ p, li { white-space: pre-wrap; }
          <attribute name="title" >
           <string>Landscape</string>
          </attribute>
-         <widget class="QWidget" name="layoutWidget_6" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>88</width>
-            <height>78</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_17" >
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_17" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btGround-on.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QGroupBox" name="planetsGroupBox_5" >
+            <property name="title" >
+             <string>Options</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="verticalSpacing" >
+              <number>0</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="showGroundCheckBox" >
                <property name="text" >
-                <string/>
-               </property>
-               <property name="pixmap" >
-                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btGround-on.png</pixmap>
+                <string>Show ground</string>
                </property>
               </widget>
              </item>
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QGroupBox" name="planetsGroupBox_5" >
-          <property name="geometry" >
-           <rect>
-            <x>110</x>
-            <y>10</y>
-            <width>321</width>
-            <height>81</height>
-           </rect>
-          </property>
-          <property name="title" >
-           <string>Options</string>
-          </property>
-          <property name="checkable" >
-           <bool>false</bool>
-          </property>
-          <layout class="QGridLayout" >
-           <item row="0" column="0" >
-            <widget class="QCheckBox" name="showGroundCheckBox" >
-             <property name="text" >
-              <string>Show ground</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1" >
-            <widget class="QCheckBox" name="showFogCheckBox" >
-             <property name="text" >
-              <string>Show fog</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" >
-            <widget class="QCheckBox" name="showAtmosphereCheckBox" >
-             <property name="text" >
-              <string>Show atmosphere</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1" >
-            <layout class="QHBoxLayout" >
-             <item>
-              <widget class="QLabel" name="label_4" >
+             <item row="0" column="1" >
+              <widget class="QCheckBox" name="showFogCheckBox" >
                <property name="text" >
-                <string>Light pollution:</string>
+                <string>Show fog</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QSpinBox" name="lightPollutionSpinBox" />
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="showAtmosphereCheckBox" >
+               <property name="text" >
+                <string>Show atmosphere</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QLabel" name="label_4" >
+                 <property name="text" >
+                  <string>Light pollution:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="lightPollutionSpinBox" />
+               </item>
+              </layout>
              </item>
             </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QListWidget" name="landscapesListWidget" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>100</y>
-            <width>101</width>
-            <height>271</height>
-           </rect>
-          </property>
-          <property name="horizontalScrollBarPolicy" >
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="landscapePositionCheckBox" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>380</y>
-            <width>391</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Use associated planet and position</string>
-          </property>
-         </widget>
-         <widget class="QTextBrowser" name="landscapeTextBrowser" >
-          <property name="enabled" >
-           <bool>true</bool>
-          </property>
-          <property name="geometry" >
-           <rect>
-            <x>120</x>
-            <y>100</y>
-            <width>311</width>
-            <height>271</height>
-           </rect>
-          </property>
-          <property name="openExternalLinks" >
-           <bool>true</bool>
-          </property>
-         </widget>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QListWidget" name="landscapesListWidget" >
+            <property name="horizontalScrollBarPolicy" >
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QTextBrowser" name="landscapeTextBrowser" >
+            <property name="enabled" >
+             <bool>true</bool>
+            </property>
+            <property name="openExternalLinks" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2" >
+           <widget class="QCheckBox" name="landscapePositionCheckBox" >
+            <property name="text" >
+             <string>Use associated planet and position</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="tabMarking" >
          <attribute name="title" >
           <string>Marking</string>
          </attribute>
-         <widget class="QWidget" name="layoutWidget" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>81</width>
-            <height>91</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_11" >
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="pixmap" >
-                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btEquatorialGrid-on.png</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QGroupBox" name="planetsGroupBox_2" >
-          <property name="geometry" >
-           <rect>
-            <x>100</x>
-            <y>10</y>
-            <width>331</width>
-            <height>111</height>
-           </rect>
-          </property>
-          <property name="title" >
-           <string>Sky Marking</string>
-          </property>
-          <property name="checkable" >
-           <bool>false</bool>
-          </property>
-          <widget class="QCheckBox" name="showEquatorialGridCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>170</x>
-             <y>40</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Equatorial grid</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showAzimutalGridCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>172</x>
-             <y>17</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Azimutal grid</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showMeridianLineCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>40</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Meridian line</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showEclipticLineCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>20</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Ecliptic line</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showEquatorLineCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>60</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Equator line</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showCardinalPointsCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>80</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Cardinal points</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox" >
-           <property name="geometry" >
-            <rect>
-             <x>170</x>
-             <y>70</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Equatorial J2000 grid</string>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="layoutWidget_2" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>140</y>
-            <width>81</width>
-            <height>91</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" >
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_12" >
-               <property name="text" >
-                <string/>
-               </property>
-               <property name="pixmap" >
-                <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btConstellationLines-on.png</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>16</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QGroupBox" name="planetsGroupBox_3" >
-          <property name="geometry" >
-           <rect>
-            <x>100</x>
-            <y>140</y>
-            <width>331</width>
-            <height>91</height>
-           </rect>
-          </property>
-          <property name="title" >
-           <string>Constellations</string>
-          </property>
-          <property name="checkable" >
-           <bool>false</bool>
-          </property>
-          <widget class="QCheckBox" name="planetOrbitCheckBox_3" >
-           <property name="geometry" >
-            <rect>
-             <x>170</x>
-             <y>20</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Show boundaries</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="planetScaleMoonCheckBox_3" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>40</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Show lines</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="planetLightSpeedCheckBox_4" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>20</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Show labels</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="planetLightSpeedCheckBox_5" >
-           <property name="geometry" >
-            <rect>
-             <x>10</x>
-             <y>60</y>
-             <width>156</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text" >
-            <string>Show art</string>
-           </property>
-          </widget>
-          <widget class="QWidget" name="layoutWidget_3" >
-           <property name="geometry" >
-            <rect>
-             <x>160</x>
-             <y>50</y>
-             <width>177</width>
-             <height>29</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" >
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QVBoxLayout" >
             <property name="spacing" >
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="label_6" >
-              <property name="text" >
-               <string>Art brightness: </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox_2" />
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_11" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btEquatorialGrid-on.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
            </layout>
-          </widget>
-         </widget>
-         <widget class="QGroupBox" name="planetsGroupBox_6" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>240</y>
-            <width>421</width>
-            <height>161</height>
-           </rect>
-          </property>
-          <property name="title" >
-           <string>Projection</string>
-          </property>
-          <property name="checkable" >
-           <bool>false</bool>
-          </property>
-          <layout class="QHBoxLayout" >
-           <property name="spacing" >
-            <number>2</number>
-           </property>
-           <item>
-            <widget class="QListWidget" name="projectionListWidget" >
-             <property name="sizePolicy" >
-              <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QGroupBox" name="planetsGroupBox_2" >
+            <property name="title" >
+             <string>Sky Marking</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" >
+             <property name="verticalSpacing" >
+              <number>0</number>
              </property>
-             <property name="minimumSize" >
-              <size>
-               <width>110</width>
-               <height>0</height>
-              </size>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="showEclipticLineCheckBox" >
+               <property name="text" >
+                <string>Ecliptic line</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QCheckBox" name="showAzimutalGridCheckBox" >
+               <property name="text" >
+                <string>Azimutal grid</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="showMeridianLineCheckBox" >
+               <property name="text" >
+                <string>Meridian line</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QCheckBox" name="showEquatorialGridCheckBox" >
+               <property name="text" >
+                <string>Equatorial grid</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" >
+              <widget class="QCheckBox" name="showEquatorLineCheckBox" >
+               <property name="text" >
+                <string>Equator line</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox" >
+               <property name="text" >
+                <string>Equatorial J2000 grid</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" >
+              <widget class="QCheckBox" name="showCardinalPointsCheckBox" >
+               <property name="text" >
+                <string>Cardinal points</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_12" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/btConstellationLines-on.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QGroupBox" name="planetsGroupBox_3" >
+            <property name="title" >
+             <string>Constellations</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QHBoxLayout" >
+             <property name="spacing" >
+              <number>9</number>
              </property>
-             <property name="maximumSize" >
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="showConstellationLabelsCheckBox" >
+                 <property name="text" >
+                  <string>Show labels</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showConstellationLinesCheckBox" >
+                 <property name="text" >
+                  <string>Show lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showConstellationBoundariesCheckBox" >
+                 <property name="text" >
+                  <string>Show boundaries</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="showConstellationArtCheckBox" >
+                 <property name="text" >
+                  <string>Show art</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" >
+                 <property name="spacing" >
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_6" >
+                   <property name="text" >
+                    <string>Art brightness: </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox" >
+                   <property name="maximum" >
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="singleStep" >
+                    <double>0.100000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2" >
+           <widget class="QGroupBox" name="planetsGroupBox_6" >
+            <property name="title" >
+             <string>Projection</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QHBoxLayout" >
+             <property name="spacing" >
+              <number>2</number>
              </property>
-             <property name="horizontalScrollBarPolicy" >
-              <enum>Qt::ScrollBarAlwaysOff</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextBrowser" name="projectionTextBrowser" >
-             <property name="openExternalLinks" >
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+             <item>
+              <widget class="QListWidget" name="projectionListWidget" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="horizontalScrollBarPolicy" >
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextBrowser" name="projectionTextBrowser" >
+               <property name="openExternalLinks" >
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="tab" >
          <attribute name="title" >
           <string>Starlore</string>
          </attribute>
-         <widget class="QListWidget" name="culturesListWidget" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>81</width>
-            <height>351</height>
-           </rect>
-          </property>
-          <property name="horizontalScrollBarPolicy" >
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="starloreLanguageCheckBox" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>370</y>
-            <width>341</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Use associated language for sky labeling</string>
-          </property>
-         </widget>
-         <widget class="QTextBrowser" name="skyCultureTextBrowser" >
-          <property name="geometry" >
-           <rect>
-            <x>100</x>
-            <y>10</y>
-            <width>331</width>
-            <height>351</height>
-           </rect>
-          </property>
-          <property name="openExternalLinks" >
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QListWidget" name="culturesListWidget" >
+            <property name="maximumSize" >
+             <size>
+              <width>90</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="horizontalScrollBarPolicy" >
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QTextBrowser" name="skyCultureTextBrowser" >
+            <property name="openExternalLinks" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2" >
+           <widget class="QCheckBox" name="starloreLanguageCheckBox" >
+            <property name="text" >
+             <string>Use associated language for sky labeling</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>

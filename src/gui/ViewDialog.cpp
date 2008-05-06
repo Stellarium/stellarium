@@ -36,6 +36,7 @@
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -207,6 +208,32 @@ void ViewDialog::setVisible(bool v)
 		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Cardinal_Points");
 		connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
 		connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		// Constellations
+		ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+		
+		ui->showConstellationLinesCheckBox->setChecked(cmgr->getFlagLines());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Constellation_Lines");
+		connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagNames());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Constellation_Labels");
+		connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showConstellationBoundariesCheckBox->setChecked(cmgr->getFlagBoundaries());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Constellation_Boundaries");
+		connect(a, SIGNAL(toggled(bool)), ui->showConstellationBoundariesCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->showConstellationArtCheckBox->setChecked(cmgr->getFlagArt());
+		a = StelMainWindow::getInstance().findChild<QAction*>("actionShow_Constellation_Art");
+		connect(a, SIGNAL(toggled(bool)), ui->showConstellationArtCheckBox, SLOT(setChecked(bool)));
+		connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+		
+		ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
+		connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
 		
 		dialog->show();
 		dialog->raise();
