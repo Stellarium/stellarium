@@ -19,6 +19,8 @@
 
 // Class used to manage group of constellation
 
+#include <config.h>
+
 #include <vector>
 #include <QDebug>
 #include <QFile>
@@ -610,7 +612,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 void ConstellationMgr::updateI18n()
 {
-	Translator trans("skycultures", StelApp::getInstance().getFileMgr().getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
+	Translator trans(PACKAGE_NAME "-skycultures", StelApp::getInstance().getFileMgr().getLocaleDir(), StelApp::getInstance().getLocaleMgr().getSkyTranslator().getTrueLocaleName());
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{

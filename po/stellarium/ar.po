@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-29 01:00+0200\n"
+"POT-Creation-Date: 2008-05-06 09:19+0200\n"
 "PO-Revision-Date: 2008-01-11 09:49+0000\n"
 "Last-Translator: AhmedQatar <qaaaaaaq@yahoo.co.uk>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -21,23 +21,33 @@ msgstr ""
 msgid " Light Years"
 msgstr " سنوات ضوئية"
 
-#: src/ui_viewDialog.h:1280
+#: src/modules/LandscapeMgr.cpp:433
+#, qt-format
+msgid ", %1 m"
+msgstr ""
+
+#: src/gui/NewGui.cpp:218
+#, c-format, qt-format
+msgid ", %1m"
+msgstr ""
+
+#: src/ui_viewDialog.h:1284
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1286
 msgid "10000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1287
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1285
 msgid "80"
 msgstr ""
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1279
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
@@ -55,24 +65,24 @@ msgstr ""
 msgid "AU"
 msgstr "وحدة فلكية"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1294
 msgid "Amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1304
-msgid "Apollo"
-msgstr ""
-
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1319
 msgid "Art brightness: "
 msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "المؤلف: "
 
 #: src/modules/Nebula.cpp:97 src/modules/Planet.cpp:128
 #: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:118
 msgid "Az/Alt: "
 msgstr "سمتي/ استوائي: "
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1307
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "الشبكة السمتية"
@@ -81,7 +91,7 @@ msgstr "الشبكة السمتية"
 msgid "Callisto"
 msgstr "كاليستو"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1311
 #, fuzzy
 msgid "Cardinal points"
 msgstr "الجهات الاربع"
@@ -94,22 +104,25 @@ msgstr "جارون"
 msgid "Chinese"
 msgstr "صينية"
 
-#: src/ui_searchDialogGui.h:225
-#, fuzzy
-msgid "Completions"
-msgstr "الفراغ"
+#: src/ui_configurationDialog.h:416
+msgid "Configuration"
+msgstr "الاعدادات"
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1314
 #, fuzzy
 msgid "Constellations"
 msgstr "خطوط الأبراج"
 
 #: src/ui_locationDialogGui.h:269
 #, fuzzy
-msgid "Cursor :"
+msgid "Cursor:"
 msgstr "المؤشر: "
 
-#: src/ui_dateTimeDialogGui.h:124
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:451
 #, fuzzy
 msgid "Date and Time"
 msgstr "التاريخ و التوقيت"
@@ -127,7 +140,7 @@ msgstr "ديون"
 msgid "Distance: "
 msgstr "المسافة "
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1275
 msgid "Download images"
 msgstr ""
 
@@ -139,7 +152,7 @@ msgstr "شرق"
 msgid "Earth"
 msgstr "الأرض"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1309
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "خط المسار الشمسي"
@@ -157,17 +170,21 @@ msgstr "إنكيلادوس"
 msgid "Equ of date"
 msgstr ""
 
-#: src/ui_viewDialog.h:1313
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr ""
+
+#: src/ui_viewDialog.h:1310
 #, fuzzy
 msgid "Equator line"
 msgstr "خط الاستواء"
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1312
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1306
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "الشبكة الاستوائية"
@@ -176,13 +193,22 @@ msgstr "الشبكة الاستوائية"
 msgid "Europa"
 msgstr "يوروبا"
 
+#: src/gui/ViewDialog.cpp:305
+#, fuzzy
+msgid "Exceptional Leonid rate"
+msgstr ": المعدل الاستثنائي لليوند Leonid (حركة النيازك العالية 17 نوفمبر)"
+
 #: src/ui_searchDialogGui.h:210
 msgid "Find Object"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:123 src/ui_helpDialogGui.h:145
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:172 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:962
+#: src/ui_viewDialog.h:964 src/ui_configurationDialog.h:137
 #, fuzzy
 msgid "Form"
 msgstr "المخاضة"
@@ -195,14 +221,14 @@ msgstr "غانيميد"
 msgid "Go"
 msgstr ""
 
-#: src/ui_viewDialog.h:1301
-#, fuzzy
-msgid "Guereins"
-msgstr "الحية"
-
 #: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "مساعدة"
+
+#: src/gui/ViewDialog.cpp:308
+#, fuzzy
+msgid "Highest rate ever (1966 Leonids)"
+msgstr ": أعلى معدل سبق روئيته (1966 Leonids)"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -211,6 +237,14 @@ msgstr "هايبريون"
 #: src/translations.h:54
 msgid "Iapetus"
 msgstr "ايباتوس (احد اقمار زحل )"
+
+#: src/core/MappingClasses.cpp:183
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -233,7 +267,7 @@ msgstr "المشتري"
 msgid "Korean"
 msgstr ""
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1290
 msgid "Labels and markers"
 msgstr ""
 
@@ -241,17 +275,17 @@ msgstr ""
 msgid "Lakota"
 msgstr ""
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1303
 #, fuzzy
 msgid "Landscape"
 msgstr "المناظر"
 
 #: src/ui_locationDialogGui.h:275
 #, fuzzy
-msgid "Latitude :"
+msgid "Latitude:"
 msgstr "خط العرض: "
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1301
 msgid "Light pollution:"
 msgstr ""
 
@@ -274,9 +308,13 @@ msgstr "تحميل كتالوج "
 msgid "Location"
 msgstr "الموقع الجغرافي"
 
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "الموقع "
+
 #: src/ui_locationDialogGui.h:271
 #, fuzzy
-msgid "Longitude :"
+msgid "Longitude:"
 msgstr "خط الطول: "
 
 #: src/modules/Nebula.cpp:89 src/modules/Nebula.cpp:114
@@ -291,7 +329,12 @@ msgstr "قيمة "
 msgid "Magnitude: %1"
 msgstr "قيمة "
 
-#: src/ui_viewDialog.h:1331
+#: src/ui_configurationDialog.h:430
+#, fuzzy
+msgid "Main"
+msgstr "القاعدة"
+
+#: src/ui_viewDialog.h:1321
 #, fuzzy
 msgid "Marking"
 msgstr "القاعدة"
@@ -300,11 +343,15 @@ msgstr "القاعدة"
 msgid "Mars"
 msgstr "المريخ"
 
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr ""
+
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "عطارد"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1308
 #, fuzzy
 msgid "Meridian line"
 msgstr "خط دائرة نصف النهار"
@@ -325,16 +372,20 @@ msgstr "ِشمال"
 msgid "Navajo"
 msgstr ""
 
-#: src/ui_viewDialog.h:1269 src/ui_viewDialog.h:1289
+#: src/ui_viewDialog.h:1273 src/ui_viewDialog.h:1293
 #, fuzzy
-msgid "Nebula"
+msgid "Nebulas"
 msgstr "السدم السماوية [N]"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "نبتون"
 
-#: src/ui_viewDialog.h:1284
+#: src/gui/ViewDialog.cpp:249
+msgid "No description"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:299 src/ui_viewDialog.h:1288
 #, fuzzy
 msgid "Normal rate"
 msgstr ": المعدل الطبيعي"
@@ -343,27 +394,35 @@ msgstr ": المعدل الطبيعي"
 msgid "Norse"
 msgstr ""
 
-#: src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1297
 #, fuzzy
 msgid "Options"
 msgstr "الجبار"
 
-#: src/ui_searchDialogGui.h:223
-msgid "Orion"
-msgstr "الجبار"
-
-#: src/ui_viewDialog.h:1330
+#: src/core/MappingClasses.cpp:276
 msgid "Orthographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:281
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
 msgstr ""
 
 #: src/modules/StarWrapper.cpp:123
 msgid "Parallax: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1327
+#: src/core/MappingClasses.cpp:11
 #, fuzzy
 msgid "Perspective"
 msgstr "الوقت الحالي"
+
+#: src/core/MappingClasses.cpp:16
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -373,11 +432,11 @@ msgstr "فوبوس"
 msgid "Phoebe"
 msgstr "فويبي"
 
-#: src/ui_viewDialog.h:1288
+#: src/ui_viewDialog.h:1292
 msgid "Planets"
 msgstr "الكواكب"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1266
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "تلميحات الكواكب"
@@ -386,16 +445,21 @@ msgstr "تلميحات الكواكب"
 msgid "Pluto"
 msgstr "بلوتو"
 
-#: src/translations.h:76 src/ui_viewDialog.h:1338
+#: src/translations.h:76
 msgid "Polynesian"
 msgstr "بولونيزي (نسبة الى جزر في المحيط الهادئ)"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_configurationDialog.h:429
+#, fuzzy
+msgid "Program language:"
+msgstr "لغة البرنامج: "
+
+#: src/ui_viewDialog.h:1320
 #, fuzzy
 msgid "Projection"
 msgstr "النمط ثلاثي الأبعاد:"
 
-#: src/ui_viewDialog.h:963
+#: src/ui_dateTimeDialogGui.h:173 src/ui_configurationDialog.h:138
 msgid ""
 "QFrame {\n"
 "\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
@@ -678,8 +742,292 @@ msgid ""
 " }\n"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:147 src/ui_locationDialogGui.h:255
-#: src/ui_searchDialogGui.h:211 src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:965
+msgid ""
+"QFrame {\n"
+"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
+"stop: 1 #19233c);\n"
+"\tborder: 0px;\n"
+"\tcolor : #babdc4;\n"
+"    font-family: \"DejaVu\";\n"
+"}\n"
+"\n"
+"DialogFrame {\n"
+"  border-width: 1px;\n"
+"  border-style: solid;\n"
+"  border-color: #081f25;\n"
+"}\n"
+"\n"
+"ResizeFrame {\n"
+" background-image: url(data/gui/resize.png);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"\tbackground: None;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"     border: 1.5px solid #2e2e36;\n"
+"     border-radius: 10px;\n"
+"     padding: 0 8px;\n"
+"     background: white;\n"
+"     selection-background-color: darkgray;\n"
+" }\n"
+"\n"
+"QPushButton {\n"
+"  border: 1.5px solid #2e2e36;\n"
+"  border-radius: 10px;\n"
+"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+" border: 1px solid #2e2e36;\n"
+" background: #4a4b50;\n"
+" width: 15px;\n"
+"         margin: 22px 0px 22px 0px;\n"
+"     }\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    border: 2px solid #4a4b50;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
+"\tborder-radius: 4px;\n"
+"\tmin-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: bottom;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"         border: 3px solid #2e2e36;\n"
+"         background: #36375c;\n"
+"         height: 20px;\n"
+"         border-radius: 5px;\n"
+"         subcontrol-position: top;\n"
+"         subcontrol-origin: margin;\n"
+" }\n"
+"\n"
+"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
+"         border: 2px solid grey;\n"
+"         width: 3px;\n"
+"         height: 3px;\n"
+"         background: white;\n"
+" }\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"         background: none;\n"
+" }\n"
+"\n"
+"QGroupBox {\n"
+"     border: 1px solid #1f2f25;\n"
+"     border-radius: 4px;\n"
+"     margin-top: 1ex;\n"
+"     font-weight: bold;\n"
+"     background: solid #223B34;\n"
+" }\n"
+"\n"
+"QGroupBox::title {\n"
+"     subcontrol-origin: margin;\n"
+"     padding: 0px 3px;\n"
+"     color : #babdc4;\n"
+"\t left: 15px\n"
+" }\n"
+"\n"
+"\n"
+"QTabWidget::pane {\n"
+"   border-top: 2px solid #348483;\n"
+"}\n"
+"\n"
+"/* Style the tab using the tab sub-control. Note that\n"
+"         it reads QTabBar _not_ QTabWidget */\n"
+"QTabBar::tab {\n"
+"    font : bold;\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#2a3b50, stop: 1 #19233c);\n"
+"    border: 2px solid #348483;\n"
+"    border-bottom-color: #348483; /* same as the pane color */\n"
+"    border-top-left-radius: 4px;\n"
+"    border-top-right-radius: 4px;\n"
+"    min-width: 10ex;\n"
+"    padding: 2px;\n"
+"    color: #babdc4;\n"
+"}\n"
+"\n"
+"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
+"\t#19233c, stop: 1 #2a3b50);\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:selected {\n"
+"         border-color: #A2A78B;\n"
+"         border-bottom-color: #2a3b50; /* same as pane color */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:!selected {\n"
+"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
+"     }\n"
+"\n"
+"     /* make use of negative margins for overlapping tabs */\n"
+"     QTabBar::tab:selected {\n"
+"         /* expand/overlap to the left and right by 4px */\n"
+"         margin-left: -4px;\n"
+"         margin-right: -4px;\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:first:selected {\n"
+"         margin-left: 0; /* the first selected tab has nothing to overlap "
+"with on the left */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:last:selected {\n"
+"         margin-right: 0; /* the last selected tab has nothing to overlap "
+"with on the right */\n"
+"     }\n"
+"\n"
+"     QTabBar::tab:only-one {\n"
+"         margin: 0; /* if there is only one tab, we don't want overlapping "
+"margins */\n"
+"     }\n"
+"\n"
+"QListWidget {\n"
+" \tbackground: solid #121324;\n"
+"\tborder: 1px;\n"
+"    border-radius: 4px;\n"
+"    border-color: #081f25;\n"
+"    border-style: solid;\n"
+"  selection-background-color: #2a3b50;\n"
+"}\n"
+"\n"
+"QCheckBox\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QCheckBox::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  background-color: #225555;\n"
+"}\n"
+"QCheckBox::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
+"}\n"
+"QCheckBox::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
+"}\n"
+"\n"
+"QRadioButton\n"
+"{\n"
+"  color : #babdc4;\n"
+"}\n"
+"QRadioButton::indicator\n"
+"{\n"
+"  width: 13px;\n"
+"  height: 13px;\n"
+"  margin-left: 4px;\n"
+"}\n"
+"QRadioButton::indicator:checked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-checked.png);\n"
+"}\n"
+"QRadioButton::indicator:unchecked\n"
+"{\n"
+"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
+"}\n"
+"\n"
+"QSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
+"border */\n"
+"     border-image: url(:/images/spinup.png) 1;\n"
+"     border-width: 1px;\n"
+"\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:hover {\n"
+"     border-image: url(:/images/spinup_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-button:pressed {\n"
+"     border-image: url(:/images/spinup_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow {\n"
+"     image: url(:/images/up_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
+"value is max */\n"
+"    image: url(:/images/up_arrow_disabled.png);\n"
+" }\n"
+"\n"
+" QSpinBox::down-button {\n"
+"     subcontrol-origin: border;\n"
+"     subcontrol-position: bottom right; /* position at bottom right corner "
+"*/\n"
+"\n"
+"     width: 16px;\n"
+"     border-image: url(:/images/spindown.png) 1;\n"
+"     border-width: 1px;\n"
+"     border-top-width: 0;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:hover {\n"
+"     border-image: url(:/images/spindown_hover.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-button:pressed {\n"
+"     border-image: url(:/images/spindown_pressed.png) 1;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow {\n"
+"     image: url(:/images/down_arrow.png);\n"
+"     width: 7px;\n"
+"     height: 7px;\n"
+" }\n"
+"\n"
+" QSpinBox::down-arrow:disabled,\n"
+" QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"    image: url(:/images/down_arrow_disabled.png);\n"
+" }\n"
+"\n"
+"QDoubleSpinBox {\n"
+"     padding-right: 15px; /* make room for the arrows */\n"
+"     border-image: url(:/images/frame.png) 4;\n"
+"     border-width: 3;\n"
+"background-color: #225555;\n"
+"color : #babdc4;\n"
+" }\n"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:452 src/ui_helpDialogGui.h:147
+#: src/ui_locationDialogGui.h:255 src/ui_searchDialogGui.h:211
+#: src/ui_viewDialog.h:1245 src/ui_configurationDialog.h:417
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -692,14 +1040,6 @@ msgid ""
 "QToolButton:pressed {\n"
 "color: darkgray;\n"
 "}"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:125
-msgid ""
-"QToolButton { color: white; font-weight: bold; background: None; border: 1px "
-"solid\n"
-"          #2e2e36; border-radius: 2px; } QToolButton:pressed { color: "
-"darkgray; }"
 msgstr ""
 
 #: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
@@ -721,12 +1061,12 @@ msgstr "جنوب"
 msgid "Saturn"
 msgstr "زحل"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1269
 #, fuzzy
 msgid "Scale Moon"
 msgstr "حفظ الموقع"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1261
 #, fuzzy
 msgid "Scale:"
 msgstr "تكبير القمر"
@@ -737,64 +1077,64 @@ msgstr "اختر واخرج من البرنامج للتنفيذ."
 
 #: src/ui_locationDialogGui.h:273
 #, fuzzy
-msgid "Selected :"
+msgid "Selected:"
 msgstr "مختار: "
 
-#: src/ui_viewDialog.h:1270
-msgid "Short labels"
+#: src/ui_viewDialog.h:1278
+msgid "Shooting Stars"
 msgstr ""
 
 #: src/ui_viewDialog.h:1274
-msgid "Shouting Stars"
+msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1255 src/ui_viewDialog.h:1261 src/ui_viewDialog.h:1268
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1259 src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1272
+#: src/ui_viewDialog.h:1277
 #, fuzzy
 msgid "Show"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1318
 #, fuzzy
 msgid "Show art"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1296
+#: src/ui_viewDialog.h:1300
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "الغلاف الجوي"
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1315
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1299
 #, fuzzy
 msgid "Show fog"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1298
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1317
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1316
 #, fuzzy
 msgid "Show lines"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1267
 msgid "Show marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1268
 msgid "Show orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1270
 msgid "Simulate light speed"
 msgstr ""
 
@@ -802,12 +1142,12 @@ msgstr ""
 msgid "Size: "
 msgstr "حجم "
 
-#: src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1295
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1305
 msgid "Sky Marking"
 msgstr ""
 
@@ -819,14 +1159,25 @@ msgstr "مستكشف المجموعة الشمسية"
 msgid "Spectral Type: "
 msgstr "النوع الطيفي "
 
-#: src/ui_viewDialog.h:1340
+#: src/gui/ViewDialog.cpp:302
+#, fuzzy
+msgid "Standard Perseids rate"
+msgstr ""
+": المعدل القياسي للبيرسد Perseids (حركة النيازك العالية في شهر اغسطس من كل "
+"عام)"
+
+#: src/ui_viewDialog.h:1323
 #, fuzzy
 msgid "Starlore"
 msgstr "النجم"
 
-#: src/ui_viewDialog.h:1256 src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1260 src/ui_viewDialog.h:1291
 msgid "Stars"
 msgstr "النجوم"
+
+#: src/core/MappingClasses.cpp:133
+msgid "Stereographic"
+msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
@@ -836,6 +1187,26 @@ msgstr "الشمس"
 msgid "Tethys"
 msgstr "تيثيس"
 
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:228
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:138
+msgid "This mode is similar to fish-eye projection mode."
+msgstr ""
+
+#: src/main.cpp:49
+msgid "This system does not support OpenGL."
+msgstr ""
+
 #: src/translations.h:52
 msgid "Titan"
 msgstr "تيتن"
@@ -844,7 +1215,7 @@ msgstr "تيتن"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1262
 #, fuzzy
 msgid "Twinkle"
 msgstr "مثلث"
@@ -861,25 +1232,25 @@ msgstr ""
 msgid "Uranus"
 msgstr "أورانوس"
 
-#: src/ui_viewDialog.h:1339
+#: src/ui_viewDialog.h:1322
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1302
 msgid "Use associated planet and position"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:267
 msgid ""
 "Use the mouse wheel to zoom on the map.\n"
-"Click and drag the mouse to move the screen"
+"Click and drag the mouse to move the screen."
 msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "الزهرة"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1244
 #, fuzzy
 msgid "View"
 msgstr "الفيديو"
@@ -888,13 +1259,13 @@ msgstr "الفيديو"
 msgid "W"
 msgstr "غرب"
 
-#: src/translations.h:77 src/ui_viewDialog.h:1335
+#: src/translations.h:77
 msgid "Western"
 msgstr "غربي"
 
-#: src/ui_dateTimeDialogGui.h:127 src/ui_helpDialogGui.h:158
+#: src/ui_dateTimeDialogGui.h:463 src/ui_helpDialogGui.h:158
 #: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1256 src/ui_configurationDialog.h:428
 msgid "X"
 msgstr ""
 
@@ -904,12 +1275,8 @@ msgid ""
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1263
 msgid "amount:"
-msgstr ""
-
-#: src/ui_dateTimeDialogGui.h:128
-msgid "explain"
 msgstr ""
 
 #~ msgid ""
@@ -926,17 +1293,6 @@ msgstr ""
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Bad command line argument(s)\n"
-
-#~ msgid ": Exceptional Leonid rate"
-#~ msgstr ": المعدل الاستثنائي لليوند Leonid (حركة النيازك العالية 17 نوفمبر)"
-
-#~ msgid ": Highest rate ever (1966 Leonids)"
-#~ msgstr ": أعلى معدل سبق روئيته (1966 Leonids)"
-
-#~ msgid ": Standard Perseids rate"
-#~ msgstr ""
-#~ ": المعدل القياسي للبيرسد Perseids (حركة النيازك العالية في شهر اغسطس من "
-#~ "كل عام)"
 
 #~ msgid "Actual Time"
 #~ msgstr "الوقت الفعلي"
@@ -992,9 +1348,6 @@ msgstr ""
 
 #~ msgid "Auriga"
 #~ msgstr "ممسك الأعنة"
-
-#~ msgid "Author: "
-#~ msgstr "المؤلف: "
 
 #~ msgid "Azimuthal Grid [Z]"
 #~ msgstr "الشبكة السمتية [Z]"
@@ -1176,8 +1529,9 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "توقف تسجيل الاوامر."
 
-#~ msgid "Configuration"
-#~ msgstr "الاعدادات"
+#, fuzzy
+#~ msgid "Completions"
+#~ msgstr "الفراغ"
 
 #~ msgid "Configuration window"
 #~ msgstr "نافذة الاعدادات"
@@ -1485,6 +1839,10 @@ msgstr ""
 #~ msgstr "الكركي"
 
 #, fuzzy
+#~ msgid "Guereins"
+#~ msgstr "الحية"
+
+#, fuzzy
 #~ msgid "Gwan"
 #~ msgstr "العملاق"
 
@@ -1650,9 +2008,6 @@ msgstr ""
 
 #~ msgid "Local Script: "
 #~ msgstr "نص برمجي محلي: "
-
-#~ msgid "Location: "
-#~ msgstr "الموقع "
 
 #~ msgid "Longitude: "
 #~ msgstr "خط الطول: "
@@ -1822,6 +2177,9 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "البستان"
 
+#~ msgid "Orion"
+#~ msgstr "الجبار"
+
 #~ msgid "Outer Fence"
 #~ msgstr "السياج الخارجي"
 
@@ -1879,9 +2237,6 @@ msgstr ""
 
 #~ msgid "Preset Sky Time: "
 #~ msgstr "توقيت السماء المختار مسبقا: "
-
-#~ msgid "Program Language: "
-#~ msgstr "لغة البرنامج: "
 
 #~ msgid "Prow"
 #~ msgstr "مقدمة السفينة"
