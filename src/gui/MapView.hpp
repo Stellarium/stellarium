@@ -61,16 +61,16 @@ public:
 	//! Select a city
 	void select(const City* city);
 	//! Select a position
-	void select(double longitude, double latitude);
+	void select(double longitude, double latitude, int altitude = 0);
 	//! Highlight a city (0) if unhighlighted
 	void highlightCity(const City* city);
 signals:
 	//! Signal emitted when we select a new location
 	//! If no city is selected we set city to the empty string
-	void positionSelected(double longitude, double latitude, QString city);
+	void positionSelected(double longitude, double latitude, int altitude, QString city);
 	//! Signal emitted when we move over a city
 	//! When we move out we emmit the same signal with city set to the empty string
-	void positionHighlighted(double longitude, double latitude, QString city);
+	void positionHighlighted(double longitude, double latitude, int altitude, QString city);
 protected:
 	//! Add all the cities into the scene
 	void populate(const QString& filename = "data/cities_Earth.fab");

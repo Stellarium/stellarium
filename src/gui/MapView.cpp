@@ -261,27 +261,27 @@ void MapView::select(const City* city)
 	// Set the pointeur to the position
 	pointeurPos = QPointF(city->getLongitude(), -city->getLatitude());
 	update();
-	emit(positionSelected(city->getLongitude(), city->getLatitude(), city->getName()));
+	emit(positionSelected(city->getLongitude(), city->getLatitude(), city->getAltitude(), city->getName()));
 	justSelected = true;
 }
 
-void MapView::select(double longitude, double latitude)
+void MapView::select(double longitude, double latitude, int altitude)
 {
 	// Set the pointeur to the position
 	pointeurPos = QPointF(longitude, -latitude);
 	update();
-	emit(positionSelected(longitude, latitude, ""));
+	emit(positionSelected(longitude, latitude, altitude, ""));
 }
 
 void MapView::highlightCity(const City* city)
 {
 	if (city == 0)
 	{
-		emit(positionHighlighted(0, 0, ""));
+		emit(positionHighlighted(0, 0, 0, ""));
 	}
 	else
 	{
-		emit(positionHighlighted(city->getLongitude(), city->getLatitude(), city->getName()));
+		emit(positionHighlighted(city->getLongitude(), city->getLatitude(), city->getAltitude(), city->getName()));
 	}
 }
 
