@@ -200,8 +200,7 @@ color: darkgray;
       <item>
        <widget class="QLabel" name="label_2" >
         <property name="text" >
-         <string>Use the mouse wheel to zoom on the map.
-Click and drag the mouse to move the screen.</string>
+         <string>Use the mouse wheel to zoom, drag to move the screen.</string>
         </property>
        </widget>
       </item>
@@ -412,10 +411,10 @@ Click and drag the mouse to move the screen.</string>
               <number>-2000</number>
              </property>
              <property name="maximum" >
-              <number>2000</number>
+              <number>200000</number>
              </property>
              <property name="singleStep" >
-              <number>10</number>
+              <number>100</number>
              </property>
             </widget>
            </item>
