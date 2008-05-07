@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QMultiMap>
 #include <QPair>
+#include <QHash>
 
 class Ui_helpDialogForm;
 
@@ -37,6 +38,11 @@ public:
 	HelpDialog();
 
 	//! Set a key and description.
+	//!
+	//! @note @a group and @a description must be in English; this function takes
+	//! care of translating them. Of course, they still have to be marked for
+	//! translation using the <tt>N_()</tt> macro.
+	//!
 	//! @param group is the help group.  e.g. "Movement" or "Time & Date"
 	//! @param key is the textual representation of a key, e.g. "CTRL + H"
 	//! @param description is a short description of what the key does
@@ -54,6 +60,12 @@ protected:
 	Ui_helpDialogForm* ui;
 
 private:
+	//! Return the header text.
+	QString getHeaderText(void);
+
+	//! Return the footer text.
+	QString getFooterText(void);
+
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
@@ -62,9 +74,9 @@ private:
 	//! containing the helpGroup and description as the map value.
 	//! code and description.
 	QMultiMap<QString, QPair<QString, QString> > keyData;
-	QString headerText;
-	QString footerText;
 
+	//! A hash that maps some special keys to translatable strings.
+	QHash<QString, QString> specialKeys;
 };
 
 #endif /*_HELPDIALOG_HPP_*/
