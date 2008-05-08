@@ -119,6 +119,12 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
   return true;
 }
 
+void DateTimeDialog::languageChanged()
+{
+	if (dialog)
+		ui->retranslateUi(dialog);
+}
+
 /************************************************************************
  year slider or dial changed
 ************************************************************************/

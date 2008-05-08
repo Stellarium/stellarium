@@ -52,6 +52,12 @@ ViewDialog::~ViewDialog()
 	delete ui;
 }
 
+void ViewDialog::languageChanged()
+{
+	if (dialog)
+		ui->retranslateUi(dialog);
+}
+
 void ViewDialog::close()
 {
 	emit closed();
