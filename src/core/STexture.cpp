@@ -63,16 +63,18 @@ STexture::~STexture()
 	if (texels)
 		delete texels;
 	texels = NULL;
-	if (glIsTexture(id)==GL_FALSE)
+	if (id!=0)
 	{
-		// qDebug() << "WARNING: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
+		if (glIsTexture(id)==GL_FALSE)
+		{
+			qDebug() << "WARNING: in STexture::~STexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
+		}
+		else
+		{
+			glDeleteTextures(1, &id);
+		}
+		id = 0;
 	}
-	else
-	{
-		glDeleteTextures(1, &id);
-		// qDebug() << "Delete texture with ID=" << id;
-	}
-	id = 0;
 	delete mutex;
 	mutex = NULL;
 }
@@ -207,7 +209,7 @@ bool STexture::glLoad()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-
+	
 	glTexImage2D (GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
 	if (mipmapsMode==true)
 		gluBuild2DMipmaps (GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);

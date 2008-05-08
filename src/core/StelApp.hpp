@@ -63,7 +63,7 @@ public:
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(int argc, char** argv, QObject* parent);
+	StelApp(int argc, char** argv, QObject* parent=NULL);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
