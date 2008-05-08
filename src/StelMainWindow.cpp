@@ -65,10 +65,23 @@ StelMainWindow::StelMainWindow()
 	setStyleSheet(QString("QMainWindow {background: #000;}"));
 }
 
+void StelMainWindow::closeEvent(QCloseEvent* event)
+{
+	delete mainItem;
+	StelApp* stelApp = &StelApp::getInstance();
+	delete stelApp;
+	QMainWindow::closeEvent(event);
+}
+
+StelMainWindow::~StelMainWindow()
+{
+}
+
+
 void StelMainWindow::init(int argc, char** argv)
 {
 	// Create the main instance of stellarium
-	StelApp* stelApp = new StelApp(argc, argv, this);
+	StelApp* stelApp = new StelApp(argc, argv);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QSettings* settings = stelApp->getSettings();
@@ -84,7 +97,7 @@ void StelMainWindow::init(int argc, char** argv)
 	
 	// Create a graphicScene and a GraphicView drawing in an openGL widget
 	QGraphicsScene* scene = new QGraphicsScene(this);
-	StelAppGraphicsItem* mainItem = new StelAppGraphicsItem();
+	mainItem = new StelAppGraphicsItem();
 	scene->addItem(mainItem);
 	mainItem->setFocus();
 	view = new StelQGraphicsView(scene, this);
@@ -126,9 +139,6 @@ void StelMainWindow::init(int argc, char** argv)
 	mainItem->startDrawingLoop();
 }
 
-StelMainWindow::~StelMainWindow()
-{
-}
 
 void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {

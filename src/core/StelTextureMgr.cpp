@@ -159,7 +159,7 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
  Load an image from a file and create a new texture from it in a new thread. 
 *************************************************************************/
 STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString& fileExtension, bool lazyLoading)
-{
+{	
 	if (url.isEmpty())
 		return STextureSP();
 	

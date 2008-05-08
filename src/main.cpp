@@ -23,6 +23,7 @@
 #include "StelMainWindow.hpp"
 #include "Translator.hpp"
 #include <QGLFormat>
+#include <QDebug>
 
 // The GettextTranslator class provides i18n support through gettext.
 class GettextTranslator : public QTranslator
