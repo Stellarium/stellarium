@@ -269,18 +269,18 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 // Draw the image on the screen.
 void SkyImageTile::drawTile(StelCore* core)
 {
+	if (luminance>0)
+	{
+		float ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
+		if (ad_lum<0.01)
+			return;
+		glColor3f(ad_lum,ad_lum,ad_lum);
+	}
+	
 	if (!tex->bind())
 		return;
 
 	Projector* prj = core->getProjection();
-	
-	if (luminance>0)
-	{
-		float ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
-		glColor3f(ad_lum,ad_lum,ad_lum);
-		if (ad_lum<0.01)
-			return;
-	}
 	
 	const float factorX = tex->getCoordinates()[2][0];
 	const float factorY = tex->getCoordinates()[2][1];
