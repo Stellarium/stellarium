@@ -36,6 +36,7 @@ Q_OBJECT
 public:
 	SearchDialog();
 	virtual ~SearchDialog();
+	void languageChanged();
 public slots:
 	void setVisible(bool);
 	void close();

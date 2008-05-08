@@ -31,6 +31,7 @@ public:
 	DateTimeDialog();
   double newJd();
   bool valid(int y, int m, int d, int h, int min, int s);
+  void languageChanged();
 public slots:
 	void setVisible(bool);
 	void close();

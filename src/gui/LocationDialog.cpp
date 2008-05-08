@@ -38,6 +38,12 @@ LocationDialog::~LocationDialog()
 	delete ui;
 }
 
+void LocationDialog::languageChanged()
+{
+	if (dialog)
+		ui->retranslateUi(dialog);
+}
+
 void LocationDialog::close()
 {
 	emit closed();
