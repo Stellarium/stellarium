@@ -37,7 +37,7 @@ SkyBackground::SkyBackground(void)
 SkyBackground::~SkyBackground()
 {
 	foreach (SkyImageTile* s, allSkyImages)
-		s->deleteLater();
+		delete s;
 }
 
 /*************************************************************************

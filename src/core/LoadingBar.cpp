@@ -26,6 +26,7 @@
 #include "StelMainWindow.hpp"
 #include "SFont.hpp"
 #include <QGLWidget>
+#include <QDebug>
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_tex, 
 	int screenw, int screenh, const QString& extraTextString, float extraTextSize, 

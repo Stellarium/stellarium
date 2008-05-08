@@ -200,6 +200,9 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete argList; argList=NULL;
 	delete qtime; qtime=NULL;
+	
+	assert(singleton);
+	singleton = NULL;
 }
 
 /*************************************************************************

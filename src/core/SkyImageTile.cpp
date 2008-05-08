@@ -127,6 +127,10 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
+	foreach (SkyImageTile* tile, subTiles)
+	{
+		delete tile;
+	}
 }
 
 void SkyImageTile::draw(StelCore* core)
@@ -253,7 +257,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 		}
 		else
 		{
-			// Draw the subtiles
+			// Try to add the subtiles
 			foreach (SkyImageTile* tile, subTiles)
 			{
 				tile->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);

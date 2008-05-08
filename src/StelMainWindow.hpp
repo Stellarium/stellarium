@@ -68,6 +68,11 @@ public slots:
 	//! @arg shotDir changes the drectory where the screenshot is saved
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
+
+protected:
+	
+	//! Reimplement this to delete openGL textures before the GLContext disappears
+	virtual void closeEvent(QCloseEvent* event);
 	
 private:
 	//! The openGL window
@@ -76,6 +81,8 @@ private:
 	
 	// The StelMainWindow singleton
 	static StelMainWindow* singleton;
+	
+	class StelAppGraphicsItem* mainItem;
 };
 
 #endif /*STELMAINWINDOW_HPP_*/
