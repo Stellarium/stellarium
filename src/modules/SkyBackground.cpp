@@ -53,7 +53,7 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void SkyBackground::init()
 {
-	allSkyImages.append(new SkyImageTile("/home/fab1/Desktop/allDSS/allDSS.json"));
+	allSkyImages.append(new SkyImageTile("http://voint1.hq.eso.org/fabienDSS/allDSS.json"));
 	try
 	{
 		allSkyImages.append(new SkyImageTile(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json")));

@@ -201,14 +201,21 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			// static int countG=0;
 			// qWarning() << countG++;
 			QString fullTexFileName;
-			try
+			if (baseUrl.startsWith("http://"))
 			{
-				fullTexFileName = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
+				fullTexFileName = baseUrl+imageUrl;
 			}
-			catch (std::runtime_error er)
+			else
 			{
-				// Maybe the user meant a file in stellarium loical files
-				fullTexFileName = imageUrl;
+				try
+				{
+					fullTexFileName = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
+				}
+				catch (std::runtime_error er)
+				{
+					// Maybe the user meant a file in stellarium local files
+					fullTexFileName = imageUrl;
+				}
 			}
 			tex = texMgr.createTextureThread(fullTexFileName);
 			if (!tex)
