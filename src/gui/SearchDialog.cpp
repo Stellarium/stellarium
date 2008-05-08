@@ -46,6 +46,16 @@ void SearchDialog::close()
 	emit closed();
 }
 
+void SearchDialog::languageChanged()
+{
+	if (dialog)
+	{
+		QString text(ui->lineEditSearchSkyObject->text());
+		ui->retranslateUi(dialog);
+		ui->lineEditSearchSkyObject->setText(text);
+	}
+}
+
 void SearchDialog::setVisible(bool v)
 {
 	if (v) 

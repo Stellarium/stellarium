@@ -65,6 +65,15 @@ HelpDialog::HelpDialog()
 	setKey(group, "", "@ctrl+left-click", N_("Unselect"));
 }
 
+void HelpDialog::languageChanged()
+{
+	if (dialog)
+	{
+		ui->retranslateUi(dialog);
+		updateText();
+	}
+}
+
 void HelpDialog::close()
 {
         emit closed();

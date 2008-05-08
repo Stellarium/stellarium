@@ -30,6 +30,7 @@ Q_OBJECT
 public:
 	ConfigurationDialog();
 	virtual ~ConfigurationDialog();
+	void languageChanged();
 public slots:
 	void setVisible(bool);
 	void close();

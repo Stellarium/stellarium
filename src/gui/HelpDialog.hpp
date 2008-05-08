@@ -48,6 +48,8 @@ public:
 	//! @param description is a short description of what the key does
 	void setKey(QString group, QString oldKey, QString newKey, QString description);
 
+	void languageChanged();
+
 public slots:
 	void setVisible(bool);
 	void close();
@@ -58,6 +60,7 @@ signals:
 protected:
 	QWidget* dialog;
 	Ui_helpDialogForm* ui;
+
 
 private:
 	//! Return the header text.

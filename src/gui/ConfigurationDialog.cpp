@@ -40,6 +40,12 @@ ConfigurationDialog::~ConfigurationDialog()
 	delete ui;
 }
 
+void ConfigurationDialog::languageChanged()
+{
+	if (dialog)
+		ui->retranslateUi(dialog);
+}
+
 void ConfigurationDialog::close()
 {
 	emit closed();

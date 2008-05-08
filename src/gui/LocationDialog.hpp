@@ -30,6 +30,7 @@ Q_OBJECT
 public:
 	LocationDialog();
 	virtual ~LocationDialog();
+	void languageChanged();
 public slots:
 	void setVisible(bool);
 	void close();
