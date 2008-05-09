@@ -375,7 +375,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
 		tex->texels = NULL;
 		return false;
 	}
-
+	
 	// Update texture parameters from TexInfo
 	tex->format = texInfo.format;
 	tex->width = texInfo.width;
@@ -397,11 +397,6 @@ bool StelTextureMgr::loadImage(STexture* tex)
 		tex->texels = NULL;
 		return false;
 	}
-
-// 	if (tex->computeLuminance==true)
-// 	{
-// 		
-// 	}
 	
 	// Repair texture size if non power of 2 is not allowed by the video driver
 	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
