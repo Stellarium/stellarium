@@ -175,7 +175,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -549,7 +549,7 @@ color: darkgray;
              <item row="0" column="0" >
               <widget class="QCheckBox" name="planetMarkerCheckBox" >
                <property name="text" >
-                <string>Show marker</string>
+                <string>Show markers</string>
                </property>
               </widget>
              </item>
@@ -940,7 +940,7 @@ p, li { white-space: pre-wrap; }
           <item row="8" column="1" >
            <widget class="QGroupBox" name="groupBox_5" >
             <property name="title" >
-             <string>Labels and markers</string>
+             <string>Labels and Markers</string>
             </property>
             <layout class="QVBoxLayout" >
              <item>
@@ -1183,7 +1183,7 @@ p, li { white-space: pre-wrap; }
         </widget>
         <widget class="QWidget" name="tabMarking" >
          <attribute name="title" >
-          <string>Marking</string>
+          <string>Markings</string>
          </attribute>
          <layout class="QGridLayout" >
           <item row="0" column="0" >
@@ -1236,7 +1236,7 @@ p, li { white-space: pre-wrap; }
           <item row="0" column="1" >
            <widget class="QGroupBox" name="planetsGroupBox_2" >
             <property name="title" >
-             <string>Sky Marking</string>
+             <string>Celestial Sphere</string>
             </property>
             <property name="checkable" >
              <bool>false</bool>
