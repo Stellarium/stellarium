@@ -35,6 +35,9 @@ class StelCore;
 class SkyImageTile : public QObject
 {
 	Q_OBJECT;
+	
+	friend class JsonLoadThread;
+	
 public:
 	//! Constructor
 	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
@@ -52,6 +55,9 @@ private slots:
 	//! @param id the identifier of the request.
 	//! @param error true if an error occurred during the processing; otherwise false
 	void downloadFinished(int id, bool error);
+	
+	//! Called when the JSON file is loaded
+	void JsonLoadFinished();
 		
 private:
 	//! Load the tile information from a JSON file
@@ -135,6 +141,9 @@ private:
 	
 	// Store the time of the last draw
 	double lastTimeDraw;
+	
+	// The temporary map filled in a thread
+	QVariantMap temporaryResultMap;
 	
 #ifdef DEBUG_SKYIMAGE_TILE
 	static class SFont* debugFont;

@@ -26,6 +26,7 @@
 #include "STextureTypes.hpp"
 
 #include <QObject>
+#include <QImage>
 
 class QMutex;
 class QSemaphore;
@@ -111,6 +112,9 @@ private:
 	//! Used to download remote files if needed
 	class QHttp* http;
 	
+	//! Used to load in thread
+	class ImageLoadThread* loadThread;
+			
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
 	//! Used internally
@@ -121,13 +125,18 @@ private:
 	//! The URL where to download the file
 	QString fullPath;
 	
-	//! The file where the image is located
-	QFile* imageFile;
+	//! The data that was laoded from http
+	QByteArray downloadedData;
+	QImage qImage;
+	
 	//! Used ony when creating temporary file
 	QString fileExtension;
 	
 	//! True when something when wrong in the loading process
 	bool errorOccured;
+	
+	//! Human friendly error message if loading failed
+	QString errorMessage;
 	
 	//! OpenGL id
 	GLuint id;
@@ -135,9 +144,6 @@ private:
 	GLint wrapMode;
 	GLint minFilter;
 	GLint magFilter;
-	
-	//! Human friendly error message if loading failed
-	QString errorMessage;
 			
 	///////////////////////////////////////////////////////////////////////////
 	// Attributes protected by the Mutex
