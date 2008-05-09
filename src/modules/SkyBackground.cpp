@@ -29,7 +29,7 @@
 #include <QDebug>
 #include <QString>
 
-SkyBackground::SkyBackground(void)
+SkyBackground::SkyBackground(void) : flagShow(true)
 {
 	setObjectName("SkyBackground");
 }
@@ -67,6 +67,9 @@ void SkyBackground::init()
 // Draw all the multi-res images collection
 double SkyBackground::draw(StelCore* core)
 {
+	if (!flagShow)
+		return 0.;
+	
 	Projector* prj = core->getProjection();
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);

@@ -54,12 +54,18 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	
+	//! Set whether Sky Background should be displayed
+	void setFlagShow(bool b) {flagShow = b;}
+	//! Get whether Sky Background should be displayed
+	bool getFlagShow() const {return flagShow;}
 	
 private:
 	
 	// Direction of the vertices of each polygons in ICRS frame
 	QList<SkyImageTile*> allSkyImages;
+	
+	// Whether to draw at all
+	bool flagShow;
 };
 
 #endif /*SKYBACKGROUND_H_*/
