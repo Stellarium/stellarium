@@ -121,8 +121,6 @@ public:
 	{
 		imageLoaders[fileExtension] = loader;
 	}
-	//! Get the downloader shared for downloading images
-	class QHttp* getDownloader() {return downloader;}
 	
 private:
 	friend class STexture;
@@ -153,8 +151,6 @@ private:
 
 	//! Used to correct a bug on some nvidia cards
 	bool isNoPowerOfTwoLUMINANCEAllowed;
-	
-	class QHttp* downloader;
 };
 
 #endif /*STELTEXTUREMGR_H_*/
