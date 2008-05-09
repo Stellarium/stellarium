@@ -47,8 +47,6 @@ static JpgLoader jpgLoader;
 *************************************************************************/
 StelTextureMgr::StelTextureMgr()
 {
-	downloader = new QHttp((QObject*)this);
-
 	// Init default values
 	setDefaultParams();
 

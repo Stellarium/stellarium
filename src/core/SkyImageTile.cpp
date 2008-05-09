@@ -32,6 +32,7 @@
 #include <QHttp>
 #include <QUrl>
 #include <QBuffer>
+#include <QThread>
 #include <stdexcept>
 
 #ifdef DEBUG_SKYIMAGE_TILE
@@ -40,6 +41,39 @@
 #include "StelLocaleMgr.hpp"
  SFont* SkyImageTile::debugFont = NULL;
 #endif
+
+/*************************************************************************
+  Class used to load a JSON file in a thread
+ *************************************************************************/
+class JsonLoadThread : public QThread
+{
+	public:
+		JsonLoadThread(SkyImageTile* atile, QByteArray content) : QThread((QObject*)atile), tile(atile), data(content) {;}
+		virtual void run();
+	private:
+		SkyImageTile* tile;
+		QByteArray data;
+};
+
+void JsonLoadThread::run()
+{
+	try
+	{
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
+		QtJsonParser parser;
+		tile->temporaryResultMap = parser.parse(buf).toMap();
+		buf.close();
+		if (tile->temporaryResultMap.isEmpty())
+			throw std::runtime_error("empty JSON file, cannot load image tile");
+	}
+	catch (std::runtime_error e)
+	{
+		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
+		tile->errorOccured = true;
+	}
+	data = QByteArray();
+}
 
 // Constructor
 SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
@@ -434,30 +468,31 @@ void SkyImageTile::downloadFinished(int id, bool error)
 {
 	if (id!=downloadId)
 		return;
-	//qWarning() << "Downloaded JSON " << http->currentRequest().path();
-	downloading = false;
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
+	
 	if (error)
 	{
 		qWarning() << "WARNING : Problem while downloading JSON Image Tile description: " << http->errorString();
 		errorOccured = true;
+		http->close();
 		return;
-	}
-	
-	try
-	{
-		QByteArray content = http->readAll();
-		QBuffer buf(&content);
-		buf.open(QIODevice::ReadOnly);
-		loadFromJSON(buf);
-		buf.close();
-	}
-	catch (std::runtime_error e)
-	{
-		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
-		errorOccured = true;
-	}
+	}	
+	//qWarning() << "Downloaded JSON " << http->currentRequest().path();
+	QByteArray content = http->readAll();
 	http->close();
+	
+	JsonLoadThread* loadThread = new JsonLoadThread(this, content);
+	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
+	loadThread->start();
+}
+
+// Called when the tile is fully loaded from the JSON file
+void SkyImageTile::JsonLoadFinished()
+{
+	downloading = false;
+	if (errorOccured)
+		return;
+	loadFromQVariantMap(temporaryResultMap);
 }
 
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds

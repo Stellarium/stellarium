@@ -34,6 +34,8 @@
 #include <QHttp>
 #include <QDebug>
 #include <QUrl>
+#include <QImage>
+#include <QGLWidget>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -44,8 +46,30 @@
 // Initialize statics
 QSemaphore* STexture::maxLoadThreadSemaphore = new QSemaphore(5);
 
-STexture::STexture() : http(NULL), downloaded(false), downloadId(0), isLoadingImage(false), imageFile(NULL), 
-   errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
+/*************************************************************************
+  Class used to load an image and set the texture parameters in a thread
+ *************************************************************************/
+class ImageLoadThread : public QThread
+{
+	public:
+		ImageLoadThread(STexture* tex) : QThread((QObject*)tex), texture(tex) {;}
+		virtual void run();
+	private:
+		STexture* texture;
+};
+
+void ImageLoadThread::run()
+{
+	STexture::maxLoadThreadSemaphore->acquire(1);
+	texture->imageLoad();
+	STexture::maxLoadThreadSemaphore->release(1);
+}
+
+/*************************************************************************
+  Constructor
+ *************************************************************************/
+STexture::STexture() : http(NULL), loadThread(NULL), downloaded(false),  downloadId(0), isLoadingImage(false),
+				   errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
 {
 	mutex = new QMutex();
 	
@@ -60,6 +84,20 @@ STexture::STexture() : http(NULL), downloaded(false), downloadId(0), isLoadingIm
 
 STexture::~STexture()
 {
+	if (http)
+	{
+		// HTTP is still doing something for this texture. We abort it.
+		delete http;
+		http = NULL;
+	}
+		
+	if (loadThread && loadThread->isRunning())
+	{
+		// The thread is currently running, it needs to be properly stopped
+		loadThread->terminate();
+		loadThread->wait(500);
+	}
+	
 	if (texels)
 		delete texels;
 	texels = NULL;
@@ -91,25 +129,6 @@ void STexture::reportError(const QString& aerrorMessage)
 }
 
 /*************************************************************************
-  Class used to load an image and set the texture parameters in a thread
- *************************************************************************/
-class ImageLoadThread : public QThread
-{
-	public:
-		ImageLoadThread(STexture* tex) : QThread((QObject*)tex), texture(tex) {;}
-		virtual void run();
-	private:
-		STexture* texture;
-};
-
-void ImageLoadThread::run()
-{
-	STexture::maxLoadThreadSemaphore->acquire(1);
-	texture->imageLoad();
-	STexture::maxLoadThreadSemaphore->release(1);
-}
-
-/*************************************************************************
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 bool STexture::bind()
@@ -127,20 +146,12 @@ bool STexture::bind()
 	if (downloaded==false && downloadId==0 && fullPath.startsWith("http://"))
 	{
 		// We need to start download
-		imageFile = new QTemporaryFile(QDir::tempPath() + "XXXXXX." + fileExtension, this);
-		if (!imageFile->open(QIODevice::ReadWrite))
-		{
-			qWarning() << "STexture::bind(): can't create temporary file " << QDir::tempPath() + "XXXXXX." + fileExtension;
-			errorOccured = true;
-			return false;
-		}
 		if (http==NULL)
 			http = new QHttp(this);
 		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
 		QUrl url(fullPath);
 		http->setHost(url.host(), url.port(80));
-		downloadId = http->get(fullPath, imageFile);
-		fullPath = imageFile->fileName();
+		downloadId = http->get(fullPath);
 		return false;
 	}
 	
@@ -149,9 +160,9 @@ bool STexture::bind()
 	if (!isLoadingImage && downloaded==true)
 	{
 		isLoadingImage = true;
-		ImageLoadThread* thread = new ImageLoadThread(this);
-		connect(thread, SIGNAL(finished()), this, SLOT(fileLoadFinished()));
-		thread->start();
+		loadThread = new ImageLoadThread(this);
+		connect(loadThread, SIGNAL(finished()), this, SLOT(fileLoadFinished()));
+		loadThread->start();
 	}
 	return false;
 }
@@ -165,15 +176,13 @@ void STexture::downloadFinished(int did, bool error)
 	if (did!=downloadId)
 		return;
 	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
-	
-	imageFile->close();
+	downloadedData = http->readAll();
 	downloaded=true;
 	downloadId=0;
 	if (error || errorOccured)
 	{
-		qWarning() << "Texture download failed for " + imageFile->fileName()+ ": " + http->errorString();
+		qWarning() << "Texture download failed for " + fullPath+ ": " + http->errorString();
 		errorOccured = true;
-		imageFile->deleteLater();
 		return;
 	}
 	http->close();
@@ -187,41 +196,6 @@ void STexture::downloadFinished(int did, bool error)
 void STexture::fileLoadFinished()
 {
 	glLoad();
-}
-
-/*************************************************************************
- Actually load the texture already in the RAM to openGL memory
-*************************************************************************/
-bool STexture::glLoad()
-{
-	if (!texels)
-	{
-		errorOccured = true;
-		return false;
-	}
-	
-	// generate texture
-	glGenTextures (1, &id);
-	glBindTexture (GL_TEXTURE_2D, id);
-
-	// setup some parameters for texture filters and mipmapping
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-	
-	glTexImage2D (GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
-	if (mipmapsMode==true)
-		gluBuild2DMipmaps (GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
-	
-	// OpenGL has its own copy of texture data
-	free (texels);
-	texels = NULL;
-	
-	// Report success of texture loading
-	emit(loadingProcessFinished(this, false));
-	
-	return true;
 }
 
 /*************************************************************************
@@ -278,15 +252,102 @@ bool STexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
+// This class let's us sleep in milleseconds
+class MySleep : public QThread
+{
+public:
+	static void msleep(unsigned long msecs) 
+	{
+		QThread::msleep(msecs);
+	}
+};
+
 /*************************************************************************
  Load the image data
  *************************************************************************/
 bool STexture::imageLoad()
 {
-	QMutexLocker lock(mutex);
-	const bool res = StelApp::getInstance().getTextureManager().loadImage(this);
-	if (imageFile)
-		imageFile->deleteLater();
+	bool res;
+	if (downloadedData.isEmpty())
+	{
+		// Load the data from the file
+		QMutexLocker lock(mutex);
+		res = StelApp::getInstance().getTextureManager().loadImage(this);
+	}
+	else
+	{
+		// Load the image from the buffer, not from a file
+		// This is quite slow because Qt allocates twice the memory and needs to swap from ARGB to RGBA
+		qImage = QGLWidget::convertToGLFormat(QImage::fromData(downloadedData));
+		
+		// Debug
+		// qImage = QImage(8,8,QImage::Format_ARGB32);
+		// MySleep::msleep(500);
+		
+		// Release the memory
+		downloadedData = QByteArray();
+		
+		// Update texture parameters from loaded image
+		{
+			QMutexLocker lock(mutex);
+			format = GL_RGBA;
+			width = qImage.width();
+			height = qImage.height();
+			type = GL_UNSIGNED_BYTE;
+			internalFormat = 3;
+		}
+	}
 	return res;
 }
 
+/*************************************************************************
+ Actually load the texture already in the RAM to openGL memory
+*************************************************************************/
+bool STexture::glLoad()
+{
+	if (qImage.isNull() && !texels)
+	{
+		errorOccured = true;
+		reportError("Unknown error");
+		return false;
+	}
+
+	// generate texture
+	glGenTextures (1, &id);
+	glBindTexture (GL_TEXTURE_2D, id);
+
+	// setup some parameters for texture filters and mipmapping
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+	
+	if (!qImage.isNull())
+	{
+		// Load from qImage
+		if (mipmapsMode==true)
+			gluBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, qImage.bits());
+		else
+			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, qImage.bits());
+		
+		// Release shared memory
+		qImage = QImage();
+	}
+	else
+	{
+		// Load from texels buffer
+		if (mipmapsMode==true)
+			gluBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
+		else
+			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
+		
+		// OpenGL has its own copy of texture data
+		free (texels);
+		texels = NULL;
+	}
+	
+	// Report success of texture loading
+	emit(loadingProcessFinished(this, false));
+	
+	return true;
+}
