@@ -62,6 +62,8 @@ class PngLoader : public ImageLoader
 class JpgLoader : public ImageLoader
 {
 	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
+public:
+	static bool loadFromMemory(const QByteArray& data, TexInfo& texinfo);
 };
 
 //! Manage textures loading and manipulation.
