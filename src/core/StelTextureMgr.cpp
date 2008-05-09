@@ -804,3 +804,140 @@ bool JpgLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	fclose(fp);
 	return true;
 }
+
+
+/*************************************************************************
+ Load a JPG image from a buffer.
+ Code borrowed from David HENRY with the following copyright notice:
+ * jpeg.c -- jpeg texture loader
+ * last modification: feb. 9, 2006
+ *
+ * Copyright (c) 2005-2006 David HENRY
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+void mem_init_source(j_decompress_ptr cinfo)
+{
+	/* Nothing to do */
+}
+
+boolean mem_fill_input_buffer(j_decompress_ptr cinfo)
+{
+	JOCTET eoi_buffer[2] = { 0xFF, JPEG_EOI };
+	struct jpeg_source_mgr *jsrc = cinfo->src;
+
+	/* Create a fake EOI marker */
+	jsrc->next_input_byte = eoi_buffer;
+	jsrc->bytes_in_buffer = 2;
+
+	return TRUE;
+}
+
+void mem_skip_input_data(j_decompress_ptr cinfo, long num_bytes)
+{
+	struct jpeg_source_mgr *jsrc = cinfo->src;
+
+	if (num_bytes > 0)
+	{
+		while (num_bytes > (long)jsrc->bytes_in_buffer)
+		{
+			num_bytes -= (long)jsrc->bytes_in_buffer;
+			mem_fill_input_buffer (cinfo);
+		}
+
+		jsrc->next_input_byte += num_bytes;
+		jsrc->bytes_in_buffer -= num_bytes;
+	}
+}
+
+void mem_term_source (j_decompress_ptr cinfo)
+{
+	/* Nothing to do */
+}
+
+bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
+{
+	struct jpeg_decompress_struct cinfo;
+	struct my_error_mgr jerr;
+	struct jpeg_source_mgr jsrc;
+	JSAMPROW j;
+	int i;
+
+	/* Create and configure decompress object */
+	jpeg_create_decompress (&cinfo);
+	cinfo.err = jpeg_std_error (&jerr.pub);
+	cinfo.src = &jsrc;
+
+	/* Configure error manager */
+	jerr.pub.error_exit = err_exit;
+
+	if (setjmp (jerr.setjmp_buffer))
+	{
+		qWarning() << "Error: couldn't read jpeg data!";
+		jpeg_destroy_decompress(&cinfo);
+		if (texinfo.texels)
+		{
+			free(texinfo.texels);
+			texinfo.texels = NULL;
+		}
+		return false;
+	}
+
+	/* Configure source manager */
+	jsrc.next_input_byte = (const JOCTET*)data.constData();
+	jsrc.bytes_in_buffer = data.length();
+	jsrc.init_source = mem_init_source;
+	jsrc.fill_input_buffer = mem_fill_input_buffer;
+	jsrc.skip_input_data = mem_skip_input_data;
+	jsrc.resync_to_restart = jpeg_resync_to_restart;
+	jsrc.term_source = mem_term_source;
+
+	/* Read file's header and prepare for decompression */
+	jpeg_read_header (&cinfo, TRUE);
+	jpeg_start_decompress (&cinfo);
+
+  	/* Initialize image's member variables and allocate memory for pixels */
+	texinfo.width = cinfo.image_width;
+	texinfo.height = cinfo.image_height;
+	texinfo.internalFormat = cinfo.num_components;
+	texinfo.format = (cinfo.num_components == 1) ? GL_LUMINANCE : GL_RGB;
+	texinfo.texels = (GLubyte *)malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
+
+	// qWarning() << texinfo.width << texinfo.height << texinfo.internalFormat << texinfo.format;
+	
+	/* Read scanlines */
+	for (i = 0; i < texinfo.height; ++i)
+	{
+#if 1
+		j = (texinfo.texels + ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
+#else
+		j = &texinfo->texels[texinfo.width * i * texinfo->internalFormat];
+#endif
+
+		jpeg_read_scanlines (&cinfo, &j, 1);
+	}
+
+	/* Finish decompression and release memory */
+	jpeg_finish_decompress (&cinfo);
+	jpeg_destroy_decompress (&cinfo);
+
+	return true;
+}
