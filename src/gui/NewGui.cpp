@@ -392,47 +392,47 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
-	QString group = N_("Display options");
-	addGuiActions("actionShow_Constellation_Lines", N_("Show Constellation Lines"), "C", group, true, false);
-	addGuiActions("actionShow_Constellation_Art", N_("Show Constellation Art"), "R", group, true, false);
-	addGuiActions("actionShow_Constellation_Labels", N_("Show Constellation Labels"), "V", group, true, false);
-	addGuiActions("actionShow_Constellation_Boundaries", N_("Show Constellation Boundaries"), "B", group, true, false);
+	QString group = N_("Display Options");
+	addGuiActions("actionShow_Constellation_Lines", N_("Toggle constellation lines"), "C", group, true, false);
+	addGuiActions("actionShow_Constellation_Art", N_("Toggle constellation art"), "R", group, true, false);
+	addGuiActions("actionShow_Constellation_Labels", N_("Toggle constellation labels"), "V", group, true, false);
+	addGuiActions("actionShow_Constellation_Boundaries", N_("Toggle constellation boundaries"), "B", group, true, false);
 	
-	addGuiActions("actionShow_Azimutal_Grid", N_("Show Azimutal Grid"), "Z", group, true, false);
-	addGuiActions("actionShow_Equatorial_Grid", N_("Show Equatorial Grid"), "E", group, true, false);
-	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Show Equatorial J2000 Grid"), "", group, true, false);
-	addGuiActions("actionShow_Ecliptic_Line", N_("Show Ecliptic Line"), ",", group, true, false);
-	addGuiActions("actionShow_Equator_Line", N_("Show Equator Line"), ".", group, true, false);
-	addGuiActions("actionShow_Meridian_Line", N_("Show Meridian Line"), "", group, true, false);
-	addGuiActions("actionShow_Cardinal_Points", N_("Show Cardinal Points"), "Q", group, true, false);
+	addGuiActions("actionShow_Azimutal_Grid", N_("Toggle azimutal grid"), "Z", group, true, false);
+	addGuiActions("actionShow_Equatorial_Grid", N_("Toggle equatorial grid"), "E", group, true, false);
+	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Toggle equatorial J2000 grid"), "", group, true, false);
+	addGuiActions("actionShow_Ecliptic_Line", N_("Toggle ecliptic line"), ",", group, true, false);
+	addGuiActions("actionShow_Equator_Line", N_("Toggle equator line"), ".", group, true, false);
+	addGuiActions("actionShow_Meridian_Line", N_("Toggle meridian line"), "", group, true, false);
+	addGuiActions("actionShow_Cardinal_Points", N_("Toggle cardinal points"), "Q", group, true, false);
 
-	addGuiActions("actionShow_Ground", N_("Show Ground"), "G", group, true, false);
-	addGuiActions("actionShow_Atmosphere", N_("Show Atmosphere"), "A", group, true, false);
-	addGuiActions("actionShow_Fog", N_("Show Fog"), "F", group, true, false);
+	addGuiActions("actionShow_Ground", N_("Toggle ground"), "G", group, true, false);
+	addGuiActions("actionShow_Atmosphere", N_("Toggle atmosphere"), "A", group, true, false);
+	addGuiActions("actionShow_Fog", N_("Toggle fog"), "F", group, true, false);
 	
-	addGuiActions("actionShow_Nebulas", N_("Show Nebulas"), "N", group, true, false);
-	addGuiActions("actionShow_DSS", N_("Show DSS"), "", group, true, false);
-	addGuiActions("actionShow_Stars", N_("Show Stars"), "S", group, true, false);
-	addGuiActions("actionShow_Planets_Hints", N_("Show Planets Hints"), "P", group, true, false);
+	addGuiActions("actionShow_Nebulas", N_("Toggle nebulas"), "N", group, true, false);
+	addGuiActions("actionShow_DSS", N_("Toggle DSS"), "", group, true, false);
+	addGuiActions("actionShow_Stars", N_("Toggle stars"), "S", group, true, false);
+	addGuiActions("actionShow_Planets_Hints", N_("Toggle planets hints"), "P", group, true, false);
 	
-	addGuiActions("actionShow_Night_Mode", N_("Show Night Mode"), "Q", group, true, false);
-	addGuiActions("actionSet_Full_Screen", N_("Set Full Screen"), "F1", group, true, false);
-	addGuiActions("actionHorizontal_Flip", N_("Horizontal Flip"), "Ctrl+Shift+H", group, true, false);
-	addGuiActions("actionVertical_Flip", N_("Vertical Flip"), "Ctrl+Shift+V", group, true, false);
+	addGuiActions("actionShow_Night_Mode", N_("Toggle night mode"), "Q", group, true, false);
+	addGuiActions("actionSet_Full_Screen", N_("Toggle full-screen mode"), "F1", group, true, false);
+	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
+	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 	
 	group = N_("Dialogs");
-	addGuiActions("actionShow_Search_Window", N_("Show Search Window"), "Ctrl+F", group, true, false);
-	addGuiActions("actionShow_Help_Window", N_("Show Help Window"), "Ctrl+H", group, true, false);
-	addGuiActions("actionShow_Location_Window", N_("Show Location Window"), "Ctrl+L", group, true, false);
-	addGuiActions("actionShow_DateTime_Window", N_("Show Date/Time Window"), "Ctrl+T", group, true, false);
-	addGuiActions("actionShow_SkyView_Window", N_("Show Sky and Viewing option Window"), "Ctrl+G", group, true, false);
-	addGuiActions("actionShow_Configuration_Window", N_("Show Configuration Window"), "Ctrl+C", group, true, false);
+	addGuiActions("actionShow_Search_Window", N_("Toggle search window"), "Ctrl+F", group, true, false);
+	addGuiActions("actionShow_Help_Window", N_("Toggle help window"), "Ctrl+H", group, true, false);
+	addGuiActions("actionShow_Location_Window", N_("Toggle location window"), "Ctrl+L", group, true, false);
+	addGuiActions("actionShow_DateTime_Window", N_("Toggle date/time window"), "Ctrl+T", group, true, false);
+	addGuiActions("actionShow_SkyView_Window", N_("Toggle sky and viewing options window"), "Ctrl+G", group, true, false);
+	addGuiActions("actionShow_Configuration_Window", N_("Toggle configuration window"), "Ctrl+C", group, true, false);
 	
-	group = N_("Date and time");
-	addGuiActions("actionDecrease_Time_Speed", N_("Decrease Time Speed"), "J", group, false, false);
-	addGuiActions("actionIncrease_Time_Speed", N_("Increase Time Speed"), "L", group, false, false);
-	addGuiActions("actionSet_Real_Time_Speed", N_("Set Real Time Speed"), "K", group, false, false);
-	addGuiActions("actionReturn_To_Current_Time", N_("Return To Current Time"), "8", group, false, false);
+	group = N_("Date and Time");
+	addGuiActions("actionDecrease_Time_Speed", N_("Slow down time"), "J", group, false, false);
+	addGuiActions("actionIncrease_Time_Speed", N_("Speed up time"), "L", group, false, false);
+	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
+	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
 	addGuiActions("actionAdd_Solar_Hour", N_("Add 1 solar hour"), "Ctrl+=", group, false, true);
 	addGuiActions("actionSubtract_Solar_Hour", N_("Subtract 1 solar hour"), "Ctrl+-", group, false, true);
 	addGuiActions("actionAdd_Solar_Day", N_("Add 1 solar day"), "=", group, false, true);
@@ -444,16 +444,16 @@ void NewGui::init()
 	addGuiActions("actionAdd_Sidereal_Week", N_("Add 1 sidereal week"), "Alt+]", group, false, true);
 	addGuiActions("actionSubtract_Sidereal_Week", N_("Subtract 1 sidereal week"), "Alt+[", group, false, true);
 	
-	group = N_("Movement and selection");
-	addGuiActions("actionGoto_Selected_Object", N_("Goto Selected Object"), "Space", group, false, false);
-	addGuiActions("actionSet_Tracking", N_("Set Tracking"), "T", group, true, false);
-	addGuiActions("actionZoom_In_Auto", N_("Zoom in to Selected Object"), "/", group, false, false);
+	group = N_("Movement and Selection");
+	addGuiActions("actionGoto_Selected_Object", N_("Center on selected object"), "Space", group, false, false);
+	addGuiActions("actionSet_Tracking", N_("Toggle object tracking"), "T", group, true, false);
+	addGuiActions("actionZoom_In_Auto", N_("Zoom in on selected object"), "/", group, false, false);
 	addGuiActions("actionZoom_Out_Auto", N_("Zoom out"), "\\", group, false, false);
 	
 	group = N_("Misc");
-	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch Equatorial Mount"), "Ctrl+M", group, true, false);
+	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
 	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
-	addGuiActions("actionSave_Screenshot", N_("Save Screenshot"), "Ctrl+S", group, false, false);
+	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
