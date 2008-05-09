@@ -277,25 +277,43 @@ bool STexture::imageLoad()
 	else
 	{
 		// Load the image from the buffer, not from a file
-		// This is quite slow because Qt allocates twice the memory and needs to swap from ARGB to RGBA
-		qImage = QGLWidget::convertToGLFormat(QImage::fromData(downloadedData));
-		
-		// Debug
-		// qImage = QImage(8,8,QImage::Format_ARGB32);
-		// MySleep::msleep(500);
-		
+		if (fullPath.endsWith(".jpg", Qt::CaseInsensitive) || fullPath.endsWith(".jpeg", Qt::CaseInsensitive))
+		{
+			// Special case optimized for loading jpeg
+			// Could be even more optimized by re-using the texels buffers instead of allocating one for each textures
+			ImageLoader::TexInfo texInfo;
+			res = JpgLoader::loadFromMemory(downloadedData, texInfo);
+			if (!res)
+				return false;
+
+			{
+				QMutexLocker lock(mutex);
+				format = texInfo.format;
+				width = texInfo.width;
+				height = texInfo.height;
+				type = GL_UNSIGNED_BYTE;
+				internalFormat = texInfo.internalFormat;
+				texels = texInfo.texels;
+			}
+		}
+		else
+		{
+			// Use Qt QImage which is slower but works for many formats
+			// This is quite slow because Qt allocates twice the memory and needs to swap from ARGB to RGBA
+			qImage = QGLWidget::convertToGLFormat(QImage::fromData(downloadedData));
+			
+			// Update texture parameters from loaded image
+			{
+				QMutexLocker lock(mutex);
+				format = GL_RGBA;
+				width = qImage.width();
+				height = qImage.height();
+				type = GL_UNSIGNED_BYTE;
+				internalFormat = 3;
+			}
+		}
 		// Release the memory
 		downloadedData = QByteArray();
-		
-		// Update texture parameters from loaded image
-		{
-			QMutexLocker lock(mutex);
-			format = GL_RGBA;
-			width = qImage.width();
-			height = qImage.height();
-			type = GL_UNSIGNED_BYTE;
-			internalFormat = 3;
-		}
 	}
 	return res;
 }
