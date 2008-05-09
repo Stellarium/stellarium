@@ -50,19 +50,19 @@ HelpDialog::HelpDialog()
 	specialKeys["Space"] = N_("Space");
 	specialKeys["@arrows-and-left-drag"] = N_("Arrow keys & left mouse drag");
 	specialKeys["@page-up/down"] = N_("Page Up/Down");
-	specialKeys["@ctrl+up/down"] = N_("CTRL + Up Down");
+	specialKeys["@ctrl+up/down"] = N_("CTRL + Up/Down");
 	specialKeys["@left-click"] = N_("Left click");
 	specialKeys["@right-click"] = N_("Right click");
 	specialKeys["@ctrl+left-click"] = N_("CTRL + Left click");
 
 	// Add keys for those keys which do not have actions.
-	QString group = N_("Movement and selection");
+	QString group = N_("Movement and Selection");
 	setKey(group, "", "@arrows-and-left-drag", N_("Pan view around the sky"));
-	setKey(group, "", "@page-up/down", N_("Zoom"));
-	setKey(group, "", "@ctrl+up/down", N_("Zoom"));
+	setKey(group, "", "@page-up/down", N_("Zoom in/out"));
+	setKey(group, "", "@ctrl+up/down", N_("Zoom in/out"));
 	setKey(group, "", "@left-click", N_("Select object"));
-	setKey(group, "", "@right-click", N_("Unselect"));
-	setKey(group, "", "@ctrl+left-click", N_("Unselect"));
+	setKey(group, "", "@right-click", N_("Clear selection"));
+	setKey(group, "", "@ctrl+left-click", N_("Clear selection"));
 }
 
 void HelpDialog::languageChanged()
@@ -143,7 +143,7 @@ QString HelpDialog::getFooterText(void)
 	// Regexp to replace {text} with an HTML link.
 	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
 
-	QString footer = "<h3>" + Qt::escape(q_("Further Reading")) + "</h3>\n";
+	QString footer = "<h2>" + Qt::escape(q_("Further Reading")) + "</h2>\n";
 	footer += Qt::escape(q_("The following links are external web links, and will launch your web browser:\n"));
 	footer += "<p>" + Qt::escape(q_("The Stellarium User Guide:")) + " <a href=\"http://downloads.sourceforge.net/stellarium/stellarium_user_guide-0.9.1-1.pdf\">PDF</a> | <a href=\"http://porpoisehead.net/mysw/stellarium_user_guide_html-0.9.0-1/\">HTML</a></p>";
 
