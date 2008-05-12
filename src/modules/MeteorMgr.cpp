@@ -50,8 +50,8 @@ MeteorMgr::~MeteorMgr()
 	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		delete *iter;
-		active.erase(iter);
 	}
+	active.clear();
 }
 
 void MeteorMgr::init()
