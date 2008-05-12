@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 09:19+0200\n"
+"POT-Creation-Date: 2008-05-06 17:54+0200\n"
 "PO-Revision-Date: 2007-11-20 01:28+0000\n"
 "Last-Translator: LEE E. S. <ngc2737@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -26,29 +26,29 @@ msgstr " 광년"
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:218
+#: src/gui/NewGui.cpp:220
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1068
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1070
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1071
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1069
 msgid "80"
 msgstr ""
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1063
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
@@ -66,11 +66,31 @@ msgstr ""
 msgid "AU"
 msgstr "천문단위"
 
-#: src/ui_viewDialog.h:1294
+#: src/gui/NewGui.cpp:433
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:435
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:429
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:427
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:431
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/ui_viewDialog.h:1078
 msgid "Amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1103
 msgid "Art brightness: "
 msgstr ""
 
@@ -83,7 +103,7 @@ msgstr "작성자: "
 msgid "Az/Alt: "
 msgstr "방위/고도: "
 
-#: src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1091
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "방위 격자"
@@ -92,7 +112,7 @@ msgstr "방위 격자"
 msgid "Callisto"
 msgstr "칼리스토"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1096
 #, fuzzy
 msgid "Cardinal points"
 msgstr "방위기점"
@@ -109,7 +129,7 @@ msgstr "중국"
 msgid "Configuration"
 msgstr "설정"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1098
 #, fuzzy
 msgid "Constellations"
 msgstr "별자리 선"
@@ -129,6 +149,11 @@ msgstr "달력"
 msgid "Date and Time"
 msgstr "날짜 & 시간"
 
+#: src/gui/NewGui.cpp:423
+#, fuzzy
+msgid "Decrease Time Speed"
+msgstr "시간 속도 역방향 증가 [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "데이모스"
@@ -142,7 +167,7 @@ msgstr "디오네"
 msgid "Distance: "
 msgstr "거리: "
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1059
 msgid "Download images"
 msgstr ""
 
@@ -154,7 +179,7 @@ msgstr "동"
 msgid "Earth"
 msgstr "지구"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "황도"
@@ -176,17 +201,17 @@ msgstr "날짜의 균등성"
 msgid "Equal Area"
 msgstr ""
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Equator line"
 msgstr "적도"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "적위 격자"
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1093
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "적위 격자"
@@ -195,7 +220,7 @@ msgstr "적위 격자"
 msgid "Europa"
 msgstr "유로파"
 
-#: src/gui/ViewDialog.cpp:305
+#: src/gui/ViewDialog.cpp:332
 #, fuzzy
 msgid "Exceptional Leonid rate"
 msgstr ": 예외적인 사자자리 유성우 빈도수"
@@ -210,7 +235,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:172 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:964 src/ui_configurationDialog.h:137
+#: src/ui_viewDialog.h:1025 src/ui_configurationDialog.h:137
 #, fuzzy
 msgid "Form"
 msgstr "천진"
@@ -223,14 +248,24 @@ msgstr "가니메데"
 msgid "Go"
 msgstr ""
 
+#: src/gui/NewGui.cpp:438
+#, fuzzy
+msgid "Goto Selected Object"
+msgstr "선택한 천체로 이동 [스페이스]"
+
 #: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "도움말"
 
-#: src/gui/ViewDialog.cpp:308
+#: src/gui/ViewDialog.cpp:335
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": 가장 높은 빈도수 (1966년 사자자리 유성우)"
+
+#: src/gui/NewGui.cpp:448
+#, fuzzy
+msgid "Horizontal Flip"
+msgstr "수평 반전"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -247,6 +282,11 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+
+#: src/gui/NewGui.cpp:424
+#, fuzzy
+msgid "Increase Time Speed"
+msgstr "시간 속도 순방향 증가 [L]"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -269,7 +309,7 @@ msgstr "목성"
 msgid "Korean"
 msgstr "한국어"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1074
 msgid "Labels and markers"
 msgstr ""
 
@@ -277,7 +317,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "라코타 인디언"
 
-#: src/ui_viewDialog.h:1303
+#: src/ui_viewDialog.h:1087
 #, fuzzy
 msgid "Landscape"
 msgstr "경치"
@@ -287,12 +327,12 @@ msgstr "경치"
 msgid "Latitude:"
 msgstr "위도 : "
 
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Light pollution:"
 msgstr "광공해 밝기 "
 
-#: src/modules/ConstellationMgr.cpp:369
+#: src/modules/ConstellationMgr.cpp:371
 #, fuzzy, qt-format
 msgid "Loading Constellation Art: %1/%2"
 msgstr "별자리 그림을 불러옵니다. "
@@ -337,7 +377,7 @@ msgstr "등급: "
 msgid "Main"
 msgstr "용골"
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1105
 #, fuzzy
 msgid "Marking"
 msgstr "용골"
@@ -354,7 +394,7 @@ msgstr ""
 msgid "Mercury"
 msgstr "수성"
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Meridian line"
 msgstr "자오선"
@@ -375,7 +415,7 @@ msgstr "북"
 msgid "Navajo"
 msgstr "나바호족"
 
-#: src/ui_viewDialog.h:1273 src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1057 src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Nebulas"
 msgstr "성운들 [N]"
@@ -384,11 +424,11 @@ msgstr "성운들 [N]"
 msgid "Neptune"
 msgstr "해왕성"
 
-#: src/gui/ViewDialog.cpp:249
+#: src/gui/ViewDialog.cpp:276
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:299 src/ui_viewDialog.h:1288
+#: src/gui/ViewDialog.cpp:326 src/ui_viewDialog.h:1072
 #, fuzzy
 msgid "Normal rate"
 msgstr ": 정상 속도"
@@ -397,7 +437,7 @@ msgstr ": 정상 속도"
 msgid "Norse"
 msgstr "스칸디나비아인"
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Options"
 msgstr "오리온"
@@ -435,11 +475,11 @@ msgstr "포보스"
 msgid "Phoebe"
 msgstr "포에베"
 
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1076
 msgid "Planets"
 msgstr "행성들"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1050
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "행성에 대한 힌트"
@@ -457,7 +497,7 @@ msgstr "폴리네시아"
 msgid "Program language:"
 msgstr "프로그램 언어: "
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1104
 #, fuzzy
 msgid "Projection"
 msgstr "투영 :"
@@ -745,292 +785,9 @@ msgid ""
 " }\n"
 msgstr ""
 
-#: src/ui_viewDialog.h:965
-msgid ""
-"QFrame {\n"
-"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
-"stop: 1 #19233c);\n"
-"\tborder: 0px;\n"
-"\tcolor : #babdc4;\n"
-"    font-family: \"DejaVu\";\n"
-"}\n"
-"\n"
-"DialogFrame {\n"
-"  border-width: 1px;\n"
-"  border-style: solid;\n"
-"  border-color: #081f25;\n"
-"}\n"
-"\n"
-"ResizeFrame {\n"
-" background-image: url(data/gui/resize.png);\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"\tbackground: None;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"     border: 1.5px solid #2e2e36;\n"
-"     border-radius: 10px;\n"
-"     padding: 0 8px;\n"
-"     background: white;\n"
-"     selection-background-color: darkgray;\n"
-" }\n"
-"\n"
-"QPushButton {\n"
-"  border: 1.5px solid #2e2e36;\n"
-"  border-radius: 10px;\n"
-"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
-"}\n"
-"\n"
-"QScrollBar:vertical {\n"
-" border: 1px solid #2e2e36;\n"
-" background: #4a4b50;\n"
-" width: 15px;\n"
-"         margin: 22px 0px 22px 0px;\n"
-"     }\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    border: 2px solid #4a4b50;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
-"\tborder-radius: 4px;\n"
-"\tmin-height: 20px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: bottom;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar::sub-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: top;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
-"         border: 2px solid grey;\n"
-"         width: 3px;\n"
-"         height: 3px;\n"
-"         background: white;\n"
-" }\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-"         background: none;\n"
-" }\n"
-"\n"
-"QGroupBox {\n"
-"     border: 1px solid #1f2f25;\n"
-"     border-radius: 4px;\n"
-"     margin-top: 1ex;\n"
-"     font-weight: bold;\n"
-"     background: solid #223B34;\n"
-" }\n"
-"\n"
-"QGroupBox::title {\n"
-"     subcontrol-origin: margin;\n"
-"     padding: 0px 3px;\n"
-"     color : #babdc4;\n"
-"\t left: 15px\n"
-" }\n"
-"\n"
-"\n"
-"QTabWidget::pane {\n"
-"   border-top: 2px solid #348483;\n"
-"}\n"
-"\n"
-"/* Style the tab using the tab sub-control. Note that\n"
-"         it reads QTabBar _not_ QTabWidget */\n"
-"QTabBar::tab {\n"
-"    font : bold;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#2a3b50, stop: 1 #19233c);\n"
-"    border: 2px solid #348483;\n"
-"    border-bottom-color: #348483; /* same as the pane color */\n"
-"    border-top-left-radius: 4px;\n"
-"    border-top-right-radius: 4px;\n"
-"    min-width: 10ex;\n"
-"    padding: 2px;\n"
-"    color: #babdc4;\n"
-"}\n"
-"\n"
-"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
-"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#19233c, stop: 1 #2a3b50);\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:selected {\n"
-"         border-color: #A2A78B;\n"
-"         border-bottom-color: #2a3b50; /* same as pane color */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:!selected {\n"
-"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
-"     }\n"
-"\n"
-"     /* make use of negative margins for overlapping tabs */\n"
-"     QTabBar::tab:selected {\n"
-"         /* expand/overlap to the left and right by 4px */\n"
-"         margin-left: -4px;\n"
-"         margin-right: -4px;\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:first:selected {\n"
-"         margin-left: 0; /* the first selected tab has nothing to overlap "
-"with on the left */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:last:selected {\n"
-"         margin-right: 0; /* the last selected tab has nothing to overlap "
-"with on the right */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:only-one {\n"
-"         margin: 0; /* if there is only one tab, we don't want overlapping "
-"margins */\n"
-"     }\n"
-"\n"
-"QListWidget {\n"
-" \tbackground: solid #121324;\n"
-"\tborder: 1px;\n"
-"    border-radius: 4px;\n"
-"    border-color: #081f25;\n"
-"    border-style: solid;\n"
-"  selection-background-color: #2a3b50;\n"
-"}\n"
-"\n"
-"QCheckBox\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QCheckBox::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  background-color: #225555;\n"
-"}\n"
-"QCheckBox::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
-"}\n"
-"QCheckBox::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
-"}\n"
-"\n"
-"QRadioButton\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QRadioButton::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  margin-left: 4px;\n"
-"}\n"
-"QRadioButton::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-checked.png);\n"
-"}\n"
-"QRadioButton::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: top right; /* position at the top right corner */\n"
-"\n"
-"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
-"border */\n"
-"     border-image: url(:/images/spinup.png) 1;\n"
-"     border-width: 1px;\n"
-"\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:hover {\n"
-"     border-image: url(:/images/spinup_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:pressed {\n"
-"     border-image: url(:/images/spinup_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow {\n"
-"     image: url(:/images/up_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
-"value is max */\n"
-"    image: url(:/images/up_arrow_disabled.png);\n"
-" }\n"
-"\n"
-" QSpinBox::down-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: bottom right; /* position at bottom right corner "
-"*/\n"
-"\n"
-"     width: 16px;\n"
-"     border-image: url(:/images/spindown.png) 1;\n"
-"     border-width: 1px;\n"
-"     border-top-width: 0;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:hover {\n"
-"     border-image: url(:/images/spindown_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:pressed {\n"
-"     border-image: url(:/images/spindown_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow {\n"
-"     image: url(:/images/down_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow:disabled,\n"
-" QSpinBox::down-arrow:off { /* off state when value in min */\n"
-"    image: url(:/images/down_arrow_disabled.png);\n"
-" }\n"
-"\n"
-"QDoubleSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-msgstr ""
-
 #: src/ui_dateTimeDialogGui.h:452 src/ui_helpDialogGui.h:147
 #: src/ui_locationDialogGui.h:255 src/ui_searchDialogGui.h:211
-#: src/ui_viewDialog.h:1245 src/ui_configurationDialog.h:417
+#: src/ui_viewDialog.h:1029 src/ui_configurationDialog.h:417
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -1045,12 +802,22 @@ msgid ""
 "}"
 msgstr ""
 
+#: src/gui/NewGui.cpp:445
+#, fuzzy
+msgid "Quit"
+msgstr "이뉴잇족"
+
 #: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
 #: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
 #: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "적경/적위 : "
+
+#: src/gui/NewGui.cpp:426
+#, fuzzy
+msgid "Return To Current Time"
+msgstr "현재 시간으로 복귀[8]"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1064,12 +831,16 @@ msgstr "남"
 msgid "Saturn"
 msgstr "토성"
 
-#: src/ui_viewDialog.h:1269
+#: src/gui/NewGui.cpp:447
+msgid "Save Screenshot"
+msgstr ""
+
+#: src/ui_viewDialog.h:1053
 #, fuzzy
 msgid "Scale Moon"
 msgstr "위치 저장"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1045
 #, fuzzy
 msgid "Scale:"
 msgstr "달 확대"
@@ -1083,61 +854,196 @@ msgstr "선택-종료하고 실행하세요."
 msgid "Selected:"
 msgstr "선택 : "
 
-#: src/ui_viewDialog.h:1278
+#: src/gui/NewGui.cpp:446
+msgid "Set Full Screen"
+msgstr ""
+
+#: src/gui/NewGui.cpp:425
+#, fuzzy
+msgid "Set Real Time Speed"
+msgstr "실시간 속도 [K]"
+
+#: src/gui/NewGui.cpp:439
+#, fuzzy
+msgid "Set Tracking"
+msgstr "경주로"
+
+#: src/ui_viewDialog.h:1062
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1058
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259 src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1272
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1043 src/ui_viewDialog.h:1049 src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1061
 #, fuzzy
 msgid "Show"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1318
+#: src/gui/NewGui.cpp:408
+#, fuzzy
+msgid "Show Atmosphere"
+msgstr "대기"
+
+#: src/gui/NewGui.cpp:399
+#, fuzzy
+msgid "Show Azimutal Grid"
+msgstr "방위 격자"
+
+#: src/gui/NewGui.cpp:405
+#, fuzzy
+msgid "Show Cardinal Points"
+msgstr "방위기점"
+
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Show Configuration Window"
+msgstr "설정창"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Show Constellation Art"
+msgstr "별자리 그림[R]"
+
+#: src/gui/NewGui.cpp:397
+#, fuzzy
+msgid "Show Constellation Boundaries"
+msgstr "별자리 경계"
+
+#: src/gui/NewGui.cpp:396
+#, fuzzy
+msgid "Show Constellation Labels"
+msgstr "별자리 이름"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Show Constellation Lines"
+msgstr "별자리 선"
+
+#: src/gui/NewGui.cpp:412
+#, fuzzy
+msgid "Show DSS"
+msgstr "보이기: "
+
+#: src/gui/NewGui.cpp:419
+msgid "Show Date/Time Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:402
+#, fuzzy
+msgid "Show Ecliptic Line"
+msgstr "황도"
+
+#: src/gui/NewGui.cpp:403
+#, fuzzy
+msgid "Show Equator Line"
+msgstr "적도"
+
+#: src/gui/NewGui.cpp:400
+#, fuzzy
+msgid "Show Equatorial Grid"
+msgstr "적위 격자"
+
+#: src/gui/NewGui.cpp:401
+#, fuzzy
+msgid "Show Equatorial J2000 Grid"
+msgstr "적위 격자"
+
+#: src/gui/NewGui.cpp:409
+#, fuzzy
+msgid "Show Fog"
+msgstr "보이기: "
+
+#: src/gui/NewGui.cpp:407
+#, fuzzy
+msgid "Show Ground"
+msgstr "지면"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Show Help Window"
+msgstr "보이기: "
+
+#: src/gui/NewGui.cpp:418
+#, fuzzy
+msgid "Show Location Window"
+msgstr "위치 설정 "
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Show Meridian Line"
+msgstr "자오선"
+
+#: src/gui/NewGui.cpp:411
+#, fuzzy
+msgid "Show Nebulas"
+msgstr "성운들 [N]"
+
+#: src/gui/NewGui.cpp:444
+msgid "Show Night Mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Show Planets Hints"
+msgstr "행성 궤도"
+
+#: src/gui/NewGui.cpp:416
+msgid "Show Search Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:420
+msgid "Show Sky and Viewing option Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+#, fuzzy
+msgid "Show Stars"
+msgstr "보이기: "
+
+#: src/ui_viewDialog.h:1102
 #, fuzzy
 msgid "Show art"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "대기"
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1101
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Show fog"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1082
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1099
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1316
+#: src/ui_viewDialog.h:1100
 #, fuzzy
 msgid "Show lines"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1051
 msgid "Show marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1052
 msgid "Show orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1054
 msgid "Simulate light speed"
 msgstr ""
 
@@ -1145,12 +1051,12 @@ msgstr ""
 msgid "Size: "
 msgstr "크기: "
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1079
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
 
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1089
 msgid "Sky Marking"
 msgstr ""
 
@@ -1162,27 +1068,55 @@ msgstr "태양계 관측자"
 msgid "Spectral Type: "
 msgstr "스펙트럼형: "
 
-#: src/gui/ViewDialog.cpp:302
+#: src/gui/ViewDialog.cpp:329
 #, fuzzy
 msgid "Standard Perseids rate"
 msgstr ": 표준 페르세우스 유성우 빈도수"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1107
 #, fuzzy
 msgid "Starlore"
 msgstr "성"
 
-#: src/ui_viewDialog.h:1260 src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1075
 msgid "Stars"
 msgstr "별"
+
+#: src/gui/NewGui.cpp:854
+msgid "Stellarium"
+msgstr ""
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
 msgstr ""
 
+#: src/gui/NewGui.cpp:434
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:436
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:430
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:428
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:432
+msgid "Subtract 1 solar week"
+msgstr ""
+
 #: src/translations.h:33
 msgid "Sun"
 msgstr "태양"
+
+#: src/gui/NewGui.cpp:443
+msgid "Switch Equatorial Mount"
+msgstr ""
 
 #: src/translations.h:49
 msgid "Tethys"
@@ -1216,7 +1150,7 @@ msgstr "타이탄"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Twinkle"
 msgstr "삼각형"
@@ -1233,11 +1167,11 @@ msgstr "USB 스크립트: "
 msgid "Uranus"
 msgstr "천왕성"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1106
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1086
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1251,7 +1185,11 @@ msgstr ""
 msgid "Venus"
 msgstr "금성"
 
-#: src/ui_viewDialog.h:1244
+#: src/gui/NewGui.cpp:449
+msgid "Vertical Flip"
+msgstr ""
+
+#: src/ui_viewDialog.h:1028
 #, fuzzy
 msgid "View"
 msgstr "화면"
@@ -1266,7 +1204,7 @@ msgstr "서양"
 
 #: src/ui_dateTimeDialogGui.h:463 src/ui_helpDialogGui.h:158
 #: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1256 src/ui_configurationDialog.h:428
+#: src/ui_viewDialog.h:1040 src/ui_configurationDialog.h:428
 msgid "X"
 msgstr ""
 
@@ -1276,7 +1214,17 @@ msgid ""
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_viewDialog.h:1263
+#: src/gui/NewGui.cpp:440
+#, fuzzy
+msgid "Zoom in to Selected Object"
+msgstr "선택한 천체로 이동 [스페이스]"
+
+#: src/gui/NewGui.cpp:441
+#, fuzzy
+msgid "Zoom out"
+msgstr "확대 지속: "
+
+#: src/ui_viewDialog.h:1047
 msgid "amount:"
 msgstr ""
 
@@ -1485,29 +1433,14 @@ msgstr ""
 #~ msgid "Completions"
 #~ msgstr "허"
 
-#~ msgid "Configuration window"
-#~ msgstr "설정창"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "설정창[1]"
 
 #~ msgid "Constellation Art Intensity"
 #~ msgstr "별자리 그림 명암도"
 
-#~ msgid "Constellation Boundaries"
-#~ msgstr "별자리 경계"
-
-#~ msgid "Constellation Names"
-#~ msgstr "별자리 이름"
-
-#~ msgid "Constellations Art [R]"
-#~ msgstr "별자리 그림[R]"
-
 #~ msgid "Constellations Boundaries"
 #~ msgstr "별자리 경계"
-
-#~ msgid "Constellations Lines"
-#~ msgstr "별자리 선"
 
 #~ msgid "Constellations Names"
 #~ msgstr "별자리 이름"
@@ -1550,9 +1483,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "일"
-
-#~ msgid "Decrease Time Speed [J]"
-#~ msgstr "시간 속도 역방향 증가 [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "돌고래"
@@ -1684,9 +1614,6 @@ msgstr ""
 #~ msgid "Flail"
 #~ msgstr "천봉"
 
-#~ msgid "Flip horizontally"
-#~ msgstr "수평 반전"
-
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
 #~ msgstr "수평 반전[CTRL+SHIFT+H]"
 
@@ -1738,14 +1665,8 @@ msgstr ""
 #~ msgid "Good Gourd"
 #~ msgstr "과"
 
-#~ msgid "Goto selected object [SPACE]"
-#~ msgstr "선택한 천체로 이동 [스페이스]"
-
 #~ msgid "Great General"
 #~ msgstr "천장군"
-
-#~ msgid "Ground"
-#~ msgstr "지면"
 
 #~ msgid "Ground [G]"
 #~ msgstr "지면 [G]"
@@ -1801,9 +1722,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "연도"
-
-#~ msgid "Increase Time Speed [L]"
-#~ msgstr "시간 속도 순방향 증가 [L]"
 
 #~ msgid "Indus"
 #~ msgstr "인디언"
@@ -2104,9 +2022,6 @@ msgstr ""
 #~ msgid "Planet Names"
 #~ msgstr "행성 이름"
 
-#~ msgid "Planet Orbits"
-#~ msgstr "행성 궤도"
-
 #~ msgid "Planet Trails"
 #~ msgstr "행성 궤적"
 
@@ -2140,14 +2055,8 @@ msgstr ""
 #~ msgid "Rabbit Tracks"
 #~ msgstr "토끼가 지나간 길"
 
-#~ msgid "Race Track"
-#~ msgstr "경주로"
-
 #~ msgid "Ramparts"
 #~ msgstr "천루성"
-
-#~ msgid "Real Time Speed [K]"
-#~ msgstr "실시간 속도 [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "명령들을 스크립트 파일로 저장합니다:\n"
@@ -2160,9 +2069,6 @@ msgstr ""
 
 #~ msgid "Reticulum"
 #~ msgstr "그물"
-
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "현재 시간으로 복귀[8]"
 
 #~ msgid "Revolving Female"
 #~ msgstr "선회녀"
@@ -2253,9 +2159,6 @@ msgstr ""
 
 #~ msgid "Selkis"
 #~ msgstr "셀키스"
-
-#~ msgid "Set Location "
-#~ msgstr "위치 설정 "
 
 #~ msgid "Set Time "
 #~ msgstr "시간 설정 "
@@ -2513,9 +2416,6 @@ msgstr ""
 
 #~ msgid "Zaofu"
 #~ msgstr "조보"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "확대 지속: "
 
 #~ msgid "change to apply."
 #~ msgstr "프로그램을 다시 시작해야 합니다."

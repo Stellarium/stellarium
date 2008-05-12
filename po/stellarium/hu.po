@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 09:19+0200\n"
+"POT-Creation-Date: 2008-05-06 17:54+0200\n"
 "PO-Revision-Date: 2008-01-14 18:23+0000\n"
 "Last-Translator: András Mohari <mayday@vizslamail.hu>\n"
 "Language-Team: Hungarian\n"
@@ -27,29 +27,29 @@ msgstr " fényév"
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:218
+#: src/gui/NewGui.cpp:220
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1068
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1070
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1071
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1069
 msgid "80"
 msgstr ""
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1063
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
@@ -67,11 +67,31 @@ msgstr ""
 msgid "AU"
 msgstr "CSE"
 
-#: src/ui_viewDialog.h:1294
+#: src/gui/NewGui.cpp:433
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:435
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:429
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:427
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:431
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/ui_viewDialog.h:1078
 msgid "Amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1103
 msgid "Art brightness: "
 msgstr ""
 
@@ -84,7 +104,7 @@ msgstr "Szerző: "
 msgid "Az/Alt: "
 msgstr "A/h: "
 
-#: src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1091
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Horizontális rács"
@@ -93,7 +113,7 @@ msgstr "Horizontális rács"
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1096
 #, fuzzy
 msgid "Cardinal points"
 msgstr "Égtájak: "
@@ -110,7 +130,7 @@ msgstr "Kínai"
 msgid "Configuration"
 msgstr "Beállítások"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1098
 #, fuzzy
 msgid "Constellations"
 msgstr "Csillagkép"
@@ -131,6 +151,11 @@ msgstr "Naptári"
 msgid "Date and Time"
 msgstr "Dátum és idő"
 
+#: src/gui/NewGui.cpp:423
+#, fuzzy
+msgid "Decrease Time Speed"
+msgstr "Idő lassítása [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
@@ -144,7 +169,7 @@ msgstr "Dione"
 msgid "Distance: "
 msgstr "Távolság: "
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1059
 msgid "Download images"
 msgstr ""
 
@@ -156,7 +181,7 @@ msgstr "K"
 msgid "Earth"
 msgstr "Föld"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "Ekliptika vonala"
@@ -179,17 +204,17 @@ msgstr "Pill. epocha"
 msgid "Equal Area"
 msgstr ""
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Equator line"
 msgstr "Egyenlítő vonala"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "Egyenlítői rács"
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1093
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
@@ -198,7 +223,7 @@ msgstr "Egyenlítői rács"
 msgid "Europa"
 msgstr "Europa"
 
-#: src/gui/ViewDialog.cpp:305
+#: src/gui/ViewDialog.cpp:332
 #, fuzzy
 msgid "Exceptional Leonid rate"
 msgstr ": Rendkívüli Leonida-gyakoriság"
@@ -213,7 +238,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:172 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:964 src/ui_configurationDialog.h:137
+#: src/ui_viewDialog.h:1025 src/ui_configurationDialog.h:137
 #, fuzzy
 msgid "Form"
 msgstr "Gázló"
@@ -226,14 +251,23 @@ msgstr "Ganymede"
 msgid "Go"
 msgstr ""
 
+#: src/gui/NewGui.cpp:438
+#, fuzzy
+msgid "Goto Selected Object"
+msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
+
 #: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "Súgó"
 
-#: src/gui/ViewDialog.cpp:308
+#: src/gui/ViewDialog.cpp:335
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": Az eddigi csúcs (1966, Leonidák)"
+
+#: src/gui/NewGui.cpp:448
+msgid "Horizontal Flip"
+msgstr ""
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -250,6 +284,11 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+
+#: src/gui/NewGui.cpp:424
+#, fuzzy
+msgid "Increase Time Speed"
+msgstr "Idő gyorsítása [L]"
 
 #: src/translations.h:71
 msgid "Inuit"
@@ -272,7 +311,7 @@ msgstr "Jupiter"
 msgid "Korean"
 msgstr "Koreai"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1074
 msgid "Labels and markers"
 msgstr ""
 
@@ -280,7 +319,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/ui_viewDialog.h:1303
+#: src/ui_viewDialog.h:1087
 #, fuzzy
 msgid "Landscape"
 msgstr "Tájképek"
@@ -290,12 +329,12 @@ msgstr "Tájképek"
 msgid "Latitude:"
 msgstr "Szélesség: "
 
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Light pollution:"
 msgstr "Fényszennyezés erőssége: "
 
-#: src/modules/ConstellationMgr.cpp:369
+#: src/modules/ConstellationMgr.cpp:371
 #, fuzzy, qt-format
 msgid "Loading Constellation Art: %1/%2"
 msgstr "Csillagképek ábráinak betöltése: "
@@ -340,7 +379,7 @@ msgstr "Fényesség: "
 msgid "Main"
 msgstr "Hajógerinc"
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1105
 #, fuzzy
 msgid "Marking"
 msgstr "Hajógerinc"
@@ -357,7 +396,7 @@ msgstr ""
 msgid "Mercury"
 msgstr "Merkúr"
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Meridian line"
 msgstr "Meridián vonala"
@@ -378,7 +417,7 @@ msgstr "É"
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/ui_viewDialog.h:1273 src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1057 src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Nebulas"
 msgstr "Ködök [N]"
@@ -387,11 +426,11 @@ msgstr "Ködök [N]"
 msgid "Neptune"
 msgstr "Neptunusz"
 
-#: src/gui/ViewDialog.cpp:249
+#: src/gui/ViewDialog.cpp:276
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:299 src/ui_viewDialog.h:1288
+#: src/gui/ViewDialog.cpp:326 src/ui_viewDialog.h:1072
 #, fuzzy
 msgid "Normal rate"
 msgstr ": Normál gyakoriság"
@@ -400,7 +439,7 @@ msgstr ": Normál gyakoriság"
 msgid "Norse"
 msgstr "Norvég"
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Options"
 msgstr "Orion"
@@ -438,11 +477,11 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1076
 msgid "Planets"
 msgstr "Bolygók"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1050
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Bolygók jelölése"
@@ -460,7 +499,7 @@ msgstr "Polinéziai"
 msgid "Program language:"
 msgstr "A program nyelve: "
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1104
 #, fuzzy
 msgid "Projection"
 msgstr "Vetület:"
@@ -748,292 +787,9 @@ msgid ""
 " }\n"
 msgstr ""
 
-#: src/ui_viewDialog.h:965
-msgid ""
-"QFrame {\n"
-"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
-"stop: 1 #19233c);\n"
-"\tborder: 0px;\n"
-"\tcolor : #babdc4;\n"
-"    font-family: \"DejaVu\";\n"
-"}\n"
-"\n"
-"DialogFrame {\n"
-"  border-width: 1px;\n"
-"  border-style: solid;\n"
-"  border-color: #081f25;\n"
-"}\n"
-"\n"
-"ResizeFrame {\n"
-" background-image: url(data/gui/resize.png);\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"\tbackground: None;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"     border: 1.5px solid #2e2e36;\n"
-"     border-radius: 10px;\n"
-"     padding: 0 8px;\n"
-"     background: white;\n"
-"     selection-background-color: darkgray;\n"
-" }\n"
-"\n"
-"QPushButton {\n"
-"  border: 1.5px solid #2e2e36;\n"
-"  border-radius: 10px;\n"
-"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
-"}\n"
-"\n"
-"QScrollBar:vertical {\n"
-" border: 1px solid #2e2e36;\n"
-" background: #4a4b50;\n"
-" width: 15px;\n"
-"         margin: 22px 0px 22px 0px;\n"
-"     }\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    border: 2px solid #4a4b50;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
-"\tborder-radius: 4px;\n"
-"\tmin-height: 20px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: bottom;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar::sub-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: top;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
-"         border: 2px solid grey;\n"
-"         width: 3px;\n"
-"         height: 3px;\n"
-"         background: white;\n"
-" }\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-"         background: none;\n"
-" }\n"
-"\n"
-"QGroupBox {\n"
-"     border: 1px solid #1f2f25;\n"
-"     border-radius: 4px;\n"
-"     margin-top: 1ex;\n"
-"     font-weight: bold;\n"
-"     background: solid #223B34;\n"
-" }\n"
-"\n"
-"QGroupBox::title {\n"
-"     subcontrol-origin: margin;\n"
-"     padding: 0px 3px;\n"
-"     color : #babdc4;\n"
-"\t left: 15px\n"
-" }\n"
-"\n"
-"\n"
-"QTabWidget::pane {\n"
-"   border-top: 2px solid #348483;\n"
-"}\n"
-"\n"
-"/* Style the tab using the tab sub-control. Note that\n"
-"         it reads QTabBar _not_ QTabWidget */\n"
-"QTabBar::tab {\n"
-"    font : bold;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#2a3b50, stop: 1 #19233c);\n"
-"    border: 2px solid #348483;\n"
-"    border-bottom-color: #348483; /* same as the pane color */\n"
-"    border-top-left-radius: 4px;\n"
-"    border-top-right-radius: 4px;\n"
-"    min-width: 10ex;\n"
-"    padding: 2px;\n"
-"    color: #babdc4;\n"
-"}\n"
-"\n"
-"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
-"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#19233c, stop: 1 #2a3b50);\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:selected {\n"
-"         border-color: #A2A78B;\n"
-"         border-bottom-color: #2a3b50; /* same as pane color */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:!selected {\n"
-"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
-"     }\n"
-"\n"
-"     /* make use of negative margins for overlapping tabs */\n"
-"     QTabBar::tab:selected {\n"
-"         /* expand/overlap to the left and right by 4px */\n"
-"         margin-left: -4px;\n"
-"         margin-right: -4px;\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:first:selected {\n"
-"         margin-left: 0; /* the first selected tab has nothing to overlap "
-"with on the left */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:last:selected {\n"
-"         margin-right: 0; /* the last selected tab has nothing to overlap "
-"with on the right */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:only-one {\n"
-"         margin: 0; /* if there is only one tab, we don't want overlapping "
-"margins */\n"
-"     }\n"
-"\n"
-"QListWidget {\n"
-" \tbackground: solid #121324;\n"
-"\tborder: 1px;\n"
-"    border-radius: 4px;\n"
-"    border-color: #081f25;\n"
-"    border-style: solid;\n"
-"  selection-background-color: #2a3b50;\n"
-"}\n"
-"\n"
-"QCheckBox\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QCheckBox::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  background-color: #225555;\n"
-"}\n"
-"QCheckBox::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
-"}\n"
-"QCheckBox::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
-"}\n"
-"\n"
-"QRadioButton\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QRadioButton::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  margin-left: 4px;\n"
-"}\n"
-"QRadioButton::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-checked.png);\n"
-"}\n"
-"QRadioButton::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: top right; /* position at the top right corner */\n"
-"\n"
-"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
-"border */\n"
-"     border-image: url(:/images/spinup.png) 1;\n"
-"     border-width: 1px;\n"
-"\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:hover {\n"
-"     border-image: url(:/images/spinup_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:pressed {\n"
-"     border-image: url(:/images/spinup_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow {\n"
-"     image: url(:/images/up_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
-"value is max */\n"
-"    image: url(:/images/up_arrow_disabled.png);\n"
-" }\n"
-"\n"
-" QSpinBox::down-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: bottom right; /* position at bottom right corner "
-"*/\n"
-"\n"
-"     width: 16px;\n"
-"     border-image: url(:/images/spindown.png) 1;\n"
-"     border-width: 1px;\n"
-"     border-top-width: 0;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:hover {\n"
-"     border-image: url(:/images/spindown_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:pressed {\n"
-"     border-image: url(:/images/spindown_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow {\n"
-"     image: url(:/images/down_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow:disabled,\n"
-" QSpinBox::down-arrow:off { /* off state when value in min */\n"
-"    image: url(:/images/down_arrow_disabled.png);\n"
-" }\n"
-"\n"
-"QDoubleSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-msgstr ""
-
 #: src/ui_dateTimeDialogGui.h:452 src/ui_helpDialogGui.h:147
 #: src/ui_locationDialogGui.h:255 src/ui_searchDialogGui.h:211
-#: src/ui_viewDialog.h:1245 src/ui_configurationDialog.h:417
+#: src/ui_viewDialog.h:1029 src/ui_configurationDialog.h:417
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -1048,12 +804,22 @@ msgid ""
 "}"
 msgstr ""
 
+#: src/gui/NewGui.cpp:445
+#, fuzzy
+msgid "Quit"
+msgstr "Inuit"
+
 #: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
 #: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
 #: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "RA/D: "
+
+#: src/gui/NewGui.cpp:426
+#, fuzzy
+msgid "Return To Current Time"
+msgstr "Vissza a jelenbe [8]"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1067,12 +833,16 @@ msgstr "D"
 msgid "Saturn"
 msgstr "Szaturnusz"
 
-#: src/ui_viewDialog.h:1269
+#: src/gui/NewGui.cpp:447
+msgid "Save Screenshot"
+msgstr ""
+
+#: src/ui_viewDialog.h:1053
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Hely mentése"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1045
 #, fuzzy
 msgid "Scale:"
 msgstr "Hold nagyítása"
@@ -1086,61 +856,196 @@ msgstr "Jelöld ki és lépj ki innen a futtatáshoz."
 msgid "Selected:"
 msgstr "Kijelölve: "
 
-#: src/ui_viewDialog.h:1278
+#: src/gui/NewGui.cpp:446
+msgid "Set Full Screen"
+msgstr ""
+
+#: src/gui/NewGui.cpp:425
+#, fuzzy
+msgid "Set Real Time Speed"
+msgstr "Valós idő [K]"
+
+#: src/gui/NewGui.cpp:439
+#, fuzzy
+msgid "Set Tracking"
+msgstr "Versenypálya"
+
+#: src/ui_viewDialog.h:1062
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1058
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259 src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1272
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1043 src/ui_viewDialog.h:1049 src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1061
 #, fuzzy
 msgid "Show"
 msgstr "Megjelenítés: "
 
-#: src/ui_viewDialog.h:1318
+#: src/gui/NewGui.cpp:408
+#, fuzzy
+msgid "Show Atmosphere"
+msgstr "Légkör"
+
+#: src/gui/NewGui.cpp:399
+#, fuzzy
+msgid "Show Azimutal Grid"
+msgstr "Horizontális rács"
+
+#: src/gui/NewGui.cpp:405
+#, fuzzy
+msgid "Show Cardinal Points"
+msgstr "Égtájak"
+
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Show Configuration Window"
+msgstr "Beállítások ablak [1]"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Show Constellation Art"
+msgstr "Csillagképek ábrái [R]"
+
+#: src/gui/NewGui.cpp:397
+#, fuzzy
+msgid "Show Constellation Boundaries"
+msgstr "Csillagképek határai"
+
+#: src/gui/NewGui.cpp:396
+#, fuzzy
+msgid "Show Constellation Labels"
+msgstr "Csillagképek címkéi: "
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Show Constellation Lines"
+msgstr "Csillagképek vonalai"
+
+#: src/gui/NewGui.cpp:412
+#, fuzzy
+msgid "Show DSS"
+msgstr "Megjelenítés: "
+
+#: src/gui/NewGui.cpp:419
+msgid "Show Date/Time Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:402
+#, fuzzy
+msgid "Show Ecliptic Line"
+msgstr "Ekliptika vonala"
+
+#: src/gui/NewGui.cpp:403
+#, fuzzy
+msgid "Show Equator Line"
+msgstr "Egyenlítő vonala"
+
+#: src/gui/NewGui.cpp:400
+#, fuzzy
+msgid "Show Equatorial Grid"
+msgstr "Egyenlítői rács"
+
+#: src/gui/NewGui.cpp:401
+#, fuzzy
+msgid "Show Equatorial J2000 Grid"
+msgstr "Egyenlítői rács"
+
+#: src/gui/NewGui.cpp:409
+#, fuzzy
+msgid "Show Fog"
+msgstr "Megjelenítés: "
+
+#: src/gui/NewGui.cpp:407
+#, fuzzy
+msgid "Show Ground"
+msgstr "Felszín"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Show Help Window"
+msgstr "Megjelenítés: "
+
+#: src/gui/NewGui.cpp:418
+#, fuzzy
+msgid "Show Location Window"
+msgstr "Hely beállítása "
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Show Meridian Line"
+msgstr "Meridián vonala"
+
+#: src/gui/NewGui.cpp:411
+#, fuzzy
+msgid "Show Nebulas"
+msgstr "Ködök [N]"
+
+#: src/gui/NewGui.cpp:444
+msgid "Show Night Mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Show Planets Hints"
+msgstr "Bolygópályák"
+
+#: src/gui/NewGui.cpp:416
+msgid "Show Search Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:420
+msgid "Show Sky and Viewing option Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+#, fuzzy
+msgid "Show Stars"
+msgstr "Megjelenítés: "
+
+#: src/ui_viewDialog.h:1102
 #, fuzzy
 msgid "Show art"
 msgstr "Megjelenítés: "
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Légkör"
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1101
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Show fog"
 msgstr "Megjelenítés: "
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1082
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1099
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1316
+#: src/ui_viewDialog.h:1100
 #, fuzzy
 msgid "Show lines"
 msgstr "Megjelenítés: "
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1051
 msgid "Show marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1052
 msgid "Show orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1054
 msgid "Simulate light speed"
 msgstr ""
 
@@ -1148,12 +1053,12 @@ msgstr ""
 msgid "Size: "
 msgstr "Méret: "
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1079
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
 
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1089
 msgid "Sky Marking"
 msgstr ""
 
@@ -1165,27 +1070,55 @@ msgstr "Naprendszerbeli megfigyelő"
 msgid "Spectral Type: "
 msgstr "Színképtípus: "
 
-#: src/gui/ViewDialog.cpp:302
+#: src/gui/ViewDialog.cpp:329
 #, fuzzy
 msgid "Standard Perseids rate"
 msgstr ": Szokásos Perzeida-gyakoriság"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1107
 #, fuzzy
 msgid "Starlore"
 msgstr "Csillag"
 
-#: src/ui_viewDialog.h:1260 src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1075
 msgid "Stars"
 msgstr "Csillagok"
+
+#: src/gui/NewGui.cpp:854
+msgid "Stellarium"
+msgstr ""
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
 msgstr ""
 
+#: src/gui/NewGui.cpp:434
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:436
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:430
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:428
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:432
+msgid "Subtract 1 solar week"
+msgstr ""
+
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Nap"
+
+#: src/gui/NewGui.cpp:443
+msgid "Switch Equatorial Mount"
+msgstr ""
 
 #: src/translations.h:49
 msgid "Tethys"
@@ -1219,7 +1152,7 @@ msgstr "Titan"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Twinkle"
 msgstr "Háromszög"
@@ -1236,11 +1169,11 @@ msgstr "USB-parancsfájlok: "
 msgid "Uranus"
 msgstr "Uránusz"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1106
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1086
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1254,7 +1187,11 @@ msgstr ""
 msgid "Venus"
 msgstr "Vénusz"
 
-#: src/ui_viewDialog.h:1244
+#: src/gui/NewGui.cpp:449
+msgid "Vertical Flip"
+msgstr ""
+
+#: src/ui_viewDialog.h:1028
 #, fuzzy
 msgid "View"
 msgstr "Video"
@@ -1269,7 +1206,7 @@ msgstr "Nyugati"
 
 #: src/ui_dateTimeDialogGui.h:463 src/ui_helpDialogGui.h:158
 #: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1256 src/ui_configurationDialog.h:428
+#: src/ui_viewDialog.h:1040 src/ui_configurationDialog.h:428
 msgid "X"
 msgstr ""
 
@@ -1279,7 +1216,17 @@ msgid ""
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_viewDialog.h:1263
+#: src/gui/NewGui.cpp:440
+#, fuzzy
+msgid "Zoom in to Selected Object"
+msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
+
+#: src/gui/NewGui.cpp:441
+#, fuzzy
+msgid "Zoom out"
+msgstr "Nagyítás időtartama: "
+
+#: src/ui_viewDialog.h:1047
 msgid "amount:"
 msgstr ""
 
@@ -1446,9 +1393,6 @@ msgstr ""
 #~ msgid "Capricornus"
 #~ msgstr "Bak"
 
-#~ msgid "Cardinal Points"
-#~ msgstr "Égtájak"
-
 #~ msgid "Cardinal Points [Q]"
 #~ msgstr "Égtájak [Q]"
 
@@ -1525,29 +1469,14 @@ msgstr ""
 #~ msgid "Completions"
 #~ msgstr "Üresség"
 
-#~ msgid "Configuration window [1]"
-#~ msgstr "Beállítások ablak [1]"
-
 #~ msgid "Constellation Art Intensity"
 #~ msgstr "Csillagképek ábráinak intenzitása"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Csillagképek határai"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Csillagképek vonalai"
 
 #~ msgid "Constellation Names"
 #~ msgstr "Csillagképek nevei"
 
-#~ msgid "Constellation labels: "
-#~ msgstr "Csillagképek címkéi: "
-
 #~ msgid "Constellation lines: "
 #~ msgstr "Csillagképek vonalai: "
-
-#~ msgid "Constellations Art [R]"
-#~ msgstr "Csillagképek ábrái [R]"
 
 #~ msgid "Constellations Boundaries"
 #~ msgstr "Csillagképek határai"
@@ -1602,9 +1531,6 @@ msgstr ""
 
 #~ msgid "Day keys: "
 #~ msgstr "Napléptető billentyűk: "
-
-#~ msgid "Decrease Time Speed [J]"
-#~ msgstr "Idő lassítása [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "Delfin"
@@ -1828,14 +1754,8 @@ msgstr ""
 #~ msgid "Good Gourd"
 #~ msgstr "Jó Tök"
 
-#~ msgid "Goto selected object [SPACE]"
-#~ msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
-
 #~ msgid "Great General"
 #~ msgstr "Nagyvezér"
-
-#~ msgid "Ground"
-#~ msgstr "Felszín"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Felszín [G]"
@@ -1891,9 +1811,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "Császári Folyosó"
-
-#~ msgid "Increase Time Speed [L]"
-#~ msgstr "Idő gyorsítása [L]"
 
 #~ msgid "Indus"
 #~ msgstr "Indus"
@@ -2184,9 +2101,6 @@ msgstr ""
 #~ msgid "Planet Names"
 #~ msgstr "Bolygók nevei"
 
-#~ msgid "Planet Orbits"
-#~ msgstr "Bolygópályák"
-
 #~ msgid "Planet Trails"
 #~ msgstr "Bolygónyomok"
 
@@ -2217,14 +2131,8 @@ msgstr ""
 #~ msgid "Quit [CTRL + Q]"
 #~ msgstr "Kilépés [CTRL+Q]"
 
-#~ msgid "Race Track"
-#~ msgstr "Versenypálya"
-
 #~ msgid "Ramparts"
 #~ msgstr "Gátak"
-
-#~ msgid "Real Time Speed [K]"
-#~ msgstr "Valós idő [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "Parancsok rögzítése parancsfájlba:\n"
@@ -2237,9 +2145,6 @@ msgstr ""
 
 #~ msgid "Reticulum"
 #~ msgstr "Háló"
-
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "Vissza a jelenbe [8]"
 
 #~ msgid "Right Flag"
 #~ msgstr "Jobb Zászló"
@@ -2321,9 +2226,6 @@ msgstr ""
 
 #~ msgid "Selkis"
 #~ msgstr "Szelket"
-
-#~ msgid "Set Location "
-#~ msgstr "Hely beállítása "
 
 #~ msgid "Set Time "
 #~ msgstr "Idő beállítása "
@@ -2588,9 +2490,6 @@ msgstr ""
 
 #~ msgid "Zaofu"
 #~ msgstr "Zaofu"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Nagyítás időtartama: "
 
 #~ msgid "change to apply."
 #~ msgstr "lép életbe a változás."

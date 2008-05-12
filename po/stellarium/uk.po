@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 09:19+0200\n"
+"POT-Creation-Date: 2008-05-06 17:54+0200\n"
 "PO-Revision-Date: 2007-12-06 02:13+0000\n"
 "Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
 "Language-Team: \n"
@@ -29,29 +29,29 @@ msgstr " Світлові роки"
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:218
+#: src/gui/NewGui.cpp:220
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1068
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1070
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1071
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1069
 msgid "80"
 msgstr ""
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1063
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
@@ -69,11 +69,31 @@ msgstr ""
 msgid "AU"
 msgstr "АО"
 
-#: src/ui_viewDialog.h:1294
+#: src/gui/NewGui.cpp:433
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:435
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:429
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:427
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:431
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/ui_viewDialog.h:1078
 msgid "Amount:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1103
 msgid "Art brightness: "
 msgstr ""
 
@@ -86,7 +106,7 @@ msgstr "Автор: "
 msgid "Az/Alt: "
 msgstr "Азимут/Висота: "
 
-#: src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1091
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Азимутна сітка"
@@ -95,7 +115,7 @@ msgstr "Азимутна сітка"
 msgid "Callisto"
 msgstr "Калісто"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1096
 #, fuzzy
 msgid "Cardinal points"
 msgstr "Сторони світу"
@@ -112,7 +132,7 @@ msgstr "Китайська"
 msgid "Configuration"
 msgstr "Конфіґурація"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1098
 #, fuzzy
 msgid "Constellations"
 msgstr "Сузір'я"
@@ -131,6 +151,11 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Дата та час"
 
+#: src/gui/NewGui.cpp:423
+#, fuzzy
+msgid "Decrease Time Speed"
+msgstr "Зменшити швидкість часу [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Деймос"
@@ -144,7 +169,7 @@ msgstr "Діона"
 msgid "Distance: "
 msgstr "Відстань: "
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1059
 msgid "Download images"
 msgstr ""
 
@@ -156,7 +181,7 @@ msgstr "Сх"
 msgid "Earth"
 msgstr "Земля"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
@@ -178,17 +203,17 @@ msgstr ""
 msgid "Equal Area"
 msgstr ""
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка"
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1093
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
@@ -197,7 +222,7 @@ msgstr "Екваторіальна сітка"
 msgid "Europa"
 msgstr "Європа"
 
-#: src/gui/ViewDialog.cpp:305
+#: src/gui/ViewDialog.cpp:332
 #, fuzzy
 msgid "Exceptional Leonid rate"
 msgstr ": Виняткова кількість Леонід"
@@ -212,7 +237,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:172 src/ui_helpDialogGui.h:145
 #: src/ui_locationDialogGui.h:253 src/ui_searchDialogGui.h:209
-#: src/ui_viewDialog.h:964 src/ui_configurationDialog.h:137
+#: src/ui_viewDialog.h:1025 src/ui_configurationDialog.h:137
 #, fuzzy
 msgid "Form"
 msgstr "Брід"
@@ -225,14 +250,23 @@ msgstr "Ґанімед"
 msgid "Go"
 msgstr ""
 
+#: src/gui/NewGui.cpp:438
+#, fuzzy
+msgid "Goto Selected Object"
+msgstr "Йти до виділеного об'єкту [ПРОПУСК]"
+
 #: src/ui_helpDialogGui.h:146
 msgid "Help"
 msgstr "Допомога"
 
-#: src/gui/ViewDialog.cpp:308
+#: src/gui/ViewDialog.cpp:335
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": Найбільша кількість Леонід (як у 1966)"
+
+#: src/gui/NewGui.cpp:448
+msgid "Horizontal Flip"
+msgstr ""
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -249,6 +283,11 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+
+#: src/gui/NewGui.cpp:424
+#, fuzzy
+msgid "Increase Time Speed"
+msgstr "Прискорити час [L]"
 
 #: src/translations.h:71
 #, fuzzy
@@ -273,7 +312,7 @@ msgstr "Юпітер"
 msgid "Korean"
 msgstr "Ріг"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1074
 msgid "Labels and markers"
 msgstr ""
 
@@ -282,7 +321,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "Ящірка"
 
-#: src/ui_viewDialog.h:1303
+#: src/ui_viewDialog.h:1087
 #, fuzzy
 msgid "Landscape"
 msgstr "Пейзажі"
@@ -292,11 +331,11 @@ msgstr "Пейзажі"
 msgid "Latitude:"
 msgstr "Широта: "
 
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1085
 msgid "Light pollution:"
 msgstr ""
 
-#: src/modules/ConstellationMgr.cpp:369
+#: src/modules/ConstellationMgr.cpp:371
 #, fuzzy, qt-format
 msgid "Loading Constellation Art: %1/%2"
 msgstr "Завантаження малюнка сузір'я: "
@@ -342,7 +381,7 @@ msgstr "Величина: "
 msgid "Main"
 msgstr "Кіль"
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1105
 #, fuzzy
 msgid "Marking"
 msgstr "Кіль"
@@ -359,7 +398,7 @@ msgstr ""
 msgid "Mercury"
 msgstr "Меркурій"
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Meridian line"
 msgstr "Лінія зеніту"
@@ -381,7 +420,7 @@ msgstr "Пн"
 msgid "Navajo"
 msgstr "Павич"
 
-#: src/ui_viewDialog.h:1273 src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1057 src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Nebulas"
 msgstr "Туманність"
@@ -390,11 +429,11 @@ msgstr "Туманність"
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/gui/ViewDialog.cpp:249
+#: src/gui/ViewDialog.cpp:276
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:299 src/ui_viewDialog.h:1288
+#: src/gui/ViewDialog.cpp:326 src/ui_viewDialog.h:1072
 #, fuzzy
 msgid "Normal rate"
 msgstr ": Нормальна"
@@ -403,7 +442,7 @@ msgstr ": Нормальна"
 msgid "Norse"
 msgstr ""
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Options"
 msgstr "Оріон"
@@ -442,11 +481,11 @@ msgstr "Фобос"
 msgid "Phoebe"
 msgstr "Феба"
 
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1076
 msgid "Planets"
 msgstr "Планети"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1050
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Назви планет"
@@ -464,7 +503,7 @@ msgstr "Полінезійська"
 msgid "Program language:"
 msgstr "Мова програми: "
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1104
 #, fuzzy
 msgid "Projection"
 msgstr "Розташування :"
@@ -752,292 +791,9 @@ msgid ""
 " }\n"
 msgstr ""
 
-#: src/ui_viewDialog.h:965
-msgid ""
-"QFrame {\n"
-"\tbackground: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 \t#2a3b50, "
-"stop: 1 #19233c);\n"
-"\tborder: 0px;\n"
-"\tcolor : #babdc4;\n"
-"    font-family: \"DejaVu\";\n"
-"}\n"
-"\n"
-"DialogFrame {\n"
-"  border-width: 1px;\n"
-"  border-style: solid;\n"
-"  border-color: #081f25;\n"
-"}\n"
-"\n"
-"ResizeFrame {\n"
-" background-image: url(data/gui/resize.png);\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"\tbackground: None;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"     border: 1.5px solid #2e2e36;\n"
-"     border-radius: 10px;\n"
-"     padding: 0 8px;\n"
-"     background: white;\n"
-"     selection-background-color: darkgray;\n"
-" }\n"
-"\n"
-"QPushButton {\n"
-"  border: 1.5px solid #2e2e36;\n"
-"  border-radius: 10px;\n"
-"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"   stop: 0 #babbde, stop: 1 #d6d7fa);\n"
-"}\n"
-"\n"
-"QScrollBar:vertical {\n"
-" border: 1px solid #2e2e36;\n"
-" background: #4a4b50;\n"
-" width: 15px;\n"
-"         margin: 22px 0px 22px 0px;\n"
-"     }\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    border: 2px solid #4a4b50;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"   stop: 0 #c6c7ca, stop: 1 #aaabae);\n"
-"\tborder-radius: 4px;\n"
-"\tmin-height: 20px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: bottom;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar::sub-line:vertical {\n"
-"         border: 3px solid #2e2e36;\n"
-"         background: #36375c;\n"
-"         height: 20px;\n"
-"         border-radius: 5px;\n"
-"         subcontrol-position: top;\n"
-"         subcontrol-origin: margin;\n"
-" }\n"
-"\n"
-"QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {\n"
-"         border: 2px solid grey;\n"
-"         width: 3px;\n"
-"         height: 3px;\n"
-"         background: white;\n"
-" }\n"
-"\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-"         background: none;\n"
-" }\n"
-"\n"
-"QGroupBox {\n"
-"     border: 1px solid #1f2f25;\n"
-"     border-radius: 4px;\n"
-"     margin-top: 1ex;\n"
-"     font-weight: bold;\n"
-"     background: solid #223B34;\n"
-" }\n"
-"\n"
-"QGroupBox::title {\n"
-"     subcontrol-origin: margin;\n"
-"     padding: 0px 3px;\n"
-"     color : #babdc4;\n"
-"\t left: 15px\n"
-" }\n"
-"\n"
-"\n"
-"QTabWidget::pane {\n"
-"   border-top: 2px solid #348483;\n"
-"}\n"
-"\n"
-"/* Style the tab using the tab sub-control. Note that\n"
-"         it reads QTabBar _not_ QTabWidget */\n"
-"QTabBar::tab {\n"
-"    font : bold;\n"
-"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#2a3b50, stop: 1 #19233c);\n"
-"    border: 2px solid #348483;\n"
-"    border-bottom-color: #348483; /* same as the pane color */\n"
-"    border-top-left-radius: 4px;\n"
-"    border-top-right-radius: 4px;\n"
-"    min-width: 10ex;\n"
-"    padding: 2px;\n"
-"    color: #babdc4;\n"
-"}\n"
-"\n"
-"     QTabBar::tab:selected, QTabBar::tab:hover {\n"
-"         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "
-"\t#19233c, stop: 1 #2a3b50);\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:selected {\n"
-"         border-color: #A2A78B;\n"
-"         border-bottom-color: #2a3b50; /* same as pane color */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:!selected {\n"
-"         margin-top: 2px; /* make non-selected tabs look smaller */\n"
-"     }\n"
-"\n"
-"     /* make use of negative margins for overlapping tabs */\n"
-"     QTabBar::tab:selected {\n"
-"         /* expand/overlap to the left and right by 4px */\n"
-"         margin-left: -4px;\n"
-"         margin-right: -4px;\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:first:selected {\n"
-"         margin-left: 0; /* the first selected tab has nothing to overlap "
-"with on the left */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:last:selected {\n"
-"         margin-right: 0; /* the last selected tab has nothing to overlap "
-"with on the right */\n"
-"     }\n"
-"\n"
-"     QTabBar::tab:only-one {\n"
-"         margin: 0; /* if there is only one tab, we don't want overlapping "
-"margins */\n"
-"     }\n"
-"\n"
-"QListWidget {\n"
-" \tbackground: solid #121324;\n"
-"\tborder: 1px;\n"
-"    border-radius: 4px;\n"
-"    border-color: #081f25;\n"
-"    border-style: solid;\n"
-"  selection-background-color: #2a3b50;\n"
-"}\n"
-"\n"
-"QCheckBox\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QCheckBox::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  background-color: #225555;\n"
-"}\n"
-"QCheckBox::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-checked.png);\n"
-"}\n"
-"QCheckBox::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/checkbox-unchecked.png);\n"
-"}\n"
-"\n"
-"QRadioButton\n"
-"{\n"
-"  color : #babdc4;\n"
-"}\n"
-"QRadioButton::indicator\n"
-"{\n"
-"  width: 13px;\n"
-"  height: 13px;\n"
-"  margin-left: 4px;\n"
-"}\n"
-"QRadioButton::indicator:checked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-checked.png);\n"
-"}\n"
-"QRadioButton::indicator:unchecked\n"
-"{\n"
-"     image: url(:/graphicGui/gui/radio-unchecked.png);\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: top right; /* position at the top right corner */\n"
-"\n"
-"     width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent "
-"border */\n"
-"     border-image: url(:/images/spinup.png) 1;\n"
-"     border-width: 1px;\n"
-"\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:hover {\n"
-"     border-image: url(:/images/spinup_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-button:pressed {\n"
-"     border-image: url(:/images/spinup_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow {\n"
-"     image: url(:/images/up_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when "
-"value is max */\n"
-"    image: url(:/images/up_arrow_disabled.png);\n"
-" }\n"
-"\n"
-" QSpinBox::down-button {\n"
-"     subcontrol-origin: border;\n"
-"     subcontrol-position: bottom right; /* position at bottom right corner "
-"*/\n"
-"\n"
-"     width: 16px;\n"
-"     border-image: url(:/images/spindown.png) 1;\n"
-"     border-width: 1px;\n"
-"     border-top-width: 0;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:hover {\n"
-"     border-image: url(:/images/spindown_hover.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-button:pressed {\n"
-"     border-image: url(:/images/spindown_pressed.png) 1;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow {\n"
-"     image: url(:/images/down_arrow.png);\n"
-"     width: 7px;\n"
-"     height: 7px;\n"
-" }\n"
-"\n"
-" QSpinBox::down-arrow:disabled,\n"
-" QSpinBox::down-arrow:off { /* off state when value in min */\n"
-"    image: url(:/images/down_arrow_disabled.png);\n"
-" }\n"
-"\n"
-"QDoubleSpinBox {\n"
-"     padding-right: 15px; /* make room for the arrows */\n"
-"     border-image: url(:/images/frame.png) 4;\n"
-"     border-width: 3;\n"
-"background-color: #225555;\n"
-"color : #babdc4;\n"
-" }\n"
-msgstr ""
-
 #: src/ui_dateTimeDialogGui.h:452 src/ui_helpDialogGui.h:147
 #: src/ui_locationDialogGui.h:255 src/ui_searchDialogGui.h:211
-#: src/ui_viewDialog.h:1245 src/ui_configurationDialog.h:417
+#: src/ui_viewDialog.h:1029 src/ui_configurationDialog.h:417
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -1052,12 +808,22 @@ msgid ""
 "}"
 msgstr ""
 
+#: src/gui/NewGui.cpp:445
+#, fuzzy
+msgid "Quit"
+msgstr "Індієць"
+
 #: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:121
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:48
 #: src/modules/StarWrapper.cpp:106 src/modules/StarWrapper.cpp:109
 #: src/modules/Telescope.cpp:241 src/modules/Telescope.cpp:243
 msgid "RA/DE: "
 msgstr "Радіани/Градуси: "
+
+#: src/gui/NewGui.cpp:426
+#, fuzzy
+msgid "Return To Current Time"
+msgstr "Повернення до поточного часу"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -1071,12 +837,16 @@ msgstr "Пд"
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/ui_viewDialog.h:1269
+#: src/gui/NewGui.cpp:447
+msgid "Save Screenshot"
+msgstr ""
+
+#: src/ui_viewDialog.h:1053
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Зберегти положення"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1045
 #, fuzzy
 msgid "Scale:"
 msgstr "Масштабування місяця"
@@ -1090,61 +860,195 @@ msgstr "Вибрати та вийти для перезапуску."
 msgid "Selected:"
 msgstr "Вибране: "
 
-#: src/ui_viewDialog.h:1278
+#: src/gui/NewGui.cpp:446
+msgid "Set Full Screen"
+msgstr ""
+
+#: src/gui/NewGui.cpp:425
+#, fuzzy
+msgid "Set Real Time Speed"
+msgstr "Реальна швидкість часу [K]"
+
+#: src/gui/NewGui.cpp:439
+msgid "Set Tracking"
+msgstr ""
+
+#: src/ui_viewDialog.h:1062
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1058
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259 src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1272
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1043 src/ui_viewDialog.h:1049 src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1061
 #, fuzzy
 msgid "Show"
 msgstr "Показ: "
 
-#: src/ui_viewDialog.h:1318
+#: src/gui/NewGui.cpp:408
+#, fuzzy
+msgid "Show Atmosphere"
+msgstr "Атмосфера"
+
+#: src/gui/NewGui.cpp:399
+#, fuzzy
+msgid "Show Azimutal Grid"
+msgstr "Азимутна сітка"
+
+#: src/gui/NewGui.cpp:405
+#, fuzzy
+msgid "Show Cardinal Points"
+msgstr "Сторони світу"
+
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Show Configuration Window"
+msgstr "Конфіґураційне вікно"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Show Constellation Art"
+msgstr "Малюнки сузір'їв [R]"
+
+#: src/gui/NewGui.cpp:397
+#, fuzzy
+msgid "Show Constellation Boundaries"
+msgstr "Межі сузір'їв"
+
+#: src/gui/NewGui.cpp:396
+#, fuzzy
+msgid "Show Constellation Labels"
+msgstr "Імена сузір'їв "
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Show Constellation Lines"
+msgstr "Лінії сузір'їв"
+
+#: src/gui/NewGui.cpp:412
+#, fuzzy
+msgid "Show DSS"
+msgstr "Показ: "
+
+#: src/gui/NewGui.cpp:419
+msgid "Show Date/Time Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:402
+#, fuzzy
+msgid "Show Ecliptic Line"
+msgstr "Лінія екліптики"
+
+#: src/gui/NewGui.cpp:403
+#, fuzzy
+msgid "Show Equator Line"
+msgstr "Лінія екватора"
+
+#: src/gui/NewGui.cpp:400
+#, fuzzy
+msgid "Show Equatorial Grid"
+msgstr "Екваторіальна сітка"
+
+#: src/gui/NewGui.cpp:401
+#, fuzzy
+msgid "Show Equatorial J2000 Grid"
+msgstr "Екваторіальна сітка"
+
+#: src/gui/NewGui.cpp:409
+#, fuzzy
+msgid "Show Fog"
+msgstr "Показ: "
+
+#: src/gui/NewGui.cpp:407
+#, fuzzy
+msgid "Show Ground"
+msgstr "Земля"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Show Help Window"
+msgstr "Показ: "
+
+#: src/gui/NewGui.cpp:418
+#, fuzzy
+msgid "Show Location Window"
+msgstr "Встановити місцезнаходження "
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Show Meridian Line"
+msgstr "Лінія зеніту"
+
+#: src/gui/NewGui.cpp:411
+#, fuzzy
+msgid "Show Nebulas"
+msgstr "Туманність"
+
+#: src/gui/NewGui.cpp:444
+msgid "Show Night Mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Show Planets Hints"
+msgstr "Орбіти планет"
+
+#: src/gui/NewGui.cpp:416
+msgid "Show Search Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:420
+msgid "Show Sky and Viewing option Window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+#, fuzzy
+msgid "Show Stars"
+msgstr "Показ: "
+
+#: src/ui_viewDialog.h:1102
 #, fuzzy
 msgid "Show art"
 msgstr "Показ: "
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Атмосфера"
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1101
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Show fog"
 msgstr "Показ: "
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1082
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1099
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1316
+#: src/ui_viewDialog.h:1100
 #, fuzzy
 msgid "Show lines"
 msgstr "Показ: "
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1051
 msgid "Show marker"
 msgstr ""
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1052
 msgid "Show orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1054
 msgid "Simulate light speed"
 msgstr ""
 
@@ -1152,11 +1056,11 @@ msgstr ""
 msgid "Size: "
 msgstr "Розмір: "
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1079
 msgid "Sky"
 msgstr ""
 
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1089
 msgid "Sky Marking"
 msgstr ""
 
@@ -1168,27 +1072,55 @@ msgstr "Оглядач Сонячної системи"
 msgid "Spectral Type: "
 msgstr "Спектральний тип: "
 
-#: src/gui/ViewDialog.cpp:302
+#: src/gui/ViewDialog.cpp:329
 #, fuzzy
 msgid "Standard Perseids rate"
 msgstr ": Стандартна кількість Персеїд"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1107
 #, fuzzy
 msgid "Starlore"
 msgstr "Зірка"
 
-#: src/ui_viewDialog.h:1260 src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1044 src/ui_viewDialog.h:1075
 msgid "Stars"
 msgstr "Зірки"
+
+#: src/gui/NewGui.cpp:854
+msgid "Stellarium"
+msgstr ""
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
 msgstr ""
 
+#: src/gui/NewGui.cpp:434
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:436
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:430
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:428
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:432
+msgid "Subtract 1 solar week"
+msgstr ""
+
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Сонце"
+
+#: src/gui/NewGui.cpp:443
+msgid "Switch Equatorial Mount"
+msgstr ""
 
 #: src/translations.h:49
 msgid "Tethys"
@@ -1222,7 +1154,7 @@ msgstr "Титан"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Twinkle"
 msgstr "Трикутник"
@@ -1239,11 +1171,11 @@ msgstr ""
 msgid "Uranus"
 msgstr "Уран"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1106
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1086
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1257,7 +1189,11 @@ msgstr ""
 msgid "Venus"
 msgstr "Венера"
 
-#: src/ui_viewDialog.h:1244
+#: src/gui/NewGui.cpp:449
+msgid "Vertical Flip"
+msgstr ""
+
+#: src/ui_viewDialog.h:1028
 #, fuzzy
 msgid "View"
 msgstr "Відео"
@@ -1272,7 +1208,7 @@ msgstr "Європейська"
 
 #: src/ui_dateTimeDialogGui.h:463 src/ui_helpDialogGui.h:158
 #: src/ui_locationDialogGui.h:266 src/ui_searchDialogGui.h:222
-#: src/ui_viewDialog.h:1256 src/ui_configurationDialog.h:428
+#: src/ui_viewDialog.h:1040 src/ui_configurationDialog.h:428
 msgid "X"
 msgstr ""
 
@@ -1282,7 +1218,17 @@ msgid ""
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_viewDialog.h:1263
+#: src/gui/NewGui.cpp:440
+#, fuzzy
+msgid "Zoom in to Selected Object"
+msgstr "Йти до виділеного об'єкту [ПРОПУСК]"
+
+#: src/gui/NewGui.cpp:441
+#, fuzzy
+msgid "Zoom out"
+msgstr "Трівалість збільшення: "
+
+#: src/ui_viewDialog.h:1047
 msgid "amount:"
 msgstr ""
 
@@ -1493,31 +1439,15 @@ msgstr ""
 #~ msgid "Completions"
 #~ msgstr "Пустота"
 
-#~ msgid "Configuration window"
-#~ msgstr "Конфіґураційне вікно"
-
 #~ msgid "Constellation Art Intensity"
 #~ msgstr "Яскравість малюнків сузір'їв"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Межі сузір'їв"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Лінії сузір'їв"
 
 #~ msgid "Constellation Names"
 #~ msgstr "Назви сузір'їв"
 
 #, fuzzy
-#~ msgid "Constellation labels: "
-#~ msgstr "Імена сузір'їв "
-
-#, fuzzy
 #~ msgid "Constellation lines: "
 #~ msgstr "Сузір'я "
-
-#~ msgid "Constellations Art [R]"
-#~ msgstr "Малюнки сузір'їв [R]"
 
 #~ msgid "Constellations Boundaries"
 #~ msgstr "Кордони сузір'їв"
@@ -1566,9 +1496,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "День"
-
-#~ msgid "Decrease Time Speed [J]"
-#~ msgstr "Зменшити швидкість часу [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "Дельфін"
@@ -1758,14 +1685,8 @@ msgstr ""
 #~ msgid "Good Gourd"
 #~ msgstr "Хороший гарбуз"
 
-#~ msgid "Goto selected object [SPACE]"
-#~ msgstr "Йти до виділеного об'єкту [ПРОПУСК]"
-
 #~ msgid "Great General"
 #~ msgstr "Великий генерал"
-
-#~ msgid "Ground"
-#~ msgstr "Земля"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Земля [G]"
@@ -1818,9 +1739,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "Імперський прохід"
-
-#~ msgid "Increase Time Speed [L]"
-#~ msgstr "Прискорити час [L]"
 
 #~ msgid "Indus"
 #~ msgstr "Індієць"
@@ -2115,9 +2033,6 @@ msgstr ""
 #~ msgid "Planet Names"
 #~ msgstr "Імена планет"
 
-#~ msgid "Planet Orbits"
-#~ msgstr "Орбіти планет"
-
 #~ msgid "Planet Trails"
 #~ msgstr "Сліди від планет"
 
@@ -2157,9 +2072,6 @@ msgstr ""
 #~ msgid "Ramparts"
 #~ msgstr "Твердині"
 
-#~ msgid "Real Time Speed [K]"
-#~ msgstr "Реальна швидкість часу [K]"
-
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "Запис команд до файлу сценарію:\n"
 
@@ -2171,9 +2083,6 @@ msgstr ""
 
 #~ msgid "Reticulum"
 #~ msgstr "Сітка"
-
-#~ msgid "Return to Current Time"
-#~ msgstr "Повернення до поточного часу"
 
 #~ msgid "Right Flag"
 #~ msgstr "Правий прапор"
@@ -2243,9 +2152,6 @@ msgstr ""
 
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Тільки обране сузір'я"
-
-#~ msgid "Set Location "
-#~ msgstr "Встановити місцезнаходження "
 
 #~ msgid "Set Time "
 #~ msgstr "Встановити час "
@@ -2489,9 +2395,6 @@ msgstr ""
 
 #~ msgid "Zaofu"
 #~ msgstr "Тринога"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Трівалість збільшення: "
 
 #~ msgid "change to apply."
 #~ msgstr "застосування змін."
