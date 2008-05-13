@@ -150,13 +150,13 @@ QString AngleSpinBox::text()
 
 double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, PrefixType prefix)
 {
-	int sign;
+	int sign=1;
 	if (input.startsWith(negativePrefix(prefix), Qt::CaseInsensitive)) 
 	{
 		sign = -1;
 		input = input.mid(negativePrefix(prefix).length());
 	}
-	else if (input.startsWith(positivePrefix(prefix), Qt::CaseInsensitive)) 
+	else
 	{
 		sign = 1;
 		input = input.mid(positivePrefix(prefix).length());
