@@ -267,7 +267,7 @@ public:
  *************************************************************************/
 bool STexture::imageLoad()
 {
-	bool res;
+	bool res=true;
 	if (downloadedData.isEmpty())
 	{
 		// Load the data from the file
