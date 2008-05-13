@@ -77,8 +77,5 @@ class Translations
 		N_("Western");
 		N_("Tupi-Guarani");
 
-		// TUI script message
-		N_("Select and exit to run.");
-		N_("USB Script: ");  // Placeholder for translating - Rob
 	}
 };
