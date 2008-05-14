@@ -30,6 +30,10 @@
 #include <QFrame>
 #include <QFile>
 
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
+
 ConfigurationDialog::ConfigurationDialog() : dialog(NULL)
 {
 	ui = new Ui_configurationDialogForm;
@@ -55,10 +59,8 @@ void ConfigurationDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->move(200, 100);	// TODO: put in the center of the screen
-		dialog->setVisible(true);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
 		
 		// Fill the language list widget from the available list
@@ -68,9 +70,15 @@ void ConfigurationDialog::setVisible(bool v)
 		c->setCurrentIndex(c->findText(StelApp::getInstance().getLocaleMgr().getAppLanguage(), Qt::MatchExactly));
 		connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 		
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(200, 100);
 		dialog->show();
 		dialog->raise();
-		dialog->setFocus();
 	}
 	else
 	{

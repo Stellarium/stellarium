@@ -191,8 +191,7 @@ void SkyImageTile::draw(StelCore* core)
 	deleteUnusedTiles();
 }
 	
-			
-// Draw the image on the screen.
+// Return the list of tiles which should be drawn.
 void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
@@ -212,7 +211,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	{
 		if (skyConvexPolygons.isEmpty())
 		{
-			// If no polygon is defined, we assume that the tile cover the whole sky
+			// If no polygon is defined, we assume that the tile covers the whole sky
 			fullInScreen=false;
 			intersectScreen=true;
 		}

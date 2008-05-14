@@ -31,6 +31,10 @@
 #include <QDebug>
 #include <QFrame>
 
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
+
 SearchDialog::SearchDialog() : dialog(0)
 {
 	ui = new Ui_searchDialogForm;
@@ -60,16 +64,24 @@ void SearchDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->raise();
-		dialog->move(200, 100);	// TODO: put in the center of the screen
-		dialog->setVisible(true);
+
 		connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
 		connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 		connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 		onTextChanged(ui->lineEditSearchSkyObject->text());
 		connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+		
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(200, 100);
+		dialog->show();
+		dialog->raise();
 	}
 	else
 	{
