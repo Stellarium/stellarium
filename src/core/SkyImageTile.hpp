@@ -139,6 +139,8 @@ private:
 	bool downloading;
 	int downloadId;
 	
+	class JsonLoadThread* loadThread;
+			
 	// Store the time of the last draw
 	double lastTimeDraw;
 	

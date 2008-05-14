@@ -62,21 +62,22 @@ void JsonLoadThread::run()
 		QBuffer buf(&data);
 		buf.open(QIODevice::ReadOnly);
 		QtJsonParser parser;
-		tile->temporaryResultMap = parser.parse(buf).toMap();
+		QVariantMap m = parser.parse(buf).toMap();
 		buf.close();
-		if (tile->temporaryResultMap.isEmpty())
+		data = QByteArray();
+		if (m.isEmpty())
 			throw std::runtime_error("empty JSON file, cannot load image tile");
+		tile->temporaryResultMap = m;
 	}
 	catch (std::runtime_error e)
 	{
 		qWarning() << "WARNING : Can't parse loaded JSON Image Tile description: " << e.what();
 		tile->errorOccured = true;
 	}
-	data = QByteArray();
 }
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0), loadThread(NULL)
 {
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (parent!=NULL)
@@ -111,9 +112,20 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 		baseUrl = finf.absolutePath()+'/';
 		QFile f(fileName);
 		f.open(QIODevice::ReadOnly);
+		const bool compressed = fileName.endsWith(".qZ");
 		try
 		{
-			loadFromJSON(f);
+			if (compressed)
+			{
+				QByteArray ar = qUncompress(f.readAll());
+				f.close();
+				QBuffer buf(&ar);
+				buf.open(QIODevice::ReadOnly);
+				loadFromJSON(buf);
+				buf.close();
+			}
+			else
+				loadFromJSON(f);
 		}
 		catch (std::runtime_error e)
 		{
@@ -147,7 +159,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0), loadThread(NULL)
 {
 	if (parent!=NULL)
 	{
@@ -161,6 +173,16 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
+	if (loadThread && loadThread->isRunning())
+	{
+		disconnect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
+		// The thread is currently running, it needs to be properly stopped
+		if (loadThread->wait(500)==false)
+		{
+			loadThread->terminate();
+			//loadThread->wait(2000);
+		}
+	}
 	foreach (SkyImageTile* tile, subTiles)
 	{
 		delete tile;
@@ -236,6 +258,9 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
 			texMgr.setDefaultParams();
+ 			//texMgr.setMipmapsMode(true);
+			texMgr.setMinFilter(GL_LINEAR);
+ 			texMgr.setMagFilter(GL_LINEAR);
 			// static int countG=0;
 			// qWarning() << countG++;
 			QString fullTexFileName;
@@ -275,7 +300,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	// Check if we reach the resolution limit
 	Projector* prj = core->getProjection();
 	const double degPerPixel = 1./prj->getPixelPerRadAtCenter()*180./M_PI;
-	if (degPerPixel < minResolution)
+	if (degPerPixel < minResolution*0.8)
 	{
 		if (subTiles.isEmpty())
 		{
@@ -361,7 +386,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		Vec3d win;
 		Vec3d bary = poly.getBarycenter();
 		prj->project(bary,win);
-		prj->drawText(debugFont, win[0], win[1], getImageUrl());
+		prj->drawText(debugFont, win[0], win[1], QString("%1 %2").arg(minResolution*256.*60).arg(1./prj->getPixelPerRadAtCenter()*180./M_PI*256*60));//getImageUrl());
 		
 		glDisable(GL_TEXTURE_2D);
 		prj->drawPolygon(poly);
@@ -480,15 +505,20 @@ void SkyImageTile::downloadFinished(int id, bool error)
 	//qWarning() << "Downloaded JSON " << http->currentRequest().path();
 	QByteArray content = http->readAll();
 	http->close();
+	http->deleteLater();
 	
-	JsonLoadThread* loadThread = new JsonLoadThread(this, content);
+	assert(loadThread==NULL);
+	loadThread = new JsonLoadThread(this, content);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
-	loadThread->start();
+	loadThread->start(QThread::LowestPriority);
 }
 
 // Called when the tile is fully loaded from the JSON file
 void SkyImageTile::JsonLoadFinished()
 {
+	loadThread->wait();
+	delete loadThread;
+	loadThread = NULL;
 	downloading = false;
 	if (errorOccured)
 		return;

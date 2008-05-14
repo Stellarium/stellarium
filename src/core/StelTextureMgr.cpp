@@ -391,7 +391,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
 	// Apply scaling for the image
 	if (reScale(tex)==false)
 	{
-		free(tex->texels);
+		TexMalloc::free(tex->texels);
 		tex->texels = NULL;
 		return false;
 	}
@@ -410,7 +410,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
 			qWarning() << "Insufficient memory for image data allocation: need to allocate array of " 
 			           << w << "x" << h << " with " << sizeof (GLubyte) * tex->internalFormat 
 			           << " bytes per pixels.";
-			free(tex->texels);
+			TexMalloc::free(tex->texels);
 			tex->texels = NULL;
 			return false;
 		}
@@ -446,7 +446,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
 		tex->texCoordinates[3].set(0., (double)tex->height/h);
 		tex->width = w;
 		tex->height = h;
-		free(tex->texels);
+		TexMalloc::free(tex->texels);
 		tex->texels = texels2;
 	}
 
@@ -545,7 +545,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 			free (row_pointers);
 
 		if (texinfo.texels)
-			free (texinfo.texels);
+			TexMalloc::free (texinfo.texels);
 		texinfo.texels = NULL;
 
 		qWarning() << "There was an error while loading PNG image: " << texinfo.fullPath;
@@ -633,7 +633,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	}
 	
 	/* we can now allocate memory for storing pixel data */
-	texinfo.texels = (GLubyte *)malloc (sizeof (GLubyte) * texinfo.width
+	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width
 	                                     * texinfo.height * texinfo.internalFormat);
 	if (!texinfo.texels)
 	{
@@ -895,7 +895,7 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 		jpeg_destroy_decompress(&cinfo);
 		if (texinfo.texels)
 		{
-			free(texinfo.texels);
+			TexMalloc::free(texinfo.texels);
 			texinfo.texels = NULL;
 		}
 		return false;
@@ -919,7 +919,7 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 	texinfo.height = cinfo.image_height;
 	texinfo.internalFormat = cinfo.num_components;
 	texinfo.format = (cinfo.num_components == 1) ? GL_LUMINANCE : GL_RGB;
-	texinfo.texels = (GLubyte *)malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
+	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
 
 	// qWarning() << texinfo.width << texinfo.height << texinfo.internalFormat << texinfo.format;
 	
@@ -941,3 +941,53 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 
 	return true;
 }
+
+QMultiMap<size_t, void*> TexMalloc::cache;
+QMap<void*, size_t> TexMalloc::newInsert;
+QMutex TexMalloc::mutex;
+
+void* TexMalloc::malloc(size_t size)
+{
+	QMutexLocker lock(&mutex);
+	// static int tot = 0;
+	QMultiMap<size_t, void*>::iterator i = cache.find(size);
+	if (i==cache.end())
+	{
+		// tot += size;
+		//qWarning() << "Added " << size << "/" << tot;
+		void* buf = std::malloc(size);
+		newInsert.insert(buf, size);
+		return buf;
+	}
+	else
+	{
+		//qWarning() << "Reused " << size << "/" << tot;
+		void* buf = i.value();
+		cache.erase(i);
+		return buf;
+	}
+}
+
+void TexMalloc::free(void *ptr)
+{
+	QMutexLocker lock(&mutex);
+	QMap<void*, size_t>::iterator i = newInsert.find(ptr);
+	if (i==newInsert.end())
+	{
+		std::free(ptr);
+		return;
+	}
+	else
+	{
+		cache.insert(i.value(), ptr);
+	}
+}
+
+void TexMalloc::clear()
+{
+	QMutexLocker lock(&mutex);
+	for (QMap<void*, size_t>::iterator i = newInsert.begin();i!=newInsert.end();++i)
+		free(i.key());
+	newInsert.clear();
+}
+
