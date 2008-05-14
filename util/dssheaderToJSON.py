@@ -21,10 +21,6 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		x=float(box[0]-i*scale)/scale*300.
 		y=float(box[1]-j*scale)/scale*300.
 		
-		#if curLevel==5 and i==29 and j==0:
-			#print x, y
-			#exit(0)
-		
 		if x>300. or y<0.:
 			# Tile fully valid
 			return [[[0,0], [300, 0], [300, 300], [0, 300]]]
@@ -189,7 +185,7 @@ def all():
 	tmpDir = "/tmp/tmpPlate"
 	os.system("rm -r "+tmpDir)
 	
-	nRange = range(2,100)
+	nRange = range(2,894)
 	
 	for i in nRange:
 		dirName = "N%.3i" % i
