@@ -36,6 +36,7 @@
 #include <QDebug>
 #include <QGraphicsView>
 #include <QResizeEvent>
+#include <QThread>
 #include <QDebug>
 
 #include "gui/NewGui.hpp"
@@ -136,6 +137,7 @@ void StelMainWindow::init(int argc, char** argv)
 	
 	stelApp->initPlugIns();
 	
+	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	mainItem->startDrawingLoop();
 }
 

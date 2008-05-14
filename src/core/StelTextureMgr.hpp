@@ -26,6 +26,7 @@
 
 #include <QObject>
 #include <QMap>
+#include <QMutex>
 
 #include "STexture.hpp"
 
@@ -153,6 +154,20 @@ private:
 
 	//! Used to correct a bug on some nvidia cards
 	bool isNoPowerOfTwoLUMINANCEAllowed;
+};
+
+//! @class TexMalloc
+//! A special multithreaded malloc which tries to reuse the memory already allocated for loading textures
+class TexMalloc
+{
+public:
+	static void *malloc(size_t size);
+	static void free(void *ptr);
+	static void clear();
+private:
+	static QMultiMap<size_t, void*> cache;
+	static QMap<void*, size_t> newInsert;
+	static QMutex mutex;
 };
 
 #endif /*STELTEXTUREMGR_H_*/
