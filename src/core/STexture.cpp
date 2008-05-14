@@ -99,7 +99,7 @@ STexture::~STexture()
 	}
 	
 	if (texels)
-		delete texels;
+		TexMalloc::free(texels);
 	texels = NULL;
 	if (id!=0)
 	{
@@ -162,7 +162,7 @@ bool STexture::bind()
 		isLoadingImage = true;
 		loadThread = new ImageLoadThread(this);
 		connect(loadThread, SIGNAL(finished()), this, SLOT(fileLoadFinished()));
-		loadThread->start();
+		loadThread->start(QThread::LowestPriority);
 	}
 	return false;
 }
@@ -187,7 +187,7 @@ void STexture::downloadFinished(int did, bool error)
 	}
 	http->close();
 	// Call bind to activate data loading
-	bind();
+	//bind();
 }
 
 /*************************************************************************
@@ -360,7 +360,7 @@ bool STexture::glLoad()
 			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
 		
 		// OpenGL has its own copy of texture data
-		free (texels);
+		TexMalloc::free (texels);
 		texels = NULL;
 	}
 	
