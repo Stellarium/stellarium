@@ -13,7 +13,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet" >
-   <string>QFrame {
+   <string notr="true" >QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
 	border: 0px;
 	color : #babdc4;
@@ -289,17 +289,8 @@ color : #babdc4;
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
+   <property name="margin" >
     <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>1</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>1</number>
    </property>
    <item>
     <widget class="BarFrame" name="LocationBar" >
@@ -336,7 +327,7 @@ color : #babdc4;
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -425,7 +416,7 @@ color : #babdc4;
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -442,7 +433,7 @@ color : #babdc4;
          </size>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -468,22 +459,10 @@ color: darkgray;
       <enum>QFrame::StyledPanel</enum>
      </property>
      <layout class="QGridLayout" >
-      <property name="leftMargin" >
+      <property name="margin" >
        <number>0</number>
       </property>
-      <property name="topMargin" >
-       <number>0</number>
-      </property>
-      <property name="rightMargin" >
-       <number>0</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>0</number>
-      </property>
-      <property name="horizontalSpacing" >
-       <number>0</number>
-      </property>
-      <property name="verticalSpacing" >
+      <property name="spacing" >
        <number>0</number>
       </property>
       <item row="0" column="0" >
@@ -498,6 +477,14 @@ color: darkgray;
          <number>0</number>
         </property>
         <widget class="QWidget" name="tabMarking" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>435</width>
+           <height>410</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>

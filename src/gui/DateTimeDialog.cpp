@@ -32,6 +32,10 @@
 #include <QLineEdit>
 #include <QValidator>
 
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
+
 DateTimeDialog::DateTimeDialog() : 
   dialog(0), 
   year(0),
@@ -53,14 +57,10 @@ void DateTimeDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->raise();
-		dialog->move(200, 200);	// TODO: put in the center of the screen
-		dialog->setVisible(true);
 		double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
-		setDateTime(jd
-			    + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
+		setDateTime(jd + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
 
 		connect(ui->closeDateTime, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -72,6 +72,16 @@ void DateTimeDialog::setVisible(bool v)
 		connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
 
 		connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigation(), SLOT(setJDay(double)));
+		
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(200, 100);
+		dialog->show();
+		dialog->raise();
 
 	}
 	else

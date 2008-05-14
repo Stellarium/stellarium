@@ -28,6 +28,10 @@
 #include <QDebug>
 #include <QFrame>
 
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
+
 LocationDialog::LocationDialog() : dialog(0)
 {
 	ui = new Ui_locationDialogForm;
@@ -56,11 +60,8 @@ void LocationDialog::setVisible(bool v)
 		// We try to directly connect to the observer slots as much as we can
 		Observer* observer = StelApp::getInstance().getCore()->getObservatory();
 	
-		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->raise();
-		dialog->move(200, 100);	// TODO: put in the center of the screen
-		dialog->setVisible(true);
 
 		// Init the SpinBox entries
 		ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
@@ -79,6 +80,16 @@ void LocationDialog::setVisible(bool v)
 		// Init the position value
 		selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
 		spinBoxChanged();
+		
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(200, 100);
+		dialog->show();
+		dialog->raise();
 	}
 	else
 	{
