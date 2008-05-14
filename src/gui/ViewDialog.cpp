@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "Dialog.hpp"
+
 #include "ViewDialog.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_viewDialog.h"
@@ -41,6 +41,10 @@
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
+
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
 
 ViewDialog::ViewDialog() : dialog(NULL)
 {
@@ -67,12 +71,9 @@ void ViewDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new DialogFrame(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainWindow::getInstance());
 		ui->setupUi(dialog);
-		dialog->move(200, 100);	// TODO: put in the center of the screen
-		dialog->setVisible(true);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
-//		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChanged(void)));
 		
 		// Fill the culture list widget from the available list
 		QListWidget* l = ui->culturesListWidget;
@@ -241,9 +242,15 @@ void ViewDialog::setVisible(bool v)
 		ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 		connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
 		
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(200, 100);
 		dialog->show();
 		dialog->raise();
-		dialog->setFocus();
 	}
 	else
 	{

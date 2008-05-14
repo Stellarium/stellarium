@@ -39,7 +39,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelMainWindow.hpp"
 
-
+#include "StelAppGraphicsItem.hpp"
+#include <QDialog>
+#include <QGraphicsProxyWidget>
 
 
 HelpDialog::HelpDialog() 
@@ -76,27 +78,34 @@ void HelpDialog::languageChanged()
 
 void HelpDialog::close()
 {
-        emit closed();
+	emit closed();
 }
 
 void HelpDialog::setVisible(bool v)
 {
-        if (v)
-        {
-                dialog = new DialogFrame(&StelMainWindow::getInstance());
-                ui->setupUi(dialog);
+	if (v)
+	{
+		dialog = new QDialog(&StelMainWindow::getInstance());
+		ui->setupUi(dialog);
+		connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
+		
 		updateText();
-
-                dialog->raise();
-                dialog->move(190, 90); // TODO: put in the center of the screen
-                dialog->setVisible(true);
-                connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
-        }
-        else
-        {
-                dialog->deleteLater();
-                dialog = 0;
-        }
+			
+		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
+		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
+		proxy->setWidget(dialog);
+		proxy->setWindowFrameMargins(0,0,0,0);
+		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		
+		dialog->move(190, 90);
+		dialog->show();
+		dialog->raise();
+	}
+	else
+	{
+		dialog->deleteLater();
+		dialog = NULL;
+	}
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
