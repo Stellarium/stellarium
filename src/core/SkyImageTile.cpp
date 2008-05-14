@@ -48,11 +48,13 @@
 class JsonLoadThread : public QThread
 {
 	public:
-		JsonLoadThread(SkyImageTile* atile, QByteArray content) : QThread((QObject*)atile), tile(atile), data(content) {;}
+		JsonLoadThread(SkyImageTile* atile, QByteArray content, bool acompressed=false) : QThread((QObject*)atile),
+			tile(atile), data(content), compressed(acompressed) {;}
 		virtual void run();
 	private:
 		SkyImageTile* tile;
 		QByteArray data;
+		const bool compressed;
 };
 
 void JsonLoadThread::run()
@@ -61,13 +63,7 @@ void JsonLoadThread::run()
 	{
 		QBuffer buf(&data);
 		buf.open(QIODevice::ReadOnly);
-		QtJsonParser parser;
-		QVariantMap m = parser.parse(buf).toMap();
-		buf.close();
-		data = QByteArray();
-		if (m.isEmpty())
-			throw std::runtime_error("empty JSON file, cannot load image tile");
-		tile->temporaryResultMap = m;
+		tile->temporaryResultMap = SkyImageTile::loadFromJSON(buf, compressed);
 	}
 	catch (std::runtime_error e)
 	{
@@ -115,17 +111,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 		const bool compressed = fileName.endsWith(".qZ");
 		try
 		{
-			if (compressed)
-			{
-				QByteArray ar = qUncompress(f.readAll());
-				f.close();
-				QBuffer buf(&ar);
-				buf.open(QIODevice::ReadOnly);
-				loadFromJSON(buf);
-				buf.close();
-			}
-			else
-				loadFromJSON(f);
+			loadFromQVariantMap(loadFromJSON(f, compressed));
 		}
 		catch (std::runtime_error e)
 		{
@@ -396,13 +382,27 @@ void SkyImageTile::drawTile(StelCore* core)
 }
 
 // Load the tile information from a JSON file
-void SkyImageTile::loadFromJSON(QIODevice& input)
+QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
 {
 	QtJsonParser parser;
-	QVariantMap map = parser.parse(input).toMap();
+	QVariantMap map;
+	if (compressed)
+	{
+		QByteArray ar = qUncompress(input.readAll());
+		input.close();
+		QBuffer buf(&ar);
+		buf.open(QIODevice::ReadOnly);
+		map = parser.parse(buf).toMap();
+		buf.close();
+	}
+	else
+	{
+		map = parser.parse(input).toMap();
+	}
+	
 	if (map.isEmpty())
 		throw std::runtime_error("empty JSON file, cannot load image tile");
-	loadFromQVariantMap(map);
+	return map;
 }
 
 // Load the tile from a valid QVariantMap
@@ -502,13 +502,13 @@ void SkyImageTile::downloadFinished(int id, bool error)
 		http->close();
 		return;
 	}	
-	//qWarning() << "Downloaded JSON " << http->currentRequest().path();
+	const bool compressed = http->currentRequest().path().endsWith(".qZ");
 	QByteArray content = http->readAll();
 	http->close();
 	http->deleteLater();
 	
 	assert(loadThread==NULL);
-	loadThread = new JsonLoadThread(this, content);
+	loadThread = new JsonLoadThread(this, content, compressed);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
 	loadThread->start(QThread::LowestPriority);
 }

@@ -28,6 +28,7 @@
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainWindow.hpp"
+// #include "ui_viewDialog.h"
 
 #include <QtOpenGL>
 #include <QTimer>

@@ -112,13 +112,13 @@ void StelMainWindow::init(int argc, char** argv)
 	//glFormat.setSamples(1);
 	glWidget = new QGLWidget(glFormat, this);
 	glWidget->setObjectName("StelGLWidget");
-	glWidget->setAutoFillBackground(false);
-	view->setAutoFillBackground(false);
+	//glWidget->setAutoFillBackground(false);
+	//view->setAutoFillBackground(false);
 	view->setViewport(glWidget);
 	view->setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	
 	view->setCacheMode(QGraphicsView::CacheNone);
-	//view->setCacheMode(QGraphicsView::CacheBackground);
+	view->setCacheMode(QGraphicsView::CacheBackground);
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	//view->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	

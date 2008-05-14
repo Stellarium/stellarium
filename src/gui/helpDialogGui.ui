@@ -12,21 +12,15 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <property name="autoFillBackground" >
+   <bool>false</bool>
+  </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
+   <property name="margin" >
     <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>1</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>1</number>
    </property>
    <item>
     <widget class="BarFrame" name="HelpBar" >
@@ -66,7 +60,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -86,7 +80,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -103,7 +97,7 @@
          </size>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -195,11 +189,17 @@ color: darkgray;
        </disabled>
       </palette>
      </property>
-     <property name="autoFillBackground" >
+     <property name="mouseTracking" >
+      <bool>true</bool>
+     </property>
+     <property name="acceptDrops" >
       <bool>false</bool>
      </property>
+     <property name="autoFillBackground" >
+      <bool>true</bool>
+     </property>
      <property name="styleSheet" >
-      <string/>
+      <string notr="true" />
      </property>
      <property name="openExternalLinks" >
       <bool>true</bool>
@@ -220,6 +220,9 @@ color: darkgray;
        <height>30</height>
       </size>
      </property>
+     <property name="mouseTracking" >
+      <bool>false</bool>
+     </property>
      <property name="autoFillBackground" >
       <bool>false</bool>
      </property>
@@ -230,16 +233,7 @@ color: darkgray;
       <property name="spacing" >
        <number>0</number>
       </property>
-      <property name="leftMargin" >
-       <number>0</number>
-      </property>
-      <property name="topMargin" >
-       <number>0</number>
-      </property>
-      <property name="rightMargin" >
-       <number>0</number>
-      </property>
-      <property name="bottomMargin" >
+      <property name="margin" >
        <number>0</number>
       </property>
       <item>
@@ -247,7 +241,7 @@ color: darkgray;
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>271</width>
           <height>20</height>

@@ -61,7 +61,7 @@ private slots:
 		
 private:
 	//! Load the tile information from a JSON file
-	void loadFromJSON(QIODevice& input);
+	static QVariantMap loadFromJSON(QIODevice& input, bool compressed=false);
 	
 	//! Load the tile from a valid QVariantMap
 	void loadFromQVariantMap(const QVariantMap& map);
