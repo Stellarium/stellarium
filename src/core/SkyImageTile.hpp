@@ -52,9 +52,7 @@ public:
 	
 private slots:
 	//! Called when the download for the JSON file terminated
-	//! @param id the identifier of the request.
-	//! @param error true if an error occurred during the processing; otherwise false
-	void downloadFinished(int id, bool error);
+	void downloadFinished();
 	
 	//! Called when the JSON file is loaded
 	void JsonLoadFinished();
@@ -74,7 +72,7 @@ private:
 	void drawTile(StelCore* core);
 	
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
-	void deleteUnusedTiles(double lastDrawTrigger=5.);
+	void deleteUnusedTiles(double lastDrawTrigger=0.2);
 	
 	//! Delete the texture from memory. It will be reloaded automatically if needed
 	void deleteTexture() {tex.reset();}
@@ -133,11 +131,10 @@ private:
 	bool errorOccured;
 	
 	// Used to download remote JSON files if needed
-	class QHttp* http;
+	class QNetworkReply* httpReply;
 	
 	// true if the JSON descriptor file is currently downloading
 	bool downloading;
-	int downloadId;
 	
 	class JsonLoadThread* loadThread;
 			

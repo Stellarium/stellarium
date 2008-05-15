@@ -33,6 +33,9 @@
 #include <QUrl>
 #include <QBuffer>
 #include <QThread>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 #include <stdexcept>
 
 #ifdef DEBUG_SKYIMAGE_TILE
@@ -73,9 +76,8 @@ void JsonLoadThread::run()
 }
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0), loadThread(NULL)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL)
 {
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -121,6 +123,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			return;
 		}
 		f.close();
+		lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	}
 	else
 	{
@@ -134,18 +137,17 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 			assert(parent->getBaseUrl().startsWith("http://"));
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
-		http = new QHttp(this);
-		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
-		http->setHost(qurl.host(), qurl.port(80));
+		assert(httpReply==NULL);
+		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(qurl));
+		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		downloading = true;
-		downloadId = http->get(qurl.toEncoded());
 		QString turl = qurl.toString();
 		baseUrl = turl.left(turl.lastIndexOf('/')+1);
 	}
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), http(NULL), downloading(false), downloadId(0), loadThread(NULL)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL)
 {
 	if (parent!=NULL)
 	{
@@ -154,11 +156,18 @@ SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObje
 		alphaBlend = parent->alphaBlend;
 	}
 	loadFromQVariantMap(map);
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 	
 // Destructor
 SkyImageTile::~SkyImageTile()
 {
+	if (httpReply)
+	{
+		httpReply->abort();
+		delete httpReply;
+		httpReply = NULL;
+	}
 	if (loadThread && loadThread->isRunning())
 	{
 		disconnect(loadThread, SIGNAL(finished()), this, SLOT(JsonLoadFinished()));
@@ -194,15 +203,17 @@ void SkyImageTile::draw(StelCore* core)
 // Return the list of tiles which should be drawn.
 void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
 {
-	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
-	
 	// An error occured during loading
 	if (errorOccured)
 		return;
 	
 	// The JSON file is currently being downloaded
 	if (downloading)
+	{
+		// Avoid the tile to be deleted by telling that it was drawn
+		lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 		return;
+	}
 	
 	// Check that we are in the screen
 	bool fullInScreen = true;
@@ -235,6 +246,8 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 	// The tile is outside screen
 	if (fullInScreen==false && intersectScreen==false)
 		return;
+	
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 	
 	if (noTexture==false)
 	{
@@ -360,7 +373,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#if 0
+#if 1
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -371,7 +384,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		Vec3d win;
 		Vec3d bary = poly.getBarycenter();
 		prj->project(bary,win);
-		prj->drawText(debugFont, win[0], win[1], QString("%1 %2").arg(minResolution*256.*60).arg(1./prj->getPixelPerRadAtCenter()*180./M_PI*256*60));//getImageUrl());
+		prj->drawText(debugFont, win[0], win[1], getImageUrl());
 		
 		glDisable(GL_TEXTURE_2D);
 		prj->drawPolygon(poly);
@@ -488,23 +501,22 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 }
 	
 // Called when the download for the JSON file terminated
-void SkyImageTile::downloadFinished(int id, bool error)
+void SkyImageTile::downloadFinished()
 {
-	if (id!=downloadId)
-		return;
-	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
-	
-	if (error)
+	if (httpReply->error()!=QNetworkReply::NoError)
 	{
-		qWarning() << "WARNING : Problem while downloading JSON Image Tile description: " << http->errorString();
+		if (httpReply->error()!=QNetworkReply::OperationCanceledError)
+			qWarning() << "WARNING : Problem while downloading JSON Image Tile description for " << httpReply->request().url().path() << ": "<< httpReply->errorString();
 		errorOccured = true;
-		http->close();
+		httpReply->deleteLater();
+		httpReply=NULL;
 		return;
 	}	
-	const bool compressed = http->currentRequest().path().endsWith(".qZ");
-	QByteArray content = http->readAll();
-	http->close();
-	http->deleteLater();
+	
+	const bool compressed = httpReply->request().url().path().endsWith(".qZ");
+	QByteArray content = httpReply->readAll();
+	httpReply->deleteLater();
+	httpReply=NULL;
 	
 	assert(loadThread==NULL);
 	loadThread = new JsonLoadThread(this, content, compressed);
@@ -522,6 +534,7 @@ void SkyImageTile::JsonLoadFinished()
 	if (errorOccured)
 		return;
 	loadFromQVariantMap(temporaryResultMap);
+	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds

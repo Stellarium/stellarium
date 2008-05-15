@@ -55,6 +55,7 @@
 #include <QTextStream>
 #include <QMouseEvent>
 #include <QDebug>
+#include <QNetworkAccessManager>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -79,6 +80,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	loadingBar=NULL;
+	networkAccessManager=NULL;
 	
 	// Can't create 2 StelApp instances
 	assert(!singleton);
@@ -216,6 +218,7 @@ QString StelApp::getApplicationName()
 
 void StelApp::init()
 {
+	networkAccessManager = new QNetworkAccessManager(this);
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->getProjection()->windowHasBeenResized(saveProjW, saveProjH);

@@ -81,9 +81,7 @@ signals:
 	
 private slots:
 	//! Called when the download for the texture file terminated
-	//! @param id the identifier of the request.
-	//! @param error true if an error occurred during the processing; otherwise false
-	void downloadFinished(int id, bool error);
+	void downloadFinished();
 	
 	//! Called when the file loading thread has terminated
 	void fileLoadFinished();
@@ -110,15 +108,13 @@ private:
 	STextureTypes::DynamicRangeMode dynamicRangeMode;
 	
 	//! Used to download remote files if needed
-	class QHttp* http;
+	class QNetworkReply* httpReply;
 	
 	//! Used to load in thread
 	class ImageLoadThread* loadThread;
 			
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
-	//! Used internally
-	int downloadId;
 	//! Define whether the image is already loading
 	bool isLoadingImage;
 	
