@@ -121,7 +121,7 @@ void StelMainGraphicsView::closeEvent(QCloseEvent* event)
 void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
 	QString shotDir;
-	QImage im = findChild<QGLWidget*>("StelGLWidget")->grabFrameBuffer();
+	QImage im = glWidget->grabFrameBuffer();
 
 	if (saveDir == "")
 	{
