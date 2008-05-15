@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelAppGraphicsItem.hpp"
 #include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
@@ -374,7 +375,7 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
-	StelMainWindow::getInstance().setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	StelMainGraphicsView::getInstance().setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	QString styleFilePath;
@@ -388,7 +389,7 @@ void NewGui::init()
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
-	StelMainWindow::getInstance().setStyleSheet(styleFile.readAll());
+	StelMainGraphicsView::getInstance().setStyleSheet(styleFile.readAll());
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -459,7 +460,7 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
+	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(close()));
 	
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
@@ -533,10 +534,10 @@ void NewGui::init()
 	MovementMgr* mmgr = (MovementMgr*)module;
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
 	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
 	
 	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	QObject::connect(&locationDialog, SIGNAL(closed()), getGuiActions("actionShow_Location_Window"), SLOT(toggle()));
@@ -556,9 +557,9 @@ void NewGui::init()
 	QObject::connect(getGuiActions("actionShow_Search_Window"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
 	QObject::connect(&searchDialog, SIGNAL(closed()), getGuiActions("actionShow_Search_Window"), SLOT(toggle()));
 
-	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
+	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
 	
-	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(saveScreenShot()));
+	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 
 	const Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	QObject::connect(getGuiActions("actionHorizontal_Flip"), SIGNAL(toggled(bool)), proj, SLOT(setFlipHorz(bool)));
@@ -728,7 +729,7 @@ void NewGui::init()
 	buttonBarPath = new StelBarsPath(NULL);
 	buttonBarPath->updatePath(buttonBar, winBar);
 	
-	QGraphicsScene* scene = StelMainWindow::getInstance().getGraphicsView()->scene();
+	QGraphicsScene* scene = StelMainGraphicsView::getInstance().scene();
 	scene->addItem(buttonHelpLabel);
 	scene->addItem(winBar);
 	scene->addItem(buttonBar);
@@ -762,7 +763,7 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 void NewGui::updateI18n()
 {
 	// Translate all action texts
-	foreach (QObject* obj, StelMainWindow::getInstance().children())
+	foreach (QObject* obj, StelMainGraphicsView::getInstance().children())
 	{
 		QAction* a = qobject_cast<QAction*>(obj);
 		if (a)
@@ -840,7 +841,7 @@ bool NewGui::handleMouseMoves(int x, int y)
 
 void NewGui::updateBarsPos(qreal value)
 {
-	glWindowHasBeenResized(StelMainWindow::getInstance().getGraphicsView()->size().width(), StelMainWindow::getInstance().getGraphicsView()->size().height());
+	glWindowHasBeenResized(StelMainGraphicsView::getInstance().size().width(), StelMainGraphicsView::getInstance().size().height());
 }
 
 // Note: "text" and "helpGroup" must be in English -- this method and the help
@@ -849,21 +850,22 @@ void NewGui::updateBarsPos(qreal value)
 void NewGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
 	QAction* a;
-	a = new QAction(&StelMainWindow::getInstance());
+	a = new QAction(&StelMainGraphicsView::getInstance());
 	a->setObjectName(actionName);
 	a->setText(q_(text));
 	a->setShortcut(shortCut);
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
+	//a->setShortcutContext();
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
-	StelMainWindow::getInstance().addAction(a);
+	StelMainGraphicsView::getInstance().addAction(a);
 }
 
 QAction* NewGui::getGuiActions(const QString& actionName)
 {
-	QAction* a = StelMainWindow::getInstance().findChild<QAction*>(actionName);
+	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
 	if (!a)
 		qWarning() << "Can't find action " << actionName;
 	Q_ASSERT(a);

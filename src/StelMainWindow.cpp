@@ -106,7 +106,7 @@ void StelMainWindow::init(int argc, char** argv)
 	view->setFrameShape(QFrame::NoFrame);
 	view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	view->setFocusPolicy(Qt::ClickFocus);
+	view->setFocusPolicy(Qt::StrongFocus);
 
 	QGLFormat glFormat(QGL::StencilBuffer);
 	//glFormat.setSamples(1);
@@ -142,77 +142,3 @@ void StelMainWindow::init(int argc, char** argv)
 }
 
 
-void StelMainWindow::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
-{
-	QString shotDir;
-	QImage im = findChild<QGLWidget*>("StelGLWidget")->grabFrameBuffer();
-
-	if (saveDir == "")
-	{
-		try
-		{
-			shotDir = StelApp::getInstance().getFileMgr().getScreenshotDir();
-			if (!StelApp::getInstance().getFileMgr().isWritable(shotDir))
-			{
-				qWarning() << "ERROR StelAppSdl::saveScreenShot: screenshot directory is not writable: " << qPrintable(shotDir);
-				return;
-			}
-		}
-		catch(std::exception& e)
-		{
-			qWarning() << "ERROR StelAppSdl::saveScreenShot: could not determine screenshot directory: " << e.what();
-			return;
-		}
-	}
-	else
-	{
-		shotDir = saveDir;
-	}
-
-	QString shotPath;
-	for (int j=0; j<100000; ++j)
-	{
-		shotPath = shotDir+"/"+filePrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png";
-		if (!StelApp::getInstance().getFileMgr().exists(shotPath))
-			break;
-	}
-	
-	qDebug() << "Saving screenshot in file: " << shotPath;
-	im.save(shotPath);
-}
-
-
-/*************************************************************************
- Alternate fullscreen mode/windowed mode if possible
-*************************************************************************/
-void StelMainWindow::toggleFullScreen()
-{
-	// Toggle full screen
-	if (!isFullScreen())
-	{
-		showFullScreen();
-	}
-	else
-	{
-		showNormal();
-	}
-}
-
-/*************************************************************************
- Get whether fullscreen is activated or not
-*************************************************************************/
-bool StelMainWindow::getFullScreen() const
-{
-	return isFullScreen();
-}
-
-/*************************************************************************
- Set whether fullscreen is activated or not
- *************************************************************************/
-void StelMainWindow::setFullScreen(bool b)
-{
-	if (b)
-		showFullScreen();
-	else
-		showNormal();
-}

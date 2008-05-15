@@ -19,7 +19,7 @@
 
 #include "Dialog.hpp"
 #include "DateTimeDialog.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -57,7 +57,7 @@ void DateTimeDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		dialog = new QDialog(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
 		setDateTime(jd + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
@@ -73,16 +73,11 @@ void DateTimeDialog::setVisible(bool v)
 
 		connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigation(), SLOT(setJDay(double)));
 		
-		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
-		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
-		proxy->setWidget(dialog);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		
+		proxy->setZValue(100);
 		dialog->move(200, 100);
-		dialog->show();
-		dialog->raise();
-
 	}
 	else
 	{

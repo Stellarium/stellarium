@@ -19,7 +19,7 @@
 
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -60,7 +60,7 @@ void LocationDialog::setVisible(bool v)
 		// We try to directly connect to the observer slots as much as we can
 		Observer* observer = StelApp::getInstance().getCore()->getObservatory();
 	
-		dialog = new QDialog(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 
 		// Init the SpinBox entries
@@ -81,15 +81,11 @@ void LocationDialog::setVisible(bool v)
 		selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
 		spinBoxChanged();
 		
-		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
-		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
-		proxy->setWidget(dialog);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		
+		proxy->setZValue(100);
 		dialog->move(200, 100);
-		dialog->show();
-		dialog->raise();
 	}
 	else
 	{

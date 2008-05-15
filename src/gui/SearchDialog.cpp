@@ -31,7 +31,7 @@
 #include <QDebug>
 #include <QFrame>
 
-#include "StelAppGraphicsItem.hpp"
+#include "StelMainGraphicsView.hpp"
 #include <QDialog>
 #include <QGraphicsProxyWidget>
 
@@ -43,6 +43,8 @@ SearchDialog::SearchDialog() : dialog(0)
 SearchDialog::~SearchDialog()
 {
 	delete ui;
+	if (dialog)
+		delete dialog;
 }
 
 void SearchDialog::close()
@@ -64,7 +66,7 @@ void SearchDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new QDialog(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 
 		connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -73,15 +75,11 @@ void SearchDialog::setVisible(bool v)
 		onTextChanged(ui->lineEditSearchSkyObject->text());
 		connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 		
-		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
-		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
-		proxy->setWidget(dialog);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		
+		proxy->setZValue(100);
 		dialog->move(200, 100);
-		dialog->show();
-		dialog->raise();
 	}
 	else
 	{

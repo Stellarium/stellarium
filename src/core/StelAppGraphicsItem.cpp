@@ -27,7 +27,7 @@
 #include "StelAppGraphicsItem.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 // #include "ui_viewDialog.h"
 
 #include <QtOpenGL>
@@ -63,15 +63,6 @@ StelAppGraphicsItem::~StelAppGraphicsItem()
 void StelAppGraphicsItem::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
-	
-//  Test a Qt 4.4 OpenGL rendered complex styled window :)
-// 	QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(this, Qt::Tool);
-// 	QDialog* cal = new QDialog(0);
-// 	Ui_viewDialogForm ui;
-// 	ui.setupUi(cal);
-// 	proxy->setWidget(cal);
-// 	proxy->setWindowFrameMargins(0,0,0,0);
-// 	proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
@@ -160,11 +151,11 @@ void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
 	{
 		if (type == "none")
 		{
-			StelMainWindow::getInstance().getOpenGLWin()->setMaximumSize(10000,10000);
+			StelMainGraphicsView::getInstance().getOpenGLWin()->setMaximumSize(10000,10000);
 		}
 		else
 		{
-			StelMainWindow::getInstance().getOpenGLWin()->setFixedSize((int)(rect().width()), (int)(rect().height()));
+			StelMainGraphicsView::getInstance().getOpenGLWin()->setFixedSize((int)(rect().width()), (int)(rect().height()));
 		}
 	}
 	if (distorter)

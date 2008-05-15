@@ -19,7 +19,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -59,7 +59,7 @@ void ConfigurationDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new QDialog(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
 		
@@ -70,15 +70,11 @@ void ConfigurationDialog::setVisible(bool v)
 		c->setCurrentIndex(c->findText(StelApp::getInstance().getLocaleMgr().getAppLanguage(), Qt::MatchExactly));
 		connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 		
-		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
-		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
-		proxy->setWidget(dialog);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		
+		proxy->setZValue(100);
 		dialog->move(200, 100);
-		dialog->show();
-		dialog->raise();
 	}
 	else
 	{

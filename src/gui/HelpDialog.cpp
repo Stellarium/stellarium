@@ -37,7 +37,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include "StelAppGraphicsItem.hpp"
 #include <QDialog>
@@ -85,21 +85,17 @@ void HelpDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		dialog = new QDialog(&StelMainWindow::getInstance());
+		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
 		
 		updateText();
 			
-		StelAppGraphicsItem* item = &StelAppGraphicsItem::getInstance();
-		QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget(item, Qt::Tool);
-		proxy->setWidget(dialog);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		
-		dialog->move(190, 90);
-		dialog->show();
-		dialog->raise();
+		proxy->setZValue(100);
+		dialog->move(200, 100);
 	}
 	else
 	{

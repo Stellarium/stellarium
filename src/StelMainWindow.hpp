@@ -35,15 +35,8 @@ public:
 	//! Constructor
 	StelMainWindow();
 	virtual ~StelMainWindow();
-	
-	//! Init the application
-	void init(int argc, char** argv);
 			
-	//! Get the StelMainWindow singleton instance.
-	//! @deprecated
-	//! @return the StelMainWindow singleton instance
-	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
-	
+
 	//! Get the main QGLWidget
 	QGLWidget* getOpenGLWin() {return glWidget;}
 	
@@ -51,24 +44,6 @@ public:
 	QGraphicsView* getGraphicsView() {return view;}
 	
 public slots:
-	//! Alternate fullscreen mode/windowed mode if possible
-	void toggleFullScreen();
-	
-	//! Get whether fullscreen is activated or not
-	bool getFullScreen() const;
-	//! Set whether fullscreen is activated or not
-	void setFullScreen(bool);
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Specific methods
-	//! Save a screen shot.
-	//! The format of the file, and hence the filename extension 
-	//! depends on the architecture and build type.
-	//! @arg filePrefix changes the beginning of the file name
-	//! @arg shotDir changes the drectory where the screenshot is saved
-	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
-
 protected:
 	
 	//! Reimplement this to delete openGL textures before the GLContext disappears
