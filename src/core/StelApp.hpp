@@ -38,6 +38,7 @@ class StelFileMgr;
 class QStringList;
 class LoadingBar;
 class QSettings;
+class QNetworkAccessManager;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -114,6 +115,9 @@ public:
 	//! Get the main loading bar used by modules for displaying loading informations.
 	//! @return the main LoadingBar instance of the program.
 	LoadingBar* getLoadingBar() {return loadingBar;}
+	
+	//! Get the common instance of QNetworkAccessManager used in stellarium
+	QNetworkAccessManager* getNetworkAccessManager() {return networkAccessManager;}
 	
 	//! Update translations, font for GUI and sky everywhere in the program.
 	void updateI18n();	
@@ -293,6 +297,9 @@ private:
 
 	//! Utility class for file operations, mainly locating files by name
 	StelFileMgr* stelFileMgr;
+	
+	// Main network manager used for the program
+	QNetworkAccessManager* networkAccessManager;
 	
 	// The main loading bar
 	LoadingBar* loadingBar;

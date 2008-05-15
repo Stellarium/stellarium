@@ -36,6 +36,7 @@
 #include <QUrl>
 #include <QImage>
 #include <QGLWidget>
+#include <QNetworkReply>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
@@ -68,7 +69,7 @@ void ImageLoadThread::run()
 /*************************************************************************
   Constructor
  *************************************************************************/
-STexture::STexture() : http(NULL), loadThread(NULL), downloaded(false),  downloadId(0), isLoadingImage(false),
+STexture::STexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f), texels(NULL), type(GL_UNSIGNED_BYTE)
 {
 	mutex = new QMutex();
@@ -84,11 +85,12 @@ STexture::STexture() : http(NULL), loadThread(NULL), downloaded(false),  downloa
 
 STexture::~STexture()
 {
-	if (http)
+	if (httpReply)
 	{
 		// HTTP is still doing something for this texture. We abort it.
-		delete http;
-		http = NULL;
+		httpReply->abort();
+		delete httpReply;
+		httpReply = NULL;
 	}
 		
 	if (loadThread && loadThread->isRunning())
@@ -143,15 +145,11 @@ bool STexture::bind()
 		return false;
 
 	// The texture is not yet fully loaded
-	if (downloaded==false && downloadId==0 && fullPath.startsWith("http://"))
+	if (downloaded==false && httpReply==NULL && fullPath.startsWith("http://"))
 	{
 		// We need to start download
-		if (http==NULL)
-			http = new QHttp(this);
-		connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
-		QUrl url(fullPath);
-		http->setHost(url.host(), url.port(80));
-		downloadId = http->get(fullPath);
+		httpReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(QUrl(fullPath)));
+		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 		return false;
 	}
 	
@@ -171,21 +169,18 @@ bool STexture::bind()
 /*************************************************************************
  Called when the download for the texture file terminated
 *************************************************************************/
-void STexture::downloadFinished(int did, bool error)
+void STexture::downloadFinished()
 {
-	if (did!=downloadId)
-		return;
-	disconnect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(downloadFinished(int, bool)));
-	downloadedData = http->readAll();
+	downloadedData = httpReply->readAll();
 	downloaded=true;
-	downloadId=0;
-	if (error || errorOccured)
+	if (httpReply->error()!=QNetworkReply::NoError || errorOccured)
 	{
-		qWarning() << "Texture download failed for " + fullPath+ ": " + http->errorString();
+		if (httpReply->error()!=QNetworkReply::OperationCanceledError)
+			qWarning() << "Texture download failed for " + fullPath+ ": " + httpReply->errorString();
 		errorOccured = true;
-		return;
 	}
-	http->close();
+	httpReply->deleteLater();
+	httpReply=NULL;
 	// Call bind to activate data loading
 	//bind();
 }
