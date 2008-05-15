@@ -195,6 +195,8 @@ bool StelAppGraphicsItem::sceneEvent(QEvent* event)
 		y = (int)rect().height() - 1 - y;
 		distorter->distortXY(x,y);
 		StelApp::getInstance().handleMove(x, y);
+		// Refresh screen ASAP
+		thereWasAnEvent();
 	}
 	if (event->type()==QEvent::GraphicsSceneHoverMove)
 	{
@@ -204,7 +206,10 @@ bool StelAppGraphicsItem::sceneEvent(QEvent* event)
 		y = (int)rect().height() - 1 - y;
 		distorter->distortXY(x,y);
 		StelApp::getInstance().handleMove(x, y);
+		// Refresh screen ASAP
+		thereWasAnEvent();
 	}
+
 	return QGraphicsItem::sceneEvent(event);
 }
 
