@@ -43,6 +43,9 @@ public:
 	//! Get the main QGLWidget
 	QGLWidget* getOpenGLWin() {return glWidget;}
 	
+	//! Activate all the QActions associated to the widget
+	void activateKeyActions(bool b);
+	
 public slots:
 	//! Alternate fullscreen mode/windowed mode if possible
 	void toggleFullScreen();
@@ -66,7 +69,7 @@ protected:
 	
 	//! Reimplement this to delete openGL textures before the GLContext disappears
 	virtual void closeEvent(QCloseEvent* event);
-		
+
 protected:	
 	virtual void resizeEvent(QResizeEvent* event);
 	
