@@ -19,7 +19,6 @@
 
 
 #include "ViewDialog.hpp"
-#include "StelMainWindow.hpp"
 #include "ui_viewDialog.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
