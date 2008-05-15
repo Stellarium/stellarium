@@ -75,7 +75,7 @@ void SearchDialog::setVisible(bool v)
 		onTextChanged(ui->lineEditSearchSkyObject->text());
 		connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 		
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
+		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Dialog);
 		proxy->setWindowFrameMargins(0,0,0,0);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 		proxy->setZValue(100);

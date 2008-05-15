@@ -33,6 +33,7 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QThread>
+#include <QAction>
 
 #include "gui/NewGui.hpp"
 
@@ -57,6 +58,8 @@ StelMainGraphicsView::StelMainGraphicsView(QGraphicsScene* ascene, QWidget* pare
 	//glFormat.setSamples(1);
 	glWidget = new QGLWidget(glFormat, NULL);
 	setViewport(glWidget);
+	
+	setFocusPolicy(Qt::ClickFocus);
 	
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
@@ -191,4 +194,19 @@ void StelMainGraphicsView::setFullScreen(bool b)
 		showFullScreen();
 	else
 		showNormal();
+}
+
+//! Activate all the QActions associated to the widget
+void StelMainGraphicsView::activateKeyActions(bool b)
+{
+	if (b==false)
+	{
+		foreach (QAction* a, actions())
+			removeAction(a);
+	}
+	else
+	{
+		foreach (QAction* a, findChildren<QAction*>())
+			addAction(a);
+	}
 }

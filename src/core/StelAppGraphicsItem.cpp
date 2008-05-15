@@ -265,3 +265,15 @@ void StelAppGraphicsItem::keyReleaseEvent(QKeyEvent* event)
 	// Refresh screen ASAP
 	thereWasAnEvent();
 }
+
+void StelAppGraphicsItem::focusOutEvent(QFocusEvent* event)
+{
+	StelMainGraphicsView::getInstance().activateKeyActions(false);
+	QGraphicsItem::focusOutEvent(event);
+}
+
+void StelAppGraphicsItem::focusInEvent(QFocusEvent* event)
+{
+	StelMainGraphicsView::getInstance().activateKeyActions(true);
+	QGraphicsItem::focusInEvent(event);
+}
