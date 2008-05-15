@@ -28,7 +28,6 @@
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-// #include "ui_viewDialog.h"
 
 #include <QtOpenGL>
 #include <QTimer>
@@ -140,7 +139,9 @@ void StelAppGraphicsItem::recompute()
 
 void StelAppGraphicsItem::thereWasAnEvent()
 {
-	// Refresh screen ASAP
+	// Avoid sending events too close in time
+	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<0.01)
+		return;
 	recompute();
 	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
 }
