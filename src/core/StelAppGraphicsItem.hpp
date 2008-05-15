@@ -65,6 +65,8 @@ protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event);
+	virtual void focusOutEvent(QFocusEvent* event);
+	virtual void focusInEvent(QFocusEvent* event);
 	
 private slots:
 	//! Called when screen needs to be refreshed

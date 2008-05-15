@@ -857,7 +857,7 @@ void NewGui::addGuiActions(const QString& actionName, const QString& text, const
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
-	//a->setShortcutContext();
+	a->setShortcutContext(Qt::WidgetShortcut);
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
 	StelMainGraphicsView::getInstance().addAction(a);
