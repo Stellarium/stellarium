@@ -226,6 +226,6 @@ void HelpDialog::updateText(void)
 	
 	ui->helpBrowser->clear();
 	ui->helpBrowser->insertHtml(newHtml);
-	//ui->helpBrowser->scrollToAnchor("top");
+	ui->helpBrowser->scrollToAnchor("top");
 }
 
