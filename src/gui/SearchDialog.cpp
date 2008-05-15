@@ -19,7 +19,6 @@
 
 #include "Dialog.hpp"
 #include "SearchDialog.hpp"
-#include "StelMainWindow.hpp"
 #include "ui_searchDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

@@ -25,7 +25,6 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelAppGraphicsItem.hpp"
-#include "StelMainWindow.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
