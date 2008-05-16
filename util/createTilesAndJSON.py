@@ -8,7 +8,6 @@ import Image
 import ImageOps
 import math
 from astLib import astWCS
-
 from skyTile import *
 
 TILE_SIZE=256
@@ -90,7 +89,7 @@ def main():
 	masterTile.credits = "ESO"
 	masterTile.infoUrl = "TODO"
 	
-	masterTile.outputJSON(qCompress=True, maxLevelPerFile=10)
+	masterTile.outputJSON(qCompress=True, maxLevelPerFile=3)
 	
 if __name__ == "__main__":
     main()

@@ -57,6 +57,11 @@ void LocationDialog::setVisible(bool v)
 {
 	if (v) 
 	{
+		if (dialog)
+		{
+			dialog->show();
+			return;
+		}
 		// We try to directly connect to the observer slots as much as we can
 		Observer* observer = StelApp::getInstance().getCore()->getObservatory();
 	
@@ -89,8 +94,7 @@ void LocationDialog::setVisible(bool v)
 	}
 	else
 	{
-		dialog->deleteLater();
-		dialog = 0;
+		dialog->hide();
 	}
 }
 

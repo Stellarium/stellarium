@@ -65,25 +65,32 @@ void SearchDialog::setVisible(bool v)
 {
 	if (v) 
 	{
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
-		ui->setupUi(dialog);
-
-		connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
-		connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
-		connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
-		onTextChanged(ui->lineEditSearchSkyObject->text());
-		connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
-		
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Dialog);
-		proxy->setWindowFrameMargins(0,0,0,0);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		proxy->setZValue(100);
-		dialog->move(200, 100);
+		if (dialog)
+		{
+			dialog->show();
+		}
+		else
+		{
+			dialog = new QDialog(&StelMainGraphicsView::getInstance());
+			ui->setupUi(dialog);
+			connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+			connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
+			connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
+			onTextChanged(ui->lineEditSearchSkyObject->text());
+			connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+			
+			QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Dialog);
+			proxy->setWindowFrameMargins(0,0,0,0);
+			proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+			proxy->setZValue(100);
+			dialog->move(200, 100);
+		}
+		// Set the focus directly on the line edit
+		ui->lineEditSearchSkyObject->setFocus();
 	}
 	else
 	{
-		dialog->deleteLater();
-		dialog = 0;
+		dialog->hide();
 	}
 }
 

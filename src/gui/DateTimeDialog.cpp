@@ -57,6 +57,11 @@ void DateTimeDialog::setVisible(bool v)
 {
 	if (v)
 	{
+		if (dialog)
+		{
+			dialog->show();
+			return;
+		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
@@ -81,18 +86,7 @@ void DateTimeDialog::setVisible(bool v)
 	}
 	else
 	{
-		disconnect(ui->spinner_year);
-		disconnect(ui->spinner_month);
-		disconnect(ui->spinner_day);
-		disconnect(ui->spinner_hour);
-		disconnect(ui->spinner_minute);
-		disconnect(ui->spinner_second);
-
-		disconnect(this);
-
-		dialog->setVisible(false);
-		dialog->deleteLater();
-		dialog = 0;
+		dialog->hide();
 	}
 }
 
