@@ -44,8 +44,7 @@
 #include <QGraphicsProxyWidget>
 
 
-HelpDialog::HelpDialog() 
-	: dialog(0)
+HelpDialog::HelpDialog() : dialog(NULL)
 {
 	ui = new Ui_helpDialogForm;
 
@@ -85,6 +84,11 @@ void HelpDialog::setVisible(bool v)
 {
 	if (v)
 	{
+		if (dialog)
+		{
+			dialog->show();
+			return;
+		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
@@ -99,8 +103,7 @@ void HelpDialog::setVisible(bool v)
 	}
 	else
 	{
-		dialog->deleteLater();
-		dialog = NULL;
+		dialog->hide();
 	}
 }
 

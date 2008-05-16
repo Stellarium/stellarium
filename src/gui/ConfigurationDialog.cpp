@@ -59,6 +59,11 @@ void ConfigurationDialog::setVisible(bool v)
 {
 	if (v) 
 	{
+		if (dialog)
+		{
+			dialog->show();
+			return;
+		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
@@ -78,8 +83,7 @@ void ConfigurationDialog::setVisible(bool v)
 	}
 	else
 	{
-		dialog->deleteLater();
-		dialog = NULL;
+		dialog->hide();
 	}
 }
 
