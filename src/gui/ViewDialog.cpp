@@ -95,7 +95,7 @@ void ViewDialog::setVisible(bool v)
 		while (i.hasNext())
 		{
 			i.next();
-			l->addItem(q_(i.value()->getNameI18()));
+			l->addItem(i.value()->getNameI18());
 		}
 		l->setCurrentItem(l->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
 		ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
@@ -302,7 +302,7 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 	while (i.hasNext())
 	{
 		i.next();
-		if (q_(i.value()->getNameI18()) == projectionName)
+		if (i.value()->getNameI18() == projectionName)
 			break;
 	}
 
