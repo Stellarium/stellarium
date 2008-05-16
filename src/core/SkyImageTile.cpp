@@ -476,13 +476,11 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	if (map.contains("imageUrl"))
 	{
 		imageUrl = map.value("imageUrl").toString();
-	}
-	else
-	{
 		if (skyConvexPolygons.size()!=textureCoords.size())
 			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
-		noTexture = true;
 	}
+	else
+		noTexture = true;
 	
 	QVariantList subTilesl = map.value("subTiles").toList();
 	foreach (QVariant subTile, subTilesl)
