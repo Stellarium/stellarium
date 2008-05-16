@@ -7,7 +7,7 @@ import os
 import math
 import Image
 from astLib import astWCS
-from skyTile import *
+import skyTile
 
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
 # Define the invalid zones in the plates corners for N and S plates
@@ -43,9 +43,9 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		box = removeBoxS
 	
 	
-def createTile(currentLevel, i, j, outDirectory, plateName):
+def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName):
 	# Create the associated tile description
-	t = SkyImageTile()
+	t = skyTile.SkyImageTile()
 	t.level = currentLevel
 	t.i = i
 	t.j = j
@@ -86,78 +86,82 @@ def createTile(currentLevel, i, j, outDirectory, plateName):
 	v00 = wcs.pix2wcs(0,0)
 	t.minResolution = max(abs(v10[0]-v00[0])*math.cos(v00[1]*math.pi/180.), abs(v01[1]-v00[1]))
 	
-	if (currentLevel>=6):
+	if (currentLevel>=maxLevel):
 		return t
 	
 	# Recursively creates the 4 sub-tiles
-	sub = createTile(currentLevel+1, i*2, j*2, outDirectory, plateName)
+	sub = createTile(currentLevel+1, maxLevel, i*2, j*2, outDirectory, plateName)
 	if sub!=None:
 		t.subTiles.append(sub)
-	sub = createTile(currentLevel+1, i*2+1, j*2, outDirectory, plateName)
+	sub = createTile(currentLevel+1, maxLevel, i*2+1, j*2, outDirectory, plateName)
 	if sub!=None:
 		t.subTiles.append(sub)
-	sub = createTile(currentLevel+1, i*2+1, j*2+1, outDirectory, plateName)
+	sub = createTile(currentLevel+1, maxLevel, i*2+1, j*2+1, outDirectory, plateName)
 	if sub!=None:
 		t.subTiles.append(sub)
-	sub = createTile(currentLevel+1, i*2, j*2+1, outDirectory, plateName)
+	sub = createTile(currentLevel+1, maxLevel, i*2, j*2+1, outDirectory, plateName)
 	if sub!=None:
 		t.subTiles.append(sub)
 	return t
 
 
-def generateOne(inDirectory, outDirectory, doImages=True):
-	curLevel = 0
-	if not os.path.exists(outDirectory):
-		os.makedirs(outDirectory)
-	
-	if (doImages):
-		# Create a reduced 256x256 version of all the jpeg
-		for curLevel in range(0,len(levels)):
-			fullOutDir = outDirectory+"/x%.2d" % (2**curLevel)
-			if not os.path.exists(fullOutDir):
-				os.makedirs(fullOutDir)
-				print "Create directory "+fullOutDir
-			for i in range (0,2**curLevel):
-				for j in range(0,2**curLevel):
-					baseFileName = "x%.2d_%.2d_%.2d" % (2**curLevel, i,j)
-					im = Image.open(inDirectory+"/"+levels[curLevel]+"/"+inDirectory+'_'+"%.2d_%.2d_" % (i,j)+levels[curLevel]+".jpg")
-					# Enhance darker part of the image
-					im3 = im.point(lambda t : 2.*t-256.*(t/256.)**1.6)
-					im2 = im3.transform((256, 256), Image.EXTENT, (0,0,300,300), Image.BILINEAR)
-					im2.save(fullOutDir+'/'+baseFileName+".jpg")
-	
-	# Create all the JSON files
-	masterTile = createTile(0, 0, 0, outDirectory, inDirectory)
-	masterTile.outputJSON(prefix=outDirectory+'/', qCompress=True, maxLevelPerFile=4)
-		
-def main():
-	# TESTING
-	if len(sys.argv) < 3:
-		print "Usage: "+sys.argv[0]+" DSSDirName DSSOutDirName"
-		exit(0)
-	generateOne(sys.argv[1], sys.argv[2])
-	command = "scp -r " +outImgName+ " vosw@voint1.hq.eso.org:/work/fabienDSS/" + imgName;
-	print command
-	system(command)
-	
+def generateJpgTiles(inDirectory, outDirectory):
+	# Create a reduced 256x256 version of all the jpeg
+	for curLevel in range(0,len(levels)):
+		fullOutDir = outDirectory+"/x%.2d" % (2**curLevel)
+		if not os.path.exists(fullOutDir):
+			os.makedirs(fullOutDir)
+			print "Create directory "+fullOutDir
+		for i in range (0,2**curLevel):
+			for j in range(0,2**curLevel):
+				baseFileName = "x%.2d_%.2d_%.2d" % (2**curLevel, i,j)
+				im = Image.open(inDirectory+"/"+levels[curLevel]+"/"+inDirectory+'_'+"%.2d_%.2d_" % (i,j)+levels[curLevel]+".jpg")
+				# Enhance darker part of the image
+				im3 = im.point(lambda t : 2.*t-256.*(t/256.)**1.6)
+				im2 = im3.transform((256, 256), Image.EXTENT, (0,0,300,300), Image.BILINEAR)
+				im2.save(fullOutDir+'/'+baseFileName+".jpg")
+
+
 def all():
-	tmpDir = "/tmp/tmpPlate"
-	os.system("rm -r "+tmpDir)
+	outDir = "/tmp/tmpPlate"
+	nRange = range(400,425)
 	
-	nRange = range(402,403)
+	# Generate the top level file containing pointers on all
+	f = open('/tmp/allDSS.json', 'w')
+	f.write('{\n')
+	f.write('"minResolution" : 0.1,\n')
+	f.write('"luminance" : 1,\n')
+	f.write('"subTiles" : \n[\n')
+	for i in nRange:
+		plateName = "N%.3i" % i
+		ti = createTile(0, 0, 0, 0, outDir, plateName)
+		f.write('\t{\n')
+		f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
+		f.write('\t\t"skyConvexPolygons" : ')
+		skyTile.writePolys(ti.skyConvexPolygons, f)
+		f.write(',\n')
+		f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
+		f.write('\t},\n')
+	f.seek(-2, os.SEEK_CUR)
+	f.write('\n]}\n')	
+	f.close()
+	
 	
 	for i in nRange:
-		dirName = "N%.3i" % i
-		
-	for i in nRange:
-		dirName = "N%.3i" % i
-		generateOne(dirName, tmpDir, True)
+		if os.path.exists(outDir):
+			os.system("rm -r "+outDir)
+		os.makedirs(outDir)
 	
-		#command = "scp -r " +tmpDir+ " vosw@voint1.hq.eso.org:/work/fabienDSS/" + dirName;
-		#print command
-		#os.system(command)
-		#os.system("rm -r "+tmpDir)
+		plateName = "N%.3i" % i
+		generateJpgTiles(plateName, outDir)
 	
+		# Create all the JSON files
+		masterTile = createTile(0, 6, 0, 0, outDir, plateName)
+		masterTile.outputJSON(qCompress=True, maxLevelPerFile=2, outDir=outDir+'/')
+	
+		command = "scp -r " +outDir+ " vosw@voint1.hq.eso.org:/work/fabienDSS2/" + plateName;
+		print command
+		os.system(command)
 	
 if __name__ == "__main__":
     all()
