@@ -124,7 +124,7 @@ def generateJpgTiles(inDirectory, outDirectory):
 
 def all():
 	outDir = "/tmp/tmpPlate"
-	nRange = range(400,425)
+	nRange = range(400,450)
 	
 	# Generate the top level file containing pointers on all
 	f = open('/tmp/allDSS.json', 'w')
