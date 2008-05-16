@@ -6,6 +6,19 @@ import os
 import math
 import qt
 
+def writePolys(pl, f):
+	f.write('[')
+	for idx,poly in enumerate(pl):
+		f.write('[')
+		for iv,v in enumerate(poly):
+			f.write('[%.8f, %.8f]' % (v[0], v[1]))
+			if iv!=len(poly)-1:
+				f.write(', ')
+		f.write(']')
+		if idx!=len(pl)-1:
+			f.write(', ')
+	f.write(']')
+		
 class SkyImageTile:
 	def __init__(self):
 		self.subTiles = []
@@ -15,26 +28,13 @@ class SkyImageTile:
 		self.luminance = None
 		return
 	
-	def writePolys(self, pl, f):
-		f.write('[')
-		for idx,poly in enumerate(pl):
-			f.write('[')
-			for iv,v in enumerate(poly):
-				f.write('[%.8f, %.8f]' % (v[0], v[1]))
-				if iv!=len(poly)-1:
-					f.write(', ')
-			f.write(']')
-			if idx!=len(pl)-1:
-				f.write(', ')
-		f.write(']')
-		
-	def outputJSON(self, prefix='', qCompress=False, maxLevelPerFile=10):
+	def outputJSON(self, prefix='', qCompress=False, maxLevelPerFile=10, outDir=''):
 		"""Output the tiles tree in the JSON format"""
-		fName = prefix+"x%.2d_%.2d_%.2d.json" % (2**self.level, self.i, self.j)
+		fName = outDir+prefix+"x%.2d_%.2d_%.2d.json" % (2**self.level, self.i, self.j)
 		
 		# Actually write the file with maxLevelPerFile level
 		f = open(fName, 'w')
-		self.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, 0)
+		self.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, 0, outDir)
 		f.close()
 		
 		if (qCompress):
@@ -46,7 +46,7 @@ class SkyImageTile:
 			fout.close()
 			os.remove(fName)
 
-	def __subOutJSON(self, prefix, qCompress, maxLevelPerFile, f, curLev):
+	def __subOutJSON(self, prefix, qCompress, maxLevelPerFile, f, curLev, outDir):
 		levTab = ""
 		for i in range(0,curLev):
 			levTab += '\t'
@@ -59,10 +59,10 @@ class SkyImageTile:
 		if self.imageUrl:
 			f.write(levTab+'\t"imageUrl" : "'+self.imageUrl+'",\n')
 		f.write(levTab+'\t"skyConvexPolygons" : ')
-		self.writePolys(self.skyConvexPolygons, f)
+		writePolys(self.skyConvexPolygons, f)
 		f.write(',\n')
 		f.write(levTab+'\t"textureCoords" : ')
-		self.writePolys(self.textureCoords, f)
+		writePolys(self.textureCoords, f)
 		f.write(',\n')
 		if self.luminance:
 			f.write(levTab+'\t"luminance" : %f,\n' % 1.0)
@@ -77,12 +77,12 @@ class SkyImageTile:
 			# Write the tiles in the same file
 			for st in self.subTiles:
 				assert isinstance(st, SkyImageTile)
-				st.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, curLev+1)
+				st.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, curLev+1, outDir)
 				f.write(',\n')
 		else:
 			# Write the tiles in a new file
 			for st in self.subTiles:
-				st.outputJSON(prefix, qCompress, maxLevelPerFile)
+				st.outputJSON(prefix, qCompress, maxLevelPerFile, outDir)
 				f.write(levTab+'\t\t"'+prefix+"x%.2d_%.2d_%.2d.json" % (2**st.level, st.i, st.j))
 				if qCompress:
 					f.write(".qZ")
