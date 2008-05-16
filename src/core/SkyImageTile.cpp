@@ -373,7 +373,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#if 1
+#if 0
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
