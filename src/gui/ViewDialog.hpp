@@ -40,6 +40,7 @@ protected:
 	QWidget* dialog;
 	Ui_viewDialogForm* ui;
 private slots:
+	void populateLists();
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(const QString& landscapeName);

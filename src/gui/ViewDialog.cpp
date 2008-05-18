@@ -58,7 +58,11 @@ ViewDialog::~ViewDialog()
 void ViewDialog::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		shoutingStarsZHRChanged();
+		populateLists();
+	}
 }
 
 void ViewDialog::close()
@@ -79,36 +83,10 @@ void ViewDialog::setVisible(bool v)
 		ui->setupUi(dialog);
 		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
 		
-		// Fill the culture list widget from the available list
-		QListWidget* l = ui->culturesListWidget;
-		l->clear();
-		l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
-		updateSkyCultureText();
-		l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
-		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
-		
-		// Fill the projection list
-		l = ui->projectionListWidget;
-		l->clear();
-		const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
-		QMapIterator<QString, const Mapping*> i(mappings);
-		while (i.hasNext())
-		{
-			i.next();
-			l->addItem(i.value()->getNameI18());
-		}
-		l->setCurrentItem(l->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
-		ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
-		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
-		
-		// Fill the landscape list
-		l = ui->landscapesListWidget;
-		l->clear();
-		LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-		l->addItems(lmgr->getAllLandscapeNames());
-		l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
-		ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
-		connect(l, SIGNAL(currentTextChanged(const QString&)), this, SLOT(landscapeChanged(const QString&)));
+		populateLists();
+		connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
+		connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+		connect(ui->landscapesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(landscapeChanged(const QString&)));
 		
 		// Connect and initialize checkboxes and other widgets
 		
@@ -169,6 +147,7 @@ void ViewDialog::setVisible(bool v)
 		connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 		
 		// Landscape section
+		LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
 		ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
 		a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ground");
 		connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
@@ -258,6 +237,43 @@ void ViewDialog::setVisible(bool v)
 	}
 }
 
+void ViewDialog::populateLists()
+{
+	// Fill the culture list widget from the available list
+	QListWidget* l = ui->culturesListWidget;
+	l->blockSignals(true);
+	l->clear();
+	l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
+	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->blockSignals(false);
+	updateSkyCultureText();
+
+	// Fill the projection list
+	l = ui->projectionListWidget;
+	l->blockSignals(true);
+	l->clear();
+	const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
+	QMapIterator<QString, const Mapping*> i(mappings);
+	while (i.hasNext())
+	{
+		i.next();
+		l->addItem(i.value()->getNameI18());
+	}
+	l->setCurrentItem(l->findItems(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getNameI18(), Qt::MatchExactly).at(0));
+	l->blockSignals(false);
+	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
+
+	// Fill the landscape list
+	l = ui->landscapesListWidget;
+	l->blockSignals(true);
+	l->clear();
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	l->addItems(lmgr->getAllLandscapeNames());
+	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
+	l->blockSignals(false);
+	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+}
+
 void ViewDialog::skyCultureChanged(const QString& cultureName)
 {
 	StelApp::getInstance().getSkyCultureMgr().setSkyCulture(cultureName);
@@ -329,9 +345,8 @@ void ViewDialog::shoutingStarsZHRChanged()
 		zhr = 10000;
 	if (ui->zhr144000->isChecked())
 		zhr = 144000;
-	if (zhr==mmgr->getZHR())
-		return;
-	mmgr->setZHR(zhr);
+	if (zhr!=mmgr->getZHR())
+		mmgr->setZHR(zhr);
 	switch (zhr)
 	{
 		case 10:
