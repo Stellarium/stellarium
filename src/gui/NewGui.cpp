@@ -375,20 +375,7 @@ void NewGui::init()
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
 	StelMainGraphicsView::getInstance().setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
-	
-	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-	QString styleFilePath;
-	try
-	{
-		styleFilePath = fileMan.findFile("data/gui/normalStyle.css");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: can't find Qt style sheet";
-	}
-	QFile styleFile(styleFilePath);
-	styleFile.open(QIODevice::ReadOnly);
-	StelMainGraphicsView::getInstance().setStyleSheet(styleFile.readAll());
+	loadStyle("data/gui/normalStyle.css");
 	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -455,11 +442,16 @@ void NewGui::init()
 	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
 	
+	addGuiActions("action_Reload_Style", "Reload Style", "Ctrl+R", "debug", false, false);
+	
 	//QMetaObject::connectSlotsByName(Form);
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(close()));
+	
+	// Debug
+	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
 	
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
@@ -737,6 +729,30 @@ void NewGui::init()
 	
 	// Readjust position
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
+}
+
+//! Load a Qt style sheet to define the widgets style
+void NewGui::loadStyle(const QString& fileName)
+{
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	QString styleFilePath;
+	try
+	{
+		styleFilePath = fileMan.findFile(fileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: can't find Qt style sheet";
+	}
+	QFile styleFile(styleFilePath);
+	styleFile.open(QIODevice::ReadOnly);
+	StelMainGraphicsView::getInstance().setStyleSheet(styleFile.readAll());
+}
+
+//! Reload the current Qt Style Sheet (Debug only)
+void NewGui::reloadStyle()
+{
+	loadStyle("data/gui/normalStyle.css");
 }
 
 void NewGui::glWindowHasBeenResized(int ww, int hh)

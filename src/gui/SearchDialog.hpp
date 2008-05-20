@@ -21,16 +21,14 @@
 #define _SEARCHDIALOG_HPP_
 
 #include <QObject>
+#include "StelDialog.hpp"
 
 // pre declaratio of the ui class
 class Ui_searchDialogForm;
 
-/**
-	@class SearchDialog
-	
-	contains the search dialog widget 
-*/
-class SearchDialog : public QObject
+//!	@class SearchDialog
+//! contains the search dialog widget 
+class SearchDialog : public StelDialog
 {
 Q_OBJECT
 public:
@@ -38,15 +36,14 @@ public:
 	virtual ~SearchDialog();
 	void languageChanged();
 public slots:
+	// Add auto focus of the edit line
 	void setVisible(bool);
-	void close();
 	void onTextChanged(const QString& text);
 	void gotoObject();
-signals:
-	void closed();
 protected:
-	QWidget* dialog;
 	Ui_searchDialogForm* ui;
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();
 };
 
 #endif // _SEARCHDIALOG_HPP_

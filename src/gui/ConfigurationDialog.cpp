@@ -31,10 +31,8 @@
 #include <QFile>
 
 #include "StelAppGraphicsItem.hpp"
-#include <QDialog>
-#include <QGraphicsProxyWidget>
 
-ConfigurationDialog::ConfigurationDialog() : dialog(NULL)
+ConfigurationDialog::ConfigurationDialog()
 {
 	ui = new Ui_configurationDialogForm;
 }
@@ -50,41 +48,17 @@ void ConfigurationDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void ConfigurationDialog::close()
+void ConfigurationDialog::createDialogContent()
 {
-	emit closed();
-}
-
-void ConfigurationDialog::setVisible(bool v)
-{
-	if (v) 
-	{
-		if (dialog)
-		{
-			dialog->show();
-			return;
-		}
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
-		ui->setupUi(dialog);
-		connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
-		
-		// Fill the language list widget from the available list
-		QComboBox* c = ui->programLanguageComboBox;
-		c->clear();
-		c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-		c->setCurrentIndex(c->findText(StelApp::getInstance().getLocaleMgr().getAppLanguage(), Qt::MatchExactly));
-		connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
-		
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
-		proxy->setWindowFrameMargins(0,0,0,0);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		proxy->setZValue(100);
-		dialog->move(200, 100);
-	}
-	else
-	{
-		dialog->hide();
-	}
+	ui->setupUi(dialog);
+	connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
+	
+	// Fill the language list widget from the available list
+	QComboBox* c = ui->programLanguageComboBox;
+	c->clear();
+	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
+	c->setCurrentIndex(c->findText(StelApp::getInstance().getLocaleMgr().getAppLanguage(), Qt::MatchExactly));
+	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)

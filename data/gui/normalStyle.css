@@ -1,5 +1,9 @@
+QDialog {
+	background: rgba(42, 59, 80, 0%)
+}
+
 QFrame {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#2a3b50, stop: 1 #19233c);
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 50%), stop: 1 rgba(25, 35, 61, 50%));
 	border: 0px;
 	color : #babdc4;
     font-family: "DejaVu";

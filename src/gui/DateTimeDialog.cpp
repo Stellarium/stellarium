@@ -33,11 +33,8 @@
 #include <QValidator>
 
 #include "StelAppGraphicsItem.hpp"
-#include <QDialog>
-#include <QGraphicsProxyWidget>
 
 DateTimeDialog::DateTimeDialog() : 
-  dialog(0), 
   year(0),
   month(0),
   day(0),
@@ -48,74 +45,49 @@ DateTimeDialog::DateTimeDialog() :
 	ui = new Ui_dateTimeDialogForm;
 }
 
-void DateTimeDialog::close()
+void DateTimeDialog::createDialogContent()
 {
-	emit closed();
-}
+	ui->setupUi(dialog);
+	double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
 
-void DateTimeDialog::setVisible(bool v)
-{
-	if (v)
-	{
-		if (dialog)
-		{
-			dialog->show();
-			return;
-		}
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
-		ui->setupUi(dialog);
-		double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
-		setDateTime(jd + (StelApp::getInstance().getLocaleMgr().get_GMT_shift(jd)/24.0)); // UTC -> local tz
+	connect(ui->closeDateTime, SIGNAL(clicked()), this, SLOT(close()));
 
-		connect(ui->closeDateTime, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
+	connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
+	connect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
+	connect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
+	connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
+	connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
 
-		connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
-		connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
-		connect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
-		connect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
-		connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
-		connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
-
-		connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigation(), SLOT(setJDay(double)));
-		
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
-		proxy->setWindowFrameMargins(0,0,0,0);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		proxy->setZValue(100);
-		dialog->move(200, 100);
-	}
-	else
-	{
-		dialog->hide();
-	}
+	connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigation(), SLOT(setJDay(double)));
 }
 
 //! take in values, adjust for calendrical correctness if needed, and push to
 //! the widgets and signals
-
 bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 {
-  int dy, dm, dd, dh, dmin, ds;
-
-  if ( ! StelUtils::changeDateTimeForRollover(y, m, d, h, min, s,
-					      &dy, &dm, &dd, &dh, &dmin, &ds) ) {
-    dy = y;
-    dm = m;
-    dd = d;
-    dh = h;
-    dmin = min;
-    ds = s;
-  }
-
-  year = dy;
-  month = dm;
-  day = dd;
-  hour = dh;
-  minute = dmin;
-  second = ds;
-  pushToWidgets();
-  emit dateTimeChanged(newJd());
-  return true;
+	int dy, dm, dd, dh, dmin, ds;
+	
+	if ( ! StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &dy, &dm, &dd, &dh, &dmin, &ds) )
+	{
+		dy = y;
+		dm = m;
+		dd = d;
+		dh = h;
+		dmin = min;
+		ds = s;
+	}
+	
+	year = dy;
+	month = dm;
+	day = dd;
+	hour = dh;
+	minute = dmin;
+	second = ds;
+	pushToWidgets();
+	emit dateTimeChanged(newJd());
+	return true;
 }
 
 void DateTimeDialog::languageChanged()

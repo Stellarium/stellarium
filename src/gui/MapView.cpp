@@ -207,7 +207,7 @@ MapView::MapView(QWidget *parent)
 	populate();
 	
 	setScene(&scene);
-	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	setRenderHints(QPainter::SmoothPixmapTransform);
 }
 
 MapView::~MapView()
