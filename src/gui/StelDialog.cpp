@@ -72,7 +72,8 @@ void StelDialog::setVisible(bool v)
 		proxy->setWindowFrameMargins(2,0,2,2);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 		proxy->setZValue(100);
-		dialog->move(200, 100);
+		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+//		dialog->move(200, 100);
 	}
 	else
 	{
