@@ -3,7 +3,7 @@ QDialog {
 }
 
 QFrame {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 50%), stop: 1 rgba(25, 35, 61, 50%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 70%), stop: 1 rgba(25, 35, 61, 70%));
 	border: 0px;
 	color : #babdc4;
     font-family: "DejaVu";
@@ -25,17 +25,17 @@ QLabel {
 
 QLineEdit {
      border: 1.5px solid #2e2e36;
-     border-radius: 10px;
+     border-radius: 8px;
      padding: 0 8px;
-     background: white;
+     background: #d6d7da;
      selection-background-color: darkgray;
 }
 
 QPushButton {
   border: 1.5px solid #2e2e36;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-   stop: 0 #f6f7fa, stop: 1 #dadbde);
+   stop: 0 #d6d7da, stop: 1 #babbbe);
 }
 
 QPushButton:pressed {
