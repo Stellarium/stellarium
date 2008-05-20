@@ -20,20 +20,19 @@
 #ifndef _HELPDIALOG_HPP_
 #define _HELPDIALOG_HPP_
 
-#include <QWidget>
-#include <QTextBrowser>
 #include <QString>
 #include <QObject>
 #include <QMultiMap>
 #include <QPair>
 #include <QHash>
 
+#include "StelDialog.hpp"
+
 class Ui_helpDialogForm;
 
-class HelpDialog : public QObject
+class HelpDialog : public StelDialog
 {
-	Q_OBJECT
-
+	Q_OBJECT;
 public:
 	HelpDialog();
 
@@ -50,17 +49,11 @@ public:
 
 	void languageChanged();
 
-public slots:
-	void setVisible(bool);
-	void close();
-
-signals:
-	void closed();
-
 protected:
-	QWidget* dialog;
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();
+	
 	Ui_helpDialogForm* ui;
-
 
 private:
 	//! Return the header text.

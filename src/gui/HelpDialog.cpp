@@ -40,11 +40,9 @@
 #include "StelMainGraphicsView.hpp"
 
 #include "StelAppGraphicsItem.hpp"
-#include <QDialog>
-#include <QGraphicsProxyWidget>
 
 
-HelpDialog::HelpDialog() : dialog(NULL)
+HelpDialog::HelpDialog()
 {
 	ui = new Ui_helpDialogForm;
 
@@ -75,36 +73,12 @@ void HelpDialog::languageChanged()
 	}
 }
 
-void HelpDialog::close()
+void HelpDialog::createDialogContent()
 {
-	emit closed();
-}
-
-void HelpDialog::setVisible(bool v)
-{
-	if (v)
-	{
-		if (dialog)
-		{
-			dialog->show();
-			return;
-		}
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 		connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
 		
 		updateText();
-			
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
-		proxy->setWindowFrameMargins(0,0,0,0);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		proxy->setZValue(100);
-		dialog->move(200, 100);
-	}
-	else
-	{
-		dialog->hide();
-	}
 }
 
 void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)

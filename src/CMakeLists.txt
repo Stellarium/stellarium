@@ -198,6 +198,8 @@ SET(stellarium_lib_SRCS
 	gui/SearchDialog.cpp
 	gui/ConfigurationDialog.hpp
 	gui/ConfigurationDialog.cpp
+	gui/StelDialog.hpp
+	gui/StelDialog.cpp
 	
 	QtScriptMgr.cpp
 	QtScriptMgr.hpp
@@ -267,6 +269,7 @@ SET(stellarium_MOC_HDRS
 	gui/ViewDialog.hpp
 	gui/SearchDialog.hpp
 	gui/ConfigurationDialog.hpp
+	gui/StelDialog.hpp
 	StelMainGraphicsView.hpp
 	QtScriptMgr.hpp
 )

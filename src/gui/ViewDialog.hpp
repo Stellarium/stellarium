@@ -21,24 +21,21 @@
 #define _VIEWDIALOG_HPP_
 
 #include <QObject>
+#include "StelDialog.hpp"
 
 class Ui_viewDialogForm;
 
-class ViewDialog : public QObject
+class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
 	ViewDialog();
 	virtual ~ViewDialog();
 	void languageChanged();
-public slots:
-	void setVisible(bool);
-	void close();
-signals:
-	void closed();
 protected:
-	QWidget* dialog;
 	Ui_viewDialogForm* ui;
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();
 private slots:
 	void populateLists();
 	void skyCultureChanged(const QString& cultureName);
