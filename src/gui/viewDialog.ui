@@ -178,7 +178,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -1150,6 +1150,9 @@ p, li { white-space: pre-wrap; }
                  </property>
                  <property name="maximum" >
                   <number>9</number>
+                 </property>
+                 <property name="value" >
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
