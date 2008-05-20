@@ -167,6 +167,9 @@ public slots:
 	//! Set light pollution luminance level.
 	void setAtmosphereLightPollutionLuminance(double f);
 	
+	//! Set the light pollution following the Bortle Scale
+	void setAtmosphereBortleLightPollution(int bIndex);
+	
 private:
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the 

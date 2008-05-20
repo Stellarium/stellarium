@@ -65,7 +65,9 @@ public:
 	//! @return the last computed average luminance of the atmosphere in cd/m2.
 	float getAverageLuminance(void) const {return averageLuminance;}
 
+	//! Set the light pollution luminance in cd/m^2
 	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
+	//! Get the light pollution luminance in cd/m^2
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
 private:

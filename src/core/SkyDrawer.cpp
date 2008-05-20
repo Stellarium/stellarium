@@ -268,6 +268,13 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	return 0;
 }
 
+// Set the parameters so that the stars disapear at about the limit given by the bortle scale
+// See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+void SkyDrawer::setBortleScale(int bIndex)
+{
+	setMaxScaled60DegMag((double)bIndex*(-4./9.)+8);
+}
+
 Vec3f SkyDrawer::colorTable[128] = {
 	Vec3f(0.587877,0.755546,1.000000),
 	Vec3f(0.609856,0.750638,1.000000),
