@@ -498,6 +498,12 @@ double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const
 	return atmosphere->getLightPollutionLuminance();
 }
 
+//! Set the light pollution following the Bortle Scale
+void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
+{
+	setAtmosphereLightPollutionLuminance(MY_MAX(0.,0.015*(double)(bIndex-1)));
+}
+
 float LandscapeMgr::getLuminance(void) 
 {
 	return atmosphere->getRealDisplayIntensityFactor();
