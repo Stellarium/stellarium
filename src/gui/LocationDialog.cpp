@@ -29,10 +29,8 @@
 #include <QFrame>
 
 #include "StelAppGraphicsItem.hpp"
-#include <QDialog>
-#include <QGraphicsProxyWidget>
 
-LocationDialog::LocationDialog() : dialog(0)
+LocationDialog::LocationDialog()
 {
 	ui = new Ui_locationDialogForm;
 }
@@ -48,24 +46,11 @@ void LocationDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void LocationDialog::close()
+// Initialize the dialog widgets and connect the signals/slots
+void LocationDialog::createDialogContent()
 {
-	emit closed();
-}
-
-void LocationDialog::setVisible(bool v)
-{
-	if (v) 
-	{
-		if (dialog)
-		{
-			dialog->show();
-			return;
-		}
 		// We try to directly connect to the observer slots as much as we can
 		Observer* observer = StelApp::getInstance().getCore()->getObservatory();
-	
-		dialog = new QDialog(&StelMainGraphicsView::getInstance());
 		ui->setupUi(dialog);
 
 		// Init the SpinBox entries
@@ -85,17 +70,6 @@ void LocationDialog::setVisible(bool v)
 		// Init the position value
 		selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
 		spinBoxChanged();
-		
-		QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Tool);
-		proxy->setWindowFrameMargins(0,0,0,0);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-		proxy->setZValue(100);
-		dialog->move(200, 100);
-	}
-	else
-	{
-		dialog->hide();
-	}
 }
 
 void LocationDialog::selectPosition(double longitude, double latitude, int altitude, QString city)
@@ -124,4 +98,3 @@ void LocationDialog::spinBoxChanged()
 	int altitude = ui->altitudeSpinBox->value();
 	ui->graphicsView->select(longitude, latitude, altitude);
 }
-

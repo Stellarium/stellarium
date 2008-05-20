@@ -21,23 +21,20 @@
 #define _CONFIGURATIONDIALOG_HPP_
 
 #include <QObject>
+#include "StelDialog.hpp"
 
 class Ui_configurationDialogForm;
 
-class ConfigurationDialog : public QObject
+class ConfigurationDialog : public StelDialog
 {
-Q_OBJECT
+	Q_OBJECT;
 public:
 	ConfigurationDialog();
 	virtual ~ConfigurationDialog();
 	void languageChanged();
-public slots:
-	void setVisible(bool);
-	void close();
-signals:
-	void closed();
 protected:
-	QWidget* dialog;
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();	
 	Ui_configurationDialogForm* ui;
 private slots:
 	void languageChanged(const QString& languageCode);	

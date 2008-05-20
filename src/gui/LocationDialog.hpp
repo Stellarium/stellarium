@@ -21,29 +21,28 @@
 #define _LOCATIONDIALOG_HPP_
 
 #include <QObject>
+#include "StelDialog.hpp"
 
 class Ui_locationDialogForm;
 
-class LocationDialog : public QObject
+class LocationDialog : public StelDialog
 {
-Q_OBJECT
+	Q_OBJECT;
 public:
 	LocationDialog();
 	virtual ~LocationDialog();
 	void languageChanged();
 public slots:
-	void setVisible(bool);
-	void close();
 	//! Called when the mapView emit the positionSelected signal
 	void selectPosition(double longitude, double latitude, int altitude, QString city);
 	//! Called when the mapView emit the positionHighlighted signal
 	void highlightPosition(double longitude, double latitude, int altitude, QString city);
 	//! Called when the user direclty change the location from the spinbox
 	void spinBoxChanged();
-signals:
-	void closed();
 protected:
-	QWidget* dialog;
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();
+
 	Ui_locationDialogForm* ui;
 };
 

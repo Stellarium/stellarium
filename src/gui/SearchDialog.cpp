@@ -31,10 +31,8 @@
 #include <QFrame>
 
 #include "StelMainGraphicsView.hpp"
-#include <QDialog>
-#include <QGraphicsProxyWidget>
 
-SearchDialog::SearchDialog() : dialog(0)
+SearchDialog::SearchDialog()
 {
 	ui = new Ui_searchDialogForm;
 }
@@ -42,13 +40,6 @@ SearchDialog::SearchDialog() : dialog(0)
 SearchDialog::~SearchDialog()
 {
 	delete ui;
-	if (dialog)
-		delete dialog;
-}
-
-void SearchDialog::close()
-{
-	emit closed();
 }
 
 void SearchDialog::languageChanged()
@@ -61,37 +52,25 @@ void SearchDialog::languageChanged()
 	}
 }
 
-void SearchDialog::setVisible(bool v)
+
+// Initialize the dialog widgets and connect the signals/slots
+void SearchDialog::createDialogContent()
 {
-	if (v) 
-	{
-		if (dialog)
-		{
-			dialog->show();
-		}
-		else
-		{
-			dialog = new QDialog(&StelMainGraphicsView::getInstance());
-			ui->setupUi(dialog);
-			connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
-			connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
-			connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
-			onTextChanged(ui->lineEditSearchSkyObject->text());
-			connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
-			
-			QGraphicsProxyWidget* proxy = StelMainGraphicsView::getInstance().scene()->addWidget(dialog, Qt::Dialog);
-			proxy->setWindowFrameMargins(0,0,0,0);
-			proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-			proxy->setZValue(100);
-			dialog->move(200, 100);
-		}
-		// Set the focus directly on the line edit
+	ui->setupUi(dialog);
+	connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
+	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
+	onTextChanged(ui->lineEditSearchSkyObject->text());
+	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+}
+
+void SearchDialog::setVisible(bool v)
+{	
+	StelDialog::setVisible(v);
+		
+	// Set the focus directly on the line edit
+	if (ui->lineEditSearchSkyObject->isVisible())
 		ui->lineEditSearchSkyObject->setFocus();
-	}
-	else
-	{
-		dialog->hide();
-	}
 }
 
 void SearchDialog::onTextChanged(const QString& text)
