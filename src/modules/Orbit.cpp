@@ -285,11 +285,11 @@ Vec3d EllipticalOrbit::positionAtE(double E) const
         z = 0.0;
     }
 
-    Mat4d R = (Mat4d::yrotation(ascendingNode) *
+    Mat4d R = (Mat4d::zrotation(ascendingNode) *
                Mat4d::xrotation(inclination) *
-               Mat4d::yrotation(argOfPeriapsis));
+               Mat4d::zrotation(argOfPeriapsis));
 
-    return R * Vec3d(x, 0, z);
+    return R * Vec3d(x, -z, 0);
 }
 
 
@@ -323,9 +323,9 @@ Vec3d EllipticalOrbit::positionAtTime(double t) const
 void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(double JD, double* v) const
 {
   Vec3d pos = positionAtTime(JD);
-  v[0] = rotate_to_vsop87[0]*pos[2] + rotate_to_vsop87[1]*pos[0] + rotate_to_vsop87[1]*pos[1];
-  v[1] = rotate_to_vsop87[3]*pos[2] + rotate_to_vsop87[4]*pos[0] + rotate_to_vsop87[5]*pos[1];
-  v[2] = rotate_to_vsop87[6]*pos[2] + rotate_to_vsop87[7]*pos[0] + rotate_to_vsop87[8]*pos[1];
+  v[0] = rotate_to_vsop87[0]*pos[0] + rotate_to_vsop87[1]*pos[1] + rotate_to_vsop87[2]*pos[2];
+  v[1] = rotate_to_vsop87[3]*pos[0] + rotate_to_vsop87[4]*pos[1] + rotate_to_vsop87[5]*pos[2];
+  v[2] = rotate_to_vsop87[6]*pos[0] + rotate_to_vsop87[7]*pos[1] + rotate_to_vsop87[8]*pos[2];
 }
 
 double EllipticalOrbit::getPeriod() const
