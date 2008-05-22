@@ -232,6 +232,7 @@ MappingCylinder MappingCylinder::instance;
 
 bool MappingCylinder::forward(Vec3d &v) const
 {
+	if (v[1] <= -1.0 || v[1] >= 1.0) return false;
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const double alpha = std::atan2(v[0],-v[2]);
 	const double delta = std::asin(v[1]/r);
@@ -261,6 +262,65 @@ double MappingCylinder::viewScalingFactorToFov(double vsf) const
 }
 
 double MappingCylinder::deltaZoom(double fov) const
+{
+	return fov;
+}
+
+
+MappingMercator::MappingMercator(void)
+{
+	// assume aspect ration of 4/3 for getting a full 360 degree horizon:
+	maxFov = 175.0 * 4/3;
+}
+
+QString MappingMercator::getNameI18() const
+{
+	return q_("Mercator");
+}
+
+QString MappingMercator::getDescriptionI18() const
+{
+	return q_("Mercator projection");
+}
+
+MappingMercator MappingMercator::instance;
+
+bool MappingMercator::forward(Vec3d &v) const
+{
+	if (v[1] <= -1.0 || v[1] >= 1.0) return false;
+	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const double sin_delta = v[1]/r;
+	v[0] = std::atan2(v[0],-v[2]);
+	v[1] = std::log((1.0+sin_delta)/(1.0-sin_delta));
+	v[2] = r;
+	return true;
+}
+
+
+bool MappingMercator::backward(Vec3d &v) const
+{
+	const double E = std::exp(0.5*v[1]);
+	const double h = E*E;
+	const double h1 = 1.0/(1.0+h);
+	const double sin_delta = (h-1.0)*h1;
+	const double cos_delta = 2.0*E*h1;
+	v[2] = - cos_delta * std::cos(v[0]);
+	v[0] = cos_delta * std::sin(v[0]);
+	v[1] = sin_delta;
+	return true;
+}
+
+double MappingMercator::fovToViewScalingFactor(double fov) const
+{
+	return fov;
+}
+
+double MappingMercator::viewScalingFactorToFov(double vsf) const
+{
+	return vsf;
+}
+
+double MappingMercator::deltaZoom(double fov) const
 {
 	return fov;
 }

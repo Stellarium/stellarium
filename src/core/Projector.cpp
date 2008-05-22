@@ -120,6 +120,7 @@ void Projector::init()
 	registerProjectionMapping(MappingStereographic::getMapping());
 	registerProjectionMapping(MappingFisheye::getMapping());
 	registerProjectionMapping(MappingCylinder::getMapping());
+	registerProjectionMapping(MappingMercator::getMapping());
 	registerProjectionMapping(MappingPerspective::getMapping());
 	registerProjectionMapping(MappingOrthographic::getMapping());
 

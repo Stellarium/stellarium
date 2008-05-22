@@ -132,6 +132,23 @@ private:
 	double deltaZoom(double fov) const;
 };
 
+class MappingMercator : public Mapping
+{
+public:
+    MappingMercator(void);
+	virtual QString getId(void) const {return "mercator";}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	static Mapping *getMapping(void) {return &instance;}
+private:
+	static MappingMercator instance;
+	bool forward(Vec3d &win) const;
+	bool backward(Vec3d &v) const;
+	double fovToViewScalingFactor(double fov) const;
+	double viewScalingFactorToFov(double vsf) const;
+	double deltaZoom(double fov) const;
+};
+
 class MappingOrthographic : public Mapping
 {
 public:
