@@ -35,10 +35,18 @@ public:
 	void languageChanged();
 
 public slots:
-	// 	//! Called when the time8601 emits textEditing(const QString&)
-	// 	void dateTimeEdited(const QString &v);
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
+
+signals:
+	//! signals that a new, valid JD is available.
+	void dateTimeChanged(double newJd);
+
+protected:
+	//! Initialize the dialog widgets and connect the signals/slots
+	virtual void createDialogContent();
+	
+private slots:
 	//! year slider or dial changed
 	void yearChanged(int ny);
 	//! year slider or dial changed
@@ -51,27 +59,8 @@ public slots:
 	void minuteChanged(int nm);
 	//! year slider or dial changed
 	void secondChanged(int ns);
-
-signals:
-	//! signals that a new, valid JD is available.
-	void dateTimeChanged(double newJd);
-	//! year slider or dial update
-	void yearUpdate(int ny);
-	//! year slider or dial update
-	void monthUpdate(int nm);
-	//! year slider or dial update
-	void dayUpdate(int nd);
-	//! year slider or dial update
-	void hourUpdate(int nh);
-	//! year slider or dial update
-	void minuteUpdate(int nm);
-	//! year slider or dial update
-	void secondUpdate(int ns);
-
-protected:
-	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
 	
+private:
 	Ui_dateTimeDialogForm* ui;
 	int year;
 	int month;

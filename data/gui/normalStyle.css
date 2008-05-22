@@ -3,10 +3,14 @@ QDialog {
 }
 
 QFrame {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 70%), stop: 1 rgba(25, 35, 61, 70%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 40%), stop: 1 rgba(25, 35, 61, 40%));
 	border: 0px;
 	color : #aaada4;
     font-family: "DejaVu";
+}
+
+QFrame:active {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(42, 59, 80, 90%), stop: 1 rgba(25, 35, 61, 90%));
 }
 
 DialogFrame {
@@ -19,16 +23,18 @@ ResizeFrame {
  background-image: url(data/gui/resize.png);
 }
 
-QLabel {
+
+QLabel, QLabel:active {
 	background: None;
 }
 
 QLineEdit {
-     border: 1.5px solid #2e2e36;
+     border: 1.5px solid #1e1e26;
      border-radius: 8px;
      padding: 0 8px;
-     background: #d6d7da;
+     background: rgba(25, 35, 61, 40%);
      selection-background-color: darkgray;
+     color: #aaada4;
 }
 
 QPushButton {
@@ -121,45 +127,45 @@ QTabBar::tab {
     color: #aaada4;
 }
 
-     QTabBar::tab:selected, QTabBar::tab:hover {
-         background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
+QTabBar::tab:selected, QTabBar::tab:hover {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	#19233c, stop: 1 #2a3b50);
 }
 
-     QTabBar::tab:selected {
-         border-color: #A2A78B;
-         border-bottom-color: #2a3b50; /* same as pane color */
+QTabBar::tab:selected {
+	border-color: #A2A78B;
+	border-bottom-color: #2a3b50; /* same as pane color */
 }
 
-     QTabBar::tab:!selected {
-         margin-top: 2px; /* make non-selected tabs look smaller */
+QTabBar::tab:!selected {
+	margin-top: 2px; /* make non-selected tabs look smaller */
 }
 
-     /* make use of negative margins for overlapping tabs */
-     QTabBar::tab:selected {
-         /* expand/overlap to the left and right by 4px */
-         margin-left: -4px;
-         margin-right: -4px;
+/* make use of negative margins for overlapping tabs */
+QTabBar::tab:selected {
+	/* expand/overlap to the left and right by 4px */
+	margin-left: -4px;
+	margin-right: -4px;
 }
 
-     QTabBar::tab:first:selected {
-         margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+QTabBar::tab:first:selected {
+	margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
 }
 
-     QTabBar::tab:last:selected {
-         margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+QTabBar::tab:last:selected {
+	margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
 }
 
-     QTabBar::tab:only-one {
-         margin: 0; /* if there is only one tab, we don't want overlapping margins */
+QTabBar::tab:only-one {
+	margin: 0; /* if there is only one tab, we don't want overlapping margins */
 }
 
-QListWidget {
+QListWidget, QListWidget:active {
  	background: solid rgba(18, 19, 36, 70%);
 	border: 1px;
     border-radius: 4px;
     border-color: #081f25;
     border-style: solid;
-  selection-background-color: #2a3b50;
+	selection-background-color: #2a3b50;
 }
 
 QCheckBox

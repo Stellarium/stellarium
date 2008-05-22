@@ -34,7 +34,7 @@
 
 StelAppGraphicsItem* StelAppGraphicsItem::singleton = NULL;
  
-StelAppGraphicsItem::StelAppGraphicsItem() 
+StelAppGraphicsItem::StelAppGraphicsItem() : tempPainter(NULL)
 {
 	assert(!singleton);
 	singleton = this;
@@ -73,20 +73,12 @@ void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 	}
 }
 
-//! Paint the whole Core of stellarium
-//! This method is called automatically by the GraphicsView
-void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+//! Switch to native OpenGL painting, i.e not using QPainter
+//! After this call revertToQtPainting MUST be called
+void StelAppGraphicsItem::switchToNativeOpenGLPainting()
 {
-	scene()->views().at(0)->setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	
-	const double now = StelApp::getInstance().getTotalRunTime();
-	double dt = now-previousTime;
-	previousTime = now;
-	if (dt<0)	// This fix the star scale bug!!
-		return;
-	
-	// Update the core and all modules
-	StelApp::getInstance().update(dt);
+	// Ensure that we are in the drawing part of the code, and therefore that a painter was valid before
+	assert(tempPainter);
 	
 	// Save openGL projection state
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -102,6 +94,38 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
 	glDisable(GL_ALPHA_TEST);
+}
+
+//! Revert openGL state so that Qt painting works again
+//! @return a painter that can be used
+QPainter* StelAppGraphicsItem::revertToQtPainting()
+{
+	// Restore openGL projection state for Qt drawings
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glPopAttrib();
+	return tempPainter;
+}
+
+//! Paint the whole Core of stellarium
+//! This method is called automatically by the GraphicsView
+void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+	scene()->views().at(0)->setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	
+	const double now = StelApp::getInstance().getTotalRunTime();
+	double dt = now-previousTime;
+	previousTime = now;
+	if (dt<0)	// This fix the star scale bug!!
+		return;
+	
+	// Update the core and all modules
+	StelApp::getInstance().update(dt);
+	
+	tempPainter = painter;
+	switchToNativeOpenGLPainting();
 	
 	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
 	
@@ -115,12 +139,8 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	StelApp::getInstance().draw();
 	distorter->distort();
 	
-	// Restore openGL projection state for Qt drawings
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glPopAttrib();
+	revertToQtPainting();
+	tempPainter = NULL;
 }
 
 void StelAppGraphicsItem::recompute()

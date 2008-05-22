@@ -58,6 +58,14 @@ public:
 	int width() {return (int)(rect().width());}
 	int height() {return (int)(rect().height());}
 	
+	//! Switch to native OpenGL painting, i.e not using QPainter
+	//! After this call revertToQtPainting MUST be called
+	void switchToNativeOpenGLPainting();
+
+	//! Revert openGL state so that Qt painting works again
+	//! @return a painter that can be used
+	QPainter* revertToQtPainting();
+	
 protected:
  	virtual bool sceneEvent(QEvent* event);
 	virtual void keyPressEvent(QKeyEvent* event);
@@ -85,6 +93,8 @@ private:
 	
 	// The StelAppGraphicsItem singleton
 	static StelAppGraphicsItem* singleton;
+	
+	QPainter* tempPainter;
 };
 
 #endif /*STELAPPGRAPHICITEM_HPP_*/
