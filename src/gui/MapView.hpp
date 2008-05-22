@@ -36,8 +36,6 @@ Q_OBJECT
 public:
 	enum SelectionMode {SELECT_CITIES = 0, SELECT_POSITIONS}; 
 protected:
-	//! The scene
-	QGraphicsScene scene;
 	//! The world map image
 	QPixmap pix;
 	QGraphicsPixmapItem* pixItem;

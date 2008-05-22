@@ -105,30 +105,32 @@ QString Planet::getInfoString(const Navigator * nav) const
 	
 	QString str;
 	QTextStream oss(&str);
-
-	oss << englishName;  // UI translation can differ from sky translation
+	const Vec3f& c = getInfoColor();
+	oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
+	
+	oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphere_scale != 1.f)
 		oss << " (x" << sphere_scale << ")";
-	oss << endl;
+	oss << "</h2>";
 
 	oss.setRealNumberPrecision(2);
-	oss << q_("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos()) << endl;
+	oss << q_("Magnitude: ") << "<b>" << compute_magnitude(nav->getObserverHelioPos()) << "</b><br>";
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
-	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
+	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
 	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2)
 		tempRA -= M_PI*2;
-	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
+	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
 
 	oss.setRealNumberPrecision(8);
-	oss << q_("Distance: ") << equPos.length() << q_("AU") << endl;
+	oss << q_("Distance: ") << equPos.length() << q_("AU");
 	
 	return str;
 }

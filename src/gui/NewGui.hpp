@@ -111,7 +111,7 @@ private:
 	QGraphicsSimpleTextItem* fps;
 };
 
-//! The button bar on the bottom containing actions toggle buttons
+//! The informations about the currently selected object
 class InfoPanel : public QGraphicsItem
 {
 public:
@@ -119,7 +119,7 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 private:
-	QGraphicsSimpleTextItem* text;
+	QGraphicsTextItem* text;
 	StelObjectP object;
 };
 
