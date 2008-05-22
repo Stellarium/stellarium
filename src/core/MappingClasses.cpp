@@ -291,7 +291,7 @@ bool MappingMercator::forward(Vec3d &v) const
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const double sin_delta = v[1]/r;
 	v[0] = std::atan2(v[0],-v[2]);
-	v[1] = std::log((1.0+sin_delta)/(1.0-sin_delta));
+	v[1] = 0.5*std::log((1.0+sin_delta)/(1.0-sin_delta));
 	v[2] = r;
 	return true;
 }
@@ -299,7 +299,7 @@ bool MappingMercator::forward(Vec3d &v) const
 
 bool MappingMercator::backward(Vec3d &v) const
 {
-	const double E = std::exp(0.5*v[1]);
+	const double E = std::exp(v[1]);
 	const double h = E*E;
 	const double h1 = 1.0/(1.0+h);
 	const double sin_delta = (h-1.0)*h1;
