@@ -132,54 +132,54 @@ QRectF CityItem::boundingRect() const
 //! We redefine this method to bypass all the matrix transformation and gain speed
 void CityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	int cityZoom = city->getShowAtZoom();
-	if (cityZoom == 0) cityZoom = 8;
-	if (view->getScale() < cityZoom && !selected) 
-	{
-		// If the city is not visible, we can't select it either
-		setAcceptsHoverEvents(false);
-		setAcceptedMouseButtons(0);
-		return;
-	}
-	// If the city is visible we can select it with the mouse
-	setAcceptsHoverEvents(true);
-	setAcceptedMouseButtons(Qt::LeftButton);
-	// We scale the city so that the selection shape stays the same
-	float scale = 1. / view->getScale();
-	setMatrix(QMatrix(scale, 0, 0, scale, 0, 0));
-	
-	if (selected)
-	{
-		// painter->setBrush(brush);
-		painter->setPen(pen);
-	}
-
-	// Draw the point
-	QPointF pos = view->mapFromScene(this->pos());
-	painter->save();
-	painter->resetMatrix();
-	painter->drawEllipse((int)pos.x() - 2, (int)pos.y() - 2, 4, 4);
-	
-	// then the text
-	if (city->getShowAtZoom() != 0 || selected)
-	{
-		painter->drawText((int)pos.x() + 2, (int)pos.y() - 2, city->getName());
-	}
-	painter->restore();
+// 	int cityZoom = city->getShowAtZoom();
+// 	if (cityZoom == 0) cityZoom = 8;
+// 	if (view->getScale() < cityZoom && !selected) 
+// 	{
+// 		// If the city is not visible, we can't select it either
+// 		setAcceptsHoverEvents(false);
+// 		setAcceptedMouseButtons(0);
+// 		return;
+// 	}
+// 	// If the city is visible we can select it with the mouse
+// 	setAcceptsHoverEvents(true);
+// 	setAcceptedMouseButtons(Qt::LeftButton);
+// 	// We scale the city so that the selection shape stays the same
+// 	float scale = 1. / view->getScale();
+// 	setMatrix(QMatrix(scale, 0, 0, scale, 0, 0));
+// 	
+// 	if (selected)
+// 	{
+// 		// painter->setBrush(brush);
+// 		painter->setPen(pen);
+// 	}
+// 
+// 	// Draw the point
+// 	QPointF pos = view->mapFromScene(this->pos());
+// 	painter->save();
+// 	painter->resetMatrix();
+// 	painter->drawEllipse((int)pos.x() - 2, (int)pos.y() - 2, 4, 4);
+// 	
+// 	// then the text
+// 	if (city->getShowAtZoom() != 0 || selected)
+// 	{
+// 		painter->drawText((int)pos.x() + 2, (int)pos.y() - 2, city->getName());
+// 	}
+// 	painter->restore();
 }
 
 void CityItem::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
-	selected = true;
-	view->highlightCity(city);
-	view->update();
+// 	selected = true;
+// 	view->highlightCity(city);
+// 	view->update();
 }
 
 void CityItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
-	selected = false;
-	view->highlightCity(0);
-	view->update();
+// 	selected = false;
+// 	view->highlightCity(0);
+// 	view->update();
 }
 
 void CityItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -191,23 +191,23 @@ void CityItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	view->select(city);
 }
 
-MapView::MapView(QWidget *parent)
- : QGraphicsView(parent), pix("./data/gui/world.png"), pointeurPix("./data/gui/map-pointeur.png")
+MapView::MapView(QWidget *parent) : QGraphicsView(parent), pix("data/gui/world.png"), pointeurPix("data/gui/map-pointeur.png")
 {
+	QGraphicsScene* scene = new QGraphicsScene();
+	setScene(scene);
+	setRenderHints(QPainter::SmoothPixmapTransform);
 	
-	scene.setSceneRect(-180, -90, 360, 180);
 	// Add the world bitmap and scale it so that is is in the same coordinate that the cities
-	pixItem = scene.addPixmap(pix);
+	pixItem = scene->addPixmap(pix);
 	pixItem->translate(-180, -90);
 	pixItem->scale(360. / pix.size().width(), 180. / pix.size().height());
-	
-	float scale = 2; // TODO: find a way to get the real initial scalling !!!
-	QGraphicsView::scale(scale, scale);
-	
+
 	populate();
 	
-	setScene(&scene);
-	setRenderHints(QPainter::SmoothPixmapTransform);
+	scene->setSceneRect(-180, -90, 360, 180);
+	
+	float scale = 2; // TODO: find a way to get the real initial scaling !!!
+	QGraphicsView::scale(scale, scale);
 }
 
 MapView::~MapView()
@@ -252,7 +252,7 @@ void MapView::populate(const QString& filename)
 	QList<City>::iterator city;
 	for(city = cities.begin(); city < cities.end(); ++city)
 	{
-		scene.addItem(new CityItem(&*city, this));
+		scene()->addItem(new CityItem(&*city, this));
 	}
 }
 
@@ -304,16 +304,16 @@ void MapView::mousePressEvent(QMouseEvent * event)
 
 void MapView::mouseMoveEvent(QMouseEvent * event)
 {
-	if (dragMode() == ScrollHandDrag)
-	{
-		return QGraphicsView::mouseMoveEvent(event);
-	}
-	if (event->buttons() & Qt::LeftButton)
-	{
-		setDragMode(ScrollHandDrag);
-		setInteractive(false);
-		mousePressEvent(new QMouseEvent(QEvent::MouseButtonPress, event->pos(), Qt::LeftButton, event->buttons(), event->modifiers()));
-	}
+// 	if (dragMode() == ScrollHandDrag)
+// 	{
+// 		return QGraphicsView::mouseMoveEvent(event);
+// 	}
+// 	if (event->buttons() & Qt::LeftButton)
+// 	{
+// 		setDragMode(ScrollHandDrag);
+// 		setInteractive(false);
+// 		mousePressEvent(new QMouseEvent(QEvent::MouseButtonPress, event->pos(), Qt::LeftButton, event->buttons(), event->modifiers()));
+// 	}
 	QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -334,7 +334,3 @@ void MapView::mouseReleaseEvent(QMouseEvent * event)
 	QPointF pos = mapToScene(event->pos());
 	select(pos.x(), -pos.y());
 }
-
-
-
-

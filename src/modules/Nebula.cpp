@@ -62,6 +62,9 @@ QString Nebula::getInfoString(const Navigator* nav) const
 
 	QString str;
 	QTextStream oss(&str);
+	const Vec3f& c = getInfoColor();
+	oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
+	oss << "<h2>";
 	if (nameI18!="")
 	{
 		oss << nameI18 << " (";
@@ -82,24 +85,22 @@ QString Nebula::getInfoString(const Navigator* nav) const
 	{
 		oss << ")";
 	}
-	oss << endl;
-
+	oss << "</h2>";;
+	
+	oss << q_("Type: ") << "<b>" << getTypeString() << "</b><br>";
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(2);
-	oss << q_("Magnitude: ") << mag << endl;	
-	
-	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
+	if (mag < 50) 
+		oss << q_("Magnitude: ") << "<b>" << mag << "</b><br>";	
+	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << endl;
-	
-	oss << q_("Type: ") << getTypeString() << endl;
+	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
 	if (angularSize>0)
-		oss << q_("Size: ") << StelUtils::radToDmsStr(angularSize*M_PI/180.) << endl;
-	
+		oss << q_("Size: ") << StelUtils::radToDmsStr(angularSize*M_PI/180.);
 	return str;
 }
 

@@ -37,6 +37,9 @@
 #include <QString>
 #include <QSettings>
 
+// #include "StelAppGraphicsItem.hpp"
+// #include <QPainter>
+
 const QString Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
 	if (type == DISK )
@@ -982,6 +985,11 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 	glTranslatef(x,y,0);
 	glRotatef(angleDeg,0,0,1);
 	glTranslatef(0,font->getLineHeight(),0);
+// 	QPainter* painter = StelAppGraphicsItem::getInstance().revertToQtPainting();
+// 	painter->setRenderHints(QPainter::TextAntialiasing);
+// 	painter->drawText(QPointF(x, y), str);
+// 	StelAppGraphicsItem::getInstance().switchToNativeOpenGLPainting();
+	//StelMainGraphicsView::getInstance().getOpenGLWin()->renderText(xshift, yshift, 0., str);
 	font->print(xshift, yshift, str);
 	glPopMatrix();
 }

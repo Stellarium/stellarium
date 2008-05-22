@@ -260,14 +260,7 @@ QRectF BottomStelBar::boundingRect() const
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
-	QFont font("DejaVuSans", 10);
-	QColor color = QColor::fromRgbF(.8,.8,.8,1);
-	QBrush brush(color);
-	text = new QGraphicsSimpleTextItem("", this);
-
-	text->setFont(font);
-	text->setBrush(brush);
-
+	text = new QGraphicsTextItem("", this);
 	object = NULL;
 }
 
@@ -276,12 +269,12 @@ void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	std::vector<StelObjectP> selected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 
 	if (selected.size() == 0)
-		text->setText("");
+		text->setHtml("");
 	else
 	{
 		// just print details of the first item for now
 		StelCore* core = StelApp::getInstance().getCore();
-		text->setText(selected[0]->getInfoString(core->getNavigation()));
+		text->setHtml(selected[0]->getInfoString(core->getNavigation()));
 	}
 }
 
@@ -295,6 +288,7 @@ StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
 	roundSize = 6;
 	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	aPen.setWidthF(1.);
+	setBrush(QBrush(QColor::fromRgbF(0.1, 0.13, 0.23, 0.2)));
 	setPen(aPen);
 }
 
@@ -313,6 +307,7 @@ void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 	newPath.lineTo(p2.x()+r2.width(),p2.y()-roundSize);
 	newPath.arcTo(p2.x()+r2.width()-roundSize, p2.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
 	newPath.lineTo(p2.x()+r2.width()+roundSize, p2.y()+r2.height()+roundSize);
+	newPath.lineTo(p.x()-roundSize, p2.y()+r2.height()+roundSize);
 	setPath(newPath);
 }
 
@@ -719,6 +714,7 @@ void NewGui::init()
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(NULL);
 	buttonBarPath->updatePath(buttonBar, winBar);
+	buttonBarPath->setZValue(-0.1);
 	
 	QGraphicsScene* scene = StelMainGraphicsView::getInstance().scene();
 	scene->addItem(buttonHelpLabel);
@@ -803,10 +799,22 @@ void NewGui::updateI18n()
 void NewGui::update(double deltaTime)
 {
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	if (buttonTimeRewind->isChecked())
+	if (nav->getTimeSpeed()<-0.99*JD_SECOND)
+	{
+		buttonTimeRewind->setChecked(true);
+	}
+	else
+	{
 		buttonTimeRewind->setChecked(false);
-	if (buttonTimeForward->isChecked())
+	}
+	if (nav->getTimeSpeed()>1.01*JD_SECOND)
+	{
+		buttonTimeForward->setChecked(true);
+	}
+	else
+	{
 		buttonTimeForward->setChecked(false);
+	}
 	if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
 	{
 		buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
