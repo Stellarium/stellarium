@@ -2,6 +2,8 @@
 //
 // Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
 //
+// CometOrbit, InitHyp,InitPar,InitEll,Init3D: Copyright (C) 1995,2007,2008 Johannes Gajdosik
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -85,13 +87,44 @@ void Init3D(double i,double Omega,double o,double a1,double a2,
   x3 = d31*a1+d32*a2;
 }
 
+CometOrbit::CometOrbit(double pericenter_distance,
+                       double eccentricity,
+                       double inclination,
+                       double ascendingNode,
+                       double arg_of_perhelion,
+                       double time_at_perihelion,
+                       double mean_motion,
+                       double parent_rot_obliquity,
+                       double parent_rot_ascendingnode)
+           :q(pericenter_distance),e(eccentricity),i(inclination),
+            Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion),
+            n(mean_motion) {
+  const double c_obl = cos(parent_rot_obliquity);
+  const double s_obl = sin(parent_rot_obliquity);
+  const double c_nod = cos(parent_rot_ascendingnode);
+  const double s_nod = sin(parent_rot_ascendingnode);
+  rotate_to_vsop87[0] =  c_nod;
+  rotate_to_vsop87[1] = -s_nod * c_obl;
+  rotate_to_vsop87[2] =  s_nod * s_obl;
+  rotate_to_vsop87[3] =  s_nod;
+  rotate_to_vsop87[4] =  c_nod * c_obl;
+  rotate_to_vsop87[5] = -c_nod * s_obl;
+  rotate_to_vsop87[6] =  0.0;
+  rotate_to_vsop87[7] =          s_obl;
+  rotate_to_vsop87[8] =          c_obl;
+}
+
 void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
   JD -= t0;
   double a1,a2;
   if (e < 1.0) InitEll(q,n,e,JD,a1,a2);
   else if (e > 1.0) InitHyp(q,n,e,JD,a1,a2);
   else InitPar(q,n,JD,a1,a2);
-  Init3D(i,Om,o,a1,a2,v[0],v[1],v[2]);
+  double p0,p1,p2;
+  Init3D(i,Om,o,a1,a2,p0,p1,p2);
+  v[0] = rotate_to_vsop87[0]*p0 + rotate_to_vsop87[1]*p1 + rotate_to_vsop87[1]*p2;
+  v[1] = rotate_to_vsop87[3]*p0 + rotate_to_vsop87[4]*p1 + rotate_to_vsop87[5]*p2;
+  v[2] = rotate_to_vsop87[6]*p0 + rotate_to_vsop87[7]*p1 + rotate_to_vsop87[8]*p2;
 }
 
 

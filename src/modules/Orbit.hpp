@@ -2,6 +2,8 @@
 //
 // Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
 //
+// CometOrbit: Copyright (C) 2007,2008 Johannes Gajdosik
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -87,10 +89,9 @@ public:
              double ascendingNode,
              double arg_of_perhelion,
              double time_at_perihelion,
-             double mean_motion)
-     :q(pericenter_distance),e(eccentricity),i(inclination),
-      Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion),
-      n(mean_motion) {}
+             double mean_motion,
+             double parent_rot_obliquity,
+             double parent_rot_ascendingnode);
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
   void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
@@ -102,6 +103,7 @@ private:
   const double o;
   const double t0;
   const double n;
+  double rotate_to_vsop87[9];
 };
 
 
