@@ -77,9 +77,6 @@ void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 //! After this call revertToQtPainting MUST be called
 void StelAppGraphicsItem::switchToNativeOpenGLPainting()
 {
-	// Ensure that we are in the drawing part of the code, and therefore that a painter was valid before
-	assert(tempPainter);
-	
 	// Save openGL projection state
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glMatrixMode(GL_PROJECTION);
@@ -109,6 +106,39 @@ QPainter* StelAppGraphicsItem::revertToQtPainting()
 	return tempPainter;
 }
 
+
+QPainter* StelAppGraphicsItem::switchToQPainting()
+{
+	if (tempPainter)
+	{
+		tempPainter->save();
+		tempPainter->resetTransform();
+	}
+	// Save openGL projection state
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	if (!tempPainter)
+		return NULL;
+	return tempPainter;
+}
+
+//! Revert openGL state so that Qt painting works again
+//! @return a painter that can be used
+void StelAppGraphicsItem::revertToOpenGL()
+{
+	if (tempPainter)
+		tempPainter->restore();
+	// Restore openGL projection state for Qt drawings
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glPopAttrib();
+}
+
 //! Paint the whole Core of stellarium
 //! This method is called automatically by the GraphicsView
 void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -124,15 +154,11 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	// Update the core and all modules
 	StelApp::getInstance().update(dt);
 	
-	tempPainter = painter;
+	painter->save();
+	tempPainter=painter;
+	
 	switchToNativeOpenGLPainting();
-	
 	StelApp::getInstance().glWindowHasBeenResized((int)(rect().width()), (int)(rect().height()));
-	
-// 	glClearColor(0.0, 0.0, 0.0, 0.0);
-// 	glClear(GL_COLOR_BUFFER_BIT);
-// 	glWidget->swapBuffers();
-// 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	// And draw them
 	distorter->prepare();
@@ -141,6 +167,7 @@ void StelAppGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	
 	revertToQtPainting();
 	tempPainter = NULL;
+	painter->restore();
 }
 
 void StelAppGraphicsItem::recompute()

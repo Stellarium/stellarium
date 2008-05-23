@@ -57,7 +57,16 @@ void ConfigurationDialog::createDialogContent()
 	QComboBox* c = ui->programLanguageComboBox;
 	c->clear();
 	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-	c->setCurrentIndex(c->findText(StelApp::getInstance().getLocaleMgr().getAppLanguage(), Qt::MatchExactly));
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString l = Translator::iso639_1CodeToNativeName(appLang);
+	int idx = c->findText(l, Qt::MatchExactly);
+	if (idx==-1 && appLang.contains('_'))
+	{
+		l = appLang.left(2);
+		l=Translator::iso639_1CodeToNativeName(l);
+		idx = c->findText(l, Qt::MatchExactly);
+	}
+	c->setCurrentIndex(idx);
 	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 }
 

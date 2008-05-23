@@ -37,8 +37,8 @@
 #include <QString>
 #include <QSettings>
 
-// #include "StelAppGraphicsItem.hpp"
-// #include <QPainter>
+#include "StelAppGraphicsItem.hpp"
+#include <QPainter>
 
 const QString Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
 {
@@ -982,15 +982,20 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 		return;
 	}
 	
+// 	QPainter* painter = StelAppGraphicsItem::getInstance().switchToQPainting();
+// 	if (painter==NULL)
+// 	{
+// 		StelAppGraphicsItem::getInstance().revertToOpenGL();
+// 		return;
+// 	}
+// 	painter->setRenderHints(QPainter::TextAntialiasing | QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
+// 	painter->drawText(QPointF(x, y), str);
+// 	StelAppGraphicsItem::getInstance().revertToOpenGL();
+	
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glRotatef(angleDeg,0,0,1);
 	glTranslatef(0,font->getLineHeight(),0);
-// 	QPainter* painter = StelAppGraphicsItem::getInstance().revertToQtPainting();
-// 	painter->setRenderHints(QPainter::TextAntialiasing);
-// 	painter->drawText(QPointF(x, y), str);
-// 	StelAppGraphicsItem::getInstance().switchToNativeOpenGLPainting();
-	//StelMainGraphicsView::getInstance().getOpenGLWin()->renderText(xshift, yshift, 0., str);
 	font->print(xshift, yshift, str);
 	glPopMatrix();
 }

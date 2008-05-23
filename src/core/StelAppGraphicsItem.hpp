@@ -66,6 +66,9 @@ public:
 	//! @return a painter that can be used
 	QPainter* revertToQtPainting();
 	
+	QPainter* switchToQPainting();
+	void revertToOpenGL();
+	
 protected:
  	virtual bool sceneEvent(QEvent* event);
 	virtual void keyPressEvent(QKeyEvent* event);

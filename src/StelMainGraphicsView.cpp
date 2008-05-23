@@ -55,7 +55,9 @@ StelMainGraphicsView::StelMainGraphicsView(QGraphicsScene* ascene, QWidget* pare
 	
 	// Create an openGL viewport
  	QGLFormat glFormat(QGL::StencilBuffer);
-	//glFormat.setSamples(1);
+	//glFormat.setSamples(16);
+	//glFormat.setSampleBuffers(true);
+	//glFormat.setDirectRendering(false);
 	glWidget = new QGLWidget(glFormat, NULL);
 	setViewport(glWidget);
 	
