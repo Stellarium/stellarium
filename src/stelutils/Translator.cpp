@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
+#include <QLocale>
 
 #include "StelUtils.hpp"
 #include "Translator.hpp"
@@ -151,13 +152,17 @@ void Translator::reload()
 //! Convert from ISO639-1 2 letters langage code to native language name
 QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
 {
-	if (iso639codes.find(languageCode)!=iso639codes.end())
-		return iso639codes[languageCode];
-	else
-		return languageCode;
+	QLocale loc(languageCode);
+	QString l = loc.name();
+	l.truncate(2);
+	if (iso639codes.find(l)!=iso639codes.end())
+	{
+		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
+	}
+	return languageCode;
 }
 	
-//! Convert from native language name to ISO639-1 2 letters langage code 
+//! Convert from native language name to ISO639-1 2(+3) letters langage code 
 QString Translator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::iterator iter;
@@ -239,7 +244,7 @@ void Translator::initIso639_1LanguageCodes(const QString& fileName)
 		int pos = record.indexOf('\t', 4);
 		if (pos==-1)
 		{
-			qWarning() << "Error: invalid entry in ISO639 codes: " << fileName;
+			qWarning() << "Error: invalid entry in ISO639 codes: " << record << "from file " << fileName;
 		}
 		else
 		{
