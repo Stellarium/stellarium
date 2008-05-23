@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4.2)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4.7)
 
 ########### Project name ###########
 PROJECT(Stellarium)
