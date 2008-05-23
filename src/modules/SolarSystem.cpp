@@ -451,20 +451,28 @@ void SolarSystem::loadPlanets()
 					assert(0);
 				} else {
 					mean_anomaly *= (M_PI/180.0);
-					const double mean_motion = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
+//already calculated					const double mean_motion = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
 					time_at_pericenter = epoch - mean_anomaly / mean_motion;
 				}
 			}
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
+			const double parent_rot_obliquity = parent->get_parent()
+			                                  ? parent->getRotObliquity()
+			                                  : 0.0;
+			const double parent_rot_asc_node = parent->get_parent()
+			                                  ? parent->getRotAscendingnode()
+			                                  : 0.0;
 			CometOrbit *orb = new CometOrbit(pericenter_distance,
 			                                 eccentricity,
 			                                 inclination,
 			                                 ascending_node,
 			                                 arg_of_pericenter,
 			                                 time_at_pericenter,
-			                                 mean_motion);
+			                                 mean_motion,
+			                                 parent_rot_obliquity,
+			                                 parent_rot_asc_node);
 			orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
