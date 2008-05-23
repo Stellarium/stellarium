@@ -373,7 +373,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#if 0
+#if 1
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -398,7 +398,7 @@ QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
 {
 	QtJsonParser parser;
 	QVariantMap map;
-	if (compressed)
+	if (compressed && input.size()>0)
 	{
 		QByteArray ar = qUncompress(input.readAll());
 		input.close();
@@ -511,8 +511,16 @@ void SkyImageTile::downloadFinished()
 		return;
 	}	
 	
-	const bool compressed = httpReply->request().url().path().endsWith(".qZ");
 	QByteArray content = httpReply->readAll();
+	if (content.isEmpty())
+	{
+		errorOccured = true;
+		httpReply->deleteLater();
+		httpReply=NULL;
+		return;
+	}
+	
+	const bool compressed = httpReply->request().url().path().endsWith(".qZ");
 	httpReply->deleteLater();
 	httpReply=NULL;
 	

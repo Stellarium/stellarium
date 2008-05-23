@@ -168,6 +168,9 @@ color: darkgray;
         <property name="currentIndex" >
          <number>0</number>
         </property>
+        <property name="elideMode" >
+         <enum>Qt::ElideNone</enum>
+        </property>
         <widget class="QWidget" name="tabMarking" >
          <attribute name="title" >
           <string>Main</string>
@@ -181,8 +184,20 @@ color: darkgray;
             <height>25</height>
            </rect>
           </property>
+          <property name="maximumSize" >
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
+          <property name="maxVisibleItems" >
+           <number>15</number>
+          </property>
           <property name="sizeAdjustPolicy" >
            <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+          </property>
+          <property name="frame" >
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QLabel" name="label" >

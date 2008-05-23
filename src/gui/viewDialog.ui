@@ -178,7 +178,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tabSky" >
          <attribute name="title" >
@@ -364,26 +364,6 @@ color: darkgray;
                  </property>
                  <property name="checked" >
                   <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer>
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" >
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_2" >
-                 <property name="text" >
-                  <string>amount:</string>
                  </property>
                 </widget>
                </item>
@@ -844,14 +824,14 @@ color: darkgray;
              <property name="verticalSpacing" >
               <number>0</number>
              </property>
-             <item row="0" column="0" >
+             <item rowspan="2" row="0" column="0" >
               <widget class="QLabel" name="label_14" >
                <property name="text" >
-                <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu'; font-size:9pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Hourly &lt;/p>
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">zenith rate&lt;/p>&lt;/body>&lt;/html></string>
+                <string>Hourly
+zenith rate</string>
+               </property>
+               <property name="textFormat" >
+                <enum>Qt::PlainText</enum>
                </property>
               </widget>
              </item>
@@ -894,6 +874,9 @@ p, li { white-space: pre-wrap; }
               <widget class="QLabel" name="zhrLabel" >
                <property name="text" >
                 <string>Normal rate</string>
+               </property>
+               <property name="textFormat" >
+                <enum>Qt::PlainText</enum>
                </property>
               </widget>
              </item>
@@ -1532,22 +1515,5 @@ p, li { white-space: pre-wrap; }
  <resources>
   <include location="../../data/mainRes.qrc" />
  </resources>
- <connections>
-  <connection>
-   <sender>starTwinkleCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label_2</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>243</x>
-     <y>98</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>356</x>
-     <y>93</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
