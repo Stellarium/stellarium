@@ -105,8 +105,7 @@ QString Planet::getInfoString(const Navigator * nav) const
 	
 	QString str;
 	QTextStream oss(&str);
-	const Vec3f& c = getInfoColor();
-	oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
+	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 	
 	oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
