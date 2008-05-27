@@ -109,6 +109,11 @@ namespace StelUtils
 	//! @return the string describing the Vector with the form "x,y,z"
 	//! @deprecated Use the << operator from Vec3f class
 	string vec3f_to_str(const Vec3f& v);
+
+	//! Converts a Vec3f to HTML color notation.
+	//! @param v The vector
+	//! @return The string in HTML color notation "#rrggbb".
+	QString vec3fToHtmlColor(const Vec3f& v);
 		
 	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable.
 	//! @param The input string in UTF-8 format

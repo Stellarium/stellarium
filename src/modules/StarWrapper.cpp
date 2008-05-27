@@ -40,8 +40,7 @@ QString StarWrapperBase::getInfoString(const Navigator *nav) const {
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   QString str;
   QTextStream oss(&str);
-  const Vec3f& c = getInfoColor();
-  oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
+  oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
   oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
 						  QString::number(getBV(), 'f', 2)) << "<br>";
   oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
@@ -81,8 +80,7 @@ QString StarWrapper1::getInfoString(const Navigator *nav) const {
   StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   QString str;
   QTextStream oss(&str);
-  const Vec3f& c = getInfoColor();
-  oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
+  oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
   if (s->hip)
   {
 	  oss << "<h2>";
