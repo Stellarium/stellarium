@@ -577,7 +577,7 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 	foreach (SkyImageTile* tile, subTiles)
 	{
 		// At least one of the subtiles is displayed
-		if (now-tile->getLastTimeDraw()<lastDrawTrigger || tile->downloading)
+		if (now-tile->getLastTimeDraw()<lastDrawTrigger || tile->downloading) // || (tile->tex && tile->tex->isLoading())
 		{
 			deleteAll = false;
 			break;
