@@ -167,6 +167,11 @@ public:
 
 	virtual bool handleMouseMoves(int x, int y);
 
+	//! Load color scheme from the given ini file and section name
+	//! @param conf application settings object
+	//! @param section in the application settings object which contains desired color scheme
+	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 	

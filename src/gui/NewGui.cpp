@@ -727,6 +727,15 @@ void NewGui::init()
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
 
+//! Load color scheme from the given ini file and section name
+void NewGui::setColorScheme(const QSettings* conf, const QString& section)
+{
+	if (section=="night_color")
+		loadStyle("data/gui/nightStyle.css");
+	else
+		loadStyle("data/gui/normalStyle.css");
+}
+	
 //! Load a Qt style sheet to define the widgets style
 void NewGui::loadStyle(const QString& fileName)
 {
