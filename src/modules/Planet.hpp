@@ -231,12 +231,6 @@ protected:
 	// Draw the 3D sphere
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
-	// Draw the small star-like 2D halo
-	void draw_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
-
-	// Draw the small star-like point
-	void draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
-
 	// Draw the circle and name of the Planet
 	void draw_hints(const Navigator* nav, const Projector* prj);
 
