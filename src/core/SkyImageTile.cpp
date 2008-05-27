@@ -501,6 +501,8 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 // Called when the download for the JSON file terminated
 void SkyImageTile::downloadFinished()
 {
+	//qDebug() << "Download finished for " << httpReply->request().url().path() << ((httpReply->error()!=QNetworkReply::NoError) ? httpReply->errorString() : QString(""));
+	
 	if (httpReply->error()!=QNetworkReply::NoError)
 	{
 		if (httpReply->error()!=QNetworkReply::OperationCanceledError)
@@ -508,6 +510,7 @@ void SkyImageTile::downloadFinished()
 		errorOccured = true;
 		httpReply->deleteLater();
 		httpReply=NULL;
+		downloading=false;
 		return;
 	}	
 	
@@ -517,6 +520,7 @@ void SkyImageTile::downloadFinished()
 		errorOccured = true;
 		httpReply->deleteLater();
 		httpReply=NULL;
+		downloading=false;
 		return;
 	}
 	
@@ -554,7 +558,7 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 	foreach (SkyImageTile* tile, subTiles)
 	{
 		// At least one of the subtiles is displayed
-		if (now-tile->getLastTimeDraw()<lastDrawTrigger)
+		if (now-tile->getLastTimeDraw()<lastDrawTrigger || tile->downloading)
 		{
 			deleteAll = false;
 			break;
@@ -581,7 +585,6 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 			// None of the subtiles are displayed: delete all
 			foreach (SkyImageTile* tile, subTiles)
 			{
-				//qWarning() << "Delete " << tile->getImageUrl();
 				tile->deleteLater();
 			}
 			subTiles.clear();
