@@ -42,20 +42,19 @@ QString StarWrapperBase::getInfoString(const Navigator *nav) const {
   QTextStream oss(&str);
   const Vec3f& c = getInfoColor();
   oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
-  oss.setRealNumberNotation(QTextStream::FixedNotation);
-  oss.setRealNumberPrecision(2);
-  oss << q_("Magnitude: ") << "<b>" << getMagnitude(nav) << "</b>" << " &nbsp;(B-V: " << getBV() << ")<br>";
-  oss << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,true)
-		  << "/" << StelUtils::radToDmsStr(dec_j2000,true) << "<br>";
-  oss << q_("Equ of date") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_equ)
-		  << "/" << StelUtils::radToDmsStr(dec_equ) << "<br>";
+  oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
+						  QString::number(getBV(), 'f', 2)) << "<br>";
+  oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
+				      StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+  oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
+					    StelUtils::radToDmsStr(dec_equ)) << "<br>";
 
     // calculate alt az
   double az,alt;
   StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
-  oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(az) << "/" << StelUtils::radToDmsStr(alt);
+  oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt));
   
   return str;
 }
@@ -107,14 +106,13 @@ QString StarWrapper1::getInfoString(const Navigator *nav) const {
     oss << "</h2>";
   }
 
-  oss.setRealNumberNotation(QTextStream::FixedNotation);
-  oss.setRealNumberPrecision(2);
-  oss << q_("Magnitude: ") << "<b>" << getMagnitude(nav) << "</b>" << " &nbsp;(B-V: " << s->getBV() << ")<br>";
-  oss << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,true)
-		  << "/" << StelUtils::radToDmsStr(dec_j2000,true) << "<br>";
+  oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
+						  QString::number(s->getBV(), 'f', 2)) << "<br>";
+  oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
+				      StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
   
-  oss << q_("Equ of date") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_equ)
-		  << "/" << StelUtils::radToDmsStr(dec_equ) << "<br>";
+  oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
+					    StelUtils::radToDmsStr(dec_equ)) << "<br>";
 
     // calculate alt az
   double az,alt;
@@ -122,20 +120,18 @@ QString StarWrapper1::getInfoString(const Navigator *nav) const {
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if (az > M_PI*2)
 	  az -= M_PI*2;    
-  oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(az) << "/" << StelUtils::radToDmsStr(alt) << "<br>";
+  oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
 
   if (s->plx)
   {
-		oss.setRealNumberPrecision(5);
-		oss << q_("Parallax: ") << (0.00001*s->plx) << "<br>";
-		oss.setRealNumberPrecision(2);
-		oss << q_("Distance: ") << (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180)))
-				<< q_(" Light Years") << "<br>";
+		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
+		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2)
+				<< "<br>";
   }
 
   if (s->sp_int)
   {
-	  oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int) << "<br>";
+	  oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int)) << "<br>";
   }
   return str;
 }
@@ -165,19 +161,17 @@ QString StarWrapper1::getShortInfoString(const Navigator *nav) const
 		oss << "  ";
 	}
 	
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(2);
-	oss << q_("Magnitude: ") << getMagnitude(nav) << "  ";
+	oss << q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2) << "  ";
 
 	if (s->plx)
 	{
-		oss << q_("Distance: ") << (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180)))
-			<< q_(" Light Years") << "  ";
+		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2)
+			<< "  ";
 	}
 	
 	if (s->sp_int)
 	{
-		oss << q_("Spectral Type: ") << StarMgr::convertToSpectralType(s->sp_int);
+		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int));
 	}
 	return str;
 }
