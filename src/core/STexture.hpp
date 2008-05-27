@@ -71,6 +71,9 @@ public:
 	//! Return the full path to the image file
 	const QString& getFullPath() const {return fullPath;}
 	
+	//! Return whether the image is currently being loaded
+	bool isLoading() const {return isLoadingImage && !canBind();}
+	
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
 	//! or when an error occured and the texture will never be available

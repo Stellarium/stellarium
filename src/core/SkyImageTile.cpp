@@ -76,7 +76,7 @@ void JsonLoadThread::run()
 }
 
 // Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL)
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL), texFader(NULL)
 {
 	if (parent!=NULL)
 	{
@@ -147,7 +147,7 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL), texFader(NULL)
 {
 	if (parent!=NULL)
 	{
@@ -326,17 +326,27 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 // Draw the image on the screen.
 void SkyImageTile::drawTile(StelCore* core)
 {
+	float ad_lum;
 	if (luminance>0)
 	{
-		float ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
+		ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
 		if (ad_lum<0.01)
+		{
 			return;
-		glColor3f(ad_lum,ad_lum,ad_lum);
+		}
 	}
 	
 	if (!tex->bind())
+	{
 		return;
-
+	}
+	
+	if (!texFader)
+	{
+		texFader = new QTimeLine(1000, this);
+		texFader->start();
+	}
+	
 	Projector* prj = core->getProjection();
 	
 	const float factorX = tex->getCoordinates()[2][0];
@@ -344,10 +354,17 @@ void SkyImageTile::drawTile(StelCore* core)
 
 	// Draw the real texture for this image
 	glEnable(GL_TEXTURE_2D);
-	if (alphaBlend==true)
+	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
+	{
 		glEnable(GL_BLEND);
+		glColor4f(ad_lum,ad_lum,ad_lum, texFader->currentValue());
+	}
 	else
+	{
 		glDisable(GL_BLEND);
+		glColor3f(ad_lum,ad_lum,ad_lum);
+	}
+	
 	for (int p=0;p<skyConvexPolygons.size();++p)
 	{
 		const StelGeom::Polygon& poly = skyConvexPolygons.at(p).asPolygon();
@@ -373,7 +390,7 @@ void SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#if 1
+#if 0
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -547,6 +564,8 @@ void SkyImageTile::JsonLoadFinished()
 	lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 }
 
+
+
 // Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 {
@@ -577,6 +596,11 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 			foreach (SkyImageTile* tile, subTiles)
 			{
 				tile->deleteTexture();
+				if (tile->texFader)
+				{
+					tile->texFader->deleteLater();
+					tile->texFader = NULL;
+				}
 				tile->deleteUnusedTiles(lastDrawTrigger);
 			}
 		}

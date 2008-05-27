@@ -21,6 +21,7 @@
 
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
+#include <QTimeLine>
 #include <QList>
 #include <QString>
 #include <QStringList>
@@ -140,6 +141,9 @@ private:
 			
 	// Store the time of the last draw
 	double lastTimeDraw;
+
+	// Used for smooth fade in
+	QTimeLine* texFader;
 	
 	// The temporary map filled in a thread
 	QVariantMap temporaryResultMap;
