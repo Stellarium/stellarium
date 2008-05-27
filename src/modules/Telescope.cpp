@@ -240,10 +240,10 @@ QString Telescope::getInfoString(const Navigator *nav) const {
   const Vec3f& c = getInfoColor();
   oss << QString("<font color=#%1%2%3>").arg(int(c[0]*255), 2, 16).arg(int(c[1]*255), 2, 16).arg(int(c[2]*255), 2, 16);
   oss << "<h2>" << nameI18n << "</h2>"
-      << q_("J2000") << " " << q_("RA/DE: ") << StelUtils::radToHmsStr(ra_j2000,false)
-      << "/" << StelUtils::radToDmsStr(dec_j2000,false) << "<br>"
-      << q_("Equ of date") << " " << q_("RA/DE: ")
-      << StelUtils::radToHmsStr(ra_equ) << "/" << StelUtils::radToDmsStr(dec_equ);
+      << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false),
+				      StelUtils::radToDmsStr(dec_j2000,false))
+      << "<br>"
+      << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
   return str;
 }
 

@@ -112,25 +112,23 @@ QString Planet::getInfoString(const Navigator * nav) const
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphere_scale != 1.f)
-		oss << " (x" << sphere_scale << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 	oss << "</h2>";
 
-	oss.setRealNumberPrecision(2);
-	oss << q_("Magnitude: ") << "<b>" << compute_magnitude(nav->getObserverHelioPos()) << "</b><br>";
+	oss << q_("Magnitude: <b>%1</b>").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2) << "<br>";
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
-	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
+	oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2)
 		tempRA -= M_PI*2;
-	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
+	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
-	oss.setRealNumberPrecision(8);
-	oss << q_("Distance: ") << equPos.length() << q_("AU");
+	oss << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 8);
 	
 	return str;
 }
@@ -145,7 +143,7 @@ QString Planet::getSkyLabel(const Navigator * nav) const
 
 	if (sphere_scale != 1.f)
 	{
-		oss << " (x" << sphere_scale << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 	}
 	return str;
 }
@@ -162,14 +160,12 @@ QString Planet::getShortInfoString(const Navigator * nav) const
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphere_scale != 1.f)
-		oss << " (x" << sphere_scale << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 
-	oss.setRealNumberPrecision(2);
-	oss << "  " << q_("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos());
+	oss << "  " << q_("Magnitude: %1").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2);
 
 	Vec3d equPos = getEarthEquatorialPos(nav);
-	oss.setRealNumberPrecision(5);
-	oss << "  " << q_("Distance: ") << equPos.length() << q_("AU");
+	oss << "  " << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 5);
 
 	return str;
 }
