@@ -87,20 +87,18 @@ QString Nebula::getInfoString(const Navigator* nav) const
 	}
 	oss << "</h2>";;
 	
-	oss << q_("Type: ") << "<b>" << getTypeString() << "</b><br>";
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(2);
+	oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 	if (mag < 50) 
-		oss << q_("Magnitude: ") << "<b>" << mag << "</b><br>";	
-	oss << q_("RA/DE: ") << StelUtils::radToHmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+	oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << q_("Az/Alt: ") << StelUtils::radToDmsStr(tempRA) << "/" << StelUtils::radToDmsStr(tempDE) << "<br>";
+	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	if (angularSize>0)
-		oss << q_("Size: ") << StelUtils::radToDmsStr(angularSize*M_PI/180.);
+		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.));
 	return str;
 }
 
@@ -108,11 +106,10 @@ QString Nebula::getShortInfoString(const Navigator*) const
 {
 	if (nameI18!="")
 	{
-		QString str;
-		QTextStream oss(&str);
-		oss << nameI18 << L"  ";
+		QString str(nameI18);
+		str += "  ";
 		if (mag < 99)
-			oss << q_("Magnitude: ") << mag;
+			str += q_("Magnitude: %1").arg(mag);
 		
 		return str;
 	}
@@ -262,28 +259,28 @@ QString Nebula::getTypeString(void) const
 	switch(nType)
 	{
 		case NEB_GX:
-			wsType = "Galaxy";
+			wsType = q_("Galaxy");
 			break;
 		case NEB_OC:
-			wsType = "Open cluster";
+			wsType = q_("Open cluster");
 			break;
 		case NEB_GC:
-			wsType = "Globular cluster";
+			wsType = q_("Globular cluster");
 			break;
 		case NEB_N:
-			wsType = "Nebula";
+			wsType = q_("Nebula");
 			break;
 		case NEB_PN:
-			wsType = "Planetary nebula";
+			wsType = q_("Planetary nebula");
 			break;
 		case NEB_CN:
-			wsType = "Cluster associated with nebulosity";
+			wsType = q_("Cluster associated with nebulosity");
 			break;
 		case NEB_UNKNOWN:
-			wsType = "Unknown";
+			wsType = q_("Unknown");
 			break;
 		default:
-			wsType = "Undocumented type";
+			wsType = q_("Undocumented type");
 			break;
 	}
 	return wsType;
