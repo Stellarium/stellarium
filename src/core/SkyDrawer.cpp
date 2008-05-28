@@ -101,14 +101,94 @@ void SkyDrawer::update(double deltaTime)
 			fov = min_fov;
 	}
 	
+	eye->setOutputScale(30.f);
+	
 	// Temporary use a fake 60 deg fov to compute min rmag
-	lnfov_factor = std::log(108064.73f / (60*60));
-	//eye->setGlobalScale(100.*60./60);
-	min_rmag =  std::sqrt(eye->adaptLuminance(pointSourceMagToLuminance(max_scaled_60deg_mag)))*30;
+	lnfov_factor = std::log(60.f*60.f / (60*60) / (0.025*0.025));
+	min_rmag = std::sqrt(eye->adaptLuminance(pointSourceMagToLuminance(max_scaled_60deg_mag)));
 	
 	// Set the fov factor for point source luminance computation
-	lnfov_factor = std::log(108064.73f / (fov*fov));
-	//eye->setGlobalScale(100.*60./fov);
+	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (0.025*0.025));
+}
+
+// Compute the log of the luminance for a point source with the given mag for the current FOV
+float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
+{
+	return -0.92103f*(mag + mag_shift + 12.12331f) + lnfov_factor;
+}
+
+
+// Compute RMag and CMag from magnitude for a point source.
+int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
+{
+	// Real world magnitude limit (independent of FOV)
+	if (mag > max_mag)
+	{
+		rc_mag[0] = rc_mag[1] = 0.f;
+		return -1;
+	}
+
+    // rmag:
+	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
+	rc_mag[0] = eye->sqrtAdaptLuminanceLn(pointSourceMagToLnLuminance(mag));
+
+	if (rc_mag[0] < min_rmag)
+	{
+		rc_mag[0] = rc_mag[1] = 0.f;
+		return -1;
+	}
+
+	if (flagPointStar)
+	{
+		if (rc_mag[0] * starScale < 0.1f)
+		{
+			// 0.05f
+			rc_mag[0] = rc_mag[1] = 0.f;
+			return -1;
+		}
+		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
+		if (rc_mag[1] * starMagScale < 0.1f)
+		{
+			// 0.05f
+			rc_mag[0] = rc_mag[1] = 0.f;
+			return -1;
+		}
+    	// Global scaling
+		rc_mag[1] *= starMagScale;
+	}
+	else
+	{
+		// if size of star is too small (blink) we put its size to 1.2 --> no more blink
+		// And we compensate the difference of brighteness with cmag
+		if (rc_mag[0]<1.2f)
+		{
+			if ((rc_mag[0] * starScale) < 0.1f)
+			{
+				rc_mag[0] = rc_mag[1] = 0.f;
+				return -1;
+			}
+			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
+			if (rc_mag[1] * starMagScale < 0.1f)
+			{
+				rc_mag[0] = rc_mag[1] = 0.f;
+				return -1;
+			}
+			rc_mag[0] = 1.2f;
+		}
+		else
+		{
+			// cmag:
+			rc_mag[1] = 1.f;
+			if (rc_mag[0]>8.f)
+			{
+				rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
+			}
+		}
+		// Global scaling
+		rc_mag[0] *= starScale;
+		rc_mag[1] *= starMagScale;
+	}
+	return 0;
 }
 
 void SkyDrawer::prepareDraw()
@@ -190,83 +270,6 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 	return 0;
 }
 
-// Compute the log of the luminance for a point source with the given mag for the current FOV
-float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
-{
-	return -0.92103f*(mag + mag_shift + 12.12331f) + lnfov_factor;
-}
-	
-// Compute RMag and CMag from magnitude.
-int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
-{
-	if (mag > max_mag)
-	{
-		rc_mag[0] = rc_mag[1] = 0.f;
-		return -1;
-	}
-
-    // rmag:
-	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
-	rc_mag[0] = eye->sqrtAdaptLuminanceLn(pointSourceMagToLnLuminance(mag))*30;
-
-	if (rc_mag[0] < min_rmag)
-	{
-		rc_mag[0] = rc_mag[1] = 0.f;
-		return -1;
-	}
-
-	if (flagPointStar)
-	{
-		if (rc_mag[0] * starScale < 0.1f)
-		{
-			// 0.05f
-			rc_mag[0] = rc_mag[1] = 0.f;
-			return -1;
-		}
-		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] * starMagScale < 0.1f)
-		{
-			// 0.05f
-			rc_mag[0] = rc_mag[1] = 0.f;
-			return -1;
-		}
-    	// Global scaling
-		rc_mag[1] *= starMagScale;
-	}
-	else
-	{
-		// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-		// And we compensate the difference of brighteness with cmag
-		if (rc_mag[0]<1.2f)
-		{
-			if ((rc_mag[0] * starScale) < 0.1f)
-			{
-				rc_mag[0] = rc_mag[1] = 0.f;
-				return -1;
-			}
-			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-			if (rc_mag[1] * starMagScale < 0.1f)
-			{
-				rc_mag[0] = rc_mag[1] = 0.f;
-				return -1;
-			}
-			rc_mag[0] = 1.2f;
-		}
-		else
-		{
-			// cmag:
-			rc_mag[1] = 1.f;
-			if (rc_mag[0]>8.f)
-			{
-				rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
-			}
-		}
-		// Global scaling
-		rc_mag[0] *= starScale;
-		rc_mag[1] *= starMagScale;
-	}
-	return 0;
-}
 
 // Set the parameters so that the stars disapear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
