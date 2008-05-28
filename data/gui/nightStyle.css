@@ -167,6 +167,7 @@ QListWidget, QListWidget:active {
     border-color: #081f25;
     border-style: solid;
 	selection-background-color: #502a3b;
+	selection-color: rgba(220, 90, 90, 90%);
 }
 
 QCheckBox
@@ -177,7 +178,7 @@ QCheckBox::indicator
 {
   width: 13px;
   height: 13px;
-  background-color: #225555;
+  background-color: rgba(100, 30, 30, 70%);
 }
 QCheckBox::indicator:checked
 {

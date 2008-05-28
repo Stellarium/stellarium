@@ -165,6 +165,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	QFont font("DejaVuSans", 10);
 	
+	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
 	location = new QGraphicsSimpleTextItem("Munich, Earth, 500m", this);
 	fov = new QGraphicsSimpleTextItem("FOV 43.45", this);
