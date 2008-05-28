@@ -7,88 +7,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-12-25 07:58+0000\n"
-"Last-Translator: Surin <surinbjn@yahoo.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-05-07 03:12+0000\n"
+"Last-Translator: sarun <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " ปีแสง"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "หน่วยดาราศาสตร์"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "เวลาจริง"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -105,7 +83,7 @@ msgstr "ระดับสูง (m): "
 msgid "Altitude:"
 msgstr "มุมเงย "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -117,7 +95,7 @@ msgstr "ใช้ลูกศรลงเพื่อโหลดรายกา
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -125,18 +103,18 @@ msgstr ""
 msgid "Author: "
 msgstr "ผู้สร้าง: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "มุมอะซิมุธ/มุมเงย "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "กริดพิกัดอะซิมุธ"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "กริดพิกัดอะซิมุธ"
 
@@ -153,7 +131,6 @@ msgid "CTRL + Up/Down"
 msgstr ""
 
 #: src/modules/TextUI.cpp:89
-#, fuzzy
 msgid "Calendar"
 msgstr "ปฏิทิน"
 
@@ -162,20 +139,19 @@ msgid "Callisto"
 msgstr "คัสลิสโต"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "ทิศ"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "ทิศ"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "ไปยังวัตถุที่เลือก [SPACE]"
@@ -192,11 +168,15 @@ msgstr "จีน"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "สี "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
@@ -205,21 +185,18 @@ msgid "Constellation Art Intensity"
 msgstr "Intensity รูปวาดของกลุ่มดาว"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "เขตกลุ่มดาว"
+msgstr "อาณาเขตกลุ่มดาว"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
 msgstr "เส้นกลุ่มดาว"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
-msgstr "ชื่อกลุ่มดาว"
+msgstr "ชื่อของกลุ่มดาว"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "เส้นกลุ่มดาว"
@@ -246,7 +223,7 @@ msgstr "ปฏิทิน"
 msgid "Date Display Format: "
 msgstr "รูปแบบวันที่: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "วันและเวลา"
@@ -255,11 +232,16 @@ msgstr "วันและเวลา"
 msgid "Day keys: "
 msgstr ""
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "ลดความเร็วเวลา [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "ดีมอส"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "ฝูงสุนัข"
@@ -268,17 +250,21 @@ msgstr "ฝูงสุนัข"
 msgid "Dione"
 msgstr "ไดโอเน"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "นายพราน"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " ปีแสง"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "ระยะห่าง: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -291,11 +277,10 @@ msgid "Earth"
 msgstr "โลก"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
@@ -316,9 +301,10 @@ msgstr "เอ็สเซลาดุส"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:77
@@ -326,26 +312,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "กริดพิกัดศูนย์สูตร"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "กริดพิกัดศูนย์สูตร"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "กริดพิกัดศูนย์สูตร"
@@ -367,25 +351,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "พลิกตามแนวตั้ง"
+msgstr "พลิกตามแนวนอน"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "พลิกตามแนวตั้ง"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "ทางข้ามแม่น้ำ"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -395,6 +383,10 @@ msgstr "แกนีมีด"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "ทั่วไป "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -408,6 +400,13 @@ msgstr "ช่วยเหลือ"
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "อัตราสูงสุดในประวัติศาสตร์ (ฝนดาวตกลีโอนิดส์ ปี ค.ศ. 1966)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "อัตราเมื่อจุดศูนย์กลางการตกอยู่เหนือศีรษะ"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -425,6 +424,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "เพิ่มความเร็วเวลา [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "อินูอิท"
@@ -433,10 +437,11 @@ msgstr "อินูอิท"
 msgid "Io"
 msgstr "ไอโอ"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -451,7 +456,7 @@ msgstr "ธีธีส"
 msgid "Korean"
 msgstr "เกาหลี"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -459,7 +464,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "ลาโกตา"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "ภูมิประเทศ"
@@ -471,7 +476,7 @@ msgstr "ภูมิประเทศ: "
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "ละติจูด : "
+msgstr "ละติจูด: "
 
 #: src/modules/TextUI.cpp:80
 msgid "Latitude: "
@@ -483,11 +488,10 @@ msgid "Left click"
 msgstr "ธงด้านซ้าย"
 
 #: src/modules/TextUI.cpp:128
-#, fuzzy
 msgid "Light Pollution Luminance: "
 msgstr "ปริมาณมลภาวะทางแสง: "
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
 msgstr "ปริมาณมลภาวะทางแสง: "
@@ -495,7 +499,7 @@ msgstr "ปริมาณมลภาวะทางแสง: "
 #: src/modules/TextUI.cpp:108
 #, fuzzy
 msgid "Limiting Magnitude: "
-msgstr "แมกนิจูดปรากฏ "
+msgstr "ความสว่าง: "
 
 #: src/modules/TextUI.cpp:147
 msgid "Load Default Configuration: "
@@ -545,19 +549,23 @@ msgstr "ค่าคงที่ของแมกนิจูดปรากฏ
 msgid "Magnitude Sizing Multiplier: "
 msgstr "ตัวคูณความใหญ่ซึ่งจัดกลุ่มตามขนาด : "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "แมกนิจูดปรากฏ "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
-msgstr "แมกนิจูดปรากฏ "
+msgstr "ความสว่าง: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "ความสว่าง: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "กระดูกงูเรือ"
@@ -566,10 +574,10 @@ msgstr "กระดูกงูเรือ"
 msgid "Manual zoom: "
 msgstr "ซูมด้วยมือ: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "กระดูกงูเรือ"
+msgstr "ดาวอังคาร"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -595,18 +603,17 @@ msgstr "ดาวพุธ"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "แบบการฉายแผนที่:"
+msgstr "ค้นหาวัตถุ"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "ดาวพุธ"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "เส้นเมอริเดียน"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "เส้นเมอริเดียน"
@@ -619,7 +626,7 @@ msgstr "intensity ของทางช้างเผือก: "
 msgid "Mimas"
 msgstr "ไมมาส"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "ไมมาส"
@@ -628,7 +635,7 @@ msgstr "ไมมาส"
 msgid "Moon"
 msgstr "ดวงจันทร์"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -640,6 +647,11 @@ msgstr "เหนือ"
 msgid "Navajo"
 msgstr "นาวนโฮ"
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "เนบิวลา [N]"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "วงกลมเนบิวลา"
@@ -648,7 +660,7 @@ msgstr "วงกลมเนบิวลา"
 msgid "Nebula Names"
 msgstr "ชื่อเนบิวลา"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "เนบิวลา [N]"
@@ -662,7 +674,7 @@ msgstr "ดาวเนปจูน"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": อัตราปกติ"
@@ -675,7 +687,11 @@ msgstr "นอเวย์"
 msgid "Object Sizing Rule: "
 msgstr "กฎการจัดกลุ่มตามขนาดวัตถุ: "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "นายพราน"
@@ -698,8 +714,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
 msgstr "ค่าแพแรลแลกซ์: "
 
 #: src/core/MappingClasses.cpp:11
@@ -726,19 +743,22 @@ msgid "Planet Names"
 msgstr "ชื่อดาวเคราะห์"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "ทางเดินของดาวเคราะห์"
+msgstr "วงโคจรดาวเคราะห์"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "ทางเดินของดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "ดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "ข้อมูลเกี่ยวกับดาวเคราะห์"
@@ -756,23 +776,22 @@ msgid "Preset Sky Time: "
 msgstr "ชุกรูปแบบเวลาท้องฟ้า: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "ชุกรูปแบบเวลาท้องฟ้า: "
+msgstr "เวลาที่ตั้งไว้"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "ภาษาของโปรแกรม: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "แบบการฉายแผนที่:"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -787,17 +806,15 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "อินูอิท"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
-msgstr "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
+msgstr "มุม/องศา: "
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -820,16 +837,16 @@ msgstr "ดาวเสาร์"
 msgid "Save Current Configuration as Default: "
 msgstr "บันทึกค่าปัจจุบันเป็นค่ามาตรฐาน: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "บันทึกตำแหน่ง"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "ขนาดดวงจันทร์"
@@ -845,7 +862,7 @@ msgstr "เลือกและออกเพื่อเริ่มการ
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "ไปยังวัตถุที่เลือก [SPACE]"
+msgstr "ค้นหาวัตถุ"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -853,9 +870,8 @@ msgid "Selected:"
 msgstr "ที่เลือกไว้ : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "ตำแหน่ง: "
+msgstr "ตั้งตำแหน่ง "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -869,73 +885,71 @@ msgstr "ตั้งโซนเวลา: "
 msgid "Set UI Locale: "
 msgstr "ตั้ง UI สถานที่: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": อัตราปกติ"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "ตั้งเวลา "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "แสดง: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "แสดง: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "แสดง: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "แสดง: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "แสดง: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "แสดง: "
 
@@ -947,15 +961,16 @@ msgstr "ปิดเครื่อง "
 msgid "Sidereal"
 msgstr "เวลาไซดีเรียล"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "ขนาด: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 msgid "Sky"
 msgstr ""
 
@@ -975,10 +990,6 @@ msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น
 msgid "Sky Time: "
 msgstr "เวลาท้องฟ้า: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "ส่วนประกอบหลักระบบสุริยะ: "
@@ -992,13 +1003,10 @@ msgstr "ดูระบบสุริยะ"
 msgid "Space"
 msgstr "ทวน"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "ประเภทสเปกตรัม: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1009,12 +1017,12 @@ msgstr ": อัตรามาตราฐาน (ฝนดาวตกเพ�
 msgid "Star Value Multiplier: "
 msgstr "ตัวคูณค่าของดาวฤกษ์ "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "ดาว"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "ดาวฤกษ์"
 
@@ -1022,7 +1030,7 @@ msgstr "ดาวฤกษ์"
 msgid "Stars "
 msgstr "ดาวฤกษ์ "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1034,23 +1042,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1058,7 +1066,7 @@ msgstr ""
 msgid "Sun"
 msgstr "ดวงอาทิตย์"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1104,128 +1112,126 @@ msgstr "รูปแบบเวลา: "
 msgid "Titan"
 msgstr "ไททัน"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "บรรยากาศ"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "กริดพิกัดอะซิมุธ"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "ทิศ"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "ปรับแต่งหน้าต่าง"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "รูปภาพกลุ่มดาว [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "อาณาเขตกลุ่มดาว"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "ชื่อของกลุ่มดาว"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "เส้นกลุ่มดาว"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "เส้นสุริยวิถี"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "เส้นศูนย์สูตร"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "กริดพิกัดศูนย์สูตร"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "กริดพิกัดศูนย์สูตร"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "แสดง: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "ตั้งตำแหน่ง "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "เส้นเมอริเดียน"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "เนบิวลา [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "วงโคจรดาวเคราะห์"
+msgid "Toggle atmosphere"
+msgstr "บรรยากาศ"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "กริดพิกัดอะซิมุธ"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "ทิศ"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "ปรับแต่งหน้าต่าง"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "กำลังโหลดภาพกลุ่มดาว: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "อาณาเขตกลุ่มดาว"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "ชื่อของกลุ่มดาว"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "เส้นกลุ่มดาว"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "เส้นสุริยวิถี"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "เส้นศูนย์สูตร"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "กริดพิกัดศูนย์สูตร"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "กริดพิกัดศูนย์สูตร"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "ปรับแต่งหน้าต่าง"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "เส้นเมอริเดียน"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "ข้อมูลเกี่ยวกับดาวเคราะห์"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "สามดาว"
@@ -1234,22 +1240,31 @@ msgstr "สามดาว"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "สามเหลี่ยม"
+msgid "Twinkle:"
+msgstr "การกระพริบ: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "การกระพริบ: "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "ประเภท: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
 msgstr "ชุดคำสั่งที่ใชักับพอร์ต USB: "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
+msgstr ""
 
 #: src/modules/TextUI.cpp:150
 msgid "Update me via Internet: "
@@ -1259,11 +1274,11 @@ msgstr "อัพเดทผ่านอินเตอร์เน็ต: "
 msgid "Uranus"
 msgstr "ดาวยูเรนัส"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1275,7 +1290,7 @@ msgstr ""
 msgid "Venus"
 msgstr "ดาวศุกร์"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "ระบบภาพ"
@@ -1290,7 +1305,7 @@ msgstr "ตะวันตก"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1301,28 +1316,22 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "ตำแหน่ง: "
+msgstr "ช่วงของการซูม: "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "ไปยังวัตถุที่เลือก [SPACE]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "ช่วงของการซูม: "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "ช่วงของการซูม: "
-
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
@@ -1382,6 +1391,9 @@ msgstr ""
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: บรรทัดคำสั่งไม่มีข้อเท็จจริง\n"
+
+#~ msgid "AU"
+#~ msgstr "หน่วยดาราศาสตร์"
 
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "แสดงตำแหน่งเนบิวลาโดยไม่ใส่ภาพ"
@@ -1539,12 +1551,20 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "การบันทึกคำสั่งหยุด"
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "ความว่างเปล่า"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "หน้าต่างปรับตั้งค่า [1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "รูปภาพกลุ่มดาว [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "เขตกลุ่มดาว"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "เส้นกลุ่มดาว"
+
+#~ msgid "Constellations Names"
+#~ msgstr "ชื่อกลุ่มดาว"
 
 #~ msgid "Corona Australis"
 #~ msgstr "มงกุฎใต้"
@@ -1578,10 +1598,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "วัน"
-
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "ลดความเร็วเวลา [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "ปลาโลมา"
@@ -1726,6 +1742,9 @@ msgstr ""
 #~ msgid "Elk"
 #~ msgstr "กวางมูส"
 
+#~ msgid "Emptiness"
+#~ msgstr "ความว่างเปล่า"
+
 #~ msgid "Encampment"
 #~ msgstr "ค่ายพักแรม"
 
@@ -1816,15 +1835,14 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "ขุนศึก"
 
+#~ msgid "Ground"
+#~ msgstr "พื้น"
+
 #~ msgid "Ground [G]"
 #~ msgstr "พื้น [G]"
 
 #~ msgid "Grus"
 #~ msgstr "นกกระเรียน"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "งู"
 
 #~ msgid "Hand"
 #~ msgstr "มือ"
@@ -1846,10 +1864,6 @@ msgstr ""
 
 #~ msgid "Hook"
 #~ msgstr "ตะขอ"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "พลิกตามแนวนอน"
 
 #~ msgid "Horn"
 #~ msgstr "เขาสัตว์"
@@ -1874,10 +1888,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "เส้นทางเดินจักรพรรดิ์"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "เพิ่มความเร็วเวลา [L]"
 
 #~ msgid "Indus"
 #~ msgstr "คนอินเดีย"
@@ -1912,6 +1922,9 @@ msgstr ""
 #~ msgid "Language"
 #~ msgstr "ภาษา"
 
+#~ msgid "Latitude : "
+#~ msgstr "ละติจูด : "
+
 #~ msgid "Legs"
 #~ msgstr "ขา"
 
@@ -1938,6 +1951,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "กำลังโหลดภาพเนบิวลา่"
+
+#~ msgid "Longitude : "
+#~ msgstr "ลองจิจูด : "
 
 #~ msgid "Lupus"
 #~ msgstr "สุนัขป่า"
@@ -1977,9 +1993,6 @@ msgstr ""
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "อัตราดาวตกต่อนาที"
-
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "อัตราเมื่อจุดศูนย์กลางการตกอยู่เหนือศีรษะ"
 
 #~ msgid "Microscopium"
 #~ msgstr "กล้องจุลทรรศน์"
@@ -2103,9 +2116,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "สวนผลไม้"
 
-#~ msgid "Orion"
-#~ msgstr "นายพราน"
-
 #~ msgid "Outer Fence"
 #~ msgstr "รั้วรอบนอก"
 
@@ -2169,8 +2179,14 @@ msgstr ""
 #~ msgid "Rabbit Tracks"
 #~ msgstr "รอยเท้ากระต่าย"
 
+#~ msgid "Race Track"
+#~ msgstr "ลู่วิ่ง"
+
 #~ msgid "Ramparts"
 #~ msgstr "จรวด"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "ความเร็วเวลาตามจริง [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "บันทึกคำสั่งไปเป็นไฟล์ชุดคำสั่ง:\n"
@@ -2184,8 +2200,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "ตาข่าย"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "กลับไปยังเวลาปัจจุบัน"
 
 #~ msgid "Return to Current Time [8]"
@@ -2254,9 +2269,6 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "ใส่คำค้นหา (เช่น Saturn, Polaris, HP6218, Orion, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "ค้นหาวัตถุ"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "ค้นหาวัตถุ [CTRL + F]"
 
@@ -2269,13 +2281,8 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "เทพแมงป่อง"
 
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "ความเร็วเวลาตามจริง [K]"
-
-#, fuzzy
-#~ msgid "Set Tracking"
-#~ msgstr "ลู่วิ่ง"
+#~ msgid "Serpens"
+#~ msgstr "งู"
 
 #~ msgid "Setting landscape updates the location"
 #~ msgstr "ตั้งค่า landscape และ ตั้งค่าตำแหน่งเป็นปัจจุบัน"
@@ -2294,50 +2301,6 @@ msgstr ""
 
 #~ msgid "Sheepfold"
 #~ msgstr "คอกแกะ"
-
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "บรรยากาศ"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "กริดพิกัดอะซิมุธ"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "ทิศ"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "แสดง: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "เส้นสุริยวิถี"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "เส้นศูนย์สูตร"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "กริดพิกัดศูนย์สูตร"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "กริดพิกัดศูนย์สูตร"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "แสดง: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "พื้น"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "เส้นเมอริเดียน"
 
 #~ msgid "Snake"
 #~ msgstr "งู"
@@ -2447,6 +2410,9 @@ msgstr ""
 #~ msgid "Toilet"
 #~ msgstr "ห้องส้วม"
 
+#~ msgid "Triangle"
+#~ msgstr "สามเหลี่ยม"
+
 #~ msgid "Triangulum"
 #~ msgstr "สามเหลี่ยม"
 
@@ -2473,6 +2439,9 @@ msgstr ""
 
 #~ msgid "Two Sunbeams"
 #~ msgstr "ลำแสงอาทิตย์"
+
+#~ msgid "Type: "
+#~ msgstr "ประเภท: "
 
 #~ msgid "Ursa Major"
 #~ msgstr "หมีใหญ่"

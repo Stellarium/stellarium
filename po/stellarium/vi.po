@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-06-30 19:52+0000\n"
-"Last-Translator: Duy Linh <sochummy@yahoo.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-05-05 04:07+0000\n"
+"Last-Translator: anhcos <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " Năm ánh sáng"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "Đơn vị thiên văn"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "Thời gian thực"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr "Độ cao (mét): "
 msgid "Altitude:"
 msgstr "Độ cao : "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,7 +93,7 @@ msgstr "Nhấn phím mủi tên xuống để tải danh sách."
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -123,18 +101,18 @@ msgstr ""
 msgid "Author: "
 msgstr "Tác giả: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "Độ phương/Độ cao: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Lưới phương vị"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "Lưới phương vị"
 
@@ -159,20 +137,19 @@ msgid "Callisto"
 msgstr "Callisto"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "Điểm phương hướng"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "Điểm phương hướng"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
@@ -189,11 +166,15 @@ msgstr "Tiếng Trung Quốc"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "Màu sắc "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "Cấu hình"
 
@@ -202,21 +183,18 @@ msgid "Constellation Art Intensity"
 msgstr "Độ đậm hình vẽ chòm sao"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "Ranh giới các chòm sao"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Đường nối các chòm sao"
+msgstr "Đường nối chòm sao"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
 msgstr "Tên các chòm sao"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "Đường nối chòm sao"
@@ -242,7 +220,7 @@ msgstr ""
 msgid "Date Display Format: "
 msgstr "Dạng ngày hiển thị: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "Ngày & thời gian"
@@ -251,11 +229,16 @@ msgstr "Ngày & thời gian"
 msgid "Day keys: "
 msgstr ""
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "Giảm tốc độ trôi thời gian [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "Deimos"
@@ -264,17 +247,21 @@ msgstr "Deimos"
 msgid "Dione"
 msgstr "Dione"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "Tráng Sĩ"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " Năm ánh sáng"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "Khoảng cách: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -287,11 +274,10 @@ msgid "Earth"
 msgstr "Trái đất"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "Đường hoàng đạo"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "Đường hoàng đạo"
@@ -312,9 +298,10 @@ msgstr "Enceladus"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:77
@@ -322,26 +309,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "Đường quỹ đạo"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "Đường quỹ đạo"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "Lưới quỹ đạo"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "Lưới quỹ đạo"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Lưới quỹ đạo"
@@ -363,25 +348,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "Lật theo chiều dọc"
+msgstr "Lật theo chiều ngang"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "Lật theo chiều dọc"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "Chỗ cạn"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -391,6 +380,10 @@ msgstr "Ganymede"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "Tổng quát "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -404,6 +397,12 @@ msgstr "Trợ giúp"
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": Mật độ cao nhất đã từng có (mưa sao băng Leonids 1966)"
+
+#: src/ui_viewDialog.h:1056
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr ""
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -421,6 +420,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "Tăng tốc độ trôi thời gian [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr ""
@@ -429,10 +433,11 @@ msgstr ""
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -447,7 +452,7 @@ msgstr "Tethys"
 msgid "Korean"
 msgstr ""
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -455,7 +460,7 @@ msgstr ""
 msgid "Lakota"
 msgstr ""
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "Phong cảnh"
@@ -467,7 +472,7 @@ msgstr "Phong cảnh: "
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "Vĩ tuyến : "
+msgstr "Vĩ độ: "
 
 #: src/modules/TextUI.cpp:80
 msgid "Latitude: "
@@ -482,7 +487,7 @@ msgstr "Cờ trái"
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 msgid "Light pollution:"
 msgstr ""
 
@@ -519,41 +524,43 @@ msgid "Location"
 msgstr "Địa điểm"
 
 #: src/modules/LandscapeMgr.cpp:428
-#, fuzzy
 msgid "Location: "
-msgstr "Địa điểm"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "Kinh tuyến : "
+msgstr "Kinh độ: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Longitude: "
 msgstr "Kinh độ: "
 
 #: src/modules/TextUI.cpp:132
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Tăng cường độ: "
+msgstr ""
 
 #: src/modules/TextUI.cpp:105
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Tăng cường độ: "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "Cấp sao biểu kiến: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "Cấp sao biểu kiến: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Cấp sao biểu kiến: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "Sống Tàu Argo"
@@ -562,10 +569,10 @@ msgstr "Sống Tàu Argo"
 msgid "Manual zoom: "
 msgstr "Zoom thủ công: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "Sống Tàu Argo"
+msgstr "Hỏa tinh"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -591,18 +598,17 @@ msgstr "Thuỷ tinh"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "Hình chiếu :"
+msgstr "Tìm kiếm vật thể"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Thuỷ tinh"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "Đường kinh tuyến"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "Đường kinh tuyến"
@@ -615,7 +621,7 @@ msgstr "Mật độ dãi Ngân Hà "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "Mimas"
@@ -624,7 +630,7 @@ msgstr "Mimas"
 msgid "Moon"
 msgstr "Mặt trăng"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -636,6 +642,11 @@ msgstr "B"
 msgid "Navajo"
 msgstr ""
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "Tinh vân [N]"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "Vòng bao tinh vân"
@@ -644,7 +655,7 @@ msgstr "Vòng bao tinh vân"
 msgid "Nebula Names"
 msgstr "Tên các chòm sao"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "Tinh vân [N]"
@@ -657,7 +668,7 @@ msgstr "Hải vương tinh"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": Tốc độ bình thường"
@@ -670,7 +681,11 @@ msgstr ""
 msgid "Object Sizing Rule: "
 msgstr "Quy luật thay đổi cỡ vật thể: "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "Tráng Sĩ"
@@ -693,8 +708,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, qt-format
+msgid "Parallax: %1"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:11
@@ -721,19 +737,22 @@ msgid "Planet Names"
 msgstr "Tên các hành tinh"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Vết các hành tinh"
+msgstr "Quỹ đạo các hành tinh"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "Vết các hành tinh"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "Hành tinh"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Ghi chú các hình tinh"
@@ -751,23 +770,22 @@ msgid "Preset Sky Time: "
 msgstr "Chỉnh thời gian bầu trời: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "Chỉnh thời gian bầu trời: "
+msgstr "Chỉnh thời gian"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "Ngôn ngữ chương trình: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "Hình chiếu :"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -782,15 +800,13 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 msgid "Quit"
 msgstr ""
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "Xích kinh/Xích vĩ: "
 
 #: src/translations.h:51
@@ -814,16 +830,16 @@ msgstr "Thổ tinh"
 msgid "Save Current Configuration as Default: "
 msgstr "Lưu cấu hình hiện tại thành mặc định: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Lưu địa điểm"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "Tỉ lệ thật mặt trăng"
@@ -839,7 +855,7 @@ msgstr "Chọn và thoát để chạy."
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
+msgstr "Tìm kiếm vật thể"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -847,9 +863,8 @@ msgid "Selected:"
 msgstr "Được chọn : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "Địa điểm"
+msgstr "Thiết lập địa điểm "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -863,73 +878,71 @@ msgstr "Thiết lập múi thời gian: "
 msgid "Set UI Locale: "
 msgstr "Thiết lập nơi xảy ra UI "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": Tốc độ bình thường"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "Thiết lập thời gian "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "Xem: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "Xem: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Khí quyển"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "Xem: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "Xem: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "Xem: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "Xem: "
 
@@ -941,15 +954,16 @@ msgstr "Tắt: "
 msgid "Sidereal"
 msgstr ""
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
-msgstr "Kích thuớc: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
+msgstr "Kích thước: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
@@ -970,10 +984,6 @@ msgstr "Thời gian bầu trời lúc bắt đầu: "
 msgid "Sky Time: "
 msgstr "Thời gian bầu trời: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "Những vật thể thuộc hệ mặt trời: "
@@ -987,13 +997,10 @@ msgstr "Người quan sát hệ mặt trời"
 msgid "Space"
 msgstr "Cây thương"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "Dạng phổ: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1001,16 +1008,15 @@ msgid "Standard Perseids rate"
 msgstr ": Tốc độ mưa sao băng Perseids"
 
 #: src/modules/TextUI.cpp:104
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "Tăng độ sáng biểu kiến sao: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "Ngôi sao"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "Các vì sao"
 
@@ -1018,7 +1024,7 @@ msgstr "Các vì sao"
 msgid "Stars "
 msgstr "Các vì sao "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1030,23 +1036,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1054,7 +1060,7 @@ msgstr ""
 msgid "Sun"
 msgstr "Mặt trời"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1100,128 +1106,126 @@ msgstr "Dạng thời gian hiển thị: "
 msgid "Titan"
 msgstr "Titan"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "Khí quyển"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "Lưới phương vị"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "Điểm phương hướng"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "Thiết lập thông số"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "Hình vẽ các chòm sao [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "Ranh giới các chòm sao"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "Tên các chòm sao"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "Đường nối các chòm sao"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "Đường hoàng đạo"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "Đường quỹ đạo"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "Lưới quỹ đạo"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "Lưới quỹ đạo"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "Xem: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "Thiết lập địa điểm "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "Đường kinh tuyến"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "Tinh vân [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "Quỹ đạo các hành tinh"
+msgid "Toggle atmosphere"
+msgstr "Khí quyển"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "Lưới phương vị"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "Điểm phương hướng"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "Thiết lập thông số"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "Đang tải hình vẽ các chòm sao: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "Ranh giới các chòm sao"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "Tên các chòm sao"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "Đường nối chòm sao"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "Đường hoàng đạo"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "Đường quỹ đạo"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "Lưới quỹ đạo"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "Lưới quỹ đạo"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "Thiết lập thông số"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "Đường kinh tuyến"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "Ghi chú các hình tinh"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "3 ngôi sao"
@@ -1230,21 +1234,30 @@ msgstr "3 ngôi sao"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "Tam giác"
+msgid "Twinkle:"
+msgstr "Nhấp nháy: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "Nhấp nháy: "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "Loại: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
+msgstr ""
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
 msgstr ""
 
 #: src/modules/TextUI.cpp:150
@@ -1255,11 +1268,11 @@ msgstr "Cập nhật qua Internet: "
 msgid "Uranus"
 msgstr "Thiên vương tinh"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1271,7 +1284,7 @@ msgstr ""
 msgid "Venus"
 msgstr "Kim tinh"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "Video"
@@ -1286,7 +1299,7 @@ msgstr "Phương Tây"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1297,28 +1310,22 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "Địa điểm"
+msgstr "Khoảng thời gian phóng to/thu nhỏ: "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "Di chuyển đến vật thể đã chọn [SPACE]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "Khoảng thời gian phóng to/thu nhỏ: "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "Khoảng thời gian phóng to/thu nhỏ: "
-
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
@@ -1377,6 +1384,9 @@ msgstr ""
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: (Các) đối số trong dòng lệnh sai\n"
+
+#~ msgid "AU"
+#~ msgstr "Đơn vị thiên văn"
 
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "Cũng hiển thị những đám tinh vân không có hình chụp"
@@ -1522,9 +1532,17 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "Dừng việc ghi lệnh."
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "Trống rỗng"
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Hình vẽ các chòm sao [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Ranh giới các chòm sao"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Đường nối các chòm sao"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Tên các chòm sao"
 
 #~ msgid "Corona Australis"
 #~ msgstr "Nam Miện"
@@ -1559,10 +1577,6 @@ msgstr ""
 #~ msgid "Day"
 #~ msgstr "Ngày"
 
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "Giảm tốc độ trôi thời gian [J]"
-
 #~ msgid "Delphinus"
 #~ msgstr "Cá Heo"
 
@@ -1588,6 +1602,33 @@ msgstr ""
 
 #~ msgid "Disk Viewport"
 #~ msgstr "Tầm nhìn dạng đĩa"
+
+#, fuzzy
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ENTER: quay theo Equatorial/altazimuthal\n"
+#~ "F1 : Xem toàn màn hình / cửa sổ.\n"
+#~ "C : Đường nối chòm sao V : Tên chòm sao\n"
+#~ "R : Hình chòm sao E : lưới xích đạo\n"
+#~ "Z : Lưới phương vị N : Tên tinh vân\n"
+#~ "P : Tên hành 2inh G : Mặt đất\n"
+#~ "A : Bầu khí quyển F : Sương mù\n"
+#~ "Q : Điểm phương hướng O : Chuyển tỉ lệ mặt trăng\n"
+#~ "T : Bám theo thiên thể S : Các ngôi sao\n"
+#~ "4 , : Đường hoàng đạo 5 , : Đường xích đạo\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1653,6 +1694,9 @@ msgstr ""
 
 #~ msgid "Eastern Door"
 #~ msgstr "Cửa Đông"
+
+#~ msgid "Emptiness"
+#~ msgstr "Trống rỗng"
 
 #~ msgid "Encampment"
 #~ msgstr "Trại giam"
@@ -1739,15 +1783,14 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "Vị tướng vĩ đại"
 
+#~ msgid "Ground"
+#~ msgstr "Mặt đất"
+
 #~ msgid "Ground [G]"
 #~ msgstr "Mặt đất [G]"
 
 #~ msgid "Grus"
 #~ msgstr "Con Sếu"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "Con Rắn"
 
 #~ msgid "Heart"
 #~ msgstr "Trái tim"
@@ -1766,10 +1809,6 @@ msgstr ""
 
 #~ msgid "Hook"
 #~ msgstr "Cái móc"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "Lật theo chiều ngang"
 
 #~ msgid "Horn"
 #~ msgstr "Sừng"
@@ -1794,10 +1833,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "Hành lang hoàng cung"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "Tăng tốc độ trôi thời gian [L]"
 
 #~ msgid "Indus"
 #~ msgstr "Người Da Đỏ"
@@ -1835,6 +1870,9 @@ msgstr ""
 #~ msgid "Language"
 #~ msgstr "Ngôn ngữ"
 
+#~ msgid "Latitude : "
+#~ msgstr "Vĩ tuyến : "
+
 #~ msgid "Legs"
 #~ msgstr "Chân"
 
@@ -1858,6 +1896,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "Đang tải kết cấu các tinh vân:"
+
+#~ msgid "Longitude : "
+#~ msgstr "Kinh tuyến : "
 
 #~ msgid "Lupus"
 #~ msgstr "Chó Sói"
@@ -1996,9 +2037,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "Vườn cây ăn quả"
 
-#~ msgid "Orion"
-#~ msgstr "Tráng Sĩ"
-
 #~ msgid "Outer Fence"
 #~ msgstr "Hàng rào bên ngoài"
 
@@ -2059,6 +2097,9 @@ msgstr ""
 #~ msgid "Ramparts"
 #~ msgstr "Thành lũy"
 
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Tốc độ thời gian thực [K]"
+
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "Ghi các lệnh vào file kịch bản:\n"
 
@@ -2071,8 +2112,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "Lưới Đo Góc"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "Trở về thời điểm hiện tại"
 
 #~ msgid "River Turtle"
@@ -2126,9 +2166,6 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "Tìm kiếm (ví dụ: Saturn, Polaris, HP6218, Orion, M31)"
 
-#~ msgid "Search for object"
-#~ msgstr "Tìm kiếm vật thể"
-
 #~ msgid "Seconds"
 #~ msgstr "Giây"
 
@@ -2138,9 +2175,8 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "Selkis (1 vị nữ thần Ai Cập)"
 
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "Tốc độ thời gian thực [K]"
+#~ msgid "Serpens"
+#~ msgstr "Con Rắn"
 
 #~ msgid "Seven Excellencies"
 #~ msgstr "Thất nương"
@@ -2157,50 +2193,6 @@ msgstr ""
 #~ msgid "Sheepfold"
 #~ msgstr "Bãi rào cừu"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "Khí quyển"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "Lưới phương vị"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "Điểm phương hướng"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "Xem: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "Đường hoàng đạo"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "Đường quỹ đạo"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "Lưới quỹ đạo"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "Lưới quỹ đạo"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "Xem: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "Mặt đất"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "Đường kinh tuyến"
-
 #~ msgid "Soldiers Market"
 #~ msgstr "Chợ quân nhân"
 
@@ -2215,6 +2207,9 @@ msgstr ""
 
 #~ msgid "Square Granary"
 #~ msgstr "Kho thóc vuông"
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Tăng độ sáng biểu kiến sao: "
 
 #~ msgid "Star Names. Up to mag :"
 #~ msgstr "Hiện tên ngôi sao sáng đến :"
@@ -2278,6 +2273,9 @@ msgstr ""
 #~ msgid "Toilet"
 #~ msgstr "Nhà vệ sinh"
 
+#~ msgid "Triangle"
+#~ msgstr "Tam giác"
+
 #~ msgid "Triangulum"
 #~ msgstr "Tam Giác"
 
@@ -2298,6 +2296,9 @@ msgstr ""
 
 #~ msgid "Two Poles"
 #~ msgstr "Hai cực"
+
+#~ msgid "Type: "
+#~ msgstr "Loại: "
 
 #~ msgid "Ursa Major"
 #~ msgstr "Đại Hùng"

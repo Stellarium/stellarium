@@ -1,18 +1,16 @@
-# translation of 080519-po_stellarium-is.po to Icelandic
-# Icelandic translation for stellarium
-# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Belarusian translation for stellarium
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the stellarium package.
+# Hleb Valoshka <375gnu@gmail.com>, 2008.
 #
-# Sveinn í Felli <sveinki@nett.is>, 2008.
-# Sverrir Guðmundsson <sverrgu@hotmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: 080519-po_stellarium-is\n"
+"Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-28 14:11+0200\n"
-"PO-Revision-Date: 2008-05-25 21:40+0000\n"
-"Last-Translator: Sverrir Gudmundsson <Unknown>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2008-03-21 05:00+0000\n"
+"Last-Translator: Hleb Valoshka <Unknown>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,7 +46,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
-msgstr "Rauntími"
+msgstr "Цяперашні час"
 
 #: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
@@ -72,16 +70,16 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:77
 msgid "Administration "
-msgstr "Kerfisstjórnun "
+msgstr "Кіраваньне "
 
 #: src/modules/TextUI.cpp:82
 msgid "Altitude (m): "
-msgstr "Hæð (m): "
+msgstr "Вышыня (m): "
 
 #: src/ui_locationDialogGui.h:341
 #, fuzzy
 msgid "Altitude:"
-msgstr "Hæð : "
+msgstr "Вышыня : "
 
 #: src/ui_viewDialog.h:1068
 msgid "Amount:"
@@ -89,7 +87,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:143
 msgid "Arrow down to load list."
-msgstr "Ör niður til að hlaða inn lista."
+msgstr "Стрэлка ўніз для загрузкі сьпісу."
 
 #: src/gui/HelpDialog.cpp:50
 msgid "Arrow keys & left mouse drag"
@@ -101,26 +99,26 @@ msgstr ""
 
 #: src/modules/LandscapeMgr.cpp:425
 msgid "Author: "
-msgstr "Höfundur: "
+msgstr "Стваральнік: "
 
 #: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
 #: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
 #, fuzzy, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Áttarhorn/Stjörnuhæð "
+msgstr "Азімут/Вышыня: "
 
 #: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
-msgstr "Áttarhornsmöskvi"
+msgstr "Азімутальная сетка"
 
 #: src/modules/TextUI.cpp:120
 msgid "Azimuthal Grid"
-msgstr "Áttarhornsmöskvi"
+msgstr "Азімутальная сетка"
 
 #: src/modules/TextUI.cpp:141
 msgid "CD/DVD Script: "
-msgstr "CD/DVD skrifta: "
+msgstr "CD/DVD сцэнар: "
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Left click"
@@ -132,20 +130,20 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:89
 msgid "Calendar"
-msgstr "Dagatal"
+msgstr "Каляндар"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr "Kallistó"
+msgstr "Каліста"
 
 #: src/modules/TextUI.cpp:115
 msgid "Cardinal Points"
-msgstr "Höfuðáttir"
+msgstr "Бакі сьвету"
 
 #: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
-msgstr "Höfuðáttir"
+msgstr "Бакі сьвету"
 
 #: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
@@ -154,15 +152,15 @@ msgstr ""
 #: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
-msgstr "Miða á valið fyrirbæri [SPACE]"
+msgstr "Перайсьці да абранага аб'екта [ПРАБЕЛ]"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr "Karon"
+msgstr "Харон"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr "Kínversk"
+msgstr "Кітайская"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Clear selection"
@@ -174,32 +172,32 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
-msgstr "Litir "
+msgstr "Колеры "
 
 #: src/ui_configurationDialog.h:136
 msgid "Configuration"
-msgstr "Stillingar"
+msgstr "Настаўленьні"
 
 #: src/modules/TextUI.cpp:113
 msgid "Constellation Art Intensity"
-msgstr "Styrkur stjörnumerkjamynda"
+msgstr "Яраксьць выяваў сузор'яў"
 
 #: src/modules/TextUI.cpp:114
 msgid "Constellation Boundaries"
-msgstr "Mörk stjörnumerkja"
+msgstr "Межы сузор'яў"
 
 #: src/modules/TextUI.cpp:111
 msgid "Constellation Lines"
-msgstr "Teikna línur stjörnumerkja"
+msgstr "Лініі сузор'яў"
 
 #: src/modules/TextUI.cpp:112
 msgid "Constellation Names"
-msgstr "Nöfn stjörnumerkja"
+msgstr "Імёны сузор'яў"
 
 #: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
-msgstr "Teikna línur stjörnumerkja"
+msgstr "Лініі сузор'яў"
 
 #: src/modules/TextUI.cpp:137
 msgid "Correct for light travel time: "
@@ -207,48 +205,49 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:136
 msgid "Cursor Timeout: "
-msgstr "Tímamörk bendils: "
+msgstr "Затрымка курсора: "
 
 #: src/ui_locationDialogGui.h:325
 #, fuzzy
 msgid "Cursor:"
-msgstr "Bendill : "
+msgstr "Курсор : "
 
 #: src/core/MappingClasses.cpp:223
 #, fuzzy
 msgid "Cylinder"
-msgstr "Dagatal"
+msgstr "Каляндар"
 
 #: src/modules/TextUI.cpp:96
 msgid "Date Display Format: "
-msgstr "Sýnisnið dagsetningar: "
+msgstr "Фармат адлюстраваньня даты: "
 
 #: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
-msgstr "Dagur og tími"
+msgstr "Дата й час"
 
 #: src/modules/TextUI.cpp:88
+#, fuzzy
 msgid "Day keys: "
-msgstr "Dagalyklar: "
+msgstr "Клявішы дня: "
 
 #: src/gui/NewGui.cpp:420
 #, fuzzy
 msgid "Decrease time speed"
-msgstr "Minnka tímahröðun [J]"
+msgstr "Зьменшыць хуткасьць часу [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
-msgstr "Deimos"
+msgstr "Дэймас"
 
 #: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
-msgstr "Hundarnir"
+msgstr "Сабакі"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr "Díóne"
+msgstr "Дыёна"
 
 #: src/gui/NewGui.cpp:383
 msgid "Display Options"
@@ -257,12 +256,12 @@ msgstr ""
 #: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
 #, fuzzy, qt-format
 msgid "Distance: %1 Light Years"
-msgstr " Ljósár"
+msgstr " сьветлавых гадоў"
 
 #: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
 #, fuzzy, c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Fjarlægð: "
+msgstr "Адлегласьць: "
 
 #: src/ui_viewDialog.h:1052
 msgid "Download images"
@@ -270,32 +269,32 @@ msgstr ""
 
 #: src/translations.h:65
 msgid "E"
-msgstr "A"
+msgstr "У"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "jörðin"
+msgstr "Зямля"
 
 #: src/modules/TextUI.cpp:123
 msgid "Ecliptic Line"
-msgstr "Sólbraut"
+msgstr "Лінія экліптыкі"
 
 #: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
-msgstr "Sólbraut"
+msgstr "Лінія экліптыкі"
 
 #: src/modules/TextUI.cpp:75
 msgid "Effects "
-msgstr "Áhrif "
+msgstr "Эфэкты "
 
 #: src/translations.h:70
 msgid "Egyptian"
-msgstr "Egypsk"
+msgstr "Эгіпэцкая"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr "Enkeladus"
+msgstr "Энцэляд"
 
 #: src/ui_locationDialogGui.h:344
 msgid "Enter the altitude in meter"
@@ -303,9 +302,9 @@ msgstr ""
 
 #: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-#, fuzzy, qt-format
+#, qt-format
 msgid "Equ of date RA/DE: %1/%2"
-msgstr "Vorp. dags."
+msgstr ""
 
 #: src/core/MappingClasses.cpp:77
 msgid "Equal Area"
@@ -313,35 +312,35 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:122
 msgid "Equator Line"
-msgstr "Miðbaugslína"
+msgstr "Лінія экватара"
 
 #: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
-msgstr "Miðbaugslína"
+msgstr "Лінія экватара"
 
 #: src/modules/TextUI.cpp:121
 msgid "Equatorial Grid"
-msgstr "Miðbaugsmöskvi"
+msgstr "Экватарыяльная сетка"
 
 #: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
-msgstr "Miðbaugsmöskvi"
+msgstr "Экватарыяльная сетка"
 
 #: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
-msgstr "Miðbaugsmöskvi"
+msgstr "Экватарыяльная сетка"
 
 #: src/translations.h:43
 msgid "Europa"
-msgstr "Evrópa"
+msgstr "Эўропа"
 
 #: src/gui/ViewDialog.cpp:340
 #, fuzzy
 msgid "Exceptional Leonid rate"
-msgstr ": Óvenju há tíðni Leoníta"
+msgstr ": Незвычайная часьціня Леанідаў"
 
 #: src/ui_searchDialogGui.h:141 src/ui_searchDialogGui.h:142
 msgid "Find Object"
@@ -364,7 +363,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
-msgstr "Vaðið"
+msgstr "Брод"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
@@ -376,11 +375,11 @@ msgstr ""
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr "Ganýmedes"
+msgstr "Ганімэд"
 
 #: src/modules/TextUI.cpp:72
 msgid "General "
-msgstr "Almennt "
+msgstr "Агульныя "
 
 #: src/modules/Nebula.cpp:267
 msgid "Globular cluster"
@@ -392,27 +391,27 @@ msgstr ""
 
 #: src/ui_helpDialogGui.h:152
 msgid "Help"
-msgstr "Hjálp"
+msgstr "Дапамога"
 
 #: src/gui/ViewDialog.cpp:343
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
-msgstr ": Hæsta tíðni sem sést hefur (Leonítadrífan 1966)"
+msgstr ": Найбольшая калі (Леаніды ў 1966)"
 
 #: src/ui_viewDialog.h:1056
 #, fuzzy
 msgid ""
 "Hourly\n"
 "zenith rate"
-msgstr "Tíðni loftsteina úr hvirfilpunkti á klukkustund"
+msgstr "Колькасьць мэтэораў за гадзіну"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr "Hýperíon"
+msgstr "Гіпэрыён"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr "Íapetus"
+msgstr "Япэт"
 
 #: src/core/MappingClasses.cpp:183
 msgid ""
@@ -425,15 +424,15 @@ msgstr ""
 #: src/gui/NewGui.cpp:421
 #, fuzzy
 msgid "Increase time speed"
-msgstr "Auka tímahröðun [L]"
+msgstr "Павялічыць хуткасьць часу [L]"
 
 #: src/translations.h:71
 msgid "Inuit"
-msgstr "Inúíta"
+msgstr "Інуіцкая"
 
 #: src/translations.h:42
 msgid "Io"
-msgstr "Íó"
+msgstr "Іо"
 
 #: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
 #: src/modules/Telescope.cpp:242
@@ -443,16 +442,16 @@ msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr "Júpíter"
+msgstr "Юпітэр"
 
 #: src/gui/HelpDialog.cpp:120
 #, fuzzy
 msgid "Keys"
-msgstr "Teþys"
+msgstr "Тэфія"
 
 #: src/translations.h:72
 msgid "Korean"
-msgstr "Kóresk"
+msgstr "Карэйская"
 
 #: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
@@ -460,104 +459,104 @@ msgstr ""
 
 #: src/translations.h:73
 msgid "Lakota"
-msgstr "Lakóta"
+msgstr ""
 
 #: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
-msgstr "Landslag"
+msgstr "Краявіды"
 
 #: src/modules/TextUI.cpp:129
 msgid "Landscape: "
-msgstr "Landslag: "
+msgstr "Краявід: "
 
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "Breiddargráða: "
+msgstr "Шырата: "
 
 #: src/modules/TextUI.cpp:80
 msgid "Latitude: "
-msgstr "Breiddargráða: "
+msgstr "Шырата: "
 
 #: src/gui/HelpDialog.cpp:53
 #, fuzzy
 msgid "Left click"
-msgstr "Vinstri fáninn"
+msgstr "Левы сьцяг"
 
 #: src/modules/TextUI.cpp:128
 msgid "Light Pollution Luminance: "
-msgstr "Ljómi vegna ljósmengunar "
+msgstr "Яркасьць засьвятленьня: "
 
 #: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
-msgstr "Ljómi vegna ljósmengunar "
+msgstr "Яркасьць засьвятленьня: "
 
 #: src/modules/TextUI.cpp:108
 #, fuzzy
 msgid "Limiting Magnitude: "
-msgstr "Birtustig: "
+msgstr "Велічыня: "
 
 #: src/modules/TextUI.cpp:147
 msgid "Load Default Configuration: "
-msgstr "Hlaða inn sjálfgefnum stillingum: "
+msgstr "Загрузіць стандартныя настаўленьні: "
 
 #: src/modules/ConstellationMgr.cpp:371
 #, fuzzy, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr "Hleð inn myndrænum stjörnumerkjum "
+msgstr "Загрузка выяваў сузор'яў: "
 
 #: src/modules/NebulaMgr.cpp:372
 #, fuzzy, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "Hleð inn NGC grunngögnum: "
+msgstr "Загрузка каталёгу NGC: "
 
 #: src/modules/StarMgr.cpp:253
 #, fuzzy, qt-format
 msgid "Loading catalog %1"
-msgstr "Hleð inn grunngögnum "
+msgstr "Загрузка каталёгу "
 
 #: src/modules/TextUI.cpp:140
 msgid "Local Script: "
-msgstr "Staðvær skrifta: "
+msgstr "Мясцовы сцэнар: "
 
 #: src/ui_locationDialogGui.h:322
 msgid "Location"
-msgstr "Staðsetning"
+msgstr "Месца"
 
 #: src/modules/LandscapeMgr.cpp:428
 msgid "Location: "
-msgstr "Staðsetning: "
+msgstr "Месца: "
 
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "Lengdargráða: "
+msgstr "Даўгата: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Longitude: "
-msgstr "Lengdargráða: "
+msgstr "Даўгата: "
 
 #: src/modules/TextUI.cpp:132
 msgid "Magnitude Scaling Multiplier: "
-msgstr "Stillingar birtustigs: "
+msgstr "Множнік зьмяненьня велічыні: "
 
 #: src/modules/TextUI.cpp:105
 #, fuzzy
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Stillingar birtustigs: "
+msgstr "Множнік зьмяненьня велічыні: "
 
 #: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
 #: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
-msgstr "Birtustig: "
+msgstr "Велічыня: "
 
 #: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
 #, fuzzy, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Birtustig: "
+msgstr "Велічыня: "
 
 #: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
 #, qt-format
@@ -567,20 +566,20 @@ msgstr ""
 #: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
-msgstr "Kjölurinn"
+msgstr "Кіль"
 
 #: src/modules/TextUI.cpp:130
 msgid "Manual zoom: "
-msgstr "Handvirkur aðdráttur: "
+msgstr "Ручное павелічэньне: "
 
 #: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "Mars"
+msgstr "Марс"
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr "Mars"
+msgstr "Марс"
 
 #: src/core/Mapping.cpp:28
 msgid "Maximum FOV: "
@@ -588,16 +587,16 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:106
 msgid "Maximum Magnitude to Label: "
-msgstr "Merkja að hámarksbirtustigi: "
+msgstr "Іменаваць да велічыні: "
 
 #: src/modules/TextUI.cpp:134
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Merkja stjörnuþokur að birtustigi: "
+msgstr "Іменаваць туманнасьці да велічыні: "
 
 #: src/core/MappingClasses.cpp:278
 #, fuzzy
 msgid "Mercator"
-msgstr "Merkúr"
+msgstr "Мэркуры"
 
 #: src/core/MappingClasses.cpp:283
 msgid "Mercator projection"
@@ -605,33 +604,33 @@ msgstr ""
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "Merkúr"
+msgstr "Мэркуры"
 
 #: src/modules/TextUI.cpp:119
 msgid "Meridian Line"
-msgstr "Hádegisbaugur"
+msgstr "Лініі мэрыдыяну"
 
 #: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
-msgstr "Hádegisbaugur"
+msgstr "Лініі мэрыдыяну"
 
 #: src/modules/TextUI.cpp:133
 msgid "Milky Way intensity: "
-msgstr "Bjarmi Vetrarbrautarinnar "
+msgstr "Яркасьць Млечнага шляху: "
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr "Mímas"
+msgstr "Мімас"
 
 #: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
-msgstr "Mímas"
+msgstr "Мімас"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "tunglið"
+msgstr "Месяц"
 
 #: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
@@ -639,33 +638,33 @@ msgstr ""
 
 #: src/translations.h:63
 msgid "N"
-msgstr "N"
+msgstr "Пн"
 
 #: src/translations.h:74
 msgid "Navajo"
-msgstr "Navajo"
+msgstr "Наваская"
 
 #: src/modules/Nebula.cpp:270
 #, fuzzy
 msgid "Nebula"
-msgstr "Stjörnuþokur [N]"
+msgstr "Туманнасьці [N]"
 
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
-msgstr "Baugar stjörnuþoka"
+msgstr "Акружнасьці туманнасьцяў"
 
 #: src/modules/TextUI.cpp:124
 msgid "Nebula Names"
-msgstr "Nöfn stjörnuþoka"
+msgstr "Імёны туманнасьцяў"
 
 #: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
-msgstr "Stjörnuþokur [N]"
+msgstr "Туманнасьці [N]"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr "Neptúnus"
+msgstr "Нэптун"
 
 #: src/gui/ViewDialog.cpp:285
 msgid "No description"
@@ -674,15 +673,16 @@ msgstr ""
 #: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
-msgstr ": Venjuleg tíðni"
+msgstr ": Нармальная часьціня"
 
 #: src/translations.h:75
+#, fuzzy
 msgid "Norse"
-msgstr "Norræn"
+msgstr "Нарожнік"
 
 #: src/modules/TextUI.cpp:131
 msgid "Object Sizing Rule: "
-msgstr "Mælistika: "
+msgstr "Правіла зьмены памеру аб'екта: "
 
 #: src/modules/Nebula.cpp:264
 msgid "Open cluster"
@@ -691,7 +691,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
-msgstr "Óríon"
+msgstr "Арыён"
 
 #: src/core/MappingClasses.cpp:336
 msgid "Orthographic"
@@ -714,12 +714,12 @@ msgstr ""
 #: src/modules/StarWrapper.cpp:125
 #, fuzzy, qt-format
 msgid "Parallax: %1"
-msgstr "Hliðrun: "
+msgstr "Паралякс: "
 
 #: src/core/MappingClasses.cpp:11
 #, fuzzy
 msgid "Perspective"
-msgstr "Forstilltur tími"
+msgstr "Зададзены час"
 
 #: src/core/MappingClasses.cpp:16
 msgid ""
@@ -729,23 +729,23 @@ msgstr ""
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr "Fóbos"
+msgstr "Фобас"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr "Föbe"
+msgstr "Фэба"
 
 #: src/modules/TextUI.cpp:116
 msgid "Planet Names"
-msgstr "Nöfn reikistjarna"
+msgstr "Імёны плянэтаў"
 
 #: src/modules/TextUI.cpp:117
 msgid "Planet Orbits"
-msgstr "Brautir reikistjarna"
+msgstr "Арбіты плянэтаў"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
-msgstr "Ferlar reikistjarna"
+msgstr "Сьляды плянэтаў"
 
 #: src/modules/Nebula.cpp:273
 msgid "Planetary nebula"
@@ -753,38 +753,38 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1066
 msgid "Planets"
-msgstr "Reikistjörnur"
+msgstr "Плянэты"
 
 #: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
-msgstr "Vísbendingar um reikistjörnur"
+msgstr "Намінкі плянэтаў"
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr "Plútó"
+msgstr "Плютон"
 
 #: src/translations.h:76
 msgid "Polynesian"
-msgstr "Pólýnesísk"
+msgstr "Палінэзійская"
 
 #: src/modules/TextUI.cpp:91
 msgid "Preset Sky Time: "
-msgstr "Forstilltur himintími: "
+msgstr "Зададзены нябесны час: "
 
 #: src/modules/TextUI.cpp:94
 msgid "Preset Time"
-msgstr "Forstilltur tími"
+msgstr "Зададзены час"
 
 #: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
-msgstr "Tungumál forrits: "
+msgstr "Мова праграмы: "
 
 #: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
-msgstr "Vörpun :"
+msgstr "Праекцыя :"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
 #: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
@@ -806,33 +806,33 @@ msgstr ""
 #: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
-msgstr "Inúíta"
+msgstr "Інуіцкая"
 
 #: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
 #, fuzzy, qt-format
 msgid "RA/DE: %1/%2"
-msgstr "Stjörnulengd/Stjörnubreidd: "
+msgstr "Радыяны/Градусы: "
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr "Rea"
+msgstr "Рэя"
 
 #: src/gui/HelpDialog.cpp:54
 #, fuzzy
 msgid "Right click"
-msgstr "Hægri fáninn"
+msgstr "Правы сьцяг"
 
 #: src/translations.h:64
 msgid "S"
-msgstr "S"
+msgstr "Пд"
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr "Satúrnus"
+msgstr "Сатурн"
 
 #: src/modules/TextUI.cpp:148
 msgid "Save Current Configuration as Default: "
-msgstr "Vista núverandi stillingar sem sjálfgefnar: "
+msgstr "Зрабіць цяперашнія настаўленьні дапомнымі: "
 
 #: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
@@ -841,20 +841,20 @@ msgstr ""
 #: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
-msgstr "Vista staðsetningu"
+msgstr "Захаваць месца"
 
 #: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
-msgstr "Stækka tunglið"
+msgstr "Памер Месяца"
 
 #: src/modules/TextUI.cpp:76
 msgid "Scripts "
-msgstr "Skriftur "
+msgstr "Сцэнары "
 
 #: src/modules/TextUI.cpp:144
 msgid "Select and exit to run."
-msgstr "Velja og fara út úr til að keyra"
+msgstr "Выберы й выйдзі, каб выканаць."
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Select object"
@@ -863,33 +863,33 @@ msgstr ""
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
 msgid "Selected:"
-msgstr "Valið : "
+msgstr "Абрана : "
 
 #: src/modules/TextUI.cpp:70
 msgid "Set Location "
-msgstr "Stilla staðsetningu "
+msgstr "Зьмяніць месца "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
-msgstr "Stilla tíma "
+msgstr "Зьмяніць час "
 
 #: src/modules/TextUI.cpp:87
 msgid "Set Time Zone: "
-msgstr "Stilla tímabelti: "
+msgstr "Зьмяніць часавы пояс: "
 
 #: src/modules/TextUI.cpp:151
 msgid "Set UI Locale: "
-msgstr "Stilla staðfærslu viðmóts: "
+msgstr "Выберы мову ІК: "
 
 #: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
-msgstr ": Venjuleg tíðni"
+msgstr ": Нармальная часьціня"
 
 #: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
-msgstr "Stilla tíma "
+msgstr "Зьмяніць час "
 
 #: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
@@ -903,17 +903,17 @@ msgstr ""
 #: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
-msgstr "Sýna: "
+msgstr "Паказ: "
 
 #: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
-msgstr "Sýna: "
+msgstr "Паказ: "
 
 #: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
-msgstr "Lofthjúpur"
+msgstr "Атмасфэра"
 
 #: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
@@ -922,7 +922,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
-msgstr "Sýna: "
+msgstr "Паказ: "
 
 #: src/ui_viewDialog.h:1072
 msgid "Show ground"
@@ -935,7 +935,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
-msgstr "Sýna: "
+msgstr "Паказ: "
 
 #: src/ui_viewDialog.h:1044
 msgid "Show markers"
@@ -947,15 +947,15 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:103
 msgid "Show: "
-msgstr "Sýna: "
+msgstr "Паказ: "
 
 #: src/modules/TextUI.cpp:149
 msgid "Shut Down: "
-msgstr "Slökkva: "
+msgstr "Спыняць працу: "
 
 #: src/modules/TextUI.cpp:90
 msgid "Sidereal"
-msgstr "Hvarftími"
+msgstr "Зорны"
 
 #: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
@@ -964,68 +964,67 @@ msgstr ""
 #: src/modules/Nebula.cpp:100
 #, fuzzy, qt-format
 msgid "Size: %1"
-msgstr "Stærð: "
+msgstr "Памер: "
 
 #: src/ui_viewDialog.h:1069
-#, fuzzy
 msgid "Sky"
-msgstr "Sek"
+msgstr ""
 
 #: src/modules/TextUI.cpp:99
 msgid "Sky Culture: "
-msgstr "Stjörnumerkjakerfi: "
+msgstr "Культура неба: "
 
 #: src/modules/TextUI.cpp:100
 msgid "Sky Language: "
-msgstr "Tungumál á himni: "
+msgstr "Мова неба: "
 
 #: src/modules/TextUI.cpp:92
 msgid "Sky Time At Start-up: "
-msgstr "Himintími við ræsingu: "
+msgstr "Нябесны час на пачатку: "
 
 #: src/modules/TextUI.cpp:86
 msgid "Sky Time: "
-msgstr "Himintími: "
+msgstr "Час неба: "
 
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
-msgstr "Hnöttur í sólkerfinu: "
+msgstr "Цела сонечнай сыстэмы: "
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr "Athugandi sólkerfis"
+msgstr "Назіральнік сонечнай сыстэмы"
 
 #: src/gui/HelpDialog.cpp:49
 #, fuzzy
 msgid "Space"
-msgstr "Lensan"
+msgstr "Лянцэт"
 
 #: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
 #, fuzzy, qt-format
 msgid "Spectral Type: %1"
-msgstr "Litrófsflokkur: "
+msgstr "Спэктральны тып: "
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
 msgid "Standard Perseids rate"
-msgstr ": Venjuleg tíðni Persíta"
+msgstr ": Звычайная часьціня Пэрсэідаў"
 
 #: src/modules/TextUI.cpp:104
 msgid "Star Value Multiplier: "
-msgstr "Margfaldari stjörnugilda: "
+msgstr "Множнік зорнай велічыні: "
 
 #: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
-msgstr "Stjarnan"
+msgstr "Зорка"
 
 #: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
-msgstr "Stjörnur"
+msgstr "Зоркі"
 
 #: src/modules/TextUI.cpp:73
 msgid "Stars "
-msgstr "Stjörnur "
+msgstr "Зоркі "
 
 #: src/gui/NewGui.cpp:928
 msgid "Stellarium"
@@ -1061,7 +1060,7 @@ msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr "sólin"
+msgstr "Сонца"
 
 #: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
@@ -1069,7 +1068,7 @@ msgstr ""
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr "Teþys"
+msgstr "Тэфія"
 
 #: src/gui/HelpDialog.cpp:130
 msgid "The Stellarium User Guide:"
@@ -1103,11 +1102,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:95
 msgid "Time Display Format: "
-msgstr "Sýnisnið tíma: "
+msgstr "Фармат часу: "
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr "Títan"
+msgstr "Тытан"
 
 #: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
@@ -1116,42 +1115,42 @@ msgstr ""
 #: src/gui/NewGui.cpp:398
 #, fuzzy
 msgid "Toggle atmosphere"
-msgstr "Lofthjúpur"
+msgstr "Атмасфэра"
 
 #: src/gui/NewGui.cpp:389
 #, fuzzy
 msgid "Toggle azimutal grid"
-msgstr "Áttarhornsmöskvi"
+msgstr "Азімутальная сетка"
 
 #: src/gui/NewGui.cpp:395
 #, fuzzy
 msgid "Toggle cardinal points"
-msgstr "Höfuðáttir"
+msgstr "Бакі сьвету"
 
 #: src/gui/NewGui.cpp:417
 #, fuzzy
 msgid "Toggle configuration window"
-msgstr "Stillingagluggi [1]"
+msgstr "Вакно настаўленьняў [1]"
 
 #: src/gui/NewGui.cpp:385
 #, fuzzy
 msgid "Toggle constellation art"
-msgstr "Hleð inn myndrænum stjörnumerkjum "
+msgstr "Загрузка выяваў сузор'яў: "
 
 #: src/gui/NewGui.cpp:387
 #, fuzzy
 msgid "Toggle constellation boundaries"
-msgstr "Mörk stjörnumerkja"
+msgstr "Межы сузор'яў"
 
 #: src/gui/NewGui.cpp:386
 #, fuzzy
 msgid "Toggle constellation labels"
-msgstr "Nöfn stjörnumerkja"
+msgstr "Імёны сузор'яў"
 
 #: src/gui/NewGui.cpp:384
 #, fuzzy
 msgid "Toggle constellation lines"
-msgstr "Teikna línur stjörnumerkja"
+msgstr "Лініі сузор'яў"
 
 #: src/gui/NewGui.cpp:415
 msgid "Toggle date/time window"
@@ -1160,22 +1159,22 @@ msgstr ""
 #: src/gui/NewGui.cpp:392
 #, fuzzy
 msgid "Toggle ecliptic line"
-msgstr "Sólbraut"
+msgstr "Лінія экліптыкі"
 
 #: src/gui/NewGui.cpp:393
 #, fuzzy
 msgid "Toggle equator line"
-msgstr "Miðbaugslína"
+msgstr "Лінія экватара"
 
 #: src/gui/NewGui.cpp:391
 #, fuzzy
 msgid "Toggle equatorial J2000 grid"
-msgstr "Miðbaugsmöskvi"
+msgstr "Экватарыяльная сетка"
 
 #: src/gui/NewGui.cpp:390
 #, fuzzy
 msgid "Toggle equatorial grid"
-msgstr "Miðbaugsmöskvi"
+msgstr "Экватарыяльная сетка"
 
 #: src/gui/NewGui.cpp:399
 msgid "Toggle fog"
@@ -1196,12 +1195,12 @@ msgstr ""
 #: src/gui/NewGui.cpp:414
 #, fuzzy
 msgid "Toggle location window"
-msgstr "Stillingagluggi [1]"
+msgstr "Вакно настаўленьняў [1]"
 
 #: src/gui/NewGui.cpp:394
 #, fuzzy
 msgid "Toggle meridian line"
-msgstr "Hádegisbaugur"
+msgstr "Лініі мэрыдыяну"
 
 #: src/gui/NewGui.cpp:401
 msgid "Toggle nebulas"
@@ -1218,7 +1217,7 @@ msgstr ""
 #: src/gui/NewGui.cpp:404
 #, fuzzy
 msgid "Toggle planets hints"
-msgstr "Vísbendingar um reikistjörnur"
+msgstr "Намінкі плянэтаў"
 
 #: src/gui/NewGui.cpp:412
 msgid "Toggle search window"
@@ -1231,7 +1230,7 @@ msgstr ""
 #: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
-msgstr "Stjörnurnar þrjár"
+msgstr "Тры зоркі"
 
 #: src/translations.h:78
 msgid "Tupi-Guarani"
@@ -1240,11 +1239,11 @@ msgstr ""
 #: src/ui_viewDialog.h:1040
 #, fuzzy
 msgid "Twinkle:"
-msgstr "Stjörnublik "
+msgstr "Мігаценьне: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
-msgstr "Stjörnublik "
+msgstr "Мігаценьне: "
 
 #: src/modules/Nebula.cpp:89
 #, qt-format
@@ -1253,7 +1252,7 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
-msgstr "USB skrifta: "
+msgstr "USB сцэнар: "
 
 #: src/modules/Nebula.cpp:282
 msgid "Undocumented type"
@@ -1265,11 +1264,11 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:150
 msgid "Update me via Internet: "
-msgstr "Uppfæra mig um Internetið: "
+msgstr "Абнавіць мяне празь Сеціва: "
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr "Úranus"
+msgstr "Уран"
 
 #: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
@@ -1285,20 +1284,20 @@ msgstr ""
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr "Venus"
+msgstr "Вэнэра"
 
 #: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
-msgstr "Sýn"
+msgstr "Відэа"
 
 #: src/translations.h:66
 msgid "W"
-msgstr "V"
+msgstr "З"
 
 #: src/translations.h:77
 msgid "Western"
-msgstr "Vestræn"
+msgstr "Заходняя"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
@@ -1314,12 +1313,12 @@ msgstr ""
 
 #: src/modules/TextUI.cpp:135
 msgid "Zoom Duration: "
-msgstr "Tímalengd aðdráttar: "
+msgstr "Працягласьць павелічэньня: "
 
 #: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
-msgstr "Miða á valið fyrirbæri [SPACE]"
+msgstr "Перайсьці да абранага аб'екта [ПРАБЕЛ]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
 msgid "Zoom in/out"
@@ -1328,11 +1327,11 @@ msgstr ""
 #: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
-msgstr "Tímalengd aðdráttar: "
+msgstr "Працягласьць павелічэньня: "
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr "m"
+msgstr "м"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:149
@@ -1378,228 +1377,222 @@ msgstr ""
 #~ "    and comments to us at: http://www.stellarium.org\n"
 #~ "\n"
 #~ msgstr ""
-#~ "   Vinsamlegast athugið hvort til sé nýrri útgáfa og sendið villuboð\n"
-#~ "    og athugasemdir til okkar á slóðinni http://www.stellarium.org\n"
+#~ "   Калі ласка, правер наяўнасьць навейшай вэрсіі і дашлі\n"
+#~ "    паведамленьні пра памылкі і камэнтары на http://www.stellarium.org\n"
 #~ "\n"
 
 #~ msgid "AU"
-#~ msgstr "Stjörnufræðieiningar"
+#~ msgstr "а.а."
 
 #~ msgid "Also display Nebulas without textures"
-#~ msgstr "Sýna einnig þokur án áferðar"
+#~ msgstr "Адлюстроўваць туманнасьці без тэкстураў"
 
 #~ msgid "Andromeda"
-#~ msgstr "Andrómeda"
+#~ msgstr "Андрамэда"
 
 #~ msgid "Animal"
-#~ msgstr "Dýrið"
+#~ msgstr "Жывёла"
 
 #~ msgid "Antlia"
-#~ msgstr "Dælan"
+#~ msgstr "Помпа"
 
 #~ msgid "Apus"
-#~ msgstr "Paradísarfuglinn"
+#~ msgstr "Райская птушка"
 
 #~ msgid "Aquarius"
-#~ msgstr "Vatnsberinn"
+#~ msgstr "Вадаліў"
 
 #~ msgid "Aquila"
-#~ msgstr "Örninn"
+#~ msgstr "Арол"
 
 #~ msgid "Ara"
-#~ msgstr "Altarið"
+#~ msgstr "Ахвярнік"
 
 #~ msgid "Are you sure ?"
-#~ msgstr "Ertu viss ?"
+#~ msgstr "Упэўнены(-ая)?"
 
 #~ msgid "Aries"
-#~ msgstr "Hrúturinn"
+#~ msgstr "Авен"
 
 #~ msgid "Arsenal"
-#~ msgstr "Vopnabúrið"
+#~ msgstr "Арсэнал"
 
 #~ msgid "Atmosphere [A]"
-#~ msgstr "Lofthjúpur [A]"
+#~ msgstr "Атмасфэра [A]"
 
 #~ msgid "Auriga"
-#~ msgstr "Ökumaðurinn"
+#~ msgstr "Возьнік"
 
 #~ msgid "Aurvandil's Toe"
-#~ msgstr "Aurvandilstá"
+#~ msgstr "Палец Аўрвандыля"
 
 #~ msgid "Azimuthal Grid [Z]"
-#~ msgstr "Áttarhornsmöskvi [Z]"
+#~ msgstr "Азімутальная сетка [Z]"
 
 #~ msgid "Bailer"
-#~ msgstr "Skjólan"
+#~ msgstr "Коўш"
 
 #~ msgid "Banner of Three Stars"
-#~ msgstr "Þriggja stjörnu fáninn"
+#~ msgstr "Сьцяг трох зорак"
 
 #~ msgid "Bear's Lodge"
-#~ msgstr "Bjarnarhýðið"
+#~ msgstr "Медзьвядзёва бярлога"
 
 #~ msgid "Bird"
-#~ msgstr "Fuglinn"
+#~ msgstr "Птушка"
 
 #~ msgid "Blubber Container"
-#~ msgstr "Lýsisbelgurinn"
+#~ msgstr "Пасудзіна з тлушчам"
 
 #~ msgid "Boat"
-#~ msgstr "Báturinn"
+#~ msgstr "Лодка"
 
 #~ msgid "Bond"
-#~ msgstr "Bandið"
+#~ msgstr "Повязі"
 
 #~ msgid "Bootes"
-#~ msgstr "Hjarðmaðurinn"
+#~ msgstr "Валапас"
 
 #~ msgid "Bow and Arrow"
-#~ msgstr "Bogi og örvar"
+#~ msgstr "Лук і страла"
 
 #~ msgid "Breastbone"
-#~ msgstr "Bringubeinið"
+#~ msgstr "Грудзіна"
 
 #~ msgid "Bull's Foreleg"
-#~ msgstr "Froskafóturinn"
+#~ msgstr "Пярэдняя нага быка"
 
 #~ msgid "CMD + Q : Quit\n"
-#~ msgstr "CMD + Q : Hætta\n"
+#~ msgstr "CMD + Q : Выйсьці\n"
 
 #~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : Hætta\n"
+#~ msgstr "CTRL + Q : Выйсьці\n"
 
 #~ msgid "Caelum"
-#~ msgstr "Meitillinn"
+#~ msgstr "Разец"
 
 #~ msgid "Camelopardalis"
-#~ msgstr "Gírafinn"
+#~ msgstr "Жыраф"
 
 #~ msgid "Cancel"
-#~ msgstr "Hætta við"
+#~ msgstr "Адмена"
 
 #~ msgid "Cancer"
-#~ msgstr "Krabbinn"
+#~ msgstr "Рак"
 
 #~ msgid "Canes Venatici"
-#~ msgstr "Veiðihundarnir"
+#~ msgstr "Гончакі"
 
 #~ msgid "Canis Major"
-#~ msgstr "Stórihundur"
+#~ msgstr "Вялікі пёс"
 
 #~ msgid "Canis Minor"
-#~ msgstr "Litlihundur"
+#~ msgstr "Малы пёс"
 
 #~ msgid "Capricornus"
-#~ msgstr "Steingeitin"
+#~ msgstr "Казарог"
 
 #~ msgid "Cardinal Points [Q]"
-#~ msgstr "Höfuðáttir [Q]"
+#~ msgstr "Бакі сьвету [Q]"
 
 #~ msgid "Cared for by Moon"
-#~ msgstr "Í umsjá tunglsins"
-
-#~ msgid "Caribou"
-#~ msgstr "Caribou"
+#~ msgstr "Забясьпечваецца Месяцам"
 
 #~ msgid "Cassiopeia"
-#~ msgstr "Kassíópeia"
+#~ msgstr "Касіяпэя"
 
 #~ msgid "Cat's Cradle"
-#~ msgstr "Kattarbælið"
+#~ msgstr "Каціная калыска"
 
 #~ msgid "Centaurus"
-#~ msgstr "Mannfákurinn"
+#~ msgstr "Кентаўр"
 
 #~ msgid "Cepheus"
-#~ msgstr "Sefeus"
+#~ msgstr "Цэфэй"
 
 #~ msgid "Cetus"
-#~ msgstr "Hvalurinn"
+#~ msgstr "Кіт"
 
 #~ msgid "Chamaeleon"
-#~ msgstr "Kamelljónið"
+#~ msgstr "Хамэлеон"
 
 #~ msgid "Chariot"
-#~ msgstr "Feykivagninn"
+#~ msgstr "Калясьніца"
 
 #~ msgid "Chariot Yard"
-#~ msgstr "Feykivagnagerðið"
-
-#~ msgid "Chematy"
-#~ msgstr "Kematy"
+#~ msgstr "Двор калясьніц"
 
 #~ msgid "Choose landscapes:"
-#~ msgstr "Veldu landslag:"
+#~ msgstr "Выберы краявід:"
 
 #~ msgid "Circinus"
-#~ msgstr "Hringfarinn"
+#~ msgstr "Цыркуль"
 
 #~ msgid "Circular Granary"
-#~ msgstr "Kringlótta kornforðabúrið"
+#~ msgstr "Круглы сьвіран"
 
 #~ msgid "Coiled Thong"
-#~ msgstr "Snúna reimin"
+#~ msgstr "Скручаны рэмень"
 
 #~ msgid "Collarbones"
-#~ msgstr "Viðbeinin"
+#~ msgstr "Ключыца"
 
 #~ msgid "Columba"
-#~ msgstr "Dúfan"
+#~ msgstr "Голуб"
 
 #~ msgid "Coma Berenices"
-#~ msgstr "Bereníkuhaddur"
+#~ msgstr "Валасы Веранікі"
 
 #~ msgid "Command recording stopped."
-#~ msgstr "Upptaka skipana stöðvuð."
+#~ msgstr "Запіс камандаў спынены."
 
 #~ msgid "Constellations Art [R]"
-#~ msgstr "Myndræn stjörnumerki [R]"
+#~ msgstr "Выявы сузор'яў [R]"
 
 #~ msgid "Constellations Boundaries"
-#~ msgstr "Mörk stjörnumerkja"
+#~ msgstr "Межы сузор'яў"
 
 #~ msgid "Constellations Lines"
-#~ msgstr "Línur stjörnumerkja"
+#~ msgstr "Лініі сузор'яў"
 
 #~ msgid "Constellations Names"
-#~ msgstr "Nöfn stjörnumerkja"
+#~ msgstr "Імёны сузор'яў"
 
 #~ msgid "Corona Australis"
-#~ msgstr "Suðurkórónan"
+#~ msgstr "Паўднёвая карона"
 
 #~ msgid "Corona Borealis"
-#~ msgstr "Norðurkórónan"
+#~ msgstr "Паўночная карона"
 
 #~ msgid "Corvus"
-#~ msgstr "Hrafninn"
+#~ msgstr "Крумкач"
 
 #~ msgid "Crater"
-#~ msgstr "Bikarinn"
+#~ msgstr "Кратэр"
 
 #~ msgid "Crocodile"
-#~ msgstr "Krókódíllinn"
+#~ msgstr "Кракадзіл"
 
 #~ msgid "Crux"
-#~ msgstr "Suðurkrossinn"
+#~ msgstr "Крыж"
 
 #~ msgid "Current Time :"
-#~ msgstr "Klukkan er :"
+#~ msgstr "Бягучы час :"
 
 #~ msgid "Current Time Speed is x"
-#~ msgstr "Núverandi tímahraði er x"
+#~ msgstr "Бягучая хуткасьць часу - x"
 
 #~ msgid "Curved Array"
-#~ msgstr "Bogalínurnar"
+#~ msgstr "Крывы шэраг"
 
 #~ msgid "Cygnus"
-#~ msgstr "Svanurinn"
+#~ msgstr "Лебедзь"
 
 #~ msgid "Day"
-#~ msgstr "Dagur"
+#~ msgstr "Дзень"
 
 #~ msgid "Delphinus"
-#~ msgstr "Höfrungurinn"
+#~ msgstr "Дэльфін"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -1611,23 +1604,20 @@ msgstr ""
 #~ "CTRL + G : Goto selected solar system object\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Svargluggi og aðrar stillingar:\n"
-#~ "H : Hjálp I : Um Stellarium\n"
-#~ "M : Textavalblað 1 (einn) : Stillingar\n"
-#~ "CTRL + S : Taka skjámynd\n"
-#~ "CTRL + R : Víxla upptöku skriftu\n"
-#~ "CTRL + F : Víxla leitarglugga\n"
-#~ "CTRL + G : Fara til valins hnattar í sólkerfinu\n"
+#~ "Дыялёгі й іншае кіраваньне:\n"
+#~ "H   : Дапамога                  I   : Пра Stellarium\n"
+#~ "M   : Тэкставае мэню            1 (адзін)  : Настаўленьні\n"
+#~ "CTRL + S : Здымак экрана\n"
+#~ "CTRL + R : Укл/Выкл запіс сцэнара\n"
+#~ "CTRL + F : Укл/Выкл шукальнік аб'екта\n"
+#~ "CTRL + G : Перайсьці да абранага аб'екта сонечнай сыстэмы\n"
 #~ "\n"
 
-#~ msgid "Dilyehe"
-#~ msgstr "Dilyehe"
-
 #~ msgid "Dipper"
-#~ msgstr "Karlsvagninn"
+#~ msgstr "Конаўка"
 
 #~ msgid "Disk Viewport"
-#~ msgstr "Sjónarhorn eins og í kíki"
+#~ msgstr "Круглае глядзельнае вакно"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1643,48 +1633,48 @@ msgstr ""
 #~ "4 , : Ecliptic line             5 . : Equator line\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Skjástillingar:\n"
-#~ "ENTER : Pólstillt undirstaða\n"
-#~ "F1 : Fylla út í skjá / glugga\n"
-#~ "C : Teikning stjörnumerkja V : Nöfn stjörnumerkja\n"
-#~ "R : Myndræn stjörnumerki E : Miðbaugshnit\n"
-#~ "Z : Sjónbaugshnit N : Þokur\n"
-#~ "P : Reikistjörnur G : Yfirborð jarðar\n"
-#~ "A : Lofthjúpur F : Mistur\n"
-#~ "Q : Áttir O : Velja tunglið\n"
-#~ "T : Elta fyrirbæri S : Stjörnur\n"
-#~ "4 , : Sólbaugur 5 . : Miðbaugur himins\n"
+#~ "Кіраваньне адлюстраваньнем:\n"
+#~ "ENTER : Азімутальная або экватарыяльная прывязка\n"
+#~ "F1  : Пераключыцца на вакно або поўны экран\n"
+#~ "C   : Лініі сузор'яў            V   : Назвы сузор'яў\n"
+#~ "R   : Выявы сузор'яў            E   : Экватарыяльная сетка\n"
+#~ "Z   : Азімутальная сетка        N   : Імёны туманнасьцяў\n"
+#~ "P   : Імёны плянэтаў            G   : Зямля\n"
+#~ "A   : Атмасфэра                 F   : Туман\n"
+#~ "Q   : Бакі сьвету               O   : Маштабаваньне Месяца\n"
+#~ "T   : Сачэньне за аб'ектам      S   : Зоркі\n"
+#~ "4 , : Лінія экліптыкі           5 . : Лінія экватара\n"
 #~ "\n"
 
 #~ msgid "Do"
-#~ msgstr "Framkvæma"
+#~ msgstr "Рабіць"
 
 #~ msgid "Dog"
-#~ msgstr "Hundurinn"
+#~ msgstr "Сабака"
 
 #~ msgid "Dolphin"
-#~ msgstr "Höfrungurinn"
+#~ msgstr "Дэльфін"
 
 #~ msgid "Done"
-#~ msgstr "Lokið"
+#~ msgstr "Зроблена"
 
 #~ msgid "Dorado"
-#~ msgstr "Sverðfiskurinn"
+#~ msgstr "Залатая рыба"
 
 #~ msgid "Draco"
-#~ msgstr "Drekinn"
+#~ msgstr "Дракон"
 
 #~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "Teikning stjörnumerkja [C]"
+#~ msgstr "Адлюстраваньне сузор'яў [C]"
 
 #~ msgid "Dried Willow"
-#~ msgstr "Þurrkaði pílviðurinn"
+#~ msgstr "Сухая вярба"
 
 #~ msgid "Drum"
-#~ msgstr "Trumban"
+#~ msgstr "Барабан"
 
 #~ msgid "Drumstick"
-#~ msgstr "Kólfurinn"
+#~ msgstr "Барабанны кіёк"
 
 #~ msgid ""
 #~ "During Script Playback:\n"
@@ -1692,289 +1682,287 @@ msgstr ""
 #~ "6   : pause script              K   : resume script\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Á meðan keyrslu skriftu stendur:\n"
-#~ "CTRL + C : Stöðva skriftu\n"
-#~ "6 : hlé á skriftu K : keyra áfram skriftu\n"
+#~ "Падчас прайграваньня сцэнара:\n"
+#~ "CTRL + C : Спыніць сцэнар\n"
+#~ "6   : прыпыніць сцэнар          K   : працягнуць сцэнар\n"
 #~ "\n"
 
 #~ msgid "Earth God's Temple"
-#~ msgstr "Hof jarðarguðsins"
+#~ msgstr "Храм Бога Зямлі"
 
 #~ msgid "Eastern Door"
-#~ msgstr "Austurdyrnar"
+#~ msgstr "Усходнія дзьверы"
 
 #~ msgid "Elk"
-#~ msgstr "Elgurinn"
+#~ msgstr "Лось"
 
 #~ msgid "Emptiness"
-#~ msgstr "Tómleikinn"
+#~ msgstr "Пустэча"
 
 #~ msgid "Encampment"
-#~ msgstr "Tjaldbúðirnar"
+#~ msgstr "Табар"
 
 #~ msgid "Enter observatory name"
-#~ msgstr "Sláðu inn nafn athugunarstaðar"
+#~ msgstr "Увядзі імя абсэрваторыі"
 
 #~ msgid "Equatorial Grid [E]"
-#~ msgstr "Miðbaugsmöskvi [E]"
+#~ msgstr "Экватарыяльная сетка [E]"
 
 #~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "Pólstillt/Lóðstillt sjónaukastæði [ENTER]"
+#~ msgstr "Экватарыяльная/Азімутальная прывязка [ENTER]"
 
 #~ msgid "Equuleus"
-#~ msgstr "Folinn"
+#~ msgstr "Малы конь"
 
 #~ msgid "Eridanus"
-#~ msgstr "Fljótið"
+#~ msgstr "Эрыдан"
 
 #~ msgid "Error: Unable to open script file to record commands."
-#~ msgstr ""
-#~ "Villa: Tókst ekki að opna skrá skriftu til þess að taka upp skipanir."
+#~ msgstr "Памылка: немагчыма адкрыць файл сцэнара для запісу загадаў."
 
 #~ msgid "Establishment"
-#~ msgstr "Höfðingjarnir"
+#~ msgstr "Установа"
 
 #~ msgid "Extended Net"
-#~ msgstr "Stóranetið"
+#~ msgstr "Вялікая сетка"
 
 #~ msgid "Farmland"
-#~ msgstr "Akurinn"
+#~ msgstr "Ворная зямля"
 
 #~ msgid "Ferry Boat"
-#~ msgstr "Ferjubáturinn"
+#~ msgstr "Паром"
 
 #~ msgid "Fireplace"
-#~ msgstr "Eldstóin"
+#~ msgstr "Камін"
 
 #~ msgid "First Big One"
-#~ msgstr "Öldungurinn"
+#~ msgstr "Першы Вялікі"
 
 #~ msgid "First Slim One"
-#~ msgstr "Ungi maðurinn"
+#~ msgstr "Першы Маленькі"
 
 #~ msgid "Five Chariots"
-#~ msgstr "Feykivagnarnir fimm"
+#~ msgstr "Пяць калясьніц"
 
 #~ msgid "Five Feudal Kings"
-#~ msgstr "Lénsherrarnir fimm"
+#~ msgstr "Пяць фэўдальных каралёў"
 
 #~ msgid "Flail"
-#~ msgstr "Gaddakylfan"
+#~ msgstr "Цэп"
 
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
-#~ msgstr "Fletta lárétt [CTRL + SHIFT + H]"
+#~ msgstr "Гарызантальны пераварот [CTRL + SHIFT +H]"
 
 #~ msgid "Flip vertically [CTRL + SHIFT + V]"
-#~ msgstr "Fletta lóðrétt [CTRL + SHIFT + V]"
+#~ msgstr "Вэртыкальны пераварот [CTRL + SHIFT +V]"
 
 #~ msgid "Flock"
-#~ msgstr "Hjörðin"
+#~ msgstr "Чарада"
 
 #~ msgid "Flying Corridor"
-#~ msgstr "Risgöngin"
+#~ msgstr "Калідор, які лётае"
 
 #~ msgid "Fog"
-#~ msgstr "Mistur"
+#~ msgstr "Туман"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
-#~ msgstr "Sé skjáupplausn ekki á listanum, breyttu þá skránni :"
+#~ msgstr "Дзеля непаказаных разрозьненьняў рэдагуй :"
 
 #~ msgid "Fornax"
-#~ msgstr "Ofninn"
+#~ msgstr "Печ"
 
 #~ msgid "Four Channels"
-#~ msgstr "Sýkin fjögur"
+#~ msgstr "Чатыры каналы"
 
 #~ msgid "Frigate Bird"
-#~ msgstr "Freigátufuglinn"
+#~ msgstr "Птушка фрэгат"
 
 #~ msgid "GO"
-#~ msgstr "Af stað"
+#~ msgstr "Ісьці"
 
 #~ msgid "Gemini"
-#~ msgstr "Tvíburarnir"
+#~ msgstr "Блізьняты"
 
 #~ msgid "Ghosts"
-#~ msgstr "Draugarnir"
+#~ msgstr "Прывіды"
 
 #~ msgid "Giant"
-#~ msgstr "Risinn"
+#~ msgstr "Волат"
 
 #~ msgid "Girl"
-#~ msgstr "Stúlkan"
+#~ msgstr "Дзяўчына"
 
 #~ msgid "Good Gourd"
-#~ msgstr "Þroskaða graskerið"
+#~ msgstr "Добры гарбуз"
 
 #~ msgid "Great General"
-#~ msgstr "Hershöfðinginn mikli"
+#~ msgstr "Вялікі генэрал"
 
 #~ msgid "Ground"
-#~ msgstr "Jörð"
+#~ msgstr "Зямля"
 
 #~ msgid "Ground [G]"
-#~ msgstr "Jörð [G]"
+#~ msgstr "Зямля [G]"
 
 #~ msgid "Grus"
-#~ msgstr "Hegrinn"
+#~ msgstr "Журавель"
 
 #~ msgid "Hand"
-#~ msgstr "Höndin"
+#~ msgstr "Рука"
 
 #~ msgid "Heart"
-#~ msgstr "Hjartað"
+#~ msgstr "Сэрца"
 
 #~ msgid "Help [H]"
-#~ msgstr "Hjálp [H]"
+#~ msgstr "Дапамога [H]"
 
 #~ msgid "Hercules"
-#~ msgstr "Herkúles"
+#~ msgstr "Геркулес"
 
 #~ msgid "Hippopotamus"
-#~ msgstr "Flóðhesturinn"
+#~ msgstr "Гіпапатам"
 
 #~ msgid "Hit CTRL-R again to stop.\n"
-#~ msgstr "Smelltu aftur á CTRL-R til þess að stöðva.\n"
+#~ msgstr "Націсьні CTRL-R зноў, каб спыніць.\n"
 
 #~ msgid "Hook"
-#~ msgstr "Krókurinn"
+#~ msgstr "Крук"
 
 #~ msgid "Horn"
-#~ msgstr "Hornið"
+#~ msgstr "Рог"
 
 #~ msgid "Horologium"
-#~ msgstr "Klukkan"
+#~ msgstr "Гадзіньнік"
 
 #~ msgid "Horus"
-#~ msgstr "Hórus"
+#~ msgstr "Хорус (бог з галавой сокала)"
 
 #~ msgid "Hour"
-#~ msgstr "Klst."
+#~ msgstr "Гадзіна"
 
 #~ msgid "Hydra"
-#~ msgstr "Vatnaskrímslið"
+#~ msgstr "Гідра"
 
 #~ msgid "Hydrus"
-#~ msgstr "Lagarormurinn"
+#~ msgstr "Паўднёвая гідра"
 
 #~ msgid "Imperial Guards"
-#~ msgstr "Verðir keisarans"
+#~ msgstr "Ахова імпэратара"
 
 #~ msgid "Imperial Passageway"
-#~ msgstr "Keisaragöngin"
+#~ msgstr "Імпэратарскі праход"
 
 #~ msgid "Indus"
-#~ msgstr "Indíáninn"
+#~ msgstr "Індзеец"
 
 #~ msgid "Info: "
-#~ msgstr "Upplýsingar: "
+#~ msgstr "Апісаньне: "
 
 #~ msgid "Information"
-#~ msgstr "Upplýsingar"
+#~ msgstr "Зьвесткі"
 
 #~ msgid "Invalid Script command"
-#~ msgstr "Ógild skipun skriftu"
+#~ msgstr "Направільны загад сцэнара"
 
 #~ msgid "Jade Well"
-#~ msgstr "Jaðilindin"
+#~ msgstr "Жадэітавы калодзеж"
 
 #~ msgid "Jaw"
-#~ msgstr "Kjálkinn"
+#~ msgstr "Сківіца"
 
 #~ msgid "Kenemet"
-#~ msgstr "Kenemet"
+#~ msgstr "Кенэмэт (багіня маці)"
 
 #~ msgid "Khanuwy Fish"
-#~ msgstr "Khanuwyfiskurinn"
+#~ msgstr "Рыба Ханувы"
 
 #~ msgid "Kitchen"
-#~ msgstr "Eldhúsið"
+#~ msgstr "Кухня"
 
 #~ msgid "Kite of Kawelo"
-#~ msgstr "Flugdreki Kawelos"
+#~ msgstr "Ястраб Кавэла"
 
 #~ msgid "Lacerta"
-#~ msgstr "Eðlan"
+#~ msgstr "Яшчарка"
 
 #~ msgid "Lamp Stand"
-#~ msgstr "Stjakinn"
+#~ msgstr "Падстаўка лямпы"
 
 #~ msgid "Language"
-#~ msgstr "Tungumál"
+#~ msgstr "Мова"
 
 #~ msgid "Latitude : "
-#~ msgstr "Breiddargráða : "
+#~ msgstr "Шырата : "
 
 #~ msgid "Legs"
-#~ msgstr "Fæturnir"
+#~ msgstr "Ногі"
 
 #~ msgid "Leo"
-#~ msgstr "Ljónið"
+#~ msgstr "Леў"
 
 #~ msgid "Leo Minor"
-#~ msgstr "Litlaljón"
+#~ msgstr "Малы леў"
 
 #~ msgid "Lepus"
-#~ msgstr "Hérinn"
+#~ msgstr "Заяц"
 
 #~ msgid "Libra"
-#~ msgstr "Vogin"
+#~ msgstr "Лібра"
 
 #~ msgid "Lion"
-#~ msgstr "Ljónið"
+#~ msgstr "Леў"
 
 #~ msgid "Lizard"
-#~ msgstr "Eðlan"
+#~ msgstr "Яшчарка"
 
 #~ msgid "Loading Nebula Textures:"
-#~ msgstr "Hleð inn áferð fyrir stjörnuþokur:"
+#~ msgstr "Загрузка тэкстураў туманнасьцяў:"
 
 #~ msgid "Longitude : "
-#~ msgstr "Lengdargráða : "
+#~ msgstr "Даўгата : "
 
 #~ msgid "Lupus"
-#~ msgstr "Úlfurinn"
+#~ msgstr "Воўк"
 
 #~ msgid "Lynx"
-#~ msgstr "Gaupan"
+#~ msgstr "Рысь"
 
 #~ msgid "Lyra"
-#~ msgstr "Harpan"
+#~ msgstr "Ліра"
 
 #~ msgid "Magnitude"
-#~ msgstr "Birtustig"
+#~ msgstr "Зоркавая велічыня"
 
 #~ msgid "Man with Feet Apart"
-#~ msgstr "Gleiðgengi maðurinn"
+#~ msgstr "Чалавек з адрэзанымі ступнямі"
 
 #~ msgid "Man's Cart"
-#~ msgstr "Karlsvagninn"
+#~ msgstr "Воз чалавека"
 
 #~ msgid "Market"
-#~ msgstr "Markaðurinn"
+#~ msgstr "Рынак"
 
 #~ msgid "Market Officer"
-#~ msgstr "Verslunarmaðurinn"
+#~ msgstr "Службоўца рынку"
 
 #~ msgid "Maui's Fishhook"
-#~ msgstr "Maui öngullinn"
+#~ msgstr "Рыбалоўны кручок Маўі"
 
 #~ msgid "Mausoleum"
-#~ msgstr "Grafhýsið"
+#~ msgstr "Маўзалей"
 
 #~ msgid "Meadows"
-#~ msgstr "Engin"
+#~ msgstr "Сенажаці"
 
 #~ msgid "Mensa"
-#~ msgstr "Borðið"
+#~ msgstr "Сталовая гара"
 
 #~ msgid "Microscopium"
-#~ msgstr "Smásjáin"
+#~ msgstr "Мікраскоп"
 
 #~ msgid "Minutes"
-#~ msgstr "Mínútur"
+#~ msgstr "Хвіліна"
 
-#, fuzzy
 #~ msgid ""
 #~ "Misc:\n"
 #~ "9   : Toggle meteor shower rates\n"
@@ -1982,23 +1970,23 @@ msgstr ""
 #~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
 #~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 #~ msgstr ""
-#~ "Ýmislegt:\n"
-#~ "9 : Víxla tíðni loftsteinadrífu\n"
-#~ "CTRL + 0,...,9 : Framkvæma FARA TIL skipun fyrir sjónauka 0,...,9\n"
-#~ "CTRL + SHIFT + H : Víxla láréttri flettingu\n"
-#~ "CTRL + SHIFT + V : Víxla lóðréttri flettingu\n"
+#~ "Рознае:\n"
+#~ "9   : Зьмяніць часьціню мэтэораў\n"
+#~ "CTRL + 0,..,9   : Выканаць загад ПЕРАЙСЬЦІ ДА тэлескопу 0,..,9\n"
+#~ "CTRL + SHIFT + H: Пераключыць гарызантальны пераварот выявы\n"
+#~ "CTRL + SHIFT + V: Пераключыць вэртыкальны пераварот выявы\n"
 
 #~ msgid "Monoceros"
-#~ msgstr "Einhyrningurinn"
+#~ msgstr "Аднарог"
 
 #~ msgid "Month"
-#~ msgstr "Mán."
+#~ msgstr "Месяц"
 
 #~ msgid "Mooring Post"
-#~ msgstr "Bryggjustólpinn"
+#~ msgstr "Прычал"
 
 #~ msgid "Mortar"
-#~ msgstr "Stauturinn"
+#~ msgstr "Ступа"
 
 #~ msgid ""
 #~ "Movement & selection:\n"
@@ -2013,317 +2001,311 @@ msgstr ""
 #~ "SPACE            : Center on selected object\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Hreyfingar og val:\n"
-#~ "Örvalyklar : Breyta sjónarhorni í miðbaugshnitum\n"
-#~ "Upp / Niður (=>um síðu) : Aðdráttur\n"
-#~ "CTRL+Upp / Niður (=>um síðu) : Minnkun\n"
-#~ "Vinstri músarhnappur : Velja fyrirbæri\n"
-#~ "Hægri músarhnappur : Fara frá fyrirbæri\n"
-#~ "CTRL + vinstri músarhnappur : Fara frá fyrirbæri\n"
-#~ "\\ : Minnkun (reikistjörnur og tungl)\n"
-#~ "/ : Aðdráttur\n"
-#~ "SPACE : Hafa fyrirbærið í miðjum glugganum\n"
+#~ "Перамяшчэньне й вылучэньне:\n"
+#~ "Стрэлкі          : Удлюстраваньне ў Рад/Град\n"
+#~ "Page Up/Down     : Набліжэньне ці аддаленьне\n"
+#~ "CTRL + Уверх/Уніз: Набліжэньне ці аддаленьне\n"
+#~ "Пстрычка левай   : Вылучыць аб'ект\n"
+#~ "Пстрычка правай  : Зьняць вылучэньне\n"
+#~ "CTRL + Пстр. лев.: Зьняць вылучэньне\n"
+#~ "\\                : Аддаліць (плянэты й месяцы, калі можна)\n"
+#~ "/                : Наблізіць вылучаны аб'ект\n"
+#~ "ПРАБЕЛ           : Вылучаны аб'ект у сярэдзіну\n"
 #~ "\n"
 
 #~ msgid "Musca"
-#~ msgstr "Flugan"
+#~ msgstr "Муха"
 
 #~ msgid "Names of the Constellations [V]"
-#~ msgstr "Nöfn stjörnumerkja [V]"
+#~ msgstr "Імёны сузор'яў [V]"
 
 #~ msgid "Navigator's Triangle"
-#~ msgstr "Þríhyrningur sæfarans"
+#~ msgstr "Трохкутнік марахода"
 
 #~ msgid "Nebulas Names. Up to mag :"
-#~ msgstr "Nöfn stjörnuþoka. Upp að birtustigi :"
+#~ msgstr "Імёны туманнасьцяў. Да яркасьці :"
 
 #~ msgid "Neck"
-#~ msgstr "Hálsinn"
+#~ msgstr "Шыя"
 
 #~ msgid "Net"
-#~ msgstr "Netið"
+#~ msgstr "Сетка"
 
 #~ msgid "Night (red) mode"
-#~ msgstr "Næturhamur (rauður)"
+#~ msgstr "Начны (чырвоны) рэжым"
 
 #~ msgid "No"
-#~ msgstr "Nei"
+#~ msgstr "Не"
 
 #~ msgid "Norma"
-#~ msgstr "Hornmátið"
+#~ msgstr "Нарожнік"
 
 #~ msgid "North River"
-#~ msgstr "Norðuráin"
+#~ msgstr "Паўночная рака"
 
 #~ msgid "Northern Dipper"
-#~ msgstr "Norður skaftpotturinn"
+#~ msgstr "Паўночны коўш"
 
 #~ msgid "OK"
-#~ msgstr "Í lagi"
+#~ msgstr "Добра"
 
 #~ msgid "Object Search"
-#~ msgstr "Leit að fyrirbæri"
+#~ msgstr "Пошук аб'екта"
 
 #~ msgid "Octans"
-#~ msgstr "Áttungurinn"
+#~ msgstr "Актант"
 
 #~ msgid "Ophiuchus"
-#~ msgstr "Naðurvaldi"
+#~ msgstr "Зьмяяносец"
 
 #~ msgid "Orchard"
-#~ msgstr "Trjágarðurinn"
+#~ msgstr "Сад"
 
 #~ msgid "Outer Fence"
-#~ msgstr "Framvarðarvirkið"
+#~ msgstr "Вонкавая сьцяна"
 
 #~ msgid "Ox"
-#~ msgstr "Uxinn"
+#~ msgstr "Вол"
 
 #~ msgid "Pair of Stars"
-#~ msgstr "Stjörnuparið"
+#~ msgstr "Пара зорак"
 
 #~ msgid "Palace Gate"
-#~ msgstr "Hallarhliðið"
+#~ msgstr "Брама палаца"
 
 #~ msgid "Pavo"
-#~ msgstr "Páfuglinn"
+#~ msgstr "Пава"
 
 #~ msgid "Pegasus"
-#~ msgstr "Vængfákurinn"
+#~ msgstr "Пэгас"
 
 #~ msgid "Perseus"
-#~ msgstr "Perseifur"
+#~ msgstr "Пэрсэй"
 
 #~ msgid "Pestle"
-#~ msgstr "Mortélið"
+#~ msgstr "Таўкач"
 
 #~ msgid "Phoenix"
-#~ msgstr "Fönix"
+#~ msgstr "Фэнікс"
 
 #~ msgid "Pictor"
-#~ msgstr "Málarinn"
+#~ msgstr "Мастак"
 
 #~ msgid "Pisces"
-#~ msgstr "Fiskarnir"
+#~ msgstr "Рыбы"
 
 #~ msgid "Piscis Austrinus"
-#~ msgstr "Suðurfiskurinn"
+#~ msgstr "Паўднёвая рыба"
 
 #~ msgid "Planet: "
-#~ msgstr "Reikistjarna: "
+#~ msgstr "Плянэта: "
 
 #~ msgid "Point"
-#~ msgstr "Punktur"
+#~ msgstr "Пункт"
 
 #~ msgid "Prow"
-#~ msgstr "Stefnið"
+#~ msgstr "Карабель"
 
 #~ msgid "Puppis"
-#~ msgstr "Skuturinn"
+#~ msgstr "Карма"
 
 #~ msgid "Purple Palace"
-#~ msgstr "Fjólubláa höllin"
+#~ msgstr "Фіялетавы палац"
 
 #~ msgid "Pyxis"
-#~ msgstr "Áttavitinn"
+#~ msgstr "Компас"
 
 #~ msgid "Quit [CMD + Q]"
-#~ msgstr "Hætta [CMD + Q]"
+#~ msgstr "Выйсьці [CMD + Q]"
 
 #~ msgid "Quit [CTRL + Q]"
-#~ msgstr "Hætta [CTRL + Q]"
+#~ msgstr "Выйсьці [CTRL + Q]"
 
 #~ msgid "Rabbit Tracks"
-#~ msgstr "Kanínuslóðirnar"
+#~ msgstr "Сьляды труса"
 
 #~ msgid "Race Track"
-#~ msgstr "Skeiðvöllurinn"
+#~ msgstr "Сьляды гонак"
 
 #~ msgid "Ramparts"
-#~ msgstr "Virkisveggirnir"
+#~ msgstr "Шанцы"
 
 #~ msgid "Real Time Speed [K]"
-#~ msgstr "Raunhraði tíma [K]"
+#~ msgstr "Сапраўдная хуткасьць часу [K]"
 
 #~ msgid "Recording commands to script file:\n"
-#~ msgstr "Tekur upp skipanir fyrir skrifu:\n"
+#~ msgstr "Запіс камандаў у файл сцэнару:\n"
 
 #~ msgid "Rendering"
-#~ msgstr "Teikning"
+#~ msgstr "Прарысоўваньне"
 
 #~ msgid "Restart program for"
-#~ msgstr "Endurræstu forritið svo"
+#~ msgstr "Выканай праграму наноў, каб"
 
 #~ msgid "Reticulum"
-#~ msgstr "Netið"
+#~ msgstr "Сетка"
 
 #~ msgid "Return to Current Time [8]"
-#~ msgstr "Aftur í núverandi tíma [8]"
+#~ msgstr "Вернуцца да цяперашняга часу [8]"
 
 #~ msgid "Revolving Female"
-#~ msgstr "Konan sem snýst"
+#~ msgstr "Жанчына, якая круціцца"
 
 #~ msgid "Revolving Male"
-#~ msgstr "Maðurinn sem snýst"
+#~ msgstr "Мужчына, які круціцца"
 
 #~ msgid "River Turtle"
-#~ msgstr "Vatnaskjaldbakan"
+#~ msgstr "Рачная чарапаха"
 
 #~ msgid "Rolled Tongue"
-#~ msgstr "Undna tungan"
+#~ msgstr "Скручаны язык"
 
 #~ msgid "Rooftop"
-#~ msgstr "Mænirinn"
+#~ msgstr "Вільчак"
 
 #~ msgid "Room"
-#~ msgstr "Herbergið"
+#~ msgstr "Пакой"
 
 #~ msgid "Root"
-#~ msgstr "Rótin"
+#~ msgstr "Корань"
 
 #~ msgid "Rotten Gourd"
-#~ msgstr "Rotna graskerið"
+#~ msgstr "Гнілы гарбуз"
 
 #~ msgid "Runners"
-#~ msgstr "Hlaupararnir"
+#~ msgstr "Пасланцы"
 
 #~ msgid "Sagitta"
-#~ msgstr "Örin"
+#~ msgstr "Страла"
 
 #~ msgid "Sagittarius"
-#~ msgstr "Bogmaðurinn"
-
-#~ msgid "Sah"
-#~ msgstr "Sah"
+#~ msgstr "Стралец"
 
 #~ msgid "Salamander"
-#~ msgstr "Salamandran"
+#~ msgstr "Салямандра"
 
 #~ msgid "Save as default"
-#~ msgstr "Vista sem sjálfgefið"
+#~ msgstr "Захаваць як дапомныя"
 
 #~ msgid "Saving settings will save current full screen status"
-#~ msgstr "Vistun stillinga mun vista núverandi skjástillingu"
+#~ msgstr "Захаваўшы настаўленьні захаваеш бягучы стан поўнага экрану"
 
 #~ msgid "Scorpius"
-#~ msgstr "Sporðdrekinn"
+#~ msgstr "Скарпіён"
 
 #~ msgid "Screen"
-#~ msgstr "Skjárinn"
+#~ msgstr "Экран"
 
 #~ msgid "Screen Resolution :"
-#~ msgstr "Skjáupplausn :"
+#~ msgstr "Разрозьненьне экрана :"
 
 #~ msgid "Script commander"
-#~ msgstr "Skriftustjóri"
+#~ msgstr "Загадчык сцэнараў"
 
 #~ msgid "Sculptor"
-#~ msgstr "Myndhöggvarinn"
+#~ msgstr "Скульптар"
 
 #~ msgid "Scutum"
-#~ msgstr "Skjöldurinn"
+#~ msgstr "Шчыт"
 
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-#~ msgstr "Leita að (t.d. Saturn, Polaris, HP6218, Orion, M31):"
+#~ msgstr "Шукаць (напр., Сатурн, Палярная, HP6218, Арыён, M31):"
 
 #~ msgid "Search for object [CTRL + F]"
-#~ msgstr "Leita að fyrirbæri [CTRL + F]"
+#~ msgstr "Шукаць аб'ект [CTRL + F]"
 
 #~ msgid "Seconds"
-#~ msgstr "Sekúndur"
+#~ msgstr "Сэкунда"
 
 #~ msgid "Selected Constellation Only"
-#~ msgstr "Einungis valið stjörnumerki"
-
-#~ msgid "Selkis"
-#~ msgstr "Selkis"
+#~ msgstr "Толькі абраныя сузор'і"
 
 #~ msgid "Serpens"
-#~ msgstr "Höggormurinn"
+#~ msgstr "Зьмяя"
 
 #~ msgid "Setting Landscape Sets Location: "
-#~ msgstr "Val á landslagi endurstillir staðsetningu: "
+#~ msgstr "Выбраны краявід усталёўвае месцазнаходжаньне: "
 
 #~ msgid "Setting landscape updates the location"
-#~ msgstr "Stilling á landslagi breytir stillingum staðarins"
+#~ msgstr "Выбраны краявід абнаўляе месцазнаходжаньне"
 
 #~ msgid "Seven Excellencies"
-#~ msgstr "Höfðingjarnir sjö"
+#~ msgstr "Сем яснавяльможнасьцяў"
 
 #~ msgid "Seven Little Girls"
-#~ msgstr "Systurnar sjö"
+#~ msgstr "Сем маленькіх дзянчынак"
 
 #~ msgid "Sextans"
-#~ msgstr "Sextantinn"
+#~ msgstr "Сэкстанс"
 
 #~ msgid "Sheep"
-#~ msgstr "Kindin"
+#~ msgstr "Авечка"
 
 #~ msgid "Sheepfold"
-#~ msgstr "Fjárréttin"
+#~ msgstr "Кашара"
 
 #~ msgid "Snake"
-#~ msgstr "Snákurinn"
+#~ msgstr "Зьмяя"
 
 #~ msgid "Soldiers Market"
-#~ msgstr "Hermannamarkaðurinn"
+#~ msgstr "Рынак жаўнераў"
 
 #~ msgid "South River"
-#~ msgstr "Suðuráin"
+#~ msgstr "Паўднёвая рака"
 
 #~ msgid "Spear"
-#~ msgstr "Spjótið"
+#~ msgstr "Дзіда"
 
 #~ msgid "Spring"
-#~ msgstr "Vorið"
+#~ msgstr "Вясна"
 
 #~ msgid "Square Granary"
-#~ msgstr "Ferkantaða kornforðabúrið"
+#~ msgstr "Квадратны сьвіран"
 
 #~ msgid "Star Names. Up to mag :"
-#~ msgstr "Nöfn stjarna upp að birtustigi :"
+#~ msgstr "Імёны зорак. Да яркасьці :"
 
 #~ msgid "Star Twinkle. Amount :"
-#~ msgstr "Styrkur stjörnubliks :"
+#~ msgstr "Мігценьне зорак. Колькасьць :"
 
 #~ msgid "Stars of Water"
-#~ msgstr "Vatnastjörnurnar"
+#~ msgstr "Зоркі вады"
 
 #~ msgid "Stomach"
-#~ msgstr "Maginn"
+#~ msgstr "Страўнік"
 
 #~ msgid "Supreme Palace"
-#~ msgstr "Keisarahöllin"
+#~ msgstr "Найвышэйшы палац"
 
 #~ msgid "Tail"
-#~ msgstr "Skottið"
+#~ msgstr "Хвост"
 
 #~ msgid "Taurus"
-#~ msgstr "Nautið"
+#~ msgstr "Цялец"
 
 #~ msgid "Telescopium"
-#~ msgstr "Sjónaukinn"
+#~ msgstr "Тэлескоп"
 
 #~ msgid "The Asar Battlefield"
-#~ msgstr "Fólkvangur"
+#~ msgstr "Поле бітвы Асара"
 
 #~ msgid "The Fishermen"
-#~ msgstr "Veiðimaðurinn"
+#~ msgstr "Рыбак"
 
 #~ msgid "The Seven"
-#~ msgstr "Sjömenningarnir"
+#~ msgstr "Сямёра"
 
 #~ msgid "Three Steps"
-#~ msgstr "Þrepin þrjú"
+#~ msgstr "Тры крокі"
 
 #~ msgid "Thunder and Lightning"
-#~ msgstr "Þrumur og eldingar"
+#~ msgstr "Гром і маланка"
 
 #~ msgid "Thunderbird"
-#~ msgstr "Þrumufuglinn"
+#~ msgstr "Птушка грому"
 
 #~ msgid "Thunderbolt"
-#~ msgstr "Eldingin"
+#~ msgstr "Удар маланкі"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -2335,140 +2317,137 @@ msgstr ""
 #~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Tími og dagur:\n"
-#~ "6 : Stöðva tíma 7 : Hraði tíma 0\n"
-#~ "8 : Velja núverandi tíma J : Hægja á tímahröðun\n"
-#~ "K : Eðlileg tímahröðun L : Auka tímahröðun\n"
-#~ "- og = : Fram og aftur um einn dag (ýttu á ALT fyrir hvarfdaga)\n"
-#~ "[ og ] : Fram og aftur um 7 daga (ýttu á ALT fyrir hvarfdaga)\n"
-#~ "CTRL + - : Aftur um 1 klst. CTRL + = : fram um eina klst.\n"
+#~ "Час і дата:\n"
+#~ "6   : Прыпыніць хаду часу        7   : Спыніць хаду часу\n"
+#~ "8   : Усталяваць цяперашні час   J   : Павялічыць хуткасьць часу\n"
+#~ "K   : Нармальная хуткасьць часу  L   : Павялічыць хуткасьць часу\n"
+#~ "- і =    : Назад і наперад на адзін дзень (з ALT - зорныя дні)\n"
+#~ "[ і ]    : Назад і наперад на 7 дзён (з ALT - зорныя дні)\n"
+#~ "CTRL + - : Назад на гадзіну      CTRL + = : Наперад на гадзіну\n"
 #~ "\n"
 
 #~ msgid "Time Zone :"
-#~ msgstr "Tímabelti :"
+#~ msgstr "Часавы пояс :"
 
 #~ msgid "Time speed : "
-#~ msgstr "Tímahraði : "
+#~ msgstr "Хуткасьць часу : "
 
 #~ msgid "Toilet"
-#~ msgstr "Salernið"
+#~ msgstr "Туалет"
 
 #~ msgid "Triangle"
-#~ msgstr "Þríhyrningurinn"
+#~ msgstr "Трохкутнік"
 
 #~ msgid "Triangulum"
-#~ msgstr "Þríhyrningurinn"
+#~ msgstr "Трохкутнік"
 
 #~ msgid "Triangulum Australe"
-#~ msgstr "Suðurþríhyrningurinn"
+#~ msgstr "Паўднёвы трохкутнік"
 
 #~ msgid "Tripod"
-#~ msgstr "Þrífóturinn"
+#~ msgstr "Трыножак"
 
 #~ msgid "Tucana"
-#~ msgstr "Piparfuglinn"
+#~ msgstr "Тукан"
 
 #~ msgid "Turtle"
-#~ msgstr "Skjaldbakan"
+#~ msgstr "Чарапаха"
 
 #~ msgid "Two Jaws"
-#~ msgstr "Kjálkarnir tveir"
+#~ msgstr "Дзьве сківіцы"
 
 #~ msgid "Two Placed Far Apart"
-#~ msgstr "Hinar aðskildu"
+#~ msgstr "Два далёкія адзін ад аднаго"
 
 #~ msgid "Two Poles"
-#~ msgstr "Stangirnar tvær"
+#~ msgstr "Два слупы"
 
 #~ msgid "Two Sunbeams"
-#~ msgstr "Sólstafirnir tveir"
+#~ msgstr "Два сонечных промні"
 
 #~ msgid "Two in Front"
-#~ msgstr "Tvær fremstu"
+#~ msgstr "Двое сьпераду"
 
 #~ msgid "Type: "
-#~ msgstr "Gerð: "
+#~ msgstr "Тып: "
 
 #~ msgid "Ursa Major"
-#~ msgstr "Stóribjörn"
+#~ msgstr "Вялікая мядзьведзіца"
 
 #~ msgid "Ursa Minor"
-#~ msgstr "Litlibjörn"
+#~ msgstr "Малая мядзьведзіца"
 
 #~ msgid ""
 #~ "Use key J and L to decrease and increase\n"
 #~ "   time speed.\n"
 #~ "Use key K to return to real time speed."
 #~ msgstr ""
-#~ "Notaðu lyklana J og L til að minnka eða auka\n"
-#~ "   hraða tímagangs.\n"
-#~ "Notaðu lykilinn K til að fara aftur á eðlilegan hraða."
+#~ "Ужывай клявішы J і L каб зьменшыць і павялічыць\n"
+#~ "   хуткасьць часу\n"
+#~ "Ужывай клявішу K каб вернуцца да сапраўднай хуткасьці."
 
 #~ msgid "Using System Default Time Zone"
-#~ msgstr "Nota tímabelti stýrikerfisins"
+#~ msgstr "Ужыты дапомны часавы пояс сыстэмы"
 
 #~ msgid "Vela"
-#~ msgstr "Seglið"
+#~ msgstr "Ветразі"
 
 #~ msgid "Viewport Distorter"
-#~ msgstr "Sveigt sjónarhorn"
+#~ msgstr "Скажальнік акна прагляду"
 
 #~ msgid "Virgo"
-#~ msgstr "Meyjan"
+#~ msgstr "Дзева"
 
 #~ msgid "Voice of Joy"
-#~ msgstr "Gleðiraustin"
+#~ msgstr "Голас радасьці"
 
 #~ msgid "Volans"
-#~ msgstr "Flugfiskurinn"
+#~ msgstr "Рыба, якая ляціць"
 
 #~ msgid "Vulpecula"
-#~ msgstr "Litlirefur"
+#~ msgstr "Лісічка"
 
 #~ msgid "Wall"
-#~ msgstr "Múrinn"
-
-#~ msgid "Waty Bekety"
-#~ msgstr "Waty Bekety"
+#~ msgstr "Сьцяна"
 
 #~ msgid "Weaving Girl"
-#~ msgstr "Spunakonan"
+#~ msgstr "Дзяўчына, якая тчэ"
 
 #~ msgid "Well"
-#~ msgstr "Lindin"
+#~ msgstr "Калодзеж"
 
 #~ msgid "Western Door"
-#~ msgstr "Vesturdyrnar"
+#~ msgstr "Заходнія дзьверы"
 
 #~ msgid "Willow"
-#~ msgstr "Grátvíðirinn"
+#~ msgstr "Вярба"
 
 #~ msgid "Wings"
-#~ msgstr "Vængirnir"
+#~ msgstr "Крылы"
 
 #~ msgid "Winnowing Basket"
-#~ msgstr "Kornskiljuskálin"
+#~ msgstr "Кошык для веяньня"
 
 #~ msgid "Wolf's Mouth"
-#~ msgstr "Kjaftur Fenrisúlfs"
+#~ msgstr "Рот ваўка"
 
 #~ msgid "Woman's Bed"
-#~ msgstr "Rúm konunnar"
+#~ msgstr "Ложак жанчыны"
 
 #~ msgid "Woman's Cart"
-#~ msgstr "Kvennavagninn"
+#~ msgstr "Воз жанчыны"
 
 #~ msgid "Xuanyuan"
-#~ msgstr "Xuanyuan"
+#~ msgstr "Xuanyuan (Жоўты Імпэратар)"
 
 #~ msgid "Year"
-#~ msgstr "Ár"
+#~ msgstr "Год"
 
 #~ msgid "Yes"
-#~ msgstr "Já"
+#~ msgstr "Так"
 
 #~ msgid "Zaofu"
-#~ msgstr "Zaofu"
+#~ msgstr "Трынога"
 
 #~ msgid "change to apply."
-#~ msgstr "að breytingar verði virkar."
+#~ msgstr "зьмены мелі моц."

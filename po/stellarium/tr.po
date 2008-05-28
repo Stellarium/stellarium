@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2008-01-09 13:30+0000\n"
-"Last-Translator: Ali Isingor <isingor@gmail.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-04-08 13:15+0000\n"
+"Last-Translator: sinanalis <sinanali@yahoo.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " Işık Yılı"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "AB"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "Şu anki zaman"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr "Rakım (m): "
 msgid "Altitude:"
 msgstr "Rakım : "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,7 +93,7 @@ msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -123,18 +101,18 @@ msgstr ""
 msgid "Author: "
 msgstr "Yazar: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Azimutal İzdüşüm"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "Azimutal İzdüşüm"
 
@@ -151,7 +129,6 @@ msgid "CTRL + Up/Down"
 msgstr ""
 
 #: src/modules/TextUI.cpp:89
-#, fuzzy
 msgid "Calendar"
 msgstr "Takvim"
 
@@ -160,23 +137,22 @@ msgid "Callisto"
 msgstr "Callisto"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "Ana Yönler"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "Ana Yönler"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
-msgstr "Seçili Gök Cismine Git [SPACE]"
+msgstr "Seçili Gökcismine Git"
 
 #: src/translations.h:59
 msgid "Charon"
@@ -190,11 +166,15 @@ msgstr "Çin"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "Renkler "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "Yapılandırma"
 
@@ -203,12 +183,10 @@ msgid "Constellation Art Intensity"
 msgstr "Takımyıldızı Göstergesi Yoğunluğu"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "Takımyıldızı Sınırları"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
 msgstr "Takımyıldızı Çizgileri"
 
@@ -216,7 +194,7 @@ msgstr "Takımyıldızı Çizgileri"
 msgid "Constellation Names"
 msgstr "Takımyıldızı Adları"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "Takımyıldızı"
@@ -243,7 +221,7 @@ msgstr "Takvim"
 msgid "Date Display Format: "
 msgstr "Tarih Gösterim Biçimi: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "Tarih ve Saat"
@@ -252,11 +230,16 @@ msgstr "Tarih ve Saat"
 msgid "Day keys: "
 msgstr "Gün Anahtarı "
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "Zamanı Yavaşlat [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "Köpekler"
@@ -265,17 +248,21 @@ msgstr "Köpekler"
 msgid "Dione"
 msgstr "Dione"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "Avcı"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " Işık Yılı"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "Uzaklık: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -288,11 +275,10 @@ msgid "Earth"
 msgstr "Dünya"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "Yörünge Çizgisi"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "Yörünge Çizgisi"
@@ -313,9 +299,10 @@ msgstr "Enceladus"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, fuzzy, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr "zaman eşitliği"
 
 #: src/core/MappingClasses.cpp:77
@@ -323,26 +310,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "Ekvator Çizgisi"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "Ekvator Çizgisi"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "Ekvatoral İzdüşüm"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoral İzdüşüm"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Ekvatoral İzdüşüm"
@@ -364,25 +349,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "Dikey olarak döndür"
+msgstr "Yatay olarak döndür"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "Dikey olarak döndür"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "Sığlık"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -392,6 +381,10 @@ msgstr "Ganymede"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "Genel "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -405,6 +398,13 @@ msgstr "Yardım"
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": Şimdiye kadarki en yüksek hız (1966 Leonids)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "Saatlik meteor zenith oranı (ZHR)"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -422,6 +422,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "Zamanı Hızlandır [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Eskimo"
@@ -430,10 +435,11 @@ msgstr "Eskimo"
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -448,7 +454,7 @@ msgstr "Tethys"
 msgid "Korean"
 msgstr "Kore"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -456,7 +462,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "Lakota (Kuzey Amerika yerlileri)"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "Yeryüzü Şekilleri"
@@ -480,11 +486,10 @@ msgid "Left click"
 msgstr "Sol Sancak"
 
 #: src/modules/TextUI.cpp:128
-#, fuzzy
 msgid "Light Pollution Luminance: "
 msgstr "Işık Kirliliği Parlaklığı: "
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
 msgstr "Işık Kirliliği Parlaklığı: "
@@ -528,7 +533,7 @@ msgstr "Konum: "
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "Boylam : "
+msgstr "Boylam: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Longitude: "
@@ -542,19 +547,23 @@ msgstr "Kadir Ölçekleme Çarpanı: "
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Kadir Numarası Çarpanı: "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "Kadir: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "Kadir: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Kadir: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "Karina"
@@ -563,10 +572,10 @@ msgstr "Karina"
 msgid "Manual zoom: "
 msgstr "Elle büyütme: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "Karina"
+msgstr "Mars"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -592,18 +601,17 @@ msgstr "Merkür"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "Projeksiyon :"
+msgstr "Gök Cismi Ara"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Merkür"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "Meridyan Çizgisi"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "Meridyan Çizgisi"
@@ -616,7 +624,7 @@ msgstr "Samanyolu Yoğunluğu: "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "Mimas"
@@ -625,7 +633,7 @@ msgstr "Mimas"
 msgid "Moon"
 msgstr "Ay"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -637,6 +645,10 @@ msgstr "K"
 msgid "Navajo"
 msgstr "Navajo"
 
+#: src/modules/Nebula.cpp:270
+msgid "Nebula"
+msgstr "Bulutsu"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "Bulutsu Çemberleri"
@@ -645,7 +657,7 @@ msgstr "Bulutsu Çemberleri"
 msgid "Nebula Names"
 msgstr "Bulutsu Adları"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "Bulutsu"
@@ -658,7 +670,7 @@ msgstr "Neptün"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr "Normal hız"
@@ -671,7 +683,11 @@ msgstr "Viking"
 msgid "Object Sizing Rule: "
 msgstr "Cisim Boyutlama Kuralı: "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "Avcı"
@@ -694,8 +710,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
 msgstr "Paralaks "
 
 #: src/core/MappingClasses.cpp:11
@@ -722,19 +739,22 @@ msgid "Planet Names"
 msgstr "Gezegen Adları"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Gezegen İzleri"
+msgstr "Gezegen Yörüngeleri"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "Gezegen İzleri"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "Gezegenler"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Gezegen İşaretleyicileri"
@@ -752,23 +772,22 @@ msgid "Preset Sky Time: "
 msgstr "Gök Zamanını Ayarla: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "Gök Zamanını Ayarla: "
+msgstr "Saati Ayarla"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "Program dili: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "Projeksiyon :"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -783,16 +802,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "Eskimo"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "RA/DE: "
 
 #: src/translations.h:51
@@ -816,16 +833,16 @@ msgstr "Satürn"
 msgid "Save Current Configuration as Default: "
 msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Konumu Kaydet"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "Ayın Evreleri"
@@ -841,7 +858,7 @@ msgstr "Başlatmak için seç ve çık"
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "Seçili Gök Cismine Git [SPACE]"
+msgstr "Gök Cismi Ara"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -849,9 +866,8 @@ msgid "Selected:"
 msgstr "Seçili : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "Konum: "
+msgstr "Konumu Ayarla "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -865,73 +881,71 @@ msgstr "Zaman Dilimini Ayarla: "
 msgid "Set UI Locale: "
 msgstr "Yerel Saate Ayarla: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr "Normal hız"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "Saati Ayarla "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "Göster: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "Göster: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Atmosfer"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "Göster: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "Göster: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "Göster: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "Göster: "
 
@@ -943,15 +957,16 @@ msgstr "Kapat: "
 msgid "Sidereal"
 msgstr "Yıldız"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "Büyüklük: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
@@ -972,10 +987,6 @@ msgstr "Açılışta Gök Zamanı: "
 msgid "Sky Time: "
 msgstr "Gök Zamanı: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "Güneş Sistemi Gezegeni: "
@@ -989,13 +1000,10 @@ msgstr "Güneş Sistemi Gözlemevi"
 msgid "Space"
 msgstr "Mızrak"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "Yüzey Sıcaklığı: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1006,12 +1014,12 @@ msgstr ": Standart Perseids meteor yağmuru oranı"
 msgid "Star Value Multiplier: "
 msgstr "Yıldız Değeri Çarpanı: "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "Yıldız"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "Yıldızlar"
 
@@ -1019,7 +1027,7 @@ msgstr "Yıldızlar"
 msgid "Stars "
 msgstr "Yıldızlar "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1031,23 +1039,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1055,7 +1063,7 @@ msgstr ""
 msgid "Sun"
 msgstr "Güneş"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1101,128 +1109,126 @@ msgstr "Zaman Gösterim Biçimi: "
 msgid "Titan"
 msgstr "Titan"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "Atmosfer"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "Azimutal İzdüşüm"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "Ana Yönler"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "Yapılandırma Penceresi"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "Takımyıldızı Göstergesi Yükleniyor: "
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "Takımyıldızı Sınırları"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "Takımyıldızı Çizgileri"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "Takımyıldızı Çizgileri"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "Yörünge Çizgisi"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "Ekvator Çizgisi"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "Ekvatoral İzdüşüm"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "Ekvatoral İzdüşüm"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "Göster: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "Konumu Ayarla "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "Meridyan Çizgisi"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "Bulutsu"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "Gezegen Yörüngeleri"
+msgid "Toggle atmosphere"
+msgstr "Atmosfer"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "Azimutal İzdüşüm"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "Ana Yönler"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "Yapılandırma Penceresi"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "Takımyıldız Desenleri Yükleniyor "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "Takımyıldızı Sınırları"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "Takımyıldızı Adları"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "Takımyıldızı Çizgileri"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "Yörünge Çizgisi"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "Ekvator Çizgisi"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "Ekvatoral İzdüşüm"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "Ekvatoral İzdüşüm"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "Yapılandırma Penceresi"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "Meridyan Çizgisi"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "Gezegen İşaretleyicileri"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "Üç Yıldız"
@@ -1231,22 +1237,31 @@ msgstr "Üç Yıldız"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "Üçgen"
+msgid "Twinkle:"
+msgstr "Pırıldama: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "Pırıldama: "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "Türü: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
 msgstr "USB Betiği: "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
+msgstr ""
 
 #: src/modules/TextUI.cpp:150
 msgid "Update me via Internet: "
@@ -1256,11 +1271,11 @@ msgstr "İnternet aracılığı ile güncelle: "
 msgid "Uranus"
 msgstr "Uranüs"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1272,7 +1287,7 @@ msgstr ""
 msgid "Venus"
 msgstr "Venüs"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "Video"
@@ -1287,7 +1302,7 @@ msgstr "Batı"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1298,32 +1313,26 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "Büyütme süresi: "
+msgstr "Büyütme Süresi: "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
-msgstr "Seçili Gök Cismine Git [SPACE]"
+msgstr "Seçili Gökcismine Git"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "Büyütme Süresi: "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
-msgstr "Büyütme Süresi: "
-
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
+msgstr "Büyütme süresi: "
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:149
@@ -1424,6 +1433,9 @@ msgstr ""
 #~ msgid "> Found data files in %s : local version.\n"
 #~ msgstr "> veri dosyaları %s dizininde bulundu: yerel sürüm.\n"
 
+#~ msgid "AU"
+#~ msgstr "AB"
+
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "Dokusuz bulutsuları da göster"
 
@@ -1432,10 +1444,6 @@ msgstr ""
 
 #~ msgid "Animal"
 #~ msgstr "Hayvan"
-
-#, fuzzy
-#~ msgid "Anta"
-#~ msgstr "Pompa"
 
 #~ msgid "Antlia"
 #~ msgstr "Pompa"
@@ -1451,6 +1459,9 @@ msgstr ""
 
 #~ msgid "Ara"
 #~ msgstr "Sunak"
+
+#~ msgid "Are you sure ?"
+#~ msgstr "Emin misiniz ?"
 
 #~ msgid "Aries"
 #~ msgstr "Koç"
@@ -1533,7 +1544,7 @@ msgstr ""
 #~ msgstr "Aurvandil'in Ayak Parmağı"
 
 #~ msgid "Azimuthal Grid [Z]"
-#~ msgstr "Azimutal İzdüşüm [Z]"
+#~ msgstr "Ufuksal Koordinat Sistemi"
 
 #~ msgid "Bailer"
 #~ msgstr "Kefil"
@@ -1549,10 +1560,6 @@ msgstr ""
 
 #~ msgid "Blubber Container"
 #~ msgstr "Donyağı Kırbası"
-
-#, fuzzy
-#~ msgid "Bo"
-#~ msgstr "Tekne"
 
 #~ msgid "Boat"
 #~ msgstr "Tekne"
@@ -1572,15 +1579,11 @@ msgstr ""
 #~ msgid "Bull's Foreleg"
 #~ msgstr "Boğanın Ön Ayağı"
 
-#, fuzzy
-#~ msgid "Byeong"
-#~ msgstr "Bağ"
-
 #~ msgid "CMD + Q  : Quit\n"
 #~ msgstr "CMD + Q: Çık\n"
 
 #~ msgid "CMD + Q : Quit\n"
-#~ msgstr "CMD + Q : Çıkış\n"
+#~ msgstr "CMD + Q : Çık\n"
 
 #~ msgid "CTRL + Q : Quit\n"
 #~ msgstr "CTRL + Q : Çık\n"
@@ -1627,9 +1630,6 @@ msgstr ""
 #~ msgid "Caribou"
 #~ msgstr "Karibu Geyiği"
 
-#~ msgid "Carina"
-#~ msgstr "Karina"
-
 #~ msgid "Cassiopeia"
 #~ msgstr "Kraliçe"
 
@@ -1657,58 +1657,6 @@ msgstr ""
 #~ msgid "Chematy"
 #~ msgstr "Chematy"
 
-#, fuzzy
-#~ msgid "CheonAa"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonBu"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonByeon"
-#~ msgstr "Bukalemun"
-
-#, fuzzy
-#~ msgid "CheonGa"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonGo"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonGu"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonJeon"
-#~ msgstr "Bukalemun"
-
-#, fuzzy
-#~ msgid "CheonJu"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonSa"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "CheonSeon"
-#~ msgstr "Bukalemun"
-
-#, fuzzy
-#~ msgid "CheonYu"
-#~ msgstr "Kharon"
-
-#, fuzzy
-#~ msgid "Cheuk"
-#~ msgstr "Kral"
-
-#, fuzzy
-#~ msgid "ChilGong"
-#~ msgstr "Kayış"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "Manzara seçiniz"
 
@@ -1733,15 +1681,17 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "Komut yazımı sona erdi."
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "Yoksunluk"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "Yapılandırma penceresi [1]"
 
 #~ msgid "Constellations Art [R]"
-#~ msgstr "Takımyıldızı Göstergeleri [R]"
+#~ msgstr "Takımyıldız Desenleri"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Takımyıldızı Sınırları"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Takımyıldızı Çizgileri"
 
 #~ msgid "Constellations Names"
 #~ msgstr "Takımyıldızlarının Adları"
@@ -1778,10 +1728,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "Gün"
-
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "Zamanı Yavaşlat [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "Yunus"
@@ -1887,15 +1833,17 @@ msgstr ""
 #~ "4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
 #~ "\n"
 
+#~ msgid "Do"
+#~ msgstr "Yap"
+
 #~ msgid "Dog"
 #~ msgstr "köpek"
 
 #~ msgid "Dolphin"
 #~ msgstr "Yunus"
 
-#, fuzzy
-#~ msgid "DonGu"
-#~ msgstr "Dione"
+#~ msgid "Done"
+#~ msgstr "Yapıldı"
 
 #~ msgid "Dorado"
 #~ msgstr "Kılıç Balığı"
@@ -1904,7 +1852,7 @@ msgstr ""
 #~ msgstr "Ejderha"
 
 #~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "Takımyıldızı Çizgileri [C]"
+#~ msgstr "Takımyıldız Çizgileri"
 
 #~ msgid "Dried Willow"
 #~ msgstr "Kurutulmuş Söğüt"
@@ -1923,7 +1871,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Betik Çalışması Sırasında:\n"
 #~ "CTRL + C : Betiği sona erdir\n"
-#~ "6 :  Betiği beklet  K : Betiği tekrar çalıştır\n"
+#~ "6 :  Betiğe beklet  K : Betiği tekrar çalıştır\n"
 #~ "\n"
 
 #~ msgid "E-W Centering Offset: "
@@ -1966,15 +1914,11 @@ msgstr ""
 #~ msgid "Enter observatory name"
 #~ msgstr "Gözlem yeri adını girin"
 
-#, fuzzy
-#~ msgid "Eo"
-#~ msgstr "D"
-
 #~ msgid "Equatorial Grid [E]"
-#~ msgstr "Ekvatoral İzdüşüm [E]"
+#~ msgstr "Ekvatoral Koordinat Sistemi"
 
 #~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "Ekvatoral/Altazimuthal Eksen [ENTER]"
+#~ msgstr "Ekvatoral/Ufuksal Kurgu"
 
 #~ msgid "Equuleus"
 #~ msgstr "Tay"
@@ -1987,10 +1931,6 @@ msgstr ""
 
 #~ msgid "Establishment"
 #~ msgstr "Yönetici Sınıf"
-
-#, fuzzy
-#~ msgid "Eup"
-#~ msgstr "Europa"
 
 #~ msgid "Extended Net"
 #~ msgstr "Genişletilmiş Ağ"
@@ -2023,10 +1963,10 @@ msgstr ""
 #~ msgstr "Harman Döven"
 
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
-#~ msgstr "Yatay dondur [CTRL + SHIFT + H]"
+#~ msgstr "Yatayda döndür"
 
 #~ msgid "Flip vertically [CTRL + SHIFT + V]"
-#~ msgstr "Dikey dondur"
+#~ msgstr "Dikeyde döndür"
 
 #~ msgid "Flock"
 #~ msgstr "Flok"
@@ -2040,9 +1980,6 @@ msgstr ""
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Listelenmemiş ekran çözünürlükleri için dosyayı düzenleyin:"
 
-#~ msgid "Ford"
-#~ msgstr "Sığlık"
-
 #~ msgid "Fornax"
 #~ msgstr "Ocak"
 
@@ -2055,27 +1992,11 @@ msgstr ""
 #~ msgid "GO"
 #~ msgstr "GİT"
 
-#, fuzzy
-#~ msgid "Gaang"
-#~ msgstr "Dev"
-
 #~ msgid "Gemini"
-#~ msgstr "İkizler"
-
-#, fuzzy
-#~ msgid "GeoGii"
-#~ msgstr "İkizler"
-
-#, fuzzy
-#~ msgid "Geon"
 #~ msgstr "İkizler"
 
 #~ msgid "Ghosts"
 #~ msgstr "Hayaletler"
-
-#, fuzzy
-#~ msgid "GiGwan"
-#~ msgstr "Dev"
 
 #~ msgid "Giant"
 #~ msgstr "Dev"
@@ -2089,23 +2010,14 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "Büyük General"
 
+#~ msgid "Ground"
+#~ msgstr "Yeryüzü"
+
 #~ msgid "Ground [G]"
 #~ msgstr "Yeryüzü [G]"
 
 #~ msgid "Grus"
 #~ msgstr "Turna"
-
-#, fuzzy
-#~ msgid "Gu"
-#~ msgstr "Turna"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "Yılan"
-
-#, fuzzy
-#~ msgid "Gwan"
-#~ msgstr "Dev"
 
 #~ msgid "HP No./Name"
 #~ msgstr "HP No./Adı"
@@ -2113,19 +2025,11 @@ msgstr ""
 #~ msgid "Hand"
 #~ msgstr "El"
 
-#, fuzzy
-#~ msgid "Hang"
-#~ msgstr "El"
-
 #~ msgid "Heart"
 #~ msgstr "Yürek"
 
 #~ msgid "Help [H]"
 #~ msgstr "Yardım [H]"
-
-#, fuzzy
-#~ msgid "Heo"
-#~ msgstr "Aslan"
 
 #~ msgid "Hercules"
 #~ msgstr "Herkül"
@@ -2136,20 +2040,8 @@ msgstr ""
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Bitirmek için CTTL-R tuşlarına tekrar basın.\n"
 
-#, fuzzy
-#~ msgid "Ho"
-#~ msgstr "Kanca"
-
-#, fuzzy
-#~ msgid "HoBuun"
-#~ msgstr "Boynuz"
-
 #~ msgid "Hook"
 #~ msgstr "Kanca"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "Yatay olarak döndür"
 
 #~ msgid "Horn"
 #~ msgstr "Boynuz"
@@ -2169,19 +2061,11 @@ msgstr ""
 #~ msgid "Hydrus"
 #~ msgstr "Küçük Su Yılanı"
 
-#, fuzzy
-#~ msgid "HyeonGwa"
-#~ msgstr "Hyperion"
-
 #~ msgid "Imperial Guards"
 #~ msgstr "İmparatorluk Muhafızları"
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "İmparatorluk Geçidi"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "Zamanı Hızlandır [L]"
 
 #~ msgid "Indus"
 #~ msgstr "Kızılderili"
@@ -2201,24 +2085,8 @@ msgstr ""
 #~ msgid "Jade Well"
 #~ msgstr "Yeşim Kuyu"
 
-#, fuzzy
-#~ msgid "JaeJwa"
-#~ msgstr "Çene"
-
-#, fuzzy
-#~ msgid "JaeSeok"
-#~ msgstr "Sek"
-
 #~ msgid "Jaw"
 #~ msgstr "Çene"
-
-#, fuzzy
-#~ msgid "Jeo"
-#~ msgstr "Aslan"
-
-#, fuzzy
-#~ msgid "JinHyeon"
-#~ msgstr "Hyperion"
 
 #~ msgid "Kenemet"
 #~ msgstr "Kenemet"
@@ -2240,6 +2108,9 @@ msgstr ""
 
 #~ msgid "Language"
 #~ msgstr "Dil"
+
+#~ msgid "Latitude : "
+#~ msgstr "Enlem: "
 
 #~ msgid "Legs"
 #~ msgstr "Bacaklar"
@@ -2289,6 +2160,9 @@ msgstr ""
 #~ msgid "Loading nebulas data "
 #~ msgstr "Nebula Verileri Yükleniyor "
 
+#~ msgid "Longitude : "
+#~ msgstr "Boylam : "
+
 #~ msgid "Lupus"
 #~ msgstr "Kurt"
 
@@ -2334,9 +2208,6 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Dakikadaki meteor hızı"
 
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "Saatlik meteor zenith oranı (ZHR)"
-
 #~ msgid "Microscopium"
 #~ msgstr "Mikroskop"
 
@@ -2381,15 +2252,14 @@ msgstr ""
 #~ "SPACE            : Center on selected object\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Hareket ve Seçilenler:\n"
-#~ "Yön Tuşları : Sağ Açıklık/Dik Açıklık (RA/DE)\n"
-#~ "Page Up/Down : Büyütme/Küçültme\n"
-#~ "CTRL+Up/Down : Büyütme/Küçültme\n"
+#~ "Hareket ve Seçimler\n"
+#~ "Yön Tuşları: Sağaçıklık / Dikaçıklık (RA/Dec)\n"
+#~ "Page Up/Down : Yakınlaştırma/Uzaklaştırma\n"
+#~ "CTRL + Up/Down : Yakınlaştırma/Uzaklaştırma\n"
 #~ "Sol Tık : Cismi seç\n"
 #~ "Sağ Tık : Seçili cismi bırak\n"
-#~ "CTRL+Sol Tık : Seçili cismi bırak\n"
-#~ "\\ : Küçült (Gezegen ve ayları için)\n"
-#~ "/ : Seçili cismi büyüt\n"
+#~ "\\ : Uzaklaştır (Gezegen ve uyduları için)\n"
+#~ "/ : Seçili cismi yaklaştır\n"
 #~ "Boşluk tuşu (SPACE) : Seçili cismi ortala\n"
 #~ "\n"
 
@@ -2398,18 +2268,6 @@ msgstr ""
 
 #~ msgid "N-S Centering Offset: "
 #~ msgstr "K-G Merkezli Konumlandırma: "
-
-#, fuzzy
-#~ msgid "NaaEon"
-#~ msgstr "Navajo"
-
-#, fuzzy
-#~ msgid "NaamDoo"
-#~ msgstr "Navajo"
-
-#, fuzzy
-#~ msgid "NamHa"
-#~ msgstr "Cetvel"
 
 #~ msgid ""
 #~ "Name : %s (NGC %u)\n"
@@ -2451,7 +2309,7 @@ msgstr ""
 #~ "Uzaklık: %.8f AU"
 
 #~ msgid "Names of the Constellations [V]"
-#~ msgstr "Takımyıldızı Adları [V]"
+#~ msgstr "Takımyıldız İsimleri"
 
 #~ msgid "Navigator's Triangle"
 #~ msgstr "Denizci'nin Üçgeni"
@@ -2471,8 +2329,7 @@ msgstr ""
 #~ msgid "Night (red) mode"
 #~ msgstr "Gece (kırmızı) modu"
 
-#, fuzzy
-#~ msgid "Noin"
+#~ msgid "No"
 #~ msgstr "Hayır"
 
 #~ msgid "Norma"
@@ -2499,9 +2356,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "Meyve Bahçesi"
 
-#~ msgid "Orion"
-#~ msgstr "Avcı"
-
 #~ msgid "Outer Fence"
 #~ msgstr "Dış Siper"
 
@@ -2510,10 +2364,6 @@ msgstr ""
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Yıldız Çifti"
-
-#, fuzzy
-#~ msgid "PalGok"
-#~ msgstr "Tavus Kuşu"
 
 #~ msgid "Palace Gate"
 #~ msgstr "Saray Kapısı"
@@ -2587,8 +2437,14 @@ msgstr ""
 #~ msgid "Rabbit Tracks"
 #~ msgstr "Tavşan İzleri"
 
+#~ msgid "Race Track"
+#~ msgstr "Koşu Yolu"
+
 #~ msgid "Ramparts"
 #~ msgstr "Siperler"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Gerçek Zamanlı Hız [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "Komutlar betik dosyasına yazılıyor:\n"
@@ -2602,8 +2458,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "Ağ"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "Şu Anki Zamana Dön"
 
 #~ msgid "Return to Current Time [8]"
@@ -2635,10 +2490,6 @@ msgstr ""
 
 #~ msgid "Runners"
 #~ msgstr "Koşucular"
-
-#, fuzzy
-#~ msgid "SaamTae"
-#~ msgstr "Semender"
 
 #~ msgid "Sagitta"
 #~ msgstr "Ok"
@@ -2688,14 +2539,11 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "Şunu ara (ör: Saturn, Polaris, HP6218, Orion, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "Gök Cismi Ara"
-
 #~ msgid "Search for object [CTRL + F]"
-#~ msgstr "Nesne Ara [CTRL + F]"
+#~ msgstr "Gökcismi Ara"
 
-#~ msgid "Sek"
-#~ msgstr "Sek"
+#~ msgid "Seconds"
+#~ msgstr "Saniye"
 
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Sadece Seçili Takımyıldızları"
@@ -2703,20 +2551,8 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "Selkis"
 
-#, fuzzy
-#~ msgid "Seong"
-#~ msgstr "Saniye"
-
 #~ msgid "Serpens"
 #~ msgstr "Yılan"
-
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "Gerçek Zamanlı Hız [K]"
-
-#, fuzzy
-#~ msgid "Set Tracking"
-#~ msgstr "Koşu Yolu"
 
 #~ msgid "Setting Landscape Sets Location: "
 #~ msgstr "Konum Belirleme Ayarı "
@@ -2739,59 +2575,11 @@ msgstr ""
 #~ msgid "Sheepfold"
 #~ msgstr "Koyun Ağılı"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "Atmosfer"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "Azimutal İzdüşüm"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "Ana Yönler"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "Göster: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "Yörünge Çizgisi"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "Ekvator Çizgisi"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "Ekvatoral İzdüşüm"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "Ekvatoral İzdüşüm"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "Göster: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "Yeryüzü"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "Meridyan Çizgisi"
-
 #~ msgid "Snake"
 #~ msgstr "Yılan"
 
 #~ msgid "Soldiers Market"
 #~ msgstr "Asker Pazarı"
-
-#, fuzzy
-#~ msgid "Soun"
-#~ msgstr "Güneş"
 
 #~ msgid "South River"
 #~ msgstr "Güney Irmağı"
@@ -2805,14 +2593,11 @@ msgstr ""
 #~ msgid "Square Granary"
 #~ msgstr "Kare Tahıl Ambarı"
 
-#~ msgid "Star"
-#~ msgstr "Yıldız"
-
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Yıldız Kadir Çarpanı: "
 
 #~ msgid "Star Names. Up to mag :"
-#~ msgstr "Şu kadirden fazla Yıldız İsimleri:"
+#~ msgstr "Şu kadire kadar Yıldız İsimleri:"
 
 #~ msgid "Star Twinkle. Amount :"
 #~ msgstr "Yıldız Pırıldama Miktarı:"
@@ -2825,14 +2610,6 @@ msgstr ""
 
 #~ msgid "Supreme Palace"
 #~ msgstr "Kutsal Saray"
-
-#, fuzzy
-#~ msgid "TaeMi"
-#~ msgstr "Kuyruk"
-
-#, fuzzy
-#~ msgid "Tae_iil"
-#~ msgstr "Kuyruk"
 
 #~ msgid "Tail"
 #~ msgstr "Kuyruk"
@@ -2897,7 +2674,6 @@ msgstr ""
 #~ "[ : 7 gün geri git   ] : 7 gün ileri git\n"
 #~ "\n"
 
-#, fuzzy
 #~ msgid ""
 #~ "Time & Date:\n"
 #~ "6   : Time rate pause           7   : Time rate 0\n"
@@ -2909,12 +2685,12 @@ msgstr ""
 #~ "\n"
 #~ msgstr ""
 #~ "Zaman & Tarih \n"
-#~ "6 : Zaman hızı durdurma 7 : Zaman hızı 0\n"
-#~ "8: Şimdiki zamanı ayarla J: Zaman hızını arttır\n"
-#~ "K : Normal zaman hızı L : Zaman hızını arttır\n"
-#~ "-ve=bir gün geri veya ileri git ( yıldız günü için ALT'a bas)\n"
-#~ "[ ve ] : 7 gün geri veya ileri  git (yıldız günü için ALT'a bas)\n"
-#~ "CTRL+ - : Bir saat geri CTRL+= : Bir saat ileri\n"
+#~ "6 : Zaman akışını durdurma 7 : Zaman akış hızı 0\n"
+#~ "8 : Şimdiki zamanı ayarla J : Zaman akış hızını artır\n"
+#~ "K : Normal zaman akış hızı L : Zaman akış hızını artır\n"
+#~ "-ve=bir gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
+#~ "[ ve ] : 7 gün geri veya ileri git (yıldız günü için ALT'a bas)\n"
+#~ "CTRL + - : Bir saat geri CTRL + = : Bir saat ileri\n"
 #~ "\n"
 
 #~ msgid "Time Zone :"
@@ -2965,6 +2741,9 @@ msgstr ""
 #~ msgid "Two in Front"
 #~ msgstr "Karşıda İki Kişi"
 
+#~ msgid "Type: "
+#~ msgstr "Türü: "
+
 #~ msgid "Ursa Major"
 #~ msgstr "Büyük Ayı"
 
@@ -2992,16 +2771,8 @@ msgstr ""
 #~ msgid "Using System Default Time Zone"
 #~ msgstr "Öntanımlı Sistem Saat Dilimi Kullanılıyor"
 
-#, fuzzy
-#~ msgid "Veado"
-#~ msgstr "Çayır"
-
 #~ msgid "Vela"
 #~ msgstr "Yelken"
-
-#, fuzzy
-#~ msgid "Vespeiro"
-#~ msgstr "Başak"
 
 #~ msgid "Viewport Distorter"
 #~ msgstr "Görünüm Bozulması"
@@ -3057,8 +2828,7 @@ msgstr ""
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
-#, fuzzy
-#~ msgid "YeoSa"
+#~ msgid "Year"
 #~ msgstr "Yıl"
 
 #~ msgid "Yes"
