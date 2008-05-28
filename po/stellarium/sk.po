@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-09-27 14:34+0000\n"
-"Last-Translator: lmichnovic <ladislav.michnovic@gmail.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-05-22 11:26+0000\n"
+"Last-Translator: Jakub Kapuš <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " svetelných rokov"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "AU"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "Aktuálny čas"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr "Výška (m): "
 msgid "Altitude:"
 msgstr "Výška : "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,7 +93,7 @@ msgstr "Stlač šipku dolu pre nahratie zoznamu."
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -123,18 +101,18 @@ msgstr ""
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "Azimut/Výška: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Azimutálna mriežka"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "Azimutálna mriežka"
 
@@ -151,7 +129,6 @@ msgid "CTRL + Up/Down"
 msgstr ""
 
 #: src/modules/TextUI.cpp:89
-#, fuzzy
 msgid "Calendar"
 msgstr "Kalendár"
 
@@ -160,20 +137,19 @@ msgid "Callisto"
 msgstr "Callisto"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "Svetové strany"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "Svetové strany"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "Choď na vybraný objekt [MEDZERNÍK]"
@@ -190,11 +166,15 @@ msgstr "Čínska"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "Farby "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "Nastavenia"
 
@@ -203,21 +183,18 @@ msgid "Constellation Art Intensity"
 msgstr "Intenzita kresieb súhvezdí"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "Hranice súhvezdí"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "čiary súhvezdí"
+msgstr "Čiary súhvezdí"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
 msgstr "Názvy súhvezdí"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "Čiary súhvezdí"
@@ -244,7 +221,7 @@ msgstr "Kalendár"
 msgid "Date Display Format: "
 msgstr "Formát zobrazovania dátumu: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "Dátum a čas"
@@ -253,11 +230,16 @@ msgstr "Dátum a čas"
 msgid "Day keys: "
 msgstr "Kľúče dní: "
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "Spomaliť čas"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "Psy"
@@ -266,17 +248,21 @@ msgstr "Psy"
 msgid "Dione"
 msgstr "Dione"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "Orión"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " svetelných rokov"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "Vzdialenosť: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -289,11 +275,10 @@ msgid "Earth"
 msgstr "Zem"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "čiara ekliptiky"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "čiara ekliptiky"
@@ -314,36 +299,35 @@ msgstr "Enceladus"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
-msgstr "Ekvinokcium"
+#, fuzzy, qt-format
+msgid "Equ of date RA/DE: %1/%2"
+msgstr "Ekvinokciálna"
 
 #: src/core/MappingClasses.cpp:77
 msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "Rovníková čiara"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "Rovníková čiara"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "Ekvatoriálna mriežka"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoriálna mriežka"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Ekvatoriálna mriežka"
@@ -365,25 +349,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "Zrkadliť vertikálne"
+msgstr "Zrkadliť horizontálne"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "Brod"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -394,18 +382,29 @@ msgstr "Ganymedes"
 msgid "General "
 msgstr "Hlavné "
 
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
+
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:152
 msgid "Help"
-msgstr "Nápoveda"
+msgstr "Pomocník"
 
 #: src/gui/ViewDialog.cpp:343
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": Najvyššia známa intenzita (Leonidy 1966)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "hod. intenzita meteorov"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -423,6 +422,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "Zrýchliť čas"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Eskimácka"
@@ -431,10 +435,11 @@ msgstr "Eskimácka"
 msgid "Io"
 msgstr "Io"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -449,7 +454,7 @@ msgstr "Tethys"
 msgid "Korean"
 msgstr "Kórejská"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -457,7 +462,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "Indiánska - kmeň Lakota"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "Terén"
@@ -469,7 +474,7 @@ msgstr "Terén: "
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "Zem.  šírka : "
+msgstr "Zemepisná šírka: "
 
 #: src/modules/TextUI.cpp:80
 msgid "Latitude: "
@@ -481,11 +486,10 @@ msgid "Left click"
 msgstr "Ľavá vlajka"
 
 #: src/modules/TextUI.cpp:128
-#, fuzzy
 msgid "Light Pollution Luminance: "
 msgstr "Jas svetelneho znečistenia: "
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
 msgstr "Jas svetelneho znečistenia: "
@@ -520,7 +524,7 @@ msgstr "Lokálny Skript: "
 
 #: src/ui_locationDialogGui.h:322
 msgid "Location"
-msgstr "Umiestnenie"
+msgstr "Poloha"
 
 #: src/modules/LandscapeMgr.cpp:428
 msgid "Location: "
@@ -529,7 +533,7 @@ msgstr "Miesto: "
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "Zem. dĺžka : "
+msgstr "Zemepisná dĺžka: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Longitude: "
@@ -543,19 +547,23 @@ msgstr "Násobič mierky magnitúdy: "
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Násobiteľ kalibrovania magnitúdy: "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "Magnitúda: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "Magnitúda: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Magnitúda: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "Kýl"
@@ -564,10 +572,10 @@ msgstr "Kýl"
 msgid "Manual zoom: "
 msgstr "Ručné zväčšenie: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "Kýl"
+msgstr "Mars"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -593,18 +601,17 @@ msgstr "Merkúr"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "Projekcia"
+msgstr "Hľadať objekt [CTRL + F]"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Merkúr"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "Poludník"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "Poludník"
@@ -617,7 +624,7 @@ msgstr "Intenzita Mliečnej dráhy "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "Mimas"
@@ -626,7 +633,7 @@ msgstr "Mimas"
 msgid "Moon"
 msgstr "Mesiac"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -638,6 +645,11 @@ msgstr "Sever"
 msgid "Navajo"
 msgstr "Navaho"
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "Hmloviny [N]"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "Kruhy hmlovín"
@@ -646,7 +658,7 @@ msgstr "Kruhy hmlovín"
 msgid "Nebula Names"
 msgstr "Názvy hmlovín"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "Hmloviny [N]"
@@ -659,7 +671,7 @@ msgstr "Neptún"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": Normálna intenzita"
@@ -672,7 +684,11 @@ msgstr "Škandinávska"
 msgid "Object Sizing Rule: "
 msgstr "Pravidlo pre zmenu veľkosti objektu: "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "Orión"
@@ -695,9 +711,10 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
-msgstr "paralaxa: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
+msgstr "Paralaxa: "
 
 #: src/core/MappingClasses.cpp:11
 #, fuzzy
@@ -723,19 +740,22 @@ msgid "Planet Names"
 msgstr "Názvy planét"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Stopy planét"
+msgstr "Dráhy planét"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "Stopy planét"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "Planéty"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Popisky planét"
@@ -753,23 +773,22 @@ msgid "Preset Sky Time: "
 msgstr "Prednastavený čas oblohy: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "Prednastavený čas oblohy: "
+msgstr "Prednastaviť čas"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "Jazyk programu: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "Projekcia"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -784,16 +803,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "Eskimácka"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "Rekt./Dekl.: "
 
 #: src/translations.h:51
@@ -817,19 +834,19 @@ msgstr "Saturn"
 msgid "Save Current Configuration as Default: "
 msgstr "Ulož aktuálne nastavenie ako štandardné: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Uložiť miesto"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
-msgstr "Mesačná škála"
+msgstr "Škálovanie Mesiaca"
 
 #: src/modules/TextUI.cpp:76
 msgid "Scripts "
@@ -842,7 +859,7 @@ msgstr "Vybrať. Po ukončení sa spustí."
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "Choď na vybraný objekt [MEDZERNÍK]"
+msgstr "Hľadať objekt [CTRL + F]"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -850,9 +867,8 @@ msgid "Selected:"
 msgstr "Zvolené : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "Miesto: "
+msgstr "Nastav umiestnenie "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -866,73 +882,71 @@ msgstr "Nastav časovú zónu: "
 msgid "Set UI Locale: "
 msgstr "Nastav jazyk pre UI: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": Normálna intenzita"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "Nastav čas "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "Ukázať: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "Ukázať: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Atmosféra"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "Ukázať: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "Ukázať: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "Ukázať: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "Ukázať: "
 
@@ -944,15 +958,16 @@ msgstr "Vypnúť: "
 msgid "Sidereal"
 msgstr "Siderický"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "Veľkosť: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
@@ -973,10 +988,6 @@ msgstr "čas oblohy na začiatku: "
 msgid "Sky Time: "
 msgstr "Čas oblohy: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "Teleso Slnečnej sústavy: "
@@ -990,13 +1001,10 @@ msgstr "Pozorovateľ Slnečnej sústavy"
 msgid "Space"
 msgstr "Kopija"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "Spektrálny typ: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1007,12 +1015,12 @@ msgstr ": Štandardná intenzita Perzeíd"
 msgid "Star Value Multiplier: "
 msgstr "Násobič  hodnoty hviezd: "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "Hviezda"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "Hviezdy"
 
@@ -1020,7 +1028,7 @@ msgstr "Hviezdy"
 msgid "Stars "
 msgstr "Hviezdy "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1032,23 +1040,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1056,7 +1064,7 @@ msgstr ""
 msgid "Sun"
 msgstr "Slnko"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1102,128 +1110,126 @@ msgstr "Formát zobrazovania času: "
 msgid "Titan"
 msgstr "Titan"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "Atmosféra"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "Azimutálna mriežka"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "Svetové strany"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "Okno s nastaveniami [1]"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "Kresby súhvezdí [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "Hranice súhvezdí"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "Názvy súhvezdí"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "čiary súhvezdí"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "čiara ekliptiky"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "Rovníková čiara"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "Ekvatoriálna mriežka"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "Ekvatoriálna mriežka"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "Ukázať: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "Nastav umiestnenie "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "Poludník"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "Hmloviny [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "Dráhy planét"
+msgid "Toggle atmosphere"
+msgstr "Atmosféra"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "Azimutálna mriežka"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "Svetové strany"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "Okno s nastaveniami [1]"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "Nahrávam obrázky súhvezdí: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "Hranice súhvezdí"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "Názvy súhvezdí"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "Čiary súhvezdí"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "čiara ekliptiky"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "Rovníková čiara"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "Ekvatoriálna mriežka"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "Ekvatoriálna mriežka"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "Okno s nastaveniami [1]"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "Poludník"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "Popisky planét"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "Tri hviezdy"
@@ -1232,22 +1238,31 @@ msgstr "Tri hviezdy"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "Trojuholník"
+msgid "Twinkle:"
+msgstr "Mihotanie: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "Mihotanie: "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "Typ: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
 msgstr "USB skript: "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
+msgstr ""
 
 #: src/modules/TextUI.cpp:150
 msgid "Update me via Internet: "
@@ -1257,11 +1272,11 @@ msgstr "Aktualizuj cez internet: "
 msgid "Uranus"
 msgstr "Urán"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1273,7 +1288,7 @@ msgstr ""
 msgid "Venus"
 msgstr "Venuša"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "Video"
@@ -1288,7 +1303,7 @@ msgstr "Západná"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1299,32 +1314,26 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "Miesto: "
+msgstr "Trvanie zväčšenia: "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "Choď na vybraný objekt [MEDZERNÍK]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "Trvanie zväčšenia: "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "Trvanie zväčšenia: "
 
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
-
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:149
@@ -1380,6 +1389,9 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Nesprávne argumenty príkazu\n"
 
+#~ msgid "AU"
+#~ msgstr "AU"
+
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "Zobraziť aj hmloviny bez textúr"
 
@@ -1388,10 +1400,6 @@ msgstr ""
 
 #~ msgid "Animal"
 #~ msgstr "Zviera"
-
-#, fuzzy
-#~ msgid "Anta"
-#~ msgstr "Výveva"
 
 #~ msgid "Antlia"
 #~ msgstr "Výveva"
@@ -1407,6 +1415,9 @@ msgstr ""
 
 #~ msgid "Ara"
 #~ msgstr "Oltár"
+
+#~ msgid "Are you sure ?"
+#~ msgstr "Ste si istý?"
 
 #~ msgid "Aries"
 #~ msgstr "Baran"
@@ -1441,10 +1452,6 @@ msgstr ""
 #~ msgid "Blubber Container"
 #~ msgstr "Nádoba pre veľrybí tuk"
 
-#, fuzzy
-#~ msgid "Bo"
-#~ msgstr "Loď"
-
 #~ msgid "Boat"
 #~ msgstr "Loď"
 
@@ -1462,10 +1469,6 @@ msgstr ""
 
 #~ msgid "Bull's Foreleg"
 #~ msgstr "Predné nohy býka"
-
-#, fuzzy
-#~ msgid "Byeong"
-#~ msgstr "Putá"
 
 #~ msgid "CMD + Q : Quit\n"
 #~ msgstr "CMD + Q : Ukončiť\n"
@@ -1506,9 +1509,6 @@ msgstr ""
 #~ msgid "Caribou"
 #~ msgstr "Sob"
 
-#~ msgid "Carina"
-#~ msgstr "Kýl"
-
 #~ msgid "Cassiopeia"
 #~ msgstr "Kasiopeja"
 
@@ -1536,58 +1536,6 @@ msgstr ""
 #~ msgid "Chematy"
 #~ msgstr "Chematy"
 
-#, fuzzy
-#~ msgid "CheonAa"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonBu"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonByeon"
-#~ msgstr "Chameleón"
-
-#, fuzzy
-#~ msgid "CheonGa"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonGo"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonGu"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonJeon"
-#~ msgstr "Chameleón"
-
-#, fuzzy
-#~ msgid "CheonJu"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonSa"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "CheonSeon"
-#~ msgstr "Chameleón"
-
-#, fuzzy
-#~ msgid "CheonYu"
-#~ msgstr "Charón"
-
-#, fuzzy
-#~ msgid "Cheuk"
-#~ msgstr "Cefeus"
-
-#, fuzzy
-#~ msgid "ChilGong"
-#~ msgstr "Zvinutý remeň"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "Zvoľ okolitú krajinu:"
 
@@ -1612,12 +1560,20 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "Záznamenávanie príkazov ukončené."
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "Prázdnota"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "Okno s nastaveniami [1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Kresby súhvezdí [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Hranice súhvezdí"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "čiary súhvezdí"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Názvy súhvezdí"
 
 #~ msgid "Corona Australis"
 #~ msgstr "Južná koruna"
@@ -1652,10 +1608,6 @@ msgstr ""
 #~ msgid "Day"
 #~ msgstr "deň"
 
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "Znížiť rýchlosť času [J]"
-
 #~ msgid "Delphinus"
 #~ msgstr "Delfín"
 
@@ -1687,11 +1639,11 @@ msgstr ""
 #~ "\n"
 #~ msgstr ""
 #~ "Dialógy a ďalšie možnosti ovládania:\n"
-#~ "H : zobrazí nápovedu   I : informácie o programe\n"
-#~ "M : Textové menu   1 (číslo jeden) : Nastavenie\n"
+#~ "H : Zobrazí nápovedu   I : Informácie o programe\n"
+#~ "M : Textové menu       1 (číslo jeden) : Nastavenie\n"
 #~ "CTRL + S : vytvoriť snímok obrazovky\n"
 #~ "CTRL + R : prepína medzi zaznamenávaním skriptu\n"
-#~ "CTRL + F : prepína medzi hľadačom objektov\n"
+#~ "CTRL + F : prepína medzi vyhľadávačom objektov\n"
 #~ "CTRL + G : ísť na zvolený objekt Slnečnej sústavy\n"
 #~ "\n"
 
@@ -1720,15 +1672,15 @@ msgstr ""
 #~ msgstr ""
 #~ "Možnosti zobrazenia:\n"
 #~ "ENTER : ekvatoriálna/paralaktická montáž\n"
-#~ "F1 : prepína medzi zobrazením v okne a celou obrazovkou\n"
-#~ "C : čiary súhvezdí   V : popisky súhvezdí\n"
-#~ "R : kresby súhvezdí   E : ekvatoriálna mriežka\n"
+#~ "F1 :    prepína medzi zobrazením v okne a celou obrazovkou\n"
+#~ "C : čiary súhvezdí       V : popisky súhvezdí\n"
+#~ "R : kresby súhvezdí      E : ekvatoriálna mriežka\n"
 #~ "Z : azimutálna mriežka   N : popisky hmlovín\n"
-#~ "P : popisky planét   G : zem\n"
-#~ "A : Atmosphere   F : hmla\n"
-#~ "Q : svetové strany   O : prepína zobrazenie Mesiaca\n"
+#~ "P : popisky planét       G : zem\n"
+#~ "A : atmosféra            F : hmla\n"
+#~ "Q : svetové strany       O : prepína zobrazenie Mesiaca\n"
 #~ "T : stopovanie objektu   S : hviezdy\n"
-#~ "4 , : čiara ekliptiky   5 . : ekvatoriálna čiara\n"
+#~ "4 , : čiara ekliptiky    5 . : ekvatoriálna čiara\n"
 #~ "\n"
 
 #~ msgid ""
@@ -1757,15 +1709,17 @@ msgstr ""
 #~ "4 : čiara ekliptiky               5 : ekvatoriálna čiara\n"
 #~ "\n"
 
+#~ msgid "Do"
+#~ msgstr "Vykonať"
+
 #~ msgid "Dog"
 #~ msgstr "Pes"
 
 #~ msgid "Dolphin"
 #~ msgstr "Delfín"
 
-#, fuzzy
-#~ msgid "DonGu"
-#~ msgstr "Dione"
+#~ msgid "Done"
+#~ msgstr "Hotovo"
 
 #~ msgid "Dorado"
 #~ msgstr "Mečiar"
@@ -1793,7 +1747,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Počas vykonávania skriptu:\n"
 #~ "CTRL + C : ukončiť skript\n"
-#~ "6 : pozastaviť skript            K : pokračovat v skripte\n"
+#~ "6 : pozastaviť skript                K : pokračovat v skripte\n"
 #~ "\n"
 
 #~ msgid "Earth God's Temple"
@@ -1814,10 +1768,6 @@ msgstr ""
 #~ msgid "Enter observatory name"
 #~ msgstr "Zadaj meno observatória"
 
-#, fuzzy
-#~ msgid "Eo"
-#~ msgstr "Východ"
-
 #~ msgid "Equatorial Grid [E]"
 #~ msgstr "Ekvatoriálna mriežka [E]"
 
@@ -1831,14 +1781,10 @@ msgstr ""
 #~ msgstr "Eridanus"
 
 #~ msgid "Error: Unable to open script file to record commands."
-#~ msgstr "Chyba: Nie je možné otvoriť skriptovací súbor pre zanamenávanie."
+#~ msgstr "Chyba: Nie je možné otvoriť skriptovací súbor pre zapisovanie."
 
 #~ msgid "Establishment"
 #~ msgstr "Sídlo"
-
-#, fuzzy
-#~ msgid "Eup"
-#~ msgstr "Európa"
 
 #~ msgid "Extended Net"
 #~ msgstr "Roztiahnutá sieť"
@@ -1885,9 +1831,6 @@ msgstr ""
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Pre nezobrazené rozlíšenia obrazovky edituj súbor :"
 
-#~ msgid "Ford"
-#~ msgstr "Brod"
-
 #~ msgid "Fornax"
 #~ msgstr "Pec"
 
@@ -1900,27 +1843,11 @@ msgstr ""
 #~ msgid "GO"
 #~ msgstr "Choď"
 
-#, fuzzy
-#~ msgid "Gaang"
-#~ msgstr "Obor"
-
 #~ msgid "Gemini"
-#~ msgstr "Blíženci"
-
-#, fuzzy
-#~ msgid "GeoGii"
-#~ msgstr "Blíženci"
-
-#, fuzzy
-#~ msgid "Geon"
 #~ msgstr "Blíženci"
 
 #~ msgid "Ghosts"
 #~ msgstr "Duchovia"
-
-#, fuzzy
-#~ msgid "GiGwan"
-#~ msgstr "Obor"
 
 #~ msgid "Giant"
 #~ msgstr "Obor"
@@ -1934,29 +1861,16 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "Veľký generál"
 
+#~ msgid "Ground"
+#~ msgstr "Zem"
+
 #~ msgid "Ground [G]"
 #~ msgstr "Zem [G]"
 
 #~ msgid "Grus"
 #~ msgstr "Žeriav"
 
-#, fuzzy
-#~ msgid "Gu"
-#~ msgstr "Žeriav"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "Had"
-
-#, fuzzy
-#~ msgid "Gwan"
-#~ msgstr "Obor"
-
 #~ msgid "Hand"
-#~ msgstr "Ruka"
-
-#, fuzzy
-#~ msgid "Hang"
 #~ msgstr "Ruka"
 
 #~ msgid "Heart"
@@ -1964,10 +1878,6 @@ msgstr ""
 
 #~ msgid "Help [H]"
 #~ msgstr "Pomocník [H]"
-
-#, fuzzy
-#~ msgid "Heo"
-#~ msgstr "Lev"
 
 #~ msgid "Hercules"
 #~ msgstr "Herkules"
@@ -1978,20 +1888,8 @@ msgstr ""
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Stlač CTRL-R opäť pre zastavenie.\n"
 
-#, fuzzy
-#~ msgid "Ho"
-#~ msgstr "Hák"
-
-#, fuzzy
-#~ msgid "HoBuun"
-#~ msgstr "Roh"
-
 #~ msgid "Hook"
 #~ msgstr "Hák"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "Zrkadliť horizontálne"
 
 #~ msgid "Horn"
 #~ msgstr "Roh"
@@ -2011,19 +1909,11 @@ msgstr ""
 #~ msgid "Hydrus"
 #~ msgstr "Vodný had"
 
-#, fuzzy
-#~ msgid "HyeonGwa"
-#~ msgstr "Hyperion"
-
 #~ msgid "Imperial Guards"
 #~ msgstr "Cisárska stráž"
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "Cisárska cestička"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "Zvýšiť rýchlosť času [L]"
 
 #~ msgid "Indus"
 #~ msgstr "Indián"
@@ -2040,24 +1930,8 @@ msgstr ""
 #~ msgid "Jade Well"
 #~ msgstr "Jadeitový prameň"
 
-#, fuzzy
-#~ msgid "JaeJwa"
-#~ msgstr "Čelusť"
-
-#, fuzzy
-#~ msgid "JaeSeok"
-#~ msgstr "Sek"
-
 #~ msgid "Jaw"
 #~ msgstr "Čelusť"
-
-#, fuzzy
-#~ msgid "Jeo"
-#~ msgstr "Lev"
-
-#, fuzzy
-#~ msgid "JinHyeon"
-#~ msgstr "Hyperion"
 
 #~ msgid "Kenemet"
 #~ msgstr "Kenemet"
@@ -2079,6 +1953,9 @@ msgstr ""
 
 #~ msgid "Language"
 #~ msgstr "Jazyk"
+
+#~ msgid "Latitude : "
+#~ msgstr "Zem.  šírka : "
 
 #~ msgid "Legs"
 #~ msgstr "Nohy"
@@ -2106,6 +1983,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "Nahrávam textúry hmlovín:"
+
+#~ msgid "Longitude : "
+#~ msgstr "Zem. dĺžka : "
 
 #~ msgid "Lupus"
 #~ msgstr "Vlk"
@@ -2146,9 +2026,6 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "Počet meteorov/min."
 
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "hod. intenzita meteorov"
-
 #~ msgid "Microscopium"
 #~ msgstr "Mikroskop"
 
@@ -2163,11 +2040,10 @@ msgstr ""
 #~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 #~ msgstr ""
 #~ "Rôzne:\n"
-#~ "9 :                               Prepínať medzi intenzitami meteorických "
-#~ "spŕšiek\n"
-#~ "CTRL + 0,..,9 :          Vykonať GOTO príkaz pre teleskop 0,..,9\n"
-#~ "CTRL + SHIFT + H: Prepínať medzi horizontálnym zrkadlením pohľadu\n"
-#~ "CTRL + SHIFT + V: Prepínať medzi vertikálnym zrkadlením pohľadu\n"
+#~ "9 : Prepínať medzi intenzitami meteorických spŕšiek\n"
+#~ "CTRL 0,..,9 : Vykonať GOTO príkaz pre teleskop 0,..,9\n"
+#~ "CTRL SHIFT H: Prepínať medzi horizontálnym zrkadlením pohľadu\n"
+#~ "CTRL SHIFT V: Prepínať medzi vertikálnym zrkadlením pohľadu\n"
 
 #~ msgid "Monoceros"
 #~ msgstr "Jednorožec"
@@ -2195,31 +2071,19 @@ msgstr ""
 #~ "\n"
 #~ msgstr ""
 #~ "Ovládanie a výber:\n"
-#~ "Šípky :                    Zmena Rekt./Dekl.\n"
+#~ "Šípky :           Zmena Rekt./Dekl.\n"
 #~ "Page Up/Down :    Priblíženie\n"
-#~ "CTRL+Up/Down : Zväčšenie\n"
-#~ "Ľavý klik :               Vybrať objekt\n"
-#~ "Pravý klik :             Odznačiť vybrané\n"
-#~ "CTRL+Ľavý klik :  Odznačiť vybrané\n"
-#~ "\\ :                              Vzdialiť sa od planéty resp. mesiaca\n"
-#~ "/ :                              Priblížiť sa k zvolenému objektu\n"
-#~ "MEDZERNÍK :        Vycentrovať zvolený objekt\n"
+#~ "CTRL hore/dolu :  Zväčšenie\n"
+#~ "Ľavý klik :       Vybrať objekt\n"
+#~ "Pravý klik :      Odznačiť vybrané\n"
+#~ "CTRL Ľavý klik :  Odznačiť vybrané \n"
+#~ "\\ :               Vzdialiť sa od planéty resp. mesiaca\n"
+#~ "/ :               Priblížiť sa k zvolenému objektu\n"
+#~ "MEDZERNÍK :       Vycentrovať zvolený objekt\n"
 #~ "\n"
 
 #~ msgid "Musca"
 #~ msgstr "Mucha"
-
-#, fuzzy
-#~ msgid "NaaEon"
-#~ msgstr "Navaho"
-
-#, fuzzy
-#~ msgid "NaamDoo"
-#~ msgstr "Navaho"
-
-#, fuzzy
-#~ msgid "NamHa"
-#~ msgstr "Pravítko"
 
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "Názvy súhvezdí [V]"
@@ -2239,8 +2103,7 @@ msgstr ""
 #~ msgid "Night (red) mode"
 #~ msgstr "Nočný (červený) mód"
 
-#, fuzzy
-#~ msgid "Noin"
+#~ msgid "No"
 #~ msgstr "Nie"
 
 #~ msgid "Norma"
@@ -2256,7 +2119,7 @@ msgstr ""
 #~ msgstr "Potvrdiť"
 
 #~ msgid "Object Search"
-#~ msgstr "Hľadanie Objektu"
+#~ msgstr "Hľadanie objektu"
 
 #~ msgid "Octans"
 #~ msgstr "Oktant"
@@ -2267,9 +2130,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "Ovocný sad"
 
-#~ msgid "Orion"
-#~ msgstr "Orión"
-
 #~ msgid "Outer Fence"
 #~ msgstr "Vonkajší plot"
 
@@ -2278,10 +2138,6 @@ msgstr ""
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Pár hviezd"
-
-#, fuzzy
-#~ msgid "PalGok"
-#~ msgstr "Páv"
 
 #~ msgid "Palace Gate"
 #~ msgstr "Palácová brána"
@@ -2332,16 +2188,22 @@ msgstr ""
 #~ msgstr "Skončiť [PRÍKAZ + Q]"
 
 #~ msgid "Quit [CTRL + Q]"
-#~ msgstr "Skončiť [CTRL + Q]"
+#~ msgstr "Skončiť [CTRL Q]"
 
 #~ msgid "Rabbit Tracks"
 #~ msgstr "Stopy králika"
 
+#~ msgid "Race Track"
+#~ msgstr "Bežecká dráha"
+
 #~ msgid "Ramparts"
 #~ msgstr "Hradby"
 
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Reálna rýchlosť času [K]"
+
 #~ msgid "Recording commands to script file:\n"
-#~ msgstr "Zaznamenávam príkazy do skriptovacieho súboru.\n"
+#~ msgstr "Zapisujem príkazy do skriptovacieho súboru:\n"
 
 #~ msgid "Rendering"
 #~ msgstr "Vykresľovanie"
@@ -2352,8 +2214,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "Sieť"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "Nastaviť súčasný čas [8]"
 
 #~ msgid "Return to Current Time [8]"
@@ -2385,10 +2246,6 @@ msgstr ""
 
 #~ msgid "Runners"
 #~ msgstr "Bežci"
-
-#, fuzzy
-#~ msgid "SaamTae"
-#~ msgstr "Salamander"
 
 #~ msgid "Sagitta"
 #~ msgstr "Šíp"
@@ -2429,41 +2286,26 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "Hľadať (napr.: Venuša, Polaris, HP6218, Orión, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "Hľadať objekt [CTRL + F]"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "Hľadať objekt [CTRL + F]"
 
-#~ msgid "Sek"
-#~ msgstr "Sek"
+#~ msgid "Seconds"
+#~ msgstr "sekundy"
 
 #~ msgid "Selected Constellation Only"
-#~ msgstr "Iba vybrané súhvezdia"
+#~ msgstr "Iba vybrané súhvezdie"
 
 #~ msgid "Selkis"
 #~ msgstr "Selkis"
 
-#, fuzzy
-#~ msgid "Seong"
-#~ msgstr "sekundy"
-
 #~ msgid "Serpens"
 #~ msgstr "Had"
-
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "Reálna rýchlosť času [K]"
-
-#, fuzzy
-#~ msgid "Set Tracking"
-#~ msgstr "Bežecká dráha"
 
 #~ msgid "Setting Landscape Sets Location: "
 #~ msgstr "Nastavenie krajiny nastaví miesto: "
 
 #~ msgid "Setting landscape updates the location"
-#~ msgstr "Nastavujem krajinu podľa miesta"
+#~ msgstr "Meniť miesto pozorovateľa podľa zvolenej krajiny"
 
 #~ msgid "Seven Excellencies"
 #~ msgstr "Sedem Excelencií"
@@ -2480,59 +2322,11 @@ msgstr ""
 #~ msgid "Sheepfold"
 #~ msgstr "Salaš"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "Atmosféra"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "Azimutálna mriežka"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "Svetové strany"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "Ukázať: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "čiara ekliptiky"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "Rovníková čiara"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "Ekvatoriálna mriežka"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "Ekvatoriálna mriežka"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "Ukázať: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "Zem"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "Poludník"
-
 #~ msgid "Snake"
 #~ msgstr "Had"
 
 #~ msgid "Soldiers Market"
 #~ msgstr "Vojenský trh"
-
-#, fuzzy
-#~ msgid "Soun"
-#~ msgstr "Slnko"
 
 #~ msgid "South River"
 #~ msgstr "Južná rieka"
@@ -2545,9 +2339,6 @@ msgstr ""
 
 #~ msgid "Square Granary"
 #~ msgstr "Štvorcová sýpka"
-
-#~ msgid "Star"
-#~ msgstr "Hviezda"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Násobiteľ hviezdnej veľkosti: "
@@ -2566,14 +2357,6 @@ msgstr ""
 
 #~ msgid "Supreme Palace"
 #~ msgstr "Hlavný palác"
-
-#, fuzzy
-#~ msgid "TaeMi"
-#~ msgstr "Chvost"
-
-#, fuzzy
-#~ msgid "Tae_iil"
-#~ msgstr "Chvost"
 
 #~ msgid "Tail"
 #~ msgstr "Chvost"
@@ -2634,11 +2417,11 @@ msgstr ""
 #~ msgstr ""
 #~ "Čas a Dátum:\n"
 #~ "6 : pozastavenie iného tempa času   7 : tempo plynutia času na 0\n"
-#~ "8 : nastaví aktuálny čas   J : zníži tempo plynutia času\n"
-#~ "K : normálne tempo plynutia času   L : zvýši tempo plynutia času\n"
+#~ "8 : nastaví aktuálny čas            J : zníži tempo plynutia času\n"
+#~ "K : normálne tempo plynutia času    L : zvýši tempo plynutia času\n"
 #~ "- a = : dozadu a dopredu o jeden deň (stlačte ALT pre siderický deň)\n"
 #~ "[ a ] : dozadu a dopredu o 7 dní (stlačte ALT pre siderický deň)\n"
-#~ "CTRL + - : o hodinu naspäť   CTRL + = : o hodinu dopredu\n"
+#~ "CTRL - : o hodinu naspäť            CTRL = : o hodinu dopredu\n"
 #~ "\n"
 
 #~ msgid "Time Zone :"
@@ -2686,6 +2469,9 @@ msgstr ""
 #~ msgid "Two in Front"
 #~ msgstr "Dvojica vpredu"
 
+#~ msgid "Type: "
+#~ msgstr "Typ: "
+
 #~ msgid "Ursa Major"
 #~ msgstr "Veľká medvedica"
 
@@ -2713,16 +2499,8 @@ msgstr ""
 #~ msgid "Using System Default Time Zone"
 #~ msgstr "Používam systémom predvolenú časovú zónu"
 
-#, fuzzy
-#~ msgid "Veado"
-#~ msgstr "Lúky"
-
 #~ msgid "Vela"
 #~ msgstr "Plachty"
-
-#, fuzzy
-#~ msgid "Vespeiro"
-#~ msgstr "Panna"
 
 #~ msgid "Viewport Distorter"
 #~ msgstr "Zakrivenie pohľadu"
@@ -2775,8 +2553,7 @@ msgstr ""
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
-#, fuzzy
-#~ msgid "YeoSa"
+#~ msgid "Year"
 #~ msgstr "rok"
 
 #~ msgid "Yes"

@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-11-02 18:17+0000\n"
-"Last-Translator: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-03-29 06:56+0000\n"
+"Last-Translator: Artin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " سال‌نوری"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "واحد نجومی"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "زمان حقیقی"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr ":(ارتفاع (متر "
 msgid "Altitude:"
 msgstr ":ارتفاع "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,26 +93,26 @@ msgstr ""
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
 #: src/modules/LandscapeMgr.cpp:425
 msgid "Author: "
-msgstr ""
+msgstr "نویسنده: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "سمت/ارتفاع: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "تقسیمات سَمتی"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "تقسیمات سَمتی"
 
@@ -159,20 +137,19 @@ msgid "Callisto"
 msgstr "کالیستو"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
-msgstr "چهارجهت اصلی "
+msgstr "چهارجهت اصلی"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "چهارجهت اصلی "
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "برو به جرم منتخب [SPACE]"
@@ -189,34 +166,35 @@ msgstr ""
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "رنگ‌ها "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "پیکربندی"
 
 #: src/modules/TextUI.cpp:113
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "خطوط صورت فلكي"
+msgstr ""
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "مرزهای صورتهای فلکی"
+msgstr ""
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "خطوط صورت فلكي"
+msgstr "خطوط صورت‌های فلکی"
 
 #: src/modules/TextUI.cpp:112
 msgid "Constellation Names"
 msgstr "نام صورت‌های فلکی‌"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "صورت فلکی"
@@ -242,7 +220,7 @@ msgstr ""
 msgid "Date Display Format: "
 msgstr ":قالب نمایش تاریخ "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "تاریخ و زمان"
@@ -251,11 +229,16 @@ msgstr "تاریخ و زمان"
 msgid "Day keys: "
 msgstr ""
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "کاهش سرعت گذر زمان [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "دیموس"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "دیموس"
@@ -264,17 +247,21 @@ msgstr "دیموس"
 msgid "Dione"
 msgstr "دیوُن"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "شکارچی"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " سال‌نوری"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "فاصله: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -287,11 +274,10 @@ msgid "Earth"
 msgstr "زمین"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "خط دایرة‌البروج"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "خط دایرة‌البروج"
@@ -312,9 +298,10 @@ msgstr "اِنسلادوس"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:77
@@ -322,26 +309,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "خط استوای سماوی"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "خط استوای سماوی"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "تقسیمات استوایی"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "تقسیمات استوایی"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "تقسیمات استوایی"
@@ -362,25 +347,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "قرینه‌سازی عمودی"
+msgstr "قرینه‌سازی افقی"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "قرینه‌سازی عمودی"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "گونیا"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -390,6 +379,10 @@ msgstr "گانی‌مد"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "عمومی "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -401,6 +394,12 @@ msgstr "راهنما"
 
 #: src/gui/ViewDialog.cpp:343
 msgid "Highest rate ever (1966 Leonids)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1056
+msgid ""
+"Hourly\n"
+"zenith rate"
 msgstr ""
 
 #: src/translations.h:53
@@ -419,6 +418,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "افزایش سرعت گذر زمان [L]"
+
 #: src/translations.h:71
 #, fuzzy
 msgid "Inuit"
@@ -428,10 +432,11 @@ msgstr "هندی"
 msgid "Io"
 msgstr "آیو"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -446,7 +451,7 @@ msgstr "تتیس"
 msgid "Korean"
 msgstr "کره‌ای‌"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -455,7 +460,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "سوسمار"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "منظره‌ها"
@@ -481,7 +486,7 @@ msgstr ""
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 msgid "Light pollution:"
 msgstr ""
 
@@ -518,9 +523,8 @@ msgid "Location"
 msgstr "موقعیت"
 
 #: src/modules/LandscapeMgr.cpp:428
-#, fuzzy
 msgid "Location: "
-msgstr "موقعیت"
+msgstr "محل: "
 
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
@@ -539,19 +543,23 @@ msgstr ""
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "قدر: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "قدر: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "قدر: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "حمّال"
@@ -560,10 +568,10 @@ msgstr "حمّال"
 msgid "Manual zoom: "
 msgstr ":زوم دستی "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "حمّال"
+msgstr "مریخ"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -589,18 +597,17 @@ msgstr "عُطارِد"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr ":تصویر کردن"
+msgstr "جستجوی جرم"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "عُطارِد"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "خط نصف‌النهار"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "خط نصف‌النهار"
@@ -613,7 +620,7 @@ msgstr ":شدت نمایش راه شیری "
 msgid "Mimas"
 msgstr "میماس"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "میماس"
@@ -622,7 +629,7 @@ msgstr "میماس"
 msgid "Moon"
 msgstr "ماه"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -635,16 +642,19 @@ msgstr "شمال"
 msgid "Navajo"
 msgstr "طاووس"
 
+#: src/modules/Nebula.cpp:270
+msgid "Nebula"
+msgstr "سحابی"
+
 #: src/modules/TextUI.cpp:125
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "نام سحابی‌ها"
+msgstr ""
 
 #: src/modules/TextUI.cpp:124
 msgid "Nebula Names"
 msgstr "نام سحابی‌ها"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "سحابی"
@@ -657,7 +667,7 @@ msgstr "نپتون"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": نرخ معمول"
@@ -670,7 +680,11 @@ msgstr ""
 msgid "Object Sizing Rule: "
 msgstr ":قانون اندازه‌گذاری جرم "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "شکارچی"
@@ -693,8 +707,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
 msgstr "اختلاف منظر: "
 
 #: src/core/MappingClasses.cpp:11
@@ -720,19 +735,22 @@ msgid "Planet Names"
 msgstr "نام سیاره‌ها"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "دنبالهٔ سیاره‌ها"
+msgstr "مدار سیاره‌ها"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "دنبالهٔ سیاره‌ها"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "سیارات"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "نشانه‌های سیارات"
@@ -750,23 +768,22 @@ msgid "Preset Sky Time: "
 msgstr ":پیش‌تنظیم زمان آسمان "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr ":پیش‌تنظیم زمان آسمان "
+msgstr ""
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "زبان برنامه: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr ":تصویر کردن"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -781,16 +798,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "هندی"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "بُعد/مِیل: "
 
 #: src/translations.h:51
@@ -813,16 +828,16 @@ msgstr "زحل"
 msgid "Save Current Configuration as Default: "
 msgstr ":ذخیره پیکربندی فعلی به عنوان پیش‌فرض "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "ذخیره موقعیت"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "مقیاس ماه"
@@ -838,7 +853,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "برو به جرم منتخب [SPACE]"
+msgstr "جستجوی جرم"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -846,9 +861,8 @@ msgid "Selected:"
 msgstr ":انتخاب‌شده "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "موقعیت"
+msgstr "موقعیت را تنظیم کنید "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -859,77 +873,74 @@ msgid "Set Time Zone: "
 msgstr ":تنظیم منطقه زمانی "
 
 #: src/modules/TextUI.cpp:151
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr ":تنظیم منطقه زمانی "
+msgstr ""
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": نرخ معمول"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "زمان را تنظیم کنید "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr ":نمایش "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr ":نمایش "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "جَوّ"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr ":نمایش "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr ":نمایش "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr ":نمایش "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr ":نمایش "
 
@@ -941,15 +952,16 @@ msgstr ""
 msgid "Sidereal"
 msgstr ""
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "اندازه: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 msgid "Sky"
 msgstr ""
 
@@ -969,10 +981,6 @@ msgstr ":زمان آسمان در ابتدا "
 msgid "Sky Time: "
 msgstr ":زمان آسمان "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "بدنه سیستم خورشیدی: "
@@ -985,13 +993,10 @@ msgstr "ناظر منظومه خورشیدی"
 msgid "Space"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "رده طیفی: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 msgid "Standard Perseids rate"
@@ -1001,12 +1006,12 @@ msgstr ""
 msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "ستارگان"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "ستارگان"
 
@@ -1014,7 +1019,7 @@ msgstr "ستارگان"
 msgid "Stars "
 msgstr "ستارگان "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1026,23 +1031,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1050,7 +1055,7 @@ msgstr ""
 msgid "Sun"
 msgstr "خورشید"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1096,128 +1101,126 @@ msgstr ":قالب نمایش زمان "
 msgid "Titan"
 msgstr "تیتان"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "جَوّ"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "تقسیمات سَمتی"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "چهارجهت اصلی "
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "پنجره پیکربندی"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "تصاویر صورتهای فلکی [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "مرزهای صورتهای فلکی"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr ":برچسب صورتهای فلکی "
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr ":خطوط صورتهای فلکی "
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "خط دایرة‌البروج"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "خط استوای سماوی"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "تقسیمات استوایی"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "تقسیمات استوایی"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr ":نمایش "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "موقعیت را تنظیم کنید "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "خط نصف‌النهار"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "سحابی"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "مدار سیاره‌ها"
+msgid "Toggle atmosphere"
+msgstr "جَوّ"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "تقسیمات سَمتی"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "چهارجهت اصلی "
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "پنجره پیکربندی"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "بارگذاری تصاویر صوَر فلکی: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "مرزهای صورتهای فلکی"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr ":برچسب صورتهای فلکی "
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr ":خطوط صورتهای فلکی "
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "خط دایرة‌البروج"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "خط استوای سماوی"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "تقسیمات استوایی"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "تقسیمات استوایی"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "پنجره پیکربندی"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "خط نصف‌النهار"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "نشانه‌های سیارات"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 msgid "Toggle stars"
 msgstr ""
 
@@ -1225,22 +1228,30 @@ msgstr ""
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
+msgid "Twinkle:"
 msgstr ":چشمک زدن "
 
 #: src/modules/TextUI.cpp:107
-#, fuzzy
 msgid "Twinkling: "
 msgstr ":چشمک زدن "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "نوع: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
+msgstr ""
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
 msgstr ""
 
 #: src/modules/TextUI.cpp:150
@@ -1251,11 +1262,11 @@ msgstr ":بروزرسانی از راه اینترنت "
 msgid "Uranus"
 msgstr "اورانوس"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1267,7 +1278,7 @@ msgstr ""
 msgid "Venus"
 msgstr "زهره"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "ویدیو"
@@ -1282,7 +1293,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1293,32 +1304,26 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "موقعیت"
+msgstr ":دوام زوم "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "برو به جرم منتخب [SPACE]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr ":دوام زوم "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr ":دوام زوم "
 
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
-
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr ""
+msgstr "دقیقه"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:149
@@ -1396,6 +1401,9 @@ msgstr ""
 #~ msgid ": mag "
 #~ msgstr ": قدر "
 
+#~ msgid "AU"
+#~ msgstr "واحد نجومی"
+
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "نمایش سحابی ها بدون بافت"
 
@@ -1407,10 +1415,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Animal"
-#~ msgstr "تلمبه"
-
-#, fuzzy
-#~ msgid "Anta"
 #~ msgstr "تلمبه"
 
 #~ msgid "Antlia"
@@ -1483,9 +1487,6 @@ msgstr ""
 #~ msgid "Caribou"
 #~ msgstr "جَدی"
 
-#~ msgid "Carina"
-#~ msgstr "حمّال"
-
 #~ msgid "Cassiopeia"
 #~ msgstr "ذات‌الکرسی"
 
@@ -1503,54 +1504,6 @@ msgstr ""
 
 #~ msgid "Chart mode"
 #~ msgstr "حالت نقشه‌ای"
-
-#, fuzzy
-#~ msgid "CheonAa"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonBu"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonByeon"
-#~ msgstr "چلپاسه"
-
-#, fuzzy
-#~ msgid "CheonGa"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonGo"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonGu"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonJeon"
-#~ msgstr "چلپاسه"
-
-#, fuzzy
-#~ msgid "CheonJu"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonSa"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "CheonSeon"
-#~ msgstr "چلپاسه"
-
-#, fuzzy
-#~ msgid "CheonYu"
-#~ msgstr "کایرون"
-
-#, fuzzy
-#~ msgid "Cheuk"
-#~ msgstr "قیفاووس"
 
 #~ msgid "Choose landscapes :"
 #~ msgstr ":مناظر را انتخاب کنید"
@@ -1576,6 +1529,13 @@ msgstr ""
 
 #~ msgid "Configuration window [1]"
 #~ msgstr "پنجره پیکربندی [1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "تصاویر صورتهای فلکی [R]"
+
+#, fuzzy
+#~ msgid "Constellations Lines"
+#~ msgstr "خطوط صورت فلكي"
 
 #~ msgid "Constellations Names"
 #~ msgstr "نام صورتهای فلکی"
@@ -1609,10 +1569,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "روز"
-
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "کاهش سرعت گذر زمان [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "دلفین"
@@ -1668,10 +1624,6 @@ msgstr ""
 #~ msgid "Dolphin"
 #~ msgstr "دلفین"
 
-#, fuzzy
-#~ msgid "DonGu"
-#~ msgstr "دیوُن"
-
 #~ msgid "Dorado"
 #~ msgstr "ماهی طلایی"
 
@@ -1695,10 +1647,6 @@ msgstr ""
 #~ msgid "Enter observatory name"
 #~ msgstr "نام رصدخانه را وارد کنید"
 
-#, fuzzy
-#~ msgid "Eo"
-#~ msgstr "شرق"
-
 #~ msgid "Equatorial Grid [E]"
 #~ msgstr "تقسیمات استوایی"
 
@@ -1713,10 +1661,6 @@ msgstr ""
 
 #~ msgid "Error: Unable to open script file to record commands."
 #~ msgstr "Error: .فایل اسکریپت برای ضبط فرمانها باز نمی‌شود"
-
-#, fuzzy
-#~ msgid "Eup"
-#~ msgstr "اروپا"
 
 #~ msgid "Fisheye Projection Mode"
 #~ msgstr "حالت تصویر‌کردن چشم‌ماهی"
@@ -1742,13 +1686,8 @@ msgstr ""
 #~ msgid "Gemini"
 #~ msgstr "جوزا"
 
-#, fuzzy
-#~ msgid "GeoGii"
-#~ msgstr "جوزا"
-
-#, fuzzy
-#~ msgid "Geon"
-#~ msgstr "جوزا"
+#~ msgid "Ground"
+#~ msgstr "زمین"
 
 #~ msgid "Ground [G]"
 #~ msgstr "زمین [G]"
@@ -1756,23 +1695,11 @@ msgstr ""
 #~ msgid "Grus"
 #~ msgstr "درنا"
 
-#, fuzzy
-#~ msgid "Gu"
-#~ msgstr "درنا"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "مار"
-
 #~ msgid "HP 60718, HD 108248, SAO 251904"
 #~ msgstr "HP ۶۰۷۱۸, HD ۱۰۸۲۴۸, SAO ۲۵۱۹۰۴"
 
 #~ msgid "Help [H]"
 #~ msgstr "کمک [H]"
-
-#, fuzzy
-#~ msgid "Heo"
-#~ msgstr "اسد"
 
 #~ msgid "Hercules"
 #~ msgstr "جاثی"
@@ -1780,19 +1707,10 @@ msgstr ""
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr ".را فشار دهیدCTRL-R برای توقف دوباره\n"
 
-#, fuzzy
-#~ msgid "Ho"
-#~ msgstr "ساعت"
-
-#, fuzzy
-#~ msgid "HoBuun"
-#~ msgstr "ساعت"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "قرینه‌سازی افقی"
-
 #~ msgid "Horologium"
+#~ msgstr "ساعت"
+
+#~ msgid "Hour"
 #~ msgstr "ساعت"
 
 #~ msgid "Hydra"
@@ -1800,14 +1718,6 @@ msgstr ""
 
 #~ msgid "Hydrus"
 #~ msgstr "مار آبی"
-
-#, fuzzy
-#~ msgid "HyeonGwa"
-#~ msgstr "هایپریون"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "افزایش سرعت گذر زمان [L]"
 
 #~ msgid "Indus"
 #~ msgstr "هندی"
@@ -1821,19 +1731,14 @@ msgstr ""
 #~ msgid "Invalid Script command"
 #~ msgstr "فرمان اشتباه"
 
-#, fuzzy
-#~ msgid "Jeo"
-#~ msgstr "اسد"
-
-#, fuzzy
-#~ msgid "JinHyeon"
-#~ msgstr "هایپریون"
-
 #~ msgid "Lacerta"
 #~ msgstr "سوسمار"
 
 #~ msgid "Language"
 #~ msgstr "زبان"
+
+#~ msgid "Latitude : "
+#~ msgstr ":عرض جغرافیایی "
 
 #~ msgid "Leo"
 #~ msgstr "اسد"
@@ -1864,6 +1769,9 @@ msgstr ""
 
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ SAO: %d/%d"
+
+#~ msgid "Longitude : "
+#~ msgstr ":طول جغرافیایی "
 
 #~ msgid "Lupus"
 #~ msgstr "گرگ"
@@ -1936,18 +1844,6 @@ msgstr ""
 #~ msgid "Musca"
 #~ msgstr "مگس"
 
-#, fuzzy
-#~ msgid "NaaEon"
-#~ msgstr "طاووس"
-
-#, fuzzy
-#~ msgid "NaamDoo"
-#~ msgstr "طاووس"
-
-#, fuzzy
-#~ msgid "NamHa"
-#~ msgstr "گونیا"
-
 #~ msgid "Name : "
 #~ msgstr "نام : "
 
@@ -1963,12 +1859,8 @@ msgstr ""
 #~ msgid "Night (red) mode"
 #~ msgstr "حالت شبانه (نور قرمز)"
 
-#, fuzzy
-#~ msgid "Noin"
+#~ msgid "No"
 #~ msgstr "خیر"
-
-#~ msgid "Norma"
-#~ msgstr "گونیا"
 
 #~ msgid "OK"
 #~ msgstr "تأیید"
@@ -1982,15 +1874,8 @@ msgstr ""
 #~ msgid "Ophiuchus"
 #~ msgstr "مارافسای"
 
-#~ msgid "Orion"
-#~ msgstr "شکارچی"
-
 #~ msgid "Pair of Stars"
 #~ msgstr "ستاره های دوگانه"
-
-#, fuzzy
-#~ msgid "PalGok"
-#~ msgstr "طاووس"
 
 #~ msgid "Pavo"
 #~ msgstr "طاووس"
@@ -2043,6 +1928,9 @@ msgstr ""
 #~ msgid "RA : "
 #~ msgstr "بُعد : "
 
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "سرعت واقعی گذر زمان [K]"
+
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr ":در حال ضبط فرمانها در فایل اسکریپت\n"
 
@@ -2055,8 +1943,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "تور"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "بازگشت به زمان فعلی"
 
 #~ msgid "Return to Current Time [8]"
@@ -2089,83 +1976,23 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "جستجو برای (نمونه : Saturn, Polaris, HP6218, Orion, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "جستجوی جرم"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "جستجوی اجرام [CTRL + F]"
+
+#~ msgid "Seconds"
+#~ msgstr "ثانیه"
 
 #~ msgid "Selected Constellation Only"
 #~ msgstr "فقط صورت‌فلکی انتخاب‌شده"
 
-#, fuzzy
-#~ msgid "Seong"
-#~ msgstr "ثانیه"
-
 #~ msgid "Serpens"
 #~ msgstr "مار"
-
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "سرعت واقعی گذر زمان [K]"
 
 #~ msgid "Sextans"
 #~ msgstr "سکستانت"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "جَوّ"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "تقسیمات سَمتی"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "چهارجهت اصلی"
-
-#, fuzzy
-#~ msgid "Show Constellation Lines"
-#~ msgstr "خطوط صورت‌های فلکی"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr ":نمایش "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "خط دایرة‌البروج"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "خط استوای سماوی"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "تقسیمات استوایی"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "تقسیمات استوایی"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr ":نمایش "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "زمین"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "خط نصف‌النهار"
-
 #~ msgid "Size : "
 #~ msgstr "اندازه: "
-
-#, fuzzy
-#~ msgid "Soun"
-#~ msgstr "خورشید"
 
 #~ msgid "Spectral : "
 #~ msgstr "رده طیفی : "
@@ -2226,6 +2053,9 @@ msgstr ""
 #~ msgid "Type : "
 #~ msgstr "نوع  : "
 
+#~ msgid "Type: "
+#~ msgstr "نوع: "
+
 #~ msgid "Ursa Major"
 #~ msgstr "دبّ اکبر"
 
@@ -2253,16 +2083,8 @@ msgstr ""
 #~ msgid "Using System Default Time Zone"
 #~ msgstr "استفاده از منطقه زمانی پیش‌فرض سیستم"
 
-#, fuzzy
-#~ msgid "Veado"
-#~ msgstr "شراع"
-
 #~ msgid "Vela"
 #~ msgstr "شراع"
-
-#, fuzzy
-#~ msgid "Vespeiro"
-#~ msgstr "سنبله"
 
 #~ msgid "Virgo"
 #~ msgstr "سنبله"
@@ -2273,8 +2095,7 @@ msgstr ""
 #~ msgid "Vulpecula"
 #~ msgstr "روباهک"
 
-#, fuzzy
-#~ msgid "YeoSa"
+#~ msgid "Year"
 #~ msgstr "سال"
 
 #~ msgid "Yes"

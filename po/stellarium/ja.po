@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-11-09 13:50+0000\n"
-"Last-Translator: sigma <example@example.com>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-04-05 20:00+0000\n"
+"Last-Translator: afujihara <afujihara@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " 光年"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "2000年分点"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "天文単位"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "現在の時刻"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr "標高(m): "
 msgid "Altitude:"
 msgstr "標高 : "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,7 +93,7 @@ msgstr "↓キーで一覧を表示します。"
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -123,18 +101,18 @@ msgstr ""
 msgid "Author: "
 msgstr "作者: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "方位/高度: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "地平座標"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "地平座標"
 
@@ -159,20 +137,19 @@ msgid "Callisto"
 msgstr "カリスト"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "方位"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "方位"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "選択した天体へ移動 [スペース]"
@@ -189,11 +166,15 @@ msgstr "中国"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "色 "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "環境設定"
 
@@ -202,21 +183,18 @@ msgid "Constellation Art Intensity"
 msgstr "星座絵の明るさ"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "星座の境界線"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
 msgstr "星座線"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
 msgstr "星座名"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "星座線"
@@ -242,7 +220,7 @@ msgstr ""
 msgid "Date Display Format: "
 msgstr "日付表示形式 : "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "日付と時刻"
@@ -251,11 +229,16 @@ msgstr "日付と時刻"
 msgid "Day keys: "
 msgstr ""
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "時間を減速 [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "ダイモス"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "天狗(てんこう：朱雀)"
@@ -264,17 +247,21 @@ msgstr "天狗(てんこう：朱雀)"
 msgid "Dione"
 msgstr "ディオーネ"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "オリオン"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " 光年"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "距離: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -287,11 +274,10 @@ msgid "Earth"
 msgstr "地球"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "黄道線"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "黄道線"
@@ -312,9 +298,10 @@ msgstr "エンケラドス"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:77
@@ -322,26 +309,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "赤道線"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "赤道線"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "赤道座標"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "赤道座標"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "赤道座標"
@@ -363,25 +348,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "画面の反転(垂直方向)"
+msgstr "画面の反転(水平方向)"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "画面の反転(垂直方向)"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "天津(てんしん：玄武)"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -391,6 +380,10 @@ msgstr "ガニメデ"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "一般 "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -404,6 +397,13 @@ msgstr "ヘルプ"
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": 最も多いときぐらい (1966年の獅子座流星群)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "１時間あたりの流れ星の数"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -421,6 +421,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "時間を加速 [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "イヌイット"
@@ -429,10 +434,11 @@ msgstr "イヌイット"
 msgid "Io"
 msgstr "イオ"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "2000年分点"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -447,7 +453,7 @@ msgstr "テティス"
 msgid "Korean"
 msgstr "韓国"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -455,7 +461,7 @@ msgstr ""
 msgid "Lakota"
 msgstr "ラコタ"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "背景"
@@ -479,11 +485,10 @@ msgid "Left click"
 msgstr "左旗(さき：玄武)"
 
 #: src/modules/TextUI.cpp:128
-#, fuzzy
 msgid "Light Pollution Luminance: "
 msgstr "光害の明るさ: "
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
 msgstr "光害の明るさ: "
@@ -521,9 +526,8 @@ msgid "Location"
 msgstr "観測場所"
 
 #: src/modules/LandscapeMgr.cpp:428
-#, fuzzy
 msgid "Location: "
-msgstr "観測場所"
+msgstr "位置: "
 
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
@@ -542,19 +546,23 @@ msgstr "等級による倍率 "
 msgid "Magnitude Sizing Multiplier: "
 msgstr "等級による倍率 : "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "等級: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "等級: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "等級: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "りゅうこつ"
@@ -563,10 +571,10 @@ msgstr "りゅうこつ"
 msgid "Manual zoom: "
 msgstr "手動ズーム : "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "りゅうこつ"
+msgstr "火星"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -592,18 +600,17 @@ msgstr "水星"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "投影法 :"
+msgstr "天体検索"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "水星"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "子午線"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "子午線"
@@ -616,7 +623,7 @@ msgstr "天の川の明るさ : "
 msgid "Mimas"
 msgstr "ミマス"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "ミマス"
@@ -625,7 +632,7 @@ msgstr "ミマス"
 msgid "Moon"
 msgstr "月"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -637,6 +644,11 @@ msgstr "北"
 msgid "Navajo"
 msgstr "ナバホ"
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "星雲名 [N]"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "星雲の円"
@@ -645,7 +657,7 @@ msgstr "星雲の円"
 msgid "Nebula Names"
 msgstr "星雲の名前"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "星雲名 [N]"
@@ -658,7 +670,7 @@ msgstr "海王星"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": 一般的な数"
@@ -671,7 +683,11 @@ msgstr "北欧"
 msgid "Object Sizing Rule: "
 msgstr "天体の大きさ設定 : "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "オリオン"
@@ -694,8 +710,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
 msgstr "年周視差: "
 
 #: src/core/MappingClasses.cpp:11
@@ -722,19 +739,22 @@ msgid "Planet Names"
 msgstr "惑星の名前"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "惑星の通った跡"
+msgstr "惑星の軌道"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "惑星の通った跡"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "惑星"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "惑星を囲む円と名前"
@@ -752,23 +772,22 @@ msgid "Preset Sky Time: "
 msgstr "天の時間の設定 : "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "天の時間の設定 : "
+msgstr "設定された時刻"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "操作パネルの言語: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "投影法 :"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -783,16 +802,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "イヌイット"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "赤経/赤緯: "
 
 #: src/translations.h:51
@@ -816,16 +833,16 @@ msgstr "土星"
 msgid "Save Current Configuration as Default: "
 msgstr "現在の設定を標準として保存 : "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "観測地保存"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "月の拡大図"
@@ -841,7 +858,7 @@ msgstr "選択しメニューを抜けるとスタートします。"
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "選択した天体へ移動 [スペース]"
+msgstr "天体検索"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -849,9 +866,8 @@ msgid "Selected:"
 msgstr "選択 : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "観測場所"
+msgstr "場所の指定 "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -865,73 +881,71 @@ msgstr "タイムゾーンの設定 : "
 msgid "Set UI Locale: "
 msgstr "操作パネルの言語: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": 一般的な数"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "時刻の設定 "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "表示 : "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "表示 : "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "大気"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "表示 : "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "表示 : "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "表示 : "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "表示 : "
 
@@ -943,15 +957,16 @@ msgstr "終了する : "
 msgid "Sidereal"
 msgstr "恒星時"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "大きさ : "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 msgid "Sky"
 msgstr ""
 
@@ -971,10 +986,6 @@ msgstr "開始時の天の時間 : "
 msgid "Sky Time: "
 msgstr "天の時間 : "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "観測地の星名: "
@@ -988,13 +999,10 @@ msgstr "太陽系の外から"
 msgid "Space"
 msgstr "梗河(こうが：青龍)"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "スペクトル型: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1005,12 +1013,12 @@ msgstr ": ペルセウス座流星群ぐらい"
 msgid "Star Value Multiplier: "
 msgstr "星の明るさの倍率: "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "星(せい：朱雀)"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "恒星"
 
@@ -1018,7 +1026,7 @@ msgstr "恒星"
 msgid "Stars "
 msgstr "恒星 "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1030,23 +1038,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1054,7 +1062,7 @@ msgstr ""
 msgid "Sun"
 msgstr "太陽"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1100,128 +1108,126 @@ msgstr "時間表示形式 : "
 msgid "Titan"
 msgstr "タイタン"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "大気"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "地平座標"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "方位"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "環境設定"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "星座絵 [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "星座の境界線"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "星座名"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "星座線"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "黄道線"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "赤道線"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "赤道座標"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "赤道座標"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "表示 : "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "場所の指定 "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "子午線"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "星雲名 [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "惑星の軌道"
+msgid "Toggle atmosphere"
+msgstr "大気"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "地平座標"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "方位"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "環境設定"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "星座絵をロード中: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "星座の境界線"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "星座名"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "星座線"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "黄道線"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "赤道線"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "赤道座標"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "赤道座標"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "環境設定"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "子午線"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "惑星を囲む円と名前"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "参(しん：白虎)"
@@ -1230,21 +1236,30 @@ msgstr "参(しん：白虎)"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "Triangle(三角形)"
+msgid "Twinkle:"
+msgstr "星のまたたく量 : "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "星のまたたく量 : "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "型 : "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
+msgstr "USBスクリプト: "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
 msgstr ""
 
 #: src/modules/TextUI.cpp:150
@@ -1255,11 +1270,11 @@ msgstr "インターネットによる更新 : "
 msgid "Uranus"
 msgstr "天王星"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1271,7 +1286,7 @@ msgstr ""
 msgid "Venus"
 msgstr "金星"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "画面"
@@ -1286,7 +1301,7 @@ msgstr "西洋"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1297,28 +1312,22 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "観測場所"
+msgstr "ズーム時間 : "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "選択した天体へ移動 [スペース]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "ズーム時間 : "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "ズーム時間 : "
-
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
@@ -1377,6 +1386,9 @@ msgstr ""
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: コマンド行の引数が違います\n"
+
+#~ msgid "AU"
+#~ msgstr "天文単位"
 
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "テクスチャーなしで、星雲を表示"
@@ -1545,12 +1557,20 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "コマンド記録停止"
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "虚(きょ：玄武)"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "設定[1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "星座絵 [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "星座の境界線"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "星座線"
+
+#~ msgid "Constellations Names"
+#~ msgstr "星座名"
 
 #~ msgid "Corona Australis"
 #~ msgstr "みなみのかんむり"
@@ -1586,10 +1606,6 @@ msgstr ""
 
 #~ msgid "Day"
 #~ msgstr "日"
-
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "時間を減速 [J]"
 
 #~ msgid "Delphinus"
 #~ msgstr "いるか"
@@ -1653,6 +1669,9 @@ msgstr ""
 #~ msgid "Dolphin"
 #~ msgstr "Dolphin(いるか)"
 
+#~ msgid "Done"
+#~ msgstr "完了"
+
 #~ msgid "Dorado"
 #~ msgstr "かじき"
 
@@ -1692,6 +1711,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Eastern Door"
 #~ msgstr "東咸(とうかん：青龍)"
+
+#, fuzzy
+#~ msgid "Emptiness"
+#~ msgstr "虚(きょ：玄武)"
 
 #, fuzzy
 #~ msgid "Encampment"
@@ -1742,6 +1765,12 @@ msgstr ""
 #, fuzzy
 #~ msgid "Flail"
 #~ msgstr "天棓(てんぽう：紫微垣)"
+
+#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
+#~ msgstr "水平に反転 [CTRL + SHIFT + H]"
+
+#~ msgid "Flip vertically [CTRL + SHIFT + V]"
+#~ msgstr "垂直に反転 [CTRL + SHIFT + V]"
 
 #, fuzzy
 #~ msgid "Flock"
@@ -1794,15 +1823,14 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "天大将軍(てんだいしょうぐん：白虎)"
 
+#~ msgid "Ground"
+#~ msgstr "地表"
+
 #~ msgid "Ground [G]"
 #~ msgstr "地表 [G]"
 
 #~ msgid "Grus"
 #~ msgstr "つる"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "へび"
 
 #, fuzzy
 #~ msgid "Heart"
@@ -1824,10 +1852,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Hook"
 #~ msgstr "天鉤(てんこう：玄武)"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "画面の反転(水平方向)"
 
 #, fuzzy
 #~ msgid "Horn"
@@ -1856,10 +1880,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Imperial Passageway"
 #~ msgstr "輦道(れんどう：玄武)"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "時間を加速 [L]"
 
 #~ msgid "Indus"
 #~ msgstr "インディアン"
@@ -1895,6 +1915,9 @@ msgstr ""
 #~ msgid "Language"
 #~ msgstr "言語"
 
+#~ msgid "Latitude : "
+#~ msgstr "緯度 : "
+
 #, fuzzy
 #~ msgid "Legs"
 #~ msgstr "奎(けい：白虎)"
@@ -1924,6 +1947,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "星雲・星団のテクスチャをロード中"
+
+#~ msgid "Longitude : "
+#~ msgstr "経度 : "
 
 #~ msgid "Lupus"
 #~ msgstr "おおかみ"
@@ -1962,9 +1988,6 @@ msgstr ""
 
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "1分あたりの流れ星の数"
-
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "１時間あたりの流れ星の数"
 
 #~ msgid "Microscopium"
 #~ msgstr "けんびきょう"
@@ -2078,9 +2101,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "天園(てんえん：白虎)"
 
-#~ msgid "Orion"
-#~ msgstr "オリオン"
-
 #, fuzzy
 #~ msgid "Outer Fence"
 #~ msgstr "外屏(がいへい：白虎)"
@@ -2122,6 +2142,9 @@ msgstr ""
 #~ msgid "Piscis Austrinus"
 #~ msgstr "みなみのうお"
 
+#~ msgid "Planet: "
+#~ msgstr "惑星: "
+
 #~ msgid "Point"
 #~ msgstr "点"
 
@@ -2149,6 +2172,9 @@ msgstr ""
 #~ msgid "Ramparts"
 #~ msgstr "塁壁陣(るいへきじん：玄武)"
 
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "実時間速度 [K]"
+
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "スクリプトファイルへのコマンド記録:\n"
 
@@ -2161,8 +2187,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "レチクル"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "現在時間に戻る"
 
 #~ msgid "Return to Current Time [8]"
@@ -2227,9 +2252,6 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "検索する天体名(例 Polaris, HP6218, Procyon, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "天体検索"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "検索[CTRL+F]"
 
@@ -2243,9 +2265,8 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "Selkis(セルケト神)"
 
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "実時間速度 [K]"
+#~ msgid "Serpens"
+#~ msgstr "へび"
 
 #, fuzzy
 #~ msgid "Seven Excellencies"
@@ -2262,49 +2283,8 @@ msgstr ""
 #~ msgid "Sheepfold"
 #~ msgstr "Sheepfold(羊小屋)"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "大気"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "地平座標"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "方位"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "表示 : "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "黄道線"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "赤道線"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "赤道座標"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "赤道座標"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "表示 : "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "地表"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "子午線"
+#~ msgid "Snake"
+#~ msgstr "蛇"
 
 #, fuzzy
 #~ msgid "Soldiers Market"
@@ -2404,6 +2384,10 @@ msgstr ""
 #~ msgid "Toilet"
 #~ msgstr "廁(し：白虎)"
 
+#, fuzzy
+#~ msgid "Triangle"
+#~ msgstr "Triangle(三角形)"
+
 #~ msgid "Triangulum"
 #~ msgstr "さんかく"
 
@@ -2435,6 +2419,9 @@ msgstr ""
 #, fuzzy
 #~ msgid "Two Sunbeams"
 #~ msgstr "Two Jaws(割れあご)"
+
+#~ msgid "Type: "
+#~ msgstr "型 : "
 
 #~ msgid "Ursa Major"
 #~ msgstr "おおぐま"
