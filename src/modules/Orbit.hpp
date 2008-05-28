@@ -91,7 +91,8 @@ public:
              double time_at_perihelion,
              double mean_motion,
              double parent_rot_obliquity,
-             double parent_rot_ascendingnode);
+             double parent_rot_ascendingnode,
+             double parent_rot_J2000_longitude);
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
   void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
