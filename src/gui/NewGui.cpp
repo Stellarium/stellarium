@@ -164,21 +164,19 @@ QRectF LeftStelBar::boundingRect() const
 BottomStelBar::BottomStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	QFont font("DejaVuSans", 10);
-	QColor color = QColor::fromRgbF(1,1,1,1);
+	
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
 	location = new QGraphicsSimpleTextItem("Munich, Earth, 500m", this);
 	fov = new QGraphicsSimpleTextItem("FOV 43.45", this);
 	fps = new QGraphicsSimpleTextItem("43.2 FPS", this);
 	
+	QColor color = QColor::fromRgbF(1,1,1,1);
+	setColor(color);
+	
 	datetime->setFont(font);
-	QBrush brush(color);
-	datetime->setBrush(brush);
 	location->setFont(font);
-	location->setBrush(brush);
 	fov->setFont(font);
-	fov->setBrush(brush);
 	fps->setFont(font);
-	fps->setBrush(brush);
 }
 
 void BottomStelBar::addButton(StelButton* button)
@@ -257,7 +255,15 @@ QRectF BottomStelBar::boundingRect() const
 	return QRectF(0, 0, r.width()-1, r.height()-1);
 }
 
-
+// Set the pen for all the sub elements
+void BottomStelBar::setColor(const QColor& c)
+{
+	datetime->setBrush(c);
+	location->setBrush(c);
+	fov->setBrush(c);
+	fps->setBrush(c);
+}
+	
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	text = new QGraphicsTextItem("", this);
@@ -731,9 +737,21 @@ void NewGui::init()
 void NewGui::setColorScheme(const QSettings* conf, const QString& section)
 {
 	if (section=="night_color")
+	{
 		loadStyle("data/gui/nightStyle.css");
+		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
+		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
+		buttonHelpLabel->setBrush(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
+		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
+	}
 	else
+	{
 		loadStyle("data/gui/normalStyle.css");
+		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+		buttonBarPath->setBrush(QColor::fromRgbF(0.1, 0.13, 0.23, 0.2));
+		buttonHelpLabel->setBrush(QColor::fromRgbF(0.9, 0.9, 1.0, 0.9));
+		buttonBar->setColor(QColor::fromRgbF(0.9, 0.9, 1.0, 0.9));
+	}
 }
 	
 //! Load a Qt style sheet to define the widgets style
