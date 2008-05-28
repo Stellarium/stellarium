@@ -68,9 +68,9 @@ public:
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
 
-	//! Set the global scale applied to input lumiances
+	//! Set the global scale applied to output lumiances, i.e simulate aperture*exposition time
 	//! @param scale the global scale
-	void setGlobalScale(float scale=1.f);
+	void setOutputScale(float scale=1.f);
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
@@ -88,7 +88,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow((float)(worldLuminance*globalScale*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
+		return std::pow((float)(worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2 * outputScale;
 	}
 
 	//! Return adapted ln(luminance) from world to display
@@ -96,25 +96,19 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float sqrtAdaptLuminanceLn(float lnWorldLuminance) const
 	{
-		const float lnPix0p0001 = -8.0656104861;
-		return std::exp((lnWorldLuminance+lnGlobalScale+lnPix0p0001)*alphaWaOverAlphaDa*0.5)*sqrtTerm2;
+		const float lnPix0p0001 = -8.0656104861f;
+		return std::exp((lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa*0.5f)*sqrtTerm2*sqrtOutputScale;
 	}
 	
 	//! Convert from xyY color system to RGB.
 	//! The first two components x and y indicate the "color", the Y is luminance in cd/m^2.
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
 	void xyYToRGB(float* xyY) const;
-
-	//! Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-	//! @param mag the visual magnitude
-	//! @param surface the object surface in arcmin^2
-	//! @return the luminance in cd/m^2
-	static float magToLuminance(float mag, float surface);
 	
 private:
 	// The global luminance scaling
-	float globalScale;
-	float lnGlobalScale;
+	float outputScale;
+	float sqrtOutputScale;
 	
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)

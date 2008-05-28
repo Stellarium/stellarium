@@ -20,6 +20,7 @@
 #include <cassert>
 # include <config.h>
 #ifndef HAVE_POW10
+# define HAVE_POW10 1
 //# define pow10(x) pow(10,(x))
 # define pow10(x) std::exp((x) * 2.3025850930)
 #endif
@@ -32,7 +33,7 @@
 ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
 {
 	// Initialize  sensor
-	setGlobalScale();
+	setOutputScale();
 	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
@@ -54,10 +55,10 @@ ToneReproducer::~ToneReproducer()
 /*********************************************************************
  Set the global scale
 *********************************************************************/
-void ToneReproducer::setGlobalScale(float scale)
+void ToneReproducer::setOutputScale(float scale)
 {
-	globalScale=scale;
-	lnGlobalScale=std::log(globalScale);
+	outputScale=scale;
+	sqrtOutputScale = std::sqrt(scale);
 }
 	
 /*********************************************************************
@@ -152,13 +153,4 @@ void ToneReproducer::xyYToRGB(float* color) const
 	color[0] = 2.04148f  *X - 0.564977f*Y - 0.344713f *Z;
 	color[1] =-0.969258f *X + 1.87599f *Y + 0.0415557f*Z;
 	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
-}
-
-
-/*********************************************************************
- Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-*********************************************************************/
-float ToneReproducer::magToLuminance(float mag, float surface)
-{
-	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * std::log10(surface)))) * 108064.73f;
 }
