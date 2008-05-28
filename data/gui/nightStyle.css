@@ -5,12 +5,13 @@ QDialog {
 QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(80, 30, 10, 40%), stop: 1 rgba(50, 30, 10, 40%));
 	border: 0px;
-	color : #aaada4;
+	color : rgba(200, 60, 60, 60%);
     font-family: "DejaVu";
 }
 
 QFrame:active {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 	rgba(80, 30, 10, 90%), stop: 1 rgba(50, 30, 10, 90%));
+	color : rgba(200, 60, 60, 90%);
 }
 
 DialogFrame {
@@ -34,7 +35,7 @@ QLineEdit {
      padding: 0 8px;
      background: rgba(61, 35, 25, 40%);
      selection-background-color: darkgray;
-     color: #aaada4;
+     color: rgba(200, 60, 60, 90%);
 }
 
 QPushButton {
@@ -104,7 +105,7 @@ QGroupBox {
 QGroupBox::title {
      subcontrol-origin: margin;
      padding: 0px 3px;
-     color : #aaada4;
+     color : rgba(200, 60, 60, 90%);
 	 left: 15px
 }
 
@@ -124,7 +125,7 @@ QTabBar::tab {
     border-top-right-radius: 4px;
     min-width: 10ex;
     padding: 2px;
-    color: #aaada4;
+    color: rgba(200, 60, 60, 90%);
 }
 
 QTabBar::tab:selected, QTabBar::tab:hover {
@@ -170,7 +171,7 @@ QListWidget, QListWidget:active {
 
 QCheckBox
 {
-  color : #aaada4;
+  color : rgba(200, 60, 60, 90%);
 }
 QCheckBox::indicator
 {
@@ -189,7 +190,7 @@ QCheckBox::indicator:unchecked
 
 QRadioButton
 {
-  color : #aaada4;
+  color : rgba(200, 60, 60, 90%);
 }
 QRadioButton::indicator
 {
@@ -211,7 +212,7 @@ QSpinBox {
      border-image: url(:/images/frame.png) 4;
      border-width: 3;
 background-color: #225555;
-color : #aaada4;
+color : rgba(200, 60, 60, 90%);
 }
 
 
@@ -220,5 +221,5 @@ QDoubleSpinBox {
      border-image: url(:/images/frame.png) 4;
      border-width: 3;
 background-color: #225555;
-color : #aaada4;
+color : rgba(200, 60, 60, 90%);
 }
