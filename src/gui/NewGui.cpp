@@ -411,8 +411,8 @@ void NewGui::init()
 	addGuiActions("actionShow_Configuration_Window", N_("Toggle configuration window"), "Ctrl+C", group, true, false);
 	
 	group = N_("Date and Time");
-	addGuiActions("actionDecrease_Time_Speed", N_("Slow down time"), "J", group, false, false);
-	addGuiActions("actionIncrease_Time_Speed", N_("Speed up time"), "L", group, false, false);
+	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
+	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
 	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
 	addGuiActions("actionAdd_Solar_Hour", N_("Add 1 solar hour"), "Ctrl+=", group, false, true);
