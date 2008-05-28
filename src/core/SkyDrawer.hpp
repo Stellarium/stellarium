@@ -25,6 +25,7 @@
 
 #include <QObject>
 
+
 class Projector;
 class ToneReproducer;
 
@@ -121,15 +122,13 @@ public slots:
 	//! Get SkyDrawer maximum magnitude.
 	float getMaxMag(void) const {return max_mag;}
 	//! Set SkyDrawer maximum magnitude.
-	//! stars/planet halos, whose original (unshifted) magnitude is greater
-	//! than this value will not be drawn.
+	//! Stars/planet halos, whose original (unshifted) magnitude is greater than this value will not be drawn.
 	void setMaxMag(float mag) {max_mag = mag;}
 	
 	//! Get SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
 	float getMaxScaled60DegMag(void) const {return max_scaled_60deg_mag;}
 	//! Set SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
-	//! Stars/planet halos, whose original (unshifted) magnitude is greater
-	//! than this value will not be drawn at 60 degree FOV.
+	//! Stars/planet halos, whose original (unshifted) magnitude is greater than this value will not be drawn at 60 degree FOV.
 	void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
 	
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale

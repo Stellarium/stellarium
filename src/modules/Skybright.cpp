@@ -22,6 +22,7 @@
 
 #include <config.h>
 #ifndef HAVE_POW10
+# define HAVE_POW10 1
 # include <math.h>
 # define pow10(x) std::exp((x) * 2.3025850930f)
 #endif
