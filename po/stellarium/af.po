@@ -6,49 +6,1694 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-01-10 21:57+0100\n"
-"PO-Revision-Date: 2008-01-12 22:44+0000\n"
-"Last-Translator: Marius Loots <mloots@medic.up.ac.za>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-04-15 13:37+0000\n"
+"Last-Translator: Marius Loots <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#, c-format
-#~ msgid ""
-#~ "Usage: %s [OPTION] ...\n"
-#~ " -v, --version          Output version information and exit.\n"
-#~ " -h, --help             Display this help and exit.\n"
-#~ msgstr ""
-#~ "Gebruik: %s [OPSIE] ...\n"
-#~ " -v, --version Vertoon weergawe inligting en stop.\n"
-#~ " -h, --help Vertoon hierdie help en stop.\n"
+#: src/modules/LandscapeMgr.cpp:433
+#, qt-format
+msgid ", %1 m"
+msgstr ""
 
-#, c-format
+#: src/gui/NewGui.cpp:219
+#, c-format, qt-format
+msgid ", %1m"
+msgstr ""
+
+#: src/ui_viewDialog.h:1058
+msgid "10"
+msgstr ""
+
+#: src/ui_viewDialog.h:1060
+#, fuzzy
+msgid "10000"
+msgstr "J2000"
+
+#: src/ui_viewDialog.h:1061
+msgid "144000"
+msgstr ""
+
+#: src/ui_viewDialog.h:1059
+msgid "80"
+msgstr ""
+
+#: src/modules/TextUI.cpp:93
+msgid "Actual Time"
+msgstr "Werklike Tyd"
+
+#: src/gui/NewGui.cpp:430
+msgid "Add 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:432
+msgid "Add 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:426
+msgid "Add 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:424
+msgid "Add 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:428
+msgid "Add 1 solar week"
+msgstr ""
+
+#: src/modules/TextUI.cpp:77
+msgid "Administration "
+msgstr "Administrasie "
+
+#: src/modules/TextUI.cpp:82
+msgid "Altitude (m): "
+msgstr "Hoogte (m) : "
+
+#: src/ui_locationDialogGui.h:341
+#, fuzzy
+msgid "Altitude:"
+msgstr "Hoogte (m) : "
+
+#: src/ui_viewDialog.h:1068
+msgid "Amount:"
+msgstr ""
+
+#: src/modules/TextUI.cpp:143
+msgid "Arrow down to load list."
+msgstr "Afpyltjie om die lys te laai."
+
+#: src/gui/HelpDialog.cpp:50
+msgid "Arrow keys & left mouse drag"
+msgstr ""
+
+#: src/ui_viewDialog.h:1093
+msgid "Art brightness: "
+msgstr ""
+
+#: src/modules/LandscapeMgr.cpp:425
+msgid "Author: "
+msgstr "Outeur : "
+
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "As/Hgte: "
+
+#: src/ui_viewDialog.h:1081
+#, fuzzy
+msgid "Azimutal grid"
+msgstr "Asimutale Rooster"
+
+#: src/modules/TextUI.cpp:120
+msgid "Azimuthal Grid"
+msgstr "Asimutale Rooster"
+
+#: src/modules/TextUI.cpp:141
+msgid "CD/DVD Script: "
+msgstr "CD/DVD Skrip : "
+
+#: src/gui/HelpDialog.cpp:55
+msgid "CTRL + Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:52
+msgid "CTRL + Up/Down"
+msgstr ""
+
+#: src/modules/TextUI.cpp:89
+msgid "Calendar"
+msgstr "Kalender"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callisto"
+
+#: src/modules/TextUI.cpp:115
+msgid "Cardinal Points"
+msgstr "Kompaspunte"
+
+#: src/ui_viewDialog.h:1086
+#, fuzzy
+msgid "Cardinal points"
+msgstr "Kompaspunte"
+
+#: src/ui_viewDialog.h:1079
+msgid "Celestial Sphere"
+msgstr ""
+
+#: src/gui/NewGui.cpp:436
+#, fuzzy
+msgid "Center on selected object"
+msgstr "Gaan na gesellekteerde voorwerp [Spasie]"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charon"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "Sjinees"
+
+#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+msgid "Clear selection"
+msgstr ""
+
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
+#: src/modules/TextUI.cpp:74
+msgid "Colors "
+msgstr "Kleure "
+
+#: src/ui_configurationDialog.h:136
+msgid "Configuration"
+msgstr "Opstelling"
+
+#: src/modules/TextUI.cpp:113
+msgid "Constellation Art Intensity"
+msgstr "Sterrebeeldkuns Intensiteit"
+
+#: src/modules/TextUI.cpp:114
+msgid "Constellation Boundaries"
+msgstr "Sterrebeeldgrense"
+
+#: src/modules/TextUI.cpp:111
+msgid "Constellation Lines"
+msgstr "Sterrebeeldlyne"
+
+#: src/modules/TextUI.cpp:112
+msgid "Constellation Names"
+msgstr "Sterrebeeldname"
+
+#: src/ui_viewDialog.h:1088
+#, fuzzy
+msgid "Constellations"
+msgstr "Sterrebeeldlyne"
+
+#: src/modules/TextUI.cpp:137
+msgid "Correct for light travel time: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:136
+msgid "Cursor Timeout: "
+msgstr "Wyser Tydsduur : "
+
+#: src/ui_locationDialogGui.h:325
+#, fuzzy
+msgid "Cursor:"
+msgstr "Wyser : "
+
+#: src/core/MappingClasses.cpp:223
+#, fuzzy
+msgid "Cylinder"
+msgstr "Kalender"
+
+#: src/modules/TextUI.cpp:96
+msgid "Date Display Format: "
+msgstr "Datumnotasie : "
+
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
+#, fuzzy
+msgid "Date and Time"
+msgstr "Datum & Tyd"
+
+#: src/modules/TextUI.cpp:88
+msgid "Day keys: "
+msgstr "Dag sleutels: "
+
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "Verminder Tyd Spoed [J]"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/gui/NewGui.cpp:411
+#, fuzzy
+msgid "Dialogs"
+msgstr "Honde"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/gui/NewGui.cpp:383
+msgid "Display Options"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " Ligjare"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Afstand: "
+
+#: src/ui_viewDialog.h:1052
+msgid "Download images"
+msgstr ""
+
+#: src/translations.h:65
+msgid "E"
+msgstr "O"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Aarde"
+
+#: src/modules/TextUI.cpp:123
+msgid "Ecliptic Line"
+msgstr "Ekliptiese Lyn"
+
+#: src/ui_viewDialog.h:1080
+#, fuzzy
+msgid "Ecliptic line"
+msgstr "Ekliptiese Lyn"
+
+#: src/modules/TextUI.cpp:75
+msgid "Effects "
+msgstr "Effekte "
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "Egipties"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/ui_locationDialogGui.h:344
+msgid "Enter the altitude in meter"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
+#: src/modules/Telescope.cpp:245
+#, fuzzy, qt-format
+msgid "Equ of date RA/DE: %1/%2"
+msgstr "Datum ewenaar"
+
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr ""
+
+#: src/modules/TextUI.cpp:122
+msgid "Equator Line"
+msgstr "Ekwatoriale Lyn"
+
+#: src/ui_viewDialog.h:1084
+#, fuzzy
+msgid "Equator line"
+msgstr "Ekwatoriale Lyn"
+
+#: src/modules/TextUI.cpp:121
+msgid "Equatorial Grid"
+msgstr "Ekwatoriale Rooster"
+
+#: src/ui_viewDialog.h:1085
+#, fuzzy
+msgid "Equatorial J2000 grid"
+msgstr "Ekwatoriale Rooster"
+
+#: src/ui_viewDialog.h:1083
+#, fuzzy
+msgid "Equatorial grid"
+msgstr "Ekwatoriale Rooster"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/gui/ViewDialog.cpp:340
+#, fuzzy
+msgid "Exceptional Leonid rate"
+msgstr ": Buitengewone Leonid aantal"
+
+#: src/ui_searchDialogGui.h:141 src/ui_searchDialogGui.h:142
+msgid "Find Object"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr ""
+
+#: src/gui/NewGui.cpp:408
+#, fuzzy
+msgid "Flip scene horizontally"
+msgstr "Draai horisontaal"
+
+#: src/gui/NewGui.cpp:409
+#, fuzzy
+msgid "Flip scene vertically"
+msgstr "Draai vertikaal"
+
+#: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
+#, fuzzy
+msgid "Form"
+msgstr "Drif"
+
+#: src/gui/HelpDialog.cpp:128
+msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
+msgstr ""
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymedes"
+
+#: src/modules/TextUI.cpp:72
+msgid "General "
+msgstr "Algemeen "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:156
+msgid "Go"
+msgstr ""
+
+#: src/ui_helpDialogGui.h:152
+msgid "Help"
+msgstr "Hulp"
+
+#: src/gui/ViewDialog.cpp:343
+#, fuzzy
+msgid "Highest rate ever (1966 Leonids)"
+msgstr ": Hoogste aantal ooit (1966 Leonids)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "Uurlikse meteoor piek tempo"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/core/MappingClasses.cpp:183
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "Versnel Tyd Spoed"
+
+#: src/translations.h:71
+#, fuzzy
+msgid "Inuit"
+msgstr "Inuit"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiter"
+
+#: src/gui/HelpDialog.cpp:120
+#, fuzzy
+msgid "Keys"
+msgstr "Tethys"
+
+#: src/translations.h:72
+msgid "Korean"
+msgstr "Koreaans"
+
+#: src/ui_viewDialog.h:1064
+msgid "Labels and Markers"
+msgstr ""
+
+#: src/translations.h:73
+#, fuzzy
+msgid "Lakota"
+msgstr "Lakota"
+
+#: src/ui_viewDialog.h:1077
+#, fuzzy
+msgid "Landscape"
+msgstr "Landskappe"
+
+#: src/modules/TextUI.cpp:129
+msgid "Landscape: "
+msgstr "Landskap : "
+
+#: src/ui_locationDialogGui.h:335
+#, fuzzy
+msgid "Latitude:"
+msgstr "Breedtegraad : "
+
+#: src/modules/TextUI.cpp:80
+msgid "Latitude: "
+msgstr "Breedtegraad : "
+
+#: src/gui/HelpDialog.cpp:53
+#, fuzzy
+msgid "Left click"
+msgstr "Linker Vlag"
+
+#: src/modules/TextUI.cpp:128
+#, fuzzy
+msgid "Light Pollution Luminance: "
+msgstr "Lig besoedeling beligting "
+
+#: src/ui_viewDialog.h:1075
+#, fuzzy
+msgid "Light pollution:"
+msgstr "Lig besoedeling beligting "
+
+#: src/modules/TextUI.cpp:108
+#, fuzzy
+msgid "Limiting Magnitude: "
+msgstr "Omvang: "
+
+#: src/modules/TextUI.cpp:147
+msgid "Load Default Configuration: "
+msgstr "Laai Verstek Instellings : "
+
+#: src/modules/ConstellationMgr.cpp:371
+#, fuzzy, qt-format
+msgid "Loading Constellation Art: %1/%2"
+msgstr "Besig om Konstellasie Kuns te laai: "
+
+#: src/modules/NebulaMgr.cpp:372
+#, fuzzy, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "Besig om NGC katalogus te laai: "
+
+#: src/modules/StarMgr.cpp:253
+#, fuzzy, qt-format
+msgid "Loading catalog %1"
+msgstr "Laai katalogus "
+
+#: src/modules/TextUI.cpp:140
+msgid "Local Script: "
+msgstr "Lokale Skrip : "
+
+#: src/ui_locationDialogGui.h:322
+msgid "Location"
+msgstr "Ligging"
+
+#: src/modules/LandscapeMgr.cpp:428
+msgid "Location: "
+msgstr "Ligging: "
+
+#: src/ui_locationDialogGui.h:329
+#, fuzzy
+msgid "Longitude:"
+msgstr "Lengtegraad : "
+
+#: src/modules/TextUI.cpp:81
+msgid "Longitude: "
+msgstr "Lengtegraad : "
+
+#: src/modules/TextUI.cpp:132
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Skaal grootte vermenigvuldiger: "
+
+#: src/modules/TextUI.cpp:105
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Orde Grootte Vermenigvuldiger : "
+
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
+#, fuzzy, qt-format
+msgid "Magnitude: %1"
+msgstr "Omvang: "
+
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Omvang: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
+#, fuzzy
+msgid "Main"
+msgstr "Carina"
+
+#: src/modules/TextUI.cpp:130
+msgid "Manual zoom: "
+msgstr "Handmatige zoem : "
+
+#: src/ui_viewDialog.h:1095
+#, fuzzy
+msgid "Markings"
+msgstr "Mars"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
+
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr ""
+
+#: src/modules/TextUI.cpp:106
+msgid "Maximum Magnitude to Label: "
+msgstr "Maksimum Orde om te benoem : "
+
+#: src/modules/TextUI.cpp:134
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maksimum Nebula Orde om te benoem : "
+
+#: src/core/MappingClasses.cpp:278
+#, fuzzy
+msgid "Mercator"
+msgstr "Mercurius"
+
+#: src/core/MappingClasses.cpp:283
+#, fuzzy
+msgid "Mercator projection"
+msgstr "Soek 'n voorwerp"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Mercurius"
+
+#: src/modules/TextUI.cpp:119
+msgid "Meridian Line"
+msgstr "Meridiaanlyn"
+
+#: src/ui_viewDialog.h:1082
+#, fuzzy
+msgid "Meridian line"
+msgstr "Meridiaanlyn"
+
+#: src/modules/TextUI.cpp:133
+msgid "Milky Way intensity: "
+msgstr "Melkweg intensiteit : "
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
+#, fuzzy
+msgid "Misc"
+msgstr "Mimas"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Maan"
+
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
+msgid "Movement and Selection"
+msgstr ""
+
+#: src/translations.h:63
+msgid "N"
+msgstr "N"
+
+#: src/translations.h:74
+#, fuzzy
+msgid "Navajo"
+msgstr "Navajo"
+
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "Nebulas [N]"
+
+#: src/modules/TextUI.cpp:125
+msgid "Nebula Circles"
+msgstr "Nebula Sirkels"
+
+#: src/modules/TextUI.cpp:124
+msgid "Nebula Names"
+msgstr "Nebulaname"
+
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
+#, fuzzy
+msgid "Nebulas"
+msgstr "Nebulas [N]"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptunus"
+
+#: src/gui/ViewDialog.cpp:285
+msgid "No description"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
+#, fuzzy
+msgid "Normal rate"
+msgstr ": Normale spoed"
+
+#: src/translations.h:75
+msgid "Norse"
+msgstr "Noors"
+
+#: src/modules/TextUI.cpp:131
+msgid "Object Sizing Rule: "
+msgstr "Voorwerpgrootte Reël : "
+
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
+#, fuzzy
+msgid "Options"
+msgstr "Orion"
+
+#: src/core/MappingClasses.cpp:336
+msgid "Orthographic"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:341
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:51
+msgid "Page Up/Down"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:59
+msgid "Pan view around the sky"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
+msgstr "Parallaks "
+
+#: src/core/MappingClasses.cpp:11
+#, fuzzy
+msgid "Perspective"
+msgstr "Voorafgestelde Tyd"
+
+#: src/core/MappingClasses.cpp:16
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/modules/TextUI.cpp:116
+msgid "Planet Names"
+msgstr "Planeetname"
+
+#: src/modules/TextUI.cpp:117
+msgid "Planet Orbits"
+msgstr "Planeet Wentelbane"
+
+#: src/modules/TextUI.cpp:118
+msgid "Planet Trails"
+msgstr "Planeet Spore"
+
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
+msgid "Planets"
+msgstr "Planete"
+
+#: src/ui_viewDialog.h:1043
+#, fuzzy
+msgid "Planets and Satellites"
+msgstr "Planeetwenke"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Pluto"
+
+#: src/translations.h:76
+msgid "Polynesian"
+msgstr "Polynesies"
+
+#: src/modules/TextUI.cpp:91
+msgid "Preset Sky Time: "
+msgstr "Vooraf Vasgestelde Hemeltyd : "
+
+#: src/modules/TextUI.cpp:94
+msgid "Preset Time"
+msgstr "Voorafgestelde Tyd"
+
+#: src/ui_configurationDialog.h:149
+#, fuzzy
+msgid "Program language:"
+msgstr "Programtaal : "
+
+#: src/ui_viewDialog.h:1094
+#, fuzzy
+msgid "Projection"
+msgstr "Projeksie :"
+
+#: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
+msgid ""
+"QToolButton {\n"
+"color: white;\n"
+"font-weight: bold;\n"
+"background: None;\n"
+"border: 1px solid #2e2e36;\n"
+"  border-radius: 2px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"color: darkgray;\n"
+"}"
+msgstr ""
+
+#: src/gui/NewGui.cpp:443
+#, fuzzy
+msgid "Quit"
+msgstr "Inuit"
+
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
+msgstr "RK/DE: "
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/gui/HelpDialog.cpp:54
+#, fuzzy
+msgid "Right click"
+msgstr "Regter Vlag"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "S"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Saturnus"
+
+#: src/modules/TextUI.cpp:148
+msgid "Save Current Configuration as Default: "
+msgstr "Stoor Huidige Instellings as Verstek : "
+
+#: src/gui/NewGui.cpp:444
+msgid "Save screenshot"
+msgstr ""
+
+#: src/ui_viewDialog.h:1046
+#, fuzzy
+msgid "Scale Moon"
+msgstr "Stoor ligging"
+
+#: src/ui_viewDialog.h:1039
+#, fuzzy
+msgid "Scale:"
+msgstr "Maanskaal"
+
+#: src/modules/TextUI.cpp:76
+msgid "Scripts "
+msgstr "Skrip "
+
+#: src/modules/TextUI.cpp:144
+msgid "Select and exit to run."
+msgstr "Kies en verlaat om te laat loop."
+
+#: src/gui/HelpDialog.cpp:62
+#, fuzzy
+msgid "Select object"
+msgstr "Soek 'n voorwerp"
+
+#: src/ui_locationDialogGui.h:327
+#, fuzzy
+msgid "Selected:"
+msgstr "Seleksie : "
+
+#: src/modules/TextUI.cpp:70
+msgid "Set Location "
+msgstr "Kies ligging "
+
+#: src/modules/TextUI.cpp:71
+msgid "Set Time "
+msgstr "Kies Tyd "
+
+#: src/modules/TextUI.cpp:87
+msgid "Set Time Zone: "
+msgstr "Verander Tydzone : "
+
+#: src/modules/TextUI.cpp:151
+msgid "Set UI Locale: "
+msgstr "Kies Verbruikersvlak Lokaal: "
+
+#: src/gui/NewGui.cpp:422
+#, fuzzy
+msgid "Set normal time rate"
+msgstr ": Normale spoed"
+
+#: src/gui/NewGui.cpp:423
+#, fuzzy
+msgid "Set time to now"
+msgstr "Kies Tyd "
+
+#: src/ui_viewDialog.h:1055
+msgid "Shooting Stars"
+msgstr ""
+
+#: src/ui_viewDialog.h:1051
+msgid "Short labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
+#, fuzzy
+msgid "Show"
+msgstr "Wys : "
+
+#: src/ui_viewDialog.h:1092
+#, fuzzy
+msgid "Show art"
+msgstr "Wys : "
+
+#: src/ui_viewDialog.h:1074
+#, fuzzy
+msgid "Show atmosphere"
+msgstr "Atmosfeer"
+
+#: src/ui_viewDialog.h:1091
+msgid "Show boundaries"
+msgstr ""
+
+#: src/ui_viewDialog.h:1073
+#, fuzzy
+msgid "Show fog"
+msgstr "Wys : "
+
+#: src/ui_viewDialog.h:1072
+msgid "Show ground"
+msgstr ""
+
+#: src/ui_viewDialog.h:1089
+msgid "Show labels"
+msgstr ""
+
+#: src/ui_viewDialog.h:1090
+#, fuzzy
+msgid "Show lines"
+msgstr "Wys : "
+
+#: src/ui_viewDialog.h:1044
+msgid "Show markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:1045
+msgid "Show orbits"
+msgstr ""
+
+#: src/modules/TextUI.cpp:103
+msgid "Show: "
+msgstr "Wys : "
+
+#: src/modules/TextUI.cpp:149
+msgid "Shut Down: "
+msgstr "Skakel af: "
+
+#: src/modules/TextUI.cpp:90
+#, fuzzy
+msgid "Sidereal"
+msgstr "Sidereale"
+
+#: src/ui_viewDialog.h:1047
+msgid "Simulate light speed"
+msgstr ""
+
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
+msgstr "Grootte: "
+
+#: src/ui_viewDialog.h:1069
+#, fuzzy
+msgid "Sky"
+msgstr "Sek"
+
+#: src/modules/TextUI.cpp:99
+msgid "Sky Culture: "
+msgstr "Hemelkultuur : "
+
+#: src/modules/TextUI.cpp:100
+msgid "Sky Language: "
+msgstr "Hemeltaal : "
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Time At Start-up: "
+msgstr "Aanvang Hemeltyd : "
+
+#: src/modules/TextUI.cpp:86
+msgid "Sky Time: "
+msgstr "Hemeltyd : "
+
+#: src/modules/TextUI.cpp:83
+msgid "Solar System Body: "
+msgstr "Sonnestelsel Liggaam : "
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Bekyk Sonnestelsel"
+
+#: src/gui/HelpDialog.cpp:49
+#, fuzzy
+msgid "Space"
+msgstr "Lans"
+
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
+msgstr "Spektraaltipe: "
+
+#: src/gui/ViewDialog.cpp:337
+#, fuzzy
+msgid "Standard Perseids rate"
+msgstr ": Standaard Perseids aantal"
+
+#: src/modules/TextUI.cpp:104
+msgid "Star Value Multiplier: "
+msgstr "Sterwaarde versterker "
+
+#: src/ui_viewDialog.h:1097
+#, fuzzy
+msgid "Starlore"
+msgstr "Ster"
+
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
+msgid "Stars"
+msgstr "Sterre"
+
+#: src/modules/TextUI.cpp:73
+msgid "Stars "
+msgstr "Sterre "
+
+#: src/gui/NewGui.cpp:928
+msgid "Stellarium"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:133
+msgid "Stereographic"
+msgstr ""
+
+#: src/gui/NewGui.cpp:431
+msgid "Subtract 1 sidereal day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:433
+msgid "Subtract 1 sidereal week"
+msgstr ""
+
+#: src/gui/NewGui.cpp:427
+msgid "Subtract 1 solar day"
+msgstr ""
+
+#: src/gui/NewGui.cpp:425
+msgid "Subtract 1 solar hour"
+msgstr ""
+
+#: src/gui/NewGui.cpp:429
+msgid "Subtract 1 solar week"
+msgstr ""
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Son"
+
+#: src/gui/NewGui.cpp:442
+msgid "Switch between equatorial and azimuthal mount"
+msgstr ""
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/gui/HelpDialog.cpp:130
+msgid "The Stellarium User Guide:"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:129
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:228
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>."
+msgstr ""
+
+#: src/core/MappingClasses.cpp:138
+msgid "This mode is similar to fish-eye projection mode."
+msgstr ""
+
+#: src/main.cpp:52
+msgid "This system does not support OpenGL."
+msgstr ""
+
+#: src/modules/TextUI.cpp:95
+msgid "Time Display Format: "
+msgstr "Tydnotasie : "
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/gui/NewGui.cpp:402
+msgid "Toggle DSS"
+msgstr ""
+
+#: src/gui/NewGui.cpp:398
+#, fuzzy
+msgid "Toggle atmosphere"
+msgstr "Atmosfeer"
+
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "Asimutale Rooster"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "Kompaspunte"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "Konfigurasievenster"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "Besig om Konstellasie Kuns te laai: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "Sterrebeeldgrense"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "Sterrebeeldname"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "Sterrebeeldlyne"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "Ekliptiese Lyn"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "Ekwatoriale Lyn"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "Ekwatoriale Rooster"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "Ekwatoriale Rooster"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "Konfigurasievenster"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "Meridiaanlyn"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "Planeetwenke"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
+#, fuzzy
+msgid "Toggle stars"
+msgstr "Drie Sterre"
+
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr ""
+
+#: src/ui_viewDialog.h:1040
+#, fuzzy
+msgid "Twinkle:"
+msgstr "Flikker : "
+
+#: src/modules/TextUI.cpp:107
+msgid "Twinkling: "
+msgstr "Flikker : "
+
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
+
+#: src/modules/TextUI.cpp:142
+#, fuzzy
+msgid "USB Script: "
+msgstr "USB Skrif "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
+msgstr ""
+
+#: src/modules/TextUI.cpp:150
+msgid "Update me via Internet: "
+msgstr "Opdateer via die Internet : "
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uranus"
+
+#: src/ui_viewDialog.h:1096
+msgid "Use associated language for sky labeling"
+msgstr ""
+
+#: src/ui_viewDialog.h:1076
+msgid "Use associated planet and position"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:324
+msgid "Use the mouse wheel to zoom, drag to move the screen."
+msgstr ""
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venus"
+
+#: src/ui_viewDialog.h:1022
+#, fuzzy
+msgid "View"
+msgstr "Video"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "W"
+
+#: src/translations.h:77
+msgid "Western"
+msgstr "Westers"
+
+#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
+#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
+msgid "X"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:332 src/ui_locationDialogGui.h:338
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+
+#: src/modules/TextUI.cpp:135
+msgid "Zoom Duration: "
+msgstr "Zoem Tydsduur : "
+
+#: src/gui/NewGui.cpp:438
+#, fuzzy
+msgid "Zoom in on selected object"
+msgstr "Gaan na gesellekteerde voorwerp [Spasie]"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
+msgid "Zoom in/out"
+msgstr ""
+
+#: src/gui/NewGui.cpp:439
+#, fuzzy
+msgid "Zoom out"
+msgstr "Zoem Tydsduur : "
+
+#: src/ui_locationDialogGui.h:347
+msgid "m"
+msgstr "m"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:149
+msgid ""
+"{Bug reporting system} - if something doesn't work properly and is not "
+"listed in the FAQ list, you can open bug reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:154
+msgid ""
+"{Feature request system} - if you have an idea for a new feature, send it to "
+"us. We can't promise to implement every idea, but we appreciate the feedback "
+"and review the list when we are planning future features."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:159
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:134
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:144
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:139
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "    and comments to us at: http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Soek vir nuwe weergawes en stuur foutverslae\n"
+#~ "    en kommentaar by: http://www.stellarium.org\n"
+#~ "\n"
+
+#~ msgid " (Variable)"
+#~ msgstr " (Veranderlike)"
+
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Foutiewe bevellyn argument(e)\n"
 
-#, c-format
-#~ msgid "Try `%s --help' for more information.\n"
-#~ msgstr "Probeer `%s --help' vir meer inligting.\n"
+#~ msgid "AU"
+#~ msgstr "AE"
 
-#~ msgid "Configuration window"
-#~ msgstr "Konfigurasievenster"
+#~ msgid "Also display Nebulas without textures"
+#~ msgstr "Vertoon Nebulas sonder teksture"
 
-#~ msgid "Search for object"
-#~ msgstr "Soek 'n voorwerp"
+#~ msgid "Andromeda"
+#~ msgstr "Andromeda"
 
-#~ msgid "Flip horizontally"
-#~ msgstr "Draai horisontaal"
+#~ msgid "Animal"
+#~ msgstr "Dier"
 
-#~ msgid "Flip vertically"
-#~ msgstr "Draai vertikaal"
+#~ msgid "Antlia"
+#~ msgstr "Antlia"
 
-#~ msgid "Return to Current Time"
-#~ msgstr "Terug na huidige tyd"
+#~ msgid "Apus"
+#~ msgstr "Apus"
+
+#~ msgid "Aquarius"
+#~ msgstr "Aquarius"
+
+#~ msgid "Aquila"
+#~ msgstr "Aquila"
+
+#~ msgid "Ara"
+#~ msgstr "Ara"
+
+#~ msgid "Are you sure ?"
+#~ msgstr "Is jy seker ?"
+
+#~ msgid "Aries"
+#~ msgstr "Aries"
+
+#~ msgid "Arsenal"
+#~ msgstr "Arsenaal"
+
+#~ msgid "Atmosphere [A]"
+#~ msgstr "Atmosfeer [A]"
+
+#~ msgid "Auriga"
+#~ msgstr "Auriga"
+
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Aurvandil se Toon"
+
+#~ msgid "Azimuthal Grid [Z]"
+#~ msgstr "Asimutale Rooster [Z]"
+
+#~ msgid "Bailer"
+#~ msgstr "Borgsteller"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Banier van die Drie Sterre"
+
+#, fuzzy
+#~ msgid "Bear's Lodge"
+#~ msgstr "Beer se Skuiling"
+
+#~ msgid "Bird"
+#~ msgstr "Voël"
+
+#~ msgid "Blubber Container"
+#~ msgstr "Walvisspek Houer"
+
+#~ msgid "Boat"
+#~ msgstr "Boot"
+
+#~ msgid "Bond"
+#~ msgstr "Band"
+
+#~ msgid "Bootes"
+#~ msgstr "Bootes"
+
+#~ msgid "Bow and Arrow"
+#~ msgstr "Pyl en Boog"
+
+#, fuzzy
+#~ msgid "Breastbone"
+#~ msgstr "Borsbeen"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Bulvoorpoot"
+
+#~ msgid "CMD + Q : Quit\n"
+#~ msgstr "CMD + Q : Verlaat\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL + Q : Verlaat\n"
+
+#~ msgid "Caelum"
+#~ msgstr "Caelum"
+
+#~ msgid "Camelopardalis"
+#~ msgstr "Camelopardalis"
+
+#~ msgid "Cancel"
+#~ msgstr "Kanselleer"
+
+#~ msgid "Cancer"
+#~ msgstr "Cancer"
+
+#~ msgid "Canes Venatici"
+#~ msgstr "Canes Venatici"
+
+#~ msgid "Canis Major"
+#~ msgstr "Canis Major"
+
+#~ msgid "Canis Minor"
+#~ msgstr "Canis Minor"
+
+#~ msgid "Capricornus"
+#~ msgstr "Capricornus"
+
+#~ msgid "Cardinal Points [Q]"
+#~ msgstr "Kardinale Punte [Q]"
+
+#~ msgid "Cared for by Moon"
+#~ msgstr "Versorg deur die Maan"
+
+#, fuzzy
+#~ msgid "Caribou"
+#~ msgstr "Kariboe"
+
+#~ msgid "Cassiopeia"
+#~ msgstr "Cassiopeia"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Katnes"
+
+#~ msgid "Centaurus"
+#~ msgstr "Centaurus"
+
+#~ msgid "Cepheus"
+#~ msgstr "Cepheus"
+
+#~ msgid "Cetus"
+#~ msgstr "Cetus"
+
+#~ msgid "Chamaeleon"
+#~ msgstr "Chamaeleon"
+
+#~ msgid "Chariot"
+#~ msgstr "Strydwa"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Strydwa Werf"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
+#~ msgid "Choose landscapes:"
+#~ msgstr "Kies landskappe :"
+
+#~ msgid "Circinus"
+#~ msgstr "Circinus"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Ronde Koringskuur"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Opgerolde Koord"
+
+#, fuzzy
+#~ msgid "Collarbones"
+#~ msgstr "Klavikels"
+
+#~ msgid "Columba"
+#~ msgstr "Columba"
+
+#~ msgid "Coma Berenices"
+#~ msgstr "Coma Berenices"
+
+#~ msgid "Command recording stopped."
+#~ msgstr "Bevelopname gestop."
+
+#~ msgid "Configuration window [1]"
+#~ msgstr "Konfigurasie venster"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "Konstellasiekuns [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "Sterrebeeldgrense"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "Sterrebeeldlyne"
+
+#~ msgid "Constellations Names"
+#~ msgstr "Sterrebeeldname"
+
+#~ msgid "Corona Australis"
+#~ msgstr "Corona Australis"
+
+#~ msgid "Corona Borealis"
+#~ msgstr "Corona Borealis"
+
+#~ msgid "Corvus"
+#~ msgstr "Corvus"
+
+#~ msgid "Crater"
+#~ msgstr "Crater"
+
+#~ msgid "Crocodile"
+#~ msgstr "Krokodil"
+
+#~ msgid "Crux"
+#~ msgstr "Crux"
+
+#~ msgid "Current Time :"
+#~ msgstr "Huidige Tyd:"
+
+#~ msgid "Current Time Speed is x"
+#~ msgstr "Huidige Tydsnelheid is x"
+
+#~ msgid "Curved Array"
+#~ msgstr "Gekromde Groep"
+
+#~ msgid "Cygnus"
+#~ msgstr "Cygnus"
+
+#~ msgid "Day"
+#~ msgstr "Dag"
+
+#~ msgid "Delphinus"
+#~ msgstr "Delphinus"
+
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vensters & ander beheerelemente:\n"
+#~ "H : Help I : Oor Stellarium\n"
+#~ "M : Tekskieslys 1 (een) : Stellings\n"
+#~ "Ctrl+S : Maak 'n skerm afbeelding\n"
+#~ "Ctrl+R : Skripopname aan/af\n"
+#~ "Ctrl+F : Voorwerpsoeker aan/af\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialoog en ander kontroles:\n"
+#~ "H : Help I : Oor Stellarium\n"
+#~ "M : Teks menu 1 (een) : Konfigurasie\n"
+#~ "CTRL + S : Neem 'n skermbeeld\n"
+#~ "CTRL + R : Skakel skrif opname\n"
+#~ "CTRL + F : Skakel voorwerp vinder\n"
+#~ "CTRL + G : Gaan na geselekteerde sonnestelsel voorwerp\n"
+#~ "\n"
+
+#~ msgid "Dilyehe"
+#~ msgstr "Dilyehe"
+
+#~ msgid "Dipper"
+#~ msgstr "Steelpan"
+
+#~ msgid "Disk Viewport"
+#~ msgstr "Skyfvormige venster."
+
+#, fuzzy
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vertoon opsies\n"
+#~ "ENTER: Ekwatoriale/altazimutale montering\n"
+#~ "F1 : Skakel volskerm / venster.\n"
+#~ "C : Konstellasie lyne V : Konstellasie byskrifte\n"
+#~ "R : Konstellasie kuns E : Ekwatoriale ruit\n"
+#~ "Z : Azimutale ruit N : Nebula labels\n"
+#~ "P : Planetêre byskrifte G : Grond\n"
+#~ "A : Atmosfeer F : Mis\n"
+#~ "Q : Kardinale punte O : Skakel maan skaal\n"
+#~ "T : Voorwerp volg S : Sterre\n"
+#~ "4 , : Ekliptiese lyn 5 . : Ekwatoriale lyn\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -77,22 +1722,699 @@ msgstr ""
 #~ "4 , : Ekliptiese lyne 5 . : Ekwatoriale lyn\n"
 #~ "\n"
 
+#, fuzzy
+#~ msgid "Do"
+#~ msgstr "Doen"
+
+#~ msgid "Dog"
+#~ msgstr "Hond"
+
+#~ msgid "Dolphin"
+#~ msgstr "Dolfyn"
+
+#~ msgid "Done"
+#~ msgstr "Klaar"
+
+#~ msgid "Dorado"
+#~ msgstr "Dorado"
+
+#~ msgid "Draco"
+#~ msgstr "Draco"
+
+#~ msgid "Drawing of the Constellations [C]"
+#~ msgstr "Konstellasie Tekeninge"
+
+#, fuzzy
+#~ msgid "Dried Willow"
+#~ msgstr "Gedroogde Wilger"
+
+#~ msgid "Drum"
+#~ msgstr "Drom"
+
+#~ msgid "Drumstick"
+#~ msgstr "Dromstok"
+
 #~ msgid ""
-#~ "Dialogs & other controls:\n"
-#~ "H   : Help                      I   : About Stellarium\n"
-#~ "M   : Text menu                 1 (one)  : Configuration\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ "CTRL + F : Toggle object finder\n"
+#~ "During Script Playback:\n"
+#~ "CTRL + C : End Script\n"
+#~ "6   : pause script              K   : resume script\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Vensters & ander beheerelemente:\n"
-#~ "H : Help I : Oor Stellarium\n"
-#~ "M : Tekskieslys 1 (een) : Stellings\n"
-#~ "Ctrl+S : Maak 'n skerm afbeelding\n"
-#~ "Ctrl+R : Skripopname aan/af\n"
-#~ "Ctrl+F : Voorwerpsoeker aan/af\n"
+#~ "Tydens skripspeling:\n"
+#~ "Ctrl+C : Beëindig skrip\n"
+#~ "6 : Skrip pouse K : Hervat skrip\n"
 #~ "\n"
+
+#~ msgid "Earth God's Temple"
+#~ msgstr "Tempel van die Aardse God"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Oosterlike Deur"
+
+#~ msgid "Elk"
+#~ msgstr "Europese Eland"
+
+#~ msgid "Emptiness"
+#~ msgstr "Leegte"
+
+#~ msgid "Encampment"
+#~ msgstr "Kamp"
+
+#~ msgid "Enter observatory name"
+#~ msgstr "Tik observatoriumnaam in"
+
+#~ msgid "Equatorial Grid [E]"
+#~ msgstr "Ekwatoriale Rooster [E]"
+
+#~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
+#~ msgstr "Ekwatoriale/Asimuntale Stelling [ENTER]"
+
+#~ msgid "Equuleus"
+#~ msgstr "Equuleus"
+
+#~ msgid "Eridanus"
+#~ msgstr "Eridanus"
+
+#~ msgid "Error: Unable to open script file to record commands."
+#~ msgstr "Fout: Kan nie skriplêer oopmaak nie."
+
+#~ msgid "Establishment"
+#~ msgstr "Nedersetting"
+
+#~ msgid "Extended Net"
+#~ msgstr "Uitgeworpe Net"
+
+#~ msgid "Farmland"
+#~ msgstr "Plaasgrond"
+
+#~ msgid "Ferry Boat"
+#~ msgstr "Veerboot"
+
+#~ msgid "Fireplace"
+#~ msgstr "Vuurherd"
+
+#, fuzzy
+#~ msgid "First Big One"
+#~ msgstr "Eerste Grote"
+
+#, fuzzy
+#~ msgid "First Slim One"
+#~ msgstr "Eerste Dun Een"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Vyf Strydwaens"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Vyf Leenhere"
+
+#~ msgid "Flail"
+#~ msgstr "Dorsstok"
+
+#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
+#~ msgstr "Draai horisontaal [CTRL + SHIFT + H]"
+
+#~ msgid "Flip vertically [CTRL + SHIFT + V]"
+#~ msgstr "Draai vertikaal [CTRL + SHIFT + V]"
+
+#~ msgid "Flock"
+#~ msgstr "Kudde"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Lugweg"
+
+#~ msgid "Fog"
+#~ msgstr "Mis"
+
+#~ msgid "For unlisted screen resolution, edit the file :"
+#~ msgstr ""
+#~ "Vir 'n skermresolusie wat nie in die lys is nie, verander die lêer :"
+
+#~ msgid "Fornax"
+#~ msgstr "Fornax"
+
+#~ msgid "Four Channels"
+#~ msgstr "Vier Kanale"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Frigat Voël"
+
+#~ msgid "GO"
+#~ msgstr "Begin"
+
+#~ msgid "Gemini"
+#~ msgstr "Gemini"
+
+#~ msgid "Ghosts"
+#~ msgstr "Geeste"
+
+#~ msgid "Giant"
+#~ msgstr "Reus"
+
+#~ msgid "Girl"
+#~ msgstr "Meisie"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Goeie Kalbas"
+
+#~ msgid "Great General"
+#~ msgstr "Groot Generaal"
+
+#~ msgid "Ground"
+#~ msgstr "Grond"
+
+#~ msgid "Ground [G]"
+#~ msgstr "Grond [G]"
+
+#~ msgid "Grus"
+#~ msgstr "Grus"
+
+#~ msgid "Hand"
+#~ msgstr "Hand"
+
+#~ msgid "Heart"
+#~ msgstr "Hart"
+
+#~ msgid "Help [H]"
+#~ msgstr "Help [H]"
+
+#~ msgid "Hercules"
+#~ msgstr "Hercules"
+
+#~ msgid "Hippopotamus"
+#~ msgstr "Seekoei"
+
+#~ msgid "Hit CTRL-R again to stop.\n"
+#~ msgstr "Druk weer Ctrl-R om te stop.\n"
+
+#~ msgid "Hook"
+#~ msgstr "Haak"
+
+#~ msgid "Horn"
+#~ msgstr "Horing"
+
+#~ msgid "Horologium"
+#~ msgstr "Horologium"
+
+#~ msgid "Horus"
+#~ msgstr "Horus"
+
+#~ msgid "Hour"
+#~ msgstr "Uur"
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
+
+#~ msgid "Hydrus"
+#~ msgstr "Hydrus"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Keiserlike Wagte"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Keiserlike Toegang"
+
+#~ msgid "Indus"
+#~ msgstr "Indus"
+
+#~ msgid "Info: "
+#~ msgstr "Inligting : "
+
+#~ msgid "Information"
+#~ msgstr "Inligting"
+
+#~ msgid "Invalid Script command"
+#~ msgstr "Ongeldige Skripopdrag"
+
+#~ msgid "Jade Well"
+#~ msgstr "Nefriet Put"
+
+#~ msgid "Jaw"
+#~ msgstr "Kaak"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Khanuwy vis"
+
+#~ msgid "Kitchen"
+#~ msgstr "Kombuis"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Vlieër van Kawelo"
+
+#~ msgid "Lacerta"
+#~ msgstr "Lacerta"
+
+#~ msgid "Lamp Stand"
+#~ msgstr "Ligstaander"
+
+#~ msgid "Language"
+#~ msgstr "Taal"
+
+#~ msgid "Latitude : "
+#~ msgstr "Breedtegraad : "
+
+#~ msgid "Legs"
+#~ msgstr "Bene"
+
+#~ msgid "Leo"
+#~ msgstr "Leo"
+
+#~ msgid "Leo Minor"
+#~ msgstr "Leo Minor"
+
+#~ msgid "Lepus"
+#~ msgstr "Lepus"
+
+#~ msgid "Libra"
+#~ msgstr "Libra"
+
+#~ msgid "Lion"
+#~ msgstr "Leeu"
+
+#, fuzzy
+#~ msgid "Lizard"
+#~ msgstr "Akkedis"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Besig om Hipparcos katalogus te laai:"
+
+#~ msgid "Loading Nebula Textures:"
+#~ msgstr "Besig om Nebulateksture te laai"
+
+#~ msgid "Longitude : "
+#~ msgstr "Lengtegraad: "
+
+#~ msgid "Lupus"
+#~ msgstr "Lupus"
+
+#~ msgid "Lynx"
+#~ msgstr "Lynx"
+
+#~ msgid "Lyra"
+#~ msgstr "Lyra"
+
+#~ msgid "Magnitude"
+#~ msgstr "Orde"
+
+#, fuzzy
+#~ msgid "Man with Feet Apart"
+#~ msgstr "Man met voete uitmekaar"
+
+#~ msgid "Man's Cart"
+#~ msgstr "Man se wa"
+
+#~ msgid "Market"
+#~ msgstr "Mark"
+
+#~ msgid "Market Officer"
+#~ msgstr "Markbeampte"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Maui se Vishaak"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Mausoleum"
+
+#~ msgid "Meadows"
+#~ msgstr "Weivelde"
+
+#~ msgid "Mensa"
+#~ msgstr "Mensa"
+
+#~ msgid "Meteor Rate per minute"
+#~ msgstr "Aantal meteore per minuut"
+
+#~ msgid "Microscopium"
+#~ msgstr "Microscopium"
+
+#~ msgid "Minutes"
+#~ msgstr "Minute"
+
+#, fuzzy
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+#~ "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+#~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
+#~ msgstr ""
+#~ "Allerlei:\n"
+#~ "9: Wissel meteoor stort koers\n"
+#~ "CTRL + 0,..,9 : Voer GOTO opdrag uit vir teleskope 0,..,9\n"
+#~ "CTRL + SHIFT + H: Wissel beeld draai horisontaal\n"
+#~ "CTRL + SHIFT + V: Wissel beeld draai vertikaal\n"
+
+#~ msgid "Monoceros"
+#~ msgstr "Monoceros"
+
+#~ msgid "Month"
+#~ msgstr "Maand"
+
+#~ msgid "Mooring Post"
+#~ msgstr "Meerpaal"
+
+#~ msgid "Mortar"
+#~ msgstr "Mortier"
+
+#~ msgid ""
+#~ "Movement & selection:\n"
+#~ "Arrow Keys       : Change viewing RA/DE\n"
+#~ "Page Up/Down     : Zoom\n"
+#~ "CTRL+Up/Down     : Zoom\n"
+#~ "Left Click       : Select object\n"
+#~ "Right Click      : Unselect\n"
+#~ "CTRL+Left Click  : Unselect\n"
+#~ "\\                : Zoom out (planet + moons if applicable)\n"
+#~ "/                : Zoom to selected object\n"
+#~ "SPACE            : Center on selected object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Beweging en seleksie:\n"
+#~ "Pyltjiesleutels : Verander RK/DE\n"
+#~ "Page Up/Down : Zoem\n"
+#~ "Ctrl+Op/Af : Zoem\n"
+#~ "Linkskliek : Selekteer\n"
+#~ "Regskliek : Deselekteer\n"
+#~ "Ctrl+Linkskliek : Deselekteer\n"
+#~ "\\ : Zoem uit (planeet + mane indien van toepassing)\n"
+#~ "/ : Zoem na geselekteerde voorwerp\n"
+#~ "SPASIE : Sentreer op geselekteerde voorwerp\n"
+#~ "\n"
+
+#~ msgid "Musca"
+#~ msgstr "Musca"
+
+#~ msgid "Names of the Constellations [V]"
+#~ msgstr "Konstellasiename [V]"
+
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Seevaarder se Driehoek"
+
+#~ msgid "Nebulas Names. Up to mag :"
+#~ msgstr "Nebulaname. Tot orde:"
+
+#~ msgid "Neck"
+#~ msgstr "Nek"
+
+#~ msgid "Net"
+#~ msgstr "Net"
+
+#~ msgid "Night (red) mode"
+#~ msgstr "Nag (rooi) modus"
+
+#~ msgid "No"
+#~ msgstr "Nee"
+
+#~ msgid "Norma"
+#~ msgstr "Norma"
+
+#~ msgid "North River"
+#~ msgstr "Noordelike Rivier"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Noordelike Steelpan"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Object Search"
+#~ msgstr "Voorwerpsoek"
+
+#~ msgid "Octans"
+#~ msgstr "Octans"
+
+#~ msgid "Ophiuchus"
+#~ msgstr "Ophiuchus"
+
+#~ msgid "Orchard"
+#~ msgstr "Boord"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Buitenste Hek"
+
+#~ msgid "Ox"
+#~ msgstr "Os"
+
+#~ msgid "Pair of Stars"
+#~ msgstr "Sterre Paar"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Paleispoort"
+
+#~ msgid "Pavo"
+#~ msgstr "Pavo"
+
+#~ msgid "Pegasus"
+#~ msgstr "Pegasus"
+
+#~ msgid "Perseus"
+#~ msgstr "Perseus"
+
+#~ msgid "Pestle"
+#~ msgstr "Stamper"
+
+#~ msgid "Phoenix"
+#~ msgstr "Phoenix"
+
+#~ msgid "Pictor"
+#~ msgstr "Pictor"
+
+#~ msgid "Pisces"
+#~ msgstr "Pisces"
+
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Piscis Austrinus"
+
+#~ msgid "Planet: "
+#~ msgstr "Planeet: "
+
+#~ msgid "Point"
+#~ msgstr "Punt"
+
+#~ msgid "Prow"
+#~ msgstr "Voorstewe"
+
+#~ msgid "Puppis"
+#~ msgstr "Puppis"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Pers Paleis"
+
+#~ msgid "Pyxis"
+#~ msgstr "Pyxis"
+
+#~ msgid "Quit [CMD + Q]"
+#~ msgstr "Verlaat [Cmd+Q]"
+
+#~ msgid "Quit [CTRL + Q]"
+#~ msgstr "Verlaat [Ctrl+Q]"
+
+#, fuzzy
+#~ msgid "Rabbit Tracks"
+#~ msgstr "Haas Spore"
+
+#~ msgid "Race Track"
+#~ msgstr "Resiesbaan"
+
+#~ msgid "Ramparts"
+#~ msgstr "Skanse"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "Ware Tyd Spoed"
+
+#~ msgid "Recording commands to script file:\n"
+#~ msgstr "Opname van bevele na skriplêer:\n"
+
+#~ msgid "Rendering"
+#~ msgstr "Render"
+
+#~ msgid "Restart program for"
+#~ msgstr "Hervat program om"
+
+#~ msgid "Reticulum"
+#~ msgstr "Reticulum"
+
+#~ msgid "Return to Current Time"
+#~ msgstr "Terug na huidige tyd"
+
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Terug Na Huidige Tyd"
+
+#, fuzzy
+#~ msgid "Revolving Female"
+#~ msgstr "Draaiende Vrou"
+
+#, fuzzy
+#~ msgid "Revolving Male"
+#~ msgstr "Draaiende Man"
+
+#~ msgid "River Turtle"
+#~ msgstr "Rivier Skilpad"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Gerolde Tong"
+
+#~ msgid "Rooftop"
+#~ msgstr "Nok"
+
+#~ msgid "Room"
+#~ msgstr "Kamer"
+
+#~ msgid "Root"
+#~ msgstr "Wortel"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Slegte Kalbas"
+
+#~ msgid "Runners"
+#~ msgstr "Hardloper"
+
+#~ msgid "Sagitta"
+#~ msgstr "Sagitta"
+
+#~ msgid "Sagittarius"
+#~ msgstr "Sagittarius"
+
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Salamander"
+#~ msgstr "Salamander"
+
+#~ msgid "Save as default"
+#~ msgstr "Stoor as verstek"
+
+#, fuzzy
+#~ msgid "Saving settings will save current full screen status"
+#~ msgstr "Berê van die opstelling sal die huidige volskerm status stoor"
+
+#~ msgid "Scorpius"
+#~ msgstr "Scorpius"
+
+#~ msgid "Screen"
+#~ msgstr "Skerm"
+
+#~ msgid "Screen Resolution :"
+#~ msgstr "Skermresolusie :"
+
+#~ msgid "Script commander"
+#~ msgstr "Skripbeheer"
+
+#~ msgid "Sculptor"
+#~ msgstr "Beeldhouer"
+
+#~ msgid "Scutum"
+#~ msgstr "Scutum"
+
+#~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+#~ msgstr "Soek vir (bv. Saturnus, Polaris, HP6218, Orion, M31):"
+
+#~ msgid "Search for object [CTRL + F]"
+#~ msgstr "Soek voorwerp [CTRL +F]"
+
+#~ msgid "Seconds"
+#~ msgstr "Sekondes"
+
+#~ msgid "Selected Constellation Only"
+#~ msgstr "Slegs Gesellekteerde Sterrebeeld"
+
+#~ msgid "Selkis"
+#~ msgstr "Selkis"
+
+#~ msgid "Serpens"
+#~ msgstr "Serpens"
+
+#, fuzzy
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "Verstelling van die landskap opdateer die posisie "
+
+#, fuzzy
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "Verstelling van die landskap opdateer die posisie"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Sewe Majesteite"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Sewe Klein Dogters"
+
+#~ msgid "Sextans"
+#~ msgstr "Sextans"
+
+#~ msgid "Sheep"
+#~ msgstr "Skaap"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Skaapskooi"
+
+#~ msgid "Snake"
+#~ msgstr "Slang"
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Soldaatmark"
+
+#~ msgid "South River"
+#~ msgstr "Suidelike Rivier"
+
+#~ msgid "Spear"
+#~ msgstr "Spies"
+
+#~ msgid "Spring"
+#~ msgstr "Veer"
+
+#~ msgid "Square Granary"
+#~ msgstr "Vierkantige Koringskuur"
+
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "Sterorde Vermenigvuldiger : "
+
+#~ msgid "Star Names. Up to mag :"
+#~ msgstr "Sterrename. Tot orde:"
+
+#~ msgid "Star Twinkle. Amount :"
+#~ msgstr "Sterflikker. Hoeveelheid:"
+
+#~ msgid "Stars of Water"
+#~ msgstr "Sterre van Water"
+
+#~ msgid "Stomach"
+#~ msgstr "Maag"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Opperste Paleis"
+
+#~ msgid "Tail"
+#~ msgstr "Stert"
+
+#~ msgid "Taurus"
+#~ msgstr "Taurus"
+
+#~ msgid "Telescopium"
+#~ msgstr "Telescopium"
+
+#~ msgid "The Asar Battlefield"
+#~ msgstr "Die Asar Slagveld"
+
+#~ msgid "The Fishermen"
+#~ msgstr "Die Hengelaars"
+
+#~ msgid "The Seven"
+#~ msgstr "Die Sewe"
+
+#~ msgid "Three Steps"
+#~ msgstr "Drie Stappe"
+
+#~ msgid "Thunder and Lightning"
+#~ msgstr "Donder en Weerlig"
+
+#, fuzzy
+#~ msgid "Thunderbird"
+#~ msgstr "Stormvoël"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Weerligstraal"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -111,2109 +2433,166 @@ msgstr ""
 #~ "[ : 7 dae terug ] : 7 dae voorentoe\n"
 #~ "\n"
 
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Orde Grootte Vermenigvuldiger : "
-
-#~ msgid "Star Magnitude Multiplier: "
-#~ msgstr "Sterorde Vermenigvuldiger : "
-
-#~ msgid " (Variable)"
-#~ msgstr " (Veranderlike)"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Besig om Hipparcos katalogus te laai:"
-
-#~ msgid "Meteor Rate per minute"
-#~ msgstr "Aantal meteore per minuut"
-
-#: src/ConstellationMgr.cpp:334
-msgid "Loading Constellation Art: "
-msgstr "Besig om Konstellasie Kuns te laai: "
-
-#: src/StarMgr.cpp:448
-msgid "Loading catalog "
-msgstr "Laai katalogus "
-
-#: src/Nebula.cpp:97 src/Nebula.cpp:122 src/Planet.cpp:113 src/Planet.cpp:162
-#: src/StarWrapper.cpp:45 src/StarWrapper.cpp:67 src/StarWrapper.cpp:112
-#: src/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "Omvang: "
-
-#: src/Nebula.cpp:99 src/Planet.cpp:117 src/StarWrapper.cpp:46
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:113 src/StarWrapper.cpp:116
-#: src/Telescope.cpp:238 src/Telescope.cpp:240
-msgid "RA/DE: "
-msgstr "RK/DE: "
-
-#: src/Nebula.cpp:105 src/Planet.cpp:124 src/StarWrapper.cpp:56
-#: src/StarWrapper.cpp:125
-msgid "Az/Alt: "
-msgstr "As/Hgte: "
-
-#: src/Nebula.cpp:107
-msgid "Type: "
-msgstr "Tipe: "
-
-#: src/Nebula.cpp:109
-msgid "Size: "
-msgstr "Grootte: "
-
-#: src/NebulaMgr.cpp:399
-msgid "Loading NGC catalog: "
-msgstr "Besig om NGC katalogus te laai: "
-
-#: src/NebulaMgr.cpp:534
-msgid "Loading Nebula Textures:"
-msgstr "Besig om Nebulateksture te laai"
-
-#: src/Planet.cpp:127 src/Planet.cpp:166 src/StarWrapper.cpp:132
-#: src/StarWrapper.cpp:174
-msgid "Distance: "
-msgstr "Afstand: "
-
-#: src/Planet.cpp:127 src/Planet.cpp:166
-msgid "AU"
-msgstr "AE"
-
-#: src/stel_ui.cpp:560 src/stel_ui.cpp:703
-msgid "Script commander"
-msgstr "Skripbeheer"
-
-#: src/stel_ui.cpp:588
-msgid "Invalid Script command"
-msgstr "Ongeldige Skripopdrag"
-
-#: src/stel_ui.cpp:668
-msgid "Drawing of the Constellations [C]"
-msgstr "Konstellasie Tekeninge"
-
-#: src/stel_ui.cpp:670
-msgid "Names of the Constellations [V]"
-msgstr "Konstellasiename [V]"
-
-#: src/stel_ui.cpp:672
-msgid "Constellations Art [R]"
-msgstr "Konstellasiekuns [R]"
-
-#: src/stel_ui.cpp:674
-msgid "Azimuthal Grid [Z]"
-msgstr "Asimutale Rooster [Z]"
-
-#: src/stel_ui.cpp:676
-msgid "Equatorial Grid [E]"
-msgstr "Ekwatoriale Rooster [E]"
-
-#: src/stel_ui.cpp:678
-msgid "Ground [G]"
-msgstr "Grond [G]"
-
-#: src/stel_ui.cpp:680
-msgid "Cardinal Points [Q]"
-msgstr "Kardinale Punte [Q]"
-
-#: src/stel_ui.cpp:682
-msgid "Atmosphere [A]"
-msgstr "Atmosfeer [A]"
-
-#: src/stel_ui.cpp:684
-msgid "Nebulas [N]"
-msgstr "Nebulas [N]"
-
-#: src/stel_ui.cpp:686
-msgid "Help [H]"
-msgstr "Help [H]"
-
-#: src/stel_ui.cpp:688
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Ekwatoriale/Asimuntale Stelling [ENTER]"
-
-#: src/stel_ui.cpp:690
-msgid "Configuration window [1]"
-msgstr "Konfigurasie venster"
-
-#: src/stel_ui.cpp:693
-msgid "Night (red) mode"
-msgstr "Nag (rooi) modus"
-
-#: src/stel_ui.cpp:696
-msgid "Quit [CTRL + Q]"
-msgstr "Verlaat [Ctrl+Q]"
-
-#: src/stel_ui.cpp:698
-msgid "Quit [CMD + Q]"
-msgstr "Verlaat [Cmd+Q]"
-
-#: src/stel_ui.cpp:701
-msgid "Search for object [CTRL + F]"
-msgstr ""
-
-#: src/stel_ui.cpp:705
-msgid "Goto selected object [SPACE]"
-msgstr "Gaan na gesellekteerde voorwerp [Spasie]"
-
-#: src/stel_ui.cpp:707
-msgid "Flip horizontally [CTRL + SHIFT + H]"
-msgstr "Draai horisontaal [CTRL + SHIFT + H]"
-
-#: src/stel_ui.cpp:709
-msgid "Flip vertically [CTRL + SHIFT + V]"
-msgstr "Draai vertikaal [CTRL + SHIFT + V]"
-
-#: src/stel_ui.cpp:715
-msgid "Decrease Time Speed [J]"
-msgstr "Verminder Tyd Spoed [J]"
-
-#: src/stel_ui.cpp:717
-msgid "Real Time Speed [K]"
-msgstr "Ware Tyd Spoed"
-
-#: src/stel_ui.cpp:719
-msgid "Increase Time Speed [L]"
-msgstr "Versnel Tyd Spoed"
-
-#: src/stel_ui.cpp:721
-msgid "Return to Current Time [8]"
-msgstr "Terug Na Huidige Tyd"
-
-#: src/stel_ui.cpp:730
-msgid ""
-"   Please check for newer versions and send bug reports\n"
-"    and comments to us at: http://www.stellarium.org\n"
-"\n"
-msgstr ""
-"   Soek vir nuwe weergawes en stuur foutverslae\n"
-"    en kommentaar by: http://www.stellarium.org\n"
-"\n"
-
-#: src/stel_ui.cpp:749
-msgid "Information"
-msgstr "Inligting"
-
-#: src/stel_ui.cpp:761
-msgid ""
-"Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
-"\n"
-msgstr ""
-"Beweging en seleksie:\n"
-"Pyltjiesleutels : Verander RK/DE\n"
-"Page Up/Down : Zoem\n"
-"Ctrl+Op/Af : Zoem\n"
-"Linkskliek : Selekteer\n"
-"Regskliek : Deselekteer\n"
-"Ctrl+Linkskliek : Deselekteer\n"
-"\\ : Zoem uit (planeet + mane indien van toepassing)\n"
-"/ : Zoem na geselekteerde voorwerp\n"
-"SPASIE : Sentreer op geselekteerde voorwerp\n"
-"\n"
-
-#: src/stel_ui.cpp:772
 #, fuzzy
-msgid ""
-"Display options:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen / window.\n"
-"C   : Constellation lines       V   : Constellation labels\n"
-"R   : Constellation art         E   : Equatorial grid\n"
-"Z   : Azimuthal grid            N   : Nebula labels\n"
-"P   : Planet labels             G   : Ground\n"
-"A   : Atmosphere                F   : Fog\n"
-"Q   : Cardinal points           O   : Toggle moon scaling\n"
-"T   : Object tracking           S   : Stars\n"
-"4 , : Ecliptic line             5 . : Equator line\n"
-"\n"
-msgstr ""
-"Vertoon opsies\n"
-"ENTER: Ekwatoriale/altazimutale montering\n"
-"F1 : Skakel volskerm / venster.\n"
-"C : Konstellasie lyne V : Konstellasie byskrifte\n"
-"R : Konstellasie kuns E : Ekwatoriale ruit\n"
-"Z : Azimutale ruit N : Nebula labels\n"
-"P : Planetêre byskrifte G : Grond\n"
-"A : Atmosfeer F : Mis\n"
-"Q : Kardinale punte O : Skakel maan skaal\n"
-"T : Voorwerp volg S : Sterre\n"
-"4 , : Ekliptiese lyn 5 . : Ekwatoriale lyn\n"
-"\n"
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Tyd & Datum\n"
+#~ "6 : Tydstempo wag 7 : Tydstempo 0\n"
+#~ "8 : Stel huidige tyd J : Verminder tydstempo\n"
+#~ "K : Normale tydstempo L : Vermeerder tydstempo\n"
+#~ "- en = : Terug en vorentoe een dag (druk ALT vir sidereale dae)\n"
+#~ "[ en ] : Terug en vorentoe 7 dae (druk ALT vir sidereale dae)\n"
+#~ "CTRL + - : Terug een uur CTRL + = : vorentoe een uur\n"
+#~ "\n"
 
-#: src/stel_ui.cpp:784
+#~ msgid "Time Zone :"
+#~ msgstr "Tydzone:"
+
+#~ msgid "Time speed : "
+#~ msgstr "Tydspoed: "
+
+#~ msgid "Toilet"
+#~ msgstr "Toilet"
+
+#~ msgid "Triangle"
+#~ msgstr "Driehoek"
+
+#~ msgid "Triangulum"
+#~ msgstr "Triangulum"
+
+#~ msgid "Triangulum Australe"
+#~ msgstr "Triangulum Australe"
+
+#~ msgid "Tripod"
+#~ msgstr "Driepoot"
+
+#~ msgid "Try `%s --help' for more information.\n"
+#~ msgstr "Probeer `%s --help' vir meer inligting.\n"
+
+#~ msgid "Tucana"
+#~ msgstr "Tucana"
+
+#~ msgid "Turtle"
+#~ msgstr "Skilpad"
+
+#~ msgid "Two Jaws"
+#~ msgstr "Twee Kake"
+
 #, fuzzy
-msgid ""
-"Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"CTRL + G : Goto selected solar system object\n"
-"\n"
-msgstr ""
-"Dialoog en ander kontroles:\n"
-"H : Help I : Oor Stellarium\n"
-"M : Teks menu 1 (een) : Konfigurasie\n"
-"CTRL + S : Neem 'n skermbeeld\n"
-"CTRL + R : Skakel skrif opname\n"
-"CTRL + F : Skakel voorwerp vinder\n"
-"CTRL + G : Gaan na geselekteerde sonnestelsel voorwerp\n"
-"\n"
+#~ msgid "Two Placed Far Apart"
+#~ msgstr "Twee Plekke Ver Uitmekaar"
 
-#: src/stel_ui.cpp:792
+#~ msgid "Two Poles"
+#~ msgstr "Twee Pale"
+
+#~ msgid "Two Sunbeams"
+#~ msgstr "Twee Sonstrale"
+
 #, fuzzy
-msgid ""
-"Time & Date:\n"
-"6   : Time rate pause           7   : Time rate 0\n"
-"8   : Set current time          J   : Decrease time rate\n"
-"K   : Normal time rate          L   : Increase time rate\n"
-"- and = :  Back and forward one day (press ALT for sidereal day)\n"
-"[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
-"CTRL + - : Back one hour        CTRL + = : forward one hour\n"
-"\n"
-msgstr ""
-"Tyd & Datum\n"
-"6 : Tydstempo wag 7 : Tydstempo 0\n"
-"8 : Stel huidige tyd J : Verminder tydstempo\n"
-"K : Normale tydstempo L : Vermeerder tydstempo\n"
-"- en = : Terug en vorentoe een dag (druk ALT vir sidereale dae)\n"
-"[ en ] : Terug en vorentoe 7 dae (druk ALT vir sidereale dae)\n"
-"CTRL + - : Terug een uur CTRL + = : vorentoe een uur\n"
-"\n"
+#~ msgid "Two in Front"
+#~ msgstr "Voorste Twee"
 
-#: src/stel_ui.cpp:800
-msgid ""
-"During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
-msgstr ""
-"Tydens skripspeling:\n"
-"Ctrl+C : Beëindig skrip\n"
-"6 : Skrip pouse K : Hervat skrip\n"
-"\n"
+#~ msgid "Type: "
+#~ msgstr "Tipe: "
 
-#: src/stel_ui.cpp:804
+#~ msgid "Ursa Major"
+#~ msgstr "Ursa Major"
+
+#~ msgid "Ursa Minor"
+#~ msgstr "Ursa Minor"
+
+#~ msgid ""
+#~ "Usage: %s [OPTION] ...\n"
+#~ " -v, --version          Output version information and exit.\n"
+#~ " -h, --help             Display this help and exit.\n"
+#~ msgstr ""
+#~ "Gebruik: %s [OPSIE] ...\n"
+#~ " -v, --version Vertoon weergawe inligting en stop.\n"
+#~ " -h, --help Vertoon hierdie help en stop.\n"
+
+#~ msgid ""
+#~ "Use key J and L to decrease and increase\n"
+#~ "   time speed.\n"
+#~ "Use key K to return to real time speed."
+#~ msgstr ""
+#~ "Gebruik J en L sleutels om tyd te versnel\n"
+#~ "   of te vertraag.\n"
+#~ "Gebruik die K sleutel om na normale spoed terug te keer."
+
+#~ msgid "Using System Default Time Zone"
+#~ msgstr "Gebruik Stelsel Verstek Tydzone"
+
+#~ msgid "Vela"
+#~ msgstr "Vela"
+
 #, fuzzy
-msgid ""
-"Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"
-msgstr ""
-"Allerlei:\n"
-"9: Wissel meteoor stort koers\n"
-"CTRL + 0,..,9 : Voer GOTO opdrag uit vir teleskope 0,..,9\n"
-"CTRL + SHIFT + H: Wissel beeld draai horisontaal\n"
-"CTRL + SHIFT + V: Wissel beeld draai vertikaal\n"
+#~ msgid "Viewport Distorter"
+#~ msgstr "Oogpoort verdraaier"
 
-#: src/stel_ui.cpp:810
-msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Verlaat\n"
+#~ msgid "Virgo"
+#~ msgstr "Virgo"
 
-#: src/stel_ui.cpp:812
-msgid "CMD + Q : Quit\n"
-msgstr "CMD + Q : Verlaat\n"
+#~ msgid "Voice of Joy"
+#~ msgstr "Stem van Vreugde"
 
-#: src/stel_ui.cpp:819
-msgid "Help"
-msgstr "Hulp"
+#~ msgid "Volans"
+#~ msgstr "Volans"
 
-#: src/stel_ui.cpp:1033
-msgid "Command recording stopped."
-msgstr "Bevelopname gestop."
+#~ msgid "Vulpecula"
+#~ msgstr "Vulpecula"
 
-#: src/stel_ui.cpp:1041
-msgid "Recording commands to script file:\n"
-msgstr "Opname van bevele na skriplêer:\n"
+#~ msgid "Wall"
+#~ msgstr "Muur"
 
-#: src/stel_ui.cpp:1043
-msgid "Hit CTRL-R again to stop.\n"
-msgstr "Druk weer Ctrl-R om te stop.\n"
+#~ msgid "Waty Bekety"
+#~ msgstr "Waty Bekety"
 
-#: src/stel_ui.cpp:1047
-msgid "Error: Unable to open script file to record commands."
-msgstr "Fout: Kan nie skriplêer oopmaak nie."
+#~ msgid "Weaving Girl"
+#~ msgstr "Weefster"
 
-#: src/stel_ui_conf.cpp:57
-msgid "Configuration"
-msgstr "Opstelling"
+#~ msgid "Well"
+#~ msgstr "Put"
 
-#: src/stel_ui_conf.cpp:77
-msgid "Stars"
-msgstr "Sterre"
+#~ msgid "Western Door"
+#~ msgstr "Westerlike Deur"
 
-#: src/stel_ui_conf.cpp:82
-msgid "Star Names. Up to mag :"
-msgstr "Sterrename. Tot orde:"
+#~ msgid "Willow"
+#~ msgstr "Wilg"
 
-#: src/stel_ui_conf.cpp:94
-msgid "Star Twinkle. Amount :"
-msgstr "Sterflikker. Hoeveelheid:"
+#~ msgid "Wings"
+#~ msgstr "Vlerke"
 
-#: src/stel_ui_conf.cpp:110
-msgid "Constellations Lines"
-msgstr "Sterrebeeldlyne"
+#~ msgid "Winnowing Basket"
+#~ msgstr "Sifmandjie"
 
-#: src/stel_ui_conf.cpp:115
-msgid "Constellations Names"
-msgstr "Sterrebeeldname"
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Wolf se bek"
 
-#: src/stel_ui_conf.cpp:120
-msgid "Constellations Boundaries"
-msgstr "Sterrebeeldgrense"
+#~ msgid "Woman's Bed"
+#~ msgstr "Vrou se Bed"
 
-#: src/stel_ui_conf.cpp:125
-msgid "Selected Constellation Only"
-msgstr "Slegs Gesellekteerde Sterrebeeld"
+#~ msgid "Woman's Cart"
+#~ msgstr "Vrou se wa"
 
-#: src/stel_ui_conf.cpp:136
-msgid "Nebulas Names. Up to mag :"
-msgstr "Nebulaname. Tot orde:"
+#~ msgid "Xuanyuan"
+#~ msgstr "Xyanyuan"
 
-#: src/stel_ui_conf.cpp:149
-msgid "Also display Nebulas without textures"
-msgstr "Vertoon Nebulas sonder teksture"
+#~ msgid "Year"
+#~ msgstr "Jaar"
 
-#: src/stel_ui_conf.cpp:160
-msgid "Planets"
-msgstr "Planete"
+#~ msgid "Yes"
+#~ msgstr "Ja"
 
-#: src/stel_ui_conf.cpp:165
-msgid "Moon Scale"
-msgstr "Maanskaal"
+#~ msgid "Zaofu"
+#~ msgstr "Zaofu"
 
-#: src/stel_ui_conf.cpp:172
-msgid "Planets Hints"
-msgstr "Planeetwenke"
-
-#: src/stel_ui_conf.cpp:184 src/stel_ui_tuiconf.cpp:434
-msgid "Equatorial Grid"
-msgstr "Ekwatoriale Rooster"
-
-#: src/stel_ui_conf.cpp:189 src/stel_ui_tuiconf.cpp:433
-msgid "Azimuthal Grid"
-msgstr "Asimutale Rooster"
-
-#: src/stel_ui_conf.cpp:194 src/stel_ui_tuiconf.cpp:435
-msgid "Equator Line"
-msgstr "Ekwatoriale Lyn"
-
-#: src/stel_ui_conf.cpp:199 src/stel_ui_tuiconf.cpp:436
-msgid "Ecliptic Line"
-msgstr "Ekliptiese Lyn"
-
-#: src/stel_ui_conf.cpp:210
-msgid "Ground"
-msgstr "Grond"
-
-#: src/stel_ui_conf.cpp:215 src/stel_ui_tuiconf.cpp:428
-msgid "Cardinal Points"
-msgstr "Kompaspunte"
-
-#: src/stel_ui_conf.cpp:220
-msgid "Atmosphere"
-msgstr "Atmosfeer"
-
-#: src/stel_ui_conf.cpp:225
-msgid "Fog"
-msgstr "Mis"
-
-#: src/stel_ui_conf.cpp:255 src/stel_ui_conf.cpp:441 src/stel_ui_conf.cpp:492
-#: src/stel_ui_conf.cpp:550
-msgid "Save as default"
-msgstr "Stoor as verstek"
-
-#: src/stel_ui_conf.cpp:267
-msgid "Current Time :"
-msgstr "Huidige Tyd:"
-
-#: src/stel_ui_conf.cpp:276
-msgid "Time Zone :"
-msgstr "Tydzone:"
-
-#: src/stel_ui_conf.cpp:280
-msgid "Using System Default Time Zone"
-msgstr "Gebruik Stelsel Verstek Tydzone"
-
-#: src/stel_ui_conf.cpp:289
-msgid "Time speed : "
-msgstr "Tydspoed: "
-
-#: src/stel_ui_conf.cpp:297
-msgid ""
-"Use key J and L to decrease and increase\n"
-"   time speed.\n"
-"Use key K to return to real time speed."
-msgstr ""
-"Gebruik J en L sleutels om tyd te versnel\n"
-"   of te vertraag.\n"
-"Gebruik die K sleutel om na normale spoed terug te keer."
-
-#: src/stel_ui_conf.cpp:318
-msgid "Cursor : "
-msgstr "Wyser : "
-
-#: src/stel_ui_conf.cpp:323
-msgid "Selected : "
-msgstr "Seleksie : "
-
-#: src/stel_ui_conf.cpp:328
-msgid "Longitude : "
-msgstr "Lengtegraad: "
-
-#: src/stel_ui_conf.cpp:336
-msgid "Latitude : "
-msgstr "Breedtegraad : "
-
-#: src/stel_ui_conf.cpp:344
-msgid "Altitude : "
-msgstr "Hoogte (m) : "
-
-#: src/stel_ui_conf.cpp:350
-msgid "m"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:353
-msgid "Save location"
-msgstr "Stoor ligging"
-
-#: src/stel_ui_conf.cpp:376
-msgid "Projection :"
-msgstr "Projeksie :"
-
-#: src/stel_ui_conf.cpp:395
-msgid "Disk Viewport"
-msgstr "Skyfvormige venster."
-
-#: src/stel_ui_conf.cpp:400
-msgid "Viewport Distorter"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:405
-msgid "Saving settings will save current full screen status"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:415
-msgid "Screen Resolution :"
-msgstr "Skermresolusie :"
-
-#: src/stel_ui_conf.cpp:419
-msgid "Restart program for"
-msgstr "Hervat program om"
-
-#: src/stel_ui_conf.cpp:420
-msgid "change to apply."
-msgstr "veranderings om toe te pas."
-
-#: src/stel_ui_conf.cpp:434
-msgid "For unlisted screen resolution, edit the file :"
-msgstr "Vir 'n skermresolusie wat nie in die lys is nie, verander die lêer :"
-
-#: src/stel_ui_conf.cpp:451
-msgid "Choose landscapes:"
-msgstr "Kies landskappe :"
-
-#: src/stel_ui_conf.cpp:466 src/stel_ui_conf.cpp:1023
-msgid "Author: "
-msgstr "Outeur : "
-
-#: src/stel_ui_conf.cpp:471 src/stel_ui_conf.cpp:1025
-msgid "Planet: "
-msgstr "Planeet: "
-
-#: src/stel_ui_conf.cpp:476 src/stel_ui_conf.cpp:1026
-msgid "Location: "
-msgstr "Ligging: "
-
-#: src/stel_ui_conf.cpp:481
-msgid "Setting landscape updates the location"
-msgstr ""
-
-#: src/stel_ui_conf.cpp:502
-msgid "Program Language: "
-msgstr "Programtaal : "
-
-#: src/stel_ui_conf.cpp:518 src/stel_ui_tuiconf.cpp:414
-msgid "Sky Language: "
-msgstr "Hemeltaal : "
-
-#: src/stel_ui_conf.cpp:536 src/stel_ui_tuiconf.cpp:410
-msgid "Sky Culture: "
-msgstr "Hemelkultuur : "
-
-#: src/stel_ui_conf.cpp:557
-msgid "Language"
-msgstr "Taal"
-
-#: src/stel_ui_conf.cpp:558
-msgid "Date & Time"
-msgstr "Datum & Tyd"
-
-#: src/stel_ui_conf.cpp:559
-msgid "Location"
-msgstr "Ligging"
-
-#: src/stel_ui_conf.cpp:560
-msgid "Landscapes"
-msgstr "Landskappe"
-
-#: src/stel_ui_conf.cpp:561
-msgid "Video"
-msgstr "Video"
-
-#: src/stel_ui_conf.cpp:562
-msgid "Rendering"
-msgstr "Render"
-
-#: src/stel_ui_conf.cpp:708
-msgid "Object Search"
-msgstr "Voorwerpsoek"
-
-#: src/stel_ui_conf.cpp:715
-msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Soek vir (bv. Saturnus, Polaris, HP6218, Orion, M31):"
-
-#: src/stel_ui_conf.cpp:733
-msgid "GO"
-msgstr "Begin"
-
-#: src/stel_ui_conf.cpp:880
-msgid "Enter observatory name"
-msgstr "Tik observatoriumnaam in"
-
-#: src/stel_ui_conf.cpp:1024
-msgid "Info: "
-msgstr "Inligting : "
-
-#: src/stel_ui_conf.cpp:1090
-msgid ": Normal rate"
-msgstr ": Normale spoed"
-
-#: src/stel_ui_conf.cpp:1097
-msgid ": Standard Perseids rate"
-msgstr ": Standaard Perseids aantal"
-
-#: src/stel_ui_conf.cpp:1104
-msgid ": Exceptional Leonid rate"
-msgstr ": Buitengewone Leonid aantal"
-
-#: src/stel_ui_conf.cpp:1111
-msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Hoogste aantal ooit (1966 Leonids)"
-
-#: src/stel_ui_conf.cpp:1116
-#, fuzzy
-msgid "Meteor zenith hourly rate"
-msgstr "Uurlikse meteoor piek tempo"
-
-#: src/stel_ui_conf.cpp:1142
-msgid "Current Time Speed is x"
-msgstr "Huidige Tydsnelheid is x"
-
-#: src/stel_ui_tuiconf.cpp:377
-msgid "Set Location "
-msgstr "Kies ligging "
-
-#: src/stel_ui_tuiconf.cpp:378
-msgid "Set Time "
-msgstr "Kies Tyd "
-
-#: src/stel_ui_tuiconf.cpp:379
-msgid "General "
-msgstr "Algemeen "
-
-#: src/stel_ui_tuiconf.cpp:380
-msgid "Stars "
-msgstr "Sterre "
-
-#: src/stel_ui_tuiconf.cpp:381
-msgid "Colors "
-msgstr "Kleure "
-
-#: src/stel_ui_tuiconf.cpp:382
-msgid "Effects "
-msgstr "Effekte "
-
-#: src/stel_ui_tuiconf.cpp:383
-msgid "Scripts "
-msgstr "Skrip "
-
-#: src/stel_ui_tuiconf.cpp:384
-msgid "Administration "
-msgstr "Administrasie "
-
-#: src/stel_ui_tuiconf.cpp:387
-msgid "Latitude: "
-msgstr "Breedtegraad : "
-
-#: src/stel_ui_tuiconf.cpp:388
-msgid "Longitude: "
-msgstr "Lengtegraad : "
-
-#: src/stel_ui_tuiconf.cpp:389
-msgid "Altitude (m): "
-msgstr "Hoogte (m) : "
-
-#: src/stel_ui_tuiconf.cpp:390
-msgid "Solar System Body: "
-msgstr "Sonnestelsel Liggaam : "
-
-#: src/stel_ui_tuiconf.cpp:395
-msgid "Sky Time: "
-msgstr "Hemeltyd : "
-
-#: src/stel_ui_tuiconf.cpp:396
-msgid "Set Time Zone: "
-msgstr "Verander Tydzone : "
-
-#: src/stel_ui_tuiconf.cpp:397
-msgid "Day keys: "
-msgstr "Dag sleutels: "
-
-#: src/stel_ui_tuiconf.cpp:398
-msgid "Calendar"
-msgstr "Kalender"
-
-#: src/stel_ui_tuiconf.cpp:399
-#, fuzzy
-msgid "Sidereal"
-msgstr "Sidereale"
-
-#: src/stel_ui_tuiconf.cpp:400
-msgid "Preset Sky Time: "
-msgstr "Vooraf Vasgestelde Hemeltyd : "
-
-#: src/stel_ui_tuiconf.cpp:401
-msgid "Sky Time At Start-up: "
-msgstr "Aanvang Hemeltyd : "
-
-#: src/stel_ui_tuiconf.cpp:402
-msgid "Actual Time"
-msgstr "Werklike Tyd"
-
-#: src/stel_ui_tuiconf.cpp:403
-msgid "Preset Time"
-msgstr "Voorafgestelde Tyd"
-
-#: src/stel_ui_tuiconf.cpp:404
-msgid "Time Display Format: "
-msgstr "Tydnotasie : "
-
-#: src/stel_ui_tuiconf.cpp:405
-msgid "Date Display Format: "
-msgstr "Datumnotasie : "
-
-#: src/stel_ui_tuiconf.cpp:417
-msgid "Show: "
-msgstr "Wys : "
-
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2239
-msgid "Yes"
-msgstr "Ja"
-
-#: src/stel_ui_tuiconf.cpp:417 src/stel_ui_tuiconf.cpp:444
-#: src/stel_ui_tuiconf.cpp:451 src/s_gui.cpp:2220
-msgid "No"
-msgstr "Nee"
-
-#: src/stel_ui_tuiconf.cpp:418
-msgid "Star Value Multiplier: "
-msgstr "Sterwaarde versterker "
-
-#: src/stel_ui_tuiconf.cpp:419
-msgid "Maximum Magnitude to Label: "
-msgstr "Maksimum Orde om te benoem : "
-
-#: src/stel_ui_tuiconf.cpp:420
-msgid "Twinkling: "
-msgstr "Flikker : "
-
-#: src/stel_ui_tuiconf.cpp:424
-msgid "Constellation Lines"
-msgstr "Sterrebeeldlyne"
-
-#: src/stel_ui_tuiconf.cpp:425
-msgid "Constellation Names"
-msgstr "Sterrebeeldname"
-
-#: src/stel_ui_tuiconf.cpp:426
-msgid "Constellation Art Intensity"
-msgstr "Sterrebeeldkuns Intensiteit"
-
-#: src/stel_ui_tuiconf.cpp:427
-msgid "Constellation Boundaries"
-msgstr "Sterrebeeldgrense"
-
-#: src/stel_ui_tuiconf.cpp:429
-msgid "Planet Names"
-msgstr "Planeetname"
-
-#: src/stel_ui_tuiconf.cpp:430
-msgid "Planet Orbits"
-msgstr "Planeet Wentelbane"
-
-#: src/stel_ui_tuiconf.cpp:431
-msgid "Planet Trails"
-msgstr "Planeet Spore"
-
-#: src/stel_ui_tuiconf.cpp:432
-msgid "Meridian Line"
-msgstr "Meridiaanlyn"
-
-#: src/stel_ui_tuiconf.cpp:437
-msgid "Nebula Names"
-msgstr "Nebulaname"
-
-#: src/stel_ui_tuiconf.cpp:438
-msgid "Nebula Circles"
-msgstr "Nebula Sirkels"
-
-#: src/stel_ui_tuiconf.cpp:442
-#, fuzzy
-msgid "Light Pollution Luminance: "
-msgstr "Lig besoedeling beligting "
-
-#: src/stel_ui_tuiconf.cpp:443
-msgid "Landscape: "
-msgstr "Landskap : "
-
-#: src/stel_ui_tuiconf.cpp:444
-msgid "Manual zoom: "
-msgstr "Handmatige zoem : "
-
-#: src/stel_ui_tuiconf.cpp:445
-msgid "Object Sizing Rule: "
-msgstr "Voorwerpgrootte Reël : "
-
-#: src/stel_ui_tuiconf.cpp:445
-msgid "Point"
-msgstr "Punt"
-
-#: src/stel_ui_tuiconf.cpp:445
-msgid "Magnitude"
-msgstr "Orde"
-
-#: src/stel_ui_tuiconf.cpp:446
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Skaal grootte vermenigvuldiger: "
-
-#: src/stel_ui_tuiconf.cpp:447
-msgid "Milky Way intensity: "
-msgstr "Melkweg intensiteit : "
-
-#: src/stel_ui_tuiconf.cpp:448
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maksimum Nebula Orde om te benoem : "
-
-#: src/stel_ui_tuiconf.cpp:449
-msgid "Zoom Duration: "
-msgstr "Zoem Tydsduur : "
-
-#: src/stel_ui_tuiconf.cpp:450
-msgid "Cursor Timeout: "
-msgstr "Wyser Tydsduur : "
-
-#: src/stel_ui_tuiconf.cpp:451
-msgid "Setting Landscape Sets Location: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:454
-msgid "Local Script: "
-msgstr "Lokale Skrip : "
-
-#: src/stel_ui_tuiconf.cpp:457
-msgid "CD/DVD Script: "
-msgstr "CD/DVD Skrip : "
-
-#: src/stel_ui_tuiconf.cpp:461
-msgid "Load Default Configuration: "
-msgstr "Laai Verstek Instellings : "
-
-#: src/stel_ui_tuiconf.cpp:462
-msgid "Save Current Configuration as Default: "
-msgstr "Stoor Huidige Instellings as Verstek : "
-
-#: src/stel_ui_tuiconf.cpp:463
-msgid "Shut Down: "
-msgstr "Skakel af: "
-
-#: src/stel_ui_tuiconf.cpp:464
-msgid "Update me via Internet: "
-msgstr "Opdateer via die Internet : "
-
-#: src/stel_ui_tuiconf.cpp:465
-msgid "Set UI Locale: "
-msgstr "Kies Verbruikersvlak Lokaal: "
-
-#: src/stel_ui_tuiconf.cpp:637
-msgid "Arrow down to load list."
-msgstr "Afpyltjie om die lys te laai."
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Son"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Mercurius"
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venus"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Aarde"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Maan"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Mars"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Phobos"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jupiter"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Europa"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymedes"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Callisto"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Saturnus"
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptunus"
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uranus"
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Pluto"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Charon"
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Bekyk Sonnestelsel"
-
-#: src/translations.h:63 src/s_gui.cpp:2685
-msgid "N"
-msgstr "N"
-
-#: src/translations.h:64 src/s_gui.cpp:2686
-msgid "S"
-msgstr "S"
-
-#: src/translations.h:65 src/s_gui.cpp:2690
-msgid "E"
-msgstr "O"
-
-#: src/translations.h:66 src/s_gui.cpp:2691
-msgid "W"
-msgstr "W"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "Sjinees"
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "Egipties"
-
-#: src/translations.h:71
-#, fuzzy
-msgid "Inuit"
-msgstr "Inuit"
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr "Koreaans"
-
-#: src/translations.h:73
-#, fuzzy
-msgid "Lakota"
-msgstr "Lakota"
-
-#: src/translations.h:74
-#, fuzzy
-msgid "Navajo"
-msgstr "Navajo"
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr "Noors"
-
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "Polynesies"
-
-#: src/translations.h:77
-msgid "Western"
-msgstr "Westers"
-
-#: src/translations.h:80
-msgid "Aquila"
-msgstr "Aquila"
-
-#: src/translations.h:81
-msgid "Andromeda"
-msgstr "Andromeda"
-
-#: src/translations.h:82
-msgid "Sculptor"
-msgstr "Beeldhouer"
-
-#: src/translations.h:83
-msgid "Ara"
-msgstr "Ara"
-
-#: src/translations.h:84
-msgid "Libra"
-msgstr "Libra"
-
-#: src/translations.h:85
-msgid "Cetus"
-msgstr "Cetus"
-
-#: src/translations.h:86
-msgid "Aries"
-msgstr "Aries"
-
-#: src/translations.h:87 src/translations.h:157
-msgid "Scutum"
-msgstr "Scutum"
-
-#: src/translations.h:88
-msgid "Pyxis"
-msgstr "Pyxis"
-
-#: src/translations.h:89
-msgid "Bootes"
-msgstr "Bootes"
-
-#: src/translations.h:90
-msgid "Caelum"
-msgstr "Caelum"
-
-#: src/translations.h:91
-msgid "Chamaeleon"
-msgstr "Chamaeleon"
-
-#: src/translations.h:92
-msgid "Cancer"
-msgstr "Cancer"
-
-#: src/translations.h:93
-msgid "Capricornus"
-msgstr "Capricornus"
-
-#: src/translations.h:94
-msgid "Carina"
-msgstr "Carina"
-
-#: src/translations.h:95
-msgid "Cassiopeia"
-msgstr "Cassiopeia"
-
-#: src/translations.h:96
-msgid "Centaurus"
-msgstr "Centaurus"
-
-#: src/translations.h:97
-msgid "Cepheus"
-msgstr "Cepheus"
-
-#: src/translations.h:98
-msgid "Coma Berenices"
-msgstr "Coma Berenices"
-
-#: src/translations.h:99
-msgid "Canes Venatici"
-msgstr "Canes Venatici"
-
-#: src/translations.h:100
-msgid "Auriga"
-msgstr "Auriga"
-
-#: src/translations.h:101
-msgid "Columba"
-msgstr "Columba"
-
-#: src/translations.h:102
-msgid "Circinus"
-msgstr "Circinus"
-
-#: src/translations.h:103
-msgid "Crater"
-msgstr "Crater"
-
-#: src/translations.h:104
-msgid "Corona Australis"
-msgstr "Corona Australis"
-
-#: src/translations.h:105
-msgid "Corona Borealis"
-msgstr "Corona Borealis"
-
-#: src/translations.h:106
-msgid "Corvus"
-msgstr "Corvus"
-
-#: src/translations.h:107
-msgid "Crux"
-msgstr "Crux"
-
-#: src/translations.h:108
-msgid "Cygnus"
-msgstr "Cygnus"
-
-#: src/translations.h:109
-msgid "Delphinus"
-msgstr "Delphinus"
-
-#: src/translations.h:110
-msgid "Dorado"
-msgstr "Dorado"
-
-#: src/translations.h:111
-msgid "Draco"
-msgstr "Draco"
-
-#: src/translations.h:112
-msgid "Norma"
-msgstr "Norma"
-
-#: src/translations.h:113
-msgid "Eridanus"
-msgstr "Eridanus"
-
-#: src/translations.h:114
-msgid "Sagitta"
-msgstr "Sagitta"
-
-#: src/translations.h:115
-msgid "Fornax"
-msgstr "Fornax"
-
-#: src/translations.h:116
-msgid "Gemini"
-msgstr "Gemini"
-
-#: src/translations.h:117
-msgid "Camelopardalis"
-msgstr "Camelopardalis"
-
-#: src/translations.h:118
-msgid "Canis Major"
-msgstr "Canis Major"
-
-#: src/translations.h:119
-msgid "Ursa Major"
-msgstr "Ursa Major"
-
-#: src/translations.h:120
-msgid "Grus"
-msgstr "Grus"
-
-#: src/translations.h:121
-msgid "Hercules"
-msgstr "Hercules"
-
-#: src/translations.h:122
-msgid "Horologium"
-msgstr "Horologium"
-
-#: src/translations.h:123
-msgid "Hydra"
-msgstr "Hydra"
-
-#: src/translations.h:124
-msgid "Hydrus"
-msgstr "Hydrus"
-
-#: src/translations.h:125
-msgid "Indus"
-msgstr "Indus"
-
-#: src/translations.h:126
-msgid "Lacerta"
-msgstr "Lacerta"
-
-#: src/translations.h:127
-msgid "Monoceros"
-msgstr "Monoceros"
-
-#: src/translations.h:128
-msgid "Lepus"
-msgstr "Lepus"
-
-#: src/translations.h:129
-msgid "Leo"
-msgstr "Leo"
-
-#: src/translations.h:130
-msgid "Lupus"
-msgstr "Lupus"
-
-#: src/translations.h:131
-msgid "Lynx"
-msgstr "Lynx"
-
-#: src/translations.h:132
-msgid "Lyra"
-msgstr "Lyra"
-
-#: src/translations.h:133
-msgid "Antlia"
-msgstr "Antlia"
-
-#: src/translations.h:134
-msgid "Microscopium"
-msgstr "Microscopium"
-
-#: src/translations.h:135
-msgid "Musca"
-msgstr "Musca"
-
-#: src/translations.h:136
-msgid "Octans"
-msgstr "Octans"
-
-#: src/translations.h:137
-msgid "Apus"
-msgstr "Apus"
-
-#: src/translations.h:138
-msgid "Ophiuchus"
-msgstr "Ophiuchus"
-
-#: src/translations.h:139
-msgid "Orion"
-msgstr "Orion"
-
-#: src/translations.h:140
-msgid "Pavo"
-msgstr "Pavo"
-
-#: src/translations.h:141
-msgid "Pegasus"
-msgstr "Pegasus"
-
-#: src/translations.h:142
-msgid "Pictor"
-msgstr "Pictor"
-
-#: src/translations.h:143
-msgid "Perseus"
-msgstr "Perseus"
-
-#: src/translations.h:144
-msgid "Equuleus"
-msgstr "Equuleus"
-
-#: src/translations.h:145
-msgid "Canis Minor"
-msgstr "Canis Minor"
-
-#: src/translations.h:146
-msgid "Leo Minor"
-msgstr "Leo Minor"
-
-#: src/translations.h:147
-msgid "Vulpecula"
-msgstr "Vulpecula"
-
-#: src/translations.h:148
-msgid "Ursa Minor"
-msgstr "Ursa Minor"
-
-#: src/translations.h:149
-msgid "Phoenix"
-msgstr "Phoenix"
-
-#: src/translations.h:150
-msgid "Piscis Austrinus"
-msgstr "Piscis Austrinus"
-
-#: src/translations.h:151
-msgid "Pisces"
-msgstr "Pisces"
-
-#: src/translations.h:152
-msgid "Volans"
-msgstr "Volans"
-
-#: src/translations.h:153
-msgid "Puppis"
-msgstr "Puppis"
-
-#: src/translations.h:154
-msgid "Reticulum"
-msgstr "Reticulum"
-
-#: src/translations.h:155
-msgid "Sagittarius"
-msgstr "Sagittarius"
-
-#: src/translations.h:156
-msgid "Scorpius"
-msgstr "Scorpius"
-
-#: src/translations.h:158
-msgid "Serpens"
-msgstr "Serpens"
-
-#: src/translations.h:159
-msgid "Sextans"
-msgstr "Sextans"
-
-#: src/translations.h:160
-msgid "Mensa"
-msgstr "Mensa"
-
-#: src/translations.h:161
-msgid "Taurus"
-msgstr "Taurus"
-
-#: src/translations.h:162
-msgid "Telescopium"
-msgstr "Telescopium"
-
-#: src/translations.h:163
-msgid "Tucana"
-msgstr "Tucana"
-
-#: src/translations.h:164
-msgid "Triangulum"
-msgstr "Triangulum"
-
-#: src/translations.h:165
-msgid "Triangulum Australe"
-msgstr "Triangulum Australe"
-
-#: src/translations.h:166
-msgid "Aquarius"
-msgstr "Aquarius"
-
-#: src/translations.h:167
-msgid "Virgo"
-msgstr "Virgo"
-
-#: src/translations.h:168
-msgid "Vela"
-msgstr "Vela"
-
-#: src/translations.h:171
-msgid "Bull's Foreleg"
-msgstr "Bulvoorpoot"
-
-#: src/translations.h:172
-msgid "Two Poles"
-msgstr "Twee Pale"
-
-#: src/translations.h:173
-msgid "Lion"
-msgstr "Leeu"
-
-#: src/translations.h:174
-msgid "Two Jaws"
-msgstr "Twee Kake"
-
-#: src/translations.h:175
-msgid "Sah"
-msgstr "Sah"
-
-#: src/translations.h:176
-msgid "Bird"
-msgstr "Voël"
-
-#: src/translations.h:177
-msgid "Sek"
-msgstr "Sek"
-
-#: src/translations.h:178
-msgid "Triangle"
-msgstr "Driehoek"
-
-#: src/translations.h:179
-msgid "Ferry Boat"
-msgstr "Veerboot"
-
-#: src/translations.h:180 src/translations.h:251
-msgid "Boat"
-msgstr "Boot"
-
-#: src/translations.h:181
-msgid "Crocodile"
-msgstr "Krokodil"
-
-#: src/translations.h:182
-msgid "Selkis"
-msgstr "Selkis"
-
-#: src/translations.h:183
-msgid "Prow"
-msgstr "Voorstewe"
-
-#: src/translations.h:184
-msgid "Horus"
-msgstr "Horus"
-
-#: src/translations.h:185
-msgid "Sheepfold"
-msgstr "Skaapskooi"
-
-#: src/translations.h:186
-msgid "Giant"
-msgstr "Reus"
-
-#: src/translations.h:187
-msgid "Hippopotamus"
-msgstr "Seekoei"
-
-#: src/translations.h:188
-msgid "Flock"
-msgstr "Kudde"
-
-#: src/translations.h:189
-msgid "Pair of Stars"
-msgstr "Sterre Paar"
-
-#: src/translations.h:190
-msgid "Khanuwy Fish"
-msgstr "Khanuwy vis"
-
-#: src/translations.h:191 src/translations.h:230
-msgid "Net"
-msgstr "Net"
-
-#: src/translations.h:192
-msgid "Jaw"
-msgstr "Kaak"
-
-#: src/translations.h:193
-msgid "Mooring Post"
-msgstr "Meerpaal"
-
-#: src/translations.h:194
-msgid "Kenemet"
-msgstr "Kenemet"
-
-#: src/translations.h:195
-msgid "Chematy"
-msgstr "Chematy"
-
-#: src/translations.h:196
-msgid "Waty Bekety"
-msgstr "Waty Bekety"
-
-#: src/translations.h:197
-msgid "Sheep"
-msgstr "Skaap"
-
-#: src/translations.h:198
-msgid "Stars of Water"
-msgstr "Sterre van Water"
-
-#: src/translations.h:201
-msgid "Northern Dipper"
-msgstr "Noordelike Steelpan"
-
-#: src/translations.h:202
-msgid "Curved Array"
-msgstr "Gekromde Groep"
-
-#: src/translations.h:203
-msgid "Coiled Thong"
-msgstr "Opgerolde Koord"
-
-#: src/translations.h:204
-msgid "Wings"
-msgstr "Vlerke"
-
-#: src/translations.h:205
-msgid "Chariot"
-msgstr "Strydwa"
-
-#: src/translations.h:206
-msgid "Tail"
-msgstr "Stert"
-
-#: src/translations.h:207
-msgid "Winnowing Basket"
-msgstr "Sifmandjie"
-
-#: src/translations.h:208 src/translations.h:339
-msgid "Dipper"
-msgstr "Steelpan"
-
-#: src/translations.h:209
-msgid "Drum"
-msgstr "Drom"
-
-#: src/translations.h:210
-msgid "Three Steps"
-msgstr "Drie Stappe"
-
-#: src/translations.h:211
-msgid "Imperial Guards"
-msgstr "Keiserlike Wagte"
-
-#: src/translations.h:212
-msgid "Horn"
-msgstr "Horing"
-
-#: src/translations.h:213
-msgid "Willow"
-msgstr "Wilg"
-
-#: src/translations.h:214
-msgid "Imperial Passageway"
-msgstr "Keiserlike Toegang"
-
-#: src/translations.h:215
-msgid "Kitchen"
-msgstr "Kombuis"
-
-#: src/translations.h:216
-msgid "River Turtle"
-msgstr "Rivier Skilpad"
-
-#: src/translations.h:217
-msgid "Stomach"
-msgstr "Maag"
-
-#: src/translations.h:218
-msgid "Great General"
-msgstr "Groot Generaal"
-
-#: src/translations.h:219
-msgid "Wall"
-msgstr "Muur"
-
-#: src/translations.h:220
-msgid "Legs"
-msgstr "Bene"
-
-#: src/translations.h:221
-msgid "Root"
-msgstr "Wortel"
-
-#: src/translations.h:222
-msgid "Ramparts"
-msgstr "Skanse"
-
-#: src/translations.h:223
-msgid "Flying Corridor"
-msgstr "Lugweg"
-
-#: src/translations.h:224
-msgid "Outer Fence"
-msgstr "Buitenste Hek"
-
-#: src/translations.h:225
-msgid "Ford"
-msgstr "Drif"
-
-#: src/translations.h:226
-msgid "Seven Excellencies"
-msgstr "Sewe Majesteite"
-
-#: src/translations.h:227
-msgid "Market"
-msgstr "Mark"
-
-#: src/translations.h:228
-msgid "Five Chariots"
-msgstr "Vyf Strydwaens"
-
-#: src/translations.h:229
-msgid "Rolled Tongue"
-msgstr "Gerolde Tong"
-
-#: src/translations.h:231
-msgid "Toilet"
-msgstr "Toilet"
-
-#: src/translations.h:232
-msgid "Screen"
-msgstr "Skerm"
-
-#: src/translations.h:233
-msgid "Soldiers Market"
-msgstr "Soldaatmark"
-
-#: src/translations.h:234
-msgid "Square Granary"
-msgstr "Vierkantige Koringskuur"
-
-#: src/translations.h:235
-msgid "Three Stars"
-msgstr "Drie Sterre"
-
-#: src/translations.h:236
-msgid "Four Channels"
-msgstr "Vier Kanale"
-
-#: src/translations.h:237
-msgid "Well"
-msgstr "Put"
-
-#: src/translations.h:238
-msgid "South River"
-msgstr "Suidelike Rivier"
-
-#: src/translations.h:239
-msgid "North River"
-msgstr "Noordelike Rivier"
-
-#: src/translations.h:240
-msgid "Five Feudal Kings"
-msgstr "Vyf Leenhere"
-
-#: src/translations.h:241
-msgid "Orchard"
-msgstr "Boord"
-
-#: src/translations.h:242
-msgid "Meadows"
-msgstr "Weivelde"
-
-#: src/translations.h:243
-msgid "Circular Granary"
-msgstr "Ronde Koringskuur"
-
-#: src/translations.h:244
-msgid "Purple Palace"
-msgstr "Pers Paleis"
-
-#: src/translations.h:245
-msgid "Extended Net"
-msgstr "Uitgeworpe Net"
-
-#: src/translations.h:246
-msgid "Arsenal"
-msgstr "Arsenaal"
-
-#: src/translations.h:247
-msgid "Hook"
-msgstr "Haak"
-
-#: src/translations.h:248
-msgid "Supreme Palace"
-msgstr "Opperste Paleis"
-
-#: src/translations.h:249
-msgid "Jade Well"
-msgstr "Nefriet Put"
-
-#: src/translations.h:250
-msgid "Lance"
-msgstr "Lans"
-
-#: src/translations.h:252
-msgid "Mausoleum"
-msgstr "Mausoleum"
-
-#: src/translations.h:253
-msgid "Dog"
-msgstr "Hond"
-
-#: src/translations.h:254
-msgid "Earth God's Temple"
-msgstr "Tempel van die Aardse God"
-
-#: src/translations.h:255
-msgid "Bow and Arrow"
-msgstr "Pyl en Boog"
-
-#: src/translations.h:256
-msgid "Pestle"
-msgstr "Stamper"
-
-#: src/translations.h:257
-msgid "Mortar"
-msgstr "Mortier"
-
-#: src/translations.h:258
-msgid "Rooftop"
-msgstr "Nok"
-
-#: src/translations.h:259
-msgid "Thunderbolt"
-msgstr "Weerligstraal"
-
-#: src/translations.h:260
-msgid "Chariot Yard"
-msgstr "Strydwa Werf"
-
-#: src/translations.h:261
-msgid "Good Gourd"
-msgstr "Goeie Kalbas"
-
-#: src/translations.h:262
-msgid "Rotten Gourd"
-msgstr "Slegte Kalbas"
-
-#: src/translations.h:263
-msgid "Encampment"
-msgstr "Kamp"
-
-#: src/translations.h:264
-msgid "Thunder and Lightning"
-msgstr "Donder en Weerlig"
-
-#: src/translations.h:265
-msgid "Palace Gate"
-msgstr "Paleispoort"
-
-#: src/translations.h:266
-msgid "Emptiness"
-msgstr "Leegte"
-
-#: src/translations.h:267
-msgid "Weaving Girl"
-msgstr "Weefster"
-
-#: src/translations.h:268
-msgid "Girl"
-msgstr "Meisie"
-
-#: src/translations.h:269
-msgid "Ox"
-msgstr "Os"
-
-#: src/translations.h:270
-msgid "Heart"
-msgstr "Hart"
-
-#: src/translations.h:271
-msgid "Room"
-msgstr "Kamer"
-
-#: src/translations.h:272
-msgid "Spring"
-msgstr "Veer"
-
-#: src/translations.h:273
-msgid "Establishment"
-msgstr "Nedersetting"
-
-#: src/translations.h:274
-msgid "Flail"
-msgstr "Dorsstok"
-
-#: src/translations.h:275
-msgid "Spear"
-msgstr "Spies"
-
-#: src/translations.h:276
-msgid "Right Flag"
-msgstr "Regter Vlag"
-
-#: src/translations.h:277
-msgid "Left Flag"
-msgstr "Linker Vlag"
-
-#: src/translations.h:278
-msgid "Drumstick"
-msgstr "Dromstok"
-
-#: src/translations.h:279
-msgid "Bond"
-msgstr "Band"
-
-#: src/translations.h:280
-msgid "Woman's Bed"
-msgstr "Vrou se Bed"
-
-#: src/translations.h:281
-msgid "Western Door"
-msgstr "Westerlike Deur"
-
-#: src/translations.h:282
-msgid "Eastern Door"
-msgstr "Oosterlike Deur"
-
-#: src/translations.h:283
-msgid "Farmland"
-msgstr "Plaasgrond"
-
-#: src/translations.h:284
-msgid "Star"
-msgstr "Ster"
-
-#: src/translations.h:285
-msgid "Ghosts"
-msgstr "Geeste"
-
-#: src/translations.h:286
-msgid "Xuanyuan"
-msgstr "Xyanyuan"
-
-#: src/translations.h:287
-msgid "Tripod"
-msgstr "Driepoot"
-
-#: src/translations.h:288
-msgid "Neck"
-msgstr "Nek"
-
-#: src/translations.h:289
-msgid "Zaofu"
-msgstr "Zaofu"
-
-#: src/translations.h:290
-msgid "Market Officer"
-msgstr "Markbeampte"
-
-#: src/translations.h:291
-msgid "Banner of Three Stars"
-msgstr "Banier van die Drie Sterre"
-
-#: src/translations.h:294
-msgid "Bailer"
-msgstr "Borgsteller"
-
-#: src/translations.h:295
-msgid "Cat's Cradle"
-msgstr "Katnes"
-
-#: src/translations.h:296
-msgid "Voice of Joy"
-msgstr "Stem van Vreugde"
-
-#: src/translations.h:297
-msgid "The Seven"
-msgstr "Die Sewe"
-
-#: src/translations.h:298
-msgid "Maui's Fishhook"
-msgstr "Maui se Vishaak"
-
-#: src/translations.h:299
-msgid "Navigator's Triangle"
-msgstr "Seevaarder se Driehoek"
-
-#: src/translations.h:300
-msgid "Kite of Kawelo"
-msgstr "Vlieër van Kawelo"
-
-#: src/translations.h:301
-msgid "Frigate Bird"
-msgstr "Frigat Voël"
-
-#: src/translations.h:302
-msgid "Cared for by Moon"
-msgstr "Versorg deur die Maan"
-
-#: src/translations.h:303
-msgid "Dolphin"
-msgstr "Dolfyn"
-
-#: src/translations.h:306
-#, fuzzy
-msgid "Revolving Male"
-msgstr "Draaiende Man"
-
-#: src/translations.h:307
-#, fuzzy
-msgid "Revolving Female"
-msgstr "Draaiende Vrou"
-
-#: src/translations.h:308
-#, fuzzy
-msgid "Man with Feet Apart"
-msgstr "Man met voete uitmekaar"
-
-#: src/translations.h:309
-#, fuzzy
-msgid "Lizard"
-msgstr "Akkedis"
-
-#: src/translations.h:310
-msgid "Dilyehe"
-msgstr "Dilyehe"
-
-#: src/translations.h:311
-#, fuzzy
-msgid "First Big One"
-msgstr "Eerste Grote"
-
-#: src/translations.h:312
-#, fuzzy
-msgid "Rabbit Tracks"
-msgstr "Haas Spore"
-
-#: src/translations.h:313
-#, fuzzy
-msgid "First Slim One"
-msgstr "Eerste Dun Een"
-
-#: src/translations.h:316
-msgid "Aurvandil's Toe"
-msgstr "Aurvandil se Toon"
-
-#: src/translations.h:317
-msgid "Wolf's Mouth"
-msgstr "Wolf se bek"
-
-#: src/translations.h:318
-msgid "The Fishermen"
-msgstr "Die Hengelaars"
-
-#: src/translations.h:319
-msgid "Woman's Cart"
-msgstr "Vrou se wa"
-
-#: src/translations.h:320
-msgid "Man's Cart"
-msgstr "Man se wa"
-
-#: src/translations.h:321
-msgid "The Asar Battlefield"
-msgstr "Die Asar Slagveld"
-
-#: src/translations.h:324
-msgid "Two Sunbeams"
-msgstr "Twee Sonstrale"
-
-#: src/translations.h:325
-#, fuzzy
-msgid "Two Placed Far Apart"
-msgstr "Twee Plekke Ver Uitmekaar"
-
-#: src/translations.h:326
-msgid "Dogs"
-msgstr "Honde"
-
-#: src/translations.h:327
-#, fuzzy
-msgid "Collarbones"
-msgstr "Kraag Bene"
-
-#: src/translations.h:328
-msgid "Lamp Stand"
-msgstr "Ligstaander"
-
-#: src/translations.h:329
-#, fuzzy
-msgid "Caribou"
-msgstr "Kariboe"
-
-#: src/translations.h:330
-#, fuzzy
-msgid "Two in Front"
-msgstr "Voorste Twee"
-
-#: src/translations.h:331
-#, fuzzy
-msgid "Breastbone"
-msgstr "Borsbeen"
-
-#: src/translations.h:332
-msgid "Runners"
-msgstr "Hardloper"
-
-#: src/translations.h:333
-msgid "Blubber Container"
-msgstr "Walvisspek Houer"
-
-#: src/translations.h:336
-msgid "Hand"
-msgstr "Hand"
-
-#: src/translations.h:337
-msgid "Snake"
-msgstr "Slang"
-
-#: src/translations.h:338
-msgid "Fireplace"
-msgstr "Vuurherd"
-
-#: src/translations.h:340
-msgid "Race Track"
-msgstr "Resiesbaan"
-
-#: src/translations.h:341
-msgid "Animal"
-msgstr "Dier"
-
-#: src/translations.h:342
-msgid "Elk"
-msgstr "Europese Eland"
-
-#: src/translations.h:343
-msgid "Seven Little Girls"
-msgstr "Sewe Klein Dogters"
-
-#: src/translations.h:344
-#, fuzzy
-msgid "Dried Willow"
-msgstr "Gedroogde Wilger"
-
-#: src/translations.h:345
-msgid "Salamander"
-msgstr "Salamander"
-
-#: src/translations.h:346
-msgid "Turtle"
-msgstr "Skilpad"
-
-#: src/translations.h:347
-#, fuzzy
-msgid "Thunderbird"
-msgstr "Stormvoël"
-
-#: src/translations.h:348
-#, fuzzy
-msgid "Bear's Lodge"
-msgstr "Beer se Skuiling"
-
-#: src/translations.h:354
-msgid "Select and exit to run."
-msgstr "Kies en verlaat om te laat loop."
-
-#: src/translations.h:355
-#, fuzzy
-msgid "USB Script: "
-msgstr "USB Skrif "
-
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2272
-msgid "Cancel"
-msgstr "Kanselleer"
-
-#: src/s_gui.cpp:2244 src/s_gui.cpp:2270
-msgid "OK"
-msgstr "OK"
-
-#: src/s_gui.cpp:2740
-msgid "Year"
-msgstr "Jaar"
-
-#: src/s_gui.cpp:2743
-msgid "Month"
-msgstr "Maand"
-
-#: src/s_gui.cpp:2746
-msgid "Day"
-msgstr "Dag"
-
-#: src/s_gui.cpp:2749
-msgid "Hour"
-msgstr "Uur"
-
-#: src/s_gui.cpp:2752
-msgid "Minutes"
-msgstr "Minute"
-
-#: src/s_gui.cpp:2755
-msgid "Seconds"
-msgstr "Sekondes"
-
-#: src/StarWrapper.cpp:46 src/StarWrapper.cpp:113 src/Telescope.cpp:238
-#, fuzzy
-msgid "J2000"
-msgstr "J2000"
-
-#: src/StarWrapper.cpp:48 src/StarWrapper.cpp:116 src/Telescope.cpp:240
-msgid "Equ of date"
-msgstr ""
-
-#: src/StarWrapper.cpp:130
-msgid "Parallax: "
-msgstr "Parallaks "
-
-#: src/StarWrapper.cpp:133 src/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " Ligjare"
-
-#: src/StarWrapper.cpp:138 src/StarWrapper.cpp:180
-msgid "Spectral Type: "
-msgstr "Spektraaltipe: "
-
-#: src/s_tui.h:275 src/s_tui.h:292
-msgid "Do"
-msgstr ""
-
-#: src/s_tui.h:275 src/s_tui.h:292
-msgid "Done"
-msgstr ""
-
-#: src/s_tui.h:292
-msgid "Are you sure ?"
-msgstr ""
+#~ msgid "change to apply."
+#~ msgstr "veranderings om toe te pas."

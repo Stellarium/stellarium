@@ -7,86 +7,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2007-11-20 01:28+0000\n"
-"Last-Translator: LEE E. S. <ngc2737@hanmail.net>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-04-06 08:29+0000\n"
+"Last-Translator: CaroMonema <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " 광년"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "천문단위"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "실제 시간"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -103,7 +81,7 @@ msgstr "고도 (m): "
 msgid "Altitude:"
 msgstr "고도 : "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -115,7 +93,7 @@ msgstr "아래 화살표로 목록을 부르세요."
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -123,18 +101,18 @@ msgstr ""
 msgid "Author: "
 msgstr "작성자: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "방위 격자"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "방위 격자"
 
@@ -151,7 +129,6 @@ msgid "CTRL + Up/Down"
 msgstr ""
 
 #: src/modules/TextUI.cpp:89
-#, fuzzy
 msgid "Calendar"
 msgstr "달력"
 
@@ -160,23 +137,22 @@ msgid "Callisto"
 msgstr "칼리스토"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "방위기점"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "방위기점"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
-msgstr "선택한 천체로 이동 [스페이스]"
+msgstr "선택한 천체로 이동 [SPACE]"
 
 #: src/translations.h:59
 msgid "Charon"
@@ -190,11 +166,15 @@ msgstr "중국"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "색깔 "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "설정"
 
@@ -203,21 +183,18 @@ msgid "Constellation Art Intensity"
 msgstr "별자리 그림 명암도"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "별자리 경계"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
 msgstr "별자리 선"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
 msgstr "별자리 이름"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "별자리 선"
@@ -244,20 +221,25 @@ msgstr "달력"
 msgid "Date Display Format: "
 msgstr "날짜 표시 형식: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "날짜 & 시간"
 
 #: src/modules/TextUI.cpp:88
 msgid "Day keys: "
-msgstr ""
+msgstr "날짜 키: "
+
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "시간 속도 감소 [J]"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "데이모스"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "개"
@@ -266,17 +248,21 @@ msgstr "개"
 msgid "Dione"
 msgstr "디오네"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "오리온"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " 광년"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "거리: "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -289,11 +275,10 @@ msgid "Earth"
 msgstr "지구"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "황도"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "황도"
@@ -314,9 +299,10 @@ msgstr "엔셀라두스"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, fuzzy, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr "날짜의 균등성"
 
 #: src/core/MappingClasses.cpp:77
@@ -324,26 +310,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "적도"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "적도"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "적위 격자"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "적위 격자"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "적위 격자"
@@ -365,25 +349,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "수직 반전"
+msgstr "수평 반전"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "수직 반전"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "천진"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -394,18 +382,29 @@ msgstr "가니메데"
 msgid "General "
 msgstr "일반 "
 
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
+
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:152
 msgid "Help"
-msgstr "도움말"
+msgstr "도움말 (한글화 : 윤선재)"
 
 #: src/gui/ViewDialog.cpp:343
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": 가장 높은 빈도수 (1966년 사자자리 유성우)"
+
+#: src/ui_viewDialog.h:1056
+#, fuzzy
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr "유성의 시간당 낙하 개수"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -423,6 +422,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "시간 속도 증가 [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "이뉴잇족"
@@ -431,10 +435,11 @@ msgstr "이뉴잇족"
 msgid "Io"
 msgstr "이오"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
-msgstr "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
+msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -449,7 +454,7 @@ msgstr "테티스"
 msgid "Korean"
 msgstr "한국어"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -457,10 +462,10 @@ msgstr ""
 msgid "Lakota"
 msgstr "라코타 인디언"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
-msgstr "경치"
+msgstr "풍경"
 
 #: src/modules/TextUI.cpp:129
 msgid "Landscape: "
@@ -469,11 +474,11 @@ msgstr "풍경: "
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "위도 : "
+msgstr "위도: "
 
 #: src/modules/TextUI.cpp:80
 msgid "Latitude: "
-msgstr "위도 "
+msgstr "위도: "
 
 #: src/gui/HelpDialog.cpp:53
 #, fuzzy
@@ -481,14 +486,13 @@ msgid "Left click"
 msgstr "좌기"
 
 #: src/modules/TextUI.cpp:128
-#, fuzzy
 msgid "Light Pollution Luminance: "
-msgstr "광공해 밝기 "
+msgstr "광공해 밝기: "
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 #, fuzzy
 msgid "Light pollution:"
-msgstr "광공해 밝기 "
+msgstr "광공해 밝기: "
 
 #: src/modules/TextUI.cpp:108
 #, fuzzy
@@ -502,17 +506,17 @@ msgstr "기본설정 불러오기: "
 #: src/modules/ConstellationMgr.cpp:371
 #, fuzzy, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr "별자리 그림을 불러옵니다. "
+msgstr "별자리 그림 로딩중...: "
 
 #: src/modules/NebulaMgr.cpp:372
 #, fuzzy, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "NGC 목록을 불러옵니다: "
+msgstr "NGC 목록 로딩중...: "
 
 #: src/modules/StarMgr.cpp:253
 #, fuzzy, qt-format
 msgid "Loading catalog %1"
-msgstr "목록을 불러옵니다: "
+msgstr "목록을 로딩중...: "
 
 #: src/modules/TextUI.cpp:140
 msgid "Local Script: "
@@ -529,34 +533,37 @@ msgstr "위치: "
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "경도 : "
+msgstr "경도: "
 
 #: src/modules/TextUI.cpp:81
 msgid "Longitude: "
-msgstr "경도 "
+msgstr "경도: "
 
 #: src/modules/TextUI.cpp:132
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "별 크기 증가: "
+msgstr "다중성 밝기: "
 
 #: src/modules/TextUI.cpp:105
 msgid "Magnitude Sizing Multiplier: "
 msgstr "별 크기 증가: "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "등급: "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "등급: "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "등급: "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "용골"
@@ -565,10 +572,10 @@ msgstr "용골"
 msgid "Manual zoom: "
 msgstr "수동 확대: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "용골"
+msgstr "화성"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -594,18 +601,17 @@ msgstr "수성"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "투영 :"
+msgstr "천체 찾기"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "수성"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "자오선"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "자오선"
@@ -618,7 +624,7 @@ msgstr "은하수 농도: "
 msgid "Mimas"
 msgstr "미마스"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "미마스"
@@ -627,7 +633,7 @@ msgstr "미마스"
 msgid "Moon"
 msgstr "달"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -639,6 +645,11 @@ msgstr "북"
 msgid "Navajo"
 msgstr "나바호족"
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "성운"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "성운 영역"
@@ -647,10 +658,10 @@ msgstr "성운 영역"
 msgid "Nebula Names"
 msgstr "성운 이름"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
-msgstr "성운들 [N]"
+msgstr "성운"
 
 #: src/translations.h:56
 msgid "Neptune"
@@ -660,7 +671,7 @@ msgstr "해왕성"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": 정상 속도"
@@ -673,7 +684,11 @@ msgstr "스칸디나비아인"
 msgid "Object Sizing Rule: "
 msgstr "천체 크기 자(尺): "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "오리온"
@@ -696,8 +711,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, fuzzy, qt-format
+msgid "Parallax: %1"
 msgstr "시차 "
 
 #: src/core/MappingClasses.cpp:11
@@ -724,19 +740,22 @@ msgid "Planet Names"
 msgstr "행성 이름"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "행성 궤적"
+msgstr "행성 궤도"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "행성 궤적"
 
-#: src/ui_viewDialog.h:1080
-msgid "Planets"
-msgstr "행성들"
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1066
+msgid "Planets"
+msgstr "행성"
+
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "행성에 대한 힌트"
@@ -754,23 +773,22 @@ msgid "Preset Sky Time: "
 msgstr "하늘 시간 미리 설정: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "하늘 시간 미리 설정: "
+msgstr "예정 시간"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "프로그램 언어: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "투영 :"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -785,16 +803,14 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 #, fuzzy
 msgid "Quit"
 msgstr "이뉴잇족"
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "적경/적위 : "
 
 #: src/translations.h:51
@@ -818,16 +834,16 @@ msgstr "토성"
 msgid "Save Current Configuration as Default: "
 msgstr "현재 설정을 기본설정으로 저장: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "위치 저장"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "달 확대"
@@ -843,7 +859,7 @@ msgstr "선택-종료하고 실행하세요."
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "선택한 천체로 이동 [스페이스]"
+msgstr "천체 찾기"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -851,9 +867,8 @@ msgid "Selected:"
 msgstr "선택 : "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "위치: "
+msgstr "위치 설정 "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -861,102 +876,101 @@ msgstr "시간 설정 "
 
 #: src/modules/TextUI.cpp:87
 msgid "Set Time Zone: "
-msgstr "시간대 설정 "
+msgstr "시간대 설정: "
 
 #: src/modules/TextUI.cpp:151
 msgid "Set UI Locale: "
 msgstr "인터페이스 지역 설정: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": 정상 속도"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "시간 설정 "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "대기"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "보이기: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "보이기: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "보이기: "
 
 #: src/modules/TextUI.cpp:149
 msgid "Shut Down: "
-msgstr "종료 "
+msgstr "종료: "
 
 #: src/modules/TextUI.cpp:90
 msgid "Sidereal"
 msgstr "항성의"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
 msgstr "크기: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 #, fuzzy
 msgid "Sky"
-msgstr "Sek"
+msgstr "섹크"
 
 #: src/modules/TextUI.cpp:99
 msgid "Sky Culture: "
@@ -974,10 +988,6 @@ msgstr "시작시 하늘 시간 적용: "
 msgid "Sky Time: "
 msgstr "하늘 시간: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "태양계 천체: "
@@ -991,13 +1001,10 @@ msgstr "태양계 관측자"
 msgid "Space"
 msgstr "경하"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "스펙트럼형: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1005,16 +1012,15 @@ msgid "Standard Perseids rate"
 msgstr ": 표준 페르세우스 유성우 빈도수"
 
 #: src/modules/TextUI.cpp:104
-#, fuzzy
 msgid "Star Value Multiplier: "
-msgstr "별 크기 증가: "
+msgstr "다중성 값: "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "성"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "별"
 
@@ -1022,7 +1028,7 @@ msgstr "별"
 msgid "Stars "
 msgstr "별 "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1034,23 +1040,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1058,7 +1064,7 @@ msgstr ""
 msgid "Sun"
 msgstr "태양"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1104,128 +1110,126 @@ msgstr "시간 표시 형식: "
 msgid "Titan"
 msgstr "타이탄"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "대기"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "방위 격자"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "방위기점"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "설정창"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "별자리 그림[R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "별자리 경계"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "별자리 이름"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "별자리 선"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "황도"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "적도"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "적위 격자"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "적위 격자"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "보이기: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "위치 설정 "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "자오선"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "성운들 [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "행성 궤도"
+msgid "Toggle atmosphere"
+msgstr "대기"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "방위 격자"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "방위기점"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "설정창"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "별자리 그림 로딩중...: "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "별자리 경계"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "별자리 이름"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "별자리 선"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "황도"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "적도"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "적위 격자"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "적위 격자"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "설정창"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "자오선"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "행성에 대한 힌트"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "삼"
@@ -1234,22 +1238,31 @@ msgstr "삼"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "삼각형"
+msgid "Twinkle:"
+msgstr "깜박임: "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "깜박임: "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "형태: "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
 msgstr "USB 스크립트: "
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
+msgstr ""
 
 #: src/modules/TextUI.cpp:150
 msgid "Update me via Internet: "
@@ -1259,11 +1272,11 @@ msgstr "프로그램 인터넷으로 업데이트: "
 msgid "Uranus"
 msgstr "천왕성"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1275,7 +1288,7 @@ msgstr ""
 msgid "Venus"
 msgstr "금성"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "화면"
@@ -1290,7 +1303,7 @@ msgstr "서양"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1301,32 +1314,26 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "위치: "
-
-#: src/gui/NewGui.cpp:432
-#, fuzzy
-msgid "Zoom in on selected object"
-msgstr "선택한 천체로 이동 [스페이스]"
-
-#: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
-msgid "Zoom in/out"
 msgstr "확대 지속: "
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:438
+#, fuzzy
+msgid "Zoom in on selected object"
+msgstr "선택한 천체로 이동 [SPACE]"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
+msgid "Zoom in/out"
+msgstr ""
+
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "확대 지속: "
 
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
-
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr ""
+msgstr "M"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:149
@@ -1372,8 +1379,8 @@ msgstr ""
 #~ "    and comments to us at: http://www.stellarium.org\n"
 #~ "\n"
 #~ msgstr ""
-#~ "   새로운 버젼을 점검하시고 다음의 홈페이지로 \n"
-#~ "    오류보고 및 논평을 보내주시기 바랍니다: http://www.stellarium.org\n"
+#~ "   새로운 버전을 확인하시고 다음의 홈페이지로 \n"
+#~ "    오류보고 및 평가를 보내주시기 바랍니다: http://www.stellarium.org\n"
 #~ "\n"
 
 #~ msgid " (Variable)"
@@ -1381,6 +1388,9 @@ msgstr ""
 
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: 명령어의 인자값이 잘못되었습니다.\n"
+
+#~ msgid "AU"
+#~ msgstr "AU"
 
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "또한, 그림 없이 성운을 표시합니다."
@@ -1405,6 +1415,9 @@ msgstr ""
 
 #~ msgid "Ara"
 #~ msgstr "제단"
+
+#~ msgid "Are you sure ?"
+#~ msgstr "확실합니까 ?"
 
 #~ msgid "Aries"
 #~ msgstr "양"
@@ -1547,12 +1560,20 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "명령 저장이 중단되었습니다."
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "허"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "설정창[1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "별자리 그림 [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "별자리 경계"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "별자리 선"
+
+#~ msgid "Constellations Names"
+#~ msgstr "별자리 이름"
 
 #~ msgid "Corona Australis"
 #~ msgstr "남쪽왕관"
@@ -1587,10 +1608,6 @@ msgstr ""
 #~ msgid "Day"
 #~ msgstr "일"
 
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "시간 속도 역방향 증가 [J]"
-
 #~ msgid "Delphinus"
 #~ msgstr "돌고래"
 
@@ -1611,6 +1628,28 @@ msgstr ""
 #~ "CTRL + F : 천체 찾기 토글\n"
 #~ "\n"
 
+#, fuzzy
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "H   : Help                      I   : About Stellarium\n"
+#~ "M   : Text menu                 1 (one)  : Configuration\n"
+#~ "CTRL + S : Take a screenshot\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : Goto selected solar system object\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dialogs & other controls :\n"
+#~ "H : 도움말\n"
+#~ "I : About Stellarium\n"
+#~ "M : 메뉴\n"
+#~ "1 (one) : Configuration\n"
+#~ "CTRL + S : 화면저장\n"
+#~ "CTRL + R : Toggle script recording\n"
+#~ "CTRL + F : Toggle object finder\n"
+#~ "CTRL + G : 선택된 태양계 천체로 가기\n"
+#~ "\n"
+
 #~ msgid "Dilyehe"
 #~ msgstr "Dilyehe"
 
@@ -1620,11 +1659,52 @@ msgstr ""
 #~ msgid "Disk Viewport"
 #~ msgstr "원반 시점"
 
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "옵션:\n"
+#~ "Enter : 적도의식/경위대식\n"
+#~ "F1 : 전체창\n"
+#~ "C : 별자리선\n"
+#~ "V : 별자리 이름\n"
+#~ "R : 별자리 그림\n"
+#~ "E : 적도 격자\n"
+#~ "Z : 방위 격자\n"
+#~ "N : 성운 이름\n"
+#~ "P : 행성 이름\n"
+#~ "G : 지면\n"
+#~ "A : 대기\n"
+#~ "F : 광해\n"
+#~ "Q : 방위기점\n"
+#~ "O : 달 확대/축소\n"
+#~ "T : 대상 추적\n"
+#~ "S : 별 표시\n"
+#~ "4, : 황도\n"
+#~ "5. : 적도\n"
+#~ "\n"
+
+#~ msgid "Do"
+#~ msgstr "Do"
+
 #~ msgid "Dog"
 #~ msgstr "천구"
 
 #~ msgid "Dolphin"
 #~ msgstr "돌고래"
+
+#~ msgid "Done"
+#~ msgstr "완료"
 
 #~ msgid "Dorado"
 #~ msgstr "황새치"
@@ -1633,7 +1713,7 @@ msgstr ""
 #~ msgstr "용"
 
 #~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "별자리 선[C]"
+#~ msgstr "별자리 선 [C]"
 
 #~ msgid "Dried Willow"
 #~ msgstr "마른 버드나무"
@@ -1650,9 +1730,9 @@ msgstr ""
 #~ "6   : pause script              K   : resume script\n"
 #~ "\n"
 #~ msgstr ""
-#~ "스크립트 재생 중:\n"
-#~ "CTRL + C : 스크립트 종료\n"
-#~ "6 : 스크립트 중지 K : 스크립트 계속\n"
+#~ "스크립트 재생 중에:\n"
+#~ "CTRL+C   :   스크립트 종료\n"
+#~ "6   :   스크립트 중지      K   :   스크립트 계속\n"
 #~ "\n"
 
 #~ msgid "Earth God's Temple"
@@ -1664,6 +1744,9 @@ msgstr ""
 #~ msgid "Elk"
 #~ msgstr "엘크"
 
+#~ msgid "Emptiness"
+#~ msgstr "허"
+
 #~ msgid "Encampment"
 #~ msgstr "실"
 
@@ -1673,8 +1756,9 @@ msgstr ""
 #~ msgid "Equatorial Grid [E]"
 #~ msgstr "적도격자 [E]"
 
+#, fuzzy
 #~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
-#~ msgstr "적위/경위대 [Enter]"
+#~ msgstr "적도의식/경위대식"
 
 #~ msgid "Equuleus"
 #~ msgstr "조랑말"
@@ -1728,7 +1812,7 @@ msgstr ""
 #~ msgstr "각도"
 
 #~ msgid "Fog"
-#~ msgstr "안개"
+#~ msgstr "광해"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "화면 해상도가 목록에 없으면 파일을 편집하세요 :"
@@ -1743,7 +1827,7 @@ msgstr ""
 #~ msgstr "군함새"
 
 #~ msgid "GO"
-#~ msgstr "가기"
+#~ msgstr "찾기"
 
 #~ msgid "Gemini"
 #~ msgstr "쌍둥이"
@@ -1763,15 +1847,14 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "천장군"
 
+#~ msgid "Ground"
+#~ msgstr "지면"
+
 #~ msgid "Ground [G]"
 #~ msgstr "지면 [G]"
 
 #~ msgid "Grus"
 #~ msgstr "두루미"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "뱀"
 
 #~ msgid "Hand"
 #~ msgstr "손"
@@ -1794,10 +1877,6 @@ msgstr ""
 #~ msgid "Hook"
 #~ msgstr "구"
 
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "수평 반전"
-
 #~ msgid "Horn"
 #~ msgstr "각"
 
@@ -1811,7 +1890,7 @@ msgstr ""
 #~ msgstr "시"
 
 #~ msgid "Hydra"
-#~ msgstr "큰물뱀"
+#~ msgstr "바다뱀"
 
 #~ msgid "Hydrus"
 #~ msgstr "물뱀"
@@ -1821,10 +1900,6 @@ msgstr ""
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "연도"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "시간 속도 순방향 증가 [L]"
 
 #~ msgid "Indus"
 #~ msgstr "인디언"
@@ -1854,7 +1929,7 @@ msgstr ""
 #~ msgstr "천주"
 
 #~ msgid "Kite of Kawelo"
-#~ msgstr "Kawelo의 연"
+#~ msgstr "카윌로의 연"
 
 #~ msgid "Lacerta"
 #~ msgstr "도마뱀"
@@ -1864,6 +1939,9 @@ msgstr ""
 
 #~ msgid "Language"
 #~ msgstr "언어"
+
+#~ msgid "Latitude : "
+#~ msgstr "위도 : "
 
 #~ msgid "Legs"
 #~ msgstr "규"
@@ -1891,6 +1969,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "성운의 그림 목록을 불러옵니다:"
+
+#~ msgid "Longitude : "
+#~ msgstr "경도 : "
 
 #~ msgid "Lupus"
 #~ msgstr "이리"
@@ -1931,9 +2012,6 @@ msgstr ""
 #~ msgid "Meteor Rate per minute"
 #~ msgstr "분당 유성 빈도수"
 
-#~ msgid "Meteor zenith hourly rate"
-#~ msgstr "유성의 시간당 낙하 개수"
-
 #~ msgid "Microscopium"
 #~ msgstr "현미경"
 
@@ -1948,10 +2026,10 @@ msgstr ""
 #~ "CTRL + SHIFT + V: Toggle vertical image flipping\n"
 #~ msgstr ""
 #~ "기타:\n"
-#~ "9 : 유성우 빈도 토글\n"
+#~ "9   :   유성우 빈도\n"
 #~ "CTRL + 0,..,9 : 천체망원경 0,..,9로의 이동 명령 실행\n"
-#~ "CTRL + SHIFT + H : 이미지 수평반전 토글\n"
-#~ "CTRL + SHIFT + V : 이미지 수직반전 토글\n"
+#~ "CTRL + SHIFT + H   :   이미지 수평반전\n"
+#~ "CTRL + SHIFT + V   :   이미지 수직반전\n"
 
 #~ msgid "Monoceros"
 #~ msgstr "외뿔소"
@@ -1979,28 +2057,28 @@ msgstr ""
 #~ "\n"
 #~ msgstr ""
 #~ "이동 & 선택:\n"
-#~ "방향키 : 적경/적위 시야변경\n"
-#~ "Page Up/Down : 확대\n"
-#~ "CTRL+Up/Down : 확대\n"
-#~ "왼쪽 클릭 : 천체 선택\n"
-#~ "오른쪽 클릭 : 선택 취소\n"
-#~ "CTRL+왼쪽 클릭 : 선택취소\n"
-#~ "\\ : 축소 (적용 가능한 경우 행성 + 달)\n"
-#~ "/ : 선택한 천체 확대\n"
-#~ "스페이스키 : 선택한 천체를 중심에 놓기\n"
+#~ "방향키   :   적경/적위 시야변경\n"
+#~ "Page Up/Down   :   확대\n"
+#~ "CTRL + Up/Down   :   확대\n"
+#~ "왼쪽 클릭   :   천체 선택\n"
+#~ "오른쪽 클릭   :   선택 취소\n"
+#~ "CTRL + 왼쪽 클릭   :   선택취소\n"
+#~ "\\   :   축소 (적용 가능한 경우 행성 + 달)\n"
+#~ "/   :   선택한 천체 확대\n"
+#~ "SPACE   :   선택한 천체를 중심에 놓기\n"
 #~ "\n"
 
 #~ msgid "Musca"
 #~ msgstr "파리"
 
 #~ msgid "Names of the Constellations [V]"
-#~ msgstr "별자리 이름[V]"
+#~ msgstr "별자리 이름 [V]"
 
 #~ msgid "Navigator's Triangle"
 #~ msgstr "항해자의 삼각자"
 
 #~ msgid "Nebulas Names. Up to mag :"
-#~ msgstr "성운 이름 표시하는 등급 한계 :"
+#~ msgstr "성운에 이름표 붙는 최대 등급 :"
 
 #~ msgid "Neck"
 #~ msgstr "항"
@@ -2037,9 +2115,6 @@ msgstr ""
 
 #~ msgid "Orchard"
 #~ msgstr "천균"
-
-#~ msgid "Orion"
-#~ msgstr "오리온"
 
 #~ msgid "Outer Fence"
 #~ msgstr "천병"
@@ -2078,7 +2153,7 @@ msgstr ""
 #~ msgstr "남쪽물고기"
 
 #~ msgid "Planet: "
-#~ msgstr "행성 "
+#~ msgstr "행성 : "
 
 #~ msgid "Point"
 #~ msgstr "기점"
@@ -2104,8 +2179,14 @@ msgstr ""
 #~ msgid "Rabbit Tracks"
 #~ msgstr "토끼가 지나간 길"
 
+#~ msgid "Race Track"
+#~ msgstr "궤도"
+
 #~ msgid "Ramparts"
 #~ msgstr "천루성"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "시간 속도 기본 [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "명령들을 스크립트 파일로 저장합니다:\n"
@@ -2119,9 +2200,8 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "그물"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
-#~ msgstr "현재 시간으로 복귀[8]"
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "현재 시간으로 복귀 [8]"
 
 #~ msgid "Revolving Female"
 #~ msgstr "선회녀"
@@ -2157,7 +2237,7 @@ msgstr ""
 #~ msgstr "궁수"
 
 #~ msgid "Sah"
-#~ msgstr "Sah"
+#~ msgstr "사흐"
 
 #~ msgid "Salamander"
 #~ msgstr "도롱뇽"
@@ -2189,9 +2269,6 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "찾기 (예를 들어 토성, 북극성, HP 6128, 오리온, M31):"
 
-#~ msgid "Search for object"
-#~ msgstr "천체 찾기"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "천체 검색[CTRL+F]"
 
@@ -2204,19 +2281,20 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "셀키스"
 
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "실시간 속도 [K]"
+#~ msgid "Serpens"
+#~ msgstr "뱀"
 
-#, fuzzy
-#~ msgid "Set Tracking"
-#~ msgstr "경주로"
+#~ msgid "Setting Landscape Sets Location: "
+#~ msgstr "풍경 정보 설정: "
+
+#~ msgid "Setting landscape updates the location"
+#~ msgstr "풍경 정보 갱신"
 
 #~ msgid "Seven Excellencies"
 #~ msgstr "칠공"
 
 #~ msgid "Seven Little Girls"
-#~ msgstr "일곱 아가씨"
+#~ msgstr "플레이아데스(7공주)"
 
 #~ msgid "Sextans"
 #~ msgstr "육분의"
@@ -2226,50 +2304,6 @@ msgstr ""
 
 #~ msgid "Sheepfold"
 #~ msgstr "양 우리"
-
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "대기"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "방위 격자"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "방위기점"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "보이기: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "황도"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "적도"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "적위 격자"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "적위 격자"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "보이기: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "지면"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "자오선"
 
 #~ msgid "Snake"
 #~ msgstr "뱀"
@@ -2289,11 +2323,14 @@ msgstr ""
 #~ msgid "Square Granary"
 #~ msgstr "천창"
 
+#~ msgid "Star Magnitude Multiplier: "
+#~ msgstr "별 크기 증가: "
+
 #~ msgid "Star Names. Up to mag :"
-#~ msgstr "이름표 붙는 별의 등급 한계 :"
+#~ msgstr "별의 이름을 표시하는 등급 한계"
 
 #~ msgid "Star Twinkle. Amount :"
-#~ msgstr "별 반짝임 정도 :"
+#~ msgstr "별의 반짝임 정도 :"
 
 #~ msgid "Stars of Water"
 #~ msgstr "물의 별"
@@ -2334,6 +2371,30 @@ msgstr ""
 #~ msgid "Thunderbolt"
 #~ msgstr "뇌전"
 
+#, fuzzy
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "6   : Time rate pause           7   : Time rate 0\n"
+#~ "8   : Set current time          J   : Decrease time rate\n"
+#~ "K   : Normal time rate          L   : Increase time rate\n"
+#~ "- and = :  Back and forward one day (press ALT for sidereal day)\n"
+#~ "[ and ] :  Back and forward 7 days (press ALT for sidereal days)\n"
+#~ "CTRL + - : Back one hour        CTRL + = : forward one hour\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Time & Date:\n"
+#~ "6 : 시간정지\n"
+#~ "7 : Time rate 0\n"
+#~ "8 : 현재 시간 설정\n"
+#~ "J : 흐르는 시간 속도 감소\n"
+#~ "K : 흐르는 시간 속도 기본 \n"
+#~ "L : 흐르는 시간 속도 증가\n"
+#~ "- and = : 하루 전/후(press ALT for sidereal day)\n"
+#~ "[ and ] : 일주일 전/후(press ALT for sidereal days)\n"
+#~ "CTRL + - : 한시간 전\n"
+#~ "CTRL + = : 한시간 후\n"
+#~ "\n"
+
 #~ msgid "Time Zone :"
 #~ msgstr "시간대 :"
 
@@ -2342,6 +2403,9 @@ msgstr ""
 
 #~ msgid "Toilet"
 #~ msgstr "측"
+
+#~ msgid "Triangle"
+#~ msgstr "삼각형"
 
 #~ msgid "Triangulum"
 #~ msgstr "삼각형"
@@ -2375,6 +2439,9 @@ msgstr ""
 
 #~ msgid "Two in Front"
 #~ msgstr "전방의 둘"
+
+#~ msgid "Type: "
+#~ msgstr "종류: "
 
 #~ msgid "Ursa Major"
 #~ msgstr "큰곰"

@@ -7,85 +7,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-23 06:10+0200\n"
-"PO-Revision-Date: 2008-01-11 09:49+0000\n"
-"Last-Translator: AhmedQatar <qaaaaaaq@yahoo.co.uk>\n"
+"POT-Creation-Date: 2008-05-28 14:11+0200\n"
+"PO-Revision-Date: 2008-01-27 22:45+0000\n"
+"Last-Translator: adil <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: src/modules/StarWrapper.cpp:133 src/modules/StarWrapper.cpp:175
-msgid " Light Years"
-msgstr " سنوات ضوئية"
 
 #: src/modules/LandscapeMgr.cpp:433
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/gui/NewGui.cpp:221
+#: src/gui/NewGui.cpp:219
 #, c-format, qt-format
 msgid ", %1m"
 msgstr ""
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1058
 msgid "10"
 msgstr ""
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1060
 msgid "10000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1061
 msgid "144000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1059
 msgid "80"
 msgstr ""
-
-#: src/ui_viewDialog.h:1067
-msgid ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Hourly </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">zenith rate</p></body></"
-"html>"
-msgstr ""
-
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-msgid "AU"
-msgstr "وحدة فلكية"
 
 #: src/modules/TextUI.cpp:93
 msgid "Actual Time"
 msgstr "الوقت الفعلي"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:430
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:432
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:426
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:418
+#: src/gui/NewGui.cpp:424
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:428
 msgid "Add 1 solar week"
 msgstr ""
 
@@ -102,7 +80,7 @@ msgstr "الإرتفاع (متر): "
 msgid "Altitude:"
 msgstr "الإرتفاع: "
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1068
 msgid "Amount:"
 msgstr ""
 
@@ -114,7 +92,7 @@ msgstr "مفتاح السهم السفلي لتميل القائمة."
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1093
 msgid "Art brightness: "
 msgstr ""
 
@@ -122,18 +100,18 @@ msgstr ""
 msgid "Author: "
 msgstr "المؤلف: "
 
-#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:130
-#: src/modules/StarWrapper.cpp:58 src/modules/StarWrapper.cpp:125
-msgid "Az/Alt: "
+#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
+#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
+#, fuzzy, qt-format
+msgid "Az/Alt: %1/%2"
 msgstr "سمتي/ استوائي: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1081
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "الشبكة السمتية"
 
 #: src/modules/TextUI.cpp:120
-#, fuzzy
 msgid "Azimuthal Grid"
 msgstr "الشبكة السمتية"
 
@@ -158,20 +136,19 @@ msgid "Callisto"
 msgstr "كاليستو"
 
 #: src/modules/TextUI.cpp:115
-#, fuzzy
 msgid "Cardinal Points"
 msgstr "الجهات الاربع"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1086
 #, fuzzy
 msgid "Cardinal points"
 msgstr "الجهات الاربع"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1079
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:436
 #, fuzzy
 msgid "Center on selected object"
 msgstr "اذهب الى الجرم المختار [مسافة]"
@@ -188,11 +165,15 @@ msgstr "صينية"
 msgid "Clear selection"
 msgstr ""
 
+#: src/modules/Nebula.cpp:276
+msgid "Cluster associated with nebulosity"
+msgstr ""
+
 #: src/modules/TextUI.cpp:74
 msgid "Colors "
 msgstr "الالوان "
 
-#: src/ui_configurationDialog.h:132
+#: src/ui_configurationDialog.h:136
 msgid "Configuration"
 msgstr "الاعدادات"
 
@@ -201,21 +182,18 @@ msgid "Constellation Art Intensity"
 msgstr "كثافة الرسوم الفنية للابراج"
 
 #: src/modules/TextUI.cpp:114
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "حدود الابراج"
 
 #: src/modules/TextUI.cpp:111
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "خطوط الابراج"
+msgstr "خطوط الأبراج"
 
 #: src/modules/TextUI.cpp:112
-#, fuzzy
 msgid "Constellation Names"
-msgstr "اسماء الابراج"
+msgstr "اسماء الأبراج"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1088
 #, fuzzy
 msgid "Constellations"
 msgstr "خطوط الأبراج"
@@ -241,7 +219,7 @@ msgstr ""
 msgid "Date Display Format: "
 msgstr "نمط عرض التاريخ: "
 
-#: src/gui/NewGui.cpp:413 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
 #, fuzzy
 msgid "Date and Time"
 msgstr "التاريخ و التوقيت"
@@ -250,11 +228,16 @@ msgstr "التاريخ و التوقيت"
 msgid "Day keys: "
 msgstr "مفاتيح اليوم "
 
+#: src/gui/NewGui.cpp:420
+#, fuzzy
+msgid "Decrease time speed"
+msgstr "انقاص سرعة الزمن [J]"
+
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "ديموس"
 
-#: src/gui/NewGui.cpp:405
+#: src/gui/NewGui.cpp:411
 #, fuzzy
 msgid "Dialogs"
 msgstr "كلا"
@@ -263,17 +246,21 @@ msgstr "كلا"
 msgid "Dione"
 msgstr "ديون"
 
-#: src/gui/NewGui.cpp:377
-#, fuzzy
+#: src/gui/NewGui.cpp:383
 msgid "Display Options"
-msgstr "الجبار"
+msgstr ""
 
-#: src/modules/Planet.cpp:133 src/modules/Planet.cpp:172
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:174
-msgid "Distance: "
+#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
+#, fuzzy, qt-format
+msgid "Distance: %1 Light Years"
+msgstr " سنوات ضوئية"
+
+#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
+#, fuzzy, c-format, qt-format
+msgid "Distance: %1AU"
 msgstr "المسافة "
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1052
 msgid "Download images"
 msgstr ""
 
@@ -286,11 +273,10 @@ msgid "Earth"
 msgstr "الأرض"
 
 #: src/modules/TextUI.cpp:123
-#, fuzzy
 msgid "Ecliptic Line"
 msgstr "خط المسار الشمسي"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1080
 #, fuzzy
 msgid "Ecliptic line"
 msgstr "خط المسار الشمسي"
@@ -311,9 +297,10 @@ msgstr "إنكيلادوس"
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:50 src/modules/StarWrapper.cpp:116
+#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
 #: src/modules/Telescope.cpp:245
-msgid "Equ of date"
+#, qt-format
+msgid "Equ of date RA/DE: %1/%2"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:77
@@ -321,26 +308,24 @@ msgid "Equal Area"
 msgstr ""
 
 #: src/modules/TextUI.cpp:122
-#, fuzzy
 msgid "Equator Line"
 msgstr "خط الاستواء"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1084
 #, fuzzy
 msgid "Equator line"
 msgstr "خط الاستواء"
 
 #: src/modules/TextUI.cpp:121
-#, fuzzy
 msgid "Equatorial Grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/ui_viewDialog.h:1099
+#: src/ui_viewDialog.h:1085
 #, fuzzy
 msgid "Equatorial J2000 grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1083
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "الشبكة الاستوائية"
@@ -362,25 +347,29 @@ msgstr ""
 msgid "Fish-eye"
 msgstr ""
 
-#: src/gui/NewGui.cpp:402
+#: src/gui/NewGui.cpp:408
 #, fuzzy
 msgid "Flip scene horizontally"
-msgstr "اقلب عموديا"
+msgstr "اقلب افقيا"
 
-#: src/gui/NewGui.cpp:403
+#: src/gui/NewGui.cpp:409
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "اقلب عموديا"
 
 #: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1029
-#: src/ui_configurationDialog.h:130
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
+#: src/ui_configurationDialog.h:134
 #, fuzzy
 msgid "Form"
 msgstr "المخاضة"
 
 #: src/gui/HelpDialog.cpp:128
 msgid "Further Reading"
+msgstr ""
+
+#: src/modules/Nebula.cpp:261
+msgid "Galaxy"
 msgstr ""
 
 #: src/translations.h:44
@@ -390,6 +379,10 @@ msgstr "غانيميد"
 #: src/modules/TextUI.cpp:72
 msgid "General "
 msgstr "عام "
+
+#: src/modules/Nebula.cpp:267
+msgid "Globular cluster"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:156
 msgid "Go"
@@ -403,6 +396,12 @@ msgstr "مساعدة"
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": أعلى معدل سبق روئيته (1966 Leonids)"
+
+#: src/ui_viewDialog.h:1056
+msgid ""
+"Hourly\n"
+"zenith rate"
+msgstr ""
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -420,6 +419,11 @@ msgid ""
 "camera lenses)."
 msgstr ""
 
+#: src/gui/NewGui.cpp:421
+#, fuzzy
+msgid "Increase time speed"
+msgstr "زيادة سرعة الزمن [L]"
+
 #: src/translations.h:71
 msgid "Inuit"
 msgstr ""
@@ -428,9 +432,10 @@ msgstr ""
 msgid "Io"
 msgstr "آيو"
 
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:113
-#: src/modules/Telescope.cpp:243
-msgid "J2000"
+#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
+#: src/modules/Telescope.cpp:242
+#, qt-format
+msgid "J2000 RA/DE: %1/%2"
 msgstr ""
 
 #: src/translations.h:41
@@ -446,7 +451,7 @@ msgstr "تيثيس"
 msgid "Korean"
 msgstr ""
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1064
 msgid "Labels and Markers"
 msgstr ""
 
@@ -454,7 +459,7 @@ msgstr ""
 msgid "Lakota"
 msgstr ""
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1077
 #, fuzzy
 msgid "Landscape"
 msgstr "المناظر"
@@ -481,7 +486,7 @@ msgstr "العلم الايسر"
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1075
 msgid "Light pollution:"
 msgstr ""
 
@@ -502,12 +507,12 @@ msgstr "تحميل رسوم الأبراج "
 #: src/modules/NebulaMgr.cpp:372
 #, fuzzy, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "تحميل كتلوج ال NGC "
+msgstr "تحميل دليل ال NGC "
 
 #: src/modules/StarMgr.cpp:253
 #, fuzzy, qt-format
 msgid "Loading catalog %1"
-msgstr "تحميل كتالوج "
+msgstr "تحميل الدليل "
 
 #: src/modules/TextUI.cpp:140
 msgid "Local Script: "
@@ -531,27 +536,30 @@ msgid "Longitude: "
 msgstr "خط الطول: "
 
 #: src/modules/TextUI.cpp:132
-#, fuzzy
 msgid "Magnitude Scaling Multiplier: "
-msgstr "مقدار الحجم مضروب في : "
+msgstr ""
 
 #: src/modules/TextUI.cpp:105
 msgid "Magnitude Sizing Multiplier: "
 msgstr "مقدار الحجم مضروب في : "
 
-#: src/modules/Nebula.cpp:94 src/modules/Nebula.cpp:115
-#: src/modules/Planet.cpp:119 src/modules/Planet.cpp:168
-#: src/modules/StarWrapper.cpp:47 src/modules/StarWrapper.cpp:112
-#: src/modules/StarWrapper.cpp:170
-msgid "Magnitude: "
-msgstr "قيمة "
-
-#: src/modules/StarWrapper.cpp:65
+#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
+#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
 #, fuzzy, qt-format
 msgid "Magnitude: %1"
 msgstr "قيمة "
 
-#: src/ui_configurationDialog.h:146
+#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
+#, fuzzy, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "قيمة "
+
+#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:150
 #, fuzzy
 msgid "Main"
 msgstr "القاعدة"
@@ -560,10 +568,10 @@ msgstr "القاعدة"
 msgid "Manual zoom: "
 msgstr "التقريب اليدوي: "
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1095
 #, fuzzy
 msgid "Markings"
-msgstr "القاعدة"
+msgstr "المريخ"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -589,18 +597,17 @@ msgstr "عطارد"
 #: src/core/MappingClasses.cpp:283
 #, fuzzy
 msgid "Mercator projection"
-msgstr "النمط ثلاثي الأبعاد:"
+msgstr "البحث عن جرم سماوي ( نجم ، كوكب ...)"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "عطارد"
 
 #: src/modules/TextUI.cpp:119
-#, fuzzy
 msgid "Meridian Line"
 msgstr "خط دائرة نصف النهار"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1082
 #, fuzzy
 msgid "Meridian line"
 msgstr "خط دائرة نصف النهار"
@@ -613,7 +620,7 @@ msgstr "كثافة درب التبانة: "
 msgid "Mimas"
 msgstr "ميماس"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:435
+#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
 #, fuzzy
 msgid "Misc"
 msgstr "ميماس"
@@ -622,7 +629,7 @@ msgstr "ميماس"
 msgid "Moon"
 msgstr "القمر"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:429
+#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
 msgid "Movement and Selection"
 msgstr ""
 
@@ -634,6 +641,11 @@ msgstr "ِشمال"
 msgid "Navajo"
 msgstr ""
 
+#: src/modules/Nebula.cpp:270
+#, fuzzy
+msgid "Nebula"
+msgstr "السدم السماوية [N]"
+
 #: src/modules/TextUI.cpp:125
 msgid "Nebula Circles"
 msgstr "دوائر السدم السماوية"
@@ -642,7 +654,7 @@ msgstr "دوائر السدم السماوية"
 msgid "Nebula Names"
 msgstr "اسماء السدم السماوية"
 
-#: src/ui_viewDialog.h:1061 src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
 #, fuzzy
 msgid "Nebulas"
 msgstr "السدم السماوية [N]"
@@ -655,7 +667,7 @@ msgstr "نبتون"
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1076
+#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
 #, fuzzy
 msgid "Normal rate"
 msgstr ": المعدل الطبيعي"
@@ -668,7 +680,11 @@ msgstr ""
 msgid "Object Sizing Rule: "
 msgstr "نظام التحجيم للهدف: "
 
-#: src/ui_viewDialog.h:1085
+#: src/modules/Nebula.cpp:264
+msgid "Open cluster"
+msgstr ""
+
+#: src/ui_viewDialog.h:1071
 #, fuzzy
 msgid "Options"
 msgstr "الجبار"
@@ -691,8 +707,9 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:130
-msgid "Parallax: "
+#: src/modules/StarWrapper.cpp:125
+#, qt-format
+msgid "Parallax: %1"
 msgstr ""
 
 #: src/core/MappingClasses.cpp:11
@@ -719,19 +736,22 @@ msgid "Planet Names"
 msgstr "اسماء الكواكب"
 
 #: src/modules/TextUI.cpp:117
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "اثار الكوكب"
+msgstr "مدارات الكواكب"
 
 #: src/modules/TextUI.cpp:118
 msgid "Planet Trails"
 msgstr "اثار الكوكب"
 
-#: src/ui_viewDialog.h:1080
+#: src/modules/Nebula.cpp:273
+msgid "Planetary nebula"
+msgstr ""
+
+#: src/ui_viewDialog.h:1066
 msgid "Planets"
 msgstr "الكواكب"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1043
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "تلميحات الكواكب"
@@ -749,23 +769,22 @@ msgid "Preset Sky Time: "
 msgstr "توقيت السماء المختار مسبقا: "
 
 #: src/modules/TextUI.cpp:94
-#, fuzzy
 msgid "Preset Time"
-msgstr "توقيت السماء المختار مسبقا: "
+msgstr "الوقت الحالي"
 
-#: src/ui_configurationDialog.h:145
+#: src/ui_configurationDialog.h:149
 #, fuzzy
 msgid "Program language:"
 msgstr "لغة البرنامج: "
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1094
 #, fuzzy
 msgid "Projection"
 msgstr "النمط ثلاثي الأبعاد:"
 
 #: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1033
-#: src/ui_configurationDialog.h:133
+#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
+#: src/ui_configurationDialog.h:137
 msgid ""
 "QToolButton {\n"
 "color: white;\n"
@@ -780,15 +799,13 @@ msgid ""
 "}"
 msgstr ""
 
-#: src/gui/NewGui.cpp:437
+#: src/gui/NewGui.cpp:443
 msgid "Quit"
 msgstr ""
 
-#: src/modules/Nebula.cpp:95 src/modules/Planet.cpp:123
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:50
-#: src/modules/StarWrapper.cpp:113 src/modules/StarWrapper.cpp:116
-#: src/modules/Telescope.cpp:243 src/modules/Telescope.cpp:245
-msgid "RA/DE: "
+#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
+#, fuzzy, qt-format
+msgid "RA/DE: %1/%2"
 msgstr "دائري/ درجات: "
 
 #: src/translations.h:51
@@ -812,16 +829,16 @@ msgstr "زحل"
 msgid "Save Current Configuration as Default: "
 msgstr "حفظ الاعدادات الحالية كافتراضي: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:444
 msgid "Save screenshot"
 msgstr ""
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1046
 #, fuzzy
 msgid "Scale Moon"
 msgstr "حفظ الموقع"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1039
 #, fuzzy
 msgid "Scale:"
 msgstr "تكبير القمر"
@@ -837,7 +854,7 @@ msgstr "اختر واخرج من البرنامج للتنفيذ."
 #: src/gui/HelpDialog.cpp:62
 #, fuzzy
 msgid "Select object"
-msgstr "اذهب الى الجرم المختار [مسافة]"
+msgstr "البحث عن جرم سماوي ( نجم ، كوكب ...)"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
@@ -845,9 +862,8 @@ msgid "Selected:"
 msgstr "مختار: "
 
 #: src/modules/TextUI.cpp:70
-#, fuzzy
 msgid "Set Location "
-msgstr "الموقع "
+msgstr "حدد الموقع "
 
 #: src/modules/TextUI.cpp:71
 msgid "Set Time "
@@ -861,73 +877,71 @@ msgstr "حدد المنطقة الزمنية: "
 msgid "Set UI Locale: "
 msgstr "حدد لغة الواجهة المحلية: "
 
-#: src/gui/NewGui.cpp:416
+#: src/gui/NewGui.cpp:422
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": المعدل الطبيعي"
 
-#: src/gui/NewGui.cpp:417
+#: src/gui/NewGui.cpp:423
 #, fuzzy
 msgid "Set time to now"
 msgstr "حدد الوقت "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:1055
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1051
 msgid "Short labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1047 src/ui_viewDialog.h:1053 src/ui_viewDialog.h:1060
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1054
 #, fuzzy
 msgid "Show"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1092
 #, fuzzy
 msgid "Show art"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1074
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "الغلاف الجوي"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1091
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1073
 #, fuzzy
 msgid "Show fog"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1072
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1089
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1090
 #, fuzzy
 msgid "Show lines"
 msgstr "اظهار: "
 
-#: src/ui_viewDialog.h:1055
-#, fuzzy
+#: src/ui_viewDialog.h:1044
 msgid "Show markers"
-msgstr "اظهار: "
+msgstr ""
 
-#: src/ui_viewDialog.h:1056
+#: src/ui_viewDialog.h:1045
 msgid "Show orbits"
 msgstr ""
 
 #: src/modules/TextUI.cpp:103
-#, fuzzy
 msgid "Show: "
 msgstr "اظهار: "
 
@@ -939,15 +953,16 @@ msgstr "اطفاء: "
 msgid "Sidereal"
 msgstr "فلكي"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1047
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/modules/Nebula.cpp:103
-msgid "Size: "
-msgstr "حجم "
+#: src/modules/Nebula.cpp:100
+#, fuzzy, qt-format
+msgid "Size: %1"
+msgstr "الحجم: "
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1069
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
@@ -968,10 +983,6 @@ msgstr "توقيت السماء عند البدء: "
 msgid "Sky Time: "
 msgstr "توقيت السماء: "
 
-#: src/gui/NewGui.cpp:414
-msgid "Slow down time"
-msgstr ""
-
 #: src/modules/TextUI.cpp:83
 msgid "Solar System Body: "
 msgstr "جسم النظام الشمسي: "
@@ -985,13 +996,10 @@ msgstr "مستكشف المجموعة الشمسية"
 msgid "Space"
 msgstr "الرمح"
 
-#: src/modules/StarWrapper.cpp:138 src/modules/StarWrapper.cpp:180
-msgid "Spectral Type: "
+#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
+#, fuzzy, qt-format
+msgid "Spectral Type: %1"
 msgstr "النوع الطيفي "
-
-#: src/gui/NewGui.cpp:415
-msgid "Speed up time"
-msgstr ""
 
 #: src/gui/ViewDialog.cpp:337
 #, fuzzy
@@ -1004,12 +1012,12 @@ msgstr ""
 msgid "Star Value Multiplier: "
 msgstr "قيمه النجم المضاعفه "
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1097
 #, fuzzy
 msgid "Starlore"
 msgstr "النجم"
 
-#: src/ui_viewDialog.h:1048 src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
 msgid "Stars"
 msgstr "النجوم"
 
@@ -1017,7 +1025,7 @@ msgstr "النجوم"
 msgid "Stars "
 msgstr "النجوم "
 
-#: src/gui/NewGui.cpp:901
+#: src/gui/NewGui.cpp:928
 msgid "Stellarium"
 msgstr ""
 
@@ -1029,23 +1037,23 @@ msgstr ""
 msgid "Stereographic"
 msgstr ""
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:431
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:433
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:427
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/NewGui.cpp:419
+#: src/gui/NewGui.cpp:425
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/NewGui.cpp:423
+#: src/gui/NewGui.cpp:429
 msgid "Subtract 1 solar week"
 msgstr ""
 
@@ -1053,7 +1061,7 @@ msgstr ""
 msgid "Sun"
 msgstr "الشمس"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:442
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
@@ -1099,128 +1107,126 @@ msgstr "نمط عرض الوقت: "
 msgid "Titan"
 msgstr "تيتن"
 
-#: src/gui/NewGui.cpp:396
+#: src/gui/NewGui.cpp:402
 msgid "Toggle DSS"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "الغلاف الجوي"
-
-#: src/gui/NewGui.cpp:383
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "الشبكة السمتية"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "الجهات الاربع"
-
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "نافذة الاعدادات"
-
-#: src/gui/NewGui.cpp:379
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "الرسوم الفنية للأبراج [R]"
-
-#: src/gui/NewGui.cpp:381
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "حدود الابراج"
-
-#: src/gui/NewGui.cpp:380
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "اسماء الأبراج"
-
-#: src/gui/NewGui.cpp:378
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "خطوط الابراج"
-
-#: src/gui/NewGui.cpp:409
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "خط المسار الشمسي"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "خط الاستواء"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "الشبكة الاستوائية"
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "الشبكة الاستوائية"
-
-#: src/gui/NewGui.cpp:393
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:391
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-#, fuzzy
-msgid "Toggle help window"
-msgstr "اظهار: "
-
-#: src/gui/NewGui.cpp:408
-#, fuzzy
-msgid "Toggle location window"
-msgstr "حدد الموقع "
-
-#: src/gui/NewGui.cpp:388
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "خط دائرة نصف النهار"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "السدم السماوية [N]"
-
-#: src/gui/NewGui.cpp:400
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:431
-msgid "Toggle object tracking"
 msgstr ""
 
 #: src/gui/NewGui.cpp:398
 #, fuzzy
-msgid "Toggle planets hints"
-msgstr "مدارات الكواكب"
+msgid "Toggle atmosphere"
+msgstr "الغلاف الجوي"
 
-#: src/gui/NewGui.cpp:406
-msgid "Toggle search window"
+#: src/gui/NewGui.cpp:389
+#, fuzzy
+msgid "Toggle azimutal grid"
+msgstr "الشبكة السمتية"
+
+#: src/gui/NewGui.cpp:395
+#, fuzzy
+msgid "Toggle cardinal points"
+msgstr "الجهات الاربع"
+
+#: src/gui/NewGui.cpp:417
+#, fuzzy
+msgid "Toggle configuration window"
+msgstr "نافذة الاعدادات"
+
+#: src/gui/NewGui.cpp:385
+#, fuzzy
+msgid "Toggle constellation art"
+msgstr "تحميل رسوم الأبراج "
+
+#: src/gui/NewGui.cpp:387
+#, fuzzy
+msgid "Toggle constellation boundaries"
+msgstr "حدود الابراج"
+
+#: src/gui/NewGui.cpp:386
+#, fuzzy
+msgid "Toggle constellation labels"
+msgstr "اسماء الأبراج"
+
+#: src/gui/NewGui.cpp:384
+#, fuzzy
+msgid "Toggle constellation lines"
+msgstr "خطوط الأبراج"
+
+#: src/gui/NewGui.cpp:415
+msgid "Toggle date/time window"
 msgstr ""
 
-#: src/gui/NewGui.cpp:410
-msgid "Toggle sky and viewing options window"
+#: src/gui/NewGui.cpp:392
+#, fuzzy
+msgid "Toggle ecliptic line"
+msgstr "خط المسار الشمسي"
+
+#: src/gui/NewGui.cpp:393
+#, fuzzy
+msgid "Toggle equator line"
+msgstr "خط الاستواء"
+
+#: src/gui/NewGui.cpp:391
+#, fuzzy
+msgid "Toggle equatorial J2000 grid"
+msgstr "الشبكة الاستوائية"
+
+#: src/gui/NewGui.cpp:390
+#, fuzzy
+msgid "Toggle equatorial grid"
+msgstr "الشبكة الاستوائية"
+
+#: src/gui/NewGui.cpp:399
+msgid "Toggle fog"
+msgstr ""
+
+#: src/gui/NewGui.cpp:407
+msgid "Toggle full-screen mode"
 msgstr ""
 
 #: src/gui/NewGui.cpp:397
+msgid "Toggle ground"
+msgstr ""
+
+#: src/gui/NewGui.cpp:413
+msgid "Toggle help window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:414
+#, fuzzy
+msgid "Toggle location window"
+msgstr "نافذة الاعدادات"
+
+#: src/gui/NewGui.cpp:394
+#, fuzzy
+msgid "Toggle meridian line"
+msgstr "خط دائرة نصف النهار"
+
+#: src/gui/NewGui.cpp:401
+msgid "Toggle nebulas"
+msgstr ""
+
+#: src/gui/NewGui.cpp:406
+msgid "Toggle night mode"
+msgstr ""
+
+#: src/gui/NewGui.cpp:437
+msgid "Toggle object tracking"
+msgstr ""
+
+#: src/gui/NewGui.cpp:404
+#, fuzzy
+msgid "Toggle planets hints"
+msgstr "تلميحات الكواكب"
+
+#: src/gui/NewGui.cpp:412
+msgid "Toggle search window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:416
+msgid "Toggle sky and viewing options window"
+msgstr ""
+
+#: src/gui/NewGui.cpp:403
 #, fuzzy
 msgid "Toggle stars"
 msgstr "النجمات الثلاث"
@@ -1229,21 +1235,30 @@ msgstr "النجمات الثلاث"
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1040
 #, fuzzy
-msgid "Twinkle"
-msgstr "مثلث"
+msgid "Twinkle:"
+msgstr "التلألئ "
 
 #: src/modules/TextUI.cpp:107
 msgid "Twinkling: "
 msgstr "التلألئ "
 
-#: src/modules/Nebula.cpp:90
-msgid "Type: "
-msgstr "نوع "
+#: src/modules/Nebula.cpp:89
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr ""
 
 #: src/modules/TextUI.cpp:142
 msgid "USB Script: "
+msgstr ""
+
+#: src/modules/Nebula.cpp:282
+msgid "Undocumented type"
+msgstr ""
+
+#: src/modules/Nebula.cpp:279
+msgid "Unknown"
 msgstr ""
 
 #: src/modules/TextUI.cpp:150
@@ -1254,11 +1269,11 @@ msgstr "حدثني عبر الانترنت "
 msgid "Uranus"
 msgstr "أورانوس"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1096
 msgid "Use associated language for sky labeling"
 msgstr ""
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1076
 msgid "Use associated planet and position"
 msgstr ""
 
@@ -1270,7 +1285,7 @@ msgstr ""
 msgid "Venus"
 msgstr "الزهرة"
 
-#: src/ui_viewDialog.h:1032
+#: src/ui_viewDialog.h:1022
 #, fuzzy
 msgid "View"
 msgstr "الفيديو"
@@ -1285,7 +1300,7 @@ msgstr "غربي"
 
 #: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
 #: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1044 src/ui_configurationDialog.h:144
+#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
 msgid "X"
 msgstr ""
 
@@ -1296,28 +1311,22 @@ msgid ""
 msgstr ""
 
 #: src/modules/TextUI.cpp:135
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "الموقع "
+msgstr "مدة التكبير: "
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:438
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "اذهب الى الجرم المختار [مسافة]"
 
 #: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
 msgid "Zoom in/out"
-msgstr "مدة التكبير: "
+msgstr ""
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:439
 #, fuzzy
 msgid "Zoom out"
 msgstr "مدة التكبير: "
-
-#: src/ui_viewDialog.h:1051
-msgid "amount:"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
@@ -1377,6 +1386,9 @@ msgstr ""
 #~ msgid "%s: Bad command line argument(s)\n"
 #~ msgstr "%s: Bad command line argument(s)\n"
 
+#~ msgid "AU"
+#~ msgstr "وحدة فلكية"
+
 #~ msgid "Also display Nebulas without textures"
 #~ msgstr "ايضا اظهار السدم بدون رسومات"
 
@@ -1385,10 +1397,6 @@ msgstr ""
 
 #~ msgid "Animal"
 #~ msgstr "الحيوان"
-
-#, fuzzy
-#~ msgid "Anta"
-#~ msgstr "مفرغة الهواء"
 
 #~ msgid "Antlia"
 #~ msgstr "مفرغة الهواء"
@@ -1429,10 +1437,6 @@ msgstr ""
 #~ msgid "Bird"
 #~ msgstr "طائر"
 
-#, fuzzy
-#~ msgid "Bo"
-#~ msgstr "قارب"
-
 #~ msgid "Boat"
 #~ msgstr "قارب"
 
@@ -1447,10 +1451,6 @@ msgstr ""
 
 #~ msgid "Bull's Foreleg"
 #~ msgstr "يد الثور"
-
-#, fuzzy
-#~ msgid "Byeong"
-#~ msgstr "الرابطة"
 
 #~ msgid "CMD + Q : Quit\n"
 #~ msgstr "CMD + Q: لانهاء البرنامج\n"
@@ -1488,9 +1488,6 @@ msgstr ""
 #~ msgid "Cared for by Moon"
 #~ msgstr "بعناية القمر"
 
-#~ msgid "Carina"
-#~ msgstr "القاعدة"
-
 #~ msgid "Cassiopeia"
 #~ msgstr "ذات الكرسي"
 
@@ -1518,58 +1515,6 @@ msgstr ""
 #~ msgid "Chematy"
 #~ msgstr "Chematy"
 
-#, fuzzy
-#~ msgid "CheonAa"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonBu"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonByeon"
-#~ msgstr "الحرباء"
-
-#, fuzzy
-#~ msgid "CheonGa"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonGo"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonGu"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonJeon"
-#~ msgstr "الحرباء"
-
-#, fuzzy
-#~ msgid "CheonJu"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonSa"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "CheonSeon"
-#~ msgstr "الحرباء"
-
-#, fuzzy
-#~ msgid "CheonYu"
-#~ msgstr "جارون"
-
-#, fuzzy
-#~ msgid "Cheuk"
-#~ msgstr "الملتهب"
-
-#, fuzzy
-#~ msgid "ChilGong"
-#~ msgstr "Coiled Thong"
-
 #~ msgid "Choose landscapes:"
 #~ msgstr "اختر نوع المنظر :"
 
@@ -1591,12 +1536,20 @@ msgstr ""
 #~ msgid "Command recording stopped."
 #~ msgstr "توقف تسجيل الاوامر."
 
-#, fuzzy
-#~ msgid "Completions"
-#~ msgstr "الفراغ"
-
 #~ msgid "Configuration window [1]"
 #~ msgstr "نافذة الخيارات [1]"
+
+#~ msgid "Constellations Art [R]"
+#~ msgstr "الرسوم الفنية للأبراج [R]"
+
+#~ msgid "Constellations Boundaries"
+#~ msgstr "حدود الابراج"
+
+#~ msgid "Constellations Lines"
+#~ msgstr "خطوط الابراج"
+
+#~ msgid "Constellations Names"
+#~ msgstr "اسماء الابراج"
 
 #~ msgid "Corona Australis"
 #~ msgstr "الإكليل الجنوبي"
@@ -1631,10 +1584,6 @@ msgstr ""
 #~ msgid "Day"
 #~ msgstr "يوم"
 
-#, fuzzy
-#~ msgid "Decrease Time Speed"
-#~ msgstr "انقاص سرعة الزمن [J]"
-
 #~ msgid "Delphinus"
 #~ msgstr "الدلفين"
 
@@ -1661,6 +1610,23 @@ msgstr ""
 
 #~ msgid "Disk Viewport"
 #~ msgstr "استخدام نمط المنظار"
+
+#~ msgid ""
+#~ "Display options:\n"
+#~ "ENTER : Equatorial/altazimuthal mount\n"
+#~ "F1  : Toggle fullscreen / window.\n"
+#~ "C   : Constellation lines       V   : Constellation labels\n"
+#~ "R   : Constellation art         E   : Equatorial grid\n"
+#~ "Z   : Azimuthal grid            N   : Nebula labels\n"
+#~ "P   : Planet labels             G   : Ground\n"
+#~ "A   : Atmosphere                F   : Fog\n"
+#~ "Q   : Cardinal points           O   : Toggle moon scaling\n"
+#~ "T   : Object tracking           S   : Stars\n"
+#~ "4 , : Ecliptic line             5 . : Equator line\n"
+#~ "\n"
+#~ msgstr ""
+#~ "اظهار الخيارات:\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "Display options:\n"
@@ -1695,10 +1661,6 @@ msgstr ""
 #~ msgid "Dolphin"
 #~ msgstr "الدولفين"
 
-#, fuzzy
-#~ msgid "DonGu"
-#~ msgstr "ديون"
-
 #~ msgid "Dorado"
 #~ msgstr "أبو سيف"
 
@@ -1706,7 +1668,7 @@ msgstr ""
 #~ msgstr "التنين"
 
 #~ msgid "Drawing of the Constellations [C]"
-#~ msgstr "رسوم الابراج [C]"
+#~ msgstr "رسم الأبراج"
 
 #~ msgid "Drum"
 #~ msgstr "الطبلة"
@@ -1729,10 +1691,6 @@ msgstr ""
 #~ msgid "Enter observatory name"
 #~ msgstr "ادخل اسم الهدف المراد رصده"
 
-#, fuzzy
-#~ msgid "Eo"
-#~ msgstr "شرق"
-
 #~ msgid "Equatorial Grid [E]"
 #~ msgstr "الشبكة الاستوائية [E]"
 
@@ -1750,10 +1708,6 @@ msgstr ""
 
 #~ msgid "Establishment"
 #~ msgstr "المؤسسة"
-
-#, fuzzy
-#~ msgid "Eup"
-#~ msgstr "يوروبا"
 
 #~ msgid "Extended Net"
 #~ msgstr "الشبكة الممتدة"
@@ -1776,6 +1730,12 @@ msgstr ""
 #~ msgid "Flail"
 #~ msgstr "المدارس"
 
+#~ msgid "Flip horizontally [CTRL + SHIFT + H]"
+#~ msgstr "تغيير أفقي"
+
+#~ msgid "Flip vertically [CTRL + SHIFT + V]"
+#~ msgstr "تغيير عمودي"
+
 #~ msgid "Flock"
 #~ msgstr "القطيع"
 
@@ -1787,9 +1747,6 @@ msgstr ""
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "لكثافة الشاشة الغير معروضة ، حرر الملف :"
-
-#~ msgid "Ford"
-#~ msgstr "المخاضة"
 
 #~ msgid "Fornax"
 #~ msgstr "الكور"
@@ -1803,27 +1760,11 @@ msgstr ""
 #~ msgid "GO"
 #~ msgstr "اذهب"
 
-#, fuzzy
-#~ msgid "Gaang"
-#~ msgstr "العملاق"
-
 #~ msgid "Gemini"
-#~ msgstr "التوأمان"
-
-#, fuzzy
-#~ msgid "GeoGii"
-#~ msgstr "التوأمان"
-
-#, fuzzy
-#~ msgid "Geon"
 #~ msgstr "التوأمان"
 
 #~ msgid "Ghosts"
 #~ msgstr "الاشباح"
-
-#, fuzzy
-#~ msgid "GiGwan"
-#~ msgstr "العملاق"
 
 #~ msgid "Giant"
 #~ msgstr "العملاق"
@@ -1837,29 +1778,16 @@ msgstr ""
 #~ msgid "Great General"
 #~ msgstr "القائد العظيم"
 
+#~ msgid "Ground"
+#~ msgstr "الأرضية ( سطح الأرض)"
+
 #~ msgid "Ground [G]"
 #~ msgstr "السطح [G]"
 
 #~ msgid "Grus"
 #~ msgstr "الكركي"
 
-#, fuzzy
-#~ msgid "Gu"
-#~ msgstr "الكركي"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "الحية"
-
-#, fuzzy
-#~ msgid "Gwan"
-#~ msgstr "العملاق"
-
 #~ msgid "Hand"
-#~ msgstr "يد"
-
-#, fuzzy
-#~ msgid "Hang"
 #~ msgstr "يد"
 
 #~ msgid "Heart"
@@ -1867,10 +1795,6 @@ msgstr ""
 
 #~ msgid "Help [H]"
 #~ msgstr "مساعدة"
-
-#, fuzzy
-#~ msgid "Heo"
-#~ msgstr "الأسد"
 
 #~ msgid "Hercules"
 #~ msgstr "الجاثي"
@@ -1881,20 +1805,8 @@ msgstr ""
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "اضغط CTRL-R مرة اخرى لتتوقف.\n"
 
-#, fuzzy
-#~ msgid "Ho"
-#~ msgstr "الخطّاف"
-
-#, fuzzy
-#~ msgid "HoBuun"
-#~ msgstr "البوق"
-
 #~ msgid "Hook"
 #~ msgstr "الخطّاف"
-
-#, fuzzy
-#~ msgid "Horizontal Flip"
-#~ msgstr "اقلب افقيا"
 
 #~ msgid "Horn"
 #~ msgstr "البوق"
@@ -1914,19 +1826,11 @@ msgstr ""
 #~ msgid "Hydrus"
 #~ msgstr "حية الماء"
 
-#, fuzzy
-#~ msgid "HyeonGwa"
-#~ msgstr "هايبريون"
-
 #~ msgid "Imperial Guards"
 #~ msgstr "الحرس الامبراطوري"
 
 #~ msgid "Imperial Passageway"
 #~ msgstr "الممر الامبراطوري"
-
-#, fuzzy
-#~ msgid "Increase Time Speed"
-#~ msgstr "زيادة سرعة الزمن [L]"
 
 #~ msgid "Indus"
 #~ msgstr "الهندي"
@@ -1938,29 +1842,13 @@ msgstr ""
 #~ msgstr "معلومات"
 
 #~ msgid "Invalid Script command"
-#~ msgstr "أمر برمجي غير صالح"
+#~ msgstr "أمر برمجي عير صحيح"
 
 #~ msgid "Jade Well"
 #~ msgstr "بئر جايد"
 
-#, fuzzy
-#~ msgid "JaeJwa"
-#~ msgstr "الفك"
-
-#, fuzzy
-#~ msgid "JaeSeok"
-#~ msgstr "Sek"
-
 #~ msgid "Jaw"
 #~ msgstr "الفك"
-
-#, fuzzy
-#~ msgid "Jeo"
-#~ msgstr "الأسد"
-
-#, fuzzy
-#~ msgid "JinHyeon"
-#~ msgstr "هايبريون"
 
 #~ msgid "Kenemet"
 #~ msgstr "Kenemet"
@@ -1979,6 +1867,9 @@ msgstr ""
 
 #~ msgid "Language"
 #~ msgstr "اللغة"
+
+#~ msgid "Latitude : "
+#~ msgstr "خط العرض: "
 
 #~ msgid "Legs"
 #~ msgstr "الساق"
@@ -2004,6 +1895,9 @@ msgstr ""
 
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "تحميل أشكال السديم"
+
+#~ msgid "Longitude : "
+#~ msgstr "خط الطول: "
 
 #~ msgid "Lupus"
 #~ msgstr "السبع"
@@ -2096,10 +1990,6 @@ msgstr ""
 #~ msgid "Musca"
 #~ msgstr "الذبابة"
 
-#, fuzzy
-#~ msgid "NamHa"
-#~ msgstr "مربع النجار"
-
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "اسماء الأبراج [V]"
 
@@ -2118,8 +2008,7 @@ msgstr ""
 #~ msgid "Night (red) mode"
 #~ msgstr "الوضع الليلي (الأحمر)"
 
-#, fuzzy
-#~ msgid "Noin"
+#~ msgid "No"
 #~ msgstr "لا"
 
 #~ msgid "Norma"
@@ -2146,9 +2035,6 @@ msgstr ""
 #~ msgid "Orchard"
 #~ msgstr "البستان"
 
-#~ msgid "Orion"
-#~ msgstr "الجبار"
-
 #~ msgid "Outer Fence"
 #~ msgstr "السياج الخارجي"
 
@@ -2157,10 +2043,6 @@ msgstr ""
 
 #~ msgid "Pair of Stars"
 #~ msgstr "زوج من النجوم"
-
-#, fuzzy
-#~ msgid "PalGok"
-#~ msgstr "الطاووس"
 
 #~ msgid "Palace Gate"
 #~ msgstr "مدخل القصر"
@@ -2216,8 +2098,14 @@ msgstr ""
 #~ msgid "Rabbit Tracks"
 #~ msgstr "Rabbit Tracks"
 
+#~ msgid "Race Track"
+#~ msgstr "سباق المسار"
+
 #~ msgid "Ramparts"
 #~ msgstr "الأسوار"
+
+#~ msgid "Real Time Speed [K]"
+#~ msgstr "سرعة الزمن الحقيقي [K]"
 
 #~ msgid "Recording commands to script file:\n"
 #~ msgstr "تسجيل الاوامر الى ملف نص برمجي:\n"
@@ -2231,8 +2119,7 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "الشبكة"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
+#~ msgid "Return to Current Time"
 #~ msgstr "العودة للوقت الحالي"
 
 #~ msgid "Return to Current Time [8]"
@@ -2255,10 +2142,6 @@ msgstr ""
 
 #~ msgid "Rotten Gourd"
 #~ msgstr "القرعة (فاكهة) المنتنة"
-
-#, fuzzy
-#~ msgid "SaamTae"
-#~ msgstr "سمندر"
 
 #~ msgid "Sagitta"
 #~ msgstr "السهم"
@@ -2299,14 +2182,11 @@ msgstr ""
 #~ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 #~ msgstr "البحث عن  ( مثال: Saturn, Polaris, HP6218, Orion, M31 ) :"
 
-#~ msgid "Search for object"
-#~ msgstr "البحث عن جرم سماوي ( نجم ، كوكب ...)"
-
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "البحث عن شيء  [CTRL + F]"
 
-#~ msgid "Sek"
-#~ msgstr "Sek"
+#~ msgid "Seconds"
+#~ msgstr "ثواني"
 
 #~ msgid "Selected Constellation Only"
 #~ msgstr "البرج المختار فقط"
@@ -2314,20 +2194,8 @@ msgstr ""
 #~ msgid "Selkis"
 #~ msgstr "Selkis"
 
-#, fuzzy
-#~ msgid "Seong"
-#~ msgstr "ثواني"
-
 #~ msgid "Serpens"
 #~ msgstr "الحية"
-
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "سرعة الزمن الحقيقي [K]"
-
-#, fuzzy
-#~ msgid "Set Tracking"
-#~ msgstr "سباق المسار"
 
 #~ msgid "Setting landscape updates the location"
 #~ msgstr "تحديد موقع تحديثات المناظر الطبيعيه"
@@ -2344,59 +2212,11 @@ msgstr ""
 #~ msgid "Sheepfold"
 #~ msgstr "حضيرة الغنم"
 
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "الغلاف الجوي"
-
-#, fuzzy
-#~ msgid "Show Azimutal Grid"
-#~ msgstr "الشبكة السمتية"
-
-#, fuzzy
-#~ msgid "Show Cardinal Points"
-#~ msgstr "الجهات الاربع"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "اظهار: "
-
-#, fuzzy
-#~ msgid "Show Ecliptic Line"
-#~ msgstr "خط المسار الشمسي"
-
-#, fuzzy
-#~ msgid "Show Equator Line"
-#~ msgstr "خط الاستواء"
-
-#, fuzzy
-#~ msgid "Show Equatorial Grid"
-#~ msgstr "الشبكة الاستوائية"
-
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "الشبكة الاستوائية"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "اظهار: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "الأرضية ( سطح الأرض)"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "خط دائرة نصف النهار"
-
 #~ msgid "Snake"
 #~ msgstr "ثعبان"
 
 #~ msgid "Soldiers Market"
 #~ msgstr "سوق الجنود"
-
-#, fuzzy
-#~ msgid "Soun"
-#~ msgstr "الشمس"
 
 #~ msgid "South River"
 #~ msgstr "النهر الجنوبي"
@@ -2409,9 +2229,6 @@ msgstr ""
 
 #~ msgid "Square Granary"
 #~ msgstr "الطاحونة المربعة"
-
-#~ msgid "Star"
-#~ msgstr "النجم"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "مقدار اضاءة النجم مضروب في: "
@@ -2430,14 +2247,6 @@ msgstr ""
 
 #~ msgid "Supreme Palace"
 #~ msgstr "القصر الأعلى"
-
-#, fuzzy
-#~ msgid "TaeMi"
-#~ msgstr "الذيل"
-
-#, fuzzy
-#~ msgid "Tae_iil"
-#~ msgstr "الذيل"
 
 #~ msgid "Tail"
 #~ msgstr "الذيل"
@@ -2513,6 +2322,9 @@ msgstr ""
 #~ msgid "Two Sunbeams"
 #~ msgstr "اثنين من اشعه الشمس"
 
+#~ msgid "Type: "
+#~ msgstr "النوع: "
+
 #~ msgid "Ursa Major"
 #~ msgstr "الدب الأكبر"
 
@@ -2540,16 +2352,8 @@ msgstr ""
 #~ msgid "Using System Default Time Zone"
 #~ msgstr "استخدام موقع التوقيت الافتراضي للنظام"
 
-#, fuzzy
-#~ msgid "Veado"
-#~ msgstr "المروج"
-
 #~ msgid "Vela"
 #~ msgstr "الشراع"
-
-#, fuzzy
-#~ msgid "Vespeiro"
-#~ msgstr "العذراء"
 
 #~ msgid "Virgo"
 #~ msgstr "العذراء"
@@ -2593,8 +2397,7 @@ msgstr ""
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
-#, fuzzy
-#~ msgid "YeoSa"
+#~ msgid "Year"
 #~ msgstr "سنة"
 
 #~ msgid "Yes"
