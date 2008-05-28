@@ -102,6 +102,8 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
+	//! Set the color for all the sub elements
+	void setColor(const QColor& c);
 private:
 	void updateText();
 	QRectF getButtonsBoundingRect();
