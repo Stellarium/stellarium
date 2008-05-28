@@ -211,20 +211,22 @@ void Atmosphere::draw(Projector* prj)
 {
 	if(fader.getInterstate())
 	{
-		// TEST
-		//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_MAX);
-		//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
-// 		glCullFace(GL_FRONT);
-// 		glEnable(GL_CULL_FACE);
+ 		// glEnable(GL_CULL_FACE);
 		for (int y2=0; y2<sky_resolution_y; ++y2)
 		{
 			const GridPoint *g0 = grid + y2*(1+sky_resolution_x);
 			const GridPoint *g1 = g0;
-			if (y2&1) g1+=(1+sky_resolution_x);
-			else g0+=(1+sky_resolution_x);
+			if (y2&1)
+			{
+				g1+=(1+sky_resolution_x);
+			}
+			else
+			{
+				g0+=(1+sky_resolution_x);
+			}
 			glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
 			{
@@ -235,6 +237,6 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
-//		if(GLEE_EXT_blend_minmax) glBlendEquation(GL_FUNC_ADD);
+ 		//glDisable(GL_CULL_FACE);
 	}
 }
