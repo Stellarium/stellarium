@@ -432,6 +432,10 @@ void SolarSystem::loadPlanets()
 				const double period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					if (parent->get_parent()) {
+						qWarning() << "ERROR: " << englishName
+							<< ": when the parent body is not the sun, you must provide "
+							<< "either orbit_MeanMotion or orbit_Period";
+					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating mean_motion:
 						mean_motion = (eccentricity == 1.0)
@@ -440,10 +444,6 @@ void SolarSystem::loadPlanets()
 						            : (semi_major_axis > 0.0)
 						            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 						            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
-					} else {
-						qWarning() << "ERROR: " << englishName
-							<< ": when the parent body is not the sun, you must provide "
-							<< "either orbit_MeanMotion or orbit_Period";
 					}
 				} else {
 					mean_motion = 2.0*M_PI/period;
