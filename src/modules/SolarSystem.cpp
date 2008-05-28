@@ -304,7 +304,7 @@ void SolarSystem::loadPlanets()
 			if (parent == NULL)
 			{
 				qWarning() << "ERROR : can't find parent solar system body for " << englishName;
-				assert(0);
+				abort();
 				continue;
 			}
 		}
@@ -327,7 +327,7 @@ void SolarSystem::loadPlanets()
 				if (semi_major_axis <= -1e100) {
 					qDebug() << "ERROR: " << englishName
 						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
-					assert(0);
+					abort();
 				} else {
 					semi_major_axis /= AU;
 					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
@@ -403,6 +403,11 @@ void SolarSystem::loadPlanets()
 		else if (funcName=="comet_orbit")
 		{
 			// Read the orbital elements
+			// orbit_PericenterDistance,orbit_SemiMajorAxis: given in AU
+			// orbit_MeanMotion: given in degrees/day
+			// orbit_Period: given in days
+			// orbit_TimeAtPericenter,orbit_Epoch: JD
+			// orbit_MeanAnomaly,orbit_Inclination,orbit_ArgOfPericenter,orbit_AscendingNode: given in degrees
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
 			if (eccentricity >= 1.0) close_orbit = false;
 			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
@@ -412,7 +417,7 @@ void SolarSystem::loadPlanets()
 				if (semi_major_axis <= -1e100) {
 					qWarning() << "ERROR: " << englishName
 						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
-					assert(0);
+					abort();
 				} else {
 					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
 					pericenter_distance = semi_major_axis * (1.0-eccentricity);
@@ -423,22 +428,28 @@ void SolarSystem::loadPlanets()
 				                : pericenter_distance / (1.0-eccentricity);
 			}
 			double mean_motion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
-			double period;
 			if (mean_motion <= -1e100) {
-				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
+				const double period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
-					mean_motion = (eccentricity == 1.0)
-					            ? 0.01720209895 * (1.5/pericenter_distance)
-					                            * sqrt(0.5/pericenter_distance)
-					            : (semi_major_axis > 0.0)
-					            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-					            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
-					period = 2.0*M_PI/mean_motion;
+					if (parent->get_parent()) {
+						// in case of parent=sun: use Gaussian gravitational constant
+						// for calculating mean_motion:
+						mean_motion = (eccentricity == 1.0)
+						            ? 0.01720209895 * (1.5/pericenter_distance)
+						                            * sqrt(0.5/pericenter_distance)
+						            : (semi_major_axis > 0.0)
+						            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+						            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+					} else {
+						qWarning() << "ERROR: " << englishName
+							<< ": when the parent body is not the sun, you must provide "
+							<< "either orbit_MeanMotion or orbit_Period";
+					}
 				} else {
 					mean_motion = 2.0*M_PI/period;
 				}
 			} else {
-				period = 2.0*M_PI/mean_motion;
+				mean_motion *= (M_PI/180.0);
 			}
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
 			if (time_at_pericenter <= -1e100) {
@@ -448,16 +459,15 @@ void SolarSystem::loadPlanets()
 					qWarning() << "ERROR: " << englishName
 						<< ": when you do not provide orbit_TimeAtPericenter, you must provide both "
 						<< "orbit_Epoch and orbit_MeanAnomaly";
-					assert(0);
+					abort();
 				} else {
 					mean_anomaly *= (M_PI/180.0);
-//already calculated					const double mean_motion = 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis));
 					time_at_pericenter = epoch - mean_anomaly / mean_motion;
 				}
 			}
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
-			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
+			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
 			const double parent_rot_obliquity = parent->get_parent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
