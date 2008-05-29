@@ -102,7 +102,12 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
 	if (helpLabel && action)
-		helpLabel->setText(action->toolTip() + "  [" + action->shortcut().toString() + "]");
+	{
+		QString shortcut = action->shortcut().toString();
+		if (shortcut == "Space")
+			shortcut = q_("Space");
+		helpLabel->setText(action->toolTip() + "  [" + shortcut + "]");
+	}
 }
 		
 void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
