@@ -30,7 +30,7 @@
 /*********************************************************************
  Constructor: Set some default values to prevent bugs in case of bad use
 *********************************************************************/
-ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), oneOverGamma(1.f/2.3f)
+ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), sqrtOneOverMaxdL(1.f/10.f), oneOverGamma(1.f/2.3f)
 {
 	// Initialize  sensor
 	setOutputScale();
@@ -141,7 +141,7 @@ void ToneReproducer::xyYToRGB(float* color) const
 	}
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	// color[2] = std::pow(adaptLuminance(color[2]) * oneOverMaxdL, oneOverGamma);
+	// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
 	color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 	
 	// Convert from xyY to XZY

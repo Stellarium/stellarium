@@ -101,13 +101,16 @@ void SkyDrawer::update(double deltaTime)
 			fov = min_fov;
 	}
 	
-	eye->setOutputScale(30.f);
+	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
+	// It could be made to vary progressively to switch from human vision to binocculares/telescope etc..
+	eye->setOutputScale(6000.f);
 	
 	// Temporary use a fake 60 deg fov to compute min rmag
 	lnfov_factor = std::log(60.f*60.f / (60*60) / (0.025*0.025));
-	min_rmag = std::sqrt(eye->adaptLuminance(pointSourceMagToLuminance(max_scaled_60deg_mag)));
+	min_rmag = std::sqrt(eye->adaptLuminanceScaled(pointSourceMagToLuminance(max_scaled_60deg_mag)));
 	
 	// Set the fov factor for point source luminance computation
+	// The 0.025 corresponds to the maximum eye resolution in degree
 	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (0.025*0.025));
 }
 
@@ -129,8 +132,8 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	}
 
     // rmag:
-	//rc_mag[0] = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 30.f;
-	rc_mag[0] = eye->sqrtAdaptLuminanceLn(pointSourceMagToLnLuminance(mag));
+	//rc_mag[0] = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 300.f;
+	rc_mag[0] = eye->sqrtAdaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag));
 
 	if (rc_mag[0] < min_rmag)
 	{
