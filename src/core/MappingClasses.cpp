@@ -79,7 +79,7 @@ QString MappingEqualArea::getNameI18() const
 
 QString MappingEqualArea::getDescriptionI18() const
 {
-	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>.");
+	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
 }
 
 MappingEqualArea MappingEqualArea::instance;
@@ -135,7 +135,7 @@ QString MappingStereographic::getNameI18() const
 
 QString MappingStereographic::getDescriptionI18() const
 {
-	return q_("This mode is similar to fish-eye projection mode.");
+	return q_("Stereographic projection is known since the antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
 }
 
 MappingStereographic MappingStereographic::instance;
@@ -225,7 +225,7 @@ QString MappingCylinder::getNameI18() const
 
 QString MappingCylinder::getDescriptionI18() const
 {
-	return q_("The full name of this projection mode is <i>cylindrical equidistant projection</i>.");
+	return q_("The full name of this projection mode is <i>cylindrical equidistant projection</i>. With this projection all parallels are equally spaced.");
 }
 
 MappingCylinder MappingCylinder::instance;
@@ -280,7 +280,7 @@ QString MappingMercator::getNameI18() const
 
 QString MappingMercator::getDescriptionI18() const
 {
-	return q_("Mercator projection");
+	return q_("The mercator projection is one of the most used world map projection. It preserves direction and shapes but distorts size, in an increasing degree away from the equator.");
 }
 
 MappingMercator MappingMercator::instance;

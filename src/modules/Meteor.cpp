@@ -130,8 +130,8 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
 
   // Compute the equivalent star luminance for a 5 arc min circle and convert it
   // in function of the eye adaptation
-  rmag = eye->adaptLuminance(term1);
-  rmag = rmag/powf(proj->getFov(),0.85f)*50.f;
+  rmag = eye->adaptLuminanceScaled(term1);
+  rmag = rmag/powf(proj->getFov(),0.85f)*500.f;
 
   // if size of star is too small (blink) we put its size to 1.2 --> no more blink
   // And we compensate the difference of brighteness with cmag
