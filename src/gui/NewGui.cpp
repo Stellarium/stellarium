@@ -409,7 +409,7 @@ void NewGui::init()
 	addGuiActions("actionShow_Stars", N_("Toggle stars"), "S", group, true, false);
 	addGuiActions("actionShow_Planets_Hints", N_("Toggle planets hints"), "P", group, true, false);
 	
-	addGuiActions("actionShow_Night_Mode", N_("Toggle night mode"), "Q", group, true, false);
+	addGuiActions("actionShow_Night_Mode", N_("Toggle night mode"), "", group, true, false);
 	addGuiActions("actionSet_Full_Screen", N_("Toggle full-screen mode"), "F1", group, true, false);
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
