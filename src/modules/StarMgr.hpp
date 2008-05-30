@@ -110,12 +110,12 @@ public:
 	virtual vector<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching Stars object's pointer if exists or NULL
-	//! @param nameI18n The case sensistive star common name or HP
+	//! @param nameI18n The case in-sensistive star common name or HP
 	//! catalog name (format can be HP1234 or HP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;	
 
 	//! Return the matching star if exists or NULL
-	//! @param name The case sensistive standard program planet name
+	//! @param name The case in-sensistive standard program planet name
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.

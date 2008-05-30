@@ -97,11 +97,12 @@ public:
 	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching nebula object's pointer if exists or NULL.
-	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
+	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can 
+	//! be M31, M 31, NGC31, NGC 31
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	
 	//! Return the matching nebula if exists or NULL.
-	//! @param name The case sensistive standard program name
+	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
