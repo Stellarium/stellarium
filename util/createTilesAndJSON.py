@@ -67,14 +67,15 @@ def main():
 
 	imgFile = sys.argv[1]
 	
+	# Try to read the header file provided to extract the WCS
 	if headerFile != None:
 		wcs = astWCS.WCS(headerFile)
 	else:
+		# Or try to generate the WCS by hand
 		(nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch) = sys.argv[2:]
 		worldCoord = astWCS.wcs.wcskinit(nxpix, nypix, ctype1, ctype2, crpix1, crpix2, crval1, crval2, cd, cdelt1, cdelt2, crota, equinox, epoch)
 		coordFrameCstr = 'J2000'
 		wcs = astWCS.wcs.wcsininit(worldCoord, coordFrameCstr);
-	TILE_SIZE = 256
 	
 	im = Image.open(imgFile)
 	
@@ -83,7 +84,8 @@ def main():
 	nbLevels = int(math.log(max(nbTileX, nbTileY))/math.log(2)+1)
 	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels, 'levels'
 	
-	# Create the index for this tile
+	# Create the master level 0 tile, which recursively creates the subtiles
+	# and sets its 
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, False)
 	masterTile.luminance = 1.
 	masterTile.credits = "ESO"
