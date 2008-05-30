@@ -76,7 +76,7 @@ public:
 	//! This value is used to scale the RGB range
 	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2
 	void setMaxDisplayLuminance(float maxdL)
-	{oneOverMaxdL = 1.f/maxdL; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
+	{oneOverMaxdL = 1.f/maxdL; sqrtOneOverMaxdL=std::sqrt(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
 	//! Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.3
@@ -91,13 +91,29 @@ public:
 		return std::pow((float)(worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2 * outputScale;
 	}
 
+	//! Return adapted luminance from world to display with 1 corresponding to full display white
+	//! @param worldLuminance the world luminance to convert in cd/m^2
+	//! @return the converted display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	float adaptLuminanceScaled(float worldLuminance) const
+	{
+		return adaptLuminance(worldLuminance)*oneOverMaxdL;
+	}
+	
 	//! Return adapted ln(luminance) from world to display
 	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
-	//! @return the converted display luminance in cd/m^2
+	//! @return the converted display luminance in sqrt(cd/m^2)
 	float sqrtAdaptLuminanceLn(float lnWorldLuminance) const
 	{
 		const float lnPix0p0001 = -8.0656104861f;
 		return std::exp((lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa*0.5f)*sqrtTerm2*sqrtOutputScale;
+	}
+	
+	//! Return adapted ln(luminance) from world to display with 1 corresponding to full display white
+	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
+	//! @return the converted sqrt of the display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	float sqrtAdaptLuminanceScaledLn(float lnWorldLuminance) const
+	{
+		return sqrtAdaptLuminanceLn(lnWorldLuminance)*sqrtOneOverMaxdL;
 	}
 	
 	//! Convert from xyY color system to RGB.
@@ -108,11 +124,12 @@ public:
 private:
 	// The global luminance scaling
 	float outputScale;
-	float sqrtOutputScale;
+	float sqrtOutputScale;	// sqrt(outputScale)
 	
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)
 	float oneOverMaxdL;	// 1 / Display maximum luminance (in cd/m^2)
+	float sqrtOneOverMaxdL; // sqrt(oneOverMaxdL)
 	float oneOverGamma;	// 1 / Screen gamma value
 
 	// Precomputed variables

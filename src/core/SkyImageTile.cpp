@@ -329,7 +329,7 @@ void SkyImageTile::drawTile(StelCore* core)
 	float ad_lum;
 	if (luminance>0)
 	{
-		ad_lum=core->getToneReproducer()->adaptLuminance(luminance);
+		ad_lum=core->getToneReproducer()->adaptLuminanceScaled(luminance);
 		if (ad_lum<0.01)
 		{
 			return;

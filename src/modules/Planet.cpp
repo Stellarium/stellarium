@@ -740,7 +740,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 		float cmag;
 		float rmag;
 	
-		cmag = std::sqrt(eye->adaptLuminance(std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos()) + 12.12331f)) * 108064.73f*0.0001))*0.1;
+		cmag = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos()) + 12.12331f)) * 108064.73f*0.0001));
 		rmag = big_halo_size/2;
 		float screen_r = getOnScreenSize(prj, nav)*8;	// Size in pixel at which the halo should start to disapear
 		if (cmag>1.f) cmag = 1.f;
