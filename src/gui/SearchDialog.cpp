@@ -27,11 +27,70 @@
 #include "StelModuleMgr.hpp"
 #include "MovementMgr.hpp"
 
+#include <QTextEdit>
+#include <QString>
+#include <QStringList>
 #include <QDebug>
 #include <QFrame>
 
 #include "StelMainGraphicsView.hpp"
 
+// Start of members for class CompletionTextEdit
+CompletionTextEdit::CompletionTextEdit(QWidget* parent)
+	: QTextEdit(parent), 
+	  selectedIdx(0)
+{
+}
+
+CompletionTextEdit::~CompletionTextEdit()
+{
+}
+
+QString CompletionTextEdit::getSelected(void)
+{
+	return toPlainText().split(",").at(selectedIdx);
+}
+
+void CompletionTextEdit::selectNext(void)
+{
+	selectedIdx++;
+	if (selectedIdx > toPlainText().count(",")) selectedIdx = 0; // wrap if necessary
+	updateSelected();
+}
+
+void CompletionTextEdit::selectPrevious(void)
+{
+	selectedIdx--;
+	if (selectedIdx < 0) selectedIdx = toPlainText().count(","); // wrap if necessary
+	updateSelected();
+}
+
+void CompletionTextEdit::selectFirst(void)
+{
+	selectedIdx=0;
+	updateSelected();
+}
+
+void CompletionTextEdit::updateSelected(void)
+{
+	QStringList items = toPlainText().split(",");
+	QString newHtml("<html><head></head><body>");
+	for(int i=0; i<selectedIdx; i++)
+		newHtml += items.at(i) + ",";
+
+	newHtml += "<b>" + items.at(selectedIdx) + "</b>,";
+
+	for(int i=selectedIdx+1; i<items.size(); i++)
+		newHtml += items.at(i) + ",";
+
+	newHtml.replace(QRegExp(",+$"), "");
+
+	newHtml += "</body></html>";
+
+	setHtml(newHtml);
+}
+
+// Start of members for class SearchDialog
 SearchDialog::SearchDialog()
 {
 	ui = new Ui_searchDialogForm;
@@ -62,6 +121,8 @@ void SearchDialog::createDialogContent()
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+	connect(ui->actionSelect_Next_Result, SIGNAL(triggered()), ui->completionText, SLOT(selectNext()));
+	connect(ui->actionSelect_Previous_Result, SIGNAL(triggered()), ui->completionText, SLOT(selectPrevious()));
 }
 
 void SearchDialog::setVisible(bool v)
@@ -76,12 +137,13 @@ void SearchDialog::setVisible(bool v)
 void SearchDialog::onTextChanged(const QString& text)
 {
 	QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
-	ui->labelCompletions->setText(matches.join(","));
+	ui->completionText->setText(matches.join(","));
+	ui->completionText->selectFirst();
 }
 
 void SearchDialog::gotoObject()
 {
-	QString name = ui->lineEditSearchSkyObject->text();
+	QString name = ui->completionText->getSelected();
 	
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	
@@ -100,7 +162,7 @@ void SearchDialog::gotoObject()
 	}
 	else
 	{
-		ui->labelCompletions->setText(QString("%1 is unknown!").arg(name));
+		ui->completionText->setText(QString("%1 is unknown!").arg(name));
 	}
 }
 
