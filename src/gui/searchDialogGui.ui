@@ -5,30 +5,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>465</width>
-    <height>106</height>
+    <width>425</width>
+    <height>141</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle" >
    <string>Find Object</string>
   </property>
   <property name="windowIcon" >
-   <iconset/>
+   <iconset>
+    <normaloff/>
+   </iconset>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
+   <property name="sizeConstraint" >
+    <enum>QLayout::SetNoConstraint</enum>
    </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -69,7 +71,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -89,7 +91,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -105,8 +107,11 @@
           <height>17</height>
          </size>
         </property>
+        <property name="focusPolicy" >
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -128,116 +133,163 @@ color: darkgray;
    </item>
    <item>
     <widget class="QFrame" name="frame" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape" >
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow" >
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLineEdit" name="lineEditSearchSkyObject" >
-        <property name="palette" >
-         <palette>
-          <active>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Highlight" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>169</red>
-              <green>169</green>
-              <blue>169</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Highlight" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>169</red>
-              <green>169</green>
-              <blue>169</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="Base" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>255</red>
-              <green>255</green>
-              <blue>255</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Highlight" >
-            <brush brushstyle="SolidPattern" >
-             <color alpha="255" >
-              <red>169</red>
-              <green>169</green>
-              <blue>169</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="font" >
-         <font/>
-        </property>
-        <property name="autoFillBackground" >
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout" >
+        <item>
+         <widget class="QLineEdit" name="lineEditSearchSkyObject" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="palette" >
+           <palette>
+            <active>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Highlight" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>169</red>
+                <green>169</green>
+                <blue>169</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Highlight" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>169</red>
+                <green>169</green>
+                <blue>169</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Highlight" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>169</red>
+                <green>169</green>
+                <blue>169</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="font" >
+           <font/>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="autoFillBackground" >
+           <bool>false</bool>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonGotoSearchSkyObject" >
+          <property name="minimumSize" >
+           <size>
+            <width>80</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text" >
+           <string>Go</string>
+          </property>
+          <property name="checkable" >
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="CompletionTextEdit" name="completionText" >
+        <property name="enabled" >
          <bool>false</bool>
         </property>
-        <property name="text" >
-         <string/>
+        <property name="focusPolicy" >
+         <enum>Qt::NoFocus</enum>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="QPushButton" name="pushButtonGotoSearchSkyObject" >
-        <property name="minimumSize" >
-         <size>
-          <width>80</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text" >
-         <string>Go</string>
-        </property>
-        <property name="checkable" >
+        <property name="acceptDrops" >
          <bool>false</bool>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2" >
-       <widget class="QLabel" name="labelCompletions" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="toolTip" >
+         <string>This is a list of the first few matching results</string>
         </property>
-        <property name="text" >
-         <string/>
+        <property name="frameShape" >
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="verticalScrollBarPolicy" >
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy" >
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="undoRedoEnabled" >
+         <bool>false</bool>
+        </property>
+        <property name="html" >
+         <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[search results here]&lt;/p>&lt;/body>&lt;/html></string>
+        </property>
+        <property name="textInteractionFlags" >
+         <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
         </property>
        </widget>
       </item>
@@ -245,6 +297,22 @@ color: darkgray;
     </widget>
    </item>
   </layout>
+  <action name="actionSelect_Next_Result" >
+   <property name="text" >
+    <string>Select Next Result</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Tab</string>
+   </property>
+  </action>
+  <action name="actionSelect_Previous_Result" >
+   <property name="text" >
+    <string>Select Previous Result</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+Backtab</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -253,7 +321,17 @@ color: darkgray;
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CompletionTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>SearchDialog.hpp</header>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>lineEditSearchSkyObject</tabstop>
+  <tabstop>completionText</tabstop>
+  <tabstop>closeButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
