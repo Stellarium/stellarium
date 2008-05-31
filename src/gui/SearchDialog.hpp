@@ -21,16 +21,39 @@
 #define _SEARCHDIALOG_HPP_
 
 #include <QObject>
+#include <QTextEdit>
 #include "StelDialog.hpp"
 
 // pre declaratio of the ui class
 class Ui_searchDialogForm;
 
+class CompletionTextEdit : public QTextEdit
+{
+	Q_OBJECT;
+
+public:
+	CompletionTextEdit(QWidget* parent=0);
+	~CompletionTextEdit();
+
+	QString getSelected(void);
+
+public slots:
+	void selectNext(void);
+	void selectPrevious(void);
+	void selectFirst(void);
+
+private:
+	void updateSelected(void);
+	int selectedIdx;
+
+};
+
 //!	@class SearchDialog
 //! contains the search dialog widget 
 class SearchDialog : public StelDialog
 {
-Q_OBJECT
+	Q_OBJECT;
+
 public:
 	SearchDialog();
 	virtual ~SearchDialog();
