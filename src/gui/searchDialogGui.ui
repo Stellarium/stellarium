@@ -297,22 +297,6 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
   </layout>
-  <action name="actionSelect_Next_Result" >
-   <property name="text" >
-    <string>Select Next Result</string>
-   </property>
-   <property name="shortcut" >
-    <string>Ctrl+Tab</string>
-   </property>
-  </action>
-  <action name="actionSelect_Previous_Result" >
-   <property name="text" >
-    <string>Select Previous Result</string>
-   </property>
-   <property name="shortcut" >
-    <string>Ctrl+Shift+Backtab</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>
