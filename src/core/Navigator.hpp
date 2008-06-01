@@ -82,7 +82,7 @@ public:
 	
 	const Planet *getHomePlanet(void) const;
 
-    // Return the observer heliocentric position
+	// Return the observer heliocentric position
 	Vec3d getObserverHelioPos(void) const;
 
 	// Transform vector from local coordinate to equatorial
@@ -98,7 +98,7 @@ public:
 	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
 
 	// Transform vector from heliocentric coordinate to earth equatorial,
-    // only needed in meteor.cpp
+	// only needed in meteor.cpp
 	Vec3d helio_to_earth_equ(const Vec3d& v) const { return mat_helio_to_earth_equ*v; }
 
 	// Transform vector from heliocentric coordinate to false equatorial : equatorial
@@ -194,6 +194,9 @@ public slots:
 	//! based on the observer body's rotational period.
 	//! @param d the decimal number of sidereal days to add (use negative values to subtract)
 	void addSiderealDays(double d);
+	//! Move the observer to the selected objejct. This will only do something if
+	//! the selected object is of the correct type - i.e. a planet.
+	void moveObserverToSelected(void);
 	
 private:
 	// Matrices used for every coordinate transfo
