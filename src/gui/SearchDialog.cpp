@@ -155,7 +155,7 @@ void SearchDialog::gotoObject()
 				StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration()
 			);
 			mvmgr->setFlagTracking(true);
-			close();
+			// close();
 		}
 	}
 	else
@@ -169,9 +169,14 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 	if (object == ui->lineEditSearchSkyObject && event->type() == QEvent::KeyRelease) 
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-		if (keyEvent->key() == Qt::Key_Tab) 
+		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down) 
 		{
 			ui->completionText->selectNext();
+			return true;
+		} 
+		if (keyEvent->key() == Qt::Key_Up) 
+		{
+			ui->completionText->selectPrevious();
 			return true;
 		} 
 		else
