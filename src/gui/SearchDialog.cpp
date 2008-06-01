@@ -111,7 +111,6 @@ void SearchDialog::languageChanged()
 	}
 }
 
-
 // Initialize the dialog widgets and connect the signals/slots
 void SearchDialog::createDialogContent()
 {
@@ -121,8 +120,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
-	connect(ui->actionSelect_Next_Result, SIGNAL(triggered()), ui->completionText, SLOT(selectNext()));
-	connect(ui->actionSelect_Previous_Result, SIGNAL(triggered()), ui->completionText, SLOT(selectPrevious()));
+	ui->lineEditSearchSkyObject->installEventFilter(this);
 }
 
 void SearchDialog::setVisible(bool v)
@@ -164,5 +162,23 @@ void SearchDialog::gotoObject()
 	{
 		ui->completionText->setText(QString("%1 is unknown!").arg(name));
 	}
+}
+
+bool SearchDialog::eventFilter(QObject *object, QEvent *event)
+{
+	if (object == ui->lineEditSearchSkyObject && event->type() == QEvent::KeyRelease) 
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if (keyEvent->key() == Qt::Key_Tab) 
+		{
+			ui->completionText->selectNext();
+			return true;
+		} 
+		else
+			return false;
+	}
+
+	return false;
+
 }
 

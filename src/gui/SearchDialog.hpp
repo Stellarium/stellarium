@@ -48,7 +48,7 @@ private:
 
 };
 
-//!	@class SearchDialog
+//! @class SearchDialog
 //! contains the search dialog widget 
 class SearchDialog : public StelDialog
 {
@@ -58,15 +58,19 @@ public:
 	SearchDialog();
 	virtual ~SearchDialog();
 	void languageChanged();
+
 public slots:
 	// Add auto focus of the edit line
 	void setVisible(bool);
 	void onTextChanged(const QString& text);
 	void gotoObject();
+
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	bool eventFilter(QObject *object, QEvent *event);
+
 };
 
 #endif // _SEARCHDIALOG_HPP_
