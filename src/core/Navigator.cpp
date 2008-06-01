@@ -23,6 +23,8 @@
 #include "SolarSystem.hpp"
 #include "Observer.hpp"
 #include "Planet.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelCore.hpp"
 
 #include <QSettings>
 #include <QStringList>
@@ -117,6 +119,16 @@ void Navigator::addSiderealDays(double d)
 	if (home->getEnglishName() != "Solar System Observer")
 	d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
+}
+
+void Navigator::moveObserverToSelected(void)
+{
+	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+	{
+		Planet* pl = dynamic_cast<Planet*>(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0].get());
+		if (pl) 
+			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(pl);
+	}
 }
 
 //! Increase the time speed

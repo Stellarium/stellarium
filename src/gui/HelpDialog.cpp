@@ -170,17 +170,25 @@ void HelpDialog::updateText(void)
 {
 	QString newHtml(getHeaderText());
 
+	// The key in the multi-map is the group (section of help, e.g. "Dialogs")
+	// the multiple values are pairs of keycode and descriptions, which we add
+	// to the text as rows in a table.
 	QMapIterator<QString, QPair<QString, QString> > i(keyData);
 	QString lastGroup;
 	bool firstGroup = true;
 	newHtml += "<table cellpadding=\"10%\">\n";
+
+	// for each group...
 	while(i.hasNext())
 	{
 		i.next();
 		QString thisGroup(i.key());
+
+		// If no gorup is specified, the info goes in the "Misc" group.
 		if (thisGroup.isEmpty())
 			thisGroup = N_("Misc");
 
+		// When we start a new group, we need a header for it
 		if (thisGroup != lastGroup)
 		{
 			if (firstGroup)
