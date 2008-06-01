@@ -56,6 +56,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QFile>
+#include <QKeySequence>
 
 #include <vector>
 
@@ -410,17 +411,17 @@ void NewGui::init()
 	addGuiActions("actionShow_Planets_Hints", N_("Toggle planets hints"), "P", group, true, false);
 	
 	addGuiActions("actionShow_Night_Mode", N_("Toggle night mode"), "", group, true, false);
-	addGuiActions("actionSet_Full_Screen", N_("Toggle full-screen mode"), "F1", group, true, false);
+	addGuiActions("actionSet_Full_Screen", N_("Toggle full-screen mode"), "F11", group, true, false);
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 	
 	group = N_("Dialogs");
-	addGuiActions("actionShow_Search_Window", N_("Toggle search window"), "Ctrl+F", group, true, false);
-	addGuiActions("actionShow_Help_Window", N_("Toggle help window"), "Ctrl+H", group, true, false);
-	addGuiActions("actionShow_Location_Window", N_("Toggle location window"), "Ctrl+L", group, true, false);
-	addGuiActions("actionShow_DateTime_Window", N_("Toggle date/time window"), "Ctrl+T", group, true, false);
-	addGuiActions("actionShow_SkyView_Window", N_("Toggle sky and viewing options window"), "Ctrl+G", group, true, false);
-	addGuiActions("actionShow_Configuration_Window", N_("Toggle configuration window"), "Ctrl+C", group, true, false);
+	addGuiActions("actionShow_Help_Window", N_("Toggle help window"), "F1", group, true, false);
+	addGuiActions("actionShow_Configuration_Window", N_("Toggle configuration window"), "F2", group, true, false);
+	addGuiActions("actionShow_Search_Window", N_("Toggle search window"), "F3,Ctrl+F", group, true, false);
+	addGuiActions("actionShow_SkyView_Window", N_("Toggle sky and viewing options window"), "F4", group, true, false);
+	addGuiActions("actionShow_DateTime_Window", N_("Toggle date/time window"), "F5", group, true, false);
+	addGuiActions("actionShow_Location_Window", N_("Toggle location window"), "F6", group, true, false);
 	
 	group = N_("Date and Time");
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
@@ -437,18 +438,19 @@ void NewGui::init()
 	addGuiActions("actionSubtract_Sidereal_Day", N_("Subtract 1 sidereal day"), "Alt+-", group, false, true);
 	addGuiActions("actionAdd_Sidereal_Week", N_("Add 1 sidereal week"), "Alt+]", group, false, true);
 	addGuiActions("actionSubtract_Sidereal_Week", N_("Subtract 1 sidereal week"), "Alt+[", group, false, true);
+
 	
 	group = N_("Movement and Selection");
 	addGuiActions("actionGoto_Selected_Object", N_("Center on selected object"), "Space", group, false, false);
 	addGuiActions("actionSet_Tracking", N_("Toggle object tracking"), "T", group, true, false);
 	addGuiActions("actionZoom_In_Auto", N_("Zoom in on selected object"), "/", group, false, false);
 	addGuiActions("actionZoom_Out_Auto", N_("Zoom out"), "\\", group, false, false);
+	addGuiActions("actionSet_Home_Planet_To_Selected", N_("Set home planet to selected planet"), "Ctrl+G", group, false, false);
 	
 	group = N_("Misc");
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
 	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
-	
 	addGuiActions("action_Reload_Style", "Reload Style", "Ctrl+R", "debug", false, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
@@ -519,6 +521,8 @@ void NewGui::init()
 	QObject::connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(addSiderealWeek()));
 	QObject::connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), module, SLOT(subtractSiderealDay()));
 	QObject::connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), module, SLOT(subtractSiderealWeek()));
+	QObject::connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), module, SLOT(moveObserverToSelected()));
+
 			
 	module = &StelApp::getInstance();
 	QObject::connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), module, SLOT(setVisionModeNight(bool)));
@@ -909,7 +913,12 @@ void NewGui::addGuiActions(const QString& actionName, const QString& text, const
 	a = new QAction(&StelMainGraphicsView::getInstance());
 	a->setObjectName(actionName);
 	a->setText(q_(text));
-	a->setShortcut(shortCut);
+	QList<QKeySequence> shortcuts;
+	QStringList shortcutStrings = shortCut.split(",");
+	for (int i = 0; i < shortcutStrings.size(); ++i)
+		shortcuts << QKeySequence(shortcutStrings.at(i));
+	
+	a->setShortcuts(shortcuts);
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
