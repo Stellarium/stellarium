@@ -57,6 +57,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QKeySequence>
+#include <QRegExp>
 
 #include <vector>
 
@@ -423,7 +424,7 @@ void NewGui::init()
 	group = N_("Dialogs");
 	addGuiActions("actionShow_Help_Window", N_("Toggle help window"), "F1", group, true, false);
 	addGuiActions("actionShow_Configuration_Window", N_("Toggle configuration window"), "F2", group, true, false);
-	addGuiActions("actionShow_Search_Window", N_("Toggle search window"), "F3,Ctrl+F", group, true, false);
+	addGuiActions("actionShow_Search_Window", N_("Toggle search window"), "F3, Ctrl+F", group, true, false);
 	addGuiActions("actionShow_SkyView_Window", N_("Toggle sky and viewing options window"), "F4", group, true, false);
 	addGuiActions("actionShow_DateTime_Window", N_("Toggle date/time window"), "F5", group, true, false);
 	addGuiActions("actionShow_Location_Window", N_("Toggle location window"), "F6", group, true, false);
@@ -919,9 +920,9 @@ void NewGui::addGuiActions(const QString& actionName, const QString& text, const
 	a->setObjectName(actionName);
 	a->setText(q_(text));
 	QList<QKeySequence> shortcuts;
-	QStringList shortcutStrings = shortCut.split(",");
+	QStringList shortcutStrings = shortCut.split(QRegExp(",(?!,|$)"));
 	for (int i = 0; i < shortcutStrings.size(); ++i)
-		shortcuts << QKeySequence(shortcutStrings.at(i));
+		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
 	
 	a->setShortcuts(shortcuts);
 	a->setCheckable(checkable);
