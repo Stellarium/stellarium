@@ -91,9 +91,9 @@ void Translator::initSystemLanguage(void)
 
 	//change systemLangName to ISO 639 / ISO 3166.
 	int pos = systemLangName.indexOf(':', 0);
-	if (pos != -1) systemLangName.resize(pos+1);
+	if (pos != -1) systemLangName.resize(pos);
 	pos = systemLangName.indexOf('.', 0);
-	if (pos == 5) systemLangName.resize(pos+1);
+	if (pos != -1) systemLangName.resize(pos);
 }
 
 void Translator::reload()
@@ -154,7 +154,8 @@ QString Translator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	QLocale loc(languageCode);
 	QString l = loc.name();
-	l.truncate(2);
+	if (l.contains('_'))
+		l.truncate(l.indexOf('_'));
 	if (iso639codes.find(l)!=iso639codes.end())
 	{
 		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
