@@ -62,7 +62,7 @@ void ConfigurationDialog::createDialogContent()
 	int idx = c->findText(l, Qt::MatchExactly);
 	if (idx==-1 && appLang.contains('_'))
 	{
-		l = appLang.left(2);
+		l = appLang.left(appLang.indexOf('_'));
 		l=Translator::iso639_1CodeToNativeName(l);
 		idx = c->findText(l, Qt::MatchExactly);
 	}
