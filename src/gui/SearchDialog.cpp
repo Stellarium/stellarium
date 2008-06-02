@@ -134,9 +134,14 @@ void SearchDialog::setVisible(bool v)
 
 void SearchDialog::onTextChanged(const QString& text)
 {
-	QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
-	ui->completionText->setText(matches.join(","));
-	ui->completionText->selectFirst();
+	if (text=="")
+		ui->completionText->setText("");
+	else
+	{
+		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
+		ui->completionText->setText(matches.join(","));
+		ui->completionText->selectFirst();
+	}
 }
 
 void SearchDialog::gotoObject()
