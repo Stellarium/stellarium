@@ -104,10 +104,15 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 		timeLine->start();
 	if (helpLabel && action)
 	{
-		QString shortcut = action->shortcut().toString();
-		if (shortcut == "Space")
-			shortcut = q_("Space");
-		helpLabel->setText(action->toolTip() + "  [" + shortcut + "]");
+		QString tip(action->toolTip());
+		QString shortcut(action->shortcut().toString());
+		if (!shortcut.isEmpty())
+		{
+			if (shortcut == "Space")
+				shortcut = q_("Space");
+			tip += "  [" + shortcut + "]";
+		}
+		helpLabel->setText(tip);
 	}
 }
 		
