@@ -45,7 +45,8 @@ public:
                     double period,
                     double epoch, // = 2451545.0,
                     double parent_rot_obliquity, // = 0.0,
-                    double parent_rot_ascendingnode // = 0.0
+                    double parent_rot_ascendingnode, // = 0.0
+					double parent_rot_J2000_longitude  // = 0.0
                     );
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
