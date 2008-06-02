@@ -148,24 +148,22 @@ void SearchDialog::gotoObject()
 {
 	QString name = ui->completionText->getSelected();
 	
-	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
-	
-	if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
+	if (name=="") return;
+	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
 	{
+		MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 		const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		if (!newSelected.empty())
 		{
 			ui->lineEditSearchSkyObject->clear();
+			ui->completionText->setText("");
+			ui->completionText->selectFirst();
 			mvmgr->moveTo(newSelected[0]->getEarthEquatorialPos(
 				StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration()
 			);
 			mvmgr->setFlagTracking(true);
 			// close();
 		}
-	}
-	else
-	{
-		ui->completionText->setText(QString("%1 is unknown!").arg(name));
 	}
 }
 
