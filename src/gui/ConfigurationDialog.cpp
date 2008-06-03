@@ -25,7 +25,10 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "Projector.hpp"
+#include "StelCore.hpp"
 
+#include <QSettings>
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
@@ -68,6 +71,12 @@ void ConfigurationDialog::createDialogContent()
 	}
 	c->setCurrentIndex(idx);
 	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+
+	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
+	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
