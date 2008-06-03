@@ -13,22 +13,13 @@
    <string>Form</string>
   </property>
   <property name="styleSheet" >
-   <string/>
+   <string notr="true" />
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>1</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -66,7 +57,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -96,7 +87,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -119,7 +110,7 @@
          </font>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -207,7 +198,7 @@ color: darkgray;
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>101</width>
           <height>27</height>
