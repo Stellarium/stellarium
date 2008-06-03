@@ -228,8 +228,9 @@ void BottomStelBar::updateText()
 	                  +StelApp::getInstance().getLocaleMgr().get_printable_time_local(jd));
 	
 	location->setText(core->getObservatory()->getHomePlanetNameI18n() +", "
-	                  +core->getObservatory()->getLocationName()
-	                  +q_(", %1m").arg(core->getObservatory()->getAltitude()));
+	                  +core->getObservatory()->getLocationName() + ", "
+			  // xgettext:no-c-format
+	                  +q_("%1m").arg(core->getObservatory()->getAltitude()));
 	
 	QString str;
 	QTextStream wos(&str);
