@@ -9,12 +9,16 @@ ADD_CUSTOM_TARGET(
     generate-pot-${stellarium_DOMAIN}
     ${GETTEXT_XGETTEXT_EXECUTABLE}
         -o ${stellarium_POT}
+        -C
+        --qt
         --keyword=_
         --keyword=N_
         --keyword=q_
         --keyword=translate:2
-        -C
-        --qt
+        --flag=_:1:no-c-format
+        --flag=N_:1:no-c-format
+        --flag=q_:1:no-c-format
+        --flag=translate:2:no-c-format
         --add-comments=TRANSLATORS:
         --directory=${PROJECT_SOURCE_DIR}
         --directory=${CMAKE_BINARY_DIR}
