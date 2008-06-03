@@ -127,6 +127,7 @@ QString Planet::getInfoString(const Navigator * nav) const
 		tempRA -= M_PI*2;
 	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
+	// xgettext:no-c-format
 	oss << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 8);
 	
 	return str;
