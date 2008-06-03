@@ -13,22 +13,13 @@
    <string>Form</string>
   </property>
   <property name="styleSheet" >
-   <string/>
+   <string notr="true" />
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -66,7 +57,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -96,7 +87,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -113,7 +104,7 @@
          </size>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -139,22 +130,10 @@ color: darkgray;
       <enum>QFrame::StyledPanel</enum>
      </property>
      <layout class="QGridLayout" >
-      <property name="leftMargin" >
+      <property name="margin" >
        <number>0</number>
       </property>
-      <property name="topMargin" >
-       <number>0</number>
-      </property>
-      <property name="rightMargin" >
-       <number>0</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>0</number>
-      </property>
-      <property name="horizontalSpacing" >
-       <number>0</number>
-      </property>
-      <property name="verticalSpacing" >
+      <property name="spacing" >
        <number>0</number>
       </property>
       <item row="0" column="0" >
@@ -172,6 +151,14 @@ color: darkgray;
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMarking" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>427</width>
+           <height>404</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
