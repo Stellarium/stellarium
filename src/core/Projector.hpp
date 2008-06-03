@@ -439,6 +439,9 @@ public slots:
 		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 
+	//! Set the initial field of view.  Updates configuration file.
+	//! @param the new value for initial field of view in decimal degrees.
+	void setInitFov(double fov);
 
 private:
 	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 

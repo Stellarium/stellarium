@@ -653,6 +653,11 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 	glPopMatrix();
 }
 
+void Projector::setInitFov(double fov)
+{
+	StelApp::getInstance().getSettings()->setValue("navigation/init_fov", fov);
+}
+
 
 void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
   assert(level<64);

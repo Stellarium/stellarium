@@ -386,8 +386,6 @@ color: darkgray;
               </layout>
              </item>
             </layout>
-            <zorder>fullScreenRadio</zorder>
-            <zorder>groupBox</zorder>
            </widget>
           </item>
           <item>
@@ -404,6 +402,19 @@ color: darkgray;
                   <string>Initial field of view</string>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5" >
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0" >
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="initFovSpinBox" >
@@ -641,6 +652,14 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabInterface" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>425</width>
+           <height>450</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Interface</string>
          </attribute>
