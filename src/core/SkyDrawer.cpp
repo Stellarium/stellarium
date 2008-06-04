@@ -144,8 +144,6 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		return -1;
 	}
 
-    // rmag:
-	//rc_mag[0] = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 300.f;
 	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
 	rc_mag[0]*=starLinearScale;
 	
