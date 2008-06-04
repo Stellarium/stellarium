@@ -215,6 +215,8 @@ void StelMainGraphicsView::setFullScreen(bool b)
 		showFullScreen();
 	else
 		showNormal();
+
+	StelApp::getInstance().getSettings()->setValue("video/fullscreen", b);
 }
 
 //! Activate all the QActions associated to the widget
