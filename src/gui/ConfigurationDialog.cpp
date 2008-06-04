@@ -52,11 +52,6 @@ void ConfigurationDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
-void ConfigurationDialog::setStartupFullScreen(bool enabled)
-{
-	StelApp::getInstance().getSettings()->setValue("video/fullscreen", enabled);
-}
-
 void ConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -93,10 +88,6 @@ void ConfigurationDialog::createDialogContent()
 	// Initial direction of view
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
-	// Full screen / windowed mode
-	ui->fullScreenRadio->setChecked(conf->value("video/fullscreen", true).toBool());
-	ui->windowModeRadio->setChecked(!conf->value("video/fullscreen", true).toBool());
-	connect(ui->fullScreenRadio, SIGNAL(toggled(bool)), this, SLOT(setStartupFullScreen(bool)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)

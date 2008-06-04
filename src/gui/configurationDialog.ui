@@ -148,7 +148,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -302,35 +302,6 @@ color: darkgray;
                 </widget>
                </item>
               </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_2" >
-            <property name="title" >
-             <string>Display</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout" >
-             <item>
-              <widget class="QRadioButton" name="fullScreenRadio" >
-               <property name="toolTip" >
-                <string>Puts Stellarium in full screen mode at startup</string>
-               </property>
-               <property name="text" >
-                <string>Full screen mode</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="windowModeRadio" >
-               <property name="toolTip" >
-                <string>Put Stellarium in windowed mode at startup</string>
-               </property>
-               <property name="text" >
-                <string>Windowed mode</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
