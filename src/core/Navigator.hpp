@@ -25,6 +25,7 @@
 #include "fixx11h.h"
 #include <QObject>
 #include <QString>
+#include <QTime>
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
@@ -123,7 +124,7 @@ public:
 	
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode() {return StartupTimeMode;}
-	void setStartupTimeMode(const QString& s) {StartupTimeMode = s;}
+	void setStartupTimeMode(const QString& s);
 	
 	// Update the modelview matrices
 	void updateModelViewMat(void);
@@ -156,8 +157,15 @@ public slots:
 	
 	//! Set stellarium time to current real world time
 	void setTimeNow();
+	//! Set the time to some value, leaving the day the same.
+	void setTodayTime(const QTime& target);
 	//! Get wether the current stellarium time is the real world time
 	bool getIsTimeNow() const;
+
+	//! get the initial "today time" from the config file
+	QTime getInitTodayTime(void);
+	//! set the initial "today time" in the config file
+	void setInitTodayTime(const QTime& t);
 
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour() {addSolarDays(0.04166666666666666667);}
@@ -220,7 +228,7 @@ private:
 	Vec3d local_vision, equ_vision, prec_equ_vision;	// Viewing direction in local and equatorial coordinates
 
 	// Time variable
-    double time_speed;				// Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;        			// Curent time in Julian day
 
 	double PresetSkyTime;

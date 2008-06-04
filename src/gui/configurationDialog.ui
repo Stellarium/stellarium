@@ -236,24 +236,24 @@ color: darkgray;
                 <string>Sets Stellarium's simulation time to the system clock when Stellarium starts</string>
                </property>
                <property name="text" >
-                <string>System time</string>
+                <string>System date and time</string>
                </property>
               </widget>
              </item>
              <item>
               <layout class="QHBoxLayout" >
                <item>
-                <widget class="QRadioButton" name="tonightRadio" >
+                <widget class="QRadioButton" name="todayRadio" >
                  <property name="toolTip" >
                   <string>Sets the simulation time to the next instance of this time of day when Stellarium starts</string>
                  </property>
                  <property name="text" >
-                  <string>Tonight at this time:</string>
+                  <string>System date at this time</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QTimeEdit" name="tonightTimeSpinBox" >
+                <widget class="QTimeEdit" name="todayTimeSpinBox" >
                  <property name="currentSectionIndex" >
                   <number>0</number>
                  </property>
@@ -381,30 +381,6 @@ color: darkgray;
                  </property>
                  <property name="text" >
                   <string>set</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QRadioButton" name="altAziMountRadio" >
-                 <property name="toolTip" >
-                  <string>Pan controls adjust aztitude and azimuth, view remains aligned to horizon</string>
-                 </property>
-                 <property name="text" >
-                  <string>Alt/azi mount</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="equatorialMountRadio" >
-                 <property name="toolTip" >
-                  <string>Pan controls adjust RA/Dec, view is aligned to celestial equator</string>
-                 </property>
-                 <property name="text" >
-                  <string>Equatorial mount</string>
                  </property>
                 </widget>
                </item>
