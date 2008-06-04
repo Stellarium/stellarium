@@ -130,19 +130,15 @@ public slots:
 	//! Stars/planet halos, whose original (unshifted) magnitude is greater than this value will not be drawn.
 	void setMaxMag(float mag) {max_mag = mag;}
 	
-	//! Get SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
-	float getMaxScaled60DegMag(void) const {return max_scaled_60deg_mag;}
-	//! Set SkyDrawer maximum scaled magnitude wrt 60 degree FOV.
-	//! Stars/planet halos, whose original (unshifted) magnitude is greater than this value will not be drawn at 60 degree FOV.
-	void setMaxScaled60DegMag(float mag) {max_scaled_60deg_mag = mag;}
-	
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	void setBortleScale(int index);
 	
+	// DEBUG
 	void setInScale(double in) {inScale = in;}
 	void setOutScale(double ou) {outScale = ou;}
 	void setPFact(double p) {pFact = p;}
+	
 public:
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;
@@ -172,7 +168,7 @@ private:
 	
 	Projector* prj;
 	ToneReproducer* eye;
-	float max_fov, min_fov, mag_shift, max_mag, max_scaled_60deg_mag, min_rmag, lnfov_factor;
+	float max_fov, min_fov, mag_shift, max_mag, lnfov_factor;
 	float starScale;
 	float starMagScale;
 	bool flagPointStar;
