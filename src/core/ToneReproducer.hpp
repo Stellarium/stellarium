@@ -75,6 +75,7 @@ public:
 	//! Set the global scale applied to input lumiances, i.e before the adaptation
 	//! @param scale the global scale
 	void setInputScale(float scale=1.f);
+	float getInputScale() const {return inputScale;}
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range

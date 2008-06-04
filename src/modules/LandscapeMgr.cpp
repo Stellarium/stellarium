@@ -268,6 +268,15 @@ void LandscapeMgr::init()
 	cardinals_points = new Cardinals();
 	cardinals_points->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
+	
+	bool ok =true;
+	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/init_bortle_scale",3);
+		setAtmosphereBortleLightPollution(3);
+		ok = true;
+	}
 }
 
 void LandscapeMgr::setColorScheme(const QSettings* conf, const QString& section)

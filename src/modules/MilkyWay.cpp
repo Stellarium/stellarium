@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
+#include "SkyDrawer.hpp"
 #include <QDebug>
 #include <QSettings>
 
@@ -57,10 +58,6 @@ void MilkyWay::setTexture(const QString& texFile)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	tex = StelApp::getInstance().getTextureManager().createTexture(texFile);
-
-	// big performance improvement to cache this
-	if (!tex->getAverageLuminance(tex_avg_luminance))
-		qWarning() << "Luminance used from unloaded image";
 }
 
 void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
@@ -75,15 +72,20 @@ double MilkyWay::draw(StelCore* core)
 	ToneReproducer* eye = core->getToneReproducer();
 	
 	assert(tex);	// A texture must be loaded before calling this
+
+	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
+	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
+	Vec3f c(0.34165, 0.429666, 0.63586);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(12.5);
 	
-	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	Vec3f c = Vec3f(0.25f, 0.25f, 0.0001f*fader->getInterstate());
-	//qDebug() << eye->adaptLuminance(c[2]);
-	eye->xyYToRGB(c);
-	//qDebug() << tex_avg_luminance;
-	c = Vec3f(c[0]*c[0], c[1]*c[1], c[2]*c[2]);
-	c*=intensity/tex_avg_luminance*6;
-	//c-=Vec3f(0.3,0.3,0.3);
+	// Get the luminance scaled between 0 and 1
+	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
+	
+	// Bound a maximum luminance
+	aLum = MY_MIN(0.38f, aLum);
+	
+	c*=aLum;
+	
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
