@@ -777,6 +777,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 		
 		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(compute_magnitude(nav->getObserverHelioPos()), rc_mag) < 0)
 			return;
+		rc_mag[0]*=0.15;
 		glBlendFunc(GL_ONE, GL_ONE);
 		float screen_r = 0.25*getOnScreenSize(prj, nav);
 		if (screen_r<1.f) screen_r=1.f;
