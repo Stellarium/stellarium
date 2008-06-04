@@ -82,6 +82,9 @@ private:
 	
 	class StelAppGraphicsItem* mainItem;
 	class StelApp* stelApp;
+
+	//! Used to prevent resize events saving to the config file until after main init is complete.
+	bool initComplete;
 };
 
 
