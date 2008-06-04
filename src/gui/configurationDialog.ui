@@ -5,30 +5,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>508</height>
+    <width>445</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
   <property name="styleSheet" >
-   <string/>
+   <string notr="true" />
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -66,7 +57,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -96,7 +87,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -113,7 +104,7 @@
          </size>
         </property>
         <property name="styleSheet" >
-         <string>QToolButton {
+         <string notr="true" >QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -139,22 +130,10 @@ color: darkgray;
       <enum>QFrame::StyledPanel</enum>
      </property>
      <layout class="QGridLayout" >
-      <property name="leftMargin" >
+      <property name="margin" >
        <number>0</number>
       </property>
-      <property name="topMargin" >
-       <number>0</number>
-      </property>
-      <property name="rightMargin" >
-       <number>0</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>0</number>
-      </property>
-      <property name="horizontalSpacing" >
-       <number>0</number>
-      </property>
-      <property name="verticalSpacing" >
+      <property name="spacing" >
        <number>0</number>
       </property>
       <item row="0" column="0" >
@@ -169,12 +148,20 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>6</number>
+         <number>0</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
@@ -214,7 +201,7 @@ color: darkgray;
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>398</height>
@@ -225,10 +212,18 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabStartup" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Startup</string>
          </attribute>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout" name="verticalLayout" >
           <item>
            <widget class="QGroupBox" name="groupBox" >
             <property name="title" >
@@ -316,7 +311,7 @@ color: darkgray;
             <property name="title" >
              <string>Display</string>
             </property>
-            <layout class="QVBoxLayout" >
+            <layout class="QHBoxLayout" name="horizontalLayout" >
              <item>
               <widget class="QRadioButton" name="fullScreenRadio" >
                <property name="whatsThis" >
@@ -328,69 +323,16 @@ color: darkgray;
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QRadioButton" name="windowModeRadio" >
-                 <property name="text" >
-                  <string>Windowed mode - size:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer>
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" >
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="spinBox" >
-                 <property name="minimum" >
-                  <number>100</number>
-                 </property>
-                 <property name="maximum" >
-                  <number>4096</number>
-                 </property>
-                 <property name="singleStep" >
-                  <number>10</number>
-                 </property>
-                 <property name="value" >
-                  <number>1024</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_2" >
-                 <property name="text" >
-                  <string>by</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="spinBox_2" >
-                 <property name="minimum" >
-                  <number>100</number>
-                 </property>
-                 <property name="maximum" >
-                  <number>4096</number>
-                 </property>
-                 <property name="singleStep" >
-                  <number>10</number>
-                 </property>
-                 <property name="value" >
-                  <number>768</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QRadioButton" name="windowModeRadio" >
+               <property name="text" >
+                <string>Windowed mode</string>
+               </property>
+              </widget>
              </item>
             </layout>
+            <zorder>fullScreenRadio</zorder>
+            <zorder>windowModeRadio</zorder>
+            <zorder>windowModeRadio</zorder>
            </widget>
           </item>
           <item>
@@ -453,7 +395,7 @@ color: darkgray;
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" >
+                 <property name="sizeHint" stdset="0" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -519,11 +461,11 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <spacer>
+           <spacer name="verticalSpacer" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -534,6 +476,14 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabPlanetarium" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Planetarium</string>
          </attribute>
@@ -566,11 +516,18 @@ color: darkgray;
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBox_3" >
+            <property name="text" >
+             <string>Auto zoom out key sets initial direction of view</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>291</height>
@@ -581,6 +538,14 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Tools</string>
          </attribute>
@@ -630,7 +595,7 @@ color: darkgray;
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>261</height>
@@ -645,14 +610,14 @@ color: darkgray;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>425</width>
-           <height>450</height>
+           <width>437</width>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Interface</string>
          </attribute>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout" name="verticalLayout_3" >
           <item>
            <layout class="QHBoxLayout" >
             <item>
@@ -700,82 +665,26 @@ color: darkgray;
           <item>
            <widget class="QGroupBox" name="groupBox_4" >
             <property name="title" >
-             <string>Selected object information (when available)</string>
+             <string>Selected object information</string>
             </property>
-            <layout class="QGridLayout" >
-             <property name="horizontalSpacing" >
-              <number>3</number>
-             </property>
-             <property name="verticalSpacing" >
-              <number>2</number>
-             </property>
-             <item row="0" column="0" >
-              <widget class="QCheckBox" name="infoObjectNameCheckbox" >
+            <layout class="QHBoxLayout" name="horizontalLayout_2" >
+             <item>
+              <widget class="QRadioButton" name="radioButton" >
+               <property name="whatsThis" >
+                <string>Whan an object is selected, display all of the information which is available for it.</string>
+               </property>
                <property name="text" >
-                <string>Object name</string>
+                <string>All availalable information</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0" >
-              <widget class="QCheckBox" name="infoBayerDesignationCheckbox" >
-               <property name="text" >
-                <string>Bayer designation</string>
+             <item>
+              <widget class="QRadioButton" name="radioButton_2" >
+               <property name="whatsThis" >
+                <string>Display only abbreviated information for selected objects.</string>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QCheckBox" name="infoAltAziCheckbox" >
                <property name="text" >
-                <string>Alt/Azi position</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QCheckBox" name="infoHpCatalogueCheckbox" >
-               <property name="text" >
-                <string>HP catalogue number</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QCheckBox" name="infoParallaxCheckbox" >
-               <property name="text" >
-                <string>Parallax</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1" >
-              <widget class="QCheckBox" name="infoDistanceCheckbox" >
-               <property name="text" >
-                <string>Distance</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1" >
-              <widget class="QCheckBox" name="infoSpectralTypeCheckbox" >
-               <property name="text" >
-                <string>Spectral type</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QCheckBox" name="infoApparentMagnitudeCheckbox" >
-               <property name="text" >
-                <string>Apparent magnitude</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" >
-              <widget class="QCheckBox" name="infoJ2000RaDecCheckbox" >
-               <property name="text" >
-                <string>J2000 RA/Dec</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0" >
-              <widget class="QCheckBox" name="infoAdjustedRaDecCheckbox" >
-               <property name="text" >
-                <string>Adjusted RA/Dec</string>
+                <string>Short information</string>
                </property>
               </widget>
              </item>
@@ -787,51 +696,26 @@ color: darkgray;
             <property name="title" >
              <string>Navigation</string>
             </property>
-            <layout class="QVBoxLayout" >
+            <layout class="QVBoxLayout" name="verticalLayout_2" >
              <item>
-              <layout class="QGridLayout" >
-               <property name="horizontalSpacing" >
-                <number>3</number>
+              <widget class="QCheckBox" name="checkBox_2" >
+               <property name="whatsThis" >
+                <string>When enabled, the keyboard can be used to pan and zoom the display.</string>
                </property>
-               <property name="verticalSpacing" >
-                <number>2</number>
+               <property name="text" >
+                <string>Enable keyboard navigation</string>
                </property>
-               <item row="0" column="0" >
-                <widget class="QCheckBox" name="manualZoomCheckbox" >
-                 <property name="text" >
-                  <string>Manual zoom</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1" >
-                <widget class="QCheckBox" name="keyboardPanningCheckbox" >
-                 <property name="text" >
-                  <string>Keyboard panning</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" >
-                <widget class="QCheckBox" name="zoomKeysCheckbox" >
-                 <property name="text" >
-                  <string>Zoom keys</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1" >
-                <widget class="QCheckBox" name="mouseDragPanningCheckbox" >
-                 <property name="text" >
-                  <string>Mouse drag panning</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="2" >
-                <widget class="QCheckBox" name="zoomMouseCheckbox" >
-                 <property name="text" >
-                  <string>Zoom mouse</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox" >
+               <property name="whatsThis" >
+                <string>When enabled, the mouse can be used to pan (drag) and zoom (mousewheel) the display.</string>
+               </property>
+               <property name="text" >
+                <string>Enable mouse navigation</string>
+               </property>
+              </widget>
              </item>
              <item>
               <layout class="QHBoxLayout" >
@@ -847,7 +731,7 @@ color: darkgray;
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" >
+                 <property name="sizeHint" stdset="0" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -897,7 +781,7 @@ color: darkgray;
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" >
+                 <property name="sizeHint" stdset="0" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -941,7 +825,7 @@ color: darkgray;
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>25</height>
@@ -952,11 +836,27 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabPlugins" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Plugins</string>
          </attribute>
         </widget>
         <widget class="QWidget" name="tab" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>437</width>
+           <height>470</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>DEBUG</string>
          </attribute>
