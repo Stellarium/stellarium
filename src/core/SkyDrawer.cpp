@@ -249,16 +249,12 @@ bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Ve
 // Draw a point source halo.
 int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
 {	
-	// qDebug() << "StarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag;
-	// assert(rc_mag[1]>= 0.f);
 	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
 		return -1;
 	
-	const Vec3f& color = colorTable[b_v];
-	
 	// Random coef for star twinkling
 	const float tw = flagStarTwinkle ? (1.-twinkleAmount*rand()/RAND_MAX) : 1.0;
-	glColor3fv(color*(rc_mag[1]*tw));
+	glColor3fv(colorTable[b_v]*(rc_mag[1]*tw));
 	
 	if (flagPointStar)
 	{
