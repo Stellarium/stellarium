@@ -545,7 +545,8 @@ void StelApp::update(double deltaTime)
 	timefr+=deltaTime;
 	if (timefr-timeBase > 1.)
 	{
-		fps=(double)frame/(timefr-timeBase);				// Calc the FPS rate
+		// Calc the FPS rate every seconds
+		fps=(double)frame/(timefr-timeBase);
 		frame = 0;
 		timeBase+=1.;
 	}
