@@ -130,6 +130,12 @@ void Navigator::moveObserverToSelected(void)
 	}
 }
 
+void Navigator::setInitViewDirectionToCurrent(void)
+{
+	QString dirStr = QString("%1,%2,%3").arg(local_vision[0]).arg(local_vision[1]).arg(local_vision[2]);
+	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
+}
+
 //! Increase the time speed
 void Navigator::increaseTimeSpeed()
 {

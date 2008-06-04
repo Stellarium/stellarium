@@ -40,7 +40,9 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QGraphicsScene* ascene, QWidget* parent, int argc, char** argv) : QGraphicsView(ascene, parent)
+StelMainGraphicsView::StelMainGraphicsView(QGraphicsScene* ascene, QWidget* parent, int argc, char** argv) 
+	: QGraphicsView(ascene, parent),
+	  initComplete(false)
 {
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
@@ -74,8 +76,19 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
 	setSceneRect(0,0,event->size().width(), event->size().height());
 	StelAppGraphicsItem::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
+	if (initComplete)
+	{
+		QSettings* conf = stelApp->getSettings();
+		if (conf!=NULL)
+		{
+			if (!isFullScreen())
+			{
+				conf->setValue("video/screen_h", event->size().height());
+				conf->setValue("video/screen_w", event->size().width());
+			}
+		}
+	}
 }
-
 
 void StelMainGraphicsView::init()
 {	
@@ -116,6 +129,7 @@ void StelMainGraphicsView::init()
 	stelApp->initPlugIns();
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+	initComplete = true;
 	mainItem->startDrawingLoop();
 }
 

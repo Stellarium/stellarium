@@ -32,10 +32,17 @@ public:
 	ConfigurationDialog();
 	virtual ~ConfigurationDialog();
 	void languageChanged();
+
+public slots:
+	//! Updates the configuration file to change the status of the video/fullscreen
+	//! flag, which will be effective at next startup.
+	void setStartupFullScreen(bool enabled);
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();	
 	Ui_configurationDialogForm* ui;
+
 private slots:
 	void languageChanged(const QString& languageCode);	
 };

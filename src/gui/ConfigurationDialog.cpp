@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "Projector.hpp"
+#include "Navigator.hpp"
 #include "StelCore.hpp"
 
 #include <QSettings>
@@ -49,6 +50,11 @@ void ConfigurationDialog::languageChanged()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
+}
+
+void ConfigurationDialog::setStartupFullScreen(bool enabled)
+{
+	StelApp::getInstance().getSettings()->setValue("video/fullscreen", enabled);
 }
 
 void ConfigurationDialog::createDialogContent()
@@ -78,9 +84,19 @@ void ConfigurationDialog::createDialogContent()
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 
+	// Initial FOV
 	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
+
+	// Initial direction of view
+	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
+
+	// Full screen / windowed mode
+	ui->fullScreenRadio->setChecked(conf->value("video/fullscreen", true).toBool());
+	ui->windowModeRadio->setChecked(!conf->value("video/fullscreen", true).toBool());
+	connect(ui->fullScreenRadio, SIGNAL(toggled(bool)), this, SLOT(setStartupFullScreen(bool)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)

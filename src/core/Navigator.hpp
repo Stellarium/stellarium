@@ -197,6 +197,9 @@ public slots:
 	//! Move the observer to the selected objejct. This will only do something if
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected(void);
+	//! Sets the initial direction of view to the current altitude and azimuth.
+	//! Note: Updates the configuration file.
+	void setInitViewDirectionToCurrent(void);
 	
 private:
 	// Matrices used for every coordinate transfo
