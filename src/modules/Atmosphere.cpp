@@ -171,8 +171,16 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 					moon_pos[2]*point[2], sun_pos[0]*point[0]+sun_pos[1]*point[1]+
 					sun_pos[2]*point[2], point[2]);
 			lumi *= eclipseFactor;
-			lumi += 0.0001 + lightPollutionLuminance;
-
+			// Add star background luminance
+			lumi += 0.0001;
+			// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
+			lumi*=eye->getInputScale();
+			
+			// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
+			// of the scaling itself
+			lumi += lightPollutionLuminance;
+			
+			// Store for later statistics
 			sum_lum+=lumi;
 			++nb_lum;
 			
