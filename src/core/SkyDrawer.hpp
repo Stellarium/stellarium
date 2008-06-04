@@ -75,15 +75,10 @@ public:
 	float surfacebrightnessToLuminance(float sb) const;
 	
 public slots:
-	//! Set base source display scaling factor.
-	void setScale(double b) {starScale=b;}
-	//! Get base source display scaling factor.
-	double getScale(void) const {return starScale;}
-	
-	//! Set source display scaling factor wrt magnitude.
-	void setMagScale(double b) {starMagScale=b;}
-	//! Get base source display scaling factor wrt magnitude.
-	double getMagScale(void) const {return starMagScale;}
+	//! Set the way brighter stars will look bigger as the fainter ones
+	void setRelativeScale(double b) {starRelativeScale=b;}
+	//! Get the way brighter stars will look bigger as the fainter ones
+	double getRelativeScale(void) const {return starRelativeScale;}
 	
 	//! Set source twinkle amount.
 	void setTwinkleAmount(double b) {twinkleAmount=b;}
@@ -99,7 +94,6 @@ public slots:
 	void setFlagPointStar(bool b) {flagPointStar=b;}
 	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
 	bool getFlagPointStar(void) const {return flagPointStar;}
-	
 	
 	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return max_fov;}
@@ -117,13 +111,6 @@ public slots:
 	//! brighter any more. Must be <= 60.0.
 	void setMinFov(float fov) {min_fov = (fov > 60.f) ? 60.f : fov;}
 	
-	//! Get SkyDrawer magnitude shift.
-	float getMagShift(void) const {return mag_shift;}
-	//! Set SkyDrawer magnitude shift.
-	//! draw the stars/planet halos as if they were brighter of fainter
-	//! by this amount of magnitude
-	void setMagShift(float d) {mag_shift = d;}
-	
 	//! Get SkyDrawer maximum magnitude.
 	float getMaxMag(void) const {return max_mag;}
 	//! Set SkyDrawer maximum magnitude.
@@ -136,10 +123,8 @@ public slots:
 	//! Get the current Bortle scale index
 	int getBortleScale() const {return bortleScaleIndex;}
 	
-	void setInScale(double in) {inScale = in;}
-	
-	// DEBUG
-	void setOutScale(double ou) {outScale = ou;}
+	void setOutputScale(double ou) {outScale = ou;}
+	float getOutputScale() const {return outScale;}
 	
 public:
 	//! Compute RMag and CMag from magnitude.
@@ -158,6 +143,8 @@ public:
 	
 private:
 	
+	void setInputScale(double in) {inScale = in;}
+	
 	//! Compute the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source
 	//! @return the luminance in log(cd/m^2)
@@ -170,12 +157,13 @@ private:
 	
 	Projector* prj;
 	ToneReproducer* eye;
-	float max_fov, min_fov, mag_shift, max_mag, lnfov_factor;
-	float starScale;
-	float starMagScale;
+	float max_fov, min_fov, max_mag, lnfov_factor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
+	
+	float starRelativeScale;
+	float starLinearScale;	// optimization variable
 	
 	//! Little halo texture
 	STextureSP texHalo;
@@ -192,7 +180,7 @@ private:
 	//! The scaling applied to input luminance before they are converted by the ToneReproducer
 	double inScale;
 	
-	// DEBUG
+	//! The scaling applied to output luminance after they are converted by the ToneReproducer
 	double outScale;
 };
 

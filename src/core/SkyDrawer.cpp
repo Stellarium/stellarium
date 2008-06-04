@@ -35,36 +35,25 @@
 SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aeye)
 {
 	// DEBUG
-	outScale = 112500.;
+	outScale = 1.0;
 	inScale = 1.9;
-	
 	bortleScaleIndex = 3;
 			
 	setMaxFov(180.f);
 	setMinFov(0.1f);
-	setMagShift(0.f);
 	setMaxMag(30.f);
 	update(0);
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 	
-	setScale(conf->value("stars/star_scale",1.1).toDouble());
-	setMagScale(conf->value("stars/star_mag_scale",1.3).toDouble());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
 	setMaxFov(conf->value("stars/mag_converter_max_fov",60.0).toDouble());
 	setMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
 	
-	bool ok = true;
-	setMagShift(conf->value("stars/mag_converter_mag_shift",0.0).toDouble(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/mag_converter_mag_shift",0.0);
-		setMagShift(0.0);
-		ok = true;
-	}
+	bool ok=true;
 	setMaxMag(conf->value("stars/mag_converter_max_mag",30.0).toDouble(&ok));
 	if (!ok)
 	{
@@ -78,6 +67,14 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 	{
 		conf->setValue("stars/init_bortle_scale",3);
 		setBortleScale(3);
+		ok = true;
+	}
+	
+	setRelativeScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/relative_scale",1.0);
+		setRelativeScale(1.0);
 		ok = true;
 	}
 }
@@ -109,7 +106,7 @@ void SkyDrawer::update(double deltaTime)
 	}
 	
 	// I am not quite sure how to interpret this one..
-	eye->setOutputScale(outScale);
+	eye->setOutputScale(112500.);
 	
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human 
@@ -120,18 +117,21 @@ void SkyDrawer::update(double deltaTime)
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
 	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
+	
+	// Precompute
+	starLinearScale = std::pow((float)(2.1f*outScale), 1.3f/2.f*starRelativeScale);
 }
 
 // Compute the log of the luminance for a point source with the given mag for the current FOV
 float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 {
-	return -0.92103f*(mag + mag_shift + 12.12331f) + lnfov_factor;
+	return -0.92103f*(mag + 12.12331f) + lnfov_factor;
 }
 
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
 float SkyDrawer::surfacebrightnessToLuminance(float sb) const
 {
-	return std::exp(-0.92103f*(sb + mag_shift + 12.12331f))/(1./60.*1./60.);
+	return std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
 
 // Compute RMag and CMag from magnitude for a point source.
@@ -143,20 +143,11 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		rc_mag[0] = rc_mag[1] = 0.f;
 		return -1;
 	}
-	
-// 	if (mag<-10)
-// 	{
-// 		// Avoid computing for too bright objects
-// 		//assert(0);
-// 		rc_mag[0] = rc_mag[1] = 0.f;
-// 		return -1;
-// 	}
 
     // rmag:
 	//rc_mag[0] = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 300.f;
-	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), 1.3f/2.);
-	const static float fact = std::pow(2.1, 1.3/2.);
-	rc_mag[0]*=fact;
+	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
+	rc_mag[0]*=starLinearScale;
 	
 	// Use now statically min_rmag = 0.6, because higher and too small values look bad
 	if (rc_mag[0] < 0.6f)
@@ -167,21 +158,13 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	
 	if (flagPointStar)
 	{
-		if (rc_mag[0] * starScale < 0.1f)
-		{
-			// 0.05f
-			rc_mag[0] = rc_mag[1] = 0.f;
-			return -1;
-		}
 		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] * starMagScale < 0.1f)
+		if (rc_mag[1] < 0.1f)
 		{
 			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
 			return -1;
 		}
-    	// Global scaling
-		rc_mag[1] *= starMagScale;
 	}
 	else
 	{
@@ -189,13 +172,8 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		// And we compensate the difference of brighteness with cmag
 		if (rc_mag[0]<1.2f)
 		{
-			if ((rc_mag[0] * starScale) < 0.1f)
-			{
-				rc_mag[0] = rc_mag[1] = 0.f;
-				return -1;
-			}
 			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-			if (rc_mag[1] * starMagScale < 0.1f)
+			if (rc_mag[1] < 0.1f)
 			{
 				rc_mag[0] = rc_mag[1] = 0.f;
 				return -1;
@@ -211,9 +189,6 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 				rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
 			}
 		}
-		// Global scaling
-		rc_mag[0] *= starScale;
-		rc_mag[1] *= starMagScale;
 	}
 	return 0;
 }
@@ -319,7 +294,7 @@ void SkyDrawer::setBortleScale(int bIndex)
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at 60 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {6.40, 4.90, 3.28, 2.12, 1.51, 1.08, 0.91, 0.67, 0.52};
-	setInScale(bortleToInScale[bIndex-1]);
+	setInputScale(bortleToInScale[bIndex-1]);
 }
 
 Vec3f SkyDrawer::colorTable[128] = {
