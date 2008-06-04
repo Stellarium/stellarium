@@ -42,7 +42,6 @@ Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(
 	equ_vision=Vec3d(1.,0.,0.);
 	prec_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
 	viewing_mode = VIEW_HORIZON;  // default
-
 }
 
 Navigator::~Navigator()
@@ -190,43 +189,28 @@ void Navigator::updateTime(double deltaTime)
 
 ////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
+// see vsop87.doc:
 
-  // see vsop87.doc:
-
-const Mat4d mat_j2000_to_vsop87(
-              Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) *
-              Mat4d::zrotation(0.0000275*(M_PI/180)));
-
+const Mat4d mat_j2000_to_vsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
 const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
-
 
 void Navigator::updateTransformMatrices(void)
 {
 	mat_local_to_earth_equ = position->getRotLocalToEquatorial(JDay);
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
-	mat_earth_equ_to_j2000 = mat_vsop87_to_j2000
-                           * position->getRotEquatorialToVsop87();
+	mat_earth_equ_to_j2000 = mat_vsop87_to_j2000 * position->getRotEquatorialToVsop87();
 	mat_j2000_to_earth_equ = mat_earth_equ_to_j2000.transpose();
 
-	mat_helio_to_earth_equ =
-	    mat_j2000_to_earth_equ *
-        mat_vsop87_to_j2000 *
-	    Mat4d::translation(-position->getCenterVsop87Pos());
-
+	mat_helio_to_earth_equ = mat_j2000_to_earth_equ * mat_vsop87_to_j2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp =
-	    mat_j2000_to_vsop87 *
-	    mat_earth_equ_to_j2000 *
-        mat_local_to_earth_equ;
+	Mat4d tmp = mat_j2000_to_vsop87 * mat_earth_equ_to_j2000 * mat_local_to_earth_equ;
 
-	mat_local_to_helio =  Mat4d::translation(position->getCenterVsop87Pos()) *
-	                      tmp *
+	mat_local_to_helio =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	mat_helio_to_local =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) *
-	                      tmp.transpose() *
+	mat_helio_to_local =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 	                      Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
@@ -234,7 +218,6 @@ void Navigator::updateTransformMatrices(void)
 // Update the modelview matrices
 void Navigator::updateModelViewMat(void)
 {
-
 	Vec3d f;
 
 	if( viewing_mode == VIEW_EQUATOR)
@@ -248,10 +231,8 @@ void Navigator::updateModelViewMat(void)
 		f = local_vision;
 	}
 
-
 	f.normalize();
 	Vec3d s(f[1],-f[0],0.);
-
 
 	if( viewing_mode == VIEW_EQUATOR)
 	{
@@ -278,6 +259,7 @@ void Navigator::updateModelViewMat(void)
 	mat_j2000_to_eye = mat_earth_equ_to_eye*mat_j2000_to_earth_equ;
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
 Vec3d Navigator::getObserverHelioPos(void) const
@@ -285,7 +267,6 @@ Vec3d Navigator::getObserverHelioPos(void) const
 	Vec3d v(0.,0.,0.);
 	return mat_local_to_helio*v;
 }
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -296,5 +277,4 @@ void Navigator::setViewingMode(ViewingModeType view_mode)
 
 	// TODO: include some nice smoothing function trigger here to rotate between
 	// the two modes
-
 }

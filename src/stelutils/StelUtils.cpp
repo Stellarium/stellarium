@@ -286,9 +286,9 @@ string vec3f_to_str(const Vec3f& v)
 QString vec3fToHtmlColor(const Vec3f& v)
 {
 	return QString("#%1%2%3")
-		.arg(int(v[0] * 255), 2, 16, QChar('0'))
-		.arg(int(v[1] * 255), 2, 16, QChar('0'))
-		.arg(int(v[2] * 255), 2, 16, QChar('0'));
+		.arg(MY_MIN(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(MY_MIN(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(MY_MIN(255, int(v[2] * 255)), 2, 16, QChar('0'));
 }
 
 double stringToDouble(const string& str)

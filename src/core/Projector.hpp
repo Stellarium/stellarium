@@ -81,7 +81,6 @@ public:
 	//! @param _mat_helio_to_eye
 	//! @param _mat_local_to_eye
 	//! @param _mat_j2000_to_eye
-
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
 				    const Mat4d& _mat_helio_to_eye,
 				    const Mat4d& _mat_local_to_eye,

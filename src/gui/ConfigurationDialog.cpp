@@ -71,6 +71,11 @@ void ConfigurationDialog::createDialogContent()
 	}
 	c->setCurrentIndex(idx);
 	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	
+	// DEBUG ---
+	connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
+	connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
+	connect(ui->doubleSpinBox_3, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setPFact(double)));
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();

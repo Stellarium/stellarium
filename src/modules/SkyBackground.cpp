@@ -74,8 +74,8 @@ double SkyBackground::draw(StelCore* core)
 	Projector* prj = core->getProjection();
 	
 	prj->setCurrentFrame(Projector::FRAME_J2000);
-	//glBlendFunc(GL_ONE, GL_ONE);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	glBlendFunc(GL_ONE, GL_ONE);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	foreach (SkyImageTile* s, allSkyImages)
