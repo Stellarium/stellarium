@@ -43,10 +43,7 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 	setMinFov(0.1f);
 	setMagShift(0.f);
 	setMaxMag(30.f);
-	min_rmag = 0.01f;
 	update(0);
-	
-	setMaxScaled60DegMag(6.5f);
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
@@ -72,13 +69,6 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 	{
 		conf->setValue("stars/mag_converter_max_mag",30.0);
 		setMaxMag(30.0);
-		ok = true;
-	}
-	setMaxScaled60DegMag(conf->value("stars/mag_converter_max_scaled_60deg_mag",6.5).toDouble(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/mag_converter_max_scaled_60deg_mag",6.5);
-		setMaxScaled60DegMag(6.5);
 		ok = true;
 	}
 }
@@ -114,10 +104,6 @@ void SkyDrawer::update(double deltaTime)
 	eye->setOutputScale(outScale);
 	float powFactor = std::pow(60./fov, pFact);
 	eye->setInputScale(inScale*powFactor); // *
-	
-	// Temporary use a fake 60 deg fov to compute min rmag
-	//lnfov_factor = std::log(60.f*60.f / (60*60) / (EYE_RESOLUTION*EYE_RESOLUTION));
-	min_rmag = 0.6;//std::sqrt(eye->adaptLuminanceScaled(pointSourceMagToLuminance(max_scaled_60deg_mag)));
 	
 	// Set the fov factor for point source luminance computation
 	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
@@ -159,7 +145,8 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	const static float fact = std::pow(2.1, 1.3/2.);
 	rc_mag[0]*=fact;
 	
-	if (rc_mag[0] < min_rmag)
+	// Use now statically min_rmag = 0.6, because higher and too small values look bad
+	if (rc_mag[0] < 0.6f)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;
 		return -1;
@@ -302,7 +289,19 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void SkyDrawer::setBortleScale(int bIndex)
 {
-	setMaxScaled60DegMag((double)bIndex*(-4./9.)+8);
+	// Associate the Bortle index (1 to 9) to inScale value
+	if (bIndex<1)
+	{
+		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		bIndex = 1;
+	}
+	if (bIndex>9)
+	{
+		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		bIndex = 19;
+	}
+	static const float bortleToInScale[9] = {6.40, 4.90, 3.28, 2.12, 1.51, 1.08, 0.91, 0.67, 0.52};
+	setInScale(bortleToInScale[bIndex-1]);
 }
 
 Vec3f SkyDrawer::colorTable[128] = {
