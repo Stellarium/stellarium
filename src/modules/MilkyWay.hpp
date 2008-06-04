@@ -84,7 +84,6 @@ private:
 	STextureSP tex;
 	Vec3f color;
 	float intensity;
-	float tex_avg_luminance;
 	class LinearFader* fader;
 };
 

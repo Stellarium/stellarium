@@ -37,8 +37,9 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 	// DEBUG
 	outScale = 112500.;
 	inScale = 1.9;
-	pFact = 0.8;
 	
+	bortleScaleIndex = 3;
+			
 	setMaxFov(180.f);
 	setMinFov(0.1f);
 	setMagShift(0.f);
@@ -71,6 +72,14 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 		setMaxMag(30.0);
 		ok = true;
 	}
+	
+	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/init_bortle_scale",3);
+		setBortleScale(3);
+		ok = true;
+	}
 }
 
 
@@ -99,13 +108,17 @@ void SkyDrawer::update(double deltaTime)
 			fov = min_fov;
 	}
 	
-	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
-	// It could be made to vary progressively to switch from human vision to binocculares/telescope etc..
+	// I am not quite sure how to interpret this one..
 	eye->setOutputScale(outScale);
-	float powFactor = std::pow(60./fov, pFact);
+	
+	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
+	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human 
+	// vision to binocculares/telescope. Use a max of 0.7 because after that the atmosphere starts to glow too much!
+	float powFactor = std::pow(60./MY_MAX(0.7,fov), 0.8);
 	eye->setInputScale(inScale*powFactor); // *
 	
 	// Set the fov factor for point source luminance computation
+	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
 	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 }
 
@@ -300,6 +313,11 @@ void SkyDrawer::setBortleScale(int bIndex)
 		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 19;
 	}
+	
+	bortleScaleIndex = bIndex;
+	
+	// These value have been calibrated by hand, looking at the faintest star in stellarium at 60 deg FOV
+	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {6.40, 4.90, 3.28, 2.12, 1.51, 1.08, 0.91, 0.67, 0.52};
 	setInScale(bortleToInScale[bIndex-1]);
 }

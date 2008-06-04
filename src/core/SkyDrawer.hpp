@@ -133,11 +133,13 @@ public slots:
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	void setBortleScale(int index);
+	//! Get the current Bortle scale index
+	int getBortleScale() const {return bortleScaleIndex;}
+	
+	void setInScale(double in) {inScale = in;}
 	
 	// DEBUG
-	void setInScale(double in) {inScale = in;}
 	void setOutScale(double ou) {outScale = ou;}
-	void setPFact(double p) {pFact = p;}
 	
 public:
 	//! Compute RMag and CMag from magnitude.
@@ -181,14 +183,17 @@ private:
 	//! Load B-V conversion parameters from config file
 	static void initColorTableFromConfigFile(class QSettings* conf);
 	
-	//! Contains 
+	//! Contains the list of colors matching a given B-V index
 	static Vec3f colorTable[128];
+	
+	//! The current Bortle Scale index
+	int bortleScaleIndex;
+	
+	//! The scaling applied to input luminance before they are converted by the ToneReproducer
+	double inScale;
 	
 	// DEBUG
 	double outScale;
-	double inScale;
-	double pFact;
-	
 };
 
 #endif
