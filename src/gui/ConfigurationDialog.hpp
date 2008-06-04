@@ -39,7 +39,8 @@ protected:
 	Ui_configurationDialogForm* ui;
 
 private slots:
-	void languageChanged(const QString& languageCode);	
+	void languageChanged(const QString& languageCode);
+	void setStartupTimeMode(void);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

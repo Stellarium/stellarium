@@ -28,6 +28,7 @@
 
 #include <QSettings>
 #include <QStringList>
+#include <QDateTime>
 #include <QDebug>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -81,16 +82,35 @@ void Navigator::init()
 	
 	// Navigation section
 	PresetSkyTime 		= conf->value("navigation/preset_sky_time",2451545.).toDouble();
-	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "now").toString();
-	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
+	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "actual").toString().toLower();
+	if (StartupTimeMode=="preset")
 		setJDay(PresetSkyTime - StelUtils::get_GMT_shift_from_QT(PresetSkyTime) * JD_HOUR);
-	else setTimeNow();
+	else if (StartupTimeMode=="today")
+		setTodayTime(getInitTodayTime());
+	else 
+		setTimeNow();
 }
 
 //! Set stellarium time to current real world time
 void Navigator::setTimeNow()
 {
 	setJDay(StelUtils::getJDFromSystem());
+}
+
+void Navigator::setTodayTime(const QTime& target)
+{
+	QDateTime dt = QDateTime::currentDateTime();
+	if (target.isValid())
+	{
+		dt.setTime(target);
+		// don't forget to adjust for timezone / daylight savings.
+		setJDay(StelUtils::qDateTimeToJd(dt)-(StelUtils::get_GMT_shift_from_QT(StelUtils::getJDFromSystem()) * JD_HOUR));
+	}
+	else
+	{
+		qWarning() << "WARNING - time passed to Navigator::setTodayTime is not valid. The system time will be used." << target;
+		setTimeNow();
+	}
 }
 
 //! Get whether the current stellarium time is the real world time
@@ -105,6 +125,20 @@ bool Navigator::getIsTimeNow(void) const
 		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
 	}
 	return previousResult;
+}
+
+QTime Navigator::getInitTodayTime(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	return QTime::fromString(conf->value("navigation/today_time", "22:00").toString(), "hh:mm");
+}
+
+void Navigator::setInitTodayTime(const QTime& t)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	conf->setValue("navigation/today_time", t.toString("hh:mm"));
 }
 
 void Navigator::addSolarDays(double d)
@@ -218,6 +252,14 @@ void Navigator::updateTransformMatrices(void)
 
 	mat_helio_to_local =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 	                      Mat4d::translation(-position->getCenterVsop87Pos());
+}
+
+void Navigator::setStartupTimeMode(const QString& s)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	StartupTimeMode = s;
+	conf->setValue("navigation/startup_time_mode", StartupTimeMode);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

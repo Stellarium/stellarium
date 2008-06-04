@@ -73,20 +73,34 @@ void ConfigurationDialog::createDialogContent()
 	c->setCurrentIndex(idx);
 	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 	
-	// DEBUG ---
-	connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
-	connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 
+	// Startup Tab
+	if (nav->getStartupTimeMode()=="actual")
+		ui->systemTimeRadio->setChecked(true);
+	else if (nav->getStartupTimeMode()=="today")
+		ui->todayRadio->setChecked(true);
+	else
+		ui->fixedTimeRadio->setChecked(true);
+	connect(ui->systemTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
+	connect(ui->todayRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
+	connect(ui->fixedTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
+	
+	ui->todayTimeSpinBox->setTime(nav->getInitTodayTime());
+	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
+	
 	// Initial FOV
 	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
 
 	// Initial direction of view
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
+
+	// DEBUG tab
+	connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
+	connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
 
 }
 
@@ -95,3 +109,14 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(Translator::nativeNameToIso639_1Code(langName));
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(Translator::nativeNameToIso639_1Code(langName));
 }
+
+void ConfigurationDialog::setStartupTimeMode(void)
+{
+	if (ui->systemTimeRadio->isChecked())
+		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("actual");
+	else if (ui->todayRadio->isChecked())
+		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("today");
+	else
+		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("preset");
+}
+
