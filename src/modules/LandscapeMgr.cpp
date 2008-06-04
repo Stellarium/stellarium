@@ -501,7 +501,8 @@ double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const
 //! Set the light pollution following the Bortle Scale
 void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 {
-	setAtmosphereLightPollutionLuminance(MY_MAX(0.,0.015*(double)(bIndex-1)));
+	// This is an empirical formula
+	setAtmosphereLightPollutionLuminance(MY_MAX(0.,0.0020*std::pow(bIndex-1, 2.1)));
 }
 
 float LandscapeMgr::getLuminance(void) 
