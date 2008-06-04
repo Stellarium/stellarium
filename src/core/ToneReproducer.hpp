@@ -72,14 +72,18 @@ public:
 	//! @param scale the global scale
 	void setOutputScale(float scale=1.f);
 	
+	//! Set the global scale applied to input lumiances, i.e before the adaptation
+	//! @param scale the global scale
+	void setInputScale(float scale=1.f);
+	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
-	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2
+	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 120 cd/m^2
 	void setMaxDisplayLuminance(float maxdL)
-	{oneOverMaxdL = 1.f/maxdL; sqrtOneOverMaxdL=std::sqrt(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
+	{oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
 	//! Set the display gamma
-	//! @param gamma the gamma. Initial default value is 2.3
+	//! @param gamma the gamma. Initial default value is 2.2222
 	void setDisplayGamma(float gamma)
 	{oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
@@ -88,7 +92,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow((float)(worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2 * outputScale;
+		return std::pow((float)(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2 * outputScale;
 	}
 
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
@@ -99,21 +103,14 @@ public:
 		return adaptLuminance(worldLuminance)*oneOverMaxdL;
 	}
 	
-	//! Return adapted ln(luminance) from world to display
-	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
-	//! @return the converted display luminance in sqrt(cd/m^2)
-	float sqrtAdaptLuminanceLn(float lnWorldLuminance) const
-	{
-		const float lnPix0p0001 = -8.0656104861f;
-		return std::exp((lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa*0.5f)*sqrtTerm2*sqrtOutputScale;
-	}
-	
 	//! Return adapted ln(luminance) from world to display with 1 corresponding to full display white
 	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
-	//! @return the converted sqrt of the display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
-	float sqrtAdaptLuminanceScaledLn(float lnWorldLuminance) const
+	//! @param pFact the power at whihc the result should be set. The default is 0.5 and therefore return the square root of the adapted luminance
+	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const
 	{
-		return sqrtAdaptLuminanceLn(lnWorldLuminance)*sqrtOneOverMaxdL;
+		const float lnPix0p0001 = -8.0656104861f;
+		return std::exp(((lnInputScale+lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa+lnTerm2+lnOutputScale+lnOneOverMaxdL)*pFact);
 	}
 	
 	//! Convert from xyY color system to RGB.
@@ -124,12 +121,15 @@ public:
 private:
 	// The global luminance scaling
 	float outputScale;
-	float sqrtOutputScale;	// sqrt(outputScale)
+	float lnOutputScale;	// std::log(outputScale)
+	
+	float inputScale;
+	float lnInputScale;		// std::log(inputScale)
 	
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)
 	float oneOverMaxdL;	// 1 / Display maximum luminance (in cd/m^2)
-	float sqrtOneOverMaxdL; // sqrt(oneOverMaxdL)
+	float lnOneOverMaxdL; // log(oneOverMaxdL)
 	float oneOverGamma;	// 1 / Screen gamma value
 
 	// Precomputed variables
@@ -139,7 +139,7 @@ private:
 	float betaWa;
 	float alphaWaOverAlphaDa;
 	float term2;
-	float sqrtTerm2;
+	float lnTerm2;	// log(term2)
 	
 	float term2TimesOneOverMaxdLpOneOverGamma;
 };

@@ -29,8 +29,16 @@
 #include <QSettings>
 #include <QDebug>
 
+// The 0.025 corresponds to the maximum eye resolution in degree
+#define EYE_RESOLUTION (0.25)
+
 SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aeye)
 {
+	// DEBUG
+	outScale = 112500.;
+	inScale = 1.9;
+	pFact = 0.8;
+	
 	setMaxFov(180.f);
 	setMinFov(0.1f);
 	setMagShift(0.f);
@@ -103,15 +111,16 @@ void SkyDrawer::update(double deltaTime)
 	
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It could be made to vary progressively to switch from human vision to binocculares/telescope etc..
-	eye->setOutputScale(6000.f);
+	eye->setOutputScale(outScale);
+	float powFactor = std::pow(60./fov, pFact);
+	eye->setInputScale(inScale*powFactor); // *
 	
 	// Temporary use a fake 60 deg fov to compute min rmag
-	lnfov_factor = std::log(60.f*60.f / (60*60) / (0.025*0.025));
-	min_rmag = std::sqrt(eye->adaptLuminanceScaled(pointSourceMagToLuminance(max_scaled_60deg_mag)));
+	//lnfov_factor = std::log(60.f*60.f / (60*60) / (EYE_RESOLUTION*EYE_RESOLUTION));
+	min_rmag = 0.6;//std::sqrt(eye->adaptLuminanceScaled(pointSourceMagToLuminance(max_scaled_60deg_mag)));
 	
 	// Set the fov factor for point source luminance computation
-	// The 0.025 corresponds to the maximum eye resolution in degree
-	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (0.025*0.025));
+	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 }
 
 // Compute the log of the luminance for a point source with the given mag for the current FOV
@@ -120,6 +129,11 @@ float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 	return -0.92103f*(mag + mag_shift + 12.12331f) + lnfov_factor;
 }
 
+// Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
+float SkyDrawer::surfacebrightnessToLuminance(float sb) const
+{
+	return std::exp(-0.92103f*(sb + mag_shift + 12.12331f))/(1./60.*1./60.);
+}
 
 // Compute RMag and CMag from magnitude for a point source.
 int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
@@ -130,17 +144,27 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		rc_mag[0] = rc_mag[1] = 0.f;
 		return -1;
 	}
+	
+	if (mag<-10)
+	{
+		// Avoid computing for too bright objects
+		//assert(0);
+		rc_mag[0] = rc_mag[1] = 0.f;
+		return -1;
+	}
 
     // rmag:
 	//rc_mag[0] = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(mag + mag_shift + 12.12331f)) * fov_factor)) * 300.f;
-	rc_mag[0] = eye->sqrtAdaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag));
-
+	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), 1.3f/2.);
+	const static float fact = std::pow(2.1, 1.3/2.);
+	rc_mag[0]*=fact;
+	
 	if (rc_mag[0] < min_rmag)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;
 		return -1;
 	}
-
+	
 	if (flagPointStar)
 	{
 		if (rc_mag[0] * starScale < 0.1f)
@@ -181,7 +205,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		else
 		{
 			// cmag:
-			rc_mag[1] = 1.f;
+			rc_mag[1] = 1.0f;
 			if (rc_mag[0]>8.f)
 			{
 				rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
@@ -462,5 +486,13 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 				}
 			}
 		}
+	}
+	
+	// because the star texture is not fully white we need to add a factor here to avoid to dark colors == too saturated
+	for (int i=0;i<128;i++) 
+	{
+		colorTable[i] *= 1.4;
+		colorTable[i][0] *=1./1.3;
+		colorTable[i][1] *=1./1.2;
 	}
 }

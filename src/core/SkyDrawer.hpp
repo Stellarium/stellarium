@@ -69,6 +69,11 @@ public:
 	//! @return true if the source was actually visible and drawn
 	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
+	//! Compute the luminance for an extended source with the given surface brightness
+	//! @param sb Surface brightness in V magnitude/arcmin^2
+	//! @return the luminance in cd/m^2
+	float surfacebrightnessToLuminance(float sb) const;
+	
 public slots:
 	//! Set base source display scaling factor.
 	void setScale(double b) {starScale=b;}
@@ -135,6 +140,9 @@ public slots:
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	void setBortleScale(int index);
 	
+	void setInScale(double in) {inScale = in;}
+	void setOutScale(double ou) {outScale = ou;}
+	void setPFact(double p) {pFact = p;}
 public:
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;
@@ -179,6 +187,12 @@ private:
 	
 	//! Contains 
 	static Vec3f colorTable[128];
+	
+	// DEBUG
+	double outScale;
+	double inScale;
+	double pFact;
+	
 };
 
 #endif

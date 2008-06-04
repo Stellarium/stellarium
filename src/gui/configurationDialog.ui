@@ -13,13 +13,22 @@
    <string>Form</string>
   </property>
   <property name="styleSheet" >
-   <string notr="true" />
+   <string/>
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="margin" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
     <number>0</number>
    </property>
    <item>
@@ -57,7 +66,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -87,7 +96,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -104,7 +113,7 @@
          </size>
         </property>
         <property name="styleSheet" >
-         <string notr="true" >QToolButton {
+         <string>QToolButton {
 color: white;
 font-weight: bold;
 background: None;
@@ -130,10 +139,22 @@ color: darkgray;
       <enum>QFrame::StyledPanel</enum>
      </property>
      <layout class="QGridLayout" >
-      <property name="margin" >
+      <property name="leftMargin" >
        <number>0</number>
       </property>
-      <property name="spacing" >
+      <property name="topMargin" >
+       <number>0</number>
+      </property>
+      <property name="rightMargin" >
+       <number>0</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>0</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing" >
        <number>0</number>
       </property>
       <item row="0" column="0" >
@@ -148,26 +169,18 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>6</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>425</width>
-           <height>450</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_6" >
+         <layout class="QVBoxLayout" >
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7" >
+           <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="label" >
               <property name="text" >
@@ -197,11 +210,11 @@ color: darkgray;
            </layout>
           </item>
           <item>
-           <spacer name="verticalSpacer_4" >
+           <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" >
              <size>
               <width>20</width>
               <height>398</height>
@@ -212,24 +225,16 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabStartup" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>425</width>
-           <height>450</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Startup</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_4" >
+         <layout class="QVBoxLayout" >
           <item>
            <widget class="QGroupBox" name="groupBox" >
             <property name="title" >
              <string>Date and time</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout" >
+            <layout class="QVBoxLayout" >
              <item>
               <widget class="QRadioButton" name="systemTimeRadio" >
                <property name="whatsThis" >
@@ -241,7 +246,7 @@ color: darkgray;
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QRadioButton" name="tonightRadio" >
                  <property name="whatsThis" >
@@ -269,7 +274,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QRadioButton" name="fixedTimeRadio" >
                  <property name="whatsThis" >
@@ -311,7 +316,7 @@ color: darkgray;
             <property name="title" >
              <string>Display</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2" >
+            <layout class="QVBoxLayout" >
              <item>
               <widget class="QRadioButton" name="fullScreenRadio" >
                <property name="whatsThis" >
@@ -323,7 +328,7 @@ color: darkgray;
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QRadioButton" name="windowModeRadio" >
                  <property name="text" >
@@ -332,11 +337,11 @@ color: darkgray;
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer" >
+                <spacer>
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -393,9 +398,9 @@ color: darkgray;
             <property name="title" >
              <string>Observer</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3" >
+            <layout class="QVBoxLayout" >
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QLabel" name="label_3" >
                  <property name="text" >
@@ -435,7 +440,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QLabel" name="label_4" >
                  <property name="text" >
@@ -444,11 +449,11 @@ color: darkgray;
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_2" >
+                <spacer>
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -493,7 +498,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QRadioButton" name="altAziMountRadio" >
                  <property name="text" >
@@ -514,11 +519,11 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_3" >
+           <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -529,18 +534,10 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabPlanetarium" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>425</width>
-           <height>450</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Planetarium</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_5" >
+         <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="sphericMirrorCheckbox" >
             <property name="whatsThis" >
@@ -569,11 +566,11 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer" >
+           <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" >
              <size>
               <width>20</width>
               <height>291</height>
@@ -584,18 +581,10 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>425</width>
-           <height>450</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Tools</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_11" >
+         <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="showFlipButtonsCheckbox" >
             <property name="whatsThis" >
@@ -637,11 +626,11 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_2" >
+           <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" >
              <size>
               <width>20</width>
               <height>261</height>
@@ -663,9 +652,9 @@ color: darkgray;
          <attribute name="title" >
           <string>Interface</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_8" >
+         <layout class="QVBoxLayout" >
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8" >
+           <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="label_7" >
               <property name="text" >
@@ -679,7 +668,7 @@ color: darkgray;
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_9" >
+           <layout class="QHBoxLayout" >
             <item>
              <widget class="QCheckBox" name="mouseTimeoutCheckbox" >
               <property name="whatsThis" >
@@ -713,7 +702,7 @@ color: darkgray;
             <property name="title" >
              <string>Selected object information (when available)</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout" >
+            <layout class="QGridLayout" >
              <property name="horizontalSpacing" >
               <number>3</number>
              </property>
@@ -798,9 +787,9 @@ color: darkgray;
             <property name="title" >
              <string>Navigation</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7" >
+            <layout class="QVBoxLayout" >
              <item>
-              <layout class="QGridLayout" name="gridLayout_2" >
+              <layout class="QGridLayout" >
                <property name="horizontalSpacing" >
                 <number>3</number>
                </property>
@@ -845,7 +834,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QLabel" name="label_8" >
                  <property name="text" >
@@ -854,11 +843,11 @@ color: darkgray;
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_4" >
+                <spacer>
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -895,7 +884,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_11" >
+              <layout class="QHBoxLayout" >
                <item>
                 <widget class="QLabel" name="label_9" >
                  <property name="text" >
@@ -904,11 +893,11 @@ color: darkgray;
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_3" >
+                <spacer>
                  <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -948,11 +937,11 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_5" >
+           <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" >
              <size>
               <width>20</width>
               <height>25</height>
@@ -963,17 +952,110 @@ color: darkgray;
          </layout>
         </widget>
         <widget class="QWidget" name="tabPlugins" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>425</width>
-           <height>450</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Plugins</string>
          </attribute>
+        </widget>
+        <widget class="QWidget" name="tab" >
+         <attribute name="title" >
+          <string>DEBUG</string>
+         </attribute>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox" >
+          <property name="geometry" >
+           <rect>
+            <x>160</x>
+            <y>80</y>
+            <width>171</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="maximum" >
+           <double>99999999.000000000000000</double>
+          </property>
+          <property name="singleStep" >
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value" >
+           <double>1.900000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_2" >
+          <property name="geometry" >
+           <rect>
+            <x>160</x>
+            <y>130</y>
+            <width>171</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="maximum" >
+           <double>99999999.000000000000000</double>
+          </property>
+          <property name="singleStep" >
+           <double>500.000000000000000</double>
+          </property>
+          <property name="value" >
+           <double>112500.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_3" >
+          <property name="geometry" >
+           <rect>
+            <x>160</x>
+            <y>180</y>
+            <width>171</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="maximum" >
+           <double>100000000.000000000000000</double>
+          </property>
+          <property name="singleStep" >
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value" >
+           <double>0.800000000000000</double>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_10" >
+          <property name="geometry" >
+           <rect>
+            <x>20</x>
+            <y>90</y>
+            <width>131</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>InScale</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_11" >
+          <property name="geometry" >
+           <rect>
+            <x>20</x>
+            <y>130</y>
+            <width>131</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>outScale</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_12" >
+          <property name="geometry" >
+           <rect>
+            <x>20</x>
+            <y>180</y>
+            <width>131</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>powFactor</string>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>

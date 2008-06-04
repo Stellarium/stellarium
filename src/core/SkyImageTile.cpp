@@ -26,6 +26,7 @@
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
+#include "SkyDrawer.hpp"
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -256,7 +257,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
 			texMgr.setDefaultParams();
- 			//texMgr.setMipmapsMode(true);
+ 			texMgr.setMipmapsMode(true);
 			texMgr.setMinFilter(GL_LINEAR);
  			texMgr.setMagFilter(GL_LINEAR);
 			// static int countG=0;
@@ -356,6 +357,8 @@ void SkyImageTile::drawTile(StelCore* core)
 	glEnable(GL_TEXTURE_2D);
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
+		if (!alphaBlend)
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		glEnable(GL_BLEND);
 		glColor4f(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
@@ -408,6 +411,8 @@ void SkyImageTile::drawTile(StelCore* core)
 		glEnable(GL_TEXTURE_2D);
 	}
 #endif
+	if (!alphaBlend)
+		glBlendFunc(GL_ONE, GL_ONE); // Revert
 }
 
 // Load the tile information from a JSON file
@@ -449,6 +454,14 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		luminance = map.value("luminance").toDouble(&ok);
 		if (!ok)
 			throw std::runtime_error("luminance expect a float value");
+	}
+	
+	if (map.contains("maxBrightness"))
+	{
+		luminance = map.value("maxBrightness").toDouble(&ok);
+		if (!ok)
+			throw std::runtime_error("maxBrightness expect a float value");
+		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfacebrightnessToLuminance(luminance);
 	}
 	
 	if (map.contains("alphaBlend"))

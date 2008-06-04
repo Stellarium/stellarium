@@ -30,10 +30,11 @@
 /*********************************************************************
  Constructor: Set some default values to prevent bugs in case of bad use
 *********************************************************************/
-ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), sqrtOneOverMaxdL(1.f/10.f), oneOverGamma(1.f/2.3f)
+ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
 {
 	// Initialize  sensor
 	setOutputScale();
+	setInputScale();
 	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
@@ -53,12 +54,22 @@ ToneReproducer::~ToneReproducer()
 }
 
 /*********************************************************************
- Set the global scale
+ Set the global output scale
 *********************************************************************/
 void ToneReproducer::setOutputScale(float scale)
 {
 	outputScale=scale;
-	sqrtOutputScale = std::sqrt(scale);
+	lnOutputScale = std::log(scale);
+}
+
+
+/*********************************************************************
+ Set the global input scale
+*********************************************************************/
+void ToneReproducer::setInputScale(float scale)
+{
+	inputScale=scale;
+	lnInputScale = std::log(inputScale);
 }
 	
 /*********************************************************************
@@ -76,7 +87,7 @@ void ToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
-	sqrtTerm2 = std::sqrt(term2);
+	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
 
@@ -95,7 +106,7 @@ void ToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
-	sqrtTerm2 = std::sqrt(term2);
+	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
 
