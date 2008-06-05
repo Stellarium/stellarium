@@ -67,13 +67,10 @@ public:
 	//! Indoor Lighting : 100    cd/m^2
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
-
-	//! Set the global scale applied to output lumiances, i.e simulate aperture*exposition time
-	//! @param scale the global scale
-	void setOutputScale(float scale=1.f);
 	
 	//! Set the global scale applied to input lumiances, i.e before the adaptation
-	//! @param scale the global scale
+	//! It is the parameter to modify to simulate aperture*exposition time
+	//! @param scale the global input scale
 	void setInputScale(float scale=1.f);
 	float getInputScale() const {return inputScale;}
 	
@@ -93,7 +90,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow((float)(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2 * outputScale;
+		return std::pow((float)(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
 	}
 
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
@@ -111,7 +108,7 @@ public:
 	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const
 	{
 		const float lnPix0p0001 = -8.0656104861f;
-		return std::exp(((lnInputScale+lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa+lnTerm2+lnOutputScale+lnOneOverMaxdL)*pFact);
+		return std::exp(((lnInputScale+lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa+lnTerm2+lnOneOverMaxdL)*pFact);
 	}
 	
 	//! Convert from xyY color system to RGB.
@@ -121,9 +118,6 @@ public:
 	
 private:
 	// The global luminance scaling
-	float outputScale;
-	float lnOutputScale;	// std::log(outputScale)
-	
 	float inputScale;
 	float lnInputScale;		// std::log(inputScale)
 	

@@ -174,7 +174,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			// Add star background luminance
 			lumi += 0.0001;
 			// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
-			lumi*=eye->getInputScale();
+			// lumi*=eye->getInputScale();
 			
 			// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
 			// of the scaling itself

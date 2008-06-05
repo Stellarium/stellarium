@@ -35,8 +35,7 @@
 SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aeye)
 {
 	// DEBUG
-	outScale = 1.0;
-	inScale = 1.9;
+	inScale = 1.;
 	bortleScaleIndex = 3;
 			
 	setMaxFov(180.f);
@@ -70,11 +69,19 @@ SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aey
 		ok = true;
 	}
 	
-	setRelativeScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
+	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
 	if (!ok)
 	{
 		conf->setValue("stars/relative_scale",1.0);
-		setRelativeScale(1.0);
+		setRelativeStarScale(1.0);
+		ok = true;
+	}
+	
+	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("stars/absolute_scale",1.0);
+		setAbsoluteStarScale(1.0);
 		ok = true;
 	}
 }
@@ -105,21 +112,18 @@ void SkyDrawer::update(double deltaTime)
 			fov = min_fov;
 	}
 	
-	// I am not quite sure how to interpret this one..
-	eye->setOutputScale(112500.);
-	
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human 
 	// vision to binocculares/telescope. Use a max of 0.7 because after that the atmosphere starts to glow too much!
 	float powFactor = std::pow(60./MY_MAX(0.7,fov), 0.8);
-	eye->setInputScale(inScale*powFactor); // *
+	eye->setInputScale(2025000.f*inScale*powFactor);
 	
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
 	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 	
 	// Precompute
-	starLinearScale = std::pow((float)(2.1f*outScale), 1.3f/2.f*starRelativeScale);
+	starLinearScale = std::pow(2.1f*starAbsoluteScaleF, 1.3f/2.f*starRelativeScale);
 }
 
 // Compute the log of the luminance for a point source with the given mag for the current FOV
