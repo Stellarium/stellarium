@@ -101,8 +101,6 @@ void CompletionLabel::updateSelected(void)
 	// remove final comma
 	newText.replace(QRegExp(", *$"), "");
 
-	qDebug() << newText;
-
 	setText(newText);
 }
 
@@ -166,7 +164,6 @@ void SearchDialog::onTextChanged(const QString& text)
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
-	qDebug() << "got selected:" << name;
 	
 	if (name=="") return;
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
