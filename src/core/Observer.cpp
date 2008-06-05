@@ -249,11 +249,6 @@ void Observer::setConf(QSettings* conf, const QString& section) const
 }
 
 
-QString Observer::getHomePlanetEnglishName(void) const {
-  const Planet *p = getHomePlanet();
-  return p ? p->getEnglishName() : "";
-}
-
 QString Observer::getHomePlanetNameI18n(void) const {
   const Planet *p = getHomePlanet();
   return p ? p->getNameI18n() : "";

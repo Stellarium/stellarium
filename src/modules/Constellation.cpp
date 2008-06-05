@@ -133,15 +133,15 @@ void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 
 		// If one of the point is in the screen
-		b0 = prj->projectCheck(art_vertex[0],v0) || (nav->getPrecEquVision().dot(art_vertex[0])>0.9);
-		b1 = prj->projectCheck(art_vertex[1],v1) || (nav->getPrecEquVision().dot(art_vertex[1])>0.9);
-		b2 = prj->projectCheck(art_vertex[2],v2) || (nav->getPrecEquVision().dot(art_vertex[2])>0.9);
-		b3 = prj->projectCheck(art_vertex[3],v3) || (nav->getPrecEquVision().dot(art_vertex[3])>0.9);
-		b4 = prj->projectCheck(art_vertex[4],v4) || (nav->getPrecEquVision().dot(art_vertex[4])>0.9);
-		b5 = prj->projectCheck(art_vertex[5],v5) || (nav->getPrecEquVision().dot(art_vertex[5])>0.9);
-		b6 = prj->projectCheck(art_vertex[6],v6) || (nav->getPrecEquVision().dot(art_vertex[6])>0.9);
-		b7 = prj->projectCheck(art_vertex[7],v7) || (nav->getPrecEquVision().dot(art_vertex[7])>0.9);
-		b8 = prj->projectCheck(art_vertex[8],v8) || (nav->getPrecEquVision().dot(art_vertex[8])>0.9);
+		b0 = prj->projectCheck(art_vertex[0],v0) || (nav->getJ2000EquVision().dot(art_vertex[0])>0.9);
+		b1 = prj->projectCheck(art_vertex[1],v1) || (nav->getJ2000EquVision().dot(art_vertex[1])>0.9);
+		b2 = prj->projectCheck(art_vertex[2],v2) || (nav->getJ2000EquVision().dot(art_vertex[2])>0.9);
+		b3 = prj->projectCheck(art_vertex[3],v3) || (nav->getJ2000EquVision().dot(art_vertex[3])>0.9);
+		b4 = prj->projectCheck(art_vertex[4],v4) || (nav->getJ2000EquVision().dot(art_vertex[4])>0.9);
+		b5 = prj->projectCheck(art_vertex[5],v5) || (nav->getJ2000EquVision().dot(art_vertex[5])>0.9);
+		b6 = prj->projectCheck(art_vertex[6],v6) || (nav->getJ2000EquVision().dot(art_vertex[6])>0.9);
+		b7 = prj->projectCheck(art_vertex[7],v7) || (nav->getJ2000EquVision().dot(art_vertex[7])>0.9);
+		b8 = prj->projectCheck(art_vertex[8],v8) || (nav->getJ2000EquVision().dot(art_vertex[8])>0.9);
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
