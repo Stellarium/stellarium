@@ -61,7 +61,6 @@ public:
 	QString getInfoString(const Navigator * nav) const;
 	QString getShortInfoString(const Navigator * nav = NULL) const;
 	QString getType(void) const {return "Nebula";}
-	Vec3d getEarthEquatorialPos(const Navigator *nav) const {return nav->j2000_to_earth_equ(XYZ);}
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
 	double getCloseViewFov(const Navigator * nav = NULL) const;

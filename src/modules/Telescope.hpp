@@ -45,18 +45,13 @@ public:
   QString getInfoString(const Navigator * nav) const;
   QString getShortInfoString(const Navigator * nav) const;
   QString getType(void) const {return "Telescope";}
-  Vec3d getEarthEquatorialPos(const Navigator *nav) const
-    {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
-
   virtual bool isConnected(void) const = 0;
   virtual bool hasKnownPosition(void) const = 0;
     // all TCP (and all possible other style) communication shall be done in
     // these functions:
-  virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
-                                int &fdmax) = 0;
-  virtual void handleSelectFds(const fd_set &read_fds,
-                               const fd_set &write_fds) {}
+  virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
+  virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
   void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
   const std::list<double> &getOculars(void) const {return oculars;}
 protected:

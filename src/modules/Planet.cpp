@@ -226,21 +226,10 @@ void Planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 	delta_orbitJD = re.sidereal_period/ORBIT_SEGMENTS;
 }
 
-
-// Return the Planet position in rectangular earth equatorial coordinate
-Vec3d Planet::getEarthEquatorialPos(const Navigator * nav) const
-{
-	Vec3d v = get_heliocentric_ecliptic_pos();
-	return nav->helio_to_earth_pos_equ(v); // this is earth equatorial but centered
-}
-
 Vec3d Planet::getObsJ2000Pos(const Navigator *nav) const 
 {
-	return mat_vsop87_to_j2000.multiplyWithoutTranslation(
-	           get_heliocentric_ecliptic_pos() 
-	           - nav->getObserverHelioPos());
+	return mat_vsop87_to_j2000.multiplyWithoutTranslation(get_heliocentric_ecliptic_pos() - nav->getObserverHelioPos());
 }
-
 
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
@@ -393,18 +382,22 @@ void Planet::compute_trans_matrix(double jd)
 Mat4d Planet::getRotEquatorialToVsop87(void) const 
 {
 	Mat4d rval = rot_local_to_parent;
-	if (parent) for (const Planet *p=parent;p->parent;p=p->parent) 
-		rval = p->rot_local_to_parent * rval;
-
+	if (parent)
+	{
+		for (const Planet *p=parent;p->parent;p=p->parent) 
+			rval = p->rot_local_to_parent * rval;
+	}
 	return rval;
 }
 
 void Planet::setRotEquatorialToVsop87(const Mat4d &m) 
 {
 	Mat4d a = Mat4d::identity();
-	if (parent) for (const Planet *p=parent;p->parent;p=p->parent) 
-		a = p->rot_local_to_parent * a;
-
+	if (parent)
+	{
+		for (const Planet *p=parent;p->parent;p=p->parent) 
+			a = p->rot_local_to_parent * a;
+	}
 	rot_local_to_parent = a.transpose() * m;
 }
 

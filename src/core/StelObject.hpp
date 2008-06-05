@@ -69,8 +69,8 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n(void) const = 0;
 	
-	//! Get position in earth equatorial frame
-	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const;
+	//! Get position in earth equatorial coordinate
+	Vec3d getEarthEquatorialPos(const Navigator *nav) const;
 	
 	//! Get observer centered J2000 coordinates
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;

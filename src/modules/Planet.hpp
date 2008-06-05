@@ -110,8 +110,6 @@ public:
 	// Return the radius of a circle containing the object on screen
 	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const;
 	virtual QString getType(void) const {return "Planet";}
-	// Return the Planet position in rectangular earth equatorial coordinate
-	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const;
 	// observer centered J2000 coordinates
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const;
 	virtual QString getEnglishName(void) const {return englishName;}
