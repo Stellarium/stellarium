@@ -28,6 +28,7 @@
 #include "MovementMgr.hpp"
 
 #include <QTextEdit>
+#include <QLabel>
 #include <QString>
 #include <QStringList>
 #include <QDebug>
@@ -35,59 +36,72 @@
 
 #include "StelMainGraphicsView.hpp"
 
-// Start of members for class CompletionTextEdit
-CompletionTextEdit::CompletionTextEdit(QWidget* parent)
-	: QTextEdit(parent), 
+// Start of members for class CompletionLabel
+CompletionLabel::CompletionLabel(QWidget* parent)
+	: QLabel(parent), 
 	  selectedIdx(0)
 {
 }
 
-CompletionTextEdit::~CompletionTextEdit()
+CompletionLabel::~CompletionLabel()
 {
 }
 
-QString CompletionTextEdit::getSelected(void)
+QString CompletionLabel::getSelected(void)
 {
-	return toPlainText().split(",").at(selectedIdx);
+	QString item = text().split(",").at(selectedIdx);
+	item.replace(QRegExp("</?b>"), "");
+	return item;
 }
 
-void CompletionTextEdit::selectNext(void)
+void CompletionLabel::selectNext(void)
 {
 	selectedIdx++;
-	if (selectedIdx > toPlainText().count(",")) selectedIdx = 0; // wrap if necessary
+	if (selectedIdx > text().count(",")) selectedIdx = 0; // wrap if necessary
 	updateSelected();
 }
 
-void CompletionTextEdit::selectPrevious(void)
+void CompletionLabel::selectPrevious(void)
 {
 	selectedIdx--;
-	if (selectedIdx < 0) selectedIdx = toPlainText().count(","); // wrap if necessary
+	if (selectedIdx < 0) selectedIdx = text().count(","); // wrap if necessary
 	updateSelected();
 }
 
-void CompletionTextEdit::selectFirst(void)
+void CompletionLabel::selectFirst(void)
 {
 	selectedIdx=0;
 	updateSelected();
 }
 
-void CompletionTextEdit::updateSelected(void)
+void CompletionLabel::updateSelected(void)
 {
-	QStringList items = toPlainText().split(",");
-	QString newHtml("<html><head></head><body>");
+	QStringList items = text().split(",");
+	QString newText("");
+	
+	// and pre-selected items, stripping bold tags if found
 	for(int i=0; i<selectedIdx; i++)
-		newHtml += items.at(i) + ",";
+	{
+		QString item(items.at(i));
+		item.replace(QRegExp("</?b>"), "");
+		newText += item + ",";
+	}
 
-	newHtml += "<b>" + items.at(selectedIdx) + "</b>,";
+	// add selected item in bold
+	newText += "<b>" + items.at(selectedIdx) + "</b>,";
 
+	// and post-selected items, stripping bold tags if found
 	for(int i=selectedIdx+1; i<items.size(); i++)
-		newHtml += items.at(i) + ",";
+	{
+		QString item(items.at(i));
+		item.replace(QRegExp("</b>"), "");
+		newText += item + ",";
+	}
 
-	newHtml.replace(QRegExp(",+$"), "");
+	// remove final comma
+	newText.replace(QRegExp(",+$"), "");
 
-	newHtml += "</body></html>";
-
-	setHtml(newHtml);
+	setText(newText);
 }
 
 // Start of members for class SearchDialog
@@ -135,18 +149,18 @@ void SearchDialog::setVisible(bool v)
 void SearchDialog::onTextChanged(const QString& text)
 {
 	if (text=="")
-		ui->completionText->setText("");
+		ui->completionLabel->setText("");
 	else
 	{
 		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
-		ui->completionText->setText(matches.join(","));
-		ui->completionText->selectFirst();
+		ui->completionLabel->setText(matches.join(","));
+		ui->completionLabel->selectFirst();
 	}
 }
 
 void SearchDialog::gotoObject()
 {
-	QString name = ui->completionText->getSelected();
+	QString name = ui->completionLabel->getSelected();
 	
 	if (name=="") return;
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
@@ -156,8 +170,8 @@ void SearchDialog::gotoObject()
 		if (!newSelected.empty())
 		{
 			ui->lineEditSearchSkyObject->clear();
-			ui->completionText->setText("");
-			ui->completionText->selectFirst();
+			ui->completionLabel->setText("");
+			ui->completionLabel->selectFirst();
 			mvmgr->moveTo(newSelected[0]->getEarthEquatorialPos(
 				StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration()
 			);
@@ -174,12 +188,12 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down) 
 		{
-			ui->completionText->selectNext();
+			ui->completionLabel->selectNext();
 			return true;
 		} 
 		if (keyEvent->key() == Qt::Key_Up) 
 		{
-			ui->completionText->selectPrevious();
+			ui->completionLabel->selectPrevious();
 			return true;
 		} 
 		else
