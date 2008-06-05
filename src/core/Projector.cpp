@@ -312,8 +312,6 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
 
 void Projector::setFov(double f)
 {
-
-	// qDebug() << "Set fov to " << f << " " << max_fov << " " << min_fov;
 	fov = f;
 	if (f>max_fov)
 		fov = max_fov;
@@ -331,7 +329,6 @@ void Projector::setMaxFov(double max)
 	{
 		setFov(max);
 	}
-
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
@@ -401,18 +398,6 @@ void Projector::initGlMatrixOrtho2d(void) const
 	glLoadIdentity();
 }
 
-/*************************************************************************
- Return an openGL Matrix for a perspective projection.
-*************************************************************************/
-//Mat4d Projector::getGlMatrixPerspective(void) const
-//{
-//	const double f = 1./std::tan(fov*M_PI/360.);
-//	const double ratio = (double)getViewportHeight()/getViewportWidth();
-//	return Mat4d( flip_horz*f*ratio, 0., 0., 0.,
-//					0., flip_vert*f, 0., 0.,
-//					0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-//					0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);	
-//}
 
 /*************************************************************************
  Set the current projection mapping to use
@@ -441,29 +426,6 @@ void Projector::setCurrentMapping(const QString& mappingId)
 	}
 }
 
-	
-/*************************************************************************
- Project the vector v from the current frame into the viewport
-*************************************************************************/
-// bool Projector::project(const Vec3d &v, Vec3d &win) const
-// {
-// 	// really important speedup:
-// 	win[0] = modelViewMatrix.r[0]*v[0] + modelViewMatrix.r[4]*v[1]
-// 	         + modelViewMatrix.r[8]*v[2] + modelViewMatrix.r[12];
-// 	win[1] = modelViewMatrix.r[1]*v[0] + modelViewMatrix.r[5]*v[1]
-// 	         + modelViewMatrix.r[9]*v[2] + modelViewMatrix.r[13];
-// 	win[2] = modelViewMatrix.r[2]*v[0] + modelViewMatrix.r[6]*v[1]
-// 	         + modelViewMatrix.r[10]*v[2] + modelViewMatrix.r[14];
-// 	const bool rval = mapping->forward(win);
-// 	  // very important: even when the projected point comes from an
-// 	  // invisible region of the sky (rval=false), we must finish
-// 	  // reprojecting, so that OpenGl can successfully eliminate
-// 	  // polygons by culling.
-// 	win[0] = viewport_center[0] + flip_horz * pixel_per_rad * win[0];
-// 	win[1] = viewport_center[1] + flip_vert * pixel_per_rad * win[1];
-// 	win[2] = (win[2] - zNear) / (zNear - zFar);
-// 	return rval;
-// }
 
 /*************************************************************************
  Project the vector v from the viewport frame into the current frame 
