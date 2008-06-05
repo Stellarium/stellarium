@@ -91,6 +91,9 @@ void ConfigurationDialog::createDialogContent()
 	ui->todayTimeSpinBox->setTime(nav->getInitTodayTime());
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
 	
+	ui->fixedDateTimeEdit->setDateTime(nav->getInitDateTime());
+	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setInitDateTime(QDateTime)));
+	
 	// Initial FOV
 	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
