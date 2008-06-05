@@ -41,6 +41,7 @@ protected:
 private slots:
 	void languageChanged(const QString& languageCode);
 	void setStartupTimeMode(void);
+	void setDiskViewport(bool);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

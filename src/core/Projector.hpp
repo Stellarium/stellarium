@@ -86,9 +86,6 @@ public:
 				    const Mat4d& _mat_local_to_eye,
 				    const Mat4d& _mat_j2000_to_eye);
 	
-	//! Set the flag with decides whether to arrage labels so that
-	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
-	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
 	//! Get the current state of the flag which decides whether to 
 	//! arrage labels so that they are aligned with the bottom of a 2d 
 	//! screen, or a 3d dome.
@@ -419,6 +416,9 @@ public:
 			   GLint stacks, int orient_inside = 0) const;
 
 public slots:
+	//! Set the flag with decides whether to arrage labels so that
+	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
+	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
 	//! Get the state of the horizontal flip.
 	//! @return True if flipped horizontally, else false.
 	bool getFlipHorz(void) const {return (flip_horz < 0.0);}
