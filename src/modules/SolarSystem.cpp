@@ -49,9 +49,7 @@
 #include <QMapIterator>
 #include <QDebug>
 
-SolarSystem::SolarSystem()
-	:sun(NULL),moon(NULL),earth(NULL),selected(NULL),
-	moonScale(1.), fontSize(14.),
+SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moonScale(1.), fontSize(14.),
 	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flag_light_travel_time(false), lastHomePlanet(NULL)
 {
@@ -65,7 +63,7 @@ void SolarSystem::setFontSize(float newFontSize)
 
 SolarSystem::~SolarSystem()
 {
-	  // release selected:
+	// release selected:
 	selected = NULL;
 	for(vector<Planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
@@ -104,7 +102,6 @@ void SolarSystem::init()
 	// for the first initialization assert that center is sun center (only impacts on light speed correction)
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
-	setScale(conf->value("stars/star_scale",1.1).toDouble());  // if reload config
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
 	setMoonScale(conf->value("viewing/moon_scale", 5.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
@@ -690,53 +687,56 @@ void SolarSystem::loadPlanets()
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double date, const Vec3d& observerPos) {
-  if (flag_light_travel_time) {
-    for (vector<Planet*>::const_iterator iter(system_planets.begin());
-         iter!=system_planets.end();iter++) {
-      (*iter)->computePositionWithoutOrbits(date);
-    }
-    for (vector<Planet*>::const_iterator iter(system_planets.begin());
-         iter!=system_planets.end();iter++) {
-      const double light_speed_correction =
-        ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length()
-        * (AU / (SPEED_OF_LIGHT * 86400));
-      (*iter)->compute_position(date-light_speed_correction);
-    }
-  } else {
-    for (vector<Planet*>::const_iterator iter(system_planets.begin());
-         iter!=system_planets.end();iter++) {
-      (*iter)->compute_position(date);
-    }
-  }
-  
-  computeTransMatrices(date, observerPos);
+void SolarSystem::computePositions(double date, const Vec3d& observerPos)
+{
+	if (flag_light_travel_time)
+	{
+		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		{
+			(*iter)->computePositionWithoutOrbits(date);
+		}
+		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		{
+			const double light_speed_correction = ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			(*iter)->compute_position(date-light_speed_correction);
+		}
+	}
+	else
+	{
+		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		{
+			(*iter)->compute_position(date);
+		}
+	}  
+	computeTransMatrices(date, observerPos);
 }
 
 // Compute the transformation matrix for every elements of the solar system.
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
-void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos) {
-  if (flag_light_travel_time) {
-    for (vector<Planet*>::const_iterator iter(system_planets.begin());
-         iter!=system_planets.end();iter++) {
-      const double light_speed_correction =
-        ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length()
-        * (AU / (SPEED_OF_LIGHT * 86400));
-      (*iter)->compute_trans_matrix(date-light_speed_correction);
-    }
-  } else {
-    for (vector<Planet*>::const_iterator iter(system_planets.begin());
-         iter!=system_planets.end();iter++) {
-      (*iter)->compute_trans_matrix(date);
-    }
-  }
+void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
+{
+	if (flag_light_travel_time)
+	{
+		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		{
+			const double light_speed_correction = ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			(*iter)->compute_trans_matrix(date-light_speed_correction);
+		}
+  	}
+	else
+	{
+		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		{
+			(*iter)->compute_trans_matrix(date);
+		}
+	}
 }
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 double SolarSystem::draw(StelCore* core)
 {
-	if(!Planet::getflagShow())
+	if (!flagShow)
 		return 0.0;
 	
 	Navigator* nav = core->getNavigation();
@@ -760,7 +760,6 @@ double SolarSystem::draw(StelCore* core)
 	glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
 
 	// Light pos in zero (sun)
-	//nav->switchToHeliocentric();
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
 	glEnable(GL_LIGHT0);
 
@@ -784,7 +783,7 @@ double SolarSystem::draw(StelCore* core)
 	while (iter != system_planets.end())
 	{
 		double squaredDistance = 0;
-		if(*iter==moon && near_lunar_eclipse(nav, prj))
+		if (*iter==moon && near_lunar_eclipse(nav, prj))
 		{
 			// TODO: moon magnitude label during eclipse isn't accurate...
 
@@ -1215,14 +1214,11 @@ void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
 		setSelected(newSelected[0].get());
-//		// potentially record this action
-//		if (!recordActionCallback.empty())
-//			recordActionCallback("select planet " + selected_object.getEnglishName());
 }
 
 // Activate/Deactivate planets display
-void SolarSystem::setFlagPlanets(bool b) {Planet::setflagShow(b);}
-bool SolarSystem::getFlagPlanets(void) const {return Planet::getflagShow();}
+void SolarSystem::setFlagPlanets(bool b) {flagShow=b;}
+bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
 
 // Set/Get planets names color
 void SolarSystem::setNamesColor(const Vec3f& c) {Planet::set_label_color(c);}
@@ -1235,10 +1231,6 @@ Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
 // Set/Get planets trails color
 void SolarSystem::setTrailsColor(const Vec3f& c)  {Planet::set_trail_color(c);}
 Vec3f SolarSystem::getTrailsColor(void) const {return Planet::getTrailColor();}
-
-// Set/Get base planets display scaling factor 
-void SolarSystem::setScale(float scale) {Planet::setScale(scale);}
-float SolarSystem::getScale(void) const {return Planet::getScale();}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)

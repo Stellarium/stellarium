@@ -41,7 +41,7 @@ StelCore::StelCore()
 	tone_converter = new ToneReproducer();
 	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
 	projection->init();
-	skyDrawer = new SkyDrawer(projection, tone_converter);
+	skyDrawer = new SkyDrawer(this);
 }
 
 

@@ -38,11 +38,9 @@
 #include "StarMgr.hpp"
 
 SFont* Planet::planet_name_font = NULL;
-float Planet::object_scale = 1.f;
 Vec3f Planet::label_color = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbit_color = Vec3f(1,0.6,1);
 Vec3f Planet::trail_color = Vec3f(1,0.7,0.7);
-LinearFader Planet::flagShow;
 
 Planet::Planet(Planet *parent,
                const QString& englishName,
@@ -56,7 +54,7 @@ Planet::Planet(Planet *parent,
                const QString& tex_halo_name,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
-               bool close_orbit,
+               bool aclose_orbit,
                bool hidden) 
 	: englishName(englishName),
 	  flagHalo(flagHalo),
@@ -64,10 +62,14 @@ Planet::Planet(Planet *parent,
 	  radius(radius), one_minus_oblateness(1.0-oblateness),
 	  color(color), albedo(albedo), axis_rotation(0.), rings(NULL),
 	  sphere_scale(1.f),
-	  lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
-	  coord_func(coord_func), osculating_func(osculating_func),
-	  close_orbit(close_orbit), parent(parent), hidden(hidden)
+	  lastJD(J2000), 
+	  coord_func(coord_func), osculating_func(osculating_func), parent(parent), hidden(hidden)
 {
+	last_orbitJD =0;
+	deltaJD = JD_SECOND;
+	orbit_cached = 0;
+	close_orbit = aclose_orbit;
+				 
 	if (parent) 
 		parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -528,7 +530,7 @@ float Planet::compute_magnitude(Vec3d obs_pos) const
 	return rval;
 }
 
-float Planet::compute_magnitude(const Navigator * nav) const
+float Planet::getMagnitude(const Navigator * nav) const
 {
 	return compute_magnitude(nav->getObserverHelioPos());
 }

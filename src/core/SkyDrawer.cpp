@@ -19,6 +19,7 @@
  
 #include "SkyDrawer.hpp"
 #include "Projector.hpp"
+#include "Navigator.hpp"
 #include "ToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
@@ -32,9 +33,11 @@
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25)
 
-SkyDrawer::SkyDrawer(Projector* aprj, ToneReproducer* aeye) : prj(aprj), eye(aeye)
+SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 {
-	// DEBUG
+	prj = core->getProjection();
+	eye = core->getToneReproducer();
+
 	inScale = 1.;
 	bortleScaleIndex = 3;
 			
@@ -133,7 +136,7 @@ float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 }
 
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
-float SkyDrawer::surfacebrightnessToLuminance(float sb) const
+float SkyDrawer::surfacebrightnessToLuminance(float sb)
 {
 	return std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
@@ -271,6 +274,30 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 }
 
 
+void SkyDrawer::preDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color, bool lighting)
+{
+	const Vec3d sun_pos = core->getNavigation()->get_helio_to_eye_mat()*Vec3d(0,0,0);
+	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
+	
+	if (lighting)
+	{
+		glEnable(GL_LIGHTING);
+		const float diffuse[4] = {2,2,2,1};
+		glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+	}
+	else
+	{
+		glDisable(GL_LIGHTING);
+		glColor3fv(color);
+	}
+}
+
+// Terminate drawing of a 3D model, draw the halo
+void SkyDrawer::postDrawSky3dModel()
+{
+	glDisable(GL_LIGHTING);
+}
+	
 // Set the parameters so that the stars disapear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void SkyDrawer::setBortleScale(int bIndex)

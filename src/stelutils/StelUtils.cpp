@@ -803,9 +803,9 @@ double qTimeToJDFraction(const QTime& time)
 QTime jdFractionToQTime(const double jd)
 {
 	double decHours = fmod(jd+0.5, 1.0);
-        int hours = decHours/0.041666666666666666666;
-        int mins = (decHours-(hours*0.041666666666666666666))/0.00069444444444444444444;
-        return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
+	int hours = (int)(decHours/0.041666666666666666666);
+	int mins = (int)((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
+	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
 bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify)

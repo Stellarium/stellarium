@@ -104,8 +104,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 
 	// DEBUG tab
-	connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
-	connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
+	// connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
+	// connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
 
 }
 
