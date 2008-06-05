@@ -42,7 +42,7 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(Projector::FRAME_TYPE frame = Projector::FRAME_EARTH_EQU);
+	SkyGrid(Projector::FRAME_TYPE frame);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
 	void setFontSize(double newFontSize);

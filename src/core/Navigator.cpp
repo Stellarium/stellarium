@@ -41,7 +41,7 @@ Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(
 	}
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
-	prec_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
+	J2000_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
 	viewing_mode = VIEW_HORIZON;  // default
 }
 
@@ -211,22 +211,22 @@ void Navigator::setLocalVision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
-	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
+	J2000_equ_vision = mat_earth_equ_to_j2000*equ_vision;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setEquVision(const Vec3d& _pos)
 {
 	equ_vision = _pos;
-	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
+	J2000_equ_vision = mat_earth_equ_to_j2000*equ_vision;
 	local_vision = earth_equ_to_local(equ_vision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::setPrecEquVision(const Vec3d& _pos)
+void Navigator::setJ2000EquVision(const Vec3d& _pos)
 {
-	prec_equ_vision = _pos;
-	equ_vision = mat_j2000_to_earth_equ*prec_equ_vision;
+	J2000_equ_vision = _pos;
+	equ_vision = mat_j2000_to_earth_equ*J2000_equ_vision;
 	local_vision = earth_equ_to_local(equ_vision);
 }
 
@@ -313,9 +313,6 @@ void Navigator::updateModelViewMat(void)
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
 
-//johannes
-//    mat_local_to_eye =  Mat4d::zrotation(0.5*M_PI) * mat_local_to_eye;
-
 	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
 	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
 	mat_j2000_to_eye = mat_earth_equ_to_eye*mat_j2000_to_earth_equ;
@@ -326,7 +323,7 @@ void Navigator::updateModelViewMat(void)
 // Return the observer heliocentric position
 Vec3d Navigator::getObserverHelioPos(void) const
 {
-	Vec3d v(0.,0.,0.);
+	static const Vec3d v(0.,0.,0.);
 	return mat_local_to_helio*v;
 }
 

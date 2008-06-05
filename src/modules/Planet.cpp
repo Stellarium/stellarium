@@ -926,7 +926,7 @@ void Planet::draw_trail(const Navigator * nav, const Projector* prj)
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
-	prj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
+	prj->setCurrentFrame(Projector::FRAME_J2000);
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -997,9 +997,9 @@ void Planet::update_trail(const Navigator* nav)
 	{
 		last_trailJD = date;
 		TrailPoint tp;
-		Vec3d v = get_heliocentric_ecliptic_pos();
+		//Vec3d v = get_heliocentric_ecliptic_pos();
 		//      trail.push_front( nav->helio_to_earth_equ(v) );  // centered on earth
-		tp.point = nav->helio_to_earth_pos_equ(v);
+		tp.point = getObsJ2000Pos(nav);//nav->helio_to_earth_pos_equ(v);
 		tp.date = date;
 		trail.push_front( tp );
 

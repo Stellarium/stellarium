@@ -304,9 +304,7 @@ void MovementMgr::updateMotion(double deltaTime)
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=move_speed*deltaTime*1000*proj->getFov();
-//	double deplzoom=zoom_speed*deltaTime*1000*proj->getFov();
-	double deplzoom=zoom_speed*deltaTime*1000*proj->getCurrentMapping().
-	                  deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
+	double deplzoom=zoom_speed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
 
 	if (deltaAz<0)
 	{
@@ -355,27 +353,11 @@ void MovementMgr::updateMotion(double deltaTime)
 		}
 	}
 
-	if(deltaFov != 0 )
+	if (deltaFov != 0 )
 	{
 		changeFov(deltaFov);
-		QString tss;
-		QTextStream ts(&tss);
-		ts << "zoom delta_fov " << deltaFov;
 	}
-
-	if(deltaAz != 0 || deltaAlt != 0)
-	{
-		panView(deltaAz, deltaAlt);
-		QString tss;
-		QTextStream ts(&tss);
-		ts << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
-	}
-	else
-	{
-		// must perform call anyway, but don't record!
-		panView(deltaAz, deltaAlt);
-	}
-	
+	panView(deltaAz, deltaAlt);
 	update_auto_zoom(deltaTime);
 }
 
