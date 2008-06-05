@@ -75,11 +75,11 @@ public:
 
 	// Get vision direction
 	const Vec3d& getEquVision(void) const {return equ_vision;}
-	const Vec3d& getPrecEquVision(void) const {return prec_equ_vision;}
+	const Vec3d& getJ2000EquVision(void) const {return J2000_equ_vision;}
 	const Vec3d& getLocalVision(void) const {return local_vision;}
 	void setLocalVision(const Vec3d& _pos);
 	void setEquVision(const Vec3d& _pos);
-	void setPrecEquVision(const Vec3d& _pos);
+	void setJ2000EquVision(const Vec3d& _pos);
 	
 	const Planet *getHomePlanet(void) const;
 
@@ -229,7 +229,7 @@ private:
 	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-	Vec3d local_vision, equ_vision, prec_equ_vision;	// Viewing direction in local and equatorial coordinates
+	Vec3d local_vision, equ_vision, J2000_equ_vision;	// Viewing direction in local and equatorial coordinates
 
 	// Time variable
 	double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec

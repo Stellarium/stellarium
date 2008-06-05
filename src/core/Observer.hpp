@@ -59,8 +59,6 @@ public slots:
 	//! Set the home planet from its english name
 	bool setHomePlanet(const QString& englishName);
 	
-	//! Get the english home planet name
-	QString getHomePlanetEnglishName(void) const;
 	//! Get the translated home planet name
 	QString getHomePlanetNameI18n(void) const;
 	

@@ -181,13 +181,12 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	float xpos = winpos[0];
 	float ypos = winpos[1];
 
-	core->getProjection()->setCurrentFrame(Projector::FRAME_EARTH_EQU);
 	float best_object_value;
 	best_object_value = 100000.f;
 	vector<StelObjectP>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		core->getProjection()->project((*iter)->getEarthEquatorialPos(core->getNavigation()), winpos);
+		core->getProjection()->project((*iter)->getObsJ2000Pos(core->getNavigation()), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float priority =  (*iter)->getSelectPriority(core->getNavigation());
 		// qDebug() << (*iter).getShortInfoString(core->getNavigation()) << ": " << priority << " " << distance;
