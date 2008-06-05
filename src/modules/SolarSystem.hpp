@@ -61,9 +61,7 @@ public:
 	virtual void init();
 
 	//! Draw SolarSystem objects (planets).
-	//! @param prj The Projector object.
-	//! @param nav The Navigator object.
-	//! @ToneProducer eye The eye adaptation model.
+	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
 	virtual double draw(StelCore *core);
@@ -169,11 +167,6 @@ public slots:
 	//! Get the current color used to draw planet trails.
 	Vec3f getTrailsColor(void) const;
 	
-	//! Set base planets display scaling factor.
-	void setScale(float scale);
-	//! Get base planets display scaling factor.
-	float getScale(void) const;
-	
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
@@ -187,25 +180,8 @@ public slots:
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
-	//! Get a hash of locale and ssystem.ini names for use with the TUI.
-	//! @return A newline delimited hash of localized:standard planet names.
-	//! Planet translated name is PARENT : NAME
-	QString getPlanetHashString();
- 
-	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
-	//! (Required for light travel time computation.)
-	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
-
-	//! Search for SolarSystem objects which are close to the position given 
-	//! in earth equatorial position.
-	//! @param v A position in earth equatorial position.
-	//! @param core the StelCore object.
-	//! @return a pointer to a StelObject if found, else NULL
-	StelObject* search(Vec3d v, const StelCore* core) const;
-
 	//! Get a pointer to a Planet object.
-	//! @param the English name of the desired planet.
+	//! @param planetEnglishName the English name of the desired planet.
 	//! @return The matching planet pointer if exists or NULL.
 	Planet* searchByEnglishName(QString planetEnglishName) const;
 	
@@ -218,10 +194,30 @@ public:
 	//! Get the Planet object pointer for Earth's moon.
 	Planet* getMoon(void) const {return moon;}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// DEPRECATED
+	///////////////////////////////////////////////////////////////////////////////////////
+	//! Get a hash of locale and ssystem.ini names for use with the TUI.
+	//! @return A newline delimited hash of localized:standard planet names.
+	//! Planet translated name is PARENT : NAME
+	QString getPlanetHashString();
+ 
+	//! Compute the position and transform matrix for every element of the solar system.
+	//! @param observerPos Position of the observer in heliocentric ecliptic frame. 
+	//! (Required for light travel time computation.)
+	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+	
 	//! Get the list of all the bodies of the solar system.
 	const vector<Planet*>& getAllPlanets() const {return system_planets;}
 	
 private:
+	//! Search for SolarSystem objects which are close to the position given 
+	//! in earth equatorial position.
+	//! @param v A position in earth equatorial position.
+	//! @param core the StelCore object.
+	//! @return a pointer to a StelObject if found, else NULL
+	StelObject* search(Vec3d v, const StelCore* core) const;
+	
 	//! Update the planet motion trails.
 	// void updateTrails(const Navigator* nav);
 
@@ -252,9 +248,6 @@ private:
 	//! The currently selected planet.
 	StelObject* selected;
 
-	// solar system related settings
-	float object_scale;  // should be kept synchronized with star scale...
-
 	bool flagMoonScale;
 	float moonScale;	// Moon scale value
 
@@ -262,7 +255,6 @@ private:
 	SFont& planet_name_font;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
-	vector<Orbit*> orbits;// Pointers on created elliptical orbits
 	bool near_lunar_eclipse(const Navigator * nav, Projector * prj);
 	
 	// draw earth shadow on moon for lunar eclipses
@@ -281,8 +273,14 @@ private:
 	bool flag_light_travel_time;
 	
 	STextureSP texPointer;			// The selection pointer texture
-
+	
+	bool flagShow;
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	// DEPRECATED
+	//////////////////////////////////////////////////////////////////////////////////
 	const Planet* lastHomePlanet;          // for tracking home planet changes for trails
+	vector<Orbit*> orbits;// Pointers on created elliptical orbits
 };
 
 
