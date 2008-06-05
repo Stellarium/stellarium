@@ -65,38 +65,22 @@ ArtificialPlanet::ArtificialPlanet(const Planet &orig) :
   set_heliocentric_ecliptic_pos(orig.get_heliocentric_ecliptic_pos());
 }
 
-void ArtificialPlanet::setDest(const Planet &dest) {
-  ArtificialPlanet::dest = &dest;
-  englishName = QString("%1->%2").arg(orig_name).arg(dest.getEnglishName());
-  nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest.getNameI18n());
-
-    // rotation:
-  const RotationElements &r(dest.getRotationElements());
-  lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
-//  lastJD = dest->getLastJD();
-
-  
-//  re.offset = fmod(re.offset + 360.0*24* (lastJD-re.epoch)/re.period,
-//                              360.0);
-//  re.epoch = lastJD;
-
-//  re.period = r.period;
-
-//  re.offset = fmod(re.offset + 360.0*24* (r.epoch-re.epoch)/re.period,
-//                              360.0);
-//  re.epoch = r.epoch;
-
-
-  re.offset = r.offset + fmod(re.offset - r.offset
-                               + 360.0*( (lastJD-re.epoch)/re.period
-                                          - (lastJD-r.epoch)/r.period),
-                              360.0);
-
-  re.epoch = r.epoch;
-  re.period = r.period;
-  if (re.offset - r.offset < -180.f) re.offset += 360.f; else
-  if (re.offset - r.offset >  180.f) re.offset -= 360.f;
-
+void ArtificialPlanet::setDest(const Planet &dest)
+{
+	ArtificialPlanet::dest = &dest;
+	englishName = QString("%1->%2").arg(orig_name).arg(dest.getEnglishName());
+	nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest.getNameI18n());
+	
+	// rotation:
+	const RotationElements &r(dest.getRotationElements());
+	lastJD = StelApp::getInstance().getCore()->getNavigation()->getJDay();
+	
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
+	
+	re.epoch = r.epoch;
+	re.period = r.period;
+	if (re.offset - r.offset < -180.f) re.offset += 360.f; else
+	if (re.offset - r.offset >  180.f) re.offset -= 360.f;
 }
 
 void ArtificialPlanet::setRot(const Vec3d &r) {
@@ -189,16 +173,16 @@ double Observer::getDistanceFromCenter(void) const {
   return getHomePlanet()->getRadius() + (altitude/(1000*AU));
 }
 
-Mat4d Observer::getRotLocalToEquatorial(double jd) const {
-  double lat = latitude;
-  // TODO: Figure out how to keep continuity in sky as reach poles
-  // otherwise sky jumps in rotation when reach poles in equatorial mode
-  // This is a kludge
-  if( lat > 89.5 )  lat = 89.5;
-  if( lat < -89.5 ) lat = -89.5;
-  //qWarning() << getHomePlanet()->getEnglishName().c_str() << " " << getHomePlanet()->getSiderealTime(10)-getHomePlanet()->getSiderealTime(9);
-  return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+longitude)*(M_PI/180.))
-       * Mat4d::yrotation((90.-lat)*(M_PI/180.));
+Mat4d Observer::getRotLocalToEquatorial(double jd) const
+{
+	double lat = latitude;
+	// TODO: Figure out how to keep continuity in sky as reach poles
+	// otherwise sky jumps in rotation when reach poles in equatorial mode
+	// This is a kludge
+	if( lat > 89.5 )  lat = 89.5;
+	if( lat < -89.5 ) lat = -89.5;
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+longitude)*(M_PI/180.))
+		* Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
 
 Mat4d Observer::getRotEquatorialToVsop87(void) const {
