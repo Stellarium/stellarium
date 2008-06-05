@@ -559,6 +559,15 @@ double qDateTimeToJd(const QDateTime& dateTime)
 	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime().msecsTo(dateTime.time())-0.5;
 }
 
+QDateTime jdToQDateTime(const double& jd)
+{
+	int year, month, day;
+	getDateFromJulianDay(jd, &year, &month, &day);
+	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, QChar('0')).arg(month).arg(day), "yyyy.m.d");
+	result.setTime(jdFractionToQTime(jd));
+	return result;
+}
+
 // based on QDateTime's original handling, but expanded to handle 0.0 and earlier.
 void getDateFromJulianDay(double jd, int *year, int *month, int *day)
 {
@@ -569,7 +578,7 @@ void getDateFromJulianDay(double jd, int *year, int *month, int *day)
 	if (fraction >= .5)
 	{
 		jd += 1.0;
-}
+	}
 
 	if (jd >= 2299161)
 	{
@@ -789,6 +798,14 @@ double getJDFromSystem(void)
 double qTimeToJDFraction(const QTime& time)
 {
 	return (double)1./(24*60*60*1000)*QTime().msecsTo(time)-0.5;
+}
+
+QTime jdFractionToQTime(const double jd)
+{
+	double decHours = fmod(jd+0.5, 1.0);
+        int hours = decHours/0.041666666666666666666;
+        int mins = (decHours-(hours*0.041666666666666666666))/0.00069444444444444444444;
+        return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
 bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify)

@@ -139,6 +139,20 @@ void Navigator::setInitTodayTime(const QTime& t)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 	conf->setValue("navigation/today_time", t.toString("hh:mm"));
+} 
+
+QDateTime Navigator::getInitDateTime(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	return StelUtils::jdToQDateTime(conf->value("navigation/preset_sky_time",2451545.).toDouble() - StelUtils::get_GMT_shift_from_QT(PresetSkyTime) * JD_HOUR);
+}
+
+void Navigator::setInitDateTime(const QDateTime& dt)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	conf->setValue("navigation/preset_sky_time", StelUtils::qDateTimeToJd(dt));
 }
 
 void Navigator::addSolarDays(double d)
