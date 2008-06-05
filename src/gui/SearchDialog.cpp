@@ -50,7 +50,7 @@ CompletionLabel::~CompletionLabel()
 QString CompletionLabel::getSelected(void)
 {
 	QString item = text().split(",").at(selectedIdx);
-	item.replace(QRegExp("</?b>"), "");
+	item.replace(QRegExp(" *</?b> *"), "");
 	return item;
 }
 
@@ -84,22 +84,24 @@ void CompletionLabel::updateSelected(void)
 	{
 		QString item(items.at(i));
 		item.replace(QRegExp("</?b>"), "");
-		newText += item + ",";
+		newText += item.trimmed() + ", ";
 	}
 
 	// add selected item in bold
-	newText += "<b>" + items.at(selectedIdx) + "</b>,";
+	if (items.at(selectedIdx) != "") newText += "<b>" + items.at(selectedIdx).trimmed() + "</b>, ";
 
 	// and post-selected items, stripping bold tags if found
 	for(int i=selectedIdx+1; i<items.size(); i++)
 	{
 		QString item(items.at(i));
-		item.replace(QRegExp("</b>"), "");
-		newText += item + ",";
+		item.replace(QRegExp("</?b>"), "");
+		newText += item.trimmed() + ", ";
 	}
 
 	// remove final comma
-	newText.replace(QRegExp(",+$"), "");
+	newText.replace(QRegExp(", *$"), "");
+
+	qDebug() << newText;
 
 	setText(newText);
 }
@@ -149,11 +151,14 @@ void SearchDialog::setVisible(bool v)
 void SearchDialog::onTextChanged(const QString& text)
 {
 	if (text=="")
+	{
 		ui->completionLabel->setText("");
+		ui->completionLabel->selectFirst();
+	}
 	else
 	{
 		QStringList matches = StelApp::getInstance().getStelObjectMgr().listMatchingObjectsI18n(text, 5);
-		ui->completionLabel->setText(matches.join(","));
+		ui->completionLabel->setText(matches.join(", "));
 		ui->completionLabel->selectFirst();
 	}
 }
@@ -161,6 +166,7 @@ void SearchDialog::onTextChanged(const QString& text)
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
+	qDebug() << "got selected:" << name;
 	
 	if (name=="") return;
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
