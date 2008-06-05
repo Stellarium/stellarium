@@ -164,8 +164,12 @@ public slots:
 
 	//! get the initial "today time" from the config file
 	QTime getInitTodayTime(void);
-	//! set the initial "today time" in the config file
+	//! set the initial "today time" in the config file for "today" initial time type
 	void setInitTodayTime(const QTime& t);
+	//! get the initial date and time from the config file for "preset" initial time type
+	QDateTime getInitDateTime(void);
+	//! set the initial date and time from the config file for "preset" initial time type
+	void setInitDateTime(const QDateTime& t);
 
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour() {addSolarDays(0.04166666666666666667);}

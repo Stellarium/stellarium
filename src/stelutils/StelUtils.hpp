@@ -311,14 +311,17 @@ QString localeDateString(int year, int month, int day, int dayOfWeek, QString fm
 //! @return QString representing the formatted date
 QString localeDateString(int year, int month, int day, int dayOfWeek);
 
-	//! Get the current Julian Date from system time.
-	//! @return the current Julian Date
-	double getJDFromSystem(void);
-	
-	//! Convert a time of day to the fraction of a Julian Day.
-	//! Note that a Julian Day starts at 12:00, not 0:00, and 
-	//! so 12:00 == 0.0 and 0:00 == 0.5
-	double qTimeToJDFraction(const QTime& time);
+//! Get the current Julian Date from system time.
+//! @return the current Julian Date
+double getJDFromSystem(void);
+
+//! Convert a time of day to the fraction of a Julian Day.
+//! Note that a Julian Day starts at 12:00, not 0:00, and 
+//! so 12:00 == 0.0 and 0:00 == 0.5
+double qTimeToJDFraction(const QTime& time);
+
+//! Convert a fraction of a Julian Day to a QTime
+QTime jdFractionToQTime(const double jd);
 
 //! Return number of hours offset from GMT, using Qt functions.
 float get_GMT_shift_from_QT(double JD);
@@ -327,6 +330,11 @@ float get_GMT_shift_from_QT(double JD);
 //! @param dateTime the UTC QDateTime to convert
 //! @result the matching decimal Julian Day
 double qDateTimeToJd(const QDateTime& dateTime);
+
+//! Convert a julian day to a QDateTime.
+//! @param jd to convert
+//! @result the matching UTC QDateTime
+QDateTime jdToQDateTime(const double& jd);
 
 bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s);
 
