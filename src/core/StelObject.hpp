@@ -70,12 +70,12 @@ public:
 	virtual QString getNameI18n(void) const = 0;
 	
 	//! Get position in earth equatorial frame
-	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const = 0;
+	virtual Vec3d getEarthEquatorialPos(const Navigator *nav) const;
 	
-	//! observer centered J2000 coordinates
+	//! Get observer centered J2000 coordinates
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
-	//! Return object's magnitude
+	//! Return object's magnitude as seen from observer
 	virtual float getMagnitude(const Navigator *nav) const {return 99;}
 	
 	//! Return a priority value which is used to discriminate objects by priority

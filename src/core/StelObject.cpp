@@ -19,6 +19,7 @@
 
 
 #include "StelObject.hpp"
+#include "Navigator.hpp"
 
 void intrusive_ptr_add_ref(StelObject* p)
 {
@@ -28,5 +29,10 @@ void intrusive_ptr_add_ref(StelObject* p)
 void intrusive_ptr_release(StelObject* p)
 {
 	p->release();
+}
+
+Vec3d StelObject::getEarthEquatorialPos(const Navigator * nav) const
+{
+	return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));
 }
 
