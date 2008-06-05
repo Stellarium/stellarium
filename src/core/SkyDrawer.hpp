@@ -25,9 +25,9 @@
 
 #include <QObject>
 
-
 class Projector;
 class ToneReproducer;
+class StelCore;
 
 //! @class SkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
@@ -37,7 +37,7 @@ class SkyDrawer : public QObject
 	Q_OBJECT;
 public:
 	//! Constructor
-    SkyDrawer(Projector* prj, ToneReproducer* eye);
+    SkyDrawer(StelCore* core);
 	//! Destructor
     ~SkyDrawer();
 
@@ -60,19 +60,47 @@ public:
 	int drawPointSource(double x, double y, float mag, float b_v);
 	int drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
 	
-	//! Draw a disk source halo.
+	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
+	//! point source because the flux is spread on the disk area
 	//! @param x the x position of the disk center in pixel
 	//! @param y the y position of the disk centre in pixel
 	//! @param r radius of the disk in pixel
-	//! @param mag the source magnitude
+	//! @param mag the source integrated magnitude
 	//! @param color the source RGB color
 	//! @return true if the source was actually visible and drawn
 	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
+	//! Set-up openGL lighting and color before drawing a 3d model.
+	//! @param x the x position of the object centroid in pixel
+	//! @param y the y position of the object centroid in pixel
+	//! @param illuminatedArea the total illuminated area in arcmin^2
+	//! @param mag the object integrated magnitude
+	//! @param color the object RGB color
+	//! @param lighting whether lighting computations should be activated for rendering
+	void preDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color=Vec3f(1.f, 1.f, 1.f), bool lighting=true);
+	
+	//! Terminate drawing of a 3D model, draw the halo
+	void postDrawSky3dModel();
+	
+	//! Compute RMag and CMag from magnitude.
+	int computeRCMag(float mag, float rc_mag[2]) const;
+	
 	//! Compute the luminance for an extended source with the given surface brightness
 	//! @param sb Surface brightness in V magnitude/arcmin^2
 	//! @return the luminance in cd/m^2
-	float surfacebrightnessToLuminance(float sb) const;
+	static float surfacebrightnessToLuminance(float sb);
+	
+	//! Convert quantized B-V index to float B-V
+	static inline float indexToBV(unsigned char b_v)
+	{
+		return (float)b_v*(4.f/127.f)-0.5f;
+	}
+	
+	//! Convert quantized B-V index to RGB colors
+	static inline const Vec3f& indexToColor(unsigned char b_v)
+	{
+		return colorTable[b_v];
+	}
 	
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
@@ -128,21 +156,6 @@ public slots:
 	//! Get the current Bortle scale index
 	int getBortleScale() const {return bortleScaleIndex;}
 	
-public:
-	//! Compute RMag and CMag from magnitude.
-	int computeRCMag(float mag, float rc_mag[2]) const;
-	
-	//! Convert quantized B-V index to float B-V
-	static inline float indexToBV(unsigned char b_v)
-	{
-		return (float)b_v*(4.f/127.f)-0.5f;
-	}
-	
-	static inline const Vec3f& indexToColor(unsigned char b_v)
-	{
-		return colorTable[b_v];
-	}
-	
 private:
 	
 	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
@@ -160,8 +173,10 @@ private:
 	//! @return the luminance in cd/m^2
 	float pointSourceMagToLnLuminance(float mag) const;
 	
+	StelCore* core;
 	Projector* prj;
 	ToneReproducer* eye;
+	
 	float max_fov, min_fov, max_mag, lnfov_factor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
