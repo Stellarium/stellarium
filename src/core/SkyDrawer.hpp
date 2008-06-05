@@ -76,9 +76,14 @@ public:
 	
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
-	void setRelativeScale(double b) {starRelativeScale=b;}
+	void setRelativeStarScale(double b=1.0) {starRelativeScale=b;}
 	//! Get the way brighter stars will look bigger as the fainter ones
-	double getRelativeScale(void) const {return starRelativeScale;}
+	double getRelativeStarScale(void) const {return starRelativeScale;}
+	
+	//! Set the absolute star brightness scale
+	void setAbsoluteStarScale(double b=1.0) {starAbsoluteScaleF=b;}
+	//! Get the absolute star brightness scale
+	double getAbsoluteStarScale(void) const {return starAbsoluteScaleF;}
 	
 	//! Set source twinkle amount.
 	void setTwinkleAmount(double b) {twinkleAmount=b;}
@@ -123,9 +128,6 @@ public slots:
 	//! Get the current Bortle scale index
 	int getBortleScale() const {return bortleScaleIndex;}
 	
-	void setOutputScale(double ou) {outScale = ou;}
-	float getOutputScale() const {return outScale;}
-	
 public:
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;
@@ -143,7 +145,10 @@ public:
 	
 private:
 	
+	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
 	void setInputScale(double in) {inScale = in;}
+	//! Get the scaling applied to input luminance before they are converted by the ToneReproducer
+	float getInputScale() const {return inScale;}
 	
 	//! Compute the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source
@@ -163,6 +168,8 @@ private:
 	float twinkleAmount;
 	
 	float starRelativeScale;
+	float starAbsoluteScaleF;
+	
 	float starLinearScale;	// optimization variable
 	
 	//! Little halo texture
@@ -179,9 +186,6 @@ private:
 	
 	//! The scaling applied to input luminance before they are converted by the ToneReproducer
 	double inScale;
-	
-	//! The scaling applied to output luminance after they are converted by the ToneReproducer
-	double outScale;
 };
 
 #endif

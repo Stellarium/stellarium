@@ -33,7 +33,6 @@
 ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
 {
 	// Initialize  sensor
-	setOutputScale();
 	setInputScale();
 	
 	// Update alphaDa and betaDa values
@@ -52,16 +51,6 @@ ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100
 ToneReproducer::~ToneReproducer()
 {
 }
-
-/*********************************************************************
- Set the global output scale
-*********************************************************************/
-void ToneReproducer::setOutputScale(float scale)
-{
-	outputScale=scale;
-	lnOutputScale = std::log(scale);
-}
-
 
 /*********************************************************************
  Set the global input scale
