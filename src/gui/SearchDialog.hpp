@@ -21,19 +21,22 @@
 #define _SEARCHDIALOG_HPP_
 
 #include <QObject>
-#include <QTextEdit>
+#include <QLabel>
 #include "StelDialog.hpp"
 
-// pre declaratio of the ui class
+// pre declaration of the ui class
 class Ui_searchDialogForm;
 
-class CompletionTextEdit : public QTextEdit
+//! @class CompletionLabel
+//! used to display a few results matching the search string, and to
+//! tab through those selections.
+class CompletionLabel : public QLabel
 {
 	Q_OBJECT;
 
 public:
-	CompletionTextEdit(QWidget* parent=0);
-	~CompletionTextEdit();
+	CompletionLabel(QWidget* parent=0);
+	~CompletionLabel();
 
 	QString getSelected(void);
 

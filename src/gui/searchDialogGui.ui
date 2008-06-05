@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>425</width>
-    <height>172</height>
+    <width>344</width>
+    <height>133</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -256,40 +256,27 @@ color: darkgray;
        </layout>
       </item>
       <item>
-       <widget class="CompletionTextEdit" name="completionText" >
-        <property name="enabled" >
+       <widget class="CompletionLabel" name="completionLabel" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="MinimumExpanding" hsizetype="Preferred" >
+          <horstretch>35</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+        <property name="scaledContents" >
          <bool>false</bool>
         </property>
-        <property name="focusPolicy" >
-         <enum>Qt::NoFocus</enum>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
-        <property name="acceptDrops" >
-         <bool>false</bool>
-        </property>
-        <property name="toolTip" >
-         <string>This is a list of the first few matching results</string>
-        </property>
-        <property name="frameShape" >
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="verticalScrollBarPolicy" >
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy" >
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="undoRedoEnabled" >
-         <bool>false</bool>
-        </property>
-        <property name="html" >
-         <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu Sans'; font-size:11pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;">[search results here]&lt;/p>&lt;/body>&lt;/html></string>
+        <property name="wordWrap" >
+         <bool>true</bool>
         </property>
         <property name="textInteractionFlags" >
-         <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         <set>Qt::TextSelectableByMouse</set>
         </property>
        </widget>
       </item>
@@ -306,14 +293,13 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>CompletionTextEdit</class>
-   <extends>QTextEdit</extends>
+   <class>CompletionLabel</class>
+   <extends>QLabel</extends>
    <header>SearchDialog.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>lineEditSearchSkyObject</tabstop>
-  <tabstop>completionText</tabstop>
   <tabstop>closeButton</tabstop>
  </tabstops>
  <resources/>
