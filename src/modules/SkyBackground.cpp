@@ -66,10 +66,10 @@ void SkyBackground::init()
 }
 
 // Draw all the multi-res images collection
-double SkyBackground::draw(StelCore* core)
+void SkyBackground::draw(StelCore* core)
 {
 	if (!flagShow)
-		return 0.;
+		return;
 	
 	Projector* prj = core->getProjection();
 	
@@ -77,9 +77,6 @@ double SkyBackground::draw(StelCore* core)
 	glBlendFunc(GL_ONE, GL_ONE);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
 	foreach (SkyImageTile* s, allSkyImages)
 		s->draw(core);
-	glDisable(GL_CULL_FACE);
-	return 0;
 }

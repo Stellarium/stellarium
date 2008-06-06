@@ -29,6 +29,7 @@ class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
 		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags) {;}
+		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
 		void paintWindowFrame(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 		{
 /*			QStyleOptionTitleBar bar;
@@ -73,7 +74,6 @@ void StelDialog::setVisible(bool v)
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
-//		dialog->move(200, 100);
 	}
 	else
 	{

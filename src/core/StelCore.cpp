@@ -134,6 +134,9 @@ void StelCore::preDraw()
 	projection->applyViewport();
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
+	
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 

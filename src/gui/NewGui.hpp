@@ -152,7 +152,7 @@ public:
 	virtual void init();
 	
 	//! Draws
-	virtual double draw(StelCore* core) {return 0;}
+	virtual void draw(StelCore* core) {;}
 	
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime);

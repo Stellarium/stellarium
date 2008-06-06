@@ -276,8 +276,11 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 
 void SkyDrawer::preDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color, bool lighting)
 {
+	// Set the main source of light to be the sun
 	const Vec3d sun_pos = core->getNavigation()->get_helio_to_eye_mat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
+	
+	glEnable(GL_CULL_FACE);
 	
 	if (lighting)
 	{
@@ -296,6 +299,10 @@ void SkyDrawer::preDrawSky3dModel(double x, double y, double illuminatedArea, fl
 void SkyDrawer::postDrawSky3dModel()
 {
 	glDisable(GL_LIGHTING);
+	glDisable(GL_CULL_FACE);
+	
+	// Now draw the halo according the object brightness
+	
 }
 	
 // Set the parameters so that the stars disapear at about the limit given by the bortle scale

@@ -40,7 +40,7 @@ public:
 	virtual void init();
 	
 	//! Draws sky background
-	virtual double draw(StelCore* core);
+	virtual void draw(StelCore* core);
 	
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {;}

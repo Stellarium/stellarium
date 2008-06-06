@@ -31,6 +31,8 @@
 #include "StelTextureMgr.hpp"
 #include "SFont.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
+
 #include <QDebug>
 
 STextureSP Nebula::tex_circle;
@@ -157,35 +159,35 @@ double Nebula::getCloseViewFov(const Navigator*) const
 	return angularSize * 4;
 }
 						   
-void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
+void Nebula::draw_circle(const StelCore* core)
 {
-	if (4.f/getOnScreenSize(prj, nav)<0.1) return;
+	if (4.f/getOnScreenSize(core)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = MY_MIN(1,4.f/getOnScreenSize(prj, nav))*0.8;
+	float lum = MY_MIN(1,4.f/getOnScreenSize(core))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
-	prj->drawSprite2dMode(XY[0], XY[1], 8);
+	core->getProjection()->drawSprite2dMode(XY[0], XY[1], 8);
 }
 
-void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproducer* eye)
+void Nebula::draw_no_tex(const StelCore* core)
 {
-	float d = getOnScreenSize(prj, nav);
+	float d = getOnScreenSize(core);
 	float cmag = 0.20 * hints_brightness;
 
 	glColor3f(cmag,cmag,cmag);
 	tex_circle->bind();
-	prj->drawSprite2dMode(XY[0], XY[1], d);
+	core->getProjection()->drawSprite2dMode(XY[0], XY[1], d);
 }
 
-void Nebula::draw_name(const Projector* prj)
+void Nebula::draw_name(const StelCore* core)
 {
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
-	float size = getOnScreenSize(prj);
+	float size = getOnScreenSize(core);
 	float shift = 4.f + size/1.8f;
 
 	QString nebulaname = getNameI18n();
 
-	prj->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
+	core->getProjection()->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
 }
 
 bool Nebula::readNGC(char *recordstr)
