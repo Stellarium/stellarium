@@ -26,14 +26,6 @@
 #include <QMouseEvent>
 
 
-class DialogFrame : public QFrame
-{
-Q_OBJECT
-public:
-    DialogFrame(QWidget *parent) : QFrame(parent) {}
-};
-
-
 class BarFrame : public QFrame
 {
 Q_OBJECT
