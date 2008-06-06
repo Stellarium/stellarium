@@ -101,6 +101,11 @@ public slots:
 	//! @return the number of seconds it takes for an auto-move operation to complete.
 	float getAutoMoveDuration(void) const {return auto_move_duration;}
 
+	//! Set whether auto zoom out will reset the viewing direction to the inital value
+	void setFlagAutoZoomOutResetsDirection(bool b) {flagAutoZoomOutResetsDirection = b;}
+	//! Get whether auto zoom out will reset the viewing direction to the inital value
+	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
+	
 	//! Move the view to a specified position.
 	//! Uses equatorial or local coordinate depending on _local_pos value.
 	//! @param aim The position to move to expressed as a vector.
@@ -193,6 +198,7 @@ private:
 	// Automove
 	auto_zoom zoom_move;		// Current auto movement
 	bool flag_auto_zoom;		// Define if autozoom is on or off
+	bool flagAutoZoomOutResetsDirection;
 };
 
 #endif /*MOVEMENTMGR_H_*/
