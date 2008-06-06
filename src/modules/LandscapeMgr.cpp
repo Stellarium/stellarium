@@ -241,7 +241,7 @@ void LandscapeMgr::draw(StelCore* core)
 	ToneReproducer* eye = core->getToneReproducer();
 	
 	// Draw the atmosphere
-	atmosphere->draw(prj);
+	atmosphere->draw(core);
 
 	// Draw the landscape
 	landscape->draw(eye, prj, nav);

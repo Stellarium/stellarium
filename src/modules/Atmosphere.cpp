@@ -24,6 +24,7 @@
 #include "StelUtils.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
+#include "StelCore.hpp"
 
 Atmosphere::Atmosphere(void)
            :viewport(0,0,0,0),sky_resolution_y(44), grid(0),
@@ -142,7 +143,6 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	
 	Vec3d point(1., 0., 0.);
 	skylight_struct2 b2;
-	const float atm_intensity = fader.getInterstate();
 	float lumi;
 	
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
@@ -174,7 +174,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			// Add star background luminance
 			lumi += 0.0001;
 			// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
-			// lumi*=eye->getInputScale();
+			//lumi*=eye->getInputScale();
 			
 			// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
 			// of the scaling itself
@@ -200,11 +200,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			}
 			b2.color[2] = lumi;
 			
-			eye->xyYToRGB(b2.color);
-			grid[y*(1+sky_resolution_x)+x].color.set(
-				b2.color[0]*atm_intensity,
-				b2.color[1]*atm_intensity,
-				b2.color[2]*atm_intensity);
+			grid[y*(1+sky_resolution_x)+x].color.set(b2.color[0], b2.color[1], b2.color[2]);
 		}
 	}
 	
@@ -215,18 +211,30 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void Atmosphere::draw(Projector* prj)
+void Atmosphere::draw(StelCore* core)
 {
-	if(fader.getInterstate())
+	ToneReproducer* eye = core->getToneReproducer();
+	
+	if (fader.getInterstate())
 	{
+		const float atm_intensity = fader.getInterstate();
+		
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
- 		// glEnable(GL_CULL_FACE);
+		
+		// Adapt luminance at this point to avoid a mismatch with the adaption value
+		for (int i=0;i<(1+sky_resolution_x)*(1+sky_resolution_y);++i)
+		{
+			Vec3f& c = grid[i].color;
+			eye->xyYToRGB(c);
+			c*=atm_intensity;
+		}
+		
 		for (int y2=0; y2<sky_resolution_y; ++y2)
 		{
-			const GridPoint *g0 = grid + y2*(1+sky_resolution_x);
-			const GridPoint *g1 = g0;
+			GridPoint *g0 = grid + y2*(1+sky_resolution_x);
+			GridPoint *g1 = g0;
 			if (y2&1)
 			{
 				g1+=(1+sky_resolution_x);
@@ -235,8 +243,10 @@ void Atmosphere::draw(Projector* prj)
 			{
 				g0+=(1+sky_resolution_x);
 			}
+			
+			
 			glBegin(GL_TRIANGLE_STRIP);
-			for(int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
+			for (int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
 			{
 				glColor3fv(g0->color);
 				glVertex2fv(g0->pos_2d);
@@ -245,6 +255,5 @@ void Atmosphere::draw(Projector* prj)
 			}
 			glEnd();
 		}
- 		//glDisable(GL_CULL_FACE);
 	}
 }
