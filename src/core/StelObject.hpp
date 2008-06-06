@@ -72,13 +72,13 @@ public:
 	
 	//! Get observer centered equatorial coordinate at the current equinox
 	//! The frame has it's Z axis at the observer current rotation axis
-	//! In 2000-01-01 this is frame is almost the same as J2000, but ONLY if the observer is on earth
+	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getObsEquatorialPos(const Navigator *nav) const;
 	
 	//! Get observer centered equatorial coordinates at equinox J2000
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
-	//! Return object's magnitude as seen from observer
+	//! Return object's apparent V magnitude as seen from observer
 	virtual float getMagnitude(const Navigator *nav) const {return 99;}
 	
 	//! Return a priority value which is used to discriminate objects by priority
@@ -95,9 +95,14 @@ public:
 	virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
 	virtual double get_parent_satellites_fov(const Navigator *nav) const {return -1.;}
 	
+	//! Return the angular radius of a circle containing the object as seen from the observer
+	//! with the circle center assumed to be at getObsJ2000Pos().
+	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
+	virtual double getAngularSize(const StelCore* core) const = 0;
+	
 	//! Return the radius of a circle containing the object on screen
 	//! @return radius in pixel
-	virtual float getOnScreenSize(const StelCore* core) const {return 0;}
+	float getOnScreenSize(const StelCore* core) const;
 };
 
 #endif

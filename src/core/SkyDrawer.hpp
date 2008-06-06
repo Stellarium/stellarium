@@ -71,16 +71,16 @@ public:
 	bool drawDiskSource(double x, double y, double r, float mag, const Vec3f& color);
 	
 	//! Set-up openGL lighting and color before drawing a 3d model.
-	//! @param x the x position of the object centroid in pixel
-	//! @param y the y position of the object centroid in pixel
 	//! @param illuminatedArea the total illuminated area in arcmin^2
 	//! @param mag the object integrated magnitude
-	//! @param color the object RGB color
 	//! @param lighting whether lighting computations should be activated for rendering
-	void preDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color=Vec3f(1.f, 1.f, 1.f), bool lighting=true);
+	void preDrawSky3dModel(double illuminatedArea, float mag, bool lighting=true);
 	
 	//! Terminate drawing of a 3D model, draw the halo
-	void postDrawSky3dModel();
+	//! @param x the x position of the object centroid in pixel
+	//! @param y the y position of the object centroid in pixel
+	//! @param color the object halo RGB color
+	void postDrawSky3dModel(double x, double y, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	int computeRCMag(float mag, float rc_mag[2]) const;

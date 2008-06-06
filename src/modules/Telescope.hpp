@@ -54,6 +54,7 @@ public:
   virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
   void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
   const std::list<double> &getOculars(void) const {return oculars;}
+  virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
 protected:
   Telescope(const QString &name);
   QString nameI18n;

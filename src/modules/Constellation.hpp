@@ -47,7 +47,7 @@ private:
 	// StelObject method to override
    	//! Write I18n information about the object in string.
 	//! @param nav a pointer to the Navigator object (unused).
-	QString getInfoString(const Navigator * nav) const
+	virtual QString getInfoString(const Navigator * nav) const
 	{
 		return getNameI18n() + "(" + getShortName() + "°";
 	}
@@ -58,15 +58,17 @@ private:
 	//! is used for the constellation label.
 	//! @param nav a pointer to the navigator object.
 	//! @return short description (name).
-	QString getShortInfoString(const Navigator* nav) const {return getNameI18n();}
+	virtual QString getShortInfoString(const Navigator* nav) const {return getNameI18n();}
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
-	QString getType(void) const {return "Constellation";}
+	virtual QString getType(void) const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
+	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
 
+	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}; // TODO
+	
 	//! @param record string containing the following whitespace 
 	//! separated fields: abbreviation - a three character abbreviation 
 	//! for the constellation, a number of lines, and a list of Hipparcos

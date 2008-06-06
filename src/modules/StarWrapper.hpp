@@ -89,6 +89,7 @@ protected:
   QString getNameI18n(void) const {
     return s->getNameI18n();
   }
+  virtual double getAngularSize(const StelCore* core) const {return 0.;}
 protected:
   const SpecialZoneArray<Star> *const a;
   const SpecialZoneData<Star> *const z;

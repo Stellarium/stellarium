@@ -534,15 +534,12 @@ void Planet::set_big_halo(const QString& halotexfile)
 	tex_big_halo = StelApp::getInstance().getTextureManager().createTexture(halotexfile);
 }
 
-// Return the radius of a circle containing the object on screen
-float Planet::getOnScreenSize(const StelCore *core) const
+double Planet::getAngularSize(const StelCore* core) const
 {
 	double rad = radius;
 	if (rings)
 		rad = rings->get_size();
-
-	return std::atan(rad*sphere_scale*2.f/getObsEquatorialPos(core->getNavigation()).length()) * 
-			180./M_PI/core->getProjection()->getFov() * core->getProjection()->getViewportHeight();
+	return std::atan(rad*sphere_scale*2./getObsEquatorialPos(core->getNavigation()).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -699,7 +696,10 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	glDisable(GL_BLEND);
 
 	// Prepare openGL lighting parameters according to luminance
-	core->getSkyDrawer()->preDrawSky3dModel(screenPos[0],screenPos[1], 10, getMagnitude(core->getNavigation()), color, flag_lighting);
+	float surfArcMin2 = getAngularSize(core)*60;
+	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
+	
+	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);
 	
 	if (tex_map)
 		tex_map->bind();
@@ -716,7 +716,7 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	if (nb_facet>40) nb_facet = 40;
 	core->getProjection()->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
 
-	core->getSkyDrawer()->postDrawSky3dModel();
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], color);
 }
 
 void Planet::draw_big_halo(const StelCore* core)
