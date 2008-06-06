@@ -42,6 +42,7 @@ private slots:
 	void languageChanged(const QString& languageCode);
 	void setStartupTimeMode(void);
 	void setDiskViewport(bool);
+	void setSphericMirror(bool);
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
