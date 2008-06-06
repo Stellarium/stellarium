@@ -28,6 +28,7 @@
 
 class Projector;
 class ToneReproducer;
+class StelCore;
 
 //! Compute and display the daylight sky color using openGL.
 //! The sky brightness is computed with the SkyBright class, the color with the SkyLight
@@ -39,7 +40,7 @@ public:
 	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, ToneReproducer * eye, Projector* prj,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relative_humidity = 40.f);
-	void draw(Projector* prj);
+	void draw(StelCore* core);
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	
 	//! Set fade in/out duration in seconds
