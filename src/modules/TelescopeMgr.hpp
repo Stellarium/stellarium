@@ -45,7 +45,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
-	virtual double draw(StelCore *core);
+	virtual void draw(StelCore *core);
 	virtual void update(double deltaTime);
 	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;

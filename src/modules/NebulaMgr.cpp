@@ -114,9 +114,8 @@ void NebulaMgr::init()
 }
 
 // Draw all the Nebulae
-double NebulaMgr::draw(StelCore* core)
+void NebulaMgr::draw(StelCore* core)
 {
-	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
@@ -136,7 +135,7 @@ double NebulaMgr::draw(StelCore* core)
 	// Print all the stars of all the selected zones
 	Nebula* n;
 
-	// speed up the computation of n->getOnScreenSize(prj, nav)>5:
+	// speed up the computation of n->getOnScreenSize(core)>5:
 	const float size_limit = 5./prj->getPixelPerRadAtCenter()*180./M_PI;
 
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
@@ -147,18 +146,19 @@ double NebulaMgr::draw(StelCore* core)
 		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
 		{
 			prj->project(n->XYZ,n->XY);
-			n->draw_name(prj);
-			n->draw_circle(prj, nav);
+			n->draw_name(core);
+			n->draw_circle(core);
 		}
 	}
-	drawPointer(prj, nav);
+	drawPointer(core);
 	//nebGrid.draw(prj, p);
-
-	return 0;
 }
 
-void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
+void NebulaMgr::drawPointer(const StelCore* core)
 {
+	const Navigator* nav = core->getNavigation();
+	const Projector* prj = core->getProjection();
+	
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
@@ -175,7 +175,7 @@ void NebulaMgr::drawPointer(const Projector* prj, const Navigator * nav)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-		float size = obj->getOnScreenSize(prj, nav);
+		float size = obj->getOnScreenSize(core);
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 		prj->drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);

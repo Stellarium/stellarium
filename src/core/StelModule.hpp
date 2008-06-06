@@ -49,8 +49,7 @@ public:
 	
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
-	//! @return the max squared distance in pixels any single object has moved since the previous update.
-	virtual double draw(StelCore* core) = 0;
+	virtual void draw(StelCore* core) = 0;
 	
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.

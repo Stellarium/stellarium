@@ -535,20 +535,25 @@ void Planet::set_big_halo(const QString& halotexfile)
 }
 
 // Return the radius of a circle containing the object on screen
-float Planet::getOnScreenSize(const Projector *prj, const Navigator *nav) const
+float Planet::getOnScreenSize(const StelCore *core) const
 {
-	double rad;
-	if(rings) rad = rings->get_size();
-	else rad = radius;
+	double rad = radius;
+	if (rings)
+		rad = rings->get_size();
 
-	return std::atan(rad*sphere_scale*2.f/getEarthEquatorialPos(nav).length())*180./M_PI/prj->getFov()*prj->getViewportHeight();
+	return std::atan(rad*sphere_scale*2.f/getEarthEquatorialPos(core->getNavigation()).length()) * 
+			180./M_PI/core->getProjection()->getFov() * core->getProjection()->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer* eye, bool stencil)
+double Planet::draw(StelCore* core, bool stencil)
 {
-	if (hidden) return 0;
+	if (hidden)
+		return 0;
 
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
+	
 	Mat4d mat = Mat4d::translation(ecliptic_pos)
               * rot_local_to_parent;
 	const Planet *p = parent;
@@ -573,7 +578,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 
 
 	// Compute the 2D position and check if in the screen
-	float screen_sz = getOnScreenSize(prj, nav);
+	float screen_sz = getOnScreenSize(core);
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	
@@ -597,7 +602,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 			if (ang_dist>1.f) ang_dist = 1.f;
 			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
 			
-			draw_hints(nav, prj);
+			draw_hints(core);
 		}
 
 		if (screen_sz>1)
@@ -612,7 +617,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 				prj->set_clipping_planes(z_near,z_far);
 				glClear(GL_DEPTH_BUFFER_BIT);
 				glEnable(GL_DEPTH_TEST);
-				draw_sphere(prj,mat,screen_sz);
+				draw_sphere(core,mat,screen_sz);
 				rings->draw(prj,mat,screen_sz);
 				glDisable(GL_DEPTH_TEST);
 				prj->set_clipping_planes(n,f);  // Restore old clipping planes
@@ -620,18 +625,18 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 			else
 			{
 				if(stencil) glEnable(GL_STENCIL_TEST);
-				draw_sphere(prj, mat, screen_sz);
+				draw_sphere(core, mat, screen_sz);
 				if(stencil) glDisable(GL_STENCIL_TEST);
 			}
 		}
 
 		if (!tex_big_halo)
 		{
-			SkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+			SkyDrawer* skyDrawer = core->getSkyDrawer();
 			skyDrawer->prepareDraw();
-			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(prj, nav), compute_magnitude(nav->getObserverHelioPos()), color);
+			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), compute_magnitude(nav->getObserverHelioPos()), color);
 		}
-		if (tex_big_halo) draw_big_halo(nav, prj, eye);
+		if (tex_big_halo) draw_big_halo(core);
 	}
 	double distanceSquared =
 		(screenPos[0] - previousScreenPos[0]) *
@@ -661,13 +666,16 @@ void glCircle(const Vec3d& pos, float radius)
 }
 
 
-void Planet::draw_hints(const Navigator* nav, const Projector* prj)
+void Planet::draw_hints(const StelCore* core)
 {
 	if (!labelsFader.getInterstate())
 		return;
 
+	const Navigator* nav = core->getNavigation();
+	const Projector* prj = core->getProjection();
+	
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + getOnScreenSize(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
+	float tmp = 10.f + getOnScreenSize(core)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate());
 	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
@@ -685,60 +693,45 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glCircle(screenPos, 8);
 }
 
-void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz)
+void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 {
-	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>40) nb_facet = 40;
-
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 
-	if (flag_lighting)
-	{
-		glEnable(GL_LIGHTING);
-		if (englishName=="Moon")
-		{
-			const float diffuse[4] = {2,2,2,1};
-			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
-		}
-		else
-		{
-			const float diffuse[4] = {1,1,1,1};
-			glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
-		}
-	}
-	else
-	{
-		glDisable(GL_LIGHTING);
-		glColor3fv(color);
-	}
-	if (tex_map) tex_map->bind();
-
-	prj->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+	// Prepare openGL lighting parameters according to luminance
+	core->getSkyDrawer()->preDrawSky3dModel(screenPos[0],screenPos[1], 10, getMagnitude(core->getNavigation()), color, flag_lighting);
+	
+	if (tex_map)
+		tex_map->bind();
 
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
-	prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
+	core->getProjection()->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+	
+	// Draw the spheroid itself
+	// Adapt the number of facets according with the size of the sphere for optimization
+	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+	if (nb_facet<10) nb_facet = 10;
+	if (nb_facet>40) nb_facet = 40;
+	core->getProjection()->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
 
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_LIGHTING);
-
+	core->getSkyDrawer()->postDrawSky3dModel();
 }
 
-void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
+void Planet::draw_big_halo(const StelCore* core)
 {
+	const Navigator* nav = core->getNavigation();
+	const ToneReproducer* eye = core->getToneReproducer();
+	
 	if (englishName=="Moon")
 	{
 		float cmag;
 		float rmag;
 	
-		cmag = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos()) + 12.12331f)) * 108064.73f*0.0001));
+		cmag = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(getMagnitude(nav) + 12.12331f)) * 108064.73f*0.0001));
 		rmag = big_halo_size/2;
-		float screen_r = getOnScreenSize(prj, nav)*8;	// Size in pixel at which the halo should start to disapear
+		float screen_r = getOnScreenSize(core)*8;	// Size in pixel at which the halo should start to disapear
 		if (cmag>1.f) cmag = 1.f;
 		if (rmag<screen_r)
 		{
@@ -774,7 +767,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 			return;
 		rc_mag[0]=MY_MIN(rc_mag[0]*0.15, 300);
 		glBlendFunc(GL_ONE, GL_ONE);
-		float screen_r = 0.25*getOnScreenSize(prj, nav);
+		float screen_r = 0.25*getOnScreenSize(core);
 		if (screen_r<1.f) screen_r=1.f;
 		rc_mag[1] *= 0.5*rc_mag[0]/(screen_r*screen_r*screen_r);
 		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;

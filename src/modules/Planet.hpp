@@ -108,7 +108,7 @@ public:
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	// Return the radius of a circle containing the object on screen
-	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const;
+	virtual float getOnScreenSize(const StelCore* core) const;
 	virtual QString getType(void) const {return "Planet";}
 	// observer centered J2000 coordinates
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const;
@@ -123,7 +123,7 @@ public:
 	// Draw the Planet
 	// Return the squared distance in pixels between the current and the
 	// previous position this planet was drawn at.
-	double draw(Projector* prj, const Navigator* nav, const ToneReproducer* eye, bool stencil);
+	double draw(StelCore* core, bool stencil);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -238,13 +238,13 @@ protected:
 	QString getSkyLabel(const Navigator * nav) const;
 	
 	// Draw the 3D sphere
-	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
+	void draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz);
 
 	// Draw the circle and name of the Planet
-	void draw_hints(const Navigator* nav, const Projector* prj);
+	void draw_hints(const StelCore* core);
 
 	// Draw the big halo (for sun or moon)
-	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
+	void draw_big_halo(const StelCore* core);
 
 
 	QString englishName;            // english planet name

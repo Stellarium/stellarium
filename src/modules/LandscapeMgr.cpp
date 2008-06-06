@@ -234,7 +234,7 @@ void LandscapeMgr::update(double deltaTime)
 	landscape->setBrightness(landscapeBrightness+0.05);
 }
 
-double LandscapeMgr::draw(StelCore* core)
+void LandscapeMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -248,8 +248,6 @@ double LandscapeMgr::draw(StelCore* core)
 
 	// Draw the cardinal points
 	cardinals_points->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getLatitude());
-	
-	return 0;
 }
 
 void LandscapeMgr::init()

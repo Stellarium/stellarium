@@ -58,7 +58,7 @@ public:
 	virtual void init();
 	
 	//! Draws all nebula objects.
-	virtual double draw(StelCore* core);
+	virtual void draw(StelCore* core);
 	
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
@@ -167,7 +167,7 @@ private:
 	StelObject* search(Vec3f Pos);    // Search the Nebulae by position	
 		
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const Projector* prj, const Navigator * nav);
+	void drawPointer(const StelCore* core);
 		
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);

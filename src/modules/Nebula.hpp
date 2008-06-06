@@ -24,6 +24,7 @@
 #include "StelObject.hpp"
 #include "Projector.hpp"
 #include "Navigator.hpp"
+#include "StelCore.hpp"
 #include "Translator.hpp"
 #include "STextureTypes.hpp"
 
@@ -84,23 +85,19 @@ public:
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
-	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const
+	virtual float getOnScreenSize(const StelCore *core) const
 	{
-		return angularSize * (prj->getViewportHeight()/prj->getFov());
+		return angularSize * (core->getProjection()->getViewportHeight()/core->getProjection()->getFov());
 	}
 
 private:
-	void draw_chart(const Projector* prj, const Navigator * nav);
-	//void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
-	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
-	void draw_name(const Projector* prj);
-	void draw_circle(const Projector* prj, const Navigator * nav);
-	//bool hasTex(void) {return nebTex;}
+	void draw_no_tex(const StelCore* core);
+	void draw_name(const StelCore* core);
+	void draw_circle(const StelCore* core);
     
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;// Index Catalog number
-	//unsigned int UGC_nb;            // Uppsala General  Catalog number
 	QString englishName;             // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude
@@ -109,10 +106,6 @@ private:
 	Vec3d XY;                       // Store temporary 2D position
 	nebula_type nType;
 
-	//STextureSP nebTex;             // Texture
-	//Vec3f tex_quad_vertex[4];       // The 4 vertex used to draw the nebula texture
-	//float luminance;                // Object luminance to use (value computed to compensate
-	                                // the texture average luminosity)
 	static STextureSP tex_circle;   // The symbolic circle texture
 	static SFont* nebula_font;      // Font used for names printing
 	static float hints_brightness;

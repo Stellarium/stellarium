@@ -64,7 +64,7 @@ public:
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual double draw(StelCore *core);
+	virtual void draw(StelCore *core);
 	
 	//! Update time-varying components.
 	//! This includes planet motion trails.
@@ -229,7 +229,7 @@ private:
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const Projector* prj, const Navigator * nav);
+	void drawPointer(const StelCore* core);
 
 	//! Load planet data from a file.
 	void loadPlanets();
