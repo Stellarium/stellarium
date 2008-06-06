@@ -175,9 +175,7 @@ void SearchDialog::gotoObject()
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->setText("");
 			ui->completionLabel->selectFirst();
-			mvmgr->moveTo(newSelected[0]->getEarthEquatorialPos(
-				StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration()
-			);
+			mvmgr->moveTo(newSelected[0]->getObsEquatorialPos(StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration());
 			mvmgr->setFlagTracking(true);
 			// close();
 		}
