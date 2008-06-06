@@ -107,13 +107,11 @@ public:
 	virtual float getMagnitude(const Navigator * nav) const;
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
-	// Return the radius of a circle containing the object on screen
-	virtual float getOnScreenSize(const StelCore* core) const;
 	virtual QString getType(void) const {return "Planet";}
-	// observer centered J2000 coordinates
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual double getAngularSize(const StelCore* core) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object

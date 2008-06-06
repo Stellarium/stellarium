@@ -20,6 +20,8 @@
 
 #include "StelObject.hpp"
 #include "Navigator.hpp"
+#include "StelCore.hpp"
+#include "Projector.hpp"
 
 void intrusive_ptr_add_ref(StelObject* p)
 {
@@ -36,3 +38,8 @@ Vec3d StelObject::getObsEquatorialPos(const Navigator * nav) const
 	return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));
 }
 
+// Return the radius of a circle containing the object on screen
+float StelObject::getOnScreenSize(const StelCore* core) const
+{
+	return getAngularSize(core)*M_PI/180.*core->getProjection()->getPixelPerRadAtCenter();
+}

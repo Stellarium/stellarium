@@ -274,7 +274,7 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 }
 
 
-void SkyDrawer::preDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color, bool lighting)
+void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighting)
 {
 	// Set the main source of light to be the sun
 	const Vec3d sun_pos = core->getNavigation()->get_helio_to_eye_mat()*Vec3d(0,0,0);
@@ -291,12 +291,14 @@ void SkyDrawer::preDrawSky3dModel(double x, double y, double illuminatedArea, fl
 	else
 	{
 		glDisable(GL_LIGHTING);
-		glColor3fv(color);
+		glColor3fv(Vec3f(1.f,1.f,1.f));
 	}
+	
+	float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
 }
 
 // Terminate drawing of a 3D model, draw the halo
-void SkyDrawer::postDrawSky3dModel()
+void SkyDrawer::postDrawSky3dModel(double x, double y, const Vec3f& color)
 {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_CULL_FACE);

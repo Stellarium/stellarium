@@ -85,10 +85,7 @@ public:
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
-	virtual float getOnScreenSize(const StelCore *core) const
-	{
-		return angularSize * (core->getProjection()->getViewportHeight()/core->getProjection()->getFov());
-	}
+	virtual double getAngularSize(const StelCore *core) const {return angularSize;}
 
 private:
 	void draw_no_tex(const StelCore* core);
