@@ -168,7 +168,7 @@ private:
 
 	//! Draw all registered StelModule in the order defined by the order lists.
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
-	double draw();
+	void draw();
 	
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);

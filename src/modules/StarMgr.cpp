@@ -501,7 +501,7 @@ int StarMgr::getMaxSearchLevel() const
 
 
 // Draw all the stars
-double StarMgr::draw(StelCore* core)
+void StarMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -511,7 +511,8 @@ double StarMgr::draw(StelCore* core)
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
-    if(!starsFader.getInterstate()) return 0.;
+    if (!starsFader.getInterstate())
+		return;
 
 	int max_search_level = getMaxSearchLevel();
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),max_search_level);
@@ -575,8 +576,6 @@ double StarMgr::draw(StelCore* core)
     exit_loop:
 
 	drawPointer(prj, nav);
-
-    return 0.;
 }
 
 

@@ -31,9 +31,7 @@
 
 void TextUI::init()
 {
-
 	return;
-
 }
 
 /*************************************************************************
@@ -41,7 +39,6 @@ void TextUI::init()
 *************************************************************************/
 double TextUI::getCallOrder(StelModuleActionName actionName) const
 {
-
 	// TODO should always draw last (on top)
 	if (actionName==StelModule::ACTION_DRAW)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+100;
@@ -50,22 +47,18 @@ double TextUI::getCallOrder(StelModuleActionName actionName) const
 
 void TextUI::update(double delta_time)
 {
-
 	return;
 }
 
 
-double TextUI::draw(StelCore* core)
+void TextUI::draw(StelCore* core)
 {
-	
-	return 0.0; 
-
+	return;
 }
 
-
 // Stub to hold translation keys
-void temporary_translation() {
-
+void temporary_translation()
+{
 	// TUI categories
 	N_("Set Location ");
 	N_("Set Time ");
@@ -149,7 +142,4 @@ void temporary_translation() {
 	N_("Shut Down: ");
 	N_("Update me via Internet: ");
 	N_("Set UI Locale: ");
-
 }
-
-

@@ -116,8 +116,11 @@ void SolarSystem::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
 }
 
-void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
+void SolarSystem::drawPointer(const StelCore* core)
 {
+	const Navigator* nav = core->getNavigation();
+	const Projector* prj = core->getProjection();
+	
 	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
 	{
@@ -130,7 +133,7 @@ void SolarSystem::drawPointer(const Projector* prj, const Navigator * nav)
 	
 		glColor3f(1.0f,0.3f,0.3f);
 	
-		float size = obj->getOnScreenSize(prj, nav);
+		float size = obj->getOnScreenSize(core);
 		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
@@ -734,14 +737,13 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-double SolarSystem::draw(StelCore* core)
+void SolarSystem::draw(StelCore* core)
 {
 	if (!flagShow)
-		return 0.0;
+		return;
 	
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
-	ToneReproducer* eye = core->getToneReproducer();
 	
 	Planet::set_font(&planet_name_font);
 	
@@ -778,11 +780,9 @@ double SolarSystem::draw(StelCore* core)
 	sort(system_planets.begin(),system_planets.end(),bigger_distance());
 
 	// Draw the elements
-	double maxSquaredDistance = 0;
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		double squaredDistance = 0;
 		if (*iter==moon && near_lunar_eclipse(nav, prj))
 		{
 			// TODO: moon magnitude label during eclipse isn't accurate...
@@ -794,14 +794,12 @@ double SolarSystem::draw(StelCore* core)
 			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-			squaredDistance = (*iter)->draw(prj, nav, eye, 1);
+			(*iter)->draw(core, 1);
 		}
 		else
 		{
-			squaredDistance = (*iter)->draw(prj, nav, eye, 0);
+			(*iter)->draw(core, 0);
 		}
-		if (squaredDistance > maxSquaredDistance)
-			maxSquaredDistance = squaredDistance;
 
 		++iter;
 	}
@@ -815,9 +813,7 @@ double SolarSystem::draw(StelCore* core)
 	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
 		draw_earth_shadow(nav, prj);
 
-	drawPointer(prj, nav);
-	
-	return maxSquaredDistance;
+	drawPointer(core);
 }
 
 void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)

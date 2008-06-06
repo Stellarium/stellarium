@@ -442,7 +442,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	fic.close();
 }
 
-double ConstellationMgr::draw(StelCore* core)
+void ConstellationMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -452,7 +452,6 @@ double ConstellationMgr::draw(StelCore* core)
 	drawNames(prj);
 	drawArt(prj, nav);
 	drawBoundaries(prj);
-	return 0.;
 }
 
 // Draw constellations art textures

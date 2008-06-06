@@ -53,7 +53,7 @@ public:
 	virtual void init();
 	
 	//! Draw the landscape graphics, cardinal points and atmosphere.
-	virtual double draw(StelCore* core);
+	virtual void draw(StelCore* core);
 	
 	//! Update time-dependent state.
 	//! Includes:

@@ -83,7 +83,7 @@ public:
 	
 	
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual double draw(StelCore* core); //! Draw all the stars
+	virtual void draw(StelCore* core); //! Draw all the stars
 	
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.

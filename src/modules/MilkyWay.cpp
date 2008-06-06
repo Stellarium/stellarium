@@ -65,7 +65,7 @@ void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 void MilkyWay::setFlagShow(bool b){*fader = b;}
 bool MilkyWay::getFlagShow(void) const {return *fader;}
 	
-double MilkyWay::draw(StelCore* core)
+void MilkyWay::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -102,5 +102,4 @@ double MilkyWay::draw(StelCore* core)
 	prj->sSphere(radius,1.0,20,20,1);
 
 	glDisable(GL_CULL_FACE);
-	return 0.;
 }

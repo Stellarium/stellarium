@@ -161,14 +161,14 @@ void MeteorMgr::update(double delta_time)
 }
 
 
-double MeteorMgr::draw(StelCore* core)
+void MeteorMgr::draw(StelCore* core)
 {
 	if (!flagShow)
-		return 0;
+		return;
 	
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
-		return 0.;
+		return;
 	
 	core->getProjection()->setCurrentFrame(Projector::FRAME_LOCAL);
 	
@@ -183,7 +183,4 @@ double MeteorMgr::draw(StelCore* core)
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	
-	return 0.0;  // TODO, actually calculate movement on screen
-
 }

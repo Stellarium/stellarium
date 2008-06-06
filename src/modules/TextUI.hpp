@@ -39,7 +39,7 @@ public:
 	virtual void init();
 	
 	//! Draw
-	virtual double draw(StelCore* core);
+	virtual void draw(StelCore* core);
 	
 	//! Update time-dependent parts of the module.
 	virtual void update(double deltaTime);

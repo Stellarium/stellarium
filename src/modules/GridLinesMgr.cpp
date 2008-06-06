@@ -643,7 +643,7 @@ void GridLinesMgr::update(double deltaTime)
 	meridian_line->update(deltaTime);
 }
 
-double GridLinesMgr::draw(StelCore* core)
+void GridLinesMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -660,7 +660,6 @@ double GridLinesMgr::draw(StelCore* core)
 	ecliptic_line->draw(prj,nav);
 	// Draw the meridian line
 	meridian_line->draw(prj,nav);
-	return 0.;
 }
 
 void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)

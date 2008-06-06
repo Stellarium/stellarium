@@ -566,29 +566,20 @@ void StelApp::update(double deltaTime)
 }
 
 //! Main drawing function called at each frame
-double StelApp::draw()
+void StelApp::draw()
 {
 	if (!initialized)
-		return 0.;
-
-    // Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	glClear(GL_COLOR_BUFFER_BIT);
+		return;
 
 	core->preDraw();
 
-	// Render all the main objects of stellarium
-	double squaredDistance = 0.;
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_DRAW))
 	{
-		double d = i->draw(core);
-		if (d>squaredDistance)
-			squaredDistance = d;
+		i->draw(core);
 	}
 
 	core->postDraw();
-	
-	return squaredDistance;
 }
 
 /*************************************************************************

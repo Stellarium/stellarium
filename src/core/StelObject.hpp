@@ -28,6 +28,7 @@
 class Navigator;
 class Projector;
 class STexture;
+class StelCore;
 
 // Declare the 2 functions needed by boost intrusive pointers
 class StelObject;
@@ -92,7 +93,9 @@ public:
 	virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
 	virtual double get_parent_satellites_fov(const Navigator *nav) const {return -1.;}
 	
-	virtual float getOnScreenSize(const Projector *prj, const Navigator *nav = NULL) const {return 0;}
+	//! Return the radius of a circle containing the object on screen
+	//! @return radius in pixel
+	virtual float getOnScreenSize(const StelCore* core) const {return 0;}
 };
 
 #endif

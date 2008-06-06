@@ -82,7 +82,7 @@ double TelescopeMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-double TelescopeMgr::draw(StelCore* core)
+void TelescopeMgr::draw(StelCore* core)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -137,8 +137,6 @@ double TelescopeMgr::draw(StelCore* core)
   }
   
   drawPointer(prj, nav);
-  
-  return 0.;
 }
 
 void TelescopeMgr::update(double deltaTime) {
