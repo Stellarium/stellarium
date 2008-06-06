@@ -118,7 +118,7 @@ QString Planet::getInfoString(const Navigator * nav) const
 
 	oss << q_("Magnitude: <b>%1</b>").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2) << "<br>";
 
-	Vec3d equPos = getEarthEquatorialPos(nav);
+	Vec3d equPos = getObsEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
 	oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	// calculate alt az position
@@ -166,7 +166,7 @@ QString Planet::getShortInfoString(const Navigator * nav) const
 
 	oss << "  " << q_("Magnitude: %1").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2);
 
-	Vec3d equPos = getEarthEquatorialPos(nav);
+	Vec3d equPos = getObsEquatorialPos(nav);
 	oss << "  " << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 5);
 
 	return str;
@@ -193,16 +193,16 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const Navigator* nav) const
 {
-	return std::atan(radius*sphere_scale*2.f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
+	return std::atan(radius*sphere_scale*2.f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
 }
 
 double Planet::get_satellites_fov(const Navigator * nav) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
-	if (englishName=="Jupiter") return std::atan(0.005f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
-	if (englishName=="Saturn") return std::atan(0.005f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
-	if (englishName=="Mars") return std::atan(0.0001f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
-	if (englishName=="Uranus") return std::atan(0.002f/getEarthEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Jupiter") return std::atan(0.005f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Saturn") return std::atan(0.005f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Mars") return std::atan(0.0001f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
+	if (englishName=="Uranus") return std::atan(0.002f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
 	return -1.;
 }
 
@@ -541,7 +541,7 @@ float Planet::getOnScreenSize(const StelCore *core) const
 	if (rings)
 		rad = rings->get_size();
 
-	return std::atan(rad*sphere_scale*2.f/getEarthEquatorialPos(core->getNavigation()).length()) * 
+	return std::atan(rad*sphere_scale*2.f/getObsEquatorialPos(core->getNavigation()).length()) * 
 			180./M_PI/core->getProjection()->getFov() * core->getProjection()->getViewportHeight();
 }
 
@@ -589,7 +589,7 @@ double Planet::draw(StelCore* core, bool stencil)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/getEarthEquatorialPos(nav).length())/prj->getFov();
+		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/getObsEquatorialPos(nav).length())/prj->getFov();
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
@@ -608,7 +608,7 @@ double Planet::draw(StelCore* core, bool stencil)
 		if (screen_sz>1)
 		{
 			if(rings) {
-				const double dist = getEarthEquatorialPos(nav).length();
+				const double dist = getObsEquatorialPos(nav).length();
 				double z_near = 0.9*(dist - rings->get_size());
 				double z_far  = 1.1*(dist + rings->get_size());
 				if (z_near < 0.0) z_near = 0.0;
@@ -953,7 +953,7 @@ void Planet::draw_trail(const Navigator * nav, const Projector* prj)
 	}
 
 	// draw final segment to finish at current Planet position
-	if( !first_point && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getEarthEquatorialPos(nav), onscreen2) )
+	if( !first_point && prj->projectLineCheck( (*trail.begin()).point, onscreen1, getObsEquatorialPos(nav), onscreen2) )
 	{
 		glBegin(GL_LINE_STRIP);
 		glVertex2d(onscreen1[0], onscreen1[1]);

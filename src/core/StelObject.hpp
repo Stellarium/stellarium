@@ -70,10 +70,12 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n(void) const = 0;
 	
-	//! Get position in earth equatorial coordinate
-	Vec3d getEarthEquatorialPos(const Navigator *nav) const;
+	//! Get observer centered equatorial coordinate at the current equinox
+	//! The frame has it's Z axis at the observer current rotation axis
+	//! In 2000-01-01 this is frame is almost the same as J2000, but ONLY if the observer is on earth
+	Vec3d getObsEquatorialPos(const Navigator *nav) const;
 	
-	//! Get observer centered J2000 coordinates
+	//! Get observer centered equatorial coordinates at equinox J2000
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
 	//! Return object's magnitude as seen from observer

@@ -221,7 +221,7 @@ void MovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 				{
-					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()),auto_move_duration);
+					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()),auto_move_duration);
 					setFlagTracking(true);
 				}
 			}
@@ -387,7 +387,7 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()), move_duration, false, 1);
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()), move_duration, false, 1);
 		manual_move_duration = move_duration;
 	}
 	else
@@ -462,7 +462,7 @@ void MovementMgr::setFlagTracking(bool b)
 	}
 	else
 	{
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()), getAutoMoveDuration());
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()), getAutoMoveDuration());
 		flagTracking=true;
 	}
 }
@@ -504,7 +504,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		if( zooming_mode == 1 && StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation());
+			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation());
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -534,9 +534,9 @@ void MovementMgr::updateVisionVector(double deltaTime)
 				/* could track as moves too, but would need to know if start was actually
 				   a zoomed in view on the object or an extraneous zoom out command
 				   if(move.local_pos) {
-				   move.start=earth_equ_to_local(selected.getEarthEquatorialPos(this));
+				   move.start=earth_equ_to_local(selected.getObsEquatorialPos(this));
 				   } else {
-				   move.start=selected.getEarthEquatorialPos(this);
+				   move.start=selected.getObsEquatorialPos(this);
 				   }
 				   move.start.normalize();
 				*/
@@ -596,7 +596,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && StelApp::getInstance().getStelObjectMgr().getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquVision(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getEarthEquatorialPos(core->getNavigation()));
+			nav->setEquVision(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()));
 		}
 		else
 		{

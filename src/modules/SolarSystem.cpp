@@ -871,7 +871,7 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->getEarthEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
@@ -904,7 +904,7 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, 
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		equPos = (*iter)->getEarthEquatorialPos(core->getNavigation());
+		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
 		{
