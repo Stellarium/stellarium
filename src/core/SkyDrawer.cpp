@@ -119,11 +119,11 @@ void SkyDrawer::update(double deltaTime)
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human 
 	// vision to binocculares/telescope. Use a max of 0.7 because after that the atmosphere starts to glow too much!
 	float powFactor = std::pow(60./MY_MAX(0.7,fov), 0.8);
-	eye->setInputScale(2025000.f*inScale*powFactor);
+	eye->setInputScale(inScale*powFactor);
 	
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
-	lnfov_factor = std::log(60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
+	lnfov_factor = std::log(2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 	
 	// Precompute
 	starLinearScale = std::pow(2.1f*starAbsoluteScaleF, 1.3f/2.f*starRelativeScale);
@@ -138,7 +138,7 @@ float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
 float SkyDrawer::surfacebrightnessToLuminance(float sb)
 {
-	return std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
+	return 2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
 
 // Compute RMag and CMag from magnitude for a point source.
@@ -282,6 +282,9 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 	
 	glEnable(GL_CULL_FACE);
 	
+	//float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
+	//float aLum = eye->adaptLuminanceScaled(surfLuminance);
+	
 	if (lighting)
 	{
 		glEnable(GL_LIGHTING);
@@ -293,8 +296,6 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 		glDisable(GL_LIGHTING);
 		glColor3fv(Vec3f(1.f,1.f,1.f));
 	}
-	
-	float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
 }
 
 // Terminate drawing of a 3D model, draw the halo
