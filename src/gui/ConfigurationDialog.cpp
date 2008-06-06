@@ -28,6 +28,8 @@
 #include "Projector.hpp"
 #include "Navigator.hpp"
 #include "StelCore.hpp"
+#include "MovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -76,6 +78,7 @@ void ConfigurationDialog::createDialogContent()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	MovementMgr* movement = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 
 	// Startup Tab
 	if (nav->getStartupTimeMode()=="actual")
@@ -100,8 +103,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
 	// Planetarium tab
+	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
+	ui->autoZoomResetsDirectionCheckbox->setChecked(movement->getFlagAutoZoomOutResetsDirection());
+	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), movement, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 
 	// DEBUG tab
 	// connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInScale(double)));
@@ -135,3 +141,10 @@ void ConfigurationDialog::setDiskViewport(bool b)
 		proj->setMaskType(Projector::NONE);
 }
 
+void ConfigurationDialog::setSphericMirror(bool b)
+{
+	if (b)
+		StelAppGraphicsItem::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
+	else
+		StelAppGraphicsItem::getInstance().setViewPortDistorterType("none");
+}

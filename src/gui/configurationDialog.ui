@@ -148,7 +148,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>2</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -159,7 +159,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -217,7 +217,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -410,13 +410,13 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Planetarium</string>
          </attribute>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
           <item>
            <widget class="QCheckBox" name="sphericMirrorCheckbox" >
             <property name="toolTip" >
@@ -448,7 +448,7 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_3" >
+           <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox" >
             <property name="toolTip" >
              <string>When enabled, select the "auto zoom out" key will also set the initial viewing direction</string>
             </property>
@@ -478,7 +478,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -546,7 +546,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -676,7 +676,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -689,7 +689,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >

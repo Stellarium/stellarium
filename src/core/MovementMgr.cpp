@@ -30,8 +30,19 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
-	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
+MovementMgr::MovementMgr(StelCore* acore) 
+	: core(acore), 
+	  flag_lock_equ_pos(false), 
+	  flagTracking(false), 
+	  is_mouse_moving_horiz(false), 
+	  is_mouse_moving_vert(false), 
+	  flag_auto_move(0), 
+	  deltaFov(0.), 
+	  deltaAlt(0.), 
+	  deltaAz(0.), 
+	  move_speed(0.00025), 
+	  flag_auto_zoom(0), 
+	  flagAutoZoomOutResetsDirection(0)
 {
 	setObjectName("MovementMgr");
 	is_dragging = false;
@@ -54,6 +65,7 @@ void MovementMgr::init()
 	zoom_speed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
 	auto_move_duration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
 	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
+	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 }	
 	
 bool MovementMgr::handleMouseMoves(int x, int y)
@@ -435,7 +447,8 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 	}
 
 	zoomTo(proj->getInitFov(), move_duration);
-	moveTo(nav->getinitViewPos(), move_duration, true, -1);
+	if (flagAutoZoomOutResetsDirection) 
+		moveTo(nav->getinitViewPos(), move_duration, true, -1);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
