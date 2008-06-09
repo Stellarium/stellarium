@@ -31,7 +31,7 @@ class StelMainGraphicsView : public QGraphicsView
 {
 Q_OBJECT;
 public:
-	StelMainGraphicsView(QGraphicsScene* ascene, QWidget* parent, int argc, char** argv);
+	StelMainGraphicsView(QWidget* parent, int argc, char** argv);
 	virtual ~StelMainGraphicsView() {;}
 	
 	//! Start the main initialization of Stellarium
