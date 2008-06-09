@@ -40,10 +40,9 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QGraphicsScene* ascene, QWidget* parent, int argc, char** argv) 
-	: QGraphicsView(ascene, parent),
-	  initComplete(false)
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), initComplete(false)
 {
+	setScene(new QGraphicsScene());
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
