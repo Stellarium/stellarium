@@ -76,12 +76,11 @@ private:
 	Skylight sky;
 	Skybright skyb;
 	int sky_resolution_y,sky_resolution_x;
-	struct GridPoint {
-		Vec2f pos_2d;
-		Vec3f color;
-	};
-	GridPoint *grid;	// For Atmosphere calculation
-
+	
+	Vec2f* posGrid;
+	Vec3f* colorGrid;
+	GLushort* indices;
+	
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
 	double eclipseFactor;
