@@ -26,8 +26,7 @@
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 
-Atmosphere::Atmosphere(void)
-           :viewport(0,0,0,0),sky_resolution_y(44), grid(0),
+Atmosphere::Atmosphere(void) :viewport(0,0,0,0),sky_resolution_y(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
@@ -35,7 +34,21 @@ Atmosphere::Atmosphere(void)
 
 Atmosphere::~Atmosphere(void)
 {
-	if (grid) {delete[] grid;grid = NULL;}
+	if (posGrid)
+	{
+		delete[] posGrid;
+		posGrid = NULL;
+	}
+	if (colorGrid)
+	{
+		delete[] colorGrid;
+		colorGrid = NULL;
+	}
+	if (indices)
+	{
+		delete[] indices;
+		indices = NULL;
+	}
 }
 
 void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
@@ -44,17 +57,17 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 {
 	if (viewport != prj->getViewport())
 	{
+		// The viewport changed: update the number of point of the grid
 		viewport = prj->getViewport();
-		if (grid)
-		{
-			delete[] grid;
-			grid = NULL;
-		}
+		if (posGrid)
+			delete[] posGrid;
+		if (colorGrid)
+			delete[] colorGrid;
+		if (indices)
+			delete[] indices;
 		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
-		grid = new GridPoint[(1+sky_resolution_x)*(1+sky_resolution_y)];
-		//qDebug() << "Atmosphere::compute_color: "
-		//         << (1+sky_resolution_x)*(1+sky_resolution_y)
-		//         << " Gridpoints instead of " << (48*48);
+		posGrid = new Vec2f[(1+sky_resolution_x)*(1+sky_resolution_y)];
+		colorGrid = new Vec3f[(1+sky_resolution_x)*(1+sky_resolution_y)];
 		float stepX = (float)prj->getViewportWidth() / (sky_resolution_x-0.5);
 		float stepY = (float)prj->getViewportHeight() / sky_resolution_y;
 		float viewport_left = (float)prj->getViewportPosX();
@@ -63,12 +76,38 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		{
 			for(int y=0; y<=sky_resolution_y; ++y)
 			{
-				GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
-				g.pos_2d[0] = viewport_left + ((x == 0) ? 0.f :
-					(x == sky_resolution_x) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
-				g.pos_2d[1] = viewport_bottom+y*stepY;
+				Vec2f &v(posGrid[y*(1+sky_resolution_x)+x]);
+				v[0] = viewport_left + ((x == 0) ? 0.f : 
+						(x == sky_resolution_x) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
+				v[1] = viewport_bottom+y*stepY;
 			}
 		}
+		
+		// Generate the indices used to draw the quads
+		indices = new GLushort[sky_resolution_x*sky_resolution_y*4];
+		int i=0;
+		for (int y2=0; y2<sky_resolution_y; ++y2)
+		{
+			GLushort g0 = y2*(1+sky_resolution_x);
+			GLushort g1 = g0;
+			if (y2&1)
+			{
+				g1+=(1+sky_resolution_x);
+			}
+			else
+			{
+				g0+=(1+sky_resolution_x);
+			}
+			
+			for (int x2=0; x2<sky_resolution_x; ++x2)
+			{
+				indices[i++]=g0;
+				indices[i++]=g1;
+				indices[i++]=++g1;
+				indices[i++]=++g0;
+			}
+		}
+		//qDebug() << sky_resolution_x*sky_resolution_y*4 << i*4;
 	}
 
 	// Update the eclipse intensity factor to apply on atmosphere model
@@ -146,16 +185,14 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	float lumi;
 	
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
-
-	//qWarning() << lightPollutionLuminance;
 	
 	// Compute the sky color for every point above the ground
 	for (int x=0; x<=sky_resolution_x; ++x)
 	{
 		for(int y=0; y<=sky_resolution_y; ++y)
 		{
-            GridPoint &g(grid[y*(1+sky_resolution_x)+x]);
-			prj->unProject(g.pos_2d[0],g.pos_2d[1],point);
+            Vec2f &v(posGrid[y*(1+sky_resolution_x)+x]);
+			prj->unProject(v[0],v[1],point);
 
 			assert(fabs(point.lengthSquared()-1.0) < 1e-10);
 
@@ -200,10 +237,10 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			}
 			b2.color[2] = lumi;
 			
-			grid[y*(1+sky_resolution_x)+x].color.set(b2.color[0], b2.color[1], b2.color[2]);
+			colorGrid[y*(1+sky_resolution_x)+x].set(b2.color[0], b2.color[1], b2.color[2]);
 		}
 	}
-	
+			
 	// Update average luminance
 	averageLuminance = sum_lum/nb_lum;
 }
@@ -226,34 +263,21 @@ void Atmosphere::draw(StelCore* core)
 		// Adapt luminance at this point to avoid a mismatch with the adaption value
 		for (int i=0;i<(1+sky_resolution_x)*(1+sky_resolution_y);++i)
 		{
-			Vec3f& c = grid[i].color;
+			Vec3f& c = colorGrid[i];
 			eye->xyYToRGB(c);
 			c*=atm_intensity;
 		}
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
 		
-		for (int y2=0; y2<sky_resolution_y; ++y2)
-		{
-			GridPoint *g0 = grid + y2*(1+sky_resolution_x);
-			GridPoint *g1 = g0;
-			if (y2&1)
-			{
-				g1+=(1+sky_resolution_x);
-			}
-			else
-			{
-				g0+=(1+sky_resolution_x);
-			}
-			
-			
-			glBegin(GL_TRIANGLE_STRIP);
-			for (int x2=0; x2<=sky_resolution_x; ++x2,g0++,g1++)
-			{
-				glColor3fv(g0->color);
-				glVertex2fv(g0->pos_2d);
-				glColor3fv(g1->color);
-				glVertex2fv(g1->pos_2d);
-			}
-			glEnd();
-		}
+		// Load the vertices positions, color components and indice in GL arrays
+		glColorPointer(3, GL_FLOAT, 0, colorGrid);
+		glVertexPointer(2, GL_FLOAT, 0, posGrid);
+		// And draw everything at once
+		glDrawElements(GL_QUADS, sky_resolution_x*sky_resolution_y*4, GL_UNSIGNED_SHORT, indices);
+		
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 	}
 }
