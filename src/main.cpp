@@ -23,7 +23,6 @@
 #include "StelMainGraphicsView.hpp"
 #include "Translator.hpp"
 #include <QDebug>
-#include <QGraphicsScene>
 #include <QGLFormat>
 
 // The GettextTranslator class provides i18n support through gettext.
@@ -52,8 +51,7 @@ int main(int argc, char **argv)
 		QMessageBox::information(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 	
-	QGraphicsScene scene;
-	StelMainGraphicsView view(&scene, NULL, argc, argv);
+	StelMainGraphicsView view(NULL, argc, argv);
 	view.show();
 	view.init();
 	app.exec();
