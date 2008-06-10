@@ -198,7 +198,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	return 0;
 }
 
-void SkyDrawer::prepareDraw()
+void SkyDrawer::preDrawPointSource()
 {
 	glDisable(GL_LIGHTING);
 	// Blending is really important. Otherwise faint stars in the vicinity of
@@ -219,6 +219,11 @@ void SkyDrawer::prepareDraw()
 	
 }
 
+// Finalize the drawing of point sources
+void SkyDrawer::postDrawPointSource()
+{
+}
+	
 // Draw a disk source halo.
 bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Vec3f& color)
 {

@@ -376,17 +376,6 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 void NewGui::init()
 {	
 	qDebug() << "Creating GUI ...";
-	QString fName;
-	try
-	{
-		fName = StelApp::getInstance().getFileMgr().findFile("data/DejaVuSans.ttf");
-	}
-	catch (exception& e)
-	{
-		qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
-	}
-	if (!fName.isEmpty())
-		QFontDatabase::addApplicationFont(fName);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI

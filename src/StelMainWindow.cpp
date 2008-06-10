@@ -24,9 +24,13 @@
 #include <QResizeEvent>
 #include <QIcon>
 #include <QCleanlooksStyle>
+#include <QDebug>
+#include <QFontDatabase>
 
+#include <stdexcept>
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelFileMgr.hpp"
 
 // Initialize static variables
 StelMainWindow* StelMainWindow::singleton = NULL;
@@ -43,6 +47,18 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initCompl
 void StelMainWindow::init()
 {
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	
+	QString fName;
+	try
+	{
+		fName = StelApp::getInstance().getFileMgr().findFile("data/DejaVuSans.ttf");
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
+	}
+	if (!fName.isEmpty())
+		QFontDatabase::addApplicationFont(fName);
 	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QSettings* settings = StelApp::getInstance().getSettings();

@@ -49,7 +49,7 @@ public:
 	void update(double deltaTime);
 	
 	//! Set the proper openGL state before making calls to drawPointSource
-	void prepareDraw();
+	void preDrawPointSource();
 	
 	//! Draw a point source halo.
 	//! @param x the x position of the object on the screen
@@ -59,6 +59,9 @@ public:
 	//! @return true if the source was actually visible and drawn
 	int drawPointSource(double x, double y, float mag, float b_v);
 	int drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
+	
+	//! Finalize the drawing of point sources
+	void postDrawPointSource();
 	
 	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
 	//! point source because the flux is spread on the disk area
