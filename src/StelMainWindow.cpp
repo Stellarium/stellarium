@@ -37,7 +37,7 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initCompl
 	assert(!singleton);
 	singleton = this;
 	setStyle(new QCleanlooksStyle());
-	setStyleSheet(QString("QGraphicsView {background: #000;}"));
+	//setStyleSheet(QString("QGraphicsView {background: #000;}"));
 }
 
 void StelMainWindow::init()
