@@ -155,7 +155,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	rc_mag[0]*=starLinearScale;
 	
 	// Use now statically min_rmag = 0.6, because higher and too small values look bad
-	if (rc_mag[0] < 0.6f)
+	if (rc_mag[0] < 0.5f)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;
 		return -1;
@@ -164,7 +164,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	if (flagPointStar)
 	{
 		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] < 0.1f)
+		if (rc_mag[1] < 0.05f)
 		{
 			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
@@ -178,7 +178,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		if (rc_mag[0]<1.2f)
 		{
 			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-			if (rc_mag[1] < 0.1f)
+			if (rc_mag[1] < 0.07f)
 			{
 				rc_mag[0] = rc_mag[1] = 0.f;
 				return -1;
