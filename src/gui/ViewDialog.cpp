@@ -72,7 +72,7 @@ void ViewDialog::createDialogContent()
 	populateLists();
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
-	connect(ui->landscapesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(landscapeChanged(const QString&)));
+	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
 	
 	// Connect and initialize checkboxes and other widgets
 	
@@ -310,10 +310,10 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
 }
 
-void ViewDialog::landscapeChanged(const QString& landscapeName)
+void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-	lmgr->setLandscapeByName(landscapeName);
+	lmgr->setLandscapeByName(item->text());
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 }
 
