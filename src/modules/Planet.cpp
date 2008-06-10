@@ -630,8 +630,9 @@ double Planet::draw(StelCore* core, bool stencil)
 		if (!tex_big_halo)
 		{
 			SkyDrawer* skyDrawer = core->getSkyDrawer();
-			skyDrawer->prepareDraw();
+			skyDrawer->preDrawPointSource();
 			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), compute_magnitude(nav->getObserverHelioPos()), color);
+			skyDrawer->postDrawPointSource();
 		}
 		if (tex_big_halo) draw_big_halo(core);
 	}
