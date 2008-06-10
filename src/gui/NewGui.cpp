@@ -390,7 +390,6 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Set up the new GUI
-	StelMainGraphicsView::getInstance().setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	loadStyle("data/gui/normalStyle.css");
 	
 	///////////////////////////////////////////////////////////////////////
@@ -784,7 +783,7 @@ void NewGui::loadStyle(const QString& fileName)
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
-	StelMainGraphicsView::getInstance().setStyleSheet(styleFile.readAll());
+	StelMainWindow::getInstance().setStyleSheet(styleFile.readAll());
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
