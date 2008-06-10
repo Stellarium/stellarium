@@ -327,7 +327,7 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 // Draw the image on the screen.
 void SkyImageTile::drawTile(StelCore* core)
 {
-	float ad_lum;
+	float ad_lum=1.f;
 	if (luminance>0)
 	{
 		ad_lum=core->getToneReproducer()->adaptLuminanceScaled(luminance);
