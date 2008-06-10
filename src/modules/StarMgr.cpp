@@ -523,7 +523,7 @@ void StarMgr::draw(StelCore* core)
     prj->setCurrentFrame(Projector::FRAME_J2000);
 
 	// Prepare openGL for drawing many stars
-	skyDrawer->prepareDraw();
+	skyDrawer->preDrawPointSource();
 
     // draw all the stars of all the selected zones
     float rcmag_table[2*256];
@@ -574,7 +574,9 @@ void StarMgr::draw(StelCore* core)
 		}
     }
     exit_loop:
-
+	// Finish drawing many stars
+	skyDrawer->postDrawPointSource();
+	
 	drawPointer(prj, nav);
 }
 
