@@ -242,7 +242,7 @@ bool StelAppGraphicsItem::sceneEvent(QEvent* event)
 		int y = (int)mevent->pos().y();
 		y = (int)rect().height() - 1 - y;
 		distorter->distortXY(x,y);
-		StelApp::getInstance().handleMove(x, y);
+		StelApp::getInstance().handleMove(x, y, mevent->buttons());
 		// Refresh screen ASAP
 		thereWasAnEvent();
 	}
@@ -253,7 +253,7 @@ bool StelAppGraphicsItem::sceneEvent(QEvent* event)
 		int y = (int)mevent->pos().y();
 		y = (int)rect().height() - 1 - y;
 		distorter->distortXY(x,y);
-		StelApp::getInstance().handleMove(x, y);
+		StelApp::getInstance().handleMove(x, y, Qt::NoButton);
 		// Refresh screen ASAP
 		thereWasAnEvent();
 	}

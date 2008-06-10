@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QDialog>
 #include <QGraphicsProxyWidget>
+#include <QStyleOptionGraphicsItem>
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -64,14 +65,13 @@ void StelDialog::setVisible(bool v)
 			return;
 		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
-		
 		createDialogContent();
 		
-		CustomProxy* proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(NULL, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+		proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache); // , QSize(proxy->boundingRect().width()/2, proxy->boundingRect().height()/2)
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
 	}

@@ -59,6 +59,7 @@
 #include <QFile>
 #include <QKeySequence>
 #include <QRegExp>
+#include <QPixmapCache>
 
 #include <vector>
 
@@ -374,7 +375,9 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 
 
 void NewGui::init()
-{	
+{
+	//QPixmapCache::setCacheLimit(100000);
+	
 	qDebug() << "Creating GUI ...";
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -862,11 +865,11 @@ void NewGui::update(double deltaTime)
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 }
 
-bool NewGui::handleMouseMoves(int x, int y)
+bool NewGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
 	double minX = 0;
-	if (x<maxX && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
+	if (x<maxX && b==Qt::NoButton && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
@@ -878,7 +881,7 @@ bool NewGui::handleMouseMoves(int x, int y)
 	}
 	
 	double maxY = buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
-	if (y<maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
+	if (y<maxY && b==Qt::NoButton && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
