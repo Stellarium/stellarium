@@ -22,6 +22,8 @@
 
 #include <QSettings>
 #include <QResizeEvent>
+#include <QIcon>
+#include <QCleanlooksStyle>
 
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -34,11 +36,14 @@ StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initCompl
 	// Can't create 2 StelMainWindow instances
 	assert(!singleton);
 	singleton = this;
+	setStyle(new QCleanlooksStyle());
 	setStyleSheet(QString("QGraphicsView {background: #000;}"));
 }
 
 void StelMainWindow::init()
 {
+	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	
 	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
 	QSettings* settings = StelApp::getInstance().getSettings();
 	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
