@@ -26,6 +26,8 @@
 #include "ToneReproducer.hpp"
 #include "StelCore.hpp"
 
+//#define USE_VERTEX_BUFFERS 1
+
 Atmosphere::Atmosphere(void) :viewport(0,0,0,0),sky_resolution_y(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
