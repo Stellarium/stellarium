@@ -82,7 +82,7 @@ public:
 	
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module. 
 	//! @return true if the event was intercepted
-	virtual bool handleMouseMoves(int x, int y) {return false;}
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {return false;}
 	
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param event the Key event

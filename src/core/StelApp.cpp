@@ -628,12 +628,12 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 	
 // Handle mouse move
-void StelApp::handleMove(int x, int y)
+void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 {
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
 	{
-		if (i->handleMouseMoves(x, y))
+		if (i->handleMouseMoves(x, y, b))
 			return;
 	}
 }
