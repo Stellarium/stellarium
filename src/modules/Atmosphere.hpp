@@ -86,6 +86,9 @@ private:
 	double eclipseFactor;
 	ParabolicFader fader;
 	float lightPollutionLuminance;
+	
+	unsigned int vertexBufferId;
+	unsigned int indicesBufferId;
 };
 
 #endif // _STEL_ATMOSTPHERE_H_
