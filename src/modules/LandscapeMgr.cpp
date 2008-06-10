@@ -438,6 +438,10 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getAltitude());
+		if (landscape->getPlanetName()!="")
+		{
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getPlanetName();
+		}
 		desc += "<br><br>";
 	}
 	return desc;
