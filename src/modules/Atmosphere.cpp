@@ -107,7 +107,19 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 				indices[i++]=++g0;
 			}
 		}
-		//qDebug() << sky_resolution_x*sky_resolution_y*4 << i*4;
+		
+#ifdef USE_VERTEX_BUFFERS
+		// Load the data on the GPU using vertex buffers
+		glGenBuffersARB(1, &vertexBufferId);
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
+		glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+sky_resolution_x)*(1+sky_resolution_y)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
+		glGenBuffersARB(1, &indicesBufferId);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
+		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sky_resolution_x*sky_resolution_y*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+#endif
+		
 	}
 
 	// Update the eclipse intensity factor to apply on atmosphere model
@@ -267,17 +279,32 @@ void Atmosphere::draw(StelCore* core)
 			eye->xyYToRGB(c);
 			c*=atm_intensity;
 		}
-
+		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_COLOR_ARRAY);
 		
-		// Load the vertices positions, color components and indice in GL arrays
+		// Load the color components
 		glColorPointer(3, GL_FLOAT, 0, colorGrid);
+		
+#ifdef USE_VERTEX_BUFFERS
+		// Bind the vertex and indices buffer
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
+		glVertexPointer(2, GL_FLOAT, 0, 0);
+		// And draw everything at once
+		glDrawElements(GL_QUADS, sky_resolution_x*sky_resolution_y*4, GL_UNSIGNED_SHORT, 0);
+		// Unbind buffers
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+#else
+		// Load the vertex array
 		glVertexPointer(2, GL_FLOAT, 0, posGrid);
 		// And draw everything at once
 		glDrawElements(GL_QUADS, sky_resolution_x*sky_resolution_y*4, GL_UNSIGNED_SHORT, indices);
+#endif
 		
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
+
 	}
 }

@@ -21,6 +21,7 @@
 #include <QtGui/QMessageBox>
 #include <QTranslator>
 #include "StelMainGraphicsView.hpp"
+#include "StelMainWindow.hpp"
 #include "Translator.hpp"
 #include <QDebug>
 #include <QGLFormat>
@@ -51,9 +52,12 @@ int main(int argc, char **argv)
 		QMessageBox::information(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 	
-	StelMainGraphicsView view(NULL, argc, argv);
-	view.show();
-	view.init();
+	StelMainGraphicsView* view = new StelMainGraphicsView(NULL, argc, argv);
+	StelMainWindow* mainWin = new StelMainWindow(NULL);
+	mainWin->setCentralWidget(view);
+	mainWin->init();
 	app.exec();
+	delete view;
+	delete mainWin;
 	return 0;
 }

@@ -60,13 +60,13 @@ NebulaMgr::NebulaMgr(void) : nebGrid(10000), displayNoTexture(false)
 
 NebulaMgr::~NebulaMgr()
 {
+	Nebula::tex_circle = STextureSP();
+	
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
 	{
 		delete (*iter);
 	}
-	
-	Nebula::tex_circle = STextureSP();
 }
 
 /*************************************************************************

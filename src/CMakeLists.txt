@@ -205,6 +205,8 @@ SET(stellarium_lib_SRCS
 	QtScriptMgr.hpp
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
+	StelMainWindow.hpp
+	StelMainWindow.cpp
 	translations.h
 )
 
@@ -271,6 +273,7 @@ SET(stellarium_MOC_HDRS
 	gui/ConfigurationDialog.hpp
 	gui/StelDialog.hpp
 	StelMainGraphicsView.hpp
+	StelMainWindow.hpp
 	QtScriptMgr.hpp
 )
 

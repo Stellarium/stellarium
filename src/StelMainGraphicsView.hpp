@@ -32,7 +32,7 @@ class StelMainGraphicsView : public QGraphicsView
 Q_OBJECT;
 public:
 	StelMainGraphicsView(QWidget* parent, int argc, char** argv);
-	virtual ~StelMainGraphicsView() {;}
+	virtual ~StelMainGraphicsView();
 	
 	//! Start the main initialization of Stellarium
 	void init();
@@ -46,16 +46,11 @@ public:
 	
 	//! Activate all the QActions associated to the widget
 	void activateKeyActions(bool b);
+	//! Delete openGL textures (to call before the GLContext disappears)
+	void deinitGL();
 	
 public slots:
-	//! Alternate fullscreen mode/windowed mode if possible
-	void toggleFullScreen();
-	
-	//! Get whether fullscreen is activated or not
-	bool getFullScreen() const;
-	//! Set whether fullscreen is activated or not
-	void setFullScreen(bool);
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
 	//! Save a screen shot.
@@ -67,15 +62,11 @@ public slots:
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 
 protected:
-	
-	//! Reimplement this to delete openGL textures before the GLContext disappears
-	virtual void closeEvent(QCloseEvent* event);
-
-protected:	
 	virtual void resizeEvent(QResizeEvent* event);
 	
 private:
-	// The StelMainWindow singleton
+	
+	//! The StelMainWindow singleton
 	static StelMainGraphicsView* singleton;
 	
 	//! The openGL window
@@ -83,9 +74,6 @@ private:
 	
 	class StelAppGraphicsItem* mainItem;
 	class StelApp* stelApp;
-
-	//! Used to prevent resize events saving to the config file until after main init is complete.
-	bool initComplete;
 };
 
 

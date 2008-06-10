@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelAppGraphicsItem.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
@@ -464,7 +465,7 @@ void NewGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(close()));
+	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
 	
 	// Debug
 	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
@@ -543,10 +544,8 @@ void NewGui::init()
 	MovementMgr* mmgr = (MovementMgr*)module;
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
-	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(triggered(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
 	QObject::connect(&locationDialog, SIGNAL(closed()), getGuiActions("actionShow_Location_Window"), SLOT(toggle()));
