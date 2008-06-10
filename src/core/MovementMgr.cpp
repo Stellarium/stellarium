@@ -68,7 +68,7 @@ void MovementMgr::init()
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 }	
 	
-bool MovementMgr::handleMouseMoves(int x, int y)
+bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
 	if(FlagEnableMoveMouse)

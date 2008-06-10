@@ -52,7 +52,7 @@ public:
 	//! Handle keyboard events.
 	virtual void handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y);
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//! Handle mouse wheel events.
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.

@@ -167,7 +167,7 @@ public:
 	
 	virtual void glWindowHasBeenResized(int w, int h);
 
-	virtual bool handleMouseMoves(int x, int y);
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 
 	//! Load color scheme from the given ini file and section name
 	//! @param conf application settings object
