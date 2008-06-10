@@ -184,9 +184,9 @@ void HelpDialog::updateText(void)
 		i.next();
 		QString thisGroup(i.key());
 
-		// If no gorup is specified, the info goes in the "Misc" group.
+		// If no group is specified, the info goes in the "Miscellaneous" group.
 		if (thisGroup.isEmpty())
-			thisGroup = N_("Misc");
+			thisGroup = N_("Miscellaneous");
 
 		// When we start a new group, we need a header for it
 		if (thisGroup != lastGroup)
