@@ -119,7 +119,7 @@ void TreeGrid::split(TreeGridNode& node)
 	const Vec3d& c1 = p[1];
 	const Vec3d& c2 = p[2];
 	
-	assert((c0^c1)*c2 >= 0.0);
+	assert((c1^c0)*c2 >= 0.0);
 	Vec3d e0 = c1+c2;
 	e0.normalize();
 	Vec3d e1 = c2+c0;

@@ -40,7 +40,7 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), initComplete(false)
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent)
 {
 	setScene(new QGraphicsScene());
 	// Can't create 2 StelMainWindow instances
@@ -71,38 +71,18 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	mainItem->setFocus();
 }
 
+StelMainGraphicsView::~StelMainGraphicsView()
+{
+}
+
 void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
 	setSceneRect(0,0,event->size().width(), event->size().height());
 	StelAppGraphicsItem::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
-	if (initComplete)
-	{
-		QSettings* conf = stelApp->getSettings();
-		if (conf!=NULL)
-		{
-			if (!isFullScreen())
-			{
-				conf->setValue("video/screen_h", event->size().height());
-				conf->setValue("video/screen_w", event->size().width());
-			}
-		}
-	}
 }
 
 void StelMainGraphicsView::init()
-{	
-	// Init the main window. It must be done here because it is not the responsability of StelApp to do that
-	QSettings* settings = stelApp->getSettings();
-	resize(settings->value("video/screen_w", 800).toInt(), settings->value("video/screen_h", 600).toInt());
-	if (settings->value("video/fullscreen", true).toBool())
-	{
-		showFullScreen();
-	}
-	else
-	{
-		show();
-	}
-
+{
 	//view->setAutoFillBackground(false);
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	setCacheMode(QGraphicsView::CacheNone);
@@ -128,18 +108,18 @@ void StelMainGraphicsView::init()
 	stelApp->initPlugIns();
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-	initComplete = true;
+	
 	mainItem->startDrawingLoop();
 }
 
-void StelMainGraphicsView::closeEvent(QCloseEvent* event)
+//! Delete openGL textures (to call before the GLContext disappears)
+void StelMainGraphicsView::deinitGL()
 {
 	delete mainItem;
 	StelApp* stelApp = &StelApp::getInstance();
 	delete stelApp;
-	QGraphicsView::closeEvent(event);
+	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 }
-
 
 void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir) const
 {
@@ -178,44 +158,6 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 	
 	qDebug() << "Saving screenshot in file: " << shotPath;
 	im.save(shotPath);
-}
-
-
-/*************************************************************************
- Alternate fullscreen mode/windowed mode if possible
-*************************************************************************/
-void StelMainGraphicsView::toggleFullScreen()
-{
-	// Toggle full screen
-	if (!isFullScreen())
-	{
-		showFullScreen();
-	}
-	else
-	{
-		showNormal();
-	}
-}
-
-/*************************************************************************
- Get whether fullscreen is activated or not
-*************************************************************************/
-bool StelMainGraphicsView::getFullScreen() const
-{
-	return isFullScreen();
-}
-
-/*************************************************************************
- Set whether fullscreen is activated or not
- *************************************************************************/
-void StelMainGraphicsView::setFullScreen(bool b)
-{
-	if (b)
-		showFullScreen();
-	else
-		showNormal();
-
-	StelApp::getInstance().getSettings()->setValue("video/fullscreen", b);
 }
 
 //! Activate all the QActions associated to the widget
