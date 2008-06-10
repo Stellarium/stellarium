@@ -24,6 +24,7 @@
 #include "StelDialog.hpp"
 
 class Ui_viewDialogForm;
+class QListWidgetItem;
 
 class ViewDialog : public StelDialog
 {
@@ -40,7 +41,7 @@ private slots:
 	void populateLists();
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
-	void landscapeChanged(const QString& landscapeName);
+	void landscapeChanged(QListWidgetItem* item);
 	void shoutingStarsZHRChanged();
 private:
 	void updateSkyCultureText();	
