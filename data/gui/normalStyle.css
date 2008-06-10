@@ -4,7 +4,7 @@ QDialog {
 
 QDialog:active {background: rgba(48, 49, 52, 0%);}
 
-QFrame {
+QWidget {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(86, 87, 90, 40%), stop: 1 rgba(48, 49, 52, 40%));
 	border: 0px;
 	color: #dedede;
@@ -281,3 +281,25 @@ QDoubleSpinBox::down-button {
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
          }
+
+QDockWidget {
+	border: 1px solid #081f25;
+	titlebar-close-icon: url(close.png);
+	titlebar-normal-icon: url(undock.png);
+}
+
+QDockWidget::title {
+	text-align: left; / * align the text to the left * /
+	background: #081f25;
+	padding-left: 5px;
+}
+
+QMainWindow::separator {
+	background: #081f25;
+	width: 50px; / * when vertical * /
+	height: 10px; / * when horizontal * /
+}
+
+QMainWindow::separator:hover {
+	background: red;
+}
