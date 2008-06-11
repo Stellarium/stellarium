@@ -492,7 +492,7 @@ int StarMgr::getMaxSearchLevel() const
        it!=zone_arrays.end();it++) {
     const float mag_min = 0.001f*it->second->mag_min;
     float rcmag[2];
-    if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag) < 0)
+    if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
 		break;
     rval = it->first;
   }
@@ -538,7 +538,7 @@ void StarMgr::draw(StelCore* core)
 		for (int i=it->second->mag_steps-1;i>=0;i--)
 		{
 			const float mag = mag_min+k*i;
-			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i) < 0)
+			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
 			{
 				if (i==0) goto exit_loop;
 			}

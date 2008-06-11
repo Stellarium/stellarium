@@ -87,6 +87,20 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 		setAbsoluteStarScale(1.0);
 		ok = true;
 	}
+	
+	// Initialize buffers for use by gl vertex array
+	nbPointSources = 0;
+	maxPointSources = 1000;
+	verticesGrid = new Vec2f[maxPointSources*4];
+	colorGrid = new Vec3f[maxPointSources*4];
+	textureGrid = new Vec2f[maxPointSources*4];
+	for (unsigned int i=0;i<maxPointSources; ++i)
+	{
+		textureGrid[i*4].set(0,0);
+		textureGrid[i*4+1].set(1,0);
+		textureGrid[i*4+2].set(1,1);
+		textureGrid[i*4+3].set(0,1);
+	}
 }
 
 
@@ -142,13 +156,13 @@ float SkyDrawer::surfacebrightnessToLuminance(float sb)
 }
 
 // Compute RMag and CMag from magnitude for a point source.
-int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
+bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 {
 	// Real world magnitude limit (independent of FOV)
 	if (mag > max_mag)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;
-		return -1;
+		return false;
 	}
 
 	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
@@ -158,7 +172,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	if (rc_mag[0] < 0.5f)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;
-		return -1;
+		return false;
 	}
 	
 	if (flagPointStar)
@@ -168,7 +182,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		{
 			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
-			return -1;
+			return false;
 		}
 	}
 	else
@@ -181,7 +195,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 			if (rc_mag[1] < 0.07f)
 			{
 				rc_mag[0] = rc_mag[1] = 0.f;
-				return -1;
+				return false;
 			}
 			rc_mag[0] = 1.2f;
 		}
@@ -195,7 +209,7 @@ int SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 			}
 		}
 	}
-	return 0;
+	return true;
 }
 
 void SkyDrawer::preDrawPointSource()
@@ -222,13 +236,71 @@ void SkyDrawer::preDrawPointSource()
 // Finalize the drawing of point sources
 void SkyDrawer::postDrawPointSource()
 {
-}
+	if (nbPointSources==0)
+		return;
 	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		
+	// Load the color components
+	glColorPointer(3, GL_FLOAT, 0, colorGrid);
+	// Load the vertex array
+	glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
+	// Load the vertex array
+	glTexCoordPointer(2, GL_FLOAT, 0, textureGrid);
+	
+	// And draw everything at once
+	glDrawArrays(GL_QUADS, 0, nbPointSources*4);
+		
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	nbPointSources = 0;	
+}
+
+// Draw a point source halo.
+int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
+{	
+	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
+		return -1;
+	
+	// Random coef for star twinkling
+	const float tw = flagStarTwinkle ? (1.-twinkleAmount*rand()/RAND_MAX) : 1.0;
+	
+	if (flagPointStar)
+	{
+		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
+		glColor3fv(colorTable[b_v]*(rc_mag[1]*tw));
+		prj->drawPoint2d(x, y);
+	}
+	else
+	{
+		// Store the drawing instructions in the vertex arrays
+		colorGrid[nbPointSources*4+3] = (colorTable[b_v]*(rc_mag[1]*tw));		
+		const double radius = rc_mag[0];
+		Vec2f* v = &(verticesGrid[nbPointSources*4]);
+		v->set(x-radius,y-radius); ++v;
+		v->set(x+radius,y-radius); ++v;
+		v->set(x+radius,y+radius); ++v;
+		v->set(x-radius,y+radius); ++v;
+		++nbPointSources;
+		if (nbPointSources>=maxPointSources)
+		{
+			// Flush the buffer (draw all buffered stars)
+			postDrawPointSource();
+		}
+	}
+	return 0;
+}
+
+
 // Draw a disk source halo.
 bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Vec3f& color)
 {
 	float rc_mag[2];
-	if (computeRCMag(mag,rc_mag) < 0)
+	if (computeRCMag(mag,rc_mag)==false)
 		return false;
 
 	if (getFlagPointStar())
@@ -254,28 +326,6 @@ bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Ve
 		prj->drawSprite2dMode(x, y, rc_mag[0]*2);
 	}
 	return true;
-}
-
-// Draw a point source halo.
-int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
-{	
-	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
-		return -1;
-	
-	// Random coef for star twinkling
-	const float tw = flagStarTwinkle ? (1.-twinkleAmount*rand()/RAND_MAX) : 1.0;
-	glColor3fv(colorTable[b_v]*(rc_mag[1]*tw));
-	
-	if (flagPointStar)
-	{
-		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		prj->drawPoint2d(x, y);
-	}
-	else
-	{
-		prj->drawSprite2dMode(x, y, 2.f*rc_mag[0]);
-	}
-	return 0;
 }
 
 
