@@ -60,8 +60,8 @@ public:
 	//! @param mag the source magnitude
 	//! @param b_v the source B-V
 	//! @return true if the source was actually visible and drawn
-	int drawPointSource(double x, double y, float mag, float b_v);
-	int drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
+	bool drawPointSource(double x, double y, float mag, float b_v);
+	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
 	
 	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
 	//! point source because the flux is spread on the disk area
@@ -90,6 +90,13 @@ public:
 	//! @param rc_mag array of 2 floats containing the radius and luminance
 	//! @return false if the object is too faint to be displayed
 	bool computeRCMag(float mag, float rc_mag[2]) const;
+	
+	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
+	//! This information is used to determine the world adaptation luminance
+	//! This method should be called during the update operations of the main loop
+	//! @param lum luminance in cd/m^2
+	//! @param area on-screen area in pixel^2
+	void reportLuminanceInFov(double lum, float area);
 	
 	//! Compute the luminance for an extended source with the given surface brightness
 	//! @param sb Surface brightness in V magnitude/arcmin^2

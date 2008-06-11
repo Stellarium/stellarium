@@ -395,10 +395,9 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 	const double movement_factor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;            
 	for (const Star *s=z->getStars();s<end;s++)
 	{
-		if (is_inside ? prj->project(s->getJ2000Pos(z,movement_factor),xy)
-			: prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy))
+		if (is_inside ? prj->project(s->getJ2000Pos(z,movement_factor),xy) : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy))
 		{
-			if (0 > drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->b_v))
+			if (drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->b_v)==false)
 			{
 				break;
 			}
