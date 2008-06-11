@@ -261,10 +261,10 @@ void SkyDrawer::postDrawPointSource()
 }
 
 // Draw a point source halo.
-int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
+bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
 {	
 	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
-		return -1;
+		return false;
 	
 	// Random coef for star twinkling
 	const float tw = flagStarTwinkle ? (1.-twinkleAmount*rand()/RAND_MAX) : 1.0;
@@ -292,7 +292,7 @@ int SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsign
 			postDrawPointSource();
 		}
 	}
-	return 0;
+	return true;
 }
 
 
@@ -577,4 +577,10 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		colorTable[i][0] *=1./1.3;
 		colorTable[i][1] *=1./1.2;
 	}
+}
+
+// Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
+void SkyDrawer::reportLuminanceInFov(double lum, float area)
+{
+	
 }
