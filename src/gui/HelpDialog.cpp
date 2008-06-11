@@ -21,15 +21,16 @@
 #include <QTextBrowser>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QFrame>
 #include <QSettings>
 #include <QResizeEvent>
 #include <QSize>
-#include <QDebug>
 #include <QMultiMap>
-#include <QMap>
-#include <QMapIterator>
+#include <QList>
+#include <QSet>
 #include <QPair>
-#include <QFrame>
+#include <QtAlgorithms>
+#include <QDebug>
 
 #include "ui_helpDialogGui.h"
 
@@ -168,51 +169,66 @@ QString HelpDialog::getFooterText(void)
 
 void HelpDialog::updateText(void)
 {
+	// Here's how we will build the help text for the keys:
+	// 1.  Get a unique list of groups by asking for the keys and then converting the
+	//     resulting QSlist into a QSet.  Iterate over the QSet of groups names doing:
+	// 1.1  add the group title
+	// 1.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString> 
+	//      which describe the key binding (QPair::first) and the help text for
+	//      that key binding (QPair::second).
+	// 1.3  Sort this list by the first value in the pait, courtesy of qSort and
+	//      HelpDialog::stringPairFirstLessThan
+	// 1.4  Iterate over the sorted list adding key and description for each item
+	
 	QString newHtml(getHeaderText());
-
-	// The key in the multi-map is the group (section of help, e.g. "Dialogs")
-	// the multiple values are pairs of keycode and descriptions, which we add
-	// to the text as rows in a table.
-	QMapIterator<QString, QPair<QString, QString> > i(keyData);
-	QString lastGroup;
-	bool firstGroup = true;
 	newHtml += "<table cellpadding=\"10%\">\n";
 
-	// for each group...
-	while(i.hasNext())
+	QSet<QString> groups = keyData.keys().toSet();  // 1
+	foreach (QString group, groups)
 	{
-		i.next();
-		QString thisGroup(i.key());
+		QString groupDescription = group;
+		if (group.isEmpty())
+			groupDescription = N_("Miscellaneous");
 
-		// If no group is specified, the info goes in the "Miscellaneous" group.
-		if (thisGroup.isEmpty())
-			thisGroup = N_("Miscellaneous");
+		// 1.1
+		newHtml += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(groupDescription)) + ":</u></b></td></tr>\n";
 
-		// When we start a new group, we need a header for it
-		if (thisGroup != lastGroup)
+		// 1.2
+		QList< QPair<QString, QString> > keys = keyData.values(group);
+
+		// 1.3
+		qSort(keys.begin(), keys.end(), HelpDialog::stringPairFirstLessThan);
+
+		// 1.4
+		for(int i=0; i<keys.size(); i++)
 		{
-			if (firstGroup)
-				firstGroup = false;
+			QString key = keys.at(i).first; // the string which holds the key, e.g. "F1"
 
-			newHtml += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(thisGroup)) + ":</u></b></td></tr>\n";
+			// For some keys we need to translate from th QT string to something
+			// more readable
+			QString specKey = specialKeys[key];
+			if (!specKey.isEmpty())
+				key = q_(specKey);
+
+			// Finally, add HTML table data for the key as it's help text
+			newHtml += "<tr><td><b>" + Qt::escape(key) + "</b></td>";
+			newHtml += "<td>" + Qt::escape(q_( keys.at(i).second)) + "</td></tr>\n";
 		}
-
-		// Translate special keys
-		QString key = i.value().first;
-		QString spec_key = specialKeys[key];
-		if (!spec_key.isEmpty())
-			key = q_(spec_key);
-
-		newHtml += "<tr><td><b>" + Qt::escape(key) + "</b></td>";
-		newHtml += "<td>" + Qt::escape(q_(i.value().second)) + "</td></tr>\n";
-		lastGroup = thisGroup;
 	}
 
 	newHtml += "</table>";
 	newHtml += getFooterText();
-	
 	ui->helpBrowser->clear();
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
+}
+
+bool HelpDialog::stringPairFirstLessThan(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
+{
+	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although 
+	// right now we will get F1 F11 F12 F2.  However, at time of writing, no group
+	// of keys has F1-F9, and one from F10-F12 in it, so it doesn't really matter.
+	// -MNG 2008-06-01
+	return p1.first < p2.first;
 }
 
