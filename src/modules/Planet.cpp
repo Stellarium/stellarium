@@ -765,7 +765,7 @@ void Planet::draw_big_halo(const StelCore* core)
 	{
 		float rc_mag[2];
 		
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(compute_magnitude(nav->getObserverHelioPos()), rc_mag) < 0)
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(compute_magnitude(nav->getObserverHelioPos()), rc_mag)==false)
 			return;
 		rc_mag[0]=MY_MIN(rc_mag[0]*0.008, 10000);
 		glBlendFunc(GL_ONE, GL_ONE);

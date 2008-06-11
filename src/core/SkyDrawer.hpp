@@ -50,6 +50,9 @@ public:
 	
 	//! Set the proper openGL state before making calls to drawPointSource
 	void preDrawPointSource();
+		
+	//! Finalize the drawing of point sources
+	void postDrawPointSource();
 	
 	//! Draw a point source halo.
 	//! @param x the x position of the object on the screen
@@ -59,9 +62,6 @@ public:
 	//! @return true if the source was actually visible and drawn
 	int drawPointSource(double x, double y, float mag, float b_v);
 	int drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
-	
-	//! Finalize the drawing of point sources
-	void postDrawPointSource();
 	
 	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
 	//! point source because the flux is spread on the disk area
@@ -75,7 +75,7 @@ public:
 	
 	//! Set-up openGL lighting and color before drawing a 3d model.
 	//! @param illuminatedArea the total illuminated area in arcmin^2
-	//! @param mag the object integrated magnitude
+	//! @param mag the object integrated V magnitude
 	//! @param lighting whether lighting computations should be activated for rendering
 	void preDrawSky3dModel(double illuminatedArea, float mag, bool lighting=true);
 	
@@ -86,7 +86,10 @@ public:
 	void postDrawSky3dModel(double x, double y, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
-	int computeRCMag(float mag, float rc_mag[2]) const;
+	//! @param mag the object integrated V magnitude
+	//! @param rc_mag array of 2 floats containing the radius and luminance
+	//! @return false if the object is too faint to be displayed
+	bool computeRCMag(float mag, float rc_mag[2]) const;
 	
 	//! Compute the luminance for an extended source with the given surface brightness
 	//! @param sb Surface brightness in V magnitude/arcmin^2
@@ -204,6 +207,13 @@ private:
 	
 	//! The scaling applied to input luminance before they are converted by the ToneReproducer
 	double inScale;
+	
+	// Variables used for GL optimization
+	Vec2f* verticesGrid;
+	Vec3f* colorGrid;
+	Vec2f* textureGrid;
+	unsigned int nbPointSources;
+	unsigned int maxPointSources;
 };
 
 #endif
