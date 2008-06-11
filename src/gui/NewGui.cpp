@@ -449,7 +449,7 @@ void NewGui::init()
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
 	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
-	addGuiActions("action_Reload_Style", "Reload Style", "Ctrl+R", "debug", false, false);
+	addGuiActions("action_Reload_Style", "Reload style", "Ctrl+R", "Debug", false, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
