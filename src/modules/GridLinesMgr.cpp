@@ -648,6 +648,8 @@ void GridLinesMgr::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 
+	glEnable(GL_LINE_SMOOTH);
+	
 	// Draw the equatorial grid
 	equ_grid->draw(prj);
 	// Draw the equatorial grid
@@ -660,6 +662,8 @@ void GridLinesMgr::draw(StelCore* core)
 	ecliptic_line->draw(prj,nav);
 	// Draw the meridian line
 	meridian_line->draw(prj,nav);
+	
+	glDisable(GL_LINE_SMOOTH);
 }
 
 void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)
