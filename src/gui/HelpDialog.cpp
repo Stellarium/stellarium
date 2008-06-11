@@ -47,23 +47,26 @@ HelpDialog::HelpDialog()
 {
 	ui = new Ui_helpDialogForm;
 
+	// Make some key and mouse bindings translatable. Keys starting with
+	// "!NUMBER-" are made up; the number is there to keep the entries
+	// sorted (at least relative to each other).
 	specialKeys["Space"] = N_("Space");
-	specialKeys["@arrows-and-left-drag"] = N_("Arrow keys & left mouse drag");
-	specialKeys["@page-up/down"] = N_("Page Up/Down");
-	specialKeys["@ctrl+up/down"] = N_("CTRL + Up/Down");
-	specialKeys["@left-click"] = N_("Left click");
-	specialKeys["@right-click"] = N_("Right click");
-	specialKeys["@ctrl+left-click"] = N_("CTRL + Left click");
+	specialKeys["!01-arrows-and-left-drag"] = N_("Arrow keys & left mouse drag");
+	specialKeys["!02-page-up/down"] = N_("Page Up/Down");
+	specialKeys["!03-ctrl+up/down"] = N_("CTRL + Up/Down");
+	specialKeys["!04-left-click"] = N_("Left click");
+	specialKeys["!05-right-click"] = N_("Right click");
+	specialKeys["!06-ctrl+left-click"] = N_("CTRL + Left click");
 
 	// Add keys for those keys which do not have actions.
 	QString group = N_("Movement and Selection");
-	setKey(group, "", "@arrows-and-left-drag", N_("Pan view around the sky"));
-	setKey(group, "", "@page-up/down", N_("Zoom in/out"));
-	setKey(group, "", "@ctrl+up/down", N_("Zoom in/out"));
-	setKey(group, "", "@left-click", N_("Select object"));
-	setKey(group, "", "@right-click", N_("Clear selection"));
+	setKey(group, "", "!01-arrows-and-left-drag", N_("Pan view around the sky"));
+	setKey(group, "", "!02-page-up/down", N_("Zoom in/out"));
+	setKey(group, "", "!03-ctrl+up/down", N_("Zoom in/out"));
+	setKey(group, "", "!04-left-click", N_("Select object"));
+	setKey(group, "", "!05-right-click", N_("Clear selection"));
 #ifdef MACOSX
-	setKey(group, "", "@ctrl+left-click", N_("Clear selection"));
+	setKey(group, "", "!06-ctrl+left-click", N_("Clear selection"));
 #endif
 }
 
