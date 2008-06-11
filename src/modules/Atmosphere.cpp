@@ -274,6 +274,7 @@ void Atmosphere::draw(StelCore* core)
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
+		glShadeModel(GL_SMOOTH);
 		
 		// Adapt luminance at this point to avoid a mismatch with the adaption value
 		for (int i=0;i<(1+sky_resolution_x)*(1+sky_resolution_y);++i)
@@ -308,6 +309,7 @@ void Atmosphere::draw(StelCore* core)
 		
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
-
+		
+		glShadeModel(GL_FLAT);
 	}
 }

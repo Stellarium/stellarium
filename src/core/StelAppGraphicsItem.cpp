@@ -83,10 +83,9 @@ void StelAppGraphicsItem::switchToNativeOpenGLPainting()
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glShadeModel(GL_SMOOTH);
+	glShadeModel(GL_FLAT);
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_LINE_SMOOTH);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_MULTISAMPLE);
 	glDisable(GL_DITHER);
