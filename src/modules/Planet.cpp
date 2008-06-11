@@ -715,8 +715,9 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>40) nb_facet = 40;
+	glShadeModel(GL_SMOOTH);
 	core->getProjection()->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
-
+	glShadeModel(GL_FLAT);
 	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], color);
 }
 
