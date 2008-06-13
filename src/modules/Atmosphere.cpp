@@ -202,58 +202,55 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	prj->setCurrentFrame(Projector::FRAME_LOCAL);
 	
 	// Compute the sky color for every point above the ground
-	for (int x=0; x<=sky_resolution_x; ++x)
+	for (int i=0; i<(1+sky_resolution_x)*(1+sky_resolution_y); ++i)
 	{
-		for(int y=0; y<=sky_resolution_y; ++y)
+		Vec2f &v(posGrid[i]);
+		prj->unProject(v[0],v[1],point);
+		
+		assert(fabs(point.lengthSquared()-1.0) < 1e-10);
+		
+		if (point[2]<=0)
 		{
-            Vec2f &v(posGrid[y*(1+sky_resolution_x)+x]);
-			prj->unProject(v[0],v[1],point);
-
-			assert(fabs(point.lengthSquared()-1.0) < 1e-10);
-
-			if (point[2]<=0)
-			{
-				point[2] = -point[2];
-				// The sky below the ground is the symetric of the one above :
-				// it looks nice and gives proper values for brightness estimation
-			}
-			
-			// Use the Skybright.cpp 's models for brightness which gives better results.
-			lumi = skyb.get_luminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
-					moon_pos[2]*point[2], sun_pos[0]*point[0]+sun_pos[1]*point[1]+
-					sun_pos[2]*point[2], point[2]);
-			lumi *= eclipseFactor;
-			// Add star background luminance
-			lumi += 0.0001;
-			// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
-			//lumi*=eye->getInputScale();
-			
-			// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
-			// of the scaling itself
-			lumi += lightPollutionLuminance;
-			
-			// Store for later statistics
-			sum_lum+=lumi;
-			++nb_lum;
-			
-			if (lumi>0.01)
-			{
-				b2.pos[0] = point[0];
-				b2.pos[1] = point[1];
-				b2.pos[2] = point[2];
-				// Use the Skylight model for the color
-				sky.get_xyY_valuev(b2);
-			}
-			else
-			{
-				// Too dark to see atmosphere color, don't bother computing it
-				b2.color[0]=0.;
-				b2.color[1]=0.;
-			}
-			b2.color[2] = lumi;
-			
-			colorGrid[y*(1+sky_resolution_x)+x].set(b2.color[0], b2.color[1], b2.color[2]);
+			point[2] = -point[2];
+			// The sky below the ground is the symetric of the one above :
+			// it looks nice and gives proper values for brightness estimation
 		}
+		
+		// Use the Skybright.cpp 's models for brightness which gives better results.
+		lumi = skyb.get_luminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
+				moon_pos[2]*point[2], sun_pos[0]*point[0]+sun_pos[1]*point[1]+
+				sun_pos[2]*point[2], point[2]);
+		lumi *= eclipseFactor;
+		// Add star background luminance
+		lumi += 0.0001;
+		// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
+		//lumi*=eye->getInputScale();
+		
+		// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
+		// of the scaling itself
+		lumi += lightPollutionLuminance;
+		
+		// Store for later statistics
+		sum_lum+=lumi;
+		++nb_lum;
+		
+		if (lumi>0.01)
+		{
+			b2.pos[0] = point[0];
+			b2.pos[1] = point[1];
+			b2.pos[2] = point[2];
+			// Use the Skylight model for the color
+			sky.get_xyY_valuev(b2);
+		}
+		else
+		{
+			// Too dark to see atmosphere color, don't bother computing it
+			b2.color[0]=0.;
+			b2.color[1]=0.;
+		}
+		b2.color[2] = lumi;
+		
+		colorGrid[i].set(b2.color[0], b2.color[1], b2.color[2]);
 	}
 			
 	// Update average luminance
