@@ -74,10 +74,13 @@ private:
 	//! A hash that maps some special keys to translatable strings.
 	QHash<QString, QString> specialKeys;
 
-	//! Less-than function for qSort to compare QPair<QString,QString> values.
+	//! Sort function for qSort to compare QPair<QString,QString> values.
 	//! This is used when displaying the hlp text to sort the items in a group
 	//! by the key code (first item of the QPair)
-	static bool stringPairFirstLessThan(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2);
+	static bool helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2);
+
+	//! Sort function for putting the Misc group at the end of the list of groups
+	static bool helpGroupSort(const QString& s1, const QString& s2);
 };
 
 #endif /*_HELPDIALOG_HPP_*/
