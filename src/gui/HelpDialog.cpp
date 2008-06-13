@@ -174,35 +174,46 @@ void HelpDialog::updateText(void)
 {
 	// Here's how we will build the help text for the keys:
 	// 1.  Get a unique list of groups by asking for the keys and then converting the
-	//     resulting QSlist into a QSet.  Iterate over the QSet of groups names doing:
-	// 1.1  add the group title
-	// 1.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString> 
+	//     resulting QList into a QSet.  
+	// 2   Converet back to a QList, sort and move the empty string to the end of the
+	//     list if it is present (this is the miscellaneous group).
+	// 3   Iterate over the QSet of groups names doing:
+	// 3.1  add the group title
+	// 3.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString> 
 	//      which describe the key binding (QPair::first) and the help text for
 	//      that key binding (QPair::second).
-	// 1.3  Sort this list by the first value in the pait, courtesy of qSort and
-	//      HelpDialog::stringPairFirstLessThan
-	// 1.4  Iterate over the sorted list adding key and description for each item
+	// 3.3  Sort this list by the first value in the pait, courtesy of qSort and
+	//      HelpDialog::helpItemSort
+	// 3.4  Iterate over the sorted list adding key and description for each item
 	
 	QString newHtml(getHeaderText());
 	newHtml += "<table cellpadding=\"10%\">\n";
 
-	QSet<QString> groups = keyData.keys().toSet();  // 1
+	QList<QString> groups = keyData.keys().toSet().toList(); // 1 + 2
+	qSort(groups.begin(), groups.end(), HelpDialog::helpGroupSort);
+	
+	// 3
+	QString lastGroup;  // to group "" and "Miscellaneous into one
 	foreach (QString group, groups)
 	{
 		QString groupDescription = group;
 		if (group.isEmpty())
 			groupDescription = N_("Miscellaneous");
 
-		// 1.1
-		newHtml += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(groupDescription)) + ":</u></b></td></tr>\n";
+		if (lastGroup!=groupDescription)
+		{
+			// 3.1
+			newHtml += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(groupDescription)) + ":</u></b></td></tr>\n";
+		}
+		lastGroup = groupDescription;
 
-		// 1.2
+		// 3.2
 		QList< QPair<QString, QString> > keys = keyData.values(group);
 
-		// 1.3
-		qSort(keys.begin(), keys.end(), HelpDialog::stringPairFirstLessThan);
+		// 3.3
+		qSort(keys.begin(), keys.end(), HelpDialog::helpItemSort);
 
-		// 1.4
+		// 3.4
 		for(int i=0; i<keys.size(); i++)
 		{
 			QString key = keys.at(i).first; // the string which holds the key, e.g. "F1"
@@ -226,12 +237,31 @@ void HelpDialog::updateText(void)
 	ui->helpBrowser->scrollToAnchor("top");
 }
 
-bool HelpDialog::stringPairFirstLessThan(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
+bool HelpDialog::helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
 {
 	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although 
 	// right now we will get F1 F11 F12 F2.  However, at time of writing, no group
 	// of keys has F1-F9, and one from F10-F12 in it, so it doesn't really matter.
 	// -MNG 2008-06-01
-	return p1.first < p2.first;
+	if (p1.first.split(",").at(0).size()!=p2.first.split(",").at(0).size())
+		return p1.first.size() < p2.first.size();
+	else
+		return p1.first < p2.first;
 }
 
+bool HelpDialog::helpGroupSort(const QString& s1, const QString& s2)
+{
+	QString s1c = s1.toUpper();
+	QString s2c = s2.toUpper();
+
+	if (s1c=="" || s1c==QString(N_("Miscellaneous")).toUpper())
+		s1c = "ZZZ" + s1c;
+	if (s2c=="" || s2c==QString(N_("Miscellaneous")).toUpper())
+		s2c = "ZZZ" + s2c;
+	if (s1c=="DEBUG")
+		s1c = "ZZZZ" + s1c;
+	if (s2c=="DEBUG")
+		s2c = "ZZZZ" + s2c;
+
+	return s1c < s2c;
+}
