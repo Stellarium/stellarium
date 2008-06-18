@@ -40,7 +40,8 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 
 	inScale = 1.;
 	bortleScaleIndex = 3;
-			
+	limitMagnitude = -100.f;
+	
 	setMaxFov(180.f);
 	setMinFov(0.1f);
 	setMaxMag(30.f);
@@ -141,6 +142,35 @@ void SkyDrawer::update(double deltaTime)
 	
 	// Precompute
 	starLinearScale = std::pow(2.1f*starAbsoluteScaleF, 1.3f/2.f*starRelativeScale);
+	
+	// Compute the current limit magnitude by dichotomy
+	float a=-26.f;
+	float b=30.f;
+	float rcmag[2];
+	limitMagnitude = 0.f;
+	int safety=0;
+	while (std::fabs(limitMagnitude-a)>0.05)
+	{
+		computeRCMag(limitMagnitude, rcmag);
+		if (rcmag[0]<=0.f)
+		{
+			float tmp = limitMagnitude;
+			limitMagnitude=(a+limitMagnitude)/2;
+			b=tmp;
+		}
+		else
+		{
+			float tmp = limitMagnitude;
+			limitMagnitude=(b+limitMagnitude)/2;
+			a=tmp;
+		}
+		++safety;
+		if (safety>20)
+		{
+			limitMagnitude=-99;
+			break;
+		}
+	}
 }
 
 // Compute the log of the luminance for a point source with the given mag for the current FOV
@@ -168,7 +198,7 @@ bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
 	rc_mag[0]*=starLinearScale;
 	
-	// Use now statically min_rmag = 0.6, because higher and too small values look bad
+	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rc_mag[0] < 0.5f)
 	{
 		rc_mag[0] = rc_mag[1] = 0.f;

@@ -169,6 +169,9 @@ public slots:
 	//! Get the current Bortle scale index
 	int getBortleScale() const {return bortleScaleIndex;}
 	
+	//! Get the magnitude of the currently faintest visible point source
+	float getLimitMagnitude() const {return limitMagnitude;}
+	
 private:
 	
 	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
@@ -199,6 +202,9 @@ private:
 	float starAbsoluteScaleF;
 	
 	float starLinearScale;	// optimization variable
+	
+	//! Current magnitude limit for point sources
+	float limitMagnitude;
 	
 	//! Little halo texture
 	STextureSP texHalo;
