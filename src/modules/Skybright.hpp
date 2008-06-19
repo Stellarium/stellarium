@@ -19,33 +19,39 @@
 #ifndef _SKYBRIGHT_H_
 #define _SKYBRIGHT_H_
 
+//! @class Skybright
+//! Compute the luminance of the sky according to some parameters like sun moon position
+//! or time or altitude etc..
 class Skybright
 {
 public:
+	//! Constructor
     Skybright();
 
-	// month : 1=Jan, 12=Dec
-	// moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-	void set_date(int year, int month, float moon_phase);
+	//! Set the sky date to use for atmosphere computation
+	//! @param year the year in YYYY format
+	//! @param month the month: 1=Jan, 12=Dec
+	//! @param moon_phase the moon phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
+	void setDate(int year, int month, float moon_phase);
 
-	// Set the position parameters
-	// Latitude in radian, altitude in m, temperature in deg. C, humidity in %
-	void set_loc(float latitude, float altitude, float temperature = 15.f,
-	             float relative_humidity = 40.f);
+	//! Set the position parameters to use for atmosphere computation
+	//! @param latitude observer latitude in radian
+	//! @param altitude observer altitude in m
+	//! @param temperature temperature in deg. C
+	//! @param humidity air humidity in %
+	void setLocation(float latitude, float altitude, float temperature = 15.f, float relative_humidity = 40.f);
 
-	// Set the moon and sun zenith angular distance (cosin given) and precompute what can be
-	// This funtion has to be called once before any call to get_luminance()
-	// Input : cos_dist_moon_zenith = cos(angular distance between moon and zenith)
-	//		   cos_dist_sun_zenith  = cos(angular distance between sun and zenith)
-	void set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zenith);
+	//! Set the moon and sun zenith angular distance (cosin given) and precompute what can be
+	//! This funtion has to be called once before any call to get_luminance()
+	//! @param cos_dist_moon_zenith cos(angular distance between moon and zenith)
+	//! @param cos_dist_sun_zenith cos(angular distance between sun and zenith)
+	void setSunMoon(float cos_dist_moon_zenith, float cos_dist_sun_zenith);
 
-	// Compute the luminance at the given position
-	// Inputs : cos_dist_moon = cos(angular distance between moon and the position)
-	//			cos_dist_sun  = cos(angular distance between sun  and the position)
-	//			cos_dist_zenith = cos(angular distance between zenith and the position)
-	float get_luminance(float cos_dist_moon,
-	                    float cos_dist_sun,
-	                    float cos_dist_zenith) const;
+	//! Compute the luminance at the given position
+	//! @param cos_dist_moon cos(angular distance between moon and the position)
+	//! @param cos_dist_sun cos(angular distance between sun  and the position)
+	//! @param cos_dist_zenith cos(angular distance between zenith and the position)
+	float getLuminance(float cos_dist_moon, float cos_dist_sun, float cos_dist_zenith) const;
 
 private:
 	float air_mass_moon;	// Air mass for the Moon
@@ -66,7 +72,6 @@ private:
 	float b_night_term;
 	float b_moon_term1;
 	float b_twilight_term;
-
 };
 
 #endif // _SKYBRIGHT_H_

@@ -51,14 +51,14 @@ inline float fastAcos(float x)
 
 Skybright::Skybright() : SN(1.f)
 {
-	set_date(2003, 8, 0);
-	set_loc(M_PI_4, 1000., 25.f, 40.f);
-	set_sun_moon(0.5, 0.5);
+	setDate(2003, 8, 0);
+	setLocation(M_PI_4, 1000., 25.f, 40.f);
+	setSunMoon(0.5, 0.5);
 }
 
 // month : 1=Jan, 12=Dec
 // moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-void Skybright::set_date(int year, int month, float moon_phase)
+void Skybright::setDate(int year, int month, float moon_phase)
 {
 	mag_moon = -12.73f + 1.4896903f * std::fabs(moon_phase) + 0.04310727f * std::pow(moon_phase, 4.f);
 
@@ -69,7 +69,7 @@ void Skybright::set_date(int year, int month, float moon_phase)
 }
 
 
-void Skybright::set_loc(float latitude, float altitude, float temperature, float relative_humidity)
+void Skybright::setLocation(float latitude, float altitude, float temperature, float relative_humidity)
 {
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
@@ -84,7 +84,7 @@ void Skybright::set_loc(float latitude, float altitude, float temperature, float
 
 // Set the moon and sun zenith angular distance (cosin given)
 // and precompute what can be
-void Skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zenith)
+void Skybright::setSunMoon(float cos_dist_moon_zenith, float cos_dist_sun_zenith)
 {
 	// Air mass for Moon
 	if (cos_dist_moon_zenith<0) air_mass_moon = 40.f;
@@ -114,7 +114,7 @@ void Skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 // Inputs : cos_dist_moon = cos(angular distance between moon and the position)
 //			cos_dist_sun  = cos(angular distance between sun  and the position)
 //			cos_dist_zenith = cos(angular distance between zenith and the position)
-float Skybright::get_luminance(float cos_dist_moon,
+float Skybright::getLuminance(float cos_dist_moon,
                                float cos_dist_sun,
                                float cos_dist_zenith) const
 {
