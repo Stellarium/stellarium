@@ -137,6 +137,8 @@ void StelCore::preDraw()
 	
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	skyDrawer->preDraw();
 }
 
 

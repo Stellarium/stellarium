@@ -35,6 +35,7 @@
 #include "Observer.hpp"
 #include "StelIniParser.hpp"
 #include "SFont.hpp"
+#include "SkyDrawer.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -183,7 +184,7 @@ void LandscapeMgr::update(double deltaTime)
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
-	eye->setWorldAdaptationLuminance(3.75+atmosphere->getAverageLuminance()*3.5);
+	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, prj->getViewportWidth()*prj->getViewportHeight());
 	
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
