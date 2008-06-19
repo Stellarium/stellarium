@@ -244,6 +244,15 @@ bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 
 void SkyDrawer::preDrawPointSource()
 {
+	assert(nbPointSources==0);
+}
+
+// Finalize the drawing of point sources
+void SkyDrawer::postDrawPointSource()
+{
+	if (nbPointSources==0)
+		return;
+	
 	glDisable(GL_LIGHTING);
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
@@ -260,14 +269,6 @@ void SkyDrawer::preDrawPointSource()
 		texHalo->bind();
 		glEnable(GL_TEXTURE_2D);
 	}
-	
-}
-
-// Finalize the drawing of point sources
-void SkyDrawer::postDrawPointSource()
-{
-	if (nbPointSources==0)
-		return;
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -291,24 +292,24 @@ void SkyDrawer::postDrawPointSource()
 }
 
 // Draw a point source halo.
-bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
+bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const Vec3f& color)
 {	
 	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
 		return false;
 	
 	// Random coef for star twinkling
-	const float tw = flagStarTwinkle ? (1.-twinkleAmount*rand()/RAND_MAX) : 1.0;
+	const float tw = flagStarTwinkle ? (1.f-twinkleAmount*rand()/RAND_MAX) : 1.f;
 	
 	if (flagPointStar)
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		glColor3fv(colorTable[b_v]*(rc_mag[1]*tw));
+		glColor3fv(color*(rc_mag[1]*tw));
 		prj->drawPoint2d(x, y);
 	}
 	else
 	{
 		// Store the drawing instructions in the vertex arrays
-		colorGrid[nbPointSources*4+3] = (colorTable[b_v]*(rc_mag[1]*tw));		
+		colorGrid[nbPointSources*4+3] = color*(rc_mag[1]*tw);		
 		const double radius = rc_mag[0];
 		Vec2f* v = &(verticesGrid[nbPointSources*4]);
 		v->set(x-radius,y-radius); ++v;
@@ -329,6 +330,23 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], unsig
 // Draw a disk source halo.
 bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Vec3f& color)
 {
+	glDisable(GL_LIGHTING);
+	// Blending is really important. Otherwise faint stars in the vicinity of
+	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	
+	if (getFlagPointStar())
+	{
+		glDisable(GL_TEXTURE_2D);
+		glPointSize(0.1);
+	}
+	else
+	{
+		texHalo->bind();
+		glEnable(GL_TEXTURE_2D);
+	}
+	
 	float rc_mag[2];
 	if (computeRCMag(mag,rc_mag)==false)
 		return false;
@@ -367,13 +385,25 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 	
 	glEnable(GL_CULL_FACE);
 	
-	//float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
-	//float aLum = eye->adaptLuminanceScaled(surfLuminance);
+	float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
+	float aLum = eye->adaptLuminanceScaled(surfLuminance/1000);
+	//reportLuminanceInFov(surfLuminance/1000, illuminatedArea/(60.*60.)*(core->getProjection()->getPixelPerRadAtCenter()* core->getProjection()->getPixelPerRadAtCenter()*M_PI/180.*M_PI/180.));
+	
+	if (aLum<=1.f)
+	{
+		tempRCMag[0]=0.f;
+		tempRCMag[1]=0.f;
+	}
+	else
+	{
+		tempRCMag[0] = std::sqrt(aLum-1.f);
+		tempRCMag[1] = 1.f;
+	}
 	
 	if (lighting)
 	{
 		glEnable(GL_LIGHTING);
-		const float diffuse[4] = {2,2,2,1};
+		const float diffuse[4] = {aLum,aLum,aLum,1};
 		glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
 	}
 	else
@@ -384,15 +414,37 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 }
 
 // Terminate drawing of a 3D model, draw the halo
-void SkyDrawer::postDrawSky3dModel(double x, double y, const Vec3f& color)
+void SkyDrawer::postDrawSky3dModel(double x, double y, float mag, const Vec3f& color)
 {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_CULL_FACE);
 	
 	// Now draw the halo according the object brightness
-	
+// 	preDrawPointSource();
+// 	bool save = getFlagTwinkle();
+// 	setFlagTwinkle(false);
+	//drawPointSource(x,y,tempRCMag,color);
+// 	setFlagTwinkle(save);
+// 	postDrawPointSource();
 }
-	
+
+// Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
+void SkyDrawer::reportLuminanceInFov(double lum, float area)
+{
+	float fact = (area>=100.f) ? 1.f : area/100.f;
+	fact*=fact*fact;
+	if ((fact*lum) > maxLum)
+		maxLum = fact*lum;
+}
+
+void SkyDrawer::preDraw()
+{
+	eye->setWorldAdaptationLuminance(maxLum);
+	// Re-initialize for next stage
+	maxLum = 0;
+}
+
+
 // Set the parameters so that the stars disapear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void SkyDrawer::setBortleScale(int bIndex)
@@ -607,10 +659,4 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		colorTable[i][0] *=1./1.3;
 		colorTable[i][1] *=1./1.2;
 	}
-}
-
-// Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
-void SkyDrawer::reportLuminanceInFov(double lum, float area)
-{
-	
 }

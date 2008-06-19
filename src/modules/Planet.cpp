@@ -116,7 +116,7 @@ QString Planet::getInfoString(const Navigator * nav) const
 		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 	oss << "</h2>";
 
-	oss << q_("Magnitude: <b>%1</b>").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2) << "<br>";
+	oss << q_("Magnitude: <b>%1</b>").arg(getMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	Vec3d equPos = getObsEquatorialPos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
@@ -164,7 +164,7 @@ QString Planet::getShortInfoString(const Navigator * nav) const
 	if (sphere_scale != 1.f)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 
-	oss << "  " << q_("Magnitude: %1").arg(compute_magnitude(nav->getObserverHelioPos()), 0, 'f', 2);
+	oss << "  " << q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2);
 
 	Vec3d equPos = getObsEquatorialPos(nav);
 	oss << "  " << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 5);
@@ -470,18 +470,19 @@ double Planet::get_phase(Vec3d obs_pos) const
 	return (1.0 - acos(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 }
 
-float Planet::compute_magnitude(Vec3d obs_pos) const 
+float Planet::getMagnitude(const Navigator * nav) const 
 {
+	Vec3d obs_pos = nav->getObserverHelioPos();
 	const double sq = obs_pos.lengthSquared();
 	if (parent == 0) {
 		// sun
-		return -26.73f + 2.5f*log10f(sq);
+		return -26.73f + 2.5f*std::log10(sq);
 	}
 	const Vec3d heliopos = get_heliocentric_ecliptic_pos();
 	const double Rq = heliopos.lengthSquared();
 	const double pq = (obs_pos - heliopos).lengthSquared();
 	const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
-	const double phase = (1.0 - acos(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+	const double phase = (1.0 - std::acos(cos_chi)/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	double F = 2.0 * albedo * radius * radius * phase / (3.0*pq*Rq);
 
 	// Check if the satellite is inside the inner shadow of the parent planet:
@@ -497,7 +498,7 @@ float Planet::compute_magnitude(Vec3d obs_pos) const
 			// compute d = distance from satellite center to border
 			// of inner shadow. d>0 means inside the shadow cone.
 			double d = sun_radius - sun_minus_parent_radius*quot
-			- sqrt( (1.0-sun_minus_parent_radius/sqrt(parent_Rq))
+			- std::sqrt( (1.0-sun_minus_parent_radius/sqrt(parent_Rq))
 			* (Rq-pos_times_parent_pos*quot) );
 			if (d >= radius) 
 			{
@@ -509,23 +510,18 @@ float Planet::compute_magnitude(Vec3d obs_pos) const
 				// The satellite is partly inside the inner shadow,
 				// compute a fantasy value for the magnitude:
 				d /= radius;
-				F *= (0.5 - (asin(d)+d*sqrt(1.0-d*d))/M_PI);
+				F *= (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
 			}
 		}
 	}
 
-	const double rval = -26.73 - 2.5 * log10(F);
+	const double rval = -26.73 - 2.5 * std::log10(F);
 	//qDebug() << "Planet(" << getEnglishName()
-	//         << ")::compute_magnitude(" << obs_pos << "): "
+	//         << ")::getMagnitude(" << obs_pos << "): "
 	//         << "phase: " << phase
 	//         << ",F: " << F
 	//         << ",rval: " << rval;
 	return rval;
-}
-
-float Planet::getMagnitude(const Navigator * nav) const
-{
-	return compute_magnitude(nav->getObserverHelioPos());
 }
 
 void Planet::set_big_halo(const QString& halotexfile)
@@ -539,7 +535,7 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = radius;
 	if (rings)
 		rad = rings->get_size();
-	return std::atan(rad*sphere_scale*2./getObsEquatorialPos(core->getNavigation()).length()) * 180./M_PI;
+	return std::atan2(rad*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -631,7 +627,7 @@ double Planet::draw(StelCore* core, bool stencil)
 		{
 			SkyDrawer* skyDrawer = core->getSkyDrawer();
 			skyDrawer->preDrawPointSource();
-			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), compute_magnitude(nav->getObserverHelioPos()), color);
+			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), getMagnitude(nav), color);
 			skyDrawer->postDrawPointSource();
 		}
 		if (tex_big_halo) draw_big_halo(core);
@@ -700,6 +696,7 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	float surfArcMin2 = getAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
 	
+	//qDebug() << nameI18;
 	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);
 	
 	if (tex_map)
@@ -718,7 +715,7 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	glShadeModel(GL_SMOOTH);
 	core->getProjection()->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
 	glShadeModel(GL_FLAT);
-	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], color);
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], getMagnitude(core->getNavigation()), color);
 }
 
 void Planet::draw_big_halo(const StelCore* core)
@@ -765,7 +762,7 @@ void Planet::draw_big_halo(const StelCore* core)
 	{
 		float rc_mag[2];
 		
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(compute_magnitude(nav->getObserverHelioPos()), rc_mag)==false)
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(getMagnitude(nav), rc_mag)==false)
 			return;
 		rc_mag[0]=MY_MIN(rc_mag[0]*0.008, 10000);
 		glBlendFunc(GL_ONE, GL_ONE);

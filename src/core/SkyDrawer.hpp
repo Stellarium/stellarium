@@ -58,10 +58,12 @@ public:
 	//! @param x the x position of the object on the screen
 	//! @param y the y position of the object on the screen
 	//! @param mag the source magnitude
-	//! @param b_v the source B-V
+	//! @param b_v the source B-V index
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(double x, double y, float mag, float b_v);
-	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v);
+	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
+		{return drawPointSource(x, y, rc_mag, colorTable[b_v]);}
+	
+	bool drawPointSource(double x, double y, const float rc_mag[2], const Vec3f& color);
 	
 	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
 	//! point source because the flux is spread on the disk area
@@ -83,7 +85,7 @@ public:
 	//! @param x the x position of the object centroid in pixel
 	//! @param y the y position of the object centroid in pixel
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(double x, double y, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(double x, double y, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -97,6 +99,9 @@ public:
 	//! @param lum luminance in cd/m^2
 	//! @param area on-screen area in pixel^2
 	void reportLuminanceInFov(double lum, float area);
+	
+	//! To be called before the drawing stage starts
+	void preDraw();
 	
 	//! Compute the luminance for an extended source with the given surface brightness
 	//! @param sb Surface brightness in V magnitude/arcmin^2
@@ -221,12 +226,23 @@ private:
 	//! The scaling applied to input luminance before they are converted by the ToneReproducer
 	double inScale;
 	
-	// Variables used for GL optimization
+	// Variables used for GL optimization when displaying point sources
+	//! Buffer for storing the vertex array data
 	Vec2f* verticesGrid;
+	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
+	//! Buffer for storing the texture coordinate array data
 	Vec2f* textureGrid;
+	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
+	//! Maximum number of sources which can be stored in the buffers
 	unsigned int maxPointSources;
+	
+	//! The maximum transformed luminance to apply at the next update
+	float maxLum;
+	float maxLumDraw;
+	
+	float tempRCMag[2];
 };
 
 #endif
