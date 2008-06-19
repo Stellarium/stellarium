@@ -19,6 +19,7 @@
 #include <cmath>
 #include <cassert>
 #include <QDebug>
+#include "StelUtils.hpp"
 
 #include <config.h>
 #ifndef HAVE_POW10
@@ -29,7 +30,7 @@
 
 #include "Skybright.hpp"
 
-/// Compute exp(x) for small x
+//! Compute exp(x) for small x
 inline float fastExp(float x)
 {
 	return (x>=0)?
@@ -37,12 +38,14 @@ inline float fastExp(float x)
 		1.f / fastExp(-x);
 }
 
-/// Compute acos(x)
+//! Compute acos(x)
+//! The taylor serie is not accurate around x=1 and x=-1
 inline float fastAcos(float x)
 {
 	return M_PI/2.f - (
 		x + 1.f/6.f * x*x*x + 3.f/40.f * x*x*x*x*x +
 		5.f/112.f * x*x*x*x*x*x*x
+		//105.f/3456.f * x*x*x*x*x*x*x*x*x
 	);
 }
 
@@ -115,14 +118,9 @@ float Skybright::get_luminance(float cos_dist_moon,
                                float cos_dist_sun,
                                float cos_dist_zenith) const
 {
-	float dist_moon,dist_sun,dist_zenith;
+	float dist_sun,dist_zenith;
 	
     // catch rounding errors here or end up with white flashes in some cases
-
-	if (cos_dist_moon <= -1.f) {cos_dist_moon = -1.f;dist_moon = M_PI;}
-	else if (cos_dist_moon >= 1.f) {cos_dist_moon = 1.f;dist_moon = 0.f;}
-	else dist_moon = fastAcos(cos_dist_moon);
-
 	if (cos_dist_sun <= -1.f) {cos_dist_sun = -1.f;dist_sun = M_PI;}
 	else if (cos_dist_sun >= 1.f) {cos_dist_sun = 1.f;dist_sun = 0.f;}
 	else dist_sun = fastAcos(cos_dist_sun);
@@ -146,17 +144,23 @@ float Skybright::get_luminance(float cos_dist_moon,
 	const float Ktrimed = K> 0.05f ? K : 0.05f;
 	const float b_twilight = pow10(b_twilight_term + 0.063661977f * dist_zenith/Ktrimed) * (1.7453293f / dist_sun) * (1.f-bKX);
 
-	// 27/08/2003 : Decide increase moonlight for more halo effect...
-	// took out 20070223 Rob :	b_moon *= 2.f;
-
 	// Total sky brightness
 	float b_total = ((b_twilight<b_daylight) ? b_twilight : b_daylight);
 
 	// Moonlight brightness, don't compute if less than 1% daylight
 	if ((b_moon_term1 * (1.f - bKX) * (28860205.1341274269 * C3 + 440000.f * (1.f - C3)))/b_total>0.01f)
 	{
-		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0007f)
-			+ pow10(6.15f - (dist_moon+0.001f) * 1.43239f)
+		float dist_moon;
+		if (cos_dist_moon <= -1.f) {cos_dist_moon = -1.f;dist_moon = M_PI;}
+		else if (cos_dist_moon >= 1.f) {cos_dist_moon = 1.f;dist_moon = 0.f;}
+		else
+		{
+			// Because the accuracy of our power serie is bad around 1, call the real acos if it's the case
+			dist_moon = cos_dist_moon > 0.99 ? std::acos(cos_dist_moon) : fastAcos(cos_dist_moon);
+		}
+		
+		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0005f)	// The last 0.0005 should be 0, but it causes too fast brightness change
+			+ pow10(6.15f - dist_moon * 1.43239f)
 			+ 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
 		float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 		b_total += b_moon;
