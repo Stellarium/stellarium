@@ -44,7 +44,6 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	
 	setMaxFov(180.f);
 	setMinFov(0.1f);
-	setMaxMag(30.f);
 	update(0);
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -57,14 +56,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	setMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
 	
 	bool ok=true;
-	setMaxMag(conf->value("stars/mag_converter_max_mag",30.0).toDouble(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/mag_converter_max_mag",30.0);
-		setMaxMag(30.0);
-		ok = true;
-	}
-	
+
 	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
@@ -188,13 +180,6 @@ float SkyDrawer::surfacebrightnessToLuminance(float sb)
 // Compute RMag and CMag from magnitude for a point source.
 bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 {
-	// Real world magnitude limit (independent of FOV)
-	if (mag > max_mag)
-	{
-		rc_mag[0] = rc_mag[1] = 0.f;
-		return false;
-	}
-
 	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
 	rc_mag[0]*=starLinearScale;
 	

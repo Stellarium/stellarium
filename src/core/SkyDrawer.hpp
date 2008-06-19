@@ -146,6 +146,17 @@ public slots:
 	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
 	bool getFlagPointStar(void) const {return flagPointStar;}
 	
+	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
+	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+	void setBortleScale(int index);
+	//! Get the current Bortle scale index
+	int getBortleScale() const {return bortleScaleIndex;}
+	
+	//! Get the magnitude of the currently faintest visible point source
+	float getLimitMagnitude() const {return limitMagnitude;}
+	
+private:
+	
 	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return max_fov;}
 	//! Set SkyDrawer maximum FOV.
@@ -161,23 +172,6 @@ public slots:
 	//! But when FOV gets smaller than this value, the stars do not become
 	//! brighter any more. Must be <= 60.0.
 	void setMinFov(float fov) {min_fov = (fov > 60.f) ? 60.f : fov;}
-	
-	//! Get SkyDrawer maximum magnitude.
-	float getMaxMag(void) const {return max_mag;}
-	//! Set SkyDrawer maximum magnitude.
-	//! Stars/planet halos, whose original (unshifted) magnitude is greater than this value will not be drawn.
-	void setMaxMag(float mag) {max_mag = mag;}
-	
-	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
-	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	void setBortleScale(int index);
-	//! Get the current Bortle scale index
-	int getBortleScale() const {return bortleScaleIndex;}
-	
-	//! Get the magnitude of the currently faintest visible point source
-	float getLimitMagnitude() const {return limitMagnitude;}
-	
-private:
 	
 	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
 	void setInputScale(double in) {inScale = in;}
@@ -198,7 +192,7 @@ private:
 	Projector* prj;
 	ToneReproducer* eye;
 	
-	float max_fov, min_fov, max_mag, lnfov_factor;
+	float max_fov, min_fov, lnfov_factor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
