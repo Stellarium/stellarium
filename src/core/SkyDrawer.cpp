@@ -32,6 +32,7 @@
 
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25)
+#define MAX_LINEAR_RADIUS 8.f
 
 SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 {
@@ -41,7 +42,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	inScale = 1.;
 	bortleScaleIndex = 3;
 	limitMagnitude = -100.f;
-	
+	oldLum=-1;
 	setMaxFov(180.f);
 	setMinFov(0.1f);
 	update(0);
@@ -52,7 +53,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
-	setMaxFov(conf->value("stars/mag_converter_max_fov",60.0).toDouble());
+	setMaxFov(conf->value("stars/mag_converter_max_fov",70.0).toDouble());
 	setMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
 	
 	bool ok=true;
@@ -107,6 +108,7 @@ void SkyDrawer::init()
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
+	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
 }
 
 void SkyDrawer::update(double deltaTime)
@@ -130,10 +132,10 @@ void SkyDrawer::update(double deltaTime)
 	
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
-	lnfov_factor = std::log(2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
+	lnfov_factor = std::log(1./50.*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 	
 	// Precompute
-	starLinearScale = std::pow(2.1f*starAbsoluteScaleF, 1.3f/2.f*starRelativeScale);
+	starLinearScale = std::pow(35.f*2.0f*starAbsoluteScaleF, 1.40f/2.f*starRelativeScale);
 	
 	// Compute the current limit magnitude by dichotomy
 	float a=-26.f;
@@ -165,22 +167,27 @@ void SkyDrawer::update(double deltaTime)
 	}
 }
 
-// Compute the log of the luminance for a point source with the given mag for the current FOV
+// Compute the ln of the luminance for a point source with the given mag for the current FOV
 float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 {
 	return -0.92103f*(mag + 12.12331f) + lnfov_factor;
 }
 
+float SkyDrawer::pointSourceLuminanceToMag(float lum)
+{
+	return (std::log(lum) - lnfov_factor)/-0.92103f - 12.12331f;
+}
+
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
 float SkyDrawer::surfacebrightnessToLuminance(float sb)
 {
-	return 2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
+	return 2.*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
 }
 
 // Compute RMag and CMag from magnitude for a point source.
 bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 {
-	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.3f/2.f);
+	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
 	rc_mag[0]*=starLinearScale;
 	
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
@@ -190,38 +197,25 @@ bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 		return false;
 	}
 	
-	if (flagPointStar)
+	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
+	// And we compensate the difference of brighteness with cmag
+	if (rc_mag[0]<1.2f)
 	{
 		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] < 0.05f)
+		if (rc_mag[1] < 0.07f)
 		{
-			// 0.05f
 			rc_mag[0] = rc_mag[1] = 0.f;
 			return false;
 		}
+		rc_mag[0] = 1.2f;
 	}
 	else
 	{
-		// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-		// And we compensate the difference of brighteness with cmag
-		if (rc_mag[0]<1.2f)
+		// cmag:
+		rc_mag[1] = 1.0f;
+		if (rc_mag[0]>MAX_LINEAR_RADIUS)
 		{
-			rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-			if (rc_mag[1] < 0.07f)
-			{
-				rc_mag[0] = rc_mag[1] = 0.f;
-				return false;
-			}
-			rc_mag[0] = 1.2f;
-		}
-		else
-		{
-			// cmag:
-			rc_mag[1] = 1.0f;
-			if (rc_mag[0]>8.f)
-			{
-				rc_mag[0]=8.f+2.f*std::sqrt(1.f+rc_mag[0]-8.f)-2.f;
-			}
+			rc_mag[0]=MAX_LINEAR_RADIUS+std::sqrt(1.f+rc_mag[0]-MAX_LINEAR_RADIUS)-1.f;
 		}
 	}
 	return true;
@@ -230,14 +224,6 @@ bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
 void SkyDrawer::preDrawPointSource()
 {
 	assert(nbPointSources==0);
-}
-
-// Finalize the drawing of point sources
-void SkyDrawer::postDrawPointSource()
-{
-	if (nbPointSources==0)
-		return;
-	
 	glDisable(GL_LIGHTING);
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
@@ -251,9 +237,17 @@ void SkyDrawer::postDrawPointSource()
 	}
 	else
 	{
-		texHalo->bind();
 		glEnable(GL_TEXTURE_2D);
 	}
+}
+
+// Finalize the drawing of point sources
+void SkyDrawer::postDrawPointSource()
+{
+	if (nbPointSources==0)
+		return;
+	
+	texHalo->bind();
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -279,7 +273,7 @@ void SkyDrawer::postDrawPointSource()
 // Draw a point source halo.
 bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const Vec3f& color)
 {	
-	if (rc_mag[0]<=0.f || rc_mag[1]<=0.f)
+	if (rc_mag[0]<=0.f)
 		return false;
 	
 	// Random coef for star twinkling
@@ -301,6 +295,28 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 		v->set(x+radius,y-radius); ++v;
 		v->set(x+radius,y+radius); ++v;
 		v->set(x-radius,y+radius); ++v;
+		
+		// If the rmag is big, draw a big halo
+		if (radius>MAX_LINEAR_RADIUS+5)
+		{
+			float cmag = (radius-(MAX_LINEAR_RADIUS+5))/30;
+			float rmag = 150.f;
+			if (cmag>1.f)
+				cmag = 1.f;
+
+			texBigHalo->bind();
+			glEnable(GL_TEXTURE_2D);
+			glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+
+			glBegin(GL_QUADS);
+				glTexCoord2i(0,0); glVertex2f(x-rmag,y-rmag);
+				glTexCoord2i(1,0); glVertex2f(x+rmag,y-rmag);
+				glTexCoord2i(1,1); glVertex2f(x+rmag,y+rmag);
+				glTexCoord2i(0,1); glVertex2f(x-rmag,y+rmag);
+			glEnd();
+		}
+		
+		
 		++nbPointSources;
 		if (nbPointSources>=maxPointSources)
 		{
@@ -312,83 +328,16 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 }
 
 
-// Draw a disk source halo.
-bool SkyDrawer::drawDiskSource(double x, double y, double r, float mag, const Vec3f& color)
-{
-	glDisable(GL_LIGHTING);
-	// Blending is really important. Otherwise faint stars in the vicinity of
-	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	
-	if (getFlagPointStar())
-	{
-		glDisable(GL_TEXTURE_2D);
-		glPointSize(0.1);
-	}
-	else
-	{
-		texHalo->bind();
-		glEnable(GL_TEXTURE_2D);
-	}
-	
-	float rc_mag[2];
-	if (computeRCMag(mag,rc_mag)==false)
-		return false;
-
-	if (getFlagPointStar())
-	{
-		if (r<=1.f)
-		{
-			glColor3fv(color*rc_mag[1]);
-			prj->drawPoint2d(x, y);
-		}
-	}
-	else
-	{
-		if (r<1.f) r=1.f;
-		rc_mag[1] *= 0.5*rc_mag[0]/(r*r*r);
-		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
-
-		if (rc_mag[0]<r)
-		{
-			rc_mag[1]*= (rc_mag[0]/r);
-			rc_mag[0] = r;
-		}
-		glColor3fv(color*rc_mag[1]);
-		prj->drawSprite2dMode(x, y, rc_mag[0]*2);
-	}
-	return true;
-}
-
-
 void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighting)
 {
 	// Set the main source of light to be the sun
 	const Vec3d sun_pos = core->getNavigation()->get_helio_to_eye_mat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
 	
-	glEnable(GL_CULL_FACE);
-	
-	float surfLuminance = surfacebrightnessToLuminance(mag + std::log10(illuminatedArea)/2.5f);
-	float aLum = eye->adaptLuminanceScaled(surfLuminance/1000);
-	//reportLuminanceInFov(surfLuminance/1000, illuminatedArea/(60.*60.)*(core->getProjection()->getPixelPerRadAtCenter()* core->getProjection()->getPixelPerRadAtCenter()*M_PI/180.*M_PI/180.));
-	
-	if (aLum<=1.f)
-	{
-		tempRCMag[0]=0.f;
-		tempRCMag[1]=0.f;
-	}
-	else
-	{
-		tempRCMag[0] = std::sqrt(aLum-1.f);
-		tempRCMag[1] = 1.f;
-	}
-	
 	if (lighting)
 	{
 		glEnable(GL_LIGHTING);
-		const float diffuse[4] = {aLum,aLum,aLum,1};
+		const float diffuse[4] = {2.,2.,2.,1};
 		glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
 	}
 	else
@@ -399,33 +348,156 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 }
 
 // Terminate drawing of a 3D model, draw the halo
-void SkyDrawer::postDrawSky3dModel(double x, double y, float mag, const Vec3f& color)
+void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color)
 {
+	if (mag<-20)
+	{
+		// TODO sun
+		return;
+	}
+	
 	glDisable(GL_LIGHTING);
-	glDisable(GL_CULL_FACE);
+	
+	// Compute the surface magnitude per arcmin^2.
+	const float pixPerRad = core->getProjection()->getPixelPerRadAtCenter();
+	float surfaceMag = mag + std::log10(illuminatedArea)/2.5f;
+	//mag = MY_MAX(mag, surfaceMag);
+	
+	//mag = MY_MAX(mag, pointSourceLuminanceToMag(surfacebrightnessToLuminance(surfaceMag)));
+	//qDebug() << mag << pointSourceLuminanceToMag(surfacebrightnessToLuminance(surfaceMag));
+	// qDebug() << eye->getWorldAdaptationLuminance() << eye->getInputScale() << pointSourceMagToLuminance(mag) <<  eye->adaptLuminanceScaled(pointSourceMagToLuminance(mag));
+	
+	
+	// Assume a disk shape
+	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
+	//float modelLuminance = reverseComputeRCMag(pixRadius);
+	//qDebug() << surfLuminance << pointSourceLuminance << modelLuminance;
+	
+	// Convert the luminance back to magnitude
+	//float fakePointSourceMag = pointSourceLuminanceToMag(MY_MIN(surfLuminance, pointSourceLuminance));
 	
 	// Now draw the halo according the object brightness
-// 	preDrawPointSource();
-// 	bool save = getFlagTwinkle();
-// 	setFlagTwinkle(false);
-	//drawPointSource(x,y,tempRCMag,color);
-// 	setFlagTwinkle(save);
-// 	postDrawPointSource();
+	bool save = getFlagTwinkle();
+	setFlagTwinkle(false);
+	
+	float rcm[2];
+	computeRCMag(mag, rcm);
+	
+	// We now have the radius and luminosity of the small halo
+	// If the disk of the planet is big enough to be visible, we should adjust the eye adaptation luminance
+	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
+
+	float tStart = 8.f;
+	float tStop = 18.f;
+	float truncated=0.f;
+	if (pixRadius<tStart)
+	{
+		if (rcm[0]>tStart*3.)
+		{
+			truncated = rcm[0]-tStart*3.;
+			rcm[0]=tStart*3.;
+		}
+	}
+	else
+	{
+		if (rcm[0]>pixRadius*3.)
+		{
+			truncated = rcm[0]-pixRadius*3.;
+			rcm[0]=pixRadius*3.;
+		}
+	}
+	
+	// Fade the halo away when the disk is too big
+	if (pixRadius>=tStop)
+	{
+		rcm[1]=0.f;
+	}
+	if (pixRadius>tStart && pixRadius<tStop)
+	{
+		rcm[1]=(tStop-pixRadius)/(tStop-tStart);
+	}
+	
+	if (truncated>0.f)
+	{
+		float wl = findWorldLumForMag(mag, rcm[0]);
+		//qDebug() << wl;
+		if (wl>0)
+		{
+			reportLuminanceInFov(MY_MIN(wl/50, 700000));
+		}
+	}
+	
+	preDrawPointSource();
+	drawPointSource(x,y,rcm,color);
+	postDrawPointSource();
+	
+	setFlagTwinkle(save);
 }
 
-// Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
-void SkyDrawer::reportLuminanceInFov(double lum, float area)
+float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 {
-	float fact = (area>=100.f) ? 1.f : area/100.f;
-	fact*=fact*fact;
-	if ((fact*lum) > maxLum)
-		maxLum = fact*lum;
+	const float saveLum = eye->getWorldAdaptationLuminance();	// save
+	
+	// Compute the luminance by dichotomy
+	float a=0.001f;
+	float b=500000.f;
+	float rcmag[2];
+	rcmag[0]=-99;
+	float curLum = 500.f;
+	int safety=0;
+	while (std::fabs(rcmag[0]-targetRadius)>0.1)
+	{
+		eye->setWorldAdaptationLuminance(curLum);
+		computeRCMag(mag, rcmag);
+		if (rcmag[0]<=targetRadius)
+		{
+			float tmp = curLum;
+			curLum=(a+curLum)/2;
+			b=tmp;
+		}
+		else
+		{
+			float tmp = curLum;
+			curLum=(b+curLum)/2;
+			a=tmp;
+		}
+		++safety;
+		if (safety>50)
+		{
+			if (curLum>490000.f)
+			{
+				curLum = 500000.f;
+			}
+			else
+			{
+				curLum=-1;
+			}
+			break;
+		}
+	}
+	
+	eye->setWorldAdaptationLuminance(saveLum);	// restore
+	
+	return curLum;
+}
+
+// Report that an object of luminance lum is currently displayed
+void SkyDrawer::reportLuminanceInFov(double lum)
+{
+	if (lum > maxLum)
+	{
+		if (oldLum<0)
+			oldLum=lum;
+		maxLum = lum;// oldLum+(lum-oldLum)*0.1;
+	}
 }
 
 void SkyDrawer::preDraw()
 {
 	eye->setWorldAdaptationLuminance(maxLum);
+	//qDebug() << maxLum;
 	// Re-initialize for next stage
+	oldLum = maxLum;
 	maxLum = 0;
 }
 
@@ -443,7 +515,7 @@ void SkyDrawer::setBortleScale(int bIndex)
 	if (bIndex>9)
 	{
 		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
-		bIndex = 19;
+		bIndex = 9;
 	}
 	
 	bortleScaleIndex = bIndex;
@@ -451,7 +523,7 @@ void SkyDrawer::setBortleScale(int bIndex)
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at 60 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {6.40, 4.90, 3.28, 2.12, 1.51, 1.08, 0.91, 0.67, 0.52};
-	setInputScale(bortleToInScale[bIndex-1]);
+	//setInputScale(bortleToInScale[bIndex-1]);
 }
 
 Vec3f SkyDrawer::colorTable[128] = {

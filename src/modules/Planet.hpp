@@ -119,9 +119,7 @@ public:
 	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
 	// Draw the Planet
-	// Return the squared distance in pixels between the current and the
-	// previous position this planet was drawn at.
-	double draw(StelCore* core, bool stencil);
+	void draw(StelCore* core);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -231,6 +229,9 @@ public:
 protected:
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const Navigator * nav) const;
+	
+	// Draw the 3d model. Call the proper functions if there are rings etc..
+	void draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz);
 	
 	// Draw the 3D sphere
 	void draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz);
