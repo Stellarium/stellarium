@@ -194,6 +194,9 @@ public:
 	//! Get the Planet object pointer for Earth's moon.
 	Planet* getMoon(void) const {return moon;}
 	
+	//! Determine if a lunar eclipse is close at hand?
+	bool near_lunar_eclipse();
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -255,7 +258,6 @@ private:
 	SFont& planet_name_font;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
-	bool near_lunar_eclipse(const Navigator * nav, Projector * prj);
 	
 	// draw earth shadow on moon for lunar eclipses
 	void draw_earth_shadow(const Navigator * nav, Projector * prj);  

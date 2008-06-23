@@ -539,22 +539,19 @@ double Planet::getAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-double Planet::draw(StelCore* core, bool stencil)
+void Planet::draw(StelCore* core)
 {
 	if (hidden)
-		return 0;
+		return;
 
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	Mat4d mat = Mat4d::translation(ecliptic_pos)
-              * rot_local_to_parent;
+	Mat4d mat = Mat4d::translation(ecliptic_pos) * rot_local_to_parent;
 	const Planet *p = parent;
 	while (p && p->parent)
 	{
-		mat = Mat4d::translation(p->ecliptic_pos)
-		    * mat
-		    * p->rot_local_to_parent;
+		mat = Mat4d::translation(p->ecliptic_pos) * mat * p->rot_local_to_parent;
 		p = p->parent;
 	}
 
@@ -564,9 +561,11 @@ double Planet::draw(StelCore* core, bool stencil)
 	const Vec3d sun_pos = nav->get_helio_to_eye_mat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
 
-	if (this == nav->getHomePlanet()) {
-		if (rings) rings->draw(prj,mat,1000.0);
-		return 0;
+	if (this == nav->getHomePlanet())
+	{
+		if (rings)
+			rings->draw(prj,mat,1000.0);
+		return;
 	}
 
 
@@ -598,50 +597,78 @@ double Planet::draw(StelCore* core, bool stencil)
 			draw_hints(core);
 		}
 
-		if (screen_sz>1)
-		{
-			if(rings) {
-				const double dist = getObsEquatorialPos(nav).length();
-				double z_near = 0.9*(dist - rings->get_size());
-				double z_far  = 1.1*(dist + rings->get_size());
-				if (z_near < 0.0) z_near = 0.0;
-				double n,f;
-				prj->get_clipping_planes(&n,&f); // Save clipping planes
-				prj->set_clipping_planes(z_near,z_far);
-				glClear(GL_DEPTH_BUFFER_BIT);
-				glEnable(GL_DEPTH_TEST);
-				draw_sphere(core,mat,screen_sz);
-				rings->draw(prj,mat,screen_sz);
-				glDisable(GL_DEPTH_TEST);
-				prj->set_clipping_planes(n,f);  // Restore old clipping planes
-			}
-			else
-			{
-				if(stencil) glEnable(GL_STENCIL_TEST);
-				draw_sphere(core, mat, screen_sz);
-				if(stencil) glDisable(GL_STENCIL_TEST);
-			}
-		}
+		draw3dModel(core,mat,screen_sz);
 
 		if (!tex_big_halo)
 		{
-			SkyDrawer* skyDrawer = core->getSkyDrawer();
-			skyDrawer->preDrawPointSource();
-			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), getMagnitude(nav), color);
-			skyDrawer->postDrawPointSource();
+// 			SkyDrawer* skyDrawer = core->getSkyDrawer();
+// 			skyDrawer->preDrawPointSource();
+// 			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), getMagnitude(nav), color);
+// 			skyDrawer->postDrawPointSource();
 		}
 		if (tex_big_halo) draw_big_halo(core);
 	}
-	double distanceSquared =
-		(screenPos[0] - previousScreenPos[0]) *
-		(screenPos[0] - previousScreenPos[0]) +
-		(screenPos[1] - previousScreenPos[1]) *
-		(screenPos[1] - previousScreenPos[1]);
-	previousScreenPos = screenPos;
-	return distanceSquared;
+	return;
 }
 
+void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
+{
+	Navigator* nav = core->getNavigation();
+	Projector* prj = core->getProjection();
 	
+	// Prepare openGL lighting parameters according to luminance
+	float surfArcMin2 = getAngularSize(core)*60;
+	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
+	
+	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);
+	
+	if (screen_sz>1.)
+	{
+		if (rings)
+		{
+			const double dist = getObsEquatorialPos(nav).length();
+			double z_near = 0.9*(dist - rings->get_size());
+			double z_far  = 1.1*(dist + rings->get_size());
+			if (z_near < 0.0) z_near = 0.0;
+			double n,f;
+			prj->get_clipping_planes(&n,&f); // Save clipping planes
+			prj->set_clipping_planes(z_near,z_far);
+			glClear(GL_DEPTH_BUFFER_BIT);
+			glEnable(GL_DEPTH_TEST);
+			draw_sphere(core,mat,screen_sz);
+			glDisable(GL_LIGHTING);
+			rings->draw(prj,mat,screen_sz);
+			glEnable(GL_LIGHTING);
+			glDisable(GL_DEPTH_TEST);
+			prj->set_clipping_planes(n,f);  // Restore old clipping planes
+		}
+		else
+		{
+			SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+			if (this==ssm->getMoon() && ssm->near_lunar_eclipse())
+			{
+				// TODO: moon magnitude label during eclipse isn't accurate...
+				// special case to update stencil buffer for drawing lunar eclipses
+				glClear(GL_STENCIL_BUFFER_BIT);
+				glClearStencil(0x0);
+
+				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+				glEnable(GL_STENCIL_TEST);
+				draw_sphere(core, mat, screen_sz);
+				glDisable(GL_STENCIL_TEST);
+			}
+			else
+			{
+				draw_sphere(core, mat, screen_sz);
+			}
+		}
+	}
+	
+	//qDebug() << nameI18;
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getMagnitude(core->getNavigation()), color);
+}
+
 void glCircle(const Vec3d& pos, float radius)
 {
 	float angle, facets;
@@ -691,13 +718,7 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 {
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-
-	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getAngularSize(core)*60;
-	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
-	
-	//qDebug() << nameI18;
-	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);
+	glEnable(GL_CULL_FACE);
 	
 	if (tex_map)
 		tex_map->bind();
@@ -715,7 +736,7 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	glShadeModel(GL_SMOOTH);
 	core->getProjection()->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet);
 	glShadeModel(GL_FLAT);
-	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], getMagnitude(core->getNavigation()), color);
+	glDisable(GL_CULL_FACE);
 }
 
 void Planet::draw_big_halo(const StelCore* core)
@@ -723,42 +744,6 @@ void Planet::draw_big_halo(const StelCore* core)
 	const Navigator* nav = core->getNavigation();
 	const ToneReproducer* eye = core->getToneReproducer();
 	
-	if (englishName=="Moon")
-	{
-		float cmag;
-		float rmag;
-	
-		cmag = std::sqrt(eye->adaptLuminanceScaled(std::exp(-0.92103f*(getMagnitude(nav) + 12.12331f)) * 108064.73f*0.0001));
-		rmag = big_halo_size/2;
-		float screen_r = getOnScreenSize(core)*8;	// Size in pixel at which the halo should start to disapear
-		if (cmag>1.f) cmag = 1.f;
-		if (rmag<screen_r)
-		{
-			cmag*=rmag/screen_r;
-			rmag = screen_r;
-		}
-		//qDebug() << "cmag=" << cmag << " screen_r="<< screen_r;
-	
-		if (tex_big_halo) tex_big_halo->bind();
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-	
-		// drawSprite2dMode does not work for the big halo, perhaps it is too big?
-		glBegin(GL_QUADS);
-			glTexCoord2i(0,0);
-			glVertex2f(screenPos[0]-rmag,screenPos[1]-rmag);
-			glTexCoord2i(1,0);
-			glVertex2f(screenPos[0]+rmag,screenPos[1]-rmag);
-			glTexCoord2i(1,1);
-			glVertex2f(screenPos[0]+rmag,screenPos[1]+rmag);
-			glTexCoord2i(0,1);
-			glVertex2f(screenPos[0]-rmag,screenPos[1]+rmag);
-		glEnd();
-	}
-	else
 	{
 		float rc_mag[2];
 		

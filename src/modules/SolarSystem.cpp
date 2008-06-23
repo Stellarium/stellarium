@@ -783,24 +783,7 @@ void SolarSystem::draw(StelCore* core)
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		if (*iter==moon && near_lunar_eclipse(nav, prj))
-		{
-			// TODO: moon magnitude label during eclipse isn't accurate...
-
-			// special case to update stencil buffer for drawing lunar eclipses
-			glClear(GL_STENCIL_BUFFER_BIT);
-			glClearStencil(0x0);
-
-			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-
-			(*iter)->draw(core, 1);
-		}
-		else
-		{
-			(*iter)->draw(core, 0);
-		}
-
+		(*iter)->draw(core);
 		++iter;
 	}
 
@@ -1160,7 +1143,7 @@ void SolarSystem::update(double delta_time)
 
 
 // is a lunar eclipse close at hand?
-bool SolarSystem::near_lunar_eclipse(const Navigator * nav, Projector *prj)
+bool SolarSystem::near_lunar_eclipse()
 {
 	// TODO: could replace with simpler test
 
