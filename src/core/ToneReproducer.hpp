@@ -67,6 +67,7 @@ public:
 	//! Indoor Lighting : 100    cd/m^2
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
+	float getWorldAdaptationLuminance() const {return Lwa;}
 	
 	//! Set the global scale applied to input lumiances, i.e before the adaptation
 	//! It is the parameter to modify to simulate aperture*exposition time
@@ -93,12 +94,28 @@ public:
 		return std::pow((float)(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
 	}
 
+	//! Return adapted luminance from display to world
+	//! @param displayLuminance the display luminance to convert in cd/m^2
+	//! @return the converted world luminance in cd/m^2
+	float reverseAdaptLuminance(float displayLuminance) const
+	{
+		return std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
+	}
+	
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
 	//! @param worldLuminance the world luminance to convert in cd/m^2
 	//! @return the converted display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
 	float adaptLuminanceScaled(float worldLuminance) const
 	{
 		return adaptLuminance(worldLuminance)*oneOverMaxdL;
+	}
+	
+	//! Return adapted luminance from display to world with 1 corresponding to full display white
+	//! @param displayLuminance the display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	//! @return the converted world luminance in cd/m^2
+	float reverseAdaptLuminanceScaled(float displayLuminance) const
+	{
+		return reverseAdaptLuminance(displayLuminance/oneOverMaxdL);
 	}
 	
 	//! Return adapted ln(luminance) from world to display with 1 corresponding to full display white
