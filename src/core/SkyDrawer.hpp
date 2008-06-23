@@ -85,7 +85,7 @@ public:
 	//! @param x the x position of the object centroid in pixel
 	//! @param y the y position of the object centroid in pixel
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(double x, double y, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -97,8 +97,7 @@ public:
 	//! This information is used to determine the world adaptation luminance
 	//! This method should be called during the update operations of the main loop
 	//! @param lum luminance in cd/m^2
-	//! @param area on-screen area in pixel^2
-	void reportLuminanceInFov(double lum, float area);
+	void reportLuminanceInFov(double lum);
 	
 	//! To be called before the drawing stage starts
 	void preDraw();
@@ -147,15 +146,19 @@ public slots:
 	bool getFlagPointStar(void) const {return flagPointStar;}
 	
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
+	//! The limit is valid only at a given zoom level (around 60 deg)
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	void setBortleScale(int index);
 	//! Get the current Bortle scale index
 	int getBortleScale() const {return bortleScaleIndex;}
 	
 	//! Get the magnitude of the currently faintest visible point source
+	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
+	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
 	
 private:
+	float reverseComputeRCMag(float rmag) const;
 	
 	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return max_fov;}
@@ -183,11 +186,20 @@ private:
 	//! @return the luminance in log(cd/m^2)
 	inline float pointSourceMagToLuminance(float mag) const {return std::exp(pointSourceMagToLnLuminance(mag));}
 	
+	//! Compute the V magnitude for a point source with the given luminance for the current FOV
+	//! @param lum the luminance in cd/m^2
+	//! @return V magnitude of the point source
+	float pointSourceLuminanceToMag(float lum);
+	
 	//! Compute the log of the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source
 	//! @return the luminance in cd/m^2
 	float pointSourceMagToLnLuminance(float mag) const;
 	
+	//! Find the world adaptation luminance to use so that a point source of magnitude mag
+	//! is displayed with a halo of size targetRadius
+	float findWorldLumForMag(float mag, float targetRadius);
+			
 	StelCore* core;
 	Projector* prj;
 	ToneReproducer* eye;
@@ -234,9 +246,14 @@ private:
 	
 	//! The maximum transformed luminance to apply at the next update
 	float maxLum;
+	//! The previously used world luminance
+	float oldLum;
 	float maxLumDraw;
 	
 	float tempRCMag[2];
+	
+	//! Big halo texture
+	STextureSP texBigHalo;
 };
 
 #endif

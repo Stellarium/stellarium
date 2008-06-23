@@ -173,7 +173,7 @@ float Skybright::getLuminance(float cos_dist_moon,
 		b_total += b_night;
 	}
 	
-	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2;
+	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389.*2. *1.5;
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
 }

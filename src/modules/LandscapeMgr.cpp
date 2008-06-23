@@ -184,7 +184,7 @@ void LandscapeMgr::update(double deltaTime)
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
-	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, prj->getViewportWidth()*prj->getViewportHeight());
+	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5);
 	
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
