@@ -76,13 +76,13 @@ void MilkyWay::draw(StelCore* core)
 	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
 	Vec3f c(0.34165, 0.429666, 0.63586);
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(12.5);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5);
 	
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 	
 	// Bound a maximum luminance
-	aLum = MY_MIN(0.38f, aLum);
+	aLum = MY_MIN(0.38f, aLum*2.);
 	
 	c*=aLum;
 	
