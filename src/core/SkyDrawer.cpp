@@ -55,6 +55,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
 	setMaxFov(conf->value("stars/mag_converter_max_fov",70.0).toDouble());
 	setMinFov(conf->value("stars/mag_converter_min_fov",0.1).toDouble());
+	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	
 	bool ok=true;
 
@@ -427,7 +428,8 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
+			if (flagLuminanceAdaptation)
+				reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
  	}
 	

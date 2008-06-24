@@ -157,6 +157,11 @@ public slots:
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
 
+	//! Set the value of the eye adaptation flag
+	void setFlagLuminanceAdaptation(bool b) {flagLuminanceAdaptation=b;}
+	//! Get the current value of eye adaptation flag
+	bool getFlagLuminanceAdaptation(void) const {return flagLuminanceAdaptation;}
+
 private:
 	// Debug
 	float reverseComputeRCMag(float rmag) const;
@@ -259,6 +264,8 @@ private:
 	//! Big halo texture
 	STextureSP texBigHalo;
 	STextureSP texSunHalo;
+
+	bool flagLuminanceAdaptation;
 };
 
 #endif

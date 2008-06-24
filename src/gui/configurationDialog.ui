@@ -148,7 +148,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -410,7 +410,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -478,7 +478,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -526,6 +526,19 @@ color: darkgray;
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="adaptationCheckbox" >
+            <property name="toolTip" >
+             <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
+            </property>
+            <property name="text" >
+             <string>Simulate luminance adaptation</string>
+            </property>
+            <property name="checked" >
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
@@ -546,7 +559,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>472</height>
+           <height>470</height>
           </rect>
          </property>
          <attribute name="title" >
