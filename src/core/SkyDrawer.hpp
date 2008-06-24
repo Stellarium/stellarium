@@ -254,6 +254,7 @@ private:
 	
 	//! Big halo texture
 	STextureSP texBigHalo;
+	STextureSP texSunHalo;
 };
 
 #endif
