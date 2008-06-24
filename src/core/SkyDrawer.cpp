@@ -388,7 +388,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	float tStart = 2.f;
-	float tStop = 8.f;
+	float tStop = 6.f;
 	bool truncated=false;
 	
 	float maxHaloRadius = MY_MAX(tStart*3., pixRadius*3.);
@@ -413,7 +413,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			reportLuminanceInFov(MY_MIN(500., MY_MIN(wl/90, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
+			reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
 	}
 	
@@ -452,7 +452,7 @@ float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 			a=tmp;
 		}
 		++safety;
-		if (safety>50)
+		if (safety>20)
 		{
 			if (curLum>490000.f)
 			{
@@ -478,14 +478,13 @@ void SkyDrawer::reportLuminanceInFov(double lum)
 	{
 		if (oldLum<0)
 			oldLum=lum;
-		maxLum = lum;// oldLum+(lum-oldLum)*0.1;
+		maxLum = oldLum+(lum-oldLum)*0.4;
 	}
 }
 
 void SkyDrawer::preDraw()
 {
 	eye->setWorldAdaptationLuminance(maxLum);
-	//qDebug() << maxLum;
 	// Re-initialize for next stage
 	oldLum = maxLum;
 	maxLum = 0;
