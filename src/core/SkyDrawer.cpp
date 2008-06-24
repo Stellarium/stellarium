@@ -299,7 +299,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 		// If the rmag is big, draw a big halo
 		if (radius>MAX_LINEAR_RADIUS+5)
 		{
-			float cmag = (radius-(MAX_LINEAR_RADIUS+5))/30;
+			float cmag = MY_MIN(rc_mag[1],(radius-(MAX_LINEAR_RADIUS+5.))/30.);
 			float rmag = 150.f;
 			if (cmag>1.f)
 				cmag = 1.f;
@@ -387,24 +387,15 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	// If the disk of the planet is big enough to be visible, we should adjust the eye adaptation luminance
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
-	float tStart = 8.f;
-	float tStop = 18.f;
-	float truncated=0.f;
-	if (pixRadius<tStart)
+	float tStart = 2.f;
+	float tStop = 8.f;
+	bool truncated=false;
+	
+	float maxHaloRadius = MY_MAX(tStart*3., pixRadius*3.);
+	if (rcm[0]>maxHaloRadius)
 	{
-		if (rcm[0]>tStart*3.)
-		{
-			truncated = rcm[0]-tStart*3.;
-			rcm[0]=tStart*3.;
-		}
-	}
-	else
-	{
-		if (rcm[0]>pixRadius*3.)
-		{
-			truncated = rcm[0]-pixRadius*3.;
-			rcm[0]=pixRadius*3.;
-		}
+		truncated = true;
+		rcm[0]=maxHaloRadius+std::sqrt(rcm[0]-maxHaloRadius);
 	}
 	
 	// Fade the halo away when the disk is too big
@@ -417,13 +408,12 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		rcm[1]=(tStop-pixRadius)/(tStop-tStart);
 	}
 	
-	if (truncated>0.f)
+	if (truncated==true)
 	{
 		float wl = findWorldLumForMag(mag, rcm[0]);
-		//qDebug() << wl;
 		if (wl>0)
 		{
-			reportLuminanceInFov(MY_MIN(wl/50, 700000));
+			reportLuminanceInFov(MY_MIN(500., MY_MIN(wl/90, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
 	}
 	
