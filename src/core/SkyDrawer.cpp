@@ -365,6 +365,8 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
 	
+	bool noStarHalo = false;
+	
 	if (mag<-15.f)
 	{
 		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
@@ -385,7 +387,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 			glTexCoord2i(0,1); glVertex2f(x-rmag,y+rmag);
 		glEnd();
 		
-		return;
+		noStarHalo = true;
 	}
 	
 	// Now draw the halo according the object brightness
@@ -429,10 +431,12 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		}
  	}
 	
-	preDrawPointSource();
-	drawPointSource(x,y,rcm,color);
-	postDrawPointSource();
-	
+	if (!noStarHalo)
+	{
+		preDrawPointSource();
+		drawPointSource(x,y,rcm,color);
+		postDrawPointSource();
+	}
 	setFlagTwinkle(save);
 }
 
