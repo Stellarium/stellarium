@@ -109,6 +109,7 @@ void SkyDrawer::init()
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture("star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("haloLune.png");
+	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("halo.png");
 }
 
 void SkyDrawer::update(double deltaTime)
@@ -297,7 +298,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 		v->set(x-radius,y+radius); ++v;
 		
 		// If the rmag is big, draw a big halo
-		if (radius>MAX_LINEAR_RADIUS+5)
+		if (radius>MAX_LINEAR_RADIUS+5.f)
 		{
 			float cmag = MY_MIN(rc_mag[1],(radius-(MAX_LINEAR_RADIUS+5.))/30.);
 			float rmag = 150.f;
@@ -350,31 +351,34 @@ void SkyDrawer::preDrawSky3dModel(double illuminatedArea, float mag, bool lighti
 // Terminate drawing of a 3D model, draw the halo
 void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, float mag, const Vec3f& color)
 {
-	if (mag<-20)
-	{
-		// TODO sun
-		return;
-	}
-	
 	glDisable(GL_LIGHTING);
 	
-	// Compute the surface magnitude per arcmin^2.
 	const float pixPerRad = core->getProjection()->getPixelPerRadAtCenter();
-	float surfaceMag = mag + std::log10(illuminatedArea)/2.5f;
-	//mag = MY_MAX(mag, surfaceMag);
-	
-	//mag = MY_MAX(mag, pointSourceLuminanceToMag(surfacebrightnessToLuminance(surfaceMag)));
-	//qDebug() << mag << pointSourceLuminanceToMag(surfacebrightnessToLuminance(surfaceMag));
-	// qDebug() << eye->getWorldAdaptationLuminance() << eye->getInputScale() << pointSourceMagToLuminance(mag) <<  eye->adaptLuminanceScaled(pointSourceMagToLuminance(mag));
-	
-	
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
-	//float modelLuminance = reverseComputeRCMag(pixRadius);
-	//qDebug() << surfLuminance << pointSourceLuminance << modelLuminance;
 	
-	// Convert the luminance back to magnitude
-	//float fakePointSourceMag = pointSourceLuminanceToMag(MY_MIN(surfLuminance, pointSourceLuminance));
+	if (mag<-15.f)
+	{
+		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
+		// as the sun as seen from earth
+		texSunHalo->bind();
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+		glEnable(GL_TEXTURE_2D);
+		float rmag = 160.f*(mag+15)/-11.;
+		float cmag = 1.f;
+		if (rmag<pixRadius*3.f+100.)
+			cmag = MY_MAX(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		glBegin(GL_QUADS);
+			glTexCoord2i(0,0); glVertex2f(x-rmag,y-rmag);
+			glTexCoord2i(1,0); glVertex2f(x+rmag,y-rmag);
+			glTexCoord2i(1,1); glVertex2f(x+rmag,y+rmag);
+			glTexCoord2i(0,1); glVertex2f(x-rmag,y+rmag);
+		glEnd();
+		
+		return;
+	}
 	
 	// Now draw the halo according the object brightness
 	bool save = getFlagTwinkle();
