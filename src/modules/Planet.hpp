@@ -144,7 +144,9 @@ public:
 
 	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
 	double get_phase(Vec3d obs_pos) const;
-
+	// Get the angular size of the spheroid of the planet (i.e. without the rings)
+	double getSpheroidAngularSize(const StelCore* core) const;
+				
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
