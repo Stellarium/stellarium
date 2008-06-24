@@ -30,6 +30,7 @@
 #include "StelCore.hpp"
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "SkyDrawer.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -108,6 +109,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(movement->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), movement, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+
+	// Tools tab
+	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
+	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 
 	// DEBUG tab
 	// connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInputScale(double)));
