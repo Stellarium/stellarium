@@ -582,11 +582,11 @@ void Planet::draw(StelCore* core)
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
 		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/getObsEquatorialPos(nav).length())/prj->getFov();
-		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
+		if (ang_dist==0.f)
+			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
 		draw_orbit(nav, prj);  // TODO - fade in here also...
-
 		draw_trail(nav, prj);
 
 		if (ang_dist>0.25)
@@ -598,15 +598,6 @@ void Planet::draw(StelCore* core)
 		}
 
 		draw3dModel(core,mat,screen_sz);
-
-		if (!tex_big_halo)
-		{
-// 			SkyDrawer* skyDrawer = core->getSkyDrawer();
-// 			skyDrawer->preDrawPointSource();
-// 			skyDrawer->drawDiskSource(screenPos[0], screenPos[1], getOnScreenSize(core), getMagnitude(nav), color);
-// 			skyDrawer->postDrawPointSource();
-		}
-		if (tex_big_halo) draw_big_halo(core);
 	}
 	return;
 }
