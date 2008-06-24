@@ -365,7 +365,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_TEXTURE_2D);
-		float rmag = 160.f*(mag+15)/-11.;
+		float rmag = 150.f*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = MY_MAX(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);

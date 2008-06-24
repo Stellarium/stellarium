@@ -169,9 +169,6 @@ public:
 
 	const Planet *get_parent(void) const {return parent;}
 
-	void set_big_halo(const QString& halotexfile);
-	void set_halo_size(float s) {big_halo_size = s;}
-
 	static void set_font(SFont* f) {planet_name_font = f;}
 	
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
@@ -239,9 +236,6 @@ protected:
 	// Draw the circle and name of the Planet
 	void draw_hints(const StelCore* core);
 
-	// Draw the big halo (for sun or moon)
-	void draw_big_halo(const StelCore* core);
-
 
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
@@ -260,9 +254,6 @@ protected:
 	Mat4d rot_local_to_parent;
 	float axis_rotation;            // Rotation angle of the Planet on it's axis
 	STextureSP tex_map;             // Planet map texture
-	STextureSP tex_big_halo;        // Big halo texture
-
-	float big_halo_size;            // Halo size on screen
 
 	Ring* rings;                    // Planet rings
 

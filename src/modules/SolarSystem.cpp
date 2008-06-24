@@ -670,13 +670,6 @@ void SolarSystem::loadPlanets()
 			p->set_rings(r);
 		}
 
-		QString bighalotexfile = pd.value(secname+"/tex_big_halo", "").toString();
-		if (!bighalotexfile.isEmpty())
-		{
-			p->set_big_halo(bighalotexfile);
-			p->set_halo_size(pd.value(secname+"/big_halo_size", 50.f).toDouble());
-		}
-
 		system_planets.push_back(p);
 		readOk++;
 	}
