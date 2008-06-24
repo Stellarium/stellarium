@@ -532,6 +532,12 @@ double Planet::getAngularSize(const StelCore* core) const
 	return std::atan2(rad*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
 }
 
+
+double Planet::getSpheroidAngularSize(const StelCore* core) const
+{
+	return std::atan2(radius*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
+}
+
 // Draw the Planet and all the related infos : name, circle etc..
 void Planet::draw(StelCore* core)
 {
@@ -602,12 +608,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 	Projector* prj = core->getProjection();
 	
 	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getAngularSize(core)*60;
-	if (rings)
-	{
-		// Temporary fix for saturn. Should be done cleanly by deriving Planet by RingedPlanet
-		surfArcMin2 = std::atan2(radius*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI*60;
-	}
+	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
 	
 	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);

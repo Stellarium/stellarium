@@ -412,14 +412,14 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		rcm[1]=(tStop-pixRadius)/(tStop-tStart);
 	}
 	
-	if (truncated==true)
-	{
+ 	if (truncated)
+ 	{
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
 			reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
-	}
+ 	}
 	
 	preDrawPointSource();
 	drawPointSource(x,y,rcm,color);
@@ -482,7 +482,8 @@ void SkyDrawer::reportLuminanceInFov(double lum)
 	{
 		if (oldLum<0)
 			oldLum=lum;
-		maxLum = oldLum+(lum-oldLum)*0.4;
+		float transitionSpeed = 0.3f;
+		maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* MY_MIN(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
 	}
 }
 
