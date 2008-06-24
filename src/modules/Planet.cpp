@@ -524,12 +524,6 @@ float Planet::getMagnitude(const Navigator * nav) const
 	return rval;
 }
 
-void Planet::set_big_halo(const QString& halotexfile)
-{
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex_big_halo = StelApp::getInstance().getTextureManager().createTexture(halotexfile);
-}
-
 double Planet::getAngularSize(const StelCore* core) const
 {
 	double rad = radius;
@@ -609,6 +603,11 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 	
 	// Prepare openGL lighting parameters according to luminance
 	float surfArcMin2 = getAngularSize(core)*60;
+	if (rings)
+	{
+		// Temporary fix for saturn. Should be done cleanly by deriving Planet by RingedPlanet
+		surfArcMin2 = std::atan2(radius*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI*60;
+	}
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
 	
 	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flag_lighting);
@@ -642,7 +641,6 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 				// special case to update stencil buffer for drawing lunar eclipses
 				glClear(GL_STENCIL_BUFFER_BIT);
 				glClearStencil(0x0);
-
 				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 				glEnable(GL_STENCIL_TEST);
@@ -730,50 +728,6 @@ void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)
 	glDisable(GL_CULL_FACE);
 }
 
-void Planet::draw_big_halo(const StelCore* core)
-{
-	const Navigator* nav = core->getNavigation();
-	const ToneReproducer* eye = core->getToneReproducer();
-	
-	{
-		float rc_mag[2];
-		
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(getMagnitude(nav), rc_mag)==false)
-			return;
-		rc_mag[0]=MY_MIN(rc_mag[0]*0.008, 10000);
-		glBlendFunc(GL_ONE, GL_ONE);
-		float screen_r = 0.25*getOnScreenSize(core);
-		if (screen_r<1.f) screen_r=1.f;
-		rc_mag[1] *= 0.5*rc_mag[0]/(screen_r*screen_r*screen_r);
-		if (rc_mag[1]>1.f) rc_mag[1] = 1.f;
-	
-		if (rc_mag[0]<screen_r)
-		{
-			rc_mag[1]*=rc_mag[0]/screen_r;
-			rc_mag[0] = screen_r;
-		}
-	
-		if (tex_big_halo) tex_big_halo->bind();
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*rc_mag[1], color[1]*rc_mag[1], color[2]*rc_mag[1]);
-	
-		screen_r = 0.3*rc_mag[0]; // just an arbitrary scaling
-		// drawSprite2dMode does not work for the big halo,
-		// perhaps it is too big?
-		glBegin(GL_QUADS);
-			glTexCoord2i(0,0);
-			glVertex2f(screenPos[0]-screen_r,screenPos[1]-screen_r);
-			glTexCoord2i(1,0);
-			glVertex2f(screenPos[0]+screen_r,screenPos[1]-screen_r);
-			glTexCoord2i(1,1);
-			glVertex2f(screenPos[0]+screen_r,screenPos[1]+screen_r);
-			glTexCoord2i(0,1);
-			glVertex2f(screenPos[0]-screen_r,screenPos[1]+screen_r);
-		glEnd();
-	}
-}
 
 Ring::Ring(double radius_min,double radius_max,const QString &texname)
      :radius_min(radius_min),radius_max(radius_max) 
