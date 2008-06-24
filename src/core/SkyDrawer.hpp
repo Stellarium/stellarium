@@ -156,10 +156,14 @@ public slots:
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
-	
+
 private:
+	// Debug
 	float reverseComputeRCMag(float rmag) const;
 	
+	//! Compute the current limit magnitude by dichotomy
+	float computeLimitMagnitude() const;
+			
 	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return max_fov;}
 	//! Set SkyDrawer maximum FOV.

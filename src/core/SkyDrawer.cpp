@@ -138,34 +138,42 @@ void SkyDrawer::update(double deltaTime)
 	// Precompute
 	starLinearScale = std::pow(35.f*2.0f*starAbsoluteScaleF, 1.40f/2.f*starRelativeScale);
 	
+	// update limit mag
+	limitMagnitude = computeLimitMagnitude();
+}
+
+// Compute the current limit magnitude by dichotomy
+float SkyDrawer::computeLimitMagnitude() const
+{
 	// Compute the current limit magnitude by dichotomy
 	float a=-26.f;
 	float b=30.f;
 	float rcmag[2];
-	limitMagnitude = 0.f;
+	float lim = 0.f;
 	int safety=0;
-	while (std::fabs(limitMagnitude-a)>0.05)
+	while (std::fabs(lim-a)>0.05)
 	{
-		computeRCMag(limitMagnitude, rcmag);
+		computeRCMag(lim, rcmag);
 		if (rcmag[0]<=0.f)
 		{
-			float tmp = limitMagnitude;
-			limitMagnitude=(a+limitMagnitude)/2;
+			float tmp = lim;
+			lim=(a+lim)/2;
 			b=tmp;
 		}
 		else
 		{
-			float tmp = limitMagnitude;
-			limitMagnitude=(b+limitMagnitude)/2;
+			float tmp = lim;
+			lim=(b+lim)/2;
 			a=tmp;
 		}
 		++safety;
 		if (safety>20)
 		{
-			limitMagnitude=-99;
+			lim=-99;
 			break;
 		}
 	}
+	return lim;
 }
 
 // Compute the ln of the luminance for a point source with the given mag for the current FOV
@@ -482,7 +490,8 @@ void SkyDrawer::reportLuminanceInFov(double lum)
 	{
 		if (oldLum<0)
 			oldLum=lum;
-		float transitionSpeed = 0.3f;
+		float transitionSpeed = 0.2f;
+		// Use a log law for smooth transitions
 		maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* MY_MIN(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
 	}
 }
@@ -514,11 +523,13 @@ void SkyDrawer::setBortleScale(int bIndex)
 	
 	bortleScaleIndex = bIndex;
 	
-	// These value have been calibrated by hand, looking at the faintest star in stellarium at 60 deg FOV
+	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	static const float bortleToInScale[9] = {6.40, 4.90, 3.28, 2.12, 1.51, 1.08, 0.91, 0.67, 0.52};
-	//setInputScale(bortleToInScale[bIndex-1]);
+	static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+	setInputScale(bortleToInScale[bIndex-1]);
 }
+
+
 
 Vec3f SkyDrawer::colorTable[128] = {
 	Vec3f(0.587877,0.755546,1.000000),
