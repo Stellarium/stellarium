@@ -406,9 +406,10 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 				const QString starname = s->getNameI18n();
 				if (!starname.isEmpty())
 				{
+					const float offset = (rcmag_table + 2*(s->mag))[0]*0.7;
 					const Vec3f& colorr = SkyDrawer::indexToColor(s->b_v)*0.75;
 					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);
-					prj->drawText(starFont,xy[0],xy[1], starname, 0, 4, 4, false);
+					prj->drawText(starFont,xy[0],xy[1], starname, 0, offset, offset, false);
 				}
 			}
 		}
