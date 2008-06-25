@@ -93,6 +93,7 @@ Planet::Planet(Planet *parent,
 	{
 		deltaJD = 0.001*JD_SECOND;
 	}
+	flagLabels = true;
 }
 
 Planet::~Planet()
@@ -590,13 +591,15 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 		draw_orbit(nav, prj);  // TODO - fade in here also...
 		draw_trail(nav, prj);
 
-		if (maxMagLabels>getMagnitude(nav) && ang_dist>0.25)
+		if (flagLabels && ang_dist>0.25 && maxMagLabels>getMagnitude(nav))
 		{
-			if (ang_dist>1.f) ang_dist = 1.f;
-			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
-			
-			draw_hints(core);
+			labelsFader=true;
 		}
+		else
+		{
+			labelsFader=false;
+		}
+		draw_hints(core);
 
 		draw3dModel(core,mat,screen_sz);
 	}
@@ -662,20 +665,19 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 
 void Planet::draw_hints(const StelCore* core)
 {
-	if (!labelsFader.getInterstate())
+	if (labelsFader.getInterstate()<=0.f)
 		return;
 
 	const Navigator* nav = core->getNavigation();
 	const Projector* prj = core->getProjection();
 	
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = 10.f + getOnScreenSize(core)/sphere_scale/2.f; // Shift for nameI18 printing
-
+	float tmp = 10.f + getOnScreenSize(core)/1.44; // Shift for nameI18 printing
 	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate());
 	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
-	if (!hint_fader.getInterstate())
+	if (hint_fader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
