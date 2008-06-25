@@ -119,7 +119,7 @@ public:
 	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
 	
 	// Draw the Planet
-	void draw(StelCore* core);
+	void draw(StelCore* core, float maxMagLabels);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet

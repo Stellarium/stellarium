@@ -87,7 +87,7 @@ public:
 	
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) {names_fader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
+	virtual void update(double deltaTime) {labelsFader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
 	
 	//! Translate text.
 	virtual void updateI18n();
@@ -138,19 +138,17 @@ public slots:
 	bool getFlagStars(void) const {return starsFader==true;}
 	
 	//! Set display flag for Star names (labels).
-	void setFlagNames(bool b) {names_fader=b;}
+	void setFlagLabels(bool b) {labelsFader=b;}
 	//! Get display flag for Star names (labels).
-	bool getFlagNames(void) const {return names_fader==true;}
+	bool getFlagLabels(void) const {return labelsFader==true;}
 	
-	//! Set display flag for Star Scientific names.
-	void setFlagStarsSciNames(bool b) {flagStarSciName=b;}
-	//! Get display flag for Star Scientific names.
-	bool getFlagStarsSciNames(void) const {return flagStarSciName;}
-	
-	//! Set maximum magnitude at which stars names are displayed.
-	void setMaxMagName(float b) {maxMagStarName=b;}
-	//! Get maximum magnitude at which stars names are displayed.
-	float getMaxMagName(void) const {return maxMagStarName;} 
+	//! Set the amount of star labels. The real amount is also proportional with FOV.
+	//! The limit is set in function of the stars magnitude
+	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	void setLabelsAmount(float a) {labelsAmount=a;}
+	//! Get the amount of star labels. The real amount is also proportional with FOV.
+	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	float getLabelsAmount(void) const {return labelsAmount;}
 	
 	//! Define font size to use for star names display.
 	void setFontSize(double newFontSize);
@@ -222,12 +220,11 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);
 	
-	LinearFader names_fader;
+	LinearFader labelsFader;
 	LinearFader starsFader;
 	
 	bool flagStarName;
-	bool flagStarSciName;
-	float maxMagStarName;
+	float labelsAmount;
 	bool gravityLabel;
 	
 	int max_geodesic_grid_level;

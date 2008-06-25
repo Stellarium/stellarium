@@ -423,13 +423,12 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		rcm[1]=(tStop-pixRadius)/(tStop-tStart);
 	}
 	
- 	if (truncated)
+	if (truncated && flagLuminanceAdaptation)
  	{
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			if (flagLuminanceAdaptation)
-				reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
+			reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
  	}
 	

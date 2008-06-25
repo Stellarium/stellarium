@@ -539,7 +539,7 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core)
+void Planet::draw(StelCore* core, float maxMagLabels)
 {
 	if (hidden)
 		return;
@@ -568,7 +568,6 @@ void Planet::draw(StelCore* core)
 		return;
 	}
 
-
 	// Compute the 2D position and check if in the screen
 	float screen_sz = getOnScreenSize(core);
 	float viewport_left = prj->getViewportPosX();
@@ -589,7 +588,7 @@ void Planet::draw(StelCore* core)
 		draw_orbit(nav, prj);  // TODO - fade in here also...
 		draw_trail(nav, prj);
 
-		if (ang_dist>0.25)
+		if (maxMagLabels>getMagnitude(nav) && ang_dist>0.25)
 		{
 			if (ang_dist>1.f) ang_dist = 1.f;
 			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
