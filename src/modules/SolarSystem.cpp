@@ -135,7 +135,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 	
 		glColor3f(1.0f,0.3f,0.3f);
 	
-		float size = obj->getOnScreenSize(core);
+		float size = obj->getOnScreenSize(core)*2;
 		size+=26.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
