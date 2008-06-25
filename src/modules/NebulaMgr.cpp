@@ -45,8 +45,8 @@
 
 #include "SkyImageTile.hpp"
 
-void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
-const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
+void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::label_color = c;}
+const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::label_color;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
 const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circle_color;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
@@ -192,7 +192,7 @@ void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
+	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
 	setCirclesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
 }
 
@@ -224,15 +224,15 @@ StelObject* NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-		try
-		{
-			loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
-			loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
-		}
-		catch (exception& e)
-		{
-			qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
-		}
+	try
+	{
+		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
+		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
+	}
+	catch (exception& e)
+	{
+		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
+	}
 }
 
 // Look for a nebulae by XYZ coords

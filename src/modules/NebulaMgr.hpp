@@ -133,9 +133,9 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 	
 	//! Set the color used to draw nebula labels.
-	void setNamesColor(const Vec3f& c);
+	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
-	const Vec3f &getNamesColor(void) const;
+	const Vec3f &getLabelsColor(void) const;
 	
 	//! Set the color used to draw the nebula circles.
 	void setCirclesColor(const Vec3f& c);

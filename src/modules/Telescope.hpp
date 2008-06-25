@@ -36,34 +36,35 @@ long long int GetNow(void);
 struct fd_set;
 #endif
 
-class Telescope : public StelObject {
+class Telescope : public StelObject
+{
 public:
-  static Telescope *create(const QString &url);
-  virtual ~Telescope(void) {}
-  QString getEnglishName(void) const {return name;}
-  QString getNameI18n(void) const {return nameI18n;}
-  QString getInfoString(const Navigator * nav) const;
-  QString getShortInfoString(const Navigator * nav) const;
-  QString getType(void) const {return "Telescope";}
-  virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
-  virtual bool isConnected(void) const = 0;
-  virtual bool hasKnownPosition(void) const = 0;
-    // all TCP (and all possible other style) communication shall be done in
-    // these functions:
-  virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
-  virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
-  void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
-  const std::list<double> &getOculars(void) const {return oculars;}
-  virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
+	static Telescope *create(const QString &url);
+	virtual ~Telescope(void) {}
+	QString getEnglishName(void) const {return name;}
+	QString getNameI18n(void) const {return nameI18n;}
+	QString getInfoString(const StelCore* core) const;
+	QString getShortInfoString(const StelCore* core) const;
+	QString getType(void) const {return "Telescope";}
+	virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
+	virtual bool isConnected(void) const = 0;
+	virtual bool hasKnownPosition(void) const = 0;
+	// all TCP (and all possible other style) communication shall be done in
+	// these functions:
+	virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
+	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
+	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
+	const std::list<double> &getOculars(void) const {return oculars;}
+	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
 protected:
-  Telescope(const QString &name);
-  QString nameI18n;
-  const QString name;
+	Telescope(const QString &name);
+	QString nameI18n;
+	const QString name;
 private:
-  bool isInitialized(void) const {return true;}
-  float getSelectPriority(const Navigator *nav) const {return -10.f;}
+	bool isInitialized(void) const {return true;}
+	float getSelectPriority(const Navigator *nav) const {return -10.f;}
 private:
-  std::list<double> oculars; // fov of the oculars
+	std::list<double> oculars; // fov of the oculars
 };
 
 
