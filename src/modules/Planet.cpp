@@ -41,6 +41,7 @@ SFont* Planet::planet_name_font = NULL;
 Vec3f Planet::label_color = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbit_color = Vec3f(1,0.6,1);
 Vec3f Planet::trail_color = Vec3f(1,0.7,0.7);
+STextureSP Planet::hintCircleTex;
 
 Planet::Planet(Planet *parent,
                const QString& englishName,
@@ -659,24 +660,6 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getMagnitude(core->getNavigation()), color);
 }
 
-void glCircle(const Vec3d& pos, float radius)
-{
-	float angle, facets;
-
-	if (radius < 2) facets = 6;
-	else facets = (int)(radius*3);
-	
-	glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINE_LOOP);
-	for (int i = 0; i < facets; i++)
-	{
-		angle = 2.0f*M_PI*i/facets;
-		glVertex3f(pos[0] + radius * sin(angle), pos[1] + radius * cos(angle), 0.0f);
-	}
-	glEnd();
-}
-
-
 void Planet::draw_hints(const StelCore* core)
 {
 	if (!labelsFader.getInterstate())
@@ -696,12 +679,13 @@ void Planet::draw_hints(const StelCore* core)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp);
+	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp*0.7);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glCircle(screenPos, 8);
+	Planet::hintCircleTex->bind();
+	prj->drawSprite2dMode(screenPos[0], screenPos[1], 22);
 }
 
 void Planet::draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz)

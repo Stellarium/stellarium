@@ -81,6 +81,7 @@ private:
 class Planet : public StelObject
 {
 public:
+	friend class SolarSystem;
 	Planet(Planet *parent,
 	       const QString& englishName,
 	       int flagHalo,
@@ -275,6 +276,8 @@ protected:
 
 	static SFont* planet_name_font; // Font for names
 	static Vec3f label_color;
+	
+	static STextureSP hintCircleTex;
 	
 	LinearFader hint_fader;
 	LinearFader labelsFader;
