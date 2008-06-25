@@ -296,7 +296,8 @@ void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	{
 		// just print details of the first item for now
 		StelCore* core = StelApp::getInstance().getCore();
-		text->setHtml(selected[0]->getInfoString(core));
+		QString s = selected[0]->getInfoString(core, StelObject::InfoStringGroup(StelObject::AllInfo));
+		text->setHtml(s);
 	}
 }
 

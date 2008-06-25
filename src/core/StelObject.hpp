@@ -41,6 +41,30 @@ void intrusive_ptr_release(StelObject* p);
 class StelObject : public GridObject
 {
 public:
+	//! @enum InfoStringGroup used as named bitfield flags as specifiers to 
+	//! filter results of getInfoString. The precise definition of these should
+	//! be documented in the getInfoString documentation for the derived classes
+	//! for all specifiers which ae defined in that derivative.
+	enum InfoStringGroup
+	{
+		Name          = 0x00000001, //!< An object's name
+		CatalogNumber = 0x00000002, //!< Catalog numbers
+		Magnitude     = 0x00000004, //!< Magnitude related data
+		RaDecJ2000    = 0x00000008, //!< The position (J2000 ref)
+		RaDec         = 0x00000010, //!< The position (Equ of date)
+		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance      = 0x00000040, //!< Info about an object's distance
+		Size          = 0x00000080, //!< Info about an object's size
+		Extra1        = 0x00000100, //!< Should be documented in the derived class
+		Extra2        = 0x00000200, //!< Should be documented in the derived class
+		Extra3        = 0x00000400  //!< Should be documented in the derived class
+	};
+
+	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
+	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDec|AltAzi|Distance|Size|Extra1|Extra2|Extra3);
+	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
+	static const InfoStringGroup BriefInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDec);
+
 	virtual ~StelObject(void) {}
 
 	//! Default implementation of the GridObject method
@@ -56,7 +80,7 @@ public:
 	virtual void release(void) {;}
 	
 	//! Write I18n information about the object in QString. 
-	virtual QString getInfoString(const StelCore *core) const = 0;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const = 0;
 	
 	//! The returned QString can typically be used for object labeling in the sky
 	virtual QString getShortInfoString(const StelCore *core) const = 0;
@@ -103,6 +127,7 @@ public:
 	//! Return the radius of a circle containing the object on screen
 	//! @return radius in pixel
 	float getOnScreenSize(const StelCore* core) const;
+
 };
 
 #endif

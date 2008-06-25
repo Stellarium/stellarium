@@ -43,7 +43,7 @@ public:
 	virtual ~Telescope(void) {}
 	QString getEnglishName(void) const {return name;}
 	QString getNameI18n(void) const {return nameI18n;}
-	QString getInfoString(const StelCore* core) const;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getShortInfoString(const StelCore* core) const;
 	QString getType(void) const {return "Telescope";}
 	virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;

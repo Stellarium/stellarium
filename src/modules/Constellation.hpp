@@ -47,7 +47,7 @@ private:
 	// StelObject method to override
    	//! Write I18n information about the object in string.
 	//! @param core a pointer to the StelCore object (unused).
-	virtual QString getInfoString(const StelCore* core) const
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
 		return getNameI18n() + "(" + getShortName() + "°";
 	}

@@ -31,7 +31,7 @@
 
 namespace BigStarCatalogExtension {
 
-QString StarWrapperBase::getInfoString(const StelCore *core) const
+QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
 	const Vec3d j2000_pos = getObsJ2000Pos(nav);
@@ -42,17 +42,25 @@ QString StarWrapperBase::getInfoString(const StelCore *core) const
 	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
 	QString str;
 	QTextStream oss(&str);
-	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-	oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-	oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
+
+	if (flags&Name)
+		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())) << "<br>";
+	if (flags&Magnitude)
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+	if (flags&RaDecJ2000)
+		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+	if (flags&RaDec)
+		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
 	
-	// calculate alt az
-	double az,alt;
-	StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
-	az = 3*M_PI - az;  // N is zero, E is 90 degrees
-	if(az > M_PI*2) az -= M_PI*2;    
-	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt));
+	if (flags&AltAzi)
+	{
+		// calculate alt az
+		double az,alt;
+		StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+		az = 3*M_PI - az;  // N is zero, E is 90 degrees
+		if(az > M_PI*2) az -= M_PI*2;    
+		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
+	}
 	
 	return str;
 }
@@ -70,7 +78,7 @@ QString StarWrapper1::getEnglishName(void) const
 	return StarWrapperBase::getEnglishName();
 }
 
-QString StarWrapper1::getInfoString(const StelCore *core) const
+QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
 	const Vec3d j2000_pos = getObsJ2000Pos(nav);
@@ -84,56 +92,71 @@ QString StarWrapper1::getInfoString(const StelCore *core) const
 	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 	if (s->hip)
 	{
-		oss << "<h2>";
+		if (flags&Name || flags&CatalogNumber)
+			oss << "<h2>";
+
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
-		if (commonNameI18!="" || sciName!="")
+
+		if (flags&Name)
 		{
-			oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-			if (commonNameI18!="" && sciName!="")
-				oss << "(";
-			oss << (sciName=="" ? "" : sciName);
-			if (commonNameI18!="" && sciName!="")
-				oss << ")";
+			if (commonNameI18!="" || sciName!="")
+			{
+				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
+				if (commonNameI18!="" && sciName!="")
+					oss << "(";
+				oss << (sciName=="" ? "" : sciName);
+				if (commonNameI18!="" && sciName!="")
+					oss << ")";
+
+			}
+		}
+		if (flags&CatalogNumber && flags&Name && (commonNameI18!="" || sciName!=""))
 			oss << " - ";
-		}
-		oss << "HP " << s->hip;
+
+		if (flags&CatalogNumber)
+			oss << "HP " << s->hip;
 		if (s->component_ids)
-		{
 			oss << " " << StarMgr::convertToComponentIds(s->component_ids);
-		}
-		oss << "</h2>";
+
+		if (flags&Name || flags&CatalogNumber)
+			oss << "</h2>";
 	}
 	
-	oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
-							QString::number(s->getBV(), 'f', 2)) << "<br>";
-	oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
-						StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
-						StelUtils::radToDmsStr(dec_equ)) << "<br>";
+	if (flags&Magnitude)
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
+		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
+	if (flags&RaDecJ2000)
+		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
+		                                    StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+	if (flags&RaDec)
+		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
+		                                          StelUtils::radToDmsStr(dec_equ)) << "<br>";
 	
-	// calculate alt az
-	double az,alt;
-	StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
-	az = 3*M_PI - az;  // N is zero, E is 90 degrees
-	if (az > M_PI*2)
-		az -= M_PI*2;    
-	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
-	
-	if (s->plx)
+	if (flags&AltAzi)
 	{
-		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
-		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2)
-				<< "<br>";
+		// calculate alt az
+		double az,alt;
+		StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+		az = 3*M_PI - az;  // N is zero, E is 90 degrees
+		if (az > M_PI*2)
+			az -= M_PI*2;    
+		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
 	}
 	
-	if (s->sp_int)
+	if (s->sp_int && flags&Extra1)
 	{
 		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int)) << "<br>";
 	}
+
+	if (flags&Distance)
+		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
+	
+	if (s->plx && flags&Extra2)
+		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
+
 	return str;
 }
-
 
 QString StarWrapper1::getShortInfoString(const StelCore *core) const
 {
