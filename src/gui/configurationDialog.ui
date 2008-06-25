@@ -615,9 +615,9 @@ color: darkgray;
             <property name="title" >
              <string>Selected Object Information</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_2" >
+            <layout class="QVBoxLayout" name="verticalLayout_5" >
              <item>
-              <widget class="QRadioButton" name="radioButton" >
+              <widget class="QRadioButton" name="allSelectedInfoRadio" >
                <property name="toolTip" >
                 <string>Whan an object is selected, display all of the information which is available for it.</string>
                </property>
@@ -627,12 +627,19 @@ color: darkgray;
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_2" >
+              <widget class="QRadioButton" name="shortSelectedInfoRadio" >
                <property name="toolTip" >
                 <string>Display only abbreviated information for selected objects.</string>
                </property>
                <property name="text" >
                 <string>Short information</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="noSelectedInfoRadio" >
+               <property name="text" >
+                <string>None</string>
                </property>
               </widget>
              </item>
