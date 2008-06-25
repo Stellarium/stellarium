@@ -83,8 +83,8 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
-	ui->starLabelCheckBox->setChecked(smgr->getFlagNames());
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagNames(bool)));
+	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
+	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
@@ -134,6 +134,9 @@ void ViewDialog::createDialogContent()
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+	
+	// Labels section
+	connect(ui->masterLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(masterLabelsValueChanged(int)));
 	
 	// Landscape section
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
@@ -202,7 +205,7 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
-	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagNames());
+	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagLabels());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Labels");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
@@ -346,4 +349,13 @@ void ViewDialog::shoutingStarsZHRChanged()
 			ui->zhrLabel->setText(q_("Highest rate ever (1966 Leonids)"));
 			break;
 	}
+}
+
+void ViewDialog::masterLabelsValueChanged(int v)
+{
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	float a= ((float)v)/10.f;
+	smgr->setLabelsAmount(a);
+	ssmgr->setLabelsAmount(a);
 }

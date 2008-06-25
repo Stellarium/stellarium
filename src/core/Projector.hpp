@@ -140,14 +140,15 @@ public:
 	
 	//! Get the horizontal viewport offset in pixels.
 	int getViewportPosX(void) const {return viewport_xywh[0];}
-	
 	//! Get the vertical viewport offset in pixels.
 	int getViewportPosY(void) const {return viewport_xywh[1];}
-	
 	//! Get the viewport width in pixels.
 	int getViewportWidth(void) const {return viewport_xywh[2];}
 	//! Get the viewport height in pixels.
 	int getViewportHeight(void) const {return viewport_xywh[3];}
+	
+	//! Get the maximum ratio between the viewport height and width
+	float getViewportRatio() const {return getViewportWidth()>getViewportHeight() ? getViewportWidth()/getViewportHeight() : getViewportHeight()/getViewportWidth();}
 	
 	//! Handle the resizing of the window.
 	void windowHasBeenResized(int width,int height);
@@ -174,12 +175,6 @@ public:
 	bool getViewportMaskDisk(void) const {return getMaskType()==Projector::DISK;}
 	//! Set whether no mask must be drawn over the viewport.
 	void setViewportMaskNone(void) {setMaskType(Projector::NONE);}
-	
-	//! Set the current OpenGL viewport to projector's viewport.
-	void applyViewport(void) const
-	{
-		glViewport(viewport_xywh[0], viewport_xywh[1], viewport_xywh[2], viewport_xywh[3]);
-	}	
 	
 	//! Set the clipping planes.
 	// TODO: A better explanation.
@@ -443,6 +438,7 @@ public slots:
 	void setInitFov(double fov);
 
 private:
+	
 	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 		

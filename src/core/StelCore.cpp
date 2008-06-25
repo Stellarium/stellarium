@@ -130,8 +130,8 @@ void StelCore::preDraw()
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.000001 ,50);
 
-	// Init viewport to current projector values
-	projection->applyViewport();
+	// Init GL viewport to current projector values
+	glViewport(projection->getViewportPosX(), projection->getViewportPosY(), projection->getViewportWidth(), projection->getViewportHeight());
 
 	projection->setCurrentFrame(Projector::FRAME_J2000);
 	
