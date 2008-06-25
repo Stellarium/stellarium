@@ -182,8 +182,8 @@ public:
 	void setFlagHints(bool b){hint_fader = b;}
 	bool getFlagHints(void) const {return hint_fader;}
 	
-	void setFlagLabels(bool b){labelsFader = b;}
-	bool getFlagLabels(void) const {return labelsFader;}
+	void setFlagLabels(bool b){flagLabels = b;}
+	bool getFlagLabels(void) const {return flagLabels;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -280,7 +280,8 @@ protected:
 	static STextureSP hintCircleTex;
 	
 	LinearFader hint_fader;
-	LinearFader labelsFader;
+	LinearFader labelsFader;	// Store the current state of the label for this planet
+	bool flagLabels;			// Define whether labels should be displayed
 	
 	bool hidden;  // useful for fake planets used as observation positions - not drawn or labeled
 };
