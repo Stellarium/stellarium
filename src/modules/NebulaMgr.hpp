@@ -135,17 +135,25 @@ public slots:
 	//! Set the color used to draw nebula labels.
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
-	const Vec3f &getLabelsColor(void) const;
+	const Vec3f& getLabelsColor(void) const;
 	
 	//! Set the color used to draw the nebula circles.
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
-	const Vec3f &getCirclesColor(void) const;
+	const Vec3f& getCirclesColor(void) const;
 	
 	//! Set flag for displaying nebulae even without textures.
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
 	//! Get flag for displaying nebulae without textures.
 	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
+	
+	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
+	//! The limit is set in function of the nebulae magnitude
+	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	void setLabelsAmount(float a) {labelsAmount=a;}
+	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
+	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	float getLabelsAmount(void) const {return labelsAmount;}
 	
 	//! Set maximum magnitude at which nebulae hints are displayed.
 	void setMaxMagHints(float f) {maxMagHints = f;}
@@ -181,7 +189,12 @@ private:
 	
 	TreeGrid nebGrid;
 	
-	float maxMagHints;			// Define maximum magnitude at which nebulae hints are displayed
+	// Define maximum magnitude at which nebulae hints are displayed
+	float maxMagHints;
+	
+	//! The amount of planets labels (between 0 and 10)
+	float labelsAmount;
+	
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	
 	STextureSP texPointer;			// The selection pointer texture

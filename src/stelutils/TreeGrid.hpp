@@ -81,7 +81,6 @@ private:
     
     // The last filter
     ConvexS filter;
-    
 };
 
 

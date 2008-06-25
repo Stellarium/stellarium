@@ -64,7 +64,7 @@ struct HalfSpace
 	double getArea() const {return 2.*M_PI*(1.-d);}
 	//! The direction unit vector
 	Vec3d n;
-	//! The cone radius in radian
+	//! The cos of cone radius
 	double d;
 };
 
@@ -178,7 +178,6 @@ public:
 //! We rewrite the intersect for ConvexPolygon
 inline bool intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
 {
-	//qDebug() << "intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)";
 	const ConvexS& c1 = cp1;
 	const ConvexS& c2 = cp2;
 	return !c1.areAllPointsOutsideOneSide(cp2) && !c2.areAllPointsOutsideOneSide(cp1);
