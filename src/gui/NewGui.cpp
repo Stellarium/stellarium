@@ -284,6 +284,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	text = new QGraphicsTextItem("", this);
 	object = NULL;
+	infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
 }
 
 void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -296,7 +297,7 @@ void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	{
 		// just print details of the first item for now
 		StelCore* core = StelApp::getInstance().getCore();
-		QString s = selected[0]->getInfoString(core, StelObject::InfoStringGroup(StelObject::AllInfo));
+		QString s = selected[0]->getInfoString(core, infoTextFilters);
 		text->setHtml(s);
 	}
 }

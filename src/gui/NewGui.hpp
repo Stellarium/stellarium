@@ -24,6 +24,7 @@
 #include "LocationDialog.hpp"
 #include "ViewDialog.hpp"
 #include "StelObjectType.hpp"
+#include "StelObject.hpp"
 #include "HelpDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
@@ -120,9 +121,13 @@ public:
 	InfoPanel(QGraphicsItem* parent);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
+	void setInfoTextFilters(const StelObject::InfoStringGroup& flags) {infoTextFilters=flags;}
+	const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
+
 private:
 	QGraphicsTextItem* text;
 	StelObjectP object;
+	StelObject::InfoStringGroup infoTextFilters;
 };
 
 class StelBarsPath : public QGraphicsPathItem
@@ -176,6 +181,8 @@ public:
 	
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
+
+	InfoPanel* getInfoPanel(void) { return infoPanel; }
 	
 private slots:
 	void updateBarsPos(qreal value);

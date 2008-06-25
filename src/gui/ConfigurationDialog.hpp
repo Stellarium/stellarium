@@ -39,6 +39,9 @@ protected:
 	Ui_configurationDialogForm* ui;
 
 private slots:
+	void setNoSelectedInfo(void);
+	void setAllSelectedInfo(void);
+	void setBriefSelectedInfo(void);
 	void languageChanged(const QString& languageCode);
 	void setStartupTimeMode(void);
 	void setDiskViewport(bool);
