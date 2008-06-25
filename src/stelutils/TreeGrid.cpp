@@ -69,7 +69,7 @@ TreeGrid::TreeGrid(unsigned int maxobj) : maxObjects(maxobj), filter()
 	for (int i=0;i<20;++i)
 	{
 		const int* corners = icosahedron_triangles[i];
-		children.push_back(ConvexPolygon(icosahedron_corners[corners[2]],icosahedron_corners[corners[1]], icosahedron_corners[corners[0]]));
+		children.push_back(ConvexPolygon(icosahedron_corners[corners[0]],icosahedron_corners[corners[2]], icosahedron_corners[corners[1]]));
 	}
 }
 
@@ -127,10 +127,10 @@ void TreeGrid::split(TreeGridNode& node)
 	Vec3d e2 = c0+c1;
 	e2.normalize();
 	
-	node.children.push_back(ConvexPolygon(e1,e2,c0));
-	node.children.push_back(ConvexPolygon(e0,c1,e2));
-	node.children.push_back(ConvexPolygon(c2,e0,e1));
-	node.children.push_back(ConvexPolygon(e2,e1,e0));
+	node.children.push_back(ConvexPolygon(e1,c0,e2));
+	node.children.push_back(ConvexPolygon(e0,e2,c1));
+	node.children.push_back(ConvexPolygon(c2,e1,e0));
+	node.children.push_back(ConvexPolygon(e2,e0,e1));
 }
 
 void TreeGrid::fillAll(const TreeGridNode& node, Grid& grid) const
