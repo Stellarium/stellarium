@@ -79,6 +79,7 @@ SolarSystem::~SolarSystem()
 	sun = NULL;
 	moon = NULL;
 	earth = NULL;
+	Planet::hintCircleTex.reset();
 }
 
 /*************************************************************************
@@ -115,7 +116,10 @@ void SolarSystem::init()
 	startTrails(conf->value("astro/flag_object_trails", false).toBool());	
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setMinFilter(GL_LINEAR);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
+	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("planet-indicator.png");
 }
 
 void SolarSystem::drawPointer(const StelCore* core)
