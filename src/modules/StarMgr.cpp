@@ -167,8 +167,8 @@ void StarMgr::init() {
 	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
-	setFlagNames(conf->value("astro/flag_star_name",true).toBool());
-	setMaxMagName(conf->value("stars/max_mag_star_name",1.5).toDouble());
+	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
+	setLabelsAmount(conf->value("stars/labels_amount",3).toDouble());
 	
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 
@@ -518,7 +518,7 @@ void StarMgr::draw(StelCore* core)
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),max_search_level);
 
     // Set temporary static variable for optimization
-    const float names_brightness = names_fader.getInterstate() * starsFader.getInterstate();
+    const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
     
     prj->setCurrentFrame(Projector::FRAME_J2000);
 
@@ -527,13 +527,10 @@ void StarMgr::draw(StelCore* core)
 
     // draw all the stars of all the selected zones
     float rcmag_table[2*256];
-//static int count = 0;
-//count++;
 	
     for (ZoneArrayMap::const_iterator it(zone_arrays.begin()); it!=zone_arrays.end();it++)
 	{
 		const float mag_min = 0.001f*it->second->mag_min;
-		// if (maxMag < mag_min) break;
 		const float k = (0.001f*it->second->mag_range)/it->second->mag_steps;
 		for (int i=it->second->mag_steps-1;i>=0;i--)
 		{
@@ -554,24 +551,19 @@ void StarMgr::draw(StelCore* core)
 		last_max_search_level = it->first;
 	
 		unsigned int max_mag_star_name = 0;
-		if (names_fader.getInterstate())
+		if (labelsFader.getInterstate()>0.f)
 		{
-			int x = (int)((maxMagStarName-mag_min)/k);
-			if (x > 0) max_mag_star_name = x;
+			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
+			int x = (int)((maxMag-mag_min)/k);
+			if (x > 0)
+				max_mag_star_name = x;
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-		{
-			it->second->draw(zone,true,rcmag_table,prj,
-							max_mag_star_name,names_brightness,
-							starFont);
-		}
+			it->second->draw(zone, true, rcmag_table, prj, max_mag_star_name, names_brightness, starFont);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-		{
-			it->second->draw(zone,false,rcmag_table,prj,
-							max_mag_star_name,names_brightness,
-							starFont);
-		}
+			it->second->draw(zone, false, rcmag_table, prj, max_mag_star_name,names_brightness, starFont);
     }
     exit_loop:
 	// Finish drawing many stars

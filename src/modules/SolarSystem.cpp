@@ -36,8 +36,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
-#include "Navigator.hpp" // for mat_j2000_to_vsop87
+#include "Navigator.hpp"
 #include "SFont.hpp"
+#include "SkyDrawer.hpp"
 
 #include <QTextStream>
 #include <QSettings>
@@ -107,6 +108,7 @@ void SolarSystem::init()
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
+	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
@@ -773,10 +775,11 @@ void SolarSystem::draw(StelCore* core)
 	sort(system_planets.begin(),system_planets.end(),bigger_distance());
 
 	// Draw the elements
+	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		(*iter)->draw(core);
+		(*iter)->draw(core, maxMagLabel);
 		++iter;
 	}
 

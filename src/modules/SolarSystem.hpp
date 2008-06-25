@@ -138,6 +138,14 @@ public slots:
 	//! Get the current value of the flag which determines if planet labels are drawn or hidden.
 	bool getFlagLabels() const;
 	
+	//! Set the amount of planet labels. The real amount is also proportional with FOV.
+	//! The limit is set in function of the planets magnitude
+	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	void setLabelsAmount(float a) {labelsAmount=a;}
+	//! Get the amount of planet labels. The real amount is also proportional with FOV.
+	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+	float getLabelsAmount(void) const {return labelsAmount;}
+	
 	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
@@ -256,6 +264,9 @@ private:
 
 	double fontSize;
 	SFont& planet_name_font;
+	
+	//! The amount of planets labels (between 0 and 10)
+	float labelsAmount;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
 	

@@ -87,7 +87,7 @@ void ConstellationMgr::init()
 	updateSkyCulture();
 	fontSize = conf->value("viewing/constellation_font_size",16.).toDouble();
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
-	setFlagNames(conf->value("viewing/flag_constellation_name").toBool());
+	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5).toDouble());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.).toDouble());
@@ -312,7 +312,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	// Set current states
 	setFlagArt(flagArt);
 	setFlagLines(flagLines);
-	setFlagNames(flagNames);	
+	setFlagLabels(flagNames);	
 	setFlagBoundaries(flagBoundaries);	
 
 	QFile fic(artfileName);
@@ -699,7 +699,7 @@ void ConstellationMgr::setFlagArt(bool b)
 }
 
 
-void ConstellationMgr::setFlagNames(bool b)
+void ConstellationMgr::setFlagLabels(bool b)
 {
 	flagNames = b;
 	if (selected.begin() != selected.end() && isolateSelected)
@@ -745,7 +745,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 		// Propagate current settings to newly selected constellation
 		c->setFlagLines(getFlagLines());
-		c->setFlagName(getFlagNames());
+		c->setFlagName(getFlagLabels());
 		c->setFlagArt(getFlagArt());
 		c->setFlagBoundaries(getFlagBoundaries());
 	
@@ -789,7 +789,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 		{
 			(*iter)->setFlagLines(getFlagLines());
-			(*iter)->setFlagName(getFlagNames());
+			(*iter)->setFlagName(getFlagLabels());
 			(*iter)->setFlagArt(getFlagArt());
 			(*iter)->setFlagBoundaries(getFlagBoundaries());
 		}
@@ -828,7 +828,7 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 			{
 				(*iter)->setFlagLines(getFlagLines());
-				(*iter)->setFlagName(getFlagNames());
+				(*iter)->setFlagName(getFlagLabels());
 				(*iter)->setFlagArt(getFlagArt());
 				(*iter)->setFlagBoundaries(getFlagBoundaries());
 			}

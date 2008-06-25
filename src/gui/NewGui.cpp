@@ -466,8 +466,8 @@ void NewGui::init()
 	getGuiActions("actionShow_Constellation_Lines")->setChecked(cmgr->getFlagLines());
 	QObject::connect(getGuiActions("actionShow_Constellation_Art"), SIGNAL(toggled(bool)), module, SLOT(setFlagArt(bool)));
 	getGuiActions("actionShow_Constellation_Art")->setChecked(cmgr->getFlagArt());
-	QObject::connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), module, SLOT(setFlagNames(bool)));
-	getGuiActions("actionShow_Constellation_Labels")->setChecked(cmgr->getFlagNames());
+	QObject::connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), module, SLOT(setFlagLabels(bool)));
+	getGuiActions("actionShow_Constellation_Labels")->setChecked(cmgr->getFlagLabels());
 	QObject::connect(getGuiActions("actionShow_Constellation_Boundaries"), SIGNAL(toggled(bool)), module, SLOT(setFlagBoundaries(bool)));
 	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(cmgr->getFlagBoundaries());
 	

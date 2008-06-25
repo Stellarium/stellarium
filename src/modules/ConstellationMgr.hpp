@@ -133,9 +133,9 @@ public slots:
 	bool getFlagBoundaries(void) const {return flagBoundaries;}
 	
 	//! Set whether constellation names will be displayed
-	void setFlagNames(bool b);
+	void setFlagLabels(bool b);
 	//! Set whether constellation names are displayed
-	bool getFlagNames(void) const {return flagNames;}
+	bool getFlagLabels(void) const {return flagNames;}
 	
 	//! Set whether selected constellation must be displayed alone
 	void setFlagIsolateSelected(bool s) { isolateSelected = s; }
