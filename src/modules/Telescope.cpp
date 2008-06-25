@@ -229,7 +229,7 @@ Telescope::Telescope(const QString &name) : name(name)
 	nameI18n = name;
 }
 
-QString Telescope::getInfoString(const StelCore* core) const
+QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
 	const Vec3d j2000_pos = getObsJ2000Pos(nav);
@@ -240,10 +240,18 @@ QString Telescope::getInfoString(const StelCore* core) const
 	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
 	QString str;
 	QTextStream oss(&str);
-	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-	oss << "<h2>" << nameI18n << "</h2>" << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false),
-			StelUtils::radToDmsStr(dec_j2000,false)) << "<br>"
-			<< q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
+	if (flags&Name)
+	{
+		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+		oss << "<h2>" << nameI18n << "</h2>";
+	}
+
+	if (flags&RaDecJ2000) 
+		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false), StelUtils::radToDmsStr(dec_j2000,false)) << "<br>";
+
+	if (flags&RaDec)
+		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
+
 	return str;
 }
 

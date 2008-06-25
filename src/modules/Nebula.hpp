@@ -59,7 +59,11 @@ public:
 	Nebula();
 	~Nebula();
 
-	QString getInfoString(const StelCore *core) const;
+	//! Get a textual description of the object
+	//! @param core the StelCore object
+	//! @param flags StelObject::InfoStringGroups to be included in the return value.
+	//! The StelObject::InfoStringGroups Extra1 is the "type" - e.g. "Galaxy" or "Open Cluster".
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	QString getShortInfoString(const StelCore *core) const;
 	QString getType(void) const {return "Nebula";}
 	// observer centered J2000 coordinates

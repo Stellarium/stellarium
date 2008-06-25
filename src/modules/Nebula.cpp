@@ -55,7 +55,7 @@ Nebula::~Nebula()
 {
 }
 
-QString Nebula::getInfoString(const StelCore *core) const
+QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
 	double tempDE, tempRA;
@@ -65,42 +65,60 @@ QString Nebula::getInfoString(const StelCore *core) const
 
 	QString str;
 	QTextStream oss(&str);
+
 	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-	oss << "<h2>";
-	if (nameI18!="")
+
+	if (flags&Name || flags&CatalogNumber)
+		oss << "<h2>";
+
+	if (nameI18!="" && flags&Name)
 	{
-		oss << nameI18 << " (";
+		oss << nameI18;
 	}
-	if ((M_nb > 0) && (M_nb < 111))
+
+	if (flags&CatalogNumber)
 	{
-		oss << "M " << M_nb << " - ";
+		if (nameI18!="" && flags&Name)
+			oss << " (";
+
+		QStringList catIds;
+		if ((M_nb > 0) && (M_nb < 111))
+			catIds << QString("M %1").arg(M_nb);
+		if (NGC_nb > 0)
+			catIds << QString("NGC %1").arg(NGC_nb);
+		if (IC_nb > 0)
+			catIds << QString("IC %1").arg(IC_nb);
+		oss << catIds.join(" - ");
+
+		if (nameI18!="" && flags&Name)
+			oss << ")";
 	}
-	if (NGC_nb > 0)
-	{
-		oss << "NGC " << NGC_nb;
-	}
-	if (IC_nb > 0)
-	{
-		oss << "IC " << IC_nb;
-	}
-	if (nameI18!="")
-	{
-		oss << ")";
-	}
-	oss << "</h2>";;
+
+	if (flags&Name || flags&CatalogNumber)
+		oss << "</h2>";
 	
-	oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
-	if (mag < 50) 
+	if (flags&Extra1)
+		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+
+	if (mag < 50 && flags&Magnitude) 
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
-	oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
-	// calculate alt az
-	Vec3d localPos = nav->earth_equ_to_local(equPos);
-	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
-	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
-	if (angularSize>0)
-		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.));
+
+	if (flags&RaDec)
+		oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+
+	if (flags&AltAzi)
+	{
+		// calculate alt az
+		Vec3d localPos = nav->earth_equ_to_local(equPos);
+		StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
+		tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+		if(tempRA > M_PI*2) tempRA -= M_PI*2;	
+		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+	}
+
+	if (angularSize>0 && flags&Size)
+		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.)) << "<br>";
+
 	return str;
 }
 
