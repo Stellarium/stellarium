@@ -99,8 +99,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
-	virtual QString getInfoString(const Navigator * nav) const;
-	virtual QString getShortInfoString(const Navigator * nav) const;
+	virtual QString getInfoString(const StelCore *core) const;
+	virtual QString getShortInfoString(const StelCore *core) const;
 	virtual double getCloseViewFov(const Navigator * nav) const;
 	virtual double get_satellites_fov(const Navigator * nav) const;
 	virtual double get_parent_satellites_fov(const Navigator * nav) const;

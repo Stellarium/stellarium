@@ -799,7 +799,7 @@ void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
+	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::str_to_vec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
@@ -1196,8 +1196,8 @@ void SolarSystem::setFlagPlanets(bool b) {flagShow=b;}
 bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
 
 // Set/Get planets names color
-void SolarSystem::setNamesColor(const Vec3f& c) {Planet::set_label_color(c);}
-const Vec3f& SolarSystem::getNamesColor(void) const {return Planet::getLabelColor();}
+void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::set_label_color(c);}
+const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
 
 // Set/Get orbits lines color
 void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::set_orbit_color(c);}

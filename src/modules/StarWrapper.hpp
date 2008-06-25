@@ -52,8 +52,8 @@ protected:
 
   QString getEnglishName(void) const {return "";}
   QString getNameI18n(void) const = 0;
-  QString getInfoString(const Navigator *nav) const;
-  QString getShortInfoString(const Navigator *nav) const;
+  QString getInfoString(const StelCore *core) const;
+  QString getShortInfoString(const StelCore *core) const;
   virtual float getBV(void) const = 0;
 private:
   int ref_count;
@@ -102,8 +102,8 @@ public:
   StarWrapper1(const SpecialZoneArray<Star1> *a,
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
-  QString getInfoString(const Navigator *nav) const;
-  QString getShortInfoString(const Navigator *nav) const;
+  QString getInfoString(const StelCore *core) const;
+  QString getShortInfoString(const StelCore *core) const;
   QString getEnglishName(void) const;
 };
 

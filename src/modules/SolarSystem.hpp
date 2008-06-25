@@ -161,9 +161,9 @@ public slots:
 	void setFontSize(float newFontSize);
 	
 	//! Set the color used to draw planet labels.
-	void setNamesColor(const Vec3f& c);
+	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
-	const Vec3f& getNamesColor(void) const;
+	const Vec3f& getLabelsColor(void) const;
 	
 	//! Set the color used to draw planet orbit lines.
 	void setOrbitsColor(const Vec3f& c);

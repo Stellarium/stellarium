@@ -153,9 +153,9 @@ public slots:
 	Vec3f getBoundariesColor() const;
 		
 	//! Set label color for names
-	void setNamesColor(const Vec3f& c);
+	void setLabelsColor(const Vec3f& c);
 	//! Get label color for names
-	Vec3f getNamesColor() const;
+	Vec3f getLabelsColor() const;
 	
 	//! Set the font size used for constellation names display
 	void setFontSize(double newFontSize);
