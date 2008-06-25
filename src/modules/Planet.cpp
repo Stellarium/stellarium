@@ -101,8 +101,9 @@ Planet::~Planet()
 }
 
 // Return the information string "ready to print" :)
-QString Planet::getInfoString(const Navigator * nav) const
+QString Planet::getInfoString(const StelCore* core) const
 {
+	const Navigator* nav = core->getNavigation();
 	double tempDE, tempRA;
 	
 	QString str;
@@ -130,8 +131,8 @@ QString Planet::getInfoString(const Navigator * nav) const
 	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
 	// xgettext:no-c-format
-	oss << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 8);
-	
+	oss << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 8) << "<br>";
+	oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 	return str;
 }
 
@@ -152,8 +153,9 @@ QString Planet::getSkyLabel(const Navigator * nav) const
 
 
 // Return the information string "ready to print" :)
-QString Planet::getShortInfoString(const Navigator * nav) const
+QString Planet::getShortInfoString(const StelCore * core) const
 {
+	const Navigator* nav = core->getNavigation();
 	QString str;
 	QTextStream oss(&str);
 
@@ -168,7 +170,6 @@ QString Planet::getShortInfoString(const Navigator * nav) const
 
 	Vec3d equPos = getObsEquatorialPos(nav);
 	oss << "  " << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 5);
-
 	return str;
 }
 
@@ -187,7 +188,7 @@ float Planet::getSelectPriority(const Navigator *nav) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getNamesColor();
+	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
 }
 
 

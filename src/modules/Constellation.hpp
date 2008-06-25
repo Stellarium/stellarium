@@ -46,8 +46,8 @@ private:
     
 	// StelObject method to override
    	//! Write I18n information about the object in string.
-	//! @param nav a pointer to the Navigator object (unused).
-	virtual QString getInfoString(const Navigator * nav) const
+	//! @param core a pointer to the StelCore object (unused).
+	virtual QString getInfoString(const StelCore* core) const
 	{
 		return getNameI18n() + "(" + getShortName() + "°";
 	}
@@ -56,9 +56,9 @@ private:
 	//! This member function returns a string containing a short 
 	//! description of a Constellation object.  This short description 
 	//! is used for the constellation label.
-	//! @param nav a pointer to the navigator object.
+	//! @param core a pointer to the StelCore object.
 	//! @return short description (name).
-	virtual QString getShortInfoString(const Navigator* nav) const {return getNameI18n();}
+	virtual QString getShortInfoString(const StelCore* core) const {return getNameI18n();}
 
 	//! Get the module/object type string.
 	//! @return "Constellation"

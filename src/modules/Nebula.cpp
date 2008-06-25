@@ -55,8 +55,9 @@ Nebula::~Nebula()
 {
 }
 
-QString Nebula::getInfoString(const Navigator* nav) const
+QString Nebula::getInfoString(const StelCore *core) const
 {
+	const Navigator* nav = core->getNavigation();
 	double tempDE, tempRA;
 
 	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
@@ -103,7 +104,7 @@ QString Nebula::getInfoString(const Navigator* nav) const
 	return str;
 }
 
-QString Nebula::getShortInfoString(const Navigator*) const
+QString Nebula::getShortInfoString(const StelCore *core) const
 {
 	if (nameI18!="")
 	{
@@ -151,7 +152,7 @@ QString Nebula::getShortInfoString(const Navigator*) const
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getNamesColor();
+	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
 double Nebula::getCloseViewFov(const Navigator*) const

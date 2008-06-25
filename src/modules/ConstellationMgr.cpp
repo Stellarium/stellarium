@@ -169,7 +169,7 @@ void ConstellationMgr::setColorScheme(const QSettings* conf, const QString& sect
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLinesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_lines_color",    defaultColor).toString()));
 	setBoundariesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setNamesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_names_color",    defaultColor).toString()));
+	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/const_names_color",    defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
@@ -234,12 +234,12 @@ Vec3f ConstellationMgr::getBoundariesColor() const
 	return Constellation::boundaryColor;
 }
 
-void ConstellationMgr::setNamesColor(const Vec3f& c) 
+void ConstellationMgr::setLabelsColor(const Vec3f& c) 
 {
 	Constellation::labelColor = c;
 }
 
-Vec3f ConstellationMgr::getNamesColor() const 
+Vec3f ConstellationMgr::getLabelsColor() const 
 {
 	return Constellation::labelColor;
 }

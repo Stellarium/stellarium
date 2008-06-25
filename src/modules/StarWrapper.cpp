@@ -31,112 +31,113 @@
 
 namespace BigStarCatalogExtension {
 
-QString StarWrapperBase::getInfoString(const Navigator *nav) const {
-  const Vec3d j2000_pos = getObsJ2000Pos(nav);
-  double dec_j2000, ra_j2000;
-  StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
-  const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
-  double dec_equ, ra_equ;
-  StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
-  QString str;
-  QTextStream oss(&str);
-  oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-  oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
-						  QString::number(getBV(), 'f', 2)) << "<br>";
-  oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
-				      StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-  oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
-					    StelUtils::radToDmsStr(dec_equ)) << "<br>";
-
-    // calculate alt az
-  double az,alt;
-  StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
-  az = 3*M_PI - az;  // N is zero, E is 90 degrees
-  if(az > M_PI*2) az -= M_PI*2;    
-  oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt));
-  
-  return str;
-}
-
-QString StarWrapperBase::getShortInfoString(const Navigator *nav) const
+QString StarWrapperBase::getInfoString(const StelCore *core) const
 {
-	return q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2);
+	const Navigator* nav = core->getNavigation();
+	const Vec3d j2000_pos = getObsJ2000Pos(nav);
+	double dec_j2000, ra_j2000;
+	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+	double dec_equ, ra_equ;
+	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+	QString str;
+	QTextStream oss(&str);
+	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+	oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+	oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+	oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
+	
+	// calculate alt az
+	double az,alt;
+	StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+	az = 3*M_PI - az;  // N is zero, E is 90 degrees
+	if(az > M_PI*2) az -= M_PI*2;    
+	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt));
+	
+	return str;
+}
+
+QString StarWrapperBase::getShortInfoString(const StelCore *core) const
+{
+	return q_("Magnitude: %1").arg(getMagnitude(core->getNavigation()), 0, 'f', 2);
 }
 
 
-QString StarWrapper1::getEnglishName(void) const {
-	if (s->hip) {
+QString StarWrapper1::getEnglishName(void) const
+{
+	if (s->hip)
 		return QString("HP %1").arg(s->hip);
-	}
 	return StarWrapperBase::getEnglishName();
 }
 
-QString StarWrapper1::getInfoString(const Navigator *nav) const {
-  const Vec3d j2000_pos = getObsJ2000Pos(nav);
-  double dec_j2000, ra_j2000;
-  StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
-  const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
-  double dec_equ, ra_equ;
-  StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
-  QString str;
-  QTextStream oss(&str);
-  oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-  if (s->hip)
-  {
-	  oss << "<h2>";
-    const QString commonNameI18 = StarMgr::getCommonName(s->hip);
-    const QString sciName = StarMgr::getSciName(s->hip);
-    if (commonNameI18!="" || sciName!="")
-    {
-      oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-      if (commonNameI18!="" && sciName!="")
-		  oss << "(";
-      oss << (sciName=="" ? "" : sciName);
-      if (commonNameI18!="" && sciName!="")
-		  oss << ")";
-	  oss << " - ";
-    }
-    oss << "HP " << s->hip;
-    if (s->component_ids)
+QString StarWrapper1::getInfoString(const StelCore *core) const
+{
+	const Navigator* nav = core->getNavigation();
+	const Vec3d j2000_pos = getObsJ2000Pos(nav);
+	double dec_j2000, ra_j2000;
+	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+	double dec_equ, ra_equ;
+	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+	QString str;
+	QTextStream oss(&str);
+	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+	if (s->hip)
 	{
-		oss << " " << StarMgr::convertToComponentIds(s->component_ids);
-    }
-    oss << "</h2>";
-  }
-
-  oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
-						  QString::number(s->getBV(), 'f', 2)) << "<br>";
-  oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
-				      StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-  
-  oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
-					    StelUtils::radToDmsStr(dec_equ)) << "<br>";
-
-    // calculate alt az
-  double az,alt;
-  StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
-  az = 3*M_PI - az;  // N is zero, E is 90 degrees
-  if (az > M_PI*2)
-	  az -= M_PI*2;    
-  oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
-
-  if (s->plx)
-  {
+		oss << "<h2>";
+		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
+		const QString sciName = StarMgr::getSciName(s->hip);
+		if (commonNameI18!="" || sciName!="")
+		{
+			oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
+			if (commonNameI18!="" && sciName!="")
+				oss << "(";
+			oss << (sciName=="" ? "" : sciName);
+			if (commonNameI18!="" && sciName!="")
+				oss << ")";
+			oss << " - ";
+		}
+		oss << "HP " << s->hip;
+		if (s->component_ids)
+		{
+			oss << " " << StarMgr::convertToComponentIds(s->component_ids);
+		}
+		oss << "</h2>";
+	}
+	
+	oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
+							QString::number(s->getBV(), 'f', 2)) << "<br>";
+	oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
+						StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+	oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
+						StelUtils::radToDmsStr(dec_equ)) << "<br>";
+	
+	// calculate alt az
+	double az,alt;
+	StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+	az = 3*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;    
+	oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
+	
+	if (s->plx)
+	{
 		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2)
 				<< "<br>";
-  }
-
-  if (s->sp_int)
-  {
-	  oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int)) << "<br>";
-  }
-  return str;
+	}
+	
+	if (s->sp_int)
+	{
+		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int)) << "<br>";
+	}
+	return str;
 }
 
 
-QString StarWrapper1::getShortInfoString(const Navigator *nav) const
+QString StarWrapper1::getShortInfoString(const StelCore *core) const
 {
+	const Navigator* nav = core->getNavigation();
 	QString str;
 	QTextStream oss(&str);
 	if (s->hip)

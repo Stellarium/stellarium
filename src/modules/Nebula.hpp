@@ -59,8 +59,8 @@ public:
 	Nebula();
 	~Nebula();
 
-	QString getInfoString(const Navigator * nav) const;
-	QString getShortInfoString(const Navigator * nav = NULL) const;
+	QString getInfoString(const StelCore *core) const;
+	QString getShortInfoString(const StelCore *core) const;
 	QString getType(void) const {return "Nebula";}
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
