@@ -309,3 +309,13 @@ SET(tests_testdates_SRCS
 ADD_EXECUTABLE(testdates ${tests_testdates_SRCS})
 TARGET_LINK_LIBRARIES(testdates ${extLinkerOption})
 ADD_TEST(test_testdates ${EXECUTABLE_OUTPUT_PATH}/testdates)
+
+SET(tests_testSphereGeometry_SRCS
+	tests/testSphereGeometry.cpp
+	stelutils/SphereGeometry.hpp
+	stelutils/SphereGeometry.cpp
+	stelutils/StelUtils.cpp
+	stelutils/StelUtils.hpp)
+ADD_EXECUTABLE(testSphereGeometry ${tests_testSphereGeometry_SRCS})
+TARGET_LINK_LIBRARIES(testSphereGeometry ${extLinkerOption})
+ADD_TEST(test_testSphereGeometry ${EXECUTABLE_OUTPUT_PATH}/testSphereGeometry)
