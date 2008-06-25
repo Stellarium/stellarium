@@ -31,6 +31,7 @@
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "SkyDrawer.hpp"
+#include "NewGui.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -114,6 +115,20 @@ void ConfigurationDialog::createDialogContent()
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 
+	// Interface tab
+	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	assert(newGui);
+	if (newGui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+		ui->noSelectedInfoRadio->setChecked(true);
+	else if (newGui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::BriefInfo))
+		ui->briefSelectedInfoRadio->setChecked(true);
+	else
+		ui->allSelectedInfoRadio->setChecked(true);
+
+	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
+	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
+	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+
 	// DEBUG tab
 	// connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInputScale(double)));
 	// connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
@@ -153,3 +168,26 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	else
 		StelAppGraphicsItem::getInstance().setViewPortDistorterType("none");
 }
+
+void ConfigurationDialog::setNoSelectedInfo(void)
+{
+	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	assert(newGui);
+	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(0));
+}
+
+void ConfigurationDialog::setAllSelectedInfo(void)
+{
+	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	assert(newGui);
+	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+}
+
+void ConfigurationDialog::setBriefSelectedInfo(void)
+{
+	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	assert(newGui);
+	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::BriefInfo));
+}
+
+
