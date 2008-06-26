@@ -83,9 +83,6 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
-	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
 	
@@ -108,9 +105,6 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->planetMarkerCheckBox, SLOT(setChecked(bool)));
 	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
-	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
-	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
-	
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
 	
@@ -119,11 +113,6 @@ void ViewDialog::createDialogContent()
 	
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
-	
-	// Nebula section
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
-	ui->showNebulaCheckBox->setChecked(nmgr->getFlagShow());
-	connect(ui->showNebulaCheckBox, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagShow(bool)));
 	
 	// Shouting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
@@ -136,7 +125,22 @@ void ViewDialog::createDialogContent()
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	
 	// Labels section
-	connect(ui->masterLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(masterLabelsValueChanged(int)));
+	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
+	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
+	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
+	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
+	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
+	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Nebulas");
+	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
+	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+	
+	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
+	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
+	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
+	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
+	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
+	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
 	
 	// Landscape section
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
@@ -351,11 +355,24 @@ void ViewDialog::shoutingStarsZHRChanged()
 	}
 }
 
-void ViewDialog::masterLabelsValueChanged(int v)
+void ViewDialog::starsLabelsValueChanged(int v)
 {
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	float a= ((float)v)/10.f;
 	smgr->setLabelsAmount(a);
+}
+
+void ViewDialog::planetsLabelsValueChanged(int v)
+{
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	float a= ((float)v)/10.f;
 	ssmgr->setLabelsAmount(a);
+}
+
+void ViewDialog::nebulasLabelsValueChanged(int v)
+{
+	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	float a= ((float)v)/10.f;
+	nmgr->setHintsAmount(a);
+	nmgr->setLabelsAmount(a);
 }
