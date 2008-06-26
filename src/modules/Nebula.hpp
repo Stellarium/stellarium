@@ -42,7 +42,6 @@ public:
 	//! @param flags StelObject::InfoStringGroups to be included in the return value.
 	//! The StelObject::InfoStringGroups Extra1 is the "type" - e.g. "Galaxy" or "Open Cluster".
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual QString getShortInfoString(const StelCore *core) const;
 	virtual QString getType(void) const {return "Nebula";}
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
 	virtual double getCloseViewFov(const Navigator * nav = NULL) const;

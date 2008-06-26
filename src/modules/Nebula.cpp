@@ -66,7 +66,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	QString str;
 	QTextStream oss(&str);
 
-	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+	if (!(flags&PlainText))
+		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 
 	if (flags&Name || flags&CatalogNumber)
 		oss << "<h2>";
@@ -119,38 +120,23 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (angularSize>0 && flags&Size)
 		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.)) << "<br>";
 
+	// chomp trailing line breaks
+	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+
+	if (flags&PlainText)
+	{
+		str.replace("<b>", "");
+		str.replace("</b>", "");
+		str.replace("<h2>", "");
+		str.replace("</h2>", "\n");
+		str.replace("<br>", "\n");
+	}
+
 	return str;
 }
 
-QString Nebula::getShortInfoString(const StelCore *core) const
+float Nebula::getSelectPriority(const Navigator *nav) const
 {
-	if (nameI18!="")
-	{
-		return getNameI18n();
-	}
-	else
-	{
-		if (M_nb > 0)
-		{
-			return QString("M %1").arg(M_nb);
-		}
-		else if (NGC_nb > 0)
-		{
-			return QString("NGC %1").arg(NGC_nb);
-		}
-		else if (IC_nb > 0)
-		{
-			return QString("IC %1").arg(IC_nb);
-		}
-	}
-	
-	// All nebula have at least an NGC or IC number
-	assert(false);
-	return "";
-}
-
- float Nebula::getSelectPriority(const Navigator *nav) const
- {
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
@@ -161,7 +147,7 @@ QString Nebula::getShortInfoString(const StelCore *core) const
 		if (getMagnitude(nav)>20) return 20;
 		return getMagnitude(nav);
 	}
- }
+}
 
 Vec3f Nebula::getInfoColor(void) const
 {
@@ -192,7 +178,19 @@ void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
 	float size = getOnScreenSize(core);
 	float shift = 4.f + size/1.8f;
-	QString str = getShortInfoString(core);
+	QString str;
+	if (nameI18!="")
+		str = getNameI18n();
+	else
+	{
+		if (M_nb > 0)
+			str = QString("M %1").arg(M_nb);
+		else if (NGC_nb > 0)
+			str = QString("NGC %1").arg(NGC_nb);
+		else if (IC_nb > 0)
+			str = QString("IC %1").arg(IC_nb);
+	}
+	
 	core->getProjection()->drawText(nebula_font,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 

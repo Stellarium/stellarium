@@ -28,6 +28,7 @@
 #include "Translator.hpp"
 
 #include <QTextStream>
+#include <QRegExp>
 
 namespace BigStarCatalogExtension {
 
@@ -43,7 +44,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if (flags&Name)
+	if (flags&Name && !(flags&PlainText))
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())) << "<br>";
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
@@ -62,14 +63,20 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
 	}
 	
+	// chomp trailing line breaks
+	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+
+	if (flags&PlainText)
+	{
+		str.replace("<b>", "");
+		str.replace("</b>", "");
+		str.replace("<h2>", "");
+		str.replace("</h2>", "\n");
+		str.replace("<br>", "\n");
+	}
+
 	return str;
 }
-
-QString StarWrapperBase::getShortInfoString(const StelCore *core) const
-{
-	return q_("Magnitude: %1").arg(getMagnitude(core->getNavigation()), 0, 'f', 2);
-}
-
 
 QString StarWrapper1::getEnglishName(void) const
 {
@@ -89,7 +96,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
 	QString str;
 	QTextStream oss(&str);
-	oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+	if (!(flags&PlainText))
+		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 	if (s->hip)
 	{
 		if (flags&Name || flags&CatalogNumber)
@@ -155,49 +163,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (s->plx && flags&Extra2)
 		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
 
+	// chomp trailing line breaks
+	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+
+	if (flags&PlainText)
+	{
+		str.replace("<b>", "");
+		str.replace("</b>", "");
+		str.replace("<h2>", "");
+		str.replace("</h2>", "\n");
+		str.replace("<br>", "\n");
+	}
+
 	return str;
 }
-
-QString StarWrapper1::getShortInfoString(const StelCore *core) const
-{
-	const Navigator* nav = core->getNavigation();
-	QString str;
-	QTextStream oss(&str);
-	if (s->hip)
-	{
-		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
-		const QString sciName = StarMgr::getSciName(s->hip);
-		if (commonNameI18!="" || sciName!="")
-		{
-			oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-			if (commonNameI18!="" && sciName!="") oss << "(";
-			oss << (sciName=="" ? "" : sciName);
-			if (commonNameI18!="" && sciName!="") oss << ")";
-			oss << "  ";
-		}
-		oss << "HP " << s->hip;
-		if (s->component_ids)
-		{
-			oss << " " << StarMgr::convertToComponentIds(s->component_ids);
-		}
-		oss << "  ";
-	}
-	
-	oss << q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2) << "  ";
-
-	if (s->plx)
-	{
-		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2)
-			<< "  ";
-	}
-	
-	if (s->sp_int)
-	{
-		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int));
-	}
-	return str;
-}
-
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,
                                     const SpecialZoneData<Star1> *z) const {
