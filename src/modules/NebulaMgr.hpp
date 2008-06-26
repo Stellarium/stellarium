@@ -114,6 +114,11 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
+	//! Set the color used to draw the nebula circles.
+	void setCirclesColor(const Vec3f& c);
+	//! Get current value of the nebula circle color.
+	const Vec3f& getCirclesColor(void) const;
+	
 	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);
 	//! Get Nebulae Hints circle scale.
@@ -137,11 +142,6 @@ public slots:
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
 	
-	//! Set the color used to draw the nebula circles.
-	void setCirclesColor(const Vec3f& c);
-	//! Get current value of the nebula circle color.
-	const Vec3f& getCirclesColor(void) const;
-	
 	//! Set flag for displaying nebulae even without textures.
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
 	//! Get flag for displaying nebulae without textures.
@@ -155,10 +155,13 @@ public slots:
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	float getLabelsAmount(void) const {return labelsAmount;}
 	
-	//! Set maximum magnitude at which nebulae hints are displayed.
-	void setMaxMagHints(float f) {maxMagHints = f;}
-	//! Get maximum magnitude at which nebulae hints are displayed.
-	float getMaxMagHints(void) const {return maxMagHints;}
+	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
+	//! The limit is set in function of the nebulae magnitude
+	//! @param a the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
+	void setHintsAmount(float f) {hintsAmount = f;}
+	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
+	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
+	float getHintsAmount(void) const {return hintsAmount;}
 	
 private:
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
@@ -187,17 +190,18 @@ private:
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
+	//! The internal grid for fast positional lookup
 	TreeGrid nebGrid;
 	
-	// Define maximum magnitude at which nebulae hints are displayed
-	float maxMagHints;
-	
-	//! The amount of planets labels (between 0 and 10)
+	//! The amount of hints (between 0 and 10)
+	float hintsAmount;
+	//! The amount of labels (between 0 and 10)
 	float labelsAmount;
 	
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 	
-	STextureSP texPointer;			// The selection pointer texture
+	//! The selection pointer texture
+	STextureSP texPointer;
 };
 
 #endif // _NEBULA_MGR_H_

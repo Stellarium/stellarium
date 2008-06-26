@@ -32,6 +32,7 @@
 #include "Nebula.hpp"
 #include "STexture.hpp"
 #include "Navigator.hpp"
+#include "SkyDrawer.hpp"
 #include "Translator.hpp"
 #include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"
@@ -104,7 +105,8 @@ void NebulaMgr::init()
 	
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
-	setMaxMagHints(conf->value("astro/max_mag_nebula_name", 99).toDouble());
+	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toDouble());
+	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toDouble());
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toDouble());
 	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 
@@ -117,6 +119,7 @@ void NebulaMgr::init()
 void NebulaMgr::draw(StelCore* core)
 {
 	Projector* prj = core->getProjection();
+	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	
@@ -132,22 +135,24 @@ void NebulaMgr::draw(StelCore* core)
 	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(margin, margin);
 	nebGrid.filterIntersect(p);
 	
-	// Print all the stars of all the selected zones
+	// Print all the nebulae of all the selected zones
 	Nebula* n;
 
 	// speed up the computation of n->getOnScreenSize(core)>5:
 	const float size_limit = 5./prj->getPixelPerRadAtCenter()*180./M_PI;
-
+	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2-2.+(hintsAmount*1.2f)-2.f;
+	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.+(labelsAmount*1.2f)-2.f;
+	
 	for (TreeGrid::const_iterator iter = nebGrid.begin(); iter != nebGrid.end(); ++iter)
 	{
 		n = static_cast<Nebula*>(*iter);
 
 		// improve performance by skipping if too small to see
-		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= getMaxMagHints()))
+		if (n->angularSize>size_limit || (hintsFader.getInterstate()>0.0001 && n->mag <= maxMagHints))
 		{
 			prj->project(n->XYZ,n->XY);
-			n->draw_name(core);
-			n->draw_circle(core);
+			n->drawLabel(core, maxMagLabels);
+			n->drawHints(core, maxMagHints);
 		}
 	}
 	drawPointer(core);
@@ -320,16 +325,6 @@ Nebula *NebulaMgr::searchIC(unsigned int IC)
 	return NULL;
 }
 
-/*StelObject NebulaMgr::searchUGC(unsigned int UGC)
-{
-	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
-	{
-		if ((*iter)->UGC_nb == UGC) return (*iter);
-	}
-
-	return NULL;
-}*/
 
 // read from stream
 bool NebulaMgr::loadNGC(const QString& catNGC)
