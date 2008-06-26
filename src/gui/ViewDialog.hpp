@@ -43,7 +43,9 @@ private slots:
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(QListWidgetItem* item);
 	void shoutingStarsZHRChanged();
-	void masterLabelsValueChanged(int);
+	void planetsLabelsValueChanged(int);
+	void nebulasLabelsValueChanged(int);
+	void starsLabelsValueChanged(int);
 private:
 	void updateSkyCultureText();	
 };
