@@ -52,14 +52,6 @@ private:
 		return getNameI18n() + "(" + getShortName() + "°";
 	}
 
-	//! Get a brief information string about a Constellation.
-	//! This member function returns a string containing a short 
-	//! description of a Constellation object.  This short description 
-	//! is used for the constellation label.
-	//! @param core a pointer to the StelCore object.
-	//! @return short description (name).
-	virtual QString getShortInfoString(const StelCore* core) const {return getNameI18n();}
-
 	//! Get the module/object type string.
 	//! @return "Constellation"
 	virtual QString getType(void) const {return "Constellation";}

@@ -242,7 +242,9 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 	if (flags&Name)
 	{
-		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+		if (!(flags&PlainText))
+			oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+
 		oss << "<h2>" << nameI18n << "</h2>";
 	}
 
@@ -252,15 +254,20 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&RaDec)
 		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
 
+	// chomp trailing line breaks
+	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+
+	if (flags&PlainText)
+	{
+		str.replace("<b>", "");
+		str.replace("</b>", "");
+		str.replace("<h2>", "");
+		str.replace("</h2>", "\n");
+		str.replace("<br>", "\n");
+	}
+
 	return str;
 }
-
-QString Telescope::getShortInfoString(const StelCore*) const
-{
-	return nameI18n;
-}
-
-
 
 long long int GetNow(void) {
 #ifdef WIN32
