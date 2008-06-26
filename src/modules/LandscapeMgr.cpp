@@ -604,7 +604,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	try
 	{
-		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::DIRECTORY);
+		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::Directory);
 	}
 	catch(exception& e)
 	{

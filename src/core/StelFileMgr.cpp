@@ -75,7 +75,7 @@ StelFileMgr::~StelFileMgr()
 {
 }
 
-QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
+QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 {
 	if (path.isEmpty())
 		throw (std::runtime_error("Empty file path"));
@@ -107,7 +107,7 @@ QString StelFileMgr::findFile(const QString& path, const FLAGS& flags)
 	throw(std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData()));
 }
 
-QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::FLAGS& flags)
+QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags)
 {
 	QSet<QString> result;
 	QStringList listPaths;
@@ -135,17 +135,17 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 					bool returnThisOne = true;
 				
 					// but if we have flags set, that will filter the result
-					if ((flags & WRITABLE) && !fullPath.isWritable())
+					if ((flags & Writable) && !fullPath.isWritable())
 						returnThisOne = false;
 				
-					if ((flags & DIRECTORY) && !fullPath.isDir())
+					if ((flags & Directory) && !fullPath.isDir())
 						returnThisOne = false;
 					
-					if ((flags & FILE) && !fullPath.isFile())
+					if ((flags & File) && !fullPath.isFile())
 						returnThisOne = false;
 					
-					// we only want to return "hidden" results if the HIDDEN flag is set
-					if (!(flags & HIDDEN))
+					// we only want to return "hidden" results if the Hidden flag is set
+					if (!(flags & Hidden))
 						if ((*fileIt)[0] == '.') 
 							returnThisOne = false;
 				
@@ -229,12 +229,12 @@ void StelFileMgr::checkUserDir()
 	}	
 }
 
-bool StelFileMgr::fileFlagsCheck(const QString& path, const FLAGS& flags)
+bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 {
-	if ( ! (flags & HIDDEN) )
+	if ( ! (flags & Hidden) )
 	{
-		// Files are considered HIDDEN on POSIX systems if the file name begins with 
-		// a "." character.  Unless we have the HIDDEN flag set, reject and path
+		// Files are considered Hidden on POSIX systems if the file name begins with 
+		// a "." character.  Unless we have the Hidden flag set, reject and path
 		// where the basename starts with a .
 		if (baseName(path)[0] == '.')
 		{
@@ -245,7 +245,7 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const FLAGS& flags)
 	QFileInfo thePath(path);
 	QDir parentDir = thePath.dir();
 
-	if (flags & NEW)
+	if (flags & New)
 	{
 		// if the file already exists, it is not a new file
 		if (thePath.exists())
@@ -261,18 +261,18 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const FLAGS& flags)
 	}
 	else if (thePath.exists())
 	{
-		if ((flags & WRITABLE) && !thePath.isWritable())
+		if ((flags & Writable) && !thePath.isWritable())
 			return(false);
 			
-		if ((flags & DIRECTORY) && !thePath.isDir())
+		if ((flags & Directory) && !thePath.isDir())
 			return(false);
 			
-		if ((flags & FILE) && !thePath.isFile())
+		if ((flags & File) && !thePath.isFile())
 			return(false); 
 	}
 	else
 	{
-		// doesn't exist and NEW flag wasn't requested
+		// doesn't exist and New flag wasn't requested
 		return(false);
 	}
 		
