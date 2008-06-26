@@ -773,7 +773,7 @@ void NewGui::loadStyle(const QString& fileName)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: can't find Qt style sheet";
+		qWarning() << "WARNING: can't find Qt style sheet:" << fileName;
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
