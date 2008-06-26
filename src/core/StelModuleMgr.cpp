@@ -110,7 +110,7 @@ StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
 #endif
 	try
 	{
-		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::FILE);
+		moduleFullPath = StelApp::getInstance().getFileMgr().findFile(moduleFullPath, StelFileMgr::File);
 	}
 	catch (std::exception& e)
 	{
@@ -180,7 +180,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 	
 	try
 	{
-		moduleDirs = fileMan.listContents("modules",StelFileMgr::DIRECTORY);
+		moduleDirs = fileMan.listContents("modules",StelFileMgr::Directory);
 	}
 	catch(std::exception& e)
 	{

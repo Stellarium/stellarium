@@ -379,7 +379,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
-		QSet<QString> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::DIRECTORY);
+		QSet<QString> landscapeIds = stelFileMgr->listContents("landscapes", StelFileMgr::Directory);
 		for(QSet<QString>::iterator i=landscapeIds.begin(); i!=landscapeIds.end(); ++i)
 		{
 			try 
@@ -656,7 +656,7 @@ void StelApp::setConfigFile(const QString& configName)
 {
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FLAGS(StelFileMgr::WRITABLE|StelFileMgr::FILE));
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 		return;
 	}
 	catch(exception& e)
@@ -666,7 +666,7 @@ void StelApp::setConfigFile(const QString& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::FILE);	
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::File);	
 		return;
 	}
 	catch(exception& e)
@@ -676,7 +676,7 @@ void StelApp::setConfigFile(const QString& configName)
 	
 	try
 	{
-		configFile = stelFileMgr->findFile(configName, StelFileMgr::NEW);
+		configFile = stelFileMgr->findFile(configName, StelFileMgr::New);
 		//qDebug() << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile;
 		return;
 	}

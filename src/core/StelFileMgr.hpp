@@ -19,15 +19,15 @@
 class StelFileMgr
 {
 public:
-	//! @enum FLAGS used as named bitfield flags as specifiers to filter results of StelFileMgr methods.
-	enum FLAGS {
-		REMOVABLE_MEDIA	= 0x00000001,	//!< Search on removable media if present (default is not to).
-		WRITABLE	= 0x00000002,	//!< Only return writable paths. For directories this means
-						//!< that it is possible to create files within the directory.
-		DIRECTORY	= 0x00000004,	//!< Exclude non-directories.
-		FILE		= 0x00000008,	//!< Exclude non-files.
-		NEW 		= 0x00000010,	//!< Exclude existing paths.
-  		HIDDEN		= 0x00000020	//!< Include "hidden" paths (starting with a . on POSIX systems).
+	//! @enum Flags used as named bitfield flags as specifiers to filter results of StelFileMgr methods.
+	enum Flags {
+		RemovableMedia = 0x00000001,  //!< Search on removable media if present (default is not to).
+		Writable       = 0x00000002,  //!< Only return writable paths. For directories this means
+		                              //!< that it is possible to create files within the directory.
+		Directory      = 0x00000004, //!< Exclude non-directories.
+		File           = 0x00000008, //!< Exclude non-files.
+		New            = 0x00000010, //!< Exclude existing paths.
+  		Hidden         = 0x00000020  //!< Include "hidden" paths (starting with a . on POSIX systems).
 	};
 				
 	//! Constructor.
@@ -58,7 +58,7 @@ public:
 	//! @exception std::exception what() -> "file does not match flags: [fullpath]".
 	//! 		This exception occurs if a full path is passes at the path argument, but 
 	//!		that path does not match the flags specified.
-	QString findFile(const QString& path, const FLAGS& flags=(FLAGS)0);
+	QString findFile(const QString& path, const Flags& flags=(Flags)0);
 	
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -67,7 +67,7 @@ public:
 	//!         not the whole path), which are available in any of the search
 	//!         paths + path.  Returns empty list if none were found or the path
 	//!         is invalid (not a directory / not existing)
-	QSet<QString> listContents(const QString& path, const FLAGS& flags=(FLAGS)0);
+	QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0);
 		
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
@@ -168,10 +168,10 @@ private:
 	
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
-	//! @param flags a set of StelFileMgr::FLAGS to test against path
+	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exceptions misc 
-	bool fileFlagsCheck(const QString& path, const FLAGS& flags=(FLAGS)0);
+	bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
 	
 	QStringList fileLocations;
 

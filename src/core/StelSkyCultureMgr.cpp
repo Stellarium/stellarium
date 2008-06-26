@@ -38,7 +38,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 	
 	try
 	{
-		cultureDirNames = fileMan.listContents("skycultures",StelFileMgr::DIRECTORY);
+		cultureDirNames = fileMan.listContents("skycultures",StelFileMgr::Directory);
 	}
 	catch(exception& e)
 	{
