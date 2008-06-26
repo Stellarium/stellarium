@@ -59,7 +59,6 @@ protected:
   //! is included in the return value.  The Extra1 InfoStringGroup switches spectral type.
   //! The Extra2 InfoStringGroup switches parallax.
   QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-  QString getShortInfoString(const StelCore *core) const;
   virtual float getBV(void) const = 0;
 private:
   int ref_count;
@@ -109,7 +108,6 @@ public:
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
   QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-  QString getShortInfoString(const StelCore *core) const;
   QString getEnglishName(void) const;
 };
 

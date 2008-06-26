@@ -44,7 +44,7 @@ public:
 	//! @enum InfoStringGroup used as named bitfield flags as specifiers to 
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
-	//! for all specifiers which ae defined in that derivative.
+	//! for all specifiers which are defined in that derivative.
 	enum InfoStringGroup
 	{
 		Name          = 0x00000001, //!< An object's name
@@ -55,9 +55,10 @@ public:
 		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
 		Distance      = 0x00000040, //!< Info about an object's distance
 		Size          = 0x00000080, //!< Info about an object's size
-		Extra1        = 0x00000100, //!< Should be documented in the derived class
-		Extra2        = 0x00000200, //!< Should be documented in the derived class
-		Extra3        = 0x00000400  //!< Should be documented in the derived class
+		Extra1        = 0x00000100, //!< Derived class-specific extra fields
+		Extra2        = 0x00000200, //!< Derived class-specific extra fields
+		Extra3        = 0x00000400, //!< Derived class-specific extra fields
+		PlainText     = 0x00000800  //!< Strip HTML tags from output
 	};
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
@@ -79,11 +80,13 @@ public:
 	//! The default behaviour is to do nothing, thus making StelObjectP behave like normal pointers.
 	virtual void release(void) {;}
 	
-	//! Write I18n information about the object in QString. 
+	//! Write I18n information about the object in QString.
+	//! @param core the StelCore object to use
+	//! @param flags a set of InfoStringGroup flags which are used to 
+	//! filter the return value - including specified types of information
+	//! and altering the output format.
+	//! @return an HTML string containing information about the StelObject.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const = 0;
-	
-	//! The returned QString can typically be used for object labeling in the sky
-	virtual QString getShortInfoString(const StelCore *core) const = 0;
 	
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType(void) const = 0;

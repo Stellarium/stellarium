@@ -113,7 +113,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
+		if (!(flags&PlainText))
+			oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 		
 		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
@@ -154,6 +155,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Size)
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 
+	// Chomp trailing line break
+	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+
+	if (flags&PlainText)
+	{
+		str.replace("<b>", "");
+		str.replace("</b>", "");
+		str.replace("<h2>", "");
+		str.replace("</h2>", "\n");
+		str.replace("<br>", "\n");
+	}
+
 	return str;
 }
 
@@ -169,28 +182,6 @@ QString Planet::getSkyLabel(const Navigator * nav) const
 	{
 		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
 	}
-	return str;
-}
-
-
-// Return the information string "ready to print" :)
-QString Planet::getShortInfoString(const StelCore * core) const
-{
-	const Navigator* nav = core->getNavigation();
-	QString str;
-	QTextStream oss(&str);
-
-	oss << englishName;  // UI translation can differ from sky translation
-
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
-	if (sphere_scale != 1.f)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
-
-	oss << "  " << q_("Magnitude: %1").arg(getMagnitude(nav), 0, 'f', 2);
-
-	Vec3d equPos = getObsEquatorialPos(nav);
-	oss << "  " << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 5);
 	return str;
 }
 
