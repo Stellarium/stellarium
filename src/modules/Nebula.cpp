@@ -73,7 +73,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (nameI18!="" && flags&Name)
 	{
-		oss << nameI18;
+		oss << getNameI18n() << " (";
 	}
 
 	if (flags&CatalogNumber)
@@ -126,12 +126,7 @@ QString Nebula::getShortInfoString(const StelCore *core) const
 {
 	if (nameI18!="")
 	{
-		QString str(nameI18);
-		str += "  ";
-		if (mag < 99)
-			str += q_("Magnitude: %1").arg(mag);
-		
-		return str;
+		return getNameI18n();
 	}
 	else
 	{
@@ -178,35 +173,27 @@ double Nebula::getCloseViewFov(const Navigator*) const
 	return angularSize * 4;
 }
 						   
-void Nebula::draw_circle(const StelCore* core)
+void Nebula::drawHints(const StelCore* core, float maxMagHints)
 {
-	if (4.f/getOnScreenSize(core)<0.1) return;
+	if (mag>maxMagHints)
+		return;
+	//if (4.f/getOnScreenSize(core)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = MY_MIN(1,4.f/getOnScreenSize(core))*0.8;
+	float lum = 1.;//MY_MIN(1,4.f/getOnScreenSize(core))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
 	core->getProjection()->drawSprite2dMode(XY[0], XY[1], 8);
 }
 
-void Nebula::draw_no_tex(const StelCore* core)
+void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
 {
-	float d = getOnScreenSize(core);
-	float cmag = 0.20 * hints_brightness;
-
-	glColor3f(cmag,cmag,cmag);
-	tex_circle->bind();
-	core->getProjection()->drawSprite2dMode(XY[0], XY[1], d);
-}
-
-void Nebula::draw_name(const StelCore* core)
-{
+	if (mag>maxMagLabel)
+		return;
 	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
 	float size = getOnScreenSize(core);
 	float shift = 4.f + size/1.8f;
-
-	QString nebulaname = getNameI18n();
-
-	core->getProjection()->drawText(nebula_font,XY[0]+shift, XY[1]+shift, nebulaname, 0, 0, 0, false);
+	QString str = getShortInfoString(core);
+	core->getProjection()->drawText(nebula_font,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
 bool Nebula::readNGC(char *recordstr)
