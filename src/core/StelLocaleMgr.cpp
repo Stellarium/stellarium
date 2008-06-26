@@ -45,8 +45,8 @@ void StelLocaleMgr::init()
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
 	setAppLanguage(conf->value("localization/app_locale", "system").toString());
 	
-	time_format = string_to_s_time_format(conf->value("localization:time_display_format", "system_default").toString());
-	date_format = string_to_s_date_format(conf->value("localization:date_display_format", "system_default").toString());
+	time_format = string_to_s_time_format(conf->value("localization/time_display_format", "system_default").toString());
+	date_format = string_to_s_date_format(conf->value("localization/date_display_format", "system_default").toString());
 	// time_zone used to be in init_location section of config,
 	// so use that as fallback when reading config - Rob
 	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
@@ -120,7 +120,7 @@ QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 	else
 	{
 		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
-}
+	}
 	return StelUtils::jdToIsoString(JD + shift);
 }
 
@@ -129,9 +129,8 @@ QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 {
 	vector<int> numbers = TextEntryDateTimeValidator::get_ints_from_ISO8601_string(t);
-
 	if (numbers.size() == 6)
-{
+	{
 		int y = numbers[0];
 		int m = numbers[1];
 		int d = numbers[2];
@@ -142,19 +141,18 @@ double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 		double jd;
 
 		if ( ! StelUtils::getJDFromDate(&jd, y, m, d, h, mn, s) )
-		  {
-		    qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
-		    return 0.0;
-		  }
+		{
+			qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
+			return 0.0;
+		}
 
 		// modified by shift
-	if (time_zone_mode == S_TZ_GMT_SHIFT)
+		if (time_zone_mode == S_TZ_GMT_SHIFT)
 			jd -= GMT_shift;
-	else
+		else
 			jd -= StelUtils::get_GMT_shift_from_QT(jd)*0.041666666666;
 	
 		return jd;
-	
 	}
 	else
 	{
@@ -180,30 +178,23 @@ QString StelLocaleMgr::get_printable_date_local(double JD) const
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = (int)floor(fmod(JD, 7));
 	QString str;
-	
 	switch (date_format)
 	{
 		case S_DATE_MMDDYYYY:
-		{
 			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
-		break;
-		}
+			break;
 		case S_DATE_DDMMYYYY:
-		{
 			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
-		break;
-		}
+			break;
 		case S_DATE_YYYYMMDD:
-		{
 			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
-		break;
-		}
-	case S_DATE_SYSTEM_DEFAULT:
-		str = StelUtils::localeDateString(year, month, day, dayOfWeek);
-		break;
+			break;
+		case S_DATE_SYSTEM_DEFAULT:
+			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
+			break;
 		default:
 			qWarning() << "WARNING: unknown date format fallback to system default";
-		str = StelUtils::localeDateString(year, month, day, dayOfWeek);
+			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
 	}
 	return str;
 }
