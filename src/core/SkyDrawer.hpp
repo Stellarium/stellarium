@@ -97,7 +97,8 @@ public:
 	//! This information is used to determine the world adaptation luminance
 	//! This method should be called during the update operations of the main loop
 	//! @param lum luminance in cd/m^2
-	void reportLuminanceInFov(double lum);
+	//! @param fastAdaptation adapt the eye quickly if true, other wise use a smooth adaptation
+	void reportLuminanceInFov(double lum, bool fastAdaptation=false);
 	
 	//! To be called before the drawing stage starts
 	void preDraw();
