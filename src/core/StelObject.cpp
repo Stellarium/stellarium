@@ -36,7 +36,7 @@ void intrusive_ptr_release(StelObject* p)
 	p->release();
 }
 
-Vec3d StelObject::getObsEquatorialPos(const Navigator * nav) const
+Vec3d StelObject::getObsEquatorialPos(const Navigator* nav) const
 {
 	return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));
 }
@@ -50,5 +50,11 @@ float StelObject::getOnScreenSize(const StelCore* core) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getObsSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))*getObsEquatorialPos(core->getNavigation());
+	return Mat4d::zrotation(-core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))* getObsEquatorialPos(core->getNavigation());
+}
+
+// Get observer local alt/az coordinate
+Vec3d StelObject::getAltAzPos(const Navigator* nav) const
+{
+	return nav->j2000_to_local(getObsJ2000Pos(nav));
 }

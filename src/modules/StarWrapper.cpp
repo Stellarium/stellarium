@@ -35,12 +35,10 @@ namespace BigStarCatalogExtension {
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	const Vec3d j2000_pos = getObsJ2000Pos(nav);
 	double dec_j2000, ra_j2000;
-	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
-	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
 	double dec_equ, ra_equ;
-	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	double dec_sideral, ra_sideral;
 	StelUtils::rect_to_sphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
 	QString str;
@@ -59,7 +57,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+		StelUtils::rect_to_sphe(&az,&alt,getAltAzPos(nav));
 		az = 3*M_PI - az;  // N is zero, E is 90 degrees
 		if(az > M_PI*2) az -= M_PI*2;    
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
@@ -90,12 +88,10 @@ QString StarWrapper1::getEnglishName(void) const
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	const Vec3d j2000_pos = getObsJ2000Pos(nav);
 	double dec_j2000, ra_j2000;
-	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
-	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
 	double dec_equ, ra_equ;
-	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	QString str;
 	QTextStream oss(&str);
 	if (!(flags&PlainText))
@@ -149,7 +145,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+		StelUtils::rect_to_sphe(&az,&alt,getAltAzPos(nav));
 		az = 3*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;    

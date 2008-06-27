@@ -94,7 +94,8 @@ public:
 
 	Vec3d earth_equ_to_j2000(const Vec3d& v) const { return mat_earth_equ_to_j2000*v; }
 	Vec3d j2000_to_earth_equ(const Vec3d& v) const { return mat_j2000_to_earth_equ*v; }
-
+	Vec3d j2000_to_local(const Vec3d& v) const { return mat_j2000_to_local*v; }
+	
 	// Transform vector from heliocentric coordinate to local
 	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
 
@@ -222,7 +223,8 @@ private:
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
 	Mat4d mat_earth_equ_to_j2000;
 	Mat4d mat_j2000_to_earth_equ;
-
+	Mat4d mat_j2000_to_local;
+	
 	Mat4d mat_local_to_eye;			// Modelview matrix for observer local drawing
 	Mat4d mat_earth_equ_to_eye;		// Modelview matrix for geocentric equatorial drawing
 	Mat4d mat_j2000_to_eye;	// precessed version
