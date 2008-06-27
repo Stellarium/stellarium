@@ -75,12 +75,14 @@ sub refactorString {
 	}
 	my %patchFileList;
 	my $textRed = color 'red';
+	my $textGreen = color 'green';
 	my $textReset = color 'reset';
 
 	# read all the files and build a list of the ones which contain the
 	# search pattern.  the list is the keys in the hash %patchFileList
 	# also print previews of the replacements, with the text to be
 	# replaced in red.
+	my $candidates = 0;
 	foreach my $f (@allFileList) {
 		if ($f =~ /~$/) { warn "SKIPPING backup file: $f"; next; }
 		if ( ! open(F, "<$f") ) { 
@@ -88,15 +90,32 @@ sub refactorString {
 		}
 		else {
 			while(<F>) {
-				if (s/($s)/$textRed$1$textReset/g) { 
+				# First, if we already have the replacement string
+				# colour it red because it could be a problem
+				if (s/($r)/$textRed$1$textReset/g) {
+					if (!$flg_yes || $flg_verbose) {
+						print "!!  $f\[$.\]: $_";
+					}
+				}
+
+				# Now colour all target strings and preview them
+				if (s/($s)/$textGreen$1$textReset/g) { 
 					$patchFileList{$f} = 1; 
 					if (!$flg_yes || $flg_verbose) {
-						print "$f\[$.\]: $_";
+						print "    $f\[$.\]: $_";
 					}
+					$candidates++;
 				}
 			}
 			close(F);
 		}
+	}
+
+	if ($candidates==0) {
+		if ($flg_verbose) {
+			print "There is nothing to replace\n";
+		}
+		exit(0);
 	}
 
 	# prompt user if they want to do the replacement
@@ -162,11 +181,24 @@ refactor [options] pattern {replacement|.} file [file] ...
 =head1 DESCRIPTION
 
 Replaces Perl-RE I<pattern> with I<replacement> in all specified files.  First the
-program prints out what the replacement is, and then lists lines in files where
-a replacement will be made, highlighing in red the text which will be replaced.
+program prints a preview of what will be done.
 
 If I<replacement> is a period ("."), the replacement will be guesses at according to
 Stellarium's variable coding standards (e.g. camel_case => camelCase).
+
+When the replacement string already exists in one of the target files, the offending
+string will be coloured red, and the line printed out with the prefix !!.  
+
+Strings which match the search pattern will be coloured green, and those lines 
+which will be modified will be printed with no prefix.
+
+Once the preview output is completed, the user will be prompted if they wish to 
+proceed with the modificaion of the files.  If there are no modifiections to do 
+the program will terminate.
+
+On confirming the intention to proceed, the original files will be re-named with a ~ 
+suffix, and a modified copy of the file with the original name will be created with
+the changes made.
 
 =head1 OPTIONS
 
@@ -182,7 +214,8 @@ Print extra information about what is going on.
 
 =item B<--yes>
 
-Don't prompt for confirmation - just do it.
+Don't prompt for confirmation - just do it. This will also suppress the
+display of preview and conflict information, unless the --verbose flag is used.
 
 =head1 ENVIRONMENT
 
