@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>428</width>
-    <height>497</height>
+    <width>427</width>
+    <height>493</height>
    </rect>
   </property>
   <property name="font" >
@@ -164,8 +164,8 @@ color: darkgray;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>420</width>
-           <height>441</height>
+           <width>419</width>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -458,9 +458,61 @@ color: darkgray;
               </widget>
              </item>
             </layout>
+            <zorder>planetOrbitCheckBox</zorder>
+            <zorder>planetScaleMoonCheckBox</zorder>
+            <zorder>planetLightSpeedCheckBox</zorder>
+            <zorder>planetMarkerCheckBox</zorder>
+            <zorder>planetsGroupBox_6</zorder>
            </widget>
           </item>
           <item row="2" column="0" colspan="2" >
+           <widget class="QGroupBox" name="planetsGroupBox_6" >
+            <property name="title" >
+             <string>Projection</string>
+            </property>
+            <property name="checkable" >
+             <bool>false</bool>
+            </property>
+            <layout class="QHBoxLayout" name="_3" >
+             <property name="spacing" >
+              <number>2</number>
+             </property>
+             <item>
+              <widget class="QListWidget" name="projectionListWidget" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize" >
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="horizontalScrollBarPolicy" >
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextBrowser" name="projectionTextBrowser" >
+               <property name="openExternalLinks" >
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2" >
            <widget class="QGroupBox" name="planetsGroupBox_4" >
             <property name="title" >
              <string>Shooting Stars</string>
@@ -557,68 +609,21 @@ zenith rate</string>
             </layout>
            </widget>
           </item>
-          <item row="3" column="0" colspan="2" >
-           <widget class="QGroupBox" name="planetsGroupBox_6" >
-            <property name="title" >
-             <string>Projection</string>
-            </property>
-            <property name="checkable" >
-             <bool>false</bool>
-            </property>
-            <layout class="QHBoxLayout" name="_3" >
-             <property name="spacing" >
-              <number>2</number>
-             </property>
-             <item>
-              <widget class="QListWidget" name="projectionListWidget" >
-               <property name="sizePolicy" >
-                <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize" >
-                <size>
-                 <width>100</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="horizontalScrollBarPolicy" >
-                <enum>Qt::ScrollBarAlwaysOff</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTextBrowser" name="projectionTextBrowser" >
-               <property name="openExternalLinks" >
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
          </layout>
          <zorder>planetsGroupBox</zorder>
-         <zorder>planetsGroupBox_4</zorder>
-         <zorder>planetsGroupBox_6</zorder>
          <zorder>starGroupBox</zorder>
          <zorder></zorder>
          <zorder></zorder>
+         <zorder>planetsGroupBox_4</zorder>
+         <zorder>planetsGroupBox_6</zorder>
         </widget>
         <widget class="QWidget" name="tabMarking" >
          <property name="geometry" >
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>420</width>
-           <height>441</height>
+           <width>419</width>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -987,8 +992,8 @@ zenith rate</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>420</width>
-           <height>441</height>
+           <width>419</width>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -1133,8 +1138,8 @@ zenith rate</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>420</width>
-           <height>441</height>
+           <width>419</width>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
