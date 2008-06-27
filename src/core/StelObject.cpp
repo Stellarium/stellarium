@@ -24,6 +24,8 @@
 #include "Projector.hpp"
 #include "Observer.hpp"
 
+#include <QDebug>
+
 void intrusive_ptr_add_ref(StelObject* p)
 {
 	p->retain();
@@ -48,5 +50,5 @@ float StelObject::getOnScreenSize(const StelCore* core) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getObsSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))*getObsEquatorialPos(core->getNavigation());
+	return Mat4d::zrotation(-core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))*getObsEquatorialPos(core->getNavigation());
 }
