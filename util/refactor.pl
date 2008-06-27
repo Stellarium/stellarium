@@ -7,9 +7,11 @@ use Term::ANSIColor;
 
 my $flg_verbose = 0;
 my $flg_yes = 0;
+my $flg_no = 0;
 GetOptions(
 	"verbose" => \$flg_verbose,
 	"yes"     => \$flg_yes,
+	"no"      => \$flg_no,
 	"help"    => sub { lusage(0); },
 ) || usage(1);
 
@@ -118,6 +120,8 @@ sub refactorString {
 		exit(0);
 	}
 
+	if ($flg_no) { exit(0); }
+
 	# prompt user if they want to do the replacement
 	my $do_it = $flg_yes;
 	if ($flg_yes) { 
@@ -207,6 +211,10 @@ the changes made.
 =item B<--help>
 
 Print the command line syntax an option details.
+
+=item B<--no>
+
+Don't do anything (useful for previewing).
 
 =item B<--verbose>
 
