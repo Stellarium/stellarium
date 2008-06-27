@@ -41,83 +41,132 @@ QLineEdit {
 }
 
 QPushButton {
-  border: 1px solid #2e2e36;
-  border-radius: 4px;
-  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d6d7da, stop: 1 #babbbe);
+	border: 1px solid #5c5c5c;
+	border-radius: 4px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d6d7da, stop: 1 #babbbe);
 }
 
 QPushButton:pressed {
- background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #babbde, stop: 1 #d6d7fa);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #babbde, stop: 1 #d6d7fa);
 }
 
+
+/****** QScrollBar:vertical *******/
 QScrollBar:vertical {
- border: 1px solid #2e2e36;
- background: #4a4b50;
- width: 15px;
-         margin: 22px 0px 22px 0px;
+	border: 1px solid #747474;
+	background: #5c5c5c;
+	width: 13px;
+	margin: 22px 0px 22px 0px;
 }
 
 QScrollBar::handle:vertical {
-    border: 1px solid #4a4b50;
-    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
-   stop: 0 #c6c7ca, stop: 1 #aaabae);
+    border: 0px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
 	border-radius: 4px;
 	min-height: 20px;
 }
 
 QScrollBar::add-line:vertical {
-         border: 3px solid #2e2e36;
-         background: #36375c;
-         height: 20px;
-         border-radius: 5px;
-         subcontrol-position: bottom;
-         subcontrol-origin: margin;
+	border: 1px solid #5c5c5c;
+	height: 20px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
 }
 
 QScrollBar::sub-line:vertical {
-         border: 3px solid #2e2e36;
-         background: #36375c;
-         height: 20px;
-         border-radius: 5px;
-         subcontrol-position: top;
-         subcontrol-origin: margin;
-}
-
-QScrollBar:left-arrow:vertical, QScrollBar::right-arrow:vertical {
-         border: 2px solid grey;
-         width: 3px;
-         height: 3px;
-         background: white;
+	border: 1px solid #5c5c5c;
+	height: 20px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
 }
 
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-         background: rgba(18, 19, 36, 70%);
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #515151, stop:1 #747474);
 }
 
 QScrollBar::up-arrow {
-	subcontrol-origin: border;
-	subcontrol-position: top right; /* position at the top right corner */
+	subcontrol-origin: padding;
+	subcontrol-position: top; /* position at the top right corner */
 	width: 13px; 
 	height: 20px; 
-	border:solid 1px;
-	border-width: 2px;
-	border-color: #2e2e36;
-	border-radius: 5px;
 	image: url(:/graphicGui/gui/spinup.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92, 90%), stop: 1 rgba(74, 74, 75, 90%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(98, 98, 99, 90%), stop: 1 rgba(70, 70, 70, 90%));
 }
 
 QScrollBar::down-arrow {
-	subcontrol-origin: border;
-	subcontrol-position: bottom right; /* position at the bottom right corner */
+	subcontrol-origin: padding;
+	subcontrol-position: bottom; /* position at the bottom right corner */
 	width: 13px; 
 	height: 20px; 
-	border:solid 1px;
-	border-width: 2px;
-	border-color: #2e2e36;
-	border-radius: 5px;
 	image: url(:/graphicGui/gui/spindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(98, 98, 99, 90%), stop: 1 rgba(70, 70, 70, 90%));
+}
+
+/****** QScrollBar:horizontal *******/
+QScrollBar:horizontal {
+	border: 1px solid #747474;
+	background: #5c5c5c;
+	height: 13px;
+	margin: 0px 22px 0px 22px;
+}
+
+QScrollBar::handle:horizontal {
+    border: 0px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
+	border-radius: 4px;
+	min-width: 20px;
+}
+
+QScrollBar::add-line:horizontal {
+	border: 1px solid #5c5c5c;
+	width: 20px;
+	subcontrol-position: left;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+	border: 1px solid #5c5c5c;
+	width: 20px;
+	subcontrol-position: right;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #515151, stop:1 #747474);
+}
+
+QScrollBar::right-arrow {
+	subcontrol-origin: padding;
+	subcontrol-position: left; /* position at the top right corner */
+	height: 13px; 
+	width: 20px; 
+	image: url(:/graphicGui/gui/spinleft.png);
+	background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 rgb(98, 98, 99, 90%), stop: 1 rgba(70, 70, 70, 90%));
+}
+
+QScrollBar::left-arrow {
+	subcontrol-origin: padding;
+	subcontrol-position: right; /* position at the bottom right corner */
+	height: 13px; 
+	width: 20px; 
+	image: url(:/graphicGui/gui/spinright.png);
+	background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 rgb(98, 98, 99, 90%), stop: 1 rgba(70, 70, 70, 90%));
+}
+
+/****** QSlider:horizontal *******/
+QSlider::groove:horizontal {
+	border: 1px solid #747474;
+	height: 8px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #515151, stop:1 #747474);
+	margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
+	border: 1px solid #5c5c5c;
+	width: 18px;
+	margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+	border-radius: 3px;
 }
 
 QGroupBox {
@@ -178,7 +227,7 @@ QTabBar::tab:selected {
 }
 
 QTabBar::tab:first:selected {
-	margin-left: 0; the first selected tab has nothing to overlap with on the left
+	margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
 }
 
 QTabBar::tab:last:selected {
@@ -335,8 +384,8 @@ QComboBox::down-arrow {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
 }
 
-/************* The following are used for VirGO **************/
 
+/************* The following are used for VirGO **************/
 
 QMainWindow::separator {
 	border: 1px solid rgb(48, 49, 52);
@@ -414,17 +463,3 @@ QDateEdit::down-button {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
 }
 
-QSlider::groove:horizontal {
-	border: 1px solid #747474;
-	height: 8px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #515151, stop:1 #848484);
-	margin: 2px 0;
-}
-
-QSlider::handle:horizontal {
-	background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
-	border: 1px solid #5c5c5c;
-	width: 18px;
-	margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-	border-radius: 3px;
-}
