@@ -132,19 +132,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b>").arg(getMagnitude(nav), 0, 'f', 2) << "<br>";
 
-	Vec3d equPos = getObsEquatorialPos(nav);
-
-	if (flags&RaDec)
+	if (flags&RaDecJ2000)
 	{
-		StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
-		oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+		StelUtils::rect_to_sphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
+		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	}
 
 	if (flags&AltAzi)
 	{
 		// calculate alt az position
-		Vec3d localPos = nav->earth_equ_to_local(equPos);
-		StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
+		StelUtils::rect_to_sphe(&tempRA, &tempDE, getAltAzPos(nav));
 		tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 		if(tempRA > M_PI*2)
 			tempRA -= M_PI*2;
@@ -154,7 +151,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Distance)
 	{
 		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(equPos.length(), 0, 'f', 8) << "<br>";
+		oss << q_("Distance: %1AU").arg(getObsJ2000Pos(nav).length(), 0, 'f', 8) << "<br>";
 	}
 
 	if (flags&Size)
