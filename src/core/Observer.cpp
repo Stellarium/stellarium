@@ -185,10 +185,17 @@ Mat4d Observer::getRotLocalToEquatorial(double jd) const
 		* Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
 
-Mat4d Observer::getRotEquatorialToVsop87(void) const {
-  return getHomePlanet()->getRotEquatorialToVsop87();
+Mat4d Observer::getRotEquatorialToVsop87(void) const
+{
+	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
+// Get the sideral time shifted by the observer longitude
+double Observer::getLocalSideralTime(double jd) const
+{
+	return (getHomePlanet()->getSiderealTime(jd)+longitude)*M_PI/180.;
+}
+	
 void Observer::load(const QString& file, const QString& section)
 {
 	QSettings conf(file, QSettings::IniFormat);

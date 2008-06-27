@@ -53,6 +53,11 @@ public:
 	Mat4d getRotLocalToEquatorial(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 	
+	//! Get the sideral time shifted by the observer longitude
+	//! @param jd the Julian Day
+	//! @return the locale sideral time in radian
+	double getLocalSideralTime(double jd) const;
+	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
