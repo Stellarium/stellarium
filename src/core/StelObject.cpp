@@ -22,6 +22,7 @@
 #include "Navigator.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
+#include "Observer.hpp"
 
 void intrusive_ptr_add_ref(StelObject* p)
 {
@@ -42,4 +43,10 @@ Vec3d StelObject::getObsEquatorialPos(const Navigator * nav) const
 float StelObject::getOnScreenSize(const StelCore* core) const
 {
 	return getAngularSize(core)*M_PI/180.*core->getProjection()->getPixelPerRadAtCenter();
+}
+
+// Get observer local sideral coordinate
+Vec3d StelObject::getObsSideralPos(const StelCore* core) const
+{
+	return Mat4d::zrotation(core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))*getObsEquatorialPos(core->getNavigation());
 }
