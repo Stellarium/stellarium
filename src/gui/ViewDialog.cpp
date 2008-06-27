@@ -77,11 +77,12 @@ void ViewDialog::createDialogContent()
 	// Connect and initialize checkboxes and other widgets
 	
 	// Stars section
+	QAction* a;
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-	ui->showStarsCheckBox->setChecked(smgr->getFlagStars());
-	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Stars");
-	connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
-	connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+// 	ui->showStarsCheckBox->setChecked(smgr->getFlagStars());
+// 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Stars");
+// 	connect(a, SIGNAL(toggled(bool)), ui->showStarsCheckBox, SLOT(setChecked(bool)));
+// 	connect(ui->showStarsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
@@ -94,6 +95,9 @@ void ViewDialog::createDialogContent()
 	
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
+	
+	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
+	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 	
 	// Planets section
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
