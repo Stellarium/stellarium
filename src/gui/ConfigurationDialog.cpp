@@ -62,20 +62,20 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
 	
 	// Fill the language list widget from the available list
-	QComboBox* c = ui->programLanguageComboBox;
+	QListWidget* c = ui->programLanguageListWidget;
 	c->clear();
 	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QString l = Translator::iso639_1CodeToNativeName(appLang);
-	int idx = c->findText(l, Qt::MatchExactly);
-	if (idx==-1 && appLang.contains('_'))
+	QList<QListWidgetItem*> litem = c->findItems(l, Qt::MatchExactly);
+	if (litem.empty() && appLang.contains('_'))
 	{
 		l = appLang.left(appLang.indexOf('_'));
 		l=Translator::iso639_1CodeToNativeName(l);
-		idx = c->findText(l, Qt::MatchExactly);
+		litem = c->findItems(l, Qt::MatchExactly);
 	}
-	c->setCurrentIndex(idx);
-	connect(c, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	c->setCurrentItem(litem.at(0));
+	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
