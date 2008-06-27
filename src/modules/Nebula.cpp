@@ -58,10 +58,6 @@ Nebula::~Nebula()
 QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	double tempDE, tempRA;
-
-	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
-	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
 
 	QString str;
 	QTextStream oss(&str);
@@ -104,15 +100,16 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (mag < 50 && flags&Magnitude) 
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
+	double tempDE, tempRA;
+	StelUtils::rect_to_sphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
 	if (flags&RaDec)
-		oss << q_("RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
 	if (flags&AltAzi)
 	{
 		// calculate alt az
-		Vec3d localPos = nav->earth_equ_to_local(equPos);
-		StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
-		tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+		StelUtils::rect_to_sphe(&tempRA, &tempDE, getAltAzPos(nav));
+		tempRA = 3.*M_PI - tempRA;  // N is zero, E is 90 degrees
 		if(tempRA > M_PI*2) tempRA -= M_PI*2;	
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	}

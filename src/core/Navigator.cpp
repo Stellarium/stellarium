@@ -255,7 +255,8 @@ void Navigator::updateTransformMatrices(void)
 
 	mat_earth_equ_to_j2000 = mat_vsop87_to_j2000 * position->getRotEquatorialToVsop87();
 	mat_j2000_to_earth_equ = mat_earth_equ_to_j2000.transpose();
-
+	mat_j2000_to_local = mat_earth_equ_to_local*mat_j2000_to_earth_equ;
+	
 	mat_helio_to_earth_equ = mat_j2000_to_earth_equ * mat_vsop87_to_j2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
