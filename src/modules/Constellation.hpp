@@ -45,11 +45,16 @@ private:
 	~Constellation();
     
 	// StelObject method to override
-   	//! Write I18n information about the object in string.
-	//! @param core a pointer to the StelCore object (unused).
+	//! Get a string with data about the Constellation.
+	//! Constellations support the following InfoStringGroup flags:
+	//! - Name
+	//! @param core the Stelore object
+	//! @param flags a set of InfoStringGroup items to include in the return value.
+	//! @return a QString a description of the Planet.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
-		return getNameI18n() + "(" + getShortName() + "°";
+		if (flags&Name) return getNameI18n() + "(" + getShortName() + "°";
+		else return "";
 	}
 
 	//! Get the module/object type string.

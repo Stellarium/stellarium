@@ -53,11 +53,18 @@ protected:
   QString getEnglishName(void) const {return "";}
   QString getNameI18n(void) const = 0;
 
-  //! Get information about the nebula.
-  //! @param core the StelCore
-  //! @param flags a set of StelObject::InfoStringGroup flags which deteremine which information
-  //! is included in the return value.  The Extra1 InfoStringGroup switches spectral type.
-  //! The Extra2 InfoStringGroup switches parallax.
+
+  //! StarWrapperBase supports the following InfoStringGroup flags:
+  //! - Name
+  //! - Magnitude
+  //! - RaDecJ2000
+  //! - RaDec
+  //! - AltAzi
+  //! - PlainText
+  //! @param core the StelCore object
+  //! @param flags a set of InfoStringGroup items to include in the return value.
+  //! @return a QString containing an HMTL encoded description of the StarWrapperBase.
+  //! is included in the return value.  
   QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
   virtual float getBV(void) const = 0;
 private:
@@ -107,6 +114,20 @@ public:
   StarWrapper1(const SpecialZoneArray<Star1> *a,
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
+  //! StarWrapper1 supports the following InfoStringGroup flags:
+  //! - Name
+  //! - CatalogNumber
+  //! - Magnitude
+  //! - RaDecJ2000
+  //! - RaDec
+  //! - AltAzi
+  //! - Extra1 (spectral type)
+  //! - Distance
+  //! - Extra2 (parallax)
+  //! - PlainText
+  //! @param core the StelCore object
+  //! @param flags a set of InfoStringGroup items to include in the return value.
+  //! @return a QString containing an HMTL encoded description of the StarWrapper1.
   QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
   QString getEnglishName(void) const;
 };
