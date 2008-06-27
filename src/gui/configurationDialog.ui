@@ -148,7 +148,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -197,7 +197,7 @@ color: darkgray;
              <item>
               <widget class="QRadioButton" name="systemTimeRadio" >
                <property name="toolTip" >
-                <string>Sets Stellarium's simulation time to the system clock when Stellarium starts</string>
+                <string>Startups stellarium at system clock date and time</string>
                </property>
                <property name="text" >
                 <string>System date and time</string>
@@ -400,7 +400,7 @@ color: darkgray;
             <item>
              <widget class="QCheckBox" name="mouseTimeoutCheckbox" >
               <property name="toolTip" >
-               <string>When enabled, hides the mouse cursor after this number of seconds of inactivity</string>
+               <string>Hides the mouse cursor when inactive</string>
               </property>
               <property name="text" >
                <string>Mouse cursor timeout (seconds):</string>
@@ -470,7 +470,7 @@ color: darkgray;
              <item>
               <widget class="QCheckBox" name="checkBox_2" >
                <property name="toolTip" >
-                <string>When enabled, the keyboard can be used to pan and zoom the display.</string>
+                <string>Allow keyboard to pan and zoom</string>
                </property>
                <property name="text" >
                 <string>Enable keyboard navigation</string>
@@ -480,7 +480,7 @@ color: darkgray;
              <item>
               <widget class="QCheckBox" name="checkBox" >
                <property name="toolTip" >
-                <string>When enabled, the mouse can be used to pan (drag) and zoom (mousewheel) the display.</string>
+                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
                </property>
                <property name="text" >
                 <string>Enable mouse navigation</string>
