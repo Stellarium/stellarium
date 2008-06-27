@@ -120,9 +120,8 @@ void ViewDialog::createDialogContent()
 	
 	// Shouting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
-	ui->showShoutingStarsCheckBox->setChecked(mmgr->getFlagShow());
-	connect(ui->showShoutingStarsCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagShow(bool)));
-	
+	ui->zhrNone->setChecked(!mmgr->getFlagShow());
+	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
@@ -332,6 +331,15 @@ void ViewDialog::shoutingStarsZHRChanged()
 {
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
 	int zhr;
+	if (ui->zhrNone->isChecked())
+	{
+		mmgr->setFlagShow(false);
+		zhr = 0;
+	}
+	else
+	{
+		mmgr->setFlagShow(true);
+	}
 	if (ui->zhr10->isChecked())
 		zhr = 10;
 	if (ui->zhr80->isChecked())
@@ -344,6 +352,9 @@ void ViewDialog::shoutingStarsZHRChanged()
 		mmgr->setZHR(zhr);
 	switch (zhr)
 	{
+		case 0:
+			ui->zhrLabel->setText(q_("No shooting stars"));
+			break;
 		case 10:
 			ui->zhrLabel->setText(q_("Normal rate"));
 			break;
