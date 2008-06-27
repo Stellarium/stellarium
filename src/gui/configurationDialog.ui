@@ -159,57 +159,38 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
-         <layout class="QVBoxLayout" >
-          <item>
-           <layout class="QHBoxLayout" >
-            <item>
-             <widget class="QLabel" name="label" >
-              <property name="text" >
-               <string>Program language:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="programLanguageComboBox" >
-              <property name="maximumSize" >
-               <size>
-                <width>16777215</width>
-                <height>300</height>
-               </size>
-              </property>
-              <property name="maxVisibleItems" >
-               <number>15</number>
-              </property>
-              <property name="sizeAdjustPolicy" >
-               <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-              </property>
-              <property name="frame" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0" >
-             <size>
-              <width>20</width>
-              <height>398</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label" >
+          <property name="geometry" >
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>131</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Program language:</string>
+          </property>
+         </widget>
+         <widget class="QListWidget" name="programLanguageListWidget" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>181</width>
+            <height>401</height>
+           </rect>
+          </property>
+          <property name="horizontalScrollBarPolicy" >
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="tabStartup" >
          <property name="geometry" >
@@ -217,7 +198,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -410,7 +391,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -478,7 +459,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -516,16 +497,6 @@ color: darkgray;
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="siderealTimeCheckbox" >
-            <property name="toolTip" >
-             <string>Changes the time display to use sidereal time instead of solar time.</string>
-            </property>
-            <property name="text" >
-             <string>Sidereal time</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="adaptationCheckbox" >
             <property name="toolTip" >
              <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
@@ -559,7 +530,7 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -696,89 +667,12 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>437</width>
-           <height>470</height>
+           <height>472</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Plugins</string>
          </attribute>
-        </widget>
-        <widget class="QWidget" name="tab" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>437</width>
-           <height>470</height>
-          </rect>
-         </property>
-         <attribute name="title" >
-          <string>DEBUG</string>
-         </attribute>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox" >
-          <property name="geometry" >
-           <rect>
-            <x>160</x>
-            <y>80</y>
-            <width>171</width>
-            <height>27</height>
-           </rect>
-          </property>
-          <property name="maximum" >
-           <double>99999999.000000000000000</double>
-          </property>
-          <property name="singleStep" >
-           <double>0.100000000000000</double>
-          </property>
-          <property name="value" >
-           <double>1.900000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2" >
-          <property name="geometry" >
-           <rect>
-            <x>160</x>
-            <y>130</y>
-            <width>171</width>
-            <height>27</height>
-           </rect>
-          </property>
-          <property name="maximum" >
-           <double>99999999.000000000000000</double>
-          </property>
-          <property name="singleStep" >
-           <double>500.000000000000000</double>
-          </property>
-          <property name="value" >
-           <double>112500.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_10" >
-          <property name="geometry" >
-           <rect>
-            <x>20</x>
-            <y>90</y>
-            <width>131</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>InScale</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_11" >
-          <property name="geometry" >
-           <rect>
-            <x>20</x>
-            <y>130</y>
-            <width>131</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>outScale</string>
-          </property>
-         </widget>
         </widget>
        </widget>
       </item>
