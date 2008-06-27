@@ -37,10 +37,19 @@ public:
 	Nebula();
 	~Nebula();
 
-	//! Get a textual description of the object
-	//! @param core the StelCore object
-	//! @param flags StelObject::InfoStringGroups to be included in the return value.
-	//! The StelObject::InfoStringGroups Extra1 is the "type" - e.g. "Galaxy" or "Open Cluster".
+	//! Nebula support the following InfoStringGroup flags:
+	//! - Name
+	//! - CatalogNumber
+	//! - Magnitude
+	//! - RaDec
+	//! - AltAzi
+	//! - Distance
+	//! - Size
+	//! - Extra1 (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
+	//! - PlainText
+	//! @param core the Stelore object
+	//! @param flags a set of InfoStringGroup items to include in the return value.
+	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getType(void) const {return "Nebula";}
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}

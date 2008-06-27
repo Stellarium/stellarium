@@ -94,12 +94,26 @@ public:
 	       const QString& tex_halo_name,
 	       pos_func_type _coord_func,
 	       OsulatingFunctType *osculating_func,
-	       bool close_orbit,bool hidden);
+	       bool close_orbit,
+	       bool hidden, 
+	       bool has_atmosphere);
 
 	~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
+	//! Get a string with data about the Planet.
+	//! Planets support the following InfoStringGroup flags:
+	//! - Name
+	//! - Magnitude
+	//! - RaDec
+	//! - AltAzi
+	//! - Distance
+	//! - Size
+	//! - PlainText
+	//! @param core the Stelore object
+	//! @param flags a set of InfoStringGroup items to include in the return value.
+	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual double getCloseViewFov(const Navigator * nav) const;
 	virtual double get_satellites_fov(const Navigator * nav) const;
@@ -112,6 +126,7 @@ public:
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
+	virtual bool hasAtmosphere(void) {return atmosphere;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
@@ -238,7 +253,6 @@ protected:
 	// Draw the circle and name of the Planet
 	void draw_hints(const StelCore* core);
 
-
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
 	int flagHalo;                   // Set wether a little "star like" halo will be drawn
@@ -246,7 +260,6 @@ protected:
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA
 	double one_minus_oblateness;    // (polar radius)/(equatorial radius)
-
 	Vec3d ecliptic_pos;             // Position in UA in the rectangular ecliptic coordinate system
 	                                // centered on the parent Planet
 	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
@@ -256,33 +269,25 @@ protected:
 	Mat4d rot_local_to_parent;
 	float axis_rotation;            // Rotation angle of the Planet on it's axis
 	STextureSP tex_map;             // Planet map texture
-
 	Ring* rings;                    // Planet rings
-
 	double distance;                // Temporary variable used to store the distance to a given point
 	                                // it is used for sorting while drawing
-
 	float sphere_scale;             // Artificial scaling for better viewing
-
 	double lastJD;
-	
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
 	OsulatingFunctType *const osculating_func;
-
 	const Planet *parent;           // Planet parent i.e. sun for earth
 	list<Planet *> satellites;      // satellites of the Planet
-
 	static SFont* planet_name_font; // Font for names
 	static Vec3f label_color;
-	
 	static STextureSP hintCircleTex;
-	
 	LinearFader hint_fader;
-	LinearFader labelsFader;	// Store the current state of the label for this planet
-	bool flagLabels;			// Define whether labels should be displayed
-	
-	bool hidden;  // useful for fake planets used as observation positions - not drawn or labeled
+	LinearFader labelsFader;        // Store the current state of the label for this planet
+	bool flagLabels;                // Define whether labels should be displayed
+	bool hidden;                    // useful for fake planets used as observation 
+	                                // positions - not drawn or labeled
+	bool atmosphere;                // Does the planet have an atmosphere?
 };
 
 #endif // _PLANET_HPP_

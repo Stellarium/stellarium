@@ -653,7 +653,8 @@ void SolarSystem::loadPlanets()
 					posfunc,
 					osculating_func,
 					close_orbit,
-					pd.value(secname+"/hidden", 0).toBool());
+					pd.value(secname+"/hidden", 0).toBool(),
+					pd.value(secname+"/atmosphere", false).toBool());
 
 		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;
