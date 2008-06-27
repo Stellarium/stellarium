@@ -56,7 +56,8 @@ Planet::Planet(Planet *parent,
                pos_func_type coord_func,
                OsulatingFunctType *osculating_func,
                bool aclose_orbit,
-               bool hidden) 
+               bool hidden,
+	       bool has_atmosphere) 
 	: englishName(englishName),
 	  flagHalo(flagHalo),
 	  flag_lighting(flag_lighting),
@@ -64,7 +65,11 @@ Planet::Planet(Planet *parent,
 	  color(color), albedo(albedo), axis_rotation(0.), rings(NULL),
 	  sphere_scale(1.f),
 	  lastJD(J2000), 
-	  coord_func(coord_func), osculating_func(osculating_func), parent(parent), hidden(hidden)
+	  coord_func(coord_func), 
+	  osculating_func(osculating_func), 
+	  parent(parent), 
+	  hidden(hidden), 
+	  atmosphere(has_atmosphere)
 {
 	last_orbitJD =0;
 	deltaJD = JD_SECOND;

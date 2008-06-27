@@ -43,6 +43,14 @@ public:
 	virtual ~Telescope(void) {}
 	QString getEnglishName(void) const {return name;}
 	QString getNameI18n(void) const {return nameI18n;}
+	//! Telescope supports the following InfoStringGroup flags:
+	//! - Name
+	//! - RaDecJ2000
+	//! - RaDec
+	//! - PlainText
+	//! @param core the StelCore object
+	//! @param flags a set of InfoStringGroup items to include in the return value.
+	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getType(void) const {return "Telescope";}
 	virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
