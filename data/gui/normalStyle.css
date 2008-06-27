@@ -16,13 +16,13 @@ QFrame:active {
 }
 
 DialogFrame {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #081f25;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #081f25;
 }
 
 ResizeFrame {
- background-image: url(data/gui/resize.png);
+	background-image: url(data/gui/resize.png);
 }
 
 
@@ -244,15 +244,15 @@ QTabBar::tab:only-one {
 }
 
 QListWidget, QListWidget:active {
- 	background: solid rgba(31, 31, 31, 70%);
+	background: solid rgba(31, 31, 31, 70%);
 	border: 1px;
-    	border-radius: 0px;
-    	border-left-color: #000;
+    border-radius: 0px;
+    border-left-color: #000;
 	border-top-color: #000;
 	border-right-color: #5f5f5f;
 	border-bottom-color:#5f5f5f;
-    	border-style: solid;
-	selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(208, 169, 93, 90%), stop: 1 rgba(255, 255, 190, 90%));
+    border-style: solid;
+	selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(178, 139, 63, 90%), stop: 1 rgba(225, 225, 160, 90%));
 }
 
 QCheckBox
