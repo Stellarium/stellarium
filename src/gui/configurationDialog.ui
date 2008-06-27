@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>445</width>
-    <height>528</height>
+    <width>481</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -158,59 +158,42 @@ color: darkgray;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>437</width>
-           <height>472</height>
+           <width>473</width>
+           <height>409</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
-         <widget class="QLabel" name="label" >
-          <property name="geometry" >
-           <rect>
-            <x>20</x>
-            <y>20</y>
-            <width>131</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Program language:</string>
-          </property>
-         </widget>
-         <widget class="QListWidget" name="programLanguageListWidget" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>50</y>
-            <width>181</width>
-            <height>401</height>
-           </rect>
-          </property>
-          <property name="horizontalScrollBarPolicy" >
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="tabStartup" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>437</width>
-           <height>472</height>
-          </rect>
-         </property>
-         <attribute name="title" >
-          <string>Startup</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout" >
-          <item>
+         <layout class="QGridLayout" name="gridLayout" >
+          <item rowspan="3" row="0" column="0" >
+           <widget class="QGroupBox" name="groupBox_2" >
+            <property name="title" >
+             <string>Program language</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_6" >
+             <item>
+              <widget class="QListWidget" name="programLanguageListWidget" >
+               <property name="minimumSize" >
+                <size>
+                 <width>170</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="horizontalScrollBarPolicy" >
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1" >
            <widget class="QGroupBox" name="groupBox" >
             <property name="title" >
-             <string>Date and Time</string>
+             <string>Startup Date and Time</string>
             </property>
-            <layout class="QVBoxLayout" >
+            <layout class="QVBoxLayout" name="_2" >
              <item>
               <widget class="QRadioButton" name="systemTimeRadio" >
                <property name="toolTip" >
@@ -222,14 +205,14 @@ color: darkgray;
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" >
+              <layout class="QHBoxLayout" name="_3" >
                <item>
                 <widget class="QRadioButton" name="todayRadio" >
                  <property name="toolTip" >
                   <string>Sets the simulation time to the next instance of this time of day when Stellarium starts</string>
                  </property>
                  <property name="text" >
-                  <string>System date at this time:</string>
+                  <string>System date at:</string>
                  </property>
                 </widget>
                </item>
@@ -250,7 +233,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" >
+              <layout class="QHBoxLayout" name="_4" >
                <item>
                 <widget class="QRadioButton" name="fixedTimeRadio" >
                  <property name="toolTip" >
@@ -287,14 +270,14 @@ color: darkgray;
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="1" column="1" >
            <widget class="QGroupBox" name="groupBox_3" >
             <property name="title" >
-             <string>Observer</string>
+             <string>Startup FOV and Direction</string>
             </property>
-            <layout class="QVBoxLayout" >
+            <layout class="QVBoxLayout" name="_5" >
              <item>
-              <layout class="QHBoxLayout" >
+              <layout class="QHBoxLayout" name="_6" >
                <item>
                 <widget class="QLabel" name="label_3" >
                  <property name="text" >
@@ -334,7 +317,7 @@ color: darkgray;
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" >
+              <layout class="QHBoxLayout" name="_7" >
                <item>
                 <widget class="QLabel" name="label_2" >
                  <property name="text" >
@@ -370,154 +353,15 @@ color: darkgray;
             </layout>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer" >
+          <item row="2" column="1" >
+           <spacer name="verticalSpacer_2" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tabPlanetarium" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>437</width>
-           <height>472</height>
-          </rect>
-         </property>
-         <attribute name="title" >
-          <string>Planetarium</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_4" >
-          <item>
-           <widget class="QCheckBox" name="sphericMirrorCheckbox" >
-            <property name="toolTip" >
-             <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
-            </property>
-            <property name="text" >
-             <string>Spheric mirror distortion</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="gravityLabelCheckbox" >
-            <property name="toolTip" >
-             <string>Align labels with the horizon</string>
-            </property>
-            <property name="text" >
-             <string>Gravity labels</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="discViewportCheckbox" >
-            <property name="toolTip" >
-             <string>Mask out everything outside a central circle in the main view</string>
-            </property>
-            <property name="text" >
-             <string>Disc viewport</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox" >
-            <property name="toolTip" >
-             <string>When enabled, select the "auto zoom out" key will also set the initial viewing direction</string>
-            </property>
-            <property name="text" >
-             <string>Auto zoom out key sets initial direction of view</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0" >
-             <size>
-              <width>20</width>
-              <height>291</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tabTools" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>437</width>
-           <height>472</height>
-          </rect>
-         </property>
-         <attribute name="title" >
-          <string>Tools</string>
-         </attribute>
-         <layout class="QVBoxLayout" >
-          <item>
-           <widget class="QCheckBox" name="showFlipButtonsCheckbox" >
-            <property name="toolTip" >
-             <string>Enables/disables toolbar buttons for flipping the displayed image in the vertical and horizontal axes.   Useful for users of telescopes which flip the image of the object being observed.</string>
-            </property>
-            <property name="text" >
-             <string>Show flip buttons</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="nightModeCheckbox" >
-            <property name="toolTip" >
-             <string>Enables/disables night vision mode.  Night vision mode changes the appearance of Stellarium's user interface to use red light only - this helps to preserve the dark adaptation of the eye.</string>
-            </property>
-            <property name="text" >
-             <string>Night vision mode</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="chartModeCheckbox" >
-            <property name="toolTip" >
-             <string>Changes the way Stellarium renders the sky to look more like astronomical charts (i.e. sky is white, objects are dark).</string>
-            </property>
-            <property name="text" >
-             <string>Chart view mode</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="adaptationCheckbox" >
-            <property name="toolTip" >
-             <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
-            </property>
-            <property name="text" >
-             <string>Simulate luminance adaptation</string>
-            </property>
-            <property name="checked" >
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0" >
-             <size>
-              <width>20</width>
-              <height>261</height>
+              <height>143</height>
              </size>
             </property>
            </spacer>
@@ -529,8 +373,8 @@ color: darkgray;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>437</width>
-           <height>472</height>
+           <width>473</width>
+           <height>412</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -661,13 +505,152 @@ color: darkgray;
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tabTools" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>473</width>
+           <height>412</height>
+          </rect>
+         </property>
+         <attribute name="title" >
+          <string>Tools</string>
+         </attribute>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="showFlipButtonsCheckbox" >
+            <property name="toolTip" >
+             <string>Enables/disables toolbar buttons for flipping the displayed image in the vertical and horizontal axes.   Useful for users of telescopes which flip the image of the object being observed.</string>
+            </property>
+            <property name="text" >
+             <string>Show flip buttons</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="nightModeCheckbox" >
+            <property name="toolTip" >
+             <string>Enables/disables night vision mode.  Night vision mode changes the appearance of Stellarium's user interface to use red light only - this helps to preserve the dark adaptation of the eye.</string>
+            </property>
+            <property name="text" >
+             <string>Night vision mode</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chartModeCheckbox" >
+            <property name="toolTip" >
+             <string>Changes the way Stellarium renders the sky to look more like astronomical charts (i.e. sky is white, objects are dark).</string>
+            </property>
+            <property name="text" >
+             <string>Chart view mode</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="adaptationCheckbox" >
+            <property name="toolTip" >
+             <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
+            </property>
+            <property name="text" >
+             <string>Simulate luminance adaptation</string>
+            </property>
+            <property name="checked" >
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>261</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tabPlanetarium" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>473</width>
+           <height>412</height>
+          </rect>
+         </property>
+         <attribute name="title" >
+          <string>Planetarium</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
+          <item>
+           <widget class="QCheckBox" name="sphericMirrorCheckbox" >
+            <property name="toolTip" >
+             <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+            </property>
+            <property name="text" >
+             <string>Spheric mirror distortion</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="gravityLabelCheckbox" >
+            <property name="toolTip" >
+             <string>Align labels with the horizon</string>
+            </property>
+            <property name="text" >
+             <string>Gravity labels</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="discViewportCheckbox" >
+            <property name="toolTip" >
+             <string>Mask out everything outside a central circle in the main view</string>
+            </property>
+            <property name="text" >
+             <string>Disc viewport</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox" >
+            <property name="toolTip" >
+             <string>When enabled, select the "auto zoom out" key will also set the initial viewing direction</string>
+            </property>
+            <property name="text" >
+             <string>Auto zoom out key sets initial direction of view</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>291</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="tabPlugins" >
          <property name="geometry" >
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>437</width>
-           <height>472</height>
+           <width>473</width>
+           <height>412</height>
           </rect>
          </property>
          <attribute name="title" >
