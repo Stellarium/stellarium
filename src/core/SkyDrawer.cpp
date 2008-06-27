@@ -489,15 +489,22 @@ float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 }
 
 // Report that an object of luminance lum is currently displayed
-void SkyDrawer::reportLuminanceInFov(double lum)
+void SkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
 {
 	if (lum > maxLum)
 	{
 		if (oldLum<0)
 			oldLum=lum;
-		float transitionSpeed = 0.2f;
 		// Use a log law for smooth transitions
-		maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* MY_MIN(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
+		if (fastAdaptation==true && lum>oldLum)
+		{
+			maxLum = lum;
+		}
+		else
+		{
+			float transitionSpeed = 0.2f;
+			maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* MY_MIN(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
+		}
 	}
 }
 
