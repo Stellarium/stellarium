@@ -544,20 +544,7 @@ color: darkgray;
              <string>Changes the way Stellarium renders the sky to look more like astronomical charts (i.e. sky is white, objects are dark).</string>
             </property>
             <property name="text" >
-             <string>Chart view mode</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="adaptationCheckbox" >
-            <property name="toolTip" >
-             <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
-            </property>
-            <property name="text" >
-             <string>Simulate luminance adaptation</string>
-            </property>
-            <property name="checked" >
-             <bool>false</bool>
+             <string>Inverted color mode</string>
             </property>
            </widget>
           </item>
