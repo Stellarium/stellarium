@@ -148,7 +148,7 @@ color: darkgray;
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -434,7 +434,7 @@ color: darkgray;
              <item>
               <widget class="QRadioButton" name="allSelectedInfoRadio" >
                <property name="toolTip" >
-                <string>Whan an object is selected, display all of the information which is available for it.</string>
+                <string>Display all of the information which is available</string>
                </property>
                <property name="text" >
                 <string>All availalable information</string>
@@ -444,7 +444,7 @@ color: darkgray;
              <item>
               <widget class="QRadioButton" name="briefSelectedInfoRadio" >
                <property name="toolTip" >
-                <string>Display only abbreviated information for selected objects.</string>
+                <string>Display only abbreviated information</string>
                </property>
                <property name="text" >
                 <string>Short information</string>
