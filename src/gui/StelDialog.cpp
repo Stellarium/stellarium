@@ -20,6 +20,7 @@
 
 #include "StelDialog.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelAppGraphicsItem.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -52,6 +53,7 @@ StelDialog::~StelDialog()
 
 void StelDialog::close()
 {
+	proxy->scene()->setFocusItem(&StelAppGraphicsItem::getInstance());
 	emit closed();
 }
 
@@ -62,6 +64,7 @@ void StelDialog::setVisible(bool v)
 		if (dialog)
 		{
 			dialog->show();
+			proxy->setFocus();
 			return;
 		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
@@ -74,6 +77,7 @@ void StelDialog::setVisible(bool v)
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); // , QSize(proxy->boundingRect().width()/2, proxy->boundingRect().height()/2)
 		proxy->setZValue(100);
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		proxy->setFocus();
 	}
 	else
 	{

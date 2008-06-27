@@ -177,7 +177,7 @@ void SearchDialog::gotoObject()
 			ui->completionLabel->selectFirst();
 			mvmgr->moveTo(newSelected[0]->getObsEquatorialPos(StelApp::getInstance().getCore()->getNavigation()),mvmgr->getAutoMoveDuration());
 			mvmgr->setFlagTracking(true);
-			// close();
+			close();
 		}
 	}
 }
@@ -202,6 +202,5 @@ bool SearchDialog::eventFilter(QObject *object, QEvent *event)
 	}
 
 	return false;
-
 }
 
