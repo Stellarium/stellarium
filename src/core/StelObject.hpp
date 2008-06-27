@@ -102,6 +102,10 @@ public:
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getObsEquatorialPos(const Navigator *nav) const;
 	
+	//! Get observer local sideral coordinate
+	//! The frame has it's Z axis at the observer current rotation axis
+	Vec3d getObsSideralPos(const StelCore *nav) const;
+	
 	//! Get observer centered equatorial coordinates at equinox J2000
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
