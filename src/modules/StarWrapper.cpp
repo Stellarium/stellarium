@@ -41,6 +41,8 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
 	double dec_equ, ra_equ;
 	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+	double dec_sideral, ra_sideral;
+	StelUtils::rect_to_sphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
 	QString str;
 	QTextStream oss(&str);
 
@@ -52,7 +54,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
 	if (flags&RaDec)
 		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
-	
+	oss << q_("Local sideral: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
 	if (flags&AltAzi)
 	{
 		// calculate alt az
@@ -140,7 +142,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&RaDec)
 		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
 		                                          StelUtils::radToDmsStr(dec_equ)) << "<br>";
-	
+	double dec_sideral, ra_sideral;
+	StelUtils::rect_to_sphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
+	oss << q_("Local sideral: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
 	if (flags&AltAzi)
 	{
 		// calculate alt az
