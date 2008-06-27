@@ -31,6 +31,11 @@ QLabel, QLabel:active {
 	background: transparent;
 }
 
+QToolTip {
+	color:#8f8f8f;
+	background: rgba(48, 49, 52);
+}
+
 QLineEdit {
      border: 1.5px solid #1e1e26;
      border-radius: 8px;
