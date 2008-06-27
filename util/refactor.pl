@@ -70,7 +70,9 @@ sub refactorString {
 		die "re-factored string is the same as the original $s\n";
 	}
 
-	print "Will replace $s with $r:\n";
+	if (!$flg_yes) {
+		print "Will replace $s with $r:\n";
+	}
 	my %patchFileList;
 	my $textRed = color 'red';
 	my $textReset = color 'reset';
@@ -88,7 +90,9 @@ sub refactorString {
 			while(<F>) {
 				if (s/($s)/$textRed$1$textReset/g) { 
 					$patchFileList{$f} = 1; 
-					print "$f\[$.\]: $_";
+					if (!$flg_yes || $flg_verbose) {
+						print "$f\[$.\]: $_";
+					}
 				}
 			}
 			close(F);
@@ -96,10 +100,21 @@ sub refactorString {
 	}
 
 	# prompt user if they want to do the replacement
-	print "\nAccept changes (y/n) > ";
-	my $res = <STDIN>;
-	chomp $res;
-	if (lc($res) eq "y") {
+	my $do_it = $flg_yes;
+	if ($flg_yes) { 
+		$do_it = 1;
+	}
+	else {
+		print "\nAccept changes (y/n)> ";
+		my $res = <STDIN>;
+		chomp $res;
+		if (lc($res) eq "y") {
+			$do_it = 1;
+		}
+	}
+
+	if ($do_it)
+	{
 		# iterate over the files identified in the first scan, doing the
 		# replacement.  The original files will be renamed with a ~ suffix
 		# and the original named file will be re-created with the changes.
@@ -118,14 +133,19 @@ sub refactorString {
 			close(ORIG);
 			close(NEWF);
 			$updatedFiles++;
+			if ($flg_verbose) {
+				print "patched $f (backup in $orig)\n";
+			}
 		}
 
-		print "Done updated $updatedLines lines in $updatedFiles files\n";
+		if ($flg_verbose) {
+			print "Done updated $updatedLines lines in $updatedFiles files\n";
+		}
 	}
-	else {
+	elsif ($flg_verbose) {
 		print "not patching\n";
-		exit;
 	}
+	exit;
 }
 
 __END__
