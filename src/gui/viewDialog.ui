@@ -272,7 +272,7 @@ color: darkgray;
              <item row="1" column="3" >
               <widget class="QCheckBox" name="adaptationCheckbox" >
                <property name="toolTip" >
-                <string>When enabled and a very bright object is visible, other objects will be dimmed.</string>
+                <string>Dimm faint stars when a very bright object is visible</string>
                </property>
                <property name="text" >
                 <string>Dynamic eye adaptation</string>
