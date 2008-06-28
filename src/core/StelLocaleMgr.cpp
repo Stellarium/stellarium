@@ -52,7 +52,7 @@ void StelLocaleMgr::init()
 	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
 	if (tzstr == "system_default")
 	{
-		time_zone_mode = S_TZ_SYSTEM_DEFAULT;
+		time_zone_mode = STzSystemDefault;
 		// Set the program global intern timezones variables from the system locale
 		tzset();
 	}
@@ -60,13 +60,13 @@ void StelLocaleMgr::init()
 	{
 		if (tzstr == "gmt+x") // TODO : handle GMT+X timezones form
 		{
-			time_zone_mode = S_TZ_GMT_SHIFT;
+			time_zone_mode = STzGMTShift;
 			// GMT_shift = x;
 		}
 		else
 		{
 			// We have a custom time zone name
-			time_zone_mode = S_TZ_CUSTOM;
+			time_zone_mode = STzCustom;
 			set_custom_tz_name(tzstr);
 		}
 	}
@@ -113,7 +113,7 @@ Translator& StelLocaleMgr::getSkyTranslator()
 QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 {
 	double shift = 0.0;
-	if (time_zone_mode == S_TZ_GMT_SHIFT)
+	if (time_zone_mode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -147,7 +147,7 @@ double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 		}
 
 		// modified by shift
-		if (time_zone_mode == S_TZ_GMT_SHIFT)
+		if (time_zone_mode == STzGMTShift)
 			jd -= GMT_shift;
 		else
 			jd -= StelUtils::get_GMT_shift_from_QT(jd)*0.041666666666;
@@ -167,7 +167,7 @@ QString StelLocaleMgr::get_printable_date_local(double JD) const
 	{
 	int year, month, day, dayOfWeek;
 	double shift = 0.0;
-	if (time_zone_mode == S_TZ_GMT_SHIFT)
+	if (time_zone_mode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -180,16 +180,16 @@ QString StelLocaleMgr::get_printable_date_local(double JD) const
 	QString str;
 	switch (date_format)
 	{
-		case S_DATE_MMDDYYYY:
+		case SDateMMDDYYYY:
 			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
 			break;
-		case S_DATE_DDMMYYYY:
+		case SDateDDMMYYYY:
 			str = QString("%1-%2-%3").arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
 			break;
-		case S_DATE_YYYYMMDD:
+		case SDateYYYYMMDD:
 			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
 			break;
-		case S_DATE_SYSTEM_DEFAULT:
+		case SDateSystemDefault:
 			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
 			break;
 		default:
@@ -205,7 +205,7 @@ QString StelLocaleMgr::get_printable_time_local(double JD) const
 {
 	int hour, minute, second;
 	double shift = 0.0;
-	if (time_zone_mode == S_TZ_GMT_SHIFT)
+	if (time_zone_mode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -219,11 +219,11 @@ QString StelLocaleMgr::get_printable_time_local(double JD) const
 
 	switch (time_format)
 	{
-		case S_TIME_SYSTEM_DEFAULT:
+		case STimeSystemDefault:
 		return t.toString();
-		case S_TIME_24H:
+		case STime24h:
 		return t.toString("hh:mm:ss");
-		case S_TIME_12H:
+		case STime12h:
 		return t.toString("hh:mm:ss ap");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
@@ -232,41 +232,41 @@ QString StelLocaleMgr::get_printable_time_local(double JD) const
 }
 
 // Convert the time format enum to its associated string and reverse
-StelLocaleMgr::S_TIME_FORMAT StelLocaleMgr::string_to_s_time_format(const QString& tf) const
+StelLocaleMgr::STimeFormat StelLocaleMgr::string_to_s_time_format(const QString& tf) const
 {
-	if (tf == "system_default") return S_TIME_SYSTEM_DEFAULT;
-	if (tf == "24h") return S_TIME_24H;
-	if (tf == "12h") return S_TIME_12H;
+	if (tf == "system_default") return STimeSystemDefault;
+	if (tf == "24h") return STime24h;
+	if (tf == "12h") return STime12h;
 	qWarning() << "WARNING: unrecognized time_display_format : " << tf << " system_default used.";
-	return S_TIME_SYSTEM_DEFAULT;
+	return STimeSystemDefault;
 }
 
-QString StelLocaleMgr::s_time_format_to_string(S_TIME_FORMAT tf) const
+QString StelLocaleMgr::s_time_format_to_string(STimeFormat tf) const
 {
-	if (tf == S_TIME_SYSTEM_DEFAULT) return "system_default";
-	if (tf == S_TIME_24H) return "24h";
-	if (tf == S_TIME_12H) return "12h";
+	if (tf == STimeSystemDefault) return "system_default";
+	if (tf == STime24h) return "24h";
+	if (tf == STime12h) return "12h";
 	qWarning() << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used.";
 	return "system_default";
 }
 
 // Convert the date format enum to its associated string and reverse
-StelLocaleMgr::S_DATE_FORMAT StelLocaleMgr::string_to_s_date_format(const QString& df) const
+StelLocaleMgr::SDateFormat StelLocaleMgr::string_to_s_date_format(const QString& df) const
 {
-	if (df == "system_default") return S_DATE_SYSTEM_DEFAULT;
-	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;
-	if (df == "ddmmyyyy") return S_DATE_DDMMYYYY;
-	if (df == "yyyymmdd") return S_DATE_YYYYMMDD;  // iso8601
+	if (df == "system_default") return SDateSystemDefault;
+	if (df == "mmddyyyy") return SDateMMDDYYYY;
+	if (df == "ddmmyyyy") return SDateDDMMYYYY;
+	if (df == "yyyymmdd") return SDateYYYYMMDD;  // iso8601
 	qWarning() << "WARNING: unrecognized date_display_format : " << df << " system_default used.";
-	return S_DATE_SYSTEM_DEFAULT;
+	return SDateSystemDefault;
 }
 
-QString StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
+QString StelLocaleMgr::s_date_format_to_string(SDateFormat df) const
 {
-	if (df == S_DATE_SYSTEM_DEFAULT) return "system_default";
-	if (df == S_DATE_MMDDYYYY) return "mmddyyyy";
-	if (df == S_DATE_DDMMYYYY) return "ddmmyyyy";
-	if (df == S_DATE_YYYYMMDD) return "yyyymmdd";
+	if (df == SDateSystemDefault) return "system_default";
+	if (df == SDateMMDDYYYY) return "mmddyyyy";
+	if (df == SDateDDMMYYYY) return "ddmmyyyy";
+	if (df == SDateYYYYMMDD) return "yyyymmdd";
 	qWarning() << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used.";
 	return "system_default";
 }
@@ -274,7 +274,7 @@ QString StelLocaleMgr::s_date_format_to_string(S_DATE_FORMAT df) const
 void StelLocaleMgr::set_custom_tz_name(const QString& tzname)
 {
 	custom_tz_name = tzname;
-	time_zone_mode = S_TZ_CUSTOM;
+	time_zone_mode = STzCustom;
 	
 	if( custom_tz_name != "")
 	{
@@ -286,7 +286,7 @@ void StelLocaleMgr::set_custom_tz_name(const QString& tzname)
 
 float StelLocaleMgr::get_GMT_shift(double JD) const
 {
-	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
+	if (time_zone_mode == STzGMTShift) return GMT_shift;
 	else return StelUtils::get_GMT_shift_from_QT(JD);
 }
 
