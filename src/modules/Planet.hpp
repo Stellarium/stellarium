@@ -54,12 +54,12 @@ class RotationElements
 {
 public:
     RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
-    float period;        // rotation period
-    float offset;        // rotation at epoch
+    float period;          // rotation period
+    float offset;          // rotation at epoch
     double epoch;
-    float obliquity;     // tilt of rotation axis w.r.t. ecliptic
-    float ascendingNode; // long. of ascending node of equator on the ecliptic
-    float precessionRate; // rate of precession of rotation axis in rads/day
+    float obliquity;       // tilt of rotation axis w.r.t. ecliptic
+    float ascendingNode;   // long. of ascending node of equator on the ecliptic
+    float precessionRate;  // rate of precession of rotation axis in rads/day
     double siderealPeriod; // sidereal period (Planet year in earth days)
 };
 
@@ -229,14 +229,14 @@ public:
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 	// draw orbital path of Planet
 	void drawOrbit(const Navigator * nav, const Projector* prj);
-	Vec3d orbit[ORBIT_SEGMENTS];    // store heliocentric coordinates for drawing the orbit
+	Vec3d orbit[ORBIT_SEGMENTS];   // store heliocentric coordinates for drawing the orbit
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;
 	bool orbitCached;              // whether orbit calculations are cached for drawing orbit yet
-	bool closeOrbit; // whether to connect the beginning of the orbit line to
-	                  // the end: good for elliptical orbits, bad for parabolic
-	                  // and hyperbolic orbits
+	bool closeOrbit;               // whether to connect the beginning of the orbit line to
+	                               // the end: good for elliptical orbits, bad for parabolic
+	                               // and hyperbolic orbits
 	static Vec3f orbitColor;
 	LinearFader orbitFader;
 	
@@ -256,10 +256,10 @@ protected:
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
 	int flagHalo;                   // Set wether a little "star like" halo will be drawn
-	int flagLighting;              // Set wether light computation has to be proceed
+	int flagLighting;               // Set wether light computation has to be proceed
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA
-	double oneMinusOblateness;    // (polar radius)/(equatorial radius)
+	double oneMinusOblateness;      // (polar radius)/(equatorial radius)
 	Vec3d ecliptic_pos;             // Position in UA in the rectangular ecliptic coordinate system
 	                                // centered on the parent Planet
 	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
@@ -291,3 +291,4 @@ protected:
 };
 
 #endif // _PLANET_HPP_
+

@@ -48,10 +48,10 @@ conf.value("spheric_mirror/projector_position_z",-0.2).toDouble());
     qDebug() << "      In order to keep your setup unchanged, please use spheric_mirror:image_distance_div_height = "
              << image_distance_div_height << " instead";
   }
-  horz_zoom_factor = conf.value("spheric_mirror/flip_horz",true).toBool()
+  horzZoomFactor = conf.value("spheric_mirror/flip_horz",true).toBool()
                    ? (-image_distance_div_height)
                    : image_distance_div_height;
-  vert_zoom_factor = conf.value("spheric_mirror/flip_vert",false).toBool()
+  vertZoomFactor = conf.value("spheric_mirror/flip_vert",false).toBool()
                    ? (-image_distance_div_height)
                    : image_distance_div_height;
 
@@ -60,8 +60,8 @@ conf.value("spheric_mirror/projector_position_z",-0.2).toDouble());
   double delta = conf.value("spheric_mirror/projector_delta",-1e100).toDouble();
   if (delta <= -1e100) {
     double x,y;
-      // before calling transform() horz_zoom_factor,vert_zoom_factor,
-      // alpha_delta_phi must already be initialized
+      // before calling transform() horzZoomFactor,vertZoomFactor,
+      // alphaDeltaPhi must already be initialized
     initRotMatrix(0.0,0.0,0.0);
     transform(Vec3d(0,0,1),x,y);
 	const double zenith_y(conf.value("spheric_mirror/zenith_y",0.125).toDouble());
@@ -86,26 +86,26 @@ void SphericMirrorCalculator::initRotMatrix(double alpha,
   const double cp = cos(phi);
   const double sp = sin(phi);
 
-  alpha_delta_phi[0] =   ca*cp - sa*sd*sp;
-  alpha_delta_phi[1] = - sa*cp - ca*sd*sp;
-  alpha_delta_phi[2] =            - cd*sp;
+  alphaDeltaPhi[0] =   ca*cp - sa*sd*sp;
+  alphaDeltaPhi[1] = - sa*cp - ca*sd*sp;
+  alphaDeltaPhi[2] =            - cd*sp;
 
-  alpha_delta_phi[3] =           sa*cd;
-  alpha_delta_phi[4] =           ca*cd;
-  alpha_delta_phi[5] =            - sd;
+  alphaDeltaPhi[3] =           sa*cd;
+  alphaDeltaPhi[4] =           ca*cd;
+  alphaDeltaPhi[5] =            - sd;
   
-  alpha_delta_phi[6] = - ca*sp - sa*sd*cp;
-  alpha_delta_phi[7] =   sa*sp - ca*sd*cp;
-  alpha_delta_phi[8] =            - cd*cp;
+  alphaDeltaPhi[6] = - ca*sp - sa*sd*cp;
+  alphaDeltaPhi[7] =   sa*sp - ca*sd*cp;
+  alphaDeltaPhi[8] =            - cd*cp;
 /*
-    // check if alpha_delta_phi is an orthogonal matrix:
+    // check if alphaDeltaPhi is an orthogonal matrix:
   for (int i=0;i<3;i++) {
     for (int j=0;j<3;j++) {
       double prod0 = 0;
       double prod1 = 0;
       for (int k=0;k<3;k++) {
-        prod0 += alpha_delta_phi[3*i+k]*alpha_delta_phi[3*j+k];
-        prod1 += alpha_delta_phi[i+3*k]*alpha_delta_phi[j+3*k];
+        prod0 += alphaDeltaPhi[3*i+k]*alphaDeltaPhi[3*j+k];
+        prod1 += alphaDeltaPhi[i+3*k]*alphaDeltaPhi[j+3*k];
       }
       if (i==j) {
         prod0 -= 1.0;
@@ -159,22 +159,22 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
 
     // rotate
   const double zb =
-    alpha_delta_phi[1]*x[0] + alpha_delta_phi[4]*x[1] + alpha_delta_phi[7]*x[2];
-  xb = (horz_zoom_factor/zb) *
-   (alpha_delta_phi[0]*x[0] + alpha_delta_phi[3]*x[1] + alpha_delta_phi[6]*x[2]);
-  yb = (vert_zoom_factor/zb) *
-   (alpha_delta_phi[2]*x[0] + alpha_delta_phi[5]*x[1] + alpha_delta_phi[8]*x[2]);
+    alphaDeltaPhi[1]*x[0] + alphaDeltaPhi[4]*x[1] + alphaDeltaPhi[7]*x[2];
+  xb = (horzZoomFactor/zb) *
+   (alphaDeltaPhi[0]*x[0] + alphaDeltaPhi[3]*x[1] + alphaDeltaPhi[6]*x[2]);
+  yb = (vertZoomFactor/zb) *
+   (alphaDeltaPhi[2]*x[0] + alphaDeltaPhi[5]*x[1] + alphaDeltaPhi[8]*x[2]);
 
   return rval;
 }
 
 
 bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
-  x /= horz_zoom_factor;
-  y /= vert_zoom_factor;
-  v[0] = alpha_delta_phi[0]*x + alpha_delta_phi[1] + alpha_delta_phi[2]*y;
-  v[1] = alpha_delta_phi[3]*x + alpha_delta_phi[4] + alpha_delta_phi[5]*y;
-  v[2] = alpha_delta_phi[6]*x + alpha_delta_phi[7] + alpha_delta_phi[8]*y;
+  x /= horzZoomFactor;
+  y /= vertZoomFactor;
+  v[0] = alphaDeltaPhi[0]*x + alphaDeltaPhi[1] + alphaDeltaPhi[2]*y;
+  v[1] = alphaDeltaPhi[3]*x + alphaDeltaPhi[4] + alphaDeltaPhi[5]*y;
+  v[2] = alphaDeltaPhi[6]*x + alphaDeltaPhi[7] + alphaDeltaPhi[8]*y;
   const double vv = v.dot(v);
   const double Pv = P.dot(v);
   const double discr = Pv*Pv-(P.dot(P)-1.0)*vv;
@@ -194,50 +194,50 @@ bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
 
 bool SphericMirrorCalculator::retransform(double x,double y,
                                           Vec3d &v,
-                                          Vec3d &v_x,Vec3d &v_y) const {
-  x /= horz_zoom_factor;
-  const double dx = 1.0/horz_zoom_factor;
-  y /= vert_zoom_factor;
-  const double dy = 1.0/vert_zoom_factor;
+                                          Vec3d &vX,Vec3d &vY) const {
+  x /= horzZoomFactor;
+  const double dx = 1.0/horzZoomFactor;
+  y /= vertZoomFactor;
+  const double dy = 1.0/vertZoomFactor;
 
-  v[0] = alpha_delta_phi[0]*x + alpha_delta_phi[1] + alpha_delta_phi[2]*y;
-  v[1] = alpha_delta_phi[3]*x + alpha_delta_phi[4] + alpha_delta_phi[5]*y;
-  v[2] = alpha_delta_phi[6]*x + alpha_delta_phi[7] + alpha_delta_phi[8]*y;
+  v[0] = alphaDeltaPhi[0]*x + alphaDeltaPhi[1] + alphaDeltaPhi[2]*y;
+  v[1] = alphaDeltaPhi[3]*x + alphaDeltaPhi[4] + alphaDeltaPhi[5]*y;
+  v[2] = alphaDeltaPhi[6]*x + alphaDeltaPhi[7] + alphaDeltaPhi[8]*y;
 
-  v_x[0] = alpha_delta_phi[0]*dx;
-  v_x[1] = alpha_delta_phi[3]*dx;
-  v_x[2] = alpha_delta_phi[6]*dx;
+  vX[0] = alphaDeltaPhi[0]*dx;
+  vX[1] = alphaDeltaPhi[3]*dx;
+  vX[2] = alphaDeltaPhi[6]*dx;
 
-  v_y[0] = alpha_delta_phi[2]*dy;
-  v_y[1] = alpha_delta_phi[5]*dy;
-  v_y[2] = alpha_delta_phi[8]*dy;
+  vY[0] = alphaDeltaPhi[2]*dy;
+  vY[1] = alphaDeltaPhi[5]*dy;
+  vY[2] = alphaDeltaPhi[8]*dy;
 
   const double vv = v.dot(v);
-  const double vv_x = 2.0*v.dot(v_x);
-  const double vv_y = 2.0*v.dot(v_y);
+  const double vvX = 2.0*v.dot(vX);
+  const double vvY = 2.0*v.dot(vY);
   
   const double Pv = P.dot(v);
-  const double Pv_x = P.dot(v_x);
-  const double Pv_y = P.dot(v_y);
+  const double PvX = P.dot(vX);
+  const double PvY = P.dot(vY);
 
   const double discr = Pv*Pv-(P.dot(P)-1.0)*vv;
-  const double discr_x = 2.0*Pv*Pv_x-(P.dot(P)-1.0)*vv_x;
-  const double discr_y = 2.0*Pv*Pv_y-(P.dot(P)-1.0)*vv_y;
+  const double discr_x = 2.0*Pv*PvX-(P.dot(P)-1.0)*vvX;
+  const double discr_y = 2.0*Pv*PvY-(P.dot(P)-1.0)*vvY;
   
   if (discr < 0) {
     return false;
   }
   const Vec3d Q = P + v*((-Pv-sqrt(discr))/vv);
-  const Vec3d Q_x = v_x*((-Pv-sqrt(discr))/vv)
-                  + v*( (vv*(-Pv_x-0.5*discr_x/sqrt(discr))
-                        -vv_x*(-Pv-sqrt(discr))) /(vv*vv));
-  const Vec3d Q_y = v_y*((-Pv-sqrt(discr))/vv)
-                  + v*( (vv*(-Pv_y-0.5*discr_y/sqrt(discr))
-                        -vv_y*(-Pv-sqrt(discr))) /(vv*vv));
+  const Vec3d Q_x = vX*((-Pv-sqrt(discr))/vv)
+                  + v*( (vv*(-PvX-0.5*discr_x/sqrt(discr))
+                        -vvX*(-Pv-sqrt(discr))) /(vv*vv));
+  const Vec3d Q_y = vY*((-Pv-sqrt(discr))/vv)
+                  + v*( (vv*(-PvY-0.5*discr_y/sqrt(discr))
+                        -vvY*(-Pv-sqrt(discr))) /(vv*vv));
 
   const Vec3d w = v - Q*(2*v.dot(Q));
-  const Vec3d w_x = v_x - Q_x*(2*v.dot(Q)) - Q*(2*(v_x.dot(Q)+v.dot(Q_x)));
-  const Vec3d w_y = v_y - Q_y*(2*v.dot(Q)) - Q*(2*(v_y.dot(Q)+v.dot(Q_y)));
+  const Vec3d w_x = vX - Q_x*(2*v.dot(Q)) - Q*(2*(vX.dot(Q)+v.dot(Q_x)));
+  const Vec3d w_y = vY - Q_y*(2*v.dot(Q)) - Q*(2*(vY.dot(Q)+v.dot(Q_y)));
 
 
   const Vec3d MQ = Q - DomeCenter;
@@ -249,24 +249,24 @@ bool SphericMirrorCalculator::retransform(double x,double y,
   double f_y = -Q_y.dot(w)-MQ.dot(w_y);
 
   double f1 = f + sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
-  double f1_x = f_x + 0.5*(2*f*f_x - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv_x
+  double f1_x = f_x + 0.5*(2*f*f_x - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvX
                                    - 2*MQ.dot(Q_x)*vv )
               / sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
-  double f1_y = f_y + 0.5*(2*f*f_y - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv_y
+  double f1_y = f_y + 0.5*(2*f*f_y - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvY
                                    - 2*MQ.dot(Q_y)*vv )
               / sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
 
   const Vec3d S = Q + w*(f1/vv);
-  const Vec3d S_x = Q_x + w*((vv*f1_x-vv_x*f1)/(vv*vv)) + w_x*(f1/vv);
-  const Vec3d S_y = Q_y + w*((vv*f1_y-vv_y*f1)/(vv*vv)) + w_y*(f1/vv);
+  const Vec3d S_x = Q_x + w*((vv*f1_x-vvX*f1)/(vv*vv)) + w_x*(f1/vv);
+  const Vec3d S_y = Q_y + w*((vv*f1_y-vvY*f1)/(vv*vv)) + w_y*(f1/vv);
 
   v = S - DomeCenter;
-  v_x = S_x;
-  v_y = S_y;
+  vX = S_x;
+  vY = S_y;
   
   v *= (1.0/DomeRadius);
-  v_x *= (1.0/DomeRadius);
-  v_y *= (1.0/DomeRadius);
+  vX *= (1.0/DomeRadius);
+  vY *= (1.0/DomeRadius);
   return true;
 }
 

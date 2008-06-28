@@ -67,13 +67,13 @@ public:
 	void updateMotion(double deltaTime);
 	
 	// These are hopefully temporary.
-	bool getHasDragged() const {return has_dragged;}
-	void stopDragging() {is_dragging=false; has_dragged=false;}
+	bool getHasDragged() const {return hasDragged;}
+	void stopDragging() {isDragging=false; hasDragged=false;}
 	
 	
 	//! Get the zoom speed
 	// TODO: what are the units?
-	double getZoomSpeed() {return zoom_speed;}
+	double getZoomSpeed() {return zoomSpeed;}
 	
 public slots:
 	//! Set whether auto zoom can go further than normal.
@@ -87,19 +87,19 @@ public slots:
 	bool getFlagTracking(void) const {return flagTracking;}
 
 	//! Set whether sky position is to be locked.
-	void setFlagLockEquPos(bool b) {flag_lock_equ_pos=b;}
+	void setFlagLockEquPos(bool b) {flagLockEquPos=b;}
 	//! Get whether sky position is locked.
-	bool getFlagLockEquPos(void) const {return flag_lock_equ_pos;}
+	bool getFlagLockEquPos(void) const {return flagLockEquPos;}
 	
 	//! Move view in alt/az (or equatorial if in that mode) coordinates.
 	void panView(double deltaAz, double deltaAlt);
 
 	//! Set automove duration in seconds
 	//! @param f the number of seconds it takes for an auto-move operation to complete.
-	void setAutoMoveDuration(float f) {auto_move_duration = f;}
+	void setAutoMoveDuration(float f) {autoMoveDuration = f;}
 	//! Get automove duration in seconds
 	//! @return the number of seconds it takes for an auto-move operation to complete.
-	float getAutoMoveDuration(void) const {return auto_move_duration;}
+	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
 	void setFlagAutoZoomOutResetsDirection(bool b) {flagAutoZoomOutResetsDirection = b;}
@@ -107,7 +107,7 @@ public slots:
 	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
 	
 	//! Move the view to a specified position.
-	//! Uses equatorial or local coordinate depending on _local_pos value.
+	//! Uses equatorial or local coordinate depending on _localPos value.
 	//! @param aim The position to move to expressed as a vector.
 	//! @param moveDuration The time it takes for the move to complete.
 	//! @param localPos If false, use equatorial position, else use local.
@@ -120,9 +120,9 @@ public slots:
 	void zoomTo(double aimFov, float moveDuration = 1.);
 
 	//! Go and zoom to the selected object. A later call to autoZoomOut will come back to the previous zoom level.
-	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
+	void autoZoomIn(float moveDuration = 1.f, bool allowManualZoom = 1);
 	//! Unzoom to the previous position.
-	void autoZoomOut(float move_duration = 1.f, bool full = 0);
+	void autoZoomOut(float moveDuration = 1.f, bool full = 0);
 
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
@@ -140,22 +140,22 @@ private:
 	void changeFov(double deltaFov);
 	   
 	void updateVisionVector(double deltaTime); 
-	void update_auto_zoom(double deltaTime); // Update auto_zoom if activated
+	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 	
 	//! Make the first screen position correspond to the second (useful for mouse dragging)
 	void dragView(int x1, int y1, int x2, int y2);
 	
-	StelCore* core;	// The core on which the movement are applied
+	StelCore* core;          // The core on which the movement are applied
 
-	bool flag_lock_equ_pos;			// Define if the equatorial position is locked
+	bool flagLockEquPos;     // Define if the equatorial position is locked
 
-	bool flagTracking;			// Define if the selected object is followed
+	bool flagTracking;       // Define if the selected object is followed
 	
 	// Flags for mouse movements
-	bool is_mouse_moving_horiz;
-	bool is_mouse_moving_vert;
+	bool isMouseMovingHoriz;
+	bool isMouseMovingVert;
 
-	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
+	int FlagEnableMoveMouse; // allow mouse at edge of screen to move view
 	int MouseZoom;
 	
 	int FlagEnableZoomKeys;
@@ -169,22 +169,22 @@ private:
 		Vec3d aim;
 		float speed;
 		float coef;
-		bool local_pos;			// Define if the position are in equatorial or altazimutal
-	} auto_move;
+		bool localPos;  // Define if the position are in equatorial or altazimutal
+	} autoMove;
 	
-	auto_move move;				// Current auto movement
-	int flag_auto_move;			// Define if automove is on or off
-	int zooming_mode;			// 0 : undefined, 1 zooming, -1 unzooming
+	autoMove move;          // Current auto movement
+	int flagAutoMove;       // Define if automove is on or off
+	int zoomingMode;        // 0 : undefined, 1 zooming, -1 unzooming
 
-	double deltaFov,deltaAlt,deltaAz;	// View movement
-	double move_speed, zoom_speed;		// Speed of movement and zooming
+	double deltaFov,deltaAlt,deltaAz; // View movement
+	double moveSpeed, zoomSpeed;      // Speed of movement and zooming
 
-	int FlagManualZoom;			// Define whether auto zoom can go further
-	float auto_move_duration;		// Duration of movement for the auto move to a selected objectin seconds
+	int FlagManualZoom;     // Define whether auto zoom can go further
+	float autoMoveDuration; // Duration of movement for the auto move to a selected objectin seconds
 	
 	// Mouse control options
-	bool is_dragging, has_dragged;
-	int previous_x, previous_y;
+	bool isDragging, hasDragged;
+	int previousX, previousY;
 	
 	// Struct used to store data for auto zoom
 	typedef struct
@@ -193,12 +193,13 @@ private:
 		double aim;
 		float speed;
 		float coef;
-	} auto_zoom;
+	} autoZoom;
 	
 	// Automove
-	auto_zoom zoom_move;		// Current auto movement
-	bool flag_auto_zoom;		// Define if autozoom is on or off
+	autoZoom zoomMove; // Current auto movement
+	bool flagAutoZoom; // Define if autozoom is on or off
 	bool flagAutoZoomOutResetsDirection;
 };
 
 #endif /*MOVEMENTMGR_H_*/
+
