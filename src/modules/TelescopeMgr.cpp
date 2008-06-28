@@ -99,7 +99,7 @@ void TelescopeMgr::draw(StelCore* core)
       Vec3d XY;
       if (prj->projectCheck(it->second->getObsJ2000Pos(0),XY)) {
         if (telescope_fader.getInterstate() >= 0) {
-          glColor4f(circle_color[0],circle_color[1],circle_color[2],
+          glColor4f(circleColor[0],circleColor[1],circleColor[2],
                     telescope_fader.getInterstate());
           glDisable(GL_TEXTURE_2D);
           for (std::list<double>::const_iterator
@@ -128,7 +128,7 @@ void TelescopeMgr::draw(StelCore* core)
           glEnd();
         }
         if (name_fader.getInterstate() >= 0) {
-          glColor4f(label_color[0],label_color[1],label_color[2], name_fader.getInterstate());
+          glColor4f(labelColor[0],labelColor[1],labelColor[2], name_fader.getInterstate());
           prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
           telescope_texture->bind();
         }
@@ -151,7 +151,7 @@ void TelescopeMgr::setColorScheme(const QSettings* conf, const QString& section)
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
-	set_circle_color(StelUtils::strToVec3f(conf->value(section+"/telescope_circle_color", defaultColor).toString()));
+	set_circleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));
 }
 
 vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const

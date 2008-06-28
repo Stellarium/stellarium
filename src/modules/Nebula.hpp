@@ -62,8 +62,8 @@ public:
 	virtual double getAngularSize(const StelCore *core) const {return angularSize/2;}
 	
 	// Methods specific to Nebula
-	void setLabelColor(const Vec3f& v) {label_color = v;}
-	void setCircleColor(const Vec3f& v) {circle_color = v;}
+	void setLabelColor(const Vec3f& v) {labelColor = v;}
+	void setCircleColor(const Vec3f& v) {circleColor = v;}
 
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
@@ -71,14 +71,19 @@ public:
 	
 private:
 	
-	//!	NEB_GX Galaxy
-	//! NEB_OC Open star cluster
-	//! NEB_GC Globular star cluster, usually in the Milky Way Galaxy
-	//! NEB_N Bright emission or reflection nebula
-	//! NEB_PN Planetary nebula
-	//! CN Cluster associated with nebulosity
-	//! Other Undocumented type
-	enum nebula_type { NEB_GX, NEB_OC, NEB_GC, NEB_N, NEB_PN, NEB_DN, NEB_IG, NEB_CN, NEB_UNKNOWN };
+	//! @enum NebulaType Nebula types
+	enum NebulaType 
+	{ 
+		NebGx,     //!< Galaxy
+		NebOc,     //!< Open star cluster
+		NebGc,     //!< Globular star cluster, usually in the Milky Way Galaxy
+		NebN,      //!< Bright emission or reflection nebula
+		NebPn,     //!< Planetary nebula
+		NebDn,     //!< ???
+		NebIg,     //!< ???
+		NebCn,     //!< Cluster associated with nebulosity
+		NebUnknown //!< Unknown type
+	};
 	
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.qtranslate(englishName);}
@@ -88,23 +93,24 @@ private:
 	void drawLabel(const StelCore* core, float maxMagLabel);
 	void drawHints(const StelCore* core, float maxMagHints);
     
-	unsigned int M_nb;				// Messier Catalog number
-	unsigned int NGC_nb;			// New General Catalog number
-	unsigned int IC_nb;				// Index Catalog number
-	QString englishName;			// English name
+	unsigned int M_nb;              // Messier Catalog number
+	unsigned int NGC_nb;            // New General Catalog number
+	unsigned int IC_nb;             // Index Catalog number
+	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude
-	float angularSize;				// Angular size in degree
+	float angularSize;              // Angular size in degree
 	Vec3f XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
-	nebula_type nType;
+	NebulaType nType;
 
-	static STextureSP tex_circle;   // The symbolic circle texture
-	static SFont* nebula_font;      // Font used for names printing
-	static float hints_brightness;
+	static STextureSP texCircle;   // The symbolic circle texture
+	static SFont* nebulaFont;      // Font used for names printing
+	static float hintsBrightness;
 
-	static Vec3f label_color, circle_color;
+	static Vec3f labelColor, circleColor;
 	static float circleScale;       // Define the scaling of the hints circle
 };
 
 #endif // _NEBULA_H_
+

@@ -188,7 +188,7 @@ private:
 	QMap<QString,QString> getNameToDirMap(void) const;
 		
 	Atmosphere* atmosphere;			// Atmosphere
-	Cardinals* cardinals_points;		// Cardinals points
+	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	
 	// Define whether the observer location is to be updated when the landscape is updated.

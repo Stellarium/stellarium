@@ -38,7 +38,7 @@
 #include "StarMgr.hpp"
 
 SFont* Planet::planet_name_font = NULL;
-Vec3f Planet::label_color = Vec3f(0.4,0.4,0.8);
+Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
 STextureSP Planet::hintCircleTex;
@@ -685,7 +685,7 @@ void Planet::drawHints(const StelCore* core)
 	
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getOnScreenSize(core)/1.44; // Shift for nameI18 printing
-	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate());
+	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
@@ -693,7 +693,7 @@ void Planet::drawHints(const StelCore* core)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	glColor4f(label_color[0], label_color[1], label_color[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp*0.7);
+	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp*0.7);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);

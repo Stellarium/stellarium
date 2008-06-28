@@ -57,10 +57,10 @@ Skybright::Skybright() : SN(1.f)
 }
 
 // month : 1=Jan, 12=Dec
-// moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-void Skybright::setDate(int year, int month, float moon_phase)
+// moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
+void Skybright::setDate(int year, int month, float moonPhase)
 {
-	mag_moon = -12.73f + 1.4896903f * std::fabs(moon_phase) + 0.04310727f * std::pow(moon_phase, 4.f);
+	mag_moon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
 
 	RA = (month - 3.f) * 0.52359878f;
 
@@ -69,16 +69,16 @@ void Skybright::setDate(int year, int month, float moon_phase)
 }
 
 
-void Skybright::setLocation(float latitude, float altitude, float temperature, float relative_humidity)
+void Skybright::setLocation(float latitude, float altitude, float temperature, float relativeHumidity)
 {
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
 	// extinction Coefficient for V band
 	float KR = 0.1066f * std::exp(-altitude/8200.f);
-	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relative_humidity/100.f) ,1.33f) *
+	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relativeHumidity/100.f) ,1.33f) *
 		(1.f + 0.33f * sign_latitude * std::sin(RA));
 	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f;
-	float KW = 0.031f * 0.94f * (relative_humidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f);
+	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f);
 	K = KR + KA + KO + KW;
 }
 
