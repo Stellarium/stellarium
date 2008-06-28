@@ -32,7 +32,7 @@
 #include "STextureTypes.hpp"
 
 // The callback type for the external position computation function
-typedef boost::callback<void, double, double*> pos_func_type;
+typedef boost::callback<void, double, double*> posFuncType;
 
 typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
 
@@ -60,20 +60,20 @@ public:
     float obliquity;     // tilt of rotation axis w.r.t. ecliptic
     float ascendingNode; // long. of ascending node of equator on the ecliptic
     float precessionRate; // rate of precession of rotation axis in rads/day
-    double sidereal_period; // sidereal period (Planet year in earth days)
+    double siderealPeriod; // sidereal period (Planet year in earth days)
 };
 
 // Class to manage rings for planets like saturn
 class Ring
 {
 public:
-	Ring(double radius_min,double radius_max,const QString &texname);
+	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
 	void draw(const Projector* prj,const Mat4d& mat,double screen_sz);
-	double get_size(void) const {return radius_max;}
+	double get_size(void) const {return radiusMax;}
 private:
-	const double radius_min;
-	const double radius_max;
+	const double radiusMin;
+	const double radiusMax;
 	STextureSP tex;
 };
 
@@ -85,18 +85,18 @@ public:
 	Planet(Planet *parent,
 	       const QString& englishName,
 	       int flagHalo,
-	       int flag_lighting,
+	       int flagLighting,
 	       double radius,
 	       double oblateness,
 	       Vec3f color,
 	       float albedo,
-	       const QString& tex_map_name,
-	       const QString& tex_halo_name,
-	       pos_func_type _coord_func,
-	       OsulatingFunctType *osculating_func,
-	       bool close_orbit,
+	       const QString& texMapName,
+	       const QString& texHaloName,
+	       posFuncType _coord_func,
+	       OsulatingFunctType *osculatingFunc,
+	       bool closeOrbit,
 	       bool hidden, 
-	       bool has_atmosphere);
+	       bool hasAtmosphere);
 
 	~Planet();
 
@@ -116,8 +116,8 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual double getCloseViewFov(const Navigator * nav) const;
-	virtual double get_satellites_fov(const Navigator * nav) const;
-	virtual double get_parent_satellites_fov(const Navigator * nav) const;
+	virtual double getSatellitesFov(const Navigator * nav) const;
+	virtual double getParentSatellitesFov(const Navigator * nav) const;
 	virtual float getMagnitude(const Navigator * nav) const;
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
@@ -152,43 +152,43 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double date);
-	void compute_position(const double date);
+	void computePosition(const double date);
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
-	void compute_trans_matrix(double date);
+	void computeTransMatrix(double date);
 
-	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
-	double get_phase(Vec3d obs_pos) const;
+	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
+	double get_phase(Vec3d obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 				
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
-		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
+		float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
 	double getRotObliquity(void) const {return re.obliquity;}
 
 	// Get the Planet position in the parent Planet ecliptic coordinate
-	Vec3d get_ecliptic_pos() const;
+	Vec3d getEclipticPos() const;
 
 	// Return the heliocentric ecliptical position
-	Vec3d get_heliocentric_ecliptic_pos() const;
-	void set_heliocentric_ecliptic_pos(const Vec3d &pos);
+	Vec3d getHeliocentricEclipticPos() const;
+	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
-	double compute_distance(const Vec3d& obs_helio_pos);
-	double get_distance(void) const {return distance;}
+	double computeDistance(const Vec3d& obs_helio_pos);
+	double getDistance(void) const {return distance;}
 
-	void set_rings(Ring* r) {rings = r;}
+	void setRings(Ring* r) {rings = r;}
 
-	void set_sphere_scale(float s) {sphere_scale = s;}
-	float get_sphere_scale(void) const {return sphere_scale;}
+	void setSphereScale(float s) {sphere_scale = s;}
+	float getSphereScale(void) const {return sphere_scale;}
 
-	const Planet *get_parent(void) const {return parent;}
+	const Planet *getParent(void) const {return parent;}
 
-	static void set_font(SFont* f) {planet_name_font = f;}
+	static void setFont(SFont* f) {planet_name_font = f;}
 	
-	static void set_label_color(const Vec3f& lc) {label_color = lc;}
+	static void setLabelColor(const Vec3f& lc) {label_color = lc;}
 	static const Vec3f& getLabelColor(void) {return label_color;}
 
 	void update(int delta_time);
@@ -204,41 +204,41 @@ public:
 	
 	///// Trail related code
 	// Should move to a TrailPath class which works on a StelObject, not on a Planet
-	void update_trail(const Navigator* nav);
-	void draw_trail(const Navigator * nav, const Projector* prj);
+	void updateTrail(const Navigator* nav);
+	void drawTrail(const Navigator * nav, const Projector* prj);
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrail(bool b);
-	void setFlagTrail(bool b){if(b == trail_fader) return; trail_fader = b; startTrail(b);}
-	bool getFlagTrail(void) const {return trail_fader;}
-	static void set_trail_color(const Vec3f& c) { trail_color = c; }
-	static const Vec3f& getTrailColor() { return trail_color; }
-	static Vec3f trail_color;
+	void setFlagTrail(bool b){if(b == trailFader) return; trailFader = b; startTrail(b);}
+	bool getFlagTrail(void) const {return trailFader;}
+	static void setTrailColor(const Vec3f& c) { trailColor = c; }
+	static const Vec3f& getTrailColor() { return trailColor; }
+	static Vec3f trailColor;
 	list<TrailPoint>trail;
-	bool trail_on;                  // accumulate trail data if true
+	bool trailOn;                  // accumulate trail data if true
 	double DeltaTrail;
 	int MaxTrail;
-	double last_trailJD;
-	bool first_point;               // if need to take first point of trail still
-	LinearFader trail_fader;
+	double lastTrailJD;
+	bool firstPoint;               // if need to take first point of trail still
+	LinearFader trailFader;
 	
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
-	void setFlagOrbits(bool b){orbit_fader = b;}
-	bool getFlagOrbits(void) const {return orbit_fader;}	
-	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
-	static const Vec3f& getOrbitColor() {return orbit_color;}
+	void setFlagOrbits(bool b){orbitFader = b;}
+	bool getFlagOrbits(void) const {return orbitFader;}	
+	static void set_orbitColor(const Vec3f& oc) {orbitColor = oc;}
+	static const Vec3f& getOrbitColor() {return orbitColor;}
 	// draw orbital path of Planet
-	void draw_orbit(const Navigator * nav, const Projector* prj);
+	void drawOrbit(const Navigator * nav, const Projector* prj);
 	Vec3d orbit[ORBIT_SEGMENTS];    // store heliocentric coordinates for drawing the orbit
-	double last_orbitJD;
+	double lastOrbitJD;
 	double deltaJD;
-	double delta_orbitJD;
-	bool orbit_cached;              // whether orbit calculations are cached for drawing orbit yet
-	bool close_orbit; // whether to connect the beginning of the orbit line to
+	double deltaOrbitJD;
+	bool orbitCached;              // whether orbit calculations are cached for drawing orbit yet
+	bool closeOrbit; // whether to connect the beginning of the orbit line to
 	                  // the end: good for elliptical orbits, bad for parabolic
 	                  // and hyperbolic orbits
-	static Vec3f orbit_color;
-	LinearFader orbit_fader;
+	static Vec3f orbitColor;
+	LinearFader orbitFader;
 	
 protected:
 	// Return the information string "ready to print" :)
@@ -248,18 +248,18 @@ protected:
 	void draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz);
 	
 	// Draw the 3D sphere
-	void draw_sphere(StelCore* core, const Mat4d& mat, float screen_sz);
+	void drawSphere(StelCore* core, const Mat4d& mat, float screen_sz);
 
 	// Draw the circle and name of the Planet
-	void draw_hints(const StelCore* core);
+	void drawHints(const StelCore* core);
 
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
 	int flagHalo;                   // Set wether a little "star like" halo will be drawn
-	int flag_lighting;              // Set wether light computation has to be proceed
+	int flagLighting;              // Set wether light computation has to be proceed
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA
-	double one_minus_oblateness;    // (polar radius)/(equatorial radius)
+	double oneMinusOblateness;    // (polar radius)/(equatorial radius)
 	Vec3d ecliptic_pos;             // Position in UA in the rectangular ecliptic coordinate system
 	                                // centered on the parent Planet
 	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
@@ -275,8 +275,8 @@ protected:
 	float sphere_scale;             // Artificial scaling for better viewing
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
-	pos_func_type coord_func;
-	OsulatingFunctType *const osculating_func;
+	posFuncType coord_func;
+	OsulatingFunctType *const osculatingFunc;
 	const Planet *parent;           // Planet parent i.e. sun for earth
 	list<Planet *> satellites;      // satellites of the Planet
 	static SFont* planet_name_font; // Font for names

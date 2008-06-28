@@ -176,11 +176,11 @@ void LandscapeMgr::update(double deltaTime)
 	const Observer* obs = StelApp::getInstance().getCore()->getObservatory();
 	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproducer();
 	
-	Vec3d sunPos = nav->helio_to_local(ssystem->getSun()->get_heliocentric_ecliptic_pos());
+	Vec3d sunPos = nav->helio_to_local(ssystem->getSun()->getHeliocentricEclipticPos());
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = nav->helio_to_local(ssystem->getMoon()->get_heliocentric_ecliptic_pos());
+	Vec3d moonPos = nav->helio_to_local(ssystem->getMoon()->getHeliocentricEclipticPos());
 	atmosphere->compute_color(nav->getJDay(), sunPos, moonPos,
-	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
+	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
@@ -191,7 +191,7 @@ void LandscapeMgr::update(double deltaTime)
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
 //	{
-//		Vec3d pos = nav->helio_to_local((*i)->get_heliocentric_ecliptic_pos());
+//		Vec3d pos = nav->helio_to_local((*i)->getHeliocentricEclipticPos());
 //		pos.normalize();
 //		if (pos[2] <= 0)
 //		{

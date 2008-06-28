@@ -370,7 +370,7 @@ public:
 	void drawPoint2d(double x, double y) const;
 	
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
+	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 	             GLint slices, GLint stacks, int orient_inside = 0) const;
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
@@ -407,7 +407,7 @@ public:
 			     int orient_inside = 0) const;
 	
 	//! Reimplementation of gluSphere for use in linear mode.
-	void sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness, GLint slices, 
+	void sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness, GLint slices, 
 			   GLint stacks, int orient_inside = 0) const;
 
 public slots:

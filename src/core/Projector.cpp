@@ -532,13 +532,13 @@ void ComputeCosSinRho(double phi,int segments) {
 
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
-void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
+void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
                               GLint slices, GLint stacks, int orient_inside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(modelViewMatrix);
 
-	if (one_minus_oblateness == 1.0)
+	if (oneMinusOblateness == 1.0)
 	{ // gluSphere seems to have hardware acceleration
 		GLUquadricObj * p = gluNewQuadric();
 		gluQuadricTexture(p,GL_TRUE);
@@ -588,24 +588,24 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble one_minus_oblateness,
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = nsign * cos_sin_rho_p[0];
-				glNormal3f(x * one_minus_oblateness * nsign,
-				           y * one_minus_oblateness * nsign,
+				glNormal3f(x * oneMinusOblateness * nsign,
+				           y * oneMinusOblateness * nsign,
 				           z * nsign);
 				glTexCoord2f(s, t);
 				glVertex3d(x * radius,
 				           y * radius,
-				           one_minus_oblateness * z * radius);
+				           oneMinusOblateness * z * radius);
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = nsign * cos_sin_rho_p[2];
-				glNormal3f(x * one_minus_oblateness * nsign,
-				           y * one_minus_oblateness * nsign,
+				glNormal3f(x * oneMinusOblateness * nsign,
+				           y * oneMinusOblateness * nsign,
 				           z * nsign);
 				glTexCoord2f(s, t - dt);
 				s += ds;
 				glVertex3d(x * radius,
 				           y * radius,
-				           one_minus_oblateness * z * radius);
+				           oneMinusOblateness * z * radius);
 			}
 			glEnd();
 			t -= dt;
@@ -1245,7 +1245,7 @@ void Projector::drawRectSprite2dMode(double x, double y, double sizex, double si
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
 
-void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
+void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
                         GLint slices, GLint stacks, int orient_inside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
@@ -1318,30 +1318,30 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * one_minus_oblateness,
-				                                y * one_minus_oblateness,
+				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,
+				                                y * oneMinusOblateness,
 				                                z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
 				          c*diffuseLight[2] + ambientLight[2]);
 			}
-			drawVertex3(x * radius, y * radius, z * one_minus_oblateness * radius);
+			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 			z = nsign * cos_sin_rho_p[2];
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				c = nsign * lightPos3.dot(Vec3f(x * one_minus_oblateness,
-				                                y * one_minus_oblateness,
+				c = nsign * lightPos3.dot(Vec3f(x * oneMinusOblateness,
+				                                y * oneMinusOblateness,
 				                                z));
 				if (c<0) {c=0;}
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
 				          c*diffuseLight[1] + ambientLight[1],
 				          c*diffuseLight[2] + ambientLight[2]);
 			}
-			drawVertex3(x * radius, y * radius, z * one_minus_oblateness * radius);
+			drawVertex3(x * radius, y * radius, z * oneMinusOblateness * radius);
 			s += ds;
 		}
 		glEnd();

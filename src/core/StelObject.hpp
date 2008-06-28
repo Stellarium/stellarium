@@ -127,8 +127,8 @@ public:
 	virtual double getCloseViewFov(const Navigator *nav) const {return 10.;}
 	
 	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
-	virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
-	virtual double get_parent_satellites_fov(const Navigator *nav) const {return -1.;}
+	virtual double getSatellitesFov(const Navigator *nav) const {return -1.;}
+	virtual double getParentSatellitesFov(const Navigator *nav) const {return -1.;}
 	
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getObsJ2000Pos().
