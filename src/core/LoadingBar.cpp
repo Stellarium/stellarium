@@ -28,7 +28,7 @@
 #include <QGLWidget>
 #include <QDebug>
 
-LoadingBar::LoadingBar(Projector* _prj, float fontSize, const QString&  splash_tex, 
+LoadingBar::LoadingBar(Projector* _prj, float fontSize, const QString&  splashTex, 
 	int screenw, int screenh, const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
@@ -41,8 +41,8 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	if (!splash_tex.isEmpty())
-		splash = StelApp::getInstance().getTextureManager().createTexture(splash_tex);
+	if (!splashTex.isEmpty())
+		splash = StelApp::getInstance().getTextureManager().createTexture(splashTex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 	timeCounter = StelApp::getInstance().getTotalRunTime();
 }

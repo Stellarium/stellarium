@@ -44,7 +44,7 @@ public:
 	//! Create and initialise the LoadingBar.
 	//! @param prj the projector used to display the LoadingBar
 	//! @param fontSize the size of the font to use in the LoadingBar
-	//! @param splash_tex the file name of a texture to display with the LoadingBar
+	//! @param splashTex the file name of a texture to display with the LoadingBar
 	//! @param screenw the screen width
 	//! @param screenh the screen height
 	//! @param extraTextString extra text which does not change during the life
@@ -53,7 +53,7 @@ public:
 	//! @param extraTextSize the size of the font used for the exta text
 	//! @param extraTextPosx the x position of the extra text
 	//! @param extraTextPosy the y position of the extra text
-	LoadingBar(Projector* prj, float fontSize, const QString&  splash_tex, 
+	LoadingBar(Projector* prj, float fontSize, const QString&  splashTex, 
 	           int screenw, int screenh, const QString& extraTextString="", 
 	           float extraTextSize = 30.f, float extraTextPosx = 0.f, float extraTextPosy = 0.f);
 
