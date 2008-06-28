@@ -45,8 +45,8 @@ void StelLocaleMgr::init()
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
 	setAppLanguage(conf->value("localization/app_locale", "system").toString());
 	
-	time_format = string_to_s_time_format(conf->value("localization/time_display_format", "system_default").toString());
-	date_format = string_to_s_date_format(conf->value("localization/date_display_format", "system_default").toString());
+	time_format = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
+	date_format = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
 	// time_zone used to be in init_location section of config,
 	// so use that as fallback when reading config - Rob
 	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
@@ -67,7 +67,7 @@ void StelLocaleMgr::init()
 		{
 			// We have a custom time zone name
 			time_zone_mode = STzCustom;
-			set_custom_tz_name(tzstr);
+			setCustomTzName(tzstr);
 		}
 	}
 }
@@ -232,7 +232,7 @@ QString StelLocaleMgr::get_printable_time_local(double JD) const
 }
 
 // Convert the time format enum to its associated string and reverse
-StelLocaleMgr::STimeFormat StelLocaleMgr::string_to_s_time_format(const QString& tf) const
+StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf) const
 {
 	if (tf == "system_default") return STimeSystemDefault;
 	if (tf == "24h") return STime24h;
@@ -241,7 +241,7 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::string_to_s_time_format(const QString&
 	return STimeSystemDefault;
 }
 
-QString StelLocaleMgr::s_time_format_to_string(STimeFormat tf) const
+QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf) const
 {
 	if (tf == STimeSystemDefault) return "system_default";
 	if (tf == STime24h) return "24h";
@@ -251,7 +251,7 @@ QString StelLocaleMgr::s_time_format_to_string(STimeFormat tf) const
 }
 
 // Convert the date format enum to its associated string and reverse
-StelLocaleMgr::SDateFormat StelLocaleMgr::string_to_s_date_format(const QString& df) const
+StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df) const
 {
 	if (df == "system_default") return SDateSystemDefault;
 	if (df == "mmddyyyy") return SDateMMDDYYYY;
@@ -261,7 +261,7 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::string_to_s_date_format(const QString&
 	return SDateSystemDefault;
 }
 
-QString StelLocaleMgr::s_date_format_to_string(SDateFormat df) const
+QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 {
 	if (df == SDateSystemDefault) return "system_default";
 	if (df == SDateMMDDYYYY) return "mmddyyyy";
@@ -271,7 +271,7 @@ QString StelLocaleMgr::s_date_format_to_string(SDateFormat df) const
 	return "system_default";
 }
 
-void StelLocaleMgr::set_custom_tz_name(const QString& tzname)
+void StelLocaleMgr::setCustomTzName(const QString& tzname)
 {
 	custom_tz_name = tzname;
 	time_zone_mode = STzCustom;
