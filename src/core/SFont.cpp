@@ -24,12 +24,12 @@
 #include <QChar>
 #include <QString>
 
-SFont::SFont(float size_i, const QString& ttfFileName) 
-	: typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(size_i), 72) 
+SFont::SFont(float sizeI, const QString& ttfFileName) 
+	: typeFace(QFile::encodeName(ttfFileName).constData(), (size_t)(sizeI), 72) 
 {
 }
 
-void SFont::print_char_outlined(const QChar c) const
+void SFont::printCharOutlined(const QChar c) const
 {
 	GLfloat current_color[4];
 	glGetFloatv(GL_CURRENT_COLOR, current_color);	 
