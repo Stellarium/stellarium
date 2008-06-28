@@ -92,7 +92,7 @@ void ConstellationMgr::init()
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5).toDouble());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.).toDouble());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
-	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
+	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolateSelected",
 				conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 	StelApp::getInstance().getStelObjectMgr().registerStelObjectMgr(this);
 }
@@ -424,15 +424,15 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4f A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4f X = B * A.inverse();
 
-			cons->art_vertex[0] = Vec3f(X * Vec3f(0, 0, 0));
-			cons->art_vertex[1] = Vec3f(X * Vec3f(texSizeX / 2, 0, 0));
-			cons->art_vertex[2] = Vec3f(X * Vec3f(texSizeX / 2, texSizeY / 2, 0));
-			cons->art_vertex[3] = Vec3f(X * Vec3f(0, texSizeY / 2, 0));
-			cons->art_vertex[4] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, 0, 0));
-			cons->art_vertex[5] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2, 0));
-			cons->art_vertex[6] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2 + texSizeY / 2, 0));
-			cons->art_vertex[7] = Vec3f(X * Vec3f(texSizeX / 2 + 0, texSizeY / 2 + texSizeY / 2, 0));
-			cons->art_vertex[8] = Vec3f(X * Vec3f(0, texSizeY / 2 + texSizeY / 2, 0));
+			cons->artVertex[0] = Vec3f(X * Vec3f(0, 0, 0));
+			cons->artVertex[1] = Vec3f(X * Vec3f(texSizeX / 2, 0, 0));
+			cons->artVertex[2] = Vec3f(X * Vec3f(texSizeX / 2, texSizeY / 2, 0));
+			cons->artVertex[3] = Vec3f(X * Vec3f(0, texSizeY / 2, 0));
+			cons->artVertex[4] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, 0, 0));
+			cons->artVertex[5] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2, 0));
+			cons->artVertex[6] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2 + texSizeY / 2, 0));
+			cons->artVertex[7] = Vec3f(X * Vec3f(texSizeX / 2 + 0, texSizeY / 2 + texSizeY / 2, 0));
+			cons->artVertex[8] = Vec3f(X * Vec3f(0, texSizeY / 2 + texSizeY / 2, 0));
 
 			++readOk;
 		}
@@ -636,7 +636,7 @@ void ConstellationMgr::setArtIntensity(double _max)
 	artMaxIntensity = _max;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->art_fader.setMaxValue(_max);
+		(*iter)->artFader.setMaxValue(_max);
 }
 
 void ConstellationMgr::setArtFadeDuration(float duration)
@@ -644,7 +644,7 @@ void ConstellationMgr::setArtFadeDuration(float duration)
 	artFadeDuration = duration;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->art_fader.setDuration((int) (duration * 1000.f));
+		(*iter)->artFader.setDuration((int) (duration * 1000.f));
 }
 
 void ConstellationMgr::setFlagLines(bool b)

@@ -127,8 +127,8 @@ void TelescopeMgr::draw(StelCore* core)
           glVertex2d(XY[0]-radius,XY[1]+radius); // Top left
           glEnd();
         }
-        if (name_fader.getInterstate() >= 0) {
-          glColor4f(labelColor[0],labelColor[1],labelColor[2], name_fader.getInterstate());
+        if (nameFader.getInterstate() >= 0) {
+          glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
           prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
           telescope_texture->bind();
         }
@@ -140,7 +140,7 @@ void TelescopeMgr::draw(StelCore* core)
 }
 
 void TelescopeMgr::update(double deltaTime) {
-  name_fader.update((int)(deltaTime*1000));
+  nameFader.update((int)(deltaTime*1000));
   telescope_fader.update((int)(deltaTime*1000));
  	// communicate with the telescopes:
 	communicate();

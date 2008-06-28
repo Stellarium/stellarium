@@ -41,21 +41,21 @@ public:
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
 	void update(double deltaTime)
 	{
-		land_fader.update((int)(deltaTime*1000));
-		fog_fader.update((int)(deltaTime*1000));
+		landFader.update((int)(deltaTime*1000));
+		fogFader.update((int)(deltaTime*1000));
 	}
 
 	//! Set the brightness of the landscape
-	void setBrightness(float b) {sky_brightness = b;}
+	void setBrightness(float b) {skyBrightness = b;}
 	
 	//! Set whether landscape is displayed (does not concern fog)
-	void setFlagShow(bool b) {land_fader=b;}
+	void setFlagShow(bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() const {return (bool)land_fader;}
+	bool getFlagShow() const {return (bool)landFader;}
 	//! Set whether fog is displayed
-	void setFlagShowFog(bool b) {fog_fader=b;}
+	void setFlagShowFog(bool b) {fogFader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() const {return (bool)fog_fader;}
+	bool getFlagShowFog() const {return (bool)fogFader;}
 	//! Get landscape name
 	QString getName() const {return name;}
 	//! Get landscape author name
@@ -85,10 +85,10 @@ protected:
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
 	QString name;
-	float sky_brightness;
-	bool valid_landscape;   // was a landscape loaded properly?
-	LinearFader land_fader;
-	LinearFader fog_fader;
+	float skyBrightness;
+	bool validLandscape;   // was a landscape loaded properly?
+	LinearFader landFader;
+	LinearFader fogFader;
 	QString author;
 	QString description;
 	QString planet;
@@ -99,8 +99,8 @@ protected:
 	typedef struct
 	{
 		STextureSP tex;
-		float tex_coords[4];
-	} landscape_tex_coord;
+		float texCoords[4];
+	} landscapeTexCoord;
 };
 
 
@@ -113,26 +113,26 @@ public:
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(bool _fullpath, QMap<QString, QString> param);
 private:
-	void draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	void draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	void draw_ground(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
-	STextureSP* side_texs;
-	int nb_side_texs;
-	int nb_side;
-	landscape_tex_coord* sides;
-	STextureSP fog_tex;
-	landscape_tex_coord fog_tex_coord;
-	STextureSP ground_tex;
-	landscape_tex_coord ground_tex_coord;
-	int nb_decor_repeat;
-	float fog_alt_angle;
-	float fog_angle_shift;
-	float decor_alt_angle;
-	float decor_angle_shift;
-	float decor_angle_rotatez;
-	float ground_angle_shift;
-	float ground_angle_rotatez;
-	int draw_ground_first;
+	void drawFog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	void drawDecor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	void drawGround(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	STextureSP* sideTexs;
+	int nbSideTexs;
+	int nbSide;
+	landscapeTexCoord* sides;
+	STextureSP fogTex;
+	landscapeTexCoord fogTexCoord;
+	STextureSP groundTex;
+	landscapeTexCoord groundTexCoord;
+	int nbDecorRepeat;
+	float fogAltAngle;
+	float fogAngleShift;
+	float decorAltAngle;
+	float decorAngleShift;
+	float decorAngleRotatez;
+	float groundAngleShift;
+	float groundAngleRotatez;
+	int drawGroundFirst;
 	bool tanMode;	// Whether the angles should be converted using tan instead of sin 
 };
 
@@ -144,12 +144,12 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath, const QString& _maptex,
-	            double _texturefov, double angle_rotatez);
+	            double _texturefov, double angleRotatez);
 private:
 
-	STextureSP map_tex;
-	float tex_fov;
-	float angle_rotatez;
+	STextureSP mapTex;
+	float texFov;
+	float angleRotatez;
 };
 
 
@@ -161,11 +161,11 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const QString _name, bool _fullpath,
-	            const QString& _maptex, double angle_rotatez);
+	            const QString& _maptex, double angleRotatez);
 private:
 
-	STextureSP map_tex;
-	float angle_rotatez;
+	STextureSP mapTex;
+	float angleRotatez;
 };
 
 #endif // _LANDSCAPE_H_

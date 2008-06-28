@@ -128,12 +128,12 @@ public slots:
 	void setColorMeridianLine(const Vec3f& v);
 	
 private:
-	SkyGrid * equ_grid;					// Equatorial grid
-	SkyGrid * equJ2000_grid;			// Equatorial J2000 grid
-	SkyGrid * azi_grid;					// Azimutal grid
-	SkyLine * equator_line;				// Celestial Equator line
-	SkyLine * ecliptic_line;			// Ecliptic line
-	SkyLine * meridian_line;			// Meridian line
+	SkyGrid * equGrid;      // Equatorial grid
+	SkyGrid * equJ2000Grid; // Equatorial J2000 grid
+	SkyGrid * aziGrid;      // Azimutal grid
+	SkyLine * equatorLine;  // Celestial Equator line
+	SkyLine * eclipticLine; // Ecliptic line
+	SkyLine * meridianLine; // Meridian line
 };
 
 #endif /*GRIDLINES_H_*/
