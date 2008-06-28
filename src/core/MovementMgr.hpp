@@ -58,7 +58,7 @@ public:
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	//! Called then the selected object changes.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to MovementMgr

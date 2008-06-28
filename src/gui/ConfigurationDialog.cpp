@@ -155,9 +155,9 @@ void ConfigurationDialog::setDiskViewport(bool b)
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	assert(proj);
 	if (b)
-		proj->setMaskType(Projector::DISK);
+		proj->setMaskType(Projector::Disk);
 	else
-		proj->setMaskType(Projector::NONE);
+		proj->setMaskType(Projector::None);
 }
 
 void ConfigurationDialog::setSphericMirror(bool b)

@@ -170,7 +170,7 @@ void MeteorMgr::draw(StelCore* core)
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return;
 	
-	core->getProjection()->setCurrentFrame(Projector::FRAME_LOCAL);
+	core->getProjection()->setCurrentFrame(Projector::FrameLocal);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);

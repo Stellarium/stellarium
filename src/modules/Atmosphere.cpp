@@ -199,7 +199,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	skylight_struct2 b2;
 	float lumi;
 	
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	prj->setCurrentFrame(Projector::FrameLocal);
 	
 	// Compute the sky color for every point above the ground
 	for (int i=0; i<(1+sky_resolution_x)*(1+sky_resolution_y); ++i)

@@ -85,11 +85,11 @@ public:
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
 	//! the existing selection list.
-	enum selectAction
+	enum SelectAction
 	{
-		ADD_TO_SELECTION,
-		REPLACE_SELECTION,
-		REMOVE_FROM_SELECTION
+		AddToSelection,
+		ReplaceSelection,
+		RemoveFromSelection
 	};
 
  

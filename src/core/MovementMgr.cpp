@@ -666,9 +666,9 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 	Vec3d tempvec1, tempvec2;
 	double az1, alt1, az2, alt2;
 	if (nav->getViewingMode()==Navigator::ViewHorizon)
-		proj->setCurrentFrame(Projector::FRAME_LOCAL);
+		proj->setCurrentFrame(Projector::FrameLocal);
 	else
-		proj->setCurrentFrame(Projector::FRAME_EARTH_EQU);
+		proj->setCurrentFrame(Projector::FrameEarthEqu);
 		
 //johannes: StelApp already gives appropriate x/y coordinates
 //	proj->unProject(x2,proj->getViewportHeight()-y2, tempvec2);

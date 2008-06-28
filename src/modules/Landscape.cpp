@@ -286,7 +286,7 @@ void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, c
 
 	glColor4f(sky_brightness, sky_brightness, sky_brightness,
 	          land_fader.getInterstate());
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	prj->setCurrentFrame(Projector::FrameLocal);
 
 	const int stacks = 8;
 	  // make slices_per_side=(3<<K) so that the innermost polygon of the
@@ -422,7 +422,7 @@ void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Na
 	glEnable(GL_BLEND);
 	map_tex->bind();
 	prj->setCustomFrame(nav->getLocalToEyeMat() * Mat4d::zrotation(-angle_rotatez));
-	prj->sSphere_map(radius,40,20,tex_fov,1);
+	prj->sSphereMap(radius,40,20,tex_fov,1);
 
 	glDisable(GL_CULL_FACE);
 }

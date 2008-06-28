@@ -42,7 +42,7 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(Projector::FRAME_TYPE frame);
+	SkyGrid(Projector::FrameType frame);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
 	void setFontSize(double newFontSize);
@@ -56,7 +56,7 @@ public:
 private:
 	bool transparent_top;
 	Vec3f color;
-	Projector::FRAME_TYPE frameType;
+	Projector::FrameType frameType;
 	double fontSize;
 	SFont& font;
 	LinearFader fader;
@@ -89,14 +89,14 @@ public:
 private:
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
-	Projector::FRAME_TYPE frameType;
+	Projector::FrameType frameType;
 	LinearFader fader;
 	double fontSize;
 	SFont& font;
 };
 
 // rms added color as parameter
-SkyGrid::SkyGrid(Projector::FRAME_TYPE frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
+SkyGrid::SkyGrid(Projector::FrameType frame) : color(0.2,0.2,0.2), frameType(frame), fontSize(12),
 	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	transparent_top = true;
@@ -223,7 +223,7 @@ static Vec3d get2dPosFromSpherical1802(const Projector* prj, double lon, double 
 //! Beginning means that the direction of increasing longitude goes inside the viewport 
 static bool isParallelEntering(const Projector* prj, double lon, double lat)
 {
-	return prj->check_in_viewport(get2dPosFromSpherical(prj, lon+0.0001*prj->getFov(), lat));
+	return prj->checkInViewport(get2dPosFromSpherical(prj, lon+0.0001*prj->getFov(), lat));
 }
 
 //! Check if the given point from the viewport side is the beginning of a meridian or not
@@ -236,7 +236,7 @@ static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, doubl
 	double lat2 = lat1802+0.001*prj->getFov();
 	if (lat2>2.*M_PI)
 		lat2-=2.*M_PI;
-	return prj->check_in_viewport(get2dPosFromSpherical1802(prj, lon1802, lat2));
+	return prj->checkInViewport(get2dPosFromSpherical1802(prj, lon1802, lat2));
 }
 
 
@@ -355,9 +355,9 @@ void SkyGrid::draw(const Projector* prj) const
 	bool northPoleInViewport = false;
 	bool southPoleInViewport = false;
 	Vec3d win;
-	if (prj->project(Vec3d(0,0,1), win) && prj->check_in_viewport(win))
+	if (prj->project(Vec3d(0,0,1), win) && prj->checkInViewport(win))
 		northPoleInViewport = true;
-	if (prj->project(Vec3d(0,0,-1), win) && prj->check_in_viewport(win))
+	if (prj->project(Vec3d(0,0,-1), win) && prj->checkInViewport(win))
 		southPoleInViewport = true;
 
 	// Get the longitude and latitude resolution at the center of the viewport
@@ -553,11 +553,11 @@ font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstanc
 
 	switch (line_type)
 	{
-		case LOCAL : frameType = Projector::FRAME_LOCAL; break;
-		case MERIDIAN : frameType = Projector::FRAME_LOCAL; break;
-		case ECLIPTIC : frameType = Projector::FRAME_HELIO; break;
-		case EQUATOR : frameType = Projector::FRAME_EARTH_EQU; break;
-		default : frameType = Projector::FRAME_EARTH_EQU;
+		case LOCAL : frameType = Projector::FrameLocal; break;
+		case MERIDIAN : frameType = Projector::FrameLocal; break;
+		case ECLIPTIC : frameType = Projector::FrameHelio; break;
+		case EQUATOR : frameType = Projector::FrameEarthEqu; break;
+		default : frameType = Projector::FrameEarthEqu;
 	}
 }
 
@@ -591,9 +591,9 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
-	equ_grid = new SkyGrid(Projector::FRAME_EARTH_EQU);
-	equJ2000_grid = new SkyGrid(Projector::FRAME_J2000);
-	azi_grid = new SkyGrid(Projector::FRAME_LOCAL);
+	equ_grid = new SkyGrid(Projector::FrameEarthEqu);
+	equJ2000_grid = new SkyGrid(Projector::FrameJ2000);
+	azi_grid = new SkyGrid(Projector::FrameLocal);
 	equator_line = new SkyLine(SkyLine::EQUATOR);
 	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
 	meridian_line = new SkyLine(SkyLine::MERIDIAN);
