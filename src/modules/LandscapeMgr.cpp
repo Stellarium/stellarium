@@ -180,7 +180,7 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = nav->helioToLocal(ssystem->getMoon()->getHeliocentricEclipticPos());
 	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
-	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->getHeliocentricEclipticPos()),
+	                          ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	

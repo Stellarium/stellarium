@@ -37,7 +37,7 @@
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 
-SFont* Planet::planet_name_font = NULL;
+SFont* Planet::planetNameFont = NULL;
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 Vec3f Planet::trailColor = Vec3f(1,0.7,0.7);
@@ -53,7 +53,7 @@ Planet::Planet(Planet *parent,
                float albedo,
                const QString& texMapName,
                const QString& texHaloName,
-               posFuncType coord_func,
+               posFuncType coordFunc,
                OsulatingFunctType *osculatingFunc,
                bool acloseOrbit,
                bool hidden,
@@ -62,10 +62,10 @@ Planet::Planet(Planet *parent,
 	  flagHalo(flagHalo),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), albedo(albedo), axis_rotation(0.), rings(NULL),
-	  sphere_scale(1.f),
+	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  sphereScale(1.f),
 	  lastJD(J2000), 
-	  coord_func(coord_func), 
+	  coordFunc(coordFunc), 
 	  osculatingFunc(osculatingFunc), 
 	  parent(parent), 
 	  hidden(hidden), 
@@ -78,11 +78,11 @@ Planet::Planet(Planet *parent,
 				 
 	if (parent) 
 		parent->satellites.push_back(this);
-	ecliptic_pos=Vec3d(0.,0.,0.);
-	rot_local_to_parent = Mat4d::identity();
+	eclipticPos=Vec3d(0.,0.,0.);
+	rotLocalToParent = Mat4d::identity();
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
-	tex_map = StelApp::getInstance().getTextureManager().createTexture(texMapName);
+	texMap = StelApp::getInstance().getTextureManager().createTexture(texMapName);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -124,8 +124,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (sphere_scale != 1.f)
-			oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
+		if (sphereScale != 1.f)
+			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
 	}
 
@@ -180,9 +180,9 @@ QString Planet::getSkyLabel(const Navigator * nav) const
 	oss.setRealNumberPrecision(2);
 	oss << nameI18;
 
-	if (sphere_scale != 1.f)
+	if (sphereScale != 1.f)
 	{
-		oss << QString::fromUtf8(" (\xC3\x97") << sphere_scale << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 	}
 	return str;
 }
@@ -208,7 +208,7 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const Navigator* nav) const
 {
-	return std::atan(radius*sphere_scale*2.f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
+	return std::atan(radius*sphereScale*2.f/getObsEquatorialPos(nav).length())*180./M_PI * 4;
 }
 
 double Planet::getSatellitesFov(const Navigator * nav) const
@@ -228,7 +228,7 @@ double Planet::getParentSatellitesFov(const Navigator *nav) const
 }
 
 // Set the orbital elements
-void Planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod )
+void Planet::setRotationElements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod )
 {
 	re.period = _period;
 	re.offset = _offset;
@@ -252,7 +252,7 @@ void Planet::computePositionWithoutOrbits(const double date)
 {
 	if (fabs(lastJD-date)>deltaJD) 
 	{
-		coord_func(date, ecliptic_pos);
+		coordFunc(date, eclipticPos);
 		lastJD = date;
 	}
 }
@@ -295,11 +295,11 @@ void Planet::computePosition(const double date)
 					computeTransMatrix(calc_date);
 					if (osculatingFunc) 
 					{
-						(*osculatingFunc)(date,calc_date,ecliptic_pos);
+						(*osculatingFunc)(date,calc_date,eclipticPos);
 					} 
 					else 
 					{
-						coord_func(calc_date, ecliptic_pos);
+						coordFunc(calc_date, eclipticPos);
 					}
 					orbit[d] = getHeliocentricEclipticPos();
 				}
@@ -323,11 +323,11 @@ void Planet::computePosition(const double date)
 
 					computeTransMatrix(calc_date);
 					if (osculatingFunc) {
-						(*osculatingFunc)(date,calc_date,ecliptic_pos);
+						(*osculatingFunc)(date,calc_date,eclipticPos);
 					} 
 					else 
 					{
-						coord_func(calc_date, ecliptic_pos);
+						coordFunc(calc_date, eclipticPos);
 					}
 					orbit[d] = getHeliocentricEclipticPos();
 				}
@@ -350,11 +350,11 @@ void Planet::computePosition(const double date)
 				computeTransMatrix(calc_date);
 				if (osculatingFunc) 
 				{
-					(*osculatingFunc)(date,calc_date,ecliptic_pos);
+					(*osculatingFunc)(date,calc_date,eclipticPos);
 				} 
 				else 
 				{
-					coord_func(calc_date, ecliptic_pos);
+					coordFunc(calc_date, eclipticPos);
 				}
 				orbit[d] = getHeliocentricEclipticPos();
 			}
@@ -365,7 +365,7 @@ void Planet::computePosition(const double date)
 
 
 		// calculate actual Planet position
-		coord_func(date, ecliptic_pos);
+		coordFunc(date, eclipticPos);
 
 		lastJD = date;
 
@@ -373,7 +373,7 @@ void Planet::computePosition(const double date)
 	else if (fabs(lastJD-date)>deltaJD)
 	{
 		// calculate actual Planet position
-		coord_func(date, ecliptic_pos);
+		coordFunc(date, eclipticPos);
 		lastJD = date;
 	}
 
@@ -382,13 +382,13 @@ void Planet::computePosition(const double date)
 // Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 void Planet::computeTransMatrix(double jd)
 {
-	axis_rotation = getSiderealTime(jd);
+	axisRotation = getSiderealTime(jd);
 
 	// Special case - heliocentric coordinates are on ecliptic,
 	// not solar equator...
 	if (parent) 
 	{
-		rot_local_to_parent = Mat4d::zrotation(re.ascendingNode
+		rotLocalToParent = Mat4d::zrotation(re.ascendingNode
 		                      - re.precessionRate*(jd-re.epoch))
 		                      * Mat4d::xrotation(re.obliquity);
 	}
@@ -396,11 +396,11 @@ void Planet::computeTransMatrix(double jd)
 
 Mat4d Planet::getRotEquatorialToVsop87(void) const 
 {
-	Mat4d rval = rot_local_to_parent;
+	Mat4d rval = rotLocalToParent;
 	if (parent)
 	{
 		for (const Planet *p=parent;p->parent;p=p->parent) 
-			rval = p->rot_local_to_parent * rval;
+			rval = p->rotLocalToParent * rval;
 	}
 	return rval;
 }
@@ -411,9 +411,9 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 	if (parent)
 	{
 		for (const Planet *p=parent;p->parent;p=p->parent) 
-			a = p->rot_local_to_parent * a;
+			a = p->rotLocalToParent * a;
 	}
-	rot_local_to_parent = a.transpose() * m;
+	rotLocalToParent = a.transpose() * m;
 }
 
 
@@ -436,20 +436,20 @@ double Planet::getSiderealTime(double jd) const
 // Get the Planet position in the parent Planet ecliptic coordinate
 Vec3d Planet::getEclipticPos() const
 {
-	return ecliptic_pos;
+	return eclipticPos;
 }
 
 // Return the heliocentric ecliptical position
 // used only for earth shadow, lunar eclipse
 Vec3d Planet::getHeliocentricEclipticPos() const
 {
-	Vec3d pos = ecliptic_pos;
+	Vec3d pos = eclipticPos;
 	const Planet *pp = parent;
 	if (pp)
 	{
 		while (pp->parent)
 		{
-			pos += pp->ecliptic_pos;
+			pos += pp->eclipticPos;
 			pp = pp->parent;
 		}
 	}
@@ -458,24 +458,24 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 
 void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 {
-	ecliptic_pos = pos;
+	eclipticPos = pos;
 	const Planet *p = parent;
 	if (p) while (p->parent)
 	{
-		ecliptic_pos -= p->ecliptic_pos;
+		eclipticPos -= p->eclipticPos;
 		p = p->parent;
 	}
 }
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)
-double Planet::computeDistance(const Vec3d& obs_helio_pos)
+double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
-	distance = (obs_helio_pos-getHeliocentricEclipticPos()).length();
+	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
 	return distance;
 }
 
 // Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (dist in AU)
-double Planet::get_phase(Vec3d obsPos) const 
+double Planet::getPhase(Vec3d obsPos) const 
 {
 	const double sq = obsPos.lengthSquared();
 	const Vec3d heliopos = getHeliocentricEclipticPos();
@@ -543,14 +543,14 @@ double Planet::getAngularSize(const StelCore* core) const
 {
 	double rad = radius;
 	if (rings)
-		rad = rings->get_size();
-	return std::atan2(rad*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
+		rad = rings->getSize();
+	return std::atan2(rad*sphereScale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(radius*sphere_scale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
+	return std::atan2(radius*sphereScale,getObsJ2000Pos(core->getNavigation()).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -562,11 +562,11 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	Mat4d mat = Mat4d::translation(ecliptic_pos) * rot_local_to_parent;
+	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	const Planet *p = parent;
 	while (p && p->parent)
 	{
-		mat = Mat4d::translation(p->ecliptic_pos) * mat * p->rot_local_to_parent;
+		mat = Mat4d::translation(p->eclipticPos) * mat * p->rotLocalToParent;
 		p = p->parent;
 	}
 
@@ -584,14 +584,14 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	}
 
 	// Compute the 2D position and check if in the screen
-	float screen_sz = getOnScreenSize(core);
+	float screenSz = getOnScreenSize(core);
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	
 	prj->setCustomFrame(mat);
 	if (prj->project(Vec3f(0,0,0), screenPos) &&
-	        screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screen_sz &&
-	        screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->getViewportWidth() + screen_sz)
+	        screenPos[1]>viewport_bottom - screenSz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screenSz &&
+	        screenPos[0]>viewport_left - screenSz && screenPos[0]<viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
@@ -613,12 +613,12 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 		}
 		drawHints(core);
 
-		draw3dModel(core,mat,screen_sz);
+		draw3dModel(core,mat,screenSz);
 	}
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
+void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
@@ -629,22 +629,22 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 	
 	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flagLighting);
 	
-	if (screen_sz>1.)
+	if (screenSz>1.)
 	{
 		if (rings)
 		{
 			const double dist = getObsEquatorialPos(nav).length();
-			double z_near = 0.9*(dist - rings->get_size());
-			double z_far  = 1.1*(dist + rings->get_size());
+			double z_near = 0.9*(dist - rings->getSize());
+			double z_far  = 1.1*(dist + rings->getSize());
 			if (z_near < 0.0) z_near = 0.0;
 			double n,f;
 			prj->getClippingPlanes(&n,&f); // Save clipping planes
 			prj->setClippingPlanes(z_near,z_far);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
-			drawSphere(core,mat,screen_sz);
+			drawSphere(core,mat,screenSz);
 			glDisable(GL_LIGHTING);
-			rings->draw(prj,mat,screen_sz);
+			rings->draw(prj,mat,screenSz);
 			glEnable(GL_LIGHTING);
 			glDisable(GL_DEPTH_TEST);
 			prj->setClippingPlanes(n,f);  // Restore old clipping planes
@@ -661,12 +661,12 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 				glEnable(GL_STENCIL_TEST);
-				drawSphere(core, mat, screen_sz);
+				drawSphere(core, mat, screenSz);
 				glDisable(GL_STENCIL_TEST);
 			}
 			else
 			{
-				drawSphere(core, mat, screen_sz);
+				drawSphere(core, mat, screenSz);
 			}
 		}
 	}
@@ -686,14 +686,14 @@ void Planet::drawHints(const StelCore* core)
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = 10.f + getOnScreenSize(core)/1.44; // Shift for nameI18 printing
 	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-	prj->drawText(planet_name_font,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
+	prj->drawText(planetNameFont,screenPos[0],screenPos[1], getSkyLabel(nav), 0, tmp, tmp, false);
 
 	// hint disapears smoothly on close view
-	if (hint_fader.getInterstate()<=0)
+	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hint_fader.getInterstate()/tmp*0.7);
+	glColor4f(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7);
 
 	// Draw the 2D small circle
 	glEnable(GL_BLEND);
@@ -702,27 +702,27 @@ void Planet::drawHints(const StelCore* core)
 	prj->drawSprite2dMode(screenPos[0], screenPos[1], 22);
 }
 
-void Planet::drawSphere(StelCore* core, const Mat4d& mat, float screen_sz)
+void Planet::drawSphere(StelCore* core, const Mat4d& mat, float screenSz)
 {
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	
-	if (tex_map)
-		tex_map->bind();
+	if (texMap)
+		texMap->bind();
 
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
-	core->getProjection()->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
+	core->getProjection()->setCustomFrame(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 	
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>40) nb_facet = 40;
 	glShadeModel(GL_SMOOTH);
-	core->getProjection()->sSphere(radius*sphere_scale, oneMinusOblateness, nb_facet, nb_facet);
+	core->getProjection()->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	glShadeModel(GL_FLAT);
 	glDisable(GL_CULL_FACE);
 }
@@ -738,14 +738,14 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
+void Ring::draw(const Projector* prj,const Mat4d& mat,double screenSz)
 {
-	screen_sz -= 50;
-	screen_sz /= 250.0;
-	if (screen_sz < 0.0) screen_sz = 0.0;
-	else if (screen_sz > 1.0) screen_sz = 1.0;
-	const int slices = 128+(int)((256-128)*screen_sz);
-	const int stacks = 8+(int)((32-8)*screen_sz);
+	screenSz -= 50;
+	screenSz /= 250.0;
+	if (screenSz < 0.0) screenSz = 0.0;
+	else if (screenSz > 1.0) screenSz = 1.0;
+	const int slices = 128+(int)((256-128)*screenSz);
+	const int stacks = 8+(int)((32-8)*screenSz);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -965,7 +965,7 @@ void Planet::startTrail(bool b)
 
 void Planet::update(int deltaTime)
 {
-	hint_fader.update(deltaTime);
+	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 	trailFader.update(deltaTime);
