@@ -5,6 +5,11 @@ use strict;
 use Getopt::Long;
 use Term::ANSIColor;
 
+	my $textRed = color 'red';
+	my $textGreen = color 'green';
+	my $textBlue = color 'blue';
+	my $textReset = color 'reset';
+
 my $flg_verbose = 0;
 my $flg_yes = 0;
 my $flg_no = 0;
@@ -73,7 +78,7 @@ sub refactorString {
 	}
 
 	if (!$flg_yes) {
-		print "Will replace $s with $r:\n";
+		print "${textBlue}Will replace${textReset} $s ${textBlue}with${textReset} $r${textBlue}:${textReset}\n";
 	}
 	my %patchFileList;
 	my $textRed = color 'red';
@@ -124,15 +129,20 @@ sub refactorString {
 
 	# prompt user if they want to do the replacement
 	my $do_it = $flg_yes;
+	my $prompt_replace = 0;
 	if ($flg_yes) { 
 		$do_it = 1;
 	}
 	else {
-		print "\nAccept changes (y/n)> ";
+		print "\nAccept changes (${textGreen}y${textReset}es/${textGreen}n${textReset}o/${textGreen}p${textReset}rompt)? >";
 		my $res = <STDIN>;
 		chomp $res;
 		if (lc($res) eq "y") {
 			$do_it = 1;
+		}
+		elsif (lc($res) eq "p") {
+			$do_it = 1;
+			$prompt_replace = 1;
 		}
 	}
 
@@ -150,7 +160,24 @@ sub refactorString {
 			open(NEWF, ">$f")  || die "cannot open $f for writing : $!\n";
 			while(<ORIG>)
 			{
-				if (s/$s/$r/g) { $updatedLines ++; }
+				if (/$s/) {
+					if (!$prompt_replace) {
+						s/$s/$r/g;
+						$updatedLines ++; 
+					}
+					else {
+						my $prompt = $_;
+						$prompt =~ s/($s)/$textGreen$1$textReset/g;
+						print "$prompt";
+						print "patch this line (y/n)? >";
+						my $res = <STDIN>;
+						chomp $res;
+						if (lc($res) ne "n") {
+							s/$s/$r/g;
+							$updatedLines ++;
+						}
+					}
+				}
 				print NEWF $_;
 			}
 			close(ORIG);
