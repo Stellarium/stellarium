@@ -50,7 +50,7 @@ QValidator::State TextEntryDateTimeValidator::validate(QString & input, int & po
 	return Invalid;
 }
 
-vector<int> TextEntryDateTimeValidator::get_ints_from_ISO8601_string(const QString & dt)
+vector<int> TextEntryDateTimeValidator::getIntsFromISO8601String(const QString & dt)
 {
 	QRegExp final(finalRe);
 	vector<int> retval;
@@ -72,14 +72,14 @@ vector<int> TextEntryDateTimeValidator::get_ints_from_ISO8601_string(const QStri
 			else
 			{
 				retval.clear();
-				qWarning() << "TextEntryDateTimeValidator::get_ints_from_ISO8601_string: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
+				qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date at capture " << i << ", returning nothing: " << dt;
 				break;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "TextEntryDateTimeValidator::get_ints_from_ISO8601_string: input string failed to be an exact date, returning nothing: " << dt;
+		qWarning() << "TextEntryDateTimeValidator::getIntsFromISO8601String: input string failed to be an exact date, returning nothing: " << dt;
 	}
 	return retval;
 }

@@ -552,13 +552,13 @@ void MovementMgr::updateVisionVector(double deltaTime)
 
 		if (move.localPos)
 		{
-			StelUtils::rect_to_sphe(&ra_aim, &de_aim, move.aim);
-			StelUtils::rect_to_sphe(&ra_start, &de_start, move.start);
+			StelUtils::rectToSphe(&ra_aim, &de_aim, move.aim);
+			StelUtils::rectToSphe(&ra_start, &de_start, move.start);
 		}
 		else
 		{
-			StelUtils::rect_to_sphe(&ra_aim, &de_aim, nav->earthEquToLocal(move.aim));
-			StelUtils::rect_to_sphe(&ra_start, &de_start, nav->earthEquToLocal(move.start));
+			StelUtils::rectToSphe(&ra_aim, &de_aim, nav->earthEquToLocal(move.aim));
+			StelUtils::rectToSphe(&ra_start, &de_start, nav->earthEquToLocal(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -575,7 +575,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		
 		Vec3d tmp;
-		StelUtils::sphe_to_rect(ra_now, de_now, tmp);
+		StelUtils::spheToRect(ra_now, de_now, tmp);
 		nav->setEquVision(nav->localToEarthEqu(tmp));
 
 		move.coef+=move.speed*deltaTime*1000;
@@ -621,8 +621,8 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 	Navigator* nav = core->getNavigation();
 	double azVision, altVision;
 
-	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rect_to_sphe(&azVision,&altVision,nav->getEquVision());
-	else StelUtils::rect_to_sphe(&azVision,&altVision,nav->getLocalVision());
+	if( nav->getViewingMode() == Navigator::ViewEquator) StelUtils::rectToSphe(&azVision,&altVision,nav->getEquVision());
+	else StelUtils::rectToSphe(&azVision,&altVision,nav->getLocalVision());
 
 	// if we are moving in the Azimuthal angle (left/right)
 	if (deltaAz) azVision-=deltaAz;
@@ -640,13 +640,13 @@ void MovementMgr::panView(double deltaAz, double deltaAlt)
 		if( nav->getViewingMode() == Navigator::ViewEquator)
 		{
 			Vec3d tmp;
-			StelUtils::sphe_to_rect(azVision, altVision, tmp);
+			StelUtils::spheToRect(azVision, altVision, tmp);
 			nav->setLocalVision(nav->earthEquToLocal(tmp));
 		}
 		else
 		{
 			Vec3d tmp;
-			StelUtils::sphe_to_rect(azVision, altVision, tmp);
+			StelUtils::spheToRect(azVision, altVision, tmp);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
 			nav->setEquVision(nav->localToEarthEqu(tmp));
 		}
@@ -675,8 +675,8 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 //	proj->unProject(x1,proj->getViewportHeight()-y1, tempvec1);
 	proj->unProject(x2,y2, tempvec2);
 	proj->unProject(x1,y1, tempvec1);
-	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
-	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
+	StelUtils::rectToSphe(&az1, &alt1, tempvec1);
+	StelUtils::rectToSphe(&az2, &alt2, tempvec2);
 	panView(az2-az1, alt1-alt2);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);

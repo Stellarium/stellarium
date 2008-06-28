@@ -44,9 +44,9 @@ public:
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	
 	//! Set fade in/out duration in seconds
-	void setFadeDuration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	//! Get fade in/out duration in seconds
-	float getFadeDuration() {return fader.get_duration()/1000.f;}
+	float getFadeDuration() {return fader.getDuration()/1000.f;}
 	
 	//! Define whether to display atmosphere
 	void setFlagShow(bool b){fader = b;}

@@ -197,8 +197,8 @@ void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
-	setCirclesColor(StelUtils::str_to_vec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
+	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
 }
 
 // Search by name

@@ -62,7 +62,7 @@ public:
   void communicate(void);
    
   void set_names_fade_duration(float duration)
-    {name_fader.set_duration((int) (duration * 1000.f));}
+    {name_fader.setDuration((int) (duration * 1000.f));}
   
   void setLabelColor(const Vec3f &c) {label_color = c;}
   const Vec3f &getLabelColor(void) const {return label_color;}

@@ -997,10 +997,10 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 			glColor4fv(*textColor);
 		}
 		double lon, lat;
-		StelUtils::rect_to_sphe(&lon, &lat, start);
+		StelUtils::rectToSphe(&lon, &lat, start);
 		Vec3d win0, win1;
 		Vec3d v1, v2;
-		StelUtils::sphe_to_rect(lon+0.0000001, lat, v2);
+		StelUtils::spheToRect(lon+0.0000001, lat, v2);
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
@@ -1014,7 +1014,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 
 		// Label at end of the arc
-		StelUtils::sphe_to_rect(lon+length-0.0000001, lat, v2);
+		StelUtils::spheToRect(lon+length-0.0000001, lat, v2);
 		project(v, win0);
 		project(v2, win1);
 		angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
@@ -1062,10 +1062,10 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			glColor4fv(*textColor);
 		}
 		double lon, lat;
-		StelUtils::rect_to_sphe(&lon, &lat, start);
+		StelUtils::rectToSphe(&lon, &lat, start);
 		Vec3d win0, win1;
 		Vec3d v2;
-		StelUtils::sphe_to_rect(lon, lat+0.0000001*(start[1]>=0 ? 1.:-1.), v2);
+		StelUtils::spheToRect(lon, lat+0.0000001*(start[1]>=0 ? 1.:-1.), v2);
 		project(start, win0);
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
@@ -1080,7 +1080,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 
 		// Label at end of the arc
-		StelUtils::sphe_to_rect(lon, lat+(length-0.0000001)*(start[1]>=0 ? 1.:-1.), v2);
+		StelUtils::spheToRect(lon, lat+(length-0.0000001)*(start[1]>=0 ? 1.:-1.), v2);
 		project(v, win0);
 		project(v2, win1);
 		angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
@@ -1090,7 +1090,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			angleDeg+=180.;
 			xshift=-font->getStrLen(str)-20.f;
 		}
-		StelUtils::rect_to_sphe(&lon, &lat, v);
+		StelUtils::rectToSphe(&lon, &lat, v);
 		str = StelUtils::radToHmsStrAdapt(lon);
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 		

@@ -646,7 +646,7 @@ void SolarSystem::loadPlanets()
 					pd.value(secname+"/lighting").toBool(),
 					pd.value(secname+"/radius").toDouble()/AU,
 					pd.value(secname+"/oblateness", 0.0).toDouble(),
-					StelUtils::str_to_vec3f(pd.value(secname+"/color").toString()),
+					StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					pd.value(secname+"/albedo").toDouble(),
 					pd.value(secname+"/tex_map").toString(),
 					pd.value(secname+"/tex_halo").toString(),
@@ -804,9 +804,9 @@ void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::str_to_vec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
-	setTrailsColor(StelUtils::str_to_vec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
+	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
 }
 
 Planet* SolarSystem::searchByEnglishName(QString planetEnglishName) const
