@@ -95,7 +95,7 @@ void MilkyWay::draw(StelCore* core)
 	glDisable(GL_BLEND);
 	tex->bind();
 
-	prj->setCustomFrame(nav->get_j2000_to_eye_mat()*
+	prj->setCustomFrame(nav->getJ2000ToEyeMat()*
 		     Mat4d::xrotation(M_PI/180*23)*
 		     Mat4d::yrotation(M_PI/180*120)*
 		     Mat4d::zrotation(M_PI/180*7));

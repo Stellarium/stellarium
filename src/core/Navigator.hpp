@@ -41,8 +41,12 @@ class StelObject;
 class LoadingBar;
 class Planet;
 
-// Class which manages a navigation context
-// Manage date/time, viewing direction/fov, observer position, and coordinate changes
+//! @class Navigator
+//! Manages a navigation context.  This includes:
+//! - date/time
+//! - viewing direction/fov
+//! - observer position
+//! - coordinate changes
 class Navigator : public QObject
 {
 	Q_OBJECT;
@@ -51,12 +55,12 @@ public:
 
 	enum ViewingModeType
 	{
-		VIEW_HORIZON,
-		VIEW_EQUATOR
+		ViewHorizon,
+		ViewEquator
 	};
 	
 	//! Possible mount modes
-	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
+	enum MountMode { MountAltAzimuthal, MountEquatorial };
 	
 	// Create and initialise to default a navigation context
 	Navigator(Observer* obs);
@@ -68,54 +72,54 @@ public:
 	void updateTransformMatrices(void);
 	
 	//! Set current mount type
-	void setMountMode(MOUNT_MODE m) {setViewingMode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
+	void setMountMode(MountMode m) {setViewingMode((m==MountAltAzimuthal) ? Navigator::ViewHorizon : Navigator::ViewEquator);}
 	//! Get current mount type
-	MOUNT_MODE getMountMode(void) {return ((getViewingMode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
+	MountMode getMountMode(void) {return ((getViewingMode()==Navigator::ViewHorizon) ? MountAltAzimuthal : MountEquatorial);}
 
 
-	// Get vision direction
-	const Vec3d& getEquVision(void) const {return equ_vision;}
-	const Vec3d& getJ2000EquVision(void) const {return J2000_equ_vision;}
-	const Vec3d& getLocalVision(void) const {return local_vision;}
+	//! Get vision direction
+	const Vec3d& getEquVision(void) const {return equVision;}
+	const Vec3d& getJ2000EquVision(void) const {return J2000EquVision;}
+	const Vec3d& getLocalVision(void) const {return localVision;}
 	void setLocalVision(const Vec3d& _pos);
 	void setEquVision(const Vec3d& _pos);
 	void setJ2000EquVision(const Vec3d& _pos);
 	
 	const Planet *getHomePlanet(void) const;
 
-	// Return the observer heliocentric position
+	//! Return the observer heliocentric position
 	Vec3d getObserverHelioPos(void) const;
 
-	// Transform vector from local coordinate to equatorial
-	Vec3d local_to_earth_equ(const Vec3d& v) const { return mat_local_to_earth_equ*v; }
+	//! Transform vector from local coordinate to equatorial
+	Vec3d localToEarthEqu(const Vec3d& v) const { return matLocalToEarthEqu*v; }
 
-	// Transform vector from equatorial coordinate to local
-	Vec3d earth_equ_to_local(const Vec3d& v) const { return mat_earth_equ_to_local*v; }
+	//! Transform vector from equatorial coordinate to local
+	Vec3d earthEquToLocal(const Vec3d& v) const { return matEarthEquToLocal*v; }
 
-	Vec3d earth_equ_to_j2000(const Vec3d& v) const { return mat_earth_equ_to_j2000*v; }
-	Vec3d j2000_to_earth_equ(const Vec3d& v) const { return mat_j2000_to_earth_equ*v; }
-	Vec3d j2000_to_local(const Vec3d& v) const { return mat_j2000_to_local*v; }
+	Vec3d earthEquToJ2000(const Vec3d& v) const { return matEarthEquToJ2000*v; }
+	Vec3d j2000ToEarthEqu(const Vec3d& v) const { return matJ2000ToEarthEqu*v; }
+	Vec3d j2000ToLocal(const Vec3d& v) const { return matJ2000ToLocal*v; }
 	
-	// Transform vector from heliocentric coordinate to local
-	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
+	//! Transform vector from heliocentric coordinate to local
+	Vec3d helioToLocal(const Vec3d& v) const { return matHelioToLocal*v; }
 
-	// Transform vector from heliocentric coordinate to earth equatorial,
-	// only needed in meteor.cpp
-	Vec3d helio_to_earth_equ(const Vec3d& v) const { return mat_helio_to_earth_equ*v; }
+	//! Transform vector from heliocentric coordinate to earth equatorial,
+	//! only needed in meteor.cpp
+	Vec3d helioToEarthEqu(const Vec3d& v) const { return matHelioToEarthEqu*v; }
 
-	// Transform vector from heliocentric coordinate to false equatorial : equatorial
-	// coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d helio_to_earth_pos_equ(const Vec3d& v) const { return mat_local_to_earth_equ*mat_helio_to_local*v; }
+	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
+	//! coordinate but centered on the observer position (usefull for objects close to earth)
+	Vec3d helioToEarthPosEqu(const Vec3d& v) const { return matLocalToEarthEqu*matHelioToLocal*v; }
 
 
-	// Return the modelview matrix for some coordinate systems
-	const Mat4d& get_helio_to_eye_mat(void) const {return mat_helio_to_eye;}
-	const Mat4d& get_earth_equ_to_eye_mat(void) const {return mat_earth_equ_to_eye;}
-	const Mat4d& get_local_to_eye_mat(void) const {return mat_local_to_eye;}
-	const Mat4d& get_j2000_to_eye_mat(void) const {return mat_j2000_to_eye;}
+	//! Return the modelview matrix for some coordinate systems
+	const Mat4d& getHelioToEyeMat(void) const {return matHelioToEye;}
+	const Mat4d& getEarthEquToEyeMat(void) const {return matEarthEquToEye;}
+	const Mat4d& getLocalToEyeMat(void) const {return matLocalToEye;}
+	const Mat4d& getJ2000ToEyeMat(void) const {return matJ2000ToEye;}
 
-	void setViewingMode(ViewingModeType view_mode);
-	ViewingModeType getViewingMode(void) const {return viewing_mode;}
+	void setViewingMode(ViewingModeType viewMode);
+	ViewingModeType getViewingMode(void) const {return viewingMode;}
 
 	const Vec3d& getinitViewPos() {return initViewPos;}
 	
@@ -127,14 +131,14 @@ public:
 	QString getStartupTimeMode() {return StartupTimeMode;}
 	void setStartupTimeMode(const QString& s);
 	
-	// Update the modelview matrices
+	//! Update the modelview matrices
 	void updateModelViewMat(void);
 	
 public slots:
 	//! Toggle current mount mode between equatorial and altazimutal
-	void toggleMountMode() {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
+	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimutal
-	void setEquatorialMount(bool b) {setMountMode(b ? MOUNT_EQUATORIAL : MOUNT_ALTAZIMUTAL);}
+	void setEquatorialMount(bool b) {setMountMode(b ? MountEquatorial : MountAltAzimuthal);}
 	
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {JDay=JD;}
@@ -216,26 +220,27 @@ public slots:
 	
 private:
 	// Matrices used for every coordinate transfo
-	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observer local coordinate
-	Mat4d mat_local_to_helio;		// Transform from Observer local coordinate to Heliocentric
-	Mat4d mat_local_to_earth_equ;	// Transform from Observer local coordinate to Earth Equatorial
-	Mat4d mat_earth_equ_to_local;	// Transform from Observer local coordinate to Earth Equatorial
-	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
-	Mat4d mat_earth_equ_to_j2000;
-	Mat4d mat_j2000_to_earth_equ;
-	Mat4d mat_j2000_to_local;
+	Mat4d matHelioToLocal;    // Transform from Heliocentric to Observer local coordinate
+	Mat4d matLocalToHelio;    // Transform from Observer local coordinate to Heliocentric
+	Mat4d matLocalToEarthEqu; // Transform from Observer local coordinate to Earth Equatorial
+	Mat4d matEarthEquToLocal; // Transform from Observer local coordinate to Earth Equatorial
+	Mat4d matHelioToEarthEqu; // Transform from Heliocentric to earth equatorial coordinate
+	Mat4d matEarthEquToJ2000;
+	Mat4d matJ2000ToEarthEqu;
+	Mat4d matJ2000ToLocal;
 	
-	Mat4d mat_local_to_eye;			// Modelview matrix for observer local drawing
-	Mat4d mat_earth_equ_to_eye;		// Modelview matrix for geocentric equatorial drawing
-	Mat4d mat_j2000_to_eye;	// precessed version
-	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
+	Mat4d matLocalToEye;      // Modelview matrix for observer local drawing
+	Mat4d matEarthEquToEye;   // Modelview matrix for geocentric equatorial drawing
+	Mat4d matJ2000ToEye;      // precessed version
+	Mat4d matHelioToEye;      // Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-	Vec3d local_vision, equ_vision, J2000_equ_vision;	// Viewing direction in local and equatorial coordinates
+	// Viewing direction in local and equatorial coordinates
+	Vec3d localVision, equVision, J2000EquVision;
 
 	// Time variable
-	double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec
-	double JDay;        			// Curent time in Julian day
+	double time_speed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double JDay;              // Curent time in Julian day
 
 	double PresetSkyTime;
 	QString StartupTimeMode;
@@ -243,9 +248,10 @@ private:
 	// Position variables
 	Observer* position;
 
-	Vec3d initViewPos;				// Default viewing direction
+	Vec3d initViewPos;        // Default viewing direction
 
-	ViewingModeType viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
+	// defines if view corrects for horizon, or uses equatorial coordinates
+	ViewingModeType viewingMode;
 };
 
 #endif //_NAVIGATOR_H_

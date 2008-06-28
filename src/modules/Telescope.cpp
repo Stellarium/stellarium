@@ -235,7 +235,7 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	const Vec3d j2000_pos = getObsJ2000Pos(nav);
 	double dec_j2000, ra_j2000;
 	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
-	const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+	const Vec3d equatorial_pos = nav->j2000ToEarthEqu(j2000_pos);
 	double dec_equ, ra_equ;
 	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
 	QString str;
