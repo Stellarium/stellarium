@@ -652,7 +652,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 		else
 		{
 			SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
-			if (this==ssm->getMoon() && ssm->near_lunar_eclipse())
+			if (this==ssm->getMoon() && ssm->nearLunarEclipse())
 			{
 				// TODO: moon magnitude label during eclipse isn't accurate...
 				// special case to update stencil buffer for drawing lunar eclipses

@@ -52,7 +52,7 @@
 
 SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moonScale(1.), fontSize(14.),
 	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
-	flagOrbits(false),flag_light_travel_time(false), lastHomePlanet(NULL)
+	flagOrbits(false),flagLightTravelTime(false), lastHomePlanet(NULL)
 {
 	setObjectName("SolarSystem");
 }
@@ -66,7 +66,7 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected = NULL;
-	for(vector<Planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+	for(vector<Planet*>::iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
 	{
 		if (*iter) delete *iter;
 		*iter = NULL;
@@ -299,8 +299,8 @@ void SolarSystem::loadPlanets()
  		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
-			vector<Planet*>::iterator iter = system_planets.begin();
-			while (iter != system_planets.end())
+			vector<Planet*>::iterator iter = systemPlanets.begin();
+			while (iter != systemPlanets.end())
 			{
 				if ((*iter)->getEnglishName()==strParent)
 				{
@@ -677,13 +677,13 @@ void SolarSystem::loadPlanets()
 			p->setRings(r);
 		}
 
-		system_planets.push_back(p);
+		systemPlanets.push_back(p);
 		readOk++;
 	}
 
 	// special case: load earth shadow texture
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex_earth_shadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
+	texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 	
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits";
 }
@@ -692,13 +692,13 @@ void SolarSystem::loadPlanets()
 // The order is not important since the position is computed relatively to the mother body
 void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 {
-	if (flag_light_travel_time)
+	if (flagLightTravelTime)
 	{
-		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computePositionWithoutOrbits(date);
 		}
-		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			(*iter)->computePosition(date-light_speed_correction);
@@ -706,7 +706,7 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 	}
 	else
 	{
-		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computePosition(date);
 		}
@@ -718,9 +718,9 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
 void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 {
-	if (flag_light_travel_time)
+	if (flagLightTravelTime)
 	{
-		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			(*iter)->computeTransMatrix(date-light_speed_correction);
@@ -728,7 +728,7 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
   	}
 	else
 	{
-		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
+		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computeTransMatrix(date);
 		}
@@ -769,20 +769,20 @@ void SolarSystem::draw(StelCore* core)
 	Vec3d obsHelioPos = nav->getObserverHelioPos();
 	
 	vector<Planet*>::iterator iter;
-	iter = system_planets.begin();
-	while (iter != system_planets.end())
+	iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		(*iter)->computeDistance(obsHelioPos);
 		++iter;
 	}
 
 	// And sort them from the furthest to the closest
-	sort(system_planets.begin(),system_planets.end(),bigger_distance());
+	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	// Draw the elements
 	float maxMagLabel=core->getSkyDrawer()->getLimitMagnitude()*0.80+(labelsAmount*1.2f)-2.f;
-	iter = system_planets.begin();
-	while (iter != system_planets.end())
+	iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		(*iter)->draw(core, maxMagLabel);
 		++iter;
@@ -795,7 +795,7 @@ void SolarSystem::draw(StelCore* core)
 	// stencil buffer is set up in moon drawing above
 	// This effect curently only looks right from earth viewpoint
 	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
-		draw_earth_shadow(nav, prj);
+		drawEarthShadow(nav, prj);
 
 	drawPointer(core);
 }
@@ -811,8 +811,8 @@ void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
 
 Planet* SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
-	vector<Planet*>::const_iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		if((*iter)->getEnglishName() == planetEnglishName) return (*iter);  // also check standard ini file names
 		++iter;
@@ -823,8 +823,8 @@ Planet* SolarSystem::searchByEnglishName(QString planetEnglishName) const
 
 StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
-	vector<Planet*>::const_iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
 		++iter;
@@ -835,8 +835,8 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 
 StelObjectP SolarSystem::searchByName(const QString& name) const
 {
-	vector<Planet*>::const_iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		if( (*iter)->getEnglishName() == name ) return (*iter); 
 		++iter;
@@ -852,8 +852,8 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	double cos_angle_closest = 0.;
 	static Vec3d equPos;
 
-	vector<Planet*>::const_iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
 		equPos.normalize();
@@ -885,8 +885,8 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, 
 	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
 
-	vector<Planet*>::const_iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
 		equPos.normalize();
@@ -904,7 +904,7 @@ void SolarSystem::updateI18n()
 {
 	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
@@ -917,7 +917,7 @@ QString SolarSystem::getPlanetHashString(void)
 	QTextStream oss(&str);
 	
 	vector <Planet *>::iterator iter;
-	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+	for (iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
 	{
 		if((*iter)->getParent() != NULL && (*iter)->getParent()->getEnglishName() != "Sun")
 		{
@@ -933,7 +933,7 @@ QString SolarSystem::getPlanetHashString(void)
 void SolarSystem::startTrails(bool b)
 {
 	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
 		(*iter)->startTrail(b);
 	}
@@ -942,7 +942,7 @@ void SolarSystem::startTrails(bool b)
 void SolarSystem::setFlagTrails(bool b)
 {
 	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
 		(*iter)->setFlagTrail(b);
 	}
@@ -950,8 +950,8 @@ void SolarSystem::setFlagTrails(bool b)
 
 bool SolarSystem::getFlagTrails(void) const
 {
-	for (vector<Planet*>::const_iterator iter = system_planets.begin();
-	     iter != system_planets.end(); iter++ ) {
+	for (vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	     iter != systemPlanets.end(); iter++ ) {
 		if ((*iter)->getFlagTrail()) return true;
 	}
 	return false;
@@ -960,7 +960,7 @@ bool SolarSystem::getFlagTrails(void) const
 void SolarSystem::setFlagHints(bool b)
 {
 	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
 		(*iter)->setFlagHints(b);
 	}
@@ -968,7 +968,7 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (vector<Planet*>::const_iterator iter = system_planets.begin(); iter != system_planets.end(); iter++)
+	for (vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
 	{
 		if ((*iter)->getFlagHints()) return true;
 	}
@@ -978,7 +978,7 @@ bool SolarSystem::getFlagHints(void) const
 void SolarSystem::setFlagLabels(bool b)
 {
 	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
 		(*iter)->setFlagLabels(b);
 	}
@@ -986,7 +986,7 @@ void SolarSystem::setFlagLabels(bool b)
 
 bool SolarSystem::getFlagLabels() const
 {
-	for (vector<Planet*>::const_iterator iter = system_planets.begin(); iter != system_planets.end(); iter++)
+	for (vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
 	{
 		if ((*iter)->getFlagLabels()) return true;
 	}
@@ -999,7 +999,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	if (!b || !selected || selected == sun)
 	{
 		vector<Planet*>::iterator iter;
-		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+		for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 		{
 			(*iter)->setFlagOrbits(b);
 		}
@@ -1009,8 +1009,8 @@ void SolarSystem::setFlagOrbits(bool b)
 		// if a Planet is selected and orbits are on,
         // fade out non-selected ones
 		vector<Planet*>::iterator iter;
-		for (iter = system_planets.begin();
-             iter != system_planets.end(); iter++ )
+		for (iter = systemPlanets.begin();
+             iter != systemPlanets.end(); iter++ )
 		{
             if (selected == (*iter)) (*iter)->setFlagOrbits(b);
             else (*iter)->setFlagOrbits(false);
@@ -1033,7 +1033,7 @@ void SolarSystem::setSelected(StelObject* obj)
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
+void SolarSystem::drawEarthShadow(const Navigator * nav, Projector * prj)
 {
 
 	Vec3d e = getEarth()->getEclipticPos();
@@ -1075,7 +1075,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 
 	prj->setCurrentFrame(Projector::FrameHelio);
 	// shadow radial texture
-	tex_earth_shadow->bind();
+	texEarthShadow->bind();
 
 	Vec3d r, s;
 
@@ -1132,8 +1132,8 @@ void SolarSystem::update(double deltaTime)
 		restartTrails = true;
 	}
 
-	vector<Planet*>::iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
+	vector<Planet*>::iterator iter = systemPlanets.begin();
+	while (iter != systemPlanets.end())
 	{
 		if(restartTrails) (*iter)->startTrail(true);
 		(*iter)->updateTrail(nav);
@@ -1144,7 +1144,7 @@ void SolarSystem::update(double deltaTime)
 
 
 // is a lunar eclipse close at hand?
-bool SolarSystem::near_lunar_eclipse()
+bool SolarSystem::nearLunarEclipse()
 {
 	// TODO: could replace with simpler test
 
@@ -1176,7 +1176,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	QString objw = objPrefix.toUpper();
 	
 	vector <Planet*>::const_iterator iter;
-	for (iter=system_planets.begin(); iter!=system_planets.end(); ++iter)
+	for (iter=systemPlanets.begin(); iter!=systemPlanets.end(); ++iter)
 	{
 		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
 		if (constw==objw)
@@ -1234,7 +1234,7 @@ void SolarSystem::setSelected(const QString& englishName)
 	setSelected(searchByEnglishName(englishName));
 }
 
-bool SolarSystem::bigger_distance::operator()(Planet* p1, Planet* p2)
+bool SolarSystem::biggerDistance::operator()(Planet* p1, Planet* p2)
 {
 	return p1->getDistance() > p2->getDistance();
 }
