@@ -226,8 +226,8 @@ void BottomStelBar::updateText()
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
-	datetime->setText(StelApp::getInstance().getLocaleMgr().get_printable_date_local(jd) +"   "
-	                  +StelApp::getInstance().getLocaleMgr().get_printable_time_local(jd));
+	datetime->setText(StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
+	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd));
 	
 	location->setText(core->getObservatory()->getHomePlanetNameI18n() +", "
 	                  +core->getObservatory()->getLocationName() + ", "
