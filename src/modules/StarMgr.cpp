@@ -550,20 +550,20 @@ void StarMgr::draw(StelCore* core)
 		}
 		lastMaxSearchLevel = it->first;
 	
-		unsigned int max_mag_star_name = 0;
+		unsigned int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
 			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
 			int x = (int)((maxMag-mag_min)/k);
 			if (x > 0)
-				max_mag_star_name = x;
+				maxMagStarName = x;
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, true, rcmag_table, prj, max_mag_star_name, names_brightness, starFont);
+			it->second->draw(zone, true, rcmag_table, prj, maxMagStarName, names_brightness, starFont);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);(zone = it1.next()) >= 0;)
-			it->second->draw(zone, false, rcmag_table, prj, max_mag_star_name,names_brightness, starFont);
+			it->second->draw(zone, false, rcmag_table, prj, maxMagStarName,names_brightness, starFont);
     }
     exit_loop:
 	// Finish drawing many stars

@@ -35,7 +35,7 @@
 //! Control of the meteor rate is performed in the MeteorMgr class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
 //! "dies", after which, the update() member returns false.  The live/dead
-//! status of a meteor may also be determined using the is_alive member.
+//! status of a meteor may also be determined using the isAlive member.
 class Meteor
 {
 public:
@@ -56,27 +56,27 @@ public:
 	
 	//! Determine if a meteor is alive or has burned out.
 	//! @return true if alive, else false.
-	bool is_alive(void);
+	bool isAlive(void);
 	
 private:
 	Mat4d mmat; // tranformation matrix to align radiant with earth direction of travel
 	Vec3d obs;  // observer position in meteor coord. system
 	Vec3d position;  // equatorial coordinate position
-	Vec3d pos_internal;  // middle of train
-	Vec3d pos_train;  // end of train
+	Vec3d posInternal;  // middle of train
+	Vec3d posTrain;  // end of train
 	bool train;      // point or train visible?
-	double start_h;  // start height above center of earth
-	double end_h;    // end height
+	double startH;  // start height above center of earth
+	double endH;    // end height
 	double velocity; // km/s
 	bool alive;      // is it still visible?
 	float mag;	   // Apparent magnitude at head, 0-1
-	float max_mag;  // 0-1
-	float abs_mag;  // absolute magnitude
-	float vis_mag;  // visual magnitude at observer
+	float maxMag;  // 0-1
+	float absMag;  // absolute magnitude
+	float visMag;  // visual magnitude at observer
 	double xydistance; // distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double init_dist;  // initial distance from observer
-	double min_dist;  // nearest point to observer along path
-	double dist_multiplier;  // scale magnitude due to changes in distance 
+	double initDist;  // initial distance from observer
+	double minDist;  // nearest point to observer along path
+	double distMultiplier;  // scale magnitude due to changes in distance 
 	
 };
 
