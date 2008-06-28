@@ -45,7 +45,7 @@ SkyBackground::~SkyBackground()
 *************************************************************************/
 double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ACTION_DRAW)
+	if (actionName==StelModule::ActionDraw)
 		return GETSTELMODULE("MilkyWay")->getCallOrder(actionName)+5;
 	return 0;
 }

@@ -40,7 +40,7 @@ void TextUI::init()
 double TextUI::getCallOrder(StelModuleActionName actionName) const
 {
 	// TODO should always draw last (on top)
-	if (actionName==StelModule::ACTION_DRAW)
+	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+100;
 	return 0;
 }

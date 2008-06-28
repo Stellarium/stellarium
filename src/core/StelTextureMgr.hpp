@@ -117,7 +117,7 @@ public:
 	
 	//! Define how the dynamic range of the image will be adapted to fit on 8 bits
 	//! Note that using linear mode on 8 bits images does nothing
-	void setDynamicRangeMode(STextureTypes::DynamicRangeMode dMode = STextureTypes::LINEAR) {dynamicRangeMode = dMode;}
+	void setDynamicRangeMode(STextureTypes::DynamicRangeMode dMode = STextureTypes::Linear) {dynamicRangeMode = dMode;}
 	
 	//! Register a new image loader for a given image file extension
 	void registerImageLoader(const QString& fileExtension, ImageLoader* loader)
