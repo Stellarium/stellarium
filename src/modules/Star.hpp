@@ -49,8 +49,8 @@ template <class Star> struct SpecialZoneData;
 
 
 
-static inline float IndexToBV(unsigned char b_v) {
-  return (float)b_v*(4.f/127.f)-0.5f;
+static inline float IndexToBV(unsigned char bV) {
+  return (float)bV*(4.f/127.f)-0.5f;
 }
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
@@ -61,7 +61,7 @@ struct Star1 { // 28 byte
   unsigned char component_ids; //  5 bits needed
   Int32 x0;                    // 32 bits needed
   Int32 x1;                    // 32 bits needed
-  unsigned char b_v;           //  7 bits needed
+  unsigned char bV;           //  7 bits needed
   unsigned char mag;           //  8 bits needed
   Uint16 sp_int;               // 14 bits needed
   Int32 dx0,dx1,plx;
@@ -76,7 +76,7 @@ struct Star1 { // 28 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return IndexToBV(b_v);}
+  float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const;
   void repack(bool from_be);
   void print(void);
@@ -98,7 +98,7 @@ struct Star2 {  // 10 byte
   int x1:20;
   int dx0:14;
   int dx1:14;
-  unsigned int b_v:7;
+  unsigned int bV:7;
   unsigned int mag:5;
   enum {max_pos_val=((1<<19)-1)};
   boost::intrusive_ptr<StelObject>
@@ -111,7 +111,7 @@ struct Star2 {  // 10 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return IndexToBV(b_v);}
+  float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
   void repack(bool from_be);
   void print(void);
@@ -131,7 +131,7 @@ struct Star2 {  // 10 byte
 struct Star3 {  // 6 byte
   int x0:18;
   int x1:18;
-  unsigned int b_v:7;
+  unsigned int bV:7;
   unsigned int mag:5;
   enum {max_pos_val=((1<<17)-1)};
   boost::intrusive_ptr<StelObject>
@@ -142,7 +142,7 @@ struct Star3 {  // 6 byte
     pos.normalize();
     return pos;
   }
-  float getBV(void) const {return IndexToBV(b_v);}
+  float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
   void repack(bool from_be);
   void print(void);

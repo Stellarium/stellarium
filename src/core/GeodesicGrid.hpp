@@ -92,20 +92,20 @@ public:
 	//! for 0<=l<=getMaxLevel().
 	//! inside[l] will not contain zones that are already contained
 	//! in inside[l1] for some l1 < l.
-	//! In order to restrict search depth set max_search_level < max_level,
-	//! for full search depth set max_search_level = max_level,
+	//! In order to restrict search depth set maxSearchLevel < max_level,
+	//! for full search depth set maxSearchLevel = max_level,
 	void searchZones(const StelGeom::ConvexS& convex,
-	                 int **inside,int **border,int max_search_level) const;
+	                 int **inside,int **border,int maxSearchLevel) const;
 
 	//! Return a search result matching the given spatial region
 	//! The result is cached, meaning that it is very fast to search the same region consecutively
 	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
-	const GeodesicSearchResult* search(const StelGeom::ConvexS& convex, int max_search_level) const;
+	const GeodesicSearchResult* search(const StelGeom::ConvexS& convex, int maxSearchLevel) const;
 	
 	//! Convenience function returning a search result matching the given spatial region
 	//! The result is cached, meaning that it is very fast to search the same region consecutively
 	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
-	const GeodesicSearchResult* search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int max_search_level) const;
+	const GeodesicSearchResult* search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int maxSearchLevel) const;
 
 private:
 	const Vec3d& getTriangleCorner(int lev, int index, int cornerNumber) const;
@@ -127,7 +127,7 @@ private:
 	                 const bool *corner0_inside,
 	                 const bool *corner1_inside,
 	                 const bool *corner2_inside,
-	                 int **inside,int **border,int max_search_level) const;
+	                 int **inside,int **border,int maxSearchLevel) const;
 
 	const int max_level;
 	struct Triangle
@@ -155,7 +155,7 @@ private:
 	friend class GeodesicSearchBorderIterator;
 	friend class GeodesicGrid;
 	
-	void search(const StelGeom::ConvexS& convex, int max_search_level);
+	void search(const StelGeom::ConvexS& convex, int maxSearchLevel);
 	
 	const GeodesicGrid &grid;
 	int **const zones;

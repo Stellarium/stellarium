@@ -68,9 +68,9 @@ public:
 	const Navigator* getNavigation() const {return navigation;}
 
 	//! Get the current tone reproducer used in the core.
-	ToneReproducer* getToneReproducer() {return tone_converter;}
+	ToneReproducer* getToneReproducer() {return toneConverter;}
 	//! Get the current tone reproducer used in the core.
-	const ToneReproducer* getToneReproducer() const {return tone_converter;}
+	const ToneReproducer* getToneReproducer() const {return toneConverter;}
 
 	//! Get the current SkyDrawer used in the core.
 	SkyDrawer* getSkyDrawer() {return skyDrawer;}
@@ -83,20 +83,20 @@ public:
 	const Observer* getObservatory() const {return observatory;}
 
 	//! Get the shared instance of GeodesicGrid
-	GeodesicGrid* getGeodesicGrid() {return geodesic_grid;}
+	GeodesicGrid* getGeodesicGrid() {return geodesicGrid;}
 	//! Get the shared instance of GeodesicGrid
-	const GeodesicGrid* getGeodesicGrid() const {return geodesic_grid;}
+	const GeodesicGrid* getGeodesicGrid() const {return geodesicGrid;}
 	
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
 	Observer* observatory;			// Manage observer position
 	Projector* projection;			// Manage the projection mode and matrix
-	ToneReproducer* tone_converter;		// Tones conversion between stellarium world and display device
+	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	SkyDrawer* skyDrawer;
 	class MovementMgr* movementMgr;		// Manage vision movements
 	
 	// Manage geodesic grid
-	GeodesicGrid* geodesic_grid;
+	GeodesicGrid* geodesicGrid;
 };
 
 #endif // _STEL_CORE_H_
