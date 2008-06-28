@@ -52,7 +52,7 @@ void StelLocaleMgr::init()
 	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
 	if (tzstr == "system_default")
 	{
-		time_zone_mode = STzSystemDefault;
+		timeZoneMode = STzSystemDefault;
 		// Set the program global intern timezones variables from the system locale
 		tzset();
 	}
@@ -60,13 +60,13 @@ void StelLocaleMgr::init()
 	{
 		if (tzstr == "gmt+x") // TODO : handle GMT+X timezones form
 		{
-			time_zone_mode = STzGMTShift;
+			timeZoneMode = STzGMTShift;
 			// GMT_shift = x;
 		}
 		else
 		{
 			// We have a custom time zone name
-			time_zone_mode = STzCustom;
+			timeZoneMode = STzCustom;
 			setCustomTzName(tzstr);
 		}
 	}
@@ -110,10 +110,10 @@ Translator& StelLocaleMgr::getSkyTranslator()
 
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
-QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
+QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 {
 	double shift = 0.0;
-	if (time_zone_mode == STzGMTShift)
+	if (timeZoneMode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -126,7 +126,7 @@ QString StelLocaleMgr::get_ISO8601_time_local(double JD) const
 
 //! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
 //! of them.
-double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
+double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 {
 	vector<int> numbers = TextEntryDateTimeValidator::get_ints_from_ISO8601_string(t);
 	if (numbers.size() == 6)
@@ -142,12 +142,12 @@ double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 
 		if ( ! StelUtils::getJDFromDate(&jd, y, m, d, h, mn, s) )
 		{
-			qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
+			qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: StelUtils::getJDFromDate failed!  returning beginning of epoch!";
 			return 0.0;
 		}
 
 		// modified by shift
-		if (time_zone_mode == STzGMTShift)
+		if (timeZoneMode == STzGMTShift)
 			jd -= GMT_shift;
 		else
 			jd -= StelUtils::get_GMT_shift_from_QT(jd)*0.041666666666;
@@ -156,18 +156,18 @@ double StelLocaleMgr::get_jd_from_ISO8601_time_local(const QString& t) const
 	}
 	else
 	{
-		qWarning() << "StelLocaleMgr::get_jd_from_ISO8601_time_local: did not get 6 ints back from TextEntryDateTimeValidator for input " << t << ", returning beginning of epoch!";
+		qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: did not get 6 ints back from TextEntryDateTimeValidator for input " << t << ", returning beginning of epoch!";
 		return 0.0;
 	}
 }
 	
 
 // Return a string with the local date formated according to the date_format variable
-QString StelLocaleMgr::get_printable_date_local(double JD) const
+QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	{
 	int year, month, day, dayOfWeek;
 	double shift = 0.0;
-	if (time_zone_mode == STzGMTShift)
+	if (timeZoneMode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -199,13 +199,13 @@ QString StelLocaleMgr::get_printable_date_local(double JD) const
 	return str;
 }
 
-// Return a string with the local time (according to time_zone_mode variable) formated
+// Return a string with the local time (according to timeZoneMode variable) formated
 // according to the time_format variable
-QString StelLocaleMgr::get_printable_time_local(double JD) const
+QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
 	int hour, minute, second;
 	double shift = 0.0;
-	if (time_zone_mode == STzGMTShift)
+	if (timeZoneMode == STzGMTShift)
 	{
 		shift = GMT_shift;
 	}
@@ -273,20 +273,20 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 
 void StelLocaleMgr::setCustomTzName(const QString& tzname)
 {
-	custom_tz_name = tzname;
-	time_zone_mode = STzCustom;
+	customTzName = tzname;
+	timeZoneMode = STzCustom;
 	
-	if( custom_tz_name != "")
+	if( customTzName != "")
 	{
 		// set the TZ environement variable and update c locale stuff
-		putenv(strdup(qPrintable("TZ=" + custom_tz_name)));
+		putenv(strdup(qPrintable("TZ=" + customTzName)));
 		tzset();
 	}
 }
 
 float StelLocaleMgr::get_GMT_shift(double JD) const
 {
-	if (time_zone_mode == STzGMTShift) return GMT_shift;
+	if (timeZoneMode == STzGMTShift) return GMT_shift;
 	else return StelUtils::get_GMT_shift_from_QT(JD);
 }
 
