@@ -60,12 +60,12 @@ Skybright::Skybright() : SN(1.f)
 // moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
 void Skybright::setDate(int year, int month, float moonPhase)
 {
-	mag_moon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
+	magMoon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
 
 	RA = (month - 3.f) * 0.52359878f;
 
 	// Term for dark sky brightness computation
-	b_night_term = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
+	bNightTerm = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
 }
 
 
@@ -84,92 +84,92 @@ void Skybright::setLocation(float latitude, float altitude, float temperature, f
 
 // Set the moon and sun zenith angular distance (cosin given)
 // and precompute what can be
-void Skybright::setSunMoon(float cos_dist_moon_zenith, float cos_dist_sun_zenith)
+void Skybright::setSunMoon(float cosDistMoonZenith, float cosDistSunZenith)
 {
 	// Air mass for Moon
-	if (cos_dist_moon_zenith<0) air_mass_moon = 40.f;
-	else air_mass_moon = 1.f / (cos_dist_moon_zenith+0.025f*std::exp(-11.f*cos_dist_moon_zenith));
+	if (cosDistMoonZenith<0) airMassMoon = 40.f;
+	else airMassMoon = 1.f / (cosDistMoonZenith+0.025f*std::exp(-11.f*cosDistMoonZenith));
 
 	// Air mass for Sun
-	if (cos_dist_sun_zenith<0) air_mass_sun = 40.f;
-	else air_mass_sun = 1.f / (cos_dist_sun_zenith+0.025f*std::exp(-11.f*cos_dist_sun_zenith));
+	if (cosDistSunZenith<0) airMassSun = 40.f;
+	else airMassSun = 1.f / (cosDistSunZenith+0.025f*std::exp(-11.f*cosDistSunZenith));
 
-	b_moon_term1 = pow10(-0.4f * (mag_moon + 54.32f));
+	bMoonTerm1 = pow10(-0.4f * (magMoon + 54.32f));
 
 	// Moon should have no impact if below the horizon
 	// .05 is ad hoc fadeout range - Rob
-	if( cos_dist_moon_zenith < 0.f ) b_moon_term1 *= 1.f + cos_dist_moon_zenith/0.05f;
-	if(cos_dist_moon_zenith < -0.05f) b_moon_term1 = 0.f;
+	if( cosDistMoonZenith < 0.f ) bMoonTerm1 *= 1.f + cosDistMoonZenith/0.05f;
+	if(cosDistMoonZenith < -0.05f) bMoonTerm1 = 0.f;
 
 
-	C3 = pow10(-0.4f*K*air_mass_moon);	// Term for moon brightness computation
+	C3 = pow10(-0.4f*K*airMassMoon);	// Term for moon brightness computation
 
-	b_twilight_term = -6.724f + 22.918312f * (M_PI_2-std::acos(cos_dist_sun_zenith));
+	bTwilightTerm = -6.724f + 22.918312f * (M_PI_2-std::acos(cosDistSunZenith));
 
-	C4 = pow10(-0.4f*K*air_mass_sun);	// Term for sky brightness computation
+	C4 = pow10(-0.4f*K*airMassSun);	// Term for sky brightness computation
 }
 
 
 // Compute the luminance at the given position
-// Inputs : cos_dist_moon = cos(angular distance between moon and the position)
-//			cos_dist_sun  = cos(angular distance between sun  and the position)
-//			cos_dist_zenith = cos(angular distance between zenith and the position)
-float Skybright::getLuminance(float cos_dist_moon,
-                               float cos_dist_sun,
-                               float cos_dist_zenith) const
+// Inputs : cosDistMoon = cos(angular distance between moon and the position)
+//			cosDistSun  = cos(angular distance between sun  and the position)
+//			cosDistZenith = cos(angular distance between zenith and the position)
+float Skybright::getLuminance(float cosDistMoon,
+                               float cosDistSun,
+                               float cosDistZenith) const
 {
-	float dist_sun,dist_zenith;
+	float distSun,dist_zenith;
 	
     // catch rounding errors here or end up with white flashes in some cases
-	if (cos_dist_sun <= -1.f) {cos_dist_sun = -1.f;dist_sun = M_PI;}
-	else if (cos_dist_sun >= 1.f) {cos_dist_sun = 1.f;dist_sun = 0.f;}
-	else dist_sun = fastAcos(cos_dist_sun);
+	if (cosDistSun <= -1.f) {cosDistSun = -1.f;distSun = M_PI;}
+	else if (cosDistSun >= 1.f) {cosDistSun = 1.f;distSun = 0.f;}
+	else distSun = fastAcos(cosDistSun);
 
-	if (cos_dist_zenith <= -1.f) {cos_dist_zenith = -1.f;dist_zenith = M_PI;}
-	else if (cos_dist_zenith >= 1.f) {cos_dist_zenith = 1.f;dist_zenith = 0.f;}
-	else dist_zenith = fastAcos(cos_dist_zenith);
+	if (cosDistZenith <= -1.f) {cosDistZenith = -1.f;dist_zenith = M_PI;}
+	else if (cosDistZenith >= 1.f) {cosDistZenith = 1.f;dist_zenith = 0.f;}
+	else dist_zenith = fastAcos(cosDistZenith);
 
 	// Air mass
-	// const float X = 1.f / (cos_dist_zenith + 0.025f*std::exp(-11.f*cos_dist_zenith));
-	const float X = 1.f / (cos_dist_zenith + 0.025f*fastExp(-11.f*cos_dist_zenith));
+	// const float X = 1.f / (cosDistZenith + 0.025f*std::exp(-11.f*cosDistZenith));
+	const float X = 1.f / (cosDistZenith + 0.025f*fastExp(-11.f*cosDistZenith));
 	const float bKX = pow10(-0.4f * K * X);
 
 	// Daylight brightness
-	const float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f)
-	               + pow10(6.15f - (dist_sun+0.001f)* 1.43239f)
-	               + 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
+	const float FS = 18886.28f / (distSun*distSun + 0.0007f)
+	               + pow10(6.15f - (distSun+0.001f)* 1.43239f)
+	               + 229086.77f * ( 1.06f + cosDistSun*cosDistSun );
 	const float b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
 	const float Ktrimed = K> 0.05f ? K : 0.05f;
-	const float b_twilight = pow10(b_twilight_term + 0.063661977f * dist_zenith/Ktrimed) * (1.7453293f / dist_sun) * (1.f-bKX);
+	const float b_twilight = pow10(bTwilightTerm + 0.063661977f * dist_zenith/Ktrimed) * (1.7453293f / distSun) * (1.f-bKX);
 
 	// Total sky brightness
 	float b_total = ((b_twilight<b_daylight) ? b_twilight : b_daylight);
 
 	// Moonlight brightness, don't compute if less than 1% daylight
-	if ((b_moon_term1 * (1.f - bKX) * (28860205.1341274269 * C3 + 440000.f * (1.f - C3)))/b_total>0.01f)
+	if ((bMoonTerm1 * (1.f - bKX) * (28860205.1341274269 * C3 + 440000.f * (1.f - C3)))/b_total>0.01f)
 	{
 		float dist_moon;
-		if (cos_dist_moon <= -1.f) {cos_dist_moon = -1.f;dist_moon = M_PI;}
-		else if (cos_dist_moon >= 1.f) {cos_dist_moon = 1.f;dist_moon = 0.f;}
+		if (cosDistMoon <= -1.f) {cosDistMoon = -1.f;dist_moon = M_PI;}
+		else if (cosDistMoon >= 1.f) {cosDistMoon = 1.f;dist_moon = 0.f;}
 		else
 		{
 			// Because the accuracy of our power serie is bad around 1, call the real acos if it's the case
-			dist_moon = cos_dist_moon > 0.99 ? std::acos(cos_dist_moon) : fastAcos(cos_dist_moon);
+			dist_moon = cosDistMoon > 0.99 ? std::acos(cosDistMoon) : fastAcos(cosDistMoon);
 		}
 		
 		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0005f)	// The last 0.0005 should be 0, but it causes too fast brightness change
 			+ pow10(6.15f - dist_moon * 1.43239f)
-			+ 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
-		float b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
+			+ 229086.77f * ( 1.06f + cosDistMoon*cosDistMoon );
+		float b_moon = bMoonTerm1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 		b_total += b_moon;
 	}
 	
 	// Dark night sky brightness, don't compute if less than 1% daylight
-	if ((b_night_term*bKX)/b_total>0.01f)
+	if ((bNightTerm*bKX)/b_total>0.01f)
 	{
-		const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith)) * b_night_term * bKX;
+		const float b_night = (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
 		b_total += b_night;
 	}
 	
@@ -182,10 +182,10 @@ float Skybright::getLuminance(float cos_dist_moon,
 260 BL=B(3)/1.11E-15 : REM in nanolamberts*/
 
 	// Airmass for each component
-	//cos_dist_zenith = std::cos(dist_zenith);
-	//float gaz_mass = 1.f / ( cos_dist_zenith + 0.0286f * std::exp(-10.5f * cos_dist_zenith) );
-	//float aerosol_mass = 1.f / ( cos_dist_zenith + 0.0123f * std::exp(-24.5f * cos_dist_zenith) );
-	//float ozone_mass = 1.f / std::sqrt( 0.0062421903f - cos_dist_zenith * cos_dist_zenith / 1.0062814f );
+	//cosDistZenith = std::cos(dist_zenith);
+	//float gaz_mass = 1.f / ( cosDistZenith + 0.0286f * std::exp(-10.5f * cosDistZenith) );
+	//float aerosol_mass = 1.f / ( cosDistZenith + 0.0123f * std::exp(-24.5f * cosDistZenith) );
+	//float ozone_mass = 1.f / std::sqrt( 0.0062421903f - cosDistZenith * cosDistZenith / 1.0062814f );
 	// Total extinction for V band
 	//float DM = KR*gaz_mass + KA*aerosol_mass + KO*ozone_mass + KW*gaz_mass;
 

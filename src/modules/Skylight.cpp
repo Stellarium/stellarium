@@ -43,100 +43,100 @@ Skylight::~Skylight()
 }
 
 
-void Skylight::set_params(float _sun_zenith_angle, float _turbidity)
+void Skylight::setParams(float _sunZenithAngle, float _turbidity)
 {
 	// Set the two main variables
-	thetas = _sun_zenith_angle;
+	thetas = _sunZenithAngle;
 	T = _turbidity;
 
 	// Precomputation of the distribution coefficients and zenith luminances/color
-	compute_zenith_luminance();
-	compute_zenith_color();
-	compute_luminance_distribution_coefs();
+	computeZenithLuminance();
+	computeZenithColor();
+	computeLuminanceDistributionCoefs();
 	computeColorDistributionCoefs();
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
 	float cos_thetas = std::cos(thetas);
-	term_x = zenith_color_x   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
-	term_y = zenith_color_y   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = zenith_luminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
+	term_x = zenithColorX   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
+	term_y = zenithColorY   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
+	term_Y = zenithLuminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
 
 }
 
-void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
+void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 {
 	// Store sun position
-	sun_pos[0] = _sun_pos[0];
-	sun_pos[1] = _sun_pos[1];
-	sun_pos[2] = _sun_pos[2];
+	sunPos[0] = _sunPos[0];
+	sunPos[1] = _sunPos[1];
+	sunPos[2] = _sunPos[2];
 
 	// Set the two main variables
-	thetas = M_PI_2 - std::asin((float)sun_pos[2]);
+	thetas = M_PI_2 - std::asin((float)sunPos[2]);
 	T = _turbidity;
 
 	// Precomputation of the distribution coefficients and zenith luminances/color
-	compute_zenith_luminance();
-	compute_zenith_color();
-	compute_luminance_distribution_coefs();
+	computeZenithLuminance();
+	computeZenithColor();
+	computeLuminanceDistributionCoefs();
 	computeColorDistributionCoefs();
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
-	float cos_thetas = sun_pos[2];
-	term_x = zenith_color_x   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
-	term_y = zenith_color_y   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = zenith_luminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
+	float cos_thetas = sunPos[2];
+	term_x = zenithColorX   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
+	term_y = zenithColorY   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
+	term_Y = zenithLuminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
 }
 
 // Compute the sky color at the given position in the CIE color system and store it in p.color
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-// void Skylight::get_xyY_value(skylight_struct * p)
+// void Skylight::getxyYValue(skylightStruct * p)
 // {
-// 	float cos_dist_sun = std::cos(p->dist_sun);
-// 	float one_over_cos_zenith_angle = 1.f/std::cos(p->zenith_angle);
-// 	p->color[0] = term_x * (1.f + Ax * std::exp(Bx * one_over_cos_zenith_angle)) * (1.f + Cx * std::exp(Dx*p->dist_sun) +
-// 		Ex * cos_dist_sun * cos_dist_sun);
-// 	p->color[1] = term_y * (1.f + Ay * std::exp(By * one_over_cos_zenith_angle)) * (1.f + Cy * std::exp(Dy*p->dist_sun) +
-// 		Ey * cos_dist_sun * cos_dist_sun);
-// 	p->color[2] = term_Y * (1.f + AY * std::exp(BY * one_over_cos_zenith_angle)) * (1.f + CY * std::exp(DY*p->dist_sun) +
-// 		EY * cos_dist_sun * cos_dist_sun);
+// 	float cosDistSun = std::cos(p->distSun);
+// 	float oneOverCosZenithAngle = 1.f/std::cos(p->zenithAngle);
+// 	p->color[0] = term_x * (1.f + Ax * std::exp(Bx * oneOverCosZenithAngle)) * (1.f + Cx * std::exp(Dx*p->distSun) +
+// 		Ex * cosDistSun * cosDistSun);
+// 	p->color[1] = term_y * (1.f + Ay * std::exp(By * oneOverCosZenithAngle)) * (1.f + Cy * std::exp(Dy*p->distSun) +
+// 		Ey * cosDistSun * cosDistSun);
+// 	p->color[2] = term_Y * (1.f + AY * std::exp(BY * oneOverCosZenithAngle)) * (1.f + CY * std::exp(DY*p->distSun) +
+// 		EY * cosDistSun * cosDistSun);
 // }
 
 // Compute the sky color at the given position in the CIE color system and store it in p.color
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-void Skylight::get_xyY_valuev(skylight_struct2& p) const
+void Skylight::getxyYValuev(skylightStruct2& p) const
 {
-	float cos_dist_sun = sun_pos[0]*p.pos[0]
-                       + sun_pos[1]*p.pos[1]
-                       + sun_pos[2]*p.pos[2];
-	float dist_sun;
-	if (cos_dist_sun <= -1.f ) {cos_dist_sun = -1.f;dist_sun = M_PI;}
-	else if (cos_dist_sun >= 1.f ) {cos_dist_sun = 1.f;dist_sun = 0.f;}
-	else dist_sun = fastAcos(cos_dist_sun);
-	const float cos_dist_sun_q = cos_dist_sun*cos_dist_sun;
+	float cosDistSun = sunPos[0]*p.pos[0]
+                       + sunPos[1]*p.pos[1]
+                       + sunPos[2]*p.pos[2];
+	float distSun;
+	if (cosDistSun <= -1.f ) {cosDistSun = -1.f;distSun = M_PI;}
+	else if (cosDistSun >= 1.f ) {cosDistSun = 1.f;distSun = 0.f;}
+	else distSun = fastAcos(cosDistSun);
+	const float cosDistSun_q = cosDistSun*cosDistSun;
 
 	float Fx = 0.f;
 	float Fy = 0.f;
 	float FY = 0.f;
 
 	if (p.pos[2] > 0.f) {
-	  float one_over_cos_zenith_angle = 1.f / p.pos[2];
-	  Fx = std::exp(Bx*one_over_cos_zenith_angle);
-	  Fy = std::exp(By*one_over_cos_zenith_angle);
-	  FY = std::exp(BY*one_over_cos_zenith_angle);
+	  float oneOverCosZenithAngle = 1.f / p.pos[2];
+	  Fx = std::exp(Bx*oneOverCosZenithAngle);
+	  Fy = std::exp(By*oneOverCosZenithAngle);
+	  FY = std::exp(BY*oneOverCosZenithAngle);
 	}
 
 	p.color[0] = term_x * (1.f + Ax * Fx)
-	                    * (1.f + Cx * std::exp(Dx*dist_sun) + Ex * cos_dist_sun_q);
+	                    * (1.f + Cx * std::exp(Dx*distSun) + Ex * cosDistSun_q);
 
 	p.color[1] = term_y * (1.f + Ay * Fy)
-	                    * (1.f + Cy * std::exp(Dy*dist_sun) + Ey * cos_dist_sun_q);
+	                    * (1.f + Cy * std::exp(Dy*distSun) + Ey * cosDistSun_q);
 
 	p.color[2] = term_Y * (1.f + AY * FY)
-	                    * (1.f + CY * std::exp(DY*dist_sun) + EY * cos_dist_sun_q);
+	                    * (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
 
 
 	if (p.color[2] < 0 || p.color[0] < 0 || p.color[1] < 0)
