@@ -397,7 +397,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 	{
 		if (is_inside ? prj->project(s->getJ2000Pos(z,movement_factor),xy) : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy))
 		{
-			if (drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->b_v)==false)
+			if (drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->bV)==false)
 			{
 				break;
 			}
@@ -407,7 +407,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 				if (!starname.isEmpty())
 				{
 					const float offset = (rcmag_table + 2*(s->mag))[0]*0.7;
-					const Vec3f& colorr = SkyDrawer::indexToColor(s->b_v)*0.75;
+					const Vec3f& colorr = SkyDrawer::indexToColor(s->bV)*0.75;
 					glColor4f(colorr[0], colorr[1], colorr[2],names_brightness);
 					prj->drawText(starFont,xy[0],xy[1], starname, 0, offset, offset, false);
 				}

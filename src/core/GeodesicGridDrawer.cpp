@@ -28,15 +28,15 @@
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {
 	setObjectName("GeodesicGridDrawer");
-//	geodesic_grid = new GeodesicGrid(maxLevel);
-//	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
+//	geodesicGrid = new GeodesicGrid(maxLevel);
+//	geodesic_search_result = new GeodesicSearchResult(*geodesicGrid);
 	font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage());
 }
 
 GeodesicGridDrawer::~GeodesicGridDrawer()
 {
 //	delete geodesic_search_result;
-//	delete geodesic_grid;
+//	delete geodesicGrid;
 }
 
 void GeodesicGridDrawer::init()
@@ -44,12 +44,12 @@ void GeodesicGridDrawer::init()
 }
 
 
-double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
+double GeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 {
 	Projector* prj = core->getProjection();
-	GeodesicGrid* geodesic_grid = core->getGeodesicGrid();
+	GeodesicGrid* geodesicGrid = core->getGeodesicGrid();
 
-	const GeodesicSearchResult* geodesic_search_result = geodesic_grid->search(prj->unprojectViewport(), max_search_level);
+	const GeodesicSearchResult* geodesic_search_result = geodesicGrid->search(prj->unprojectViewport(), maxSearchLevel);
 	
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -58,10 +58,10 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 	glColor4f(0.2,0.3,0.2,1);
 	
 	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;
-	if (lev>geodesic_grid->getMaxLevel()) 
-		lev = geodesic_grid->getMaxLevel();
+	if (lev>geodesicGrid->getMaxLevel()) 
+		lev = geodesicGrid->getMaxLevel();
 
-	lev = max_search_level;
+	lev = maxSearchLevel;
 //	Vec3d e0, e1, e2, e3;
 	Vec3d win1, win2;
 //	prj->unproject_j2000(0,0,e0);
@@ -76,7 +76,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 		while((index = it1.next()) >= 0)
 		{
 			Vec3d center;
-			geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
+			geodesicGrid->getTriangleCorners(lev, index, v0, v1, v2);
 			prj->project(v0, win1);
 			prj->project(v1, win2);
 			center += win1;
@@ -100,7 +100,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 			center += win1;
 			center*=0.33333;
 			QString str = QString("%1 (%2)").arg(index)
-			                                .arg(geodesic_grid->getPartnerTriangle(lev, index));
+			                                .arg(geodesicGrid->getPartnerTriangle(lev, index));
 			glEnable(GL_TEXTURE_2D);
 				prj->drawText(font,center[0]-6, center[1]+6, str);
 			glDisable(GL_TEXTURE_2D);
@@ -110,7 +110,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 	while((index = it1.next()) >= 0)
 	{
 		Vec3d center;
-		geodesic_grid->getTriangleCorners(lev, index, v0, v1, v2);
+		geodesicGrid->getTriangleCorners(lev, index, v0, v1, v2);
 		prj->project(v0, win1);
 		prj->project(v1, win2);
 		center += win1;
@@ -134,7 +134,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 		center += win1;
 		center*=0.33333;
 		QString str = QString("%1 (%2)").arg(index)
-		                                .arg(geodesic_grid->getPartnerTriangle(lev, index));
+		                                .arg(geodesicGrid->getPartnerTriangle(lev, index));
 		glEnable(GL_TEXTURE_2D);
 			prj->drawText(font,center[0]-6, center[1]+6, str);
 		glDisable(GL_TEXTURE_2D);
