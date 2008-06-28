@@ -33,11 +33,11 @@ namespace STextureTypes
 //! Supported dynamic range modes
 enum DynamicRangeMode
 {
-	LINEAR,
-	MINMAX_USER,
-	MINMAX_QUANTILE,
-	MINMAX_GREYLEVEL,
-	MINMAX_GREYLEVEL_AUTO
+	Linear,
+	MinmaxUser,
+	MinmaxQuantile,
+	MinmaxGreylevel,
+	MinmaxGreylevelAuto
 };
 }
 #endif /*STEXTURETYPES_HPP_*/

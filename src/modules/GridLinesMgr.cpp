@@ -614,7 +614,7 @@ GridLinesMgr::~GridLinesMgr()
 *************************************************************************/
 double GridLinesMgr::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ACTION_DRAW)
+	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10;
 	return 0;
 }

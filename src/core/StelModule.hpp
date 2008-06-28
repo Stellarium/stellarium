@@ -114,15 +114,15 @@ public:
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{
-		ACTION_DRAW,
-		ACTION_UPDATE,
-		ACTION_HANDLEMOUSECLICKS,
-		ACTION_HANDLEMOUSEMOVES,
-		ACTION_HANDLEKEYS
+		ActionDraw,
+		ActionUpdate,
+		ActionHangleMouseClicks,
+		ActionHandleMouseMoves,
+		ActionHandleKeys
 	};
 	
 	//! Return the value defining the order of call for the given action
-	//! For example if stars.callOrder[ACTION_DRAW] == 10 and constellation.callOrder[ACTION_DRAW] == 11, 
+	//! For example if stars.callOrder[ActionDraw] == 10 and constellation.callOrder[ActionDraw] == 11, 
 	//! the stars module will be drawn before the constellations
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called

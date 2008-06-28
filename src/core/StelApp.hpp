@@ -137,12 +137,12 @@ public:
 	//! Set the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
 	//! @param multiplier new value for the time multiplier
-	void setTimeMultiplier(const int multiplier) { time_multiplier = multiplier; }
+	void setTimeMultiplier(const int multiplier) { timeMultiplier = multiplier; }
 
 	//! Get the time multiplier used when fast forwarding scripts.
 	//! n.b. - do not confuse this with sky time rate
 	//! @return the integer time multiplier
-	const int getTimeMultiplier() { return time_multiplier; }
+	const int getTimeMultiplier() { return timeMultiplier; }
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -313,7 +313,7 @@ private:
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
 
-	int time_multiplier;	// used for adjusting delta_time for script speeds
+	int timeMultiplier;	// used for adjusting delta_time for script speeds
 	
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
