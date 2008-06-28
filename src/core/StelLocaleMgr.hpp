@@ -76,7 +76,7 @@ public:
 	//! - "24h"
 	//! - "12h"
 	//!
-	//! These values correspond to the similarly named values in the S_TIME_FORMAT enum.
+	//! These values correspond to the similarly named values in the STimeFormat enum.
 	QString get_time_format_str(void) const {return s_time_format_to_string(time_format);}
 	//! Set the time format from a format string.
 	//! @tf value values are the same as the return values for get_time_format_str().
@@ -88,7 +88,7 @@ public:
 	//! - "system_default"
 	//! - "yyyymmdd"
 	//!
-	//! These values correspond to the similarly named values in the S_DATE_FORMAT enum.
+	//! These values correspond to the similarly named values in the SDateFormat enum.
 	QString get_date_format_str(void) const {return s_date_format_to_string(date_format);}
 	void set_date_format_str(const QString& df) {date_format=string_to_s_date_format(df);}
 	
@@ -97,21 +97,21 @@ public:
 	//! varibale by the tzset function from libc.
 	void setCustomTimezone(QString _time_zone) { set_custom_tz_name(_time_zone); }
 
-	//! @enum S_TIME_FORMAT
+	//! @enum STimeFormat
 	//! The time display format.
-	enum S_TIME_FORMAT {
-		S_TIME_24H,		//!< 24 hour clock, e.g. "18:22:00"
-		S_TIME_12H,		//!< 12 hour clock, e.g. "06:22:00 pm"
-  		S_TIME_SYSTEM_DEFAULT	//!< use the system default format.
+	enum STimeFormat {
+		STime24h,		//!< 24 hour clock, e.g. "18:22:00"
+		STime12h,		//!< 12 hour clock, e.g. "06:22:00 pm"
+  		STimeSystemDefault	//!< use the system default format.
 	};
 	
-	//! @enum S_DATE_FORMAT
+	//! @enum SDateFormat
 	//! The date display format.
-	enum S_DATE_FORMAT {
-		S_DATE_MMDDYYYY,	//!< e.g. "07-05-1998" for July 5th 1998
-		S_DATE_DDMMYYYY,	//!< e.g. "05-07-1998" for July 5th 1998
-		S_DATE_SYSTEM_DEFAULT,	//!< Use the system default date format
-		S_DATE_YYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
+	enum SDateFormat {
+		SDateMMDDYYYY,	//!< e.g. "07-05-1998" for July 5th 1998
+		SDateDDMMYYYY,	//!< e.g. "05-07-1998" for July 5th 1998
+		SDateSystemDefault,	//!< Use the system default date format
+		SDateYYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
 	};
 	
 	//! Get a localized, formatted string representation of the date component of a Julian date.
@@ -120,12 +120,12 @@ public:
 	//! Get a localized, formatted string representation of the time component of a Julian date.
 	QString get_printable_time_local(double JD) const;
 	
-	//! @enum S_TZ_FORMAT
-	enum S_TZ_FORMAT
+	//! @enum STzFormat
+	enum STzFormat
 	{
-		S_TZ_CUSTOM,		//!< User-specified timezone.
-		S_TZ_GMT_SHIFT,		//!< GMT + offset.
-		S_TZ_SYSTEM_DEFAULT	//!< System default.
+		STzCustom,		//!< User-specified timezone.
+		STzGMTShift,		//!< GMT + offset.
+		STzSystemDefault	//!< System default.
 	};
 	
 	//! Get the current time shift at observator time zone with respect to GMT time.
@@ -143,7 +143,7 @@ public:
 		return custom_tz_name;
 	}
 	//! Get the current timezone format mode.
-	S_TZ_FORMAT get_tz_format(void) const
+	STzFormat get_tz_format(void) const
 	{
 		return time_zone_mode;
 	}
@@ -163,20 +163,20 @@ private:
 	Translator skyTranslator;
 	
 	// Date and time variables
-	S_TIME_FORMAT time_format;
-	S_DATE_FORMAT date_format;
-	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
+	STimeFormat time_format;
+	SDateFormat date_format;
+	STzFormat time_zone_mode;		// Can be the system default or a user defined value
 	
 	QString custom_tz_name;			// Something like "Europe/Paris"
 	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
 	
 	// Convert the time format enum to its associated string and reverse
-	S_TIME_FORMAT string_to_s_time_format(const QString&) const;
-	QString s_time_format_to_string(S_TIME_FORMAT) const;
+	STimeFormat string_to_s_time_format(const QString&) const;
+	QString s_time_format_to_string(STimeFormat) const;
 	
 	// Convert the date format enum to its associated string and reverse
-	S_DATE_FORMAT string_to_s_date_format(const QString& df) const;
-	QString s_date_format_to_string(S_DATE_FORMAT df) const;
+	SDateFormat string_to_s_date_format(const QString& df) const;
+	QString s_date_format_to_string(SDateFormat df) const;
 };
 
 #endif
