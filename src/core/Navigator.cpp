@@ -39,10 +39,10 @@ Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(
 		qCritical() << "ERROR : Can't create a Navigator without a valid Observator";
 		exit(1);
 	}
-	local_vision=Vec3d(1.,0.,0.);
-	equ_vision=Vec3d(1.,0.,0.);
-	J2000_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
-	viewing_mode = VIEW_HORIZON;  // default
+	localVision=Vec3d(1.,0.,0.);
+	equVision=Vec3d(1.,0.,0.);
+	J2000EquVision=Vec3d(1.,0.,0.);  // not correct yet...
+	viewingMode = ViewHorizon;  // default
 }
 
 Navigator::~Navigator()
@@ -65,11 +65,11 @@ void Navigator::init()
 	updateModelViewMat();
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
-		setViewingMode(Navigator::VIEW_EQUATOR);
+		setViewingMode(Navigator::ViewEquator);
 	else
 	{
 		if (tmpstr=="horizon")
-			setViewingMode(Navigator::VIEW_HORIZON);
+			setViewingMode(Navigator::ViewHorizon);
 		else
 		{
 			qDebug() << "ERROR : Unknown viewing mode type : " << tmpstr;
@@ -180,7 +180,7 @@ void Navigator::moveObserverToSelected(void)
 
 void Navigator::setInitViewDirectionToCurrent(void)
 {
-	QString dirStr = QString("%1,%2,%3").arg(local_vision[0]).arg(local_vision[1]).arg(local_vision[2]);
+	QString dirStr = QString("%1,%2,%3").arg(localVision[0]).arg(localVision[1]).arg(localVision[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
 
@@ -209,25 +209,25 @@ void Navigator::decreaseTimeSpeed()
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setLocalVision(const Vec3d& _pos)
 {
-	local_vision = _pos;
-	equ_vision=local_to_earth_equ(local_vision);
-	J2000_equ_vision = mat_earth_equ_to_j2000*equ_vision;
+	localVision = _pos;
+	equVision=localToEarthEqu(localVision);
+	J2000EquVision = matEarthEquToJ2000*equVision;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setEquVision(const Vec3d& _pos)
 {
-	equ_vision = _pos;
-	J2000_equ_vision = mat_earth_equ_to_j2000*equ_vision;
-	local_vision = earth_equ_to_local(equ_vision);
+	equVision = _pos;
+	J2000EquVision = matEarthEquToJ2000*equVision;
+	localVision = earthEquToLocal(equVision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setJ2000EquVision(const Vec3d& _pos)
 {
-	J2000_equ_vision = _pos;
-	equ_vision = mat_j2000_to_earth_equ*J2000_equ_vision;
-	local_vision = earth_equ_to_local(equ_vision);
+	J2000EquVision = _pos;
+	equVision = matJ2000ToEarthEqu*J2000EquVision;
+	localVision = earthEquToLocal(equVision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -250,22 +250,22 @@ const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
 
 void Navigator::updateTransformMatrices(void)
 {
-	mat_local_to_earth_equ = position->getRotLocalToEquatorial(JDay);
-	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
+	matLocalToEarthEqu = position->getRotLocalToEquatorial(JDay);
+	matEarthEquToLocal = matLocalToEarthEqu.transpose();
 
-	mat_earth_equ_to_j2000 = mat_vsop87_to_j2000 * position->getRotEquatorialToVsop87();
-	mat_j2000_to_earth_equ = mat_earth_equ_to_j2000.transpose();
-	mat_j2000_to_local = mat_earth_equ_to_local*mat_j2000_to_earth_equ;
+	matEarthEquToJ2000 = mat_vsop87_to_j2000 * position->getRotEquatorialToVsop87();
+	matJ2000ToEarthEqu = matEarthEquToJ2000.transpose();
+	matJ2000ToLocal = matEarthEquToLocal*matJ2000ToEarthEqu;
 	
-	mat_helio_to_earth_equ = mat_j2000_to_earth_equ * mat_vsop87_to_j2000 * Mat4d::translation(-position->getCenterVsop87Pos());
+	matHelioToEarthEqu = matJ2000ToEarthEqu * mat_vsop87_to_j2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp = mat_j2000_to_vsop87 * mat_earth_equ_to_j2000 * mat_local_to_earth_equ;
+	Mat4d tmp = mat_j2000_to_vsop87 * matEarthEquToJ2000 * matLocalToEarthEqu;
 
-	mat_local_to_helio =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+	matLocalToHelio =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	mat_helio_to_local =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+	matHelioToLocal =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 	                      Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
@@ -283,40 +283,40 @@ void Navigator::updateModelViewMat(void)
 {
 	Vec3d f;
 
-	if( viewing_mode == VIEW_EQUATOR)
+	if( viewingMode == ViewEquator)
 	{
 		// view will use equatorial coordinates, so that north is always up
-		f = equ_vision;
+		f = equVision;
 	}
 	else
 	{
 		// view will correct for horizon (always down)
-		f = local_vision;
+		f = localVision;
 	}
 
 	f.normalize();
 	Vec3d s(f[1],-f[0],0.);
 
-	if( viewing_mode == VIEW_EQUATOR)
+	if( viewingMode == ViewEquator)
 	{
 		// convert everything back to local coord
-		f = local_vision;
+		f = localVision;
 		f.normalize();
-		s = earth_equ_to_local( s );
+		s = earthEquToLocal( s );
 	}
 
 	Vec3d u(s^f);
 	s.normalize();
 	u.normalize();
 
-	mat_local_to_eye.set(s[0],u[0],-f[0],0.,
+	matLocalToEye.set(s[0],u[0],-f[0],0.,
 	                     s[1],u[1],-f[1],0.,
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
 
-	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
-	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
-	mat_j2000_to_eye = mat_earth_equ_to_eye*mat_j2000_to_earth_equ;
+	matEarthEquToEye = matLocalToEye*matEarthEquToLocal;
+	matHelioToEye = matLocalToEye*matHelioToLocal;
+	matJ2000ToEye = matEarthEquToEye*matJ2000ToEarthEqu;
 }
 
 
@@ -325,15 +325,15 @@ void Navigator::updateModelViewMat(void)
 Vec3d Navigator::getObserverHelioPos(void) const
 {
 	static const Vec3d v(0.,0.,0.);
-	return mat_local_to_helio*v;
+	return matLocalToHelio*v;
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
-void Navigator::setViewingMode(ViewingModeType view_mode)
+void Navigator::setViewingMode(ViewingModeType viewMode)
 {
-	viewing_mode = view_mode;
+	viewingMode = viewMode;
 
 	// TODO: include some nice smoothing function trigger here to rotate between
 	// the two modes

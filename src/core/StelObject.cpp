@@ -38,7 +38,7 @@ void intrusive_ptr_release(StelObject* p)
 
 Vec3d StelObject::getObsEquatorialPos(const Navigator* nav) const
 {
-	return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));
+	return nav->j2000ToEarthEqu(getObsJ2000Pos(nav));
 }
 
 // Return the radius of a circle containing the object on screen
@@ -56,5 +56,5 @@ Vec3d StelObject::getObsSideralPos(const StelCore* core) const
 // Get observer local alt/az coordinate
 Vec3d StelObject::getAltAzPos(const Navigator* nav) const
 {
-	return nav->j2000_to_local(getObsJ2000Pos(nav));
+	return nav->j2000ToLocal(getObsJ2000Pos(nav));
 }

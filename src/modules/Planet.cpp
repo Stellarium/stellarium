@@ -571,9 +571,9 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	}
 
 	// This removed totally the Planet shaking bug!!!
-	mat = nav->get_helio_to_eye_mat() * mat;
+	mat = nav->getHelioToEyeMat() * mat;
 
-	const Vec3d sun_pos = nav->get_helio_to_eye_mat()*Vec3d(0,0,0);
+	const Vec3d sun_pos = nav->getHelioToEyeMat()*Vec3d(0,0,0);
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
 
 	if (this == nav->getHomePlanet())
@@ -919,8 +919,8 @@ void Planet::updateTrail(const Navigator* nav)
 		lastTrailJD = date;
 		TrailPoint tp;
 		//Vec3d v = getHeliocentricEclipticPos();
-		//      trail.push_front( nav->helio_to_earth_equ(v) );  // centered on earth
-		tp.point = getObsJ2000Pos(nav);//nav->helio_to_earth_pos_equ(v);
+		//      trail.push_front( nav->helioToEarthEqu(v) );  // centered on earth
+		tp.point = getObsJ2000Pos(nav);//nav->helioToEarthPosEqu(v);
 		tp.date = date;
 		trail.push_front( tp );
 

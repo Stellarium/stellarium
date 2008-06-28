@@ -41,7 +41,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   // determine meteor model view matrix (want z in dir of travel of earth, z=0 at center of earth)
   // meteor life is so short, no need to recalculate
   double equ_rotation; // rotation needed to align with path of earth
-  Vec3d sun_dir = nav->helio_to_earth_equ( Vec3d(0,0,0) );
+  Vec3d sun_dir = nav->helioToEarthEqu( Vec3d(0,0,0) );
 
   Mat4d tmat = Mat4d::xrotation(-23.45f*M_PI/180.f);  // ecliptical tilt
   sun_dir.transfo4d(tmat);  // convert to ecliptical coordinates
@@ -59,7 +59,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
 
   // find observer position in meteor coordinate system
-  obs = nav->local_to_earth_equ(Vec3d(0,0,EARTH_RADIUS));
+  obs = nav->localToEarthEqu(Vec3d(0,0,EARTH_RADIUS));
   obs.transfo4d(mmat.transpose());
 
   // set meteor start x,y
@@ -206,8 +206,8 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	epos.transfo4d(mmat);
 
 	// convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-	spos = nav->earth_equ_to_local( spos );
-	epos = nav->earth_equ_to_local( epos );
+	spos = nav->earthEquToLocal( spos );
+	epos = nav->earthEquToLocal( epos );
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 
@@ -229,7 +229,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 		Vec3d posi = pos_internal; 
 		posi[2] = position[2] + (pos_train[2] - position[2])/2;
 		posi.transfo4d(mmat);
-		posi = nav->earth_equ_to_local( posi );
+		posi = nav->earthEquToLocal( posi );
 		posi[2] -= EARTH_RADIUS;
 		proj->project(posi/1216, intpos);
 
