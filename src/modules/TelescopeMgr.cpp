@@ -161,10 +161,10 @@ vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov,
   	return result;
   Vec3d v(vv);
   v.normalize();
-  double cos_lim_fov = cos(limitFov * M_PI/180.);
+  double cosLimFov = cos(limitFov * M_PI/180.);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();++it) {
-    if (it->second->getObsJ2000Pos(0).dot(v) >= cos_lim_fov) {
+    if (it->second->getObsJ2000Pos(0).dot(v) >= cosLimFov) {
       result.push_back(it->second);
     }
   }

@@ -74,8 +74,8 @@ public:
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
   virtual void generateNativeDebugFile(const char *fname) const = 0;
   unsigned int getNrOfStars(void) const {return nr_of_stars;}
-  virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
-  virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
+  virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
+  virtual void searchAround(int index,const Vec3d &v,double cosLimFov,
                             vector<StelObjectP > &result) = 0;
   virtual void draw(int index,bool is_inside,
                     const float *rcmag_table, Projector *prj,
@@ -122,7 +122,7 @@ private:
   HANDLE mapping_handle;
 #endif
   void scaleAxis(void);
-  void searchAround(int index,const Vec3d &v,double cos_lim_fov,
+  void searchAround(int index,const Vec3d &v,double cosLimFov,
                     vector<StelObjectP > &result);
   void draw(int index,bool is_inside,
             const float *rcmag_table, Projector *prj,
@@ -132,7 +132,7 @@ private:
 
 template<class Star>
 void SpecialZoneArray<Star>::scaleAxis(void) {
-  star_position_scale /= Star::max_pos_val;
+  star_position_scale /= Star::MaxPosVal;
   for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--) {
     z->axis0 *= star_position_scale;
     z->axis1 *= star_position_scale;
@@ -156,7 +156,7 @@ public:
     : SpecialZoneArray<Star1>(f,byte_swap,use_mmap,lb,hip_star_mgr,level,
                               mag_min,mag_range,mag_steps) {}
 private:
-  void updateHipIndex(HipIndexStruct hip_index[]) const;
+  void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
 
 
@@ -392,10 +392,10 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 	Vec3d xy;
 	const Star *const end = z->getStars() + z->size;
 	const double d2000 = 2451545.0;
-	const double movement_factor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;            
+	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((StarMgr::getCurrentJDay()-d2000)/365.25) / star_position_scale;            
 	for (const Star *s=z->getStars();s<end;s++)
 	{
-		if (is_inside ? prj->project(s->getJ2000Pos(z,movement_factor),xy) : prj->projectCheck(s->getJ2000Pos(z,movement_factor),xy))
+		if (is_inside ? prj->project(s->getJ2000Pos(z,movementFactor),xy) : prj->projectCheck(s->getJ2000Pos(z,movementFactor),xy))
 		{
 			if (drawer->drawPointSource(xy[0],xy[1],rcmag_table + 2*(s->mag),s->bV)==false)
 			{
@@ -419,15 +419,15 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 
 template<class Star>
 void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
-                                          double cos_lim_fov,
+                                          double cosLimFov,
                                           vector<StelObjectP > &result) {
   const double d2000 = 2451545.0;
-  const double movement_factor = (M_PI/180)*(0.0001/3600)
+  const double movementFactor = (M_PI/180)*(0.0001/3600)
                            * ((StarMgr::getCurrentJDay()-d2000)/365.25)
                            / star_position_scale;
   const SpecialZoneData<Star> *const z = getZones()+index;
   for (int i=0;i<z->size;i++) {
-    if (z->getStars()[i].getJ2000Pos(z,movement_factor)*v >= cos_lim_fov) {
+    if (z->getStars()[i].getJ2000Pos(z,movementFactor)*v >= cosLimFov) {
         // TODO: do not select stars that are too faint to display
       result.push_back(z->getStars()[i].createStelObject(this,z));
     }

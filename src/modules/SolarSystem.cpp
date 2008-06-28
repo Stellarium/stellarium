@@ -873,7 +873,7 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 	else return NULL;
 }
 
-// Return a stl vector containing the planets located inside the lim_fov circle around position v
+// Return a stl vector containing the planets located inside the limFov circle around position v
 vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	vector<StelObjectP> result;
@@ -882,7 +882,7 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, 
 		
 	Vec3d v = core->getNavigation()->j2000ToEarthEqu(vv);
 	v.normalize();
-	double cos_lim_fov = cos(limitFov * M_PI/180.);
+	double cosLimFov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
 
 	vector<Planet*>::const_iterator iter = systemPlanets.begin();
@@ -890,7 +890,7 @@ vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, 
 	{
 		equPos = (*iter)->getObsEquatorialPos(core->getNavigation());
 		equPos.normalize();
-		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
+		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 		{
 			result.push_back(*iter);
 		}

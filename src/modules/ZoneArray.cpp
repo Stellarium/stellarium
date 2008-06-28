@@ -241,7 +241,7 @@ ZoneArray::ZoneArray(const StarMgr &hip_star_mgr,int level,
                      int mag_min,int mag_range,int mag_steps)
           :level(level),
            mag_min(mag_min),mag_range(mag_range),mag_steps(mag_steps),
-           star_position_scale(0.0), //IntToDouble(scale_int)/Star::max_pos_val
+           star_position_scale(0.0), //IntToDouble(scale_int)/Star::MaxPosVal
            hip_star_mgr(hip_star_mgr),
            zones(0) {
   nr_of_zones = GeodesicGrid::nrOfZones(level);
@@ -271,7 +271,7 @@ bool ZoneArray::readFileWithLoadingBar(FILE *f,void *data,size_t size,
   return true;
 }
 
-void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
+void ZoneArray1::updateHipIndex(HipIndexStruct hipIndex[]) const {
   for (const SpecialZoneData<Star1> *z=getZones()+(nr_of_zones-1);
        z>=getZones();z--) {
     for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--) {
@@ -282,9 +282,9 @@ void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
         exit(1);
       }
       if (hip != 0) {
-        hip_index[hip].a = this;
-        hip_index[hip].z = z;
-        hip_index[hip].s = s;
+        hipIndex[hip].a = this;
+        hipIndex[hip].z = z;
+        hipIndex[hip].s = s;
       }
     }
   }
