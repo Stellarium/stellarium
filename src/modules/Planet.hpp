@@ -191,7 +191,7 @@ public:
 	static void setLabelColor(const Vec3f& lc) {label_color = lc;}
 	static const Vec3f& getLabelColor(void) {return label_color;}
 
-	void update(int delta_time);
+	void update(int deltaTime);
 	
 	void setFlagHints(bool b){hint_fader = b;}
 	bool getFlagHints(void) const {return hint_fader;}

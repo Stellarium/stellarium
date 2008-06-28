@@ -49,7 +49,7 @@ public:
 	
 	//! Updates the position of the meteor, and expires it if necessary.
 	//! @return true of the meteor is still alive, else false.
-	bool update(double delta_time);
+	bool update(double deltaTime);
 	
 	//! Draws the meteor.
 	bool draw(Projector *proj, const Navigator* nav);

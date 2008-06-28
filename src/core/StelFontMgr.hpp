@@ -49,23 +49,23 @@ private:
 	//! Class which describes which font to use for a given language ISO code.
 	class FontForLanguage
 	{
-		public:
-			QString langageName;
-			QString fontFileName;
-			double fontScale;
-			QString fixedFontFileName;
-			double fixedFontScale;
-			bool operator == (const FontForLanguage& f) const;
+	public:
+		QString langageName;
+		QString fontFileName;
+		double fontScale;
+		QString fixedFontFileName;
+		double fixedFontScale;
+		bool operator == (const FontForLanguage& f) const;
 	};	
 	
 	//! @class LoadedFont
 	//! Class which describes a loaded font.
 	class LoadedFont
 	{
-		public:
-			LoadedFont(const QString& fileName, int size);
-			QString fileName;
-			int size;	// floating point scale * 10
+	public:
+		LoadedFont(const QString& fileName, int size);
+		QString fileName;
+		int size;	// floating point scale * 10
 	};
 	
 	//! @class ltLoadedFonts

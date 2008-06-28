@@ -854,17 +854,17 @@ float get_GMT_shift_from_QT(double JD)
 // UTC !
 bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s)
 {
-  double delta_time = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
+  double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
   QDate test((y <= 0 ? y-1 : y), m, d);
   // if QDate will oblige, do so.
   if ( test.isValid() ) {
     double qdjd = (double)test.toJulianDay();
-    qdjd += delta_time;
+    qdjd += deltaTime;
     *newjd = qdjd;
     return true;
   } else {
     double jd = (double)((1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075) - 38;
-    jd += delta_time;
+    jd += deltaTime;
     *newjd = jd;
     return true;
   }

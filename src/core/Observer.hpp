@@ -37,8 +37,8 @@ public:
 	Observer(const class SolarSystem &ssystem);
 	~Observer();
 
-	void update(int delta_time);  // for moving observing position 
-	void setHomePlanet(const Planet *p,float transit_seconds=2.f);
+	void update(int deltaTime);  // for moving observing position 
+	void setHomePlanet(const Planet *p,float transitSeconds=2.f);
 	const Planet *getHomePlanet(void) const;
 	
 	void setConf(QSettings* conf, const QString& section) const;
@@ -95,19 +95,19 @@ private:
 	QString locationName;			// Position name
 
 	const Planet *planet;
-    ArtificialPlanet *artificial_planet;
-    int time_to_go;
+    ArtificialPlanet *artificialPlanet;
+    int timeToGo;
 
 	double longitude;		// Longitude in degree
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter
 
 	// for changing position
-	bool flag_move_to;
-	double start_lat, end_lat;
-	double start_lon, end_lon;
-	double start_alt, end_alt;
-	float move_to_coef, move_to_mult;
+	bool flagMoveTo;
+	double startLat, endLat;
+	double startLon, endLon;
+	double startAlt, endAlt;
+	float moveToCoef, moveToMult;
 };
 
 #endif
