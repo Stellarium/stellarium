@@ -185,11 +185,11 @@ void formatting ()
 	// test detection of offset from UTC.
 
 	double mar122008 = QDate(2008,3,12).toJulianDay();
-	_assert(-4.0 == StelUtils::get_GMT_shift_from_QT(mar122008),
-	        "gmt shift wrong: " + QString("%1").arg(StelUtils::get_GMT_shift_from_QT(mar122008)));
+	_assert(-4.0 == StelUtils::getGMTShiftFromQT(mar122008),
+	        "gmt shift wrong: " + QString("%1").arg(StelUtils::getGMTShiftFromQT(mar122008)));
 	double mar012008 = QDate(2008,3,1).toJulianDay();
-	_assert(-5.0 == StelUtils::get_GMT_shift_from_QT(mar012008),
-	        "gmt shift wrong: " + QString("%1").arg(StelUtils::get_GMT_shift_from_QT(mar012008)));
+	_assert(-5.0 == StelUtils::getGMTShiftFromQT(mar012008),
+	        "gmt shift wrong: " + QString("%1").arg(StelUtils::getGMTShiftFromQT(mar012008)));
 
 
 }
