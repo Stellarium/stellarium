@@ -171,20 +171,20 @@ private:
 	float computeLimitMagnitude() const;
 			
 	//! Get SkyDrawer maximum FOV.
-	float getMaxFov(void) const {return max_fov;}
+	float getMaxFov(void) const {return maxFov;}
 	//! Set SkyDrawer maximum FOV.
 	//! Usually stars/planet halos are drawn fainter when FOV gets larger, 
 	//! but when FOV gets larger than this value, the stars do not become
 	//! fainter any more. Must be >= 60.0.
-	void setMaxFov(float fov) {max_fov = (fov < 60.f) ? 60.f : fov;}
+	void setMaxFov(float fov) {maxFov = (fov < 60.f) ? 60.f : fov;}
 	
 	//! Get SkyDrawer minimum FOV.
-	float getMinFov(void) const {return min_fov;}
+	float getMinFov(void) const {return minFov;}
 	//! Set SkyDrawer minimum FOV.
 	//! Usually stars/planet halos are drawn brighter when FOV gets smaller.
 	//! But when FOV gets smaller than this value, the stars do not become
 	//! brighter any more. Must be <= 60.0.
-	void setMinFov(float fov) {min_fov = (fov > 60.f) ? 60.f : fov;}
+	void setMinFov(float fov) {minFov = (fov > 60.f) ? 60.f : fov;}
 	
 	//! Set the scaling applied to input luminance before they are converted by the ToneReproducer
 	void setInputScale(double in) {inScale = in;}
@@ -214,7 +214,7 @@ private:
 	Projector* prj;
 	ToneReproducer* eye;
 	
-	float max_fov, min_fov, lnfov_factor;
+	float maxFov, minFov, lnfov_factor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;

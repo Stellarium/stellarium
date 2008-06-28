@@ -84,14 +84,15 @@ private slots:
 	void recompute();
 		
 private:
-	//! Notify that an event was handled by the program and therefore the FPS should be maximized for a couple of seconds
+	//! Notify that an event was handled by the program and therefore the 
+	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
 	class QTimer* mainTimer;
 	
 	double previousTime;
 	double lastEventTimeSec;
 	
-	// Main elements of the stel_app
+	// Main elements of the StelApp
 	class ViewportDistorter *distorter;
 	
 	// The StelAppGraphicsItem singleton

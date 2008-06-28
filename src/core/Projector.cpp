@@ -40,19 +40,19 @@
 #include "StelAppGraphicsItem.hpp"
 #include <QPainter>
 
-const QString Projector::maskTypeToString(PROJECTOR_MASK_TYPE type)
+const QString Projector::maskTypeToString(ProjectorMaskType type)
 {
-	if (type == DISK )
+	if (type == Disk )
 		return "disk";
 	else
 		return "none";
 }
 
-Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const QString &s)
+Projector::ProjectorMaskType Projector::stringToMaskType(const QString &s)
 {
 	if (s=="disk")
-		return DISK;
-	return NONE;
+		return Disk;
+	return None;
 }
 
 void Projector::registerProjectionMapping(Mapping *c)
@@ -67,7 +67,7 @@ void Projector::init()
 
 	// Video Section
 	QString tmpstr = conf->value("projection/viewport").toString();
-	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
+	const Projector::ProjectorMaskType projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	const bool maximized = (tmpstr=="maximized");
 	const int screen_w = conf->value("video/screen_w", 800).toInt();
@@ -77,10 +77,10 @@ void Projector::init()
 	const int viewport_height = conf->value("projection/viewport_height", maximized ? screen_h : screen_min_wh).toInt();
 	const int viewport_x = conf->value("projection/viewport_x", (screen_w-viewport_width)/2).toInt();
 	const int viewport_y = conf->value("projection/viewport_y", (screen_h-viewport_height)/2).toInt();
-	const double viewport_center_x = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
-	const double viewport_center_y = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
-	const double viewport_fov_diameter = conf->value("projection/viewport_fov_diameter", MY_MIN(viewport_width,viewport_height)).toDouble();
-	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewport_center_x,viewport_center_y, viewport_fov_diameter);
+	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
+	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
+	const double viewportFovDiameter = conf->value("projection/viewport_fov_diameter", MY_MIN(viewport_width,viewport_height)).toDouble();
+	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewportCenterX,viewportCenterY, viewportFovDiameter);
 
 	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
 	if (overwrite_max_fov > 360.0)
@@ -152,22 +152,22 @@ void Projector::windowHasBeenResized(int width,int height)
 }
 
 Projector::Projector(const Vector4<GLint>& viewport, double _fov)
-		:maskType(NONE), fov(_fov), min_fov(0.0001), max_fov(100),
+		:maskType(None), fov(_fov), minFov(0.0001), maxFov(100),
 		zNear(0.1), zFar(10000),
-		viewport_xywh(viewport),
-        viewport_center(Vec2d(viewport_xywh[0]+0.5*viewport_xywh[2],
-		                      viewport_xywh[1]+0.5*viewport_xywh[3])),
-        viewport_fov_diameter(MY_MIN(viewport_xywh[2],viewport_xywh[3])),
+		viewportXywh(viewport),
+        viewportCenter(Vec2d(viewportXywh[0]+0.5*viewportXywh[2],
+		                      viewportXywh[1]+0.5*viewportXywh[3])),
+        viewportFovDiameter(MY_MIN(viewportXywh[2],viewportXywh[3])),
 		gravityLabels(0),
 		mapping(NULL)
 {
-	flip_horz = 1.0;
-	flip_vert = 1.0;
-	setViewport(viewport_xywh[0],viewport_xywh[1],
-	            viewport_xywh[2],viewport_xywh[3],
-	            viewport_center[0]-viewport_xywh[0],
-                viewport_center[1]-viewport_xywh[1],
-	            viewport_fov_diameter);
+	flipHorz = 1.0;
+	flipVert = 1.0;
+	setViewport(viewportXywh[0],viewportXywh[1],
+	            viewportXywh[2],viewportXywh[3],
+	            viewportCenter[0]-viewportXywh[0],
+                viewportCenter[1]-viewportXywh[1],
+	            viewportFovDiameter);
 
 	setFov(_fov);
 }
@@ -177,16 +177,16 @@ Projector::~Projector()
 
 
 void Projector::setViewport(int x, int y, int w, int h,
-                            double cx,double cy,double fov_diam)
+                            double cx,double cy,double fovDiam)
 {
-	viewport_xywh[0] = x;
-	viewport_xywh[1] = y;
-	viewport_xywh[2] = w;
-	viewport_xywh[3] = h;
-	viewport_center[0] = x+cx;
-	viewport_center[1] = y+cy;
-	viewport_fov_diameter = fov_diam;
-	pixel_per_rad = 0.5 * viewport_fov_diameter
+	viewportXywh[0] = x;
+	viewportXywh[1] = y;
+	viewportXywh[2] = w;
+	viewportXywh[3] = h;
+	viewportCenter[0] = x+cx;
+	viewportCenter[1] = y+cy;
+	viewportFovDiameter = fovDiam;
+	pixelPerRad = 0.5 * viewportFovDiameter
 	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 	glViewport(x, y, w, h);
 	initGlMatrixOrtho2d();
@@ -199,10 +199,10 @@ void Projector::setViewport(int x, int y, int w, int h,
 QList<Vec2d> Projector::getViewportVertices2d() const
 {
 	QList<Vec2d> result;
-	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]));
-	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]));
-	result.push_back(Vec2d(viewport_xywh[0]+viewport_xywh[2], viewport_xywh[1]+viewport_xywh[3]));
-	result.push_back(Vec2d(viewport_xywh[0], viewport_xywh[1]+viewport_xywh[3]));
+	result.push_back(Vec2d(viewportXywh[0], viewportXywh[1]));
+	result.push_back(Vec2d(viewportXywh[0]+viewportXywh[2], viewportXywh[1]));
+	result.push_back(Vec2d(viewportXywh[0]+viewportXywh[2], viewportXywh[1]+viewportXywh[3]));
+	result.push_back(Vec2d(viewportXywh[0], viewportXywh[1]+viewportXywh[3]));
 	return result;
 }
 
@@ -227,47 +227,47 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 StelGeom::ConvexS Projector::unprojectViewport(void) const {
     // This is quite ugly, but already better than nothing.
     // In fact this function should have different implementations
-    // for the different mapping types. And maskType, viewport_fov_diameter,
-    // viewport_center, viewport_xywh must be taken into account, too.
+    // for the different mapping types. And maskType, viewportFovDiameter,
+    // viewportCenter, viewportXywh must be taken into account, too.
     // Last not least all halfplanes n*x>d really should have d<=0
     // or at least very small d/n.length().
   if ((dynamic_cast<const MappingCylinder*>(mapping) == 0 || fov < 90) &&
       fov < 360.0) {
     Vec3d e0,e1,e2,e3;
     bool ok;
-    if (maskType == DISK) {
+    if (maskType == Disk) {
       if (fov >= 120.0) {
-        unProject(viewport_center[0],viewport_center[1],e0);
+        unProject(viewportCenter[0],viewportCenter[1],e0);
         StelGeom::ConvexS rval(1);
         rval[0].n = e0;
         rval[0].d = (fov<360.0) ? cos(fov*(M_PI/360.0)) : -1.0;
         return rval;
       }
-	  ok  = unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
-                      viewport_center[1] - 0.5*viewport_fov_diameter,e0);
-	  ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
-                      viewport_center[1] + 0.5*viewport_fov_diameter,e2);
+	  ok  = unProject(viewportCenter[0] - 0.5*viewportFovDiameter,
+                      viewportCenter[1] - 0.5*viewportFovDiameter,e0);
+	  ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter,
+                      viewportCenter[1] + 0.5*viewportFovDiameter,e2);
 	  if (needGlFrontFaceCW()) {
-        ok &= unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
-                        viewport_center[1] + 0.5*viewport_fov_diameter,e3);
-        ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
-                        viewport_center[1] - 0.5*viewport_fov_diameter,e1);
+        ok &= unProject(viewportCenter[0] - 0.5*viewportFovDiameter,
+                        viewportCenter[1] + 0.5*viewportFovDiameter,e3);
+        ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter,
+                        viewportCenter[1] - 0.5*viewportFovDiameter,e1);
 	  } else {
-        ok &= unProject(viewport_center[0] - 0.5*viewport_fov_diameter,
-                        viewport_center[1] + 0.5*viewport_fov_diameter,e1);
-        ok &= unProject(viewport_center[0] + 0.5*viewport_fov_diameter,
-                        viewport_center[1] - 0.5*viewport_fov_diameter,e3);
+        ok &= unProject(viewportCenter[0] - 0.5*viewportFovDiameter,
+                        viewportCenter[1] + 0.5*viewportFovDiameter,e1);
+        ok &= unProject(viewportCenter[0] + 0.5*viewportFovDiameter,
+                        viewportCenter[1] - 0.5*viewportFovDiameter,e3);
 	  }
     } else {
-      ok  = unProject(viewport_xywh[0],viewport_xywh[1],e0);
-      ok &= unProject(viewport_xywh[0]+viewport_xywh[2],
-                      viewport_xywh[1]+viewport_xywh[3],e2);
+      ok  = unProject(viewportXywh[0],viewportXywh[1],e0);
+      ok &= unProject(viewportXywh[0]+viewportXywh[2],
+                      viewportXywh[1]+viewportXywh[3],e2);
       if (needGlFrontFaceCW()) {
-        ok &= unProject(viewport_xywh[0],viewport_xywh[1]+viewport_xywh[3],e3);
-        ok &= unProject(viewport_xywh[0]+viewport_xywh[2],viewport_xywh[1],e1);
+        ok &= unProject(viewportXywh[0],viewportXywh[1]+viewportXywh[3],e3);
+        ok &= unProject(viewportXywh[0]+viewportXywh[2],viewportXywh[1],e1);
       } else {
-        ok &= unProject(viewport_xywh[0],viewport_xywh[1]+viewport_xywh[3],e1);
-        ok &= unProject(viewport_xywh[0]+viewport_xywh[2],viewport_xywh[1],e3);
+        ok &= unProject(viewportXywh[0],viewportXywh[1]+viewportXywh[3],e1);
+        ok &= unProject(viewportXywh[0]+viewportXywh[2],viewportXywh[1],e3);
       }
     }
     if (ok) {
@@ -287,8 +287,8 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
         return rval;
       } else {
         Vec3d middle;
-        if (unProject(viewport_xywh[0]+0.5*viewport_xywh[2],
-                      viewport_xywh[1]+0.5*viewport_xywh[3],middle)) {
+        if (unProject(viewportXywh[0]+0.5*viewportXywh[2],
+                      viewportXywh[1]+0.5*viewportXywh[3],middle)) {
           double d = middle*e0;
           double h = middle*e1;
           if (d > h) d = h;
@@ -313,32 +313,32 @@ StelGeom::ConvexS Projector::unprojectViewport(void) const {
 void Projector::setFov(double f)
 {
 	fov = f;
-	if (f>max_fov)
-		fov = max_fov;
-	if (f<min_fov)
-		fov = min_fov;
-	pixel_per_rad = 0.5 * viewport_fov_diameter
+	if (f>maxFov)
+		fov = maxFov;
+	if (f<minFov)
+		fov = minFov;
+	pixelPerRad = 0.5 * viewportFovDiameter
 	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 }
 
 
 void Projector::setMaxFov(double max)
 {
-	max_fov = max;
+	maxFov = max;
 	if (fov > max)
 	{
 		setFov(max);
 	}
 }
 
-void Projector::set_clipping_planes(double znear, double zfar)
+void Projector::setClippingPlanes(double znear, double zfar)
 {
 	zNear = znear;
 	zFar = zfar;
 }
 
 // Set the standard modelview matrices used for projection
-void Projector::set_modelview_matrices(	const Mat4d& _matEarthEquToEye,
+void Projector::setModelviewMatrices(	const Mat4d& _matEarthEquToEye,
                                         const Mat4d& _matHelioToEye,
                                         const Mat4d& _matLocalToEye,
                                         const Mat4d& _matJ2000ToEye)
@@ -353,20 +353,20 @@ void Projector::set_modelview_matrices(	const Mat4d& _matEarthEquToEye,
 /*************************************************************************
  Set the frame in which we want to draw from now on
 *************************************************************************/
-void Projector::setCurrentFrame(FRAME_TYPE frameType) const
+void Projector::setCurrentFrame(FrameType frameType) const
 {
 	switch (frameType)
 	{
-	case FRAME_LOCAL:
+	case FrameLocal:
 		setCustomFrame(matLocalToEye);
 		break;
-	case FRAME_HELIO:
+	case FrameHelio:
 		setCustomFrame(matHelioToEye);
 		break;
-	case FRAME_EARTH_EQU:
+	case FrameEarthEqu:
 		setCustomFrame(matEarthEquToEye);
 		break;
-	case FRAME_J2000:
+	case FrameJ2000:
 		setCustomFrame(matJ2000ToEye);
 		break;
 	default:
@@ -392,8 +392,8 @@ void Projector::initGlMatrixOrtho2d(void) const
 	// thus we never need to change to 2dMode from now on before drawing
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(viewport_xywh[0], viewport_xywh[0] + viewport_xywh[2],
-	        viewport_xywh[1], viewport_xywh[1] + viewport_xywh[3], -1, 1);
+	glOrtho(viewportXywh[0], viewportXywh[0] + viewportXywh[2],
+	        viewportXywh[1], viewportXywh[1] + viewportXywh[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -414,8 +414,8 @@ void Projector::setCurrentMapping(const QString& mappingId)
 
 		// Redefine the projection functions
 		mapping = i.value();
-		min_fov = mapping->minFov;
-		max_fov = mapping->maxFov;
+		minFov = mapping->minFov;
+		maxFov = mapping->maxFov;
 
 		setFov(fov);
 		initGlMatrixOrtho2d();
@@ -432,8 +432,8 @@ void Projector::setCurrentMapping(const QString& mappingId)
 *************************************************************************/
 bool Projector::unProject(double x, double y, Vec3d &v) const
 {
-	v[0] = flip_horz * (x - viewport_center[0]) / pixel_per_rad;
-	v[1] = flip_vert * (y - viewport_center[1]) / pixel_per_rad;
+	v[0] = flipHorz * (x - viewportCenter[0]) / pixelPerRad;
+	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;
 	v[2] = 0;
 	const bool rval = mapping->backward(v);
 	  // Even when the reprojected point comes from an region of the screen,
@@ -462,17 +462,17 @@ bool Projector::unProject(double x, double y, Vec3d &v) const
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void Projector::draw_viewport_shape(void)
+void Projector::drawViewportShape(void)
 {
-	if (maskType != DISK)
+	if (maskType != Disk)
 		return;
 
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
-	glTranslated(viewport_center[0],viewport_center[1],0.0);
+	glTranslated(viewportCenter[0],viewportCenter[1],0.0);
 	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, 0.5*viewport_fov_diameter,
+	gluDisk(p, 0.5*viewportFovDiameter,
                getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
 	glPopMatrix();
@@ -533,7 +533,7 @@ void ComputeCosSinRho(double phi,int segments) {
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
 void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
-                              GLint slices, GLint stacks, int orient_inside) const
+                              GLint slices, GLint stacks, int orientInside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(modelViewMatrix);
@@ -542,7 +542,7 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
 	{ // gluSphere seems to have hardware acceleration
 		GLUquadricObj * p = gluNewQuadric();
 		gluQuadricTexture(p,GL_TRUE);
-		if (orient_inside)
+		if (orientInside)
 			gluQuadricOrientation(p, GLU_INSIDE);
 		gluSphere(p, radius, slices, stacks);
 		gluDeleteQuadric(p);
@@ -554,7 +554,7 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
 		GLint i, j;
 		GLfloat nsign;
 
-		if (orient_inside)
+		if (orientInside)
 			nsign = -1.0;
 		else
 			nsign = 1.0;
@@ -621,7 +621,7 @@ void Projector::setInitFov(double fov)
 }
 
 
-void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
+void Projector::sFanDisk(double radius,int innerFanSlices,int level) const {
   assert(level<64);
   double rad[64];
   int i,j;
@@ -631,9 +631,9 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
 //    rad[i] = radius*f*f;
 //  }
   for (i=level-1;i>=0;i--) {
-    rad[i] = rad[i+1]*(1.0-M_PI/(inner_fan_slices<<(i+1)))*2.0/3.0;
+    rad[i] = rad[i+1]*(1.0-M_PI/(innerFanSlices<<(i+1)))*2.0/3.0;
   }
-  int slices = inner_fan_slices<<level;
+  int slices = innerFanSlices<<level;
   const double dtheta = 2.0 * M_PI / slices;
   assert(slices<=MAX_SLICES);
   ComputeCosSinTheta(dtheta,slices);
@@ -687,10 +687,10 @@ void Projector::sFanDisk(double radius,int inner_fan_slices,int level) const {
 
 
 // Draw a disk with a special texturing mode having texture center at disk center
-void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside) const
+void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientInside) const
 {
 	GLint i,j;
-	const GLfloat nsign = orient_inside ? -1 : 1;
+	const GLfloat nsign = orientInside ? -1 : 1;
     double r;
 	const double dr = radius / stacks;
 
@@ -722,14 +722,14 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_in
 	}
 }
 
-void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const
+void Projector::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const
 {
 	double x,y;
 	int j;
 
-	const double nsign = (orient_inside)?-1.0:1.0;
+	const double nsign = (orientInside)?-1.0:1.0;
 
-	const double dr = (r_max-r_min) / stacks;
+	const double dr = (rMax-rMin) / stacks;
 	const double dtheta = 2.0 * M_PI / slices;
 	if (slices < 0) slices = -slices;
 	assert(slices<=MAX_SLICES);
@@ -738,10 +738,10 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks
 
 
 	// draw intermediate stacks as quad strips
-	for (double r = r_min; r < r_max; r+=dr)
+	for (double r = rMin; r < rMax; r+=dr)
 	{
-		const double tex_r0 = (r-r_min)/(r_max-r_min);
-		const double tex_r1 = (r+dr-r_min)/(r_max-r_min);
+		const double tex_r0 = (r-rMin)/(rMax-rMin);
+		const double tex_r1 = (r+dr-rMin)/(rMax-rMin);
 		glBegin(GL_QUAD_STRIP /*GL_TRIANGLE_STRIP*/);
 		for (j=0,cos_sin_theta_p=cos_sin_theta;
 		        j<=slices;
@@ -770,12 +770,12 @@ static void sSphereMapTexCoordFast(double rho_div_fov, double costheta, double s
 	             0.5 + rho_div_fov * sintheta);
 }
 
-void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
-                            double texture_fov, int orient_inside) const
+void Projector::sSphereMap(GLdouble radius, GLint slices, GLint stacks,
+                            double textureFov, int orientInside) const
 {
 	double rho,x,y,z;
 	int i, j;
-	const double nsign = orient_inside?-1:1;
+	const double nsign = orientInside?-1:1;
 
 	const double drho = M_PI / stacks;
 	assert(stacks<=MAX_STACKS);
@@ -796,7 +796,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 	const int imax = stacks;
 
 	// draw intermediate stacks as quad strips
-	if (!orient_inside) // nsign==1
+	if (!orientInside) // nsign==1
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0;
 		        i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
@@ -809,7 +809,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho/texture_fov,
+				sSphereMapTexCoordFast(rho/textureFov,
 				                       cos_sin_theta_p[0],
 				                       cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
@@ -818,7 +818,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast((rho + drho)/texture_fov,
+				sSphereMapTexCoordFast((rho + drho)/textureFov,
 				                       cos_sin_theta_p[0],
 				                       cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
@@ -839,7 +839,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = cos_sin_rho_p[2];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast((rho + drho)/texture_fov,
+				sSphereMapTexCoordFast((rho + drho)/textureFov,
 				                       cos_sin_theta_p[0],
 				                       -cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
@@ -848,7 +848,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = cos_sin_rho_p[0];
 				glNormal3d(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho/texture_fov,
+				sSphereMapTexCoordFast(rho/textureFov,
 				                       cos_sin_theta_p[0],
 				                       -cos_sin_theta_p[1]);
 				drawVertex3(x * radius, y * radius, z * radius);
@@ -860,20 +860,20 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside) const
+void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(modelViewMatrix);
 	GLUquadricObj * p = gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
-	if (orient_inside)
+	if (orientInside)
 	{
 		glCullFace(GL_FRONT);
 	}
 	gluCylinder(p, radius, radius, height, slices, stacks);
 	gluDeleteQuadric(p);
 	glPopMatrix();
-	if (orient_inside)
+	if (orientInside)
 	{
 		glCullFace(GL_BACK);
 	}
@@ -881,15 +881,15 @@ void Projector::sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, 
 
 
 void Projector::drawTextGravity180(const SFont* font, float x, float y, const QString& ws,
-                                   bool speed_optimize, float xshift, float yshift) const
+                                   bool speedOptimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
-	dx = x - viewport_center[0];
-	dy = y - viewport_center[1];
+	dx = x - viewportCenter[0];
+	dy = y - viewportCenter[1];
 	d = sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
-	if (d>MY_MAX(viewport_xywh[3], viewport_xywh[2])*2)
+	if (d>MY_MAX(viewportXywh[3], viewportXywh[2])*2)
 		return;
 
 	theta = M_PI + std::atan2(dx, dy - 1);
@@ -911,7 +911,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	for (int i=0;i<ws.length();++i)
 	{
-		if( !speed_optimize )
+		if( !speedOptimize )
 		{
 			font->print_char_outlined(ws[i]);
 		}
@@ -925,7 +925,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 		// TODO: would look better with kerning information...
 		glTranslatef(font->getStrLen(ws.mid(i,1)) * 1.05, 0, 0);
 
-		if( !speed_optimize )
+		if( !speedOptimize )
 		{
 			psi = std::atan2((float)font->getStrLen(ws.mid(i,1))*1.05f,(float)d) * 180./M_PI;
 			if (psi>5)
@@ -1106,8 +1106,8 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 void Projector::drawCircle(double x,double y,double r) const {
   if (r <= 1.0) return;
   const Vec2d center(x,y);
-  const Vec2d v_center(0.5*viewport_xywh[2],
-                       0.5*viewport_xywh[3]);
+  const Vec2d v_center(0.5*viewportXywh[2],
+                       0.5*viewportXywh[3]);
   const double R = v_center.length();
   const double d = (v_center-center).length();
   if (d > r+R || d < r-R) return;
@@ -1246,7 +1246,7 @@ void Projector::drawRectSprite2dMode(double x, double y, double sizex, double si
 // Drawing methods for general (non-linear) mode
 
 void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
-                        GLint slices, GLint stacks, int orient_inside) const
+                        GLint slices, GLint stacks, int orientInside) const
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1276,7 +1276,7 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 	GLint i, j;
 	GLfloat nsign;
 
-	if (orient_inside)
+	if (orientInside)
 	{
 		nsign = -1.0;
 		t=0.0; // from inside texture is reversed
@@ -1353,14 +1353,14 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside) const
+void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside) const
 {
 	static GLdouble da, r, dz;
 	static GLfloat z, nsign;
 	static GLint i, j;
 
 	nsign = 1.0;
-	if (orient_inside)
+	if (orientInside)
 		glCullFace(GL_FRONT);
 	//nsign = -1.0;
 	//else nsign = 1.0;
@@ -1403,6 +1403,6 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 		z += dz;
 	}				/* for stacks */
 
-	if (orient_inside)
+	if (orientInside)
 		glCullFace(GL_BACK);
 }

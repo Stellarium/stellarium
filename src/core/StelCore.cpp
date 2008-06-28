@@ -113,7 +113,7 @@ void StelCore::update(double deltaTime)
 	// On the other hand it must be called after ssystem->update
 	// and panView in order to have the new observers position
 	// and not interfere with vision vector movement.
-	projection->set_modelview_matrices(	navigation->getEarthEquToEyeMat(),
+	projection->setModelviewMatrices(	navigation->getEarthEquToEyeMat(),
 	                                    navigation->getHelioToEyeMat(),
 	                                    navigation->getLocalToEyeMat(),
 	                                    navigation->getJ2000ToEyeMat());
@@ -128,12 +128,12 @@ void StelCore::update(double deltaTime)
 void StelCore::preDraw()
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	projection->set_clipping_planes(0.000001 ,50);
+	projection->setClippingPlanes(0.000001 ,50);
 
 	// Init GL viewport to current projector values
 	glViewport(projection->getViewportPosX(), projection->getViewportPosY(), projection->getViewportWidth(), projection->getViewportHeight());
 
-	projection->setCurrentFrame(Projector::FRAME_J2000);
+	projection->setCurrentFrame(Projector::FrameJ2000);
 	
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -147,5 +147,5 @@ void StelCore::preDraw()
 *************************************************************************/
 void StelCore::postDraw()
 {
-	projection->draw_viewport_shape();
+	projection->drawViewportShape();
 }

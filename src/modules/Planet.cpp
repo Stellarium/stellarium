@@ -638,8 +638,8 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 			double z_far  = 1.1*(dist + rings->get_size());
 			if (z_near < 0.0) z_near = 0.0;
 			double n,f;
-			prj->get_clipping_planes(&n,&f); // Save clipping planes
-			prj->set_clipping_planes(z_near,z_far);
+			prj->getClippingPlanes(&n,&f); // Save clipping planes
+			prj->setClippingPlanes(z_near,z_far);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			drawSphere(core,mat,screen_sz);
@@ -647,7 +647,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz)
 			rings->draw(prj,mat,screen_sz);
 			glEnable(GL_LIGHTING);
 			glDisable(GL_DEPTH_TEST);
-			prj->set_clipping_planes(n,f);  // Restore old clipping planes
+			prj->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
 		{
@@ -773,7 +773,7 @@ void Planet::drawOrbit(const Navigator * nav, const Projector* prj)
 	if(!orbitFader.getInterstate()) return;
 	if(!re.siderealPeriod) return;
 
-	prj->setCurrentFrame(Projector::FRAME_HELIO);    // 2D coordinate
+	prj->setCurrentFrame(Projector::FrameHelio);    // 2D coordinate
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -847,7 +847,7 @@ void Planet::drawTrail(const Navigator * nav, const Projector* prj)
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
-	prj->setCurrentFrame(Projector::FRAME_J2000);
+	prj->setCurrentFrame(Projector::FrameJ2000);
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);

@@ -116,14 +116,14 @@ void SkyDrawer::init()
 void SkyDrawer::update(double deltaTime)
 {
 	float fov = prj->getFov();
-	if (fov > max_fov)
+	if (fov > maxFov)
 	{
-		fov = max_fov;
+		fov = maxFov;
 	}
 	else
 	{
-		if (fov < min_fov)
-			fov = min_fov;
+		if (fov < minFov)
+			fov = minFov;
 	}
 	
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument

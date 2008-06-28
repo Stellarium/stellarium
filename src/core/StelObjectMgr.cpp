@@ -66,10 +66,10 @@ void StelObjectMgr::handleMouseClicks(QMouseEvent* event)
 
 		// Try to select object at that position
 		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-			event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
+			event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 #else
 		findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-			event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::ADD_TO_SELECTION : StelModule::REPLACE_SELECTION);
+			event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 #endif
 		// If an object was selected update informations
 		if (getWasSelected())
@@ -176,7 +176,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
-	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
+	core->getProjection()->setCurrentFrame(Projector::FrameJ2000);
 	core->getProjection()->project(v, winpos);
 	float xpos = winpos[0];
 	float ypos = winpos[1];
@@ -207,7 +207,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	core->getProjection()->setCurrentFrame(Projector::FRAME_J2000);
+	core->getProjection()->setCurrentFrame(Projector::FrameJ2000);
 	core->getProjection()->unProject(x,y,v);
 	return cleverFind(core, v);
 }
@@ -222,7 +222,7 @@ void StelObjectMgr::unSelect(void)
 	// Send the event to every StelModule
 	foreach (StelModule* iter, StelApp::getInstance().getModuleMgr().getAllModules())
 	{
-		iter->selectedObjectChangeCallBack(StelModule::REMOVE_FROM_SELECTION);
+		iter->selectedObjectChangeCallBack(StelModule::RemoveFromSelection);
 	}
 }
 

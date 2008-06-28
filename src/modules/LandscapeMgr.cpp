@@ -103,7 +103,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	Vec3f pos;
 	Vec3d xy;
 
-	prj->setCurrentFrame(Projector::FRAME_LOCAL);
+	prj->setCurrentFrame(Projector::FrameLocal);
 
 	float shift = font.getStrLen(sNorth)/2;
 

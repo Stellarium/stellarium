@@ -70,13 +70,13 @@ private:
 	const int screen_h;
 	const double original_max_fov;
 	const Vector4<GLint> original_viewport;
-	const Vec2d original_viewport_center;
-	const double original_viewport_fov_diameter;
+	const Vec2d original_viewportCenter;
+	const double original_viewportFovDiameter;
 
 	int viewport[2],viewport_texture_offset[2];
 	int viewport_w,viewport_h;
-	float viewport_center[2];
-	float viewport_fov_diameter;
+	float viewportCenter[2];
+	float viewportFovDiameter;
 
 	int texture_wh;
 
@@ -106,8 +106,8 @@ ViewportDistorterFisheyeToSphericMirror
 	: prj(prj),screen_w(screen_w),screen_h(screen_h),
 	  original_max_fov(prj->getCurrentMapping().maxFov),
 	  original_viewport(prj->getViewport()),
-	  original_viewport_center(prj->getViewportCenter()),
-	  original_viewport_fov_diameter(prj->getViewportFovDiameter()),
+	  original_viewportCenter(prj->getViewportCenter()),
+	  original_viewportFovDiameter(prj->getViewportFovDiameter()),
 	  texture_point_array(0)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
@@ -151,9 +151,9 @@ ViewportDistorterFisheyeToSphericMirror
 	{
 		viewport_h = screen_h;
 	}
-	viewport_center[0] = conf.value("spheric_mirror/viewport_center_x", 0.5*viewport_w).toDouble();
-	viewport_center[1] = conf.value("spheric_mirror/viewport_center_y", 0.5*viewport_h).toDouble();
-	viewport_fov_diameter = conf.value("spheric_mirror/viewport_fov_diameter", MY_MIN(viewport_w,viewport_h)).toDouble();
+	viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*viewport_w).toDouble();
+	viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*viewport_h).toDouble();
+	viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", MY_MIN(viewport_w,viewport_h)).toDouble();
 
 	texture_wh = 1;
 	while (texture_wh < viewport_w || texture_wh < viewport_h)
@@ -172,7 +172,7 @@ ViewportDistorterFisheyeToSphericMirror
 		viewport[1] = (screen_h-viewport_h) >> 1;
 	}
 	//qDebug() << "texture_wh: " << texture_wh;
-	//qDebug() << "viewport_fov_diameter: " << viewport_fov_diameter;
+	//qDebug() << "viewportFovDiameter: " << viewportFovDiameter;
 	//qDebug() << "screen: " << screen_w << ", " << screen_h;
 	//qDebug() << "viewport: " << viewport[0] << ", " << viewport[1] << ", "
 	//         << viewport_w << ", " << viewport_h;
@@ -181,8 +181,8 @@ ViewportDistorterFisheyeToSphericMirror
 	//         << viewport_texture_offset[1];
 	prj->setViewport(viewport[0],viewport[1],
 	                 viewport_w,viewport_h,
-	                 viewport_center[0],viewport_center[1],
-	                 viewport_fov_diameter);
+	                 viewportCenter[0],viewportCenter[1],
+	                 viewportFovDiameter);
 
 	// initialize mirror_texture:
 	glGenTextures(1, &mirror_texture);
@@ -265,7 +265,7 @@ ViewportDistorterFisheyeToSphericMirror
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
 		if (gamma < 0.0) gamma = 0.0;
 		const float view_scaling_factor
-		= 0.5 * viewport_fov_diameter
+		= 0.5 * viewportFovDiameter
 		  / prj->getCurrentMapping().fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
 		texture_point_array = new TexturePoint[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
@@ -287,15 +287,15 @@ ViewportDistorterFisheyeToSphericMirror
 				              (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
 				              v,vX,vY);
 				rc &= prj->getCurrentMapping().forward(v);
-				const float x = viewport_center[0] + v[0] * view_scaling_factor;
-				const float y = viewport_center[1] + v[1] * view_scaling_factor;
+				const float x = viewportCenter[0] + v[0] * view_scaling_factor;
+				const float y = viewportCenter[1] + v[1] * view_scaling_factor;
 				vertex_point.h = rc ? (vX^vY).length() : 0.0;
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping
 				// artefacts by specifying a viewport size a little less then
 				// (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
-				// of 512*512 and viewport_fov_diameter=512 you will get clamping
+				// of 512*512 and viewportFovDiameter=512 you will get clamping
 				// artefacts in the 3 otherwise black hills on the bottom of the image.
 
 				//      if (x < 0.f) {x=0.f;vertex_point.h=0;}
@@ -426,8 +426,8 @@ ViewportDistorterFisheyeToSphericMirror::
 	prj->setMaxFov(original_max_fov);
 	prj->setViewport(original_viewport[0],original_viewport[1],
 	                 original_viewport[2],original_viewport[3],
-	                 original_viewport_center[0],original_viewport_center[1],
-	                 original_viewport_fov_diameter);
+	                 original_viewportCenter[0],original_viewportCenter[1],
+	                 original_viewportFovDiameter);
 }
 
 

@@ -74,7 +74,7 @@ public:
 	virtual void updateI18n();
 	
 	//! Called when a new object is selected.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
 	//! Load a color scheme from a configration object
 	//! @param conf the configuration object containing the color scheme
@@ -260,7 +260,7 @@ private:
 	StelObject* selected;
 
 	bool flagMoonScale;
-	float moonScale;	// Moon scale value
+	float moonScale;                 // Moon scale value
 
 	double fontSize;
 	SFont& planet_name_font;
@@ -268,7 +268,7 @@ private:
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
 	
-	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
+	vector<Planet*> system_planets;  // Vector containing all the bodies of the system
 	
 	// draw earth shadow on moon for lunar eclipses
 	void draw_earth_shadow(const Navigator * nav, Projector * prj);  
@@ -279,21 +279,21 @@ private:
 		bool operator()(Planet* p1, Planet* p2);
 	};
 
-	STextureSP tex_earth_shadow;  // for lunar eclipses
+	STextureSP tex_earth_shadow;     // for lunar eclipses
 
 	// Master settings
 	bool flagOrbits;
 	bool flag_light_travel_time;
 	
-	STextureSP texPointer;			// The selection pointer texture
+	STextureSP texPointer;           // The selection pointer texture
 	
 	bool flagShow;
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	//////////////////////////////////////////////////////////////////////////////////
-	const Planet* lastHomePlanet;          // for tracking home planet changes for trails
-	vector<Orbit*> orbits;// Pointers on created elliptical orbits
+	const Planet* lastHomePlanet;    // for tracking home planet changes for trails
+	vector<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 
 

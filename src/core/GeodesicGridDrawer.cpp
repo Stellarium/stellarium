@@ -54,7 +54,7 @@ double GeodesicGridDrawer::draw(StelCore* core, int max_search_level)
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	prj->setCurrentFrame(Projector::FRAME_J2000);	// set 2D coordinate
+	prj->setCurrentFrame(Projector::FrameJ2000);	// set 2D coordinate
 	glColor4f(0.2,0.3,0.2,1);
 	
 	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;

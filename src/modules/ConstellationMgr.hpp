@@ -74,7 +74,7 @@ public:
 	//! The selected objects changed, check if some stars are selected and display the 
 	//! matching constellations if isolate_selected mode is activated.
 	//! @param added not used at present (?)
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::REPLACE_SELECTION);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::ReplaceSelection);
 	
 	//! Load a color scheme from a configration object
 	//! @param conf the configuration object containing the color scheme

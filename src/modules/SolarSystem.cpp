@@ -133,7 +133,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getObsJ2000Pos(nav);
 		Vec3d screenpos;
-		prj->setCurrentFrame(Projector::FRAME_J2000);
+		prj->setCurrentFrame(Projector::FrameJ2000);
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos)) return;
 	
@@ -671,9 +671,9 @@ void SolarSystem::loadPlanets()
 
 
 		if (pd.value(secname+"/rings", 0).toBool()) {
-			const double r_min = pd.value(secname+"/ring_inner_size").toDouble()/AU;
-			const double r_max = pd.value(secname+"/ring_outer_size").toDouble()/AU;
-			Ring *r = new Ring(r_min,r_max,pd.value(secname+"/tex_ring").toString());
+			const double rMin = pd.value(secname+"/ring_inner_size").toDouble()/AU;
+			const double rMax = pd.value(secname+"/ring_outer_size").toDouble()/AU;
+			Ring *r = new Ring(rMin,rMax,pd.value(secname+"/tex_ring").toString());
 			p->setRings(r);
 		}
 
@@ -1073,7 +1073,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-	prj->setCurrentFrame(Projector::FRAME_HELIO);
+	prj->setCurrentFrame(Projector::FrameHelio);
 	// shadow radial texture
 	tex_earth_shadow->bind();
 
