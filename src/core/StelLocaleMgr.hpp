@@ -77,10 +77,10 @@ public:
 	//! - "12h"
 	//!
 	//! These values correspond to the similarly named values in the STimeFormat enum.
-	QString getTimeFormatStr(void) const {return sTimeFormatToString(time_format);}
+	QString getTimeFormatStr(void) const {return sTimeFormatToString(timeFormat);}
 	//! Set the time format from a format string.
 	//! @tf value values are the same as the return values for getTimeFormatStr().
-	void setTimeFormatStr(const QString& tf) {time_format=stringToSTimeFormat(tf);}
+	void setTimeFormatStr(const QString& tf) {timeFormat=stringToSTimeFormat(tf);}
 	//! Get the format string which describes the current date format.
 	//! Valid values:
 	//! - "mmddyyyy"
@@ -89,13 +89,13 @@ public:
 	//! - "yyyymmdd"
 	//!
 	//! These values correspond to the similarly named values in the SDateFormat enum.
-	QString getDateFormatStr(void) const {return sDateFormatToString(date_format);}
-	void setDateFormatStr(const QString& df) {date_format=stringToSDateFormat(df);}
+	QString getDateFormatStr(void) const {return sDateFormatToString(dateFormat);}
+	void setDateFormatStr(const QString& df) {dateFormat=stringToSDateFormat(df);}
 	
 	//! Set the time zone.
-	//! @param _time_zone the time zone string as parsed from the TZ environment 
+	//! @param tZ the time zone string as parsed from the TZ environment 
 	//! varibale by the tzset function from libc.
-	void setCustomTimezone(QString _time_zone) { setCustomTzName(_time_zone); }
+	void setCustomTimezone(QString tZ) { setCustomTzName(tZ); }
 
 	//! @enum STimeFormat
 	//! The time display format.
@@ -163,8 +163,8 @@ private:
 	Translator skyTranslator;
 	
 	// Date and time variables
-	STimeFormat time_format;
-	SDateFormat date_format;
+	STimeFormat timeFormat;
+	SDateFormat dateFormat;
 	STzFormat timeZoneMode;		// Can be the system default or a user defined value
 	
 	QString customTzName;			// Something like "Europe/Paris"

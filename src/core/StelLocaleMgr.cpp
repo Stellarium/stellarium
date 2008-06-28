@@ -45,8 +45,8 @@ void StelLocaleMgr::init()
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
 	setAppLanguage(conf->value("localization/app_locale", "system").toString());
 	
-	time_format = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
-	date_format = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
+	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
+	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
 	// time_zone used to be in init_location section of config,
 	// so use that as fallback when reading config - Rob
 	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
@@ -162,7 +162,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 }
 	
 
-// Return a string with the local date formated according to the date_format variable
+// Return a string with the local date formated according to the dateFormat variable
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	{
 	int year, month, day, dayOfWeek;
@@ -178,7 +178,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = (int)floor(fmod(JD, 7));
 	QString str;
-	switch (date_format)
+	switch (dateFormat)
 	{
 		case SDateMMDDYYYY:
 			str = QString("%1-%2-%3").arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
@@ -200,7 +200,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 }
 
 // Return a string with the local time (according to timeZoneMode variable) formated
-// according to the time_format variable
+// according to the timeFormat variable
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
 	int hour, minute, second;
@@ -217,7 +217,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	
 	QTime t(hour, minute, second);
 
-	switch (time_format)
+	switch (timeFormat)
 	{
 		case STimeSystemDefault:
 		return t.toString();
