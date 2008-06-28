@@ -48,10 +48,10 @@ void testContains()
 	// polygons-point intersect
 	double deg5 = 5.*M_PI/180.;
 	double deg2 = 2.*M_PI/180.;
-	StelUtils::sphe_to_rect(-deg5, -deg5, v0);
-	StelUtils::sphe_to_rect(+deg5, -deg5, v1);
-	StelUtils::sphe_to_rect(+deg5, +deg5, v2);
-	StelUtils::sphe_to_rect(-deg5, +deg5, v3);
+	StelUtils::spheToRect(-deg5, -deg5, v0);
+	StelUtils::spheToRect(+deg5, -deg5, v1);
+	StelUtils::spheToRect(+deg5, +deg5, v2);
+	StelUtils::spheToRect(-deg5, +deg5, v3);
 	StelGeom::ConvexPolygon square1(v3, v2, v1, v0);
 	_assert(contains(square1, p0), "Square contains point failure");
 	_assert(!contains(square1, p1), "Square not contains point failure");
@@ -59,10 +59,10 @@ void testContains()
 	_assert(!intersect(square1, p1), "Square not intersect point failure");
 	
 	// polygons-polygons intersect
-	StelUtils::sphe_to_rect(-deg2, -deg2, v0);
-	StelUtils::sphe_to_rect(+deg2, -deg2, v1);
-	StelUtils::sphe_to_rect(+deg2, +deg2, v2);
-	StelUtils::sphe_to_rect(-deg2, +deg2, v3);
+	StelUtils::spheToRect(-deg2, -deg2, v0);
+	StelUtils::spheToRect(+deg2, -deg2, v1);
+	StelUtils::spheToRect(+deg2, +deg2, v2);
+	StelUtils::spheToRect(-deg2, +deg2, v3);
 	StelGeom::ConvexPolygon square2(v3, v2, v1, v0);
 	_assert(contains(square1, square2), "Square contains square failure");
 	_assert(!contains(square2, square1), "Square not contains square failure");
@@ -70,15 +70,15 @@ void testContains()
 	_assert(intersect(square2, square1), "Square intersect square failure");
 	
 	// Test the tricky case where 2 polygons intersect without having point within each other
-	StelUtils::sphe_to_rect(-deg5, -deg2, v0);
-	StelUtils::sphe_to_rect(+deg5, -deg2, v1);
-	StelUtils::sphe_to_rect(+deg5, +deg2, v2);
-	StelUtils::sphe_to_rect(-deg5, +deg2, v3);
+	StelUtils::spheToRect(-deg5, -deg2, v0);
+	StelUtils::spheToRect(+deg5, -deg2, v1);
+	StelUtils::spheToRect(+deg5, +deg2, v2);
+	StelUtils::spheToRect(-deg5, +deg2, v3);
 	StelGeom::ConvexPolygon squareHoriz(v3, v2, v1, v0);
-	StelUtils::sphe_to_rect(-deg2, -deg5, v0);
-	StelUtils::sphe_to_rect(+deg2, -deg5, v1);
-	StelUtils::sphe_to_rect(+deg2, +deg5, v2);
-	StelUtils::sphe_to_rect(-deg2, +deg5, v3);
+	StelUtils::spheToRect(-deg2, -deg5, v0);
+	StelUtils::spheToRect(+deg2, -deg5, v1);
+	StelUtils::spheToRect(+deg2, +deg5, v2);
+	StelUtils::spheToRect(-deg2, +deg5, v3);
 	StelGeom::ConvexPolygon squareVerti(v3, v2, v1, v0);
 	_assert(!contains(squareHoriz, squareVerti), "Special intersect contains failure");
 	_assert(!contains(squareVerti, squareHoriz), "Special intersect contains failure");

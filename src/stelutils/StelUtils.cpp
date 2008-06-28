@@ -248,7 +248,7 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 }
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const string& s)
+Vec3f strToVec3f(const string& s)
 {
 	float x, y, z;
 	if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
@@ -256,26 +256,26 @@ Vec3f str_to_vec3f(const string& s)
 }
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const QStringList& s)
+Vec3f strToVec3f(const QStringList& s)
 {
 	if (s.size()<3)
 		 return Vec3f(0.f,0.f,0.f);
 	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
 }
 
-Vec3f str_to_vec3f(const QString& s)
+Vec3f strToVec3f(const QString& s)
 {
-	return str_to_vec3f(s.toStdString());
+	return strToVec3f(s.toStdString());
 }
 
-Vec3f str_to_vec3f(const char* s)
+Vec3f strToVec3f(const char* s)
 {
-	return str_to_vec3f(string(s));
+	return strToVec3f(string(s));
 }
 
 
 // Obtains a string from a Vec3f with the form x,y,z
-string vec3f_to_str(const Vec3f& v)
+string vec3fToStr(const Vec3f& v)
 {
 	ostringstream os;
 	os << v[0] << "," << v[1] << "," << v[2];
@@ -345,40 +345,40 @@ long int stringToLong(const string& str)
 	return integer;
 }
 
-void sphe_to_rect(double lng, double lat, Vec3d& v)
+void spheToRect(double lng, double lat, Vec3d& v)
 {
 	const double cosLat = cos(lat);
 	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
-void sphe_to_rect(float lng, float lat, Vec3f& v)
+void spheToRect(float lng, float lat, Vec3f& v)
 {
 	const double cosLat = cos(lat);
 	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
-void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
+void rectToSphe(double *lng, double *lat, const Vec3d& v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
 	*lng = atan2(v[1],v[0]);
 }
 
-void rect_to_sphe(float *lng, float *lat, const Vec3d& v)
+void rectToSphe(float *lng, float *lat, const Vec3d& v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
 	*lng = atan2(v[1],v[0]);
 }
 
-void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
+void rectToSphe(float *lng, float *lat, const Vec3f& v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
 	*lng = atan2(v[1],v[0]);
 }
 
-void rect_to_sphe(double *lng, double *lat, const Vec3f& v)
+void rectToSphe(double *lng, double *lat, const Vec3f& v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
@@ -406,7 +406,7 @@ static void skipwhite(char **s)
 		++(*s);
 }	
 
-double get_dec_angle(const string& str)
+double getDecAngle(const string& str)
 {
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
@@ -506,14 +506,14 @@ double get_dec_angle(const string& str)
 	return (pos);
 }
 
-double get_dec_angle(const QString& str)
+double getDecAngle(const QString& str)
 {
-	return get_dec_angle(str.toStdString());
+	return getDecAngle(str.toStdString());
 }
 
-double get_dec_angle(const char* str)
+double getDecAngle(const char* str)
 {
-	return get_dec_angle(string(str));
+	return getDecAngle(string(str));
 }
 
 bool checkAbsolutePath(const string& fileName)

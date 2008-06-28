@@ -128,7 +128,7 @@ void dateRoundTrip()
 		                         t1s[i]) == 0,
 		        QString("%1").arg(i) + ": " +StelUtils::jdToIsoString(t1d[i]) + " ne " + t1s[i] + " (" + QDate::fromJulianDay((int)floor(t1d[i])).toString() + ")");
 
-		fromString = TextEntryDateTimeValidator::get_ints_from_ISO8601_string(t1s[i]);
+		fromString = TextEntryDateTimeValidator::getIntsFromISO8601String(t1s[i]);
 		success = StelUtils::getJDFromDate( &jd, 
 						    fromString[0],
 						    fromString[1],

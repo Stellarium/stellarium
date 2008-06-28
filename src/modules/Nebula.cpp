@@ -101,14 +101,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
 	double tempDE, tempRA;
-	StelUtils::rect_to_sphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
+	StelUtils::rectToSphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
 	if (flags&RaDec)
 		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
 	if (flags&AltAzi)
 	{
 		// calculate alt az
-		StelUtils::rect_to_sphe(&tempRA, &tempDE, getAltAzPos(nav));
+		StelUtils::rectToSphe(&tempRA, &tempDE, getAltAzPos(nav));
 		tempRA = 3.*M_PI - tempRA;  // N is zero, E is 90 degrees
 		if(tempRA > M_PI*2) tempRA -= M_PI*2;	
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
@@ -220,7 +220,7 @@ bool Nebula::readNGC(char *recordstr)
 	DecRad*=M_PI/180.;    // Convert from deg to rad
 
 	// Calc the Cartesian coord with RA and DE
-	StelUtils::sphe_to_rect(RaRad,DecRad,XYZ);
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
 
 	sscanf(&recordstr[47],"%f",&mag);
 	if (mag < 1) mag = 99;

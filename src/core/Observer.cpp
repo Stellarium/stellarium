@@ -231,8 +231,8 @@ void Observer::load(QSettings* conf, const QString& section)
 	// qDebug("(home_planet should be: \"%s\" is: \"%s\") ",
 	//         conf.get_str(section, "home_planet").c_str(),
 	//         planet->getEnglishName().c_str());
-	latitude  = StelUtils::get_dec_angle(conf->value(section+"/latitude").toString());
-	longitude = StelUtils::get_dec_angle(conf->value(section+"/longitude").toString());
+	latitude  = StelUtils::getDecAngle(conf->value(section+"/latitude").toString());
+	longitude = StelUtils::getDecAngle(conf->value(section+"/longitude").toString());
 	altitude = conf->value(section+"/altitude",0).toInt();
 }
 

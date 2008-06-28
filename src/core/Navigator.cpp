@@ -77,7 +77,7 @@ void Navigator::init()
 		}
 	}
 	
-	initViewPos = StelUtils::str_to_vec3f(conf->value("navigation/init_view_pos").toString());
+	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	setLocalVision(initViewPos);
 	
 	// Navigation section

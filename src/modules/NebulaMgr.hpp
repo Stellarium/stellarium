@@ -125,7 +125,7 @@ public slots:
 	float getCircleScale(void) const;
 	
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
-	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
+	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 	
 	//! Set flag for displaying Nebulae Hints.
 	void setFlagHints(bool b) {hintsFader=b;}

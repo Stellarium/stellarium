@@ -210,7 +210,7 @@ void StarMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLabelColor(StelUtils::str_to_vec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
+	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
 /***************************************************************************

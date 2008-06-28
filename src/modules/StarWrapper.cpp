@@ -36,11 +36,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 {
 	const Navigator* nav = core->getNavigation();
 	double dec_j2000, ra_j2000;
-	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
 	double dec_equ, ra_equ;
-	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
+	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	double dec_sideral, ra_sideral;
-	StelUtils::rect_to_sphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
+	StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
 	QString str;
 	QTextStream oss(&str);
 
@@ -57,7 +57,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rect_to_sphe(&az,&alt,getAltAzPos(nav));
+		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
 		az = 3*M_PI - az;  // N is zero, E is 90 degrees
 		if(az > M_PI*2) az -= M_PI*2;    
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
@@ -89,9 +89,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 {
 	const Navigator* nav = core->getNavigation();
 	double dec_j2000, ra_j2000;
-	StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
 	double dec_equ, ra_equ;
-	StelUtils::rect_to_sphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
+	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	QString str;
 	QTextStream oss(&str);
 	if (!(flags&PlainText))
@@ -139,13 +139,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
 		                                          StelUtils::radToDmsStr(dec_equ)) << "<br>";
 	double dec_sideral, ra_sideral;
-	StelUtils::rect_to_sphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
+	StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
 	oss << q_("Local sideral: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
 	if (flags&AltAzi)
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rect_to_sphe(&az,&alt,getAltAzPos(nav));
+		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
 		az = 3*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;    

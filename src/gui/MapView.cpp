@@ -80,8 +80,8 @@ City City::fromLine(const QString& line)
 	ret.name = tokens[0]; 
 	ret.state = tokens[1];
 	ret.country = tokens[2];
-	ret.latitude = StelUtils::get_dec_angle(tokens[3]);
-	ret.longitude = StelUtils::get_dec_angle(tokens[4]);
+	ret.latitude = StelUtils::getDecAngle(tokens[3]);
+	ret.longitude = StelUtils::getDecAngle(tokens[4]);
 	ret.altitude = tokens[5].toInt();
 	ret.zone = tokens[6].toFloat();
 	ret.showatzoom = tokens[7].toInt();

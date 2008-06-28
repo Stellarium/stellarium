@@ -478,7 +478,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::sphe_to_rect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
+			StelUtils::spheToRect(vl.at(0).toDouble(&ok)*M_PI/180., vl.at(1).toDouble(&ok)*M_PI/180., v);
 			if (!ok)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);

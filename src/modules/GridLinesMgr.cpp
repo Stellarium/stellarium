@@ -49,7 +49,7 @@ public:
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
 	void set_top_transparancy(bool b) { transparent_top= b; }
@@ -82,7 +82,7 @@ public:
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
 	void setFontSize(double newSize);
@@ -136,7 +136,7 @@ static double getLatFrom2dPos(const Projector* prj, const Vec2d& p)
 //! This is used to get rid of the longitude discontinuity in lon=0 
 void rectToSpheType2(double& lon, double& lat, const Vec3d& v)
 {
-	StelUtils::rect_to_sphe(&lon, &lat, v);
+	StelUtils::rectToSphe(&lon, &lat, v);
 	// lon is now between -pi and pi, we want it between 0 and pi, like a latitude
 	// lat is now between -pi/2 and pi/2, we want it between 0 and 2*pi like a longitude
 	lat += M_PI/2;
@@ -161,7 +161,7 @@ void spheToRectType2(double lon, double lat, Vec3d& v)
 		lon = -lon;
 	}
 	lat -= M_PI/2;
-	StelUtils::sphe_to_rect(lon, lat, v);
+	StelUtils::spheToRect(lon, lat, v);
 }
 
 void spheToRectLat1802(double lon, double lat, Vec3d& v)
@@ -174,7 +174,7 @@ void spheToRectLat1802(double lon, double lat, Vec3d& v)
 		lon += M_PI;
 	}
 	lat -= M_PI/2;
-	StelUtils::sphe_to_rect(lon, lat, v);
+	StelUtils::spheToRect(lon, lat, v);
 }
 
 //! Return a special latitude in radian [0;2*pi] for a position given in the viewport
@@ -203,7 +203,7 @@ static Vec3d get2dPosFromSpherical(const Projector* prj, double lon, double lat)
 {
 	Vec3d v;
 	Vec3d win;
-	StelUtils::sphe_to_rect(lon, lat, v);
+	StelUtils::spheToRect(lon, lat, v);
 	prj->project(v, win);
 	return win;
 }
@@ -364,11 +364,11 @@ void SkyGrid::draw(const Projector* prj) const
 	Vec3d centerV;
 	double lon0, lat0, lon1, lat1, lon2, lat2;
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
-	StelUtils::rect_to_sphe(&lon0, &lat0, centerV);
+	StelUtils::rectToSphe(&lon0, &lat0, centerV);
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2+1, prj->getViewportPosY()+prj->getViewportHeight()/2, centerV);
-	StelUtils::rect_to_sphe(&lon1, &lat1, centerV);
+	StelUtils::rectToSphe(&lon1, &lat1, centerV);
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
-	StelUtils::rect_to_sphe(&lon2, &lat2, centerV);
+	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 	
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionParallel(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : getClosestResolutionMeridian(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))));
@@ -405,7 +405,7 @@ void SkyGrid::draw(const Projector* prj) const
 			for (unsigned int i=0;i<iter->second.size()/2;++i)
 			{
 				double lon = *ii;
-				StelUtils::sphe_to_rect(lon, (double)iter->first/RADIAN_MAS, vv);
+				StelUtils::spheToRect(lon, (double)iter->first/RADIAN_MAS, vv);
 				++ii;
 				if (ii==iter->second.end())
 					size = *iter->second.begin() - lon;
@@ -670,12 +670,12 @@ void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setColorEquatorGrid(StelUtils::str_to_vec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
-	setColorEquatorJ2000Grid(StelUtils::str_to_vec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
-	setColorAzimutalGrid(StelUtils::str_to_vec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
-	setColorEquatorLine(StelUtils::str_to_vec3f(conf->value(section+"/equator_color", defaultColor).toString()));
-	setColorEclipticLine(StelUtils::str_to_vec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
-	setColorMeridianLine(StelUtils::str_to_vec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
+	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
+	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
+	setColorAzimutalGrid(StelUtils::strToVec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
+	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
+	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
+	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 }
 
 //! Set flag for displaying Azimutal Grid

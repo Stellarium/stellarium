@@ -42,7 +42,7 @@ public:
 	QValidator::State validate(QString & input, int & pos) const;
 
 	//! use RegExp for final to parse a QString to six ints, use in the event QDateTime cannot handle the date.
-	static vector<int> get_ints_from_ISO8601_string(const QString &);
+	static vector<int> getIntsFromISO8601String(const QString &);
 private:
 	QRegExp final, badEpoch, editingYear, editingMonth, editingDay, editingHour, editingMinute, editingSecond;
 };
