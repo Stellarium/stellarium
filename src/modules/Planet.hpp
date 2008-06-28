@@ -69,8 +69,8 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(const Projector* prj,const Mat4d& mat,double screen_sz);
-	double get_size(void) const {return radiusMax;}
+	void draw(const Projector* prj,const Mat4d& mat,double screenSz);
+	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;
 	const double radiusMax;
@@ -92,7 +92,7 @@ public:
 	       float albedo,
 	       const QString& texMapName,
 	       const QString& texHaloName,
-	       posFuncType _coord_func,
+	       posFuncType _coordFunc,
 	       OsulatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden, 
@@ -158,12 +158,12 @@ public:
 	void computeTransMatrix(double date);
 
 	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
-	double get_phase(Vec3d obsPos) const;
+	double getPhase(Vec3d obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 				
 	// Set the orbital elements
-	void set_rotation_elements(float _period, float _offset, double _epoch,
+	void setRotationElements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
 	double getRotObliquity(void) const {return re.obliquity;}
@@ -176,25 +176,25 @@ public:
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
-	double computeDistance(const Vec3d& obs_helio_pos);
+	double computeDistance(const Vec3d& obsHelioPos);
 	double getDistance(void) const {return distance;}
 
 	void setRings(Ring* r) {rings = r;}
 
-	void setSphereScale(float s) {sphere_scale = s;}
-	float getSphereScale(void) const {return sphere_scale;}
+	void setSphereScale(float s) {sphereScale = s;}
+	float getSphereScale(void) const {return sphereScale;}
 
 	const Planet *getParent(void) const {return parent;}
 
-	static void setFont(SFont* f) {planet_name_font = f;}
+	static void setFont(SFont* f) {planetNameFont = f;}
 	
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
 	void update(int deltaTime);
 	
-	void setFlagHints(bool b){hint_fader = b;}
-	bool getFlagHints(void) const {return hint_fader;}
+	void setFlagHints(bool b){hintFader = b;}
+	bool getFlagHints(void) const {return hintFader;}
 	
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
@@ -225,7 +225,7 @@ public:
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
 	bool getFlagOrbits(void) const {return orbitFader;}	
-	static void set_orbitColor(const Vec3f& oc) {orbitColor = oc;}
+	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 	// draw orbital path of Planet
 	void drawOrbit(const Navigator * nav, const Projector* prj);
@@ -245,10 +245,10 @@ protected:
 	QString getSkyLabel(const Navigator * nav) const;
 	
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, const Mat4d& mat, float screen_sz);
+	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);
 	
 	// Draw the 3D sphere
-	void drawSphere(StelCore* core, const Mat4d& mat, float screen_sz);
+	void drawSphere(StelCore* core, const Mat4d& mat, float screenSz);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core);
@@ -260,29 +260,29 @@ protected:
 	RotationElements re;            // Rotation param
 	double radius;                  // Planet radius in UA
 	double oneMinusOblateness;      // (polar radius)/(equatorial radius)
-	Vec3d ecliptic_pos;             // Position in UA in the rectangular ecliptic coordinate system
+	Vec3d eclipticPos;             // Position in UA in the rectangular ecliptic coordinate system
 	                                // centered on the parent Planet
 	Vec3d screenPos;                // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;        // The position of this planet in the previous frame.
 	Vec3f color;
 	float albedo;                   // Planet albedo
-	Mat4d rot_local_to_parent;
-	float axis_rotation;            // Rotation angle of the Planet on it's axis
-	STextureSP tex_map;             // Planet map texture
+	Mat4d rotLocalToParent;
+	float axisRotation;            // Rotation angle of the Planet on it's axis
+	STextureSP texMap;             // Planet map texture
 	Ring* rings;                    // Planet rings
 	double distance;                // Temporary variable used to store the distance to a given point
 	                                // it is used for sorting while drawing
-	float sphere_scale;             // Artificial scaling for better viewing
+	float sphereScale;             // Artificial scaling for better viewing
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
-	posFuncType coord_func;
+	posFuncType coordFunc;
 	OsulatingFunctType *const osculatingFunc;
 	const Planet *parent;           // Planet parent i.e. sun for earth
 	list<Planet *> satellites;      // satellites of the Planet
-	static SFont* planet_name_font; // Font for names
+	static SFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
 	static STextureSP hintCircleTex;
-	LinearFader hint_fader;
+	LinearFader hintFader;
 	LinearFader labelsFader;        // Store the current state of the label for this planet
 	bool flagLabels;                // Define whether labels should be displayed
 	bool hidden;                    // useful for fake planets used as observation 

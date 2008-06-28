@@ -44,9 +44,9 @@ public:
                     double meanAnomalyAtEpoch,
                     double period,
                     double epoch, // = 2451545.0,
-                    double parent_rot_obliquity, // = 0.0,
-                    double parent_rot_ascendingnode, // = 0.0
-					double parent_rot_J2000_longitude  // = 0.0
+                    double parentRotObliquity, // = 0.0,
+                    double parentRotAscendingnode, // = 0.0
+					double parentRotJ2000Longitude  // = 0.0
                     );
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
@@ -57,7 +57,7 @@ public:
       // given in "dynamical equinox and ecliptic J2000"
       // which is the reference frame for VSOP87
       // In order to rotate to VSOP87
-      // parent_rot_obliquity and parent_rot_ascendingnode must be supplied.
+      // parentRotObliquity and parentRotAscendingnode must be supplied.
     void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
 
       // Original one
@@ -78,22 +78,22 @@ private:
     double meanAnomalyAtEpoch;
     double period;
     double epoch;
-    double rotate_to_vsop87[9];
+    double rotateToVsop87[9];
 };
 
 
 class CometOrbit : public Orbit {
 public:
-  CometOrbit(double pericenter_distance,
+  CometOrbit(double pericenterDistance,
              double eccentricity,
              double inclination,
              double ascendingNode,
-             double arg_of_perhelion,
-             double time_at_perihelion,
-             double mean_motion,
-             double parent_rot_obliquity,
-             double parent_rot_ascendingnode,
-             double parent_rot_J2000_longitude);
+             double argOfPerhelion,
+             double timeAtPerihelion,
+             double meanMotion,
+             double parentRotObliquity,
+             double parentRotAscendingnode,
+             double parentRotJ2000Longitude);
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
   void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
@@ -105,7 +105,7 @@ private:
   const double o;
   const double t0;
   const double n;
-  double rotate_to_vsop87[9];
+  double rotateToVsop87[9];
 };
 
 

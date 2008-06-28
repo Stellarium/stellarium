@@ -75,8 +75,8 @@ public slots:
 private:
 	std::vector<Meteor*> active;		// Vector containing all active meteors
 	int ZHR;
-	int max_velocity;
-	double zhr_to_wsr;  // factor to convert from zhr to whole earth per second rate
+	int maxVelocity;
+	double zhrToWsr;  // factor to convert from zhr to whole earth per second rate
 	bool flagShow;
 };
 
