@@ -92,18 +92,18 @@ void StarMgr::initTriangle(int lev,int index,
                            const Vec3d &c0,
                            const Vec3d &c1,
                            const Vec3d &c2) {
-  ZoneArrayMap::const_iterator it(zone_arrays.find(lev));
-  if (it!=zone_arrays.end()) it->second->initTriangle(index,c0,c1,c2);
+  ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
+  if (it!=zoneArrays.end()) it->second->initTriangle(index,c0,c1,c2);
 }
 
 
 StarMgr::StarMgr(void) :
-    hip_index(new HipIndexStruct[NR_OF_HIP+1]),
+    hipIndex(new HipIndexStruct[NR_OF_HIP+1]),
 	fontSize(13.),
     starFont(0)
 {
 	setObjectName("StarMgr");
-  if (hip_index == 0) {
+  if (hipIndex == 0) {
     qWarning() << "ERROR: StarMgr::StarMgr: no memory";
     exit(1);
   }
@@ -123,35 +123,35 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 
 StarMgr::~StarMgr(void) {
-  ZoneArrayMap::iterator it(zone_arrays.end());
-  while (it!=zone_arrays.begin()) {
+  ZoneArrayMap::iterator it(zoneArrays.end());
+  while (it!=zoneArrays.begin()) {
     --it;
     delete it->second;
     it->second = NULL;
   }
-  zone_arrays.clear();
-  if (hip_index) delete[] hip_index;
+  zoneArrays.clear();
+  if (hipIndex) delete[] hipIndex;
 }
 
 bool StarMgr::flagSciNames = true;
-double StarMgr::current_JDay = 0;
-map<int,QString> StarMgr::common_names_map;
-map<int,QString> StarMgr::common_names_map_i18n;
-map<QString,int> StarMgr::common_names_index;
-map<QString,int> StarMgr::common_names_index_i18n;
+double StarMgr::currentJDay = 0;
+map<int,QString> StarMgr::commonNamesMap;
+map<int,QString> StarMgr::commonNamesMapI18n;
+map<QString,int> StarMgr::commonNamesIndex;
+map<QString,int> StarMgr::commonNamesIndexI18n;
 
-map<int,QString> StarMgr::sci_names_map_i18n;
-map<QString,int> StarMgr::sci_names_index_i18n;
+map<int,QString> StarMgr::sciNamesMapI18n;
+map<QString,int> StarMgr::sciNamesIndexI18n;
 
 QString StarMgr::getCommonName(int hip) {
-  map<int,QString>::const_iterator it(common_names_map_i18n.find(hip));
-  if (it!=common_names_map_i18n.end()) return it->second;
+  map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
+  if (it!=commonNamesMapI18n.end()) return it->second;
   return "";
 }
 
 QString StarMgr::getSciName(int hip) {
-  map<int,QString>::const_iterator it(sci_names_map_i18n.find(hip));
-  if (it!=sci_names_map_i18n.end()) return it->second;
+  map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
+  if (it!=sciNamesMapI18n.end()) return it->second;
   return "";
 }
 
@@ -162,7 +162,7 @@ void StarMgr::init() {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
-	load_data();
+	loadData();
 	double fontSize = 12;
 	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
@@ -178,8 +178,8 @@ void StarMgr::init() {
 
 void StarMgr::setGrid(GeodesicGrid* geodesicGrid) {
   geodesicGrid->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-  for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
-       it!=zone_arrays.end();it++) {
+  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
+       it!=zoneArrays.end();it++) {
     it->second->scaleAxis();
   }
 }
@@ -217,7 +217,7 @@ void StarMgr::setColorScheme(const QSettings* conf, const QString& section)
  Load star catalogue data from files.
  If a file is not found, it will be skipped.
 ***************************************************************************/
-void StarMgr::load_data()
+void StarMgr::loadData()
 {
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 			
@@ -258,7 +258,7 @@ void StarMgr::load_data()
 				{
 					maxGeodesicGridLevel = z->level;
 				}
-				ZoneArray *&pos(zone_arrays[z->level]);
+				ZoneArray *&pos(zoneArrays[z->level]);
 				if (pos)
 				{
 					qDebug() << cat_file_name << ", " << z->level << ": duplicate level";
@@ -274,14 +274,14 @@ void StarMgr::load_data()
 
 	for (int i=0; i<=NR_OF_HIP; i++)
 	{
-		hip_index[i].a = 0;
-		hip_index[i].z = 0;
-		hip_index[i].s = 0;
+		hipIndex[i].a = 0;
+		hipIndex[i].z = 0;
+		hipIndex[i].s = 0;
 	}
-	for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
-	                it != zone_arrays.end();it++)
+	for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
+	                it != zoneArrays.end();it++)
 	{
-		it->second->updateHipIndex(hip_index);
+		it->second->updateHipIndex(hipIndex);
 	}
 
 	const QString cat_hip_sp_file_name = conf.value("stars/cat_hip_sp_file_name","").toString();
@@ -328,11 +328,11 @@ void StarMgr::load_data()
 }
 
 // Load common names from file 
-int StarMgr::load_common_names(const QString& commonNameFile) {
-	common_names_map.clear();
-	common_names_map_i18n.clear();
-	common_names_index.clear();
-	common_names_index_i18n.clear();
+int StarMgr::loadCommonNames(const QString& commonNameFile) {
+	commonNamesMap.clear();
+	commonNamesMapI18n.clear();
+	commonNamesIndex.clear();
+	commonNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << commonNameFile;
 	QFile cnFile(commonNameFile);
@@ -391,10 +391,10 @@ int StarMgr::load_common_names(const QString& commonNameFile) {
 			const QString commonNameI18n = q_(englishCommonName);
 			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
-			common_names_map[hip] = englishCommonName;
-			common_names_index[englishCommonName] = hip;
-			common_names_map_i18n[hip] = commonNameI18n;
-			common_names_index_i18n[commonNameI18n_cap] = hip;
+			commonNamesMap[hip] = englishCommonName;
+			commonNamesIndex[englishCommonName] = hip;
+			commonNamesMapI18n[hip] = commonNameI18n;
+			commonNamesIndexI18n[commonNameI18n_cap] = hip;
 			readOk++;
 		}
 	}
@@ -406,10 +406,10 @@ int StarMgr::load_common_names(const QString& commonNameFile) {
 
 
 // Load scientific names from file 
-void StarMgr::load_sci_names(const QString& sciNameFile)
+void StarMgr::loadSciNames(const QString& sciNameFile)
 {
-	sci_names_map_i18n.clear();
-	sci_names_index_i18n.clear();
+	sciNamesMapI18n.clear();
+	sciNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << sciNameFile;
 	QFile snFile(sciNameFile);
@@ -458,7 +458,7 @@ void StarMgr::load_sci_names(const QString& sciNameFile)
 			}
 
 			// Don't set the sci name if it's already set
-			if (sci_names_map_i18n.find(hip)!=sci_names_map_i18n.end())
+			if (sciNamesMapI18n.find(hip)!=sciNamesMapI18n.end())
 			{
 				//qWarning() << "WARNING - duplicate name for HP" << hip << "at line" 
 				//           << lineNumber << "in" << sciNameFile << "SKIPPING";
@@ -475,8 +475,8 @@ void StarMgr::load_sci_names(const QString& sciNameFile)
 
 			sci_name_i18n.replace('_',' ');
 			QString sci_name_i18n_cap = sci_name_i18n.toUpper();
-			sci_names_map_i18n[hip] = sci_name_i18n;
-			sci_names_index_i18n[sci_name_i18n_cap] = hip;
+			sciNamesMapI18n[hip] = sci_name_i18n;
+			sciNamesIndexI18n[sci_name_i18n_cap] = hip;
 			readOk++;
 		}
 	}
@@ -488,8 +488,8 @@ void StarMgr::load_sci_names(const QString& sciNameFile)
 int StarMgr::getMaxSearchLevel() const
 {
   int rval = -1;
-  for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
-       it!=zone_arrays.end();it++) {
+  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
+       it!=zoneArrays.end();it++) {
     const float mag_min = 0.001f*it->second->mag_min;
     float rcmag[2];
     if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
@@ -507,7 +507,7 @@ void StarMgr::draw(StelCore* core)
 	Projector* prj = core->getProjection();
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	
-    current_JDay = nav->getJDay();
+    currentJDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
@@ -528,7 +528,7 @@ void StarMgr::draw(StelCore* core)
     // draw all the stars of all the selected zones
     float rcmag_table[2*256];
 	
-    for (ZoneArrayMap::const_iterator it(zone_arrays.begin()); it!=zone_arrays.end();it++)
+    for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
 	{
 		const float mag_min = 0.001f*it->second->mag_min;
 		const float k = (0.001f*it->second->mag_range)/it->second->mag_steps;
@@ -597,9 +597,9 @@ assert(0);
 }
 
 // Return a stl vector containing the stars located
-// inside the lim_fov circle around position v
+// inside the limFov circle around position v
 vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
-                                           double lim_fov, // degrees
+                                           double limFov, // degrees
 										   const StelCore* core) const {
   vector<StelObjectP > result;
   if (!getFlagStars())
@@ -630,7 +630,7 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
     // now we have h0*v=h1*v=h0*h1=0.
     // construct a region with 4 corners e0,e1,e2,e3 inside which
     // all desired stars must be:
-  double f = 1.4142136 * tan(lim_fov * M_PI/180.0);
+  double f = 1.4142136 * tan(limFov * M_PI/180.0);
   h0 *= f;
   h1 *= f;
   Vec3d e0 = v + h0;
@@ -645,9 +645,9 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
     // search the triangles
  	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e3,e2,e1,e0,lastMaxSearchLevel);
     // iterate over the stars inside the triangles:
-  f = cos(lim_fov * M_PI/180.);
-  for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
-       it!=zone_arrays.end();it++) {
+  f = cos(limFov * M_PI/180.);
+  for (ZoneArrayMap::const_iterator it(zoneArrays.begin());
+       it!=zoneArrays.end();it++) {
 //qDebug() << "search inside(" << it->first << "):";
     int zone;
     for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
@@ -674,14 +674,14 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n() {
   Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-  common_names_map_i18n.clear();
-  common_names_index_i18n.clear();
-  for (map<int,QString>::iterator it(common_names_map.begin());
-       it!=common_names_map.end();it++) {
+  commonNamesMapI18n.clear();
+  commonNamesIndexI18n.clear();
+  for (map<int,QString>::iterator it(commonNamesMap.begin());
+       it!=commonNamesMap.end();it++) {
     const int i = it->first;
     const QString t(trans.qtranslate(it->second));
-    common_names_map_i18n[i] = t;
-    common_names_index_i18n[t.toUpper()] = i;
+    commonNamesMapI18n[i] = t;
+    commonNamesIndexI18n[t.toUpper()] = i;
   }
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
@@ -717,10 +717,10 @@ StelObjectP StarMgr::search(const QString& name) const
 // Search the star by HP number
 StelObjectP StarMgr::searchHP(int _HP) const {
   if (0 < _HP && _HP <= NR_OF_HIP) {
-    const Star1 *const s = hip_index[_HP].s;
+    const Star1 *const s = hipIndex[_HP].s;
     if (s) {
-      const SpecialZoneArray<Star1> *const a = hip_index[_HP].a;
-      const SpecialZoneData<Star1> *const z = hip_index[_HP].z;
+      const SpecialZoneArray<Star1> *const a = hipIndex[_HP].a;
+      const SpecialZoneData<Star1> *const z = hipIndex[_HP].z;
       return s->createStelObject(a,z);
     }
   }
@@ -739,15 +739,15 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by I18n common name
-	map<QString,int>::const_iterator it(common_names_index_i18n.find(objw));
-	if (it!=common_names_index_i18n.end()) 
+	map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
+	if (it!=commonNamesIndexI18n.end()) 
 	{
 		return searchHP(it->second);
 	}
 
 	// Search by sci name
-	it = sci_names_index_i18n.find(objw);
-	if (it!=sci_names_index_i18n.end()) 
+	it = sciNamesIndexI18n.find(objw);
+	if (it!=sciNamesIndexI18n.end()) 
 	{
 		return searchHP(it->second);
 	}
@@ -770,15 +770,15 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	/* Should we try this anyway?
 	// Search by common name
-	map<QString,int>::const_iterator it(common_names_index_i18n.find(objw));
+	map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 
-	if (it!=common_names_index_i18n.end()) {
+	if (it!=commonNamesIndexI18n.end()) {
 		return searchHP(it->second);
 	} */
 
 	// Search by sci name
-	map<QString,int>::const_iterator it = sci_names_index_i18n.find(objw);
-	if (it!=sci_names_index_i18n.end()) {
+	map<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
+	if (it!=sciNamesIndexI18n.end()) {
 		return searchHP(it->second);
 	}
 
@@ -795,8 +795,8 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (map<QString,int>::const_iterator it(common_names_index_i18n.lower_bound(objw));
-	     it!=common_names_index_i18n.end();
+	for (map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw));
+	     it!=commonNamesIndexI18n.end();
 	     it++) 
 	{
 		const QString constw(it->first.mid(0,objw.size()));
@@ -810,8 +810,8 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	// Search for sci names
-	for (map<QString,int>::const_iterator it(sci_names_index_i18n.lower_bound(objw));
-	     it!=sci_names_index_i18n.end();
+	for (map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw));
+	     it!=sciNamesIndexI18n.end();
 	     it++) 
 	{
 		const QString constw(it->first.mid(0,objw.size()));
@@ -844,7 +844,7 @@ void StarMgr::updateSkyCulture()
 	// Load culture star names in english
 	try
 	{
-		load_common_names(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
+		loadCommonNames(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
 	catch(exception& e)
 	{
@@ -854,7 +854,7 @@ void StarMgr::updateSkyCulture()
 	
 	try
 	{
-		load_sci_names(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
+		loadSciNames(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
 	}
 	catch(exception& e)
 	{
