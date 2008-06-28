@@ -404,7 +404,7 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	}
 	else
 	{
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->get_satellites_fov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()*0.9>satfov)
 			zoomTo(satfov, move_duration);
@@ -428,7 +428,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->get_satellites_fov(core->getNavigation());
+		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
@@ -438,7 +438,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->get_parent_satellites_fov((core->getNavigation()));
+		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigation()));
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
 			zoomTo(satfov, move_duration);

@@ -64,7 +64,7 @@ public:
   void set_names_fade_duration(float duration)
     {name_fader.set_duration((int) (duration * 1000.f));}
   
-  void set_label_color(const Vec3f &c) {label_color = c;}
+  void setLabelColor(const Vec3f &c) {label_color = c;}
   const Vec3f &getLabelColor(void) const {return label_color;}
 
   void set_circle_color(const Vec3f &c) {circle_color = c;}

@@ -49,20 +49,20 @@ private:
 
 ArtificialPlanet::ArtificialPlanet(const Planet &orig) : 
 		Planet(0, "", 0, 0, 0, 0, Vec3f(0,0,0), 0, "", "",
-		pos_func_type(), 0, false, true, false), dest(0),
+		posFuncType(), 0, false, true, false), dest(0),
 		orig_name(orig.getEnglishName()), orig_name_i18n(orig.getNameI18n())
 {
   radius = 0;
     // set parent = sun:
-  if (orig.get_parent()) {
-    parent = orig.get_parent();
-    while (parent->get_parent()) parent = parent->get_parent();
+  if (orig.getParent()) {
+    parent = orig.getParent();
+    while (parent->getParent()) parent = parent->getParent();
   } else {
     parent = &orig; // sun
   }
   re = orig.getRotationElements();
   setRotEquatorialToVsop87(orig.getRotEquatorialToVsop87());
-  set_heliocentric_ecliptic_pos(orig.get_heliocentric_ecliptic_pos());
+  setHeliocentricEclipticPos(orig.getHeliocentricEclipticPos());
 }
 
 void ArtificialPlanet::setDest(const Planet &dest)
@@ -132,8 +132,8 @@ Vec3d ArtificialPlanet::GetRot(const Planet *p) {
 void ArtificialPlanet::computeAverage(double f1) {
   const double f2 = 1.0 - f1;
      // position:
-  set_heliocentric_ecliptic_pos(get_heliocentric_ecliptic_pos()*f1
-                      + dest->get_heliocentric_ecliptic_pos()*f2);
+  setHeliocentricEclipticPos(getHeliocentricEclipticPos()*f1
+                      + dest->getHeliocentricEclipticPos()*f2);
 
     // 3 Euler angles:
   Vec3d a1(GetRot(this));
@@ -166,7 +166,7 @@ Observer::~Observer()
 }
 
 Vec3d Observer::getCenterVsop87Pos(void) const {
-  return getHomePlanet()->get_heliocentric_ecliptic_pos();
+  return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
 double Observer::getDistanceFromCenter(void) const {
