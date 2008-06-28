@@ -33,8 +33,8 @@
 #define JD_HOUR   0.041666666666666666666
 #define JD_DAY    1.
 
-extern const Mat4d mat_j2000_to_vsop87;
-extern const Mat4d mat_vsop87_to_j2000;
+extern const Mat4d matJ2000ToVsop87;
+extern const Mat4d matVsop87ToJ2000;
 
 class Observer;
 class StelObject;

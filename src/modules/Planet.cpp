@@ -243,7 +243,7 @@ void Planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 
 Vec3d Planet::getObsJ2000Pos(const Navigator *nav) const 
 {
-	return mat_vsop87_to_j2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHelioPos());
+	return matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - nav->getObserverHelioPos());
 }
 
 // Compute the position in the parent Planet coordinate system

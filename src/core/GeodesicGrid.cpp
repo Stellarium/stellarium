@@ -89,13 +89,13 @@ static const TopLevelTriangle icosahedron_triangles[20] =
         {{ 8, 9, 5}}  //  8
     };
 
-GeodesicGrid::GeodesicGrid(const int lev) : max_level(lev<0?0:lev), lastMaxSearchlevel(-1)
+GeodesicGrid::GeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastMaxSearchlevel(-1)
 {
-	if (max_level > 0)
+	if (maxLevel > 0)
 	{
-		triangles = new Triangle*[max_level+1];
+		triangles = new Triangle*[maxLevel+1];
 		int nr_of_triangles = 20;
-		for (int i=0;i<max_level;i++)
+		for (int i=0;i<maxLevel;i++)
 		{
 			triangles[i] = new Triangle[nr_of_triangles];
 			nr_of_triangles *= 4;
@@ -118,9 +118,9 @@ GeodesicGrid::GeodesicGrid(const int lev) : max_level(lev<0?0:lev), lastMaxSearc
 
 GeodesicGrid::~GeodesicGrid(void)
 {
-	if (max_level > 0)
+	if (maxLevel > 0)
 	{
-		for (int i=max_level-1;i>=0;i--) delete[] triangles[i];
+		for (int i=maxLevel-1;i>=0;i--) delete[] triangles[i];
 		delete[] triangles;
 	}
 	delete cacheSearchResult;
@@ -225,7 +225,7 @@ void GeodesicGrid::initTriangle(int lev,int index,
 	t.e2 = c0+c1;
 	t.e2.normalize();
 	lev++;
-	if (lev < max_level)
+	if (lev < maxLevel)
 	{
 		index *= 4;
 		initTriangle(lev,index+0,c0,t.e2,t.e1);
@@ -236,13 +236,13 @@ void GeodesicGrid::initTriangle(int lev,int index,
 }
 
 
-void GeodesicGrid::visitTriangles(int max_visit_level,
+void GeodesicGrid::visitTriangles(int maxVisitLevel,
                                   VisitFunc *func,
                                   void *context) const
 {
-	if (func && max_visit_level >= 0)
+	if (func && maxVisitLevel >= 0)
 	{
-		if (max_visit_level > max_level) max_visit_level = max_level;
+		if (maxVisitLevel > maxLevel) maxVisitLevel = maxLevel;
 		for (int i=0;i<20;i++)
 		{
 			const int *const corners = icosahedron_triangles[i].corners;
@@ -250,7 +250,7 @@ void GeodesicGrid::visitTriangles(int max_visit_level,
 			               icosahedron_corners[corners[0]],
 			               icosahedron_corners[corners[1]],
 			               icosahedron_corners[corners[2]],
-			               max_visit_level,func,context);
+			               maxVisitLevel,func,context);
 		}
 	}
 }
@@ -259,25 +259,25 @@ void GeodesicGrid::visitTriangles(int lev,int index,
                                   const Vec3d &c0,
                                   const Vec3d &c1,
                                   const Vec3d &c2,
-                                  int max_visit_level,
+                                  int maxVisitLevel,
                                   VisitFunc *func,
                                   void *context) const
 {
 	(*func)(lev,index,c0,c1,c2,context);
 	Triangle &t(triangles[lev][index]);
 	lev++;
-	if (lev <= max_visit_level)
+	if (lev <= maxVisitLevel)
 	{
 		index *= 4;
-		visitTriangles(lev,index+0,c0,t.e2,t.e1,max_visit_level,func,context);
-		visitTriangles(lev,index+1,t.e2,c1,t.e0,max_visit_level,func,context);
-		visitTriangles(lev,index+2,t.e1,t.e0,c2,max_visit_level,func,context);
-		visitTriangles(lev,index+3,t.e0,t.e1,t.e2,max_visit_level,func,context);
+		visitTriangles(lev,index+0,c0,t.e2,t.e1,maxVisitLevel,func,context);
+		visitTriangles(lev,index+1,t.e2,c1,t.e0,maxVisitLevel,func,context);
+		visitTriangles(lev,index+2,t.e1,t.e0,c2,maxVisitLevel,func,context);
+		visitTriangles(lev,index+3,t.e0,t.e1,t.e2,maxVisitLevel,func,context);
 	}
 }
 
 
-int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
+int GeodesicGrid::searchZone(const Vec3d &v,int searchLevel) const
 {
 	for (int i=0;i<20;i++)
 	{
@@ -288,7 +288,7 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
 		if (((c0^c1)*v >= 0.0) && ((c1^c2)*v >= 0.0) && ((c2^c0)*v >= 0.0))
 		{
 			// v lies inside this icosahedron triangle
-			for (int lev=0;lev<search_level;lev++)
+			for (int lev=0;lev<searchLevel;lev++)
 			{
 				Triangle &t(triangles[lev][i]);
 				i <<= 2;
@@ -324,7 +324,7 @@ void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
                                int maxSearchLevel) const
 {
 	if (maxSearchLevel < 0) maxSearchLevel = 0;
-	else if (maxSearchLevel > max_level) maxSearchLevel = max_level;
+	else if (maxSearchLevel > maxLevel) maxSearchLevel = maxLevel;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	int *halfs_used = new int[convex.size()];
 #else
@@ -362,8 +362,8 @@ void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
 
 void GeodesicGrid::searchZones(int lev,int index,
                                const StelGeom::ConvexS& convex,
-                               const int *index_of_used_half_spaces,
-                               const int half_spaces_used,
+                               const int *indexOfUsedHalfSpaces,
+                               const int halfSpacesUsed,
                                const bool *corner0_inside,
                                const bool *corner1_inside,
                                const bool *corner2_inside,
@@ -371,14 +371,14 @@ void GeodesicGrid::searchZones(int lev,int index,
                                const int maxSearchLevel) const
 {
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-	int *halfs_used = new int[half_spaces_used];
+	int *halfs_used = new int[halfSpacesUsed];
 #else
-	int halfs_used[half_spaces_used];
+	int halfs_used[halfSpacesUsed];
 #endif
 	int halfs_used_count = 0;
-	for (int h=0;h<half_spaces_used;h++)
+	for (int h=0;h<halfSpacesUsed;h++)
 	{
-		const int i = index_of_used_half_spaces[h];
+		const int i = indexOfUsedHalfSpaces[h];
 		if (!corner0_inside[i] && !corner1_inside[i] && !corner2_inside[i])
 		{
 			// totally outside this HalfSpace
@@ -521,32 +521,32 @@ void GeodesicSearchResult::search(const StelGeom::ConvexS& convex,
 void GeodesicSearchInsideIterator::reset(void)
 {
 	level = 0;
-	max_count = 1<<(max_level<<1); // 4^max_level
-	index_p = r.zones[0];
-	end_p = r.inside[0];
-	index = (*index_p) * max_count;
-	count = (index_p < end_p) ? 0 : max_count;
+	maxCount = 1<<(maxLevel<<1); // 4^maxLevel
+	indexP = r.zones[0];
+	endP = r.inside[0];
+	index = (*indexP) * maxCount;
+	count = (indexP < endP) ? 0 : maxCount;
 }
 
 int GeodesicSearchInsideIterator::next(void)
 {
-	if (count < max_count) return index+(count++);
-	index_p++;
-	if (index_p < end_p)
+	if (count < maxCount) return index+(count++);
+	indexP++;
+	if (indexP < endP)
 	{
-		index = (*index_p) * max_count;
+		index = (*indexP) * maxCount;
 		count = 1;
 		return index;
 	}
-	while (level < max_level)
+	while (level < maxLevel)
 	{
 		level++;
-		max_count >>= 2;
-		index_p = r.zones[level];
-		end_p = r.inside[level];
-		if (index_p < end_p)
+		maxCount >>= 2;
+		indexP = r.zones[level];
+		endP = r.inside[level];
+		if (indexP < endP)
 		{
-			index = (*index_p) * max_count;
+			index = (*indexP) * maxCount;
 			count = 1;
 			return index;
 		}
