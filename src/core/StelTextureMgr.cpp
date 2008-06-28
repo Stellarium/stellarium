@@ -214,7 +214,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 	{
 		switch (tex->dynamicRangeMode)
 		{
-			case (STextureTypes::LINEAR):
+			case (STextureTypes::Linear):
 			{
 				if (tex->internalFormat==1)
 				{
@@ -237,7 +237,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 				qWarning() << "Internal format: " << tex->internalFormat << " is not supported for LUMINANCE texture " << tex->fullPath;
 				return false;
 			}
-			case (STextureTypes::MINMAX_QUANTILE):
+			case (STextureTypes::MinmaxQuantile):
 			{
 				// Compute the image histogram
 				int* histo = (int*)calloc(sizeof(int), 1<<bitpix); 

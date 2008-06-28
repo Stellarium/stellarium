@@ -368,9 +368,9 @@ NewGui::~NewGui()
 *************************************************************************/
 double NewGui::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ACTION_DRAW)
+	if (actionName==StelModule::ActionDraw)
 		return 100000;
-	if (actionName==StelModule::ACTION_HANDLEMOUSEMOVES)
+	if (actionName==StelModule::ActionHandleMouseMoves)
 		return -1;
 	return 0;
 }

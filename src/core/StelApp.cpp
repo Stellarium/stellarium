@@ -230,7 +230,7 @@ void StelApp::init()
 	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	
-	time_multiplier = 1;
+	timeMultiplier = 1;
 	
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
@@ -552,12 +552,12 @@ void StelApp::update(double deltaTime)
 	}
 
 	// change time rate if needed to fast forward scripts
-	deltaTime *= time_multiplier;
+	deltaTime *= timeMultiplier;
 
 	core->update(deltaTime);
 	
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_UPDATE))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionUpdate))
 	{
 		i->update(deltaTime);
 	}
@@ -574,7 +574,7 @@ void StelApp::draw()
 	core->preDraw();
 
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_DRAW))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionDraw))
 	{
 		i->draw(core);
 	}
@@ -606,7 +606,7 @@ void StelApp::handleClick(QMouseEvent* event)
 {
 	event->setAccepted(false);
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHangleMouseClicks))
 	{
 		i->handleMouseClicks(event);
 		if (event->isAccepted())
@@ -619,7 +619,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSECLICKS))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHangleMouseClicks))
 	{
 		i->handleMouseWheel(event);
 		if (event->isAccepted())
@@ -631,7 +631,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 {
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEMOUSEMOVES))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
 		if (i->handleMouseMoves(x, y, b))
 			return;
@@ -643,7 +643,7 @@ void StelApp::handleKeys(QKeyEvent* event)
 {
 	event->setAccepted(false);
 	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ACTION_HANDLEKEYS))
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleKeys))
 	{
 		i->handleKeys(event);
 		if (event->isAccepted())

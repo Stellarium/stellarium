@@ -155,9 +155,9 @@ LandscapeMgr::~LandscapeMgr()
 *************************************************************************/
 double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ACTION_DRAW)
+	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("TelescopeMgr")->getCallOrder(actionName)+10;
-	if (actionName==StelModule::ACTION_UPDATE)
+	if (actionName==StelModule::ActionUpdate)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
 	return 0;
 }
