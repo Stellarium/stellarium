@@ -88,43 +88,43 @@ void Init3D(double i,double Omega,double o,double a1,double a2,
 }
 
 
-CometOrbit::CometOrbit(double pericenter_distance,
+CometOrbit::CometOrbit(double pericenterDistance,
                        double eccentricity,
                        double inclination,
                        double ascendingNode,
-                       double arg_of_perhelion,
-                       double time_at_perihelion,
-                       double mean_motion,
-                       double parent_rot_obliquity,
-                       double parent_rot_ascendingnode,
-                       double parent_rot_J2000_longitude)
-           :q(pericenter_distance),e(eccentricity),i(inclination),
-            Om(ascendingNode),o(arg_of_perhelion),t0(time_at_perihelion),
-            n(mean_motion) {
-  const double c_obl = cos(parent_rot_obliquity);
-  const double s_obl = sin(parent_rot_obliquity);
-  const double c_nod = cos(parent_rot_ascendingnode);
-  const double s_nod = sin(parent_rot_ascendingnode);
-  const double cj = cos(parent_rot_J2000_longitude);
-  const double sj = sin(parent_rot_J2000_longitude);
-//  rotate_to_vsop87[0] =  c_nod;
-//  rotate_to_vsop87[1] = -s_nod * c_obl;
-//  rotate_to_vsop87[2] =  s_nod * s_obl;
-//  rotate_to_vsop87[3] =  s_nod;
-//  rotate_to_vsop87[4] =  c_nod * c_obl;
-//  rotate_to_vsop87[5] = -c_nod * s_obl;
-//  rotate_to_vsop87[6] =  0.0;
-//  rotate_to_vsop87[7] =          s_obl;
-//  rotate_to_vsop87[8] =          c_obl;
-  rotate_to_vsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
-  rotate_to_vsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
-  rotate_to_vsop87[2] =           s_nod*s_obl;
-  rotate_to_vsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
-  rotate_to_vsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
-  rotate_to_vsop87[5] =          -c_nod*s_obl;
-  rotate_to_vsop87[6] =                 s_obl*sj;
-  rotate_to_vsop87[7] =                 s_obl*cj;
-  rotate_to_vsop87[8] =                 c_obl;
+                       double argOfPerhelion,
+                       double timeAtPerihelion,
+                       double meanMotion,
+                       double parentRotObliquity,
+                       double parentRotAscendingnode,
+                       double parentRotJ2000Longitude)
+           :q(pericenterDistance),e(eccentricity),i(inclination),
+            Om(ascendingNode),o(argOfPerhelion),t0(timeAtPerihelion),
+            n(meanMotion) {
+  const double c_obl = cos(parentRotObliquity);
+  const double s_obl = sin(parentRotObliquity);
+  const double c_nod = cos(parentRotAscendingnode);
+  const double s_nod = sin(parentRotAscendingnode);
+  const double cj = cos(parentRotJ2000Longitude);
+  const double sj = sin(parentRotJ2000Longitude);
+//  rotateToVsop87[0] =  c_nod;
+//  rotateToVsop87[1] = -s_nod * c_obl;
+//  rotateToVsop87[2] =  s_nod * s_obl;
+//  rotateToVsop87[3] =  s_nod;
+//  rotateToVsop87[4] =  c_nod * c_obl;
+//  rotateToVsop87[5] = -c_nod * s_obl;
+//  rotateToVsop87[6] =  0.0;
+//  rotateToVsop87[7] =          s_obl;
+//  rotateToVsop87[8] =          c_obl;
+  rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
+  rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
+  rotateToVsop87[2] =           s_nod*s_obl;
+  rotateToVsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
+  rotateToVsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
+  rotateToVsop87[5] =          -c_nod*s_obl;
+  rotateToVsop87[6] =                 s_obl*sj;
+  rotateToVsop87[7] =                 s_obl*cj;
+  rotateToVsop87[8] =                 c_obl;
 }
 
 void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
@@ -135,9 +135,9 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
   else InitPar(q,n,JD,a1,a2);
   double p0,p1,p2;
   Init3D(i,Om,o,a1,a2,p0,p1,p2);
-  v[0] = rotate_to_vsop87[0]*p0 + rotate_to_vsop87[1]*p1 + rotate_to_vsop87[2]*p2;
-  v[1] = rotate_to_vsop87[3]*p0 + rotate_to_vsop87[4]*p1 + rotate_to_vsop87[5]*p2;
-  v[2] = rotate_to_vsop87[6]*p0 + rotate_to_vsop87[7]*p1 + rotate_to_vsop87[8]*p2;
+  v[0] = rotateToVsop87[0]*p0 + rotateToVsop87[1]*p1 + rotateToVsop87[2]*p2;
+  v[1] = rotateToVsop87[3]*p0 + rotateToVsop87[4]*p1 + rotateToVsop87[5]*p2;
+  v[2] = rotateToVsop87[6]*p0 + rotateToVsop87[7]*p1 + rotateToVsop87[8]*p2;
 }
 
 
@@ -150,9 +150,9 @@ EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
                                  double meanAnomalyAtEpoch,
                                  double period,
                                  double epoch,
-                                 double parent_rot_obliquity,
-                                 double parent_rot_ascendingnode,
-								 double parent_rot_J2000_longitude) :
+                                 double parentRotObliquity,
+                                 double parentRotAscendingnode,
+								 double parentRotJ2000Longitude) :
 
     pericenterDistance(pericenterDistance),
     eccentricity(eccentricity),
@@ -164,22 +164,22 @@ EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
     epoch(epoch)
 {
 
-  const double c_obl = cos(parent_rot_obliquity);
-  const double s_obl = sin(parent_rot_obliquity);
-  const double c_nod = cos(parent_rot_ascendingnode);
-  const double s_nod = sin(parent_rot_ascendingnode);
-  const double cj = cos(parent_rot_J2000_longitude);
-  const double sj = sin(parent_rot_J2000_longitude);
+  const double c_obl = cos(parentRotObliquity);
+  const double s_obl = sin(parentRotObliquity);
+  const double c_nod = cos(parentRotAscendingnode);
+  const double s_nod = sin(parentRotAscendingnode);
+  const double cj = cos(parentRotJ2000Longitude);
+  const double sj = sin(parentRotJ2000Longitude);
 
-  rotate_to_vsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
-  rotate_to_vsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
-  rotate_to_vsop87[2] =           s_nod*s_obl;
-  rotate_to_vsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
-  rotate_to_vsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
-  rotate_to_vsop87[5] =          -c_nod*s_obl;
-  rotate_to_vsop87[6] =                 s_obl*sj;
-  rotate_to_vsop87[7] =                 s_obl*cj;
-  rotate_to_vsop87[8] =                 c_obl;
+  rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
+  rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
+  rotateToVsop87[2] =           s_nod*s_obl;
+  rotateToVsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
+  rotateToVsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
+  rotateToVsop87[5] =          -c_nod*s_obl;
+  rotateToVsop87[6] =                 s_obl*sj;
+  rotateToVsop87[7] =                 s_obl*cj;
+  rotateToVsop87[8] =                 c_obl;
 }
 
 // Standard iteration for solving Kepler's Equation
@@ -375,9 +375,9 @@ Vec3d EllipticalOrbit::positionAtTime(double t) const
 void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(double JD, double* v) const
 {
   Vec3d pos = positionAtTime(JD);
-  v[0] = rotate_to_vsop87[0]*pos[0] + rotate_to_vsop87[1]*pos[1] + rotate_to_vsop87[2]*pos[2];
-  v[1] = rotate_to_vsop87[3]*pos[0] + rotate_to_vsop87[4]*pos[1] + rotate_to_vsop87[5]*pos[2];
-  v[2] = rotate_to_vsop87[6]*pos[0] + rotate_to_vsop87[7]*pos[1] + rotate_to_vsop87[8]*pos[2];
+  v[0] = rotateToVsop87[0]*pos[0] + rotateToVsop87[1]*pos[1] + rotateToVsop87[2]*pos[2];
+  v[1] = rotateToVsop87[3]*pos[0] + rotateToVsop87[4]*pos[1] + rotateToVsop87[5]*pos[2];
+  v[2] = rotateToVsop87[6]*pos[0] + rotateToVsop87[7]*pos[1] + rotateToVsop87[8]*pos[2];
 }
 
 double EllipticalOrbit::getPeriod() const

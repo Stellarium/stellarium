@@ -51,7 +51,7 @@
 #include <QDebug>
 
 SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moonScale(1.), fontSize(14.),
-	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
+	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flag_light_travel_time(false), lastHomePlanet(NULL)
 {
 	setObjectName("SolarSystem");
@@ -59,7 +59,7 @@ SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moo
 
 void SolarSystem::setFontSize(float newFontSize)
 {
-	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	planetNameFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
 SolarSystem::~SolarSystem()
@@ -327,9 +327,9 @@ void SolarSystem::loadPlanets()
 			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity").toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
-			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
+			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
-			if (pericenter_distance <= 0.0) {
+			if (pericenterDistance <= 0.0) {
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
 					qDebug() << "ERROR: " << englishName
@@ -338,31 +338,31 @@ void SolarSystem::loadPlanets()
 				} else {
 					semi_major_axis /= AU;
 					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
-					pericenter_distance = semi_major_axis * (1.0-eccentricity);
+					pericenterDistance = semi_major_axis * (1.0-eccentricity);
 				}
 			} else {
-				pericenter_distance /= AU;
+				pericenterDistance /= AU;
 				semi_major_axis = (eccentricity == 1.0)
 				                ? 0.0 // parabolic orbits have no semi_major_axis
-				                : pericenter_distance / (1.0-eccentricity);
+				                : pericenterDistance / (1.0-eccentricity);
 			}
-			double mean_motion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
+			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
 			double period;
-			if (mean_motion <= -1e100) {
+			if (meanMotion <= -1e100) {
 				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
-					mean_motion = (eccentricity == 1.0)
-					            ? 0.01720209895 * (1.5/pericenter_distance)
-					                            * sqrt(0.5/pericenter_distance)
+					meanMotion = (eccentricity == 1.0)
+					            ? 0.01720209895 * (1.5/pericenterDistance)
+					                            * sqrt(0.5/pericenterDistance)
 					            : (semi_major_axis > 0.0)
 					            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 					            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
-					period = 2.0*M_PI/mean_motion;
+					period = 2.0*M_PI/meanMotion;
 				} else {
-					mean_motion = 2.0*M_PI/period;
+					meanMotion = 2.0*M_PI/period;
 				}
 			} else {
-				period = 2.0*M_PI/mean_motion;
+				period = 2.0*M_PI/meanMotion;
 			}
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
@@ -386,7 +386,7 @@ void SolarSystem::loadPlanets()
 			}
 
 			// when the parent is the sun use ecliptic rathe than sun equator:
-			const double parent_rot_obliquity = parent->getParent()
+			const double parentRotObliquity = parent->getParent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
@@ -394,8 +394,8 @@ void SolarSystem::loadPlanets()
 			                                  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
-				const double c_obl = cos(parent_rot_obliquity);
-				const double s_obl = sin(parent_rot_obliquity);
+				const double c_obl = cos(parentRotObliquity);
+				const double s_obl = sin(parentRotObliquity);
 				const double c_nod = cos(parent_rot_asc_node);
 				const double s_nod = sin(parent_rot_asc_node);
 				const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
@@ -408,7 +408,7 @@ void SolarSystem::loadPlanets()
 			}
 
 			// Create an elliptical orbit
-			EllipticalOrbit *orb = new EllipticalOrbit(pericenter_distance,
+			EllipticalOrbit *orb = new EllipticalOrbit(pericenterDistance,
 			                                           eccentricity,
 			                                           inclination,
 			                                           ascending_node,
@@ -416,7 +416,7 @@ void SolarSystem::loadPlanets()
 			                                           mean_anomaly,
 			                                           period,
 			                                           epoch,
-			                                           parent_rot_obliquity,
+			                                           parentRotObliquity,
 			                                           parent_rot_asc_node,
 													   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
@@ -433,9 +433,9 @@ void SolarSystem::loadPlanets()
 			// orbit_MeanAnomaly,orbit_Inclination,orbit_ArgOfPericenter,orbit_AscendingNode: given in degrees
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
-			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
+			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
-			if (pericenter_distance <= 0.0) {
+			if (pericenterDistance <= 0.0) {
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
 					qWarning() << "ERROR: " << englishName
@@ -443,15 +443,15 @@ void SolarSystem::loadPlanets()
 					abort();
 				} else {
 					assert(eccentricity != 1.0); // parabolic orbits have no semi_major_axis
-					pericenter_distance = semi_major_axis * (1.0-eccentricity);
+					pericenterDistance = semi_major_axis * (1.0-eccentricity);
 				}
 			} else {
 				semi_major_axis = (eccentricity == 1.0)
 				                ? 0.0 // parabolic orbits have no semi_major_axis
-				                : pericenter_distance / (1.0-eccentricity);
+				                : pericenterDistance / (1.0-eccentricity);
 			}
-			double mean_motion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
-			if (mean_motion <= -1e100) {
+			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble();
+			if (meanMotion <= -1e100) {
 				const double period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					if (parent->getParent()) {
@@ -460,19 +460,19 @@ void SolarSystem::loadPlanets()
 							<< "either orbit_MeanMotion or orbit_Period";
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
-						// for calculating mean_motion:
-						mean_motion = (eccentricity == 1.0)
-						            ? 0.01720209895 * (1.5/pericenter_distance)
-						                            * sqrt(0.5/pericenter_distance)
+						// for calculating meanMotion:
+						meanMotion = (eccentricity == 1.0)
+						            ? 0.01720209895 * (1.5/pericenterDistance)
+						                            * sqrt(0.5/pericenterDistance)
 						            : (semi_major_axis > 0.0)
 						            ? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 						            : 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 					}
 				} else {
-					mean_motion = 2.0*M_PI/period;
+					meanMotion = 2.0*M_PI/period;
 				}
 			} else {
-				mean_motion *= (M_PI/180.0);
+				meanMotion *= (M_PI/180.0);
 			}
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
 			if (time_at_pericenter <= -1e100) {
@@ -485,13 +485,13 @@ void SolarSystem::loadPlanets()
 					abort();
 				} else {
 					mean_anomaly *= (M_PI/180.0);
-					time_at_pericenter = epoch - mean_anomaly / mean_motion;
+					time_at_pericenter = epoch - mean_anomaly / meanMotion;
 				}
 			}
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parent_rot_obliquity = parent->getParent()
+			const double parentRotObliquity = parent->getParent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
@@ -499,8 +499,8 @@ void SolarSystem::loadPlanets()
 			                                  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
                         if (parent->getParent()) {
-                           const double c_obl = cos(parent_rot_obliquity);
-                           const double s_obl = sin(parent_rot_obliquity);
+                           const double c_obl = cos(parentRotObliquity);
+                           const double s_obl = sin(parentRotObliquity);
                            const double c_nod = cos(parent_rot_asc_node);
                            const double s_nod = sin(parent_rot_asc_node);
                            const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
@@ -511,14 +511,14 @@ void SolarSystem::loadPlanets()
                            J2000NodeOrigin.normalize();
                            parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
                         }
-			CometOrbit *orb = new CometOrbit(pericenter_distance,
+			CometOrbit *orb = new CometOrbit(pericenterDistance,
 			                                 eccentricity,
 			                                 inclination,
 			                                 ascending_node,
 			                                 arg_of_pericenter,
 			                                 time_at_pericenter,
-			                                 mean_motion,
-			                                 parent_rot_obliquity,
+			                                 meanMotion,
+			                                 parentRotObliquity,
 			                                 parent_rot_asc_node,
 											 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
@@ -660,7 +660,7 @@ void SolarSystem::loadPlanets()
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
-		p->set_rotation_elements(
+		p->setRotationElements(
 		    pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
 		    pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
 		    pd.value(secname+"/rot_epoch", J2000).toDouble(),
@@ -745,7 +745,7 @@ void SolarSystem::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	Planet::setFont(&planet_name_font);
+	Planet::setFont(&planetNameFont);
 	
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
@@ -766,13 +766,13 @@ void SolarSystem::draw(StelCore* core)
 	glEnable(GL_LIGHT0);
 
 	// Compute each Planet distance to the observer
-	Vec3d obs_helio_pos = nav->getObserverHelioPos();
+	Vec3d obsHelioPos = nav->getObserverHelioPos();
 	
 	vector<Planet*>::iterator iter;
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		(*iter)->computeDistance(obs_helio_pos);
+		(*iter)->computeDistance(obsHelioPos);
 		++iter;
 	}
 
@@ -908,7 +908,7 @@ void SolarSystem::updateI18n()
 	{
 		(*iter)->translateName(trans);
 	}
-	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
+	planetNameFont = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 QString SolarSystem::getPlanetHashString(void)
@@ -1205,7 +1205,7 @@ void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
 const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::set_orbitColor(c);}
+void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
 Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
 
 // Set/Get planets trails color

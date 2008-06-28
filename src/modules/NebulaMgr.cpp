@@ -64,7 +64,7 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texCircle = STextureSP();
 	
 	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	for(iter=nebArray.begin();iter!=nebArray.end();iter++)
 	{
 		delete (*iter);
 	}
@@ -207,7 +207,7 @@ StelObject* NebulaMgr::search(const QString& name)
 	QString uname = name.toUpper();
 	vector <Nebula*>::const_iterator iter;
 
-	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 	{
 		QString testName = (*iter)->getEnglishName().toUpper();
 		if (testName==uname) return *iter;
@@ -247,7 +247,7 @@ StelObject* NebulaMgr::search(Vec3f Pos)
 	vector<Nebula *>::iterator iter;
 	Nebula * plusProche=NULL;
 	float anglePlusProche=0.;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	for(iter=nebArray.begin();iter!=nebArray.end();iter++)
 	{
 		if ((*iter)->XYZ[0]*Pos[0]+(*iter)->XYZ[1]*Pos[1]+(*iter)->XYZ[2]*Pos[2]>anglePlusProche)
 		{
@@ -274,8 +274,8 @@ vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, co
 	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
 
-	vector<Nebula*>::const_iterator iter = neb_array.begin();
-	while (iter != neb_array.end())
+	vector<Nebula*>::const_iterator iter = nebArray.begin();
+	while (iter != nebArray.end())
 	{
 		equPos = (*iter)->XYZ;
 		equPos.normalize();
@@ -295,7 +295,7 @@ vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, co
 Nebula *NebulaMgr::searchM(unsigned int M)
 {
 	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	for(iter=nebArray.begin();iter!=nebArray.end();iter++)
 	{
 		if ((*iter)->M_nb == M) return (*iter);
 	}
@@ -306,7 +306,7 @@ Nebula *NebulaMgr::searchM(unsigned int M)
 Nebula *NebulaMgr::searchNGC(unsigned int NGC)
 {
 	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();++iter)
+	for(iter=nebArray.begin();iter!=nebArray.end();++iter)
 	{
 		if ((*iter)->NGC_nb == NGC)
 			return (*iter);
@@ -317,7 +317,7 @@ Nebula *NebulaMgr::searchNGC(unsigned int NGC)
 Nebula *NebulaMgr::searchIC(unsigned int IC)
 {
 	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	for(iter=nebArray.begin();iter!=nebArray.end();iter++)
 	{
 		if ((*iter)->IC_nb == IC) return (*iter);
 	}
@@ -377,7 +377,7 @@ bool NebulaMgr::loadNGC(const QString& catNGC)
 		}
 		else
 		{
-			neb_array.push_back(e);
+			nebArray.push_back(e);
 			nebGrid.insert(e);
 			++readOk;
 		}
@@ -470,7 +470,7 @@ void NebulaMgr::updateI18n()
 {
 	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Nebula*>::iterator iter;
-	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
+	for( iter = nebArray.begin(); iter < nebArray.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
@@ -488,7 +488,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
 	if (objw.mid(0, 3) == "NGC")
 	{
-		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 		{
 			if (QString("NGC%1").arg((*iter)->NGC_nb) == objw || QString("NGC %1").arg((*iter)->NGC_nb) == objw)
 				return *iter;
@@ -496,7 +496,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 	
 	// Search by common names
-	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 	{
 		QString objwcap = (*iter)->nameI18.toUpper();
 		if (objwcap==objw) 
@@ -506,7 +506,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
 	{
-		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 		{
 			if (QString("M%1").arg((*iter)->M_nb) == objw || QString("M %1").arg((*iter)->M_nb) == objw)
 				return *iter;
@@ -527,7 +527,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
 	if (objw.mid(0, 3) == "NGC")
 	{
-		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 		{
 			if (QString("NGC%1").arg((*iter)->NGC_nb) == objw || QString("NGC %1").arg((*iter)->NGC_nb) == objw)
 				return *iter;
@@ -535,7 +535,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 	
 	// Search by common names
-	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 	{
 		QString objwcap = (*iter)->englishName.toUpper();
 		if (objwcap==objw) 
@@ -545,7 +545,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
 	{
-		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		for (iter = nebArray.begin(); iter != nebArray.end(); ++iter)
 		{
 			if (QString("M%1").arg((*iter)->M_nb) == objw || QString("M %1").arg((*iter)->M_nb) == objw)
 				return *iter;
@@ -569,7 +569,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw[0]=='M')
 	{
-		for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
+		for (iter=nebArray.begin(); iter!=nebArray.end(); ++iter)
 		{
 			if ((*iter)->M_nb==0) continue;
 			QString constw = QString("M%1").arg((*iter)->M_nb);
@@ -589,7 +589,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 	
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
+	for (iter=nebArray.begin(); iter!=nebArray.end(); ++iter)
 	{
 		if ((*iter)->NGC_nb==0) continue;
 		QString constw = QString("NGC%1").arg((*iter)->NGC_nb);
@@ -608,7 +608,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 	
 	// Search by common names
-	for (iter=neb_array.begin(); iter!=neb_array.end(); ++iter)
+	for (iter=nebArray.begin(); iter!=nebArray.end(); ++iter)
 	{
 		QString constw = (*iter)->nameI18.mid(0, objw.size()).toUpper();
 		if (constw==objw)

@@ -34,14 +34,14 @@ MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 	setObjectName("MeteorMgr");
 			
 	ZHR = zhr;
-	max_velocity = maxv;
+	maxVelocity = maxv;
 
 	// calculate factor for meteor creation rate per second since visible area ZHR is for
 	// estimated visible radius of 458km
 	// (calculated for average meteor magnitude of +2.5 and limiting magnitude of 5)
 
-	//  zhr_to_wsr = 1.0f/3600.f;
-	zhr_to_wsr = 1.6667f/3600.f;
+	//  zhrToWsr = 1.0f/3600.f;
+	zhrToWsr = 1.6667f/3600.f;
 	// this is a correction factor to adjust for the model as programmed to match observed rates
 }
 
@@ -81,7 +81,7 @@ int MeteorMgr::getZHR()
 
 void MeteorMgr::setMaxVelocity(int maxv)
 {
-	max_velocity = maxv;
+	maxVelocity = maxv;
 }
 
 void MeteorMgr::update(double deltaTime)
@@ -124,7 +124,7 @@ void MeteorMgr::update(double deltaTime)
 	/*
 	// debug - one at a time
 	if(active.begin() == active.end() ) {
-	  Meteor *m = new Meteor(projection, navigation, max_velocity);
+	  Meteor *m = new Meteor(projection, navigation, maxVelocity);
 	  active.push_back(m);
 	    }
 	*/
@@ -138,7 +138,7 @@ void MeteorMgr::update(double deltaTime)
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int)((double)ZHR*zhr_to_wsr*(double)deltaTime/1000.0f + 0.5);
+	int mpf = (int)((double)ZHR*zhrToWsr*(double)deltaTime/1000.0f + 0.5);
 	if( mpf < 1 ) mpf = 1;
 
 	int mlaunch = 0;
@@ -147,15 +147,15 @@ void MeteorMgr::update(double deltaTime)
 
 		// start new meteor based on ZHR time probability
 		double prob = (double)rand()/((double)RAND_MAX+1);
-		if( ZHR > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)deltaTime/1000.0f/(double)mpf) )
+		if( ZHR > 0 && prob < ((double)ZHR*zhrToWsr*(double)deltaTime/1000.0f/(double)mpf) )
 		{
-			Meteor *m = new Meteor(proj, nav, eye, max_velocity);
+			Meteor *m = new Meteor(proj, nav, eye, maxVelocity);
 			active.push_back(m);
 			mlaunch++;
 		}
 	}
 
-	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhr_to_wsr, deltaTime);
+	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhrToWsr, deltaTime);
 
 
 }

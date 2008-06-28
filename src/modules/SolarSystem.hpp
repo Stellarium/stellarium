@@ -263,7 +263,7 @@ private:
 	float moonScale;                 // Moon scale value
 
 	double fontSize;
-	SFont& planet_name_font;
+	SFont& planetNameFont;
 	
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
