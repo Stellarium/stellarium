@@ -107,8 +107,8 @@ StarMgr::StarMgr(void) :
     qWarning() << "ERROR: StarMgr::StarMgr: no memory";
     exit(1);
   }
-  max_geodesic_grid_level = -1;
-  last_max_search_level = -1;
+  maxGeodesicGridLevel = -1;
+  lastMaxSearchLevel = -1;
 }
 
 /*************************************************************************
@@ -176,8 +176,8 @@ void StarMgr::init() {
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");   // Load pointer texture
 }
 
-void StarMgr::setGrid(GeodesicGrid* geodesic_grid) {
-  geodesic_grid->visitTriangles(max_geodesic_grid_level,initTriangleFunc,this);
+void StarMgr::setGrid(GeodesicGrid* geodesicGrid) {
+  geodesicGrid->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
     it->second->scaleAxis();
@@ -222,7 +222,7 @@ void StarMgr::load_data()
 	LoadingBar& lb = *StelApp::getInstance().getLoadingBar();
 			
 	// Please do not init twice:
-	assert(max_geodesic_grid_level < 0);
+	assert(maxGeodesicGridLevel < 0);
 
 	qDebug() << "Loading star data ...";
 
@@ -254,9 +254,9 @@ void StarMgr::load_data()
 			ZoneArray *const z = ZoneArray::create(*this,cat_file_name,lb);
 			if (z)
 			{
-				if (max_geodesic_grid_level < z->level)
+				if (maxGeodesicGridLevel < z->level)
 				{
-					max_geodesic_grid_level = z->level;
+					maxGeodesicGridLevel = z->level;
 				}
 				ZoneArray *&pos(zone_arrays[z->level]);
 				if (pos)
@@ -323,8 +323,8 @@ void StarMgr::load_data()
 		}
 	}
 
-	last_max_search_level = max_geodesic_grid_level;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << max_geodesic_grid_level;
+	lastMaxSearchLevel = maxGeodesicGridLevel;
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
 }
 
 // Load common names from file 
@@ -514,8 +514,8 @@ void StarMgr::draw(StelCore* core)
     if (!starsFader.getInterstate())
 		return;
 
-	int max_search_level = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),max_search_level);
+	int maxSearchLevel = getMaxSearchLevel();
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(prj->unprojectViewport(),maxSearchLevel);
 
     // Set temporary static variable for optimization
     const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
@@ -548,7 +548,7 @@ void StarMgr::draw(StelCore* core)
 				rcmag_table[2*i] *= starsFader.getInterstate();
 			}
 		}
-		last_max_search_level = it->first;
+		lastMaxSearchLevel = it->first;
 	
 		unsigned int max_mag_star_name = 0;
 		if (labelsFader.getInterstate()>0.f)
@@ -643,7 +643,7 @@ vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
   e2 *= f;
   e3 *= f;
     // search the triangles
- 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e3,e2,e1,e0,last_max_search_level);
+ 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid()->search(e3,e2,e1,e0,lastMaxSearchLevel);
     // iterate over the stars inside the triangles:
   f = cos(lim_fov * M_PI/180.);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());

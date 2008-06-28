@@ -189,7 +189,7 @@ public:
 	// TODO: the StarMgr it self should call core()->getGeodesicGrid()->setMaxlevel etc..
 	//! Get the maximum level of the geodesic sphere used.
 	//! See the class description for a short introduction to the meaning of this value.
-	int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
+	int getMaxGridLevel(void) const {return maxGeodesicGridLevel;}
 	//! Initializes each triangular face of the geodesic grid.
 	void setGrid(class GeodesicGrid* grid);
 	
@@ -227,8 +227,8 @@ private:
 	float labelsAmount;
 	bool gravityLabel;
 	
-	int max_geodesic_grid_level;
-	int last_max_search_level;
+	int maxGeodesicGridLevel;
+	int lastMaxSearchLevel;
 	typedef map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zone_arrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,

@@ -38,7 +38,7 @@
 *************************************************************************/
 StelCore::StelCore()
 {
-	tone_converter = new ToneReproducer();
+	toneConverter = new ToneReproducer();
 	projection = new Projector(Vector4<GLint>(0,0,800,600), 60);
 	projection->init();
 	skyDrawer = new SkyDrawer(this);
@@ -53,8 +53,8 @@ StelCore::~StelCore()
 	delete navigation; navigation=NULL;
 	delete projection; projection=NULL;
 	delete observatory; observatory=NULL;
-	delete tone_converter; tone_converter=NULL;
-	delete geodesic_grid; geodesic_grid=NULL;
+	delete toneConverter; toneConverter=NULL;
+	delete geodesicGrid; geodesicGrid=NULL;
 	delete skyDrawer; skyDrawer=NULL;
 }
 
@@ -78,8 +78,8 @@ void StelCore::init()
 	
 	StarMgr* hip_stars = (StarMgr*)StelApp::getInstance().getModuleMgr().getModule("StarMgr");
 	int grid_level = hip_stars->getMaxGridLevel();
-	geodesic_grid = new GeodesicGrid(grid_level);
-	hip_stars->setGrid(geodesic_grid);
+	geodesicGrid = new GeodesicGrid(grid_level);
+	hip_stars->setGrid(geodesicGrid);
 	
 	skyDrawer->init();
 }

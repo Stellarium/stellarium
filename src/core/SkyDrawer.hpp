@@ -58,12 +58,12 @@ public:
 	//! @param x the x position of the object on the screen
 	//! @param y the y position of the object on the screen
 	//! @param mag the source magnitude
-	//! @param b_v the source B-V index
+	//! @param bV the source B-V index
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(double x, double y, const float rc_mag[2], unsigned int b_v)
-		{return drawPointSource(x, y, rc_mag, colorTable[b_v]);}
+	bool drawPointSource(double x, double y, const float rcMag[2], unsigned int bV)
+		{return drawPointSource(x, y, rcMag, colorTable[bV]);}
 	
-	bool drawPointSource(double x, double y, const float rc_mag[2], const Vec3f& color);
+	bool drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color);
 	
 	//! Draw a disk source halo. The real surface brightness is smaller as if it were a 
 	//! point source because the flux is spread on the disk area
@@ -89,9 +89,9 @@ public:
 	
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
-	//! @param rc_mag array of 2 floats containing the radius and luminance
+	//! @param rcMag array of 2 floats containing the radius and luminance
 	//! @return false if the object is too faint to be displayed
-	bool computeRCMag(float mag, float rc_mag[2]) const;
+	bool computeRCMag(float mag, float rcMag[2]) const;
 	
 	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
 	//! This information is used to determine the world adaptation luminance
@@ -109,15 +109,15 @@ public:
 	static float surfacebrightnessToLuminance(float sb);
 	
 	//! Convert quantized B-V index to float B-V
-	static inline float indexToBV(unsigned char b_v)
+	static inline float indexToBV(unsigned char bV)
 	{
-		return (float)b_v*(4.f/127.f)-0.5f;
+		return (float)bV*(4.f/127.f)-0.5f;
 	}
 	
 	//! Convert quantized B-V index to RGB colors
-	static inline const Vec3f& indexToColor(unsigned char b_v)
+	static inline const Vec3f& indexToColor(unsigned char bV)
 	{
-		return colorTable[b_v];
+		return colorTable[bV];
 	}
 	
 public slots:
@@ -214,7 +214,7 @@ private:
 	Projector* prj;
 	ToneReproducer* eye;
 	
-	float maxFov, minFov, lnfov_factor;
+	float maxFov, minFov, lnfovFactor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;

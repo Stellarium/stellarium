@@ -134,7 +134,7 @@ void SkyDrawer::update(double deltaTime)
 	
 	// Set the fov factor for point source luminance computation
 	// the division by powFactor should in principle not be here, but it doesn't look nice if removed
-	lnfov_factor = std::log(1./50.*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
+	lnfovFactor = std::log(1./50.*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4);
 	
 	// Precompute
 	starLinearScale = std::pow(35.f*2.0f*starAbsoluteScaleF, 1.40f/2.f*starRelativeScale);
@@ -180,12 +180,12 @@ float SkyDrawer::computeLimitMagnitude() const
 // Compute the ln of the luminance for a point source with the given mag for the current FOV
 float SkyDrawer::pointSourceMagToLnLuminance(float mag) const
 {
-	return -0.92103f*(mag + 12.12331f) + lnfov_factor;
+	return -0.92103f*(mag + 12.12331f) + lnfovFactor;
 }
 
 float SkyDrawer::pointSourceLuminanceToMag(float lum)
 {
-	return (std::log(lum) - lnfov_factor)/-0.92103f - 12.12331f;
+	return (std::log(lum) - lnfovFactor)/-0.92103f - 12.12331f;
 }
 
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
@@ -195,37 +195,37 @@ float SkyDrawer::surfacebrightnessToLuminance(float sb)
 }
 
 // Compute RMag and CMag from magnitude for a point source.
-bool SkyDrawer::computeRCMag(float mag, float rc_mag[2]) const
+bool SkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 {
-	rc_mag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
-	rc_mag[0]*=starLinearScale;
+	rcMag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
+	rcMag[0]*=starLinearScale;
 	
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
-	if (rc_mag[0] < 0.5f)
+	if (rcMag[0] < 0.5f)
 	{
-		rc_mag[0] = rc_mag[1] = 0.f;
+		rcMag[0] = rcMag[1] = 0.f;
 		return false;
 	}
 	
 	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
 	// And we compensate the difference of brighteness with cmag
-	if (rc_mag[0]<1.2f)
+	if (rcMag[0]<1.2f)
 	{
-		rc_mag[1] = rc_mag[0] * rc_mag[0] / 1.44f;
-		if (rc_mag[1] < 0.07f)
+		rcMag[1] = rcMag[0] * rcMag[0] / 1.44f;
+		if (rcMag[1] < 0.07f)
 		{
-			rc_mag[0] = rc_mag[1] = 0.f;
+			rcMag[0] = rcMag[1] = 0.f;
 			return false;
 		}
-		rc_mag[0] = 1.2f;
+		rcMag[0] = 1.2f;
 	}
 	else
 	{
 		// cmag:
-		rc_mag[1] = 1.0f;
-		if (rc_mag[0]>MAX_LINEAR_RADIUS)
+		rcMag[1] = 1.0f;
+		if (rcMag[0]>MAX_LINEAR_RADIUS)
 		{
-			rc_mag[0]=MAX_LINEAR_RADIUS+std::sqrt(1.f+rc_mag[0]-MAX_LINEAR_RADIUS)-1.f;
+			rcMag[0]=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag[0]-MAX_LINEAR_RADIUS)-1.f;
 		}
 	}
 	return true;
@@ -281,9 +281,9 @@ void SkyDrawer::postDrawPointSource()
 }
 
 // Draw a point source halo.
-bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const Vec3f& color)
+bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const Vec3f& color)
 {	
-	if (rc_mag[0]<=0.f)
+	if (rcMag[0]<=0.f)
 		return false;
 	
 	// Random coef for star twinkling
@@ -292,14 +292,14 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 	if (flagPointStar)
 	{
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		glColor3fv(color*(rc_mag[1]*tw));
+		glColor3fv(color*(rcMag[1]*tw));
 		prj->drawPoint2d(x, y);
 	}
 	else
 	{
 		// Store the drawing instructions in the vertex arrays
-		colorGrid[nbPointSources*4+3] = color*(rc_mag[1]*tw);		
-		const double radius = rc_mag[0];
+		colorGrid[nbPointSources*4+3] = color*(rcMag[1]*tw);		
+		const double radius = rcMag[0];
 		Vec2f* v = &(verticesGrid[nbPointSources*4]);
 		v->set(x-radius,y-radius); ++v;
 		v->set(x+radius,y-radius); ++v;
@@ -309,7 +309,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rc_mag[2], const
 		// If the rmag is big, draw a big halo
 		if (radius>MAX_LINEAR_RADIUS+5.f)
 		{
-			float cmag = MY_MIN(rc_mag[1],(radius-(MAX_LINEAR_RADIUS+5.))/30.);
+			float cmag = MY_MIN(rcMag[1],(radius-(MAX_LINEAR_RADIUS+5.))/30.);
 			float rmag = 150.f;
 			if (cmag>1.f)
 				cmag = 1.f;
@@ -689,15 +689,15 @@ static Vec3f Gamma(double gamma,const Vec3f &x)
 void SkyDrawer::initColorTableFromConfigFile(QSettings* conf) 
 {
 	std::map<float,Vec3f> color_map;
-	for (float b_v=-0.5f;b_v<=4.0f;b_v+=0.01) 
+	for (float bV=-0.5f;bV<=4.0f;bV+=0.01) 
 	{
 		char entry[256];
-		sprintf(entry,"bv_color_%+5.2f",b_v);
+		sprintf(entry,"bv_color_%+5.2f",bV);
 		const QStringList s(conf->value(QString("stars/") + entry).toStringList());
 		if (!s.isEmpty())
 		{
 			const Vec3f c(StelUtils::str_to_vec3f(s));
-			color_map[b_v] = Gamma(1/0.45,c);
+			color_map[bV] = Gamma(1/0.45,c);
 		}
 	}
 
@@ -705,8 +705,8 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 	{
 		for (int i=0;i<128;i++) 
 		{
-			const float b_v = SkyDrawer::indexToBV(i);
-			std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(b_v));
+			const float bV = SkyDrawer::indexToBV(i);
+			std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(bV));
 			if (greater == color_map.begin()) 
 			{
 				colorTable[i] = greater->second;
@@ -720,7 +720,7 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 				} 
 				else 
 				{
-					colorTable[i] = Gamma(0.45, ((b_v-less->first)*greater->second + (greater->first-b_v)*less->second) *(1.f/(greater->first-less->first)));
+					colorTable[i] = Gamma(0.45, ((bV-less->first)*greater->second + (greater->first-bV)*less->second) *(1.f/(greater->first-less->first)));
 				}
 			}
 		}

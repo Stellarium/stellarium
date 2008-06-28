@@ -321,10 +321,10 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const
 
 void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
                                int **inside_list,int **border_list,
-                               int max_search_level) const
+                               int maxSearchLevel) const
 {
-	if (max_search_level < 0) max_search_level = 0;
-	else if (max_search_level > max_level) max_search_level = max_level;
+	if (maxSearchLevel < 0) maxSearchLevel = 0;
+	else if (maxSearchLevel > max_level) maxSearchLevel = max_level;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	int *halfs_used = new int[convex.size()];
 #else
@@ -352,7 +352,7 @@ void GeodesicGrid::searchZones(const StelGeom::ConvexS& convex,
 		            corner_inside[icosahedron_triangles[i].corners[0]],
 		            corner_inside[icosahedron_triangles[i].corners[1]],
 		            corner_inside[icosahedron_triangles[i].corners[2]],
-		            inside_list,border_list,max_search_level);
+		            inside_list,border_list,maxSearchLevel);
 	}
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	delete[] halfs_used;
@@ -368,7 +368,7 @@ void GeodesicGrid::searchZones(int lev,int index,
                                const bool *corner1_inside,
                                const bool *corner2_inside,
                                int **inside_list,int **border_list,
-                               const int max_search_level) const
+                               const int maxSearchLevel) const
 {
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	int *halfs_used = new int[half_spaces_used];
@@ -404,7 +404,7 @@ void GeodesicGrid::searchZones(int lev,int index,
 	{
 		(*border_list)--;
 		**border_list = index;
-		if (lev < max_search_level)
+		if (lev < maxSearchLevel)
 		{
 			Triangle &t(triangles[lev][index]);
 			lev++;
@@ -431,19 +431,19 @@ void GeodesicGrid::searchZones(int lev,int index,
 			searchZones(lev,index+0,
 			            convex,halfs_used,halfs_used_count,
 			            corner0_inside,edge2_inside,edge1_inside,
-			            inside_list,border_list,max_search_level);
+			            inside_list,border_list,maxSearchLevel);
 			searchZones(lev,index+1,
 			            convex,halfs_used,halfs_used_count,
 			            edge2_inside,corner1_inside,edge0_inside,
-			            inside_list,border_list,max_search_level);
+			            inside_list,border_list,maxSearchLevel);
 			searchZones(lev,index+2,
 			            convex,halfs_used,halfs_used_count,
 			            edge1_inside,edge0_inside,corner2_inside,
-			            inside_list,border_list,max_search_level);
+			            inside_list,border_list,maxSearchLevel);
 			searchZones(lev,index+3,
 			            convex,halfs_used,halfs_used_count,
 			            edge0_inside,edge1_inside,edge2_inside,
-			            inside_list,border_list,max_search_level);
+			            inside_list,border_list,maxSearchLevel);
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 			delete[] edge0_inside;
 			delete[] edge1_inside;
@@ -477,10 +477,10 @@ const GeodesicSearchResult* GeodesicGrid::search(const StelGeom::ConvexS& convex
 /*************************************************************************
  Return a search result matching the given spatial region
 *************************************************************************/
-const GeodesicSearchResult* GeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int max_search_level) const
+const GeodesicSearchResult* GeodesicGrid::search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,int maxSearchLevel) const
 {
 	StelGeom::ConvexS c(e0, e1, e2, e3);
-	return search(c,max_search_level);
+	return search(c,maxSearchLevel);
 }
 
 
@@ -508,14 +508,14 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 }
 
 void GeodesicSearchResult::search(const StelGeom::ConvexS& convex,
-                                  int max_search_level)
+                                  int maxSearchLevel)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)
 	{
 		inside[i] = zones[i];
 		border[i] = zones[i]+GeodesicGrid::nrOfZones(i);
 	}
-	grid.searchZones(convex,inside,border,max_search_level);
+	grid.searchZones(convex,inside,border,maxSearchLevel);
 }
 
 void GeodesicSearchInsideIterator::reset(void)
