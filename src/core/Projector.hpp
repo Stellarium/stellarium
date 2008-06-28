@@ -48,12 +48,12 @@ class Projector : public QObject
 public:
 
 	//! Supported reference frame types
-	enum FRAME_TYPE
+	enum FrameType
 	{
-		FRAME_LOCAL,
-		FRAME_HELIO,
-		FRAME_EARTH_EQU,
-		FRAME_J2000
+		FrameLocal,
+		FrameHelio,
+		FrameEarthEqu,
+		FrameJ2000
 	};
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ public:
 	//! @param _matHelioToEye
 	//! @param _matLocalToEye
 	//! @param _matJ2000ToEye
-	void set_modelview_matrices(const Mat4d& _matEarthEquToEye,
+	void setModelviewMatrices(const Mat4d& _matEarthEquToEye,
 				    const Mat4d& _matHelioToEye,
 				    const Mat4d& _matLocalToEye,
 				    const Mat4d& _matJ2000ToEye);
@@ -95,24 +95,24 @@ public:
 	void registerProjectionMapping(Mapping *c);
 	
 	///////////////////////////////////////////////////////////////////////////
-	//! @enum PROJECTOR_MASK_TYPE Methods for controlling viewport and mask.
-	enum PROJECTOR_MASK_TYPE
+	//! @enum ProjectorMaskType Methods for controlling viewport and mask.
+	enum ProjectorMaskType
 	{
-		DISK,	//!< For disk viewport mode (circular mask to seem like bins/telescope)
-		NONE	//!< Regular - no mask.
+		Disk,	//!< For disk viewport mode (circular mask to seem like bins/telescope)
+		None	//!< Regular - no mask.
 	};
 	
-	//! Get a string description of a PROJECTOR_MASK_TYPE.
-	static const QString maskTypeToString(PROJECTOR_MASK_TYPE type);
+	//! Get a string description of a ProjectorMaskType.
+	static const QString maskTypeToString(ProjectorMaskType type);
 	
-	//! Get a PROJECTOR_MASK_TYPE from a string description.
-	static PROJECTOR_MASK_TYPE stringToMaskType(const QString &s);
+	//! Get a ProjectorMaskType from a string description.
+	static ProjectorMaskType stringToMaskType(const QString &s);
 	
 	//! Get the current type of the mask if any.
-	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
+	ProjectorMaskType getMaskType(void) const {return maskType;}
 	
 	//! Set the mask type.
-	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
+	void setMaskType(ProjectorMaskType m) {maskType = m; }
 	
 	//! Set up the view port dimensions and position.
 	//! Define viewport size, center(relative to lower left corner)
@@ -123,29 +123,29 @@ public:
 	//! @param h The height of the viewport.
 	//! @param cx The center of the viewport in the x axis (relative to left edge).
 	//! @param cy The center of the viewport in the y axis (relative to bottom edge).
-	//! @param fov_diam The field of view diameter.
-	void setViewport(int x, int y, int w, int h, double cx, double cy, double fov_diam);
+	//! @param fovDiam The field of view diameter.
+	void setViewport(int x, int y, int w, int h, double cx, double cy, double fovDiam);
 
 	//! Get the lower left corner of the viewport and the width, height.
-	const Vector4<GLint>& getViewport(void) const {return viewport_xywh;}
+	const Vector4<GLint>& getViewport(void) const {return viewportXywh;}
 
 	//! Get the center of the viewport relative to the lower left corner.
 	Vec2d getViewportCenter(void) const
 	{
-		return Vec2d(viewport_center[0]-viewport_xywh[0],viewport_center[1]-viewport_xywh[1]);
+		return Vec2d(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 	}
 
 	//! Get the diameter of the FOV disk.
-	double getViewportFovDiameter(void) const {return viewport_fov_diameter;}
+	double getViewportFovDiameter(void) const {return viewportFovDiameter;}
 	
 	//! Get the horizontal viewport offset in pixels.
-	int getViewportPosX(void) const {return viewport_xywh[0];}
+	int getViewportPosX(void) const {return viewportXywh[0];}
 	//! Get the vertical viewport offset in pixels.
-	int getViewportPosY(void) const {return viewport_xywh[1];}
+	int getViewportPosY(void) const {return viewportXywh[1];}
 	//! Get the viewport width in pixels.
-	int getViewportWidth(void) const {return viewport_xywh[2];}
+	int getViewportWidth(void) const {return viewportXywh[2];}
 	//! Get the viewport height in pixels.
-	int getViewportHeight(void) const {return viewport_xywh[3];}
+	int getViewportHeight(void) const {return viewportXywh[3];}
 	
 	//! Get the maximum ratio between the viewport height and width
 	float getViewportRatio() const {return getViewportWidth()>getViewportHeight() ? getViewportWidth()/getViewportHeight() : getViewportHeight()/getViewportWidth();}
@@ -166,28 +166,28 @@ public:
 	StelGeom::ConvexPolygon getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
 
 	//! Un-project the entire viewport depending on mapping, maskType,
-	//! viewport_fov_diameter, viewport_center, and viewport dimensions.
+	//! viewportFovDiameter, viewportCenter, and viewport dimensions.
 	StelGeom::ConvexS unprojectViewport(void) const;
 
 	//! Set whether a disk mask must be drawn over the viewport.
-	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}
+	void setViewportMaskDisk(void) {setMaskType(Projector::Disk);}
 	//! Get whether a disk mask must be drawn over the viewport.
-	bool getViewportMaskDisk(void) const {return getMaskType()==Projector::DISK;}
+	bool getViewportMaskDisk(void) const {return getMaskType()==Projector::Disk;}
 	//! Set whether no mask must be drawn over the viewport.
-	void setViewportMaskNone(void) {setMaskType(Projector::NONE);}
+	void setViewportMaskNone(void) {setMaskType(Projector::None);}
 	
 	//! Set the clipping planes.
 	// TODO: A better explanation.
-	void set_clipping_planes(double znear, double zfar);
+	void setClippingPlanes(double znear, double zfar);
 	//! Get the clipping planes.
 	// TODO: A better explanation.
-	void get_clipping_planes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
+	void getClippingPlanes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling the PROJECTION matrix
 	// TODO Doxygen docs: What is this for?
 	bool needGlFrontFaceCW(void) const
-		{return (flip_horz*flip_vert < 0.0);}
+		{return (flipHorz*flipVert < 0.0);}
 
 	//! Get whether the GL_POINT_SPRITE extension is available now.
 	bool getflagGlPointSprite() const {return flagGlPointSprite;}
@@ -198,12 +198,12 @@ public:
 	double getFov(void) const {return fov;}
 	
 	//! Get size of a radian in pixels at the center of the viewport disk
-	double getPixelPerRadAtCenter(void) const {return pixel_per_rad;}
+	double getPixelPerRadAtCenter(void) const {return pixelPerRad;}
 
 	//! Set the maximum field of View in degrees.
 	void setMaxFov(double max);
 	//! Get the maximum field of View in degrees.
-	double getMaxFov(void) const {return max_fov;}
+	double getMaxFov(void) const {return maxFov;}
 	//! Return the initial default FOV in degree.
 	double getInitFov() const {return initFov;}
 	
@@ -211,9 +211,9 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
 	//! Check to see if a 2d position is inside the viewport.
-	bool check_in_viewport(const Vec3d& pos) const
-		{return (pos[1]>=viewport_xywh[1] && pos[0]>=viewport_xywh[0] &&
-		pos[1]<=(viewport_xywh[1] + viewport_xywh[3]) && pos[0]<=(viewport_xywh[0] + viewport_xywh[2]));}
+	bool checkInViewport(const Vec3d& pos) const
+		{return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
+		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));}
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
@@ -233,8 +233,8 @@ public:
 		// invisible region of the sky (rval=false), we must finish
 		// reprojecting, so that OpenGl can successfully eliminate
 		// polygons by culling.
-		win[0] = viewport_center[0] + flip_horz * pixel_per_rad * win[0];
-		win[1] = viewport_center[1] + flip_vert * pixel_per_rad * win[1];
+		win[0] = viewportCenter[0] + flipHorz * pixelPerRad * win[0];
+		win[1] = viewportCenter[1] + flipVert * pixelPerRad * win[1];
 		win[2] = (win[2] - zNear) / (zNear - zFar);
 		return rval;
 	}
@@ -243,7 +243,7 @@ public:
 	//! @param v the vector in the current frame.
 	//! @param win the projected vector in the viewport 2D frame.
 	//! @return true if the projected point is inside the viewport.
-	bool projectCheck(const Vec3d& v, Vec3d& win) const {return (project(v, win) && check_in_viewport(win));}
+	bool projectCheck(const Vec3d& v, Vec3d& win) const {return (project(v, win) && checkInViewport(win));}
 
 	//! Project the vector v from the viewport frame into the current frame.
 	//! @param win the vector in the viewport 2D frame.
@@ -259,12 +259,12 @@ public:
 	//! @param win2 the second projected vector in the viewport 2D frame.
 	//! @return true if at least one of the projected vector is within the viewport.
 	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project(v1, win1) && project(v2, win2) && (check_in_viewport(win1) || check_in_viewport(win2));}
+		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
 
 	//! Set the frame in which we want to draw from now on.
 	//! The frame will be the current one until this method or setCustomFrame is called again.
 	//! @param frameType the type.
-	void setCurrentFrame(FRAME_TYPE frameType) const;
+	void setCurrentFrame(FrameType frameType) const;
 
 	//! Set a custom model view matrix.
 	//! The new setting remains active until the next call to setCurrentFrame 
@@ -289,7 +289,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 
 	//! Fill with black around the viewport.
-	void draw_viewport_shape(void);
+	void drawViewportShape(void);
 	
 	//! Generalisation of glVertex3v for non-linear projections. 
 	//! This method does not manage the lighting operations properly.
@@ -371,32 +371,32 @@ public:
 	
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(GLdouble radius, GLdouble oneMinusOblateness,
-	             GLint slices, GLint stacks, int orient_inside = 0) const;
+	             GLint slices, GLint stacks, int orientInside = 0) const;
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orient_inside = 0) const;
+	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, int orientInside = 0) const;
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
-	//! The number of slices of the outmost circle is (inner_fan_slices<<level).
+	//! The number of slices of the outmost circle is (innerFanSlices<<level).
 	//! @param radius the radius of the disk.
-	//! @param inner_fan_slices the number of slices.
+	//! @param innerFanSlices the number of slices.
 	//! @param level the numbe of concentric circles.
-	void sFanDisk(double radius,int inner_fan_slices,int level) const;
+	void sFanDisk(double radius,int innerFanSlices,int level) const;
 
 	//! Draw a disk with a special texturing mode having texture center at center.
 	//! @param radius the radius of the disk.
 	//! @param slices the number of slices.
 	//! @param stacks ???
-	//! @param orient_inside ???
-	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orient_inside = 0) const;
+	//! @param orientInside ???
+	void sDisk(GLdouble radius, GLint slices, GLint stacks, int orientInside = 0) const;
 	
 	//! Draw a ring with a radial texturing.
-	void sRing(GLdouble r_min, GLdouble r_max, GLint slices, GLint stacks, int orient_inside) const;
+	void sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, int orientInside) const;
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
-	                 double texture_fov = 2.*M_PI, int orient_inside = 0) const;
+	void sSphereMap(GLdouble radius, GLint slices, GLint stacks,
+	                 double textureFov = 2.*M_PI, int orientInside = 0) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for linear mode
@@ -404,11 +404,11 @@ public:
 	
 	//! Reimplementation of gluCylinder for use in linear mode.
 	void sCylinderLinear(GLdouble radius, GLdouble height, GLint slices, GLint stacks, 
-			     int orient_inside = 0) const;
+			     int orientInside = 0) const;
 	
 	//! Reimplementation of gluSphere for use in linear mode.
 	void sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness, GLint slices, 
-			   GLint stacks, int orient_inside = 0) const;
+			   GLint stacks, int orientInside = 0) const;
 
 public slots:
 	//! Set the flag with decides whether to arrage labels so that
@@ -416,20 +416,20 @@ public slots:
 	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
 	//! Get the state of the horizontal flip.
 	//! @return True if flipped horizontally, else false.
-	bool getFlipHorz(void) const {return (flip_horz < 0.0);}
+	bool getFlipHorz(void) const {return (flipHorz < 0.0);}
 	//! Get the state of the vertical flip.
 	//! @return True if flipped vertically, else false.
-	bool getFlipVert(void) const {return (flip_vert < 0.0);}
+	bool getFlipVert(void) const {return (flipVert < 0.0);}
 	//! Set the horizontal flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
 	void setFlipHorz(bool flip) {
-		flip_horz = flip ? -1.0 : 1.0;
+		flipHorz = flip ? -1.0 : 1.0;
 		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 	//! Set the vertical flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
 	void setFlipVert(bool flip) {
-		flip_vert = flip ? -1.0 : 1.0;
+		flipVert = flip ? -1.0 : 1.0;
 		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 
@@ -440,28 +440,28 @@ public slots:
 private:
 	
 	void drawTextGravity180(const SFont* font, float x, float y, const QString& str, 
-			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
+			      bool speedOptimize = 1, float xshift = 0, float yshift = 0) const;
 		
 	//! Init the real openGL Matrices to a 2d orthographic projection
 	void initGlMatrixOrtho2d(void) const;
 	
 	//! The current projector mask
-	PROJECTOR_MASK_TYPE maskType;
+	ProjectorMaskType maskType;
 
 	double initFov;                // initial default FOV in degree
 	double fov;                    // Field of view in degree
-	double min_fov;                // Minimum fov in degree
-	double max_fov;                // Maximum fov in degree
+	double minFov;                 // Minimum fov in degree
+	double maxFov;                 // Maximum fov in degree
 	double zNear, zFar;            // Near and far clipping planes
 
-	Vector4<GLint> viewport_xywh;  // Viewport parameters
-	Vec2d viewport_center;         // Viewport center in screen pixel
-	double viewport_fov_diameter;  // diameter of a circle with 180 degrees diameter in screen pixel
+	Vector4<GLint> viewportXywh;   // Viewport parameters
+	Vec2d viewportCenter;          // Viewport center in screen pixel
+	double viewportFovDiameter;    // diameter of a circle with 180 degrees diameter in screen pixel
 
 	Mat4d projectionMatrix;        // Projection matrix
 
-	double pixel_per_rad;          // pixel per rad at the center of the viewport disk
-	double flip_horz,flip_vert;    // Whether to flip in horizontal or vertical directions
+	double pixelPerRad;            // pixel per rad at the center of the viewport disk
+	double flipHorz,flipVert;      // Whether to flip in horizontal or vertical directions
 
 	Mat4d matEarthEquToEye;        // Modelview Matrix for earth equatorial projection
 	Mat4d matJ2000ToEye;           // for precessed equ coords

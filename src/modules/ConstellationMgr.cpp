@@ -139,7 +139,7 @@ void ConstellationMgr::updateSkyCulture()
 		updateI18n();
 		
 		// as constellations have changed, clear out any selection and retest for match!
-		selectedObjectChangeCallBack(StelModule::REPLACE_SELECTION);		
+		selectedObjectChangeCallBack(StelModule::ReplaceSelection);		
 	}
 	catch(exception& e)
 	{
@@ -190,7 +190,7 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 //		StelApp::getInstance().getStelObjectMgr().setSelectedObject(c->getBrightestStarInConstellation());
 
 		// If removing this selection
-		if(action == StelModule::REMOVE_FROM_SELECTION) {
+		if(action == StelModule::RemoveFromSelection) {
 			unsetSelectedConst((Constellation *)newSelectedConst[0].get());
 		} else {
 			// Add constellation to selected list (do not select a star, just the constellation)
@@ -447,7 +447,7 @@ void ConstellationMgr::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	prj->setCurrentFrame(Projector::FRAME_J2000);
+	prj->setCurrentFrame(Projector::FrameJ2000);
 	drawLines(prj);
 	drawNames(prj);
 	drawArt(prj, nav);

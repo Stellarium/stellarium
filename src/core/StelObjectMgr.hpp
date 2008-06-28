@@ -57,24 +57,24 @@ public:
 	//! Find and select an object near given equatorial position.
 	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object near given screen position.
 	//! @param added add the found object to selection if true, replace if false
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
-	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its translated name.
 	//! @param added add the found object to selection if true, replace if false
 	//! @param nameI18n the case sensitive object translated name
 	//! @return true if a object with the passed name was found
-	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its standard program name.
 	//! @param added add the found object to selection if true, replace if false
 	//! @param name the case sensitive object translated name
 	//! @return true if a object with the passed name was found
-	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -91,13 +91,13 @@ public:
 	//! Notify that we want to select the given object.
 	//! @param added add the object to selection if true, replace if false
 	//! @return true if at least 1 object was sucessfully selected
-	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
 	//! Notify that we want to select the given objects.
 	//! @param objs a vector of objects to select
 	//! @param added add the object to selection if true, replace if false
 	//! @return true if at least 1 object was sucessfully selected
-	bool setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::REPLACE_SELECTION);
+	bool setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Get the list objects which was recently selected by the user.
 	const std::vector<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
@@ -110,11 +110,12 @@ public:
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
 private:
-	std::vector<StelObjectModule*> objectsModule;	// The list of StelObjectModule that are referenced in Stellarium
-	
-	std::vector<StelObjectP> lastSelectedObjects;	// The last selected object in stellarium
-	
-	bool object_pointer_visibility;		// Should selected object pointer be drawn
+	// The list of StelObjectModule that are referenced in Stellarium
+	std::vector<StelObjectModule*> objectsModule;	
+	// The last selected object in stellarium
+	std::vector<StelObjectP> lastSelectedObjects;
+	// Should selected object pointer be drawn
+	bool object_pointer_visibility;	
 
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;

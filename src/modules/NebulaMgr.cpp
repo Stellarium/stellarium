@@ -129,7 +129,7 @@ void NebulaMgr::draw(StelCore* core)
 
 	Vec3f pXYZ;
 	
-	prj->setCurrentFrame(Projector::FRAME_J2000);
+	prj->setCurrentFrame(Projector::FrameJ2000);
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
 	const StelGeom::ConvexPolygon& p = prj->getViewportConvexPolygon(margin, margin);

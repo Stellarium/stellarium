@@ -93,15 +93,15 @@ public:
 	//! the existing selection list.
 	enum StelModuleSelectAction
 	{
-		ADD_TO_SELECTION,
-		REPLACE_SELECTION,
-		REMOVE_FROM_SELECTION
+		AddToSelection,
+		ReplaceSelection,
+		RemoveFromSelection
 	};
 
 	//! Indicate that the user requested selection of StelObjects.
 	//! The StelModule should then manage by themself how they handle the event
 	//! @param added true if the user request that the objects are added to the selection
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=REPLACE_SELECTION) {;}
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {;}
 	
 	//! Load color scheme from the given ini file and section name
 	//! @param conf application settings object
