@@ -245,22 +245,22 @@ void Navigator::updateTime(double deltaTime)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 // see vsop87.doc:
 
-const Mat4d mat_j2000_to_vsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
-const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
+const Mat4d matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
+const Mat4d matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 
 void Navigator::updateTransformMatrices(void)
 {
 	matLocalToEarthEqu = position->getRotLocalToEquatorial(JDay);
 	matEarthEquToLocal = matLocalToEarthEqu.transpose();
 
-	matEarthEquToJ2000 = mat_vsop87_to_j2000 * position->getRotEquatorialToVsop87();
+	matEarthEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEarthEqu = matEarthEquToJ2000.transpose();
 	matJ2000ToLocal = matEarthEquToLocal*matJ2000ToEarthEqu;
 	
-	matHelioToEarthEqu = matJ2000ToEarthEqu * mat_vsop87_to_j2000 * Mat4d::translation(-position->getCenterVsop87Pos());
+	matHelioToEarthEqu = matJ2000ToEarthEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp = mat_j2000_to_vsop87 * matEarthEquToJ2000 * matLocalToEarthEqu;
+	Mat4d tmp = matJ2000ToVsop87 * matEarthEquToJ2000 * matLocalToEarthEqu;
 
 	matLocalToHelio =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));

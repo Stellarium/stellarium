@@ -28,11 +28,11 @@
 #include <QGLWidget>
 #include <QDebug>
 
-LoadingBar::LoadingBar(Projector* _prj, float font_size, const QString&  splash_tex, 
+LoadingBar::LoadingBar(Projector* _prj, float fontSize, const QString&  splash_tex, 
 	int screenw, int screenh, const QString& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
-barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), font_size)),
+barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
 			  extraText(extraTextString)
 {

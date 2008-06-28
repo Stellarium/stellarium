@@ -48,16 +48,16 @@ class GeodesicGrid
 	// Each zone has a unique integer number in the range
 	// [0,getNrOfZones()-1].
 public:
-	GeodesicGrid(int max_level);
+	GeodesicGrid(int maxLevel);
 	~GeodesicGrid(void);
 	
 	
-	int getMaxLevel(void) const {return max_level;}
+	int getMaxLevel(void) const {return maxLevel;}
 	
 	static int nrOfZones(int level)
 	{return (20<<(level<<1));} // 20*4^level
 	
-	int getNrOfZones(void) const {return nrOfZones(max_level);}
+	int getNrOfZones(void) const {return nrOfZones(maxLevel);}
 	
 	//! Return the position of the 3 corners for the triangle at the given level and index
 	void getTriangleCorners(int lev, int index, Vec3d& c0, Vec3d& c1, Vec3d& c2) const;
@@ -70,14 +70,14 @@ public:
 	                         const Vec3d &c2,
 	                         void *context);
 	
-	void visitTriangles(int max_visit_level, VisitFunc *func,void *context) const;
+	void visitTriangles(int maxVisitLevel, VisitFunc *func,void *context) const;
 
 	//! Find the zone number in which a given point lies.
 	//! prerequisite: v*v==1
 	//! When the point lies on the border of two or more zones,
 	//! one such zone is returned (always the same one,
 	//! because the algorithm is deterministic).
-	int searchZone(const Vec3d &v,int search_level) const;
+	int searchZone(const Vec3d &v,int searchLevel) const;
 
 	//! Find all zones that lie fully(inside) or partly(border)
 	//! in the intersection of the given half spaces.
@@ -92,8 +92,8 @@ public:
 	//! for 0<=l<=getMaxLevel().
 	//! inside[l] will not contain zones that are already contained
 	//! in inside[l1] for some l1 < l.
-	//! In order to restrict search depth set maxSearchLevel < max_level,
-	//! for full search depth set maxSearchLevel = max_level,
+	//! In order to restrict search depth set maxSearchLevel < maxLevel,
+	//! for full search depth set maxSearchLevel = maxLevel,
 	void searchZones(const StelGeom::ConvexS& convex,
 	                 int **inside,int **border,int maxSearchLevel) const;
 
@@ -117,19 +117,19 @@ private:
 	                    const Vec3d &c0,
 	                    const Vec3d &c1,
 	                    const Vec3d &c2,
-	                    int max_visit_level,
+	                    int maxVisitLevel,
 	                    VisitFunc *func,
 	                    void *context) const;
 	void searchZones(int lev,int index,
 	                 const StelGeom::ConvexS& convex,
-	                 const int *index_of_used_half_spaces,
-	                 const int half_spaces_used,
+	                 const int *indexOfUsedHalfSpaces,
+	                 const int halfSpacesUsed,
 	                 const bool *corner0_inside,
 	                 const bool *corner1_inside,
 	                 const bool *corner2_inside,
 	                 int **inside,int **border,int maxSearchLevel) const;
 
-	const int max_level;
+	const int maxLevel;
 	struct Triangle
 	{
 		Vec3d e0,e1,e2;   // Seitenmittelpunkte
@@ -187,18 +187,18 @@ class GeodesicSearchInsideIterator
 {
 public:
 	GeodesicSearchInsideIterator(const GeodesicSearchResult &r,int level)
-: r(r),max_level((level<0)?0:(level>r.grid.getMaxLevel())
+: r(r),maxLevel((level<0)?0:(level>r.grid.getMaxLevel())
 	                 ?r.grid.getMaxLevel():level)
 	{reset();}
 	void reset(void);
 	int next(void); // returns -1 when finished
 private:
 	const GeodesicSearchResult &r;
-	const int max_level;
+	const int maxLevel;
 	int level;
-	int max_count;
-	int *index_p;
-	int *end_p;
+	int maxCount;
+	int *indexP;
+	int *endP;
 	int index;
 	int count;
 };
