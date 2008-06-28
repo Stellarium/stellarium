@@ -84,12 +84,12 @@ void MeteorMgr::setMaxVelocity(int maxv)
 	max_velocity = maxv;
 }
 
-void MeteorMgr::update(double delta_time)
+void MeteorMgr::update(double deltaTime)
 {
 	if (!flagShow)
 		return;
 	
-	delta_time*=1000;
+	deltaTime*=1000;
 	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
 	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproducer();
@@ -101,7 +101,7 @@ void MeteorMgr::update(double delta_time)
 	{
 		n++;
 		//qDebug("Meteor %d update\n", ++n);
-		if( !( (*iter)->update(delta_time) ) )
+		if( !( (*iter)->update(deltaTime) ) )
 		{
 			// remove dead meteor
 			//      qDebug("Meteor \tdied\n");
@@ -132,13 +132,13 @@ void MeteorMgr::update(double delta_time)
 
 	// if stellarium has been suspended, don't create huge number of meteors to
 	// make up for lost time!
-	if( delta_time > 500 )
+	if( deltaTime > 500 )
 	{
-		delta_time = 500;
+		deltaTime = 500;
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int)((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f + 0.5);
+	int mpf = (int)((double)ZHR*zhr_to_wsr*(double)deltaTime/1000.0f + 0.5);
 	if( mpf < 1 ) mpf = 1;
 
 	int mlaunch = 0;
@@ -147,7 +147,7 @@ void MeteorMgr::update(double delta_time)
 
 		// start new meteor based on ZHR time probability
 		double prob = (double)rand()/((double)RAND_MAX+1);
-		if( ZHR > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f/(double)mpf) )
+		if( ZHR > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)deltaTime/1000.0f/(double)mpf) )
 		{
 			Meteor *m = new Meteor(proj, nav, eye, max_velocity);
 			active.push_back(m);
@@ -155,7 +155,7 @@ void MeteorMgr::update(double delta_time)
 		}
 	}
 
-	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhr_to_wsr, delta_time);
+	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhr_to_wsr, deltaTime);
 
 
 }

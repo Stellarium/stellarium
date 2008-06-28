@@ -217,12 +217,12 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 	return NULL;
 }
 
-void Constellation::update(int delta_time)
+void Constellation::update(int deltaTime)
 {
-	line_fader.update(delta_time);
-	name_fader.update(delta_time);
-	art_fader.update(delta_time);
-	boundary_fader.update(delta_time);
+	line_fader.update(deltaTime);
+	name_fader.update(deltaTime);
+	art_fader.update(deltaTime);
+	boundary_fader.update(deltaTime);
 }
 
 void Constellation::drawBoundaryOptim(Projector* prj) const

@@ -1120,7 +1120,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 }
 
 
-void SolarSystem::update(double delta_time)
+void SolarSystem::update(double deltaTime)
 {
 	bool restartTrails = false;
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
@@ -1137,7 +1137,7 @@ void SolarSystem::update(double delta_time)
 	{
 		if(restartTrails) (*iter)->startTrail(true);
 		(*iter)->updateTrail(nav);
-		(*iter)->update((int)(delta_time*1000));
+		(*iter)->update((int)(deltaTime*1000));
 		iter++;
 	}
 }

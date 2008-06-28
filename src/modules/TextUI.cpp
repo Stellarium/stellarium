@@ -45,7 +45,7 @@ double TextUI::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void TextUI::update(double delta_time)
+void TextUI::update(double deltaTime)
 {
 	return;
 }
