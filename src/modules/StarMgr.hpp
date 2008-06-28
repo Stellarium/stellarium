@@ -128,9 +128,9 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
 	//! Set the color used to label bright stars.
-	void setLabelColor(const Vec3f& c) {label_color = c;}
+	void setLabelColor(const Vec3f& c) {labelColor = c;}
 	//! Get the current color used to label bright stars.
-	Vec3f getLabelColor(void) const {return label_color;}
+	Vec3f getLabelColor(void) const {return labelColor;}
 	
 	//! Set display flag for Stars.
 	void setFlagStars(bool b) {starsFader=b;}
@@ -260,7 +260,7 @@ private:
 	double fontSize;
 	SFont *starFont;
 	static bool flagSciNames;
-	Vec3f label_color;
+	Vec3f labelColor;
 	
 	STextureSP texPointer;		// The selection pointer texture
 };

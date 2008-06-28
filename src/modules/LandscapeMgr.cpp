@@ -137,7 +137,7 @@ void Cardinals::updateI18n()
 }
 
 
-LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
+LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
 {
 	setObjectName("LandscapeMgr");
 }
@@ -145,7 +145,7 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinals_points(NULL), landsca
 LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
-	delete cardinals_points;
+	delete cardinalsPoints;
 	delete landscape;
 	landscape = NULL;
 }
@@ -166,7 +166,7 @@ void LandscapeMgr::update(double deltaTime)
 {
 	atmosphere->update(deltaTime);
 	landscape->update(deltaTime);
-	cardinals_points->update(deltaTime);
+	cardinalsPoints->update(deltaTime);
 	
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
@@ -179,7 +179,7 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d sunPos = nav->helioToLocal(ssystem->getSun()->getHeliocentricEclipticPos());
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = nav->helioToLocal(ssystem->getMoon()->getHeliocentricEclipticPos());
-	atmosphere->compute_color(nav->getJDay(), sunPos, moonPos,
+	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
 	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
@@ -248,7 +248,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(eye, prj, nav);
 
 	// Draw the cardinal points
-	cardinals_points->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getLatitude());
+	cardinalsPoints->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getLatitude());
 }
 
 void LandscapeMgr::init()
@@ -264,8 +264,8 @@ void LandscapeMgr::init()
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",1.5).toDouble());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toDouble());
-	cardinals_points = new Cardinals();
-	cardinals_points->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
+	cardinalsPoints = new Cardinals();
+	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	
 	bool ok =true;
@@ -381,7 +381,7 @@ bool LandscapeMgr::loadLandscape(QMap<QString, QString>& param)
 void LandscapeMgr::updateI18n()
 {
 	// Translate all labels with the new language
-	if (cardinals_points) cardinals_points->updateI18n();
+	if (cardinalsPoints) cardinalsPoints->updateI18n();
 }
 
 void LandscapeMgr::setFlagLandscape(bool b) 
@@ -451,25 +451,25 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 //! Set flag for displaying Cardinals Points
 void LandscapeMgr::setFlagCardinalsPoints(bool b) 
 {
-	cardinals_points->setFlagShow(b);
+	cardinalsPoints->setFlagShow(b);
 }
 
 //! Get flag for displaying Cardinals Points
 bool LandscapeMgr::getFlagCardinalsPoints(void) const 
 {
-	return cardinals_points->getFlagShow();
+	return cardinalsPoints->getFlagShow();
 }
 
 //! Set Cardinals Points color
 void LandscapeMgr::setColorCardinalPoints(const Vec3f& v) 
 {
-	cardinals_points->setColor(v); 
+	cardinalsPoints->setColor(v); 
 }
 
 //! Get Cardinals Points color
 Vec3f LandscapeMgr::getColorCardinalPoints(void) const 
 {
-	return cardinals_points->get_color();
+	return cardinalsPoints->get_color();
 }
 	
 ///////////////////////////////////////////////////////////////////////////////////////

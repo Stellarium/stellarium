@@ -29,7 +29,7 @@
 // Uncomment to try out vertex buffers
 //#define USE_VERTEX_BUFFERS 1
 
-Atmosphere::Atmosphere(void) :viewport(0,0,0,0),sky_resolution_y(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
+Atmosphere::Atmosphere(void) :viewport(0,0,0,0),skyResolutionY(44), posGrid(NULL), colorGrid(NULL), indices(NULL),
             averageLuminance(0.f), eclipseFactor(1.), lightPollutionLuminance(0)
 {
 	setFadeDuration(3.f);
@@ -54,9 +54,9 @@ Atmosphere::~Atmosphere(void)
 	}
 }
 
-void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+void Atmosphere::computeColor(double JD, Vec3d sunPos, Vec3d moonPos, float moonPhase,
                                ToneReproducer * eye, Projector* prj,
-                               float latitude, float altitude, float temperature, float relative_humidity)
+                               float latitude, float altitude, float temperature, float relativeHumidity)
 {
 	if (viewport != prj->getViewport())
 	{
@@ -68,41 +68,41 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 			delete[] colorGrid;
 		if (indices)
 			delete[] indices;
-		sky_resolution_x = (int)floor(0.5+sky_resolution_y*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
-		posGrid = new Vec2f[(1+sky_resolution_x)*(1+sky_resolution_y)];
-		colorGrid = new Vec3f[(1+sky_resolution_x)*(1+sky_resolution_y)];
-		float stepX = (float)prj->getViewportWidth() / (sky_resolution_x-0.5);
-		float stepY = (float)prj->getViewportHeight() / sky_resolution_y;
+		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
+		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
+		colorGrid = new Vec3f[(1+skyResolutionX)*(1+skyResolutionY)];
+		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5);
+		float stepY = (float)prj->getViewportHeight() / skyResolutionY;
 		float viewport_left = (float)prj->getViewportPosX();
 		float viewport_bottom = (float)prj->getViewportPosY();
-		for (int x=0; x<=sky_resolution_x; ++x)
+		for (int x=0; x<=skyResolutionX; ++x)
 		{
-			for(int y=0; y<=sky_resolution_y; ++y)
+			for(int y=0; y<=skyResolutionY; ++y)
 			{
-				Vec2f &v(posGrid[y*(1+sky_resolution_x)+x]);
+				Vec2f &v(posGrid[y*(1+skyResolutionX)+x]);
 				v[0] = viewport_left + ((x == 0) ? 0.f : 
-						(x == sky_resolution_x) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
+						(x == skyResolutionX) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
 				v[1] = viewport_bottom+y*stepY;
 			}
 		}
 		
 		// Generate the indices used to draw the quads
-		indices = new GLushort[sky_resolution_x*sky_resolution_y*4];
+		indices = new GLushort[skyResolutionX*skyResolutionY*4];
 		int i=0;
-		for (int y2=0; y2<sky_resolution_y; ++y2)
+		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
-			GLushort g0 = y2*(1+sky_resolution_x);
+			GLushort g0 = y2*(1+skyResolutionX);
 			GLushort g1 = g0;
 			if (y2&1)
 			{
-				g1+=(1+sky_resolution_x);
+				g1+=(1+skyResolutionX);
 			}
 			else
 			{
-				g0+=(1+sky_resolution_x);
+				g0+=(1+skyResolutionX);
 			}
 			
-			for (int x2=0; x2<sky_resolution_x; ++x2)
+			for (int x2=0; x2<skyResolutionX; ++x2)
 			{
 				indices[i++]=g0;
 				indices[i++]=g1;
@@ -115,10 +115,10 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 		// Load the data on the GPU using vertex buffers
 		glGenBuffersARB(1, &vertexBufferId);
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vertexBufferId);
-		glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+sky_resolution_x)*(1+sky_resolution_y)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
+		glBufferDataARB(GL_ARRAY_BUFFER_ARB, (1+skyResolutionX)*(1+skyResolutionY)*2*sizeof(float), posGrid, GL_STATIC_DRAW_ARB);
 		glGenBuffersARB(1, &indicesBufferId);
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
-		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sky_resolution_x*sky_resolution_y*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
+		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, skyResolutionX*skyResolutionY*4*sizeof(GLushort), indices, GL_STATIC_DRAW_ARB);
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
 #endif
@@ -183,13 +183,13 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 
 	sky.set_paramsv(sun_pos, 5.f);
 
-	skyb.setLocation(latitude * M_PI/180., altitude, temperature, relative_humidity);
+	skyb.setLocation(latitude * M_PI/180., altitude, temperature, relativeHumidity);
 	skyb.setSunMoon(moon_pos[2], sun_pos[2]);
 
 	// Calculate the date from the julian day.
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	skyb.setDate(year, month, moon_phase);
+	skyb.setDate(year, month, moonPhase);
 
 	// Variables used to compute the average sky luminance
 	double sum_lum = 0.;
@@ -202,7 +202,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 	prj->setCurrentFrame(Projector::FrameLocal);
 	
 	// Compute the sky color for every point above the ground
-	for (int i=0; i<(1+sky_resolution_x)*(1+sky_resolution_y); ++i)
+	for (int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
 		Vec2f &v(posGrid[i]);
 		prj->unProject(v[0],v[1],point);
@@ -274,7 +274,7 @@ void Atmosphere::draw(StelCore* core)
 		glShadeModel(GL_SMOOTH);
 		
 		// Adapt luminance at this point to avoid a mismatch with the adaption value
-		for (int i=0;i<(1+sky_resolution_x)*(1+sky_resolution_y);++i)
+		for (int i=0;i<(1+skyResolutionX)*(1+skyResolutionY);++i)
 		{
 			Vec3f& c = colorGrid[i];
 			eye->xyYToRGB(c);
@@ -293,7 +293,7 @@ void Atmosphere::draw(StelCore* core)
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, indicesBufferId);
 		glVertexPointer(2, GL_FLOAT, 0, 0);
 		// And draw everything at once
-		glDrawElements(GL_QUADS, sky_resolution_x*sky_resolution_y*4, GL_UNSIGNED_SHORT, 0);
+		glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, 0);
 		// Unbind buffers
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
@@ -301,7 +301,7 @@ void Atmosphere::draw(StelCore* core)
 		// Load the vertex array
 		glVertexPointer(2, GL_FLOAT, 0, posGrid);
 		// And draw everything at once
-		glDrawElements(GL_QUADS, sky_resolution_x*sky_resolution_y*4, GL_UNSIGNED_SHORT, indices);
+		glDrawElements(GL_QUADS, skyResolutionX*skyResolutionY*4, GL_UNSIGNED_SHORT, indices);
 #endif
 		
 		glDisableClientState(GL_VERTEX_ARRAY);

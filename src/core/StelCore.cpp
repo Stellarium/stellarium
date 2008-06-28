@@ -106,8 +106,8 @@ void StelCore::update(double deltaTime)
 	movementMgr->updateMotion(deltaTime);	
 	
 	// Give the updated standard projection matrices to the projector.
-	// atmosphere->compute_color needs the projection matrices, so we must
-	// set them before calling atmosphere->compute_color, otherwise
+	// atmosphere->computeColor needs the projection matrices, so we must
+	// set them before calling atmosphere->computeColor, otherwise
 	// the first image will be rendered with invalid (nan)
 	// inverse projection matrices.
 	// On the other hand it must be called after ssystem->update

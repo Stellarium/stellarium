@@ -46,10 +46,10 @@
 
 #include "SkyImageTile.hpp"
 
-void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::label_color = c;}
-const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::label_color;}
-void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
-const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circle_color;}
+void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
+const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
+void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
+const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
@@ -61,7 +61,7 @@ NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
 
 NebulaMgr::~NebulaMgr()
 {
-	Nebula::tex_circle = STextureSP();
+	Nebula::texCircle = STextureSP();
 	
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -96,10 +96,10 @@ void NebulaMgr::init()
 	assert(conf);
 
 	double fontSize = 12;
-	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	Nebula::tex_circle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
+	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");   // Load pointer texture
 	
@@ -121,7 +121,7 @@ void NebulaMgr::draw(StelCore* core)
 	Projector* prj = core->getProjection();
 	SkyDrawer* skyDrawer = core->getSkyDrawer();
 	
-	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
+	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -198,7 +198,7 @@ void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
-	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
+	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circleColor", defaultColor).toString()));
 }
 
 // Search by name
@@ -475,7 +475,7 @@ void NebulaMgr::updateI18n()
 		(*iter)->translateName(trans);
 	}
 	double fontSize = 12;
-	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
+	Nebula::nebulaFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 

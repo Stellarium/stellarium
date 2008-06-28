@@ -64,11 +64,11 @@ public:
   void set_names_fade_duration(float duration)
     {name_fader.setDuration((int) (duration * 1000.f));}
   
-  void setLabelColor(const Vec3f &c) {label_color = c;}
-  const Vec3f &getLabelColor(void) const {return label_color;}
+  void setLabelColor(const Vec3f &c) {labelColor = c;}
+  const Vec3f &getLabelColor(void) const {return labelColor;}
 
-  void set_circle_color(const Vec3f &c) {circle_color = c;}
-  const Vec3f &getCircleColor(void) const {return circle_color;}
+  void set_circleColor(const Vec3f &c) {circleColor = c;}
+  const Vec3f &getCircleColor(void) const {return circleColor;}
   
   //! Set display flag for Telescopes
   void setFlagTelescopes(bool b) {telescope_fader=b;}
@@ -94,8 +94,8 @@ private:
 
   LinearFader name_fader;
   LinearFader telescope_fader;
-  Vec3f circle_color;
-  Vec3f label_color;
+  Vec3f circleColor;
+  Vec3f labelColor;
   SFont *telescope_font;
   STextureSP telescope_texture;
 
