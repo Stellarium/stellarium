@@ -8,6 +8,7 @@ use Term::ANSIColor;
 	my $textRed = color 'red';
 	my $textGreen = color 'green';
 	my $textBlue = color 'blue';
+	my $textYellow = color 'yellow';
 	my $textReset = color 'reset';
 
 my $flg_verbose = 0;
@@ -57,9 +58,26 @@ sub lusage {
 # e.g. variable_name -> variableName
 sub autoProcess {
 	my $s = shift;
-	my $w = $s;
-	$w =~ s/_([a-z])/uc($1)/ge;
-	$w =~ s/_//g;
+	# be rid of special characters
+	$s =~ s/\\b//g;
+	$s =~ s/\\z//g;
+
+	my $w;
+	if ($s =~ /^[A-Z\d_]+$/) {
+		# LIKE_THIS -> LikeThis
+		my @a = split(/_+/, $s);
+		$w = "";
+		foreach (@a) {
+			$_ = lc($_);
+			substr($_,0,1) = uc(substr($_,0,1));
+			$w .= $_;
+		}
+	}
+	else {
+		$w = $s;
+		$w =~ s/_([a-z])/uc($1)/ge;
+		$w =~ s/_//g;
+	}
 	return $w;
 }
 
@@ -78,7 +96,7 @@ sub refactorString {
 	}
 
 	if (!$flg_yes) {
-		print "${textBlue}Will replace${textReset} $s ${textBlue}with${textReset} $r${textBlue}:${textReset}\n";
+		print "${textBlue}Will replace${textGreen} $s ${textBlue}with${textRed} $r ${textBlue}:${textReset}\n";
 	}
 	my %patchFileList;
 	my $textRed = color 'red';
@@ -109,6 +127,7 @@ sub refactorString {
 				if (s/($s)/$textGreen$1$textReset/g) { 
 					$patchFileList{$f} = 1; 
 					if (!$flg_yes || $flg_verbose) {
+						s/(\")/$textRed$1$textReset/g;
 						print "    $f\[$.\]: $_";
 					}
 					$candidates++;
@@ -168,6 +187,7 @@ sub refactorString {
 					else {
 						my $prompt = $_;
 						$prompt =~ s/($s)/$textGreen$1$textReset/g;
+						$prompt =~ s/(\")/$textRed$1$textReset/g;
 						print "$prompt";
 						print "patch this line (y/n)? >";
 						my $res = <STDIN>;
