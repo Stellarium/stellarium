@@ -62,7 +62,7 @@ public:
   void communicate(void);
    
   void set_names_fade_duration(float duration)
-    {name_fader.setDuration((int) (duration * 1000.f));}
+    {nameFader.setDuration((int) (duration * 1000.f));}
   
   void setLabelColor(const Vec3f &c) {labelColor = c;}
   const Vec3f &getLabelColor(void) const {return labelColor;}
@@ -76,9 +76,9 @@ public:
   bool getFlagTelescopes(void) const {return (bool)telescope_fader;}  
   
   //! Set display flag for Telescope names
-  void setFlagTelescopeName(bool b) {name_fader=b;}
+  void setFlagTelescopeName(bool b) {nameFader=b;}
   //! Get display flag for Telescope names
-  bool getFlagTelescopeName(void) const {return name_fader==true;}
+  bool getFlagTelescopeName(void) const {return nameFader==true;}
   
   //! Define font size to use for telescope names display
   void setFontSize(float font_size);
@@ -92,7 +92,7 @@ private:
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const Projector* prj, const Navigator * nav);
 
-  LinearFader name_fader;
+  LinearFader nameFader;
   LinearFader telescope_fader;
   Vec3f circleColor;
   Vec3f labelColor;
