@@ -153,16 +153,16 @@ void ArtificialPlanet::computeAverage(double f1) {
 
 Observer::Observer(const SolarSystem &ssystem)
          :ssystem(ssystem),
-          planet(0), artificial_planet(0),
+          planet(0), artificialPlanet(0),
           longitude(0.), latitude(0.), altitude(0)
 {
 	locationName = "Anonymous_Location";
-	flag_move_to = false;
+	flagMoveTo = false;
 }
 
 Observer::~Observer()
 {
-  if (artificial_planet) delete artificial_planet;
+  if (artificialPlanet) delete artificialPlanet;
 }
 
 Vec3d Observer::getCenterVsop87Pos(void) const {
@@ -262,7 +262,7 @@ QString Observer::getHomePlanetNameI18n(void) const {
 }
 
 QString Observer::getLocationName(void) const {
-	return artificial_planet ? "" : locationName;
+	return artificialPlanet ? "" : locationName;
 }
 
 
@@ -278,46 +278,46 @@ bool Observer::setHomePlanet(const QString &english_name)
 	return true;
 }
 
-void Observer::setHomePlanet(const Planet *p, float transit_seconds)
+void Observer::setHomePlanet(const Planet *p, float transitSeconds)
 {
 	assert(p); // Assertion enables to track bad calls. Please keep it this way.
 	if (planet != p)
 	{
 		if (planet)
 		{
-			if (!artificial_planet)
+			if (!artificialPlanet)
 			{
-				artificial_planet = new ArtificialPlanet(*planet);
+				artificialPlanet = new ArtificialPlanet(*planet);
 				locationName = "";
 			}
-			artificial_planet->setDest(*p);
-			time_to_go = (int)(1000.f * transit_seconds); // milliseconds
+			artificialPlanet->setDest(*p);
+			timeToGo = (int)(1000.f * transitSeconds); // milliseconds
     	}
 		planet = p; 
 	}
 }
 
 const Planet *Observer::getHomePlanet(void) const {
-  return artificial_planet ? artificial_planet : planet;
+  return artificialPlanet ? artificialPlanet : planet;
 }
 
 
 // move gradually to a new observation location
 void Observer::moveTo(double lat, double lon, double alt, int duration, const QString& _name)
 {
-  flag_move_to = true;
+  flagMoveTo = true;
 
-  start_lat = latitude;
-  end_lat = lat;
+  startLat = latitude;
+  endLat = lat;
 
-  start_lon = longitude;
-  end_lon = lon;
+  startLon = longitude;
+  endLon = lon;
 
-  start_alt = altitude;
-  end_alt = alt;
+  startAlt = altitude;
+  endAlt = alt;
 
-  move_to_coef = 1.0f/duration;
-  move_to_mult = 0;
+  moveToCoef = 1.0f/duration;
+  moveToMult = 0;
 
   locationName = _name;
 }
@@ -325,15 +325,15 @@ void Observer::moveTo(double lat, double lon, double alt, int duration, const QS
 
 // for moving observator position gradually
 // TODO need to work on direction of motion...
-void Observer::update(int delta_time)
+void Observer::update(int deltaTime)
 {
-	if (artificial_planet)
+	if (artificialPlanet)
 	{
-		time_to_go -= delta_time;
-		if (time_to_go <= 0)
+		timeToGo -= deltaTime;
+		if (timeToGo <= 0)
 		{
-			delete artificial_planet;
-			artificial_planet = NULL;
+			delete artificialPlanet;
+			artificialPlanet = NULL;
 			StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
 			if (objmgr.getWasSelected() && objmgr.getSelectedObject()[0].get()==planet)
 			{
@@ -342,21 +342,21 @@ void Observer::update(int delta_time)
 		}
 		else
 		{
-			const double f1 = time_to_go/(double)(time_to_go + delta_time);
-			artificial_planet->computeAverage(f1);
+			const double f1 = timeToGo/(double)(timeToGo + deltaTime);
+			artificialPlanet->computeAverage(f1);
 		}
 	}
 
-	if (flag_move_to)
+	if (flagMoveTo)
 	{
-		move_to_mult += move_to_coef*delta_time;
-		if (move_to_mult >= 1.f)
+		moveToMult += moveToCoef*deltaTime;
+		if (moveToMult >= 1.f)
 		{
-			move_to_mult = 1.f;
-			flag_move_to = false;
+			moveToMult = 1.f;
+			flagMoveTo = false;
 		}
-		latitude = start_lat - move_to_mult*(start_lat-end_lat);
-		longitude = start_lon - move_to_mult*(start_lon-end_lon);
-		altitude = int(start_alt - move_to_mult*(start_alt-end_alt));
+		latitude = startLat - moveToMult*(startLat-endLat);
+		longitude = startLon - moveToMult*(startLon-endLon);
+		altitude = int(startAlt - moveToMult*(startAlt-endAlt));
 	}
 }

@@ -154,7 +154,7 @@ Meteor::~Meteor()
 }
 
 // returns true if alive
-bool Meteor::update(double delta_time)
+bool Meteor::update(double deltaTime)
 {
   if(!alive) return(0);
 
@@ -162,22 +162,22 @@ bool Meteor::update(double delta_time)
     // burning has stopped so magnitude fades out
     // assume linear fade out
 
-    mag -= max_mag * delta_time/500.0f;
+    mag -= max_mag * deltaTime/500.0f;
     if( mag < 0 ) alive=0;  // no longer visible
 
   }
 
   // *** would need time direction multiplier to allow reverse time replay
-  position[2] = position[2] - velocity*delta_time/1000.0f;
+  position[2] = position[2] - velocity*deltaTime/1000.0f;
 
   // train doesn't extend beyond start of burn
   if( position[2] + velocity*0.5f > start_h ) {
     pos_train[2] = start_h ;
   } else {
-    pos_train[2] -= velocity*delta_time/1000.0f;
+    pos_train[2] -= velocity*deltaTime/1000.0f;
   }
 
-  //qDebug("meteor position: %f delta_t %d\n", position[2], delta_time);
+  //qDebug("meteor position: %f delta_t %d\n", position[2], deltaTime);
 
   // determine visual magnitude based on distance to observer
   double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );

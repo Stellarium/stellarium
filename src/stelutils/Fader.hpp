@@ -32,7 +32,7 @@ public:
 	// Create and initialise
 	Fader(bool _state, float _min_value=0.f, float _max_value=1.f) : state(_state), min_value(_min_value), max_value(_max_value) {;}
     virtual ~Fader() {;}
-	// Increments the internal counter of delta_time ticks
+	// Increments the internal counter of deltaTime ticks
 	virtual void update(int delta_ticks) = 0;
 	// Gets current switch state
 	virtual float getInterstate(void) const = 0;
@@ -58,7 +58,7 @@ public:
 	// Create and initialise
 	BooleanFader(bool _state=false, float _min_value=0.f, float _max_value=1.f) : Fader(_state, _min_value, _max_value) {;}
     ~BooleanFader() {;}
-	// Increments the internal counter of delta_time ticks
+	// Increments the internal counter of deltaTime ticks
 	void update(int delta_ticks) {;}
 	// Gets current switch state
 	float getInterstate(void) const {return state ? max_value : min_value;}
@@ -85,7 +85,7 @@ public:
 	
     ~LinearFader() {;}
 	
-	// Increments the internal counter of delta_time ticks
+	// Increments the internal counter of deltaTime ticks
 	void update(int delta_ticks)
 	{
 		if (!is_transiting) return; // We are not in transition
@@ -168,7 +168,7 @@ public:
 	
     ~ParabolicFader() {;}
 	
-	// Increments the internal counter of delta_time ticks
+	// Increments the internal counter of deltaTime ticks
 	void update(int delta_ticks)
 	{
 		if (!is_transiting) return; // We are not in transition
@@ -242,7 +242,7 @@ public:
 		{
 		}
 	
-	// Increments the internal counter of delta_time ticks
+	// Increments the internal counter of deltaTime ticks
 	void update(int delta_ticks)
 	{
 

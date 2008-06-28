@@ -621,12 +621,12 @@ void ConstellationMgr::updateI18n()
 }
 
 // update faders
-void ConstellationMgr::update(double delta_time)
+void ConstellationMgr::update(double deltaTime)
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->update((int)(delta_time*1000));
+		(*iter)->update((int)(deltaTime*1000));
 	}
 }
 

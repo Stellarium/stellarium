@@ -313,7 +313,7 @@ private:
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
 
-	int timeMultiplier;	// used for adjusting delta_time for script speeds
+	int timeMultiplier;	// used for adjusting deltaTime for script speeds
 	
 	//! Define whether we are in night vision mode
 	bool flagNightVision;

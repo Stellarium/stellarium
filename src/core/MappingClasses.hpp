@@ -6,7 +6,7 @@
 class MappingPerspective : public Mapping
 {
 public:
-    MappingPerspective(void);
+	MappingPerspective(void);
 	virtual QString getId() const {return "perspective";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -48,7 +48,7 @@ private:
 class MappingStereographic : public Mapping
 {
 public:
-    MappingStereographic(void);
+	MappingStereographic(void);
 	virtual QString getId(void) const {return "stereographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -80,7 +80,7 @@ private:
 class MappingFisheye : public Mapping
 {
 public:
-    MappingFisheye(void);
+	MappingFisheye(void);
 	virtual QString getId(void) const {return "fisheye";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -118,7 +118,7 @@ private:
 class MappingCylinder : public Mapping
 {
 public:
-    MappingCylinder(void);
+	MappingCylinder(void);
 	virtual QString getId(void) const {return "cylinder";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -135,7 +135,7 @@ private:
 class MappingMercator : public Mapping
 {
 public:
-    MappingMercator(void);
+	MappingMercator(void);
 	virtual QString getId(void) const {return "mercator";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -152,7 +152,7 @@ private:
 class MappingOrthographic : public Mapping
 {
 public:
-    MappingOrthographic(void);
+	MappingOrthographic(void);
 	virtual QString getId(void) const {return "orthographic";}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
@@ -166,4 +166,5 @@ private:
 	double deltaZoom(double fov) const;
 };
 
-#endif
+#endif // _MAPPING_CLASSES_HPP_
+

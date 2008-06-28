@@ -108,7 +108,7 @@ private:
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
 	void drawArtOptim(Projector* prj, const Navigator* nav) const;
 	//! Update fade levels according to time since various events.
-	void update(int delta_time);
+	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
 	void setFlagLines(bool b) {line_fader=b;}

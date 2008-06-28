@@ -107,7 +107,7 @@ public:
 	std::vector<StelObjectP> getSelectedObject(const QString& type);
 
 	//! Set whether a pointer is to be drawn over selected object.
-	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
+	void setFlagSelectedObjectPointer(bool b) { objectPointerVisibility = b; }
 	
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
@@ -115,7 +115,7 @@ private:
 	// The last selected object in stellarium
 	std::vector<StelObjectP> lastSelectedObjects;
 	// Should selected object pointer be drawn
-	bool object_pointer_visibility;	
+	bool objectPointerVisibility;	
 
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;

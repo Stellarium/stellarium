@@ -963,10 +963,10 @@ void Planet::startTrail(bool b)
 	}
 }
 
-void Planet::update(int delta_time)
+void Planet::update(int deltaTime)
 {
-	hint_fader.update(delta_time);
-	labelsFader.update(delta_time);
-	orbitFader.update(delta_time);
-	trailFader.update(delta_time);
+	hint_fader.update(deltaTime);
+	labelsFader.update(deltaTime);
+	orbitFader.update(deltaTime);
+	trailFader.update(deltaTime);
 }
