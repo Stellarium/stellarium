@@ -35,12 +35,12 @@
 
 #include <QDebug>
 
-STextureSP Nebula::tex_circle;
-SFont* Nebula::nebula_font = NULL;
+STextureSP Nebula::texCircle;
+SFont* Nebula::nebulaFont = NULL;
 float Nebula::circleScale = 1.f;
-float Nebula::hints_brightness = 0;
-Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
-Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
+float Nebula::hintsBrightness = 0;
+Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
+Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 
 Nebula::Nebula() :
 		M_nb(0),
@@ -163,8 +163,8 @@ void Nebula::drawHints(const StelCore* core, float maxMagHints)
 	//if (4.f/getOnScreenSize(core)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.;//MY_MIN(1,4.f/getOnScreenSize(core))*0.8;
-	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
-	Nebula::tex_circle->bind();
+	glColor3f(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
+	Nebula::texCircle->bind();
 	core->getProjection()->drawSprite2dMode(XY[0], XY[1], 8);
 }
 
@@ -172,7 +172,7 @@ void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;
-	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
+	glColor4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
 	float size = getOnScreenSize(core);
 	float shift = 4.f + size/1.8f;
 	QString str;
@@ -188,7 +188,7 @@ void Nebula::drawLabel(const StelCore* core, float maxMagLabel)
 			str = QString("IC %1").arg(IC_nb);
 	}
 	
-	core->getProjection()->drawText(nebula_font,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+	core->getProjection()->drawText(nebulaFont,XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
 bool Nebula::readNGC(char *recordstr)
@@ -237,19 +237,19 @@ bool Nebula::readNGC(char *recordstr)
 		size = 1;
 
 	// this is a huge performance drag if called every frame, so cache here
-	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
-	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NEB_OC;}
-	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NEB_GC;}
-	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N;}
-	else if (!strncmp(&recordstr[8],"Pl",2)) { nType = NEB_PN;}
+	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NebGx;}
+	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NebOc;}
+	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NebGc;}
+	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NebN;}
+	else if (!strncmp(&recordstr[8],"Pl",2)) { nType = NebPn;}
 	else if (!strncmp(&recordstr[8],"  ",2)) { return false;}
 	else if (!strncmp(&recordstr[8]," -",2)) { return false;}
 	else if (!strncmp(&recordstr[8]," *",2)) { return false;}
 	else if (!strncmp(&recordstr[8],"D*",2)) { return false;}
 	else if (!strncmp(&recordstr[7],"***",3)) { return false;}
-	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NEB_CN;}
-	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NEB_UNKNOWN;}
-	else { nType = NEB_UNKNOWN;}
+	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NebCn;}
+	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NebUnknown;}
+	else { nType = NebUnknown;}
 
 	return true;
 }
@@ -260,25 +260,25 @@ QString Nebula::getTypeString(void) const
 
 	switch(nType)
 	{
-		case NEB_GX:
+		case NebGx:
 			wsType = q_("Galaxy");
 			break;
-		case NEB_OC:
+		case NebOc:
 			wsType = q_("Open cluster");
 			break;
-		case NEB_GC:
+		case NebGc:
 			wsType = q_("Globular cluster");
 			break;
-		case NEB_N:
+		case NebN:
 			wsType = q_("Nebula");
 			break;
-		case NEB_PN:
+		case NebPn:
 			wsType = q_("Planetary nebula");
 			break;
-		case NEB_CN:
+		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");
 			break;
-		case NEB_UNKNOWN:
+		case NebUnknown:
 			wsType = q_("Unknown");
 			break;
 		default:

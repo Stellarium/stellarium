@@ -89,7 +89,7 @@ private:
 	// Compute the luminance distribution coefficients
 	inline void compute_luminance_distribution_coefs(void);
 	// Compute the color distribution coefficients
-	inline void compute_color_distribution_coefs(void);
+	inline void computeColorDistributionCoefs(void);
 
 };
 
@@ -143,7 +143,7 @@ inline void Skylight::compute_luminance_distribution_coefs(void)
 }
 
 // Compute the color distribution coefficients
-inline void Skylight::compute_color_distribution_coefs(void)
+inline void Skylight::computeColorDistributionCoefs(void)
 {
 	Ax =-0.0193f*T - 0.2592f;
 	Bx =-0.0665f*T + 0.0008f;

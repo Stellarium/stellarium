@@ -31,15 +31,15 @@ public:
 	//! Set the sky date to use for atmosphere computation
 	//! @param year the year in YYYY format
 	//! @param month the month: 1=Jan, 12=Dec
-	//! @param moon_phase the moon phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-	void setDate(int year, int month, float moon_phase);
+	//! @param moonPhase the moon phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
+	void setDate(int year, int month, float moonPhase);
 
 	//! Set the position parameters to use for atmosphere computation
 	//! @param latitude observer latitude in radian
 	//! @param altitude observer altitude in m
 	//! @param temperature temperature in deg. C
 	//! @param humidity air humidity in %
-	void setLocation(float latitude, float altitude, float temperature = 15.f, float relative_humidity = 40.f);
+	void setLocation(float latitude, float altitude, float temperature = 15.f, float relativeHumidity = 40.f);
 
 	//! Set the moon and sun zenith angular distance (cosin given) and precompute what can be
 	//! This funtion has to be called once before any call to get_luminance()

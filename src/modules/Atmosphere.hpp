@@ -37,9 +37,9 @@ class Atmosphere
 public:
     Atmosphere(void);
     virtual ~Atmosphere(void);
-	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, ToneReproducer * eye, Projector* prj,
+	void computeColor(double JD, Vec3d sunPos, Vec3d moonPos, float moonPhase, ToneReproducer * eye, Projector* prj,
 		float latitude = 45.f, float altitude = 200.f,
-		float temperature = 15.f, float relative_humidity = 40.f);
+		float temperature = 15.f, float relativeHumidity = 40.f);
 	void draw(StelCore* core);
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	
@@ -75,7 +75,7 @@ private:
 	Vector4<GLint> viewport;
 	Skylight sky;
 	Skybright skyb;
-	int sky_resolution_y,sky_resolution_x;
+	int skyResolutionY,skyResolutionX;
 	
 	Vec2f* posGrid;
 	Vec3f* colorGrid;

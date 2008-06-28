@@ -188,8 +188,8 @@ public:
 
 	static void setFont(SFont* f) {planet_name_font = f;}
 	
-	static void setLabelColor(const Vec3f& lc) {label_color = lc;}
-	static const Vec3f& getLabelColor(void) {return label_color;}
+	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
+	static const Vec3f& getLabelColor(void) {return labelColor;}
 
 	void update(int deltaTime);
 	
@@ -280,7 +280,7 @@ protected:
 	const Planet *parent;           // Planet parent i.e. sun for earth
 	list<Planet *> satellites;      // satellites of the Planet
 	static SFont* planet_name_font; // Font for names
-	static Vec3f label_color;
+	static Vec3f labelColor;
 	static STextureSP hintCircleTex;
 	LinearFader hint_fader;
 	LinearFader labelsFader;        // Store the current state of the label for this planet

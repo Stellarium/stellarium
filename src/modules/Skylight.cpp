@@ -53,7 +53,7 @@ void Skylight::set_params(float _sun_zenith_angle, float _turbidity)
 	compute_zenith_luminance();
 	compute_zenith_color();
 	compute_luminance_distribution_coefs();
-	compute_color_distribution_coefs();
+	computeColorDistributionCoefs();
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
 	float cos_thetas = std::cos(thetas);
@@ -78,7 +78,7 @@ void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 	compute_zenith_luminance();
 	compute_zenith_color();
 	compute_luminance_distribution_coefs();
-	compute_color_distribution_coefs();
+	computeColorDistributionCoefs();
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
 	float cos_thetas = sun_pos[2];
