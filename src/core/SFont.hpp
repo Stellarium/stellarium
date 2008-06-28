@@ -36,7 +36,7 @@
 class SFont
 {
 public:
-	SFont(float size_i, const QString& ttfFileName);
+	SFont(float sizeI, const QString& ttfFileName);
 	~SFont() {;}
     
 	void print(float x, float y, const QString& s, int upsidedown = 1) const
@@ -44,12 +44,12 @@ public:
 		typeFace.render(s, Vec2f(x, y), upsidedown==1);
 	}
     
-	void print_char(const QChar c) const
+	void printChar(const QChar c) const
 	{
 		typeFace.renderGlyphs(c);
 	}
 
-	void print_char_outlined(const QChar c) const;
+	void printCharOutlined(const QChar c) const;
 	float getStrLen(const QString& s) const {return typeFace.width(s);}
 	float getLineHeight(void) const {return typeFace.lineHeight();}
 	float getAscent(void) const {return typeFace.ascent();}
