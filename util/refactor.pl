@@ -153,7 +153,7 @@ sub refactorString {
 		$do_it = 1;
 	}
 	else {
-		print "\nAccept changes (${textGreen}y${textReset}es/${textGreen}n${textReset}o/${textGreen}p${textReset}rompt)? >";
+		print "\nAccept $candidates changes (${textGreen}y${textReset}es/${textGreen}n${textReset}o/${textGreen}p${textReset}rompt)? >";
 		my $res = <STDIN>;
 		chomp $res;
 		if (lc($res) eq "y") {
