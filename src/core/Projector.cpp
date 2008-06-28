@@ -913,11 +913,11 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 	{
 		if( !speedOptimize )
 		{
-			font->print_char_outlined(ws[i]);
+			font->printCharOutlined(ws[i]);
 		}
 		else
 		{
-			font->print_char(ws[i]);
+			font->printChar(ws[i]);
 		}
 
 		// with typeface need to manually advance
