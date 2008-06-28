@@ -61,9 +61,9 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	if (landscapeIni.contains("location/planet")) planet = landscapeIni.value("location/planet").toString();
 	if (landscapeIni.contains("location/altitude")) altitude = landscapeIni.value("location/altitude").toInt();
 	if (landscapeIni.contains("location/latitude")) 
-		latitude = StelUtils::get_dec_angle(landscapeIni.value("location/latitude").toString());
+		latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString());
 	if (landscapeIni.contains("location/longitude")) 
-		longitude = StelUtils::get_dec_angle(landscapeIni.value("location/longitude").toString());
+		longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString());
 }
 
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)

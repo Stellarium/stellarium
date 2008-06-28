@@ -134,14 +134,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&RaDecJ2000)
 	{
-		StelUtils::rect_to_sphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
+		StelUtils::rectToSphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
 		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	}
 
 	if (flags&AltAzi)
 	{
 		// calculate alt az position
-		StelUtils::rect_to_sphe(&tempRA, &tempDE, getAltAzPos(nav));
+		StelUtils::rectToSphe(&tempRA, &tempDE, getAltAzPos(nav));
 		tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 		if(tempRA > M_PI*2)
 			tempRA -= M_PI*2;

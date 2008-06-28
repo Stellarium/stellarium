@@ -115,7 +115,7 @@ void ConstellationMgr::updateSkyCulture()
 	// Check if the sky culture changed since last load, if not don't load anything
 	if (lastLoadedSkyCulture == newSkyCulture)
 		return;
-	
+
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
 	QString conArtFile;
@@ -167,9 +167,9 @@ void ConstellationMgr::setColorScheme(const QSettings* conf, const QString& sect
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLinesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_lines_color",    defaultColor).toString()));
-	setBoundariesColor(StelUtils::str_to_vec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setLabelsColor(StelUtils::str_to_vec3f(conf->value(section+"/const_names_color",    defaultColor).toString()));
+	setLinesColor(StelUtils::strToVec3f(conf->value(section+"/const_lines_color",    defaultColor).toString()));
+	setBoundariesColor(StelUtils::strToVec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color",    defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
@@ -636,7 +636,7 @@ void ConstellationMgr::setArtIntensity(double _max)
 	artMaxIntensity = _max;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->art_fader.set_max_value(_max);
+		(*iter)->art_fader.setMaxValue(_max);
 }
 
 void ConstellationMgr::setArtFadeDuration(float duration)
@@ -644,7 +644,7 @@ void ConstellationMgr::setArtFadeDuration(float duration)
 	artFadeDuration = duration;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->art_fader.set_duration((int) (duration * 1000.f));
+		(*iter)->art_fader.setDuration((int) (duration * 1000.f));
 }
 
 void ConstellationMgr::setFlagLines(bool b)
@@ -900,7 +900,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 			DE*=M_PI/180.;    // Convert from deg to rad
 
 			// Calc the Cartesian coord with RA and DE
-			StelUtils::sphe_to_rect(RA,DE,XYZ);
+			StelUtils::spheToRect(RA,DE,XYZ);
 			points->push_back(XYZ);
 		}
 		

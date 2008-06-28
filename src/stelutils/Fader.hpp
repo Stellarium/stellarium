@@ -30,42 +30,42 @@ class Fader
 {
 public:
 	// Create and initialise
-	Fader(bool _state, float _min_value=0.f, float _max_value=1.f) : state(_state), min_value(_min_value), max_value(_max_value) {;}
+	Fader(bool initialState, float minimumValue=0.f, float maximumValue=1.f) : state(initialState), minValue(minimumValue), maxValue(maximumValue) {;}
     virtual ~Fader() {;}
 	// Increments the internal counter of deltaTime ticks
-	virtual void update(int delta_ticks) = 0;
+	virtual void update(int deltaTicks) = 0;
 	// Gets current switch state
 	virtual float getInterstate(void) const = 0;
-	virtual float get_interstate_percentage(void) const = 0;
+	virtual float getInterstatePercentage(void) const = 0;
 	// Switchors can be used just as bools
 	virtual Fader& operator=(bool s) = 0;
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
-	virtual void set_duration(int _duration) {;}
-	virtual float get_duration(void) = 0;
-	virtual void set_min_value(float _min) {min_value = _min;}
-	virtual void set_max_value(float _max) {max_value = _max;}
-	float get_min_value(void) {return min_value;}
-	float get_max_value(void) {return max_value;}
+	virtual void setDuration(int _duration) {;}
+	virtual float getDuration(void) = 0;
+	virtual void setMinValue(float _min) {minValue = _min;}
+	virtual void setMaxValue(float _max) {maxValue = _max;}
+	float getMinValue(void) {return minValue;}
+	float getMaxValue(void) {return maxValue;}
 protected:
 	bool state;
-	float min_value, max_value;
+	float minValue, maxValue;
 };
 
 class BooleanFader : public Fader
 {
 public:
 	// Create and initialise
-	BooleanFader(bool _state=false, float _min_value=0.f, float _max_value=1.f) : Fader(_state, _min_value, _max_value) {;}
+	BooleanFader(bool initialState=false, float minimumValue=0.f, float maximumValue=1.f) : Fader(initialState, minimumValue, maximumValue) {;}
     ~BooleanFader() {;}
 	// Increments the internal counter of deltaTime ticks
-	void update(int delta_ticks) {;}
+	void update(int deltaTicks) {;}
 	// Gets current switch state
-	float getInterstate(void) const {return state ? max_value : min_value;}
-	float get_interstate_percentage(void) const {return state ? 100.f : 0.f;}
+	float getInterstate(void) const {return state ? maxValue : minValue;}
+	float getInterstatePercentage(void) const {return state ? 100.f : 0.f;}
 	// Switchors can be used just as bools
 	Fader& operator=(bool s) {state=s; return *this;}
-	virtual float get_duration(void) {return 0.f;}
+	virtual float getDuration(void) {return 0.f;}
 protected:
 };
 
@@ -75,52 +75,52 @@ class LinearFader : public Fader
 {
 public:
 	// Create and initialise to default
-	LinearFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: Fader(_state, _min_value, _max_value)
+	LinearFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
+		: Fader(initialState, minimumValue, maximumValue)
 	{
-		is_transiting = false;
+		isTransiting = false;
 		duration = _duration;
-		interstate = state ? max_value : min_value;
+		interstate = state ? maxValue : minValue;
 	}
 	
     ~LinearFader() {;}
 	
 	// Increments the internal counter of deltaTime ticks
-	void update(int delta_ticks)
+	void update(int deltaTicks)
 	{
-		if (!is_transiting) return; // We are not in transition
-		counter+=delta_ticks;
+		if (!isTransiting) return; // We are not in transition
+		counter+=deltaTicks;
 		if (counter>=duration)
 		{
 			// Transition is over
-			is_transiting = false;
-			interstate = target_value;
-			// state = (target_value==max_value) ? true : false;
+			isTransiting = false;
+			interstate = targetValue;
+			// state = (targetValue==maxValue) ? true : false;
 		}
 		else
 		{
-			interstate = start_value + (target_value - start_value) * counter/duration;
+			interstate = startValue + (targetValue - startValue) * counter/duration;
 		}
 	}
 	
 	// Get current switch state
 	float getInterstate(void) const { return interstate;}
-	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
+	float getInterstatePercentage(void) const {return 100.f * (interstate-minValue)/(maxValue-minValue);}
 	
 	// Faders can be used just as bools
 	Fader& operator=(bool s)
 	{
 
-		if(is_transiting) {
+		if(isTransiting) {
 			// if same end state, no changes
 			if(s == state) return *this;
 			
 			// otherwise need to reverse course
 			state = s;
 			counter = duration - counter;
-			float temp = start_value;
-			start_value = target_value;
-			target_value = temp;
+			float temp = startValue;
+			startValue = targetValue;
+			targetValue = temp;
 			
 		} else {
 
@@ -128,25 +128,25 @@ public:
 
 			// set up and begin transit
 			state = s;
-			start_value = s ? min_value : max_value;
-			target_value = s ? max_value : min_value;
+			startValue = s ? minValue : maxValue;
+			targetValue = s ? maxValue : minValue;
 			counter=0;
-			is_transiting = true;
+			isTransiting = true;
 		}
 		return *this;
 	}
 	
-	void set_duration(int _duration) {duration = _duration;}
-	virtual float get_duration(void) {return duration;}
-	void set_max_value(float _max) {
-		if(interstate >=  max_value) interstate =_max;
-		max_value = _max;
+	void setDuration(int _duration) {duration = _duration;}
+	virtual float getDuration(void) {return duration;}
+	void setMaxValue(float _max) {
+		if(interstate >=  maxValue) interstate =_max;
+		maxValue = _max;
 	}
 
 protected:
-	bool is_transiting;
+	bool isTransiting;
 	int duration;
-	float start_value, target_value;
+	float startValue, targetValue;
 	int counter;
 	float interstate;
 };
@@ -158,31 +158,31 @@ class ParabolicFader : public Fader
 {
 public:
 	// Create and initialise to default
-	ParabolicFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: Fader(_state, _min_value, _max_value)
+	ParabolicFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
+		: Fader(initialState, minimumValue, maximumValue)
 	{
-		is_transiting = false;
+		isTransiting = false;
 		duration = _duration;
-		interstate = state ? max_value : min_value;
+		interstate = state ? maxValue : minValue;
 	}
 	
     ~ParabolicFader() {;}
 	
 	// Increments the internal counter of deltaTime ticks
-	void update(int delta_ticks)
+	void update(int deltaTicks)
 	{
-		if (!is_transiting) return; // We are not in transition
-		counter+=delta_ticks;
+		if (!isTransiting) return; // We are not in transition
+		counter+=deltaTicks;
 		if (counter>=duration)
 		{
 			// Transition is over
-			is_transiting = false;
-			interstate = target_value;
-			// state = (target_value==max_value) ? true : false;
+			isTransiting = false;
+			interstate = targetValue;
+			// state = (targetValue==maxValue) ? true : false;
 		}
 		else
 		{
-			interstate = start_value + (target_value - start_value) * counter/duration;
+			interstate = startValue + (targetValue - startValue) * counter/duration;
 			interstate *= interstate;
 		}
 
@@ -191,22 +191,22 @@ public:
 	
 	// Get current switch state
 	float getInterstate(void) const { return interstate;}
-	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
+	float getInterstatePercentage(void) const {return 100.f * (interstate-minValue)/(maxValue-minValue);}
 	
 	// Faders can be used just as bools
 	Fader& operator=(bool s)
 	{
 
-		if(is_transiting) {
+		if(isTransiting) {
 			// if same end state, no changes
 			if(s == state) return *this;
 			
 			// otherwise need to reverse course
 			state = s;
 			counter = duration - counter;
-			float temp = start_value;
-			start_value = target_value;
-			target_value = temp;
+			float temp = startValue;
+			startValue = targetValue;
+			targetValue = temp;
 			
 		} else {
 
@@ -214,20 +214,20 @@ public:
 
 			// set up and begin transit
 			state = s;
-			start_value = s ? min_value : max_value;
-			target_value = s ? max_value : min_value;
+			startValue = s ? minValue : maxValue;
+			targetValue = s ? maxValue : minValue;
 			counter=0;
-			is_transiting = true;
+			isTransiting = true;
 		}
 		return *this;
 	}
 	
-	void set_duration(int _duration) {duration = _duration;}
-	virtual float get_duration(void) {return duration;}
+	void setDuration(int _duration) {duration = _duration;}
+	virtual float getDuration(void) {return duration;}
 protected:
-	bool is_transiting;
+	bool isTransiting;
 	int duration;
-	float start_value, target_value;
+	float startValue, targetValue;
 	int counter;
 	float interstate;
 };
@@ -237,27 +237,27 @@ protected:
 class ParabolicFader : public LinearFader
 {
 public:
-	ParabolicFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: LinearFader(_duration, _min_value, _max_value, _state)
+	ParabolicFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false) 
+		: LinearFader(_duration, minimumValue, maximumValue, initialState)
 		{
 		}
 	
 	// Increments the internal counter of deltaTime ticks
-	void update(int delta_ticks)
+	void update(int deltaTicks)
 	{
 
 		printf("Counter %d  interstate %f\n", counter, interstate);
-		if (!is_transiting) return; // We are not in transition
-		counter+=delta_ticks;
+		if (!isTransiting) return; // We are not in transition
+		counter+=deltaTicks;
 		if (counter>=duration)
 		{
 			// Transition is over
-			is_transiting = false;
-			interstate = target_value;
+			isTransiting = false;
+			interstate = targetValue;
 		}
 		else
 		{
-			interstate = start_value + (target_value - start_value) * counter/duration;
+			interstate = startValue + (targetValue - startValue) * counter/duration;
 			interstate *= interstate;
 		}
 

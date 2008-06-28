@@ -48,7 +48,7 @@ public:
 	Vec3f get_color() {return color;}
 	void updateI18n();
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow(void) const {return fader;}
 private:
@@ -282,7 +282,7 @@ void LandscapeMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	setColorCardinalPoints(StelUtils::str_to_vec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
+	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
 

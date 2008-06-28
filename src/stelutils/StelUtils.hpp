@@ -99,16 +99,16 @@ namespace StelUtils
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
 	//! @deprecated Use the >> operator from Vec3f class
-	Vec3f str_to_vec3f(const string& s);
-	Vec3f str_to_vec3f(const QStringList& s);
-	Vec3f str_to_vec3f(const QString& s);
-	Vec3f str_to_vec3f(const char* s);
+	Vec3f strToVec3f(const string& s);
+	Vec3f strToVec3f(const QStringList& s);
+	Vec3f strToVec3f(const QString& s);
+	Vec3f strToVec3f(const char* s);
 	
 	//! Obtains a string from a Vec3f.
 	//! @param v The vector
 	//! @return the string describing the Vector with the form "x,y,z"
 	//! @deprecated Use the << operator from Vec3f class
-	string vec3f_to_str(const Vec3f& v);
+	string vec3fToStr(const Vec3f& v);
 
 	//! Converts a Vec3f to HTML color notation.
 	//! @param v The vector
@@ -176,27 +176,27 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	void sphe_to_rect(double lng, double lat, Vec3d& v);
+	void spheToRect(double lng, double lat, Vec3d& v);
 	
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	void sphe_to_rect(float lng, float lat, Vec3f& v);
+	void spheToRect(float lng, float lat, Vec3f& v);
 	
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
-	void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
+	void rectToSphe(double *lng, double *lat, const Vec3d& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
-	void rect_to_sphe(float *lng, float *lat, const Vec3d& v);
+	void rectToSphe(float *lng, float *lat, const Vec3d& v);
 
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
-	double get_dec_angle(const string&);
-	double get_dec_angle(const QString&);
-	double get_dec_angle(const char*);
+	double getDecAngle(const string&);
+	double getDecAngle(const QString&);
+	double getDecAngle(const char*);
 	
 	//! Check if the filename is an absolute path.
 	bool checkAbsolutePath(const string& fileName);
@@ -292,55 +292,55 @@ namespace StelUtils
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions. 
 	
-//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
-void getDateFromJulianDay(double julianDay, int *year, int *month, int *day);
+	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
+	void getDateFromJulianDay(double julianDay, int *year, int *month, int *day);
 
-//! Make from julianDay an hour, minute, second.
-void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second);
+	//! Make from julianDay an hour, minute, second.
+	void getTimeFromJulianDay(double julianDay, int *hour, int *minute, int *second);
 
-//! Utility for formatting to a simple iso 8601 string.
-QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second );
+	//! Utility for formatting to a simple iso 8601 string.
+	QString sixIntsToIsoString( int year, int month, int day, int hour, int minute, int second );
 
-QString jdToIsoString(double jd);
+	QString jdToIsoString(double jd);
 
-//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
-//! @return QString representing the formatted date
-QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
+	//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
+	//! @return QString representing the formatted date
+	QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
 
-//! Format the date and day-of-week per the default locale's QLocale::ShortFormat.
-//! @return QString representing the formatted date
-QString localeDateString(int year, int month, int day, int dayOfWeek);
+	//! Format the date and day-of-week per the default locale's QLocale::ShortFormat.
+	//! @return QString representing the formatted date
+	QString localeDateString(int year, int month, int day, int dayOfWeek);
 
-//! Get the current Julian Date from system time.
-//! @return the current Julian Date
-double getJDFromSystem(void);
+	//! Get the current Julian Date from system time.
+	//! @return the current Julian Date
+	double getJDFromSystem(void);
 
-//! Convert a time of day to the fraction of a Julian Day.
-//! Note that a Julian Day starts at 12:00, not 0:00, and 
-//! so 12:00 == 0.0 and 0:00 == 0.5
-double qTimeToJDFraction(const QTime& time);
+	//! Convert a time of day to the fraction of a Julian Day.
+	//! Note that a Julian Day starts at 12:00, not 0:00, and 
+	//! so 12:00 == 0.0 and 0:00 == 0.5
+	double qTimeToJDFraction(const QTime& time);
 
-//! Convert a fraction of a Julian Day to a QTime
-QTime jdFractionToQTime(const double jd);
+	//! Convert a fraction of a Julian Day to a QTime
+	QTime jdFractionToQTime(const double jd);
 
-//! Return number of hours offset from GMT, using Qt functions.
-float getGMTShiftFromQT(double JD);
+	//! Return number of hours offset from GMT, using Qt functions.
+	float getGMTShiftFromQT(double JD);
 
-//! Convert a QT QDateTime class to julian day.
-//! @param dateTime the UTC QDateTime to convert
-//! @result the matching decimal Julian Day
-double qDateTimeToJd(const QDateTime& dateTime);
+	//! Convert a QT QDateTime class to julian day.
+	//! @param dateTime the UTC QDateTime to convert
+	//! @result the matching decimal Julian Day
+	double qDateTimeToJd(const QDateTime& dateTime);
 
-//! Convert a julian day to a QDateTime.
-//! @param jd to convert
-//! @result the matching UTC QDateTime
-QDateTime jdToQDateTime(const double& jd);
+	//! Convert a julian day to a QDateTime.
+	//! @param jd to convert
+	//! @result the matching UTC QDateTime
+	QDateTime jdToQDateTime(const double& jd);
 
-bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s);
+	bool getJDFromDate(double* newjd, int y, int m, int d, int h, int min, int s);
 
-  int numberOfDaysInMonthInYear(int month, int year);
-  bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-			     int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
+	int numberOfDaysInMonthInYear(int month, int year);
+	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
+	                               int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
 }
 
