@@ -113,10 +113,10 @@ void StelCore::update(double deltaTime)
 	// On the other hand it must be called after ssystem->update
 	// and panView in order to have the new observers position
 	// and not interfere with vision vector movement.
-	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
-	                                    navigation->get_helio_to_eye_mat(),
-	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_j2000_to_eye_mat());
+	projection->set_modelview_matrices(	navigation->getEarthEquToEyeMat(),
+	                                    navigation->getHelioToEyeMat(),
+	                                    navigation->getLocalToEyeMat(),
+	                                    navigation->getJ2000ToEyeMat());
 	
 	skyDrawer->update(deltaTime);
 }

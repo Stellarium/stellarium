@@ -338,15 +338,15 @@ void Projector::set_clipping_planes(double znear, double zfar)
 }
 
 // Set the standard modelview matrices used for projection
-void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
-                                        const Mat4d& _mat_helio_to_eye,
-                                        const Mat4d& _mat_local_to_eye,
-                                        const Mat4d& _mat_j2000_to_eye)
+void Projector::set_modelview_matrices(	const Mat4d& _matEarthEquToEye,
+                                        const Mat4d& _matHelioToEye,
+                                        const Mat4d& _matLocalToEye,
+                                        const Mat4d& _matJ2000ToEye)
 {
-	mat_earth_equ_to_eye = _mat_earth_equ_to_eye;
-	mat_j2000_to_eye = _mat_j2000_to_eye;
-	mat_helio_to_eye = _mat_helio_to_eye;
-	mat_local_to_eye = _mat_local_to_eye;
+	matEarthEquToEye = _matEarthEquToEye;
+	matJ2000ToEye = _matJ2000ToEye;
+	matHelioToEye = _matHelioToEye;
+	matLocalToEye = _matLocalToEye;
 }
 
 
@@ -358,16 +358,16 @@ void Projector::setCurrentFrame(FRAME_TYPE frameType) const
 	switch (frameType)
 	{
 	case FRAME_LOCAL:
-		setCustomFrame(mat_local_to_eye);
+		setCustomFrame(matLocalToEye);
 		break;
 	case FRAME_HELIO:
-		setCustomFrame(mat_helio_to_eye);
+		setCustomFrame(matHelioToEye);
 		break;
 	case FRAME_EARTH_EQU:
-		setCustomFrame(mat_earth_equ_to_eye);
+		setCustomFrame(matEarthEquToEye);
 		break;
 	case FRAME_J2000:
-		setCustomFrame(mat_j2000_to_eye);
+		setCustomFrame(matJ2000ToEye);
 		break;
 	default:
 		qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
