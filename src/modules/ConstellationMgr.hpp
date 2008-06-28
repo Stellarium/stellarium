@@ -72,7 +72,7 @@ public:
 	
 	//! Limit the number of constellations to draw based on selected stars.
 	//! The selected objects changed, check if some stars are selected and display the 
-	//! matching constellations if isolate_selected mode is activated.
+	//! matching constellations if isolateSelected mode is activated.
 	//! @param added not used at present (?)
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::ReplaceSelection);
 	
@@ -165,7 +165,7 @@ public slots:
 private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names in english
-	void loadNames(const QString& names_file);
+	void loadNames(const QString& namesFile);
 	
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param fileName The name of the constellation data file

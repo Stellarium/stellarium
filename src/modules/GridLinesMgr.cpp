@@ -591,22 +591,22 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
-	equ_grid = new SkyGrid(Projector::FrameEarthEqu);
-	equJ2000_grid = new SkyGrid(Projector::FrameJ2000);
-	azi_grid = new SkyGrid(Projector::FrameLocal);
-	equator_line = new SkyLine(SkyLine::EQUATOR);
-	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
-	meridian_line = new SkyLine(SkyLine::MERIDIAN);
+	equGrid = new SkyGrid(Projector::FrameEarthEqu);
+	equJ2000Grid = new SkyGrid(Projector::FrameJ2000);
+	aziGrid = new SkyGrid(Projector::FrameLocal);
+	equatorLine = new SkyLine(SkyLine::EQUATOR);
+	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
+	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 }
 
 GridLinesMgr::~GridLinesMgr()
 {
-	delete equ_grid;
-	delete equJ2000_grid;
-	delete azi_grid;
-	delete equator_line;
-	delete ecliptic_line;
-	delete meridian_line;
+	delete equGrid;
+	delete equJ2000Grid;
+	delete aziGrid;
+	delete equatorLine;
+	delete eclipticLine;
+	delete meridianLine;
 }
 
 /*************************************************************************
@@ -635,12 +635,12 @@ void GridLinesMgr::init()
 void GridLinesMgr::update(double deltaTime)
 {
 	// Update faders
-	equ_grid->update(deltaTime);
-	equJ2000_grid->update(deltaTime);
-	azi_grid->update(deltaTime);
-	equator_line->update(deltaTime);
-	ecliptic_line->update(deltaTime);
-	meridian_line->update(deltaTime);
+	equGrid->update(deltaTime);
+	equJ2000Grid->update(deltaTime);
+	aziGrid->update(deltaTime);
+	equatorLine->update(deltaTime);
+	eclipticLine->update(deltaTime);
+	meridianLine->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -651,17 +651,17 @@ void GridLinesMgr::draw(StelCore* core)
 	glEnable(GL_LINE_SMOOTH);
 	
 	// Draw the equatorial grid
-	equ_grid->draw(prj);
+	equGrid->draw(prj);
 	// Draw the equatorial grid
-	equJ2000_grid->draw(prj);
+	equJ2000Grid->draw(prj);
 	// Draw the altazimutal grid
-	azi_grid->draw(prj);
+	aziGrid->draw(prj);
 	// Draw the celestial equator line
-	equator_line->draw(prj,nav);
+	equatorLine->draw(prj,nav);
 	// Draw the ecliptic line
-	ecliptic_line->draw(prj,nav);
+	eclipticLine->draw(prj,nav);
 	// Draw the meridian line
-	meridian_line->draw(prj,nav);
+	meridianLine->draw(prj,nav);
 	
 	glDisable(GL_LINE_SMOOTH);
 }
@@ -679,45 +679,45 @@ void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)
 }
 
 //! Set flag for displaying Azimutal Grid
-void GridLinesMgr::setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
+void GridLinesMgr::setFlagAzimutalGrid(bool b) {aziGrid->setFlagshow(b);}
 //! Get flag for displaying Azimutal Grid
-bool GridLinesMgr::getFlagAzimutalGrid(void) const {return azi_grid->getFlagshow();}
-Vec3f GridLinesMgr::getColorAzimutalGrid(void) const {return azi_grid->getColor();}
+bool GridLinesMgr::getFlagAzimutalGrid(void) const {return aziGrid->getFlagshow();}
+Vec3f GridLinesMgr::getColorAzimutalGrid(void) const {return aziGrid->getColor();}
 
 //! Set flag for displaying Equatorial Grid
-void GridLinesMgr::setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorGrid(bool b) {equGrid->setFlagshow(b);}
 //! Get flag for displaying Equatorial Grid
-bool GridLinesMgr::getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorGrid(void) const {return equ_grid->getColor();}
+bool GridLinesMgr::getFlagEquatorGrid(void) const {return equGrid->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorGrid(void) const {return equGrid->getColor();}
 
 //! Set flag for displaying Equatorial J2000 Grid
-void GridLinesMgr::setFlagEquatorJ2000Grid(bool b) {equJ2000_grid->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorJ2000Grid(bool b) {equJ2000Grid->setFlagshow(b);}
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const {return equJ2000_grid->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const {return equJ2000_grid->getColor();}
+bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const {return equJ2000Grid->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const {return equJ2000Grid->getColor();}
 
 //! Set flag for displaying Equatorial Line
-void GridLinesMgr::setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorLine(bool b) {equatorLine->setFlagshow(b);}
 //! Get flag for displaying Equatorial Line
-bool GridLinesMgr::getFlagEquatorLine(void) const {return equator_line->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorLine(void) const {return equator_line->getColor();}
+bool GridLinesMgr::getFlagEquatorLine(void) const {return equatorLine->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorLine(void) const {return equatorLine->getColor();}
 
 //! Set flag for displaying Ecliptic Line
-void GridLinesMgr::setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
+void GridLinesMgr::setFlagEclipticLine(bool b) {eclipticLine->setFlagshow(b);}
 //! Get flag for displaying Ecliptic Line
-bool GridLinesMgr::getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}
-Vec3f GridLinesMgr::getColorEclipticLine(void) const {return ecliptic_line->getColor();}
+bool GridLinesMgr::getFlagEclipticLine(void) const {return eclipticLine->getFlagshow();}
+Vec3f GridLinesMgr::getColorEclipticLine(void) const {return eclipticLine->getColor();}
 
 
 //! Set flag for displaying Meridian Line
-void GridLinesMgr::setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
+void GridLinesMgr::setFlagMeridianLine(bool b) {meridianLine->setFlagshow(b);}
 //! Get flag for displaying Meridian Line
-bool GridLinesMgr::getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}
-Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridian_line->getColor();}
+bool GridLinesMgr::getFlagMeridianLine(void) const {return meridianLine->getFlagshow();}
+Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridianLine->getColor();}
 
-void GridLinesMgr::setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
-void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
-void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& v) { equJ2000_grid->setColor(v);}
-void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
-void GridLinesMgr::setColorEclipticLine(const Vec3f& v) { ecliptic_line->setColor(v);}
-void GridLinesMgr::setColorMeridianLine(const Vec3f& v) { meridian_line->setColor(v);}
+void GridLinesMgr::setColorAzimutalGrid(const Vec3f& v) { aziGrid->setColor(v);}
+void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equGrid->setColor(v);}
+void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& v) { equJ2000Grid->setColor(v);}
+void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equatorLine->setColor(v);}
+void GridLinesMgr::setColorEclipticLine(const Vec3f& v) { eclipticLine->setColor(v);}
+void GridLinesMgr::setColorMeridianLine(const Vec3f& v) { meridianLine->setColor(v);}

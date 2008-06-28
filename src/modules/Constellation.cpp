@@ -92,13 +92,13 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 
 void Constellation::drawOptim(Projector* prj) const
 {
-	if(!line_fader.getInterstate()) return;
+	if(!lineFader.getInterstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	glColor4f(lineColor[0], lineColor[1], lineColor[2], line_fader.getInterstate());
+	glColor4f(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
 	
 	Vec3d star1;
 	Vec3d star2;
@@ -116,15 +116,15 @@ void Constellation::drawOptim(Projector* prj) const
 
 void Constellation::drawName(SFont *constfont, Projector* prj) const
 {
-	if(!name_fader.getInterstate()) return;
-	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
+	if(!nameFader.getInterstate()) return;
+	glColor4f(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
 	prj->drawText(constfont, XYname[0], XYname[1], nameI18, 
 	              0., -constfont->getStrLen(nameI18)/2, 0, false);
 }
 
 void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 {
-	float intensity = art_fader.getInterstate(); 
+	float intensity = artFader.getInterstate(); 
 	if (artTexture && intensity) 
 	{
 		glColor3f(intensity,intensity,intensity);
@@ -133,15 +133,15 @@ void Constellation::drawArtOptim(Projector* prj, const Navigator* nav) const
 		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 
 		// If one of the point is in the screen
-		b0 = prj->projectCheck(art_vertex[0],v0) || (nav->getJ2000EquVision().dot(art_vertex[0])>0.9);
-		b1 = prj->projectCheck(art_vertex[1],v1) || (nav->getJ2000EquVision().dot(art_vertex[1])>0.9);
-		b2 = prj->projectCheck(art_vertex[2],v2) || (nav->getJ2000EquVision().dot(art_vertex[2])>0.9);
-		b3 = prj->projectCheck(art_vertex[3],v3) || (nav->getJ2000EquVision().dot(art_vertex[3])>0.9);
-		b4 = prj->projectCheck(art_vertex[4],v4) || (nav->getJ2000EquVision().dot(art_vertex[4])>0.9);
-		b5 = prj->projectCheck(art_vertex[5],v5) || (nav->getJ2000EquVision().dot(art_vertex[5])>0.9);
-		b6 = prj->projectCheck(art_vertex[6],v6) || (nav->getJ2000EquVision().dot(art_vertex[6])>0.9);
-		b7 = prj->projectCheck(art_vertex[7],v7) || (nav->getJ2000EquVision().dot(art_vertex[7])>0.9);
-		b8 = prj->projectCheck(art_vertex[8],v8) || (nav->getJ2000EquVision().dot(art_vertex[8])>0.9);
+		b0 = prj->projectCheck(artVertex[0],v0) || (nav->getJ2000EquVision().dot(artVertex[0])>0.9);
+		b1 = prj->projectCheck(artVertex[1],v1) || (nav->getJ2000EquVision().dot(artVertex[1])>0.9);
+		b2 = prj->projectCheck(artVertex[2],v2) || (nav->getJ2000EquVision().dot(artVertex[2])>0.9);
+		b3 = prj->projectCheck(artVertex[3],v3) || (nav->getJ2000EquVision().dot(artVertex[3])>0.9);
+		b4 = prj->projectCheck(artVertex[4],v4) || (nav->getJ2000EquVision().dot(artVertex[4])>0.9);
+		b5 = prj->projectCheck(artVertex[5],v5) || (nav->getJ2000EquVision().dot(artVertex[5])>0.9);
+		b6 = prj->projectCheck(artVertex[6],v6) || (nav->getJ2000EquVision().dot(artVertex[6])>0.9);
+		b7 = prj->projectCheck(artVertex[7],v7) || (nav->getJ2000EquVision().dot(artVertex[7])>0.9);
+		b8 = prj->projectCheck(artVertex[8],v8) || (nav->getJ2000EquVision().dot(artVertex[8])>0.9);
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
@@ -219,21 +219,21 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 
 void Constellation::update(int deltaTime)
 {
-	line_fader.update(deltaTime);
-	name_fader.update(deltaTime);
-	art_fader.update(deltaTime);
-	boundary_fader.update(deltaTime);
+	lineFader.update(deltaTime);
+	nameFader.update(deltaTime);
+	artFader.update(deltaTime);
+	boundaryFader.update(deltaTime);
 }
 
 void Constellation::drawBoundaryOptim(Projector* prj) const
 {
-	if(!boundary_fader.getInterstate()) return;
+	if(!boundaryFader.getInterstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundary_fader.getInterstate());
+	glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 
 	unsigned int i, j, size;
 	Vec3d pt1, pt2;

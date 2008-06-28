@@ -111,28 +111,28 @@ private:
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
-	void setFlagLines(bool b) {line_fader=b;}
+	void setFlagLines(bool b) {lineFader=b;}
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
-	void setFlagBoundaries(bool b) {boundary_fader=b;}
+	void setFlagBoundaries(bool b) {boundaryFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
-	void setFlagName(bool b) {name_fader=b;}
+	void setFlagName(bool b) {nameFader=b;}
 	//! Turn on and off Constellation art rendering.
 	//! @param b new state for art drawing.
-	void setFlagArt(bool b) {art_fader=b;}
+	void setFlagArt(bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
-	bool getFlagLines(void) const {return line_fader;}
+	bool getFlagLines(void) const {return lineFader;}
 	//! Get the current state of Constellation boundary rendering.
 	//! @return true if Constellation boundary rendering it turned on, else false.
-	bool getFlagBoundaries(void) const {return boundary_fader;}
+	bool getFlagBoundaries(void) const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool getFlagName(void) const {return name_fader;}
+	bool getFlagName(void) const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
-	bool getFlagArt(void) const {return art_fader;}
+	bool getFlagArt(void) const {return artFader;}
 	
 	//! International name (translated using gettext)
 	QString nameI18;
@@ -150,10 +150,10 @@ private:
 	//! List of stars forming the segments
 	StelObjectP* asterism;
 	STextureSP artTexture;
-	Vec3d art_vertex[9];
+	Vec3d artVertex[9];
 	
 	//! Define whether art, lines, names and boundary must be drawn
-	LinearFader art_fader, line_fader, name_fader, boundary_fader;
+	LinearFader artFader, lineFader, nameFader, boundaryFader;
 	vector<vector<Vec3f> *> isolatedBoundarySegments;
 	vector<vector<Vec3f> *> sharedBoundarySegments;
 	
