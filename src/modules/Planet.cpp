@@ -573,8 +573,8 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 	// This removed totally the Planet shaking bug!!!
 	mat = nav->getHelioToEyeMat() * mat;
 
-	const Vec3d sun_pos = nav->getHelioToEyeMat()*Vec3d(0,0,0);
-	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sun_pos[0],sun_pos[1],sun_pos[2],1.f));
+	const Vec3d sunPos = nav->getHelioToEyeMat()*Vec3d(0,0,0);
+	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 	if (this == nav->getHomePlanet())
 	{
