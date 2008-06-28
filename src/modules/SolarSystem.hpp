@@ -152,10 +152,10 @@ public slots:
 	bool getFlagOrbits() const {return flagOrbits;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
-	void setFlagLightTravelTime(bool b) {flag_light_travel_time = b;}
+	void setFlagLightTravelTime(bool b) {flagLightTravelTime = b;}
 	//! Get the current value of the flag which determines if light travel time 
 	//! calculation is used or not.
-	bool getFlagLightTravelTime(void) const {return flag_light_travel_time;}	
+	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}	
 	
 	//! Set planet names font size.
 	void setFontSize(float newFontSize);
@@ -203,7 +203,7 @@ public:
 	Planet* getMoon(void) const {return moon;}
 	
 	//! Determine if a lunar eclipse is close at hand?
-	bool near_lunar_eclipse();
+	bool nearLunarEclipse();
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -219,7 +219,7 @@ public:
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 	
 	//! Get the list of all the bodies of the solar system.
-	const vector<Planet*>& getAllPlanets() const {return system_planets;}
+	const vector<Planet*>& getAllPlanets() const {return systemPlanets;}
 	
 private:
 	//! Search for SolarSystem objects which are close to the position given 
@@ -268,22 +268,22 @@ private:
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
 	
-	vector<Planet*> system_planets;  // Vector containing all the bodies of the system
+	vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system
 	
 	// draw earth shadow on moon for lunar eclipses
-	void draw_earth_shadow(const Navigator * nav, Projector * prj);  
+	void drawEarthShadow(const Navigator * nav, Projector * prj);  
 
 	// And sort them from the furthest to the closest to the observer
-	struct bigger_distance : public binary_function<Planet*, Planet*, bool>
+	struct biggerDistance : public binary_function<Planet*, Planet*, bool>
 	{
 		bool operator()(Planet* p1, Planet* p2);
 	};
 
-	STextureSP tex_earth_shadow;     // for lunar eclipses
+	STextureSP texEarthShadow;     // for lunar eclipses
 
 	// Master settings
 	bool flagOrbits;
-	bool flag_light_travel_time;
+	bool flagLightTravelTime;
 	
 	STextureSP texPointer;           // The selection pointer texture
 	
