@@ -276,14 +276,14 @@ double EllipticalOrbit::eccentricAnomaly(double M) const
     else if (eccentricity < 0.2)
     {
         // Low eccentricity, so use the standard iteration technique
-        Solution sol = solve_iteration_fixed(SolveKeplerFunc1(eccentricity, M), M, 5);
+        Solution sol = solveIteration_fixed(SolveKeplerFunc1(eccentricity, M), M, 5);
         return sol.first;
     }
     else if (eccentricity < 0.9)
     {
         // Higher eccentricity elliptical orbit; use a more complex but
         // much faster converging iteration.
-        Solution sol = solve_iteration_fixed(SolveKeplerFunc2(eccentricity, M), M, 6);
+        Solution sol = solveIteration_fixed(SolveKeplerFunc2(eccentricity, M), M, 6);
         // Debugging
         // qDebug("ecc: %f, error: %f mas\n",
         //        eccentricity, radToDeg(sol.second) * 3600000);
@@ -295,7 +295,7 @@ double EllipticalOrbit::eccentricAnomaly(double M) const
         // equation.  Only use this for high-eccentricity orbits, as it
         // requires more calcuation.
         double E = M + 0.85 * eccentricity * sign(sin(M));
-        Solution sol = solve_iteration_fixed(SolveKeplerLaguerreConway(eccentricity, M), E, 8);
+        Solution sol = solveIteration_fixed(SolveKeplerLaguerreConway(eccentricity, M), E, 8);
         return sol.first;
     }
     else if (eccentricity == 1.0)
@@ -308,7 +308,7 @@ double EllipticalOrbit::eccentricAnomaly(double M) const
     {
         // Laguerre-Conway method for hyperbolic (ecc > 1) orbits.
         double E = log(2 * M / eccentricity + 1.85);
-        Solution sol = solve_iteration_fixed(SolveKeplerLaguerreConwayHyp(eccentricity, M), E, 30);
+        Solution sol = solveIteration_fixed(SolveKeplerLaguerreConwayHyp(eccentricity, M), E, 30);
         return sol.first;
     }
 }

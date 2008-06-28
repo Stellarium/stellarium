@@ -18,7 +18,7 @@
  */
 
 #ifndef _STAR_MGR_H_
-#define _STAR_MGR_H_
+#define _STAR_MGR_H_ 1
 
 #include <vector>
 #include <map>
@@ -81,7 +81,6 @@ public:
 	//! - Lets various display flags from the ini parser object
 	virtual void init();
 	
-	
 	//! Draw the stars and the star selection indicator if necessary.
 	virtual void draw(StelCore* core); //! Draw all the stars
 	
@@ -106,7 +105,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	//! Return a stl vector containing the stars located inside the lim_fov circle around position v
+	//! Return a stl vector containing the stars located inside the limFov circle around position v
 	virtual vector<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching Stars object's pointer if exists or NULL
@@ -193,7 +192,7 @@ public:
 	//! Initializes each triangular face of the geodesic grid.
 	void setGrid(class GeodesicGrid* grid);
 	
-	static double getCurrentJDay(void) {return current_JDay;}
+	static double getCurrentJDay(void) {return currentJDay;}
 	
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
@@ -203,19 +202,19 @@ private:
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
-	int load_common_names(const QString& commonNameFile);
+	int loadCommonNames(const QString& commonNameFile);
 	
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
-	void load_sci_names(const QString& sciNameFile);
+	void loadSciNames(const QString& sciNameFile);
 	
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
 	
 	//! Load all the stars from the files.
-	void load_data();
+	void loadData();
 	
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const Projector* prj, const Navigator * nav);
@@ -230,32 +229,32 @@ private:
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
 	typedef map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
-	ZoneArrayMap zone_arrays; // index is the grid level
+	ZoneArrayMap zoneArrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
-				const Vec3d &c0,
-				const Vec3d &c1,
-				const Vec3d &c2,
-				void *context)
+	                             const Vec3d &c0,
+	                             const Vec3d &c1,
+	                             const Vec3d &c2,
+	                             void *context)
 	{
 		reinterpret_cast<StarMgr*>(context)->initTriangle(lev, index, c0, c1, c2);
 	}
 	
 	void initTriangle(int lev, int index,
-			const Vec3d &c0,
-			const Vec3d &c1,
-			const Vec3d &c2);
+	                  const Vec3d &c0,
+	                  const Vec3d &c1,
+	                  const Vec3d &c2);
 	
-	BigStarCatalogExtension::HipIndexStruct *hip_index; // array of hiparcos stars
+	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
 	
-	static map<int, QString> common_names_map;
-	static map<int, QString> common_names_map_i18n;
-	static map<QString, int> common_names_index;
-	static map<QString, int> common_names_index_i18n;
+	static map<int, QString> commonNamesMap;
+	static map<int, QString> commonNamesMapI18n;
+	static map<QString, int> commonNamesIndex;
+	static map<QString, int> commonNamesIndexI18n;
 	
-	static map<int, QString> sci_names_map_i18n;
-	static map<QString, int> sci_names_index_i18n;
+	static map<int, QString> sciNamesMapI18n;
+	static map<QString, int> sciNamesIndexI18n;
 
-	static double current_JDay;
+	static double currentJDay;
 	
 	double fontSize;
 	SFont *starFont;
@@ -267,3 +266,4 @@ private:
 
 
 #endif // _STAR_MGR_H_
+

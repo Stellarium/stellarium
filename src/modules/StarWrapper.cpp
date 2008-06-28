@@ -122,8 +122,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (flags&CatalogNumber)
 			oss << "HP " << s->hip;
-		if (s->component_ids)
-			oss << " " << StarMgr::convertToComponentIds(s->component_ids);
+		if (s->componentIds)
+			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
 
 		if (flags&Name || flags&CatalogNumber)
 			oss << "</h2>";
@@ -152,9 +152,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
 	}
 	
-	if (s->sp_int && flags&Extra1)
+	if (s->spInt && flags&Extra1)
 	{
-		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->sp_int)) << "<br>";
+		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br>";
 	}
 
 	if (flags&Distance)

@@ -20,7 +20,7 @@
  */
 
 #ifndef _STAR_HPP_
-#define _STAR_HPP_
+#define _STAR_HPP_ 1
 
 #include "ZoneData.hpp"
 
@@ -58,27 +58,27 @@ static inline float IndexToBV(unsigned char bV) {
 #endif
 struct Star1 { // 28 byte
   int hip:24;                  // 17 bits needed
-  unsigned char component_ids; //  5 bits needed
+  unsigned char componentIds;  //  5 bits needed
   Int32 x0;                    // 32 bits needed
   Int32 x1;                    // 32 bits needed
-  unsigned char bV;           //  7 bits needed
+  unsigned char bV;            //  7 bits needed
   unsigned char mag;           //  8 bits needed
-  Uint16 sp_int;               // 14 bits needed
+  Uint16 spInt;                // 14 bits needed
   Int32 dx0,dx1,plx;
-  enum {max_pos_val=0x7FFFFFFF};
+  enum {MaxPosVal=0x7FFFFFFF};
   boost::intrusive_ptr<StelObject>
     createStelObject(const SpecialZoneArray<Star1> *a,
                      const SpecialZoneData<Star1> *z) const;
-  Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
+  Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
     Vec3d pos = z->center
-              + (x0+movement_factor*dx0)*z->axis0
-              + (x1+movement_factor*dx1)*z->axis1;
+              + (x0+movementFactor*dx0)*z->axis0
+              + (x1+movementFactor*dx1)*z->axis1;
     pos.normalize();
     return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const;
-  void repack(bool from_be);
+  void repack(bool fromBe);
   void print(void);
 }
 #if defined(__GNUC__)
@@ -100,20 +100,20 @@ struct Star2 {  // 10 byte
   int dx1:14;
   unsigned int bV:7;
   unsigned int mag:5;
-  enum {max_pos_val=((1<<19)-1)};
+  enum {MaxPosVal=((1<<19)-1)};
   boost::intrusive_ptr<StelObject>
     createStelObject(const SpecialZoneArray<Star2> *a,
                      const SpecialZoneData<Star2> *z) const;
-  Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
+  Vec3d getJ2000Pos(const ZoneData *z,double movementFactor) const {
     Vec3d pos = z->center
-              + (x0+movement_factor*dx0)*z->axis0
-              + (x1+movement_factor*dx1)*z->axis1;
+              + (x0+movementFactor*dx0)*z->axis0
+              + (x1+movementFactor*dx1)*z->axis1;
     pos.normalize();
     return pos;
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
-  void repack(bool from_be);
+  void repack(bool fromBe);
   void print(void);
 }
 #if defined(__GNUC__)
@@ -133,7 +133,7 @@ struct Star3 {  // 6 byte
   int x1:18;
   unsigned int bV:7;
   unsigned int mag:5;
-  enum {max_pos_val=((1<<17)-1)};
+  enum {MaxPosVal=((1<<17)-1)};
   boost::intrusive_ptr<StelObject>
     createStelObject(const SpecialZoneArray<Star3> *a,
                      const SpecialZoneData<Star3> *z) const;
@@ -144,7 +144,7 @@ struct Star3 {  // 6 byte
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return "";}
-  void repack(bool from_be);
+  void repack(bool fromBe);
   void print(void);
 }
 #if defined(__GNUC__)
@@ -157,4 +157,4 @@ struct Star3 {  // 6 byte
 
 } // namespace BigStarCatalogExtension
 
-#endif
+#endif // _STAR_HPP_
