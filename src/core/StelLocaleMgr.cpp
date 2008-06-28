@@ -29,7 +29,7 @@
 #include <QSettings>
 #include <QString>
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMT_shift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMTShift(0)
 {}
 
 
@@ -61,7 +61,7 @@ void StelLocaleMgr::init()
 		if (tzstr == "gmt+x") // TODO : handle GMT+X timezones form
 		{
 			timeZoneMode = STzGMTShift;
-			// GMT_shift = x;
+			// GMTShift = x;
 		}
 		else
 		{
@@ -115,11 +115,11 @@ QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 	double shift = 0.0;
 	if (timeZoneMode == STzGMTShift)
 	{
-		shift = GMT_shift;
+		shift = GMTShift;
 	}
 	else
 	{
-		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
 	}
 	return StelUtils::jdToIsoString(JD + shift);
 }
@@ -148,9 +148,9 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 
 		// modified by shift
 		if (timeZoneMode == STzGMTShift)
-			jd -= GMT_shift;
+			jd -= GMTShift;
 		else
-			jd -= StelUtils::get_GMT_shift_from_QT(jd)*0.041666666666;
+			jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
 	
 		return jd;
 	}
@@ -169,11 +169,11 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	double shift = 0.0;
 	if (timeZoneMode == STzGMTShift)
 	{
-		shift = GMT_shift;
+		shift = GMTShift;
 	}
 	else
 	{
-		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
 	}
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = (int)floor(fmod(JD, 7));
@@ -207,11 +207,11 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	double shift = 0.0;
 	if (timeZoneMode == STzGMTShift)
 	{
-		shift = GMT_shift;
+		shift = GMTShift;
 	}
 	else
 	{
-		shift = StelUtils::get_GMT_shift_from_QT(JD)*0.041666666666;
+		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
 	}
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
 	
@@ -284,9 +284,9 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 	}
 }
 
-float StelLocaleMgr::get_GMT_shift(double JD) const
+float StelLocaleMgr::getGMTShift(double JD) const
 {
-	if (timeZoneMode == STzGMTShift) return GMT_shift;
-	else return StelUtils::get_GMT_shift_from_QT(JD);
+	if (timeZoneMode == STzGMTShift) return GMTShift;
+	else return StelUtils::getGMTShiftFromQT(JD);
 }
 

@@ -131,10 +131,10 @@ public:
 	//! Get the current time shift at observator time zone with respect to GMT time.
 	void setGMTShift(int t)
 	{
-		GMT_shift=t;
+		GMTShift=t;
 	}
 	//! Get the current time shift in hours at observator time zone with respect to GMT time.
-	float get_GMT_shift(double JD = 0) const;
+	float getGMTShift(double JD = 0) const;
 	//! Set the timezone by a TZ-style string (see tzset in the libc manual).
 	void setCustomTzName(const QString& tzname);
 	//! Get the timezone name (a TZ-style string - see tzset in the libc manual).
@@ -143,7 +143,7 @@ public:
 		return customTzName;
 	}
 	//! Get the current timezone format mode.
-	STzFormat get_tz_format(void) const
+	STzFormat getTzFormat(void) const
 	{
 		return timeZoneMode;
 	}
@@ -168,7 +168,7 @@ private:
 	STzFormat timeZoneMode;		// Can be the system default or a user defined value
 	
 	QString customTzName;			// Something like "Europe/Paris"
-	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
+	float GMTShift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
 	
 	// Convert the time format enum to its associated string and reverse
 	STimeFormat stringToSTimeFormat(const QString&) const;

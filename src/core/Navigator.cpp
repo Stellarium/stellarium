@@ -84,7 +84,7 @@ void Navigator::init()
 	PresetSkyTime 		= conf->value("navigation/preset_sky_time",2451545.).toDouble();
 	StartupTimeMode 	= conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (StartupTimeMode=="preset")
-		setJDay(PresetSkyTime - StelUtils::get_GMT_shift_from_QT(PresetSkyTime) * JD_HOUR);
+		setJDay(PresetSkyTime - StelUtils::getGMTShiftFromQT(PresetSkyTime) * JD_HOUR);
 	else if (StartupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 	else 
@@ -104,7 +104,7 @@ void Navigator::setTodayTime(const QTime& target)
 	{
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
-		setJDay(StelUtils::qDateTimeToJd(dt)-(StelUtils::get_GMT_shift_from_QT(StelUtils::getJDFromSystem()) * JD_HOUR));
+		setJDay(StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR));
 	}
 	else
 	{
@@ -145,7 +145,7 @@ QDateTime Navigator::getInitDateTime(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
-	return StelUtils::jdToQDateTime(conf->value("navigation/preset_sky_time",2451545.).toDouble() - StelUtils::get_GMT_shift_from_QT(PresetSkyTime) * JD_HOUR);
+	return StelUtils::jdToQDateTime(conf->value("navigation/preset_sky_time",2451545.).toDouble() - StelUtils::getGMTShiftFromQT(PresetSkyTime) * JD_HOUR);
 }
 
 void Navigator::setInitDateTime(const QDateTime& dt)

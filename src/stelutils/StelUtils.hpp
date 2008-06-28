@@ -324,7 +324,7 @@ double qTimeToJDFraction(const QTime& time);
 QTime jdFractionToQTime(const double jd);
 
 //! Return number of hours offset from GMT, using Qt functions.
-float get_GMT_shift_from_QT(double JD);
+float getGMTShiftFromQT(double JD);
 
 //! Convert a QT QDateTime class to julian day.
 //! @param dateTime the UTC QDateTime to convert

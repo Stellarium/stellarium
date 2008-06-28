@@ -833,7 +833,7 @@ bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool 
 }
 
 // Use Qt's own sense of time and offset instead of platform specific code.
-float get_GMT_shift_from_QT(double JD)
+float getGMTShiftFromQT(double JD)
 {
 	int year, month, day, hour, minute, second;
 	getDateFromJulianDay(JD, &year, &month, &day);
