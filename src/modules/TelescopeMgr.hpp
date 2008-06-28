@@ -105,7 +105,7 @@ private:
     void clear(void);
   };
   TelescopeMap telescope_map;
-  STextureSP texPointer;			// The selection pointer texture
+  STextureSP texPointer;   // The selection pointer texture
 };
 
 

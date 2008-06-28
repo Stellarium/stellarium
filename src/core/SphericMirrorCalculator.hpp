@@ -28,12 +28,12 @@ class QSettings;
 class SphericMirrorCalculator {
 public:
   SphericMirrorCalculator(const QSettings& conf);
-  double getHorzZoomFactor(void) const {return horz_zoom_factor;}
-  double getVertZoomFactor(void) const {return vert_zoom_factor;}
+  double getHorzZoomFactor(void) const {return horzZoomFactor;}
+  double getVertZoomFactor(void) const {return vertZoomFactor;}
   bool transform(const Vec3d &v,double &x,double &y) const;
   bool retransform(double x,double y,Vec3d &v) const;
     // for calculating partial derivatives:
-  bool retransform(double x,double y,Vec3d &v,Vec3d &v_x,Vec3d &v_y) const;
+  bool retransform(double x,double y,Vec3d &v,Vec3d &vX,Vec3d &vY) const;
 private:
   void initRotMatrix(double alpha,double delta,double phi);
 private:
@@ -43,9 +43,9 @@ private:
   double PP;
   double lP;
   Vec3d p;
-  double horz_zoom_factor;
-  double vert_zoom_factor;
-  double alpha_delta_phi[9];
+  double horzZoomFactor;
+  double vertZoomFactor;
+  double alphaDeltaPhi[9];
 };
 
 #endif

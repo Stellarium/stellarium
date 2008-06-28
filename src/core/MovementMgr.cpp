@@ -32,20 +32,20 @@
 
 MovementMgr::MovementMgr(StelCore* acore) 
 	: core(acore), 
-	  flag_lock_equ_pos(false), 
+	  flagLockEquPos(false), 
 	  flagTracking(false), 
-	  is_mouse_moving_horiz(false), 
-	  is_mouse_moving_vert(false), 
-	  flag_auto_move(0), 
+	  isMouseMovingHoriz(false), 
+	  isMouseMovingVert(false), 
+	  flagAutoMove(0), 
 	  deltaFov(0.), 
 	  deltaAlt(0.), 
 	  deltaAz(0.), 
-	  move_speed(0.00025), 
-	  flag_auto_zoom(0), 
+	  moveSpeed(0.00025), 
+	  flagAutoZoom(0), 
 	  flagAutoZoomOutResetsDirection(0)
 {
 	setObjectName("MovementMgr");
-	is_dragging = false;
+	isDragging = false;
 }
 
 MovementMgr::~MovementMgr()
@@ -61,9 +61,9 @@ void MovementMgr::init()
 	MouseZoom = conf->value("navigation/mouse_zoom",30).toInt();
 	FlagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
 	FlagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
-	move_speed = conf->value("navigation/move_speed",0.0004).toDouble();
-	zoom_speed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
-	auto_move_duration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
+	moveSpeed = conf->value("navigation/move_speed",0.0004).toDouble();
+	zoomSpeed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
+	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
 	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 }	
@@ -76,45 +76,45 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		if (x == 0)
 		{
 			turnLeft(1);
-			is_mouse_moving_horiz = true;
+			isMouseMovingHoriz = true;
 		}
 		else if (x == core->getProjection()->getViewportWidth() - 1)
 		{
 			turnRight(1);
-			is_mouse_moving_horiz = true;
+			isMouseMovingHoriz = true;
 		}
-		else if (is_mouse_moving_horiz)
+		else if (isMouseMovingHoriz)
 		{
 			turnLeft(0);
-			is_mouse_moving_horiz = false;
+			isMouseMovingHoriz = false;
 		}
 
 		if (y == 0)
 		{
 			turnUp(1);
-			is_mouse_moving_vert = true;
+			isMouseMovingVert = true;
 		}
 		else if (y == core->getProjection()->getViewportHeight() - 1)
 		{
 			turnDown(1);
-			is_mouse_moving_vert = true;
+			isMouseMovingVert = true;
 		}
-		else if (is_mouse_moving_vert)
+		else if (isMouseMovingVert)
 		{
 			turnUp(0);
-			is_mouse_moving_vert = false;
+			isMouseMovingVert = false;
 		}
 	}
 	
-	if (is_dragging)
+	if (isDragging)
 	{
-		if (has_dragged || (std::sqrt((double)((x-previous_x)*(x-previous_x) +(y-previous_y)*(y-previous_y)))>4.))
+		if (hasDragged || (std::sqrt((double)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>4.))
 		{
-			has_dragged = true;
+			hasDragged = true;
 			setFlagTracking(false);
-			dragView(previous_x, previous_y, x, y);
-			previous_x = x;
-			previous_y = y;
+			dragView(previousX, previousY, x, y);
+			previousX = x;
+			previousY = y;
 			return true;
 		}
 	}
@@ -194,19 +194,19 @@ void MovementMgr::handleMouseClicks(QMouseEvent* event)
 		case Qt::LeftButton :
 			if (event->type()==QEvent::MouseButtonPress)
 			{
-				is_dragging = true;
-				has_dragged = false;
-				previous_x = event->x();
-				previous_y = event->y();
+				isDragging = true;
+				hasDragged = false;
+				previousX = event->x();
+				previousY = event->y();
 				event->accept();
 				return;
 			}
 			else
 			{
-				if (is_dragging)
+				if (isDragging)
 				{
-					is_dragging = false;
-					if (has_dragged)
+					isDragging = false;
+					if (hasDragged)
 					{
 						event->accept();
 						return;
@@ -221,7 +221,7 @@ void MovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 				{
-					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()),auto_move_duration);
+					moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()),autoMoveDuration);
 					setFlagTracking(true);
 				}
 			}
@@ -315,8 +315,8 @@ void MovementMgr::updateMotion(double deltaTime)
 	updateVisionVector(deltaTime);
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
-	double depl=move_speed*deltaTime*1000*proj->getFov();
-	double deplzoom=zoom_speed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
+	double depl=moveSpeed*deltaTime*1000*proj->getFov();
+	double deplzoom=zoomSpeed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
 
 	if (deltaAz<0)
 	{
@@ -370,56 +370,56 @@ void MovementMgr::updateMotion(double deltaTime)
 		changeFov(deltaFov);
 	}
 	panView(deltaAz, deltaAlt);
-	update_auto_zoom(deltaTime);
+	updateAutoZoom(deltaTime);
 }
 
 
 // Go and zoom to the selected object.
-void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
+void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
 	Projector* proj = core->getProjection();
 	
 	if (!StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		return;
 		
-	float manual_move_duration;
+	float manualMoveDuration;
 
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()), move_duration, false, 1);
-		manual_move_duration = move_duration;
+		moveTo(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation()), moveDuration, false, 1);
+		manualMoveDuration = moveDuration;
 	}
 	else
 	{
 		// faster zoom in manual zoom mode once object is centered
-		manual_move_duration = move_duration*.66f;
+		manualMoveDuration = moveDuration*.66f;
 	}
 
-	if( allow_manual_zoom && FlagManualZoom )
+	if( allowManualZoom && FlagManualZoom )
 	{
 		// if manual zoom mode, user can zoom in incrementally
 		float newfov = proj->getFov()*0.5f;
-		zoomTo(newfov, manual_move_duration);
+		zoomTo(newfov, manualMoveDuration);
 	}
 	else
 	{
 		float satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getSatellitesFov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()*0.9>satfov)
-			zoomTo(satfov, move_duration);
+			zoomTo(satfov, moveDuration);
 		else
 		{
 			float closefov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getCloseViewFov(core->getNavigation());
 			if (proj->getFov()>closefov)
-				zoomTo(closefov, move_duration);
+				zoomTo(closefov, moveDuration);
 		}
 	}
 }
 
 
 // Unzoom and go to the init position
-void MovementMgr::autoZoomOut(float move_duration, bool full)
+void MovementMgr::autoZoomOut(float moveDuration, bool full)
 {
 	Navigator* nav = core->getNavigation();
 	Projector* proj = core->getProjection();
@@ -432,7 +432,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
-			zoomTo(satfov, move_duration);
+			zoomTo(satfov, moveDuration);
 			return;
 		}
 
@@ -441,14 +441,14 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 		satfov = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getParentSatellitesFov((core->getNavigation()));
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
-			zoomTo(satfov, move_duration);
+			zoomTo(satfov, moveDuration);
 			return;
 		}
 	}
 
-	zoomTo(proj->getInitFov(), move_duration);
+	zoomTo(proj->getInitFov(), moveDuration);
 	if (flagAutoZoomOutResetsDirection) 
-		moveTo(nav->getinitViewPos(), move_duration, true, -1);
+		moveTo(nav->getinitViewPos(), moveDuration, true, -1);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
@@ -470,14 +470,14 @@ void MovementMgr::setFlagTracking(bool b)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void MovementMgr::moveTo(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
+void MovementMgr::moveTo(const Vec3d& _aim, float moveDuration, bool _localPos, int zooming)
 {
 	Navigator* nav = core->getNavigation();
-	zooming_mode = zooming;
+	zoomingMode = zooming;
 	move.aim=_aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	if (_local_pos)
+	if (_localPos)
 	{
 		move.start=nav->getLocalVision();
 	}
@@ -486,10 +486,10 @@ void MovementMgr::moveTo(const Vec3d& _aim, float move_duration, bool _local_pos
 		move.start=nav->getEquVision();
 	}
 	move.start.normalize();
-	move.speed=1.f/(move_duration*1000);
+	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
-	move.local_pos = _local_pos;
-	flag_auto_move = true;
+	move.localPos = _localPos;
+	flagAutoMove = true;
 }
 
 
@@ -497,11 +497,11 @@ void MovementMgr::moveTo(const Vec3d& _aim, float move_duration, bool _local_pos
 void MovementMgr::updateVisionVector(double deltaTime)
 {
 	Navigator* nav = core->getNavigation();
-	if (flag_auto_move)
+	if (flagAutoMove)
 	{
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-		if( zooming_mode == 1 && StelApp::getInstance().getStelObjectMgr().getWasSelected())
+		if( zoomingMode == 1 && StelApp::getInstance().getStelObjectMgr().getWasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
 			move.aim = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]->getObsEquatorialPos(core->getNavigation());
@@ -513,7 +513,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		float smooth = 4.f;
 		double c;
 
-		if (zooming_mode == 1)
+		if (zoomingMode == 1)
 		{
 			if( move.coef > .9 )
 			{
@@ -524,7 +524,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 				c = 1 - pow(1.-1.11*(move.coef),3);
 			}
 		}
-		else if(zooming_mode == -1)
+		else if(zoomingMode == -1)
 		{
 			if( move.coef < 0.1 )
 			{
@@ -533,7 +533,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 
 				/* could track as moves too, but would need to know if start was actually
 				   a zoomed in view on the object or an extraneous zoom out command
-				   if(move.local_pos) {
+				   if(move.localPos) {
 				   move.start=earth_equ_to_local(selected.getObsEquatorialPos(this));
 				   } else {
 				   move.start=selected.getObsEquatorialPos(this);
@@ -550,7 +550,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		else c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
 
 
-		if (move.local_pos)
+		if (move.localPos)
 		{
 			StelUtils::rect_to_sphe(&ra_aim, &de_aim, move.aim);
 			StelUtils::rect_to_sphe(&ra_start, &de_start, move.start);
@@ -581,8 +581,8 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		move.coef+=move.speed*deltaTime*1000;
 		if (move.coef>=1.)
 		{
-			flag_auto_move=0;
-			if (move.local_pos)
+			flagAutoMove=0;
+			if (move.localPos)
 			{
 				nav->setLocalVision(move.aim);
 			}
@@ -600,7 +600,7 @@ void MovementMgr::updateVisionVector(double deltaTime)
 		}
 		else
 		{
-			if (flag_lock_equ_pos) // Equatorial vision vector locked
+			if (flagLockEquPos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
 				nav->setLocalVision(nav->earth_equ_to_local(nav->getEquVision()));
@@ -683,45 +683,45 @@ void MovementMgr::dragView(int x1, int y1, int x2, int y2)
 }
 
 
-// Update auto_zoom if activated
-void MovementMgr::update_auto_zoom(double deltaTime)
+// Update autoZoom if activated
+void MovementMgr::updateAutoZoom(double deltaTime)
 {
-	if (flag_auto_zoom)
+	if (flagAutoZoom)
 	{
 		Projector* proj = core->getProjection();
 		
 		// Use a smooth function
 		double c;
 
-		if( zoom_move.start > zoom_move.aim )
+		if( zoomMove.start > zoomMove.aim )
 		{
 			// slow down as approach final view
-			c = 1 - (1-zoom_move.coef)*(1-zoom_move.coef)*(1-zoom_move.coef);
+			c = 1 - (1-zoomMove.coef)*(1-zoomMove.coef)*(1-zoomMove.coef);
 		}
 		else
 		{
 			// speed up as leave zoom target
-			c = (zoom_move.coef)*(zoom_move.coef)*(zoom_move.coef);
+			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
 		}
 
-		proj->setFov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
-		zoom_move.coef+=zoom_move.speed*deltaTime*1000;
-		if (zoom_move.coef>=1.)
+		proj->setFov(zoomMove.start + (zoomMove.aim - zoomMove.start) * c);
+		zoomMove.coef+=zoomMove.speed*deltaTime*1000;
+		if (zoomMove.coef>=1.)
 		{
-			flag_auto_zoom = 0;
-			proj->setFov(zoom_move.aim);
+			flagAutoZoom = 0;
+			proj->setFov(zoomMove.aim);
 		}
 	}
 }
 
 // Zoom to the given field of view
-void MovementMgr::zoomTo(double aim_fov, float move_duration)
+void MovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
-	zoom_move.aim=aim_fov;
-    zoom_move.start=core->getProjection()->getFov();
-    zoom_move.speed=1.f/(move_duration*1000);
-    zoom_move.coef=0.;
-    flag_auto_zoom = true;
+	zoomMove.aim=aim_fov;
+    zoomMove.start=core->getProjection()->getFov();
+    zoomMove.speed=1.f/(moveDuration*1000);
+    zoomMove.coef=0.;
+    flagAutoZoom = true;
 }
 
 void MovementMgr::changeFov(double deltaFov)
@@ -732,5 +732,5 @@ void MovementMgr::changeFov(double deltaFov)
 
 double MovementMgr::getAimFov(void) const
 {
-	return (flag_auto_zoom ? zoom_move.aim : core->getProjection()->getFov());
+	return (flagAutoZoom ? zoomMove.aim : core->getProjection()->getFov());
 }
