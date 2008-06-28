@@ -281,15 +281,15 @@ ViewportDistorterFisheyeToSphericMirror
 				                          (i == max_x) ? screen_w :
 				                          (i-0.5f*(j&1))*step_x);
 				vertex_point.ver_xy[1] = j*step_y;
-				Vec3d v,v_x,v_y;
+				Vec3d v,vX,vY;
 				bool rc = calc.retransform(
 				              (vertex_point.ver_xy[0]-0.5f*screen_w) / screen_h,
 				              (vertex_point.ver_xy[1]-0.5f*screen_h) / screen_h,
-				              v,v_x,v_y);
+				              v,vX,vY);
 				rc &= prj->getCurrentMapping().forward(v);
 				const float x = viewport_center[0] + v[0] * view_scaling_factor;
 				const float y = viewport_center[1] + v[1] * view_scaling_factor;
-				vertex_point.h = rc ? (v_x^v_y).length() : 0.0;
+				vertex_point.h = rc ? (vX^vY).length() : 0.0;
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping

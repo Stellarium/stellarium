@@ -448,37 +448,38 @@ private:
 	//! The current projector mask
 	PROJECTOR_MASK_TYPE maskType;
 
-	double initFov;				// initial default FOV in degree
-	double fov;					// Field of view in degree
-	double min_fov;				// Minimum fov in degree
-	double max_fov;				// Maximum fov in degree
-	double zNear, zFar;			// Near and far clipping planes
+	double initFov;                // initial default FOV in degree
+	double fov;                    // Field of view in degree
+	double min_fov;                // Minimum fov in degree
+	double max_fov;                // Maximum fov in degree
+	double zNear, zFar;            // Near and far clipping planes
 
-	Vector4<GLint> viewport_xywh;	// Viewport parameters
-	Vec2d viewport_center;		// Viewport center in screen pixel
-	double viewport_fov_diameter;	// diameter of a circle with 180 degrees diameter in screen pixel
+	Vector4<GLint> viewport_xywh;  // Viewport parameters
+	Vec2d viewport_center;         // Viewport center in screen pixel
+	double viewport_fov_diameter;  // diameter of a circle with 180 degrees diameter in screen pixel
 
-	Mat4d projectionMatrix;		// Projection matrix
+	Mat4d projectionMatrix;        // Projection matrix
 
-	double pixel_per_rad; // pixel per rad at the center of the viewport disk
-	double flip_horz,flip_vert;	// Whether to flip in horizontal or vertical directions
+	double pixel_per_rad;          // pixel per rad at the center of the viewport disk
+	double flip_horz,flip_vert;    // Whether to flip in horizontal or vertical directions
 
-	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
-	Mat4d mat_j2000_to_eye;         // for precessed equ coords
-	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
-	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
+	Mat4d mat_earth_equ_to_eye;    // Modelview Matrix for earth equatorial projection
+	Mat4d mat_j2000_to_eye;        // for precessed equ coords
+	Mat4d mat_helio_to_eye;        // Modelview Matrix for earth equatorial projection
+	Mat4d mat_local_to_eye;        // Modelview Matrix for earth equatorial projection
 	
-	bool gravityLabels;				// should label text align with the horizon?
+	bool gravityLabels;            // should label text align with the horizon?
 	
-	bool flagGlPointSprite;			// Define whether glPointSprite is activated
+	bool flagGlPointSprite;        // Define whether glPointSprite is activated
 	
-	mutable Mat4d modelViewMatrix;			// openGL MODELVIEW Matrix
+	mutable Mat4d modelViewMatrix; // openGL MODELVIEW Matrix
 	
 	const Mapping *mapping;
 	QMap<QString,const Mapping*> projectionMapping;
 	
-	QString currentProjectionType;	// Type of the projection currently used
+	QString currentProjectionType; // Type of the projection currently used
 	
 };
 
 #endif // _PROJECTOR_H_
+
