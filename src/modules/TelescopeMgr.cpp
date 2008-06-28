@@ -150,7 +150,7 @@ void TelescopeMgr::setColorScheme(const QSettings* conf, const QString& section)
 {
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
-	set_label_color(StelUtils::str_to_vec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
+	setLabelColor(StelUtils::str_to_vec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
 	set_circle_color(StelUtils::str_to_vec3f(conf->value(section+"/telescope_circle_color", defaultColor).toString()));
 }
 

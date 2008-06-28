@@ -317,16 +317,16 @@ void SolarSystem::loadPlanets()
 		}
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
-		pos_func_type posfunc;
-		OsulatingFunctType *osculating_func = 0;
-		bool close_orbit = pd.value(secname+"/close_orbit", true).toBool();
+		posFuncType posfunc;
+		OsulatingFunctType *osculatingFunc = 0;
+		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
 		if (funcName=="ell_orbit")
 		{
 			// Read the orbital elements
 			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity").toDouble();
-			if (eccentricity >= 1.0) close_orbit = false;
+			if (eccentricity >= 1.0) closeOrbit = false;
 			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
 			if (pericenter_distance <= 0.0) {
@@ -386,14 +386,14 @@ void SolarSystem::loadPlanets()
 			}
 
 			// when the parent is the sun use ecliptic rathe than sun equator:
-			const double parent_rot_obliquity = parent->get_parent()
+			const double parent_rot_obliquity = parent->getParent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
-			const double parent_rot_asc_node = parent->get_parent()
+			const double parent_rot_asc_node = parent->getParent()
 			                                  ? parent->getRotAscendingnode()
 			                                  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
-			if (parent->get_parent()) {
+			if (parent->getParent()) {
 				const double c_obl = cos(parent_rot_obliquity);
 				const double s_obl = sin(parent_rot_obliquity);
 				const double c_nod = cos(parent_rot_asc_node);
@@ -421,7 +421,7 @@ void SolarSystem::loadPlanets()
 													   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
-			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
+			posfunc = posFuncType(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
 		} 
 		else if (funcName=="comet_orbit")
 		{
@@ -432,7 +432,7 @@ void SolarSystem::loadPlanets()
 			// orbit_TimeAtPericenter,orbit_Epoch: JD
 			// orbit_MeanAnomaly,orbit_Inclination,orbit_ArgOfPericenter,orbit_AscendingNode: given in degrees
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
-			if (eccentricity >= 1.0) close_orbit = false;
+			if (eccentricity >= 1.0) closeOrbit = false;
 			double pericenter_distance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
 			if (pericenter_distance <= 0.0) {
@@ -454,7 +454,7 @@ void SolarSystem::loadPlanets()
 			if (mean_motion <= -1e100) {
 				const double period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
-					if (parent->get_parent()) {
+					if (parent->getParent()) {
 						qWarning() << "ERROR: " << englishName
 							<< ": when the parent body is not the sun, you must provide "
 							<< "either orbit_MeanMotion or orbit_Period";
@@ -491,14 +491,14 @@ void SolarSystem::loadPlanets()
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parent_rot_obliquity = parent->get_parent()
+			const double parent_rot_obliquity = parent->getParent()
 			                                  ? parent->getRotObliquity()
 			                                  : 0.0;
-			const double parent_rot_asc_node = parent->get_parent()
+			const double parent_rot_asc_node = parent->getParent()
 			                                  ? parent->getRotAscendingnode()
 			                                  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
-                        if (parent->get_parent()) {
+                        if (parent->getParent()) {
                            const double c_obl = cos(parent_rot_obliquity);
                            const double s_obl = sin(parent_rot_obliquity);
                            const double c_nod = cos(parent_rot_asc_node);
@@ -523,114 +523,114 @@ void SolarSystem::loadPlanets()
 											 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
-			posfunc = pos_func_type(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
+			posfunc = posFuncType(orb,&CometOrbit::positionAtTimevInVSOP87Coordinates);
 		}
 
 		if (funcName=="sun_special")
-			posfunc = pos_func_type(get_sun_helio_coordsv);
+			posfunc = posFuncType(get_sun_helio_coordsv);
 
 		if (funcName=="mercury_special") {
-			posfunc = pos_func_type(get_mercury_helio_coordsv);
-			osculating_func = &get_mercury_helio_osculating_coords;
+			posfunc = posFuncType(get_mercury_helio_coordsv);
+			osculatingFunc = &get_mercury_helio_osculating_coords;
 		}
         
 		if (funcName=="venus_special") {
-			posfunc = pos_func_type(get_venus_helio_coordsv);
-			osculating_func = &get_venus_helio_osculating_coords;
+			posfunc = posFuncType(get_venus_helio_coordsv);
+			osculatingFunc = &get_venus_helio_osculating_coords;
 		}
 
 		if (funcName=="earth_special") {
-			posfunc = pos_func_type(get_earth_helio_coordsv);
-			osculating_func = &get_earth_helio_osculating_coords;
+			posfunc = posFuncType(get_earth_helio_coordsv);
+			osculatingFunc = &get_earth_helio_osculating_coords;
 		}
 
 		if (funcName=="lunar_special")
-			posfunc = pos_func_type(get_lunar_parent_coordsv);
+			posfunc = posFuncType(get_lunar_parent_coordsv);
 
 		if (funcName=="mars_special") {
-			posfunc = pos_func_type(get_mars_helio_coordsv);
-			osculating_func = &get_mars_helio_osculating_coords;
+			posfunc = posFuncType(get_mars_helio_coordsv);
+			osculatingFunc = &get_mars_helio_osculating_coords;
 		}
 
 		if (funcName=="phobos_special")
-			posfunc = pos_func_type(get_phobos_parent_coordsv);
+			posfunc = posFuncType(get_phobos_parent_coordsv);
 
 		if (funcName=="deimos_special")
-			posfunc = pos_func_type(get_deimos_parent_coordsv);
+			posfunc = posFuncType(get_deimos_parent_coordsv);
 
 		if (funcName=="jupiter_special") {
-			posfunc = pos_func_type(get_jupiter_helio_coordsv);
-			osculating_func = &get_jupiter_helio_osculating_coords;
+			posfunc = posFuncType(get_jupiter_helio_coordsv);
+			osculatingFunc = &get_jupiter_helio_osculating_coords;
 		}
 
 		if (funcName=="europa_special")
-			posfunc = pos_func_type(get_europa_parent_coordsv);
+			posfunc = posFuncType(get_europa_parent_coordsv);
 
 		if (funcName=="calisto_special")
-			posfunc = pos_func_type(get_callisto_parent_coordsv);
+			posfunc = posFuncType(get_callisto_parent_coordsv);
 
 		if (funcName=="io_special")
-			posfunc = pos_func_type(get_io_parent_coordsv);
+			posfunc = posFuncType(get_io_parent_coordsv);
 
 		if (funcName=="ganymede_special")
-			posfunc = pos_func_type(get_ganymede_parent_coordsv);
+			posfunc = posFuncType(get_ganymede_parent_coordsv);
 
 		if (funcName=="saturn_special") {
-			posfunc = pos_func_type(get_saturn_helio_coordsv);
-			osculating_func = &get_saturn_helio_osculating_coords;
+			posfunc = posFuncType(get_saturn_helio_coordsv);
+			osculatingFunc = &get_saturn_helio_osculating_coords;
 		}
 
 		if (funcName=="mimas_special")
-			posfunc = pos_func_type(get_mimas_parent_coordsv);
+			posfunc = posFuncType(get_mimas_parent_coordsv);
 
 		if (funcName=="enceladus_special")
-			posfunc = pos_func_type(get_enceladus_parent_coordsv);
+			posfunc = posFuncType(get_enceladus_parent_coordsv);
 
 		if (funcName=="tethys_special")
-			posfunc = pos_func_type(get_tethys_parent_coordsv);
+			posfunc = posFuncType(get_tethys_parent_coordsv);
 
 		if (funcName=="dione_special")
-			posfunc = pos_func_type(get_dione_parent_coordsv);
+			posfunc = posFuncType(get_dione_parent_coordsv);
 
 		if (funcName=="rhea_special")
-			posfunc = pos_func_type(get_rhea_parent_coordsv);
+			posfunc = posFuncType(get_rhea_parent_coordsv);
 
 		if (funcName=="titan_special")
-			posfunc = pos_func_type(get_titan_parent_coordsv);
+			posfunc = posFuncType(get_titan_parent_coordsv);
 
 		if (funcName=="iapetus_special")
-			posfunc = pos_func_type(get_iapetus_parent_coordsv);
+			posfunc = posFuncType(get_iapetus_parent_coordsv);
 
 		if (funcName=="hyperion_special")
-			posfunc = pos_func_type(get_hyperion_parent_coordsv);
+			posfunc = posFuncType(get_hyperion_parent_coordsv);
 
 		if (funcName=="uranus_special") {
-			posfunc = pos_func_type(get_uranus_helio_coordsv);
-			osculating_func = &get_uranus_helio_osculating_coords;
+			posfunc = posFuncType(get_uranus_helio_coordsv);
+			osculatingFunc = &get_uranus_helio_osculating_coords;
 		}
 
 		if (funcName=="miranda_special")
-			posfunc = pos_func_type(get_miranda_parent_coordsv);
+			posfunc = posFuncType(get_miranda_parent_coordsv);
 
 		if (funcName=="ariel_special")
-			posfunc = pos_func_type(get_ariel_parent_coordsv);
+			posfunc = posFuncType(get_ariel_parent_coordsv);
 
 		if (funcName=="umbriel_special")
-			posfunc = pos_func_type(get_umbriel_parent_coordsv);
+			posfunc = posFuncType(get_umbriel_parent_coordsv);
 
 		if (funcName=="titania_special")
-			posfunc = pos_func_type(get_titania_parent_coordsv);
+			posfunc = posFuncType(get_titania_parent_coordsv);
 
 		if (funcName=="oberon_special")
-			posfunc = pos_func_type(get_oberon_parent_coordsv);
+			posfunc = posFuncType(get_oberon_parent_coordsv);
 
 		if (funcName=="neptune_special") {
-			posfunc = pos_func_type(get_neptune_helio_coordsv);
-			osculating_func = &get_neptune_helio_osculating_coords;
+			posfunc = posFuncType(get_neptune_helio_coordsv);
+			osculatingFunc = &get_neptune_helio_osculating_coords;
 		}
 
 		if (funcName=="pluto_special")
-			posfunc = pos_func_type(get_pluto_helio_coordsv);
+			posfunc = posFuncType(get_pluto_helio_coordsv);
 
 
 		if (posfunc.empty())
@@ -651,8 +651,8 @@ void SolarSystem::loadPlanets()
 					pd.value(secname+"/tex_map").toString(),
 					pd.value(secname+"/tex_halo").toString(),
 					posfunc,
-					osculating_func,
-					close_orbit,
+					osculatingFunc,
+					closeOrbit,
 					pd.value(secname+"/hidden", 0).toBool(),
 					pd.value(secname+"/atmosphere", false).toBool());
 
@@ -674,7 +674,7 @@ void SolarSystem::loadPlanets()
 			const double r_min = pd.value(secname+"/ring_inner_size").toDouble()/AU;
 			const double r_max = pd.value(secname+"/ring_outer_size").toDouble()/AU;
 			Ring *r = new Ring(r_min,r_max,pd.value(secname+"/tex_ring").toString());
-			p->set_rings(r);
+			p->setRings(r);
 		}
 
 		system_planets.push_back(p);
@@ -700,15 +700,15 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 		}
 		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
 		{
-			const double light_speed_correction = ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			(*iter)->compute_position(date-light_speed_correction);
+			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			(*iter)->computePosition(date-light_speed_correction);
 		}
 	}
 	else
 	{
 		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
 		{
-			(*iter)->compute_position(date);
+			(*iter)->computePosition(date);
 		}
 	}  
 	computeTransMatrices(date, observerPos);
@@ -722,15 +722,15 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 	{
 		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
 		{
-			const double light_speed_correction = ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			(*iter)->compute_trans_matrix(date-light_speed_correction);
+			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			(*iter)->computeTransMatrix(date-light_speed_correction);
 		}
   	}
 	else
 	{
 		for (vector<Planet*>::const_iterator iter(system_planets.begin());iter!=system_planets.end();iter++)
 		{
-			(*iter)->compute_trans_matrix(date);
+			(*iter)->computeTransMatrix(date);
 		}
 	}
 }
@@ -745,7 +745,7 @@ void SolarSystem::draw(StelCore* core)
 	Navigator* nav = core->getNavigation();
 	Projector* prj = core->getProjection();
 	
-	Planet::set_font(&planet_name_font);
+	Planet::setFont(&planet_name_font);
 	
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
@@ -772,7 +772,7 @@ void SolarSystem::draw(StelCore* core)
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-		(*iter)->compute_distance(obs_helio_pos);
+		(*iter)->computeDistance(obs_helio_pos);
 		++iter;
 	}
 
@@ -919,9 +919,9 @@ QString SolarSystem::getPlanetHashString(void)
 	vector <Planet *>::iterator iter;
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
-		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun")
+		if((*iter)->getParent() != NULL && (*iter)->getParent()->getEnglishName() != "Sun")
 		{
-			oss << (*iter)->get_parent()->getEnglishName() << " : ";
+			oss << (*iter)->getParent()->getEnglishName() << " : ";
 		}
 		
 		oss << (*iter)->getEnglishName() << endl;
@@ -1036,10 +1036,10 @@ void SolarSystem::setSelected(StelObject* obj)
 void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 {
 
-	Vec3d e = getEarth()->get_ecliptic_pos();
-	Vec3d m = getMoon()->get_ecliptic_pos();  // relative to earth
-	Vec3d mh = getMoon()->get_heliocentric_ecliptic_pos();  // relative to sun
-	float mscale = getMoon()->get_sphere_scale();
+	Vec3d e = getEarth()->getEclipticPos();
+	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
+	Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
+	float mscale = getMoon()->getSphereScale();
 
 	// shadow location at earth + moon distance along earth vector from sun
 	Vec3d en = e;
@@ -1136,7 +1136,7 @@ void SolarSystem::update(double delta_time)
 	while (iter != system_planets.end())
 	{
 		if(restartTrails) (*iter)->startTrail(true);
-		(*iter)->update_trail(nav);
+		(*iter)->updateTrail(nav);
 		(*iter)->update((int)(delta_time*1000));
 		iter++;
 	}
@@ -1148,9 +1148,9 @@ bool SolarSystem::near_lunar_eclipse()
 {
 	// TODO: could replace with simpler test
 
-	Vec3d e = getEarth()->get_ecliptic_pos();
-	Vec3d m = getMoon()->get_ecliptic_pos();  // relative to earth
-	Vec3d mh = getMoon()->get_heliocentric_ecliptic_pos();  // relative to sun
+	Vec3d e = getEarth()->getEclipticPos();
+	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
+	Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
 
 	// shadow location at earth + moon distance along earth vector from sun
 	Vec3d en = e;
@@ -1201,22 +1201,22 @@ void SolarSystem::setFlagPlanets(bool b) {flagShow=b;}
 bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
 
 // Set/Get planets names color
-void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::set_label_color(c);}
+void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
 const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::set_orbit_color(c);}
+void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::set_orbitColor(c);}
 Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
 
 // Set/Get planets trails color
-void SolarSystem::setTrailsColor(const Vec3f& c)  {Planet::set_trail_color(c);}
+void SolarSystem::setTrailsColor(const Vec3f& c)  {Planet::setTrailColor(c);}
 Vec3f SolarSystem::getTrailsColor(void) const {return Planet::getTrailColor();}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
 {
-	if (!b) getMoon()->set_sphere_scale(1);
-	else getMoon()->set_sphere_scale(moonScale);
+	if (!b) getMoon()->setSphereScale(1);
+	else getMoon()->setSphereScale(moonScale);
 	flagMoonScale = b;
 }
 
@@ -1225,7 +1225,7 @@ void SolarSystem::setMoonScale(float f)
 {
 	moonScale = f;
 	if (flagMoonScale)
-		getMoon()->set_sphere_scale(moonScale);
+		getMoon()->setSphereScale(moonScale);
 }
 
 // Set selected planets by englishName
@@ -1236,5 +1236,5 @@ void SolarSystem::setSelected(const QString& englishName)
 
 bool SolarSystem::bigger_distance::operator()(Planet* p1, Planet* p2)
 {
-	return p1->get_distance() > p2->get_distance();
+	return p1->getDistance() > p2->getDistance();
 }
