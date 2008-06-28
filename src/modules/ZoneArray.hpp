@@ -79,7 +79,7 @@ public:
                             vector<StelObjectP > &result) = 0;
   virtual void draw(int index,bool is_inside,
                     const float *rcmag_table, Projector *prj,
-                    unsigned int max_mag_star_name,float names_brightness,
+                    unsigned int maxMagStarName,float names_brightness,
                     SFont *starFont) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
@@ -126,7 +126,7 @@ private:
                     vector<StelObjectP > &result);
   void draw(int index,bool is_inside,
             const float *rcmag_table, Projector *prj,
-            unsigned int max_mag_star_name,float names_brightness,
+            unsigned int maxMagStarName,float names_brightness,
             SFont *starFont) const;
 };
 
@@ -383,7 +383,7 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const float *rcmag_table,
                                   Projector *prj,
-                                  unsigned int max_mag_star_name,
+                                  unsigned int maxMagStarName,
                                   float names_brightness,
                                   SFont *starFont) const
 {
@@ -401,7 +401,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 			{
 				break;
 			}
-			if (s->mag < max_mag_star_name)
+			if (s->mag < maxMagStarName)
 			{
 				const QString starname = s->getNameI18n();
 				if (!starname.isEmpty())

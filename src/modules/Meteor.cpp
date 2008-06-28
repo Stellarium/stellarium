@@ -36,7 +36,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
   velocity=v;
 
-  max_mag = 1;
+  maxMag = 1;
 
   // determine meteor model view matrix (want z in dir of travel of earth, z=0 at center of earth)
   // meteor life is so short, no need to recalculate
@@ -63,8 +63,8 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   obs.transfo4d(mmat.transpose());
 
   // set meteor start x,y
-  pos_internal[0] = pos_train[0] = position[0] = xydistance*cos(angle) +obs[0];
-  pos_internal[1] = pos_train[1] = position[1] = xydistance*sin(angle) +obs[1];
+  posInternal[0] = posTrain[0] = position[0] = xydistance*cos(angle) +obs[0];
+  posInternal[1] = posTrain[1] = position[1] = xydistance*sin(angle) +obs[1];
 
   // determine life of meteor (start and end z value based on atmosphere burn altitudes)
 
@@ -77,19 +77,19 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
     return;
   }
 
-  start_h = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
+  startH = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
 
   // determine end of burn point, and nearest point to observer for distance mag calculation
   // mag should be max at nearest point still burning
   if( D > EARTH_RADIUS+LOW_ALTITUDE ) {
-    end_h = -start_h;  // earth grazing
-    min_dist = xydistance;
+    endH = -startH;  // earth grazing
+    minDist = xydistance;
   } else {
-    end_h = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
-    min_dist = sqrt( xydistance*xydistance + pow( end_h - obs[2], 2) );
+    endH = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
+    minDist = sqrt( xydistance*xydistance + pow( endH - obs[2], 2) );
   }
 
-  if(min_dist > VISIBLE_RADIUS ) {
+  if(minDist > VISIBLE_RADIUS ) {
     // on average, not visible (although if were zoomed ...)
     alive = 0;
     return;
@@ -97,15 +97,15 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
     
   /* experiment
   // limit lifetime to 0.5-3.0 sec
-  double tmp_h = start_h - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
-  if( tmp_h > end_h ) {
-    end_h = tmp_h;
+  double tmp_h = startH - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
+  if( tmp_h > endH ) {
+    endH = tmp_h;
   }
   */
 
-  pos_train[2] = position[2] = start_h;
+  posTrain[2] = position[2] = startH;
 
-  //  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], start_h, end_h, velocity);
+  //  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], startH, endH, velocity);
 
   alive = 1;
   train=0;
@@ -144,7 +144,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproducer* eye, double v)
   // most visible meteors are under about 180km distant
   // scale max mag down if outside this range 
   float scale = 1;
-  if(min_dist!=0) scale = 180*180/(min_dist*min_dist);
+  if(minDist!=0) scale = 180*180/(minDist*minDist);
   if( scale < 1 ) mag *= scale;
 
 }
@@ -158,11 +158,11 @@ bool Meteor::update(double deltaTime)
 {
   if(!alive) return(0);
 
-  if( position[2] < end_h ) {
+  if( position[2] < endH ) {
     // burning has stopped so magnitude fades out
     // assume linear fade out
 
-    mag -= max_mag * deltaTime/500.0f;
+    mag -= maxMag * deltaTime/500.0f;
     if( mag < 0 ) alive=0;  // no longer visible
 
   }
@@ -171,10 +171,10 @@ bool Meteor::update(double deltaTime)
   position[2] = position[2] - velocity*deltaTime/1000.0f;
 
   // train doesn't extend beyond start of burn
-  if( position[2] + velocity*0.5f > start_h ) {
-    pos_train[2] = start_h ;
+  if( position[2] + velocity*0.5f > startH ) {
+    posTrain[2] = startH ;
   } else {
-    pos_train[2] -= velocity*deltaTime/1000.0f;
+    posTrain[2] -= velocity*deltaTime/1000.0f;
   }
 
   //qDebug("meteor position: %f delta_t %d\n", position[2], deltaTime);
@@ -184,7 +184,7 @@ bool Meteor::update(double deltaTime)
 
   if( dist == 0 ) dist = .01;  // just to be cautious (meteor hits observer!)
 
-  dist_multiplier = min_dist*min_dist / (dist*dist);
+  distMultiplier = minDist*minDist / (dist*dist);
 
   return(alive);
 }
@@ -199,7 +199,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	Vec3d start, end;
 
 	Vec3d spos = position;
-	Vec3d epos = pos_train;
+	Vec3d epos = posTrain;
 
 	// convert to equ
 	spos.transfo4d(mmat);
@@ -222,12 +222,12 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	if( train ) {
 		// connect this point with last drawn point
 
-		double tmag = mag*dist_multiplier;
+		double tmag = mag*distMultiplier;
 
 		// compute an intermediate point so can curve slightly along projection distortions
 		Vec3d intpos;
-		Vec3d posi = pos_internal; 
-		posi[2] = position[2] + (pos_train[2] - position[2])/2;
+		Vec3d posi = posInternal; 
+		posi[2] = position[2] + (posTrain[2] - position[2])/2;
 		posi.transfo4d(mmat);
 		posi = nav->earthEquToLocal( posi );
 		posi[2] -= EARTH_RADIUS;
@@ -270,7 +270,7 @@ bool Meteor::draw(Projector *proj, const Navigator* nav)
 	return(1);
 }
 
-bool Meteor::is_alive(void)
+bool Meteor::isAlive(void)
 {
   return(alive);
 }
