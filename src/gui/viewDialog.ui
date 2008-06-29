@@ -165,13 +165,126 @@ color: darkgray;
            <x>0</x>
            <y>0</y>
            <width>419</width>
-           <height>435</height>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
           <string>Sky</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_4" >
+          <item row="1" column="0" >
+           <layout class="QVBoxLayout" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_10" >
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="pixmap" >
+                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/bt_planet.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="showPlanetCheckBox" >
+                <property name="text" >
+                 <string>Show</string>
+                </property>
+                <property name="checked" >
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>16</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0" >
+               <size>
+                <width>20</width>
+                <height>16</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
           <item row="1" column="1" >
            <widget class="QGroupBox" name="planetsGroupBox" >
             <property name="title" >
@@ -224,7 +337,7 @@ color: darkgray;
           <item row="0" column="0" colspan="2" >
            <widget class="QGroupBox" name="starGroupBox" >
             <property name="title" >
-             <string>Sources Rendering</string>
+             <string>Point sources rendering</string>
             </property>
             <property name="alignment" >
              <set>Qt::AlignLeading</set>
@@ -347,119 +460,6 @@ color: darkgray;
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <layout class="QVBoxLayout" >
-            <property name="spacing" >
-             <number>0</number>
-            </property>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0" >
-               <size>
-                <width>20</width>
-                <height>16</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" >
-              <item>
-               <spacer>
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>16</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_10" >
-                <property name="text" >
-                 <string/>
-                </property>
-                <property name="pixmap" >
-                 <pixmap resource="../../data/mainRes.qrc" >:/graphicGui/gui/bt_planet.png</pixmap>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer>
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>16</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" >
-              <item>
-               <spacer>
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>16</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="showPlanetCheckBox" >
-                <property name="text" >
-                 <string>Show</string>
-                </property>
-                <property name="checked" >
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer>
-                <property name="orientation" >
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0" >
-                 <size>
-                  <width>16</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0" >
-               <size>
-                <width>20</width>
-                <height>16</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
           <item row="3" column="0" colspan="2" >
            <widget class="QGroupBox" name="shootingStarsGroupBox" >
             <property name="title" >
@@ -494,7 +494,7 @@ zenith rate:</string>
                <item>
                 <widget class="QRadioButton" name="zhrNone" >
                  <property name="text" >
-                  <string>None</string>
+                  <string>0</string>
                  </property>
                 </widget>
                </item>
@@ -534,10 +534,10 @@ zenith rate:</string>
              <item row="1" column="2" >
               <widget class="QLabel" name="zhrLabel" >
                <property name="text" >
-                <string>Normal rate</string>
+                <string>&lt;small>&lt;i>Normal rate&lt;/i>&lt;/small></string>
                </property>
                <property name="textFormat" >
-                <enum>Qt::PlainText</enum>
+                <enum>Qt::RichText</enum>
                </property>
               </widget>
              </item>
@@ -605,10 +605,6 @@ zenith rate:</string>
            </widget>
           </item>
          </layout>
-         <zorder>planetsGroupBox</zorder>
-         <zorder>starGroupBox</zorder>
-         <zorder>shootingStarsGroupBox</zorder>
-         <zorder>projectionGroupBox</zorder>
         </widget>
         <widget class="QWidget" name="tabMarking" >
          <property name="geometry" >
@@ -616,7 +612,7 @@ zenith rate:</string>
            <x>0</x>
            <y>0</y>
            <width>419</width>
-           <height>435</height>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -986,7 +982,7 @@ zenith rate:</string>
            <x>0</x>
            <y>0</y>
            <width>419</width>
-           <height>435</height>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
@@ -1132,7 +1128,7 @@ zenith rate:</string>
            <x>0</x>
            <y>0</y>
            <width>419</width>
-           <height>435</height>
+           <height>437</height>
           </rect>
          </property>
          <attribute name="title" >
