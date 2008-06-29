@@ -321,7 +321,7 @@ color: darkgray;
              <item row="1" column="3" >
               <widget class="QCheckBox" name="adaptationCheckbox" >
                <property name="toolTip" >
-                <string>Dimm faint stars when a very bright object is visible</string>
+                <string>Dim faint stars when a very bright object is visible</string>
                </property>
                <property name="text" >
                 <string>Dynamic eye adaptation</string>
@@ -482,7 +482,7 @@ color: darkgray;
               <widget class="QLabel" name="label_14" >
                <property name="text" >
                 <string>Hourly
-zenith rate</string>
+zenith rate:</string>
                </property>
                <property name="textFormat" >
                 <enum>Qt::PlainText</enum>
