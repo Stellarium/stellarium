@@ -353,19 +353,19 @@ void ViewDialog::shoutingStarsZHRChanged()
 	switch (zhr)
 	{
 		case 0:
-			ui->zhrLabel->setText(q_("No shooting stars"));
+			ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
 			break;
 		case 10:
-			ui->zhrLabel->setText(q_("Normal rate"));
+			ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
 			break;
 		case 80:
-			ui->zhrLabel->setText(q_("Standard Perseids rate"));
+			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
 			break;
 		case 10000:
-			ui->zhrLabel->setText(q_("Exceptional Leonid rate"));
+			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
 			break;
 		case 144000:
-			ui->zhrLabel->setText(q_("Highest rate ever (1966 Leonids)"));
+			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1966 Leonids)")+"</i></small>");
 			break;
 	}
 }
