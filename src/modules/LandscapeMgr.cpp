@@ -176,9 +176,9 @@ void LandscapeMgr::update(double deltaTime)
 	const Observer* obs = StelApp::getInstance().getCore()->getObservatory();
 	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproducer();
 	
-	Vec3d sunPos = nav->helioToLocal(ssystem->getSun()->getHeliocentricEclipticPos());
+	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = nav->helioToLocal(ssystem->getMoon()->getHeliocentricEclipticPos());
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
 	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
 	                          ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
@@ -191,7 +191,7 @@ void LandscapeMgr::update(double deltaTime)
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
 //	{
-//		Vec3d pos = nav->helioToLocal((*i)->getHeliocentricEclipticPos());
+//		Vec3d pos = (*i)->getAltAzPos(nav);
 //		pos.normalize();
 //		if (pos[2] <= 0)
 //		{

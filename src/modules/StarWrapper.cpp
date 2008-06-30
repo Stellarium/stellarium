@@ -50,10 +50,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
 	if (flags&RaDecJ2000)
-		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	if (flags&RaDec)
-		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
-	oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
+		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
+	if (flags&RaDecOfDate)
+		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
+	if (flags&HourAngle)
+		oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
 	if (flags&AltAzi)
 	{
 		// calculate alt az
@@ -134,15 +135,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
 		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
 	if (flags&RaDecJ2000)
-		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
+		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
 		                                    StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	if (flags&RaDec)
-		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
+	if (flags&RaDecOfDate)
+		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
 		                                          StelUtils::radToDmsStr(dec_equ)) << "<br>";
 	double dec_sideral, ra_sideral;
 	StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
 	ra_sideral = 2.*M_PI-ra_sideral;
-	oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
+	if (flags&HourAngle)
+		oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
 	if (flags&AltAzi)
 	{
 		// calculate alt az
