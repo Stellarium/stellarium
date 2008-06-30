@@ -50,21 +50,22 @@ public:
 		Name          = 0x00000001, //!< An object's name
 		CatalogNumber = 0x00000002, //!< Catalog numbers
 		Magnitude     = 0x00000004, //!< Magnitude related data
-		RaDecJ2000    = 0x00000008, //!< The position (J2000 ref)
-		RaDec         = 0x00000010, //!< The position (Equ of date)
+		RaDecJ2000    = 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate   = 0x00000010, //!< The equatorial position (of date)
 		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
 		Distance      = 0x00000040, //!< Info about an object's distance
 		Size          = 0x00000080, //!< Info about an object's size
 		Extra1        = 0x00000100, //!< Derived class-specific extra fields
 		Extra2        = 0x00000200, //!< Derived class-specific extra fields
 		Extra3        = 0x00000400, //!< Derived class-specific extra fields
-		PlainText     = 0x00000800  //!< Strip HTML tags from output
+		PlainText     = 0x00000800, //!< Strip HTML tags from output
+		HourAngle     = 0x00001000  //!< The hour angle + DE (of date)
 	};
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDec|AltAzi|Distance|Size|Extra1|Extra2|Extra3);
+	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup BriefInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDec);
+	static const InfoStringGroup BriefInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject(void) {}
 
@@ -102,8 +103,8 @@ public:
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getObsEquatorialPos(const Navigator* nav) const;
 	
-	//! Get observer local sideral coordinate
-	//! The frame has it's Z axis at the observer current rotation axis
+	//! Get observer centered hour angle + declination (at current equinox)
+	//! The frame has its Z axis at the observer current rotation axis
 	Vec3d getObsSideralPos(const StelCore* core) const;
 	
 	//! Get observer local alt/az coordinate

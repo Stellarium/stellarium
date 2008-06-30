@@ -135,7 +135,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&RaDecJ2000)
 	{
 		StelUtils::rectToSphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
-		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 	}
 
 	if (flags&AltAzi)
@@ -918,9 +918,7 @@ void Planet::updateTrail(const Navigator* nav)
 	{
 		lastTrailJD = date;
 		TrailPoint tp;
-		//Vec3d v = getHeliocentricEclipticPos();
-		//      trail.push_front( nav->helioToEarthEqu(v) );  // centered on earth
-		tp.point = getObsJ2000Pos(nav);//nav->helioToEarthPosEqu(v);
+		tp.point = getObsJ2000Pos(nav);
 		tp.date = date;
 		trail.push_front( tp );
 
