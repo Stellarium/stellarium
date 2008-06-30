@@ -102,8 +102,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	double tempDE, tempRA;
 	StelUtils::rectToSphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
-	if (flags&RaDec)
-		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
+	if (flags&RaDecOfDate)
+		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
 
 	if (flags&AltAzi)
 	{

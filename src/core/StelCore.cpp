@@ -58,6 +58,27 @@ StelCore::~StelCore()
 	delete skyDrawer; skyDrawer=NULL;
 }
 
+// void printLog(GLuint obj)
+// {
+// 	int infologLength = 0;
+// 	int maxLength;
+// 	
+// 	if(glIsShader(obj))
+// 		glGetShaderiv(obj,GL_INFO_LOG_LENGTH,&maxLength);
+// 	else
+// 		glGetProgramiv(obj,GL_INFO_LOG_LENGTH,&maxLength);
+// 			
+// 	char infoLog[maxLength];
+//  
+// 	if (glIsShader(obj))
+// 		glGetShaderInfoLog(obj, maxLength, &infologLength, infoLog);
+// 	else
+// 		glGetProgramInfoLog(obj, maxLength, &infologLength, infoLog);
+//  
+// 	if (infologLength > 0)
+// 		printf("%s\n",infoLog);
+// }
+
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
@@ -82,6 +103,23 @@ void StelCore::init()
 	hip_stars->setGrid(geodesicGrid);
 	
 	skyDrawer->init();
+	
+	// Debug
+	// Invert colors fragment shader
+// 	const QByteArray a("void main(void) {float gray = dot(gl_Color.rgb, vec3(0.299, 0.587, 0.114)); gl_FragColor = vec4(gray * vec3(1.2, 1.0, 0.8), 1.0);}");
+// 	GLuint fs;	// Fragment Shader
+// 	GLuint sp;	// Shader Program
+// 	fs = glCreateShader(GL_FRAGMENT_SHADER);
+// 	const char* str = a.constData();
+// 	glShaderSource(fs, 1, &str, NULL);
+// 	glCompileShader(fs);
+// 	printLog(fs);
+// 
+// 	sp = glCreateProgram();
+// 	glAttachShader(sp, fs);
+// 	glLinkProgram(sp);
+// 	printLog(sp);
+// 	glUseProgram(sp);
 }
 
 

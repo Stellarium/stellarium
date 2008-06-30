@@ -232,12 +232,10 @@ Telescope::Telescope(const QString &name) : name(name)
 QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	const Vec3d j2000_pos = getObsJ2000Pos(nav);
 	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,j2000_pos);
-	const Vec3d equatorial_pos = nav->j2000ToEarthEqu(j2000_pos);
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
 	double dec_equ, ra_equ;
-	StelUtils::rectToSphe(&ra_equ,&dec_equ,equatorial_pos);
+	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	QString str;
 	QTextStream oss(&str);
 	if (flags&Name)
@@ -249,10 +247,10 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 
 	if (flags&RaDecJ2000) 
-		oss << q_("J2000 RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false), StelUtils::radToDmsStr(dec_j2000,false)) << "<br>";
+		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false), StelUtils::radToDmsStr(dec_j2000,false)) << "<br>";
 
-	if (flags&RaDec)
-		oss << q_("Equ of date RA/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
+	if (flags&RaDecOfDate)
+		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
 
 	// chomp trailing line breaks
 	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
