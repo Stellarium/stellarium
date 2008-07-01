@@ -244,18 +244,15 @@ void BottomStelBar::updateText()
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
 	fps->setText(str);
 	
-	datetime->setPos(10, 0);
-
+	
+	
 	QRectF rectCh = getButtonsBoundingRect();
 	
-	fov->setPos(rectCh.right()-170, 0);
-	fps->setPos(rectCh.right()-60, 0);
+	location->setPos(0, 0);
+	datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
 	
-	double left = datetime->pos().x()+datetime->boundingRect().width();
-	double right = fov->pos().x();
-	double newPosX = left+(right-left)/2.-location->boundingRect().width()/2.;
-	if (std::fabs(newPosX-location->pos().x())>20)
-		location->setPos((int)newPosX,0);
+	fov->setPos(datetime->x()-230, 0);
+	fps->setPos(datetime->x()-140, 0);
 }
 
 void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
