@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef SKYIMAGETILE_H_
-#define SKYIMAGETILE_H_
+#ifndef _SKYIMAGETILE_HPP_
+#define _SKYIMAGETILE_HPP_
 
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
@@ -153,4 +153,4 @@ private:
 #endif
 };
 
-#endif /*SKYIMAGETILE_H_*/
+#endif // _SKYIMAGETILE_HPP_

@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef QTJSONPARSER_H_
-#define QTJSONPARSER_H_
+#ifndef _QTJSONPARSER_HPP_
+#define _QTJSONPARSER_HPP_
 
 #include <QIODevice>
 #include <QVariant>
@@ -40,4 +40,4 @@ public:
 	QVariant parse(QIODevice& input);
 };
 
-#endif /*QTJSONPARSER_H_*/
+#endif // _QTJSONPARSER_HPP_

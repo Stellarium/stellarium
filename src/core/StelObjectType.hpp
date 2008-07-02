@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEL_OBJECT_TYPE_H_
-#define _STEL_OBJECT_TYPE_H_
+#ifndef _STELOBJECTTYPE_HPP_
+#define _STELOBJECTTYPE_HPP_
 
 #include <boost/intrusive_ptr.hpp>
 
@@ -26,4 +26,4 @@ class StelObject;
 //! Intrusive pointer used to manage StelObject with smart pointers
 typedef boost::intrusive_ptr<StelObject> StelObjectP;
 
-#endif
+#endif // _STELOBJECTTYPE_HPP_

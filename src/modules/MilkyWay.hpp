@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef __MILKYWAY_H__
-#define __MILKYWAY_H__
+#ifndef _MILKYWAY_HPP_
+#define _MILKYWAY_HPP_
 
 #include "StelModule.hpp"
 #include "vecmath.h"
@@ -87,4 +87,4 @@ private:
 	class LinearFader* fader;
 };
 
-#endif // __MILKYWAY_H__
+#endif // _MILKYWAY_HPP_

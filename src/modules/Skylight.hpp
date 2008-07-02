@@ -20,8 +20,8 @@
 // Fast implementation of the algorithm from the article
 // "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits.
 
-#ifndef _SKYLIGHT_H_
-#define _SKYLIGHT_H_
+#ifndef _SKYLIGHT_HPP_
+#define _SKYLIGHT_HPP_
 
 #include <cassert>
 #include <cmath>

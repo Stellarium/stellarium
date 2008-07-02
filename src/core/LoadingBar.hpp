@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _LOADINGBAR_H_
-#define _LOADINGBAR_H_
+#ifndef _LOADINGBAR_HPP_
+#define _LOADINGBAR_HPP_
 
 #include "STextureTypes.hpp"
 #include "vecmath.h"
@@ -80,4 +80,4 @@ private:
 	double timeCounter;
 };
 
-#endif //_LOADINGBAR_H_
+#endif // _LOADINGBAR_HPP_

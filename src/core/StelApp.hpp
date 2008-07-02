@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELAPP_H
-#define STELAPP_H
+#ifndef _STELAPP_HPP_
+#define _STELAPP_HPP_
 
 #include <cassert>
 #include "fixx11h.h"
@@ -332,4 +332,4 @@ private:
 	int saveProjH;
 };
 
-#endif
+#endif // _STELAPP_HPP_

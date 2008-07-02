@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NEBULA_MGR_H_
-#define _NEBULA_MGR_H_
+#ifndef _NEBULAMGR_HPP_
+#define _NEBULAMGR_HPP_
 
 #include <vector>
 #include <QString>
@@ -204,4 +204,4 @@ private:
 	STextureSP texPointer;
 };
 
-#endif // _NEBULA_MGR_H_
+#endif // _NEBULAMGR_HPP_

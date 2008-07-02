@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SKYBRIGHT_H_
-#define _SKYBRIGHT_H_
+#ifndef _SKYBRIGHT_HPP_
+#define _SKYBRIGHT_HPP_
 
 //! @class Skybright
 //! Compute the luminance of the sky according to some parameters like sun moon position
@@ -69,4 +69,4 @@ private:
 	float bTwilightTerm;
 };
 
-#endif // _SKYBRIGHT_H_
+#endif // _SKYBRIGHT_HPP_

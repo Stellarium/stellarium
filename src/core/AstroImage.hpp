@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef ASTROIMAGE_H_
-#define ASTROIMAGE_H_
+#ifndef _ASTROIMAGE_HPP_
+#define _ASTROIMAGE_HPP_
 
 #include "STextureTypes.hpp"
 #include "SphereGeometry.hpp"
@@ -64,4 +64,4 @@ private:
 	const StelGeom::ConvexPolygon poly;
 };
 
-#endif /*ASTROIMAGE_H_*/
+#endif // _ASTROIMAGE_H_

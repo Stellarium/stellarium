@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef SPHEREGEOMETRY_HPP_
-#define SPHEREGEOMETRY_HPP_
+#ifndef _SPHEREGEOMETRY_HPP_
+#define _SPHEREGEOMETRY_HPP_
 
 #include <vector>
 #include "vecmath.h"
@@ -292,4 +292,4 @@ inline bool intersect(const ConvexPolygon& c, const HalfSpace& h)
 
 }	// namespace StelGeom
 
-#endif /*SPHEREGEOMETRY_HPP_*/
+#endif // _SPHEREGEOMETRY_HPP_

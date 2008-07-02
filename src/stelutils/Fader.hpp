@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _FADER_H_
-#define _FADER_H_
+#ifndef _FADER_HPP_
+#define _FADER_HPP_
 
 #include <cstdio>
 #include <cfloat>
@@ -266,4 +266,4 @@ public:
 };
 */
 
-#endif //_FADER_H_
+#endif // _FADER_HPP_

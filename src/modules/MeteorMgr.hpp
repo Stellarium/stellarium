@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _METEOR_MGR_H_
-#define _METEOR_MGR_H_
+#ifndef _METEORMGR_HPP_
+#define _METEORMGR_HPP_
 
 #include <vector>
 #include "StelModule.hpp"
@@ -81,4 +81,4 @@ private:
 };
 
 
-#endif // _METEOR_MGR_H
+#endif // _METEORMGR_HPP_

@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef SKYBACKGROUND_H_
-#define SKYBACKGROUND_H_
+#ifndef _SKYBACKGROUND_HPP_
+#define _SKYBACKGROUND_HPP_
 
 #include "StelModule.hpp"
 #include <QString>
@@ -68,4 +68,4 @@ private:
 	bool flagShow;
 };
 
-#endif /*SKYBACKGROUND_H_*/
+#endif // _SKYBACKGROUND_HPP_

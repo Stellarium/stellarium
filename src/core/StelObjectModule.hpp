@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELOBJECTMODULE_H
-#define STELOBJECTMODULE_H
+#ifndef _STELOBJECTMODULE_HPP_
+#define _STELOBJECTMODULE_HPP_
 
 #include <vector>
 #include <QString>
@@ -65,4 +65,4 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const = 0;
 };
 
-#endif
+#endif // _STELOBJECTMODULE_HPP_

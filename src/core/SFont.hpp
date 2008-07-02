@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _S_FONT_H
-#define _S_FONT_H
+#ifndef _SFONT_H_
+#define _SFONT_H_
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -60,4 +60,4 @@ private:
 	mutable TypeFace typeFace;
 };
 
-#endif  //_S_FONT_H
+#endif // _SFONT_H_

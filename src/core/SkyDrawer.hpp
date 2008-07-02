@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef SKYDRAWER_HPP
-#define SKYDRAWER_HPP
+#ifndef _SKYDRAWER_HPP_
+#define _SKYDRAWER_HPP_
 
 #include "STextureTypes.hpp"
 #include "vecmath.h"
@@ -269,4 +269,4 @@ private:
 	bool flagLuminanceAdaptation;
 };
 
-#endif
+#endif // _SKYDRAWER_HPP_

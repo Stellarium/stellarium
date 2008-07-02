@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef LANDSCAPEMGR_H_
-#define LANDSCAPEMGR_H_
+#ifndef _LANDSCAPEMGR_HPP_
+#define _LANDSCAPEMGR_HPP_
 
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
@@ -198,4 +198,4 @@ private:
 	QString currentLandscapeID;
 };
 
-#endif /*LANDSCAPEMGR_H_*/
+#endif // _LANDSCAPEMGR_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef MOVEMENTMGR_H_
-#define MOVEMENTMGR_H_
+#ifndef _MOVEMENTMGR_HPP_
+#define _MOVEMENTMGR_HPP_
 
 #include "StelModule.hpp"
 #include "Projector.hpp"
@@ -201,5 +201,5 @@ private:
 	bool flagAutoZoomOutResetsDirection;
 };
 
-#endif /*MOVEMENTMGR_H_*/
+#endif // _MOVEMENTMGR_HPP_
 

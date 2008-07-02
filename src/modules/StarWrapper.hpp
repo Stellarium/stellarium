@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STAR_WRAPPER_HPP_
-#define _STAR_WRAPPER_HPP_
+#ifndef _STARWRAPPER_HPP_
+#define _STARWRAPPER_HPP_
 
 #include <QString>
 #include "StelObject.hpp"
@@ -148,4 +148,4 @@ public:
 
 } // namespace BigStarCatalogExtension
 
-#endif
+#endif // _STARWRAPPER_HPP_

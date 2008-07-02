@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _METEOR_H_
-#define _METEOR_H_
+#ifndef _METEOR_HPP_
+#define _METEOR_HPP_
 
 #include "Projector.hpp"
 #include "Navigator.hpp"
@@ -81,4 +81,4 @@ private:
 };
 
 
-#endif // _METEOR_H
+#endif // _METEOR_HPP_

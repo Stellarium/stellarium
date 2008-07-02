@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELMAINGRAPHICSVIEW_HPP_
-#define STELMAINGRAPHICSVIEW_HPP_
+#ifndef _STELMAINGRAPHICSVIEW_HPP_
+#define _STELMAINGRAPHICSVIEW_HPP_
 
 #include <cassert>
 #include <QGraphicsView>
@@ -77,4 +77,4 @@ private:
 };
 
 
-#endif /*STELMAINGRAPHICSVIEW_HPP_*/
+#endif // _STELMAINGRAPHICSVIEW_HPP_

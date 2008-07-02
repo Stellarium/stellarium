@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _TEXT_UI_H_
-#define _TEXT_UI_H_
+#ifndef _TEXTUI_HPP_
+#define _TEXTUI_HPP_
 
 #include "StelModule.hpp"
 
@@ -60,4 +60,4 @@ private:
 };
 
 
-#endif // _TEXT_UI_H
+#endif // _TEXTUI_HPP_

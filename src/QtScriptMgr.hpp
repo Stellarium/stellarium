@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef QTSCRIPTMGR_HPP
-#define QTSCRIPTMGR_HPP
+#ifndef _QTSCRIPTMGR_HPP_
+#define _QTSCRIPTMGR_HPP_
 
 #include <QObject>
 #include <QtScript>
@@ -68,4 +68,4 @@ private:
 	QScriptEngine engine;
 };
 
-#endif
+#endif // _QTSCRIPTMGR_HPP_

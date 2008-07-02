@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELOBJECTMGR_HPP_
-#define STELOBJECTMGR_HPP_
+#ifndef _STELOBJECTMGR_HPP_
+#define _STELOBJECTMGR_HPP_
 
 #include <vector>
 #include <QString>
@@ -130,4 +130,4 @@ private:
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;	
 };
 
-#endif /*SELECTIONMGR_HPP_*/
+#endif // _SELECTIONMGR_HPP_
