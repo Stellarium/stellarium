@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _OBSERVER_H_
-#define _OBSERVER_H_
+#ifndef _OBSERVER_HPP_
+#define _OBSERVER_HPP_
 
 #include <QObject>
 #include <QString>
@@ -110,4 +110,4 @@ private:
 	float moveToCoef, moveToMult;
 };
 
-#endif
+#endif // _OBSERVER_HPP_

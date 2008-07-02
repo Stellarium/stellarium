@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _ZONE_DATA_HPP_
-#define _ZONE_DATA_HPP_
+#ifndef _ZONEDATA_HPP_
+#define _ZONEDATA_HPP_
 
 #include <boost/intrusive_ptr.hpp>
 
@@ -58,4 +58,4 @@ struct SpecialZoneData : public ZoneData {
 
 } // namespace BigStarCatalogExtension
 
-#endif
+#endif // _ZONEDATA_HPP_

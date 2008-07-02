@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SOLARSYSTEM_H_
-#define _SOLARSYSTEM_H_
+#ifndef _SOLARSYSTEM_HPP_
+#define _SOLARSYSTEM_HPP_
 //sun is already defined in Sun C/Solaris
 #if defined(sun)
 #undef sun
@@ -297,4 +297,4 @@ private:
 };
 
 
-#endif // _SOLARSYSTEM_H_
+#endif // _SOLARSYSTEM_HPP_

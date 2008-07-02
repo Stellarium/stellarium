@@ -18,8 +18,8 @@
 //                (this was inspired by Doug Gregor's callback classes)
 //   18 Nov 2000  Initial version
 
-#ifndef BOOST_CALLBACKS_HPP
-#define BOOST_CALLBACKS_HPP
+#ifndef _CALLBACKS_HPP_
+#define _CALLBACKS_HPP_
 
 #include <cassert>
 #include "callback_helpers.hpp"
@@ -89,5 +89,5 @@ private:
 
 }        // namespace boost
 
-#endif   // BOOST_CALLBACKS_HPP
+#endif   // _CALLBACKS_HPP_
 

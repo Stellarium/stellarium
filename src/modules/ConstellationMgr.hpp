@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _CONSTELLATION_MGR_H_
-#define _CONSTELLATION_MGR_H_
+#ifndef _CONSTELLATIONMGR_HPP_
+#define _CONSTELLATIONMGR_HPP_
 
 #include <vector>
 #include <QString>
@@ -235,4 +235,4 @@ private:
 	float artMaxIntensity;
 };
 
-#endif // _CONSTELLATION_MGR_H_
+#endif // _CONSTELLATIONMGR_HPP_

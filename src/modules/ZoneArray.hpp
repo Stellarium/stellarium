@@ -21,8 +21,8 @@
  */
 
 
-#ifndef _ZONE_ARRAY_HPP_
-#define _ZONE_ARRAY_HPP_
+#ifndef _ZONEARRAY_HPP_
+#define _ZONEARRAY_HPP_
 
 #include <QString>
 #include <QDebug>
@@ -436,4 +436,4 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
 
 } // namespace BigStarCatalogExtension
 
-#endif
+#endif // _ZONEARRAY_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef STELPLUGININTERFACE_HPP_
-#define STELPLUGININTERFACE_HPP_
+#ifndef _STELPLUGININTERFACE_HPP_
+#define _STELPLUGININTERFACE_HPP_
 
 #include <QtPlugin>
 class StelPluginInterface
@@ -29,4 +29,4 @@ public:
 };
 Q_DECLARE_INTERFACE(StelPluginInterface,"stellarium.StelPluginInterface/1.0");
 
-#endif /*STELPLUGININTERFACE_HPP_*/
+#endif // _STELPLUGININTERFACE_HPP_

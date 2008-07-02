@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEL_CORE_H_
-#define _STEL_CORE_H_
+#ifndef _STELCORE_HPP_
+#define _STELCORE_HPP_
 
 #include <QString>
 
@@ -99,4 +99,4 @@ private:
 	GeodesicGrid* geodesicGrid;
 };
 
-#endif // _STEL_CORE_H_
+#endif // _STELCORE_HPP_

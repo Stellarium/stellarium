@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _LANDSCAPE_H_
-#define _LANDSCAPE_H_
+#ifndef _LANDSCAPE_HPP_
+#define _LANDSCAPE_HPP_
 
 #include <QMap>
 #include "vecmath.h"
@@ -168,4 +168,4 @@ private:
 	float angleRotatez;
 };
 
-#endif // _LANDSCAPE_H_
+#endif // _LANDSCAPE_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _TELESCOPE_H_
-#define _TELESCOPE_H_
+#ifndef _TELESCOPE_HPP_
+#define _TELESCOPE_HPP_
 
 #include <list>
 #include <QString>
@@ -75,4 +75,4 @@ private:
 };
 
 
-#endif
+#endif // _TELESCOPE_HPP_

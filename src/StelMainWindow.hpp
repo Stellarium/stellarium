@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELMAINWINDOW_HPP_
-#define STELMAINWINDOW_HPP_
+#ifndef _STELMAINWINDOW_HPP_
+#define _STELMAINWINDOW_HPP_
 
 #include <QMainWindow>
 
@@ -60,4 +60,4 @@ private:
 	bool initComplete;
 };
 
-#endif /*STELMAINWINDOW_HPP_*/
+#endif // _STELMAINWINDOW_HPP_

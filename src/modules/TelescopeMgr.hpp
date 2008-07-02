@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _TELESCOPE_MGR_H_
-#define _TELESCOPE_MGR_H_
+#ifndef _TELESCOPEMGR_HPP_
+#define _TELESCOPEMGR_HPP_
 
 #include "StelObjectModule.hpp"
 #include "Fader.hpp"
@@ -109,4 +109,4 @@ private:
 };
 
 
-#endif
+#endif // _TELESCOPEMGR_HPP_

@@ -12,7 +12,7 @@
 
 
 #ifndef _SOLVE_HPP_
-#define _SOLVE_HPP_ 1
+#define _SOLVE_HPP_
 
 #include <utility>
 

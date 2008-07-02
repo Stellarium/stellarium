@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEL_ATMOSTPHERE_H_
-#define _STEL_ATMOSTPHERE_H_
+#ifndef _ATMOSTPHERE_HPP_
+#define _ATMOSTPHERE_HPP_
 
 #include "Skylight.hpp"
 #include "vecmath.h"
@@ -91,4 +91,4 @@ private:
 	unsigned int indicesBufferId;
 };
 
-#endif // _STEL_ATMOSTPHERE_H_
+#endif // _ATMOSTPHERE_HPP_

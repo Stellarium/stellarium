@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _S_UTILITY_H_
-#define _S_UTILITY_H_
+#ifndef _STELUTILS_HPP_
+#define _STELUTILS_HPP_
 
 #include <string>
 #include <vector>
@@ -344,4 +344,4 @@ namespace StelUtils
 
 }
 
-#endif
+#endif // _STELUTILS_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _CONSTELLATION_H_
-#define _CONSTELLATION_H_
+#ifndef _CONSTELLATION_HPP_
+#define _CONSTELLATION_HPP_
 
 #include <vector>
 #include <boost/intrusive_ptr.hpp>
@@ -165,4 +165,4 @@ private:
 	static bool singleSelected;
 };
 
-#endif // _CONSTELLATION_H_
+#endif // _CONSTELLATION_HPP_

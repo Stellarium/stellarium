@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef GRIDOBJECT_H_
-#define GRIDOBJECT_H_
+#ifndef _GRIDOBJECT_HPP_
+#define _GRIDOBJECT_HPP_
 
 #include "vecmath.h"
 
@@ -33,4 +33,4 @@ class GridObject
 		virtual Vec3d getPositionForGrid() const=0;
 };
 
-#endif // GRIDOBJECT_H_
+#endif // _GRIDOBJECT_HPP_

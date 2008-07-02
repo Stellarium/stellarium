@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef GEODESICGRIDDRAWER_H_
-#define GEODESICGRIDDRAWER_H_
+#ifndef _GEODESICGRIDDRAWER_HPP_
+#define _GEODESICGRIDDRAWER_HPP_
 
 #include "GeodesicGrid.hpp"
 #include "StelModule.hpp"
@@ -48,4 +48,4 @@ private:
 	SFont* font;
 };
 
-#endif /*GEODESICGRIDDRAWER_H_*/
+#endif // _GEODESICGRIDDRAWER_HPP_

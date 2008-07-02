@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELTEXTUREMGR_H_
-#define STELTEXTUREMGR_H_
+#ifndef _STELTEXTUREMGR_HPP_
+#define _STELTEXTUREMGR_HPP_
 
 #include <config.h>
 #include "GLee.h"
@@ -170,4 +170,4 @@ private:
 	static QMutex mutex;
 };
 
-#endif /*STELTEXTUREMGR_H_*/
+#endif // _STELTEXTUREMGR_HPP_

@@ -19,8 +19,8 @@
 //              (this was inspired by Doug Gregor's callback classes)
 //   18 Nov 2000  Initial version
 
-#ifndef BOOST_CALLBACKHELPERS_HPP
-#define BOOST_CALLBACKHELPERS_HPP
+#ifndef _CALLBACK_HELPERS_HPP_
+#define _CALLBACK_HELPERS_HPP_
 
 namespace boost {
 namespace details {
@@ -315,5 +315,5 @@ struct generate_method {
 }        // namespace details
 }        // namespace boost
 
-#endif   // BOOST_CALLBACKHELPERS_HPP
+#endif // _CALLBACK_HELPERS_HPP_
 
