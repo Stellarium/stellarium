@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef GRIDLINES_H_
-#define GRIDLINES_H_
+#ifndef _GRIDLINESMGR_HPP_
+#define _GRIDLINESMGR_HPP_
 
 #include "vecmath.h"
 #include "StelModule.hpp"
@@ -136,4 +136,4 @@ private:
 	SkyLine * meridianLine; // Meridian line
 };
 
-#endif /*GRIDLINES_H_*/
+#endif // _GRIDLINESMGR_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef STELMODULE_H
-#define STELMODULE_H
+#ifndef _STELMODULE_HPP_
+#define _STELMODULE_HPP_
 
 #include <QString>
 #include <QObject>
@@ -129,4 +129,4 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const {return 0;}
 };
 
-#endif
+#endif // _STELMODULE_HPP_

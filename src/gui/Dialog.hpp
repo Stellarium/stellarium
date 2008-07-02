@@ -18,8 +18,8 @@
  */
 
 
-#ifndef _DIALOG_H_
-#define _DIALOG_H_
+#ifndef _DIALOG_HPP_
+#define _DIALOG_HPP_
 
 #include <QWidget>
 #include <QFrame>
@@ -56,4 +56,4 @@ public:
 };
 
 
-#endif // _DIALOG_H_
+#endif // _DIALOG_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELSKYCULTUREMGR_H
-#define STELSKYCULTUREMGR_H
+#ifndef _STELSKYCULTUREMGR_HPP_
+#define _STELSKYCULTUREMGR_HPP_
 
 #include <QMap>
 #include <QString>
@@ -111,4 +111,4 @@ private:
 	StelSkyCulture currentSkyCulture;
 };
 
-#endif
+#endif // _STELSKYCULTUREMGR_HPP_

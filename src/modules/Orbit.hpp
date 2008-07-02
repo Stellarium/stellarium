@@ -9,8 +9,8 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
-#ifndef _ORBIT_H_
-#define _ORBIT_H_
+#ifndef _ORBIT_HPP_
+#define _ORBIT_HPP_
 
 #include "vecmath.h"
 
@@ -144,4 +144,4 @@ private:
 
 
 
-#endif // _ORBIT_H_
+#endif // _ORBIT_HPP_

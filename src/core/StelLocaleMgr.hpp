@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef STELLOCALEMGR_H
-#define STELLOCALEMGR_H
+#ifndef _STELLOCALEMGR_HPP_
+#define _STELLOCALEMGR_HPP_
 
 #include "Translator.hpp"
 
@@ -179,4 +179,4 @@ private:
 	QString sDateFormatToString(SDateFormat df) const;
 };
 
-#endif
+#endif // _STELLOCALEMGR_HPP_

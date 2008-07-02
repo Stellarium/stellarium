@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NEBULA_H_
-#define _NEBULA_H_
+#ifndef _NEBULA_HPP_
+#define _NEBULA_HPP_
 
 #include <QString>
 #include "StelObject.hpp"
@@ -112,5 +112,5 @@ private:
 	static float circleScale;       // Define the scaling of the hints circle
 };
 
-#endif // _NEBULA_H_
+#endif // _NEBULA_HPP_
 

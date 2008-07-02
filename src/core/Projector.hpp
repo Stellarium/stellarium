@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PROJECTOR_H_
-#define _PROJECTOR_H_
+#ifndef _PROJECTOR_HPP_
+#define _PROJECTOR_HPP_
 
 #include "GLee.h"
 #include "fixx11h.h"
@@ -481,5 +481,5 @@ private:
 	
 };
 
-#endif // _PROJECTOR_H_
+#endif // _PROJECTOR_HPP_
 

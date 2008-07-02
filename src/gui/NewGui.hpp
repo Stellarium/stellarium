@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NEWGUI_H_
-#define _NEWGUI_H_
+#ifndef _NEWGUI_HPP_
+#define _NEWGUI_HPP_
 
 #include "StelModule.hpp"
 #include "LocationDialog.hpp"
@@ -219,4 +219,4 @@ private:
 	ConfigurationDialog configurationDialog;
 };
 
-#endif // _NEWGUI_H_
+#endif // _NEWGUI_HPP_

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#ifndef STELMODULEMGR_H
-#define STELMODULEMGR_H
+#ifndef _STELMODULEMGR_HPP_
+#define _STELMODULEMGR_HPP_
 
 #include <QObject>
 #include <QMap>
@@ -102,4 +102,4 @@ private:
 
 };
 
-#endif
+#endif // _STELMODULEMGR_HPP_

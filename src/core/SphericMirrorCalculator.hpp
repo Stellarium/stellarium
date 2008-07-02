@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SPHERIC_MIRROR_CALCULATOR_H_
-#define _SPHERIC_MIRROR_CALCULATOR_H_
+#ifndef _SPHERICMIRRORCALCULATOR_HPP_
+#define _SPHERICMIRRORCALCULATOR_HPP_
 
 #include "vecmath.h"
 
@@ -48,4 +48,4 @@ private:
   double alphaDeltaPhi[9];
 };
 
-#endif
+#endif // _SPHERICMIRRORCALCULATOR_HPP_

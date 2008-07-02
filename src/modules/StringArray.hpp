@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STRING_ARRAY_HPP_
-#define _STRING_ARRAY_HPP_
+#ifndef _STRINGARRAY_HPP_
+#define _STRINGARRAY_HPP_
 
 #include <QString>
 
@@ -42,4 +42,4 @@ private:
 
 } // namespace BigStarCatalogExtension
 
-#endif
+#endif // _STRINGARRAY_HPP_

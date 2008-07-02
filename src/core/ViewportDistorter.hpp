@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _VIEWPORT_DISTORTER_H_
-#define _VIEWPORT_DISTORTER_H_
+#ifndef _VIEWPORTDISTORTER_HPP_
+#define _VIEWPORTDISTORTER_HPP_
 
 class Projector;
 class QString;
@@ -47,4 +47,4 @@ private:
 
 };
 
-#endif
+#endif // _VIEWPORTDISTORTER_HPP_

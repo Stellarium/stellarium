@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STAR_MGR_H_
-#define _STAR_MGR_H_ 1
+#ifndef _STARMGR_HPP_
+#define _STARMGR_HPP_
 
 #include <vector>
 #include <map>
@@ -265,5 +265,5 @@ private:
 };
 
 
-#endif // _STAR_MGR_H_
+#endif // _STARMGR_HPP_
 
