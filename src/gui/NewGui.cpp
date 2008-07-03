@@ -63,9 +63,6 @@
 #include <QProgressBar>
 #include <QGraphicsWidget>
 #include <QGraphicsProxyWidget>
-#include <QGraphicsGridLayout>
-#include <QGraphicsLinearLayout>
-#include <QSpacerItem>
 
 #include <vector>
 
@@ -832,7 +829,9 @@ void NewGui::loadStyle(const QString& fileName)
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
-	qApp->setStyleSheet(styleFile.readAll());
+	QByteArray a(styleFile.readAll());
+	qApp->setStyleSheet(a);
+	StelMainWindow::getInstance().setStyleSheet(a);	// Why?
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

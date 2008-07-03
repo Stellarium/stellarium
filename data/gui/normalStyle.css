@@ -48,7 +48,12 @@ QLineEdit {
 QPushButton {
 	border: 1px solid #5c5c5c;
 	border-radius: 4px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d6d7da, stop: 1 #babbbe);
+	padding: 2px 8px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(230, 231, 235, 40%), stop: 1 rgba(186, 187, 190, 40%));
+}
+
+QPushButton:active {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(230, 231, 235, 90%), stop: 1 rgba(186, 187, 190, 90%));
 }
 
 QPushButton:pressed {
@@ -183,8 +188,8 @@ QGroupBox {
 }
 
 QGroupBox::title {
-     subcontrol-origin: margin;
-    	padding: 0px 3px;
+	subcontrol-origin: margin;
+	padding: 0px 3px;
    	color : #aaada4;
 	left: 10px
 }
@@ -195,12 +200,11 @@ QTabWidget::pane {
 	border-top: 0px solid #838386;
 }
 
-/* Style the tab using the tab sub-control. Note that
-         it reads QTabBar _not_ QTabWidget */
+/* Style the tab using the tab sub-control. Note that */
 QTabBar::tab {
 	font : bold;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(86, 87, 90, 40%), stop: 1 rgba(48, 49, 52, 40%));
-	border: 1px solid #838386;
+	border: 1px solid rgba(105, 106, 110, 40%);
 	border-bottom: 0px; /* same as the pane color */
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
@@ -210,8 +214,16 @@ QTabBar::tab {
 	color: #aaada4;
 }
 
-QTabBar::tab:selected, QTabBar::tab:hover {
+QTabBar::tab:active {
+	border: 1px solid rgba(105, 106, 110, 90%);
+}
+
+QTabBar::tab:selected:active, QTabBar::tab:hover {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(95, 96, 100, 90%), stop: 1 rgba(86, 87, 90, 90%));
+}
+
+QTabBar::tab:selected {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(95, 96, 100, 40%), stop: 1 rgba(86, 87, 90, 40%));
 }
 
 QTabBar::tab:selected {
@@ -406,9 +418,13 @@ QProgressBar::chunk {
 
 /************* The following are used for VirGO **************/
 
+QMainWindow {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+}
+
 QMainWindow::separator {
-	border: 1px solid rgb(48, 49, 52);
-	background: rgb(86, 87, 90);
+	border: 0px solid rgb(48, 49, 52);
+	background: rgb(66, 67, 70);
 }
 
 QMainWindow::separator:horizontal {
@@ -444,7 +460,8 @@ QDockWidget .QWidget {
 }
 
 	
-QTreeView {
+QTreeView, QTreeView:active {
+	background-color: rgb(76, 77, 80);
 	alternate-background-color: rgb(86, 87, 90);
 	color:#8f8f8f;
 }
@@ -482,3 +499,17 @@ QDateEdit::down-button {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
 }
 
+QMenu {
+	background-color: rgb(86, 87, 90); /* sets background of the menu */
+	border: 1px solid black;
+}
+
+QMenu::item {
+	/* sets background of menu item. set this to something non-transparent
+	if you want menu color and menu item color to be different */
+	background-color: rgb(66, 67, 70);
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+	background-color: #656321;
+}
