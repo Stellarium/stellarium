@@ -130,6 +130,7 @@ private:
 	StelObject::InfoStringGroup infoTextFilters;
 };
 
+//! The path around the bottom left button bars
 class StelBarsPath : public QGraphicsPathItem
 {
 public:
@@ -138,6 +139,21 @@ public:
 	double getRoundSize() const {return roundSize;}
 private:
 	double roundSize;
+};
+
+//! Progess bars in the lower right corner
+class StelProgressBarMgr : public QObject, public QGraphicsItem
+{
+	Q_OBJECT;
+public:
+	StelProgressBarMgr(QGraphicsItem* parent);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual QRectF boundingRect() const;
+	class QProgressBar* addProgressBar();
+private slots:
+	void oneDestroyed(QObject* obj);
+private:
+	void updateBarsPositions();
 };
 
 //! @class NewGui
@@ -182,7 +198,13 @@ public:
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 
+	//! Get a pointer on the info panel used to display selected object info
 	InfoPanel* getInfoPanel(void) { return infoPanel; }
+	
+	//! Add a new progress bar in the lower right corner of the screen.
+	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
+	//! @return a pointer to the progress bar
+	class QProgressBar* addProgessBar();
 	
 private slots:
 	void updateBarsPos(qreal value);
@@ -217,6 +239,8 @@ private:
 	SearchDialog searchDialog;
 	ViewDialog viewDialog;
 	ConfigurationDialog configurationDialog;
+	
+	StelProgressBarMgr* progressBarMgr;
 };
 
 #endif // _NEWGUI_HPP_
