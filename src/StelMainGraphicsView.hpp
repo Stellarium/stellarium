@@ -49,6 +49,11 @@ public:
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	
+	//! Add a new progress bar in the lower right corner of the screen.
+	//! When the progress bar is not used anymore, just delete it.
+	//! @return a pointer to the progress bar
+	class QProgressBar* addProgessBar();
+	
 public slots:
 
 	///////////////////////////////////////////////////////////////////////////

@@ -174,3 +174,10 @@ void StelMainGraphicsView::activateKeyActions(bool b)
 			addAction(a);
 	}
 }
+
+// Add a new progress bar in the lower right corner of the screen.
+class QProgressBar* StelMainGraphicsView::addProgessBar()
+{
+	NewGui* gui = (NewGui*)GETSTELMODULE("NewGui");
+	return gui->addProgessBar();
+}
