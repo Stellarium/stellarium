@@ -131,7 +131,8 @@ public:
 	
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
-			
+
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Deprecated methods
 	//! Set the time multiplier used when fast forwarding scripts.

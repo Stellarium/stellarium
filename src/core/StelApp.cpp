@@ -861,4 +861,3 @@ double StelApp::getTotalRunTime() const
 {
 	return (double)qtime->elapsed()/1000;
 }
-
