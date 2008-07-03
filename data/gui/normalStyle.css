@@ -389,6 +389,20 @@ QComboBox::down-arrow {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
 }
 
+QProgressBar {
+	border: 1px solid rgb(70%,70%,70%,50%);
+	border-radius: 2px;
+	background-color: rbg(15%, 16%, 19%, 20%);
+	text-align: center;
+	color: #8f8f8f;
+}
+
+QProgressBar::chunk {
+	background-color: rgb(68, 68, 109, 50%);
+	width: 10px;
+	margin: 0.5px;
+}
+
 
 /************* The following are used for VirGO **************/
 

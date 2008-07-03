@@ -60,6 +60,12 @@
 #include <QKeySequence>
 #include <QRegExp>
 #include <QPixmapCache>
+#include <QProgressBar>
+#include <QGraphicsWidget>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsGridLayout>
+#include <QGraphicsLinearLayout>
+#include <QSpacerItem>
 
 #include <vector>
 
@@ -333,6 +339,53 @@ void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 }
 
 
+StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent)
+{
+}
+		
+void StelProgressBarMgr::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	// Do nothing. Just paint the child widgets
+}
+
+QRectF StelProgressBarMgr::boundingRect() const
+{
+	if (QGraphicsItem::children().size()==0)
+		return QRectF();
+	const QRectF& r = childrenBoundingRect();
+	return QRectF(0, 0, r.width()-1, r.height()-1);
+}
+
+QProgressBar* StelProgressBarMgr::addProgressBar()
+{
+	QProgressBar* pb = new QProgressBar();
+	pb->setFixedHeight(15);
+	pb->setValue(66);
+	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
+	pbProxy->setWidget(pb);
+	pbProxy->setParentItem(this);
+	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+	pbProxy->setZValue(150);
+	updateBarsPositions();
+	connect(pbProxy, SIGNAL(destroyed(QObject*)), this, SLOT(oneDestroyed(QObject*)));
+	return pb;
+}
+
+void StelProgressBarMgr::updateBarsPositions()
+{
+	int y=0;
+	foreach(QGraphicsItem* item, childItems())
+	{
+		item->setPos(0, y);
+		y+=18;
+	}
+}
+
+void StelProgressBarMgr::oneDestroyed(QObject* obj)
+{
+	updateBarsPositions();
+}
+		
 NewGui::NewGui()
 {
 	setObjectName("NewGui");
@@ -727,12 +780,17 @@ void NewGui::init()
 	buttonBarPath->updatePath(buttonBar, winBar);
 	buttonBarPath->setZValue(-0.1);
 	
+	// Used to display some progress bar in the lower right corner, e.g. when loading a file
+	progressBarMgr = new StelProgressBarMgr(NULL);
+									
+	// Add everything in the scene
 	QGraphicsScene* scene = StelMainGraphicsView::getInstance().scene();
 	scene->addItem(buttonHelpLabel);
 	scene->addItem(winBar);
 	scene->addItem(buttonBar);
 	scene->addItem(buttonBarPath);
 	scene->addItem(infoPanel);
+	scene->addItem(progressBarMgr);
 	
 	// Readjust position
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
@@ -774,7 +832,7 @@ void NewGui::loadStyle(const QString& fileName)
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
-	StelMainWindow::getInstance().setStyleSheet(styleFile.readAll());
+	qApp->setStyleSheet(styleFile.readAll());
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
@@ -800,6 +858,8 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 	buttonBarPath->updatePath(buttonBar, winBar);
 
 	infoPanel->setPos(8,8);
+	
+	progressBarMgr->setPos(ww-progressBarMgr->boundingRect().width()-5, hh-progressBarMgr->boundingRect().height()-5);
 }
 
 
@@ -937,3 +997,9 @@ void NewGui::retranslateUi(QWidget *Form)
 {
 	Form->setWindowTitle(QApplication::translate("Form", "Stellarium", 0, QApplication::UnicodeUTF8));
 } // retranslateUi
+
+// Add a new progress bar in the lower right corner of the screen.
+QProgressBar* NewGui::addProgessBar()
+{
+	return progressBarMgr->addProgressBar();
+}
