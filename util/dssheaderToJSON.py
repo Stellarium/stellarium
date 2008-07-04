@@ -122,37 +122,20 @@ def generateJpgTiles(inDirectory, outDirectory):
 				im2.save(fullOutDir+'/'+baseFileName+".jpg")
 
 
-def all():
+def plateRange():
+	if len(sys.argv)!=4:
+		print "Usage: "+sys.argv[0]+" prefix startPlate stopPlate "
+		exit(-1)
+	prefix = sys.argv[1]
 	outDir = "/tmp/tmpPlate"
-	nRange = range(800,820)
-	
-	# Generate the top level file containing pointers on all
-	f = open('/tmp/allDSS.json', 'w')
-	f.write('{\n')
-	f.write('"minResolution" : 0.1,\n')
-	f.write('"maxBrightness" : 13,\n')
-	f.write('"subTiles" : \n[\n')
-	for i in nRange:
-		plateName = "N%.3i" % i
-		ti = createTile(0, 0, 0, 0, outDir, plateName)
-		f.write('\t{\n')
-		f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
-		f.write('\t\t"worldCoords" : ')
-		skyTile.writePolys(ti.skyConvexPolygons, f)
-		f.write(',\n')
-		f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
-		f.write('\t},\n')
-	f.seek(-2, os.SEEK_CUR)
-	f.write('\n]}\n')	
-	f.close()
-	
+	nRange = range(int(sys.argv[2]),int(sys.argv[3]))
 	
 	for i in nRange:
 		if os.path.exists(outDir):
 			os.system("rm -r "+outDir)
 		os.makedirs(outDir)
 	
-		plateName = "N%.3i" % i
+		plateName = prefix + "%.3i" % i
 		generateJpgTiles(plateName, outDir)
 	
 		# Create all the JSON files
@@ -162,6 +145,34 @@ def all():
 		command = "scp -r " +outDir+ " vosw@voint1.hq.eso.org:/work/fabienDSS2/" + plateName;
 		print command
 		os.system(command)
+
+def mainHeader():
+	# Generate the top level file containing pointers on all
+	f = open('/tmp/allDSS.json', 'w')
+	f.write('{\n')
+	f.write('"minResolution" : 0.1,\n')
+	f.write('"maxBrightness" : 13,\n')
+	f.write('"subTiles" : \n[\n')
 	
+	for prefix in ['N', 'S']:
+		if prefix=='N':
+			nRange = range(2, 898)
+		if prefix=='S':
+			nRange = range(1, 894)
+		for i in nRange:
+			plateName = prefix+"%.3i" % i
+			ti = createTile(0, 0, 0, 0, outDir, plateName)
+			f.write('\t{\n')
+			f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
+			f.write('\t\t"worldCoords" : ')
+			skyTile.writePolys(ti.skyConvexPolygons, f)
+			f.write(',\n')
+			f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
+			f.write('\t},\n')
+			
+	f.seek(-2, os.SEEK_CUR)
+	f.write('\n]}\n')	
+	f.close()
+
 if __name__ == "__main__":
-    all()
+    plateRange()
