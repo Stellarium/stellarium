@@ -21,9 +21,9 @@
 #define _STELAPPGRAPHICITEM_HPP_
 
 #include <cassert>
-#include <QGraphicsWidget>
+#include <QGraphicsRectItem>
 
-class StelAppGraphicsItem : public QGraphicsWidget
+class StelAppGraphicsItem : public QObject, public QGraphicsRectItem
 {
 	Q_OBJECT;
 public:
