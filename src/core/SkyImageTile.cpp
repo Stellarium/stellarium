@@ -454,6 +454,7 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		luminance = map.value("luminance").toDouble(&ok);
 		if (!ok)
 			throw std::runtime_error("luminance expect a float value");
+		qWarning() << "luminance in preview JSON files is deprecated. Replace with maxBrightness.";
 	}
 	
 	if (map.contains("maxBrightness"))
@@ -471,6 +472,10 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("skyConvexPolygons").toList();
+	if (polyList.empty())
+		polyList = map.value("worldCoords").toList();
+	else
+		qWarning() << "skyConvexPolygons in preview JSON files is deprecated. Replace with worldCoords.";
 	foreach (const QVariant& polyRaDec, polyList)
 	{
 		QList<Vec3d> vertices;
