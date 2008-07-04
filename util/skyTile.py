@@ -25,7 +25,7 @@ class SkyImageTile:
 		self.credits = None
 		self.infoUrl = None
 		self.imageUrl = None
-		self.luminance = None
+		self.maxBrightness = None
 		return
 	
 	def outputJSON(self, prefix='', qCompress=False, maxLevelPerFile=10, outDir=''):
@@ -58,14 +58,14 @@ class SkyImageTile:
 			f.write(levTab+'\t"infoUrl" : "'+self.infoUrl+'",\n')
 		if self.imageUrl:
 			f.write(levTab+'\t"imageUrl" : "'+self.imageUrl+'",\n')
-		f.write(levTab+'\t"skyConvexPolygons" : ')
+		f.write(levTab+'\t"worldCoords" : ')
 		writePolys(self.skyConvexPolygons, f)
 		f.write(',\n')
 		f.write(levTab+'\t"textureCoords" : ')
 		writePolys(self.textureCoords, f)
 		f.write(',\n')
-		if self.luminance:
-			f.write(levTab+'\t"luminance" : %f,\n' % 1.0)
+		if self.maxBrightness:
+			f.write(levTab+'\t"maxBrightness" : %f,\n' % self.maxBrightness)
 		f.write(levTab+'\t"minResolution" : %f' % self.minResolution)
 		if len(self.subTiles)==0:
 			f.write('\n'+levTab+'}')

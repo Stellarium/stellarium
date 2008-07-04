@@ -11,7 +11,7 @@ import skyTile
 
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
 # Define the invalid zones in the plates corners for N and S plates
-removeBoxN=[64*300-2000, 1150]
+removeBoxN=[64*300-2000, 1200]
 removeBoxS=[460, 604]
 
 def getIntersectPoly(baseFileName, curLevel, i,j):
@@ -53,7 +53,7 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName):
 	if currentLevel==0:
 		t.credits = "Copyright (C) 2008 Brian McLean, STScI Digitized Sky Survey"
 		t.infoUrl = "http://stdatu.stsci.edu/cgi-bin/dss_form"
-		t.luminance = 1
+		# t.maxBrightness = 10
 
 	# Create the matching sky polygons, return if there is no relevant polygons
 	pl = getIntersectPoly(plateName, currentLevel, i,j)
@@ -124,20 +124,20 @@ def generateJpgTiles(inDirectory, outDirectory):
 
 def all():
 	outDir = "/tmp/tmpPlate"
-	nRange = range(400,450)
+	nRange = range(800,820)
 	
 	# Generate the top level file containing pointers on all
 	f = open('/tmp/allDSS.json', 'w')
 	f.write('{\n')
 	f.write('"minResolution" : 0.1,\n')
-	f.write('"luminance" : 1,\n')
+	f.write('"maxBrightness" : 13,\n')
 	f.write('"subTiles" : \n[\n')
 	for i in nRange:
 		plateName = "N%.3i" % i
 		ti = createTile(0, 0, 0, 0, outDir, plateName)
 		f.write('\t{\n')
 		f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
-		f.write('\t\t"skyConvexPolygons" : ')
+		f.write('\t\t"worldCoords" : ')
 		skyTile.writePolys(ti.skyConvexPolygons, f)
 		f.write(',\n')
 		f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
