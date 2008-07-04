@@ -248,31 +248,18 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 }
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f strToVec3f(const string& s)
-{
-	float x, y, z;
-	if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
-	return Vec3f(x,y,z);
-}
-
-// Obtains a Vec3f from a string with the form x,y,z
 Vec3f strToVec3f(const QStringList& s)
 {
 	if (s.size()<3)
 		 return Vec3f(0.f,0.f,0.f);
+
 	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
 }
 
 Vec3f strToVec3f(const QString& s)
 {
-	return strToVec3f(s.toStdString());
+	return strToVec3f(s.split(","));
 }
-
-Vec3f strToVec3f(const char* s)
-{
-	return strToVec3f(string(s));
-}
-
 
 // Obtains a string from a Vec3f with the form x,y,z
 string vec3fToStr(const Vec3f& v)
@@ -385,135 +372,38 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-// strips trailing whitespaces from buf.
-#define iswhite(c)  ((c)== ' ' || (c)=='\t')
-static char *trim(char *x)
-{
-	char *y;
-
-	if(!x)
-		return(x);
-	y = x + strlen(x)-1;
-	while (y >= x && iswhite(*y))
-				*y-- = 0; /* skip white space */
-	return x;
-}
-
-// salta espacios en blanco
-static void skipwhite(char **s)
-{
-	while(iswhite(**s))
-		++(*s);
-}	
-
-double getDecAngle(const string& str)
-{
-	const char* s = str.c_str();
-	char *mptr, *ptr, *dec, *hh;
-	int negative = 0;
-	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
-	char delim2[] = " NSEWnsew\"\n\t";
-	int dghh = 0, minutes = 0;
-	double seconds = 0.0, pos;
-	short count;
-
-	enum _type
-	{
-		HOURS, DEGREES, LAT, LONG
-	}
-	type;
-
-	if (s == NULL || !*s)
-		return(-0.0);
-	count = strlen(s) + 1;
-	if ((mptr = (char *) malloc(count)) == NULL)
-		return (-0.0);
-	ptr = mptr;
-	memcpy(ptr, s, count);
-	trim(ptr);
-	skipwhite(&ptr);
-
-	/* the last letter has precedence over the sign */
-	if (strpbrk(ptr,"SsWw") != NULL)
-		negative = 1;
-
-	if (*ptr == '+' || *ptr == '-')
-		negative = (char) (*ptr++ == '-' ? 1 : negative);
-	skipwhite(&ptr);
-	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
-		type = HOURS;
-	else
-		if (strpbrk(ptr,"SsNn") != NULL)
-			type = LAT;
-	else
-		type = DEGREES; /* unspecified, the caller must control it */
-
-	if ((ptr = strtok(ptr,delim1)) != NULL)
-		dghh = atoi (ptr);
-	else
-	{
-		free(mptr);
-		return (-0.0);
-	}
-
-	if ((ptr = strtok(NULL,delim1)) != NULL)
-	{
-		minutes = atoi (ptr);
-		if (minutes > 59)
-		{
-			free(mptr);
-			return (-0.0);
-		}
-	}
-	else
-	{
-		free(mptr);
-		return (-0.0);
-	}
-
-	if ((ptr = strtok(NULL,delim2)) != NULL)
-	{
-		if ((dec = strchr(ptr,',')) != NULL)
-			*dec = '.';
-		seconds = strtod (ptr, NULL);
-		if (seconds >= 60.0)
-		{
-			free(mptr);
-			return (-0.0);
-		}
-	}
-
-	if ((ptr = strtok(NULL," \n\t")) != NULL)
-	{
-		skipwhite(&ptr);
-		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
-	}
-
-	free(mptr);
-
-	pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
-	if (type == HOURS && pos > 24.0)
-		return (-0.0);
-	if (type == LAT && pos > 90.0)
-		return (-0.0);
-	else
-		if (pos > 180.0)
-			return (-0.0);
-
-	if (negative)
-		pos = -pos;
-
-	return (pos);
-}
-
 double getDecAngle(const QString& str)
 {
-	return getDecAngle(str.toStdString());
-}
+	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*[Dd\xBA]\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$");
+	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])\\s*$");
 
-double getDecAngle(const char* str)
-{
-	return getDecAngle(string(str));
+	if (re1.exactMatch(str))
+	{
+		qDebug() << "re1 match " << re1.capturedTexts();
+		bool neg = (re1.capturedTexts().at(1) == "-");
+		double d = re1.capturedTexts().at(2).toDouble();
+		double m = re1.capturedTexts().at(3).toDouble();
+		double s = re1.capturedTexts().at(4).toDouble();
+		QString cardinal = re1.capturedTexts().at(6);
+		double deg = d + (m/60) + (s/3600);
+		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
+			deg *= -1.;
+		return (deg * 2 * M_PI / 360.);
+	}
+	else if (re2.exactMatch(str))
+	{
+		qDebug() << "re2 match " << re2.capturedTexts();
+		bool neg = (re2.capturedTexts().at(1) == "-");
+		double deg = re2.capturedTexts().at(2).toDouble();
+		QString cardinal = re2.capturedTexts().at(4);
+		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
+			deg *= -1.;
+		return (deg * 2 * M_PI / 360.);
+	}
+
+	qDebug() << "getDecAngle failed to parse angle string:" << str;
+	return -0.0;
+
 }
 
 bool checkAbsolutePath(const string& fileName)
