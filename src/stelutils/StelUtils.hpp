@@ -99,10 +99,8 @@ namespace StelUtils
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
 	//! @deprecated Use the >> operator from Vec3f class
-	Vec3f strToVec3f(const string& s);
 	Vec3f strToVec3f(const QStringList& s);
 	Vec3f strToVec3f(const QString& s);
-	Vec3f strToVec3f(const char* s);
 	
 	//! Obtains a string from a Vec3f.
 	//! @param v The vector
@@ -193,10 +191,26 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	void rectToSphe(float *lng, float *lat, const Vec3d& v);
 
-	//! Obtains Latitude, Longitude, RA or Declination from a string.
-	double getDecAngle(const string&);
-	double getDecAngle(const QString&);
-	double getDecAngle(const char*);
+	//! Convert a string longitude, latitude, RA or Declination angle
+	//! to radians.
+	//! @param str the angle in format something like these: 
+	//! - +53d  51'21.6"
+	//! - +53d51'21.6"
+	//! - -1d  10'31.8"
+	//! - +46d6'31"
+	//! - 50D46'0"N
+	//! - 123D47'59"W
+	//! - 123.567 N
+	//! - 123.567W
+	//! - -123.567
+	//! The degree separator may be a degree symbol (\xBA) in addition
+	//! to a 'd' or 'D'.
+	//! @return the angle in radians. 
+	//! Latitude: North are positive, South are negative.
+	//! Longitude: East is positive, West is negative.
+	//! Note: if there is a N, S, E or W suffix, any leading + or - 
+	//! characters are ignored.
+	double getDecAngle(const QString& str);
 	
 	//! Check if the filename is an absolute path.
 	bool checkAbsolutePath(const string& fileName);
