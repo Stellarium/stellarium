@@ -46,7 +46,7 @@ StelAppGraphicsItem::StelAppGraphicsItem() : tempPainter(NULL)
 	connect(mainTimer, SIGNAL(timeout()), this, SLOT(recompute()));
 	
 	setAcceptsHoverEvents(true);
-	setFocusPolicy(Qt::ClickFocus);
+	setFlags(QGraphicsItem::ItemIsFocusable);
 	setZValue(-1);
 }
 
@@ -66,7 +66,7 @@ void StelAppGraphicsItem::init()
 
 void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 {
-	setGeometry(QRect(0,0,w,h));
+	setRect(QRect(0,0,w,h));
 	if (!distorter || (distorter && distorter->getType() == "none"))
 	{
 		StelApp::getInstance().glWindowHasBeenResized(w, h);
