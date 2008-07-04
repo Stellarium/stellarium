@@ -111,6 +111,7 @@ inline void Skylight::computeZenithLuminance(void)
 }
 
 // Compute CIE x and y color components
+// Edit: changed some coefficients to get new sky color
 inline void Skylight::computeZenithColor(void)
 {
 	static float thetas2;
@@ -121,22 +122,23 @@ inline void Skylight::computeZenithColor(void)
 	thetas3 = thetas2 * thetas;
 	T2 = T * T;
 
-	zenithColorX = ( 0.00166f*thetas3 - 0.00375f*thetas2 + 0.00209f*thetas) * T2 +
+	zenithColorX = ( 0.00216f*thetas3 - 0.00375f*thetas2 + 0.00209f*thetas) * T2 +
 	               (-0.02903f*thetas3 + 0.06377f*thetas2 - 0.03202f*thetas + 0.00394f) * T +
-	               ( 0.11693f*thetas3 - 0.21196f*thetas2 + 0.06052f*thetas + 0.25886f);
+	               ( 0.10169f*thetas3 - 0.21196f*thetas2 + 0.06052f*thetas + 0.25886f);
 
 	zenithColorY = ( 0.00275f*thetas3 - 0.00610f*thetas2 + 0.00317f*thetas) * T2 +
 	               (-0.04214f*thetas3 + 0.08970f*thetas2 - 0.04153f*thetas + 0.00516f) * T +
-	               ( 0.15346f*thetas3 - 0.26756f*thetas2 + 0.06670f*thetas + 0.26688f);
+	               ( 0.14535f*thetas3 - 0.26756f*thetas2 + 0.06670f*thetas + 0.26688f);
 
 }
 
 // Compute the luminance distribution coefficients
+// Edit: changed some coefficients to get new sky color
 inline void Skylight::computeLuminanceDistributionCoefs(void)
 {
-	AY = 0.1787f*T - 1.4630f;
+	AY = 0.2787f*T - 1.0630f;
 	BY =-0.3554f*T + 0.4275f;
-	CY =-0.0227f*T + 5.3251f;
+	CY =-0.0227f*T + 6.3251f;
 	DY = 0.1206f*T - 2.5771f;
 	EY =-0.0670f*T + 0.3703f;
 	// with BY>0 the formulas in getxyYValuev make no sense
@@ -144,19 +146,20 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 }
 
 // Compute the color distribution coefficients
+// Edit: changed some coefficients to get new sky color
 inline void Skylight::computeColorDistributionCoefs(void)
 {
-	Ax =-0.0193f*T - 0.2592f;
-	Bx =-0.0665f*T + 0.0008f;
-	Cx =-0.0004f*T + 0.2125f;
-	Dx =-0.0641f*T - 0.8989f;
-	Ex =-0.0033f*T + 0.0452f;
+	Ax =-0.0148f*T - 0.1703f;
+	Bx =-0.0664f*T + 0.0011f;
+	Cx =-0.0005f*T + 0.2127f;
+	Dx =-0.0641f*T - 0.8992f;
+	Ex =-0.0035f*T + 0.0453f;
 
-	Ay =-0.0167f*T - 0.2608f;
-	By =-0.0950f*T + 0.0092f;
-	Cy =-0.0079f*T + 0.2102f;
-	Dy =-0.0441f*T - 1.6537f;
-	Ey =-0.0109f*T + 0.0529f;
+	Ay =-0.0131f*T - 0.2498f;
+	By =-0.0951f*T + 0.0092f;
+	Cy =-0.0082f*T + 0.2404f;
+	Dy =-0.0438f*T - 1.0539f;
+	Ey =-0.0109f*T + 0.0531f;
 	// with Bx,By>0 the formulas in getxyYValuev make no sense
 	assert(Bx <= 0.0);
 	assert(By <= 0.0);
