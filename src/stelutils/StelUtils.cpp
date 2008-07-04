@@ -379,7 +379,6 @@ double getDecAngle(const QString& str)
 
 	if (re1.exactMatch(str))
 	{
-		qDebug() << "re1 match " << re1.capturedTexts();
 		bool neg = (re1.capturedTexts().at(1) == "-");
 		double d = re1.capturedTexts().at(2).toDouble();
 		double m = re1.capturedTexts().at(3).toDouble();
@@ -392,7 +391,6 @@ double getDecAngle(const QString& str)
 	}
 	else if (re2.exactMatch(str))
 	{
-		qDebug() << "re2 match " << re2.capturedTexts();
 		bool neg = (re2.capturedTexts().at(1) == "-");
 		double deg = re2.capturedTexts().at(2).toDouble();
 		QString cardinal = re2.capturedTexts().at(4);
