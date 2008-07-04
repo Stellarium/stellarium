@@ -85,11 +85,10 @@ def main():
 	print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels, 'levels'
 	
 	# Create the master level 0 tile, which recursively creates the subtiles
-	# and sets its 
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, False)
-	masterTile.luminance = 1.
+	masterTile.maxBrightness = 13.
 	masterTile.credits = "ESO"
-	masterTile.infoUrl = "TODO"
+	masterTile.infoUrl = ""
 	
 	masterTile.outputJSON(qCompress=True, maxLevelPerFile=3)
 	
