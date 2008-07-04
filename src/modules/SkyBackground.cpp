@@ -53,7 +53,7 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void SkyBackground::init()
 {
-	allSkyImages.append(new SkyImageTile("http://www.eso.org/~fchereau/fabienDSS2/allDSS.json"));
+	//allSkyImages.append(new SkyImageTile("http://voint1.hq.eso.org/fabienDSS2/allDSS.json"));
 	allSkyImages.append(new SkyImageTile("http://stellarium.free.fr/divers/30Dor/x01_00_00.json.qZ"));
 	try
 	{
