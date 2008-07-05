@@ -19,17 +19,7 @@
 
 #include <config.h>
 
-#include <math.h> // fmod
-#include <sstream>
-#include <fstream>
-#include <cstdlib>
-#include <ctime>
-#include <config.h>
-#include <cstdio>
-#include <iomanip>
-#include <vector>
-#include <algorithm>
-#include <stdexcept>
+#include <cmath> // std::fmod
 
 #ifdef CYGWIN
  #include <malloc.h>
@@ -50,41 +40,6 @@
 namespace StelUtils
 {
 
-std::wstring stringToWstring(const string& s)
-{
-	return QString::fromUtf8(s.c_str()).toStdWString();
-}
-
-string wstringToString(const wstring& ws)
-{
-	return QString::fromStdWString(ws).toUtf8().constData();
-}
-
-wstring doubleToWstring(double d)
-{
-	return QString::number(d).toStdWString();
-}
-
-wstring intToWstring(int i)
-{
-	return QString::number(i).toStdWString();
-}
-
-string intToString(int i)
-{
-	return QString::number(i).toStdString();
-}
-
-string underscoresToSpaces(char * c)
-{
-	string str = c;
-	for (string::size_type i=0;i<str.length();++i)
-	{
-		if (str[i]=='_') str[i]=' ';
-	}
-	return str;
-}
-
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
@@ -102,7 +57,7 @@ double dmsToRad(int d, unsigned int m, double s)
 *************************************************************************/
 void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 {
-	angle = fmod(angle,2.0*M_PI);
+	angle = std::fmod(angle,2.0*M_PI);
 	if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
 		
 	angle *= 12./M_PI;
@@ -117,7 +72,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 *************************************************************************/
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
-	angle = fmod(angle,2.0*M_PI);
+	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
 	if (angle<0)
 	{
@@ -139,44 +94,77 @@ QString radToHmsStrAdapt(double angle)
 {
 	unsigned int h,m;
 	double s;
+	QString buf;
+	QTextStream ts(&buf);
 	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
-	ostringstream os;
-	os << h << 'h';
+	ts << h << 'h';
 	if (std::fabs(s*100-(int)s*100)>=1)
 	{
-		os << m << 'm' << std::fixed << std::setprecision(1) << std::setw(4) << std::setfill('0') << s << 's';
+		ts << m << 'm';
+		ts.setRealNumberNotation(QTextStream::FixedNotation);
+		ts.setPadChar('0');
+		ts.setFieldWidth(4);
+		ts.setRealNumberPrecision(1);
+		ts << s;
+		ts.reset();
+		ts << 's';
 	}
 	else if ((int)s!=0)
 	{
-		os << m << 'm' << (int)s << 's';
+		ts << m << 'm' << (int)s << 's';
 	}
 	else if (m!=0)
 	{
-		os << m << 'm';
+		ts << m << 'm';
 	}
-	return QString::fromStdString(os.str());
+	return buf;
 }
 
 /*************************************************************************
  Convert an angle in radian to a hms formatted string
+ If decimal is true,  output should be like this: "  16h29m55.3s"
+ If decimal is true,  output should be like this: "  16h20m0.4s"
+ If decimal is false, output should be like this: "0h26m5s"
 *************************************************************************/
 QString radToHmsStr(double angle, bool decimal)
 {
 	unsigned int h,m;
 	double s;
 	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
-	ostringstream os;
+	int width, precision;
+	QString carry;
 	if (decimal)
-		os << std::setprecision(1) << std::setw(4);
+	{
+		width=4;
+		precision=1;
+		carry="60.0";
+	}
 	else
-		os << std::setprecision(0) << std::setw(2);
-	
-	os << h << 'h' << m << 'm' << std::fixed << std::setfill('0') << s << 's';
-	return QString::fromStdString(os.str());
+	{
+		width=2;
+		precision=0;
+		carry="60";
+	}
+
+	// handle carry case (when seconds are rounded up)
+	if (QString("%1").arg(s, 0, 'f', precision) == carry)
+	{
+		s=0;
+		m+=1;
+	}
+	if (m==60)
+	{
+		m=0;
+		h+=1;
+	}
+	if (h==24 && m==0 && s==0) 
+		h=0;
+
+	return QString("%1h%2m%3s").arg(h, width).arg(m).arg(s, 0, 'f', precision);
 }
 
 /*************************************************************************
- Convert an angle in radian to a dms formatted wstring
+ Convert an angle in radian to a dms formatted string
  If the minute and second part are null are too small, don't print them
 *************************************************************************/
 QString radToDmsStrAdapt(double angle, bool useD)
@@ -206,12 +194,13 @@ QString radToDmsStrAdapt(double angle, bool useD)
 	{
 		os << m << '\'';
 	}
+	qDebug() << "radToDmsStrAdapt(" << angle << ", " << useD << ") = " << str;
 	return str;
 }
 
 
 /*************************************************************************
- Convert an angle in radian to a dms formatted wstring
+ Convert an angle in radian to a dms formatted string
 *************************************************************************/
 QString radToDmsStr(double angle, bool decimal, bool useD)
 {
@@ -261,14 +250,6 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
-// Obtains a string from a Vec3f with the form x,y,z
-string vec3fToStr(const Vec3f& v)
-{
-	ostringstream os;
-	os << v[0] << "," << v[1] << "," << v[2];
-	return os.str();
-}
-
 // Converts a Vec3f to HTML color notation.
 QString vec3fToHtmlColor(const Vec3f& v)
 {
@@ -276,60 +257,6 @@ QString vec3fToHtmlColor(const Vec3f& v)
 		.arg(MY_MIN(255, int(v[0] * 255)), 2, 16, QChar('0'))
 		.arg(MY_MIN(255, int(v[1] * 255)), 2, 16, QChar('0'))
 		.arg(MY_MIN(255, int(v[2] * 255)), 2, 16, QChar('0'));
-}
-
-double stringToDouble(const string& str)
-{
-#ifdef NAN
-	if(str.empty())
-		return NAN;
-#else
-	if(str.empty())
-		return 0.;
-#endif
-	double dbl;
-	std::istringstream dstr( str );
-
-	dstr >> dbl;
-	return dbl;
-}
-
-int stringToInt(const string& str)
-{
-	if(str.empty()) return 0;
-	int integer;
-	std::istringstream istr( str );
-
-	istr >> integer;
-	return integer;
-}
-
-
-int stringToInt(const string& str, int default_value)
-{
-	if(str.empty()) return default_value;
-	int integer;
-	std::istringstream istr( str );
-
-	istr >> integer;
-	return integer;
-}
-
-string doubleToString(double dbl)
-{
-	std::ostringstream oss;
-	oss << dbl;
-	return oss.str();
-}
-
-long int stringToLong(const string& str)
-{
-	if(str.empty()) return 0;
-	long int integer;
-	std::istringstream istr( str );
-
-	istr >> integer;
-	return integer;
 }
 
 void spheToRect(double lng, double lat, Vec3d& v)
@@ -402,20 +329,6 @@ double getDecAngle(const QString& str)
 	qDebug() << "getDecAngle failed to parse angle string:" << str;
 	return -0.0;
 
-}
-
-bool checkAbsolutePath(const string& fileName)
-{
-	// Absolute path if starts by '/' or by 'Drive:/' (MS)
-
-	if (fileName!="")
-	{
-		if (fileName[0]=='/')
-			return true;
-		if (fileName[1] == ':' && (fileName[2] == '/' || fileName[2]=='\\'))
-			return true;
-	}
-	return false;
 }
 
 // Check if a number is a power of 2
@@ -690,34 +603,10 @@ double qTimeToJDFraction(const QTime& time)
 
 QTime jdFractionToQTime(const double jd)
 {
-	double decHours = fmod(jd+0.5, 1.0);
+	double decHours = std::fmod(jd+0.5, 1.0);
 	int hours = (int)(decHours/0.041666666666666666666);
 	int mins = (int)((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
 	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
-}
-
-bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify)
-{
-	bool result=false;
-	vector<string>::iterator lastOpt = find(args.begin(), args.end(), "--");
-
-	vector<string>::iterator foundShort = find(args.begin(), lastOpt, shortOpt);
-	if (foundShort != lastOpt)
-	{
-		result=true;
-		if (modify)
-			args.erase(foundShort);
-	}
-
-	vector<string>::iterator foundLong = find(args.begin(), lastOpt, longOpt);
-	if (foundLong != lastOpt)
-	{
-		result=true;
-		if (modify)
-			args.erase(foundLong);
-	}
-
-	return result;
 }
 
 // Use Qt's own sense of time and offset instead of platform specific code.

@@ -22,6 +22,7 @@
 
 #define CHECK_FILE "data/ssystem.ini"
 
+#include <stdexcept>
 #include <QSet>
 #include <QString>
 #include <QStringList>
