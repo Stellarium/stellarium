@@ -18,6 +18,7 @@
  */
 
 #include <functional>
+#include <cstdlib>
 #include <QSettings>
 
 #include "Projector.hpp"
