@@ -20,15 +20,9 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
-#include <string>
-#include <vector>
 #include "vecmath.h"
-#include <sstream>
-#include <algorithm>
-#include <exception>
-#include <stdexcept>
-
 #include "fixx11h.h"
+
 #include <QDateTime>
 #include <QString>
 
@@ -84,13 +78,13 @@ namespace StelUtils
 	//! @param rad input angle in radian
 	QString radToHmsStr(double angle, bool decimal=false);
 	
-	//! Convert an angle in radian to a dms formatted wstring.
+	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param rad input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStrAdapt(double angle, bool useD=false);
 	
-	//! Convert an angle in radian to a dms formatted wstring.
+	//! Convert an angle in radian to a dms formatted string.
 	//! @param rad input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(double angle, bool decimal=false, bool useD=false);
@@ -102,75 +96,11 @@ namespace StelUtils
 	Vec3f strToVec3f(const QStringList& s);
 	Vec3f strToVec3f(const QString& s);
 	
-	//! Obtains a string from a Vec3f.
-	//! @param v The vector
-	//! @return the string describing the Vector with the form "x,y,z"
-	//! @deprecated Use the << operator from Vec3f class
-	string vec3fToStr(const Vec3f& v);
-
 	//! Converts a Vec3f to HTML color notation.
 	//! @param v The vector
 	//! @return The string in HTML color notation "#rrggbb".
 	QString vec3fToHtmlColor(const Vec3f& v);
 		
-	//! Convert from UTF-8 to wchar_t, this is likely to be not very portable.
-	//! @param The input string in UTF-8 format
-	//! @return The matching wide string
-	wstring stringToWstring(const string& s);
-	
-	//! Convert std::wstring to UTF-8 std::string using wcstombs() function.
-	//! @param The input wide character string
-	//! @return The matching string in UTF-8 format
-	string wstringToString(const wstring& ws);
-	
-	//! Format the double value to a wstring (with current locale).
-	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
-	//! @param d the input double value
-	//! @return the matching wstring
-	wstring doubleToWstring(double d);
-	
-	//! Format the int value to a wstring (with current locale).
-	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
-	//! @param i the input int value
-	//! @return the matching wstring
-	wstring intToWstring(int i);
-	
-	//! Format the int value to a string (with current locale).
-	//! @param i the input int value
-	//! @return the matching string
-	string intToString(int i);
-	
-	//! Extract the int value from a string.
-	//! @param str the input string
-	//! @return the matching int
-	int stringToInt(const string& str);
-	
-	//! Extract the int value from a string, and use default value if the string is not convertible as an int.
-	//! @param str the input string
-	//! @param defaultValue the default fallback value
-	//! @return the matching int or default value
-	int stringToInt(const string& str, int defaultValue);
-	
-	//! Extract the double value from a string.
-	//! @param str the input string
-	//! @return the matching double value
-	double stringToDouble(const string& str);
-	
-	//! Format the double value to a string (with current locale).
-	//! @param dbl the input int value
-	//! @return the matching string
-	string doubleToString(double dbl);
-	
-	//! Replace all "_" with " " 
-	//! @param c the input character array
-	//! @return a string with underscores replaced
-	string underscoresToSpaces(char * c); 
-
-	//! Extract the long int value from a string.
-	//! @param str the input string
-	//! @return the matching long int value
-	long int stringToLong(const string& str);
-	
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
@@ -212,9 +142,6 @@ namespace StelUtils
 	//! characters are ignored.
 	double getDecAngle(const QString& str);
 	
-	//! Check if the filename is an absolute path.
-	bool checkAbsolutePath(const string& fileName);
-
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(int value);
 	
@@ -224,88 +151,8 @@ namespace StelUtils
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);
 	
-	//! Check if a vector of strings has a CLI-style option.
-	//! @param args a vector of strings, think argv
-	//! @param shortOpt a short-form option string, e.g, "-h"
-	//! @param longOpt a long-form option string, e.g. "--help"
-	//! @param modify whether to remove found options from args (default=true)
-	//! @return true if the option exists in args
-	bool argsHaveOption(vector<string>& args, string shortOpt, string longOpt, bool modify=true);
-	
-	//! Retrieve option with argument from vector of strings.
-	//! given a vector of string command line arguments, this function will
-	//! extract the argument to an option of type T.
-	//! The option may be expresed using either the short form, e.g. -n arg,
-	//! the long form with a space, e.g. --number arg, or the long form
-	//! with an =, e.g. --number=arg
-	//! Type checking is done on the result using the stringstream class, so
-	//! any type which can be validated and converted using this class may be
-	//! used with this function.
-	//! @param args a vector of string arguments, think argv
-	//! @param shortOpt the short form of the option, e.g. -n
-	//! @param longOpt the long form of the option, e.g. --number
-	//! @param defValue the default value to return if the option was not found in args
-	//! @param mofify whether to remove found values from args or not (default=true)
-	//! @exception runtime_error("no_optarg") the expected argument to the option was not found
-	//! @exception runtime_error("optarg_type") the expected argument to the option was not found
-	template<class T>
-	T argsHaveOptionWithArg(vector<string>& args, string shortOpt, string longOpt, T defValue, bool modify=true)
-	{
-		vector<string>::iterator optArg;
-	
-		vector<string>::iterator lastOpt = find(args.begin(), args.end(), "--");
-		for(vector<string>::iterator i=args.begin(); i!=lastOpt; i++)
-		{
-			if (*i == shortOpt || *i == longOpt)
-			{
-				optArg = i + 1;
-				if (optArg == lastOpt)
-					throw(runtime_error("no_optarg"));
-				else
-				{
-					T result;
-					stringstream ss(*optArg);
-					ss >> result;
-					if ( ! ss.fail() )
-					{
-						if (modify)
-							args.erase(i, optArg + 1);
-
-						return result;
-					}
-					else
-					{
-						throw(runtime_error("optarg_type"));
-					}
-				}
-				
-			}
-			else if ( (*i).substr(0, longOpt.length()) == longOpt && (*i).substr(longOpt.length(), 1) == "=" )
-			{
-				string arg(*i);
-				arg.erase(0,longOpt.length()+1);
-				T result;
-				stringstream ss(arg);
-				ss >> result;
-				if ( ! ss.fail() )
-				{
-					if (modify)
-						args.erase(i);
-
-					return result;
-				}
-				else
-				{
-					throw(runtime_error("optarg type"));
-				}
-			}
-		}
-		return defValue;
-	}
-	
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions. 
-	
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
 	void getDateFromJulianDay(double julianDay, int *year, int *month, int *day);
 
