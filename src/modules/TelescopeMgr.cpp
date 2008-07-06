@@ -53,11 +53,11 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
 #ifdef WIN32
   WSADATA wsaData;
   if (WSAStartup(0x202,&wsaData) == 0) {
-    wsa_ok = true;
+    wsaOk = true;
   } else {
     qWarning() << "WARNING TelescopeMgr::TelescopeMgr: WSAStartup failed, "
                << "you will not be able to control telescopes";
-    wsa_ok = false;
+    wsaOk = false;
   }
 #else
     // SIGPIPE is normal operation when we send while the other side
@@ -68,7 +68,7 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL) {
 
 TelescopeMgr::~TelescopeMgr(void) {
 #ifdef WIN32
-  if (wsa_ok) WSACleanup();
+  if (wsaOk) WSACleanup();
 #endif
 }
 
@@ -90,7 +90,7 @@ void TelescopeMgr::draw(StelCore* core)
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
   prj->setCurrentFrame(Projector::FrameJ2000);
-  telescope_texture->bind();
+  telescopeTexture->bind();
   glBlendFunc(GL_ONE,GL_ONE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
   for (TelescopeMap::const_iterator it(telescope_map.begin());
@@ -98,9 +98,9 @@ void TelescopeMgr::draw(StelCore* core)
     if (it->second->isConnected() && it->second->hasKnownPosition()) {
       Vec3d XY;
       if (prj->projectCheck(it->second->getObsJ2000Pos(0),XY)) {
-        if (telescope_fader.getInterstate() >= 0) {
+        if (telescopeFader.getInterstate() >= 0) {
           glColor4f(circleColor[0],circleColor[1],circleColor[2],
-                    telescope_fader.getInterstate());
+                    telescopeFader.getInterstate());
           glDisable(GL_TEXTURE_2D);
           for (std::list<double>::const_iterator
                it2(it->second->getOculars().begin());
@@ -130,7 +130,7 @@ void TelescopeMgr::draw(StelCore* core)
         if (nameFader.getInterstate() >= 0) {
           glColor4f(labelColor[0],labelColor[1],labelColor[2], nameFader.getInterstate());
           prj->drawText(telescope_font, XY[0],XY[1],it->second->getNameI18n(), 0, 6, -4, false);
-          telescope_texture->bind();
+          telescopeTexture->bind();
         }
       }
     }
@@ -141,7 +141,7 @@ void TelescopeMgr::draw(StelCore* core)
 
 void TelescopeMgr::update(double deltaTime) {
   nameFader.update((int)(deltaTime*1000));
-  telescope_fader.update((int)(deltaTime*1000));
+  telescopeFader.update((int)(deltaTime*1000));
  	// communicate with the telescopes:
 	communicate();
 }
@@ -209,10 +209,10 @@ QStringList TelescopeMgr::listMatchingObjectsI18n(
   return result;
 }
 
-void TelescopeMgr::setFontSize(float font_size) {
+void TelescopeMgr::setFontSize(float fontSize) {
 	telescope_font = &StelApp::getInstance().getFontManager()
                        .getStandardFont(StelApp::getInstance()
-                                .getLocaleMgr().getSkyLanguage(), font_size);
+                                .getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
 
@@ -222,9 +222,9 @@ void TelescopeMgr::init() {
 
 	setFontSize(12.f);
 	StelApp::getInstance().getTextureManager().setDefaultParams();
-	telescope_texture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
+	telescopeTexture = StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 #ifdef WIN32
-	if (!wsa_ok) return;
+	if (!wsaOk) return;
 #endif
 	telescope_map.clear();
 	for (int i=0;i<9;i++) 
@@ -279,10 +279,10 @@ void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {
+void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000Pos) {
   TelescopeMap::const_iterator it(telescope_map.find(telescope_nr));
   if (it != telescope_map.end()) {
-    it->second->telescopeGoto(j2000_pos);
+    it->second->telescopeGoto(j2000Pos);
   }
 }
 

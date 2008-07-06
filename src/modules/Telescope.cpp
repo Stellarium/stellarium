@@ -131,8 +131,8 @@ private:
     if (lq > 0.0) XYZ *= (1.0/sqrt(lq));
     else XYZ = desired_pos;
   }
-  void telescopeGoto(const Vec3d &j2000_pos) {
-    desired_pos = j2000_pos;
+  void telescopeGoto(const Vec3d &j2000Pos) {
+    desired_pos = j2000Pos;
     desired_pos.normalize();
   }
   Vec3d XYZ; // j2000 position
@@ -150,7 +150,7 @@ private:
   Vec3d getObsJ2000Pos(const Navigator *nav=0) const;
   void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,int &fd_max);
   void handleSelectFds(const fd_set &read_fds,const fd_set &write_fds);
-  void telescopeGoto(const Vec3d &j2000_pos);
+  void telescopeGoto(const Vec3d &j2000Pos);
   bool isInitialized(void) const {return (ntohs(address.sin_port)!=0);}
   void performReading(void);
   void performWriting(void);
@@ -368,12 +368,12 @@ void TelescopeTcp::hangup(void) {
   position_pointer = positions;
 }
 
-void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
+void TelescopeTcp::telescopeGoto(const Vec3d &j2000Pos) {
   if (isConnected()) {
     if (write_buff_end-write_buff+20 < (int)sizeof(write_buff)) {
-      const double ra = atan2(j2000_pos[1],j2000_pos[0]);
-      const double dec = atan2(j2000_pos[2],
-              sqrt(j2000_pos[0]*j2000_pos[0]+j2000_pos[1]*j2000_pos[1]));
+      const double ra = atan2(j2000Pos[1],j2000Pos[0]);
+      const double dec = atan2(j2000Pos[2],
+              sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
       unsigned int ra_int = (unsigned int)floor(
                                0.5 +  ra*(((unsigned int)0x80000000)/M_PI));
       int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
