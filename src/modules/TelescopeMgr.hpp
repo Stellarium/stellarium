@@ -71,9 +71,9 @@ public:
   const Vec3f &getCircleColor(void) const {return circleColor;}
   
   //! Set display flag for Telescopes
-  void setFlagTelescopes(bool b) {telescope_fader=b;}
+  void setFlagTelescopes(bool b) {telescopeFader=b;}
   //! Get display flag for Telescopes
-  bool getFlagTelescopes(void) const {return (bool)telescope_fader;}  
+  bool getFlagTelescopes(void) const {return (bool)telescopeFader;}  
   
   //! Set display flag for Telescope names
   void setFlagTelescopeName(bool b) {nameFader=b;}
@@ -81,23 +81,23 @@ public:
   bool getFlagTelescopeName(void) const {return nameFader==true;}
   
   //! Define font size to use for telescope names display
-  void setFontSize(float font_size);
+  void setFontSize(float fontSize);
 
   //! send a J2000-goto-command to the specified telescope
-  void telescopeGoto(int telescope_nr,const Vec3d &j2000_pos);
+  void telescopeGoto(int telescope_nr,const Vec3d &j2000Pos);
 private:
 #ifdef WIN32
-  bool wsa_ok;
+  bool wsaOk;
 #endif
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const Projector* prj, const Navigator * nav);
 
   LinearFader nameFader;
-  LinearFader telescope_fader;
+  LinearFader telescopeFader;
   Vec3f circleColor;
   Vec3f labelColor;
   SFont *telescope_font;
-  STextureSP telescope_texture;
+  STextureSP telescopeTexture;
 
   class TelescopeMap : public std::map<int,Telescope*> {
   public:

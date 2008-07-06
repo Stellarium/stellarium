@@ -53,7 +53,7 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getType(void) const {return "Telescope";}
-	virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
+	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
 	// all TCP (and all possible other style) communication shall be done in
