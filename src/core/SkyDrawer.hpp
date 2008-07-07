@@ -231,7 +231,7 @@ private:
 	STextureSP texHalo;
 	
 	//! Load B-V conversion parameters from config file
-	static void initColorTableFromConfigFile(class QSettings* conf);
+	void initColorTableFromConfigFile(class QSettings* conf);
 	
 	//! Contains the list of colors matching a given B-V index
 	static Vec3f colorTable[128];

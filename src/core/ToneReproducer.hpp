@@ -81,6 +81,10 @@ public:
 	void setMaxDisplayLuminance(float maxdL)
 	{oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
 
+	//! Get the display gamma
+	//! @return the display gamma. Default value is 2.2222 for a CRT
+	float getDisplayGamma() const {return 1.f/oneOverGamma;}
+	
 	//! Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.2222
 	void setDisplayGamma(float gamma)

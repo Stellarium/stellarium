@@ -695,7 +695,6 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		char entry[256];
 		sprintf(entry,"bv_color_%+5.2f",bV);
 		const QStringList s(conf->value(QString("stars/") + entry).toStringList());
-		qDebug() << QString("stars/") + entry << s;
 		if (!s.isEmpty())
 		{
 			Vec3f c;
@@ -703,7 +702,7 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 				c = StelUtils::strToVec3f(s[0]);
 			else
 				c =StelUtils::strToVec3f(s);
-			color_map[bV] = Gamma(1./0.45,c);
+			color_map[bV] = Gamma(eye->getDisplayGamma(),c);
 		}
 	}
 
@@ -726,17 +725,17 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 				} 
 				else 
 				{
-					colorTable[i] = Gamma(0.45, ((bV-less->first)*greater->second + (greater->first-bV)*less->second) *(1.f/(greater->first-less->first)));
+					colorTable[i] = Gamma(1.f/eye->getDisplayGamma(), ((bV-less->first)*greater->second + (greater->first-bV)*less->second) *(1.f/(greater->first-less->first)));
 				}
 			}
 		}
 	}
 	
 	// because the star texture is not fully white we need to add a factor here to avoid to dark colors == too saturated
-	for (int i=0;i<128;i++) 
-	{
-		colorTable[i] *= 1.4;
-		colorTable[i][0] *=1./1.3;
-		colorTable[i][1] *=1./1.2;
-	}
+// 	for (int i=0;i<128;i++) 
+// 	{
+// 		colorTable[i] *= 1.4;
+// 		colorTable[i][0] *=1./1.3;
+// 		colorTable[i][1] *=1./1.2;
+// 	}
 }
