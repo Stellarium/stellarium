@@ -194,7 +194,7 @@ QString radToDmsStrAdapt(double angle, bool useD)
 	{
 		os << m << '\'';
 	}
-	qDebug() << "radToDmsStrAdapt(" << angle << ", " << useD << ") = " << str;
+	//qDebug() << "radToDmsStrAdapt(" << angle << ", " << useD << ") = " << str;
 	return str;
 }
 
