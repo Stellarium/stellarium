@@ -695,10 +695,15 @@ void SkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		char entry[256];
 		sprintf(entry,"bv_color_%+5.2f",bV);
 		const QStringList s(conf->value(QString("stars/") + entry).toStringList());
+		qDebug() << QString("stars/") + entry << s;
 		if (!s.isEmpty())
 		{
-			const Vec3f c(StelUtils::strToVec3f(s));
-			color_map[bV] = Gamma(1/0.45,c);
+			Vec3f c;
+			if (s.size()==1)
+				c = StelUtils::strToVec3f(s[0]);
+			else
+				c =StelUtils::strToVec3f(s);
+			color_map[bV] = Gamma(1./0.45,c);
 		}
 	}
 
