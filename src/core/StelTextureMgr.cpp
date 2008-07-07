@@ -128,7 +128,7 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 	{
 		tex->fullPath = StelApp::getInstance().getFileMgr().findFile(afilename);
 	}
-	catch (exception e)
+	catch (std::runtime_error e)
 	{
 		try
 		{
@@ -169,7 +169,7 @@ STextureSP StelTextureMgr::createTextureThread(const QString& url, const QString
 		{
 			tex->fullPath = StelApp::getInstance().getFileMgr().findFile(url);
 		}
-		catch (exception e)
+		catch (std::runtime_error e)
 		{
 			try
 			{

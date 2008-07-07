@@ -40,7 +40,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 	{
 		cultureDirNames = fileMan.listContents("skycultures",StelFileMgr::Directory);
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
 	}
@@ -53,7 +53,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			dirToNameEnglish[*dir].englishName = pd.value("info/name").toString();
 			dirToNameEnglish[*dir].author = pd.value("info/author").toString();
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << *dir;
 		}

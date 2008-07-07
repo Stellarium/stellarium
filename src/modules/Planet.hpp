@@ -213,7 +213,7 @@ public:
 	static void setTrailColor(const Vec3f& c) { trailColor = c; }
 	static const Vec3f& getTrailColor() { return trailColor; }
 	static Vec3f trailColor;
-	list<TrailPoint>trail;
+	std::list<TrailPoint>trail;
 	bool trailOn;                  // accumulate trail data if true
 	double DeltaTrail;
 	int MaxTrail;
@@ -278,7 +278,7 @@ protected:
 	posFuncType coordFunc;
 	OsulatingFunctType *const osculatingFunc;
 	const Planet *parent;           // Planet parent i.e. sun for earth
-	list<Planet *> satellites;      // satellites of the Planet
+	std::list<Planet *> satellites;      // satellites of the Planet
 	static SFont* planetNameFont; // Font for names
 	static Vec3f labelColor;
 	static STextureSP hintCircleTex;
