@@ -26,8 +26,6 @@
 #include <QDateTime>
 #include <QString>
 
-using namespace std;
-
 // astonomical unit (km)
 #define AU 149597870.691
 

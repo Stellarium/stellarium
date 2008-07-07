@@ -66,6 +66,8 @@
   #define INVALID_SOCKET (-1)
 #endif
 
+using namespace std;
+				   
 struct PrintRaDec {
   PrintRaDec(const unsigned int ra_int,const int dec_int)
     :ra_int(ra_int),dec_int(dec_int) {}

@@ -227,7 +227,7 @@ void MapView::populate(const QString& filename)
 	{
 		cityDataPath = StelApp::getInstance().getFileMgr().findFile(filename);
 	}
-	catch (exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR: Failed to locate city data for location map: " << filename << e.what();
 		return;
