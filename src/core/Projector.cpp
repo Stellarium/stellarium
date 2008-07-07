@@ -953,10 +953,18 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 // 	if (painter==NULL)
 // 	{
 // 		StelAppGraphicsItem::getInstance().revertToOpenGL();
+// 		qDebug() << "NULL Painter";
 // 		return;
 // 	}
-// 	painter->setRenderHints(QPainter::TextAntialiasing | QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
-// 	painter->drawText(QPointF(x, y), str);
+// 	painter->setRenderHints(QPainter::TextAntialiasing | QPainter::HighQualityAntialiasing);
+// 	painter->translate(QPointF(x+xshift, y+yshift));
+// 	//painter->scale(1, -1.00001);
+// 	painter->setBrush(QColor(255,255,0));
+// 	painter->setPen(QColor(255,255,0));
+// 	QPainterPath text;
+// 	text.addText(QPointF(0,0), QFont(), str);
+// 	painter->drawPath(text);
+// 	//painter->drawText(QPointF(xshift, -yshift), str);
 // 	StelAppGraphicsItem::getInstance().revertToOpenGL();
 	
 	glPushMatrix();
