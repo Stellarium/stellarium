@@ -302,7 +302,7 @@ bool StelTextureMgr::reScale(STexture* tex)
 					GLubyte* data = (GLubyte*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
 					{
-						data[i] = (GLubyte)MY_MIN((MY_MAX((data[i]-minCut), 0)*scaling), 255);
+						data[i] = (GLubyte)qMin((qMax((data[i]-minCut), 0)*scaling), 255.);
 					}
 				}
 				else if (tex->internalFormat==2 && tex->type==GL_UNSIGNED_SHORT)
@@ -310,14 +310,14 @@ bool StelTextureMgr::reScale(STexture* tex)
 					double scaling = 65535./(maxCut-minCut);
 					GLushort* data = (GLushort*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
-						data[i] = (GLushort)MY_MIN((MY_MAX(data[i]-minCut, 0)*scaling), 65535);
+						data[i] = (GLushort)qMin((qMax(data[i]-minCut, 0)*scaling), 65535.);
 				}
 				else if (tex->internalFormat==2 && tex->type==GL_SHORT)
 				{
 					double scaling = 65535./(maxCut-minCut);
 					GLshort* data = (GLshort*)tex->texels;
 					for (unsigned int i=0;i<nbPix;++i)
-						data[i] = (GLshort)MY_MIN((MY_MAX(data[i]-minCut, -32767)*scaling), 32767);
+						data[i] = (GLshort)qMin((qMax(data[i]-minCut, -32767)*scaling), 32767.);
 				}
 				else
 				{

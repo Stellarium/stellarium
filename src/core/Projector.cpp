@@ -72,14 +72,14 @@ void Projector::init()
 	const bool maximized = (tmpstr=="maximized");
 	const int screen_w = conf->value("video/screen_w", 800).toInt();
 	const int screen_h = conf->value("video/screen_h", 600).toInt();
-	const int screen_min_wh = MY_MIN(screen_w,screen_h);
+	const int screen_min_wh = qMin(screen_w,screen_h);
 	const int viewport_width = conf->value("projection/viewport_width", maximized ? screen_w : screen_min_wh).toInt();
 	const int viewport_height = conf->value("projection/viewport_height", maximized ? screen_h : screen_min_wh).toInt();
 	const int viewport_x = conf->value("projection/viewport_x", (screen_w-viewport_width)/2).toInt();
 	const int viewport_y = conf->value("projection/viewport_y", (screen_h-viewport_height)/2).toInt();
 	const double viewportCenterX = conf->value("projection/viewport_center_x",0.5*viewport_width).toDouble();
 	const double viewportCenterY = conf->value("projection/viewport_center_y",0.5*viewport_height).toDouble();
-	const double viewportFovDiameter = conf->value("projection/viewport_fov_diameter", MY_MIN(viewport_width,viewport_height)).toDouble();
+	const double viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	setViewport(viewport_x,viewport_y,viewport_width,viewport_height, viewportCenterX,viewportCenterY, viewportFovDiameter);
 
 	double overwrite_max_fov = conf->value("projection/equal_area_max_fov",0.0).toDouble();
@@ -148,7 +148,7 @@ void Projector::init()
 void Projector::windowHasBeenResized(int width,int height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
-	setViewport(0,0,width,height, 0.5*width, 0.5*height,MY_MIN(width,height));
+	setViewport(0,0,width,height, 0.5*width, 0.5*height,qMin(width,height));
 }
 
 Projector::Projector(const Vector4<GLint>& viewport, double _fov)
@@ -157,7 +157,7 @@ Projector::Projector(const Vector4<GLint>& viewport, double _fov)
 		viewportXywh(viewport),
         viewportCenter(Vec2d(viewportXywh[0]+0.5*viewportXywh[2],
 		                      viewportXywh[1]+0.5*viewportXywh[3])),
-        viewportFovDiameter(MY_MIN(viewportXywh[2],viewportXywh[3])),
+        viewportFovDiameter(qMin(viewportXywh[2],viewportXywh[3])),
 		gravityLabels(0),
 		mapping(NULL)
 {
@@ -889,7 +889,7 @@ void Projector::drawTextGravity180(const SFont* font, float x, float y, const QS
 	d = sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
-	if (d>MY_MAX(viewportXywh[3], viewportXywh[2])*2)
+	if (d>qMax(viewportXywh[3], viewportXywh[2])*2)
 		return;
 
 	theta = M_PI + std::atan2(dx, dy - 1);
