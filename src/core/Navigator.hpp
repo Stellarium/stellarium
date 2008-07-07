@@ -146,9 +146,9 @@ public slots:
 	double getJDay() const {return JDay;}
 	
 	//! Set time speed in JDay/sec
-	void setTimeSpeed(double ts) {time_speed=ts;}
+	void setTimeSpeed(double ts) {timeSpeed=ts;}
 	//! Get time speed in JDay/sec
-	double getTimeSpeed() const {return time_speed;}
+	double getTimeSpeed() const {return timeSpeed;}
 	
 	//! Increase the time speed
 	void increaseTimeSpeed();
@@ -158,7 +158,7 @@ public slots:
 	//! Set real time speed, i.e. 1 sec/sec
 	void setRealTimeSpeed() {setTimeSpeed(JD_SECOND);}
 	//! Get whether it is real time speed, i.e. 1 sec/sec
-	bool getRealTimeSpeed() const {return (fabs(time_speed-JD_SECOND)<0.0000001);}
+	bool getRealTimeSpeed() const {return (fabs(timeSpeed-JD_SECOND)<0.0000001);}
 	
 	//! Set stellarium time to current real world time
 	void setTimeNow();
@@ -239,7 +239,7 @@ private:
 	Vec3d localVision, equVision, J2000EquVision;
 
 	// Time variable
-	double time_speed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;              // Curent time in Julian day
 
 	double PresetSkyTime;
