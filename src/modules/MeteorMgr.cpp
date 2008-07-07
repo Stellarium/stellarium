@@ -113,7 +113,7 @@ void MeteorMgr::update(double deltaTime)
 		}
 	}
 
-	// only makes sense given lifetimes of meteors to draw when time_speed is realtime
+	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 	// otherwise high overhead of large numbers of meteors
 	double tspeed = nav->getTimeSpeed() *86400;  // sky seconds per actual second
 	if(tspeed <= 0 || fabs(tspeed) > 1 )

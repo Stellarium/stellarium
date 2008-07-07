@@ -32,7 +32,7 @@
 #include <QDebug>
 
 ////////////////////////////////////////////////////////////////////////////////
-Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(obs)
+Navigator::Navigator(Observer* obs) : timeSpeed(JD_SECOND), JDay(0.), position(obs)
 {
 	if (!position)
 	{
@@ -234,7 +234,7 @@ void Navigator::setJ2000EquVision(const Vec3d& _pos)
 // Increment time
 void Navigator::updateTime(double deltaTime)
 {
-	JDay+=time_speed*deltaTime;
+	JDay+=timeSpeed*deltaTime;
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
