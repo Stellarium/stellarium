@@ -136,8 +136,8 @@ void ConvexPolygon::getBoundingLonLat(double result[4]) const
 	bool insideDown = inside(Vec3d(0,0,-1));
 
 
-	result[2] = MY_MIN(MY_MIN(vertex[0].latitude(), vertex[1].latitude()), MY_MIN(vertex[2].latitude(), vertex[3].latitude()));
-	result[3] = MY_MAX(MY_MAX(vertex[0].latitude(), vertex[1].latitude()), MY_MAX(vertex[2].latitude(), vertex[3].latitude()));
+	result[2] = qMin(qMin(vertex[0].latitude(), vertex[1].latitude()), qMin(vertex[2].latitude(), vertex[3].latitude()));
+	result[3] = qMax(qMax(vertex[0].latitude(), vertex[1].latitude()), qMax(vertex[2].latitude(), vertex[3].latitude()));
 	if (result[2]<-M_PI/2)
 		result[2] = -M_PI/2;
 	if (result[3]>M_PI/2)
@@ -154,8 +154,8 @@ void ConvexPolygon::getBoundingLonLat(double result[4]) const
 	}
 	else
 	{
-		result[0] = MY_MIN(MY_MIN(vertex[0].longitude(), vertex[1].longitude()), MY_MIN(vertex[2].longitude(), vertex[3].longitude()));
-		result[1] = MY_MAX(MY_MAX(vertex[0].longitude(), vertex[1].longitude()), MY_MAX(vertex[2].longitude(), vertex[3].longitude()));
+		result[0] = qMin(qMin(vertex[0].longitude(), vertex[1].longitude()), qMin(vertex[2].longitude(), vertex[3].longitude()));
+		result[1] = qMax(qMax(vertex[0].longitude(), vertex[1].longitude()), qMax(vertex[2].longitude(), vertex[3].longitude()));
 	}
 }
 */

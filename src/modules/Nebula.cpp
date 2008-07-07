@@ -162,7 +162,7 @@ void Nebula::drawHints(const StelCore* core, float maxMagHints)
 		return;
 	//if (4.f/getOnScreenSize(core)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	float lum = 1.;//MY_MIN(1,4.f/getOnScreenSize(core))*0.8;
+	float lum = 1.;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	glColor3f(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 	Nebula::texCircle->bind();
 	core->getProjection()->drawSprite2dMode(XY[0], XY[1], 8);

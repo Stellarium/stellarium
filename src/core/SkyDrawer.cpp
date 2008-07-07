@@ -29,6 +29,7 @@
 #include <QStringList>
 #include <QSettings>
 #include <QDebug>
+#include <QtGlobal>
 
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25)
@@ -129,7 +130,7 @@ void SkyDrawer::update(double deltaTime)
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human 
 	// vision to binocculares/telescope. Use a max of 0.7 because after that the atmosphere starts to glow too much!
-	float powFactor = std::pow(60./MY_MAX(0.7,fov), 0.8);
+	float powFactor = std::pow(60./qMax(0.7f,fov), 0.8);
 	eye->setInputScale(inScale*powFactor);
 	
 	// Set the fov factor for point source luminance computation
@@ -309,7 +310,7 @@ bool SkyDrawer::drawPointSource(double x, double y, const float rcMag[2], const 
 		// If the rmag is big, draw a big halo
 		if (radius>MAX_LINEAR_RADIUS+5.f)
 		{
-			float cmag = MY_MIN(rcMag[1],(radius-(MAX_LINEAR_RADIUS+5.))/30.);
+			float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.))/30.f);
 			float rmag = 150.f;
 			if (cmag>1.f)
 				cmag = 1.f;
@@ -379,7 +380,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		float rmag = 150.f*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
-			cmag = MY_MAX(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		glBegin(GL_QUADS);
 			glTexCoord2i(0,0); glVertex2f(x-rmag,y-rmag);
@@ -406,7 +407,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	float tStop = 6.f;
 	bool truncated=false;
 	
-	float maxHaloRadius = MY_MAX(tStart*3., pixRadius*3.);
+	float maxHaloRadius = qMax(tStart*3., pixRadius*3.);
 	if (rcm[0]>maxHaloRadius)
 	{
 		truncated = true;
@@ -428,7 +429,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		float wl = findWorldLumForMag(mag, rcm[0]);
 		if (wl>0)
 		{
-			reportLuminanceInFov(MY_MIN(700., MY_MIN(wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
+			reportLuminanceInFov(qMin(700., qMin((double)wl/50, (60.*60.)/(prj->getFov()*prj->getFov())*6.)));
 		}
  	}
 	
@@ -503,7 +504,7 @@ void SkyDrawer::reportLuminanceInFov(double lum, bool fastAdaptation)
 		else
 		{
 			float transitionSpeed = 0.2f;
-			maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* MY_MIN(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
+			maxLum = std::exp(std::log(oldLum)+(std::log(lum)-std::log(oldLum))* qMin(1.f, 1.f/StelApp::getInstance().getFps()/transitionSpeed));
 		}
 	}
 }

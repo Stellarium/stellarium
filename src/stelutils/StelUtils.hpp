@@ -34,9 +34,6 @@ using namespace std;
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 
-#define MY_MAX(a,b) (((a)>(b))?(a):(b))
-#define MY_MIN(a,b) (((a)<(b))?(a):(b))
-
 namespace StelUtils
 {
 

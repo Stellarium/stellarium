@@ -221,7 +221,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += MY_MAX(0.2/-12.*ssystem->getMoon()->getMagnitude(nav),0)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getMagnitude(nav),0.)*moonPos[2];
 //
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -514,7 +514,7 @@ double LandscapeMgr::getAtmosphereLightPollutionLuminance(void) const
 void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 {
 	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(MY_MAX(0.,0.0020*std::pow(bIndex-1, 2.1)));
+	setAtmosphereLightPollutionLuminance(qMax(0.,0.0020*std::pow(bIndex-1, 2.1)));
 }
 
 float LandscapeMgr::getLuminance(void) 

@@ -153,7 +153,7 @@ ViewportDistorterFisheyeToSphericMirror
 	}
 	viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*viewport_w).toDouble();
 	viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*viewport_h).toDouble();
-	viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", MY_MIN(viewport_w,viewport_h)).toDouble();
+	viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(viewport_w,viewport_h)).toDouble();
 
 	texture_wh = 1;
 	while (texture_wh < viewport_w || texture_wh < viewport_h)
