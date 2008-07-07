@@ -254,9 +254,9 @@ Vec3f strToVec3f(const QString& s)
 QString vec3fToHtmlColor(const Vec3f& v)
 {
 	return QString("#%1%2%3")
-		.arg(MY_MIN(255, int(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(MY_MIN(255, int(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(MY_MIN(255, int(v[2] * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
 }
 
 void spheToRect(double lng, double lat, Vec3d& v)

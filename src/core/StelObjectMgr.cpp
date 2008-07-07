@@ -164,7 +164,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	vector<StelObjectP> temp;
 
 	// Field of view for a 30 pixel diameter circle on screen
-	float fov_around = core->getProjection()->getFov()/MY_MIN(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
+	float fov_around = core->getProjection()->getFov()/qMin(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
 
 	// Collect the objects inside the range
 	std::vector<StelObjectModule*>::const_iterator iteromgr;

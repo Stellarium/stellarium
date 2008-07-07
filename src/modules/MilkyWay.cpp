@@ -82,7 +82,7 @@ void MilkyWay::draw(StelCore* core)
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 	
 	// Bound a maximum luminance
-	aLum = MY_MIN(0.38f, aLum*2.);
+	aLum = qMin(0.38, aLum*2.);
 	
 	c*=aLum;
 	
