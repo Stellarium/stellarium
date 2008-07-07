@@ -154,8 +154,8 @@ private:
 	
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
-	vector<vector<Vec3f> *> isolatedBoundarySegments;
-	vector<vector<Vec3f> *> sharedBoundarySegments;
+	std::vector<std::vector<Vec3f> *> isolatedBoundarySegments;
+	std::vector<std::vector<Vec3f> *> sharedBoundarySegments;
 	
 	//! Currently we only need one color for all constellations, this may change at some point
 	static Vec3f lineColor;

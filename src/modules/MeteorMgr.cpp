@@ -48,7 +48,7 @@ MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 
 MeteorMgr::~MeteorMgr()
 {
-	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	for(std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		delete *iter;
 	}
@@ -98,7 +98,7 @@ void MeteorMgr::update(double deltaTime)
 
 	// step through and update all active meteors
 	int n =0;
-	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	for(std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		n++;
 		//qDebug("Meteor %d update\n", ++n);
@@ -178,7 +178,7 @@ void MeteorMgr::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);  // much dimmer without this
 
 	// step through and draw all active meteors
-	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
 		(*iter)->draw(core->getProjection(), core->getNavigation());
 	}

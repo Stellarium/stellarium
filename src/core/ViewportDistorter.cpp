@@ -333,7 +333,7 @@ ViewportDistorterFisheyeToSphericMirror
 
 			in.setDevice(&file);
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file << e.what();
 		}

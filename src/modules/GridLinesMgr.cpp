@@ -243,7 +243,7 @@ static bool isMeridianEnteringLat180(const Projector* prj, double lon1802, doubl
 //! Return all the points p on the segment [p0 p1] for which the value of func(p) == k*step
 //! For each value of k*step, the result is then sorted ordered according to the value of func2(p)
 //! @return a map associating all the values of k*step and their associated func2(p)
-static void getPslow(map<int, set<double> > & result, const Projector* prj, 
+static void getPslow(std::map<int, std::set<double> > & result, const Projector* prj, 
 	const Vec2d& p0, const Vec2d& p1, double step, 
 	double (*func)(const Projector* prj, const Vec2d& p),
 	double (*func2)(const Projector* prj, const Vec2d& p))
@@ -373,8 +373,8 @@ void SkyGrid::draw(const Projector* prj) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionParallel(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
 	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : getClosestResolutionMeridian(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))));
 	
-	map<int, set<double> > resultsParallels;
-	map<int, set<double> > resultsMeridians;
+	std::map<int, std::set<double> > resultsParallels;
+	std::map<int, std::set<double> > resultsMeridians;
 	const QList<Vec2d> viewportVertices = prj->getViewportVertices2d();
 	for (int i=0;i<viewportVertices.size();++i)
 	{
@@ -386,7 +386,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 
 	// Draw the parallels
-	for (map<int, set<double> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
+	for (std::map<int, std::set<double> >::const_iterator iter=resultsParallels.begin(); iter!=resultsParallels.end(); ++iter)
 	{
 		if (iter->second.size()%2!=0)
 		{
@@ -394,7 +394,7 @@ void SkyGrid::draw(const Projector* prj) const
 		}
 		else
 		{
-			set<double>::const_iterator ii = iter->second.begin();
+			std::set<double>::const_iterator ii = iter->second.begin();
 			if (!isParallelEntering(prj, *iter->second.begin(), (double)iter->first/RADIAN_MAS))
 			{
 				++ii;
@@ -442,10 +442,10 @@ void SkyGrid::draw(const Projector* prj) const
 	// Draw meridians
 	
 	// Discriminate meridian categories, if latitude is > pi, the real longitude180 is -longitude+pi 
-	map<int, set<double> > resultsMeridiansOrdered;
-	for (map<int, set<double> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
+	std::map<int, std::set<double> > resultsMeridiansOrdered;
+	for (std::map<int, std::set<double> >::const_iterator iter=resultsMeridians.begin(); iter!=resultsMeridians.end(); ++iter)
 	{
-		for (set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
+		for (std::set<double>::const_iterator k=iter->second.begin();k!=iter->second.end();++k)
 		{
 			assert(*k>=0. && *k<=2.*M_PI);
 			assert((double)iter->first/RADIAN_MAS>=0. && (double)iter->first/RADIAN_MAS<=M_PI);
@@ -456,7 +456,7 @@ void SkyGrid::draw(const Projector* prj) const
 		}
 	}
 	
-	for (map<int, set<double> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
+	for (std::map<int, std::set<double> >::const_iterator iter=resultsMeridiansOrdered.begin(); iter!=resultsMeridiansOrdered.end(); ++iter)
 	{
 //		qDebug() << "------- lon1802=" << iter->first << "--------";
 //		for (map<double, Vec2d>::const_iterator k = iter->second.begin();k!=iter->second.end();++k)
@@ -476,7 +476,7 @@ void SkyGrid::draw(const Projector* prj) const
 		{
 			// The content of the set iter->second is supposed to be the sorted list of the latitudeType2
 			// at which the meridian of longitude iter->first crosses the viewport
-			set<double>::const_iterator k = iter->second.begin();
+			std::set<double>::const_iterator k = iter->second.begin();
 			if (!isMeridianEnteringLat180(prj, (double)iter->first/RADIAN_MAS, *k))
 			{
 				++k;
