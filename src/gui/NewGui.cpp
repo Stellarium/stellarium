@@ -357,6 +357,8 @@ QProgressBar* StelProgressBarMgr::addProgressBar()
 {
 	QProgressBar* pb = new QProgressBar();
 	pb->setFixedHeight(15);
+	pb->setFixedWidth(250);
+	pb->setTextVisible(true);
 	pb->setValue(66);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);

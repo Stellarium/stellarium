@@ -76,9 +76,24 @@ void JsonLoadThread::run()
 	}
 }
 
-// Constructor
-SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent), luminance(-1), alphaBlend(false), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL), texFader(NULL)
+void SkyImageTile::initCtor()
 {
+	luminance = -1;
+	alphaBlend = false;
+	noTexture = false;
+	errorOccured = false;
+	httpReply = NULL;
+	downloading = false;
+	loadThread = NULL;
+	texFader = NULL;
+	loadingState = false;
+	lastPercent = 0;
+}
+
+// Constructor
+SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(parent)
+{
+	initCtor();
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -148,8 +163,9 @@ SkyImageTile::SkyImageTile(const QString& url, SkyImageTile* parent) : QObject(p
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent), luminance(-1), noTexture(false), errorOccured(false), httpReply(NULL), downloading(false), loadThread(NULL), texFader(NULL)
+SkyImageTile::SkyImageTile(const QVariantMap& map, SkyImageTile* parent) : QObject(parent)
 {
+	initCtor();
 	if (parent!=NULL)
 	{
 		baseUrl = parent->getBaseUrl();
@@ -188,21 +204,26 @@ SkyImageTile::~SkyImageTile()
 void SkyImageTile::draw(StelCore* core)
 {
 	Projector* prj = core->getProjection();
-	QMultiMap<double, SkyImageTile*> result;
-	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
 	
+	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
+	QMultiMap<double, SkyImageTile*> result;
+	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	
+	int numToBeLoaded=0;
 	QMap<double, SkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core);
+		if (i.value()->drawTile(core)==false)
+			++numToBeLoaded;
 	}
+	updatePercent(result.size(), numToBeLoaded);
 	
 	deleteUnusedTiles();
 }
 	
 // Return the list of tiles which should be drawn.
-void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect)
+void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
 	// An error occured during loading
 	if (errorOccured)
@@ -215,6 +236,9 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 		lastTimeDraw = StelApp::getInstance().getTotalRunTime();
 		return;
 	}
+	
+	if (luminance>0 && luminance<limitLuminance)
+		return;
 	
 	// Check that we are in the screen
 	bool fullInScreen = true;
@@ -318,28 +342,22 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
 			// Try to add the subtiles
 			foreach (SkyImageTile* tile, subTiles)
 			{
-				tile->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);
+				tile->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 			}
 		}
 	}
 }
 	
 // Draw the image on the screen.
-void SkyImageTile::drawTile(StelCore* core)
+bool SkyImageTile::drawTile(StelCore* core)
 {
 	float ad_lum=1.f;
 	if (luminance>0)
-	{
 		ad_lum=core->getToneReproducer()->adaptLuminanceScaled(luminance);
-		if (ad_lum<0.01)
-		{
-			return;
-		}
-	}
 	
 	if (!tex->bind())
 	{
-		return;
+		return false;
 	}
 	
 	if (!texFader)
@@ -413,6 +431,8 @@ void SkyImageTile::drawTile(StelCore* core)
 #endif
 	if (!alphaBlend)
 		glBlendFunc(GL_ONE, GL_ONE); // Revert
+	
+	return true;
 }
 
 // Load the tile information from a JSON file
@@ -442,8 +462,22 @@ QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
 // Load the tile from a valid QVariantMap
 void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 {
-	credits = map.value("credits").toString();
-	infoUrl = map.value("infoUrl").toString();
+	if (map.contains("imageCredits"))
+	{
+		QVariantMap dsCredits = map.value("imageCredits").toMap();
+		dataSetCredits.shortCredits = dsCredits.value("short").toString();
+		dataSetCredits.fullCredits = dsCredits.value("full").toString();
+		dataSetCredits.infoURL = dsCredits.value("infoUrl").toString();
+	}
+	if (map.contains("serverCredits"))
+	{
+		QVariantMap sCredits = map.value("serverCredits").toMap();
+		serverCredits.shortCredits = sCredits.value("short").toString();
+		serverCredits.fullCredits = sCredits.value("full").toString();
+		serverCredits.infoURL = sCredits.value("infoUrl").toString();
+	}
+	
+	shortName = map.value("shortName").toString();
 	bool ok=false;
 	minResolution = map.value("minResolution").toDouble(&ok);
 	if (!ok)
@@ -639,4 +673,44 @@ void SkyImageTile::deleteUnusedTiles(double lastDrawTrigger)
 	{
 		tile->deleteUnusedTiles(lastDrawTrigger);
 	}
+}
+
+void SkyImageTile::updatePercent(int tot, int toBeLoaded)
+{
+	if (tot+toBeLoaded==0)
+	{
+		if (loadingState==true)
+		{
+			loadingState=false;
+			emit(loadingStateChanged(false));
+		}
+		return;
+	}
+
+	int p = (int)(100.f*tot/(tot+toBeLoaded));
+	if (p>100)
+		p=100;
+	if (p<0)
+		p=0;
+	if (p==100 || p==0)
+	{
+		if (loadingState==true)
+		{
+			loadingState=false;
+			emit(loadingStateChanged(false));
+		}
+		return;
+	}
+	else
+	{
+		if (loadingState==false)
+		{
+			loadingState=true;
+			emit(loadingStateChanged(true));
+		}
+	}
+	if (p==lastPercent)
+		return;
+	lastPercent=p;
+	emit(percentLoadedChanged(p));
 }
