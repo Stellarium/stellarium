@@ -71,7 +71,7 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName):
 	t.j = j
 	t.imageUrl = "x%.2d/" % (2**currentLevel)+"x%.2d_%.2d_%.2d.jpg" % (2**currentLevel, i,j)
 	if currentLevel==0:
-		t.credits = "Copyright (C) 2008 Brian McLean, STScI Digitized Sky Survey"
+		t.credits = "Copyright (C) 2008, STScI Digitized Sky Survey"
 		t.infoUrl = "http://stdatu.stsci.edu/cgi-bin/dss_form"
 		# t.maxBrightness = 10
 
