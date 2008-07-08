@@ -24,10 +24,12 @@
 #include "Projector.hpp"
 #include "SkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <stdexcept>
 #include <QDebug>
 #include <QString>
+#include <QProgressBar>
 
 SkyBackground::SkyBackground(void) : flagShow(true)
 {
@@ -36,7 +38,7 @@ SkyBackground::SkyBackground(void) : flagShow(true)
 
 SkyBackground::~SkyBackground()
 {
-	foreach (SkyImageTile* s, allSkyImages)
+	foreach (SkyBackgroundElem* s, allSkyImages)
 		delete s;
 }
 
@@ -53,16 +55,24 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void SkyBackground::init()
 {
-	//allSkyImages.append(new SkyImageTile("http://voint1.hq.eso.org/fabienDSS2/allDSS.json"));
-	allSkyImages.append(new SkyImageTile("http://stellarium.free.fr/divers/30Dor/x01_00_00.json.qZ"));
+	addElem("http://voint1.hq.eso.org/fabienDSS2/allDSS.json");
+	addElem("http://stellarium.free.fr/divers/30Dor/x01_00_00.json.qZ");
 	try
 	{
-		allSkyImages.append(new SkyImageTile(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json")));
+		addElem(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
 	}
+}
+
+void SkyBackground::addElem(const QString& uri)
+{
+	SkyBackgroundElem* bEl = new SkyBackgroundElem(uri);
+	allSkyImages.append(bEl);
+	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
+	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 }
 
 // Draw all the multi-res images collection
@@ -77,6 +87,69 @@ void SkyBackground::draw(StelCore* core)
 	glBlendFunc(GL_ONE, GL_ONE);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_BLEND);
-	foreach (SkyImageTile* s, allSkyImages)
-		s->draw(core);
+	foreach (SkyBackgroundElem* s, allSkyImages)
+		s->tile->draw(core);
+}
+
+// Called when loading of data started or stopped for one collection
+void SkyBackground::loadingStateChanged(bool b)
+{
+	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
+	Q_ASSERT(tile!=0);
+	SkyBackgroundElem* elem = skyBackgroundElemForTile(tile);
+	Q_ASSERT(elem!=NULL);
+	if (b)
+	{
+		Q_ASSERT(elem->progressBar==NULL);
+		elem->progressBar = StelMainGraphicsView::getInstance().addProgessBar();
+		QString serverStr = elem->tile->getServerCredits().shortCredits;
+		if (!serverStr.isEmpty())
+			serverStr = " from "+serverStr;
+		elem->progressBar->setFormat("Loading "+elem->tile->getShortName()+serverStr);
+		elem->progressBar->setRange(0,100);
+	}
+	else
+	{
+		Q_ASSERT(elem->progressBar!=NULL);
+		elem->progressBar->deleteLater();
+		elem->progressBar = NULL;
+	}
+}
+	
+// Called when the percentage of loading tiles/tiles to be displayed changed for one collection
+void SkyBackground::percentLoadedChanged(int percentage)
+{
+	SkyImageTile* tile = qobject_cast<SkyImageTile*>(QObject::sender());
+	Q_ASSERT(tile!=0);
+	SkyBackgroundElem* elem = skyBackgroundElemForTile(tile);
+	Q_ASSERT(elem!=NULL);
+	Q_ASSERT(elem->progressBar!=NULL);
+	elem->progressBar->setValue(percentage);
+}
+
+SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const SkyImageTile* t)
+{
+	foreach (SkyBackgroundElem* e, allSkyImages)
+	{
+		if (e->tile==t)
+		{
+			return e;
+		}
+	}
+	return NULL;
+}
+
+SkyBackground::SkyBackgroundElem::SkyBackgroundElem(const QString& uri) : progressBar(NULL)
+{
+	tile = new SkyImageTile(uri);
+}
+				 
+SkyBackground::SkyBackgroundElem::~SkyBackgroundElem()
+{
+	if (tile)
+		delete tile;
+	tile = NULL;
+	if (progressBar)
+		delete progressBar;
+	progressBar = NULL;
 }

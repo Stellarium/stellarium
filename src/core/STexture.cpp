@@ -85,6 +85,11 @@ STexture::STexture() : httpReply(NULL), loadThread(NULL), downloaded(false), isL
 
 STexture::~STexture()
 {
+	if (httpReply || (loadThread && loadThread->isRunning()))
+	{
+		reportError("Aborted (texture deleted)");
+	}
+	
 	if (httpReply)
 	{
 		// HTTP is still doing something for this texture. We abort it.
@@ -127,7 +132,7 @@ void STexture::reportError(const QString& aerrorMessage)
 	errorOccured = true;
 	errorMessage = aerrorMessage;
 	// Report failure of texture loading
-	emit(loadingProcessFinished(this, true));
+	emit(loadingProcessFinished(true));
 }
 
 /*************************************************************************
@@ -360,7 +365,7 @@ bool STexture::glLoad()
 	}
 	
 	// Report success of texture loading
-	emit(loadingProcessFinished(this, false));
+	emit(loadingProcessFinished(false));
 	
 	return true;
 }

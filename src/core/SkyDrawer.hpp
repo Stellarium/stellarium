@@ -157,7 +157,12 @@ public slots:
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
-
+	
+	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
+	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
+	//! @return the limit V luminance at which an object will be visible
+	float getLimitLuminance() const {return limitLuminance;}
+	
 	//! Set the value of the eye adaptation flag
 	void setFlagLuminanceAdaptation(bool b) {flagLuminanceAdaptation=b;}
 	//! Get the current value of eye adaptation flag
@@ -170,6 +175,9 @@ private:
 	//! Compute the current limit magnitude by dichotomy
 	float computeLimitMagnitude() const;
 			
+	//! Compute the current limit luminance by dichotomy
+	float computeLimitLuminance() const;
+	
 	//! Get SkyDrawer maximum FOV.
 	float getMaxFov(void) const {return maxFov;}
 	//! Set SkyDrawer maximum FOV.
@@ -226,6 +234,9 @@ private:
 	
 	//! Current magnitude limit for point sources
 	float limitMagnitude;
+	
+	//! Current magnitude luminance
+	float limitLuminance;
 	
 	//! Little halo texture
 	STextureSP texHalo;

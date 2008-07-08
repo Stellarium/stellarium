@@ -21,9 +21,11 @@
 
 #include "StelModule.hpp"
 #include <QString>
+#include <QList>
 
 class StelCore;
 class SkyImageTile;
+class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
 class SkyBackground : public StelModule
@@ -59,10 +61,33 @@ public slots:
 	//! Get whether Sky Background should be displayed
 	bool getFlagShow() const {return flagShow;}
 	
+private slots:
+	//! Called when loading of data started or stopped for one collection
+	//! @param b true if data loading started, false if finished
+	void loadingStateChanged(bool b);
+	
+	//! Called when the percentage of loading tiles/tiles to be displayed changed for one collection
+	//! @param percentage the percentage of loaded data
+	void percentLoadedChanged(int percentage);
+	
 private:
 	
-	// Direction of the vertices of each polygons in ICRS frame
-	QList<SkyImageTile*> allSkyImages;
+	class SkyBackgroundElem
+	{
+		public:
+			SkyBackgroundElem(const QString& str);
+			SkyBackgroundElem(SkyImageTile* t) : tile(t), progressBar(NULL) {;}
+			~SkyBackgroundElem();
+			SkyImageTile* tile;
+			QProgressBar* progressBar;
+	};
+	
+	SkyBackgroundElem* skyBackgroundElemForTile(const SkyImageTile*);
+	
+	void addElem(const QString& uri);
+	
+	//! List of the image collection to display, and associated progress bars
+	QList<SkyBackgroundElem*> allSkyImages;
 	
 	// Whether to draw at all
 	bool flagShow;

@@ -43,6 +43,7 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	inScale = 1.;
 	bortleScaleIndex = 3;
 	limitMagnitude = -100.f;
+	limitLuminance = 0;
 	oldLum=-1;
 	setMaxFov(180.f);
 	setMinFov(0.1f);
@@ -142,12 +143,14 @@ void SkyDrawer::update(double deltaTime)
 	
 	// update limit mag
 	limitMagnitude = computeLimitMagnitude();
+	
+	// update limit luminance
+	limitLuminance = computeLimitLuminance();
 }
 
 // Compute the current limit magnitude by dichotomy
 float SkyDrawer::computeLimitMagnitude() const
 {
-	// Compute the current limit magnitude by dichotomy
 	float a=-26.f;
 	float b=30.f;
 	float rcmag[2];
@@ -172,6 +175,39 @@ float SkyDrawer::computeLimitMagnitude() const
 		if (safety>20)
 		{
 			lim=-99;
+			break;
+		}
+	}
+	return lim;
+}
+
+// Compute the current limit luminance by dichotomy
+float SkyDrawer::computeLimitLuminance() const
+{
+	float a=0.f;
+	float b=500000.f;
+	float lim=40.f;
+	int safety=0;
+	float adaptL;
+	while (std::fabs(lim-a)>0.05)
+	{
+		adaptL = eye->adaptLuminanceScaled(lim);
+		if (adaptL<=0.05f) // Object considered not visible if its adapted scaled luminance<0.05
+		{
+			float tmp = lim;
+			lim=(b+lim)/2;
+			a=tmp;
+		}
+		else
+		{
+			float tmp = lim;
+			lim=(a+lim)/2;
+			b=tmp;
+		}
+		++safety;
+		if (safety>30)
+		{
+			lim=500000;
 			break;
 		}
 	}
