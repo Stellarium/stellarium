@@ -402,11 +402,11 @@ QComboBox::down-arrow {
 }
 
 QProgressBar {
-	border: 1px solid rgb(70%,70%,70%,50%);
+	border: 1px solid rgb(40%,40%,50%,50%);
 	border-radius: 2px;
 	background-color: rbg(15%, 16%, 19%, 20%);
 	text-align: center;
-	color: #8f8f8f;
+	color: #6f6f7f;
 }
 
 QProgressBar::chunk {
