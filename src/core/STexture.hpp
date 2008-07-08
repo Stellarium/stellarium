@@ -78,9 +78,8 @@ signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
 	//! or when an error occured and the texture will never be available
 	//! In case of error, you can query what the problem was by calling getErrorMessage()
-	//! @param caller the texture instance which emitted the signal
 	//! @param error is equal to true if an error occured while loading the texture
-	void loadingProcessFinished(STexture* caller, bool error);
+	void loadingProcessFinished(bool error);
 	
 private slots:
 	//! Called when the download for the texture file terminated

@@ -32,6 +32,34 @@
 class QIODevice;
 class StelCore;
 
+//! Contain all the credits for a given server hosting the data
+class ServerCredits
+{
+public:
+	//! Very short credit to display in the loading bar
+	QString shortCredits;
+	
+	//! Full credits
+	QString fullCredits;
+	
+	//! The URL where to get more info about the server
+	QString infoURL;
+};
+
+//! Contains all the credits for the creator of the image collection
+class DataSetCredits
+{
+public:
+	//! Very short credit to display in the loading bar
+	QString shortCredits;
+	
+	//! Full credits
+	QString fullCredits;
+	
+	//! The URL where to get more info about the data collection
+	QString infoURL;
+};
+
 //! Base class for any astro image with a fixed position
 class SkyImageTile : public QObject
 {
@@ -51,14 +79,35 @@ public:
 	//! Draw the image on the screen.
 	void draw(StelCore* core);
 	
+	//! Return the dataset credits to use in the progress bar
+	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
+	
+	//! Return the server credits to use in the progress bar
+	ServerCredits getServerCredits() const {return serverCredits;}
+	
+	//! Return the short name for this image to be used in the loading bar
+	QString getShortName() const {return shortName;}
+	
+signals:
+	//! Emitted when loading of data started or stopped
+	//! @param b true if data loading started, false if finished
+	void loadingStateChanged(bool b);
+	
+	//! Emitted when the percentage of loading tiles/tiles to be displayed changed
+	//! @param percentage the percentage of loaded data
+	void percentLoadedChanged(int percentage);
+		
 private slots:
 	//! Called when the download for the JSON file terminated
 	void downloadFinished();
 	
 	//! Called when the JSON file is loaded
 	void JsonLoadFinished();
-		
+	
 private:
+	//! init the SkyImageTile
+	void initCtor();
+			
 	//! Load the tile information from a JSON file
 	static QVariantMap loadFromJSON(QIODevice& input, bool compressed=false);
 	
@@ -67,10 +116,11 @@ private:
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, StelCore* core, const StelGeom::ConvexPolygon& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
 	
 	//! Draw the image on the screen.
-	void drawTile(StelCore* core);
+	//! @return true if the tile was actually displayed
+	bool drawTile(StelCore* core);
 	
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 	void deleteUnusedTiles(double lastDrawTrigger=2.);
@@ -90,11 +140,14 @@ private:
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
 	
-	// Image credits
-	QString credits;
+	//! The credits of the server where this data come from
+	ServerCredits serverCredits;
 	
-	// Info URL for the image
-	QString infoUrl;
+	//! The credits for the data set
+	DataSetCredits dataSetCredits;
+	
+	//! The very short name for this image set to be used in loading bar
+	QString shortName;
 	
 	// URL where the image is located
 	QString imageUrl;
@@ -147,6 +200,10 @@ private:
 	
 	// The temporary map filled in a thread
 	QVariantMap temporaryResultMap;
+	
+	void updatePercent(int tot, int numToBeLoaded);
+	bool loadingState;
+	int lastPercent;
 	
 #ifdef DEBUG_SKYIMAGE_TILE
 	static class SFont* debugFont;
