@@ -35,7 +35,7 @@
 #include <QThread>
 #include <QAction>
 
-#include "gui/NewGui.hpp"
+#include "gui/StelGui.hpp"
 
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
@@ -101,7 +101,7 @@ void StelMainGraphicsView::init()
 	mainItem->init();
 	setFocus();
 	
-	NewGui* newGui = new NewGui();
+	StelGui* newGui = new StelGui();
 	newGui->init();
 	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
 	
@@ -178,6 +178,6 @@ void StelMainGraphicsView::activateKeyActions(bool b)
 // Add a new progress bar in the lower right corner of the screen.
 class QProgressBar* StelMainGraphicsView::addProgessBar()
 {
-	NewGui* gui = (NewGui*)GETSTELMODULE("NewGui");
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	return gui->addProgessBar();
 }

@@ -31,7 +31,7 @@
 #include "MovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "SkyDrawer.hpp"
-#include "NewGui.hpp"
+#include "StelGui.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -115,7 +115,7 @@ void ConfigurationDialog::createDialogContent()
 
 
 	// Interface tab
-	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
 	assert(newGui);
 	if (newGui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		ui->noSelectedInfoRadio->setChecked(true);
@@ -170,21 +170,21 @@ void ConfigurationDialog::setSphericMirror(bool b)
 
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
 	assert(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(0));
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
-	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
 	assert(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
-	NewGui* newGui = (NewGui*)GETSTELMODULE("NewGui");
+	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
 	assert(newGui);
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::BriefInfo));
 }
