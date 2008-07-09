@@ -135,7 +135,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	}
 
 	// Load the configuration file
-	confSettings = new QSettings(getConfigFilePath(), StelIniFormat);
+	confSettings = new QSettings(getConfigFilePath(), StelIniFormat, this);
 	
 	// Main section
 	QString version = confSettings->value("main/version").toString();

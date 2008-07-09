@@ -35,7 +35,8 @@ class HelpDialog : public StelDialog
 	Q_OBJECT;
 public:
 	HelpDialog();
-
+	~HelpDialog();
+	
 	//! Set a key and description.
 	//!
 	//! @note @a group and @a description must be in English; this function takes

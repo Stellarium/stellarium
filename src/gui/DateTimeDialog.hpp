@@ -30,6 +30,7 @@ class DateTimeDialog : public StelDialog
 	Q_OBJECT;
 public:
 	DateTimeDialog();
+	~DateTimeDialog();
 	double newJd();
 	bool valid(int y, int m, int d, int h, int min, int s);
 	void languageChanged();

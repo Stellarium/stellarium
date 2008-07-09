@@ -44,10 +44,15 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	bortleScaleIndex = 3;
 	limitMagnitude = -100.f;
 	limitLuminance = 0;
-	oldLum=-1;
+	oldLum=-1.f;
+	maxLum = 0.f;
 	setMaxFov(180.f);
 	setMinFov(0.1f);
 	update(0);
+	
+	starAbsoluteScaleF = 1.f;
+	starRelativeScale = 1.f;
+	starLinearScale = 19.569f;
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
@@ -103,6 +108,15 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 
 SkyDrawer::~SkyDrawer()
 {
+	if (verticesGrid)
+		delete[] verticesGrid;
+	verticesGrid = NULL;
+	if (colorGrid)
+		delete[] colorGrid;
+	colorGrid = NULL;
+	if (textureGrid)
+		delete[] textureGrid;
+	textureGrid = NULL;
 }
 
 // Init parameters from config file

@@ -70,6 +70,12 @@ HelpDialog::HelpDialog()
 #endif
 }
 
+HelpDialog::~HelpDialog()
+{
+	delete ui;
+	ui = NULL;
+}
+
 void HelpDialog::languageChanged()
 {
 	if (dialog)
