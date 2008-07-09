@@ -29,107 +29,14 @@
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
 #include "ConfigurationDialog.hpp"
-#include <QGraphicsPixmapItem>
 #include <QDebug>
+#include <QGraphicsItem>
 
 class QGraphicsSceneMouseEvent;
-class QTimeLine;
 class QAction;
 class QGraphicsTextItem;
-class QTimer;
-
-//! Implement a button for use in Stellarium's graphic widgets
-class StelButton : public QObject, public QGraphicsPixmapItem
-{
-	friend class BottomStelBar;
-	
-	Q_OBJECT;
-public:
-	//! Constructor
-	//! @param parent the parent item
-	//! @param pixOn the pixmap to display when the button is toggled
-	//! @param pixOff the pixmap to display when the button is not toggled
-	//! @param pixHover a pixmap slowly blended when mouse is over the button
-	//! @param groupName the name of a button group in which to add the button. If the group doesn't exist, create a new group.
-	//! @param action the associated action. Connections are automatically done with the signals if relevant.
-	//! @param helpLabel the label in which the button will display it's help when hovered
-	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, QGraphicsSimpleTextItem* helpLabel=NULL, bool noBackground=false);
-
-	//! Get whether the button is checked
-	bool isChecked() const {return checked;}
-
-signals:
-	//! Triggered when the button state changes
-	void toggled(bool);
-	//! Triggered when the button state changes
-	void triggered();
-
-public slots:
-	//! set whether the button is checked
-	void setChecked(bool b);
-
-protected:
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-private slots:
-	void animValueChanged(qreal value);	
-private:
-	QPixmap pixOn;
-	QPixmap pixOff;
-	QPixmap pixHover;
-	QPixmap pixBackground;
-	bool checked;
-	QTimeLine* timeLine;
-	QAction* action;
-	QGraphicsSimpleTextItem* helpLabel;
-	bool noBckground;
-};
-
-//! The button bar on the left containing windows toggle buttons
-class LeftStelBar : public QGraphicsItem
-{
-public:
-	LeftStelBar(QGraphicsItem* parent);
-	~LeftStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	virtual QRectF boundingRect() const;
-	void addButton(StelButton* button);
-private:
-	QTimeLine* hideTimeLine;
-};
-
-//! The button bar on the bottom containing actions toggle buttons
-class BottomStelBar : public QGraphicsItem
-{
-public:
-	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	virtual QRectF boundingRect() const;
-	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
-	//! @param b the button to add
-	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
-	void addButton(StelButton* button, const QString& groupName="defaultGroup");
-	//! Remove the button associated with the action of the passed name
-	void removeButton(const QString& actionName);
-	//! Set the color for all the sub elements
-	void setColor(const QColor& c);
-private:
-	void updateText();
-	void updateButtonsGroups();
-	QRectF getButtonsBoundingRect();
-	QGraphicsSimpleTextItem* location;
-	QGraphicsSimpleTextItem* datetime;
-	QGraphicsSimpleTextItem* fov;
-	QGraphicsSimpleTextItem* fps;
-	
-	QMap<QString, QList<StelButton*> > buttonGroups;
-	QPixmap pixBackgroundLeft;
-	QPixmap pixBackgroundRight;
-	QPixmap pixBackgroundMiddle;
-	QPixmap pixBackgroundSingle;
-};
+class QTimeLine;
+class StelButton;
 
 //! The informations about the currently selected object
 class InfoPanel : public QGraphicsItem
@@ -147,34 +54,9 @@ private:
 	StelObject::InfoStringGroup infoTextFilters;
 };
 
-//! The path around the bottom left button bars
-class StelBarsPath : public QGraphicsPathItem
-{
-public:
-	StelBarsPath(QGraphicsItem* parent);
-	void updatePath(BottomStelBar* bot, LeftStelBar* lef);
-	double getRoundSize() const {return roundSize;}
-private:
-	double roundSize;
-};
-
-//! Progess bars in the lower right corner
-class StelProgressBarMgr : public QObject, public QGraphicsItem
-{
-	Q_OBJECT;
-public:
-	StelProgressBarMgr(QGraphicsItem* parent);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	virtual QRectF boundingRect() const;
-	class QProgressBar* addProgressBar();
-private slots:
-	void oneDestroyed(QObject* obj);
-private:
-	void updateBarsPositions();
-};
-
 //! @class NewGui
-//! New GUI based on QGraphicView
+//! Main class for the GUI based on QGraphicView.
+//! It manages the various qt configuration windows, the buttons bars, the list of QAction/shortcuts.
 class NewGui : public StelModule
 {
 	Q_OBJECT;
@@ -188,25 +70,12 @@ public:
 	// Methods defined in the StelModule class
 	//! Initialize the NewGui object.
 	virtual void init();
-	
-	//! Draws
 	virtual void draw(StelCore* core) {;}
-	
-	//! Update state which is time dependent.
 	virtual void update(double deltaTime);
-	
-	//! Update i18 names from English names according to passed translator.
-	//! The translation is done using gettext with translated strings defined 
-	//! in translations.h
 	virtual void updateI18n();
-	
-	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	
 	virtual void glWindowHasBeenResized(int w, int h);
-
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-
 	//! Load color scheme from the given ini file and section name
 	//! @param conf application settings object
 	//! @param section in the application settings object which contains desired color scheme
@@ -240,16 +109,19 @@ public:
 	QAction* getGuiActions(const QString& actionName);
 	
 private slots:
+	//! Update the position of the button bars in the main window
+	void updateBarsPos(qreal value);
+	
 	//! Reload the current Qt Style Sheet (Debug only)
 	void reloadStyle();
 	
 private:
 	void retranslateUi(QWidget *Form);
 	
-	LeftStelBar* winBar;
-	BottomStelBar* buttonBar;
+	class LeftStelBar* winBar;
+	class BottomStelBar* buttonBar;
 	InfoPanel* infoPanel;
-	StelBarsPath* buttonBarPath;
+	class StelBarsPath* buttonBarPath;
 	QGraphicsSimpleTextItem* buttonHelpLabel;
 
 	QTimeLine* animLeftBarTimeLine;
@@ -269,7 +141,7 @@ private:
 	ViewDialog viewDialog;
 	ConfigurationDialog configurationDialog;
 	
-	StelProgressBarMgr* progressBarMgr;
+	class StelProgressBarMgr* progressBarMgr;
 };
 
 #endif // _NEWGUI_HPP_
