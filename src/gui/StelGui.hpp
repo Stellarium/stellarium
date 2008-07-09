@@ -54,21 +54,21 @@ private:
 	StelObject::InfoStringGroup infoTextFilters;
 };
 
-//! @class NewGui
+//! @class StelGui
 //! Main class for the GUI based on QGraphicView.
 //! It manages the various qt configuration windows, the buttons bars, the list of QAction/shortcuts.
-class NewGui : public StelModule
+class StelGui : public StelModule
 {
 	Q_OBJECT;
 public:
 	friend class ViewDialog;
 	
-	NewGui();
-	virtual ~NewGui();
+	StelGui();
+	virtual ~StelGui();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	//! Initialize the NewGui object.
+	//! Initialize the StelGui object.
 	virtual void init();
 	virtual void draw(StelCore* core) {;}
 	virtual void update(double deltaTime);
@@ -82,7 +82,7 @@ public:
 	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Methods specific to the NewGui class
+	// Methods specific to the StelGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 
