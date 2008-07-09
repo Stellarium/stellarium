@@ -1039,10 +1039,6 @@ bool NewGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 	return false;
 }
 
-void NewGui::updateBarsPos(qreal value)
-{
-	glWindowHasBeenResized(StelMainGraphicsView::getInstance().size().width(), StelMainGraphicsView::getInstance().size().height());
-}
 
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
@@ -1072,8 +1068,10 @@ QAction* NewGui::getGuiActions(const QString& actionName)
 {
 	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
 	if (!a)
+	{
 		qWarning() << "Can't find action " << actionName;
-	Q_ASSERT(a);
+		return NULL;
+	}
 	return a;
 }
 
