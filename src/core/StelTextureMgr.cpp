@@ -942,6 +942,8 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 	return true;
 }
 
+// Multithread memory pool for textures loading
+// TODO free at the end
 QMultiMap<size_t, void*> TexMalloc::cache;
 QMap<void*, size_t> TexMalloc::newInsert;
 QMutex TexMalloc::mutex;

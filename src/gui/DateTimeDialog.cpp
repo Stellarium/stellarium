@@ -45,6 +45,12 @@ DateTimeDialog::DateTimeDialog() :
 	ui = new Ui_dateTimeDialogForm;
 }
 
+DateTimeDialog::~DateTimeDialog()
+{
+	delete ui;
+	ui=NULL;
+}
+
 void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
