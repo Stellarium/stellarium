@@ -1,163 +1,202 @@
 # Hungarian translation for Stellarium.
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Stellarium package.
-# András Mohari <mayday@vizslamail.hu>, 2005-2007.
+# András Mohari <andras.mohari@gmail.com>, 2005-2008.
 # István Dudás <devereaux@freemail.hu>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Stellarium 0.9.0\n"
+"Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-28 14:11+0200\n"
-"PO-Revision-Date: 2008-01-14 18:23+0000\n"
-"Last-Translator: András Mohari <mayday@vizslamail.hu>\n"
-"Language-Team: Hungarian\n"
+"POT-Creation-Date: 2008-07-09 09:35+0200\n"
+"PO-Revision-Date: 2008-07-01 10:05+0000\n"
+"Last-Translator: András Mohari <andras.mohari@gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-16 21:49+0000\n"
+"X-Launchpad-Export-Date: 2008-07-09 07:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-Language: Hungarian\n"
 
-#: src/modules/LandscapeMgr.cpp:433
+#: src/gui/NewGui.cpp:238
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1 m"
+
+#: src/modules/LandscapeMgr.cpp:441
 #, qt-format
 msgid ", %1 m"
-msgstr ""
+msgstr ", %1 m"
 
-#: src/gui/NewGui.cpp:219
-#, c-format, qt-format
-msgid ", %1m"
-msgstr ""
+#: src/ui_viewDialog.h:860
+msgid "0"
+msgstr "0"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:861
 msgid "10"
-msgstr ""
+msgstr "10"
 
-#: src/ui_viewDialog.h:1060
-#, fuzzy
+#: src/ui_viewDialog.h:863
 msgid "10000"
-msgstr "J2000"
+msgstr "10000"
 
-#: src/ui_viewDialog.h:1061
+#: src/ui_viewDialog.h:864
 msgid "144000"
-msgstr ""
+msgstr "144000"
 
-#: src/ui_viewDialog.h:1059
+#: src/ui_viewDialog.h:862
 msgid "80"
-msgstr ""
+msgstr "80"
 
-#: src/modules/TextUI.cpp:93
+#: src/ui_viewDialog.h:865
+msgid "<small><i>Normal rate</i></small>"
+msgstr "<small><i>Normál gyakoriság</i></small>"
+
+#: src/ui_viewDialog.h:848
+msgid "Absolute scale:"
+msgstr "Abszolút méret:"
+
+#: src/modules/TextUI.cpp:86
 msgid "Actual Time"
 msgstr "Idő"
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:487
 msgid "Add 1 sidereal day"
-msgstr ""
+msgstr "1 csillagnappal előre"
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:489
 msgid "Add 1 sidereal week"
-msgstr ""
+msgstr "7 csillagnappal előre"
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:483
 msgid "Add 1 solar day"
-msgstr ""
+msgstr "1 szoláris nappal előre"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:481
 msgid "Add 1 solar hour"
-msgstr ""
+msgstr "1 szoláris órával előre"
 
-#: src/gui/NewGui.cpp:428
+#: src/gui/NewGui.cpp:485
 msgid "Add 1 solar week"
-msgstr ""
+msgstr "7 szoláris nappal előre"
 
-#: src/modules/TextUI.cpp:77
+#: src/modules/TextUI.cpp:70
 msgid "Administration "
 msgstr "Adminisztráció "
 
-#: src/modules/TextUI.cpp:82
+#: src/ui_configurationDialog.h:561
+msgid "Align labels with the horizon"
+msgstr "A feliratok látóhatárhoz igazítása"
+
+#: src/ui_configurationDialog.h:512
+msgid "All availalable information"
+msgstr "Minden adat"
+
+#: src/ui_configurationDialog.h:523
+msgid "Allow keyboard to pan and zoom"
+msgstr ""
+
+#: src/ui_configurationDialog.h:529
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+
+#: src/modules/TextUI.cpp:75
 msgid "Altitude (m): "
 msgstr "Magasság (m): "
 
 #: src/ui_locationDialogGui.h:341
-#, fuzzy
 msgid "Altitude:"
-msgstr "Magasság: "
+msgstr "Magasság:"
 
-#: src/ui_viewDialog.h:1068
-msgid "Amount:"
-msgstr ""
+#: src/modules/Planet.cpp:158
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "Látszó átmérő: %1"
 
-#: src/modules/TextUI.cpp:143
+#: src/modules/TextUI.cpp:136
 msgid "Arrow down to load list."
 msgstr "Lista betöltése a \"le\" nyílbillentyűvel."
 
-#: src/gui/HelpDialog.cpp:50
+#: src/gui/HelpDialog.cpp:54
 msgid "Arrow keys & left mouse drag"
-msgstr ""
+msgstr "Nyílbillentyűk és bal egérgombbal húzás"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:883
 msgid "Art brightness: "
-msgstr ""
+msgstr "Ábrák fényessége: "
 
-#: src/modules/LandscapeMgr.cpp:425
+#: src/gui/NewGui.cpp:455
+msgid "Atmosphere"
+msgstr "Légkör"
+
+#: src/modules/LandscapeMgr.cpp:433
 msgid "Author: "
 msgstr "Szerző: "
 
-#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
-#, fuzzy, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "A/h: "
-
-#: src/ui_viewDialog.h:1081
+#: src/ui_configurationDialog.h:576
 #, fuzzy
+msgid "Auto zoom out key sets initial direction of view"
+msgstr "Automatikus kicsinyítéskor visszaáll az eredeti látóirány"
+
+#: src/modules/Nebula.cpp:114 src/modules/Planet.cpp:148
+#: src/modules/StarWrapper.cpp:65 src/modules/StarWrapper.cpp:156
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "A/h: %1/%2"
+
+#: src/gui/NewGui.cpp:446 src/ui_viewDialog.h:871
 msgid "Azimutal grid"
 msgstr "Horizontális rács"
 
-#: src/modules/TextUI.cpp:120
-#, fuzzy
+#: src/modules/TextUI.cpp:113
 msgid "Azimuthal Grid"
 msgstr "Horizontális rács"
 
-#: src/modules/TextUI.cpp:141
+#: src/modules/TextUI.cpp:134
 msgid "CD/DVD Script: "
-msgstr "CD-/DVD-parancsfájl: "
+msgstr "CD/DVD-parancsfájlok: "
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:59
 msgid "CTRL + Left click"
-msgstr ""
+msgstr "CTRL + bal kattintás"
 
-#: src/gui/HelpDialog.cpp:52
+#: src/gui/HelpDialog.cpp:56
 msgid "CTRL + Up/Down"
-msgstr ""
+msgstr "CTRL + fel/le"
 
 # XXX [mayday]: Úgy mint "Day keys: Calendar". Jobbe lenne a "Calendar Day"...
-#: src/modules/TextUI.cpp:89
-#, fuzzy
+#: src/modules/TextUI.cpp:82
 msgid "Calendar"
-msgstr "Naptári"
+msgstr "Naptár"
 
 #: src/translations.h:45
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/modules/TextUI.cpp:115
-#, fuzzy
+#: src/modules/TextUI.cpp:108
 msgid "Cardinal Points"
-msgstr "Égtájak: "
+msgstr "Égtájak"
 
-#: src/ui_viewDialog.h:1086
-#, fuzzy
+#: src/gui/NewGui.cpp:452 src/ui_viewDialog.h:876
 msgid "Cardinal points"
-msgstr "Égtájak: "
+msgstr "Égtájak"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:869
 msgid "Celestial Sphere"
-msgstr ""
+msgstr "Éggömb"
 
-#: src/gui/NewGui.cpp:436
-#, fuzzy
+#: src/gui/NewGui.cpp:493
 msgid "Center on selected object"
-msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
+msgstr "A kijelölt égitest középre igazítása"
+
+#: src/ui_configurationDialog.h:548
+msgid ""
+"Changes the way Stellarium renders the sky to look more like astronomical "
+"charts (i.e. sky is white, objects are dark)."
+msgstr ""
+"A Stellarium nagyjából úgy jeleníti meg az eget, ahogyan a csillagászati "
+"térképek (vagyis az ég fehér, az égitestek sötétek)."
 
 #: src/translations.h:59
 msgid "Charon"
@@ -167,112 +206,143 @@ msgstr "Charon"
 msgid "Chinese"
 msgstr "Kínai"
 
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:67 src/gui/HelpDialog.cpp:69
 msgid "Clear selection"
-msgstr ""
+msgstr "Kijelölés törlése"
 
-#: src/modules/Nebula.cpp:276
+#: src/modules/Nebula.cpp:279
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "Köd csillaghalmazzal"
 
-#: src/modules/TextUI.cpp:74
+#: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Színek "
 
-#: src/ui_configurationDialog.h:136
+#: src/ui_configurationDialog.h:457
 msgid "Configuration"
 msgstr "Beállítások"
 
-#: src/modules/TextUI.cpp:113
+#: src/gui/NewGui.cpp:470
+msgid "Configuration window"
+msgstr "Beállítások ablak"
+
+#: src/modules/TextUI.cpp:106
 msgid "Constellation Art Intensity"
 msgstr "Csillagképek ábráinak intenzitása"
 
-#: src/modules/TextUI.cpp:114
-#, fuzzy
+#: src/modules/TextUI.cpp:107
 msgid "Constellation Boundaries"
 msgstr "Csillagképek határai"
 
-#: src/modules/TextUI.cpp:111
-#, fuzzy
+#: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
 msgstr "Csillagképek vonalai"
 
-#: src/modules/TextUI.cpp:112
+#: src/modules/TextUI.cpp:105
 msgid "Constellation Names"
 msgstr "Csillagképek nevei"
 
-#: src/ui_viewDialog.h:1088
-#, fuzzy
+#: src/gui/NewGui.cpp:442
+msgid "Constellation art"
+msgstr "Csillagképek ábrái"
+
+#: src/gui/NewGui.cpp:444
+msgid "Constellation boundaries"
+msgstr "Csillagképek határai"
+
+#: src/gui/NewGui.cpp:443
+msgid "Constellation labels"
+msgstr "Csillagképek nevei"
+
+#: src/gui/NewGui.cpp:441
+msgid "Constellation lines"
+msgstr "Csillagképek vonalai"
+
+#: src/ui_viewDialog.h:878
 msgid "Constellations"
-msgstr "Csillagkép"
+msgstr "Csillagképek"
 
-#: src/modules/TextUI.cpp:137
+#: src/modules/TextUI.cpp:130
 msgid "Correct for light travel time: "
-msgstr ""
+msgstr "Fénysebesség figyelembevétele: "
 
-#: src/modules/TextUI.cpp:136
+#: src/modules/TextUI.cpp:129
 msgid "Cursor Timeout: "
 msgstr "Egérmutató elrejtési ideje: "
 
 #: src/ui_locationDialogGui.h:325
-#, fuzzy
 msgid "Cursor:"
-msgstr "Kurzor: "
+msgstr "Mutató:"
 
 # XXX [mayday]: Úgy mint "Day keys: Calendar". Jobbe lenne a "Calendar Day"...
 #: src/core/MappingClasses.cpp:223
-#, fuzzy
 msgid "Cylinder"
-msgstr "Naptári"
+msgstr "Henger"
 
-#: src/modules/TextUI.cpp:96
+#: src/gui/NewGui.cpp:459
+msgid "DSS"
+msgstr "DSS"
+
+#: src/modules/TextUI.cpp:89
 msgid "Date Display Format: "
 msgstr "Dátumformátum: "
 
-#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
-#, fuzzy
+#: src/gui/NewGui.cpp:476 src/ui_dateTimeDialogGui.h:180
 msgid "Date and Time"
 msgstr "Dátum és idő"
 
-#: src/modules/TextUI.cpp:88
+#: src/gui/NewGui.cpp:473
+msgid "Date/time window"
+msgstr "Dátum és idő ablak"
+
+#: src/modules/TextUI.cpp:81
 msgid "Day keys: "
 msgstr "Napléptető billentyűk: "
 
-#: src/gui/NewGui.cpp:420
-#, fuzzy
+#: src/gui/NewGui.cpp:477
 msgid "Decrease time speed"
-msgstr "Idő lassítása [J]"
+msgstr "Idő lassítása"
 
 #: src/translations.h:39
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Dialogs"
-msgstr "Kutyák"
+#: src/ui_viewDialog.h:853
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "A halvány csillagok elhalványulnak egy nagyon fényes égitest mellett"
 
 #: src/translations.h:50
 msgid "Dione"
 msgstr "Dione"
 
-#: src/gui/NewGui.cpp:383
-#, fuzzy
+#: src/ui_configurationDialog.h:570
+msgid "Disc viewport"
+msgstr "Kör alakú látómező"
+
+#: src/gui/NewGui.cpp:440
 msgid "Display Options"
-msgstr "Orion"
+msgstr "Megjelenítés beállításai"
 
-#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
-#, fuzzy, qt-format
+#: src/ui_configurationDialog.h:509
+msgid "Display all of the information which is available"
+msgstr "Minden lehetséges adat megjelenik"
+
+#: src/ui_configurationDialog.h:515
+msgid "Display only abbreviated information"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:165
+#, qt-format
 msgid "Distance: %1 Light Years"
-msgstr " fényév"
+msgstr "Távolság: %1 fényév"
 
-#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
-#, fuzzy, c-format, qt-format
+#: src/modules/Planet.cpp:154
+#, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Távolság: "
+msgstr "Távolság: %1 CSE"
 
-#: src/ui_viewDialog.h:1052
-msgid "Download images"
+#: src/ui_viewDialog.h:856
+msgid "Dynamic eye adaptation"
 msgstr ""
 
 #: src/translations.h:65
@@ -283,17 +353,15 @@ msgstr "K"
 msgid "Earth"
 msgstr "Föld"
 
-#: src/modules/TextUI.cpp:123
-#, fuzzy
+#: src/modules/TextUI.cpp:116
 msgid "Ecliptic Line"
 msgstr "Ekliptika vonala"
 
-#: src/ui_viewDialog.h:1080
-#, fuzzy
+#: src/gui/NewGui.cpp:449 src/ui_viewDialog.h:870
 msgid "Ecliptic line"
 msgstr "Ekliptika vonala"
 
-#: src/modules/TextUI.cpp:75
+#: src/modules/TextUI.cpp:68
 msgid "Effects "
 msgstr "Effektusok "
 
@@ -301,47 +369,62 @@ msgstr "Effektusok "
 msgid "Egyptian"
 msgstr "Egyiptomi"
 
+#: src/ui_configurationDialog.h:526
+msgid "Enable keyboard navigation"
+msgstr "Billentyűnavigáció engedélyezése"
+
+#: src/ui_configurationDialog.h:532
+msgid "Enable mouse navigation"
+msgstr "Egérnavigáció engedélyezése"
+
+#: src/ui_configurationDialog.h:542
+msgid ""
+"Enables/disables night vision mode.  Night vision mode changes the "
+"appearance of Stellarium's user interface to use red light only - this helps "
+"to preserve the dark adaptation of the eye."
+msgstr ""
+"Ki-be kapcsolja az éjszakai módot. Éjszakai módban a felhasználói felület "
+"vörösben jelenik meg, így nem zavarja a sötéthez szokott szemet."
+
+#: src/ui_configurationDialog.h:536
+msgid ""
+"Enables/disables toolbar buttons for flipping the displayed image in the "
+"vertical and horizontal axes.   Useful for users of telescopes which flip "
+"the image of the object being observed."
+msgstr ""
+"Ki-be kapcsolja a kép függőleges és vízszintes tükrözését végző gombokat az "
+"eszköztáron. Hasznos a fordított állású képet adó távcsövek tulajdonosai "
+"számára."
+
 #: src/translations.h:48
 msgid "Enceladus"
 msgstr "Enceladus"
 
 #: src/ui_locationDialogGui.h:344
 msgid "Enter the altitude in meter"
-msgstr ""
-
-# XXX [mayday]: "equinox of date", a pillanatnyi ephocha. Vagyis az égi egyenlítő és a tavaszpont pillanatnyi helyére vonatkoznak az RA/D koordináták.
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
-#: src/modules/Telescope.cpp:245
-#, fuzzy, qt-format
-msgid "Equ of date RA/DE: %1/%2"
-msgstr "Pill. epocha"
+msgstr "Add meg a magasságot méterben"
 
 #: src/core/MappingClasses.cpp:77
 msgid "Equal Area"
-msgstr ""
+msgstr "Területtartó"
 
-#: src/modules/TextUI.cpp:122
-#, fuzzy
+#: src/modules/TextUI.cpp:115
 msgid "Equator Line"
 msgstr "Egyenlítő vonala"
 
-#: src/ui_viewDialog.h:1084
-#, fuzzy
+#: src/gui/NewGui.cpp:450 src/ui_viewDialog.h:874
 msgid "Equator line"
 msgstr "Egyenlítő vonala"
 
-#: src/modules/TextUI.cpp:121
-#, fuzzy
+#: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
 msgstr "Egyenlítői rács"
 
-#: src/ui_viewDialog.h:1085
-#, fuzzy
+#: src/gui/NewGui.cpp:448 src/ui_viewDialog.h:875
 msgid "Equatorial J2000 grid"
-msgstr "Egyenlítői rács"
+msgstr "Egyenlítői rács (J2000)"
 
-#: src/ui_viewDialog.h:1083
-#, fuzzy
+#: src/gui/NewGui.cpp:447 src/ui_viewDialog.h:873
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
 
@@ -349,74 +432,100 @@ msgstr "Egyenlítői rács"
 msgid "Europa"
 msgstr "Europa"
 
-#: src/gui/ViewDialog.cpp:340
-#, fuzzy
+#: src/gui/ViewDialog.cpp:365
 msgid "Exceptional Leonid rate"
-msgstr ": Rendkívüli Leonida-gyakoriság"
+msgstr "Rendkívüli Leonida-gyakoriság"
 
-#: src/ui_searchDialogGui.h:141 src/ui_searchDialogGui.h:142
+#: src/ui_searchDialogGui.h:185 src/ui_searchDialogGui.h:186
 msgid "Find Object"
-msgstr ""
+msgstr "Égitest keresése"
 
 #: src/core/MappingClasses.cpp:178
 msgid "Fish-eye"
-msgstr ""
+msgstr "Halszem"
 
-#: src/gui/NewGui.cpp:408
+#: src/gui/NewGui.cpp:465
 msgid "Flip scene horizontally"
-msgstr ""
+msgstr "Kép tükrözése vízszintesen"
 
-#: src/gui/NewGui.cpp:409
+#: src/gui/NewGui.cpp:466
 msgid "Flip scene vertically"
-msgstr ""
+msgstr "Kép tükrözése függőlegesen"
 
-#: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
-#: src/ui_configurationDialog.h:134
-#, fuzzy
+#: src/gui/NewGui.cpp:456
+msgid "Fog"
+msgstr "Köd"
+
+#: src/ui_dateTimeDialogGui.h:179 src/ui_helpDialogGui.h:163
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:837
+#: src/ui_configurationDialog.h:456
 msgid "Form"
-msgstr "Gázló"
+msgstr "Űrlap"
 
-#: src/gui/HelpDialog.cpp:128
+#: src/gui/NewGui.cpp:464
+msgid "Full-screen mode"
+msgstr "Teljes képernyős mód"
+
+#: src/gui/HelpDialog.cpp:134
 msgid "Further Reading"
-msgstr ""
+msgstr "További olvasmányok"
 
-#: src/modules/Nebula.cpp:261
+#: src/modules/Nebula.cpp:264
 msgid "Galaxy"
-msgstr ""
+msgstr "Galaxis"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ganymede"
 
-#: src/modules/TextUI.cpp:72
+#: src/modules/TextUI.cpp:65
 msgid "General "
 msgstr "Általános "
 
-#: src/modules/Nebula.cpp:267
+#: src/modules/Nebula.cpp:270
 msgid "Globular cluster"
-msgstr ""
+msgstr "Gömbhalmaz"
 
-#: src/ui_searchDialogGui.h:156
+#: src/ui_searchDialogGui.h:189
 msgid "Go"
-msgstr ""
+msgstr "Ugrás"
 
-#: src/ui_helpDialogGui.h:152
+#: src/ui_configurationDialog.h:564
+msgid "Gravity labels"
+msgstr "Gravitációs címkék"
+
+#: src/gui/NewGui.cpp:454
+msgid "Ground"
+msgstr "Felszín"
+
+#: src/ui_helpDialogGui.h:164
 msgid "Help"
 msgstr "Súgó"
 
-#: src/gui/ViewDialog.cpp:343
-#, fuzzy
-msgid "Highest rate ever (1966 Leonids)"
-msgstr ": Az eddigi csúcs (1966, Leonidák)"
+#: src/gui/NewGui.cpp:469
+msgid "Help window"
+msgstr "Súgóablak"
 
-# XXX [mayday]: A "Meteorok zenitre redukált gyakorisága" sajnos túl hosszú -- miatta nem fér ki az utána következő szöveg az ablakban.
-#: src/ui_viewDialog.h:1056
-#, fuzzy
+#: src/ui_configurationDialog.h:502
+msgid "Hides the mouse cursor when inactive"
+msgstr "Elrejti az egérmutatót, ha nem mozog"
+
+#: src/gui/ViewDialog.cpp:368
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "Az eddigi csúcs (1966-os Leonidák)"
+
+#: src/modules/StarWrapper.cpp:57 src/modules/StarWrapper.cpp:147
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Óraszög, D: %1, %2"
+
+#: src/ui_viewDialog.h:858
 msgid ""
 "Hourly\n"
-"zenith rate"
-msgstr "Meteorok gyakorisága (ZHR)"
+"zenith rate:"
+msgstr ""
+"Zenitre redukált\n"
+"óránkénti darabszám:"
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -433,105 +542,114 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+"Halszem vetületben &ndash; más néven <i>azimutális távolságtartó vetület</i> "
+"&ndash; a látómező közepétől nagy szögtávolságra levő egyenesek görbéknek "
+"látszanak (a torzítás hasonló a nagylátószögű lencséknél tapasztalhatóhoz)."
 
-#: src/gui/NewGui.cpp:421
-#, fuzzy
+#: src/gui/NewGui.cpp:478
 msgid "Increase time speed"
-msgstr "Idő gyorsítása [L]"
+msgstr "Idő gyorsítása"
+
+#: src/ui_configurationDialog.h:491
+msgid "Initial direction of view:"
+msgstr "Kezdeti látóirány:"
+
+#: src/ui_configurationDialog.h:485
+msgid "Initial field of view:"
+msgstr "Kezdeti látószög:"
+
+#: src/ui_configurationDialog.h:533
+msgid "Interface"
+msgstr "Felület"
+
+#: src/ui_configurationDialog.h:499
+msgid "Interface style:"
+msgstr "Felület stílusa:"
 
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Inuit"
 
+#: src/ui_configurationDialog.h:551
+msgid "Inverted color mode"
+msgstr "Invertált színek"
+
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
-
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
-#: src/modules/Telescope.cpp:242
-#, qt-format
-msgid "J2000 RA/DE: %1/%2"
-msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: src/gui/HelpDialog.cpp:120
-#, fuzzy
+#: src/gui/HelpDialog.cpp:126
 msgid "Keys"
-msgstr "Tethys"
+msgstr "Billentyűk"
 
 #: src/translations.h:72
 msgid "Korean"
 msgstr "Koreai"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:885
 msgid "Labels and Markers"
-msgstr ""
+msgstr "Címkék és jelölések"
 
 #: src/translations.h:73
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/ui_viewDialog.h:1077
-#, fuzzy
+#: src/ui_viewDialog.h:897
 msgid "Landscape"
-msgstr "Tájképek"
+msgstr "Tájkép"
 
-#: src/modules/TextUI.cpp:129
+#: src/modules/TextUI.cpp:122
 msgid "Landscape: "
 msgstr "Tájkép: "
 
 #: src/ui_locationDialogGui.h:335
-#, fuzzy
 msgid "Latitude:"
-msgstr "Szélesség: "
+msgstr "Szélesség:"
 
-#: src/modules/TextUI.cpp:80
+#: src/modules/TextUI.cpp:73
 msgid "Latitude: "
 msgstr "Szélesség: "
 
-#: src/gui/HelpDialog.cpp:53
-#, fuzzy
+#: src/gui/HelpDialog.cpp:57
 msgid "Left click"
-msgstr "Bal Zászló"
+msgstr "Bal kattintás"
 
-#: src/modules/TextUI.cpp:128
-#, fuzzy
+#: src/modules/TextUI.cpp:121
 msgid "Light Pollution Luminance: "
 msgstr "Fényszennyezés erőssége: "
 
-#: src/ui_viewDialog.h:1075
-#, fuzzy
+#: src/ui_viewDialog.h:895
 msgid "Light pollution:"
-msgstr "Fényszennyezés erőssége: "
+msgstr "Fényszennyezés:"
 
-#: src/modules/TextUI.cpp:108
-#, fuzzy
+#: src/modules/TextUI.cpp:101
 msgid "Limiting Magnitude: "
-msgstr "Fényesség: "
+msgstr "Fényességkorlát: "
 
-#: src/modules/TextUI.cpp:147
+#: src/modules/TextUI.cpp:140
 msgid "Load Default Configuration: "
 msgstr "Alapkonfiguráció betöltése: "
 
 #: src/modules/ConstellationMgr.cpp:371
-#, fuzzy, qt-format
+#, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr "Csillagképek ábráinak betöltése: "
+msgstr "Csillagképek ábráinak betöltése: %2/%1"
 
-#: src/modules/NebulaMgr.cpp:372
-#, fuzzy, qt-format
+#: src/modules/NebulaMgr.cpp:367
+#, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "NGC-katalógus betöltése: "
+msgstr "NGC-katalógus betöltése: %2/%1"
 
 #: src/modules/StarMgr.cpp:253
-#, fuzzy, qt-format
+#, qt-format
 msgid "Loading catalog %1"
-msgstr "Katalógus betöltése: "
+msgstr "Katalógus betöltése: %1"
 
-#: src/modules/TextUI.cpp:140
+#: src/modules/TextUI.cpp:133
 msgid "Local Script: "
 msgstr "Helyi parancsfájl: "
 
@@ -539,101 +657,91 @@ msgstr "Helyi parancsfájl: "
 msgid "Location"
 msgstr "Hely"
 
-#: src/modules/LandscapeMgr.cpp:428
+#: src/gui/NewGui.cpp:474
+msgid "Location window"
+msgstr "Hely ablak"
+
+#: src/modules/LandscapeMgr.cpp:436
 msgid "Location: "
 msgstr "Hely: "
 
 #: src/ui_locationDialogGui.h:329
-#, fuzzy
 msgid "Longitude:"
-msgstr "Hosszúság: "
+msgstr "Hosszúság:"
 
-#: src/modules/TextUI.cpp:81
+#: src/modules/TextUI.cpp:74
 msgid "Longitude: "
 msgstr "Hosszúság: "
 
 # XXX [mayday]: A csillagok méretét szabályozza a fényességük alapján.
-#: src/modules/TextUI.cpp:132
+#: src/modules/TextUI.cpp:125
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Fényességalapú méretezés szorzója: "
 
 # XXX [mayday]: A csillagok méretét szabályozza a fényességük alapján.
-#: src/modules/TextUI.cpp:105
-#, fuzzy
+#: src/modules/TextUI.cpp:98
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Fényességalapú méretezés szorzója: "
 
-#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
-#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
-#, fuzzy, qt-format
-msgid "Magnitude: %1"
-msgstr "Fényesség: "
-
-#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
-#, fuzzy, qt-format
+#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:133
+#, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Fényesség: "
+msgstr "Fényesség: <b>%1</b>"
 
-#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
-#, fuzzy, qt-format
+#: src/modules/StarWrapper.cpp:51 src/modules/StarWrapper.cpp:135
+#, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Fényesség: "
+msgstr "Fényesség: <b>%1</b> (B-V: %2)"
 
-#: src/ui_configurationDialog.h:150
-#, fuzzy
+#: src/ui_configurationDialog.h:498
 msgid "Main"
-msgstr "Hajógerinc"
+msgstr "Általános"
 
-#: src/modules/TextUI.cpp:130
+#: src/modules/TextUI.cpp:123
 msgid "Manual zoom: "
 msgstr "Kézi nagyítás: "
 
-#: src/ui_viewDialog.h:1095
-#, fuzzy
+#: src/ui_viewDialog.h:889
 msgid "Markings"
-msgstr "Hajógerinc"
+msgstr "Jelölések"
 
 #: src/translations.h:38
 msgid "Mars"
 msgstr "Mars"
 
+#: src/ui_configurationDialog.h:567
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "A kép közepén levő körön kívül minden ki lesz takarva"
+
 #: src/core/Mapping.cpp:28
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "Legnagyobb látószög: "
 
-#: src/modules/TextUI.cpp:106
+#: src/modules/TextUI.cpp:99
 msgid "Maximum Magnitude to Label: "
 msgstr "Maximális magnitúdó a címkézéshez: "
 
-#: src/modules/TextUI.cpp:134
+#: src/modules/TextUI.cpp:127
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Maximális magnitúdó a ködök címkézéséhez: "
 
 #: src/core/MappingClasses.cpp:278
-#, fuzzy
 msgid "Mercator"
-msgstr "Merkúr"
-
-#: src/core/MappingClasses.cpp:283
-#, fuzzy
-msgid "Mercator projection"
-msgstr "Vetület:"
+msgstr "Mercator"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Merkúr"
 
-#: src/modules/TextUI.cpp:119
-#, fuzzy
+#: src/modules/TextUI.cpp:112
 msgid "Meridian Line"
-msgstr "Meridián vonala"
+msgstr "Meridiánvonal"
 
-#: src/ui_viewDialog.h:1082
-#, fuzzy
+#: src/gui/NewGui.cpp:451 src/ui_viewDialog.h:872
 msgid "Meridian line"
-msgstr "Meridián vonala"
+msgstr "Meridiánvonal"
 
-#: src/modules/TextUI.cpp:133
+#: src/modules/TextUI.cpp:126
 msgid "Milky Way intensity: "
 msgstr "Tejút intenzitása: "
 
@@ -641,18 +749,22 @@ msgstr "Tejút intenzitása: "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
-#, fuzzy
-msgid "Misc"
-msgstr "Mimas"
+#: src/gui/HelpDialog.cpp:201 src/gui/HelpDialog.cpp:257
+#: src/gui/HelpDialog.cpp:259 src/gui/NewGui.cpp:499
+msgid "Miscellaneous"
+msgstr "Egyebek"
 
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Hold"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
+#: src/ui_configurationDialog.h:505
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Egérmutató elrejtési ideje (másodperc):"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/NewGui.cpp:492
 msgid "Movement and Selection"
-msgstr ""
+msgstr "Mozgás és kijelölés"
 
 #: src/translations.h:63
 msgid "N"
@@ -662,87 +774,110 @@ msgstr "É"
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/modules/Nebula.cpp:270
-#, fuzzy
-msgid "Nebula"
-msgstr "Ködök [N]"
+#: src/ui_configurationDialog.h:520
+msgid "Navigation"
+msgstr "Navigáció"
 
-#: src/modules/TextUI.cpp:125
+#: src/modules/Nebula.cpp:273
+msgid "Nebula"
+msgstr "Csillagköd"
+
+#: src/modules/TextUI.cpp:118
 msgid "Nebula Circles"
 msgstr "Ködök jelzőkörei"
 
-#: src/modules/TextUI.cpp:124
+#: src/modules/TextUI.cpp:117
 msgid "Nebula Names"
 msgstr "Ködök nevei"
 
-#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
-#, fuzzy
+#: src/gui/NewGui.cpp:458 src/ui_viewDialog.h:886
 msgid "Nebulas"
-msgstr "Ködök [N]"
+msgstr "Csillagködök"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "Neptunusz"
 
-#: src/gui/ViewDialog.cpp:285
-msgid "No description"
-msgstr ""
+#: src/gui/NewGui.cpp:463
+msgid "Night mode"
+msgstr "Éjszakai mód"
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
-#, fuzzy
+#: src/ui_configurationDialog.h:545
+msgid "Night vision mode"
+msgstr "Éjszakai mód"
+
+#: src/gui/ViewDialog.cpp:298
+msgid "No description"
+msgstr "Nincs leírás"
+
+#: src/gui/ViewDialog.cpp:356
+msgid "No shooting stars"
+msgstr "Nincsenek hullócsillagok"
+
+#: src/ui_configurationDialog.h:519
+msgid "None"
+msgstr "Egyik sem"
+
+#: src/gui/ViewDialog.cpp:359
 msgid "Normal rate"
-msgstr ": Normál gyakoriság"
+msgstr "Normál gyakoriság"
 
 #: src/translations.h:75
 msgid "Norse"
 msgstr "Norvég"
 
-#: src/modules/TextUI.cpp:131
+#: src/modules/TextUI.cpp:124
 msgid "Object Sizing Rule: "
 msgstr "Égitestek méretezési módja: "
 
-#: src/modules/Nebula.cpp:264
+#: src/modules/Nebula.cpp:267
 msgid "Open cluster"
-msgstr ""
+msgstr "Nyílthalmaz"
 
-#: src/ui_viewDialog.h:1071
-#, fuzzy
+#: src/ui_viewDialog.h:891
 msgid "Options"
-msgstr "Orion"
+msgstr "Beállítások"
 
 #: src/core/MappingClasses.cpp:336
 msgid "Orthographic"
-msgstr ""
+msgstr "Ortografikus"
 
 #: src/core/MappingClasses.cpp:341
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
+"Az ortografikus vetület a perspektivikus vetülettel rokon, de a vetítési "
+"középpont a végtelenben van."
 
-#: src/gui/HelpDialog.cpp:51
+#: src/ui_configurationDialog.h:483
+msgid "Other:"
+msgstr "Egyéb:"
+
+#: src/gui/HelpDialog.cpp:55
 msgid "Page Up/Down"
-msgstr ""
+msgstr "Page Up, Page Down"
 
-#: src/gui/HelpDialog.cpp:59
+#: src/gui/HelpDialog.cpp:63
 msgid "Pan view around the sky"
-msgstr ""
+msgstr "Körbenézés az égen"
 
-#: src/modules/StarWrapper.cpp:125
-#, fuzzy, qt-format
+#: src/modules/StarWrapper.cpp:168
+#, qt-format
 msgid "Parallax: %1"
-msgstr "Parallaxis: "
+msgstr "Parallaxis: %1"
 
 #: src/core/MappingClasses.cpp:11
-#, fuzzy
 msgid "Perspective"
-msgstr "Előre beállított idő"
+msgstr "Perspektivikus"
 
 #: src/core/MappingClasses.cpp:16
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektivikus vetületben a látóhatár mindig egyenes. E vetítési mód a "
+"matematikában <i>gnomonikus vetület</i> néven ismeretes."
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -752,95 +887,102 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/modules/TextUI.cpp:116
+#: src/modules/TextUI.cpp:109
 msgid "Planet Names"
 msgstr "Bolygók nevei"
 
-#: src/modules/TextUI.cpp:117
-#, fuzzy
+#: src/modules/TextUI.cpp:110
 msgid "Planet Orbits"
-msgstr "Bolygónyomok"
+msgstr "Bolygópályák"
 
-#: src/modules/TextUI.cpp:118
+#: src/modules/TextUI.cpp:111
 msgid "Planet Trails"
-msgstr "Bolygónyomok"
+msgstr "Bolygók nyomvonalai"
 
-#: src/modules/Nebula.cpp:273
-#, fuzzy
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr "Bolygó: "
+
+#: src/ui_configurationDialog.h:577
+msgid "Planetarium"
+msgstr "Planetárium"
+
+#: src/modules/Nebula.cpp:276
 msgid "Planetary nebula"
-msgstr "Ködök [N]"
+msgstr "Planetáris köd"
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_viewDialog.h:888
 msgid "Planets"
 msgstr "Bolygók"
 
-#: src/ui_viewDialog.h:1043
-#, fuzzy
+#: src/ui_viewDialog.h:842
 msgid "Planets and Satellites"
-msgstr "Bolygók jelölése"
+msgstr "Bolygók és holdak"
+
+#: src/gui/NewGui.cpp:461
+msgid "Planets hints"
+msgstr "Bolygók jelzőkörei"
+
+#: src/ui_configurationDialog.h:578
+msgid "Plugins"
+msgstr "Bővítmények"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Plútó"
 
+#: src/ui_viewDialog.h:847
+msgid "Point sources rendering"
+msgstr "Pontszerű fényforrások megjelenítése"
+
 #: src/translations.h:76
 msgid "Polynesian"
 msgstr "Polinéziai"
 
-#: src/modules/TextUI.cpp:91
+#: src/modules/TextUI.cpp:84
 msgid "Preset Sky Time: "
 msgstr "Előre beállított idő: "
 
-#: src/modules/TextUI.cpp:94
-#, fuzzy
+#: src/modules/TextUI.cpp:87
 msgid "Preset Time"
-msgstr "Előre beállított idő: "
+msgstr "Előre beállított idő"
 
-#: src/ui_configurationDialog.h:149
-#, fuzzy
-msgid "Program language:"
-msgstr "A program nyelve: "
+#: src/ui_configurationDialog.h:464
+msgid "Program language"
+msgstr "A program nyelve"
 
-#: src/ui_viewDialog.h:1094
-#, fuzzy
+#: src/ui_viewDialog.h:866
 msgid "Projection"
-msgstr "Vetület:"
+msgstr "Vetület"
 
-#: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
-#: src/ui_configurationDialog.h:137
-msgid ""
-"QToolButton {\n"
-"color: white;\n"
-"font-weight: bold;\n"
-"background: None;\n"
-"border: 1px solid #2e2e36;\n"
-"  border-radius: 2px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"color: darkgray;\n"
-"}"
-msgstr ""
-
-#: src/gui/NewGui.cpp:443
-#, fuzzy
+#: src/gui/NewGui.cpp:501
 msgid "Quit"
-msgstr "Inuit"
+msgstr "Kilépés"
 
-#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
-#, fuzzy, qt-format
-msgid "RA/DE: %1/%2"
-msgstr "RA/D: "
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:138
+#: src/modules/StarWrapper.cpp:53 src/modules/StarWrapper.cpp:138
+#: src/modules/Telescope.cpp:252
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA, D (J2000): %1, %2"
+
+#: src/modules/StarWrapper.cpp:55 src/modules/StarWrapper.cpp:141
+#: src/modules/Telescope.cpp:255
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA, D (pillanatnyi): %1, %2"
+
+#: src/ui_viewDialog.h:850
+msgid "Relative scale:"
+msgstr "Relatív méret:"
 
 #: src/translations.h:51
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/gui/HelpDialog.cpp:54
-#, fuzzy
+#: src/gui/HelpDialog.cpp:58
 msgid "Right click"
-msgstr "Jobb Zászló"
+msgstr "Jobb kattintás"
 
 #: src/translations.h:64
 msgid "S"
@@ -850,169 +992,183 @@ msgstr "D"
 msgid "Saturn"
 msgstr "Szaturnusz"
 
-#: src/modules/TextUI.cpp:148
+#: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
 msgstr "Beállítások mentése alapértelmezettként: "
 
-#: src/gui/NewGui.cpp:444
+#: src/gui/NewGui.cpp:502
 msgid "Save screenshot"
-msgstr ""
+msgstr "Képernyő mentése"
 
-#: src/ui_viewDialog.h:1046
-#, fuzzy
+#: src/ui_viewDialog.h:844
 msgid "Scale Moon"
-msgstr "Hely mentése"
-
-#: src/ui_viewDialog.h:1039
-#, fuzzy
-msgid "Scale:"
 msgstr "Hold nagyítása"
 
-#: src/modules/TextUI.cpp:76
+#: src/modules/TextUI.cpp:69
 msgid "Scripts "
 msgstr "Parancsfájlok "
 
-#: src/modules/TextUI.cpp:144
+#: src/gui/NewGui.cpp:471
+msgid "Search window"
+msgstr "Keresőablak"
+
+#: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
 msgstr "Jelöld ki és lépj ki innen a futtatáshoz."
 
-#: src/gui/HelpDialog.cpp:62
-#, fuzzy
+#: src/gui/HelpDialog.cpp:66
 msgid "Select object"
-msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
+msgstr "Égitest kijelölése"
+
+#: src/ui_configurationDialog.h:506
+msgid "Selected Object Information"
+msgstr "A kijelölt égitest adatai"
 
 #: src/ui_locationDialogGui.h:327
-#, fuzzy
 msgid "Selected:"
-msgstr "Kijelölve: "
+msgstr "Kijelölve:"
 
-#: src/modules/TextUI.cpp:70
-#, fuzzy
+#: src/ui_configurationDialog.h:497
+msgid "Set"
+msgstr "Beállítás"
+
+#: src/modules/TextUI.cpp:63
 msgid "Set Location "
-msgstr "Hely: "
+msgstr "Hely beállítása "
 
-#: src/modules/TextUI.cpp:71
+#: src/modules/TextUI.cpp:64
 msgid "Set Time "
 msgstr "Idő beállítása "
 
-#: src/modules/TextUI.cpp:87
+#: src/modules/TextUI.cpp:80
 msgid "Set Time Zone: "
 msgstr "Időzóna beállítása: "
 
-#: src/modules/TextUI.cpp:151
+#: src/modules/TextUI.cpp:144
 msgid "Set UI Locale: "
 msgstr "Felhasználói felület területi beállítása: "
 
-#: src/gui/NewGui.cpp:422
-#, fuzzy
+#: src/gui/NewGui.cpp:497
+msgid "Set home planet to selected planet"
+msgstr ""
+
+#: src/gui/NewGui.cpp:479
 msgid "Set normal time rate"
-msgstr ": Normál gyakoriság"
+msgstr "Valós sebesség visszaállítása"
 
-#: src/gui/NewGui.cpp:423
-#, fuzzy
+#: src/ui_configurationDialog.h:488
+msgid "Set the initial field of view in degrees"
+msgstr "A kezdeti látószög megadása fokokban"
+
+#: src/gui/NewGui.cpp:480
 msgid "Set time to now"
-msgstr "Idő beállítása "
+msgstr "Vissza a jelenbe"
 
-#: src/ui_viewDialog.h:1055
+#: src/ui_configurationDialog.h:474
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_viewDialog.h:857
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Hullócsillagok"
 
-#: src/ui_viewDialog.h:1051
-msgid "Short labels"
-msgstr ""
+#: src/ui_configurationDialog.h:518
+msgid "Short information"
+msgstr "Kevesebb adat"
 
-#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
-#: src/ui_viewDialog.h:1054
-#, fuzzy
+#: src/ui_viewDialog.h:841
 msgid "Show"
-msgstr "Megjelenítés: "
+msgstr "Mutatás"
 
-#: src/ui_viewDialog.h:1092
-#, fuzzy
+#: src/ui_viewDialog.h:882
 msgid "Show art"
-msgstr "Megjelenítés: "
+msgstr "Ábrák mutatása"
 
-#: src/ui_viewDialog.h:1074
-#, fuzzy
+#: src/ui_viewDialog.h:894
 msgid "Show atmosphere"
-msgstr "Légkör"
+msgstr "Légkör mutatása"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:881
 msgid "Show boundaries"
-msgstr ""
+msgstr "Határok mutatása"
 
-#: src/ui_viewDialog.h:1073
-#, fuzzy
+#: src/ui_configurationDialog.h:539
+msgid "Show flip buttons"
+msgstr "A képtükröző gombok mutatása"
+
+#: src/ui_viewDialog.h:893
 msgid "Show fog"
-msgstr "Megjelenítés: "
+msgstr "Köd mutatása"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:892
 msgid "Show ground"
-msgstr ""
+msgstr "Felszín mutatása"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:879
 msgid "Show labels"
-msgstr ""
+msgstr "Címkék mutatása"
 
-#: src/ui_viewDialog.h:1090
-#, fuzzy
+#: src/ui_viewDialog.h:880
 msgid "Show lines"
-msgstr "Megjelenítés: "
+msgstr "Vonalak mutatása"
 
-#: src/ui_viewDialog.h:1044
-#, fuzzy
+#: src/ui_viewDialog.h:846
 msgid "Show markers"
-msgstr "Megjelenítés: "
+msgstr "Jelzők mutatása"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:843
 msgid "Show orbits"
-msgstr ""
+msgstr "Pályák mutatása"
 
-#: src/modules/TextUI.cpp:103
-#, fuzzy
+#: src/modules/TextUI.cpp:96
 msgid "Show: "
-msgstr "Megjelenítés: "
+msgstr "Mutatás: "
 
-#: src/modules/TextUI.cpp:149
+#: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
 msgstr "Leállítás: "
 
 # XXX [mayday]: Úgy mint "Day keys: Sideral". Jobb lenne a "Sideral Day"...
-#: src/modules/TextUI.cpp:90
+#: src/modules/TextUI.cpp:83
 msgid "Sidereal"
 msgstr "Csillagászati"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:845
 msgid "Simulate light speed"
-msgstr ""
+msgstr "Fénysebesség szimulálása"
 
-#: src/modules/Nebula.cpp:100
-#, fuzzy, qt-format
+#: src/modules/Nebula.cpp:118
+#, qt-format
 msgid "Size: %1"
-msgstr "Méret: "
+msgstr "Méret: %1"
 
-#: src/ui_viewDialog.h:1069
-#, fuzzy
+#: src/ui_viewDialog.h:867
 msgid "Sky"
-msgstr "Sek"
+msgstr "Ég"
 
-#: src/modules/TextUI.cpp:99
+#: src/modules/TextUI.cpp:92
 msgid "Sky Culture: "
 msgstr "Kultúrkör: "
 
-#: src/modules/TextUI.cpp:100
+#: src/modules/TextUI.cpp:93
 msgid "Sky Language: "
 msgstr "Az ég nyelve: "
 
-#: src/modules/TextUI.cpp:92
+#: src/modules/TextUI.cpp:85
 msgid "Sky Time At Start-up: "
 msgstr "Idő az induláskor: "
 
-#: src/modules/TextUI.cpp:86
+#: src/modules/TextUI.cpp:79
 msgid "Sky Time: "
 msgstr "Idő: "
 
-#: src/modules/TextUI.cpp:83
+#: src/gui/NewGui.cpp:472
+msgid "Sky and viewing options window"
+msgstr ""
+
+#: src/modules/TextUI.cpp:76
 msgid "Solar System Body: "
 msgstr "Naprendszerbeli égitest: "
 
@@ -1020,114 +1176,163 @@ msgstr "Naprendszerbeli égitest: "
 msgid "Solar System Observer"
 msgstr "Naprendszerbeli megfigyelő"
 
-#: src/gui/HelpDialog.cpp:49
-#, fuzzy
+#: src/gui/HelpDialog.cpp:53 src/gui/NewGui.cpp:118
 msgid "Space"
-msgstr "Lándzsa"
+msgstr "Szóköz"
 
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
-#, fuzzy, qt-format
+#: src/modules/StarWrapper.cpp:161
+#, qt-format
 msgid "Spectral Type: %1"
-msgstr "Színképtípus: "
+msgstr "Színképtípus: %1"
 
-#: src/gui/ViewDialog.cpp:337
-#, fuzzy
+#: src/ui_configurationDialog.h:558
+msgid "Spheric mirror distortion"
+msgstr "Gömbtükörtorzítás"
+
+#: src/ui_configurationDialog.h:555
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"A gömbtükörtorzítás a kis költségű planetáriumokban alkalmazott gömbtükrökre "
+"vetítéskor használatos."
+
+#: src/gui/ViewDialog.cpp:362
 msgid "Standard Perseids rate"
-msgstr ": Szokásos Perzeida-gyakoriság"
+msgstr "Szokásos Perzeida-gyakoriság"
 
 # XXX [mayday]: A csillagok világosságát szabályozza.
-#: src/modules/TextUI.cpp:104
+#: src/modules/TextUI.cpp:97
 msgid "Star Value Multiplier: "
 msgstr "Csillagok világosságának szorzója: "
 
-#: src/ui_viewDialog.h:1097
-#, fuzzy
+#: src/ui_viewDialog.h:899
 msgid "Starlore"
-msgstr "Csillag"
+msgstr "Csillaghagyomány"
 
-#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
+#: src/gui/NewGui.cpp:460 src/ui_viewDialog.h:887
 msgid "Stars"
 msgstr "Csillagok"
 
-#: src/modules/TextUI.cpp:73
+#: src/modules/TextUI.cpp:66
 msgid "Stars "
 msgstr "Csillagok "
 
-#: src/gui/NewGui.cpp:928
-msgid "Stellarium"
-msgstr ""
+#: src/ui_configurationDialog.h:468
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Induláskor a rendszeridőt használja a Stellarium"
 
-#: src/gui/HelpDialog.cpp:119
+#: src/ui_configurationDialog.h:465
+msgid "Startup Date and Time"
+msgstr "Kezdeti dátum és idő"
+
+#: src/ui_configurationDialog.h:484
+msgid "Startup FOV and Direction"
+msgstr "Kezdeti látószög és -irány"
+
+#: src/gui/NewGui.cpp:999
+msgid "Stellarium"
+msgstr "Stellarium"
+
+#: src/gui/HelpDialog.cpp:125
 msgid "Stellarium Help"
-msgstr ""
+msgstr "A Stellarium súgója"
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
-msgstr ""
+msgstr "Sztereografikus"
 
-#: src/gui/NewGui.cpp:431
+#: src/core/MappingClasses.cpp:138
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+"A sztereografikus vetület már az ókor óta ismeretes; eredetileg "
+"planiszfériumnak nevezték. Szögtartó, de nem területtartó."
+
+#: src/gui/NewGui.cpp:488
 msgid "Subtract 1 sidereal day"
-msgstr ""
+msgstr "1 csillagnappal vissza"
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:490
 msgid "Subtract 1 sidereal week"
-msgstr ""
+msgstr "7 csillagnappal vissza"
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:484
 msgid "Subtract 1 solar day"
-msgstr ""
+msgstr "1 szoláris nappal vissza"
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:482
 msgid "Subtract 1 solar hour"
-msgstr ""
+msgstr "1 szoláris órával vissza"
 
-#: src/gui/NewGui.cpp:429
+#: src/gui/NewGui.cpp:486
 msgid "Subtract 1 solar week"
-msgstr ""
+msgstr "7 szoláris nappal vissza"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Nap"
 
-#: src/gui/NewGui.cpp:442
+#: src/gui/NewGui.cpp:500
 msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
+msgstr "Váltás egyenlítői és horizontális koordináta-rendszer közt"
+
+#: src/ui_configurationDialog.h:471
+msgid "System date and time"
+msgstr "Rendszerdátum és -idő"
+
+#: src/ui_configurationDialog.h:477
+msgid "System date at:"
+msgstr "Rendszerdátum ekkor:"
 
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "Tethys"
 
-#: src/gui/HelpDialog.cpp:130
+#: src/gui/HelpDialog.cpp:136
 msgid "The Stellarium User Guide:"
-msgstr ""
+msgstr "Stellarium felhasználói kézikönyv:"
 
-#: src/gui/HelpDialog.cpp:129
+#: src/gui/HelpDialog.cpp:135
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
-msgstr ""
+msgstr "Az alábbi külső hivatkozások webböngészőben fognak megnyílni:\n"
 
 #: src/core/MappingClasses.cpp:82
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>."
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
+"E vetítési mód teljes neve <i>Lambert-féle azimutális területtartó vetület</"
+"i>. Területtartó, de szögtorzulása van."
 
 #: src/core/MappingClasses.cpp:228
+#, fuzzy
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>."
+"projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
+"E vetítési mód teljes neve <i>távolságtartó hengervetület</i>. A szélességi "
+"körök egymással párhuzamosak."
 
-#: src/core/MappingClasses.cpp:138
-msgid "This mode is similar to fish-eye projection mode."
+#: src/core/MappingClasses.cpp:283
+#, fuzzy
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
 msgstr ""
+"A Mercator-vetületet használják leggyakrabban a világtérképeken. Szögtartó, "
+"de a területtorzítása az egyenlítőtől távolodva egyre növekszik."
 
 #: src/main.cpp:52
 msgid "This system does not support OpenGL."
-msgstr ""
+msgstr "Ez a rendszer nem támogatja az OpenGL-t."
 
-#: src/modules/TextUI.cpp:95
+#: src/modules/TextUI.cpp:88
 msgid "Time Display Format: "
 msgstr "Időformátum: "
 
@@ -1135,163 +1340,44 @@ msgstr "Időformátum: "
 msgid "Titan"
 msgstr "Titan"
 
-#: src/gui/NewGui.cpp:402
-msgid "Toggle DSS"
-msgstr ""
+#: src/ui_configurationDialog.h:552
+msgid "Tools"
+msgstr "Eszközök"
 
-#: src/gui/NewGui.cpp:398
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "Légkör"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "Horizontális rács"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "Égtájak: "
-
-#: src/gui/NewGui.cpp:417
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "Beállítások ablak [1]"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "Csillagképek ábrái [R]"
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "Csillagképek határai"
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "Csillagképek címkéi: "
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "Csillagképek vonalai: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "Ekliptika vonala"
-
-#: src/gui/NewGui.cpp:393
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "Egyenlítő vonala"
-
-#: src/gui/NewGui.cpp:391
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "Egyenlítői rács"
-
-#: src/gui/NewGui.cpp:390
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "Egyenlítői rács"
-
-#: src/gui/NewGui.cpp:399
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:397
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:413
-#, fuzzy
-msgid "Toggle help window"
-msgstr "Megjelenítés: "
-
-#: src/gui/NewGui.cpp:414
-#, fuzzy
-msgid "Toggle location window"
-msgstr "Hely beállítása "
-
-#: src/gui/NewGui.cpp:394
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "Meridián vonala"
-
-#: src/gui/NewGui.cpp:401
-#, fuzzy
-msgid "Toggle nebulas"
-msgstr "Ködök [N]"
-
-#: src/gui/NewGui.cpp:406
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:437
-msgid "Toggle object tracking"
-msgstr ""
-
-#: src/gui/NewGui.cpp:404
-#, fuzzy
-msgid "Toggle planets hints"
-msgstr "Bolygópályák"
-
-#: src/gui/NewGui.cpp:412
-msgid "Toggle search window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:416
-msgid "Toggle sky and viewing options window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:403
-#, fuzzy
-msgid "Toggle stars"
-msgstr "Három Csillag"
+#: src/gui/NewGui.cpp:494
+msgid "Track object"
+msgstr "Égitest követése"
 
 #: src/translations.h:78
 msgid "Tupi-Guarani"
-msgstr ""
+msgstr "Tupi-guarani"
 
-#: src/ui_viewDialog.h:1040
-#, fuzzy
+#: src/ui_viewDialog.h:849
 msgid "Twinkle:"
-msgstr "Háromszög"
+msgstr "Vibrálás:"
 
-#: src/modules/TextUI.cpp:107
+#: src/modules/TextUI.cpp:100
 msgid "Twinkling: "
 msgstr "Vibrálás: "
 
-#: src/modules/Nebula.cpp:89
+#: src/modules/Nebula.cpp:98
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr ""
+msgstr "Típus: <b>%1</b>"
 
-#: src/modules/TextUI.cpp:142
+#: src/modules/TextUI.cpp:135
 msgid "USB Script: "
 msgstr "USB-parancsfájlok: "
 
-#: src/modules/Nebula.cpp:282
+#: src/modules/Nebula.cpp:285
 msgid "Undocumented type"
-msgstr ""
+msgstr "Nem dokumentált típus"
 
-#: src/modules/Nebula.cpp:279
+#: src/modules/Nebula.cpp:282
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
-#: src/modules/TextUI.cpp:150
+#: src/modules/TextUI.cpp:143
 msgid "Update me via Internet: "
 msgstr "Frissítés az Internetről: "
 
@@ -1299,26 +1385,37 @@ msgstr "Frissítés az Internetről: "
 msgid "Uranus"
 msgstr "Uránusz"
 
-#: src/ui_viewDialog.h:1096
-msgid "Use associated language for sky labeling"
-msgstr ""
+#: src/ui_configurationDialog.h:480
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Tetszőleges dátum és idő használata a Stellarium indulásakor"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:898
+msgid "Use associated language for sky labeling"
+msgstr "Az égi feliratok a társított nyelven jelenjenek meg"
+
+#: src/ui_viewDialog.h:896
 msgid "Use associated planet and position"
+msgstr "Ugrás a tájképhez társított bolygóra és helyre"
+
+#: src/ui_configurationDialog.h:494
+msgid ""
+"Use the current viewing direction (altitude and azimuth) when Stellarim "
+"starts."
 msgstr ""
+"Indulkáskor a jelenlegi látóirányt (magasság és azimut) használja a "
+"Stellarium."
 
 #: src/ui_locationDialogGui.h:324
 msgid "Use the mouse wheel to zoom, drag to move the screen."
-msgstr ""
+msgstr "A térkép az egérgörgővel nagyítható és húzással mozgatható."
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "Vénusz"
 
-#: src/ui_viewDialog.h:1022
-#, fuzzy
+#: src/ui_viewDialog.h:838
 msgid "View"
-msgstr "Video"
+msgstr "Nézet"
 
 #: src/translations.h:66
 msgid "W"
@@ -1328,80 +1425,101 @@ msgstr "Ny"
 msgid "Western"
 msgstr "Nyugati"
 
-#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
-#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
-msgid "X"
+#: src/ui_configurationDialog.h:573
+#, fuzzy
+msgid ""
+"When enabled, select the \"auto zoom out\" key will also set the initial "
+"viewing direction"
 msgstr ""
+"Engedélyezésekor az automatikus kicsinyítés alkalmával visszaáll az eredeti "
+"látóirány is."
+
+#: src/gui/NewGui.cpp:468
+msgid "Windows"
+msgstr "Ablakok"
+
+#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:165
+#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:187
+#: src/ui_viewDialog.h:839 src/ui_configurationDialog.h:458
+msgid "X"
+msgstr "X"
 
 #: src/ui_locationDialogGui.h:332 src/ui_locationDialogGui.h:338
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
+"Az érték fokban vagy fok-perc-másodperc hármasban adható meg. Például: +1d "
+"12m 8s"
 
-#: src/modules/TextUI.cpp:135
-#, fuzzy
+#: src/modules/TextUI.cpp:128
 msgid "Zoom Duration: "
-msgstr "Hely: "
+msgstr "Nagyítás időtartama: "
 
-#: src/gui/NewGui.cpp:438
-#, fuzzy
+#: src/gui/NewGui.cpp:495
 msgid "Zoom in on selected object"
-msgstr "Ugrás a kijelölt égitestre [SZÓKÖZ]"
+msgstr "A kijelölt égitest nagyítása"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
-#, fuzzy
+#: src/gui/HelpDialog.cpp:64 src/gui/HelpDialog.cpp:65
 msgid "Zoom in/out"
-msgstr "Nagyítás időtartama: "
+msgstr "Nagyítás/kicsinyítés"
 
-#: src/gui/NewGui.cpp:439
-#, fuzzy
+#: src/gui/NewGui.cpp:496
 msgid "Zoom out"
-msgstr "Nagyítás időtartama: "
+msgstr "Kicsinyítés"
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:149
+#: src/gui/HelpDialog.cpp:155
 msgid ""
 "{Bug reporting system} - if something doesn't work properly and is not "
 "listed in the FAQ list, you can open bug reports here."
 msgstr ""
+"{Hibabejelentés} – ha valami nem működik megfelelően, és nem szerepel a "
+"gyakori kérdések közt sem, akkor itt lehet bejelenteni a hibákat."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:154
+#: src/gui/HelpDialog.cpp:160
 msgid ""
 "{Feature request system} - if you have an idea for a new feature, send it to "
 "us. We can't promise to implement every idea, but we appreciate the feedback "
 "and review the list when we are planning future features."
 msgstr ""
+"{Kívánságlista} – ha új szolgáltatást szeretnél látni a programban, mondd el "
+"nekünk. Nem ígérhetjük, hogy minden új ötletet megvalósítunk, de nagyra "
+"értékeljük a visszajelzéseket, és a jövőbeli szolgáltatások tervezésekor "
+"átnézzük a kéréseket."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:159
+#: src/gui/HelpDialog.cpp:165
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr ""
+msgstr "{Fórumok} – társalogj a Stellariumról a többi felhasználóval."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:134
+#: src/gui/HelpDialog.cpp:140
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr ""
+msgstr "{Gyakori kérdések} a Stellariumról. Válaszokkal."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:144
+#: src/gui/HelpDialog.cpp:150
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
+"{Segítségkérés} – ha segítségre van szükséged a Stellarium használatához, "
+"akkor itt tedd fel a kérdésedet, mi pedig megpróbálunk segíteni."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:139
+#: src/gui/HelpDialog.cpp:145
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
+"{A Stellarium wikije} – általános információk. Itt találhatók a felhasználók "
+"által készített tájképek és parancsfájlok is."
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -1551,14 +1669,8 @@ msgstr ""
 #~ msgid "Capricornus"
 #~ msgstr "Bak"
 
-#~ msgid "Cardinal Points [Q]"
-#~ msgstr "Égtájak [Q]"
-
 #~ msgid "Cared for by Moon"
 #~ msgstr "Hold Kegyeltje"
-
-#~ msgid "Caribou"
-#~ msgstr "Rénszarvas"
 
 #~ msgid "Cassiopeia"
 #~ msgstr "Cassiopeia"
@@ -1575,23 +1687,11 @@ msgstr ""
 #~ msgid "Cepheus"
 #~ msgstr "Cefeusz"
 
-#~ msgid "Cetus"
-#~ msgstr "Cet"
-
-#~ msgid "Chamaeleon"
-#~ msgstr "Kaméleon"
-
-#~ msgid "Chariot"
-#~ msgstr "Harci Szekér"
-
 #~ msgid "Chariot Yard"
 #~ msgstr "Kocsiszín"
 
 #~ msgid "Chematy"
 #~ msgstr "Chematy"
-
-#~ msgid "Choose a catalog :"
-#~ msgstr "Katalógus:"
 
 #~ msgid "Choose landscapes :"
 #~ msgstr "Tájkép választása:"
@@ -1608,9 +1708,6 @@ msgstr ""
 #~ msgid "Coiled Thong"
 #~ msgstr "Ostorszíj"
 
-#~ msgid "Collarbones"
-#~ msgstr "Kulcscsontok"
-
 #~ msgid "Columba"
 #~ msgstr "Galamb"
 
@@ -1623,9 +1720,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Completions"
 #~ msgstr "Üresség"
-
-#~ msgid "Constellations Names"
-#~ msgstr "Csillagképek nevei"
 
 #~ msgid "Corona Australis"
 #~ msgstr "Déli Korona"
@@ -1656,9 +1750,6 @@ msgstr ""
 
 #~ msgid "Cygnus"
 #~ msgstr "Hattyú"
-
-#~ msgid "DE : "
-#~ msgstr "DE: "
 
 #~ msgid "Day"
 #~ msgstr "Nap"
@@ -1730,9 +1821,6 @@ msgstr ""
 #~ msgid "Dolphin"
 #~ msgstr "Delfin"
 
-#~ msgid "Done"
-#~ msgstr "Kész"
-
 #~ msgid "Dorado"
 #~ msgstr "Aranyhal"
 
@@ -1792,17 +1880,11 @@ msgstr ""
 #~ msgid "Enter observatory name"
 #~ msgstr "A megfigyelőhely neve"
 
-#~ msgid "Equatorial Grid [E]"
-#~ msgstr "Egyenlítői rács [E]"
-
 #~ msgid "Equatorial/Altazimuthal Mount [ENTER]"
 #~ msgstr "Egyenlítői/horizontális koordináta-rendszer [ENTER]"
 
 #~ msgid "Equuleus"
 #~ msgstr "Csikó"
-
-#~ msgid "Eridanus"
-#~ msgstr "Eridánusz"
 
 #~ msgid "Error: Unable to open script file to record commands."
 #~ msgstr "Hiba: Nem lehet megnyitni a parancsfájlt parancsrögzítéshez."
@@ -1843,14 +1925,8 @@ msgstr ""
 #~ msgid "Flying Corridor"
 #~ msgstr "Repülő Folyosó"
 
-#~ msgid "Fog"
-#~ msgstr "Köd"
-
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Más felbontás ebben a fájlban adható meg:"
-
-#~ msgid "Fornax"
-#~ msgstr "Kemence"
 
 #~ msgid "Four Channels"
 #~ msgstr "Négy Csatorna"
@@ -1867,9 +1943,6 @@ msgstr ""
 #~ msgid "Ghosts"
 #~ msgstr "Szellemek"
 
-#~ msgid "Giant"
-#~ msgstr "Óriás"
-
 #~ msgid "Girl"
 #~ msgstr "Lány"
 
@@ -1882,21 +1955,8 @@ msgstr ""
 #~ msgid "Ground [G]"
 #~ msgstr "Felszín [G]"
 
-#~ msgid "Grus"
-#~ msgstr "Daru"
-
-#, fuzzy
-#~ msgid "Guereins"
-#~ msgstr "Kígyó"
-
 #~ msgid "Hand"
 #~ msgstr "Kéz"
-
-#~ msgid "Heart"
-#~ msgstr "Szív"
-
-#~ msgid "Help [H]"
-#~ msgstr "Súgó [H]"
 
 #~ msgid "Hercules"
 #~ msgstr "Herkules"
@@ -1910,14 +1970,8 @@ msgstr ""
 #~ msgid "Hook"
 #~ msgstr "Horog"
 
-#~ msgid "Horn"
-#~ msgstr "Szarv"
-
 #~ msgid "Horologium"
 #~ msgstr "Ingaóra"
-
-#~ msgid "Horus"
-#~ msgstr "Hórusz"
 
 #~ msgid "Hour"
 #~ msgstr "Óra"
@@ -1934,14 +1988,8 @@ msgstr ""
 #~ msgid "Imperial Passageway"
 #~ msgstr "Császári Folyosó"
 
-#~ msgid "Indus"
-#~ msgstr "Indus"
-
 #~ msgid "Info: "
 #~ msgstr "Információ: "
-
-#~ msgid "Information"
-#~ msgstr "Információ"
 
 #~ msgid "Invalid Script command"
 #~ msgstr "Érvénytelen parancs"
@@ -1967,9 +2015,6 @@ msgstr ""
 #~ msgid "Kite of Kawelo"
 #~ msgstr "Kawelo Sárkánya"
 
-#~ msgid "Lacerta"
-#~ msgstr "Gyík"
-
 #~ msgid "Lamp Stand"
 #~ msgstr "Lámpatartó"
 
@@ -1985,23 +2030,11 @@ msgstr ""
 #~ msgid "Leo Minor"
 #~ msgstr "Kis Oroszlán"
 
-#~ msgid "Lepus"
-#~ msgstr "Nyúl"
-
 #~ msgid "Libra"
 #~ msgstr "Mérleg"
 
-#~ msgid "Lion"
-#~ msgstr "Oroszlán"
-
-#~ msgid "Lizard"
-#~ msgstr "Gyík"
-
 #~ msgid "Loading Nebula Textures:"
 #~ msgstr "Csillagködök textúráinak betöltése:"
-
-#~ msgid "Lupus"
-#~ msgstr "Farkas"
 
 #~ msgid "Lynx"
 #~ msgstr "Hiúz"
@@ -2009,14 +2042,8 @@ msgstr ""
 #~ msgid "Lyra"
 #~ msgstr "Lant"
 
-#~ msgid "Magnitude"
-#~ msgstr "Magnitúdó"
-
 #~ msgid "Magnitude: "
 #~ msgstr "Fényesség: "
-
-#~ msgid "Market"
-#~ msgstr "Piactér"
 
 #~ msgid "Market Officer"
 #~ msgstr "Piacfelügyelő"
@@ -2029,9 +2056,6 @@ msgstr ""
 
 #~ msgid "Meadows"
 #~ msgstr "Mező"
-
-#~ msgid "Mensa"
-#~ msgstr "Táblahegy"
 
 #~ msgid "Microscopium"
 #~ msgstr "Mikroszkóp"
@@ -2054,15 +2078,6 @@ msgstr ""
 
 #~ msgid "Monoceros"
 #~ msgstr "Egyszarvú"
-
-#~ msgid "Month"
-#~ msgstr "Hónap"
-
-#~ msgid "Mooring Post"
-#~ msgstr "Kikötőoszlop"
-
-#~ msgid "Mortar"
-#~ msgstr "Mozsár"
 
 #~ msgid ""
 #~ "Movement & selection:\n"
@@ -2089,12 +2104,6 @@ msgstr ""
 #~ "SZÓKÖZ        : Kijelölt égitest középre igazítása\n"
 #~ "\n"
 
-#~ msgid "Musca"
-#~ msgstr "Légy"
-
-#~ msgid "Names of the Constellations [V]"
-#~ msgstr "Csillagképek nevei [V]"
-
 #~ msgid "Navigator's Triangle"
 #~ msgstr "Hajósok Háromszöge"
 
@@ -2104,17 +2113,8 @@ msgstr ""
 #~ msgid "Neck"
 #~ msgstr "Nyak"
 
-#~ msgid "Net"
-#~ msgstr "Háló"
-
 #~ msgid "Night (red) mode"
 #~ msgstr "Éjjeli (vörös) mód"
-
-#~ msgid "No"
-#~ msgstr "Nem"
-
-#~ msgid "Norma"
-#~ msgstr "Szögmérő"
 
 #~ msgid "North River"
 #~ msgstr "Északi Folyó"
@@ -2127,9 +2127,6 @@ msgstr ""
 
 #~ msgid "Object Search"
 #~ msgstr "Égitest keresése"
-
-#~ msgid "Octans"
-#~ msgstr "Oktáns"
 
 #~ msgid "Ophiuchus"
 #~ msgstr "Kígyótartó"
@@ -2146,14 +2143,8 @@ msgstr ""
 #~ msgid "Ox"
 #~ msgstr "Ökör"
 
-#~ msgid "Pair of Stars"
-#~ msgstr "Csillagpár"
-
 #~ msgid "Palace Gate"
 #~ msgstr "Palotakapu"
-
-#~ msgid "Pavo"
-#~ msgstr "Páva"
 
 #~ msgid "Pegasus"
 #~ msgstr "Pegazus"
@@ -2161,26 +2152,14 @@ msgstr ""
 #~ msgid "Perseus"
 #~ msgstr "Perzeusz"
 
-#~ msgid "Pestle"
-#~ msgstr "Mozsártörő"
-
-#~ msgid "Phoenix"
-#~ msgstr "Főnix"
-
 #~ msgid "Pictor"
 #~ msgstr "Festő"
-
-#~ msgid "Pisces"
-#~ msgstr "Halak"
 
 #~ msgid "Piscis Austrinus"
 #~ msgstr "Déli Hal"
 
-#~ msgid "Planet: "
-#~ msgstr "Bolygó: "
-
-#~ msgid "Point"
-#~ msgstr "Pont"
+#~ msgid "Program language:"
+#~ msgstr "A program nyelve:"
 
 #~ msgid "Prow"
 #~ msgstr "Hajóorr"
@@ -2215,36 +2194,17 @@ msgstr ""
 #~ msgid "Reticulum"
 #~ msgstr "Háló"
 
-#, fuzzy
-#~ msgid "Return To Current Time"
-#~ msgstr "Vissza a jelenbe [8]"
-
 #~ msgid "River Turtle"
 #~ msgstr "Folyami Teknős"
 
-#~ msgid "Rolled Tongue"
-#~ msgstr "Feltekert Nyelv"
-
 #~ msgid "Rooftop"
 #~ msgstr "Tető"
-
-#~ msgid "Room"
-#~ msgstr "Szoba"
-
-#~ msgid "Root"
-#~ msgstr "Gyökér"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Rohadt Tök"
 
 #~ msgid "Runners"
 #~ msgstr "Futók"
 
 #~ msgid "Sagitta"
 #~ msgstr "Nyíl"
-
-#~ msgid "Sagittarius"
-#~ msgstr "Nyilas"
 
 #~ msgid "Sah"
 #~ msgstr "Sah"
@@ -2258,17 +2218,11 @@ msgstr ""
 #~ msgid "Saving settings will save current full screen status"
 #~ msgstr "Mentéskor a teljes képernyős mód állapota is tárolódik"
 
-#~ msgid "Scorpius"
-#~ msgstr "Skorpió"
-
 #~ msgid "Screen"
 #~ msgstr "Rosta"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Képernyő felbontása:"
-
-#~ msgid "Script commander"
-#~ msgstr "Parancsbevitel"
 
 #~ msgid "Sculptor"
 #~ msgstr "Szobrász"
@@ -2285,15 +2239,8 @@ msgstr ""
 #~ msgid "Seconds"
 #~ msgstr "Másodp."
 
-#~ msgid "Selected Constellation Only"
-#~ msgstr "Csak a kijelölt csillagkép"
-
 #~ msgid "Selkis"
 #~ msgstr "Szelket"
-
-#, fuzzy
-#~ msgid "Set Real Time Speed"
-#~ msgstr "Valós idő [K]"
 
 #, fuzzy
 #~ msgid "Set Tracking"
@@ -2311,18 +2258,11 @@ msgstr ""
 #~ msgid "Seven Little Girls"
 #~ msgstr "Hét Kislány"
 
-#~ msgid "Sextans"
-#~ msgstr "Szextáns"
-
 #~ msgid "Sheep"
 #~ msgstr "Birka"
 
 #~ msgid "Sheepfold"
 #~ msgstr "Karám"
-
-#, fuzzy
-#~ msgid "Show Atmosphere"
-#~ msgstr "Légkör"
 
 #, fuzzy
 #~ msgid "Show Azimutal Grid"
@@ -2331,14 +2271,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Show Cardinal Points"
 #~ msgstr "Égtájak"
-
-#, fuzzy
-#~ msgid "Show Constellation Lines"
-#~ msgstr "Csillagképek vonalai"
-
-#, fuzzy
-#~ msgid "Show DSS"
-#~ msgstr "Megjelenítés: "
 
 #, fuzzy
 #~ msgid "Show Ecliptic Line"
@@ -2352,39 +2284,14 @@ msgstr ""
 #~ msgid "Show Equatorial Grid"
 #~ msgstr "Egyenlítői rács"
 
-#, fuzzy
-#~ msgid "Show Equatorial J2000 Grid"
-#~ msgstr "Egyenlítői rács"
-
-#, fuzzy
-#~ msgid "Show Fog"
-#~ msgstr "Megjelenítés: "
-
-#, fuzzy
-#~ msgid "Show Ground"
-#~ msgstr "Felszín"
-
-#, fuzzy
-#~ msgid "Show Meridian Line"
-#~ msgstr "Meridián vonala"
-
-#~ msgid "Snake"
-#~ msgstr "Kígyó"
-
 #~ msgid "Soldiers Market"
 #~ msgstr "Katonák Piactere"
 
 #~ msgid "South River"
 #~ msgstr "Déli Folyó"
 
-#~ msgid "Spear"
-#~ msgstr "Dárda"
-
 #~ msgid "Spring"
 #~ msgstr "Rugó"
-
-#~ msgid "Square Granary"
-#~ msgstr "Szögletes Magtár"
 
 #~ msgid "Star Names. Up to mag :"
 #~ msgstr "Csillagnevek. Max. mag.:"
@@ -2400,12 +2307,6 @@ msgstr ""
 
 #~ msgid "Supreme Palace"
 #~ msgstr "Legfelsőbb Palota"
-
-#~ msgid "Tail"
-#~ msgstr "Far"
-
-#~ msgid "Taurus"
-#~ msgstr "Bika"
 
 #~ msgid "Telescopium"
 #~ msgstr "Távcső"
@@ -2450,12 +2351,6 @@ msgstr ""
 #~ msgid "Time Zone :"
 #~ msgstr "Időzóna:"
 
-#~ msgid "Time speed : "
-#~ msgstr "Idő múlása: "
-
-#~ msgid "Toilet"
-#~ msgstr "Illemhely"
-
 #~ msgid "Triangulum"
 #~ msgstr "Háromszög"
 
@@ -2486,12 +2381,6 @@ msgstr ""
 #~ msgid "Type: "
 #~ msgstr "Típus: "
 
-#~ msgid "Ursa Major"
-#~ msgstr "Nagy Medve"
-
-#~ msgid "Ursa Minor"
-#~ msgstr "Kis Medve"
-
 #~ msgid ""
 #~ "Use key J and L to decrease and increase\n"
 #~ "   time speed.\n"
@@ -2516,9 +2405,6 @@ msgstr ""
 #~ msgid "Voice of Joy"
 #~ msgstr "Öröm Hangja"
 
-#~ msgid "Volans"
-#~ msgstr "Repülőhal"
-
 #~ msgid "Vulpecula"
 #~ msgstr "Róka"
 
@@ -2531,18 +2417,6 @@ msgstr ""
 #~ msgid "Weaving Girl"
 #~ msgstr "Integető Lány"
 
-#~ msgid "Well"
-#~ msgstr "Kút"
-
-#~ msgid "Western Door"
-#~ msgstr "Nyugati Ajtó"
-
-#~ msgid "Willow"
-#~ msgstr "Fűzfa"
-
-#~ msgid "Wings"
-#~ msgstr "Szárnyak"
-
 #~ msgid "Winnowing Basket"
 #~ msgstr "Rostálókosár"
 
@@ -2554,9 +2428,6 @@ msgstr ""
 
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
-
-#~ msgid "Year"
-#~ msgstr "Év"
 
 #~ msgid "Yes"
 #~ msgstr "Igen"

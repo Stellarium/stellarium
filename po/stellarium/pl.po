@@ -9,130 +9,169 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-28 14:11+0200\n"
-"PO-Revision-Date: 2008-04-14 01:15+0000\n"
-"Last-Translator: Łukasz Cieśnik <lukasz.ciesnik@gmail.com>\n"
+"POT-Creation-Date: 2008-07-09 09:35+0200\n"
+"PO-Revision-Date: 2008-07-03 11:42+0000\n"
+"Last-Translator: Neovigo <neovigo@no.pl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-28 07:40+0000\n"
+"X-Launchpad-Export-Date: 2008-07-09 07:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
-#: src/modules/LandscapeMgr.cpp:433
+#: src/gui/NewGui.cpp:238
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
+
+#: src/modules/LandscapeMgr.cpp:441
 #, qt-format
 msgid ", %1 m"
-msgstr ""
+msgstr ", %1 m"
 
-#: src/gui/NewGui.cpp:219
-#, c-format, qt-format
-msgid ", %1m"
-msgstr ""
+#: src/ui_viewDialog.h:860
+msgid "0"
+msgstr "0"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:861
 msgid "10"
-msgstr ""
+msgstr "10"
 
-#: src/ui_viewDialog.h:1060
+#: src/ui_viewDialog.h:863
 #, fuzzy
 msgid "10000"
 msgstr "J2000"
 
-#: src/ui_viewDialog.h:1061
+#: src/ui_viewDialog.h:864
 msgid "144000"
-msgstr ""
+msgstr "144000"
 
-#: src/ui_viewDialog.h:1059
+#: src/ui_viewDialog.h:862
 msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:865
+msgid "<small><i>Normal rate</i></small>"
 msgstr ""
 
-#: src/modules/TextUI.cpp:93
+#: src/ui_viewDialog.h:848
+msgid "Absolute scale:"
+msgstr "Skala bezwzględna:"
+
+#: src/modules/TextUI.cpp:86
 msgid "Actual Time"
-msgstr "Aktualny czas"
+msgstr "Bieżący czas"
 
-#: src/gui/NewGui.cpp:430
+#: src/gui/NewGui.cpp:487
 msgid "Add 1 sidereal day"
-msgstr ""
+msgstr "Dodaj 1 dzień gwiazdowy"
 
-#: src/gui/NewGui.cpp:432
+#: src/gui/NewGui.cpp:489
 msgid "Add 1 sidereal week"
-msgstr ""
+msgstr "Dodaj 1 tydzień gwiazdowy"
 
-#: src/gui/NewGui.cpp:426
+#: src/gui/NewGui.cpp:483
 msgid "Add 1 solar day"
-msgstr ""
+msgstr "Dodaj 1 dzień słoneczny"
 
-#: src/gui/NewGui.cpp:424
+#: src/gui/NewGui.cpp:481
 msgid "Add 1 solar hour"
-msgstr ""
+msgstr "Dodaj 1 godzinę słoneczną"
 
-#: src/gui/NewGui.cpp:428
+#: src/gui/NewGui.cpp:485
 msgid "Add 1 solar week"
-msgstr ""
+msgstr "Dodaj 1 tydzień słoneczny"
 
-#: src/modules/TextUI.cpp:77
+#: src/modules/TextUI.cpp:70
 msgid "Administration "
 msgstr "Administracja "
 
-#: src/modules/TextUI.cpp:82
+#: src/ui_configurationDialog.h:561
+msgid "Align labels with the horizon"
+msgstr "Umieszczaj etykiety równolegle do horyzontu"
+
+#: src/ui_configurationDialog.h:512
+msgid "All availalable information"
+msgstr "Wszystkie dostępne informacje"
+
+#: src/ui_configurationDialog.h:523
+msgid "Allow keyboard to pan and zoom"
+msgstr ""
+
+#: src/ui_configurationDialog.h:529
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+
+#: src/modules/TextUI.cpp:75
 msgid "Altitude (m): "
 msgstr "Wysokość (m): "
 
 #: src/ui_locationDialogGui.h:341
 #, fuzzy
 msgid "Altitude:"
-msgstr "Wysokość n.p.m.: "
+msgstr "Wysokość n.p.m.:"
 
-#: src/ui_viewDialog.h:1068
-msgid "Amount:"
+#: src/modules/Planet.cpp:158
+#, qt-format
+msgid "Apparent diameter: %1"
 msgstr ""
 
-#: src/modules/TextUI.cpp:143
+#: src/modules/TextUI.cpp:136
 msgid "Arrow down to load list."
 msgstr "Strzałka w dół - wczytanie listy."
 
-#: src/gui/HelpDialog.cpp:50
+#: src/gui/HelpDialog.cpp:54
 msgid "Arrow keys & left mouse drag"
-msgstr ""
+msgstr "Strzałki & przeciąganie z LPM"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:883
 msgid "Art brightness: "
-msgstr ""
+msgstr "Jasność rysunków: "
 
-#: src/modules/LandscapeMgr.cpp:425
+#: src/gui/NewGui.cpp:455
+msgid "Atmosphere"
+msgstr "Atmosfera"
+
+#: src/modules/LandscapeMgr.cpp:433
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/modules/Nebula.cpp:98 src/modules/Planet.cpp:128
-#: src/modules/StarWrapper.cpp:56 src/modules/StarWrapper.cpp:121
-#, fuzzy, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Az/Wys: "
+#: src/ui_configurationDialog.h:576
+msgid "Auto zoom out key sets initial direction of view"
+msgstr ""
+"Przywracanie początkowego kierunku widzenia po naciśnięciu klawisza "
+"automatycznego oddalania"
 
-#: src/ui_viewDialog.h:1081
+#: src/modules/Nebula.cpp:114 src/modules/Planet.cpp:148
+#: src/modules/StarWrapper.cpp:65 src/modules/StarWrapper.cpp:156
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Az/Wys: %1/%2"
+
+#: src/gui/NewGui.cpp:446 src/ui_viewDialog.h:871
 #, fuzzy
 msgid "Azimutal grid"
 msgstr "Siatka azymutalna"
 
-#: src/modules/TextUI.cpp:120
+#: src/modules/TextUI.cpp:113
 msgid "Azimuthal Grid"
 msgstr "Siatka azymutalna"
 
-#: src/modules/TextUI.cpp:141
+#: src/modules/TextUI.cpp:134
 msgid "CD/DVD Script: "
 msgstr "Skrypt CD/DVD: "
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:59
 msgid "CTRL + Left click"
-msgstr ""
+msgstr "CTRL + LPM"
 
-#: src/gui/HelpDialog.cpp:52
+#: src/gui/HelpDialog.cpp:56
 msgid "CTRL + Up/Down"
-msgstr ""
+msgstr "CTRL + góra/dół"
 
-#: src/modules/TextUI.cpp:89
+#: src/modules/TextUI.cpp:82
 msgid "Calendar"
 msgstr "Kalendarz"
 
@@ -140,23 +179,32 @@ msgstr "Kalendarz"
 msgid "Callisto"
 msgstr "Callisto"
 
-#: src/modules/TextUI.cpp:115
+#: src/modules/TextUI.cpp:108
 msgid "Cardinal Points"
 msgstr "Punkty kardynalne"
 
-#: src/ui_viewDialog.h:1086
+#: src/gui/NewGui.cpp:452 src/ui_viewDialog.h:876
 #, fuzzy
 msgid "Cardinal points"
-msgstr "Punkty kardynalne: "
+msgstr "Punkty kardynalne:"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:869
 msgid "Celestial Sphere"
-msgstr ""
+msgstr "Sfera niebieska"
 
-#: src/gui/NewGui.cpp:436
+#: src/gui/NewGui.cpp:493
 #, fuzzy
 msgid "Center on selected object"
 msgstr "Idź do wybranego obiektu [Spacja]"
+
+#: src/ui_configurationDialog.h:548
+#, fuzzy
+msgid ""
+"Changes the way Stellarium renders the sky to look more like astronomical "
+"charts (i.e. sky is white, objects are dark)."
+msgstr ""
+"Zmienia sposób rysowania nieba przez Stellarium, stylizując wygląd na "
+"wykresy astronomiczne (białe niebo, ciemne obiekty)."
 
 #: src/translations.h:59
 msgid "Charon"
@@ -166,75 +214,103 @@ msgstr "Charon"
 msgid "Chinese"
 msgstr "chińska"
 
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:67 src/gui/HelpDialog.cpp:69
 msgid "Clear selection"
-msgstr ""
+msgstr "Usuń zaznaczenie"
 
-#: src/modules/Nebula.cpp:276
+#: src/modules/Nebula.cpp:279
 msgid "Cluster associated with nebulosity"
 msgstr ""
 
-#: src/modules/TextUI.cpp:74
+#: src/modules/TextUI.cpp:67
 msgid "Colors "
 msgstr "Kolory "
 
-#: src/ui_configurationDialog.h:136
+#: src/ui_configurationDialog.h:457
 msgid "Configuration"
 msgstr "Konfiguracja"
 
-#: src/modules/TextUI.cpp:113
+#: src/gui/NewGui.cpp:470
+msgid "Configuration window"
+msgstr "Okno konfiguracji"
+
+#: src/modules/TextUI.cpp:106
 msgid "Constellation Art Intensity"
 msgstr "Jasność rysunków gwiazdozbiorów"
 
-#: src/modules/TextUI.cpp:114
+#: src/modules/TextUI.cpp:107
 msgid "Constellation Boundaries"
 msgstr "Granice gwiazdozbiorów"
 
-#: src/modules/TextUI.cpp:111
+#: src/modules/TextUI.cpp:104
 msgid "Constellation Lines"
 msgstr "Linie gwiazdozbiorów"
 
-#: src/modules/TextUI.cpp:112
+#: src/modules/TextUI.cpp:105
 msgid "Constellation Names"
 msgstr "Nazwy gwiazdozbiorów"
 
-#: src/ui_viewDialog.h:1088
+#: src/gui/NewGui.cpp:442
+msgid "Constellation art"
+msgstr "Rysunki gwiazdozbiorów"
+
+#: src/gui/NewGui.cpp:444
+msgid "Constellation boundaries"
+msgstr "Granice gwiazdozbiorów"
+
+#: src/gui/NewGui.cpp:443
+msgid "Constellation labels"
+msgstr "Podpisy gwiazdozbiorów"
+
+#: src/gui/NewGui.cpp:441
+msgid "Constellation lines"
+msgstr "Linie gwiazdozbiorów"
+
+#: src/ui_viewDialog.h:878
 #, fuzzy
 msgid "Constellations"
 msgstr "Gwiazdozbiór"
 
-#: src/modules/TextUI.cpp:137
+#: src/modules/TextUI.cpp:130
 msgid "Correct for light travel time: "
-msgstr ""
+msgstr "Poprawka uwzględniająca czas przebycia drogi przez światło: "
 
-#: src/modules/TextUI.cpp:136
+#: src/modules/TextUI.cpp:129
 msgid "Cursor Timeout: "
 msgstr "Limit czasu kursora: "
 
 #: src/ui_locationDialogGui.h:325
 #, fuzzy
 msgid "Cursor:"
-msgstr "Kursor : "
+msgstr "Kursor :"
 
 #: src/core/MappingClasses.cpp:223
 #, fuzzy
 msgid "Cylinder"
-msgstr "Kalendarz"
+msgstr "Walcowe"
 
-#: src/modules/TextUI.cpp:96
+#: src/gui/NewGui.cpp:459
+msgid "DSS"
+msgstr "DSS"
+
+#: src/modules/TextUI.cpp:89
 msgid "Date Display Format: "
 msgstr "Format wyświetlania daty: "
 
-#: src/gui/NewGui.cpp:419 src/ui_dateTimeDialogGui.h:169
+#: src/gui/NewGui.cpp:476 src/ui_dateTimeDialogGui.h:180
 #, fuzzy
 msgid "Date and Time"
 msgstr "Data i czas"
 
-#: src/modules/TextUI.cpp:88
+#: src/gui/NewGui.cpp:473
+msgid "Date/time window"
+msgstr "Okno daty/czasu"
+
+#: src/modules/TextUI.cpp:81
 msgid "Day keys: "
 msgstr "Klawisze w trybie dziennym: "
 
-#: src/gui/NewGui.cpp:420
+#: src/gui/NewGui.cpp:477
 #, fuzzy
 msgid "Decrease time speed"
 msgstr "Zmniejsz tempo upływu czasu [J]"
@@ -243,31 +319,42 @@ msgstr "Zmniejsz tempo upływu czasu [J]"
 msgid "Deimos"
 msgstr "Deimos"
 
-#: src/gui/NewGui.cpp:411
-#, fuzzy
-msgid "Dialogs"
-msgstr "Psy Gończe"
+#: src/ui_viewDialog.h:853
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "Przygaszaj słabe gwiazdy, jeśli widać bardzo jasny obiekt"
 
 #: src/translations.h:50
 msgid "Dione"
 msgstr "Dione"
 
-#: src/gui/NewGui.cpp:383
+#: src/ui_configurationDialog.h:570
+msgid "Disc viewport"
+msgstr "Lornetka"
+
+#: src/gui/NewGui.cpp:440
 msgid "Display Options"
-msgstr ""
+msgstr "Ustawienia wyświetlania"
 
-#: src/modules/StarWrapper.cpp:126 src/modules/StarWrapper.cpp:166
-#, fuzzy, qt-format
+#: src/ui_configurationDialog.h:509
+msgid "Display all of the information which is available"
+msgstr "Wyświetlaj wszystkie dostępne informacje"
+
+#: src/ui_configurationDialog.h:515
+msgid "Display only abbreviated information"
+msgstr "Wyświetlaj tylko informacje skrócone"
+
+#: src/modules/StarWrapper.cpp:165
+#, qt-format
 msgid "Distance: %1 Light Years"
-msgstr " lat świetlnych"
+msgstr "Odległość: %1 lat świetlnych"
 
-#: src/modules/Planet.cpp:130 src/modules/Planet.cpp:167
-#, fuzzy, c-format, qt-format
+#: src/modules/Planet.cpp:154
+#, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Odległość: "
+msgstr "Odległość: %1 j.a."
 
-#: src/ui_viewDialog.h:1052
-msgid "Download images"
+#: src/ui_viewDialog.h:856
+msgid "Dynamic eye adaptation"
 msgstr ""
 
 #: src/translations.h:65
@@ -278,16 +365,15 @@ msgstr "E"
 msgid "Earth"
 msgstr "Ziemia"
 
-#: src/modules/TextUI.cpp:123
+#: src/modules/TextUI.cpp:116
 msgid "Ecliptic Line"
 msgstr "Ekliptyka"
 
-#: src/ui_viewDialog.h:1080
-#, fuzzy
+#: src/gui/NewGui.cpp:449 src/ui_viewDialog.h:870
 msgid "Ecliptic line"
 msgstr "Ekliptyka"
 
-#: src/modules/TextUI.cpp:75
+#: src/modules/TextUI.cpp:68
 msgid "Effects "
 msgstr "Efekty "
 
@@ -295,43 +381,67 @@ msgstr "Efekty "
 msgid "Egyptian"
 msgstr "egipska"
 
+#: src/ui_configurationDialog.h:526
+#, fuzzy
+msgid "Enable keyboard navigation"
+msgstr "Zezwól na nawigację klawiaturą"
+
+#: src/ui_configurationDialog.h:532
+#, fuzzy
+msgid "Enable mouse navigation"
+msgstr "Zezwól na nawigację myszą"
+
+#: src/ui_configurationDialog.h:542
+msgid ""
+"Enables/disables night vision mode.  Night vision mode changes the "
+"appearance of Stellarium's user interface to use red light only - this helps "
+"to preserve the dark adaptation of the eye."
+msgstr ""
+"Włącza/wyłącza tryb widzenia w ciemności. Włączenie tego trybu powoduje "
+"wyświetlanie interfejsu użytkownika programu Stellarium w całości w kolorze "
+"czerwonym - pomaga to zachować adaptację oczu do widzenia w ciemności."
+
+#: src/ui_configurationDialog.h:536
+msgid ""
+"Enables/disables toolbar buttons for flipping the displayed image in the "
+"vertical and horizontal axes.   Useful for users of telescopes which flip "
+"the image of the object being observed."
+msgstr ""
+"Włącza/wyłącza wyświetlanie przycisków paska narzędzi służących do "
+"odwracania obrazu względem osi pionowej i poziomej. Jest to przydatne gdy "
+"używany teleskop odwraca obraz obserwowanego obiektu."
+
 #: src/translations.h:48
 msgid "Enceladus"
 msgstr "Enceladus"
 
 #: src/ui_locationDialogGui.h:344
 msgid "Enter the altitude in meter"
-msgstr ""
-
-#: src/modules/StarWrapper.cpp:48 src/modules/StarWrapper.cpp:112
-#: src/modules/Telescope.cpp:245
-#, fuzzy, qt-format
-msgid "Equ of date RA/DE: %1/%2"
-msgstr "Odpowiednik daty"
+msgstr "Podaj wysokość w metrach"
 
 #: src/core/MappingClasses.cpp:77
 msgid "Equal Area"
-msgstr ""
+msgstr "Równopolowe"
 
-#: src/modules/TextUI.cpp:122
+#: src/modules/TextUI.cpp:115
 msgid "Equator Line"
 msgstr "Równik niebieski"
 
-#: src/ui_viewDialog.h:1084
+#: src/gui/NewGui.cpp:450 src/ui_viewDialog.h:874
 #, fuzzy
 msgid "Equator line"
 msgstr "Równik niebieski"
 
-#: src/modules/TextUI.cpp:121
+#: src/modules/TextUI.cpp:114
 msgid "Equatorial Grid"
 msgstr "Siatka równikowa"
 
-#: src/ui_viewDialog.h:1085
+#: src/gui/NewGui.cpp:448 src/ui_viewDialog.h:875
 #, fuzzy
 msgid "Equatorial J2000 grid"
-msgstr "Siatka równikowa"
+msgstr "Siatka równikowa J2000"
 
-#: src/ui_viewDialog.h:1083
+#: src/gui/NewGui.cpp:447 src/ui_viewDialog.h:873
 #, fuzzy
 msgid "Equatorial grid"
 msgstr "Siatka równikowa"
@@ -340,75 +450,104 @@ msgstr "Siatka równikowa"
 msgid "Europa"
 msgstr "Europa"
 
-#: src/gui/ViewDialog.cpp:340
+#: src/gui/ViewDialog.cpp:365
 #, fuzzy
 msgid "Exceptional Leonid rate"
 msgstr ": wysoka intensywność Leonidów"
 
-#: src/ui_searchDialogGui.h:141 src/ui_searchDialogGui.h:142
+#: src/ui_searchDialogGui.h:185 src/ui_searchDialogGui.h:186
 msgid "Find Object"
-msgstr ""
+msgstr "Znajdź obiekt"
 
 #: src/core/MappingClasses.cpp:178
 msgid "Fish-eye"
-msgstr ""
+msgstr "\"Rybie oko\""
 
-#: src/gui/NewGui.cpp:408
+#: src/gui/NewGui.cpp:465
 #, fuzzy
 msgid "Flip scene horizontally"
 msgstr "Odwróć w poziomie"
 
-#: src/gui/NewGui.cpp:409
+#: src/gui/NewGui.cpp:466
 #, fuzzy
 msgid "Flip scene vertically"
 msgstr "Odwróć w pionie"
 
-#: src/ui_dateTimeDialogGui.h:167 src/ui_helpDialogGui.h:151
-#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:1019
-#: src/ui_configurationDialog.h:134
+#: src/gui/NewGui.cpp:456
+msgid "Fog"
+msgstr "Mgła"
+
+#: src/ui_dateTimeDialogGui.h:179 src/ui_helpDialogGui.h:163
+#: src/ui_locationDialogGui.h:321 src/ui_viewDialog.h:837
+#: src/ui_configurationDialog.h:456
 #, fuzzy
 msgid "Form"
 msgstr "Bród"
 
-#: src/gui/HelpDialog.cpp:128
-msgid "Further Reading"
-msgstr ""
+#: src/gui/NewGui.cpp:464
+msgid "Full-screen mode"
+msgstr "Tryb pełnoekranowy"
 
-#: src/modules/Nebula.cpp:261
+#: src/gui/HelpDialog.cpp:134
+msgid "Further Reading"
+msgstr "Dalsza lektura"
+
+#: src/modules/Nebula.cpp:264
 msgid "Galaxy"
-msgstr ""
+msgstr "Galaktyka"
 
 #: src/translations.h:44
 msgid "Ganymede"
 msgstr "Ganimedes"
 
-#: src/modules/TextUI.cpp:72
+#: src/modules/TextUI.cpp:65
 msgid "General "
 msgstr "Podstawowe "
 
-#: src/modules/Nebula.cpp:267
+#: src/modules/Nebula.cpp:270
 msgid "Globular cluster"
-msgstr ""
+msgstr "Gromada kulista"
 
-#: src/ui_searchDialogGui.h:156
+#: src/ui_searchDialogGui.h:189
 msgid "Go"
-msgstr ""
+msgstr "Start!"
 
-#: src/ui_helpDialogGui.h:152
+#: src/ui_configurationDialog.h:564
+#, fuzzy
+msgid "Gravity labels"
+msgstr "Etykiety grawitacji"
+
+#: src/gui/NewGui.cpp:454
+msgid "Ground"
+msgstr "Ziemia"
+
+#: src/ui_helpDialogGui.h:164
 msgid "Help"
 msgstr "Pomoc"
 
-#: src/gui/ViewDialog.cpp:343
+#: src/gui/NewGui.cpp:469
+msgid "Help window"
+msgstr "Okno pomocy"
+
+#: src/ui_configurationDialog.h:502
+msgid "Hides the mouse cursor when inactive"
+msgstr "W razie bezczynności ukrywa kursor myszy"
+
+#: src/gui/ViewDialog.cpp:368
 #, fuzzy
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ": najwyższa intensywność (1966 Leonidy)"
 
-#: src/ui_viewDialog.h:1056
-#, fuzzy
+#: src/modules/StarWrapper.cpp:57 src/modules/StarWrapper.cpp:147
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr ""
+
+#: src/ui_viewDialog.h:858
 msgid ""
 "Hourly\n"
-"zenith rate"
-msgstr "Liczba meteorów na godzinę"
+"zenith rate:"
+msgstr ""
 
 #: src/translations.h:53
 msgid "Hyperion"
@@ -419,110 +558,127 @@ msgid "Iapetus"
 msgstr "Japetus"
 
 #: src/core/MappingClasses.cpp:183
+#, fuzzy
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+"Przy odwzorowaniu typu \"rybie oko\" (<i>odwzorowaniu azymutalnym "
+"równoodległościowym</i>) linie proste ulegają zakrzywieniu gdy widoczne są z "
+"dużej odległości kątowej od środka pola widzenia (zniekształcenia tego "
+"rodzaju widać przez obiektywy o bardzo szerokim kącie widzenia)."
 
-#: src/gui/NewGui.cpp:421
+#: src/gui/NewGui.cpp:478
 #, fuzzy
 msgid "Increase time speed"
 msgstr "Zwiększ tempo upływu czasu [L]"
+
+#: src/ui_configurationDialog.h:491
+msgid "Initial direction of view:"
+msgstr "Początkowy kierunek widzenia:"
+
+#: src/ui_configurationDialog.h:485
+msgid "Initial field of view:"
+msgstr "Początkowy kąt widzenia:"
+
+#: src/ui_configurationDialog.h:533
+msgid "Interface"
+msgstr "Interfejs"
+
+#: src/ui_configurationDialog.h:499
+msgid "Interface style:"
+msgstr "Styl interfejsu:"
 
 #: src/translations.h:71
 msgid "Inuit"
 msgstr "Eskimos"
 
+#: src/ui_configurationDialog.h:551
+#, fuzzy
+msgid "Inverted color mode"
+msgstr "Odwróć kolory"
+
 #: src/translations.h:42
 msgid "Io"
 msgstr "Io"
-
-#: src/modules/StarWrapper.cpp:46 src/modules/StarWrapper.cpp:109
-#: src/modules/Telescope.cpp:242
-#, qt-format
-msgid "J2000 RA/DE: %1/%2"
-msgstr ""
 
 #: src/translations.h:41
 msgid "Jupiter"
 msgstr "Jowisz"
 
-#: src/gui/HelpDialog.cpp:120
-#, fuzzy
+#: src/gui/HelpDialog.cpp:126
 msgid "Keys"
-msgstr "Tethys"
+msgstr "Klawisze"
 
 #: src/translations.h:72
 msgid "Korean"
 msgstr "Koreański"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:885
 msgid "Labels and Markers"
-msgstr ""
+msgstr "Etykiety i znaczniki"
 
 #: src/translations.h:73
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:897
 #, fuzzy
 msgid "Landscape"
 msgstr "Krajobrazy"
 
-#: src/modules/TextUI.cpp:129
+#: src/modules/TextUI.cpp:122
 msgid "Landscape: "
 msgstr "Krajobraz: "
 
 #: src/ui_locationDialogGui.h:335
 #, fuzzy
 msgid "Latitude:"
-msgstr "Szerokość: "
+msgstr "Szerokość:"
 
-#: src/modules/TextUI.cpp:80
+#: src/modules/TextUI.cpp:73
 msgid "Latitude: "
 msgstr "Szerokość: "
 
-#: src/gui/HelpDialog.cpp:53
-#, fuzzy
+#: src/gui/HelpDialog.cpp:57
 msgid "Left click"
-msgstr "Lewa Flaga"
+msgstr "Kliknięcie LPM"
 
-#: src/modules/TextUI.cpp:128
+#: src/modules/TextUI.cpp:121
 msgid "Light Pollution Luminance: "
 msgstr "Zanieczyszczenie świetlne "
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:895
 #, fuzzy
 msgid "Light pollution:"
-msgstr "Zanieczyszczenie świetlne "
+msgstr "Zanieczyszczenie świetlne"
 
-#: src/modules/TextUI.cpp:108
-#, fuzzy
+#: src/modules/TextUI.cpp:101
 msgid "Limiting Magnitude: "
-msgstr "Wielkość gwiazdowa: "
+msgstr "Graniczna wielkość gwiazdowa: "
 
-#: src/modules/TextUI.cpp:147
+#: src/modules/TextUI.cpp:140
 msgid "Load Default Configuration: "
 msgstr "Wczytaj ustawienia domyślne: "
 
 #: src/modules/ConstellationMgr.cpp:371
-#, fuzzy, qt-format
+#, qt-format
 msgid "Loading Constellation Art: %1/%2"
-msgstr "Ładowanie obrazów gwiazdozbiorów: "
+msgstr "Ładowanie rysunków gwiazdozbiorów: %1/%2"
 
-#: src/modules/NebulaMgr.cpp:372
-#, fuzzy, qt-format
+#: src/modules/NebulaMgr.cpp:367
+#, qt-format
 msgid "Loading NGC catalog: %1/%2"
-msgstr "Ładowanie katalogu NGC: "
+msgstr "Ładowanie katalogu NGC: %1/%2"
 
 #: src/modules/StarMgr.cpp:253
-#, fuzzy, qt-format
+#, qt-format
 msgid "Loading catalog %1"
-msgstr "Ładowanie katalogu NGC: "
+msgstr "Ładowanie katalogu %1"
 
-#: src/modules/TextUI.cpp:140
+#: src/modules/TextUI.cpp:133
 msgid "Local Script: "
 msgstr "Skrypt lokalny: "
 
@@ -530,53 +686,51 @@ msgstr "Skrypt lokalny: "
 msgid "Location"
 msgstr "Lokalizacja"
 
-#: src/modules/LandscapeMgr.cpp:428
+#: src/gui/NewGui.cpp:474
+msgid "Location window"
+msgstr "Okno lokalizacji"
+
+#: src/modules/LandscapeMgr.cpp:436
 msgid "Location: "
 msgstr "Położenie: "
 
 #: src/ui_locationDialogGui.h:329
 #, fuzzy
 msgid "Longitude:"
-msgstr "Długość: "
+msgstr "Długość:"
 
-#: src/modules/TextUI.cpp:81
+#: src/modules/TextUI.cpp:74
 msgid "Longitude: "
 msgstr "Długość: "
 
-#: src/modules/TextUI.cpp:132
+#: src/modules/TextUI.cpp:125
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Mnożnik skalowania wielkości: "
 
-#: src/modules/TextUI.cpp:105
+#: src/modules/TextUI.cpp:98
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Mnożnik zwiększania jasności: "
 
-#: src/modules/Nebula.cpp:111 src/modules/Planet.cpp:164
-#: src/modules/StarWrapper.cpp:63 src/modules/StarWrapper.cpp:162
-#, fuzzy, qt-format
-msgid "Magnitude: %1"
-msgstr "Wielkość gwiazdowa: "
-
-#: src/modules/Nebula.cpp:91 src/modules/Planet.cpp:117
-#, fuzzy, qt-format
+#: src/modules/Nebula.cpp:101 src/modules/Planet.cpp:133
+#, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Wielkość gwiazdowa: "
+msgstr "Wielkość gwiazdowa: <b>%1</b>"
 
-#: src/modules/StarWrapper.cpp:44 src/modules/StarWrapper.cpp:107
+#: src/modules/StarWrapper.cpp:51 src/modules/StarWrapper.cpp:135
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr ""
+msgstr "Wielkość gwiazdowa: <b>%1</b> (B-V: %2)"
 
-#: src/ui_configurationDialog.h:150
+#: src/ui_configurationDialog.h:498
 #, fuzzy
 msgid "Main"
 msgstr "Kil"
 
-#: src/modules/TextUI.cpp:130
+#: src/modules/TextUI.cpp:123
 msgid "Manual zoom: "
 msgstr "Przybliżanie i oddalanie ręczne: "
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:889
 #, fuzzy
 msgid "Markings"
 msgstr "Mars"
@@ -585,42 +739,40 @@ msgstr "Mars"
 msgid "Mars"
 msgstr "Mars"
 
+#: src/ui_configurationDialog.h:567
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Zamaskuj wszystko poza środkowym kołem w widoku głównym."
+
 #: src/core/Mapping.cpp:28
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "Maksymalny kąt widzenia: "
 
-#: src/modules/TextUI.cpp:106
+#: src/modules/TextUI.cpp:99
 msgid "Maximum Magnitude to Label: "
 msgstr "Podpisy maksymalnie do jasności: "
 
-#: src/modules/TextUI.cpp:134
+#: src/modules/TextUI.cpp:127
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Podpisy mgławic maksymalnie do jasności: "
 
 #: src/core/MappingClasses.cpp:278
-#, fuzzy
 msgid "Mercator"
-msgstr "Merkury"
-
-#: src/core/MappingClasses.cpp:283
-#, fuzzy
-msgid "Mercator projection"
-msgstr "Szukaj obiektu"
+msgstr "Merkatora"
 
 #: src/translations.h:34
 msgid "Mercury"
 msgstr "Merkury"
 
-#: src/modules/TextUI.cpp:119
+#: src/modules/TextUI.cpp:112
 msgid "Meridian Line"
 msgstr "Południk"
 
-#: src/ui_viewDialog.h:1082
+#: src/gui/NewGui.cpp:451 src/ui_viewDialog.h:872
 #, fuzzy
 msgid "Meridian line"
 msgstr "Południk"
 
-#: src/modules/TextUI.cpp:133
+#: src/modules/TextUI.cpp:126
 msgid "Milky Way intensity: "
 msgstr "Jasność Drogi Mlecznej: "
 
@@ -628,18 +780,22 @@ msgstr "Jasność Drogi Mlecznej: "
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/gui/HelpDialog.cpp:180 src/gui/NewGui.cpp:441
-#, fuzzy
-msgid "Misc"
-msgstr "Mimas"
+#: src/gui/HelpDialog.cpp:201 src/gui/HelpDialog.cpp:257
+#: src/gui/HelpDialog.cpp:259 src/gui/NewGui.cpp:499
+msgid "Miscellaneous"
+msgstr "Różne"
 
 #: src/translations.h:37
 msgid "Moon"
 msgstr "Księżyc"
 
-#: src/gui/HelpDialog.cpp:58 src/gui/NewGui.cpp:435
+#: src/ui_configurationDialog.h:505
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Limit czasu kursora myszy (w sekundach):"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/NewGui.cpp:492
 msgid "Movement and Selection"
-msgstr ""
+msgstr "Przesuwanie i wybór"
 
 #: src/translations.h:63
 msgid "N"
@@ -649,32 +805,51 @@ msgstr "N"
 msgid "Navajo"
 msgstr "Nawaho"
 
-#: src/modules/Nebula.cpp:270
+#: src/ui_configurationDialog.h:520
+msgid "Navigation"
+msgstr "Nawigacja"
+
+#: src/modules/Nebula.cpp:273
 msgid "Nebula"
 msgstr "Mgławica"
 
-#: src/modules/TextUI.cpp:125
+#: src/modules/TextUI.cpp:118
 msgid "Nebula Circles"
 msgstr "Mgławice jako koła"
 
-#: src/modules/TextUI.cpp:124
+#: src/modules/TextUI.cpp:117
 msgid "Nebula Names"
 msgstr "Nazwy mgławic"
 
-#: src/ui_viewDialog.h:1050 src/ui_viewDialog.h:1067
-#, fuzzy
+#: src/gui/NewGui.cpp:458 src/ui_viewDialog.h:886
 msgid "Nebulas"
-msgstr "Mgławica"
+msgstr "Mgławice"
 
 #: src/translations.h:56
 msgid "Neptune"
 msgstr "Neptun"
 
-#: src/gui/ViewDialog.cpp:285
-msgid "No description"
-msgstr ""
+#: src/gui/NewGui.cpp:463
+msgid "Night mode"
+msgstr "Tryb nocny"
 
-#: src/gui/ViewDialog.cpp:334 src/ui_viewDialog.h:1062
+#: src/ui_configurationDialog.h:545
+msgid "Night vision mode"
+msgstr "Tryb widzenia w ciemności"
+
+#: src/gui/ViewDialog.cpp:298
+msgid "No description"
+msgstr "Brak opisu"
+
+#: src/gui/ViewDialog.cpp:356
+msgid "No shooting stars"
+msgstr "Wyłącz spadające gwiazdy"
+
+#: src/ui_configurationDialog.h:519
+msgid "None"
+msgstr "Brak"
+
+#: src/gui/ViewDialog.cpp:359
 #, fuzzy
 msgid "Normal rate"
 msgstr ": normalna"
@@ -683,52 +858,60 @@ msgstr ": normalna"
 msgid "Norse"
 msgstr "Nordycki"
 
-#: src/modules/TextUI.cpp:131
+#: src/modules/TextUI.cpp:124
 msgid "Object Sizing Rule: "
 msgstr "Miara skalowania obiektów: "
 
-#: src/modules/Nebula.cpp:264
+#: src/modules/Nebula.cpp:267
 msgid "Open cluster"
-msgstr ""
+msgstr "Gromada otwarta"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:891
 #, fuzzy
 msgid "Options"
 msgstr "Orion"
 
 #: src/core/MappingClasses.cpp:336
 msgid "Orthographic"
-msgstr ""
+msgstr "Ortograficzne"
 
 #: src/core/MappingClasses.cpp:341
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
+"Odwzorowanie ortograficzne jest powiązane z odwzorowaniem perspektywicznym, "
+"lecz punkt rzutowania położony jest w nieskończonej odległości."
 
-#: src/gui/HelpDialog.cpp:51
-msgid "Page Up/Down"
+#: src/ui_configurationDialog.h:483
+msgid "Other:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:59
+#: src/gui/HelpDialog.cpp:55
+msgid "Page Up/Down"
+msgstr "Strona w górę / w dół"
+
+#: src/gui/HelpDialog.cpp:63
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/modules/StarWrapper.cpp:125
-#, fuzzy, qt-format
+#: src/modules/StarWrapper.cpp:168
+#, qt-format
 msgid "Parallax: %1"
-msgstr "Paralaksa "
+msgstr "Paralaksa: %1"
 
 #: src/core/MappingClasses.cpp:11
 #, fuzzy
 msgid "Perspective"
-msgstr "Ustawiony czas"
+msgstr "Perspektywiczne"
 
 #: src/core/MappingClasses.cpp:16
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Przy odwzorowaniu perspektywicznym horyzont jest linią prostą. W matematyce "
+"stosuje się nazwę <i>rzut gnomoniczny</i>."
 
 #: src/translations.h:40
 msgid "Phobos"
@@ -738,92 +921,106 @@ msgstr "Phobos"
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/modules/TextUI.cpp:116
+#: src/modules/TextUI.cpp:109
 msgid "Planet Names"
 msgstr "Nazwy planet"
 
-#: src/modules/TextUI.cpp:117
+#: src/modules/TextUI.cpp:110
 msgid "Planet Orbits"
 msgstr "Orbity planet"
 
-#: src/modules/TextUI.cpp:118
+#: src/modules/TextUI.cpp:111
 msgid "Planet Trails"
 msgstr "Ślady planet"
 
-#: src/modules/Nebula.cpp:273
-msgid "Planetary nebula"
-msgstr ""
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr "Planeta: "
 
-#: src/ui_viewDialog.h:1066
+#: src/ui_configurationDialog.h:577
+msgid "Planetarium"
+msgstr "Planetarium"
+
+#: src/modules/Nebula.cpp:276
+msgid "Planetary nebula"
+msgstr "Mgławica planetarna"
+
+#: src/ui_viewDialog.h:888
 msgid "Planets"
 msgstr "Planety"
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:842
 #, fuzzy
 msgid "Planets and Satellites"
 msgstr "Wyróżnianie planet"
+
+#: src/gui/NewGui.cpp:461
+#, fuzzy
+msgid "Planets hints"
+msgstr "Podpowiedzi do planet"
+
+#: src/ui_configurationDialog.h:578
+msgid "Plugins"
+msgstr "Wtyczki"
 
 #: src/translations.h:58
 msgid "Pluto"
 msgstr "Pluton"
 
+#: src/ui_viewDialog.h:847
+msgid "Point sources rendering"
+msgstr ""
+
 #: src/translations.h:76
 msgid "Polynesian"
 msgstr "polinezyjska"
 
-#: src/modules/TextUI.cpp:91
+#: src/modules/TextUI.cpp:84
 msgid "Preset Sky Time: "
 msgstr "Domyślny czas gwiazdowy: "
 
-#: src/modules/TextUI.cpp:94
+#: src/modules/TextUI.cpp:87
 msgid "Preset Time"
 msgstr "Ustawiony czas"
 
-#: src/ui_configurationDialog.h:149
-#, fuzzy
-msgid "Program language:"
-msgstr "Język programu: "
+#: src/ui_configurationDialog.h:464
+msgid "Program language"
+msgstr "Język programu"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:866
 #, fuzzy
 msgid "Projection"
 msgstr "Projekcja :"
 
-#: src/ui_dateTimeDialogGui.h:170 src/ui_helpDialogGui.h:153
-#: src/ui_searchDialogGui.h:143 src/ui_viewDialog.h:1023
-#: src/ui_configurationDialog.h:137
-msgid ""
-"QToolButton {\n"
-"color: white;\n"
-"font-weight: bold;\n"
-"background: None;\n"
-"border: 1px solid #2e2e36;\n"
-"  border-radius: 2px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"color: darkgray;\n"
-"}"
-msgstr ""
-
-#: src/gui/NewGui.cpp:443
+#: src/gui/NewGui.cpp:501
 #, fuzzy
 msgid "Quit"
 msgstr "Eskimos"
 
-#: src/modules/Nebula.cpp:92 src/modules/Planet.cpp:121
-#, fuzzy, qt-format
-msgid "RA/DE: %1/%2"
-msgstr "RA/DE: "
+#: src/modules/Nebula.cpp:106 src/modules/Planet.cpp:138
+#: src/modules/StarWrapper.cpp:53 src/modules/StarWrapper.cpp:138
+#: src/modules/Telescope.cpp:252
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr ""
+
+#: src/modules/StarWrapper.cpp:55 src/modules/StarWrapper.cpp:141
+#: src/modules/Telescope.cpp:255
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr ""
+
+#: src/ui_viewDialog.h:850
+msgid "Relative scale:"
+msgstr "Skala względna:"
 
 #: src/translations.h:51
 msgid "Rhea"
 msgstr "Rhea"
 
-#: src/gui/HelpDialog.cpp:54
-#, fuzzy
+#: src/gui/HelpDialog.cpp:58
 msgid "Right click"
-msgstr "Prawa Flaga"
+msgstr "Kliknięcie PPM"
 
 #: src/translations.h:64
 msgid "S"
@@ -833,165 +1030,192 @@ msgstr "S"
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/modules/TextUI.cpp:148
+#: src/modules/TextUI.cpp:141
 msgid "Save Current Configuration as Default: "
 msgstr "Zapisz ustawienia jako domyślne: "
 
-#: src/gui/NewGui.cpp:444
+#: src/gui/NewGui.cpp:502
 msgid "Save screenshot"
-msgstr ""
+msgstr "Zapisz zrzut ekranu"
 
-#: src/ui_viewDialog.h:1046
+#: src/ui_viewDialog.h:844
 #, fuzzy
 msgid "Scale Moon"
 msgstr "Zapisz lokalizację"
 
-#: src/ui_viewDialog.h:1039
-#, fuzzy
-msgid "Scale:"
-msgstr "Skalowanie Księżyca"
-
-#: src/modules/TextUI.cpp:76
+#: src/modules/TextUI.cpp:69
 msgid "Scripts "
 msgstr "Skrypty "
 
-#: src/modules/TextUI.cpp:144
+#: src/gui/NewGui.cpp:471
+msgid "Search window"
+msgstr "Okno wyszukiwania"
+
+#: src/modules/TextUI.cpp:137
 msgid "Select and exit to run."
 msgstr "Wybierz tę opcję i wyjdź z menu aby uruchomić."
 
-#: src/gui/HelpDialog.cpp:62
-#, fuzzy
+#: src/gui/HelpDialog.cpp:66
 msgid "Select object"
-msgstr "Szukaj obiektu"
+msgstr "Wybór obiektu"
+
+#: src/ui_configurationDialog.h:506
+msgid "Selected Object Information"
+msgstr "Informacja o zaznaczonym obiekcie"
 
 #: src/ui_locationDialogGui.h:327
 #, fuzzy
 msgid "Selected:"
-msgstr "Wybrane : "
+msgstr "Wybrane :"
 
-#: src/modules/TextUI.cpp:70
+#: src/ui_configurationDialog.h:497
+msgid "Set"
+msgstr "Ustaw"
+
+#: src/modules/TextUI.cpp:63
 msgid "Set Location "
 msgstr "Ustaw lokalizację "
 
-#: src/modules/TextUI.cpp:71
+#: src/modules/TextUI.cpp:64
 msgid "Set Time "
 msgstr "Ustaw czas "
 
-#: src/modules/TextUI.cpp:87
+#: src/modules/TextUI.cpp:80
 msgid "Set Time Zone: "
 msgstr "Ustaw strefę czasową: "
 
-#: src/modules/TextUI.cpp:151
+#: src/modules/TextUI.cpp:144
 msgid "Set UI Locale: "
 msgstr "Ustawienie lokalne: "
 
-#: src/gui/NewGui.cpp:422
+#: src/gui/NewGui.cpp:497
+msgid "Set home planet to selected planet"
+msgstr "Ustaw bieżącą planetę jako planetę początkową"
+
+#: src/gui/NewGui.cpp:479
 #, fuzzy
 msgid "Set normal time rate"
 msgstr ": normalna"
 
-#: src/gui/NewGui.cpp:423
+#: src/ui_configurationDialog.h:488
+msgid "Set the initial field of view in degrees"
+msgstr "Ustawienie początkowego kąta widzenia w stopniach"
+
+#: src/gui/NewGui.cpp:480
 #, fuzzy
 msgid "Set time to now"
-msgstr "Ustaw czas "
+msgstr "Ustaw czas"
 
-#: src/ui_viewDialog.h:1055
+#: src/ui_configurationDialog.h:474
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_viewDialog.h:857
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Spadające gwiazdy"
 
-#: src/ui_viewDialog.h:1051
-msgid "Short labels"
-msgstr ""
+#: src/ui_configurationDialog.h:518
+msgid "Short information"
+msgstr "Krótka informacja"
 
-#: src/ui_viewDialog.h:1037 src/ui_viewDialog.h:1042 src/ui_viewDialog.h:1049
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:841
 #, fuzzy
 msgid "Show"
-msgstr "Pokaż: "
+msgstr "Pokaż:"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:882
 #, fuzzy
 msgid "Show art"
-msgstr "Pokaż: "
+msgstr "Pokaż:"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:894
 #, fuzzy
 msgid "Show atmosphere"
 msgstr "Atmosfera"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:881
 msgid "Show boundaries"
-msgstr ""
+msgstr "Pokazuj granice"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_configurationDialog.h:539
+msgid "Show flip buttons"
+msgstr "Pokaż przyciski odwracania obrazu"
+
+#: src/ui_viewDialog.h:893
 #, fuzzy
 msgid "Show fog"
-msgstr "Pokaż: "
+msgstr "Pokaż:"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:892
 msgid "Show ground"
-msgstr ""
+msgstr "Pokazuj ziemię"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:879
 msgid "Show labels"
-msgstr ""
+msgstr "Pokazuj etykiety"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:880
 #, fuzzy
 msgid "Show lines"
-msgstr "Pokaż: "
+msgstr "Pokaż:"
 
-#: src/ui_viewDialog.h:1044
+#: src/ui_viewDialog.h:846
 msgid "Show markers"
-msgstr ""
+msgstr "Pokazuj znaczniki"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:843
 msgid "Show orbits"
-msgstr ""
+msgstr "Pokaż orbity"
 
-#: src/modules/TextUI.cpp:103
+#: src/modules/TextUI.cpp:96
 msgid "Show: "
 msgstr "Pokaż: "
 
-#: src/modules/TextUI.cpp:149
+#: src/modules/TextUI.cpp:142
 msgid "Shut Down: "
 msgstr "Wyłącz komputer: "
 
-#: src/modules/TextUI.cpp:90
+#: src/modules/TextUI.cpp:83
 msgid "Sidereal"
 msgstr "Syderyczny (gwiazdowy)"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:845
 msgid "Simulate light speed"
-msgstr ""
+msgstr "Symuluj prędkość światła"
 
-#: src/modules/Nebula.cpp:100
-#, fuzzy, qt-format
+#: src/modules/Nebula.cpp:118
+#, qt-format
 msgid "Size: %1"
-msgstr "Rozmiar: "
+msgstr "Rozmiar: %1"
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:867
 #, fuzzy
 msgid "Sky"
 msgstr "Sek"
 
-#: src/modules/TextUI.cpp:99
+#: src/modules/TextUI.cpp:92
 msgid "Sky Culture: "
 msgstr "Kultura nieba: "
 
-#: src/modules/TextUI.cpp:100
+#: src/modules/TextUI.cpp:93
 msgid "Sky Language: "
 msgstr "Język mapy nieba: "
 
-#: src/modules/TextUI.cpp:92
+#: src/modules/TextUI.cpp:85
 msgid "Sky Time At Start-up: "
 msgstr "Czas gwiazdowy po uruchomieniu programu: "
 
-#: src/modules/TextUI.cpp:86
+#: src/modules/TextUI.cpp:79
 msgid "Sky Time: "
 msgstr "Czas gwiazdowy: "
 
-#: src/modules/TextUI.cpp:83
+#: src/gui/NewGui.cpp:472
+msgid "Sky and viewing options window"
+msgstr "Okno ustawień widoku i nieba"
+
+#: src/modules/TextUI.cpp:76
 msgid "Solar System Body: "
 msgstr "Ciało Układu Słonecznego: "
 
@@ -999,113 +1223,176 @@ msgstr "Ciało Układu Słonecznego: "
 msgid "Solar System Observer"
 msgstr "Obserwator Układu Słonecznego"
 
-#: src/gui/HelpDialog.cpp:49
+#: src/gui/HelpDialog.cpp:53 src/gui/NewGui.cpp:118
 #, fuzzy
 msgid "Space"
-msgstr "Kopia"
+msgstr "Spacja"
 
-#: src/modules/StarWrapper.cpp:132 src/modules/StarWrapper.cpp:172
-#, fuzzy, qt-format
+#: src/modules/StarWrapper.cpp:161
+#, qt-format
 msgid "Spectral Type: %1"
-msgstr "Typ widmowy: "
+msgstr "Typ widmowy: %1"
 
-#: src/gui/ViewDialog.cpp:337
+#: src/ui_configurationDialog.h:558
+msgid "Spheric mirror distortion"
+msgstr "Zniekształcenie zwierciadła kulistego"
+
+#: src/ui_configurationDialog.h:555
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Zniekształcenie zwierciadła kulistego jest używane przy rzutowaniu obrazu na "
+"zwierciadło kuliste, stosowane w tańszych systemach pełniących role "
+"planetariów."
+
+#: src/gui/ViewDialog.cpp:362
 #, fuzzy
 msgid "Standard Perseids rate"
 msgstr ": zwykła intensywność Perseidów"
 
-#: src/modules/TextUI.cpp:104
+#: src/modules/TextUI.cpp:97
 msgid "Star Value Multiplier: "
-msgstr "Współczynnik ilości gwizd: "
+msgstr "Mnożnik liczby gwiazd: "
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:899
 #, fuzzy
 msgid "Starlore"
 msgstr "Gwiazda"
 
-#: src/ui_viewDialog.h:1038 src/ui_viewDialog.h:1065
+#: src/gui/NewGui.cpp:460 src/ui_viewDialog.h:887
 msgid "Stars"
 msgstr "Gwiazdy"
 
-#: src/modules/TextUI.cpp:73
+#: src/modules/TextUI.cpp:66
 msgid "Stars "
 msgstr "Gwiazdy "
 
-#: src/gui/NewGui.cpp:928
-msgid "Stellarium"
-msgstr ""
+#: src/ui_configurationDialog.h:468
+#, fuzzy
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Ustalaj datę i czas na podstawie czasu systemowego"
 
-#: src/gui/HelpDialog.cpp:119
+#: src/ui_configurationDialog.h:465
+#, fuzzy
+msgid "Startup Date and Time"
+msgstr "Data i czas przy starcie programu"
+
+#: src/ui_configurationDialog.h:484
+#, fuzzy
+msgid "Startup FOV and Direction"
+msgstr "Początkowy kąt widzenia i kierunek"
+
+#: src/gui/NewGui.cpp:999
+msgid "Stellarium"
+msgstr "Stellarium"
+
+#: src/gui/HelpDialog.cpp:125
 msgid "Stellarium Help"
-msgstr ""
+msgstr "Pomoc programu Stellarium"
 
 #: src/core/MappingClasses.cpp:133
 msgid "Stereographic"
-msgstr ""
+msgstr "Stereograficzne"
 
-#: src/gui/NewGui.cpp:431
+#: src/core/MappingClasses.cpp:138
+#, fuzzy
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+"Rzut stereograficzny znany był już od starożytności pod nazwą rzutu "
+"planisferycznego. Jest to odwzorowanie wiernokątne - linie na sferze i ich "
+"obrazy na płaszczyźnie przecinają się pod takim samym kątem, jednak nie są "
+"zachowane pola ani odległości."
+
+#: src/gui/NewGui.cpp:488
 msgid "Subtract 1 sidereal day"
-msgstr ""
+msgstr "Odejmij 1 dzień gwiazdowy"
 
-#: src/gui/NewGui.cpp:433
+#: src/gui/NewGui.cpp:490
 msgid "Subtract 1 sidereal week"
-msgstr ""
+msgstr "Odejmij 1 tydzień gwiazdowy"
 
-#: src/gui/NewGui.cpp:427
+#: src/gui/NewGui.cpp:484
 msgid "Subtract 1 solar day"
-msgstr ""
+msgstr "Odejmij 1 dzień słoneczny"
 
-#: src/gui/NewGui.cpp:425
+#: src/gui/NewGui.cpp:482
 msgid "Subtract 1 solar hour"
-msgstr ""
+msgstr "Odejmij 1 godzinę słoneczną"
 
-#: src/gui/NewGui.cpp:429
+#: src/gui/NewGui.cpp:486
 msgid "Subtract 1 solar week"
-msgstr ""
+msgstr "Odejmij 1 tydzień słoneczny"
 
 #: src/translations.h:33
 msgid "Sun"
 msgstr "Słońce"
 
-#: src/gui/NewGui.cpp:442
+#: src/gui/NewGui.cpp:500
+#, fuzzy
 msgid "Switch between equatorial and azimuthal mount"
+msgstr "Przełączanie między układem równikowym i azymutowym"
+
+#: src/ui_configurationDialog.h:471
+msgid "System date and time"
+msgstr "Data i czas systemowy"
+
+#: src/ui_configurationDialog.h:477
+msgid "System date at:"
 msgstr ""
 
 #: src/translations.h:49
 msgid "Tethys"
 msgstr "Tethys"
 
-#: src/gui/HelpDialog.cpp:130
+#: src/gui/HelpDialog.cpp:136
 msgid "The Stellarium User Guide:"
-msgstr ""
+msgstr "Przewodnik użytkownika Stellarium"
 
-#: src/gui/HelpDialog.cpp:129
+#: src/gui/HelpDialog.cpp:135
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
+"Poniżej znajdują się odnośniki do zewnętrznych stron internetowych. "
+"Kliknięcie odnośnika spowoduje uruchomienie przeglądarki WWW.\n"
 
 #: src/core/MappingClasses.cpp:82
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>."
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Pełna nazwa tego odwzorowania brzmi <i>odwzorowanie azymutalne równopolowe "
+"Lamberta</i>. Zachowuje ono pole powierzchni, lecz nie zachowuje kątów."
 
 #: src/core/MappingClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>."
+"projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
+"Pełna nazwa tego odwzorowania brzmi <i>odwzorowanie walcowe "
+"równoodległościowe</i>. Odwzorowanie to zachowuje równomierność "
+"rozmieszczenia linii równoległych."
 
-#: src/core/MappingClasses.cpp:138
-msgid "This mode is similar to fish-eye projection mode."
+#: src/core/MappingClasses.cpp:283
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
 msgstr ""
+"Odwzorowanie Merkatora jest jednym z najczęściej wykorzystywanych odwzorowań "
+"do przedstawiania mapy świata. Zachowuje ono kierunki i kształty, lecz "
+"rozmiary ulegają zniekształceniu (w coraz większym stopniu w miarę oddalania "
+"się od równika)."
 
 #: src/main.cpp:52
 msgid "This system does not support OpenGL."
-msgstr ""
+msgstr "Ten system nie obsługuje OpenGL."
 
-#: src/modules/TextUI.cpp:95
+#: src/modules/TextUI.cpp:88
 msgid "Time Display Format: "
 msgstr "Format wyświetlania czasu: "
 
@@ -1113,161 +1400,45 @@ msgstr "Format wyświetlania czasu: "
 msgid "Titan"
 msgstr "Tytan"
 
-#: src/gui/NewGui.cpp:402
-msgid "Toggle DSS"
-msgstr ""
+#: src/ui_configurationDialog.h:552
+msgid "Tools"
+msgstr "Narzędzia"
 
-#: src/gui/NewGui.cpp:398
-#, fuzzy
-msgid "Toggle atmosphere"
-msgstr "Atmosfera"
-
-#: src/gui/NewGui.cpp:389
-#, fuzzy
-msgid "Toggle azimutal grid"
-msgstr "Siatka azymutalna"
-
-#: src/gui/NewGui.cpp:395
-#, fuzzy
-msgid "Toggle cardinal points"
-msgstr "Punkty kardynalne: "
-
-#: src/gui/NewGui.cpp:417
-#, fuzzy
-msgid "Toggle configuration window"
-msgstr "Okno ustawień"
-
-#: src/gui/NewGui.cpp:385
-#, fuzzy
-msgid "Toggle constellation art"
-msgstr "Ładowanie obrazów gwiazdozbiorów: "
-
-#: src/gui/NewGui.cpp:387
-#, fuzzy
-msgid "Toggle constellation boundaries"
-msgstr "Granice gwiazdozbiorów"
-
-#: src/gui/NewGui.cpp:386
-#, fuzzy
-msgid "Toggle constellation labels"
-msgstr "Podpisy gwiazdozbiorów: "
-
-#: src/gui/NewGui.cpp:384
-#, fuzzy
-msgid "Toggle constellation lines"
-msgstr "Linie gwiazdozbiorów: "
-
-#: src/gui/NewGui.cpp:415
-msgid "Toggle date/time window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:392
-#, fuzzy
-msgid "Toggle ecliptic line"
-msgstr "Ekliptyka"
-
-#: src/gui/NewGui.cpp:393
-#, fuzzy
-msgid "Toggle equator line"
-msgstr "Równik niebieski"
-
-#: src/gui/NewGui.cpp:391
-#, fuzzy
-msgid "Toggle equatorial J2000 grid"
-msgstr "Siatka równikowa"
-
-#: src/gui/NewGui.cpp:390
-#, fuzzy
-msgid "Toggle equatorial grid"
-msgstr "Siatka równikowa"
-
-#: src/gui/NewGui.cpp:399
-msgid "Toggle fog"
-msgstr ""
-
-#: src/gui/NewGui.cpp:407
-msgid "Toggle full-screen mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:397
-msgid "Toggle ground"
-msgstr ""
-
-#: src/gui/NewGui.cpp:413
-msgid "Toggle help window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:414
-#, fuzzy
-msgid "Toggle location window"
-msgstr "Okno ustawień"
-
-#: src/gui/NewGui.cpp:394
-#, fuzzy
-msgid "Toggle meridian line"
-msgstr "Południk"
-
-#: src/gui/NewGui.cpp:401
-msgid "Toggle nebulas"
-msgstr ""
-
-#: src/gui/NewGui.cpp:406
-msgid "Toggle night mode"
-msgstr ""
-
-#: src/gui/NewGui.cpp:437
-msgid "Toggle object tracking"
-msgstr ""
-
-#: src/gui/NewGui.cpp:404
-#, fuzzy
-msgid "Toggle planets hints"
-msgstr "Wyróżnianie planet"
-
-#: src/gui/NewGui.cpp:412
-msgid "Toggle search window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:416
-msgid "Toggle sky and viewing options window"
-msgstr ""
-
-#: src/gui/NewGui.cpp:403
-#, fuzzy
-msgid "Toggle stars"
-msgstr "Trzy gwiazdy"
+#: src/gui/NewGui.cpp:494
+msgid "Track object"
+msgstr "Śledź obiekt"
 
 #: src/translations.h:78
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_viewDialog.h:1040
+#: src/ui_viewDialog.h:849
 #, fuzzy
 msgid "Twinkle:"
-msgstr "Migotanie: "
+msgstr "Migotanie:"
 
-#: src/modules/TextUI.cpp:107
+#: src/modules/TextUI.cpp:100
 msgid "Twinkling: "
 msgstr "Migotanie: "
 
-#: src/modules/Nebula.cpp:89
+#: src/modules/Nebula.cpp:98
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr ""
+msgstr "Typ: <b>%1</b>"
 
-#: src/modules/TextUI.cpp:142
+#: src/modules/TextUI.cpp:135
 msgid "USB Script: "
 msgstr "Skrypt USB "
 
-#: src/modules/Nebula.cpp:282
+#: src/modules/Nebula.cpp:285
 msgid "Undocumented type"
-msgstr ""
+msgstr "Typ nieudokumentowany"
 
-#: src/modules/Nebula.cpp:279
+#: src/modules/Nebula.cpp:282
 msgid "Unknown"
-msgstr ""
+msgstr "Nieznane"
 
-#: src/modules/TextUI.cpp:150
+#: src/modules/TextUI.cpp:143
 msgid "Update me via Internet: "
 msgstr "Aktualizuj przez Internet: "
 
@@ -1275,23 +1446,38 @@ msgstr "Aktualizuj przez Internet: "
 msgid "Uranus"
 msgstr "Uran"
 
-#: src/ui_viewDialog.h:1096
-msgid "Use associated language for sky labeling"
+#: src/ui_configurationDialog.h:480
+msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
+"Ustawiaj określoną datę i czas podczas uruchamiania programu Stellarium."
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:898
+msgid "Use associated language for sky labeling"
+msgstr "Użyj skojarzonego języka do opisywania mapy nieba"
+
+#: src/ui_viewDialog.h:896
 msgid "Use associated planet and position"
 msgstr ""
+
+#: src/ui_configurationDialog.h:494
+msgid ""
+"Use the current viewing direction (altitude and azimuth) when Stellarim "
+"starts."
+msgstr ""
+"Ustawiaj aktualny kierunek widzenia (wysokość i azymut) przy uruchamianiu "
+"Stellarium."
 
 #: src/ui_locationDialogGui.h:324
 msgid "Use the mouse wheel to zoom, drag to move the screen."
 msgstr ""
+"Użyj kółka myszy do przybliżania/oddalania, przeciągnij myszą by przesuwać "
+"obraz."
 
 #: src/translations.h:35
 msgid "Venus"
 msgstr "Wenus"
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:838
 #, fuzzy
 msgid "View"
 msgstr "Obraz"
@@ -1304,78 +1490,105 @@ msgstr "W"
 msgid "Western"
 msgstr "zachodnia"
 
-#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:164
-#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:154
-#: src/ui_viewDialog.h:1034 src/ui_configurationDialog.h:148
-msgid "X"
+#: src/ui_configurationDialog.h:573
+msgid ""
+"When enabled, select the \"auto zoom out\" key will also set the initial "
+"viewing direction"
 msgstr ""
+"Gdy ta opcja jest włączona, naciśnięcie klawisza \"automatycznego oddalania"
+"\" przywraca też początkowy kierunek widzenia."
+
+#: src/gui/NewGui.cpp:468
+msgid "Windows"
+msgstr "Okna"
+
+#: src/ui_dateTimeDialogGui.h:181 src/ui_helpDialogGui.h:165
+#: src/ui_locationDialogGui.h:323 src/ui_searchDialogGui.h:187
+#: src/ui_viewDialog.h:839 src/ui_configurationDialog.h:458
+msgid "X"
+msgstr "X"
 
 #: src/ui_locationDialogGui.h:332 src/ui_locationDialogGui.h:338
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
+"Wartości w stopniach można podawać jako liczby dziesiętne albo w formacie "
+"dms (stopnie, minuty, sekundy), np. +1d 12m 8s"
 
-#: src/modules/TextUI.cpp:135
+#: src/modules/TextUI.cpp:128
 msgid "Zoom Duration: "
 msgstr "Czas trwania przybliżenia: "
 
-#: src/gui/NewGui.cpp:438
+#: src/gui/NewGui.cpp:495
 #, fuzzy
 msgid "Zoom in on selected object"
 msgstr "Idź do wybranego obiektu [Spacja]"
 
-#: src/gui/HelpDialog.cpp:60 src/gui/HelpDialog.cpp:61
+#: src/gui/HelpDialog.cpp:64 src/gui/HelpDialog.cpp:65
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Przybliżanie/oddalanie"
 
-#: src/gui/NewGui.cpp:439
+#: src/gui/NewGui.cpp:496
 #, fuzzy
 msgid "Zoom out"
-msgstr "Czas trwania przybliżenia: "
+msgstr "Czas trwania przybliżenia:"
 
 #: src/ui_locationDialogGui.h:347
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:149
+#: src/gui/HelpDialog.cpp:155
 msgid ""
 "{Bug reporting system} - if something doesn't work properly and is not "
 "listed in the FAQ list, you can open bug reports here."
 msgstr ""
+"{System zgłaszania błędów} - jeśli coś nie działa prawidłowo, a problem nie "
+"jest wymieniony na liście FAQ, możesz tutaj zamieścić raport na temat błędu."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:154
+#: src/gui/HelpDialog.cpp:160
 msgid ""
 "{Feature request system} - if you have an idea for a new feature, send it to "
 "us. We can't promise to implement every idea, but we appreciate the feedback "
 "and review the list when we are planning future features."
 msgstr ""
+"{System proponowania nowych funkcji} - jeśli masz pomysł na rozszerzenie "
+"programu o nową funkcję, prześlij go nam. Nie możemy obiecać, że "
+"zrealizujemy każdy pomysł, ale doceniamy odzew użytkowników i przeglądamy "
+"listę pomysłów podczas planowania nowych funkcji."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:159
+#: src/gui/HelpDialog.cpp:165
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
+"{Forum} - podyskutuj na temat programu Stellarium z innymi użytkownikami."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:134
+#: src/gui/HelpDialog.cpp:140
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
+"{FAQ (często zadawane pytania)} na temat Stellarium. Są tu również "
+"odpowiedzi."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:144
+#: src/gui/HelpDialog.cpp:150
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
+"{System wsparcia} - jeśli potrzebujesz pomocy dotyczącej używania programu "
+"Stellarium, opisz tutaj swój problem, a postaramy się ci pomóc."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:139
+#: src/gui/HelpDialog.cpp:145
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
+"{Wiki Stellarium} - Ogólne informacje. Można tu też znaleźć stworzone przez "
+"użytkowników krajobrazy i skrypty."
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -1751,6 +1964,10 @@ msgstr ""
 #~ msgid "Delphinus"
 #~ msgstr "Delfin"
 
+#, fuzzy
+#~ msgid "Dialogs"
+#~ msgstr "Psy Gończe"
+
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
 #~ "H   : Help                      I   : About Stellarium\n"
@@ -1988,9 +2205,6 @@ msgstr ""
 #~ msgid "Flying Corridor"
 #~ msgstr "Korytarz powietrzny"
 
-#~ msgid "Fog"
-#~ msgstr "Mgła"
-
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Aby użyć niestandardowej rozdzielczości, zmień plik :"
 
@@ -2023,9 +2237,6 @@ msgstr ""
 
 #~ msgid "Great General"
 #~ msgstr "Wielki Generał"
-
-#~ msgid "Ground"
-#~ msgstr "Ziemia"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Ziemia [G]"
@@ -2068,6 +2279,12 @@ msgstr ""
 
 #~ msgid "Hour"
 #~ msgstr "Godzina"
+
+#, fuzzy
+#~ msgid ""
+#~ "Hourly\n"
+#~ "zenith rate"
+#~ msgstr "Liczba meteorów na godzinę"
 
 #~ msgid "Hydra"
 #~ msgstr "Wąż Wodny"
@@ -2222,6 +2439,10 @@ msgstr ""
 #~ msgid "Mensa"
 #~ msgstr "Góra Stołowa"
 
+#, fuzzy
+#~ msgid "Mercator projection"
+#~ msgstr "Szukaj obiektu"
+
 #~ msgid "Message"
 #~ msgstr "Komunikat"
 
@@ -2233,6 +2454,10 @@ msgstr ""
 
 #~ msgid "Minutes"
 #~ msgstr "Minuty"
+
+#, fuzzy
+#~ msgid "Misc"
+#~ msgstr "Mimas"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -2422,9 +2647,6 @@ msgstr ""
 #~ msgid "Planet/Moon"
 #~ msgstr "Planeta/Księżyc"
 
-#~ msgid "Planet: "
-#~ msgstr "Planeta: "
-
 #~ msgid "Planets & Moons"
 #~ msgstr "Planety i księżyce"
 
@@ -2433,6 +2655,10 @@ msgstr ""
 
 #~ msgid "Point"
 #~ msgstr "Punkt"
+
+#, fuzzy
+#~ msgid "Program language:"
+#~ msgstr "Język programu:"
 
 #~ msgid "Prow"
 #~ msgstr "Kil"
@@ -2540,6 +2766,10 @@ msgstr ""
 
 #~ msgid "Saving video size "
 #~ msgstr "Zapisywanie rozmiaru obrazu "
+
+#, fuzzy
+#~ msgid "Scale:"
+#~ msgstr "Skalowanie Księżyca"
 
 #~ msgid "Scorpius"
 #~ msgstr "Skorpion"
@@ -2733,6 +2963,70 @@ msgstr ""
 
 #~ msgid "Time speed : "
 #~ msgstr "Prędkość upływu czasu : "
+
+#, fuzzy
+#~ msgid "Toggle atmosphere"
+#~ msgstr "Atmosfera"
+
+#, fuzzy
+#~ msgid "Toggle azimutal grid"
+#~ msgstr "Siatka azymutalna"
+
+#, fuzzy
+#~ msgid "Toggle cardinal points"
+#~ msgstr "Punkty kardynalne:"
+
+#, fuzzy
+#~ msgid "Toggle configuration window"
+#~ msgstr "Okno ustawień"
+
+#, fuzzy
+#~ msgid "Toggle constellation art"
+#~ msgstr "Ładowanie obrazów gwiazdozbiorów:"
+
+#, fuzzy
+#~ msgid "Toggle constellation boundaries"
+#~ msgstr "Granice gwiazdozbiorów"
+
+#, fuzzy
+#~ msgid "Toggle constellation labels"
+#~ msgstr "Podpisy gwiazdozbiorów:"
+
+#, fuzzy
+#~ msgid "Toggle constellation lines"
+#~ msgstr "Linie gwiazdozbiorów:"
+
+#, fuzzy
+#~ msgid "Toggle ecliptic line"
+#~ msgstr "Ekliptyka"
+
+#, fuzzy
+#~ msgid "Toggle equator line"
+#~ msgstr "Równik niebieski"
+
+#, fuzzy
+#~ msgid "Toggle equatorial J2000 grid"
+#~ msgstr "Siatka równikowa"
+
+#, fuzzy
+#~ msgid "Toggle equatorial grid"
+#~ msgstr "Siatka równikowa"
+
+#, fuzzy
+#~ msgid "Toggle location window"
+#~ msgstr "Okno ustawień"
+
+#, fuzzy
+#~ msgid "Toggle meridian line"
+#~ msgstr "Południk"
+
+#, fuzzy
+#~ msgid "Toggle planets hints"
+#~ msgstr "Wyróżnianie planet"
+
+#, fuzzy
+#~ msgid "Toggle stars"
+#~ msgstr "Trzy gwiazdy"
 
 #~ msgid "Toilet"
 #~ msgstr "Toaleta"
