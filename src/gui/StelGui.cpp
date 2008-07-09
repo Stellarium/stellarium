@@ -43,29 +43,13 @@
 #include "SolarSystem.hpp"
 #include "SkyBackground.hpp"
 
-#include <QPaintDevice>
-#include <QPainter>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsLineItem>
-#include <QRectF>
 #include <QDebug>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsTextItem>
 #include <QTimeLine>
 #include <QFontDatabase>
 #include <QMouseEvent>
 #include <QAction>
 #include <QApplication>
 #include <QFile>
-#include <QKeySequence>
-#include <QRegExp>
-#include <QPixmapCache>
-#include <QProgressBar>
-#include <QGraphicsWidget>
-#include <QGraphicsProxyWidget>
-
-#include <vector>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
