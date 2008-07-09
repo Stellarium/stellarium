@@ -269,9 +269,6 @@ private:
 	float maxLum;
 	//! The previously used world luminance
 	float oldLum;
-	float maxLumDraw;
-	
-	float tempRCMag[2];
 	
 	//! Big halo texture
 	STextureSP texBigHalo;

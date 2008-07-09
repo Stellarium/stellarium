@@ -52,6 +52,7 @@ ViewDialog::ViewDialog()
 ViewDialog::~ViewDialog()
 {
 	delete ui;
+	ui=NULL;
 }
 
 void ViewDialog::languageChanged()
