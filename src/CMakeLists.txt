@@ -178,8 +178,8 @@ SET(stellarium_lib_SRCS
 	modules/ZoneArray.hpp
 	modules/ZoneData.hpp
 	
-	gui/NewGui.hpp
-	gui/NewGui.cpp
+	gui/StelGui.hpp
+	gui/StelGui.cpp
 	gui/StelGuiItems.hpp
 	gui/StelGuiItems.cpp
 	gui/HelpDialog.hpp
@@ -263,7 +263,7 @@ SET(stellarium_MOC_HDRS
 	modules/SolarSystem.hpp
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
-	gui/NewGui.hpp
+	gui/StelGui.hpp
 	gui/StelGuiItems.hpp
 	gui/HelpDialog.hpp
 	gui/Dialog.hpp

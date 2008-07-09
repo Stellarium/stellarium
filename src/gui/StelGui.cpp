@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "NewGui.hpp"
+#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -95,9 +95,9 @@ QRectF InfoPanel::boundingRect() const
 }
 
 
-NewGui::NewGui()
+StelGui::StelGui()
 {
-	setObjectName("NewGui");
+	setObjectName("StelGui");
 	winBar = NULL;
 	buttonBar = NULL;
 	infoPanel = NULL;
@@ -113,7 +113,7 @@ NewGui::NewGui()
 	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos(qreal)));
 }
 
-NewGui::~NewGui()
+StelGui::~StelGui()
 {
 	// When the QGraphicsItems are deleted, they are automatically removed from the scene
 	delete winBar;
@@ -125,7 +125,7 @@ NewGui::~NewGui()
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
-double NewGui::getCallOrder(StelModuleActionName actionName) const
+double StelGui::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return 100000;
@@ -135,7 +135,7 @@ double NewGui::getCallOrder(StelModuleActionName actionName) const
 }
 
 
-void NewGui::init()
+void StelGui::init()
 {
 	//QPixmapCache::setCacheLimit(100000);
 	
@@ -511,7 +511,7 @@ void NewGui::init()
 }
 
 //! Load color scheme from the given ini file and section name
-void NewGui::setColorScheme(const QSettings* conf, const QString& section)
+void StelGui::setColorScheme(const QSettings* conf, const QString& section)
 {
 	if (section=="night_color")
 	{
@@ -532,7 +532,7 @@ void NewGui::setColorScheme(const QSettings* conf, const QString& section)
 }
 	
 //! Load a Qt style sheet to define the widgets style
-void NewGui::loadStyle(const QString& fileName)
+void StelGui::loadStyle(const QString& fileName)
 {
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	QString styleFilePath;
@@ -552,12 +552,12 @@ void NewGui::loadStyle(const QString& fileName)
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
-void NewGui::reloadStyle()
+void StelGui::reloadStyle()
 {
 	loadStyle("data/gui/normalStyle.css");
 }
 
-void NewGui::glWindowHasBeenResized(int ww, int hh)
+void StelGui::glWindowHasBeenResized(int ww, int hh)
 {
 	double h=hh;
 	if (!winBar || !buttonBar || !buttonHelpLabel)
@@ -579,7 +579,7 @@ void NewGui::glWindowHasBeenResized(int ww, int hh)
 }
 
 
-void NewGui::updateI18n()
+void StelGui::updateI18n()
 {
 	// Translate all action texts
 	foreach (QObject* obj, StelMainGraphicsView::getInstance().children())
@@ -604,7 +604,7 @@ void NewGui::updateI18n()
 	viewDialog.languageChanged();
 }
 
-void NewGui::update(double deltaTime)
+void StelGui::update(double deltaTime)
 {
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	if (nav->getTimeSpeed()<-0.99*JD_SECOND)
@@ -640,7 +640,7 @@ void NewGui::update(double deltaTime)
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
 }
 
-bool NewGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
+bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
 	double maxY = winBar->boundingRect().height()+buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
@@ -676,7 +676,7 @@ bool NewGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-void NewGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+void StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
 	QAction* a;
 	a = new QAction(&StelMainGraphicsView::getInstance());
@@ -697,7 +697,7 @@ void NewGui::addGuiActions(const QString& actionName, const QString& text, const
 	StelMainGraphicsView::getInstance().addAction(a);
 }
 
-QAction* NewGui::getGuiActions(const QString& actionName)
+QAction* StelGui::getGuiActions(const QString& actionName)
 {
 	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
 	if (!a)
@@ -708,18 +708,18 @@ QAction* NewGui::getGuiActions(const QString& actionName)
 	return a;
 }
 
-void NewGui::updateBarsPos(qreal value) 	 
+void StelGui::updateBarsPos(qreal value) 	 
 { 	 
 	glWindowHasBeenResized(StelMainGraphicsView::getInstance().size().width(), StelMainGraphicsView::getInstance().size().height()); 	 
 }
 
-void NewGui::retranslateUi(QWidget *Form)
+void StelGui::retranslateUi(QWidget *Form)
 {
 	Form->setWindowTitle(QApplication::translate("Form", "Stellarium", 0, QApplication::UnicodeUTF8));
 } // retranslateUi
 
 // Add a new progress bar in the lower right corner of the screen.
-QProgressBar* NewGui::addProgessBar()
+QProgressBar* StelGui::addProgessBar()
 {
 	return progressBarMgr->addProgressBar();
 }
