@@ -212,6 +212,8 @@ public:
 	//! @param section in the application settings object which contains desired color scheme
 	virtual void setColorScheme(const QSettings* conf, const QString& section);
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods specific to the NewGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 
@@ -223,15 +225,25 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgessBar();
 	
-private slots:
-	void updateBarsPos(qreal value);
+	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
+	//! @param actionName qt object name. Used as a reference for later uses
+	//! @param text the text to display when hovering, or in the help window
+	//! @param shortCut the qt shortcut to use
+	//! @param helpGroup hint on how to group the text in the help window
+	//! @param checkable whether the action should be checkable
+	//! @param autoRepeat whether the action should be autorepeated
+	void addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 	
+	//! Get a pointer on an action managed by the GUI
+	//! @param actionName qt object name for this action
+	//! @return a pointer on the QAction object or NULL if don't exist
+	QAction* getGuiActions(const QString& actionName);
+	
+private slots:
 	//! Reload the current Qt Style Sheet (Debug only)
 	void reloadStyle();
 	
 private:
-	void addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
-	QAction* getGuiActions(const QString& actionName);
 	void retranslateUi(QWidget *Form);
 	
 	LeftStelBar* winBar;
