@@ -331,7 +331,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 void ViewDialog::shoutingStarsZHRChanged()
 {
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
-	int zhr;
+	int zhr=-1;
 	if (ui->zhrNone->isChecked())
 	{
 		mmgr->setFlagShow(false);
@@ -368,6 +368,8 @@ void ViewDialog::shoutingStarsZHRChanged()
 		case 144000:
 			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1966 Leonids)")+"</i></small>");
 			break;
+		default:
+			ui->zhrLabel->setText(QString("<small><i>")+"Error"+"</i></small>");
 	}
 }
 
