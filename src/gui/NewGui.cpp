@@ -661,7 +661,7 @@ void NewGui::init()
 	MovementMgr* mmgr = (MovementMgr*)module;
 	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 	
-	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(triggered(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
+	QObject::connect(getGuiActions("actionSet_Full_Screen"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
@@ -822,6 +822,11 @@ void NewGui::init()
 	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Night_Mode"), buttonHelpLabel);
+	buttonBar->addButton(b, "060-othersGroup");
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/btFullScreen-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btFullScreen-off.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen"), buttonHelpLabel);
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
