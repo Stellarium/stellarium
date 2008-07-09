@@ -180,6 +180,8 @@ SET(stellarium_lib_SRCS
 	
 	gui/NewGui.hpp
 	gui/NewGui.cpp
+	gui/StelGuiItems.hpp
+	gui/StelGuiItems.cpp
 	gui/HelpDialog.hpp
 	gui/HelpDialog.cpp
 	gui/Dialog.hpp
@@ -262,6 +264,7 @@ SET(stellarium_MOC_HDRS
 	modules/MeteorMgr.hpp
 	modules/StarMgr.hpp
 	gui/NewGui.hpp
+	gui/StelGuiItems.hpp
 	gui/HelpDialog.hpp
 	gui/Dialog.hpp
 	gui/MapView.hpp
