@@ -1005,25 +1005,27 @@ void NewGui::update(double deltaTime)
 bool NewGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
+	double maxY = winBar->boundingRect().height()+buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
 	double minX = 0;
-	if (x<maxX && b==Qt::NoButton && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
+	if (x<=maxX && y<=maxY && b==Qt::NoButton && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if (x>maxX && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
+	if ((x>maxX || y>maxY) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
 	}
 	
-	double maxY = buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
-	if (y<maxY && b==Qt::NoButton && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
+	maxX = winBar->boundingRect().width()+buttonBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
+	maxY = buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
+	if (x<=maxX && y<=maxY && b==Qt::NoButton && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
-	if (y>maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	if ((x>maxX || y>maxY) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
