@@ -50,8 +50,6 @@
 #include "typeface.h"
 
 // Data would be hidden inside an anonymous namespace, but msvc 6 can't handle it
-//namespace 
-//{
 static FT_Library ftlibrary_;
 static bool FTinitialized=false; 
 

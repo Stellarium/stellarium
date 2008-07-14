@@ -173,7 +173,7 @@ std::vector<GridObject*> TreeGrid::getAllObjects()
 	return result;
 }
 	
-#if 1
+#ifdef TREEGRIDDEBUG
 #include "Projector.hpp"
 #include "Navigator.hpp"				 
 double TreeGridNode::draw(Projector *prj, const StelGeom::ConvexS& roi, float opacity) const

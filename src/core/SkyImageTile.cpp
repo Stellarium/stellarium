@@ -552,6 +552,10 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		noTexture = true;
 	
 	QVariantList subTilesl = map.value("subTiles").toList();
+// 	if (subTilesl.size()>10)
+// 	{
+// 		qWarning() << "Large tiles number for " << shortName << ": " << subTilesl.size();
+// 	}
 	foreach (QVariant subTile, subTilesl)
 	{
 		// The JSON file contains a nested tile structure

@@ -17,16 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
- 
 #ifndef _TREEGRID_HPP_
 #define _TREEGRID_HPP_
 
 #include <vector>
-
 #include "Grid.hpp"
-
-class Projector;
-class Navigator;
 
 struct TreeGridNode
 {
@@ -41,7 +36,9 @@ struct TreeGridNode
     typedef std::vector<TreeGridNode> Children;
     Children children;
     
-	double draw(Projector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
+#ifdef TREEGRIDDEBUG
+	double draw(class Projector *prj, const StelGeom::ConvexS&, float opacity = 1.) const;
+#endif
 };
 
 class TreeGrid : public Grid, public TreeGridNode

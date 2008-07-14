@@ -175,7 +175,6 @@ void StelAppGraphicsItem::recompute()
 	scene()->views().at(0)->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	update(rect());
 	
-	
 	double duration = 1./StelApp::getInstance().minfps;
 	if (StelApp::getInstance().getTotalRunTime()-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
