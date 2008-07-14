@@ -186,4 +186,32 @@ void StelCore::preDraw()
 void StelCore::postDraw()
 {
 	projection->drawViewportShape();
+	
+// 	// Inverted mode
+// 	glPixelTransferi(GL_RED_BIAS, 1);
+// 	glPixelTransferi(GL_GREEN_BIAS, 1);
+// 	glPixelTransferi(GL_BLUE_BIAS, 1);
+// 	glPixelTransferi(GL_RED_SCALE, -1);
+// 	glPixelTransferi(GL_GREEN_SCALE, -1);
+// 	glPixelTransferi(GL_BLUE_SCALE, -1);
+	
+	// Night red mode
+// 	glPixelTransferf(GL_GREEN_SCALE, 0.1f);
+// 	glPixelTransferf(GL_BLUE_SCALE, 0.1f);
+	
+// 	glDisable(GL_TEXTURE_2D);
+// 	glShadeModel(GL_FLAT);
+// 	glDisable(GL_DEPTH_TEST);
+// 	glDisable(GL_CULL_FACE);
+// 	glDisable(GL_LIGHTING);
+// 	glDisable(GL_MULTISAMPLE);
+// 	glDisable(GL_DITHER);
+// 	glDisable(GL_ALPHA_TEST);
+// 	
+// 	glColor3f(1,1,1);
+// 	glRasterPos2i(300,300);
+// 	
+// 	glReadBuffer(GL_BACK);
+// 	glDrawBuffer(GL_BACK);
+// 	glCopyPixels(1, 1, 200, 200, GL_COLOR);
 }
