@@ -60,7 +60,7 @@ void LocationDialog::createDialogContent()
 		ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 
 		// Connect all the QT signals
-		connect(ui->closeLocation, SIGNAL(clicked()), this, SLOT(close()));
+		connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 		connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
 		connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
 		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));

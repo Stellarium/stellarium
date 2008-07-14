@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
+    <width>481</width>
     <height>465</height>
    </rect>
   </property>
@@ -66,7 +66,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="LocationBarLabel" >
+       <widget class="QLabel" name="stelWindowTitle" >
         <property name="palette" >
          <palette>
           <active/>
@@ -96,28 +96,21 @@
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="closeView" >
-        <property name="maximumSize" >
+       <widget class="QPushButton" name="closeStelWindow" >
+        <property name="minimumSize" >
          <size>
-          <width>17</width>
-          <height>17</height>
+          <width>16</width>
+          <height>16</height>
          </size>
         </property>
-        <property name="styleSheet" >
-         <string notr="true" >QToolButton {
-color: white;
-font-weight: bold;
-background: None;
-border: 1px solid #2e2e36;
-  border-radius: 2px;
-}
-
-QToolButton:pressed {
-color: darkgray;
-}</string>
+        <property name="maximumSize" >
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
         <property name="text" >
-         <string>X</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -158,8 +151,8 @@ color: darkgray;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>469</width>
-           <height>407</height>
+           <width>473</width>
+           <height>409</height>
           </rect>
          </property>
          <attribute name="title" >
