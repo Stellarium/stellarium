@@ -69,7 +69,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label" >
+       <widget class="QLabel" name="stelWindowTitle" >
         <property name="text" >
          <string>Help</string>
         </property>
@@ -89,28 +89,21 @@
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="closeHelp" >
-        <property name="maximumSize" >
+       <widget class="QPushButton" name="closeStelWindow" >
+        <property name="minimumSize" >
          <size>
-          <width>17</width>
-          <height>17</height>
+          <width>16</width>
+          <height>16</height>
          </size>
         </property>
-        <property name="styleSheet" >
-         <string notr="true" >QToolButton {
-color: white;
-font-weight: bold;
-background: None;
-border: 1px solid #2e2e36;
-  border-radius: 2px;
-}
-
-QToolButton:pressed {
-color: darkgray;
-}</string>
+        <property name="maximumSize" >
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
         <property name="text" >
-         <string>X</string>
+         <string/>
         </property>
        </widget>
       </item>

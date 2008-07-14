@@ -59,7 +59,7 @@ void ConfigurationDialog::languageChanged()
 void ConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	// Fill the language list widget from the available list
 	QListWidget* c = ui->programLanguageListWidget;

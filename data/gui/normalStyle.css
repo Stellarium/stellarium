@@ -31,6 +31,12 @@ QLabel, QLabel:active {
 	background: transparent;
 }
 
+QLabel#stelWindowTitle, QLabel:active#stelWindowTitle {
+	color: #DEDEDE;
+	font: bold;
+	background: transparent;
+}
+
 QToolTip {
 	color:#8f8f8f;
 	background: rgba(48, 49, 52);
@@ -58,6 +64,16 @@ QPushButton:active {
 
 QPushButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #babbde, stop: 1 #d6d7fa);
+}
+
+QPushButton#closeStelWindow {
+	border: 0px;
+	background-color: transparent;
+	background-image: url(:/graphicGui/gui/closeButton.png);
+}
+
+QPushButton:hover#closeStelWindow {
+	background-image: url(:/graphicGui/gui/closeButton-hover.png);
 }
 
 
