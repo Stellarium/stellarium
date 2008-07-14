@@ -129,7 +129,7 @@ void SearchDialog::languageChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onTextChanged(ui->lineEditSearchSkyObject->text());

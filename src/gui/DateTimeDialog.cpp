@@ -57,7 +57,7 @@ void DateTimeDialog::createDialogContent()
 	double jd = StelApp::getInstance().getCore()->getNavigation()->getJDay();
 	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)); // UTC -> local tz
 
-	connect(ui->closeDateTime, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
 	connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));

@@ -88,7 +88,7 @@ void HelpDialog::languageChanged()
 void HelpDialog::createDialogContent()
 {
 		ui->setupUi(dialog);
-		connect(ui->closeHelp, SIGNAL(clicked()), this, SLOT(close()));
+		connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 		
 		updateText();
 }

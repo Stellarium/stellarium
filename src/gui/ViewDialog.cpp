@@ -68,7 +68,7 @@ void ViewDialog::languageChanged()
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(ui->closeView, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	populateLists();
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
