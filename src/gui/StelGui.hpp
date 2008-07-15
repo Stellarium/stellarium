@@ -37,6 +37,7 @@ class QAction;
 class QGraphicsTextItem;
 class QTimeLine;
 class StelButton;
+class BottomStelBar;
 
 //! The informations about the currently selected object
 class InfoPanel : public QGraphicsItem
@@ -101,26 +102,15 @@ public:
 	//! @param helpGroup hint on how to group the text in the help window
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
-	void addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 	
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
 	QAction* getGuiActions(const QString& actionName);
 	
-	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
-	//! @param b the button to add
-	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
-	void addBottomBarButton(StelButton* button, const QString& groupName="defaultGroup");
-	
-	//! Hide the button associated with the action of the passed name
-	void hideBottomBarButton(const QString& actionName);
-	
-	//! Set whether time must be displayed in the bottom bar
-	void setFlagShowTime(bool b);
-	
-	//! Set whether location info must be displayed in the bottom bar
-	void setFlagShowLocation(bool b);
+	//! Get the button bar at the bottom of the screen
+	BottomStelBar* getButtonBar() {return buttonBar;}
 	
 private slots:
 	//! Update the position of the button bars in the main window
@@ -133,7 +123,7 @@ private:
 	void retranslateUi(QWidget *Form);
 	
 	class LeftStelBar* winBar;
-	class BottomStelBar* buttonBar;
+	BottomStelBar* buttonBar;
 	InfoPanel* infoPanel;
 	class StelBarsPath* buttonBarPath;
 	QGraphicsSimpleTextItem* buttonHelpLabel;

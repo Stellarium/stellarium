@@ -113,12 +113,18 @@ public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
+	
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
 	//! @param b the button to add
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
-	void addButton(StelButton* button, const QString& groupName="defaultGroup");
+	//! @param beforeActionName insert the button before the button associated to the given action. If the action doesn't exist, insert it at the end of the group.
+	void addButton(StelButton* button, const QString& groupName="defaultGroup", const QString& beforeActionName="");
 	//! Hide the button associated with the action of the passed name
-	void hideButton(const QString& actionName);
+	StelButton* hideButton(const QString& actionName);
+	
+	//! Set the margin at the left and right of a button group in pixels
+	void setGroupMargin(const QString& groupName, int left, int right);
+	
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
 	
@@ -136,7 +142,18 @@ private:
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
 	
-	QMap<QString, QList<StelButton*> > buttonGroups;
+	struct ButtonGroup
+	{
+		ButtonGroup() : leftMargin(0), rightMargin(0) {;}
+		//! Elements of the group
+		QList<StelButton*> elems;
+		//! Left margin size in pixel
+		int leftMargin;
+		//! Right margin size in pixel
+		int rightMargin;
+	};
+	
+	QMap<QString, ButtonGroup> buttonGroups;
 	QPixmap pixBackgroundLeft;
 	QPixmap pixBackgroundRight;
 	QPixmap pixBackgroundMiddle;
