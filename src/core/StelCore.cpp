@@ -195,10 +195,10 @@ void StelCore::postDraw()
 // 	glPixelTransferi(GL_GREEN_SCALE, -1);
 // 	glPixelTransferi(GL_BLUE_SCALE, -1);
 	
-	// Night red mode
-// 	glPixelTransferf(GL_GREEN_SCALE, 0.1f);
-// 	glPixelTransferf(GL_BLUE_SCALE, 0.1f);
-	
+// 	// Night red mode
+//  glPixelTransferf(GL_GREEN_SCALE, 0.1f);
+//  glPixelTransferf(GL_BLUE_SCALE, 0.1f);
+// 	
 // 	glDisable(GL_TEXTURE_2D);
 // 	glShadeModel(GL_FLAT);
 // 	glDisable(GL_DEPTH_TEST);
@@ -207,9 +207,7 @@ void StelCore::postDraw()
 // 	glDisable(GL_MULTISAMPLE);
 // 	glDisable(GL_DITHER);
 // 	glDisable(GL_ALPHA_TEST);
-// 	
-// 	glColor3f(1,1,1);
-// 	glRasterPos2i(300,300);
+// 	glRasterPos2i(0,0);
 // 	
 // 	glReadBuffer(GL_BACK);
 // 	glDrawBuffer(GL_BACK);
