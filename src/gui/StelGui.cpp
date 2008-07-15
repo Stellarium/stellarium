@@ -123,8 +123,6 @@ double StelGui::getCallOrder(StelModuleActionName actionName) const
 
 void StelGui::init()
 {
-	//QPixmapCache::setCacheLimit(100000);
-	
 	qDebug() << "Creating GUI ...";
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -376,7 +374,6 @@ void StelGui::init()
 	infoPanel = new InfoPanel(NULL);
 	
 	QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
-	QPixmap pxmapBlank(":/graphicGui/gui/btBlank.png");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLines-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLines-off.png");
@@ -452,9 +449,6 @@ void StelGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit"), buttonHelpLabel);
 	buttonBar->addButton(b, "060-othersGroup");
 	
-	b = new StelButton(NULL, pxmapBlank, pxmapBlank, pxmapBlank, NULL, NULL, true);
-	buttonBar->addButton(b, "065-blank");
-	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
 	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionDecrease_Time_Speed"), buttonHelpLabel);
@@ -475,6 +469,8 @@ void StelGui::init()
 	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionIncrease_Time_Speed"), buttonHelpLabel);
 	buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
+	buttonBar->setGroupMargin("070-timeGroup", 32, 0);
+	
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(NULL);
 	buttonBarPath->updatePath(buttonBar, winBar);
@@ -681,7 +677,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-void StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
 	QAction* a;
 	a = new QAction(&StelMainGraphicsView::getInstance());
@@ -700,6 +696,7 @@ void StelGui::addGuiActions(const QString& actionName, const QString& text, cons
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
 	StelMainGraphicsView::getInstance().addAction(a);
+	return a;
 }
 
 QAction* StelGui::getGuiActions(const QString& actionName)
@@ -727,28 +724,4 @@ void StelGui::retranslateUi(QWidget *Form)
 QProgressBar* StelGui::addProgessBar()
 {
 	return progressBarMgr->addProgressBar();
-}
-
-// Add a button in a group in the button bar. Group are displayed in alphabetic order.
-void StelGui::addBottomBarButton(StelButton* button, const QString& groupName)
-{
-	buttonBar->addButton(button, groupName);
-}
-	
-// Hide the button associated with the action of the passed name
-void StelGui::hideBottomBarButton(const QString& actionName)
-{
-	buttonBar->hideButton(actionName);
-}
-
-// Set whether time must be displayed in the bottom bar
-void StelGui::setFlagShowTime(bool b)
-{
-	buttonBar->setFlagShowTime(b);
-}
-	
-// Set whether location info must be displayed in the bottom bar
-void StelGui::setFlagShowLocation(bool b)
-{
-	buttonBar->setFlagShowLocation(b);
 }
