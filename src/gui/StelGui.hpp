@@ -108,6 +108,20 @@ public:
 	//! @return a pointer on the QAction object or NULL if don't exist
 	QAction* getGuiActions(const QString& actionName);
 	
+	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
+	//! @param b the button to add
+	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
+	void addBottomBarButton(StelButton* button, const QString& groupName="defaultGroup");
+	
+	//! Hide the button associated with the action of the passed name
+	void hideBottomBarButton(const QString& actionName);
+	
+	//! Set whether time must be displayed in the bottom bar
+	void setFlagShowTime(bool b);
+	
+	//! Set whether location info must be displayed in the bottom bar
+	void setFlagShowLocation(bool b);
+	
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos(qreal value);
