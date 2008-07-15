@@ -117,10 +117,16 @@ public:
 	//! @param b the button to add
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
 	void addButton(StelButton* button, const QString& groupName="defaultGroup");
-	//! Remove the button associated with the action of the passed name
-	void removeButton(const QString& actionName);
+	//! Hide the button associated with the action of the passed name
+	void hideButton(const QString& actionName);
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
+	
+	//! Set whether time must be displayed in the bottom bar
+	void setFlagShowTime(bool b) {flagShowTime=b;}
+	//! Set whether location info must be displayed in the bottom bar
+	void setFlagShowLocation(bool b) {flagShowLocation=b;}
+	
 private:
 	void updateText();
 	void updateButtonsGroups();
@@ -135,6 +141,9 @@ private:
 	QPixmap pixBackgroundRight;
 	QPixmap pixBackgroundMiddle;
 	QPixmap pixBackgroundSingle;
+	
+	bool flagShowTime;
+	bool flagShowLocation;
 };
 
 //! The path around the bottom left button bars

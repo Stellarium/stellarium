@@ -50,6 +50,8 @@
 #include <QAction>
 #include <QApplication>
 #include <QFile>
+#include <QTextDocument>
+#include <QTextBrowser>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
@@ -512,6 +514,25 @@ void StelGui::setColorScheme(const QSettings* conf, const QString& section)
 		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 		buttonHelpLabel->setBrush(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+		
+// 		QList<QTextBrowser*> brl = StelMainGraphicsView::getInstance().findChildren<QTextBrowser*>();
+// 		qDebug() << brl.size();
+// 		foreach (QTextBrowser* b, brl)
+// 		{
+// 			StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+// 			QString styleFilePath;
+// 			try
+// 			{
+// 				styleFilePath = fileMan.findFile("data/gui/normalHtml.css");
+// 			}
+// 			catch (std::runtime_error& e)
+// 			{
+// 				qWarning() << "WARNING: can't find css:" << "data/gui/normalHtml.css";
+// 			}
+// 			qDebug() << b->objectName();
+// 			b->loadResource(QTextDocument::StyleSheetResource, QUrl(styleFilePath));//"a {color: #aaaa22 }"
+// 			b->reload();
+// 		}
 	}
 }
 	
@@ -706,4 +727,28 @@ void StelGui::retranslateUi(QWidget *Form)
 QProgressBar* StelGui::addProgessBar()
 {
 	return progressBarMgr->addProgressBar();
+}
+
+// Add a button in a group in the button bar. Group are displayed in alphabetic order.
+void StelGui::addBottomBarButton(StelButton* button, const QString& groupName)
+{
+	buttonBar->addButton(button, groupName);
+}
+	
+// Hide the button associated with the action of the passed name
+void StelGui::hideBottomBarButton(const QString& actionName)
+{
+	buttonBar->hideButton(actionName);
+}
+
+// Set whether time must be displayed in the bottom bar
+void StelGui::setFlagShowTime(bool b)
+{
+	buttonBar->setFlagShowTime(b);
+}
+	
+// Set whether location info must be displayed in the bottom bar
+void StelGui::setFlagShowLocation(bool b)
+{
+	buttonBar->setFlagShowLocation(b);
 }

@@ -182,6 +182,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
+	
+	flagShowTime = true;
+	flagShowLocation = true;
 }
 
 void BottomStelBar::addButton(StelButton* button, const QString& groupName)
@@ -192,7 +195,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName)
 	button->setParentItem(this);
 }
 
-void BottomStelBar::removeButton(const QString& actionName)
+void BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
 	StelButton* bToRemove=NULL;
@@ -282,13 +285,13 @@ void BottomStelBar::updateText()
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
-	datetime->setText(StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
-	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd));
+	datetime->setText(flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
+	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : "");
 	
-	location->setText(core->getObservatory()->getHomePlanetNameI18n() +", "
+	location->setText(flagShowLocation ? core->getObservatory()->getHomePlanetNameI18n() +", "
 	                  +core->getObservatory()->getLocationName() + ", "
 			  // xgettext:no-c-format
-	                  +q_("%1m").arg(core->getObservatory()->getAltitude()));
+	                  +q_("%1m").arg(core->getObservatory()->getAltitude()) : "");
 	
 	QString str;
 	QTextStream wos(&str);
@@ -300,10 +303,7 @@ void BottomStelBar::updateText()
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
 	fps->setText(str);
 	
-	
-	
 	QRectF rectCh = getButtonsBoundingRect();
-	
 	location->setPos(0, 0);
 	datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
 	
