@@ -187,36 +187,48 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	flagShowLocation = true;
 }
 
-void BottomStelBar::addButton(StelButton* button, const QString& groupName)
+void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
 {
-	QList<StelButton*>& g = buttonGroups[groupName];
-	g.append(button);
+	QList<StelButton*>& g = buttonGroups[groupName].elems;
+	bool done=false;
+	for (int i=0;i<g.size();++i)
+	{
+		if (g[i]->action && g[i]->action->objectName()==beforeActionName)
+		{
+			g.insert(i, button);
+			done=true;
+			break;
+		}
+	}
+	if (done==false)
+		g.append(button);
+	
 	updateButtonsGroups();
 	button->setParentItem(this);
 }
 
-void BottomStelBar::hideButton(const QString& actionName)
+StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
 	StelButton* bToRemove=NULL;
-	for (QMap<QString, QList<StelButton*> >::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
 	{
 		int i=0;
-		foreach (StelButton* b, iter.value())
+		foreach (StelButton* b, iter.value().elems)
 		{
 			if (b->action && b->action->objectName()==actionName)
 			{
 				gName=iter.key();
 				bToRemove = b;
-				iter.value().removeAt(i);
+				iter.value().elems.removeAt(i);
 				break;
 			}
 			++i;
 		}
 	}
 	if (bToRemove==NULL)
-		return;
-	if (buttonGroups[gName].size()==0)
+		return NULL;
+	if (buttonGroups[gName].elems.size()==0)
 	{
 		buttonGroups.remove(gName);
 	}
@@ -225,8 +237,19 @@ void BottomStelBar::hideButton(const QString& actionName)
 	bToRemove->setParent(NULL);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
+	return bToRemove;
 }
 
+// Set the margin at the left and right of a button group in pixels
+void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right)
+{
+	if (!buttonGroups.contains(groupName))
+		return;
+	buttonGroups[groupName].leftMargin=left;
+	buttonGroups[groupName].rightMargin=right;
+	updateButtonsGroups();
+}
+	
 QRectF BottomStelBar::getButtonsBoundingRect()
 {
 	location->setParentItem(NULL);
@@ -248,21 +271,24 @@ void BottomStelBar::updateButtonsGroups()
 {
 	double x=0;
 	double y = datetime->boundingRect().height()+3;
-	for (QMap<QString, QList<StelButton*> >::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	for (QMap<QString, ButtonGroup >::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
 	{
+		if (iter.value().elems.empty())
+			continue;
+		x+=iter.value().leftMargin;
 		int n=0;
-		foreach (StelButton* b, iter.value())
+		foreach (StelButton* b, iter.value().elems)
 		{
 			if (n==0)
 			{
-				if (iter.value().size()==1)
+				if (iter.value().elems.size()==1)
 					b->pixBackground = pixBackgroundSingle;
 				else
 					b->pixBackground = pixBackgroundLeft;
 			}
-			else if (n==iter.value().size()-1)
+			else if (n==iter.value().elems.size()-1)
 			{
-				if (iter.value().size()!=1)
+				if (iter.value().elems.size()!=1)
 					b->pixBackground = pixBackgroundSingle;
 				b->pixBackground = pixBackgroundRight;
 			}
@@ -276,6 +302,7 @@ void BottomStelBar::updateButtonsGroups()
 			x+=b->pixOn.width();
 			++n;
 		}
+		x+=iter.value().rightMargin;
 	}
 	updateText();
 }
