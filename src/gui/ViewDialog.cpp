@@ -120,8 +120,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 	
 	// Shouting stars section
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
-	ui->zhrNone->setChecked(!mmgr->getFlagShow());
+	shoutingStarsZHRChanged();
 	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
