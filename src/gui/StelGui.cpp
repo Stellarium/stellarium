@@ -88,7 +88,6 @@ StelGui::StelGui()
 	buttonBar = NULL;
 	infoPanel = NULL;
 	buttonBarPath = NULL;
-	buttonHelpLabel = NULL;
 	
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
@@ -326,10 +325,6 @@ void StelGui::init()
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
-	// Create the help label
-	buttonHelpLabel = new QGraphicsSimpleTextItem("");
-	buttonHelpLabel->setFont(QFont("DejaVuSans", 11));
-	buttonHelpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(NULL);
@@ -337,33 +332,33 @@ void StelGui::init()
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
 	QPixmap pxmapOff(":/graphicGui/gui/1-off-time.png");
-	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"), buttonHelpLabel);
+	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"));
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/2-off-location.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"), buttonHelpLabel);	
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"));	
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/5-off-labels.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_SkyView_Window"));
 	winBar->addButton(b);	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/6-off-search.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Search_Window"));
 	winBar->addButton(b);	
 	
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/8-off-settings.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Configuration_Window"));
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/9-off-help.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Help_Window"));
 	winBar->addButton(b);
 	
 	
@@ -377,96 +372,96 @@ void StelGui::init()
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLines-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLines-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Lines"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Lines"));
 	buttonBar->addButton(b, "010-constellationsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationLabels-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationLabels-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Labels"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Labels"));
 	buttonBar->addButton(b, "010-constellationsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btConstellationArt-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btConstellationArt-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Art"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Constellation_Art"));
 	buttonBar->addButton(b, "010-constellationsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Equatorial_Grid"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Equatorial_Grid"));
 	buttonBar->addButton(b, "020-gridsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btAzimutalGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAzimutalGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimutal_Grid"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Azimutal_Grid"));
 	buttonBar->addButton(b, "020-gridsGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGround-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGround-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Ground"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Ground"));
 	buttonBar->addButton(b, "030-landscapeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btCardinalPoints-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btCardinalPoints-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Cardinal_Points"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Cardinal_Points"));
 	buttonBar->addButton(b, "030-landscapeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btAtmosphere-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btAtmosphere-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Atmosphere"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Atmosphere"));
 	buttonBar->addButton(b, "030-landscapeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btNebula-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNebula-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"));
 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"));
 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSwitch_Equatorial_Mount"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btGotoSelectedObject-off.png");
-	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionGoto_Selected_Object"), buttonHelpLabel);
+	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionGoto_Selected_Object"));
 	buttonBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btNightView-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Night_Mode"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Night_Mode"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btFullScreen-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Full_Screen"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btQuit.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit"), buttonHelpLabel);
+	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiActions("actionQuit"));
 	buttonBar->addButton(b, "060-othersGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRewind-off.png");
-	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionDecrease_Time_Speed"), buttonHelpLabel);
+	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionDecrease_Time_Speed"));
 	buttonBar->addButton(buttonTimeRewind, "070-timeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeRealtime-off.png");
-	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"), buttonHelpLabel);
+	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionSet_Real_Time_Speed"));
 	buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeNow-off.png");
-	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionReturn_To_Current_Time"), buttonHelpLabel);
+	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionReturn_To_Current_Time"));
 	buttonBar->addButton(buttonTimeCurrent, "070-timeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btTimeForward-off.png");
-	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionIncrease_Time_Speed"), buttonHelpLabel);
+	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionIncrease_Time_Speed"));
 	buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
 	buttonBar->setGroupMargin("070-timeGroup", 32, 0);
@@ -481,7 +476,6 @@ void StelGui::init()
 									
 	// Add everything in the scene
 	QGraphicsScene* scene = StelMainGraphicsView::getInstance().scene();
-	scene->addItem(buttonHelpLabel);
 	scene->addItem(winBar);
 	scene->addItem(buttonBar);
 	scene->addItem(buttonBarPath);
@@ -500,7 +494,6 @@ void StelGui::setColorScheme(const QSettings* conf, const QString& section)
 		loadStyle("data/gui/nightStyle.css");
 		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
 		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		buttonHelpLabel->setBrush(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
 	}
 	else
@@ -508,7 +501,6 @@ void StelGui::setColorScheme(const QSettings* conf, const QString& section)
 		loadStyle("data/gui/normalStyle.css");
 		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		buttonHelpLabel->setBrush(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 		
 // 		QList<QTextBrowser*> brl = StelMainGraphicsView::getInstance().findChildren<QTextBrowser*>();
@@ -561,16 +553,14 @@ void StelGui::reloadStyle()
 void StelGui::glWindowHasBeenResized(int ww, int hh)
 {
 	double h=hh;
-	if (!winBar || !buttonBar || !buttonHelpLabel)
+	if (!winBar || !buttonBar)
 		return;
 	
-	double rangeX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRect().height()-buttonBar->boundingRect().height()-20);
+	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize();
+	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20);
 	
-	double rangeY = buttonBar->boundingRect().height()+0.5-7.-buttonBarPath->getRoundSize();
-	buttonBar->setPos(winBar->boundingRect().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRect().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
-	
-	buttonHelpLabel->setPos((int)(winBar->pos().x()+winBar->boundingRect().right()+buttonBarPath->getRoundSize()+8), (int)(buttonBar->pos().y()-buttonBarPath->getRoundSize()-20));
+	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
+	buttonBar->setPos(winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
 	
 	buttonBarPath->updatePath(buttonBar, winBar);
 
