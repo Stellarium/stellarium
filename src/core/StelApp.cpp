@@ -856,7 +856,7 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 	}
 }
 
-//! Return the time since when stellarium is running in second.
+// Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime() const
 {
 	return (double)qtime->elapsed()/1000;
