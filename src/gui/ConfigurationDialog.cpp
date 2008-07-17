@@ -74,7 +74,8 @@ void ConfigurationDialog::createDialogContent()
 		l=Translator::iso639_1CodeToNativeName(l);
 		litem = c->findItems(l, Qt::MatchExactly);
 	}
-	c->setCurrentItem(litem.at(0));
+	if (!litem.empty())
+		c->setCurrentItem(litem.at(0));
 	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
