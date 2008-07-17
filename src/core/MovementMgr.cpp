@@ -30,19 +30,18 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-MovementMgr::MovementMgr(StelCore* acore) 
-	: core(acore), 
-	  flagLockEquPos(false), 
-	  flagTracking(false), 
-	  isMouseMovingHoriz(false), 
-	  isMouseMovingVert(false), 
-	  flagAutoMove(0), 
-	  deltaFov(0.), 
-	  deltaAlt(0.), 
-	  deltaAz(0.), 
-	  moveSpeed(0.00025), 
-	  flagAutoZoom(0), 
-	  flagAutoZoomOutResetsDirection(0)
+MovementMgr::MovementMgr(StelCore* acore) : core(acore), 
+	flagLockEquPos(false), 
+	flagTracking(false), 
+	isMouseMovingHoriz(false), 
+	isMouseMovingVert(false), 
+	keyMoveSpeed(0.00025), 
+	flagAutoMove(0), 
+	deltaFov(0.), 
+	deltaAlt(0.), 
+	deltaAz(0.), 
+	flagAutoZoom(0), 
+	flagAutoZoomOutResetsDirection(0)
 {
 	setObjectName("MovementMgr");
 	isDragging = false;
@@ -57,21 +56,21 @@ void MovementMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
-	FlagEnableMoveMouse = conf->value("navigation/flag_enable_move_mouse",1).toBool();
-	MouseZoom = conf->value("navigation/mouse_zoom",30).toInt();
-	FlagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
-	FlagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
-	moveSpeed = conf->value("navigation/move_speed",0.0004).toDouble();
-	zoomSpeed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
+	flagEnableMoveMouse = conf->value("navigation/flag_enable_move_mouse",1).toBool();
+	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
+	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
+	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
+	keyMoveSpeed = conf->value("navigation/move_speed",0.0004).toDouble();
+	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
 	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
-	FlagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
+	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 }	
 	
 bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
-	if(FlagEnableMoveMouse)
+	if(flagEnableMoveMouse)
 	{
 		if (x == 0)
 		{
@@ -182,7 +181,7 @@ void MovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	int numDegrees = event->delta() / 8;
 	int numSteps = numDegrees / 15;
-	zoomTo(getAimFov()-MouseZoom*numSteps*getAimFov()/60., 0.2);
+	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0.2);
 	event->accept();
 }
 
@@ -247,7 +246,7 @@ void MovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 
 void MovementMgr::turnRight(bool s)
 {
-	if (s && FlagEnableMoveKeys)
+	if (s && flagEnableMoveKeys)
 	{
 		deltaAz = 1;
 		setFlagTracking(false);
@@ -259,7 +258,7 @@ void MovementMgr::turnRight(bool s)
 
 void MovementMgr::turnLeft(bool s)
 {
-	if (s && FlagEnableMoveKeys)
+	if (s && flagEnableMoveKeys)
 	{
 		deltaAz = -1;
 		setFlagTracking(false);
@@ -271,7 +270,7 @@ void MovementMgr::turnLeft(bool s)
 
 void MovementMgr::turnUp(bool s)
 {
-	if (s && FlagEnableMoveKeys)
+	if (s && flagEnableMoveKeys)
 	{
 		deltaAlt = 1;
 		setFlagTracking(false);
@@ -283,7 +282,7 @@ void MovementMgr::turnUp(bool s)
 
 void MovementMgr::turnDown(bool s)
 {
-	if (s && FlagEnableMoveKeys)
+	if (s && flagEnableMoveKeys)
 	{
 		deltaAlt = -1;
 		setFlagTracking(false);
@@ -296,13 +295,13 @@ void MovementMgr::turnDown(bool s)
 
 void MovementMgr::zoomIn(bool s)
 {
-	if (FlagEnableZoomKeys)
+	if (flagEnableZoomKeys)
 		deltaFov = -1*(s!=0);
 }
 
 void MovementMgr::zoomOut(bool s)
 {
-	if (FlagEnableZoomKeys)
+	if (flagEnableZoomKeys)
 		deltaFov = (s!=0);
 }
 
@@ -315,8 +314,8 @@ void MovementMgr::updateMotion(double deltaTime)
 	updateVisionVector(deltaTime);
 	
 	// the more it is zoomed, the lower the moving speed is (in angle)
-	double depl=moveSpeed*deltaTime*1000*proj->getFov();
-	double deplzoom=zoomSpeed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
+	double depl=keyMoveSpeed*deltaTime*1000*proj->getFov();
+	double deplzoom=keyZoomSpeed*deltaTime*1000*proj->getCurrentMapping().deltaZoom(proj->getFov()*(M_PI/360.0))*(360.0/M_PI);
 
 	if (deltaAz<0)
 	{
@@ -396,7 +395,7 @@ void MovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 		manualMoveDuration = moveDuration*.66f;
 	}
 
-	if( allowManualZoom && FlagManualZoom )
+	if( allowManualZoom && flagManualZoom )
 	{
 		// if manual zoom mode, user can zoom in incrementally
 		float newfov = proj->getFov()*0.5f;

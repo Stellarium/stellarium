@@ -73,14 +73,9 @@ public:
 	
 	//! Get the zoom speed
 	// TODO: what are the units?
-	double getZoomSpeed() {return zoomSpeed;}
+	double getZoomSpeed() {return keyZoomSpeed;}
 	
 public slots:
-	//! Set whether auto zoom can go further than normal.
-	void setFlagManualAutoZoom(bool b) {FlagManualZoom = b;}
-	//! Get whether auto zoom can go further than normal.
-	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}
-	
 	//! Set object tracking on/off and go to selected object
 	void setFlagTracking(bool b=true);
 	//! Get current object tracking status.
@@ -155,12 +150,14 @@ private:
 	bool isMouseMovingHoriz;
 	bool isMouseMovingVert;
 
-	int FlagEnableMoveMouse; // allow mouse at edge of screen to move view
-	int MouseZoom;
+	bool flagEnableMoveMouse; // allow mouse at edge of screen to move view
+	float mouseZoomSpeed;
 	
-	int FlagEnableZoomKeys;
-	int FlagEnableMoveKeys;
-
+	bool flagEnableZoomKeys;
+	bool flagEnableMoveKeys;
+	float keyMoveSpeed;			// Speed of keys movement
+	float keyZoomSpeed;			// Speed of keys zoom
+	
 	// Automove
 	// Struct used to store data for auto mov
 	typedef struct
@@ -177,9 +174,8 @@ private:
 	int zoomingMode;        // 0 : undefined, 1 zooming, -1 unzooming
 
 	double deltaFov,deltaAlt,deltaAz; // View movement
-	double moveSpeed, zoomSpeed;      // Speed of movement and zooming
 
-	int FlagManualZoom;     // Define whether auto zoom can go further
+	bool flagManualZoom;     // Define whether auto zoom can go further
 	float autoMoveDuration; // Duration of movement for the auto move to a selected objectin seconds
 	
 	// Mouse control options
