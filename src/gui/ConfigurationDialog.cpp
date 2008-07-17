@@ -32,6 +32,7 @@
 #include "StelModuleMgr.hpp"
 #include "SkyDrawer.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -40,7 +41,7 @@
 
 #include "StelAppGraphicsItem.hpp"
 
-ConfigurationDialog::ConfigurationDialog()
+ConfigurationDialog::ConfigurationDialog(): flipVert(NULL), flipHoriz(NULL)
 {
 	ui = new Ui_configurationDialogForm;
 }
@@ -58,9 +59,16 @@ void ConfigurationDialog::languageChanged()
 
 void ConfigurationDialog::createDialogContent()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	MovementMgr* movement = static_cast<MovementMgr*>(StelApp::getInstance().getModuleMgr().getModule("MovementMgr"));
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	
 	ui->setupUi(dialog);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
+	// Main tab
 	// Fill the language list widget from the available list
 	QListWidget* c = ui->programLanguageListWidget;
 	c->clear();
@@ -77,13 +85,21 @@ void ConfigurationDialog::createDialogContent()
 	if (!litem.empty())
 		c->setCurrentItem(litem.at(0));
 	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
-	
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Projector* proj = StelApp::getInstance().getCore()->getProjection();
-	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	MovementMgr* movement = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("MovementMgr");
 
-	// Startup Tab
+	// Selected object info
+	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+		ui->noSelectedInfoRadio->setChecked(true);
+	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::BriefInfo))
+		ui->briefSelectedInfoRadio->setChecked(true);
+	else
+		ui->allSelectedInfoRadio->setChecked(true);
+	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
+	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
+	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+	
+	
+	// Navigation tab
+	// Startup time
 	if (nav->getStartupTimeMode()=="actual")
 		ui->systemTimeRadio->setChecked(true);
 	else if (nav->getStartupTimeMode()=="today")
@@ -100,39 +116,23 @@ void ConfigurationDialog::createDialogContent()
 	ui->fixedDateTimeEdit->setDateTime(nav->getInitDateTime());
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setInitDateTime(QDateTime)));
 	
+	// Startup FOV/direction of view
 	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
-
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
-	// Planetarium tab
+	// Tools tab
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(movement->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), movement, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
-
-	// Tools tab
-
-
-	// Interface tab
-	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
-	assert(newGui);
-	if (newGui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
-		ui->noSelectedInfoRadio->setChecked(true);
-	else if (newGui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::BriefInfo))
-		ui->briefSelectedInfoRadio->setChecked(true);
-	else
-		ui->allSelectedInfoRadio->setChecked(true);
-
-	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
-	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
-	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
-
-	// DEBUG tab
-	// connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setInputScale(double)));
-	// connect(ui->doubleSpinBox_2, SIGNAL(valueChanged(double)), (const QObject*)StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setOutScale(double)));
-
+	
+	const bool b = conf->value("gui/flag_show_flip_buttons",false).toBool();
+	ui->showFlipButtonsCheckbox->setChecked(b);
+	if (b==true)
+		setShowFlipButtons(b);
+	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), this, SLOT(setShowFlipButtons(bool)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
@@ -190,4 +190,30 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::BriefInfo));
 }
 
-
+void ConfigurationDialog::setShowFlipButtons(bool b)
+{
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	if (b==true)
+	{
+		if (flipVert==NULL)
+		{
+			// Create the vertical flip button
+			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+			flipVert = new StelButton(NULL, QPixmap(":/graphicGui/gui/btFlipVertical-on.png"), QPixmap(":/graphicGui/gui/btFlipVertical-off.png"), pxmapGlow32x32, gui->getGuiActions("actionVertical_Flip"));
+		}
+		if (flipHoriz==NULL)
+		{
+			// Create the vertical flip button
+			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+			flipHoriz = new StelButton(NULL, QPixmap(":/graphicGui/gui/btFlipHorizontal-on.png"), QPixmap(":/graphicGui/gui/btFlipHorizontal-off.png"), pxmapGlow32x32, gui->getGuiActions("actionHorizontal_Flip"));
+		}
+		
+		gui->getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit");
+		gui->getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
+	}
+	else
+	{
+		gui->getButtonBar()->hideButton("actionVertical_Flip");
+		gui->getButtonBar()->hideButton("actionHorizontal_Flip");
+	}
+}
