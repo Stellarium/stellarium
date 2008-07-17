@@ -46,6 +46,11 @@ private slots:
 	void setStartupTimeMode(void);
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
+	void setShowFlipButtons(bool);
+	
+private:
+	class StelButton* flipVert;
+	class StelButton* flipHoriz;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
