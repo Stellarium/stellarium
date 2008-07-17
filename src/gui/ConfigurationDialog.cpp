@@ -62,7 +62,7 @@ void ConfigurationDialog::createDialogContent()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	MovementMgr* movement = static_cast<MovementMgr*>(StelApp::getInstance().getModuleMgr().getModule("MovementMgr"));
+	MovementMgr* mmgr = static_cast<MovementMgr*>(StelApp::getInstance().getModuleMgr().getModule("MovementMgr"));
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
 	ui->setupUi(dialog);
@@ -97,6 +97,13 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	
+	// View mode radio buttons
+	const bool vmodeNight = StelApp::getInstance().getVisionModeNight();
+	ui->normalVisionRadioButton->setChecked(!vmodeNight);
+	ui->nightVisionRadioButton->setChecked(vmodeNight);
+	connect(ui->normalVisionRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
+	connect(ui->nightVisionRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
+	connect(ui->invertedColorsRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
 	
 	// Navigation tab
 	// Startup time
@@ -121,12 +128,18 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
+	ui->enableKeysNavigationCheckBox->setChecked(mmgr->getFlagEnableMoveKeys() || mmgr->getFlagEnableZoomKeys());
+	ui->enableMouseNavigationCheckBox->setChecked(mmgr->getFlagEnableMouseNavigation());
+	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableMoveKeys(bool)));
+	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableZoomKeys(bool)));
+	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableMouseNavigation(bool)));
+	
 	// Tools tab
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	ui->autoZoomResetsDirectionCheckbox->setChecked(movement->getFlagAutoZoomOutResetsDirection());
-	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), movement, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	ui->autoZoomResetsDirectionCheckbox->setChecked(mmgr->getFlagAutoZoomOutResetsDirection());
+	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 	
 	const bool b = conf->value("gui/flag_show_flip_buttons",false).toBool();
 	ui->showFlipButtonsCheckbox->setChecked(b);
@@ -215,5 +228,18 @@ void ConfigurationDialog::setShowFlipButtons(bool b)
 	{
 		gui->getButtonBar()->hideButton("actionVertical_Flip");
 		gui->getButtonBar()->hideButton("actionHorizontal_Flip");
+	}
+}
+
+void ConfigurationDialog::visionModeChanged()
+{
+	const bool b = StelApp::getInstance().getVisionModeNight();
+	if (ui->normalVisionRadioButton->isChecked() && b)
+	{
+		StelApp::getInstance().setVisionModeNight(false);
+	}
+	if (ui->nightVisionRadioButton->isChecked() && !b)
+	{
+		StelApp::getInstance().setVisionModeNight(true);
 	}
 }

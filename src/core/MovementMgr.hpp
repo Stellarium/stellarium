@@ -101,6 +101,26 @@ public slots:
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
 	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
 	
+	//! Get whether keys can control zoom
+	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
+	//! Set whether keys can control zoom
+	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b;}
+	
+	//! Get whether keys can control move
+	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
+	//! Set whether keys can control movement
+	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}
+	
+	//! Get whether being at the edge of the screen activates movement
+	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
+	//! Set whether being at the edge of the screen activates movement
+	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b;}
+	
+	//! Get whether mouse can control movement
+	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
+	//! Set whether mouse can control movement
+	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b;}
+	
 	//! Move the view to a specified position.
 	//! Uses equatorial or local coordinate depending on _localPos value.
 	//! @param aim The position to move to expressed as a vector.
@@ -150,7 +170,8 @@ private:
 	bool isMouseMovingHoriz;
 	bool isMouseMovingVert;
 
-	bool flagEnableMoveMouse; // allow mouse at edge of screen to move view
+	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
+	bool flagEnableMouseNavigation;
 	float mouseZoomSpeed;
 	
 	bool flagEnableZoomKeys;

@@ -47,6 +47,7 @@ private slots:
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
 	void setShowFlipButtons(bool);
+	void visionModeChanged();
 	
 private:
 	class StelButton* flipVert;
