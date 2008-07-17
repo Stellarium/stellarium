@@ -137,6 +137,9 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 ########### Add macros ###########
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
+IF(CMAKE_BUILD_TYPE STREQUAL "Release")
+ ADD_DEFINITIONS(-DQT_NO_DEBUG)
+ENDIF(CMAKE_BUILD_TYPE STREQUAL "Release")
 
 ########### uninstall files ###############
 CONFIGURE_FILE(

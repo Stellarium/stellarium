@@ -288,6 +288,8 @@ ADD_CUSTOM_TARGET(GenerateUiHeaders ALL DEPENDS ${stellarium_UIS_H})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${SDL_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${SDLMIXER_LIBRARY})
 
+#INCLUDE(PCHSupport_26)
+
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption})
@@ -296,6 +298,7 @@ IF(GENERATE_STELMAINLIB)
  TARGET_LINK_LIBRARIES(stellarium stelMain ${extLinkerOption})
 ELSE(GENERATE_STELMAINLIB)
  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+# ADD_PRECOMPILED_HEADER(stellarium pch.hpp)
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption})
 ENDIF(GENERATE_STELMAINLIB)
 
