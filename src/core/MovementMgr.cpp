@@ -31,16 +31,17 @@
 #include <QDebug>
 
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), 
-	flagLockEquPos(false), 
-	flagTracking(false), 
-	isMouseMovingHoriz(false), 
-	isMouseMovingVert(false), 
-	keyMoveSpeed(0.00025), 
-	flagAutoMove(0), 
-	deltaFov(0.), 
-	deltaAlt(0.), 
-	deltaAz(0.), 
-	flagAutoZoom(0), 
+	flagLockEquPos(false),
+	flagTracking(false),
+	isMouseMovingHoriz(false),
+	isMouseMovingVert(false),
+	flagEnableMouseNavigation(true),
+	keyMoveSpeed(0.00025),
+	flagAutoMove(0),
+	deltaFov(0.),
+	deltaAlt(0.),
+	deltaAz(0.),
+	flagAutoZoom(0),
 	flagAutoZoomOutResetsDirection(0)
 {
 	setObjectName("MovementMgr");
@@ -56,7 +57,7 @@ void MovementMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
-	flagEnableMoveMouse = conf->value("navigation/flag_enable_move_mouse",1).toBool();
+	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
 	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
@@ -65,19 +66,20 @@ void MovementMgr::init()
 	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5).toDouble();
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
+	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 }	
 	
 bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
 	// Turn if the mouse is at the edge of the screen unless config asks otherwise
-	if(flagEnableMoveMouse)
+	if (flagEnableMoveAtScreenEdge)
 	{
-		if (x == 0)
+		if (x <= 1)
 		{
 			turnLeft(1);
 			isMouseMovingHoriz = true;
 		}
-		else if (x == core->getProjection()->getViewportWidth() - 1)
+		else if (x >= core->getProjection()->getViewportWidth() - 2)
 		{
 			turnRight(1);
 			isMouseMovingHoriz = true;
@@ -88,12 +90,12 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			isMouseMovingHoriz = false;
 		}
 
-		if (y == 0)
+		if (y <= 1)
 		{
 			turnUp(1);
 			isMouseMovingVert = true;
 		}
-		else if (y == core->getProjection()->getViewportHeight() - 1)
+		else if (y >= core->getProjection()->getViewportHeight() - 2)
 		{
 			turnDown(1);
 			isMouseMovingVert = true;
@@ -105,7 +107,7 @@ bool MovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		}
 	}
 	
-	if (isDragging)
+	if (isDragging && flagEnableMouseNavigation)
 	{
 		if (hasDragged || (std::sqrt((double)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>4.))
 		{
@@ -179,6 +181,8 @@ void MovementMgr::handleKeys(QKeyEvent* event)
 //! Handle mouse wheel events.
 void MovementMgr::handleMouseWheel(QWheelEvent* event)
 {
+	if (flagEnableMouseNavigation==false)
+		return;
 	int numDegrees = event->delta() / 8;
 	int numSteps = numDegrees / 15;
 	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0.2);

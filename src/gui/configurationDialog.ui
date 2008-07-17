@@ -224,6 +224,9 @@
              </item>
              <item>
               <widget class="QRadioButton" name="invertedColorsRadioButton" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
                <property name="toolTip" >
                 <string>Inverted colors like on astronomical charts (i.e. sky is white, objects are dark).</string>
                </property>
@@ -312,7 +315,7 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2" >
              <item>
-              <widget class="QCheckBox" name="checkBox_2" >
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox" >
                <property name="toolTip" >
                 <string>Allow keyboard to pan and zoom</string>
                </property>
@@ -322,7 +325,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox" >
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox" >
                <property name="toolTip" >
                 <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
                </property>
