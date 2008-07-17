@@ -575,7 +575,8 @@ QTreeView, QTreeView:active {
 }
 
 QDateEdit {
-	padding-right: 20px; /* make room for the arrows */background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
+	padding-right: 20px; /* make room for the arrows */
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(68, 68, 69, 90%), stop: 1 rgba(40, 40, 40, 90%));
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(200, 201, 202, 90%), stop: 1 rgba(104, 106, 107, 90%));
 	color: rgb(31, 31, 31);
@@ -618,6 +619,6 @@ QMenu::item {
 	background-color: rgb(66, 67, 70);
 }
 
-QMenu::item: selected { /* when user selects item using mouse or keyboard */
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
 	background-color: rgb(101, 99, 33);
 }
