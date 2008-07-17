@@ -48,7 +48,7 @@ private:
 class StelButton : public QObject, public QGraphicsPixmapItem
 {
 	friend class BottomStelBar;
-	
+	friend class LeftStelBar;
 	Q_OBJECT;
 public:
 	//! Constructor
@@ -60,7 +60,7 @@ public:
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
 	//! @param helpLabel the label in which the button will display it's help when hovered
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, QGraphicsSimpleTextItem* helpLabel=NULL, bool noBackground=false);
+			   QAction* action=NULL, bool noBackground=false);
 
 	//! Get whether the button is checked
 	bool isChecked() const {return checked;}
@@ -70,6 +70,9 @@ signals:
 	void toggled(bool);
 	//! Triggered when the button state changes
 	void triggered();
+	//! Emitted when the hover state change
+	//! @param b true if the mouse entered the button
+	void hoverChanged(bool b);
 
 public slots:
 	//! set whether the button is checked
@@ -89,31 +92,38 @@ private:
 	bool checked;
 	QTimeLine* timeLine;
 	QAction* action;
-	QGraphicsSimpleTextItem* helpLabel;
 	bool noBckground;
 };
 
 //! The button bar on the left containing windows toggle buttons
-class LeftStelBar : public QGraphicsItem
+class LeftStelBar : public QObject, public QGraphicsItem
 {
+	Q_OBJECT;
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
+	QRectF boundingRectNoHelpLabel();
+private slots:	
+	//! Update the help label when a button is hovered
+	void buttonHoverChanged(bool b);
 private:
 	QTimeLine* hideTimeLine;
+	QGraphicsSimpleTextItem* helpLabel;
 };
 
 //! The button bar on the bottom containing actions toggle buttons
-class BottomStelBar : public QGraphicsItem
+class BottomStelBar : public QObject, public QGraphicsItem
 {
+	Q_OBJECT;
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
-	
+	QRectF boundingRectNoHelpLabel();
+			
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
 	//! @param b the button to add
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
@@ -132,6 +142,10 @@ public:
 	void setFlagShowTime(bool b) {flagShowTime=b;}
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
+
+private slots:	
+	//! Update the help label when a button is hovered
+	void buttonHoverChanged(bool b);
 	
 private:
 	void updateText();
@@ -161,6 +175,8 @@ private:
 	
 	bool flagShowTime;
 	bool flagShowLocation;
+	
+	QGraphicsSimpleTextItem* helpLabel;
 };
 
 //! The path around the bottom left button bars
