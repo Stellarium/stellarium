@@ -24,6 +24,7 @@
 #include "Navigator.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelMainGraphicsView.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -44,9 +45,9 @@
 
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
-		const QPixmap& apixHover, QAction* aaction, QGraphicsSimpleTextItem* ahelpLabel, bool noBackground) : 
+		const QPixmap& apixHover, QAction* aaction, bool noBackground) : 
 		QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
-		checked(false), action(aaction), helpLabel(ahelpLabel), noBckground(noBackground)
+		checked(false), action(aaction), noBckground(noBackground)
 {
 	assert(!pixOn.isNull());
 	assert(!pixOff.isNull());
@@ -85,18 +86,8 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 	timeLine->setDirection(QTimeLine::Forward);
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
-	if (helpLabel && action)
-	{
-		QString tip(action->toolTip());
-		QString shortcut(action->shortcut().toString());
-		if (!shortcut.isEmpty())
-		{
-			if (shortcut == "Space")
-				shortcut = q_("Space");
-			tip += "  [" + shortcut + "]";
-		}
-		helpLabel->setText(tip);
-	}
+	
+	emit(hoverChanged(true));
 }
 		
 void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
@@ -104,8 +95,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	timeLine->setDirection(QTimeLine::Backward);
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
-	if (helpLabel && action)
-		helpLabel->setText("");
+	emit(hoverChanged(false));
 }
 
 void StelButton::animValueChanged(qreal value)
@@ -136,6 +126,10 @@ void StelButton::setChecked(bool b)
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
+	// Create the help label
+	helpLabel = new QGraphicsSimpleTextItem("", this);
+	helpLabel->setFont(QFont("DejaVuSans", 11));
+	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 }
 
 LeftStelBar::~LeftStelBar()
@@ -145,13 +139,15 @@ LeftStelBar::~LeftStelBar()
 void LeftStelBar::addButton(StelButton* button)
 {
 	double posY = 0;
-	if (children().size()!=0)
+	if (QGraphicsItem::children().size()!=0)
 	{
 		const QRectF& r = childrenBoundingRect();
 		posY += r.bottom()-1;
 	}
 	button->setParentItem(this);
 	button->setPos(0.5, posY+10.5);
+	
+	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
 void LeftStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -161,6 +157,42 @@ void LeftStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* optio
 QRectF LeftStelBar::boundingRect() const
 {
 	return childrenBoundingRect();
+}
+
+QRectF LeftStelBar::boundingRectNoHelpLabel()
+{
+	helpLabel->setParentItem(NULL);
+	const QRectF& r= childrenBoundingRect();
+	helpLabel->setParentItem(this);
+	return r;
+}
+
+
+// Update the help label when a button is hovered
+void LeftStelBar::buttonHoverChanged(bool b)
+{
+	StelButton* button = qobject_cast<StelButton*>(sender());
+	Q_ASSERT(button);
+	if (b==true)
+	{
+		if (button->action)
+		{
+			QString tip(button->action->toolTip());
+			QString shortcut(button->action->shortcut().toString());
+			if (!shortcut.isEmpty())
+			{
+				if (shortcut == "Space")
+					shortcut = q_("Space");
+				tip += "  [" + shortcut + "]";
+			}
+			helpLabel->setText(tip);
+			helpLabel->setPos(boundingRectNoHelpLabel().width()+15.5,button->pos().y()+button->pixmap().size().height()/2-8);
+		}
+	}
+	else
+	{
+		helpLabel->setText("");
+	}
 }
 
 BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, const QPixmap& pixRight, 
@@ -174,6 +206,11 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	location = new QGraphicsSimpleTextItem("Munich, Earth, 500m", this);
 	fov = new QGraphicsSimpleTextItem("FOV 43.45", this);
 	fps = new QGraphicsSimpleTextItem("43.2 FPS", this);
+	
+	// Create the help label
+	helpLabel = new QGraphicsSimpleTextItem("", this);
+	helpLabel->setFont(QFont("DejaVuSans", 11));
+	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
@@ -205,6 +242,8 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	
 	updateButtonsGroups();
 	button->setParentItem(this);
+	
+	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
 StelButton* BottomStelBar::hideButton(const QString& actionName)
@@ -256,6 +295,7 @@ QRectF BottomStelBar::getButtonsBoundingRect()
 	datetime->setParentItem(NULL);
 	fov->setParentItem(NULL);
 	fps->setParentItem(NULL);
+	helpLabel->setParentItem(NULL);
 	
 	QRectF rectCh = boundingRect();
 	
@@ -263,7 +303,7 @@ QRectF BottomStelBar::getButtonsBoundingRect()
 	datetime->setParentItem(this);
 	fov->setParentItem(this);
 	fps->setParentItem(this);
-	
+	helpLabel->setParentItem(this);
 	return rectCh;
 }
 
@@ -345,10 +385,18 @@ void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* opt
 
 QRectF BottomStelBar::boundingRect() const
 {
-	if (children().size()==0)
+	if (QGraphicsItem::children().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
 	return QRectF(0, 0, r.width()-1, r.height()-1);
+}
+
+QRectF BottomStelBar::boundingRectNoHelpLabel()
+{
+	helpLabel->setParentItem(NULL);
+	const QRectF& r = boundingRect();
+	helpLabel->setParentItem(this);
+	return r;
 }
 
 // Set the pen for all the sub elements
@@ -358,6 +406,34 @@ void BottomStelBar::setColor(const QColor& c)
 	location->setBrush(c);
 	fov->setBrush(c);
 	fps->setBrush(c);
+	helpLabel->setBrush(c);
+}
+
+// Update the help label when a button is hovered
+void BottomStelBar::buttonHoverChanged(bool b)
+{
+	StelButton* button = qobject_cast<StelButton*>(sender());
+	Q_ASSERT(button);
+	if (b==true)
+	{
+		if (button->action)
+		{
+			QString tip(button->action->toolTip());
+			QString shortcut(button->action->shortcut().toString());
+			if (!shortcut.isEmpty())
+			{
+				if (shortcut == "Space")
+					shortcut = q_("Space");
+				tip += "  [" + shortcut + "]";
+			}
+			helpLabel->setText(tip);
+			helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
+		}
+	}
+	else
+	{
+		helpLabel->setText("");
+	}
 }
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
@@ -373,9 +449,9 @@ void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 {
 	QPainterPath newPath;
 	QPointF p = lef->pos();
-	QRectF r = lef->boundingRect();
+	QRectF r = lef->boundingRectNoHelpLabel();
 	QPointF p2 = bot->pos();
-	QRectF r2 = bot->boundingRect();
+	QRectF r2 = bot->boundingRectNoHelpLabel();
 	
 	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
 	newPath.lineTo(p.x()+r.width(),p.y()-roundSize);

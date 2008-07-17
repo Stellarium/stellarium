@@ -126,7 +126,6 @@ private:
 	BottomStelBar* buttonBar;
 	InfoPanel* infoPanel;
 	class StelBarsPath* buttonBarPath;
-	QGraphicsSimpleTextItem* buttonHelpLabel;
 
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
