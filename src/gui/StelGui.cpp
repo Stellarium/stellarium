@@ -297,8 +297,6 @@ void StelGui::init()
 	
 	QObject::connect(getGuiActions("actionShow_Search_Window"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
 	QObject::connect(&searchDialog, SIGNAL(closed()), getGuiActions("actionShow_Search_Window"), SLOT(toggle()));
-
-	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
 	
 	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 
