@@ -200,7 +200,7 @@ SkyImageTile::~SkyImageTile()
 		delete tile;
 	}
 }
-
+	
 void SkyImageTile::draw(StelCore* core)
 {
 	Projector* prj = core->getProjection();
@@ -286,27 +286,10 @@ void SkyImageTile::getTilesToDraw(QMultiMap<double, SkyImageTile*>& result, Stel
  			texMgr.setMagFilter(GL_LINEAR);
 			// static int countG=0;
 			// qWarning() << countG++;
-			QString fullTexFileName;
-			if (baseUrl.startsWith("http://"))
-			{
-				fullTexFileName = baseUrl+imageUrl;
-			}
-			else
-			{
-				try
-				{
-					fullTexFileName = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
-				}
-				catch (std::runtime_error er)
-				{
-					// Maybe the user meant a file in stellarium local files
-					fullTexFileName = imageUrl;
-				}
-			}
-			tex = texMgr.createTextureThread(fullTexFileName);
+			tex = texMgr.createTextureThread(absoluteImageURI);
 			if (!tex)
 			{
-				qWarning() << "WARNING : Can't create tile: " << baseUrl+imageUrl;
+				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
 				errorOccured = true;
 				return;
 			}
@@ -435,6 +418,12 @@ bool SkyImageTile::drawTile(StelCore* core)
 	return true;
 }
 
+// Return true if the tile is fully loaded and can be displayed
+bool SkyImageTile::isReadyToDisplay() const
+{
+	return tex && tex->canBind();
+}
+	
 // Load the tile information from a JSON file
 QVariantMap SkyImageTile::loadFromJSON(QIODevice& input, bool compressed)
 {
@@ -544,7 +533,23 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	
 	if (map.contains("imageUrl"))
 	{
-		imageUrl = map.value("imageUrl").toString();
+		QString imageUrl = map.value("imageUrl").toString();
+		if (baseUrl.startsWith("http://"))
+		{
+			absoluteImageURI = baseUrl+imageUrl;
+		}
+		else
+		{
+			try
+			{
+				absoluteImageURI = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
+			}
+			catch (std::runtime_error er)
+			{
+					// Maybe the user meant a file in stellarium local files
+				absoluteImageURI = imageUrl;
+			}
+		}
 		if (skyConvexPolygons.size()!=textureCoords.size())
 			throw std::runtime_error("the number of convex polygons does not match the number of texture space polygon");
 	}

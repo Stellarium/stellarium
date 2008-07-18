@@ -622,3 +622,11 @@ QMenu::item {
 QMenu::item:selected { /* when user selects item using mouse or keyboard */
 	background-color: rgb(101, 99, 33);
 }
+
+QMainWindow > QDialog {
+	background: rgba(48, 49, 52, 100%);
+}
+
+QMainWindow > QDialog:active {
+	background: rgba(48, 49, 52, 100%);
+}

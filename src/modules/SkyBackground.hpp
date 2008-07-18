@@ -61,6 +61,12 @@ public slots:
 	//! Get whether Sky Background should be displayed
 	bool getFlagShow() const {return flagShow;}
 	
+	//! Add a new sky image tile in the list of background images
+	void insertSkyImage(SkyImageTile* img, bool show=true);
+	
+	//! Remove a sky image tile from the list of background images
+	void removeSkyImage(SkyImageTile* img);
+	
 private slots:
 	//! Called when loading of data started or stopped for one collection
 	//! @param b true if data loading started, false if finished
@@ -80,6 +86,7 @@ private:
 			~SkyBackgroundElem();
 			SkyImageTile* tile;
 			QProgressBar* progressBar;
+			bool show;
 	};
 	
 	SkyBackgroundElem* skyBackgroundElemForTile(const SkyImageTile*);
