@@ -75,6 +75,23 @@ void SkyBackground::addElem(const QString& uri)
 	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
 }
 
+void SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
+{
+	SkyBackgroundElem* bEl = new SkyBackgroundElem(tile);
+	bEl->show = ashow;
+	allSkyImages.append(bEl);
+	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
+	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+}
+
+// Remove a sky image tile from the list of background images
+void SkyBackground::removeSkyImage(SkyImageTile* img)
+{
+	SkyBackgroundElem* elem = skyBackgroundElemForTile(img);
+	allSkyImages.removeAll(elem);
+	delete elem;
+}
+
 // Draw all the multi-res images collection
 void SkyBackground::draw(StelCore* core)
 {
@@ -85,10 +102,12 @@ void SkyBackground::draw(StelCore* core)
 	
 	prj->setCurrentFrame(Projector::FrameJ2000);
 	glBlendFunc(GL_ONE, GL_ONE);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glEnable(GL_BLEND);
 	foreach (SkyBackgroundElem* s, allSkyImages)
-		s->tile->draw(core);
+	{
+		if (s->show)
+			s->tile->draw(core);
+	}
 }
 
 // Called when loading of data started or stopped for one collection
@@ -126,7 +145,7 @@ void SkyBackground::percentLoadedChanged(int percentage)
 	Q_ASSERT(elem->progressBar!=NULL);
 	elem->progressBar->setValue(percentage);
 }
-
+	
 SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const SkyImageTile* t)
 {
 	foreach (SkyBackgroundElem* e, allSkyImages)
@@ -146,10 +165,7 @@ SkyBackground::SkyBackgroundElem::SkyBackgroundElem(const QString& uri) : progre
 				 
 SkyBackground::SkyBackgroundElem::~SkyBackgroundElem()
 {
-	if (tile)
-		delete tile;
-	tile = NULL;
 	if (progressBar)
-		delete progressBar;
+		progressBar->deleteLater();
 	progressBar = NULL;
 }

@@ -68,6 +68,9 @@ class SkyImageTile : public QObject
 	friend class JsonLoadThread;
 	
 public:
+	//! Default constructor
+	SkyImageTile() {initCtor();}
+	
 	//! Constructor
 	SkyImageTile(const QString& url, SkyImageTile* parent=NULL);
 	//! Constructor
@@ -88,6 +91,15 @@ public:
 	//! Return the short name for this image to be used in the loading bar
 	QString getShortName() const {return shortName;}
 	
+	//! Return the absolute path/URL to the image file
+	QString getAbsoluteImageURI() const {return absoluteImageURI;}
+	
+	//! Return true if the tile is fully loaded and can be displayed
+	bool isReadyToDisplay() const;
+	
+	//! Return true if an error occured while loading the data
+	bool hasErrorOccured() const {return errorOccured;}
+	
 signals:
 	//! Emitted when loading of data started or stopped
 	//! @param b true if data loading started, false if finished
@@ -103,11 +115,54 @@ private slots:
 	
 	//! Called when the JSON file is loaded
 	void JsonLoadFinished();
+
+protected:
+	//! The credits of the server where this data come from
+	ServerCredits serverCredits;
+	
+	//! The credits for the data set
+	DataSetCredits dataSetCredits;
+	
+	//! The very short name for this image set to be used in loading bar
+	QString shortName;
+	
+	//! URL where the image is located
+	QString absoluteImageURI;
+	
+	//! Base URL to prefix to relative URL
+	QString baseUrl;
+	
+	//! Minimum resolution of the data of the texture in degree/pixel
+	float minResolution;
+	
+	//! The image luminance in cd/m^2
+	float luminance;
+	
+	//! Whether the texture must be blended
+	bool alphaBlend;
+	
+	//! True if the tile is just a list of other tiles without texture for itself
+	bool noTexture;
+	
+	//! Direction of the vertices of each polygons in ICRS frame
+	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
+	
+	//! Positions of the vertex of each convex polygons in texture space
+	QList< QList<Vec2f> > textureCoords;
+	
+	//! The list of all the subTiles URL for this tile
+	QStringList subTilesUrls;
+	
+	//! The list of all the created subtiles for this tile
+	QList<SkyImageTile*> subTiles;
+	
+	//! Set to true if an error occured with this tile and it should not be displayed
+	bool errorOccured;
 	
 private:
 	//! init the SkyImageTile
 	void initCtor();
-			
+	
 	//! Load the tile information from a JSON file
 	static QVariantMap loadFromJSON(QIODevice& input, bool compressed=false);
 	
@@ -134,55 +189,11 @@ private:
 	//! Return the base URL prefixed to relative URL
 	QString getBaseUrl() const {return baseUrl;}
 	
-	//! Return the image URL as written in the JSON file
-	QString getImageUrl() const  {return imageUrl;}
-	
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
 	
-	//! The credits of the server where this data come from
-	ServerCredits serverCredits;
-	
-	//! The credits for the data set
-	DataSetCredits dataSetCredits;
-	
-	//! The very short name for this image set to be used in loading bar
-	QString shortName;
-	
-	// URL where the image is located
-	QString imageUrl;
-	
-	// Base URL to prefix to relative URL
-	QString baseUrl;
-	
-	// Minimum resolution of the data of the texture in degree/pixel
-	float minResolution;
-	
-	// The image luminance in cd/m^2
-	float luminance;
-	
-	// Whether the texture must be blended
-	bool alphaBlend;
-	
 	// The texture of the tile
 	STextureSP tex;
-	// True if the tile is just a list of other tiles without texture for itself
-	bool noTexture;
-	
-	// Direction of the vertices of each polygons in ICRS frame
-	QList<StelGeom::ConvexPolygon> skyConvexPolygons;
-	
-	// Positions of the vertex of each convex polygons in texture space
-	QList< QList<Vec2f> > textureCoords;
-	
-	// The list of all the subTiles URL for this tile
-	QStringList subTilesUrls;
-	
-	// The list of all the created subtiles for this tile
-	QList<SkyImageTile*> subTiles;
-	
-	// Set to true if an error occured with this tile and it should not be displayed
-	bool errorOccured;
 	
 	// Used to download remote JSON files if needed
 	class QNetworkReply* httpReply;

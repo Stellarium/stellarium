@@ -62,7 +62,7 @@ void ConfigurationDialog::createDialogContent()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	MovementMgr* mmgr = static_cast<MovementMgr*>(StelApp::getInstance().getModuleMgr().getModule("MovementMgr"));
+	MovementMgr* mmgr = static_cast<MovementMgr*>(GETSTELMODULE("MovementMgr"));
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
 	ui->setupUi(dialog);
