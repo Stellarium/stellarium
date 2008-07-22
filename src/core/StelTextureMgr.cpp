@@ -926,12 +926,7 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 	/* Read scanlines */
 	for (i = 0; i < texinfo.height; ++i)
 	{
-#if 1
-		j = (texinfo.texels + ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
-#else
-		j = &texinfo->texels[texinfo.width * i * texinfo->internalFormat];
-#endif
-
+		j = texinfo.texels + ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat);
 		jpeg_read_scanlines (&cinfo, &j, 1);
 	}
 

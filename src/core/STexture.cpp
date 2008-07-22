@@ -353,12 +353,18 @@ bool STexture::glLoad()
 	}
 	else
 	{
+		// Fixed the bug which caused shifted loading for LUMINANCE images with non multiple of 4 widths!
+		glPushClientAttrib(GL_CLIENT_PIXEL_STORE_BIT);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		
 		// Load from texels buffer
 		if (mipmapsMode==true)
 			gluBuild2DMipmaps(GL_TEXTURE_2D, internalFormat, width, height, format, type, texels);
 		else
 			glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, texels);
 		
+		glPopClientAttrib();
+				
 		// OpenGL has its own copy of texture data
 		TexMalloc::free (texels);
 		texels = NULL;
