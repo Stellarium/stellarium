@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_
 ########### next target ###############
 
 SET(stellarium_lib_SRCS
-	core/AstroImage.cpp
-	core/AstroImage.hpp
 	core/Audio.cpp
 	core/Audio.hpp
 	core/GeodesicGrid.cpp
