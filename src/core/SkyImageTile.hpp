@@ -100,6 +100,9 @@ public:
 	//! Return true if an error occured while loading the data
 	bool hasErrorOccured() const {return errorOccured;}
 	
+	//! Delete the texture from memory. It will be reloaded automatically if needed
+	void deleteTexture() {tex.reset();}
+	
 signals:
 	//! Emitted when loading of data started or stopped
 	//! @param b true if data loading started, false if finished
@@ -179,9 +182,6 @@ private:
 	
 	//! Delete all the subtiles which were not displayed since more than lastDrawTrigger seconds
 	void deleteUnusedTiles(double lastDrawTrigger=2.);
-	
-	//! Delete the texture from memory. It will be reloaded automatically if needed
-	void deleteTexture() {tex.reset();}
 	
 	//! Return the last time the tile content was actually drawn
 	double getLastTimeDraw() const {return lastTimeDraw;}
