@@ -20,6 +20,8 @@
 #ifndef _TREEGRID_HPP_
 #define _TREEGRID_HPP_
 
+//#define TREEGRIDDEBUG 1
+
 #include <vector>
 #include "Grid.hpp"
 
