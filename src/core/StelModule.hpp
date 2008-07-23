@@ -36,8 +36,6 @@ class QSettings;
 //! @author Fabien Chereau
 class StelModule : public QObject
 {
-	Q_OBJECT
-
 public:
 	StelModule() {;}
 
