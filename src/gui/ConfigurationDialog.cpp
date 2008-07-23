@@ -226,8 +226,8 @@ void ConfigurationDialog::setShowFlipButtons(bool b)
 	}
 	else
 	{
-		gui->getButtonBar()->hideButton("actionVertical_Flip");
-		gui->getButtonBar()->hideButton("actionHorizontal_Flip");
+		Q_ASSERT(gui->getButtonBar()->hideButton("actionVertical_Flip")==flipVert);
+		Q_ASSERT(gui->getButtonBar()->hideButton("actionHorizontal_Flip")==flipHoriz);
 	}
 }
 
