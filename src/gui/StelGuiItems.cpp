@@ -241,6 +241,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 		g.append(button);
 	
 	updateButtonsGroups();
+	button->setVisible(true);
 	button->setParentItem(this);
 	
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
@@ -273,7 +274,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	}
 	// Cannot really delete because some part of the GUI depend on the presence of some buttons
 	// so just make invisible
-	bToRemove->setParent(NULL);
+	bToRemove->setParentItem(NULL);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
 	return bToRemove;
@@ -353,12 +354,12 @@ void BottomStelBar::updateText()
 	double jd = core->getNavigation()->getJDay();
 	
 	datetime->setText(flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
-	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : "");
+	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ");
 	
 	location->setText(flagShowLocation ? core->getObservatory()->getHomePlanetNameI18n() +", "
 	                  +core->getObservatory()->getLocationName() + ", "
 			  // xgettext:no-c-format
-	                  +q_("%1m").arg(core->getObservatory()->getAltitude()) : "");
+	                  +q_("%1m").arg(core->getObservatory()->getAltitude()) : " ");
 	
 	QString str;
 	QTextStream wos(&str);

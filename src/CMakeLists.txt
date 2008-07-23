@@ -243,7 +243,6 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
-	core/StelModule.hpp
 	core/StelModuleMgr.hpp
 	core/Observer.hpp
 	core/StelApp.hpp
