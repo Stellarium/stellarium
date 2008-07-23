@@ -53,7 +53,7 @@ private:
 	//! @return a QString a description of the Planet.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
-		if (flags&Name) return getNameI18n() + "(" + getShortName() + "°";
+		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
 		else return "";
 	}
 

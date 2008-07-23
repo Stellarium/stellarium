@@ -233,11 +233,6 @@ Telescope::Telescope(const QString &name) : name(name)
 
 QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	const Navigator* nav = core->getNavigation();
-	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
-	double dec_equ, ra_equ;
-	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	QString str;
 	QTextStream oss(&str);
 	if (flags&Name)
@@ -248,23 +243,9 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<h2>" << nameI18n << "</h2>";
 	}
 
-	if (flags&RaDecJ2000) 
-		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,false), StelUtils::radToDmsStr(dec_j2000,false)) << "<br>";
+	oss << getPositionInfoString(core, flags);
 
-	if (flags&RaDecOfDate)
-		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ));
-
-	// chomp trailing line breaks
-	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
-
-	if (flags&PlainText)
-	{
-		str.replace("<b>", "");
-		str.replace("</b>", "");
-		str.replace("<h2>", "");
-		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
-	}
+	postProcessInfoString(str, flags);
 
 	return str;
 }
