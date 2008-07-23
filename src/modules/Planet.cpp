@@ -111,7 +111,6 @@ Planet::~Planet()
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	double tempDE, tempRA;
 	
 	QString str;
 	QTextStream oss(&str);
@@ -132,21 +131,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b>").arg(getMagnitude(nav), 0, 'f', 2) << "<br>";
 
-	if (flags&RaDecJ2000)
-	{
-		StelUtils::rectToSphe(&tempRA, &tempDE, getObsJ2000Pos(nav));
-		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
-	}
-
-	if (flags&AltAzi)
-	{
-		// calculate alt az position
-		StelUtils::rectToSphe(&tempRA, &tempDE, getAltAzPos(nav));
-		tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-		if(tempRA > M_PI*2)
-			tempRA -= M_PI*2;
-		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(tempRA), StelUtils::radToDmsStr(tempDE)) << "<br>";
-	}
+	oss << getPositionInfoString(core, flags);
 
 	if (flags&Distance)
 	{
@@ -157,17 +142,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Size)
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 
-	// Chomp trailing line break
-	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
-
-	if (flags&PlainText)
-	{
-		str.replace("<b>", "");
-		str.replace("</b>", "");
-		str.replace("<h2>", "");
-		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
-	}
+	postProcessInfoString(str, flags);
 
 	return str;
 }

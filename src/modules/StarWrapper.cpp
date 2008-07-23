@@ -28,20 +28,12 @@
 #include "Translator.hpp"
 
 #include <QTextStream>
-#include <QRegExp>
 
 namespace BigStarCatalogExtension {
 
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
-	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
-	double dec_equ, ra_equ;
-	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
-	double dec_sideral, ra_sideral;
-	StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
-	ra_sideral = 2.*M_PI-ra_sideral;
 	QString str;
 	QTextStream oss(&str);
 
@@ -49,33 +41,10 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())) << "<br>";
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-	if (flags&RaDecJ2000)
-		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	if (flags&RaDecOfDate)
-		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) << "<br>";
-	if (flags&HourAngle)
-		oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
-	if (flags&AltAzi)
-	{
-		// calculate alt az
-		double az,alt;
-		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
-		az = 3*M_PI - az;  // N is zero, E is 90 degrees
-		if(az > M_PI*2) az -= M_PI*2;    
-		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
-	}
 	
-	// chomp trailing line breaks
-	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
-
-	if (flags&PlainText)
-	{
-		str.replace("<b>", "");
-		str.replace("</b>", "");
-		str.replace("<h2>", "");
-		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
-	}
+	oss << getPositionInfoString(core, flags);
+	
+	StelObject::postProcessInfoString(str, flags);
 
 	return str;
 }
@@ -89,12 +58,9 @@ QString StarWrapper1::getEnglishName(void) const
 
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
-	const Navigator* nav = core->getNavigation();
-	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getObsJ2000Pos(nav));
-	double dec_equ, ra_equ;
-	StelUtils::rectToSphe(&ra_equ,&dec_equ,getObsEquatorialPos(nav));
 	QString str;
+	const Navigator* nav = core->getNavigation();
+	
 	QTextStream oss(&str);
 	if (!(flags&PlainText))
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
@@ -134,27 +100,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
 		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
-	if (flags&RaDecJ2000)
-		oss << q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true),
-		                                    StelUtils::radToDmsStr(dec_j2000,true)) << "<br>";
-	if (flags&RaDecOfDate)
-		oss << q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ),
-		                                          StelUtils::radToDmsStr(dec_equ)) << "<br>";
-	double dec_sideral, ra_sideral;
-	StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getObsSideralPos(core));
-	ra_sideral = 2.*M_PI-ra_sideral;
-	if (flags&HourAngle)
-		oss << q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) << "<br>";
-	if (flags&AltAzi)
-	{
-		// calculate alt az
-		double az,alt;
-		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
-		az = 3*M_PI - az;  // N is zero, E is 90 degrees
-		if (az > M_PI*2)
-			az -= M_PI*2;    
-		oss << q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) << "<br>";
-	}
+	
+	oss << getPositionInfoString(core, flags);
 	
 	if (s->spInt && flags&Extra1)
 	{
@@ -167,17 +114,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (s->plx && flags&Extra2)
 		oss << q_("Parallax: %1").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
 
-	// chomp trailing line breaks
-	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
-
-	if (flags&PlainText)
-	{
-		str.replace("<b>", "");
-		str.replace("</b>", "");
-		str.replace("<h2>", "");
-		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
-	}
+	StelObject::postProcessInfoString(str, flags);
 
 	return str;
 }

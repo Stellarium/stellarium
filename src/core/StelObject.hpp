@@ -140,6 +140,12 @@ public:
 	//! @return radius in pixel
 	float getOnScreenSize(const StelCore* core) const;
 
+protected:
+	//! Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
+	QString getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	
+	//! Apply post processing on the info string
+	static void postProcessInfoString(QString& str, const InfoStringGroup& flags);
 };
 
 #endif // _STELOBJECT_HPP_
