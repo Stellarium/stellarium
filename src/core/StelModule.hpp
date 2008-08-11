@@ -26,6 +26,7 @@
 // Predeclaration
 class StelCore;
 class QSettings;
+class StelStyle;
 
 //! This is the common base class for all the main components of stellarium.
 //! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
@@ -101,10 +102,9 @@ public:
 	//! @param added true if the user request that the objects are added to the selection
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {;}
 	
-	//! Load color scheme from the given ini file and section name
-	//! @param conf application settings object
-	//! @param section in the application settings object which contains desired color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section) {;}
+	//! Load the given color style
+	//! @param style the style object containing all necessary information on how to style widgets and text
+	virtual void setStelStyle(const StelStyle& style) {;}
 	
 	//! This method is called for all StelModules when the GL window is resized
 	virtual void glWindowHasBeenResized(int w, int h) {;}

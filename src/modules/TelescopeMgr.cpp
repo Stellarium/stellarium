@@ -28,6 +28,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
+#include "StelStyle.hpp"
 
 #include <algorithm>
 #include <QSettings>
@@ -146,9 +147,12 @@ void TelescopeMgr::update(double deltaTime) {
 	communicate();
 }
 
-void TelescopeMgr::setColorScheme(const QSettings* conf, const QString& section)
+void TelescopeMgr::setStelStyle(const StelStyle& style)
 {
 	// Load colors from config file
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/telescope_label_color", defaultColor).toString()));
 	set_circleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));

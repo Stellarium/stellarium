@@ -63,9 +63,7 @@ public:
 	//! Sets the colors of the grids and great circles.
 	//! Sets the colors of the Equatorial Grid, Azimuthal Grid, 
 	//! Meridian Line, Equator Line and Ecliptic Line.
-	//! @param conf the configuration object containing the color scheme
-	//! @param section of conf containing the color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Used to determine the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

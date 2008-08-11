@@ -43,7 +43,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-
+#include "StelStyle.hpp"
 #include "SkyImageTile.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
@@ -193,9 +193,12 @@ void NebulaMgr::drawPointer(const StelCore* core)
 void NebulaMgr::updateSkyCulture()
 {;}
 
-void NebulaMgr::setColorScheme(const QSettings* conf, const QString& section)
+void NebulaMgr::setStelStyle(const StelStyle& style)
 {
 	// Load colors from config file
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
 	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circleColor", defaultColor).toString()));

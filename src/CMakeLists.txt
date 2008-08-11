@@ -66,6 +66,7 @@ SET(stellarium_lib_SRCS
 	core/ToneReproducer.hpp
 	core/ViewportDistorter.cpp
 	core/ViewportDistorter.hpp
+	core/StelStyle.hpp
 	
 	stelutils/bytes.h
 	stelutils/callback_helpers.hpp

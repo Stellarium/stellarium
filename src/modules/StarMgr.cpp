@@ -52,6 +52,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
+#include "StelStyle.hpp"
 
 #include "ZoneArray.hpp"
 #include "StringArray.hpp"
@@ -206,9 +207,12 @@ void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 	}
 }
 
-void StarMgr::setColorScheme(const QSettings* conf, const QString& section)
+void StarMgr::setStelStyle(const StelStyle& style)
 {
 	// Load colors from config file
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
