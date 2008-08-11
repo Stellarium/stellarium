@@ -78,8 +78,6 @@ public:
 	virtual void glWindowHasBeenResized(int w, int h);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//! Load color scheme from the given ini file and section name
-	//! @param conf application settings object
-	//! @param section in the application settings object which contains desired color scheme
 	virtual void setStelStyle(const StelStyle& style);
 	
 	///////////////////////////////////////////////////////////////////////////
