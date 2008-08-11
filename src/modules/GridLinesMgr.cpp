@@ -35,6 +35,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "SFont.hpp"
+#include "StelStyle.hpp"
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.
@@ -666,8 +667,11 @@ void GridLinesMgr::draw(StelCore* core)
 	glDisable(GL_LINE_SMOOTH);
 }
 
-void GridLinesMgr::setColorScheme(const QSettings* conf, const QString& section)
+void GridLinesMgr::setStelStyle(const StelStyle& style)
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	// Load colors from config file
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));

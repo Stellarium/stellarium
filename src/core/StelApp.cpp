@@ -47,6 +47,8 @@
 #include "QtJsonParser.hpp"
 #include "SkyBackground.hpp"
 
+#include "StelStyle.hpp"
+
 #include <iostream>
 #include <QStringList>
 #include <QString>
@@ -75,7 +77,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	setlocale(LC_NUMERIC, "C");
 	
 	setObjectName("StelApp");
-
+	
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
 	fontManager=NULL;
@@ -181,12 +183,15 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	parseCLIArgsPostConfig();
 	moduleMgr = new StelModuleMgr();
 	
+	// Init a default StelStyle, before loading modules, it will be overrided
+	currentStelStyle = NULL;
+	setColorScheme("color");
+	
 	// testing code
 // 	QtJsonParser parser;
 // 	QFile file("/home/fabien/Desktop/N874_00_00_x64.json");
 // 	file.open(QIODevice::ReadOnly);
 // 	qWarning() << parser.parse(file);
-	return;
 }
 
 /*************************************************************************
@@ -205,6 +210,8 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete argList; argList=NULL;
 	delete qtime; qtime=NULL;
+	
+	delete currentStelStyle;
 	
 	assert(singleton);
 	singleton = NULL;
@@ -712,10 +719,39 @@ void StelApp::copyDefaultConfigFile()
 // Set the colorscheme for all the modules
 void StelApp::setColorScheme(const QString& section)
 {
+	if (!currentStelStyle)
+		currentStelStyle = new StelStyle;
+	
+	currentStelStyle->confSectionName = section;
+	
+	QString fileName;
+	if (section=="night_color")
+	{	
+		fileName = "data/gui/nightStyle.css";
+	}
+	else if (section=="color")
+	{
+		fileName = "data/gui/normalStyle.css";
+	}
+	
+	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+	QString styleFilePath;
+	try
+	{
+		styleFilePath = fileMan.findFile(fileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: can't find Qt style sheet:" << fileName;
+	}
+	QFile styleFile(styleFilePath);
+	styleFile.open(QIODevice::ReadOnly);
+	currentStelStyle->qtStyleSheet = styleFile.readAll();
+	
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())
 	{
-		iter->setColorScheme(confSettings, section);
+		iter->setStelStyle(*currentStelStyle);
 	}
 }
 

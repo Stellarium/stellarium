@@ -36,6 +36,7 @@
 #include "StelIniParser.hpp"
 #include "SFont.hpp"
 #include "SkyDrawer.hpp"
+#include "StelStyle.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -278,9 +279,12 @@ void LandscapeMgr::init()
 	}
 }
 
-void LandscapeMgr::setColorScheme(const QSettings* conf, const QString& section)
+void LandscapeMgr::setStelStyle(const StelStyle& style)
 {
 	// Load colors from config file
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }

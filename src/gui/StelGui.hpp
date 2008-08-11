@@ -80,7 +80,7 @@ public:
 	//! Load color scheme from the given ini file and section name
 	//! @param conf application settings object
 	//! @param section in the application settings object which contains desired color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	virtual void setStelStyle(const StelStyle& style);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
@@ -115,9 +115,6 @@ public:
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos(qreal value);
-	
-	//! Reload the current Qt Style Sheet (Debug only)
-	void reloadStyle();
 	
 private:
 	void retranslateUi(QWidget *Form);

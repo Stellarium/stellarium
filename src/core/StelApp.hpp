@@ -39,6 +39,7 @@ class QStringList;
 class LoadingBar;
 class QSettings;
 class QNetworkAccessManager;
+class StelStyle;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -132,6 +133,8 @@ public:
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
 
+	//! Return the currently used style
+	const StelStyle* getCurrentStelStyle() {return currentStelStyle;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Deprecated methods
@@ -304,6 +307,9 @@ private:
 	
 	// The main loading bar
 	LoadingBar* loadingBar;
+	
+	// Currently used StelStyle
+	StelStyle* currentStelStyle;
 	
 	float fps;
 	//! The minimum desired frame rate in frame per second.
