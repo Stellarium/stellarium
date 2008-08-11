@@ -724,29 +724,47 @@ void StelApp::setColorScheme(const QString& section)
 	
 	currentStelStyle->confSectionName = section;
 	
-	QString fileName;
+	QString qtStyleFileName;
+	QString htmlStyleFileName;
+	
 	if (section=="night_color")
 	{	
-		fileName = "data/gui/nightStyle.css";
+		qtStyleFileName = "data/gui/nightStyle.css";
+		htmlStyleFileName = "data/gui/nightHtml.css";
 	}
 	else if (section=="color")
 	{
-		fileName = "data/gui/normalStyle.css";
+		qtStyleFileName = "data/gui/normalStyle.css";
+		htmlStyleFileName = "data/gui/normalHtml.css";
 	}
 	
+	// Load Qt style sheet
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
 	QString styleFilePath;
 	try
 	{
-		styleFilePath = fileMan.findFile(fileName);
+		styleFilePath = fileMan.findFile(qtStyleFileName);
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: can't find Qt style sheet:" << fileName;
+		qWarning() << "WARNING: can't find Qt style sheet:" << qtStyleFileName;
 	}
 	QFile styleFile(styleFilePath);
 	styleFile.open(QIODevice::ReadOnly);
 	currentStelStyle->qtStyleSheet = styleFile.readAll();
+	
+	// Load HTML style sheet
+	try
+	{
+		styleFilePath = fileMan.findFile(htmlStyleFileName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: can't find css:" << htmlStyleFileName;
+	}
+	QFile htmlStyleFile(styleFilePath);
+	htmlStyleFile.open(QIODevice::ReadOnly);
+	currentStelStyle->htmlStyleSheet = htmlStyleFile.readAll();
 	
 	// Send the event to every StelModule
 	foreach (StelModule* iter, moduleMgr->getAllModules())

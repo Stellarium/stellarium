@@ -32,6 +32,8 @@ public:
 	LocationDialog();
 	virtual ~LocationDialog();
 	void languageChanged();
+	//! Notify that the application style changed
+	void styleChanged();
 public slots:
 	//! Called when the mapView emit the positionSelected signal
 	void selectPosition(double longitude, double latitude, int altitude, QString city);

@@ -499,24 +499,13 @@ void StelGui::setStelStyle(const StelStyle& style)
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 	}
 	
-// 	QList<QTextBrowser*> brl = StelMainGraphicsView::getInstance().findChildren<QTextBrowser*>();
-// 	qDebug() << brl.size();
-// 	foreach (QTextBrowser* b, brl)
-// 	{
-// 		StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-// 		QString styleFilePath;
-// 		try
-// 		{
-// 			styleFilePath = fileMan.findFile("data/gui/normalHtml.css");
-// 		}
-// 		catch (std::runtime_error& e)
-// 		{
-// 			qWarning() << "WARNING: can't find css:" << "data/gui/normalHtml.css";
-// 		}
-// 		qDebug() << b->objectName();
-// 		b->loadResource(QTextDocument::StyleSheetResource, QUrl(styleFilePath));//"a {color: #aaaa22 }"
-// 		b->reload();
-// 	}
+	// Update the dialogs
+	configurationDialog.styleChanged();
+	dateTimeDialog.styleChanged();
+	helpDialog.styleChanged();
+	locationDialog.styleChanged();
+	searchDialog.styleChanged();
+	viewDialog.styleChanged();
 }
 
 

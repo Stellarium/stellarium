@@ -39,9 +39,8 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-
 #include "StelAppGraphicsItem.hpp"
-
+#include "StelStyle.hpp"
 
 HelpDialog::HelpDialog()
 {
@@ -81,6 +80,14 @@ void HelpDialog::languageChanged()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		updateText();
+	}
+}
+
+void HelpDialog::styleChanged()
+{
+	if (dialog)
+	{
 		updateText();
 	}
 }
@@ -239,6 +246,7 @@ void HelpDialog::updateText(void)
 	newHtml += "</table>";
 	newHtml += getFooterText();
 	ui->helpBrowser->clear();
+	ui->helpBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
 }

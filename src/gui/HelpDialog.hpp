@@ -49,6 +49,9 @@ public:
 	void setKey(QString group, QString oldKey, QString newKey, QString description);
 
 	void languageChanged();
+	
+	//! Notify that the application style changed
+	void styleChanged();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

@@ -125,6 +125,11 @@ void SearchDialog::languageChanged()
 	}
 }
 
+void SearchDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 // Initialize the dialog widgets and connect the signals/slots
 void SearchDialog::createDialogContent()
 {
