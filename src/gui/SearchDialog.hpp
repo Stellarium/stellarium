@@ -61,7 +61,8 @@ public:
 	SearchDialog();
 	virtual ~SearchDialog();
 	void languageChanged();
-
+	//! Notify that the application style changed
+	void styleChanged();
 public slots:
 	// Add auto focus of the edit line
 	void setVisible(bool);
