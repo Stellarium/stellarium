@@ -76,10 +76,8 @@ public:
 	//! @param added not used at present (?)
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::ReplaceSelection);
 	
-	//! Load a color scheme from a configration object
-	//! @param conf the configuration object containing the color scheme
-	//! @param section of conf containing the color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	//! Load a color scheme
+	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order

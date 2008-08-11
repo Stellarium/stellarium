@@ -39,6 +39,7 @@
 #include "Navigator.hpp"
 #include "SFont.hpp"
 #include "SkyDrawer.hpp"
+#include "StelStyle.hpp"
 
 #include <QTextStream>
 #include <QSettings>
@@ -800,9 +801,12 @@ void SolarSystem::draw(StelCore* core)
 	drawPointer(core);
 }
 
-void SolarSystem::setColorScheme(const QSettings* conf, const QString& section)
+void SolarSystem::setStelStyle(const StelStyle& style)
 {
 	// Load colors from config file
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString section = style.confSectionName;
+	
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));

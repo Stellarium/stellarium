@@ -42,6 +42,7 @@
 #include "Projector.hpp"
 #include "SolarSystem.hpp"
 #include "SkyBackground.hpp"
+#include "StelStyle.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -124,10 +125,6 @@ void StelGui::init()
 {
 	qDebug() << "Creating GUI ...";
 	
-	///////////////////////////////////////////////////////////////////////////
-	// Set up the new GUI
-	loadStyle("data/gui/normalStyle.css");
-	
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
@@ -200,9 +197,6 @@ void StelGui::init()
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
-	
-	// Debug
-	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
 	
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
@@ -480,73 +474,51 @@ void StelGui::init()
 	scene->addItem(infoPanel);
 	scene->addItem(progressBarMgr);
 	
+	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
+	
 	// Readjust position
 	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
 }
 
 //! Load color scheme from the given ini file and section name
-void StelGui::setColorScheme(const QSettings* conf, const QString& section)
+void StelGui::setStelStyle(const StelStyle& style)
 {
-	if (section=="night_color")
+	qApp->setStyleSheet(style.qtStyleSheet);
+	StelMainWindow::getInstance().setStyleSheet(style.qtStyleSheet);	// Why?
+	
+	if (style.confSectionName=="night_color")
 	{
-		loadStyle("data/gui/nightStyle.css");
 		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
 		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
 	}
 	else
 	{
-		loadStyle("data/gui/normalStyle.css");
 		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		
-// 		QList<QTextBrowser*> brl = StelMainGraphicsView::getInstance().findChildren<QTextBrowser*>();
-// 		qDebug() << brl.size();
-// 		foreach (QTextBrowser* b, brl)
-// 		{
-// 			StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-// 			QString styleFilePath;
-// 			try
-// 			{
-// 				styleFilePath = fileMan.findFile("data/gui/normalHtml.css");
-// 			}
-// 			catch (std::runtime_error& e)
-// 			{
-// 				qWarning() << "WARNING: can't find css:" << "data/gui/normalHtml.css";
-// 			}
-// 			qDebug() << b->objectName();
-// 			b->loadResource(QTextDocument::StyleSheetResource, QUrl(styleFilePath));//"a {color: #aaaa22 }"
-// 			b->reload();
-// 		}
 	}
-}
 	
-//! Load a Qt style sheet to define the widgets style
-void StelGui::loadStyle(const QString& fileName)
-{
-	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
-	QString styleFilePath;
-	try
-	{
-		styleFilePath = fileMan.findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: can't find Qt style sheet:" << fileName;
-	}
-	QFile styleFile(styleFilePath);
-	styleFile.open(QIODevice::ReadOnly);
-	QByteArray a(styleFile.readAll());
-	qApp->setStyleSheet(a);
-	StelMainWindow::getInstance().setStyleSheet(a);	// Why?
+// 	QList<QTextBrowser*> brl = StelMainGraphicsView::getInstance().findChildren<QTextBrowser*>();
+// 	qDebug() << brl.size();
+// 	foreach (QTextBrowser* b, brl)
+// 	{
+// 		StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
+// 		QString styleFilePath;
+// 		try
+// 		{
+// 			styleFilePath = fileMan.findFile("data/gui/normalHtml.css");
+// 		}
+// 		catch (std::runtime_error& e)
+// 		{
+// 			qWarning() << "WARNING: can't find css:" << "data/gui/normalHtml.css";
+// 		}
+// 		qDebug() << b->objectName();
+// 		b->loadResource(QTextDocument::StyleSheetResource, QUrl(styleFilePath));//"a {color: #aaaa22 }"
+// 		b->reload();
+// 	}
 }
 
-//! Reload the current Qt Style Sheet (Debug only)
-void StelGui::reloadStyle()
-{
-	loadStyle("data/gui/normalStyle.css");
-}
 
 void StelGui::glWindowHasBeenResized(int ww, int hh)
 {

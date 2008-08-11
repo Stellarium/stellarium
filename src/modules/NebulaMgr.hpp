@@ -75,10 +75,7 @@ public:
 	
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in a configuration object
-	//! Load a color scheme from a configration object
-	//! @param conf the configuration object containing the color scheme
-	//! @param section of conf containing the color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

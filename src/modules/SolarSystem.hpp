@@ -76,10 +76,8 @@ public:
 	//! Called when a new object is selected.
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
-	//! Load a color scheme from a configration object
-	//! @param conf the configuration object containing the color scheme
-	//! @param section of conf containing the color scheme
-	virtual void setColorScheme(const QSettings* conf, const QString& section);
+	//! Load a color scheme
+	virtual void setStelStyle(const StelStyle& style);
 	
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
