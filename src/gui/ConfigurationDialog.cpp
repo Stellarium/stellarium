@@ -57,6 +57,11 @@ void ConfigurationDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
+void ConfigurationDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 void ConfigurationDialog::createDialogContent()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();

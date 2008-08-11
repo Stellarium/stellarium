@@ -46,6 +46,11 @@ void LocationDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
+void LocationDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 // Initialize the dialog widgets and connect the signals/slots
 void LocationDialog::createDialogContent()
 {

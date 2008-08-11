@@ -36,6 +36,7 @@
 #include "MeteorMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "StelStyle.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -61,6 +62,14 @@ void ViewDialog::languageChanged()
 	{
 		ui->retranslateUi(dialog);
 		shoutingStarsZHRChanged();
+		populateLists();
+	}
+}
+
+void ViewDialog::styleChanged()
+{
+	if (dialog)
+	{
 		populateLists();
 	}
 }
@@ -293,6 +302,9 @@ void ViewDialog::updateSkyCultureText()
 			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 		}
 	}
+	
+	ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	
 	if (descPath.isEmpty())
 	{
 		ui->skyCultureTextBrowser->setHtml(q_("No description"));
@@ -317,6 +329,7 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 	}
 
 	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
+	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
 }
 
@@ -324,6 +337,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
 	lmgr->setLandscapeByName(item->text());
+	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 }
 

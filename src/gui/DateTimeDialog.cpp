@@ -102,6 +102,11 @@ void DateTimeDialog::languageChanged()
 		ui->retranslateUi(dialog);
 }
 
+void DateTimeDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 /************************************************************************
  year slider or dial changed
 ************************************************************************/
