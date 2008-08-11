@@ -533,8 +533,8 @@ QMainWindow {
 }
 
 QMainWindow::separator {
-	border: 0px solid rgb(48, 49, 52);
-	background: rgb(66, 67, 70);
+	border: 1px solid #8c8c8c;
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #818181, stop: 0.5 #707070, stop: 0.6 #636363, stop:1 #858585);
 }
 
 QMainWindow::separator:horizontal {
@@ -559,9 +559,10 @@ QDockWidget {
 }
 
 QDockWidget::title {
-	text-align: left;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
-	padding-left: 5px;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #818181, stop: 0.5 #707070, stop: 0.6 #636363, stop:1 #858585);
+	color: white;
+	padding-left: 4px;
+	border: 1px solid #8c8c8c;
 }
 
 QDockWidget .QWidget {
@@ -570,7 +571,7 @@ QDockWidget .QWidget {
 	
 QTreeView, QTreeView:active {
 	background-color: rgb(76, 77, 80);
-	alternate-background-color: rgb(86, 87, 90);
+	alternate-background-color: rgb(76, 80, 87);
 	color: rgb(143, 143, 143);
 }
 
@@ -629,4 +630,13 @@ QMainWindow > QDialog {
 
 QMainWindow > QDialog:active {
 	background: rgba(48, 49, 52, 100%);
+}
+
+QHeaderView::section {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+									stop:0 #616161, stop: 0.5 #505050,
+									stop: 0.6 #434343, stop:1 #656565);
+	color: white;
+	padding-left: 4px;
+	border: 1px solid #6c6c6c;
 }
