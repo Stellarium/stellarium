@@ -161,16 +161,17 @@ protected:
 	
 	//! Set to true if an error occured with this tile and it should not be displayed
 	bool errorOccured;
-	
-private:
-	//! init the SkyImageTile
-	void initCtor();
-	
+
+protected:
 	//! Load the tile information from a JSON file
 	static QVariantMap loadFromJSON(QIODevice& input, bool compressed=false);
 	
 	//! Load the tile from a valid QVariantMap
 	void loadFromQVariantMap(const QVariantMap& map);
+	
+private:
+	//! init the SkyImageTile
+	void initCtor();
 	
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
