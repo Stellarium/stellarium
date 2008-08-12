@@ -30,10 +30,10 @@ ENDIF(UNIX AND NOT WIN32)
 
 # best way to get to MACOSX?
 IF(MACOSX)
- SET(CMAKE_INCLUDE_PATH "/usr/X11R6/include:/usr/X11R6/include/freetype2:/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include:/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
- SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
- SET(CMAKE_C_FLAGS "-fno-common -Wall -DMACOSX -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib")
- SET(CMAKE_CXX_FLAGS "-fno-common -Wall -DMACOSX -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include -I/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/include/freetype2 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib")
+ SET(CMAKE_INCLUDE_PATH "/usr/X11/include:/usr/X11/include/freetype2:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include:/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2:/sw/include:${CMAKE_INCLUDE_PATH}")
+ SET(CMAKE_LIBRARY_PATH "/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib:/sw/lib:${CMAKE_LIBRARY_PATH}")
+ SET(CMAKE_C_FLAGS "-fno-common -Wall -DMACOSX -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include -I/Developer/SDKs/MacOSX10.5.sdk/usr/X11/include/freetype2 -L/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib")
+ SET(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
 ENDIF(MACOSX)
 
 
