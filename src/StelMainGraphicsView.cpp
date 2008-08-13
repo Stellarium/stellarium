@@ -89,7 +89,10 @@ void StelMainGraphicsView::init()
 	
 	// This apparently useless line fixes the scrolling bug
 	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
-	//setMatrix(QMatrix(1,0,0,1,0.00000001,0));
+#if QT_VERSION == 0x040400
+	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
+#endif
+	
 	
 	//view->setCacheMode(QGraphicsView::CacheBackground);
 	// Antialiasing works only with SampleBuffer, but it's much slower
