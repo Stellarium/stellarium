@@ -72,9 +72,6 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
 	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
 	
