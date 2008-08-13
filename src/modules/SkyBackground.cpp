@@ -56,7 +56,6 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 void SkyBackground::init()
 {
 	addElem("http://voint1.hq.eso.org/fabienDSS2/allDSS.json");
-	//addElem("http://stellarium.free.fr/divers/30Dor/x01_00_00.json.qZ");
 	try
 	{
 		addElem(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
