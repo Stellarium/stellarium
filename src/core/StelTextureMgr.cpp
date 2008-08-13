@@ -76,8 +76,7 @@ void StelTextureMgr::init()
 	assert(conf);
 
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
-	isNoPowerOfTwoAllowed = conf->value("video/non_power_of_two_textures", true).toBool();
-	isNoPowerOfTwoAllowed = isNoPowerOfTwoAllowed && (GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0);
+	isNoPowerOfTwoAllowed = GLEE_ARB_texture_non_power_of_two || GLEE_VERSION_2_0;
 	
 	// Check vendor and renderer
 	QString glRenderer((char*)glGetString(GL_RENDERER));
@@ -143,6 +142,13 @@ STextureSP StelTextureMgr::createTexture(const QString& afilename)
 	}
 
 	tex->downloaded = true;
+	
+	if (tex->fullPath.startsWith(":/"))
+	{
+		QFile tmpF(tex->fullPath);
+		tmpF.open(QIODevice::ReadOnly);
+		tex->downloadedData = tmpF.readAll();
+	}
 	
 	// Simply load everything
 	if (tex->imageLoad() && tex->glLoad())
@@ -357,7 +363,7 @@ bool StelTextureMgr::loadImage(STexture* tex)
 	}
 
 	// Load the image
-	// Create a new texInfo withthe proper parameters
+	// Create a new texInfo with the proper parameters
 	ImageLoader::TexInfo texInfo;
 	texInfo.format = tex->format;
 	texInfo.width = tex->width;

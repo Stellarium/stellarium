@@ -309,7 +309,7 @@ bool STexture::imageLoad()
 				width = qImage.width();
 				height = qImage.height();
 				type = GL_UNSIGNED_BYTE;
-				internalFormat = 3;
+				internalFormat = 4;
 			}
 		}
 		// Release the memory
