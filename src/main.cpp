@@ -43,7 +43,8 @@ public:
 
 // Main stellarium procedure
 int main(int argc, char **argv)
-{	
+{
+	QApplication::setDesktopSettingsAware(false);
 	QApplication app(argc, argv);
 	GettextTranslator trans;
 	app.installTranslator(&trans);
