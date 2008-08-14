@@ -84,8 +84,8 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 void StelMainGraphicsView::init()
 {
 	//view->setAutoFillBackground(false);
-	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	setCacheMode(QGraphicsView::CacheNone);
+	//setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	//setCacheMode(QGraphicsView::CacheNone);
 	
 	// This apparently useless line fixes the scrolling bug
 	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
