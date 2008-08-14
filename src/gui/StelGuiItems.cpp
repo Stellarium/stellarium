@@ -128,7 +128,9 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
-	helpLabel->setFont(QFont("DejaVuSans", 11));
+	QFont font("DejaVuSans");
+	font.setPixelSize(14);
+	helpLabel->setFont(font);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 }
 
@@ -199,7 +201,8 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 		const QPixmap& pixMiddle, const QPixmap& pixSingle) : QGraphicsItem(parent), pixBackgroundLeft(pixLeft), pixBackgroundRight(pixRight),
 		pixBackgroundMiddle(pixMiddle), pixBackgroundSingle(pixSingle)
 {
-	QFont font("DejaVuSans", 10);
+	QFont font("DejaVuSans");
+	font.setPixelSize(12);
 	
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
@@ -209,7 +212,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
-	helpLabel->setFont(QFont("DejaVuSans", 11));
+	QFont font2("DejaVuSans");
+	font2.setPixelSize(14);
+	helpLabel->setFont(font2);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	
 	QColor color = QColor::fromRgbF(1,1,1,1);
