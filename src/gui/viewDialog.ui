@@ -156,17 +156,9 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabSky" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>419</width>
-           <height>437</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Sky</string>
          </attribute>
@@ -606,14 +598,6 @@ zenith rate:</string>
          </layout>
         </widget>
         <widget class="QWidget" name="tabMarking" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>419</width>
-           <height>437</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Markings</string>
          </attribute>
@@ -976,14 +960,6 @@ zenith rate:</string>
          </layout>
         </widget>
         <widget class="QWidget" name="tab_2" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>419</width>
-           <height>437</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Landscape</string>
          </attribute>
@@ -1122,14 +1098,6 @@ zenith rate:</string>
          </layout>
         </widget>
         <widget class="QWidget" name="tab" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>419</width>
-           <height>437</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Starlore</string>
          </attribute>
