@@ -106,7 +106,7 @@ QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(86, 87, 90, 40%), stop: 1 rgba(48, 49, 52, 40%));
 	border: 0px;
 	color: rgb(222, 222, 222);
-	font-family: "DejaVu";
+	font-size: 12px;
 }
 
 QFrame:active {
@@ -126,6 +126,7 @@ ResizeFrame {
 
 QLabel, QLabel:active {
 	color: rgb(143, 143, 143);
+	font-size: 12px;
 	background: transparent;
 }
 
@@ -137,6 +138,7 @@ QLabel#stelWindowTitle, QLabel:active#stelWindowTitle {
 
 QToolTip {
 	color: rgb(143, 143, 143);
+	font-size: 12px;
 	background: rgb(48, 49, 52);
 }
 
@@ -147,6 +149,7 @@ QLineEdit {
 	background: rgba(25, 35, 61, 40%);
 	selection-background-color: rgb(169, 169, 169);
 	color: rgb(170, 173, 164);
+	font-size: 12px;
 }
 
 QPushButton {
@@ -154,6 +157,7 @@ QPushButton {
 	border-radius: 4px;
 	padding: 2px 8px;
 	color: rgb(31, 31, 31);
+	font-size: 12px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(183, 184, 185, 90%), stop: 1 rgba(111, 113, 114, 90%));
 }
 
@@ -305,6 +309,7 @@ QGroupBox::title {
 	subcontrol-origin: margin;
 	padding: 0px 3px;
    	color: rgb(170, 173, 164);
+   	font-size: 12px;
 	left: 10px
 }
 
@@ -325,6 +330,7 @@ QTabBar::tab {
 	padding: 3px;
 	padding-top:5px;
 	color: rgb(170, 173, 164);
+	font-size: 12px;
 }
 
 QTabBar::tab:active {
@@ -343,6 +349,7 @@ QTabBar::tab:selected {
 	border-color: rgb(131, 131, 134);
 	border-bottom: 0px; /* same as pane color */
 	color: rgb(222, 222, 222);
+	font-size: 12px;
 }
 
 QTabBar::tab:!selected {
@@ -383,6 +390,7 @@ QListWidget, QListWidget:active {
 QCheckBox { 
 	background: transparent;
 	color: rgb(143, 143, 143);
+	font-size: 12px;
 }
 
 QCheckBox::indicator {
@@ -403,6 +411,7 @@ QCheckBox::indicator:unchecked {
 QRadioButton {
 	background: transparent;
 	color: rgb(143, 143, 143);
+	font-size: 12px;
 }
 
 QRadioButton::indicator {
@@ -425,6 +434,7 @@ QSpinBox {
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(200, 201, 202, 90%), stop: 1 rgba(104, 106, 107, 90%));
 	color: rgb(31, 31, 31);
+	font-size: 12px;
 	padding: 0px;
 	border-radius: 0px;
 }
@@ -458,6 +468,7 @@ QDoubleSpinBox {
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(200, 201, 202, 90%), stop: 1 rgba(104, 106, 107, 90%));
 	color: rgb(31, 31, 31);
+	font-size: 12px;
 	padding: 0px;
 	border-radius: 0px;
 }
@@ -518,6 +529,7 @@ QProgressBar {
 	background-color: rbga(38, 41, 48, 20%);
 	text-align: center;
 	color: rgb(111, 111, 127);
+	font-size: 12px;
 }
 
 QProgressBar::chunk {
@@ -552,6 +564,7 @@ QMainWindow::separator:horizontal:hover {
 
 QDockWidget {
 	color: rgb(222, 222, 222);
+	font-size: 12px;
 	border: 1px solid rgb(8, 31, 37);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 /*	titlebar-close-icon: url(close.png);
@@ -561,6 +574,7 @@ QDockWidget {
 QDockWidget::title {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #818181, stop: 0.5 #707070, stop: 0.6 #636363, stop:1 #858585);
 	color: white;
+	font-size: 12px;
 	padding-left: 4px;
 	border: 1px solid #8c8c8c;
 }
@@ -573,6 +587,7 @@ QTreeView, QTreeView:active {
 	background-color: rgb(76, 77, 80);
 	alternate-background-color: rgb(76, 80, 87);
 	color: rgb(143, 143, 143);
+	font-size: 12px;
 }
 
 QDateEdit {
@@ -581,6 +596,7 @@ QDateEdit {
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(200, 201, 202, 90%), stop: 1 rgba(104, 106, 107, 90%));
 	color: rgb(31, 31, 31);
+	font-size: 12px;
 	padding: 0px;
 	border-radius: 0px;
 }
@@ -635,6 +651,7 @@ QMainWindow > QDialog:active {
 QHeaderView::section {
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop: 0.5 #505050,stop: 0.6 #434343, stop:1 #656565);
 	color: white;
+	font-size: 12px;
 	padding-left: 4px;
 	border: 1px solid #6c6c6c;
 }
