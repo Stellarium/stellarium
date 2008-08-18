@@ -137,6 +137,8 @@ private:
 	ConfigurationDialog configurationDialog;
 	
 	class StelProgressBarMgr* progressBarMgr;
+	
+	int lastButtonbarWidth;
 };
 
 #endif // _NEWGUI_HPP_

@@ -119,7 +119,6 @@ void StelMainGraphicsView::init()
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainGraphicsView::deinitGL()
 {
-	delete mainItem;
 	StelApp* stelApp = &StelApp::getInstance();
 	delete stelApp;
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
