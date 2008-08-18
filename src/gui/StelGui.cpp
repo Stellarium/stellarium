@@ -79,6 +79,7 @@ StelGui::StelGui()
 	buttonBar = NULL;
 	infoPanel = NULL;
 	buttonBarPath = NULL;
+	lastButtonbarWidth = 0;
 	
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
@@ -670,6 +671,12 @@ void StelGui::updateBarsPos()
 		updatePath = true;
 	}
 	
+	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
+	{
+		updatePath = true;
+		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+	}
+			
 	if (updatePath)
 		buttonBarPath->updatePath(buttonBar, winBar);
 

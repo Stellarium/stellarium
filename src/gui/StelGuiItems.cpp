@@ -252,9 +252,9 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	if (done==false)
 		g.append(button);
 	
-	updateButtonsGroups();
 	button->setVisible(true);
 	button->setParentItem(this);
+	updateButtonsGroups();
 	
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -360,12 +360,13 @@ void BottomStelBar::updateButtonsGroups()
 		}
 		x+=iter.value().rightMargin;
 	}
-	updateText(true);
+	updateText();
 }
 
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
-void BottomStelBar::updateText(bool updatePos)
+void BottomStelBar::updateText()
 {
+	bool updatePos = false;
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
