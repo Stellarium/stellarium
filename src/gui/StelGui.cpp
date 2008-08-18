@@ -65,7 +65,8 @@ void InfoPanel::setTextFromObjects(const std::vector<StelObjectP>& selected)
 {
 	if (selected.size() == 0)
 	{
-		setHtml("");
+		if (!document()->isEmpty())
+			document()->clear();
 	}
 	else
 	{
@@ -479,11 +480,6 @@ void StelGui::reloadStyle()
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
-void StelGui::selectedObjectChangeCallBack(StelModuleSelectAction action)
-{
-	infoPanel->setTextFromObjects(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
-}
-
 //! Load color scheme from the given ini file and section name
 void StelGui::setStelStyle(const StelStyle& style)
 {
@@ -586,6 +582,8 @@ void StelGui::update(double deltaTime)
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
 	if (getGuiActions("actionShow_Stars")->isChecked()!=smgr->getFlagStars())
 		getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
+	
+	infoPanel->setTextFromObjects(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 }
 
 bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
