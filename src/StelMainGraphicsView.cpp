@@ -170,3 +170,19 @@ class QProgressBar* StelMainGraphicsView::addProgessBar()
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	return gui->addProgessBar();
 }
+
+//! Activate all the QActions associated to the widget
+void StelMainGraphicsView::activateKeyActions(bool b)
+{
+	if (b==false)
+	{
+		foreach (QAction* a, actions())
+			removeAction(a);
+	}
+	else
+	{
+		foreach (QAction* a, findChildren<QAction*>())
+			addAction(a);
+	}
+}
+

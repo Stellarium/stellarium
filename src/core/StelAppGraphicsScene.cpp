@@ -224,7 +224,7 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	QGraphicsScene::mousePressEvent(event);
 	if (event->isAccepted())
 		return;
-
+	
 	int x = (int)event->scenePos().x();
 	int y = (int)event->scenePos().y();
 	y = (int)height() - 1 - y;
@@ -239,6 +239,9 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mouseReleaseEvent(event);
+	
+	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
+	
 	if (event->isAccepted())
 		return;
 

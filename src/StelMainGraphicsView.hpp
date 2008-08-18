@@ -51,6 +51,9 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgessBar();
 	
+	//! Activate all the QActions associated to the widget
+	void activateKeyActions(bool b);
+
 public slots:
 
 	///////////////////////////////////////////////////////////////////////////
