@@ -57,9 +57,9 @@ void LocationDialog::createDialogContent()
 		ui->setupUi(dialog);
 
 		// Init the SpinBox entries
-		ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+		ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 		ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
-		ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+		ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 		ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 
 		// Connect all the QT signals
