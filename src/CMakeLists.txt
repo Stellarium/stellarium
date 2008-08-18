@@ -39,8 +39,8 @@ SET(stellarium_lib_SRCS
 	core/StelFileMgr.hpp
 	core/StelFontMgr.cpp
 	core/StelFontMgr.hpp
-	core/StelAppGraphicsItem.cpp
-	core/StelAppGraphicsItem.hpp
+	core/StelAppGraphicsScene.cpp
+	core/StelAppGraphicsScene.hpp
 	core/StelLocaleMgr.cpp
 	core/StelLocaleMgr.hpp
 	core/StelModule.cpp
@@ -247,7 +247,7 @@ SET(stellarium_MOC_HDRS
 	core/StelApp.hpp
 	core/Navigator.hpp
 	core/Projector.hpp
-	core/StelAppGraphicsItem.hpp
+	core/StelAppGraphicsScene.hpp
 	core/STexture.hpp
 	core/MovementMgr.hpp
 	core/SkyImageTile.hpp
