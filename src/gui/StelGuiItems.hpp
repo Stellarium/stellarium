@@ -105,7 +105,7 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
-	QRectF boundingRectNoHelpLabel();
+	QRectF boundingRectNoHelpLabel() const;
 private slots:	
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -122,7 +122,7 @@ public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
-	QRectF boundingRectNoHelpLabel();
+	QRectF boundingRectNoHelpLabel() const;
 			
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
 	//! @param b the button to add
@@ -148,9 +148,9 @@ private slots:
 	void buttonHoverChanged(bool b);
 	
 private:
-	void updateText();
+	void updateText(bool updatePos=false);
 	void updateButtonsGroups();
-	QRectF getButtonsBoundingRect();
+	QRectF getButtonsBoundingRect() const;
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;

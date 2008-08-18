@@ -161,12 +161,19 @@ QRectF LeftStelBar::boundingRect() const
 	return childrenBoundingRect();
 }
 
-QRectF LeftStelBar::boundingRectNoHelpLabel()
+QRectF LeftStelBar::boundingRectNoHelpLabel() const
 {
-	helpLabel->setParentItem(NULL);
-	const QRectF& r= childrenBoundingRect();
-	helpLabel->setParentItem(this);
-	return r;
+	// Re-use original Qt code, just remove the help label
+	QRectF childRect;
+	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	{
+		if (child==helpLabel)
+			continue;
+		QPointF childPos = child->pos();
+		QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
+		childRect |= matrix.mapRect(child->boundingRect() | child->childrenBoundingRect());
+	}
+	return childRect;
 }
 
 
@@ -295,22 +302,25 @@ void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right
 	updateButtonsGroups();
 }
 	
-QRectF BottomStelBar::getButtonsBoundingRect()
+QRectF BottomStelBar::getButtonsBoundingRect() const
 {
-	location->setParentItem(NULL);
-	datetime->setParentItem(NULL);
-	fov->setParentItem(NULL);
-	fps->setParentItem(NULL);
-	helpLabel->setParentItem(NULL);
-	
-	QRectF rectCh = boundingRect();
-	
-	location->setParentItem(this);
-	datetime->setParentItem(this);
-	fov->setParentItem(this);
-	fps->setParentItem(this);
-	helpLabel->setParentItem(this);
-	return rectCh;
+	// Re-use original Qt code, just remove the help label
+	QRectF childRect;
+	bool hasBtn = false;
+	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	{
+		if (qgraphicsitem_cast<StelButton*>(child)==0)
+			continue;
+		hasBtn = true;
+		QPointF childPos = child->pos();
+		QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
+		childRect |= matrix.mapRect(child->boundingRect() | child->childrenBoundingRect());
+	}
+
+	if (hasBtn)
+		return QRectF(0, 0, childRect.width()-1, childRect.height()-1);
+	else
+		return QRectF();
 }
 
 void BottomStelBar::updateButtonsGroups()
@@ -350,38 +360,59 @@ void BottomStelBar::updateButtonsGroups()
 		}
 		x+=iter.value().rightMargin;
 	}
-	updateText();
+	updateText(true);
 }
 
-void BottomStelBar::updateText()
+// Make sure to avoid any change if not necessary to avoid triggering useless redraw
+void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getNavigation()->getJDay();
 	
-	datetime->setText(flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
-	                  +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ");
+	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
+			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
+	if (datetime->text()!=newDate)
+	{
+		updatePos = true;
+		datetime->setText(newDate);
+	}
 	
-	location->setText(flagShowLocation ? core->getObservatory()->getHomePlanetNameI18n() +", "
-	                  +core->getObservatory()->getLocationName() + ", "
-			  // xgettext:no-c-format
-	                  +q_("%1m").arg(core->getObservatory()->getAltitude()) : " ");
+	QString newLocation = flagShowLocation ? core->getObservatory()->getHomePlanetNameI18n() +", "
+			+core->getObservatory()->getLocationName() + ", "
+			// xgettext:no-c-format
+			+q_("%1m").arg(core->getObservatory()->getAltitude()) : " ";
+	if (location->text()!=newLocation)
+	{
+		updatePos = true;
+		location->setText(newLocation);
+	}
 	
 	QString str;
 	QTextStream wos(&str);
 	wos << "FOV " << qSetRealNumberPrecision(3) << core->getProjection()->getFov() << QChar(0x00B0);
-	fov->setText(str);
+	if (fov->text()!=str)
+	{
+		updatePos = true;
+		fov->setText(str);
+	}
 	
 	str="";
 	QTextStream wos2(&str);
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
-	fps->setText(str);
+	if (fps->text()!=str)
+	{
+		updatePos = true;
+		fps->setText(str);
+	}
 	
-	QRectF rectCh = getButtonsBoundingRect();
-	location->setPos(0, 0);
-	datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
-	
-	fov->setPos(datetime->x()-230, 0);
-	fps->setPos(datetime->x()-140, 0);
+	if (updatePos)
+	{
+		QRectF rectCh = getButtonsBoundingRect();
+		location->setPos(0, 0);
+		datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
+		fov->setPos(datetime->x()-230, 0);
+		fps->setPos(datetime->x()-140, 0);
+	}
 }
 
 void BottomStelBar::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -397,12 +428,19 @@ QRectF BottomStelBar::boundingRect() const
 	return QRectF(0, 0, r.width()-1, r.height()-1);
 }
 
-QRectF BottomStelBar::boundingRectNoHelpLabel()
+QRectF BottomStelBar::boundingRectNoHelpLabel() const
 {
-	helpLabel->setParentItem(NULL);
-	const QRectF& r = boundingRect();
-	helpLabel->setParentItem(this);
-	return r;
+	// Re-use original Qt code, just remove the help label
+	QRectF childRect;
+	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	{
+		if (child==helpLabel)
+			continue;
+		QPointF childPos = child->pos();
+		QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
+		childRect |= matrix.mapRect(child->boundingRect() | child->childrenBoundingRect());
+	}
+	return childRect;
 }
 
 // Set the pen for all the sub elements

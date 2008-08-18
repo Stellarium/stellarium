@@ -20,7 +20,6 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
-#include <cassert>
 #include <QGraphicsView>
 #include <QResizeEvent>
 
@@ -39,13 +38,11 @@ public:
 	
 	//! Get the StelMainGraphicsView singleton instance.
 	//! @return the StelMainGraphicsView singleton instance
-	static StelMainGraphicsView& getInstance() {assert(singleton); return *singleton;}
+	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
 	//! Get the main QGLWidget
 	QGLWidget* getOpenGLWin() {return glWidget;}
-	
-	//! Activate all the QActions associated to the widget
-	void activateKeyActions(bool b);
+
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	

@@ -39,6 +39,10 @@
 
 //! @class SkyGrid 
 //! Class which manages a grid to display in the sky.
+//! TODO: this class suffers a number of problems:
+//! 1- the algorithm used to find the points where the lines cross the edge of the screen
+//! is slow and very buggy at high latitudes
+//! 2- needs support for DMS/DMS labelling, not only HMS/DMS
 class SkyGrid
 {
 public:

@@ -32,8 +32,6 @@
 #include <QLineEdit>
 #include <QValidator>
 
-#include "StelAppGraphicsItem.hpp"
-
 DateTimeDialog::DateTimeDialog() : 
   year(0),
   month(0),
