@@ -52,27 +52,27 @@ void LocationDialog::styleChanged()
 // Initialize the dialog widgets and connect the signals/slots
 void LocationDialog::createDialogContent()
 {
-		// We try to directly connect to the observer slots as much as we can
-		Observer* observer = StelApp::getInstance().getCore()->getObservatory();
-		ui->setupUi(dialog);
+	// We try to directly connect to the observer slots as much as we can
+	Observer* observer = StelApp::getInstance().getCore()->getObservatory();
+	ui->setupUi(dialog);
 
-		// Init the SpinBox entries
-		ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
-		ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
-		ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
-		ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
+	// Init the SpinBox entries
+	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
+	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 
-		// Connect all the QT signals
-		connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-		connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
-		connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
-		connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-		connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-		connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
-		
-		// Init the position value
-		selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
-		spinBoxChanged();
+	// Connect all the QT signals
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
+	connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
+	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
+	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
+	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
+	
+	// Init the position value
+	selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
+	spinBoxChanged();
 }
 
 void LocationDialog::selectPosition(double longitude, double latitude, int altitude, QString city)
