@@ -106,7 +106,7 @@ void StelMainGraphicsView::init()
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	//setCacheMode(QGraphicsView::CacheBackground);
 	
-	setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
+	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 	
 	StelGui* newGui = new StelGui();
 	newGui->init();
