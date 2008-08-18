@@ -110,6 +110,7 @@ public:
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
+	void reloadStyle();
 	
 private:
 	void retranslateUi(QWidget *Form);

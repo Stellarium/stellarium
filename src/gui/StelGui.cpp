@@ -184,6 +184,9 @@ void StelGui::init()
 	// Connect all the GUI actions signals with the Core of Stellarium
 	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
 	
+	// Debug
+	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
+
 	QObject* module = GETSTELMODULE("ConstellationMgr");
 	ConstellationMgr* cmgr = (ConstellationMgr*)module;
 	QObject::connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), module, SLOT(setFlagLines(bool)));
@@ -465,6 +468,12 @@ void StelGui::init()
 	// Readjust position
 	updateBarsPos();
 	infoPanel->setPos(8,8);
+}
+
+//! Reload the current Qt Style Sheet (Debug only)
+void StelGui::reloadStyle()
+{
+	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 }
 
 void StelGui::selectedObjectChangeCallBack(StelModuleSelectAction action)
