@@ -37,7 +37,6 @@
 #include <QString>
 #include <QSettings>
 
-#include "StelAppGraphicsItem.hpp"
 #include <QPainter>
 
 const QString Projector::maskTypeToString(ProjectorMaskType type)
@@ -949,10 +948,10 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 		return;
 	}
 	
-// 	QPainter* painter = StelAppGraphicsItem::getInstance().switchToQPainting();
+// 	QPainter* painter = StelAppGraphicsScene::getInstance().switchToQPainting();
 // 	if (painter==NULL)
 // 	{
-// 		StelAppGraphicsItem::getInstance().revertToOpenGL();
+// 		StelAppGraphicsScene::getInstance().revertToOpenGL();
 // 		qDebug() << "NULL Painter";
 // 		return;
 // 	}
@@ -965,7 +964,7 @@ void Projector::drawText(const SFont* font, float x, float y, const QString& str
 // 	text.addText(QPointF(0,0), QFont(), str);
 // 	painter->drawPath(text);
 // 	//painter->drawText(QPointF(xshift, -yshift), str);
-// 	StelAppGraphicsItem::getInstance().revertToOpenGL();
+// 	StelAppGraphicsScene::getInstance().revertToOpenGL();
 	
 	glPushMatrix();
 	glTranslatef(x,y,0);

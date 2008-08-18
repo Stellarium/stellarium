@@ -24,7 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "Projector.hpp"
 #include "fixx11h.h"
-#include "StelAppGraphicsItem.hpp"
+#include "StelAppGraphicsScene.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -32,9 +32,9 @@
 #include <QtOpenGL>
 #include <QTimer>
 
-StelAppGraphicsItem* StelAppGraphicsItem::singleton = NULL;
+StelAppGraphicsScene* StelAppGraphicsScene::singleton = NULL;
  
-StelAppGraphicsItem::StelAppGraphicsItem() : tempPainter(NULL)
+StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL)
 {
 	assert(!singleton);
 	singleton = this;
@@ -44,7 +44,7 @@ StelAppGraphicsItem::StelAppGraphicsItem() : tempPainter(NULL)
 	previousTime = lastEventTimeSec;
 }
 
-StelAppGraphicsItem::~StelAppGraphicsItem()
+StelAppGraphicsScene::~StelAppGraphicsScene()
 {
 	if (distorter)
 	{
@@ -53,12 +53,12 @@ StelAppGraphicsItem::~StelAppGraphicsItem()
 	}
 }
 
-void StelAppGraphicsItem::init()
+void StelAppGraphicsScene::init()
 {
 	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
 }
 
-void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
+void StelAppGraphicsScene::glWindowHasBeenResized(int w, int h)
 {
 	if (!distorter || (distorter && distorter->getType() == "none"))
 	{
@@ -68,7 +68,7 @@ void StelAppGraphicsItem::glWindowHasBeenResized(int w, int h)
 
 //! Switch to native OpenGL painting, i.e not using QPainter
 //! After this call revertToQtPainting MUST be called
-void StelAppGraphicsItem::switchToNativeOpenGLPainting()
+void StelAppGraphicsScene::switchToNativeOpenGLPainting()
 {
 	// Save openGL projection state
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -87,7 +87,7 @@ void StelAppGraphicsItem::switchToNativeOpenGLPainting()
 
 //! Revert openGL state so that Qt painting works again
 //! @return a painter that can be used
-QPainter* StelAppGraphicsItem::revertToQtPainting()
+QPainter* StelAppGraphicsScene::revertToQtPainting()
 {
 	// Restore openGL projection state for Qt drawings
 	glMatrixMode(GL_PROJECTION);
@@ -99,7 +99,7 @@ QPainter* StelAppGraphicsItem::revertToQtPainting()
 }
 
 
-QPainter* StelAppGraphicsItem::switchToQPainting()
+QPainter* StelAppGraphicsScene::switchToQPainting()
 {
 	if (tempPainter)
 	{
@@ -119,7 +119,7 @@ QPainter* StelAppGraphicsItem::switchToQPainting()
 
 //! Revert openGL state so that Qt painting works again
 //! @return a painter that can be used
-void StelAppGraphicsItem::revertToOpenGL()
+void StelAppGraphicsScene::revertToOpenGL()
 {
 	if (tempPainter)
 		tempPainter->restore();
@@ -131,10 +131,10 @@ void StelAppGraphicsItem::revertToOpenGL()
 	glPopAttrib();
 }
 
-void StelAppGraphicsItem::drawBackground(QPainter *painter, const QRectF &)
+void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 {
 	if (painter->paintEngine()->type() != QPaintEngine::OpenGL) {
-		qWarning("StelAppGraphicsItem: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
+		qWarning("StelAppGraphicsScene: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}
 
@@ -164,12 +164,12 @@ void StelAppGraphicsItem::drawBackground(QPainter *painter, const QRectF &)
 	QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
 }
 
-void StelAppGraphicsItem::thereWasAnEvent()
+void StelAppGraphicsScene::thereWasAnEvent()
 {
 	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
 }
 
-void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
+void StelAppGraphicsScene::setViewPortDistorterType(const QString &type)
 {
 	if (type != getViewPortDistorterType())
 	{
@@ -190,7 +190,7 @@ void StelAppGraphicsItem::setViewPortDistorterType(const QString &type)
 	distorter = ViewportDistorter::create(type,(int)width(),(int)height(),StelApp::getInstance().getCore()->getProjection());
 }
 
-QString StelAppGraphicsItem::getViewPortDistorterType() const
+QString StelAppGraphicsScene::getViewPortDistorterType() const
 {
 	if (distorter)
 		return distorter->getType();
@@ -198,12 +198,12 @@ QString StelAppGraphicsItem::getViewPortDistorterType() const
 }
 
 // Set mouse cursor display
-void StelAppGraphicsItem::showCursor(bool b)
+void StelAppGraphicsScene::showCursor(bool b)
 {
 //	setCursor(b ? Qt::ArrowCursor : Qt::BlankCursor);
 }
 
-void StelAppGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void StelAppGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsScene::mouseMoveEvent(event);
 	if (event->isAccepted())
@@ -219,7 +219,7 @@ void StelAppGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
-void StelAppGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
+void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mousePressEvent(event);
 	if (event->isAccepted())
@@ -236,7 +236,7 @@ void StelAppGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
-void StelAppGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mouseReleaseEvent(event);
 	if (event->isAccepted())
@@ -253,7 +253,7 @@ void StelAppGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
-void StelAppGraphicsItem::wheelEvent(QGraphicsSceneWheelEvent* event)
+void StelAppGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent* event)
 {
 	QGraphicsScene::wheelEvent(event);
 	if (event->isAccepted())
@@ -270,7 +270,7 @@ void StelAppGraphicsItem::wheelEvent(QGraphicsSceneWheelEvent* event)
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
-void StelAppGraphicsItem::keyPressEvent(QKeyEvent* event)
+void StelAppGraphicsScene::keyPressEvent(QKeyEvent* event)
 {
 	QGraphicsScene::keyPressEvent(event);
 	if (event->isAccepted())
@@ -281,7 +281,7 @@ void StelAppGraphicsItem::keyPressEvent(QKeyEvent* event)
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
-void StelAppGraphicsItem::keyReleaseEvent(QKeyEvent* event)
+void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 {
 	QGraphicsScene::keyReleaseEvent(event);
 	if (event->isAccepted())

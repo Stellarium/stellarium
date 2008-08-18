@@ -39,7 +39,7 @@
 #include <QFrame>
 #include <QFile>
 
-#include "StelAppGraphicsItem.hpp"
+#include "StelAppGraphicsScene.hpp"
 
 ConfigurationDialog::ConfigurationDialog(): flipVert(NULL), flipHoriz(NULL)
 {
@@ -182,9 +182,9 @@ void ConfigurationDialog::setDiskViewport(bool b)
 void ConfigurationDialog::setSphericMirror(bool b)
 {
 	if (b)
-		StelAppGraphicsItem::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
+		StelAppGraphicsScene::getInstance().setViewPortDistorterType("fisheye_to_spheric_mirror");
 	else
-		StelAppGraphicsItem::getInstance().setViewPortDistorterType("none");
+		StelAppGraphicsScene::getInstance().setViewPortDistorterType("none");
 }
 
 void ConfigurationDialog::setNoSelectedInfo(void)
