@@ -40,18 +40,14 @@ class StelButton;
 class BottomStelBar;
 
 //! The informations about the currently selected object
-class InfoPanel : public QGraphicsItem
+class InfoPanel : public QGraphicsTextItem
 {
 public:
 	InfoPanel(QGraphicsItem* parent);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	virtual QRectF boundingRect() const;
 	void setInfoTextFilters(const StelObject::InfoStringGroup& flags) {infoTextFilters=flags;}
 	const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
-
+	void setTextFromObjects(const std::vector<StelObjectP>&);
 private:
-	QGraphicsTextItem* text;
-	StelObjectP object;
 	StelObject::InfoStringGroup infoTextFilters;
 };
 
@@ -79,6 +75,7 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//! Load color scheme from the given ini file and section name
 	virtual void setStelStyle(const StelStyle& style);
+	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
@@ -112,7 +109,7 @@ public:
 	
 private slots:
 	//! Update the position of the button bars in the main window
-	void updateBarsPos(qreal value);
+	void updateBarsPos();
 	
 private:
 	void retranslateUi(QWidget *Form);

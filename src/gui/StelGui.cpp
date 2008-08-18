@@ -25,7 +25,6 @@
 #include "MovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelAppGraphicsItem.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
@@ -54,33 +53,24 @@
 #include <QTextDocument>
 #include <QTextBrowser>
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsItem(parent)
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
-	text = new QGraphicsTextItem("", this);
-	object = NULL;
 	infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
 }
 
-void InfoPanel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void InfoPanel::setTextFromObjects(const std::vector<StelObjectP>& selected)
 {
-	std::vector<StelObjectP> selected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
-
 	if (selected.size() == 0)
-		text->setHtml("");
+	{
+		setHtml("");
+	}
 	else
 	{
 		// just print details of the first item for now
-		StelCore* core = StelApp::getInstance().getCore();
-		QString s = selected[0]->getInfoString(core, infoTextFilters);
-		text->setHtml(s);
+		QString s = selected[0]->getInfoString(StelApp::getInstance().getCore(), infoTextFilters);
+		setHtml(s);
 	}
 }
-
-QRectF InfoPanel::boundingRect() const
-{
-	return childrenBoundingRect();
-}
-
 
 StelGui::StelGui()
 {
@@ -92,20 +82,15 @@ StelGui::StelGui()
 	
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos(qreal)));
+	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 	
 	animBottomBarTimeLine = new QTimeLine(200, this);
 	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos(qreal)));
+	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 }
 
 StelGui::~StelGui()
 {
-	// When the QGraphicsItems are deleted, they are automatically removed from the scene
-	delete winBar;
-	delete buttonBar;
-	delete infoPanel;
-	delete buttonBarPath;
 }
 
 /*************************************************************************
@@ -477,7 +462,13 @@ void StelGui::init()
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 	
 	// Readjust position
-	glWindowHasBeenResized((int)scene->sceneRect().width(), (int)scene->sceneRect().height());
+	updateBarsPos();
+	infoPanel->setPos(8,8);
+}
+
+void StelGui::selectedObjectChangeCallBack(StelModuleSelectAction action)
+{
+	infoPanel->setTextFromObjects(StelApp::getInstance().getStelObjectMgr().getSelectedObject());
 }
 
 //! Load color scheme from the given ini file and section name
@@ -511,21 +502,10 @@ void StelGui::setStelStyle(const StelStyle& style)
 
 void StelGui::glWindowHasBeenResized(int ww, int hh)
 {
-	double h=hh;
 	if (!winBar || !buttonBar)
 		return;
 	
-	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
-	winBar->setPos(buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5, h-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20);
-	
-	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
-	buttonBar->setPos(winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize(), h-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY);
-	
-	buttonBarPath->updatePath(buttonBar, winBar);
-
-	infoPanel->setPos(8,8);
-	
-	progressBarMgr->setPos(ww-progressBarMgr->boundingRect().width()-5, hh-progressBarMgr->boundingRect().height()-5);
+	updateBarsPos();
 }
 
 
@@ -559,23 +539,28 @@ void StelGui::update(double deltaTime)
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	if (nav->getTimeSpeed()<-0.99*JD_SECOND)
 	{
-		buttonTimeRewind->setChecked(true);
+		if (buttonTimeRewind->isChecked()==false)
+			buttonTimeRewind->setChecked(true);
 	}
 	else
 	{
-		buttonTimeRewind->setChecked(false);
+		if (buttonTimeRewind->isChecked()==true)
+			buttonTimeRewind->setChecked(false);
 	}
 	if (nav->getTimeSpeed()>1.01*JD_SECOND)
 	{
-		buttonTimeForward->setChecked(true);
+		if (buttonTimeForward->isChecked()==false)
+			buttonTimeForward->setChecked(true);
 	}
 	else
 	{
-		buttonTimeForward->setChecked(false);
+		if (buttonTimeRewind->isChecked()==true)
+			buttonTimeRewind->setChecked(false);
 	}
 	if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
 	{
-		buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
+		if (buttonTimeRealTimeSpeed->isChecked()!=nav->getRealTimeSpeed())
+			buttonTimeRealTimeSpeed->setChecked(nav->getRealTimeSpeed());
 	}
 	const bool isTimeNow=nav->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)
@@ -659,9 +644,42 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 	return a;
 }
 
-void StelGui::updateBarsPos(qreal value) 	 
-{ 	 
-	glWindowHasBeenResized(StelMainGraphicsView::getInstance().size().width(), StelMainGraphicsView::getInstance().size().height()); 	 
+void StelGui::updateBarsPos()
+{
+	const int ww = StelMainGraphicsView::getInstance().width();
+	const int hh = StelMainGraphicsView::getInstance().height();
+			
+	bool updatePath = false;
+	
+	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
+	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
+	const qreal newWinBarX = buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
+	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
+	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
+	{
+		winBar->setPos(newWinBarX, newWinBarY);
+		updatePath = true;
+	}
+	
+	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
+	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
+	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
+	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
+	{
+		buttonBar->setPos(newButtonBarX, newButtonBarY);
+		updatePath = true;
+	}
+	
+	if (updatePath)
+		buttonBarPath->updatePath(buttonBar, winBar);
+
+	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-5;
+	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()-5;
+	if (progressBarMgr->pos().x()!=newProgressBarX || progressBarMgr->pos().y()!=newProgressBarY)
+	{
+		progressBarMgr->setPos(newProgressBarX, newProgressBarY);
+		updatePath = true;
+	}
 }
 
 void StelGui::retranslateUi(QWidget *Form)
