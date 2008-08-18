@@ -18,7 +18,7 @@
  */
 
 #include "StelMainGraphicsView.hpp"
-#include "StelAppGraphicsItem.hpp"
+#include "StelAppGraphicsScene.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -66,7 +66,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
-	mainItem = new StelAppGraphicsItem();
+	mainItem = new StelAppGraphicsScene();
 	setScene(mainItem);
 }
 

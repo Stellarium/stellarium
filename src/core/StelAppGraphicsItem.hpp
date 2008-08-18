@@ -17,22 +17,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STELAPPGRAPHICITEM_HPP_
-#define _STELAPPGRAPHICITEM_HPP_
+#ifndef _STELAPPGRAPHICSSCENE_HPP_
+#define _STELAPPGRAPHICSSCENE_HPP_
 
 #include <QGraphicsScene>
 
-class StelAppGraphicsItem : public QGraphicsScene
+class StelAppGraphicsScene : public QGraphicsScene
 {
 	Q_OBJECT;
 public:
-	StelAppGraphicsItem();
-	~StelAppGraphicsItem();
+	StelAppGraphicsScene();
+	~StelAppGraphicsScene();
 
 	//! Get the StelMainWindow singleton instance.
 	//! @deprecated
 	//! @return the StelMainWindow singleton instance
-	static StelAppGraphicsItem& getInstance() {Q_ASSERT(singleton); return *singleton;}
+	static StelAppGraphicsScene& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
 	void init();
 
@@ -81,11 +81,11 @@ private:
 	// Main elements of the StelApp
 	class ViewportDistorter *distorter;
 	
-	// The StelAppGraphicsItem singleton
-	static StelAppGraphicsItem* singleton;
+	// The StelAppGraphicsScene singleton
+	static StelAppGraphicsScene* singleton;
 	
 	QPainter* tempPainter;
 };
 
-#endif // _STELAPPGRAPHICITEM_HPP_
+#endif // _STELAPPGRAPHICSSCENE_HPP_
 
