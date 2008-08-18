@@ -17,8 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <cassert>
-
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -632,7 +630,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 
 	default:
 		// Badness
-		assert(0);
+		Q_ASSERT(0);
 	}
 	
 	/* we can now allocate memory for storing pixel data */
