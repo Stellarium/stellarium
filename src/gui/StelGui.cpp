@@ -56,6 +56,9 @@
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
 	infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	QFont font("DejaVuSans");
+	font.setPixelSize(13);
+	setFont(font);
 }
 
 void InfoPanel::setTextFromObjects(const std::vector<StelObjectP>& selected)
