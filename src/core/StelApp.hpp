@@ -20,7 +20,6 @@
 #ifndef _STELAPP_HPP_
 #define _STELAPP_HPP_
 
-#include <cassert>
 #include "fixx11h.h"
 #include <QString>
 #include <QObject>
@@ -78,7 +77,7 @@ public:
 	
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
-	static StelApp& getInstance() {assert(singleton); return *singleton;}
+	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
 	//! Get the module manager to use for accessing any module loaded in the application.
 	//! @return the module manager.

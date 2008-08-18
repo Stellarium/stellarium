@@ -23,8 +23,8 @@
 #ifndef _SKYLIGHT_HPP_
 #define _SKYLIGHT_HPP_
 
-#include <cassert>
 #include <cmath>
+#include <QDebug>
 
 typedef struct {
 	float zenithAngle;  // zenithAngle : angular distance to the zenith in radian
@@ -142,7 +142,7 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 	DY = 0.1206f*T - 2.5771f;
 	EY =-0.0670f*T + 0.3703f;
 	// with BY>0 the formulas in getxyYValuev make no sense
-	assert(BY <= 0.0);
+	Q_ASSERT(BY <= 0.0);
 }
 
 // Compute the color distribution coefficients
@@ -161,8 +161,8 @@ inline void Skylight::computeColorDistributionCoefs(void)
 	Dy =-0.0438f*T - 1.0539f;
 	Ey =-0.0109f*T + 0.0531f;
 	// with Bx,By>0 the formulas in getxyYValuev make no sense
-	assert(Bx <= 0.0);
-	assert(By <= 0.0);
+	Q_ASSERT(Bx <= 0.0);
+	Q_ASSERT(By <= 0.0);
 }
 
 

@@ -33,7 +33,7 @@ public:
 	
 	//! Get the StelMainWindow singleton instance.
 	//! @return the StelMainWindow singleton instance
-	static StelMainWindow& getInstance() {assert(singleton); return *singleton;}
+	static StelMainWindow& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
 	void init();
 	

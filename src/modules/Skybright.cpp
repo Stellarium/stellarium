@@ -17,7 +17,6 @@
  */
 
 #include <cmath>
-#include <cassert>
 #include <QDebug>
 #include "StelUtils.hpp"
 

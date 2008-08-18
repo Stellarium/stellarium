@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <cassert>
 #include <map>
 #include "GLee.h"
 
@@ -62,7 +61,7 @@ void Projector::registerProjectionMapping(Mapping *c)
 void Projector::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
 	// Video Section
 	QString tmpstr = conf->value("projection/viewport").toString();
@@ -559,12 +558,12 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
 			nsign = 1.0;
 
 		const double drho = M_PI / stacks;
-		assert(stacks<=MAX_STACKS);
+		Q_ASSERT(stacks<=MAX_STACKS);
 		ComputeCosSinRho(drho,stacks);
 		double *cos_sin_rho_p;
 
 		const double dtheta = 2.0 * M_PI / slices;
-		assert(slices<=MAX_SLICES);
+		Q_ASSERT(slices<=MAX_SLICES);
 		ComputeCosSinTheta(dtheta,slices);
 		double *cos_sin_theta_p;
 
@@ -621,7 +620,7 @@ void Projector::setInitFov(double fov)
 
 
 void Projector::sFanDisk(double radius,int innerFanSlices,int level) const {
-  assert(level<64);
+  Q_ASSERT(level<64);
   double rad[64];
   int i,j;
   rad[level] = radius;
@@ -634,7 +633,7 @@ void Projector::sFanDisk(double radius,int innerFanSlices,int level) const {
   }
   int slices = innerFanSlices<<level;
   const double dtheta = 2.0 * M_PI / slices;
-  assert(slices<=MAX_SLICES);
+  Q_ASSERT(slices<=MAX_SLICES);
   ComputeCosSinTheta(dtheta,slices);
   double *cos_sin_theta_p;
   int slices_step = 2;
@@ -695,7 +694,7 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks, int orientIns
 
 	const double dtheta = 2.0 * M_PI / slices;
 	if (slices < 0) slices = -slices;
-	assert(slices<=MAX_SLICES);
+	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 
@@ -731,7 +730,7 @@ void Projector::sRing(GLdouble rMin, GLdouble rMax, GLint slices, GLint stacks, 
 	const double dr = (rMax-rMin) / stacks;
 	const double dtheta = 2.0 * M_PI / slices;
 	if (slices < 0) slices = -slices;
-	assert(slices<=MAX_SLICES);
+	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
 
@@ -777,12 +776,12 @@ void Projector::sSphereMap(GLdouble radius, GLint slices, GLint stacks,
 	const double nsign = orientInside?-1:1;
 
 	const double drho = M_PI / stacks;
-	assert(stacks<=MAX_STACKS);
+	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
 	double *cos_sin_rho_p;
 
 	const double dtheta = 2.0 * M_PI / slices;
-	assert(slices<=MAX_SLICES);
+	Q_ASSERT(slices<=MAX_SLICES);
 
 	ComputeCosSinTheta(dtheta,slices);
 	double *cos_sin_theta_p;
@@ -1295,12 +1294,12 @@ void Projector::sSphere(GLdouble radius, GLdouble oneMinusOblateness,
 	}
 
 	const double drho = M_PI / stacks;
-	assert(stacks<=MAX_STACKS);
+	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
 	double *cos_sin_rho_p;
 
 	const double dtheta = 2.0 * M_PI / slices;
-	assert(slices<=MAX_SLICES);
+	Q_ASSERT(slices<=MAX_SLICES);
 	ComputeCosSinTheta(dtheta,slices);
 	const double *cos_sin_theta_p;
 

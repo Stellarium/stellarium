@@ -37,7 +37,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <QDebug>
 #include <cmath>
 #include <cstdlib>
-#include <cassert>
 
 static const double icosahedron_G = 0.5*(1.0+sqrt(5.0));
 static const double icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
@@ -186,7 +185,7 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 {
 	if (lev==0)
 	{
-		assert(index<20);
+		Q_ASSERT(index<20);
 		return (index&1) ? index+1 : index-1;
 	}
 	switch(index&7)
@@ -206,7 +205,7 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 	case 5:
 		return (lev==1) ? index-5 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
 	default:
-		assert(0);
+		Q_ASSERT(0);
 	}
 	return 0;
 }
@@ -216,7 +215,7 @@ void GeodesicGrid::initTriangle(int lev,int index,
                                 const Vec3d &c1,
                                 const Vec3d &c2)
 {
-	assert((c0^c1)*c2 >= 0.0);
+	Q_ASSERT((c0^c1)*c2 >= 0.0);
 	Triangle &t(triangles[lev][index]);
 	t.e0 = c1+c2;
 	t.e0.normalize();
