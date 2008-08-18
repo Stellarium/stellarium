@@ -104,8 +104,9 @@ void StelMainGraphicsView::init()
 	
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	
 	//setCacheMode(QGraphicsView::CacheBackground);
+	
+	setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 	
 	StelGui* newGui = new StelGui();
 	newGui->init();

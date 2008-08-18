@@ -186,12 +186,6 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	// Init a default StelStyle, before loading modules, it will be overrided
 	currentStelStyle = NULL;
 	setColorScheme("color");
-	
-	// testing code
-// 	QtJsonParser parser;
-// 	QFile file("/home/fabien/Desktop/N874_00_00_x64.json");
-// 	file.open(QIODevice::ReadOnly);
-// 	qWarning() << parser.parse(file);
 }
 
 /*************************************************************************
