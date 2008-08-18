@@ -20,10 +20,9 @@
 #ifndef _STELAPPGRAPHICITEM_HPP_
 #define _STELAPPGRAPHICITEM_HPP_
 
-#include <cassert>
-#include <QGraphicsRectItem>
+#include <QGraphicsScene>
 
-class StelAppGraphicsItem : public QObject, public QGraphicsRectItem
+class StelAppGraphicsItem : public QGraphicsScene
 {
 	Q_OBJECT;
 public:
@@ -33,7 +32,7 @@ public:
 	//! Get the StelMainWindow singleton instance.
 	//! @deprecated
 	//! @return the StelMainWindow singleton instance
-	static StelAppGraphicsItem& getInstance() {assert(singleton); return *singleton;}
+	static StelAppGraphicsItem& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
 	void init();
 
@@ -46,17 +45,11 @@ public:
 	//! Set mouse cursor display
 	void showCursor(bool b);
 	
-	//! Start the main drawing loop
-	void startDrawingLoop();
-	
 	//! Paint the whole Core of stellarium
 	//! This method is called automatically by the GraphicsView
-	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget=0);
+	void drawBackground(QPainter *painter, const QRectF &rect);
 	
 	void glWindowHasBeenResized(int w, int h);
-	
-	int width() {return (int)(rect().width());}
-	int height() {return (int)(rect().height());}
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter
 	//! After this call revertToQtPainting MUST be called
@@ -70,24 +63,17 @@ public:
 	void revertToOpenGL();
 	
 protected:
- 	virtual bool sceneEvent(QEvent* event);
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-	virtual void wheelEvent(QGraphicsSceneWheelEvent* event);
-	virtual void focusOutEvent(QFocusEvent* event);
-	virtual void focusInEvent(QFocusEvent* event);
-	
-private slots:
-	//! Called when screen needs to be refreshed
-	void recompute();
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+	virtual void wheelEvent(QGraphicsSceneWheelEvent * wheelEvent);
 		
 private:
 	//! Notify that an event was handled by the program and therefore the 
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
-	class QTimer* mainTimer;
 	
 	double previousTime;
 	double lastEventTimeSec;

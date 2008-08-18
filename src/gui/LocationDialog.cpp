@@ -28,8 +28,6 @@
 #include <QDebug>
 #include <QFrame>
 
-#include "StelAppGraphicsItem.hpp"
-
 LocationDialog::LocationDialog()
 {
 	ui = new Ui_locationDialogForm;

@@ -20,7 +20,6 @@
 
 #include "StelDialog.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "StelAppGraphicsItem.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -53,7 +52,6 @@ StelDialog::~StelDialog()
 
 void StelDialog::close()
 {
-	proxy->scene()->setFocusItem(&StelAppGraphicsItem::getInstance());
 	emit closed();
 }
 

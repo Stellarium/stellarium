@@ -67,8 +67,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
 	mainItem = new StelAppGraphicsItem();
-	scene()->addItem(mainItem);
-	mainItem->setFocus();
+	setScene(mainItem);
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
@@ -77,15 +76,16 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
-	setSceneRect(0,0,event->size().width(), event->size().height());
-	StelAppGraphicsItem::getInstance().glWindowHasBeenResized(event->size().width(), event->size().height());
+	if (scene())
+		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
+	QGraphicsView::resizeEvent(event);
 }
 
 void StelMainGraphicsView::init()
 {
 	//view->setAutoFillBackground(false);
 	//setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	//setCacheMode(QGraphicsView::CacheNone);
+	//setCacheMode(QGraphicsView::CacheNone);	
 	
 	// This apparently useless line fixes the scrolling bug
 	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
@@ -93,8 +93,6 @@ void StelMainGraphicsView::init()
 	setMatrix(QMatrix(1,0,0,1,0.00000001,0));
 #endif
 	
-	
-	//view->setCacheMode(QGraphicsView::CacheBackground);
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	// setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	
@@ -104,6 +102,11 @@ void StelMainGraphicsView::init()
 	mainItem->init();
 	setFocus();
 	
+	// Allows for precise FPS control
+	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
+	
+	//setCacheMode(QGraphicsView::CacheBackground);
+	
 	StelGui* newGui = new StelGui();
 	newGui->init();
 	StelApp::getInstance().getModuleMgr().registerModule(newGui, true);
@@ -111,8 +114,6 @@ void StelMainGraphicsView::init()
 	stelApp->initPlugIns();
 	
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-	
-	mainItem->startDrawingLoop();
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)
@@ -161,21 +162,6 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 	
 	qDebug() << "Saving screenshot in file: " << shotPath;
 	im.save(shotPath);
-}
-
-//! Activate all the QActions associated to the widget
-void StelMainGraphicsView::activateKeyActions(bool b)
-{
-	if (b==false)
-	{
-		foreach (QAction* a, actions())
-			removeAction(a);
-	}
-	else
-	{
-		foreach (QAction* a, findChildren<QAction*>())
-			addAction(a);
-	}
 }
 
 // Add a new progress bar in the lower right corner of the screen.
