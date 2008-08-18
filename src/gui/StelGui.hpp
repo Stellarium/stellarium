@@ -75,7 +75,6 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	//! Load color scheme from the given ini file and section name
 	virtual void setStelStyle(const StelStyle& style);
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
