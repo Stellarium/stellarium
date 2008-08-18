@@ -19,7 +19,6 @@
 #include "QtJsonParser.hpp"
 #include <QDebug>
 #include <stdexcept>
-#include <cassert>
 
 void skipJson(QIODevice& input)
 {
@@ -99,7 +98,7 @@ QString readString(QIODevice& input)
 		if (input.atEnd())
 			throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	}
-	assert(0);
+	Q_ASSERT(0);
 	return "";
 }
 

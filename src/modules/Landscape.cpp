@@ -23,7 +23,6 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 
-#include <cassert>
 #include <vector>
 
 #include <QDebug>

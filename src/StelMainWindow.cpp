@@ -38,7 +38,7 @@ StelMainWindow* StelMainWindow::singleton = NULL;
 StelMainWindow::StelMainWindow(QWidget* parent) : QMainWindow(parent), initComplete(false)
 {
 	// Can't create 2 StelMainWindow instances
-	assert(!singleton);
+	Q_ASSERT(!singleton);
 	singleton = this;
 	setStyle(new QCleanlooksStyle());
 	//setStyleSheet(QString("QGraphicsView {background: #000;}"));

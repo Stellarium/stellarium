@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include <cassert>
 #include "TreeGrid.hpp"
+#include <QDebug>
 
 static const double icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
 static const double icosahedron_b = 1.0/std::sqrt(1.0+icosahedron_G*icosahedron_G);
@@ -110,16 +110,16 @@ void TreeGrid::insert(GridObject* obj, TreeGridNode& node)
 
 void TreeGrid::split(TreeGridNode& node)
 {
-    assert(node.children.empty());
+    Q_ASSERT(node.children.empty());
     const Polygon& p = node.triangle;
     
-    assert(p.size() == 3);
+    Q_ASSERT(p.size() == 3);
 
 	const Vec3d& c0 = p[0];
 	const Vec3d& c1 = p[1];
 	const Vec3d& c2 = p[2];
 	
-	assert((c1^c0)*c2 >= 0.0);
+	Q_ASSERT((c1^c0)*c2 >= 0.0);
 	Vec3d e0 = c1+c2;
 	e0.normalize();
 	Vec3d e1 = c2+c0;

@@ -18,7 +18,6 @@
 */
 
 #include <config.h>
-#include <cassert>
 #include <dirent.h>
 #include <cstdio>
 #include <algorithm>
@@ -142,7 +141,7 @@ void Translator::reload()
 	setlocale(LC_CTYPE,"");
 #endif
 	QString result = bind_textdomain_codeset(domain.toUtf8().constData(), "UTF-8");
-	assert(result=="UTF-8");
+	Q_ASSERT(result=="UTF-8");
 	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
 	textdomain (domain.toUtf8().constData());
 	Translator::lastUsed = this;
@@ -233,7 +232,7 @@ void Translator::initIso639_1LanguageCodes(const QString& fileName)
 	if (!inf.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Can't open ISO639 codes file " << fileName;
-		assert(0);
+		Q_ASSERT(0);
 	}
 	
 	if (!iso639codes.empty())
