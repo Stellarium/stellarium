@@ -67,8 +67,8 @@ void StelDialog::setVisible(bool v)
 	{
 		if (dialog)
 		{
-			proxy->setFocus();
 			dialog->show();
+			proxy->setFocus();
 			return;
 		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
