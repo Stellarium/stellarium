@@ -94,10 +94,6 @@ QDateTimeEdit::down-arrow {
 
 /**********************************/
 
-QDialog {
-	background: transparent;
-}
-
 QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 	border: 0px;
@@ -111,18 +107,13 @@ DialogFrame {
 	border-color: rgb(8, 31, 37);
 }
 
-ResizeFrame {
-	background-image: url(:/graphicGui/gui/resize.png);
-}
-
-
 QLabel {
 	color: rgb(143, 143, 143);
 	font-size: 12px;
 	background: transparent;
 }
 
-QLabel#stelWindowTitle, QLabel:active#stelWindowTitle {
+QLabel#stelWindowTitle {
 	color: rgb(222, 222, 222);
 	font: bold;
 	background: transparent;
@@ -579,6 +570,7 @@ QTreeView {
 	font-size: 12px;
 }
 
+
 QDateEdit {
 	padding-right: 20px; /* make room for the arrows */
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
@@ -594,9 +586,7 @@ QDateEdit::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
-	border-right-color: rgb(0, 0, 0);
-	border-top-color: rgb(0, 0, 0);
+	border: solid 1px rgb(0, 0, 0);	
 	image: url(:/graphicGui/gui/spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
@@ -606,9 +596,7 @@ QDateEdit::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
-	border-right-color: rgb(0, 0, 0);
-	border-bottom-color: rgb(0, 0, 0);
+	border: solid 1px rgb(0, 0, 0);	
 	image: url(:/graphicGui/gui/spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
@@ -617,6 +605,7 @@ QDateEdit::down-button {
 QMenu {
 	background-color: rgb(86, 87, 90); /* sets background of the menu */
 	border: 1px solid rgb(0, 0, 0);
+	color: rgb(222, 222, 222);
 }
 
 QMenu::item {
@@ -630,10 +619,6 @@ QMenu::item:selected { /* when user selects item using mouse or keyboard */
 }
 
 QMainWindow > QDialog {
-	background: rgb(48, 49, 52);
-}
-
-QMainWindow > QDialog:active {
 	background: rgb(48, 49, 52);
 }
 
