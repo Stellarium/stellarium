@@ -44,7 +44,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	protected:
 		virtual void focusInEvent(QFocusEvent* event) {QGraphicsProxyWidget::focusInEvent(event); widget()->setWindowOpacity(0.9);}
-		virtual void focusOutEvent(QFocusEvent* event) {QGraphicsProxyWidget::focusOutEvent(event); widget()->setWindowOpacity(0.3); }
+		virtual void focusOutEvent(QFocusEvent* event) {QGraphicsProxyWidget::focusOutEvent(event); widget()->setWindowOpacity(0.4); }
 };
 
 StelDialog::StelDialog() : dialog(NULL)
