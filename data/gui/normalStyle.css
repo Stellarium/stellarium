@@ -135,10 +135,10 @@ QToolTip {
 }
 
 QLineEdit {
-	border: 1.5px solid rgb(30, 30, 38);
-	border-radius: 8px;
+	border: 1px solid rgb(30, 30, 38);
+	border-radius: 3px;
 	padding: 0 8px;
-	background: rgb(25, 35, 61);
+	background: rgb(104, 106, 107);
 	selection-background-color: rgb(169, 169, 169);
 	color: rgb(170, 173, 164);
 	font-size: 12px;
@@ -480,7 +480,7 @@ QDoubleSpinBox::down-button {
 QComboBox {
 	border: 1px solid rgb(0, 0, 0);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(200, 201, 202), stop: 1 rgb(104, 106, 107));
-	border-radius: 0px;
+	font-size: 12px;
 }
 
 QComboBox::drop-down {
@@ -492,6 +492,10 @@ QComboBox::drop-down {
 	border-bottom-right-radius: 0px;
 }
 
+QComboBox:editable {
+	background: rgb(104, 106, 107);
+}
+
 QComboBox::down-arrow {
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
 	height: 20px;
@@ -501,6 +505,11 @@ QComboBox::down-arrow {
 	image: url(:/graphicGui/gui/spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
+}
+
+QComboBox QAbstractItemView {
+	border: 2px solid rgb(65, 75, 81);
+	background: rgb(134, 136, 137);
 }
 
 QProgressBar {
