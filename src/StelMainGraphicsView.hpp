@@ -66,6 +66,11 @@ public slots:
 	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="") const;
 
+	//! Get whether mouse cursor is currently displayed
+	bool getFlagShowCursor() const;
+	//! Set whether mouse cursor is currently displayed
+	void setFlagShowCursor(bool b);
+	
 protected:
 	virtual void resizeEvent(QResizeEvent* event);
 	

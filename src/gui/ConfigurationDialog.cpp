@@ -151,6 +151,13 @@ void ConfigurationDialog::createDialogContent()
 	if (b==true)
 		setShowFlipButtons(b);
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), this, SLOT(setShowFlipButtons(bool)));
+	
+	const float tmout = StelAppGraphicsScene::getInstance().getCursorTimeout();
+	ui->mouseTimeoutCheckbox->setChecked(tmout>0);
+	if (tmout>0)
+		ui->mouseTimeoutSpinBox->setValue(tmout);
+	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
+	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
@@ -247,4 +254,12 @@ void ConfigurationDialog::visionModeChanged()
 	{
 		StelApp::getInstance().setVisionModeNight(true);
 	}
+}
+
+void ConfigurationDialog::cursorTimeOutChanged()
+{
+	if (ui->mouseTimeoutCheckbox->isChecked())
+		StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+	else
+		StelAppGraphicsScene::getInstance().setCursorTimeout(-1.f);
 }
