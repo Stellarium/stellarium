@@ -141,4 +141,4 @@ private:
 	int lastButtonbarWidth;
 };
 
-#endif // _NEWGUI_HPP_
+#endif // _STELGUI_HPP_

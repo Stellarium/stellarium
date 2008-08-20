@@ -186,3 +186,14 @@ void StelMainGraphicsView::activateKeyActions(bool b)
 	}
 }
 
+//! Get whether mouse cursor is currently displayed
+bool StelMainGraphicsView::getFlagShowCursor() const
+{
+	return cursor().shape()==Qt::ArrowCursor;
+}
+
+//! Set whether mouse cursor is currently displayed
+void StelMainGraphicsView::setFlagShowCursor(bool b)
+{
+	setCursor(b ? Qt::ArrowCursor : Qt::BlankCursor);
+}

@@ -49,7 +49,9 @@ private slots:
 	void setSphericMirror(bool);
 	void setShowFlipButtons(bool);
 	void visionModeChanged();
-	
+	void cursorTimeOutChanged();
+	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
+			
 private:
 	class StelButton* flipVert;
 	class StelButton* flipHoriz;
