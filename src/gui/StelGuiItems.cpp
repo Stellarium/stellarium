@@ -472,7 +472,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
+			//helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
+			helpLabel->setPos(20,-27);
 		}
 	}
 	else

@@ -12,9 +12,7 @@ AngleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
-	border-right-color: rgb(0, 0, 0);
-	border-top-color: rgb(0, 0, 0);
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
@@ -24,9 +22,7 @@ AngleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
-	border-right-color: rgb(0, 0, 0);
-	border-bottom-color: rgb(0, 0, 0);
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spindown.png);
 	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
@@ -46,11 +42,10 @@ QTimeEdit::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top right; /* position at the top right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
+	border: solid 1px rgb(0, 0, 0);
 	border-right-color: rgb(0, 0, 0);
 	border-top-color: rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spinup.png);
-	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
 }
 
@@ -58,11 +53,8 @@ QTimeEdit::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right; /* position at the bottom right corner */
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	border: solid 1px;	
-	border-right-color: rgb(0, 0, 0);
-	border-bottom-color: rgb(0, 0, 0);
+	border: solid 1px rgb(0, 0, 0);
 	image: url(:/graphicGui/gui/spindown.png);
-	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 }
 
@@ -77,8 +69,6 @@ QDateTimeEdit::drop-down {
 	border-top: 1px;
 	border-left-color: rgb(0, 0, 0);
 	border-left-style: solid;
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
 }
 
 QDateTimeEdit::down-arrow {
@@ -588,7 +578,6 @@ QDateEdit::up-button {
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
 	border: solid 1px rgb(0, 0, 0);	
 	image: url(:/graphicGui/gui/spinup.png);
-	border-width: 1px;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
 }
 
@@ -598,8 +587,7 @@ QDateEdit::down-button {
 	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
 	border: solid 1px rgb(0, 0, 0);	
 	image: url(:/graphicGui/gui/spindown.png);
-	border-width: 1px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(74, 74, 75));
 }
 
 QMenu {
