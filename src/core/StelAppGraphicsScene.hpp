@@ -42,9 +42,6 @@ public:
 	//! Get the type of viewport distorter currently used
 	QString getViewPortDistorterType() const;
 	
-	//! Set mouse cursor display
-	void showCursor(bool b);
-	
 	//! Paint the whole Core of stellarium
 	//! This method is called automatically by the GraphicsView
 	void drawBackground(QPainter *painter, const QRectF &rect);
@@ -62,6 +59,11 @@ public:
 	QPainter* switchToQPainting();
 	void revertToOpenGL();
 	
+	//! Get the mouse cursor timeout in seconds
+	float getCursorTimeout() const {return cursorTimeout;}
+	//! Set the mouse cursor timeout in seconds
+	void setCursorTimeout(float t) {cursorTimeout=t;}
+	
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
@@ -69,7 +71,7 @@ protected:
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 	virtual void wheelEvent(QGraphicsSceneWheelEvent * wheelEvent);
-		
+	
 private:
 	//! Notify that an event was handled by the program and therefore the 
 	//! FPS should be maximized for a couple of seconds.
@@ -85,6 +87,9 @@ private:
 	static StelAppGraphicsScene* singleton;
 	
 	QPainter* tempPainter;
+	
+	// Number of second before the mouse cursor disappears
+	float cursorTimeout;
 };
 
 #endif // _STELAPPGRAPHICSSCENE_HPP_

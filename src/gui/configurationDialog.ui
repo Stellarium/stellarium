@@ -144,20 +144,12 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>398</width>
-           <height>362</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
@@ -296,14 +288,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabInterface" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>398</width>
-           <height>362</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Navigation</string>
          </attribute>
@@ -544,14 +528,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>398</width>
-           <height>362</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Tools</string>
          </attribute>
@@ -654,7 +630,7 @@
                   <double>3600.000000000000000</double>
                  </property>
                  <property name="value" >
-                  <double>10.000000000000000</double>
+                  <double>3.000000000000000</double>
                  </property>
                 </widget>
                </item>
