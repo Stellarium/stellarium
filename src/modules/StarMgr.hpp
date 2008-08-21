@@ -104,7 +104,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Return a stl vector containing the stars located inside the limFov circle around position v
-	virtual vector<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching Stars object's pointer if exists or NULL
 	//! @param nameI18n The case in-sensistive star common name or HP

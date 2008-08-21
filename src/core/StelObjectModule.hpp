@@ -20,7 +20,7 @@
 #ifndef _STELOBJECTMODULE_HPP_
 #define _STELOBJECTMODULE_HPP_
 
-#include <vector>
+#include <QList>
 #include <QString>
 #include <QStringList>
 #include <boost/intrusive_ptr.hpp>
@@ -47,7 +47,7 @@ public:
 	//! @param limitFov angular diameter of the searching zone in degree.
 	//! @param core the core instance to use.
 	//! @return the list of all the displayed objects contained in the defined zone.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const = 0;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const = 0;
 	
 	//! Find a StelObject by name.
 	//! @param nameI18n The translated name for the current sky locale.

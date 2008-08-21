@@ -158,9 +158,9 @@ void TelescopeMgr::setStelStyle(const StelStyle& style)
 	set_circleColor(StelUtils::strToVec3f(conf->value(section+"/telescope_circleColor", defaultColor).toString()));
 }
 
-vector<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
+QList<StelObjectP> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
-  vector<StelObjectP> result;
+  QList<StelObjectP> result;
   if (!getFlagTelescopes())
   	return result;
   Vec3d v(vv);
@@ -264,7 +264,7 @@ void TelescopeMgr::init() {
 
 void TelescopeMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Telescope");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
