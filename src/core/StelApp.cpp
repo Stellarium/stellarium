@@ -61,6 +61,7 @@
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
+QTime* StelApp::qtime = NULL;
 
 /*************************************************************************
  Create and initialize the main Stellarium application.
@@ -97,8 +98,8 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	
 	stelFileMgr = new StelFileMgr();
 	
-	qtime = new QTime();
-	qtime->start();
+	StelApp::qtime = new QTime();
+	StelApp::qtime->start();
 	
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version, and if we want to set the configFile value.
@@ -203,7 +204,6 @@ StelApp::~StelApp()
 	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
 	delete textureMgr; textureMgr=NULL;
 	delete argList; argList=NULL;
-	delete qtime; qtime=NULL;
 	
 	delete currentStelStyle;
 	
@@ -905,7 +905,7 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 }
 
 // Return the time since when stellarium is running in second.
-double StelApp::getTotalRunTime() const
+double StelApp::getTotalRunTime()
 {
-	return (double)qtime->elapsed()/1000;
+	return (double)StelApp::qtime->elapsed()/1000;
 }
