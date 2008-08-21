@@ -27,6 +27,7 @@
 #include "StelAppGraphicsScene.hpp"
 #include "ViewportDistorter.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMainWindow.hpp"
 #include "StelMainGraphicsView.hpp"
 
 #include <QtOpenGL>
@@ -163,16 +164,16 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	int dur = (int)(duration*1000);
 	QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
 	
-	qDebug() << cursorTimeout << StelMainGraphicsView::getInstance().getFlagShowCursor();
+	// qDebug() << cursorTimeout << StelMainGraphicsView::getInstance().getFlagShowCursor();
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout))
 	{
-		if (StelMainGraphicsView::getInstance().getFlagShowCursor()==true)
-			StelMainGraphicsView::getInstance().setFlagShowCursor(false);
+		if (QApplication::overrideCursor()==0)
+			QApplication::setOverrideCursor(Qt::BlankCursor);
 	}
 	else
 	{
-		if (StelMainGraphicsView::getInstance().getFlagShowCursor()==false)
-			StelMainGraphicsView::getInstance().setFlagShowCursor(true);
+		if (QApplication::overrideCursor()!=0)
+			QApplication::restoreOverrideCursor();
 	}
 }
 
@@ -212,6 +213,7 @@ QString StelAppGraphicsScene::getViewPortDistorterType() const
 void StelAppGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsScene::mouseMoveEvent(event);
+	thereWasAnEvent(); // Refresh screen ASAP
 	if (event->isAccepted())
 		return;
 	
@@ -221,8 +223,6 @@ void StelAppGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	distorter->distortXY(x,y);
 	StelApp::getInstance().handleMove(x, y, event->buttons());
 	event->accept();
-	
-	thereWasAnEvent(); // Refresh screen ASAP
 }
 
 void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -245,9 +245,7 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mouseReleaseEvent(event);
-	
 	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
-	
 	if (event->isAccepted())
 		return;
 
@@ -258,13 +256,13 @@ void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 	event->accept();
-	
 	thereWasAnEvent(); // Refresh screen ASAP
 }
 
 void StelAppGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent* event)
 {
 	QGraphicsScene::wheelEvent(event);
+	thereWasAnEvent(); // Refresh screen ASAP
 	if (event->isAccepted())
 		return;
 	
@@ -275,8 +273,6 @@ void StelAppGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent* event)
 	QWheelEvent newEvent(QPoint(x,y), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
 	event->accept();
-
-	thereWasAnEvent(); // Refresh screen ASAP
 }
 
 void StelAppGraphicsScene::keyPressEvent(QKeyEvent* event)
