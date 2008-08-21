@@ -92,7 +92,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
 	StelObjectP rval;
-	std::vector<StelObjectModule*>::const_iterator iter;
+	QList<StelObjectModule*>::const_iterator iter;
 	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
 	{
 		rval = (*iter)->searchByNameI18n(name);
@@ -106,7 +106,7 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
 	StelObjectP rval;
-	std::vector<StelObjectModule*>::const_iterator iter;
+	QList<StelObjectModule*>::const_iterator iter;
 	for (iter=objectsModule.begin();iter!=objectsModule.end();++iter)
 	{
 		rval = (*iter)->searchByName(name);
@@ -160,18 +160,15 @@ bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, StelModule
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
 	StelObjectP sobj;
-	vector<StelObjectP> candidates;
-	vector<StelObjectP> temp;
+	QList<StelObjectP> candidates;
 
 	// Field of view for a 30 pixel diameter circle on screen
 	float fov_around = core->getProjection()->getFov()/qMin(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight()) * 30.f;
 
 	// Collect the objects inside the range
-	std::vector<StelObjectModule*>::const_iterator iteromgr;
-	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
+	for (QList<StelObjectModule*>::const_iterator iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
-		temp = (*iteromgr)->searchAround(v, fov_around, core);
-		candidates.insert(candidates.begin(), temp.begin(), temp.end());
+		candidates += (*iteromgr)->searchAround(v, fov_around, core);
 	}
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
@@ -183,7 +180,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	float best_object_value;
 	best_object_value = 100000.f;
-	vector<StelObjectP>::iterator iter = candidates.begin();
+	QList<StelObjectP>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
 		core->getProjection()->project((*iter)->getObsJ2000Pos(core->getNavigation()), winpos);
@@ -238,7 +235,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 	}
 	
 	// An object has been found
-	std::vector<StelObjectP> objs;
+	QList<StelObjectP> objs;
 	objs.push_back(obj);
 	return setSelectedObject(objs, action);
 }
@@ -246,7 +243,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 /*************************************************************************
  Notify that we want to select the given objects
 *************************************************************************/
-bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
+bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
 {
 	lastSelectedObjects=objs;
 
@@ -262,10 +259,10 @@ bool StelObjectMgr::setSelectedObject(const std::vector<StelObjectP>& objs, Stel
  Return the list objects of type "withType" which was recently selected by
   the user
 *************************************************************************/
-std::vector<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
+QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 {
-	std::vector<StelObjectP> result;
-	for (std::vector<StelObjectP>::iterator iter=lastSelectedObjects.begin();iter!=lastSelectedObjects.end();++iter)
+	QList<StelObjectP> result;
+	for (QList<StelObjectP>::iterator iter=lastSelectedObjects.begin();iter!=lastSelectedObjects.end();++iter)
 	{
 		if ((*iter)->getType()==type)
 			result.push_back(*iter);
@@ -283,7 +280,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	QStringList result;
 
 	// For all StelObjectmodules..
-	std::vector<StelObjectModule*>::const_iterator iteromgr;
+	QList<StelObjectModule*>::const_iterator iteromgr;
 	for (iteromgr=objectsModule.begin();iteromgr!=objectsModule.end();++iteromgr)
 	{
 		// Get matching object for this module

@@ -91,7 +91,7 @@ public:
 	//! @param prj the Projector object.
 	//! @return an stl vector containing the nebulae located inside the
 	//! limitFov circle around position v.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching nebula object's pointer if exists or NULL.
 	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can 

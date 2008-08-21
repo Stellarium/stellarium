@@ -20,7 +20,7 @@
 #ifndef _STELOBJECTMGR_HPP_
 #define _STELOBJECTMGR_HPP_
 
-#include <vector>
+#include <QList>
 #include <QString>
 #include "vecmath.h"
 #include "StelModule.hpp"
@@ -97,23 +97,23 @@ public:
 	//! @param objs a vector of objects to select
 	//! @param added add the object to selection if true, replace if false
 	//! @return true if at least 1 object was sucessfully selected
-	bool setSelectedObject(const std::vector<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+	bool setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Get the list objects which was recently selected by the user.
-	const std::vector<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
+	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 	
 	//! Return the list objects of type "withType" which was recently selected by the user.
 	//! @param type return only objects of the given type 
-	std::vector<StelObjectP> getSelectedObject(const QString& type);
+	QList<StelObjectP> getSelectedObject(const QString& type);
 
 	//! Set whether a pointer is to be drawn over selected object.
 	void setFlagSelectedObjectPointer(bool b) { objectPointerVisibility = b; }
 	
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
-	std::vector<StelObjectModule*> objectsModule;	
+	QList<StelObjectModule*> objectsModule;	
 	// The last selected object in stellarium
-	std::vector<StelObjectP> lastSelectedObjects;
+	QList<StelObjectP> lastSelectedObjects;
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;	
 

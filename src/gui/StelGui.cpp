@@ -61,7 +61,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	setFont(font);
 }
 
-void InfoPanel::setTextFromObjects(const std::vector<StelObjectP>& selected)
+void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 {
 	if (selected.size() == 0)
 	{

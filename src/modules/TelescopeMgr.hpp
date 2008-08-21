@@ -25,7 +25,6 @@
 #include "vecmath.h"
 #include "STextureTypes.hpp"
 
-#include <vector>
 #include <map>
 #include <QString>
 #include <QStringList>
@@ -52,7 +51,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
 
