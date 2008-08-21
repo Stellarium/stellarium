@@ -76,7 +76,7 @@ public:
   unsigned int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cosLimFov,
-                            vector<StelObjectP > &result) = 0;
+                            QList<StelObjectP > &result) = 0;
   virtual void draw(int index,bool is_inside,
                     const float *rcmag_table, Projector *prj,
                     unsigned int maxMagStarName,float names_brightness,
@@ -123,7 +123,7 @@ private:
 #endif
   void scaleAxis(void);
   void searchAround(int index,const Vec3d &v,double cosLimFov,
-                    vector<StelObjectP > &result);
+                    QList<StelObjectP > &result);
   void draw(int index,bool is_inside,
             const float *rcmag_table, Projector *prj,
             unsigned int maxMagStarName,float names_brightness,
@@ -420,7 +420,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 template<class Star>
 void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
                                           double cosLimFov,
-                                          vector<StelObjectP > &result) {
+                                          QList<StelObjectP > &result) {
   const double d2000 = 2451545.0;
   const double movementFactor = (M_PI/180)*(0.0001/3600)
                            * ((StarMgr::getCurrentJDay()-d2000)/365.25)

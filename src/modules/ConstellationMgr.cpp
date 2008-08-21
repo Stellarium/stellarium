@@ -177,7 +177,7 @@ void ConstellationMgr::setStelStyle(const StelStyle& style)
 
 void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 	if (newSelected.empty())
 	{
 		// Even if do not have anything selected, KEEP constellation selection intact
@@ -186,7 +186,7 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 		return;
 	}
 	
-	const std::vector<StelObjectP> newSelectedConst = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Constellation");
+	const QList<StelObjectP> newSelectedConst = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Constellation");
 	if (!newSelectedConst.empty())
 	{
 //		const boost::intrusive_ptr<Constellation> c = boost::dynamic_pointer_cast<Constellation>(newSelectedConst[0]);
@@ -202,7 +202,7 @@ void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction actio
 	}
 	else
 	{
-		const std::vector<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+		const QList<StelObjectP> newSelectedStar = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 		if (!newSelectedStar.empty())
 		{
 //			if (!added)
@@ -535,9 +535,9 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-vector<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
+QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
-	return vector<StelObjectP>(0);
+	return QList<StelObjectP>();
 }
 
 void ConstellationMgr::loadNames(const QString& namesFile)

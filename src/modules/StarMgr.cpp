@@ -188,7 +188,7 @@ void StarMgr::setGrid(GeodesicGrid* geodesicGrid) {
 
 void StarMgr::drawPointer(const Projector* prj, const Navigator * nav)
 {
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Star");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -585,12 +585,12 @@ void StarMgr::draw(StelCore* core)
 StelObjectP StarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
-  vector<StelObjectP > v = searchAround(pos,
+  QList<StelObjectP > v = searchAround(pos,
                                         0.8, // just an arbitrary number
                                         NULL);
   StelObjectP nearest;
   double cos_angle_nearest = -10.0;
-  for (vector<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {
+  for (QList<StelObjectP >::const_iterator it(v.begin());it!=v.end();it++) {
     const double c = (*it)->getObsJ2000Pos(0)*pos;
     if (c > cos_angle_nearest) {
       cos_angle_nearest = c;
@@ -602,10 +602,10 @@ assert(0);
 
 // Return a stl vector containing the stars located
 // inside the limFov circle around position v
-vector<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
+QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv,
                                            double limFov, // degrees
 										   const StelCore* core) const {
-  vector<StelObjectP > result;
+  QList<StelObjectP > result;
   if (!getFlagStars())
   	return result;
   	

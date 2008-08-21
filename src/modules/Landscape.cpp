@@ -23,8 +23,6 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 
-#include <vector>
-
 #include <QDebug>
 #include <QSettings>
 

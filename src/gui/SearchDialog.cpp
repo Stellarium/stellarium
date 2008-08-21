@@ -174,7 +174,7 @@ void SearchDialog::gotoObject()
 	else if (StelApp::getInstance().getStelObjectMgr().findAndSelectI18n(name))
 	{
 		MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
-		const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+		const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		if (!newSelected.empty())
 		{
 			ui->lineEditSearchSkyObject->clear();

@@ -86,7 +86,7 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case in-sensistive constellation name

@@ -128,7 +128,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 	const Navigator* nav = core->getNavigation();
 	const Projector* prj = core->getProjection();
 	
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -878,9 +878,9 @@ StelObject* SolarSystem::search(Vec3d pos, const StelCore* core) const
 }
 
 // Return a stl vector containing the planets located inside the limFov circle around position v
-vector<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
+QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
-	vector<StelObjectP> result;
+	QList<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
 		
@@ -1195,7 +1195,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 
 void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 {
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Planet");
 	if (!newSelected.empty())
 		setSelected(newSelected[0].get());
 }

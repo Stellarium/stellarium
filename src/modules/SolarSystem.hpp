@@ -92,7 +92,7 @@ public:
 	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
 	//! objects found in the specified area. This vector is not sorted by distance 
 	//! from v.
-	virtual vector<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param NameI18n The case in-sensistive translated planet name.

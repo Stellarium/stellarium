@@ -164,7 +164,7 @@ void NebulaMgr::drawPointer(const StelCore* core)
 	const Navigator* nav = core->getNavigation();
 	const Projector* prj = core->getProjection();
 	
-	const std::vector<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
+	const QList<StelObjectP> newSelected = StelApp::getInstance().getStelObjectMgr().getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -266,9 +266,9 @@ StelObject* NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the limFov circle around position v
-vector<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
+QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
-	vector<StelObjectP> result;
+	QList<StelObjectP> result;
 	if (!getFlagShow())
 		return result;
 		
