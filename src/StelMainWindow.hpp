@@ -45,7 +45,7 @@ public slots:
 	bool getFullScreen() const;
 	//!	Set whether fullscreen is activated or not
 	void setFullScreen(bool);
-
+	
 protected:	
 	//! Reimplemented to delete openGL textures before the GLContext disappears
  	virtual void closeEvent(QCloseEvent* event);
