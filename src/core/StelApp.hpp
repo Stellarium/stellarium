@@ -39,6 +39,7 @@ class LoadingBar;
 class QSettings;
 class QNetworkAccessManager;
 class StelStyle;
+class QTime;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -163,7 +164,7 @@ public slots:
 	float getFps() const {return fps;}
 
 	//! Return the time since when stellarium is running in second.
-	double getTotalRunTime() const;
+	static double getTotalRunTime();
 	
 private:
 	//! Update all object according to the deltaTime in seconds.
@@ -330,7 +331,7 @@ private:
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
 	
-	class QTime* qtime;
+	static QTime* qtime;
 	
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized

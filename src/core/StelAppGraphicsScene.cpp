@@ -41,7 +41,7 @@ StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(
 	singleton = this;
 	
 	distorter = ViewportDistorter::create("none",800,600,NULL);
-	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
+	lastEventTimeSec = StelApp::getTotalRunTime();
 	previousTime = lastEventTimeSec;
 }
 
@@ -139,7 +139,7 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 		return;
 	}
 
-	const double now = StelApp::getInstance().getTotalRunTime();
+	const double now = StelApp::getTotalRunTime();
 	double dt = now-previousTime;
 	previousTime = now;
 	if (dt<0)	// This fix the star scale bug!!
@@ -179,7 +179,7 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 
 void StelAppGraphicsScene::thereWasAnEvent()
 {
-	lastEventTimeSec = StelApp::getInstance().getTotalRunTime();
+	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
 void StelAppGraphicsScene::setViewPortDistorterType(const QString &type)
@@ -228,6 +228,7 @@ void StelAppGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mousePressEvent(event);
+	thereWasAnEvent(); // Refresh screen ASAP
 	if (event->isAccepted())
 		return;
 	
@@ -238,13 +239,12 @@ void StelAppGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 	event->accept();
-	
-	thereWasAnEvent(); // Refresh screen ASAP
 }
 
 void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QGraphicsScene::mouseReleaseEvent(event);
+	thereWasAnEvent(); // Refresh screen ASAP
 	StelMainGraphicsView::getInstance().activateKeyActions(!(hasFocus() && focusItem()!=0));
 	if (event->isAccepted())
 		return;
@@ -256,7 +256,6 @@ void StelAppGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(x,y), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 	event->accept();
-	thereWasAnEvent(); // Refresh screen ASAP
 }
 
 void StelAppGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent* event)
