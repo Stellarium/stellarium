@@ -186,8 +186,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods for controlling the PROJECTION matrix
 	// TODO Doxygen docs: What is this for?
-	bool needGlFrontFaceCW(void) const
-		{return (flipHorz*flipVert < 0.0);}
+	bool needGlFrontFaceCW(void) const {return (flipHorz*flipVert < 0.0);}
 
 	//! Get whether the GL_POINT_SPRITE extension is available now.
 	bool getflagGlPointSprite() const {return flagGlPointSprite;}

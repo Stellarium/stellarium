@@ -219,7 +219,7 @@ StelGeom::ConvexPolygon Projector::getViewportConvexPolygon(double marginX, doub
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	return StelGeom::ConvexPolygon(e0, e1, e2, e3);
+	return needGlFrontFaceCW() ? StelGeom::ConvexPolygon(e1, e0, e3, e2) : StelGeom::ConvexPolygon(e0, e1, e2, e3);
 }
 
 StelGeom::ConvexS Projector::unprojectViewport(void) const {
