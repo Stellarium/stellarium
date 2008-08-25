@@ -315,8 +315,7 @@ void Projector::setFov(double f)
 		fov = maxFov;
 	if (f<minFov)
 		fov = minFov;
-	pixelPerRad = 0.5 * viewportFovDiameter
-	  / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
+	pixelPerRad = 0.5 * viewportFovDiameter / (mapping ? mapping->fovToViewScalingFactor(fov*(M_PI/360.0)) : 1.0);
 }
 
 
