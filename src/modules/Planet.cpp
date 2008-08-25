@@ -724,7 +724,8 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screenSz)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
+//	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
+	glColor3f(1.f, 1.f, 1.f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
