@@ -8,5 +8,6 @@ INSTALL(
         info.ini
         references.txt
         star_names.fab
+		description.en.utf8
     DESTINATION share/${PACKAGE}/skycultures/maori
 )
