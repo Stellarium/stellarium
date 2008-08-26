@@ -809,9 +809,10 @@ void Planet::drawOrbit(const Navigator * nav, const Projector* prj)
 
 	if(on) glEnd();
 
-	glDisable(GL_BLEND);
-	glEnable(GL_LIGHTING);
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
+
 }
 
 
@@ -865,9 +866,9 @@ void Planet::drawTrail(const Navigator * nav, const Projector* prj)
 		glEnd();
 	}
 
-	glDisable(GL_BLEND);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
+  glDisable(GL_LIGHTING);
+  glEnable(GL_TEXTURE_2D);
 }
 
 // update trail points as needed
