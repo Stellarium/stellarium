@@ -40,6 +40,7 @@
 #include "SFont.hpp"
 #include "SkyDrawer.hpp"
 #include "StelStyle.hpp"
+#include "StelUtils.hpp"
 
 #include <QTextStream>
 #include <QSettings>
@@ -661,14 +662,43 @@ void SolarSystem::loadPlanets()
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
+
+		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI/180.0);
+		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI/180.0);
+
+		// Use more common planet North pole data if available
+		// NB: N pole as defined by IAU (NOT right hand rotation rule)
+		// NB: J2000 epoch
+		double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
+		double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
+
+		if(J2000NPoleRA || J2000NPoleDE) {
+			// qDebug() << "Using north pole data for " << englishName << endl;
+
+			Vec3d J2000NPole;
+			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
+		  
+			Vec3d vsop87Pole(matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
+		  
+			double ra, de;
+			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
+		  
+			rotObliquity = (M_PI_2 - de);
+			rotAscNode = (ra + M_PI_2);
+		  
+			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << endl;
+			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
+
+		}
+
 		p->setRotationElements(
 		    pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
 		    pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
 		    pd.value(secname+"/rot_epoch", J2000).toDouble(),
-		    pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI/180.0),
-		    pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI/180.0),
+		    rotObliquity,
+		    rotAscNode,
 		    pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
-		    pd.value(secname+"/sidereal_period",0.).toDouble());
+		    pd.value(secname+"/orbit_visualization_period",0.).toDouble());
 
 
 		if (pd.value(secname+"/rings", 0).toBool()) {
