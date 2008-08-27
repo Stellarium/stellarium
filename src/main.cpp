@@ -25,6 +25,7 @@
 #include "Translator.hpp"
 #include <QDebug>
 #include <QGLFormat>
+#include <QPlastiqueStyle>
 
 // The GettextTranslator class provides i18n support through gettext.
 class GettextTranslator : public QTranslator
@@ -45,6 +46,7 @@ public:
 int main(int argc, char **argv)
 {
 	QApplication::setDesktopSettingsAware(false);
+	QApplication::setStyle(new QPlastiqueStyle());
 	QApplication app(argc, argv);
 	GettextTranslator trans;
 	app.installTranslator(&trans);

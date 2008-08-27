@@ -40,6 +40,7 @@ class QSettings;
 class QNetworkAccessManager;
 class StelStyle;
 class QTime;
+class PlanetLocationMgr;
 
 //! @class StelApp 
 //! Singleton main Stellarium application class.
@@ -103,6 +104,10 @@ public:
 	//! Get the StelObject manager to use for querying from all stellarium objects.
 	//! @return the StelObject manager to use for querying from all stellarium objects
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
+	
+	//! Get the PlanetLocation manager to use for managing stored locations
+	//! @return the PlanetLocation manager to use for managing stored locations
+	PlanetLocationMgr& getPlanetLocationMgr() {return *planetLocationMgr;}
 	
 	//! Get the StelFileMgr for performing file operations.
 	//! @return the StelFileMgr manager to use for performing file operations
@@ -299,6 +304,9 @@ private:
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
 
+	// Manager for the list of observer locations on planets
+	PlanetLocationMgr* planetLocationMgr;
+	
 	//! Utility class for file operations, mainly locating files by name
 	StelFileMgr* stelFileMgr;
 	
