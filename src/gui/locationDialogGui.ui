@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>565</width>
-    <height>591</height>
+    <width>688</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -186,247 +186,187 @@
      <property name="frameShape" >
       <enum>QFrame::StyledPanel</enum>
      </property>
-     <layout class="QVBoxLayout" >
-      <item>
-       <widget class="QLabel" name="label_2" >
+     <layout class="QGridLayout" name="gridLayout_2" >
+      <item rowspan="2" row="0" column="0" >
+       <widget class="QLabel" name="mapLabel" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>400</width>
+          <height>240</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>400</width>
+          <height>240</height>
+         </size>
+        </property>
         <property name="text" >
-         <string>Use the mouse wheel to zoom, drag to move the screen.</string>
+         <string/>
+        </property>
+        <property name="pixmap" >
+         <pixmap>../../data/gui/world.png</pixmap>
+        </property>
+        <property name="scaledContents" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="MapView" name="graphicsView" >
-        <property name="verticalScrollBarPolicy" >
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy" >
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="interactive" >
-         <bool>false</bool>
+      <item row="0" column="1" >
+       <widget class="QLineEdit" name="citySearchLineEdit" >
+        <property name="text" >
+         <string>search city</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QFrame" name="frame" >
-        <property name="frameShape" >
-         <enum>QFrame::StyledPanel</enum>
+      <item row="2" column="0" colspan="2" >
+       <widget class="QGroupBox" name="groupBox" >
+        <property name="title" >
+         <string>Location Information</string>
         </property>
-        <property name="frameShadow" >
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" >
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_5" >
-             <property name="enabled" >
-              <bool>true</bool>
-             </property>
-             <property name="text" >
-              <string>Cursor:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="cursorLabel" >
-             <property name="sizePolicy" >
-              <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_4" >
-             <property name="text" >
-              <string>Selected:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="selectedLabel" >
-             <property name="sizePolicy" >
-              <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFrame" name="frame_2" >
-        <property name="frameShape" >
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow" >
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QGridLayout" >
+        <layout class="QGridLayout" name="gridLayout" >
          <item row="0" column="0" >
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_8" >
-             <property name="minimumSize" >
-              <size>
-               <width>70</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text" >
-              <string>Longitude:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="AngleSpinBox" name="longitudeSpinBox" >
-             <property name="minimumSize" >
-              <size>
-               <width>150</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="toolTip" >
-              <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-             </property>
-             <property name="alignment" >
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_3" >
+           <property name="text" >
+            <string>Name/City:</string>
+           </property>
+          </widget>
          </item>
          <item row="0" column="1" >
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_9" >
-             <property name="minimumSize" >
-              <size>
-               <width>70</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text" >
-              <string>Latitude:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="AngleSpinBox" name="latitudeSpinBox" >
-             <property name="minimumSize" >
-              <size>
-               <width>150</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="toolTip" >
-              <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-             </property>
-             <property name="alignment" >
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
+          <widget class="QLineEdit" name="cityNameLineEdit" />
+         </item>
+         <item row="0" column="2" >
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>Longitude:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" >
+          <widget class="AngleSpinBox" name="longitudeSpinBox" >
+           <property name="minimumSize" >
+            <size>
+             <width>140</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip" >
+            <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0" >
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label" >
-             <property name="minimumSize" >
-              <size>
-               <width>70</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text" >
-              <string>Altitude:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="altitudeSpinBox" >
-             <property name="minimumSize" >
-              <size>
-               <width>100</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="toolTip" >
-              <string>Enter the altitude in meter</string>
-             </property>
-             <property name="suffix" >
-              <string>m</string>
-             </property>
-             <property name="minimum" >
-              <number>-2000</number>
-             </property>
-             <property name="maximum" >
-              <number>200000</number>
-             </property>
-             <property name="singleStep" >
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_4" >
+           <property name="text" >
+            <string>Country:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QLineEdit" name="countryNameLineEdit" />
+         </item>
+         <item row="1" column="2" >
+          <widget class="QLabel" name="label_5" >
+           <property name="text" >
+            <string>Latitude:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" >
+          <widget class="AngleSpinBox" name="latitudeSpinBox" >
+           <property name="minimumSize" >
+            <size>
+             <width>140</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip" >
+            <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4" >
+          <widget class="QPushButton" name="newLocationPushButton" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>New</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" >
+          <widget class="QLabel" name="label_6" >
+           <property name="text" >
+            <string>Planet:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" >
+          <widget class="QLineEdit" name="planetNameLineEdit" />
+         </item>
+         <item row="2" column="2" >
+          <widget class="QLabel" name="label_7" >
+           <property name="text" >
+            <string>Altitude:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3" >
+          <widget class="QSpinBox" name="altitudeSpinBox" >
+           <property name="minimumSize" >
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip" >
+            <string>Enter the altitude in meter</string>
+           </property>
+           <property name="suffix" >
+            <string>m</string>
+           </property>
+           <property name="minimum" >
+            <number>-2000</number>
+           </property>
+           <property name="maximum" >
+            <number>200000</number>
+           </property>
+           <property name="singleStep" >
+            <number>100</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4" >
+          <widget class="QPushButton" name="saveLocationPushButton" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>Add to list</string>
+           </property>
+          </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QListView" name="citiesListView" >
+        <property name="uniformItemSizes" >
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -442,16 +382,13 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>MapView</class>
-   <extends>QGraphicsView</extends>
-   <header>MapView.hpp</header>
-  </customwidget>
-  <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/mainRes.qrc" />
+ </resources>
  <connections/>
 </ui>

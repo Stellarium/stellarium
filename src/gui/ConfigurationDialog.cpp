@@ -75,37 +75,37 @@ void ConfigurationDialog::createDialogContent()
 	
 	// Main tab
 	// Fill the language list widget from the available list
-	QListWidget* c = ui->programLanguageListWidget;
-	c->clear();
-	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	QString l = Translator::iso639_1CodeToNativeName(appLang);
-	QList<QListWidgetItem*> litem = c->findItems(l, Qt::MatchExactly);
-	if (litem.empty() && appLang.contains('_'))
-	{
-		l = appLang.left(appLang.indexOf('_'));
-		l=Translator::iso639_1CodeToNativeName(l);
-		litem = c->findItems(l, Qt::MatchExactly);
-	}
-	if (!litem.empty())
-		c->setCurrentItem(litem.at(0));
-	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
-
-	
-// 	QComboBox* cb = ui->programLanguageComboBox;
-// 	cb->clear();
-// 	cb->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
-// 	QString l2 = Translator::iso639_1CodeToNativeName(appLang);
-// 	int lt = cb->findText(l2, Qt::MatchExactly);
-// 	if (lt == -1 && appLang.contains('_'))
+// 	QListWidget* c = ui->programLanguageListWidget;
+// 	c->clear();
+// 	c->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
+// 	
+// 	QString l = Translator::iso639_1CodeToNativeName(appLang);
+// 	QList<QListWidgetItem*> litem = c->findItems(l, Qt::MatchExactly);
+// 	if (litem.empty() && appLang.contains('_'))
 // 	{
-// 		l2 = appLang.left(appLang.indexOf('_'));
-// 		l2=Translator::iso639_1CodeToNativeName(l2);
-// 		lt = cb->findText(l2, Qt::MatchExactly);
+// 		l = appLang.left(appLang.indexOf('_'));
+// 		l=Translator::iso639_1CodeToNativeName(l);
+// 		litem = c->findItems(l, Qt::MatchExactly);
 // 	}
-// 	if (lt!=-1)
-// 		cb->setCurrentIndex(lt);
-// 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+// 	if (!litem.empty())
+// 		c->setCurrentItem(litem.at(0));
+// 	connect(c, SIGNAL(currentTextChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QComboBox* cb = ui->programLanguageComboBox;
+	cb->clear();
+	cb->addItems(Translator::globalTranslator.getAvailableLanguagesNamesNative(StelApp::getInstance().getFileMgr().getLocaleDir()));
+	QString l2 = Translator::iso639_1CodeToNativeName(appLang);
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && appLang.contains('_'))
+	{
+		l2 = appLang.left(appLang.indexOf('_'));
+		l2=Translator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
 	
 	// Selected object info
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)

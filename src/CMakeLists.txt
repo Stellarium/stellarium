@@ -21,6 +21,8 @@ SET(stellarium_lib_SRCS
 	core/Navigator.hpp
 	core/Observer.cpp
 	core/Observer.hpp
+	core/PlanetLocationMgr.hpp
+	core/PlanetLocationMgr.cpp
 	core/Projector.cpp
 	core/Projector.hpp
 	core/SFont.cpp
@@ -246,6 +248,7 @@ SET(stellarium_MOC_HDRS
 	core/Observer.hpp
 	core/StelApp.hpp
 	core/Navigator.hpp
+	core/PlanetLocationMgr.hpp
 	core/Projector.hpp
 	core/StelAppGraphicsScene.hpp
 	core/STexture.hpp

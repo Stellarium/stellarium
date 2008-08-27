@@ -36,6 +36,7 @@
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
 #include "Projector.hpp"
+#include "PlanetLocationMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -203,6 +204,7 @@ StelApp::~StelApp()
 	delete stelFileMgr; stelFileMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL;	// Also delete all modules
 	delete textureMgr; textureMgr=NULL;
+	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete argList; argList=NULL;
 	
 	delete currentStelStyle;
@@ -230,6 +232,7 @@ void StelApp::init()
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
+	planetLocationMgr = new PlanetLocationMgr();
 	
 	timeMultiplier = 1;
 	

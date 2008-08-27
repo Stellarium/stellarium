@@ -24,6 +24,7 @@
 #include "StelDialog.hpp"
 
 class Ui_locationDialogForm;
+class QModelIndex;
 
 class LocationDialog : public StelDialog
 {
@@ -34,17 +35,20 @@ public:
 	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
-public slots:
-	//! Called when the mapView emit the positionSelected signal
-	void selectPosition(double longitude, double latitude, int altitude, QString city);
-	//! Called when the mapView emit the positionHighlighted signal
-	void highlightPosition(double longitude, double latitude, int altitude, QString city);
-	//! Called when the user direclty change the location from the spinbox
-	void spinBoxChanged();
+	
+private slots:
+	//! Called when the map is clicked
+	//void mapPositionChanged(double longitude, double latitude);
+	//! Called when the user directly change the location from the spinbox
+	//void lonLatAltChanged();
+	//! Called when the planet line edit is changed
+	//void planetChanged(const QString& planet);
+	//! Called when the user activates an item from the list
+	void listItemActivated(const QModelIndex&);
+	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-
 	Ui_locationDialogForm* ui;
 };
 
