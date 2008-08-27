@@ -29,6 +29,7 @@ class Planet;
 class ArtificialPlanet;
 class QSettings;
 
+//! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
 {
 	Q_OBJECT;

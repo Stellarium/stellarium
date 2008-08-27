@@ -20,6 +20,7 @@
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "PlanetLocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -27,6 +28,7 @@
 
 #include <QDebug>
 #include <QFrame>
+#include <QSortFilterProxyModel>
 
 LocationDialog::LocationDialog()
 {
@@ -53,7 +55,6 @@ void LocationDialog::styleChanged()
 void LocationDialog::createDialogContent()
 {
 	// We try to directly connect to the observer slots as much as we can
-	Observer* observer = StelApp::getInstance().getCore()->getObservatory();
 	ui->setupUi(dialog);
 
 	// Init the SpinBox entries
@@ -62,42 +63,56 @@ void LocationDialog::createDialogContent()
 	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getPlanetLocationMgr().getModelAll());
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+							  
+	ui->citiesListView->setModel(proxyModel);
+	
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listItemActivated(const QModelIndex&)));
+	
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
-	connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
-	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
+// 	connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
+// 	connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
+// 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
+// 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
+// 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
 	
 	// Init the position value
-	selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude(), "");
-	spinBoxChanged();
+// 	Observer* observer = StelApp::getInstance().getCore()->getObservatory();
+// 	selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude());
+//	spinBoxChanged();
 }
 
-void LocationDialog::selectPosition(double longitude, double latitude, int altitude, QString city)
-{
-	// Set all the entries
-	ui->longitudeSpinBox->setDegrees(longitude);
-	ui->latitudeSpinBox->setDegrees(latitude);
-	ui->selectedLabel->setText(city);
-	ui->altitudeSpinBox->setValue(altitude);
-	
-	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
-	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
-	StelApp::getInstance().getCore()->getObservatory()->setAltitude(altitude);
-}
+// void LocationDialog::selectPosition(double longitude, double latitude, int altitude, QString city)
+// {
+// 	// Set all the entries
+// 	ui->longitudeSpinBox->setDegrees(longitude);
+// 	ui->latitudeSpinBox->setDegrees(latitude);
+// 	ui->altitudeSpinBox->setValue(altitude);
+// 	
+// 	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
+// 	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
+// 	StelApp::getInstance().getCore()->getObservatory()->setAltitude(altitude);
+// }
 
-void LocationDialog::highlightPosition(double longitude, double latitude, int altitude, QString city)
-{
-	ui->cursorLabel->setText(city);
-	ui->cursorLabel->update();
-}
+// void LocationDialog::spinBoxChanged()
+// {
+// // 	double longitude = ui->longitudeSpinBox->valueDegrees();
+// // 	double latitude = ui->latitudeSpinBox->valueDegrees();
+// // 	int altitude = ui->altitudeSpinBox->value();
+// // 	ui->graphicsView->select(longitude, latitude, altitude);
+// }
 
-void LocationDialog::spinBoxChanged()
+void LocationDialog::listItemActivated(const QModelIndex& index)
 {
-	double longitude = ui->longitudeSpinBox->valueDegrees();
-	double latitude = ui->latitudeSpinBox->valueDegrees();
-	int altitude = ui->altitudeSpinBox->value();
-	ui->graphicsView->select(longitude, latitude, altitude);
+// 	QVariant v = index.data(PlanetLocationMgr::PlanetLocationRole);
+// 	const PlanetLocation* loc = (PlanetLocation*)v.value<void*>();
+// 	ui->cityNameLineEdit->setText(loc->name);
+// 	ui->countryNameLineEdit->setText(loc->countryCode);
+// 	ui->longitudeSpinBox->setDegrees(loc->longitude);
+// 	ui->latitudeSpinBox->setDegrees(loc->latitude);
 }

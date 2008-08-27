@@ -484,7 +484,6 @@ void StelGui::reloadStyle()
 void StelGui::setStelStyle(const StelStyle& style)
 {
 	qApp->setStyleSheet(style.qtStyleSheet);
-	StelMainWindow::getInstance().setStyleSheet(style.qtStyleSheet);	// Why?
 	
 	if (style.confSectionName=="night_color")
 	{
@@ -498,14 +497,6 @@ void StelGui::setStelStyle(const StelStyle& style)
 		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 	}
-	
-	// Update the dialogs
-	configurationDialog.styleChanged();
-	dateTimeDialog.styleChanged();
-	helpDialog.styleChanged();
-	locationDialog.styleChanged();
-	searchDialog.styleChanged();
-	viewDialog.styleChanged();
 }
 
 
