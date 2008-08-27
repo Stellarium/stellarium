@@ -31,7 +31,7 @@ class CustomProxy : public QGraphicsProxyWidget
 	public:
 		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
 		{
-			//setFocusPolicy(Qt::ClickFocus);
+			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
 		void paintWindowFrame(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -43,8 +43,19 @@ class CustomProxy : public QGraphicsProxyWidget
 			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
 		}
 	protected:
-		virtual void focusInEvent(QFocusEvent* event) {QGraphicsProxyWidget::focusInEvent(event); widget()->setWindowOpacity(0.9);}
-		virtual void focusOutEvent(QFocusEvent* event) {QGraphicsProxyWidget::focusOutEvent(event); widget()->setWindowOpacity(0.4); }
+		
+		virtual bool event(QEvent* event)
+		{
+			if (event->type()==QEvent::WindowDeactivate)
+			{
+				widget()->setWindowOpacity(0.4);
+			}
+			if (event->type()==QEvent::WindowActivate)
+			{
+				widget()->setWindowOpacity(0.9);
+			}
+			return QGraphicsProxyWidget::event(event);
+		}
 };
 
 StelDialog::StelDialog() : dialog(NULL)

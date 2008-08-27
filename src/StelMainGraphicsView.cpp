@@ -49,6 +49,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 
 	setObjectName("Mainview");
 	
+	// Avoid white background at init
 	setStyleSheet(QString("QGraphicsView {background: #000;}"));
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -83,9 +84,7 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 
 void StelMainGraphicsView::init()
 {
-	//view->setAutoFillBackground(false);
-	//setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	//setCacheMode(QGraphicsView::CacheNone);	
+	//setAutoFillBackground(false);
 	
 	// This apparently useless line fixes the scrolling bug
 	// I suspect a Qt 4.4 bug -> Fixed with Qt 4.4.1
@@ -95,7 +94,8 @@ void StelMainGraphicsView::init()
 	
 	// Antialiasing works only with SampleBuffer, but it's much slower
 	// setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
-	
+	//setRenderHint(QPainter::TextAntialiasing, false);
+			
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	stelApp->init();
@@ -104,7 +104,6 @@ void StelMainGraphicsView::init()
 	
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-	//setCacheMode(QGraphicsView::CacheBackground);
 	
 	//setOptimizationFlags(QGraphicsView::DontClipPainter|QGraphicsView::DontSavePainterState|QGraphicsView::DontAdjustForAntialiasing);
 	
