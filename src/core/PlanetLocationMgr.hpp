@@ -30,6 +30,7 @@ class QStringListModel;
 class PlanetLocation
 {
 public:
+	PlanetLocation();
 	//! Return a short string which can be used in a list view
 	QString toSmallString() const;
 	//! Location/city name
