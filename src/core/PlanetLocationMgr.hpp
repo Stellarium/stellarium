@@ -34,8 +34,8 @@ public:
 	QString toSmallString() const;
 	//! Location/city name
 	QString name;
-	//! 2 letters country code, or empty string
-	QString countryCode;
+	//! English country name or empty string
+	QString country;
 	//! State/region name
 	QString state;
 	//! English planet name

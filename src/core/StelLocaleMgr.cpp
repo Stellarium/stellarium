@@ -29,8 +29,21 @@
 #include <QSettings>
 #include <QString>
 
+QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
+
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMTShift(0)
-{}
+{
+	// Init country codes to string
+	for (int i=1;i<165;++i)
+	{
+		foreach (QLocale::Country c, QLocale::countriesForLanguage((QLocale::Language)i))
+		{
+			QLocale ll_CC((QLocale::Language)i, c);
+			QString cCode = ll_CC.name().right(2).toLower();
+			countryCodeToStringMap[cCode]=QLocale::countryToString(c);
+		}
+	}
+}
 
 
 StelLocaleMgr::~StelLocaleMgr()
@@ -164,7 +177,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t) const
 
 // Return a string with the local date formated according to the dateFormat variable
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
-	{
+{
 	int year, month, day, dayOfWeek;
 	double shift = 0.0;
 	if (timeZoneMode == STzGMTShift)
@@ -290,3 +303,9 @@ float StelLocaleMgr::getGMTShift(double JD) const
 	else return StelUtils::getGMTShiftFromQT(JD);
 }
 
+// Convert a 2 letter country code to string
+QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
+{
+	QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.find(countryCode);
+	return (i!=countryCodeToStringMap.end()) ? i.value() : QString();
+}

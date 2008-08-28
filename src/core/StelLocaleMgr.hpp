@@ -158,6 +158,9 @@ public:
 	//! @param JD the time and date expressed as a Julian date value.
 	double getJdFromISO8601TimeLocal(const QString&) const;
 
+	//! Convert a 2 letter country code to string
+	static QString countryCodeToString(const QString& countryCode);
+	
 private:
 	// The translator used for astronomical object naming
 	Translator skyTranslator;
@@ -177,6 +180,8 @@ private:
 	// Convert the date format enum to its associated string and reverse
 	SDateFormat stringToSDateFormat(const QString& df) const;
 	QString sDateFormatToString(SDateFormat df) const;
+	
+	static QMap<QString, QString> countryCodeToStringMap;
 };
 
 #endif // _STELLOCALEMGR_HPP_
