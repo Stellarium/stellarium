@@ -25,6 +25,10 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Observer.hpp"
+#include "StelModuleMgr.hpp"
+#include "SolarSystem.hpp"
+#include "Planet.hpp"
+#include "StelFileMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -114,4 +118,23 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 	ui->countryNameLineEdit->setText(loc.countryCode);
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
+	ui->planetNameLineEdit->setText(loc.planetName);
+	
+	// Try to set the proper planet map image
+	SolarSystem* ssm = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Planet* p = ssm->searchByEnglishName(loc.planetName);
+	if (p)
+	{
+		QString path;
+		try
+		{
+			path = StelApp::getInstance().getFileMgr().findFile("textures/"+p->getTextMapName());
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
+			return;
+		}
+		ui->mapLabel->setPixmap(path);
+	}
 }

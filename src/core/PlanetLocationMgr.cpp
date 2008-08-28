@@ -86,6 +86,17 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		lngstring = splitline[6];
 		//loc.population = (int) ( 1000 * popstring.toFloat() );
 
+		if (splitline.size()>7)
+		{
+			// Parse planet name
+			loc.planetName = splitline[7];
+		}
+		else
+		{
+			// Earth by default
+			loc.planetName = "Earth";
+		}
+		
 		loc.longitude = lngstring.left(lngstring.size() - 2).toDouble();
 		if (lngstring.contains("W"))
 			loc.longitude=-loc.longitude;

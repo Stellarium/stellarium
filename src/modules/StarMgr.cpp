@@ -235,7 +235,7 @@ void StarMgr::loadData()
 	{
 		iniFile = StelApp::getInstance().getFileMgr().findFile("stars/default/stars.ini");
 	}
-	catch (exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR - could not find stars/default/stars.ini : " << e.what() << iniFile;
 		return;
@@ -299,7 +299,7 @@ void StarMgr::loadData()
 		{
 			spectral_array.initFromFile(StelApp::getInstance().getFileMgr().findFile("stars/default/" + cat_hip_sp_file_name));
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
 			           << ("stars/default/" + cat_hip_sp_file_name)
@@ -319,7 +319,7 @@ void StarMgr::loadData()
 			component_array.initFromFile(StelApp::getInstance().getFileMgr()
 			        .findFile("stars/default/" + cat_hip_cids_file_name));
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
 			           << ("stars/default/" + cat_hip_cids_file_name)
@@ -850,7 +850,7 @@ void StarMgr::updateSkyCulture()
 	{
 		loadCommonNames(StelApp::getInstance().getFileMgr().findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
 	}
-	catch(exception& e)
+	catch(std::runtime_error& e)
 	{
 		qWarning() << "WARNING: could not load star_names.fab for sky culture " 
 		           << skyCultureDir << ": " << e.what();	
