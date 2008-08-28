@@ -115,7 +115,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 {
 	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
 	ui->cityNameLineEdit->setText(loc.name);
-	ui->countryNameLineEdit->setText(loc.countryCode);
+	ui->countryNameLineEdit->setText(loc.country);
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->planetNameLineEdit->setText(loc.planetName);
