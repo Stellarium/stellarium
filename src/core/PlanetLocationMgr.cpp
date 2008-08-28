@@ -19,6 +19,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "PlanetLocationMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -28,7 +29,7 @@ int PlanetLocationMgr::PlanetLocationRole = Qt::UserRole+1;
 
 QString PlanetLocation::toSmallString() const
 {
-	return name + ", " + state + ", " +countryCode;
+	return name + ", " + state + ", " +country;
 }
 
 PlanetLocationMgr::PlanetLocationMgr()
@@ -79,7 +80,10 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		splitline = rawline.split("\t");
 		loc.name    = splitline[0];
 		loc.state   = splitline[1];
-		loc.countryCode = splitline[2];
+		loc.country = StelLocaleMgr::countryCodeToString(splitline[2]);
+		if (loc.country.isEmpty())
+			loc.country = splitline[2];
+					
 		//loc.role    = splitline[3];
 		popstring = splitline[4];
 		latstring = splitline[5];
