@@ -28,6 +28,7 @@ class SolarSystem;
 class Planet;
 class ArtificialPlanet;
 class QSettings;
+class PlanetLocation;
 
 //! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
@@ -90,6 +91,9 @@ public slots:
 	void load(const QString& file, const QString& section);
 	//! Save observatory informations to the given config file
 	void save(const QString& file, const QString& section) const;
+	
+	//! Set the observer position to this planet location
+	void setPlanetLocation(const PlanetLocation& loc);
 	
 private:
     const SolarSystem &ssystem;

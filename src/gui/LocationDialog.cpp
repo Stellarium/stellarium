@@ -66,7 +66,7 @@ void LocationDialog::createDialogContent()
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
 	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
-
+	
 	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getPlanetLocationMgr().getModelAll());
 	proxyModel->sort(0, Qt::AscendingOrder);
@@ -137,4 +137,6 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 		}
 		ui->mapLabel->setPixmap(path);
 	}
+	
+	StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
 }

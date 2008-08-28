@@ -29,20 +29,46 @@
 #include <QSettings>
 #include <QString>
 
+#include <QFile>
+
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, INSTALL_LOCALEDIR, ""), GMTShift(0)
 {
-	// Init country codes to string
-	for (int i=1;i<165;++i)
+	// Init country codes to string using Qt data (slow)
+// 	for (int i=1;i<165;++i)
+// 	{
+// 		foreach (QLocale::Country c, QLocale::countriesForLanguage((QLocale::Language)i))
+// 		{
+// 			QLocale ll_CC((QLocale::Language)i, c);
+// 			QString cCode = ll_CC.name().right(2).toLower();
+// 			countryCodeToStringMap[cCode]=QLocale::countryToString(c);
+// 		}
+// 	}
+//	// Save to file
+// 	QFile file("countryCodes.dat");
+// 	file.open(QIODevice::WriteOnly);
+// 	QDataStream out(&file);    // save the data serialized to the file
+// 	out << countryCodeToStringMap;
+// 	file.close();
+	
+	// Load from file
+	QString path;
+	try
 	{
-		foreach (QLocale::Country c, QLocale::countriesForLanguage((QLocale::Language)i))
-		{
-			QLocale ll_CC((QLocale::Language)i, c);
-			QString cCode = ll_CC.name().right(2).toLower();
-			countryCodeToStringMap[cCode]=QLocale::countryToString(c);
-		}
+		path = StelApp::getInstance().getFileMgr().findFile("data/countryCodes.dat");
 	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR - could not find country code data file." << e.what();
+		return;
+	}
+	
+	QFile file(path);
+	file.open(QIODevice::ReadOnly);
+	QDataStream in(&file);	// read the data serialized from the file
+	in >> countryCodeToStringMap;
+	file.close();
 }
 
 
