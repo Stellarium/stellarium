@@ -143,6 +143,8 @@ public:
 	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
 	
+	const QString& getTextMapName() const {return texMapName;}
+	
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
@@ -255,6 +257,7 @@ protected:
 
 	QString englishName;            // english planet name
 	QString nameI18;                // International translated name
+	QString texMapName;				// Texture file path
 	int flagHalo;                   // Set wether a little "star like" halo will be drawn
 	int flagLighting;               // Set wether light computation has to be proceed
 	RotationElements re;            // Rotation param
