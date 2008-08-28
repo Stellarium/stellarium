@@ -27,6 +27,8 @@
 
 int PlanetLocationMgr::PlanetLocationRole = Qt::UserRole+1;
 
+PlanetLocation::PlanetLocation() : longitude(0.), latitude(0.), altitude(0) {;}
+
 QString PlanetLocation::toSmallString() const
 {
 	return name + ", " + state + ", " +country;

@@ -28,7 +28,7 @@
 #include "StelCore.hpp" // getNavigator
 #include "Navigator.hpp" // getJDay
   // setting the titlebar text:
-
+#include "PlanetLocationMgr.hpp"
 #include <cassert>
 #include <QDebug>
 #include <QSettings>
@@ -359,4 +359,15 @@ void Observer::update(int deltaTime)
 		longitude = startLon - moveToMult*(startLon-endLon);
 		altitude = int(startAlt - moveToMult*(startAlt-endAlt));
 	}
+}
+
+//! Set the observer position to this planet location
+void Observer::setPlanetLocation(const PlanetLocation& loc)
+{
+	locationName = loc.name;
+	if (!setHomePlanet(loc.planetName))
+		planet = ssystem.getEarth();
+	latitude = loc.latitude;
+	longitude = loc.longitude;
+	altitude = loc.altitude;
 }
