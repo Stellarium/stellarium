@@ -51,7 +51,7 @@ Planet::Planet(Planet *parent,
                double oblateness,
                Vec3f color,
                float albedo,
-               const QString& texMapName,
+               const QString& atexMapName,
                const QString& texHaloName,
                posFuncType coordFunc,
                OsulatingFunctType *osculatingFunc,
@@ -71,6 +71,7 @@ Planet::Planet(Planet *parent,
 	  hidden(hidden), 
 	  atmosphere(hasAtmosphere)
 {
+	texMapName = atexMapName;
 	lastOrbitJD =0;
 	deltaJD = JD_SECOND;
 	orbitCached = 0;
