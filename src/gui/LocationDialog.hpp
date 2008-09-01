@@ -38,7 +38,8 @@ public:
 	
 private slots:
 	//! Called when the map is clicked
-	//void mapPositionChanged(double longitude, double latitude);
+	void setPositionFromMap(double longitude, double latitude);
+	
 	//! Called when the user directly change the location from the spinbox
 	//void lonLatAltChanged();
 	//! Called when the planet line edit is changed
