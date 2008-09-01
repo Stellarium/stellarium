@@ -25,6 +25,7 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
+class PlanetLocation;
 
 class LocationDialog : public StelDialog
 {
@@ -36,21 +37,20 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 	
-private slots:
-	//! Called when the map is clicked
-	void setPositionFromMap(double longitude, double latitude);
-	
-	//! Called when the user directly change the location from the spinbox
-	//void lonLatAltChanged();
-	//! Called when the planet line edit is changed
-	//void planetChanged(const QString& planet);
-	//! Called when the user activates an item from the list
-	void listItemActivated(const QModelIndex&);
-	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
 	Ui_locationDialogForm* ui;
+	
+private:
+	void setFieldsFromLocation(const PlanetLocation& loc);
+	
+private slots:
+	//! Called when the map is clicked
+	void setPositionFromMap(double longitude, double latitude);
+	
+	//! Called when the user activates an item from the list
+	void listItemActivated(const QModelIndex&);
 };
 
 #endif // _LOCATIONDIALOG_HPP_

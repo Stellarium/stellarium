@@ -825,7 +825,7 @@ void SolarSystem::draw(StelCore* core)
 	// special case: draw earth shadow over moon if appropriate
 	// stencil buffer is set up in moon drawing above
 	// This effect curently only looks right from earth viewpoint
-	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
+	if (nav->getHomePlanet()->getEnglishName() == "Earth") 
 		drawEarthShadow(nav, prj);
 
 	drawPointer(core);
@@ -1161,7 +1161,8 @@ void SolarSystem::update(double deltaTime)
 
 	// Determine if home planet has changed, and restart planet trails
 	// since the data is no longer useful
-	if(nav->getHomePlanet() != lastHomePlanet) {
+	if (nav->getHomePlanet() != lastHomePlanet)
+	{
 		lastHomePlanet = nav->getHomePlanet();
 		restartTrails = true;
 	}

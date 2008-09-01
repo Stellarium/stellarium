@@ -151,37 +151,36 @@ void ArtificialPlanet::computeAverage(double f1) {
 
 
 
-Observer::Observer(const SolarSystem &ssystem)
-         :ssystem(ssystem),
-          planet(0), artificialPlanet(0),
-          longitude(0.), latitude(0.), altitude(0)
+Observer::Observer(const SolarSystem &ssystem) : ssystem(ssystem), planet(0), artificialPlanet(0)
 {
-	locationName = "Anonymous_Location";
 	flagMoveTo = false;
 }
 
 Observer::~Observer()
 {
-  if (artificialPlanet) delete artificialPlanet;
+	if (artificialPlanet)
+		delete artificialPlanet;
 }
 
-Vec3d Observer::getCenterVsop87Pos(void) const {
-  return getHomePlanet()->getHeliocentricEclipticPos();
+Vec3d Observer::getCenterVsop87Pos(void) const
+{
+	return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
-double Observer::getDistanceFromCenter(void) const {
-  return getHomePlanet()->getRadius() + (altitude/(1000*AU));
+double Observer::getDistanceFromCenter(void) const
+{
+	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
 }
 
 Mat4d Observer::getRotLocalToEquatorial(double jd) const
 {
-	double lat = latitude;
+	double lat = currentLocation.latitude;
 	// TODO: Figure out how to keep continuity in sky as reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
 	if( lat > 89.5 )  lat = 89.5;
 	if( lat < -89.5 ) lat = -89.5;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+longitude)*(M_PI/180.))
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*(M_PI/180.))
 		* Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
 
@@ -193,78 +192,14 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const
 // Get the sideral time shifted by the observer longitude
 double Observer::getLocalSideralTime(double jd) const
 {
-	return (getHomePlanet()->getSiderealTime(jd)+longitude)*M_PI/180.;
+	return (getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.;
 }
-	
-void Observer::load(const QString& file, const QString& section)
+
+void Observer::init()
 {
-	QSettings conf(file, QSettings::IniFormat);
-	if (conf.status() != QSettings::NoError)
-	{
-		qDebug() << "ERROR parsing ini file " << file;
-		assert(0);
-	}
-
-	if (!conf.childGroups().contains(section))
-	{
-		qWarning() << "ERROR : Can't find observator section " << section << " in file " << file;
-	}
-	load(&conf, section);
+	const QString locationName = StelApp::getInstance().getSettings()->value("init_location/location","Paris, Paris, France").toString();
+	setPlanetLocation(StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(locationName));
 }
-
-void Observer::load(QSettings* conf, const QString& section)
-{
-	assert(conf);
-	locationName = conf->value(section + "/name").toString();
-
-	for (int i=0;i<locationName.size();++i)
-	{
-		if (locationName[i]=='_') locationName[i]=' ';
-	}
-
-	if (!setHomePlanet(conf->value(section+"/home_planet", "Earth").toString())) {
-		planet = ssystem.getEarth();
-	}
-    
-	qDebug() << "Loading location: " << locationName <<", on " << planet->getEnglishName();
-    
-	// qDebug("(home_planet should be: \"%s\" is: \"%s\") ",
-	//         conf.get_str(section, "home_planet").c_str(),
-	//         planet->getEnglishName().c_str());
-	latitude  = StelUtils::getDecAngle(conf->value(section+"/latitude").toString());
-	longitude = StelUtils::getDecAngle(conf->value(section+"/longitude").toString());
-	altitude = conf->value(section+"/altitude",0).toInt();
-}
-
-void Observer::save(const QString& file, const QString& section) const
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	setConf(conf, section);
-}
-
-
-// change settings but don't write to files
-void Observer::setConf(QSettings* conf, const QString& section) const
-{
-	conf->setValue(section + "/name", locationName);
-	conf->setValue(section + "/home_planet", planet->getEnglishName());
-	conf->setValue(section + "/latitude", StelUtils::radToDmsStr(latitude*M_PI/180.0, true, true));
-	conf->setValue(section + "/longitude", StelUtils::radToDmsStr(longitude*M_PI/180.0, true, true));
-	conf->setValue(section + "/altitude", altitude);
-	// TODO: clear out old timezone settings from this section
-	// if still in loaded conf?  Potential for confusion.
-}
-
-
-QString Observer::getHomePlanetNameI18n(void) const {
-  const Planet *p = getHomePlanet();
-  return p ? p->getNameI18n() : "";
-}
-
-QString Observer::getLocationName(void) const {
-	return artificialPlanet ? "" : locationName;
-}
-
 
 bool Observer::setHomePlanet(const QString &english_name)
 {
@@ -288,7 +223,7 @@ void Observer::setHomePlanet(const Planet *p, float transitSeconds)
 			if (!artificialPlanet)
 			{
 				artificialPlanet = new ArtificialPlanet(*planet);
-				locationName = "";
+				currentLocation.name = "";
 			}
 			artificialPlanet->setDest(*p);
 			timeToGo = (int)(1000.f * transitSeconds); // milliseconds
@@ -297,29 +232,20 @@ void Observer::setHomePlanet(const Planet *p, float transitSeconds)
 	}
 }
 
-const Planet *Observer::getHomePlanet(void) const {
-  return artificialPlanet ? artificialPlanet : planet;
+const Planet* Observer::getHomePlanet(void) const
+{
+	return artificialPlanet ? artificialPlanet : planet;
 }
 
 
 // move gradually to a new observation location
-void Observer::moveTo(double lat, double lon, double alt, int duration, const QString& _name)
+void Observer::moveTo(const PlanetLocation& target, double duration)
 {
-  flagMoveTo = true;
-
-  startLat = latitude;
-  endLat = lat;
-
-  startLon = longitude;
-  endLon = lon;
-
-  startAlt = altitude;
-  endAlt = alt;
-
-  moveToCoef = 1.0f/duration;
-  moveToMult = 0;
-
-  locationName = _name;
+	flagMoveTo = true;
+	moveStartLocation = currentLocation;
+	moveTargetLocation = target;
+	moveToCoef = 1.0f/duration;
+	moveToMult = 0;
 }
 
 
@@ -354,20 +280,20 @@ void Observer::update(int deltaTime)
 		{
 			moveToMult = 1.f;
 			flagMoveTo = false;
+			currentLocation = moveTargetLocation;
 		}
-		latitude = startLat - moveToMult*(startLat-endLat);
-		longitude = startLon - moveToMult*(startLon-endLon);
-		altitude = int(startAlt - moveToMult*(startAlt-endAlt));
+		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
+		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
+		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
+		currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
+		currentLocation.planetName = "SpaceShip";
 	}
 }
 
 //! Set the observer position to this planet location
 void Observer::setPlanetLocation(const PlanetLocation& loc)
 {
-	locationName = loc.name;
+	currentLocation = loc;
 	if (!setHomePlanet(loc.planetName))
 		planet = ssystem.getEarth();
-	latitude = loc.latitude;
-	longitude = loc.longitude;
-	altitude = loc.altitude;
 }
