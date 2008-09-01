@@ -191,7 +191,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2" >
       <item rowspan="2" row="0" column="0" >
-       <widget class="QLabel" name="mapLabel" >
+       <widget class="MapLabel" name="mapLabel" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
           <horstretch>0</horstretch>
@@ -395,6 +395,11 @@
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>MapLabel</class>
+   <extends>QLabel</extends>
+   <header>MapLabel.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

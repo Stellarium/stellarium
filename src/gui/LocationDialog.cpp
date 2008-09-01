@@ -79,8 +79,9 @@ void LocationDialog::createDialogContent()
 	
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-// 	connect(ui->graphicsView, SIGNAL(positionSelected(double, double, int, QString)), this, SLOT(selectPosition(double, double, int, QString)));
-// 	connect(ui->graphicsView, SIGNAL(positionHighlighted(double, double, int, QString)), this, SLOT(highlightPosition(double, double, int, QString)));
+	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
+
+	
 // 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 // 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 // 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
@@ -91,17 +92,15 @@ void LocationDialog::createDialogContent()
 //	spinBoxChanged();
 }
 
-// void LocationDialog::selectPosition(double longitude, double latitude, int altitude, QString city)
-// {
-// 	// Set all the entries
-// 	ui->longitudeSpinBox->setDegrees(longitude);
-// 	ui->latitudeSpinBox->setDegrees(latitude);
-// 	ui->altitudeSpinBox->setValue(altitude);
-// 	
-// 	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
-// 	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
-// 	StelApp::getInstance().getCore()->getObservatory()->setAltitude(altitude);
-// }
+void LocationDialog::setPositionFromMap(double longitude, double latitude)
+{
+	// Set all the entries
+	ui->longitudeSpinBox->setDegrees(longitude);
+	ui->latitudeSpinBox->setDegrees(latitude);
+	
+	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
+	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
+}
 
 // void LocationDialog::spinBoxChanged()
 // {
