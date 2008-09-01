@@ -44,6 +44,5 @@ void MapLabel::mousePressEvent(QMouseEvent* event)
 {
 	const double lon = ((double)event->pos().x())/size().width()*360.-180.;
 	const double lat = 90.-((double)event->pos().y())/size().height()*180.;
-	setCursorPos(lon, lat);
 	emit(positionChanged(lon, lat));
 }

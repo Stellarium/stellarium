@@ -30,6 +30,7 @@
 #include "Planet.hpp"
 #include "StelFileMgr.hpp"
 
+#include <QSettings>
 #include <QDebug>
 #include <QFrame>
 #include <QSortFilterProxyModel>
@@ -81,38 +82,29 @@ void LocationDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
+	setFieldsFromLocation(StelApp::getInstance().getCore()->getObservatory()->getCurrentLocation());
 	
 // 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 // 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 // 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
-	
-	// Init the position value
-// 	Observer* observer = StelApp::getInstance().getCore()->getObservatory();
-// 	selectPosition(observer->getLongitude(), observer->getLatitude(), observer->getAltitude());
-//	spinBoxChanged();
 }
 
 void LocationDialog::setPositionFromMap(double longitude, double latitude)
 {
-	// Set all the entries
-	ui->longitudeSpinBox->setDegrees(longitude);
-	ui->latitudeSpinBox->setDegrees(latitude);
+	PlanetLocation loc;
+	loc.longitude = longitude;
+	loc.latitude = latitude;
+	loc.planetName = ui->planetNameLineEdit->text();
+	loc.name = "New Location";
+	loc.country = "";
+	loc.state = "";
 	
-	StelApp::getInstance().getCore()->getObservatory()->setLongitude(longitude);
-	StelApp::getInstance().getCore()->getObservatory()->setLatitude(latitude);
+	setFieldsFromLocation(loc);
+	StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
 }
 
-// void LocationDialog::spinBoxChanged()
-// {
-// // 	double longitude = ui->longitudeSpinBox->valueDegrees();
-// // 	double latitude = ui->latitudeSpinBox->valueDegrees();
-// // 	int altitude = ui->altitudeSpinBox->value();
-// // 	ui->graphicsView->select(longitude, latitude, altitude);
-// }
-
-void LocationDialog::listItemActivated(const QModelIndex& index)
+void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 {
-	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
 	ui->cityNameLineEdit->setText(loc.name);
 	ui->countryNameLineEdit->setText(loc.country);
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
@@ -154,6 +146,16 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 			ui->mapLabel->setPixmap(path);
 		}
 	}
-	
+	// Set pointer position
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+}
+
+void LocationDialog::listItemActivated(const QModelIndex& index)
+{
+	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
+	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
+	
+	// Make location persistent
+	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());
 }

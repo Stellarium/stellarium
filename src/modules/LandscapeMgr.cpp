@@ -182,7 +182,7 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
 	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
 	                          ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
-	                          eye, prj, obs->getLatitude(), obs->getAltitude(),
+	                          eye, prj, obs->getCurrentLocation().latitude, obs->getCurrentLocation().altitude,
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	
 	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
@@ -249,7 +249,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(eye, prj, nav);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getLatitude());
+	cardinalsPoints->draw(prj, StelApp::getInstance().getCore()->getObservatory()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()
@@ -341,20 +341,7 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	
 	if (getFlagLandscapeSetsLocation())
 	{
-		// Set the planet and moveto the right location
-		if (landscape->getPlanetName()!="") 
-			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(landscape->getPlanetName());
-	
-		if (landscape->getLongitude() > -500 && landscape->getLatitude() > -500) 
-		{
-			StelApp::getInstance().getCore()->getObservatory()->moveTo(
-				landscape->getLatitude(),
-				landscape->getLongitude(),
-				landscape->getAltitude(),
-				0,
-    			landscape->getName());
-		}
-	
+		StelApp::getInstance().getCore()->getObservatory()->moveTo(landscape->getLocation());
 	}
 	return 1;
 }
@@ -438,14 +425,14 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 	desc+=landscape->getAuthorName();
 	desc+="<br>";
 	desc+="<b>"+q_("Location: ")+"</b>";
-	if (landscape->getLongitude()>-500.0 && landscape->getLatitude()>-500.0)
+	if (landscape->getLocation().longitude>-500.0 && landscape->getLocation().latitude>-500.0)
 	{
-		desc += StelUtils::radToDmsStrAdapt(landscape->getLongitude() * M_PI/180.);
-		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLatitude() *M_PI/180.);
-		desc += QString(q_(", %1 m")).arg(landscape->getAltitude());
-		if (landscape->getPlanetName()!="")
+		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
+		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
+		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
+		if (landscape->getLocation().planetName!="")
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getPlanetName();
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getLocation().planetName;
 		}
 		desc += "<br><br>";
 	}

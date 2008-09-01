@@ -31,7 +31,10 @@ PlanetLocation::PlanetLocation() : longitude(0.), latitude(0.), altitude(0) {;}
 
 QString PlanetLocation::toSmallString() const
 {
-	return name + ", " + state + ", " +country;
+	if (state.isEmpty())
+		return name + ", " +country;
+	else
+		return name + ", " + state + ", " +country;
 }
 
 PlanetLocationMgr::PlanetLocationMgr()
@@ -119,4 +122,18 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 
 PlanetLocationMgr::~PlanetLocationMgr()
 {
+}
+
+const PlanetLocation PlanetLocationMgr::locationForSmallString(const QString& s) const
+{
+	QMap<QString, PlanetLocation>::const_iterator iter = locations.find(s);
+	if (iter==locations.end())
+	{
+		qWarning() << "Warning: location " << s << "is unknown, use Paris as default location.";
+		return locations["Paris, Paris, France"];
+	}
+	else
+	{
+		return locations.value(s);
+	}
 }

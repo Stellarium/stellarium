@@ -87,7 +87,7 @@ void StelCore::init()
 	// Observer
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	observatory = new Observer(*solsystem);
-	observatory->load(StelApp::getInstance().getSettings(), "init_location");
+	observatory->init();
 
 	// Navigator
 	navigation = new Navigator(observatory);
@@ -135,7 +135,6 @@ void StelCore::update(double deltaTime)
 	// Position of sun and all the satellites (ie planets)
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	solsystem->computePositions(navigation->getJDay(), navigation->getHomePlanet()->getHeliocentricEclipticPos());
-	//qDebug() << "getHeliocentricEclipticPos()[0]=" << navigation->getHomePlanet()->getHeliocentricEclipticPos()[0];
 
 	// Transform matrices between coordinates systems
 	navigation->updateTransformMatrices();
