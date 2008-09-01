@@ -20,6 +20,7 @@
 #ifndef _OBSERVER_HPP_
 #define _OBSERVER_HPP_
 
+#include "PlanetLocation.hpp"
 #include <QObject>
 #include <QString>
 #include "vecmath.h"
@@ -28,7 +29,6 @@ class SolarSystem;
 class Planet;
 class ArtificialPlanet;
 class QSettings;
-class PlanetLocation;
 
 //! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
@@ -40,15 +40,11 @@ public:
 	~Observer();
 
 	void update(int deltaTime);  // for moving observing position 
-	void setHomePlanet(const Planet *p,float transitSeconds=2.f);
-	const Planet *getHomePlanet(void) const;
 	
-	void setConf(QSettings* conf, const QString& section) const;
-	void load(QSettings* conf, const QString& section);
+	void init();
 	
-	//! TODO: Move to MovementMgr
-	//! @param duration in ms
-	void moveTo(double lat, double lon, double alt, int duration, const QString& locationName);
+	//! @param duration in s
+	void moveTo(const PlanetLocation& target, double duration=1);
 	
 	Vec3d getCenterVsop87Pos(void) const;
 	double getDistanceFromCenter(void) const;
@@ -60,59 +56,34 @@ public:
 	//! @return the locale sideral time in radian
 	double getLocalSideralTime(double jd) const;
 	
+	const Planet *getHomePlanet(void) const;
+	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Method callable from script and GUI
-	//! Set the home planet from its english name
-	bool setHomePlanet(const QString& englishName);
-	
-	//! Get the translated home planet name
-	QString getHomePlanetNameI18n(void) const;
-	
-	//! Get the observatory name
-	QString getLocationName(void) const;
-	
-	//! Get the latitude in degrees
-	double getLatitude(void) const {return latitude;}
-	//! Set the latitude in degrees
-	void setLatitude(double l) {latitude=l;}
-	
-	//! Get the longitude in degrees
-	double getLongitude(void) const {return longitude;}
-	//! Set the longitude in degrees
-	void setLongitude(double l) {longitude=l;}
-	
-	//! Get the altitude in meters
-	int getAltitude(void) const {return altitude;}
-	//! Set the altitude in meters
-	void setAltitude(int a) {altitude=a;}
-
-	//! Load observatory informations from the given config file
-	void load(const QString& file, const QString& section);
-	//! Save observatory informations to the given config file
-	void save(const QString& file, const QString& section) const;
-	
-	//! Set the observer position to this planet location
+	//! Get the informations on the current location
+	const PlanetLocation& getCurrentLocation() const {return currentLocation;}
+	//! Set the new current location
 	void setPlanetLocation(const PlanetLocation& loc);
 	
 private:
+	//! Set the home planet from its english name
+	bool setHomePlanet(const QString& englishName);
+	
+	void setHomePlanet(const Planet *p,float transitSeconds=2.f);
+	
     const SolarSystem &ssystem;
-	QString locationName;			// Position name
 
-	const Planet *planet;
+	const Planet* planet;
     ArtificialPlanet *artificialPlanet;
     int timeToGo;
-
-	double longitude;		// Longitude in degree
-	double latitude;		// Latitude in degree
-	int altitude;			// Altitude in meter
+	PlanetLocation currentLocation;
 
 	// for changing position
 	bool flagMoveTo;
-	double startLat, endLat;
-	double startLon, endLon;
-	double startAlt, endAlt;
 	float moveToCoef, moveToMult;
+	PlanetLocation moveStartLocation;
+	PlanetLocation moveTargetLocation;
 };
 
 #endif // _OBSERVER_HPP_

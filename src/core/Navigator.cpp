@@ -164,7 +164,7 @@ void Navigator::addSiderealDays(double d)
 {
 	const Planet* home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System Observer")
-	d *= home->getSiderealDay();
+		d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
 }
 
@@ -173,8 +173,15 @@ void Navigator::moveObserverToSelected(void)
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
 		Planet* pl = dynamic_cast<Planet*>(StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0].get());
-		if (pl) 
-			StelApp::getInstance().getCore()->getObservatory()->setHomePlanet(pl);
+		if (pl)
+		{
+			// We need to move to the selected planet. Try to generate a location from the current one
+			PlanetLocation loc = StelApp::getInstance().getCore()->getObservatory()->getCurrentLocation();
+			loc.planetName = pl->getEnglishName();
+			loc.name = "-";
+			loc.state = "";
+			StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
+		}
 	}
 }
 

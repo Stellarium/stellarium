@@ -21,6 +21,7 @@ SET(stellarium_lib_SRCS
 	core/Navigator.hpp
 	core/Observer.cpp
 	core/Observer.hpp
+	core/PlanetLocation.hpp
 	core/PlanetLocationMgr.hpp
 	core/PlanetLocationMgr.cpp
 	core/Projector.cpp

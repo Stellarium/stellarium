@@ -22,18 +22,19 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
+#include "PlanetLocation.hpp"
 
 #include <QDebug>
 #include <QSettings>
 
-Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.),
-		     planet(""), latitude(-1000), longitude(-1000), altitude(1)
+Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.)
 {
 	validLandscape = 0;
 }
 
 Landscape::~Landscape()
-{}
+{
+}
 
 
 // Load attributes common to all landscapes
@@ -55,12 +56,21 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	}
 	
 	// Optional data
-	if (landscapeIni.contains("location/planet")) planet = landscapeIni.value("location/planet").toString();
-	if (landscapeIni.contains("location/altitude")) altitude = landscapeIni.value("location/altitude").toInt();
+	if (landscapeIni.contains("location/planet"))
+		location.planetName = landscapeIni.value("location/planet").toString();
+	if (landscapeIni.contains("location/altitude"))
+		location.altitude = landscapeIni.value("location/altitude").toInt();
 	if (landscapeIni.contains("location/latitude")) 
-		latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString());
+		location.latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString());
 	if (landscapeIni.contains("location/longitude")) 
-		longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString());
+		location.longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString());
+	if (landscapeIni.contains("location/country")) 
+		location.country = landscapeIni.value("location/country").toString();
+	if (landscapeIni.contains("location/state")) 
+		location.state = landscapeIni.value("location/state").toString();
+	if (landscapeIni.contains("location/name")) 
+		location.name = landscapeIni.value("location/name").toString();
+	location.landscapeKey = name;
 }
 
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)

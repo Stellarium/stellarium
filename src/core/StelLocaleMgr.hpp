@@ -25,7 +25,8 @@
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau
-class StelLocaleMgr{
+class StelLocaleMgr
+{
 public:
 	StelLocaleMgr();
 	~StelLocaleMgr();
@@ -182,6 +183,8 @@ private:
 	QString sDateFormatToString(SDateFormat df) const;
 	
 	static QMap<QString, QString> countryCodeToStringMap;
+	
+	static void generateCountryList();
 };
 
 #endif // _STELLOCALEMGR_HPP_

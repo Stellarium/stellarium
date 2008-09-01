@@ -28,8 +28,10 @@
 #include "Fader.hpp"
 #include "StelUtils.hpp"
 #include "STextureTypes.hpp"
+#include "PlanetLocation.hpp"
 
 class QSettings;
+class PlanetLocation;
 
 //! Store and manages the displaying of the Landscape
 class Landscape
@@ -62,16 +64,10 @@ public:
 	QString getAuthorName() const {return author;}
 	//! Get landscape description
 	QString getDescription() const {return description;}
-	
-	//! Return the (English) planet name for the landscape
-	QString getPlanetName(void) { return planet; }	
-	//! Return the latitude for the landscape in degree
-	double getLatitude(void) { return latitude; }
-	//! Return the longitude for the landscape in degree
-	double getLongitude(void) { return longitude; }
-	//! Return the altitude for the landscape in m
-	double getAltitude(void) { return altitude; }
 
+	//! Return the associated location or NULL
+	const PlanetLocation& getLocation() const {return location;}
+	
 protected:
 	//! Load attributes common to all landscapes
 	//! @param A reference to an existant QSettings object which describes the landscape
@@ -91,16 +87,14 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
-	QString planet;
-	double latitude;
-	double longitude;
-	double altitude;
 	
 	typedef struct
 	{
 		STextureSP tex;
 		float texCoords[4];
 	} landscapeTexCoord;
+	
+	PlanetLocation location;
 };
 
 
