@@ -32,7 +32,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "Planet.hpp"
-#include "Observer.hpp"
 #include "StelIniParser.hpp"
 #include "SFont.hpp"
 #include "SkyDrawer.hpp"

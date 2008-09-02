@@ -74,14 +74,14 @@ public:
 	
 	//! Update Observer info if needed. Default implementation does nothing.
 	virtual void update(double deltaTime);
-	virtual const Planet* getHomePlanet(void) const {return isObserverLifeOver() ? planet : (Planet*)artificialPlanet;}
+	virtual const Planet* getHomePlanet(void) const {return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : (Planet*)artificialPlanet;}
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
 	virtual Observer* getNextObserver() const {return new Observer(moveTargetLocation);}
 	
 private:
 	PlanetLocation moveStartLocation;
 	PlanetLocation moveTargetLocation;
-	ArtificialPlanet *artificialPlanet;
+	ArtificialPlanet* artificialPlanet;
 	double timeToGo;
 	double transitSeconds;
 };

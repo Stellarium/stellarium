@@ -22,7 +22,6 @@
 #include "Navigator.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
-#include "Observer.hpp"
 #include "StelUtils.hpp"
 #include "Translator.hpp"
 

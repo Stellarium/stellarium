@@ -22,7 +22,6 @@
 #include "ui_searchDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Observer.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MovementMgr.hpp"
