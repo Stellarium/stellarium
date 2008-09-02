@@ -58,6 +58,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	// Optional data
 	if (landscapeIni.contains("location/planet"))
 		location.planetName = landscapeIni.value("location/planet").toString();
+	else
+		location.planetName = "Earth";
 	if (landscapeIni.contains("location/altitude"))
 		location.altitude = landscapeIni.value("location/altitude").toInt();
 	if (landscapeIni.contains("location/latitude")) 
@@ -70,6 +72,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.state = landscapeIni.value("location/state").toString();
 	if (landscapeIni.contains("location/name")) 
 		location.name = landscapeIni.value("location/name").toString();
+	else
+		location.name = name;
 	location.landscapeKey = name;
 }
 

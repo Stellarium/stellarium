@@ -90,7 +90,7 @@ def main():
 	masterTile.credits = "ESO"
 	masterTile.infoUrl = ""
 	
-	masterTile.outputJSON(qCompress=True, maxLevelPerFile=3)
+	masterTile.outputJSON(qCompress=False, maxLevelPerFile=3)
 	
 if __name__ == "__main__":
     main()

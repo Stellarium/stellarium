@@ -33,7 +33,6 @@
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
-#include "Observer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "Navigator.hpp"
 #include "StelObjectType.hpp"
