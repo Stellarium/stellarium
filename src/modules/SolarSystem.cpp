@@ -1273,3 +1273,14 @@ bool SolarSystem::biggerDistance::operator()(Planet* p1, Planet* p2)
 {
 	return p1->getDistance() > p2->getDistance();
 }
+
+// Get the list of all the planet english names
+QStringList SolarSystem::getAllPlanetEnglishNames() const
+{
+	QStringList res;
+	for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+	{
+		res.append((*iter)->englishName);
+	}
+	return res;
+}
