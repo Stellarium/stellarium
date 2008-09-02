@@ -24,7 +24,7 @@
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Observer.hpp"
+#include "Navigator.hpp"
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -82,7 +82,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
-	setFieldsFromLocation(StelApp::getInstance().getCore()->getObservatory()->getCurrentLocation());
+	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 	
 // 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
 // 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
@@ -100,7 +100,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.state = "";
 	
 	setFieldsFromLocation(loc);
-	StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
+	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc,0);
 }
 
 void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
@@ -154,7 +154,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 {
 	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
 	setFieldsFromLocation(loc);
-	StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
+	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
 	// Make location persistent
 	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());

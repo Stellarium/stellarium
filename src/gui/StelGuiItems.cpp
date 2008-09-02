@@ -378,10 +378,10 @@ void BottomStelBar::updateText()
 		datetime->setText(newDate);
 	}
 	
-	QString newLocation = flagShowLocation ? q_(core->getObservatory()->getCurrentLocation().planetName) +", "
-			+core->getObservatory()->getCurrentLocation().name + ", "
+	QString newLocation = flagShowLocation ? q_(core->getNavigation()->getCurrentLocation().planetName) +", "
+			+core->getNavigation()->getCurrentLocation().name + ", "
 			// xgettext:no-c-format
-			+q_("%1m").arg(core->getObservatory()->getCurrentLocation().altitude) : " ";
+			+q_("%1m").arg(core->getNavigation()->getCurrentLocation().altitude) : " ";
 	if (location->text()!=newLocation)
 	{
 		updatePos = true;
