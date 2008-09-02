@@ -22,14 +22,12 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "Translator.hpp"
-  // unselecting selected planet after setHomePlanet:
 #include "StelApp.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelCore.hpp" // getNavigator
-#include "Navigator.hpp" // getJDay
-  // setting the titlebar text:
+#include "StelCore.hpp"
+#include "Navigator.hpp"
 #include "PlanetLocationMgr.hpp"
-#include <cassert>
+#include "StelModuleMgr.hpp"
+
 #include <QDebug>
 #include <QSettings>
 #include <QStringList>
@@ -151,15 +149,19 @@ void ArtificialPlanet::computeAverage(double f1) {
 
 
 
-Observer::Observer(const SolarSystem &ssystem) : ssystem(ssystem), planet(0), artificialPlanet(0)
+Observer::Observer(const PlanetLocation &loc) : currentLocation(loc)
 {
-	flagMoveTo = false;
+	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	planet = ssystem->searchByEnglishName(loc.planetName);
+	if (planet==NULL)
+	{
+		qWarning() << "Can't create Observer on planet " + loc.planetName + " because it is unknown. Use Earth as default.";
+		planet=ssystem->getEarth();
+	}
 }
 
 Observer::~Observer()
 {
-	if (artificialPlanet)
-		delete artificialPlanet;
 }
 
 Vec3d Observer::getCenterVsop87Pos(void) const
@@ -189,111 +191,71 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const
 	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-// Get the sideral time shifted by the observer longitude
-double Observer::getLocalSideralTime(double jd) const
+SpaceShipObserver::SpaceShipObserver(const PlanetLocation& startLoc, const PlanetLocation& target, double atransitSeconds) : Observer(startLoc),
+		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
-	return (getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.;
-}
-
-void Observer::init()
-{
-	const QString locationName = StelApp::getInstance().getSettings()->value("init_location/location","Paris, Paris, France").toString();
-	setPlanetLocation(StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(locationName));
-}
-
-bool Observer::setHomePlanet(const QString &english_name)
-{
-	Planet *p = ssystem.searchByEnglishName(english_name);
-	if (p==NULL)
+	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
 	{
-		qWarning() << "Can't set home planet to " + english_name + " because it is unknown";
-  		return false;
-	}
-	setHomePlanet(p);
-	return true;
-}
-
-void Observer::setHomePlanet(const Planet *p, float transitSeconds)
-{
-	assert(p); // Assertion enables to track bad calls. Please keep it this way.
-	if (planet != p)
-	{
-		if (planet)
+		SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+		Planet *startPlanet = ssystem->searchByEnglishName(moveStartLocation.planetName);
+		Planet *targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
+		if (startPlanet==NULL || targetPlanet==NULL)
 		{
-			if (!artificialPlanet)
+			qWarning() << "Can't move from planet " + moveStartLocation.planetName + " to planet " + moveTargetLocation.planetName + " because it is unknown";
+			timeToGo = -1.;	// Will abort properly the move
+			if (targetPlanet==NULL)
 			{
-				artificialPlanet = new ArtificialPlanet(*planet);
-				currentLocation.name = "";
+				// Stay at the same position as a failover
+				moveTargetLocation = moveStartLocation;
 			}
-			artificialPlanet->setDest(*p);
-			timeToGo = (int)(1000.f * transitSeconds); // milliseconds
-    	}
-		planet = p; 
+			return;
+		}
+		
+		artificialPlanet = new ArtificialPlanet(*startPlanet);
+		artificialPlanet->setDest(*targetPlanet);
+		planet = targetPlanet;
 	}
+	timeToGo = transitSeconds;
 }
 
-const Planet* Observer::getHomePlanet(void) const
-{
-	return artificialPlanet ? artificialPlanet : planet;
-}
-
-
-// move gradually to a new observation location
-void Observer::moveTo(const PlanetLocation& target, double duration)
-{
-	flagMoveTo = true;
-	moveStartLocation = currentLocation;
-	moveTargetLocation = target;
-	moveToCoef = 1.0f/duration;
-	moveToMult = 0;
-}
-
-
-// for moving observator position gradually
-// TODO need to work on direction of motion...
-void Observer::update(int deltaTime)
+SpaceShipObserver::~SpaceShipObserver()
 {
 	if (artificialPlanet)
+		delete artificialPlanet;
+	artificialPlanet=NULL;
+}
+
+void SpaceShipObserver::update(double deltaTime)
+{
+	timeToGo -= deltaTime;
+	
+	// If move is over 
+	if (timeToGo <= 0.)
 	{
-		timeToGo -= deltaTime;
-		if (timeToGo <= 0)
+		timeToGo = 0.;	
+		currentLocation = moveTargetLocation;
+	}
+	else
+	{
+		if (artificialPlanet)
 		{
-			delete artificialPlanet;
-			artificialPlanet = NULL;
-			StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
-			if (objmgr.getWasSelected() && objmgr.getSelectedObject()[0].get()==planet)
-			{
-				objmgr.unSelect();
-			}
+			// Update SpaceShip position
+			artificialPlanet->computeAverage(timeToGo/(timeToGo + deltaTime));
+			currentLocation.planetName = "SpaceShip";
+			currentLocation.name = moveStartLocation.planetName + " -> " + moveTargetLocation.planetName;
 		}
 		else
 		{
-			const double f1 = timeToGo/(double)(timeToGo + deltaTime);
-			artificialPlanet->computeAverage(f1);
+			currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
+			currentLocation.planetName = moveTargetLocation.planetName;
 		}
-	}
-
-	if (flagMoveTo)
-	{
-		moveToMult += moveToCoef*deltaTime;
-		if (moveToMult >= 1.f)
-		{
-			moveToMult = 1.f;
-			flagMoveTo = false;
-			currentLocation = moveTargetLocation;
-		}
+		
+		// Move the lon/lat/alt on the planet
+		const double moveToMult = 1.-(timeToGo/transitSeconds);
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
-		currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
-		currentLocation.planetName = "SpaceShip";
+		
+		
 	}
-}
-
-//! Set the observer position to this planet location
-void Observer::setPlanetLocation(const PlanetLocation& loc)
-{
-	currentLocation = loc;
-	if (!setHomePlanet(loc.planetName))
-		planet = ssystem.getEarth();
 }

@@ -76,11 +76,6 @@ public:
 	SkyDrawer* getSkyDrawer() {return skyDrawer;}
 	//! Get the current SkyDrawer used in the core.
 	const SkyDrawer* getSkyDrawer() const {return skyDrawer;}
-	
-	//! Get the current observer description.
-	Observer* getObservatory() {return observatory;}
-	//! Get the current observer description.
-	const Observer* getObservatory() const {return observatory;}
 
 	//! Get the shared instance of GeodesicGrid
 	GeodesicGrid* getGeodesicGrid() {return geodesicGrid;}
@@ -89,7 +84,6 @@ public:
 	
 private:
 	Navigator* navigation;			// Manage all navigation parameters, coordinate transformations etc..
-	Observer* observatory;			// Manage observer position
 	Projector* projection;			// Manage the projection mode and matrix
 	ToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
 	SkyDrawer* skyDrawer;

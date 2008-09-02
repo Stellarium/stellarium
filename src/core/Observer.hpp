@@ -25,65 +25,65 @@
 #include <QString>
 #include "vecmath.h"
 
-class SolarSystem;
 class Planet;
 class ArtificialPlanet;
-class QSettings;
+class Observer;
 
 //! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
 {
 	Q_OBJECT;
-
+	
 public:
-	Observer(const class SolarSystem &ssystem);
+	//! Create a new Observer instance which is at a fixed PlanetLocation
+	Observer(const PlanetLocation& loc);
 	~Observer();
 
-	void update(int deltaTime);  // for moving observing position 
-	
-	void init();
-	
-	//! @param duration in s
-	void moveTo(const PlanetLocation& target, double duration=1);
+	//! Update Observer info if needed. Default implementation does nothing.
+	virtual void update(double deltaTime) {;}
 	
 	Vec3d getCenterVsop87Pos(void) const;
 	double getDistanceFromCenter(void) const;
 	Mat4d getRotLocalToEquatorial(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 	
-	//! Get the sideral time shifted by the observer longitude
-	//! @param jd the Julian Day
-	//! @return the locale sideral time in radian
-	double getLocalSideralTime(double jd) const;
+	virtual const Planet* getHomePlanet(void) const {return planet;}
 	
-	const Planet *getHomePlanet(void) const;
-	
-public slots:
-	///////////////////////////////////////////////////////////////////////////
-	// Method callable from script and GUI
 	//! Get the informations on the current location
 	const PlanetLocation& getCurrentLocation() const {return currentLocation;}
-	//! Set the new current location
-	void setPlanetLocation(const PlanetLocation& loc);
+	
+	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one
+	//! provided by the getNextObserver() method
+	virtual bool isObserverLifeOver() const {return false;}
+	
+	//! Get the next observer to use once the life of this one is over
+	virtual Observer* getNextObserver() const {return new Observer(currentLocation);}
+	
+protected:
+	PlanetLocation currentLocation;
+	const Planet* planet;    
+};
+
+//! @class SpaceShipObserver
+//! An observer which moves from from one position to another one and/or from one planet to another one
+class SpaceShipObserver : public Observer
+{
+public:
+	SpaceShipObserver(const PlanetLocation& startLoc, const PlanetLocation& target, double transitSeconds=1.f);
+	~SpaceShipObserver();
+	
+	//! Update Observer info if needed. Default implementation does nothing.
+	virtual void update(double deltaTime);
+	virtual const Planet* getHomePlanet(void) const {return isObserverLifeOver() ? planet : (Planet*)artificialPlanet;}
+	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
+	virtual Observer* getNextObserver() const {return new Observer(moveTargetLocation);}
 	
 private:
-	//! Set the home planet from its english name
-	bool setHomePlanet(const QString& englishName);
-	
-	void setHomePlanet(const Planet *p,float transitSeconds=2.f);
-	
-    const SolarSystem &ssystem;
-
-	const Planet* planet;
-    ArtificialPlanet *artificialPlanet;
-    int timeToGo;
-	PlanetLocation currentLocation;
-
-	// for changing position
-	bool flagMoveTo;
-	float moveToCoef, moveToMult;
 	PlanetLocation moveStartLocation;
 	PlanetLocation moveTargetLocation;
+	ArtificialPlanet *artificialPlanet;
+	double timeToGo;
+	double transitSeconds;
 };
 
 #endif // _OBSERVER_HPP_
