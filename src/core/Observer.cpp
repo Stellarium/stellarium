@@ -194,11 +194,11 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const
 SpaceShipObserver::SpaceShipObserver(const PlanetLocation& startLoc, const PlanetLocation& target, double atransitSeconds) : Observer(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
+	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Planet *targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
 	{
-		SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
 		Planet *startPlanet = ssystem->searchByEnglishName(moveStartLocation.planetName);
-		Planet *targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 		if (startPlanet==NULL || targetPlanet==NULL)
 		{
 			qWarning() << "Can't move from planet " + moveStartLocation.planetName + " to planet " + moveTargetLocation.planetName + " because it is unknown";
@@ -213,8 +213,8 @@ SpaceShipObserver::SpaceShipObserver(const PlanetLocation& startLoc, const Plane
 		
 		artificialPlanet = new ArtificialPlanet(*startPlanet);
 		artificialPlanet->setDest(*targetPlanet);
-		planet = targetPlanet;
 	}
+	planet = targetPlanet;
 	timeToGo = transitSeconds;
 }
 
@@ -223,6 +223,7 @@ SpaceShipObserver::~SpaceShipObserver()
 	if (artificialPlanet)
 		delete artificialPlanet;
 	artificialPlanet=NULL;
+	planet = NULL;
 }
 
 void SpaceShipObserver::update(double deltaTime)
@@ -255,7 +256,5 @@ void SpaceShipObserver::update(double deltaTime)
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
-		
-		
 	}
 }

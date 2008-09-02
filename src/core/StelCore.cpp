@@ -18,7 +18,6 @@
 
 #include "StelCore.hpp"
 #include "Navigator.hpp"
-#include "Observer.hpp"
 #include "Projector.hpp"
 #include "ToneReproducer.hpp"
 #include "SkyDrawer.hpp"

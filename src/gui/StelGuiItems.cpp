@@ -20,11 +20,11 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Projector.hpp"
-#include "Observer.hpp"
 #include "Navigator.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "PlanetLocation.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
