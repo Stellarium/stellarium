@@ -53,7 +53,7 @@ float StelObject::getOnScreenSize(const StelCore* core) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getObsSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getObservatory()->getLocalSideralTime(core->getNavigation()->getJDay()))* getObsEquatorialPos(core->getNavigation());
+	return Mat4d::zrotation(-core->getNavigation()->getLocalSideralTime())* getObsEquatorialPos(core->getNavigation());
 }
 
 // Get observer local alt/az coordinate

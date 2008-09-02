@@ -25,6 +25,7 @@
 #include "Planet.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelCore.hpp"
+#include "PlanetLocationMgr.hpp"
 
 #include <QSettings>
 #include <QStringList>
@@ -32,13 +33,8 @@
 #include <QDebug>
 
 ////////////////////////////////////////////////////////////////////////////////
-Navigator::Navigator(Observer* obs) : timeSpeed(JD_SECOND), JDay(0.), position(obs)
+Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 {
-	if (!position)
-	{
-		qCritical() << "ERROR : Can't create a Navigator without a valid Observator";
-		exit(1);
-	}
 	localVision=Vec3d(1.,0.,0.);
 	equVision=Vec3d(1.,0.,0.);
 	J2000EquVision=Vec3d(1.,0.,0.);  // not correct yet...
@@ -58,6 +54,9 @@ void Navigator::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
+	const QString locationName = StelApp::getInstance().getSettings()->value("init_location/location","Paris, Paris, France").toString();
+	position = new Observer(StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(locationName));
+	
 	setTimeNow();
 	setLocalVision(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
@@ -176,13 +175,41 @@ void Navigator::moveObserverToSelected(void)
 		if (pl)
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
-			PlanetLocation loc = StelApp::getInstance().getCore()->getObservatory()->getCurrentLocation();
+			PlanetLocation loc = getCurrentLocation();
 			loc.planetName = pl->getEnglishName();
 			loc.name = "-";
 			loc.state = "";
-			StelApp::getInstance().getCore()->getObservatory()->setPlanetLocation(loc);
+			moveObserverTo(loc);
 		}
 	}
+}
+
+// Get the informations on the current location
+const PlanetLocation& Navigator::getCurrentLocation() const
+{
+	return position->getCurrentLocation();
+}
+
+// Smoothly move the observer to the given location
+void Navigator::moveObserverTo(const PlanetLocation& target, double duration)
+{
+	if (duration>0.)
+	{
+		SpaceShipObserver* newObs = new SpaceShipObserver(getCurrentLocation(), target, duration);
+		delete position;
+		position = newObs;
+	}
+	else
+	{
+		delete position;
+		position = new Observer(target);
+	}
+}
+
+// Get the sideral time shifted by the observer longitude
+double Navigator::getLocalSideralTime() const
+{
+	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
 void Navigator::setInitViewDirectionToCurrent(void)
@@ -246,6 +273,20 @@ void Navigator::updateTime(double deltaTime)
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
 	if (JDay<-34803211.500012) JDay = -34803211.500012;
+	
+	if (position->isObserverLifeOver())
+	{
+		// Unselect if the new home planet is the previously selected object
+		StelObjectMgr &objmgr(StelApp::getInstance().getStelObjectMgr());
+		if (objmgr.getWasSelected() && objmgr.getSelectedObject()[0].get()==position->getHomePlanet())
+		{
+			objmgr.unSelect();
+		}
+		Observer* newObs = position->getNextObserver();
+		delete position;
+		position = newObs;
+	}
+	position->update(deltaTime);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

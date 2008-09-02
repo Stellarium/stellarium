@@ -52,7 +52,6 @@ StelCore::~StelCore()
 {
 	delete navigation; navigation=NULL;
 	delete projection; projection=NULL;
-	delete observatory; observatory=NULL;
 	delete toneConverter; toneConverter=NULL;
 	delete geodesicGrid; geodesicGrid=NULL;
 	delete skyDrawer; skyDrawer=NULL;
@@ -83,14 +82,9 @@ StelCore::~StelCore()
  Load core data and initialize with default values
 *************************************************************************/
 void StelCore::init()
-{	
-	// Observer
-	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	observatory = new Observer(*solsystem);
-	observatory->init();
-
+{
 	// Navigator
-	navigation = new Navigator(observatory);
+	navigation = new Navigator();
 	navigation->init();
 	
 	movementMgr = new MovementMgr(this);
@@ -129,7 +123,6 @@ void StelCore::init()
 void StelCore::update(double deltaTime)
 {
 	// Update the position of observation and time etc...
-	observatory->update((int)(deltaTime*1000));
 	navigation->updateTime(deltaTime);
 
 	// Position of sun and all the satellites (ie planets)

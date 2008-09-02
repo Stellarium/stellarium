@@ -40,6 +40,7 @@ class Observer;
 class StelObject;
 class LoadingBar;
 class Planet;
+class PlanetLocation;
 
 //! @class Navigator
 //! Manages a navigation context.  This includes:
@@ -63,7 +64,7 @@ public:
 	enum MountMode { MountAltAzimuthal, MountEquatorial };
 	
 	// Create and initialise to default a navigation context
-	Navigator(Observer* obs);
+	Navigator();
 	~Navigator();
 
 	void init();
@@ -84,6 +85,16 @@ public:
 	void setLocalVision(const Vec3d& _pos);
 	void setEquVision(const Vec3d& _pos);
 	void setJ2000EquVision(const Vec3d& _pos);
+	
+	//! Get the informations on the current location
+	const PlanetLocation& getCurrentLocation() const;
+	//! Smoothly move the observer to the given location
+	//! @param duration in s
+	void moveObserverTo(const PlanetLocation& target, double duration=1.);
+	
+	//! Get the sideral time shifted by the observer longitude
+	//! @return the locale sideral time in radian
+	double getLocalSideralTime() const;
 	
 	const Planet *getHomePlanet(void) const;
 
