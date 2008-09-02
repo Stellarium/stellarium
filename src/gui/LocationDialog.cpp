@@ -75,6 +75,9 @@ void LocationDialog::createDialogContent()
 							  
 	ui->citiesListView->setModel(proxyModel);
 	
+	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetEnglishNames());
+	
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listItemActivated(const QModelIndex&)));
 	
@@ -94,7 +97,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	PlanetLocation loc;
 	loc.longitude = longitude;
 	loc.latitude = latitude;
-	loc.planetName = ui->planetNameLineEdit->text();
+	loc.planetName = ui->planetNameComboBox->currentText();
 	loc.name = "New Location";
 	loc.country = "";
 	loc.state = "";
@@ -109,7 +112,13 @@ void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 	ui->countryNameLineEdit->setText(loc.country);
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
-	ui->planetNameLineEdit->setText(loc.planetName);
+	int idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use Earth as default
+		ui->planetNameComboBox->findText("Earth", Qt::MatchCaseSensitive);
+	}
+	ui->planetNameComboBox->setCurrentIndex(idx);
 	
 	// Try to set the proper planet map image
 	if (loc.planetName=="Earth")

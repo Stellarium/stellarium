@@ -77,6 +77,8 @@ void StelLocaleMgr::generateCountryList()
 	countryCodeToStringMap["cu"]="Cuba";
 	countryCodeToStringMap["mg"]="Madagascar";
 	countryCodeToStringMap["rs"]="Serbia";
+	countryCodeToStringMap["ps"]="Palestinian Territories";
+	countryCodeToStringMap["tm"]="Turkmenistan";
 	
 	// Save to file
 	QFile file("countryCodes.dat");
