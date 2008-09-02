@@ -255,17 +255,17 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
+         <item row="0" column="2" >
           <widget class="QLineEdit" name="cityNameLineEdit" />
          </item>
-         <item row="0" column="2" >
+         <item row="0" column="3" >
           <widget class="QLabel" name="label" >
            <property name="text" >
             <string>Longitude:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3" >
+         <item row="0" column="4" >
           <widget class="AngleSpinBox" name="longitudeSpinBox" >
            <property name="minimumSize" >
             <size>
@@ -288,17 +288,17 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
+         <item row="1" column="2" >
           <widget class="QLineEdit" name="countryNameLineEdit" />
          </item>
-         <item row="1" column="2" >
+         <item row="1" column="3" >
           <widget class="QLabel" name="label_5" >
            <property name="text" >
             <string>Latitude:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="3" >
+         <item row="1" column="4" >
           <widget class="AngleSpinBox" name="latitudeSpinBox" >
            <property name="minimumSize" >
             <size>
@@ -321,17 +321,14 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QLineEdit" name="planetNameLineEdit" />
-         </item>
-         <item row="2" column="2" >
+         <item row="2" column="3" >
           <widget class="QLabel" name="label_7" >
            <property name="text" >
             <string>Altitude:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="3" >
+         <item row="2" column="4" >
           <widget class="QSpinBox" name="altitudeSpinBox" >
            <property name="minimumSize" >
             <size>
@@ -343,7 +340,7 @@
             <string>Enter the altitude in meter</string>
            </property>
            <property name="suffix" >
-            <string>m</string>
+            <string> m</string>
            </property>
            <property name="minimum" >
             <number>-2000</number>
@@ -356,7 +353,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="4" >
+         <item row="2" column="5" >
           <widget class="QPushButton" name="saveLocationPushButton" >
            <property name="enabled" >
             <bool>false</bool>
@@ -366,10 +363,23 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="2" >
+          <widget class="QComboBox" name="planetNameComboBox" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
      </layout>
+     <zorder>mapLabel</zorder>
+     <zorder>label_2</zorder>
+     <zorder>citySearchLineEdit</zorder>
+     <zorder>citiesListView</zorder>
+     <zorder>groupBox</zorder>
+     <zorder>saveLocationPushButton</zorder>
     </widget>
    </item>
   </layout>
