@@ -162,6 +162,9 @@ public:
 	//! Convert a 2 letter country code to string
 	static QString countryCodeToString(const QString& countryCode);
 	
+	//! Return a list of all the known country names
+	static QStringList getAllCountryNames();
+	
 private:
 	// The translator used for astronomical object naming
 	Translator skyTranslator;

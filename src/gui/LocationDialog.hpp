@@ -45,12 +45,24 @@ protected:
 private:
 	void setFieldsFromLocation(const PlanetLocation& loc);
 	
+	//! True if the user is currently editing a new location
+	bool isEditingNew;
+	void reportEdit();
+	
+	void disconnectEditSignals();
+	void connectEditSignals();
+	
 private slots:
 	//! Called when the map is clicked
 	void setPositionFromMap(double longitude, double latitude);
 	
 	//! Called when the user activates an item from the list
 	void listItemActivated(const QModelIndex&);
+	
+	//! Called when the planet/country name is changed by hand
+	void comboBoxChanged(const QString& text);
+	//! Called when latitude/longitude/altitude is modified
+	void spinBoxChanged(int i=0);
 };
 
 #endif // _LOCATIONDIALOG_HPP_

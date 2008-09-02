@@ -288,9 +288,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2" >
-          <widget class="QLineEdit" name="countryNameLineEdit" />
-         </item>
          <item row="1" column="3" >
           <widget class="QLabel" name="label_5" >
            <property name="text" >
@@ -365,6 +362,13 @@
          </item>
          <item row="2" column="2" >
           <widget class="QComboBox" name="planetNameComboBox" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2" >
+          <widget class="QComboBox" name="countryNameComboBox" >
            <property name="editable" >
             <bool>true</bool>
            </property>
