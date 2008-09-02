@@ -29,13 +29,14 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "StelFileMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
 #include <QFrame>
 #include <QSortFilterProxyModel>
 
-LocationDialog::LocationDialog()
+LocationDialog::LocationDialog() : isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
 }
@@ -78,6 +79,8 @@ void LocationDialog::createDialogContent()
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetEnglishNames());
 	
+	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
+	
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listItemActivated(const QModelIndex&)));
 	
@@ -87,11 +90,27 @@ void LocationDialog::createDialogContent()
 
 	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 	
-// 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-// 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged(void)), this, SLOT(spinBoxChanged(void)));
-// 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), observer, SLOT(setAltitude(int)));
+	connectEditSignals();
 }
 
+void LocationDialog::disconnectEditSignals()
+{
+	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(spinBoxChanged()));
+	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(spinBoxChanged()));
+	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChanged(int)));
+	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
+	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
+}
+
+void LocationDialog::connectEditSignals()
+{
+	connect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(spinBoxChanged()));
+	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(spinBoxChanged()));
+	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChanged(int)));
+	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
+	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
+}
+	
 void LocationDialog::setPositionFromMap(double longitude, double latitude)
 {
 	PlanetLocation loc;
@@ -108,15 +127,24 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 
 void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 {
+	disconnectEditSignals();
+	
 	ui->cityNameLineEdit->setText(loc.name);
-	ui->countryNameLineEdit->setText(loc.country);
+	int idx = ui->countryNameComboBox->findText(loc.country);
+	if (idx==-1)
+	{
+		// Use France as default
+		ui->countryNameComboBox->findText("France", Qt::MatchCaseSensitive);
+	}
+	ui->countryNameComboBox->setCurrentIndex(idx);
+	
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
-	int idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
+	idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Earth as default
-		ui->planetNameComboBox->findText("Earth", Qt::MatchCaseSensitive);
+		ui->planetNameComboBox->findText("Earth");
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	
@@ -157,14 +185,43 @@ void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 	}
 	// Set pointer position
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	
+	connectEditSignals();
 }
 
 void LocationDialog::listItemActivated(const QModelIndex& index)
 {
+	isEditingNew=false;
+	ui->saveLocationPushButton->setEnabled(false);
+	
 	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
 	setFieldsFromLocation(loc);
+	
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
 	// Make location persistent
 	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());
+}
+
+// Called when the planet name is changed by hand
+void LocationDialog::comboBoxChanged(const QString& text)
+{
+	reportEdit();
+}
+
+void LocationDialog::reportEdit()
+{
+	if (isEditingNew)
+		return;
+		
+	// The user starts editing manually a field, this creates automatically a new location
+	// and allows to save it to the user locations list
+	isEditingNew=true;
+	ui->saveLocationPushButton->setEnabled(true);
+	ui->cityNameLineEdit->setText("New Location");
+}
+
+void LocationDialog::spinBoxChanged(int i)
+{
+	reportEdit();
 }

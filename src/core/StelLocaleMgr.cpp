@@ -347,3 +347,12 @@ QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
 	QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.find(countryCode);
 	return (i!=countryCodeToStringMap.end()) ? i.value() : QString();
 }
+
+// Return a list of all the known country names
+QStringList StelLocaleMgr::getAllCountryNames()
+{
+	QStringList res;
+	for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.begin();i!=countryCodeToStringMap.end();++i)
+		res.append(i.value());
+	return res;
+}
