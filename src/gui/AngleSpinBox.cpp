@@ -148,8 +148,12 @@ QString AngleSpinBox::text()
 	return lineEdit()->text();
 }
 
-double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, PrefixType prefix)
+double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, PrefixType prefix) const
 {
+	if (prefix==Unknown)
+	{
+		prefix=currentPrefixType;
+	}
 	int sign=1;
 	if (input.startsWith(negativePrefix(prefix), Qt::CaseInsensitive)) 
 	{
