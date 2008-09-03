@@ -26,7 +26,7 @@
 class PlanetLocation
 {
 public:
-	PlanetLocation() : longitude(0.), latitude(0.), altitude(0) {;}
+	PlanetLocation() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
 
 	//! Return a short string which can be used in a list view
 	QString toSmallString() const
@@ -41,7 +41,7 @@ public:
 	QString name;
 	//! English country name or empty string
 	QString country;
-	//! State/region name
+	//! State/region name (usefull if 2 locations of the same country have the same name)
 	QString state;
 	//! English planet name
 	QString planetName;
@@ -51,6 +51,8 @@ public:
 	double latitude;
 	//! Altitude in meter
 	int altitude;
+	//! Light pollution index following Bortle scale
+	float bortleScaleIndex;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
 };

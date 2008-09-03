@@ -70,6 +70,8 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 	{
 		PlanetLocation loc;
 		rawline=sourcestream.readLine();
+		if (rawline.startsWith('#'))
+			continue;
 		splitline = rawline.split("\t");
 		loc.name    = splitline[0];
 		loc.state   = splitline[1];
@@ -84,16 +86,26 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		//loc.population = (int) ( 1000 * popstring.toFloat() );
 
 		loc.altitude = (splitline[7]).toInt();
+		bool ok;
+		loc.bortleScaleIndex = (splitline[8]).toInt(&ok);
+		if (ok==false)
+			loc.bortleScaleIndex = 2;
 		
-		if (splitline.size()>8)
+		if (splitline.size()>9)
 		{
 			// Parse planet name
-			loc.planetName = splitline[8];
+			loc.planetName = splitline[9];
 		}
 		else
 		{
 			// Earth by default
 			loc.planetName = "Earth";
+		}
+		
+		if (splitline.size()>10)
+		{
+			// Parse optional associated landscape key
+			loc.landscapeKey = splitline[10];
 		}
 		
 		loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
