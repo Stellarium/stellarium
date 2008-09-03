@@ -27,8 +27,8 @@
 
 PlanetLocationMgr::PlanetLocationMgr()
 {
-	loadCities("data/base_cities.txt");
-	loadCities("data/user_cities.txt");
+	loadCities("data/base_locations.txt");
+	loadCities("data/user_locations.txt");
 	
 	modelAllLocation = new QStringListModel(this);
 	modelAllLocation->setStringList(locations.keys());
