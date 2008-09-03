@@ -83,10 +83,12 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		lngstring = splitline[6];
 		//loc.population = (int) ( 1000 * popstring.toFloat() );
 
-		if (splitline.size()>7)
+		loc.altitude = (splitline[7]).toInt();
+		
+		if (splitline.size()>8)
 		{
 			// Parse planet name
-			loc.planetName = splitline[7];
+			loc.planetName = splitline[8];
 		}
 		else
 		{
@@ -94,11 +96,11 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 			loc.planetName = "Earth";
 		}
 		
-		loc.longitude = lngstring.left(lngstring.size() - 2).toDouble();
+		loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
 		if (lngstring.contains("W"))
 			loc.longitude=-loc.longitude;
 		
-		loc.latitude = latstring.left(latstring.size() - 2).toDouble();
+		loc.latitude = latstring.left(latstring.size() - 1).toDouble();
 		if (latstring.contains("S"))
 			loc.latitude=-loc.latitude;
 		
@@ -147,4 +149,18 @@ const PlanetLocation PlanetLocationMgr::locationForSmallString(const QString& s)
 bool PlanetLocationMgr::canSaveUserLocation(const PlanetLocation& loc) const
 {
 	return locations.find(loc.toSmallString())==locations.end();
+}
+
+// Add permanently a location to the list of user locations
+bool PlanetLocationMgr::saveUserLocation(const PlanetLocation& loc)
+{
+	if (!canSaveUserLocation(loc))
+		return false;
+	
+	// Add in the program
+	locations[loc.toSmallString()]=loc;
+	
+	// Append in the user file
+	modelAllLocation->setStringList(locations.keys());
+	return true;
 }

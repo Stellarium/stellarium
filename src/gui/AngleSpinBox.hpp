@@ -48,7 +48,8 @@ public:
 		Normal,		//!< negative values have '-' prefix
 		NormalPlus,	//!< positive values have '+' prefix, negative values have '-' prefix.
 		Longitude,	//!< positive values have 'E' prefix, negative values have 'W' prefix.
-		Latitude	//!< positive values have 'N' prefix, negative values have 'S' prefix.
+		Latitude,	//!< positive values have 'N' prefix, negative values have 'S' prefix.
+ 		Unknown
 	};
 
 	AngleSpinBox(QWidget* parent=0, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
@@ -75,7 +76,7 @@ public:
 	//! @param input the string value to be converted / validated.
 	//! @param state a pointer to a QValidator::State value which is set according to the validation.
 	//! @return the value of the angle expressed in input in radians.
-	static double stringToDouble(QString input, QValidator::State* state, PrefixType prefix=Normal);
+	double stringToDouble(QString input, QValidator::State* state, PrefixType prefix=Unknown) const;
 
 	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format)
 	//! @param places the number of decimal places to use.

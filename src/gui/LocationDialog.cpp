@@ -88,6 +88,8 @@ void LocationDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
+	connect(ui->saveLocationPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentLocation()));
+
 	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 	
 	connectEditSignals();
@@ -252,3 +254,10 @@ void LocationDialog::reportEdit()
 	ui->saveLocationPushButton->setEnabled(isEditingNew && StelApp::getInstance().getPlanetLocationMgr().canSaveUserLocation(loc));
 }
 
+// Called when the user clic on the save button
+void LocationDialog::saveCurrentLocation()
+{
+	StelApp::getInstance().getPlanetLocationMgr().saveUserLocation(locationFromFields());
+	isEditingNew=false;
+	ui->saveLocationPushButton->setEnabled(false);
+}

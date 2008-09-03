@@ -72,6 +72,9 @@ private slots:
 	void spinBoxChanged(int i=0);
 	//! Called when the location name is manually changed
 	void locationNameChanged(const QString& text);
+	
+	//! Called when the user clic on the save button
+	void saveCurrentLocation();
 };
 
 #endif // _LOCATIONDIALOG_HPP_
