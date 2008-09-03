@@ -191,11 +191,12 @@ const PlanetLocation& Navigator::getCurrentLocation() const
 }
 
 // Smoothly move the observer to the given location
-void Navigator::moveObserverTo(const PlanetLocation& target, double duration)
+void Navigator::moveObserverTo(const PlanetLocation& target, double duration, double durationIfPlanetChange)
 {
-	if (duration>0.)
+	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
+	if (d>0.)
 	{
-		SpaceShipObserver* newObs = new SpaceShipObserver(getCurrentLocation(), target, duration);
+		SpaceShipObserver* newObs = new SpaceShipObserver(getCurrentLocation(), target, d);
 		delete position;
 		position = newObs;
 	}
