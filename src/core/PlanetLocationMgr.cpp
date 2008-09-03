@@ -91,10 +91,13 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		if (ok==false)
 			loc.bortleScaleIndex = 2;
 		
-		if (splitline.size()>9)
+		// Reserve for TimeZone
+		// if (splitline.size()>9) {}
+		
+		if (splitline.size()>10)
 		{
 			// Parse planet name
-			loc.planetName = splitline[9];
+			loc.planetName = splitline[10];
 		}
 		else
 		{
@@ -102,10 +105,10 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 			loc.planetName = "Earth";
 		}
 		
-		if (splitline.size()>10)
+		if (splitline.size()>11)
 		{
 			// Parse optional associated landscape key
-			loc.landscapeKey = splitline[10];
+			loc.landscapeKey = splitline[11];
 		}
 		
 		loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
