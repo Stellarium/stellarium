@@ -44,7 +44,13 @@ public:
 	//! Return the PlanetLocation for the given row (match modelAllLocation index row)
 	const PlanetLocation locationForSmallString(const QString& s) const;
 	
-	static int PlanetLocationRole;
+	//! Get whether a location can be permanently added to the list of user locations
+	//! The main constraint is that the small string must be unique
+	bool canSaveUserLocation(const PlanetLocation& loc) const;
+	
+	//! Add permanently a location to the list of user locations
+	//! It is later identifued by its small string
+	bool saveUserLocation(const PlanetLocation& loc);
 	
 private:
 	//! Load cities from a file

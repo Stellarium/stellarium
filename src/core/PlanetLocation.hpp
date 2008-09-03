@@ -26,10 +26,14 @@
 class PlanetLocation
 {
 public:
-	PlanetLocation();
+	PlanetLocation() : longitude(0.), latitude(0.), altitude(0) {;}
+
 	//! Return a short string which can be used in a list view
-	QString toSmallString() const;
-			
+	QString toSmallString() const
+	{
+		return name + ", " +country;
+	}
+	
 	//! Location/city name
 	QString name;
 	//! English country name or empty string
@@ -46,9 +50,6 @@ public:
 	int altitude;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
-	
-private:
-	mutable QString cachePlanetNameI18n;
 };
 
 #endif // _PLANET_LOCATION_HPP_
