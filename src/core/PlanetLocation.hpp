@@ -34,6 +34,9 @@ public:
 		return name + ", " +country;
 	}
 	
+	//! Output the location as a string ready to be stored in the user_location file
+	QString serializeToLine() const;
+	
 	//! Location/city name
 	QString name;
 	//! English country name or empty string
