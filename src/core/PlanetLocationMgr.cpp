@@ -25,18 +25,6 @@
 #include <QDebug>
 #include <QFile>
 
-int PlanetLocationMgr::PlanetLocationRole = Qt::UserRole+1;
-
-PlanetLocation::PlanetLocation() : longitude(0.), latitude(0.), altitude(0) {;}
-
-QString PlanetLocation::toSmallString() const
-{
-	if (state.isEmpty())
-		return name + ", " +country;
-	else
-		return name + ", " + state + ", " +country;
-}
-
 PlanetLocationMgr::PlanetLocationMgr()
 {
 	loadCities("data/base_cities.txt");
@@ -114,7 +102,24 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		if (latstring.contains("S"))
 			loc.latitude=-loc.latitude;
 		
-		locations[loc.toSmallString()] = loc;
+		if (locations.contains(loc.toSmallString()))
+		{
+			// Add the state in the name of the existing one and the new one to differentiate
+			PlanetLocation loc2 = locations[loc.toSmallString()];
+			if (!loc2.state.isEmpty())
+				loc2.name += " ("+loc2.state+")";
+			// remove and re-add the fixed version
+			locations.remove(loc.toSmallString());
+			locations[loc2.toSmallString()] = loc2;
+			
+			if (!loc.state.isEmpty())
+				loc.name += " ("+loc.state+")";
+			locations[loc.toSmallString()] = loc;
+		}
+		else
+		{
+			locations[loc.toSmallString()] = loc;
+		}
 	}
 	
 	sourcefile.close();
@@ -130,10 +135,16 @@ const PlanetLocation PlanetLocationMgr::locationForSmallString(const QString& s)
 	if (iter==locations.end())
 	{
 		qWarning() << "Warning: location " << s << "is unknown, use Paris as default location.";
-		return locations["Paris, Paris, France"];
+		return locations["Paris, France"];
 	}
 	else
 	{
 		return locations.value(s);
 	}
+}
+
+// Get whether a location can be permanently added to the list of user locations
+bool PlanetLocationMgr::canSaveUserLocation(const PlanetLocation& loc) const
+{
+	return locations.find(loc.toSmallString())==locations.end();
 }

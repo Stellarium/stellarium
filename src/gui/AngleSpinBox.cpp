@@ -162,10 +162,10 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		input = input.mid(positivePrefix(prefix).length());
 	}
 
-	QRegExp dmsRx("^\\s*(\\d+)\\s*[d°](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", Qt::CaseInsensitive);
+	QRegExp dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", Qt::CaseInsensitive);
 	QRegExp hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", Qt::CaseInsensitive);
-	QRegExp decRx("^(\\d+(\\.\\d*)?)(\\s*[°]\\s*)?$");
-	QRegExp badRx("[^hdms0-9 °'\"\\.]", Qt::CaseInsensitive);
+	QRegExp decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
+	QRegExp badRx("[^hdms0-9 \\x00b0'\"\\.]", Qt::CaseInsensitive);
 
 	QValidator::State dummy;
 	if (state == NULL)

@@ -43,10 +43,17 @@ protected:
 	Ui_locationDialogForm* ui;
 	
 private:
+	//! Set the values of all the fields from a location info
+	//! Also move the observer to this position
 	void setFieldsFromLocation(const PlanetLocation& loc);
+	
+	//! Create a PlanetLocation instance from the fields
+	PlanetLocation locationFromFields() const;
 	
 	//! True if the user is currently editing a new location
 	bool isEditingNew;
+	
+	//! To be called when user edits any field
 	void reportEdit();
 	
 	void disconnectEditSignals();
@@ -59,10 +66,12 @@ private slots:
 	//! Called when the user activates an item from the list
 	void listItemActivated(const QModelIndex&);
 	
-	//! Called when the planet/country name is changed by hand
+	//! Called when the planet/country name is manually changed
 	void comboBoxChanged(const QString& text);
 	//! Called when latitude/longitude/altitude is modified
 	void spinBoxChanged(int i=0);
+	//! Called when the location name is manually changed
+	void locationNameChanged(const QString& text);
 };
 
 #endif // _LOCATIONDIALOG_HPP_
