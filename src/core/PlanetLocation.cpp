@@ -23,6 +23,19 @@
 // Output the location as a string ready to be stored in the user_location file
 QString PlanetLocation::serializeToLine() const
 {
+	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
+			.arg(name)
+			.arg(state)
+			.arg(country)
+			.arg(role)
+			.arg(population/1000)
+			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 3) : QString("%1N").arg(latitude, 0, 'f', 3))
+			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 3) : QString("%1E").arg(longitude, 0, 'f', 3))
+			.arg(altitude)
+			.arg(bortleScaleIndex)
+			.arg("")		// Reserve for time zone
+			.arg(planetName)
+			.arg(landscapeKey);
 }
 
 // Parse a lcoation from a line serialization
@@ -39,15 +52,15 @@ PlanetLocation PlanetLocation::createFromLine(const QString& rawline)
 	loc.role    = splitline[3].at(0);
 	loc.population = (int) ( 1000 * splitline[4].toFloat() );
 
-	const QString& lngstring = splitline[6];
-	loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
-	if (lngstring.contains("W"))
-		loc.longitude=-loc.longitude;
-	
 	const QString& latstring = splitline[5];
 	loc.latitude = latstring.left(latstring.size() - 1).toDouble();
 	if (latstring.contains("S"))
 		loc.latitude=-loc.latitude;
+	
+	const QString& lngstring = splitline[6];
+	loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
+	if (lngstring.contains("W"))
+		loc.longitude=-loc.longitude;
 	
 	loc.altitude = (splitline[7]).toInt();
 	bool ok;
