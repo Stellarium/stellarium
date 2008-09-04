@@ -1,4 +1,24 @@
-#LocationName	Provice/State	country(ISO Code/Full English Name)	code(C/B=Capital, R=Regional capital,N=Normal city)	Population(thousand)	Latitude(deg[N/S]) Longitude(deg[E/W])	Altitude(m)	LightPollution(0-9 Bortle scale, empty=auto)	TimeZone(empty=auto)	Planet(empty=Earth)	LandscapeKey(empty=auto)
+# Locations file.  This file is used to create the location list as used
+# in the location selection dialog.
+# Format:
+# + One record per line
+# + Fields in a record are delimited with the tab character
+# + Line beginning with a # character are comments
+# + Field are as follows:
+#   - LocationName
+#   - Provice/State
+#   - Country(ISO Code/Full English Name)
+#   - Type code (C/B=Capital, R=Regional capital,N=Normal city,
+#                O=Observatory, L=lander, I=spacecraft impact
+#                A=spacecraft crash
+#   - Population (thousand)
+#   - Latitude (deg[N/S])
+#   - Longitude (deg[E/W])
+#   - Altitude (meters)
+#   - Light Pollution (0-9 Bortle scale, empty=auto)
+#   - TimeZone (empty=auto)
+#   - Planet (empty=Earth)
+#   - LandscapeKey (empty=auto)
 Mumbai	Maharashtra	in	R	12622,5	18.96N	72.82E	0	
 Buenos Aires	Distrito Federal / Buenos Aires	ar	B	11928,4	34.61S	58.37W	0	
 Moskva	Moskva	ru	B	11246,6	55.75N	37.62E	0	
@@ -22608,4 +22628,56 @@ Kuala Lipis	Pahang	my	N	15	4.18N	102.05E	0
 Madara	n.a.	ng	N	15	11.78N	10.45E	0	
 Matlock	England	gb	N	15	53.14N	1.55W	0	
 La Unión	Murcia	es	N	15	37.62N	0.89W	0	
-Mars 2 (crash)		USSR	N	0	45S	58W	0	0		Mars
+Apollo 11	USA	Mare Tranquillitatis	L	0	0.67N	23.47E	0	0		Moon	moon
+Apollo 12	USA	Oceanus Procellarum	L	0	3.01S	23.42W	0	0		Moon	moon
+Apollo 14	USA	Fra Mauro	L	0	3.65S	17.47W	0	0		Moon	moon
+Apollo 15	USA	Hadley/Apennines	L	0	26.13N	3.63E	0	0		Moon	moon
+Apollo 16	USA	Descartes	L	0	8.97S	15.50E	0	0		Moon	moon
+Apollo 17	USA	Taurus-Littrow	L	0	20.19N	30.77E	0	0		Moon	moon
+Luna 2	USSR	Palus Putredinis	I	0	29.10N	0.00E	0	0		Moon	moon
+Luna 5	USSR	Mare Nubium	A	0	31.00S	8.00E	0	0		Moon	moon
+Luna 7	USSR	Oceanus Procellarum	A	0	9.00N	40.00W	0	0		Moon	moon
+Luna 8	USSR	Oceanus Procellarum	A	0	9.08N	63.18W	0	0		Moon	moon
+Luna 9	USSR	Oceanus Procellarum	L	0	7.08N	64.33W	0	0		Moon	moon
+Luna 13	USSR	Oceanus Procellarum	L	0	18.87N	62.05W	0	0		Moon	moon
+Luna 15	USSR	Mare Crisium	A	0	17.00N	60.00E	0	0		Moon	moon
+Luna 16	USSR	Mare Fecunditatis	L	0	0.68S	56.30E	0	0		Moon	moon
+Luna 17	USSR	Mare Imbrium	L	0	38.28N	35.00W	0	0		Moon	moon
+Luna 18	USSR	Mare Fecunditatis	A	0	3.57N	56.50E	0	0		Moon	moon
+Luna 20	USSR	Mare Fecunditatis	L	0	3.57N	56.50E	0	0		Moon	moon
+Luna 21	USSR	Mare Sedenitatis	L	0	25.51N	30.38E	0	0		Moon	moon
+Luna 23	USSR	Mare Crisium	L	0	12.68N	62.30E	0	0		Moon	moon
+Luna 24	USSR	Mare Crisium	L	0	12.25N	62.20E	0	0		Moon	moon
+Ranger 4	USA		I	0	15.50S	130.70W	0	0		Moon	moon
+Ranger 7	USA	Mare Cognitum	I	0	10.35S	21.58W	0	0		Moon	moon
+Ranger 8	USA	Mare Tranquillitatis	I	0	2.67N	24.65E	0	0		Moon	moon
+Ranger 9	USA	Alphonsus	I	0	12.83S	2.37W	0	0		Moon	moon
+Surveyor 1	USA	Flamsteed Procellarum	L	0	2.45S	43.21W	0	0		Moon	moon
+Surveyor 3	USA	Oceanus Procellarum	L	0	2.94S	23.34W	0	0		Moon	moon
+Surveyor 4	USA		A	0	0.43N	1.33W	0	0		Moon	moon
+Surveyor 5	USA	Mare Tranquillitatis	L	0	1.41N	23.18E	0	0		Moon	moon
+Surveyor 6	USA	Sinus Medii	L	0	0.46N	1.37W	0	0		Moon	moon
+Surveyor 7	USA	Tycho (North rim)	L	0	41.01S	11.41W	0	0		Moon	moon
+Lunar 1	USA		I	0	7.00N	161.00E	0	0		Moon	moon
+Lunar 2	USA		I	0	3.00N	119.10E	0	0		Moon	moon
+Lunar 3	USA		I	0	14.32N	92.70W	0	0		Moon	moon
+Lunar 5	USA		I	0	2.79S	83.00W	0	0		Moon	moon
+Prospector	USA		I	0	90.00S	0.00E	0	0		Moon	moon
+Mars 2	USSR		A	0	45.00S	58.00W	0	0		Mars
+Mars 3	USSR		L	0	45.00S	158.00W	0	0		Mars
+Mars 6	USSR		A	0	23.90S	19.42W	0	0		Mars
+Viking 1	USA	Chryse Planitia	L	0	22.70N	48.22W	0	0		Mars
+Viking 2	USA	Utopia Planitia	L	0	48.27N	134.01E	0	0		Mars
+Pathfinder	USA	Ares Vallis	L	0	19.11N	33.20W	0	0		Mars
+MPL	USA		L	0	76.00S	164.00E	0	0		Mars
+Beagle 2	Europe	Isidis Planitia	A	0	10.00N	90.00E	0	0		Mars
+Spirit	USA	Gusev crater	L	0	14.57S	175.47W	0	0		Mars
+Opportunity	USA	Meridiani Terra	L	0	1.95S	5.53W	0	0		Mars
+Venera 7	USSR		L	0	5.00S	9.00W	0	0		Venus
+Venera 8	USSR		L	0	10.00S	25.00W	0	0		Venus
+Venera 9	USSR		L	0	32.00N	69.00W	0	0		Venus
+Venera 10	USSR		L	0	16.00N	69.00W	0	0		Venus
+Venera 11	USSR		L	0	14.00S	61.00W	0	0		Venus
+Venera 12	USSR		L	0	7.00S	66.00W	0	0		Venus
+Venera 13	USSR		L	0	7.50S	57.00W	0	0		Venus
+Venera 14	USSR		L	0	13.25S	50.00W	0	0		Venus
