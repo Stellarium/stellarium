@@ -224,6 +224,8 @@ void LocationDialog::comboBoxChanged(const QString& text)
 {
 	reportEdit();
 	PlanetLocation loc = locationFromFields();
+	if (loc.planetName!=StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().planetName)
+		setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 }
 
@@ -247,10 +249,15 @@ void LocationDialog::reportEdit()
 		// The user starts editing manually a field, this creates automatically a new location
 		// and allows to save it to the user locations list
 		isEditingNew=true;
-		ui->cityNameLineEdit->setText("New Location");
 	}
 	
-	const PlanetLocation& loc = locationFromFields();
+	PlanetLocation loc = locationFromFields();
+	if (!StelApp::getInstance().getPlanetLocationMgr().canSaveUserLocation(loc))
+	{
+		ui->cityNameLineEdit->setText("New Location");
+		ui->cityNameLineEdit->selectAll();
+		loc = locationFromFields();
+	}
 	ui->saveLocationPushButton->setEnabled(isEditingNew && StelApp::getInstance().getPlanetLocationMgr().canSaveUserLocation(loc));
 }
 
