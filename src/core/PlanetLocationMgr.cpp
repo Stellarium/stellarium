@@ -43,14 +43,14 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "ERROR: Failed to locate city data: " << fileName << e.what();
+		qWarning() << "ERROR: Failed to locate location data file: " << fileName << e.what();
 		return;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "ERROR: Could not open city data file: " << cityDataPath;
+		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
 		return;
 	}
 	
@@ -61,7 +61,7 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 	while (!sourcestream.atEnd())
 	{
 		const QString& rawline=sourcestream.readLine();
-		if (rawline.startsWith('#'))
+		if (rawline.isEmpty() || rawline.startsWith('#'))
 			continue;
 		PlanetLocation loc = PlanetLocation::createFromLine(rawline);
 		
@@ -122,5 +122,40 @@ bool PlanetLocationMgr::saveUserLocation(const PlanetLocation& loc)
 	
 	// Append in the user file
 	modelAllLocation->setStringList(locations.keys());
+	
+	// Load the cities from data file
+	QString cityDataPath;
+	try
+	{
+		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Writable);
+	}
+	catch (std::runtime_error& e)
+	{
+		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+		{
+			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+			{
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUserDir()+"/data";
+				qWarning() << "Location cannot be saved";
+				return false;
+			}
+		}
+		
+		cityDataPath = StelApp::getInstance().getFileMgr().getUserDir()+"/data/user_locations.txt";
+		qWarning() << "Will create a new user location file: " << cityDataPath;
+	}
+
+	QFile sourcefile(cityDataPath);
+	if (!sourcefile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+	{
+		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		return false;
+	}
+	
+	QTextStream outstream(&sourcefile);
+	outstream.setCodec("UTF-8");	
+	outstream << loc.serializeToLine() << '\n';
+	sourcefile.close();
+	
 	return true;
 }

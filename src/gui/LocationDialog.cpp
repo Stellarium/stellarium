@@ -257,7 +257,12 @@ void LocationDialog::reportEdit()
 // Called when the user clic on the save button
 void LocationDialog::saveCurrentLocation()
 {
-	StelApp::getInstance().getPlanetLocationMgr().saveUserLocation(locationFromFields());
+	const PlanetLocation& loc = locationFromFields();
+	StelApp::getInstance().getPlanetLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
 	ui->saveLocationPushButton->setEnabled(false);
+	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
+	
+	// Make location persistent
+	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());
 }
