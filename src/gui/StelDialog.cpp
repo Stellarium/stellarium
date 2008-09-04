@@ -56,6 +56,17 @@ class CustomProxy : public QGraphicsProxyWidget
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
+		
+		// Avoid blocking the program when hovering over an inactive window
+		virtual bool sceneEvent(QEvent* event)
+		{
+			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
+			{
+				event->setAccepted(false);
+				return false;
+			}
+			return QGraphicsProxyWidget::sceneEvent(event);
+		}
 };
 
 StelDialog::StelDialog() : dialog(NULL)

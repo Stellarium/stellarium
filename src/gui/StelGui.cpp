@@ -51,6 +51,7 @@
 #include <QFile>
 #include <QTextDocument>
 #include <QTextBrowser>
+#include <QPixmapCache>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
@@ -77,6 +78,8 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 
 StelGui::StelGui()
 {
+	// QPixmapCache::setCacheLimit(30000); ?
+	
 	setObjectName("StelGui");
 	winBar = NULL;
 	buttonBar = NULL;

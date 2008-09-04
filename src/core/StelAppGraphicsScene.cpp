@@ -212,10 +212,16 @@ QString StelAppGraphicsScene::getViewPortDistorterType() const
 
 void StelAppGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-	QGraphicsScene::mouseMoveEvent(event);
 	thereWasAnEvent(); // Refresh screen ASAP
-	if (event->isAccepted())
-		return;
+	
+	if (mouseGrabberItem())
+	{
+		QGraphicsScene::mouseMoveEvent(event);
+		if (event->isAccepted())
+			return;
+	}
+	else
+		QGraphicsScene::mouseMoveEvent(event);
 	
 	int x = (int)event->scenePos().x();
 	int y = (int)event->scenePos().y();
