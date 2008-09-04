@@ -185,7 +185,7 @@ void StelGui::init()
 	
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), &StelMainWindow::getInstance(), SLOT(close()));
+	QObject::connect(getGuiActions("actionQuit"), SIGNAL(triggered()), this, SLOT(quitStellarium()));
 	
 	// Debug
 	QObject::connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
@@ -698,4 +698,9 @@ void StelGui::retranslateUi(QWidget *Form)
 QProgressBar* StelGui::addProgessBar()
 {
 	return progressBarMgr->addProgressBar();
+}
+
+void StelGui::quitStellarium()
+{
+	QCoreApplication::exit();
 }

@@ -40,7 +40,7 @@
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent)
+StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** argv)  : QGraphicsView(parent), wasDeinit(false)
 {
 	setScene(new QGraphicsScene(this));
 	// Can't create 2 StelMainWindow instances
@@ -67,8 +67,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent, int argc, char** arg
 	
 	// Create the main instance of stellarium
 	stelApp = new StelApp(argc, argv);
-	mainItem = new StelAppGraphicsScene();
-	setScene(mainItem);
+	setScene(new StelAppGraphicsScene());
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
@@ -99,7 +98,7 @@ void StelMainGraphicsView::init()
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
 	stelApp->init();
-	mainItem->init();
+	static_cast<StelAppGraphicsScene*>(scene())->init();
 	setFocus();
 	
 	// Allows for precise FPS control
@@ -119,6 +118,11 @@ void StelMainGraphicsView::init()
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainGraphicsView::deinitGL()
 {
+	// Can be called only once
+	if (wasDeinit==true)
+		return;
+	wasDeinit = true;
+	StelApp::getInstance().getModuleMgr().removeModule("StelGui");
 	QCoreApplication::processEvents();
 	StelApp* stelApp = &StelApp::getInstance();
 	delete stelApp;
