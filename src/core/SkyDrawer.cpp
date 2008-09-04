@@ -48,11 +48,12 @@ SkyDrawer::SkyDrawer(StelCore* acore) : core(acore)
 	maxLum = 0.f;
 	setMaxFov(180.f);
 	setMinFov(0.1f);
-	update(0);
 	
 	starAbsoluteScaleF = 1.f;
 	starRelativeScale = 1.f;
 	starLinearScale = 19.569f;
+	
+	update(0);
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
