@@ -157,7 +157,7 @@ SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const 
 	return NULL;
 }
 
-SkyBackground::SkyBackgroundElem::SkyBackgroundElem(const QString& uri) : progressBar(NULL)
+SkyBackground::SkyBackgroundElem::SkyBackgroundElem(const QString& uri) : progressBar(NULL), show(true)
 {
 	tile = new SkyImageTile(uri);
 }
