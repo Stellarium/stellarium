@@ -27,7 +27,7 @@ class PlanetLocation
 {
 public:
 	PlanetLocation() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
-
+	
 	//! Return a short string which can be used in a list view
 	QString toSmallString() const
 	{
@@ -55,6 +55,14 @@ public:
 	float bortleScaleIndex;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
+	//! Population in number of inhabitants
+	int population;
+	//! Location role code
+	//! C/B=Capital, R=Regional capital, N=Normal city, O=Observatory, L=lander, I=spacecraft impact, A=spacecraft crash
+	QChar role;
+	
+	//! Parse a lcoation from a line serialization
+	static PlanetLocation createFromLine(const QString& line);
 };
 
 #endif // _PLANET_LOCATION_HPP_
