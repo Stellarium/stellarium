@@ -185,6 +185,9 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	parseCLIArgsPostConfig();
 	moduleMgr = new StelModuleMgr();
 	
+	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
+	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
+	
 	// Init a default StelStyle, before loading modules, it will be overrided
 	currentStelStyle = NULL;
 	setColorScheme("color");
@@ -238,9 +241,6 @@ void StelApp::init()
 	
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
-	
-	maxfps = confSettings->value("video/maximum_fps",10000.).toDouble();
-	minfps = confSettings->value("video/minimum_fps",10000.).toDouble();
 
 	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
 	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
