@@ -19,7 +19,6 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "PlanetLocationMgr.hpp"
-#include "StelLocaleMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -58,66 +57,13 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 	// Read the data serialized from the file.
 	// Code below borrowed from Marble (http://edu.kde.org/marble/)
 	QTextStream sourcestream(&sourcefile);
-	sourcestream.setCodec("UTF-8");
-	
-	QString rawline;
-	QString popstring;
-	QString latstring;
-	QString lngstring;
-	QStringList splitline;
-
+	sourcestream.setCodec("UTF-8");	
 	while (!sourcestream.atEnd())
 	{
-		PlanetLocation loc;
-		rawline=sourcestream.readLine();
+		const QString& rawline=sourcestream.readLine();
 		if (rawline.startsWith('#'))
 			continue;
-		splitline = rawline.split("\t");
-		loc.name    = splitline[0];
-		loc.state   = splitline[1];
-		loc.country = StelLocaleMgr::countryCodeToString(splitline[2]);
-		if (loc.country.isEmpty())
-			loc.country = splitline[2];
-					
-		//loc.role    = splitline[3];
-		popstring = splitline[4];
-		latstring = splitline[5];
-		lngstring = splitline[6];
-		//loc.population = (int) ( 1000 * popstring.toFloat() );
-
-		loc.altitude = (splitline[7]).toInt();
-		bool ok;
-		loc.bortleScaleIndex = (splitline[8]).toInt(&ok);
-		if (ok==false)
-			loc.bortleScaleIndex = 2;
-		
-		// Reserve for TimeZone
-		// if (splitline.size()>9) {}
-		
-		if (splitline.size()>10)
-		{
-			// Parse planet name
-			loc.planetName = splitline[10];
-		}
-		else
-		{
-			// Earth by default
-			loc.planetName = "Earth";
-		}
-		
-		if (splitline.size()>11)
-		{
-			// Parse optional associated landscape key
-			loc.landscapeKey = splitline[11];
-		}
-		
-		loc.longitude = lngstring.left(lngstring.size() - 1).toDouble();
-		if (lngstring.contains("W"))
-			loc.longitude=-loc.longitude;
-		
-		loc.latitude = latstring.left(latstring.size() - 1).toDouble();
-		if (latstring.contains("S"))
-			loc.latitude=-loc.latitude;
+		PlanetLocation loc = PlanetLocation::createFromLine(rawline);
 		
 		if (locations.contains(loc.toSmallString()))
 		{
@@ -138,7 +84,6 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 			locations[loc.toSmallString()] = loc;
 		}
 	}
-	
 	sourcefile.close();
 }
 

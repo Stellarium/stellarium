@@ -49,7 +49,7 @@ public:
 	bool canSaveUserLocation(const PlanetLocation& loc) const;
 	
 	//! Add permanently a location to the list of user locations
-	//! It is later identifued by its small string
+	//! It is later identified by its small string
 	bool saveUserLocation(const PlanetLocation& loc);
 	
 private:
