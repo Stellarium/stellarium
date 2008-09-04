@@ -25,6 +25,7 @@
 #include <QIcon>
 #include <QDebug>
 #include <QFontDatabase>
+#include <QCoreApplication>
 
 #include <stdexcept>
 #include "StelApp.hpp"
@@ -108,7 +109,7 @@ void StelMainWindow::setFullScreen(bool b)
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {
 	StelMainGraphicsView::getInstance().deinitGL();
-	QMainWindow::closeEvent(event);
+	QCoreApplication::exit();
 }
 
 

@@ -76,9 +76,9 @@ private:
 	
 	//! The openGL window
 	QGLWidget* glWidget;
-	
-	class StelAppGraphicsScene* mainItem;
 	class StelApp* stelApp;
+	
+	bool wasDeinit;
 };
 
 

@@ -48,6 +48,7 @@ int main(int argc, char **argv)
 	QApplication::setDesktopSettingsAware(false);
 	QApplication::setStyle(new QPlastiqueStyle());
 	QApplication app(argc, argv);
+	//app.setQuitOnLastWindowClosed(false);
 	GettextTranslator trans;
 	app.installTranslator(&trans);
 	if (!QGLFormat::hasOpenGL())
@@ -60,6 +61,7 @@ int main(int argc, char **argv)
 	mainWin->setCentralWidget(view);
 	mainWin->init();
 	app.exec();
+	view->deinitGL();
 	delete view;
 	delete mainWin;
 	return 0;

@@ -110,6 +110,7 @@ private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
 	void reloadStyle();
+	void quitStellarium();
 	
 private:
 	void retranslateUi(QWidget *Form);
