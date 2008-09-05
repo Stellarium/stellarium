@@ -137,11 +137,11 @@ public:
 	const Vec3d& getinitViewPos() {return initViewPos;}
 	
 	//! Return the preset sky time in JD
-	double getPresetSkyTime() const {return PresetSkyTime;}
-	void setPresetSkyTime(double d) {PresetSkyTime=d;}
+	double getPresetSkyTime() const {return presetSkyTime;}
+	void setPresetSkyTime(double d) {presetSkyTime=d;}
 	
 	//! Return the startup mode, can be preset|Preset or anything else
-	QString getStartupTimeMode() {return StartupTimeMode;}
+	QString getStartupTimeMode() {return startupTimeMode;}
 	void setStartupTimeMode(const QString& s);
 	
 	//! Update the modelview matrices
@@ -255,8 +255,8 @@ private:
 	double timeSpeed;        // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;              // Curent time in Julian day
 
-	double PresetSkyTime;
-	QString StartupTimeMode;
+	double presetSkyTime;
+	QString startupTimeMode;
 
 	// Position variables
 	Observer* position;
