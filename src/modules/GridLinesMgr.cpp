@@ -590,7 +590,10 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 // Johannes: use a big radius as a dirty workaround for the bug that the
 // ecliptic line is not drawn around the observer, but around the sun:
 	const Vec3d vv(1000000,0,0);
-	prj->drawParallel(vv, 2.*M_PI, false, &font);
+	if (line_type==MERIDIAN)
+		prj->drawMeridian(vv, 2.*M_PI, false, &font);
+	else
+		prj->drawParallel(vv, 2.*M_PI, false, &font);
 }
 
 GridLinesMgr::GridLinesMgr()
