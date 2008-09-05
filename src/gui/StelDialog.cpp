@@ -90,6 +90,7 @@ void StelDialog::setVisible(bool v)
 		if (dialog)
 		{
 			dialog->show();
+			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
 			proxy->setFocus();
 			return;
 		}
