@@ -587,8 +587,8 @@ void SkyLine::draw(Projector *prj,const Navigator *nav) const
 
 	prj->setCurrentFrame(frameType);
 	
-// Johannes: use a big radius as a dirty workaround for the bug that the
-// ecliptic line is not drawn around the observer, but around the sun:
+	// Johannes: use a big radius as a dirty workaround for the bug that the
+	// ecliptic line is not drawn around the observer, but around the sun:
 	const Vec3d vv(1000000,0,0);
 	if (line_type==MERIDIAN)
 		prj->drawMeridian(vv, 2.*M_PI, false, &font);
