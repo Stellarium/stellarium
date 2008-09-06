@@ -5,15 +5,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>459</height>
+    <width>400</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>250</width>
+    <height>250</height>
+   </size>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
   <property name="autoFillBackground" >
    <bool>false</bool>
+  </property>
+  <property name="styleSheet" >
+   <string notr="true" />
   </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
@@ -102,9 +111,6 @@
           <height>16</height>
          </size>
         </property>
-        <property name="focusPolicy" >
-         <enum>Qt::NoFocus</enum>
-        </property>
         <property name="text" >
          <string/>
         </property>
@@ -127,18 +133,18 @@
         <colorrole role="WindowText" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Text" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
@@ -147,18 +153,18 @@
         <colorrole role="WindowText" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Text" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
@@ -167,18 +173,18 @@
         <colorrole role="WindowText" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Text" >
          <brush brushstyle="SolidPattern" >
           <color alpha="255" >
-           <red>186</red>
-           <green>189</green>
-           <blue>196</blue>
+           <red>3</red>
+           <green>3</green>
+           <blue>3</blue>
           </color>
          </brush>
         </colorrole>
@@ -187,6 +193,9 @@
      </property>
      <property name="mouseTracking" >
       <bool>true</bool>
+     </property>
+     <property name="contextMenuPolicy" >
+      <enum>Qt::DefaultContextMenu</enum>
      </property>
      <property name="acceptDrops" >
       <bool>false</bool>
@@ -295,6 +304,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/mainRes.qrc" />
+ </resources>
  <connections/>
 </ui>
