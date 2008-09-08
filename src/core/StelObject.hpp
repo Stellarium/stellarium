@@ -59,11 +59,12 @@ public:
 		Extra2        = 0x00000200, //!< Derived class-specific extra fields
 		Extra3        = 0x00000400, //!< Derived class-specific extra fields
 		PlainText     = 0x00000800, //!< Strip HTML tags from output
-		HourAngle     = 0x00001000  //!< The hour angle + DE (of date)
+		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
+		AbsoluteMagnitude = 0x00002000  //!< The absolute magnitude
 	};
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle);
+	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroup BriefInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
