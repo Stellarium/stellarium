@@ -35,7 +35,7 @@ public slots:
 	void setVisible(bool);
 	void close();
 signals:
-	void closed();
+	void visibleChanged(bool);
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
