@@ -177,14 +177,24 @@ class QProgressBar* StelMainGraphicsView::addProgessBar()
 //! Activate all the QActions associated to the widget
 void StelMainGraphicsView::activateKeyActions(bool b)
 {
+	QList<QAction*> aList = findChildren<QAction*>("actionQuit");
+	QAction* actionQuit = aList.size() > 0 ? aList.at(0) : NULL;
 	if (b==false)
 	{
 		foreach (QAction* a, actions())
-			removeAction(a);
+		{
+			// Special case for the Quit action shortcut which is always valid
+			if (a!=actionQuit)
+				removeAction(a);
+		}
 	}
 	else
 	{
 		foreach (QAction* a, findChildren<QAction*>())
-			addAction(a);
+		{
+			// Special case for the Quit action shortcut which is always valid
+			if (a!=actionQuit)
+				addAction(a);
+		}
 	}
 }
