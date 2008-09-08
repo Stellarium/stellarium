@@ -60,15 +60,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	QString str;
 	QTextStream oss(&str);
 
-	if (!(flags&PlainText))
-		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
 	if (nameI18!="" && flags&Name)
 	{
-		oss << getNameI18n() << " (";
+		oss << getNameI18n();
 	}
 
 	if (flags&CatalogNumber)

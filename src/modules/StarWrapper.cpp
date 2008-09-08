@@ -37,8 +37,6 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if ((flags&Name) && !(flags&PlainText))
-		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())) << "<br>";
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
 	
@@ -62,8 +60,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const Navigator* nav = core->getNavigation();
 	
 	QTextStream oss(&str);
-	if (!(flags&PlainText))
-		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 	if (s->hip)
 	{
 		if ((flags&Name) || (flags&CatalogNumber))

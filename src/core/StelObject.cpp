@@ -103,7 +103,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 }
 
 // Apply post processing on the info string
-void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags)
+void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
 	// chomp trailing line breaks
 	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
@@ -115,5 +115,9 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
 		str.replace("<br>", "\n");
+	}
+	else
+	{
+		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())));
 	}
 }
