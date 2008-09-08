@@ -145,7 +145,7 @@ QString HelpDialog::getFooterText(void)
 
 	QString footer = "<h2>" + Qt::escape(q_("Further Reading")) + "</h2>\n";
 	footer += Qt::escape(q_("The following links are external web links, and will launch your web browser:\n"));
-	footer += "<p>" + Qt::escape(q_("The Stellarium User Guide:")) + " <a href=\"http://downloads.sourceforge.net/stellarium/stellarium_user_guide-0.9.1-1.pdf\">PDF</a> | <a href=\"http://porpoisehead.net/mysw/stellarium_user_guide_html/\">HTML</a></p>";
+	footer += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + Qt::escape(q_("The Stellarium User Guide")) + "</a>";
 
 	footer += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
