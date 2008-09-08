@@ -137,7 +137,7 @@ void StelGui::init()
 	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false);
 	
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
-	addGuiActions("actionShow_DSS", N_("DSS"), "", group, true, false);
+//	addGuiActions("actionShow_DSS", N_("DSS"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
 	addGuiActions("actionShow_Planets_Hints", N_("Planets hints"), "P", group, true, false);
 	
@@ -230,10 +230,10 @@ void StelGui::init()
 	QObject::connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), module, SLOT(setFlagHints(bool)));
 	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 	
-	module = GETSTELMODULE("SkyBackground");
-	SkyBackground* bmgr = (SkyBackground*)module;
-	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
-	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
+// 	module = GETSTELMODULE("SkyBackground");
+// 	SkyBackground* bmgr = (SkyBackground*)module;
+// 	QObject::connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), module, SLOT(setFlagShow(bool)));
+// 	getGuiActions("actionShow_DSS")->setChecked(bmgr->getFlagShow());
 	
 	module = (QObject*)StelApp::getInstance().getCore()->getNavigation();
 	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), module, SLOT(increaseTimeSpeed()));
@@ -401,10 +401,10 @@ void StelGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"));
 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
-	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"));
-	buttonBar->addButton(b, "040-nebulaeGroup");
+// 	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
+// 	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
+// 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"));
+// 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/gui/btEquatorialMount-off.png");

@@ -237,9 +237,6 @@ QString Telescope::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 	if (flags&Name)
 	{
-		if (!(flags&PlainText))
-			oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-
 		oss << "<h2>" << nameI18n << "</h2>";
 	}
 

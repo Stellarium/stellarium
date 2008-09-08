@@ -146,7 +146,7 @@ protected:
 	QString getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	
 	//! Apply post processing on the info string
-	static void postProcessInfoString(QString& str, const InfoStringGroup& flags);
+	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 };
 
 #endif // _STELOBJECT_HPP_
