@@ -55,10 +55,9 @@ double SkyBackground::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void SkyBackground::init()
 {
-	addElem("http://voint1.hq.eso.org/fabienDSS2/allDSS.json");
 	try
 	{
-		addElem(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
+		insertSkyImage(StelApp::getInstance().getFileMgr().findFile("nebulae/default/textures.json"));
 	}
 	catch (std::runtime_error& e)
 	{
@@ -66,29 +65,51 @@ void SkyBackground::init()
 	}
 }
 
-void SkyBackground::addElem(const QString& uri)
-{
-	SkyBackgroundElem* bEl = new SkyBackgroundElem(uri);
-	allSkyImages.append(bEl);
-	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
-	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
-}
-
-void SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
+QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
 {
 	SkyBackgroundElem* bEl = new SkyBackgroundElem(tile);
+	QString key = tile->getShortName();
+	if (key.isEmpty())
+		key = tile->getAbsoluteImageURI();
+	if (allSkyImages.contains(key))
+	{
+		QString suffix = "_01";
+		int i=1;
+		while (allSkyImages.contains(key+suffix))
+		{
+			suffix=QString("_%1").arg(i);
+		}
+		key+=suffix;
+	}
 	bEl->show = ashow;
-	allSkyImages.append(bEl);
+	allSkyImages.insert(key,bEl);
 	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
 	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+	return key;
+}
+
+// Add a new image from its URI (URL or local file name)
+QString SkyBackground::insertSkyImage(const QString& uri, bool ashow)
+{
+	return insertSkyImage(new SkyImageTile(uri), ashow);
+}
+
+// Remove a sky image tile from the list of background images
+void SkyBackground::removeSkyImage(const QString& key)
+{
+	if (allSkyImages.contains(key))
+	{
+		SkyBackgroundElem* bEl = allSkyImages[key];
+		delete bEl;
+		allSkyImages.remove(key);
+	}
 }
 
 // Remove a sky image tile from the list of background images
 void SkyBackground::removeSkyImage(SkyImageTile* img)
 {
-	SkyBackgroundElem* elem = skyBackgroundElemForTile(img);
-	allSkyImages.removeAll(elem);
-	delete elem;
+	const QString k = keyForTile(img);
+	removeSkyImage(k);
 }
 
 // Draw all the multi-res images collection
@@ -157,14 +178,21 @@ SkyBackground::SkyBackgroundElem* SkyBackground::skyBackgroundElemForTile(const 
 	return NULL;
 }
 
-SkyBackground::SkyBackgroundElem::SkyBackgroundElem(const QString& uri) : progressBar(NULL), show(true)
+QString SkyBackground::keyForTile(const SkyImageTile* t)
 {
-	tile = new SkyImageTile(uri);
+	return allSkyImages.key(skyBackgroundElemForTile(t));
 }
+
+SkyBackground::SkyBackgroundElem::SkyBackgroundElem(SkyImageTile* t, bool ashow, bool aexternallyOwned) : 
+		tile(t), progressBar(NULL), show(ashow), externallyOwned(aexternallyOwned)
+{;}
 				 
 SkyBackground::SkyBackgroundElem::~SkyBackgroundElem()
 {
 	if (progressBar)
 		progressBar->deleteLater();
 	progressBar = NULL;
+	if (!externallyOwned)
+		delete tile;
+	tile = NULL;
 }
