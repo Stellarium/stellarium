@@ -80,10 +80,8 @@ StelDialog::~StelDialog()
 
 void StelDialog::close()
 {
-	emit closed();
-	dialog->close();
-	//proxy->clearFocus();
-	//StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	emit visibleChanged(false);
+	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 }
 
 void StelDialog::setVisible(bool v)
@@ -98,6 +96,7 @@ void StelDialog::setVisible(bool v)
 			return;
 		}
 		dialog = new QDialog(&StelMainGraphicsView::getInstance());
+		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
 		proxy = new CustomProxy(NULL, Qt::Tool);
@@ -112,6 +111,7 @@ void StelDialog::setVisible(bool v)
 	else
 	{
 		dialog->hide();
+		emit visibleChanged(false);
 		//proxy->clearFocus();
 		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 	}
