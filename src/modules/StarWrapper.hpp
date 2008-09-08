@@ -88,11 +88,11 @@ protected:
                  );
   }
   Vec3f getInfoColor(void) const {return SkyDrawer::indexToColor(s->bV);}
-  float getMagnitude(const Navigator *nav) const
+  float getVMagnitude(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
   float getSelectPriority(const Navigator *nav) const
   {
-  	return getMagnitude(nav);
+  	return getVMagnitude(nav);
   }
   float getBV(void) const {return s->getBV();}
   QString getEnglishName(void) const {

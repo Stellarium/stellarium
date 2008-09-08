@@ -130,7 +130,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getMagnitude(nav), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 
@@ -168,11 +168,11 @@ float Planet::getSelectPriority(const Navigator *nav) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return getMagnitude(nav)-15.f;
+		return getVMagnitude(nav)-15.f;
 	}
 	else
 	{
-		return getMagnitude(nav) - 8.f;
+		return getVMagnitude(nav) - 8.f;
 	}
 }
 
@@ -461,7 +461,7 @@ double Planet::getPhase(Vec3d obsPos) const
 	return (1.0 - acos(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 }
 
-float Planet::getMagnitude(const Navigator * nav) const 
+float Planet::getVMagnitude(const Navigator * nav) const 
 {
 	Vec3d obsPos = nav->getObserverHelioPos();
 	const double sq = obsPos.lengthSquared();
@@ -508,7 +508,7 @@ float Planet::getMagnitude(const Navigator * nav) const
 
 	const double rval = -26.73 - 2.5 * std::log10(F);
 	//qDebug() << "Planet(" << getEnglishName()
-	//         << ")::getMagnitude(" << obsPos << "): "
+	//         << ")::getVMagnitude(" << obsPos << "): "
 	//         << "phase: " << phase
 	//         << ",F: " << F
 	//         << ",rval: " << rval;
@@ -579,7 +579,7 @@ void Planet::draw(StelCore* core, float maxMagLabels)
 		drawOrbit(nav, prj);  // TODO - fade in here also...
 		drawTrail(nav, prj);
 
-		if (flagLabels && ang_dist>0.25 && maxMagLabels>getMagnitude(nav))
+		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(nav))
 		{
 			labelsFader=true;
 		}
@@ -603,7 +603,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI;
 	
-	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getMagnitude(core->getNavigation()), flagLighting);
+	core->getSkyDrawer()->preDrawSky3dModel(surfArcMin2, getVMagnitude(core->getNavigation()), flagLighting);
 	
 	if (screenSz>1.)
 	{
@@ -648,7 +648,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 	}
 	
 	//qDebug() << nameI18;
-	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getMagnitude(core->getNavigation()), color);
+	core->getSkyDrawer()->postDrawSky3dModel(screenPos[0],screenPos[1], surfArcMin2, getVMagnitude(core->getNavigation()), color);
 }
 
 void Planet::drawHints(const StelCore* core)
