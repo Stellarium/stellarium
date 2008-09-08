@@ -93,8 +93,25 @@ void LocationDialog::createDialogContent()
 	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 	
 	connectEditSignals();
+	
+	startTimer(200);	// Refresh the dialog every 0.5 second if the position is changed programmatically
 }
 
+// Update the widget to make sure it is synchrone if the location is changed programmatically
+void LocationDialog::updateFromProgram()
+{
+	if (!dialog->isVisible() || isEditingNew==true)
+		return;
+	
+	const QString& key1 = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().toSmallString();
+	const QString& key2 = locationFromFields().toSmallString();
+	
+	if (key1!=key2)
+	{
+		setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
+	}
+}
+	
 void LocationDialog::disconnectEditSignals()
 {
 	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(spinBoxChanged()));
