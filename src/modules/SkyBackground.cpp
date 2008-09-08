@@ -65,9 +65,9 @@ void SkyBackground::init()
 	}
 }
 
-QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
+QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow, bool aexternallyOwned)
 {
-	SkyBackgroundElem* bEl = new SkyBackgroundElem(tile);
+	SkyBackgroundElem* bEl = new SkyBackgroundElem(tile, ashow, aexternallyOwned);
 	QString key = tile->getShortName();
 	if (key.isEmpty())
 		key = tile->getAbsoluteImageURI();
@@ -81,7 +81,6 @@ QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
 		}
 		key+=suffix;
 	}
-	bEl->show = ashow;
 	allSkyImages.insert(key,bEl);
 	connect(bEl->tile, SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
 	connect(bEl->tile, SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
@@ -91,7 +90,7 @@ QString SkyBackground::insertSkyImage(SkyImageTile* tile, bool ashow)
 // Add a new image from its URI (URL or local file name)
 QString SkyBackground::insertSkyImage(const QString& uri, bool ashow)
 {
-	return insertSkyImage(new SkyImageTile(uri), ashow);
+	return insertSkyImage(new SkyImageTile(uri), ashow, true);
 }
 
 // Remove a sky image tile from the list of background images

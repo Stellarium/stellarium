@@ -56,7 +56,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods
 	//! Add a new sky image tile in the list of background images
-	QString insertSkyImage(SkyImageTile* img, bool show=true);
+	QString insertSkyImage(SkyImageTile* img, bool show=true, bool externallyOwned=true);
 	
 	//! Remove a sky image tile from the list of background images
 	void removeSkyImage(SkyImageTile* img);
