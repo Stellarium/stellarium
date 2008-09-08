@@ -269,22 +269,22 @@ void StelGui::init()
 	getGuiActions("actionSet_Full_Screen")->setChecked(StelMainWindow::getInstance().isFullScreen());
 	
 	QObject::connect(getGuiActions("actionShow_Location_Window"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&locationDialog, SIGNAL(closed()), getGuiActions("actionShow_Location_Window"), SLOT(toggle()));
+	QObject::connect(&locationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Location_Window"), SLOT(setChecked(bool)));
 
 	QObject::connect(getGuiActions("actionShow_Configuration_Window"), SIGNAL(toggled(bool)), &configurationDialog, SLOT(setVisible(bool)));
-	QObject::connect(&configurationDialog, SIGNAL(closed()), getGuiActions("actionShow_Configuration_Window"), SLOT(toggle()));
+	QObject::connect(&configurationDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Configuration_Window"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionShow_SkyView_Window"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
-	QObject::connect(&viewDialog, SIGNAL(closed()), getGuiActions("actionShow_SkyView_Window"), SLOT(toggle()));
+	QObject::connect(&viewDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_SkyView_Window"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionShow_Help_Window"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
-	QObject::connect(&helpDialog, SIGNAL(closed()), getGuiActions("actionShow_Help_Window"), SLOT(toggle()));
+	QObject::connect(&helpDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Help_Window"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionShow_DateTime_Window"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
-	QObject::connect(&dateTimeDialog, SIGNAL(closed()), getGuiActions("actionShow_DateTime_Window"), SLOT(toggle()));
+	QObject::connect(&dateTimeDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_DateTime_Window"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionShow_Search_Window"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
-	QObject::connect(&searchDialog, SIGNAL(closed()), getGuiActions("actionShow_Search_Window"), SLOT(toggle()));
+	QObject::connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiActions("actionShow_Search_Window"), SLOT(setChecked(bool)));
 	
 	QObject::connect(getGuiActions("actionSave_Screenshot"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 
