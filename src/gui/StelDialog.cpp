@@ -81,6 +81,9 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	emit closed();
+	dialog->close();
+	//proxy->clearFocus();
+	//StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 }
 
 void StelDialog::setVisible(bool v)
@@ -109,5 +112,7 @@ void StelDialog::setVisible(bool v)
 	else
 	{
 		dialog->hide();
+		//proxy->clearFocus();
+		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
 	}
 }

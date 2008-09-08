@@ -51,7 +51,6 @@
 #include <QFile>
 #include <QTextDocument>
 #include <QTextBrowser>
-#include <QPixmapCache>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
