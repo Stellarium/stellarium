@@ -109,6 +109,9 @@
           <height>16</height>
          </size>
         </property>
+        <property name="focusPolicy" >
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text" >
          <string/>
         </property>
@@ -150,14 +153,6 @@
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>355</width>
-           <height>389</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Main</string>
          </attribute>
@@ -341,14 +336,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabInterface" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>347</width>
-           <height>429</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Navigation</string>
          </attribute>
@@ -649,14 +636,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>355</width>
-           <height>389</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Tools</string>
          </attribute>
