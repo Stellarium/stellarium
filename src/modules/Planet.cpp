@@ -132,6 +132,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude)
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
 
+	if (flags&AbsoluteMagnitude)
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)-5.*(std::log10(getObsJ2000Pos(nav).length()*AU/(SPEED_OF_LIGHT*86400*365.25))-1.), 0, 'f', 2) << "<br>";
+	
 	oss << getPositionInfoString(core, flags);
 
 	if (flags&Distance)
