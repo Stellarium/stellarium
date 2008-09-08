@@ -117,10 +117,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
-		if (!(flags&PlainText))
-			oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
-		
+	{	
 		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
