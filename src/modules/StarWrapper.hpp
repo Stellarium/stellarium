@@ -22,6 +22,7 @@
 
 #include <QString>
 #include "StelObject.hpp"
+#include "StelApp.hpp"
 #include "Navigator.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
@@ -87,7 +88,7 @@ protected:
                    / a->star_position_scale
                  );
   }
-  Vec3f getInfoColor(void) const {return SkyDrawer::indexToColor(s->bV);}
+  Vec3f getInfoColor(void) const {return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : SkyDrawer::indexToColor(s->bV);}
   float getVMagnitude(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
   float getSelectPriority(const Navigator *nav) const

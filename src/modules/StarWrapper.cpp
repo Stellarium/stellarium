@@ -30,7 +30,7 @@
 #include <QTextStream>
 
 namespace BigStarCatalogExtension {
-
+	
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	const Navigator* nav = core->getNavigation();
@@ -46,6 +46,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	return str;
 }
+
 
 QString StarWrapper1::getEnglishName(void) const
 {

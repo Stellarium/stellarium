@@ -178,7 +178,7 @@ float Planet::getSelectPriority(const Navigator *nav) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.4) : ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
 }
 
 
