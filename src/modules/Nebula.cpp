@@ -121,7 +121,7 @@ float Nebula::getSelectPriority(const Navigator *nav) const
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
+	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
 double Nebula::getCloseViewFov(const Navigator*) const
