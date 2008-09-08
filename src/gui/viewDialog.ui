@@ -197,6 +197,12 @@
           <height>16</height>
          </size>
         </property>
+        <property name="focusPolicy" >
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="contextMenuPolicy" >
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
         <property name="text" >
          <string/>
         </property>
@@ -256,14 +262,6 @@
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabSky" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>616</width>
-           <height>470</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Sky</string>
          </attribute>
@@ -845,14 +843,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabMarking" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>616</width>
-           <height>470</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Markings</string>
          </attribute>
@@ -1130,14 +1120,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabLandscape" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>616</width>
-           <height>470</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Landscape</string>
          </attribute>
@@ -1321,14 +1303,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabStarlore" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>616</width>
-           <height>470</height>
-          </rect>
-         </property>
          <attribute name="title" >
           <string>Starlore</string>
          </attribute>
