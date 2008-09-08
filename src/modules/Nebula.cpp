@@ -63,7 +63,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (!(flags&PlainText))
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 
-	if (flags&Name || flags&CatalogNumber)
+	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
 	if (nameI18!="" && flags&Name)
@@ -89,7 +89,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << ")";
 	}
 
-	if (flags&Name || flags&CatalogNumber)
+	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 	
 	if (flags&Extra1)
@@ -117,8 +117,8 @@ float Nebula::getSelectPriority(const Navigator *nav) const
 	}
 	else
 	{
-		if (getMagnitude(nav)>20) return 20;
-		return getMagnitude(nav);
+		if (getVMagnitude(nav)>20) return 20;
+		return getVMagnitude(nav);
 	}
 }
 

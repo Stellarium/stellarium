@@ -54,7 +54,7 @@ public:
 	virtual QString getType(void) const {return "Nebula";}
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
 	virtual double getCloseViewFov(const Navigator * nav = NULL) const;
-	virtual float getMagnitude(const Navigator * nav = NULL) const {return mag;}
+	virtual float getVMagnitude(const Navigator * nav = NULL) const {return mag;}
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getNameI18n(void) const {return nameI18;}

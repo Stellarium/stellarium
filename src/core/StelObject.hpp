@@ -115,7 +115,7 @@ public:
 	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 	
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getMagnitude(const Navigator *nav) const {return 99;}
+	virtual float getVMagnitude(const Navigator *nav) const {return 99;}
 	
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority 

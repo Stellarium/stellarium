@@ -118,7 +118,7 @@ public:
 	virtual double getCloseViewFov(const Navigator * nav) const;
 	virtual double getSatellitesFov(const Navigator * nav) const;
 	virtual double getParentSatellitesFov(const Navigator * nav) const;
-	virtual float getMagnitude(const Navigator * nav) const;
+	virtual float getVMagnitude(const Navigator * nav) const;
 	virtual float getSelectPriority(const Navigator *nav) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
