@@ -37,10 +37,10 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if (flags&Name && !(flags&PlainText))
+	if ((flags&Name) && !(flags&PlainText))
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())) << "<br>";
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
 	
 	oss << getPositionInfoString(core, flags);
 	
@@ -66,7 +66,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor()));
 	if (s->hip)
 	{
-		if (flags&Name || flags&CatalogNumber)
+		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "<h2>";
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
@@ -85,7 +85,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 			}
 		}
-		if (flags&CatalogNumber && flags&Name && (commonNameI18!="" || sciName!=""))
+		if ((flags&CatalogNumber) && (flags&Name) && (commonNameI18!="" || sciName!=""))
 			oss << " - ";
 
 		if (flags&CatalogNumber)
@@ -93,12 +93,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (s->componentIds)
 			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
 
-		if (flags&Name || flags&CatalogNumber)
+		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
 	
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getMagnitude(nav), 'f', 2),
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2),
 		                                                QString::number(s->getBV(), 'f', 2)) << "<br>";
 	
 	oss << getPositionInfoString(core, flags);
