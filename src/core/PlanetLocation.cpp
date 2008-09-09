@@ -63,11 +63,17 @@ PlanetLocation PlanetLocation::createFromLine(const QString& rawline)
 		loc.longitude=-loc.longitude;
 	
 	loc.altitude = (splitline[7]).toInt();
-	bool ok;
-	loc.bortleScaleIndex = (splitline[8]).toInt(&ok);
-	if (ok==false)
+	
+	if (splitline.size()>8)
+	{
+		bool ok;
+		loc.bortleScaleIndex = (splitline[8]).toInt(&ok);
+		if (ok==false)
+			loc.bortleScaleIndex = 2;
+	}
+	else
 		loc.bortleScaleIndex = 2;
-		
+	
 	// Reserve for TimeZone
 	// if (splitline.size()>9) {}
 		
