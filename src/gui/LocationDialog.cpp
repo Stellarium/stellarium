@@ -150,6 +150,7 @@ void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 	
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
+	ui->altitudeSpinBox->setValue(loc.altitude);
 	idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
