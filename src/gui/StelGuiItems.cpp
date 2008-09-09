@@ -47,7 +47,7 @@
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, bool noBackground) : 
 		QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
-		checked(false), action(aaction), noBckground(noBackground)
+							checked(false), action(aaction), noBckground(noBackground), opacity(1.), hoverOpacity(0.)
 {
 	assert(!pixOn.isNull());
 	assert(!pixOff.isNull());
@@ -98,30 +98,35 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	emit(hoverChanged(false));
 }
 
-void StelButton::animValueChanged(qreal value)
+void StelButton::updateIcon()
 {
-	QPixmap pix;
-	if (pixBackground.isNull() || noBckground)
-	{
-		pix = QPixmap(pixOn.size());
-		pix.fill(QColor(0,0,0,0));
-	}
-	else
-		pix = pixBackground;
+	if (opacity<0.)
+		opacity=0;
+	QPixmap pix(pixOn.size());
+	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
+	painter.setOpacity(opacity);
+	if (!pixBackground.isNull() && noBckground==false)
+		painter.drawPixmap(0,0, pixBackground);
 	painter.drawPixmap(0,0, checked ? pixOn : pixOff);
-	if (value>0)
+	if (hoverOpacity>0)
 	{
-		painter.setOpacity(value);
+		painter.setOpacity(hoverOpacity*opacity);
 		painter.drawPixmap(0,0, pixHover);
 	}
 	setPixmap(pix);
 }
 
+void StelButton::animValueChanged(qreal value)
+{
+	hoverOpacity = value;
+	updateIcon();
+}
+	
 void StelButton::setChecked(bool b)
 {
 	checked=b;
-	animValueChanged(timeLine->currentValue());
+	updateIcon();
 }
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
@@ -291,7 +296,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	updateButtonsGroups();
 	return bToRemove;
 }
-
+	
 // Set the margin at the left and right of a button group in pixels
 void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right)
 {
@@ -558,4 +563,33 @@ void StelProgressBarMgr::updateBarsPositions()
 void StelProgressBarMgr::oneDestroyed(QObject* obj)
 {
 	updateBarsPositions();
+}
+
+CornerButtons::CornerButtons(QGraphicsItem* parent)
+{
+}
+		
+void CornerButtons::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	// Do nothing. Just paint the child widgets
+}
+
+QRectF CornerButtons::boundingRect() const
+{
+	if (QGraphicsItem::children().size()==0)
+		return QRectF();
+	const QRectF& r = childrenBoundingRect();
+	return QRectF(0, 0, r.width()-1, r.height()-1);
+}
+
+void CornerButtons::setOpacity(double opacity)
+{
+	if (QGraphicsItem::children().size()==0)
+		return;
+	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	{
+		StelButton* sb = qgraphicsitem_cast<StelButton*>(child);
+		Q_ASSERT(sb!=NULL);
+		sb->setOpacity(opacity);
+	}
 }

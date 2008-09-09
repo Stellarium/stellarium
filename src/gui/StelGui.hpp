@@ -112,6 +112,12 @@ private slots:
 	void reloadStyle();
 	void quitStellarium();
 	
+	bool getAutoHideHorizontalButtonBar() const {return autoHideHorizontalButtonBar;}
+	void setAutoHideHorizontalButtonBar(bool b) {autoHideHorizontalButtonBar=b;}
+	
+	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
+	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
+	
 private:
 	void retranslateUi(QWidget *Form);
 	
@@ -140,6 +146,15 @@ private:
 	class StelProgressBarMgr* progressBarMgr;
 	
 	int lastButtonbarWidth;
+	
+	// The 2 auto hide buttons in the lower left corner
+	StelButton* btHorizAutoHide;
+	StelButton* btVertAutoHide;
+	
+	class CornerButtons* autoHidebts;
+	
+	bool autoHideHorizontalButtonBar;
+	bool autoHideVerticalButtonBar;
 };
 
 #endif // _STELGUI_HPP_

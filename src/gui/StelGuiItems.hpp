@@ -44,6 +44,17 @@ private:
 	void updateBarsPositions();
 };
 
+//! Buttons in the bottom left corner
+class CornerButtons : public QObject, public QGraphicsItem
+{
+Q_OBJECT;
+public:
+	CornerButtons(QGraphicsItem* parent=NULL);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual QRectF boundingRect() const;
+	void setOpacity(double opacity);
+};
+
 //! Implement a button for use in Stellarium's graphic widgets
 class StelButton : public QObject, public QGraphicsPixmapItem
 {
@@ -65,6 +76,9 @@ public:
 	//! Get whether the button is checked
 	bool isChecked() const {return checked;}
 
+	//! Set the button opacity
+	void setOpacity(double v) {opacity=v; updateIcon();}
+	
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -85,6 +99,8 @@ protected:
 private slots:
 	void animValueChanged(qreal value);	
 private:
+	void updateIcon();
+	
 	QPixmap pixOn;
 	QPixmap pixOff;
 	QPixmap pixHover;
@@ -93,6 +109,8 @@ private:
 	QTimeLine* timeLine;
 	QAction* action;
 	bool noBckground;
+	double opacity;
+	double hoverOpacity;
 };
 
 //! The button bar on the left containing windows toggle buttons
