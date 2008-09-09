@@ -51,6 +51,7 @@
 #include <QFile>
 #include <QTextDocument>
 #include <QTextBrowser>
+#include <QGraphicsWidget>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
@@ -85,7 +86,10 @@ StelGui::StelGui()
 	infoPanel = NULL;
 	buttonBarPath = NULL;
 	lastButtonbarWidth = 0;
-	
+	autoHidebts = NULL;
+	autoHideHorizontalButtonBar = true;
+	autoHideVerticalButtonBar = true;
+			
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
 	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
@@ -182,6 +186,9 @@ void StelGui::init()
 	addGuiActions("actionQuit", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot", N_("Save screenshot"), "Ctrl+S", group, false, false);
 	addGuiActions("action_Reload_Style", "Reload style", "Ctrl+R", "Debug", false, false);
+	
+	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
+	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	
 	//QMetaObject::connectSlotsByName(Form);
 	
@@ -307,6 +314,11 @@ void StelGui::init()
 	
 	QObject::connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
+	
+	QObject::connect(getGuiActions("actionAutoHideHorizontalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideHorizontalButtonBar(bool)));
+	getGuiActions("actionAutoHideHorizontalButtonBar")->setChecked(getAutoHideHorizontalButtonBar());
+	QObject::connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
+	getGuiActions("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 	
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -468,6 +480,23 @@ void StelGui::init()
 	scene->addItem(infoPanel);
 	scene->addItem(progressBarMgr);
 	
+	// Create the 2 auto hide buttons in the bottom left corner
+	autoHidebts = new CornerButtons();
+	pxmapOn = QPixmap(":/graphicGui/gui/HorizontalAutoHideOn.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/HorizontalAutoHideOff.png");
+	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), getGuiActions("actionAutoHideHorizontalButtonBar"), true);
+	btHorizAutoHide->setChecked(getAutoHideHorizontalButtonBar());
+	
+	pxmapOn = QPixmap(":/graphicGui/gui/VerticalAutoHideOn.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/VerticalAutoHideOff.png");
+	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), getGuiActions("actionAutoHideVerticalButtonBar"), true);
+	btVertAutoHide->setChecked(getAutoHideVerticalButtonBar());
+	
+	btHorizAutoHide->setPos(0,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height());
+	btVertAutoHide->setPos(0,0);
+	btVertAutoHide->setZValue(1000);
+	scene->addItem(autoHidebts);
+
 	setStelStyle(*StelApp::getInstance().getCurrentStelStyle());
 	
 	// Readjust position
@@ -588,7 +617,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if ((x>maxX || y>maxY) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
+	if (autoHideVerticalButtonBar && (x>maxX || y>maxY) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
@@ -601,7 +630,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
-	if ((x>maxX || y>maxY) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	if (autoHideHorizontalButtonBar && (x>maxX || y>maxY) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
@@ -689,6 +718,11 @@ void StelGui::updateBarsPos()
 		progressBarMgr->setPos(newProgressBarX, newProgressBarY);
 		updatePath = true;
 	}
+	
+	// Update position of the auto-hide buttons
+	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
+	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
+	autoHidebts->setOpacity(opacity);
 }
 
 void StelGui::retranslateUi(QWidget *Form)
