@@ -316,14 +316,14 @@ void StelGui::init()
 	winBar = new LeftStelBar(NULL);
 	
 	QPixmap pxmapGlow(":/graphicGui/gui/glow.png");
-	QPixmap pxmapOn(":/graphicGui/gui/1-on-time.png");
-	QPixmap pxmapOff(":/graphicGui/gui/1-off-time.png");
-	StelButton* b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"));
+	QPixmap pxmapOn(":/graphicGui/gui/2-on-location.png");
+	QPixmap pxmapOff(":/graphicGui/gui/2-off-location.png");
+	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"));	
 	winBar->addButton(b);
 	
-	pxmapOn = QPixmap(":/graphicGui/gui/2-on-location.png");
-	pxmapOff = QPixmap(":/graphicGui/gui/2-off-location.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_Location_Window"));	
+	pxmapOn = QPixmap(":/graphicGui/gui/1-on-time.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/1-off-time.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiActions("actionShow_DateTime_Window"));
 	winBar->addButton(b);
 	
 	pxmapOn = QPixmap(":/graphicGui/gui/5-on-labels.png");
