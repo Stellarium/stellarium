@@ -1,6 +1,4 @@
 
-INSTALL(FILES nightStyle.css normalStyle.css DESTINATION share/${PACKAGE}/data/gui)
+INSTALL(FILES nightStyle.css nightHtml.css normalStyle.css normalHtml.css world.png DESTINATION share/${PACKAGE}/data/gui)
 
-
-INSTALL(FILES nightStyle.css normalStyle.css DESTINATION share/${PACKAGE}/data/gui)
 
