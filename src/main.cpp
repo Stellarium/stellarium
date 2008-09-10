@@ -27,7 +27,8 @@
 #include <QGLFormat>
 #include <QPlastiqueStyle>
 
-// The GettextTranslator class provides i18n support through gettext.
+//! @class GettextTranslator
+//! Provides i18n support through gettext.
 class GettextTranslator : public QTranslator
 {
 public:

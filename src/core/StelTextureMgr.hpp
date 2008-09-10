@@ -53,13 +53,15 @@ public:
 	virtual bool loadImage(const QString& filename, TexInfo& texInfo) = 0;
 };
 
-//! @class PngLoader Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
+//! @class PngLoader
+//! Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA.
 class PngLoader : public ImageLoader
 {
 	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
 };
 
-//! @class JpgLoader Define a JPG loader. This implementation supports LUMINANCE or RGB.
+//! @class JpgLoader
+//! Define a JPG loader. This implementation supports LUMINANCE or RGB.
 class JpgLoader : public ImageLoader
 {
 	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
@@ -67,6 +69,7 @@ public:
 	static bool loadFromMemory(const QByteArray& data, TexInfo& texinfo);
 };
 
+//! @class StelTextureMgr
 //! Manage textures loading and manipulation.
 //! The texture loader has a current state defining the way the textures will be loaded in memory,
 //! that is, whether mimap should be generated, the wrap mode or mag and min filters.
@@ -91,6 +94,7 @@ public:
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
+	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
 	STextureSP createTextureThread(const QString& url, const QString& fileExtension="", bool lazyLoading=true);
 	
 	//! Define if mipmaps must be created while creating textures

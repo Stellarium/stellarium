@@ -23,7 +23,8 @@
 #include <QAbstractSpinBox>
 #include <QString>
 
-//! @class AngleSpinBox a spin box for displaying/entering angular values.
+//! @class AngleSpinBox
+//! A spin box for displaying/entering angular values.
 //! This class can accept angles in various formats commonly used in astronomy
 //! including decimal degrees, DMS and HMS.
 
