@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+//! @class StelDialog
+//! Base class for all the GUI windows in stellarium
 class StelDialog : public QObject
 {
 	Q_OBJECT;

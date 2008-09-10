@@ -47,7 +47,8 @@ template<class T>
 bool intersect(const T& o, const Vec3d& v)
 { return contains(o, v); }
 
-//! @class HalfSpace A HalfSpace is defined by a direction and an aperture.
+//! @class HalfSpace
+//! A HalfSpace is defined by a direction and an aperture.
 //! It forms a cone from the center of the Coordinate frame with a radius d
 struct HalfSpace
 {
@@ -68,7 +69,8 @@ struct HalfSpace
 	double d;
 };
 
-//! @class Polygon A polygon is defined by a set of connected points.
+//! @class Polygon
+//! A polygon is defined by a set of connected points.
 //! The last point is connected to the first one
 class Polygon : public std::vector<Vec3d>
 {
@@ -89,7 +91,8 @@ bool intersect(const Polygon& p, const T& o)
 }
 
 
-//! @class ConvexS A Convex is defined by several HalfSpaces defining a convex region.
+//! @class ConvexS
+//! A Convex is defined by several HalfSpaces defining a convex region.
 //! A Convex region is not necessarily a ConvexPolygon, it can for example be a single HalfSpace.
 //! Because in X11, Convex is #defined as an int in X11/X.h: (#define Convex 2) we needed to use another name (ConvexS).
 class ConvexS : public std::vector<HalfSpace>
@@ -121,7 +124,8 @@ public:
 	}
 };
 
-//! @class ConvexPolygon A special case of ConvexS for which all HalfSpace have a aperture of PI/2.
+//! @class ConvexPolygon
+//! A special case of ConvexS for which all HalfSpace have a aperture of PI/2.
 //! The operator [] behave as for a Polygon, i.e. return the vertex positions.
 //! To acces the HalfSpaces, use the asConvex() method.
 class ConvexPolygon : public ConvexS, public Polygon
@@ -183,7 +187,8 @@ inline bool intersect(const ConvexPolygon& cp1, const ConvexPolygon& cp2)
 	return !c1.areAllPointsOutsideOneSide(cp2) && !c2.areAllPointsOutsideOneSide(cp1);
 }
 
-//! @class Disk A Disk is defined by a single HalfSpace
+//! @class Disk
+//! A Disk is defined by a single HalfSpace
 struct Disk : HalfSpace
 {
     //! Constructor

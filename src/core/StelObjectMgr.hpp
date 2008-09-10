@@ -55,23 +55,23 @@ public:
 	void registerStelObjectMgr(StelObjectModule* mgr);
 
 	//! Find and select an object near given equatorial position.
-	//! @param added add the found object to selection if true, replace if false
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object near given screen position.
-	//! @param added add the found object to selection if true, replace if false
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its translated name.
-	//! @param added add the found object to selection if true, replace if false
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param nameI18n the case sensitive object translated name
 	//! @return true if a object with the passed name was found
 	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its standard program name.
-	//! @param added add the found object to selection if true, replace if false
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param name the case sensitive object translated name
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
@@ -89,13 +89,13 @@ public:
 	void unSelect(void);
 
 	//! Notify that we want to select the given object.
-	//! @param added add the object to selection if true, replace if false
+	//! @param action action define whether to add to, replace, or remove from the existing selection
 	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 	
 	//! Notify that we want to select the given objects.
 	//! @param objs a vector of objects to select
-	//! @param added add the object to selection if true, replace if false
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 

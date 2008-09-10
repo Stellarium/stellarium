@@ -30,8 +30,9 @@ class StelStyle;
 
 //! This is the common base class for all the main components of stellarium.
 //! Standard StelModules are the one displaying the stars, the constellations, the planets etc..
-//! Every new component should herit and implement the methods defined in StelModule.hpp.
+//! Every new module derived class should implement the methods defined in StelModule.hpp.
 //! Once a module is registered into the StelModuleMgr, it is automatically managed by the program.
+//! It can be called using the GETSTELMODULE macro, passing as argument its name, which is also the QObject name
 //! Because StelModules are very generic components, it is also possible to load them dynamically,
 //! thus enabling creation of external plug-ins for stellarium.
 //! @author Fabien Chereau
@@ -99,7 +100,7 @@ public:
 
 	//! Indicate that the user requested selection of StelObjects.
 	//! The StelModule should then manage by themself how they handle the event
-	//! @param added true if the user request that the objects are added to the selection
+	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=ReplaceSelection) {;}
 	
 	//! Load the given color style
