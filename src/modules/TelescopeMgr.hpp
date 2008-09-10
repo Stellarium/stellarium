@@ -36,10 +36,11 @@ class StelObject;
 class Telescope;
 class QSettings;
 
-class TelescopeMgr : public StelObjectModule {
+class TelescopeMgr : public StelObjectModule
+{
 public:
-  TelescopeMgr(void);
-  virtual ~TelescopeMgr(void);
+	TelescopeMgr(void);
+	virtual ~TelescopeMgr(void);
   
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -54,57 +55,56 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
-
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
-
-
-  void communicate(void);
-   
-  void set_names_fade_duration(float duration)
-    {nameFader.setDuration((int) (duration * 1000.f));}
-  
-  void setLabelColor(const Vec3f &c) {labelColor = c;}
-  const Vec3f &getLabelColor(void) const {return labelColor;}
-
-  void set_circleColor(const Vec3f &c) {circleColor = c;}
-  const Vec3f &getCircleColor(void) const {return circleColor;}
-  
-  //! Set display flag for Telescopes
-  void setFlagTelescopes(bool b) {telescopeFader=b;}
-  //! Get display flag for Telescopes
-  bool getFlagTelescopes(void) const {return (bool)telescopeFader;}  
-  
-  //! Set display flag for Telescope names
-  void setFlagTelescopeName(bool b) {nameFader=b;}
-  //! Get display flag for Telescope names
-  bool getFlagTelescopeName(void) const {return nameFader==true;}
-  
-  //! Define font size to use for telescope names display
-  void setFontSize(float fontSize);
-
-  //! send a J2000-goto-command to the specified telescope
-  void telescopeGoto(int telescope_nr,const Vec3d &j2000Pos);
+	
+	
+	void communicate(void);
+	
+	void set_names_fade_duration(float duration) {nameFader.setDuration((int) (duration * 1000.f));}
+	
+	void setLabelColor(const Vec3f &c) {labelColor = c;}
+	const Vec3f &getLabelColor(void) const {return labelColor;}
+	
+	void set_circleColor(const Vec3f &c) {circleColor = c;}
+	const Vec3f &getCircleColor(void) const {return circleColor;}
+	
+	//! Set display flag for Telescopes
+	void setFlagTelescopes(bool b) {telescopeFader=b;}
+	//! Get display flag for Telescopes
+	bool getFlagTelescopes(void) const {return (bool)telescopeFader;}  
+	
+	//! Set display flag for Telescope names
+	void setFlagTelescopeName(bool b) {nameFader=b;}
+	//! Get display flag for Telescope names
+	bool getFlagTelescopeName(void) const {return nameFader==true;}
+	
+	//! Define font size to use for telescope names display
+	void setFontSize(float fontSize);
+	
+	//! send a J2000-goto-command to the specified telescope
+	void telescopeGoto(int telescope_nr,const Vec3d &j2000Pos);
+	
 private:
-#ifdef WIN32
-  bool wsaOk;
-#endif
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const Projector* prj, const Navigator * nav);
 
-  LinearFader nameFader;
-  LinearFader telescopeFader;
-  Vec3f circleColor;
-  Vec3f labelColor;
-  SFont *telescope_font;
-  STextureSP telescopeTexture;
-
-  class TelescopeMap : public std::map<int,Telescope*> {
-  public:
-    ~TelescopeMap(void) {clear();}
-    void clear(void);
-  };
-  TelescopeMap telescope_map;
-  STextureSP texPointer;   // The selection pointer texture
+	LinearFader nameFader;
+	LinearFader telescopeFader;
+	Vec3f circleColor;
+	Vec3f labelColor;
+	SFont *telescope_font;
+	STextureSP telescopeTexture;
+	
+	class TelescopeMap : public std::map<int,Telescope*>
+	{
+	public:
+		~TelescopeMap(void) {clear();}
+		void clear(void);
+	};
+	
+	TelescopeMap telescope_map;
+	// The selection pointer texture
+	STextureSP texPointer;
 };
 
 
