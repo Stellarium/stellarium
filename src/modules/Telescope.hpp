@@ -56,8 +56,8 @@ public:
 	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
-	// all TCP (and all possible other style) communication shall be done in
-	// these functions:
+	
+	// all TCP (and all possible other style) communication shall be done in these functions:
 	virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
 	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
 	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
@@ -73,6 +73,5 @@ private:
 private:
 	std::list<double> oculars; // fov of the oculars
 };
-
 
 #endif // _TELESCOPE_HPP_
