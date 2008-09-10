@@ -302,8 +302,7 @@ long long int GetNow(void)
 #endif
 }
 
-TelescopeTcp::TelescopeTcp(const QString &name,const QString &params)
-		: Telescope(name),fd(INVALID_SOCKET),
+TelescopeTcp::TelescopeTcp(const QString &name,const QString &params) : Telescope(name),fd(INVALID_SOCKET),
 		end_position(positions+(sizeof(positions)/sizeof(positions[0])))
 {
 	hangup();
