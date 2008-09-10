@@ -492,7 +492,7 @@ void StelGui::init()
 	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), getGuiActions("actionAutoHideVerticalButtonBar"), true);
 	btVertAutoHide->setChecked(getAutoHideVerticalButtonBar());
 	
-	btHorizAutoHide->setPos(0,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height());
+	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
 	scene->addItem(autoHidebts);
