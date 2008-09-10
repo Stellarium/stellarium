@@ -25,6 +25,7 @@
 #include <QList>
 #include "StelModule.hpp"
 
+//! Get a module from its QObject name
 #define GETSTELMODULE( m ) StelApp::getInstance().getModuleMgr().getModule( m )
 
 //! @class StelModuleMgr
@@ -39,6 +40,7 @@ public:
 	~StelModuleMgr();
 	
 	//! Register a new StelModule to the list
+	//! The module is later referenced by its QObject name.
 	void registerModule(StelModule* m, bool generateCallingLists=false);
 	
 	//! Unregister and delete a StelModule. The program will hang if other modules depend on the removed one
@@ -52,8 +54,8 @@ public:
 	StelModule* loadExternalPlugin(const QString& moduleID);
 
 	//! Get the corresponding module or NULL if can't find it.
-	//! @param moduleID the unique ID of the module, by convention equal to the class name
-	StelModule* getModule(const QString& moduleID);
+	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name
+	StelModule* getModule(const QString& moduleName);
 	
 	//! Get the list of all the currently registered modules
 	QList<StelModule*> getAllModules() {return modules.values();}
@@ -77,14 +79,14 @@ public:
 		QString author;
 		QString contact;
 		QString description;
+		//! If true, the module is automatically loaded at startup
 		bool loadAtStartup;
 	};
  
 	//! Return the list of all the external module found in the modules directories
 	static QList<ExternalStelModuleDescriptor> getExternalModuleList();
 
-	//! Enum used when selecting objects to define whether to add to, replace, or remove from 
-	//! the existing selection list.
+	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum SelectAction
 	{
 		AddToSelection,

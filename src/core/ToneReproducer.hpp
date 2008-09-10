@@ -67,12 +67,14 @@ public:
 	//! Indoor Lighting : 100    cd/m^2
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
+	//! Get the eye adaptation luminance for the world
 	float getWorldAdaptationLuminance() const {return Lwa;}
 	
 	//! Set the global scale applied to input lumiances, i.e before the adaptation
 	//! It is the parameter to modify to simulate aperture*exposition time
 	//! @param scale the global input scale
 	void setInputScale(float scale=1.f);
+	//! Get the global scale applied to input lumiances, i.e before the adaptation
 	float getInputScale() const {return inputScale;}
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
@@ -123,7 +125,7 @@ public:
 	}
 	
 	//! Return adapted ln(luminance) from world to display with 1 corresponding to full display white
-	//! @param worldLuminance the world luminance to convert in ln(cd/m^2)
+	//! @param lnWorldLuminance the world luminance to convert in ln(cd/m^2)
 	//! @param pFact the power at whihc the result should be set. The default is 0.5 and therefore return the square root of the adapted luminance
 	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
 	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const

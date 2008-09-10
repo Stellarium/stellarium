@@ -22,6 +22,8 @@
 
 #include <QGraphicsScene>
 
+//! A special QGraphicsScene for use in Stellarium.
+//! It manages initialization of the program and redirects users inputs to the core and GUI
 class StelAppGraphicsScene : public QGraphicsScene
 {
 	Q_OBJECT;
