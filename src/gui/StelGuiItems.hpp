@@ -81,6 +81,9 @@ public:
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
 	
+	//! Activate red mode for this button, i.e. will reduce the non red color component of the icon
+	void setRedMode(bool b) {redMode=b; updateIcon();}
+	
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -107,12 +110,22 @@ private:
 	QPixmap pixOff;
 	QPixmap pixHover;
 	QPixmap pixBackground;
+	
+	QPixmap pixOnRed;
+	QPixmap pixOffRed;
+	QPixmap pixHoverRed;
+	QPixmap pixBackgroundRed;
+	
 	bool checked;
 	QTimeLine* timeLine;
 	QAction* action;
 	bool noBckground;
 	double opacity;
 	double hoverOpacity;
+	
+	bool redMode;
+	
+	static QPixmap makeRed(const QPixmap& p);
 };
 
 //! The button bar on the left containing windows toggle buttons
@@ -126,6 +139,10 @@ public:
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
+	//! Set the color for all the sub elements
+	void setColor(const QColor& c);
+	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
+	void setRedMode(bool b);
 private slots:	
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -157,6 +174,9 @@ public:
 	
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
+	
+	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
+	void setRedMode(bool b);
 	
 	//! Set whether time must be displayed in the bottom bar
 	void setFlagShowTime(bool b) {flagShowTime=b;}

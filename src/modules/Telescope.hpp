@@ -41,6 +41,8 @@ class Telescope : public StelObject
 public:
 	static Telescope *create(const QString &url);
 	virtual ~Telescope(void) {}
+	
+	// Method inherited from StelObject
 	QString getEnglishName(void) const {return name;}
 	QString getNameI18n(void) const {return nameI18n;}
 	//! Telescope supports the following InfoStringGroup flags:
@@ -53,16 +55,19 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	QString getType(void) const {return "Telescope";}
+	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
+		
+	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos) = 0;
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
+	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
+	const std::list<double> &getOculars(void) const {return oculars;}
 	
 	// all TCP (and all possible other style) communication shall be done in these functions:
 	virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds, int &fdmax) = 0;
 	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) {}
-	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
-	const std::list<double> &getOculars(void) const {return oculars;}
-	virtual double getAngularSize(const StelCore* core) const {assert(0); return 0;}	// TODO
+
 protected:
 	Telescope(const QString &name);
 	QString nameI18n;
