@@ -565,7 +565,7 @@ void StelProgressBarMgr::oneDestroyed(QObject* obj)
 	updateBarsPositions();
 }
 
-CornerButtons::CornerButtons(QGraphicsItem* parent)
+CornerButtons::CornerButtons(QGraphicsItem* parent) : lastOpacity(10)
 {
 }
 		
@@ -584,6 +584,9 @@ QRectF CornerButtons::boundingRect() const
 
 void CornerButtons::setOpacity(double opacity)
 {
+	if (opacity<=0. && lastOpacity<=0.)
+		return;
+	lastOpacity = opacity;
 	if (QGraphicsItem::children().size()==0)
 		return;
 	foreach (QGraphicsItem *child, QGraphicsItem::children())
