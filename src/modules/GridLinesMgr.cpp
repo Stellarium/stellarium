@@ -348,9 +348,23 @@ void SkyGrid::draw(const Projector* prj) const
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-	glColor4f(color[0],color[1],color[2], fader.getInterstate());
 	Vec4f textColor(color[0], color[1], color[2], 0);
+	float red;
+
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		// instead of a filter which just zeros G&B, set the red 
+		// value to the mean brightness of RGB.
+		red = (color[0] + color[1] + color[2]) / 3.0;
+		textColor[0] = red;
+		textColor[1] = 0.; textColor[2] = 0.;
+		glColor4f(red, 0, 0, fader.getInterstate());
+	}
+	else
+	{
+		glColor4f(color[0],color[1],color[2], fader.getInterstate());
+	}
+
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 
