@@ -232,14 +232,14 @@ MappingCylinder MappingCylinder::instance;
 
 bool MappingCylinder::forward(Vec3d &v) const
 {
-	//if (v[1] <= -1.0 || v[1] >= 1.0) return false;
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
 	const double alpha = std::atan2(v[0],-v[2]);
 	const double delta = std::asin(v[1]/r);
 	v[0] = alpha;
 	v[1] = delta;
 	v[2] = r;
-	return true;
+	return rval;
 }
 
 bool MappingCylinder::backward(Vec3d &v) const
@@ -287,13 +287,13 @@ MappingMercator MappingMercator::instance;
 
 bool MappingMercator::forward(Vec3d &v) const
 {
-	//if (v[1] <= -1.0 || v[1] >= 1.0) return false;
 	const double r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
 	const double sin_delta = v[1]/r;
 	v[0] = std::atan2(v[0],-v[2]);
 	v[1] = 0.5*std::log((1.0+sin_delta)/(1.0-sin_delta));
 	v[2] = r;
-	return true;
+	return rval;
 }
 
 
