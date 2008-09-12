@@ -157,6 +157,7 @@ class BottomStelBar : public QObject, public QGraphicsItem
 	Q_OBJECT;
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
+	virtual ~BottomStelBar();
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	QRectF boundingRectNoHelpLabel() const;
