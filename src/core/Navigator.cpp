@@ -42,7 +42,10 @@ Navigator::Navigator() : timeSpeed(JD_SECOND), JDay(0.), position(NULL)
 }
 
 Navigator::~Navigator()
-{}
+{
+	delete position;
+	position=NULL;
+}
 
 const Planet *Navigator::getHomePlanet(void) const
 {

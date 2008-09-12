@@ -62,6 +62,8 @@ StelTextureMgr::StelTextureMgr()
 *************************************************************************/
 StelTextureMgr::~StelTextureMgr()
 {
+	// Release the textures memory pool
+	TexMalloc::clear();
 }
 
 /*************************************************************************
@@ -634,8 +636,7 @@ bool PngLoader::loadImage(const QString& filename, TexInfo& texinfo)
 	}
 	
 	/* we can now allocate memory for storing pixel data */
-	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width
-	                                     * texinfo.height * texinfo.internalFormat);
+	texinfo.texels = (GLubyte *)TexMalloc::malloc (sizeof (GLubyte) * texinfo.width * texinfo.height * texinfo.internalFormat);
 	if (!texinfo.texels)
 	{
 		qWarning() << "Not enough memory to allocate the PNG image texture " << texinfo.fullPath;
@@ -939,7 +940,6 @@ bool JpgLoader::loadFromMemory(const QByteArray& data, TexInfo& texinfo)
 }
 
 // Multithread memory pool for textures loading
-// TODO free at the end
 QMultiMap<size_t, void*> TexMalloc::cache;
 QMap<void*, size_t> TexMalloc::newInsert;
 QMutex TexMalloc::mutex;
@@ -966,6 +966,7 @@ void* TexMalloc::malloc(size_t size)
 	}
 }
 
+// If a block with the same size already is in the pool, just free it else, store it for a later re-use
 void TexMalloc::free(void *ptr)
 {
 	QMutexLocker lock(&mutex);
@@ -981,11 +982,12 @@ void TexMalloc::free(void *ptr)
 	}
 }
 
+// Clear cache and delete all blocks
 void TexMalloc::clear()
 {
 	QMutexLocker lock(&mutex);
 	for (QMap<void*, size_t>::iterator i = newInsert.begin();i!=newInsert.end();++i)
-		free(i.key());
+		std::free(i.key());
 	newInsert.clear();
 }
 

@@ -282,6 +282,22 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, cons
 	flagShowLocation = true;
 }
 
+BottomStelBar::~BottomStelBar()
+{
+	// Remove currently hidden buttons which are not delete by a parent element
+	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	{
+		foreach (StelButton* b, iter.value().elems)
+		{
+			if (b->parentItem()==0)
+			{
+				delete b;
+				b=NULL;
+			}
+		}
+	}
+}
+
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
 {
 	QList<StelButton*>& g = buttonGroups[groupName].elems;
