@@ -161,16 +161,22 @@ private:
 };
 
 //! @class TexMalloc
-//! A special multithreaded malloc which tries to reuse the memory already allocated for loading textures
+//! A special multithreaded malloc which manages a memory pool to reuse the memory already allocated for loading previous textures
 class TexMalloc
 {
 public:
-	static void *malloc(size_t size);
+	//! Equivalent to standard C malloc function
+	static void* malloc(size_t size);
+	//! Equivalent to standard C free function
 	static void free(void *ptr);
+	//! Clear the cache and release all memory
 	static void clear();
 private:
+	//! Cache memory block size/pointer
 	static QMultiMap<size_t, void*> cache;
+	//! Reversed cache, gives the size of an allocated memory block
 	static QMap<void*, size_t> newInsert;
+	//! Used for thread safety
 	static QMutex mutex;
 };
 
