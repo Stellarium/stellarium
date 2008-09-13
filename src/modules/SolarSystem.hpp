@@ -150,7 +150,7 @@ public slots:
 	bool getFlagOrbits() const {return flagOrbits;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
-	void setFlagLightTravelTime(bool b) {flagLightTravelTime = b;}
+	void setFlagLightTravelTime(bool b);
 	//! Get the current value of the flag which determines if light travel time 
 	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}	
