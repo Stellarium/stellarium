@@ -419,7 +419,8 @@ void Projector::setCurrentMapping(const QString& mappingId)
 	}
 	else
 	{
-		qWarning() << "Unknown projection type: " << qPrintable(mappingId);
+		qWarning() << "Unknown projection type: " << qPrintable(mappingId) << "setting \"stereographic\" instead";
+		setCurrentMapping("stereographic");
 	}
 }
 
