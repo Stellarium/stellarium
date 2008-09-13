@@ -41,6 +41,7 @@
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
+#include <QSettings>
 
 #include "StelMainGraphicsView.hpp"
 #include <QDialog>
@@ -61,7 +62,7 @@ void ViewDialog::languageChanged()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		shoutingStarsZHRChanged();
+		shootingStarsZHRChanged();
 		populateLists();
 	}
 }
@@ -129,12 +130,22 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 	
 	// Shouting stars section
-	shoutingStarsZHRChanged();
-	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
-	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
-	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
-	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
-	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shoutingStarsZHRChanged()));
+	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	assert(mmgr);
+	switch(mmgr->getZHR())
+	{
+		case 0: ui->zhrNone->setChecked(true); break;
+		case 80: ui->zhr80->setChecked(true); break;
+		case 10000: ui->zhr10000->setChecked(true); break;
+		case 144000: ui->zhr144000->setChecked(true); break;
+		default: ui->zhr10->setChecked(true); break;
+	}
+	shootingStarsZHRChanged();
+	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
+	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
+	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
+	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
+	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
 	
 	// Labels section
 	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
@@ -341,7 +352,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 }
 
-void ViewDialog::shoutingStarsZHRChanged()
+void ViewDialog::shootingStarsZHRChanged()
 {
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
 	int zhr=-1;
@@ -363,7 +374,10 @@ void ViewDialog::shoutingStarsZHRChanged()
 	if (ui->zhr144000->isChecked())
 		zhr = 144000;
 	if (zhr!=mmgr->getZHR())
+	{
 		mmgr->setZHR(zhr);
+		StelApp::getInstance().getSettings()->setValue("astro/meteor_rate", zhr);
+	}
 	switch (zhr)
 	{
 		case 0:
@@ -384,6 +398,7 @@ void ViewDialog::shoutingStarsZHRChanged()
 		default:
 			ui->zhrLabel->setText(QString("<small><i>")+"Error"+"</i></small>");
 	}
+
 }
 
 void ViewDialog::starsLabelsValueChanged(int v)
