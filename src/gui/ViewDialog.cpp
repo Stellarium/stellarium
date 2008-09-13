@@ -41,7 +41,6 @@
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
-#include <QSettings>
 
 #include "StelMainGraphicsView.hpp"
 #include <QDialog>
@@ -320,7 +319,6 @@ void ViewDialog::updateSkyCultureText()
 
 void ViewDialog::projectionChanged(const QString& projectionName)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	const QMap<QString, const Mapping*>& mappings = StelApp::getInstance().getCore()->getProjection()->getAllMappings();
 	QMapIterator<QString, const Mapping*> i(mappings);
 	while (i.hasNext())
@@ -333,7 +331,6 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
-	conf->setValue("projection/type", StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getId());
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
