@@ -50,8 +50,10 @@ private slots:
 	void starsLabelsValueChanged(int);
 	void saveSkyTabSettings(void);
 	void saveMarkingsTabSettings(void);
-	void saveLandscaleTabSettings(void);
+	void saveLandscapeTabSettings(void);
 	void saveStarloreTabSettings(void);
+	void setCurrentLandscapeAsDefault(void);
+	void setCurrentCultureAsDefault(void);
 
 private:
 	void updateSkyCultureText();	
