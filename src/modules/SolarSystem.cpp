@@ -993,14 +993,10 @@ bool SolarSystem::getFlagTrails(void) const
 
 void SolarSystem::setFlagHints(bool b)
 {
-	if (b != getFlagHints())
+	vector<Planet*>::iterator iter;
+	for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
 	{
-		vector<Planet*>::iterator iter;
-		for( iter = systemPlanets.begin(); iter < systemPlanets.end(); iter++ )
-		{
-			(*iter)->setFlagHints(b);
-		}
-		StelApp::getInstance().getSettings()->setValue("astro/flag_planets_hints", b);
+		(*iter)->setFlagHints(b);
 	}
 }
 
@@ -1033,11 +1029,7 @@ bool SolarSystem::getFlagLabels() const
 
 void SolarSystem::setFlagOrbits(bool b)
 {
-	if (b != getFlagOrbits())
-	{
-		flagOrbits = b;
-		StelApp::getInstance().getSettings()->setValue("astro/flag_planets_orbits", b);
-	}
+	flagOrbits = b;
 	if (!b || !selected || selected == sun)
 	{
 		vector<Planet*>::iterator iter;
@@ -1062,11 +1054,7 @@ void SolarSystem::setFlagOrbits(bool b)
 
 void SolarSystem::setFlagLightTravelTime(bool b)
 {
-	if (b != getFlagLightTravelTime())
-	{
-		flagLightTravelTime = b;
-		StelApp::getInstance().getSettings()->setValue("astro/flag_light_travel_time", b);
-	}
+	flagLightTravelTime = b;
 }
 
 void SolarSystem::setSelected(StelObject* obj)
@@ -1250,11 +1238,7 @@ void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction action)
 // Activate/Deactivate planets display
 void SolarSystem::setFlagPlanets(bool b) 
 {
-	if (b != flagShow)
-	{
-		flagShow=b;
-		StelApp::getInstance().getSettings()->setValue("astro/flag_planets", b);
-	}
+	flagShow=b;
 }
 
 bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
