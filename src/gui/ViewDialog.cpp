@@ -449,8 +449,6 @@ void ViewDialog::starsLabelsValueChanged(int v)
 
 void ViewDialog::saveSkyTabSettings(void)
 {
-	qDebug() << "saving settings for sky tab";
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
@@ -479,8 +477,6 @@ void ViewDialog::saveSkyTabSettings(void)
 
 void ViewDialog::saveMarkingsTabSettings(void)
 {
-	qDebug() << "saving settings for markings tab";
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
@@ -524,8 +520,6 @@ void ViewDialog::saveMarkingsTabSettings(void)
 
 void ViewDialog::saveLandscapeTabSettings(void)
 {
-	qDebug() << "saving settings for landscape tab";
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
@@ -540,12 +534,11 @@ void ViewDialog::saveLandscapeTabSettings(void)
 
 void ViewDialog::saveStarloreTabSettings(void)
 {
-	qDebug() << "saving settings for starlore tab";
+	// TODO: sky culture associated language, when feature is implemented.
 }
 
 void ViewDialog::setCurrentLandscapeAsDefault(void)
 {
-	qDebug() << "saving current landscape as default";
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 
@@ -557,7 +550,6 @@ void ViewDialog::setCurrentLandscapeAsDefault(void)
 
 void ViewDialog::setCurrentCultureAsDefault(void)
 {
-	qDebug() << "saving current sky culture as default";
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 	conf->setValue("localization/sky_culture", StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir());
