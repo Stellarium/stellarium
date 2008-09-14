@@ -82,8 +82,10 @@ void ViewDialog::createDialogContent()
 	
 	populateLists();
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
+	connect(ui->setDefaultCultureButton, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
 	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
+	connect(ui->setDefaultLandscapeButton, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 	
 	// Connect and initialize checkboxes and other widgets
 	
@@ -172,7 +174,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 	connect(ui->nebulaLabelCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
 
-	//TODO
 	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
 	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
 	connect(ui->planetLabelCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
@@ -193,21 +194,26 @@ void ViewDialog::createDialogContent()
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+	connect(ui->showGroundCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
+	connect(ui->showFogCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Atmosphere");
 	connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+	connect(ui->showAtmosphereCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
+	connect(ui->landscapePositionCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveLandscapeTabSettings()));
 	
 	// Grid and lines
 	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
@@ -516,14 +522,45 @@ void ViewDialog::saveMarkingsTabSettings(void)
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 }
 
-void ViewDialog::saveLandscaleTabSettings(void)
+void ViewDialog::saveLandscapeTabSettings(void)
 {
 	qDebug() << "saving settings for landscape tab";
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	assert(lmgr);
+	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
+	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
+	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
+	conf->setValue("stars/init_bortle_scale", StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 }
 
 void ViewDialog::saveStarloreTabSettings(void)
 {
 	qDebug() << "saving settings for starlore tab";
+}
+
+void ViewDialog::setCurrentLandscapeAsDefault(void)
+{
+	qDebug() << "saving current landscape as default";
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	assert(lmgr);
+	conf->setValue("init_location/landscape_name", lmgr->getLandscapeId());
+	conf->setValue("init_location/name", lmgr->getCurrentLandscapeName());
+}
+
+void ViewDialog::setCurrentCultureAsDefault(void)
+{
+	qDebug() << "saving current sky culture as default";
+	QSettings* conf = StelApp::getInstance().getSettings();
+	assert(conf);
+	conf->setValue("localization/sky_culture", StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir());
 }
 
 void ViewDialog::planetsLabelsValueChanged(int v)
