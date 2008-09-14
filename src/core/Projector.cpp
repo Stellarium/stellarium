@@ -416,7 +416,6 @@ void Projector::setCurrentMapping(const QString& mappingId)
 
 		setFov(fov);
 		initGlMatrixOrtho2d();
-		StelApp::getInstance().getSettings()->setValue("projection/type", mappingId);
 	}
 	else
 	{
