@@ -329,11 +329,11 @@ void StelApp::initPlugIns()
 {
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
-	foreach (StelModuleMgr::ExternalStelModuleDescriptor i, moduleMgr->getExternalModuleList())
+	foreach (StelModuleMgr::PluginDescriptor i, moduleMgr->getPluginsList())
 	{
 		if (i.loadAtStartup==false)
 			continue;
-		StelModule* m = moduleMgr->loadExternalPlugin(i.key);
+		StelModule* m = moduleMgr->loadPlugin(i.key);
 		if (m!=NULL)
 		{
 			moduleMgr->registerModule(m, true);
@@ -559,6 +559,8 @@ void StelApp::update(double deltaTime)
 	deltaTime *= timeMultiplier;
 
 	core->update(deltaTime);
+	
+	moduleMgr->update();
 	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionUpdate))
