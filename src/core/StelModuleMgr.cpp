@@ -39,10 +39,19 @@ StelModuleMgr::StelModuleMgr()
 	callOrders[StelModule::ActionHangleMouseClicks]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleMouseMoves]=QList<StelModule*>();
 	callOrders[StelModule::ActionHandleKeys]=QList<StelModule*>();
+	callingListsToRegenerate = false;
 }
 
 StelModuleMgr::~StelModuleMgr()
 {
+}
+
+// Regenerate calling lists if necessary
+void StelModuleMgr::update()
+{
+	if (callingListsToRegenerate)
+		generateCallingLists();
+	callingListsToRegenerate = false;
 }
 
 /*************************************************************************
@@ -65,7 +74,7 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 /*************************************************************************
  Unregister and delete a StelModule.
 *************************************************************************/
-void StelModuleMgr::removeModule(const QString& moduleID)
+void StelModuleMgr::unloadModule(const QString& moduleID)
 {
 	StelModule* m = getModule(moduleID);
 	if (!m)
@@ -74,7 +83,7 @@ void StelModuleMgr::removeModule(const QString& moduleID)
 		return;
 	}
 	modules.remove(moduleID);
-	generateCallingLists();
+	callingListsToRegenerate = true;
 	m->deleteLater();
 }
 
@@ -96,7 +105,7 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID)
 /*************************************************************************
  Load an external plugin
 *************************************************************************/
-StelModule* StelModuleMgr::loadExternalPlugin(const QString& moduleID)
+StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 {
 	QString moduleFullPath = "modules/" + moduleID + "/lib" + moduleID;
 #ifdef WIN32
@@ -147,6 +156,22 @@ private:
 	StelModule::StelModuleActionName action;
 };
 
+
+// Unload all plugins
+void StelModuleMgr::unloadAllPlugins()
+{
+	QListIterator<PluginDescriptor> i(getPluginsList());
+	i.toBack();
+	while (i.hasPrevious())
+	{
+		const PluginDescriptor& d = i.previous();
+		if (d.loadAtStartup==false)
+			continue;
+		unloadModule(d.key);
+		qDebug() << "Unloaded external module " << d.key << ".";
+	}
+}
+
 /*************************************************************************
  Generate properly sorted calling lists for each action (e,g, draw, update)
  according to modules orders dependencies
@@ -171,9 +196,9 @@ void StelModuleMgr::generateCallingLists()
 /*************************************************************************
  Return the list of all the external module found in the modules/ directories
 *************************************************************************/
-QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalModuleList()
+QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 {
-	QList<StelModuleMgr::ExternalStelModuleDescriptor> result;
+	QList<StelModuleMgr::PluginDescriptor> result;
 	QSet<QString> moduleDirs;
 	
 	StelFileMgr& fileMan(StelApp::getInstance().getFileMgr());
@@ -191,7 +216,7 @@ QList<StelModuleMgr::ExternalStelModuleDescriptor> StelModuleMgr::getExternalMod
 	{
 		try
 		{
-			StelModuleMgr::ExternalStelModuleDescriptor mDesc;
+			StelModuleMgr::PluginDescriptor mDesc;
 			QSettings pd(fileMan.findFile("modules/" + *dir + "/module.ini"), StelIniFormat);
 			mDesc.key = *dir;
 			mDesc.name = pd.value("module/name").toString();
