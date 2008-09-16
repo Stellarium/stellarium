@@ -984,11 +984,21 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 
 	Vec3d v(start);
 	Vec3d pt1;
+	bool res1;
+	bool res2=true;
 	glBegin(GL_LINE_STRIP);
 	for (int i=0;i<=nbSeg;++i)
 	{
-		project(v, pt1);
-		glVertex2f(pt1[0],pt1[1]);
+		res1 = project(v, pt1);
+		const bool toDraw = !(res2==false && res1==false);
+		res2=res1;
+		if (toDraw)
+			glVertex2f(pt1[0],pt1[1]);
+		else
+		{
+			glEnd();
+			glBegin(GL_LINE_STRIP);
+		}
 		dRa.transfo(v);
 	}
 	glEnd();
@@ -1049,11 +1059,21 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 
 	Vec3d v(start);
 	Vec3d pt1;
+	bool res1;
+	bool res2=true;
 	glBegin(GL_LINE_STRIP);
 	for (int i=0;i<=nbSeg;++i)
 	{
-		project(v, pt1);
-		glVertex2f(pt1[0],pt1[1]);
+		res1 = project(v, pt1);
+		const bool toDraw = !(res2==false && res1==false);
+		res2=res1;
+		if (toDraw)
+			glVertex2f(pt1[0],pt1[1]);
+		else
+		{
+			glEnd();
+			glBegin(GL_LINE_STRIP);
+		}
 		dDe.transfo(v);
 	}
 	glEnd();
