@@ -39,20 +39,26 @@ public:
 	StelModuleMgr();
 	~StelModuleMgr();
 	
+	//! Regenerate calling lists if necessary
+	void update();
+	
 	//! Register a new StelModule to the list
 	//! The module is later referenced by its QObject name.
 	void registerModule(StelModule* m, bool generateCallingLists=false);
 	
 	//! Unregister and delete a StelModule. The program will hang if other modules depend on the removed one
 	//! @param moduleID the unique ID of the module, by convention equal to the class name
-	void removeModule(const QString& moduleID);
+	void unloadModule(const QString& moduleID);
 	
 	//! Load dynamically a module
 	//! @param moduleID the name of the module = name of the dynamic library file without extension 
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
-	StelModule* loadExternalPlugin(const QString& moduleID);
+	StelModule* loadPlugin(const QString& moduleID);
 
+	//! Unload all plugins
+	void unloadAllPlugins();
+	
 	//! Get the corresponding module or NULL if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name
 	StelModule* getModule(const QString& moduleName);
@@ -71,7 +77,7 @@ public:
 	}
 
 	//! Contains the information read from the module.ini file
-	struct ExternalStelModuleDescriptor
+	struct PluginDescriptor
 	{
 		//! The name of the directory and of the lib*.so with *=key
 		QString key;
@@ -84,7 +90,7 @@ public:
 	};
  
 	//! Return the list of all the external module found in the modules directories
-	static QList<ExternalStelModuleDescriptor> getExternalModuleList();
+	static QList<PluginDescriptor> getPluginsList();
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum SelectAction
@@ -102,6 +108,8 @@ private:
 	//! The list of all module in the correct order for each action
 	QMap<StelModule::StelModuleActionName, QList<StelModule*> > callOrders;
 
+	//! True if modules were removed, and therefore the calling list need to be regenerated
+	bool callingListsToRegenerate;
 };
 
 #endif // _STELMODULEMGR_HPP_
