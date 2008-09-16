@@ -413,6 +413,11 @@ void StelGui::init()
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Nebulas"));
 	buttonBar->addButton(b, "040-nebulaeGroup");
 	
+	pxmapOn = QPixmap(":/graphicGui/gui/btPlanets-on.png");
+	pxmapOff = QPixmap(":/graphicGui/gui/btPlanets-off.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_Planets_Hints"));
+	buttonBar->addButton(b, "040-nebulaeGroup");
+	
 // 	pxmapOn = QPixmap(":/graphicGui/gui/btDSS-on.png");
 // 	pxmapOff = QPixmap(":/graphicGui/gui/btDSS-off.png");
 // 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiActions("actionShow_DSS"));
