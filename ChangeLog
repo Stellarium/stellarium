@@ -15,7 +15,8 @@ Optimized atmosphere computation and others, speed can be increased up to a fact
 Implemented light pollution following the Bortle scale index.
 Improved and optimized stars rendering (updated colors, sizes and added large halo for very bright ones, use GL lists for drawing stars by bunch)
 Made testing python wrappers using SIP (unused)
-Created a new SkyTile class supporting dynamic multi-resolution images loading and display. Image trees can be stored as JSON files.
+Created a new SkyTile class supporting lazy dynamic multi-resolution images loading and display. Image trees can be stored as JSON files.
+Startup is much faster.
 Migrated the previous nebula textures to the new format.
 Added a LocationManager for managing observing locations and cleaned the code of observer.
 Changed key bindings, use F1.. F6 for opening dialogs.
