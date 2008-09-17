@@ -36,7 +36,7 @@
 #include "SolarSystem.hpp"
 #include "StelIniParser.hpp"
 #include "Projector.hpp"
-#include "PlanetLocationMgr.hpp"
+#include "LocationMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelFontMgr.hpp"
@@ -235,7 +235,7 @@ void StelApp::init()
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	planetLocationMgr = new PlanetLocationMgr();
+	planetLocationMgr = new LocationMgr();
 	
 	timeMultiplier = 1;
 	

@@ -25,7 +25,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Navigator.hpp"
-#include "PlanetLocationMgr.hpp"
+#include "LocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 #include <QDebug>
@@ -149,7 +149,7 @@ void ArtificialPlanet::computeAverage(double f1) {
 
 
 
-Observer::Observer(const PlanetLocation &loc) : currentLocation(loc)
+Observer::Observer(const Location &loc) : currentLocation(loc)
 {
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	planet = ssystem->searchByEnglishName(loc.planetName);
@@ -191,7 +191,7 @@ Mat4d Observer::getRotEquatorialToVsop87(void) const
 	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-SpaceShipObserver::SpaceShipObserver(const PlanetLocation& startLoc, const PlanetLocation& target, double atransitSeconds) : Observer(startLoc),
+SpaceShipObserver::SpaceShipObserver(const Location& startLoc, const Location& target, double atransitSeconds) : Observer(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
 {
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
