@@ -124,8 +124,6 @@ private:
 	double hoverOpacity;
 	
 	bool redMode;
-	
-	static QPixmap makeRed(const QPixmap& p);
 };
 
 //! The button bar on the left containing windows toggle buttons
