@@ -123,14 +123,14 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 	}
 	catch (std::exception& e)
 	{
-		qWarning() << "ERROR while locating module path: " << e.what();
+		qWarning() << "ERROR while locating plugin path: " << e.what();
 	}
 
 	QPluginLoader loader(moduleFullPath);
 	if (!loader.load())
 	{
 		qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString();
-		qWarning() << "Module " << moduleID << " will not be loaded.";
+		qWarning() << "Plugin " << moduleID << " will not be loaded.";
 		return NULL;
 	}
 	
@@ -138,13 +138,13 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 	if (!obj)
 	{
 		qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString();
-		qWarning() << "Module " << moduleID << " will not be open.";
+		qWarning() << "Plugin " << moduleID << " will not be open.";
 		return NULL;
 	}
 	
 	StelPluginInterface* plugInt = qobject_cast<StelPluginInterface *>(obj);
 	StelModule* sMod = plugInt->getStelModule();
-	qDebug() << "Loaded external module " << moduleID << ".";
+	qDebug() << "Loaded plugin " << moduleID << ".";
 	return sMod;
 }
 
@@ -168,7 +168,7 @@ void StelModuleMgr::unloadAllPlugins()
 		if (d.loadAtStartup==false)
 			continue;
 		unloadModule(d.key);
-		qDebug() << "Unloaded external module " << d.key << ".";
+		qDebug() << "Unloaded plugin " << d.key << ".";
 	}
 }
 
@@ -228,7 +228,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		}
 		catch (std::exception& e)
 		{
-			qWarning() << "WARNING: unable to successfully read module.ini file from module " << *dir;
+			qWarning() << "WARNING: unable to successfully read module.ini file from plugin " << *dir;
 		}
 	}
 
