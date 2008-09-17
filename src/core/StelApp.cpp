@@ -777,9 +777,9 @@ void StelApp::setVisionModeNight(bool b)
 {
 	if (flagNightVision!=b)
 	{
+		flagNightVision=b;
 		setColorScheme(b ? "night_color" : "color");
 	}
-	flagNightVision=b;
 }
 
 // Update translations and font for sky everywhere in the program
