@@ -20,7 +20,7 @@
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "PlanetLocationMgr.hpp"
+#include "LocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -71,7 +71,7 @@ void LocationDialog::createDialogContent()
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 	
 	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getPlanetLocationMgr().getModelAll());
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 							  
@@ -137,7 +137,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(locationNameChanged(const QString&)));
 }
 
-void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
+void LocationDialog::setFieldsFromLocation(const Location& loc)
 {
 	// Deactivate edit signals
 	disconnectEditSignals();
@@ -204,10 +204,10 @@ void LocationDialog::setFieldsFromLocation(const PlanetLocation& loc)
 	connectEditSignals();
 }
 
-// Create a PlanetLocation instance from the fields
-PlanetLocation LocationDialog::locationFromFields() const
+// Create a Location instance from the fields
+Location LocationDialog::locationFromFields() const
 {
-	PlanetLocation loc;
+	Location loc;
 	loc.planetName = ui->planetNameComboBox->currentText();
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
@@ -222,7 +222,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 	isEditingNew=false;
 	ui->saveLocationPushButton->setEnabled(false);
 	
-	PlanetLocation loc = StelApp::getInstance().getPlanetLocationMgr().locationForSmallString(index.data().toString());
+	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
@@ -233,7 +233,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 void LocationDialog::setPositionFromMap(double longitude, double latitude)
 {
 	reportEdit();
-	PlanetLocation loc = locationFromFields();
+	Location loc = locationFromFields();
 	loc.latitude = latitude;
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
@@ -244,7 +244,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 void LocationDialog::comboBoxChanged(const QString& text)
 {
 	reportEdit();
-	PlanetLocation loc = locationFromFields();
+	Location loc = locationFromFields();
 	if (loc.planetName!=StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().planetName)
 		setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
@@ -253,7 +253,7 @@ void LocationDialog::comboBoxChanged(const QString& text)
 void LocationDialog::spinBoxChanged(int i)
 {
 	reportEdit();
-	PlanetLocation loc = locationFromFields();
+	Location loc = locationFromFields();
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 }
 
@@ -272,21 +272,21 @@ void LocationDialog::reportEdit()
 		isEditingNew=true;
 	}
 	
-	PlanetLocation loc = locationFromFields();
-	if (!StelApp::getInstance().getPlanetLocationMgr().canSaveUserLocation(loc))
+	Location loc = locationFromFields();
+	if (!StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc))
 	{
 		ui->cityNameLineEdit->setText("New Location");
 		ui->cityNameLineEdit->selectAll();
 		loc = locationFromFields();
 	}
-	ui->saveLocationPushButton->setEnabled(isEditingNew && StelApp::getInstance().getPlanetLocationMgr().canSaveUserLocation(loc));
+	ui->saveLocationPushButton->setEnabled(isEditingNew && StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc));
 }
 
 // Called when the user clic on the save button
 void LocationDialog::saveCurrentLocation()
 {
-	const PlanetLocation& loc = locationFromFields();
-	StelApp::getInstance().getPlanetLocationMgr().saveUserLocation(loc);
+	const Location& loc = locationFromFields();
+	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
 	ui->saveLocationPushButton->setEnabled(false);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);

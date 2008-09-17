@@ -24,7 +24,7 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>

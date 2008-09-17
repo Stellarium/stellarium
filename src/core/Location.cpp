@@ -16,12 +16,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 #include "StelLocaleMgr.hpp"
 #include <QStringList>
 
 // Output the location as a string ready to be stored in the user_location file
-QString PlanetLocation::serializeToLine() const
+QString Location::serializeToLine() const
 {
 	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
 			.arg(name)
@@ -38,10 +38,10 @@ QString PlanetLocation::serializeToLine() const
 			.arg(landscapeKey);
 }
 
-// Parse a lcoation from a line serialization
-PlanetLocation PlanetLocation::createFromLine(const QString& rawline)
+// Parse a location from a line serialization
+Location Location::createFromLine(const QString& rawline)
 {
-	PlanetLocation loc;
+	Location loc;
 	const QStringList& splitline = rawline.split("\t");
 	loc.name    = splitline[0];
 	loc.state   = splitline[1];

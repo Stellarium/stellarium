@@ -18,13 +18,13 @@
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "PlanetLocationMgr.hpp"
+#include "LocationMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
 #include <QFile>
 
-PlanetLocationMgr::PlanetLocationMgr()
+LocationMgr::LocationMgr()
 {
 	loadCities("data/base_locations.txt");
 	loadCities("data/user_locations.txt");
@@ -33,7 +33,7 @@ PlanetLocationMgr::PlanetLocationMgr()
 	modelAllLocation->setStringList(locations.keys());
 }
 
-void PlanetLocationMgr::loadCities(const QString& fileName)
+void LocationMgr::loadCities(const QString& fileName)
 {
 	// Load the cities from data file
 	QString cityDataPath;
@@ -63,12 +63,12 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 		const QString& rawline=sourcestream.readLine();
 		if (rawline.isEmpty() || rawline.startsWith('#'))
 			continue;
-		PlanetLocation loc = PlanetLocation::createFromLine(rawline);
+		Location loc = Location::createFromLine(rawline);
 		
 		if (locations.contains(loc.toSmallString()))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			PlanetLocation loc2 = locations[loc.toSmallString()];
+			Location loc2 = locations[loc.toSmallString()];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
@@ -87,13 +87,13 @@ void PlanetLocationMgr::loadCities(const QString& fileName)
 	sourcefile.close();
 }
 
-PlanetLocationMgr::~PlanetLocationMgr()
+LocationMgr::~LocationMgr()
 {
 }
 
-const PlanetLocation PlanetLocationMgr::locationForSmallString(const QString& s) const
+const Location LocationMgr::locationForSmallString(const QString& s) const
 {
-	QMap<QString, PlanetLocation>::const_iterator iter = locations.find(s);
+	QMap<QString, Location>::const_iterator iter = locations.find(s);
 	if (iter==locations.end())
 	{
 		qWarning() << "Warning: location " << s << "is unknown, use Paris as default location.";
@@ -106,13 +106,13 @@ const PlanetLocation PlanetLocationMgr::locationForSmallString(const QString& s)
 }
 
 // Get whether a location can be permanently added to the list of user locations
-bool PlanetLocationMgr::canSaveUserLocation(const PlanetLocation& loc) const
+bool LocationMgr::canSaveUserLocation(const Location& loc) const
 {
 	return locations.find(loc.toSmallString())==locations.end();
 }
 
 // Add permanently a location to the list of user locations
-bool PlanetLocationMgr::saveUserLocation(const PlanetLocation& loc)
+bool LocationMgr::saveUserLocation(const Location& loc)
 {
 	if (!canSaveUserLocation(loc))
 		return false;

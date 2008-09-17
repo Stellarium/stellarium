@@ -22,7 +22,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 
 #include <QDebug>
 #include <QSettings>
