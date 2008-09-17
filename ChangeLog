@@ -12,10 +12,12 @@ Recoded from scratch the new QWidget based GUI rendered in the QGraphicsView usi
 Moved stars/planets halo rendering into SkyDrawer.
 Implemented dynamic eye adaptation for bright objects.
 Optimized atmosphere computation and others, speed can be increased up to a factor of 2.
+Implemented light pollution following the Bortle scale index.
+Improved stars rendering (updated colors, sizes and added large halo for very bright ones)
 Made testing python wrappers using SIP (unused)
 Created a new SkyTile class supporting dynamic multi-resolution images loading and display. Image trees can be stored as JSON files.
 Migrated the previous nebula textures to the new format.
-Added a LocationManager for managing observing locations.
+Added a LocationManager for managing observing locations and cleaned the code of observer.
 Fixed many bugs.
 
 0.9.1 [2008-01-17]
