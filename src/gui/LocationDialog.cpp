@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QFrame>
 #include <QSortFilterProxyModel>
+#include <QTimer>
 
 LocationDialog::LocationDialog() : isEditingNew(false)
 {
@@ -94,7 +95,9 @@ void LocationDialog::createDialogContent()
 	
 	connectEditSignals();
 	
-	startTimer(200);	// Refresh the dialog every 0.5 second if the position is changed programmatically
+	QTimer* refreshTimer = new QTimer(this);
+	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
+	refreshTimer->start(200);
 }
 
 // Update the widget to make sure it is synchrone if the location is changed programmatically
