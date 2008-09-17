@@ -41,6 +41,8 @@
 #include "SolarSystem.hpp"
 #include "SkyBackground.hpp"
 #include "StelStyle.hpp"
+#include "SkyDrawer.hpp"
+#include "MeteorMgr.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -124,29 +126,29 @@ void StelGui::init()
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
 	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false, "viewing/flag_constellation_drawing");
-	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
-	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false);
-	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false);
+	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false, "viewing/flag_constellation_art");
+	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false, "viewing/flag_constellation_name");
+	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false, "viewing/flag_constellation_boundaries");
 	
-	addGuiActions("actionShow_Azimutal_Grid", N_("Azimutal grid"), "Z", group, true, false);
-	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
-	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
-	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
-	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
-	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), "", group, true, false);
-	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false);
+	addGuiActions("actionShow_Azimutal_Grid", N_("Azimutal grid"), "Z", group, true, false, "viewing/flag_azimutal_grid");
+	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false, "viewing/flag_equatorial_grid");
+	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false, "viewing/flag_equatorial_J2000_grid");
+	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false, "viewing/flag_ecliptic_line");
+	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false, "viewing/flag_equator_line");
+	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), "", group, true, false, "viewing/flag_meridian_line");
+	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false, "viewing/flag_cardinal_points");
 
-	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false);
-	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false);
-	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false);
+	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false, "landscape/flag_landscape");
+	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false, "landscape/flag_atmosphere");
+	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false, "landscape/flag_fog");
 	
-	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
+	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false, "astro/flag_nebula_name");
 //	addGuiActions("actionShow_DSS", N_("DSS"), "", group, true, false);
-	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
-	addGuiActions("actionShow_Planets_Hints", N_("Planets hints"), "P", group, true, false);
+	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false, "astro/flag_stars");
+	addGuiActions("actionShow_Planets_Hints", N_("Planets hints"), "P", group, true, false, "astro/flag_planets_hints");
 	
-	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
-	addGuiActions("actionSet_Full_Screen", N_("Full-screen mode"), "F11", group, true, false);
+	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false, "viewing/flag_night");
+	addGuiActions("actionSet_Full_Screen", N_("Full-screen mode"), "F11", group, true, false); // TODO: move persistence here? (currently elsewhere)
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 	
@@ -703,7 +705,14 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 // Called each time a GUI action is triggered
 void StelGui::guiActionTriggered(bool b)
 {
-	qDebug() << QObject::sender()->objectName() << b << QObject::sender()->property("persistenceName").toString();
+	// can get the action name from: QObject::sender()->objectName()
+	QString configKey = QObject::sender()->property("persistenceName").toString();
+	if (configKey != "")
+	{
+		QSettings* conf = StelApp::getInstance().getSettings();
+		assert(conf);
+		conf->setValue(configKey, b);
+	}
 }
 	
 void StelGui::updateBarsPos()
