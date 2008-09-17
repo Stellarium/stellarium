@@ -84,7 +84,7 @@ private slots:
 	void saveCurrentLocation();
 	
 private:
-	QString lastPixmapPath;
+	QString lastPlanet;
 	bool lastVisionMode;
 };
 
