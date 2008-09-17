@@ -444,8 +444,8 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 	}
 	
 	// Now draw the halo according the object brightness
-	bool save = getFlagTwinkle();
-	setFlagTwinkle(false);
+	bool save = flagStarTwinkle;
+	flagStarTwinkle = false;
 	
 	float rcm[2];
 	computeRCMag(mag, rcm);
@@ -490,7 +490,7 @@ void SkyDrawer::postDrawSky3dModel(double x, double y, double illuminatedArea, f
 		drawPointSource(x,y,rcm,color);
 		postDrawPointSource();
 	}
-	setFlagTwinkle(save);
+	flagStarTwinkle=save;
 }
 
 float SkyDrawer::findWorldLumForMag(float mag, float targetRadius)
