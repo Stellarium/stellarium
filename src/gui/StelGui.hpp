@@ -121,7 +121,7 @@ private slots:
 	
 	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
 	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
-	
+
 	//! Called each time a GUI action is triggered
 	void guiActionTriggered(bool b=false);
 	
