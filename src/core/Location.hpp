@@ -21,12 +21,12 @@
 
 #include <QString>
 
-//! @class PlanetLocation
+//! @class Location
 //! Store the informations for a location on a planet
-class PlanetLocation
+class Location
 {
 public:
-	PlanetLocation() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
+	Location() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
 	
 	//! Return a short string which can be used in a list view
 	QString toSmallString() const
@@ -62,7 +62,7 @@ public:
 	QChar role;
 	
 	//! Parse a lcoation from a line serialization
-	static PlanetLocation createFromLine(const QString& line);
+	static Location createFromLine(const QString& line);
 };
 
 #endif // _PLANET_LOCATION_HPP_

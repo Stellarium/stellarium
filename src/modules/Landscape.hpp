@@ -28,10 +28,10 @@
 #include "Fader.hpp"
 #include "StelUtils.hpp"
 #include "STextureTypes.hpp"
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 
 class QSettings;
-class PlanetLocation;
+class Location;
 
 //! Store and manages the displaying of the Landscape
 class Landscape
@@ -66,7 +66,7 @@ public:
 	QString getDescription() const {return description;}
 
 	//! Return the associated location or NULL
-	const PlanetLocation& getLocation() const {return location;}
+	const Location& getLocation() const {return location;}
 	
 protected:
 	//! Load attributes common to all landscapes
@@ -94,7 +94,7 @@ protected:
 		float texCoords[4];
 	} landscapeTexCoord;
 	
-	PlanetLocation location;
+	Location location;
 };
 
 

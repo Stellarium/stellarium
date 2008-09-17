@@ -25,7 +25,7 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
-class PlanetLocation;
+class Location;
 
 class LocationDialog : public StelDialog
 {
@@ -45,10 +45,10 @@ protected:
 private:
 	//! Set the values of all the fields from a location info
 	//! Also move the observer to this position
-	void setFieldsFromLocation(const PlanetLocation& loc);
+	void setFieldsFromLocation(const Location& loc);
 	
-	//! Create a PlanetLocation instance from the fields
-	PlanetLocation locationFromFields() const;
+	//! Create a Location instance from the fields
+	Location locationFromFields() const;
 	
 	//! True if the user is currently editing a new location
 	bool isEditingNew;

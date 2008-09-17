@@ -20,7 +20,7 @@
 #ifndef _OBSERVER_HPP_
 #define _OBSERVER_HPP_
 
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 #include <QObject>
 #include <QString>
 #include "vecmath.h"
@@ -29,14 +29,15 @@ class Planet;
 class ArtificialPlanet;
 class Observer;
 
+//! @class Observer
 //! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
 {
 	Q_OBJECT;
 	
 public:
-	//! Create a new Observer instance which is at a fixed PlanetLocation
-	Observer(const PlanetLocation& loc);
+	//! Create a new Observer instance which is at a fixed Location
+	Observer(const Location& loc);
 	~Observer();
 
 	//! Update Observer info if needed. Default implementation does nothing.
@@ -50,7 +51,7 @@ public:
 	virtual const Planet* getHomePlanet(void) const {return planet;}
 	
 	//! Get the informations on the current location
-	const PlanetLocation& getCurrentLocation() const {return currentLocation;}
+	const Location& getCurrentLocation() const {return currentLocation;}
 	
 	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one
 	//! provided by the getNextObserver() method
@@ -60,7 +61,7 @@ public:
 	virtual Observer* getNextObserver() const {return new Observer(currentLocation);}
 	
 protected:
-	PlanetLocation currentLocation;
+	Location currentLocation;
 	const Planet* planet;    
 };
 
@@ -69,7 +70,7 @@ protected:
 class SpaceShipObserver : public Observer
 {
 public:
-	SpaceShipObserver(const PlanetLocation& startLoc, const PlanetLocation& target, double transitSeconds=1.f);
+	SpaceShipObserver(const Location& startLoc, const Location& target, double transitSeconds=1.f);
 	~SpaceShipObserver();
 	
 	//! Update Observer info if needed. Default implementation does nothing.
@@ -79,8 +80,8 @@ public:
 	virtual Observer* getNextObserver() const {return new Observer(moveTargetLocation);}
 	
 private:
-	PlanetLocation moveStartLocation;
-	PlanetLocation moveTargetLocation;
+	Location moveStartLocation;
+	Location moveTargetLocation;
 	ArtificialPlanet* artificialPlanet;
 	double timeToGo;
 	double transitSeconds;

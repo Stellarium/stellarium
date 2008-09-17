@@ -16,10 +16,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PLANET_LOCATION_MGR_HPP_
-#define _PLANET_LOCATION_MGR_HPP_
+#ifndef _LOCATION_MGR_HPP_
+#define _LOCATION_MGR_HPP_
 
-#include "PlanetLocation.hpp"
+#include "Location.hpp"
 #include <QString>
 #include <QObject>
 #include <QMetaType>
@@ -27,30 +27,31 @@
 
 class QStringListModel;
 
+//! @class LocationMgr
 //! Base class for any astro image with a fixed position
-class PlanetLocationMgr : public QObject
+class LocationMgr : public QObject
 {
 	Q_OBJECT;
 	
 public:
 	//! Default constructor
-	PlanetLocationMgr();
+	LocationMgr();
 	//! Destructor
-	~PlanetLocationMgr();
+	~LocationMgr();
 	
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
 	
-	//! Return the PlanetLocation for the given row (match modelAllLocation index row)
-	const PlanetLocation locationForSmallString(const QString& s) const;
+	//! Return the Location for the given row (match modelAllLocation index row)
+	const Location locationForSmallString(const QString& s) const;
 	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
-	bool canSaveUserLocation(const PlanetLocation& loc) const;
+	bool canSaveUserLocation(const Location& loc) const;
 	
 	//! Add permanently a location to the list of user locations
 	//! It is later identified by its small string
-	bool saveUserLocation(const PlanetLocation& loc);
+	bool saveUserLocation(const Location& loc);
 	
 private:
 	//! Load cities from a file
@@ -60,7 +61,7 @@ private:
 	QStringListModel* modelAllLocation;
 	
 	//! The list of all loaded locations
-	QMap<QString, PlanetLocation> locations;
+	QMap<QString, Location> locations;
 };
 
-#endif // _PLANET_LOCATION_MGR_HPP_
+#endif // _LOCATION_MGR_HPP_
