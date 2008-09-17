@@ -123,7 +123,7 @@ void StelGui::init()
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	QString group = N_("Display Options");
-	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false);
+	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false, "viewing/flag_constellation_drawing");
 	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
 	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false);
 	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false);
@@ -658,7 +658,7 @@ bool StelGui::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, const QString& persistenceName)
 {
 	QAction* a;
 	a = new QAction(&StelMainGraphicsView::getInstance());
@@ -673,10 +673,13 @@ QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, 
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
+	a->setProperty("persistenceName", QVariant(persistenceName));
 	a->setShortcutContext(Qt::WidgetShortcut);
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
 	StelMainGraphicsView::getInstance().addAction(a);
+	
+	connect(a, SIGNAL(toggled(bool)), this, SLOT(guiActionTriggered(bool)));
 	return a;
 }
 
@@ -691,6 +694,12 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 	return a;
 }
 
+// Called each time a GUI action is triggered
+void StelGui::guiActionTriggered(bool b)
+{
+	qDebug() << QObject::sender()->objectName() << b;
+}
+	
 void StelGui::updateBarsPos()
 {
 	const int ww = StelMainGraphicsView::getInstance().width();

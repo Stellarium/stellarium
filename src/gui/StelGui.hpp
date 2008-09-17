@@ -96,7 +96,8 @@ public:
 	//! @param helpGroup hint on how to group the text in the help window
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
-	QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	//! @param persistenceName name of the attribute for persistence in the config.ini. Not persistent if empty.
+	QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, const QString& persistenceName=QString());
 	
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
@@ -117,6 +118,9 @@ private slots:
 	
 	bool getAutoHideVerticalButtonBar() const {return autoHideVerticalButtonBar;}
 	void setAutoHideVerticalButtonBar(bool b) {autoHideVerticalButtonBar=b;}
+	
+	//! Called each time a GUI action is triggered
+	void guiActionTriggered(bool b=false);
 	
 private:
 	void retranslateUi(QWidget *Form);
