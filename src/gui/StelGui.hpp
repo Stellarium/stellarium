@@ -107,6 +107,9 @@ public:
 	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar() {return buttonBar;}
 	
+	//! Transform the pixmap so that it look red for night vision mode
+	static QPixmap makeRed(const QPixmap& p);
+	
 private slots:
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();

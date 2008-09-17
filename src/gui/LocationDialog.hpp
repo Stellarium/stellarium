@@ -59,6 +59,9 @@ private:
 	void disconnectEditSignals();
 	void connectEditSignals();
 	
+	//! Update the map for the given location.
+	void setMapForLocation(const Location& loc);
+	
 private slots:
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
@@ -79,6 +82,10 @@ private slots:
 	
 	//! Called when the user clic on the save button
 	void saveCurrentLocation();
+	
+private:
+	QString lastPixmapPath;
+	bool lastVisionMode;
 };
 
 #endif // _LOCATIONDIALOG_HPP_

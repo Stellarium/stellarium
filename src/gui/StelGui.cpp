@@ -764,3 +764,19 @@ void StelGui::quitStellarium()
 {
 	QCoreApplication::exit();
 }
+
+QPixmap StelGui::makeRed(const QPixmap& p)
+{
+	QImage im = p.toImage().convertToFormat(QImage::Format_ARGB32);
+	Q_ASSERT(im.format()==QImage::Format_ARGB32);
+	QRgb* bits = (QRgb*)im.bits();
+	const QRgb* stop = bits+im.width()*im.height();
+	do
+	{
+		*bits = qRgba(qRed(*bits), (int)(0.2*qGreen(*bits)), (int)(0.2*qBlue(*bits)), qAlpha(*bits));
+		++bits;
+	}
+	while (bits!=stop);
+		
+	return QPixmap::fromImage(im);
+}

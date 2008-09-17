@@ -30,7 +30,7 @@
 #include "Planet.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
-
+#include "StelGui.hpp"
 #include <QSettings>
 #include <QDebug>
 #include <QFrame>
@@ -161,12 +161,28 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 		ui->planetNameComboBox->findText("Earth");
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
+	setMapForLocation(loc);
 	
+	// Set pointer position
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	
+	// Reactivate edit signals
+	connectEditSignals();
+}
+
+// Update the map for the given location.
+void LocationDialog::setMapForLocation(const Location& loc)
+{
+	// Avoids usless processing
+	if (lastPixmapPath==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+		return;
+	
+	QPixmap pixmap;
+	QString path;
 	// Try to set the proper planet map image
 	if (loc.planetName=="Earth")
 	{
 		// Special case for earth, we don't want to see the clouds
-		QString path;
 		try
 		{
 			path = StelApp::getInstance().getFileMgr().findFile("data/gui/world.png");
@@ -176,7 +192,7 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 			qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
 			return;
 		}
-		ui->mapLabel->setPixmap(path);
+		pixmap = QPixmap(path);
 	}
 	else
 	{
@@ -184,7 +200,6 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 		Planet* p = ssm->searchByEnglishName(loc.planetName);
 		if (p)
 		{
-			QString path;
 			try
 			{
 				path = StelApp::getInstance().getFileMgr().findFile("textures/"+p->getTextMapName());
@@ -194,14 +209,22 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 				qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
 				return;
 			}
-			ui->mapLabel->setPixmap(path);
+			pixmap = QPixmap(path);
 		}
 	}
-	// Set pointer position
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 	
-	// Reactivate edit signals
-	connectEditSignals();
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		ui->mapLabel->setPixmap(StelGui::makeRed(pixmap));
+	}
+	else
+	{
+		ui->mapLabel->setPixmap(pixmap);
+	}
+	
+	// For caching
+	lastPixmapPath = path;
+	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 // Create a Location instance from the fields

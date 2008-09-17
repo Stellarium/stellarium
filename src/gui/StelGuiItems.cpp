@@ -25,6 +25,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "Location.hpp"
+#include "StelGui.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -52,12 +53,12 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	assert(!pixOn.isNull());
 	assert(!pixOff.isNull());
 	
-	pixOnRed = StelButton::makeRed(pixOn);
-	pixOffRed = StelButton::makeRed(pixOff);
+	pixOnRed = StelGui::makeRed(pixOn);
+	pixOffRed = StelGui::makeRed(pixOff);
 	if (!pixHover.isNull())
-		pixHoverRed = StelButton::makeRed(pixHover);
+		pixHoverRed = StelGui::makeRed(pixHover);
 	if (!pixBackground.isNull())
-		pixBackgroundRed = StelButton::makeRed(pixBackground);
+		pixBackgroundRed = StelGui::makeRed(pixBackground);
 	
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptsHoverEvents(true);
@@ -104,21 +105,6 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
 	emit(hoverChanged(false));
-}
-
-QPixmap StelButton::makeRed(const QPixmap& p)
-{
-	QImage im = p.toImage().convertToFormat(QImage::Format_ARGB32);
-	Q_ASSERT(im.format()==QImage::Format_ARGB32);
-	for (int i=0;i<im.width();++i)
-	{
-		for (int j=0;j<im.height();++j)
-		{
-			const QRgb c = im.pixel(i,j);
-			im.setPixel(i,j, qRgba(qRed(c), (int)(0.2*qGreen(c)), (int)(0.2*qBlue(c)), qAlpha(c)));
-		}
-	}
-	return QPixmap::fromImage(im);
 }
 
 void StelButton::updateIcon()
