@@ -135,7 +135,7 @@ void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString d
 QString HelpDialog::getHeaderText(void)
 {
 	return "<html><head><title>" + Qt::escape(q_("Stellarium Help")) + "</title></head><body>\n"
-		+ "<a name=\"top\"><h2>" + Qt::escape(q_("Keys")) + "</h2></a>\n";
+		+ "<h2>" + Qt::escape(q_("Keys")) + "</h2>\n";
 }
 
 QString HelpDialog::getFooterText(void)

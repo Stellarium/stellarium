@@ -78,6 +78,9 @@ void ViewDialog::styleChanged()
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	ui->setDefaultCultureButton->setEnabled(false);
+	ui->setDefaultLandscapeButton->setEnabled(false);
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	populateLists();
@@ -99,7 +102,7 @@ void ViewDialog::createDialogContent()
 	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
-	connect(ui->starTwinkleCheckBox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->starScaleRadiusDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAbsoluteStarScale());
 	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAbsoluteStarScale(double)));
@@ -114,7 +117,7 @@ void ViewDialog::createDialogContent()
 	
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
-	connect(ui->adaptationCheckbox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Planets section
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
@@ -125,19 +128,19 @@ void ViewDialog::createDialogContent()
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Planets_Hints");
 	connect(a, SIGNAL(toggled(bool)), ui->planetMarkerCheckBox, SLOT(setChecked(bool)));
 	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->planetMarkerCheckBox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
-	connect(ui->planetScaleMoonCheckBox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
-	connect(ui->planetOrbitCheckBox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
-	connect(ui->planetLightSpeedCheckBox, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Shouting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
@@ -152,31 +155,31 @@ void ViewDialog::createDialogContent()
 	}
 	shootingStarsZHRChanged();
 	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->zhrNone, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->zhr10, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->zhr80, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->zhr10000, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(saveSkyTabSettings()));
+	connect(ui->zhr144000, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Labels section
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-	connect(ui->starLabelCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 
 	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Nebulas");
 	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
 	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->nebulaLabelCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 
 	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
 	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
-	connect(ui->planetLabelCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
@@ -194,21 +197,21 @@ void ViewDialog::createDialogContent()
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showGroundCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
+	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
-	connect(ui->showFogCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
+	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Atmosphere");
 	connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showAtmosphereCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
+	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
-	connect(ui->landscapePositionCheckBox, SIGNAL(clicked()), this, SLOT(saveLandscapeTabSettings()));
+	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
@@ -221,43 +224,43 @@ void ViewDialog::createDialogContent()
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equator_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showEquatorLineCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showEclipticLineCheckBox->setChecked(glmgr->getFlagEclipticLine());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Ecliptic_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEclipticLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showEclipticLineCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showMeridianLineCheckBox->setChecked(glmgr->getFlagMeridianLine());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Meridian_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showMeridianLineCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equatorial_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showEquatorialGridCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showAzimutalGridCheckBox->setChecked(glmgr->getFlagAzimutalGrid());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Azimutal_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showAzimutalGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAzimutalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showAzimutalGridCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showAzimutalGridCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Equatorial_J2000_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Cardinal_Points");
 	connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showCardinalPointsCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	// Constellations
 	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
@@ -266,25 +269,25 @@ void ViewDialog::createDialogContent()
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Lines");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showConstellationLinesCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagLabels());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Labels");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showConstellationLabelsCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showConstellationBoundariesCheckBox->setChecked(cmgr->getFlagBoundaries());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Boundaries");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationBoundariesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->showConstellationArtCheckBox->setChecked(cmgr->getFlagArt());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Constellation_Art");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationArtCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
-	connect(ui->showConstellationArtCheckBox, SIGNAL(clicked()), this, SLOT(saveMarkingsTabSettings()));
+	connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
@@ -331,6 +334,7 @@ void ViewDialog::populateLists()
 void ViewDialog::skyCultureChanged(const QString& cultureName)
 {
 	StelApp::getInstance().getSkyCultureMgr().setSkyCulture(cultureName);
+	ui->setDefaultCultureButton->setEnabled(true);
 	updateSkyCultureText();
 }
 
@@ -390,6 +394,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	lmgr->setLandscapeByName(item->text());
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+	ui->setDefaultLandscapeButton->setEnabled(true);
 }
 
 void ViewDialog::shootingStarsZHRChanged()
@@ -546,6 +551,7 @@ void ViewDialog::setCurrentLandscapeAsDefault(void)
 	assert(lmgr);
 	conf->setValue("init_location/landscape_name", lmgr->getLandscapeId());
 	conf->setValue("init_location/name", lmgr->getCurrentLandscapeName());
+	ui->setDefaultLandscapeButton->setEnabled(false);
 }
 
 void ViewDialog::setCurrentCultureAsDefault(void)
@@ -553,6 +559,7 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	assert(conf);
 	conf->setValue("localization/sky_culture", StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir());
+	ui->setDefaultCultureButton->setEnabled(false);
 }
 
 void ViewDialog::planetsLabelsValueChanged(int v)
