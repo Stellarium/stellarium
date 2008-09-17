@@ -1,13 +1,21 @@
-0.10.0 [in development]
-Don't support SDL main application anymore. Only Qt.
-The whole StelApp class is managed as a QGraphicsItem, inside a QGraphicsView.
-Extracted deprecated sources from the core of stellarium.
-Continued API cleaning.
+0.10.0 [2008-09-??]
+Global switch to Qt. Don't support SDL main application anymore.
+The whole StelApp class is managed by a QGraphicsScene, inside a QGraphicsView.
+Removed deprecated sources from the core of stellarium (old GUI, TUI and scripting).
+Continued API cleaning and simplifications.
+Performed large refactorings to use portable Qt API (migrated from std::string and std::wstring to QString).
 Re-organized the source files into sub-directories.
-Created the new GUI button bars based on QGraphicsView
+Exposed some methods as slots so that they can be scripted in the future.
+Created the new Qt-based GUI button bars (QGraphicsItems).
+Recoded from scratch the new QWidget based GUI rendered in the QGraphicsView using style sheets.
 Moved stars/planets halo rendering into SkyDrawer.
+Implemented dynamic eye adaptation for bright objects.
 Optimized atmosphere computation and others.
-Migrate std::string and std::wstring to QString
+Made testing python wrappers using SIP (unused)
+Created a new SkyTile class supporting dynamic multi-resolution images loading and display.
+Migrated the previous nebula textures to the new format.
+Added a LocationManager for managing observing locations.
+Fixed many bugs.
 
 0.9.1 [2008-01-17]
 Got rid of autoconf/automake (Hooray!)
