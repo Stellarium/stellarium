@@ -542,6 +542,12 @@ void StelGui::setStelStyle(const StelStyle& style)
 		btHorizAutoHide->setRedMode(false);
 		btVertAutoHide->setRedMode(false);
 	}
+	
+	locationDialog.styleChanged();
+	dateTimeDialog.styleChanged();
+	configurationDialog.styleChanged();
+	searchDialog.styleChanged();
+	viewDialog.styleChanged();
 }
 
 

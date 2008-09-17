@@ -40,6 +40,7 @@
 LocationDialog::LocationDialog() : isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
+	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 LocationDialog::~LocationDialog()
@@ -55,7 +56,9 @@ void LocationDialog::languageChanged()
 
 void LocationDialog::styleChanged()
 {
-	// Nothing for now
+	// Make the map red if needed
+	if (dialog)
+		setMapForLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -174,7 +177,7 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 void LocationDialog::setMapForLocation(const Location& loc)
 {
 	// Avoids usless processing
-	if (lastPixmapPath==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
 		return;
 	
 	QPixmap pixmap;
@@ -223,7 +226,7 @@ void LocationDialog::setMapForLocation(const Location& loc)
 	}
 	
 	// For caching
-	lastPixmapPath = path;
+	lastPlanet = loc.planetName;
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
