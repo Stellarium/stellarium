@@ -37,16 +37,10 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 	
-	//! Update the widget to make sure it is synchrone if the location is changed programmatically
-	//! This function should be called repeatidly with e.g. a timer
-	void updateFromProgram();
-	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
 	Ui_locationDialogForm* ui;
-	
-	void timerEvent(QTimerEvent* event) {updateFromProgram();}
 	
 private:
 	//! Set the values of all the fields from a location info
@@ -66,6 +60,9 @@ private:
 	void connectEditSignals();
 	
 private slots:
+	//! Update the widget to make sure it is synchrone if the location is changed programmatically
+	//! This function should be called repeatidly with e.g. a timer
+	void updateFromProgram();
 	
 	//! Called when the map is clicked
 	void setPositionFromMap(double longitude, double latitude);
