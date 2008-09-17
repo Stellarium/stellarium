@@ -697,7 +697,7 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 // Called each time a GUI action is triggered
 void StelGui::guiActionTriggered(bool b)
 {
-	qDebug() << QObject::sender()->objectName() << b;
+	qDebug() << QObject::sender()->objectName() << b << QObject::sender()->property("persistenceName").toString();
 }
 	
 void StelGui::updateBarsPos()
