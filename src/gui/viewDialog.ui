@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>611</width>
-    <height>586</height>
+    <height>511</height>
    </rect>
   </property>
   <property name="font" >
@@ -250,7 +250,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -291,6 +291,72 @@
              <property name="spacing" >
               <number>0</number>
              </property>
+             <item rowspan="2" row="0" column="1" >
+              <widget class="QGroupBox" name="planetsGroupBox" >
+               <property name="font" >
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>50</weight>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="title" >
+                <string>Planets and satellites</string>
+               </property>
+               <property name="checkable" >
+                <bool>false</bool>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_2" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QCheckBox" name="showPlanetCheckBox" >
+                  <property name="text" >
+                   <string>Show planets</string>
+                  </property>
+                  <property name="checked" >
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="planetMarkerCheckBox" >
+                  <property name="text" >
+                   <string>Show planet markers</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="planetOrbitCheckBox" >
+                  <property name="sizePolicy" >
+                   <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text" >
+                   <string>Show planet orbits</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="planetLightSpeedCheckBox" >
+                  <property name="text" >
+                   <string>Simulate light speed</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="planetScaleMoonCheckBox" >
+                  <property name="text" >
+                   <string>Scale Moon</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
              <item rowspan="2" row="0" column="0" >
               <widget class="QGroupBox" name="starGroupBox" >
                <property name="font" >
@@ -530,84 +596,15 @@
                </layout>
               </widget>
              </item>
-             <item rowspan="2" row="0" column="1" >
-              <widget class="QGroupBox" name="planetsGroupBox" >
-               <property name="font" >
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="title" >
-                <string>Planets and satellites</string>
-               </property>
-               <property name="checkable" >
-                <bool>false</bool>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_2" >
-                <property name="margin" >
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QCheckBox" name="showPlanetCheckBox" >
-                  <property name="text" >
-                   <string>Show planets</string>
-                  </property>
-                  <property name="checked" >
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="planetMarkerCheckBox" >
-                  <property name="text" >
-                   <string>Show planet markers</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="planetOrbitCheckBox" >
-                  <property name="sizePolicy" >
-                   <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text" >
-                   <string>Show planet orbits</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="planetLightSpeedCheckBox" >
-                  <property name="text" >
-                   <string>Simulate light speed</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="planetScaleMoonCheckBox" >
-                  <property name="text" >
-                   <string>Scale Moon</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-               <zorder>showPlanetCheckBox</zorder>
-               <zorder>planetMarkerCheckBox</zorder>
-               <zorder>planetOrbitCheckBox</zorder>
-               <zorder>planetLightSpeedCheckBox</zorder>
-               <zorder>planetScaleMoonCheckBox</zorder>
-               <zorder>labelsGroupBox</zorder>
-              </widget>
-             </item>
              <item row="2" column="0" >
               <widget class="QGroupBox" name="atmosphereGroupBox" >
                <property name="title" >
                 <string>Atmosphere</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_3" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QCheckBox" name="showAtmosphereCheckBox" >
                   <property name="text" >
@@ -644,10 +641,13 @@
                   <property name="orientation" >
                    <enum>Qt::Vertical</enum>
                   </property>
+                  <property name="sizeType" >
+                   <enum>QSizePolicy::Expanding</enum>
+                  </property>
                   <property name="sizeHint" stdset="0" >
                    <size>
                     <width>20</width>
-                    <height>40</height>
+                    <height>0</height>
                    </size>
                   </property>
                  </spacer>
@@ -683,6 +683,9 @@
                 <bool>false</bool>
                </property>
                <layout class="QGridLayout" name="gridLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
                 <item row="0" column="0" >
                  <widget class="QCheckBox" name="starLabelCheckBox" >
                   <property name="text" >
@@ -752,22 +755,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0" >
-                 <spacer name="horizontalSpacer_5" >
-                  <property name="orientation" >
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType" >
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0" >
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item row="3" column="1" >
                  <spacer name="horizontalSpacer_4" >
                   <property name="orientation" >
@@ -779,7 +766,23 @@
                   <property name="sizeHint" stdset="0" >
                    <size>
                     <width>180</width>
-                    <height>20</height>
+                    <height>0</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="3" column="0" >
+                 <spacer name="horizontalSpacer_5" >
+                  <property name="orientation" >
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType" >
+                   <enum>QSizePolicy::Minimum</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0" >
+                   <size>
+                    <width>40</width>
+                    <height>0</height>
                    </size>
                   </property>
                  </spacer>
@@ -933,9 +936,6 @@
               </spacer>
              </item>
             </layout>
-            <zorder>frame_9</zorder>
-            <zorder>frame_11</zorder>
-            <zorder>groupBox</zorder>
            </widget>
           </item>
          </layout>
@@ -950,6 +950,12 @@
            <normalon>:/graphicGui/gui/tabicon-markings-active.png</normalon>:/graphicGui/gui/tabicon-markings.png</iconset>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_2" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>0</number>
+          </property>
           <item row="0" column="0" >
            <widget class="QFrame" name="frame_7" >
             <property name="frameShape" >
@@ -1124,7 +1130,7 @@
            </widget>
           </item>
           <item row="1" column="0" >
-           <widget class="QGroupBox" name="projectionGroupBox_2" >
+           <widget class="QGroupBox" name="projectionGroupBox" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
               <horstretch>0</horstretch>
@@ -1341,7 +1347,7 @@
                    <item row="2" column="1" >
                     <widget class="QPushButton" name="setDefaultLandscapeButton" >
                      <property name="text" >
-                      <string>Set as default</string>
+                      <string>set as default</string>
                      </property>
                     </widget>
                    </item>
