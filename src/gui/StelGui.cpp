@@ -113,6 +113,9 @@ StelGui::StelGui()
 	animBottomBarTimeLine = new QTimeLine(200, this);
 	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
 	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
+
+	flipHoriz = NULL;
+	flipVert = NULL;
 }
 
 StelGui::~StelGui()
@@ -523,6 +526,11 @@ void StelGui::init()
 	// Readjust position
 	updateBarsPos();
 	infoPanel->setPos(8,8);
+
+	// add the flip buttons if requested in the config
+	QSettings* conf = StelApp::getInstance().getSettings();
+        Q_ASSERT(conf);
+	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
@@ -804,3 +812,38 @@ QPixmap StelGui::makeRed(const QPixmap& p)
 		
 	return QPixmap::fromImage(im);
 }
+
+void StelGui::setFlagShowFlipButtons(bool b)
+{
+	if (b==true)
+	{
+		if (flipVert==NULL)
+		{
+			// Create the vertical flip button
+			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+			flipVert = new StelButton(NULL, 
+			                          QPixmap(":/graphicGui/gui/btFlipVertical-on.png"), 
+			                          QPixmap(":/graphicGui/gui/btFlipVertical-off.png"), 
+			                          pxmapGlow32x32, 
+			                          getGuiActions("actionVertical_Flip"));
+		}
+		if (flipHoriz==NULL)
+		{
+			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
+			flipHoriz = new StelButton(NULL, 
+			                           QPixmap(":/graphicGui/gui/btFlipHorizontal-on.png"), 
+			                           QPixmap(":/graphicGui/gui/btFlipHorizontal-off.png"), 
+			                           pxmapGlow32x32, 
+			                           getGuiActions("actionHorizontal_Flip"));
+		}
+		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit");
+		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
+	}
+	else
+	{
+		Q_ASSERT(getButtonBar()->hideButton("actionVertical_Flip")==flipVert);
+		Q_ASSERT(getButtonBar()->hideButton("actionHorizontal_Flip")==flipHoriz);
+	}
+	flagShowFlipButtons = b;
+}
+

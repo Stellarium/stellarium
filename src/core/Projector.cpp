@@ -125,7 +125,7 @@ void Projector::init()
 	tmpstr = conf->value("projection/type", "stereographic").toString();
 	setCurrentMapping(tmpstr);
 
-	initFov	= conf->value("navigation/init_fov",60.).toDouble();
+	setInitFov(conf->value("navigation/init_fov",60.).toDouble());
 	setFov(initFov);
 
 	//glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW);
@@ -612,12 +612,6 @@ void Projector::sSphereLinear(GLdouble radius, GLdouble oneMinusOblateness,
 
 	glPopMatrix();
 }
-
-void Projector::setInitFov(double fov)
-{
-	StelApp::getInstance().getSettings()->setValue("navigation/init_fov", fov);
-}
-
 
 void Projector::sFanDisk(double radius,int innerFanSlices,int level) const {
   Q_ASSERT(level<64);

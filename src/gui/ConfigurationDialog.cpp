@@ -51,7 +51,7 @@
 
 #include "StelAppGraphicsScene.hpp"
 
-ConfigurationDialog::ConfigurationDialog(): flipVert(NULL), flipHoriz(NULL)
+ConfigurationDialog::ConfigurationDialog()
 {
 	ui = new Ui_configurationDialogForm;
 }
@@ -74,7 +74,6 @@ void ConfigurationDialog::styleChanged()
 
 void ConfigurationDialog::createDialogContent()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
@@ -150,7 +149,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setPresetSkyTime(QDateTime)));
 	
 	// Startup FOV/direction of view
-	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
+	ui->initFovSpinBox->setValue(proj->getInitFov());
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
@@ -167,11 +166,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 	
-	const bool b = conf->value("gui/flag_show_flip_buttons",false).toBool();
-	ui->showFlipButtonsCheckbox->setChecked(b);
-	if (b==true)
-		setShowFlipButtons(b);
-	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), this, SLOT(setShowFlipButtons(bool)));
+	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
+	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
 	
 	const float tmout = StelAppGraphicsScene::getInstance().getCursorTimeout();
 	ui->mouseTimeoutCheckbox->setChecked(tmout>0);
@@ -245,35 +241,6 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 
-void ConfigurationDialog::setShowFlipButtons(bool b)
-{
-	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
-	if (b==true)
-	{
-		if (flipVert==NULL)
-		{
-			// Create the vertical flip button
-			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
-			flipVert = new StelButton(NULL, QPixmap(":/graphicGui/gui/btFlipVertical-on.png"), QPixmap(":/graphicGui/gui/btFlipVertical-off.png"), pxmapGlow32x32, gui->getGuiActions("actionVertical_Flip"));
-		}
-		if (flipHoriz==NULL)
-		{
-			// Create the vertical flip button
-			QPixmap pxmapGlow32x32(":/graphicGui/gui/glow32x32.png");
-			flipHoriz = new StelButton(NULL, QPixmap(":/graphicGui/gui/btFlipHorizontal-on.png"), QPixmap(":/graphicGui/gui/btFlipHorizontal-off.png"), pxmapGlow32x32, gui->getGuiActions("actionHorizontal_Flip"));
-		}
-		
-		gui->getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit");
-		gui->getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
-	}
-	else
-	{
-		Q_ASSERT(gui->getButtonBar()->hideButton("actionVertical_Flip")==flipVert);
-		Q_ASSERT(gui->getButtonBar()->hideButton("actionHorizontal_Flip")==flipHoriz);
-	}
-}
-
-
 void ConfigurationDialog::cursorTimeOutChanged()
 {
 	if (ui->mouseTimeoutCheckbox->isChecked())
@@ -311,6 +278,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(mvmgr);
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Q_ASSERT(nav);
+	Projector* proj = StelApp::getInstance().getCore()->getProjection();
+	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
@@ -375,10 +344,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_move_keys", mvmgr->getFlagEnableMoveKeys());
-
 	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
+	conf->setValue("navigation/init_fov", proj->getInitFov());
+	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
 
 }
 

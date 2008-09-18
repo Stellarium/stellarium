@@ -434,7 +434,7 @@ public slots:
 
 	//! Set the initial field of view.  Updates configuration file.
 	//! @param the new value for initial field of view in decimal degrees.
-	void setInitFov(double fov);
+	void setInitFov(double fov) {initFov=fov;}
 
 private:
 	
