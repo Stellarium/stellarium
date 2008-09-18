@@ -77,7 +77,7 @@ void ConfigurationDialog::createDialogContent()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Projector* proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
-	MovementMgr* mmgr = static_cast<MovementMgr*>(GETSTELMODULE("MovementMgr"));
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
 	ui->setupUi(dialog);
@@ -155,18 +155,18 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
 	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
-	ui->enableKeysNavigationCheckBox->setChecked(mmgr->getFlagEnableMoveKeys() || mmgr->getFlagEnableZoomKeys());
-	ui->enableMouseNavigationCheckBox->setChecked(mmgr->getFlagEnableMouseNavigation());
-	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableMoveKeys(bool)));
-	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableZoomKeys(bool)));
-	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagEnableMouseNavigation(bool)));
+	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
+	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
+	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
+	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
+	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	
 	// Tools tab
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	ui->autoZoomResetsDirectionCheckbox->setChecked(mmgr->getFlagAutoZoomOutResetsDirection());
-	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
+	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 	
 	const bool b = conf->value("gui/flag_show_flip_buttons",false).toBool();
 	ui->showFlipButtonsCheckbox->setChecked(b);
@@ -302,6 +302,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(glmgr);
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	Q_ASSERT(gui);
+	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
+	Q_ASSERT(mvmgr);
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
@@ -351,13 +353,22 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// Save default location
 	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
 
-	// configuration dialog options
+	// configuration dialog / main tab
+	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	conf->setValue("localization/app_locale", Translator::nativeNameToIso639_1Code(langName));
+
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
 	else
 		conf->setValue("gui/selected_object_info", "all");
+
+	// configuration dialog / navigation tab
+	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
+	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
+	conf->setValue("navigation/flag_enable_move_keys", mvmgr->getFlagEnableMoveKeys());
+
 }
 
 // Reset all stellarium options.
