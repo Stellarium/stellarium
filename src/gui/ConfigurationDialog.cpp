@@ -160,8 +160,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	
 	// Tools tab
+	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
+	ui->discViewportCheckbox->setChecked(proj->getMaskType() == Projector::Disk);
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
@@ -348,7 +350,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/today_time", nav->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
 	conf->setValue("navigation/init_fov", proj->getInitFov());
+
+	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
+	conf->setValue("video/distorter", StelAppGraphicsScene::getInstance().getViewPortDistorterType());
+	conf->setValue("projection/viewport", Projector::maskTypeToString(proj->getMaskType()));
 
 }
 
