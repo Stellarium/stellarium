@@ -109,6 +109,11 @@ public:
 	
 	//! Transform the pixmap so that it look red for night vision mode
 	static QPixmap makeRed(const QPixmap& p);
+
+	bool getFlagShowFlipButtons(void) {return flagShowFlipButtons;}
+
+public slots:
+	void setFlagShowFlipButtons(bool b);
 	
 private slots:
 	//! Update the position of the button bars in the main window
@@ -162,6 +167,11 @@ private:
 	
 	bool autoHideHorizontalButtonBar;
 	bool autoHideVerticalButtonBar;
+
+	bool flagShowFlipButtons;
+	class StelButton* flipVert;
+	class StelButton* flipHoriz;
+
 };
 
 #endif // _STELGUI_HPP_
