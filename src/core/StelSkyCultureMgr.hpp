@@ -38,8 +38,9 @@ public:
 //! @class StelSkyCultureMgr
 //! Manage sky cultures for stellarium.
 //! Different human cultures have used different names for stars, and visualised
-//! different constellations in the sky (and in different parts of the sky). The
-//! StelSkyCultureMgr class handles the different sky cultures.
+//! different constellations in the sky (and in different parts of the sky).
+//! In the installation data directory and user data directory are the "skycultures" sub-directory containing one sub-directory per sky culture.
+//! This sub-directory name is that we refer to as sky culture ID here.
 //! @author Fabien Chereau
 class StelSkyCultureMgr{
 public:
@@ -48,36 +49,32 @@ public:
 	
 	//! Initialize the StelSkyCultureMgr object.
 	//! Gets the default sky culture name from the application's settings,
-	//! sets that sky culture by calling setSkyCultureDir().
+	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
 	
-	//! Set the sky culture from i18n name.
-	//! @return true on success; false and doesn't change if skyculture is invalid.
-	bool setSkyCulture(const QString& cultureName) {return setSkyCultureDir(skyCultureI18ToDirectory(cultureName));}
-	
-	//! Get the current sky culture
+	//! Get the current sky culture.
 	StelSkyCulture getSkyCulture() const {return currentSkyCulture;}
 	
-	//! Get the current sky culture translated name
-	QString getSkyCultureNameI18() const;
+public slots:
+	//! Get the current sky culture translated name.
+	QString getCurrentSkyCultureNameI18() const;
+	//! Set the sky culture from i18n name.
+	//! @return true on success; false and doesn't change if skyculture is invalid.
+	bool setCurrentSkyCultureNameI18(const QString& cultureName) {return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));}
 	
-	//! Set the current sky culture from the passed directory.
-	//! In in the installatiom data directory and user data directory, 
-	//! we have the "skycultures" sub-directory. Inside this there is
-	//! one sub-directory per sky culture. This sub-directory name
-	//! is that we refer to here.
-	//! @param cultureDir The sub-directory name inside the "skycultures" 
-	//! directory.
+	//! Get the current sky culture ID.
+	QString getCurrentSkyCultureID() {return currentSkyCultureDir;}
+	//! Set the current sky culture from the ID.
+	//! @param id the sky culture ID.
 	//! @return true on success; else false.
-	bool setSkyCultureDir(const QString& cultureDir);
+	bool setCurrentSkyCultureID(const QString& id);
 	
-	//! Get the current sky culture directory name.  
-	QString getSkyCultureDir() {return currentSkyCultureDir;}
-	
-	//! Get a hash of translated culture names and directories.
-	//! @return A newline delimited list of translated culture names and directories
-	//! e.g. "name1\ndir1\name2\ndir2".
-	QString getSkyCultureHash() const;	
+	//! Get the default sky culture ID
+	QString getDefaultSkyCultureID() {return defaultSkyCultureID;}
+	//! Set the default sky culture from the ID.
+	//! @param id the sky culture ID.
+	//! @return true on success; else false.
+	bool setDefaultSkyCultureID(const QString& id);
 	
 	//! Get a list of sky culture names in English.
 	//! @return A new-line delimited list of English sky culture names.
@@ -87,6 +84,7 @@ public:
 	//! @return A new-line delimited list of translated sky culture names.
 	QStringList getSkyCultureListI18(void);
 	
+private:
 	//! Get the culture name in English associated with a specified directory.
 	//! @param directory The directory name.
 	//! @return The English name for the culture associated with directory.
@@ -103,12 +101,13 @@ public:
 	//! @return The directory assocuated with cultureName.
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 	
-private:
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
 	
 	// The directory containing data for the culture used for constellations, etc.. 
 	QString currentSkyCultureDir;
 	StelSkyCulture currentSkyCulture;
+	
+	QString defaultSkyCultureID;
 };
 
 #endif // _STELSKYCULTUREMGR_HPP_

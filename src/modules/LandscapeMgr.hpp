@@ -104,26 +104,28 @@ public slots:
 	QStringList getAllLandscapeNames() const;
 		
 	//! Get the current landscape ID.
-	const QString& getLandscapeId() const {return currentLandscapeID;}
+	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
+	//! Change the current landscape to the landscape with the ID specified.
+	//! @param id the ID of the new landscape
+	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
+	bool setCurrentLandscapeID(const QString& id);
+	
+	//! Get the default landscape ID.
+	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
+	//! Change the default landscape to the landscape with the ID specified.
+	//! @param id the ID of the landscape to use by default
+	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
+	bool setDefaultLandscapeID(const QString& id);
 	
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
+	//! Change the current landscape to the landscape with the name specified.
+	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
+	//! @return false if the new landscape could not be set (e.g. no landscape of that name was found). True on success.
+	bool setCurrentLandscapeName(const QString& name);
 	
 	//! Return a pseudo HTML formated string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
-	
-	//! Change the current landscape to the landscape with the name specified.
-	//! @param newLandscapeName the name of the new landscape, as found in the 
-	//! landscape:name key of the landscape.ini file.
-	//! @return false if the new landscape could not be set (e.g. no landscape 
-	//! of that name was found). True on success.
-	bool setLandscapeByName(const QString& newLandscapeName);
-
-	//! Change the current landscape to the landscape with the ID specified.
-	//! @param newLandscapeID the ID of the new landscape
-	//! @return false if the new landscape could not be set (e.g. no landscape 
-	//! of that ID was found). True on success.
-	bool setLandscapeByID(const QString& newLandscapeID);
 	
 	//! Get flag for displaying Landscape.
 	bool getFlagLandscape() const;
@@ -159,16 +161,16 @@ public slots:
 	float getAtmosphereFadeDuration() const;
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(float f);
-
-	//! Get light pollution luminance level.
-	double getAtmosphereLightPollutionLuminance() const;
-	//! Set light pollution luminance level.
-	void setAtmosphereLightPollutionLuminance(double f);
 	
 	//! Set the light pollution following the Bortle Scale
 	void setAtmosphereBortleLightPollution(int bIndex);
 	
 private:
+	//! Get light pollution luminance level.
+	double getAtmosphereLightPollutionLuminance() const;
+	//! Set light pollution luminance level.
+	void setAtmosphereLightPollutionLuminance(double f);
+	
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the 
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
@@ -194,6 +196,9 @@ private:
 	
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;
+	
+	// The ID of the default landscape
+	QString defaultLandscapeID;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

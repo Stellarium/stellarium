@@ -257,7 +257,8 @@ void LandscapeMgr::init()
 
 	atmosphere = new Atmosphere();
 	landscape = new LandscapeOldStyle();
-	setLandscapeByID(conf->value("init_location/landscape_name").toString());
+	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
+	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
@@ -288,7 +289,7 @@ void LandscapeMgr::setStelStyle(const StelStyle& style)
 }
 
 
-bool LandscapeMgr::setLandscapeByName(const QString& newLandscapeName)
+bool LandscapeMgr::setCurrentLandscapeName(const QString& newLandscapeName)
 {
 	if (newLandscapeName.isEmpty())
 		return 0;
@@ -296,7 +297,7 @@ bool LandscapeMgr::setLandscapeByName(const QString& newLandscapeName)
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(newLandscapeName)!=nameToDirMap.end())
 	{
-		return setLandscapeByID(nameToDirMap[newLandscapeName]);
+		return setCurrentLandscapeID(nameToDirMap[newLandscapeName]);
 	}
 	else
 	{
@@ -306,7 +307,7 @@ bool LandscapeMgr::setLandscapeByName(const QString& newLandscapeName)
 }
 
 
-bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
+bool LandscapeMgr::setCurrentLandscapeID(const QString& newLandscapeID)
 {
 	if (newLandscapeID.isEmpty())
 		return 0;
@@ -319,13 +320,13 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	{
 		newLandscape = createFromFile(fileMan.findFile("landscapes/" + newLandscapeID + "/landscape.ini"), newLandscapeID);
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR while loading landscape " << "landscapes/" + newLandscapeID + "/landscape.ini" << ", (" << e.what() << ")" << endl;
 	}
 
-	if(!newLandscape)
-		return 0;
+	if (!newLandscape)
+		return false;
 
 	if (landscape)
 	{
@@ -341,17 +342,27 @@ bool LandscapeMgr::setLandscapeByID(const QString& newLandscapeID)
 	{
 		StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(landscape->getLocation());
 	}
-	return 1;
+	return true;
 }
 
+// Change the default landscape to the landscape with the ID specified.
+bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
+{
+	if (id.isEmpty())
+		return false;
+	defaultLandscapeID = id;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("init_location/landscape_name", id);
+	return true;
+}
 
 //! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 //! and make it the current landscape
 bool LandscapeMgr::loadLandscape(QMap<QString, QString>& param)
 {
 	Landscape* newLandscape = createFromHash(param);
-	if(!newLandscape)
-		return 0;
+	if (!newLandscape)
+		return false;
 
 	if (landscape)
 	{
@@ -364,7 +375,7 @@ bool LandscapeMgr::loadLandscape(QMap<QString, QString>& param)
 	currentLandscapeID = param["name"];
 	// probably not particularly useful, as not in landscape.ini file
 
-	return 1;
+	return true;
 }
 
 void LandscapeMgr::updateI18n()
@@ -595,7 +606,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 	{
 		landscapeDirs = fileMan.listContents("landscapes",StelFileMgr::Directory);
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qDebug() << "ERROR while trying list landscapes:" << e.what();
 	}
@@ -608,7 +619,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap(void) const
 			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}

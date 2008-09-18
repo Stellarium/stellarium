@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>511</height>
+    <width>610</width>
+    <height>496</height>
    </rect>
   </property>
   <property name="font" >
@@ -226,7 +226,7 @@
       <property name="spacing" >
        <number>0</number>
       </property>
-      <item row="0" column="0" >
+      <item row="2" column="0" >
        <widget class="QTabWidget" name="viewTabWidget" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
@@ -791,10 +791,6 @@
               </widget>
              </item>
             </layout>
-            <zorder>planetsGroupBox</zorder>
-            <zorder>starGroupBox</zorder>
-            <zorder>atmosphereGroupBox</zorder>
-            <zorder>labelsGroupBox</zorder>
            </widget>
           </item>
           <item row="1" column="0" colspan="3" >
@@ -983,7 +979,7 @@
                <property name="checkable" >
                 <bool>false</bool>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_7" >
+               <layout class="QVBoxLayout" name="verticalLayout_10" >
                 <property name="margin" >
                  <number>0</number>
                 </property>
@@ -1054,7 +1050,7 @@
                <property name="checkable" >
                 <bool>false</bool>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_8" >
+               <layout class="QVBoxLayout" name="verticalLayout_11" >
                 <property name="margin" >
                  <number>0</number>
                 </property>
@@ -1118,12 +1114,21 @@
                   <property name="sizeHint" stdset="0" >
                    <size>
                     <width>20</width>
-                    <height>40</height>
+                    <height>5</height>
                    </size>
                   </property>
                  </spacer>
                 </item>
                </layout>
+               <zorder>showConstellationLinesCheckBox</zorder>
+               <zorder>showConstellationLabelsCheckBox</zorder>
+               <zorder>showConstellationBoundariesCheckBox</zorder>
+               <zorder>showConstellationArtCheckBox</zorder>
+               <zorder>layoutWidget_2</zorder>
+               <zorder>layoutWidget_2</zorder>
+               <zorder>horizontalSpacer_6</zorder>
+               <zorder>projectionGroupBox</zorder>
+               <zorder>projectionGroupBox</zorder>
               </widget>
              </item>
             </layout>
@@ -1156,10 +1161,7 @@
             <property name="checkable" >
              <bool>false</bool>
             </property>
-            <layout class="QHBoxLayout" name="_4" >
-             <property name="spacing" >
-              <number>6</number>
-             </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_10" >
              <property name="margin" >
               <number>0</number>
              </property>
@@ -1344,10 +1346,10 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1" >
-                    <widget class="QPushButton" name="setDefaultLandscapeButton" >
+                   <item row="3" column="0" >
+                    <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox" >
                      <property name="text" >
-                      <string>Set as default</string>
+                      <string>Use this landscape as default</string>
                      </property>
                     </widget>
                    </item>
@@ -1484,7 +1486,10 @@
                   <property name="title" >
                    <string>Options</string>
                   </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_10" >
+                  <layout class="QVBoxLayout" name="verticalLayout_8" >
+                   <property name="margin" >
+                    <number>0</number>
+                   </property>
                    <item>
                     <widget class="QCheckBox" name="starloreLanguageCheckBox" >
                      <property name="text" >
@@ -1493,9 +1498,9 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="setDefaultCultureButton" >
+                    <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox" >
                      <property name="text" >
-                      <string>Set as default</string>
+                      <string>Use this sky culture as default</string>
                      </property>
                     </widget>
                    </item>
@@ -1506,6 +1511,9 @@
               </widget>
              </item>
             </layout>
+            <zorder>culturesListWidget</zorder>
+            <zorder>frame_5</zorder>
+            <zorder>setDefaultCultureButton</zorder>
            </widget>
           </item>
          </layout>
