@@ -69,11 +69,12 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
-	setSkyCultureDir(StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString());
+	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
+	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
 //! Set the current sky culture from the passed directory
-bool StelSkyCultureMgr::setSkyCultureDir(const QString& cultureDir)
+bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
@@ -87,7 +88,23 @@ bool StelSkyCultureMgr::setSkyCultureDir(const QString& cultureDir)
 	return true;
 }
 
-QString StelSkyCultureMgr::getSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
+// Set the default sky culture from the ID.
+bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
+{
+	// make sure culture definition exists before attempting or will die
+	if (directoryToSkyCultureEnglish(id) == "")
+	{
+		qWarning() << "Invalid sky culture ID: " << id;
+		return false;
+	}
+	defaultSkyCultureID = id;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("localization/sky_culture", id);
+	return true;
+}
+	
+QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
 
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
@@ -112,22 +129,6 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 		i.next();
 		cultures += q_(i.value().englishName);
 	}
-	return cultures;
-}
-
-//! returns newline delimited hash of human readable culture names translated to current locale
-//! and the directory names
-QString StelSkyCultureMgr::getSkyCultureHash(void) const
-{
-	QString cultures;
-	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
-	while (i.hasNext())
-	{
-		i.next();
-		if(i.value().englishName == "") continue;
-		cultures += QString("%1\n%2\n").arg(q_(i.value().englishName)).arg(i.key());
-	}
-
 	return cultures;
 }
 
