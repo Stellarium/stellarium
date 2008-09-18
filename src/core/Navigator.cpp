@@ -82,15 +82,30 @@ void Navigator::init()
 	initViewPos = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	setLocalVision(initViewPos);
 	
+	// we want to be able to handle the old style preset time, recorded as a double
+	// jday, or as a more human readable string...
+	bool ok;
+	QString presetTimeStr = conf->value("navigation/preset_sky_time",2451545.).toString();
+	presetSkyTime = presetTimeStr.toDouble(&ok);
+	if (ok)
+		qDebug() << "navigation/preset_sky_time is a double - treating as jday:" << presetSkyTime;
+	else
+	{
+		qDebug() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
+		presetSkyTime = StelUtils::qDateTimeToJd(QDateTime::fromString(presetTimeStr));
+	}
+
 	// Navigation section
-	presetSkyTime 		= conf->value("navigation/preset_sky_time",2451545.).toDouble();
-	startupTimeMode 	= conf->value("navigation/startup_time_mode", "actual").toString().toLower();
+	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
+
+	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")
 		setJDay(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
-	else 
-		setTimeNow();
+
+	// we previously set the time to "now" already, so we don't need to 
+	// explicitly do it if the startupTimeMode=="now".
 }
 
 // Set the location to use by default at startup
@@ -137,34 +152,6 @@ bool Navigator::getIsTimeNow(void) const
 		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
 	}
 	return previousResult;
-}
-
-QTime Navigator::getInitTodayTime(void)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	return QTime::fromString(conf->value("navigation/today_time", "22:00").toString(), "hh:mm");
-}
-
-void Navigator::setInitTodayTime(const QTime& t)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	conf->setValue("navigation/today_time", t.toString("hh:mm"));
-} 
-
-QDateTime Navigator::getInitDateTime(void)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	return StelUtils::jdToQDateTime(conf->value("navigation/preset_sky_time",2451545.).toDouble() - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
-}
-
-void Navigator::setInitDateTime(const QDateTime& dt)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	conf->setValue("navigation/preset_sky_time", StelUtils::qDateTimeToJd(dt));
 }
 
 void Navigator::addSolarDays(double d)
@@ -333,10 +320,7 @@ void Navigator::updateTransformMatrices(void)
 
 void Navigator::setStartupTimeMode(const QString& s)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
 	startupTimeMode = s;
-	conf->setValue("navigation/startup_time_mode", startupTimeMode);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -390,6 +374,10 @@ Vec3d Navigator::getObserverHelioPos(void) const
 	return matLocalToHelio*v;
 }
 
+void Navigator::setPresetSkyTime(QDateTime dt)
+{
+	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
