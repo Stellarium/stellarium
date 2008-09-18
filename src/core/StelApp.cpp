@@ -111,7 +111,7 @@ StelApp::StelApp(int argc, char** argv, QObject* parent) : QObject(parent),
 	{
 		Translator::init(stelFileMgr->findFile("data/iso639-1.utf8"));
 	}
-	catch (exception& e)
+	catch (std::runtime_error& e)
 	{
 		qDebug() << "ERROR while loading translations: " << e.what() << endl;
 	}
@@ -393,7 +393,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
 				cout << qPrintable(*i) << endl;
 			}
-			catch(exception& e){}
+			catch (std::runtime_error& e){}
 		}
 		exit(0);
 	}
@@ -405,7 +405,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		if (newUserDir!="" && !newUserDir.isEmpty())
 			stelFileMgr->setUserDir(newUserDir);
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
 		exit(1);
@@ -425,7 +425,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 	{
 		setConfigFile(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini"));
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
 		setConfigFile("config.ini");		
@@ -437,7 +437,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 		if (!newShotDir.isEmpty() && newShotDir!="")
 			stelFileMgr->setScreenshotDir(newShotDir);
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: problem while setting screenshot directory for --screenshot-dir option: " << e.what();
 	}
@@ -665,7 +665,7 @@ void StelApp::setConfigFile(const QString& configName)
 		configFile = stelFileMgr->findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 		return;
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		//qDebug() << "DEBUG StelApp::setConfigFile could not locate writable config file " << configName;
 	}
@@ -675,7 +675,7 @@ void StelApp::setConfigFile(const QString& configName)
 		configFile = stelFileMgr->findFile(configName, StelFileMgr::File);	
 		return;
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		//qDebug() << "DEBUG StelApp::setConfigFile could not find read only config file " << configName;
 	}		
@@ -686,7 +686,7 @@ void StelApp::setConfigFile(const QString& configName)
 		//qDebug() << "DEBUG StelApp::setConfigFile found NEW file path: " << configFile;
 		return;
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qCritical() << "ERROR StelApp::setConfigFile could not find or create configuration file " << configName;
 		exit(1);
@@ -700,7 +700,7 @@ void StelApp::copyDefaultConfigFile()
 	{
 		defaultConfigFilePath = stelFileMgr->findFile("data/default_config.ini");
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qCritical() << "ERROR StelApp::copyDefaultConfigFile failed to locate data/default_config.ini.  Please check your installation.";
 		exit(1);
