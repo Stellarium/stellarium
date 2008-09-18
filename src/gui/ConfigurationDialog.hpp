@@ -47,7 +47,6 @@ private slots:
 	void setStartupTimeMode(void);
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
-	void setShowFlipButtons(bool);
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
 	
@@ -59,9 +58,6 @@ private slots:
 	//! This basically replaces the config.ini by the default one
 	void resetAllOptions();
 	
-private:
-	class StelButton* flipVert;
-	class StelButton* flipHoriz;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
