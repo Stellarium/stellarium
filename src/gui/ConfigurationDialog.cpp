@@ -146,9 +146,8 @@ void ConfigurationDialog::createDialogContent()
 	
 	ui->todayTimeSpinBox->setTime(nav->getInitTodayTime());
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
-	
-	ui->fixedDateTimeEdit->setDateTime(nav->getInitDateTime());
-	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setInitDateTime(QDateTime)));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(nav->getPresetSkyTime()));
+	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setPresetSkyTime(QDateTime)));
 	
 	// Startup FOV/direction of view
 	ui->initFovSpinBox->setValue(conf->value("navigation/init_fov",60.).toDouble());
@@ -193,12 +192,18 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 
 void ConfigurationDialog::setStartupTimeMode(void)
 {
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
+
 	if (ui->systemTimeRadio->isChecked())
 		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("actual");
 	else if (ui->todayRadio->isChecked())
 		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("today");
 	else
 		StelApp::getInstance().getCore()->getNavigation()->setStartupTimeMode("preset");
+
+	nav->setInitTodayTime(ui->todayTimeSpinBox->time());
+	nav->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
@@ -304,6 +309,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(gui);
 	MovementMgr* mvmgr = (MovementMgr*)GETSTELMODULE("MovementMgr");
 	Q_ASSERT(mvmgr);
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
+	Q_ASSERT(nav);
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
@@ -368,6 +375,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_move_keys", mvmgr->getFlagEnableMoveKeys());
+
+	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
+	conf->setValue("navigation/today_time", nav->getInitTodayTime());
+	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
 
 }
 
