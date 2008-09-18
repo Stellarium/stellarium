@@ -35,7 +35,7 @@
 
 StelAppGraphicsScene* StelAppGraphicsScene::singleton = NULL;
  
-StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f)
+StelAppGraphicsScene::StelAppGraphicsScene() : tempPainter(NULL), cursorTimeout(-1.f), flagCursorTimeout(false)
 {
 	assert(!singleton);
 	singleton = this;
@@ -56,7 +56,11 @@ StelAppGraphicsScene::~StelAppGraphicsScene()
 
 void StelAppGraphicsScene::init()
 {
-	setViewPortDistorterType(StelApp::getInstance().getSettings()->value("video/distorter","none").toString());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	setViewPortDistorterType(conf->value("video/distorter","none").toString());
+	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
+	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
 }
 
 void StelAppGraphicsScene::glWindowHasBeenResized(int w, int h)
@@ -165,7 +169,7 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
 	
 	// qDebug() << cursorTimeout << StelMainGraphicsView::getInstance().getFlagShowCursor();
-	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout))
+	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{
 		if (QApplication::overrideCursor()==0)
 			QApplication::setOverrideCursor(Qt::BlankCursor);
