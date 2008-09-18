@@ -57,7 +57,21 @@
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
-	infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	QSettings* conf = StelApp::getInstance().getSettings();
+        Q_ASSERT(conf);
+	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
+	if (objectInfo == "all")
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	else if (objectInfo == "short")
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	else if (objectInfo == "none")
+		infoTextFilters = StelObject::InfoStringGroup(0);
+	else
+	{
+		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
+
 	QFont font("DejaVuSans");
 	font.setPixelSize(13);
 	setFont(font);
