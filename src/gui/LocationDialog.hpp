@@ -83,6 +83,9 @@ private slots:
 	//! Called when the user clic on the add to list button
 	void addCurrentLocationToList();
 	
+	//! Called when the user clic on the delete button
+	void deleteCurrentLocationFromList();
+	
 	//! Called when the user wants to use the current location as default
 	void useAsDefaultClicked();
 	
