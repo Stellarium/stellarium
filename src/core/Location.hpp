@@ -25,8 +25,10 @@
 //! Store the informations for a location on a planet
 class Location
 {
+	friend class LocationMgr;
+	
 public:
-	Location() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
+	Location() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.), isUserLocation(true) {;}
 	
 	//! Return a short string which can be used in a list view
 	QString getID() const
@@ -63,6 +65,10 @@ public:
 	
 	//! Parse a location from a line serialization
 	static Location createFromLine(const QString& line);
+	
+private:
+	//! Used privately by the LocationMgr
+	bool isUserLocation;
 };
 
 #endif // _LOCATION_HPP_
