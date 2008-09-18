@@ -71,6 +71,10 @@ void ConfigurationDialog::createDialogContent()
 	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
 	
 	ui->setupUi(dialog);
+	
+	// Set the main tab activated by default
+	ui->configurationTabWidget->setCurrentIndex(0);
+	
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	// Main tab
