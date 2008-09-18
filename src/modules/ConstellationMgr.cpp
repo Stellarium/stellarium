@@ -124,7 +124,7 @@ void ConstellationMgr::updateSkyCulture()
 	{
 		conArtFile = fileMan.findFile("skycultures/"+newSkyCulture+"/constellationsart.fab");
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: no constellationsart.fab file found for sky culture " << newSkyCulture;
 	}
@@ -142,7 +142,7 @@ void ConstellationMgr::updateSkyCulture()
 		// as constellations have changed, clear out any selection and retest for match!
 		selectedObjectChangeCallBack(StelModule::ReplaceSelection);		
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR: while loading new constellation data for sky culture " 
 			<< newSkyCulture << ", reason: " << e.what() << endl;		
@@ -155,7 +155,7 @@ void ConstellationMgr::updateSkyCulture()
 		{
 			loadBoundaries(fileMan.findFile("data/constellations_boundaries.dat"));
 		}
-		catch(exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR loading constellation boundaries file: " << e.what();
 		}
@@ -389,7 +389,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			{
 				texturePath = StelApp::getInstance().getFileMgr().findFile("skycultures/"+cultureName+"/"+texfile);
 			}
-			catch(exception& e)
+			catch (std::runtime_error& e)
 			{
 				// if the texture isn't found in the skycultures/[culture] directory,
 				// try the central textures diectory.

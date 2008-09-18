@@ -321,13 +321,13 @@ void ViewDialog::updateSkyCultureText()
 	{
 		descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description."+StelApp::getInstance().getLocaleMgr().getAppLanguage()+".utf8");
 	}
-	catch (exception& e)
+	catch (std::runtime_error& e)
 	{
 		try
 		{
 			descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description.en.utf8");
 		}
-		catch (exception& e)
+		catch (std::runtime_error& e)
 		{
 			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 		}
