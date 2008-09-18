@@ -53,9 +53,19 @@ public:
 	//! It is later identified by its small string
 	bool saveUserLocation(const Location& loc);
 	
+	//! Get whether a location can be deleted from the list of user locations
+	//! If the location comes from the base read only list, it cannot be deleted
+	//! @param id the location ID
+	bool canDeleteUserLocation(const QString& id) const;
+	
+	//! Delete permanently the given location from the list of user locations
+	//! If the location comes from the base read only list, it cannot be deleted and false is returned
+	//! @param id the location ID
+	bool deleteUserLocation(const QString& id);
+	
 private:
 	//! Load cities from a file
-	void loadCities(const QString& fileName);
+	void loadCities(const QString& fileName, bool isUserLocation);
 	
 	//! Model containing all the city information
 	QStringListModel* modelAllLocation;

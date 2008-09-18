@@ -26,14 +26,14 @@
 
 LocationMgr::LocationMgr()
 {
-	loadCities("data/base_locations.txt");
-	loadCities("data/user_locations.txt");
+	loadCities("data/base_locations.txt", false);
+	loadCities("data/user_locations.txt", true);
 	
 	modelAllLocation = new QStringListModel(this);
 	modelAllLocation->setStringList(locations.keys());
 }
 
-void LocationMgr::loadCities(const QString& fileName)
+void LocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 {
 	// Load the cities from data file
 	QString cityDataPath;
@@ -64,6 +64,7 @@ void LocationMgr::loadCities(const QString& fileName)
 		if (rawline.isEmpty() || rawline.startsWith('#'))
 			continue;
 		Location loc = Location::createFromLine(rawline);
+		loc.isUserLocation = isUserLocation;
 		
 		if (locations.contains(loc.getID()))
 		{
@@ -120,10 +121,10 @@ bool LocationMgr::saveUserLocation(const Location& loc)
 	// Add in the program
 	locations[loc.getID()]=loc;
 	
-	// Append in the user file
+	// Append in the Qt model
 	modelAllLocation->setStringList(locations.keys());
 	
-	// Load the cities from data file
+	// Append to the user location file
 	QString cityDataPath;
 	try
 	{
@@ -157,5 +158,73 @@ bool LocationMgr::saveUserLocation(const Location& loc)
 	outstream << loc.serializeToLine() << '\n';
 	sourcefile.close();
 	
+	return true;
+}
+
+// Get whether a location can be deleted from the list of user locations
+// If the location comes from the base read only list, it cannot be deleted
+bool LocationMgr::canDeleteUserLocation(const QString& id) const
+{
+	QMap<QString, Location>::const_iterator iter=locations.find(id);
+	
+	// If it's not known at all there is a problem
+	if (iter==locations.end())
+		return false;
+	
+	return iter.value().isUserLocation;
+}
+	
+// Delete permanently the given location from the list of user locations
+// If the location comes from the base read only list, it cannot be deleted and false is returned
+bool LocationMgr::deleteUserLocation(const QString& id)
+{
+	if (!canDeleteUserLocation(id))
+		return false;
+	
+	locations.remove(id);
+	// Remove in the Qt model file
+	modelAllLocation->setStringList(locations.keys());
+	
+	// Resave the whole remaining user locations file
+	QString cityDataPath;
+	try
+	{
+		cityDataPath = StelApp::getInstance().getFileMgr().findFile("data/user_locations.txt", StelFileMgr::Writable);
+	}
+	catch (std::runtime_error& e)
+	{
+		if (!StelFileMgr::exists(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+		{
+			if (!StelFileMgr::mkDir(StelApp::getInstance().getFileMgr().getUserDir()+"/data"))
+			{
+				qWarning() << "ERROR - cannot create non-existent data directory" << StelApp::getInstance().getFileMgr().getUserDir()+"/data";
+				qWarning() << "Location cannot be saved";
+				return false;
+			}
+		}
+		
+		cityDataPath = StelApp::getInstance().getFileMgr().getUserDir()+"/data/user_locations.txt";
+		qWarning() << "Will create a new user location file: " << cityDataPath;
+	}
+
+	QFile sourcefile(cityDataPath);
+	if (!sourcefile.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		return false;
+	}
+	
+	QTextStream outstream(&sourcefile);
+	outstream.setCodec("UTF-8");	
+	
+	for (QMap<QString, Location>::const_iterator iter=locations.begin();iter!=locations.end();++iter)
+	{
+		if (iter.value().isUserLocation)
+		{
+			outstream << iter.value().serializeToLine() << '\n';
+		}
+	}
+	
+	sourcefile.close();
 	return true;
 }

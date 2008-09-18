@@ -36,6 +36,7 @@
 #include <QFrame>
 #include <QSortFilterProxyModel>
 #include <QTimer>
+#include <QStringListModel>
 
 LocationDialog::LocationDialog() : isEditingNew(false)
 {
@@ -76,8 +77,7 @@ void LocationDialog::createDialogContent()
 	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
 	proxyModel->sort(0, Qt::AscendingOrder);
-	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-							  
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);		  
 	ui->citiesListView->setModel(proxyModel);
 	
 	SolarSystem* ssystem = (SolarSystem*)GETSTELMODULE("SolarSystem");
@@ -93,7 +93,8 @@ void LocationDialog::createDialogContent()
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
-
+	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
+	
 	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
 	
 	const bool b = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID()
@@ -175,6 +176,8 @@ void LocationDialog::setFieldsFromLocation(const Location& loc)
 	// Set pointer position
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 	
+	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
+	
 	// Reactivate edit signals
 	connectEditSignals();
 }
@@ -255,6 +258,7 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 	ui->addLocationToListPushButton->setEnabled(false);
 	
 	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
+	
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
@@ -313,19 +317,31 @@ void LocationDialog::reportEdit()
 		loc = locationFromFields();
 	}
 	ui->addLocationToListPushButton->setEnabled(isEditingNew && StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc));
+	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 }
 
 // Called when the user clic on the save button
 void LocationDialog::addCurrentLocationToList()
 {
 	const Location& loc = locationFromFields();
+	ui->citySearchLineEdit->clear();
 	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
-	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
-	// Make location persistent
-	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.getID());
+	const QAbstractItemModel* model = ui->citiesListView->model();
+	const QString id = loc.getID();
+	for (int i=0;i<model->rowCount();++i)
+	{
+		if (model->index(i,0).data()==id)
+		{
+			ui->citiesListView->scrollTo(model->index(i,0));
+			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
+			listItemActivated(model->index(i,0));
+			break;
+		}
+	}
+	//StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 }
 
 // Called when the user wants to use the current location as default
@@ -336,4 +352,11 @@ void LocationDialog::useAsDefaultClicked()
 			StelApp::getInstance().getCore()->getNavigation()->getDefaultLocationID();
 	ui->useAsDefaultLocationCheckBox->setChecked(b);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
+}
+
+// Called when the user clic on the delete button
+void LocationDialog::deleteCurrentLocationFromList()
+{
+	const Location& loc = locationFromFields();
+	StelApp::getInstance().getLocationMgr().deleteUserLocation(loc.getID());
 }
