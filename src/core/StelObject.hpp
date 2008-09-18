@@ -66,7 +66,7 @@ public:
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup BriefInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroup ShortInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject(void) {}
 
