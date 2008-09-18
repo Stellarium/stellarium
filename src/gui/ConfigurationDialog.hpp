@@ -48,7 +48,6 @@ private slots:
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
 	void setShowFlipButtons(bool);
-	void visionModeChanged();
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
 			

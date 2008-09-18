@@ -118,14 +118,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	
-	// View mode radio buttons
-	const bool vmodeNight = StelApp::getInstance().getVisionModeNight();
-	ui->normalVisionRadioButton->setChecked(!vmodeNight);
-	ui->nightVisionRadioButton->setChecked(vmodeNight);
-	connect(ui->normalVisionRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
-	connect(ui->nightVisionRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
-	connect(ui->invertedColorsRadioButton, SIGNAL(clicked()), this, SLOT(visionModeChanged()));
-	
 	// Navigation tab
 	// Startup time
 	if (nav->getStartupTimeMode()=="actual")
@@ -259,18 +251,6 @@ void ConfigurationDialog::setShowFlipButtons(bool b)
 	}
 }
 
-void ConfigurationDialog::visionModeChanged()
-{
-	const bool b = StelApp::getInstance().getVisionModeNight();
-	if (ui->normalVisionRadioButton->isChecked() && b)
-	{
-		StelApp::getInstance().setVisionModeNight(false);
-	}
-	if (ui->nightVisionRadioButton->isChecked() && !b)
-	{
-		StelApp::getInstance().setVisionModeNight(true);
-	}
-}
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
