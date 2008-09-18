@@ -124,7 +124,7 @@ void ConfigurationDialog::createDialogContent()
 	// Selected object info
 	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		ui->noSelectedInfoRadio->setChecked(true);
-	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::BriefInfo))
+	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		ui->briefSelectedInfoRadio->setChecked(true);
 	else
 		ui->allSelectedInfoRadio->setChecked(true);
@@ -237,7 +237,7 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	StelGui* newGui = (StelGui*)GETSTELMODULE("StelGui");
 	assert(newGui);
-	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::BriefInfo));
+	newGui->getInfoPanel()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 
 void ConfigurationDialog::setShowFlipButtons(bool b)
@@ -300,6 +300,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(nmgr);
 	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
 	Q_ASSERT(glmgr);
+	StelGui* gui = (StelGui*)GETSTELMODULE("StelGui");
+	Q_ASSERT(gui);
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
@@ -348,6 +350,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	
 	// Save default location
 	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
+
+	// configuration dialog options
+	if (gui->getInfoPanel()->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+		conf->setValue("gui/selected_object_info", "none");
+	else if (gui->getInfoPanel()->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+		conf->setValue("gui/selected_object_info", "short");
+	else
+		conf->setValue("gui/selected_object_info", "all");
 }
 
 // Reset all stellarium options.
