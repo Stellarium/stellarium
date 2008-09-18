@@ -275,14 +275,14 @@
             </property>
             <layout class="QGridLayout" name="gridLayout" >
              <item row="0" column="0" >
-              <widget class="QPushButton" name="pushButton" >
+              <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
                <property name="text" >
                 <string>Set current viewing options as default</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0" >
-              <widget class="QPushButton" name="pushButton_2" >
+              <widget class="QPushButton" name="resetAlloptionsPushButton" >
                <property name="text" >
                 <string>Reset all options</string>
                </property>

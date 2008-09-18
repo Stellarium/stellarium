@@ -33,6 +33,9 @@
 #include "SkyDrawer.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "Location.hpp"
+#include "LandscapeMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -170,6 +173,9 @@ void ConfigurationDialog::createDialogContent()
 		ui->mouseTimeoutSpinBox->setValue(tmout);
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
+	
+	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
+	connect(ui->resetAlloptionsPushButton, SIGNAL(clicked()), this, SLOT(resetAllOptions()));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
@@ -262,4 +268,27 @@ void ConfigurationDialog::cursorTimeOutChanged()
 		StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 	else
 		StelAppGraphicsScene::getInstance().setCursorTimeout(-1.f);
+}
+
+// Save the current viewing option including landscape, location and sky culture
+// This doesn't include the current viewing direction, time and FOV since those have specific controls
+void ConfigurationDialog::saveCurrentViewOptions()
+{
+	// Save default location
+	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
+	// Save default landscape
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	Q_ASSERT(lmgr);
+	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
+	// Save default Sky Culture
+	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	
+	// Save other options
+	// TODO
+}
+
+// Reset all stellarium options.
+// This basically replaces the config.ini by the default one
+void ConfigurationDialog::resetAllOptions()
+{
 }
