@@ -101,29 +101,23 @@ void ViewDialog::createDialogContent()
 	
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
-	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->starScaleRadiusDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAbsoluteStarScale());
 	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAbsoluteStarScale(double)));
-	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->starRelativeScaleDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getRelativeStarScale());
 	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setRelativeStarScale(double)));
-	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSkyTabSettings()));	
 	
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
-	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
-	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Planets section
 	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
 	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
 	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
-	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
 	a = StelMainGraphicsView::getInstance().findChild<QAction*>("actionShow_Planets_Hints");
@@ -132,15 +126,12 @@ void ViewDialog::createDialogContent()
 	
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
-	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
-	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
-	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Shooting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
@@ -155,20 +146,14 @@ void ViewDialog::createDialogContent()
 	}
 	shootingStarsZHRChanged();
 	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhrNone, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr80, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10000, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr144000, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
 	// Labels section
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 
 	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
@@ -178,17 +163,13 @@ void ViewDialog::createDialogContent()
 
 	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
 	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
-	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMarkingsTabSettings()));
 	
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
-	connect(ui->starsLabelsHorizontalSlider, SIGNAL(sliderReleased()), this, SLOT(saveMarkingsTabSettings()));
 	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
 	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
-	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(sliderReleased()), this, SLOT(saveMarkingsTabSettings()));
 	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
 	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
-	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(sliderReleased()), this, SLOT(saveMarkingsTabSettings()));
 	
 	// Landscape section
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
@@ -207,12 +188,10 @@ void ViewDialog::createDialogContent()
 	
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
-	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveLandscapeTabSettings()));
 	
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
@@ -280,7 +259,6 @@ void ViewDialog::createDialogContent()
 	
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
-	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveMarkingsTabSettings()));
 	
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -383,10 +361,6 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 	StelApp::getInstance().getCore()->getProjection()->setCurrentMapping(i.value()->getId());
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getHtmlSummary());
-
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	conf->setValue("projection/type", StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getId());
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
@@ -452,71 +426,6 @@ void ViewDialog::starsLabelsValueChanged(int v)
 	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
 	float a= ((float)v)/10.f;
 	smgr->setLabelsAmount(a);
-}
-
-void ViewDialog::saveSkyTabSettings(void)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-
-	SkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
-	assert(skyd);
-	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
-	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
-	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
-	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
-
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
-	assert(ssmgr);
-	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
-	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
-	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
-	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
-
-	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
-	assert(mmgr);
-	conf->setValue("astro/meteor_rate", mmgr->getZHR());
-
-}
-
-void ViewDialog::saveMarkingsTabSettings(void)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-
-	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
-	assert(cmgr);
-	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
-
-	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
-	assert(smgr);
-	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
-	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
-
-	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
-	assert(ssmgr);
-	conf->setValue("astro/flag_planets_labels", ssmgr->getFlagLabels());
-	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
-
-	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
-	assert(nmgr);
-	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
-}
-
-void ViewDialog::saveLandscapeTabSettings(void)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-	Q_ASSERT(lmgr);
-	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
-	conf->setValue("stars/init_bortle_scale", StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
-}
-
-void ViewDialog::saveStarloreTabSettings(void)
-{
-	// TODO: sky culture associated language, when feature is implemented.
 }
 
 void ViewDialog::setCurrentLandscapeAsDefault(void)

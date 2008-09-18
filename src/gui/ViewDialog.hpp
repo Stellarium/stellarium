@@ -48,10 +48,6 @@ private slots:
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void starsLabelsValueChanged(int);
-	void saveSkyTabSettings(void);
-	void saveMarkingsTabSettings(void);
-	void saveLandscapeTabSettings(void);
-	void saveStarloreTabSettings(void);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 
