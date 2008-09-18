@@ -546,9 +546,9 @@ void SkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 			{
 				absoluteImageURI = StelApp::getInstance().getFileMgr().findFile(baseUrl+imageUrl);
 			}
-			catch (std::runtime_error er)
+			catch (std::runtime_error& er)
 			{
-					// Maybe the user meant a file in stellarium local files
+				// Maybe the user meant a file in stellarium local files
 				absoluteImageURI = imageUrl;
 			}
 		}
