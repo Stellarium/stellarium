@@ -110,7 +110,7 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 
 void ConstellationMgr::updateSkyCulture()
 {
-	QString newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	QString newSkyCulture = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 	StelFileMgr& fileMan = StelApp::getInstance().getFileMgr();
 	
 	// Check if the sky culture changed since last load, if not don't load anything

@@ -843,7 +843,7 @@ void StarMgr::setFontSize(double newFontSize)
 
 void StarMgr::updateSkyCulture()
 {
-	QString skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	QString skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 	
 	// Load culture star names in english
 	try
@@ -860,7 +860,7 @@ void StarMgr::updateSkyCulture()
 	{
 		loadSciNames(StelApp::getInstance().getFileMgr().findFile("stars/default/name.fab"));
 	}
-	catch(exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: could not load scientific star names file: " << e.what();
 	}

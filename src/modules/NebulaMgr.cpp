@@ -237,7 +237,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		loadNGC(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000.dat"));
 		loadNGCNames(StelApp::getInstance().getFileMgr().findFile("nebulae/" + setName + "/ngc2000names.dat"));
 	}
-	catch (exception& e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
 	}

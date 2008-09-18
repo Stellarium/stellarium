@@ -78,17 +78,13 @@ void ViewDialog::styleChanged()
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	ui->setDefaultCultureButton->setEnabled(false);
-	ui->setDefaultLandscapeButton->setEnabled(false);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	populateLists();
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
-	connect(ui->setDefaultCultureButton, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
 	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
-	connect(ui->setDefaultLandscapeButton, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 	
 	// Connect and initialize checkboxes and other widgets
 	
@@ -143,7 +139,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSkyTabSettings()));
 	
-	// Shouting stars section
+	// Shooting stars section
 	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
 	assert(mmgr);
 	switch(mmgr->getZHR())
@@ -215,6 +211,10 @@ void ViewDialog::createDialogContent()
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveLandscapeTabSettings()));
 	
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
+	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
+	
 	// Grid and lines
 	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
 	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
@@ -278,6 +278,12 @@ void ViewDialog::createDialogContent()
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveMarkingsTabSettings()));
+	
+	// Starlore
+	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
+	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
+	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
+	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 }
 
 void ViewDialog::populateLists()
@@ -287,7 +293,7 @@ void ViewDialog::populateLists()
 	l->blockSignals(true);
 	l->clear();
 	l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
-	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
 
@@ -319,9 +325,11 @@ void ViewDialog::populateLists()
 
 void ViewDialog::skyCultureChanged(const QString& cultureName)
 {
-	StelApp::getInstance().getSkyCultureMgr().setSkyCulture(cultureName);
-	ui->setDefaultCultureButton->setEnabled(true);
+	StelApp::getInstance().getSkyCultureMgr().setCurrentSkyCultureNameI18(cultureName);
 	updateSkyCultureText();
+	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
+	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
+	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 }
 
 void ViewDialog::updateSkyCultureText()
@@ -330,17 +338,17 @@ void ViewDialog::updateSkyCultureText()
 	QString descPath;
 	try
 	{
-		descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir() + "/description."+StelApp::getInstance().getLocaleMgr().getAppLanguage()+".utf8");
+		descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description."+StelApp::getInstance().getLocaleMgr().getAppLanguage()+".utf8");
 	}
 	catch (exception& e)
 	{
 		try
 		{
-			descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir() + "/description.en.utf8");
+			descPath = fileMan.findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description.en.utf8");
 		}
 		catch (exception& e)
 		{
-			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 		}
 	}
 	
@@ -381,10 +389,11 @@ void ViewDialog::projectionChanged(const QString& projectionName)
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-	lmgr->setLandscapeByName(item->text());
+	lmgr->setCurrentLandscapeName(item->text());
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
-	ui->setDefaultLandscapeButton->setEnabled(true);
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 }
 
 void ViewDialog::shootingStarsZHRChanged()
@@ -510,22 +519,18 @@ void ViewDialog::saveStarloreTabSettings(void)
 
 void ViewDialog::setCurrentLandscapeAsDefault(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-	assert(lmgr);
-	conf->setValue("init_location/landscape_name", lmgr->getLandscapeId());
-	conf->setValue("init_location/name", lmgr->getCurrentLandscapeName());
-	ui->setDefaultLandscapeButton->setEnabled(false);
+	Q_ASSERT(lmgr);
+	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setChecked(true);
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(false);
 }
 
 void ViewDialog::setCurrentCultureAsDefault(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-	conf->setValue("localization/sky_culture", StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir());
-	ui->setDefaultCultureButton->setEnabled(false);
+	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	ui->useAsDefaultSkyCultureCheckBox->setChecked(true);
+	ui->useAsDefaultSkyCultureCheckBox->setEnabled(false);
 }
 
 void ViewDialog::planetsLabelsValueChanged(int v)

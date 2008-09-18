@@ -202,7 +202,7 @@ void SolarSystem::loadPlanets()
 	{
 		iniFile = StelApp::getInstance().getFileMgr().findFile("data/ssystem.ini");
 	}
-	catch(exception& e)
+	catch(std::runtime_error& e)
 	{
 		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << e.what() << endl;
 		return;
