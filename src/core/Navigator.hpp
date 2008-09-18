@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QString>
 #include <QTime>
+#include <QDateTime>
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
@@ -138,6 +139,7 @@ public:
 	
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const {return presetSkyTime;}
+	//! Set the preset sky time from a JD
 	void setPresetSkyTime(double d) {presetSkyTime=d;}
 	
 	//! Return the startup mode, can be preset|Preset or anything else
@@ -181,13 +183,11 @@ public slots:
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file
-	QTime getInitTodayTime(void);
-	//! set the initial "today time" in the config file for "today" initial time type
-	void setInitTodayTime(const QTime& t);
-	//! get the initial date and time from the config file for "preset" initial time type
-	QDateTime getInitDateTime(void);
-	//! set the initial date and time from the config file for "preset" initial time type
-	void setInitDateTime(const QDateTime& t);
+	QTime getInitTodayTime(void) {return initTodayTime;}
+	//! set the initial "today time" from the config file
+	void setInitTodayTime(const QTime& t) {initTodayTime=t;}
+	//! Set the preset sky time from a QDateTime
+	void setPresetSkyTime(QDateTime dt);
 
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour() {addSolarDays(0.04166666666666666667);}
@@ -263,6 +263,7 @@ private:
 	double JDay;              // Curent time in Julian day
 
 	double presetSkyTime;
+	QTime initTodayTime;
 	QString startupTimeMode;
 
 	// The ID of the default startup location

@@ -364,7 +364,7 @@ QDateTime jdToQDateTime(const double& jd)
 {
 	int year, month, day;
 	getDateFromJulianDay(jd, &year, &month, &day);
-	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, QChar('0')).arg(month).arg(day), "yyyy.m.d");
+	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
 	result.setTime(jdFractionToQTime(jd));
 	return result;
 }
