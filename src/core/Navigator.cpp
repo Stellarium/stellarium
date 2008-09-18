@@ -55,10 +55,10 @@ const Planet *Navigator::getHomePlanet(void) const
 void Navigator::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
+	Q_ASSERT(conf);
 
-	const QString locationName = StelApp::getInstance().getSettings()->value("init_location/location","Paris, Paris, France").toString();
-	position = new Observer(StelApp::getInstance().getLocationMgr().locationForSmallString(locationName));
+	defaultLocationID = conf->value("init_location/location","Paris, Paris, France").toString();
+	position = new Observer(StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID));
 	
 	setTimeNow();
 	setLocalVision(Vec3f(1,1e-05,0.2));
@@ -93,6 +93,16 @@ void Navigator::init()
 		setTimeNow();
 }
 
+// Set the location to use by default at startup
+void Navigator::setDefaultLocationID(const QString& id)
+{
+	defaultLocationID = id;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("init_location/location", id);
+}
+	
 //! Set stellarium time to current real world time
 void Navigator::setTimeNow()
 {

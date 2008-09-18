@@ -92,9 +92,15 @@ void LocationDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
-	connect(ui->saveLocationPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentLocation()));
+	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 
 	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());
+	
+	const bool b = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID()
+			==StelApp::getInstance().getCore()->getNavigation()->getDefaultLocationID();
+	ui->useAsDefaultLocationCheckBox->setChecked(b);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
+	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked()), this, SLOT(useAsDefaultClicked()));
 	
 	connectEditSignals();
 	
@@ -109,8 +115,8 @@ void LocationDialog::updateFromProgram()
 	if (!dialog->isVisible() || isEditingNew==true)
 		return;
 	
-	const QString& key1 = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().toSmallString();
-	const QString& key2 = locationFromFields().toSmallString();
+	const QString& key1 = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID();
+	const QString& key2 = locationFromFields().getID();
 	
 	if (key1!=key2)
 	{
@@ -246,14 +252,15 @@ Location LocationDialog::locationFromFields() const
 void LocationDialog::listItemActivated(const QModelIndex& index)
 {
 	isEditingNew=false;
-	ui->saveLocationPushButton->setEnabled(false);
+	ui->addLocationToListPushButton->setEnabled(false);
 	
 	Location loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
-	// Make location persistent
-	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());
+	const bool b = loc.getID()==StelApp::getInstance().getCore()->getNavigation()->getDefaultLocationID();
+	ui->useAsDefaultLocationCheckBox->setChecked(b);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 }
 
 void LocationDialog::setPositionFromMap(double longitude, double latitude)
@@ -305,18 +312,28 @@ void LocationDialog::reportEdit()
 		ui->cityNameLineEdit->selectAll();
 		loc = locationFromFields();
 	}
-	ui->saveLocationPushButton->setEnabled(isEditingNew && StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc));
+	ui->addLocationToListPushButton->setEnabled(isEditingNew && StelApp::getInstance().getLocationMgr().canSaveUserLocation(loc));
 }
 
 // Called when the user clic on the save button
-void LocationDialog::saveCurrentLocation()
+void LocationDialog::addCurrentLocationToList()
 {
 	const Location& loc = locationFromFields();
 	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
-	ui->saveLocationPushButton->setEnabled(false);
+	ui->addLocationToListPushButton->setEnabled(false);
 	StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 	
 	// Make location persistent
-	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.toSmallString());
+	StelApp::getInstance().getSettings()->setValue("init_location/location",loc.getID());
+}
+
+// Called when the user wants to use the current location as default
+void LocationDialog::useAsDefaultClicked()
+{
+	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
+	const bool b = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID()==
+			StelApp::getInstance().getCore()->getNavigation()->getDefaultLocationID();
+	ui->useAsDefaultLocationCheckBox->setChecked(b);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 }

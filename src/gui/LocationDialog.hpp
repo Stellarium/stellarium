@@ -80,8 +80,11 @@ private slots:
 	//! Called when the location name is manually changed
 	void locationNameChanged(const QString& text);
 	
-	//! Called when the user clic on the save button
-	void saveCurrentLocation();
+	//! Called when the user clic on the add to list button
+	void addCurrentLocationToList();
+	
+	//! Called when the user wants to use the current location as default
+	void useAsDefaultClicked();
 	
 private:
 	QString lastPlanet;

@@ -65,23 +65,23 @@ void LocationMgr::loadCities(const QString& fileName)
 			continue;
 		Location loc = Location::createFromLine(rawline);
 		
-		if (locations.contains(loc.toSmallString()))
+		if (locations.contains(loc.getID()))
 		{
 			// Add the state in the name of the existing one and the new one to differentiate
-			Location loc2 = locations[loc.toSmallString()];
+			Location loc2 = locations[loc.getID()];
 			if (!loc2.state.isEmpty())
 				loc2.name += " ("+loc2.state+")";
 			// remove and re-add the fixed version
-			locations.remove(loc.toSmallString());
-			locations[loc2.toSmallString()] = loc2;
+			locations.remove(loc.getID());
+			locations[loc2.getID()] = loc2;
 			
 			if (!loc.state.isEmpty())
 				loc.name += " ("+loc.state+")";
-			locations[loc.toSmallString()] = loc;
+			locations[loc.getID()] = loc;
 		}
 		else
 		{
-			locations[loc.toSmallString()] = loc;
+			locations[loc.getID()] = loc;
 		}
 	}
 	sourcefile.close();
@@ -108,7 +108,7 @@ const Location LocationMgr::locationForSmallString(const QString& s) const
 // Get whether a location can be permanently added to the list of user locations
 bool LocationMgr::canSaveUserLocation(const Location& loc) const
 {
-	return locations.find(loc.toSmallString())==locations.end();
+	return locations.find(loc.getID())==locations.end();
 }
 
 // Add permanently a location to the list of user locations
@@ -118,7 +118,7 @@ bool LocationMgr::saveUserLocation(const Location& loc)
 		return false;
 	
 	// Add in the program
-	locations[loc.toSmallString()]=loc;
+	locations[loc.getID()]=loc;
 	
 	// Append in the user file
 	modelAllLocation->setStringList(locations.keys());
