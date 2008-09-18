@@ -28,7 +28,7 @@
 class QStringListModel;
 
 //! @class LocationMgr
-//! Base class for any astro image with a fixed position
+//! Manage the list of available location.
 class LocationMgr : public QObject
 {
 	Q_OBJECT;

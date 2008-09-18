@@ -224,9 +224,16 @@ public slots:
 	//! based on the observer body's rotational period.
 	//! @param d the decimal number of sidereal days to add (use negative values to subtract)
 	void addSiderealDays(double d);
-	//! Move the observer to the selected objejct. This will only do something if
+	
+	//! Move the observer to the selected object. This will only do something if
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected(void);
+	
+	//! Get the location used by default at startup
+	QString getDefaultLocationID() const {return defaultLocationID;}
+	//! Set the location to use by default at startup
+	void setDefaultLocationID(const QString& id);
+	
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent(void);
@@ -258,6 +265,9 @@ private:
 	double presetSkyTime;
 	QString startupTimeMode;
 
+	// The ID of the default startup location
+	QString defaultLocationID;
+			
 	// Position variables
 	Observer* position;
 

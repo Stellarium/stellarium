@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _PLANET_LOCATION_HPP_
-#define _PLANET_LOCATION_HPP_
+#ifndef _LOCATION_HPP_
+#define _LOCATION_HPP_
 
 #include <QString>
 
@@ -29,7 +29,7 @@ public:
 	Location() : longitude(0.), latitude(0.), altitude(0), bortleScaleIndex(2.) {;}
 	
 	//! Return a short string which can be used in a list view
-	QString toSmallString() const
+	QString getID() const
 	{
 		return name + ", " +country;
 	}
@@ -61,8 +61,8 @@ public:
 	//! C/B=Capital, R=Regional capital, N=Normal city, O=Observatory, L=lander, I=spacecraft impact, A=spacecraft crash
 	QChar role;
 	
-	//! Parse a lcoation from a line serialization
+	//! Parse a location from a line serialization
 	static Location createFromLine(const QString& line);
 };
 
-#endif // _PLANET_LOCATION_HPP_
+#endif // _LOCATION_HPP_
