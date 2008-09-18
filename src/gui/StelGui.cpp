@@ -687,7 +687,7 @@ QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, 
 		helpDialog.setKey(helpGroup, "", shortCut, text);
 	StelMainGraphicsView::getInstance().addAction(a);
 	
-	connect(a, SIGNAL(toggled(bool)), this, SLOT(guiActionTriggered(bool)));
+	// connect(a, SIGNAL(toggled(bool)), this, SLOT(guiActionTriggered(bool)));
 	return a;
 }
 
@@ -706,13 +706,8 @@ QAction* StelGui::getGuiActions(const QString& actionName)
 void StelGui::guiActionTriggered(bool b)
 {
 	// can get the action name from: QObject::sender()->objectName()
-	QString configKey = QObject::sender()->property("persistenceName").toString();
-	if (configKey != "")
-	{
-		QSettings* conf = StelApp::getInstance().getSettings();
-		assert(conf);
-		conf->setValue(configKey, b);
-	}
+	// to get the config.ini key:
+	// and QObject::sender()->property("persistenceName").toString();
 }
 	
 void StelGui::updateBarsPos()

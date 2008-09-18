@@ -1,4 +1,5 @@
 /*
+ *
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
  * 
@@ -36,6 +37,12 @@
 #include "Location.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "SolarSystem.hpp"
+#include "MeteorMgr.hpp"
+#include "ConstellationMgr.hpp"
+#include "StarMgr.hpp"
+#include "NebulaMgr.hpp"
+#include "GridLinesMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -274,17 +281,73 @@ void ConfigurationDialog::cursorTimeOutChanged()
 // This doesn't include the current viewing direction, time and FOV since those have specific controls
 void ConfigurationDialog::saveCurrentViewOptions()
 {
-	// Save default location
-	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
-	// Save default landscape
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
 	Q_ASSERT(lmgr);
+	SolarSystem* ssmgr = (SolarSystem*)GETSTELMODULE("SolarSystem");
+	Q_ASSERT(ssmgr);
+	MeteorMgr* mmgr = (MeteorMgr*)GETSTELMODULE("MeteorMgr");
+	Q_ASSERT(mmgr);
+	SkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
+	Q_ASSERT(skyd);
+	ConstellationMgr* cmgr = (ConstellationMgr*)GETSTELMODULE("ConstellationMgr");
+	Q_ASSERT(cmgr);
+	StarMgr* smgr = (StarMgr*)GETSTELMODULE("StarMgr");
+	Q_ASSERT(smgr);
+	NebulaMgr* nmgr = (NebulaMgr*)GETSTELMODULE("NebulaMgr");
+	Q_ASSERT(nmgr);
+	GridLinesMgr* glmgr = (GridLinesMgr*)GETSTELMODULE("GridLinesMgr");
+	Q_ASSERT(glmgr);
+
+	// view dialog / sky tab settings
+	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
+	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
+	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
+	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
+	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
+	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
+	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
+	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
+	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
+	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf->setValue("astro/meteor_rate", mmgr->getZHR());
+
+	// view dialog / markings tab settings
+	conf->setValue("viewing/flag_azimutal_grid", glmgr->getFlagAzimutalGrid());
+	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
+	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
+	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
+	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
+	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
+	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
+	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
+	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
+	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
+	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
+	conf->setValue("astro/flag_planets_labels", ssmgr->getFlagLabels());
+	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
+	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
+	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
+	conf->setValue("projection/type", StelApp::getInstance().getCore()->getProjection()->getCurrentMapping().getId());
+
+	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
-	// Save default Sky Culture
+	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
+	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
+	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
+	conf->setValue("stars/init_bortle_scale", StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+
+	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 	
-	// Save other options
-	// TODO
+	// Save default location
+	StelApp::getInstance().getCore()->getNavigation()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID());
 }
 
 // Reset all stellarium options.
