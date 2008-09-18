@@ -341,7 +341,6 @@ void LocationDialog::addCurrentLocationToList()
 			break;
 		}
 	}
-	//StelApp::getInstance().getCore()->getNavigation()->moveObserverTo(loc, 0.);
 }
 
 // Called when the user wants to use the current location as default
