@@ -250,7 +250,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -682,7 +682,7 @@
                <property name="checkable" >
                 <bool>false</bool>
                </property>
-               <layout class="QGridLayout" name="gridLayout" >
+               <layout class="QGridLayout" name="gridLayoutx" >
                 <property name="margin" >
                  <number>0</number>
                 </property>
@@ -1120,22 +1120,13 @@
                  </spacer>
                 </item>
                </layout>
-               <zorder>showConstellationLinesCheckBox</zorder>
-               <zorder>showConstellationLabelsCheckBox</zorder>
-               <zorder>showConstellationBoundariesCheckBox</zorder>
-               <zorder>showConstellationArtCheckBox</zorder>
-               <zorder>layoutWidget_2</zorder>
-               <zorder>layoutWidget_2</zorder>
-               <zorder>horizontalSpacer_6</zorder>
-               <zorder>projectionGroupBox</zorder>
-               <zorder>projectionGroupBox</zorder>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
           <item row="1" column="0" >
-           <widget class="QGroupBox" name="projectionGroupBox" >
+           <widget class="QGroupBox" name="setProjectionGroupBox" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
               <horstretch>0</horstretch>
@@ -1511,9 +1502,6 @@
               </widget>
              </item>
             </layout>
-            <zorder>culturesListWidget</zorder>
-            <zorder>frame_5</zorder>
-            <zorder>setDefaultCultureButton</zorder>
            </widget>
           </item>
          </layout>
