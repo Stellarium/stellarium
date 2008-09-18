@@ -507,10 +507,9 @@ void ViewDialog::saveMarkingsTabSettings(void)
 void ViewDialog::saveLandscapeTabSettings(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	assert(conf);
-
+	Q_ASSERT(conf);
 	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
-	assert(lmgr);
+	Q_ASSERT(lmgr);
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("stars/init_bortle_scale", StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 }

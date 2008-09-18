@@ -50,7 +50,15 @@ private slots:
 	void setShowFlipButtons(bool);
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
-			
+	
+	//! Save the current viewing option including landscape, location and sky culture
+	//! This doesn't include the current viewing direction, time and FOV since those have specific controls
+	void saveCurrentViewOptions();
+	
+	//! Reset all stellarium options.
+	//! This basically replaces the config.ini by the default one
+	void resetAllOptions();
+	
 private:
 	class StelButton* flipVert;
 	class StelButton* flipHoriz;
