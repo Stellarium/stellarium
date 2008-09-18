@@ -396,7 +396,7 @@ bool SkyImageTile::drawTile(StelCore* core)
 		}
 		glEnd();
 	}
-#if 0
+#ifdef DEBUG_SKYIMAGE_TILE
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -407,7 +407,7 @@ bool SkyImageTile::drawTile(StelCore* core)
 		Vec3d win;
 		Vec3d bary = poly.getBarycenter();
 		prj->project(bary,win);
-		prj->drawText(debugFont, win[0], win[1], getImageUrl());
+		prj->drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
 		
 		glDisable(GL_TEXTURE_2D);
 		prj->drawPolygon(poly);

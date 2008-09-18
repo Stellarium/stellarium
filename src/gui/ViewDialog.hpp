@@ -50,7 +50,9 @@ private slots:
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
-
+	//! Update the widget to make sure it is synchrone if a value was changed programmatically
+	//! This function should be called repeatidly with e.g. a timer
+	void updateFromProgram();
 private:
 	void updateSkyCultureText();	
 };

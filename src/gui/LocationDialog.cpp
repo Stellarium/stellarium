@@ -113,12 +113,22 @@ void LocationDialog::createDialogContent()
 // Update the widget to make sure it is synchrone if the location is changed programmatically
 void LocationDialog::updateFromProgram()
 {
-	if (!dialog->isVisible() || isEditingNew==true)
+	if (!dialog->isVisible())
 		return;
 	
+	// Check that the use as default check box needs to be updated
+	const bool b = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID()
+			==StelApp::getInstance().getCore()->getNavigation()->getDefaultLocationID();
+	if (b!=ui->useAsDefaultLocationCheckBox->isChecked())
+	{
+		ui->useAsDefaultLocationCheckBox->setChecked(b);
+		ui->useAsDefaultLocationCheckBox->setEnabled(!b);
+	}
+	
+	if (isEditingNew==true)
+		return;
 	const QString& key1 = StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation().getID();
 	const QString& key2 = locationFromFields().getID();
-	
 	if (key1!=key2)
 	{
 		setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigation()->getCurrentLocation());

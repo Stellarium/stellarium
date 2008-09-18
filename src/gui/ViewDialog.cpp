@@ -42,6 +42,7 @@
 #include <QFrame>
 #include <QFile>
 #include <QSettings>
+#include <QTimer>
 
 #include "StelMainGraphicsView.hpp"
 #include <QDialog>
@@ -265,6 +266,10 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	
+	QTimer* refreshTimer = new QTimer(this);
+	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
+	refreshTimer->start(200);
 }
 
 void ViewDialog::populateLists()
@@ -457,4 +462,28 @@ void ViewDialog::nebulasLabelsValueChanged(int v)
 	float a= ((float)v)/10.f;
 	nmgr->setHintsAmount(a);
 	nmgr->setLabelsAmount(a);
+}
+
+// Update the widget to make sure it is synchrone if a value was changed programmatically
+void ViewDialog::updateFromProgram()
+{
+	if (!dialog->isVisible())
+		return;
+	
+	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated
+	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
+	if (b!=ui->useAsDefaultSkyCultureCheckBox->isChecked())
+	{
+		ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
+		ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	}
+	
+	LandscapeMgr* lmgr = (LandscapeMgr*)GETSTELMODULE("LandscapeMgr");
+	Q_ASSERT(lmgr);
+	b = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
+	if (b!=ui->useAsDefaultLandscapeCheckBox->isChecked())
+	{
+		ui->useAsDefaultLandscapeCheckBox->setChecked(b);
+		ui->useAsDefaultLandscapeCheckBox->setEnabled(!b);
+	}
 }
