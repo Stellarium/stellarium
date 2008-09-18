@@ -162,6 +162,7 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelAppGraphicsScene::getInstance().getViewPortDistorterType() == "fisheye_to_spheric_mirror");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
+	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), proj, SLOT(setFlagGravityLabels(bool)));
 	ui->discViewportCheckbox->setChecked(proj->getMaskType() == Projector::Disk);
 	connect(ui->discViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
@@ -171,11 +172,10 @@ void ConfigurationDialog::createDialogContent()
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
 	
-	const float tmout = StelAppGraphicsScene::getInstance().getCursorTimeout();
-	ui->mouseTimeoutCheckbox->setChecked(tmout>0);
-	if (tmout>0)
-		ui->mouseTimeoutSpinBox->setValue(tmout);
+	ui->mouseTimeoutCheckbox->setChecked(StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
+	ui->mouseTimeoutSpinBox->setValue(StelAppGraphicsScene::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
+	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 	
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
@@ -245,10 +245,8 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
-	if (ui->mouseTimeoutCheckbox->isChecked())
-		StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
-	else
-		StelAppGraphicsScene::getInstance().setCursorTimeout(-1.f);
+	StelAppGraphicsScene::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+	StelAppGraphicsScene::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 }
 
 // Save the current viewing option including landscape, location and sky culture
@@ -355,7 +353,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
 	conf->setValue("video/distorter", StelAppGraphicsScene::getInstance().getViewPortDistorterType());
 	conf->setValue("projection/viewport", Projector::maskTypeToString(proj->getMaskType()));
-
+	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
+	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
+	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
+	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
 }
 
 // Reset all stellarium options.

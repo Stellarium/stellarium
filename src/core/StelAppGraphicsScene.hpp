@@ -61,11 +61,15 @@ public:
 	QPainter* switchToQPainting();
 	void revertToOpenGL();
 	
+	//! Get the state of the mouse cursor timeout flag
+	bool getFlagCursorTimeout() {return flagCursorTimeout;}
 	//! Get the mouse cursor timeout in seconds
 	float getCursorTimeout() const {return cursorTimeout;}
+	//! Get the state of the mouse cursor timeout flag
+	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b;}
 	//! Set the mouse cursor timeout in seconds
 	void setCursorTimeout(float t) {cursorTimeout=t;}
-	
+
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
@@ -92,6 +96,7 @@ private:
 	
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
+	bool flagCursorTimeout;
 };
 
 #endif // _STELAPPGRAPHICSSCENE_HPP_
