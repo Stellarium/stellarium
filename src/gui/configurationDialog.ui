@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>355</width>
-    <height>487</height>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -147,7 +147,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>2</number>
         </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
@@ -217,58 +217,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_6" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title" >
-             <string>View mode</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QRadioButton" name="normalVisionRadioButton" >
-               <property name="toolTip" >
-                <string>Standard mode.</string>
-               </property>
-               <property name="text" >
-                <string>Normal vision</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="nightVisionRadioButton" >
-               <property name="toolTip" >
-                <string>Use red light only - this helps to preserve the dark adaptation of the eye.</string>
-               </property>
-               <property name="text" >
-                <string>Night vision</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="invertedColorsRadioButton" >
-               <property name="enabled" >
-                <bool>false</bool>
-               </property>
-               <property name="toolTip" >
-                <string>Inverted colors like on astronomical charts (i.e. sky is white, objects are dark).</string>
-               </property>
-               <property name="text" >
-                <string>Inverted colors</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <widget class="QGroupBox" name="groupBox_4" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
@@ -284,7 +232,7 @@
              </font>
             </property>
             <property name="title" >
-             <string>Selected Object Information</string>
+             <string>Selected object information</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5" >
              <property name="margin" >
@@ -314,6 +262,29 @@
               <widget class="QRadioButton" name="noSelectedInfoRadio" >
                <property name="text" >
                 <string>None</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_6" >
+            <property name="title" >
+             <string>Default options</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout" >
+             <item row="0" column="0" >
+              <widget class="QPushButton" name="pushButton" >
+               <property name="text" >
+                <string>Set current viewing options as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QPushButton" name="pushButton_2" >
+               <property name="text" >
+                <string>Reset all options</string>
                </property>
               </widget>
              </item>
@@ -395,7 +366,7 @@
              </font>
             </property>
             <property name="title" >
-             <string>Startup Date and Time</string>
+             <string>Startup date and time</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_3" >
              <property name="margin" >
@@ -518,7 +489,7 @@
              </font>
             </property>
             <property name="title" >
-             <string>Startup FOV and Direction</string>
+             <string>Startup FOV and direction</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_4" >
              <property name="horizontalSpacing" >
