@@ -200,7 +200,7 @@ private:
 	//! to the serach path.  The configuration file must be writable, or there will
 	//! be trouble!
 	//! @param configName the name or full path of the configuration file
-	void setConfigFile(const QString& configName);
+	void setConfigFile(const QString& configName, bool restoreDefaults=false);
 	
 	//! Copies the default configuration file.
 	//! This function copies the default_config.ini file to config.ini (or other
