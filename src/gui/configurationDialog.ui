@@ -294,14 +294,14 @@
              <item row="2" column="0" >
               <widget class="QLabel" name="startupFOVLabel" >
                <property name="text" >
-                <string>Startup FOV: XX</string>
+				<string notr="true">Startup FOV: XX</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0" >
               <widget class="QLabel" name="startupDirectionOfViewlabel" >
                <property name="text" >
-                <string>Startup direction of view: xxxx</string>
+				<string notr="true">Startup direction of view: xxxx</string>
                </property>
               </widget>
              </item>
