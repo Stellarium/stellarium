@@ -94,6 +94,7 @@ void HelpDialog::styleChanged()
 void HelpDialog::createDialogContent()
 {
 		ui->setupUi(dialog);
+		ui->helpTabWidget->setCurrentIndex(0);
 		connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 		
 		updateText();
@@ -248,6 +249,38 @@ void HelpDialog::updateText(void)
 	ui->helpBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
+
+	// populate About tab
+	newHtml = "<h1>" + StelApp::getInstance().getApplicationName() + "</h1>";
+	// Note: this legal notice is not suitable for traslation
+	newHtml += "<h3>Copyright &copy; 2000-2008 Stellarium Developers</h3>";
+	newHtml += "<p>This program is free software; you can redistribute it and/or ";
+	newHtml += "modify it under the terms of the GNU General Public License ";
+	newHtml += "as published by the Free Software Foundation; either version 2 ";
+	newHtml += "of the License, or (at your option) any later version.</p>";
+	newHtml += "<p>This program is distributed in the hope that it will be useful, ";
+	newHtml += "but WITHOUT ANY WARRANTY; without even the implied ";
+	newHtml += "warranty of MERCHANTABILITY or FITNESS FOR A ";
+	newHtml += "PARTICULAR PURPOSE.  See the GNU General Public ";
+	newHtml += "License for more details.</p>";
+	newHtml += "<p>You should have received a copy of the GNU General Public ";
+	newHtml += "License along with this program; if not, write to:</p>";
+	newHtml += "<pre>Free Software Foundation, Inc.\n";
+	newHtml += "59 Temple Place - Suite 330\n";
+	newHtml += "Boston, MA  02111-1307, USA.\n</pre>";
+	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
+	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
+	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: Fabien Chéreau")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: Rob Spearman")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: Johan Meuris")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: Johannes Gajdosik")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: Matthew Gates")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: Nigel Kerr")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: Andras Mohari")) + "</li><ul><p>";
+	ui->aboutBrowser->clear();
+	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
+	ui->aboutBrowser->insertHtml(newHtml);
+	ui->aboutBrowser->scrollToAnchor("top");
 }
 
 bool HelpDialog::helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
