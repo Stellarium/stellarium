@@ -102,8 +102,6 @@ void StelMainWindow::setFullScreen(bool b)
 		showFullScreen();
 	else
 		showNormal();
-
-	StelApp::getInstance().getSettings()->setValue("video/fullscreen", b);
 }
 
 void StelMainWindow::closeEvent(QCloseEvent* event)
@@ -115,17 +113,5 @@ void StelMainWindow::closeEvent(QCloseEvent* event)
 
 void StelMainWindow::resizeEvent(QResizeEvent* event)
 {
-	if (initComplete)
-	{
-		QSettings* conf = StelApp::getInstance().getSettings();
-		if (conf!=NULL)
-		{
-			if (!isFullScreen())
-			{
-				conf->setValue("video/screen_h", event->size().height());
-				conf->setValue("video/screen_w", event->size().width());
-			}
-		}
-	}
 	QMainWindow::resizeEvent(event);
 }

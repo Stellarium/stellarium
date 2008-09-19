@@ -21,6 +21,7 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
+#include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -357,6 +358,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	
 	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
 	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
+
+	// full screen and window size
+	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
+	if (!StelMainWindow::getInstance().getFullScreen())
+	{
+		conf->setValue("video/screen_w", StelMainWindow::getInstance().size().width());
+		conf->setValue("video/screen_h", StelMainWindow::getInstance().size().height());
+	}
 	
 	updateConfigLabels();
 }
