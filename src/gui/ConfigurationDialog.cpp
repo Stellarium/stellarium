@@ -179,7 +179,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 	
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
-	connect(ui->resetAlloptionsPushButton, SIGNAL(clicked()), this, SLOT(resetAllOptions()));
+	//connect(ui->resetAlloptionsPushButton, SIGNAL(clicked()), this, SLOT(resetAllOptions()));
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
