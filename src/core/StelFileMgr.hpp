@@ -141,12 +141,12 @@ public:
 	//! It will be the first directory in the path which is used when
 	//! trying to find most data files
 	//! @return the path to the user private data directory	
-	//! @exceptions NOT_FOUND if the directory could not be found
+	//! @exception NOT_FOUND if the directory could not be found
 	QString getUserDir(void);
 
 	//! Sets the user directory.  This updates the search paths (first element)
 	//! @param newDir the new value of the user directory
-	//! @exceptions NOT_VALID if the specified user directory is not usable
+	//! @exception NOT_VALID if the specified user directory is not usable
 	void setUserDir(const QString& newDir);
 	
 	//! This is the directory into which screenshots will be saved
@@ -154,7 +154,7 @@ public:
 	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
 	//! It is ??? on Windows
 	//! @return the path to the directory where screenshots are saved
-	//! @exceptions NOT_FOUND if the directory could not be found
+	//! @exception NOT_FOUND if the directory could not be found
 	QString getScreenshotDir(void);
 
 	//! Sets the screenshot directory.
@@ -183,14 +183,14 @@ private:
 	//! This is the directory where we expect to find scripts, nebulae, stars, 
 	//! skycultures etc, and will be added at the end of the search path
 	//! @return the path to the installation data directory	
-	//! @exceptions NOT_FOUND if the directory could not be found
+	//! @exception NOT_FOUND if the directory could not be found
 	QString getInstallationDir(void);
 	
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path
 	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
-	//! @exceptions misc 
+	//! @exception misc 
 	bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
 	
 	QStringList fileLocations;

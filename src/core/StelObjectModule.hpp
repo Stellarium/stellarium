@@ -28,9 +28,9 @@
 #include "vecmath.h"
 
 //! @class StelObjectModule
-//! Specialization of @sa{StelModule} which manages a collection of StelObjects.
-//! Instances deriving from the StelObjectModule class can be managed by the @sa{StelObjectMgr}.
-//! The class defines extra abstract functions for searching and listing @sa{StelObjects}.
+//! Specialization of StelModule which manages a collection of StelObject.
+//! Instances deriving from the StelObjectModule class can be managed by the StelObjectMgr.
+//! The class defines extra abstract functions for searching and listing StelObjects.
 class StelObjectModule : public StelModule
 {
 public:
