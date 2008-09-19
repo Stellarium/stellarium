@@ -27,7 +27,7 @@
 #include <QStringList>
 #include <QVariantMap>
 
-#define DEBUG_SKYIMAGE_TILE
+//#define DEBUG_SKYIMAGE_TILE
 
 class QIODevice;
 class StelCore;
