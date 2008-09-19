@@ -61,6 +61,8 @@ void StelAppGraphicsScene::init()
 	setViewPortDistorterType(conf->value("video/distorter","none").toString());
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.).toDouble());
+	
+	startMainLoop();
 }
 
 void StelAppGraphicsScene::glWindowHasBeenResized(int w, int h)
@@ -163,13 +165,16 @@ void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 	
 	revertToQtPainting();
 	
+	// Determines when the next display will need to be triggered
+	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
+	// after that, it switches back to the minfps value to save power
 	double duration = 1./StelApp::getInstance().minfps;
 	if (now-lastEventTimeSec<2.5)
 		duration = 1./StelApp::getInstance().maxfps;
 	int dur = (int)(duration*1000);
 	QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(update()));
 	
-	// qDebug() << cursorTimeout << StelMainGraphicsView::getInstance().getFlagShowCursor();
+	// Manage cursor timeout
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{
 		if (QApplication::overrideCursor()==0)
@@ -336,4 +341,11 @@ void StelAppGraphicsScene::keyReleaseEvent(QKeyEvent* event)
 	}
 	
 	StelApp::getInstance().handleKeys(event);
+}
+
+void StelAppGraphicsScene::startMainLoop()
+{
+	QTimer* timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+	timer->start((int)(1./StelApp::getInstance().minfps*1000));
 }
