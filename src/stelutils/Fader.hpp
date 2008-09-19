@@ -53,7 +53,7 @@ protected:
 };
 
 //! @class BooleanFader
-//! Implementation of @sa{Fader} which behaves like a normal boolean, i.e. no transition between on and off.
+//! Implementation of Fader which behaves like a normal boolean, i.e. no transition between on and off.
 class BooleanFader : public Fader
 {
 public:
@@ -72,7 +72,7 @@ protected:
 };
 
 //! @class LinearFader
-//! Implementation of @sa{Fader} which implements a linear transition.
+//! Implementation of Fader which implements a linear transition.
 //! Please note that state is updated instantaneously, so if you need to draw something fading in
 //! and out, you need to check the interstate value (!=0) to know to draw when on AND during transitions.
 class LinearFader : public Fader

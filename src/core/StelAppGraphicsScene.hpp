@@ -32,10 +32,10 @@ public:
 	~StelAppGraphicsScene();
 
 	//! Get the StelMainWindow singleton instance.
-	//! @deprecated
 	//! @return the StelMainWindow singleton instance
 	static StelAppGraphicsScene& getInstance() {Q_ASSERT(singleton); return *singleton;}
 	
+	//! Initialize the StelAppGraphicsScene
 	void init();
 
 	//! Start the display loop
@@ -54,7 +54,7 @@ public:
 	void glWindowHasBeenResized(int w, int h);
 	
 	//! Switch to native OpenGL painting, i.e not using QPainter
-	//! After this call revertToQtPainting MUST be called
+	//! @sa After this call revertToQtPainting MUST be called
 	void switchToNativeOpenGLPainting();
 
 	//! Revert openGL state so that Qt painting works again
