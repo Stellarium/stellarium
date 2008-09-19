@@ -34,9 +34,7 @@ class GettextTranslator : public QTranslator
 public:
 	virtual bool isEmpty() const { return false; }
 
-	virtual QString translate(const char* context,
-				  const char* sourceText,
-				  const char* comment=0) const
+	virtual QString translate(const char* context, const char* sourceText, const char* comment=0) const
 	{
 		return q_(sourceText);
 	}

@@ -68,8 +68,6 @@ public:
 	
 	// These are hopefully temporary.
 	bool getHasDragged() const {return hasDragged;}
-	void stopDragging() {isDragging=false; hasDragged=false;}
-	
 	
 	//! Get the zoom speed
 	// TODO: what are the units?

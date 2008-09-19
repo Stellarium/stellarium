@@ -347,7 +347,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 {	
 	if (argsGetOption(argList, "-v", "--version"))
 	{
-		cout << qPrintable(getApplicationName()) << endl;
+		std::cout << qPrintable(getApplicationName()) << std::endl;
 		exit(0);
 	}
 
@@ -357,29 +357,29 @@ void StelApp::parseCLIArgsPreConfig(void)
 		QString binName = argList->at(0);
 		binName.remove(QRegExp("^.*[/\\\\]"));
 		
-		cout << "Usage:" << endl
+		std::cout << "Usage:" << std::endl
 		     << "  " 
-		     << qPrintable(binName) << " [options]" << endl << endl
-		     << "Options:" << endl
-		     << "--version (or -v)       : Print program name and version and exit." << endl
-		     << "--help (or -h)          : This cruft." << endl
-		     << "--config-file (or -c)   : Use an alternative name for the config file" << endl
-		     << "--user-dir (or -u)      : Use an alternative user data directory" << endl
-		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << endl
-		     << "                          the full screen setting in the config file" << endl
-		     << "--screenshot-dir        : Specify directory to save screenshots" << endl
-		     << "--home-planet           : Specify observer planet (English name)" << endl
-		     << "--altitude              : Specify observer altitude in meters" << endl
-		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << endl
-		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << endl 
-		     << "--list-landscapes       : Print a list of value landscape IDs" << endl 
-		     << "--landscape             : Start using landscape whose ID (dir name)" << endl
-		     << "                          is passed as parameter to option" << endl
-		     << "--sky-date              : Specify sky date in format yyyymmdd" << endl
-		     << "--sky-time              : Specify sky time in format hh:mm:ss" << endl
-		     << "--fov                   : Specify the field of view (degrees)" << endl
-		     << "--projection-type       : Specify projection type, e.g. stereographic" << endl
-		     << "--restore-defaults      : Delete existing config.ini and use defaults" << endl;
+		     << qPrintable(binName) << " [options]" << std::endl << std::endl
+		     << "Options:" << std::endl
+		     << "--version (or -v)       : Print program name and version and exit." << std::endl
+		     << "--help (or -h)          : This cruft." << std::endl
+		     << "--config-file (or -c)   : Use an alternative name for the config file" << std::endl
+		     << "--user-dir (or -u)      : Use an alternative user data directory" << std::endl
+		     << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides" << std::endl
+		     << "                          the full screen setting in the config file" << std::endl
+		     << "--screenshot-dir        : Specify directory to save screenshots" << std::endl
+		     << "--home-planet           : Specify observer planet (English name)" << std::endl
+		     << "--altitude              : Specify observer altitude in meters" << std::endl
+		     << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"" << std::endl
+		     << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"" << std::endl 
+		     << "--list-landscapes       : Print a list of value landscape IDs" << std::endl 
+		     << "--landscape             : Start using landscape whose ID (dir name)" << std::endl
+		     << "                          is passed as parameter to option" << std::endl
+		     << "--sky-date              : Specify sky date in format yyyymmdd" << std::endl
+		     << "--sky-time              : Specify sky time in format hh:mm:ss" << std::endl
+		     << "--fov                   : Specify the field of view (degrees)" << std::endl
+		     << "--projection-type       : Specify projection type, e.g. stereographic" << std::endl
+		     << "--restore-defaults      : Delete existing config.ini and use defaults" << std::endl;
 		exit(0);
 	}
 	
@@ -393,7 +393,7 @@ void StelApp::parseCLIArgsPreConfig(void)
 				// finding the file will throw an exception if it is not found
 				// in that case we won't output the landscape ID as it canont work
 				stelFileMgr->findFile("landscapes/" + *i + "/landscape.ini");
-				cout << qPrintable(*i) << endl;
+				std::cout << qPrintable(*i) << std::endl;
 			}
 			catch (std::runtime_error& e){}
 		}
@@ -471,7 +471,7 @@ void StelApp::parseCLIArgsPostConfig()
 		projectionType = argsGetOptionWithArg<QString>(argList, "", "--projection-type", "");
 
 	}
-	catch (exception& e)
+	catch (std::exception& e)
 	{
 		qCritical() << "ERROR while checking command line options: " << e.what();
 		exit(0);
@@ -869,7 +869,7 @@ T StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString lon
 		{
 			if (i+1>=lastOptIdx)
 			{
-				throw(runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
+				throw (std::runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
 			}
 			else
 			{
@@ -885,7 +885,7 @@ T StelApp::argsGetOptionWithArg(QStringList* args, QString shortOpt, QString lon
 			QTextStream converter(qPrintable(argStr));
 			converter >> retVal;
 			if (converter.status() != QTextStream::Ok)
-				throw(runtime_error(qPrintable("optarg_type ("+longOpt+")")));
+				throw (std::runtime_error(qPrintable("optarg_type ("+longOpt+")")));
 			else
 				return retVal;
 		}
@@ -921,7 +921,7 @@ int StelApp::argsGetYesNoOption(QStringList* args, QString shortOpt, QString lon
 	}
 	else
 	{
-		throw(runtime_error("optarg_type"));
+		throw (std::runtime_error("optarg_type"));
 	}
 }
 

@@ -71,8 +71,6 @@ public:
 	//! - Sets the default projection mode and field of view.
 	//! - Sets whether to use GL points or a spite, according to the ini parser
 	//!   object and the detected hardware capabilities.
-	//!
-	//! @param conf The ini parser object.
 	void init();
 	
 	//! Set the standard modelview matrices used for projection.
@@ -160,9 +158,9 @@ public:
 	//! non-linear projection, it can also be a more complex shape.
 	QList<Vec2d> getViewportVertices2d() const;
 	
-	//! Return a convex polygon on the sphere which includes the viewport 
-	//! in the current frame.
-	//! @param margin an extra margin in pixel which extends the polygon size
+	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
+	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction
+	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction
 	StelGeom::ConvexPolygon getViewportConvexPolygon(double marginX=0., double marginY=0.) const;
 
 	//! Un-project the entire viewport depending on mapping, maskType,
@@ -266,10 +264,9 @@ public:
 	void setCurrentFrame(FrameType frameType) const;
 
 	//! Set a custom model view matrix.
-	//! The new setting remains active until the next call to setCurrentFrame 
-	//! or setCustomFrame.
-	//! @param the openGL MODELVIEW matrix to use.
-	void setCustomFrame(const Mat4d&) const;
+	//! The new setting remains active until the next call to setCurrentFrame or setCustomFrame.
+	//! @param m the openGL MODELVIEW matrix to use.
+	void setCustomFrame(const Mat4d& m) const;
 
 	//! Set the current projection mapping to use.
 	//! The mapping must have been registered before being used.
@@ -298,10 +295,13 @@ public:
 		project(v, win);
 		glVertex3dv(win);
 	}
+	//! Convenience function.
+	//! @sa drawVertex3v
 	void drawVertex3(double x, double y, double z) const {drawVertex3v(Vec3d(x, y, z));}
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
+	//! @param font the font to use for display
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
@@ -324,6 +324,7 @@ public:
 	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
+	//! @param font the font to use for display
 	void drawParallel(const Vec3d& start, double length, bool labelAxis=false, 
 			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 	
@@ -336,6 +337,7 @@ public:
 	//! @param textColor color to use for rendering text. If NULL use the current openGL painting color.
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
+	//! @param font the font to use for display
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
 			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
 
@@ -433,7 +435,7 @@ public slots:
 	}
 
 	//! Set the initial field of view.  Updates configuration file.
-	//! @param the new value for initial field of view in decimal degrees.
+	//! @param fov the new value for initial field of view in decimal degrees.
 	void setInitFov(double fov) {initFov=fov;}
 
 private:

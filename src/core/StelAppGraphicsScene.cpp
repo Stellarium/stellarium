@@ -138,7 +138,8 @@ void StelAppGraphicsScene::revertToOpenGL()
 
 void StelAppGraphicsScene::drawBackground(QPainter *painter, const QRectF &)
 {
-	if (painter->paintEngine()->type() != QPaintEngine::OpenGL) {
+	if (painter->paintEngine()->type() != QPaintEngine::OpenGL)
+	{
 		qWarning("StelAppGraphicsScene: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
 		return;
 	}

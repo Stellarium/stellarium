@@ -46,6 +46,8 @@
 #include "StelStyle.hpp"
 #include "SkyImageTile.hpp"
 
+using namespace std;
+
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
