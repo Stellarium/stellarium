@@ -52,6 +52,8 @@
 #include <QMapIterator>
 #include <QDebug>
 
+using namespace std;
+
 SolarSystem::SolarSystem() :sun(NULL),moon(NULL),earth(NULL),selected(NULL), moonScale(1.), fontSize(14.),
 	planetNameFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
 	flagOrbits(false),flagLightTravelTime(false), lastHomePlanet(NULL)
@@ -68,12 +70,12 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected = NULL;
-	for(vector<Planet*>::iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
+	for(std::vector<Planet*>::iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); ++iter)
 	{
 		if (*iter) delete *iter;
 		*iter = NULL;
 	}
-	for(vector<Orbit*>::iterator iter = orbits.begin(); iter != orbits.end(); ++iter)
+	for(std::vector<Orbit*>::iterator iter = orbits.begin(); iter != orbits.end(); ++iter)
 	{
 		if (*iter) delete *iter;
 		*iter = NULL;
@@ -725,11 +727,11 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
-		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computePositionWithoutOrbits(date);
 		}
-		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			(*iter)->computePosition(date-light_speed_correction);
@@ -737,7 +739,7 @@ void SolarSystem::computePositions(double date, const Vec3d& observerPos)
 	}
 	else
 	{
-		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computePosition(date);
 		}
@@ -751,7 +753,7 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
-		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			const double light_speed_correction = ((*iter)->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			(*iter)->computeTransMatrix(date-light_speed_correction);
@@ -759,7 +761,7 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
   	}
 	else
 	{
-		for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+		for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 		{
 			(*iter)->computeTransMatrix(date);
 		}
@@ -984,7 +986,7 @@ void SolarSystem::setFlagTrails(bool b)
 
 bool SolarSystem::getFlagTrails(void) const
 {
-	for (vector<Planet*>::const_iterator iter = systemPlanets.begin();
+	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin();
 	     iter != systemPlanets.end(); iter++ ) {
 		if ((*iter)->getFlagTrail()) return true;
 	}
@@ -1002,7 +1004,7 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
+	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
 	{
 		if ((*iter)->getFlagHints()) return true;
 	}
@@ -1020,7 +1022,7 @@ void SolarSystem::setFlagLabels(bool b)
 
 bool SolarSystem::getFlagLabels() const
 {
-	for (vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
+	for (std::vector<Planet*>::const_iterator iter = systemPlanets.begin(); iter != systemPlanets.end(); iter++)
 	{
 		if ((*iter)->getFlagLabels()) return true;
 	}
@@ -1286,7 +1288,7 @@ bool SolarSystem::biggerDistance::operator()(Planet* p1, Planet* p2)
 QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
-	for (vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
+	for (std::vector<Planet*>::const_iterator iter(systemPlanets.begin());iter!=systemPlanets.end();iter++)
 	{
 		res.append((*iter)->englishName);
 	}

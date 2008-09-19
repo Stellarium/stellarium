@@ -237,7 +237,7 @@ void Constellation::drawBoundaryOptim(Projector* prj) const
 
 	unsigned int i, j, size;
 	Vec3d pt1, pt2;
-	vector<Vec3f> *points;
+	std::vector<Vec3f> *points;
 
 	if (singleSelected) size = isolatedBoundarySegments.size();
 	else size = sharedBoundarySegments.size();

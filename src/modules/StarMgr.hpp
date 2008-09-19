@@ -226,7 +226,7 @@ private:
 	
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
+	typedef std::map<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zoneArrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
 	                             const Vec3d &c0,
@@ -244,13 +244,13 @@ private:
 	
 	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
 	
-	static map<int, QString> commonNamesMap;
-	static map<int, QString> commonNamesMapI18n;
-	static map<QString, int> commonNamesIndex;
-	static map<QString, int> commonNamesIndexI18n;
+	static std::map<int, QString> commonNamesMap;
+	static std::map<int, QString> commonNamesMapI18n;
+	static std::map<QString, int> commonNamesIndex;
+	static std::map<QString, int> commonNamesIndexI18n;
 	
-	static map<int, QString> sciNamesMapI18n;
-	static map<QString, int> sciNamesIndexI18n;
+	static std::map<int, QString> sciNamesMapI18n;
+	static std::map<QString, int> sciNamesIndexI18n;
 
 	static double currentJDay;
 	

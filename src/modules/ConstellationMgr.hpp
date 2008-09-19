@@ -73,7 +73,7 @@ public:
 	//! Limit the number of constellations to draw based on selected stars.
 	//! The selected objects changed, check if some stars are selected and display the 
 	//! matching constellations if isolateSelected mode is activated.
-	//! @param added not used at present (?)
+	//! @param action define whether to add to, replace, or remove from the existing selection
 	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action = StelModule::ReplaceSelection);
 	
 	//! Load a color scheme
@@ -210,17 +210,17 @@ private:
 	//! do not use until it exhibits the proper behaviour.
 	StelObject* getSelected(void) const;
 	
-	vector<Constellation*> selected; // More than one can be selected at a time
+	std::vector<Constellation*> selected; // More than one can be selected at a time
 	
 	Constellation* isStarIn(const StelObject *s) const;
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;		
-	vector<Constellation*> asterisms;
+	std::vector<Constellation*> asterisms;
 	double fontSize;
 	SFont* asterFont;
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;
-	vector<vector<Vec3f> *> allBoundarySegments;
+	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 	
