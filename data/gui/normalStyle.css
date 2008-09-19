@@ -504,6 +504,11 @@ QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/gui/checkbox-unchecked.png);
 }
 
+/*QCheckBox:disabled { 
+	color: rgb(210, 0, 0);
+	font-weight: 500;
+}*/
+
 QRadioButton {
 	background: none;
 }
