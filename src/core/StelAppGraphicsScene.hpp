@@ -38,6 +38,9 @@ public:
 	
 	void init();
 
+	//! Start the display loop
+	void startMainLoop();
+			
 	//! Define the type of viewport distorter to use
 	//! @param type can be only 'fisheye_to_spheric_mirror' or anything else for no distorter
 	void setViewPortDistorterType(const QString& type);
