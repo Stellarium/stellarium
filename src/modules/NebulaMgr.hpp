@@ -183,7 +183,7 @@ private:
 	bool loadNGC(const QString& fileName);
 	bool loadNGCNames(const QString& fileName);
 
-	vector<Nebula*> nebArray;		// The nebulas list
+	std::vector<Nebula*> nebArray;		// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	

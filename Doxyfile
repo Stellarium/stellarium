@@ -133,9 +133,12 @@ FILE_PATTERNS          = *.c \
                          *.xpm \
                          *.dox
 RECURSIVE              = YES
-EXCLUDE                = ./src/stelutils/iniparser \
-                         ./src/stelutils/typeface.h \
-                         ./src/stelutils/typeface.cpp
+EXCLUDE                = ./src/stelutils/typeface.h \
+                         ./src/stelutils/typeface.cpp \
+                         /home/fab1/prog/trunk/stellarium/src/stelutils/callback_helpers.hpp \
+                         /home/fab1/prog/trunk/stellarium/src/stelutils/callbacks.hpp \
+                         /home/fab1/prog/trunk/stellarium/src/stelutils/GLee.h \
+                         /home/fab1/prog/trunk/stellarium/src/stelutils/GLee.c
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = 
 EXAMPLE_PATH           = 

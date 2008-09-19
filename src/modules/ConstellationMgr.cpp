@@ -47,6 +47,8 @@
 #include "SFont.hpp"
 #include "StelStyle.hpp"
 
+using namespace std;
+
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	fontSize(15),
@@ -64,7 +66,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 
 ConstellationMgr::~ConstellationMgr()
 {
-	vector<Constellation *>::iterator iter;
+	std::vector<Constellation *>::iterator iter;
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{

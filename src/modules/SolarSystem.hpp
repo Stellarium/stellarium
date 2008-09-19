@@ -220,7 +220,7 @@ public:
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
 	
 	//! Get the list of all the bodies of the solar system.
-	const vector<Planet*>& getAllPlanets() const {return systemPlanets;}
+	const std::vector<Planet*>& getAllPlanets() const {return systemPlanets;}
 	
 private:
 	//! Search for SolarSystem objects which are close to the position given 
@@ -269,13 +269,13 @@ private:
 	//! The amount of planets labels (between 0 and 10)
 	float labelsAmount;
 	
-	vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system
+	std::vector<Planet*> systemPlanets;  // Vector containing all the bodies of the system
 	
 	// draw earth shadow on moon for lunar eclipses
 	void drawEarthShadow(const Navigator * nav, Projector * prj);  
 
 	// And sort them from the furthest to the closest to the observer
-	struct biggerDistance : public binary_function<Planet*, Planet*, bool>
+	struct biggerDistance : public std::binary_function<Planet*, Planet*, bool>
 	{
 		bool operator()(Planet* p1, Planet* p2);
 	};
@@ -294,7 +294,7 @@ private:
 	// DEPRECATED
 	//////////////////////////////////////////////////////////////////////////////////
 	const Planet* lastHomePlanet;    // for tracking home planet changes for trails
-	vector<Orbit*> orbits;           // Pointers on created elliptical orbits
+	std::vector<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 
 

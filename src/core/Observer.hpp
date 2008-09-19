@@ -30,7 +30,7 @@ class ArtificialPlanet;
 class Observer;
 
 //! @class Observer
-//! @TODO Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
+//! Should be renamed as PlanetBasedObserver and derive from a more generical Observer class
 class Observer : public QObject
 {
 	Q_OBJECT;

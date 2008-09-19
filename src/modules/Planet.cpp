@@ -833,20 +833,18 @@ void Planet::drawTrail(const Navigator * nav, const Projector* prj)
 
 	glColor3fv(trailColor*trailFader.getInterstate());
 
-	list<TrailPoint>::iterator iter;
-	list<TrailPoint>::iterator nextiter;
-	list<TrailPoint>::iterator begin = trail.begin();
+	std::list<TrailPoint>::iterator iter;
+	std::list<TrailPoint>::iterator nextiter;
+	std::list<TrailPoint>::iterator begin = trail.begin();
 	//  begin++;
 
 	if(trail.begin() != trail.end())
 	{
-
 		nextiter = trail.end();
 		nextiter--;
 
 		for( iter=nextiter; iter != begin; iter--)
 		{
-
 			nextiter--;
 			if( prj->projectLineCheck( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) )
 			{
@@ -910,8 +908,8 @@ void Planet::updateTrail(const Navigator* nav)
 	// because sampling depends on speed and frame rate, need to clear out
 	// points if trail gets longer than desired
 
-	list<TrailPoint>::iterator iter;
-	list<TrailPoint>::iterator end = trail.end();
+	std::list<TrailPoint>::iterator iter;
+	std::list<TrailPoint>::iterator end = trail.end();
 
 	for( iter=trail.begin(); iter != end; iter++)
 	{

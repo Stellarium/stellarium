@@ -136,22 +136,22 @@ StarMgr::~StarMgr(void) {
 
 bool StarMgr::flagSciNames = true;
 double StarMgr::currentJDay = 0;
-map<int,QString> StarMgr::commonNamesMap;
-map<int,QString> StarMgr::commonNamesMapI18n;
-map<QString,int> StarMgr::commonNamesIndex;
-map<QString,int> StarMgr::commonNamesIndexI18n;
+std::map<int,QString> StarMgr::commonNamesMap;
+std::map<int,QString> StarMgr::commonNamesMapI18n;
+std::map<QString,int> StarMgr::commonNamesIndex;
+std::map<QString,int> StarMgr::commonNamesIndexI18n;
 
-map<int,QString> StarMgr::sciNamesMapI18n;
-map<QString,int> StarMgr::sciNamesIndexI18n;
+std::map<int,QString> StarMgr::sciNamesMapI18n;
+std::map<QString,int> StarMgr::sciNamesIndexI18n;
 
 QString StarMgr::getCommonName(int hip) {
-  map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
+  std::map<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
   if (it!=commonNamesMapI18n.end()) return it->second;
   return "";
 }
 
 QString StarMgr::getSciName(int hip) {
-  map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
+  std::map<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
   if (it!=sciNamesMapI18n.end()) return it->second;
   return "";
 }
@@ -680,7 +680,7 @@ void StarMgr::updateI18n() {
   Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   commonNamesMapI18n.clear();
   commonNamesIndexI18n.clear();
-  for (map<int,QString>::iterator it(commonNamesMap.begin());
+  for (std::map<int,QString>::iterator it(commonNamesMap.begin());
        it!=commonNamesMap.end();it++) {
     const int i = it->first;
     const QString t(trans.qtranslate(it->second));
@@ -743,7 +743,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by I18n common name
-	map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
+	std::map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end()) 
 	{
 		return searchHP(it->second);
@@ -774,14 +774,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	/* Should we try this anyway?
 	// Search by common name
-	map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
+	std::map<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 
 	if (it!=commonNamesIndexI18n.end()) {
 		return searchHP(it->second);
 	} */
 
 	// Search by sci name
-	map<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
+	std::map<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
 	if (it!=sciNamesIndexI18n.end()) {
 		return searchHP(it->second);
 	}
@@ -799,7 +799,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw));
+	for (std::map<QString,int>::const_iterator it(commonNamesIndexI18n.lower_bound(objw));
 	     it!=commonNamesIndexI18n.end();
 	     it++) 
 	{
@@ -814,7 +814,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	// Search for sci names
-	for (map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw));
+	for (std::map<QString,int>::const_iterator it(sciNamesIndexI18n.lower_bound(objw));
 	     it!=sciNamesIndexI18n.end();
 	     it++) 
 	{

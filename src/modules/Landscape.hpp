@@ -70,8 +70,8 @@ public:
 	
 protected:
 	//! Load attributes common to all landscapes
-	//! @param A reference to an existant QSettings object which describes the landscape
-	//! @param The name of the directory for the landscape files (e.g. "ocean")
+	//! @param landscapeIni A reference to an existant QSettings object which describes the landscape
+	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
 	
 	//! search for a texture in landscape directory, else global textures directory

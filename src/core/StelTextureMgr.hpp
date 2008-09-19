@@ -66,6 +66,11 @@ class JpgLoader : public ImageLoader
 {
 	virtual bool loadImage(const QString& filename, TexInfo& texinfo);
 public:
+	//! Load the jpeg data from a buffer already in memory.
+	//! The implementation doesn't use the Qt loading for performances reasons.
+	//! @param data the array containing the raw compressed image bytes
+	//! @param texinfo the texinfo to generate
+	//! @return false in case of loading error
 	static bool loadFromMemory(const QByteArray& data, TexInfo& texinfo);
 };
 
