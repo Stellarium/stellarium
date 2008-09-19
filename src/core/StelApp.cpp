@@ -54,6 +54,7 @@
 #include <QStringList>
 #include <QString>
 #include <QFile>
+#include <QFileInfo>
 #include <QRegExp>
 #include <QTextStream>
 #include <QMouseEvent>
@@ -377,7 +378,8 @@ void StelApp::parseCLIArgsPreConfig(void)
 		     << "--sky-date              : Specify sky date in format yyyymmdd" << endl
 		     << "--sky-time              : Specify sky time in format hh:mm:ss" << endl
 		     << "--fov                   : Specify the field of view (degrees)" << endl
-		     << "--projection-type       : Specify projection type, e.g. stereographic" << endl;
+		     << "--projection-type       : Specify projection type, e.g. stereographic" << endl
+		     << "--restore-defaults      : Delete existing config.ini and use defaults" << endl;
 		exit(0);
 	}
 	
@@ -421,14 +423,18 @@ void StelApp::parseCLIArgsPreConfig(void)
 		}
 	}
 	
+	bool restoreDefaultConfigFile = false;
+	if (argsGetOption(argList, "", "--restore-defaults"))
+		restoreDefaultConfigFile=true;
+	
 	try
 	{
-		setConfigFile(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini"));
+		setConfigFile(argsGetOptionWithArg<QString>(argList, "-c", "--config-file", "config.ini"), restoreDefaultConfigFile);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
-		setConfigFile("config.ini");		
+		setConfigFile("config.ini", restoreDefaultConfigFile);		
 	}
 
 	try
@@ -658,11 +664,21 @@ void StelApp::handleKeys(QKeyEvent* event)
 }
 
 
-void StelApp::setConfigFile(const QString& configName)
+void StelApp::setConfigFile(const QString& configName, bool restoreDefaults)
 {
 	try
 	{
 		configFile = stelFileMgr->findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+		if (restoreDefaults == true)
+		{
+			QString backupFile(configFile.left(configFile.length()-3) + QString("old"));
+
+			if (QFileInfo(backupFile).exists())
+				QFile(backupFile).remove();
+
+			QFile(configFile).rename(backupFile);
+			qDebug() << "setting defaults - old config is backed up in " << backupFile;
+		}
 		return;
 	}
 	catch (std::runtime_error& e)
