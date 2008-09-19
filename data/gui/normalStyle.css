@@ -591,19 +591,11 @@ QComboBox::drop-down {
 	border: 1px solid rgb(0, 0, 0);
 }
 
-/*QComboBox:editable {
-
-}
-
-AngleSpinBox:editable {
-
-}*/
-
 QComboBox::down-arrow {
 	width: 20px; 
 	height: 20px;
 	border: 1px solid rgb(0, 0, 0);	
-	border-left: 1px solid rgba(0, 0, 0, 0%);
+	border-left: 2px solid rgba(0, 0, 0, 0%);
 	image: url(:/graphicGui/gui/spindown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 }
@@ -611,6 +603,10 @@ QComboBox::down-arrow {
 QComboBox QAbstractItemView {
 	border: 2px solid rgb(65, 75, 81);
 	background: rgb(134, 136, 137);
+}
+
+QComboBox {
+	padding-left: 3px;
 }
 
 QProgressBar {
