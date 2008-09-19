@@ -215,6 +215,7 @@ double Navigator::getLocalSideralTime() const
 
 void Navigator::setInitViewDirectionToCurrent(void)
 {
+	initViewPos = localVision;
 	QString dirStr = QString("%1,%2,%3").arg(localVision[0]).arg(localVision[1]).arg(localVision[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }

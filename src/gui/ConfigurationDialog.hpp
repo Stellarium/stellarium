@@ -50,6 +50,9 @@ private slots:
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double d) {cursorTimeOutChanged();}
 	
+	//! Update the labels displaying the current default state
+	void updateConfigLabels();
+	
 	//! Save the current viewing option including landscape, location and sky culture
 	//! This doesn't include the current viewing direction, time and FOV since those have specific controls
 	void saveCurrentViewOptions();

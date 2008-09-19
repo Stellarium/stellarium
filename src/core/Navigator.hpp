@@ -135,7 +135,8 @@ public:
 	void setViewingMode(ViewingModeType viewMode);
 	ViewingModeType getViewingMode(void) const {return viewingMode;}
 
-	const Vec3d& getinitViewPos() {return initViewPos;}
+	//! Return the inital viewing direction in altazimutal coordinates
+	const Vec3d& getInitViewingDirection() {return initViewPos;}
 	
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const {return presetSkyTime;}
