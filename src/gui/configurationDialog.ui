@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>355</width>
-    <height>361</height>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -273,35 +273,75 @@
             <property name="title" >
              <string>Default options</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout" >
-             <item row="0" column="0" >
+            <layout class="QVBoxLayout" name="verticalLayout_4x" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <item>
               <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
                <property name="text" >
                 <string>Save current options as default</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0" >
+             <item>
               <widget class="QLabel" name="saveDefaultOptionsLabel" >
+               <property name="minimumSize" >
+                <size>
+                 <width>0</width>
+                 <height>33</height>
+                </size>
+               </property>
                <property name="text" >
                 <string>Save all the current options including the current FOV and direction of view for use at next startup.</string>
+               </property>
+               <property name="scaledContents" >
+                <bool>false</bool>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
                <property name="wordWrap" >
                 <bool>true</bool>
                </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="startupFOVLabel" >
-               <property name="text" >
-				<string notr="true">Startup FOV: XX</string>
+               <property name="textInteractionFlags" >
+                <set>Qt::NoTextInteraction</set>
                </property>
               </widget>
              </item>
-             <item row="3" column="0" >
+             <item>
+              <spacer name="verticalSpacer_3" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>20</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="startupFOVLabel" >
+               <property name="text" >
+                <string>Startup FOV: XX</string>
+               </property>
+               <property name="textInteractionFlags" >
+                <set>Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLabel" name="startupDirectionOfViewlabel" >
                <property name="text" >
-				<string notr="true">Startup direction of view: xxxx</string>
+                <string>Startup direction of view: xxxx</string>
+               </property>
+               <property name="textInteractionFlags" >
+                <set>Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
