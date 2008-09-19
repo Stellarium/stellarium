@@ -147,11 +147,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(nav->getPresetSkyTime()));
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setPresetSkyTime(QDateTime)));
-	
-	// Startup FOV/direction of view
-	ui->initFovSpinBox->setValue(proj->getInitFov());
-	connect(ui->initFovSpinBox, SIGNAL(valueChanged(double)), proj, SLOT(setInitFov(double)));
-	connect(ui->setInitViewDirection, SIGNAL(clicked()), nav, SLOT(setInitViewDirectionToCurrent()));
 
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
 	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
@@ -180,6 +175,8 @@ void ConfigurationDialog::createDialogContent()
 	
 	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
 	//connect(ui->resetAlloptionsPushButton, SIGNAL(clicked()), this, SLOT(resetAllOptions()));
+	
+	updateConfigLabels();
 }
 
 void ConfigurationDialog::languageChanged(const QString& langName)
@@ -357,6 +354,24 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getFlagCursorTimeout());
 	conf->setValue("gui/mouse_cursor_timeout", StelAppGraphicsScene::getInstance().getCursorTimeout());
+	
+	StelApp::getInstance().getCore()->getProjection()->setInitFov(StelApp::getInstance().getCore()->getProjection()->getFov());
+	StelApp::getInstance().getCore()->getNavigation()->setInitViewDirectionToCurrent();
+	
+	updateConfigLabels();
+}
+
+void ConfigurationDialog::updateConfigLabels()
+{
+	ui->startupFOVLabel->setText(q_("Startup FOV: %1%2").arg(StelApp::getInstance().getCore()->getProjection()->getFov()).arg(QChar(0x00B0)));
+	
+	double az, alt;
+	const Vec3d v = StelApp::getInstance().getCore()->getNavigation()->getInitViewingDirection();
+	StelUtils::rectToSphe(&az, &alt, v);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;    
+	ui->startupDirectionOfViewlabel->setText(q_("Startup direction of view Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)));
 }
 
 // Reset all stellarium options.
