@@ -277,7 +277,31 @@
              <item row="0" column="0" >
               <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
                <property name="text" >
-                <string>Set current options as default</string>
+                <string>Save current options as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QLabel" name="saveDefaultOptionsLabel" >
+               <property name="text" >
+                <string>Save all the current options including the current FOV and direction of view for use at next startup.</string>
+               </property>
+               <property name="wordWrap" >
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" >
+              <widget class="QLabel" name="startupFOVLabel" >
+               <property name="text" >
+                <string>Startup FOV: XX</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" >
+              <widget class="QLabel" name="startupDirectionOfViewlabel" >
+               <property name="text" >
+                <string>Startup direction of view: xxxx</string>
                </property>
               </widget>
              </item>
@@ -468,118 +492,6 @@
                 </size>
                </property>
               </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title" >
-             <string>Startup FOV and direction</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4" >
-             <property name="horizontalSpacing" >
-              <number>0</number>
-             </property>
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <item row="0" column="0" >
-              <layout class="QHBoxLayout" name="_6" >
-               <item>
-                <widget class="QLabel" name="label_3" >
-                 <property name="text" >
-                  <string>Initial field of view (degrees):</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_5" >
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0" >
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="initFovSpinBox" >
-                 <property name="toolTip" >
-                  <string>Set the initial field of view in degrees</string>
-                 </property>
-                 <property name="alignment" >
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="minimum" >
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="maximum" >
-                  <double>270.000000000000000</double>
-                 </property>
-                 <property name="value" >
-                  <double>60.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="1" >
-              <spacer name="horizontalSpacer_3" >
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0" >
-                <size>
-                 <width>64</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="0" >
-              <layout class="QHBoxLayout" name="_7" >
-               <item>
-                <widget class="QLabel" name="label_2" >
-                 <property name="text" >
-                  <string>Initial direction of view:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer" >
-                 <property name="orientation" >
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0" >
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="setInitViewDirection" >
-                 <property name="toolTip" >
-                  <string>Use the current viewing direction (altitude and azimuth) when Stellarim starts.</string>
-                 </property>
-                 <property name="text" >
-                  <string>Set from current</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
              </item>
             </layout>
            </widget>

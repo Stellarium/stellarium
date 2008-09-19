@@ -451,7 +451,7 @@ void MovementMgr::autoZoomOut(float moveDuration, bool full)
 
 	zoomTo(proj->getInitFov(), moveDuration);
 	if (flagAutoZoomOutResetsDirection) 
-		moveTo(nav->getinitViewPos(), moveDuration, true, -1);
+		moveTo(nav->getInitViewingDirection(), moveDuration, true, -1);
 	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
