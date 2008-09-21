@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>355</width>
-    <height>364</height>
+    <width>427</width>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -149,12 +149,30 @@
         <property name="currentIndex" >
          <number>0</number>
         </property>
+        <property name="iconSize" >
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="elideMode" >
          <enum>Qt::ElideNone</enum>
         </property>
         <widget class="QWidget" name="tabMain" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>419</width>
+           <height>443</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Main</string>
+         </attribute>
+         <attribute name="icon" >
+          <iconset resource="../../data/mainRes.qrc" >
+           <normaloff>:/graphicGui/gui/tabicon-main.png</normaloff>:/graphicGui/gui/tabicon-main.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_6" >
           <property name="spacing" >
@@ -177,13 +195,6 @@
               <height>0</height>
              </size>
             </property>
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Program language</string>
             </property>
@@ -202,13 +213,13 @@
                <property name="minimumSize" >
                 <size>
                  <width>220</width>
-                 <height>22</height>
+                 <height>24</height>
                 </size>
                </property>
                <property name="maximumSize" >
                 <size>
                  <width>220</width>
-                 <height>22</height>
+                 <height>24</height>
                 </size>
                </property>
               </widget>
@@ -226,9 +237,9 @@
             </property>
             <property name="font" >
              <font>
-              <pointsize>10</pointsize>
               <weight>50</weight>
               <bold>false</bold>
+              <kerning>true</kerning>
              </font>
             </property>
             <property name="title" >
@@ -270,6 +281,12 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_6" >
+            <property name="font" >
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="title" >
              <string>Default options</string>
             </property>
@@ -279,6 +296,12 @@
              </property>
              <item>
               <widget class="QPushButton" name="setViewingOptionAsDefaultPushButton" >
+               <property name="minimumSize" >
+                <size>
+                 <width>0</width>
+                 <height>24</height>
+                </size>
+               </property>
                <property name="text" >
                 <string>Save current options as default</string>
                </property>
@@ -364,8 +387,20 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabInterface" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>427</width>
+           <height>434</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Navigation</string>
+         </attribute>
+         <attribute name="icon" >
+          <iconset resource="../../data/mainRes.qrc" >
+           <normaloff>:/graphicGui/gui/tabicon-navigation.png</normaloff>:/graphicGui/gui/tabicon-navigation.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout" >
           <property name="spacing" >
@@ -376,13 +411,6 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_5" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Control</string>
             </property>
@@ -415,13 +443,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Startup date and time</string>
             </property>
@@ -462,6 +483,18 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
                  <property name="font" >
                   <font/>
                  </property>
@@ -499,6 +532,18 @@
                </item>
                <item>
                 <widget class="QDateTimeEdit" name="fixedDateTimeEdit" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
                  <property name="date" >
                   <date>
                    <year>1952</year>
@@ -552,8 +597,20 @@
          </layout>
         </widget>
         <widget class="QWidget" name="tabTools" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>427</width>
+           <height>434</height>
+          </rect>
+         </property>
          <attribute name="title" >
           <string>Tools</string>
+         </attribute>
+         <attribute name="icon" >
+          <iconset resource="../../data/mainRes.qrc" >
+           <normaloff>:/graphicGui/gui/tabicon-tools.png</normaloff>:/graphicGui/gui/tabicon-tools.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_3" >
           <property name="spacing" >
@@ -564,13 +621,6 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_8" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Amateur astronomer options</string>
             </property>
@@ -593,13 +643,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_7" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Planetarium options</string>
             </property>
@@ -652,13 +695,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_9" >
-            <property name="font" >
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title" >
              <string>Other</string>
             </property>
@@ -679,7 +715,26 @@
                 </widget>
                </item>
                <item>
+                <spacer name="horizontalSpacer" >
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0" >
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox" >
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
                  <property name="decimals" >
                   <number>1</number>
                  </property>
