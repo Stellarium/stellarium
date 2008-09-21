@@ -557,7 +557,7 @@ AngleSpinBox::down-button {
 
 QSpinBox,QTimeEdit,QDateTimeEdit,QDoubleSpinBox,QComboBox,AngleSpinBox {
 	padding-right: 0px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(221, 221, 224, 50%), stop: 1 rgba(134, 136, 139, 50%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(180, 180, 183, 100%), stop: 1 rgba(93, 95, 98, 100%));
 	border: 1px solid rgb(0, 0, 0);
 	color: rgb(31, 31, 31);
 	min-height: 22px;
@@ -585,12 +585,21 @@ QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSp
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 }
 
+QSpinBox::down-button:pressed,QTimeEdit::down-button:pressed,QDoubleSpinBox::down-button:pressed,AngleSpinBox::down-button:pressed {
+     image: url(:/graphicGui/gui/spindown-pressed.png);
+ }
+
+QSpinBox::up-button:pressed,QTimeEdit::up-button:pressed,QDoubleSpinBox::up-button:pressed,AngleSpinBox::up-button:pressed {
+     image: url(:/graphicGui/gui/spinup-pressed.png);
+ }
+
 QComboBox::drop-down, .QDateTimeEdit::drop-down {
 	subcontrol-origin: padding;
 	subcontrol-position: center right;
 	width: 20px;
 	border: none;
 }
+
 
 QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
 	width: 20px; 
@@ -599,9 +608,16 @@ QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(40, 40, 40));
 }
 
+QComboBox::down-arrow:on, .QDateTimeEdit::down-arrow:pressed {
+	image: url(:/graphicGui/gui/spindown-pressed.png);
+}
+
 QComboBox QAbstractItemView {
-	border: 2px solid rgb(65, 75, 81);
-	background: rgb(94, 96, 97);
+	color: rgb(31, 31, 31);
+	border: 1px solid rgb(0, 0, 0);
+	border-bottom: 1px solid rgb(0, 0, 0);
+	border-top: none;
+	background: rgba(93, 95, 98, 100%);
 }
 
 QComboBox {
