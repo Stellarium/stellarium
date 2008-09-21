@@ -270,7 +270,7 @@ void HelpDialog::updateText(void)
 	newHtml += "Boston, MA  02111-1307, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
-	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: Fabien Chéreau")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: %1").arg(QString::fromUtf8("Fabien Chéreau"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: Rob Spearman")) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: Johan Meuris")) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: Johannes Gajdosik")) + "</li>";
