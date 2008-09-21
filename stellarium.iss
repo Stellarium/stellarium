@@ -10,7 +10,7 @@ AppName=Stellarium
 AppVerName=Stellarium 0.10.0
 DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
-UninstallDisplayIcon={app}\stellarium.exe
+UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
 Compression=zip/9
 
