@@ -33,6 +33,10 @@ QFrame#viewContent {
 	background: rgb(0, 0, 0);
 }
 
+QFrame#bottomResizeFrame {
+background:rgb(48, 49, 52);
+}
+
 /*QWidget QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 	border: none;
@@ -44,23 +48,8 @@ QFrame#viewContent {
 	border: rgb(255, 240, 0);
 }*/
 
-QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar {
+QFrame#LocationBar, QFrame#DateTimeBar, QFrame#SearchBar, QFrame#TimeBar, QFrame#HelpBar{
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
-}
-
-/***********************************************************************************************************/
-
-.QDateTimeEdit::drop-down {
-	width: 20px;
-	border-top: solid 1px rgb(0, 0, 0);	
-}
-
-.QDateTimeEdit::down-arrow {
-	width: 20px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
-	height: 19px;
-	border: solid 1px rgb(0, 0, 0);
-	image: url(:/graphicGui/gui/spindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 }
 
 /*********************************************dateTimedialog*********************************************************/
@@ -144,6 +133,10 @@ QTextBrowser {
 	color: rgb(3, 3, 3);
 }
 
+QTextBrowser#helpBrowser,QTextBrowser#aboutBrowser {
+	margin-left:11px;
+}
+
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
@@ -219,12 +212,13 @@ QPushButton:hover#closeStelWindow {
 /**********************************************LocationDialog*******************************************************/
 
 QLineEdit#citySearchLineEdit {
-	margin: 0px 0px 2px 0px;
+	margin: 0px 0px 4px 0px;
 	padding: 4px;
-	padding-left: 40px;
+	padding-left: 32px;
 	background-image: url(:/graphicGui/gui/searchBoxBackground.png);
 	background-repeat: none;
 	background-position: center left;
+	border: none;
 }
 
 /********************************************** QScrollBar:vertical ************************************************/
@@ -563,9 +557,10 @@ AngleSpinBox::down-button {
 
 QSpinBox,QTimeEdit,QDateTimeEdit,QDoubleSpinBox,QComboBox,AngleSpinBox {
 	padding-right: 0px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(221, 221, 224), stop: 1 rgba(134, 136, 139, 99%));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(221, 221, 224, 50%), stop: 1 rgba(134, 136, 139, 50%));
 	border: 1px solid rgb(0, 0, 0);
 	color: rgb(31, 31, 31);
+	min-height: 22px;
 }
 
 QSpinBox::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,AngleSpinBox::up-button {
@@ -590,19 +585,18 @@ QSpinBox::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,AngleSp
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
 }
 
-QComboBox::drop-down {
+QComboBox::drop-down, .QDateTimeEdit::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: center right;
 	width: 20px;
-	border-top: 0px;
-	border: 1px solid rgb(0, 0, 0);
+	border: none;
 }
 
-QComboBox::down-arrow {
+QComboBox::down-arrow, .QDateTimeEdit::down-arrow {
 	width: 20px; 
-	height: 20px;
-	border: 1px solid rgb(0, 0, 0);	
-	border-left: 2px solid rgba(0, 0, 0, 0%);
+	height: 22px;
 	image: url(:/graphicGui/gui/spindown.png);
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 68, 69), stop: 1 rgb(40, 40, 40));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(40, 40, 40));
 }
 
 QComboBox QAbstractItemView {
