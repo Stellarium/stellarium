@@ -314,7 +314,7 @@ static const double STEP_SIZES_DMS[] = {1., 5., 10., 60., 300., 600., 1200., 360
 static const double STEP_SIZES_HMS[] = {1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
 //! Return the angular grid step in degree which best fits the given scale 
-static double getClosestResolutionParallel(double pixelPerRad)
+static double getClosestResolutionDMS(double pixelPerRad)
 {
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
@@ -327,7 +327,7 @@ static double getClosestResolutionParallel(double pixelPerRad)
 }
 
 //! Return the angular grid step in degree which best fits the given scale 
-static double getClosestResolutionMeridian(double pixelPerRad)
+static double getClosestResolutionHMS(double pixelPerRad)
 {
 	double minResolution = 80.;
 	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
@@ -389,8 +389,10 @@ void SkyGrid::draw(const Projector* prj) const
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 	
-	const double gridStepParallelRad = M_PI/180.*getClosestResolutionParallel(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
-	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : getClosestResolutionMeridian(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))));
+	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(1./std::sqrt((lat1-lat0)*(lat1-lat0)+(lat2-lat0)*(lat2-lat0)));
+	
+	const double closetResLon = (frameType==Projector::FrameLocal) ? getClosestResolutionDMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0))) : getClosestResolutionHMS(1./std::sqrt((lon1-lon0)*(lon1-lon0)+(lon2-lon0)*(lon2-lon0)));
+	const double gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	
 	std::map<int, std::set<double> > resultsParallels;
 	std::map<int, std::set<double> > resultsMeridians;
@@ -513,7 +515,7 @@ void SkyGrid::draw(const Projector* prj) const
 				else
 					size = *k - lat180;
 				if (size<0.) size+=2.*M_PI;
-				prj->drawMeridian(vv, size, true, &font, &textColor);
+				prj->drawMeridian(vv, size, true, &font, &textColor, -1, frameType==Projector::FrameLocal);
 				++k;
 			}
 		}
@@ -544,7 +546,7 @@ void SkyGrid::draw(const Projector* prj) const
 	
 	// Draw meridian zero which can't be found by the normal algo..
 	const Vec3d vv(1,0,0);
-	prj->drawMeridian(vv, 2.*M_PI, false, &font);
+	prj->drawMeridian(vv, 2.*M_PI, false, &font, NULL, -1, frameType==Projector::FrameLocal);
 	
 	// Draw the meridians which are totally included in the viewport (and thus don't intersect with the edge of the screen)
 	if (northPoleInViewport && southPoleInViewport)
@@ -558,7 +560,7 @@ void SkyGrid::draw(const Projector* prj) const
 			{
 				Vec3d vvv;
 				spheToRectLat1802((double)latMas/RADIAN_MAS, 0, vvv);
-				prj->drawMeridian(vvv, 2.*M_PI, false, &font, &textColor);
+				prj->drawMeridian(vvv, 2.*M_PI, false, &font, &textColor, -1, frameType==Projector::FrameLocal);
 			}
 		}
 	}
