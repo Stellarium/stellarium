@@ -338,8 +338,9 @@ public:
 	//! @param nbSeg if not==-1,indicate how many line segments should be used for drawing the arc, if==-1
 	//! this value is automatically adjusted to prevent seeing the curve as a polygon.
 	//! @param font the font to use for display
+	//! @param useDMS if true display label in DD:MM:SS. Normal is HH:MM:SS
 	void drawMeridian(const Vec3d& start, double length, bool labelAxis=false, 
-			  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1) const;
+					  const SFont* font=NULL, const Vec4f* textColor=NULL, int nbSeg=-1, bool useDMS=false) const;
 
 	//! draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(double x,double y,double r) const;

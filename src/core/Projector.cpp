@@ -1044,7 +1044,7 @@ void Projector::drawParallel(const Vec3d& start, double length, bool labelAxis, 
 /*************************************************************************
  Draw a meridian arc in the current frame
 *************************************************************************/
-void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg) const
+void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, const SFont* font, const Vec4f* textColor, int nbSeg, bool useDMS) const
 {
 	if (nbSeg==-1)
 		nbSeg = 4 + (int)(length*54./(2.*M_PI));
@@ -1090,7 +1090,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 		project(v2, win1);
 		double angleDeg = std::atan2(win1[1]-win0[1], win1[0]-win0[0])*180./M_PI;
 		//angleDeg += start[1]>=0 ? 1.:180.;
-		QString str = StelUtils::radToHmsStrAdapt(lon);
+		QString str = useDMS ? StelUtils::radToDmsStrAdapt(M_PI-lon) : StelUtils::radToHmsStrAdapt(lon);
 		float xshift=20;
 		if (angleDeg>90. || angleDeg<-90.)
 		{
@@ -1111,7 +1111,7 @@ void Projector::drawMeridian(const Vec3d& start, double length, bool labelAxis, 
 			xshift=-font->getStrLen(str)-20.f;
 		}
 		StelUtils::rectToSphe(&lon, &lat, v);
-		str = StelUtils::radToHmsStrAdapt(lon);
+		str = useDMS ? StelUtils::radToDmsStrAdapt(M_PI-lon) : StelUtils::radToHmsStrAdapt(lon);
 		drawText(font, win1[0], win1[1], str, angleDeg, xshift, 3);
 		
 		if (textColor)
