@@ -243,7 +243,7 @@ void StelApp::init()
 	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
-	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bits.png",
+	loadingBar = new LoadingBar(core->getProjection(), 12., "logo24bitsbeta.png",
 	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
 	              PACKAGE_VERSION, 45, 320, 121);
 	
