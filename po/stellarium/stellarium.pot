@@ -1,17 +1,20 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-21 09:10+0200\n"
+"POT-Creation-Date: 2008-09-22 15:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-22 12:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 
 #: src/modules/ConstellationMgr.cpp:376
 #, qt-format
@@ -623,28 +626,25 @@ msgstr ""
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
-msgid "Developer: Rob Spearman"
+#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:279
+#, qt-format
+msgid "Developer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:275
-msgid "Graphic/other designer: Johan Meuris"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:276
-msgid "Developer: Johannes Gajdosik"
+#, qt-format
+msgid "Graphic/other designer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:277
-msgid "Doc author/developer: Matthew Gates"
+#, qt-format
+msgid "Doc author/developer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:278
-msgid "OSX Developer: Nigel Kerr"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:279
-msgid "Developer: Andras Mohari"
+#, qt-format
+msgid "OSX Developer: %1"
 msgstr ""
 
 #: src/gui/StelGui.cpp:144
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Location window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:288
+#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr ""
 
@@ -1068,88 +1068,84 @@ msgstr ""
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:287 src/ui_helpDialogGui.h:186
-#: src/ui_locationDialogGui.h:288 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:457
+#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
+#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
+#: src/ui_configurationDialog.h:476
 msgid "Form"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:290 src/ui_dateTimeDialogGui.h:291
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:292 src/ui_dateTimeDialogGui.h:293
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:187 src/ui_helpDialogGui.h:189
+#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
 msgid "Help"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:190
+#: src/ui_helpDialogGui.h:215
 msgid "About"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:289
+#: src/ui_locationDialogGui.h:385
 msgid "Location"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:292
-msgid "Search:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:294
+#: src/ui_locationDialogGui.h:389
 msgid "Current location information"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:295
-msgid "Name/City:"
+#: src/ui_locationDialogGui.h:390
+msgid "Use as default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:296
-msgid "Longitude:"
+#: src/ui_locationDialogGui.h:391
+msgid "Delete"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:299 src/ui_locationDialogGui.h:306
+#: src/ui_locationDialogGui.h:392
+msgid "Add to list"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:393
+msgid "Latitude:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:302
-msgid "Country:"
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:303
-msgid "Latitude:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:309
-msgid "Planet:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:310
+#: src/ui_locationDialogGui.h:405
 msgid "Altitude:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:313
+#: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:316
+#: src/ui_locationDialogGui.h:411
 msgid " m"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:317
-msgid "Add to list"
+#: src/ui_locationDialogGui.h:412
+msgid "Name/City:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:318
-msgid "Delete"
+#: src/ui_locationDialogGui.h:413
+msgid "Country:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:319
-msgid "Use as default"
+#: src/ui_locationDialogGui.h:414
+msgid "Planet:"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
@@ -1324,182 +1320,182 @@ msgstr ""
 msgid "Starlore"
 msgstr ""
 
-#: src/ui_configurationDialog.h:458
+#: src/ui_configurationDialog.h:477
 msgid "Configuration"
 msgstr ""
 
-#: src/ui_configurationDialog.h:470
+#: src/ui_configurationDialog.h:489
 msgid "Program language"
 msgstr ""
 
-#: src/ui_configurationDialog.h:471
+#: src/ui_configurationDialog.h:490
 msgid "Selected object information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:474
+#: src/ui_configurationDialog.h:493
 msgid "Display all of the information which is available"
 msgstr ""
 
-#: src/ui_configurationDialog.h:477
+#: src/ui_configurationDialog.h:496
 msgid "All availalable"
 msgstr ""
 
-#: src/ui_configurationDialog.h:480
+#: src/ui_configurationDialog.h:499
 msgid "Display only abbreviated information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:483
+#: src/ui_configurationDialog.h:502
 msgid "Short"
 msgstr ""
 
-#: src/ui_configurationDialog.h:484
+#: src/ui_configurationDialog.h:503
 msgid "None"
 msgstr ""
 
-#: src/ui_configurationDialog.h:485
+#: src/ui_configurationDialog.h:504
 msgid "Default options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:486
+#: src/ui_configurationDialog.h:505
 msgid "Save current options as default"
 msgstr ""
 
-#: src/ui_configurationDialog.h:487
+#: src/ui_configurationDialog.h:506
 msgid ""
 "Save all the current options including the current FOV and direction of view "
 "for use at next startup."
 msgstr ""
 
-#: src/ui_configurationDialog.h:488
+#: src/ui_configurationDialog.h:507
 msgid "Startup FOV: XX"
 msgstr ""
 
-#: src/ui_configurationDialog.h:489
+#: src/ui_configurationDialog.h:508
 msgid "Startup direction of view: xxxx"
 msgstr ""
 
-#: src/ui_configurationDialog.h:490
+#: src/ui_configurationDialog.h:509
 msgid "Main"
 msgstr ""
 
-#: src/ui_configurationDialog.h:491
+#: src/ui_configurationDialog.h:510
 msgid "Control"
 msgstr ""
 
-#: src/ui_configurationDialog.h:494
+#: src/ui_configurationDialog.h:513
 msgid "Allow keyboard to pan and zoom"
 msgstr ""
 
-#: src/ui_configurationDialog.h:497
+#: src/ui_configurationDialog.h:516
 msgid "Enable keyboard navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:500
+#: src/ui_configurationDialog.h:519
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:503
+#: src/ui_configurationDialog.h:522
 msgid "Enable mouse navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:504
+#: src/ui_configurationDialog.h:523
 msgid "Startup date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:507
+#: src/ui_configurationDialog.h:526
 msgid "Starts Stellarium at system clock date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:510
+#: src/ui_configurationDialog.h:529
 msgid "System date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:513
+#: src/ui_configurationDialog.h:532
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:516
+#: src/ui_configurationDialog.h:535
 msgid "System date at:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:519
+#: src/ui_configurationDialog.h:538
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 
-#: src/ui_configurationDialog.h:522
+#: src/ui_configurationDialog.h:541
 msgid "Other:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:523
+#: src/ui_configurationDialog.h:542
 msgid "Navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:524
+#: src/ui_configurationDialog.h:543
 msgid "Amateur astronomer options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:527
+#: src/ui_configurationDialog.h:546
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 
-#: src/ui_configurationDialog.h:530
+#: src/ui_configurationDialog.h:549
 msgid "Show flip buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:531
+#: src/ui_configurationDialog.h:550
 msgid "Planetarium options"
 msgstr ""
 
-#: src/ui_configurationDialog.h:534
+#: src/ui_configurationDialog.h:553
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:537
+#: src/ui_configurationDialog.h:556
 msgid "Spheric mirror distortion"
 msgstr ""
 
-#: src/ui_configurationDialog.h:540
+#: src/ui_configurationDialog.h:559
 msgid "Align labels with the horizon"
 msgstr ""
 
-#: src/ui_configurationDialog.h:543
+#: src/ui_configurationDialog.h:562
 msgid "Gravity labels"
 msgstr ""
 
-#: src/ui_configurationDialog.h:546
+#: src/ui_configurationDialog.h:565
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:549
+#: src/ui_configurationDialog.h:568
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:552
+#: src/ui_configurationDialog.h:571
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:555
+#: src/ui_configurationDialog.h:574
 msgid "Disc viewport"
 msgstr ""
 
-#: src/ui_configurationDialog.h:556
+#: src/ui_configurationDialog.h:575
 msgid "Other"
 msgstr ""
 
-#: src/ui_configurationDialog.h:559
+#: src/ui_configurationDialog.h:578
 msgid "Hides the mouse cursor when inactive"
 msgstr ""
 
-#: src/ui_configurationDialog.h:562
+#: src/ui_configurationDialog.h:581
 msgid "Mouse cursor timeout (seconds):"
 msgstr ""
 
-#: src/ui_configurationDialog.h:563
+#: src/ui_configurationDialog.h:582
 msgid "Tools"
 msgstr ""
