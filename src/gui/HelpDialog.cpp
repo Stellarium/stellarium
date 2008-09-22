@@ -276,7 +276,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + Qt::escape(q_("Developer: Johannes Gajdosik")) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: Matthew Gates")) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("OSX Developer: Nigel Kerr")) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: Andras Mohari")) + "</li><ul><p>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li><ul><p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);
