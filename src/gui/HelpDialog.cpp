@@ -271,11 +271,11 @@ void HelpDialog::updateText(void)
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
 	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: Rob Spearman")) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: Johan Meuris")) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: Johannes Gajdosik")) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: Matthew Gates")) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: Nigel Kerr")) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: %1").arg(QString("Matthew Gates"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li><ul><p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
