@@ -1,4 +1,4 @@
-0.10.0 [2008-09-??]
+0.10.0 beta [2008-09-22]
 Global switch to Qt. Don't support SDL main application anymore.
 The whole StelApp class is managed by a QGraphicsScene, inside a QGraphicsView.
 Removed deprecated sources from the core of stellarium (old GUI, TUI and scripting).
