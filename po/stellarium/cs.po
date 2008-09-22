@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-21 09:10+0200\n"
+"POT-Creation-Date: 2008-09-22 15:19+0200\n"
 "PO-Revision-Date: 2008-09-21 10:43+0000\n"
 "Last-Translator: Filip Mösner <filip.mosner@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -16,6 +16,1528 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2008-09-22 12:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: src/ui_locationDialogGui.h:411
+msgid " m"
+msgstr " m"
+
+#: src/gui/StelGuiItems.cpp:432
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
+
+#: src/modules/LandscapeMgr.cpp:441
+#, qt-format
+msgid ", %1 m"
+msgstr ", %1 m"
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr "/"
+
+#: src/ui_viewDialog.h:992
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:993
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:995
+msgid "10000"
+msgstr "10 000"
+
+#: src/ui_viewDialog.h:996
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:994
+msgid "80"
+msgstr "80"
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:215
+msgid "About"
+msgstr ""
+
+#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr "Absolutní magnituda: %1"
+
+#: src/ui_viewDialog.h:974
+msgid "Absolute scale:"
+msgstr "Absolutní stupnice"
+
+#: src/modules/TextUI.cpp:86
+msgid "Actual Time"
+msgstr "Aktuální čas"
+
+#: src/gui/StelGui.cpp:191
+msgid "Add 1 sidereal day"
+msgstr "Přidat 1 siderický den"
+
+#: src/gui/StelGui.cpp:193
+msgid "Add 1 sidereal week"
+msgstr "Přidat 1 siderický týden"
+
+#: src/gui/StelGui.cpp:187
+msgid "Add 1 solar day"
+msgstr "Přidat 1 sluneční den"
+
+#: src/gui/StelGui.cpp:185
+msgid "Add 1 solar hour"
+msgstr "Přidat 1 sluneční hodinu"
+
+#: src/gui/StelGui.cpp:189
+msgid "Add 1 solar week"
+msgstr "Přidat 1 sluneční týden"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Add to list"
+msgstr "Přidat do listu"
+
+#: src/modules/TextUI.cpp:70
+msgid "Administration "
+msgstr "Administrace "
+
+#: src/ui_configurationDialog.h:559
+msgid "Align labels with the horizon"
+msgstr "Zarovnat popisky k horizontu"
+
+#: src/ui_configurationDialog.h:496
+msgid "All availalable"
+msgstr "Všechno k dispozici"
+
+#: src/ui_configurationDialog.h:513
+msgid "Allow keyboard to pan and zoom"
+msgstr "Umožní pohyb a přibližování klávesnicí"
+
+#: src/ui_configurationDialog.h:519
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "Umožní použití myši k pohybu (tahem) a přibližování (kolečkem)"
+
+#: src/modules/TextUI.cpp:75
+msgid "Altitude (m): "
+msgstr "Nadm. výška (m): "
+
+#: src/ui_locationDialogGui.h:405
+msgid "Altitude:"
+msgstr "Nadmořská výška :"
+
+#: src/ui_configurationDialog.h:543
+msgid "Amateur astronomer options"
+msgstr "Volby pro astronomy amatéry"
+
+#: src/modules/Planet.cpp:144
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "Zdánlivý průměr: %1"
+
+#: src/modules/TextUI.cpp:136
+msgid "Arrow down to load list."
+msgstr "Stikněte šipku dolů pro načtení seznamu."
+
+#: src/gui/HelpDialog.cpp:52
+msgid "Arrow keys & left mouse drag"
+msgstr "Kurzorové klávesy & tažení levým tlačítkem myši"
+
+#: src/ui_viewDialog.h:1012
+msgid "Art brightness: "
+msgstr "Jas kreseb: "
+
+#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
+msgid "Atmosphere"
+msgstr "Atmosféra"
+
+#: src/modules/LandscapeMgr.cpp:433
+msgid "Author: "
+msgstr "Autor: "
+
+#: src/gui/StelGui.cpp:209
+msgid "Auto hide horizontal button bar"
+msgstr "Automaticky schovávat horizontální nástrojovou lištu"
+
+#: src/gui/StelGui.cpp:210
+msgid "Auto hide vertical button bar"
+msgstr "Automaticky schovávat vertikální nástrojovou lištu"
+
+#: src/ui_configurationDialog.h:568
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "Automatické oddálení vrací zorné pole do výchozího směru"
+
+#: src/core/StelObject.cpp:100
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "Azimut/Výška: %1/%2"
+
+#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
+msgid "Azimutal grid"
+msgstr "Azimutální mřížka"
+
+#: src/modules/TextUI.cpp:113
+msgid "Azimuthal Grid"
+msgstr "Azimutální mřížka"
+
+#: src/modules/TextUI.cpp:134
+msgid "CD/DVD Script: "
+msgstr "CD/DVD skript: "
+
+#: src/gui/HelpDialog.cpp:57
+msgid "CTRL + Left click"
+msgstr "CTRL + Levé tlačítko myši"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Nahoru/Dolů"
+
+#: src/modules/TextUI.cpp:82
+msgid "Calendar"
+msgstr "kalendářní"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callistó"
+
+#: src/modules/TextUI.cpp:108
+msgid "Cardinal Points"
+msgstr "Světové strany"
+
+#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
+msgid "Cardinal points"
+msgstr "Světové strany"
+
+#: src/ui_viewDialog.h:999
+msgid "Celestial Sphere"
+msgstr "Nebeská sféra"
+
+#: src/gui/StelGui.cpp:197
+msgid "Center on selected object"
+msgstr "Zaměřit na vybraný objekt"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charon"
+
+#: src/translations.h:69
+msgid "Chinese"
+msgstr "čínský"
+
+#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
+msgid "Clear selection"
+msgstr "Zrušit výběr"
+
+#: src/modules/Nebula.cpp:252
+msgid "Cluster associated with nebulosity"
+msgstr "Hvězdokupa spojovaná s mlhovinou"
+
+#: src/modules/TextUI.cpp:67
+msgid "Colors "
+msgstr "Barvy "
+
+#: src/ui_configurationDialog.h:477
+msgid "Configuration"
+msgstr "Nastavení"
+
+#: src/gui/StelGui.cpp:174
+msgid "Configuration window"
+msgstr "Nastavení"
+
+#: src/modules/TextUI.cpp:106
+msgid "Constellation Art Intensity"
+msgstr "Intenzita obrázků souhvězdí"
+
+#: src/modules/TextUI.cpp:107
+msgid "Constellation Boundaries"
+msgstr "Hranice souhvězdí"
+
+#: src/modules/TextUI.cpp:104
+msgid "Constellation Lines"
+msgstr "Ohraničující čáry souhvězdí"
+
+#: src/modules/TextUI.cpp:105
+msgid "Constellation Names"
+msgstr "Názvy souhvězdí"
+
+#: src/gui/StelGui.cpp:146
+msgid "Constellation art"
+msgstr "Kresby souhvězdí"
+
+#: src/gui/StelGui.cpp:148
+msgid "Constellation boundaries"
+msgstr "Hranice souhvězdí"
+
+#: src/gui/StelGui.cpp:147
+msgid "Constellation labels"
+msgstr "Popisy souhvězdí"
+
+#: src/gui/StelGui.cpp:145
+msgid "Constellation lines"
+msgstr "Tvary souhvězdí"
+
+#: src/ui_viewDialog.h:1007
+msgid "Constellations"
+msgstr "Souhvězdí"
+
+#: src/ui_configurationDialog.h:510
+msgid "Control"
+msgstr "Ovládání"
+
+#: src/modules/TextUI.cpp:130
+msgid "Correct for light travel time: "
+msgstr "Oprava na konečnou rychlost světla "
+
+#: src/ui_locationDialogGui.h:413
+msgid "Country:"
+msgstr "Země:"
+
+#: src/ui_locationDialogGui.h:389
+msgid "Current location information"
+msgstr "Údaje o současné zeměpisné poloze"
+
+#: src/modules/TextUI.cpp:129
+msgid "Cursor Timeout: "
+msgstr "Skrytí kurzoru: "
+
+#: src/core/MappingClasses.cpp:223
+msgid "Cylinder"
+msgstr "Válec"
+
+#: src/modules/TextUI.cpp:89
+msgid "Date Display Format: "
+msgstr "Formát datumu: "
+
+#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr "Datum a čas"
+
+#: src/gui/StelGui.cpp:177
+msgid "Date/time window"
+msgstr "Datum/čas"
+
+#: src/modules/TextUI.cpp:81
+msgid "Day keys: "
+msgstr "Typ dnů "
+
+#: src/gui/StelGui.cpp:181
+msgid "Decrease time speed"
+msgstr "Zpomalit čas"
+
+#: src/ui_configurationDialog.h:504
+msgid "Default options"
+msgstr "Předvolená nastavení"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/ui_locationDialogGui.h:391
+msgid "Delete"
+msgstr "Odstranit"
+
+#: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:279
+#, fuzzy, qt-format
+msgid "Developer: %1"
+msgstr "Vývojáři"
+
+#: src/gui/HelpDialog.cpp:272
+msgid "Developers"
+msgstr "Vývojáři"
+
+#: src/ui_viewDialog.h:979
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "Zeslabit slabé hvězdy, když je vidět velmi jasný objekt"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/ui_configurationDialog.h:574
+msgid "Disc viewport"
+msgstr "Okrouhlé zorné pole"
+
+#: src/gui/StelGui.cpp:144
+msgid "Display Options"
+msgstr "Možnosti zobrazení"
+
+#: src/ui_configurationDialog.h:493
+msgid "Display all of the information which is available"
+msgstr "Zobraz všechny dostupné informace"
+
+#: src/ui_configurationDialog.h:499
+msgid "Display only abbreviated information"
+msgstr "Zobraz pouze zkrácené informace"
+
+#: src/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "Vzdálenost: %1 ly"
+
+#: src/modules/Planet.cpp:140
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "Vzdálenost: %1AU"
+
+#: src/gui/HelpDialog.cpp:277
+#, fuzzy, qt-format
+msgid "Doc author/developer: %1"
+msgstr "Autor doc a vývojář: Matthew Gates"
+
+#: src/ui_viewDialog.h:982
+msgid "Dynamic eye adaptation"
+msgstr "Dynamické přizpůsobení zraku"
+
+#: src/translations.h:65
+msgid "E"
+msgstr "V"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Země"
+
+#: src/modules/TextUI.cpp:116
+msgid "Ecliptic Line"
+msgstr "Ekliptika"
+
+#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
+msgid "Ecliptic line"
+msgstr "Dráha Slunce (ekliptika)"
+
+#: src/modules/TextUI.cpp:68
+msgid "Effects "
+msgstr "Efekty "
+
+#: src/translations.h:70
+msgid "Egyptian"
+msgstr "egyptský"
+
+#: src/ui_configurationDialog.h:516
+msgid "Enable keyboard navigation"
+msgstr "Umožnit navigaci pomocí klávesnice"
+
+#: src/ui_configurationDialog.h:522
+msgid "Enable mouse navigation"
+msgstr "Umožnit navigaci pomocí myši"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/ui_locationDialogGui.h:408
+msgid "Enter the altitude in meter"
+msgstr "Zadej nadmořskou výšku v metrech"
+
+#: src/core/MappingClasses.cpp:77
+msgid "Equal Area"
+msgstr "Plochojevná projekce"
+
+#: src/modules/TextUI.cpp:115
+msgid "Equator Line"
+msgstr "Rovník"
+
+#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
+msgid "Equator line"
+msgstr "Rovník"
+
+#: src/modules/TextUI.cpp:114
+msgid "Equatorial Grid"
+msgstr "Ekvatoriální mřížka"
+
+#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
+msgid "Equatorial J2000 grid"
+msgstr "Ekvatoriální mřížka J2000"
+
+#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
+msgid "Equatorial grid"
+msgstr "Ekvatoriální mřížka"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Európa"
+
+#: src/gui/ViewDialog.cpp:418
+msgid "Exceptional Leonid rate"
+msgstr "Vyjímečná četnost Leonid"
+
+#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
+msgid "Find Object"
+msgstr "Najít objekt"
+
+#: src/core/MappingClasses.cpp:178
+msgid "Fish-eye"
+msgstr "Rybí oko"
+
+#: src/gui/StelGui.cpp:169
+msgid "Flip scene horizontally"
+msgstr "Převrátit obraz vodorovně"
+
+#: src/gui/StelGui.cpp:170
+msgid "Flip scene vertically"
+msgstr "Převrátit obraz svisle"
+
+#: src/gui/StelGui.cpp:160
+msgid "Fog"
+msgstr "Mlha"
+
+#: src/ui_dateTimeDialogGui.h:293 src/ui_helpDialogGui.h:211
+#: src/ui_locationDialogGui.h:384 src/ui_viewDialog.h:964
+#: src/ui_configurationDialog.h:476
+msgid "Form"
+msgstr "Formulář"
+
+#: src/gui/StelGui.cpp:168
+msgid "Full-screen mode"
+msgstr "Režim celá obrazovka"
+
+#: src/gui/HelpDialog.cpp:147
+msgid "Further Reading"
+msgstr "Podrobnější čtení"
+
+#: src/modules/Nebula.cpp:237
+msgid "Galaxy"
+msgstr "Galaxie"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymédes"
+
+#: src/modules/TextUI.cpp:65
+msgid "General "
+msgstr "Obecné "
+
+#: src/modules/Nebula.cpp:243
+msgid "Globular cluster"
+msgstr "Kulová hvězdokupa"
+
+#: src/gui/HelpDialog.cpp:275
+#, fuzzy, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Grafik, ostatní design: Johan Meuris"
+
+#: src/ui_configurationDialog.h:562
+msgid "Gravity labels"
+msgstr "Zarovnat popisky"
+
+#: src/gui/StelGui.cpp:158
+msgid "Ground"
+msgstr "Horizont"
+
+#: src/ui_helpDialogGui.h:212 src/ui_helpDialogGui.h:214
+msgid "Help"
+msgstr "Nápověda"
+
+#: src/gui/StelGui.cpp:173
+msgid "Help window"
+msgstr "Okno nápovědy"
+
+#: src/ui_configurationDialog.h:578
+msgid "Hides the mouse cursor when inactive"
+msgstr "Skrýt kurzor myši, když je neaktivní"
+
+#: src/gui/ViewDialog.cpp:421
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "Nejvyšší četnost vůbec (Leonidy 1966)"
+
+#: src/core/StelObject.cpp:89
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "Hodinový úhel/Deklinace: %1/%2"
+
+#: src/ui_viewDialog.h:991
+msgid "Hourly zenith rate:"
+msgstr "Hodinová četnost v zenitu"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/core/MappingClasses.cpp:183
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+"V projekci typu rybí oko, neboli <i>azimutální ekvidistantní projekci</i>, "
+"se rovné čáry ve velké vzdálenosti od středu pole ohýbají do křivek (podobně "
+"jako při použití objektivu s velmi krátkou ohniskovou vzdáleností)."
+
+#: src/gui/StelGui.cpp:182
+msgid "Increase time speed"
+msgstr "Zrychlit čas"
+
+#: src/translations.h:71
+msgid "Inuit"
+msgstr "Inuitská"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiter"
+
+#: src/gui/HelpDialog.cpp:139
+msgid "Keys"
+msgstr "Klávesy"
+
+#: src/translations.h:72
+msgid "Korean"
+msgstr "Korejská"
+
+#: src/ui_viewDialog.h:986
+msgid "Labels and Markers"
+msgstr "Označení a ukazatele"
+
+#: src/translations.h:73
+msgid "Lakota"
+msgstr "Lakotská"
+
+#: src/ui_viewDialog.h:1020
+msgid "Landscape"
+msgstr "Krajina"
+
+#: src/modules/TextUI.cpp:122
+msgid "Landscape: "
+msgstr "Krajina: "
+
+#: src/ui_locationDialogGui.h:393
+msgid "Latitude:"
+msgstr "Zeměpisná šířka:"
+
+#: src/modules/TextUI.cpp:73
+msgid "Latitude: "
+msgstr "Šířka: "
+
+#: src/gui/HelpDialog.cpp:55
+msgid "Left click"
+msgstr "Levé tlačítko myši"
+
+#: src/modules/TextUI.cpp:121
+msgid "Light Pollution Luminance: "
+msgstr "Jas světelného znečištění "
+
+#: src/ui_viewDialog.h:985
+msgid "Light pollution: "
+msgstr "Světelný smog "
+
+#: src/modules/TextUI.cpp:101
+msgid "Limiting Magnitude: "
+msgstr "Mezní hvězdná velikost (limitní magnituda) "
+
+#: src/modules/TextUI.cpp:140
+msgid "Load Default Configuration: "
+msgstr "Nahrát výchozí nastavení: "
+
+#: src/modules/ConstellationMgr.cpp:376
+#, qt-format
+msgid "Loading Constellation Art: %1/%2"
+msgstr "Načítám kresby souhvězdí: %1/%2"
+
+#: src/modules/NebulaMgr.cpp:372
+#, qt-format
+msgid "Loading NGC catalog: %1/%2"
+msgstr "Načítám NGC katalog: %1/%2"
+
+#: src/modules/StarMgr.cpp:257
+#, qt-format
+msgid "Loading catalog %1"
+msgstr "Načítám katalog %1"
+
+#: src/modules/TextUI.cpp:133
+msgid "Local Script: "
+msgstr "Lokální skript: "
+
+#: src/ui_locationDialogGui.h:385
+msgid "Location"
+msgstr "Poloha"
+
+#: src/gui/StelGui.cpp:178
+msgid "Location window"
+msgstr "Poloha"
+
+#: src/modules/LandscapeMgr.cpp:436
+msgid "Location: "
+msgstr "Místo: "
+
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr "Zeměpisná délka:"
+
+#: src/modules/TextUI.cpp:74
+msgid "Longitude: "
+msgstr "Délka: "
+
+#: src/modules/TextUI.cpp:125
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Násobič vykreslování magnitud "
+
+#: src/modules/TextUI.cpp:98
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Násobič magnitudy: "
+
+#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
+#, qt-format
+msgid "Magnitude: <b>%1</b>"
+msgstr "Magnituda: <b>%1</b>"
+
+#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Magnituda: <b>%1</b> (B-V: %2)"
+
+#: src/ui_configurationDialog.h:509
+msgid "Main"
+msgstr "Hlavní"
+
+#: src/modules/TextUI.cpp:123
+msgid "Manual zoom: "
+msgstr "Manuální zoom: "
+
+#: src/ui_viewDialog.h:1014
+msgid "Markings"
+msgstr "Označení"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
+
+#: src/ui_configurationDialog.h:571
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "Schová všechno mimo prostřední okrouhlé zorné pole"
+
+#: src/core/Mapping.cpp:28
+msgid "Maximum FOV: "
+msgstr "Maximální zorné pole: "
+
+#: src/modules/TextUI.cpp:99
+msgid "Maximum Magnitude to Label: "
+msgstr "Jména do magnitudy: "
+
+#: src/modules/TextUI.cpp:127
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Jména mlhovin do magnitudy: "
+
+#: src/core/MappingClasses.cpp:278
+msgid "Mercator"
+msgstr "Mercatorova projekce"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Merkur"
+
+#: src/modules/TextUI.cpp:112
+msgid "Meridian Line"
+msgstr "Poledník"
+
+#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
+msgid "Meridian line"
+msgstr "Poledník"
+
+#: src/modules/TextUI.cpp:126
+msgid "Milky Way intensity: "
+msgstr "Intenzita Mléčné dráhy: "
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
+msgid "Miscellaneous"
+msgstr "Různé"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Měsíc"
+
+#: src/ui_configurationDialog.h:581
+msgid "Mouse cursor timeout (seconds):"
+msgstr "Čas do skrytí kurzoru myši (v sekundách):"
+
+#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
+msgid "Movement and Selection"
+msgstr "Pohyb a Výběr"
+
+#: src/translations.h:63
+msgid "N"
+msgstr "S"
+
+#: src/ui_locationDialogGui.h:412
+msgid "Name/City:"
+msgstr "Jméno/Město:"
+
+#: src/translations.h:74
+msgid "Navajo"
+msgstr "Navajská"
+
+#: src/ui_configurationDialog.h:542
+msgid "Navigation"
+msgstr "Navigace"
+
+#: src/modules/Nebula.cpp:246
+msgid "Nebula"
+msgstr "Mlhovina"
+
+#: src/modules/TextUI.cpp:118
+msgid "Nebula Circles"
+msgstr "Kroužky mlhovin"
+
+#: src/modules/TextUI.cpp:117
+msgid "Nebula Names"
+msgstr "Názvy mlhovin"
+
+#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
+msgid "Nebulas"
+msgstr "Mlhoviny [N]"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptun"
+
+#: src/gui/StelGui.cpp:167
+msgid "Night mode"
+msgstr "Noční režim"
+
+#: src/gui/ViewDialog.cpp:345
+msgid "No description"
+msgstr "Bez popisu"
+
+#: src/gui/ViewDialog.cpp:409
+msgid "No shooting stars"
+msgstr "Žádné padající hvězdy"
+
+#: src/ui_configurationDialog.h:503
+msgid "None"
+msgstr "Nic"
+
+#: src/gui/ViewDialog.cpp:412
+msgid "Normal rate"
+msgstr "Normální četnost"
+
+#: src/translations.h:75
+msgid "Norse"
+msgstr "Severský"
+
+#: src/gui/HelpDialog.cpp:278
+#, fuzzy, qt-format
+msgid "OSX Developer: %1"
+msgstr "Vývojář pro OSX: Nigel Kerr"
+
+#: src/modules/TextUI.cpp:124
+msgid "Object Sizing Rule: "
+msgstr "Velikost objektů: "
+
+#: src/modules/Nebula.cpp:240
+msgid "Open cluster"
+msgstr "Otevřená hvězdokupa"
+
+#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
+msgid "Options"
+msgstr "Možnosti"
+
+#: src/core/MappingClasses.cpp:336
+msgid "Orthographic"
+msgstr "Ortografická projekce"
+
+#: src/core/MappingClasses.cpp:341
+msgid ""
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"Ortografická projekce je podobná perspektivní projekci s tím rozdílem, že "
+"bod perspektivy je posunut do nekonečna."
+
+#: src/ui_configurationDialog.h:575
+msgid "Other"
+msgstr "Jiné"
+
+#: src/ui_configurationDialog.h:541
+msgid "Other:"
+msgstr "Jiné:"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:61
+msgid "Pan view around the sky"
+msgstr "Pohyb zorného pole po obloze"
+
+#: src/modules/StarWrapper.cpp:115
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "Paralaxa: %1\""
+
+#: src/core/MappingClasses.cpp:11
+msgid "Perspective"
+msgstr "Perspektiva"
+
+#: src/core/MappingClasses.cpp:16
+msgid ""
+"Perspective projection keeps the horizon a straight line. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
+msgstr ""
+"Perspektivní projekce zobrazuje horizont jako přímku. Matematický název této "
+"projekce je <i>gnomonická projekce</i>."
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/modules/TextUI.cpp:109
+msgid "Planet Names"
+msgstr "Názvy planet"
+
+#: src/modules/TextUI.cpp:110
+msgid "Planet Orbits"
+msgstr "Oběžné dráhy planet"
+
+#: src/modules/TextUI.cpp:111
+msgid "Planet Trails"
+msgstr "Dráhy planet"
+
+#: src/ui_locationDialogGui.h:414
+msgid "Planet:"
+msgstr "Planeta"
+
+#: src/modules/LandscapeMgr.cpp:444
+msgid "Planet: "
+msgstr "Planeta: "
+
+#: src/ui_configurationDialog.h:550
+msgid "Planetarium options"
+msgstr "Nastavení planetaria"
+
+#: src/modules/Nebula.cpp:249
+msgid "Planetary nebula"
+msgstr "Planetární mlhovina"
+
+#: src/ui_viewDialog.h:989
+msgid "Planets"
+msgstr "Planety"
+
+#: src/ui_viewDialog.h:967
+msgid "Planets and satellites"
+msgstr "Planety a měsíce"
+
+#: src/gui/StelGui.cpp:165
+msgid "Planets hints"
+msgstr "Nápověda k planetám"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Pluto"
+
+#: src/translations.h:76
+msgid "Polynesian"
+msgstr "polynéský"
+
+#: src/modules/TextUI.cpp:84
+msgid "Preset Sky Time: "
+msgstr "Přednastavený hvězdný čas: "
+
+#: src/modules/TextUI.cpp:87
+msgid "Preset Time"
+msgstr "Nastavit čas"
+
+#: src/ui_configurationDialog.h:489
+msgid "Program language"
+msgstr "Jazyk programu"
+
+#: src/gui/HelpDialog.cpp:273
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "Koordinátor projektu a šéf vývoje: %1"
+
+#: src/ui_viewDialog.h:1013
+msgid "Projection"
+msgstr "Projekce"
+
+#: src/gui/StelGui.cpp:205
+msgid "Quit"
+msgstr "Ukončit"
+
+#: src/core/StelObject.cpp:74
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "Rektascenze/Deklinace (J2000): %1/%2"
+
+#: src/core/StelObject.cpp:81
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "Rektascenze/deklinace (k ekvinokciu): %1/%2"
+
+#: src/ui_viewDialog.h:975
+msgid "Relative scale:"
+msgstr "Relativní stupnice"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Right click"
+msgstr "Pravé tlačítko myši"
+
+#: src/translations.h:64
+msgid "S"
+msgstr "J"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Saturn"
+
+#: src/modules/TextUI.cpp:141
+msgid "Save Current Configuration as Default: "
+msgstr "Uložit aktuální nastavení jako výchozí: "
+
+#: src/ui_configurationDialog.h:506
+msgid ""
+"Save all the current options including the current FOV and direction of view "
+"for use at next startup."
+msgstr ""
+"Uloží všechna současná nastavení včetně šíře zorného pole a směru pohledu a "
+"použije je při příštím spuštění."
+
+#: src/ui_configurationDialog.h:505
+msgid "Save current options as default"
+msgstr "Uložit současný stav jako předvolený"
+
+#: src/gui/StelGui.cpp:206
+msgid "Save screenshot"
+msgstr "Uložit snímek obrazovky"
+
+#: src/ui_viewDialog.h:972
+msgid "Scale Moon"
+msgstr "Zvětšení Měsíce"
+
+#: src/modules/TextUI.cpp:69
+msgid "Scripts "
+msgstr "Skripty "
+
+#: src/gui/StelGui.cpp:175
+msgid "Search window"
+msgstr "Vyhledávání"
+
+#: src/modules/TextUI.cpp:137
+msgid "Select and exit to run."
+msgstr "Vyber a opusť pro spuštění."
+
+#: src/gui/HelpDialog.cpp:64
+msgid "Select object"
+msgstr "Vybrat objekt"
+
+#: src/ui_configurationDialog.h:490
+msgid "Selected object information"
+msgstr "Údaje o označeném objektu"
+
+#: src/modules/TextUI.cpp:63
+msgid "Set Location "
+msgstr "Nastavení polohy "
+
+#: src/modules/TextUI.cpp:64
+msgid "Set Time "
+msgstr "Nastavení času "
+
+#: src/modules/TextUI.cpp:80
+msgid "Set Time Zone: "
+msgstr "Nastavení časového pásma: "
+
+#: src/modules/TextUI.cpp:144
+msgid "Set UI Locale: "
+msgstr "Nastavit jazyk uživatelského rozhraní: "
+
+#: src/gui/StelGui.cpp:201
+msgid "Set home planet to selected planet"
+msgstr "Nastavit vybranou planetu jako domovskou"
+
+#: src/gui/StelGui.cpp:183
+msgid "Set normal time rate"
+msgstr "Nastavit normální rychlost času"
+
+#: src/gui/StelGui.cpp:184
+msgid "Set time to now"
+msgstr "Nastavit čas na teď"
+
+#: src/ui_configurationDialog.h:532
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr ""
+
+#: src/ui_viewDialog.h:990
+msgid "Shooting Stars"
+msgstr "Padající hvězdy"
+
+#: src/ui_configurationDialog.h:502
+msgid "Short"
+msgstr "krátký"
+
+#: src/ui_viewDialog.h:1011
+msgid "Show art"
+msgstr "Zobraz kresby"
+
+#: src/ui_viewDialog.h:984
+msgid "Show atmosphere"
+msgstr "Zobraz atmosféru"
+
+#: src/ui_viewDialog.h:1010
+msgid "Show boundaries"
+msgstr "Zobraz hranice"
+
+#: src/ui_configurationDialog.h:549
+msgid "Show flip buttons"
+msgstr "Zobrazit převracecí tlačítka"
+
+#: src/ui_viewDialog.h:1017
+msgid "Show fog"
+msgstr "Zobraz mlhu"
+
+#: src/ui_viewDialog.h:1016
+msgid "Show ground"
+msgstr "Zobraz terén"
+
+#: src/ui_viewDialog.h:1009
+msgid "Show labels"
+msgstr "Zobrazit popisy"
+
+#: src/ui_viewDialog.h:1008
+msgid "Show lines"
+msgstr "Zobraz čáry"
+
+#: src/ui_viewDialog.h:969
+msgid "Show planet markers"
+msgstr "Zobraz ukazatele planet"
+
+#: src/ui_viewDialog.h:970
+msgid "Show planet orbits"
+msgstr "Zobrazit orbity planet"
+
+#: src/ui_viewDialog.h:968
+msgid "Show planets"
+msgstr "Zobrazit planety"
+
+#: src/modules/TextUI.cpp:96
+msgid "Show: "
+msgstr "Zobrazovat: "
+
+#: src/modules/TextUI.cpp:142
+msgid "Shut Down: "
+msgstr "Vypnout: "
+
+#: src/modules/TextUI.cpp:83
+msgid "Sidereal"
+msgstr "siderické"
+
+#: src/ui_viewDialog.h:971
+msgid "Simulate light speed"
+msgstr "Simulovat rychlost světla"
+
+#: src/modules/Nebula.cpp:101
+#, qt-format
+msgid "Size: %1"
+msgstr "Velikost: %1"
+
+#: src/ui_viewDialog.h:998
+msgid "Sky"
+msgstr "Obloha"
+
+#: src/modules/TextUI.cpp:92
+msgid "Sky Culture: "
+msgstr "Kultura: "
+
+#: src/modules/TextUI.cpp:93
+msgid "Sky Language: "
+msgstr "Jazyk: "
+
+#: src/modules/TextUI.cpp:85
+msgid "Sky Time At Start-up: "
+msgstr "Výchozí hvězdný čas: "
+
+#: src/modules/TextUI.cpp:79
+msgid "Sky Time: "
+msgstr "Hvězdný čas: "
+
+#: src/gui/StelGui.cpp:176
+msgid "Sky and viewing options window"
+msgstr "Nastavení oblohy a pohledu"
+
+#: src/modules/TextUI.cpp:76
+msgid "Solar System Body: "
+msgstr "Těleso sluneční soustavy: "
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "Vně sluneční soustavy"
+
+#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
+#: src/gui/StelGuiItems.cpp:531
+msgid "Space"
+msgstr "Mezerník"
+
+#: src/modules/StarWrapper.cpp:108
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "Spektrální třída: %1"
+
+#: src/ui_configurationDialog.h:556
+msgid "Spheric mirror distortion"
+msgstr "Zakřivení sférického zrcadla"
+
+#: src/ui_configurationDialog.h:553
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"Zakřivení sférického zrcadla se používá při projekci Stellaria na sférických "
+"zrcadlech nízkorozpočtových systémů planetárií."
+
+#: src/gui/ViewDialog.cpp:415
+msgid "Standard Perseids rate"
+msgstr "Standardní četnost Perseid"
+
+#: src/modules/TextUI.cpp:97
+msgid "Star Value Multiplier: "
+msgstr "Násobič jasu hvězd "
+
+#: src/ui_viewDialog.h:1024
+msgid "Starlore"
+msgstr "Hvězdná mytologie"
+
+#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
+msgid "Stars"
+msgstr "Hvězdy"
+
+#: src/modules/TextUI.cpp:66
+msgid "Stars "
+msgstr "Hvězdy "
+
+#: src/ui_configurationDialog.h:526
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Spustí Stellarium se systémovým časem"
+
+#: src/gui/ConfigurationDialog.cpp:375
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "Šíře zorného pole při spuštění: %1/%2"
+
+#: src/ui_configurationDialog.h:507
+msgid "Startup FOV: XX"
+msgstr ""
+
+#: src/ui_configurationDialog.h:523
+msgid "Startup date and time"
+msgstr "Datum a čas při spuštění"
+
+#: src/gui/ConfigurationDialog.cpp:383
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "Směr pohledu při spuštění (azimut/výška): %1/%2"
+
+#: src/ui_configurationDialog.h:508
+msgid "Startup direction of view: xxxx"
+msgstr ""
+
+#: src/gui/StelGui.cpp:786
+msgid "Stellarium"
+msgstr "Stellarium"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Stellarium Help"
+msgstr "Nápověda Stellaria"
+
+#: src/core/MappingClasses.cpp:133
+msgid "Stereographic"
+msgstr "Stereografická projekce"
+
+#: src/core/MappingClasses.cpp:138
+msgid ""
+"Stereographic projection is known since the antiquity and was originally "
+"known as the planisphere projection. It preserves the angles at which curves "
+"cross each other but it does not preserve area."
+msgstr ""
+"Stereografická projekce byla známá už v antice a byla původně známá jako "
+"planisférická projekce. Zachovává úhly, pod nimiž se křivky protínají, ale "
+"nezachovává obsah."
+
+#: src/gui/StelGui.cpp:192
+msgid "Subtract 1 sidereal day"
+msgstr "Odebrat 1 siderický den"
+
+#: src/gui/StelGui.cpp:194
+msgid "Subtract 1 sidereal week"
+msgstr "Odebrat 1 siderický týden"
+
+#: src/gui/StelGui.cpp:188
+msgid "Subtract 1 solar day"
+msgstr "Odebrat 1 sluneční den"
+
+#: src/gui/StelGui.cpp:186
+msgid "Subtract 1 solar hour"
+msgstr "Odebrat 1 sluneční hodinu"
+
+#: src/gui/StelGui.cpp:190
+msgid "Subtract 1 solar week"
+msgstr "Odebrat 1 sluneční týden"
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Slunce"
+
+#: src/gui/StelGui.cpp:204
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "Přepnout mezi ekvatoriální a azimutální montáží"
+
+#: src/ui_configurationDialog.h:529
+msgid "System date and time"
+msgstr "Systémový čas"
+
+#: src/ui_configurationDialog.h:535
+msgid "System date at:"
+msgstr "Systémové datum na:"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/gui/HelpDialog.cpp:149
+msgid "The Stellarium User Guide"
+msgstr "Příručka uživatele ke Stellariu"
+
+#: src/gui/HelpDialog.cpp:148
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Následující odkazy jsou externí, a budou otevřeny ve vašem webovém "
+"prohlížeči\n"
+
+#: src/core/MappingClasses.cpp:82
+msgid ""
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
+msgstr ""
+"Plný název této zobrazovací metody je, <i>Lambertova azimutální plochojevná "
+"projekce</i>. Zachovává obsah, nikoli však úhly."
+
+#: src/core/MappingClasses.cpp:228
+msgid ""
+"The full name of this projection mode is <i>cylindrical equidistant "
+"projection</i>. With this projection all parallels are equally spaced."
+msgstr ""
+"Úplný název této metody je <i>válcová délkojevná projekce</i>. Při ní jsou "
+"všechny rovnoběžky stejně vzdálené."
+
+#: src/core/MappingClasses.cpp:283
+msgid ""
+"The mercator projection is one of the most used world map projection. It "
+"preserves direction and shapes but distorts size, in an increasing degree "
+"away from the equator."
+msgstr ""
+"Mercatorova projekce je jedna z nepoužívanějších projekcí pro mapy světa. "
+"Zachovává směr a tvary, ale zkresluje velikost, tím více, čím dále od "
+"rovníku."
+
+#: src/main.cpp:55
+msgid "This system does not support OpenGL."
+msgstr "Tento systém nemá podporu OpenGL."
+
+#: src/modules/TextUI.cpp:88
+msgid "Time Display Format: "
+msgstr "Formát času: "
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/ui_configurationDialog.h:546
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr ""
+"Zobrazí nebo schová tlačidla vertikálního a horizontálního převrácení obrazu"
+
+#: src/ui_configurationDialog.h:582
+msgid "Tools"
+msgstr "Nástroje"
+
+#: src/gui/StelGui.cpp:198
+msgid "Track object"
+msgstr "Sledovat objekt"
+
+#: src/translations.h:78
+msgid "Tupi-Guarani"
+msgstr "Tupi-Guarani"
+
+#: src/ui_viewDialog.h:976
+msgid "Twinkle:"
+msgstr "Mihotání:"
+
+#: src/modules/TextUI.cpp:100
+msgid "Twinkling: "
+msgstr "Mihotání: "
+
+#: src/modules/Nebula.cpp:93
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Typ: <b>%1</b>"
+
+#: src/modules/TextUI.cpp:135
+msgid "USB Script: "
+msgstr "USB skript: "
+
+#: src/modules/Nebula.cpp:258
+msgid "Undocumented type"
+msgstr "Nedokumentovaný typ"
+
+#: src/modules/Nebula.cpp:255
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: src/modules/TextUI.cpp:143
+msgid "Update me via Internet: "
+msgstr "Aktualizovat přes Internet: "
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uran"
+
+#: src/ui_configurationDialog.h:538
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "Použít specifické datum a čas při spuštění Stellaria"
+
+#: src/ui_locationDialogGui.h:390
+msgid "Use as default"
+msgstr "Použít jako předvolené"
+
+#: src/ui_viewDialog.h:1022
+msgid "Use associated language for sky labeling"
+msgstr "Použít vybraný jazyk taky pro názvy na obloze"
+
+#: src/ui_viewDialog.h:1018
+msgid "Use associated planet and position"
+msgstr "Použít přiřazené planety a pozici"
+
+#: src/ui_viewDialog.h:1019
+msgid "Use this landscape as default"
+msgstr "Použít tento terén jako předvolený"
+
+#: src/ui_viewDialog.h:1023
+msgid "Use this sky culture as default"
+msgstr "Použít tuto kulturu jako předvolenou"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Venuše"
+
+#: src/ui_viewDialog.h:965
+msgid "View"
+msgstr "Pohled"
+
+#: src/translations.h:66
+msgid "W"
+msgstr "Z"
+
+#: src/translations.h:77
+msgid "Western"
+msgstr "západoevropský"
+
+#: src/ui_configurationDialog.h:565
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"Pokud je to povoleno, tlačítko automatického oddálení rovněž nastaví "
+"počáteční směr zorného pole."
+
+#: src/gui/StelGui.cpp:172
+msgid "Windows"
+msgstr "Windows"
+
+#: src/ui_locationDialogGui.h:396 src/ui_locationDialogGui.h:402
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+"Můžete zadat hodnotu v desetinách stupně, nebo použít formát stupně minuty "
+"vteřiny (dms), například: +1d 12m 8s"
+
+#: src/modules/TextUI.cpp:128
+msgid "Zoom Duration: "
+msgstr "Rychlost zoomu: "
+
+#: src/gui/StelGui.cpp:199
+msgid "Zoom in on selected object"
+msgstr "Přiblížit daný objekt"
+
+#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
+msgid "Zoom in/out"
+msgstr "Přiblížit/Oddálit"
+
+#: src/gui/StelGui.cpp:200
+msgid "Zoom out"
+msgstr "Oddálit"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:168
+msgid ""
+"{Bug reporting system} - if something doesn't work properly and is not "
+"listed in the FAQ list, you can open bug reports here."
+msgstr ""
+"{Systém Ohlašování Chyb} - pokud něco správně nefunguje a není to v Často "
+"Kladených Otázkách, tak zde můžete ohlásit chybu."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:173
+msgid ""
+"{Feature request system} - if you have an idea for a new feature, send it to "
+"us. We can't promise to implement every idea, but we appreciate the feedback "
+"and review the list when we are planning future features."
+msgstr ""
+"{Feature request system} - pokud máte nějaký návrh na novou funkci ve "
+"Stellariu, pošlete nám ho. Nemůžeme slíbit, že zapracujeme každý nápad do "
+"programu, ale oceňujeme Vaší zpětnou vazbu a bereme v úvahu Vaše nápady, "
+"když plánujeme nové funkce."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:178
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Fóra} - diskutuj o Stellariu s dalšími uživateli."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:153
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Často Kladené Otázky} o Stellariu. A odpovědi také."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:163
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} - pokud potřebujete pomoci s používáním Stellaria, "
+"zašlete vaši žádost o pomoc zde a my se Vám pokusíme pomoci."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:158
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium Wiki} - Obecné informace.  Také zde můžete nalézt uživatelské "
+"skripty a krajiny."
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
@@ -59,14 +1581,26 @@ msgstr ""
 #~ msgid "Aries"
 #~ msgstr "Beran"
 
+#~ msgid "Arsenal"
+#~ msgstr "Zbrojnice"
+
 #~ msgid "Atmosphere [A]"
 #~ msgstr "Atmosféra [A]"
 
 #~ msgid "Auriga"
 #~ msgstr "Vozka"
 
+#~ msgid "Aurvandil's Toe"
+#~ msgstr "Aurvandilův palec"
+
 #~ msgid "Azimuthal Grid [Z]"
 #~ msgstr "Azimutální mřížka [Z]"
+
+#~ msgid "Bailer"
+#~ msgstr "Výlevka"
+
+#~ msgid "Banner of Three Stars"
+#~ msgstr "Prapor se třemi hvězdami"
 
 #~ msgid "Bird"
 #~ msgstr "Pták"
@@ -74,11 +1608,17 @@ msgstr ""
 #~ msgid "Boat"
 #~ msgstr "Loď"
 
+#~ msgid "Bond"
+#~ msgstr "Okovy"
+
 #~ msgid "Bootes"
 #~ msgstr "Pastevec"
 
 #~ msgid "Bow and Arrow"
 #~ msgstr "Luk a šíp"
+
+#~ msgid "Bull's Foreleg"
+#~ msgstr "Přední noha býka"
 
 #~ msgid "CMD + Q : Quit\n"
 #~ msgstr "CMD + Q : Konec\n"
@@ -113,8 +1653,14 @@ msgstr ""
 #~ msgid "Cardinal Points [Q]"
 #~ msgstr "Světové strany [Q]"
 
+#~ msgid "Cared for by Moon"
+#~ msgstr "Obstaráno Měsícem"
+
 #~ msgid "Cassiopeia"
 #~ msgstr "Kasiopea"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Lůžko kočky"
 
 #~ msgid "Centaurus"
 #~ msgstr "Kentaur"
@@ -128,11 +1674,26 @@ msgstr ""
 #~ msgid "Chamaeleon"
 #~ msgstr "Chameleón"
 
+#~ msgid "Chariot"
+#~ msgstr "Válečný vůz"
+
+#~ msgid "Chariot Yard"
+#~ msgstr "Vozový dvůr"
+
+#~ msgid "Chematy"
+#~ msgstr "Chematy"
+
 #~ msgid "Choose landscapes:"
 #~ msgstr "Výběr krajiny:"
 
 #~ msgid "Circinus"
 #~ msgstr "Kružítko"
+
+#~ msgid "Circular Granary"
+#~ msgstr "Kulatá sýpka"
+
+#~ msgid "Coiled Thong"
+#~ msgstr "Svinutý řemen"
 
 #~ msgid "Columba"
 #~ msgstr "Holubice"
@@ -182,6 +1743,9 @@ msgstr ""
 #~ msgid "Current Time Speed is x"
 #~ msgstr "Aktuální rychlost času je x"
 
+#~ msgid "Curved Array"
+#~ msgstr "Zakřivený šik"
+
 #~ msgid "Cygnus"
 #~ msgstr "Labuť"
 
@@ -190,6 +1754,15 @@ msgstr ""
 
 #~ msgid "Delphinus"
 #~ msgstr "Delfín"
+
+#~ msgid "Developer: Andras Mohari"
+#~ msgstr "Vývojář: Andras Mohari"
+
+#~ msgid "Developer: Johannes Gajdosik"
+#~ msgstr "Vývojář: Johanes Gajdosik"
+
+#~ msgid "Developer: Rob Spearman"
+#~ msgstr "Vývojář: Rob Spearman"
 
 #~ msgid ""
 #~ "Dialogs & other controls:\n"
@@ -207,6 +1780,9 @@ msgstr ""
 #~ "CTRL + R : Záznam skriptu\n"
 #~ "CTRL + F : Vyhledávač objektů\n"
 #~ "\n"
+
+#~ msgid "Dipper"
+#~ msgstr "Naběračka"
 
 #~ msgid "Disk Viewport"
 #~ msgstr "Kruhové zorné pole"
@@ -270,6 +1846,18 @@ msgstr ""
 #~ "6 : Pozastavení skriptu K : Znovuspuštění skriptu\n"
 #~ "\n"
 
+#~ msgid "Earth God's Temple"
+#~ msgstr "Chrám boha země"
+
+#~ msgid "Eastern Door"
+#~ msgstr "Východní dveře"
+
+#~ msgid "Emptiness"
+#~ msgstr "Prázdnota"
+
+#~ msgid "Encampment"
+#~ msgstr "Ležení"
+
 #~ msgid "Enter observatory name"
 #~ msgstr "Zadejte název observatoře"
 
@@ -288,14 +1876,38 @@ msgstr ""
 #~ msgid "Error: Unable to open script file to record commands."
 #~ msgstr "Chyba: Nepodařilo se otevřít soubor pro záznam skriptu."
 
+#~ msgid "Establishment"
+#~ msgstr "Sídlo"
+
+#~ msgid "Extended Net"
+#~ msgstr "Roztažená síť"
+
+#~ msgid "Farmland"
+#~ msgstr "Pole"
+
 #~ msgid "Ferry Boat"
 #~ msgstr "Přívoz"
+
+#~ msgid "Five Chariots"
+#~ msgstr "Pět vozů"
+
+#~ msgid "Five Feudal Kings"
+#~ msgstr "Pět středověkých králů"
+
+#~ msgid "Flail"
+#~ msgstr "Řemdih"
 
 #~ msgid "Flip horizontally [CTRL + SHIFT + H]"
 #~ msgstr "Prohodit horizontálně [CTRL + SHIFT + H]"
 
 #~ msgid "Flip vertically [CTRL + SHIFT + V]"
 #~ msgstr "Prohodit vertikálně [CTRL + SHIFT + H]"
+
+#~ msgid "Flock"
+#~ msgstr "Hejno"
+
+#~ msgid "Flying Corridor"
+#~ msgstr "Letecký koridor"
 
 #~ msgid "For unlisted screen resolution, edit the file :"
 #~ msgstr "Pro další rozlišení upravte soubor :"
@@ -306,14 +1918,29 @@ msgstr ""
 #~ msgid "Four Channels"
 #~ msgstr "Čtyři kanály"
 
+#~ msgid "Frigate Bird"
+#~ msgstr "Fregatka"
+
 #~ msgid "GO"
 #~ msgstr "Hledat"
 
 #~ msgid "Gemini"
 #~ msgstr "Blíženci"
 
+#~ msgid "Ghosts"
+#~ msgstr "Duchové"
+
+#~ msgid "Giant"
+#~ msgstr "Obr"
+
 #~ msgid "Girl"
 #~ msgstr "Dívka"
+
+#~ msgid "Good Gourd"
+#~ msgstr "Zdravá tykev"
+
+#~ msgid "Great General"
+#~ msgstr "Velký generál"
 
 #~ msgid "Ground [G]"
 #~ msgstr "Horizont [G]"
@@ -330,6 +1957,9 @@ msgstr ""
 #~ msgid "Hercules"
 #~ msgstr "Herkules"
 
+#~ msgid "Hippopotamus"
+#~ msgstr "Hroch"
+
 #~ msgid "Hit CTRL-R again to stop.\n"
 #~ msgstr "Pro ukončení znovu stiskněte CTRL + R.\n"
 
@@ -342,6 +1972,9 @@ msgstr ""
 #~ msgid "Horologium"
 #~ msgstr "Hodiny"
 
+#~ msgid "Horus"
+#~ msgstr "Hór"
+
 #~ msgid "Hour"
 #~ msgstr "Hodiny"
 
@@ -350,6 +1983,12 @@ msgstr ""
 
 #~ msgid "Hydrus"
 #~ msgstr "Malý vodní had"
+
+#~ msgid "Imperial Guards"
+#~ msgstr "Císařské stráže"
+
+#~ msgid "Imperial Passageway"
+#~ msgstr "Císařská cesta"
 
 #~ msgid "Indus"
 #~ msgstr "Indián"
@@ -363,8 +2002,23 @@ msgstr ""
 #~ msgid "Invalid Script command"
 #~ msgstr "Neplatný příkaz skriptu"
 
+#~ msgid "Jade Well"
+#~ msgstr "Nefritová studna"
+
 #~ msgid "Jaw"
 #~ msgstr "Čelist"
+
+#~ msgid "Kenemet"
+#~ msgstr "Kenemet"
+
+#~ msgid "Khanuwy Fish"
+#~ msgstr "Ryba Khanuwy"
+
+#~ msgid "Kitchen"
+#~ msgstr "Kuchyně"
+
+#~ msgid "Kite of Kawelo"
+#~ msgstr "Kawelův drak"
 
 #~ msgid "Lacerta"
 #~ msgstr "Ještěrka"
@@ -417,6 +2071,15 @@ msgstr ""
 #~ msgid "Market"
 #~ msgstr "Tržiště"
 
+#~ msgid "Market Officer"
+#~ msgstr "Úředník"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Mauiho háček"
+
+#~ msgid "Mausoleum"
+#~ msgstr "Mauzoleum"
+
 #~ msgid "Meadows"
 #~ msgstr "Louky"
 
@@ -451,6 +2114,12 @@ msgstr ""
 #~ msgid "Month"
 #~ msgstr "Měsíc"
 
+#~ msgid "Mooring Post"
+#~ msgstr "Kotviště"
+
+#~ msgid "Mortar"
+#~ msgstr "Hmoždíř"
+
 #~ msgid ""
 #~ "Movement & selection:\n"
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -482,8 +2151,14 @@ msgstr ""
 #~ msgid "Names of the Constellations [V]"
 #~ msgstr "Jména souhvězdí [V]"
 
+#~ msgid "Navigator's Triangle"
+#~ msgstr "Navigační trojúhelník"
+
 #~ msgid "Nebulas Names. Up to mag :"
 #~ msgstr "Jména mhlovin do magnitudy :"
+
+#~ msgid "Neck"
+#~ msgstr "Krk"
 
 #~ msgid "Net"
 #~ msgstr "Síť"
@@ -493,6 +2168,15 @@ msgstr ""
 
 #~ msgid "No"
 #~ msgstr "Ne"
+
+#~ msgid "Norma"
+#~ msgstr "Pravítko"
+
+#~ msgid "North River"
+#~ msgstr "Severní řeka"
+
+#~ msgid "Northern Dipper"
+#~ msgstr "Severní naběračka"
 
 #~ msgid "OK"
 #~ msgstr "OK"
@@ -506,11 +2190,20 @@ msgstr ""
 #~ msgid "Ophiuchus"
 #~ msgstr "Hadonoš"
 
+#~ msgid "Orchard"
+#~ msgstr "Ovocný sad"
+
+#~ msgid "Outer Fence"
+#~ msgstr "Vnější oplocení"
+
 #~ msgid "Ox"
 #~ msgstr "Vůl"
 
 #~ msgid "Pair of Stars"
 #~ msgstr "Pár hvězd"
+
+#~ msgid "Palace Gate"
+#~ msgstr "Palácová brána"
 
 #~ msgid "Pavo"
 #~ msgstr "Páv"
@@ -520,6 +2213,9 @@ msgstr ""
 
 #~ msgid "Perseus"
 #~ msgstr "Perseus"
+
+#~ msgid "Pestle"
+#~ msgstr "Palička"
 
 #~ msgid "Phoenix"
 #~ msgstr "Fénix"
@@ -536,8 +2232,14 @@ msgstr ""
 #~ msgid "Point"
 #~ msgstr "Jako body"
 
+#~ msgid "Prow"
+#~ msgstr "Příď"
+
 #~ msgid "Puppis"
 #~ msgstr "Lodní záď"
+
+#~ msgid "Purple Palace"
+#~ msgstr "Purpurový palác"
 
 #~ msgid "Pyxis"
 #~ msgstr "Kompas"
@@ -547,6 +2249,9 @@ msgstr ""
 
 #~ msgid "Quit [CTRL + Q]"
 #~ msgstr "Konec [CTRL + Q]"
+
+#~ msgid "Ramparts"
+#~ msgstr "Opevnění"
 
 #~ msgid "Real Time Speed [K]"
 #~ msgstr "Normální běh času [K]"
@@ -566,8 +2271,29 @@ msgstr ""
 #~ msgid "Return to Current Time"
 #~ msgstr "Zpět na aktuální čas"
 
+#~ msgid "Return to Current Time [8]"
+#~ msgstr "Návrat k aktuálnímu času [8]"
+
+#~ msgid "River Turtle"
+#~ msgstr "Říční želva"
+
+#~ msgid "Rolled Tongue"
+#~ msgstr "Svinutý jazyk"
+
+#~ msgid "Rooftop"
+#~ msgstr "Střecha"
+
+#~ msgid "Room"
+#~ msgstr "Pokoj"
+
 #~ msgid "Root"
 #~ msgstr "Kořen"
+
+#~ msgid "Rotten Gourd"
+#~ msgstr "Shnilá tykev"
+
+#~ msgid "Runners"
+#~ msgstr "Běžci"
 
 #~ msgid "Sagitta"
 #~ msgstr "Šíp"
@@ -575,11 +2301,20 @@ msgstr ""
 #~ msgid "Sagittarius"
 #~ msgstr "Střelec"
 
+#~ msgid "Sah"
+#~ msgstr "Sah"
+
+#~ msgid "Salamander"
+#~ msgstr "Mlok"
+
 #~ msgid "Save as default"
 #~ msgstr "Uložit jako výchozí"
 
 #~ msgid "Scorpius"
 #~ msgstr "Štír"
+
+#~ msgid "Screen"
+#~ msgstr "Zástěna"
 
 #~ msgid "Screen Resolution :"
 #~ msgstr "Rozlišení obrazovky :"
@@ -599,20 +2334,47 @@ msgstr ""
 #~ msgid "Search for object [CTRL + F]"
 #~ msgstr "Hledání objektů [CTRL + F]"
 
+#~ msgid "Search:"
+#~ msgstr "Hledat:"
+
 #~ msgid "Seconds"
 #~ msgstr "Sekundy"
 
 #~ msgid "Selected Constellation Only"
 #~ msgstr "Pouze vybraná souhvězdí"
 
+#~ msgid "Selkis"
+#~ msgstr "Selkis (škorpión)"
+
 #~ msgid "Serpens"
 #~ msgstr "Had"
+
+#~ msgid "Seven Excellencies"
+#~ msgstr "Sedm Excelencí"
 
 #~ msgid "Sextans"
 #~ msgstr "Sextant"
 
 #~ msgid "Sheep"
 #~ msgstr "Ovce"
+
+#~ msgid "Sheepfold"
+#~ msgstr "Ovčinec"
+
+#~ msgid "Soldiers Market"
+#~ msgstr "Vojenské tržiště"
+
+#~ msgid "South River"
+#~ msgstr "Jižní řeka"
+
+#~ msgid "Spear"
+#~ msgstr "Kopí"
+
+#~ msgid "Spring"
+#~ msgstr "Pružina"
+
+#~ msgid "Square Granary"
+#~ msgstr "Čtverhranná sýpka"
 
 #~ msgid "Star Magnitude Multiplier: "
 #~ msgstr "Násobič hvězdné velikosti: "
@@ -623,6 +2385,15 @@ msgstr ""
 #~ msgid "Star Twinkle. Amount :"
 #~ msgstr "Mihotání hvězd. Faktor:"
 
+#~ msgid "Stars of Water"
+#~ msgstr "Vodní hvězdy"
+
+#~ msgid "Stomach"
+#~ msgstr "Žaludek"
+
+#~ msgid "Supreme Palace"
+#~ msgstr "Nejvyšší palác"
+
 #~ msgid "Tail"
 #~ msgstr "Ocas"
 
@@ -632,11 +2403,20 @@ msgstr ""
 #~ msgid "Telescopium"
 #~ msgstr "Teleskop"
 
+#~ msgid "The Fishermen"
+#~ msgstr "Rybáři"
+
+#~ msgid "The Seven"
+#~ msgstr "Sedmička"
+
 #~ msgid "Three Steps"
 #~ msgstr "Tři schody"
 
 #~ msgid "Thunder and Lightning"
 #~ msgstr "Hrom a blesk"
+
+#~ msgid "Thunderbolt"
+#~ msgstr "Blesk"
 
 #~ msgid ""
 #~ "Time & Date:\n"
@@ -661,6 +2441,9 @@ msgstr ""
 #~ msgid "Time speed : "
 #~ msgstr "Rychlost běhu času: "
 
+#~ msgid "Toilet"
+#~ msgstr "Záchod"
+
 #~ msgid "Triangle"
 #~ msgstr "Trojúhelník"
 
@@ -669,6 +2452,9 @@ msgstr ""
 
 #~ msgid "Triangulum Australe"
 #~ msgstr "Jižní trojúhelník"
+
+#~ msgid "Tripod"
+#~ msgstr "Trojnožka"
 
 #~ msgid "Try `%s --help' for more information.\n"
 #~ msgstr "Zkuste přepínač `%s --help' pro získání více informací.\n"
@@ -714,8 +2500,14 @@ msgstr ""
 #~ msgid "Vela"
 #~ msgstr "Plachty"
 
+#~ msgid "Viewport Distorter"
+#~ msgstr "Deformace obrazu (pro projekci na kopuli)"
+
 #~ msgid "Virgo"
 #~ msgstr "Panna"
+
+#~ msgid "Voice of Joy"
+#~ msgstr "Radostný hlas"
 
 #~ msgid "Volans"
 #~ msgstr "Létající ryba"
@@ -725,264 +2517,6 @@ msgstr ""
 
 #~ msgid "Wall"
 #~ msgstr "Zeď"
-
-#~ msgid "Year"
-#~ msgstr "Rok"
-
-#~ msgid "Yes"
-#~ msgstr "Ano"
-
-#~ msgid "change to apply."
-#~ msgstr "po restartu programu."
-
-#~ msgid "Arsenal"
-#~ msgstr "Zbrojnice"
-
-#~ msgid "Bailer"
-#~ msgstr "Výlevka"
-
-#~ msgid "Banner of Three Stars"
-#~ msgstr "Prapor se třemi hvězdami"
-
-#~ msgid "Bond"
-#~ msgstr "Okovy"
-
-#~ msgid "Bull's Foreleg"
-#~ msgstr "Přední noha býka"
-
-#~ msgid "Cared for by Moon"
-#~ msgstr "Obstaráno Měsícem"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Lůžko kočky"
-
-#~ msgid "Chariot"
-#~ msgstr "Válečný vůz"
-
-#~ msgid "Chariot Yard"
-#~ msgstr "Vozový dvůr"
-
-#~ msgid "Chematy"
-#~ msgstr "Chematy"
-
-#~ msgid "Circular Granary"
-#~ msgstr "Kulatá sýpka"
-
-#~ msgid "Coiled Thong"
-#~ msgstr "Svinutý řemen"
-
-#~ msgid "Curved Array"
-#~ msgstr "Zakřivený šik"
-
-#~ msgid "Dipper"
-#~ msgstr "Naběračka"
-
-#~ msgid "Earth God's Temple"
-#~ msgstr "Chrám boha země"
-
-#~ msgid "Eastern Door"
-#~ msgstr "Východní dveře"
-
-#~ msgid "Emptiness"
-#~ msgstr "Prázdnota"
-
-#~ msgid "Encampment"
-#~ msgstr "Ležení"
-
-#~ msgid "Establishment"
-#~ msgstr "Sídlo"
-
-#~ msgid "Extended Net"
-#~ msgstr "Roztažená síť"
-
-#~ msgid "Farmland"
-#~ msgstr "Pole"
-
-#~ msgid "Five Chariots"
-#~ msgstr "Pět vozů"
-
-#~ msgid "Five Feudal Kings"
-#~ msgstr "Pět středověkých králů"
-
-#~ msgid "Flail"
-#~ msgstr "Řemdih"
-
-#~ msgid "Flock"
-#~ msgstr "Hejno"
-
-#~ msgid "Flying Corridor"
-#~ msgstr "Letecký koridor"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "Fregatka"
-
-#~ msgid "Ghosts"
-#~ msgstr "Duchové"
-
-#~ msgid "Giant"
-#~ msgstr "Obr"
-
-#~ msgid "Good Gourd"
-#~ msgstr "Zdravá tykev"
-
-#~ msgid "Great General"
-#~ msgstr "Velký generál"
-
-#~ msgid "Hippopotamus"
-#~ msgstr "Hroch"
-
-#~ msgid "Horus"
-#~ msgstr "Hór"
-
-#~ msgid "Imperial Guards"
-#~ msgstr "Císařské stráže"
-
-#~ msgid "Imperial Passageway"
-#~ msgstr "Císařská cesta"
-
-#~ msgid "Jade Well"
-#~ msgstr "Nefritová studna"
-
-#~ msgid "Kenemet"
-#~ msgstr "Kenemet"
-
-#~ msgid "Khanuwy Fish"
-#~ msgstr "Ryba Khanuwy"
-
-#~ msgid "Kitchen"
-#~ msgstr "Kuchyně"
-
-#~ msgid "Kite of Kawelo"
-#~ msgstr "Kawelův drak"
-
-#~ msgid "Market Officer"
-#~ msgstr "Úředník"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Mauiho háček"
-
-#~ msgid "Mausoleum"
-#~ msgstr "Mauzoleum"
-
-#~ msgid "Mooring Post"
-#~ msgstr "Kotviště"
-
-#~ msgid "Mortar"
-#~ msgstr "Hmoždíř"
-
-#~ msgid "Navigator's Triangle"
-#~ msgstr "Navigační trojúhelník"
-
-#~ msgid "Neck"
-#~ msgstr "Krk"
-
-#~ msgid "Norma"
-#~ msgstr "Pravítko"
-
-#~ msgid "North River"
-#~ msgstr "Severní řeka"
-
-#~ msgid "Northern Dipper"
-#~ msgstr "Severní naběračka"
-
-#~ msgid "Orchard"
-#~ msgstr "Ovocný sad"
-
-#~ msgid "Outer Fence"
-#~ msgstr "Vnější oplocení"
-
-#~ msgid "Palace Gate"
-#~ msgstr "Palácová brána"
-
-#~ msgid "Pestle"
-#~ msgstr "Palička"
-
-#~ msgid "Prow"
-#~ msgstr "Příď"
-
-#~ msgid "Purple Palace"
-#~ msgstr "Purpurový palác"
-
-#~ msgid "Ramparts"
-#~ msgstr "Opevnění"
-
-#~ msgid "Return to Current Time [8]"
-#~ msgstr "Návrat k aktuálnímu času [8]"
-
-#~ msgid "River Turtle"
-#~ msgstr "Říční želva"
-
-#~ msgid "Rolled Tongue"
-#~ msgstr "Svinutý jazyk"
-
-#~ msgid "Rooftop"
-#~ msgstr "Střecha"
-
-#~ msgid "Room"
-#~ msgstr "Pokoj"
-
-#~ msgid "Rotten Gourd"
-#~ msgstr "Shnilá tykev"
-
-#~ msgid "Sah"
-#~ msgstr "Sah"
-
-#~ msgid "Salamander"
-#~ msgstr "Mlok"
-
-#~ msgid "Screen"
-#~ msgstr "Zástěna"
-
-#~ msgid "Selkis"
-#~ msgstr "Selkis (škorpión)"
-
-#~ msgid "Seven Excellencies"
-#~ msgstr "Sedm Excelencí"
-
-#~ msgid "Sheepfold"
-#~ msgstr "Ovčinec"
-
-#~ msgid "Soldiers Market"
-#~ msgstr "Vojenské tržiště"
-
-#~ msgid "South River"
-#~ msgstr "Jižní řeka"
-
-#~ msgid "Spear"
-#~ msgstr "Kopí"
-
-#~ msgid "Spring"
-#~ msgstr "Pružina"
-
-#~ msgid "Square Granary"
-#~ msgstr "Čtverhranná sýpka"
-
-#~ msgid "Stars of Water"
-#~ msgstr "Vodní hvězdy"
-
-#~ msgid "Stomach"
-#~ msgstr "Žaludek"
-
-#~ msgid "Supreme Palace"
-#~ msgstr "Nejvyšší palác"
-
-#~ msgid "The Seven"
-#~ msgstr "Sedmička"
-
-#~ msgid "Thunderbolt"
-#~ msgstr "Blesk"
-
-#~ msgid "Toilet"
-#~ msgstr "Záchod"
-
-#~ msgid "Tripod"
-#~ msgstr "Trojnožka"
-
-#~ msgid "Viewport Distorter"
-#~ msgstr "Deformace obrazu (pro projekci na kopuli)"
-
-#~ msgid "Voice of Joy"
-#~ msgstr "Radostný hlas"
 
 #~ msgid "Waty Bekety"
 #~ msgstr "Waty Bekety"
@@ -1005,1552 +2539,23 @@ msgstr ""
 #~ msgid "Winnowing Basket"
 #~ msgstr "Prosívací košík"
 
+#~ msgid "Wolf's Mouth"
+#~ msgstr "Vlčí tlama"
+
 #~ msgid "Woman's Bed"
 #~ msgstr "Postel ženy"
 
 #~ msgid "Xuanyuan"
 #~ msgstr "Xuanyuan"
 
+#~ msgid "Year"
+#~ msgstr "Rok"
+
+#~ msgid "Yes"
+#~ msgstr "Ano"
+
 #~ msgid "Zaofu"
 #~ msgstr "Zaofu"
 
-#~ msgid "Aurvandil's Toe"
-#~ msgstr "Aurvandilův palec"
-
-#~ msgid "Runners"
-#~ msgstr "Běžci"
-
-#~ msgid "The Fishermen"
-#~ msgstr "Rybáři"
-
-#~ msgid "Wolf's Mouth"
-#~ msgstr "Vlčí tlama"
-
-#: src/modules/ConstellationMgr.cpp:376
-#, qt-format
-msgid "Loading Constellation Art: %1/%2"
-msgstr "Načítám kresby souhvězdí: %1/%2"
-
-#: src/modules/StarMgr.cpp:257
-#, qt-format
-msgid "Loading catalog %1"
-msgstr "Načítám katalog %1"
-
-#: src/modules/LandscapeMgr.cpp:433
-msgid "Author: "
-msgstr "Autor: "
-
-#: src/modules/LandscapeMgr.cpp:436
-msgid "Location: "
-msgstr "Místo: "
-
-#: src/modules/LandscapeMgr.cpp:441
-#, qt-format
-msgid ", %1 m"
-msgstr ", %1 m"
-
-#: src/modules/LandscapeMgr.cpp:444
-msgid "Planet: "
-msgstr "Planeta: "
-
-#: src/modules/Nebula.cpp:93
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Typ: <b>%1</b>"
-
-#: src/modules/Nebula.cpp:96 src/modules/Planet.cpp:130
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "Magnituda: <b>%1</b>"
-
-#: src/modules/Nebula.cpp:101
-#, qt-format
-msgid "Size: %1"
-msgstr "Velikost: %1"
-
-#: src/modules/Nebula.cpp:237
-msgid "Galaxy"
-msgstr "Galaxie"
-
-#: src/modules/Nebula.cpp:240
-msgid "Open cluster"
-msgstr "Otevřená hvězdokupa"
-
-#: src/modules/Nebula.cpp:243
-msgid "Globular cluster"
-msgstr "Kulová hvězdokupa"
-
-#: src/modules/Nebula.cpp:246
-msgid "Nebula"
-msgstr "Mlhovina"
-
-#: src/modules/Nebula.cpp:249
-msgid "Planetary nebula"
-msgstr "Planetární mlhovina"
-
-#: src/modules/Nebula.cpp:252
-msgid "Cluster associated with nebulosity"
-msgstr "Hvězdokupa spojovaná s mlhovinou"
-
-#: src/modules/Nebula.cpp:255
-msgid "Unknown"
-msgstr "Neznámý"
-
-#: src/modules/Nebula.cpp:258
-msgid "Undocumented type"
-msgstr "Nedokumentovaný typ"
-
-#: src/modules/NebulaMgr.cpp:372
-#, qt-format
-msgid "Loading NGC catalog: %1/%2"
-msgstr "Načítám NGC katalog: %1/%2"
-
-#: src/modules/Planet.cpp:133 src/modules/StarWrapper.cpp:102
-#, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr "Absolutní magnituda: %1"
-
-#: src/modules/Planet.cpp:140
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "Vzdálenost: %1AU"
-
-#: src/modules/Planet.cpp:144
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "Zdánlivý průměr: %1"
-
-#: src/modules/StarWrapper.cpp:41 src/modules/StarWrapper.cpp:98
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Magnituda: <b>%1</b> (B-V: %2)"
-
-#: src/modules/StarWrapper.cpp:108
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "Spektrální třída: %1"
-
-#: src/modules/StarWrapper.cpp:112
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "Vzdálenost: %1 ly"
-
-#: src/modules/StarWrapper.cpp:115
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "Paralaxa: %1\""
-
-#: src/modules/TextUI.cpp:63
-msgid "Set Location "
-msgstr "Nastavení polohy "
-
-#: src/modules/TextUI.cpp:64
-msgid "Set Time "
-msgstr "Nastavení času "
-
-#: src/modules/TextUI.cpp:65
-msgid "General "
-msgstr "Obecné "
-
-#: src/modules/TextUI.cpp:66
-msgid "Stars "
-msgstr "Hvězdy "
-
-#: src/modules/TextUI.cpp:67
-msgid "Colors "
-msgstr "Barvy "
-
-#: src/modules/TextUI.cpp:68
-msgid "Effects "
-msgstr "Efekty "
-
-#: src/modules/TextUI.cpp:69
-msgid "Scripts "
-msgstr "Skripty "
-
-#: src/modules/TextUI.cpp:70
-msgid "Administration "
-msgstr "Administrace "
-
-#: src/modules/TextUI.cpp:73
-msgid "Latitude: "
-msgstr "Šířka: "
-
-#: src/modules/TextUI.cpp:74
-msgid "Longitude: "
-msgstr "Délka: "
-
-#: src/modules/TextUI.cpp:75
-msgid "Altitude (m): "
-msgstr "Nadm. výška (m): "
-
-#: src/modules/TextUI.cpp:76
-msgid "Solar System Body: "
-msgstr "Těleso sluneční soustavy: "
-
-#: src/modules/TextUI.cpp:79
-msgid "Sky Time: "
-msgstr "Hvězdný čas: "
-
-#: src/modules/TextUI.cpp:80
-msgid "Set Time Zone: "
-msgstr "Nastavení časového pásma: "
-
-#: src/modules/TextUI.cpp:81
-msgid "Day keys: "
-msgstr "Typ dnů "
-
-#: src/modules/TextUI.cpp:82
-msgid "Calendar"
-msgstr "kalendářní"
-
-#: src/modules/TextUI.cpp:83
-msgid "Sidereal"
-msgstr "siderické"
-
-#: src/modules/TextUI.cpp:84
-msgid "Preset Sky Time: "
-msgstr "Přednastavený hvězdný čas: "
-
-#: src/modules/TextUI.cpp:85
-msgid "Sky Time At Start-up: "
-msgstr "Výchozí hvězdný čas: "
-
-#: src/modules/TextUI.cpp:86
-msgid "Actual Time"
-msgstr "Aktuální čas"
-
-#: src/modules/TextUI.cpp:87
-msgid "Preset Time"
-msgstr "Nastavit čas"
-
-#: src/modules/TextUI.cpp:88
-msgid "Time Display Format: "
-msgstr "Formát času: "
-
-#: src/modules/TextUI.cpp:89
-msgid "Date Display Format: "
-msgstr "Formát datumu: "
-
-#: src/modules/TextUI.cpp:92
-msgid "Sky Culture: "
-msgstr "Kultura: "
-
-#: src/modules/TextUI.cpp:93
-msgid "Sky Language: "
-msgstr "Jazyk: "
-
-#: src/modules/TextUI.cpp:96
-msgid "Show: "
-msgstr "Zobrazovat: "
-
-#: src/modules/TextUI.cpp:97
-msgid "Star Value Multiplier: "
-msgstr "Násobič jasu hvězd "
-
-#: src/modules/TextUI.cpp:98
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Násobič magnitudy: "
-
-#: src/modules/TextUI.cpp:99
-msgid "Maximum Magnitude to Label: "
-msgstr "Jména do magnitudy: "
-
-#: src/modules/TextUI.cpp:100
-msgid "Twinkling: "
-msgstr "Mihotání: "
-
-#: src/modules/TextUI.cpp:101
-msgid "Limiting Magnitude: "
-msgstr "Mezní hvězdná velikost (limitní magnituda) "
-
-#: src/modules/TextUI.cpp:104
-msgid "Constellation Lines"
-msgstr "Ohraničující čáry souhvězdí"
-
-#: src/modules/TextUI.cpp:105
-msgid "Constellation Names"
-msgstr "Názvy souhvězdí"
-
-#: src/modules/TextUI.cpp:106
-msgid "Constellation Art Intensity"
-msgstr "Intenzita obrázků souhvězdí"
-
-#: src/modules/TextUI.cpp:107
-msgid "Constellation Boundaries"
-msgstr "Hranice souhvězdí"
-
-#: src/modules/TextUI.cpp:108
-msgid "Cardinal Points"
-msgstr "Světové strany"
-
-#: src/modules/TextUI.cpp:109
-msgid "Planet Names"
-msgstr "Názvy planet"
-
-#: src/modules/TextUI.cpp:110
-msgid "Planet Orbits"
-msgstr "Oběžné dráhy planet"
-
-#: src/modules/TextUI.cpp:111
-msgid "Planet Trails"
-msgstr "Dráhy planet"
-
-#: src/modules/TextUI.cpp:112
-msgid "Meridian Line"
-msgstr "Poledník"
-
-#: src/modules/TextUI.cpp:113
-msgid "Azimuthal Grid"
-msgstr "Azimutální mřížka"
-
-#: src/modules/TextUI.cpp:114
-msgid "Equatorial Grid"
-msgstr "Ekvatoriální mřížka"
-
-#: src/modules/TextUI.cpp:115
-msgid "Equator Line"
-msgstr "Rovník"
-
-#: src/modules/TextUI.cpp:116
-msgid "Ecliptic Line"
-msgstr "Ekliptika"
-
-#: src/modules/TextUI.cpp:117
-msgid "Nebula Names"
-msgstr "Názvy mlhovin"
-
-#: src/modules/TextUI.cpp:118
-msgid "Nebula Circles"
-msgstr "Kroužky mlhovin"
-
-#: src/modules/TextUI.cpp:121
-msgid "Light Pollution Luminance: "
-msgstr "Jas světelného znečištění "
-
-#: src/modules/TextUI.cpp:122
-msgid "Landscape: "
-msgstr "Krajina: "
-
-#: src/modules/TextUI.cpp:123
-msgid "Manual zoom: "
-msgstr "Manuální zoom: "
-
-#: src/modules/TextUI.cpp:124
-msgid "Object Sizing Rule: "
-msgstr "Velikost objektů: "
-
-#: src/modules/TextUI.cpp:125
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Násobič vykreslování magnitud "
-
-#: src/modules/TextUI.cpp:126
-msgid "Milky Way intensity: "
-msgstr "Intenzita Mléčné dráhy: "
-
-#: src/modules/TextUI.cpp:127
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Jména mlhovin do magnitudy: "
-
-#: src/modules/TextUI.cpp:128
-msgid "Zoom Duration: "
-msgstr "Rychlost zoomu: "
-
-#: src/modules/TextUI.cpp:129
-msgid "Cursor Timeout: "
-msgstr "Skrytí kurzoru: "
-
-#: src/modules/TextUI.cpp:130
-msgid "Correct for light travel time: "
-msgstr "Oprava na konečnou rychlost světla "
-
-#: src/modules/TextUI.cpp:133
-msgid "Local Script: "
-msgstr "Lokální skript: "
-
-#: src/modules/TextUI.cpp:134
-msgid "CD/DVD Script: "
-msgstr "CD/DVD skript: "
-
-#: src/modules/TextUI.cpp:135
-msgid "USB Script: "
-msgstr "USB skript: "
-
-#: src/modules/TextUI.cpp:136
-msgid "Arrow down to load list."
-msgstr "Stikněte šipku dolů pro načtení seznamu."
-
-#: src/modules/TextUI.cpp:137
-msgid "Select and exit to run."
-msgstr "Vyber a opusť pro spuštění."
-
-#: src/modules/TextUI.cpp:140
-msgid "Load Default Configuration: "
-msgstr "Nahrát výchozí nastavení: "
-
-#: src/modules/TextUI.cpp:141
-msgid "Save Current Configuration as Default: "
-msgstr "Uložit aktuální nastavení jako výchozí: "
-
-#: src/modules/TextUI.cpp:142
-msgid "Shut Down: "
-msgstr "Vypnout: "
-
-#: src/modules/TextUI.cpp:143
-msgid "Update me via Internet: "
-msgstr "Aktualizovat přes Internet: "
-
-#: src/modules/TextUI.cpp:144
-msgid "Set UI Locale: "
-msgstr "Nastavit jazyk uživatelského rozhraní: "
-
-#: src/core/MappingClasses.cpp:11
-msgid "Perspective"
-msgstr "Perspektiva"
-
-#: src/core/MappingClasses.cpp:16
-msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
-"name for this projection method is <i>gnomonic projection</i>."
-msgstr ""
-"Perspektivní projekce zobrazuje horizont jako přímku. Matematický název této "
-"projekce je <i>gnomonická projekce</i>."
-
-#: src/core/MappingClasses.cpp:77
-msgid "Equal Area"
-msgstr "Plochojevná projekce"
-
-#: src/core/MappingClasses.cpp:82
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"Plný název této zobrazovací metody je, <i>Lambertova azimutální plochojevná "
-"projekce</i>. Zachovává obsah, nikoli však úhly."
-
-#: src/core/MappingClasses.cpp:133
-msgid "Stereographic"
-msgstr "Stereografická projekce"
-
-#: src/core/MappingClasses.cpp:138
-msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
-msgstr ""
-"Stereografická projekce byla známá už v antice a byla původně známá jako "
-"planisférická projekce. Zachovává úhly, pod nimiž se křivky protínají, ale "
-"nezachovává obsah."
-
-#: src/core/MappingClasses.cpp:178
-msgid "Fish-eye"
-msgstr "Rybí oko"
-
-#: src/core/MappingClasses.cpp:183
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-"V projekci typu rybí oko, neboli <i>azimutální ekvidistantní projekci</i>, "
-"se rovné čáry ve velké vzdálenosti od středu pole ohýbají do křivek (podobně "
-"jako při použití objektivu s velmi krátkou ohniskovou vzdáleností)."
-
-#: src/core/MappingClasses.cpp:223
-msgid "Cylinder"
-msgstr "Válec"
-
-#: src/core/MappingClasses.cpp:228
-msgid ""
-"The full name of this projection mode is <i>cylindrical equidistant "
-"projection</i>. With this projection all parallels are equally spaced."
-msgstr ""
-"Úplný název této metody je <i>válcová délkojevná projekce</i>. Při ní jsou "
-"všechny rovnoběžky stejně vzdálené."
-
-#: src/core/MappingClasses.cpp:278
-msgid "Mercator"
-msgstr "Mercatorova projekce"
-
-#: src/core/MappingClasses.cpp:283
-msgid ""
-"The mercator projection is one of the most used world map projection. It "
-"preserves direction and shapes but distorts size, in an increasing degree "
-"away from the equator."
-msgstr ""
-"Mercatorova projekce je jedna z nepoužívanějších projekcí pro mapy světa. "
-"Zachovává směr a tvary, ale zkresluje velikost, tím více, čím dále od "
-"rovníku."
-
-#: src/core/MappingClasses.cpp:336
-msgid "Orthographic"
-msgstr "Ortografická projekce"
-
-#: src/core/MappingClasses.cpp:341
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"Ortografická projekce je podobná perspektivní projekci s tím rozdílem, že "
-"bod perspektivy je posunut do nekonečna."
-
-#: src/core/Mapping.cpp:28
-msgid "Maximum FOV: "
-msgstr "Maximální zorné pole: "
-
-#: src/core/StelObject.cpp:74
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "Rektascenze/Deklinace (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:81
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "Rektascenze/deklinace (k ekvinokciu): %1/%2"
-
-#: src/core/StelObject.cpp:89
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "Hodinový úhel/Deklinace: %1/%2"
-
-#: src/core/StelObject.cpp:100
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "Azimut/Výška: %1/%2"
-
-#: src/gui/ConfigurationDialog.cpp:375
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "Šíře zorného pole při spuštění: %1/%2"
-
-#: src/gui/ConfigurationDialog.cpp:383
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Směr pohledu při spuštění (azimut/výška): %1/%2"
-
-#: src/gui/HelpDialog.cpp:51 src/gui/StelGuiItems.cpp:208
-#: src/gui/StelGuiItems.cpp:531
-msgid "Space"
-msgstr "Mezerník"
-
-#: src/gui/HelpDialog.cpp:52
-msgid "Arrow keys & left mouse drag"
-msgstr "Kurzorové klávesy & tažení levým tlačítkem myši"
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Page Up/Down"
-msgstr "Page Up/Down"
-
-#: src/gui/HelpDialog.cpp:54
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Nahoru/Dolů"
-
-#: src/gui/HelpDialog.cpp:55
-msgid "Left click"
-msgstr "Levé tlačítko myši"
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Right click"
-msgstr "Pravé tlačítko myši"
-
-#: src/gui/HelpDialog.cpp:57
-msgid "CTRL + Left click"
-msgstr "CTRL + Levé tlačítko myši"
-
-#: src/gui/HelpDialog.cpp:60 src/gui/StelGui.cpp:196
-msgid "Movement and Selection"
-msgstr "Pohyb a Výběr"
-
-#: src/gui/HelpDialog.cpp:61
-msgid "Pan view around the sky"
-msgstr "Pohyb zorného pole po obloze"
-
-#: src/gui/HelpDialog.cpp:62 src/gui/HelpDialog.cpp:63
-msgid "Zoom in/out"
-msgstr "Přiblížit/Oddálit"
-
-#: src/gui/HelpDialog.cpp:64
-msgid "Select object"
-msgstr "Vybrat objekt"
-
-#: src/gui/HelpDialog.cpp:65 src/gui/HelpDialog.cpp:67
-msgid "Clear selection"
-msgstr "Zrušit výběr"
-
-#: src/gui/HelpDialog.cpp:138
-msgid "Stellarium Help"
-msgstr "Nápověda Stellaria"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Keys"
-msgstr "Klávesy"
-
-#: src/gui/HelpDialog.cpp:147
-msgid "Further Reading"
-msgstr "Podrobnější čtení"
-
-#: src/gui/HelpDialog.cpp:148
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr ""
-"Následující odkazy jsou externí, a budou otevřeny ve vašem webovém "
-"prohlížeči\n"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "The Stellarium User Guide"
-msgstr "Příručka uživatele ke Stellariu"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:153
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Často Kladené Otázky} o Stellariu. A odpovědi také."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:158
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr ""
-"{Stellarium Wiki} - Obecné informace.  Také zde můžete nalézt uživatelské "
-"skripty a krajiny."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:163
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-"{Support ticket system} - pokud potřebujete pomoci s používáním Stellaria, "
-"zašlete vaši žádost o pomoc zde a my se Vám pokusíme pomoci."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:168
-msgid ""
-"{Bug reporting system} - if something doesn't work properly and is not "
-"listed in the FAQ list, you can open bug reports here."
-msgstr ""
-"{Systém Ohlašování Chyb} - pokud něco správně nefunguje a není to v Často "
-"Kladených Otázkách, tak zde můžete ohlásit chybu."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:173
-msgid ""
-"{Feature request system} - if you have an idea for a new feature, send it to "
-"us. We can't promise to implement every idea, but we appreciate the feedback "
-"and review the list when we are planning future features."
-msgstr ""
-"{Feature request system} - pokud máte nějaký návrh na novou funkci ve "
-"Stellariu, pošlete nám ho. Nemůžeme slíbit, že zapracujeme každý nápad do "
-"programu, ale oceňujeme Vaší zpětnou vazbu a bereme v úvahu Vaše nápady, "
-"když plánujeme nové funkce."
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Fóra} - diskutuj o Stellariu s dalšími uživateli."
-
-#: src/gui/HelpDialog.cpp:214 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/StelGui.cpp:203
-msgid "Miscellaneous"
-msgstr "Různé"
-
-#: src/gui/HelpDialog.cpp:272
-msgid "Developers"
-msgstr "Vývojáři"
-
-#: src/gui/HelpDialog.cpp:273
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "Koordinátor projektu a šéf vývoje: %1"
-
-#: src/gui/HelpDialog.cpp:274
-msgid "Developer: Rob Spearman"
-msgstr "Vývojář: Rob Spearman"
-
-#: src/gui/HelpDialog.cpp:275
-msgid "Graphic/other designer: Johan Meuris"
-msgstr "Grafik, ostatní design: Johan Meuris"
-
-#: src/gui/HelpDialog.cpp:276
-msgid "Developer: Johannes Gajdosik"
-msgstr "Vývojář: Johanes Gajdosik"
-
-#: src/gui/HelpDialog.cpp:277
-msgid "Doc author/developer: Matthew Gates"
-msgstr "Autor doc a vývojář: Matthew Gates"
-
-#: src/gui/HelpDialog.cpp:278
-msgid "OSX Developer: Nigel Kerr"
-msgstr "Vývojář pro OSX: Nigel Kerr"
-
-#: src/gui/HelpDialog.cpp:279
-msgid "Developer: Andras Mohari"
-msgstr "Vývojář: Andras Mohari"
-
-#: src/gui/StelGui.cpp:144
-msgid "Display Options"
-msgstr "Možnosti zobrazení"
-
-#: src/gui/StelGui.cpp:145
-msgid "Constellation lines"
-msgstr "Tvary souhvězdí"
-
-#: src/gui/StelGui.cpp:146
-msgid "Constellation art"
-msgstr "Kresby souhvězdí"
-
-#: src/gui/StelGui.cpp:147
-msgid "Constellation labels"
-msgstr "Popisy souhvězdí"
-
-#: src/gui/StelGui.cpp:148
-msgid "Constellation boundaries"
-msgstr "Hranice souhvězdí"
-
-#: src/gui/StelGui.cpp:150 src/ui_viewDialog.h:1002
-msgid "Azimutal grid"
-msgstr "Azimutální mřížka"
-
-#: src/gui/StelGui.cpp:151 src/ui_viewDialog.h:1000
-msgid "Equatorial grid"
-msgstr "Ekvatoriální mřížka"
-
-#: src/gui/StelGui.cpp:152 src/ui_viewDialog.h:1001
-msgid "Equatorial J2000 grid"
-msgstr "Ekvatoriální mřížka J2000"
-
-#: src/gui/StelGui.cpp:153 src/ui_viewDialog.h:1005
-msgid "Ecliptic line"
-msgstr "Dráha Slunce (ekliptika)"
-
-#: src/gui/StelGui.cpp:154 src/ui_viewDialog.h:1003
-msgid "Equator line"
-msgstr "Rovník"
-
-#: src/gui/StelGui.cpp:155 src/ui_viewDialog.h:1004
-msgid "Meridian line"
-msgstr "Poledník"
-
-#: src/gui/StelGui.cpp:156 src/ui_viewDialog.h:1006
-msgid "Cardinal points"
-msgstr "Světové strany"
-
-#: src/gui/StelGui.cpp:158
-msgid "Ground"
-msgstr "Horizont"
-
-#: src/gui/StelGui.cpp:159 src/ui_viewDialog.h:983
-msgid "Atmosphere"
-msgstr "Atmosféra"
-
-#: src/gui/StelGui.cpp:160
-msgid "Fog"
-msgstr "Mlha"
-
-#: src/gui/StelGui.cpp:162 src/ui_viewDialog.h:988
-msgid "Nebulas"
-msgstr "Mlhoviny [N]"
-
-#: src/gui/StelGui.cpp:164 src/ui_viewDialog.h:973 src/ui_viewDialog.h:987
-msgid "Stars"
-msgstr "Hvězdy"
-
-#: src/gui/StelGui.cpp:165
-msgid "Planets hints"
-msgstr "Nápověda k planetám"
-
-#: src/gui/StelGui.cpp:167
-msgid "Night mode"
-msgstr "Noční režim"
-
-#: src/gui/StelGui.cpp:168
-msgid "Full-screen mode"
-msgstr "Režim celá obrazovka"
-
-#: src/gui/StelGui.cpp:169
-msgid "Flip scene horizontally"
-msgstr "Převrátit obraz vodorovně"
-
-#: src/gui/StelGui.cpp:170
-msgid "Flip scene vertically"
-msgstr "Převrátit obraz svisle"
-
-#: src/gui/StelGui.cpp:172
-msgid "Windows"
-msgstr "Windows"
-
-#: src/gui/StelGui.cpp:173
-msgid "Help window"
-msgstr "Okno nápovědy"
-
-#: src/gui/StelGui.cpp:174
-msgid "Configuration window"
-msgstr "Nastavení"
-
-#: src/gui/StelGui.cpp:175
-msgid "Search window"
-msgstr "Vyhledávání"
-
-#: src/gui/StelGui.cpp:176
-msgid "Sky and viewing options window"
-msgstr "Nastavení oblohy a pohledu"
-
-#: src/gui/StelGui.cpp:177
-msgid "Date/time window"
-msgstr "Datum/čas"
-
-#: src/gui/StelGui.cpp:178
-msgid "Location window"
-msgstr "Poloha"
-
-#: src/gui/StelGui.cpp:180 src/ui_dateTimeDialogGui.h:288
-msgid "Date and Time"
-msgstr "Datum a čas"
-
-#: src/gui/StelGui.cpp:181
-msgid "Decrease time speed"
-msgstr "Zpomalit čas"
-
-#: src/gui/StelGui.cpp:182
-msgid "Increase time speed"
-msgstr "Zrychlit čas"
-
-#: src/gui/StelGui.cpp:183
-msgid "Set normal time rate"
-msgstr "Nastavit normální rychlost času"
-
-#: src/gui/StelGui.cpp:184
-msgid "Set time to now"
-msgstr "Nastavit čas na teď"
-
-#: src/gui/StelGui.cpp:185
-msgid "Add 1 solar hour"
-msgstr "Přidat 1 sluneční hodinu"
-
-#: src/gui/StelGui.cpp:186
-msgid "Subtract 1 solar hour"
-msgstr "Odebrat 1 sluneční hodinu"
-
-#: src/gui/StelGui.cpp:187
-msgid "Add 1 solar day"
-msgstr "Přidat 1 sluneční den"
-
-#: src/gui/StelGui.cpp:188
-msgid "Subtract 1 solar day"
-msgstr "Odebrat 1 sluneční den"
-
-#: src/gui/StelGui.cpp:189
-msgid "Add 1 solar week"
-msgstr "Přidat 1 sluneční týden"
-
-#: src/gui/StelGui.cpp:190
-msgid "Subtract 1 solar week"
-msgstr "Odebrat 1 sluneční týden"
-
-#: src/gui/StelGui.cpp:191
-msgid "Add 1 sidereal day"
-msgstr "Přidat 1 siderický den"
-
-#: src/gui/StelGui.cpp:192
-msgid "Subtract 1 sidereal day"
-msgstr "Odebrat 1 siderický den"
-
-#: src/gui/StelGui.cpp:193
-msgid "Add 1 sidereal week"
-msgstr "Přidat 1 siderický týden"
-
-#: src/gui/StelGui.cpp:194
-msgid "Subtract 1 sidereal week"
-msgstr "Odebrat 1 siderický týden"
-
-#: src/gui/StelGui.cpp:197
-msgid "Center on selected object"
-msgstr "Zaměřit na vybraný objekt"
-
-#: src/gui/StelGui.cpp:198
-msgid "Track object"
-msgstr "Sledovat objekt"
-
-#: src/gui/StelGui.cpp:199
-msgid "Zoom in on selected object"
-msgstr "Přiblížit daný objekt"
-
-#: src/gui/StelGui.cpp:200
-msgid "Zoom out"
-msgstr "Oddálit"
-
-#: src/gui/StelGui.cpp:201
-msgid "Set home planet to selected planet"
-msgstr "Nastavit vybranou planetu jako domovskou"
-
-#: src/gui/StelGui.cpp:204
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "Přepnout mezi ekvatoriální a azimutální montáží"
-
-#: src/gui/StelGui.cpp:205
-msgid "Quit"
-msgstr "Ukončit"
-
-#: src/gui/StelGui.cpp:206
-msgid "Save screenshot"
-msgstr "Uložit snímek obrazovky"
-
-#: src/gui/StelGui.cpp:209
-msgid "Auto hide horizontal button bar"
-msgstr "Automaticky schovávat horizontální nástrojovou lištu"
-
-#: src/gui/StelGui.cpp:210
-msgid "Auto hide vertical button bar"
-msgstr "Automaticky schovávat vertikální nástrojovou lištu"
-
-#: src/gui/StelGui.cpp:786
-msgid "Stellarium"
-msgstr "Stellarium"
-
-#: src/gui/StelGuiItems.cpp:432
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
-
-#: src/gui/ViewDialog.cpp:345
-msgid "No description"
-msgstr "Bez popisu"
-
-#: src/gui/ViewDialog.cpp:409
-msgid "No shooting stars"
-msgstr "Žádné padající hvězdy"
-
-#: src/gui/ViewDialog.cpp:412
-msgid "Normal rate"
-msgstr "Normální četnost"
-
-#: src/gui/ViewDialog.cpp:415
-msgid "Standard Perseids rate"
-msgstr "Standardní četnost Perseid"
-
-#: src/gui/ViewDialog.cpp:418
-msgid "Exceptional Leonid rate"
-msgstr "Vyjímečná četnost Leonid"
-
-#: src/gui/ViewDialog.cpp:421
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "Nejvyšší četnost vůbec (Leonidy 1966)"
-
-#: src/main.cpp:55
-msgid "This system does not support OpenGL."
-msgstr "Tento systém nemá podporu OpenGL."
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "Slunce"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "Merkur"
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "Venuše"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "Země"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "Měsíc"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "Mars"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "Deimos"
-
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "Phobos"
-
-#: src/translations.h:41
-msgid "Jupiter"
-msgstr "Jupiter"
-
-#: src/translations.h:42
-msgid "Io"
-msgstr "Io"
-
-#: src/translations.h:43
-msgid "Europa"
-msgstr "Európa"
-
-#: src/translations.h:44
-msgid "Ganymede"
-msgstr "Ganymédes"
-
-#: src/translations.h:45
-msgid "Callisto"
-msgstr "Callistó"
-
-#: src/translations.h:46
-msgid "Saturn"
-msgstr "Saturn"
-
-#: src/translations.h:47
-msgid "Mimas"
-msgstr "Mimas"
-
-#: src/translations.h:48
-msgid "Enceladus"
-msgstr "Enceladus"
-
-#: src/translations.h:49
-msgid "Tethys"
-msgstr "Tethys"
-
-#: src/translations.h:50
-msgid "Dione"
-msgstr "Dione"
-
-#: src/translations.h:51
-msgid "Rhea"
-msgstr "Rhea"
-
-#: src/translations.h:52
-msgid "Titan"
-msgstr "Titan"
-
-#: src/translations.h:53
-msgid "Hyperion"
-msgstr "Hyperion"
-
-#: src/translations.h:54
-msgid "Iapetus"
-msgstr "Iapetus"
-
-#: src/translations.h:55
-msgid "Phoebe"
-msgstr "Phoebe"
-
-#: src/translations.h:56
-msgid "Neptune"
-msgstr "Neptun"
-
-#: src/translations.h:57
-msgid "Uranus"
-msgstr "Uran"
-
-#: src/translations.h:58
-msgid "Pluto"
-msgstr "Pluto"
-
-#: src/translations.h:59
-msgid "Charon"
-msgstr "Charon"
-
-#: src/translations.h:60
-msgid "Solar System Observer"
-msgstr "Vně sluneční soustavy"
-
-#: src/translations.h:63
-msgid "N"
-msgstr "S"
-
-#: src/translations.h:64
-msgid "S"
-msgstr "J"
-
-#: src/translations.h:65
-msgid "E"
-msgstr "V"
-
-#: src/translations.h:66
-msgid "W"
-msgstr "Z"
-
-#: src/translations.h:69
-msgid "Chinese"
-msgstr "čínský"
-
-#: src/translations.h:70
-msgid "Egyptian"
-msgstr "egyptský"
-
-#: src/translations.h:71
-msgid "Inuit"
-msgstr "Inuitská"
-
-#: src/translations.h:72
-msgid "Korean"
-msgstr "Korejská"
-
-#: src/translations.h:73
-msgid "Lakota"
-msgstr "Lakotská"
-
-#: src/translations.h:74
-msgid "Navajo"
-msgstr "Navajská"
-
-#: src/translations.h:75
-msgid "Norse"
-msgstr "Severský"
-
-#: src/translations.h:76
-msgid "Polynesian"
-msgstr "polynéský"
-
-#: src/translations.h:77
-msgid "Western"
-msgstr "západoevropský"
-
-#: src/translations.h:78
-msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
-
-#: src/ui_dateTimeDialogGui.h:287 src/ui_helpDialogGui.h:186
-#: src/ui_locationDialogGui.h:288 src/ui_viewDialog.h:964
-#: src/ui_configurationDialog.h:457
-msgid "Form"
-msgstr "Formulář"
-
-#: src/ui_dateTimeDialogGui.h:290 src/ui_dateTimeDialogGui.h:291
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:292 src/ui_dateTimeDialogGui.h:293
-msgid ":"
-msgstr ":"
-
-#: src/ui_helpDialogGui.h:187 src/ui_helpDialogGui.h:189
-msgid "Help"
-msgstr "Nápověda"
-
-#: src/ui_helpDialogGui.h:190
-msgid "About"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:289
-msgid "Location"
-msgstr "Poloha"
-
-#: src/ui_locationDialogGui.h:292
-msgid "Search:"
-msgstr "Hledat:"
-
-#: src/ui_locationDialogGui.h:294
-msgid "Current location information"
-msgstr "Údaje o současné zeměpisné poloze"
-
-#: src/ui_locationDialogGui.h:295
-msgid "Name/City:"
-msgstr "Jméno/Město:"
-
-#: src/ui_locationDialogGui.h:296
-msgid "Longitude:"
-msgstr "Zeměpisná délka:"
-
-#: src/ui_locationDialogGui.h:299 src/ui_locationDialogGui.h:306
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr ""
-"Můžete zadat hodnotu v desetinách stupně, nebo použít formát stupně minuty "
-"vteřiny (dms), například: +1d 12m 8s"
-
-#: src/ui_locationDialogGui.h:302
-msgid "Country:"
-msgstr "Země:"
-
-#: src/ui_locationDialogGui.h:303
-msgid "Latitude:"
-msgstr "Zeměpisná šířka:"
-
-#: src/ui_locationDialogGui.h:309
-msgid "Planet:"
-msgstr "Planeta"
-
-#: src/ui_locationDialogGui.h:310
-msgid "Altitude:"
-msgstr "Nadmořská výška :"
-
-#: src/ui_locationDialogGui.h:313
-msgid "Enter the altitude in meter"
-msgstr "Zadej nadmořskou výšku v metrech"
-
-#: src/ui_locationDialogGui.h:316
-msgid " m"
-msgstr " m"
-
-#: src/ui_locationDialogGui.h:317
-msgid "Add to list"
-msgstr "Přidat do listu"
-
-#: src/ui_locationDialogGui.h:318
-msgid "Delete"
-msgstr "Odstranit"
-
-#: src/ui_locationDialogGui.h:319
-msgid "Use as default"
-msgstr "Použít jako předvolené"
-
-#: src/ui_searchDialogGui.h:199 src/ui_searchDialogGui.h:200
-msgid "Find Object"
-msgstr "Najít objekt"
-
-#: src/ui_viewDialog.h:965
-msgid "View"
-msgstr "Pohled"
-
-#: src/ui_viewDialog.h:967
-msgid "Planets and satellites"
-msgstr "Planety a měsíce"
-
-#: src/ui_viewDialog.h:968
-msgid "Show planets"
-msgstr "Zobrazit planety"
-
-#: src/ui_viewDialog.h:969
-msgid "Show planet markers"
-msgstr "Zobraz ukazatele planet"
-
-#: src/ui_viewDialog.h:970
-msgid "Show planet orbits"
-msgstr "Zobrazit orbity planet"
-
-#: src/ui_viewDialog.h:971
-msgid "Simulate light speed"
-msgstr "Simulovat rychlost světla"
-
-#: src/ui_viewDialog.h:972
-msgid "Scale Moon"
-msgstr "Zvětšení Měsíce"
-
-#: src/ui_viewDialog.h:974
-msgid "Absolute scale:"
-msgstr "Absolutní stupnice"
-
-#: src/ui_viewDialog.h:975
-msgid "Relative scale:"
-msgstr "Relativní stupnice"
-
-#: src/ui_viewDialog.h:976
-msgid "Twinkle:"
-msgstr "Mihotání:"
-
-#: src/ui_viewDialog.h:979
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "Zeslabit slabé hvězdy, když je vidět velmi jasný objekt"
-
-#: src/ui_viewDialog.h:982
-msgid "Dynamic eye adaptation"
-msgstr "Dynamické přizpůsobení zraku"
-
-#: src/ui_viewDialog.h:984
-msgid "Show atmosphere"
-msgstr "Zobraz atmosféru"
-
-#: src/ui_viewDialog.h:985
-msgid "Light pollution: "
-msgstr "Světelný smog "
-
-#: src/ui_viewDialog.h:986
-msgid "Labels and Markers"
-msgstr "Označení a ukazatele"
-
-#: src/ui_viewDialog.h:989
-msgid "Planets"
-msgstr "Planety"
-
-#: src/ui_viewDialog.h:990
-msgid "Shooting Stars"
-msgstr "Padající hvězdy"
-
-#: src/ui_viewDialog.h:991
-msgid "Hourly zenith rate:"
-msgstr "Hodinová četnost v zenitu"
-
-#: src/ui_viewDialog.h:992
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:993
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:994
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:995
-msgid "10000"
-msgstr "10 000"
-
-#: src/ui_viewDialog.h:996
-msgid "144000"
-msgstr "144000"
-
-#: src/ui_viewDialog.h:998
-msgid "Sky"
-msgstr "Obloha"
-
-#: src/ui_viewDialog.h:999
-msgid "Celestial Sphere"
-msgstr "Nebeská sféra"
-
-#: src/ui_viewDialog.h:1007
-msgid "Constellations"
-msgstr "Souhvězdí"
-
-#: src/ui_viewDialog.h:1008
-msgid "Show lines"
-msgstr "Zobraz čáry"
-
-#: src/ui_viewDialog.h:1009
-msgid "Show labels"
-msgstr "Zobrazit popisy"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show boundaries"
-msgstr "Zobraz hranice"
-
-#: src/ui_viewDialog.h:1011
-msgid "Show art"
-msgstr "Zobraz kresby"
-
-#: src/ui_viewDialog.h:1012
-msgid "Art brightness: "
-msgstr "Jas kreseb: "
-
-#: src/ui_viewDialog.h:1013
-msgid "Projection"
-msgstr "Projekce"
-
-#: src/ui_viewDialog.h:1014
-msgid "Markings"
-msgstr "Označení"
-
-#: src/ui_viewDialog.h:1015 src/ui_viewDialog.h:1021
-msgid "Options"
-msgstr "Možnosti"
-
-#: src/ui_viewDialog.h:1016
-msgid "Show ground"
-msgstr "Zobraz terén"
-
-#: src/ui_viewDialog.h:1017
-msgid "Show fog"
-msgstr "Zobraz mlhu"
-
-#: src/ui_viewDialog.h:1018
-msgid "Use associated planet and position"
-msgstr "Použít přiřazené planety a pozici"
-
-#: src/ui_viewDialog.h:1019
-msgid "Use this landscape as default"
-msgstr "Použít tento terén jako předvolený"
-
-#: src/ui_viewDialog.h:1020
-msgid "Landscape"
-msgstr "Krajina"
-
-#: src/ui_viewDialog.h:1022
-msgid "Use associated language for sky labeling"
-msgstr "Použít vybraný jazyk taky pro názvy na obloze"
-
-#: src/ui_viewDialog.h:1023
-msgid "Use this sky culture as default"
-msgstr "Použít tuto kulturu jako předvolenou"
-
-#: src/ui_viewDialog.h:1024
-msgid "Starlore"
-msgstr "Hvězdná mytologie"
-
-#: src/ui_configurationDialog.h:458
-msgid "Configuration"
-msgstr "Nastavení"
-
-#: src/ui_configurationDialog.h:470
-msgid "Program language"
-msgstr "Jazyk programu"
-
-#: src/ui_configurationDialog.h:471
-msgid "Selected object information"
-msgstr "Údaje o označeném objektu"
-
-#: src/ui_configurationDialog.h:474
-msgid "Display all of the information which is available"
-msgstr "Zobraz všechny dostupné informace"
-
-#: src/ui_configurationDialog.h:477
-msgid "All availalable"
-msgstr "Všechno k dispozici"
-
-#: src/ui_configurationDialog.h:480
-msgid "Display only abbreviated information"
-msgstr "Zobraz pouze zkrácené informace"
-
-#: src/ui_configurationDialog.h:483
-msgid "Short"
-msgstr "krátký"
-
-#: src/ui_configurationDialog.h:484
-msgid "None"
-msgstr "Nic"
-
-#: src/ui_configurationDialog.h:485
-msgid "Default options"
-msgstr "Předvolená nastavení"
-
-#: src/ui_configurationDialog.h:486
-msgid "Save current options as default"
-msgstr "Uložit současný stav jako předvolený"
-
-#: src/ui_configurationDialog.h:487
-msgid ""
-"Save all the current options including the current FOV and direction of view "
-"for use at next startup."
-msgstr ""
-"Uloží všechna současná nastavení včetně šíře zorného pole a směru pohledu a "
-"použije je při příštím spuštění."
-
-#: src/ui_configurationDialog.h:488
-msgid "Startup FOV: XX"
-msgstr ""
-
-#: src/ui_configurationDialog.h:489
-msgid "Startup direction of view: xxxx"
-msgstr ""
-
-#: src/ui_configurationDialog.h:490
-msgid "Main"
-msgstr "Hlavní"
-
-#: src/ui_configurationDialog.h:491
-msgid "Control"
-msgstr "Ovládání"
-
-#: src/ui_configurationDialog.h:494
-msgid "Allow keyboard to pan and zoom"
-msgstr "Umožní pohyb a přibližování klávesnicí"
-
-#: src/ui_configurationDialog.h:497
-msgid "Enable keyboard navigation"
-msgstr "Umožnit navigaci pomocí klávesnice"
-
-#: src/ui_configurationDialog.h:500
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Umožní použití myši k pohybu (tahem) a přibližování (kolečkem)"
-
-#: src/ui_configurationDialog.h:503
-msgid "Enable mouse navigation"
-msgstr "Umožnit navigaci pomocí myši"
-
-#: src/ui_configurationDialog.h:504
-msgid "Startup date and time"
-msgstr "Datum a čas při spuštění"
-
-#: src/ui_configurationDialog.h:507
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Spustí Stellarium se systémovým časem"
-
-#: src/ui_configurationDialog.h:510
-msgid "System date and time"
-msgstr "Systémový čas"
-
-#: src/ui_configurationDialog.h:513
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-
-#: src/ui_configurationDialog.h:516
-msgid "System date at:"
-msgstr "Systémové datum na:"
-
-#: src/ui_configurationDialog.h:519
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Použít specifické datum a čas při spuštění Stellaria"
-
-#: src/ui_configurationDialog.h:522
-msgid "Other:"
-msgstr "Jiné:"
-
-#: src/ui_configurationDialog.h:523
-msgid "Navigation"
-msgstr "Navigace"
-
-#: src/ui_configurationDialog.h:524
-msgid "Amateur astronomer options"
-msgstr "Volby pro astronomy amatéry"
-
-#: src/ui_configurationDialog.h:527
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
-"Zobrazí nebo schová tlačidla vertikálního a horizontálního převrácení obrazu"
-
-#: src/ui_configurationDialog.h:530
-msgid "Show flip buttons"
-msgstr "Zobrazit převracecí tlačítka"
-
-#: src/ui_configurationDialog.h:531
-msgid "Planetarium options"
-msgstr "Nastavení planetaria"
-
-#: src/ui_configurationDialog.h:534
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"Zakřivení sférického zrcadla se používá při projekci Stellaria na sférických "
-"zrcadlech nízkorozpočtových systémů planetárií."
-
-#: src/ui_configurationDialog.h:537
-msgid "Spheric mirror distortion"
-msgstr "Zakřivení sférického zrcadla"
-
-#: src/ui_configurationDialog.h:540
-msgid "Align labels with the horizon"
-msgstr "Zarovnat popisky k horizontu"
-
-#: src/ui_configurationDialog.h:543
-msgid "Gravity labels"
-msgstr "Zarovnat popisky"
-
-#: src/ui_configurationDialog.h:546
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-"Pokud je to povoleno, tlačítko automatického oddálení rovněž nastaví "
-"počáteční směr zorného pole."
-
-#: src/ui_configurationDialog.h:549
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "Automatické oddálení vrací zorné pole do výchozího směru"
-
-#: src/ui_configurationDialog.h:552
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "Schová všechno mimo prostřední okrouhlé zorné pole"
-
-#: src/ui_configurationDialog.h:555
-msgid "Disc viewport"
-msgstr "Okrouhlé zorné pole"
-
-#: src/ui_configurationDialog.h:556
-msgid "Other"
-msgstr "Jiné"
-
-#: src/ui_configurationDialog.h:559
-msgid "Hides the mouse cursor when inactive"
-msgstr "Skrýt kurzor myši, když je neaktivní"
-
-#: src/ui_configurationDialog.h:562
-msgid "Mouse cursor timeout (seconds):"
-msgstr "Čas do skrytí kurzoru myši (v sekundách):"
-
-#: src/ui_configurationDialog.h:563
-msgid "Tools"
-msgstr "Nástroje"
+#~ msgid "change to apply."
+#~ msgstr "po restartu programu."
