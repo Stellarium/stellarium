@@ -648,7 +648,7 @@ void GridLinesMgr::init()
 
 	setFlagAzimutalGrid(conf->value("viewing/flag_azimutal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
-	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
+	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
